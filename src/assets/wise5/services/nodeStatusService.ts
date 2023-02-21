@@ -30,7 +30,7 @@ export class NodeStatusService {
     return this.dataService.getNodeStatusByNodeId(nodeId);
   }
 
-  getNodeStatuses(): any[] {
+  getNodeStatuses(): any {
     return this.dataService.nodeStatuses;
   }
 

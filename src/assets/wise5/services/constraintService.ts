@@ -253,7 +253,7 @@ export class ConstraintService {
     );
   }
 
-  evaluateIsCompletedCriteria(criteria) {
+  private evaluateIsCompletedCriteria(criteria) {
     return this.dataService.isCompleted(criteria.params.nodeId);
   }
 

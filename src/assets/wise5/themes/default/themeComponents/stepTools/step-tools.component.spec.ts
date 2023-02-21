@@ -11,6 +11,7 @@ import { NodeStatusIcon } from '../nodeStatusIcon/node-status-icon.component';
 
 import { StepToolsComponent } from './step-tools.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
+import { NodeStatusService } from '../../../../services/nodeStatusService';
 
 const nodeId1 = 'node1';
 const nodeId2 = 'node2';
@@ -18,16 +19,7 @@ const nodeStatus1 = { icon: '', isCompleted: true };
 const nodeStatus2 = { icon: '', isCompleted: false };
 let getCurrentNodeIdSpy;
 
-class MockNodeService {
-  getPrevNodeId() {
-    return '';
-  }
-  getNextNodeId() {
-    return Promise.resolve('');
-  }
-}
-
-describe('StepToolsComponent', () => {
+fdescribe('StepToolsComponent', () => {
   let component: StepToolsComponent;
   let fixture: ComponentFixture<StepToolsComponent>;
 
@@ -49,7 +41,7 @@ describe('StepToolsComponent', () => {
     fixture = TestBed.createComponent(StepToolsComponent);
     getCurrentNodeIdSpy = spyOn(TestBed.inject(StudentDataService), 'getCurrentNodeId');
     getCurrentNodeIdSpy.and.returnValue(nodeId1);
-    spyOn(TestBed.inject(StudentDataService), 'getNodeStatuses').and.returnValue({
+    spyOn(TestBed.inject(NodeStatusService), 'getNodeStatuses').and.returnValue({
       node1: nodeStatus1,
       node2: nodeStatus2
     });

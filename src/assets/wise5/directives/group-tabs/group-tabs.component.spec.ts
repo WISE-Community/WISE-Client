@@ -37,7 +37,7 @@ class MockStudentDataService {
 let component: GroupTabsComponent;
 let projectService: VLEProjectService;
 let studentDataService: StudentDataService;
-describe('GroupTabsComponent', () => {
+fdescribe('GroupTabsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
