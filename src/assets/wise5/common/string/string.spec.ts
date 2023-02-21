@@ -19,4 +19,9 @@ describe('wordWrap()', () => {
     const string = 'A string with more than 20 characters.';
     expect(wordWrap(string, 20)).toEqual('A string with more\nthan 20 characters.');
   });
+
+  it('should not break string into multiple lines if string is same length or shorter than the wrap limit', () => {
+    const string = 'A short string.';
+    expect(wordWrap(string, 20)).toEqual('A short string.');
+  });
 });
