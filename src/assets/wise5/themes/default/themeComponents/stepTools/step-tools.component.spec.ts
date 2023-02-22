@@ -19,7 +19,7 @@ const nodeStatus1 = { icon: '', isCompleted: true };
 const nodeStatus2 = { icon: '', isCompleted: false };
 let getCurrentNodeIdSpy;
 
-fdescribe('StepToolsComponent', () => {
+describe('StepToolsComponent', () => {
   let component: StepToolsComponent;
   let fixture: ComponentFixture<StepToolsComponent>;
 
@@ -44,6 +44,9 @@ fdescribe('StepToolsComponent', () => {
     spyOn(TestBed.inject(NodeStatusService), 'getNodeStatuses').and.returnValue({
       node1: nodeStatus1,
       node2: nodeStatus2
+    });
+    spyOn(TestBed.inject(NodeStatusService), 'getNodeStatusByNodeId').and.returnValue({
+      isCompleted: true
     });
     spyOn(TestBed.inject(ProjectService), 'nodeHasWork').and.returnValue(true);
     component = fixture.componentInstance;

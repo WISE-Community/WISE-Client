@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
+import { NodeStatusService } from '../../services/nodeStatusService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../../vle/vleProjectService';
 import { GroupTabsComponent } from './group-tabs.component';
@@ -7,6 +8,13 @@ import { GroupTabsComponent } from './group-tabs.component';
 const group1 = { id: 'group1' };
 const group2 = { id: 'group2' };
 const node1 = { id: 'node1' };
+
+class MockNodeStatusService {
+  canVisitNode(): boolean {
+    return true;
+  }
+}
+
 class MockVLEProjectService {
   rootNode = {
     ids: ['group1', 'group2']
@@ -37,11 +45,12 @@ class MockStudentDataService {
 let component: GroupTabsComponent;
 let projectService: VLEProjectService;
 let studentDataService: StudentDataService;
-fdescribe('GroupTabsComponent', () => {
+describe('GroupTabsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         GroupTabsComponent,
+        { provide: NodeStatusService, useClass: MockNodeStatusService },
         { provide: VLEProjectService, useClass: MockVLEProjectService },
         { provide: StudentDataService, useClass: MockStudentDataService }
       ]
