@@ -6284,8 +6284,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a3eeff4aa6c88e46cda0d6c9a1f7bbb2a7603c94" datatype="html">
-        <source> The WISE team uses de-identified user data to perform research. Researchers in the Graduate School of Education at The University of California at Berkeley and partner institutions may use de-identified data to perform data analyses and explore research topics. This data includes both user-generated and auto-generated content (see &apos;Information We Collect&apos; section). Results of our research may be shared with educators and other researchers through conferences, journals, and other publications. </source>
+      <trans-unit id="114359a6219aea670825f15040ff9ba83d70dd1b" datatype="html">
+        <source> The WISE team uses de-identified user data to perform research. Researchers in the Berkeley School of Education at the University of California, Berkeley and partner institutions may use de-identified data to perform data analyses and explore research topics. This data includes both user-generated and auto-generated content (see &apos;Information We Collect&apos; section). Results of our research may be shared with educators and other researchers through conferences, journals, and other publications. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">130,137</context>
