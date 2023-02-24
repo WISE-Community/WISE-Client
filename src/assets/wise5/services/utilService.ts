@@ -10,13 +10,6 @@ import '../lib/jquery/jquery-global';
 export class UtilService {
   constructor(@Inject(LOCALE_ID) private localeID: string) {}
 
-  convertStringToNumber(str) {
-    if (str != null && str != '' && !isNaN(Number(str))) {
-      return Number(str);
-    }
-    return str;
-  }
-
   /**
    * Get an image object from an image element
    * @param imageElement an image element (<img src='abc.jpg'/>)
