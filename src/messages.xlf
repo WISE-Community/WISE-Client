@@ -6128,8 +6128,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">28,33</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="b5ef5becf2c46338066cdc1eef3f18cfd284d146" datatype="html">
-        <source>This policy was last updated on February 22, 2023.</source>
+      <trans-unit id="a4d70da4464e3c6a7d96acd1531a533e185bbb6e" datatype="html">
+        <source>This policy was last updated on February 24, 2023.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">34</context>
@@ -6263,8 +6263,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">120</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="14b67b76e70e38bffe0c2c97a3d8cdcfd9c7f0e4" datatype="html">
-        <source> WISE uses Google Analytics to help us understand our site usage. We use data like which pages you visit and clicks you make to help us improve the site. Information collected and processed by Google Analytics includes user IP addresses, network locations, and geographic locations. Some browsers allow you to opt-out of the Google Analytics tracking by installing add-ons for your browser. </source>
+      <trans-unit id="8f609af765f4c46805811e2b454456680cbed184" datatype="html">
+        <source> WISE uses Google Analytics to help us understand our site usage. We use data like which pages you visit and clicks you make to help us improve the site. Information collected and processed by Google Analytics is anonymized and does not contain IP addresses or similar personally identifiable information. Some browsers allow you to opt-out of the Google Analytics tracking by installing add-ons for your browser. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">121,127</context>
@@ -6284,8 +6284,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="114359a6219aea670825f15040ff9ba83d70dd1b" datatype="html">
-        <source> The WISE team uses de-identified user data to perform research. Researchers in the Berkeley School of Education at the University of California, Berkeley and partner institutions may use de-identified data to perform data analyses and explore research topics. This data includes both user-generated and auto-generated content (see &apos;Information We Collect&apos; section). Results of our research may be shared with educators and other researchers through conferences, journals, and other publications. </source>
+      <trans-unit id="60fb27c72801d122024e7b7a354508172637bfb6" datatype="html">
+        <source> The WISE team uses de-identified user data to perform research. Researchers in the School of Education at the University of California, Berkeley and partner institutions may use de-identified data to perform data analyses and explore research topics. This data includes both user-generated and auto-generated content (see &apos;Information We Collect&apos; section). Results of our research may be shared with educators and other researchers through conferences, journals, and other publications. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">130,137</context>
@@ -6466,8 +6466,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">271,274</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a53ebef13aa69d9f02d5e74bad14f75519260813" datatype="html">
-        <source>UC Berkeley Graduate School of Education</source>
+      <trans-unit id="3a138bb9b22a7748740c15107ebcb91239858f3e" datatype="html">
+        <source>UC Berkeley School of Education</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">276</context>
