@@ -6284,8 +6284,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="08ccadc8fca6fa0b8450501340e1e0dc8bb990c4" datatype="html">
-        <source> The WISE team uses de-identified user data to perform research. Researchers in the Berkeley School of Education at the University of California, Berkeley and partner institutions may use de-identified data to perform data analyses and explore research topics. This data includes both user-generated and auto-generated content (see &apos;Information We Collect&apos; section). Results of our research may be shared with educators and other researchers through conferences, journals, and other publications. </source>
+      <trans-unit id="60fb27c72801d122024e7b7a354508172637bfb6" datatype="html">
+        <source> The WISE team uses de-identified user data to perform research. Researchers in the School of Education at the University of California, Berkeley and partner institutions may use de-identified data to perform data analyses and explore research topics. This data includes both user-generated and auto-generated content (see &apos;Information We Collect&apos; section). Results of our research may be shared with educators and other researchers through conferences, journals, and other publications. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">130,137</context>
@@ -6466,8 +6466,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">271,274</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a53ebef13aa69d9f02d5e74bad14f75519260813" datatype="html">
-        <source>UC Berkeley Graduate School of Education</source>
+      <trans-unit id="3a138bb9b22a7748740c15107ebcb91239858f3e" datatype="html">
+        <source>UC Berkeley School of Education</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">276</context>
