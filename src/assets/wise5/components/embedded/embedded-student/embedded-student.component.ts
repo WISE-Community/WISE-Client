@@ -1,5 +1,5 @@
 import * as html2canvas from 'html2canvas';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -70,6 +70,7 @@ export class EmbeddedStudent extends ComponentStudent {
 
   constructor(
     protected AnnotationService: AnnotationService,
+    private changeDetectorRef: ChangeDetectorRef,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected dialog: MatDialog,
@@ -621,5 +622,21 @@ export class EmbeddedStudent extends ComponentStudent {
       };
       this.sendMessageToApplication(message);
     }
+  }
+
+  updateLatestScoreAnnotation(annotation: any): void {
+    this.latestAnnotations = {
+      comment: this.latestAnnotations.comment,
+      score: annotation
+    };
+    this.changeDetectorRef.detectChanges();
+  }
+
+  updateLatestCommentAnnotation(annotation: any): void {
+    this.latestAnnotations = {
+      comment: annotation,
+      score: this.latestAnnotations.score
+    };
+    this.changeDetectorRef.detectChanges();
   }
 }
