@@ -9,6 +9,8 @@ export class User {
   permissions: number[];
   isRecaptchaRequired: boolean;
   isGoogleUser: boolean = false;
+  token: string;
+  isRecaptchaInvalid: boolean = false;
 
   constructor(jsonObject: any = {}) {
     for (let key of Object.keys(jsonObject)) {

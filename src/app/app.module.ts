@@ -22,6 +22,7 @@ import { MobileMenuModule } from './modules/mobile-menu/mobile-menu.module';
 import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementDialogComponent } from './announcement/announcement.component';
 import { TrackScrollDirective } from './track-scroll.directive';
+import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 
 export function initialize(
   configService: ConfigService,
@@ -56,6 +57,7 @@ export function initialize(
     MatSidenavModule,
     MatSnackBarModule,
     MatDialogModule,
+    RecaptchaV3Module,
     RouterModule.forRoot([], {
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
@@ -85,6 +87,10 @@ export function initialize(
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
+    },
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: '6LfBmGojAAAAAGawo276q4BH1gOfxi96ugYNq3aE'
     }
   ],
   bootstrap: [AppComponent]

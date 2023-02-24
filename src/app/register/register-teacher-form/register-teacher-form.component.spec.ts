@@ -18,6 +18,8 @@ import {
   nameTests,
   validateAndExpect
 } from '../register-user-form/register-user-form-spec-helpers';
+import { By } from '@angular/platform-browser';
+import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 
 class MockTeacherService {
   registerTeacherAccount() {}
@@ -29,6 +31,7 @@ let component: RegisterTeacherFormComponent;
 let fixture: ComponentFixture<RegisterTeacherFormComponent>;
 const PASSWORD: string = 'Abcd1234';
 let teacherService: TeacherService;
+let recaptchaV3Service: ReCaptchaV3Service;
 let router: Router;
 let snackBar: MatSnackBar;
 
@@ -44,12 +47,14 @@ describe('RegisterTeacherFormComponent', () => {
           MatCheckboxModule,
           MatSelectModule,
           MatInputModule,
-          MatSnackBarModule
+          MatSnackBarModule,
+          RecaptchaV3Module
         ],
         providers: [
           PasswordService,
           { provide: TeacherService, useClass: MockTeacherService },
-          { provide: UserService, useClass: MockUserService }
+          { provide: UserService, useClass: MockUserService },
+          { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
         ],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
@@ -60,8 +65,9 @@ describe('RegisterTeacherFormComponent', () => {
     fixture = TestBed.createComponent(RegisterTeacherFormComponent);
     component = fixture.componentInstance;
     teacherService = TestBed.get(TeacherService);
+    recaptchaV3Service = TestBed.inject(ReCaptchaV3Service);
     router = TestBed.get(Router);
-    snackBar = TestBed.get(MatSnackBar);
+    snackBar = TestBed.inject(MatSnackBar);
     fixture.detectChanges();
   });
   validateFirstName();
@@ -96,9 +102,45 @@ function validateLastName() {
     }
   });
 }
-function createAccount() {
+async function createAccount() {
   describe('createAccount()', () => {
-    it('should create account with valid form fields', () => {
+    it(
+      'should create account with valid form fields',
+      waitForAsync(async () => {
+        component.createTeacherAccountFormGroup.setValue(
+          createAccountFormValue(
+            'Spongebob',
+            'Squarepants',
+            'spongebob@bikinibottom.com',
+            'Bikini Bottom',
+            'Ocean',
+            'Pacific Ocean',
+            'Boating School',
+            'Other',
+            '',
+            PASSWORD,
+            PASSWORD,
+            true
+          )
+        );
+        const username = 'SpongebobSquarepants';
+        const response: any = helpers.createAccountSuccessResponse(username);
+        spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
+        spyOn(teacherService, 'registerTeacherAccount').and.returnValue(of(response));
+        const routerNavigateSpy = spyOn(router, 'navigate').and.callFake(
+          (args: any[]): Promise<boolean> => {
+            return of(true).toPromise();
+          }
+        );
+        await component.createAccount();
+        expect(routerNavigateSpy).toHaveBeenCalledWith([
+          'join/teacher/complete',
+          { username: username, isUsingGoogleId: false }
+        ]);
+      })
+    );
+
+    it('should show error when Recaptcha is invalid', () => {
       component.createTeacherAccountFormGroup.setValue(
         createAccountFormValue(
           'Spongebob',
@@ -115,45 +157,50 @@ function createAccount() {
           true
         )
       );
-      const username = 'SpongebobSquarepants';
-      const response: any = helpers.createAccountSuccessResponse(username);
-      spyOn(teacherService, 'registerTeacherAccount').and.returnValue(of(response));
-      const routerNavigateSpy = spyOn(router, 'navigate').and.callFake(
-        (args: any[]): Promise<boolean> => {
-          return of(true).toPromise();
-        }
-      );
-      component.createAccount();
-      expect(routerNavigateSpy).toHaveBeenCalledWith([
-        'join/teacher/complete',
-        { username: username, isUsingGoogleId: false }
-      ]);
+      component.teacherUser.isRecaptchaInvalid = true;
+      const errorMessage = 'recaptchaResponseInvalid';
+      const response: any = helpers.createAccountErrorResponse(errorMessage);
+      spyOn(teacherService, 'registerTeacherAccount').and.returnValue(throwError(response));
+      const recaptchaError = fixture.debugElement.queryAll(By.css('.recaptchaError'));
+      console.log(recaptchaError);
     });
 
-    it('should show error when invalid first name is sent to server', () => {
-      expectCreateAccountWithInvalidNameToShowError(
-        'invalidFirstName',
-        'Error: First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
-      );
-    });
+    it(
+      'should show error when invalid first name is sent to server',
+      waitForAsync(() => {
+        expectCreateAccountWithInvalidNameToShowError(
+          'invalidFirstName',
+          'Error: First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
+        );
+      })
+    );
 
-    it('should show error when invalid last name is sent to server', () => {
-      expectCreateAccountWithInvalidNameToShowError(
-        'invalidLastName',
-        'Error: Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
-      );
-    });
+    it(
+      'should show error when invalid last name is sent to server',
+      waitForAsync(() => {
+        expectCreateAccountWithInvalidNameToShowError(
+          'invalidLastName',
+          'Error: Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
+        );
+      })
+    );
 
-    it('should show error when invalid first and last name is sent to server', () => {
-      expectCreateAccountWithInvalidNameToShowError(
-        'invalidFirstAndLastName',
-        'Error: First Name and Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
-      );
-    });
+    it(
+      'should show error when invalid first and last name is sent to server',
+      waitForAsync(() => {
+        expectCreateAccountWithInvalidNameToShowError(
+          'invalidFirstAndLastName',
+          'Error: First Name and Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
+        );
+      })
+    );
   });
 }
 
-function expectCreateAccountWithInvalidNameToShowError(errorCode: string, errorMessage: string) {
+async function expectCreateAccountWithInvalidNameToShowError(
+  errorCode: string,
+  errorMessage: string
+) {
   component.createTeacherAccountFormGroup.setValue(
     createAccountFormValue(
       'Spongebob',
@@ -171,9 +218,10 @@ function expectCreateAccountWithInvalidNameToShowError(errorCode: string, errorM
     )
   );
   const response: any = helpers.createAccountErrorResponse(errorCode);
+  spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
   spyOn(teacherService, 'registerTeacherAccount').and.returnValue(throwError(response));
   const snackBarSpy = spyOn(snackBar, 'open');
-  component.createAccount();
+  await component.createAccount();
   expect(snackBarSpy).toHaveBeenCalledWith(errorMessage);
 }
 

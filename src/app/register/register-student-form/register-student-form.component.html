@@ -116,7 +116,15 @@
           </mat-form-field>
         </p>
       </div>
-      <p i18n>By clicking "Create Account", you agree to our <a href="privacy" target="_blank">Privacy Policy & Terms of Use</a></p>
+      <p class="wise-terms" i18n>By clicking "Create Account", you agree to our <a href="privacy" target="_blank">Privacy Policy & Terms of Use</a>.</p>
+      <p i18n>This site is protected by reCAPTCHA and the Google
+        <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+        <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+      </p>
+      <ng-container [ngSwitch]="studentUser.isRecaptchaInvalid">
+        <mat-error *ngSwitchCase="true" recaptchaError i18n>Recaptcha failed. Please reload the page and try again!</mat-error>
+        <div *ngSwitchDefault i18n>&nbsp;</div>
+      </ng-container>
       <button mat-flat-button color="primary" type="submit"
           [disabled]="!createStudentAccountFormGroup.valid || processing">
         <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
