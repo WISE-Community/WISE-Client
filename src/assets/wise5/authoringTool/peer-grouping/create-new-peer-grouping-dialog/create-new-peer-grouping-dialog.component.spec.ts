@@ -13,7 +13,7 @@ const TAG1: string = 'tag1';
 const REFERENCE_COMPONENT_NODE_ID1 = 'node1';
 const REFERENCE_COMPONENT_COMPONENT_ID1 = 'component1';
 let component: CreateNewPeerGroupingDialogComponent;
-let createNewPeerGroupingSpy, dialogCloseSpy;
+let createNewPeerGroupingSpy: jasmine.Spy, dialogCloseSpy: jasmine.Spy;
 let fixture: ComponentFixture<CreateNewPeerGroupingDialogComponent>;
 
 describe('CreateNewPeerGroupingDialogComponent', () => {
@@ -37,7 +37,8 @@ describe('CreateNewPeerGroupingDialogComponent', () => {
 
 function create() {
   create_RandomLogic_ShouldCreatePeerGroup();
-  create_DifferentIdeasLogic_ShouldCreatePeerGroup();
+  create_DifferentIdeasAnyLogic_ShouldCreatePeerGroup();
+  create_DifferentIdeasMaximizeLogic_ShouldCreatePeerGroup();
   create_DifferentScoresAnyLogic_ShouldCreatePeerGroup();
   create_DifferentScoresMaximizeLogic_ShouldCreatePeerGroup();
 }
@@ -57,45 +58,37 @@ function create_RandomLogic_ShouldCreatePeerGroup() {
   });
 }
 
-function create_DifferentIdeasLogic_ShouldCreatePeerGroup() {
-  it('should create peer grouping with different ideas logic', async () => {
-    const newPeerGrouping = new PeerGrouping({
-      logic: `differentIdeas("${REFERENCE_COMPONENT_NODE_ID1}", "${REFERENCE_COMPONENT_COMPONENT_ID1}")`,
-      maxMembershipCount: 2,
-      tag: TAG1
-    });
-    createNewPeerGroupingSpy.and.returnValue(of(newPeerGrouping));
-    component.logicType = 'differentIdeas';
-    component.referenceComponent = new ReferenceComponent(
-      REFERENCE_COMPONENT_NODE_ID1,
-      REFERENCE_COMPONENT_COMPONENT_ID1
-    );
-    component.create();
-    expect(createNewPeerGroupingSpy).toHaveBeenCalledWith(newPeerGrouping);
-    expect(dialogCloseSpy).toHaveBeenCalled();
+function create_DifferentIdeasAnyLogic_ShouldCreatePeerGroup() {
+  it('should create peer grouping with different ideas any logic', async () => {
+    expectLogicCreateNewPeerGrouping('differentIdeas', 'any');
   });
 }
 
+function create_DifferentIdeasMaximizeLogic_ShouldCreatePeerGroup() {
+  it('should create peer grouping with different ideas maximize logic', async () => {
+    expectLogicCreateNewPeerGrouping('differentIdeas', 'maximize');
+  });
+}
 function create_DifferentScoresAnyLogic_ShouldCreatePeerGroup() {
   it('should create peer grouping with different scores any logic', async () => {
-    expectDifferentScoresLogicCreateNewPeerGrouping('any');
+    expectLogicCreateNewPeerGrouping('differentKIScores', 'any');
   });
 }
 
 function create_DifferentScoresMaximizeLogic_ShouldCreatePeerGroup() {
   it('should create peer grouping with different scores maximize logic', async () => {
-    expectDifferentScoresLogicCreateNewPeerGrouping('maximize');
+    expectLogicCreateNewPeerGrouping('differentKIScores', 'maximize');
   });
 }
 
-function expectDifferentScoresLogicCreateNewPeerGrouping(mode: string) {
+function expectLogicCreateNewPeerGrouping(logicType: string, mode: string) {
   const newPeerGrouping = new PeerGrouping({
-    logic: `differentKIScores("${REFERENCE_COMPONENT_NODE_ID1}", "${REFERENCE_COMPONENT_COMPONENT_ID1}", "${mode}")`,
+    logic: `${logicType}("${REFERENCE_COMPONENT_NODE_ID1}", "${REFERENCE_COMPONENT_COMPONENT_ID1}", "${mode}")`,
     maxMembershipCount: 2,
     tag: TAG1
   });
   createNewPeerGroupingSpy.and.returnValue(of(newPeerGrouping));
-  component.logicType = 'differentKIScores';
+  component.logicType = logicType;
   component.referenceComponent = new ReferenceComponent(
     REFERENCE_COMPONENT_NODE_ID1,
     REFERENCE_COMPONENT_COMPONENT_ID1

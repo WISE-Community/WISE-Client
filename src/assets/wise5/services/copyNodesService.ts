@@ -3,15 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConfigService } from './configService';
 import { TeacherProjectService } from './teacherProjectService';
-import { UtilService } from './utilService';
+import { copy } from '../common/object/object';
 
 @Injectable()
 export class CopyNodesService {
   constructor(
     protected http: HttpClient,
     protected ConfigService: ConfigService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected ProjectService: TeacherProjectService
   ) {}
 
   /**
@@ -50,7 +49,7 @@ export class CopyNodesService {
    */
   private copyNode(nodeId: string): any {
     const node = this.ProjectService.getNodeById(nodeId);
-    const nodeCopy = this.UtilService.makeCopyOfJSONObject(node);
+    const nodeCopy = copy(node);
     nodeCopy.id = this.ProjectService.getNextAvailableNodeId();
     nodeCopy.transitionLogic = {};
     nodeCopy.constraints = [];

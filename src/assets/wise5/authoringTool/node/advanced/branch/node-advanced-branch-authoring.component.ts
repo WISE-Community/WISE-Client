@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { copy } from '../../../../common/object/object';
 import { ConfigService } from '../../../../services/configService';
 import { TagService } from '../../../../services/tagService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { UtilService } from '../../../../services/utilService';
 
 @Component({
   selector: 'node-advanced-branch-authoring',
@@ -28,8 +28,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     private ConfigService: ConfigService,
     private TagService: TagService,
     private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
+    private TeacherDataService: TeacherDataService
   ) {
     this.branchCriteria = [
       {
@@ -106,7 +105,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
                   this.createBranchComponentId
                 );
                 if (choices != null) {
-                  branch.choices = this.UtilService.makeCopyOfJSONObject(choices);
+                  branch.choices = copy(choices);
                 }
               }
             }
@@ -453,7 +452,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
         if (branch != null) {
           const id = choices[c].id;
           branch.choiceId = id;
-          branch.choices = this.UtilService.makeCopyOfJSONObject(choices);
+          branch.choices = copy(choices);
           const transition = branch.transition;
           if (transition != null) {
             // get the first transition criterion. Assume there is only one transition criterion
@@ -733,7 +732,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
   }
 
   getBranchItems() {
-    const items = this.UtilService.makeCopyOfJSONObject(this.ProjectService.idToOrder);
+    const items = copy(this.ProjectService.idToOrder);
     for (const nodeId of Object.keys(items)) {
       items[nodeId]['$key'] = nodeId;
     }

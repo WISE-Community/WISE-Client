@@ -19,7 +19,7 @@ describe('MilestonesAuthoringToolController', () => {
     $scope = $rootScope.$new();
     ProjectService = _ProjectService_;
     UtilService = _UtilService_;
-    ProjectService.setProject(JSON.parse(JSON.stringify(demoProjectJSONOriginal)));
+    ProjectService.setProject(copy(demoProjectJSONOriginal));
     milestonesAuthoringController =
         $controller('MilestonesAuthoringController', { $filter: $filter, $scope: $scope });
   }));

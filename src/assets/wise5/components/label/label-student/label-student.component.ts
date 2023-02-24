@@ -11,6 +11,8 @@ import { ComponentService } from '../../componentService';
 import { LabelService } from '../labelService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { MatDialog } from '@angular/material/dialog';
+import { convertToPNGFile } from '../../../common/canvas/canvas';
+import { wordWrap } from '../../../common/string/string';
 
 @Component({
   selector: 'label-student',
@@ -64,8 +66,7 @@ export class LabelStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 
@@ -711,7 +712,7 @@ export class LabelStudent extends ComponentStudent {
   wrapTextIfNecessary(text: string): string {
     let wrappedText = text;
     if (this.componentContent.labelWidth != null && this.componentContent.labelWidth !== '') {
-      wrappedText = this.UtilService.wordWrap(text, this.componentContent.labelWidth);
+      wrappedText = wordWrap(text, this.componentContent.labelWidth);
     }
     return wrappedText;
   }
@@ -727,15 +728,10 @@ export class LabelStudent extends ComponentStudent {
     canvas.remove(label.text);
   }
 
-  getStudentDataImageObject(): any {
-    const base64String = this.canvas.toDataURL('image/png');
-    return this.UtilService.getImageObjectFromBase64String(base64String);
-  }
-
   snipImage(): void {
     this.NotebookService.addNote(
       this.StudentDataService.getCurrentNodeId(),
-      this.getStudentDataImageObject()
+      convertToPNGFile(this.canvas)
     );
   }
 

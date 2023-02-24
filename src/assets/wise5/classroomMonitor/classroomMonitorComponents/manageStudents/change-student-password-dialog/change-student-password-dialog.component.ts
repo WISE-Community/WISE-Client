@@ -1,11 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from '../../../../services/configService';
 import { TeacherService } from '../../../../../../app/teacher/teacher.service';
-import { passwordMatchValidator } from '../../../../../../app/modules/shared/validators/password-match.validator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PasswordService } from '../../../../../../app/services/password.service';
+import { NewPasswordAndConfirmComponent } from '../../../../../../app/password/new-password-and-confirm/new-password-and-confirm.component';
 
 @Component({
   selector: 'app-change-student-password-dialog',
@@ -14,25 +13,18 @@ import { PasswordService } from '../../../../../../app/services/password.service
 })
 export class ChangeStudentPasswordDialogComponent implements OnInit {
   canViewStudentNames: boolean;
-  changePasswordForm: FormGroup = new FormGroup(
-    {
-      teacherPassword: new FormControl(''),
-      newPassword: new FormControl('', [
-        Validators.required,
-        Validators.minLength(this.passwordService.minLength),
-        Validators.pattern(this.passwordService.pattern)
-      ]),
-      confirmNewPassword: new FormControl('', Validators.required)
-    },
-    { validators: passwordMatchValidator.bind(this) }
-  );
+  changePasswordForm: FormGroup = new FormGroup({
+    teacherPassword: new FormControl('')
+  });
+  confirmPasswordLabel: string = $localize`Confirm New Student Password`;
   isChangingPassword: boolean;
   isTeacherGoogleUser: boolean;
+  passwordLabel: string = $localize`New Student Password`;
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private ConfigService: ConfigService,
     private dialog: MatDialog,
-    private passwordService: PasswordService,
     private snackBar: MatSnackBar,
     private TeacherService: TeacherService,
     @Inject(MAT_DIALOG_DATA) public user: any
@@ -46,12 +38,18 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
     }
   }
 
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
+  }
+
   changePassword(): void {
     this.isChangingPassword = true;
     this.TeacherService.changeStudentPassword(
       this.ConfigService.getRunId(),
       this.user.id,
-      this.changePasswordForm.controls['newPassword'].value,
+      this.changePasswordForm.controls[
+        NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME
+      ].value,
       this.changePasswordForm.controls['teacherPassword'].value
     ).subscribe(
       () => {
@@ -83,11 +81,15 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
         break;
       case 'invalidPasswordLength':
         formError.minlength = true;
-        this.changePasswordForm.get('newPassword').setErrors(formError);
+        this.changePasswordForm
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
       case 'invalidPasswordPattern':
         formError.pattern = true;
-        this.changePasswordForm.get('newPassword').setErrors(formError);
+        this.changePasswordForm
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
     }
   }

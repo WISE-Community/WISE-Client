@@ -5,7 +5,6 @@ import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentService } from '../../componentService';
 import { DialogResponse } from '../DialogResponse';
 import { StudentDialogResponse } from '../StudentDialogResponse';
@@ -25,6 +24,7 @@ import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceF
 import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
 import { ComponentStudent } from '../../component-student.component';
 import { DialogGuidanceComponent } from '../DialogGuidanceComponent';
+import { copy } from '../../../common/object/object';
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -56,8 +56,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     protected notebookService: NotebookService,
     protected studentAssetService: StudentAssetService,
     protected studentDataService: StudentDataService,
-    protected studentStatusService: StudentStatusService,
-    protected utilService: UtilService
+    protected studentStatusService: StudentStatusService
   ) {
     super(
       annotationService,
@@ -67,17 +66,14 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       nodeService,
       notebookService,
       studentAssetService,
-      studentDataService,
-      utilService
+      studentDataService
     );
   }
 
   ngOnInit(): void {
     super.ngOnInit();
     if (this.componentState != null) {
-      this.responses = this.utilService.makeCopyOfJSONObject(
-        this.componentState.studentData.responses
-      );
+      this.responses = copy(this.componentState.studentData.responses);
       this.submitCounter = this.componentState.studentData.submitCounter;
     }
     this.workgroupId = this.configService.getWorkgroupId();

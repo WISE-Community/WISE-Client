@@ -27,12 +27,12 @@ import { GetWorkgroupService } from './services/getWorkgroupService';
 import { WorkgroupService } from './services/workgroup.service';
 import { TeacherWorkService } from '../assets/wise5/services/teacherWorkService';
 import { TeacherDiscussionService } from '../assets/wise5/components/discussion/teacherDiscussionService';
-import { NodeInfoService } from '../assets/wise5/services/nodeInfoService';
 import { RouterModule } from '@angular/router';
 import { setUpLocationSync } from '@angular/router/upgrade';
 import { TeacherPeerGroupService } from '../assets/wise5/services/teacherPeerGroupService';
 import { DataExportService } from '../assets/wise5/services/dataExportService';
 import { TeacherNodeIconComponent } from '../assets/wise5/authoringTool/teacher-node-icon/teacher-node-icon.component';
+import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -59,9 +59,9 @@ export class EmptyComponent {}
     InsertNodesService,
     MilestoneService,
     MoveNodesService,
-    NodeInfoService,
     ProjectAssetService,
     SpaceService,
+    { provide: PeerGroupService, useExisting: TeacherPeerGroupService },
     { provide: ProjectService, useExisting: TeacherProjectService },
     TeacherDataService,
     TeacherDiscussionService,

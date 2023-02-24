@@ -37,7 +37,6 @@ import { DialogGuidanceService } from '../assets/wise5/components/dialogGuidance
 import { PeerChatService } from '../assets/wise5/components/peerChat/peerChatService';
 import { ShowMyWorkService } from '../assets/wise5/components/showMyWork/showMyWorkService';
 import { ShowGroupWorkService } from '../assets/wise5/components/showGroupWork/showGroupWorkService';
-import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 import { ComputerAvatarService } from '../assets/wise5/services/computerAvatarService';
 import { StudentStatusService } from '../assets/wise5/services/studentStatusService';
 import { OpenResponseCompletionCriteriaService } from '../assets/wise5/components/openResponse/openResponseCompletionCriteriaService';
@@ -48,7 +47,7 @@ import { PathService } from '../assets/wise5/services/pathService';
 import { TabulatorDataService } from '../assets/wise5/components/table/tabulatorDataService';
 import { StompService } from '../assets/wise5/services/stompService';
 import { ClickToSnipImageService } from '../assets/wise5/services/clickToSnipImageService';
-import { PasswordService } from './services/password.service';
+import { StudentPeerGroupService } from '../assets/wise5/services/studentPeerGroupService';
 
 @NgModule({
   providers: [
@@ -81,10 +80,8 @@ import { PasswordService } from './services/password.service';
     OutsideURLService,
     OpenResponseCompletionCriteriaService,
     OpenResponseService,
-    PasswordService,
     PathService,
     PeerChatService,
-    PeerGroupService,
     ProjectLibraryService,
     { provide: ProjectService, useExisting: VLEProjectService },
     SessionService,
@@ -93,6 +90,7 @@ import { PasswordService } from './services/password.service';
     StompService,
     StudentAssetService,
     StudentDataService,
+    StudentPeerGroupService,
     StudentStatusService,
     StudentWebSocketService,
     SummaryService,

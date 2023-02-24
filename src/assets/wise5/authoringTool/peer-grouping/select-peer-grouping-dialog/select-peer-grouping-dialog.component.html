@@ -6,10 +6,11 @@
   </p>
   <mat-card *ngFor="let peerGrouping of peerGroupings" class="peer-grouping">
     <select-peer-grouping-option
-        [peerGrouping]="peerGrouping"
-        [selectedPeerGrouping]="dialogData.peerGrouping"
-        (selectEvent)="selectPeerGrouping($event)"
-        (deleteEvent)="deletePeerGrouping($event)">
+      [peerGrouping]="peerGrouping"
+      [selectedPeerGrouping]="dialogData.peerGrouping"
+      (selectEvent)="selectPeerGrouping($event)"
+      (deleteEvent)="deletePeerGrouping($event)"
+    >
     </select-peer-grouping-option>
   </mat-card>
   <button mat-stroked-button (click)="showNewPeerGroupingAuthoring()">

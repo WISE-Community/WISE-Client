@@ -1,4 +1,4 @@
-@import '~style/abstracts/variables';
+@import 'style/abstracts/variables';
 
 .response-text {
   padding: 4px 8px;
@@ -10,4 +10,8 @@
   border: 2px solid;
   padding: 2px 6px;
   background-color: transparent;
+}
+
+.deleted-text {
+  text-decoration: line-through;
 }

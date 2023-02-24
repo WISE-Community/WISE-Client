@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="/assets/wise5/themes/default/style/angular-material.css" />
+<link rel="stylesheet" href="/assets/wise5/themes/default/style/monitor.css" />
+<div class="app-styles monitor-theme monitor" disable-delete-keypress role="main">
+  <mat-drawer-container>
+    <mat-drawer #drawer [(opened)]="menuOpen" mode="over" class="mat-elevation-z4">
+      <main-menu [state]="$state" [title]="title" [views]="views"></main-menu>
+    </mat-drawer>
+    <mat-drawer-content>
+      <top-bar
+        [logoPath]="logoPath"
+        [notifications]="notifications"
+        [projectId]="projectId"
+        [projectTitle]="projectTitle"
+        [runId]="runId"
+        [runCode]="runCode"
+      ></top-bar>
+      <tool-bar
+        [showPeriodSelect]="showPeriodSelect"
+        [showStepTools]="showGradeByStepTools"
+        [showTeamTools]="showGradeByTeamTools"
+        [viewName]="currentViewName"
+        [workgroupId]="workgroupId"
+        (onMenuToggle)="toggleMenu()"
+      ></tool-bar>
+      <content id="content" fxFlex role="main" fxLayout="column" class="l-main">
+        <node-progress-view
+          *ngIf="
+            $state.$current.name == 'root.cm.unit' || $state.$current.name == 'root.cm.unit.node'
+          "
+        >
+        </node-progress-view>
+        <milestones *ngIf="$state.$current.name == 'root.cm.milestones'"></milestones>
+        <notebook-grading *ngIf="$state.$current.name == 'root.cm.notebooks'"></notebook-grading>
+        <student-progress *ngIf="$state.$current.name == 'root.cm.teamLanding'"></student-progress>
+        <student-grading
+          *ngIf="$state.$current.name == 'root.cm.team'"
+          [workgroupId]="workgroupId"
+        ></student-grading>
+        <manage-students *ngIf="$state.$current.name == 'root.cm.manageStudents'"></manage-students>
+        <data-export *ngIf="$state.$current.name == 'root.cm.export'"></data-export>
+        <export-step-visits
+          *ngIf="$state.$current.name == 'root.cm.exportVisits'"
+        ></export-step-visits>
+      </content>
+      <side-menu [state]="$state" [views]="views"></side-menu>
+      <notebook-report
+        *ngIf="reportEnabled"
+        [ngClass]="{ 'report-full': reportFullscreen }"
+        [notebookConfig]="notebookConfig"
+      ></notebook-report>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

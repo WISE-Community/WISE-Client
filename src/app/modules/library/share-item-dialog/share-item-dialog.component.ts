@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { map, debounceTime } from 'rxjs/operators';
 import { Project } from '../../../domain/project';
+import { copy } from '../../../../assets/wise5/common/object/object';
 
 @Directive()
 export abstract class ShareItemDialogComponent implements OnInit {
@@ -51,7 +52,7 @@ export abstract class ShareItemDialogComponent implements OnInit {
 
   populateSharedOwners(sharedOwners) {
     for (let sharedOwner of sharedOwners) {
-      const localSharedOwner = JSON.parse(JSON.stringify(sharedOwner));
+      const localSharedOwner = copy(sharedOwner);
       this.populatePermissions(localSharedOwner);
       this.sharedOwners.push(localSharedOwner);
     }

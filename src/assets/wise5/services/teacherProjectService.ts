@@ -3,40 +3,39 @@ import * as angular from 'angular';
 import { ProjectService } from './projectService';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { UtilService } from './utilService';
 import { BranchService } from './branchService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { PathService } from './pathService';
 import { RandomKeyService } from './randomKeyService';
+import { copy } from '../common/object/object';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
-  private componentChangedSource: Subject<boolean> = new Subject<boolean>();
-  public componentChanged$: Observable<boolean> = this.componentChangedSource.asObservable();
+  private componentChangedSource: Subject<void> = new Subject<void>();
+  public componentChanged$: Observable<void> = this.componentChangedSource.asObservable();
   private nodeChangedSource: Subject<boolean> = new Subject<boolean>();
   public nodeChanged$: Observable<boolean> = this.nodeChangedSource.asObservable();
   private refreshProjectSource: Subject<void> = new Subject<void>();
   public refreshProject$ = this.refreshProjectSource.asObservable();
   private scrollToBottomOfPageSource: Subject<void> = new Subject<void>();
   public scrollToBottomOfPage$ = this.scrollToBottomOfPageSource.asObservable();
-  private errorSavingProjectSource: Subject<any> = new Subject<any>();
-  public errorSavingProject$: Observable<any> = this.errorSavingProjectSource.asObservable();
-  private notAllowedToEditThisProjectSource: Subject<any> = new Subject<any>();
-  public notAllowedToEditThisProject$: Observable<any> = this.notAllowedToEditThisProjectSource.asObservable();
-  private projectSavedSource: Subject<any> = new Subject<any>();
-  public projectSaved$: Observable<any> = this.projectSavedSource.asObservable();
-  private savingProjectSource: Subject<any> = new Subject<any>();
-  public savingProject$: Observable<any> = this.savingProjectSource.asObservable();
+  private errorSavingProjectSource: Subject<void> = new Subject<void>();
+  public errorSavingProject$: Observable<void> = this.errorSavingProjectSource.asObservable();
+  private notAllowedToEditThisProjectSource: Subject<void> = new Subject<void>();
+  public notAllowedToEditThisProject$: Observable<void> = this.notAllowedToEditThisProjectSource.asObservable();
+  private projectSavedSource: Subject<void> = new Subject<void>();
+  public projectSaved$: Observable<void> = this.projectSavedSource.asObservable();
+  private savingProjectSource: Subject<void> = new Subject<void>();
+  public savingProject$: Observable<void> = this.savingProjectSource.asObservable();
 
   constructor(
     protected branchService: BranchService,
     protected componentServiceLookupService: ComponentServiceLookupService,
     protected http: HttpClient,
     protected configService: ConfigService,
-    protected pathService: PathService,
-    private utilService: UtilService
+    protected pathService: PathService
   ) {
     super(branchService, componentServiceLookupService, http, configService, pathService);
   }
@@ -1285,9 +1284,7 @@ export class TeacherProjectService extends ProjectService {
         id: this.getNextAvailableConstraintIdForNodeId(node.id),
         action: branchPathTakenConstraint.action,
         targetId: node.id,
-        removalCriteria: this.utilService.makeCopyOfJSONObject(
-          branchPathTakenConstraint.removalCriteria
-        )
+        removalCriteria: copy(branchPathTakenConstraint.removalCriteria)
       };
       this.addConstraintToNode(node, newConstraint);
     }
@@ -1832,9 +1829,7 @@ export class TeacherProjectService extends ProjectService {
              * copy the transition logic to the node that comes
              * before it
              */
-            node.transitionLogic = this.utilService.makeCopyOfJSONObject(
-              nodeToRemoveTransitionLogic
-            );
+            node.transitionLogic = copy(nodeToRemoveTransitionLogic);
 
             /*
              * set the transitions for the node that comes before

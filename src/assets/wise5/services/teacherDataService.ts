@@ -10,6 +10,9 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { Node } from '../common/Node';
+import { compressToEncodedURIComponent } from 'lz-string';
+import { isMatchingPeriods } from '../common/period/period';
+import { getIntersectOfArrays } from '../common/array/array';
 
 @Injectable()
 export class TeacherDataService extends DataService {
@@ -166,8 +169,9 @@ export class TeacherDataService extends DataService {
       .set('getStudentWork', 'true')
       .set('getAnnotations', 'false')
       .set('getEvents', 'false');
-    for (const component of this.getAllRelatedComponents(node)) {
-      params = params.append('components', JSON.stringify(component));
+    const components = this.getAllRelatedComponents(node);
+    if (components.length > 0) {
+      params = params.set('components', compressToEncodedURIComponent(JSON.stringify(components)));
     }
     return this.retrieveStudentData(params);
   }
@@ -266,9 +270,16 @@ export class TeacherDataService extends DataService {
   }
 
   processComponentStates(componentStates) {
+    this.initializeComponentStatesDataStructures();
     for (const componentState of componentStates) {
       this.addOrUpdateComponentState(componentState);
     }
+  }
+
+  initializeComponentStatesDataStructures(): void {
+    this.studentData.componentStatesByWorkgroupId = {};
+    this.studentData.componentStatesByNodeId = {};
+    this.studentData.componentStatesByComponentId = {};
   }
 
   processEvents(events) {
@@ -303,12 +314,18 @@ export class TeacherDataService extends DataService {
   }
 
   processAnnotations(annotations) {
+    this.initializeAnnotationsDataStructures();
     this.studentData.annotations = annotations;
     for (const annotation of annotations) {
       this.addAnnotationToAnnotationsToWorkgroupId(annotation);
       this.addAnnotationToAnnotationsByNodeId(annotation);
     }
     this.AnnotationService.setAnnotations(this.studentData.annotations);
+  }
+
+  initializeAnnotationsDataStructures(): void {
+    this.studentData.annotationsByNodeId = {};
+    this.studentData.annotationsToWorkgroupId = {};
   }
 
   addAnnotationToAnnotationsToWorkgroupId(annotation) {
@@ -526,19 +543,13 @@ export class TeacherDataService extends DataService {
   getComponentStatesByWorkgroupIdAndNodeId(workgroupId, nodeId) {
     const componentStatesByWorkgroupId = this.getComponentStatesByWorkgroupId(workgroupId);
     const componentStatesByNodeId = this.getComponentStatesByNodeId(nodeId);
-    return this.UtilService.getIntersectOfArrays(
-      componentStatesByWorkgroupId,
-      componentStatesByNodeId
-    );
+    return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByNodeId);
   }
 
   getComponentStatesByWorkgroupIdAndComponentId(workgroupId, componentId) {
     const componentStatesByWorkgroupId = this.getComponentStatesByWorkgroupId(workgroupId);
     const componentStatesByComponentId = this.getComponentStatesByComponentId(componentId);
-    return this.UtilService.getIntersectOfArrays(
-      componentStatesByWorkgroupId,
-      componentStatesByComponentId
-    );
+    return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByComponentId);
   }
 
   getComponentStatesByWorkgroupIdAndComponentIds(workgroupId, componentIds) {
@@ -549,10 +560,7 @@ export class TeacherDataService extends DataService {
         this.getComponentStatesByComponentId(componentId)
       );
     }
-    return this.UtilService.getIntersectOfArrays(
-      componentStatesByWorkgroupId,
-      componentStatesByComponentId
-    );
+    return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByComponentId);
   }
 
   getEventsByWorkgroupId(workgroupId) {
@@ -561,12 +569,6 @@ export class TeacherDataService extends DataService {
 
   getEventsByNodeId(nodeId) {
     return this.studentData.eventsByNodeId[nodeId] || [];
-  }
-
-  getEventsByWorkgroupIdAndNodeId(workgroupId, nodeId) {
-    const eventsByWorkgroupId = this.getEventsByWorkgroupId(workgroupId);
-    const eventsByNodeId = this.getEventsByNodeId(nodeId);
-    return this.UtilService.getIntersectOfArrays(eventsByWorkgroupId, eventsByNodeId);
   }
 
   getLatestEventByWorkgroupIdAndNodeIdAndType(workgroupId, nodeId, eventType) {
@@ -601,17 +603,11 @@ export class TeacherDataService extends DataService {
     const annotationsByNodeId = this.studentData.annotationsByNodeId[nodeId];
     if (annotationsByNodeId != null) {
       return annotationsByNodeId.filter((annotation) => {
-        return this.UtilService.isMatchingPeriods(annotation.periodId, periodId);
+        return isMatchingPeriods(annotation.periodId, periodId);
       });
     } else {
       return [];
     }
-  }
-
-  getAnnotationsToWorkgroupIdAndNodeId(workgroupId, nodeId) {
-    const annotationsToWorkgroupId = this.getAnnotationsToWorkgroupId(workgroupId);
-    const annotationsByNodeId = this.getAnnotationsByNodeId(nodeId);
-    return this.UtilService.getIntersectOfArrays(annotationsToWorkgroupId, annotationsByNodeId);
   }
 
   initializePeriods() {

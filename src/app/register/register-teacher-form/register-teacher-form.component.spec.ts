@@ -13,13 +13,13 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import * as helpers from '../register-user-form/register-user-form-spec-helpers';
-import { PasswordService } from '../../services/password.service';
 import {
   nameTests,
   validateAndExpect
 } from '../register-user-form/register-user-form-spec-helpers';
 import { By } from '@angular/platform-browser';
 import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+import { PasswordModule } from '../../password/password.module';
 
 class MockTeacherService {
   registerTeacherAccount() {}
@@ -48,10 +48,10 @@ describe('RegisterTeacherFormComponent', () => {
           MatSelectModule,
           MatInputModule,
           MatSnackBarModule,
-          RecaptchaV3Module
+          RecaptchaV3Module,
+          PasswordModule
         ],
         providers: [
-          PasswordService,
           { provide: TeacherService, useClass: MockTeacherService },
           { provide: UserService, useClass: MockUserService },
           { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
@@ -250,8 +250,8 @@ function createAccountFormValue(
     schoolLevel: schoolLevel,
     howDidYouHearAboutUs: howDidYouHearAboutUs,
     passwords: {
-      password: password,
-      confirmPassword: confirmPassword
+      newPassword: password,
+      confirmNewPassword: confirmPassword
     },
     agree: agree
   };

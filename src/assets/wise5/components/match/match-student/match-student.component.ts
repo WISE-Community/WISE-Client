@@ -20,6 +20,7 @@ import {
   transferArrayItem
 } from '@angular/cdk/drag-drop';
 import { RandomKeyService } from '../../../services/randomKeyService';
+import { copy } from '../../../common/object/object';
 
 @Component({
   selector: 'match-student',
@@ -64,8 +65,7 @@ export class MatchStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 
@@ -378,7 +378,7 @@ export class MatchStudent extends ComponentStudent {
     this.sourceBucket.items = this.sourceBucket.items.concat(this.choices);
     this.buckets.push(this.sourceBucket);
     for (const componentContentBucket of this.componentContent.buckets) {
-      const bucket = JSON.parse(JSON.stringify(componentContentBucket));
+      const bucket = copy(componentContentBucket);
       bucket.items = [];
       this.buckets.push(bucket);
     }
@@ -400,7 +400,7 @@ export class MatchStudent extends ComponentStudent {
   }
 
   getDeepCopyOfBuckets(): any[] {
-    return JSON.parse(JSON.stringify(this.buckets));
+    return copy(this.buckets);
   }
 
   /**

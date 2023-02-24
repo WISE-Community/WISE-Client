@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/index';
+import { Observable } from 'rxjs';
 import { StudentService } from '../../../student/student.service';
 
 export class MockStudentService {

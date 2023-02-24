@@ -15,6 +15,8 @@ import { TableService } from '../tableService';
 import { MatDialog } from '@angular/material/dialog';
 import { TabulatorData } from '../TabulatorData';
 import { TabulatorDataService } from '../tabulatorDataService';
+import { copy } from '../../../common/object/object';
+import { convertToPNGFile } from '../../../common/canvas/canvas';
 
 @Component({
   selector: 'table-student',
@@ -71,8 +73,7 @@ export class TableStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 
@@ -411,7 +412,7 @@ export class TableStudent extends ComponentStudent {
       studentData.dataExplorerYAxisLabels = this.dataExplorerYAxisLabels;
     }
     studentData.isDataExplorerScatterPlotRegressionLineEnabled = this.isDataExplorerScatterPlotRegressionLineEnabled;
-    studentData.dataExplorerSeries = this.UtilService.makeCopyOfJSONObject(this.dataExplorerSeries);
+    studentData.dataExplorerSeries = copy(this.dataExplorerSeries);
 
     studentData.submitCounter = this.submitCounter;
     componentState.isSubmit = this.isSubmit;
@@ -897,9 +898,8 @@ export class TableStudent extends ComponentStudent {
       true
     );
     html2canvas(tableElement).then((canvas: any) => {
-      const base64Image = canvas.toDataURL('image/png');
-      const imageObject = this.UtilService.getImageObjectFromBase64String(base64Image);
-      this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), imageObject);
+      const pngFile = convertToPNGFile(canvas);
+      this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), pngFile);
     });
   }
 
@@ -954,7 +954,7 @@ export class TableStudent extends ComponentStudent {
       );
       const connectedComponentsAndComponentState = {
         connectedComponent: connectedComponent,
-        componentState: this.UtilService.makeCopyOfJSONObject(componentState)
+        componentState: copy(componentState)
       };
       connectedComponentsAndTheirComponentStates.push(connectedComponentsAndComponentState);
     }
@@ -1132,23 +1132,21 @@ export class TableStudent extends ComponentStudent {
     this.dataExplorerYAxisLabel = componentState.studentData.dataExplorerYAxisLabel;
     this.dataExplorerYAxisLabels = componentState.studentData.dataExplorerYAxisLabels;
     if (componentState.studentData.dataExplorerSeries != null) {
-      this.dataExplorerSeries = this.UtilService.makeCopyOfJSONObject(
-        componentState.studentData.dataExplorerSeries
-      );
+      this.dataExplorerSeries = copy(componentState.studentData.dataExplorerSeries);
       this.dataExplorerXColumn = this.dataExplorerSeries[0].xColumn;
     }
   }
 
   processConnectedComponentState(componentState: any): void {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
+    const connectedComponent = this.component.getConnectedComponent(
+      componentState.nodeId,
+      componentState.componentId
     );
     const componentType = this.ProjectService.getComponentType(
       connectedComponent.nodeId,
       connectedComponent.componentId
     );
-    const componentStateCopy = this.UtilService.makeCopyOfJSONObject(componentState);
+    const componentStateCopy = copy(componentState);
     if (componentType === 'Table') {
       this.setStudentWork(componentStateCopy);
       this.isDirty = true;

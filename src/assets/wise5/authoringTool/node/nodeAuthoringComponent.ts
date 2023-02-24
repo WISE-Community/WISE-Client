@@ -6,7 +6,6 @@ import { CopyComponentService } from '../../services/copyComponentService';
 import { InsertComponentService } from '../../services/insertComponentService';
 import { NodeService } from '../../services/nodeService';
 import { TeacherDataService } from '../../services/teacherDataService';
-import { UtilService } from '../../services/utilService';
 import * as $ from 'jquery';
 import { NotificationService } from '../../services/notificationService';
 import { Subscription } from 'rxjs';
@@ -14,6 +13,10 @@ import { Directive } from '@angular/core';
 import { Node } from '../../common/Node';
 import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
 import { ComponentTypeService } from '../../services/componentTypeService';
+import { ComponentContent } from '../../common/ComponentContent';
+import { Component } from '../../common/Component';
+import { copy } from '../../common/object/object';
+import { temporarilyHighlightElement } from '../../common/dom/dom';
 
 @Directive()
 class NodeAuthoringController {
@@ -64,8 +67,7 @@ class NodeAuthoringController {
     'NodeService',
     'NotificationService',
     'ProjectService',
-    'TeacherDataService',
-    'UtilService'
+    'TeacherDataService'
   ];
 
   constructor(
@@ -83,8 +85,7 @@ class NodeAuthoringController {
     private NodeService: NodeService,
     private NotificationService: NotificationService,
     private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
+    private TeacherDataService: TeacherDataService
   ) {
     this.$translate = $filter('translate');
   }
@@ -102,8 +103,8 @@ class NodeAuthoringController {
      * session in case we need to roll back if the user decides to
      * cancel/revert all the changes.
      */
-    this.originalNodeCopy = this.UtilService.makeCopyOfJSONObject(this.nodeJson);
-    this.currentNodeCopy = this.UtilService.makeCopyOfJSONObject(this.nodeJson);
+    this.originalNodeCopy = copy(this.nodeJson);
+    this.currentNodeCopy = copy(this.nodeJson);
 
     this.subscriptions.add(
       this.NodeService.componentShowSubmitButtonValueChanged$.subscribe(({ showSubmitButton }) => {
@@ -149,19 +150,22 @@ class NodeAuthoringController {
     this.subscriptions.unsubscribe();
   }
 
-  previewStepInNewWindow() {
-    const data = { constraints: true };
-    this.saveEvent('stepPreviewed', 'Navigation', data);
-    window.open(`${this.ConfigService.getConfigParam('previewProjectURL')}/${this.nodeId}`);
+  protected previewStepInNewWindow(constraints: boolean): void {
+    this.saveStepPreviewedEvent(constraints);
+    window.open(this.createPreviewURL(this.nodeId, constraints));
   }
 
-  previewStepWithoutConstraintsInNewWindow() {
-    const data = { constraints: false };
+  private saveStepPreviewedEvent(constraints: boolean): void {
+    const data = { constraints: constraints };
     this.saveEvent('stepPreviewed', 'Navigation', data);
-    window.open(
-      `${this.ConfigService.getConfigParam('previewProjectURL')}/${this.nodeId}` +
-        `?constraints=false`
-    );
+  }
+
+  private createPreviewURL(nodeId: string, constraints: boolean): string {
+    let previewURL = `${this.ConfigService.getConfigParam('previewProjectURL')}/${nodeId}`;
+    if (!constraints) {
+      previewURL += '?constraints=false';
+    }
+    return previewURL;
   }
 
   close() {
@@ -201,7 +205,7 @@ class NodeAuthoringController {
    */
   authoringViewNodeChanged(parseProject = false) {
     this.undoStack.push(this.currentNodeCopy);
-    this.currentNodeCopy = this.UtilService.makeCopyOfJSONObject(this.nodeJson);
+    this.currentNodeCopy = copy(this.nodeJson);
     if (parseProject) {
       this.ProjectService.parseProject();
       this.items = this.ProjectService.idToOrder;
@@ -495,7 +499,7 @@ class NodeAuthoringController {
       if (newComponents != null) {
         for (const newComponent of newComponents) {
           if (newComponent != null) {
-            this.UtilService.temporarilyHighlightElement(newComponent.id);
+            temporarilyHighlightElement(newComponent.id);
           }
         }
       }
@@ -587,7 +591,8 @@ class NodeAuthoringController {
     return componentObjects;
   }
 
-  showComponentAdvancedAuthoring(component: any) {
+  showComponentAdvancedAuthoring(componentContent: ComponentContent) {
+    const component = new Component(componentContent, this.nodeId);
     this.$mdDialog.show({
       templateUrl: 'assets/wise5/authoringTool/components/edit-component-advanced.html',
       controller: [

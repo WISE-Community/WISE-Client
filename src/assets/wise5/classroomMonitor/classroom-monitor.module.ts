@@ -2,41 +2,24 @@
 
 import * as angular from 'angular';
 import './classroomMonitorComponents/manageStudents/manageStudentsModule';
-import './classroomMonitorComponents/milestones/milestones';
-import './classroomMonitorComponents/nodeGrading/nodeGrading';
 import './classroomMonitorComponents/nodeProgress/nodeProgress';
-import './classroomMonitorComponents/studentGrading/studentGrading';
 import './classroomMonitorComponents/studentProgress/studentProgress';
-import './classroomMonitorComponents/shared/shared';
-import './classroomMonitorComponents/notebook/notebook';
-import '../components/component-grading.module';
 import './dataExport/data-export-module';
-import ClassroomMonitorController from './classroomMonitorController';
-import StudentProgressController from './studentProgress/studentProgressController';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { NotebookGradingComponent } from './notebook-grading/notebook-grading.component';
 import { StudentGradingComponent } from './student-grading/student-grading.component';
+import { StudentProgressComponent } from './student-progress/student-progress.component';
+import { ClassroomMonitorComponent } from './classroom-monitor.component';
 
 export default angular
-  .module('classroomMonitor', [
-    'componentGrading',
-    'cmShared',
-    'dataExport',
-    'manageStudents',
-    'milestones',
-    'nodeGrading',
-    'nodeProgress',
-    'notebookGrading',
-    'studentGrading',
-    'studentProgress'
-  ])
-  .controller('ClassroomMonitorController', ClassroomMonitorController)
+  .module('classroomMonitor', ['dataExport', 'manageStudents', 'nodeProgress', 'studentProgress'])
+  .directive('classroomMonitor', downgradeComponent({ component: ClassroomMonitorComponent }))
   .directive('notebookGrading', downgradeComponent({ component: NotebookGradingComponent }))
   .directive(
     'studentGrading',
     downgradeComponent({ component: StudentGradingComponent }) as angular.IDirectiveFactory
   )
-  .controller('StudentProgressController', StudentProgressController)
+  .directive('studentProgress', downgradeComponent({ component: StudentProgressComponent }))
   .config([
     '$stateProvider',
     '$translatePartialLoaderProvider',
@@ -45,9 +28,7 @@ export default angular
       $stateProvider
         .state('root.cm', {
           url: '/manage/unit/:runId',
-          templateUrl: '/assets/wise5/classroomMonitor/classroomMonitor.html',
-          controller: 'ClassroomMonitorController',
-          controllerAs: 'classroomMonitorController',
+          component: 'classroomMonitor',
           abstract: true,
           resolve: {
             config: [
@@ -148,9 +129,7 @@ export default angular
         })
         .state('root.cm.teamLanding', {
           url: '/team',
-          templateUrl: '/assets/wise5/classroomMonitor/studentProgress/studentProgress.html',
-          controller: 'StudentProgressController',
-          controllerAs: 'studentProgressController'
+          component: 'studentProgress'
         })
         .state('root.cm.team', {
           url: '/team/:workgroupId',
@@ -175,12 +154,6 @@ export default angular
         .state('root.cm.unit.node', {
           url: '/node/:nodeId',
           component: 'nodeProgressView'
-        })
-        .state('root.cm.dashboard', {
-          url: '/dashboard',
-          templateUrl: '/assets/wise5/classroomMonitor/dashboard/dashboard.html',
-          controller: 'DashboardController',
-          controllerAs: 'dashboardController'
         })
         .state('root.cm.milestones', {
           url: '/milestones',

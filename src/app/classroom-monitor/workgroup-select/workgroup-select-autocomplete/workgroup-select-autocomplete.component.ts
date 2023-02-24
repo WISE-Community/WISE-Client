@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { filter, map, startWith } from 'rxjs/operators';
 import { ConfigService } from '../../../../assets/wise5/services/configService';
 import { TeacherDataService } from '../../../../assets/wise5/services/teacherDataService';
+import { copy } from '../../../../assets/wise5/common/object/object';
 
 @Component({
   selector: 'workgroup-select-autocomplete',
@@ -71,7 +72,7 @@ export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectCompone
       const ids = workgroup.userIds;
       const names = workgroup.displayNames.split(',');
       for (let x = 0; x < ids.length; x++) {
-        const current = JSON.parse(JSON.stringify(workgroup));
+        const current = copy(workgroup);
         current.userId = ids[x];
         const name = names[x].trim();
         current.displayNames = name;

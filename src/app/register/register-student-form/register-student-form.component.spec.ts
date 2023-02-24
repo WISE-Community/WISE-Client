@@ -12,14 +12,13 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import * as helpers from '../register-user-form/register-user-form-spec-helpers';
-import { PasswordService } from '../../services/password.service';
 import {
   nameTests,
   validateAndExpect
 } from '../register-user-form/register-user-form-spec-helpers';
 import { BrowserModule, By } from '@angular/platform-browser';
-import { MatError } from '@angular/material/form-field';
 import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+import { PasswordModule } from '../../password/password.module';
 
 let router: Router;
 let component: RegisterStudentFormComponent;
@@ -49,6 +48,7 @@ describe('RegisterStudentFormComponent', () => {
         declarations: [RegisterStudentFormComponent],
         imports: [
           BrowserAnimationsModule,
+          PasswordModule,
           RouterTestingModule,
           ReactiveFormsModule,
           MatSelectModule,
@@ -58,7 +58,6 @@ describe('RegisterStudentFormComponent', () => {
           RecaptchaV3Module
         ],
         providers: [
-          PasswordService,
           { provide: StudentService, useClass: MockStudentService },
           { provide: UserService, useClass: MockUserService },
           { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
@@ -244,8 +243,8 @@ function createAccountFormValue(
     securityQuestion: securityQuestion,
     securityQuestionAnswer: securityQuestionAnswer,
     passwords: {
-      password: password,
-      confirmPassword: confirmPassword
+      newPassword: password,
+      confirmNewPassword: confirmPassword
     }
   };
 }

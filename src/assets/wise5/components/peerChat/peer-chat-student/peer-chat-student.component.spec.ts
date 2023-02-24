@@ -5,14 +5,13 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
-import { PeerGroupService } from '../../../services/peerGroupService';
+import { StudentPeerGroupService } from '../../../services/studentPeerGroupService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { StudentWebSocketService } from '../../../services/studentWebSocketService';
 import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentService } from '../../componentService';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
@@ -147,14 +146,13 @@ describe('PeerChatStudentComponent', () => {
         NotificationService,
         PauseScreenService,
         PeerChatService,
-        PeerGroupService,
         ProjectService,
         SessionService,
         StudentAssetService,
         StudentDataService,
+        StudentPeerGroupService,
         StudentWebSocketService,
-        TagService,
-        UtilService
+        TagService
       ]
     }).compileComponents();
   });
@@ -168,12 +166,15 @@ describe('PeerChatStudentComponent', () => {
       return workgroupId === teacherWorkgroupId;
     });
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
-    retrievePeerGroupSpy = spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup');
+    retrievePeerGroupSpy = spyOn(TestBed.inject(StudentPeerGroupService), 'retrievePeerGroup');
     retrievePeerGroupSpy.and.callFake(() => {
       return of(peerGroup);
     });
-    spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroupWork').and.returnValue(
+    spyOn(TestBed.inject(StudentPeerGroupService), 'retrievePeerGroupWork').and.returnValue(
       of([componentState1, componentState2])
+    );
+    spyOn(TestBed.inject(StudentPeerGroupService), 'retrievePeerGroupAnnotations').and.returnValue(
+      of([])
     );
     component = fixture.componentInstance;
     component.component = new PeerChatComponent(componentContent, nodeId);

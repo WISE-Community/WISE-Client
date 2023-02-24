@@ -2,21 +2,28 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConfigService } from './configService';
 import { TeacherDataService } from './teacherDataService';
-import { UtilService } from './utilService';
+import { compressToEncodedURIComponent } from 'lz-string';
 
 @Injectable()
 export class DataExportService {
   constructor(
     private ConfigService: ConfigService,
     private http: HttpClient,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
+    private TeacherDataService: TeacherDataService
   ) {}
 
-  retrieveStudentDataExport(selectedNodes = []): Promise<any> {
-    let params = this.createHttpParams('true', 'false', 'true');
-    for (const selectedNode of selectedNodes) {
-      params = params.append('components', JSON.stringify(selectedNode));
+  retrieveStudentData(
+    selectedNodes = [],
+    includeStudentWork: boolean,
+    includeEvents: boolean,
+    includeAnnotations: boolean
+  ): Promise<any> {
+    let params = this.createHttpParams(includeStudentWork, includeEvents, includeAnnotations);
+    if (selectedNodes.length > 0) {
+      params = params.set(
+        'components',
+        compressToEncodedURIComponent(JSON.stringify(selectedNodes))
+      );
     }
     return this.TeacherDataService.retrieveStudentData(params);
   }
@@ -88,14 +95,6 @@ export class DataExportService {
       });
   }
 
-  retrieveOneWorkgroupPerRowExport(selectedNodes = []): Promise<any> {
-    let params = this.createHttpParams('true', 'true', 'true');
-    for (const selectedNode of selectedNodes) {
-      params = params.append('components', JSON.stringify(selectedNode));
-    }
-    return this.TeacherDataService.retrieveStudentData(params);
-  }
-
   retrieveStudentAssetsExport(): Promise<any> {
     window.location.href = this.getExportURL(this.ConfigService.getRunId(), 'studentAssets');
     return new Promise((resolve) => {
@@ -103,20 +102,16 @@ export class DataExportService {
     });
   }
 
-  retrieveRawDataExport(selectedNodes: any[] = []): Promise<any> {
-    let params = this.createHttpParams('true', 'true', 'true');
-    for (const selectedNode of selectedNodes) {
-      params = params.append('components', JSON.stringify(selectedNode));
-    }
-    return this.TeacherDataService.retrieveStudentData(params);
-  }
-
-  private createHttpParams(studentWork: string, events: string, annotations: string): HttpParams {
+  private createHttpParams(
+    includeStudentWork: boolean,
+    includeEvents: boolean,
+    includeAnnotations: boolean
+  ): HttpParams {
     return new HttpParams()
       .set('runId', this.ConfigService.getRunId())
-      .set('getStudentWork', studentWork)
-      .set('getEvents', events)
-      .set('getAnnotations', annotations);
+      .set('getStudentWork', includeStudentWork)
+      .set('getEvents', includeEvents)
+      .set('getAnnotations', includeAnnotations);
   }
 
   getExportURL(runId: number, exportType: string): string {

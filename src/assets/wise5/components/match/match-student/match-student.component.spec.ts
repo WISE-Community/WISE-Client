@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
+import { copy } from '../../../common/object/object';
 import { ClickToSnipImageService } from '../../../services/clickToSnipImageService';
 import { ProjectService } from '../../../services/projectService';
 import { MatchStudent } from './match-student.component';
@@ -91,9 +92,7 @@ describe('MatchStudentComponent', () => {
       ]
     };
     component.component = new Component(componentContent, nodeId);
-    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(
-      JSON.parse(JSON.stringify(componentContent))
-    );
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(copy(componentContent));
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {
@@ -659,7 +658,7 @@ function getCleanedValue() {
       const componentContent = component.componentContent;
       componentContent.choices[0].value = choiceValue;
       componentContent.buckets[0].value = bucketValue;
-      const originalComponentContent = JSON.parse(JSON.stringify(componentContent));
+      const originalComponentContent = copy(componentContent);
       component.componentContent = TestBed.inject(
         ClickToSnipImageService
       ).injectClickToSnipImageListener(component.componentContent);

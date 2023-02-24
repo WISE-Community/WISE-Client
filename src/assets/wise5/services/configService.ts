@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { UtilService } from './utilService';
+import { isMatchingPeriods } from '../common/period/period';
 
 @Injectable()
 export class ConfigService {
@@ -289,7 +290,10 @@ export class ConfigService {
 
   getTeacherWorkgroupIds(): number[] {
     const teacherWorkgroupIds = [];
-    teacherWorkgroupIds.push(this.getTeacherWorkgroupId());
+    const teacherWorkgroupId = this.getTeacherWorkgroupId();
+    if (teacherWorkgroupId != null) {
+      teacherWorkgroupIds.push(teacherWorkgroupId);
+    }
     teacherWorkgroupIds.push(...this.getSharedTeacherWorkgroupIds());
     return teacherWorkgroupIds;
   }
@@ -332,7 +336,7 @@ export class ConfigService {
         return myClassInfo.sharedTeacherUserInfos;
       }
     }
-    return null;
+    return [];
   }
 
   getClassmateWorkgroupIds(includeSelf = false) {
@@ -440,11 +444,11 @@ export class ConfigService {
   getWorkgroupsByPeriod(periodId) {
     const workgroupsInPeriod = [];
     const myUserInfo = this.getMyUserInfo();
-    if (this.isStudent() && this.utilService.isMatchingPeriods(myUserInfo.periodId, periodId)) {
+    if (this.isStudent() && isMatchingPeriods(myUserInfo.periodId, periodId)) {
       workgroupsInPeriod.push(myUserInfo);
     }
     for (const classmateUserInfo of this.getClassmateUserInfos()) {
-      if (this.utilService.isMatchingPeriods(classmateUserInfo.periodId, periodId)) {
+      if (isMatchingPeriods(classmateUserInfo.periodId, periodId)) {
         workgroupsInPeriod.push(classmateUserInfo);
       }
     }
@@ -614,6 +618,10 @@ export class ConfigService {
     return !this.isRunOwner(workgroupId) && !this.isRunSharedTeacher();
   }
 
+  isSignedInUserATeacher(): boolean {
+    return this.isRunOwner() || this.isRunSharedTeacher();
+  }
+
   isTeacherWorkgroupId(workgroupId: number): boolean {
     return this.isTeacherIdentifyingId('workgroupId', workgroupId);
   }
@@ -624,6 +632,9 @@ export class ConfigService {
 
   isTeacherIdentifyingId(fieldName: string, value: number): boolean {
     const teacherUserInfo = this.getTeacherUserInfo();
+    if (teacherUserInfo == null) {
+      return false;
+    }
     if (teacherUserInfo[fieldName] === value) {
       return true;
     }

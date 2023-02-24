@@ -1,9 +1,11 @@
 <div>
   <mat-form-field class="model-parameters">
     <mat-label i18n>Model Parameters</mat-label>
-    <input matInput
-        [(ngModel)]="componentContent.parameters"
-        (ngModelChange)="componentChanged()"/>
+    <input
+      matInput
+      [(ngModel)]="componentContent.parameters"
+      (ngModelChange)="componentChanged()"
+    />
   </mat-form-field>
 </div>
 <div *ngIf="isNotebookEnabled()">
@@ -11,8 +13,7 @@
   </edit-component-add-to-notebook-button>
 </div>
 <edit-common-advanced
-    [nodeId]="nodeId"
-    [componentId]="componentId"
-    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-    [componentContent]="componentContent">
+  [component]="component"
+  [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+>
 </edit-common-advanced>

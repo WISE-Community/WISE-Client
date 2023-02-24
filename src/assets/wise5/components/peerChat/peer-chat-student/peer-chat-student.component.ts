@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { forkJoin, Observable } from 'rxjs';
 import { timeout } from 'rxjs/operators';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
-import { PeerGroupService } from '../../../services/peerGroupService';
+import { StudentPeerGroupService } from '../../../services/studentPeerGroupService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { StudentWebSocketService } from '../../../services/studentWebSocketService';
-import { UtilService } from '../../../services/utilService';
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
@@ -28,7 +28,7 @@ import { PeerGroup } from '../PeerGroup';
 })
 export class PeerChatStudentComponent extends ComponentStudent {
   component: PeerChatComponent;
-  displayedQuestionBankRule: QuestionBankRule;
+  displayedQuestionBankRules: QuestionBankRule[];
   dynamicPrompt: FeedbackRule;
   isPeerChatWorkgroupsResponseReceived: boolean;
   isPeerChatWorkgroupsAvailable: boolean;
@@ -43,18 +43,18 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   constructor(
     protected annotationService: AnnotationService,
+    private changeDetectorRef: ChangeDetectorRef,
     protected componentService: ComponentService,
     protected configService: ConfigService,
     protected dialog: MatDialog,
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
     private notificationService: NotificationService,
-    private peerGroupService: PeerGroupService,
+    private peerGroupService: StudentPeerGroupService,
     private peerChatService: PeerChatService,
     protected studentAssetService: StudentAssetService,
     protected studentDataService: StudentDataService,
-    private studentWebSocketService: StudentWebSocketService,
-    protected utilService: UtilService
+    private studentWebSocketService: StudentWebSocketService
   ) {
     super(
       annotationService,
@@ -64,17 +64,20 @@ export class PeerChatStudentComponent extends ComponentStudent {
       nodeService,
       notebookService,
       studentAssetService,
-      studentDataService,
-      utilService
+      studentDataService
     );
   }
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.myWorkgroupId = this.configService.getWorkgroupId();
+    this.myWorkgroupId = this.configService.isAuthoring() ? 1 : this.configService.getWorkgroupId();
     this.requestChatWorkgroups();
     this.registerStudentWorkReceivedListener();
     this.questionBankContent = this.component.getQuestionBankContent();
+  }
+
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   private registerStudentWorkReceivedListener(): void {
@@ -109,7 +112,13 @@ export class PeerChatStudentComponent extends ComponentStudent {
             const peerGroupWorkgroupIds = peerGroup.getWorkgroupIds();
             this.addTeacherWorkgroupIds(peerGroupWorkgroupIds);
             this.setPeerChatWorkgroups(peerGroupWorkgroupIds);
-            this.getPeerChatComponentStates(peerGroup);
+            forkJoin([
+              this.getPeerChatComponentStates(peerGroup),
+              this.getPeerChatAnnotations(peerGroup)
+            ]).subscribe(([componentStates, annotations]) => {
+              this.setPeerChatMessages(componentStates);
+              this.peerChatService.processIsDeletedAnnotations(annotations, this.peerChatMessages);
+            });
           }
         },
         (error) => {
@@ -122,18 +131,25 @@ export class PeerChatStudentComponent extends ComponentStudent {
     workgroupIds.push(...this.configService.getTeacherWorkgroupIds());
   }
 
-  private getPeerChatComponentStates(peerGroup: PeerGroup): void {
-    this.peerGroupService
-      .retrievePeerGroupWork(peerGroup, this.component.nodeId, this.component.id)
-      .pipe(timeout(this.requestTimeout))
-      .subscribe((componentStates: any[]) => {
-        this.setPeerChatMessages(componentStates);
-      });
+  private getPeerChatComponentStates(peerGroup: PeerGroup): Observable<any> {
+    return this.peerGroupService.retrievePeerGroupWork(
+      peerGroup,
+      this.component.nodeId,
+      this.component.id
+    );
   }
 
   private setPeerChatMessages(componentStates: any = []): void {
     this.peerChatMessages = [];
     this.peerChatService.setPeerChatMessages(this.peerChatMessages, componentStates);
+  }
+
+  private getPeerChatAnnotations(peerGroup: PeerGroup): Observable<any> {
+    return this.peerGroupService.retrievePeerGroupAnnotations(
+      peerGroup,
+      this.component.nodeId,
+      this.component.id
+    );
   }
 
   private setPeerChatWorkgroups(workgroupIds: number[]): void {
@@ -144,11 +160,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   }
 
   submitStudentResponse(response: string): void {
-    const peerChatMessage = new PeerChatMessage(
-      this.configService.getWorkgroupId(),
-      response,
-      new Date().getTime()
-    );
+    const peerChatMessage = new PeerChatMessage(this.myWorkgroupId, response, new Date().getTime());
     this.addPeerChatMessage(peerChatMessage);
     this.response = response;
     this.emitComponentSubmitTriggered();
@@ -167,8 +179,8 @@ export class PeerChatStudentComponent extends ComponentStudent {
     if (this.dynamicPrompt != null) {
       componentState.studentData.dynamicPrompt = this.dynamicPrompt;
     }
-    if (this.displayedQuestionBankRule != null) {
-      componentState.studentData.questionBank = this.displayedQuestionBankRule;
+    if (this.displayedQuestionBankRules != null) {
+      componentState.studentData.questionBank = this.displayedQuestionBankRules;
     }
     componentState.componentType = 'PeerChat';
     componentState.nodeId = this.component.nodeId;
@@ -176,7 +188,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     componentState.isSubmit = true;
     componentState.runId = this.configService.getRunId();
     componentState.periodId = this.configService.getPeriodId();
-    componentState.workgroupId = this.configService.getWorkgroupId();
+    componentState.workgroupId = this.myWorkgroupId;
     componentState.peerGroupId = this.peerGroup.id;
     const promise = new Promise((resolve, reject) => {
       return this.createComponentStateAdditionalProcessing(

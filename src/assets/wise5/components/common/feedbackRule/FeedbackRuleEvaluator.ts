@@ -1,6 +1,7 @@
 import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
 import { CRaterResponse } from '../cRater/CRaterResponse';
 import { FeedbackRule } from './FeedbackRule';
+import { FeedbackRuleExpression } from './FeedbackRuleExpression';
 import { TermEvaluator } from './TermEvaluator/TermEvaluator';
 import { TermEvaluatorFactory } from './TermEvaluator/TermEvaluatorFactory';
 
@@ -16,6 +17,15 @@ export class FeedbackRuleEvaluator {
       }
     }
     return this.getDefaultRule(this.component.getFeedbackRules());
+  }
+
+  getFeedbackRules(response: CRaterResponse[]): FeedbackRule[] {
+    const matchedRules = this.component
+      .getFeedbackRules()
+      .filter((rule) => this.satisfiesRule(response, Object.assign(new FeedbackRule(), rule)));
+    return matchedRules.length > 0
+      ? matchedRules
+      : [this.getDefaultRule(this.component.getFeedbackRules())];
   }
 
   private satisfiesRule(
@@ -104,10 +114,9 @@ export class FeedbackRuleEvaluator {
     response: CRaterResponse | CRaterResponse[],
     feedbackRule: FeedbackRule
   ): boolean {
-    const postfixExpression = feedbackRule.getPostfixExpression();
     const termStack = [];
-    for (const term of postfixExpression) {
-      if (FeedbackRule.isOperand(term)) {
+    for (const term of feedbackRule.getPostfixExpression()) {
+      if (FeedbackRuleExpression.isOperand(term)) {
         termStack.push(term);
       } else {
         this.evaluateOperator(term, termStack, response);
@@ -176,6 +185,7 @@ export class FeedbackRuleEvaluator {
     return (
       feedbackRules.find((rule) => FeedbackRule.isDefaultRule(rule)) ||
       Object.assign(new FeedbackRule(), {
+        id: 'default',
         expression: 'isDefault',
         feedback: this.component.isMultipleFeedbackTextsForSameRuleAllowed()
           ? [this.defaultFeedback]

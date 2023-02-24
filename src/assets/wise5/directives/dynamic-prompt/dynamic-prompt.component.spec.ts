@@ -6,7 +6,7 @@ import { PeerGroupStudentData } from '../../../../app/domain/peerGroupStudentDat
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { ComponentContent } from '../../common/ComponentContent';
 import { AnnotationService } from '../../services/annotationService';
-import { PeerGroupService } from '../../services/peerGroupService';
+import { StudentPeerGroupService } from '../../services/studentPeerGroupService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 import { DynamicPromptComponent } from './dynamic-prompt.component';
@@ -79,11 +79,11 @@ function peerGroupingTagEnabled(): void {
   describe('peerGroupingTagEnabled', () => {
     beforeEach(() => {
       component.dynamicPrompt.peerGroupingTag = 'apple';
-      spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup').and.returnValue(
+      spyOn(TestBed.inject(StudentPeerGroupService), 'retrievePeerGroup').and.returnValue(
         of(createPeerGroup())
       );
       retrieveStudentDataSpy = spyOn(
-        TestBed.inject(PeerGroupService),
+        TestBed.inject(StudentPeerGroupService),
         'retrieveDynamicPromptStudentData'
       );
     });

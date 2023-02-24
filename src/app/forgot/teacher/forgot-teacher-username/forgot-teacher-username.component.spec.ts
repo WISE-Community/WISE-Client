@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TeacherService } from '../../../teacher/teacher.service';
-import { Observable } from 'rxjs/index';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 export class MockTeacherService {

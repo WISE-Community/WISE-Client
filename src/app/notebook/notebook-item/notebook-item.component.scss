@@ -1,6 +1,6 @@
-@import '~@angular/material/theming', 
-    '~style/abstracts/variables',
-    '~style/themes/default';
+@import '@angular/material/theming',
+    'style/abstracts/variables',
+    'style/themes/default';
 
 $light-gray: map-get($mat-grey, 300);
 

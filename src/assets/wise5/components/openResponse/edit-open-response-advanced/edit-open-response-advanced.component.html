@@ -1,29 +1,32 @@
 <mat-form-field class="starter-sentence">
   <mat-label i18n>Starter Sentence (Optional)</mat-label>
   <textarea
-      matInput
-      [(ngModel)]="componentContent.starterSentence"
-      (ngModelChange)="componentChanged()"
-      cdkTextareaAutosize>
+    matInput
+    [(ngModel)]="componentContent.starterSentence"
+    (ngModelChange)="componentChanged()"
+    cdkTextareaAutosize
+  >
   </textarea>
 </mat-form-field>
 <div>
   <mat-checkbox
-      color="primary"
-      class="checkbox"
-      [(ngModel)]="componentContent.isStudentAudioRecordingEnabled"
-      (ngModelChange)="componentChanged()"
-      i18n>
+    color="primary"
+    class="checkbox"
+    [(ngModel)]="componentContent.isStudentAudioRecordingEnabled"
+    (ngModelChange)="componentChanged()"
+    i18n
+  >
     Allow students to record audio response
   </mat-checkbox>
 </div>
 <div>
   <mat-checkbox
-      color="primary"
-      class="checkbox"
-      [(ngModel)]="componentContent.enableCRater"
-      (ngModelChange)="enableCRaterClicked()"
-      i18n>
+    color="primary"
+    class="checkbox"
+    [(ngModel)]="componentContent.enableCRater"
+    (ngModelChange)="enableCRaterClicked()"
+    i18n
+  >
     Enable CRater
   </mat-checkbox>
 </div>
@@ -31,15 +34,19 @@
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
     <mat-form-field>
       <mat-label i18n>Item Id</mat-label>
-      <input matInput
-          [(ngModel)]="componentContent.cRater.itemId"
-          (ngModelChange)="componentChanged()"/>
+      <input
+        matInput
+        [(ngModel)]="componentContent.cRater.itemId"
+        (ngModelChange)="componentChanged()"
+      />
     </mat-form-field>
     <div>
-      <button mat-raised-button
-          color="primary"
-          (click)="verifyCRaterItemId(componentContent.cRater.itemId)"
-          i18n>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="verifyCRaterItemId(componentContent.cRater.itemId)"
+        i18n
+      >
         Verify
       </button>
     </div>
@@ -50,8 +57,10 @@
   <div>
     <mat-form-field>
       <mat-label i18n>Score On</mat-label>
-      <mat-select [(ngModel)]="componentContent.cRater.scoreOn"
-          (ngModelChange)="componentChanged()">
+      <mat-select
+        [(ngModel)]="componentContent.cRater.scoreOn"
+        (ngModelChange)="componentChanged()"
+      >
         <mat-option value="submit" i18n>Submit</mat-option>
         <mat-option value="save" i18n>Save</mat-option>
         <mat-option value="change" i18n>Change</mat-option>
@@ -60,94 +69,122 @@
   </div>
   <div>
     <mat-checkbox
-        color="primary"
-        class="checkbox"
-        [(ngModel)]="componentContent.cRater.showScore"
-        (ngModelChange)="componentChanged()"
-        i18n>
+      color="primary"
+      class="checkbox"
+      [(ngModel)]="componentContent.cRater.showScore"
+      (ngModelChange)="componentChanged()"
+      i18n
+    >
       Show Score
     </mat-checkbox>
   </div>
   <mat-checkbox
-      color="primary"
-      class="checkbox"
-      [(ngModel)]="componentContent.cRater.showFeedback"
-      (ngModelChange)="componentChanged()"
-      i18n>
+    color="primary"
+    class="checkbox"
+    [(ngModel)]="componentContent.cRater.showFeedback"
+    (ngModelChange)="componentChanged()"
+    i18n
+  >
     Show Feedback
   </mat-checkbox>
   <div class="section-container">
     <mat-checkbox
-        color="primary"
-        class="checkbox"
-        [ngModel]="componentContent.cRater.feedback?.enabled"
-        (ngModelChange)="setFeedbackEnabled($event)"
-        i18n>
+      color="primary"
+      class="checkbox"
+      [ngModel]="componentContent.cRater.feedback?.enabled"
+      (ngModelChange)="setFeedbackEnabled($event)"
+      i18n
+    >
       Enable Feedback Rules
     </mat-checkbox>
-    <edit-feedback-rules *ngIf="componentContent.cRater.feedback?.enabled"
-        [feedbackRules]="componentContent.cRater.feedback.rules">
+    <edit-feedback-rules
+      *ngIf="componentContent.cRater.feedback?.enabled"
+      [feedbackRules]="componentContent.cRater.feedback.rules"
+    >
     </edit-feedback-rules>
   </div>
-  <div class="section-container"
-      *ngIf="!componentContent.cRater.feedback?.enabled && componentContent.cRater.scoringRules.length > 0">
+  <div
+    class="section-container"
+    *ngIf="
+      !componentContent.cRater.feedback?.enabled && componentContent.cRater.scoringRules.length > 0
+    "
+  >
     <div fxLayoutGap="10px" class="section-label">
       <span i18n>Scoring Rule</span>
       <button
-          mat-raised-button
-          color="primary"
-          (click)="addScoringRule()"
-          matTooltip="Add Scoring Rule"
-          matTooltipPosition="above"
-          i18n-matTooltip>
+        mat-raised-button
+        color="primary"
+        (click)="addScoringRule()"
+        matTooltip="Add Scoring Rule"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
         <mat-icon>add</mat-icon>
       </button>
     </div>
-    <div *ngFor="let scoringRule of componentContent.cRater.scoringRules; index as scoringRuleIndex; first as isFirst; last as isLast"
-        fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px" class="section-item">
+    <div
+      *ngFor="
+        let scoringRule of componentContent.cRater.scoringRules;
+        index as scoringRuleIndex;
+        first as isFirst;
+        last as isLast
+      "
+      fxLayout="row wrap"
+      fxLayoutAlign="start start"
+      fxLayoutGap="20px"
+      class="section-item"
+    >
       <mat-form-field class="scoring-rule-score">
         <mat-label i18n>Score</mat-label>
-        <input matInput
-            type="number"
-            min="0"
-            [(ngModel)]="scoringRule.score"
-            (ngModelChange)="componentChanged()"/>
+        <input
+          matInput
+          type="number"
+          min="0"
+          [(ngModel)]="scoringRule.score"
+          (ngModelChange)="componentChanged()"
+        />
       </mat-form-field>
       <mat-form-field class="scoring-rule-feedback-text">
         <mat-label i18n>Feedback Text</mat-label>
-        <textarea matInput
-            [(ngModel)]="scoringRule.feedbackText"
-            (ngModelChange)="componentChanged()"
-            cdkTextareaAutosize>
+        <textarea
+          matInput
+          [(ngModel)]="scoringRule.feedbackText"
+          (ngModelChange)="componentChanged()"
+          cdkTextareaAutosize
+        >
         </textarea>
       </mat-form-field>
       <div fxLayoutGap="10px">
         <button
-            mat-raised-button
-            color="primary"
-            (click)="moveObjectUp(componentContent.cRater.scoringRules, scoringRuleIndex)"
-            [disabled]="isFirst"
-            matTooltip="Move Scoring Rule Up"
-            matTooltipPosition="above"
-            i18n-matTooltip>
+          mat-raised-button
+          color="primary"
+          (click)="moveObjectUp(componentContent.cRater.scoringRules, scoringRuleIndex)"
+          [disabled]="isFirst"
+          matTooltip="Move Scoring Rule Up"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
           <mat-icon>arrow_upward</mat-icon>
         </button>
         <button
-            mat-raised-button
-            color="primary"
-            (click)="moveObjectDown(componentContent.cRater.scoringRules, scoringRuleIndex)"
-            [disabled]="isLast"
-            matTooltip="Move Scoring Rule Down"
-            matTooltipPosition="above"
-            i18n-matTooltip>
+          mat-raised-button
+          color="primary"
+          (click)="moveObjectDown(componentContent.cRater.scoringRules, scoringRuleIndex)"
+          [disabled]="isLast"
+          matTooltip="Move Scoring Rule Down"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
           <mat-icon>arrow_downward</mat-icon>
         </button>
         <button
-            mat-raised-button
-            color="primary" (click)="scoringRuleDeleteClicked(scoringRuleIndex)"
-            matTooltip="Delete Scoring Rule"
-            matTooltipPosition="above"
-            i18n-matTooltip>
+          mat-raised-button
+          color="primary"
+          (click)="scoringRuleDeleteClicked(scoringRuleIndex)"
+          matTooltip="Delete Scoring Rule"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
           <mat-icon>delete</mat-icon>
         </button>
       </div>
@@ -156,11 +193,12 @@
   <div class="section-container">
     <div>
       <mat-checkbox
-          color="primary"
-          class="checkbox"
-          [(ngModel)]="componentContent.cRater.enableMultipleAttemptScoringRules"
-          (click)="enableMultipleAttemptScoringRulesClicked()"
-          i18n>
+        color="primary"
+        class="checkbox"
+        [(ngModel)]="componentContent.cRater.enableMultipleAttemptScoringRules"
+        (click)="enableMultipleAttemptScoringRulesClicked()"
+        i18n
+      >
         Enable Multiple Attempt Feedback
       </mat-checkbox>
     </div>
@@ -168,67 +206,97 @@
       <div fxLayoutGap="10px" class="section-label">
         <span i18n>Multiple Attempt Scoring Rules</span>
         <button
-            mat-raised-button
-            color="primary"
-            (click)="addMultipleAttemptScoringRule()"
-            matTooltip="Add Multiple Attempt Scoring Rule"
-            matTooltipPosition="above"
-            i18n-matTooltip>
+          mat-raised-button
+          color="primary"
+          (click)="addMultipleAttemptScoringRule()"
+          matTooltip="Add Multiple Attempt Scoring Rule"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div *ngFor="let multipleAttemptScoringRule of componentContent.cRater.multipleAttemptScoringRules; index as multipleAttemptScoringRuleIndex; first as isFirst; last as isLast"
-          fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px" class="section-item">
+      <div
+        *ngFor="
+          let multipleAttemptScoringRule of componentContent.cRater.multipleAttemptScoringRules;
+          index as multipleAttemptScoringRuleIndex;
+          first as isFirst;
+          last as isLast
+        "
+        fxLayout="row wrap"
+        fxLayoutAlign="start center"
+        fxLayoutGap="20px"
+        class="section-item"
+      >
         <mat-form-field class="previous-score">
           <mat-label i18n>Previous Score</mat-label>
-          <input matInput
-              [(ngModel)]="multipleAttemptScoringRule.scoreSequence[0]"
-              (ngModelChange)="componentChanged()"
-              min="0"/>
+          <input
+            matInput
+            [(ngModel)]="multipleAttemptScoringRule.scoreSequence[0]"
+            (ngModelChange)="componentChanged()"
+            min="0"
+          />
         </mat-form-field>
         <mat-form-field class="current-score">
           <mat-label i18n>Current Score</mat-label>
-          <input matInput
-              [(ngModel)]="multipleAttemptScoringRule.scoreSequence[1]"
-              (ngModelChange)="componentChanged()"
-              min="0"/>
+          <input
+            matInput
+            [(ngModel)]="multipleAttemptScoringRule.scoreSequence[1]"
+            (ngModelChange)="componentChanged()"
+            min="0"
+          />
         </mat-form-field>
         <mat-form-field class="multiple-attempt-feedback">
           <mat-label i18n>Feedback to Student</mat-label>
-          <textarea matInput
-              [(ngModel)]="multipleAttemptScoringRule.feedbackText"
-              (ngModelChange)="componentChanged()"
-              cdkTextareaAutosize>
-         </textarea>
+          <textarea
+            matInput
+            [(ngModel)]="multipleAttemptScoringRule.feedbackText"
+            (ngModelChange)="componentChanged()"
+            cdkTextareaAutosize
+          >
+          </textarea>
         </mat-form-field>
         <div fxLayoutGap="10px">
           <button
-             mat-raised-button
-             color="primary"
-             (click)="moveObjectUp(componentContent.cRater.multipleAttemptScoringRules, multipleAttemptScoringRuleIndex)"
-             [disabled]="isFirst"
-             matTooltip="Move Multiple Attempt Scoring Rule Up"
-             matTooltipPosition="above"
-             i18n-matTooltip>
+            mat-raised-button
+            color="primary"
+            (click)="
+              moveObjectUp(
+                componentContent.cRater.multipleAttemptScoringRules,
+                multipleAttemptScoringRuleIndex
+              )
+            "
+            [disabled]="isFirst"
+            matTooltip="Move Multiple Attempt Scoring Rule Up"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
             <mat-icon>arrow_upward</mat-icon>
           </button>
           <button
-             mat-raised-button
-             color="primary"
-             (click)="moveObjectDown(componentContent.cRater.multipleAttemptScoringRules, multipleAttemptScoringRuleIndex)"
-             [disabled]="isLast"
-             matTooltip="Move Multiple Attempt Scoring Rule Down"
-             matTooltipPosition="above"
-             i18n-matTooltip>
+            mat-raised-button
+            color="primary"
+            (click)="
+              moveObjectDown(
+                componentContent.cRater.multipleAttemptScoringRules,
+                multipleAttemptScoringRuleIndex
+              )
+            "
+            [disabled]="isLast"
+            matTooltip="Move Multiple Attempt Scoring Rule Down"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
             <mat-icon>arrow_downward</mat-icon>
           </button>
           <button
-             mat-raised-button
-             color="primary"
-             (click)="multipleAttemptScoringRuleDeleteClicked(multipleAttemptScoringRuleIndex)"
-             matTooltip="Delet Multiple Attempt Scoring"
-             matTooltipPosition="above"
-             i18n-matTooltip>
+            mat-raised-button
+            color="primary"
+            (click)="multipleAttemptScoringRuleDeleteClicked(multipleAttemptScoringRuleIndex)"
+            matTooltip="Delet Multiple Attempt Scoring"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </div>
@@ -238,11 +306,12 @@
   <div class="section-container">
     <div>
       <mat-checkbox
-          color="primary"
-          class="checkbox"
-          [(ngModel)]="componentContent.enableNotifications"
-          (ngModelChange)="enableNotificationsClicked()"
-          i18n>
+        color="primary"
+        class="checkbox"
+        [(ngModel)]="componentContent.enableNotifications"
+        (ngModelChange)="enableNotificationsClicked()"
+        i18n
+      >
         Enable Notifications
       </mat-checkbox>
     </div>
@@ -250,63 +319,85 @@
       <div fxLayoutGap="10px" class="section-label">
         <span i18n>Notifications</span>
         <button
-            mat-raised-button
-            color="primary"
-            (click)="addNotification()"
-            matTooltip="Add New Notification"
-            matTooltipPosition="above"
-            i18n>
+          mat-raised-button
+          color="primary"
+          (click)="addNotification()"
+          matTooltip="Add New Notification"
+          matTooltipPosition="above"
+          i18n
+        >
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div *ngFor="let notification of componentContent.notificationSettings.notifications; index as notificationIndex; first as isFirst; last as isLast"
-          class="section-item">
+      <div
+        *ngFor="
+          let notification of componentContent.notificationSettings.notifications;
+          index as notificationIndex;
+          first as isFirst;
+          last as isLast
+        "
+        class="section-item"
+      >
         <div fxLayoutGap="20px">
           <mat-form-field class="notification-score">
-              <mat-label i18n>Previous Score</mat-label>
-              <input matInput
-                  type="number"
-                  min="0"
-                  [(ngModel)]="notification.enableCriteria.scoreSequence[0]"
-                  (ngModelChange)="componentChanged()"/>
+            <mat-label i18n>Previous Score</mat-label>
+            <input
+              matInput
+              type="number"
+              min="0"
+              [(ngModel)]="notification.enableCriteria.scoreSequence[0]"
+              (ngModelChange)="componentChanged()"
+            />
           </mat-form-field>
           <mat-form-field class="notification-score">
-              <mat-label i18n>Current Score</mat-label>
-              <input matInput
-                  type="number"
-                  min="0"
-                  [(ngModel)]="notification.enableCriteria.scoreSequence[1]"
-                  (ngModelChange)="componentChanged()"/>
+            <mat-label i18n>Current Score</mat-label>
+            <input
+              matInput
+              type="number"
+              min="0"
+              [(ngModel)]="notification.enableCriteria.scoreSequence[1]"
+              (ngModelChange)="componentChanged()"
+            />
           </mat-form-field>
           <div fxFlex></div>
           <div fxLayoutGap="10px">
             <button
-                mat-raised-button
-                color="primary"
-                (click)="moveObjectUp(componentContent.notificationSettings.notifications, notificationIndex)"
-                [disabled]="isFirst"
-                matTooltip="Move Notification Up"
-                matTooltipPosition="above"
-                i18n-matTooltip>
+              mat-raised-button
+              color="primary"
+              (click)="
+                moveObjectUp(componentContent.notificationSettings.notifications, notificationIndex)
+              "
+              [disabled]="isFirst"
+              matTooltip="Move Notification Up"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
               <mat-icon>arrow_upward</mat-icon>
             </button>
             <button
-                mat-raised-button
-                color="primary"
-                (click)="moveObjectDown(componentContent.notificationSettings.notifications, notificationIndex)"
-                [disabled]="isLast"
-                matTooltip="Move Notification Down"
-                matTooltipPosition="above"
-                i18n-matTooltip>
+              mat-raised-button
+              color="primary"
+              (click)="
+                moveObjectDown(
+                  componentContent.notificationSettings.notifications,
+                  notificationIndex
+                )
+              "
+              [disabled]="isLast"
+              matTooltip="Move Notification Down"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
               <mat-icon>arrow_downward</mat-icon>
             </button>
             <button
-                mat-raised-button
-                color="primary"
-                (click)="notificationDeleteClicked(notificationIndex)"
-                matTooltip="Delete Notification"
-                matTooltipPosition="above"
-                i18n-matTooltip>
+              mat-raised-button
+              color="primary"
+              (click)="notificationDeleteClicked(notificationIndex)"
+              matTooltip="Delete Notification"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
               <mat-icon>delete</mat-icon>
             </button>
           </div>
@@ -316,45 +407,51 @@
             Enable Ambient Display Dismiss Mode
           </mat-checkbox>
           <mat-form-field *ngIf="notification.isAmbient">
-             <mat-label i18n>Dismiss Code</mat-label>
-             <input matInput
-                [(ngModel)]="notification.dismissCode"
-                (ngModelChange)="componentChanged()"/>
+            <mat-label i18n>Dismiss Code</mat-label>
+            <input
+              matInput
+              [(ngModel)]="notification.dismissCode"
+              (ngModelChange)="componentChanged()"
+            />
           </mat-form-field>
         </div>
         <div fxLayoutAlign="start start" fxLayoutGap="20px">
           <mat-checkbox
-              color="primary"
-              class="checkbox"
-              [(ngModel)]="notification.isNotifyStudent"
-              i18n>
+            color="primary"
+            class="checkbox"
+            [(ngModel)]="notification.isNotifyStudent"
+            i18n
+          >
             Notify Student
           </mat-checkbox>
           <mat-form-field *ngIf="notification.isNotifyStudent" class="notification-feedback">
             <mat-label i18n>Feedback to Student</mat-label>
             <textarea
-                matInput
-                [(ngModel)]="notification.notificationMessageToStudent"
-                (ngModelChange)="componentChanged()"
-                cdkTextareaAutosize>
+              matInput
+              [(ngModel)]="notification.notificationMessageToStudent"
+              (ngModelChange)="componentChanged()"
+              cdkTextareaAutosize
+            >
             </textarea>
           </mat-form-field>
         </div>
         <div fxLayoutAlign="start start" fxLayoutGap="20px">
           <mat-checkbox
-              color="primary"
-              class="checkbox"
-              [(ngModel)]="notification.isNotifyTeacher"
-              i18n>
+            color="primary"
+            class="checkbox"
+            [(ngModel)]="notification.isNotifyTeacher"
+            i18n
+          >
             Notify Teacher
           </mat-checkbox>
           <mat-form-field *ngIf="notification.isNotifyTeacher" class="notification-feedback">
             <mat-label i18n>Feedback to Teacher</mat-label>
             <textarea
-                matInput
-                [(ngModel)]="notification.notificationMessageToTeacher"
-                (ngModelChange)="componentChanged()"
-                cdkTextareaAutosize>
+              matInput
+              [(ngModel)]="notification.notificationMessageToTeacher"
+              (ngModelChange)="componentChanged()"
+              cdkTextareaAutosize
+            >
             </textarea>
           </mat-form-field>
         </div>
@@ -363,38 +460,45 @@
   </div>
   <div class="section-container">
     <mat-checkbox
-        color="primary"
-        class="checkbox"
-        [(ngModel)]="useCustomCompletionCriteria"
-        (click)="useCustomCompletionCriteriaClicked($event)"
-        i18n>
+      color="primary"
+      class="checkbox"
+      [(ngModel)]="useCustomCompletionCriteria"
+      (click)="useCustomCompletionCriteriaClicked($event)"
+      i18n
+    >
       Use Custom Completion Criteria
     </mat-checkbox>
     <div *ngIf="useCustomCompletionCriteria && componentContent.completionCriteria != null">
       <div fxLayoutGap="10px" class="section-label">
         <span i18n>Custom Completion Criteria</span>
         <button
-            mat-raised-button
-            color="primary"
-            (click)="addCompletionCriteria()"
-            matTooltip="Add Completion Criteria"
-            matTooltipPosition="above"
-            i18n-matTooltip>
+          mat-raised-button
+          color="primary"
+          (click)="addCompletionCriteria()"
+          matTooltip="Add Completion Criteria"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div *ngFor="let criteria of componentContent.completionCriteria.criteria; index as criteriaIndex; first as isFirst; last as isLast"
-          fxLayout="row wrap"
-          fxLayoutAlign="start center"
-          fxLayoutGap="20px"
-          class="section-item">
+      <div
+        *ngFor="
+          let criteria of componentContent.completionCriteria.criteria;
+          index as criteriaIndex;
+          first as isFirst;
+          last as isLast
+        "
+        fxLayout="row wrap"
+        fxLayoutAlign="start center"
+        fxLayoutGap="20px"
+        class="section-item"
+      >
         <mat-form-field class="custom-completion-criteria-step">
           <mat-label i18n>Step</mat-label>
-          <mat-select [(ngModel)]="criteria.nodeId"
-              (ngModelChange)="componentChanged()">
+          <mat-select [(ngModel)]="criteria.nodeId" (ngModelChange)="componentChanged()">
             <ng-container *ngFor="let nodeId of nodeIds">
-              <mat-option *ngIf="isApplicationNode(nodeId)"
-                  [value]="nodeId">
+              <mat-option *ngIf="isApplicationNode(nodeId)" [value]="nodeId">
                 {{ getNodePositionAndTitle(nodeId) }}
               </mat-option>
             </ng-container>
@@ -402,10 +506,11 @@
         </mat-form-field>
         <mat-form-field class="custom-completion-criteria-component">
           <mat-label i18n>Component</mat-label>
-          <mat-select [(ngModel)]="criteria.componentId"
-              (ngModelChange)="componentChanged()">
-            <mat-option *ngFor="let component of getComponents(criteria.nodeId); index as componentIndex"
-                [value]="component.id">
+          <mat-select [(ngModel)]="criteria.componentId" (ngModelChange)="componentChanged()">
+            <mat-option
+              *ngFor="let component of getComponents(criteria.nodeId); index as componentIndex"
+              [value]="component.id"
+            >
               {{ componentIndex + 1 }}. {{ component.type }}
               <span *ngIf="component.id === componentId" i18n>(This Component)</span>
             </mat-option>
@@ -413,8 +518,7 @@
         </mat-form-field>
         <mat-form-field class="custom-completion-criteria-action">
           <mat-label>Action</mat-label>
-          <mat-select [(ngModel)]="criteria.name"
-              (ngModelChange)="componentChanged()">
+          <mat-select [(ngModel)]="criteria.name" (ngModelChange)="componentChanged()">
             <mat-option value="isSubmitted" i18n>Submit</mat-option>
             <mat-option value="isSaved" i18n>Save</mat-option>
           </mat-select>
@@ -422,32 +526,35 @@
         <div fxFlex></div>
         <div fxLayoutGap="10px">
           <button
-              mat-raised-button
-              color="primary"
-              (click)="moveObjectUp(componentContent.completionCriteria.criteria, criteriaIndex)"
-              [disabled]="isFirst"
-              matTooltip="Move Completion Criteria Up"
-              matTooltipPosition="above"
-              i18n-matTooltip>
+            mat-raised-button
+            color="primary"
+            (click)="moveObjectUp(componentContent.completionCriteria.criteria, criteriaIndex)"
+            [disabled]="isFirst"
+            matTooltip="Move Completion Criteria Up"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
             <mat-icon>arrow_upward</mat-icon>
           </button>
           <button
-              mat-raised-button
-              color="primary"
-              (click)="moveObjectDown(componentContent.completionCriteria.criteria, criteriaIndex)"
-              [disabled]="isLast"
-              matTooltip="Move Completion Criteria Down"
-              matTooltipPosition="above"
-              i18n-matTooltip>
+            mat-raised-button
+            color="primary"
+            (click)="moveObjectDown(componentContent.completionCriteria.criteria, criteriaIndex)"
+            [disabled]="isLast"
+            matTooltip="Move Completion Criteria Down"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
             <mat-icon>arrow_downward</mat-icon>
           </button>
           <button
-              mat-raised-button
-              color="primary"
-              (click)="deleteCompletionCriteria(criteriaIndex)"
-              matTooltip="Delete Completion Criteria"
-              matTooltipPosition="above"
-              i18n-matTooltip>
+            mat-raised-button
+            color="primary"
+            (click)="deleteCompletionCriteria(criteriaIndex)"
+            matTooltip="Delete Completion Criteria"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </div>
@@ -460,8 +567,7 @@
   </edit-component-add-to-notebook-button>
 </div>
 <edit-common-advanced
-    [nodeId]="nodeId"
-    [componentId]="componentId"
-    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-    [componentContent]="componentContent">
+  [component]="component"
+  [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+>
 </edit-common-advanced>

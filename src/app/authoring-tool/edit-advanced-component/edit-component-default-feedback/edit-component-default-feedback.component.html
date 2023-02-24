@@ -1,56 +1,67 @@
 <div>
- <label class="feedback-on-submit-label" i18n>
-   Default Feedback on Submit
- </label>
- <button
+  <label class="feedback-on-submit-label" i18n> Default Feedback on Submit </label>
+  <button
     mat-raised-button
     color="primary"
-    (click)='addDefaultFeedback()'
+    (click)="addDefaultFeedback()"
     matTooltip="Add Default Feedback on Submit"
     matTooltipPosition="above"
-    i18n-matTooltip>
-   <mat-icon>add</mat-icon>
- </button>
+    i18n-matTooltip
+  >
+    <mat-icon>add</mat-icon>
+  </button>
 </div>
-<div *ngFor="let singleDefaultFeedback of componentContent.defaultFeedback; let i = index; first as isFirst; last as isLast; trackBy: customTrackBy"
-    class="feedback-row">
+<div
+  *ngFor="
+    let singleDefaultFeedback of componentContent.defaultFeedback;
+    let i = index;
+    first as isFirst;
+    last as isLast;
+    trackBy: customTrackBy
+  "
+  class="feedback-row"
+>
   <mat-form-field class="feedback-input">
     <mat-label i18n>Default Feedback on Submit {{ i + 1 }}</mat-label>
     <input
-        matInput
-        type="text"
-        [(ngModel)]="componentContent.defaultFeedback[i]"
-        (ngModelChange)="feedbackChanged.next($event)"/>
+      matInput
+      type="text"
+      [(ngModel)]="componentContent.defaultFeedback[i]"
+      (ngModelChange)="feedbackChanged.next($event)"
+    />
   </mat-form-field>
   <button
-      mat-raised-button
-      color="primary"
-      class="feedback-button"
-      [disabled]="isFirst"
-      (click)="moveDefaultFeedbackUp(i)"
-      matTooltip="Move Up"
-      matTooltipPosition="above"
-      i18n-matTooltip>
+    mat-raised-button
+    color="primary"
+    class="feedback-button"
+    [disabled]="isFirst"
+    (click)="moveDefaultFeedbackUp(i)"
+    matTooltip="Move Up"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
     <mat-icon>arrow_upward</mat-icon>
   </button>
   <button
-      mat-raised-button
-      color="primary"
-      class="feedback-button"
-      [disabled]="isLast"
-      (click)="moveDefaultFeedbackDown(i)"
-      matTooltip="Move Down"
-      matTooltipPosition="above"
-      i18n-matTooltip>
+    mat-raised-button
+    color="primary"
+    class="feedback-button"
+    [disabled]="isLast"
+    (click)="moveDefaultFeedbackDown(i)"
+    matTooltip="Move Down"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
     <mat-icon>arrow_downward</mat-icon>
   </button>
   <button
-      mat-raised-button
-      color="primary"
-      (click)="deleteDefaultFeedback(i)"
-      matTooltip="Delete"
-      matTooltipPosition="above"
-      i18n-matTooltip>
+    mat-raised-button
+    color="primary"
+    (click)="deleteDefaultFeedback(i)"
+    matTooltip="Delete"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
     <mat-icon>delete</mat-icon>
   </button>
 </div>

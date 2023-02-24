@@ -6,6 +6,7 @@ import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVehiclesChallenge.project.json';
 import teacherProjctJSON_import from './sampleData/curriculum/TeacherProjectServiceSpec.project.json';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { copy } from '../../assets/wise5/common/object/object';
 let service: TeacherProjectService;
 let configService: ConfigService;
 let http: HttpTestingController;
@@ -22,7 +23,6 @@ const projectURL = projectBaseURL + 'project.json';
 const registerNewProjectURL = 'http://localhost:8080/wise/project/new';
 const saveProjectURL = 'http://localhost:8080/wise/project/save/' + projectIdDefault;
 const wiseBaseURL = '/wise';
-
 describe('TeacherProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -32,9 +32,9 @@ describe('TeacherProjectService', () => {
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(TeacherProjectService);
     configService = TestBed.inject(ConfigService);
-    demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
-    scootersProjectJSON = JSON.parse(JSON.stringify(scootersProjectJSON_import));
-    teacherProjectJSON = JSON.parse(JSON.stringify(teacherProjctJSON_import));
+    demoProjectJSON = copy(demoProjectJSON_import);
+    scootersProjectJSON = copy(scootersProjectJSON_import);
+    teacherProjectJSON = copy(teacherProjctJSON_import);
     service.project = {
       nodes: [],
       inactiveNodes: []

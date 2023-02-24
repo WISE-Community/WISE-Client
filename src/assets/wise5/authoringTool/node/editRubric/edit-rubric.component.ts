@@ -1,7 +1,7 @@
+import { insertWiseLinks } from '../../../common/wise-link/wise-link';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 
 class EditRubricComponentController {
   node: any;
@@ -20,8 +20,7 @@ class EditRubricComponentController {
     private $state: any,
     private ConfigService: ConfigService,
     private TeacherProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
+    private TeacherDataService: TeacherDataService
   ) {}
 
   $onInit(): void {
@@ -32,7 +31,7 @@ class EditRubricComponentController {
 
   rubricChanged(): void {
     let html = this.ConfigService.removeAbsoluteAssetPaths(this.rubric);
-    html = this.UtilService.insertWISELinks(html);
+    html = insertWiseLinks(html);
     this.node.rubric = html;
     this.TeacherProjectService.saveProject();
   }

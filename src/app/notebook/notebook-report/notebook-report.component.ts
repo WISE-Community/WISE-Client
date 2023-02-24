@@ -5,7 +5,6 @@ import { AnnotationService } from '../../../assets/wise5/services/annotationServ
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
-import { UtilService } from '../../../assets/wise5/services/utilService';
 import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
 
 @Component({
@@ -36,10 +35,9 @@ export class NotebookReportComponent extends NotebookParentComponent {
     ConfigService: ConfigService,
     NotebookService: NotebookService,
     private ProjectService: ProjectService,
-    UtilService: UtilService,
     private mediaObserver: MediaObserver
   ) {
-    super(ConfigService, NotebookService, UtilService);
+    super(ConfigService, NotebookService);
   }
 
   ngOnInit(): void {
@@ -93,8 +91,8 @@ export class NotebookReportComponent extends NotebookParentComponent {
     );
 
     this.subscriptions.add(
-      this.mediaObserver.media$.subscribe((change: MediaChange) => {
-        if (change.mqAlias == 'xs' && !this.collapsed) {
+      this.mediaObserver.asObservable().subscribe((change: MediaChange[]) => {
+        if (change[0].mqAlias == 'xs' && !this.collapsed) {
           this.collapsed = true;
           this.fullscreen();
         }

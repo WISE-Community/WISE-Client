@@ -9,7 +9,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
 import { User } from '../../../domain/user';
 import { MatDialogModule } from '@angular/material/dialog';
-import { PasswordService } from '../../../services/password.service';
+import { PasswordModule } from '../../../password/password.module';
+
 const CORRECT_OLD_PASSWORD = 'correctOldPassword123';
 const INCORRECT_OLD_PASSWORD = 'incorrectOldPassword123';
 const INVALID_PASSWORD_TOO_SHORT = 'Abcd123';
@@ -50,8 +51,14 @@ describe('EditPasswordComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [EditPasswordComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatSnackBarModule, ReactiveFormsModule],
-      providers: [PasswordService, { provide: UserService, useValue: new MockUserService() }],
+      imports: [
+        BrowserAnimationsModule,
+        MatDialogModule,
+        MatSnackBarModule,
+        PasswordModule,
+        ReactiveFormsModule
+      ],
+      providers: [{ provide: UserService, useValue: new MockUserService() }],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(EditPasswordComponent);

@@ -6,6 +6,8 @@ import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
 import { UtilService } from '../../services/utilService';
+import { convertToPNGFile } from '../../common/canvas/canvas';
+import { wordWrap } from '../../common/string/string';
 
 @Injectable()
 export class LabelService extends ComponentService {
@@ -232,7 +234,7 @@ export class LabelService extends ComponentService {
      * Line wrap the text so that each line does not exceed the max number of
      * characters.
      */
-    const textWrapped = this.UtilService.wordWrap(text, maxCharactersPerLine);
+    const textWrapped = wordWrap(text, maxCharactersPerLine);
 
     // create a div to draw the SVG in
     const svgElement = document.createElement('div');
@@ -284,18 +286,14 @@ export class LabelService extends ComponentService {
     const domURL = self.URL || (self as any).webkitURL || self;
     const url = domURL.createObjectURL(svg);
     const image = new Image();
-    const thisUtilService = this.UtilService;
     return new Promise((resolve, reject) => {
       image.onload = (event) => {
         const image: any = event.target;
         myCanvas.width = image.width;
         myCanvas.height = image.height;
         ctx.drawImage(image, 0, 0);
-        const base64Image = myCanvas.toDataURL('image/png');
-        const imageObject = thisUtilService.getImageObjectFromBase64String(base64Image);
-
-        // create a student asset image
-        this.StudentAssetService.uploadAsset(imageObject).then((unreferencedAsset) => {
+        const pngFile = convertToPNGFile(myCanvas);
+        this.StudentAssetService.uploadAsset(pngFile).then((unreferencedAsset) => {
           /*
            * make a copy of the unreferenced asset so that we
            * get a referenced asset
@@ -352,9 +350,8 @@ export class LabelService extends ComponentService {
   generateImageFromRenderedComponentState(componentState: any) {
     return new Promise((resolve, reject) => {
       const canvas = this.getCanvas(componentState);
-      const img_b64 = canvas.toDataURL('image/png');
-      const imageObject = this.UtilService.getImageObjectFromBase64String(img_b64);
-      this.StudentAssetService.uploadAsset(imageObject).then((asset: any) => {
+      const pngFile = convertToPNGFile(canvas);
+      this.StudentAssetService.uploadAsset(pngFile).then((asset: any) => {
         resolve(asset);
       });
     });
@@ -491,7 +488,7 @@ export class LabelService extends ComponentService {
 
     let wrappedTextString = textString;
     if (labelWidth != null) {
-      wrappedTextString = this.UtilService.wordWrap(textString, labelWidth);
+      wrappedTextString = wordWrap(textString, labelWidth);
     }
 
     // create an editable text element

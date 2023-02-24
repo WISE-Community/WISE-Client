@@ -10,7 +10,10 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
+import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
+import { StudentDataService } from '../../../services/studentDataService';
+import { StudentPeerGroupService } from '../../../services/studentPeerGroupService';
 import { PeerGroup } from '../../peerChat/PeerGroup';
 import { PeerGroupMember } from '../../peerChat/PeerGroupMember';
 import { ShowGroupWorkStudentComponent } from './show-group-work-student.component';
@@ -26,14 +29,23 @@ class MockNotebookService {
 }
 
 class MockConfigService {
+  getPeriodId() {
+    return periodId;
+  }
   getRunId() {
     return 1;
+  }
+  isAuthoring() {
+    return false;
   }
   isPreview() {
     return false;
   }
+  isSignedInUserATeacher() {
+    return false;
+  }
   getWorkgroupId() {
-    return 1;
+    return workgroupId;
   }
   getAvatarColorForWorkgroupId(workgroupId: any) {
     return '#000000';
@@ -48,7 +60,14 @@ let componentState1;
 let componentState2;
 let componentState3;
 let fixture: ComponentFixture<ShowGroupWorkStudentComponent>;
+const periodId = 100;
+const peerGroup = new PeerGroup(
+  1,
+  [new PeerGroupMember(1, 1), new PeerGroupMember(2, 1), new PeerGroupMember(3, 1)],
+  new PeerGrouping()
+);
 let studentWork;
+const workgroupId: number = 1000;
 
 describe('ShowGroupWorkStudentComponent', () => {
   beforeEach(async () => {
@@ -60,7 +79,8 @@ describe('ShowGroupWorkStudentComponent', () => {
         { provide: ConfigService, useClass: MockConfigService },
         { provide: MatDialog, useClass: MockService },
         { provide: NodeService, useClass: MockService },
-        { provide: NotebookService, useClass: MockNotebookService }
+        { provide: NotebookService, useClass: MockNotebookService },
+        { provide: PeerGroupService, useClass: StudentPeerGroupService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -85,11 +105,7 @@ describe('ShowGroupWorkStudentComponent', () => {
     spyOn(TestBed.inject(ProjectService), 'injectAssetPaths').and.returnValue({
       type: 'OpenResponse'
     });
-    component.peerGroup = new PeerGroup(
-      1,
-      [new PeerGroupMember(1, 1), new PeerGroupMember(2, 1), new PeerGroupMember(3, 1)],
-      new PeerGrouping()
-    );
+    component.peerGroup = peerGroup;
     component.setWorkgroupInfos();
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     fixture.detectChanges();
@@ -98,6 +114,7 @@ describe('ShowGroupWorkStudentComponent', () => {
   setStudentWorkFromGroupMembers();
   setLayout();
   setWidths();
+  showGroupWorkInPreview();
 });
 
 function createComponentState(workgroupId: number): any {
@@ -157,6 +174,30 @@ function setWidths() {
       component.setWidths();
       expect(component.widthMd).toEqual(50);
       expect(component.widthLg).toEqual(33.33);
+    });
+  });
+}
+
+function showGroupWorkInPreview() {
+  describe('ngOnInit()', () => {
+    it('should show group work in preview', () => {
+      spyOn(TestBed.inject(ConfigService), 'isPreview').and.returnValue(true);
+      spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(workgroupId);
+      spyOn(TestBed.inject(ConfigService), 'getPeriodId').and.returnValue(periodId);
+      spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup').and.returnValue(of(peerGroup));
+      const latestComponentState = {
+        id: 100,
+        studentData: {
+          response: 'Hello'
+        },
+        workgroupId: workgroupId
+      };
+      spyOn(
+        TestBed.inject(StudentDataService),
+        'getLatestComponentStateByNodeIdAndComponentId'
+      ).and.returnValue(latestComponentState);
+      component.ngOnInit();
+      expect(component.workgroupIdToWork.get(workgroupId)).toEqual(latestComponentState);
     });
   });
 }

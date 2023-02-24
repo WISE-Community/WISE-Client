@@ -53,8 +53,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
       nodeService,
       notebookService,
       studentAssetService,
-      studentDataService,
-      utilService
+      studentDataService
     );
   }
 

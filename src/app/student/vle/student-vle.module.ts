@@ -32,6 +32,8 @@ import { RunEndedAndLockedMessageComponent } from '../../../assets/wise5/vle/run
 import { NodeClickLockedService } from '../../../assets/wise5/services/nodeClickLockedService';
 import { NodeNavigationComponent } from '../../../assets/wise5/directives/node-navigation/node-navigation.component';
 import { GroupTabsComponent } from '../../../assets/wise5/directives/group-tabs/group-tabs.component';
+import { StudentPeerGroupService } from '../../../assets/wise5/services/studentPeerGroupService';
+import { PeerGroupService } from '../../../assets/wise5/services/peerGroupService';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import { GroupTabsComponent } from '../../../assets/wise5/directives/group-tabs/
     PauseScreenService,
     { provide: DataService, useExisting: StudentDataService },
     { provide: NotificationService, useExisting: StudentNotificationService },
+    { provide: PeerGroupService, useExisting: StudentPeerGroupService },
     { provide: ProjectService, useExisting: VLEProjectService },
     StudentNotificationService,
     VLEProjectService

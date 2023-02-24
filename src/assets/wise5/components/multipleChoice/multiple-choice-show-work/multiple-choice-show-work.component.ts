@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { copy } from '../../../common/object/object';
 import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { MultipleChoiceService } from '../multipleChoiceService';
 
@@ -20,8 +20,7 @@ export class MultipleChoiceShowWorkComponent extends ComponentShowWorkDirective 
   constructor(
     private MultipleChoiceService: MultipleChoiceService,
     protected nodeService: NodeService,
-    protected ProjectService: ProjectService,
-    private UtilService: UtilService
+    protected ProjectService: ProjectService
   ) {
     super(nodeService, ProjectService);
   }
@@ -34,7 +33,7 @@ export class MultipleChoiceShowWorkComponent extends ComponentShowWorkDirective 
       this.studentChoiceId = studentChoiceIds[0];
     }
     this.choices = this.processChoices(
-      this.UtilService.makeCopyOfJSONObject(this.componentContent.choices),
+      copy(this.componentContent.choices),
       this.componentState.studentData.studentChoices
     );
     this.showFeedback = this.componentContent.showFeedback;

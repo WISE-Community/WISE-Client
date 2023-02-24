@@ -11,7 +11,7 @@ import { OpenResponseContent } from '../../components/openResponse/OpenResponseC
 import { PeerGroup } from '../../components/peerChat/PeerGroup';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
-import { PeerGroupService } from '../../services/peerGroupService';
+import { StudentPeerGroupService } from '../../services/studentPeerGroupService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 import { DynamicPrompt } from './DynamicPrompt';
@@ -31,7 +31,7 @@ export class DynamicPromptComponent implements OnInit {
   constructor(
     private annotationService: AnnotationService,
     private configService: ConfigService,
-    private peerGroupService: PeerGroupService,
+    private peerGroupService: StudentPeerGroupService,
     private projectService: ProjectService,
     private studentDataService: StudentDataService
   ) {}

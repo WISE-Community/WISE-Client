@@ -4,6 +4,7 @@ import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { ComponentState } from '../../../app/domain/componentState';
 import { Component } from '../common/Component';
+import { copy } from '../common/object/object';
 import { GenerateImageDialogComponent } from '../directives/generate-image-dialog/generate-image-dialog.component';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
@@ -11,7 +12,6 @@ import { NodeService } from '../services/nodeService';
 import { NotebookService } from '../services/notebookService';
 import { StudentAssetService } from '../services/studentAssetService';
 import { StudentDataService } from '../services/studentDataService';
-import { UtilService } from '../services/utilService';
 import { StudentAssetsDialogComponent } from '../vle/studentAsset/student-assets-dialog/student-assets-dialog.component';
 import { StudentAssetRequest } from '../vle/studentAsset/StudentAssetRequest';
 import { ComponentService } from './componentService';
@@ -62,8 +62,7 @@ export abstract class ComponentStudent {
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
+    protected StudentDataService: StudentDataService
   ) {}
 
   ngOnInit(): void {
@@ -351,7 +350,7 @@ export abstract class ComponentStudent {
           connectedComponent.componentId
         );
         if (componentState != null) {
-          componentStates.push(this.UtilService.makeCopyOfJSONObject(componentState));
+          componentStates.push(copy(componentState));
         }
         if (connectedComponent.type === 'showWork') {
           this.isDisabled = true;
@@ -651,9 +650,9 @@ export abstract class ComponentStudent {
   }
 
   importWorkAsBackground(componentState: any): void {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
+    const connectedComponent = this.component.getConnectedComponent(
+      componentState.nodeId,
+      componentState.componentId
     );
     if (connectedComponent.importWorkAsBackground) {
       this.setComponentStateAsBackgroundImage(componentState);
@@ -726,14 +725,6 @@ export abstract class ComponentStudent {
       this.ConfigService.getWorkgroupId(),
       data
     );
-  }
-
-  updateLatestScoreAnnotation(annotation: any): void {
-    this.latestAnnotations.score = annotation;
-  }
-
-  updateLatestCommentAnnotation(annotation: any): void {
-    this.latestAnnotations.comment = annotation;
   }
 
   registerNotebookItemChosenListener(): void {

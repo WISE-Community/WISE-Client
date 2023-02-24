@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UtilService } from '../../../../assets/wise5/services/utilService';
 import * as Highcharts from 'highcharts';
+import { rgbToHex } from '../../../../assets/wise5/common/color/color';
 
 @Component({
   selector: 'milestone-report-graph',
+  styleUrls: ['./milestone-report-graph.component.scss'],
   template:
     '<highcharts-chart [Highcharts]="Highcharts" [options]="chartConfig"></highcharts-chart>'
 })
@@ -36,8 +38,7 @@ export class MilestoneReportGraphComponent implements OnInit {
     this.chartConfig = {
       chart: {
         type: 'column',
-        height: 200,
-        width: 200,
+        height: 248,
         style: {
           fontFamily: 'Roboto,Helvetica Neue,sans-serif'
         }
@@ -67,7 +68,7 @@ export class MilestoneReportGraphComponent implements OnInit {
       },
       tooltip: {
         formatter: function () {
-          return `<b>${this.series.name}<br/>${$localize`teams`}: ${this.point.count}</b>`;
+          return `<b>${this.series.name}<br/>${$localize`Teams`}: ${this.point.count}</b>`;
         }
       },
       xAxis: {
@@ -100,7 +101,7 @@ export class MilestoneReportGraphComponent implements OnInit {
       opacity += step;
       const singleSeries = {
         name: this.utilService.trimToLength(componentData.stepTitle, 26),
-        color: this.utilService.rgbToHex(color, opacity),
+        color: rgbToHex(color, opacity),
         data: this.getComponentSeriesData(componentData)
       };
       series.push(singleSeries);
