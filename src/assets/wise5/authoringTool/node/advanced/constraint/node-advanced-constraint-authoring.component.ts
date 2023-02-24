@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MultipleChoiceContent } from '../../../../components/multipleChoice/MultipleChoiceContent';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { UtilService } from '../../../../services/utilService';
+import { temporarilyHighlightElement } from '../../../../common/dom/dom';
 
 @Component({
   selector: 'node-advanced-constraint-authoring',
@@ -19,8 +19,7 @@ export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
 
   constructor(
     private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
+    private TeacherDataService: TeacherDataService
   ) {
     this.constraintActions = [
       {
@@ -268,7 +267,7 @@ export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
     const newNodeConstraintId = this.addConstraint();
     setTimeout(() => {
       this.ProjectService.scrollToBottomOfPage();
-      this.UtilService.temporarilyHighlightElement(newNodeConstraintId);
+      temporarilyHighlightElement(newNodeConstraintId);
     });
   }
 

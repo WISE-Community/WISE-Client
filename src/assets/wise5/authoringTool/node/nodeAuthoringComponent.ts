@@ -6,7 +6,6 @@ import { CopyComponentService } from '../../services/copyComponentService';
 import { InsertComponentService } from '../../services/insertComponentService';
 import { NodeService } from '../../services/nodeService';
 import { TeacherDataService } from '../../services/teacherDataService';
-import { UtilService } from '../../services/utilService';
 import * as $ from 'jquery';
 import { NotificationService } from '../../services/notificationService';
 import { Subscription } from 'rxjs';
@@ -17,6 +16,7 @@ import { ComponentTypeService } from '../../services/componentTypeService';
 import { ComponentContent } from '../../common/ComponentContent';
 import { Component } from '../../common/Component';
 import { copy } from '../../common/object/object';
+import { temporarilyHighlightElement } from '../../common/dom/dom';
 
 @Directive()
 class NodeAuthoringController {
@@ -67,8 +67,7 @@ class NodeAuthoringController {
     'NodeService',
     'NotificationService',
     'ProjectService',
-    'TeacherDataService',
-    'UtilService'
+    'TeacherDataService'
   ];
 
   constructor(
@@ -86,8 +85,7 @@ class NodeAuthoringController {
     private NodeService: NodeService,
     private NotificationService: NotificationService,
     private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
+    private TeacherDataService: TeacherDataService
   ) {
     this.$translate = $filter('translate');
   }
@@ -501,7 +499,7 @@ class NodeAuthoringController {
       if (newComponents != null) {
         for (const newComponent of newComponents) {
           if (newComponent != null) {
-            this.UtilService.temporarilyHighlightElement(newComponent.id);
+            temporarilyHighlightElement(newComponent.id);
           }
         }
       }
