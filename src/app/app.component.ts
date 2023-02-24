@@ -150,15 +150,9 @@ export class AppComponent {
       const script = this.document.createElement('script');
       script.innerHTML = `window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());`;
+          gtag('js', new Date());
+          gtag('config', '${this.googleAnalyticsId}');`;
       this.document.head.appendChild(script);
-      gtag('config', this.googleAnalyticsId, { page_path: this.router.url });
-
-      this.router.events.subscribe((ev: any) => {
-        if (ev instanceof NavigationEnd) {
-          gtag('config', this.googleAnalyticsId, { page_path: ev.urlAfterRedirects });
-        }
-      });
     }
   }
 

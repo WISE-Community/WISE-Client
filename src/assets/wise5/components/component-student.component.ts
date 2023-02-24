@@ -727,14 +727,6 @@ export abstract class ComponentStudent {
     );
   }
 
-  updateLatestScoreAnnotation(annotation: any): void {
-    this.latestAnnotations.score = annotation;
-  }
-
-  updateLatestCommentAnnotation(annotation: any): void {
-    this.latestAnnotations.comment = annotation;
-  }
-
   registerNotebookItemChosenListener(): void {
     this.subscriptions.add(
       this.NotebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
