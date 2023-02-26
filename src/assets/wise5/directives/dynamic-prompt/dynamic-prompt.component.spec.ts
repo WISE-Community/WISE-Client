@@ -6,7 +6,7 @@ import { PeerGroupStudentData } from '../../../../app/domain/peerGroupStudentDat
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { ComponentContent } from '../../common/ComponentContent';
 import { AnnotationService } from '../../services/annotationService';
-import { StudentPeerGroupService } from '../../services/studentPeerGroupService';
+import { PeerGroupService } from '../../services/peerGroupService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 import { DynamicPromptComponent } from './dynamic-prompt.component';
@@ -26,8 +26,7 @@ describe('DynamicPromptComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DynamicPromptComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      providers: []
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
     }).compileComponents();
   });
 
@@ -79,11 +78,11 @@ function peerGroupingTagEnabled(): void {
   describe('peerGroupingTagEnabled', () => {
     beforeEach(() => {
       component.dynamicPrompt.peerGroupingTag = 'apple';
-      spyOn(TestBed.inject(StudentPeerGroupService), 'retrievePeerGroup').and.returnValue(
+      spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup').and.returnValue(
         of(createPeerGroup())
       );
       retrieveStudentDataSpy = spyOn(
-        TestBed.inject(StudentPeerGroupService),
+        TestBed.inject(PeerGroupService),
         'retrieveDynamicPromptStudentData'
       );
     });
