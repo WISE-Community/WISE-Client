@@ -169,20 +169,6 @@ export class UtilService {
   }
 
   /**
-   * Check if there is a 'nodeEntered' event in the array of events.
-   * @param events An array of events.
-   * @return Whether there is a 'nodeEntered' event in the array of events.
-   */
-  hasNodeEnteredEvent(events) {
-    for (let event of events) {
-      if (event.event == 'nodeEntered') {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
    * Determine whether the component has been authored to import work.
    * @param componentContent The component content.
    * @return Whether to import work in this component.

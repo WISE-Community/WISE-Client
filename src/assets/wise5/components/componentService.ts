@@ -153,4 +153,10 @@ export class ComponentService {
   isSubmitRequired(node: any, component: any) {
     return node.showSubmitButton || (component.showSubmitButton && !node.showSaveButton);
   }
+
+  hasNodeEnteredEvent(nodeEvents: any[]): boolean {
+    return nodeEvents.some((nodeEvent: any) => {
+      return nodeEvent.event === 'nodeEntered';
+    });
+  }
 }
