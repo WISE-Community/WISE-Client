@@ -9,13 +9,6 @@ import '../lib/jquery/jquery-global';
 export class UtilService {
   constructor(@Inject(LOCALE_ID) private localeID: string) {}
 
-  convertStringToNumber(str) {
-    if (str != null && str != '' && !isNaN(Number(str))) {
-      return Number(str);
-    }
-    return str;
-  }
-
   isImage(fileName: string): boolean {
     const imageExtensionsRegEx = new RegExp('.*.(png|jpg|jpeg|bmp|gif|tiff|svg|webp)');
     return fileName.toLowerCase().match(imageExtensionsRegEx) != null;
