@@ -7,7 +7,7 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
-import { StudentPeerGroupService } from '../../../services/studentPeerGroupService';
+import { PeerGroupService } from '../../../services/peerGroupService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { StudentWebSocketService } from '../../../services/studentWebSocketService';
@@ -50,8 +50,8 @@ export class PeerChatStudentComponent extends ComponentStudent {
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
     private notificationService: NotificationService,
-    private peerGroupService: StudentPeerGroupService,
     private peerChatService: PeerChatService,
+    private peerGroupService: PeerGroupService,
     protected studentAssetService: StudentAssetService,
     protected studentDataService: StudentDataService,
     private studentWebSocketService: StudentWebSocketService

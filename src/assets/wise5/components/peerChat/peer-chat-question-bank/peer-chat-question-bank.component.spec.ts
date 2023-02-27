@@ -6,7 +6,7 @@ import { ProjectService } from '../../../services/projectService';
 import { QuestionBank } from './QuestionBank';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { QuestionBankRule } from './QuestionBankRule';
-import { StudentPeerGroupService } from '../../../services/studentPeerGroupService';
+import { PeerGroupService } from '../../../services/peerGroupService';
 import { PeerGroup } from '../PeerGroup';
 import { of } from 'rxjs';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 let component: PeerChatQuestionBankComponent;
 let fixture: ComponentFixture<PeerChatQuestionBankComponent>;
-let peerGroupService: StudentPeerGroupService;
+let peerGroupService: PeerGroupService;
 let projectService: ProjectService;
 const defaultQuestionBankRule = {
   id: 'default',
@@ -35,7 +35,7 @@ describe('PeerChatQuestionBankComponent', () => {
       declarations: [PeerChatQuestionBankComponent]
     }).compileComponents();
     fixture = TestBed.createComponent(PeerChatQuestionBankComponent);
-    peerGroupService = TestBed.inject(StudentPeerGroupService);
+    peerGroupService = TestBed.inject(PeerGroupService);
     projectService = TestBed.inject(ProjectService);
     component = fixture.componentInstance;
     component.content = {

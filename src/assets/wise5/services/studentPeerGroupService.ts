@@ -142,4 +142,15 @@ export class StudentPeerGroupService extends PeerGroupService {
       showWorkComponentId
     );
   }
+
+  retrievePeerGroupAnnotations(
+    peerGroup: PeerGroup,
+    nodeId: string,
+    componentId: string
+  ): Observable<any> {
+    if (this.configService.isPreview()) {
+      return of([]);
+    }
+    return this.http.get(`/api/peer-group/${peerGroup.id}/${nodeId}/${componentId}/annotations`);
+  }
 }
