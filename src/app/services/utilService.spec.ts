@@ -10,7 +10,6 @@ describe('UtilService', () => {
     service = TestBed.inject(UtilService);
   });
   convertStringToNumberTests();
-  arrayHasNonNullElementTests();
   calculateMeanTests();
   trimToLength();
   removeHTMLTags();
@@ -31,25 +30,6 @@ function convertStringToNumberTests() {
     it('should return non-null number string as is', () => {
       expect(service.convertStringToNumber('abc')).toEqual('abc');
       expect(service.convertStringToNumber('')).toEqual('');
-    });
-  });
-}
-
-function arrayHasNonNullElementTests() {
-  describe('arrayHasNonNullElement()', () => {
-    it('should return true if it has at least one non null element', () => {
-      const arrayToCheck = [null, {}, null];
-      expect(service.arrayHasNonNullElement(arrayToCheck)).toEqual(true);
-    });
-
-    it('should return false if it has all null elements', () => {
-      const arrayToCheck = [null, null, null];
-      expect(service.arrayHasNonNullElement(arrayToCheck)).toEqual(false);
-    });
-
-    it('should return true if it has all non null elements', () => {
-      const arrayToCheck = [{}, {}, {}];
-      expect(service.arrayHasNonNullElement(arrayToCheck)).toEqual(true);
     });
   });
 }

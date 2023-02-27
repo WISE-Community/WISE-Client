@@ -156,21 +156,6 @@ export class UtilService {
   }
 
   /**
-   * Check if an array has any non null elements.
-   * @param arrayToCheck An array which may have null and non null elements.
-   * @return True if the array has at least one non null element.
-   * False if the array has all null elements.
-   */
-  arrayHasNonNullElement(arrayToCheck) {
-    for (let element of arrayToCheck) {
-      if (element != null) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
    * Get the number of words in the string.
    * @param str The string.
    * @return The number of words in the string.
