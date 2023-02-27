@@ -2,7 +2,6 @@
 
 import { formatDate } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
-import { convertToPNGFile } from '../common/canvas/canvas';
 import { copy } from '../common/object/object';
 import '../lib/jquery/jquery-global';
 
@@ -15,20 +14,6 @@ export class UtilService {
       return Number(str);
     }
     return str;
-  }
-
-  /**
-   * Get an image object from an image element
-   * @param imageElement an image element (<img src='abc.jpg'/>)
-   * @returns an image object
-   */
-  getImageObjectFromImageElement(imageElement: any): any {
-    const canvas = document.createElement('canvas');
-    canvas.width = imageElement.naturalWidth;
-    canvas.height = imageElement.naturalHeight;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(imageElement, 0, 0);
-    return convertToPNGFile(canvas);
   }
 
   isImage(fileName: string): boolean {
