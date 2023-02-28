@@ -4,9 +4,9 @@ import { ConfigService } from '../../services/configService';
 import { CopyProjectService } from '../../services/copyProjectService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
-import { UtilService } from '../../services/utilService';
 import * as angular from 'angular';
 import * as $ from 'jquery';
+import { temporarilyHighlightElement } from '../../common/dom/dom';
 
 class MainAuthoringController {
   $translate;
@@ -31,8 +31,7 @@ class MainAuthoringController {
     'ConfigService',
     'CopyProjectService',
     'ProjectService',
-    'TeacherDataService',
-    'UtilService'
+    'TeacherDataService'
   ];
 
   constructor(
@@ -45,8 +44,7 @@ class MainAuthoringController {
     private ConfigService: ConfigService,
     private CopyProjectService: CopyProjectService,
     private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
+    private TeacherDataService: TeacherDataService
   ) {
     this.$translate = $filter('translate');
   }
@@ -104,8 +102,7 @@ class MainAuthoringController {
       this.scrollToTopOfPage();
       this.$timeout(() => {
         // wait for new element to appear on the page
-        const highlightDuration = 3000;
-        this.UtilService.temporarilyHighlightElement(projectId, highlightDuration);
+        temporarilyHighlightElement(projectId, 3000);
       });
     });
   }

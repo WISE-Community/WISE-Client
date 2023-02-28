@@ -50,6 +50,7 @@ import { ClickToSnipImageService } from '../assets/wise5/services/clickToSnipIma
 import { StudentPeerGroupService } from '../assets/wise5/services/studentPeerGroupService';
 import { ConstraintService } from '../assets/wise5/services/constraintService';
 import { NodeStatusService } from '../assets/wise5/services/nodeStatusService';
+import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 
 @NgModule({
   providers: [
@@ -86,6 +87,7 @@ import { NodeStatusService } from '../assets/wise5/services/nodeStatusService';
     OpenResponseService,
     PathService,
     PeerChatService,
+    PeerGroupService,
     ProjectLibraryService,
     { provide: ProjectService, useExisting: VLEProjectService },
     SessionService,

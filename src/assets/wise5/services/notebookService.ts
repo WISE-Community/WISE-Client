@@ -91,7 +91,7 @@ export class NotebookService {
 
   addNote(
     nodeId: string,
-    file: any = null,
+    file: File = null,
     text: string = null,
     studentWorkIds: number[] = null,
     isEditTextEnabled: boolean = true,

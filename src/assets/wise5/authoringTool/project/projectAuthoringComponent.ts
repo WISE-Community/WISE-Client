@@ -6,12 +6,12 @@ import { DeleteNodeService } from '../../services/deleteNodeService';
 import { MoveNodesService } from '../../services/moveNodesService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
-import { UtilService } from '../../services/utilService';
 import * as angular from 'angular';
 import * as $ from 'jquery';
 import { Subscription } from 'rxjs';
 import { Message } from '@stomp/stompjs';
 import { RxStomp } from '@stomp/rx-stomp';
+import { temporarilyHighlightElement } from '../../common/dom/dom';
 
 class ProjectAuthoringController {
   $translate: any;
@@ -70,8 +70,7 @@ class ProjectAuthoringController {
     'DeleteNodeService',
     'MoveNodesService',
     'ProjectService',
-    'TeacherDataService',
-    'UtilService'
+    'TeacherDataService'
   ];
 
   constructor(
@@ -86,8 +85,7 @@ class ProjectAuthoringController {
     private DeleteNodeService: DeleteNodeService,
     private MoveNodesService: MoveNodesService,
     private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
+    private TeacherDataService: TeacherDataService
   ) {
     this.$translate = $filter('translate');
   }
@@ -695,7 +693,7 @@ class ProjectAuthoringController {
       if (newNodes != null && newNodes.length > 0) {
         for (let newNode of newNodes) {
           if (newNode != null) {
-            this.UtilService.temporarilyHighlightElement(newNode.id);
+            temporarilyHighlightElement(newNode.id);
           }
         }
         if (doScrollToNewNodes) {

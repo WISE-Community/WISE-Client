@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PeerGroupStudentData } from '../../../app/domain/peerGroupStudentData';
 import { Node } from '../common/Node';
 import { PeerGroup } from '../components/peerChat/PeerGroup';
 import { PeerGroupMember } from '../components/peerChat/PeerGroupMember';
@@ -76,7 +77,7 @@ export class PeerGroupService {
     nodeId: string,
     componentId: string
   ): Observable<any> {
-    return this.http.get(`/api/peer-group/${peerGroup.id}/${nodeId}/${componentId}/annotations`);
+    return of([]);
   }
 
   retrievePeerGroupInfo(peerGroupingTag: string): Observable<any> {
@@ -96,5 +97,21 @@ export class PeerGroupService {
 
   removeWorkgroupFromGroup(workgroupId: number, groupId: number): Observable<any> {
     return this.http.delete(`/api/peer-group/membership/${groupId}/${workgroupId}`);
+  }
+
+  retrieveQuestionBankStudentData(
+    peerGroupId: number,
+    nodeId: string,
+    componentId: string
+  ): Observable<PeerGroupStudentData[]> {
+    return of([]);
+  }
+
+  retrieveDynamicPromptStudentData(
+    peerGroupId: number,
+    nodeId: string,
+    componentId: string
+  ): Observable<PeerGroupStudentData[]> {
+    return of([]);
   }
 }
