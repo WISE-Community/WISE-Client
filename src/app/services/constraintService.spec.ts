@@ -27,6 +27,7 @@ let scoreCriteria: any;
 let usedXSubmitsCriteria: any;
 let numberOfWordsWrittenCriteria: any;
 let addXNumberOfNotesOnThisStepCriteria: any;
+let addXNumberOfNotesOnThisStepNotebook: any;
 
 describe('ConstraintService', () => {
   beforeEach(() => {
@@ -114,6 +115,20 @@ describe('ConstraintService', () => {
         nodeId: 'node1',
         requiredNumberOfNotes: 10
       }
+    };
+    addXNumberOfNotesOnThisStepNotebook = {
+      allItems: [
+        { nodeId: 'node1' },
+        { nodeId: 'node1' },
+        { nodeId: 'node1' },
+        { nodeId: 'node1' },
+        { nodeId: 'node1' },
+        { nodeId: 'node2' },
+        { nodeId: 'node2' },
+        { nodeId: 'node2' },
+        { nodeId: 'node2' },
+        { nodeId: 'node2' }
+      ]
     };
   });
 
@@ -384,31 +399,21 @@ function evaluateNumberOfWordsWrittenCriteria() {
 }
 
 function evaluateAddXNumberOfNotesOnThisStepCriteria() {
-  const notebook = {
-    allItems: [
-      { nodeId: 'node1' },
-      { nodeId: 'node1' },
-      { nodeId: 'node1' },
-      { nodeId: 'node1' },
-      { nodeId: 'node1' },
-      { nodeId: 'node2' },
-      { nodeId: 'node2' },
-      { nodeId: 'node2' },
-      { nodeId: 'node2' },
-      { nodeId: 'node2' }
-    ]
-  };
-  xit('should evaluate add x number of notes on this step criteria false', () => {
-    spyOn(notebookService, 'getNotebookByWorkgroup').and.returnValue(notebook);
+  it('should evaluate add x number of notes on this step criteria false', () => {
+    spyOn(notebookService, 'getNotebookByWorkgroup').and.returnValue(
+      addXNumberOfNotesOnThisStepNotebook
+    );
     expect(
       service.evaluateAddXNumberOfNotesOnThisStepCriteria(addXNumberOfNotesOnThisStepCriteria)
     ).toEqual(false);
   });
-  xit('should evaluate add x number of notes on this step criteria true', () => {
-    notebook.allItems.forEach((item) => {
+  it('should evaluate add x number of notes on this step criteria true', () => {
+    addXNumberOfNotesOnThisStepNotebook.allItems.forEach((item) => {
       item.nodeId = 'node1';
     });
-    spyOn(notebookService, 'getNotebookByWorkgroup').and.returnValue(notebook);
+    spyOn(notebookService, 'getNotebookByWorkgroup').and.returnValue(
+      addXNumberOfNotesOnThisStepNotebook
+    );
     expect(
       service.evaluateAddXNumberOfNotesOnThisStepCriteria(addXNumberOfNotesOnThisStepCriteria)
     ).toEqual(true);
