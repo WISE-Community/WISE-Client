@@ -9,7 +9,6 @@ import { ConfigService } from '../../services/configService';
 import { NodeService } from '../../services/nodeService';
 import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
-import { UtilService } from '../../services/utilService';
 import { VLEProjectService } from '../vleProjectService';
 
 @Component({
@@ -60,8 +59,7 @@ export class NodeComponent implements OnInit {
     private nodeService: NodeService,
     private projectService: VLEProjectService,
     private sessionService: SessionService,
-    private studentDataService: StudentDataService,
-    private utilService: UtilService
+    private studentDataService: StudentDataService
   ) {}
 
   ngOnInit(): void {
@@ -261,50 +259,48 @@ export class NodeComponent implements OnInit {
 
   private createComponentStatesResponseHandler(isAutoSave, componentId = null, isSubmit = null) {
     return (componentStatesFromComponents) => {
-      if (this.utilService.arrayHasNonNullElement(componentStatesFromComponents)) {
-        const {
-          componentStates,
-          componentEvents,
-          componentAnnotations
-        } = this.getDataArraysToSaveFromComponentStates(componentStatesFromComponents);
-        componentStates.forEach((componentState: any) => {
-          this.injectAdditionalComponentStateFields(componentState, isAutoSave, isSubmit);
-          this.notifyConnectedParts(componentId, componentState);
-        });
-        return this.studentDataService
-          .saveToServer(componentStates, componentEvents, componentAnnotations)
-          .then((savedStudentDataResponse) => {
-            if (savedStudentDataResponse) {
-              if (this.nodeService.currentNodeHasTransitionLogic()) {
-                if (this.nodeService.evaluateTransitionLogicOn('studentDataChanged')) {
-                  this.nodeService.evaluateTransitionLogic();
-                }
-                if (this.nodeService.evaluateTransitionLogicOn('scoreChanged')) {
-                  if (componentAnnotations != null && componentAnnotations.length > 0) {
-                    let evaluateTransitionLogic = false;
-                    for (const componentAnnotation of componentAnnotations) {
-                      if (componentAnnotation != null) {
-                        if (componentAnnotation.type === 'autoScore') {
-                          evaluateTransitionLogic = true;
-                        }
+      const {
+        componentStates,
+        componentEvents,
+        componentAnnotations
+      } = this.getDataArraysToSaveFromComponentStates(componentStatesFromComponents);
+      componentStates.forEach((componentState: any) => {
+        this.injectAdditionalComponentStateFields(componentState, isAutoSave, isSubmit);
+        this.notifyConnectedParts(componentId, componentState);
+      });
+      return this.studentDataService
+        .saveToServer(componentStates, componentEvents, componentAnnotations)
+        .then((savedStudentDataResponse) => {
+          if (savedStudentDataResponse) {
+            if (this.nodeService.currentNodeHasTransitionLogic()) {
+              if (this.nodeService.evaluateTransitionLogicOn('studentDataChanged')) {
+                this.nodeService.evaluateTransitionLogic();
+              }
+              if (this.nodeService.evaluateTransitionLogicOn('scoreChanged')) {
+                if (componentAnnotations != null && componentAnnotations.length > 0) {
+                  let evaluateTransitionLogic = false;
+                  for (const componentAnnotation of componentAnnotations) {
+                    if (componentAnnotation != null) {
+                      if (componentAnnotation.type === 'autoScore') {
+                        evaluateTransitionLogic = true;
                       }
                     }
-                    if (evaluateTransitionLogic) {
-                      this.nodeService.evaluateTransitionLogic();
-                    }
+                  }
+                  if (evaluateTransitionLogic) {
+                    this.nodeService.evaluateTransitionLogic();
                   }
                 }
               }
-              const studentWorkList = savedStudentDataResponse.studentWorkList;
-              if (!componentId && studentWorkList && studentWorkList.length) {
-                this.latestComponentState = studentWorkList[studentWorkList.length - 1];
-              } else {
-                this.clearLatestComponentState();
-              }
             }
-            return savedStudentDataResponse;
-          });
-      }
+            const studentWorkList = savedStudentDataResponse.studentWorkList;
+            if (!componentId && studentWorkList && studentWorkList.length) {
+              this.latestComponentState = studentWorkList[studentWorkList.length - 1];
+            } else {
+              this.clearLatestComponentState();
+            }
+          }
+          return savedStudentDataResponse;
+        });
     };
   }
 

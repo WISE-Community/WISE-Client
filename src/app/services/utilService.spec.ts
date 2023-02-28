@@ -9,31 +9,11 @@ describe('UtilService', () => {
     });
     service = TestBed.inject(UtilService);
   });
-  arrayHasNonNullElementTests();
   calculateMeanTests();
   trimToLength();
   removeHTMLTags();
   replaceImgTagWithFileName();
 });
-
-function arrayHasNonNullElementTests() {
-  describe('arrayHasNonNullElement()', () => {
-    it('should return true if it has at least one non null element', () => {
-      const arrayToCheck = [null, {}, null];
-      expect(service.arrayHasNonNullElement(arrayToCheck)).toEqual(true);
-    });
-
-    it('should return false if it has all null elements', () => {
-      const arrayToCheck = [null, null, null];
-      expect(service.arrayHasNonNullElement(arrayToCheck)).toEqual(false);
-    });
-
-    it('should return true if it has all non null elements', () => {
-      const arrayToCheck = [{}, {}, {}];
-      expect(service.arrayHasNonNullElement(arrayToCheck)).toEqual(true);
-    });
-  });
-}
 
 function calculateMeanTests() {
   describe('calculateMean()', () => {
