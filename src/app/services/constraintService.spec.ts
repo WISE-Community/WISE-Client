@@ -18,6 +18,7 @@ let utilService: UtilService;
 let criteria1: any;
 let criteria2: any;
 let nodeConstraintTwoRemovalCriteria: any;
+let isVisitedCriteria: any;
 let isVisitedAfterCriteria: any;
 let isRevisedAfterCriteria: any;
 let isVisitedAndRevisedAfterCriteria: any;
@@ -26,7 +27,7 @@ let usedXSubmitsCriteria: any;
 let numberOfWordsWrittenCriteria: any;
 let addXNumberOfNotesOnThisStepCriteria: any;
 
-fdescribe('ConstraintService', () => {
+describe('ConstraintService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
@@ -55,6 +56,11 @@ fdescribe('ConstraintService', () => {
       targetId: 'node3',
       removalCriteria: [criteria1, criteria2],
       removalConditional: 'all'
+    };
+    isVisitedCriteria = {
+      params: {
+        nodeId: 'node4'
+      }
     };
     isVisitedAfterCriteria = {
       params: {
@@ -111,7 +117,6 @@ fdescribe('ConstraintService', () => {
   evaluateIsCorrectCriteria();
   evaluateBranchPathTakenWhenNoPathsTaken();
   evaluateBranchPathTaken();
-  evaluateIsVisitedCriteriaFalseWithNoEvents();
   evaluateIsVisitedCriteria();
   evaluateIsVisitedAfterCriteria();
   evaluateIsRevisedAfterCriteria();
@@ -151,9 +156,8 @@ function evaluateNodeConstraintWithTwoRemovalCriteria() {
   });
   it('should evaluate node constraint with two removal criteria requiring any', () => {
     isCompletedSpy();
-    const constraint = { ...nodeConstraintTwoRemovalCriteria };
-    constraint.removalConditional = 'any';
-    expect(service.evaluateNodeConstraint(constraint)).toEqual(true);
+    nodeConstraintTwoRemovalCriteria.removalConditional = 'any';
+    expect(service.evaluateNodeConstraint(nodeConstraintTwoRemovalCriteria)).toEqual(true);
   });
 }
 
@@ -223,42 +227,26 @@ function evaluateBranchPathTaken() {
   });
 }
 
-function evaluateIsVisitedCriteriaFalseWithNoEvents() {
-  it('should evaluate is visited criteria with no events', () => {
-    const events = [];
-    spyOn(dataService, 'getEvents').and.returnValue(events);
-    const criteria = {
-      params: {
-        nodeId: 'node1'
-      }
-    };
-    expect(service.evaluateIsVisitedCriteria(criteria)).toEqual(false);
-  });
-}
-
 function evaluateIsVisitedCriteria() {
-  const events = [
+  let events = [
     { nodeId: 'node1', event: 'nodeEntered' },
     { nodeId: 'node2', event: 'nodeEntered' },
     { nodeId: 'node3', event: 'nodeEntered' }
   ];
   it('should evaluate is visited criteria false', () => {
     spyOn(dataService, 'getEvents').and.returnValue(events);
-    const criteria = {
-      params: {
-        nodeId: 'node4'
-      }
-    };
-    expect(service.evaluateIsVisitedCriteria(criteria)).toEqual(false);
+    expect(service.evaluateIsVisitedCriteria(isVisitedCriteria)).toEqual(false);
   });
   it('should evaluate is visited criteria true', () => {
     spyOn(dataService, 'getEvents').and.returnValue(events);
-    const criteria = {
-      params: {
-        nodeId: 'node2'
-      }
-    };
-    expect(service.evaluateIsVisitedCriteria(criteria)).toEqual(true);
+    isVisitedCriteria.params.nodeId = 'node2';
+    expect(service.evaluateIsVisitedCriteria(isVisitedCriteria)).toEqual(true);
+  });
+  it('should evaluate is visited criteria with no events', () => {
+    events = [];
+    spyOn(dataService, 'getEvents').and.returnValue(events);
+    isVisitedCriteria.params.nodeId = 'node1';
+    expect(service.evaluateIsVisitedCriteria(isVisitedCriteria)).toEqual(false);
   });
 }
 
