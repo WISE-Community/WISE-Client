@@ -6498,7 +6498,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">192</context>
+          <context context-type="linenumber">205</context>
         </context-group>
         <target state="translated">Feedback del Docente</target>
       </trans-unit>
@@ -11138,7 +11138,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <target state="translated">¿Seguir conectado/a?</target>
       </trans-unit>
@@ -11150,7 +11150,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">145</context>
         </context-group>
         <target state="translated">Se acabó el tiempo de la sesión</target>
       </trans-unit>
@@ -15538,7 +15538,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">202</context>
         </context-group>
         <target state="translated">Retroalimentación</target>
       </trans-unit>
@@ -20899,7 +20899,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">266</context>
+          <context context-type="linenumber">229</context>
         </context-group>
         <target state="translated">Guardado <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -20907,7 +20907,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">271</context>
+          <context context-type="linenumber">234</context>
         </context-group>
         <target state="translated">Auto Guardado <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -20915,7 +20915,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Submitted <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">276</context>
+          <context context-type="linenumber">239</context>
         </context-group>
         <target state="translated">Enviado <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
