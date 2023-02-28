@@ -18,6 +18,7 @@ let utilService: UtilService;
 let criteria1: any;
 let criteria2: any;
 let nodeConstraintTwoRemovalCriteria: any;
+let isVisitedEvents: any;
 let isVisitedCriteria: any;
 let isVisitedAfterCriteria: any;
 let isRevisedAfterCriteria: any;
@@ -57,6 +58,11 @@ describe('ConstraintService', () => {
       removalCriteria: [criteria1, criteria2],
       removalConditional: 'all'
     };
+    isVisitedEvents = [
+      { nodeId: 'node1', event: 'nodeEntered' },
+      { nodeId: 'node2', event: 'nodeEntered' },
+      { nodeId: 'node3', event: 'nodeEntered' }
+    ];
     isVisitedCriteria = {
       params: {
         nodeId: 'node4'
@@ -115,7 +121,6 @@ describe('ConstraintService', () => {
   evaluateNodeConstraintWithTwoRemovalCriteria();
   evaluateIsCorrectCriteriaFalseWhenNoComponentStates();
   evaluateIsCorrectCriteria();
-  evaluateBranchPathTakenWhenNoPathsTaken();
   evaluateBranchPathTaken();
   evaluateIsVisitedCriteria();
   evaluateIsVisitedAfterCriteria();
@@ -194,20 +199,6 @@ function evaluateIsCorrectCriteria() {
   });
 }
 
-function evaluateBranchPathTakenWhenNoPathsTaken() {
-  it('should evaluate branch path taken', () => {
-    const branchPathTakenEvents = [];
-    spyOn(dataService, 'getBranchPathTakenEventsByNodeId').and.returnValue(branchPathTakenEvents);
-    const criteria = {
-      params: {
-        fromNodeId: 'node1',
-        toNodeId: 'node2'
-      }
-    };
-    expect(service.evaluateBranchPathTakenCriteria(criteria)).toEqual(false);
-  });
-}
-
 function evaluateBranchPathTaken() {
   const criteria = {
     params: {
@@ -225,25 +216,25 @@ function evaluateBranchPathTaken() {
     spyOn(dataService, 'getBranchPathTakenEventsByNodeId').and.returnValue(branchPathTakenEvents);
     expect(service.evaluateBranchPathTakenCriteria(criteria)).toEqual(true);
   });
+  it('should evaluate branch path taken', () => {
+    const branchPathTakenEvents = [];
+    spyOn(dataService, 'getBranchPathTakenEventsByNodeId').and.returnValue(branchPathTakenEvents);
+    expect(service.evaluateBranchPathTakenCriteria(criteria)).toEqual(false);
+  });
 }
 
 function evaluateIsVisitedCriteria() {
-  let events = [
-    { nodeId: 'node1', event: 'nodeEntered' },
-    { nodeId: 'node2', event: 'nodeEntered' },
-    { nodeId: 'node3', event: 'nodeEntered' }
-  ];
   it('should evaluate is visited criteria false', () => {
-    spyOn(dataService, 'getEvents').and.returnValue(events);
+    spyOn(dataService, 'getEvents').and.returnValue(isVisitedEvents);
     expect(service.evaluateIsVisitedCriteria(isVisitedCriteria)).toEqual(false);
   });
   it('should evaluate is visited criteria true', () => {
-    spyOn(dataService, 'getEvents').and.returnValue(events);
+    spyOn(dataService, 'getEvents').and.returnValue(isVisitedEvents);
     isVisitedCriteria.params.nodeId = 'node2';
     expect(service.evaluateIsVisitedCriteria(isVisitedCriteria)).toEqual(true);
   });
   it('should evaluate is visited criteria with no events', () => {
-    events = [];
+    const events = [];
     spyOn(dataService, 'getEvents').and.returnValue(events);
     isVisitedCriteria.params.nodeId = 'node1';
     expect(service.evaluateIsVisitedCriteria(isVisitedCriteria)).toEqual(false);
@@ -251,13 +242,16 @@ function evaluateIsVisitedCriteria() {
 }
 
 function evaluateIsVisitedAfterCriteria() {
-  const events = [{ nodeId: 'node1', event: 'nodeEntered', clientSaveTime: 1000 }];
   it('should evaluate is visited after criteria false', () => {
+    const events = [{ nodeId: 'node1', event: 'nodeEntered', clientSaveTime: 1000 }];
     spyOn(dataService, 'getEvents').and.returnValue(events);
     expect(service.evaluateIsVisitedAfterCriteria(isVisitedAfterCriteria)).toEqual(false);
   });
   it('should evaluate is visited after criteria true', () => {
-    events.push({ nodeId: 'node1', event: 'nodeEntered', clientSaveTime: 3000 });
+    const events = [
+      { nodeId: 'node1', event: 'nodeEntered', clientSaveTime: 1000 },
+      { nodeId: 'node1', event: 'nodeEntered', clientSaveTime: 3000 }
+    ];
     spyOn(dataService, 'getEvents').and.returnValue(events);
     expect(service.evaluateIsVisitedAfterCriteria(isVisitedAfterCriteria)).toEqual(true);
   });
@@ -288,57 +282,48 @@ function evaluateIsRevisedAfterCriteria() {
 }
 
 function evaluateIsVisitedAndRevisedAfterCriteria() {
-  it('should evaluate is visited and revised after criteria false', () => {
-    const events = [{ nodeId: 'node1', event: 'nodeEntered', clientSaveTime: 1000 }];
+  function isVisitedAndRevisedAfterCriteriaSpies(events: any[], componentState: any): void {
     spyOn(dataService, 'getEvents').and.returnValue(events);
-    const componentState = { clientSaveTime: 2000 };
     spyOn(dataService, 'getLatestComponentStateByNodeIdAndComponentId').and.returnValue(
       componentState
     );
+  }
+  it('should evaluate is visited and revised after criteria false', () => {
+    const events = [{ nodeId: 'node1', event: 'nodeEntered', clientSaveTime: 1000 }];
+    const componentState = { clientSaveTime: 2000 };
+    isVisitedAndRevisedAfterCriteriaSpies(events, componentState);
     expect(
       service.evaluateIsVisitedAndRevisedAfterCriteria(isVisitedAndRevisedAfterCriteria)
     ).toEqual(false);
   });
   it('should evaluate is visited and revised after criteria true', () => {
     const events = [{ nodeId: 'node1', event: 'nodeEntered', clientSaveTime: 4000 }];
-    spyOn(dataService, 'getEvents').and.returnValue(events);
     const componentState = { nodeId: 'node2', componentId: 'component2', clientSaveTime: 5000 };
-    spyOn(dataService, 'getLatestComponentStateByNodeIdAndComponentId').and.returnValue(
-      componentState
-    );
+    isVisitedAndRevisedAfterCriteriaSpies(events, componentState);
     expect(
       service.evaluateIsVisitedAndRevisedAfterCriteria(isVisitedAndRevisedAfterCriteria)
     ).toEqual(true);
   });
   it('should evaluate is visited and revised after criteria false with no component states', () => {
     const events = [{ nodeId: 'node1', event: 'nodeEntered', clientSaveTime: 2000 }];
-    spyOn(dataService, 'getEvents').and.returnValue(events);
     const componentState = null;
-    spyOn(dataService, 'getLatestComponentStateByNodeIdAndComponentId').and.returnValue(
-      componentState
-    );
+    isVisitedAndRevisedAfterCriteriaSpies(events, componentState);
     expect(
       service.evaluateIsVisitedAndRevisedAfterCriteria(isVisitedAndRevisedAfterCriteria)
     ).toEqual(false);
   });
   it('should evaluate is visited and revised after criteria false no visit after', () => {
     const events = [{ nodeId: 'node1', event: 'nodeEntered', clientSaveTime: 1000 }];
-    spyOn(dataService, 'getEvents').and.returnValue(events);
     const componentState = { nodeId: 'node2', componentId: 'component2', clientSaveTime: 2000 };
-    spyOn(dataService, 'getLatestComponentStateByNodeIdAndComponentId').and.returnValue(
-      componentState
-    );
+    isVisitedAndRevisedAfterCriteriaSpies(events, componentState);
     expect(
       service.evaluateIsVisitedAndRevisedAfterCriteria(isVisitedAndRevisedAfterCriteria)
     ).toEqual(false);
   });
   it('should evaluate is visited and revised after criteria false visit after no revise', () => {
     const events = [{ nodeId: 'node1', event: 'nodeEntered', clientSaveTime: 4000 }];
-    spyOn(dataService, 'getEvents').and.returnValue(events);
     const componentState = { nodeId: 'node2', componentId: 'component2', clientSaveTime: 2000 };
-    spyOn(dataService, 'getLatestComponentStateByNodeIdAndComponentId').and.returnValue(
-      componentState
-    );
+    isVisitedAndRevisedAfterCriteriaSpies(events, componentState);
     expect(
       service.evaluateIsVisitedAndRevisedAfterCriteria(isVisitedAndRevisedAfterCriteria)
     ).toEqual(false);
@@ -347,17 +332,17 @@ function evaluateIsVisitedAndRevisedAfterCriteria() {
 
 function evaluateScoreCriteria() {
   const annotation = {};
-  function evaluateScoreCriteriaSpies(returnScore: number): void {
+  function scoreCriteriaSpies(returnScore: number): void {
     spyOn(configService, 'getWorkgroupId').and.returnValue(1);
     spyOn(annotationService, 'getLatestScoreAnnotation').and.returnValue(annotation);
     spyOn(annotationService, 'getScoreValueFromScoreAnnotation').and.returnValue(returnScore);
   }
   it('should evaluate score criteria false', () => {
-    evaluateScoreCriteriaSpies(4);
+    scoreCriteriaSpies(4);
     expect(service.evaluateScoreCriteria(scoreCriteria)).toEqual(false);
   });
   it('should evaluate score criteria true', () => {
-    evaluateScoreCriteriaSpies(3);
+    scoreCriteriaSpies(3);
     expect(service.evaluateScoreCriteria(scoreCriteria)).toEqual(true);
   });
 }
