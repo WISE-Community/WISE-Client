@@ -9,30 +9,11 @@ describe('UtilService', () => {
     });
     service = TestBed.inject(UtilService);
   });
-  convertStringToNumberTests();
   calculateMeanTests();
   trimToLength();
   removeHTMLTags();
   replaceImgTagWithFileName();
 });
-
-function convertStringToNumberTests() {
-  describe('convertStringToNumber()', () => {
-    it('should convert a number string to a number', () => {
-      expect(service.convertStringToNumber('5')).toEqual(5);
-      expect(service.convertStringToNumber('-100')).toEqual(-100);
-    });
-
-    it('should return null for null argument', () => {
-      expect(service.convertStringToNumber(null)).toBeNull();
-    });
-
-    it('should return non-null number string as is', () => {
-      expect(service.convertStringToNumber('abc')).toEqual('abc');
-      expect(service.convertStringToNumber('')).toEqual('');
-    });
-  });
-}
 
 function calculateMeanTests() {
   describe('calculateMean()', () => {

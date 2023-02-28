@@ -2,34 +2,12 @@
 
 import { formatDate } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
-import { convertToPNGFile } from '../common/canvas/canvas';
 import { copy } from '../common/object/object';
 import '../lib/jquery/jquery-global';
 
 @Injectable()
 export class UtilService {
   constructor(@Inject(LOCALE_ID) private localeID: string) {}
-
-  convertStringToNumber(str) {
-    if (str != null && str != '' && !isNaN(Number(str))) {
-      return Number(str);
-    }
-    return str;
-  }
-
-  /**
-   * Get an image object from an image element
-   * @param imageElement an image element (<img src='abc.jpg'/>)
-   * @returns an image object
-   */
-  getImageObjectFromImageElement(imageElement: any): any {
-    const canvas = document.createElement('canvas');
-    canvas.width = imageElement.naturalWidth;
-    canvas.height = imageElement.naturalHeight;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(imageElement, 0, 0);
-    return convertToPNGFile(canvas);
-  }
 
   isImage(fileName: string): boolean {
     const imageExtensionsRegEx = new RegExp('.*.(png|jpg|jpeg|bmp|gif|tiff|svg|webp)');
