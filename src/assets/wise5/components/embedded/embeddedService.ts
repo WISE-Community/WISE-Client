@@ -70,15 +70,6 @@ export class EmbeddedService extends ComponentService {
     return false;
   }
 
-  hasNodeEnteredEvent(nodeEvents: any[]) {
-    for (const nodeEvent of nodeEvents) {
-      if (nodeEvent.event === 'nodeEntered') {
-        return true;
-      }
-    }
-    return false;
-  }
-
   componentHasWork(component: any): boolean {
     return component.hasWork;
   }

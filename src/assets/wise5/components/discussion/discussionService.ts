@@ -77,10 +77,6 @@ export class DiscussionService extends ComponentService {
     );
   }
 
-  private hasNodeEnteredEvent(nodeEvents: any[]): boolean {
-    return nodeEvents.some((nodeEvent) => nodeEvent.event === 'nodeEntered');
-  }
-
   getClassmateResponsesFromComponents(
     runId: number,
     periodId: number,
