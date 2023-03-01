@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { StudentDataService } from '../../../../services/studentDataService';
+import { NodeStatusService } from '../../../../services/nodeStatusService';
 
 @Component({
   selector: 'node-status-icon',
@@ -7,14 +7,12 @@ import { StudentDataService } from '../../../../services/studentDataService';
   templateUrl: 'node-status-icon.component.html'
 })
 export class NodeStatusIcon {
-  @Input()
-  nodeId: string;
-
+  @Input() nodeId: string;
   nodeStatus: any;
 
-  constructor(private StudentDataService: StudentDataService) {}
+  constructor(private nodeStatusService: NodeStatusService) {}
 
   ngOnChanges() {
-    this.nodeStatus = this.StudentDataService.getNodeStatuses()[this.nodeId];
+    this.nodeStatus = this.nodeStatusService.getNodeStatusByNodeId(this.nodeId);
   }
 }

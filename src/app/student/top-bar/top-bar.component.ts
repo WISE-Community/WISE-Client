@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
+import { NodeStatusService } from '../../../assets/wise5/services/nodeStatusService';
 import { NotificationService } from '../../../assets/wise5/services/notificationService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
@@ -31,6 +32,7 @@ export class TopBarComponent {
   constructor(
     private dialog: MatDialog,
     private configService: ConfigService,
+    private nodeStatusService: NodeStatusService,
     private notificationService: NotificationService,
     private projectService: ProjectService,
     private studentDataService: StudentDataService
@@ -96,7 +98,7 @@ export class TopBarComponent {
   }
 
   private setCompletionPercent(): void {
-    this.completionPercent = this.studentDataService.getNodeStatuses()[
+    this.completionPercent = this.nodeStatusService.getNodeStatuses()[
       this.projectService.getProjectRootNode().id
     ].progress.completionPct;
   }

@@ -48,6 +48,8 @@ import { TabulatorDataService } from '../assets/wise5/components/table/tabulator
 import { StompService } from '../assets/wise5/services/stompService';
 import { ClickToSnipImageService } from '../assets/wise5/services/clickToSnipImageService';
 import { StudentPeerGroupService } from '../assets/wise5/services/studentPeerGroupService';
+import { ConstraintService } from '../assets/wise5/services/constraintService';
+import { NodeStatusService } from '../assets/wise5/services/nodeStatusService';
 import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 
 @NgModule({
@@ -60,6 +62,7 @@ import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
     BranchService,
     ClickToSnipImageService,
     ConceptMapService,
+    ConstraintService,
     ComponentService,
     ComponentServiceLookupService,
     ComponentTypeService,
@@ -76,6 +79,7 @@ import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
     MatchService,
     MultipleChoiceService,
     NodeService,
+    NodeStatusService,
     NotebookService,
     NotificationService,
     OutsideURLService,

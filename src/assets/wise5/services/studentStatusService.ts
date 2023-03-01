@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { StudentStatus } from '../common/StudentStatus';
 import { ConfigService } from './configService';
+import { NodeStatusService } from './nodeStatusService';
 import { StudentDataService } from './studentDataService';
 
 @Injectable()
@@ -11,6 +12,7 @@ export class StudentStatusService {
   constructor(
     private http: HttpClient,
     private configService: ConfigService,
+    private nodeStatusService: NodeStatusService,
     private studentDataService: StudentDataService
   ) {
     studentDataService.nodeStatusesChanged$.subscribe(() => {
@@ -56,7 +58,7 @@ export class StudentStatusService {
       const periodId = this.configService.getPeriodId();
       const workgroupId = this.configService.getWorkgroupId();
       const currentNodeId = this.studentDataService.getCurrentNodeId();
-      const nodeStatuses = this.studentDataService.getNodeStatuses();
+      const nodeStatuses = this.nodeStatusService.getNodeStatuses();
       const projectCompletion = this.studentDataService.getProjectCompletion();
       const studentStatusJSON: StudentStatus = {
         runId: runId,

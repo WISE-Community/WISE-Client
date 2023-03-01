@@ -7,6 +7,7 @@ import { ProjectService } from './projectService';
 import { ChooseBranchPathDialogComponent } from '../../../app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
 import { DataService } from '../../../app/services/data.service';
 import { Observable, Subject } from 'rxjs';
+import { ConstraintService } from './constraintService';
 
 @Injectable()
 export class NodeService {
@@ -26,6 +27,7 @@ export class NodeService {
   constructor(
     private dialog: MatDialog,
     private ConfigService: ConfigService,
+    private constraintService: ConstraintService,
     private ProjectService: ProjectService,
     private DataService: DataService
   ) {}
@@ -405,7 +407,10 @@ export class NodeService {
     const availableTransitions = [];
     for (const transition of transitions) {
       const criteria = transition.criteria;
-      if (criteria == null || (criteria != null && this.DataService.evaluateCriterias(criteria))) {
+      if (
+        criteria == null ||
+        (criteria != null && this.constraintService.evaluateCriterias(criteria))
+      ) {
         availableTransitions.push(transition);
       }
     }
