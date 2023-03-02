@@ -5,6 +5,7 @@ import { ConfigService } from '../../services/configService';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import * as $ from 'jquery';
 import { Subscription } from 'rxjs';
+import { isImage, isVideo } from '../../common/file/file';
 
 export class ProjectAssetAuthoringController {
   $translate: any;
@@ -285,9 +286,9 @@ export class ProjectAssetAuthoringController {
     this.previewAssetURL = `${assetsDirectoryPath}/${assetFileName}`;
     this.assetIsImage = false;
     this.assetIsVideo = false;
-    if (this.UtilService.isImage(assetFileName)) {
+    if (isImage(assetFileName)) {
       this.assetIsImage = true;
-    } else if (this.UtilService.isVideo(assetFileName)) {
+    } else if (isVideo(assetFileName)) {
       this.assetIsVideo = true;
       $('video').load(this.previewAssetURL);
     }
