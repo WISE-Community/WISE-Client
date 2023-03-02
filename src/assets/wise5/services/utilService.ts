@@ -133,15 +133,6 @@ export class UtilService {
     return JSON.stringify(array1Copy) == JSON.stringify(array2Copy);
   }
 
-  /**
-   * Get the number of words in the string.
-   * @param str The string.
-   * @return The number of words in the string.
-   */
-  wordCount(str) {
-    return str.trim().split(/\s+/).length;
-  }
-
   trimToLength(str: string, maxLength: number): string {
     return str.length > maxLength ? `${str.substring(0, maxLength - 3)}...` : str;
   }

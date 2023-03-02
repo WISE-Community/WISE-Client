@@ -6,7 +6,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import { NotebookService } from '../../assets/wise5/services/notebookService';
 
 let annotationService: AnnotationService;
@@ -14,7 +13,6 @@ let configService: ConfigService;
 let dataService: StudentDataService;
 let notebookService: NotebookService;
 let service: ConstraintService;
-let utilService: UtilService;
 let criteria1: any;
 let criteria2: any;
 let nodeConstraintTwoRemovalCriteria: any;
@@ -39,7 +37,6 @@ describe('ConstraintService', () => {
     dataService = TestBed.inject(StudentDataService);
     notebookService = TestBed.inject(NotebookService);
     service = TestBed.inject(ConstraintService);
-    utilService = TestBed.inject(UtilService);
     criteria1 = {
       name: 'isCompleted',
       params: {
@@ -376,22 +373,21 @@ function evaluateUsedXSubmitsCriteria() {
 }
 
 function evaluateNumberOfWordsWrittenCriteria() {
-  function numberOfWordsWrittenSpies(componentState: any, returnWordCount: number): void {
+  function numberOfWordsWrittenSpies(componentState: any): void {
     spyOn(dataService, 'getLatestComponentStateByNodeIdAndComponentId').and.returnValue(
       componentState
     );
-    spyOn(utilService, 'wordCount').and.returnValue(returnWordCount);
   }
   it('should evaluate number of words written criteria false', () => {
     const componentState = { studentData: { response: 'one two three four five' } };
-    numberOfWordsWrittenSpies(componentState, 5);
+    numberOfWordsWrittenSpies(componentState);
     expect(service.evaluateNumberOfWordsWrittenCriteria(numberOfWordsWrittenCriteria)).toEqual(
       false
     );
   });
   it('should evaluate number of words written criteria true', () => {
     const componentState = { studentData: { response: '1 2 3 4 5 6 7 8 9 0' } };
-    numberOfWordsWrittenSpies(componentState, 10);
+    numberOfWordsWrittenSpies(componentState);
     expect(service.evaluateNumberOfWordsWrittenCriteria(numberOfWordsWrittenCriteria)).toEqual(
       true
     );
