@@ -5,7 +5,6 @@ import { ConfigService } from './configService';
 import { NotebookService } from './notebookService';
 import { StudentDataService } from './studentDataService';
 import { TagService } from './tagService';
-import { UtilService } from './utilService';
 
 @Injectable()
 export class ConstraintService {
@@ -69,8 +68,7 @@ export class ConstraintService {
     private configService: ConfigService,
     private dataService: StudentDataService,
     private notebookService: NotebookService,
-    private tagService: TagService,
-    private utilService: UtilService
+    private tagService: TagService
   ) {}
 
   evaluate(constraints: any[]): any {
@@ -347,12 +345,16 @@ export class ConstraintService {
     if (componentState != null) {
       const studentData = componentState.studentData;
       const response = studentData.response;
-      const numberOfWords = this.utilService.wordCount(response);
+      const numberOfWords = this.wordCount(response);
       if (numberOfWords >= requiredNumberOfWords) {
         return true;
       }
     }
     return false;
+  }
+
+  private wordCount(str: string): number {
+    return str.trim().split(/\s+/).length;
   }
 
   evaluateAddXNumberOfNotesOnThisStepCriteria(criteria: any): boolean {
