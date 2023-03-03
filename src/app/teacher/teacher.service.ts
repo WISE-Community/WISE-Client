@@ -251,13 +251,12 @@ export class TeacherService {
     return this.http.post<any>(this.forgotPasswordUrl, params, { headers: headers });
   }
 
-  getVerificationCodeEmail(username, token) {
+  getVerificationCodeEmail(username) {
     const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
-    let params = new HttpParams();
-    params = params.set('username', username);
-    params = params.set('token', token);
+    const params = new HttpParams().set('username', username);
     return this.http.get<any>(this.getVerificationCodeUrl, { headers: headers, params: params });
   }
+
   checkVerificationCode(username, verificationCode) {
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     let params = new HttpParams();

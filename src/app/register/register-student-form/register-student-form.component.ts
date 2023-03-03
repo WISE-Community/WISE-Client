@@ -206,10 +206,4 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     }
     this.createStudentAccountFormGroup.controls['birthDay'].enable();
   }
-
-  public executeImportantAction(): void {
-    this.recaptchaV3Service.execute('importantAction').subscribe((token) => {
-      console.log(token);
-    });
-  }
 }

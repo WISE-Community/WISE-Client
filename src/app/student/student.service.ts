@@ -108,17 +108,14 @@ export class StudentService {
   }
 
   getSecurityQuestion(username) {
-    let params = new HttpParams();
-    params = params.set('username', username);
-
+    const params = new HttpParams().set('username', username);
     return this.http.get<any>(this.getSecurityQuestionUrl, { params: params });
   }
 
-  checkSecurityAnswer(username, answer, token) {
+  checkSecurityAnswer(username, answer) {
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     let params = new HttpParams().set('username', username);
     params = params.set('answer', answer);
-    params = params.set('token', token);
     return this.http.post<any>(this.checkSecurityAnswerUrl, params, { headers: headers });
   }
 
