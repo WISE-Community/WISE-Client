@@ -90,7 +90,10 @@ export function initialize(
     },
     {
       provide: RECAPTCHA_V3_SITE_KEY,
-      useValue: '6LfBmGojAAAAAGawo276q4BH1gOfxi96ugYNq3aE'
+      useFactory: (configService: ConfigService) => {
+        return configService.getRecaptchaPublicKey();
+      },
+      deps: [ConfigService]
     }
   ],
   bootstrap: [AppComponent]

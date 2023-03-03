@@ -163,7 +163,6 @@ async function createAccount() {
       const response: any = helpers.createAccountErrorResponse(errorMessage);
       spyOn(studentService, 'registerStudentAccount').and.returnValue(throwError(response));
       const recaptchaError = fixture.debugElement.queryAll(By.css('.recaptchaError'));
-      console.log(recaptchaError);
     });
 
     it(

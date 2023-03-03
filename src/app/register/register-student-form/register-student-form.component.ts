@@ -7,7 +7,6 @@ import { UtilService } from '../../services/util.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { PasswordService } from '../../services/password.service';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
 
@@ -131,21 +130,18 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     const formError: any = {};
     switch (error.messageCode) {
       case 'invalidPasswordLength':
-        console.log('pass len');
         formError.minlength = true;
         this.passwordsFormGroup
           .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
           .setErrors(formError);
         break;
       case 'invalidPasswordPattern':
-        console.log('pass pattern');
         formError.pattern = true;
         this.passwordsFormGroup
           .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
           .setErrors(formError);
         break;
       case 'recaptchaResponseInvalid':
-        console.log('recaptcha');
         this.studentUser['isRecaptchaInvalid'] = true;
         break;
       default:
@@ -211,9 +207,9 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     this.createStudentAccountFormGroup.controls['birthDay'].enable();
   }
 
-  // public executeImportantAction(): void {
-  //   this.recaptchaV3Service.execute('importantAction').subscribe((token) => {
-  //     console.log(token);
-  //   });
-  // }
+  public executeImportantAction(): void {
+    this.recaptchaV3Service.execute('importantAction').subscribe((token) => {
+      console.log(token);
+    });
+  }
 }
