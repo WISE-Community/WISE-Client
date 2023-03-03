@@ -13,6 +13,7 @@ import { MatchGradingModule } from '../../assets/wise5/components/match/match-gr
 import { MultipleChoiceGradingModule } from '../../assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.module';
 import { OpenResponseGradingModule } from '../../assets/wise5/components/openResponse/open-response-grading/open-response-grading.module';
 import { PeerChatGradingModule } from '../../assets/wise5/components/peerChat/peer-chat-grading/peer-chat-grading.module';
+import { ShowGroupWorkGradingModule } from '../../assets/wise5/components/showGroupWork/show-group-work-grading/show-group-work-grading.module';
 import { TableGradingModule } from '../../assets/wise5/components/table/table-grading/table-grading.module';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { TableGradingModule } from '../../assets/wise5/components/table/table-gr
     MultipleChoiceGradingModule,
     OpenResponseGradingModule,
     PeerChatGradingModule,
+    ShowGroupWorkGradingModule,
     TableGradingModule
   ],
   exports: [
@@ -48,6 +50,7 @@ import { TableGradingModule } from '../../assets/wise5/components/table/table-gr
     MultipleChoiceGradingModule,
     OpenResponseGradingModule,
     PeerChatGradingModule,
+    ShowGroupWorkGradingModule,
     TableGradingModule
   ]
 })

@@ -24,15 +24,40 @@ export class TeacherPeerGroupService extends PeerGroupService {
     });
   }
 
-  retrievePeerGroup(): Observable<PeerGroup> {
-    return of(this.getPreviewPeerGroup());
+  retrievePeerGroup(peerGroupingTag: string, workgroupId: number): Observable<PeerGroup> {
+    // When the teacher previews anything that retrieves Peer Group like Classroom Monitor Step Info
+    // or Authoring preview popup, the workgroupId will be null
+    if (this.configService.isClassroomMonitor() && workgroupId != null) {
+      return super.retrievePeerGroup(peerGroupingTag, workgroupId);
+    } else {
+      return of(this.getPreviewPeerGroup());
+    }
   }
 
   retrievePeerGroupWork(): Observable<any> {
     return of([]);
   }
 
-  retrieveStudentWork(): Observable<any> {
-    return of([]);
+  retrieveStudentWork(
+    peerGroup: PeerGroup,
+    nodeId: string,
+    componentId: string,
+    showWorkNodeId: string,
+    showWorkComponentId: string
+  ): Observable<any> {
+    if (
+      this.configService.isClassroomMonitor() &&
+      peerGroup.id !== PeerGroupService.PREVIEW_PEER_GROUP_ID
+    ) {
+      return super.retrieveStudentWork(
+        peerGroup,
+        nodeId,
+        componentId,
+        showWorkNodeId,
+        showWorkComponentId
+      );
+    } else {
+      return of([]);
+    }
   }
 }
