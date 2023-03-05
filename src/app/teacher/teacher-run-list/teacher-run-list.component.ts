@@ -2,7 +2,7 @@ import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { TeacherService } from '../teacher.service';
 import { TeacherRun } from '../teacher-run';
 import { ConfigService } from '../../services/config.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { Observable, of, Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
@@ -27,11 +27,12 @@ export class TeacherRunListComponent implements OnInit {
   subscriptions: Subscription = new Subscription();
 
   constructor(
-    private teacherService: TeacherService,
     private configService: ConfigService,
+    @Inject(LOCALE_ID) private localeID: string,
+    private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService,
-    @Inject(LOCALE_ID) private localeID: string
+    private teacherService: TeacherService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -76,34 +77,9 @@ export class TeacherRunListComponent implements OnInit {
   private subscribeToRuns(): void {
     this.subscriptions.add(
       this.teacherService.runs$.subscribe((run: TeacherRun) => {
-        if (this.isNewRun(run)) {
-          this.addNewRun(run);
-        } else {
-          this.updateExistingRun(run);
-        }
+        this.updateExistingRun(run);
       })
     );
-  }
-
-  private addNewRun(newRun: TeacherRun): void {
-    newRun.isHighlighted = true;
-    this.runs.unshift(newRun);
-    this.runs.sort(this.sortByStartTimeDesc);
-    this.populatePeriods();
-    this.periods.sort();
-    this.populateFilterOptions();
-    this.reset();
-    if (!this.showAll) {
-      const index = this.getRunIndex(newRun);
-      if (index > 9) {
-        this.showAll = true;
-      }
-    }
-    this.router.navigateByUrl('teacher/home/schedule').then(() => {
-      setTimeout(() => {
-        document.getElementById(`run${newRun.id}`).scrollIntoView();
-      }, 1000);
-    });
   }
 
   private updateExistingRun(updatedRun: TeacherRun): void {
@@ -113,25 +89,13 @@ export class TeacherRunListComponent implements OnInit {
     this.reset();
   }
 
-  private isNewRun(run: TeacherRun) {
-    return !this.runs.some((existingRun) => existingRun.id === run.id);
-  }
-
-  private getRunIndex(run: TeacherRun): number {
-    for (let i = 0; i < this.runs.length; i++) {
-      if (this.runs[i].id === run.id) {
-        return i;
-      }
-    }
-    return null;
-  }
-
   private processRuns(): void {
     this.filteredRuns = this.runs;
     this.populatePeriods();
     this.periods.sort();
     this.populateFilterOptions();
     this.performSearchAndFilter();
+    this.highlightNewRun();
   }
 
   sortByStartTimeDesc(a: TeacherRun, b: TeacherRun): number {
@@ -230,5 +194,21 @@ export class TeacherRunListComponent implements OnInit {
 
   isRunActive(run) {
     return run.isActive(this.configService.getCurrentServerTime());
+  }
+
+  private highlightNewRun(): void {
+    this.route.queryParams.subscribe((queryParams: Params) => {
+      if (queryParams.newRunId != null) {
+        const newRunId = parseInt(queryParams.newRunId);
+        if (newRunId != null) {
+          const newRun = this.runs.find((run) => {
+            return run.id === newRunId;
+          });
+          newRun.isHighlighted = true;
+          // remove the newRunId parameter from the url
+          this.router.navigate(['/teacher/home/schedule'], { queryParams: { newRunId: null } });
+        }
+      }
+    });
   }
 }

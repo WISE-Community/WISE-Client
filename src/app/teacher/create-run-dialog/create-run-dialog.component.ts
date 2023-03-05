@@ -8,6 +8,7 @@ import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
 import { ListClassroomCoursesDialogComponent } from '../list-classroom-courses-dialog/list-classroom-courses-dialog.component';
 import { TeacherRun } from '../teacher-run';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'create-run-dialog',
@@ -29,13 +30,14 @@ export class CreateRunDialogComponent {
   run: TeacherRun = null;
 
   constructor(
+    private configService: ConfigService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<CreateRunDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder,
+    private router: Router,
     private teacherService: TeacherService,
-    private userService: UserService,
-    private configService: ConfigService,
-    private fb: FormBuilder
+    private userService: UserService
   ) {
     this.project = data.project;
     this.maxStudentsPerTeam = 3;
@@ -127,8 +129,10 @@ export class CreateRunDialogComponent {
       )
       .subscribe((newRun: TeacherRun) => {
         this.run = new TeacherRun(newRun);
-        this.dialogRef.afterClosed().subscribe((result) => {
-          this.teacherService.broadcastRunChanges(this.run);
+        this.dialogRef.afterClosed().subscribe(() => {
+          this.router.navigate(['/teacher/home/schedule'], {
+            queryParams: { newRunId: newRun.id }
+          });
         });
         this.isCreated = true;
       });
