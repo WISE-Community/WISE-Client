@@ -20,8 +20,8 @@ export class ShowGroupWorkDisplayComponent implements OnInit {
   showWorkComponentContent: any;
   widthLg: number = 100;
   widthMd: number = 100;
-  @Input() workgroupId: any;
-  workgroupIdToWork = new Map();
+  @Input() workgroupId: number;
+  workgroupIdToWork = new Map<number, any>();
   workgroupInfos: any = {};
 
   constructor(
@@ -116,7 +116,7 @@ export class ShowGroupWorkDisplayComponent implements OnInit {
     }
   }
 
-  isNarrow(): boolean {
+  private isNarrow(): boolean {
     return this.narrowComponentTypes.includes(this.showWorkComponentContent.type);
   }
 }

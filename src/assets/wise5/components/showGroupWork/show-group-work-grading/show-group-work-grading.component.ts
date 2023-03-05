@@ -7,5 +7,5 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
   styleUrls: ['./show-group-work-grading.component.scss']
 })
 export class ShowGroupWorkGradingComponent extends ComponentShowWorkDirective {
-  @Input() workgroupId: any;
+  @Input() workgroupId: number;
 }
