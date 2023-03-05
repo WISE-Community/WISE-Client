@@ -102,9 +102,15 @@
       >
       </table-grading>
     </ng-container>
+    <show-group-work-grading
+      *ngIf="component.type === 'ShowGroupWork'"
+      [nodeId]="nodeId"
+      [componentId]="component.id"
+      [workgroupId]="workgroupId"
+    ></show-group-work-grading>
     <span fxFlex></span>
     <div
-      *ngIf="componentStates.length === 0"
+      *ngIf="componentStates.length === 0 && component.type !== 'ShowGroupWork'"
       class="component__actions__info component--grading__actions__info md-caption"
       i18n
     >
