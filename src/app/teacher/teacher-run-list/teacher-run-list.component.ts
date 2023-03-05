@@ -200,7 +200,7 @@ export class TeacherRunListComponent implements OnInit {
     this.route.queryParams.subscribe((queryParams: Params) => {
       if (queryParams.newRunId != null) {
         const newRunId = parseInt(queryParams.newRunId);
-        if (newRunId != null) {
+        if (!isNaN(newRunId)) {
           const newRun = this.runs.find((run) => {
             return run.id === newRunId;
           });
