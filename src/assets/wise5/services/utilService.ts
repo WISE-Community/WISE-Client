@@ -24,13 +24,6 @@ export class UtilService {
     return fileName.toLowerCase().match(videoExtensionsRegEx) != null;
   }
 
-  replaceDivReference(html: string, newString: string): string {
-    return html.replace(
-      /document\.getElementById\('replace-with-unique-id'\)/g,
-      `document.getElementById('${newString}')`
-    );
-  }
-
   /**
    * Remove html tags and newlines from the string.
    * @param html an html string
