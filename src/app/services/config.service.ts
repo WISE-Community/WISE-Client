@@ -35,6 +35,10 @@ export class ConfigService {
     return this.config$.getValue().discourseURL;
   }
 
+  getDiscourseNewsCategory() {
+    return this.config$.getValue().discourseNewsCategory;
+  }
+
   getGoogleAnalyticsId() {
     return this.config$.getValue().googleAnalyticsId;
   }
