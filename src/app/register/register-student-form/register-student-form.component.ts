@@ -9,7 +9,7 @@ import { RegisterUserFormComponent } from '../register-user-form/register-user-f
 import { HttpErrorResponse } from '@angular/common/http';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
-
+import { ConfigService } from '../../services/config.service';
 @Component({
   selector: 'register-student-form',
   templateUrl: './register-student-form.component.html',
@@ -50,6 +50,7 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
+    private configService: ConfigService,
     private fb: FormBuilder,
     private recaptchaV3Service: ReCaptchaV3Service,
     private router: Router,
@@ -158,8 +159,10 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
         this.studentUser[key] = this.createStudentAccountFormGroup.get(key).value;
       }
     }
-    const token = await this.recaptchaV3Service.execute('importantAction').toPromise();
-    this.studentUser['token'] = token;
+    if (this.configService.isRecaptchaEnabled()) {
+      const token = await this.recaptchaV3Service.execute('importantAction').toPromise();
+      this.studentUser['token'] = token;
+    }
     if (!this.isUsingGoogleId()) {
       this.studentUser['password'] = this.getPassword();
       delete this.studentUser['passwords'];
