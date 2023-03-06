@@ -51,6 +51,7 @@ export class TeacherRunListComponent implements OnInit {
       .subscribe((runs: TeacherRun[]) => {
         this.setRuns(runs);
         this.processRuns();
+        this.highlightNewRunIfNecessary();
         this.loaded = true;
       });
   }
@@ -95,7 +96,6 @@ export class TeacherRunListComponent implements OnInit {
     this.periods.sort();
     this.populateFilterOptions();
     this.performSearchAndFilter();
-    this.highlightNewRun();
   }
 
   sortByStartTimeDesc(a: TeacherRun, b: TeacherRun): number {
@@ -196,19 +196,24 @@ export class TeacherRunListComponent implements OnInit {
     return run.isActive(this.configService.getCurrentServerTime());
   }
 
-  private highlightNewRun(): void {
+  private highlightNewRunIfNecessary(): void {
     this.route.queryParams.subscribe((queryParams: Params) => {
       if (queryParams.newRunId != null) {
         const newRunId = parseInt(queryParams.newRunId);
         if (!isNaN(newRunId)) {
-          const newRun = this.runs.find((run) => {
-            return run.id === newRunId;
-          });
-          newRun.isHighlighted = true;
-          // remove the newRunId parameter from the url
-          this.router.navigate(['/teacher/home/schedule'], { queryParams: { newRunId: null } });
+          this.highlightNewRun(newRunId);
         }
+        // remove the newRunId parameter from the url
+        this.router.navigate(['/teacher/home/schedule'], { queryParams: { newRunId: null } });
       }
     });
+  }
+
+  private highlightNewRun(runId: number): void {
+    for (const run of this.runs) {
+      if (run.id === runId) {
+        run.isHighlighted = true;
+      }
+    }
   }
 }
