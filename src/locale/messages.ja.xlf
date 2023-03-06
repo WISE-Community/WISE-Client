@@ -12624,7 +12624,7 @@ Are you sure you want to proceed?</target>
         <source> Team has not saved any work </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component.html</context>
-          <context context-type="linenumber">110,112</context>
+          <context context-type="linenumber">116,118</context>
         </context-group>
         <target state="needs-translation"> Team has not saved any work </target>
       </trans-unit>
@@ -12632,7 +12632,7 @@ Are you sure you want to proceed?</target>
         <source>See revisions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component.html</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">126</context>
         </context-group>
         <target state="needs-translation">See revisions</target>
       </trans-unit>
@@ -19331,16 +19331,16 @@ If this problem continues, let your teacher know and move on to the next activit
       <trans-unit id="bed97e00c4410c5f35cecf15517f4ad34caa00bc" datatype="html">
         <source> You have not been paired with a classmate yet. Please check back later. </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-student/show-group-work-student.component.html</context>
-          <context context-type="linenumber">3,5</context>
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-display/show-group-work-display.component.html</context>
+          <context context-type="linenumber">2,4</context>
         </context-group>
         <target state="needs-translation"> You have not been paired with a classmate yet. Please check back later. </target>
       </trans-unit>
       <trans-unit id="695002b0833dd1205d98680144ae619f6d06a79b" datatype="html">
         <source> (Waiting for response...) </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-student/show-group-work-student.component.html</context>
-          <context context-type="linenumber">22,24</context>
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-display/show-group-work-display.component.html</context>
+          <context context-type="linenumber">21,23</context>
         </context-group>
         <target state="needs-translation"> (Waiting for response...) </target>
       </trans-unit>
