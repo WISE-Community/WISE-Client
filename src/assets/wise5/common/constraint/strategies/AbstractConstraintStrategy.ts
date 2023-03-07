@@ -6,10 +6,10 @@ export abstract class AbstractConstraintStrategy implements ConstraintStrategy {
   context: EvaluateConstraintContext;
   dataService: StudentDataService;
 
-  setContext(context: EvaluateConstraintContext) {
+  setContext(context: EvaluateConstraintContext): void {
     this.context = context;
     this.dataService = this.context.getDataService();
   }
 
-  abstract evaluate(criteria: any);
+  abstract evaluate(criteria: any): boolean;
 }

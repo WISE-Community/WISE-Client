@@ -10,7 +10,7 @@ export class EvaluateConstraintContext {
     return this.dataService;
   }
 
-  setStrategy(strategy: ConstraintStrategy) {
+  setStrategy(strategy: ConstraintStrategy): void {
     strategy.setContext(this);
     this.strategy = strategy;
   }
