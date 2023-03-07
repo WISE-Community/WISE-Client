@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UtilService } from '../../../../assets/wise5/services/utilService';
 import * as Highcharts from 'highcharts';
 import { rgbToHex } from '../../../../assets/wise5/common/color/color';
 import { trimToLength } from '../../../../assets/wise5/common/string/string';
@@ -24,7 +23,7 @@ export class MilestoneReportGraphComponent implements OnInit {
   series: any[];
   @Input() titleColor: string;
 
-  constructor(private utilService: UtilService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.data = JSON.parse(this.data.replace(/\'/g, '"'));
