@@ -99,15 +99,13 @@ export class HomeComponent implements OnInit {
       if (config != null) {
         this.discourseUrl = this.configService.getDiscourseURL();
         this.discourseNewsCategory = this.configService.getDiscourseNewsCategory();
-        if (
-          this.discourseUrl != null &&
-          this.discourseUrl !== '' &&
-          this.discourseNewsCategory != null &&
-          this.discourseNewsCategory !== ''
-        ) {
-          this.isDiscourseNewsAvailable = true;
-        }
+        this.isDiscourseNewsAvailable =
+          this.isSet(this.discourseUrl) && this.isSet(this.discourseNewsCategory);
       }
     });
+  }
+
+  private isSet(str: string): boolean {
+    return str != null && str !== '';
   }
 }
