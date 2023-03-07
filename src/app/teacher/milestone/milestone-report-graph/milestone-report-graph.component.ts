@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { UtilService } from '../../../../assets/wise5/services/utilService';
 import * as Highcharts from 'highcharts';
 import { rgbToHex } from '../../../../assets/wise5/common/color/color';
+import { trimToLength } from '../../../../assets/wise5/common/string/string';
 
 @Component({
   selector: 'milestone-report-graph',
@@ -100,7 +101,7 @@ export class MilestoneReportGraphComponent implements OnInit {
     for (const componentData of this.getDataToGraph(this.data, this.locations)) {
       opacity += step;
       const singleSeries = {
-        name: this.utilService.trimToLength(componentData.stepTitle, 26),
+        name: trimToLength(componentData.stepTitle, 26),
         color: rgbToHex(color, opacity),
         data: this.getComponentSeriesData(componentData)
       };

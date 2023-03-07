@@ -133,10 +133,6 @@ export class UtilService {
     return JSON.stringify(array1Copy) == JSON.stringify(array2Copy);
   }
 
-  trimToLength(str: string, maxLength: number): string {
-    return str.length > maxLength ? `${str.substring(0, maxLength - 3)}...` : str;
-  }
-
   /**
    * Determine whether the component has been authored to import work.
    * @param componentContent The component content.
