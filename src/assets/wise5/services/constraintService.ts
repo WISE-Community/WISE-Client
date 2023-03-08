@@ -4,6 +4,7 @@ import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategi
 import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/IsCompletedConstraintStrategy';
 import { IsCorrectConstraintStrategy } from '../common/constraint/strategies/IsCorrectConstraintStrategy';
 import { IsVisibleConstraintStrategy } from '../common/constraint/strategies/IsVisibleConstraintStrategy';
+import { IsVisitableConstraintStrategy } from '../common/constraint/strategies/IsVisitableContraintStrategy';
 import { UsedXSubmitsConstraintStrategy } from '../common/constraint/strategies/UsedXSubmitsConstraintStrategy';
 import { WroteXNumberOfWordsConstraintStrategy } from '../common/constraint/strategies/WroteXNumberOfWordsConstraintStrategy';
 import { AnnotationService } from './annotationService';
@@ -20,14 +21,12 @@ export class ConstraintService {
     isCompleted: new IsCompletedConstraintStrategy(),
     isCorrect: new IsCorrectConstraintStrategy(),
     isVisible: new IsVisibleConstraintStrategy(),
+    isVisitable: new IsVisitableConstraintStrategy(),
     usedXSubmits: new UsedXSubmitsConstraintStrategy(),
     wroteXNumberOfWords: new WroteXNumberOfWordsConstraintStrategy()
   };
 
   criteriaFunctionNameToFunction = {
-    isVisitable: (criteria) => {
-      return this.evaluateIsVisitableCriteria(criteria);
-    },
     isVisited: (criteria) => {
       return this.evaluateIsVisitedCriteria(criteria);
     },
@@ -145,6 +144,7 @@ export class ConstraintService {
         'isCompleted',
         'isCorrect',
         'isVisible',
+        'isVisitable',
         'usedXSubmits',
         'wroteXNumberOfWords'
       ].includes(criteria.name)
@@ -166,11 +166,6 @@ export class ConstraintService {
       }
     }
     return true;
-  }
-
-  evaluateIsVisitableCriteria(criteria: any): boolean {
-    const nodeStatus = this.dataService.getNodeStatusByNodeId(criteria.params.nodeId);
-    return nodeStatus.isVisitable;
   }
 
   evaluateIsVisitedCriteria(criteria: any): boolean {
