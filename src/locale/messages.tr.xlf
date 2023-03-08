@@ -5028,7 +5028,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>WISE students in classroom</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <target state="needs-translation">WISE students in classroom</target>
       </trans-unit>
@@ -5036,7 +5036,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>WISE students building</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <target state="needs-translation">WISE students building</target>
       </trans-unit>
@@ -5044,7 +5044,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Free, standards-aligned, and research-based inquiry curricula that address <x id="START_LINK" ctype="x-a" equiv-text="this.ngssLink.startTag"/>NGSS 3D proficiency<x id="CLOSE_LINK" ctype="x-a" equiv-text="this.ngssLink.closeTag"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <target state="needs-translation">Free, standards-aligned, and research-based inquiry curricula that address <x id="START_LINK" ctype="x-a" equiv-text="this.ngssLink.startTag"/>NGSS 3D proficiency<x id="CLOSE_LINK" ctype="x-a" equiv-text="this.ngssLink.closeTag"/></target>
       </trans-unit>
@@ -5052,7 +5052,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>WISE unit on laptop</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <target state="needs-translation">WISE unit on laptop</target>
       </trans-unit>
@@ -5060,7 +5060,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Interactive scientific models plus hands-on activities, personalized guidance, and rich embedded assessments</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">75</context>
         </context-group>
         <target state="translated">Etkileşimli bilimsel modeller artı uygulamalı etkinlikler, kişiselleştirilmiş rehberlik ve zengin yerleşik değerlendirmeler</target>
       </trans-unit>
@@ -5068,7 +5068,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>WISE students and teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">79</context>
         </context-group>
         <target state="needs-translation">WISE students and teacher</target>
       </trans-unit>
@@ -5076,7 +5076,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Robust teacher grading and management tools supporting individualized and customized learning</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">91</context>
         </context-group>
         <target state="needs-translation">Robust teacher grading and management tools supporting individualized and customized learning</target>
       </trans-unit>
@@ -17506,7 +17506,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to overwrite the current line data?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">238</context>
+          <context context-type="linenumber">237</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to overwrite the current line data?</target>
       </trans-unit>
@@ -17514,7 +17514,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1091</context>
+          <context context-type="linenumber">1090</context>
         </context-group>
         <target state="needs-translation">The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</target>
       </trans-unit>
@@ -17522,7 +17522,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>You can not edit this series. Please choose a series that can be edited.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1105</context>
+          <context context-type="linenumber">1104</context>
         </context-group>
         <target state="needs-translation">You can not edit this series. Please choose a series that can be edited.</target>
       </trans-unit>
@@ -17530,7 +17530,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset the series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1383</context>
+          <context context-type="linenumber">1382</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset the series?</target>
       </trans-unit>
@@ -17538,7 +17538,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset the &quot;<x id="PH" equiv-text="seriesName"/>&quot; series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1385</context>
+          <context context-type="linenumber">1384</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset the "<x id="PH" equiv-text="seriesName"/>" series?</target>
       </trans-unit>
@@ -17546,11 +17546,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Trial</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1906</context>
+          <context context-type="linenumber">1905</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">2740</context>
+          <context context-type="linenumber">2759</context>
         </context-group>
         <target state="translated">Deneme</target>
       </trans-unit>
@@ -20688,7 +20688,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>There was an error uploading.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentAssetService.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">116</context>
         </context-group>
         <target state="needs-translation">There was an error uploading.</target>
       </trans-unit>
@@ -20696,7 +20696,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>There was an error uploading. You might have reached your file upload limit or the file you tried to upload was too large. Please ask your teacher for help.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentAssetService.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">127</context>
         </context-group>
         <target state="needs-translation">There was an error uploading. You might have reached your file upload limit or the file you tried to upload was too large. Please ask your teacher for help.</target>
       </trans-unit>
@@ -20900,7 +20900,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">206</context>
+          <context context-type="linenumber">180</context>
         </context-group>
         <target state="needs-translation">Saved <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -20908,7 +20908,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">211</context>
+          <context context-type="linenumber">185</context>
         </context-group>
         <target state="needs-translation">Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -20916,7 +20916,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Submitted <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">216</context>
+          <context context-type="linenumber">190</context>
         </context-group>
         <target state="needs-translation">Submitted <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
