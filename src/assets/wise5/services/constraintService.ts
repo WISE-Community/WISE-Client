@@ -3,6 +3,7 @@ import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstrai
 import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategies/BranchPathTakenConstraintStrategy';
 import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/IsCompletedConstraintStrategy';
 import { IsCorrectConstraintStrategy } from '../common/constraint/strategies/IsCorrectConstraintStrategy';
+import { IsVisibleConstraintStrategy } from '../common/constraint/strategies/IsVisibleConstraintStrategy';
 import { UsedXSubmitsConstraintStrategy } from '../common/constraint/strategies/UsedXSubmitsConstraintStrategy';
 import { WroteXNumberOfWordsConstraintStrategy } from '../common/constraint/strategies/WroteXNumberOfWordsConstraintStrategy';
 import { AnnotationService } from './annotationService';
@@ -18,14 +19,12 @@ export class ConstraintService {
     branchPathTaken: new BranchPathTakenConstraintStrategy(),
     isCompleted: new IsCompletedConstraintStrategy(),
     isCorrect: new IsCorrectConstraintStrategy(),
+    isVisible: new IsVisibleConstraintStrategy(),
     usedXSubmits: new UsedXSubmitsConstraintStrategy(),
     wroteXNumberOfWords: new WroteXNumberOfWordsConstraintStrategy()
   };
 
   criteriaFunctionNameToFunction = {
-    isVisible: (criteria) => {
-      return this.evaluateIsVisibleCriteria(criteria);
-    },
     isVisitable: (criteria) => {
       return this.evaluateIsVisitableCriteria(criteria);
     },
@@ -145,6 +144,7 @@ export class ConstraintService {
         'branchPathTaken',
         'isCompleted',
         'isCorrect',
+        'isVisible',
         'usedXSubmits',
         'wroteXNumberOfWords'
       ].includes(criteria.name)
@@ -166,11 +166,6 @@ export class ConstraintService {
       }
     }
     return true;
-  }
-
-  evaluateIsVisibleCriteria(criteria: any): boolean {
-    const nodeStatus = this.dataService.getNodeStatusByNodeId(criteria.params.nodeId);
-    return nodeStatus.isVisible;
   }
 
   evaluateIsVisitableCriteria(criteria: any): boolean {
