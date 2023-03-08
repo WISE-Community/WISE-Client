@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstraintContext';
 import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategies/BranchPathTakenConstraintStrategy';
 import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/IsCompletedConstraintStrategy';
+import { IsCorrectConstraintStrategy } from '../common/constraint/strategies/IsCorrectConstraintStrategy';
 import { WroteXNumberOfWordsConstraintStrategy } from '../common/constraint/strategies/WroteXNumberOfWordsConstraintStrategy';
 import { AnnotationService } from './annotationService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
@@ -15,6 +16,7 @@ export class ConstraintService {
   criteriaFunctionNameToStrategy = {
     branchPathTaken: new BranchPathTakenConstraintStrategy(),
     isCompleted: new IsCompletedConstraintStrategy(),
+    isCorrect: new IsCorrectConstraintStrategy(),
     wroteXNumberOfWords: new WroteXNumberOfWordsConstraintStrategy()
   };
 
@@ -36,9 +38,6 @@ export class ConstraintService {
     },
     isVisitedAndRevisedAfter: (criteria) => {
       return this.evaluateIsVisitedAndRevisedAfterCriteria(criteria);
-    },
-    isCorrect: (criteria) => {
-      return this.evaluateIsCorrectCriteria(criteria);
     },
     choiceChosen: (criteria) => {
       return this.evaluateChoiceChosenCriteria(criteria);
@@ -142,7 +141,9 @@ export class ConstraintService {
   }
 
   private evaluateCriteria(criteria: any): boolean {
-    if (['isCompleted', 'branchPathTaken', 'wroteXNumberOfWords'].includes(criteria.name)) {
+    if (
+      ['branchPathTaken', 'isCompleted', 'isCorrect', 'wroteXNumberOfWords'].includes(criteria.name)
+    ) {
       this.evaluateConstraintContext.setStrategy(
         this.criteriaFunctionNameToStrategy[criteria.name]
       );
@@ -243,19 +244,6 @@ export class ConstraintService {
         event.clientSaveTime
       )
     );
-  }
-
-  evaluateIsCorrectCriteria(criteria) {
-    const componentStates = this.dataService.getComponentStatesByNodeIdAndComponentId(
-      criteria.params.nodeId,
-      criteria.params.componentId
-    );
-    for (const componentState of componentStates) {
-      if (componentState.studentData.isCorrect) {
-        return true;
-      }
-    }
-    return false;
   }
 
   evaluateChoiceChosenCriteria(criteria: any): boolean {

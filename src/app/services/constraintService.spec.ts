@@ -114,8 +114,6 @@ describe('ConstraintService', () => {
 
   evaluateNodeConstraintWithOneRemovalCriteria();
   evaluateNodeConstraintWithTwoRemovalCriteria();
-  evaluateIsCorrectCriteriaFalseWhenNoComponentStates();
-  evaluateIsCorrectCriteria();
   evaluateIsVisitedCriteria();
   evaluateIsVisitedAfterCriteria();
   evaluateIsRevisedAfterCriteria();
@@ -156,39 +154,6 @@ function evaluateNodeConstraintWithTwoRemovalCriteria() {
     isCompletedSpy();
     nodeConstraintTwoRemovalCriteria.removalConditional = 'any';
     expect(service.evaluateNodeConstraint(nodeConstraintTwoRemovalCriteria)).toEqual(true);
-  });
-}
-
-function evaluateIsCorrectCriteriaFalseWhenNoComponentStates() {
-  it('should evaluate is correct criteria false when no component states', () => {
-    const componentStates = [];
-    spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue(componentStates);
-    const criteria = {
-      params: {
-        nodeId: 'node1',
-        componentId: 'component1'
-      }
-    };
-    expect(service.evaluateIsCorrectCriteria(criteria)).toEqual(false);
-  });
-}
-
-function evaluateIsCorrectCriteria() {
-  const criteria = {
-    params: {
-      nodeId: 'node1',
-      componentId: 'component1'
-    }
-  };
-  it('should evaluate is correct criteria false', () => {
-    const componentStates = [{ studentData: { isCorrect: false } }];
-    spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue(componentStates);
-    expect(service.evaluateIsCorrectCriteria(criteria)).toEqual(false);
-  });
-  it('should evaluate is correct criteria true', () => {
-    const componentStates = [{ studentData: { isCorrect: true } }];
-    spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue(componentStates);
-    expect(service.evaluateIsCorrectCriteria(criteria)).toEqual(true);
   });
 }
 
