@@ -22,7 +22,6 @@ let isVisitedAfterCriteria: any;
 let isRevisedAfterCriteria: any;
 let scoreCriteria: any;
 let usedXSubmitsCriteria: any;
-let numberOfWordsWrittenCriteria: any;
 let addXNumberOfNotesOnThisStepCriteria: any;
 let addXNumberOfNotesOnThisStepNotebook: any;
 
@@ -91,13 +90,6 @@ describe('ConstraintService', () => {
         requiredSubmitCount: 2
       }
     };
-    numberOfWordsWrittenCriteria = {
-      params: {
-        nodeId: 'node1',
-        componentId: 'component1',
-        requiredNumberOfWords: 10
-      }
-    };
     addXNumberOfNotesOnThisStepCriteria = {
       params: {
         nodeId: 'node1',
@@ -130,7 +122,6 @@ describe('ConstraintService', () => {
   evaluateIsVisitedAndRevisedAfterCriteria();
   evaluateScoreCriteria();
   evaluateUsedXSubmitsCriteria();
-  evaluateNumberOfWordsWrittenCriteria();
   evaluateAddXNumberOfNotesOnThisStepCriteria();
   evaluateCriterias();
 });
@@ -339,28 +330,6 @@ function evaluateUsedXSubmitsCriteria() {
     const componentStates = [{ studentData: { submitCounter: 2 } }];
     spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue(componentStates);
     expect(service.evaluateUsedXSubmitsCriteria(usedXSubmitsCriteria)).toEqual(true);
-  });
-}
-
-function evaluateNumberOfWordsWrittenCriteria() {
-  function numberOfWordsWrittenSpies(componentState: any): void {
-    spyOn(dataService, 'getLatestComponentStateByNodeIdAndComponentId').and.returnValue(
-      componentState
-    );
-  }
-  it('should evaluate number of words written criteria false', () => {
-    const componentState = { studentData: { response: 'one two three four five' } };
-    numberOfWordsWrittenSpies(componentState);
-    expect(service.evaluateNumberOfWordsWrittenCriteria(numberOfWordsWrittenCriteria)).toEqual(
-      false
-    );
-  });
-  it('should evaluate number of words written criteria true', () => {
-    const componentState = { studentData: { response: '1 2 3 4 5 6 7 8 9 0' } };
-    numberOfWordsWrittenSpies(componentState);
-    expect(service.evaluateNumberOfWordsWrittenCriteria(numberOfWordsWrittenCriteria)).toEqual(
-      true
-    );
   });
 }
 

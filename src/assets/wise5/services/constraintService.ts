@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstraintContext';
 import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategies/BranchPathTakenConstraintStrategy';
 import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/IsCompletedConstraintStrategy';
+import { WroteXNumberOfWordsConstraintStrategy } from '../common/constraint/strategies/WroteXNumberOfWordsConstraintStrategy';
 import { AnnotationService } from './annotationService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { ConfigService } from './configService';
@@ -12,8 +13,9 @@ import { TagService } from './tagService';
 @Injectable()
 export class ConstraintService {
   criteriaFunctionNameToStrategy = {
+    branchPathTaken: new BranchPathTakenConstraintStrategy(),
     isCompleted: new IsCompletedConstraintStrategy(),
-    branchPathTaken: new BranchPathTakenConstraintStrategy()
+    wroteXNumberOfWords: new WroteXNumberOfWordsConstraintStrategy()
   };
 
   criteriaFunctionNameToFunction = {
@@ -49,9 +51,6 @@ export class ConstraintService {
     },
     usedXSubmits: (criteria) => {
       return this.evaluateUsedXSubmitsCriteria(criteria);
-    },
-    wroteXNumberOfWords: (criteria) => {
-      return this.evaluateNumberOfWordsWrittenCriteria(criteria);
     },
     addXNumberOfNotesOnThisStep: (criteria) => {
       return this.evaluateAddXNumberOfNotesOnThisStepCriteria(criteria);
@@ -143,7 +142,7 @@ export class ConstraintService {
   }
 
   private evaluateCriteria(criteria: any): boolean {
-    if (['isCompleted', 'branchPathTaken'].includes(criteria.name)) {
+    if (['isCompleted', 'branchPathTaken', 'wroteXNumberOfWords'].includes(criteria.name)) {
       this.evaluateConstraintContext.setStrategy(
         this.criteriaFunctionNameToStrategy[criteria.name]
       );
@@ -322,30 +321,6 @@ export class ConstraintService {
       }
     }
     return Math.max(manualSubmitCounter, highestSubmitCounter);
-  }
-
-  evaluateNumberOfWordsWrittenCriteria(criteria: any): boolean {
-    const params = criteria.params;
-    const nodeId = params.nodeId;
-    const componentId = params.componentId;
-    const requiredNumberOfWords = params.requiredNumberOfWords;
-    const componentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
-      nodeId,
-      componentId
-    );
-    if (componentState != null) {
-      const studentData = componentState.studentData;
-      const response = studentData.response;
-      const numberOfWords = this.wordCount(response);
-      if (numberOfWords >= requiredNumberOfWords) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  private wordCount(str: string): number {
-    return str.trim().split(/\s+/).length;
   }
 
   evaluateAddXNumberOfNotesOnThisStepCriteria(criteria: any): boolean {
