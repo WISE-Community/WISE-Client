@@ -16,8 +16,6 @@ let service: ConstraintService;
 let criteria1: any;
 let criteria2: any;
 let nodeConstraintTwoRemovalCriteria: any;
-let isVisitedEvents: any;
-let isVisitedCriteria: any;
 let isVisitedAfterCriteria: any;
 let isRevisedAfterCriteria: any;
 let scoreCriteria: any;
@@ -52,16 +50,6 @@ describe('ConstraintService', () => {
       targetId: 'node3',
       removalCriteria: [criteria1, criteria2],
       removalConditional: 'all'
-    };
-    isVisitedEvents = [
-      { nodeId: 'node1', event: 'nodeEntered' },
-      { nodeId: 'node2', event: 'nodeEntered' },
-      { nodeId: 'node3', event: 'nodeEntered' }
-    ];
-    isVisitedCriteria = {
-      params: {
-        nodeId: 'node4'
-      }
     };
     isVisitedAfterCriteria = {
       params: {
@@ -106,7 +94,6 @@ describe('ConstraintService', () => {
 
   evaluateNodeConstraintWithOneRemovalCriteria();
   evaluateNodeConstraintWithTwoRemovalCriteria();
-  evaluateIsVisitedCriteria();
   evaluateIsVisitedAfterCriteria();
   evaluateIsRevisedAfterCriteria();
   evaluateIsVisitedAndRevisedAfterCriteria();
@@ -145,24 +132,6 @@ function evaluateNodeConstraintWithTwoRemovalCriteria() {
     isCompletedSpy();
     nodeConstraintTwoRemovalCriteria.removalConditional = 'any';
     expect(service.evaluateNodeConstraint(nodeConstraintTwoRemovalCriteria)).toEqual(true);
-  });
-}
-
-function evaluateIsVisitedCriteria() {
-  it('should evaluate is visited criteria false', () => {
-    spyOn(dataService, 'getEvents').and.returnValue(isVisitedEvents);
-    expect(service.evaluateIsVisitedCriteria(isVisitedCriteria)).toEqual(false);
-  });
-  it('should evaluate is visited criteria true', () => {
-    spyOn(dataService, 'getEvents').and.returnValue(isVisitedEvents);
-    isVisitedCriteria.params.nodeId = 'node2';
-    expect(service.evaluateIsVisitedCriteria(isVisitedCriteria)).toEqual(true);
-  });
-  it('should evaluate is visited criteria with no events', () => {
-    const events = [];
-    spyOn(dataService, 'getEvents').and.returnValue(events);
-    isVisitedCriteria.params.nodeId = 'node1';
-    expect(service.evaluateIsVisitedCriteria(isVisitedCriteria)).toEqual(false);
   });
 }
 

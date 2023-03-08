@@ -5,6 +5,7 @@ import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/I
 import { IsCorrectConstraintStrategy } from '../common/constraint/strategies/IsCorrectConstraintStrategy';
 import { IsVisibleConstraintStrategy } from '../common/constraint/strategies/IsVisibleConstraintStrategy';
 import { IsVisitableConstraintStrategy } from '../common/constraint/strategies/IsVisitableContraintStrategy';
+import { IsVisitedConstraintStrategy } from '../common/constraint/strategies/IsVisitedConstraintStrategy';
 import { UsedXSubmitsConstraintStrategy } from '../common/constraint/strategies/UsedXSubmitsConstraintStrategy';
 import { WroteXNumberOfWordsConstraintStrategy } from '../common/constraint/strategies/WroteXNumberOfWordsConstraintStrategy';
 import { AnnotationService } from './annotationService';
@@ -22,14 +23,12 @@ export class ConstraintService {
     isCorrect: new IsCorrectConstraintStrategy(),
     isVisible: new IsVisibleConstraintStrategy(),
     isVisitable: new IsVisitableConstraintStrategy(),
+    isVisited: new IsVisitedConstraintStrategy(),
     usedXSubmits: new UsedXSubmitsConstraintStrategy(),
     wroteXNumberOfWords: new WroteXNumberOfWordsConstraintStrategy()
   };
 
   criteriaFunctionNameToFunction = {
-    isVisited: (criteria) => {
-      return this.evaluateIsVisitedCriteria(criteria);
-    },
     isVisitedAfter: (criteria) => {
       return this.evaluateIsVisitedAfterCriteria(criteria);
     },
@@ -145,6 +144,7 @@ export class ConstraintService {
         'isCorrect',
         'isVisible',
         'isVisitable',
+        'isVisited',
         'usedXSubmits',
         'wroteXNumberOfWords'
       ].includes(criteria.name)
@@ -166,16 +166,6 @@ export class ConstraintService {
       }
     }
     return true;
-  }
-
-  evaluateIsVisitedCriteria(criteria: any): boolean {
-    const events = this.dataService.getEvents();
-    for (const event of events) {
-      if (event.nodeId === criteria.params.nodeId && event.event === 'nodeEntered') {
-        return true;
-      }
-    }
-    return false;
   }
 
   evaluateIsVisitedAfterCriteria(criteria: any): boolean {
