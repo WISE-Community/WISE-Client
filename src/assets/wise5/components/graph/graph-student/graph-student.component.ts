@@ -19,7 +19,6 @@ import { GraphContent } from '../GraphContent';
 import { RandomKeyService } from '../../../services/randomKeyService';
 import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
-import { CSVToArray } from '../../../common/array/array';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -2020,7 +2019,7 @@ export class GraphStudent extends ComponentStudent {
     if (
       this.previousTrialIdsToShow != null &&
       this.trialIdsToShow != null &&
-      !this.UtilService.arraysContainSameValues(this.previousTrialIdsToShow, this.trialIdsToShow)
+      !this.arraysContainSameValues(this.previousTrialIdsToShow, this.trialIdsToShow)
     ) {
       this.trialIdsToShow = this.trialIdsToShow;
       this.studentDataChanged();
@@ -2031,6 +2030,26 @@ export class GraphStudent extends ComponentStudent {
      * is called.
      */
     this.previousTrialIdsToShow = copy(this.trialIdsToShow);
+  }
+
+  /**
+   * Check if two arrays contain the same values. This is used to check if two arrays of ids contain
+   * the same values. The order of the elements is not compared, only the actual values. This means
+   * the elements can be in different orders but still contain the same values.
+   * Example:
+   * array1=['1234567890', 'abcdefghij']
+   * array2=['abcdefghij', '1234567890']
+   * If these two arrays are passed in as the two arguments, this function will return true.
+   * @param array1 an array of strings
+   * @param array2 an array of strings
+   * @return whether the arrays contain the same values
+   */
+  private arraysContainSameValues(array1: string[], array2: string[]): boolean {
+    const array1Copy = copy(array1);
+    array1Copy.sort();
+    const array2Copy = copy(array2);
+    array2Copy.sort();
+    return JSON.stringify(array1Copy) === JSON.stringify(array2Copy);
   }
 
   showOrHideTrials(trialIdsToShow) {
