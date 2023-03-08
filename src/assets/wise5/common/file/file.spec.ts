@@ -2,32 +2,26 @@ import { isAudio, isImage, isVideo } from './file';
 
 describe('isImage()', () => {
   it('should return true if string ends in an image extension type', () => {
-    const filename = 'image.jpg';
-    expect(isImage(filename)).toBeTruthy();
+    expect(isImage('image.jpg')).toBeTruthy();
   });
   it('should return false if string does not end in an image extension type', () => {
-    const filename = 'image.jpg.bak';
-    expect(isImage(filename)).toBeFalsy();
+    expect(isImage('image.jpg.bak')).toBeFalsy();
   });
 });
 
 describe('isVideo()', () => {
   it('should return true if string ends in a video extension type', () => {
-    const filename = 'video.mp4';
-    expect(isVideo(filename)).toBeTruthy();
+    expect(isVideo('video.mp4')).toBeTruthy();
   });
   it('should return false if string does not end in a video extension type', () => {
-    const filename = 'video.mp4.bak';
-    expect(isVideo(filename)).toBeFalsy();
+    expect(isVideo('video.mp4.bak')).toBeFalsy();
   });
 });
 describe('isAudio()', () => {
   it('should return true if string ends in an audio extension type', () => {
-    const filename = 'audio.mp3';
-    expect(isAudio(filename)).toBeTruthy();
+    expect(isAudio('audio.mp3')).toBeTruthy();
   });
   it('should return false if string does not end in an audio extension type', () => {
-    const filename = 'audio.mp3.bak';
-    expect(isAudio(filename)).toBeFalsy();
+    expect(isAudio('audio.mp3.bak')).toBeFalsy();
   });
 });
