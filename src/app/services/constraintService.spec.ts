@@ -21,7 +21,6 @@ let isVisitedCriteria: any;
 let isVisitedAfterCriteria: any;
 let isRevisedAfterCriteria: any;
 let scoreCriteria: any;
-let usedXSubmitsCriteria: any;
 let addXNumberOfNotesOnThisStepCriteria: any;
 let addXNumberOfNotesOnThisStepNotebook: any;
 
@@ -83,13 +82,6 @@ describe('ConstraintService', () => {
         scores: [1, 2, 3]
       }
     };
-    usedXSubmitsCriteria = {
-      params: {
-        nodeId: 'node1',
-        componentId: 'component1',
-        requiredSubmitCount: 2
-      }
-    };
     addXNumberOfNotesOnThisStepCriteria = {
       params: {
         nodeId: 'node1',
@@ -119,7 +111,6 @@ describe('ConstraintService', () => {
   evaluateIsRevisedAfterCriteria();
   evaluateIsVisitedAndRevisedAfterCriteria();
   evaluateScoreCriteria();
-  evaluateUsedXSubmitsCriteria();
   evaluateAddXNumberOfNotesOnThisStepCriteria();
   evaluateCriterias();
 });
@@ -282,19 +273,6 @@ function evaluateScoreCriteria() {
   it('should evaluate score criteria true', () => {
     scoreCriteriaSpies(3);
     expect(service.evaluateScoreCriteria(scoreCriteria)).toEqual(true);
-  });
-}
-
-function evaluateUsedXSubmitsCriteria() {
-  it('should evaluate used x submits criteria false', () => {
-    const componentStates = [{ studentData: { submitCounter: 1 } }];
-    spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue(componentStates);
-    expect(service.evaluateUsedXSubmitsCriteria(usedXSubmitsCriteria)).toEqual(false);
-  });
-  it('should evaluate used x submits criteria true', () => {
-    const componentStates = [{ studentData: { submitCounter: 2 } }];
-    spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue(componentStates);
-    expect(service.evaluateUsedXSubmitsCriteria(usedXSubmitsCriteria)).toEqual(true);
   });
 }
 

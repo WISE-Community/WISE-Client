@@ -3,6 +3,7 @@ import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstrai
 import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategies/BranchPathTakenConstraintStrategy';
 import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/IsCompletedConstraintStrategy';
 import { IsCorrectConstraintStrategy } from '../common/constraint/strategies/IsCorrectConstraintStrategy';
+import { UsedXSubmitsConstraintStrategy } from '../common/constraint/strategies/UsedXSubmitsConstraintStrategy';
 import { WroteXNumberOfWordsConstraintStrategy } from '../common/constraint/strategies/WroteXNumberOfWordsConstraintStrategy';
 import { AnnotationService } from './annotationService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
@@ -17,6 +18,7 @@ export class ConstraintService {
     branchPathTaken: new BranchPathTakenConstraintStrategy(),
     isCompleted: new IsCompletedConstraintStrategy(),
     isCorrect: new IsCorrectConstraintStrategy(),
+    usedXSubmits: new UsedXSubmitsConstraintStrategy(),
     wroteXNumberOfWords: new WroteXNumberOfWordsConstraintStrategy()
   };
 
@@ -47,9 +49,6 @@ export class ConstraintService {
     },
     teacherRemoval: (criteria) => {
       return this.evaluateTeacherRemovalCriteria(criteria);
-    },
-    usedXSubmits: (criteria) => {
-      return this.evaluateUsedXSubmitsCriteria(criteria);
     },
     addXNumberOfNotesOnThisStep: (criteria) => {
       return this.evaluateAddXNumberOfNotesOnThisStepCriteria(criteria);
@@ -142,7 +141,13 @@ export class ConstraintService {
 
   private evaluateCriteria(criteria: any): boolean {
     if (
-      ['branchPathTaken', 'isCompleted', 'isCorrect', 'wroteXNumberOfWords'].includes(criteria.name)
+      [
+        'branchPathTaken',
+        'isCompleted',
+        'isCorrect',
+        'usedXSubmits',
+        'wroteXNumberOfWords'
+      ].includes(criteria.name)
     ) {
       this.evaluateConstraintContext.setStrategy(
         this.criteriaFunctionNameToStrategy[criteria.name]
@@ -276,39 +281,6 @@ export class ConstraintService {
 
   evaluateTeacherRemovalCriteria(criteria: any): boolean {
     return criteria.params.periodId !== this.configService.getPeriodId();
-  }
-
-  evaluateUsedXSubmitsCriteria(criteria: any): boolean {
-    const params = criteria.params;
-    return this.getSubmitCount(params.nodeId, params.componentId) >= params.requiredSubmitCount;
-  }
-
-  getSubmitCount(nodeId: string, componentId: string): number {
-    // counter for manually counting the component states with isSubmit=true
-    let manualSubmitCounter = 0;
-
-    // counter for remembering the highest submitCounter value found in studentData objects
-    let highestSubmitCounter = 0;
-
-    /*
-     * We are counting with two submit counters for backwards compatibility.
-     * Some componentStates only have isSubmit=true and do not keep an
-     * updated submitCounter for the number of submits.
-     */
-    const componentStates = this.dataService.getComponentStatesByNodeIdAndComponentId(
-      nodeId,
-      componentId
-    );
-    for (const componentState of componentStates) {
-      if (componentState.isSubmit) {
-        manualSubmitCounter++;
-      }
-      const studentData = componentState.studentData;
-      if (studentData.submitCounter > highestSubmitCounter) {
-        highestSubmitCounter = studentData.submitCounter;
-      }
-    }
-    return Math.max(manualSubmitCounter, highestSubmitCounter);
   }
 
   evaluateAddXNumberOfNotesOnThisStepCriteria(criteria: any): boolean {
