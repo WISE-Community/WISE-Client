@@ -9,13 +9,6 @@ import '../lib/jquery/jquery-global';
 export class UtilService {
   constructor(@Inject(LOCALE_ID) private localeID: string) {}
 
-  replaceDivReference(html: string, newString: string): string {
-    return html.replace(
-      /document\.getElementById\('replace-with-unique-id'\)/g,
-      `document.getElementById('${newString}')`
-    );
-  }
-
   /**
    * Remove html tags and newlines from the string.
    * @param html an html string
@@ -116,19 +109,6 @@ export class UtilService {
     const array2Copy = copy(array2);
     array2Copy.sort();
     return JSON.stringify(array1Copy) == JSON.stringify(array2Copy);
-  }
-
-  /**
-   * Get the number of words in the string.
-   * @param str The string.
-   * @return The number of words in the string.
-   */
-  wordCount(str) {
-    return str.trim().split(/\s+/).length;
-  }
-
-  trimToLength(str: string, maxLength: number): string {
-    return str.length > maxLength ? `${str.substring(0, maxLength - 3)}...` : str;
   }
 
   /**

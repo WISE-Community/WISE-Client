@@ -1,6 +1,8 @@
 import { Component, OnInit, SecurityContext } from '@angular/core';
 import { bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn } from '../animations';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ConfigService } from '../services/config.service';
+import { Config } from '../domain/config';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +11,9 @@ import { DomSanitizer } from '@angular/platform-browser';
   animations: [bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn]
 })
 export class HomeComponent implements OnInit {
+  discourseNewsCategory: string;
+  discourseUrl: string;
+  isDiscourseNewsAvailable: boolean = false;
   loaded: boolean = false;
   hero = {
     imgSrc: 'assets/img/wise-students-hero.jpg',
@@ -87,7 +92,20 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private configService: ConfigService, private sanitizer: DomSanitizer) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.configService.getConfig().subscribe((config: Config) => {
+      if (config != null) {
+        this.discourseUrl = this.configService.getDiscourseURL();
+        this.discourseNewsCategory = this.configService.getDiscourseNewsCategory();
+        this.isDiscourseNewsAvailable =
+          this.isSet(this.discourseUrl) && this.isSet(this.discourseNewsCategory);
+      }
+    });
+  }
+
+  private isSet(str: string): boolean {
+    return str != null && str !== '';
+  }
 }

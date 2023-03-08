@@ -29,8 +29,6 @@ export class MockTeacherService {
     });
   }
 
-  broadcastRunChanges() {}
-
   setTabIndex() {}
 
   checkClassroomAuthorization(): Observable<string> {

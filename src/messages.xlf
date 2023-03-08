@@ -4597,49 +4597,49 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>WISE students in classroom</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4788492906571844304" datatype="html">
         <source>WISE students building</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="399164538965188389" datatype="html">
         <source>Free, standards-aligned, and research-based inquiry curricula that address <x id="START_LINK" ctype="x-a" equiv-text="this.ngssLink.startTag"/>NGSS 3D proficiency<x id="CLOSE_LINK" ctype="x-a" equiv-text="this.ngssLink.closeTag"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2488461351187724080" datatype="html">
         <source>WISE unit on laptop</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6104474954962536234" datatype="html">
         <source>Interactive scientific models plus hands-on activities, personalized guidance, and rich embedded assessments</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5655885224951904964" datatype="html">
         <source>WISE students and teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2643991125797499080" datatype="html">
         <source>Robust teacher grading and management tools supporting individualized and customized learning</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1934952699406892664" datatype="html">
@@ -8383,7 +8383,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>All Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.ts</context>
-          <context context-type="linenumber">153</context>
+          <context context-type="linenumber">117</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
@@ -11390,14 +11390,14 @@ Are you sure you want to proceed?</source>
         <source> Team has not saved any work </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component.html</context>
-          <context context-type="linenumber">110,112</context>
+          <context context-type="linenumber">116,118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1a68048cfcd964c630f4316c43db20f0b8e3a80d" datatype="html">
         <source>See revisions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component.html</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9b7565e0b46708f16f29b8b055bc32b758f30834" datatype="html">
@@ -17307,15 +17307,15 @@ If this problem continues, let your teacher know and move on to the next activit
       <trans-unit id="bed97e00c4410c5f35cecf15517f4ad34caa00bc" datatype="html">
         <source> You have not been paired with a classmate yet. Please check back later. </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-student/show-group-work-student.component.html</context>
-          <context context-type="linenumber">3,5</context>
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-display/show-group-work-display.component.html</context>
+          <context context-type="linenumber">2,4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="695002b0833dd1205d98680144ae619f6d06a79b" datatype="html">
         <source> (Waiting for response...) </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-student/show-group-work-student.component.html</context>
-          <context context-type="linenumber">22,24</context>
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-display/show-group-work-display.component.html</context>
+          <context context-type="linenumber">21,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6296654944974704263" datatype="html">
@@ -18695,21 +18695,21 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">200</context>
+          <context context-type="linenumber">180</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5275881069346355759" datatype="html">
         <source>Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">205</context>
+          <context context-type="linenumber">185</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2692433425768915750" datatype="html">
         <source>Submitted <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">210</context>
+          <context context-type="linenumber">190</context>
         </context-group>
       </trans-unit>
       <trans-unit id="846fecebb7756c6127955bc2c08d2111dce64c3c" datatype="html">
