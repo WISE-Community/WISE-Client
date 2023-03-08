@@ -1,6 +1,5 @@
 'use strict';
 
-import { UtilService } from '../../services/utilService';
 import { ConfigService } from '../../services/configService';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import * as $ from 'jquery';
@@ -39,8 +38,7 @@ export class ProjectAssetAuthoringController {
     '$stateParams',
     '$timeout',
     'ConfigService',
-    'ProjectAssetService',
-    'UtilService'
+    'ProjectAssetService'
   ];
 
   constructor(
@@ -49,8 +47,7 @@ export class ProjectAssetAuthoringController {
     private $stateParams: any,
     private $timeout: any,
     private ConfigService: ConfigService,
-    private ProjectAssetService: ProjectAssetService,
-    private UtilService: UtilService
+    private ProjectAssetService: ProjectAssetService
   ) {
     this.$translate = $filter('translate');
   }

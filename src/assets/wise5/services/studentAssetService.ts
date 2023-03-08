@@ -69,11 +69,6 @@ export class StudentAssetService {
       });
   }
 
-  hasSuffix(assetURL, suffixes) {
-    const assetExtension = assetURL.substring(assetURL.lastIndexOf('.') + 1);
-    return suffixes.includes(assetExtension.toLowerCase());
-  }
-
   isImage(asset) {
     return isImage(this.getFileNameFromAsset(asset));
   }
