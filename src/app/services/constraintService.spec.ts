@@ -21,8 +21,6 @@ let isVisitedCriteria: any;
 let isVisitedAfterCriteria: any;
 let isRevisedAfterCriteria: any;
 let scoreCriteria: any;
-let usedXSubmitsCriteria: any;
-let numberOfWordsWrittenCriteria: any;
 let addXNumberOfNotesOnThisStepCriteria: any;
 let addXNumberOfNotesOnThisStepNotebook: any;
 
@@ -84,20 +82,6 @@ describe('ConstraintService', () => {
         scores: [1, 2, 3]
       }
     };
-    usedXSubmitsCriteria = {
-      params: {
-        nodeId: 'node1',
-        componentId: 'component1',
-        requiredSubmitCount: 2
-      }
-    };
-    numberOfWordsWrittenCriteria = {
-      params: {
-        nodeId: 'node1',
-        componentId: 'component1',
-        requiredNumberOfWords: 10
-      }
-    };
     addXNumberOfNotesOnThisStepCriteria = {
       params: {
         nodeId: 'node1',
@@ -122,16 +106,11 @@ describe('ConstraintService', () => {
 
   evaluateNodeConstraintWithOneRemovalCriteria();
   evaluateNodeConstraintWithTwoRemovalCriteria();
-  evaluateIsCorrectCriteriaFalseWhenNoComponentStates();
-  evaluateIsCorrectCriteria();
-  evaluateBranchPathTaken();
   evaluateIsVisitedCriteria();
   evaluateIsVisitedAfterCriteria();
   evaluateIsRevisedAfterCriteria();
   evaluateIsVisitedAndRevisedAfterCriteria();
   evaluateScoreCriteria();
-  evaluateUsedXSubmitsCriteria();
-  evaluateNumberOfWordsWrittenCriteria();
   evaluateAddXNumberOfNotesOnThisStepCriteria();
   evaluateCriterias();
 });
@@ -166,63 +145,6 @@ function evaluateNodeConstraintWithTwoRemovalCriteria() {
     isCompletedSpy();
     nodeConstraintTwoRemovalCriteria.removalConditional = 'any';
     expect(service.evaluateNodeConstraint(nodeConstraintTwoRemovalCriteria)).toEqual(true);
-  });
-}
-
-function evaluateIsCorrectCriteriaFalseWhenNoComponentStates() {
-  it('should evaluate is correct criteria false when no component states', () => {
-    const componentStates = [];
-    spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue(componentStates);
-    const criteria = {
-      params: {
-        nodeId: 'node1',
-        componentId: 'component1'
-      }
-    };
-    expect(service.evaluateIsCorrectCriteria(criteria)).toEqual(false);
-  });
-}
-
-function evaluateIsCorrectCriteria() {
-  const criteria = {
-    params: {
-      nodeId: 'node1',
-      componentId: 'component1'
-    }
-  };
-  it('should evaluate is correct criteria false', () => {
-    const componentStates = [{ studentData: { isCorrect: false } }];
-    spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue(componentStates);
-    expect(service.evaluateIsCorrectCriteria(criteria)).toEqual(false);
-  });
-  it('should evaluate is correct criteria true', () => {
-    const componentStates = [{ studentData: { isCorrect: true } }];
-    spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue(componentStates);
-    expect(service.evaluateIsCorrectCriteria(criteria)).toEqual(true);
-  });
-}
-
-function evaluateBranchPathTaken() {
-  const criteria = {
-    params: {
-      fromNodeId: 'node1',
-      toNodeId: 'node2'
-    }
-  };
-  it('should evaluate branch path taken false', () => {
-    const branchPathTakenEvents = [{ data: { fromNodeId: 'node1', toNodeId: 'node3' } }];
-    spyOn(dataService, 'getBranchPathTakenEventsByNodeId').and.returnValue(branchPathTakenEvents);
-    expect(service.evaluateBranchPathTakenCriteria(criteria)).toEqual(false);
-  });
-  it('should evaluate branch path taken true', () => {
-    const branchPathTakenEvents = [{ data: { fromNodeId: 'node1', toNodeId: 'node2' } }];
-    spyOn(dataService, 'getBranchPathTakenEventsByNodeId').and.returnValue(branchPathTakenEvents);
-    expect(service.evaluateBranchPathTakenCriteria(criteria)).toEqual(true);
-  });
-  it('should evaluate branch path taken', () => {
-    const branchPathTakenEvents = [];
-    spyOn(dataService, 'getBranchPathTakenEventsByNodeId').and.returnValue(branchPathTakenEvents);
-    expect(service.evaluateBranchPathTakenCriteria(criteria)).toEqual(false);
   });
 }
 
@@ -351,41 +273,6 @@ function evaluateScoreCriteria() {
   it('should evaluate score criteria true', () => {
     scoreCriteriaSpies(3);
     expect(service.evaluateScoreCriteria(scoreCriteria)).toEqual(true);
-  });
-}
-
-function evaluateUsedXSubmitsCriteria() {
-  it('should evaluate used x submits criteria false', () => {
-    const componentStates = [{ studentData: { submitCounter: 1 } }];
-    spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue(componentStates);
-    expect(service.evaluateUsedXSubmitsCriteria(usedXSubmitsCriteria)).toEqual(false);
-  });
-  it('should evaluate used x submits criteria true', () => {
-    const componentStates = [{ studentData: { submitCounter: 2 } }];
-    spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue(componentStates);
-    expect(service.evaluateUsedXSubmitsCriteria(usedXSubmitsCriteria)).toEqual(true);
-  });
-}
-
-function evaluateNumberOfWordsWrittenCriteria() {
-  function numberOfWordsWrittenSpies(componentState: any): void {
-    spyOn(dataService, 'getLatestComponentStateByNodeIdAndComponentId').and.returnValue(
-      componentState
-    );
-  }
-  it('should evaluate number of words written criteria false', () => {
-    const componentState = { studentData: { response: 'one two three four five' } };
-    numberOfWordsWrittenSpies(componentState);
-    expect(service.evaluateNumberOfWordsWrittenCriteria(numberOfWordsWrittenCriteria)).toEqual(
-      false
-    );
-  });
-  it('should evaluate number of words written criteria true', () => {
-    const componentState = { studentData: { response: '1 2 3 4 5 6 7 8 9 0' } };
-    numberOfWordsWrittenSpies(componentState);
-    expect(service.evaluateNumberOfWordsWrittenCriteria(numberOfWordsWrittenCriteria)).toEqual(
-      true
-    );
   });
 }
 

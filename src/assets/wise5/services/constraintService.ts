@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstraintContext';
+import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategies/BranchPathTakenConstraintStrategy';
 import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/IsCompletedConstraintStrategy';
+import { IsCorrectConstraintStrategy } from '../common/constraint/strategies/IsCorrectConstraintStrategy';
+import { UsedXSubmitsConstraintStrategy } from '../common/constraint/strategies/UsedXSubmitsConstraintStrategy';
+import { WroteXNumberOfWordsConstraintStrategy } from '../common/constraint/strategies/WroteXNumberOfWordsConstraintStrategy';
 import { AnnotationService } from './annotationService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { ConfigService } from './configService';
@@ -11,13 +15,14 @@ import { TagService } from './tagService';
 @Injectable()
 export class ConstraintService {
   criteriaFunctionNameToStrategy = {
-    isCompleted: new IsCompletedConstraintStrategy()
+    branchPathTaken: new BranchPathTakenConstraintStrategy(),
+    isCompleted: new IsCompletedConstraintStrategy(),
+    isCorrect: new IsCorrectConstraintStrategy(),
+    usedXSubmits: new UsedXSubmitsConstraintStrategy(),
+    wroteXNumberOfWords: new WroteXNumberOfWordsConstraintStrategy()
   };
 
   criteriaFunctionNameToFunction = {
-    branchPathTaken: (criteria) => {
-      return this.evaluateBranchPathTakenCriteria(criteria);
-    },
     isVisible: (criteria) => {
       return this.evaluateIsVisibleCriteria(criteria);
     },
@@ -36,9 +41,6 @@ export class ConstraintService {
     isVisitedAndRevisedAfter: (criteria) => {
       return this.evaluateIsVisitedAndRevisedAfterCriteria(criteria);
     },
-    isCorrect: (criteria) => {
-      return this.evaluateIsCorrectCriteria(criteria);
-    },
     choiceChosen: (criteria) => {
       return this.evaluateChoiceChosenCriteria(criteria);
     },
@@ -47,12 +49,6 @@ export class ConstraintService {
     },
     teacherRemoval: (criteria) => {
       return this.evaluateTeacherRemovalCriteria(criteria);
-    },
-    usedXSubmits: (criteria) => {
-      return this.evaluateUsedXSubmitsCriteria(criteria);
-    },
-    wroteXNumberOfWords: (criteria) => {
-      return this.evaluateNumberOfWordsWrittenCriteria(criteria);
     },
     addXNumberOfNotesOnThisStep: (criteria) => {
       return this.evaluateAddXNumberOfNotesOnThisStepCriteria(criteria);
@@ -144,7 +140,15 @@ export class ConstraintService {
   }
 
   private evaluateCriteria(criteria: any): boolean {
-    if (criteria.name === 'isCompleted') {
+    if (
+      [
+        'branchPathTaken',
+        'isCompleted',
+        'isCorrect',
+        'usedXSubmits',
+        'wroteXNumberOfWords'
+      ].includes(criteria.name)
+    ) {
       this.evaluateConstraintContext.setStrategy(
         this.criteriaFunctionNameToStrategy[criteria.name]
       );
@@ -162,21 +166,6 @@ export class ConstraintService {
       }
     }
     return true;
-  }
-
-  evaluateBranchPathTakenCriteria(criteria: any): boolean {
-    const expectedFromNodeId = criteria.params.fromNodeId;
-    const expectedToNodeId = criteria.params.toNodeId;
-    const branchPathTakenEvents = this.dataService.getBranchPathTakenEventsByNodeId(
-      expectedFromNodeId
-    );
-    for (const branchPathTakenEvent of branchPathTakenEvents) {
-      const data = branchPathTakenEvent.data;
-      if (criteria.params.fromNodeId === data.fromNodeId && expectedToNodeId === data.toNodeId) {
-        return true;
-      }
-    }
-    return false;
   }
 
   evaluateIsVisibleCriteria(criteria: any): boolean {
@@ -262,19 +251,6 @@ export class ConstraintService {
     );
   }
 
-  evaluateIsCorrectCriteria(criteria) {
-    const componentStates = this.dataService.getComponentStatesByNodeIdAndComponentId(
-      criteria.params.nodeId,
-      criteria.params.componentId
-    );
-    for (const componentState of componentStates) {
-      if (componentState.studentData.isCorrect) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   evaluateChoiceChosenCriteria(criteria: any): boolean {
     const service = this.componentServiceLookupService.getService('MultipleChoice');
     const latestComponentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
@@ -305,63 +281,6 @@ export class ConstraintService {
 
   evaluateTeacherRemovalCriteria(criteria: any): boolean {
     return criteria.params.periodId !== this.configService.getPeriodId();
-  }
-
-  evaluateUsedXSubmitsCriteria(criteria: any): boolean {
-    const params = criteria.params;
-    return this.getSubmitCount(params.nodeId, params.componentId) >= params.requiredSubmitCount;
-  }
-
-  getSubmitCount(nodeId: string, componentId: string): number {
-    // counter for manually counting the component states with isSubmit=true
-    let manualSubmitCounter = 0;
-
-    // counter for remembering the highest submitCounter value found in studentData objects
-    let highestSubmitCounter = 0;
-
-    /*
-     * We are counting with two submit counters for backwards compatibility.
-     * Some componentStates only have isSubmit=true and do not keep an
-     * updated submitCounter for the number of submits.
-     */
-    const componentStates = this.dataService.getComponentStatesByNodeIdAndComponentId(
-      nodeId,
-      componentId
-    );
-    for (const componentState of componentStates) {
-      if (componentState.isSubmit) {
-        manualSubmitCounter++;
-      }
-      const studentData = componentState.studentData;
-      if (studentData.submitCounter > highestSubmitCounter) {
-        highestSubmitCounter = studentData.submitCounter;
-      }
-    }
-    return Math.max(manualSubmitCounter, highestSubmitCounter);
-  }
-
-  evaluateNumberOfWordsWrittenCriteria(criteria: any): boolean {
-    const params = criteria.params;
-    const nodeId = params.nodeId;
-    const componentId = params.componentId;
-    const requiredNumberOfWords = params.requiredNumberOfWords;
-    const componentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
-      nodeId,
-      componentId
-    );
-    if (componentState != null) {
-      const studentData = componentState.studentData;
-      const response = studentData.response;
-      const numberOfWords = this.wordCount(response);
-      if (numberOfWords >= requiredNumberOfWords) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  private wordCount(str: string): number {
-    return str.trim().split(/\s+/).length;
   }
 
   evaluateAddXNumberOfNotesOnThisStepCriteria(criteria: any): boolean {
