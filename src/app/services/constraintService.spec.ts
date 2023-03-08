@@ -124,7 +124,6 @@ describe('ConstraintService', () => {
   evaluateNodeConstraintWithTwoRemovalCriteria();
   evaluateIsCorrectCriteriaFalseWhenNoComponentStates();
   evaluateIsCorrectCriteria();
-  evaluateBranchPathTaken();
   evaluateIsVisitedCriteria();
   evaluateIsVisitedAfterCriteria();
   evaluateIsRevisedAfterCriteria();
@@ -199,30 +198,6 @@ function evaluateIsCorrectCriteria() {
     const componentStates = [{ studentData: { isCorrect: true } }];
     spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue(componentStates);
     expect(service.evaluateIsCorrectCriteria(criteria)).toEqual(true);
-  });
-}
-
-function evaluateBranchPathTaken() {
-  const criteria = {
-    params: {
-      fromNodeId: 'node1',
-      toNodeId: 'node2'
-    }
-  };
-  it('should evaluate branch path taken false', () => {
-    const branchPathTakenEvents = [{ data: { fromNodeId: 'node1', toNodeId: 'node3' } }];
-    spyOn(dataService, 'getBranchPathTakenEventsByNodeId').and.returnValue(branchPathTakenEvents);
-    expect(service.evaluateBranchPathTakenCriteria(criteria)).toEqual(false);
-  });
-  it('should evaluate branch path taken true', () => {
-    const branchPathTakenEvents = [{ data: { fromNodeId: 'node1', toNodeId: 'node2' } }];
-    spyOn(dataService, 'getBranchPathTakenEventsByNodeId').and.returnValue(branchPathTakenEvents);
-    expect(service.evaluateBranchPathTakenCriteria(criteria)).toEqual(true);
-  });
-  it('should evaluate branch path taken', () => {
-    const branchPathTakenEvents = [];
-    spyOn(dataService, 'getBranchPathTakenEventsByNodeId').and.returnValue(branchPathTakenEvents);
-    expect(service.evaluateBranchPathTakenCriteria(criteria)).toEqual(false);
   });
 }
 

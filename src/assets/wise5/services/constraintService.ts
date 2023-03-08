@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstraintContext';
+import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategies/BranchPathTakenConstraintStrategy';
 import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/IsCompletedConstraintStrategy';
 import { AnnotationService } from './annotationService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
@@ -11,13 +12,11 @@ import { TagService } from './tagService';
 @Injectable()
 export class ConstraintService {
   criteriaFunctionNameToStrategy = {
-    isCompleted: new IsCompletedConstraintStrategy()
+    isCompleted: new IsCompletedConstraintStrategy(),
+    branchPathTaken: new BranchPathTakenConstraintStrategy()
   };
 
   criteriaFunctionNameToFunction = {
-    branchPathTaken: (criteria) => {
-      return this.evaluateBranchPathTakenCriteria(criteria);
-    },
     isVisible: (criteria) => {
       return this.evaluateIsVisibleCriteria(criteria);
     },
@@ -144,7 +143,7 @@ export class ConstraintService {
   }
 
   private evaluateCriteria(criteria: any): boolean {
-    if (criteria.name === 'isCompleted') {
+    if (['isCompleted', 'branchPathTaken'].includes(criteria.name)) {
       this.evaluateConstraintContext.setStrategy(
         this.criteriaFunctionNameToStrategy[criteria.name]
       );
@@ -162,21 +161,6 @@ export class ConstraintService {
       }
     }
     return true;
-  }
-
-  evaluateBranchPathTakenCriteria(criteria: any): boolean {
-    const expectedFromNodeId = criteria.params.fromNodeId;
-    const expectedToNodeId = criteria.params.toNodeId;
-    const branchPathTakenEvents = this.dataService.getBranchPathTakenEventsByNodeId(
-      expectedFromNodeId
-    );
-    for (const branchPathTakenEvent of branchPathTakenEvents) {
-      const data = branchPathTakenEvent.data;
-      if (criteria.params.fromNodeId === data.fromNodeId && expectedToNodeId === data.toNodeId) {
-        return true;
-      }
-    }
-    return false;
   }
 
   evaluateIsVisibleCriteria(criteria: any): boolean {
