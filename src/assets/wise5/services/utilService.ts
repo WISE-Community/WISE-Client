@@ -9,21 +9,6 @@ import '../lib/jquery/jquery-global';
 export class UtilService {
   constructor(@Inject(LOCALE_ID) private localeID: string) {}
 
-  isImage(fileName: string): boolean {
-    const imageExtensionsRegEx = new RegExp('.*.(png|jpg|jpeg|bmp|gif|tiff|svg|webp)');
-    return fileName.toLowerCase().match(imageExtensionsRegEx) != null;
-  }
-
-  isVideo(fileName: string): boolean {
-    const videoExtensionsRegEx = new RegExp('.*.(mp4|mpg|mpeg|m4v|m2v|avi|gifv|mov|qt|webm)');
-    return fileName.toLowerCase().match(videoExtensionsRegEx) != null;
-  }
-
-  isAudio(fileName: string): boolean {
-    const videoExtensionsRegEx = new RegExp('.*.(mp3|flac|m4a|ogg|wav|webm)');
-    return fileName.toLowerCase().match(videoExtensionsRegEx) != null;
-  }
-
   /**
    * Remove html tags and newlines from the string.
    * @param html an html string
@@ -102,8 +87,28 @@ export class UtilService {
     return '';
   }
 
-  trimToLength(str: string, maxLength: number): string {
-    return str.length > maxLength ? `${str.substring(0, maxLength - 3)}...` : str;
+  /**
+   * Check if two arrays contain the same values. This is commonly used to
+   * check if two arrays of ids contain the same values. The order of the
+   * elements is not compared, only the actual values. This means the elements
+   * can be in different orders but still contain the same values.
+   * Example:
+   * array1=['1234567890', 'abcdefghij']
+   * array2=['abcdefghij', '1234567890']
+   * If these two arrays are passed in as the two arguments, this function
+   * will return true.
+   * Note: This may only work if the elements are strings, numbers or
+   * booleans. If the elements are objects, this function may or may not work.
+   * @param array1 an array of strings, numbers, or booleans
+   * @param array2 an array of strings, numbers, or booleans
+   * @return whether the arrays contain the same values
+   */
+  arraysContainSameValues(array1, array2): boolean {
+    const array1Copy = copy(array1);
+    array1Copy.sort();
+    const array2Copy = copy(array2);
+    array2Copy.sort();
+    return JSON.stringify(array1Copy) == JSON.stringify(array2Copy);
   }
 
   /**

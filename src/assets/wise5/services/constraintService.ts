@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstraintContext';
+import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/IsCompletedConstraintStrategy';
 import { AnnotationService } from './annotationService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { ConfigService } from './configService';
@@ -8,6 +10,10 @@ import { TagService } from './tagService';
 
 @Injectable()
 export class ConstraintService {
+  criteriaFunctionNameToStrategy = {
+    isCompleted: new IsCompletedConstraintStrategy()
+  };
+
   criteriaFunctionNameToFunction = {
     branchPathTaken: (criteria) => {
       return this.evaluateBranchPathTakenCriteria(criteria);
@@ -29,9 +35,6 @@ export class ConstraintService {
     },
     isVisitedAndRevisedAfter: (criteria) => {
       return this.evaluateIsVisitedAndRevisedAfterCriteria(criteria);
-    },
-    isCompleted: (criteria) => {
-      return this.evaluateIsCompletedCriteria(criteria);
     },
     isCorrect: (criteria) => {
       return this.evaluateIsCorrectCriteria(criteria);
@@ -62,6 +65,8 @@ export class ConstraintService {
     }
   };
 
+  evaluateConstraintContext: EvaluateConstraintContext;
+
   constructor(
     private annotationService: AnnotationService,
     private componentServiceLookupService: ComponentServiceLookupService,
@@ -69,7 +74,9 @@ export class ConstraintService {
     private dataService: StudentDataService,
     private notebookService: NotebookService,
     private tagService: TagService
-  ) {}
+  ) {
+    this.evaluateConstraintContext = new EvaluateConstraintContext(dataService);
+  }
 
   evaluate(constraints: any[]): any {
     let isVisible = true;
@@ -137,11 +144,15 @@ export class ConstraintService {
   }
 
   private evaluateCriteria(criteria: any): boolean {
-    const criteriaFunction = this.criteriaFunctionNameToFunction[criteria.name];
-    if (criteriaFunction == null) {
-      return true;
+    if (criteria.name === 'isCompleted') {
+      this.evaluateConstraintContext.setStrategy(
+        this.criteriaFunctionNameToStrategy[criteria.name]
+      );
+      return this.evaluateConstraintContext.evaluate(criteria);
+    } else {
+      const criteriaFunction = this.criteriaFunctionNameToFunction[criteria.name];
+      return criteriaFunction == null || criteriaFunction(criteria);
     }
-    return criteriaFunction(criteria);
   }
 
   evaluateCriterias(criterias: any): boolean {
@@ -249,10 +260,6 @@ export class ConstraintService {
         event.clientSaveTime
       )
     );
-  }
-
-  private evaluateIsCompletedCriteria(criteria) {
-    return this.dataService.isCompleted(criteria.params.nodeId);
   }
 
   evaluateIsCorrectCriteria(criteria) {

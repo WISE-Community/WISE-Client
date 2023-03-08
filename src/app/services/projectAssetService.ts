@@ -8,6 +8,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { UtilService } from '../../assets/wise5/services/utilService';
+import { isAudio, isImage, isVideo } from '../../assets/wise5/common/file/file';
 
 @Injectable()
 export class ProjectAssetService {
@@ -74,11 +75,11 @@ export class ProjectAssetService {
 
   injectFileTypeValues(projectAssets: any[]) {
     projectAssets.forEach((projectAsset) => {
-      if (this.UtilService.isImage(projectAsset.fileName)) {
+      if (isImage(projectAsset.fileName)) {
         projectAsset.fileType = 'image';
-      } else if (this.UtilService.isVideo(projectAsset.fileName)) {
+      } else if (isVideo(projectAsset.fileName)) {
         projectAsset.fileType = 'video';
-      } else if (this.UtilService.isAudio(projectAsset.fileName)) {
+      } else if (isAudio(projectAsset.fileName)) {
         projectAsset.fileType = 'audio';
       } else {
         projectAsset.fileType = 'other';
