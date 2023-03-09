@@ -3,6 +3,7 @@ import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstrai
 import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategies/BranchPathTakenConstraintStrategy';
 import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/IsCompletedConstraintStrategy';
 import { IsCorrectConstraintStrategy } from '../common/constraint/strategies/IsCorrectConstraintStrategy';
+import { IsRevisedAfterConstraintStrategy } from '../common/constraint/strategies/IsRevisedAFterConstraintStrategy';
 import { IsVisibleConstraintStrategy } from '../common/constraint/strategies/IsVisibleConstraintStrategy';
 import { IsVisitableConstraintStrategy } from '../common/constraint/strategies/IsVisitableContraintStrategy';
 import { IsVisitedAfterConstraintStrategy } from '../common/constraint/strategies/IsVisitedAfterConstraintStrategy';
@@ -22,6 +23,7 @@ export class ConstraintService {
     branchPathTaken: new BranchPathTakenConstraintStrategy(),
     isCompleted: new IsCompletedConstraintStrategy(),
     isCorrect: new IsCorrectConstraintStrategy(),
+    isRevisedAfter: new IsRevisedAfterConstraintStrategy(),
     isVisible: new IsVisibleConstraintStrategy(),
     isVisitable: new IsVisitableConstraintStrategy(),
     isVisited: new IsVisitedConstraintStrategy(),
@@ -31,9 +33,6 @@ export class ConstraintService {
   };
 
   criteriaFunctionNameToFunction = {
-    isRevisedAfter: (criteria) => {
-      return this.evaluateIsRevisedAfterCriteria(criteria);
-    },
     isVisitedAndRevisedAfter: (criteria) => {
       return this.evaluateIsVisitedAndRevisedAfterCriteria(criteria);
     },
@@ -141,6 +140,7 @@ export class ConstraintService {
         'branchPathTaken',
         'isCompleted',
         'isCorrect',
+        'isRevisedAfter',
         'isVisible',
         'isVisitable',
         'isVisited',
@@ -166,20 +166,6 @@ export class ConstraintService {
       }
     }
     return true;
-  }
-
-  evaluateIsRevisedAfterCriteria(criteria: any): boolean {
-    const isRevisedAfterNodeId = criteria.params.isRevisedAfterNodeId;
-    const isRevisedAfterComponentId = criteria.params.isRevisedAfterComponentId;
-    const criteriaCreatedTimestamp = criteria.params.criteriaCreatedTimestamp;
-    const latestComponentStateForComponent = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
-      isRevisedAfterNodeId,
-      isRevisedAfterComponentId
-    );
-    return (
-      latestComponentStateForComponent != null &&
-      latestComponentStateForComponent.clientSaveTime > criteriaCreatedTimestamp
-    );
   }
 
   evaluateIsVisitedAndRevisedAfterCriteria(criteria: any): boolean {

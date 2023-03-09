@@ -16,7 +16,6 @@ let service: ConstraintService;
 let criteria1: any;
 let criteria2: any;
 let nodeConstraintTwoRemovalCriteria: any;
-let isRevisedAfterCriteria: any;
 let scoreCriteria: any;
 let addXNumberOfNotesOnThisStepCriteria: any;
 let addXNumberOfNotesOnThisStepNotebook: any;
@@ -50,12 +49,6 @@ describe('ConstraintService', () => {
       removalCriteria: [criteria1, criteria2],
       removalConditional: 'all'
     };
-    isRevisedAfterCriteria = {
-      params: {
-        isVRevisedAfterNodeId: 'node1',
-        criteriaCreatedTimestamp: 2000
-      }
-    };
     scoreCriteria = {
       params: {
         nodeId: 'node1',
@@ -87,7 +80,6 @@ describe('ConstraintService', () => {
 
   evaluateNodeConstraintWithOneRemovalCriteria();
   evaluateNodeConstraintWithTwoRemovalCriteria();
-  evaluateIsRevisedAfterCriteria();
   evaluateIsVisitedAndRevisedAfterCriteria();
   evaluateScoreCriteria();
   evaluateAddXNumberOfNotesOnThisStepCriteria();
@@ -124,30 +116,6 @@ function evaluateNodeConstraintWithTwoRemovalCriteria() {
     isCompletedSpy();
     nodeConstraintTwoRemovalCriteria.removalConditional = 'any';
     expect(service.evaluateNodeConstraint(nodeConstraintTwoRemovalCriteria)).toEqual(true);
-  });
-}
-
-function evaluateIsRevisedAfterCriteria() {
-  it('should evaluate is revised after criteria false', () => {
-    const componentState = { nodeId: 'node1', componentId: 'component1', clientSaveTime: 1000 };
-    spyOn(dataService, 'getLatestComponentStateByNodeIdAndComponentId').and.returnValue(
-      componentState
-    );
-    expect(service.evaluateIsRevisedAfterCriteria(isRevisedAfterCriteria)).toEqual(false);
-  });
-  it('should evaluate is revised after criteria true', () => {
-    const componentState = { nodeId: 'node1', componentId: 'component1', clientSaveTime: 3000 };
-    spyOn(dataService, 'getLatestComponentStateByNodeIdAndComponentId').and.returnValue(
-      componentState
-    );
-    expect(service.evaluateIsRevisedAfterCriteria(isRevisedAfterCriteria)).toEqual(true);
-  });
-  it('should evaluate is revised after criteria false with no componen states', () => {
-    const componentState = null;
-    spyOn(dataService, 'getLatestComponentStateByNodeIdAndComponentId').and.returnValue(
-      componentState
-    );
-    expect(service.evaluateIsRevisedAfterCriteria(isRevisedAfterCriteria)).toEqual(false);
   });
 }
 
