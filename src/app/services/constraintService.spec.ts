@@ -80,7 +80,6 @@ describe('ConstraintService', () => {
 
   evaluateNodeConstraintWithOneRemovalCriteria();
   evaluateNodeConstraintWithTwoRemovalCriteria();
-  evaluateIsVisitedAndRevisedAfterCriteria();
   evaluateScoreCriteria();
   evaluateAddXNumberOfNotesOnThisStepCriteria();
   evaluateCriterias();
@@ -116,59 +115,6 @@ function evaluateNodeConstraintWithTwoRemovalCriteria() {
     isCompletedSpy();
     nodeConstraintTwoRemovalCriteria.removalConditional = 'any';
     expect(service.evaluateNodeConstraint(nodeConstraintTwoRemovalCriteria)).toEqual(true);
-  });
-}
-
-function evaluateIsVisitedAndRevisedAfterCriteria() {
-  const isVisitedAndRevisedAfterCriteria = {
-    params: {
-      isVisitedAfterNodeId: 'node1',
-      isRevisedAfterNodeId: 'node2',
-      isRevisedAfterComponentId: 'component2',
-      criteriaCreatedTimestamp: 3000
-    }
-  };
-
-  function isVisitedAndRevisedAfterCriteriaSpies(events: any[], componentState: any): void {
-    spyOn(dataService, 'getEvents').and.returnValue(events);
-    spyOn(dataService, 'getLatestComponentStateByNodeIdAndComponentId').and.returnValue(
-      componentState
-    );
-  }
-  function expectIsVisitedAndRevisedAfterCriteria(
-    eventTimestamp: number,
-    componentStateTimestamp: number,
-    expectedValue: boolean
-  ): void {
-    const events = [{ nodeId: 'node1', event: 'nodeEntered', clientSaveTime: eventTimestamp }];
-    const componentState =
-      componentStateTimestamp == null
-        ? null
-        : {
-            nodeId: 'node2',
-            componentId: 'component2',
-            clientSaveTime: componentStateTimestamp
-          };
-    isVisitedAndRevisedAfterCriteriaSpies(events, componentState);
-    expect(
-      service.evaluateIsVisitedAndRevisedAfterCriteria(isVisitedAndRevisedAfterCriteria)
-    ).toEqual(expectedValue);
-  }
-  it(`should return false when they did not visit the node to visit after the
-      criteriaCreatedTimestamp and did not do any work on the revise node`, () => {
-    expectIsVisitedAndRevisedAfterCriteria(1000, null, false);
-  });
-  it(`should return false when they did not visit the node to visit after the
-      criteriaCreatedTimestamp and did not revise after criteriaCreatedTimestamp`, () => {
-    expectIsVisitedAndRevisedAfterCriteria(1000, 2000, false);
-  });
-  it(`should return false when they visited the node to visit after the criteriaCreatedTimestamp but
-      did not revise after criteriaCreatedTimestamp`, () => {
-    expectIsVisitedAndRevisedAfterCriteria(4000, 2000, false);
-  });
-  it(`should return true when visited the node to visit after the criteriaCreatedTimestamp and then
-      revised after criteriaCreatedTimestamp`, () => {
-    expectIsVisitedAndRevisedAfterCriteria(4000, 5000, true);
   });
 }
 
