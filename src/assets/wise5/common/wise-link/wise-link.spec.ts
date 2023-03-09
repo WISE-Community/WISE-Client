@@ -148,5 +148,5 @@ function createWiseLinkReplacedByElement(
   componentId: string,
   linkText: string
 ): string {
-  return `<${tag} wiselink="true" onclick="document.getElementById('replace-with-unique-id').dispatchEvent(new CustomEvent('wiselinkclicked', { detail: { nodeId: '${nodeId}', componentId: '${componentId}' } })); return false;">${linkText}</${tag}>`;
+  return `<${tag} wiselink="true" node-id="${nodeId}" component-id="${componentId}" onclick="document.getElementById('replace-with-unique-id').dispatchEvent(new CustomEvent('wiselinkclicked', { detail: { nodeId: '${nodeId}', componentId: '${componentId}' } })); return false;">${linkText}</${tag}>`;
 }
