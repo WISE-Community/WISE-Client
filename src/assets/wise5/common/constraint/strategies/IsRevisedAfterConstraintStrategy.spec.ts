@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { StudentDataService } from '../../../services/studentDataService';
-import { IsRevisedAfterConstraintStrategy } from './IsRevisedAFterConstraintStrategy';
+import { IsRevisedAfterConstraintStrategy } from './IsRevisedAfterConstraintStrategy';
 
 let dataService: StudentDataService;
 let strategy: IsRevisedAfterConstraintStrategy;
