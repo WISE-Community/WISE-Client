@@ -19,9 +19,11 @@ import {
 import { BrowserModule, By } from '@angular/platform-browser';
 import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { PasswordModule } from '../../password/password.module';
+import { ConfigService } from '../../services/config.service';
 
 let router: Router;
 let component: RegisterStudentFormComponent;
+let configService: ConfigService;
 let fixture: ComponentFixture<RegisterStudentFormComponent>;
 const PASSWORD: string = 'Abcd1234';
 let recaptchaV3Service: ReCaptchaV3Service;
@@ -41,6 +43,10 @@ export class MockStudentService {
 
 export class MockUserService {}
 
+class MockConfigService {
+  isRecaptchaEnabled() {}
+}
+
 describe('RegisterStudentFormComponent', () => {
   beforeEach(
     waitForAsync(() => {
@@ -58,6 +64,7 @@ describe('RegisterStudentFormComponent', () => {
           RecaptchaV3Module
         ],
         providers: [
+          { provide: ConfigService, useClass: MockConfigService },
           { provide: StudentService, useClass: MockStudentService },
           { provide: UserService, useClass: MockUserService },
           { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
@@ -68,11 +75,12 @@ describe('RegisterStudentFormComponent', () => {
   );
 
   beforeEach(() => {
+    configService = TestBed.inject(ConfigService);
     fixture = TestBed.createComponent(RegisterStudentFormComponent);
     studentService = TestBed.get(StudentService);
+    recaptchaV3Service = TestBed.inject(ReCaptchaV3Service);
     router = TestBed.get(Router);
     snackBar = TestBed.inject(MatSnackBar);
-    recaptchaV3Service = TestBed.inject(ReCaptchaV3Service);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

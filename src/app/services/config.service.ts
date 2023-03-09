@@ -4,7 +4,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Config } from '../domain/config';
 import { Announcement } from '../domain/announcement';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ConfigService {
   private userConfigUrl = '/api/user/config';
   private announcementUrl = '/api/announcement';

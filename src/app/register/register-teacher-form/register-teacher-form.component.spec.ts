@@ -20,6 +20,7 @@ import {
 import { By } from '@angular/platform-browser';
 import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { PasswordModule } from '../../password/password.module';
+import { ConfigService } from '../../services/config.service';
 
 class MockTeacherService {
   registerTeacherAccount() {}
@@ -27,7 +28,12 @@ class MockTeacherService {
 
 class MockUserService {}
 
+class MockConfigService {
+  isRecaptchaEnabled() {}
+}
+
 let component: RegisterTeacherFormComponent;
+let configService: ConfigService;
 let fixture: ComponentFixture<RegisterTeacherFormComponent>;
 const PASSWORD: string = 'Abcd1234';
 let teacherService: TeacherService;
@@ -52,6 +58,7 @@ describe('RegisterTeacherFormComponent', () => {
           PasswordModule
         ],
         providers: [
+          { provide: ConfigService, useClass: MockConfigService },
           { provide: TeacherService, useClass: MockTeacherService },
           { provide: UserService, useClass: MockUserService },
           { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
@@ -64,6 +71,7 @@ describe('RegisterTeacherFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterTeacherFormComponent);
     component = fixture.componentInstance;
+    configService = TestBed.inject(ConfigService);
     teacherService = TestBed.get(TeacherService);
     recaptchaV3Service = TestBed.inject(ReCaptchaV3Service);
     router = TestBed.get(Router);
