@@ -3,6 +3,12 @@ import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstrai
 import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategies/BranchPathTakenConstraintStrategy';
 import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/IsCompletedConstraintStrategy';
 import { IsCorrectConstraintStrategy } from '../common/constraint/strategies/IsCorrectConstraintStrategy';
+import { IsRevisedAfterConstraintStrategy } from '../common/constraint/strategies/IsRevisedAfterConstraintStrategy';
+import { IsVisibleConstraintStrategy } from '../common/constraint/strategies/IsVisibleConstraintStrategy';
+import { IsVisitableConstraintStrategy } from '../common/constraint/strategies/IsVisitableContraintStrategy';
+import { IsVisitedAfterConstraintStrategy } from '../common/constraint/strategies/IsVisitedAfterConstraintStrategy';
+import { IsVisitedAndRevisedAfterConstraintStrategy } from '../common/constraint/strategies/IsVisitedAndRevisedAfterConstraintStrategy';
+import { IsVisitedConstraintStrategy } from '../common/constraint/strategies/IsVisitedConstraintStrategy';
 import { UsedXSubmitsConstraintStrategy } from '../common/constraint/strategies/UsedXSubmitsConstraintStrategy';
 import { WroteXNumberOfWordsConstraintStrategy } from '../common/constraint/strategies/WroteXNumberOfWordsConstraintStrategy';
 import { AnnotationService } from './annotationService';
@@ -18,29 +24,17 @@ export class ConstraintService {
     branchPathTaken: new BranchPathTakenConstraintStrategy(),
     isCompleted: new IsCompletedConstraintStrategy(),
     isCorrect: new IsCorrectConstraintStrategy(),
+    isRevisedAfter: new IsRevisedAfterConstraintStrategy(),
+    isVisible: new IsVisibleConstraintStrategy(),
+    isVisitable: new IsVisitableConstraintStrategy(),
+    isVisited: new IsVisitedConstraintStrategy(),
+    isVisitedAfter: new IsVisitedAfterConstraintStrategy(),
+    isVisitedAndRevisedAfter: new IsVisitedAndRevisedAfterConstraintStrategy(),
     usedXSubmits: new UsedXSubmitsConstraintStrategy(),
     wroteXNumberOfWords: new WroteXNumberOfWordsConstraintStrategy()
   };
 
   criteriaFunctionNameToFunction = {
-    isVisible: (criteria) => {
-      return this.evaluateIsVisibleCriteria(criteria);
-    },
-    isVisitable: (criteria) => {
-      return this.evaluateIsVisitableCriteria(criteria);
-    },
-    isVisited: (criteria) => {
-      return this.evaluateIsVisitedCriteria(criteria);
-    },
-    isVisitedAfter: (criteria) => {
-      return this.evaluateIsVisitedAfterCriteria(criteria);
-    },
-    isRevisedAfter: (criteria) => {
-      return this.evaluateIsRevisedAfterCriteria(criteria);
-    },
-    isVisitedAndRevisedAfter: (criteria) => {
-      return this.evaluateIsVisitedAndRevisedAfterCriteria(criteria);
-    },
     choiceChosen: (criteria) => {
       return this.evaluateChoiceChosenCriteria(criteria);
     },
@@ -145,6 +139,12 @@ export class ConstraintService {
         'branchPathTaken',
         'isCompleted',
         'isCorrect',
+        'isRevisedAfter',
+        'isVisible',
+        'isVisitable',
+        'isVisited',
+        'isVisitedAfter',
+        'isVisitedAndRevisedAfter',
         'usedXSubmits',
         'wroteXNumberOfWords'
       ].includes(criteria.name)
@@ -166,89 +166,6 @@ export class ConstraintService {
       }
     }
     return true;
-  }
-
-  evaluateIsVisibleCriteria(criteria: any): boolean {
-    const nodeStatus = this.dataService.getNodeStatusByNodeId(criteria.params.nodeId);
-    return nodeStatus.isVisible;
-  }
-
-  evaluateIsVisitableCriteria(criteria: any): boolean {
-    const nodeStatus = this.dataService.getNodeStatusByNodeId(criteria.params.nodeId);
-    return nodeStatus.isVisitable;
-  }
-
-  evaluateIsVisitedCriteria(criteria: any): boolean {
-    const events = this.dataService.getEvents();
-    for (const event of events) {
-      if (event.nodeId === criteria.params.nodeId && event.event === 'nodeEntered') {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  evaluateIsVisitedAfterCriteria(criteria: any): boolean {
-    const isVisitedAfterNodeId = criteria.params.isVisitedAfterNodeId;
-    const criteriaCreatedTimestamp = criteria.params.criteriaCreatedTimestamp;
-    const events = this.dataService.getEvents();
-    for (const event of events) {
-      if (
-        event.nodeId === isVisitedAfterNodeId &&
-        event.event === 'nodeEntered' &&
-        event.clientSaveTime > criteriaCreatedTimestamp
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  evaluateIsRevisedAfterCriteria(criteria: any): boolean {
-    const isRevisedAfterNodeId = criteria.params.isRevisedAfterNodeId;
-    const isRevisedAfterComponentId = criteria.params.isRevisedAfterComponentId;
-    const criteriaCreatedTimestamp = criteria.params.criteriaCreatedTimestamp;
-    const latestComponentStateForComponent = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
-      isRevisedAfterNodeId,
-      isRevisedAfterComponentId
-    );
-    return (
-      latestComponentStateForComponent != null &&
-      latestComponentStateForComponent.clientSaveTime > criteriaCreatedTimestamp
-    );
-  }
-
-  evaluateIsVisitedAndRevisedAfterCriteria(criteria: any): boolean {
-    const isVisitedAfterNodeId = criteria.params.isVisitedAfterNodeId;
-    const isRevisedAfterNodeId = criteria.params.isRevisedAfterNodeId;
-    const isRevisedAfterComponentId = criteria.params.isRevisedAfterComponentId;
-    const criteriaCreatedTimestamp = criteria.params.criteriaCreatedTimestamp;
-    const events = this.dataService.getEvents();
-    for (const event of events) {
-      if (
-        this.isVisitedAndRevisedAfter(
-          isVisitedAfterNodeId,
-          isRevisedAfterNodeId,
-          isRevisedAfterComponentId,
-          event,
-          criteriaCreatedTimestamp
-        )
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  isVisitedAndRevisedAfter(visitNodeId, reviseNodeId, reviseComponentId, event, timestamp) {
-    return (
-      this.dataService.isNodeVisitedAfterTimestamp(event, visitNodeId, timestamp) &&
-      this.dataService.hasWorkCreatedAfterTimestamp(
-        reviseNodeId,
-        reviseComponentId,
-        event.clientSaveTime
-      )
-    );
   }
 
   evaluateChoiceChosenCriteria(criteria: any): boolean {
