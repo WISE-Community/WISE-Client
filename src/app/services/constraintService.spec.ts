@@ -16,7 +16,6 @@ let service: ConstraintService;
 let criteria1: any;
 let criteria2: any;
 let nodeConstraintTwoRemovalCriteria: any;
-let isVisitedAfterCriteria: any;
 let isRevisedAfterCriteria: any;
 let scoreCriteria: any;
 let addXNumberOfNotesOnThisStepCriteria: any;
@@ -50,12 +49,6 @@ describe('ConstraintService', () => {
       targetId: 'node3',
       removalCriteria: [criteria1, criteria2],
       removalConditional: 'all'
-    };
-    isVisitedAfterCriteria = {
-      params: {
-        isVisitedAfterNodeId: 'node1',
-        criteriaCreatedTimestamp: 2000
-      }
     };
     isRevisedAfterCriteria = {
       params: {
@@ -94,7 +87,6 @@ describe('ConstraintService', () => {
 
   evaluateNodeConstraintWithOneRemovalCriteria();
   evaluateNodeConstraintWithTwoRemovalCriteria();
-  evaluateIsVisitedAfterCriteria();
   evaluateIsRevisedAfterCriteria();
   evaluateIsVisitedAndRevisedAfterCriteria();
   evaluateScoreCriteria();
@@ -132,22 +124,6 @@ function evaluateNodeConstraintWithTwoRemovalCriteria() {
     isCompletedSpy();
     nodeConstraintTwoRemovalCriteria.removalConditional = 'any';
     expect(service.evaluateNodeConstraint(nodeConstraintTwoRemovalCriteria)).toEqual(true);
-  });
-}
-
-function evaluateIsVisitedAfterCriteria() {
-  it('should evaluate is visited after criteria false', () => {
-    const events = [{ nodeId: 'node1', event: 'nodeEntered', clientSaveTime: 1000 }];
-    spyOn(dataService, 'getEvents').and.returnValue(events);
-    expect(service.evaluateIsVisitedAfterCriteria(isVisitedAfterCriteria)).toEqual(false);
-  });
-  it('should evaluate is visited after criteria true', () => {
-    const events = [
-      { nodeId: 'node1', event: 'nodeEntered', clientSaveTime: 1000 },
-      { nodeId: 'node1', event: 'nodeEntered', clientSaveTime: 3000 }
-    ];
-    spyOn(dataService, 'getEvents').and.returnValue(events);
-    expect(service.evaluateIsVisitedAfterCriteria(isVisitedAfterCriteria)).toEqual(true);
   });
 }
 
