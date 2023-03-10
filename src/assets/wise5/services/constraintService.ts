@@ -3,7 +3,9 @@ import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstrai
 import { AddXNumberOfNotesOnThisStepConstraintStrategy } from '../common/constraint/strategies/AddXNumberOfNotesOnThisStepConstraintStrategy';
 import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategies/BranchPathTakenConstraintStrategy';
 import { ChoiceChosenConstraintStrategy } from '../common/constraint/strategies/ChoiceChosenConstraintStrategy';
+import { ConstraintStrategy } from '../common/constraint/strategies/ConstraintStrategy';
 import { FillXNumberOfRowsConstraintStrategy } from '../common/constraint/strategies/FillXNumberOfRowsConstraintStrategy';
+import { HasTagConstraintStrategy } from '../common/constraint/strategies/HasTagConstraintStrategy';
 import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/IsCompletedConstraintStrategy';
 import { IsCorrectConstraintStrategy } from '../common/constraint/strategies/IsCorrectConstraintStrategy';
 import { IsRevisedAfterConstraintStrategy } from '../common/constraint/strategies/IsRevisedAfterConstraintStrategy';
@@ -30,6 +32,7 @@ export class ConstraintService {
     branchPathTaken: new BranchPathTakenConstraintStrategy(),
     choiceChosen: new ChoiceChosenConstraintStrategy(),
     fillXNumberOfRows: new FillXNumberOfRowsConstraintStrategy(),
+    hasTag: new HasTagConstraintStrategy(),
     isCompleted: new IsCompletedConstraintStrategy(),
     isCorrect: new IsCorrectConstraintStrategy(),
     isRevisedAfter: new IsRevisedAfterConstraintStrategy(),
@@ -43,13 +46,6 @@ export class ConstraintService {
     usedXSubmits: new UsedXSubmitsConstraintStrategy(),
     wroteXNumberOfWords: new WroteXNumberOfWordsConstraintStrategy()
   };
-
-  criteriaFunctionNameToFunction = {
-    hasTag: (criteria) => {
-      return this.evaluateHasTagCriteria(criteria);
-    }
-  };
-
   evaluateConstraintContext: EvaluateConstraintContext;
 
   constructor(
@@ -58,14 +54,15 @@ export class ConstraintService {
     configService: ConfigService,
     dataService: StudentDataService,
     notebookService: NotebookService,
-    private tagService: TagService
+    tagService: TagService
   ) {
     this.evaluateConstraintContext = new EvaluateConstraintContext(
       annotationService,
       componentServiceLookupService,
       configService,
       dataService,
-      notebookService
+      notebookService,
+      tagService
     );
   }
 
@@ -135,34 +132,13 @@ export class ConstraintService {
   }
 
   private evaluateCriteria(criteria: any): boolean {
-    if (
-      [
-        'addXNumberOfNotesOnThisStep',
-        'branchPathTaken',
-        'choiceChosen',
-        'fillXNumberOfRows',
-        'isCompleted',
-        'isCorrect',
-        'isRevisedAfter',
-        'isVisible',
-        'isVisitable',
-        'isVisited',
-        'isVisitedAfter',
-        'isVisitedAndRevisedAfter',
-        'score',
-        'teacherRemoval',
-        'usedXSubmits',
-        'wroteXNumberOfWords'
-      ].includes(criteria.name)
-    ) {
-      this.evaluateConstraintContext.setStrategy(
-        this.criteriaFunctionNameToStrategy[criteria.name]
-      );
-      return this.evaluateConstraintContext.evaluate(criteria);
-    } else {
-      const criteriaFunction = this.criteriaFunctionNameToFunction[criteria.name];
-      return criteriaFunction == null || criteriaFunction(criteria);
-    }
+    const strategy = this.criteriaFunctionNameToStrategy[criteria.name];
+    return strategy == null || this.evaluateStrategy(criteria, strategy);
+  }
+
+  private evaluateStrategy(criteria: any, strategy: ConstraintStrategy): boolean {
+    this.evaluateConstraintContext.setStrategy(strategy);
+    return this.evaluateConstraintContext.evaluate(criteria);
   }
 
   evaluateCriterias(criterias: any): boolean {
@@ -172,9 +148,5 @@ export class ConstraintService {
       }
     }
     return true;
-  }
-
-  evaluateHasTagCriteria(criteria: any): boolean {
-    return this.tagService.hasTagName(criteria.params.tag);
   }
 }

@@ -3,6 +3,7 @@ import { ComponentServiceLookupService } from '../../../services/componentServic
 import { ConfigService } from '../../../services/configService';
 import { NotebookService } from '../../../services/notebookService';
 import { StudentDataService } from '../../../services/studentDataService';
+import { TagService } from '../../../services/tagService';
 import { EvaluateConstraintContext } from '../EvaluateConstraintContext';
 import { ConstraintStrategy } from './ConstraintStrategy';
 
@@ -13,6 +14,7 @@ export abstract class AbstractConstraintStrategy implements ConstraintStrategy {
   context: EvaluateConstraintContext;
   dataService: StudentDataService;
   notebookService: NotebookService;
+  tagService: TagService;
 
   setContext(context: EvaluateConstraintContext): void {
     this.annotationService = context.getAnnotationService();
@@ -21,6 +23,7 @@ export abstract class AbstractConstraintStrategy implements ConstraintStrategy {
     this.dataService = context.getDataService();
     this.componentServiceLookupService = context.getComponentServiceLookupService();
     this.notebookService = context.getNotebookService();
+    this.tagService = context.getTagService();
   }
 
   abstract evaluate(criteria: any): boolean;

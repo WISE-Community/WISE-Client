@@ -3,6 +3,7 @@ import { ComponentServiceLookupService } from '../../services/componentServiceLo
 import { ConfigService } from '../../services/configService';
 import { NotebookService } from '../../services/notebookService';
 import { StudentDataService } from '../../services/studentDataService';
+import { TagService } from '../../services/tagService';
 import { ConstraintStrategy } from './strategies/ConstraintStrategy';
 
 export class EvaluateConstraintContext {
@@ -13,7 +14,8 @@ export class EvaluateConstraintContext {
     private componentServiceLookupService: ComponentServiceLookupService,
     private configService: ConfigService,
     private dataService: StudentDataService,
-    private notebookService: NotebookService
+    private notebookService: NotebookService,
+    private tagService: TagService
   ) {}
 
   getAnnotationService(): AnnotationService {
@@ -34,6 +36,10 @@ export class EvaluateConstraintContext {
 
   getNotebookService(): NotebookService {
     return this.notebookService;
+  }
+
+  getTagService(): TagService {
+    return this.tagService;
   }
 
   setStrategy(strategy: ConstraintStrategy): void {
