@@ -4,29 +4,19 @@ import { ConstraintService } from '../../assets/wise5/services/constraintService
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
-import { ConfigService } from '../../assets/wise5/services/configService';
-import { AnnotationService } from '../../assets/wise5/services/annotationService';
-import { NotebookService } from '../../assets/wise5/services/notebookService';
 
-let annotationService: AnnotationService;
-let configService: ConfigService;
 let dataService: StudentDataService;
-let notebookService: NotebookService;
 let service: ConstraintService;
 let criteria1: any;
 let criteria2: any;
 let nodeConstraintTwoRemovalCriteria: any;
-let scoreCriteria: any;
 
 describe('ConstraintService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
     });
-    annotationService = TestBed.inject(AnnotationService);
-    configService = TestBed.inject(ConfigService);
     dataService = TestBed.inject(StudentDataService);
-    notebookService = TestBed.inject(NotebookService);
     service = TestBed.inject(ConstraintService);
     criteria1 = {
       name: 'isCompleted',
@@ -47,17 +37,9 @@ describe('ConstraintService', () => {
       removalCriteria: [criteria1, criteria2],
       removalConditional: 'all'
     };
-    scoreCriteria = {
-      params: {
-        nodeId: 'node1',
-        componentId: 'component1',
-        scores: [1, 2, 3]
-      }
-    };
   });
   evaluateNodeConstraintWithOneRemovalCriteria();
   evaluateNodeConstraintWithTwoRemovalCriteria();
-  evaluateScoreCriteria();
   evaluateCriterias();
 });
 
@@ -91,23 +73,6 @@ function evaluateNodeConstraintWithTwoRemovalCriteria() {
     isCompletedSpy();
     nodeConstraintTwoRemovalCriteria.removalConditional = 'any';
     expect(service.evaluateNodeConstraint(nodeConstraintTwoRemovalCriteria)).toEqual(true);
-  });
-}
-
-function evaluateScoreCriteria() {
-  const annotation = {};
-  function scoreCriteriaSpies(returnScore: number): void {
-    spyOn(configService, 'getWorkgroupId').and.returnValue(1);
-    spyOn(annotationService, 'getLatestScoreAnnotation').and.returnValue(annotation);
-    spyOn(annotationService, 'getScoreValueFromScoreAnnotation').and.returnValue(returnScore);
-  }
-  it('should evaluate score criteria false', () => {
-    scoreCriteriaSpies(4);
-    expect(service.evaluateScoreCriteria(scoreCriteria)).toEqual(false);
-  });
-  it('should evaluate score criteria true', () => {
-    scoreCriteriaSpies(3);
-    expect(service.evaluateScoreCriteria(scoreCriteria)).toEqual(true);
   });
 }
 

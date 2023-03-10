@@ -12,6 +12,7 @@ import { IsVisitableConstraintStrategy } from '../common/constraint/strategies/I
 import { IsVisitedAfterConstraintStrategy } from '../common/constraint/strategies/IsVisitedAfterConstraintStrategy';
 import { IsVisitedAndRevisedAfterConstraintStrategy } from '../common/constraint/strategies/IsVisitedAndRevisedAfterConstraintStrategy';
 import { IsVisitedConstraintStrategy } from '../common/constraint/strategies/IsVisitedConstraintStrategy';
+import { ScoreConstraintStrategy } from '../common/constraint/strategies/ScoreConstraintStrategy';
 import { UsedXSubmitsConstraintStrategy } from '../common/constraint/strategies/UsedXSubmitsConstraintStrategy';
 import { WroteXNumberOfWordsConstraintStrategy } from '../common/constraint/strategies/WroteXNumberOfWordsConstraintStrategy';
 import { AnnotationService } from './annotationService';
@@ -36,14 +37,12 @@ export class ConstraintService {
     isVisited: new IsVisitedConstraintStrategy(),
     isVisitedAfter: new IsVisitedAfterConstraintStrategy(),
     isVisitedAndRevisedAfter: new IsVisitedAndRevisedAfterConstraintStrategy(),
+    score: new ScoreConstraintStrategy(),
     usedXSubmits: new UsedXSubmitsConstraintStrategy(),
     wroteXNumberOfWords: new WroteXNumberOfWordsConstraintStrategy()
   };
 
   criteriaFunctionNameToFunction = {
-    score: (criteria) => {
-      return this.evaluateScoreCriteria(criteria);
-    },
     teacherRemoval: (criteria) => {
       return this.evaluateTeacherRemovalCriteria(criteria);
     },
@@ -55,15 +54,17 @@ export class ConstraintService {
   evaluateConstraintContext: EvaluateConstraintContext;
 
   constructor(
-    private annotationService: AnnotationService,
+    annotationService: AnnotationService,
     componentServiceLookupService: ComponentServiceLookupService,
     private configService: ConfigService,
-    private dataService: StudentDataService,
+    dataService: StudentDataService,
     notebookService: NotebookService,
     private tagService: TagService
   ) {
     this.evaluateConstraintContext = new EvaluateConstraintContext(
+      annotationService,
       componentServiceLookupService,
+      configService,
       dataService,
       notebookService
     );
@@ -149,6 +150,7 @@ export class ConstraintService {
         'isVisited',
         'isVisitedAfter',
         'isVisitedAndRevisedAfter',
+        'score',
         'usedXSubmits',
         'wroteXNumberOfWords'
       ].includes(criteria.name)
@@ -170,25 +172,6 @@ export class ConstraintService {
       }
     }
     return true;
-  }
-
-  evaluateScoreCriteria(criteria: any): boolean {
-    const params = criteria.params;
-    const scoreType = 'any';
-    const latestScoreAnnotation = this.annotationService.getLatestScoreAnnotation(
-      params.nodeId,
-      params.componentId,
-      this.configService.getWorkgroupId(),
-      scoreType
-    );
-    if (latestScoreAnnotation != null) {
-      const scoreValue = this.dataService.getScoreValueFromScoreAnnotation(
-        latestScoreAnnotation,
-        params.scoreId
-      );
-      return this.dataService.isScoreInExpectedScores(params.scores, scoreValue);
-    }
-    return false;
   }
 
   evaluateTeacherRemovalCriteria(criteria: any): boolean {
