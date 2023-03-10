@@ -102,10 +102,11 @@ function replaceWiseLinksHelper(html: string, regex: string): string {
     const linkText = getWiseLinkLinkText(wiseLinkHTML);
     let newElement = '';
     const onclickString = `document.getElementById('replace-with-unique-id').dispatchEvent(new CustomEvent('wiselinkclicked', { detail: { nodeId: '${nodeId}', componentId: '${componentId}' } })); return false;`;
+    const params = `wiselink="true" node-id="${nodeId}" component-id="${componentId}" onclick="${onclickString}"`;
     if (type === 'button') {
-      newElement = `<button wiselink="true" onclick="${onclickString}">${linkText}</button>`;
+      newElement = `<button ${params}>${linkText}</button>`;
     } else {
-      newElement = `<a wiselink="true" onclick="${onclickString}">${linkText}</a>`;
+      newElement = `<a ${params}>${linkText}</a>`;
     }
     html = html.replace(wiseLinkHTML, newElement);
     wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
