@@ -36,19 +36,18 @@ function evaluate() {
         scores: [1, 2, 3]
       }
     };
-    it('should evaluate score criteria false', () => {
-      scoreCriteriaSpies({}, 4);
-      expect(strategy.evaluate(criteria)).toEqual(false);
+    it('should return false when score is not found in the criteria', () => {
+      expectEvaluate(criteria, 4, false);
     });
-    it('should evaluate score criteria true', () => {
-      scoreCriteriaSpies({}, 3);
-      expect(strategy.evaluate(criteria)).toEqual(true);
+    it('should return true when score is found in the criteria', () => {
+      expectEvaluate(criteria, 3, true);
     });
   });
 }
 
-function scoreCriteriaSpies(annotation: any, score: number): void {
+function expectEvaluate(criteria: any, score: number, expected: boolean): void {
   spyOn(configService, 'getWorkgroupId').and.returnValue(1);
-  spyOn(annotationService, 'getLatestScoreAnnotation').and.returnValue(annotation);
+  spyOn(annotationService, 'getLatestScoreAnnotation').and.returnValue({});
   spyOn(annotationService, 'getScoreValueFromScoreAnnotation').and.returnValue(score);
+  expect(strategy.evaluate(criteria)).toEqual(expected);
 }
