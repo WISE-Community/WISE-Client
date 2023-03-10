@@ -29,6 +29,7 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     { code: 'MALE', label: $localize`Male` },
     { code: 'NO_ANSWER', label: $localize`No Answer/Other` }
   ];
+  isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
   months: any[] = [
     { code: '1', label: $localize`01 (Jan)` },
     { code: '2', label: $localize`02 (Feb)` },
@@ -159,7 +160,7 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
         this.studentUser[key] = this.createStudentAccountFormGroup.get(key).value;
       }
     }
-    if (this.configService.isRecaptchaEnabled()) {
+    if (this.isRecaptchaEnabled) {
       const token = await this.recaptchaV3Service.execute('importantAction').toPromise();
       this.studentUser['token'] = token;
     }

@@ -142,7 +142,7 @@
         By clicking "Create Account", you agree to our
         <a href="privacy" target="_blank">Privacy Policy & Terms of Use</a>.
       </p>
-      <p i18n>
+      <p *ngIf="isRecaptchaEnabled" i18n>
         This site is protected by reCAPTCHA and the Google
         <a href="https://policies.google.com/privacy">Privacy Policy</a> and
         <a href="https://policies.google.com/terms">Terms of Service</a> apply.

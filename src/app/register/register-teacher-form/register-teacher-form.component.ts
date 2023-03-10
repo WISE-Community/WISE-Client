@@ -32,6 +32,7 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     },
     { validator: this.agreeCheckboxValidator }
   );
+  isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
   isSubmitted = false;
   passwordsFormGroup = this.fb.group({});
   processing: boolean = false;
@@ -137,7 +138,7 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     for (let key of Object.keys(this.createTeacherAccountFormGroup.controls)) {
       this.teacherUser[key] = this.createTeacherAccountFormGroup.get(key).value;
     }
-    if (this.configService.isRecaptchaEnabled()) {
+    if (this.isRecaptchaEnabled) {
       const token = await this.recaptchaV3Service.execute('importantAction').toPromise();
       this.teacherUser['token'] = token;
     }
