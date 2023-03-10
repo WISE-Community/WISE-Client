@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstraintContext';
+import { AddXNumberOfNotesOnThisStepConstraintStrategy } from '../common/constraint/strategies/AddXNumberOfNotesOnThisStepConstraintStrategy';
 import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategies/BranchPathTakenConstraintStrategy';
+import { ChoiceChosenConstraintStrategy } from '../common/constraint/strategies/ChoiceChosenConstraintStrategy';
+import { FillXNumberOfRowsConstraintStrategy } from '../common/constraint/strategies/FillXNumberOfRowsConstraintStrategy';
 import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/IsCompletedConstraintStrategy';
 import { IsCorrectConstraintStrategy } from '../common/constraint/strategies/IsCorrectConstraintStrategy';
 import { IsRevisedAfterConstraintStrategy } from '../common/constraint/strategies/IsRevisedAfterConstraintStrategy';
@@ -21,7 +24,10 @@ import { TagService } from './tagService';
 @Injectable()
 export class ConstraintService {
   criteriaFunctionNameToStrategy = {
+    addXNumberOfNotesOnThisStep: new AddXNumberOfNotesOnThisStepConstraintStrategy(),
     branchPathTaken: new BranchPathTakenConstraintStrategy(),
+    choiceChosen: new ChoiceChosenConstraintStrategy(),
+    fillXNumberOfRows: new FillXNumberOfRowsConstraintStrategy(),
     isCompleted: new IsCompletedConstraintStrategy(),
     isCorrect: new IsCorrectConstraintStrategy(),
     isRevisedAfter: new IsRevisedAfterConstraintStrategy(),
@@ -35,20 +41,11 @@ export class ConstraintService {
   };
 
   criteriaFunctionNameToFunction = {
-    choiceChosen: (criteria) => {
-      return this.evaluateChoiceChosenCriteria(criteria);
-    },
     score: (criteria) => {
       return this.evaluateScoreCriteria(criteria);
     },
     teacherRemoval: (criteria) => {
       return this.evaluateTeacherRemovalCriteria(criteria);
-    },
-    addXNumberOfNotesOnThisStep: (criteria) => {
-      return this.evaluateAddXNumberOfNotesOnThisStepCriteria(criteria);
-    },
-    fillXNumberOfRows: (criteria) => {
-      return this.evaluateFillXNumberOfRowsCriteria(criteria);
     },
     hasTag: (criteria) => {
       return this.evaluateHasTagCriteria(criteria);
@@ -59,13 +56,17 @@ export class ConstraintService {
 
   constructor(
     private annotationService: AnnotationService,
-    private componentServiceLookupService: ComponentServiceLookupService,
+    componentServiceLookupService: ComponentServiceLookupService,
     private configService: ConfigService,
     private dataService: StudentDataService,
-    private notebookService: NotebookService,
+    notebookService: NotebookService,
     private tagService: TagService
   ) {
-    this.evaluateConstraintContext = new EvaluateConstraintContext(dataService);
+    this.evaluateConstraintContext = new EvaluateConstraintContext(
+      componentServiceLookupService,
+      dataService,
+      notebookService
+    );
   }
 
   evaluate(constraints: any[]): any {
@@ -136,7 +137,10 @@ export class ConstraintService {
   private evaluateCriteria(criteria: any): boolean {
     if (
       [
+        'addXNumberOfNotesOnThisStep',
         'branchPathTaken',
+        'choiceChosen',
+        'fillXNumberOfRows',
         'isCompleted',
         'isCorrect',
         'isRevisedAfter',
@@ -168,15 +172,6 @@ export class ConstraintService {
     return true;
   }
 
-  evaluateChoiceChosenCriteria(criteria: any): boolean {
-    const service = this.componentServiceLookupService.getService('MultipleChoice');
-    const latestComponentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
-      criteria.params.nodeId,
-      criteria.params.componentId
-    );
-    return latestComponentState != null && service.choiceChosen(criteria, latestComponentState);
-  }
-
   evaluateScoreCriteria(criteria: any): boolean {
     const params = criteria.params;
     const scoreType = 'any';
@@ -198,41 +193,6 @@ export class ConstraintService {
 
   evaluateTeacherRemovalCriteria(criteria: any): boolean {
     return criteria.params.periodId !== this.configService.getPeriodId();
-  }
-
-  evaluateAddXNumberOfNotesOnThisStepCriteria(criteria: any): boolean {
-    const params = criteria.params;
-    const nodeId = params.nodeId;
-    const requiredNumberOfNotes = params.requiredNumberOfNotes;
-    try {
-      const notebook = this.notebookService.getNotebookByWorkgroup();
-      const notebookItemsByNodeId = this.dataService.getNotebookItemsByNodeId(notebook, nodeId);
-      return notebookItemsByNodeId.length >= requiredNumberOfNotes;
-    } catch (e) {}
-    return false;
-  }
-
-  evaluateFillXNumberOfRowsCriteria(criteria: any): boolean {
-    const params = criteria.params;
-    const nodeId = params.nodeId;
-    const componentId = params.componentId;
-    const requiredNumberOfFilledRows = params.requiredNumberOfFilledRows;
-    const tableHasHeaderRow = params.tableHasHeaderRow;
-    const requireAllCellsInARowToBeFilled = params.requireAllCellsInARowToBeFilled;
-    const tableService = this.componentServiceLookupService.getService('Table');
-    const componentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
-      nodeId,
-      componentId
-    );
-    return (
-      componentState != null &&
-      tableService.hasRequiredNumberOfFilledRows(
-        componentState,
-        requiredNumberOfFilledRows,
-        tableHasHeaderRow,
-        requireAllCellsInARowToBeFilled
-      )
-    );
   }
 
   evaluateHasTagCriteria(criteria: any): boolean {
