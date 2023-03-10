@@ -17,8 +17,6 @@ let criteria1: any;
 let criteria2: any;
 let nodeConstraintTwoRemovalCriteria: any;
 let scoreCriteria: any;
-let addXNumberOfNotesOnThisStepCriteria: any;
-let addXNumberOfNotesOnThisStepNotebook: any;
 
 describe('ConstraintService', () => {
   beforeEach(() => {
@@ -56,32 +54,10 @@ describe('ConstraintService', () => {
         scores: [1, 2, 3]
       }
     };
-    addXNumberOfNotesOnThisStepCriteria = {
-      params: {
-        nodeId: 'node1',
-        requiredNumberOfNotes: 10
-      }
-    };
-    addXNumberOfNotesOnThisStepNotebook = {
-      allItems: [
-        { nodeId: 'node1' },
-        { nodeId: 'node1' },
-        { nodeId: 'node1' },
-        { nodeId: 'node1' },
-        { nodeId: 'node1' },
-        { nodeId: 'node2' },
-        { nodeId: 'node2' },
-        { nodeId: 'node2' },
-        { nodeId: 'node2' },
-        { nodeId: 'node2' }
-      ]
-    };
   });
-
   evaluateNodeConstraintWithOneRemovalCriteria();
   evaluateNodeConstraintWithTwoRemovalCriteria();
   evaluateScoreCriteria();
-  evaluateAddXNumberOfNotesOnThisStepCriteria();
   evaluateCriterias();
 });
 
@@ -132,28 +108,6 @@ function evaluateScoreCriteria() {
   it('should evaluate score criteria true', () => {
     scoreCriteriaSpies(3);
     expect(service.evaluateScoreCriteria(scoreCriteria)).toEqual(true);
-  });
-}
-
-function evaluateAddXNumberOfNotesOnThisStepCriteria() {
-  it('should evaluate add x number of notes on this step criteria false', () => {
-    spyOn(notebookService, 'getNotebookByWorkgroup').and.returnValue(
-      addXNumberOfNotesOnThisStepNotebook
-    );
-    expect(
-      service.evaluateAddXNumberOfNotesOnThisStepCriteria(addXNumberOfNotesOnThisStepCriteria)
-    ).toEqual(false);
-  });
-  it('should evaluate add x number of notes on this step criteria true', () => {
-    addXNumberOfNotesOnThisStepNotebook.allItems.forEach((item) => {
-      item.nodeId = 'node1';
-    });
-    spyOn(notebookService, 'getNotebookByWorkgroup').and.returnValue(
-      addXNumberOfNotesOnThisStepNotebook
-    );
-    expect(
-      service.evaluateAddXNumberOfNotesOnThisStepCriteria(addXNumberOfNotesOnThisStepCriteria)
-    ).toEqual(true);
   });
 }
 
