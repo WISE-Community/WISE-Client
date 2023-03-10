@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstraintContext';
 import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategies/BranchPathTakenConstraintStrategy';
+import { ChoiceChosenConstraintStrategy } from '../common/constraint/strategies/ChoiceChosenConstraintStrategy';
 import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/IsCompletedConstraintStrategy';
 import { IsCorrectConstraintStrategy } from '../common/constraint/strategies/IsCorrectConstraintStrategy';
 import { IsRevisedAfterConstraintStrategy } from '../common/constraint/strategies/IsRevisedAfterConstraintStrategy';
@@ -22,6 +23,7 @@ import { TagService } from './tagService';
 export class ConstraintService {
   criteriaFunctionNameToStrategy = {
     branchPathTaken: new BranchPathTakenConstraintStrategy(),
+    choiceChosen: new ChoiceChosenConstraintStrategy(),
     isCompleted: new IsCompletedConstraintStrategy(),
     isCorrect: new IsCorrectConstraintStrategy(),
     isRevisedAfter: new IsRevisedAfterConstraintStrategy(),
@@ -35,9 +37,6 @@ export class ConstraintService {
   };
 
   criteriaFunctionNameToFunction = {
-    choiceChosen: (criteria) => {
-      return this.evaluateChoiceChosenCriteria(criteria);
-    },
     score: (criteria) => {
       return this.evaluateScoreCriteria(criteria);
     },
@@ -65,7 +64,10 @@ export class ConstraintService {
     private notebookService: NotebookService,
     private tagService: TagService
   ) {
-    this.evaluateConstraintContext = new EvaluateConstraintContext(dataService);
+    this.evaluateConstraintContext = new EvaluateConstraintContext(
+      componentServiceLookupService,
+      dataService
+    );
   }
 
   evaluate(constraints: any[]): any {
@@ -137,6 +139,7 @@ export class ConstraintService {
     if (
       [
         'branchPathTaken',
+        'choiceChosen',
         'isCompleted',
         'isCorrect',
         'isRevisedAfter',
@@ -167,16 +170,6 @@ export class ConstraintService {
     }
     return true;
   }
-
-  evaluateChoiceChosenCriteria(criteria: any): boolean {
-    const service = this.componentServiceLookupService.getService('MultipleChoice');
-    const latestComponentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
-      criteria.params.nodeId,
-      criteria.params.componentId
-    );
-    return latestComponentState != null && service.choiceChosen(criteria, latestComponentState);
-  }
-
   evaluateScoreCriteria(criteria: any): boolean {
     const params = criteria.params;
     const scoreType = 'any';
