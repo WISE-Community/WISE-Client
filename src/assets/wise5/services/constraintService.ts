@@ -13,6 +13,7 @@ import { IsVisitedAfterConstraintStrategy } from '../common/constraint/strategie
 import { IsVisitedAndRevisedAfterConstraintStrategy } from '../common/constraint/strategies/IsVisitedAndRevisedAfterConstraintStrategy';
 import { IsVisitedConstraintStrategy } from '../common/constraint/strategies/IsVisitedConstraintStrategy';
 import { ScoreConstraintStrategy } from '../common/constraint/strategies/ScoreConstraintStrategy';
+import { TeacherRemovalConstraintStrategy } from '../common/constraint/strategies/TeacherRemovalConstraintStrategy';
 import { UsedXSubmitsConstraintStrategy } from '../common/constraint/strategies/UsedXSubmitsConstraintStrategy';
 import { WroteXNumberOfWordsConstraintStrategy } from '../common/constraint/strategies/WroteXNumberOfWordsConstraintStrategy';
 import { AnnotationService } from './annotationService';
@@ -38,14 +39,12 @@ export class ConstraintService {
     isVisitedAfter: new IsVisitedAfterConstraintStrategy(),
     isVisitedAndRevisedAfter: new IsVisitedAndRevisedAfterConstraintStrategy(),
     score: new ScoreConstraintStrategy(),
+    teacherRemoval: new TeacherRemovalConstraintStrategy(),
     usedXSubmits: new UsedXSubmitsConstraintStrategy(),
     wroteXNumberOfWords: new WroteXNumberOfWordsConstraintStrategy()
   };
 
   criteriaFunctionNameToFunction = {
-    teacherRemoval: (criteria) => {
-      return this.evaluateTeacherRemovalCriteria(criteria);
-    },
     hasTag: (criteria) => {
       return this.evaluateHasTagCriteria(criteria);
     }
@@ -56,7 +55,7 @@ export class ConstraintService {
   constructor(
     annotationService: AnnotationService,
     componentServiceLookupService: ComponentServiceLookupService,
-    private configService: ConfigService,
+    configService: ConfigService,
     dataService: StudentDataService,
     notebookService: NotebookService,
     private tagService: TagService
@@ -151,6 +150,7 @@ export class ConstraintService {
         'isVisitedAfter',
         'isVisitedAndRevisedAfter',
         'score',
+        'teacherRemoval',
         'usedXSubmits',
         'wroteXNumberOfWords'
       ].includes(criteria.name)
@@ -172,10 +172,6 @@ export class ConstraintService {
       }
     }
     return true;
-  }
-
-  evaluateTeacherRemovalCriteria(criteria: any): boolean {
-    return criteria.params.periodId !== this.configService.getPeriodId();
   }
 
   evaluateHasTagCriteria(criteria: any): boolean {
