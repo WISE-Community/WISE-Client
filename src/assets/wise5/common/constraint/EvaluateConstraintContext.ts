@@ -1,4 +1,5 @@
 import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
+import { NotebookService } from '../../services/notebookService';
 import { StudentDataService } from '../../services/studentDataService';
 import { ConstraintStrategy } from './strategies/ConstraintStrategy';
 
@@ -7,7 +8,8 @@ export class EvaluateConstraintContext {
 
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
-    private dataService: StudentDataService
+    private dataService: StudentDataService,
+    private notebookService: NotebookService
   ) {}
 
   getComponentServiceLookupService(): ComponentServiceLookupService {
@@ -16,6 +18,10 @@ export class EvaluateConstraintContext {
 
   getDataService(): StudentDataService {
     return this.dataService;
+  }
+
+  getNotebookService(): NotebookService {
+    return this.notebookService;
   }
 
   setStrategy(strategy: ConstraintStrategy): void {

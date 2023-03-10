@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstraintContext';
+import { AddXNumberOfNotesOnThisStepConstraintStrategy } from '../common/constraint/strategies/AddXNumberOfNotesOnThisStepConstraintStrategy';
 import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategies/BranchPathTakenConstraintStrategy';
 import { ChoiceChosenConstraintStrategy } from '../common/constraint/strategies/ChoiceChosenConstraintStrategy';
 import { FillXNumberOfRowsConstraintStrategy } from '../common/constraint/strategies/FillXNumberOfRowsConstraintStrategy';
@@ -23,6 +24,7 @@ import { TagService } from './tagService';
 @Injectable()
 export class ConstraintService {
   criteriaFunctionNameToStrategy = {
+    addXNumberOfNotesOnThisStep: new AddXNumberOfNotesOnThisStepConstraintStrategy(),
     branchPathTaken: new BranchPathTakenConstraintStrategy(),
     choiceChosen: new ChoiceChosenConstraintStrategy(),
     fillXNumberOfRows: new FillXNumberOfRowsConstraintStrategy(),
@@ -45,9 +47,6 @@ export class ConstraintService {
     teacherRemoval: (criteria) => {
       return this.evaluateTeacherRemovalCriteria(criteria);
     },
-    addXNumberOfNotesOnThisStep: (criteria) => {
-      return this.evaluateAddXNumberOfNotesOnThisStepCriteria(criteria);
-    },
     hasTag: (criteria) => {
       return this.evaluateHasTagCriteria(criteria);
     }
@@ -60,12 +59,13 @@ export class ConstraintService {
     componentServiceLookupService: ComponentServiceLookupService,
     private configService: ConfigService,
     private dataService: StudentDataService,
-    private notebookService: NotebookService,
+    notebookService: NotebookService,
     private tagService: TagService
   ) {
     this.evaluateConstraintContext = new EvaluateConstraintContext(
       componentServiceLookupService,
-      dataService
+      dataService,
+      notebookService
     );
   }
 
@@ -137,6 +137,7 @@ export class ConstraintService {
   private evaluateCriteria(criteria: any): boolean {
     if (
       [
+        'addXNumberOfNotesOnThisStep',
         'branchPathTaken',
         'choiceChosen',
         'fillXNumberOfRows',
@@ -192,18 +193,6 @@ export class ConstraintService {
 
   evaluateTeacherRemovalCriteria(criteria: any): boolean {
     return criteria.params.periodId !== this.configService.getPeriodId();
-  }
-
-  evaluateAddXNumberOfNotesOnThisStepCriteria(criteria: any): boolean {
-    const params = criteria.params;
-    const nodeId = params.nodeId;
-    const requiredNumberOfNotes = params.requiredNumberOfNotes;
-    try {
-      const notebook = this.notebookService.getNotebookByWorkgroup();
-      const notebookItemsByNodeId = this.dataService.getNotebookItemsByNodeId(notebook, nodeId);
-      return notebookItemsByNodeId.length >= requiredNumberOfNotes;
-    } catch (e) {}
-    return false;
   }
 
   evaluateHasTagCriteria(criteria: any): boolean {
