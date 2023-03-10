@@ -292,7 +292,7 @@
               ng-repeat='item in $ctrl.items | toArray | orderBy : "order"'
               class="projectItem"
               ng-class='::{"node-select--group": $ctrl.isGroupNode(item.$key), "node-select--node": !$ctrl.isGroupNode(item.$key)}'
-              ng-if="::item.order!==0 && (!$ctrl.insertGroupMode || ($ctrl.insertGroupMode && $ctrl.isGroupNode(item.$key)))"
+              ng-if="item.order!==0 && (!$ctrl.insertGroupMode || ($ctrl.insertGroupMode && $ctrl.isGroupNode(item.$key)))"
             >
               <div
                 id="{{::item.$key}}"
