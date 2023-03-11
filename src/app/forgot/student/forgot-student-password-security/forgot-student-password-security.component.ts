@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StudentService } from '../../../student/student.service';
 import { finalize } from 'rxjs/operators';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { ConfigService } from '../../../services/config.service';
 
 @Component({
   selector: 'app-forgot-student-password-security',
@@ -10,18 +12,21 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./forgot-student-password-security.component.scss']
 })
 export class ForgotStudentPasswordSecurityComponent implements OnInit {
-  username: string;
-  questionKey: string;
-  question: string;
   answer: string;
   answerSecurityQuestionFormGroup: FormGroup = this.fb.group({
     answer: new FormControl('', [Validators.required])
   });
+  isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
   message: string;
   processing: boolean = false;
+  question: string;
+  questionKey: string;
+  username: string;
 
   constructor(
+    private configService: ConfigService,
     private fb: FormBuilder,
+    private recaptchaV3Service: ReCaptchaV3Service,
     private router: Router,
     private route: ActivatedRoute,
     private studentService: StudentService
@@ -33,11 +38,17 @@ export class ForgotStudentPasswordSecurityComponent implements OnInit {
     this.question = this.route.snapshot.queryParamMap.get('question');
   }
 
-  submit() {
+  async submit() {
     this.processing = true;
     this.clearMessage();
+    let token;
+    if (this.isRecaptchaEnabled) {
+      token = await this.recaptchaV3Service.execute('importantAction').toPromise();
+    } else {
+      token = '';
+    }
     this.studentService
-      .checkSecurityAnswer(this.username, this.getAnswer())
+      .checkSecurityAnswer(this.username, this.getAnswer(), token)
       .pipe(
         finalize(() => {
           this.processing = false;
@@ -49,6 +60,8 @@ export class ForgotStudentPasswordSecurityComponent implements OnInit {
         } else {
           if (response.messageCode === 'incorrectAnswer') {
             this.setIncorrectAnswerMessage();
+          } else if (response.messageCode === 'recaptchaResponseInvalid') {
+            this.setRecaptchaResponseInvalidMessage();
           }
         }
       });
@@ -68,6 +81,11 @@ export class ForgotStudentPasswordSecurityComponent implements OnInit {
 
   setIncorrectAnswerMessage() {
     const message = $localize`Incorrect answer, please try again. If you can't remember the answer to your security question, please ask your teacher to change your password or contact us for assistance.`;
+    this.setMessage(message);
+  }
+
+  setRecaptchaResponseInvalidMessage() {
+    const message = $localize`Recaptcha failed. Please reload the page and try again.`;
     this.setMessage(message);
   }
 

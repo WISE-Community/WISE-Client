@@ -6,6 +6,39 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { ConfigService } from '../../../services/config.service';
+import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+
+let component: ForgotTeacherPasswordComponent;
+let configService: ConfigService;
+let fixture: ComponentFixture<ForgotTeacherPasswordComponent>;
+let recaptchaV3Service: ReCaptchaV3Service;
+let teacherService: TeacherService;
+
+function submitAndReceiveResponse(teacherServiceFunctionName, status, messageCode) {
+  const teacherService = TestBed.get(TeacherService);
+  const observableResponse = createObservableResponse(status, messageCode);
+  spyOn(teacherService, teacherServiceFunctionName).and.returnValue(observableResponse);
+  component.submit();
+  fixture.detectChanges();
+}
+
+function createObservableResponse(status, messageCode) {
+  const observableResponse = Observable.create((observer) => {
+    const response = {
+      status: status,
+      messageCode: messageCode
+    };
+    observer.next(response);
+    observer.complete();
+  });
+  return observableResponse;
+}
+
+function getErrorMessage() {
+  const errorMessage = fixture.debugElement.nativeElement.querySelector('.warn');
+  return errorMessage.textContent;
+}
 
 export class MockTeacherService {
   getVerificationCodeEmail(username: string): Observable<any> {
@@ -19,47 +52,37 @@ export class MockTeacherService {
   }
 }
 
+class MockConfigService {
+  isRecaptchaEnabled() {}
+}
+
 describe('ForgotTeacherPasswordComponent', () => {
-  let component: ForgotTeacherPasswordComponent;
-  let fixture: ComponentFixture<ForgotTeacherPasswordComponent>;
-
-  const submitAndReceiveResponse = (teacherServiceFunctionName, status, messageCode) => {
-    const teacherService = TestBed.get(TeacherService);
-    const observableResponse = createObservableResponse(status, messageCode);
-    spyOn(teacherService, teacherServiceFunctionName).and.returnValue(observableResponse);
-    component.submit();
-    fixture.detectChanges();
-  };
-
-  const createObservableResponse = (status, messageCode) => {
-    const observableResponse = Observable.create((observer) => {
-      const response = {
-        status: status,
-        messageCode: messageCode
-      };
-      observer.next(response);
-      observer.complete();
-    });
-    return observableResponse;
-  };
-
-  const getErrorMessage = () => {
-    const errorMessage = fixture.debugElement.nativeElement.querySelector('.warn');
-    return errorMessage.textContent;
-  };
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ForgotTeacherPasswordComponent],
+        imports: [RouterTestingModule, ReactiveFormsModule, RecaptchaV3Module],
+        providers: [
+          { provide: TeacherService, useClass: MockTeacherService },
+          { provide: ConfigService, useClass: MockConfigService },
+          { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      });
+    })
+  );
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [ForgotTeacherPasswordComponent],
-      imports: [RouterTestingModule, ReactiveFormsModule],
-      providers: [{ provide: TeacherService, useClass: MockTeacherService }],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+    configService = TestBed.inject(ConfigService);
     fixture = TestBed.createComponent(ForgotTeacherPasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
+  changePassword();
+});
+
+function changePassword() {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -85,6 +108,11 @@ describe('ForgotTeacherPasswordComponent', () => {
     expect(getErrorMessage()).toContain(
       'The server has encountered an error and was unable to send you an email'
     );
+  });
+
+  it('should show error when Recaptcha is invalid', () => {
+    submitAndReceiveResponse('getVerificationCodeEmail', 'failure', 'recaptchaResponseInvalid');
+    expect(getErrorMessage()).toContain('Recaptcha failed');
   });
 
   it('should navigate to the verify code page', () => {
@@ -114,4 +142,4 @@ describe('ForgotTeacherPasswordComponent', () => {
       skipLocationChange: true
     });
   });
-});
+}

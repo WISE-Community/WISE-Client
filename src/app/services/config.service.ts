@@ -47,6 +47,11 @@ export class ConfigService {
     return this.config$.getValue().isGoogleClassroomEnabled;
   }
 
+  isRecaptchaEnabled() {
+    const recaptchaPublicKey = this.getRecaptchaPublicKey();
+    return recaptchaPublicKey != null && recaptchaPublicKey != '';
+  }
+
   getRecaptchaPublicKey() {
     return this.config$.getValue().recaptchaPublicKey;
   }

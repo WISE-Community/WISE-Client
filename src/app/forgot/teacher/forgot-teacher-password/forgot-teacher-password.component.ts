@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { finalize } from 'rxjs/operators';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { ConfigService } from '../../../services/config.service';
 
 @Component({
   selector: 'app-forgot-teacher-password',
@@ -13,12 +15,15 @@ export class ForgotTeacherPasswordComponent implements OnInit {
   forgotTeacherPasswordFormGroup: FormGroup = this.fb.group({
     username: new FormControl('', [Validators.required])
   });
+  isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
   message: string = '';
   showForgotUsernameLink: boolean = false;
   processing: boolean = false;
 
   constructor(
+    private configService: ConfigService,
     private fb: FormBuilder,
+    private recaptchaV3Service: ReCaptchaV3Service,
     private router: Router,
     private teacherService: TeacherService
   ) {}
@@ -33,13 +38,19 @@ export class ForgotTeacherPasswordComponent implements OnInit {
     this.forgotTeacherPasswordFormGroup.controls[name].setValue(value);
   }
 
-  submit() {
+  async submit() {
     this.processing = true;
     this.clearMessage();
     this.showForgotUsernameLink = false;
     const username = this.getControlFieldValue('username');
+    let token;
+    if (this.isRecaptchaEnabled) {
+      token = await this.recaptchaV3Service.execute('importantAction').toPromise();
+    } else {
+      token = '';
+    }
     this.teacherService
-      .getVerificationCodeEmail(username)
+      .getVerificationCodeEmail(username, token)
       .pipe(
         finalize(() => {
           this.processing = false;
@@ -56,6 +67,8 @@ export class ForgotTeacherPasswordComponent implements OnInit {
             this.setTooManyVerificationCodeAttemptsMessage();
           } else if (response.messageCode === 'failedToSendEmail') {
             this.setFailedToSendEmailMessage();
+          } else if (response.messageCode === 'recaptchaResponseInvalid') {
+            this.setRecaptchaResponseInvalidMessage();
           }
         }
       });
@@ -73,6 +86,11 @@ export class ForgotTeacherPasswordComponent implements OnInit {
 
   setFailedToSendEmailMessage() {
     const message = $localize`The server has encountered an error and was unable to send you an email. Please try again. If the error continues to occur, please contact us.`;
+    this.setMessage(message);
+  }
+
+  setRecaptchaResponseInvalidMessage() {
+    const message = $localize`Recaptcha failed. Please reload the page and try again.`;
     this.setMessage(message);
   }
 
