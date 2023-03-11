@@ -112,6 +112,13 @@ export class TeacherDataService extends DataService {
       });
   }
 
+  saveAddComponentEvent(nodeId: string, newComponent: any): void {
+    this.saveEvent('AuthoringTool', nodeId, null, null, 'Authoring', 'componentCreated', {
+      componentId: newComponent.id,
+      componentType: newComponent.type
+    });
+  }
+
   addCommonParams(params) {
     params = this.addProjectIdToHttpParams(params);
     params = this.addRunIdToHttpParams(params);
