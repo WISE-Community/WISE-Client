@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NodeStatus } from '../common/NodeStatus';
 import { ConstraintService } from './constraintService';
 import { NotebookService } from './notebookService';
 import { ProjectService } from './projectService';
@@ -70,9 +71,9 @@ export class NodeStatusService {
     this.updateNodeStatusTimestamps(nodeId);
   }
 
-  private calculateNodeStatus(node: any): any {
+  private calculateNodeStatus(node: any): NodeStatus {
     const nodeId = node.id;
-    const nodeStatus: any = this.createNodeStatus(nodeId);
+    const nodeStatus = new NodeStatus(nodeId);
     const constraintsForNode = this.projectService.getConstraintsThatAffectNode(node);
     const constraintResults = this.constraintService.evaluate(constraintsForNode);
     nodeStatus.isVisible = constraintResults.isVisible;
@@ -81,15 +82,6 @@ export class NodeStatusService {
     nodeStatus.isCompleted = this.dataService.isCompleted(nodeId);
     nodeStatus.isVisited = this.dataService.isNodeVisited(nodeId);
     return nodeStatus;
-  }
-
-  private createNodeStatus(nodeId: string): any {
-    return {
-      nodeId: nodeId,
-      isVisible: true,
-      isVisitable: true,
-      isCompleted: true
-    };
   }
 
   private setNotVisibleIfRequired(
@@ -106,12 +98,11 @@ export class NodeStatusService {
     }
   }
 
-  private updateNodeStatus(nodeId: string, nodeStatus: any): void {
+  private updateNodeStatus(nodeId: string, nodeStatus: NodeStatus): void {
     const oldNodeStatus = this.getNodeStatusByNodeId(nodeId);
     if (oldNodeStatus == null) {
       this.setNodeStatusByNodeId(nodeId, nodeStatus);
     } else {
-      const previousIsCompletedValue = this.dataService.nodeStatuses[nodeId].isCompleted;
       this.dataService.nodeStatuses[nodeId].isVisited = nodeStatus.isVisited;
       this.dataService.nodeStatuses[nodeId].isVisible = nodeStatus.isVisible;
       this.dataService.nodeStatuses[nodeId].isVisitable = nodeStatus.isVisitable;
@@ -119,7 +110,7 @@ export class NodeStatusService {
     }
   }
 
-  private setNodeStatusByNodeId(nodeId: string, nodeStatus: any): void {
+  private setNodeStatusByNodeId(nodeId: string, nodeStatus: NodeStatus): void {
     this.dataService.nodeStatuses[nodeId] = nodeStatus;
   }
 
