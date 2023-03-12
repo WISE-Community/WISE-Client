@@ -138,7 +138,7 @@
         >
         </new-password-and-confirm>
       </div>
-      <p class="wise-terms" i18n>
+      <p i18n>
         By clicking "Create Account", you agree to our
         <a href="privacy" target="_blank">Privacy Policy & Terms of Use</a>.
       </p>
@@ -147,8 +147,8 @@
         <a href="https://policies.google.com/privacy">Privacy Policy</a> and
         <a href="https://policies.google.com/terms">Terms of Service</a> apply.
       </p>
-      <ng-container [ngSwitch]="studentUser.isRecaptchaInvalid">
-        <mat-error *ngSwitchCase="true" recaptchaError i18n
+      <ng-container *ngIf="isRecaptchaEnabled" [ngSwitch]="studentUser.isRecaptchaInvalid">
+        <mat-error *ngSwitchCase="true" class="recaptchaError" i18n
           >Recaptcha failed. Please reload the page and try again!</mat-error
         >
         <div *ngSwitchDefault i18n>&nbsp;</div>

@@ -170,8 +170,8 @@
         <a href="https://policies.google.com/privacy">Privacy Policy</a> and
         <a href="https://policies.google.com/terms">Terms of Service</a> apply.
       </p>
-      <ng-container [ngSwitch]="teacherUser.isRecaptchaInvalid">
-        <mat-error *ngSwitchCase="true" recaptchaError i18n
+      <ng-container *ngIf="isRecaptchaEnabled" [ngSwitch]="teacherUser.isRecaptchaInvalid">
+        <mat-error *ngSwitchCase="true" class="center recaptchaError" i18n
           >Recaptcha failed. Please reload the page and try again!</mat-error
         >
         <div *ngSwitchDefault i18n>&nbsp;</div>

@@ -153,6 +153,7 @@ async function createAccount() {
     );
 
     it('should show error when Recaptcha is invalid', () => {
+      component.isRecaptchaEnabled = true;
       component.createStudentAccountFormGroup.setValue(
         createAccountFormValue(
           'Patrick',
@@ -167,10 +168,14 @@ async function createAccount() {
         )
       );
       component.studentUser.isRecaptchaInvalid = true;
+      spyOn(recaptchaV3Service, 'execute').and.returnValue(of(''));
       const errorMessage = 'recaptchaResponseInvalid';
       const response: any = helpers.createAccountErrorResponse(errorMessage);
       spyOn(studentService, 'registerStudentAccount').and.returnValue(throwError(response));
+      component.createAccount();
+      fixture.detectChanges();
       const recaptchaError = fixture.debugElement.queryAll(By.css('.recaptchaError'));
+      expect(recaptchaError).not.toHaveSize(0);
     });
 
     it(

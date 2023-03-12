@@ -149,6 +149,7 @@ async function createAccount() {
     );
 
     it('should show error when Recaptcha is invalid', () => {
+      component.isRecaptchaEnabled = true;
       component.createTeacherAccountFormGroup.setValue(
         createAccountFormValue(
           'Spongebob',
@@ -166,10 +167,14 @@ async function createAccount() {
         )
       );
       component.teacherUser.isRecaptchaInvalid = true;
+      spyOn(recaptchaV3Service, 'execute').and.returnValue(of(''));
       const errorMessage = 'recaptchaResponseInvalid';
       const response: any = helpers.createAccountErrorResponse(errorMessage);
       spyOn(teacherService, 'registerTeacherAccount').and.returnValue(throwError(response));
+      component.createAccount();
+      fixture.detectChanges();
       const recaptchaError = fixture.debugElement.queryAll(By.css('.recaptchaError'));
+      expect(recaptchaError).not.toHaveSize(0);
     });
 
     it(
