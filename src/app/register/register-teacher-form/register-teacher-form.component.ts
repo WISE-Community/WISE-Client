@@ -7,7 +7,9 @@ import { UtilService } from '../../services/util.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'register-teacher-form',
@@ -30,6 +32,7 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     },
     { validator: this.agreeCheckboxValidator }
   );
+  isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
   isSubmitted = false;
   passwordsFormGroup = this.fb.group({});
   processing: boolean = false;
@@ -44,7 +47,9 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
+    private configService: ConfigService,
     private fb: FormBuilder,
+    private recaptchaV3Service: ReCaptchaV3Service,
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
@@ -81,11 +86,11 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     this.createTeacherAccountFormGroup.controls[name].setValue(value);
   }
 
-  createAccount(): void {
+  async createAccount() {
     this.isSubmitted = true;
     if (this.createTeacherAccountFormGroup.valid) {
       this.processing = true;
-      this.populateTeacherUser();
+      await this.populateTeacherUser();
       this.teacherService.registerTeacherAccount(this.teacherUser).subscribe(
         (response: any) => {
           this.createAccountSuccess(response);
@@ -120,15 +125,22 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
           .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
           .setErrors(formError);
         break;
+      case 'recaptchaResponseInvalid':
+        this.teacherUser['isRecaptchaInvalid'] = true;
+        break;
       default:
         this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.messageCode));
     }
     this.processing = false;
   }
 
-  private populateTeacherUser(): void {
+  private async populateTeacherUser() {
     for (let key of Object.keys(this.createTeacherAccountFormGroup.controls)) {
       this.teacherUser[key] = this.createTeacherAccountFormGroup.get(key).value;
+    }
+    if (this.isRecaptchaEnabled) {
+      const token = await this.recaptchaV3Service.execute('importantAction').toPromise();
+      this.teacherUser['token'] = token;
     }
     if (!this.isUsingGoogleId()) {
       this.teacherUser['password'] = this.getPassword();

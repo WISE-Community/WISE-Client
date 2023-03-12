@@ -165,18 +165,27 @@
           >
         </p>
       </div>
-      <p>
-        <button
-          fxFlex
-          mat-flat-button
-          color="primary"
-          type="submit"
-          [disabled]="!createTeacherAccountFormGroup.valid || processing"
-        >
-          <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
-          <span i18n>Create Account</span>
-        </button>
+      <p *ngIf="isRecaptchaEnabled" i18n>
+        This site is protected by reCAPTCHA and the Google
+        <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+        <a href="https://policies.google.com/terms">Terms of Service</a> apply.
       </p>
+      <ng-container *ngIf="isRecaptchaEnabled" [ngSwitch]="teacherUser.isRecaptchaInvalid">
+        <mat-error *ngSwitchCase="true" class="center recaptchaError" i18n
+          >Recaptcha failed. Please reload the page and try again!</mat-error
+        >
+        <div *ngSwitchDefault i18n>&nbsp;</div>
+      </ng-container>
+      <button
+        fxFlex
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="!createTeacherAccountFormGroup.valid || processing"
+      >
+        <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
+        <span i18n>Create Account</span>
+      </button>
     </form>
   </mat-card-content>
 </mat-card>
