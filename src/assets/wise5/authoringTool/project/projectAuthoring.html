@@ -479,7 +479,11 @@
                     </div>
                   </div>
                 </div>
-                <div ng-repeat="inactiveChildId in inactiveNode.ids" class="projectItem">
+                <div
+                  ng-repeat="inactiveChildId in inactiveNode.ids"
+                  ng-if="!$ctrl.insertGroupMode"
+                  class="projectItem"
+                >
                   <div
                     layout="row"
                     ng-class='::{"groupHeader": $ctrl.isGroupNode(inactiveChildId.id), "stepHeader": !$ctrl.isGroupNode(inactiveChildId.id), "branchPathStepHeader": $ctrl.isNodeInAnyBranchPath(inactiveChildId.id) && !$ctrl.isGroupNode(inactiveChildId.id)}'
