@@ -70,9 +70,9 @@ export class ConstraintService {
   evaluate(constraints: any[]): ConstraintEvaluationResult {
     let isVisible = true;
     let isVisitable = true;
-    for (const constraintForNode of constraints) {
-      const result = this.evaluateConstraint(constraintForNode);
-      const action = constraintForNode.action;
+    for (const constraint of constraints) {
+      const result = this.evaluateConstraint(constraint);
+      const action = constraint.action;
       if (this.isVisibleConstraintAction(action)) {
         isVisible = isVisible && result;
       } else if (this.isVisitableConstraintAction(action)) {
@@ -98,15 +98,15 @@ export class ConstraintService {
     ].includes(action);
   }
 
-  evaluateConstraint(constraintForNode: any): boolean {
-    return this.evaluateNodeConstraint(constraintForNode);
+  evaluateConstraint(constraint: any): boolean {
+    return this.evaluateNodeConstraint(constraint);
   }
 
-  evaluateNodeConstraint(constraintForNode: any): boolean {
-    const removalCriteria = constraintForNode.removalCriteria;
+  evaluateNodeConstraint(constraint: any): boolean {
+    const removalCriteria = constraint.removalCriteria;
     return (
       removalCriteria == null ||
-      this.evaluateMultipleRemovalCriteria(removalCriteria, constraintForNode.removalConditional)
+      this.evaluateMultipleRemovalCriteria(removalCriteria, constraint.removalConditional)
     );
   }
 
