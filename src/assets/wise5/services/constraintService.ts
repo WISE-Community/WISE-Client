@@ -3,7 +3,9 @@ import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstrai
 import { AddXNumberOfNotesOnThisStepConstraintStrategy } from '../common/constraint/strategies/AddXNumberOfNotesOnThisStepConstraintStrategy';
 import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategies/BranchPathTakenConstraintStrategy';
 import { ChoiceChosenConstraintStrategy } from '../common/constraint/strategies/ChoiceChosenConstraintStrategy';
+import { ConstraintStrategy } from '../common/constraint/strategies/ConstraintStrategy';
 import { FillXNumberOfRowsConstraintStrategy } from '../common/constraint/strategies/FillXNumberOfRowsConstraintStrategy';
+import { HasTagConstraintStrategy } from '../common/constraint/strategies/HasTagConstraintStrategy';
 import { IsCompletedConstraintStrategy } from '../common/constraint/strategies/IsCompletedConstraintStrategy';
 import { IsCorrectConstraintStrategy } from '../common/constraint/strategies/IsCorrectConstraintStrategy';
 import { IsRevisedAfterConstraintStrategy } from '../common/constraint/strategies/IsRevisedAfterConstraintStrategy';
@@ -12,6 +14,8 @@ import { IsVisitableConstraintStrategy } from '../common/constraint/strategies/I
 import { IsVisitedAfterConstraintStrategy } from '../common/constraint/strategies/IsVisitedAfterConstraintStrategy';
 import { IsVisitedAndRevisedAfterConstraintStrategy } from '../common/constraint/strategies/IsVisitedAndRevisedAfterConstraintStrategy';
 import { IsVisitedConstraintStrategy } from '../common/constraint/strategies/IsVisitedConstraintStrategy';
+import { ScoreConstraintStrategy } from '../common/constraint/strategies/ScoreConstraintStrategy';
+import { TeacherRemovalConstraintStrategy } from '../common/constraint/strategies/TeacherRemovalConstraintStrategy';
 import { UsedXSubmitsConstraintStrategy } from '../common/constraint/strategies/UsedXSubmitsConstraintStrategy';
 import { WroteXNumberOfWordsConstraintStrategy } from '../common/constraint/strategies/WroteXNumberOfWordsConstraintStrategy';
 import { AnnotationService } from './annotationService';
@@ -28,6 +32,7 @@ export class ConstraintService {
     branchPathTaken: new BranchPathTakenConstraintStrategy(),
     choiceChosen: new ChoiceChosenConstraintStrategy(),
     fillXNumberOfRows: new FillXNumberOfRowsConstraintStrategy(),
+    hasTag: new HasTagConstraintStrategy(),
     isCompleted: new IsCompletedConstraintStrategy(),
     isCorrect: new IsCorrectConstraintStrategy(),
     isRevisedAfter: new IsRevisedAfterConstraintStrategy(),
@@ -36,36 +41,28 @@ export class ConstraintService {
     isVisited: new IsVisitedConstraintStrategy(),
     isVisitedAfter: new IsVisitedAfterConstraintStrategy(),
     isVisitedAndRevisedAfter: new IsVisitedAndRevisedAfterConstraintStrategy(),
+    score: new ScoreConstraintStrategy(),
+    teacherRemoval: new TeacherRemovalConstraintStrategy(),
     usedXSubmits: new UsedXSubmitsConstraintStrategy(),
     wroteXNumberOfWords: new WroteXNumberOfWordsConstraintStrategy()
   };
-
-  criteriaFunctionNameToFunction = {
-    score: (criteria) => {
-      return this.evaluateScoreCriteria(criteria);
-    },
-    teacherRemoval: (criteria) => {
-      return this.evaluateTeacherRemovalCriteria(criteria);
-    },
-    hasTag: (criteria) => {
-      return this.evaluateHasTagCriteria(criteria);
-    }
-  };
-
   evaluateConstraintContext: EvaluateConstraintContext;
 
   constructor(
-    private annotationService: AnnotationService,
+    annotationService: AnnotationService,
     componentServiceLookupService: ComponentServiceLookupService,
-    private configService: ConfigService,
-    private dataService: StudentDataService,
+    configService: ConfigService,
+    dataService: StudentDataService,
     notebookService: NotebookService,
-    private tagService: TagService
+    tagService: TagService
   ) {
     this.evaluateConstraintContext = new EvaluateConstraintContext(
+      annotationService,
       componentServiceLookupService,
+      configService,
       dataService,
-      notebookService
+      notebookService,
+      tagService
     );
   }
 
@@ -135,32 +132,13 @@ export class ConstraintService {
   }
 
   private evaluateCriteria(criteria: any): boolean {
-    if (
-      [
-        'addXNumberOfNotesOnThisStep',
-        'branchPathTaken',
-        'choiceChosen',
-        'fillXNumberOfRows',
-        'isCompleted',
-        'isCorrect',
-        'isRevisedAfter',
-        'isVisible',
-        'isVisitable',
-        'isVisited',
-        'isVisitedAfter',
-        'isVisitedAndRevisedAfter',
-        'usedXSubmits',
-        'wroteXNumberOfWords'
-      ].includes(criteria.name)
-    ) {
-      this.evaluateConstraintContext.setStrategy(
-        this.criteriaFunctionNameToStrategy[criteria.name]
-      );
-      return this.evaluateConstraintContext.evaluate(criteria);
-    } else {
-      const criteriaFunction = this.criteriaFunctionNameToFunction[criteria.name];
-      return criteriaFunction == null || criteriaFunction(criteria);
-    }
+    const strategy = this.criteriaFunctionNameToStrategy[criteria.name];
+    return strategy == null || this.evaluateStrategy(criteria, strategy);
+  }
+
+  private evaluateStrategy(criteria: any, strategy: ConstraintStrategy): boolean {
+    this.evaluateConstraintContext.setStrategy(strategy);
+    return this.evaluateConstraintContext.evaluate(criteria);
   }
 
   evaluateCriterias(criterias: any): boolean {
@@ -170,32 +148,5 @@ export class ConstraintService {
       }
     }
     return true;
-  }
-
-  evaluateScoreCriteria(criteria: any): boolean {
-    const params = criteria.params;
-    const scoreType = 'any';
-    const latestScoreAnnotation = this.annotationService.getLatestScoreAnnotation(
-      params.nodeId,
-      params.componentId,
-      this.configService.getWorkgroupId(),
-      scoreType
-    );
-    if (latestScoreAnnotation != null) {
-      const scoreValue = this.dataService.getScoreValueFromScoreAnnotation(
-        latestScoreAnnotation,
-        params.scoreId
-      );
-      return this.dataService.isScoreInExpectedScores(params.scores, scoreValue);
-    }
-    return false;
-  }
-
-  evaluateTeacherRemovalCriteria(criteria: any): boolean {
-    return criteria.params.periodId !== this.configService.getPeriodId();
-  }
-
-  evaluateHasTagCriteria(criteria: any): boolean {
-    return this.tagService.hasTagName(criteria.params.tag);
   }
 }
