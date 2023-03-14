@@ -19,7 +19,6 @@ import { ReferenceComponent } from '../../../app/domain/referenceComponent';
 @Injectable()
 export class ProjectService {
   achievements: any = [];
-  activeConstraints: any = [];
   additionalProcessingFunctionsMap: any = {};
   allPaths: string[] = [];
   applicationNodes: any = [];
@@ -29,7 +28,6 @@ export class ProjectService {
   idToOrder: any = {};
   inactiveGroupNodes: any[] = [];
   inactiveStepNodes: any[] = [];
-  isNodeAffectedByConstraintResult: any = {};
   metadata: any = {};
   nodes: any = {};
   nodeCount: number = 0;
@@ -40,8 +38,8 @@ export class ProjectService {
   project: any = null;
   rootNode: any = null;
   transitions: Transition[] = [];
-  private projectChangedSource: Subject<void> = new Subject<void>();
-  public projectChanged$: Observable<void> = this.projectChangedSource.asObservable();
+  private projectParsedSource: Subject<void> = new Subject<void>();
+  public projectParsed$: Observable<void> = this.projectParsedSource.asObservable();
 
   constructor(
     protected branchService: BranchService,
@@ -64,9 +62,7 @@ export class ProjectService {
     this.inactiveGroupNodes = [];
     this.groupNodes = [];
     this.idToNode = {};
-    this.isNodeAffectedByConstraintResult = {};
     this.metadata = {};
-    this.activeConstraints = [];
     this.rootNode = null;
     this.idToOrder = {};
     this.nodeCount = 0;
@@ -182,12 +178,6 @@ export class ProjectService {
     for (const node of nodes) {
       const nodeId = node.id;
       const nodeType = node.type;
-      const content = node.content;
-      const constraints = node.constraints;
-
-      if (content != null) {
-        //node.content = this.injectAssetPaths(content);
-      }
 
       this.setIdToNode(nodeId, node);
       this.addNode(node);
@@ -201,23 +191,6 @@ export class ProjectService {
       const groupId = node.groupId;
       if (groupId != null) {
         this.addNodeToGroupNode(groupId, nodeId);
-      }
-
-      if (constraints != null) {
-        if (
-          this.configService.isPreview() == true &&
-          this.configService.getConfigParam('constraints') === false
-        ) {
-          /*
-           * if we are in preview mode and constraints are set
-           * to false, we will not add the constraints
-           */
-        } else {
-          // all other cases we will add the constraints
-          for (const constraint of constraints) {
-            this.activeConstraints.push(constraint);
-          }
-        }
       }
     }
   }
@@ -236,7 +209,6 @@ export class ProjectService {
     this.metadata = this.project.metadata;
     this.loadNodes(this.project.nodes);
     this.loadInactiveNodes(this.project.inactiveNodes);
-    this.loadConstraints(this.project.constraints);
     this.rootNode = this.getRootNode(this.project.nodes[0].id);
     this.calculateNodeOrderOfProject();
     this.loadNodeIdsInAnyBranch(this.getBranches());
@@ -244,13 +216,12 @@ export class ProjectService {
     if (this.project.projectAchievements != null) {
       this.achievements = this.project.projectAchievements;
     }
-    this.broadcastProjectChanged();
+    this.broadcastProjectParsed();
   }
 
   instantiateDefaults(): void {
     this.project.nodes = this.project.nodes ? this.project.nodes : [];
     this.project.inactiveNodes = this.project.inactiveNodes ? this.project.inactiveNodes : [];
-    this.project.constraints = this.project.constraints ? this.project.constraints : [];
   }
 
   private calculateNodeOrderOfProject(): void {
@@ -655,96 +626,6 @@ export class ProjectService {
 
   isStartNodeId(nodeId: string): boolean {
     return this.project.startNodeId === nodeId;
-  }
-
-  getConstraintsThatAffectNode(node: any): any[] {
-    if (!this.configService.getConfigParam('constraints')) {
-      return [];
-    }
-    const constraints = [];
-    const allConstraints = this.activeConstraints;
-    for (let constraint of allConstraints) {
-      if (this.isNodeAffectedByConstraint(node, constraint)) {
-        constraints.push(constraint);
-      }
-    }
-    return constraints;
-  }
-
-  /**
-   * Order the constraints so that they show up in the same order as in the
-   * project.
-   * @param constraints An array of constraint objects.
-   * @return An array of ordered constraints.
-   */
-  orderConstraints(constraints: any[]): any[] {
-    let orderedNodeIds = this.getFlattenedProjectAsNodeIds();
-    return constraints.sort(this.constraintsComparatorGenerator(orderedNodeIds));
-  }
-
-  /**
-   * Create the constraints comparator function that is used for sorting an
-   * array of constraint objects.
-   * @param orderedNodeIds An array of node ids in the order in which they
-   * show up in the project.
-   * @return A comparator that orders constraint objects in the order in which
-   * the target ids show up in the project.
-   */
-  private constraintsComparatorGenerator(orderedNodeIds: string[]): any {
-    return function (constraintA, constraintB) {
-      let constraintAIndex = orderedNodeIds.indexOf(constraintA.targetId);
-      let constraintBIndex = orderedNodeIds.indexOf(constraintB.targetId);
-      if (constraintAIndex < constraintBIndex) {
-        return -1;
-      } else if (constraintAIndex > constraintBIndex) {
-        return 1;
-      }
-      return 0;
-    };
-  }
-
-  /**
-   * Check if a node is affected by the constraint
-   * @param node check if the node is affected
-   * @param constraint the constraint that might affect the node
-   * @returns whether the node is affected by the constraint
-   */
-  private isNodeAffectedByConstraint(node: any, constraint: any): boolean {
-    const cachedResult = this.getCachedIsNodeAffectedByConstraintResult(node.id, constraint.id);
-    if (cachedResult != null) {
-      return cachedResult;
-    } else {
-      let result = false;
-      const nodeId = node.id;
-      const targetId = constraint.targetId;
-      const action = constraint.action;
-
-      if (action === 'makeAllNodesAfterThisNotVisible') {
-        if (this.isNodeIdAfter(targetId, node.id)) {
-          result = true;
-        }
-      } else if (action === 'makeAllNodesAfterThisNotVisitable') {
-        if (this.isNodeIdAfter(targetId, node.id)) {
-          result = true;
-        }
-      } else {
-        const targetNode = this.getNodeById(targetId);
-        if (targetNode != null) {
-          const nodeType = targetNode.type;
-          if (nodeType === 'node' && nodeId === targetId) {
-            result = true;
-          } else if (
-            nodeType === 'group' &&
-            (nodeId === targetId || this.isNodeDescendentOfGroup(node, targetNode))
-          ) {
-            result = true;
-          }
-        }
-      }
-
-      this.cacheIsNodeAffectedByConstraintResult(node.id, constraint.id, result);
-      return result;
-    }
   }
 
   /**
@@ -1427,12 +1308,6 @@ export class ProjectService {
     }
   }
 
-  loadConstraints(constraints: any[]): void {
-    for (const constraint of constraints) {
-      constraint.active = true;
-    }
-  }
-
   shouldIncludeInTotalScore(nodeId: string, componentId: string): boolean {
     const component = this.getComponent(nodeId, componentId);
     return this.isNodeActive(nodeId) && component != null && !component.excludeFromTotalScore;
@@ -1905,28 +1780,6 @@ export class ProjectService {
     return null;
   }
 
-  /**
-   * Remember the result for whether the node is affected by the constraint
-   * @param nodeId the node id
-   * @param constraintId the constraint id
-   * @param whether the node is affected by the constraint
-   */
-  cacheIsNodeAffectedByConstraintResult(nodeId: string, constraintId: string, result: any): void {
-    this.isNodeAffectedByConstraintResult[nodeId + '-' + constraintId] = result;
-  }
-
-  /**
-   * Check if we have calculated the result for whether the node is affected
-   * by the constraint
-   * @param nodeId the node id
-   * @param constraintId the constraint id
-   * @return Return the result if we have calculated the result before. If we
-   * have not calculated the result before, we will return null
-   */
-  getCachedIsNodeAffectedByConstraintResult(nodeId: string, constraintId: string): any {
-    return this.isNodeAffectedByConstraintResult[nodeId + '-' + constraintId];
-  }
-
   getSpaces(): any[] {
     if (this.project.spaces != null) {
       return this.project.spaces;
@@ -2053,8 +1906,8 @@ export class ProjectService {
     }
   }
 
-  broadcastProjectChanged(): void {
-    this.projectChangedSource.next();
+  broadcastProjectParsed(): void {
+    this.projectParsedSource.next();
   }
 
   getPeerGroupings(): PeerGrouping[] {

@@ -4,19 +4,40 @@ import { ConstraintService } from '../../assets/wise5/services/constraintService
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
+import { ProjectService } from '../../assets/wise5/services/projectService';
+import { ConfigService } from '../../assets/wise5/services/configService';
+import { Constraint } from '../domain/constraint';
+import { Observable, Subject } from 'rxjs';
 
+class MockProjectService {
+  private projectParsedSource: Subject<void> = new Subject<void>();
+  public projectParsed$: Observable<void> = this.projectParsedSource.asObservable();
+  getFlattenedProjectAsNodeIds() {}
+  isNodeIdAfter(nodeId1: string, nodeId2: string) {
+    return nodeId1 < nodeId2;
+  }
+}
+
+let configService: ConfigService;
 let dataService: StudentDataService;
+let projectService: ProjectService;
 let service: ConstraintService;
 let criteria1: any;
 let criteria2: any;
 let nodeConstraintTwoRemovalCriteria: any;
+const nodeId1 = 'node1';
+const nodeId2 = 'node2';
+const nodeId3 = 'node3';
 
 describe('ConstraintService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
+      providers: [{ provide: ProjectService, useClass: MockProjectService }]
     });
+    configService = TestBed.inject(ConfigService);
     dataService = TestBed.inject(StudentDataService);
+    projectService = TestBed.inject(ProjectService);
     service = TestBed.inject(ConstraintService);
     criteria1 = {
       name: 'isCompleted',
@@ -41,6 +62,8 @@ describe('ConstraintService', () => {
   evaluateNodeConstraintWithOneRemovalCriteria();
   evaluateNodeConstraintWithTwoRemovalCriteria();
   evaluateCriterias();
+  getConstraintsThatAffectNode();
+  orderConstraints();
 });
 
 function evaluateNodeConstraintWithOneRemovalCriteria() {
@@ -95,5 +118,49 @@ function evaluateCriterias() {
       .withArgs('node2')
       .and.returnValue(false);
     expect(service.evaluateCriterias(criterias)).toEqual(false);
+  });
+}
+
+function getConstraintsThatAffectNode() {
+  let constraint1: Constraint;
+  describe('getConstraintsThatAffectNode()', () => {
+    beforeEach(() => {
+      spyOn(configService, 'getConfigParam').and.returnValue(true);
+      constraint1 = new Constraint({
+        id: 'constraint1',
+        action: 'makeAllNodesAfterThisNotVisible',
+        targetId: nodeId1
+      });
+      service.activeConstraints = [constraint1];
+    });
+    it(`should get the constraints that affect the node when there are no constraints that affect
+      the node`, () => {
+      const constraints = service.getConstraintsThatAffectNode({ id: nodeId1 });
+      expect(constraints.length).toEqual(0);
+    });
+    it(`should get the constraints that affect the node when there are constraints that affect the
+      node`, () => {
+      const constraints = service.getConstraintsThatAffectNode({ id: nodeId2 });
+      expect(constraints.length).toEqual(1);
+      expect(constraints[0]).toEqual(constraint1);
+    });
+  });
+}
+
+function orderConstraints() {
+  describe('orderConstraints()', () => {
+    it('should order constraints', () => {
+      spyOn(projectService, 'getFlattenedProjectAsNodeIds').and.returnValue([
+        nodeId1,
+        nodeId2,
+        nodeId3
+      ]);
+      const constraint1 = new Constraint({ targetId: nodeId2 });
+      const constraint2 = new Constraint({ targetId: nodeId3 });
+      const constraint3 = new Constraint({ targetId: nodeId1 });
+      const constraints = [constraint1, constraint2, constraint3];
+      const orderedConstraints = service.orderConstraints(constraints);
+      expect(orderedConstraints).toEqual([constraint3, constraint1, constraint2]);
+    });
   });
 }
