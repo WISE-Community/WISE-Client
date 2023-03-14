@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ConstraintEvaluationResult } from '../common/constraint/ConstraintEvaluationResult';
 import { EvaluateConstraintContext } from '../common/constraint/EvaluateConstraintContext';
 import { AddXNumberOfNotesOnThisStepConstraintStrategy } from '../common/constraint/strategies/AddXNumberOfNotesOnThisStepConstraintStrategy';
 import { BranchPathTakenConstraintStrategy } from '../common/constraint/strategies/BranchPathTakenConstraintStrategy';
@@ -66,16 +67,16 @@ export class ConstraintService {
     );
   }
 
-  evaluate(constraints: any[]): any {
+  evaluate(constraints: any[]): ConstraintEvaluationResult {
     let isVisible = true;
     let isVisitable = true;
     for (const constraintForNode of constraints) {
-      const tempResult = this.evaluateConstraint(constraintForNode);
+      const result = this.evaluateConstraint(constraintForNode);
       const action = constraintForNode.action;
       if (this.isVisibleConstraintAction(action)) {
-        isVisible = isVisible && tempResult;
+        isVisible = isVisible && result;
       } else if (this.isVisitableConstraintAction(action)) {
-        isVisitable = isVisitable && tempResult;
+        isVisitable = isVisitable && result;
       }
     }
     return { isVisible: isVisible, isVisitable: isVisitable };
@@ -97,38 +98,25 @@ export class ConstraintService {
     ].includes(action);
   }
 
-  evaluateConstraint(constraintForNode: any): any {
+  evaluateConstraint(constraintForNode: any): boolean {
     return this.evaluateNodeConstraint(constraintForNode);
   }
 
-  evaluateNodeConstraint(constraintForNode: any): any {
+  evaluateNodeConstraint(constraintForNode: any): boolean {
     const removalCriteria = constraintForNode.removalCriteria;
-    const removalConditional = constraintForNode.removalConditional;
-    if (removalCriteria == null) {
-      return true;
-    } else {
-      return this.evaluateMultipleRemovalCriteria(removalCriteria, removalConditional);
-    }
+    return (
+      removalCriteria == null ||
+      this.evaluateMultipleRemovalCriteria(removalCriteria, constraintForNode.removalConditional)
+    );
   }
 
   private evaluateMultipleRemovalCriteria(
-    multipleRemovalCriteria: any,
+    multipleRemovalCriteria: any[],
     removalConditional: any
-  ): any {
-    let result = false;
-    for (let c = 0; c < multipleRemovalCriteria.length; c++) {
-      const singleCriteriaResult = this.evaluateCriteria(multipleRemovalCriteria[c]);
-      if (c === 0) {
-        result = singleCriteriaResult;
-      } else {
-        if (removalConditional === 'any') {
-          result = result || singleCriteriaResult;
-        } else {
-          result = result && singleCriteriaResult;
-        }
-      }
-    }
-    return result;
+  ): boolean {
+    return removalConditional === 'any'
+      ? multipleRemovalCriteria.some((criteria) => this.evaluateCriteria(criteria))
+      : multipleRemovalCriteria.every((criteria) => this.evaluateCriteria(criteria));
   }
 
   private evaluateCriteria(criteria: any): boolean {
@@ -141,12 +129,7 @@ export class ConstraintService {
     return this.evaluateConstraintContext.evaluate(criteria);
   }
 
-  evaluateCriterias(criterias: any): boolean {
-    for (const criteria of criterias) {
-      if (!this.evaluateCriteria(criteria)) {
-        return false;
-      }
-    }
-    return true;
+  evaluateCriterias(criterias: any[]): boolean {
+    return criterias.every((criteria) => this.evaluateCriteria(criteria));
   }
 }
