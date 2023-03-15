@@ -22,9 +22,13 @@ import { ComponentStudentModule } from '../../assets/wise5/components/component/
 import { PreviewComponentModule } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
+import { AddLessonConfigureComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component';
+import { AddLessonChooseLocationComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-location/add-lesson-choose-location.component';
 
 @NgModule({
   declarations: [
+    AddLessonChooseLocationComponent,
+    AddLessonConfigureComponent,
     AddYourOwnNode,
     AdvancedProjectAuthoringComponent,
     CardSelectorComponent,

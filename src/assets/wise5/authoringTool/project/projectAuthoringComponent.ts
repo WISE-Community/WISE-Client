@@ -15,13 +15,11 @@ import { temporarilyHighlightElement } from '../../common/dom/dom';
 
 class ProjectAuthoringController {
   $translate: any;
-  createGroupTitle: string;
   projectId: number;
   items: any;
   nodeIds: [];
   nodeId: string;
   projectTitle: string;
-  showCreateGroup: boolean = false;
   inactiveGroupNodes: any[];
   inactiveStepNodes: any[];
   inactiveNodes: any[];
@@ -29,7 +27,6 @@ class ProjectAuthoringController {
   insertNodeMode: boolean;
   idToNode: any;
   copyMode: boolean;
-  createMode: boolean;
   nodeToAdd: any;
   projectScriptFilename: string;
   currentAuthorsMessage: string = '';
@@ -219,19 +216,9 @@ class ProjectAuthoringController {
     this.$state.go('root.at.project.node.advanced.path', { nodeId: nodeId });
   }
 
-  createGroup() {
-    this.nodeToAdd = this.ProjectService.createGroup(this.createGroupTitle);
-    this.showCreateGroup = false;
-    this.createGroupTitle = '';
-    this.insertGroupMode = true;
-    this.createMode = true;
-  }
-
   insertInside(nodeId) {
     // TODO check that we are inserting into a group
-    if (this.createMode) {
-      this.handleCreateModeInsert(nodeId, 'inside');
-    } else if (this.moveMode) {
+    if (this.moveMode) {
       this.handleMoveModeInsert(nodeId, 'inside');
     } else if (this.copyMode) {
       this.handleCopyModeInsert(nodeId, 'inside');
@@ -239,52 +226,11 @@ class ProjectAuthoringController {
   }
 
   insertAfter(nodeId) {
-    if (this.createMode) {
-      this.handleCreateModeInsert(nodeId, 'after');
-    } else if (this.moveMode) {
+    if (this.moveMode) {
       this.handleMoveModeInsert(nodeId, 'after');
     } else if (this.copyMode) {
       this.handleCopyModeInsert(nodeId, 'after');
     }
-  }
-
-  /**
-   * Create a node and then insert it in the specified location
-   * @param nodeId insert the new node inside or after this node id
-   * @param moveTo whether to insert 'inside' or 'after' the nodeId parameter
-   */
-  handleCreateModeInsert(nodeId, moveTo) {
-    if (moveTo === 'inside') {
-      this.ProjectService.createNodeInside(this.nodeToAdd, nodeId);
-    } else if (moveTo === 'after') {
-      this.ProjectService.createNodeAfter(this.nodeToAdd, nodeId);
-    } else {
-      // an unspecified moveTo was provided
-      return;
-    }
-
-    let newNodes = [this.nodeToAdd];
-    let newNode = this.nodeToAdd;
-    this.nodeToAdd = null;
-    this.createMode = false;
-    this.insertGroupMode = false;
-    this.insertNodeMode = false;
-    this.temporarilyHighlightNewNodes(newNodes);
-
-    this.ProjectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
-      this.refreshProject();
-      if (newNode != null) {
-        let nodeCreatedEventData = {
-          nodeId: newNode.id,
-          title: this.ProjectService.getNodePositionAndTitle(newNode.id)
-        };
-        if (this.ProjectService.isGroupNode(newNode.id)) {
-          this.saveEvent('activityCreated', 'Authoring', nodeCreatedEventData);
-        } else {
-          this.saveEvent('stepCreated', 'Authoring', nodeCreatedEventData);
-        }
-      }
-    });
   }
 
   /**
@@ -573,14 +519,8 @@ class ProjectAuthoringController {
     this.activityNodeSelected = false;
   }
 
-  creatNewActivityClicked() {
-    this.clearGroupTitle();
-    this.toggleGroupView();
-    if (this.showCreateGroup) {
-      this.$timeout(() => {
-        $('#createGroupTitle').focus();
-      });
-    }
+  protected createNewLesson(): void {
+    this.$state.go('root.at.project.add-lesson.configure');
   }
 
   createNewStep() {
@@ -595,7 +535,6 @@ class ProjectAuthoringController {
     this.insertGroupMode = false;
     this.insertNodeMode = false;
     this.nodeToAdd = null;
-    this.createMode = false;
     this.moveMode = false;
     this.copyMode = false;
     this.unselectAllItems();
@@ -654,19 +593,6 @@ class ProjectAuthoringController {
 
   isNodeInAnyBranchPath(nodeId) {
     return this.ProjectService.isNodeInAnyBranchPath(nodeId);
-  }
-
-  showProjectView() {
-    this.clearGroupTitle();
-    this.showCreateGroup = false;
-  }
-
-  toggleGroupView() {
-    this.showCreateGroup = !this.showCreateGroup;
-  }
-
-  clearGroupTitle() {
-    this.createGroupTitle = '';
   }
 
   goBackToProjectList() {
