@@ -161,7 +161,7 @@ export class ConstraintService {
     }
     const constraints = [];
     const allConstraints = this.activeConstraints;
-    for (let constraint of allConstraints) {
+    for (const constraint of allConstraints) {
       if (this.isNodeAffectedByConstraint(node, constraint)) {
         constraints.push(constraint);
       }
@@ -181,36 +181,33 @@ export class ConstraintService {
       return cachedResult;
     } else {
       let result = false;
-      const nodeId = node.id;
-      const targetId = constraint.targetId;
-      const action = constraint.action;
-
-      if (action === 'makeAllNodesAfterThisNotVisible') {
-        if (this.projectService.isNodeIdAfter(targetId, node.id)) {
-          result = true;
-        }
-      } else if (action === 'makeAllNodesAfterThisNotVisitable') {
-        if (this.projectService.isNodeIdAfter(targetId, node.id)) {
-          result = true;
-        }
+      if (
+        this.isNodeAfterConstraintAction(constraint.action) &&
+        this.projectService.isNodeIdAfter(constraint.targetId, node.id)
+      ) {
+        result = true;
       } else {
-        const targetNode = this.projectService.getNodeById(targetId);
-        if (targetNode != null) {
-          const nodeType = targetNode.type;
-          if (nodeType === 'node' && nodeId === targetId) {
-            result = true;
-          } else if (
-            nodeType === 'group' &&
-            (nodeId === targetId || this.projectService.isNodeDescendentOfGroup(node, targetNode))
-          ) {
-            result = true;
-          }
-        }
+        result = this.isNodeTargetOfConstraint(node, constraint.targetId);
       }
-
       this.cacheIsNodeAffectedByConstraintResult(node.id, constraint.id, result);
       return result;
     }
+  }
+
+  private isNodeAfterConstraintAction(action: string): boolean {
+    return (
+      action === 'makeAllNodesAfterThisNotVisible' || action === 'makeAllNodesAfterThisNotVisitable'
+    );
+  }
+
+  private isNodeTargetOfConstraint(node: any, targetId: string) {
+    const targetNode = this.projectService.getNodeById(targetId);
+    return (
+      targetNode != null &&
+      ((targetNode.type === 'node' && node.id === targetId) ||
+        (targetNode.type === 'group' &&
+          (node.id === targetId || this.projectService.isNodeDescendentOfGroup(node, targetNode))))
+    );
   }
 
   /**
