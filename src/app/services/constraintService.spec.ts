@@ -152,45 +152,46 @@ function evaluateCriterias() {
 }
 
 function getConstraintsThatAffectNode() {
-  let constraint1: Constraint;
-  let constraint2: Constraint;
-  let constraint3: Constraint;
+  const constraint1: Constraint = new Constraint({
+    id: 'constraint1',
+    action: 'makeAllNodesAfterThisNotVisible',
+    targetId: nodeId5
+  });
+  const constraint2: Constraint = new Constraint({
+    id: 'constraint2',
+    action: 'makeThisNodeNotVisitable',
+    targetId: nodeId2
+  });
+  const constraint3: Constraint = new Constraint({
+    id: 'constraint3',
+    action: 'makeThisNodeNotVisitable',
+    targetId: groupId2
+  });
   describe('getConstraintsThatAffectNode()', () => {
     beforeEach(() => {
       spyOn(configService, 'getConfigParam').and.returnValue(true);
-      constraint1 = new Constraint({
-        id: 'constraint1',
-        action: 'makeAllNodesAfterThisNotVisible',
-        targetId: nodeId5
-      });
-      constraint2 = new Constraint({
-        id: 'constraint2',
-        action: 'makeThisNodeNotVisitable',
-        targetId: nodeId2
-      });
-      constraint3 = new Constraint({
-        id: 'constraint3',
-        action: 'makeThisNodeNotVisitable',
-        targetId: groupId2
-      });
       service.activeConstraints = [constraint1, constraint2, constraint3];
     });
     it(`should get the constraints that affect the node when there are no constraints that affect
         the node`, () => {
-      expect(service.getConstraintsThatAffectNode({ id: nodeId1 })).toEqual([]);
+      getConstraintsThatAffectNodeAndExpect(nodeId1, []);
     });
     it(`should get the constraints that affect the node when there is a node after constraint that
         affects the node`, () => {
-      expect(service.getConstraintsThatAffectNode({ id: nodeId6 })).toEqual([constraint1]);
+      getConstraintsThatAffectNodeAndExpect(nodeId6, [constraint1]);
     });
     it(`should get the constraints that affect the node when the node is the target`, () => {
-      expect(service.getConstraintsThatAffectNode({ id: nodeId2 })).toEqual([constraint2]);
+      getConstraintsThatAffectNodeAndExpect(nodeId2, [constraint2]);
     });
     it(`should get the constraints that affect the node when the node is a child of the
         target`, () => {
-      expect(service.getConstraintsThatAffectNode({ id: nodeId4 })).toEqual([constraint3]);
+      getConstraintsThatAffectNodeAndExpect(nodeId4, [constraint3]);
     });
   });
+}
+
+function getConstraintsThatAffectNodeAndExpect(nodeId: string, expectedConstraints: Constraint[]) {
+  expect(service.getConstraintsThatAffectNode({ id: nodeId })).toEqual(expectedConstraints);
 }
 
 function orderConstraints() {
