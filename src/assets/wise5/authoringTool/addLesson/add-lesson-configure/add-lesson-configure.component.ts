@@ -1,17 +1,20 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UpgradeModule } from '@angular/upgrade/static';
 
 @Component({
   templateUrl: './add-lesson-configure.component.html'
 })
 export class AddLessonConfigureComponent {
-  name: string;
-  @ViewChild('nameField') nameField: ElementRef;
+  addLessonFormGroup: FormGroup = this.fb.group({
+    title: new FormControl('', [Validators.required])
+  });
+  @ViewChild('titleField') titleField: ElementRef;
 
-  constructor(private upgrade: UpgradeModule) {}
+  constructor(private fb: FormBuilder, private upgrade: UpgradeModule) {}
 
   ngAfterViewInit() {
-    this.nameField.nativeElement.focus();
+    this.titleField.nativeElement.focus();
   }
 
   protected cancel(): void {
@@ -20,7 +23,7 @@ export class AddLessonConfigureComponent {
 
   protected next(): void {
     this.upgrade.$injector.get('$state').go('root.at.project.add-lesson.choose-location', {
-      name: this.name
+      title: this.addLessonFormGroup.controls['title'].value
     });
   }
 }

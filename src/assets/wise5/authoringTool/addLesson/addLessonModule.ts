@@ -21,7 +21,7 @@ export default angular
           url: '/add-lesson',
           abstract: true,
           params: {
-            name: ''
+            title: ''
           }
         })
         .state('root.at.project.add-lesson.configure', {

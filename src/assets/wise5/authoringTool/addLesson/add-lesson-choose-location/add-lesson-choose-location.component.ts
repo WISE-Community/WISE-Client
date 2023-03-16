@@ -7,7 +7,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   templateUrl: './add-lesson-choose-location.component.html'
 })
 export class AddLessonChooseLocationComponent implements OnInit {
-  name: string;
+  title: string;
   groupIds: string[];
   unusedGroupIds: string[] = [];
 
@@ -16,7 +16,7 @@ export class AddLessonChooseLocationComponent implements OnInit {
     private projectService: TeacherProjectService,
     private upgrade: UpgradeModule
   ) {
-    this.name = this.upgrade.$injector.get('$stateParams').name;
+    this.title = this.upgrade.$injector.get('$stateParams').title;
   }
 
   ngOnInit(): void {
@@ -27,13 +27,13 @@ export class AddLessonChooseLocationComponent implements OnInit {
   }
 
   protected addLessonAfter(nodeId: string): void {
-    const newLesson = this.projectService.createGroup(this.name);
+    const newLesson = this.projectService.createGroup(this.title);
     this.projectService.createNodeAfter(newLesson, nodeId);
     this.save(newLesson);
   }
 
   protected addLessonAtBeginning(active: boolean): void {
-    const newLesson = this.projectService.createGroup(this.name);
+    const newLesson = this.projectService.createGroup(this.title);
     const insertInsideNodeId = active ? 'group0' : 'inactiveGroups';
     this.projectService.createNodeInside(newLesson, insertInsideNodeId);
     this.save(newLesson);
