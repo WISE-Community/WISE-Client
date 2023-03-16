@@ -127,30 +127,6 @@ export class UtilService {
     return values.reduce((a, b) => a + b) / values.length;
   }
 
-  greaterThanEqualTo(a: number, b: number): boolean {
-    return a >= b;
-  }
-
-  greaterThan(a: number, b: number): boolean {
-    return a > b;
-  }
-
-  lessThanEqualTo(a: number, b: number): boolean {
-    return a <= b;
-  }
-
-  lessThan(a: number, b: number): boolean {
-    return a < b;
-  }
-
-  equalTo(a: number, b: number): boolean {
-    return a === b;
-  }
-
-  notEqualTo(a: number, b: number): boolean {
-    return a !== b;
-  }
-
   getSavedMessage(clientSaveTime: number, showFullDate: boolean = false): string {
     let saveTimeText = this.getSaveTimeText(clientSaveTime, showFullDate);
     return $localize`Saved ${saveTimeText}:saveTime:`;
