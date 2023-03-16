@@ -7,8 +7,9 @@ import { UtilService } from '../../services/util.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
-
+import { ConfigService } from '../../services/config.service';
 @Component({
   selector: 'register-student-form',
   templateUrl: './register-student-form.component.html',
@@ -28,6 +29,7 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     { code: 'MALE', label: $localize`Male` },
     { code: 'NO_ANSWER', label: $localize`No Answer/Other` }
   ];
+  isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
   months: any[] = [
     { code: '1', label: $localize`01 (Jan)` },
     { code: '2', label: $localize`02 (Feb)` },
@@ -49,7 +51,9 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
+    private configService: ConfigService,
     private fb: FormBuilder,
+    private recaptchaV3Service: ReCaptchaV3Service,
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
@@ -101,10 +105,10 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     return this.studentUser.googleUserId != null;
   }
 
-  createAccount() {
+  async createAccount() {
     if (this.createStudentAccountFormGroup.valid) {
       this.processing = true;
-      this.populateStudentUser();
+      await this.populateStudentUser();
       this.studentService.registerStudentAccount(this.studentUser).subscribe(
         (response: any) => {
           this.createAccountSuccess(response);
@@ -139,19 +143,26 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
           .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
           .setErrors(formError);
         break;
+      case 'recaptchaResponseInvalid':
+        this.studentUser['isRecaptchaInvalid'] = true;
+        break;
       default:
         this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.messageCode));
     }
     this.processing = false;
   }
 
-  populateStudentUser() {
+  async populateStudentUser() {
     for (let key of Object.keys(this.createStudentAccountFormGroup.controls)) {
       if (key == 'birthMonth' || key == 'birthDay') {
         this.studentUser[key] = parseInt(this.createStudentAccountFormGroup.get(key).value);
       } else {
         this.studentUser[key] = this.createStudentAccountFormGroup.get(key).value;
       }
+    }
+    if (this.isRecaptchaEnabled) {
+      const token = await this.recaptchaV3Service.execute('importantAction').toPromise();
+      this.studentUser['token'] = token;
     }
     if (!this.isUsingGoogleId()) {
       this.studentUser['password'] = this.getPassword();

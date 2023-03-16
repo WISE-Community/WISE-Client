@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NodeService } from '../../../../services/nodeService';
+import { NodeStatusService } from '../../../../services/nodeStatusService';
 import { ProjectService } from '../../../../services/projectService';
 import { StudentDataService } from '../../../../services/studentDataService';
 
@@ -24,6 +25,7 @@ export class StepToolsComponent implements OnInit {
 
   constructor(
     private nodeService: NodeService,
+    private nodeStatusService: NodeStatusService,
     private projectService: ProjectService,
     private studentDataService: StudentDataService
   ) {}
@@ -35,7 +37,7 @@ export class StepToolsComponent implements OnInit {
       this.icons = { prev: 'chevron_right', next: 'chevron_left' };
     }
     this.calculateNodeIds();
-    this.nodeStatuses = this.studentDataService.getNodeStatuses();
+    this.nodeStatuses = this.nodeStatusService.getNodeStatuses();
     this.idToOrder = this.projectService.idToOrder;
     this.updateModel();
     this.subscribeToChanges();

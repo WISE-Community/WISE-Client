@@ -98,7 +98,6 @@ function saveStudentStatus_nodeStatusChanged_PostStudentStatus() {
     spyOn(configService, 'getWorkgroupId').and.returnValue(workgroupId);
     spyOn(configService, 'getStudentStatusURL').and.returnValue(studentStatusUrl);
     spyOn(studentDataService, 'getCurrentNodeId').and.returnValue(nodeId);
-    spyOn(studentDataService, 'getNodeStatuses').and.returnValue(nodeStatuses);
     spyOn(studentDataService, 'getProjectCompletion').and.returnValue(projectCompletion);
     const httpPostSpy = spyOn(http, 'post').and.callFake((url: string, body: any) => {
       return of({} as any);

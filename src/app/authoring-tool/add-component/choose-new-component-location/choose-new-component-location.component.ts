@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { goToNodeAuthoring } from '../../../../assets/wise5/common/ui-router/ui-router';
 import { ComponentTypeService } from '../../../../assets/wise5/services/componentTypeService';
 import { ConfigService } from '../../../../assets/wise5/services/configService';
 import { TeacherDataService } from '../../../../assets/wise5/services/teacherDataService';
@@ -34,7 +35,7 @@ export class ChooseNewComponentLocation {
     this.insertComponentAfter(null);
   }
 
-  insertComponentAfter(insertAfterComponentId = null) {
+  insertComponentAfter(insertAfterComponentId = null): void {
     const newComponent = this.TeacherProjectService.createComponent(
       this.nodeId,
       this.upgrade.$injector.get('$stateParams').componentType,
@@ -42,11 +43,12 @@ export class ChooseNewComponentLocation {
     );
     this.TeacherProjectService.saveProject().then(() => {
       this.saveAddComponentEvent(newComponent);
-      this.upgrade.$injector.get('$state').go('root.at.project.node', {
-        projectId: this.ConfigService.getProjectId(),
-        nodeId: this.nodeId,
-        newComponents: [newComponent]
-      });
+      goToNodeAuthoring(
+        this.upgrade.$injector.get('$state'),
+        this.ConfigService.getProjectId(),
+        this.nodeId,
+        [newComponent]
+      );
     });
   }
 

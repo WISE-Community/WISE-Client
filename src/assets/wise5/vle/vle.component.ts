@@ -10,9 +10,9 @@ import { StudentDataService } from '../services/studentDataService';
 import { VLEProjectService } from './vleProjectService';
 import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
 import { AnnotationService } from '../services/annotationService';
-import { UtilService } from '../services/utilService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WiseLinkService } from '../../../app/services/wiseLinkService';
+import { convertToPNGFile } from '../common/canvas/canvas';
 
 @Component({
   selector: 'vle',
@@ -49,7 +49,6 @@ export class VLEComponent implements AfterViewInit {
     private router: Router,
     private sessionService: SessionService,
     private studentDataService: StudentDataService,
-    private utilService: UtilService,
     private wiseLinkService: WiseLinkService
   ) {}
 
@@ -109,11 +108,19 @@ export class VLEComponent implements AfterViewInit {
   }
 
   @HostListener('window:snip-image', ['$event.detail.target'])
-  snipImage(image: Element): void {
+  snipImage(image: HTMLImageElement): void {
     this.notebookService.addNote(
       this.studentDataService.getCurrentNodeId(),
-      this.utilService.getImageObjectFromImageElement(image)
+      this.getImageObjectFromImageElement(image)
     );
+  }
+
+  private getImageObjectFromImageElement(image: HTMLImageElement): File {
+    const canvas = document.createElement('canvas');
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+    canvas.getContext('2d').drawImage(image, 0, 0);
+    return convertToPNGFile(canvas);
   }
 
   closeNotes(): void {

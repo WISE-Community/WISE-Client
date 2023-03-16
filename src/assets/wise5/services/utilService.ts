@@ -2,56 +2,12 @@
 
 import { formatDate } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
-import { convertToPNGFile } from '../common/canvas/canvas';
 import { copy } from '../common/object/object';
 import '../lib/jquery/jquery-global';
 
 @Injectable()
 export class UtilService {
   constructor(@Inject(LOCALE_ID) private localeID: string) {}
-
-  convertStringToNumber(str) {
-    if (str != null && str != '' && !isNaN(Number(str))) {
-      return Number(str);
-    }
-    return str;
-  }
-
-  /**
-   * Get an image object from an image element
-   * @param imageElement an image element (<img src='abc.jpg'/>)
-   * @returns an image object
-   */
-  getImageObjectFromImageElement(imageElement: any): any {
-    const canvas = document.createElement('canvas');
-    canvas.width = imageElement.naturalWidth;
-    canvas.height = imageElement.naturalHeight;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(imageElement, 0, 0);
-    return convertToPNGFile(canvas);
-  }
-
-  isImage(fileName: string): boolean {
-    const imageExtensionsRegEx = new RegExp('.*.(png|jpg|jpeg|bmp|gif|tiff|svg|webp)');
-    return fileName.toLowerCase().match(imageExtensionsRegEx) != null;
-  }
-
-  isVideo(fileName: string): boolean {
-    const videoExtensionsRegEx = new RegExp('.*.(mp4|mpg|mpeg|m4v|m2v|avi|gifv|mov|qt|webm)');
-    return fileName.toLowerCase().match(videoExtensionsRegEx) != null;
-  }
-
-  isAudio(fileName: string): boolean {
-    const videoExtensionsRegEx = new RegExp('.*.(mp3|flac|m4a|ogg|wav|webm)');
-    return fileName.toLowerCase().match(videoExtensionsRegEx) != null;
-  }
-
-  replaceDivReference(html: string, newString: string): string {
-    return html.replace(
-      /document\.getElementById\('replace-with-unique-id'\)/g,
-      `document.getElementById('${newString}')`
-    );
-  }
 
   /**
    * Remove html tags and newlines from the string.
@@ -129,72 +85,6 @@ export class UtilService {
       return date.toDateString() + ' ' + date.toLocaleTimeString();
     }
     return '';
-  }
-
-  /**
-   * Check if two arrays contain the same values. This is commonly used to
-   * check if two arrays of ids contain the same values. The order of the
-   * elements is not compared, only the actual values. This means the elements
-   * can be in different orders but still contain the same values.
-   * Example:
-   * array1=['1234567890', 'abcdefghij']
-   * array2=['abcdefghij', '1234567890']
-   * If these two arrays are passed in as the two arguments, this function
-   * will return true.
-   * Note: This may only work if the elements are strings, numbers or
-   * booleans. If the elements are objects, this function may or may not work.
-   * @param array1 an array of strings, numbers, or booleans
-   * @param array2 an array of strings, numbers, or booleans
-   * @return whether the arrays contain the same values
-   */
-  arraysContainSameValues(array1, array2): boolean {
-    const array1Copy = copy(array1);
-    array1Copy.sort();
-    const array2Copy = copy(array2);
-    array2Copy.sort();
-    return JSON.stringify(array1Copy) == JSON.stringify(array2Copy);
-  }
-
-  /**
-   * Check if an array has any non null elements.
-   * @param arrayToCheck An array which may have null and non null elements.
-   * @return True if the array has at least one non null element.
-   * False if the array has all null elements.
-   */
-  arrayHasNonNullElement(arrayToCheck) {
-    for (let element of arrayToCheck) {
-      if (element != null) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Get the number of words in the string.
-   * @param str The string.
-   * @return The number of words in the string.
-   */
-  wordCount(str) {
-    return str.trim().split(/\s+/).length;
-  }
-
-  trimToLength(str: string, maxLength: number): string {
-    return str.length > maxLength ? `${str.substring(0, maxLength - 3)}...` : str;
-  }
-
-  /**
-   * Check if there is a 'nodeEntered' event in the array of events.
-   * @param events An array of events.
-   * @return Whether there is a 'nodeEntered' event in the array of events.
-   */
-  hasNodeEnteredEvent(events) {
-    for (let event of events) {
-      if (event.event == 'nodeEntered') {
-        return true;
-      }
-    }
-    return false;
   }
 
   /**

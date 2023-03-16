@@ -94,7 +94,7 @@ export class GraphService extends ComponentService {
     if (this.canEdit(component)) {
       return this.hasCompletedComponentState(componentStates, node, component);
     } else {
-      return this.UtilService.hasNodeEnteredEvent(nodeEvents);
+      return this.hasNodeEnteredEvent(nodeEvents);
     }
   }
 

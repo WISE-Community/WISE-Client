@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
+import { ConstraintService } from './constraintService';
 import { ProjectService } from './projectService';
 import { StudentDataService } from './studentDataService';
 
@@ -8,6 +9,7 @@ import { StudentDataService } from './studentDataService';
 export class NodeClickLockedService {
   constructor(
     private dialog: MatDialog,
+    private constraintService: ConstraintService,
     private projectService: ProjectService,
     private studentDataService: StudentDataService
   ) {}
@@ -22,7 +24,7 @@ export class NodeClickLockedService {
         message = $localize`<p>To visit <b>${nodeTitle}</b> you need to:</p><ul>`;
         this.projectService.orderConstraints(constraints);
         for (const constraint of constraints) {
-          if (!this.studentDataService.evaluateConstraint(constraint)) {
+          if (!this.constraintService.evaluateConstraint(constraint)) {
             message += `<li>${this.getConstraintMessage(constraint)}</li>`;
           }
         }

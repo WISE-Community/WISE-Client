@@ -49,7 +49,7 @@ export class LabelService extends ComponentService {
   }
 
   isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
-    if (!this.canEdit(component) && this.UtilService.hasNodeEnteredEvent(nodeEvents)) {
+    if (!this.canEdit(component) && this.hasNodeEnteredEvent(nodeEvents)) {
       return true;
     }
     if (componentStates != null && componentStates.length > 0) {

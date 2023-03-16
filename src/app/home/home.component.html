@@ -37,11 +37,11 @@
         Integrated science learning and teaching with technology
       </div>
     </ng-template>
-    <ng-template #sideTemplate>
+    <ng-template #sideTemplate *ngIf="isDiscourseNewsAvailable">
       <discourse-latest-news
         [@bounceIn]="{ value: '*', params: { duration: '1.25s', delay: '3500ms' } }"
-        baseUrl="https://wise-discuss.berkeley.edu"
-        category="c/news-announcements/7"
+        [baseUrl]="discourseUrl"
+        [category]="discourseNewsCategory"
         queryString="order=latest"
       >
       </discourse-latest-news>

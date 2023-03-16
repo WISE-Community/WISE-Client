@@ -9,50 +9,10 @@ describe('UtilService', () => {
     });
     service = TestBed.inject(UtilService);
   });
-  convertStringToNumberTests();
-  arrayHasNonNullElementTests();
   calculateMeanTests();
-  trimToLength();
   removeHTMLTags();
   replaceImgTagWithFileName();
 });
-
-function convertStringToNumberTests() {
-  describe('convertStringToNumber()', () => {
-    it('should convert a number string to a number', () => {
-      expect(service.convertStringToNumber('5')).toEqual(5);
-      expect(service.convertStringToNumber('-100')).toEqual(-100);
-    });
-
-    it('should return null for null argument', () => {
-      expect(service.convertStringToNumber(null)).toBeNull();
-    });
-
-    it('should return non-null number string as is', () => {
-      expect(service.convertStringToNumber('abc')).toEqual('abc');
-      expect(service.convertStringToNumber('')).toEqual('');
-    });
-  });
-}
-
-function arrayHasNonNullElementTests() {
-  describe('arrayHasNonNullElement()', () => {
-    it('should return true if it has at least one non null element', () => {
-      const arrayToCheck = [null, {}, null];
-      expect(service.arrayHasNonNullElement(arrayToCheck)).toEqual(true);
-    });
-
-    it('should return false if it has all null elements', () => {
-      const arrayToCheck = [null, null, null];
-      expect(service.arrayHasNonNullElement(arrayToCheck)).toEqual(false);
-    });
-
-    it('should return true if it has all non null elements', () => {
-      const arrayToCheck = [{}, {}, {}];
-      expect(service.arrayHasNonNullElement(arrayToCheck)).toEqual(true);
-    });
-  });
-}
 
 function calculateMeanTests() {
   describe('calculateMean()', () => {
@@ -64,18 +24,6 @@ function calculateMeanTests() {
     it('should calculate the mean when there are multiple values', () => {
       const values = [1, 2, 3, 4, 10];
       expect(service.calculateMean(values)).toEqual(4);
-    });
-  });
-}
-
-function trimToLength() {
-  describe('trimToLength()', () => {
-    it('should keep strings intact if its length is equal to or less than max length', () => {
-      expect(service.trimToLength('123456789', 9)).toEqual('123456789');
-      expect(service.trimToLength('123456789', 10)).toEqual('123456789');
-    });
-    it('should trim length and add ellipses if length is longer than max length', () => {
-      expect(service.trimToLength('123456789', 7)).toEqual('1234...');
     });
   });
 }

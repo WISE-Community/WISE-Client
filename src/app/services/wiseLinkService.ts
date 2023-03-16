@@ -3,15 +3,13 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { replaceWiseLinks } from '../../assets/wise5/common/wise-link/wise-link';
 import { NodeService } from '../../assets/wise5/services/nodeService';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 
 @Injectable()
 export class WiseLinkService {
   constructor(
     private nodeService: NodeService,
     private sanitizer: DomSanitizer,
-    private studentDataService: StudentDataService,
-    private utilService: UtilService
+    private studentDataService: StudentDataService
   ) {}
 
   wiseLinkClickedEventName: string = 'wiselinkclicked';
@@ -60,7 +58,14 @@ export class WiseLinkService {
 
   generateHtmlWithWiseLink(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(
-      this.utilService.replaceDivReference(replaceWiseLinks(html), this.wiseLinkCommunicatorId)
+      this.replaceDivReference(replaceWiseLinks(html), this.wiseLinkCommunicatorId)
+    );
+  }
+
+  private replaceDivReference(html: string, newString: string): string {
+    return html.replace(
+      /document\.getElementById\('replace-with-unique-id'\)/g,
+      `document.getElementById('${newString}')`
     );
   }
 }
