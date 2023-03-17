@@ -5,45 +5,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { StudentService } from '../../../student/student.service';
 import { ConfigService } from '../../../services/config.service';
 import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
-import { By } from '@angular/platform-browser';
 
 let component: ForgotStudentPasswordSecurityComponent;
-let configService: ConfigService;
 let fixture: ComponentFixture<ForgotStudentPasswordSecurityComponent>;
 let recaptchaV3Service: ReCaptchaV3Service;
 let studentService: StudentService;
 
-function submitAndReceiveResponse(studentServiceFunctionName, status, messageCode) {
-  const studentService = TestBed.get(StudentService);
-  const observableResponse = createObservableResponse(status, messageCode);
-  spyOn(studentService, studentServiceFunctionName).and.returnValue(observableResponse);
-  component.submit();
-  fixture.detectChanges();
-}
-function createObservableResponse(status, messageCode) {
-  const observableResponse = Observable.create((observer) => {
-    const response = {
-      status: status,
-      messageCode: messageCode
-    };
-    observer.next(response);
-    observer.complete();
-  });
-  return observableResponse;
-}
-
-function getErrorMessage() {
-  const errorMessageDiv = fixture.debugElement.nativeElement.querySelector('.warn');
-  return errorMessageDiv.textContent;
-}
-
-function getSubmitButton() {
-  return fixture.debugElement.nativeElement.querySelector('button[type="submit"]');
-}
 export class MockStudentService {
   checkSecurityAnswer(username: string, answer: string): Observable<any> {
     return Observable.create((observer) => {
@@ -55,9 +26,11 @@ export class MockStudentService {
     });
   }
 }
+
 class MockConfigService {
   isRecaptchaEnabled() {}
 }
+
 describe('ForgotStudentPasswordSecurityComponent', () => {
   beforeEach(
     waitForAsync(() => {
@@ -80,17 +53,17 @@ describe('ForgotStudentPasswordSecurityComponent', () => {
   );
 
   beforeEach(() => {
-    configService = TestBed.inject(ConfigService);
     fixture = TestBed.createComponent(ForgotStudentPasswordSecurityComponent);
     recaptchaV3Service = TestBed.inject(ReCaptchaV3Service);
     component = fixture.componentInstance;
+    component.isRecaptchaEnabled = false;
     fixture.detectChanges();
   });
 
   changePassword();
 });
 
-function changePassword() {
+async function changePassword() {
   describe('changePassword()', () => {
     it('should create', () => {
       expect(component).toBeTruthy();
@@ -109,11 +82,13 @@ function changePassword() {
       expect(submitButton.disabled).toBe(false);
     });
 
-    it('should show the incorrect answer message', () => {
-      component.isRecaptchaEnabled = false;
-      submitAndReceiveResponse('checkSecurityAnswer', 'failure', 'incorrectAnswer');
-      expect(getErrorMessage()).toContain('Incorrect answer');
-    });
+    it(
+      'should show the incorrect answer message',
+      waitForAsync(() => {
+        submitAndReceiveResponse('checkSecurityAnswer', 'failure', 'incorrectAnswer');
+        expect(getErrorMessage()).toContain('Incorrect answer');
+      })
+    );
 
     it('should navigate to change password page', () => {
       const router = TestBed.get(Router);
@@ -125,7 +100,7 @@ function changePassword() {
       component.questionKey = questionKey;
       component.isRecaptchaEnabled = false;
       component.setControlFieldValue('answer', answer);
-      component.goToChangePasswordPage();
+      component.securityAnswerSuccess();
       const params = {
         username: username,
         questionKey: questionKey,
@@ -137,10 +112,46 @@ function changePassword() {
       });
     });
 
-    it('should show error when Recaptcha is invalid', () => {
-      component.isRecaptchaEnabled = false;
-      submitAndReceiveResponse('checkSecurityAnswer', 'failure', 'recaptchaResponseInvalid');
-      expect(getErrorMessage()).toContain('Recaptcha failed');
-    });
+    it(
+      'should show error when Recaptcha is invalid',
+      waitForAsync(async () => {
+        component.isRecaptchaEnabled = true;
+        studentService = TestBed.get(StudentService);
+        const observableResponse = createObservableResponse('failed', 'recaptchaResponseInvalid');
+        spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
+        spyOn(studentService, 'checkSecurityAnswer').and.returnValue(observableResponse);
+        await component.submit();
+        fixture.detectChanges();
+      })
+    );
   });
+}
+
+async function submitAndReceiveResponse(studentServiceFunctionName, status, messageCode) {
+  studentService = TestBed.get(StudentService);
+  const observableResponse = createObservableResponse(status, messageCode);
+  spyOn(studentService, studentServiceFunctionName).and.returnValue(observableResponse);
+  component.submit();
+  fixture.detectChanges();
+}
+
+function createObservableResponse(status, messageCode) {
+  const observableResponse = Observable.create((observer) => {
+    const response = {
+      status: status,
+      messageCode: messageCode
+    };
+    observer.next(response);
+    observer.complete();
+  });
+  return observableResponse;
+}
+
+function getErrorMessage() {
+  const errorMessageDiv = fixture.debugElement.nativeElement.querySelector('.warn');
+  return errorMessageDiv.textContent;
+}
+
+function getSubmitButton() {
+  return fixture.debugElement.nativeElement.querySelector('button[type="submit"]');
 }

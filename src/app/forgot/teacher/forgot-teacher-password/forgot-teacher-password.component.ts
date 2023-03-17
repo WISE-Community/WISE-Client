@@ -43,11 +43,9 @@ export class ForgotTeacherPasswordComponent implements OnInit {
     this.clearMessage();
     this.showForgotUsernameLink = false;
     const username = this.getControlFieldValue('username');
-    let token;
+    let token = '';
     if (this.isRecaptchaEnabled) {
       token = await this.recaptchaV3Service.execute('importantAction').toPromise();
-    } else {
-      token = '';
     }
     this.teacherService
       .getVerificationCodeEmail(username, token)
@@ -58,39 +56,40 @@ export class ForgotTeacherPasswordComponent implements OnInit {
       )
       .subscribe((response) => {
         if (response.status === 'success') {
-          this.goToVerificationCodePage();
+          this.verificationCodeEmailSuccess();
         } else {
-          if (response.messageCode === 'usernameNotFound') {
-            this.setUsernameNotFoundMessage();
-            this.showForgotUsernameLink = true;
-          } else if (response.messageCode === 'tooManyVerificationCodeAttempts') {
-            this.setTooManyVerificationCodeAttemptsMessage();
-          } else if (response.messageCode === 'failedToSendEmail') {
-            this.setFailedToSendEmailMessage();
-          } else if (response.messageCode === 'recaptchaResponseInvalid') {
-            this.setRecaptchaResponseInvalidMessage();
-          }
+          this.verificationCodeEmailError(response);
         }
       });
   }
 
-  setUsernameNotFoundMessage() {
-    const message = $localize`We could not find that username. Please make sure you are typing it correctly and try again. If you have forgotten your username, please use the forgot username option below.`;
-    this.setMessage(message);
+  verificationCodeEmailSuccess() {
+    const params = {
+      username: this.getControlFieldValue('username')
+    };
+    this.router.navigate(['/forgot/teacher/password/verify'], {
+      queryParams: params,
+      skipLocationChange: true
+    });
   }
 
-  setTooManyVerificationCodeAttemptsMessage() {
-    const message = $localize`You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, you can try again.`;
-    this.setMessage(message);
-  }
-
-  setFailedToSendEmailMessage() {
-    const message = $localize`The server has encountered an error and was unable to send you an email. Please try again. If the error continues to occur, please contact us.`;
-    this.setMessage(message);
-  }
-
-  setRecaptchaResponseInvalidMessage() {
-    const message = $localize`Recaptcha failed. Please reload the page and try again.`;
+  verificationCodeEmailError(response: any): void {
+    let message;
+    switch (response.messageCode) {
+      case 'usernameNotFound':
+        message = $localize`We could not find that username. Please make sure you are typing it correctly and try again. If you have forgotten your username, please use the forgot username option below.`;
+        this.showForgotUsernameLink = true;
+        break;
+      case 'tooManyVerificationCodeAttempts':
+        message = $localize`You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, you can try again.`;
+        break;
+      case 'failedToSendEmail':
+        message = $localize`The server has encountered an error and was unable to send you an email. Please try again. If the error continues to occur, please contact us.`;
+        break;
+      case 'recaptchaResponseInvalid':
+        message = $localize`Recaptcha failed. Please reload the page and try again.`;
+        break;
+    }
     this.setMessage(message);
   }
 
@@ -100,15 +99,5 @@ export class ForgotTeacherPasswordComponent implements OnInit {
 
   clearMessage() {
     this.setMessage('');
-  }
-
-  goToVerificationCodePage() {
-    const params = {
-      username: this.getControlFieldValue('username')
-    };
-    this.router.navigate(['/forgot/teacher/password/verify'], {
-      queryParams: params,
-      skipLocationChange: true
-    });
   }
 }
