@@ -257,7 +257,7 @@ export class TeacherProjectService extends ProjectService {
    * @param title the title of the group
    * @returns the group object
    */
-  createGroup(title) {
+  createGroup(title: string): any {
     return {
       id: this.getNextAvailableGroupId(),
       type: 'group',
