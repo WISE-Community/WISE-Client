@@ -74,7 +74,7 @@ export class NodeStatusService {
   private calculateNodeStatus(node: any): NodeStatus {
     const nodeId = node.id;
     const nodeStatus = new NodeStatus(nodeId);
-    const constraintsForNode = this.projectService.getConstraintsThatAffectNode(node);
+    const constraintsForNode = this.constraintService.getConstraintsThatAffectNode(node);
     const constraintResults = this.constraintService.evaluate(constraintsForNode);
     nodeStatus.isVisible = constraintResults.isVisible;
     nodeStatus.isVisitable = constraintResults.isVisitable;

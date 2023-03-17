@@ -23,11 +23,13 @@ import { AnnotationService } from './annotationService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { ConfigService } from './configService';
 import { NotebookService } from './notebookService';
+import { ProjectService } from './projectService';
 import { StudentDataService } from './studentDataService';
 import { TagService } from './tagService';
 
 @Injectable()
 export class ConstraintService {
+  activeConstraints: any[] = [];
   criteriaFunctionNameToStrategy = {
     addXNumberOfNotesOnThisStep: new AddXNumberOfNotesOnThisStepConstraintStrategy(),
     branchPathTaken: new BranchPathTakenConstraintStrategy(),
@@ -48,13 +50,15 @@ export class ConstraintService {
     wroteXNumberOfWords: new WroteXNumberOfWordsConstraintStrategy()
   };
   evaluateConstraintContext: EvaluateConstraintContext;
+  isNodeAffectedByConstraintResult: any = {};
 
   constructor(
     annotationService: AnnotationService,
     componentServiceLookupService: ComponentServiceLookupService,
-    configService: ConfigService,
+    private configService: ConfigService,
     dataService: StudentDataService,
     notebookService: NotebookService,
+    private projectService: ProjectService,
     tagService: TagService
   ) {
     this.evaluateConstraintContext = new EvaluateConstraintContext(
@@ -65,6 +69,24 @@ export class ConstraintService {
       notebookService,
       tagService
     );
+    this.subscribeToProjectParsed();
+  }
+
+  private subscribeToProjectParsed(): void {
+    this.projectService.projectParsed$.subscribe(() => {
+      this.activeConstraints = [];
+      this.isNodeAffectedByConstraintResult = {};
+      for (const node of this.projectService.project.nodes) {
+        const constraints = node.constraints;
+        if (constraints != null) {
+          if (this.configService.getConfigParam('constraints')) {
+            for (const constraint of constraints) {
+              this.activeConstraints.push(constraint);
+            }
+          }
+        }
+      }
+    });
   }
 
   evaluate(constraints: any[]): ConstraintEvaluationResult {
@@ -131,5 +153,110 @@ export class ConstraintService {
 
   evaluateCriterias(criterias: any[]): boolean {
     return criterias.every((criteria) => this.evaluateCriteria(criteria));
+  }
+
+  getConstraintsThatAffectNode(node: any): any[] {
+    if (!this.configService.getConfigParam('constraints')) {
+      return [];
+    }
+    const constraints = [];
+    const allConstraints = this.activeConstraints;
+    for (const constraint of allConstraints) {
+      if (this.isNodeAffectedByConstraint(node, constraint)) {
+        constraints.push(constraint);
+      }
+    }
+    return constraints;
+  }
+
+  /**
+   * Check if a node is affected by the constraint
+   * @param node check if the node is affected
+   * @param constraint the constraint that might affect the node
+   * @returns whether the node is affected by the constraint
+   */
+  private isNodeAffectedByConstraint(node: any, constraint: any): boolean {
+    const cachedResult = this.getCachedIsNodeAffectedByConstraintResult(node.id, constraint.id);
+    if (cachedResult != null) {
+      return cachedResult;
+    } else {
+      let result = false;
+      if (
+        this.isNodeAfterConstraintAction(constraint.action) &&
+        this.projectService.isNodeIdAfter(constraint.targetId, node.id)
+      ) {
+        result = true;
+      } else {
+        result = this.isNodeTargetOfConstraint(node, constraint.targetId);
+      }
+      this.cacheIsNodeAffectedByConstraintResult(node.id, constraint.id, result);
+      return result;
+    }
+  }
+
+  private isNodeAfterConstraintAction(action: string): boolean {
+    return (
+      action === 'makeAllNodesAfterThisNotVisible' || action === 'makeAllNodesAfterThisNotVisitable'
+    );
+  }
+
+  private isNodeTargetOfConstraint(node: any, targetId: string) {
+    const targetNode = this.projectService.getNodeById(targetId);
+    return (
+      targetNode != null &&
+      ((targetNode.type === 'node' && node.id === targetId) ||
+        (targetNode.type === 'group' &&
+          (node.id === targetId || this.projectService.isNodeDescendentOfGroup(node, targetNode))))
+    );
+  }
+
+  /**
+   * Check if we have calculated the result for whether the node is affected by the constraint
+   * @param nodeId the node id
+   * @param constraintId the constraint id
+   * @return Return the result if we have calculated the result before. If we have not calculated
+   * the result before, we will return null.
+   */
+  private getCachedIsNodeAffectedByConstraintResult(nodeId: string, constraintId: string): boolean {
+    return this.isNodeAffectedByConstraintResult[nodeId + '-' + constraintId];
+  }
+
+  /**
+   * Remember the result for whether the node is affected by the constraint
+   * @param nodeId the node id
+   * @param constraintId the constraint id
+   * @param whether the node is affected by the constraint
+   */
+  private cacheIsNodeAffectedByConstraintResult(
+    nodeId: string,
+    constraintId: string,
+    result: boolean
+  ): void {
+    this.isNodeAffectedByConstraintResult[nodeId + '-' + constraintId] = result;
+  }
+
+  /**
+   * Order the constraints so that they show up in the same order as in the project.
+   * @param constraints An array of constraint objects
+   * @return An array of ordered constraints
+   */
+  orderConstraints(constraints: any[]): any[] {
+    const orderedNodeIds = this.projectService.getFlattenedProjectAsNodeIds();
+    return constraints.sort(this.constraintsComparatorGenerator(orderedNodeIds));
+  }
+
+  /**
+   * Create the constraints comparator function that is used for sorting an array of constraint
+   * objects.
+   * @param orderedNodeIds An array of node ids in the order in which they show up in the project.
+   * @return A comparator that orders constraint objects in the order in which the target ids show
+   * up in the project.
+   */
+  private constraintsComparatorGenerator(orderedNodeIds: string[]): any {
+    return function (constraintA: any, constraintB: any) {
+      const constraintAIndex = orderedNodeIds.indexOf(constraintA.targetId);
+      const constraintBIndex = orderedNodeIds.indexOf(constraintB.targetId);
+      return constraintAIndex - constraintBIndex;
+    };
   }
 }

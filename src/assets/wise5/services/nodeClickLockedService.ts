@@ -18,11 +18,11 @@ export class NodeClickLockedService {
     this.studentDataService.nodeClickLocked$.subscribe(({ nodeId }) => {
       let message = $localize`Sorry, you cannot view this item yet.`;
       const node = this.projectService.getNodeById(nodeId);
-      const constraints = this.projectService.getConstraintsThatAffectNode(node);
+      const constraints = this.constraintService.getConstraintsThatAffectNode(node);
       if (constraints.length > 0) {
         const nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
         message = $localize`<p>To visit <b>${nodeTitle}</b> you need to:</p><ul>`;
-        this.projectService.orderConstraints(constraints);
+        this.constraintService.orderConstraints(constraints);
         for (const constraint of constraints) {
           if (!this.constraintService.evaluateConstraint(constraint)) {
             message += `<li>${this.getConstraintMessage(constraint)}</li>`;
