@@ -129,17 +129,17 @@ function evaluateNodeConstraintWithTwoRemovalCriteria() {
 
 function evaluateCriterias() {
   describe('evaluateCriterias()', () => {
-    it('should evaluate criterias when it is passed one criteria that is false', () => {
+    it(`should return false when it is passed one criteria that is false`, () => {
       const criterias = [criteria1];
       spyOn(dataService, 'isCompleted').and.returnValue(false);
       expect(service.evaluateCriterias(criterias)).toEqual(false);
     });
-    it('should evaluate criterias when it is passed one criteria that is true', () => {
+    it(`should return true when it is passed one criteria that is true`, () => {
       const criterias = [criteria1];
       spyOn(dataService, 'isCompleted').and.returnValue(true);
       expect(service.evaluateCriterias(criterias)).toEqual(true);
     });
-    it('should evaluate criterias when it is passed multiple criterias and one is false', () => {
+    it(`should return false when it is passed multiple criterias and one is false`, () => {
       const criterias = [criteria1, criteria2];
       spyOn(dataService, 'isCompleted')
         .withArgs(nodeId1)
@@ -172,19 +172,18 @@ function getConstraintsThatAffectNode() {
       spyOn(configService, 'getConfigParam').and.returnValue(true);
       service.activeConstraints = [constraint1, constraint2, constraint3];
     });
-    it(`should get the constraints that affect the node when there are no constraints that affect
-        the node`, () => {
+    it(`should return empty array when there are no constraints that affect the node`, () => {
       getConstraintsThatAffectNodeAndExpect(nodeId1, []);
     });
-    it(`should get the constraints that affect the node when there is a node after constraint that
-        affects the node`, () => {
+    it(`should return one constraint when there is a node after constraint that affects the
+        node`, () => {
       getConstraintsThatAffectNodeAndExpect(nodeId6, [constraint1]);
     });
-    it(`should get the constraints that affect the node when the node is the target`, () => {
+    it(`should return one constraint when the node is the target of a constraint`, () => {
       getConstraintsThatAffectNodeAndExpect(nodeId2, [constraint2]);
     });
-    it(`should get the constraints that affect the node when the node is a child of the
-        target`, () => {
+    it(`should return one constraint when the node is a child of the target in a
+        constraint`, () => {
       getConstraintsThatAffectNodeAndExpect(nodeId4, [constraint3]);
     });
   });
@@ -196,7 +195,7 @@ function getConstraintsThatAffectNodeAndExpect(nodeId: string, expectedConstrain
 
 function orderConstraints() {
   describe('orderConstraints()', () => {
-    it('should order constraints', () => {
+    it('should order constraints in the order that they are in the unit', () => {
       spyOn(projectService, 'getFlattenedProjectAsNodeIds').and.returnValue([
         nodeId1,
         nodeId2,
