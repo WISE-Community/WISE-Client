@@ -1,5 +1,9 @@
 <h5 i18n>Enter a title for the new lesson</h5>
-<form role="form" [formGroup]="addLessonFormGroup" (keydown.enter)="next(); $event.prventDefault()">
+<form
+  role="form"
+  [formGroup]="addLessonFormGroup"
+  (keydown.enter)="next(); $event.preventDefault()"
+>
   <mat-form-field appearance="fill" class="title-field">
     <mat-label i18n>Lesson Title</mat-label>
     <input
