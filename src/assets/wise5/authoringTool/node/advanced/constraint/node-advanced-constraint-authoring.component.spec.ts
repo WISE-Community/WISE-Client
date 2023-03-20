@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
@@ -43,6 +44,7 @@ describe('NodeAdvancedConstraintAuthoringComponent', () => {
       []
     );
     spyOn(TestBed.inject(TeacherProjectService), 'getNodeById').and.returnValue({
+      id: 'node1',
       constraints: []
     });
     spyOn(TestBed.inject(TeacherDataService), 'getCurrentNodeId').and.returnValue(nodeId1);
@@ -58,7 +60,7 @@ describe('NodeAdvancedConstraintAuthoringComponent', () => {
   }
 
   function deleteConstraint() {
-    it('should add a constraint', () => {
+    it('should delete a constraint', () => {
       spyOn(window, 'confirm').and.returnValue(true);
       component.addConstraint();
       expect(component.node.constraints.length).toEqual(1);
