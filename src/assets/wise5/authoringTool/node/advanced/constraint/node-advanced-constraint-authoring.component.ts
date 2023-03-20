@@ -291,7 +291,7 @@ export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
     const usedConstraintIds = this.node.constraints.map((constraint) => constraint.id);
     let constraintCounter = 1;
     while (true) {
-      const newConstraintId = this.node.id + 'Constraint' + constraintCounter;
+      const newConstraintId = `${this.node.id}Constraint${constraintCounter}`;
       if (!usedConstraintIds.includes(newConstraintId)) {
         return newConstraintId;
       } else {
@@ -365,12 +365,11 @@ export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
   }
 
   protected getChoiceTypeByNodeIdAndComponentId(nodeId: string, componentId: string): string {
-    let choiceType = null;
-    let component = this.projectService.getComponent(nodeId, componentId) as MultipleChoiceContent;
-    if (component != null && component.choiceType != null) {
-      choiceType = component.choiceType;
-    }
-    return choiceType;
+    const component = this.projectService.getComponent(
+      nodeId,
+      componentId
+    ) as MultipleChoiceContent;
+    return component != null && component.choiceType != null ? component.choiceType : null;
   }
 
   protected getComponents(nodeId: string): any[] {
