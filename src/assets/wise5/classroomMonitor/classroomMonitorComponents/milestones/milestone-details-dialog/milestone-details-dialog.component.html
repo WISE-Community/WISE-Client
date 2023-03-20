@@ -1,5 +1,5 @@
 <h1 mat-dialog-title i18n>Milestone: {{ milestone.name }}</h1>
-<div mat-dialog-content>
+<div mat-dialog-content class="dialog-content-scroll">
   <milestone-details [milestone]="milestone" (onVisitNodeGrading)="onVisitNodeGrading($event)">
   </milestone-details>
 </div>

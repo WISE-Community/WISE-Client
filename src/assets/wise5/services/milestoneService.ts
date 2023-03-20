@@ -5,7 +5,6 @@ import { AnnotationService } from './annotationService';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
 import { TeacherDataService } from './teacherDataService';
-import { UtilService } from './utilService';
 import { Injectable } from '@angular/core';
 import { copy } from '../common/object/object';
 
@@ -23,57 +22,80 @@ export class MilestoneService {
       return this.isPercentOfScoresSatisfiesComparator(
         satisfyCriterion,
         aggregateAutoScores,
-        this.UtilService.greaterThan
+        this.greaterThan
       );
     },
     percentOfScoresGreaterThanOrEqualTo: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
       return this.isPercentOfScoresSatisfiesComparator(
         satisfyCriterion,
         aggregateAutoScores,
-        this.UtilService.greaterThanEqualTo
+        this.greaterThanEqualTo
       );
     },
     percentOfScoresLessThan: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
       return this.isPercentOfScoresSatisfiesComparator(
         satisfyCriterion,
         aggregateAutoScores,
-        this.UtilService.lessThan
+        this.lessThan
       );
     },
     percentOfScoresLessThanOrEqualTo: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
       return this.isPercentOfScoresSatisfiesComparator(
         satisfyCriterion,
         aggregateAutoScores,
-        this.UtilService.lessThanEqualTo
+        this.lessThanEqualTo
       );
     },
     percentOfScoresEqualTo: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
       return this.isPercentOfScoresSatisfiesComparator(
         satisfyCriterion,
         aggregateAutoScores,
-        this.UtilService.equalTo
+        this.equalTo
       );
     },
     percentOfScoresNotEqualTo: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
       return this.isPercentOfScoresSatisfiesComparator(
         satisfyCriterion,
         aggregateAutoScores,
-        this.UtilService.notEqualTo
+        this.notEqualTo
       );
     }
   };
 
   constructor(
-    private AchievementService: AchievementService,
-    private AnnotationService: AnnotationService,
-    private ConfigService: ConfigService,
-    private ProjectService: ProjectService,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
+    private achievementService: AchievementService,
+    private annotationService: AnnotationService,
+    private configService: ConfigService,
+    private projectService: ProjectService,
+    private teacherDataService: TeacherDataService
   ) {}
 
+  private greaterThanEqualTo(a: number, b: number): boolean {
+    return a >= b;
+  }
+
+  private greaterThan(a: number, b: number): boolean {
+    return a > b;
+  }
+
+  private lessThanEqualTo(a: number, b: number): boolean {
+    return a <= b;
+  }
+
+  private lessThan(a: number, b: number): boolean {
+    return a < b;
+  }
+
+  private equalTo(a: number, b: number): boolean {
+    return a === b;
+  }
+
+  private notEqualTo(a: number, b: number): boolean {
+    return a !== b;
+  }
+
   getProjectMilestones() {
-    const achievements = this.ProjectService.getAchievements();
+    const achievements = this.projectService.getAchievements();
     if (achievements.isEnabled) {
       return achievements.items.filter((achievement) => {
         return ['milestone', 'milestoneReport'].includes(achievement.type);
@@ -100,9 +122,9 @@ export class MilestoneService {
   }
 
   getProjectMilestoneStatus(milestoneId: string) {
-    this.periodId = this.TeacherDataService.getCurrentPeriod().periodId;
+    this.periodId = this.teacherDataService.getCurrentPeriod().periodId;
     this.setWorkgroupsInCurrentPeriod();
-    let milestone = this.ProjectService.getAchievementByAchievementId(milestoneId);
+    let milestone = this.projectService.getAchievementByAchievementId(milestoneId);
     milestone = this.insertMilestoneItems(milestone);
     milestone = this.insertMilestoneCompletion(milestone);
     if (milestone.type === 'milestoneReport') {
@@ -112,7 +134,7 @@ export class MilestoneService {
   }
 
   insertMilestoneItems(milestone: any) {
-    milestone.items = copy(this.ProjectService.idToOrder);
+    milestone.items = copy(this.projectService.idToOrder);
     if (milestone.params != null && milestone.params.nodeIds != null) {
       for (const nodeId of milestone.params.nodeIds) {
         if (milestone.items[nodeId] != null) {
@@ -124,7 +146,7 @@ export class MilestoneService {
   }
 
   insertMilestoneCompletion(milestone: any) {
-    const achievementIdToStudentAchievements = this.AchievementService.getAchievementIdToStudentAchievementsMappings();
+    const achievementIdToStudentAchievements = this.achievementService.getAchievementIdToStudentAchievementsMappings();
     const studentAchievements = achievementIdToStudentAchievements[milestone.id];
     const workgroupIdsCompleted = [];
     const achievementTimes = [];
@@ -151,7 +173,7 @@ export class MilestoneService {
       const achievementTime = achievementTimes[c];
       const workgroupObject = {
         workgroupId: workgroupId,
-        displayNames: this.getDisplayUsernamesByWorkgroupId(workgroupId),
+        displayNames: this.configService.getDisplayUsernamesByWorkgroupId(workgroupId),
         achievementTime: achievementTime,
         completed: true
       };
@@ -161,7 +183,7 @@ export class MilestoneService {
     for (const workgroupId of workgroupIdsNotCompleted) {
       const workgroupObject = {
         workgroupId: workgroupId,
-        displayNames: this.getDisplayUsernamesByWorkgroupId(workgroupId),
+        displayNames: this.configService.getDisplayUsernamesByWorkgroupId(workgroupId),
         achievementTime: null,
         completed: false
       };
@@ -178,8 +200,8 @@ export class MilestoneService {
 
   setWorkgroupsInCurrentPeriod() {
     this.workgroupIds = [];
-    for (const workgroupId of this.ConfigService.getClassmateWorkgroupIds()) {
-      const currentPeriodId = this.ConfigService.getPeriodIdByWorkgroupId(workgroupId);
+    for (const workgroupId of this.configService.getClassmateWorkgroupIds()) {
+      const currentPeriodId = this.configService.getPeriodIdByWorkgroupId(workgroupId);
       if (this.periodId === -1 || currentPeriodId === this.periodId) {
         this.workgroupIds.push(workgroupId);
       }
@@ -208,10 +230,6 @@ export class MilestoneService {
     return referencedComponentValues[referencedComponentValues.length - 1];
   }
 
-  getDisplayUsernamesByWorkgroupId(workgroupId: number) {
-    return this.ConfigService.getDisplayUsernamesByWorkgroupId(workgroupId);
-  }
-
   isCompletionReached(projectAchievement: any) {
     return (
       projectAchievement.percentageCompleted >= projectAchievement.satisfyMinPercentage &&
@@ -235,7 +253,7 @@ export class MilestoneService {
     };
   }
 
-  getComponentAggregateAutoScores(projectAchievement: any): any[] {
+  private getComponentAggregateAutoScores(projectAchievement: any): any[] {
     const componentAggregateAutoScores = [];
     for (const referencedComponent of projectAchievement.report.locations) {
       const componentAggregateAutoScore = this.getComponentAggregateAutoScore(
@@ -249,7 +267,7 @@ export class MilestoneService {
     return componentAggregateAutoScores;
   }
 
-  getComponentAggregateAutoScore(
+  private getComponentAggregateAutoScore(
     nodeId: string,
     componentId: string,
     periodId: number,
@@ -264,7 +282,7 @@ export class MilestoneService {
     return {
       nodeId: nodeId,
       componentId: componentId,
-      stepTitle: this.ProjectService.getNodePositionAndTitle(nodeId),
+      stepTitle: this.projectService.getNodePositionAndTitle(nodeId),
       aggregateAutoScore: aggregateAutoScore
     };
   }
@@ -304,7 +322,7 @@ export class MilestoneService {
     );
   }
 
-  getComparatorSum(
+  private getComparatorSum(
     satisfyCriterion: any,
     aggregateData: any,
     possibleScores: number[],
@@ -319,7 +337,7 @@ export class MilestoneService {
     return sum;
   }
 
-  isPercentOfScoresSatisfiesComparator(
+  private isPercentOfScoresSatisfiesComparator(
     satisfyCriterion: any,
     aggregateAutoScores: any[],
     comparator: any
@@ -343,7 +361,11 @@ export class MilestoneService {
     return Object.keys(aggregateData.counts).map(Number).sort();
   }
 
-  isPercentThresholdSatisfied(satisfyCriterion: any, aggregateData: any, sum: number): boolean {
+  private isPercentThresholdSatisfied(
+    satisfyCriterion: any,
+    aggregateData: any,
+    sum: number
+  ): boolean {
     const percentOfScores = (100 * sum) / aggregateData.scoreCount;
     return percentOfScores >= satisfyCriterion.percentThreshold;
   }
@@ -372,7 +394,7 @@ export class MilestoneService {
     reportSettings: any
   ) {
     const aggregate = {};
-    const scoreAnnotations = this.AnnotationService.getAllLatestScoreAnnotations(
+    const scoreAnnotations = this.annotationService.getAllLatestScoreAnnotations(
       nodeId,
       componentId,
       periodId
@@ -381,7 +403,7 @@ export class MilestoneService {
       if (scoreAnnotation.type === 'autoScore') {
         this.addDataToAggregate(aggregate, scoreAnnotation, reportSettings);
       } else {
-        const autoScoreAnnotation = this.AnnotationService.getLatestScoreAnnotation(
+        const autoScoreAnnotation = this.annotationService.getLatestScoreAnnotation(
           nodeId,
           componentId,
           scoreAnnotation.toWorkgroupId,
@@ -400,7 +422,7 @@ export class MilestoneService {
     return aggregate;
   }
 
-  mergeAutoScoreAndTeacherScore(
+  private mergeAutoScoreAndTeacherScore(
     autoScoreAnnotation: any,
     teacherScoreAnnotation: any,
     reportSettings: any
@@ -512,7 +534,7 @@ export class MilestoneService {
     return content;
   }
 
-  getAggregateDataBySubScoreId(componentAggregateAutoScores: any[]): any {
+  private getAggregateDataBySubScoreId(componentAggregateAutoScores: any[]): any {
     const aggregateDataBySubScoreId = {};
     for (const componentAggregateAutoScore of componentAggregateAutoScores) {
       const aggregateAutoScore = componentAggregateAutoScore.aggregateAutoScore;
@@ -531,7 +553,7 @@ export class MilestoneService {
     return aggregateDataBySubScoreId;
   }
 
-  addAggregateDataBySubScoreId(
+  private addAggregateDataBySubScoreId(
     aggregateDataBySubScoreId: any,
     subScoreId: string,
     aggregateData: any,
@@ -546,7 +568,7 @@ export class MilestoneService {
     aggregateDataBySubScoreId[subScoreId].push(aggregateData);
   }
 
-  injectAdditionalFieldsIntoAggregateData(
+  private injectAdditionalFieldsIntoAggregateData(
     aggregateData: any,
     nodeId: string,
     componentId: string,
