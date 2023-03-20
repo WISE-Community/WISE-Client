@@ -32,19 +32,25 @@ export class SaveTimeMessageComponent {
     }
   }
 
-  private getSavedMessage(clientSaveTime: number, showFullDate: boolean = false): string {
-    const saveTimeText = this.getSaveTimeText(clientSaveTime, showFullDate);
-    return $localize`Saved ${saveTimeText}:saveTime:`;
+  private getSavedMessage(clientSaveTime: number, showFullDate: boolean): string {
+    return this.getMessageText('Saved', clientSaveTime, showFullDate);
   }
 
-  private getAutoSavedMessage(clientSaveTime: number, showFullDate: boolean = false): string {
-    const saveTimeText = this.getSaveTimeText(clientSaveTime, showFullDate);
-    return $localize`Auto Saved ${saveTimeText}:saveTime:`;
+  private getAutoSavedMessage(clientSaveTime: number, showFullDate: boolean): string {
+    return this.getMessageText('Auto Saved', clientSaveTime, showFullDate);
   }
 
-  private getSubmittedMessage(clientSaveTime: number, showFullDate: boolean = false): string {
+  private getSubmittedMessage(clientSaveTime: number, showFullDate: boolean): string {
+    return this.getMessageText('Submitted', clientSaveTime, showFullDate);
+  }
+
+  private getMessageText(
+    prefix: string,
+    clientSaveTime: number,
+    showFullDate: boolean = false
+  ): string {
     const saveTimeText = this.getSaveTimeText(clientSaveTime, showFullDate);
-    return $localize`Submitted ${saveTimeText}:saveTime:`;
+    return $localize`${prefix} ${saveTimeText}:saveTime:`;
   }
 
   private getSaveTimeText(saveTime: number, showFullDate: boolean = false): string {
