@@ -12564,6 +12564,27 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">105</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3124371804165766752" datatype="html">
+        <source>Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/save-time-message/save-time-message.component.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5275881069346355759" datatype="html">
+        <source>Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/save-time-message/save-time-message.component.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2692433425768915750" datatype="html">
+        <source>Submitted <x id="saveTime" equiv-text="saveTimeText"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/save-time-message/save-time-message.component.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="9ba24bf3c65fed6e59c2d2264be8d104f370a69c" datatype="html">
         <source>Previous Step</source>
         <context-group purpose="location">
@@ -18787,27 +18808,6 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
           <context context-type="linenumber">1009</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3124371804165766752" datatype="html">
-        <source>Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">132</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5275881069346355759" datatype="html">
-        <source>Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">137</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2692433425768915750" datatype="html">
-        <source>Submitted <x id="saveTime" equiv-text="saveTimeText"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="846fecebb7756c6127955bc2c08d2111dce64c3c" datatype="html">
