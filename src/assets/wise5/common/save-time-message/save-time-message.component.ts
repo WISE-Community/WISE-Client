@@ -44,11 +44,7 @@ export class SaveTimeMessageComponent {
     return this.getMessageText('Submitted', clientSaveTime, showFullDate);
   }
 
-  private getMessageText(
-    prefix: string,
-    clientSaveTime: number,
-    showFullDate: boolean = false
-  ): string {
+  private getMessageText(prefix: string, clientSaveTime: number, showFullDate: boolean): string {
     const saveTimeText = this.getSaveTimeText(clientSaveTime, showFullDate);
     return $localize`${prefix} ${saveTimeText}:saveTime:`;
   }
