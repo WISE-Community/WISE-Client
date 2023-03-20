@@ -175,6 +175,10 @@ function getConstraintsThatAffectNode() {
     it(`should return empty array when there are no constraints that affect the node`, () => {
       getConstraintsThatAffectNodeAndExpect(nodeId1, []);
     });
+    it(`should return empty array when there is a node after constraint that is the target of the
+        node but does not affect the node`, () => {
+      getConstraintsThatAffectNodeAndExpect(nodeId5, []);
+    });
     it(`should return one constraint when there is a node after constraint that affects the
         node`, () => {
       getConstraintsThatAffectNodeAndExpect(nodeId6, [constraint1]);

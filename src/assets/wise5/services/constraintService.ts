@@ -181,11 +181,10 @@ export class ConstraintService {
       return cachedResult;
     } else {
       let result = false;
-      if (
-        this.isNodeAfterConstraintAction(constraint.action) &&
-        this.projectService.isNodeIdAfter(constraint.targetId, node.id)
-      ) {
-        result = true;
+      if (this.isNodeAfterConstraintAction(constraint.action)) {
+        if (this.projectService.isNodeIdAfter(constraint.targetId, node.id)) {
+          result = true;
+        }
       } else {
         result = this.isNodeTargetOfConstraint(node, constraint.targetId);
       }
