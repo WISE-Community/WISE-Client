@@ -77,7 +77,7 @@ export class NodeGradingViewComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.nodeId) {
+    if (changes.nodeId && !changes.nodeId.firstChange) {
       this.nodeId = changes.nodeId.currentValue;
       this.setupNode();
     }
