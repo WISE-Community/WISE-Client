@@ -19,38 +19,21 @@ export class SaveTimeMessageComponent {
 
   constructor(@Inject(LOCALE_ID) private localeID: string) {}
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.tooltip = this.getSaveTimeText(this.saveTime, true);
+    const saveTimeText = this.getSaveTimeText(this.saveTime, this.isInactive);
     if (this.timeOnly) {
-      this.message = this.getSaveTimeText(this.saveTime, this.isInactive);
+      this.message = saveTimeText;
     } else if (this.isSubmit) {
-      this.message = this.getSubmittedMessage(this.saveTime, this.isInactive);
+      this.message = $localize`Submitted ${saveTimeText}:saveTime:`;
     } else if (this.isAutoSave) {
-      this.message = this.getAutoSavedMessage(this.saveTime, this.isInactive);
+      this.message = $localize`Auto Saved ${saveTimeText}:saveTime:`;
     } else {
-      this.message = this.getSavedMessage(this.saveTime, this.isInactive);
+      this.message = $localize`Saved ${saveTimeText}:saveTime:`;
     }
   }
 
-  private getSavedMessage(clientSaveTime: number, showFullDate: boolean): string {
-    return this.getMessageText('Saved', clientSaveTime, showFullDate);
-  }
-
-  private getAutoSavedMessage(clientSaveTime: number, showFullDate: boolean): string {
-    return this.getMessageText('Auto Saved', clientSaveTime, showFullDate);
-  }
-
-  private getSubmittedMessage(clientSaveTime: number, showFullDate: boolean): string {
-    return this.getMessageText('Submitted', clientSaveTime, showFullDate);
-  }
-
-  private getMessageText(prefix: string, clientSaveTime: number, showFullDate: boolean): string {
-    const saveTimeText = this.getSaveTimeText(clientSaveTime, showFullDate);
-    return $localize`${prefix} ${saveTimeText}:saveTime:`;
-  }
-
   private getSaveTimeText(saveTime: number, showFullDate: boolean = false): string {
-    const now = new Date();
     let saveTimeText = '';
     if (showFullDate) {
       saveTimeText = `${formatDate(saveTime, 'fullDate', this.localeID)} • ${formatDate(
@@ -58,7 +41,7 @@ export class SaveTimeMessageComponent {
         'shortTime',
         this.localeID
       )}`;
-    } else if (this.isSameDay(now, saveTime)) {
+    } else if (this.isToday(saveTime)) {
       saveTimeText = formatDate(saveTime, 'shortTime', this.localeID);
     } else {
       saveTimeText = formatDate(saveTime, 'mediumDate', this.localeID);
@@ -66,7 +49,10 @@ export class SaveTimeMessageComponent {
     return saveTimeText;
   }
 
-  private isSameDay(a: string | number | Date, b: string | number | Date): boolean {
-    return formatDate(a, 'shortDate', this.localeID) === formatDate(b, 'shortDate', this.localeID);
+  private isToday(time: number): boolean {
+    return (
+      formatDate(new Date(), 'shortDate', this.localeID) ===
+      formatDate(time, 'shortDate', this.localeID)
+    );
   }
 }
