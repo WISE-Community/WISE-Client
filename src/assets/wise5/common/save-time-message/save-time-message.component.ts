@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { UtilService } from '../../services/utilService';
+import { formatDate } from '@angular/common';
+import { Component, Inject, Input, LOCALE_ID } from '@angular/core';
 
 @Component({
   selector: 'save-time-message',
@@ -7,8 +7,8 @@ import { UtilService } from '../../services/utilService';
   templateUrl: 'save-time-message.component.html'
 })
 export class SaveTimeMessageComponent {
-  @Input() isInactive: boolean;
   @Input() isAutoSave: boolean;
+  @Input() isInactive: boolean;
   @Input() isSubmit: boolean;
   @Input() saveTime: number;
   @Input() timeOnly: boolean;
@@ -17,18 +17,42 @@ export class SaveTimeMessageComponent {
   message: string;
   tooltip: string;
 
-  constructor(private UtilService: UtilService) {}
+  constructor(@Inject(LOCALE_ID) private localeID: string) {}
 
-  ngOnChanges() {
-    this.tooltip = this.UtilService.getSaveTimeText(this.saveTime, true);
+  ngOnChanges(): void {
+    this.tooltip = this.getSaveTimeText(this.saveTime, true);
+    const saveTimeText = this.getSaveTimeText(this.saveTime, this.isInactive);
     if (this.timeOnly) {
-      this.message = this.UtilService.getSaveTimeText(this.saveTime, this.isInactive);
+      this.message = saveTimeText;
     } else if (this.isSubmit) {
-      this.message = this.UtilService.getSubmittedMessage(this.saveTime, this.isInactive);
+      this.message = $localize`Submitted ${saveTimeText}:saveTime:`;
     } else if (this.isAutoSave) {
-      this.message = this.UtilService.getSubmittedMessage(this.saveTime, this.isInactive);
+      this.message = $localize`Auto Saved ${saveTimeText}:saveTime:`;
     } else {
-      this.message = this.UtilService.getSavedMessage(this.saveTime, this.isInactive);
+      this.message = $localize`Saved ${saveTimeText}:saveTime:`;
     }
+  }
+
+  private getSaveTimeText(saveTime: number, showFullDate: boolean = false): string {
+    let saveTimeText = '';
+    if (showFullDate) {
+      saveTimeText = `${formatDate(saveTime, 'fullDate', this.localeID)} • ${formatDate(
+        saveTime,
+        'shortTime',
+        this.localeID
+      )}`;
+    } else if (this.isToday(saveTime)) {
+      saveTimeText = formatDate(saveTime, 'shortTime', this.localeID);
+    } else {
+      saveTimeText = formatDate(saveTime, 'mediumDate', this.localeID);
+    }
+    return saveTimeText;
+  }
+
+  private isToday(time: number): boolean {
+    return (
+      formatDate(time, 'shortDate', this.localeID) ===
+      formatDate(new Date(), 'shortDate', this.localeID)
+    );
   }
 }
