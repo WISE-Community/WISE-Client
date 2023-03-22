@@ -30,7 +30,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
   isLatestComponentStateSubmit: boolean;
   originalComponentContent: MultipleChoiceContent;
   showFeedback: boolean;
-  studentChoices: any;
+  studentChoices: string | string[];
 
   constructor(
     protected annotationService: AnnotationService,
@@ -59,7 +59,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.studentChoices = [];
+    this.studentChoices = this.component.isRadio() ? '' : [];
     this.isCorrect = null;
     this.choices = this.component.getChoices();
     this.componentHasCorrectAnswer = this.hasCorrectChoices();
@@ -202,9 +202,9 @@ export class MultipleChoiceStudent extends ComponentStudent {
   addOrRemoveFromStudentChoices(choiceId: string): void {
     const index = this.studentChoices.indexOf(choiceId);
     if (index == -1) {
-      this.studentChoices.push(choiceId);
+      (this.studentChoices as string[]).push(choiceId);
     } else {
-      this.studentChoices.splice(index, 1);
+      (this.studentChoices as string[]).splice(index, 1);
     }
   }
 
@@ -303,13 +303,10 @@ export class MultipleChoiceStudent extends ComponentStudent {
   }
 
   private isStudentChoiceValueCorrect(choice: any): boolean {
-    if (choice.isCorrect && this.isChecked(choice.id)) {
-      return true;
-    } else if (!choice.isCorrect && !this.isChecked(choice.id)) {
-      return true;
-    } else {
-      return false;
-    }
+    return (
+      (choice.isCorrect && this.isChecked(choice.id)) ||
+      (!choice.isCorrect && !this.isChecked(choice.id))
+    );
   }
 
   studentDataChanged(): void {
@@ -374,16 +371,18 @@ export class MultipleChoiceStudent extends ComponentStudent {
   }
 
   private getStudentChosenRadioChoice(): any[] {
-    return [
-      {
-        id: this.studentChoices,
-        text: this.getOriginalChoiceText(this.studentChoices)
-      }
-    ];
+    return this.studentChoices != ''
+      ? [
+          {
+            id: this.studentChoices,
+            text: this.getOriginalChoiceText(this.studentChoices as string)
+          }
+        ]
+      : [];
   }
 
   private getStudentChosenCheckboxChoice(): any[] {
-    return this.studentChoices.map((studentChoiceId) => {
+    return (this.studentChoices as string[]).map((studentChoiceId) => {
       return {
         id: studentChoiceId,
         text: this.getOriginalChoiceText(studentChoiceId)
