@@ -51,8 +51,8 @@ export class SaveTimeMessageComponent {
 
   private isToday(time: number): boolean {
     return (
-      formatDate(new Date(), 'shortDate', this.localeID) ===
-      formatDate(time, 'shortDate', this.localeID)
+      formatDate(time, 'shortDate', this.localeID) ===
+      formatDate(new Date(), 'shortDate', this.localeID)
     );
   }
 }
