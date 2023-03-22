@@ -1,4 +1,4 @@
-import { CSVToArray } from './array';
+import { arraysContainSameValues, CSVToArray } from './array';
 import csvArraySample from './arraySample';
 import { getIntersectOfArrays } from './array';
 
@@ -49,3 +49,15 @@ function allCommonItems_returnAllItems() {
     expect(intersect[2]).toEqual(obj3);
   });
 }
+
+describe('arraysContainSameValues()', () => {
+  it('should return true when arrays have same values, even when not in the same order', () => {
+    expect(arraysContainSameValues([], [])).toBeTrue();
+    expect(arraysContainSameValues(['a', 'b'], ['a', 'b'])).toBeTrue();
+    expect(arraysContainSameValues(['b', 'a'], ['a', 'b'])).toBeTrue();
+  });
+  it('should return false when arrays have different values', () => {
+    expect(arraysContainSameValues(['a'], [])).toBeFalse();
+    expect(arraysContainSameValues(['a', 'b'], ['a'])).toBeFalse();
+  });
+});
