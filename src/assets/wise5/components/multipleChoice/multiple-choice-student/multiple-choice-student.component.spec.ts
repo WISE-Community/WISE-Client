@@ -150,6 +150,7 @@ describe('MultipleChoiceStudentComponent', () => {
   testSingleAnswerSingleCorrectAnswerComponent();
   testSingleAnswerMultipleCorrectAnswersComponent();
   ngOnInit();
+  createComponentState();
 });
 
 function createComponentContentChoice(
@@ -329,29 +330,21 @@ function ngOnInit() {
       component.choices.forEach((choice) => {
         expect(choice.feedbackToShow).toBeUndefined();
       });
-      const componentState = createComponentState(
-        [
-          createComponentContentChoice(choiceId1, choiceText1),
-          createComponentContentChoice(choiceId2, choiceText2)
-        ],
-        true
-      );
-      component.componentState = componentState;
+      component.componentState = {
+        isSubmit: true,
+        studentData: {
+          studentChoices: [
+            createComponentContentChoice(choiceId1, choiceText1),
+            createComponentContentChoice(choiceId2, choiceText2)
+          ]
+        }
+      };
       component.ngOnInit();
       expectChoiceToShowFeedback(component.choices[0], feedback1);
       expectChoiceToShowFeedback(component.choices[1], feedback2);
       expectChoiceToNotShowFeedback(component.choices[2]);
     });
   });
-}
-
-function createComponentState(studentChoices: any[], isSubmit: boolean): any {
-  return {
-    isSubmit: isSubmit,
-    studentData: {
-      studentChoices: studentChoices
-    }
-  };
 }
 
 function expectChoiceToShowFeedback(choice: any, expectedFeedback: string): void {
@@ -362,4 +355,27 @@ function expectChoiceToShowFeedback(choice: any, expectedFeedback: string): void
 function expectChoiceToNotShowFeedback(choice: any): void {
   expect(choice.feedbackToShow).toBeUndefined();
   expect(choice.showFeedback).toBeFalsy();
+}
+
+function createComponentState(): void {
+  describe('createComponentState()', () => {
+    describe('radio', () => {
+      it('creates studentData with empty studentChoices', () => {
+        component.componentContent.choiceType = 'radio';
+        expectStudentChoicesToBeEmptyArray();
+      });
+    });
+    describe('checkbox', () => {
+      it('creates studentData with empty studentChoices', () => {
+        component.componentContent.choiceType = 'checkbox';
+        expectStudentChoicesToBeEmptyArray();
+      });
+    });
+  });
+}
+
+function expectStudentChoicesToBeEmptyArray(): void {
+  component.createComponentState('submit').then((componentState) => {
+    expect(componentState.studentData.studentChoices).toEqual([]);
+  });
 }
