@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { MultipleChoiceService } from '../../assets/wise5/components/multipleChoice/multipleChoiceService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
@@ -45,7 +46,6 @@ describe('MultipleChoiceService', () => {
   createComponent();
   choiceChosen();
   isChoicesSelected();
-  getStudentChoiceIdsFromStudentChoiceObjects();
   isCompleted();
   getStudentDataString();
   componentStateHasStudentWork();
@@ -160,25 +160,6 @@ function isChoicesSelected() {
   it(`should check if choices are selected when constraint choice ids is a string array and the
       constraint choice ids are selected`, () => {
     expectIsChoicesSelected([choiceId1, choiceId2], [choiceId1, choiceId2], true);
-  });
-}
-
-function getStudentChoiceIdsFromStudentChoiceObjects() {
-  function expectGetStudentChoiceIdsFromStudentChoiceObjects(
-    studentChoices: any[],
-    expectedResult: any[]
-  ) {
-    expect(service.getStudentChoiceIdsFromStudentChoiceObjects(studentChoices)).toEqual(
-      expectedResult
-    );
-  }
-  it('should get student choice ids when there are none', () => {
-    const studentChoices = [];
-    expectGetStudentChoiceIdsFromStudentChoiceObjects(studentChoices, []);
-  });
-  it('should get student choice ids when there are multiple student choices', () => {
-    const studentChoices = [choice1, choice2];
-    expectGetStudentChoiceIdsFromStudentChoiceObjects(studentChoices, [choice1.id, choice2.id]);
   });
 }
 

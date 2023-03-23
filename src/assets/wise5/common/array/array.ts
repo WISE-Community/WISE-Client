@@ -1,3 +1,5 @@
+import { copy } from '../object/object';
+
 /**
  * Parse a delimited string into an array of arrays.
  * Source: http://www.bennadel.com/blog/1504-ask-ben-parsing-csv-strings-with-javascript-exec-regular-expression-command.htm
@@ -60,4 +62,24 @@ export function getIntersectOfArrays(array1: any[], array2: any[]): any[] {
   return array1.filter((n) => {
     return array2.includes(n);
   });
+}
+
+/**
+ * Check if two arrays contain the same values. This is used to check if two arrays of ids contain
+ * the same values. The order of the elements is not compared, only the actual values. This means
+ * the elements can be in different orders but still contain the same values.
+ * Example:
+ * array1=['1234567890', 'abcdefghij']
+ * array2=['abcdefghij', '1234567890']
+ * If these two arrays are passed in as the two arguments, this function will return true.
+ * @param array1 an array of strings
+ * @param array2 an array of strings
+ * @return whether the arrays contain the same values
+ */
+export function arraysContainSameValues(array1: string[], array2: string[]): boolean {
+  const array1Copy = copy(array1);
+  array1Copy.sort();
+  const array2Copy = copy(array2);
+  array2Copy.sort();
+  return JSON.stringify(array1Copy) === JSON.stringify(array2Copy);
 }

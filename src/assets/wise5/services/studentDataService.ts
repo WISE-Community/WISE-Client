@@ -536,12 +536,9 @@ export class StudentDataService extends DataService {
     return null;
   }
 
-  isComponentSubmitDirty() {
+  isComponentSubmitDirty(): boolean {
     const latestComponentState = this.getLatestComponentState();
-    if (latestComponentState && !latestComponentState.isSubmit) {
-      return true;
-    }
-    return false;
+    return latestComponentState && !latestComponentState.isSubmit;
   }
 
   /**
@@ -551,14 +548,14 @@ export class StudentDataService extends DataService {
    * @return the latest component state with the matching node id and component id or null if none
    * are found
    */
-  getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId = null) {
+  getLatestComponentStateByNodeIdAndComponentId(nodeId: string, componentId: string = null): any {
     const componentStates = this.studentData.componentStates;
     for (let c = componentStates.length - 1; c >= 0; c--) {
       const componentState = componentStates[c];
-      if (componentId == null && componentState.nodeId === nodeId) {
-        return componentState;
-      } else if (componentState.nodeId === nodeId && componentState.componentId === componentId) {
-        return componentState;
+      if (componentState.nodeId === nodeId) {
+        if (componentId == null || componentState.componentId === componentId) {
+          return componentState;
+        }
       }
     }
     return null;

@@ -2,6 +2,7 @@
 
 import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
+import { arraysContainSameValues } from '../../common/array/array';
 
 @Injectable()
 export class MultipleChoiceService extends ComponentService {
@@ -26,49 +27,17 @@ export class MultipleChoiceService extends ComponentService {
    * criteria object
    */
   choiceChosen(criteria: any, componentState: any): boolean {
-    const studentChoiceIds = this.getStudentChoiceIdsFromStudentChoiceObjects(
-      componentState.studentData.studentChoices
-    );
+    const studentChoiceIds = componentState.studentData.studentChoices.map((choice) => choice.id);
     return this.isChoicesSelected(studentChoiceIds, criteria.params.choiceIds);
   }
 
-  isChoicesSelected(studentChoiceIds: any, constraintChoiceIds: any) {
-    if (typeof constraintChoiceIds === 'string') {
-      return studentChoiceIds.length === 1 && studentChoiceIds[0] === constraintChoiceIds;
-    } else if (Array.isArray(constraintChoiceIds)) {
-      return this.isChoiceIdsMatch(studentChoiceIds, constraintChoiceIds);
-    }
-    return false;
-  }
-
-  isChoiceIdsMatch(choiceIds1: string[], choiceIds2: string[]) {
-    if (choiceIds1.length === choiceIds2.length) {
-      for (let choiceId of choiceIds2) {
-        if (choiceIds1.indexOf(choiceId) === -1) {
-          return false;
-        }
-      }
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Get the student choice ids from the student choice objects
-   * @param studentChoices an array of student choice objects. these objects contain
-   * an id and text fields
-   * @returns an array of choice id strings
-   */
-  getStudentChoiceIdsFromStudentChoiceObjects(studentChoices: any[]) {
-    const choiceIds = [];
-    if (studentChoices != null) {
-      for (const studentChoice of studentChoices) {
-        if (studentChoice != null) {
-          choiceIds.push(studentChoice.id);
-        }
-      }
-    }
-    return choiceIds;
+  private isChoicesSelected(
+    studentChoiceIds: string[],
+    constraintChoiceIds: string | string[]
+  ): boolean {
+    return typeof constraintChoiceIds === 'string'
+      ? studentChoiceIds.length === 1 && studentChoiceIds[0] === constraintChoiceIds
+      : arraysContainSameValues(studentChoiceIds, constraintChoiceIds);
   }
 
   isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
