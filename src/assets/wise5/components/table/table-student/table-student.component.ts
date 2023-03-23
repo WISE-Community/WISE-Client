@@ -83,9 +83,6 @@ export class TableStudent extends ComponentStudent {
     // holds the the table data
     this.tableData = null;
 
-    // whether the reset table button is shown or not
-    this.isResetTableButtonVisible = true;
-
     // the label for the notebook in thos project
     this.notebookConfig = this.NotebookService.getNotebookConfig();
 
@@ -101,7 +98,6 @@ export class TableStudent extends ComponentStudent {
 
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
-    this.isResetTableButtonVisible = true;
 
     if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
       // we will show work from another component
@@ -147,6 +143,9 @@ export class TableStudent extends ComponentStudent {
       this.isDisabled = true;
     }
 
+    this.isResetTableButtonVisible = this.TableService.componentHasEditableCells(
+      this.componentContent
+    );
     this.disableComponentIfNecessary();
 
     if (this.isDataExplorerEnabled && this.componentContent.dataExplorerDataToColumn != null) {
