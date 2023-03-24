@@ -1,11 +1,19 @@
-.body-div {
-  width: 700px;
+.common-width {
+  width: 400px;
 }
 
-.constraints-div {
+.removal-conditional-select {
+  width: 100px;
+}
+
+.criteria-div {
   border: 2px solid #dddddd;
   border-radius: 5px;
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 10px 20px 10px 20px;
+}
+
+.red {
+  color: red;
 }

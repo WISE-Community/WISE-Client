@@ -24,6 +24,7 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
 import { AddLessonConfigureComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component';
 import { AddLessonChooseLocationComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-location/add-lesson-choose-location.component';
+import { ConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AddLessonChooseLocationComponent } from '../../assets/wise5/authoringTo
     ChooseNewComponentLocation,
     ChooseNewNodeLocation,
     ChooseNewNodeTemplate,
+    ConstraintAuthoringComponent,
     NodeAdvancedBranchAuthoringComponent,
     NodeAdvancedConstraintAuthoringComponent,
     NodeAdvancedGeneralAuthoringComponent,
