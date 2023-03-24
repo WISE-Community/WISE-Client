@@ -32,7 +32,7 @@ export class ConstraintAuthoringComponent implements OnInit {
     { value: 'any', text: $localize`Any` }
   ];
   removalCriteria = [
-    { value: '', text: $localize`Please Choose a Removal Criteria` },
+    { value: '', text: $localize`Please Choose a Removal Criteria`, params: [] },
     {
       value: 'isCompleted',
       text: $localize`Is Completed`,
@@ -161,17 +161,15 @@ export class ConstraintAuthoringComponent implements OnInit {
   removalCriteriaNameChanged(criteria: any): void {
     criteria.params = {};
     const params = this.getRemovalCriteriaParamsByName(criteria.name);
-    if (params != null) {
-      for (const paramObject of params) {
-        const value = paramObject.value;
-        if (paramObject.hasOwnProperty('defaultValue')) {
-          criteria.params[value] = paramObject.defaultValue;
-        } else {
-          criteria.params[value] = '';
-        }
-        if (value === 'nodeId') {
-          criteria.params[value] = this.node.id;
-        }
+    for (const paramObject of params) {
+      const value = paramObject.value;
+      if (paramObject.hasOwnProperty('defaultValue')) {
+        criteria.params[value] = paramObject.defaultValue;
+      } else {
+        criteria.params[value] = '';
+      }
+      if (value === 'nodeId') {
+        criteria.params[value] = this.node.id;
       }
     }
     this.saveProject();
@@ -188,10 +186,6 @@ export class ConstraintAuthoringComponent implements OnInit {
 
   protected constraintRemovalCriteriaNodeIdChanged(criteria: any): void {
     criteria.params.componentId = '';
-    this.saveProject();
-  }
-
-  protected constraintRemovalCriteriaComponentIdChanged(): void {
     this.saveProject();
   }
 

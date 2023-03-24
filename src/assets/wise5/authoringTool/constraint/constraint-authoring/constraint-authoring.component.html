@@ -99,10 +99,7 @@
     >
       <mat-form-field class="common-width">
         <mat-label>{{ param.text }}</mat-label>
-        <mat-select
-          [(ngModel)]="criteria.params.componentId"
-          (ngModelChange)="constraintRemovalCriteriaComponentIdChanged()"
-        >
+        <mat-select [(ngModel)]="criteria.params.componentId" (ngModelChange)="saveProject()">
           <mat-option [value]="''">
             <span class="red" i18n>Please Choose a Component</span>
           </mat-option>
