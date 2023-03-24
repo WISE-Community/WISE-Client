@@ -98,7 +98,6 @@ async function changePassword() {
       const answer = 'cookie';
       component.username = username;
       component.questionKey = questionKey;
-      component.isRecaptchaEnabled = false;
       component.setControlFieldValue('answer', answer);
       component.securityAnswerSuccess();
       const params = {
@@ -122,6 +121,7 @@ async function changePassword() {
         spyOn(studentService, 'checkSecurityAnswer').and.returnValue(observableResponse);
         await component.submit();
         fixture.detectChanges();
+        expect(getErrorMessage()).toContain('Recaptcha failed.');
       })
     );
   });

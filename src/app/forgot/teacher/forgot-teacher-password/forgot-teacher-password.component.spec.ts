@@ -96,6 +96,7 @@ async function changePassword() {
         spyOn(teacherService, 'getVerificationCodeEmail').and.returnValue(observableResponse);
         await component.submit();
         fixture.detectChanges();
+        expect(getErrorMessage()).toContain('Recaptcha failed.');
       })
     );
 
