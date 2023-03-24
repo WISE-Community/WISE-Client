@@ -3,7 +3,7 @@ import { copy } from '../../../common/object/object';
 import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
-import { MultipleChoiceService } from '../multipleChoiceService';
+import { MultipleChoiceComponent } from '../MultipleChoiceComponent';
 
 @Component({
   selector: 'multiple-choice-show-work',
@@ -13,22 +13,20 @@ import { MultipleChoiceService } from '../multipleChoiceService';
 export class MultipleChoiceShowWorkComponent extends ComponentShowWorkDirective {
   studentChoiceId: string = '';
   choices: any[] = [];
+  component: MultipleChoiceComponent;
   showFeedback: boolean = false;
   hasCorrectAnswer: boolean = false;
   isStudentAnswerCorrect: boolean = false;
 
-  constructor(
-    private MultipleChoiceService: MultipleChoiceService,
-    protected nodeService: NodeService,
-    protected ProjectService: ProjectService
-  ) {
-    super(nodeService, ProjectService);
+  constructor(protected nodeService: NodeService, protected projectService: ProjectService) {
+    super(nodeService, projectService);
   }
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.componentContent = this.ProjectService.injectAssetPaths(this.componentContent);
-    if (this.MultipleChoiceService.isRadio(this.componentContent)) {
+    this.componentContent = this.projectService.injectAssetPaths(this.componentContent);
+    this.component = new MultipleChoiceComponent(this.componentContent, this.nodeId);
+    if (this.component.isRadio()) {
       const studentChoiceIds = this.getChoiceIds(this.componentState.studentData.studentChoices);
       this.studentChoiceId = studentChoiceIds[0];
     }
@@ -42,10 +40,7 @@ export class MultipleChoiceShowWorkComponent extends ComponentShowWorkDirective 
       if (this.componentState.studentData.isCorrect == null) {
         // If the student clicks save it will not calculate isCorrect. We only calculate isCorrect
         // if the student clicks submit. Here we will calculate isCorrect for the teacher to see.
-        this.isStudentAnswerCorrect = this.MultipleChoiceService.calculateIsCorrect(
-          this.componentContent,
-          this.componentState
-        );
+        this.isStudentAnswerCorrect = this.component.calculateIsCorrect(this.componentState);
       } else {
         this.isStudentAnswerCorrect = this.componentState.studentData.isCorrect;
       }
