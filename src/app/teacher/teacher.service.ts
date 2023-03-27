@@ -251,9 +251,10 @@ export class TeacherService {
     return this.http.post<any>(this.forgotPasswordUrl, params, { headers: headers });
   }
 
-  getVerificationCodeEmail(username) {
+  getVerificationCodeEmail(username, token) {
     const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
-    const params = new HttpParams().set('username', username);
+    let params = new HttpParams().set('username', username);
+    params = params.set('token', token);
     return this.http.get<any>(this.getVerificationCodeUrl, { headers: headers, params: params });
   }
 
