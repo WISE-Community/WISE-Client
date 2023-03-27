@@ -1,4 +1,4 @@
-import { isValidJSONString, trimToLength, wordWrap } from './string';
+import { isValidJSONString, removeHTMLTags, trimToLength, wordWrap } from './string';
 
 describe('isValidJSONString()', () => {
   it('should return true if json string is valid', () => {
@@ -33,5 +33,23 @@ describe('trimToLength()', () => {
   });
   it('should trim string and add ellipses if length is longer than max length', () => {
     expect(trimToLength('123456789', 7)).toEqual('1234...');
+  });
+});
+
+describe('removeHTMLTags()', () => {
+  it('should remove html tags', () => {
+    expect(removeHTMLTags('<p><img src="computer.png"/></p>')).toEqual(' computer.png ');
+  });
+
+  it('should replace image tag with file name when it uses double quotes', () => {
+    expect(removeHTMLTags('<img src="computer.png"/>')).toEqual('computer.png');
+  });
+  it('should replace image tag with file name when it uses single quotes', () => {
+    expect(removeHTMLTags("<img src='computer.png'/>")).toEqual('computer.png');
+  });
+  it('should replace image tag with file name when there are other attributes', () => {
+    expect(
+      removeHTMLTags("<img alt='Computer' src='computer.png' aria-label='Computer'/>")
+    ).toEqual('computer.png');
   });
 });

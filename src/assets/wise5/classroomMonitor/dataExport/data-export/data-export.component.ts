@@ -22,6 +22,7 @@ import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spin
 import { DiscussionComponentDataExportStrategy } from '../strategies/DiscussionComponentDataExportStrategy';
 import { LabelComponentDataExportStrategy } from '../strategies/LabelComponentDataExportStrategy';
 import { Component as WISEComponent } from '../../../common/Component';
+import { removeHTMLTags } from '../../../common/string/string';
 
 @Component({
   selector: 'data-export',
@@ -311,7 +312,7 @@ export class DataExportComponent implements OnInit {
     if (component != null) {
       row[columnNameToNumber['Component Type']] = component.type;
       if (component.prompt != null) {
-        var prompt = this.utilService.removeHTMLTags(component.prompt);
+        var prompt = removeHTMLTags(component.prompt);
         prompt = prompt.replace(/"/g, '""');
         row[columnNameToNumber['Component Prompt']] = prompt;
       }
@@ -464,7 +465,7 @@ export class DataExportComponent implements OnInit {
       if (data != null) {
         var autoComment = data.value;
         if (autoComment != null) {
-          row[columnNameToNumber['Auto Comment']] = this.utilService.removeHTMLTags(autoComment);
+          row[columnNameToNumber['Auto Comment']] = removeHTMLTags(autoComment);
         }
       }
     }
@@ -571,7 +572,7 @@ export class DataExportComponent implements OnInit {
     let componentService = this.componentServiceLookupService.getService(componentType);
     if (componentService != null && componentService.getStudentDataString != null) {
       studentDataString = componentService.getStudentDataString(componentState);
-      studentDataString = this.utilService.removeHTMLTags(studentDataString);
+      studentDataString = removeHTMLTags(studentDataString);
       studentDataString = studentDataString.replace(/"/g, '""');
     } else {
       studentDataString = componentState.studentData;

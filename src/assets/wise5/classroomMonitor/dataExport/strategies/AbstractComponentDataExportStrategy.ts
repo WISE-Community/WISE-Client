@@ -1,4 +1,5 @@
 import { Component } from '../../../common/Component';
+import { removeHTMLTags } from '../../../common/string/string';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { ComponentRevisionCounter } from '../ComponentRevisionCounter';
 import { UserIdsAndStudentNames } from '../UserIdsAndStudentNames';
@@ -184,7 +185,7 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     row[this.columnNameToNumber.get('Component Part Number')] = componentPartNumber;
     row[this.columnNameToNumber.get('Component Type')] = this.component.content.type;
     if (this.component.content.prompt != null) {
-      let prompt = this.utilService.removeHTMLTags(this.component.content.prompt);
+      let prompt = removeHTMLTags(this.component.content.prompt);
       prompt = prompt.replace(/"/g, '""');
       row[this.columnNameToNumber.get('Component Prompt')] = prompt;
     }

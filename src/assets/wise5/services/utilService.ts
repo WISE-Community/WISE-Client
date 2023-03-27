@@ -8,30 +8,6 @@ export class UtilService {
   constructor() {}
 
   /**
-   * Remove html tags and newlines from the string.
-   * @param html an html string
-   * @return text without html tags and new lines
-   */
-  removeHTMLTags(html = '') {
-    let text = this.replaceImgTagWithFileName(html);
-    text = text.replace(/<\/?[^>]+(>|$)/g, ' ');
-    return this.removeNewLines(text);
-  }
-
-  removeNewLines(html = '') {
-    let text = html.replace(/\n/g, ' ');
-    return text.replace(/\r/g, ' ');
-  }
-
-  /**
-   * Replace img tags with the src value.
-   * Example: <img src="computer.png"/> will be replaced with computer.png.
-   */
-  replaceImgTagWithFileName(html = '') {
-    return html.replace(/<img.*?src=["'](.*?)["'].*?>/g, '$1');
-  }
-
-  /**
    * Check if a string ends with a specific string
    * @param subjectString the main string
    * @param searchString the potential end of the string

@@ -10,8 +10,6 @@ describe('UtilService', () => {
     service = TestBed.inject(UtilService);
   });
   calculateMeanTests();
-  removeHTMLTags();
-  replaceImgTagWithFileName();
 });
 
 function calculateMeanTests() {
@@ -24,36 +22,6 @@ function calculateMeanTests() {
     it('should calculate the mean when there are multiple values', () => {
       const values = [1, 2, 3, 4, 10];
       expect(service.calculateMean(values)).toEqual(4);
-    });
-  });
-}
-
-function removeHTMLTags() {
-  describe('removeHTMLTags()', () => {
-    it('should remove html tags', () => {
-      expect(service.removeHTMLTags('<p><img src="computer.png"/></p>')).toEqual(' computer.png ');
-    });
-  });
-}
-
-function replaceImgTagWithFileName() {
-  describe('replaceImgTagWithFileName()', () => {
-    it('should replace image tag with file name when it uses double quotes', () => {
-      expect(service.replaceImgTagWithFileName('<img src="computer.png"/>')).toEqual(
-        'computer.png'
-      );
-    });
-    it('should replace image tag with file name when it uses single quotes', () => {
-      expect(service.replaceImgTagWithFileName("<img src='computer.png'/>")).toEqual(
-        'computer.png'
-      );
-    });
-    it('should replace image tag with file name when there are other attributes', () => {
-      expect(
-        service.replaceImgTagWithFileName(
-          "<img alt='Computer' src='computer.png' aria-label='Computer'/>"
-        )
-      ).toEqual('computer.png');
     });
   });
 }

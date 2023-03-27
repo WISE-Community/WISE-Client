@@ -1,3 +1,4 @@
+import { removeHTMLTags } from '../../../common/string/string';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
 export class DiscussionComponentDataExportStrategy extends AbstractDataExportStrategy {
@@ -144,15 +145,13 @@ export class DiscussionComponentDataExportStrategy extends AbstractDataExportStr
       this.projectService.getComponentPosition(nodeId, componentId) + 1;
     row[columnNameToNumber['Component ID']] = component.id;
     row[columnNameToNumber['Component Type']] = component.type;
-    row[columnNameToNumber['Component Prompt']] = this.utilService.removeHTMLTags(component.prompt);
+    row[columnNameToNumber['Component Prompt']] = removeHTMLTags(component.prompt);
     row[columnNameToNumber['Student Data']] = componentState.studentData;
     row[columnNameToNumber['Student Work ID']] = componentState.id;
     row[columnNameToNumber['Thread ID']] = threadId;
     row[columnNameToNumber['Workgroup ID']] = workgroupId;
     row[columnNameToNumber['Post Level']] = this.getPostLevel(componentState);
-    row[columnNameToNumber['Post Text']] = this.utilService.removeHTMLTags(
-      componentState.studentData.response
-    );
+    row[columnNameToNumber['Post Text']] = removeHTMLTags(componentState.studentData.response);
     return row;
   }
 
