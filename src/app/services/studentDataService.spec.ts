@@ -570,17 +570,18 @@ function shouldGetNodeStatusByNodeId() {
 
 function shouldGetProgressById() {
   it('should get progress by id with child step nodes', () => {
-    service.nodeStatuses = {
+    const nodeStatuses = {
       node1: { nodeId: 'node1', isVisible: true, isCompleted: true },
       node2: { nodeId: 'node2', isVisible: true, isCompleted: false }
     };
+    service.nodeStatuses = nodeStatuses;
     spyOn(projectService, 'isGroupNode').and.callFake((nodeId) => {
       return nodeId.startsWith('group');
     });
     const childNodeIds = ['node1', 'node2'];
     spyOn(projectService, 'getChildNodeIdsById').and.returnValue(childNodeIds);
     spyOn(projectService, 'nodeHasWork').and.returnValue(true);
-    const progress: any = service.getNodeProgressById('group1');
+    const progress: any = service.getNodeProgressById('group1', nodeStatuses);
     expect(progress.completedItems).toEqual(1);
     expect(progress.completedItemsWithWork).toEqual(1);
     expect(progress.totalItems).toEqual(2);
@@ -589,7 +590,7 @@ function shouldGetProgressById() {
     expect(progress.completionPctWithWork).toEqual(50);
   });
   it('should get progress by id with child group nodes', () => {
-    service.nodeStatuses = {
+    const nodeStatuses = {
       group1: {
         nodeId: 'group1',
         progress: {
@@ -609,12 +610,13 @@ function shouldGetProgressById() {
         }
       }
     };
+    service.nodeStatuses = nodeStatuses;
     spyOn(projectService, 'isGroupNode').and.callFake((nodeId) => {
       return nodeId.startsWith('group');
     });
     const childNodeIds = ['group1', 'group2'];
     spyOn(projectService, 'getChildNodeIdsById').and.returnValue(childNodeIds);
-    const progress: any = service.getNodeProgressById('group0');
+    const progress: any = service.getNodeProgressById('group0', nodeStatuses);
     expect(progress.completedItems).toEqual(3);
     expect(progress.completedItemsWithWork).toEqual(3);
     expect(progress.totalItems).toEqual(3);

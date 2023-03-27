@@ -666,7 +666,7 @@ export class StudentDataService extends DataService {
    * work), number of visible items (all/with work), completion % (for all items, items with student
    * work)
    */
-  getNodeProgressById(nodeId) {
+  getNodeProgressById(nodeId: string, nodeStatuses: any): any {
     const progress = {
       totalItems: 0,
       totalItemsWithWork: 0,
@@ -675,11 +675,10 @@ export class StudentDataService extends DataService {
     };
     if (this.ProjectService.isGroupNode(nodeId)) {
       for (const childNodeId of this.ProjectService.getChildNodeIdsById(nodeId)) {
-        const nodeStatus = this.nodeStatuses[childNodeId];
         if (this.ProjectService.isGroupNode(childNodeId)) {
-          this.updateGroupNodeProgress(childNodeId, progress, nodeStatus);
+          this.updateGroupNodeProgress(childNodeId, progress, nodeStatuses);
         } else {
-          this.updateStepNodeProgress(childNodeId, progress, nodeStatus);
+          this.updateStepNodeProgress(childNodeId, progress, nodeStatuses);
         }
       }
       this.calculateAndInjectCompletionPercentage(progress);
@@ -689,7 +688,8 @@ export class StudentDataService extends DataService {
     return progress;
   }
 
-  updateGroupNodeProgress(nodeId, progress, nodeStatus) {
+  private updateGroupNodeProgress(nodeId: string, progress: any, nodeStatuses: any): any {
+    const nodeStatus = nodeStatuses[nodeId];
     if (nodeStatus.progress.totalItemsWithWork > -1) {
       progress.completedItems += nodeStatus.progress.completedItems;
       progress.totalItems += nodeStatus.progress.totalItems;
@@ -697,7 +697,7 @@ export class StudentDataService extends DataService {
       progress.totalItemsWithWork += nodeStatus.progress.totalItemsWithWork;
     } else {
       // we have a legacy node status so we'll need to calculate manually
-      const groupProgress = this.getNodeProgressById(nodeId);
+      const groupProgress = this.getNodeProgressById(nodeId, nodeStatuses);
       progress.completedItems += groupProgress.completedItems;
       progress.totalItems += groupProgress.totalItems;
       progress.completedItemsWithWork += groupProgress.completedItemsWithWork;
@@ -706,7 +706,8 @@ export class StudentDataService extends DataService {
     return progress;
   }
 
-  updateStepNodeProgress(nodeId, progress, nodeStatus) {
+  private updateStepNodeProgress(nodeId: string, progress: any, nodeStatuses: any): any {
+    const nodeStatus = nodeStatuses[nodeId];
     if (nodeStatus.isVisible) {
       progress.totalItems++;
       const hasWork = this.ProjectService.nodeHasWork(nodeId);
@@ -820,7 +821,7 @@ export class StudentDataService extends DataService {
 
   getProjectCompletion() {
     const nodeId = 'group0';
-    return this.getNodeProgressById(nodeId);
+    return this.getNodeProgressById(nodeId, this.nodeStatuses);
   }
 
   getRunStatus() {

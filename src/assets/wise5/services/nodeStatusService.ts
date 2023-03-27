@@ -115,7 +115,10 @@ export class NodeStatusService {
   }
 
   private updateNodeStatusProgress(nodeId: string): void {
-    this.dataService.nodeStatuses[nodeId].progress = this.dataService.getNodeProgressById(nodeId);
+    this.dataService.nodeStatuses[nodeId].progress = this.dataService.getNodeProgressById(
+      nodeId,
+      this.getNodeStatuses()
+    );
   }
 
   private updateNodeStatusIcon(nodeId: string): void {
