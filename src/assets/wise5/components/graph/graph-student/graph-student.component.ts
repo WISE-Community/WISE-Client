@@ -331,6 +331,7 @@ export class GraphStudent extends ComponentStudent {
 
     const dataExplorerSeries = studentData.dataExplorerSeries;
     const graphType = studentData.dataExplorerGraphType;
+    const tooltipHeaderColumn = studentData.dataExplorerTooltipHeaderColumn;
     this.xAxis.title.text = studentData.dataExplorerXAxisLabel;
     this.setYAxisLabels(studentData);
     this.setXAxisLabels(studentData);
@@ -349,7 +350,8 @@ export class GraphStudent extends ComponentStudent {
           graphType,
           name,
           color,
-          yAxis
+          yAxis,
+          tooltipHeaderColumn
         );
         if (series.yAxis == null) {
           this.setSeriesYAxisIndex(series, seriesIndex);
@@ -463,13 +465,27 @@ export class GraphStudent extends ComponentStudent {
     return dataRow[xColumn].text;
   }
 
-  generateDataExplorerSeries(tableData, xColumn, yColumn, graphType, name, color, yAxis) {
+  generateDataExplorerSeries(
+    tableData: any[],
+    xColumn: number,
+    yColumn: number,
+    graphType: string,
+    name: string,
+    color: string,
+    yAxis: any,
+    tooltipHeaderColumn: number
+  ): any {
     const series = {
       type: graphType,
       name: name,
       color: color,
       yAxis: yAxis,
-      data: this.convertDataExplorerDataToSeriesData(tableData, xColumn, yColumn)
+      data: this.convertDataExplorerDataToSeriesData(
+        tableData,
+        xColumn,
+        yColumn,
+        tooltipHeaderColumn
+      )
     };
     if (graphType === 'line') {
       series.data.sort(this.sortLineData);
@@ -541,14 +557,20 @@ export class GraphStudent extends ComponentStudent {
     }
   }
 
-  convertDataExplorerDataToSeriesData(rows, xColumn, yColumn) {
+  convertDataExplorerDataToSeriesData(
+    rows: any[],
+    xColumn: number,
+    yColumn: number,
+    tooltipHeaderColumn: number
+  ): any[] {
     const data = [];
     for (let r = 1; r < rows.length; r++) {
       const row = rows[r];
       const xCell = row[xColumn];
       const yCell = row[yColumn];
       if (xCell != null && yCell != null) {
-        this.addPointFromTableIntoData(xCell, yCell, data);
+        const tooltipHeader = row[tooltipHeaderColumn]?.text;
+        this.addPointFromTableIntoData(xCell, yCell, data, tooltipHeader);
       }
     }
     return data;
@@ -1719,7 +1741,7 @@ export class GraphStudent extends ComponentStudent {
       const xCell = row[xColumn];
       const yCell = row[yColumn];
       if (xCell != null && yCell != null) {
-        this.addPointFromTableIntoData(xCell, yCell, data);
+        this.addPointFromTableIntoData(xCell, yCell, data, null);
       }
     }
     return data;
@@ -1749,13 +1771,30 @@ export class GraphStudent extends ComponentStudent {
     }
   }
 
-  addPointFromTableIntoData(xCell: any, yCell: any, data: any[]) {
+  addPointFromTableIntoData(xCell: any, yCell: any, data: any[], tooltipHeader: string): void {
     const xText = xCell.text;
     const yText = yCell.text;
     if (xText != null && xText !== '' && yText != null && yText !== '') {
-      const xNumber = Number(xText);
-      const yNumber = Number(yText);
-      const point = [];
+      data.push(this.createDataPointFromTable(xText, yText, tooltipHeader));
+    } else {
+      data.push([]);
+    }
+  }
+
+  createDataPointFromTable(xText: string, yText: string, tooltipHeader: string): any {
+    let point: any;
+    const xNumber = Number(xText);
+    const yNumber = Number(yText);
+    if (!isNaN(xNumber) && !isNaN(yNumber)) {
+      point = {
+        x: xNumber,
+        y: yNumber
+      };
+      if (tooltipHeader != null) {
+        point.tooltipHeader = tooltipHeader;
+      }
+    } else {
+      point = [];
       if (!isNaN(xNumber)) {
         point.push(xNumber);
       } else {
@@ -1766,10 +1805,8 @@ export class GraphStudent extends ComponentStudent {
       } else {
         point.push(null);
       }
-      data.push(point);
-    } else {
-      data.push([]);
     }
+    return point;
   }
 
   setSeriesIds(allSeries) {
