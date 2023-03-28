@@ -9798,7 +9798,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Please Choose a Component</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">104</context>
         </context-group>
         <target state="needs-translation">Please Choose a Component</target>
       </trans-unit>
@@ -9806,7 +9806,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source><x id="INTERPOLATION" equiv-text="{{ componentIndex + 1 }}"/>. <x id="INTERPOLATION_1" equiv-text="{{ component.type }}"/> (Prompt: <x id="INTERPOLATION_2" equiv-text="{{ component.prompt }}"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">111</context>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ componentIndex + 1 }}"/>. <x id="INTERPOLATION_1" equiv-text="{{ component.type }}"/> (Prompt: <x id="INTERPOLATION_2" equiv-text="{{ component.prompt }}"/>)</target>
       </trans-unit>
@@ -9814,7 +9814,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Please Select a From Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">128</context>
         </context-group>
         <target state="needs-translation">Please Select a From Step</target>
       </trans-unit>
@@ -9822,7 +9822,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Please Select a To Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">157</context>
+          <context context-type="linenumber">154</context>
         </context-group>
         <target state="needs-translation">Please Select a To Step</target>
       </trans-unit>
@@ -9830,7 +9830,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Please Select a Choice</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">233</context>
+          <context context-type="linenumber">230</context>
         </context-group>
         <target state="needs-translation">Please Select a Choice</target>
       </trans-unit>
@@ -9840,15 +9840,15 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">281</context>
+          <context context-type="linenumber">278</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">304</context>
+          <context context-type="linenumber">301</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">327</context>
+          <context context-type="linenumber">324</context>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ param.text }}"/></target>
       </trans-unit>
@@ -9856,11 +9856,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Add Removal Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">362</context>
+          <context context-type="linenumber">359</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">367</context>
+          <context context-type="linenumber">364</context>
         </context-group>
         <target state="needs-translation">Add Removal Criteria</target>
       </trans-unit>
