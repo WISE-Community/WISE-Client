@@ -89,12 +89,12 @@ export class ConstraintService {
     });
   }
 
-  evaluate(constraints: any[]): ConstraintEvaluationResult {
+  evaluate(constraints: any[] = []): ConstraintEvaluationResult {
     let isVisible = true;
     let isVisitable = true;
-    for (const constraintForNode of constraints) {
-      const result = this.evaluateConstraint(constraintForNode);
-      const action = constraintForNode.action;
+    for (const constraint of constraints) {
+      const result = this.evaluateConstraint(constraint);
+      const action = constraint.action;
       if (this.isVisibleConstraintAction(action)) {
         isVisible = isVisible && result;
       } else if (this.isVisitableConstraintAction(action)) {
@@ -106,6 +106,7 @@ export class ConstraintService {
 
   private isVisibleConstraintAction(action: string): boolean {
     return [
+      'makeThisComponentNotVisible',
       'makeThisNodeNotVisible',
       'makeAllNodesAfterThisNotVisible',
       'makeAllOtherNodesNotVisible'
@@ -120,15 +121,11 @@ export class ConstraintService {
     ].includes(action);
   }
 
-  evaluateConstraint(constraintForNode: any): boolean {
-    return this.evaluateNodeConstraint(constraintForNode);
-  }
-
-  evaluateNodeConstraint(constraintForNode: any): boolean {
-    const removalCriteria = constraintForNode.removalCriteria;
+  evaluateConstraint(constraint: any): boolean {
+    const removalCriteria = constraint.removalCriteria;
     return (
       removalCriteria == null ||
-      this.evaluateMultipleRemovalCriteria(removalCriteria, constraintForNode.removalConditional)
+      this.evaluateMultipleRemovalCriteria(removalCriteria, constraint.removalConditional)
     );
   }
 

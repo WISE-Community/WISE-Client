@@ -41,7 +41,7 @@ let dataService: StudentDataService;
 const groupId1 = 'group1';
 const groupId2 = 'group2';
 const groupId3 = 'group3';
-let nodeConstraintTwoRemovalCriteria: any;
+let constraintTwoRemovalCriteria: any;
 const nodeId1 = 'node1';
 const nodeId2 = 'node2';
 const nodeId3 = 'node3';
@@ -73,7 +73,7 @@ describe('ConstraintService', () => {
         nodeId: nodeId2
       }
     };
-    nodeConstraintTwoRemovalCriteria = {
+    constraintTwoRemovalCriteria = {
       id: 'node3Constraint1',
       action: '',
       targetId: nodeId3,
@@ -81,21 +81,21 @@ describe('ConstraintService', () => {
       removalConditional: 'all'
     };
   });
-  evaluateNodeConstraint();
+  evaluateConstraint();
   evaluateCriterias();
   getConstraintsThatAffectNode();
   orderConstraints();
 });
 
-function evaluateNodeConstraint() {
-  describe('evaluateNodeConstraint()', () => {
-    evaluateNodeConstraintWithOneRemovalCriteria();
-    evaluateNodeConstraintWithTwoRemovalCriteria();
+function evaluateConstraint() {
+  describe('evaluateConstraint()', () => {
+    evaluateConstraintWithOneRemovalCriteria();
+    evaluateConstraintWithTwoRemovalCriteria();
   });
 }
 
-function evaluateNodeConstraintWithOneRemovalCriteria() {
-  it('should evaluate node constraint with one removal criteria', () => {
+function evaluateConstraintWithOneRemovalCriteria() {
+  it('should evaluate constraint with one removal criteria', () => {
     spyOn(dataService, 'isCompleted').and.returnValue(true);
     const constraint = {
       id: 'node1Constraint1',
@@ -104,26 +104,26 @@ function evaluateNodeConstraintWithOneRemovalCriteria() {
       removalCriteria: [criteria1],
       removalConditional: 'all'
     };
-    expect(service.evaluateNodeConstraint(constraint)).toEqual(true);
+    expect(service.evaluateConstraint(constraint)).toEqual(true);
   });
 }
 
-function evaluateNodeConstraintWithTwoRemovalCriteria() {
+function evaluateConstraintWithTwoRemovalCriteria() {
   function isCompletedSpy(): void {
     spyOn(dataService, 'isCompleted')
-      .withArgs(nodeId1)
+      .withArgs(nodeId1, undefined)
       .and.returnValue(true)
-      .withArgs(nodeId2)
+      .withArgs(nodeId2, undefined)
       .and.returnValue(false);
   }
-  it('should evaluate node constraint with two removal criteria requiring all', () => {
+  it('should evaluate constraint with two removal criteria requiring all', () => {
     isCompletedSpy();
-    expect(service.evaluateNodeConstraint(nodeConstraintTwoRemovalCriteria)).toEqual(false);
+    expect(service.evaluateConstraint(constraintTwoRemovalCriteria)).toEqual(false);
   });
-  it('should evaluate node constraint with two removal criteria requiring any', () => {
+  it('should evaluate constraint with two removal criteria requiring any', () => {
     isCompletedSpy();
-    nodeConstraintTwoRemovalCriteria.removalConditional = 'any';
-    expect(service.evaluateNodeConstraint(nodeConstraintTwoRemovalCriteria)).toEqual(true);
+    constraintTwoRemovalCriteria.removalConditional = 'any';
+    expect(service.evaluateConstraint(constraintTwoRemovalCriteria)).toEqual(true);
   });
 }
 
@@ -142,9 +142,9 @@ function evaluateCriterias() {
     it(`should return false when it is passed multiple criterias and one is false`, () => {
       const criterias = [criteria1, criteria2];
       spyOn(dataService, 'isCompleted')
-        .withArgs(nodeId1)
+        .withArgs(nodeId1, undefined)
         .and.returnValue(true)
-        .withArgs(nodeId2)
+        .withArgs(nodeId2, undefined)
         .and.returnValue(false);
       expect(service.evaluateCriterias(criterias)).toEqual(false);
     });
