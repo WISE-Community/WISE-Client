@@ -57,16 +57,13 @@ export class StudentStatusService {
       const runId = this.configService.getRunId();
       const periodId = this.configService.getPeriodId();
       const workgroupId = this.configService.getWorkgroupId();
-      const currentNodeId = this.studentDataService.getCurrentNodeId();
-      const nodeStatuses = this.nodeStatusService.getNodeStatuses();
-      const projectCompletion = this.studentDataService.getProjectCompletion();
       const studentStatusJSON: StudentStatus = {
         runId: runId,
         periodId: periodId,
         workgroupId: workgroupId,
-        currentNodeId: currentNodeId,
-        nodeStatuses: nodeStatuses,
-        projectCompletion: projectCompletion
+        currentNodeId: this.studentDataService.getCurrentNodeId(),
+        nodeStatuses: this.nodeStatusService.getNodeStatuses(),
+        projectCompletion: this.studentDataService.getProjectCompletion()
       };
       const computerAvatarId = this.getComputerAvatarId();
       if (computerAvatarId != null) {

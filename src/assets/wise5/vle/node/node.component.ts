@@ -7,6 +7,7 @@ import { ComponentService } from '../../components/componentService';
 import { ComponentStateWrapper } from '../../components/ComponentStateWrapper';
 import { ConfigService } from '../../services/configService';
 import { NodeService } from '../../services/nodeService';
+import { NodeStatusService } from '../../services/nodeStatusService';
 import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../vleProjectService';
@@ -57,6 +58,7 @@ export class NodeComponent implements OnInit {
     private componentService: ComponentService,
     private configService: ConfigService,
     private nodeService: NodeService,
+    private nodeStatusService: NodeStatusService,
     private projectService: VLEProjectService,
     private sessionService: SessionService,
     private studentDataService: StudentDataService
@@ -140,7 +142,7 @@ export class NodeComponent implements OnInit {
     this.nodeId = this.studentDataService.getCurrentNodeId();
     this.node = this.projectService.getNode(this.nodeId);
     this.nodeContent = this.projectService.getNodeById(this.nodeId);
-    this.nodeStatus = this.studentDataService.getNodeStatusByNodeId(this.nodeId);
+    this.nodeStatus = this.nodeStatusService.getNodeStatusByNodeId(this.nodeId);
     this.components = this.getComponents();
 
     if (

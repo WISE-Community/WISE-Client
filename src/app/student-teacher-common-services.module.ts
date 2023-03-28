@@ -51,6 +51,7 @@ import { StudentPeerGroupService } from '../assets/wise5/services/studentPeerGro
 import { ConstraintService } from '../assets/wise5/services/constraintService';
 import { NodeStatusService } from '../assets/wise5/services/nodeStatusService';
 import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
+import { NodeProgressService } from '../assets/wise5/services/nodeProgressService';
 
 @NgModule({
   providers: [
@@ -78,6 +79,7 @@ import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
     LabelService,
     MatchService,
     MultipleChoiceService,
+    NodeProgressService,
     NodeService,
     NodeStatusService,
     NotebookService,
