@@ -8,6 +8,7 @@ import { ComponentStateWrapper } from '../../components/ComponentStateWrapper';
 import { ConfigService } from '../../services/configService';
 import { ConstraintService } from '../../services/constraintService';
 import { NodeService } from '../../services/nodeService';
+import { NodeStatusService } from '../../services/nodeStatusService';
 import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../vleProjectService';
@@ -58,6 +59,7 @@ export class NodeComponent implements OnInit {
     private configService: ConfigService,
     private constraintService: ConstraintService,
     private nodeService: NodeService,
+    private nodeStatusService: NodeStatusService,
     private projectService: VLEProjectService,
     private sessionService: SessionService,
     private studentDataService: StudentDataService
@@ -143,7 +145,7 @@ export class NodeComponent implements OnInit {
     this.clearLatestComponentState();
     this.node = this.projectService.getNode(this.studentDataService.getCurrentNodeId());
     this.nodeContent = this.projectService.getNodeById(this.node.id);
-    this.nodeStatus = this.studentDataService.getNodeStatusByNodeId(this.node.id);
+    this.nodeStatus = this.nodeStatusService.getNodeStatusByNodeId(this.node.id);
     this.components = this.getComponents();
     this.updateComponentVisibility();
 

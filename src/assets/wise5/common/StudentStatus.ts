@@ -1,9 +1,11 @@
+import { NodeProgress } from './NodeProgress';
+
 export class StudentStatus {
   computerAvatarId?: string;
   currentNodeId: string;
   nodeStatuses: any;
   periodId: number;
-  projectCompletion: any;
+  projectCompletion: NodeProgress;
   runId: number;
   workgroupId: number;
 

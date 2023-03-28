@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NodeStatus } from '../common/NodeStatus';
 import { ConstraintService } from './constraintService';
+import { NodeProgressService } from './nodeProgressService';
 import { NotebookService } from './notebookService';
 import { ProjectService } from './projectService';
 import { StudentDataService } from './studentDataService';
@@ -9,9 +10,10 @@ import { StudentDataService } from './studentDataService';
 export class NodeStatusService {
   constructor(
     private constraintService: ConstraintService,
+    private dataService: StudentDataService,
+    private nodeProgressService: NodeProgressService,
     private notebookService: NotebookService,
-    private projectService: ProjectService,
-    private dataService: StudentDataService
+    private projectService: ProjectService
   ) {
     this.dataService.updateNodeStatuses$.subscribe(() => {
       this.updateNodeStatuses();
@@ -115,7 +117,10 @@ export class NodeStatusService {
   }
 
   private updateNodeStatusProgress(nodeId: string): void {
-    this.dataService.nodeStatuses[nodeId].progress = this.dataService.getNodeProgressById(nodeId);
+    this.dataService.nodeStatuses[nodeId].progress = this.nodeProgressService.getNodeProgress(
+      nodeId,
+      this.getNodeStatuses()
+    );
   }
 
   private updateNodeStatusIcon(nodeId: string): void {
