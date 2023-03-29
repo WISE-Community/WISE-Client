@@ -7,11 +7,11 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Directive()
 export abstract class ConstraintAuthoringComponent implements OnInit {
-  REMOVAL_CRITERIA_COMPONENT_PARAM: RemovalCriteriaParam = new RemovalCriteriaParam(
+  removalCriteriaComponentParam: RemovalCriteriaParam = new RemovalCriteriaParam(
     'componentId',
     $localize`Component`
   );
-  REMOVAL_CRITERIA_STEP_PARAM: RemovalCriteriaParam = new RemovalCriteriaParam(
+  removalCriteriaStepParam: RemovalCriteriaParam = new RemovalCriteriaParam(
     'nodeId',
     $localize`Step`
   );
@@ -26,10 +26,10 @@ export abstract class ConstraintAuthoringComponent implements OnInit {
   ];
   removalCriteria = [
     new RemovalCriteria('', $localize`Please Choose a Removal Criteria`, []),
-    new RemovalCriteria('isCompleted', $localize`Is Completed`, [this.REMOVAL_CRITERIA_STEP_PARAM]),
+    new RemovalCriteria('isCompleted', $localize`Is Completed`, [this.removalCriteriaStepParam]),
     new RemovalCriteria('score', $localize`Score`, [
-      this.REMOVAL_CRITERIA_STEP_PARAM,
-      this.REMOVAL_CRITERIA_COMPONENT_PARAM,
+      this.removalCriteriaStepParam,
+      this.removalCriteriaComponentParam,
       new RemovalCriteriaParam('scores', $localize`Score(s)`)
     ]),
     new RemovalCriteria('branchPathTaken', $localize`Branch Path Taken`, [
@@ -37,38 +37,38 @@ export abstract class ConstraintAuthoringComponent implements OnInit {
       new RemovalCriteriaParam('toNodeId', $localize`To Step`)
     ]),
     new RemovalCriteria('choiceChosen', $localize`Choice Chosen`, [
-      this.REMOVAL_CRITERIA_STEP_PARAM,
-      this.REMOVAL_CRITERIA_COMPONENT_PARAM,
+      this.removalCriteriaStepParam,
+      this.removalCriteriaComponentParam,
       new RemovalCriteriaParam('choiceIds', $localize`Choices`)
     ]),
     new RemovalCriteria('isCorrect', $localize`Is Correct`, [
-      this.REMOVAL_CRITERIA_STEP_PARAM,
-      this.REMOVAL_CRITERIA_COMPONENT_PARAM
+      this.removalCriteriaStepParam,
+      this.removalCriteriaComponentParam
     ]),
     new RemovalCriteria('usedXSubmits', $localize`Used X Submits`, [
-      this.REMOVAL_CRITERIA_STEP_PARAM,
-      this.REMOVAL_CRITERIA_COMPONENT_PARAM,
+      this.removalCriteriaStepParam,
+      this.removalCriteriaComponentParam,
       new RemovalCriteriaParam('requiredSubmitCount', $localize`Required Submit Count`)
     ]),
-    new RemovalCriteria('isVisible', $localize`Is Visible`, [this.REMOVAL_CRITERIA_STEP_PARAM]),
-    new RemovalCriteria('isVisitable', $localize`Is Visitable`, [this.REMOVAL_CRITERIA_STEP_PARAM]),
-    new RemovalCriteria('isVisited', $localize`Is Visited`, [this.REMOVAL_CRITERIA_STEP_PARAM]),
+    new RemovalCriteria('isVisible', $localize`Is Visible`, [this.removalCriteriaStepParam]),
+    new RemovalCriteria('isVisitable', $localize`Is Visitable`, [this.removalCriteriaStepParam]),
+    new RemovalCriteria('isVisited', $localize`Is Visited`, [this.removalCriteriaStepParam]),
     new RemovalCriteria('wroteXNumberOfWords', $localize`Wrote X Number of Words`, [
-      this.REMOVAL_CRITERIA_STEP_PARAM,
-      this.REMOVAL_CRITERIA_COMPONENT_PARAM,
+      this.removalCriteriaStepParam,
+      this.removalCriteriaComponentParam,
       new RemovalCriteriaParam('requiredNumberOfWords', $localize`Required Number of Words`)
     ]),
     new RemovalCriteria(
       'addXNumberOfNotesOnThisStep',
       $localize`Add X Number of Notes On This Step`,
       [
-        this.REMOVAL_CRITERIA_STEP_PARAM,
+        this.removalCriteriaStepParam,
         new RemovalCriteriaParam('requiredNumberOfNotes', $localize`Required Number of Notes`)
       ]
     ),
     new RemovalCriteria('fillXNumberOfRows', $localize`Fill X Number of Rows`, [
-      this.REMOVAL_CRITERIA_STEP_PARAM,
-      this.REMOVAL_CRITERIA_COMPONENT_PARAM,
+      this.removalCriteriaStepParam,
+      this.removalCriteriaComponentParam,
       new RemovalCriteriaParam(
         'requiredNumberOfFilledRows',
         $localize`Required Number of Filled Rows (Not Including Header Row)`

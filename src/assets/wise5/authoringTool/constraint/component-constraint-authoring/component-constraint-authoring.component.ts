@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { ValueAndText } from '../../../../../app/domain/valueAndText';
-import { TeacherDataService } from '../../../services/teacherDataService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ConstraintAction } from '../../../../../app/domain/constraintAction';
 import { ConstraintAuthoringComponent } from '../constraint-authoring/constraint-authoring.component';
 
 @Component({
@@ -11,14 +9,7 @@ import { ConstraintAuthoringComponent } from '../constraint-authoring/constraint
 })
 export class ComponentConstraintAuthoringComponent extends ConstraintAuthoringComponent {
   constraintActions = [
-    new ValueAndText('', $localize`Please Choose an Action`),
-    new ValueAndText('makeThisComponentNotVisible', $localize`Make This Component Not Visible`)
+    new ConstraintAction('', $localize`Please Choose an Action`),
+    new ConstraintAction('makeThisComponentNotVisible', $localize`Make This Component Not Visible`)
   ];
-
-  constructor(
-    protected dataService: TeacherDataService,
-    protected projectService: TeacherProjectService
-  ) {
-    super(dataService, projectService);
-  }
 }
