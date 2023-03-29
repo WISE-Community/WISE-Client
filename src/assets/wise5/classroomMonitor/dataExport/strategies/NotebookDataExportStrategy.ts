@@ -1,3 +1,4 @@
+import { removeHTMLTags } from '../../../common/string/string';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
 export class NotebookDataExportStrategy extends AbstractDataExportStrategy {
@@ -122,7 +123,7 @@ export class NotebookDataExportStrategy extends AbstractDataExportStrategy {
     }
     const responseJSON = JSON.parse(notebookItem.content);
     if (notebookItem.type === 'report') {
-      row[columnNameToNumber['Response']] = this.utilService.removeHTMLTags(responseJSON.content);
+      row[columnNameToNumber['Response']] = removeHTMLTags(responseJSON.content);
     } else {
       row[columnNameToNumber['Response']] = responseJSON.text;
     }

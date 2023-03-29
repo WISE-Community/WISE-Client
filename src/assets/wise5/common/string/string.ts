@@ -59,3 +59,23 @@ function testWhite(x) {
 export function trimToLength(str: string, maxLength: number): string {
   return str.length > maxLength ? `${str.substring(0, maxLength - 3)}...` : str;
 }
+
+/**
+ * Remove html tags and newlines from the string.
+ * @param html an html string
+ * @return text without html tags and new lines
+ */
+export function removeHTMLTags(html: string = '') {
+  let text = replaceImgTagWithFileName(html);
+  text = text.replace(/<\/?[^>]+(>|$)/g, ' ');
+  return removeNewLines(text);
+}
+
+function removeNewLines(html: string = '') {
+  let text = html.replace(/\n/g, ' ');
+  return text.replace(/\r/g, ' ');
+}
+
+function replaceImgTagWithFileName(html: string = '') {
+  return html.replace(/<img.*?src=["'](.*?)["'].*?>/g, '$1');
+}
