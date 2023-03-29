@@ -17815,8 +17815,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">185</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="308b2c34885c4f962f8d2c64bd172d99da2ef34a" datatype="html">
-        <source>When the student hovers their mouse over a data point, the tooltip will display the value from this column along with the x and y values. This can be left blank and the tooltip will still show the x and y values like normal.</source>
+      <trans-unit id="5157093c5cf05f98b4e4e0178bfdaa09a4d1b17b" datatype="html">
+        <source>When the student hovers their mouse over a data point on a scatter plot or line graph, the tooltip will display the value from this column along with the x and y values. This can be left blank and the tooltip will still show the x and y values like normal.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
           <context context-type="linenumber">198</context>
