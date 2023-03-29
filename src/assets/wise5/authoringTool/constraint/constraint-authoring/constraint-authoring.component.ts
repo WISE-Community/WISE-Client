@@ -1,4 +1,5 @@
 import { Directive, Input, OnInit } from '@angular/core';
+import { ConstraintAction } from '../../../../../app/domain/constraintAction';
 import { RemovalCriteria } from '../../../../../app/domain/removalCriteria';
 import { RemovalCriteriaParam } from '../../../../../app/domain/removalCriteriaParam';
 import { MultipleChoiceContent } from '../../../components/multipleChoice/MultipleChoiceContent';
@@ -91,6 +92,20 @@ export abstract class ConstraintAuthoringComponent implements OnInit {
   ngOnInit(): void {
     this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);
     this.node = this.projectService.getNodeById(this.dataService.getCurrentNodeId());
+    this.automaticallySetActionIfPossible();
+  }
+
+  private automaticallySetActionIfPossible(): void {
+    if (this.constraint.action === '') {
+      const possibleConstraintActions = this.constraintActions.filter(
+        (constraintAction: ConstraintAction) => {
+          return constraintAction.value !== '';
+        }
+      );
+      if (possibleConstraintActions.length === 1) {
+        this.constraint.action = possibleConstraintActions[0].value;
+      }
+    }
   }
 
   addRemovalCriteria(constraint: any): void {

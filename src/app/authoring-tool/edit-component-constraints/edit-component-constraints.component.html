@@ -1,10 +1,11 @@
 <div class="body-div">
   <div fxLayoutGap="16px">
-    <mat-label i18n>Add Constraint</mat-label>
+    <mat-label i18n>Add Visibility Constraint</mat-label>
     <button
       mat-raised-button
       color="primary"
       (click)="addConstraint()"
+      [disabled]="content.constraints.length > 0"
       matTooltip="Add Constraint"
       matTooltipPosition="above"
       i18n-matTooltip
@@ -13,11 +14,11 @@
     </button>
   </div>
   <div
-    *ngFor="let constraint of componentContent.constraints; index as constraintIndex"
+    *ngFor="let constraint of content.constraints; index as constraintIndex"
     class="constraints-div"
     fxLayoutGap="16px"
   >
-    <b i18n>Constraint {{ constraintIndex + 1 }}</b>
+    <b i18n>Constraint</b>
     <button
       mat-raised-button
       color="primary"
