@@ -1,30 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Directive, Input, OnInit } from '@angular/core';
+import { RemovalCriteria } from '../../../../../app/domain/removalCriteria';
+import { RemovalCriteriaParam } from '../../../../../app/domain/removalCriteriaParam';
 import { MultipleChoiceContent } from '../../../components/multipleChoice/MultipleChoiceContent';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
-@Component({
-  selector: 'constraint-authoring',
-  templateUrl: './constraint-authoring.component.html',
-  styleUrls: ['./constraint-authoring.component.scss']
-})
-export class ConstraintAuthoringComponent implements OnInit {
+@Directive()
+export abstract class ConstraintAuthoringComponent implements OnInit {
+  REMOVAL_CRITERIA_COMPONENT_PARAM: RemovalCriteriaParam = new RemovalCriteriaParam(
+    'componentId',
+    $localize`Component`
+  );
+  REMOVAL_CRITERIA_STEP_PARAM: RemovalCriteriaParam = new RemovalCriteriaParam(
+    'nodeId',
+    $localize`Step`
+  );
+
   @Input() constraint: any;
-  constraintActions = [
-    { value: '', text: $localize`Please Choose an Action` },
-    {
-      value: 'makeAllNodesAfterThisNotVisitable',
-      text: $localize`Make all nodes after this not visitable`
-    },
-    {
-      value: 'makeAllNodesAfterThisNotVisible',
-      text: $localize`Make all nodes after this not visible`
-    },
-    { value: 'makeAllOtherNodesNotVisitable', text: $localize`Make all other nodes not visitable` },
-    { value: 'makeAllOtherNodesNotVisible', text: $localize`Make all other nodes not visible` },
-    { value: 'makeThisNodeNotVisitable', text: $localize`Make this node not visitable` },
-    { value: 'makeThisNodeNotVisible', text: $localize`Make this node not visible` }
-  ];
+  constraintActions = [];
   node: any;
   nodeIds: string[];
   removalConditionals = [
@@ -32,116 +25,67 @@ export class ConstraintAuthoringComponent implements OnInit {
     { value: 'any', text: $localize`Any` }
   ];
   removalCriteria = [
-    { value: '', text: $localize`Please Choose a Removal Criteria`, params: [] },
-    {
-      value: 'isCompleted',
-      text: $localize`Is Completed`,
-      params: [{ value: 'nodeId', text: $localize`Step` }]
-    },
-    {
-      value: 'score',
-      text: $localize`Score`,
-      params: [
-        { value: 'nodeId', text: $localize`Step` },
-        { value: 'componentId', text: $localize`Component` },
-        { value: 'scores', text: $localize`Score(s)` }
+    new RemovalCriteria('', $localize`Please Choose a Removal Criteria`, []),
+    new RemovalCriteria('isCompleted', $localize`Is Completed`, [this.REMOVAL_CRITERIA_STEP_PARAM]),
+    new RemovalCriteria('score', $localize`Score`, [
+      this.REMOVAL_CRITERIA_STEP_PARAM,
+      this.REMOVAL_CRITERIA_COMPONENT_PARAM,
+      new RemovalCriteriaParam('scores', $localize`Score(s)`)
+    ]),
+    new RemovalCriteria('branchPathTaken', $localize`Branch Path Taken`, [
+      new RemovalCriteriaParam('fromNodeId', $localize`From Step`),
+      new RemovalCriteriaParam('toNodeId', $localize`To Step`)
+    ]),
+    new RemovalCriteria('choiceChosen', $localize`Choice Chosen`, [
+      this.REMOVAL_CRITERIA_STEP_PARAM,
+      this.REMOVAL_CRITERIA_COMPONENT_PARAM,
+      new RemovalCriteriaParam('choiceIds', $localize`Choices`)
+    ]),
+    new RemovalCriteria('isCorrect', $localize`Is Correct`, [
+      this.REMOVAL_CRITERIA_STEP_PARAM,
+      this.REMOVAL_CRITERIA_COMPONENT_PARAM
+    ]),
+    new RemovalCriteria('usedXSubmits', $localize`Used X Submits`, [
+      this.REMOVAL_CRITERIA_STEP_PARAM,
+      this.REMOVAL_CRITERIA_COMPONENT_PARAM,
+      new RemovalCriteriaParam('requiredSubmitCount', $localize`Required Submit Count`)
+    ]),
+    new RemovalCriteria('isVisible', $localize`Is Visible`, [this.REMOVAL_CRITERIA_STEP_PARAM]),
+    new RemovalCriteria('isVisitable', $localize`Is Visitable`, [this.REMOVAL_CRITERIA_STEP_PARAM]),
+    new RemovalCriteria('isVisited', $localize`Is Visited`, [this.REMOVAL_CRITERIA_STEP_PARAM]),
+    new RemovalCriteria('wroteXNumberOfWords', $localize`Wrote X Number of Words`, [
+      this.REMOVAL_CRITERIA_STEP_PARAM,
+      this.REMOVAL_CRITERIA_COMPONENT_PARAM,
+      new RemovalCriteriaParam('requiredNumberOfWords', $localize`Required Number of Words`)
+    ]),
+    new RemovalCriteria(
+      'addXNumberOfNotesOnThisStep',
+      $localize`Add X Number of Notes On This Step`,
+      [
+        this.REMOVAL_CRITERIA_STEP_PARAM,
+        new RemovalCriteriaParam('requiredNumberOfNotes', $localize`Required Number of Notes`)
       ]
-    },
-    {
-      value: 'branchPathTaken',
-      text: $localize`Branch Path Taken`,
-      params: [
-        { value: 'fromNodeId', text: $localize`From Step` },
-        { value: 'toNodeId', text: $localize`To Step` }
-      ]
-    },
-    {
-      value: 'choiceChosen',
-      text: $localize`Choice Chosen`,
-      params: [
-        { value: 'nodeId', text: $localize`Step` },
-        { value: 'componentId', text: $localize`Component` },
-        { value: 'choiceIds', text: $localize`Choices` }
-      ]
-    },
-    {
-      value: 'isCorrect',
-      text: $localize`Is Correct`,
-      params: [
-        { value: 'nodeId', text: $localize`Step` },
-        { value: 'componentId', text: $localize`Component` }
-      ]
-    },
-    {
-      value: 'usedXSubmits',
-      text: $localize`Used X Submits`,
-      params: [
-        { value: 'nodeId', text: $localize`Step` },
-        { value: 'componentId', text: $localize`Component` },
-        { value: 'requiredSubmitCount', text: $localize`Required Submit Count` }
-      ]
-    },
-    {
-      value: 'isVisible',
-      text: $localize`Is Visible`,
-      params: [{ value: 'nodeId', text: $localize`Step` }]
-    },
-    {
-      value: 'isVisitable',
-      text: $localize`Is Visitable`,
-      params: [{ value: 'nodeId', text: $localize`Step` }]
-    },
-    {
-      value: 'isVisited',
-      text: $localize`Is Visited`,
-      params: [{ value: 'nodeId', text: $localize`Step` }]
-    },
-    {
-      value: 'wroteXNumberOfWords',
-      text: $localize`Wrote X Number of Words`,
-      params: [
-        { value: 'nodeId', text: $localize`Step` },
-        { value: 'componentId', text: $localize`Component` },
-        { value: 'requiredNumberOfWords', text: $localize`Required Number of Words` }
-      ]
-    },
-    {
-      value: 'addXNumberOfNotesOnThisStep',
-      text: $localize`Add X Number of Notes On This Step`,
-      params: [
-        { value: 'nodeId', text: $localize`Step` },
-        { value: 'requiredNumberOfNotes', text: $localize`Required Number of Notes` }
-      ]
-    },
-    {
-      value: 'fillXNumberOfRows',
-      text: $localize`Fill X Number of Rows`,
-      params: [
-        { value: 'nodeId', text: $localize`Step` },
-        { value: 'componentId', text: $localize`Component` },
-        {
-          value: 'requiredNumberOfFilledRows',
-          defaultValue: null,
-          text: $localize`Required Number of Filled Rows (Not Including Header Row)`
-        },
-        {
-          value: 'tableHasHeaderRow',
-          defaultValue: true,
-          text: $localize`Table Has Header Row`
-        },
-        {
-          value: 'requireAllCellsInARowToBeFilled',
-          defaultValue: true,
-          text: $localize`Require All Cells In a Row To Be Filled`
-        }
-      ]
-    },
-    { value: 'teacherRemoval', text: $localize`Teacher Removes Constraint`, params: [] }
+    ),
+    new RemovalCriteria('fillXNumberOfRows', $localize`Fill X Number of Rows`, [
+      this.REMOVAL_CRITERIA_STEP_PARAM,
+      this.REMOVAL_CRITERIA_COMPONENT_PARAM,
+      new RemovalCriteriaParam(
+        'requiredNumberOfFilledRows',
+        $localize`Required Number of Filled Rows (Not Including Header Row)`
+      ),
+      new RemovalCriteriaParam('tableHasHeaderRow', $localize`Table Has Header Row`, true),
+      new RemovalCriteriaParam(
+        'requireAllCellsInARowToBeFilled',
+        $localize`Require All Cells In a Row To Be Filled`,
+        true
+      )
+    ]),
+    new RemovalCriteria('teacherRemoval', $localize`Teacher Removes Constraint`, [])
   ];
 
   constructor(
-    private dataService: TeacherDataService,
-    private projectService: TeacherProjectService
+    protected dataService: TeacherDataService,
+    protected projectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
@@ -163,11 +107,7 @@ export class ConstraintAuthoringComponent implements OnInit {
     const params = this.getRemovalCriteriaParamsByName(criteria.name);
     for (const paramObject of params) {
       const value = paramObject.value;
-      if (paramObject.hasOwnProperty('defaultValue')) {
-        criteria.params[value] = paramObject.defaultValue;
-      } else {
-        criteria.params[value] = '';
-      }
+      criteria.params[value] = paramObject.defaultValue;
       if (value === 'nodeId') {
         criteria.params[value] = this.node.id;
       }

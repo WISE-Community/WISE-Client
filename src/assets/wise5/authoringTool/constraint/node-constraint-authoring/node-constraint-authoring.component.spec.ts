@@ -6,22 +6,23 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Constraint } from '../../../../../app/domain/constraint';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { RequiredErrorLabelComponent } from '../../node/advanced/required-error-label/required-error-label.component';
-import { ConstraintAuthoringComponent } from './constraint-authoring.component';
+import { NodeConstraintAuthoringComponent } from './node-constraint-authoring.component';
 
-let component: ConstraintAuthoringComponent;
-let fixture: ComponentFixture<ConstraintAuthoringComponent>;
+let component: NodeConstraintAuthoringComponent;
+let fixture: ComponentFixture<NodeConstraintAuthoringComponent>;
 const nodeId1 = 'node1';
 
-describe('ConstraintAuthoringComponent', () => {
+describe('NodeConstraintAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ConstraintAuthoringComponent, RequiredErrorLabelComponent],
+      declarations: [NodeConstraintAuthoringComponent, RequiredErrorLabelComponent],
       imports: [
         BrowserAnimationsModule,
         FormsModule,
@@ -40,12 +41,11 @@ describe('ConstraintAuthoringComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ConstraintAuthoringComponent);
+    fixture = TestBed.createComponent(NodeConstraintAuthoringComponent);
     component = fixture.componentInstance;
-    component.constraint = {
+    component.constraint = new Constraint({
       id: 'node1Constraint1',
       action: '',
-      targetId: nodeId1,
       removalConditional: 'any',
       removalCriteria: [
         {
@@ -53,7 +53,7 @@ describe('ConstraintAuthoringComponent', () => {
           params: {}
         }
       ]
-    };
+    });
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
       nodeId1
     ]);
@@ -165,7 +165,7 @@ function removalCriteriaNameChanged() {
       setRemovalCriteriaName('fillXNumberOfRows');
       expectRemovalCriteriaNodeIdValueToEqualNode1();
       expectEmptyRemovalCriterialParamValue('componentId');
-      expect(removalCriteria.params['requiredNumberOfFilledRows']).toEqual(null);
+      expect(removalCriteria.params['requiredNumberOfFilledRows']).toEqual('');
       expect(removalCriteria.params['tableHasHeaderRow']).toEqual(true);
       expect(removalCriteria.params['requireAllCellsInARowToBeFilled']).toEqual(true);
     });

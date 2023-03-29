@@ -24,7 +24,7 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
 import { AddLessonConfigureComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component';
 import { AddLessonChooseLocationComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-location/add-lesson-choose-location.component';
-import { ConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component';
+import { NodeConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/constraint/node-constraint-authoring/node-constraint-authoring.component';
 
 @NgModule({
   declarations: [
@@ -39,12 +39,12 @@ import { ConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/c
     ChooseNewComponentLocation,
     ChooseNewNodeLocation,
     ChooseNewNodeTemplate,
-    ConstraintAuthoringComponent,
     NodeAdvancedBranchAuthoringComponent,
     NodeAdvancedConstraintAuthoringComponent,
     NodeAdvancedGeneralAuthoringComponent,
     NodeAdvancedJsonAuthoringComponent,
     NodeAdvancedPathAuthoringComponent,
+    NodeConstraintAuthoringComponent,
     NodeIconChooserDialog,
     RecoveryAuthoringComponent,
     RequiredErrorLabelComponent,

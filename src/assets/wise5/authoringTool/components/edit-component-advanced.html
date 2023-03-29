@@ -82,11 +82,12 @@
           node-id="{{$ctrl.nodeId}}"
           component-id="{{$ctrl.component.id}}"
         ></edit-peer-chat-advanced>
-        <edit-component-json
-          ng-switch-when="ShowGroupWork|ShowMyWork"
-          ng-switch-when-separator="|"
-          [component]="$ctrl.component"
-        ></edit-component-json>
+        <ng-container ng-switch-when="ShowGroupWork|ShowMyWork" ng-switch-when-separator="|">
+          <edit-component-constraints
+            [component-content]="$ctrl.component.content"
+          ></edit-component-constraints>
+          <edit-component-json [component]="$ctrl.component"></edit-component-json>
+        </ng-container>
         <edit-summary-advanced
           ng-switch-when="Summary"
           node-id="{{$ctrl.nodeId}}"

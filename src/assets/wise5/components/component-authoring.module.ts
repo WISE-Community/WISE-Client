@@ -38,6 +38,7 @@ import { EditConnectedComponentDeleteButtonComponent } from '../../../app/author
 import { EditConnectedComponentDefaultSelectsComponent } from '../../../app/authoring-tool/edit-connected-component-default-selects/edit-connected-component-default-selects.component';
 import { EditComponentMaxSubmitComponent } from '../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
 import { EditComponentPeerGroupingTagComponent } from '../../../app/authoring-tool/edit-component-peer-grouping-tag/edit-component-peer-grouping-tag.component';
+import { EditComponentConstraintsComponent } from '../../../app/authoring-tool/edit-component-constraints/edit-component-constraints.component';
 
 export default angular
   .module('componentAuthoringModule', [
@@ -66,6 +67,12 @@ export default angular
     'authorUrlParameters',
     downgradeComponent({
       component: AuthorUrlParametersComponent
+    }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editComponentConstraints',
+    downgradeComponent({
+      component: EditComponentConstraintsComponent
     }) as angular.IDirectiveFactory
   )
   .directive(

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { temporarilyHighlightElement } from '../../../../common/dom/dom';
+import { Constraint } from '../../../../../../app/domain/constraint';
 
 @Component({
   selector: 'node-advanced-constraint-authoring',
@@ -33,7 +34,7 @@ export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
 
   private addConstraint(): string {
     const newNodeConstraintId = this.getNewNodeConstraintId();
-    const constraint = {
+    const constraint = new Constraint({
       id: newNodeConstraintId,
       action: '',
       targetId: this.node.id,
@@ -44,7 +45,7 @@ export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
           params: {}
         }
       ]
-    };
+    });
     this.node.constraints.push(constraint);
     this.saveProject();
     return newNodeConstraintId;
