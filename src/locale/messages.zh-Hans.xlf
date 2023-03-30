@@ -13280,7 +13280,7 @@ Are you sure you want to proceed?</target>
         <source>Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <target state="needs-translation">Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position</target>
       </trans-unit>
@@ -13288,7 +13288,7 @@ Are you sure you want to proceed?</target>
         <source>One Workgroup Per Row</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">172</context>
+          <context context-type="linenumber">173</context>
         </context-group>
         <target state="needs-translation">One Workgroup Per Row</target>
       </trans-unit>
@@ -13296,7 +13296,7 @@ Are you sure you want to proceed?</target>
         <source>Latest Student Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">175</context>
         </context-group>
         <target state="needs-translation">Latest Student Work</target>
       </trans-unit>
@@ -13304,7 +13304,7 @@ Are you sure you want to proceed?</target>
         <source>All Student Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">176</context>
+          <context context-type="linenumber">177</context>
         </context-group>
         <target state="needs-translation">All Student Work</target>
       </trans-unit>
@@ -13312,7 +13312,7 @@ Are you sure you want to proceed?</target>
         <source>Events</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">178</context>
+          <context context-type="linenumber">179</context>
         </context-group>
         <target state="needs-translation">Events</target>
       </trans-unit>
@@ -13320,7 +13320,7 @@ Are you sure you want to proceed?</target>
         <source>Raw Data</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">181</context>
         </context-group>
         <target state="needs-translation">Raw Data</target>
       </trans-unit>
@@ -13328,7 +13328,7 @@ Are you sure you want to proceed?</target>
         <source>Downloading Export</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">2121</context>
+          <context context-type="linenumber">2122</context>
         </context-group>
         <target state="needs-translation">Downloading Export</target>
       </trans-unit>
@@ -17666,7 +17666,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1091</context>
+          <context context-type="linenumber">1113</context>
         </context-group>
         <target state="needs-translation">The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</target>
       </trans-unit>
@@ -17674,7 +17674,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>You can not edit this series. Please choose a series that can be edited.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1105</context>
+          <context context-type="linenumber">1127</context>
         </context-group>
         <target state="needs-translation">You can not edit this series. Please choose a series that can be edited.</target>
       </trans-unit>
@@ -17682,7 +17682,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Are you sure you want to reset the series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1383</context>
+          <context context-type="linenumber">1405</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset the series?</target>
       </trans-unit>
@@ -17690,7 +17690,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Are you sure you want to reset the &quot;<x id="PH" equiv-text="seriesName"/>&quot; series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1385</context>
+          <context context-type="linenumber">1407</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset the "<x id="PH" equiv-text="seriesName"/>" series?</target>
       </trans-unit>
@@ -17698,11 +17698,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Trial</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1906</context>
+          <context context-type="linenumber">1943</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">2740</context>
+          <context context-type="linenumber">2777</context>
         </context-group>
         <target state="needs-translation">Trial</target>
       </trans-unit>
@@ -19872,6 +19872,10 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
           <context context-type="linenumber">171</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">191</context>
+        </context-group>
         <target state="needs-translation">Table Column</target>
       </trans-unit>
       <trans-unit id="dba97f2b34e2e417cf30f6a74a19f5ee1f91dc12" datatype="html">
@@ -19882,11 +19886,35 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="needs-translation">Y Data <x id="INTERPOLATION" equiv-text="{{             componentContent.numDataExplorerSeries &gt; 1 ? dataExplorerSeriesIndex + 1 : ''           }}"/></target>
       </trans-unit>
+      <trans-unit id="b76eb2713d56d6355cbff9020f380e5fec2680c8" datatype="html">
+        <source>Tooltip Header Column</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">180</context>
+        </context-group>
+        <target state="needs-translation">Tooltip Header Column</target>
+      </trans-unit>
+      <trans-unit id="ad76c6445b04ac709c20ed50fc35db2767c99434" datatype="html">
+        <source>(Default)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">185</context>
+        </context-group>
+        <target state="needs-translation">(Default)</target>
+      </trans-unit>
+      <trans-unit id="5157093c5cf05f98b4e4e0178bfdaa09a4d1b17b" datatype="html">
+        <source>When the student hovers their mouse over a data point on a scatter plot or line graph, the tooltip will display the value from this column along with the x and y values. This can be left blank and the tooltip will still show the x and y values like normal.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">198</context>
+        </context-group>
+        <target state="needs-translation">When the student hovers their mouse over a data point on a scatter plot or line graph, the tooltip will display the value from this column along with the x and y values. This can be left blank and the tooltip will still show the x and y values like normal.</target>
+      </trans-unit>
       <trans-unit id="b652160adbee3bf218c97721e5b26a3bccf7b0c9" datatype="html">
         <source>Import Table</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">187</context>
+          <context context-type="linenumber">214</context>
         </context-group>
         <target state="needs-translation">Import Table</target>
       </trans-unit>
@@ -19894,7 +19922,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Only .csv (comma separated values) files are allowed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">196</context>
+          <context context-type="linenumber">223</context>
         </context-group>
         <target state="needs-translation">Only .csv (comma separated values) files are allowed</target>
       </trans-unit>
@@ -19902,7 +19930,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Enable Row Selection </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">225,227</context>
+          <context context-type="linenumber">252,254</context>
         </context-group>
         <target state="needs-translation"> Enable Row Selection </target>
       </trans-unit>
