@@ -244,9 +244,9 @@ function convertRowDataToSeriesData() {
       };
       const seriesData = component.convertRowDataToSeriesData(rows, params);
       expect(seriesData).toEqual([
-        [0, 0],
-        [10, 5],
-        [20, 10]
+        { x: 0, y: 0 },
+        { x: 10, y: 5 },
+        { x: 20, y: 10 }
       ]);
     });
   });
@@ -422,7 +422,10 @@ function handleTableConnectedComponentStudentDataChanged() {
         }
       };
       component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
-      expect(component.activeTrial.series[0].data).toEqual(dataRows);
+      expect(component.activeTrial.series[0].data).toEqual([
+        { x: 0, y: 0 },
+        { x: 10, y: 20 }
+      ]);
     });
     it('should handle table connected component student data changed with selected rows', () => {
       const connectedComponent = createTableConnectedComponent();
@@ -441,8 +444,8 @@ function handleTableConnectedComponentStudentDataChanged() {
       };
       component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
       expect(component.activeTrial.series[0].data).toEqual([
-        [0, 0],
-        [20, 40]
+        { x: 0, y: 0 },
+        { x: 20, y: 40 }
       ]);
     });
     it('should handle table connected component student data changed with sorted rows', () => {
@@ -462,10 +465,10 @@ function handleTableConnectedComponentStudentDataChanged() {
       };
       component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
       expect(component.activeTrial.series[0].data).toEqual([
-        [20, 40],
-        [10, 20],
-        [0, 0],
-        [30, 80]
+        { x: 20, y: 40 },
+        { x: 10, y: 20 },
+        { x: 0, y: 0 },
+        { x: 30, y: 80 }
       ]);
     });
     it('should handle table connected component student data changed with selected and sorted rows', () => {
@@ -486,8 +489,8 @@ function handleTableConnectedComponentStudentDataChanged() {
       };
       component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
       expect(component.activeTrial.series[0].data).toEqual([
-        [20, 40],
-        [0, 0]
+        { x: 20, y: 40 },
+        { x: 0, y: 0 }
       ]);
     });
     it('should handle connected data explorer student data changed', () => {
@@ -505,8 +508,11 @@ function handleTableConnectedComponentStudentDataChanged() {
       expect(series.type).toEqual('scatter');
       expect(series.name).toEqual('The series name');
       expect(series.color).toEqual('blue');
-      expect(series.data[0][0]).toEqual(1);
-      expect(series.data[1][1]).toEqual(20);
+      expect(series.data).toEqual([
+        { x: 1, y: 10 },
+        { x: 2, y: 20 },
+        { x: 3, y: 30 }
+      ]);
     });
     it('should handle connected data explorer student data changed with selected rows', () => {
       const connectedComponent = createTableConnectedComponent();
@@ -524,8 +530,10 @@ function handleTableConnectedComponentStudentDataChanged() {
       expect(series.type).toEqual('scatter');
       expect(series.name).toEqual('The series name');
       expect(series.color).toEqual('blue');
-      expect(series.data[0][0]).toEqual(1);
-      expect(series.data[1][1]).toEqual(30);
+      expect(series.data).toEqual([
+        { x: 1, y: 10 },
+        { x: 3, y: 30 }
+      ]);
     });
   });
 }
@@ -1679,18 +1687,18 @@ function generateDataExplorerSeries() {
       graphType,
       name,
       color,
-      yAxis
+      yAxis,
+      null
     );
     expect(series.name).toEqual('Age');
     expect(series.type).toEqual('scatter');
     expect(series.color).toEqual('blue');
     expect(series.data.length).toEqual(3);
-    expect(series.data[0][0]).toEqual(1);
-    expect(series.data[0][1]).toEqual(10);
-    expect(series.data[1][0]).toEqual(2);
-    expect(series.data[1][1]).toEqual(20);
-    expect(series.data[2][0]).toEqual(3);
-    expect(series.data[2][1]).toEqual(30);
+    expect(series.data).toEqual([
+      { x: 1, y: 10 },
+      { x: 2, y: 20 },
+      { x: 3, y: 30 }
+    ]);
   });
 }
 
@@ -1758,14 +1766,13 @@ function convertDataExplorerDataToSeriesData() {
     ];
     const xColumn = 0;
     const yColumn = 1;
-    const data = component.convertDataExplorerDataToSeriesData(rows, xColumn, yColumn);
+    const data = component.convertDataExplorerDataToSeriesData(rows, xColumn, yColumn, null);
     expect(data.length).toEqual(3);
-    expect(data[0][0]).toEqual(1);
-    expect(data[0][1]).toEqual(10);
-    expect(data[1][0]).toEqual(2);
-    expect(data[1][1]).toEqual(20);
-    expect(data[2][0]).toEqual(3);
-    expect(data[2][1]).toEqual(30);
+    expect(data).toEqual([
+      { x: 1, y: 10 },
+      { x: 2, y: 20 },
+      { x: 3, y: 30 }
+    ]);
   });
 }
 

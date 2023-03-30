@@ -32,6 +32,7 @@ export class TableStudent extends ComponentStudent {
   dataExplorerGraphType: string;
   dataExplorerSeries: any[];
   dataExplorerSeriesParams: any[];
+  dataExplorerTooltipHeaderColumn: number;
   dataExplorerXAxisLabel: string;
   dataExplorerXColumn: number;
   dataExplorerYAxisLabel: string;
@@ -168,6 +169,7 @@ export class TableStudent extends ComponentStudent {
     this.isDataExplorerScatterPlotRegressionLineEnabled = this.componentContent.isDataExplorerScatterPlotRegressionLineEnabled;
     this.dataExplorerYAxisLabels = Array(this.componentContent.numDataExplorerYAxis).fill('');
     this.dataExplorerSeriesParams = this.componentContent.dataExplorerSeriesParams;
+    this.dataExplorerTooltipHeaderColumn = this.componentContent.dataExplorerTooltipHeaderColumn;
   }
 
   setDataExplorerDataToColumn(): void {
@@ -404,6 +406,7 @@ export class TableStudent extends ComponentStudent {
     studentData.isDataExplorerEnabled = this.isDataExplorerEnabled;
     studentData.dataExplorerGraphType = this.dataExplorerGraphType;
     studentData.dataExplorerXAxisLabel = this.dataExplorerXAxisLabel;
+    studentData.dataExplorerTooltipHeaderColumn = this.dataExplorerTooltipHeaderColumn;
     if (this.dataExplorerYAxisLabel != null) {
       studentData.dataExplorerYAxisLabel = this.dataExplorerYAxisLabel;
     }
