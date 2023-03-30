@@ -77,12 +77,15 @@ import { CreateNewPeerGroupingDialogComponent } from '../../assets/wise5/authori
 import { EditQuestionBankComponent } from '../authoring-tool/edit-question-bank/edit-question-bank.component';
 import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component';
 import { SelectStepAndComponentComponent } from '../authoring-tool/select-step-and-component/select-step-and-component.component';
+import { EditComponentConstraintsComponent } from '../authoring-tool/edit-component-constraints/edit-component-constraints.component';
+import { ComponentConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/constraint/component-constraint-authoring/component-constraint-authoring.component';
 
 @NgModule({
   declarations: [
     AnimationAuthoring,
     AudioOscillatorAuthoring,
     AuthorUrlParametersComponent,
+    ComponentConstraintAuthoringComponent,
     ConceptMapAuthoring,
     CreateNewPeerGroupingDialogComponent,
     DrawAuthoring,
@@ -92,6 +95,7 @@ import { SelectStepAndComponentComponent } from '../authoring-tool/select-step-a
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
     EditComponentAddToNotebookButtonComponent,
+    EditComponentConstraintsComponent,
     EditComponentDefaultFeedback,
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentJsonComponent,
@@ -168,6 +172,7 @@ import { SelectStepAndComponentComponent } from '../authoring-tool/select-step-a
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
     EditComponentAddToNotebookButtonComponent,
+    EditComponentConstraintsComponent,
     EditComponentDefaultFeedback,
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentJsonComponent,
