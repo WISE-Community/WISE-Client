@@ -129,6 +129,7 @@ export class NodeStatusService {
   }
 
   private updateNodeStatus(nodeId: string, nodeStatus: NodeStatus): void {
+    // TODO: figure out why we need this if-else check. Why not just over-write the NodeStatus?
     const oldNodeStatus = this.getNodeStatusByNodeId(nodeId);
     if (oldNodeStatus == null) {
       this.setNodeStatusByNodeId(nodeId, nodeStatus);
@@ -137,6 +138,9 @@ export class NodeStatusService {
       this.dataService.nodeStatuses[nodeId].isVisible = nodeStatus.isVisible;
       this.dataService.nodeStatuses[nodeId].isVisitable = nodeStatus.isVisitable;
       this.dataService.nodeStatuses[nodeId].isCompleted = nodeStatus.isCompleted;
+      if (this.projectService.isApplicationNode(nodeId)) {
+        this.dataService.nodeStatuses[nodeId].componentStatuses = nodeStatus.componentStatuses;
+      }
     }
   }
 
