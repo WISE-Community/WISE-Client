@@ -9,8 +9,6 @@ import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { RandomKeyService } from './randomKeyService';
-import { NodeProgressService } from './nodeProgressService';
-import { NodeProgress } from '../common/NodeProgress';
 
 @Injectable()
 export class StudentDataService extends DataService {
@@ -54,7 +52,6 @@ export class StudentDataService extends DataService {
     private AnnotationService: AnnotationService,
     private componentServiceLookupService: ComponentServiceLookupService,
     private ConfigService: ConfigService,
-    private nodeProgressService: NodeProgressService,
     protected ProjectService: ProjectService
   ) {
     super(ProjectService);
@@ -741,11 +738,6 @@ export class StudentDataService extends DataService {
 
   getTotalScore() {
     return this.AnnotationService.getTotalScore(this.studentData.annotations);
-  }
-
-  getProjectCompletion(): NodeProgress {
-    const nodeId = 'group0';
-    return this.nodeProgressService.getNodeProgress(nodeId, this.nodeStatuses);
   }
 
   getRunStatus() {
