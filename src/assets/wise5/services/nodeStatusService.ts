@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ComponentStatus } from '../common/ComponentStatus';
 import { NodeStatus } from '../common/NodeStatus';
 import { ConstraintService } from './constraintService';
 import { NodeProgressService } from './nodeProgressService';
@@ -81,9 +82,36 @@ export class NodeStatusService {
     nodeStatus.isVisible = constraintResults.isVisible;
     nodeStatus.isVisitable = constraintResults.isVisitable;
     this.setNotVisibleIfRequired(nodeId, constraintsForNode, nodeStatus);
-    nodeStatus.isCompleted = this.dataService.isCompleted(nodeId);
+    if (this.projectService.isApplicationNode(node.id)) {
+      nodeStatus.componentStatuses = this.calculateComponentStatuses(node);
+      nodeStatus.isCompleted = this.isAllVisibleComponentsCompleted(nodeStatus.componentStatuses);
+    } else {
+      nodeStatus.isCompleted = this.dataService.isCompleted(nodeId);
+    }
     nodeStatus.isVisited = this.dataService.isNodeVisited(nodeId);
     return nodeStatus;
+  }
+
+  private isAllVisibleComponentsCompleted(componentStatuses: {
+    [componentId: string]: ComponentStatus;
+  }): boolean {
+    for (const componentId in componentStatuses) {
+      if (componentStatuses[componentId].isVisibleAndNotCompleted()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private calculateComponentStatuses(node: any): { [componentId: string]: ComponentStatus } {
+    const componentStatuses = {};
+    node.components.forEach((component) => {
+      componentStatuses[component.id] = new ComponentStatus(
+        this.dataService.isCompleted(node.id, component.id),
+        this.constraintService.evaluate(component.constraints).isVisible
+      );
+    });
+    return componentStatuses;
   }
 
   private setNotVisibleIfRequired(
