@@ -21,10 +21,9 @@ function render() {
     });
 
     it('should render the legend in Firefox', () => {
-      spyOnProperty(window.navigator, 'userAgent').and.returnValue('Firefox');
-      const legendDiv = createFirefoxLegendDiv('translate(227, 294)');
-      graphDiv.appendChild(legendDiv);
-      new GraphCustomLegend(graphDivId, customLegendHtml).render();
+      const browserName = 'Firefox';
+      spyOnProperty(window.navigator, 'userAgent').and.returnValue(browserName);
+      const legendDiv = createLegendAndRender(browserName, graphDiv, 'translate(227, 294)');
       expect($(legendDiv).attr(GraphCustomLegend.TRANSFORM_ATTRIBUTE_NAME)).toEqual(
         'translate(0, 294)'
       );
@@ -32,10 +31,13 @@ function render() {
     });
 
     it('should render the legend in Chrome', () => {
-      spyOnProperty(window.navigator, 'userAgent').and.returnValue('Chrome');
-      const legendDiv = createChromeLegendDiv('matrix(1, 0, 0, 1, 227, 294)');
-      graphDiv.appendChild(legendDiv);
-      new GraphCustomLegend(graphDivId, customLegendHtml).render();
+      const browserName = 'Chrome';
+      spyOnProperty(window.navigator, 'userAgent').and.returnValue(browserName);
+      const legendDiv = createLegendAndRender(
+        browserName,
+        graphDiv,
+        'matrix(1, 0, 0, 1, 227, 294)'
+      );
       expect($(legendDiv).css(GraphCustomLegend.TRANSFORM_ATTRIBUTE_NAME)).toEqual(
         'matrix(1, 0, 0, 1, 0, 294)'
       );
@@ -50,15 +52,31 @@ function createGraphDiv(id: string): HTMLElement {
   return graphDiv;
 }
 
-function createChromeLegendDiv(transform: string): HTMLElement {
-  const legendDiv = createDivWithClass(GraphCustomLegend.HIGHCHARTS_LEGEND_CLASS);
-  $(legendDiv).css(GraphCustomLegend.TRANSFORM_ATTRIBUTE_NAME, transform);
+function createLegendAndRender(
+  browserName: string,
+  graphDiv: HTMLElement,
+  transform: string
+): HTMLElement {
+  const legendDiv: HTMLElement =
+    browserName === 'Firefox'
+      ? createFirefoxLegendDiv(transform)
+      : createChromeLegendDiv(transform);
+  graphDiv.appendChild(legendDiv);
+  new GraphCustomLegend(graphDivId, customLegendHtml).render();
   return legendDiv;
 }
 
 function createFirefoxLegendDiv(transform: string): HTMLElement {
+  return createLegendDiv('attr', transform);
+}
+
+function createChromeLegendDiv(transform: string): HTMLElement {
+  return createLegendDiv('css', transform);
+}
+
+function createLegendDiv(functionName: string, transform: string): HTMLElement {
   const legendDiv = createDivWithClass(GraphCustomLegend.HIGHCHARTS_LEGEND_CLASS);
-  $(legendDiv).attr(GraphCustomLegend.TRANSFORM_ATTRIBUTE_NAME, transform);
+  $(legendDiv)[functionName](GraphCustomLegend.TRANSFORM_ATTRIBUTE_NAME, transform);
   return legendDiv;
 }
 
