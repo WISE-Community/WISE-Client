@@ -21,9 +21,7 @@ function render() {
     });
 
     it('should render the legend in Firefox', () => {
-      const browserName = 'Firefox';
-      spyOnProperty(window.navigator, 'userAgent').and.returnValue(browserName);
-      const legendDiv = createLegendAndRender(browserName, graphDiv, 'translate(227, 294)');
+      const legendDiv = createLegendAndRender('Firefox', graphDiv, 'translate(227, 294)');
       expect($(legendDiv).attr(GraphCustomLegend.TRANSFORM_ATTRIBUTE_NAME)).toEqual(
         'translate(0, 294)'
       );
@@ -31,13 +29,7 @@ function render() {
     });
 
     it('should render the legend in Chrome', () => {
-      const browserName = 'Chrome';
-      spyOnProperty(window.navigator, 'userAgent').and.returnValue(browserName);
-      const legendDiv = createLegendAndRender(
-        browserName,
-        graphDiv,
-        'matrix(1, 0, 0, 1, 227, 294)'
-      );
+      const legendDiv = createLegendAndRender('Chrome', graphDiv, 'matrix(1, 0, 0, 1, 227, 294)');
       expect($(legendDiv).css(GraphCustomLegend.TRANSFORM_ATTRIBUTE_NAME)).toEqual(
         'matrix(1, 0, 0, 1, 0, 294)'
       );
@@ -57,6 +49,7 @@ function createLegendAndRender(
   graphDiv: HTMLElement,
   transform: string
 ): HTMLElement {
+  spyOnProperty(window.navigator, 'userAgent').and.returnValue(browserName);
   const legendDiv: HTMLElement =
     browserName === 'Firefox'
       ? createFirefoxLegendDiv(transform)
