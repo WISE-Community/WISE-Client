@@ -8,51 +8,6 @@ export class UtilService {
   constructor() {}
 
   /**
-   * Remove html tags and newlines from the string.
-   * @param html an html string
-   * @return text without html tags and new lines
-   */
-  removeHTMLTags(html = '') {
-    let text = this.replaceImgTagWithFileName(html);
-    text = text.replace(/<\/?[^>]+(>|$)/g, ' ');
-    return this.removeNewLines(text);
-  }
-
-  removeNewLines(html = '') {
-    let text = html.replace(/\n/g, ' ');
-    return text.replace(/\r/g, ' ');
-  }
-
-  /**
-   * Replace img tags with the src value.
-   * Example: <img src="computer.png"/> will be replaced with computer.png.
-   */
-  replaceImgTagWithFileName(html = '') {
-    return html.replace(/<img.*?src=["'](.*?)["'].*?>/g, '$1');
-  }
-
-  /**
-   * Check if a string ends with a specific string
-   * @param subjectString the main string
-   * @param searchString the potential end of the string
-   * @param position (optional) the position to start searching
-   * @return whether the subjectString ends with the searchString
-   */
-  endsWith(subjectString: string, searchString: string, position?: number) {
-    if (
-      typeof position !== 'number' ||
-      !isFinite(position) ||
-      Math.floor(position) !== position ||
-      position > subjectString.length
-    ) {
-      position = subjectString.length;
-    }
-    position -= searchString.length;
-    const lastIndex = subjectString.lastIndexOf(searchString, position);
-    return lastIndex !== -1 && lastIndex === position;
-  }
-
-  /**
    * Sort the objects by server save time
    * @param object1 an object
    * @param object2 an object

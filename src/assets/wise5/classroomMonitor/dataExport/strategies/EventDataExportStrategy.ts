@@ -1,3 +1,4 @@
+import { removeHTMLTags } from '../../../common/string/string';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
 export class EventDataExportStrategy extends AbstractDataExportStrategy {
@@ -455,7 +456,7 @@ export class EventDataExportStrategy extends AbstractDataExportStrategy {
 
   private setComponentPrompt(row, columnNameToNumber, component) {
     if (component != null) {
-      let prompt = this.utilService.removeHTMLTags(component.prompt);
+      let prompt = removeHTMLTags(component.prompt);
       prompt = prompt.replace(/"/g, '""');
       row[columnNameToNumber['Component Prompt']] = prompt;
     }

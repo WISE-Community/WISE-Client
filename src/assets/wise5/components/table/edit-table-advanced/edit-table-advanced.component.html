@@ -175,6 +175,33 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <div fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label i18n>Tooltip Header Column</mat-label>
+        <mat-select
+          [(ngModel)]="componentContent.dataExplorerTooltipHeaderColumn"
+          (ngModelChange)="componentChanged()"
+        >
+          <mat-option [value]="" i18n>(Default)</mat-option>
+          <mat-option
+            *ngFor="let columnName of columnNames; index as columnIndex"
+            [value]="columnIndex"
+          >
+            <ng-container *ngIf="columnName === ''">
+              (<span i18n>Table Column</span> {{ columnIndex + 1 }})
+            </ng-container>
+            <ng-container *ngIf="columnName !== ''">{{ columnName }}</ng-container>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-icon
+        matTooltip="When the student hovers their mouse over a data point on a scatter plot or line graph, the tooltip will display the value from this column along with the x and y values. This can be left blank and the tooltip will still show the x and y values like normal."
+        matTooltipPosition="right"
+        i18n-matTooltip
+      >
+        help
+      </mat-icon>
+    </div>
   </div>
 </div>
 <div fxLayout fxLayoutAlign="start center">

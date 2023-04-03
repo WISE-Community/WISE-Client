@@ -32,7 +32,6 @@ export class ConceptMapShowWorkComponent extends ComponentShowWorkDirective {
   ngOnInit(): void {
     super.ngOnInit();
     this.svgId = this.getConceptMapId();
-    this.componentState = this.ProjectService.injectAssetPaths(this.componentState);
 
     /*
      * Call initializeSVG() after a timeout so that angular has a chance to set the svg element id

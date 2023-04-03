@@ -33,7 +33,6 @@ export class EmbeddedShowWorkComponent extends ComponentShowWorkDirective {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.componentContent = this.ProjectService.injectAssetPaths(this.componentContent);
     this.embeddedApplicationIFrameId = this.getIframeId();
     this.setHeight(this.componentContent);
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.componentContent.url);

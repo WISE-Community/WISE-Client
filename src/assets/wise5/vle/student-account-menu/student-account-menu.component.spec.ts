@@ -13,12 +13,26 @@ import { StudentTeacherCommonServicesModule } from '../../../../app/student-teac
 class MockProjectService {
   rootNode = {};
 
+  getMaxScoreForNode(nodeId: string): number {
+    if (nodeId === 'node1') {
+      return 1;
+    } else if (nodeId === 'node2') {
+      return 2;
+    } else if (nodeId === 'node3') {
+      return 3;
+    }
+  }
+
   getThemeSettings() {
     return {};
   }
 
   getProjectRootNode() {
     return {};
+  }
+
+  isGroupNode(nodeId: string): boolean {
+    return nodeId.startsWith('group');
   }
 }
 
@@ -39,6 +53,21 @@ describe('StudentAccountMenuComponent', () => {
       declarations: [StudentAccountMenuComponent],
       providers: [{ provide: ProjectService, useClass: MockProjectService }]
     });
+    const studentDataService = TestBed.inject(StudentDataService);
+    studentDataService.nodeStatuses = {
+      node1: {
+        nodeId: 'node1',
+        isVisible: true
+      },
+      node2: {
+        nodeId: 'node2',
+        isVisible: true
+      },
+      node3: {
+        nodeId: 'node3',
+        isVisible: true
+      }
+    };
     fixture = TestBed.createComponent(StudentAccountMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -75,4 +104,8 @@ describe('StudentAccountMenuComponent', () => {
       });
     })
   );
+
+  it('should set the max score', () => {
+    expect(component.maxScore).toEqual(6);
+  });
 });

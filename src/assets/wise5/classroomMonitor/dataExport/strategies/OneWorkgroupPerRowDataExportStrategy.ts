@@ -1,3 +1,4 @@
+import { removeHTMLTags } from '../../../common/string/string';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
 export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStrategy {
@@ -385,7 +386,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
             if (component != null) {
               var componentId = component.id;
               var columnIdPrefix = nodeId + '-' + componentId;
-              var prompt = this.utilService.removeHTMLTags(component.prompt);
+              var prompt = removeHTMLTags(component.prompt);
               prompt = prompt.replace(/"/g, '""');
               if (prompt == '') {
                 prompt = ' ';
