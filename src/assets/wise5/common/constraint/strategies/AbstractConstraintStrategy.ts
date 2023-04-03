@@ -1,4 +1,5 @@
 import { AnnotationService } from '../../../services/annotationService';
+import { CompletionService } from '../../../services/completionService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { ConfigService } from '../../../services/configService';
 import { NotebookService } from '../../../services/notebookService';
@@ -9,6 +10,7 @@ import { ConstraintStrategy } from './ConstraintStrategy';
 
 export abstract class AbstractConstraintStrategy implements ConstraintStrategy {
   annotationService: AnnotationService;
+  completionService: CompletionService;
   componentServiceLookupService: ComponentServiceLookupService;
   configService: ConfigService;
   context: EvaluateConstraintContext;
@@ -18,6 +20,7 @@ export abstract class AbstractConstraintStrategy implements ConstraintStrategy {
 
   setContext(context: EvaluateConstraintContext): void {
     this.annotationService = context.getAnnotationService();
+    this.completionService = context.getCompletionService();
     this.context = context;
     this.configService = context.getConfigService();
     this.dataService = context.getDataService();
