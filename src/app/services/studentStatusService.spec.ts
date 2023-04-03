@@ -8,9 +8,11 @@ import { StudentStatusService } from '../../assets/wise5/services/studentStatusS
 import { of } from 'rxjs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { NodeProgressService } from '../../assets/wise5/services/nodeProgressService';
 
 let configService: ConfigService;
 let http: HttpClient;
+let nodeProgressService: NodeProgressService;
 let service: StudentStatusService;
 let studentDataService: StudentDataService;
 
@@ -20,9 +22,9 @@ const workgroupId = 3;
 const nodeId = 'node1';
 const nodeStatuses = {};
 const projectCompletion = {
-  totalItems: 0,
+  totalItems: 2,
   totalItemsWithWork: 0,
-  completedItems: 0,
+  completedItems: 1,
   completedItemsWithWork: 0
 };
 const computerAvatarId = 'robot1';
@@ -35,6 +37,7 @@ describe('StudentStatusService', () => {
     });
     configService = TestBed.inject(ConfigService);
     http = TestBed.inject(HttpClient);
+    nodeProgressService = TestBed.inject(NodeProgressService);
     service = TestBed.inject(StudentStatusService);
     studentDataService = TestBed.inject(StudentDataService);
   });
@@ -98,7 +101,7 @@ function saveStudentStatus_nodeStatusChanged_PostStudentStatus() {
     spyOn(configService, 'getWorkgroupId').and.returnValue(workgroupId);
     spyOn(configService, 'getStudentStatusURL').and.returnValue(studentStatusUrl);
     spyOn(studentDataService, 'getCurrentNodeId').and.returnValue(nodeId);
-    spyOn(studentDataService, 'getProjectCompletion').and.returnValue(projectCompletion);
+    spyOn(nodeProgressService, 'getNodeProgress').and.returnValue(projectCompletion);
     const httpPostSpy = spyOn(http, 'post').and.callFake((url: string, body: any) => {
       return of({} as any);
     });
