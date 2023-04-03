@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
 import { AnnotationService } from './annotationService';
 import { DismissAmbientNotificationDialogComponent } from '../vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { RandomKeyService } from './randomKeyService';
+import { generateRandomKey } from '../common/string/string';
 
 @Injectable()
 export class NotificationService {
@@ -182,7 +182,7 @@ export class NotificationService {
       const fromWorkgroupId = this.ConfigService.getWorkgroupId();
       const runId = this.ConfigService.getRunId();
       const periodId = this.ConfigService.getPeriodId();
-      const notificationGroupId = runId + '_' + RandomKeyService.generate(); // links student and teacher notifications together
+      const notificationGroupId = runId + '_' + generateRandomKey(); // links student and teacher notifications together
       const notificationData: any = {};
       if (notificationForScore.isAmbient) {
         notificationData.isAmbient = true;

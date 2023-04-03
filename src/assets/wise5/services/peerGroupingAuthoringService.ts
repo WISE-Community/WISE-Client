@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { PeerGrouping } from '../../../app/domain/peerGrouping';
+import { generateRandomKey } from '../common/string/string';
 import { ConfigService } from './configService';
-import { RandomKeyService } from './randomKeyService';
 import { TeacherProjectService } from './teacherProjectService';
 
 @Injectable()
@@ -99,10 +99,10 @@ export class PeerGroupingAuthoringService {
   }
 
   getUniqueTag(): string {
-    let newTag = RandomKeyService.generate();
+    let newTag = generateRandomKey();
     const allPeerGroupingTags = this.getAllPeerGroupingTags(this.getPeerGroupings());
     while (allPeerGroupingTags.includes(newTag)) {
-      newTag = RandomKeyService.generate();
+      newTag = generateRandomKey();
     }
     return newTag;
   }

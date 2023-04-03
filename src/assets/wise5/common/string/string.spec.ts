@@ -1,4 +1,10 @@
-import { isValidJSONString, removeHTMLTags, trimToLength, wordWrap } from './string';
+import {
+  generateRandomKey,
+  isValidJSONString,
+  removeHTMLTags,
+  trimToLength,
+  wordWrap
+} from './string';
 
 describe('isValidJSONString()', () => {
   it('should return true if json string is valid', () => {
@@ -51,5 +57,29 @@ describe('removeHTMLTags()', () => {
     expect(
       removeHTMLTags("<img alt='Computer' src='computer.png' aria-label='Computer'/>")
     ).toEqual('computer.png');
+  });
+});
+
+describe('generateRandomKey()', () => {
+  it('should return random keys of length 10 by default', () => {
+    const key1 = generateRandomKey();
+    const key2 = generateRandomKey();
+    expect(key1.length).toEqual(10);
+    expect(key2.length).toEqual(10);
+    expect(key1).not.toEqual(key2);
+  });
+
+  it('should return random keys of specified length', () => {
+    expect(generateRandomKey(5).length).toEqual(5);
+    expect(generateRandomKey(23).length).toEqual(23);
+  });
+
+  it('should produce 100 unique random strings', () => {
+    const keysSoFar = [];
+    for (let i = 0; i < 100; i++) {
+      const key = generateRandomKey();
+      expect(keysSoFar.includes(key)).toEqual(false);
+      keysSoFar.push(key);
+    }
   });
 });

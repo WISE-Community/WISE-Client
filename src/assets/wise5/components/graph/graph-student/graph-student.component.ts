@@ -16,10 +16,10 @@ import * as covariance from 'compute-covariance';
 import canvg from 'canvg';
 import { MatDialog } from '@angular/material/dialog';
 import { GraphContent } from '../GraphContent';
-import { RandomKeyService } from '../../../services/randomKeyService';
 import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { arraysContainSameValues } from '../../../common/array/array';
+import { generateRandomKey } from '../../../common/string/string';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -1702,7 +1702,7 @@ export class GraphStudent extends ComponentStudent {
     if (this.isStudentDataVersion1(studentData.version)) {
       const series = studentData.series;
       const newTrial = {
-        id: RandomKeyService.generate(),
+        id: generateRandomKey(),
         name: nodePositionAndTitle,
         show: true,
         series: series
@@ -1943,7 +1943,7 @@ export class GraphStudent extends ComponentStudent {
       name: $localize`Trial` + ' ' + (maxTrialNumber + 1),
       series: series,
       show: true,
-      id: RandomKeyService.generate()
+      id: generateRandomKey()
     };
     this.trials.push(trial);
     this.activeTrial = trial;
@@ -2773,7 +2773,7 @@ export class GraphStudent extends ComponentStudent {
 
   addTrialFromThisComponentIfNecessary(mergedTrials, trialCount, activeTrialIndex) {
     if (this.componentContent.series.length > 0) {
-      const trial = this.createNewTrial(RandomKeyService.generate());
+      const trial = this.createNewTrial(generateRandomKey());
       trial.name = $localize`Trial` + ' ' + trialCount;
       trial.series = copy(this.componentContent.series);
       mergedTrials.push(trial);

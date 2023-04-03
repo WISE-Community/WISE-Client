@@ -8,9 +8,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
-import { RandomKeyService } from './randomKeyService';
 import { NodeProgressService } from './nodeProgressService';
 import { NodeProgress } from '../common/NodeProgress';
+import { generateRandomKey } from '../common/string/string';
 
 @Injectable()
 export class StudentDataService extends DataService {
@@ -377,7 +377,7 @@ export class StudentDataService extends DataService {
   prepareComponentStatesForSave(componentStates) {
     const studentWorkList = [];
     for (const componentState of componentStates) {
-      componentState.requestToken = RandomKeyService.generate();
+      componentState.requestToken = generateRandomKey();
       this.addComponentState(componentState);
       studentWorkList.push(componentState);
     }
@@ -386,14 +386,14 @@ export class StudentDataService extends DataService {
 
   prepareEventsForSave(events) {
     for (const event of events) {
-      event.requestToken = RandomKeyService.generate();
+      event.requestToken = generateRandomKey();
       this.addEvent(event);
     }
   }
 
   prepareAnnotationsForSave(annotations) {
     for (const annotation of annotations) {
-      annotation.requestToken = RandomKeyService.generate();
+      annotation.requestToken = generateRandomKey();
       if (annotation.id == null) {
         this.addAnnotation(annotation);
       }
