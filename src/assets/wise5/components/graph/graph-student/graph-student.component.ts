@@ -20,6 +20,7 @@ import { RandomKeyService } from '../../../services/randomKeyService';
 import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { arraysContainSameValues } from '../../../common/array/array';
+import { GraphCustomLegend } from '../GraphCustomLegend';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -905,7 +906,10 @@ export class GraphStudent extends ComponentStudent {
     if (this.componentContent.useCustomLegend) {
       // use a timeout so the graph has a chance to render before we set the custom legend
       setTimeout(() => {
-        this.setCustomLegend();
+        if (!this.hasCustomLegendBeenSet) {
+          this.setCustomLegend();
+          this.hasCustomLegendBeenSet = true;
+        }
       });
     }
     this.changeDetectorRef.detectChanges();
@@ -1222,53 +1226,8 @@ export class GraphStudent extends ComponentStudent {
     };
   }
 
-  /**
-   * Overwrite the existing legend with the custom authored legend.
-   */
-  setCustomLegend() {
-    if (!this.hasCustomLegendBeenSet) {
-      if ($('.highcharts-legend').length > 0) {
-        // move the legend to the very left by setting the x position to 0
-        const userAgent = navigator.userAgent;
-        if (userAgent.indexOf('Firefox') !== -1) {
-          /*
-           * Regex to split the transform string into three groups. We will use
-           * this to replace the x value of the translate.
-           * Example
-           * "translate(227, 294)"
-           * The regex will create three groups
-           * group 1 = "translate("
-           * group 2 = "227"
-           * group 3 = ", 294)"
-           * The x value of the translate is captured in group 2.
-           */
-          const matrixRegEx = /(translate\()(\d*)(,\s*\d*\))/;
-          const currentTransform = $('.highcharts-legend').attr('transform');
-          // replace the second group with 0
-          const newTransform = currentTransform.replace(matrixRegEx, '$10$3');
-          $('.highcharts-legend').attr('transform', newTransform);
-        } else {
-          /*
-           * Regex to split the transform string into three groups. We will use
-           * this to replace the x value of the matrix.
-           * Example
-           * "matrix(1, 0, 0, 1, 227, 294)"
-           * The regex will create three groups
-           * group 1 = "matrix(1, 0, 0, 1, "
-           * group 2 = "227"
-           * group 3 = ", 294)"
-           * The x value of the matrix is captured in group 2.
-           */
-          const matrixRegEx = /(matrix\(\d*,\s*\d*,\s*\d*,\s*\d*,\s*)(\d*)(,\s*\d*\))/;
-          const currentTransform = $('.highcharts-legend').css('transform');
-          // replace the second group with 0
-          const newTransform = currentTransform.replace(matrixRegEx, '$10$3');
-          $('.highcharts-legend').css('transform', newTransform);
-        }
-        $('.highcharts-legend').html(this.componentContent.customLegend);
-      }
-      this.hasCustomLegendBeenSet = true;
-    }
+  setCustomLegend(): void {
+    new GraphCustomLegend(this.chartId, this.componentContent.customLegend).render();
   }
 
   addPointToSeries(series, x, y) {
