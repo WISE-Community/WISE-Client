@@ -2,9 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { copy } from '../../../../common/object/object';
+import { generateRandomKey } from '../../../../common/string/string';
 import { ConfigService } from '../../../../services/configService';
 import { ProjectService } from '../../../../services/projectService';
-import { RandomKeyService } from '../../../../services/randomKeyService';
 import { StudentAssetService } from '../../../../services/studentAssetService';
 
 @Component({
@@ -56,7 +56,7 @@ export class EditNotebookItemDialogComponent implements OnInit {
 
       this.item = {
         id: null, // null id means we're creating a new notebook item.
-        localNotebookItemId: RandomKeyService.generate(),
+        localNotebookItemId: generateRandomKey(),
         type: 'note', // the notebook item type, TODO: once questions are enabled, don't hard code
         nodeId: this.nodeId,
         title: $localize`Note from ${currentNodeTitle}`,

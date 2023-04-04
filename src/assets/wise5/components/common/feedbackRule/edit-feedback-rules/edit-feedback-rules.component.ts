@@ -6,7 +6,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { FeedbackRule } from '../FeedbackRule';
 import { MatDialog } from '@angular/material/dialog';
 import { FeedbackRuleHelpComponent } from '../feedback-rule-help/feedback-rule-help.component';
-import { RandomKeyService } from '../../../../services/randomKeyService';
+import { generateRandomKey } from '../../../../common/string/string';
 
 @Component({
   selector: 'edit-feedback-rules',
@@ -60,7 +60,7 @@ export class EditFeedbackRulesComponent implements OnInit {
     if (this.version === 1) {
       return { expression: '', feedback: '' };
     } else {
-      return { id: RandomKeyService.generate(), expression: '', feedback: [''] };
+      return { id: generateRandomKey(), expression: '', feedback: [''] };
     }
   }
 

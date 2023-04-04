@@ -1,6 +1,6 @@
 'use strict';
 
-import { RandomKeyService } from '../../services/randomKeyService';
+import { generateRandomKey } from '../../common/string/string';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 
 class MilestonesAuthoringController {
@@ -193,7 +193,7 @@ class MilestonesAuthoringController {
   }
 
   generateMilestoneSatisfyCriteriaId() {
-    return this.milestoneSatisfyCriteriaIdPrefix + RandomKeyService.generate();
+    return this.milestoneSatisfyCriteriaIdPrefix + generateRandomKey();
   }
 
   isUniqueMilestoneSatisfyCriteriaId(id) {
@@ -283,7 +283,7 @@ class MilestonesAuthoringController {
   generateUniqueId(prefix: string, existingIds: any[]): string {
     let id: string;
     do {
-      id = prefix + RandomKeyService.generate();
+      id = prefix + generateRandomKey();
     } while (existingIds[id] != null);
     return id;
   }

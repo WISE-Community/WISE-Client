@@ -5,8 +5,8 @@ import { ProjectService } from './projectService';
 import { ConfigService } from './configService';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { RandomKeyService } from './randomKeyService';
 import { isMatchingPeriods } from '../common/period/period';
+import { generateRandomKey } from '../common/string/string';
 
 @Injectable()
 export class AnnotationService {
@@ -154,7 +154,7 @@ export class AnnotationService {
    * @returns a promise
    */
   saveAnnotation(annotation) {
-    annotation.requestToken = RandomKeyService.generate(); // use this to keep track of unsaved annotations.
+    annotation.requestToken = generateRandomKey(); // use this to keep track of unsaved annotations.
     this.addOrUpdateAnnotation(annotation);
     const annotations = [annotation];
     if (this.ConfigService.isPreview()) {

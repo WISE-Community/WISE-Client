@@ -79,3 +79,51 @@ function removeNewLines(html: string = '') {
 function replaceImgTagWithFileName(html: string = '') {
   return html.replace(/<img.*?src=["'](.*?)["'].*?>/g, '$1');
 }
+
+const CHARS = [
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z',
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9'
+];
+
+export function generateRandomKey(length: number = 10): string {
+  let key = '';
+  const numChars = CHARS.length;
+  for (let i = 0; i < length; i++) {
+    key += CHARS[Math.floor(Math.random() * (numChars - 1))];
+  }
+  return key;
+}

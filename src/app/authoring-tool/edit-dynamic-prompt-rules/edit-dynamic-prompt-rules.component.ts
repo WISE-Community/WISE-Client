@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { generateRandomKey } from '../../../assets/wise5/common/string/string';
 import { EditFeedbackRulesComponent } from '../../../assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
 import { FeedbackRule } from '../../../assets/wise5/components/common/feedbackRule/FeedbackRule';
-import { RandomKeyService } from '../../../assets/wise5/services/randomKeyService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 @Component({
@@ -20,7 +20,7 @@ export class EditDynamicPromptRulesComponent extends EditFeedbackRulesComponent 
   }
 
   protected createNewFeedbackRule(): Partial<FeedbackRule> {
-    return { id: RandomKeyService.generate(), expression: '', prompt: '' };
+    return { id: generateRandomKey(), expression: '', prompt: '' };
   }
 
   deleteRule(ruleIndex: number): void {
