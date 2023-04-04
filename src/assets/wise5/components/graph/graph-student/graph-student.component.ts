@@ -1226,7 +1226,7 @@ export class GraphStudent extends ComponentStudent {
     };
   }
 
-  setCustomLegend(): void {
+  private setCustomLegend(): void {
     new GraphCustomLegend(this.chartId, this.componentContent.customLegend).render();
   }
 
