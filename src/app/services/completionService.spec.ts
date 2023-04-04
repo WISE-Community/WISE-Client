@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { CompletionService } from '../../assets/wise5/services/completionService';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentContent } from '../../assets/wise5/common/ComponentContent';
 import { ProjectService } from '../../assets/wise5/services/projectService';
@@ -10,6 +10,20 @@ import { StudentTeacherCommonServicesModule } from '../student-teacher-common-se
 let dataService: StudentDataService;
 let projectService: ProjectService;
 let service: CompletionService;
+const component1 = { id: 'component1', type: 'OpenResponse' } as ComponentContent;
+const component2 = { id: 'component2', type: 'OpenResponse' } as ComponentContent;
+const components = [component1, component2] as ComponentContent[];
+const node1 = { id: 'node1' };
+const stateForComponent1 = {
+  nodeId: 'node1',
+  componentId: 'component1',
+  studentData: { response: 'Hello World 1' }
+};
+const stateForComponent2 = {
+  nodeId: 'node1',
+  componentId: 'component2',
+  studentData: { response: 'Hello World 2' }
+};
 describe('CompletionService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -23,114 +37,80 @@ describe('CompletionService', () => {
 });
 
 function isCompleted() {
-  xit('should check a component is completed false', () => {
-    const componentStates = [];
-    spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue(componentStates);
-    const componentEvents = [];
-    spyOn(dataService, 'getEventsByNodeIdAndComponentId').and.returnValue(componentEvents);
-    const nodeEvents = [];
-    spyOn(dataService, 'getEventsByNodeId').and.returnValue(nodeEvents);
-    const component = { id: 'component1', type: 'OpenResponse' } as ComponentContent;
-    spyOn(projectService, 'getComponent').and.returnValue(component);
-    const node = { id: 'node1' };
-    spyOn(projectService, 'getNodeById').and.returnValue(node);
-    expect(service.isCompleted('node1', 'component1')).toEqual(false);
+  describe('isCompleted()', () => {
+    isCompleted_Component();
+    isCompleted_Step();
+    isCompleted_Group();
   });
-  xit('should check a component is completed true', () => {
-    const componentStates = [{ studentData: { response: 'Hello World' } }];
-    spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue(componentStates);
-    const componentEvents = [];
-    spyOn(dataService, 'getEventsByNodeIdAndComponentId').and.returnValue(componentEvents);
-    const nodeEvents = [];
-    spyOn(dataService, 'getEventsByNodeId').and.returnValue(nodeEvents);
-    const component = { id: 'component1', type: 'OpenResponse' } as ComponentContent;
-    spyOn(projectService, 'getComponent').and.returnValue(component);
-    const node = { id: 'node1' };
-    spyOn(projectService, 'getNodeById').and.returnValue(node);
-    expect(service.isCompleted('node1', 'component1')).toEqual(true);
+}
+
+function isCompleted_Component() {
+  describe('Component', () => {
+    beforeEach(() => {
+      spyOn(projectService, 'getComponent').and.returnValue(component1);
+      spyOn(projectService, 'getNodeById').and.returnValue(node1);
+    });
+    it('should return false when there is no component state', () => {
+      dataService.studentData.componentStates = [];
+      expect(service.isCompleted('node1', 'component1')).toEqual(false);
+    });
+    it('should return true when there is a completed component state', () => {
+      dataService.studentData.componentStates = [stateForComponent1];
+      expect(service.isCompleted('node1', 'component1')).toEqual(true);
+    });
   });
-  xit('should check a step node is completed false', () => {
-    spyOn(projectService, 'isGroupNode').and.returnValue(false);
-    const node = {};
-    spyOn(projectService, 'getNodeById').and.returnValue(node);
-    const components = [
-      { id: 'component1', type: 'OpenResponse' },
-      { id: 'component2', type: 'OpenResponse' }
-    ] as ComponentContent[];
-    spyOn(projectService, 'getComponents').and.returnValue(components);
-    spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.callFake(
-      (nodeId, componentId) => {
-        if (nodeId === 'node1' && componentId === 'component1') {
-          return [{ studentData: { response: 'Hello World' } }];
-        } else if (nodeId === 'node1' && componentId === 'component2') {
-          return [];
+}
+
+function isCompleted_Step() {
+  describe('Step', () => {
+    beforeEach(() => {
+      spyOn(projectService, 'isGroupNode').and.returnValue(false);
+      spyOn(projectService, 'getNodeById').and.returnValue(node1);
+      spyOn(projectService, 'getComponents').and.returnValue(components);
+    });
+    it('should return false when not all components are completed', () => {
+      dataService.studentData.componentStates = [stateForComponent1];
+      expect(service.isCompleted('node1')).toEqual(false);
+    });
+    it('should return true when all the components in the step are completed', () => {
+      dataService.studentData.componentStates = [stateForComponent1, stateForComponent2];
+      expect(service.isCompleted('node1')).toEqual(true);
+    });
+  });
+}
+
+function isCompleted_Group() {
+  describe('Group', () => {
+    beforeEach(() => {
+      spyOn(projectService, 'isGroupNode').and.returnValue(true);
+      spyOn(projectService, 'getNodeById').and.returnValue(node1);
+      spyOn(projectService, 'getChildNodeIdsById').and.returnValue(['node1', 'node2']);
+    });
+    it('should return false when not all nodes in the group are completed', () => {
+      dataService.nodeStatuses = {
+        node1: {
+          isVisible: true,
+          isCompleted: true
+        },
+        node2: {
+          isVisible: true,
+          isCompleted: false
         }
-      }
-    );
-    const componentEvents = [];
-    spyOn(dataService, 'getEventsByNodeIdAndComponentId').and.returnValue(componentEvents);
-    const nodeEvents = [];
-    spyOn(dataService, 'getEventsByNodeId').and.returnValue(nodeEvents);
-    expect(service.isCompleted('node1')).toEqual(false);
-  });
-  xit('should check a step node is completed true', () => {
-    spyOn(projectService, 'isGroupNode').and.returnValue(false);
-    const node = {};
-    spyOn(projectService, 'getNodeById').and.returnValue(node);
-    const components = [
-      { id: 'component1', type: 'OpenResponse' },
-      { id: 'component2', type: 'OpenResponse' }
-    ] as ComponentContent[];
-    spyOn(projectService, 'getComponents').and.returnValue(components);
-    spyOn(dataService, 'getComponentStatesByNodeIdAndComponentId').and.callFake(
-      (nodeId, componentId) => {
-        if (nodeId === 'node1' && componentId === 'component1') {
-          return [{ studentData: { response: 'Hello World' } }];
-        } else if (nodeId === 'node1' && componentId === 'component2') {
-          return [{ studentData: { response: 'Hello World2' } }];
+      };
+      expect(service.isCompleted('group1')).toEqual(false);
+    });
+    it('should return true when all the nodes in the group are completed', () => {
+      dataService.nodeStatuses = {
+        node1: {
+          isVisible: true,
+          isCompleted: true
+        },
+        node2: {
+          isVisible: true,
+          isCompleted: true
         }
-      }
-    );
-    const componentEvents = [];
-    spyOn(dataService, 'getEventsByNodeIdAndComponentId').and.returnValue(componentEvents);
-    const nodeEvents = [];
-    spyOn(dataService, 'getEventsByNodeId').and.returnValue(nodeEvents);
-    expect(service.isCompleted('node1')).toEqual(true);
-  });
-  it('should check a group node is completed false', () => {
-    spyOn(projectService, 'isGroupNode').and.returnValue(true);
-    const node = {};
-    spyOn(projectService, 'getNodeById').and.returnValue(node);
-    const nodeIds = ['node1', 'node2'];
-    spyOn(projectService, 'getChildNodeIdsById').and.returnValue(nodeIds);
-    dataService.nodeStatuses = {
-      node1: {
-        isVisible: true,
-        isCompleted: true
-      },
-      node2: {
-        isVisible: true,
-        isCompleted: false
-      }
-    };
-    expect(service.isCompleted('node1')).toEqual(false);
-  });
-  it('should check a group node is completed true', () => {
-    spyOn(projectService, 'isGroupNode').and.returnValue(true);
-    const node = {};
-    spyOn(projectService, 'getNodeById').and.returnValue(node);
-    const nodeIds = ['node1', 'node2'];
-    spyOn(projectService, 'getChildNodeIdsById').and.returnValue(nodeIds);
-    dataService.nodeStatuses = {
-      node1: {
-        isVisible: true,
-        isCompleted: true
-      },
-      node2: {
-        isVisible: true,
-        isCompleted: true
-      }
-    };
-    expect(service.isCompleted('node1')).toEqual(true);
+      };
+      expect(service.isCompleted('group1')).toEqual(true);
+    });
   });
 }

@@ -8,7 +8,7 @@ export class CompletionService {
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
     private dataService: StudentDataService,
-    protected projectService: ProjectService
+    private projectService: ProjectService
   ) {}
 
   /**
@@ -50,28 +50,19 @@ export class CompletionService {
   }
 
   private isStepNodeCompleted(nodeId: string): boolean {
-    let result = true;
-    const components = this.projectService.getComponents(nodeId);
-    for (const component of components) {
-      const isComponentCompleted = this.isComponentCompleted(nodeId, component.id);
-      result = result && isComponentCompleted;
-    }
-    return result;
+    return this.projectService
+      .getComponents(nodeId)
+      .every((component) => this.isComponentCompleted(nodeId, component.id));
   }
 
   private isGroupNodeCompleted(nodeId: string): boolean {
-    let result = true;
-    const nodeIds = this.projectService.getChildNodeIdsById(nodeId);
-    for (const id of nodeIds) {
-      if (
-        this.dataService.nodeStatuses[id] == null ||
-        !this.dataService.nodeStatuses[id].isVisible ||
-        !this.dataService.nodeStatuses[id].isCompleted
-      ) {
-        result = false;
-        break;
-      }
-    }
-    return result;
+    return this.projectService
+      .getChildNodeIdsById(nodeId)
+      .every(
+        (id) =>
+          this.dataService.nodeStatuses[id] != null &&
+          this.dataService.nodeStatuses[id].isVisible &&
+          this.dataService.nodeStatuses[id].isCompleted
+      );
   }
 }
