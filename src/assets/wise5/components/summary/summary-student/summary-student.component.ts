@@ -9,6 +9,7 @@ import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
+import { CompletionService } from '../../../services/completionService';
 
 @Component({
   selector: 'summary-student',
@@ -33,6 +34,7 @@ export class SummaryStudent extends ComponentStudent {
 
   constructor(
     protected AnnotationService: AnnotationService,
+    private completionService: CompletionService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected dialog: MatDialog,
@@ -180,7 +182,7 @@ export class SummaryStudent extends ComponentStudent {
   }
 
   studentHasCompletedComponent() {
-    return this.StudentDataService.isCompleted(this.summaryNodeId, this.summaryComponentId);
+    return this.completionService.isCompleted(this.summaryNodeId, this.summaryComponentId);
   }
 
   getOtherStepTitle() {

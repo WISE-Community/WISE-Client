@@ -5,10 +5,12 @@ import { NodeProgressService } from './nodeProgressService';
 import { NotebookService } from './notebookService';
 import { ProjectService } from './projectService';
 import { StudentDataService } from './studentDataService';
+import { CompletionService } from './completionService';
 
 @Injectable()
 export class NodeStatusService {
   constructor(
+    private completionService: CompletionService,
     private constraintService: ConstraintService,
     private dataService: StudentDataService,
     private nodeProgressService: NodeProgressService,
@@ -81,7 +83,7 @@ export class NodeStatusService {
     nodeStatus.isVisible = constraintResults.isVisible;
     nodeStatus.isVisitable = constraintResults.isVisitable;
     this.setNotVisibleIfRequired(nodeId, constraintsForNode, nodeStatus);
-    nodeStatus.isCompleted = this.dataService.isCompleted(nodeId);
+    nodeStatus.isCompleted = this.completionService.isCompleted(nodeId);
     nodeStatus.isVisited = this.dataService.isNodeVisited(nodeId);
     return nodeStatus;
   }

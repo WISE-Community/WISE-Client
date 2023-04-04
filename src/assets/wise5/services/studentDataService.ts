@@ -7,7 +7,6 @@ import { ProjectService } from './projectService';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
-import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { generateRandomKey } from '../common/string/string';
 
 @Injectable()
@@ -49,7 +48,6 @@ export class StudentDataService extends DataService {
   constructor(
     public http: HttpClient,
     private AnnotationService: AnnotationService,
-    private componentServiceLookupService: ComponentServiceLookupService,
     private ConfigService: ConfigService,
     protected ProjectService: ProjectService
   ) {
@@ -655,67 +653,6 @@ export class StudentDataService extends DataService {
 
   isNodeExistAndActive(nodeId) {
     return this.ProjectService.getNodeById(nodeId) != null && this.ProjectService.isActive(nodeId);
-  }
-
-  /**
-   * Check if the given node or component is completed
-   * @param nodeId the node id
-   * @param componentId (optional) the component id
-   * @returns whether the node or component is completed
-   */
-  isCompleted(nodeId, componentId = null) {
-    let result = false;
-    if (nodeId && componentId) {
-      result = this.isComponentCompleted(nodeId, componentId);
-    } else if (this.ProjectService.isGroupNode(nodeId)) {
-      result = this.isGroupNodeCompleted(nodeId);
-    } else if (this.ProjectService.isApplicationNode(nodeId)) {
-      result = this.isStepNodeCompleted(nodeId);
-    }
-    return result;
-  }
-
-  private isComponentCompleted(nodeId: string, componentId: string): boolean {
-    const component = this.ProjectService.getComponent(nodeId, componentId);
-    if (component != null) {
-      const node = this.ProjectService.getNodeById(nodeId);
-      const componentType = component.type;
-      const service = this.componentServiceLookupService.getService(componentType);
-      if (['OpenResponse', 'Discussion'].includes(componentType)) {
-        return service.isCompletedV2(node, component, this.studentData);
-      } else {
-        const componentStates = this.getComponentStatesByNodeIdAndComponentId(nodeId, componentId);
-        const nodeEvents = this.getEventsByNodeId(nodeId);
-        return service.isCompleted(component, componentStates, nodeEvents, node);
-      }
-    }
-    return false;
-  }
-
-  isStepNodeCompleted(nodeId) {
-    let result = true;
-    const components = this.ProjectService.getComponents(nodeId);
-    for (const component of components) {
-      const isComponentCompleted = this.isComponentCompleted(nodeId, component.id);
-      result = result && isComponentCompleted;
-    }
-    return result;
-  }
-
-  isGroupNodeCompleted(nodeId) {
-    let result = true;
-    const nodeIds = this.ProjectService.getChildNodeIdsById(nodeId);
-    for (const id of nodeIds) {
-      if (
-        this.nodeStatuses[id] == null ||
-        !this.nodeStatuses[id].isVisible ||
-        !this.nodeStatuses[id].isCompleted
-      ) {
-        result = false;
-        break;
-      }
-    }
-    return result;
   }
 
   endCurrentNodeAndSetCurrentNodeByNodeId(nodeId) {
