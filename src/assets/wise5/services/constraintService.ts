@@ -26,6 +26,7 @@ import { NotebookService } from './notebookService';
 import { ProjectService } from './projectService';
 import { StudentDataService } from './studentDataService';
 import { TagService } from './tagService';
+import { CompletionService } from './completionService';
 
 @Injectable()
 export class ConstraintService {
@@ -54,6 +55,7 @@ export class ConstraintService {
 
   constructor(
     annotationService: AnnotationService,
+    completionService: CompletionService,
     componentServiceLookupService: ComponentServiceLookupService,
     private configService: ConfigService,
     dataService: StudentDataService,
@@ -63,6 +65,7 @@ export class ConstraintService {
   ) {
     this.evaluateConstraintContext = new EvaluateConstraintContext(
       annotationService,
+      completionService,
       componentServiceLookupService,
       configService,
       dataService,

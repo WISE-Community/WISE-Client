@@ -6,10 +6,12 @@ import { NodeProgressService } from './nodeProgressService';
 import { NotebookService } from './notebookService';
 import { ProjectService } from './projectService';
 import { StudentDataService } from './studentDataService';
+import { CompletionService } from './completionService';
 
 @Injectable()
 export class NodeStatusService {
   constructor(
+    private completionService: CompletionService,
     private constraintService: ConstraintService,
     private dataService: StudentDataService,
     private nodeProgressService: NodeProgressService,
@@ -86,7 +88,7 @@ export class NodeStatusService {
       nodeStatus.componentStatuses = this.calculateComponentStatuses(node);
       nodeStatus.isCompleted = this.isAllVisibleComponentsCompleted(nodeStatus.componentStatuses);
     } else {
-      nodeStatus.isCompleted = this.dataService.isCompleted(nodeId);
+      nodeStatus.isCompleted = this.completionService.isCompleted(nodeId);
     }
     nodeStatus.isVisited = this.dataService.isNodeVisited(nodeId);
     return nodeStatus;
@@ -107,7 +109,7 @@ export class NodeStatusService {
     const componentStatuses = {};
     node.components.forEach((component) => {
       componentStatuses[component.id] = new ComponentStatus(
-        this.dataService.isCompleted(node.id, component.id),
+        this.completionService.isCompleted(node.id, component.id),
         this.constraintService.evaluate(component.constraints).isVisible
       );
     });

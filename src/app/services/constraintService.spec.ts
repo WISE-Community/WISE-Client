@@ -8,6 +8,7 @@ import { ProjectService } from '../../assets/wise5/services/projectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { Constraint } from '../domain/constraint';
 import { Observable, Subject } from 'rxjs';
+import { CompletionService } from '../../assets/wise5/services/completionService';
 
 class MockProjectService {
   private projectParsedSource: Subject<void> = new Subject<void>();
@@ -34,6 +35,7 @@ class MockProjectService {
   }
 }
 
+let completionService: CompletionService;
 let configService: ConfigService;
 let criteria1: any;
 let criteria2: any;
@@ -57,6 +59,7 @@ describe('ConstraintService', () => {
       imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
       providers: [{ provide: ProjectService, useClass: MockProjectService }]
     });
+    completionService = TestBed.inject(CompletionService);
     configService = TestBed.inject(ConfigService);
     dataService = TestBed.inject(StudentDataService);
     projectService = TestBed.inject(ProjectService);
@@ -95,8 +98,8 @@ function evaluateConstraint() {
 }
 
 function evaluateConstraintWithOneRemovalCriteria() {
-  it('should evaluate constraint with one removal criteria', () => {
-    spyOn(dataService, 'isCompleted').and.returnValue(true);
+  it('should evaluate node constraint with one removal criteria', () => {
+    spyOn(completionService, 'isCompleted').and.returnValue(true);
     const constraint = {
       id: 'node1Constraint1',
       action: '',
@@ -110,7 +113,7 @@ function evaluateConstraintWithOneRemovalCriteria() {
 
 function evaluateConstraintWithTwoRemovalCriteria() {
   function isCompletedSpy(): void {
-    spyOn(dataService, 'isCompleted')
+    spyOn(completionService, 'isCompleted')
       .withArgs(nodeId1, undefined)
       .and.returnValue(true)
       .withArgs(nodeId2, undefined)
@@ -131,17 +134,17 @@ function evaluateCriterias() {
   describe('evaluateCriterias()', () => {
     it(`should return false when it is passed one criteria that is false`, () => {
       const criterias = [criteria1];
-      spyOn(dataService, 'isCompleted').and.returnValue(false);
+      spyOn(completionService, 'isCompleted').and.returnValue(false);
       expect(service.evaluateCriterias(criterias)).toEqual(false);
     });
     it(`should return true when it is passed one criteria that is true`, () => {
       const criterias = [criteria1];
-      spyOn(dataService, 'isCompleted').and.returnValue(true);
+      spyOn(completionService, 'isCompleted').and.returnValue(true);
       expect(service.evaluateCriterias(criterias)).toEqual(true);
     });
     it(`should return false when it is passed multiple criterias and one is false`, () => {
       const criterias = [criteria1, criteria2];
-      spyOn(dataService, 'isCompleted')
+      spyOn(completionService, 'isCompleted')
         .withArgs(nodeId1, undefined)
         .and.returnValue(true)
         .withArgs(nodeId2, undefined)

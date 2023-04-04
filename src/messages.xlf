@@ -15855,46 +15855,46 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Are you sure you want to overwrite the current line data?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">238</context>
+          <context context-type="linenumber">239</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6882380861047606832" datatype="html">
         <source>The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1113</context>
+          <context context-type="linenumber">1117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2852989551014711458" datatype="html">
         <source>You can not edit this series. Please choose a series that can be edited.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1127</context>
+          <context context-type="linenumber">1131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7053114367342967943" datatype="html">
         <source>Are you sure you want to reset the series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1405</context>
+          <context context-type="linenumber">1364</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7889560203726829643" datatype="html">
         <source>Are you sure you want to reset the &quot;<x id="PH" equiv-text="seriesName"/>&quot; series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1407</context>
+          <context context-type="linenumber">1366</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6999515396807067782" datatype="html">
         <source>Trial</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1943</context>
+          <context context-type="linenumber">1902</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">2777</context>
+          <context context-type="linenumber">2736</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9070768663485888935" datatype="html">
@@ -17636,28 +17636,28 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>You must submit work on &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the summary.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3834814461916183420" datatype="html">
         <source>You must complete &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the summary.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1745852243024604075" datatype="html">
         <source>You must submit work on &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the class summary.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8412691431688558361" datatype="html">
         <source>You must complete &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the class summary.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4739818603756173797" datatype="html">
@@ -18685,28 +18685,28 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Preview Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1967824796880640028" datatype="html">
         <source>StudentDataService.saveComponentEvent: component, category, event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">274</context>
+          <context context-type="linenumber">272</context>
         </context-group>
       </trans-unit>
       <trans-unit id="944638387659785956" datatype="html">
         <source>StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">284</context>
+          <context context-type="linenumber">282</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4924640921903672943" datatype="html">
         <source>StudentDataService.saveVLEEvent: category and event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">293</context>
+          <context context-type="linenumber">291</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8725215606116054825" datatype="html">
