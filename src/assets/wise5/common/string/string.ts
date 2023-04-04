@@ -119,7 +119,7 @@ const CHARS = [
   '9'
 ];
 
-export function generateRandomKey(length: Number = 10): string {
+export function generateRandomKey(length: number = 10): string {
   let key = '';
   const numChars = CHARS.length;
   for (let i = 0; i < length; i++) {
