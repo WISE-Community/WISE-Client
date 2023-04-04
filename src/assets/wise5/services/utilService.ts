@@ -8,27 +8,6 @@ export class UtilService {
   constructor() {}
 
   /**
-   * Check if a string ends with a specific string
-   * @param subjectString the main string
-   * @param searchString the potential end of the string
-   * @param position (optional) the position to start searching
-   * @return whether the subjectString ends with the searchString
-   */
-  endsWith(subjectString: string, searchString: string, position?: number) {
-    if (
-      typeof position !== 'number' ||
-      !isFinite(position) ||
-      Math.floor(position) !== position ||
-      position > subjectString.length
-    ) {
-      position = subjectString.length;
-    }
-    position -= searchString.length;
-    const lastIndex = subjectString.lastIndexOf(searchString, position);
-    return lastIndex !== -1 && lastIndex === position;
-  }
-
-  /**
    * Sort the objects by server save time
    * @param object1 an object
    * @param object2 an object

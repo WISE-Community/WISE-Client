@@ -8,14 +8,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
-import { NodeProgressService } from './nodeProgressService';
-import { NodeProgress } from '../common/NodeProgress';
 import { generateRandomKey } from '../common/string/string';
 
 @Injectable()
 export class StudentDataService extends DataService {
   dummyStudentWorkId: number = 1;
-  maxScore: any = null;
   nodeStatuses: any = {};
   previousStep = null;
   runStatus: any = null;
@@ -54,7 +51,6 @@ export class StudentDataService extends DataService {
     private AnnotationService: AnnotationService,
     private componentServiceLookupService: ComponentServiceLookupService,
     private ConfigService: ConfigService,
-    private nodeProgressService: NodeProgressService,
     protected ProjectService: ProjectService
   ) {
     super(ProjectService);
@@ -154,7 +150,6 @@ export class StudentDataService extends DataService {
   }
 
   broadcastNodeStatusesChanged() {
-    this.maxScore = this.getMaxScore();
     this.nodeStatusesChangedSource.next();
   }
 
@@ -743,11 +738,6 @@ export class StudentDataService extends DataService {
     return this.AnnotationService.getTotalScore(this.studentData.annotations);
   }
 
-  getProjectCompletion(): NodeProgress {
-    const nodeId = 'group0';
-    return this.nodeProgressService.getNodeProgress(nodeId, this.nodeStatuses);
-  }
-
   getRunStatus() {
     return this.runStatus;
   }
@@ -813,31 +803,6 @@ export class StudentDataService extends DataService {
         }
         return null;
       });
-  }
-
-  /**
-   * Get the max possible score for the project
-   * @returns the sum of the max scores for all the nodes in the project visible
-   * to the current workgroup or null if none of the visible components has max scores.
-   */
-  getMaxScore() {
-    let maxScore = null;
-    for (const property in this.nodeStatuses) {
-      if (this.nodeStatuses.hasOwnProperty(property)) {
-        const nodeStatus = this.nodeStatuses[property];
-        const nodeId = nodeStatus.nodeId;
-        if (nodeStatus.isVisible && !this.ProjectService.isGroupNode(nodeId)) {
-          const nodeMaxScore = this.ProjectService.getMaxScoreForNode(nodeId);
-          if (nodeMaxScore) {
-            if (maxScore == null) {
-              maxScore = 0;
-            }
-            maxScore += nodeMaxScore;
-          }
-        }
-      }
-    }
-    return maxScore;
   }
 
   broadcastComponentDirty(args: any) {

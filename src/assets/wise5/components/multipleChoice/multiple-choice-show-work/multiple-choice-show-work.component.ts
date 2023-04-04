@@ -24,7 +24,6 @@ export class MultipleChoiceShowWorkComponent extends ComponentShowWorkDirective 
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.componentContent = this.projectService.injectAssetPaths(this.componentContent);
     this.component = new MultipleChoiceComponent(this.componentContent, this.nodeId);
     if (this.component.isRadio()) {
       const studentChoiceIds = this.getChoiceIds(this.componentState.studentData.studentChoices);

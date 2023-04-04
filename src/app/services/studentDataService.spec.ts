@@ -52,7 +52,6 @@ describe('StudentDataService', () => {
   shouldGetLatestComponentStatesByNodeId();
   shouldGetLatestComponentStateByNodeId();
   shouldGetStudentWorkById();
-  shouldGetMaxScore();
 });
 
 function shouldEvaluateIsNodeVisitedAfterTimestampFalse() {
@@ -722,37 +721,5 @@ function shouldGetStudentWorkById() {
           'getAnnotations=false&onlyGetLatest=true'
       )
       .flush({ studentWorkList: [] });
-  });
-}
-
-function shouldGetMaxScore() {
-  it('should get max score', () => {
-    service.nodeStatuses = {
-      node1: {
-        nodeId: 'node1',
-        isVisible: true
-      },
-      node2: {
-        nodeId: 'node2',
-        isVisible: true
-      },
-      node3: {
-        nodeId: 'node3',
-        isVisible: true
-      }
-    };
-    spyOn(projectService, 'isGroupNode').and.callFake((nodeId) => {
-      return nodeId.startsWith('group');
-    });
-    spyOn(projectService, 'getMaxScoreForNode').and.callFake((nodeId) => {
-      if (nodeId === 'node1') {
-        return 1;
-      } else if (nodeId === 'node2') {
-        return 2;
-      } else if (nodeId === 'node3') {
-        return 3;
-      }
-    });
-    expect(service.getMaxScore()).toEqual(6);
   });
 }

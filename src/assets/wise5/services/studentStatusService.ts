@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NodeProgress } from '../common/NodeProgress';
 import { StudentStatus } from '../common/StudentStatus';
 import { ConfigService } from './configService';
+import { NodeProgressService } from './nodeProgressService';
 import { NodeStatusService } from './nodeStatusService';
 import { StudentDataService } from './studentDataService';
 
@@ -12,6 +14,7 @@ export class StudentStatusService {
   constructor(
     private http: HttpClient,
     private configService: ConfigService,
+    private nodeProgressService: NodeProgressService,
     private nodeStatusService: NodeStatusService,
     private studentDataService: StudentDataService
   ) {
@@ -63,7 +66,7 @@ export class StudentStatusService {
         workgroupId: workgroupId,
         currentNodeId: this.studentDataService.getCurrentNodeId(),
         nodeStatuses: this.nodeStatusService.getNodeStatuses(),
-        projectCompletion: this.studentDataService.getProjectCompletion()
+        projectCompletion: this.getProjectCompletion()
       };
       const computerAvatarId = this.getComputerAvatarId();
       if (computerAvatarId != null) {
@@ -88,5 +91,12 @@ export class StudentStatusService {
           }
         );
     }
+  }
+
+  private getProjectCompletion(): NodeProgress {
+    return this.nodeProgressService.getNodeProgress(
+      'group0',
+      this.nodeStatusService.getNodeStatuses()
+    );
   }
 }
