@@ -229,6 +229,9 @@ export class StudentGradingComponent implements OnInit {
       }
       node.order = this.projectService.getOrderById(nodeId);
       node.show = this.isNodeShown(nodeId);
+      node.nodeStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(
+        this.workgroupId
+      ).nodeStatuses[nodeId];
     }
   }
 

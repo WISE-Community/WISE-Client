@@ -271,6 +271,8 @@ export class NodeGradingViewComponent implements OnInit {
       workgroupId,
       this.nodeId
     );
+    const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
+    workgroup.nodeStatus = studentStatus.nodeStatuses[this.nodeId];
   }
 
   private workgroupHasNewAlert(alertNotifications: Notification[]): boolean {

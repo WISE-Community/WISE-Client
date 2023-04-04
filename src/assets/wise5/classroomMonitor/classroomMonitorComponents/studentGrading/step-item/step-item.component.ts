@@ -10,6 +10,7 @@ import {
 import { copy } from '../../../../common/object/object';
 import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { isComponentVisibleToStudent } from '../../shared/grading-helpers/grading-helpers';
 
 @Component({
   selector: 'step-item',
@@ -44,7 +45,10 @@ export class StepItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.components = this.projectService.getComponents(this.nodeId).filter((component) => {
-      return this.projectService.componentHasWork(component);
+      return (
+        this.projectService.componentHasWork(component) &&
+        isComponentVisibleToStudent(this.stepData.nodeStatus, component)
+      );
     });
   }
 

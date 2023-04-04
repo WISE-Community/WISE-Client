@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { isComponentVisibleToStudent } from '../../shared/grading-helpers/grading-helpers';
 
 @Component({
   selector: 'workgroup-item',
@@ -39,7 +40,10 @@ export class WorkgroupItemComponent {
   updateNode(): void {
     this.nodeHasWork = this.projectService.nodeHasWork(this.nodeId);
     this.components = this.projectService.getComponents(this.nodeId).filter((component) => {
-      return this.projectService.componentHasWork(component);
+      return (
+        this.projectService.componentHasWork(component) &&
+        isComponentVisibleToStudent(this.workgroupData.nodeStatus, component)
+      );
     });
   }
 
