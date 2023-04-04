@@ -52,6 +52,7 @@ import { ConstraintService } from '../assets/wise5/services/constraintService';
 import { NodeStatusService } from '../assets/wise5/services/nodeStatusService';
 import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 import { NodeProgressService } from '../assets/wise5/services/nodeProgressService';
+import { CompletionService } from '../assets/wise5/services/completionService';
 
 @NgModule({
   providers: [
@@ -64,6 +65,7 @@ import { NodeProgressService } from '../assets/wise5/services/nodeProgressServic
     ClickToSnipImageService,
     ConceptMapService,
     ConstraintService,
+    CompletionService,
     ComponentService,
     ComponentServiceLookupService,
     ComponentTypeService,

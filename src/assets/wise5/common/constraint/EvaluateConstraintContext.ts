@@ -1,4 +1,5 @@
 import { AnnotationService } from '../../services/annotationService';
+import { CompletionService } from '../../services/completionService';
 import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
 import { ConfigService } from '../../services/configService';
 import { NotebookService } from '../../services/notebookService';
@@ -11,6 +12,7 @@ export class EvaluateConstraintContext {
 
   constructor(
     private annotationService: AnnotationService,
+    private completionService: CompletionService,
     private componentServiceLookupService: ComponentServiceLookupService,
     private configService: ConfigService,
     private dataService: StudentDataService,
@@ -20,6 +22,10 @@ export class EvaluateConstraintContext {
 
   getAnnotationService(): AnnotationService {
     return this.annotationService;
+  }
+
+  getCompletionService(): CompletionService {
+    return this.completionService;
   }
 
   getComponentServiceLookupService(): ComponentServiceLookupService {
