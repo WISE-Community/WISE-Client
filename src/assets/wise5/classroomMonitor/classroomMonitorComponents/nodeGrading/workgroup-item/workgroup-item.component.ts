@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { isComponentVisibleToStudent } from '../../shared/grading-helpers/grading-helpers';
+import { calculateComponentVisibility } from '../../shared/grading-helpers/grading-helpers';
 
 @Component({
   selector: 'workgroup-item',
@@ -9,6 +9,7 @@ import { isComponentVisibleToStudent } from '../../shared/grading-helpers/gradin
   styleUrls: ['workgroup-item.component.scss']
 })
 export class WorkgroupItemComponent {
+  componentIdToIsVisible: { [componentId: string]: boolean } = {};
   components: any[] = [];
   disabled: boolean;
   @Input() expanded: boolean;
@@ -39,12 +40,12 @@ export class WorkgroupItemComponent {
 
   updateNode(): void {
     this.nodeHasWork = this.projectService.nodeHasWork(this.nodeId);
-    this.components = this.projectService.getComponents(this.nodeId).filter((component) => {
-      return (
-        this.projectService.componentHasWork(component) &&
-        isComponentVisibleToStudent(this.workgroupData.nodeStatus, component)
-      );
-    });
+    this.components = this.projectService.getComponents(this.nodeId);
+    this.componentIdToIsVisible = calculateComponentVisibility(
+      this.nodeId,
+      this.workgroupData.nodeStatus.componentStatuses,
+      this.projectService
+    );
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -58,6 +59,8 @@ export class WorkgroupItemComponent {
       this.hasNewAlert = workgroupData.hasNewAlert;
       this.status = workgroupData.completionStatus;
       this.score = workgroupData.score != null ? workgroupData.score : '-';
+      this.workgroupData = workgroupData;
+      this.updateNode();
       this.updateStatus();
     }
     if (changes.nodeId) {

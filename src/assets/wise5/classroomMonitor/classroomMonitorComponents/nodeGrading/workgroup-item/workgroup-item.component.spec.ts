@@ -26,7 +26,9 @@ describe('WorkgroupItemComponent', () => {
     getComponentsSpy.and.returnValue([]);
     fixture = TestBed.createComponent(WorkgroupItemComponent);
     component = fixture.componentInstance;
-    component.workgroupData = {};
+    component.workgroupData = {
+      nodeStatus: {}
+    };
     fixture.detectChanges();
   });
 
@@ -52,7 +54,8 @@ function ngOnInit() {
         }
       };
       component.ngOnInit();
-      expect(component.components).toEqual([component1]);
+      expect(component.componentIdToIsVisible[component1.id]).toEqual(true);
+      expect(component.componentIdToIsVisible[component2.id]).toEqual(false);
     });
   });
 }

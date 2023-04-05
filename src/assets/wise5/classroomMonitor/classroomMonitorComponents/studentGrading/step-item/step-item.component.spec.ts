@@ -22,6 +22,9 @@ describe('StepItemComponent', () => {
     teacherProjectService = TestBed.inject(TeacherProjectService);
     fixture = TestBed.createComponent(StepItemComponent);
     component = fixture.componentInstance;
+    component.stepData = {
+      nodeStatus: {}
+    };
     fixture.detectChanges();
   });
 
@@ -47,7 +50,8 @@ function ngOnInit() {
         }
       };
       component.ngOnInit();
-      expect(component.components).toEqual([component1]);
+      expect(component.componentIdToIsVisible[component1.id]).toEqual(true);
+      expect(component.componentIdToIsVisible[component2.id]).toEqual(false);
     });
   });
 }

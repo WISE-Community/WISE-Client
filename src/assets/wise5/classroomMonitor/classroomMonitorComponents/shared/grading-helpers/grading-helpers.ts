@@ -1,10 +1,24 @@
-export function isComponentVisibleToStudent(nodeStatus: any, component: any): boolean {
-  let result = true;
-  if (nodeStatus.componentStatuses != null) {
-    const componentStatus = nodeStatus.componentStatuses[component.id];
-    if (componentStatus != null) {
-      result = componentStatus.isVisible;
-    }
+import { ComponentStatus } from '../../../../common/ComponentStatus';
+import { TeacherProjectService } from '../../../../services/teacherProjectService';
+
+export function calculateComponentVisibility(
+  nodeId: string,
+  componentStatuses: { [componentId: string]: ComponentStatus },
+  projectService: TeacherProjectService
+): { [componentId: string]: boolean } {
+  const componentIdToIsVisible = {};
+  for (const component of projectService.getComponents(nodeId)) {
+    componentIdToIsVisible[component.id] =
+      projectService.componentHasWork(component) &&
+      isComponentVisibleToStudent(componentStatuses, component.id);
   }
-  return result;
+  return componentIdToIsVisible;
+}
+
+function isComponentVisibleToStudent(
+  componentStatuses: { [componentId: string]: ComponentStatus } = {},
+  componentId: string
+): boolean {
+  const componentStatus = componentStatuses[componentId];
+  return componentStatus == null || componentStatus.isVisible;
 }

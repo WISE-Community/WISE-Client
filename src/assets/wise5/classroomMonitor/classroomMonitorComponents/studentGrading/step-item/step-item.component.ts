@@ -10,7 +10,7 @@ import {
 import { copy } from '../../../../common/object/object';
 import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { isComponentVisibleToStudent } from '../../shared/grading-helpers/grading-helpers';
+import { calculateComponentVisibility } from '../../shared/grading-helpers/grading-helpers';
 
 @Component({
   selector: 'step-item',
@@ -19,6 +19,7 @@ import { isComponentVisibleToStudent } from '../../shared/grading-helpers/gradin
   encapsulation: ViewEncapsulation.None
 })
 export class StepItemComponent implements OnInit {
+  componentIdToIsVisible: { [componentId: string]: boolean } = {};
   components: any[];
   disabled: boolean;
   @Input() expand: boolean;
@@ -44,12 +45,12 @@ export class StepItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.components = this.projectService.getComponents(this.nodeId).filter((component) => {
-      return (
-        this.projectService.componentHasWork(component) &&
-        isComponentVisibleToStudent(this.stepData.nodeStatus, component)
-      );
-    });
+    this.components = this.projectService.getComponents(this.nodeId);
+    this.componentIdToIsVisible = calculateComponentVisibility(
+      this.nodeId,
+      this.stepData.nodeStatus.componentStatuses,
+      this.projectService
+    );
   }
 
   ngOnChanges(changesObj: SimpleChanges): void {
@@ -64,6 +65,11 @@ export class StepItemComponent implements OnInit {
       this.hasNewAlert = stepData.hasNewAlert;
       this.status = stepData.completionStatus;
       this.score = stepData.score >= 0 ? stepData.score : '-';
+      this.componentIdToIsVisible = calculateComponentVisibility(
+        this.nodeId,
+        stepData.nodeStatus.componentStatuses,
+        this.projectService
+      );
     }
     this.update();
   }
