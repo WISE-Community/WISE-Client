@@ -19,6 +19,7 @@ import { calculateComponentVisibility } from '../../shared/grading-helpers/gradi
   encapsulation: ViewEncapsulation.None
 })
 export class StepItemComponent implements OnInit {
+  componentIdToHasWork: { [componentId: string]: boolean } = {};
   componentIdToIsVisible: { [componentId: string]: boolean } = {};
   components: any[];
   disabled: boolean;
@@ -44,14 +45,7 @@ export class StepItemComponent implements OnInit {
     private projectService: TeacherProjectService
   ) {}
 
-  ngOnInit(): void {
-    this.components = this.projectService.getComponents(this.nodeId);
-    this.componentIdToIsVisible = calculateComponentVisibility(
-      this.nodeId,
-      this.stepData.nodeStatus.componentStatuses,
-      this.projectService
-    );
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(changesObj: SimpleChanges): void {
     if (changesObj.maxScore) {
@@ -65,10 +59,14 @@ export class StepItemComponent implements OnInit {
       this.hasNewAlert = stepData.hasNewAlert;
       this.status = stepData.completionStatus;
       this.score = stepData.score >= 0 ? stepData.score : '-';
+      this.components = this.projectService.getComponents(this.nodeId);
+      this.componentIdToHasWork = this.projectService.calculateComponentIdToHasWork(
+        this.components
+      );
       this.componentIdToIsVisible = calculateComponentVisibility(
-        this.nodeId,
-        stepData.nodeStatus.componentStatuses,
-        this.projectService
+        this.components,
+        this.componentIdToHasWork,
+        stepData.nodeStatus.componentStatuses
       );
     }
     this.update();

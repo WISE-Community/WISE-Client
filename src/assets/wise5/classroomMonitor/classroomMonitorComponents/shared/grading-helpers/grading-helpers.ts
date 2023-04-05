@@ -1,15 +1,15 @@
+import { ComponentContent } from '../../../../common/ComponentContent';
 import { ComponentStatus } from '../../../../common/ComponentStatus';
-import { TeacherProjectService } from '../../../../services/teacherProjectService';
 
 export function calculateComponentVisibility(
-  nodeId: string,
-  componentStatuses: { [componentId: string]: ComponentStatus },
-  projectService: TeacherProjectService
+  components: ComponentContent[],
+  componentIdToHasWork: { [componentId: string]: boolean },
+  componentStatuses: { [componentId: string]: ComponentStatus }
 ): { [componentId: string]: boolean } {
   const componentIdToIsVisible = {};
-  for (const component of projectService.getComponents(nodeId)) {
+  for (const component of components) {
     componentIdToIsVisible[component.id] =
-      projectService.componentHasWork(component) &&
+      componentIdToHasWork[component.id] &&
       isComponentVisibleToStudent(componentStatuses, component.id);
   }
   return componentIdToIsVisible;

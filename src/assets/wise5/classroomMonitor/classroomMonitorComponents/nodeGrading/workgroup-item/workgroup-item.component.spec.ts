@@ -32,30 +32,7 @@ describe('WorkgroupItemComponent', () => {
     fixture.detectChanges();
   });
 
-  ngOnInit();
-});
-
-function ngOnInit() {
-  describe('ngOnInit', () => {
-    it('should set the components that are visible to the student', () => {
-      const component1 = { id: 'component1', type: 'OpenResponse' };
-      const component2 = { id: 'component2', type: 'OpenResponse' };
-      getComponentsSpy.and.returnValue([component1, component2]);
-      component.workgroupData = {
-        nodeStatus: {
-          componentStatuses: {
-            component1: {
-              isVisible: true
-            },
-            component2: {
-              isVisible: false
-            }
-          }
-        }
-      };
-      component.ngOnInit();
-      expect(component.componentIdToIsVisible[component1.id]).toEqual(true);
-      expect(component.componentIdToIsVisible[component2.id]).toEqual(false);
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
-}
+});

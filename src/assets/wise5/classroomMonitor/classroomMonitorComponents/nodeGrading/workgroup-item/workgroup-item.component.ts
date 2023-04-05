@@ -9,6 +9,7 @@ import { calculateComponentVisibility } from '../../shared/grading-helpers/gradi
   styleUrls: ['workgroup-item.component.scss']
 })
 export class WorkgroupItemComponent {
+  componentIdToHasWork: { [componentId: string]: boolean } = {};
   componentIdToIsVisible: { [componentId: string]: boolean } = {};
   components: any[] = [];
   disabled: boolean;
@@ -41,10 +42,11 @@ export class WorkgroupItemComponent {
   updateNode(): void {
     this.nodeHasWork = this.projectService.nodeHasWork(this.nodeId);
     this.components = this.projectService.getComponents(this.nodeId);
+    this.componentIdToHasWork = this.projectService.calculateComponentIdToHasWork(this.components);
     this.componentIdToIsVisible = calculateComponentVisibility(
-      this.nodeId,
-      this.workgroupData.nodeStatus.componentStatuses,
-      this.projectService
+      this.components,
+      this.componentIdToHasWork,
+      this.workgroupData.nodeStatus.componentStatuses
     );
   }
 
