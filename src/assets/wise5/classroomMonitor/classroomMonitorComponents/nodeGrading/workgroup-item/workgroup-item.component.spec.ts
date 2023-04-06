@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
-import { StepItemComponent } from './step-item.component';
+import { WorkgroupItemComponent } from './workgroup-item.component';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-let component: StepItemComponent;
-let fixture: ComponentFixture<StepItemComponent>;
+let component: WorkgroupItemComponent;
+let fixture: ComponentFixture<WorkgroupItemComponent>;
+let getComponentsSpy: jasmine.Spy;
 let teacherProjectService: TeacherProjectService;
 
-describe('StepItemComponent', () => {
+describe('WorkgroupItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [StepItemComponent],
+      declarations: [WorkgroupItemComponent],
       imports: [ClassroomMonitorTestingModule],
       providers: [TeacherProjectService],
       schemas: [NO_ERRORS_SCHEMA]
@@ -20,9 +21,12 @@ describe('StepItemComponent', () => {
 
   beforeEach(() => {
     teacherProjectService = TestBed.inject(TeacherProjectService);
-    fixture = TestBed.createComponent(StepItemComponent);
+    spyOn(teacherProjectService, 'nodeHasWork').and.returnValue(true);
+    getComponentsSpy = spyOn(teacherProjectService, 'getComponents');
+    getComponentsSpy.and.returnValue([]);
+    fixture = TestBed.createComponent(WorkgroupItemComponent);
     component = fixture.componentInstance;
-    component.stepData = {
+    component.workgroupData = {
       nodeStatus: {}
     };
     fixture.detectChanges();
