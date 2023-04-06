@@ -15,8 +15,6 @@ export class DataService {
 
   constructor(protected ProjectService: ProjectService) {}
 
-  endCurrentNodeAndSetCurrentNodeByNodeId(nextNodeId) {}
-
   getCurrentNode() {
     return this.currentNode;
   }
@@ -65,4 +63,6 @@ export class DataService {
   broadcastStudentWorkReceived(studentWork: any) {
     this.studentWorkReceivedSource.next(studentWork);
   }
+
+  nodeClickLocked(nodeId: string): void {}
 }

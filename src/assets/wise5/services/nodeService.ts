@@ -25,18 +25,22 @@ export class NodeService {
   public deleteStarterState$: Observable<any> = this.deleteStarterStateSource.asObservable();
 
   constructor(
-    private dialog: MatDialog,
-    private ConfigService: ConfigService,
-    private constraintService: ConstraintService,
-    private ProjectService: ProjectService,
-    private DataService: DataService
+    protected dialog: MatDialog,
+    protected ConfigService: ConfigService,
+    protected constraintService: ConstraintService,
+    protected ProjectService: ProjectService,
+    protected DataService: DataService
   ) {}
+
+  setCurrentNode(nodeId: string): void {
+    this.DataService.setCurrentNodeByNodeId(nodeId);
+  }
 
   goToNextNode() {
     return this.getNextNodeId().then((nextNodeId) => {
       if (nextNodeId != null) {
         const mode = this.ConfigService.getMode();
-        this.DataService.endCurrentNodeAndSetCurrentNodeByNodeId(nextNodeId);
+        this.setCurrentNode(nextNodeId);
       }
       return nextNodeId;
     });
@@ -159,7 +163,7 @@ export class NodeService {
   goToNextNodeWithWork(): Promise<string> {
     return this.getNextNodeIdWithWork().then((nextNodeId: string) => {
       if (nextNodeId) {
-        this.DataService.endCurrentNodeAndSetCurrentNodeByNodeId(nextNodeId);
+        this.setCurrentNode(nextNodeId);
       }
       return nextNodeId;
     });
@@ -186,7 +190,7 @@ export class NodeService {
 
   goToPrevNode() {
     const prevNodeId = this.getPrevNodeId();
-    this.DataService.endCurrentNodeAndSetCurrentNodeByNodeId(prevNodeId);
+    this.setCurrentNode(prevNodeId);
   }
 
   /**
@@ -254,7 +258,7 @@ export class NodeService {
    */
   goToPrevNodeWithWork() {
     const prevNodeId = this.getPrevNodeIdWithWork();
-    this.DataService.endCurrentNodeAndSetCurrentNodeByNodeId(prevNodeId);
+    this.setCurrentNode(prevNodeId);
   }
 
   /**
@@ -285,7 +289,7 @@ export class NodeService {
       let currentNodeId = currentNode.id;
       let parentNode = this.ProjectService.getParentGroup(currentNodeId);
       let parentNodeId = parentNode.id;
-      this.DataService.endCurrentNodeAndSetCurrentNodeByNodeId(parentNodeId);
+      this.setCurrentNode(parentNodeId);
     }
   }
 

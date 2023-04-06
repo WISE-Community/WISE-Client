@@ -33,6 +33,8 @@ import { TeacherPeerGroupService } from '../assets/wise5/services/teacherPeerGro
 import { DataExportService } from '../assets/wise5/services/dataExportService';
 import { TeacherNodeIconComponent } from '../assets/wise5/authoringTool/teacher-node-icon/teacher-node-icon.component';
 import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
+import { NodeService } from '../assets/wise5/services/nodeService';
+import { TeacherNodeService } from '../assets/wise5/services/teacherNodeService';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -59,12 +61,14 @@ export class EmptyComponent {}
     InsertNodesService,
     MilestoneService,
     MoveNodesService,
+    { provide: NodeService, useExisting: TeacherNodeService },
     ProjectAssetService,
     SpaceService,
     { provide: PeerGroupService, useExisting: TeacherPeerGroupService },
     { provide: ProjectService, useExisting: TeacherProjectService },
     TeacherDataService,
     TeacherDiscussionService,
+    TeacherNodeService,
     TeacherPeerGroupService,
     TeacherProjectService,
     TeacherWebSocketService,

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { NodeStatusService } from '../../services/nodeStatusService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../../vle/vleProjectService';
+import { NodeService } from '../../services/nodeService';
 
 class GroupNode {
   id: string;
@@ -21,6 +22,7 @@ export class GroupTabsComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
+    private nodeService: NodeService,
     private nodeStatusService: NodeStatusService,
     private projectService: VLEProjectService,
     private studentDataService: StudentDataService
@@ -62,6 +64,6 @@ export class GroupTabsComponent implements OnInit {
 
   goToGroupTab(groupTabIndex: number): void {
     const groupStartNodeId = this.groupNodes[groupTabIndex].startId;
-    this.studentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(groupStartNodeId);
+    this.nodeService.setCurrentNode(groupStartNodeId);
   }
 }

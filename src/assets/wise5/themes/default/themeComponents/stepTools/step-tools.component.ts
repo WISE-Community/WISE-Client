@@ -66,7 +66,7 @@ export class StepToolsComponent implements OnInit {
   }
 
   toNodeIdChanged(): void {
-    this.studentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.toNodeId);
+    this.nodeService.setCurrentNode(this.toNodeId);
   }
 
   updateModel(): void {
