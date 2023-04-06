@@ -44,7 +44,6 @@ export class WorkgroupItemComponent {
     this.components = this.projectService.getComponents(this.nodeId);
     this.componentIdToHasWork = this.projectService.calculateComponentIdToHasWork(this.components);
     this.componentIdToIsVisible = calculateComponentVisibility(
-      this.components,
       this.componentIdToHasWork,
       this.workgroupData.nodeStatus.componentStatuses
     );

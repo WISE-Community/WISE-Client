@@ -64,7 +64,6 @@ export class StepItemComponent implements OnInit {
         this.components
       );
       this.componentIdToIsVisible = calculateComponentVisibility(
-        this.components,
         this.componentIdToHasWork,
         stepData.nodeStatus.componentStatuses
       );
