@@ -4,6 +4,7 @@ import { NodeStatusService } from '../../services/nodeStatusService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../../vle/vleProjectService';
 import { GroupTabsComponent } from './group-tabs.component';
+import { NodeService } from '../../services/nodeService';
 
 const group1 = { id: 'group1' };
 const group2 = { id: 'group2' };
@@ -13,6 +14,10 @@ class MockNodeStatusService {
   canVisitNode(): boolean {
     return true;
   }
+}
+
+class MockNodeService {
+  setCurrentNode(): void {}
 }
 
 class MockVLEProjectService {
@@ -39,17 +44,16 @@ class MockStudentDataService {
   canVisitNode(): boolean {
     return true;
   }
-  endCurrentNodeAndSetCurrentNodeByNodeId(): void {}
 }
 
 let component: GroupTabsComponent;
 let projectService: VLEProjectService;
-let studentDataService: StudentDataService;
 describe('GroupTabsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         GroupTabsComponent,
+        { provide: NodeService, useClass: MockNodeService },
         { provide: NodeStatusService, useClass: MockNodeStatusService },
         { provide: VLEProjectService, useClass: MockVLEProjectService },
         { provide: StudentDataService, useClass: MockStudentDataService }
@@ -57,7 +61,6 @@ describe('GroupTabsComponent', () => {
     });
     component = TestBed.inject(GroupTabsComponent);
     projectService = TestBed.inject(VLEProjectService);
-    studentDataService = TestBed.inject(StudentDataService);
   });
   ngOnInit();
   goToGroupTab();
@@ -79,7 +82,7 @@ function goToGroupTab() {
       component.groupNodes = [
         { id: 'group1', disabled: false, startId: 'node1', title: 'Lesson 1' }
       ];
-      const spy = spyOn(studentDataService, 'endCurrentNodeAndSetCurrentNodeByNodeId');
+      const spy = spyOn(TestBed.inject(NodeService), 'setCurrentNode');
       component.goToGroupTab(0);
       expect(spy).toHaveBeenCalledWith('node1');
     });

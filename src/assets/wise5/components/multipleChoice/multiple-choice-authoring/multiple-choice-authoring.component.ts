@@ -3,9 +3,9 @@ import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
-import { RandomKeyService } from '../../../services/randomKeyService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
@@ -57,7 +57,7 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
 
   addChoice(): void {
     const newChoice = {
-      id: RandomKeyService.generate(),
+      id: generateRandomKey(),
       text: '',
       feedback: '',
       isCorrect: false

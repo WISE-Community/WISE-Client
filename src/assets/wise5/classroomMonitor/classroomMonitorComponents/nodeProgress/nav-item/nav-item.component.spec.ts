@@ -6,11 +6,16 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { NavItemComponent } from './nav-item.component';
+import { NodeService } from '../../../../services/nodeService';
 
 class MockNotificationService {
   getAlertNotifications() {
     return [];
   }
+}
+
+class MockNodeService {
+  setCurrentNode(): void {}
 }
 
 class MockTeacherDataService {
@@ -20,7 +25,6 @@ class MockTeacherDataService {
   private currentPeriodChangedSource: Subject<any> = new Subject<any>();
   public currentPeriodChanged$: Observable<any> = this.currentPeriodChangedSource.asObservable();
 
-  endCurrentNodeAndSetCurrentNodeByNodeId() {}
   getCurrentPeriod() {
     return { periodId: periodId };
   }
@@ -52,6 +56,7 @@ describe('NavItemComponent', () => {
       declarations: [NavItemComponent],
       imports: [ClassroomMonitorTestingModule, MatSnackBarModule],
       providers: [
+        { provide: NodeService, useClass: MockNodeService },
         { provide: NotificationService, useClass: MockNotificationService },
         { provide: TeacherDataService, useClass: MockTeacherDataService },
         { provide: TeacherProjectService, useClass: MockTeacherProjectService }
@@ -86,13 +91,10 @@ function itemClicked() {
     });
 
     it('should set current node when a step is clicked', () => {
-      const endCurrentNodeAndSetCurrentNodeByNodeIdSpy = spyOn(
-        TestBed.inject(TeacherDataService),
-        'endCurrentNodeAndSetCurrentNodeByNodeId'
-      );
+      const spy = spyOn(TestBed.inject(NodeService), 'setCurrentNode');
       component.isGroup = false;
       component.itemClicked();
-      expect(endCurrentNodeAndSetCurrentNodeByNodeIdSpy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalled();
     });
   });
 }

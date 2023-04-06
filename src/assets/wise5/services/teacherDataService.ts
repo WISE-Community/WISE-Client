@@ -730,10 +730,6 @@ export class TeacherDataService extends DataService {
     return this.currentStep;
   }
 
-  endCurrentNodeAndSetCurrentNodeByNodeId(nodeId) {
-    this.setCurrentNodeByNodeId(nodeId);
-  }
-
   getTotalScoreByWorkgroupId(workgroupId: number) {
     return this.AnnotationService.getTotalScore(
       this.studentData.annotationsToWorkgroupId[workgroupId]

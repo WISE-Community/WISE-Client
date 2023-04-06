@@ -11,6 +11,7 @@ import { Observable, Subject } from 'rxjs';
 import { Notification } from '../../../../app/domain/notification';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
+import { NodeService } from '../../services/nodeService';
 
 @Component({
   selector: 'dismiss-ambient-notification-dialog',
@@ -31,6 +32,7 @@ export class DismissAmbientNotificationDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public notification: Notification,
     public dialogRef: MatDialogRef<DismissAmbientNotificationDialogComponent>,
     private formBuilder: FormBuilder,
+    private nodeService: NodeService,
     private projectService: ProjectService,
     private studentDataService: StudentDataService
   ) {}
@@ -122,7 +124,7 @@ export class DismissAmbientNotificationDialogComponent implements OnInit {
 
     const goToNodeId = this.notification.nodeId;
     if (goToNodeId != null) {
-      this.studentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(goToNodeId);
+      this.nodeService.setCurrentNode(goToNodeId);
     }
   }
 

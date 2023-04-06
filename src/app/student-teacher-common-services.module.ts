@@ -53,6 +53,7 @@ import { NodeStatusService } from '../assets/wise5/services/nodeStatusService';
 import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 import { NodeProgressService } from '../assets/wise5/services/nodeProgressService';
 import { CompletionService } from '../assets/wise5/services/completionService';
+import { StudentNodeService } from '../assets/wise5/services/studentNodeService';
 
 @NgModule({
   providers: [
@@ -82,7 +83,7 @@ import { CompletionService } from '../assets/wise5/services/completionService';
     MatchService,
     MultipleChoiceService,
     NodeProgressService,
-    NodeService,
+    { provide: NodeService, useExisting: StudentNodeService },
     NodeStatusService,
     NotebookService,
     NotificationService,
@@ -100,6 +101,7 @@ import { CompletionService } from '../assets/wise5/services/completionService';
     StompService,
     StudentAssetService,
     StudentDataService,
+    StudentNodeService,
     StudentPeerGroupService,
     StudentStatusService,
     StudentWebSocketService,
