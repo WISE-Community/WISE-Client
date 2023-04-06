@@ -111,14 +111,15 @@ function evaluateConstraintWithOneRemovalCriteria() {
   });
 }
 
+function isCompletedSpy(): void {
+  spyOn(completionService, 'isCompleted')
+    .withArgs(nodeId1, undefined)
+    .and.returnValue(true)
+    .withArgs(nodeId2, undefined)
+    .and.returnValue(false);
+}
+
 function evaluateConstraintWithTwoRemovalCriteria() {
-  function isCompletedSpy(): void {
-    spyOn(completionService, 'isCompleted')
-      .withArgs(nodeId1, undefined)
-      .and.returnValue(true)
-      .withArgs(nodeId2, undefined)
-      .and.returnValue(false);
-  }
   it('should evaluate constraint with two removal criteria requiring all', () => {
     isCompletedSpy();
     expect(service.evaluateConstraint(constraintTwoRemovalCriteria)).toEqual(false);
@@ -133,23 +134,16 @@ function evaluateConstraintWithTwoRemovalCriteria() {
 function evaluateCriterias() {
   describe('evaluateCriterias()', () => {
     it(`should return false when it is passed one criteria that is false`, () => {
-      const criterias = [criteria1];
       spyOn(completionService, 'isCompleted').and.returnValue(false);
-      expect(service.evaluateCriterias(criterias)).toEqual(false);
+      expect(service.evaluateCriterias([criteria1])).toEqual(false);
     });
     it(`should return true when it is passed one criteria that is true`, () => {
-      const criterias = [criteria1];
       spyOn(completionService, 'isCompleted').and.returnValue(true);
-      expect(service.evaluateCriterias(criterias)).toEqual(true);
+      expect(service.evaluateCriterias([criteria1])).toEqual(true);
     });
     it(`should return false when it is passed multiple criterias and one is false`, () => {
-      const criterias = [criteria1, criteria2];
-      spyOn(completionService, 'isCompleted')
-        .withArgs(nodeId1, undefined)
-        .and.returnValue(true)
-        .withArgs(nodeId2, undefined)
-        .and.returnValue(false);
-      expect(service.evaluateCriterias(criterias)).toEqual(false);
+      isCompletedSpy();
+      expect(service.evaluateCriterias([criteria1, criteria2])).toEqual(false);
     });
   });
 }
