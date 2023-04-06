@@ -10,21 +10,21 @@ import { NodeStatusService } from './nodeStatusService';
 @Injectable()
 export class StudentNodeService extends NodeService {
   constructor(
-    dialog: MatDialog,
-    configService: ConfigService,
-    constraintService: ConstraintService,
+    protected dialog: MatDialog,
+    protected configService: ConfigService,
+    protected constraintService: ConstraintService,
     private nodeStatusService: NodeStatusService,
-    projectService: ProjectService,
-    dataService: DataService
+    protected projectService: ProjectService,
+    protected dataService: DataService
   ) {
     super(dialog, configService, constraintService, projectService, dataService);
   }
 
   setCurrentNode(nodeId: string): void {
     if (this.nodeStatusService.getNodeStatusByNodeId(nodeId).isVisitable) {
-      this.DataService.setCurrentNodeByNodeId(nodeId);
+      this.dataService.setCurrentNodeByNodeId(nodeId);
     } else {
-      this.DataService.nodeClickLocked(nodeId);
+      this.dataService.nodeClickLocked(nodeId);
     }
   }
 }
