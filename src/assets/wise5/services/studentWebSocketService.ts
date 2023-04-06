@@ -16,7 +16,7 @@ export class StudentWebSocketService {
   constructor(
     private AnnotationService: AnnotationService,
     private configService: ConfigService,
-    private NodeService: NodeService,
+    private nodeService: NodeService,
     private notebookService: NotebookService,
     private ProjectService: ProjectService,
     private stompService: StompService,
@@ -61,7 +61,7 @@ export class StudentWebSocketService {
         const tags = JSON.parse(body.content);
         this.TagService.setTags(tags);
         this.StudentDataService.updateNodeStatuses();
-        this.NodeService.evaluateTransitionLogic();
+        this.nodeService.evaluateTransitionLogic();
       } else if (body.type === 'goToNode') {
         this.goToStep(body.content);
       } else if (body.type === 'goToNextNode') {
@@ -82,12 +82,12 @@ export class StudentWebSocketService {
   }
 
   goToStep(nodeId: string): void {
-    this.StudentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(nodeId);
+    this.nodeService.setCurrentNode(nodeId);
   }
 
   goToNextStep(): void {
-    this.NodeService.getNextNodeId().then((nextNodeId) => {
-      this.StudentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(nextNodeId);
+    this.nodeService.getNextNodeId().then((nextNodeId) => {
+      this.nodeService.setCurrentNode(nextNodeId);
     });
   }
 

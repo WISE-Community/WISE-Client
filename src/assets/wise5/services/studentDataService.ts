@@ -655,15 +655,7 @@ export class StudentDataService extends DataService {
     return this.ProjectService.getNodeById(nodeId) != null && this.ProjectService.isActive(nodeId);
   }
 
-  endCurrentNodeAndSetCurrentNodeByNodeId(nodeId) {
-    if (this.nodeStatuses[nodeId].isVisitable) {
-      this.setCurrentNodeByNodeId(nodeId);
-    } else {
-      this.nodeClickLocked(nodeId);
-    }
-  }
-
-  nodeClickLocked(nodeId) {
+  nodeClickLocked(nodeId: string): void {
     this.broadcastNodeClickLocked({ nodeId: nodeId });
   }
 

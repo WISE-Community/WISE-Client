@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithOpenInNewWindowComponent } from '../../../../directives/dialog-with-open-in-new-window/dialog-with-open-in-new-window.component';
+import { NodeService } from '../../../../services/nodeService';
 
 @Component({
   selector: 'node-progress-view',
@@ -25,6 +26,7 @@ export class NodeProgressViewComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
+    private nodeService: NodeService,
     private projectService: TeacherProjectService,
     private teacherDataService: TeacherDataService,
     private upgrade: UpgradeModule
@@ -96,7 +98,7 @@ export class NodeProgressViewComponent implements OnInit {
       const fromNodeId = $transition.params('from').nodeId;
       if (toNodeId && fromNodeId && toNodeId !== fromNodeId) {
         this.nodeId = toNodeId;
-        this.teacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(toNodeId);
+        this.nodeService.setCurrentNode(toNodeId);
       }
 
       if (toNodeId === 'group0') {

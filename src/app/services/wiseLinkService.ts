@@ -53,7 +53,7 @@ export class WiseLinkService {
     if (componentId !== '') {
       this.nodeService.registerScrollToComponent(componentId);
     }
-    this.studentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(nodeId);
+    this.nodeService.setCurrentNode(nodeId);
   }
 
   generateHtmlWithWiseLink(html: string): SafeHtml {

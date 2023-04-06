@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { StudentDataService } from '../../services/studentDataService';
 import { DismissAmbientNotificationDialogComponent } from './dismiss-ambient-notification-dialog.component';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
+import { NodeService } from '../../services/nodeService';
 
 let component: DismissAmbientNotificationDialogComponent;
 const DISMISS_CODE: string = 'computer';
@@ -80,14 +81,14 @@ function dismissCodeShouldShowInvalidDismissCodeMessage(
 function visitNode(): void {
   describe('visitNode', () => {
     it('should visit node', () => {
-      const endCurrentNodeSpy = spyOn(
-        TestBed.inject(StudentDataService),
-        'endCurrentNodeAndSetCurrentNodeByNodeId'
+      const setCurrentNodeSpy = spyOn(
+        TestBed.inject(NodeService),
+        'setCurrentNode'
       ).and.callFake(() => {});
       component.notification.nodeId = nodeId;
       component.visitNode();
       expect(saveVLEEventSpy).toHaveBeenCalled();
-      expect(endCurrentNodeSpy).toHaveBeenCalledWith(nodeId);
+      expect(setCurrentNodeSpy).toHaveBeenCalledWith(nodeId);
     });
   });
 }

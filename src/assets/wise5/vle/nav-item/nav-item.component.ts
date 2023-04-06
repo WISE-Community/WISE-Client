@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
+import { NodeService } from '../../services/nodeService';
 
 @Component({
   selector: 'nav-item',
@@ -31,6 +32,7 @@ export class NavItemComponent {
   type: string;
 
   constructor(
+    private nodeService: NodeService,
     private ProjectService: ProjectService,
     private StudentDataService: StudentDataService
   ) {}
@@ -119,12 +121,12 @@ export class NavItemComponent {
         if (this.isCurrentNode) {
           this.zoomToElement();
         } else {
-          this.StudentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.nodeId);
+          this.nodeService.setCurrentNode(this.nodeId);
         }
       }
       this.StudentDataService.setNavItemExpanded(this.nodeId, this.expanded);
     } else {
-      this.StudentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.nodeId);
+      this.nodeService.setCurrentNode(this.nodeId);
     }
   }
 }

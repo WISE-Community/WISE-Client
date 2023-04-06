@@ -7,6 +7,7 @@ import { NotificationService } from '../../../../services/notificationService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../../services/teacherWebSocketService';
+import { NodeService } from '../../../../services/nodeService';
 
 @Component({
   selector: 'nav-item',
@@ -45,6 +46,7 @@ export class NavItemComponent implements OnInit {
   constructor(
     private annotationService: AnnotationService,
     private classroomStatusService: ClassroomStatusService,
+    private nodeService: NodeService,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService,
     private snackBar: MatSnackBar,
@@ -167,7 +169,7 @@ export class NavItemComponent implements OnInit {
       this.groupItemClicked();
       this.onExpandedEvent.emit({ nodeId: this.nodeId, expanded: this.expanded });
     } else {
-      this.teacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.nodeId);
+      this.nodeService.setCurrentNode(this.nodeId);
     }
   }
 
@@ -177,7 +179,7 @@ export class NavItemComponent implements OnInit {
       if (this.isCurrentNode) {
         this.zoomToElement();
       } else {
-        this.teacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.nodeId);
+        this.nodeService.setCurrentNode(this.nodeId);
       }
     }
   }

@@ -4,10 +4,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NotificationService } from '../../services/notificationService';
-import { StudentDataService } from '../../services/studentDataService';
 import { NotificationsDialogComponent } from './notifications-dialog.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
+import { NodeService } from '../../services/nodeService';
 
 describe('NotificationsMenuComponent', () => {
   let component: NotificationsDialogComponent;
@@ -84,13 +84,13 @@ describe('NotificationsMenuComponent', () => {
   }
 
   it('should dismiss notification aggregate and visit node', () => {
-    const endCurrentNodeAndSetCurrentNodeByNodeIdSpy = spyOn(
-      TestBed.inject(StudentDataService),
-      'endCurrentNodeAndSetCurrentNodeByNodeId'
+    const setCurrentNodeSpy = spyOn(
+      TestBed.inject(NodeService),
+      'setCurrentNode'
     ).and.callFake(() => {});
     component.dismissNotificationAggregateAndVisitNode(notificationAggregate1);
     expect(dismissNotificationSpy).toHaveBeenCalledTimes(2);
-    expect(endCurrentNodeAndSetCurrentNodeByNodeIdSpy).toHaveBeenCalledWith(nodeId1);
+    expect(setCurrentNodeSpy).toHaveBeenCalledWith(nodeId1);
   });
 
   it('should dismiss notification aggregate that does not require dismiss code', () => {
