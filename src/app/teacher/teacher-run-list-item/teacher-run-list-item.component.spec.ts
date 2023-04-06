@@ -23,10 +23,10 @@ export class MockConfigService {
   }
 }
 
-describe('TeacherRunListItemComponent', () => {
-  let component: TeacherRunListItemComponent;
-  let fixture: ComponentFixture<TeacherRunListItemComponent>;
+let component: TeacherRunListItemComponent;
+let fixture: ComponentFixture<TeacherRunListItemComponent>;
 
+describe('TeacherRunListItemComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TeacherRunListItemComponent],
@@ -56,15 +56,31 @@ describe('TeacherRunListItemComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should show run info', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.textContent).toContain('Photosynthesis');
-    expect(compiled.textContent).toContain('2 periods');
-    expect(compiled.textContent).toContain('30 students');
-    expect(compiled.textContent).toContain('Access Code: Dog123');
-  });
+  render();
+  runArchiveStatusChanged();
 });
+
+function render() {
+  describe('render', () => {
+    it('should show run info', () => {
+      const compiled = fixture.debugElement.nativeElement;
+      expect(compiled.textContent).toContain('Photosynthesis');
+      expect(compiled.textContent).toContain('2 periods');
+      expect(compiled.textContent).toContain('30 students');
+      expect(compiled.textContent).toContain('Access Code: Dog123');
+    });
+  });
+}
+
+function runArchiveStatusChanged() {
+  describe('runArchiveStatusChanged()', () => {
+    it('should unselect run and emit events', () => {
+      const runSelectedSpy = spyOn(component.runSelectedStatusChangedEvent, 'emit');
+      const runArchiveSpy = spyOn(component.runArchiveStatusChangedEvent, 'emit');
+      component.runArchiveStatusChanged();
+      expect(component.run.isSelected).toEqual(false);
+      expect(runSelectedSpy).toHaveBeenCalled();
+      expect(runArchiveSpy).toHaveBeenCalled();
+    });
+  });
+}

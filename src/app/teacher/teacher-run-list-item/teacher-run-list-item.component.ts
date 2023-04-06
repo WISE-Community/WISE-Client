@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, Output, EventEmitter } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafeStyle } from '@angular/platform-browser';
 import { TeacherRun } from '../teacher-run';
@@ -16,6 +16,8 @@ import { ShareRunCodeDialogComponent } from '../share-run-code-dialog/share-run-
 })
 export class TeacherRunListItemComponent implements OnInit {
   @Input() run: TeacherRun = new TeacherRun();
+  @Output() runArchiveStatusChangedEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() runSelectedStatusChangedEvent: EventEmitter<any> = new EventEmitter<any>();
 
   manageStudentsLink: string = '';
   periodsTooltipText: string;
@@ -88,11 +90,11 @@ export class TeacherRunListItemComponent implements OnInit {
     return string;
   }
 
-  isRunActive(run) {
+  isRunActive(run: TeacherRun): boolean {
     return run.isActive(this.configService.getCurrentServerTime());
   }
 
-  isRunCompleted(run) {
+  isRunCompleted(run: TeacherRun): boolean {
     return run.isCompleted(this.configService.getCurrentServerTime());
   }
 
@@ -101,5 +103,11 @@ export class TeacherRunListItemComponent implements OnInit {
       data: this.run,
       panelClass: 'dialog-sm'
     });
+  }
+
+  runArchiveStatusChanged(): void {
+    this.run.isSelected = false;
+    this.runSelectedStatusChangedEvent.emit();
+    this.runArchiveStatusChangedEvent.emit();
   }
 }

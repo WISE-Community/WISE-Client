@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RunMenuComponent } from './run-menu.component';
 import { TeacherService } from '../teacher.service';
-import { Project } from '../../domain/project';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { ConfigService } from '../../services/config.service';
@@ -12,6 +11,8 @@ import { TeacherRun } from '../teacher-run';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Course } from '../../domain/course';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export class MockTeacherService {
   checkClassroomAuthorization(): Observable<string> {
@@ -25,6 +26,12 @@ export class MockTeacherService {
       observer.next(courses);
       observer.complete();
     });
+  }
+  archiveRun(run: TeacherRun) {
+    return of({});
+  }
+  unarchiveRun(run: TeacherRun) {
+    return of({});
   }
 }
 
@@ -56,44 +63,67 @@ export class MockConfigService {
   }
 }
 
-describe('RunMenuComponent', () => {
-  let component: RunMenuComponent;
-  let fixture: ComponentFixture<RunMenuComponent>;
+let component: RunMenuComponent;
+let fixture: ComponentFixture<RunMenuComponent>;
+let snackBarSpy: jasmine.Spy;
+let teacherService: TeacherService;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [MatMenuModule, RouterTestingModule],
-      declarations: [RunMenuComponent],
-      providers: [
-        { provide: TeacherService, useClass: MockTeacherService },
-        { provide: UserService, useClass: MockUserService },
-        { provide: ConfigService, useClass: MockConfigService },
-        { provide: MatDialog, useValue: {} }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+describe('RunMenuComponent', () => {
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [BrowserAnimationsModule, MatMenuModule, MatSnackBarModule, RouterTestingModule],
+        declarations: [RunMenuComponent],
+        providers: [
+          { provide: TeacherService, useClass: MockTeacherService },
+          { provide: UserService, useClass: MockUserService },
+          { provide: ConfigService, useClass: MockConfigService },
+          { provide: MatDialog, useValue: {} }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RunMenuComponent);
     component = fixture.componentInstance;
-    const run: TeacherRun = new TeacherRun();
-    run.id = 1;
-    run.name = 'Photosynthesis';
     const owner = new User();
-    owner.id = 1;
-    run.owner = owner;
-    const project = new Project();
-    project.id = 1;
-    project.owner = owner;
-    project.sharedOwners = [];
-    run.project = project;
-    run.sharedOwners = [];
-    component.run = run;
+    component.run = new TeacherRun({
+      id: 1,
+      name: 'Photosynthesis',
+      owner: owner,
+      project: {
+        id: 1,
+        owner: owner,
+        sharedOwners: []
+      }
+    });
+    teacherService = TestBed.inject(TeacherService);
+    snackBarSpy = spyOn(TestBed.inject(MatSnackBar), 'open');
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  archive();
+  unarchive();
 });
+
+function archive() {
+  describe('archive()', () => {
+    it('should archive a run', () => {
+      component.archive();
+      expect(component.run.project.isDeleted).toEqual(true);
+      expect(snackBarSpy).toHaveBeenCalledWith('Successfully Archived Run');
+    });
+  });
+}
+
+function unarchive() {
+  describe('unarchive()', () => {
+    it('should unarchive a run', () => {
+      component.unarchive();
+      expect(component.run.project.isDeleted).toEqual(false);
+      expect(snackBarSpy).toHaveBeenCalledWith('Successfully Unarchived Run');
+    });
+  });
+}

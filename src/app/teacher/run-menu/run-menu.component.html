@@ -29,5 +29,15 @@
       <mat-icon>report_problem</mat-icon>
       <span i18n>Report Problem</span>
     </a>
+    <ng-container *ngIf="isOwner">
+      <a mat-menu-item *ngIf="!run.project.isDeleted" (click)="archive()">
+        <mat-icon>folder</mat-icon>
+        <span i18n>Archive</span>
+      </a>
+      <a mat-menu-item *ngIf="run.project.isDeleted" (click)="unarchive()">
+        <mat-icon>folder_off</mat-icon>
+        <span i18n>Unarchive</span>
+      </a>
+    </ng-container>
   </div>
 </mat-menu>

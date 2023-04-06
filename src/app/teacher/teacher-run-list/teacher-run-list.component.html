@@ -8,6 +8,7 @@
     fxLayout="row"
     fxLayout.xs="column"
     fxLayoutGap.sm="16px"
+    fxLayoutAlign="start center"
   >
     <app-search-bar
       fxFlex="0 0 auto"
@@ -20,19 +21,14 @@
       (update)="searchChanged($event)"
     ></app-search-bar>
     <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
-    <app-select-menu
-      fxFlex="0 0 auto"
-      fxFlex.sm="0 0 calc(50%-8px)"
-      [options]="filterOptions"
-      i18n-placeholderText
-      placeholderText="Filter By Period"
-      [disable]="!loaded"
-      [value]="filterValue"
-      (update)="filterChanged($event)"
-      [valueProp]="'value'"
-      [viewValueProp]="'label'"
-    >
-    </app-select-menu>
+    <div fxLayoutGap="12px">
+      <span i18n>Active</span>
+      <mat-slide-toggle
+        [(ngModel)]="isShowArchived"
+        (change)="isShowArchivedChanged()"
+      ></mat-slide-toggle>
+      <span i18n>Archived</span>
+    </div>
   </div>
   <div class="notice">
     <p [ngStyle]="{ visibility: loaded ? 'visible' : 'hidden' }">
@@ -40,14 +36,18 @@
         >Units found: {{ filteredRuns.length }}</ng-container
       >
       <ng-container *ngIf="!searchValue && !filterValue" i18n
-        >Total classroom units: {{ filteredRuns.length }}</ng-container
+        >Total {{ isShowArchived ? 'archived' : 'active' }} classroom units:
+        {{ filteredRuns.length }}</ng-container
       >
-      <span class="mat-caption" *ngIf="filteredRuns.length">
+      <span class="mat-caption" *ngIf="!isShowArchived && filteredRuns.length">
         (<ng-container *ngIf="scheduledTotal()"
           ><span i18n>{{ scheduledTotal() }} scheduled</span>,
         </ng-container>
         <ng-container
-          ><span i18n>{{ activeTotal() }} active</span></ng-container
+          ><span i18n>{{ activeTotal() }} running</span></ng-container
+        >
+        <ng-container *ngIf="completedTotal()"
+          >, <span i18n>{{ completedTotal() }} completed</span></ng-container
         >)
       </span>
       <ng-container *ngIf="searchValue || filterValue">
@@ -58,18 +58,64 @@
       </ng-container>
     </p>
   </div>
-
+  <div
+    *ngIf="filteredRuns.length > 0"
+    class="select-all-controls"
+    fxLayout="row"
+    fxLayoutAlign="start center"
+  >
+    <mat-checkbox
+      class="select-all-check-box"
+      color="primary"
+      [checked]="isSelectedAllRuns"
+      [indeterminate]="isSelectedSomeRuns"
+      (click)="selectAllRunsCheckboxClicked($event)"
+    ></mat-checkbox>
+    <div class="select-all-drop-down">
+      <mat-select>
+        <mat-option (click)="selectRunsOptionChosen('all')" i18n>All</mat-option>
+        <mat-option (click)="selectRunsOptionChosen('none')" i18n>None</mat-option>
+        <mat-option (click)="selectRunsOptionChosen('running')" i18n>Running</mat-option>
+        <mat-option (click)="selectRunsOptionChosen('completed')" i18n>Completed</mat-option>
+      </mat-select>
+    </div>
+    <div *ngIf="numSelectedRuns > 0" class="num-selected-runs-display" i18n>
+      {{ numSelectedRuns }} Run(s) Selected
+    </div>
+    <button
+      mat-raised-button
+      color="accent"
+      *ngIf="!isShowArchived && (isSelectedAllRuns || isSelectedSomeRuns)"
+      (click)="archiveSelectedRuns()"
+      i18n
+    >
+      Archive Selected
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      *ngIf="isShowArchived && (isSelectedAllRuns || isSelectedSomeRuns)"
+      (click)="unarchiveSelectedRuns()"
+      i18n
+    >
+      Unarchive Selected
+    </button>
+  </div>
   <app-timeline>
     <ng-container *ngFor="let run of filteredRuns.sort(sortByStartTimeDesc); let i = index">
       <app-timeline-item [active]="isRunActive(run)" *ngIf="i < 10 || showAll" id="run{{ run.id }}">
         <app-timeline-item-label>
-          <strong>{{ run.startTime | date : 'mediumDate' }}</strong>
+          <strong>{{ run.startTime | date: 'mediumDate' }}</strong>
           <ng-container *ngIf="run.endTime && runSpansDays(run)">
-            - <strong>{{ run.endTime | date : 'mediumDate' }}</strong>
+            - <strong>{{ run.endTime | date: 'mediumDate' }}</strong>
           </ng-container>
         </app-timeline-item-label>
         <app-timeline-item-content>
-          <app-teacher-run-list-item [run]="run"></app-teacher-run-list-item>
+          <app-teacher-run-list-item
+            [run]="run"
+            (runArchiveStatusChangedEvent)="runArchiveStatusChanged()"
+            (runSelectedStatusChangedEvent)="runSelectedStatusChanged()"
+          ></app-teacher-run-list-item>
         </app-timeline-item-content>
       </app-timeline-item>
     </ng-container>

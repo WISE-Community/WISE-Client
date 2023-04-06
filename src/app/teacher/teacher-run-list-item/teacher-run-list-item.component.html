@@ -52,10 +52,16 @@
 
 <mat-card
   class="mat-elevation-z3 can-highlight"
-  [ngClass]="{ 'highlighted-bg': run.isHighlighted }"
+  [ngClass]="{ 'highlighted-bg': run.isHighlighted, 'archived-run': run.project.isDeleted }"
   [@flash]="{ value: '*', params: { duration: animateDuration, delay: animateDelay } }"
 >
   <mat-card-content fxLayout="row" fxLayoutGap="12px">
+    <mat-checkbox
+      *ngIf="!run.shared"
+      color="primary"
+      [(ngModel)]="run.isSelected"
+      (ngModelChange)="runSelectedStatusChangedEvent.emit()"
+    ></mat-checkbox>
     <div
       mat-card-avatar
       [style.background-image]="run.project.thumbStyle"
@@ -81,7 +87,10 @@
         </mat-card-subtitle>
       </div>
       <span fxFlex="1 1 auto"></span>
-      <app-run-menu [run]="run"></app-run-menu>
+      <app-run-menu
+        [run]="run"
+        (runArchiveStatusChangedEvent)="runArchiveStatusChanged()"
+      ></app-run-menu>
     </div>
   </mat-card-content>
   <mat-card-content fxHide fxShow.xs>
@@ -98,7 +107,7 @@
       fxLayoutGap="16px"
     >
       <span *ngIf="run.lastRun" class="mat-caption secondary-text center" i18n
-        >Last student login: {{ run.lastRun | date : 'short' }}</span
+        >Last student login: {{ run.lastRun | date: 'short' }}</span
       >
       <button
         *ngIf="!isRunActive(run) && !isRunCompleted(run)"

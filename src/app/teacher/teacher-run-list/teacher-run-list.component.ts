@@ -7,6 +7,7 @@ import { formatDate } from '@angular/common';
 import { Observable, of, Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { mergeMap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -20,9 +21,12 @@ export class TeacherRunListComponent implements OnInit {
   filteredRuns: TeacherRun[] = [];
   loaded: boolean = false;
   searchValue: string = '';
-  periods: string[] = [];
   filterOptions: any[];
   filterValue: string = '';
+  isSelectedAllRuns: boolean = false;
+  isSelectedSomeRuns: boolean = false;
+  isShowArchived: boolean = false;
+  numSelectedRuns: number = 0;
   showAll: boolean = false;
   subscriptions: Subscription = new Subscription();
 
@@ -31,6 +35,7 @@ export class TeacherRunListComponent implements OnInit {
     @Inject(LOCALE_ID) private localeID: string,
     private route: ActivatedRoute,
     private router: Router,
+    private snackBar: MatSnackBar,
     private teacherService: TeacherService,
     private userService: UserService
   ) {}
@@ -92,9 +97,6 @@ export class TeacherRunListComponent implements OnInit {
 
   private processRuns(): void {
     this.filteredRuns = this.runs;
-    this.populatePeriods();
-    this.periods.sort();
-    this.populateFilterOptions();
     this.performSearchAndFilter();
   }
 
@@ -102,60 +104,39 @@ export class TeacherRunListComponent implements OnInit {
     return b.startTime - a.startTime;
   }
 
-  private populatePeriods(): void {
-    this.periods = [];
-    for (const run of this.runs) {
-      for (const period of run.periods) {
-        if (!this.periods.includes(period)) {
-          this.periods.push(period);
-        }
-      }
-    }
-  }
-
-  private populateFilterOptions(): void {
-    this.filterOptions = [{ value: '', label: $localize`All Periods` }];
-    for (const period of this.periods) {
-      this.filterOptions.push({ value: period, label: period });
-    }
-  }
-
-  runSpansDays(run: TeacherRun) {
+  runSpansDays(run: TeacherRun): boolean {
     const startDay = formatDate(run.startTime, 'shortDate', this.localeID);
     const endDay = formatDate(run.endTime, 'shortDate', this.localeID);
     return startDay != endDay;
   }
 
   activeTotal(): number {
-    let total = 0;
     const now = this.configService.getCurrentServerTime();
-    for (const run of this.filteredRuns) {
-      if (run.isActive(now)) {
-        total++;
-      }
-    }
-    return total;
+    return this.filteredRuns.filter((run: TeacherRun) => run.isActive(now)).length;
+  }
+
+  completedTotal(): number {
+    const now = this.configService.getCurrentServerTime();
+    return this.filteredRuns.filter(
+      (run: TeacherRun) => !run.isActive(now) && !run.isScheduled(now)
+    ).length;
   }
 
   scheduledTotal(): number {
-    let total = 0;
     const now = this.configService.getCurrentServerTime();
-    for (const run of this.filteredRuns) {
-      if (run.isScheduled(now)) {
-        total++;
-      }
-    }
-    return total;
+    return this.filteredRuns.filter((run: TeacherRun) => run.isScheduled(now)).length;
   }
 
   private performSearchAndFilter(): void {
     this.filteredRuns = this.searchValue ? this.performSearch(this.searchValue) : this.runs;
-    this.performFilter(this.filterValue);
+    this.performFilter();
+    this.updateNumSelectedRuns();
   }
 
   searchChanged(searchValue: string): void {
     this.searchValue = searchValue;
     this.performSearchAndFilter();
+    this.turnOnShowAll();
   }
 
   filterChanged(value: string): void {
@@ -163,15 +144,17 @@ export class TeacherRunListComponent implements OnInit {
     this.performSearchAndFilter();
   }
 
-  private performFilter(value: string): void {
+  private performFilter(): void {
     this.filteredRuns = this.filteredRuns.filter((run: TeacherRun) => {
-      return value === '' || run.periods.includes(value);
+      return (
+        (!this.isShowArchived && !run.project.isDeleted) ||
+        (this.isShowArchived && run.project.isDeleted)
+      );
     });
   }
 
-  private performSearch(searchValue: string) {
+  private performSearch(searchValue: string): TeacherRun[] {
     searchValue = searchValue.toLocaleLowerCase();
-    // TODO: extract this for global use?
     return this.runs.filter((run: TeacherRun) =>
       Object.keys(run).some((prop) => {
         const value = run[prop];
@@ -192,7 +175,7 @@ export class TeacherRunListComponent implements OnInit {
     this.performSearchAndFilter();
   }
 
-  isRunActive(run) {
+  isRunActive(run: TeacherRun): boolean {
     return run.isActive(this.configService.getCurrentServerTime());
   }
 
@@ -215,5 +198,140 @@ export class TeacherRunListComponent implements OnInit {
         run.isHighlighted = true;
       }
     }
+  }
+
+  isShowArchivedChanged(): void {
+    this.turnOnShowAll();
+    this.unselectAllRuns();
+    this.updateSelectAllCheckboxAndNumRunsSelected();
+    this.performSearchAndFilter();
+  }
+
+  selectAllRunsCheckboxClicked(event: any): void {
+    this.turnOnShowAll();
+    if (this.isSelectedAllRuns || this.isSelectedSomeRuns) {
+      this.unselectAllRuns();
+    } else {
+      this.selectAllFilteredRuns();
+    }
+    this.updateSelectAllCheckboxAndNumRunsSelected();
+    event.preventDefault();
+  }
+
+  private unselectAllRuns(): void {
+    this.isSelectedAllRuns = false;
+    this.isSelectedSomeRuns = false;
+    for (const run of this.runs) {
+      run.isSelected = false;
+    }
+  }
+
+  private selectAllFilteredRuns(): void {
+    this.filteredRuns
+      .filter((run: TeacherRun) => !run.shared)
+      .forEach((run: TeacherRun) => {
+        run.isSelected = true;
+      });
+  }
+
+  selectRunsOptionChosen(value: string): void {
+    this.turnOnShowAll();
+    this.isSelectedAllRuns = value === 'all';
+    this.isSelectedAllRuns = value === 'none';
+    this.filteredRuns
+      .filter((run: TeacherRun) => !run.shared)
+      .forEach((run: TeacherRun) => {
+        switch (value) {
+          case 'all':
+            run.isSelected = true;
+            break;
+          case 'none':
+            run.isSelected = false;
+            break;
+          case 'running':
+            run.isSelected = !run.isCompleted(this.configService.getCurrentServerTime());
+            break;
+          case 'completed':
+            run.isSelected = run.isCompleted(this.configService.getCurrentServerTime());
+            break;
+        }
+      });
+    this.updateSelectAllCheckboxAndNumRunsSelected();
+  }
+
+  private updateSelectAllCheckboxAndNumRunsSelected(): void {
+    this.updateSelectAllCheckbox();
+    this.updateNumSelectedRuns();
+  }
+
+  private updateSelectAllCheckbox(): void {
+    const numFilteredRuns = this.filteredRuns.length;
+    const numSelectedRuns = this.getNumSelectedRuns();
+    this.isSelectedAllRuns = numSelectedRuns > 0 && numSelectedRuns === numFilteredRuns;
+    this.isSelectedSomeRuns = numSelectedRuns > 0 && numSelectedRuns !== numFilteredRuns;
+  }
+
+  private updateNumSelectedRuns(): void {
+    this.numSelectedRuns = this.getNumSelectedRuns();
+  }
+
+  private getNumSelectedRuns(): number {
+    return this.getSelectedRuns().length;
+  }
+
+  archiveSelectedRuns(): Subscription {
+    const runs = this.getSelectedRuns();
+    return this.teacherService.archiveRuns(runs).subscribe({
+      next: () => {
+        this.setRunsIsDeleted(runs, true);
+        this.unselectAllRuns();
+        this.updateSelectAllCheckboxAndNumRunsSelected();
+        this.performSearchAndFilter();
+        this.snackBar.open($localize`Successfully Archived ${runs.length} Runs`);
+      },
+      error: () => {
+        this.snackBar.open($localize`Error Archiving Runs`);
+      }
+    });
+  }
+
+  unarchiveSelectedRuns(): Subscription {
+    const runs = this.getSelectedRuns();
+    return this.teacherService.unarchiveRuns(runs).subscribe({
+      next: () => {
+        this.setRunsIsDeleted(runs, false);
+        this.unselectAllRuns();
+        this.updateSelectAllCheckboxAndNumRunsSelected();
+        this.performSearchAndFilter();
+        this.snackBar.open($localize`Successfully Unarchived ${runs.length} Runs`);
+      },
+      error: () => {
+        this.snackBar.open($localize`Error Unarchiving Runs`);
+      }
+    });
+  }
+
+  private setRunsIsDeleted(runs: TeacherRun[], isDeleted: boolean): void {
+    for (const run of runs) {
+      run.project.isDeleted = isDeleted;
+    }
+  }
+
+  runSelectedStatusChanged(): void {
+    this.updateSelectAllCheckboxAndNumRunsSelected();
+  }
+
+  runArchiveStatusChanged(): void {
+    this.performSearchAndFilter();
+  }
+
+  private getSelectedRuns(): TeacherRun[] {
+    return this.filteredRuns.filter((run: TeacherRun) => {
+      return run.isSelected;
+    });
+  }
+
+  private turnOnShowAll(): void {
+    this.showAll = true;
   }
 }
