@@ -3,7 +3,6 @@ import { StudentTeacherCommonServicesModule } from '../student-teacher-common-se
 import { ConstraintService } from '../../assets/wise5/services/constraintService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { Constraint } from '../domain/constraint';
@@ -39,7 +38,6 @@ let completionService: CompletionService;
 let configService: ConfigService;
 let criteria1: any;
 let criteria2: any;
-let dataService: StudentDataService;
 const groupId1 = 'group1';
 const groupId2 = 'group2';
 const groupId3 = 'group3';
@@ -61,7 +59,6 @@ describe('ConstraintService', () => {
     });
     completionService = TestBed.inject(CompletionService);
     configService = TestBed.inject(ConfigService);
-    dataService = TestBed.inject(StudentDataService);
     projectService = TestBed.inject(ProjectService);
     service = TestBed.inject(ConstraintService);
     criteria1 = {
@@ -134,18 +131,21 @@ function evaluateConstraintWithTwoRemovalCriteria() {
 function evaluateCriterias() {
   describe('evaluateCriterias()', () => {
     it(`should return false when it is passed one criteria that is false`, () => {
-      spyOn(completionService, 'isCompleted').and.returnValue(false);
-      expect(service.evaluateCriterias([criteria1])).toEqual(false);
+      expectEvaluateCriterias(false, false);
     });
     it(`should return true when it is passed one criteria that is true`, () => {
-      spyOn(completionService, 'isCompleted').and.returnValue(true);
-      expect(service.evaluateCriterias([criteria1])).toEqual(true);
+      expectEvaluateCriterias(true, true);
     });
     it(`should return false when it is passed multiple criterias and one is false`, () => {
       isCompletedSpy();
       expect(service.evaluateCriterias([criteria1, criteria2])).toEqual(false);
     });
   });
+}
+
+function expectEvaluateCriterias(isCompleted: boolean, expectedResult: boolean) {
+  spyOn(completionService, 'isCompleted').and.returnValue(isCompleted);
+  expect(service.evaluateCriterias([criteria1])).toEqual(expectedResult);
 }
 
 function getConstraintsThatAffectNode() {
