@@ -28,11 +28,9 @@ class ProjectAuthoringController {
   idToNode: any;
   copyMode: boolean;
   nodeToAdd: any;
-  projectScriptFilename: string;
   currentAuthorsMessage: string = '';
   stepNodeSelected: boolean = false;
   activityNodeSelected: boolean = false;
-  metadata: any;
   moveMode: boolean;
   projectURL: string;
   rxStomp: RxStomp;
@@ -94,10 +92,8 @@ class ProjectAuthoringController {
     this.inactiveStepNodes = this.ProjectService.getInactiveStepNodes();
     this.inactiveNodes = this.ProjectService.getInactiveNodes();
     this.idToNode = this.ProjectService.getIdToNode();
-    this.projectScriptFilename = this.ProjectService.getProjectScriptFilename();
     this.stepNodeSelected = false;
     this.activityNodeSelected = false;
-    this.metadata = this.ProjectService.getProjectMetadata();
     this.subscribeToCurrentAuthors(this.projectId);
     this.projectURL = window.location.origin + this.ConfigService.getConfigParam('projectURL');
     this.$transitions.onSuccess({}, ($transition) => {
@@ -149,16 +145,11 @@ class ProjectAuthoringController {
     this.ProjectService.notifyAuthorProjectEnd(this.projectId);
   }
 
-  previewProject(enableConstraints: boolean = true) {
-    const previewProjectEventData = { constraints: enableConstraints };
-    this.saveEvent('projectPreviewed', 'Navigation', previewProjectEventData);
+  previewProject(enableConstraints: boolean = true): void {
+    this.saveEvent('projectPreviewed', 'Navigation', { constraints: enableConstraints });
     window.open(
       `${this.ConfigService.getConfigParam('previewProjectURL')}?constraints=${enableConstraints}`
     );
-  }
-
-  previewProjectWithoutConstraints() {
-    this.previewProject(false);
   }
 
   showOtherConcurrentAuthors(authors) {
