@@ -140,8 +140,8 @@ class ProjectAuthoringController {
     this.subscriptions.unsubscribe();
   }
 
-  endProjectAuthoringSession() {
-    this.unSubscribeFromCurrentAuthors();
+  private endProjectAuthoringSession(): void {
+    this.rxStomp.deactivate();
     this.ProjectService.notifyAuthorProjectEnd(this.projectId);
   }
 
@@ -781,7 +781,7 @@ class ProjectAuthoringController {
     return this.getSelectedNodeIds().length > 0;
   }
 
-  subscribeToCurrentAuthors(projectId) {
+  private subscribeToCurrentAuthors(projectId: number): void {
     this.rxStomp = new RxStomp();
     this.rxStomp.configure({
       brokerURL: this.ConfigService.getWebSocketURL()
@@ -793,10 +793,6 @@ class ProjectAuthoringController {
     this.rxStomp.connected$.subscribe(() => {
       this.ProjectService.notifyAuthorProjectBegin(this.projectId);
     });
-  }
-
-  unSubscribeFromCurrentAuthors() {
-    this.rxStomp.deactivate();
   }
 }
 
