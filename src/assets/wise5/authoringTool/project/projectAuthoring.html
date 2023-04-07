@@ -7,14 +7,7 @@
       layout-wrap
     >
       <div style="margin-bottom: 20px; width: 100%">
-        <div
-          style="text-align: right; background-color: white; position: sticky; top: 0px; z-index: 2"
-        >
-          <div style="color: red">{{$ctrl.currentAuthorsMessage}}</div>
-          <div>
-            <span>&nbsp</span>
-          </div>
-        </div>
+        <concurrent-authors-message [authors]="$ctrl.authors"></concurrent-authors-message>
         <style>
           #commitDiv {
             padding: 10px 0px;

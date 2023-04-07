@@ -15,6 +15,7 @@ import { temporarilyHighlightElement } from '../../common/dom/dom';
 
 class ProjectAuthoringController {
   $translate: any;
+  authors: string[] = [];
   projectId: number;
   items: any;
   nodeIds: [];
@@ -28,7 +29,6 @@ class ProjectAuthoringController {
   idToNode: any;
   copyMode: boolean;
   nodeToAdd: any;
-  currentAuthorsMessage: string = '';
   stepNodeSelected: boolean = false;
   activityNodeSelected: boolean = false;
   moveMode: boolean;
@@ -150,18 +150,6 @@ class ProjectAuthoringController {
     window.open(
       `${this.ConfigService.getConfigParam('previewProjectURL')}?constraints=${enableConstraints}`
     );
-  }
-
-  showOtherConcurrentAuthors(authors) {
-    const myUsername = this.ConfigService.getMyUsername();
-    authors.splice(authors.indexOf(myUsername), 1);
-    if (authors.length > 0) {
-      this.currentAuthorsMessage = this.$translate('concurrentAuthorsWarning', {
-        currentAuthors: authors.join(', ')
-      });
-    } else {
-      this.currentAuthorsMessage = '';
-    }
   }
 
   saveProject() {
@@ -800,8 +788,7 @@ class ProjectAuthoringController {
     });
     this.rxStomp.activate();
     this.rxStomp.watch(`/topic/current-authors/${projectId}`).subscribe((message: Message) => {
-      const body = JSON.parse(message.body);
-      this.showOtherConcurrentAuthors(body);
+      this.authors = JSON.parse(message.body);
     });
     this.rxStomp.connected$.subscribe(() => {
       this.ProjectService.notifyAuthorProjectBegin(this.projectId);

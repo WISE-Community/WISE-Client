@@ -12,6 +12,7 @@ import { ProjectAuthoringComponent } from '../../authoringTool/project/projectAu
 import { ProjectInfoAuthoringComponent } from '../../authoringTool/info/projectInfoAuthoringComponent';
 import { RubricAuthoringComponent } from '../../authoringTool/rubric/rubric-authoring.component';
 import { RecoveryAuthoringComponent } from '../recovery-authoring/recovery-authoring.component';
+import { ConcurrentAuthorsMessageComponent } from '../concurrent-authors-message/concurrent-authors-message.component';
 
 export default angular
   .module('projectAuthoringModule', [])
@@ -25,6 +26,12 @@ export default angular
     'advancedProjectAuthoringComponent',
     downgradeComponent({
       component: AdvancedProjectAuthoringComponent
+    }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'concurrentAuthorsMessage',
+    downgradeComponent({
+      component: ConcurrentAuthorsMessageComponent
     }) as angular.IDirectiveFactory
   )
   .directive(

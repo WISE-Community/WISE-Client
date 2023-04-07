@@ -25,6 +25,7 @@ import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/rec
 import { AddLessonConfigureComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component';
 import { AddLessonChooseLocationComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-location/add-lesson-choose-location.component';
 import { ConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component';
+import { ConcurrentAuthorsMessageComponent } from '../../assets/wise5/authoringTool/concurrent-authors-message/concurrent-authors-message.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/c
     ChooseNewComponentLocation,
     ChooseNewNodeLocation,
     ChooseNewNodeTemplate,
+    ConcurrentAuthorsMessageComponent,
     ConstraintAuthoringComponent,
     NodeAdvancedBranchAuthoringComponent,
     NodeAdvancedConstraintAuthoringComponent,
