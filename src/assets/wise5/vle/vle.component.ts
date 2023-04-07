@@ -13,6 +13,7 @@ import { AnnotationService } from '../services/annotationService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WiseLinkService } from '../../../app/services/wiseLinkService';
 import { convertToPNGFile } from '../common/canvas/canvas';
+import { NodeStatusService } from '../services/nodeStatusService';
 
 @Component({
   selector: 'vle',
@@ -42,6 +43,7 @@ export class VLEComponent implements AfterViewInit {
     private configService: ConfigService,
     private dialog: MatDialog,
     private initializeVLEService: InitializeVLEService,
+    private nodeStatusService: NodeStatusService,
     private notebookService: NotebookService,
     private notificationService: NotificationService,
     private projectService: VLEProjectService,
@@ -164,7 +166,7 @@ export class VLEComponent implements AfterViewInit {
         let currentNodeId = this.currentNode.id;
 
         this.studentDataService.updateStackHistory(currentNodeId);
-        this.studentDataService.updateVisitedNodesHistory(currentNodeId);
+        this.nodeStatusService.setNodeIsVisited(currentNodeId);
 
         let componentId, componentType, category, eventName, eventData, eventNodeId;
         if (previousNode != null && this.projectService.isGroupNode(previousNode.id)) {
