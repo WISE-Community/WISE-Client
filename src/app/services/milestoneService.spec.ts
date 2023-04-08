@@ -101,7 +101,6 @@ describe('MilestoneService', () => {
     utilService = TestBed.inject(UtilService);
   });
   getProjectMilestones();
-  getProjectMilestoneReports();
   getMilestoneReportByNodeId();
   getProjectMilestoneStatus();
   insertMilestoneItems();
@@ -175,27 +174,6 @@ function getProjectMilestones() {
       spyOn(projectService, 'getAchievements').and.returnValue(achievements);
       const milestones = service.getProjectMilestones();
       expect(milestones.length).toEqual(2);
-    });
-  });
-}
-
-function getProjectMilestoneReports() {
-  describe('getProjectMilestoneReports()', () => {
-    it('should get project milestone reports', () => {
-      const achievements = {
-        isEnabled: true,
-        items: [
-          {
-            type: 'milestone'
-          },
-          {
-            type: 'milestoneReport'
-          }
-        ]
-      };
-      spyOn(projectService, 'getAchievements').and.returnValue(achievements);
-      const milestoneReports = service.getProjectMilestoneReports();
-      expect(milestoneReports.length).toEqual(1);
     });
   });
 }

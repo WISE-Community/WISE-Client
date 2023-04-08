@@ -17,7 +17,7 @@ export class MilestoneService {
   projectMilestones: any[];
   workgroupIds: any[];
   workgroupsStorage: any[] = [];
-  satisfyCriteriaFuncNameToFunc = {
+  private satisfyCriteriaFuncNameToFunc = {
     percentOfScoresGreaterThan: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
       return this.isPercentOfScoresSatisfiesComparator(
         satisfyCriterion,
@@ -104,21 +104,20 @@ export class MilestoneService {
     return [];
   }
 
-  getProjectMilestoneReports() {
-    return this.getProjectMilestones().filter((milestone) => {
-      return milestone.type === 'milestoneReport';
-    });
-  }
-
-  getMilestoneReportByNodeId(nodeId: string) {
-    const milestoneReports = this.getProjectMilestoneReports();
-    for (const milestonReport of milestoneReports) {
+  getMilestoneReportByNodeId(nodeId: string): any {
+    for (const milestonReport of this.getProjectMilestoneReports()) {
       const referencedComponent = this.getReferencedComponent(milestonReport);
       if (referencedComponent.nodeId === nodeId) {
         return this.getProjectMilestoneStatus(milestonReport.id);
       }
     }
     return null;
+  }
+
+  private getProjectMilestoneReports(): any[] {
+    return this.getProjectMilestones().filter((milestone) => {
+      return milestone.type === 'milestoneReport';
+    });
   }
 
   getProjectMilestoneStatus(milestoneId: string) {
@@ -312,13 +311,13 @@ export class MilestoneService {
     }
   }
 
-  isTemplateCriterionSatisfied(satisfyCriterion: any, aggregateAutoScores: any[]) {
-    if (satisfyCriterion.function === 'default') {
-      return true;
-    }
-    return this.satisfyCriteriaFuncNameToFunc[satisfyCriterion.function](
-      satisfyCriterion,
-      aggregateAutoScores
+  isTemplateCriterionSatisfied(satisfyCriterion: any, aggregateAutoScores: any[]): boolean {
+    return (
+      satisfyCriterion.function === 'default' ||
+      this.satisfyCriteriaFuncNameToFunc[satisfyCriterion.function](
+        satisfyCriterion,
+        aggregateAutoScores
+      )
     );
   }
 
