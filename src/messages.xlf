@@ -7293,7 +7293,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="db39827bab98f8af5e0a97d4614a0d667e98fcb6" datatype="html">
@@ -8477,18 +8477,18 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">39,40</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="c3840ff3430f7c6130e4d7a2f0aec5a7cb3ebb3a" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ completedTotal() }}"/> completed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="a7b809683879d9bbbcc3e267d32b6d1843e71f37" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ activeTotal() }}"/> running</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
           <context context-type="linenumber">47</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="c3840ff3430f7c6130e4d7a2f0aec5a7cb3ebb3a" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ completedTotal() }}"/> completed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1e5e23363e949f7dcbaf034bdb141a561132a10e" datatype="html">

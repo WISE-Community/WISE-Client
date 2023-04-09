@@ -40,14 +40,14 @@
         {{ filteredRuns.length }}</ng-container
       >
       <span class="mat-caption" *ngIf="!isShowArchived && filteredRuns.length">
-        (<ng-container *ngIf="scheduledTotal()"
-          ><span i18n>{{ scheduledTotal() }} scheduled</span>,
+        (<ng-container *ngIf="completedTotal()"
+          ><span i18n>{{ completedTotal() }} completed</span>,
         </ng-container>
         <ng-container
           ><span i18n>{{ activeTotal() }} running</span></ng-container
         >
-        <ng-container *ngIf="completedTotal()"
-          >, <span i18n>{{ completedTotal() }} completed</span></ng-container
+        <ng-container *ngIf="scheduledTotal()"
+          >, <span i18n>{{ scheduledTotal() }} scheduled</span></ng-container
         >)
       </span>
       <ng-container *ngIf="searchValue || filterValue">
