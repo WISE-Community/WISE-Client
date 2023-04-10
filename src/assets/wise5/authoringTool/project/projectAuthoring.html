@@ -7,7 +7,11 @@
       layout-wrap
     >
       <div style="margin-bottom: 20px; width: 100%">
-        <concurrent-authors-message [authors]="$ctrl.authors"></concurrent-authors-message>
+        <concurrent-authors-message
+          [authors]="$ctrl.authors"
+          class="center app-background"
+          style="position: sticky; top: 1px; padding: 4px 0; display: block; z-index: 3;"
+        ></concurrent-authors-message>
         <style>
           #commitDiv {
             padding: 10px 0px;
@@ -88,7 +92,7 @@
               background-color: white;
               margin-bottom: 15px;
               position: sticky;
-              top: 17px;
+              top: 26px;
               z-index: 2;
             "
           >

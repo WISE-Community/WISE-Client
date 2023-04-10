@@ -8815,10 +8815,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2969037350007366541" datatype="html">
-        <source><x id="PH" equiv-text="this.authors.join(
-            &apos;,&apos;
-          )"/> is also currently editing this unit. Be careful not to overwrite each other&apos;s work!</source>
+      <trans-unit id="1318680729593701201" datatype="html">
+        <source>Also currently editing this unit: <x id="PH" equiv-text="this.authors.join(
+            &apos;, &apos;
+          )"/>. Be careful not to overwrite each other&apos;s work!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/concurrent-authors-message/concurrent-authors-message.component.ts</context>
           <context context-type="linenumber">18,20</context>

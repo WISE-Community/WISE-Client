@@ -15,9 +15,9 @@ export class ConcurrentAuthorsMessageComponent {
     this.authors.splice(this.authors.indexOf(this.configService.getMyUsername()), 1);
     this.message =
       this.authors.length > 0
-        ? $localize`${this.authors.join(
-            ','
-          )} is also currently editing this unit. Be careful not to overwrite each other's work!`
+        ? $localize`Also currently editing this unit: ${this.authors.join(
+            ', '
+          )}. Be careful not to overwrite each other's work!`
         : '';
   }
 }
