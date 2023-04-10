@@ -10,6 +10,8 @@ import { CompletionService } from './completionService';
 
 @Injectable()
 export class NodeStatusService {
+  private nodeIdToIsVisited: { [nodeId: string]: boolean } = {};
+
   constructor(
     private completionService: CompletionService,
     private constraintService: ConstraintService,
@@ -18,12 +20,26 @@ export class NodeStatusService {
     private notebookService: NotebookService,
     private projectService: ProjectService
   ) {
+    this.dataService.dataRetrieved$.subscribe((studentData) => {
+      this.populateNodeIdToIsVisited(studentData.events);
+      this.updateNodeStatuses();
+    });
     this.dataService.updateNodeStatuses$.subscribe(() => {
       this.updateNodeStatuses();
     });
     this.notebookService.notebookUpdated$.subscribe(() => {
       this.updateNodeStatuses();
     });
+  }
+
+  private populateNodeIdToIsVisited(events: any[]): void {
+    events
+      .filter((event) => event.event === 'nodeEntered')
+      .forEach((event) => this.setNodeIsVisited(event.nodeId));
+  }
+
+  setNodeIsVisited(nodeId: string): void {
+    this.nodeIdToIsVisited[nodeId] = true;
   }
 
   canVisitNode(nodeId: string): boolean {
@@ -90,7 +106,7 @@ export class NodeStatusService {
     } else {
       nodeStatus.isCompleted = this.completionService.isCompleted(nodeId);
     }
-    nodeStatus.isVisited = this.dataService.isNodeVisited(nodeId);
+    nodeStatus.isVisited = this.nodeIdToIsVisited[nodeId] == true;
     return nodeStatus;
   }
 
