@@ -417,8 +417,9 @@ export class GraphStudent extends ComponentStudent {
     } else if (studentData.dataExplorerYAxisLabels != null) {
       for (let [index, yAxis] of Object.entries(this.yAxis)) {
         (yAxis as any).title.text = studentData.dataExplorerYAxisLabels[index];
-        (yAxis as any).title.style.color = this.dataExplorerColors[index];
-        (yAxis as any).labels.style.color = this.dataExplorerColors[index];
+        const yAxisIndex = studentData.dataExplorerSeries[index].yAxis;
+        (yAxis as any).title.style.color = this.dataExplorerColors[yAxisIndex];
+        (yAxis as any).labels.style.color = this.dataExplorerColors[yAxisIndex];
       }
     }
   }
