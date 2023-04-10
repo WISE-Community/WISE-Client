@@ -412,10 +412,13 @@ export class GraphService extends ComponentService {
 
   getAxisTitle(series: any, axisObj: any): string {
     if (Array.isArray(axisObj)) {
-      if (axisObj[series.index].title.text == null || axisObj[series.index].title.text === '') {
-        return series.name;
-      } else {
-        return axisObj[series.index].title.text;
+      const axisIndex = series.options.yAxis == null ? series.index : series.options.yAxis;
+      if (axisObj[axisIndex] != null) {
+        if (axisObj[axisIndex].title.text == null || axisObj[axisIndex].title.text === '') {
+          return series.name;
+        } else {
+          return axisObj[axisIndex].title.text;
+        }
       }
     } else if (axisObj.title.text == null || axisObj.title.text === '') {
       return series.name;
