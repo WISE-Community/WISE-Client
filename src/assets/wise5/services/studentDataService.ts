@@ -22,7 +22,6 @@ export class StudentDataService extends DataService {
     events: [],
     annotations: []
   };
-  visitedNodesHistory = [];
 
   private nodeClickLockedSource: Subject<any> = new Subject<any>();
   public nodeClickLocked$: Observable<any> = this.nodeClickLockedSource.asObservable();
@@ -36,6 +35,8 @@ export class StudentDataService extends DataService {
   public componentSubmitTriggered$: Observable<any> = this.componentSubmitTriggeredSource.asObservable();
   private componentStudentDataSource: Subject<any> = new Subject<any>();
   public componentStudentData$: Observable<any> = this.componentStudentDataSource.asObservable();
+  private dataRetrievedSource: Subject<any> = new Subject<any>();
+  public dataRetrieved$: Observable<any> = this.dataRetrievedSource.asObservable();
   private studentWorkSavedToServerSource: Subject<any> = new Subject<any>();
   public studentWorkSavedToServer$: Observable<any> = this.studentWorkSavedToServerSource.asObservable();
   private navItemIsExpandedSource: Subject<any> = new Subject<any>();
@@ -76,8 +77,7 @@ export class StudentDataService extends DataService {
       userId: '0'
     };
     this.AnnotationService.setAnnotations(this.studentData.annotations);
-    this.populateHistories(this.studentData.events);
-    this.updateNodeStatuses();
+    this.dataRetrievedSource.next(this.studentData);
   }
 
   updateNodeStatuses(): void {
@@ -121,7 +121,7 @@ export class StudentDataService extends DataService {
     this.studentData.annotations = resultData.annotations;
     this.AnnotationService.setAnnotations(this.studentData.annotations);
     this.populateHistories(this.studentData.events);
-    this.updateNodeStatuses();
+    this.dataRetrievedSource.next(this.studentData);
     return this.studentData;
   }
 
@@ -199,11 +199,9 @@ export class StudentDataService extends DataService {
 
   populateHistories(events) {
     this.stackHistory = [];
-    this.visitedNodesHistory = [];
     for (const event of events) {
       if (event.event === 'nodeEntered') {
         this.updateStackHistory(event.nodeId);
-        this.updateVisitedNodesHistory(event.nodeId);
       }
     }
   }
@@ -229,23 +227,6 @@ export class StudentDataService extends DataService {
     } else {
       this.stackHistory.splice(indexOfNodeId + 1, this.stackHistory.length);
     }
-  }
-
-  updateVisitedNodesHistory(nodeId) {
-    const indexOfNodeId = this.visitedNodesHistory.indexOf(nodeId);
-    if (indexOfNodeId === -1) {
-      this.visitedNodesHistory.push(nodeId);
-    }
-  }
-
-  getVisitedNodesHistory() {
-    return this.visitedNodesHistory;
-  }
-
-  isNodeVisited(nodeId) {
-    const visitedNodesHistory = this.visitedNodesHistory;
-    const indexOfNodeId = visitedNodesHistory.indexOf(nodeId);
-    return indexOfNodeId !== -1;
   }
 
   createComponentState() {
