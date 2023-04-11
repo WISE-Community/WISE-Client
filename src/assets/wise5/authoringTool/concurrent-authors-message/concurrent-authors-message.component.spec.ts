@@ -31,11 +31,11 @@ function ngOnChanges() {
     it('should set message to other authors when there are other authors', () => {
       expectMessage(
         ['aa', 'bb'],
-        "bb is also currently editing this unit. Be careful not to overwrite each other's work!"
+        "Also currently editing this unit: bb. Be careful not to overwrite each other's work!"
       );
       expectMessage(
         ['aa', 'bb', 'cc'],
-        "bb,cc is also currently editing this unit. Be careful not to overwrite each other's work!"
+        "Also currently editing this unit: bb, cc. Be careful not to overwrite each other's work!"
       );
     });
   });
