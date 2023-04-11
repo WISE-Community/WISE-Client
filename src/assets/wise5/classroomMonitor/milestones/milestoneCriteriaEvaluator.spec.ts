@@ -1,5 +1,7 @@
 import { copy } from '../../common/object/object';
 import { MilestoneCriteriaEvaluator } from './milestoneCriteriaEvaluator';
+import aggregateAutoScoresSample from '../../../../app/services/sampleData/sample_aggregateAutoScores.json';
+import satisfyCriterionSample from '../../../../app/services/sampleData/sample_satisfyCriterion.json';
 
 function createScoreCounts(counts: any[]): any {
   const countsObject = {};
@@ -128,31 +130,6 @@ function isSatisfied_percentOfScoresEqualTo() {
 
 function isSatisfied_percentOfScoresNotEqualTo() {
   it('should check is percent of scores not equal to', () => {
-    const satisfyCriterionSample = {
-      percentThreshold: 50,
-      targetVariable: 'ki',
-      componentId: 'xfns1g7pga',
-      function: 'percentOfScoresNotEqualTo',
-      id: 'template1SatisfyCriteria0',
-      type: 'autoScore',
-      nodeId: 'node1',
-      value: 3
-    };
-    const aggregateAutoScoresSample = [
-      {
-        nodeId: 'node1',
-        componentId: 'xfns1g7pga',
-        stepTitle: 'Step 1.1: Hello',
-        aggregateAutoScore: {
-          ki: {
-            counts: { 1: 2, 2: 0, 3: 1, 4: 0, 5: 0 },
-            scoreSum: 5,
-            scoreCount: 3,
-            average: 1.67
-          }
-        }
-      }
-    ];
     expect(evaluator.isSatisfied(satisfyCriterionSample, aggregateAutoScoresSample)).toEqual(true);
     const aggregateAutoScores = copy(aggregateAutoScoresSample);
     aggregateAutoScores[0].aggregateAutoScore.ki.counts = { 1: 1, 2: 0, 3: 2, 4: 0, 5: 0 };

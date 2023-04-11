@@ -13,39 +13,14 @@ import { ClassroomStatusService } from '../../assets/wise5/services/classroomSta
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import aggregateAutoScoresSample from './sampleData/sample_aggregateAutoScores.json';
+import satisfyCriterionSample from './sampleData/sample_satisfyCriterion.json';
 
 let service: MilestoneService;
 let achievementService: AchievementService;
 let configService: ConfigService;
 let projectService: ProjectService;
 let teacherDataService: TeacherDataService;
-
-const satisfyCriterionSample = {
-  percentThreshold: 50,
-  targetVariable: 'ki',
-  componentId: 'xfns1g7pga',
-  function: 'percentOfScoresNotEqualTo',
-  id: 'template1SatisfyCriteria0',
-  type: 'autoScore',
-  nodeId: 'node1',
-  value: 3
-};
-
-const aggregateAutoScoresSample = [
-  {
-    nodeId: 'node1',
-    componentId: 'xfns1g7pga',
-    stepTitle: 'Step 1.1: Hello',
-    aggregateAutoScore: {
-      ki: {
-        counts: { 1: 2, 2: 0, 3: 1, 4: 0, 5: 0 },
-        scoreSum: 5,
-        scoreCount: 3,
-        average: 1.67
-      }
-    }
-  }
-];
 
 const reportSettingsCustomScoreValuesSample = {
   customScoreValues: {
