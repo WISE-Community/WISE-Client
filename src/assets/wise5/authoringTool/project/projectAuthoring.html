@@ -7,14 +7,11 @@
       layout-wrap
     >
       <div style="margin-bottom: 20px; width: 100%">
-        <div
-          style="text-align: right; background-color: white; position: sticky; top: 0px; z-index: 2"
-        >
-          <div style="color: red">{{$ctrl.currentAuthorsMessage}}</div>
-          <div>
-            <span>&nbsp</span>
-          </div>
-        </div>
+        <concurrent-authors-message
+          [authors]="$ctrl.authors"
+          class="center app-background"
+          style="position: sticky; top: 1px; padding: 4px 0; display: block; z-index: 3;"
+        ></concurrent-authors-message>
         <style>
           #commitDiv {
             padding: 10px 0px;
@@ -95,7 +92,7 @@
               background-color: white;
               margin-bottom: 15px;
               position: sticky;
-              top: 17px;
+              top: 26px;
               z-index: 2;
             "
           >
@@ -225,7 +222,7 @@
               <md-button
                 id="previewProjectWithoutConstraintsButton"
                 class="topButton md-raised md-primary"
-                ng-click="$ctrl.previewProjectWithoutConstraints()"
+                ng-click="$ctrl.previewProject(false)"
                 ng-disabled="$ctrl.insertGroupMode || $ctrl.insertNodeMode"
               >
                 <md-icon>visibility_off</md-icon>
