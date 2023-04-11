@@ -24,7 +24,7 @@ export class CompletionService {
     } else if (this.projectService.isGroupNode(nodeId)) {
       result = this.isGroupNodeCompleted(nodeId);
     } else if (this.projectService.isApplicationNode(nodeId)) {
-      result = this.dataService.nodeStatuses[nodeId].isCompleted;
+      result = this.dataService.nodeStatuses[nodeId]?.isCompleted;
     }
     return result;
   }
