@@ -8,7 +8,7 @@ export class ConstraintsAuthoringComponent {
 
   constructor(protected projectService: TeacherProjectService) {}
 
-  protected addConstraint(): string {
+  protected addConstraint(): Constraint {
     const newNodeConstraintId = this.getNewNodeConstraintId();
     const constraint = new Constraint({
       id: newNodeConstraintId,
@@ -23,7 +23,7 @@ export class ConstraintsAuthoringComponent {
     });
     this.content.constraints.push(constraint);
     this.saveProject();
-    return newNodeConstraintId;
+    return constraint;
   }
 
   private getNewNodeConstraintId(): string {

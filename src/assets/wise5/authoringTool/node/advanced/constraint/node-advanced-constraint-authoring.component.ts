@@ -26,10 +26,11 @@ export class NodeAdvancedConstraintAuthoringComponent extends ConstraintsAuthori
   }
 
   protected addConstraintAndScrollToBottom(): void {
-    const newNodeConstraintId = this.addConstraint();
+    const constraint = this.addConstraint();
+    constraint.targetId = this.content.id;
     setTimeout(() => {
       this.projectService.scrollToBottomOfPage();
-      temporarilyHighlightElement(newNodeConstraintId);
+      temporarilyHighlightElement(constraint.id);
     });
   }
 }
