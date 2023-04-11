@@ -7,60 +7,15 @@ import { ProjectService } from './projectService';
 import { TeacherDataService } from './teacherDataService';
 import { Injectable } from '@angular/core';
 import { copy } from '../common/object/object';
+import { MilestoneCriteriaEvaluator } from '../classroomMonitor/milestones/milestoneCriteriaEvaluator';
 
 @Injectable()
 export class MilestoneService {
-  numberOfStudentsCompletedStorage: any[] = [];
   numberOfStudentsInRun: number;
-  percentageCompletedStorage: any[] = [];
   periodId: any;
   projectMilestones: any[];
+  private milestoneCriteriaEvaluator = new MilestoneCriteriaEvaluator();
   workgroupIds: any[];
-  workgroupsStorage: any[] = [];
-  satisfyCriteriaFuncNameToFunc = {
-    percentOfScoresGreaterThan: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
-      return this.isPercentOfScoresSatisfiesComparator(
-        satisfyCriterion,
-        aggregateAutoScores,
-        this.greaterThan
-      );
-    },
-    percentOfScoresGreaterThanOrEqualTo: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
-      return this.isPercentOfScoresSatisfiesComparator(
-        satisfyCriterion,
-        aggregateAutoScores,
-        this.greaterThanEqualTo
-      );
-    },
-    percentOfScoresLessThan: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
-      return this.isPercentOfScoresSatisfiesComparator(
-        satisfyCriterion,
-        aggregateAutoScores,
-        this.lessThan
-      );
-    },
-    percentOfScoresLessThanOrEqualTo: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
-      return this.isPercentOfScoresSatisfiesComparator(
-        satisfyCriterion,
-        aggregateAutoScores,
-        this.lessThanEqualTo
-      );
-    },
-    percentOfScoresEqualTo: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
-      return this.isPercentOfScoresSatisfiesComparator(
-        satisfyCriterion,
-        aggregateAutoScores,
-        this.equalTo
-      );
-    },
-    percentOfScoresNotEqualTo: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
-      return this.isPercentOfScoresSatisfiesComparator(
-        satisfyCriterion,
-        aggregateAutoScores,
-        this.notEqualTo
-      );
-    }
-  };
 
   constructor(
     private achievementService: AchievementService,
@@ -69,30 +24,6 @@ export class MilestoneService {
     private projectService: ProjectService,
     private teacherDataService: TeacherDataService
   ) {}
-
-  private greaterThanEqualTo(a: number, b: number): boolean {
-    return a >= b;
-  }
-
-  private greaterThan(a: number, b: number): boolean {
-    return a > b;
-  }
-
-  private lessThanEqualTo(a: number, b: number): boolean {
-    return a <= b;
-  }
-
-  private lessThan(a: number, b: number): boolean {
-    return a < b;
-  }
-
-  private equalTo(a: number, b: number): boolean {
-    return a === b;
-  }
-
-  private notEqualTo(a: number, b: number): boolean {
-    return a !== b;
-  }
 
   getProjectMilestones() {
     const achievements = this.projectService.getAchievements();
@@ -104,21 +35,20 @@ export class MilestoneService {
     return [];
   }
 
-  getProjectMilestoneReports() {
-    return this.getProjectMilestones().filter((milestone) => {
-      return milestone.type === 'milestoneReport';
-    });
-  }
-
-  getMilestoneReportByNodeId(nodeId: string) {
-    const milestoneReports = this.getProjectMilestoneReports();
-    for (const milestonReport of milestoneReports) {
+  getMilestoneReportByNodeId(nodeId: string): any {
+    for (const milestonReport of this.getProjectMilestoneReports()) {
       const referencedComponent = this.getReferencedComponent(milestonReport);
       if (referencedComponent.nodeId === nodeId) {
         return this.getProjectMilestoneStatus(milestonReport.id);
       }
     }
     return null;
+  }
+
+  private getProjectMilestoneReports(): any[] {
+    return this.getProjectMilestones().filter((milestone) => {
+      return milestone.type === 'milestoneReport';
+    });
   }
 
   getProjectMilestoneStatus(milestoneId: string) {
@@ -298,10 +228,10 @@ export class MilestoneService {
     };
   }
 
-  isTemplateMatch(template: any, aggregateAutoScores: any[]) {
+  isTemplateMatch(template: any, aggregateAutoScores: any[]): boolean {
     const matchedCriteria = [];
     for (const satisfyCriterion of template.satisfyCriteria) {
-      if (this.isTemplateCriterionSatisfied(satisfyCriterion, aggregateAutoScores)) {
+      if (this.milestoneCriteriaEvaluator.isSatisfied(satisfyCriterion, aggregateAutoScores)) {
         matchedCriteria.push(satisfyCriterion);
       }
     }
@@ -310,64 +240,6 @@ export class MilestoneService {
     } else if (template.satisfyConditional === 'any') {
       return matchedCriteria.length > 0;
     }
-  }
-
-  isTemplateCriterionSatisfied(satisfyCriterion: any, aggregateAutoScores: any[]) {
-    if (satisfyCriterion.function === 'default') {
-      return true;
-    }
-    return this.satisfyCriteriaFuncNameToFunc[satisfyCriterion.function](
-      satisfyCriterion,
-      aggregateAutoScores
-    );
-  }
-
-  private getComparatorSum(
-    satisfyCriterion: any,
-    aggregateData: any,
-    possibleScores: number[],
-    comparator: any
-  ): number {
-    let sum = 0;
-    for (const possibleScore of possibleScores) {
-      if (comparator(possibleScore, satisfyCriterion.value)) {
-        sum += aggregateData.counts[possibleScore];
-      }
-    }
-    return sum;
-  }
-
-  private isPercentOfScoresSatisfiesComparator(
-    satisfyCriterion: any,
-    aggregateAutoScores: any[],
-    comparator: any
-  ): boolean {
-    const aggregateData = this.getAggregateData(satisfyCriterion, aggregateAutoScores);
-    const possibleScores = this.getPossibleScores(aggregateData);
-    const sum = this.getComparatorSum(satisfyCriterion, aggregateData, possibleScores, comparator);
-    return this.isPercentThresholdSatisfied(satisfyCriterion, aggregateData, sum);
-  }
-
-  getAggregateData(satisfyCriterion: any, aggregateAutoScores: any[]) {
-    for (const aggregateAutoScore of aggregateAutoScores) {
-      if (aggregateAutoScore.componentId === satisfyCriterion.componentId) {
-        return aggregateAutoScore.aggregateAutoScore[satisfyCriterion.targetVariable];
-      }
-    }
-    throw new Error(`Aggregate data not found for component ${satisfyCriterion.componentId}`);
-  }
-
-  getPossibleScores(aggregateData: any) {
-    return Object.keys(aggregateData.counts).map(Number).sort();
-  }
-
-  private isPercentThresholdSatisfied(
-    satisfyCriterion: any,
-    aggregateData: any,
-    sum: number
-  ): boolean {
-    const percentOfScores = (100 * sum) / aggregateData.scoreCount;
-    return percentOfScores >= satisfyCriterion.percentThreshold;
   }
 
   getSatisfyCriteriaReferencedComponents(projectAchievement: any) {

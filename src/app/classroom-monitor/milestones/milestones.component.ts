@@ -84,7 +84,7 @@ export class MilestonesComponent {
   showMilestoneDetails(milestone: any): void {
     this.dialog.open(MilestoneDetailsDialogComponent, {
       data: milestone,
-      width: '1280px'
+      panelClass: 'dialog-lg'
     });
   }
 }
