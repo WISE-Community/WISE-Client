@@ -130,7 +130,9 @@ export class NodeGradingViewComponent implements OnInit {
   protected retrieveStudentData(node: Node = this.node): void {
     this.teacherDataService.retrieveStudentDataForNode(node).then(() => {
       this.teacherWorkgroupId = this.configService.getWorkgroupId();
-      this.workgroups = copy(this.configService.getClassmateUserInfos());
+      this.workgroups = copy(this.configService.getClassmateUserInfos()).filter(
+        (workgroup) => workgroup.workgroupId != null
+      );
       this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;
       this.setWorkgroupsById();
       this.sortWorkgroups();
@@ -272,7 +274,7 @@ export class NodeGradingViewComponent implements OnInit {
       this.nodeId
     );
     const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
-    workgroup.nodeStatus = studentStatus.nodeStatuses[this.nodeId];
+    workgroup.nodeStatus = studentStatus.nodeStatuses[this.nodeId] || {};
   }
 
   private workgroupHasNewAlert(alertNotifications: Notification[]): boolean {
