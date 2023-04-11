@@ -1,0 +1,10 @@
+{
+      "percentThreshold": 50,
+      "targetVariable": "ki",
+      "componentId": "xfns1g7pga",
+      "function": "percentOfScoresNotEqualTo",
+      "id": "template1SatisfyCriteria0",
+      "type": "autoScore",
+      "nodeId": "node1",
+      "value": 3
+    }

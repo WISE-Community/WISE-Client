@@ -435,7 +435,8 @@ export class NodeGradingViewComponent implements OnInit {
 
   showReport(): void {
     this.dialog.open(MilestoneDetailsDialogComponent, {
-      data: this.milestoneReport
+      data: this.milestoneReport,
+      panelClass: 'dialog-lg'
     });
   }
 
