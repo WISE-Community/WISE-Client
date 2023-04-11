@@ -15,6 +15,7 @@ import { temporarilyHighlightElement } from '../../common/dom/dom';
 
 class ProjectAuthoringController {
   $translate: any;
+  authors: string[] = [];
   projectId: number;
   items: any;
   nodeIds: [];
@@ -28,11 +29,8 @@ class ProjectAuthoringController {
   idToNode: any;
   copyMode: boolean;
   nodeToAdd: any;
-  projectScriptFilename: string;
-  currentAuthorsMessage: string = '';
   stepNodeSelected: boolean = false;
   activityNodeSelected: boolean = false;
-  metadata: any;
   moveMode: boolean;
   projectURL: string;
   rxStomp: RxStomp;
@@ -94,10 +92,8 @@ class ProjectAuthoringController {
     this.inactiveStepNodes = this.ProjectService.getInactiveStepNodes();
     this.inactiveNodes = this.ProjectService.getInactiveNodes();
     this.idToNode = this.ProjectService.getIdToNode();
-    this.projectScriptFilename = this.ProjectService.getProjectScriptFilename();
     this.stepNodeSelected = false;
     this.activityNodeSelected = false;
-    this.metadata = this.ProjectService.getProjectMetadata();
     this.subscribeToCurrentAuthors(this.projectId);
     this.projectURL = window.location.origin + this.ConfigService.getConfigParam('projectURL');
     this.$transitions.onSuccess({}, ($transition) => {
@@ -144,33 +140,16 @@ class ProjectAuthoringController {
     this.subscriptions.unsubscribe();
   }
 
-  endProjectAuthoringSession() {
-    this.unSubscribeFromCurrentAuthors();
+  private endProjectAuthoringSession(): void {
+    this.rxStomp.deactivate();
     this.ProjectService.notifyAuthorProjectEnd(this.projectId);
   }
 
-  previewProject(enableConstraints: boolean = true) {
-    const previewProjectEventData = { constraints: enableConstraints };
-    this.saveEvent('projectPreviewed', 'Navigation', previewProjectEventData);
+  previewProject(enableConstraints: boolean = true): void {
+    this.saveEvent('projectPreviewed', 'Navigation', { constraints: enableConstraints });
     window.open(
       `${this.ConfigService.getConfigParam('previewProjectURL')}?constraints=${enableConstraints}`
     );
-  }
-
-  previewProjectWithoutConstraints() {
-    this.previewProject(false);
-  }
-
-  showOtherConcurrentAuthors(authors) {
-    const myUsername = this.ConfigService.getMyUsername();
-    authors.splice(authors.indexOf(myUsername), 1);
-    if (authors.length > 0) {
-      this.currentAuthorsMessage = this.$translate('concurrentAuthorsWarning', {
-        currentAuthors: authors.join(', ')
-      });
-    } else {
-      this.currentAuthorsMessage = '';
-    }
   }
 
   saveProject() {
@@ -802,23 +781,18 @@ class ProjectAuthoringController {
     return this.getSelectedNodeIds().length > 0;
   }
 
-  subscribeToCurrentAuthors(projectId) {
+  private subscribeToCurrentAuthors(projectId: number): void {
     this.rxStomp = new RxStomp();
     this.rxStomp.configure({
       brokerURL: this.ConfigService.getWebSocketURL()
     });
     this.rxStomp.activate();
     this.rxStomp.watch(`/topic/current-authors/${projectId}`).subscribe((message: Message) => {
-      const body = JSON.parse(message.body);
-      this.showOtherConcurrentAuthors(body);
+      this.authors = JSON.parse(message.body);
     });
     this.rxStomp.connected$.subscribe(() => {
       this.ProjectService.notifyAuthorProjectBegin(this.projectId);
     });
-  }
-
-  unSubscribeFromCurrentAuthors() {
-    this.rxStomp.deactivate();
   }
 }
 
