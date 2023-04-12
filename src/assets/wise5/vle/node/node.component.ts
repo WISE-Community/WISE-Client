@@ -147,6 +147,8 @@ export class NodeComponent implements OnInit {
     this.nodeContent = this.projectService.getNodeById(this.node.id);
     this.nodeStatus = this.nodeStatusService.getNodeStatusByNodeId(this.node.id);
     this.components = this.getComponents();
+    this.dirtyComponentIds = [];
+    this.dirtySubmitComponentIds = [];
     this.updateComponentVisibility();
 
     if (
