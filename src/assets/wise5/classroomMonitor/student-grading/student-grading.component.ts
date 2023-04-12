@@ -196,7 +196,7 @@ export class StudentGradingComponent implements OnInit {
       if (this.projectService.isApplicationNode(id)) {
         let node = copy(this.projectService.getNodeById(id));
         this.nodesById[id] = node;
-        this.updateNode(id, true);
+        this.updateNode(id);
       }
     }
   }
@@ -204,9 +204,8 @@ export class StudentGradingComponent implements OnInit {
   /**
    * Update statuses, scores, notifications, etc. for a node object
    * @param nodeID a node ID number
-   * @param init Boolean whether we're in controller initialization or not
    */
-  private updateNode(nodeId: string, init = false): void {
+  private updateNode(nodeId: string): void {
     const node = this.nodesById[nodeId];
     if (node) {
       let alertNotifications = this.getAlertNotificationsByNodeId(nodeId);
@@ -229,6 +228,9 @@ export class StudentGradingComponent implements OnInit {
       }
       node.order = this.projectService.getOrderById(nodeId);
       node.show = this.isNodeShown(nodeId);
+      node.nodeStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(
+        this.workgroupId
+      )?.nodeStatuses[nodeId];
     }
   }
 

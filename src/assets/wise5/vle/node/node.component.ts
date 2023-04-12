@@ -6,6 +6,7 @@ import { Node } from '../../common/Node';
 import { ComponentService } from '../../components/componentService';
 import { ComponentStateWrapper } from '../../components/ComponentStateWrapper';
 import { ConfigService } from '../../services/configService';
+import { ConstraintService } from '../../services/constraintService';
 import { NodeService } from '../../services/nodeService';
 import { NodeStatusService } from '../../services/nodeStatusService';
 import { SessionService } from '../../services/sessionService';
@@ -21,13 +22,12 @@ export class NodeComponent implements OnInit {
   autoSaveInterval: number = 60000; // in milliseconds;
   autoSaveIntervalId: any;
   components: any[];
+  componentToVisible = {};
   dirtyComponentIds: any = [];
   dirtySubmitComponentIds: any = [];
-  endedAndLockedMessage: string;
   isDisabled: boolean;
   node: Node;
   nodeContent: any;
-  nodeId: string;
   nodeStatus: any;
   rubric: string;
   latestComponentState: ComponentState;
@@ -57,6 +57,7 @@ export class NodeComponent implements OnInit {
   constructor(
     private componentService: ComponentService,
     private configService: ConfigService,
+    private constraintService: ConstraintService,
     private nodeService: NodeService,
     private nodeStatusService: NodeStatusService,
     private projectService: VLEProjectService,
@@ -135,17 +136,20 @@ export class NodeComponent implements OnInit {
     this.studentDataService.currentNodeChanged$.subscribe(() => {
       this.initializeNode();
     });
+    this.studentDataService.nodeStatusesChanged$.subscribe(() => {
+      this.updateComponentVisibility();
+    });
   }
 
   initializeNode(): void {
     this.clearLatestComponentState();
-    this.nodeId = this.studentDataService.getCurrentNodeId();
-    this.node = this.projectService.getNode(this.nodeId);
-    this.nodeContent = this.projectService.getNodeById(this.nodeId);
-    this.nodeStatus = this.nodeStatusService.getNodeStatusByNodeId(this.nodeId);
+    this.node = this.projectService.getNode(this.studentDataService.getCurrentNodeId());
+    this.nodeContent = this.projectService.getNodeById(this.node.id);
+    this.nodeStatus = this.nodeStatusService.getNodeStatusByNodeId(this.node.id);
     this.components = this.getComponents();
     this.dirtyComponentIds = [];
     this.dirtySubmitComponentIds = [];
+    this.updateComponentVisibility();
 
     if (
       this.nodeService.currentNodeHasTransitionLogic() &&
@@ -155,22 +159,21 @@ export class NodeComponent implements OnInit {
     }
 
     const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
-      this.nodeId
+      this.node.id
     );
     if (latestComponentState) {
       this.latestComponentState = latestComponentState;
     }
 
-    const nodeId = this.nodeId;
     const componentId = null;
     const componentType = null;
     const category = 'Navigation';
     const event = 'nodeEntered';
     const eventData = {
-      nodeId: nodeId
+      nodeId: this.node.id
     };
     this.studentDataService.saveVLEEvent(
-      nodeId,
+      this.node.id,
       componentId,
       componentType,
       category,
@@ -191,9 +194,16 @@ export class NodeComponent implements OnInit {
     }
   }
 
+  private updateComponentVisibility(): void {
+    this.components.forEach((component) => {
+      const constraintResult = this.constraintService.evaluate(component.constraints);
+      this.componentToVisible[component.id] = constraintResult.isVisible;
+    });
+  }
+
   ngOnDestroy() {
     this.stopAutoSaveInterval();
-    this.nodeUnloaded(this.nodeId);
+    this.nodeUnloaded(this.node.id);
     if (
       this.nodeService.currentNodeHasTransitionLogic() &&
       this.nodeService.evaluateTransitionLogicOn('exitNode')
@@ -209,13 +219,13 @@ export class NodeComponent implements OnInit {
   }
 
   submitButtonClicked(): void {
-    this.nodeService.broadcastNodeSubmitClicked({ nodeId: this.nodeId });
+    this.nodeService.broadcastNodeSubmitClicked({ nodeId: this.node.id });
     const isAutoSave = false;
     const isSubmit = true;
     this.createAndSaveComponentData(isAutoSave, null, isSubmit);
   }
 
-  getComponents(): any[] {
+  private getComponents(): any[] {
     return this.node.components.map((component) => {
       if (this.isDisabled) {
         component.isDisabled = true;
@@ -371,9 +381,9 @@ export class NodeComponent implements OnInit {
       const componentType = component.type;
       if (this.workComponents.includes(componentType)) {
         componentStatePromises.push(
-          this.getComponentStatePromiseFromService(this.nodeId, componentId, isAutoSave, isSubmit)
+          this.getComponentStatePromiseFromService(this.node.id, componentId, isAutoSave, isSubmit)
         );
-        this.componentService.requestComponentState(this.nodeId, componentId, isSubmit);
+        this.componentService.requestComponentState(this.node.id, componentId, isSubmit);
       }
     }
     return componentStatePromises;
@@ -462,7 +472,7 @@ export class NodeComponent implements OnInit {
             connectedComponent.componentId === componentState.componentId
           ) {
             this.componentService.notifyConnectedComponentSubscribers(
-              this.nodeId,
+              this.node.id,
               component.id,
               componentState
             );
@@ -474,7 +484,7 @@ export class NodeComponent implements OnInit {
 
   getComponentStateByComponentId(componentId: string): any {
     return this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
-      this.nodeId,
+      this.node.id,
       componentId
     );
   }
@@ -501,7 +511,7 @@ export class NodeComponent implements OnInit {
     this.subscriptions.add(
       this.sessionService.exit$.subscribe(() => {
         this.stopAutoSaveInterval();
-        this.nodeUnloaded(this.nodeId);
+        this.nodeUnloaded(this.node.id);
       })
     );
   }

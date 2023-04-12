@@ -11,18 +11,11 @@ let dataService: StudentDataService;
 let projectService: ProjectService;
 let service: CompletionService;
 const component1 = { id: 'component1', type: 'OpenResponse' } as ComponentContent;
-const component2 = { id: 'component2', type: 'OpenResponse' } as ComponentContent;
-const components = [component1, component2] as ComponentContent[];
 const node1 = { id: 'node1' };
 const stateForComponent1 = {
   nodeId: 'node1',
   componentId: 'component1',
   studentData: { response: 'Hello World 1' }
-};
-const stateForComponent2 = {
-  nodeId: 'node1',
-  componentId: 'component2',
-  studentData: { response: 'Hello World 2' }
 };
 describe('CompletionService', () => {
   beforeEach(() => {
@@ -66,15 +59,15 @@ function isCompleted_Step() {
     beforeEach(() => {
       spyOn(projectService, 'isGroupNode').and.returnValue(false);
       spyOn(projectService, 'getNodeById').and.returnValue(node1);
-      spyOn(projectService, 'getComponents').and.returnValue(components);
     });
-    it('should return false when not all components are completed', () => {
-      dataService.studentData.componentStates = [stateForComponent1];
-      expect(service.isCompleted('node1')).toEqual(false);
-    });
-    it('should return true when all the components in the step are completed', () => {
-      dataService.studentData.componentStates = [stateForComponent1, stateForComponent2];
+    it('should return true when isCompleted is set to true in NodeStatuses', () => {
+      dataService.nodeStatuses = { node1: { isCompleted: true } };
       expect(service.isCompleted('node1')).toEqual(true);
+    });
+    it('should return false when isCompleted is not set or is set to false in NodeStatuses', () => {
+      dataService.nodeStatuses = { node1: { isCompleted: false } };
+      expect(service.isCompleted('node1')).toEqual(false);
+      expect(service.isCompleted('node2')).toBeFalsy();
     });
   });
 }

@@ -1,10 +1,11 @@
 <div class="body-div">
   <div fxLayoutGap="16px">
-    <mat-label i18n>Add Constraint</mat-label>
+    <mat-label i18n>Add Visibility Constraint</mat-label>
     <button
       mat-raised-button
       color="primary"
-      (click)="addConstraintAndScrollToBottom()"
+      (click)="addConstraint()"
+      [disabled]="content.constraints.length > 0"
       matTooltip="Add Constraint"
       matTooltipPosition="above"
       i18n-matTooltip
@@ -17,7 +18,7 @@
     class="constraints-div"
     fxLayoutGap="16px"
   >
-    <b i18n>Constraint {{ constraintIndex + 1 }}</b>
+    <b i18n>Constraint</b>
     <button
       mat-raised-button
       color="primary"
@@ -29,19 +30,6 @@
       <mat-icon>delete</mat-icon>
     </button>
     <br />
-    <node-constraint-authoring [constraint]="constraint"></node-constraint-authoring>
-  </div>
-  <div *ngIf="content.constraints.length > 0" fxLayoutGap="16px">
-    <mat-label i18n>Add Constraint</mat-label>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="addConstraintAndScrollToBottom()"
-      matTooltip="Add Constraint"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>add</mat-icon>
-    </button>
+    <component-constraint-authoring [constraint]="constraint"></component-constraint-authoring>
   </div>
 </div>

@@ -1,8 +1,10 @@
+import { RemovalCriteria } from './removalCriteria';
+
 export class Constraint {
   action: string;
   id: string;
   removalConditional: string;
-  removalCriteria: any[];
+  removalCriteria: RemovalCriteria[];
   targetId: string;
 
   constructor(jsonObject: any = {}) {
