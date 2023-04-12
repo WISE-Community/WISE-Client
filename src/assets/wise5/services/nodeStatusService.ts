@@ -63,9 +63,9 @@ export class NodeStatusService {
   }
 
   private updateStepNodeStatuses(): void {
-    for (const node of this.projectService.getNodes()) {
-      if (!this.projectService.isGroupNode(node.id)) {
-        this.updateNodeStatusByNode(node);
+    for (const nodeId of this.projectService.getFlattenedProjectAsNodeIds()) {
+      if (!this.projectService.isGroupNode(nodeId)) {
+        this.updateNodeStatusByNode(this.projectService.getNodeById(nodeId));
       }
     }
   }
