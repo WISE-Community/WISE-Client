@@ -131,7 +131,9 @@ export class NodeGradingViewComponent implements OnInit {
     this.teacherDataService.retrieveStudentDataForNode(node).then(() => {
       this.teacherWorkgroupId = this.configService.getWorkgroupId();
       this.workgroups = copy(this.configService.getClassmateUserInfos()).filter(
-        (workgroup) => workgroup.workgroupId != null
+        (workgroup) =>
+          workgroup.workgroupId != null &&
+          this.classroomStatusService.hasStudentStatus(workgroup.workgroupId)
       );
       this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;
       this.setWorkgroupsById();

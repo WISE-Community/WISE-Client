@@ -214,7 +214,11 @@ export class StudentProgressComponent implements OnInit {
   }
 
   showStudentGradingView(workgroup: any): void {
-    this.upgrade.$injector.get('$state').go('root.cm.team', { workgroupId: workgroup.workgroupId });
+    if (this.classroomStatusService.hasStudentStatus(workgroup.workgroupId)) {
+      this.upgrade.$injector
+        .get('$state')
+        .go('root.cm.team', { workgroupId: workgroup.workgroupId });
+    }
   }
 
   setSort(value: string): void {
