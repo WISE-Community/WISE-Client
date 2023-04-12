@@ -9734,6 +9734,14 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete the starter state? This will also close this preview window.</target>
       </trans-unit>
+      <trans-unit id="1318680729593701201" datatype="html">
+        <source>Also currently editing this unit: <x id="PH" equiv-text="this.authors.join(             &apos;, &apos;           )"/>. Be careful not to overwrite each other&apos;s work!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/concurrent-authors-message/concurrent-authors-message.component.ts</context>
+          <context context-type="linenumber">18,20</context>
+        </context-group>
+        <target state="needs-translation">Also currently editing this unit: <x id="PH" equiv-text="this.authors.join(             ', '           )"/>. Be careful not to overwrite each other's work!</target>
+      </trans-unit>
       <trans-unit id="1bd5e17c9582661e20763a7634ef07881e33bbd7" datatype="html">
         <source>Action</source>
         <context-group purpose="location">
