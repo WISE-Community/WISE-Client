@@ -337,6 +337,7 @@ export class GraphStudent extends ComponentStudent {
     this.setYAxisLabels(studentData);
     this.setXAxisLabels(studentData);
 
+    const allRegressionSeries = [];
     for (let seriesIndex = 0; seriesIndex < dataExplorerSeries.length; seriesIndex++) {
       const xColumn = dataExplorerSeries[seriesIndex].xColumn;
       const yColumn = dataExplorerSeries[seriesIndex].yColumn;
@@ -359,15 +360,23 @@ export class GraphStudent extends ComponentStudent {
         }
         this.activeTrial.series.push(series);
         if (graphType === 'scatter' && studentData.isDataExplorerScatterPlotRegressionLineEnabled) {
-          const regressionSeries = this.generateDataExplorerRegressionSeries(
+          const singleRegressionSeries = this.generateDataExplorerRegressionSeries(
             studentData.tableData,
             xColumn,
             yColumn,
-            color
+            color,
+            yAxis
           );
-          this.activeTrial.series.push(regressionSeries);
+          allRegressionSeries.push(singleRegressionSeries);
         }
       }
+    }
+
+    // Add all the regression series after all the data series so that all the data series are
+    // located at the expected index within the active trial. We need to do this because we expect
+    // the series index to match up with the axis index like in GraphService.getAxisTitle().
+    for (const singleRegressionSeries of allRegressionSeries) {
+      this.activeTrial.series.push(singleRegressionSeries);
     }
   }
 
@@ -408,8 +417,9 @@ export class GraphStudent extends ComponentStudent {
     } else if (studentData.dataExplorerYAxisLabels != null) {
       for (let [index, yAxis] of Object.entries(this.yAxis)) {
         (yAxis as any).title.text = studentData.dataExplorerYAxisLabels[index];
-        (yAxis as any).title.style.color = this.dataExplorerColors[index];
-        (yAxis as any).labels.style.color = this.dataExplorerColors[index];
+        const yAxisIndex = studentData.dataExplorerSeries[index].yAxis;
+        (yAxis as any).title.style.color = this.dataExplorerColors[yAxisIndex];
+        (yAxis as any).labels.style.color = this.dataExplorerColors[yAxisIndex];
       }
     }
   }
@@ -494,13 +504,21 @@ export class GraphStudent extends ComponentStudent {
     return series;
   }
 
-  generateDataExplorerRegressionSeries(tableData, xColumn, yColumn, color) {
+  private generateDataExplorerRegressionSeries(
+    tableData: any[],
+    xColumn: number,
+    yColumn: number,
+    color: string,
+    yAxis: number
+  ): any {
     const regressionLineData = this.calculateRegressionLineData(tableData, xColumn, yColumn);
     return {
       type: 'line',
       name: 'Regression Line',
       color: color,
-      data: regressionLineData
+      data: regressionLineData,
+      yAxis: yAxis,
+      enableMouseTracking: false
     };
   }
 

@@ -1887,7 +1887,8 @@ function setYAxisLabelsWhenMultipleYAxes() {
       }
     ];
     const studentData = {
-      dataExplorerYAxisLabels: ['Count', 'Price']
+      dataExplorerYAxisLabels: ['Count', 'Price'],
+      dataExplorerSeries: [{ yAxis: 0 }, { yAxis: 1 }]
     };
     component.setYAxisLabels(studentData);
     expect(component.yAxis[0].title.text).toEqual('Count');
