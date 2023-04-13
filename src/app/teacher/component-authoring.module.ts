@@ -79,6 +79,7 @@ import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-
 import { SelectStepAndComponentComponent } from '../authoring-tool/select-step-and-component/select-step-and-component.component';
 import { EditComponentConstraintsComponent } from '../authoring-tool/edit-component-constraints/edit-component-constraints.component';
 import { ComponentConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/constraint/component-constraint-authoring/component-constraint-authoring.component';
+import { EditConstraintRemovalCriteriaComponent } from '../../assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,7 @@ import { ComponentConstraintAuthoringComponent } from '../../assets/wise5/author
     EditConnectedComponentsWithBackgroundComponent,
     EditConnectedComponentDeleteButtonComponent,
     EditConnectedComponentTypeSelectComponent,
+    EditConstraintRemovalCriteriaComponent,
     EditDialogGuidanceAdvancedComponent,
     EditDialogGuidanceComputerAvatarComponent,
     EditDiscussionAdvancedComponent,
@@ -193,6 +195,7 @@ import { ComponentConstraintAuthoringComponent } from '../../assets/wise5/author
     EditConnectedComponentsWithBackgroundComponent,
     EditConnectedComponentDeleteButtonComponent,
     EditConnectedComponentTypeSelectComponent,
+    EditConstraintRemovalCriteriaComponent,
     EditDialogGuidanceAdvancedComponent,
     EditDiscussionAdvancedComponent,
     EditDiscussionConnectedComponentsComponent,
