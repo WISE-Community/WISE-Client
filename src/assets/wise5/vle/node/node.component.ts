@@ -308,7 +308,10 @@ export class NodeComponent implements OnInit {
             }
             const studentWorkList = savedStudentDataResponse.studentWorkList;
             if (!componentId && studentWorkList && studentWorkList.length) {
-              this.latestComponentState = studentWorkList[studentWorkList.length - 1];
+              const latestComponentState = studentWorkList[studentWorkList.length - 1];
+              if (latestComponentState.nodeId === this.node.id) {
+                this.latestComponentState = latestComponentState;
+              }
             } else {
               this.clearLatestComponentState();
             }
