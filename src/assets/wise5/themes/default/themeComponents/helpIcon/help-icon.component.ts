@@ -3,6 +3,8 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithCloseComponent } from '../../../../directives/dialog-with-close/dialog-with-close.component';
+import { WiseLinkService } from '../../../../../../app/services/wiseLinkService';
+import { VLEProjectService } from '../../../../vle/vleProjectService';
 
 @Component({
   selector: 'help-icon',
@@ -16,12 +18,18 @@ export class HelpIconComponent {
   @Input() label: string;
   pulse: boolean = true;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private projectService: VLEProjectService,
+    private wiseLinkService: WiseLinkService
+  ) {}
 
   showRubric() {
     this.dialog.open(DialogWithCloseComponent, {
       data: {
-        content: this.content,
+        content: this.wiseLinkService.generateHtmlWithWiseLink(
+          this.projectService.replaceAssetPaths(this.content)
+        ),
         title: $localize`Rubric`,
         scroll: true
       },

@@ -1,4 +1,4 @@
-import { insertWiseLinks } from '../../../common/wise-link/wise-link';
+import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wise-link';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -26,7 +26,7 @@ class EditRubricComponentController {
   $onInit(): void {
     this.nodeId = this.TeacherDataService.getCurrentNodeId();
     this.node = this.TeacherProjectService.getNodeById(this.nodeId);
-    this.rubric = this.TeacherProjectService.replaceAssetPaths(this.node.rubric);
+    this.rubric = this.TeacherProjectService.replaceAssetPaths(replaceWiseLinks(this.node.rubric));
   }
 
   rubricChanged(): void {

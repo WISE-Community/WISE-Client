@@ -42,7 +42,7 @@ export class ComponentComponent {
     }
     this.setComponent();
     if (this.configService.isPreview()) {
-      this.rubric = this.projectService.replaceAssetPaths(this.component.content.rubric);
+      this.rubric = this.component.content.rubric;
       this.showRubric = this.rubric != null && this.rubric != '';
     }
   }
