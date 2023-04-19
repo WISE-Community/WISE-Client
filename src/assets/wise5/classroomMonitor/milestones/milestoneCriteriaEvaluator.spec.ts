@@ -2,14 +2,7 @@ import { copy } from '../../common/object/object';
 import { MilestoneCriteriaEvaluator } from './milestoneCriteriaEvaluator';
 import aggregateAutoScoresSample from '../../../../app/services/sampleData/sample_aggregateAutoScores.json';
 import satisfyCriterionSample from '../../../../app/services/sampleData/sample_satisfyCriterion.json';
-
-function createScoreCounts(counts: any[]): any {
-  const countsObject = {};
-  for (let i = 0; i < counts.length; i++) {
-    countsObject[i + 1] = counts[i];
-  }
-  return countsObject;
-}
+import { createScoreCounts } from '../../../../app/services/milestone/milestone-test-functions';
 
 const aggregateAutoScores50 = [
   {
