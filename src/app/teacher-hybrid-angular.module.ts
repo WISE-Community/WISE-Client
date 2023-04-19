@@ -35,6 +35,7 @@ import { TeacherNodeIconComponent } from '../assets/wise5/authoringTool/teacher-
 import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 import { NodeService } from '../assets/wise5/services/nodeService';
 import { TeacherNodeService } from '../assets/wise5/services/teacherNodeService';
+import { MilestoneReportService } from '../assets/wise5/services/milestoneReportService';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -60,6 +61,7 @@ export class EmptyComponent {}
     InsertComponentService,
     InsertNodesService,
     MilestoneService,
+    MilestoneReportService,
     MoveNodesService,
     { provide: NodeService, useExisting: TeacherNodeService },
     ProjectAssetService,
