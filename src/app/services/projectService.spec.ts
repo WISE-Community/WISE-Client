@@ -57,6 +57,7 @@ describe('ProjectService', () => {
   getMaxScoreForComponent();
   getMaxScoreForNode();
   getPeerGrouping();
+  parseProject();
   // TODO: add test for service.getFlattenedProjectAsNodeIds()
   // TODO: add test for service.getFirstNodeIdInPathAtIndex()
   // TODO: add test for service.removeNodeIdFromPaths()
@@ -421,6 +422,16 @@ function getPeerGrouping() {
       };
       expect(service.getPeerGrouping(tag1)).toEqual(peerGrouping1);
       expect(service.getPeerGrouping(tag2)).toEqual(peerGrouping2);
+    });
+  });
+}
+
+function parseProject(): void {
+  describe('parseProject()', () => {
+    it('should filter dangling group nodes', () => {
+      service.project = twoStepsProjectJSON;
+      service.parseProject();
+      expect(service.getGroupNodes().map((node) => node.id)).toEqual(['group0', 'group1']);
     });
   });
 }
