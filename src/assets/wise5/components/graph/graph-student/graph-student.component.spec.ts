@@ -12,7 +12,7 @@ import { GraphStudent } from './graph-student.component';
 import { of } from 'rxjs';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
-import { XPlotLine } from '../../../../../app/domain/xPlotLine';
+import { XPlotLine } from '../domain/xPlotLine';
 
 let component: GraphStudent;
 const componentId = 'component1';
