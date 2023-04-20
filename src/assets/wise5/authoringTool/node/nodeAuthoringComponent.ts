@@ -494,46 +494,25 @@ class NodeAuthoringController {
    * @param newComponents an array of the new components we have just added
    */
   highlightNewComponentsAndThenShowComponentAuthoring(newComponents) {
-    this.$timeout(() => {
-      // allow the components time to show up in the UI
-      if (newComponents != null) {
-        for (const newComponent of newComponents) {
-          if (newComponent != null) {
-            temporarilyHighlightElement(newComponent.id);
-          }
+    if (newComponents != null) {
+      for (const newComponent of newComponents) {
+        if (newComponent != null) {
+          temporarilyHighlightElement(newComponent.id);
         }
       }
+    }
 
-      /*
-       * Wait a small amount of time before returning the UI back to the
-       * normal view. This allows the author to see the component number
-       * and type view a little longer so that they can see the change
-       * they just made before we switch back to the normal view.
-       */
-      this.$timeout(() => {
-        this.showComponentAuthoring();
-        this.turnOffInsertComponentMode();
-        this.showDefaultComponentsView();
-        this.clearComponentsToChecked();
+    this.showComponentAuthoring();
+    this.turnOffInsertComponentMode();
+    this.showDefaultComponentsView();
+    this.clearComponentsToChecked();
 
-        /*
-         * use a timeout to wait for the UI to update and then scroll
-         * to the first new component
-         */
-        this.$timeout(() => {
-          if (newComponents != null && newComponents.length > 0) {
-            const componentElement = $('#' + newComponents[0].id);
-            if (componentElement != null) {
-              $('#content').animate(
-                {
-                  scrollTop: componentElement.offset().top - 200
-                },
-                1000
-              );
-            }
-          }
-        }, 1000);
-      }, 1000);
+    // wait for the UI to update and then scroll to the first new component
+    this.$timeout(() => {
+      if (newComponents != null && newComponents.length > 0) {
+        const componentElement = $('#' + newComponents[0].id);
+        $('#content').scrollTop(componentElement.offset().top - 200);
+      }
     });
   }
 
