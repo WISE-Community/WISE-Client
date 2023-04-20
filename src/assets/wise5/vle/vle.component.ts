@@ -78,7 +78,7 @@ export class VLEComponent implements AfterViewInit {
 
     this.runEndedAndLocked = this.configService.isEndedAndLocked();
     let script = this.projectService.getProjectScript();
-    if (script != null) {
+    if (script != null && script !== '') {
       this.projectService.retrieveScript(script).then((script: string) => {
         new Function(script).call(this);
       });
