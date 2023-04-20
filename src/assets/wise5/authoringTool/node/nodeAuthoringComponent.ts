@@ -494,14 +494,6 @@ class NodeAuthoringController {
    * @param newComponents an array of the new components we have just added
    */
   highlightNewComponentsAndThenShowComponentAuthoring(newComponents) {
-    if (newComponents != null) {
-      for (const newComponent of newComponents) {
-        if (newComponent != null) {
-          temporarilyHighlightElement(newComponent.id);
-        }
-      }
-    }
-
     this.showComponentAuthoring();
     this.turnOffInsertComponentMode();
     this.showDefaultComponentsView();
@@ -512,6 +504,9 @@ class NodeAuthoringController {
       if (newComponents != null && newComponents.length > 0) {
         const componentElement = $('#' + newComponents[0].id);
         $('#content').scrollTop(componentElement.offset().top - 200);
+        for (const newComponent of newComponents) {
+          temporarilyHighlightElement(newComponent.id);
+        }
       }
     });
   }
