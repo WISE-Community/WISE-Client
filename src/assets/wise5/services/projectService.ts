@@ -213,10 +213,16 @@ export class ProjectService {
     this.calculateNodeOrderOfProject();
     this.loadNodeIdsInAnyBranch(this.getBranches());
     this.calculateNodeNumbers();
+    this.groupNodes = this.getActiveGroupNodes();
     if (this.project.projectAchievements != null) {
       this.achievements = this.project.projectAchievements;
     }
     this.broadcastProjectParsed();
+  }
+
+  private getActiveGroupNodes(): any[] {
+    const activeNodeIds = Object.keys(this.idToOrder);
+    return this.groupNodes.filter((node) => activeNodeIds.includes(node.id));
   }
 
   instantiateDefaults(): void {

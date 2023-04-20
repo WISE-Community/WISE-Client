@@ -1113,16 +1113,12 @@ export class TeacherProjectService extends ProjectService {
    * objects.
    */
   cleanupBeforeSave() {
-    this.getActiveNodes().forEach((activeNode) => {
+    this.project.nodes.forEach((activeNode) => {
       this.cleanupNode(activeNode);
     });
     this.getInactiveNodes().forEach((inactiveNode) => {
       this.cleanupNode(inactiveNode);
     });
-  }
-
-  getActiveNodes(): any[] {
-    return this.project.nodes;
   }
 
   /**
