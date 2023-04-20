@@ -681,7 +681,7 @@ export class GraphStudent extends ComponentStudent {
     let x = chartXAxis.toValue(e.offsetX, false);
     x = this.makeSureXIsWithinXMinMaxLimits(x);
     if (this.componentContent.showMouseXPlotLine) {
-      this.showXPlotLineAndRectangleIfNecessary(x);
+      this.showXPlotLine(x);
     }
     return x;
   }
@@ -2197,7 +2197,7 @@ export class GraphStudent extends ComponentStudent {
     this.copyPlotBandsIntoTrial(latestStudentDataTrial, latestTrial);
     this.setLastTrialToActive();
     if (studentData.xPlotLine != null) {
-      this.showXPlotLineAndRectangleIfNecessary(studentData.xPlotLine);
+      this.showXPlotLine(studentData.xPlotLine);
     }
     this.setTrialIdsToShow();
     this.activeTrialChanged();
@@ -3014,7 +3014,7 @@ export class GraphStudent extends ComponentStudent {
       if (x == null) {
         x = 0;
       }
-      this.showXPlotLineAndRectangleIfNecessary(x, text);
+      this.showXPlotLine(x, text);
     }
   }
 
@@ -3086,7 +3086,7 @@ export class GraphStudent extends ComponentStudent {
     }
   }
 
-  private showXPlotLineAndRectangleIfNecessary(x: number, text: string = ''): void {
+  private showXPlotLine(x: number, text: string = ''): void {
     showXPlotLine(this.getChartById(this.chartId), x, text);
     this.drawRectangleIfNecessary(x);
   }
