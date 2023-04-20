@@ -1,4 +1,4 @@
-import { XPlotLine } from '../../../../app/domain/xPlotLine';
+import { XPlotLine } from './domain/xPlotLine';
 
 /**
  * Show the vertical plot line at the given x.
