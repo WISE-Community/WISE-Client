@@ -182,7 +182,7 @@ export class NodeComponent implements OnInit {
     );
 
     if (this.configService.isPreview()) {
-      this.rubric = this.projectService.replaceAssetPaths(this.node.rubric);
+      this.rubric = this.node.rubric;
       this.showRubric = this.rubric != null && this.rubric != '';
     }
 

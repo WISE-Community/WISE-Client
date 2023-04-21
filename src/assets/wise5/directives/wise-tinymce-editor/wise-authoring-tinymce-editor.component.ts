@@ -94,7 +94,8 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
       controllerAs: '$ctrl',
       $stateParams: stateParams,
       clickOutsideToClose: true,
-      escapeToClose: true
+      escapeToClose: true,
+      multiple: true
     });
   }
 
