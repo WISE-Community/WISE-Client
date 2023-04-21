@@ -34,6 +34,7 @@ class NodeAuthoringController {
     'tag'
   ];
   insertComponentMode: boolean = false;
+  isAnyComponentSelected: boolean = false;
   isGroupNode: boolean;
   items: any[];
   moveComponentMode: boolean = false;
@@ -295,6 +296,7 @@ class NodeAuthoringController {
 
   clearComponentsToChecked() {
     this.componentsToChecked = {};
+    this.isAnyComponentSelected = false;
   }
 
   /**
@@ -327,69 +329,55 @@ class NodeAuthoringController {
   }
 
   moveButtonClicked() {
-    if (this.getSelectedComponentIds().length === 0) {
-      alert(this.$translate('pleaseSelectAComponentToMoveAndThenClickTheMoveButtonAgain'));
-    } else {
-      this.showDefaultComponentsView();
-      this.turnOnMoveComponentMode();
-      this.turnOnInsertComponentMode();
-      this.hideComponentAuthoring();
-    }
+    this.showDefaultComponentsView();
+    this.turnOnMoveComponentMode();
+    this.turnOnInsertComponentMode();
+    this.hideComponentAuthoring();
   }
 
   copyButtonClicked() {
-    if (this.getSelectedComponentIds().length === 0) {
-      alert(this.$translate('pleaseSelectAComponentToCopyAndThenClickTheCopyButtonAgain'));
-    } else {
-      this.showDefaultComponentsView();
-      this.turnOnCopyComponentMode();
-      this.turnOnInsertComponentMode();
-      this.hideComponentAuthoring();
-    }
+    this.showDefaultComponentsView();
+    this.turnOnCopyComponentMode();
+    this.turnOnInsertComponentMode();
+    this.hideComponentAuthoring();
   }
 
   deleteButtonClicked() {
-    if (this.getSelectedComponentIds().length === 0) {
-      alert(this.$translate('pleaseSelectAComponentToDeleteAndThenClickTheDeleteButtonAgain'));
-    } else {
-      this.scrollToTopOfPage();
-      this.hideComponentAuthoring();
+    this.scrollToTopOfPage();
+    this.hideComponentAuthoring();
 
-      /*
-       * Use a timeout to allow the effects of hideComponentAuthoring() to
-       * take effect. If we don't use a timeout, the user won't see any change
-       * in the UI.
-       */
-      this.$timeout(() => {
-        let confirmMessage = '';
-        const selectedComponentNumbersAndTypes = this.getSelectedComponentNumbersAndTypes();
-        if (selectedComponentNumbersAndTypes.length == 1) {
-          confirmMessage = this.$translate('areYouSureYouWantToDeleteThisComponent');
-        } else if (selectedComponentNumbersAndTypes.length > 1) {
-          confirmMessage = this.$translate('areYouSureYouWantToDeleteTheseComponents');
+    /*
+     * Use a timeout to allow the effects of hideComponentAuthoring() to
+     * take effect. If we don't use a timeout, the user won't see any change
+     * in the UI.
+     */
+    this.$timeout(() => {
+      let confirmMessage = '';
+      const selectedComponentNumbersAndTypes = this.getSelectedComponentNumbersAndTypes();
+      if (selectedComponentNumbersAndTypes.length == 1) {
+        confirmMessage = this.$translate('areYouSureYouWantToDeleteThisComponent');
+      } else if (selectedComponentNumbersAndTypes.length > 1) {
+        confirmMessage = this.$translate('areYouSureYouWantToDeleteTheseComponents');
+      }
+      for (let c = 0; c < selectedComponentNumbersAndTypes.length; c++) {
+        confirmMessage += '\n' + selectedComponentNumbersAndTypes[c];
+      }
+      if (confirm(confirmMessage)) {
+        const selectedComponents = this.getSelectedComponentIds();
+        const data = {
+          componentsDeleted: this.getComponentObjectsForEventData(selectedComponents)
+        };
+        for (const componentId of selectedComponents) {
+          this.ProjectService.deleteComponent(this.nodeId, componentId);
         }
-        for (let c = 0; c < selectedComponentNumbersAndTypes.length; c++) {
-          confirmMessage += '\n' + selectedComponentNumbersAndTypes[c];
-        }
-        if (confirm(confirmMessage)) {
-          const selectedComponents = this.getSelectedComponentIds();
-          const data = {
-            componentsDeleted: this.getComponentObjectsForEventData(selectedComponents)
-          };
-          for (const componentId of selectedComponents) {
-            this.ProjectService.deleteComponent(this.nodeId, componentId);
-          }
-          this.saveEvent('componentDeleted', 'Authoring', data);
-          this.checkIfNeedToShowNodeSaveOrNodeSubmitButtons();
-          this.ProjectService.saveProject();
-        } else {
-          this.clearComponentsToChecked();
-        }
-        this.turnOffInsertComponentMode();
-        this.clearComponentsToChecked();
-        this.showComponentAuthoring();
-      });
-    }
+        this.saveEvent('componentDeleted', 'Authoring', data);
+        this.checkIfNeedToShowNodeSaveOrNodeSubmitButtons();
+        this.ProjectService.saveProject();
+      }
+      this.turnOffInsertComponentMode();
+      this.clearComponentsToChecked();
+      this.showComponentAuthoring();
+    });
   }
 
   cancelInsertClicked() {
@@ -587,6 +575,10 @@ class NodeAuthoringController {
       fullscreen: true,
       clickOutsideToClose: true
     });
+  }
+
+  componentCheckboxClicked(): void {
+    this.isAnyComponentSelected = Object.values(this.componentsToChecked).some((value) => value);
   }
 }
 
