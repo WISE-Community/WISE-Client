@@ -6,7 +6,6 @@ import { ConfigService } from '../../../services/configService';
 import { DataExportService } from '../../../services/dataExportService';
 import { MatchService } from '../../../components/match/matchService';
 import { TeacherDataService } from '../../../services/teacherDataService';
-import { UtilService } from '../../../services/utilService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { StudentWorkDataExportStrategy } from '../strategies/StudentWorkDataExportStrategy';
@@ -123,8 +122,7 @@ export class DataExportComponent implements OnInit {
     private matchService: MatchService,
     public projectService: TeacherProjectService,
     public teacherDataService: TeacherDataService,
-    private upgrade: UpgradeModule,
-    public utilService: UtilService
+    private upgrade: UpgradeModule
   ) {}
 
   ngOnInit(): void {
