@@ -21,6 +21,7 @@ import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { arraysContainSameValues } from '../../../common/array/array';
 import { generateRandomKey } from '../../../common/string/string';
 import { GraphCustomLegend } from '../GraphCustomLegend';
+import { showXPlotLine } from '../graph-plot-line';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -694,33 +695,6 @@ export class GraphStudent extends ComponentStudent {
       this.showYPlotLine(y);
     }
     return y;
-  }
-
-  /**
-   * Show the vertical plot line at the given x.
-   * @param x The x value to show the vertical line at.
-   * @param text The text to show on the plot line.
-   */
-  showXPlotLine(x, text: string = null) {
-    const chart = this.getChartById(this.chartId);
-    const chartXAxis = chart.xAxis[0];
-    chartXAxis.removePlotLine('plot-line-x');
-    const plotLine: any = {
-      value: x,
-      color: 'red',
-      width: 4,
-      id: 'plot-line-x'
-    };
-    if (text != null && text !== '') {
-      plotLine.label = {
-        text: text,
-        verticalAlign: 'top'
-      };
-    }
-    chartXAxis.addPlotLine(plotLine);
-    if (this.componentContent.highlightXRangeFromZero) {
-      this.drawRangeRectangle(0, x, chart.yAxis[0].min, chart.yAxis[0].max);
-    }
   }
 
   /**
@@ -3109,6 +3083,18 @@ export class GraphStudent extends ComponentStudent {
       return this.studentDataVersion == null || this.studentDataVersion === 1;
     } else {
       return version === 1;
+    }
+  }
+
+  private showXPlotLine(x: number, text: string = ''): void {
+    showXPlotLine(this.getChartById(this.chartId), x, text);
+    this.drawRectangleIfNecessary(x);
+  }
+
+  private drawRectangleIfNecessary(x: number): void {
+    if (this.componentContent.highlightXRangeFromZero) {
+      const chart = this.getChartById(this.chartId);
+      this.drawRangeRectangle(0, x, chart.yAxis[0].min, chart.yAxis[0].max);
     }
   }
 }
