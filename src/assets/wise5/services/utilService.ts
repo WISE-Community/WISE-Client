@@ -26,21 +26,6 @@ export class UtilService {
   }
 
   /**
-   * Convert milliseconds since the epoch to a pretty printed date time
-   * @param milliseconds the milliseconds since the epoch
-   * @return a string containing the pretty printed date time
-   * example
-   * Wed Apr 06 2016 9:05:38 AM
-   */
-  convertMillisecondsToFormattedDateTime(milliseconds) {
-    const date = new Date(milliseconds);
-    if (date != null) {
-      return date.toDateString() + ' ' + date.toLocaleTimeString();
-    }
-    return '';
-  }
-
-  /**
    * Determine whether the component has been authored to import work.
    * @param componentContent The component content.
    * @return Whether to import work in this component.

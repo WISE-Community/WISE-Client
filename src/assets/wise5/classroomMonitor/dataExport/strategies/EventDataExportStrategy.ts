@@ -1,5 +1,6 @@
 import { removeHTMLTags } from '../../../common/string/string';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
+import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 
 export class EventDataExportStrategy extends AbstractDataExportStrategy {
   export() {
@@ -386,15 +387,11 @@ export class EventDataExportStrategy extends AbstractDataExportStrategy {
   }
 
   private setServerSaveTime(row, columnNameToNumber, data) {
-    row[
-      columnNameToNumber['Server Timestamp']
-    ] = this.utilService.convertMillisecondsToFormattedDateTime(data.serverSaveTime);
+    row[columnNameToNumber['Server Timestamp']] = millisecondsToDateTime(data.serverSaveTime);
   }
 
   private setClientSaveTime(row, columnNameToNumber, data) {
-    row[
-      columnNameToNumber['Client Timestamp']
-    ] = this.utilService.convertMillisecondsToFormattedDateTime(data.clientSaveTime);
+    row[columnNameToNumber['Client Timestamp']] = millisecondsToDateTime(data.clientSaveTime);
   }
 
   private setNodeId(row, columnNameToNumber, data) {

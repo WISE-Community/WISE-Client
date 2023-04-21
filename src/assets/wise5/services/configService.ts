@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { UtilService } from './utilService';
 import { isMatchingPeriods } from '../common/period/period';
+import { millisecondsToDateTime } from '../common/datetime/datetime';
 
 @Injectable()
 export class ConfigService {
@@ -985,12 +986,12 @@ export class ConfigService {
   }
 
   getFormattedStartDate() {
-    return this.utilService.convertMillisecondsToFormattedDateTime(this.getStartDate());
+    return millisecondsToDateTime(this.getStartDate());
   }
 
   getFormattedEndDate() {
     if (this.getEndDate() != null) {
-      return this.utilService.convertMillisecondsToFormattedDateTime(this.getEndDate());
+      return millisecondsToDateTime(this.getEndDate());
     }
     return '';
   }

@@ -1,5 +1,6 @@
 import { removeHTMLTags } from '../../../common/string/string';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
+import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 
 export class DiscussionComponentDataExportStrategy extends AbstractDataExportStrategy {
   constructor(private nodeId: string, private component: any) {
@@ -128,9 +129,9 @@ export class DiscussionComponentDataExportStrategy extends AbstractDataExportStr
     row[columnNameToNumber['Run ID']] = this.configService.getRunId();
 
     if (componentState.serverSaveTime != null) {
-      row[
-        columnNameToNumber['Server Timestamp']
-      ] = this.utilService.convertMillisecondsToFormattedDateTime(componentState.serverSaveTime);
+      row[columnNameToNumber['Server Timestamp']] = millisecondsToDateTime(
+        componentState.serverSaveTime
+      );
     }
 
     if (componentState.clientSaveTime != null) {
