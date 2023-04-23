@@ -16,7 +16,8 @@ export class PreviewComponentButtonComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  popUpComponentPreview(): void {
+  popUpComponentPreview(event: any): void {
+    event.stopPropagation();
     const dialogRef = this.dialog.open(PreviewComponentDialogComponent, {
       panelClass: 'dialog-lg'
     });

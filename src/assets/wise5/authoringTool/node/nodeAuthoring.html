@@ -166,7 +166,12 @@
       </div>
     </div>
   </div>
-  <div ng-if="$ctrl.showComponents && !$ctrl.insertComponentMode" layout="row" layout-margin>
+  <div
+    ng-if="$ctrl.showComponents && !$ctrl.insertComponentMode"
+    layout="row"
+    layout-margin
+    style="margin-bottom: -30px"
+  >
     <node-icon node-id="{{$ctrl.nodeId}}" can-edit="{{true}}" size="18"></node-icon>
     <div>
       <md-input-container style="margin-bottom: 0">
@@ -184,6 +189,21 @@
           size="60"
         />
       </md-input-container>
+    </div>
+    <div style="flex-grow: 1"></div>
+    <div style="flex-shrink: 0">
+      <md-button class="topButton md-raised md-primary" ng-click="$ctrl.expandAllComponents()"
+        ><md-icon>expand_more</md-icon>
+        <md-tooltip md-direction="top" class="projectButtonTooltip"
+          >{{ ::'expandAllComponents' | translate }}</md-tooltip
+        >
+      </md-button>
+      <md-button class="topButton md-raised md-primary" ng-click="$ctrl.collapseAllComponents()"
+        ><md-icon>expand_less</md-icon>
+        <md-tooltip md-direction="top" class="projectButtonTooltip"
+          >{{ ::'collapseAllComponents' | translate }}</md-tooltip
+        >
+      </md-button>
     </div>
   </div>
   <div style="margin-left: 45px" ng-if="$ctrl.insertComponentMode">
@@ -207,30 +227,36 @@
   >
     <em>{{ ::'stepHasNoComponents' | translate }}</em>
   </div>
-  <div
-    ng-repeat="component in $ctrl.components track by $index"
-    class="component"
-    style="padding: 0; margin: 0 16px"
-    ng-if="$ctrl.showComponents"
-  >
-    <div id="{{component.id}}" layout="row">
-      <div style="margin-top: 15px">
-        <md-checkbox
-          ng-model="$ctrl.componentsToChecked[component.id]"
-          ng-disabled="$ctrl.insertComponentMode"
-          ng-change="$ctrl.componentCheckboxClicked()"
-          class="md-primary"
-        >
-          <span style="font-weight: bold; margin-right: 10px"
-            >{{($index + 1)}}. {{$ctrl.getComponentTypeLabel(component.type)}}</span
+  <div ng-repeat="component in $ctrl.components track by $index">
+    <div
+      class="component"
+      style="padding: 0; margin: 16px; border: 1px solid gray"
+      ng-if="$ctrl.showComponents"
+    >
+      <div
+        id="{{component.id}}"
+        ng-click="$ctrl.toggleComponent(component.id)"
+        layout="row"
+        layout-align="start center"
+        style="cursor: pointer"
+      >
+        <div style="margin-top: 15px; margin-left: 15px">
+          <md-checkbox
+            ng-model="$ctrl.componentsToChecked[component.id]"
+            ng-disabled="$ctrl.insertComponentMode"
+            ng-change="$ctrl.componentCheckboxChanged()"
+            ng-click="$ctrl.componentCheckboxClicked($event)"
+            class="md-primary"
           >
-        </md-checkbox>
-      </div>
-      <div ng-if="!$ctrl.insertComponentMode && $ctrl.showComponentAuthoringViews">
-        <md-input-container style="margin-top: 0; margin-right: 20px; width: 150px; height: 40px">
+            <span style="font-weight: bold; margin-right: 10px"
+              >{{($index + 1)}}. {{$ctrl.getComponentTypeLabel(component.type)}}</span
+            >
+          </md-checkbox>
+        </div>
+        <div ng-if="!$ctrl.insertComponentMode && $ctrl.showComponentAuthoringViews">
           <md-button
             class="topButton md-raised md-primary"
-            ng-click="$ctrl.showComponentAdvancedAuthoring(component)"
+            ng-click="$ctrl.showComponentAdvancedAuthoring(component, $event)"
           >
             <md-icon>build</md-icon>
             <md-tooltip md-direction="top" class="projectButtonTooltip"
@@ -238,7 +264,133 @@
             >
           </md-button>
           <preview-component-button node-id="{{$ctrl.nodeId}}" component-id="{{component.id}}" />
-        </md-input-container>
+        </div>
+        <div
+          layout="row"
+          layout-align="end center"
+          style="flex-grow: 1; padding-right: 16px; align-self: stretch"
+        >
+          <div ng-if="!$ctrl.componentsToIsExpanded[component.id]">
+            <md-icon>chevron_right</md-icon>
+          </div>
+          <div ng-if="$ctrl.componentsToIsExpanded[component.id]">
+            <md-icon>expand_more</md-icon>
+          </div>
+          <md-tooltip
+            ng-if="!$ctrl.componentsToIsExpanded[component.id]"
+            md-direction="top"
+            class="projectButtonTooltip"
+            >{{ ::'clickToExpand' | translate }}</md-tooltip
+          >
+          <md-tooltip
+            ng-if="$ctrl.componentsToIsExpanded[component.id]"
+            md-direction="top"
+            class="projectButtonTooltip"
+            >{{ ::'clickToCollapse' | translate }}</md-tooltip
+          >
+        </div>
+      </div>
+      <div
+        ng-if="$ctrl.showComponentAuthoringViews && $ctrl.componentsToIsExpanded[component.id]"
+        style="margin: 0px 15px"
+      >
+        <ng-content ng-switch="::component.type">
+          <animation-authoring
+            ng-switch-when="Animation"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></animation-authoring>
+          <audio-oscillator-authoring
+            ng-switch-when="AudioOscillator"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></audio-oscillator-authoring>
+          <concept-map-authoring
+            ng-switch-when="ConceptMap"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></concept-map-authoring>
+          <dialog-guidance-authoring
+            ng-switch-when="DialogGuidance"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></dialog-guidance-authoring>
+          <discussion-authoring
+            ng-switch-when="Discussion"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></discussion-authoring>
+          <draw-authoring
+            ng-switch-when="Draw"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></draw-authoring>
+          <embedded-authoring
+            ng-switch-when="Embedded"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></embedded-authoring>
+          <graph-authoring
+            ng-switch-when="Graph"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></graph-authoring>
+          <html-authoring
+            ng-switch-when="HTML"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></html-authoring>
+          <label-authoring
+            ng-switch-when="Label"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></label-authoring>
+          <match-authoring
+            ng-switch-when="Match"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></match-authoring>
+          <multiple-choice-authoring
+            ng-switch-when="MultipleChoice"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></multiple-choice-authoring>
+          <open-response-authoring
+            ng-switch-when="OpenResponse"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></open-response-authoring>
+          <outside-url-authoring
+            ng-switch-when="OutsideURL"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></outside-url-authoring>
+          <peer-chat-authoring
+            ng-switch-when="PeerChat"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></peer-chat-authoring>
+          <show-group-work-authoring
+            ng-switch-when="ShowGroupWork"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></show-group-work-authoring>
+          <show-my-work-authoring
+            ng-switch-when="ShowMyWork"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></show-my-work-authoring>
+          <summary-authoring
+            ng-switch-when="Summary"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></summary-authoring>
+          <table-authoring
+            ng-switch-when="Table"
+            node-id="{{$ctrl.nodeId}}"
+            component-id="{{component.id}}"
+          ></table-authoring>
+        </ng-content>
       </div>
     </div>
     <div
@@ -252,115 +404,9 @@
       >
         <md-icon>keyboard_backspace</md-icon>
         <md-tooltip md-direction="top" class="projectButtonTooltip"
-          >{{ ::"insertAfter" | translate }}</md-tooltip
+          >{{ ::'insertAfter' | translate }}</md-tooltip
         >
       </md-button>
-    </div>
-    <div ng-if="$ctrl.showComponentAuthoringViews">
-      <ng-content ng-switch="::component.type">
-        <animation-authoring
-          ng-switch-when="Animation"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></animation-authoring>
-        <audio-oscillator-authoring
-          ng-switch-when="AudioOscillator"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></audio-oscillator-authoring>
-        <concept-map-authoring
-          ng-switch-when="ConceptMap"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></concept-map-authoring>
-        <dialog-guidance-authoring
-          ng-switch-when="DialogGuidance"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></dialog-guidance-authoring>
-        <discussion-authoring
-          ng-switch-when="Discussion"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></discussion-authoring>
-        <draw-authoring
-          ng-switch-when="Draw"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></draw-authoring>
-        <embedded-authoring
-          ng-switch-when="Embedded"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></embedded-authoring>
-        <graph-authoring
-          ng-switch-when="Graph"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></graph-authoring>
-        <html-authoring
-          ng-switch-when="HTML"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></html-authoring>
-        <label-authoring
-          ng-switch-when="Label"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></label-authoring>
-        <match-authoring
-          ng-switch-when="Match"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></match-authoring>
-        <multiple-choice-authoring
-          ng-switch-when="MultipleChoice"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></multiple-choice-authoring>
-        <open-response-authoring
-          ng-switch-when="OpenResponse"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></open-response-authoring>
-        <outside-url-authoring
-          ng-switch-when="OutsideURL"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></outside-url-authoring>
-        <peer-chat-authoring
-          ng-switch-when="PeerChat"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></peer-chat-authoring>
-        <show-group-work-authoring
-          ng-switch-when="ShowGroupWork"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></show-group-work-authoring>
-        <show-my-work-authoring
-          ng-switch-when="ShowMyWork"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></show-my-work-authoring>
-        <summary-authoring
-          ng-switch-when="Summary"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></summary-authoring>
-        <table-authoring
-          ng-switch-when="Table"
-          node-id="{{$ctrl.nodeId}}"
-          component-id="{{component.id}}"
-        ></table-authoring>
-      </ng-content>
-      <preview-component-button
-        style="display: block; margin-top: 16px"
-        node-id="{{$ctrl.nodeId}}"
-        component-id="{{component.id}}"
-      />
-      <br />
-      <md-divider ng-if="!$last"></md-divider>
     </div>
   </div>
 </div>
