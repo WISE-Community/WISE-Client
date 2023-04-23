@@ -495,6 +495,7 @@ class NodeAuthoringController {
         $('#content').scrollTop(componentElement.offset().top - 200);
         for (const newComponent of newComponents) {
           temporarilyHighlightElement(newComponent.id);
+          this.componentsToIsExpanded[newComponent.id] = true;
         }
       }
     });
