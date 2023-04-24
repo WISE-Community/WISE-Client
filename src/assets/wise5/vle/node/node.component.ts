@@ -360,14 +360,9 @@ export class NodeComponent implements OnInit {
     });
   }
 
-  private getComponentsToSave(componentId: string): any {
+  private getComponentsToSave(componentId: string): any[] {
     if (componentId) {
-      const components = [];
-      const component = this.node.getComponent(componentId);
-      if (component) {
-        components.push(component);
-      }
-      return components;
+      return [this.node.getComponent(componentId)];
     } else {
       const nodeStatus = this.studentDataService.getNodeStatusByNodeId(this.node.id);
       return this.getComponents().filter(
