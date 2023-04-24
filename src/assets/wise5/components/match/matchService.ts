@@ -2,6 +2,7 @@
 
 import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
+import { MatchContent } from './MatchContent';
 
 @Injectable()
 export class MatchService extends ComponentService {
@@ -47,17 +48,6 @@ export class MatchService extends ComponentService {
     return false;
   }
 
-  hasCorrectAnswer(component: any) {
-    for (const bucket of component.feedback) {
-      for (const choice of bucket.choices) {
-        if (choice.isCorrect) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
   getChoiceById(id: string, choices: any[]): any {
     return this.getItemById(id, choices);
   }
@@ -75,15 +65,10 @@ export class MatchService extends ComponentService {
     return null;
   }
 
-  componentHasCorrectAnswer(component: any): boolean {
-    for (const feedback of component.feedback) {
-      for (const choice of feedback.choices) {
-        if (choice.isCorrect) {
-          return true;
-        }
-      }
-    }
-    return false;
+  componentHasCorrectAnswer(component: MatchContent): boolean {
+    return component.feedback.some((feedback) =>
+      feedback.choices.some((choice) => choice.isCorrect)
+    );
   }
 
   setItemStatus(item: any, hasCorrectAnswer: boolean): void {
@@ -95,16 +80,5 @@ export class MatchService extends ComponentService {
     } else if (hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition) {
       item.status = 'incorrect';
     }
-  }
-
-  hasCorrectChoices(componentContent: any): boolean {
-    for (const bucket of componentContent.feedback) {
-      for (const choice of bucket.choices) {
-        if (choice.isCorrect) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 }

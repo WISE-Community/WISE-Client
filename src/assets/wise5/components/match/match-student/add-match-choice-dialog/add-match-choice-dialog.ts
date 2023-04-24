@@ -13,7 +13,7 @@ export class AddMatchChoiceDialog {
 
   constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<AddMatchChoiceDialog>) {}
 
-  save(): void {
+  protected save(): void {
     const choiceText: string = this.addChoiceFormGroup.get('choiceText').value;
     if (choiceText) {
       this.dialogRef.close(choiceText);
