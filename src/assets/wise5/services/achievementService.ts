@@ -456,7 +456,7 @@ export class AchievementService {
     this.achievementCompletedSource.next(args);
   }
 
-  broadcastNewStudentAchievement(args: any) {
-    this.newStudentAchievementSource.next(args);
+  broadcastNewStudentAchievement(achievement: any): void {
+    this.newStudentAchievementSource.next(achievement);
   }
 }

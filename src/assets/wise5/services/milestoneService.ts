@@ -7,6 +7,7 @@ import { TeacherDataService } from './teacherDataService';
 import { Injectable } from '@angular/core';
 import { copy } from '../common/object/object';
 import { MilestoneReportService } from './milestoneReportService';
+import { Milestone } from '../../../app/domain/milestone';
 
 @Injectable()
 export class MilestoneService {
@@ -23,7 +24,7 @@ export class MilestoneService {
     private teacherDataService: TeacherDataService
   ) {}
 
-  getProjectMilestones() {
+  getProjectMilestones(): Milestone[] {
     const achievements = this.projectService.getAchievements();
     if (achievements.isEnabled) {
       return achievements.items.filter((achievement) => {
@@ -34,22 +35,20 @@ export class MilestoneService {
   }
 
   getMilestoneReportByNodeId(nodeId: string): any {
-    for (const milestonReport of this.getProjectMilestoneReports()) {
-      const referencedComponent = this.getReferencedComponent(milestonReport);
+    for (const milestoneReport of this.getProjectMilestoneReports()) {
+      const referencedComponent = this.getReferencedComponent(milestoneReport);
       if (referencedComponent.nodeId === nodeId) {
-        return this.getProjectMilestoneStatus(milestonReport.id);
+        return this.getProjectMilestoneStatus(milestoneReport.id);
       }
     }
     return null;
   }
 
-  private getProjectMilestoneReports(): any[] {
-    return this.getProjectMilestones().filter((milestone) => {
-      return milestone.type === 'milestoneReport';
-    });
+  private getProjectMilestoneReports(): Milestone[] {
+    return this.getProjectMilestones().filter((milestone) => milestone.type === 'milestoneReport');
   }
 
-  getProjectMilestoneStatus(milestoneId: string) {
+  getProjectMilestoneStatus(milestoneId: string): any {
     this.periodId = this.teacherDataService.getCurrentPeriod().periodId;
     this.setWorkgroupsInCurrentPeriod();
     let milestone = this.projectService.getAchievementByAchievementId(milestoneId);
@@ -61,7 +60,7 @@ export class MilestoneService {
     return milestone;
   }
 
-  insertMilestoneItems(milestone: any) {
+  insertMilestoneItems(milestone: any): any {
     milestone.items = copy(this.projectService.idToOrder);
     if (milestone.params != null && milestone.params.nodeIds != null) {
       for (const nodeId of milestone.params.nodeIds) {
@@ -73,7 +72,7 @@ export class MilestoneService {
     return milestone;
   }
 
-  insertMilestoneCompletion(milestone: any) {
+  insertMilestoneCompletion(milestone: any): any {
     const achievementIdToStudentAchievements = this.achievementService.getAchievementIdToStudentAchievementsMappings();
     const studentAchievements = achievementIdToStudentAchievements[milestone.id];
     const workgroupIdsCompleted = [];
@@ -126,7 +125,7 @@ export class MilestoneService {
     return milestone;
   }
 
-  setWorkgroupsInCurrentPeriod() {
+  setWorkgroupsInCurrentPeriod(): void {
     this.workgroupIds = [];
     for (const workgroupId of this.configService.getClassmateWorkgroupIds()) {
       const currentPeriodId = this.configService.getPeriodIdByWorkgroupId(workgroupId);
@@ -137,35 +136,35 @@ export class MilestoneService {
     this.numberOfStudentsInRun = this.workgroupIds.length;
   }
 
-  insertMilestoneReport(milestone: any) {
+  insertMilestoneReport(milestone: Milestone): Milestone {
     const referencedComponent = this.getReferencedComponent(milestone);
     milestone.nodeId = referencedComponent.nodeId;
     milestone.componentId = referencedComponent.componentId;
     if (this.isCompletionReached(milestone)) {
       const report = this.milestoneReportService.generate(milestone, this.periodId);
-      this.setReportAvailable(milestone, true);
+      milestone.isReportAvailable = true;
       milestone.generatedReport = report.content ? report.content : null;
       milestone.generatedRecommendations = report.recommendations ? report.recommendations : null;
     } else {
-      this.setReportAvailable(milestone, false);
+      milestone.isReportAvailable = false;
     }
     return milestone;
   }
 
-  getReferencedComponent(milestone: any) {
+  getReferencedComponent(milestone: any): any {
     const referencedComponents = this.getSatisfyCriteriaReferencedComponents(milestone);
     const referencedComponentValues: any[] = Object.values(referencedComponents);
     return referencedComponentValues[referencedComponentValues.length - 1];
   }
 
-  isCompletionReached(projectAchievement: any) {
+  isCompletionReached(projectAchievement: any): boolean {
     return (
       projectAchievement.percentageCompleted >= projectAchievement.satisfyMinPercentage &&
       projectAchievement.numberOfStudentsCompleted >= projectAchievement.satisfyMinNumWorkgroups
     );
   }
 
-  getSatisfyCriteriaReferencedComponents(projectAchievement: any) {
+  getSatisfyCriteriaReferencedComponents(projectAchievement: any): any {
     const components = {};
     const templates = projectAchievement.report.templates;
     for (const template of templates) {
@@ -180,9 +179,5 @@ export class MilestoneService {
       }
     }
     return components;
-  }
-
-  setReportAvailable(projectAchievement: any, reportAvailable: boolean) {
-    projectAchievement.isReportAvailable = reportAvailable;
   }
 }

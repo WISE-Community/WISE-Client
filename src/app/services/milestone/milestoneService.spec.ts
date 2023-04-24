@@ -54,7 +54,6 @@ describe('MilestoneService', () => {
   getReferencedComponent();
   isCompletionReached();
   getSatisfyCriteriaReferencedComponents();
-  setReportAvailable();
 });
 
 function getProjectMilestones() {
@@ -420,21 +419,6 @@ function getSatisfyCriteriaReferencedComponents() {
           componentId: 'xfns1g7pga'
         }
       });
-    });
-  });
-}
-
-function setReportAvailable() {
-  describe('setReportAvailable()', () => {
-    it('should set report available false', () => {
-      const projectAchievement: any = {};
-      service.setReportAvailable(projectAchievement, false);
-      expect(projectAchievement.isReportAvailable).toEqual(false);
-    });
-    it('should set report available true', () => {
-      const projectAchievement: any = {};
-      service.setReportAvailable(projectAchievement, true);
-      expect(projectAchievement.isReportAvailable).toEqual(true);
     });
   });
 }
