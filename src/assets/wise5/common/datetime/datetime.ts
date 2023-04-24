@@ -7,8 +7,6 @@
  */
 export function millisecondsToDateTime(milliseconds: number): string {
   const date = new Date(milliseconds);
-  if (date != null) {
-    return `${date.toDateString()} ${date.toLocaleTimeString()}`;
-  }
+  return `${date.toDateString()} ${date.toLocaleTimeString()}`;
   return '';
 }
