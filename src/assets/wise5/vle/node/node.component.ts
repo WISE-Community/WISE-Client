@@ -369,7 +369,12 @@ export class NodeComponent implements OnInit {
       }
       return components;
     } else {
-      return this.getComponents();
+      const nodeStatus = this.studentDataService.getNodeStatusByNodeId(this.node.id);
+      return this.getComponents().filter(
+        (component) =>
+          this.workComponents.includes(component.type) &&
+          nodeStatus.componentStatuses[component.id].isVisible
+      );
     }
   }
 
@@ -380,14 +385,10 @@ export class NodeComponent implements OnInit {
   ): any[] {
     const componentStatePromises = [];
     for (const component of components) {
-      const componentId = component.id;
-      const componentType = component.type;
-      if (this.workComponents.includes(componentType)) {
-        componentStatePromises.push(
-          this.getComponentStatePromiseFromService(this.node.id, componentId, isAutoSave, isSubmit)
-        );
-        this.componentService.requestComponentState(this.node.id, componentId, isSubmit);
-      }
+      componentStatePromises.push(
+        this.getComponentStatePromiseFromService(this.node.id, component.id, isAutoSave, isSubmit)
+      );
+      this.componentService.requestComponentState(this.node.id, component.id, isSubmit);
     }
     return componentStatePromises;
   }
