@@ -1118,7 +1118,7 @@ export class DataExportComponent implements OnInit {
       columnNameToNumber[choice.id] = columnNames.length;
       columnNames.push(choice.value);
     }
-    if (this.includeCorrectnessColumns && this.matchService.hasCorrectAnswer(component)) {
+    if (this.includeCorrectnessColumns && this.matchService.componentHasCorrectAnswer(component)) {
       for (let choice of component.choices) {
         columnNameToNumber[choice.id + '-boolean'] = columnNames.length;
         columnNames.push(choice.value);
@@ -1196,7 +1196,10 @@ export class DataExportComponent implements OnInit {
     for (const bucket of matchComponentState.studentData.buckets) {
       for (const item of bucket.items) {
         row[columnNameToNumber[item.id]] = this.getBucketValueById(component, bucket.id);
-        if (this.includeCorrectnessColumns && this.matchService.hasCorrectAnswer(component)) {
+        if (
+          this.includeCorrectnessColumns &&
+          this.matchService.componentHasCorrectAnswer(component)
+        ) {
           this.setCorrectnessValue(row, columnNameToNumber, item);
         }
       }

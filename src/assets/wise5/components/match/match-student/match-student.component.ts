@@ -76,7 +76,7 @@ export class MatchStudent extends ComponentStudent {
     this.isHorizontal = this.componentContent.horizontal;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
-    this.hasCorrectAnswer = this.MatchService.hasCorrectChoices(this.componentContent);
+    this.hasCorrectAnswer = this.MatchService.componentHasCorrectAnswer(this.componentContent);
     if (this.shouldImportPrivateNotes()) {
       this.importPrivateNotes();
     }
@@ -196,7 +196,7 @@ export class MatchStudent extends ComponentStudent {
     sourceBucket.items = [];
   }
 
-  isAuthoredChoice(choiceId: string): boolean {
+  private isAuthoredChoice(choiceId: string): boolean {
     return this.getChoiceIds().includes(choiceId);
   }
 
@@ -210,7 +210,7 @@ export class MatchStudent extends ComponentStudent {
     }
   }
 
-  addAuthoredChoiceToBucket(choiceId: string, bucket: any): void {
+  private addAuthoredChoiceToBucket(choiceId: string, bucket: any): void {
     bucket.items.push(this.MatchService.getChoiceById(choiceId, this.choices));
   }
 
@@ -218,8 +218,11 @@ export class MatchStudent extends ComponentStudent {
    * Get the latest submitted componentState and display feedback for choices that haven't changed
    * since. This will also determine if submit is dirty.
    */
-  processPreviousStudentWork(): void {
-    const latestComponentState = this.getLatestComponentState();
+  private processPreviousStudentWork(): void {
+    const latestComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+      this.nodeId,
+      this.componentId
+    );
     if (latestComponentState == null) {
       return;
     }
@@ -228,7 +231,10 @@ export class MatchStudent extends ComponentStudent {
       this.setGeneralComponentStatus(latestComponentState.isCorrect, false);
       this.checkAnswer();
     } else {
-      const latestSubmitComponentState = this.getLatestSubmitComponentState();
+      const latestSubmitComponentState = this.StudentDataService.getLatestSubmitComponentState(
+        this.nodeId,
+        this.componentId
+      );
       if (latestSubmitComponentState != null) {
         this.showFeedbackOnUnchangedChoices(latestSubmitComponentState);
       } else {
@@ -242,23 +248,18 @@ export class MatchStudent extends ComponentStudent {
     this.setIsSubmitDirty(isSubmitDirty);
   }
 
-  getLatestComponentState(): any {
-    return this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+  processDirtyStudentWork(): void {
+    const latestSubmitComponentState = this.StudentDataService.getLatestSubmitComponentState(
       this.nodeId,
       this.componentId
     );
-  }
-
-  getLatestSubmitComponentState(): any {
-    return this.StudentDataService.getLatestSubmitComponentState(this.nodeId, this.componentId);
-  }
-
-  processDirtyStudentWork(): void {
-    const latestSubmitComponentState = this.getLatestSubmitComponentState();
     if (latestSubmitComponentState != null) {
       this.showFeedbackOnUnchangedChoices(latestSubmitComponentState);
     } else {
-      const latestComponentState = this.getLatestComponentState();
+      const latestComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+        this.nodeId,
+        this.componentId
+      );
       if (latestComponentState != null) {
         this.isCorrect = null;
         this.setIsSubmitDirty(true);
@@ -399,10 +400,6 @@ export class MatchStudent extends ComponentStudent {
       : $localize`Choices`;
   }
 
-  getDeepCopyOfBuckets(): any[] {
-    return copy(this.buckets);
-  }
-
   /**
    * Check if the student has answered correctly and show feedback.
    * @param {array} choiceIds to not show feedback for. This is used in the scenario where the
@@ -463,19 +460,21 @@ export class MatchStudent extends ComponentStudent {
     return isCorrect;
   }
 
-  getFeedback(feedbackObject: any, hasCorrectAnswer: boolean, position: number): string {
-    if (this.doesPositionMatter(feedbackObject.position)) {
-      return this.getPositionFeedback(feedbackObject, position, hasCorrectAnswer);
-    } else {
-      return this.getNonPositionFeedback(feedbackObject, hasCorrectAnswer);
-    }
+  private getFeedback(feedbackObject: any, hasCorrectAnswer: boolean, position: number): string {
+    return this.doesPositionMatter(feedbackObject.position)
+      ? this.getPositionFeedback(feedbackObject, position, hasCorrectAnswer)
+      : this.getNonPositionFeedback(feedbackObject, hasCorrectAnswer);
   }
 
-  doesPositionMatter(feedbackPosition: number): boolean {
+  private doesPositionMatter(feedbackPosition: number): boolean {
     return this.componentContent.ordered && feedbackPosition != null;
   }
 
-  getPositionFeedback(feedbackObject: any, position: number, hasCorrectAnswer: boolean): string {
+  private getPositionFeedback(
+    feedbackObject: any,
+    position: number,
+    hasCorrectAnswer: boolean
+  ): string {
     if (this.isCorrectPosition(feedbackObject, position)) {
       return feedbackObject.feedback
         ? feedbackObject.feedback
@@ -485,23 +484,17 @@ export class MatchStudent extends ComponentStudent {
     }
   }
 
-  getIncorrectPositionFeedback(feedbackObject: any): string {
+  private getIncorrectPositionFeedback(feedbackObject: any): string {
     const incorrectPositionFeedback = feedbackObject.incorrectPositionFeedback;
-    if (incorrectPositionFeedback == null || incorrectPositionFeedback === '') {
-      return $localize`Correct bucket but wrong position`;
-    } else {
-      return incorrectPositionFeedback;
-    }
+    return incorrectPositionFeedback == null || incorrectPositionFeedback === ''
+      ? $localize`Correct bucket but wrong position`
+      : incorrectPositionFeedback;
   }
 
-  getNonPositionFeedback(feedbackObject: any, hasCorrectAnswer: boolean): string {
+  private getNonPositionFeedback(feedbackObject: any, hasCorrectAnswer: boolean): string {
     let feedbackText = '';
     if (feedbackObject.feedback === '' && hasCorrectAnswer) {
-      if (feedbackObject.isCorrect) {
-        feedbackText = $localize`Correct`;
-      } else {
-        feedbackText = $localize`Incorrect`;
-      }
+      feedbackText = feedbackObject.isCorrect ? $localize`Correct` : $localize`Incorrect`;
     } else {
       feedbackText = feedbackObject.feedback;
     }
@@ -518,16 +511,12 @@ export class MatchStudent extends ComponentStudent {
     }
   }
 
-  isCorrectPosition(feedbackObject: any, position: number): boolean {
-    return position === feedbackObject.position;
-  }
-
-  getAllFeedback(): any[] {
-    return this.componentContent.feedback;
+  private isCorrectPosition(feedbackObject: any, position: number): boolean {
+    return feedbackObject.position === position;
   }
 
   getFeedbackObject(bucketId: string, choiceId: string): any {
-    for (const bucketFeedback of this.getAllFeedback()) {
+    for (const bucketFeedback of this.componentContent.feedback) {
       if (bucketFeedback.bucketId === bucketId) {
         for (const choiceFeedback of bucketFeedback.choices) {
           if (choiceFeedback.choiceId === choiceId) {
@@ -580,7 +569,7 @@ export class MatchStudent extends ComponentStudent {
     const studentData: any = {
       buckets: this.cleanBuckets(
         this.ProjectService.getComponent(this.nodeId, this.componentId),
-        this.getDeepCopyOfBuckets()
+        copy(this.buckets)
       ),
       submitCounter: this.submitCounter
     };
@@ -599,7 +588,7 @@ export class MatchStudent extends ComponentStudent {
    * injected into it such as onclick attributes and absolute asset paths.
    * @param buckets
    */
-  cleanBuckets(originalComponentContent: any, buckets: any): any {
+  private cleanBuckets(originalComponentContent: any, buckets: any): any {
     for (const bucket of buckets) {
       bucket.value = this.getCleanedValue(originalComponentContent, bucket);
       for (const item of bucket.items) {
@@ -642,7 +631,7 @@ export class MatchStudent extends ComponentStudent {
   }
 
   isAuthorHasSpecifiedACorrectBucket(choiceId: string): boolean {
-    for (const bucket of this.getAllFeedback()) {
+    for (const bucket of this.componentContent.feedback) {
       for (const choice of bucket.choices) {
         if (choice.choiceId === choiceId) {
           if (choice.isCorrect) {
@@ -660,7 +649,7 @@ export class MatchStudent extends ComponentStudent {
    * @return {boolean} whether the choice has a correct position in any bucket
    */
   isAuthorHasSpecifiedACorrectPosition(choiceId: string): boolean {
-    for (const bucket of this.getAllFeedback()) {
+    for (const bucket of this.componentContent.feedback) {
       for (const choice of bucket.choices) {
         if (choice.choiceId === choiceId) {
           if (choice.position != null) {

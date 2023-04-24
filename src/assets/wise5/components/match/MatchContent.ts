@@ -4,4 +4,6 @@ export interface MatchContent extends ComponentContent {
   buckets: any[];
   canCreateChoices: boolean;
   choices: any[];
+  feedback: any[];
+  ordered: boolean;
 }

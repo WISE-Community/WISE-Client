@@ -31,7 +31,7 @@ export class MatchShowWorkComponent extends ComponentShowWorkDirective {
 
   ngOnInit() {
     super.ngOnInit();
-    this.hasCorrectAnswer = this.matchService.hasCorrectChoices(this.componentContent);
+    this.hasCorrectAnswer = this.matchService.componentHasCorrectAnswer(this.componentContent);
     this.isCorrect = this.componentState.studentData.isCorrect;
     this.isChoicesAfter = this.componentContent.choicesAfter;
     this.isHorizontal = this.componentContent.horizontal;
