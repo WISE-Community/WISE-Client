@@ -48,42 +48,48 @@
           >{{ ::'importComponent' | translate }}</md-tooltip
         >
       </md-button>
-      <md-button
-        id="moveComponentButton"
-        ng-if="$ctrl.showStepButtons && !$ctrl.isGroupNode"
-        class="topButton md-raised md-primary"
-        ng-click="$ctrl.moveButtonClicked()"
-        ng-disabled="$ctrl.insertComponentMode"
-      >
-        <md-icon>redo</md-icon>
-        <md-tooltip md-direction="top" class="projectButtonTooltip"
-          >{{ ::'move' | translate }}</md-tooltip
+      <div>
+        <md-button
+          id="moveComponentButton"
+          ng-if="$ctrl.showStepButtons && !$ctrl.isGroupNode"
+          class="topButton md-raised md-primary"
+          ng-click="$ctrl.moveButtonClicked()"
+          ng-disabled="!$ctrl.isAnyComponentSelected || $ctrl.insertComponentMode"
         >
-      </md-button>
-      <md-button
-        id="copyComponentButton"
-        ng-if="$ctrl.showStepButtons && !$ctrl.isGroupNode"
-        class="topButton md-raised md-primary"
-        ng-click="$ctrl.copyButtonClicked()"
-        ng-disabled="$ctrl.insertComponentMode"
-      >
-        <md-icon>content_copy</md-icon>
+          <md-icon>redo</md-icon>
+        </md-button>
         <md-tooltip md-direction="top" class="projectButtonTooltip"
-          >{{ ::'copy' | translate }}</md-tooltip
+          >{{ ::'moveComponent' | translate }}</md-tooltip
         >
-      </md-button>
-      <md-button
-        id="deleteComponentButton"
-        ng-if="$ctrl.showStepButtons && !$ctrl.isGroupNode"
-        class="topButton md-raised md-primary"
-        ng-click="$ctrl.deleteButtonClicked()"
-        ng-disabled="$ctrl.insertComponentMode"
-      >
-        <md-icon>delete</md-icon>
+      </div>
+      <div>
+        <md-button
+          id="copyComponentButton"
+          ng-if="$ctrl.showStepButtons && !$ctrl.isGroupNode"
+          class="topButton md-raised md-primary"
+          ng-click="$ctrl.copyButtonClicked()"
+          ng-disabled="!$ctrl.isAnyComponentSelected || $ctrl.insertComponentMode"
+        >
+          <md-icon>content_copy</md-icon>
+        </md-button>
         <md-tooltip md-direction="top" class="projectButtonTooltip"
-          >{{ ::'DELETE' | translate }}</md-tooltip
+          >{{ ::'copyComponent' | translate }}</md-tooltip
         >
-      </md-button>
+      </div>
+      <div>
+        <md-button
+          id="deleteComponentButton"
+          ng-if="$ctrl.showStepButtons && !$ctrl.isGroupNode"
+          class="topButton md-raised md-primary"
+          ng-click="$ctrl.deleteButtonClicked()"
+          ng-disabled="!$ctrl.isAnyComponentSelected || $ctrl.insertComponentMode"
+        >
+          <md-icon>delete</md-icon>
+        </md-button>
+        <md-tooltip md-direction="top" class="projectButtonTooltip"
+          >{{ ::'deleteComponent' | translate }}</md-tooltip
+        >
+      </div>
       <md-button
         id="editStepRubricButton"
         class="topButton md-raised md-primary"
@@ -212,6 +218,7 @@
         <md-checkbox
           ng-model="$ctrl.componentsToChecked[component.id]"
           ng-disabled="$ctrl.insertComponentMode"
+          ng-change="$ctrl.componentCheckboxClicked()"
           class="md-primary"
         >
           <span style="font-weight: bold; margin-right: 10px"
