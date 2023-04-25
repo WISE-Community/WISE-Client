@@ -5,6 +5,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
 import ExportController from '../exportController';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 
 @Component({
   selector: 'export-step-visits',
@@ -418,20 +419,12 @@ export class ExportStepVisitsComponent extends ExportController {
     this.setCellInRow(visit, 'End Date', this.configService.getFormattedEndDate());
     this.setCellInRow(visit, 'Node ID', nodeId);
     this.setCellInRow(visit, 'Step Title', this.getStepNumberAndTitle(nodeId));
-    this.setCellInRow(
-      visit,
-      'Enter Time',
-      this.utilService.convertMillisecondsToFormattedDateTime(nodeEnteredEvent.clientSaveTime)
-    );
+    this.setCellInRow(visit, 'Enter Time', millisecondsToDateTime(nodeEnteredEvent.clientSaveTime));
     if (nodeExitedEvent == null) {
       this.setCellInRow(visit, 'Exit Time', '(Unknown Exit Time)');
       this.setCellInRow(visit, 'Visit Duration (Seconds)', '(Unknown Visit Duration)');
     } else if (nodeExitedEvent != null) {
-      this.setCellInRow(
-        visit,
-        'Exit Time',
-        this.utilService.convertMillisecondsToFormattedDateTime(nodeExitedEvent.clientSaveTime)
-      );
+      this.setCellInRow(visit, 'Exit Time', millisecondsToDateTime(nodeExitedEvent.clientSaveTime));
       this.setCellInRow(
         visit,
         'Visit Duration (Seconds)',

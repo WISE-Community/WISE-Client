@@ -6,7 +6,6 @@ import { ConfigService } from '../../../services/configService';
 import { DataExportService } from '../../../services/dataExportService';
 import { MatchService } from '../../../components/match/matchService';
 import { TeacherDataService } from '../../../services/teacherDataService';
-import { UtilService } from '../../../services/utilService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { StudentWorkDataExportStrategy } from '../strategies/StudentWorkDataExportStrategy';
@@ -23,6 +22,7 @@ import { DiscussionComponentDataExportStrategy } from '../strategies/DiscussionC
 import { LabelComponentDataExportStrategy } from '../strategies/LabelComponentDataExportStrategy';
 import { Component as WISEComponent } from '../../../common/Component';
 import { removeHTMLTags } from '../../../common/string/string';
+import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 
 @Component({
   selector: 'data-export',
@@ -122,8 +122,7 @@ export class DataExportComponent implements OnInit {
     private matchService: MatchService,
     public projectService: TeacherProjectService,
     public teacherDataService: TeacherDataService,
-    private upgrade: UpgradeModule,
-    public utilService: UtilService
+    private upgrade: UpgradeModule
   ) {}
 
   ngOnInit(): void {
@@ -283,9 +282,7 @@ export class DataExportComponent implements OnInit {
     row[columnNameToNumber['Run ID']] = this.configService.getRunId();
     row[columnNameToNumber['Student Work ID']] = componentState.id;
     if (componentState.serverSaveTime != null) {
-      var formattedDateTime = this.utilService.convertMillisecondsToFormattedDateTime(
-        componentState.serverSaveTime
-      );
+      var formattedDateTime = millisecondsToDateTime(componentState.serverSaveTime);
       row[columnNameToNumber['Server Timestamp']] = formattedDateTime;
     }
     if (componentState.clientSaveTime != null) {

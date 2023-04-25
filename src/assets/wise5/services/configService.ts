@@ -4,8 +4,8 @@ import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { formatDate } from '@angular/common';
-import { UtilService } from './utilService';
 import { isMatchingPeriods } from '../common/period/period';
+import { millisecondsToDateTime } from '../common/datetime/datetime';
 
 @Injectable()
 export class ConfigService {
@@ -13,11 +13,7 @@ export class ConfigService {
   private configRetrievedSource: Subject<any> = new Subject<any>();
   public configRetrieved$: Observable<any> = this.configRetrievedSource.asObservable();
 
-  constructor(
-    private http: HttpClient,
-    @Inject(LOCALE_ID) private localeID: string,
-    private utilService: UtilService
-  ) {}
+  constructor(private http: HttpClient, @Inject(LOCALE_ID) private localeID: string) {}
 
   setConfig(config) {
     this.config = config;
@@ -985,12 +981,12 @@ export class ConfigService {
   }
 
   getFormattedStartDate() {
-    return this.utilService.convertMillisecondsToFormattedDateTime(this.getStartDate());
+    return millisecondsToDateTime(this.getStartDate());
   }
 
   getFormattedEndDate() {
     if (this.getEndDate() != null) {
-      return this.utilService.convertMillisecondsToFormattedDateTime(this.getEndDate());
+      return millisecondsToDateTime(this.getEndDate());
     }
     return '';
   }

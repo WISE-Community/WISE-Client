@@ -1,5 +1,6 @@
 import { removeHTMLTags } from '../../../common/string/string';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
+import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 
 export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStrategy {
   /**
@@ -126,7 +127,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                     }
                     if (this.controller.includeStudentWorkTimestamps) {
                       if (componentState.serverSaveTime != null) {
-                        var formattedDateTime = this.utilService.convertMillisecondsToFormattedDateTime(
+                        var formattedDateTime = millisecondsToDateTime(
                           componentState.serverSaveTime
                         );
                         workgroupRow[
@@ -148,7 +149,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                         var commentAnnotation = latestComponentAnnotations.comment;
                         if (scoreAnnotation != null) {
                           if (this.controller.includeScoreTimestamps) {
-                            var scoreTimestamp = this.utilService.convertMillisecondsToFormattedDateTime(
+                            var scoreTimestamp = millisecondsToDateTime(
                               scoreAnnotation.serverSaveTime
                             );
                             workgroupRow[
@@ -169,7 +170,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                         }
                         if (commentAnnotation != null) {
                           if (this.controller.includeCommentTimestamps) {
-                            var commentTimestamp = this.utilService.convertMillisecondsToFormattedDateTime(
+                            var commentTimestamp = millisecondsToDateTime(
                               commentAnnotation.serverSaveTime
                             );
                             workgroupRow[
