@@ -34,9 +34,10 @@ export class ChooseImportStepLocationComponent {
       this.ProjectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
         this.ProjectService.refreshProject();
         if (nodesWithNewNodeIds.length === 1) {
+          const newNode = nodesWithNewNodeIds[0];
           this.upgrade.$injector
             .get('$state')
-            .go('root.at.project.node', { nodeId: nodesWithNewNodeIds[0].id });
+            .go('root.at.project.node', { nodeId: newNode.id, newComponents: newNode.components });
         } else {
           this.upgrade.$injector.get('$state').go('root.at.project');
         }
