@@ -603,6 +603,10 @@ class NodeAuthoringController {
       this.componentsToIsExpanded[component.id] = false;
     }
   }
+
+  getNumberOfComponentsExpanded(): number {
+    return Object.values(this.componentsToIsExpanded).filter((value) => value).length;
+  }
 }
 
 export const NodeAuthoringComponent = {

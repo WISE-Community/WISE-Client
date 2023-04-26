@@ -192,13 +192,19 @@
     </div>
     <div style="flex-grow: 1"></div>
     <div style="flex-shrink: 0">
-      <md-button class="topButton md-raised md-primary" ng-click="$ctrl.expandAllComponents()"
+      <md-button
+        class="topButton md-raised md-primary"
+        ng-click="$ctrl.expandAllComponents()"
+        ng-disabled="$ctrl.getNumberOfComponentsExpanded() === $ctrl.components.length"
         ><md-icon>expand_more</md-icon>
         <md-tooltip md-direction="top" class="projectButtonTooltip"
           >{{ ::'expandAllComponents' | translate }}</md-tooltip
         >
       </md-button>
-      <md-button class="topButton md-raised md-primary" ng-click="$ctrl.collapseAllComponents()"
+      <md-button
+        class="topButton md-raised md-primary"
+        ng-click="$ctrl.collapseAllComponents()"
+        ng-disabled="$ctrl.getNumberOfComponentsExpanded() === 0"
         ><md-icon>expand_less</md-icon>
         <md-tooltip md-direction="top" class="projectButtonTooltip"
           >{{ ::'collapseAllComponents' | translate }}</md-tooltip
