@@ -63,6 +63,9 @@ export class TeacherProjectService extends ProjectService {
               fontSet: 'material-icons',
               fontName: 'info'
             }
+          },
+          transitionLogic: {
+            transitions: []
           }
         },
         {
