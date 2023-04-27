@@ -196,19 +196,15 @@
         class="topButton md-raised md-primary"
         ng-click="$ctrl.expandAllComponents()"
         ng-disabled="$ctrl.getNumberOfComponentsExpanded() === $ctrl.components.length"
-        ><md-icon>expand_more</md-icon>
-        <md-tooltip md-direction="top" class="projectButtonTooltip"
-          >{{ ::'expandAllComponents' | translate }}</md-tooltip
-        >
+      >
+        {{ ::'expandAll' | translate }}
       </md-button>
       <md-button
         class="topButton md-raised md-primary"
         ng-click="$ctrl.collapseAllComponents()"
         ng-disabled="$ctrl.getNumberOfComponentsExpanded() === 0"
-        ><md-icon>expand_less</md-icon>
-        <md-tooltip md-direction="top" class="projectButtonTooltip"
-          >{{ ::'collapseAllComponents' | translate }}</md-tooltip
-        >
+      >
+        {{ ::'collapseAll' | translate }}</md-tooltip>
       </md-button>
     </div>
   </div>
@@ -236,7 +232,7 @@
   <div ng-repeat="component in $ctrl.components track by $index">
     <div
       class="component"
-      style="padding: 0; margin: 16px; border: 1px solid gray"
+      style="padding: 0; margin: 16px; border: 2px solid #dddddd; border-radius: 6px;"
       ng-if="$ctrl.showComponents"
     >
       <div
@@ -244,15 +240,17 @@
         ng-click="$ctrl.toggleComponent(component.id)"
         layout="row"
         layout-align="start center"
-        style="cursor: pointer"
+        style="cursor: pointer;"
+        aria-label="{{ ::'toggleComponentAuthoring' | translate }}"
       >
-        <div style="margin-top: 15px; margin-left: 15px">
+        <div style="margin-top: 16px; margin-left: 16px">
           <md-checkbox
             ng-model="$ctrl.componentsToChecked[component.id]"
             ng-disabled="$ctrl.insertComponentMode"
             ng-change="$ctrl.componentCheckboxChanged()"
             ng-click="$ctrl.componentCheckboxClicked($event)"
             class="md-primary"
+            aria-label="{{ ::'selectComponent' | translate }}"
           >
             <span style="font-weight: bold; margin-right: 10px"
               >{{($index + 1)}}. {{$ctrl.getComponentTypeLabel(component.type)}}</span
@@ -277,10 +275,10 @@
           style="flex-grow: 1; padding-right: 16px; align-self: stretch"
         >
           <div ng-if="!$ctrl.componentsToIsExpanded[component.id]">
-            <md-icon>chevron_right</md-icon>
+            <md-icon>expand_more</md-icon>
           </div>
           <div ng-if="$ctrl.componentsToIsExpanded[component.id]">
-            <md-icon>expand_more</md-icon>
+            <md-icon>expand_less</md-icon>
           </div>
           <md-tooltip
             ng-if="!$ctrl.componentsToIsExpanded[component.id]"
