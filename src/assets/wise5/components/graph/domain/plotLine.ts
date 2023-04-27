@@ -1,7 +1,11 @@
 export class PlotLine {
   color: string = 'red';
   id: string;
-  label: { text: string; verticalAlign: string } = { text: '', verticalAlign: 'top' };
+  label: { align: string; text: string; verticalAlign: string } = {
+    align: '',
+    text: '',
+    verticalAlign: ''
+  };
   value: number;
   width: number = 2;
   zIndex: number = 5;

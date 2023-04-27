@@ -5,5 +5,6 @@ export class XPlotLine extends PlotLine {
 
   constructor(x: number, text: string) {
     super(XPlotLine.id, x, text);
+    this.label.verticalAlign = 'top';
   }
 }
