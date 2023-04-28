@@ -21,7 +21,7 @@ import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { arraysContainSameValues } from '../../../common/array/array';
 import { generateRandomKey } from '../../../common/string/string';
 import { GraphCustomLegend } from '../GraphCustomLegend';
-import { showXPlotLine } from '../graph-plot-line';
+import { showXPlotLine, showYPlotLine } from '../graph-plot-line';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -692,7 +692,7 @@ export class GraphStudent extends ComponentStudent {
     let y = chartYAxis.toValue(e.offsetY, false);
     y = this.makeSureYIsWithinYMinMaxLimits(y);
     if (this.componentContent.showMouseYPlotLine) {
-      this.showYPlotLine(y);
+      showYPlotLine(this.getChartById(this.chartId), y);
     }
     return y;
   }
@@ -759,30 +759,6 @@ export class GraphStudent extends ComponentStudent {
       width: xMax - xMin,
       height: yMax - yMin
     });
-  }
-
-  /**
-   * Show the horizontal plot line at the given y.
-   * @param y The y value to show the horizontal line at.
-   * @param text The text to show on the plot line.
-   */
-  showYPlotLine(y, text: string = null) {
-    const chart = this.getChartById(this.chartId);
-    const chartYAxis = chart.yAxis[0];
-    chartYAxis.removePlotLine('plot-line-y');
-    const plotLine: any = {
-      value: y,
-      color: 'red',
-      width: 2,
-      id: 'plot-line-y'
-    };
-    if (text != null && text !== '') {
-      plotLine.label = {
-        text: text,
-        align: 'right'
-      };
-    }
-    chartYAxis.addPlotLine(plotLine);
   }
 
   /**
@@ -3024,7 +3000,7 @@ export class GraphStudent extends ComponentStudent {
       if (y == null) {
         y = 0;
       }
-      this.showYPlotLine(y, text);
+      showYPlotLine(this.getChartById(this.chartId), y, text);
     }
   }
 
