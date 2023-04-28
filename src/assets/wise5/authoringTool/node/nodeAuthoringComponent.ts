@@ -23,6 +23,7 @@ class NodeAuthoringController {
   $translate: any;
   components: any;
   componentsToChecked = {};
+  componentsToIsExpanded = {};
   copyComponentMode: boolean = false;
   currentNodeCopy: any;
   howToChooseAmongAvailablePathsOptions = [
@@ -494,6 +495,7 @@ class NodeAuthoringController {
         $('#content').scrollTop(componentElement.offset().top - 200);
         for (const newComponent of newComponents) {
           temporarilyHighlightElement(newComponent.id);
+          this.componentsToIsExpanded[newComponent.id] = true;
         }
       }
     });
@@ -553,7 +555,8 @@ class NodeAuthoringController {
     return componentObjects;
   }
 
-  showComponentAdvancedAuthoring(componentContent: ComponentContent) {
+  showComponentAdvancedAuthoring(componentContent: ComponentContent, event: any) {
+    event.stopPropagation();
     const component = new Component(componentContent, this.nodeId);
     this.$mdDialog.show({
       templateUrl: 'assets/wise5/authoringTool/components/edit-component-advanced.html',
@@ -577,8 +580,32 @@ class NodeAuthoringController {
     });
   }
 
-  componentCheckboxClicked(): void {
+  componentCheckboxChanged(): void {
     this.isAnyComponentSelected = Object.values(this.componentsToChecked).some((value) => value);
+  }
+
+  componentCheckboxClicked(event: any): void {
+    event.stopPropagation();
+  }
+
+  toggleComponent(componentId: string): void {
+    this.componentsToIsExpanded[componentId] = !this.componentsToIsExpanded[componentId];
+  }
+
+  expandAllComponents(): void {
+    for (const component of this.components) {
+      this.componentsToIsExpanded[component.id] = true;
+    }
+  }
+
+  collapseAllComponents(): void {
+    for (const component of this.components) {
+      this.componentsToIsExpanded[component.id] = false;
+    }
+  }
+
+  getNumberOfComponentsExpanded(): number {
+    return Object.values(this.componentsToIsExpanded).filter((value) => value).length;
   }
 }
 
