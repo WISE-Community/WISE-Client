@@ -10,7 +10,7 @@
         <concurrent-authors-message
           [authors]="$ctrl.authors"
           class="center app-background"
-          style="position: sticky; top: 1px; padding: 4px 0; display: block; z-index: 3;"
+          style="position: sticky; top: 1px; padding: 4px 0; display: block; z-index: 3"
         ></concurrent-authors-message>
         <style>
           #commitDiv {
@@ -250,6 +250,18 @@
             </div>
           </div>
           <div style="margin-top: 20px; margin-left: 20px">
+            <div ng-if="$ctrl.insertGroupMode">
+              <md-button
+                class="insertButton md-raised md-primary"
+                style="height: 40px"
+                ng-click="$ctrl.insertInside('group0')"
+              >
+                <md-icon>keyboard_backspace</md-icon>
+                <md-tooltip md-direction="top" class="projectButtonTooltip"
+                  >{{ ::'insertAsFirstActivity' | translate }}</md-tooltip
+                >
+              </md-button>
+            </div>
             <div ng-repeat='item in $ctrl.items | toArray | orderBy : "order"'></div>
             <div
               ng-repeat='item in $ctrl.items | toArray | orderBy : "order"'
