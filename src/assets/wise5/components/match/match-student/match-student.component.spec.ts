@@ -138,7 +138,6 @@ describe('MatchStudentComponent', () => {
   checkAnswer();
   checkAnswerAndDisplayFeedback();
   initializeBuckets();
-  initializeChoices();
   createComponentStateObject();
   clearFeedback();
   isAuthorHasSpecifiedACorrectBucket();
@@ -506,19 +505,6 @@ function initializeBuckets() {
       expect(component.buckets[1].value).toEqual(bucketValue1);
       expect(component.buckets[2].value).toEqual(bucketValue2);
       expect(component.buckets[3].value).toEqual(bucketValue3);
-    });
-  });
-}
-
-function initializeChoices() {
-  describe('initializeChoices', () => {
-    it('should initialize choices', () => {
-      component.choices = null;
-      component.initializeChoices();
-      expect(component.choices.length).toEqual(3);
-      expect(component.choices[0].value).toEqual(choiceValue1);
-      expect(component.choices[1].value).toEqual(choiceValue2);
-      expect(component.choices[2].value).toEqual(choiceValue3);
     });
   });
 }
