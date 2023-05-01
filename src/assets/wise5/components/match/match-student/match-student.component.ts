@@ -21,6 +21,8 @@ import {
 } from '@angular/cdk/drag-drop';
 import { copy } from '../../../common/object/object';
 import { generateRandomKey } from '../../../common/string/string';
+import { filter } from 'rxjs';
+import { NotebookItem } from '../../../common/notebook/notebookItem';
 
 @Component({
   selector: 'match-student',
@@ -40,32 +42,32 @@ export class MatchStudent extends ComponentStudent {
   isHorizontal: boolean = false;
   isLatestComponentStateSubmit: boolean = false;
   numChoiceColumns: number = 1;
-  privateNotebookItems: any[] = [];
+  privateNotebookItems: NotebookItem[] = [];
   sourceBucket: any;
   sourceBucketId: string = '0';
 
   constructor(
-    protected AnnotationService: AnnotationService,
-    protected ComponentService: ComponentService,
-    protected ConfigService: ConfigService,
+    protected annotationService: AnnotationService,
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
     protected dialog: MatDialog,
-    private MatchService: MatchService,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    private ProjectService: ProjectService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
+    private matchService: MatchService,
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    private projectService: ProjectService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService,
+    protected utilService: UtilService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService
     );
   }
 
@@ -76,16 +78,17 @@ export class MatchStudent extends ComponentStudent {
     this.isHorizontal = this.componentContent.horizontal;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
-    this.hasCorrectAnswer = this.MatchService.componentHasCorrectAnswer(this.componentContent);
+    this.hasCorrectAnswer = this.matchService.componentHasCorrectAnswer(this.componentContent);
+    this.choices = this.componentContent.choices;
     if (this.shouldImportPrivateNotes()) {
       this.importPrivateNotes();
+      this.subscribeToNewNotes();
     }
-    this.initializeChoices();
     this.initializeBuckets();
-    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
+    if (this.utilService.hasShowWorkConnectedComponent(this.componentContent)) {
       this.handleConnectedComponents();
     } else if (
-      this.MatchService.componentStateHasStudentWork(this.componentState, this.componentContent)
+      this.matchService.componentStateHasStudentWork(this.componentState, this.componentContent)
     ) {
       this.setStudentWork(this.componentState);
     } else if (this.component.hasConnectedComponent()) {
@@ -103,21 +106,24 @@ export class MatchStudent extends ComponentStudent {
     this.registerAutoScroll();
   }
 
-  importPrivateNotes(): void {
-    const allPrivateNotebookItems = this.NotebookService.getPrivateNotebookItems();
-    this.privateNotebookItems = allPrivateNotebookItems.filter((note) => {
-      return note.serverDeleteTime == null;
+  private importPrivateNotes(): void {
+    this.privateNotebookItems = this.notebookService
+      .getPrivateNotebookItems()
+      .filter((item) => item.type === 'note' && item.serverDeleteTime == null);
+    this.privateNotebookItems.forEach((item) => {
+      this.choices.push(this.createChoiceFromNotebookItem(item));
     });
+  }
+
+  private subscribeToNewNotes(): void {
     this.subscriptions.add(
-      this.NotebookService.notebookUpdated$.subscribe((args) => {
-        if (args.notebookItem.type === 'note') {
-          this.addNotebookItemToSourceBucket(args.notebookItem);
-        }
-      })
+      this.notebookService.notebookUpdated$
+        .pipe(filter(({ notebookItem }) => notebookItem.type === 'note'))
+        .subscribe(({ notebookItem }) => this.addNotebookItemToSourceBucket(notebookItem))
     );
   }
 
-  addNotebookItemToSourceBucket(notebookItem: any): void {
+  addNotebookItemToSourceBucket(notebookItem: NotebookItem): void {
     const choice = this.createChoiceFromNotebookItem(notebookItem);
     this.choices.push(choice);
     const sourceBucket = this.getSourceBucket();
@@ -171,7 +177,7 @@ export class MatchStudent extends ComponentStudent {
     const choiceIds = this.getChoiceIds();
     for (const componentStateBucket of componentState.studentData.buckets) {
       if (bucketIds.includes(componentStateBucket.id)) {
-        const bucket = this.MatchService.getBucketById(componentStateBucket.id, this.buckets);
+        const bucket = this.matchService.getBucketById(componentStateBucket.id, this.buckets);
         for (const componentStateChoice of componentStateBucket.items) {
           this.addChoiceToBucket(componentStateChoice, bucket);
           const choiceLocation = choiceIds.indexOf(componentStateChoice.id);
@@ -188,7 +194,7 @@ export class MatchStudent extends ComponentStudent {
   }
 
   getSourceBucket(): any {
-    return this.MatchService.getBucketById(this.sourceBucketId, this.buckets);
+    return this.matchService.getBucketById(this.sourceBucketId, this.buckets);
   }
 
   clearSourceBucketChoices(): void {
@@ -211,7 +217,7 @@ export class MatchStudent extends ComponentStudent {
   }
 
   private addAuthoredChoiceToBucket(choiceId: string, bucket: any): void {
-    bucket.items.push(this.MatchService.getChoiceById(choiceId, this.choices));
+    bucket.items.push(this.matchService.getChoiceById(choiceId, this.choices));
   }
 
   /**
@@ -219,7 +225,7 @@ export class MatchStudent extends ComponentStudent {
    * since. This will also determine if submit is dirty.
    */
   private processPreviousStudentWork(): void {
-    const latestComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+    const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
       this.nodeId,
       this.componentId
     );
@@ -231,7 +237,7 @@ export class MatchStudent extends ComponentStudent {
       this.setGeneralComponentStatus(latestComponentState.isCorrect, false);
       this.checkAnswer();
     } else {
-      const latestSubmitComponentState = this.StudentDataService.getLatestSubmitComponentState(
+      const latestSubmitComponentState = this.studentDataService.getLatestSubmitComponentState(
         this.nodeId,
         this.componentId
       );
@@ -249,14 +255,14 @@ export class MatchStudent extends ComponentStudent {
   }
 
   processDirtyStudentWork(): void {
-    const latestSubmitComponentState = this.StudentDataService.getLatestSubmitComponentState(
+    const latestSubmitComponentState = this.studentDataService.getLatestSubmitComponentState(
       this.nodeId,
       this.componentId
     );
     if (latestSubmitComponentState != null) {
       this.showFeedbackOnUnchangedChoices(latestSubmitComponentState);
     } else {
-      const latestComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+      const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
         this.nodeId,
         this.componentId
       );
@@ -304,7 +310,7 @@ export class MatchStudent extends ComponentStudent {
     const previousBuckets = latestSubmitComponentState.studentData.buckets;
     for (const currentBucket of this.buckets) {
       const currentBucketChoiceIds = this.getIds(currentBucket.items);
-      const previousBucket = this.MatchService.getBucketById(currentBucket.id, previousBuckets);
+      const previousBucket = this.matchService.getBucketById(currentBucket.id, previousBuckets);
       const previousBucketChoiceIds = this.getIds(previousBucket.items);
       for (
         let currentChoiceIndex = 0;
@@ -346,22 +352,11 @@ export class MatchStudent extends ComponentStudent {
     return currentChoiceIndex != previousBucketChoiceIds.indexOf(currentChoiceId);
   }
 
-  initializeChoices(): void {
-    this.choices = this.componentContent.choices;
-    if (this.shouldImportPrivateNotes()) {
-      for (const privateNotebookItem of this.privateNotebookItems) {
-        if (privateNotebookItem.type === 'note') {
-          this.choices.push(this.createChoiceFromNotebookItem(privateNotebookItem));
-        }
-      }
-    }
-  }
-
-  shouldImportPrivateNotes(): boolean {
+  private shouldImportPrivateNotes(): boolean {
     return this.isNotebookEnabled() && this.componentContent.importPrivateNotes;
   }
 
-  createChoiceFromNotebookItem(notebookItem: any): any {
+  createChoiceFromNotebookItem(notebookItem: NotebookItem): any {
     let value = notebookItem.content.text;
     for (const attachment of notebookItem.content.attachments) {
       value += `<div><img src="${attachment.iconURL}" alt="image from note"/></div>`;
@@ -432,7 +427,7 @@ export class MatchStudent extends ComponentStudent {
           );
           isCorrect &&= isChoiceCorrect;
         }
-        this.MatchService.setItemStatus(item, this.hasCorrectAnswer);
+        this.matchService.setItemStatus(item, this.hasCorrectAnswer);
       }
     }
 
@@ -568,7 +563,7 @@ export class MatchStudent extends ComponentStudent {
     componentState.isSubmit = this.isSubmit;
     const studentData: any = {
       buckets: this.cleanBuckets(
-        this.ProjectService.getComponent(this.nodeId, this.componentId),
+        this.projectService.getComponent(this.nodeId, this.componentId),
         copy(this.buckets)
       ),
       submitCounter: this.submitCounter
