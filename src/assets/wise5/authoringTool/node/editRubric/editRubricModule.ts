@@ -1,16 +1,16 @@
 import * as angular from 'angular';
 import { downgradeComponent } from '@angular/upgrade/static';
-import { EditRubricComponent } from './edit-rubric.component';
+import { EditNodeRubricComponent } from './edit-node-rubric.component';
 
 export default angular
   .module('editRubricModule', ['ui.router'])
-  .directive('editRubricComponent', downgradeComponent({ component: EditRubricComponent }))
+  .directive('editNodeRubric', downgradeComponent({ component: EditNodeRubricComponent }))
   .config([
     '$stateProvider',
     ($stateProvider) => {
       $stateProvider.state('root.at.project.node.edit-rubric', {
         url: '/edit-rubric',
-        component: 'editRubricComponent'
+        component: 'editNodeRubric'
       });
     }
   ]);

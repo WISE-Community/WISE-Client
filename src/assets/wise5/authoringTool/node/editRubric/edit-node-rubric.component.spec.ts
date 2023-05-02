@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EditRubricComponent } from './edit-rubric.component';
+import { EditNodeRubricComponent } from './edit-node-rubric.component';
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherDataService } from '../../../services/teacherDataService';
@@ -11,15 +11,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { UpgradeModule } from '@angular/upgrade/static';
 
-let component: EditRubricComponent;
-let fixture: ComponentFixture<EditRubricComponent>;
+let component: EditNodeRubricComponent;
+let fixture: ComponentFixture<EditNodeRubricComponent>;
 const node1: any = { rubric: '' };
 const nodeId1: string = 'node1';
 
-describe('EditRubricComponent', () => {
+describe('EditNodeRubricComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditRubricComponent],
+      declarations: [EditNodeRubricComponent],
       imports: [
         HttpClientTestingModule,
         MatDialogModule,
@@ -38,7 +38,7 @@ describe('EditRubricComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditRubricComponent);
+    fixture = TestBed.createComponent(EditNodeRubricComponent);
     component = fixture.componentInstance;
     spyOn(TestBed.inject(TeacherDataService), 'getCurrentNodeId').and.returnValue(nodeId1);
     spyOn(TestBed.inject(TeacherProjectService), 'getNodeById').and.returnValue(node1);
