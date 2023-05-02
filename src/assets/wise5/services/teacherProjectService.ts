@@ -371,65 +371,8 @@ export class TeacherProjectService extends ProjectService {
     }
   }
 
-  isInactive(nodeId) {
-    for (const inactiveNode of this.getInactiveNodes()) {
-      if (inactiveNode.id === nodeId) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Check if a node id is already being used in the project
-   * @param nodeId check if this node id is already being used in the project
-   * @return whether the node id is already being used in the project
-   */
-  isNodeIdUsed(nodeId) {
-    for (const node of this.getNodes().concat(this.getInactiveNodes())) {
-      if (node.id === nodeId) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Set a field in the transition logic of a node
-   */
-  setTransitionLogicField(nodeId, field, value) {
-    const node = this.getNodeById(nodeId);
-    const transitionLogic = node.transitionLogic;
-    if (transitionLogic != null) {
-      transitionLogic[field] = value;
-    }
-  }
-
-  /**
-   * Set the transition to value of a node
-   * @param fromNodeId the from node
-   * @param toNodeId the to node
-   */
-  setTransition(fromNodeId, toNodeId) {
-    const node = this.getNodeById(fromNodeId);
-    const transitionLogic = node.transitionLogic;
-    if (transitionLogic != null) {
-      let transitions = transitionLogic.transitions;
-      if (transitions == null || transitions.length == 0) {
-        transitionLogic.transitions = [];
-        const transition = {};
-        transitionLogic.transitions.push(transition);
-        transitions = transitionLogic.transitions;
-      }
-
-      if (transitions != null && transitions.length > 0) {
-        // get the first transition. we will assume there is only one transition.
-        const transition = transitions[0];
-        if (transition != null) {
-          transition.to = toNodeId;
-        }
-      }
-    }
+  private isInactive(nodeId: string): boolean {
+    return this.getInactiveNodes().some((node) => node.id === nodeId);
   }
 
   /**
@@ -445,48 +388,6 @@ export class TeacherProjectService extends ProjectService {
     } else {
       return null;
     }
-  }
-
-  /**
-   * Add branch path taken constraints to the node
-   * @param targetNodeId the node to add the constraints to
-   * @param fromNodeId the from node id of the branch path taken constraint
-   * @param toNodeId the to node id of the branch path taken constraint
-   */
-  addBranchPathTakenConstraints(targetNodeId, fromNodeId, toNodeId) {
-    const node = this.getNodeById(targetNodeId);
-    const makeThisNodeNotVisibleConstraint = {
-      id: this.getNextAvailableConstraintIdForNodeId(targetNodeId),
-      action: 'makeThisNodeNotVisible',
-      targetId: targetNodeId,
-      removalConditional: 'all',
-      removalCriteria: [
-        {
-          name: 'branchPathTaken',
-          params: {
-            fromNodeId: fromNodeId,
-            toNodeId: toNodeId
-          }
-        }
-      ]
-    };
-    node.constraints.push(makeThisNodeNotVisibleConstraint);
-    const makeThisNodeNotVisitableConstraint = {
-      id: this.getNextAvailableConstraintIdForNodeId(targetNodeId),
-      action: 'makeThisNodeNotVisitable',
-      targetId: targetNodeId,
-      removalConditional: 'all',
-      removalCriteria: [
-        {
-          name: 'branchPathTaken',
-          params: {
-            fromNodeId: fromNodeId,
-            toNodeId: toNodeId
-          }
-        }
-      ]
-    };
-    node.constraints.push(makeThisNodeNotVisitableConstraint);
   }
 
   getProjectRubric(): any {
