@@ -1,9 +1,10 @@
 import * as angular from 'angular';
+import { downgradeComponent } from '@angular/upgrade/static';
 import { EditRubricComponent } from './edit-rubric.component';
 
 export default angular
   .module('editRubricModule', ['ui.router'])
-  .component('editRubricComponent', EditRubricComponent)
+  .directive('editRubricComponent', downgradeComponent({ component: EditRubricComponent }))
   .config([
     '$stateProvider',
     ($stateProvider) => {

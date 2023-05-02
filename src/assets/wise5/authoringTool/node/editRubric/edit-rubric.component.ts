@@ -1,50 +1,42 @@
+import { Component, OnInit } from '@angular/core';
 import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wise-link';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { UpgradeModule } from '@angular/upgrade/static';
 
-class EditRubricComponentController {
+@Component({
+  selector: 'edit-rubric',
+  templateUrl: 'edit-rubric.component.html'
+})
+export class EditRubricComponent implements OnInit {
   node: any;
   nodeId: string;
   rubric: string;
 
-  static $inject = [
-    '$state',
-    'ConfigService',
-    'ProjectService',
-    'TeacherDataService',
-    'UtilService'
-  ];
-
   constructor(
-    private $state: any,
-    private ConfigService: ConfigService,
-    private TeacherProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService
+    private configService: ConfigService,
+    private teacherProjectService: TeacherProjectService,
+    private teacherDataService: TeacherDataService,
+    private upgrade: UpgradeModule
   ) {}
 
-  $onInit(): void {
-    this.nodeId = this.TeacherDataService.getCurrentNodeId();
-    this.node = this.TeacherProjectService.getNodeById(this.nodeId);
-    this.rubric = this.TeacherProjectService.replaceAssetPaths(replaceWiseLinks(this.node.rubric));
+  ngOnInit(): void {
+    this.nodeId = this.teacherDataService.getCurrentNodeId();
+    this.node = this.teacherProjectService.getNodeById(this.nodeId);
+    this.rubric = this.teacherProjectService.replaceAssetPaths(replaceWiseLinks(this.node.rubric));
   }
 
   rubricChanged(): void {
-    let html = this.ConfigService.removeAbsoluteAssetPaths(this.rubric);
-    html = insertWiseLinks(html);
+    const html = insertWiseLinks(this.configService.removeAbsoluteAssetPaths(this.rubric));
     this.node.rubric = html;
-    this.TeacherProjectService.saveProject();
+    this.teacherProjectService.saveProject();
   }
 
   goBack(): void {
-    this.$state.go('root.at.project.node', {
-      projectId: this.ConfigService.getProjectId(),
+    this.upgrade.$injector.get('$state').go('root.at.project.node', {
+      projectId: this.configService.getProjectId(),
       nodeId: this.nodeId
     });
   }
 }
-
-export const EditRubricComponent = {
-  templateUrl: `/assets/wise5/authoringTool/node/editRubric/edit-rubric.component.html`,
-  controller: EditRubricComponentController
-};
