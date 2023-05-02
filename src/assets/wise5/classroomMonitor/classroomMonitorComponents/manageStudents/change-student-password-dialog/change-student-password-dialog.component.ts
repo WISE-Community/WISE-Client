@@ -23,16 +23,16 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private ConfigService: ConfigService,
+    private configService: ConfigService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private TeacherService: TeacherService,
+    private teacherService: TeacherService,
     @Inject(MAT_DIALOG_DATA) public user: any
   ) {}
 
   ngOnInit(): void {
-    this.canViewStudentNames = this.ConfigService.getPermissions().canViewStudentNames;
-    this.isTeacherGoogleUser = this.ConfigService.isGoogleUser();
+    this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;
+    this.isTeacherGoogleUser = this.configService.isGoogleUser();
     if (!this.isTeacherGoogleUser) {
       this.changePasswordForm.controls['teacherPassword'].setValidators([Validators.required]);
     }
@@ -44,21 +44,23 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
 
   changePassword(): void {
     this.isChangingPassword = true;
-    this.TeacherService.changeStudentPassword(
-      this.ConfigService.getRunId(),
-      this.user.id,
-      this.changePasswordForm.controls[
-        NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME
-      ].value,
-      this.changePasswordForm.controls['teacherPassword'].value
-    ).subscribe(
-      () => {
-        this.changePasswordSuccess();
-      },
-      (response) => {
-        this.changePasswordError(response.error);
-      }
-    );
+    this.teacherService
+      .changeStudentPassword(
+        this.configService.getRunId(),
+        this.user.id,
+        this.changePasswordForm.controls[
+          NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME
+        ].value,
+        this.changePasswordForm.controls['teacherPassword'].value
+      )
+      .subscribe(
+        () => {
+          this.changePasswordSuccess();
+        },
+        (response) => {
+          this.changePasswordError(response.error);
+        }
+      );
   }
 
   private changePasswordSuccess(): void {

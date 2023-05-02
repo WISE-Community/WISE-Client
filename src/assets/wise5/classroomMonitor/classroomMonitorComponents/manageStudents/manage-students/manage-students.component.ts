@@ -11,23 +11,19 @@ export class ManageStudentsComponent {
   periods: any[];
   subscriptions: Subscription = new Subscription();
 
-  constructor(private TeacherDataService: TeacherDataService) {}
+  constructor(private dataService: TeacherDataService) {}
 
   ngOnInit() {
-    this.setVisiblePeriods(this.TeacherDataService.getCurrentPeriod());
+    this.setVisiblePeriods(this.dataService.getCurrentPeriod());
     this.subscriptions.add(
-      this.TeacherDataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
+      this.dataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
         this.setVisiblePeriods(currentPeriod);
       })
     );
   }
 
   setVisiblePeriods(currentPeriod: any): void {
-    if (currentPeriod.periodId === -1) {
-      this.periods = this.TeacherDataService.getPeriods();
-    } else {
-      this.periods = [currentPeriod];
-    }
+    this.periods = currentPeriod.periodId === -1 ? this.dataService.getPeriods() : [currentPeriod];
   }
 
   ngOnDestroy() {

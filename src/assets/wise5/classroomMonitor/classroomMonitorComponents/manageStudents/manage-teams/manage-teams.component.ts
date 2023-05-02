@@ -7,6 +7,4 @@ import { Component, Input } from '@angular/core';
 })
 export class ManageTeamsComponent {
   @Input() teams: any[];
-
-  constructor() {}
 }

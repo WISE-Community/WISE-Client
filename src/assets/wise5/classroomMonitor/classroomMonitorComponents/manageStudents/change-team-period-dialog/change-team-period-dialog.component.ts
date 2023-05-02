@@ -24,13 +24,13 @@ export class ChangeTeamPeriodDialogComponent {
     protected dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public team: any,
     protected http: HttpClient,
-    protected ConfigService: ConfigService,
+    protected configService: ConfigService,
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    this.canViewStudentNames = this.ConfigService.getPermissions().canViewStudentNames;
-    this.periods = this.ConfigService.getPeriods().filter((period) => {
+    this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;
+    this.periods = this.configService.getPeriods().filter((period) => {
       return period.periodId != -1 && period.periodId != this.team.periodId;
     });
   }
@@ -39,7 +39,7 @@ export class ChangeTeamPeriodDialogComponent {
     this.isChangingPeriod = true;
     this.http
       .post(
-        `/api/teacher/run/${this.ConfigService.getRunId()}/team/${
+        `/api/teacher/run/${this.configService.getRunId()}/team/${
           this.team.workgroupId
         }/change-period`,
         this.selectedPeriod.periodId
@@ -47,8 +47,8 @@ export class ChangeTeamPeriodDialogComponent {
       .subscribe(
         (response) => {
           this.isChangingPeriod = false;
-          this.ConfigService.retrieveConfig(
-            `/api/config/classroomMonitor/${this.ConfigService.getRunId()}`
+          this.configService.retrieveConfig(
+            `/api/config/classroomMonitor/${this.configService.getRunId()}`
           );
           this.snackBar.open(
             $localize`Moved Team ${this.team.workgroupId} to Period ${this.selectedPeriod.periodName}.`
