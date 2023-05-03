@@ -1,0 +1,14 @@
+<button
+  mat-raised-button
+  color="primary"
+  (click)="goBack()"
+  matTooltip="Back"
+  matTooltipPosition="above"
+  i18n-matTooltip
+>
+  <mat-icon>arrow_back</mat-icon>
+</button>
+<br />
+<h5 i18n>Edit Step Rubric</h5>
+<wise-authoring-tinymce-editor [(model)]="rubric" (modelChange)="rubricChanged()">
+</wise-authoring-tinymce-editor>
