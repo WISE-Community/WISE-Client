@@ -60,10 +60,6 @@ export class UtilService {
     }
     return false;
   }
-
-  calculateMean(values) {
-    return values.reduce((a, b) => a + b) / values.length;
-  }
 }
 
 declare global {
