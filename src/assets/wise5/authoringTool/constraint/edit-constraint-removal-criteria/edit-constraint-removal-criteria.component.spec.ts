@@ -42,18 +42,16 @@ describe('EditConstraintRemovalCriteriaComponent', () => {
   });
 
   beforeEach(() => {
-    removalCriteria = [
-      {
-        name: '',
-        params: {}
-      }
-    ];
+    removalCriteria = {
+      name: '',
+      params: {}
+    };
     component.criteria = removalCriteria;
     component.constraint = new Constraint({
       id: 'node1Constraint1',
       action: '',
       removalConditional: 'any',
-      removalCriteria: removalCriteria
+      removalCriteria: [removalCriteria]
     });
     component.node = { id: 'node1' };
     fixture.detectChanges();

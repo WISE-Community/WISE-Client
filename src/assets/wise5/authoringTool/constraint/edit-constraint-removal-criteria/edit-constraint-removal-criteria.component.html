@@ -59,15 +59,15 @@
         <mat-option [value]="''">
           <span class="red" i18n>Please Choose a Component</span>
         </mat-option>
-        <mat-option
-          *ngFor="let component of getComponents(criteria.params.nodeId)"
-          [value]="component.id"
+        <ng-container
+          *ngFor="let component of getComponents(criteria.params.nodeId); index as componentIndex"
         >
-          <span i18n
-            >{{ getComponentIndex(component) + 1 }}. {{ component.type }} (Prompt:
-            {{ component.prompt }})</span
-          >
-        </mat-option>
+          <mat-option *ngIf="componentIdToIsSelectable[component.id]" [value]="component.id">
+            <span i18n
+              >{{ componentIndex + 1 }}. {{ component.type }} (Prompt: {{ component.prompt }})</span
+            >
+          </mat-option>
+        </ng-container>
       </mat-select>
     </mat-form-field>
     <required-error-label *ngIf="criteria.params.componentId === ''"> </required-error-label>
