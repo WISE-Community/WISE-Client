@@ -28,16 +28,16 @@ export class ManageTeamComponent {
 
   constructor(
     private dialog: MatDialog,
-    private ConfigService: ConfigService,
-    private UpdateWorkgroupService: UpdateWorkgroupService,
+    private configService: ConfigService,
+    private updateWorkgroupService: UpdateWorkgroupService,
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
-    this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.team.workgroupId);
+    this.avatarColor = this.configService.getAvatarColorForWorkgroupId(this.team.workgroupId);
     this.isUnassigned = this.team.workgroupId == null;
     this.canChangePeriod =
-      this.ConfigService.getPermissions().canGradeStudentWork &&
+      this.configService.getPermissions().canGradeStudentWork &&
       this.team.users.length > 0 &&
       !this.isUnassigned;
   }
@@ -88,22 +88,19 @@ export class ManageTeamComponent {
 
   private moveUser(event: CdkDragDrop<string[]>) {
     const user: any = event.previousContainer.data[event.previousIndex];
-    this.UpdateWorkgroupService.moveMember(
-      user.id,
-      event.item.data,
-      this.team.workgroupId,
-      this.team.periodId
-    ).subscribe(() => {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-      this.ConfigService.retrieveConfig(
-        `/api/config/classroomMonitor/${this.ConfigService.getRunId()}`
-      );
-      this.snackBar.open($localize`Moved student to Team ${this.team.workgroupId}.`);
-    });
+    this.updateWorkgroupService
+      .moveMember(user.id, event.item.data, this.team.workgroupId, this.team.periodId)
+      .subscribe(() => {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex
+        );
+        this.configService.retrieveConfig(
+          `/api/config/classroomMonitor/${this.configService.getRunId()}`
+        );
+        this.snackBar.open($localize`Moved student to Team ${this.team.workgroupId}.`);
+      });
   }
 }
