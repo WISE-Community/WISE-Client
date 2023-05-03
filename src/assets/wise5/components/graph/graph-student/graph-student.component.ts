@@ -22,6 +22,7 @@ import { arraysContainSameValues } from '../../../common/array/array';
 import { generateRandomKey } from '../../../common/string/string';
 import { GraphCustomLegend } from '../GraphCustomLegend';
 import { showXPlotLine, showYPlotLine } from '../graph-plot-line';
+import { calculateMean } from '../util';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -529,8 +530,8 @@ export class GraphStudent extends ComponentStudent {
     const covarianceMatrix = covariance(xValues, yValues);
     const covarianceXY = covarianceMatrix[0][1];
     const varianceX = covarianceMatrix[0][0];
-    const meanY = this.calculateMean(yValues);
-    const meanX = this.calculateMean(xValues);
+    const meanY = calculateMean(yValues);
+    const meanX = calculateMean(xValues);
     const slope = covarianceXY / varianceX;
     const intercept = meanY - slope * meanX;
     let firstX = Math.min(...xValues);
@@ -549,10 +550,6 @@ export class GraphStudent extends ComponentStudent {
       [firstX, firstY],
       [secondX, secondY]
     ];
-  }
-
-  private calculateMean(values: number[]): number {
-    return values.reduce((a, b) => a + b) / values.length;
   }
 
   getValuesInColumn(tableData, columnIndex) {
