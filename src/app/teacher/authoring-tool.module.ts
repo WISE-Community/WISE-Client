@@ -27,6 +27,8 @@ import { AddLessonChooseLocationComponent } from '../../assets/wise5/authoringTo
 import { NodeConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/constraint/node-constraint-authoring/node-constraint-authoring.component';
 import { ConcurrentAuthorsMessageComponent } from '../../assets/wise5/authoringTool/concurrent-authors-message/concurrent-authors-message.component';
 import { EditNodeRubricComponent } from '../../assets/wise5/authoringTool/node/editRubric/edit-node-rubric.component';
+import { ChooseImportComponentComponent } from '../../assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component';
+import { ChooseImportComponentLocationComponent } from '../../assets/wise5/authoringTool/importComponent/choose-import-component-location/choose-import-component-location.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { EditNodeRubricComponent } from '../../assets/wise5/authoringTool/node/e
     AddYourOwnNode,
     AdvancedProjectAuthoringComponent,
     CardSelectorComponent,
+    ChooseImportComponentComponent,
+    ChooseImportComponentLocationComponent,
     ChooseImportStepComponent,
     ChooseImportStepLocationComponent,
     ChooseNewComponent,
