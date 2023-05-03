@@ -81,7 +81,19 @@ export class EditConstraintRemovalCriteriaComponent implements OnInit {
   constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
-    this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);
+    this.setNodeIds();
+  }
+
+  private setNodeIds(): void {
+    const allNodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);
+    this.nodeIds =
+      this.criteria.name === 'choiceChosen'
+        ? allNodeIds.filter((nodeId) =>
+            this.projectService
+              .getNode(nodeId)
+              .components.some((component) => component.type === 'MultipleChoice')
+          )
+        : allNodeIds;
   }
 
   deleteRemovalCriteria(): void {
@@ -102,6 +114,7 @@ export class EditConstraintRemovalCriteriaComponent implements OnInit {
         criteria.params[value] = this.node.id;
       }
     }
+    this.setNodeIds();
     this.saveProject();
   }
 
@@ -128,7 +141,14 @@ export class EditConstraintRemovalCriteriaComponent implements OnInit {
   }
 
   protected getComponents(nodeId: string): ComponentContent[] {
-    return this.projectService.getComponents(nodeId);
+    const components = this.projectService.getComponents(nodeId);
+    return this.criteria.name === 'choiceChosen'
+      ? components.filter((component) => component.type === 'MultipleChoice')
+      : components;
+  }
+
+  protected getComponentIndex(component: ComponentContent): number {
+    return this.projectService.getComponents(this.criteria.params.nodeId).indexOf(component);
   }
 
   protected scoresChanged(value: any, params: any): void {
