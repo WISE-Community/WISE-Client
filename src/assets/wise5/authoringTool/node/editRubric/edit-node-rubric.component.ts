@@ -11,7 +11,6 @@ import { UpgradeModule } from '@angular/upgrade/static';
 })
 export class EditNodeRubricComponent implements OnInit {
   node: any;
-  nodeId: string;
   rubric: string;
 
   constructor(
