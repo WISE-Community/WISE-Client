@@ -30,7 +30,7 @@ import { NotebookItem } from '../../../common/notebook/notebookItem';
   styleUrls: ['match-student.component.scss']
 })
 export class MatchStudent extends ComponentStudent {
-  autoScroll: any;
+  autoScroll: any = require('dom-autoscroller');
   buckets: any[] = [];
   bucketStyle: string = '';
   bucketWidth: number = 100;
@@ -73,7 +73,6 @@ export class MatchStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.autoScroll = require('dom-autoscroller');
     this.isChoicesAfter = this.componentContent.choicesAfter;
     this.isHorizontal = this.componentContent.horizontal;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
@@ -623,19 +622,6 @@ export class MatchStudent extends ComponentStudent {
       choice.isIncorrectPosition = null;
       choice.feedback = null;
     }
-  }
-
-  isAuthorHasSpecifiedACorrectBucket(choiceId: string): boolean {
-    for (const bucket of this.componentContent.feedback) {
-      for (const choice of bucket.choices) {
-        if (choice.choiceId === choiceId) {
-          if (choice.isCorrect) {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
   }
 
   /**

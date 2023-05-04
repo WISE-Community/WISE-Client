@@ -140,7 +140,6 @@ describe('MatchStudentComponent', () => {
   initializeBuckets();
   createComponentStateObject();
   clearFeedback();
-  isAuthorHasSpecifiedACorrectBucket();
   isAuthorHasSpecifiedACorrectPosition();
   getFeedbackObject();
   mergeBucket();
@@ -541,20 +540,6 @@ function clearFeedback() {
       for (const choice of component.choices) {
         expect(choice.feedback).toEqual(null);
       }
-    });
-  });
-}
-
-function isAuthorHasSpecifiedACorrectBucket() {
-  describe('isAuthorHasSpecifiedACorrectBucket', () => {
-    it(`should check if author has specified the choice has a correct bucket when it does
-        not`, () => {
-      expect(component.isAuthorHasSpecifiedACorrectBucket(choiceId1)).toEqual(false);
-    });
-
-    it('should check if author has specified the choice has a correct bucket when it does', () => {
-      component.componentContent.feedback[1].choices[0].isCorrect = true;
-      expect(component.isAuthorHasSpecifiedACorrectBucket(choiceId1)).toEqual(true);
     });
   });
 }
