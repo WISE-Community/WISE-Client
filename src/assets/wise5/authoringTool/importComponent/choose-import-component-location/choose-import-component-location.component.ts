@@ -77,16 +77,11 @@ export class ChooseImportComponentLocationComponent implements OnInit {
   }
 
   private getImportedComponents(): any[] {
-    const importedComponents = [];
-    for (const component of this.upgrade.$injector.get('$stateParams').selectedComponents) {
-      const importedComponent = {
-        fromProjectId: this.upgrade.$injector.get('$stateParams').importFromProjectId,
-        fromComponentId: component.id,
-        type: component.type
-      };
-      importedComponents.push(importedComponent);
-    }
-    return importedComponents;
+    return this.upgrade.$injector.get('$stateParams').selectedComponents.map((component) => ({
+      fromProjectId: this.upgrade.$injector.get('$stateParams').importFromProjectId,
+      fromComponentId: component.id,
+      type: component.type
+    }));
   }
 
   cancel(): void {

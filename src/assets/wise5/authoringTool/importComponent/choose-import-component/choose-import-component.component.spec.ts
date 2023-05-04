@@ -8,7 +8,6 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
-import { NotificationService } from '../../../services/notificationService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -52,7 +51,6 @@ describe('ChooseImportComponentComponent', () => {
       providers: [
         ClassroomStatusService,
         ConfigService,
-        NotificationService,
         ProjectLibraryService,
         TeacherDataService,
         TeacherProjectService,

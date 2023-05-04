@@ -18,7 +18,6 @@ export class ChooseImportComponentComponent implements OnInit {
   importProjectItems: any = [];
   libraryProjectsList: any = [];
   myProjectsList: any = [];
-  Object: any;
   nodesInOrder: any[] = [];
 
   constructor(
@@ -41,7 +40,6 @@ export class ChooseImportComponentComponent implements OnInit {
         libraryProjects
       );
     });
-    this.Object = Object;
   }
 
   showMyImportProject(importProjectId: number): void {
