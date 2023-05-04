@@ -31,8 +31,6 @@ import { NodeProgressViewComponent } from '../../assets/wise5/classroomMonitor/c
 import { TopBarComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component';
 import { NotebookGradingComponent } from '../../assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component';
 import { StudentGradingComponent } from '../../assets/wise5/classroomMonitor/student-grading/student-grading.component';
-import { ExportStepVisitsComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component';
-import { DataExportComponent } from '../../assets/wise5/classroomMonitor/dataExport/data-export/data-export.component';
 import { StudentProgressComponent } from '../../assets/wise5/classroomMonitor/student-progress/student-progress.component';
 import { ClassroomMonitorComponent } from '../../assets/wise5/classroomMonitor/classroom-monitor.component';
 import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
@@ -41,6 +39,7 @@ import { ShowNodeInfoDialogComponent } from '../classroom-monitor/show-node-info
 import { MilestoneModule } from './milestone/milestone.module';
 import { GradingCommonModule } from './grading-common.module';
 import { ManageStudentsModule } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students.module';
+import { DataExportModule } from '../../assets/wise5/classroomMonitor/dataExport/data-export.module';
 
 @NgModule({
   declarations: [
@@ -48,8 +47,6 @@ import { ManageStudentsModule } from '../../assets/wise5/classroomMonitor/classr
     ClassroomMonitorComponent,
     ComponentNewWorkBadgeComponent,
     ComponentSelectComponent,
-    DataExportComponent,
-    ExportStepVisitsComponent,
     MainMenuComponent,
     NavItemComponent,
     NavItemProgressComponent,
@@ -81,6 +78,7 @@ import { ManageStudentsModule } from '../../assets/wise5/classroomMonitor/classr
     StudentTeacherCommonModule,
     ComponentGradingModule,
     ComponentStudentModule,
+    DataExportModule,
     GradingCommonModule,
     HighchartsChartModule,
     ManageStudentsModule,

@@ -4,7 +4,7 @@ import * as angular from 'angular';
 import './classroomMonitorComponents/manageStudents/manageStudentsModule';
 import './classroomMonitorComponents/nodeProgress/nodeProgress';
 import './classroomMonitorComponents/studentProgress/studentProgress';
-import './dataExport/data-export-module';
+import './dataExport/data-export-angular-js-module';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { NotebookGradingComponent } from './notebook-grading/notebook-grading.component';
 import { StudentGradingComponent } from './student-grading/student-grading.component';
