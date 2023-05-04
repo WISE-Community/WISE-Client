@@ -16,6 +16,7 @@ import {
   CdkDragDrop,
   CdkDragEnter,
   CdkDragExit,
+  copyArrayItem,
   moveItemInArray,
   transferArrayItem
 } from '@angular/cdk/drag-drop';
@@ -137,16 +138,31 @@ export class MatchStudent extends ComponentStudent {
     event.container.element.nativeElement.classList.remove('primary-bg');
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.item.data, event.currentIndex);
+      moveItemInArray(event.container.data.items, event.item.data, event.currentIndex);
     } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.item.data,
-        event.currentIndex
-      );
+      if (event.container.data.items.includes(event.item.data.item)) {
+        if (!event.previousContainer.data.isSourceBucket) {
+          event.previousContainer.data.items.splice(event.previousIndex, 1);
+        }
+      } else if (event.previousContainer.data.isSourceBucket) {
+        copyArrayItem(
+          event.previousContainer.data.items,
+          event.container.data.items,
+          event.item.data.position,
+          event.currentIndex
+        );
+      } else if (event.container.data.isSourceBucket) {
+        event.previousContainer.data.items.splice(event.previousIndex, 1);
+      } else {
+        transferArrayItem(
+          event.previousContainer.data.items,
+          event.container.data.items,
+          event.item.data.position,
+          event.currentIndex
+        );
+      }
     }
     event.container.element.nativeElement.classList.remove('primary-bg');
     this.studentDataChanged();
