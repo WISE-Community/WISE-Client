@@ -11,15 +11,16 @@ import { MultipleChoiceContent } from '../../../components/multipleChoice/Multip
   templateUrl: './edit-constraint-removal-criteria.component.html'
 })
 export class EditConstraintRemovalCriteriaComponent implements OnInit {
-  @Input() constraint: any;
-  @Input() criteria: any;
-  @Input() node: any;
-  nodeIds: string[];
-
+  private allNodeIds: string[];
+  private componentIdToIsSelectable: { [componentId: string]: boolean } = {};
   private componentParam: RemovalCriteriaParam = new RemovalCriteriaParam(
     'componentId',
     $localize`Component`
   );
+  @Input() constraint: any;
+  @Input() criteria: any;
+  @Input() node: any;
+  nodeIds: string[];
   private stepParam: RemovalCriteriaParam = new RemovalCriteriaParam('nodeId', $localize`Step`);
 
   protected removalCriteria = [
@@ -81,7 +82,20 @@ export class EditConstraintRemovalCriteriaComponent implements OnInit {
   constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
-    this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);
+    this.allNodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);
+    this.setNodeIds();
+    this.calculateSelectableComponents();
+  }
+
+  private setNodeIds(): void {
+    this.nodeIds =
+      this.criteria.name === 'choiceChosen'
+        ? this.allNodeIds.filter((nodeId) =>
+            this.projectService
+              .getNode(nodeId)
+              .components.some((component) => component.type === 'MultipleChoice')
+          )
+        : this.allNodeIds;
   }
 
   deleteRemovalCriteria(): void {
@@ -102,6 +116,8 @@ export class EditConstraintRemovalCriteriaComponent implements OnInit {
         criteria.params[value] = this.node.id;
       }
     }
+    this.setNodeIds();
+    this.calculateSelectableComponents();
     this.saveProject();
   }
 
@@ -116,7 +132,21 @@ export class EditConstraintRemovalCriteriaComponent implements OnInit {
 
   protected nodeIdChanged(criteria: any): void {
     criteria.params.componentId = '';
+    this.calculateSelectableComponents();
     this.saveProject();
+  }
+
+  private calculateSelectableComponents(): void {
+    const components = this.projectService.getComponents(this.criteria.params.nodeId);
+    if (this.criteria.name === 'choiceChosen') {
+      components.forEach((component) => {
+        this.componentIdToIsSelectable[component.id] = component.type === 'MultipleChoice';
+      });
+    } else {
+      components.forEach((component) => {
+        this.componentIdToIsSelectable[component.id] = true;
+      });
+    }
   }
 
   protected getNodePosition(nodeId: string): string {
