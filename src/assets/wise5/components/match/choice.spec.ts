@@ -20,9 +20,7 @@ function createChoiceFromNotebookItem_NoAttachment_ReturnTextOnly() {
   describe('notebook item does not have attachment', () => {
     it('should create choice with text from notebook', () => {
       notebookItem.content.attachments = [];
-      expect(createChoiceFromNotebookItem(notebookItem)).toEqual(
-        new Choice('note1', 'choice', 'My Note')
-      );
+      expect(createChoiceFromNotebookItem(notebookItem)).toEqual(new Choice('note1', 'My Note'));
     });
   });
 }
@@ -32,11 +30,7 @@ function createChoiceFromNotebookItem_HasAttachment_ReturnTextWithImage() {
     it('should create choice with text and image from notebook', () => {
       notebookItem.content.attachments.push({ iconURL: 'my-image.png' });
       expect(createChoiceFromNotebookItem(notebookItem)).toEqual(
-        new Choice(
-          'note1',
-          'choice',
-          'My Note<div><img src="my-image.png" alt="image from note"/></div>'
-        )
+        new Choice('note1', 'My Note<div><img src="my-image.png" alt="image from note"/></div>')
       );
     });
   });

@@ -707,7 +707,7 @@ export class MatchStudent extends ComponentStudent {
       .afterClosed()
       .subscribe((result) => {
         if (result) {
-          const choice = new Choice(generateRandomKey(), 'choice', result);
+          const choice = new Choice(generateRandomKey(), result);
           choice.studentCreated = true;
           this.sourceBucket.items.push(choice);
           this.studentDataChanged();

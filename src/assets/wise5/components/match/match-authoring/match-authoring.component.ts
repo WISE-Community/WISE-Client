@@ -43,8 +43,7 @@ export class MatchAuthoring extends ComponentAuthoring {
   addChoice(): void {
     const newChoice = {
       id: generateRandomKey(),
-      value: '',
-      type: 'choice'
+      value: ''
     };
     this.componentContent.choices.push(newChoice);
     this.addChoiceToFeedback(newChoice.id);
