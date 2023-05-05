@@ -24,6 +24,7 @@ import { copy } from '../../../common/object/object';
 import { generateRandomKey } from '../../../common/string/string';
 import { filter } from 'rxjs';
 import { NotebookItem } from '../../../common/notebook/notebookItem';
+import { Choice, createChoiceFromNotebookItem } from '../choice';
 
 @Component({
   selector: 'match-student',
@@ -35,7 +36,7 @@ export class MatchStudent extends ComponentStudent {
   buckets: any[] = [];
   bucketStyle: string = '';
   bucketWidth: number = 100;
-  choices: any[] = [];
+  choices: Choice[] = [];
   choiceStyle: any = '';
   hasCorrectAnswer: boolean = false;
   isChoicesAfter: boolean = false;
@@ -111,7 +112,7 @@ export class MatchStudent extends ComponentStudent {
       .getPrivateNotebookItems()
       .filter((item) => item.type === 'note' && item.serverDeleteTime == null);
     this.privateNotebookItems.forEach((item) => {
-      this.choices.push(this.createChoiceFromNotebookItem(item));
+      this.choices.push(createChoiceFromNotebookItem(item));
     });
   }
 
@@ -124,10 +125,9 @@ export class MatchStudent extends ComponentStudent {
   }
 
   addNotebookItemToSourceBucket(notebookItem: NotebookItem): void {
-    const choice = this.createChoiceFromNotebookItem(notebookItem);
+    const choice = createChoiceFromNotebookItem(notebookItem);
     this.choices.push(choice);
-    const sourceBucket = this.getSourceBucket();
-    sourceBucket.items.push(choice);
+    this.getSourceBucket().items.push(choice);
   }
 
   dragEnter(event: CdkDragEnter) {
@@ -221,7 +221,7 @@ export class MatchStudent extends ComponentStudent {
     return this.getChoiceIds().includes(choiceId);
   }
 
-  addChoiceToBucket(choice: any, bucket: any): void {
+  addChoiceToBucket(choice: Choice, bucket: any): void {
     const choiceId = choice.id;
     if (this.isAuthoredChoice(choiceId)) {
       this.addAuthoredChoiceToBucket(choiceId, bucket);
@@ -307,11 +307,11 @@ export class MatchStudent extends ComponentStudent {
   }
 
   getBucketIds(): string[] {
-    return this.getIds(this.buckets);
+    return this.buckets.map((bucket) => bucket.id);
   }
 
   getChoiceIds(): string[] {
-    return this.getIds(this.choices);
+    return this.choices.map((choice) => choice.id);
   }
 
   getIds(objects: any[]): string[] {
@@ -369,18 +369,6 @@ export class MatchStudent extends ComponentStudent {
 
   private shouldImportPrivateNotes(): boolean {
     return this.isNotebookEnabled() && this.componentContent.importPrivateNotes;
-  }
-
-  createChoiceFromNotebookItem(notebookItem: NotebookItem): any {
-    let value = notebookItem.content.text;
-    for (const attachment of notebookItem.content.attachments) {
-      value += `<div><img src="${attachment.iconURL}" alt="image from note"/></div>`;
-    }
-    return {
-      id: notebookItem.localNotebookItemId,
-      value: value,
-      type: 'choice'
-    };
   }
 
   initializeBuckets(): void {
@@ -700,7 +688,7 @@ export class MatchStudent extends ComponentStudent {
    * @param {array} choices2 an array of choice objects
    * @return {array} A new array of unique choice objects
    */
-  mergeChoices(choices1: any[], choices2: any[]): any[] {
+  mergeChoices(choices1: Choice[], choices2: Choice[]): Choice[] {
     const mergedChoices = choices1.slice();
     const choices1Ids = this.getIds(choices1);
     for (const choice2 of choices2) {
@@ -719,13 +707,9 @@ export class MatchStudent extends ComponentStudent {
       .afterClosed()
       .subscribe((result) => {
         if (result) {
-          const newChoice = {
-            id: generateRandomKey(),
-            value: result,
-            type: 'choice',
-            studentCreated: true
-          };
-          this.sourceBucket.items.push(newChoice);
+          const choice = new Choice(generateRandomKey(), result);
+          choice.studentCreated = true;
+          this.sourceBucket.items.push(choice);
           this.studentDataChanged();
         }
       });

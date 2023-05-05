@@ -126,7 +126,6 @@ describe('MatchStudentComponent', () => {
 
   createSourceBucket();
   addNotebookItemToSourceBucket();
-  createChoiceFromNotebookItem();
   getSourceBucket();
   clearSourceBucketChoices();
   addChoiceToBucket();
@@ -233,19 +232,6 @@ function addNotebookItemToSourceBucket() {
       expect(component.buckets[0].items.length).toEqual(4);
       const sourceBucketItems = component.buckets[0].items;
       expect(sourceBucketItems[sourceBucketItems.length - 1].id).toEqual(notebookItemId);
-    });
-  });
-}
-
-function createChoiceFromNotebookItem() {
-  describe('createChoiceFromNotebookItem', () => {
-    it('should create choice from notebook item', () => {
-      const choice = component.createChoiceFromNotebookItem(notebookItem);
-      expect(choice.id).toEqual(notebookItemId);
-      expect(choice.type).toEqual('choice');
-      expect(choice.value).toEqual(
-        `${notebookItemText}<div><img src="${notebookItemImageName}" alt="image from note"/></div>`
-      );
     });
   });
 }
