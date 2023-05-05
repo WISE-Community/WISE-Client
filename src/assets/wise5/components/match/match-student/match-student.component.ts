@@ -140,7 +140,7 @@ export class MatchStudent extends ComponentStudent {
 
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data.items, event.item.data, event.currentIndex);
+      moveItemInArray(event.container.data.items, event.item.data.position, event.currentIndex);
     } else {
       if (event.container.data.items.includes(event.item.data.item)) {
         if (!event.previousContainer.data.isSourceBucket) {
