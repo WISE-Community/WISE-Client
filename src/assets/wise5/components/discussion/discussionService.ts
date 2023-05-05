@@ -1,6 +1,5 @@
 import { ComponentService } from '../componentService';
 import { ConfigService } from '../../services/configService';
-import { UtilService } from '../../services/utilService';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
@@ -9,11 +8,7 @@ import { serverSaveTimeComparator } from '../../common/object/object';
 
 @Injectable()
 export class DiscussionService extends ComponentService {
-  constructor(
-    protected http: HttpClient,
-    protected ConfigService: ConfigService,
-    protected UtilService: UtilService
-  ) {
+  constructor(protected http: HttpClient, protected ConfigService: ConfigService) {
     super();
   }
 
