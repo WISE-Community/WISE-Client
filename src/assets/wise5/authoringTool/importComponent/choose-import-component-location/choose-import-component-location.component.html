@@ -1,0 +1,43 @@
+<div class="main-div">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h6 i18n>Choose the new location by clicking one of the buttons below</h6>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="cancel()"
+      aria-label="Cancel"
+      i18n-aria-label
+      i18n
+    >
+      Cancel
+    </button>
+  </div>
+  <div class="insert-as-first-div" fxLayoutGap="20px">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="insertComponentAsFirst()"
+      matTooltip="Insert As First Component"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+    <span class="text" i18n>Insert As First Component</span>
+  </div>
+  <div *ngFor="let component of components; let componentIndex = index" class="component-div">
+    <span class="text">{{ componentIndex + 1 }}. {{ getComponentTypeLabel(component.type) }}</span>
+    <div class="insert-button-div">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="importComponentAfter(component.id)"
+        matTooltip="Insert After"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>keyboard_backspace</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
