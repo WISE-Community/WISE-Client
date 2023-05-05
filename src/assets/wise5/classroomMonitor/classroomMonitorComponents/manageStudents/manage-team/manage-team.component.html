@@ -34,7 +34,7 @@
       <ng-container *ngFor="let user of team.users">
         <li
           cdkDrag
-          [cdkDragData]="team.workgroupId"
+          [cdkDragData]="{ user: user, workgroupId: team.workgroupId }"
           (cdkDragEntered)="dragEnter($event)"
           (cdkDragExited)="dragExit($event)"
           [cdkDragPreviewContainer]="'parent'"

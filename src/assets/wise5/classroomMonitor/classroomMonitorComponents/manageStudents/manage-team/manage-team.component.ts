@@ -20,17 +20,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: 'manage-team.component.html'
 })
 export class ManageTeamComponent {
-  @Input() team: any;
-
   avatarColor: string;
   canChangePeriod: boolean;
   isUnassigned: boolean;
+  @Input() team: any;
 
   constructor(
-    private dialog: MatDialog,
     private configService: ConfigService,
-    private updateWorkgroupService: UpdateWorkgroupService,
-    private snackBar: MatSnackBar
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private updateWorkgroupService: UpdateWorkgroupService
   ) {}
 
   ngOnInit() {
@@ -62,7 +61,7 @@ export class ManageTeamComponent {
     return !drop.element.nativeElement.classList.contains('unassigned') && drop.data.length < 3;
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  protected drop(event: CdkDragDrop<string[]>): void {
     const containerEl = event.container.element.nativeElement;
     const itemEl = event.item.element.nativeElement;
     if (event.previousContainer !== event.container) {
@@ -86,10 +85,14 @@ export class ManageTeamComponent {
     }
   }
 
-  private moveUser(event: CdkDragDrop<string[]>) {
-    const user: any = event.previousContainer.data[event.previousIndex];
+  private moveUser(event: CdkDragDrop<string[]>): void {
     this.updateWorkgroupService
-      .moveMember(user.id, event.item.data, this.team.workgroupId, this.team.periodId)
+      .moveMember(
+        event.item.data.user.id,
+        event.item.data.workgroupId,
+        this.team.workgroupId,
+        this.team.periodId
+      )
       .subscribe(() => {
         transferArrayItem(
           event.previousContainer.data,
