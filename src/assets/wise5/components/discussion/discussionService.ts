@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { serverSaveTimeComparator } from '../../common/object/object';
 
 @Injectable()
 export class DiscussionService extends ComponentService {
@@ -201,7 +202,7 @@ export class DiscussionService extends ComponentService {
     annotations: any[] = [],
     studentWorkId: number
   ): any {
-    for (const annotation of annotations.sort(this.UtilService.sortByServerSaveTime).reverse()) {
+    for (const annotation of annotations.sort(serverSaveTimeComparator).reverse()) {
       if (studentWorkId === annotation.studentWorkId && annotation.type === 'inappropriateFlag') {
         return annotation;
       }
@@ -215,7 +216,7 @@ export class DiscussionService extends ComponentService {
     isStudentMode: boolean = false
   ): any[] {
     const classResponses = [];
-    componentStates = componentStates.sort(this.UtilService.sortByServerSaveTime);
+    componentStates = componentStates.sort(serverSaveTimeComparator);
     for (const componentState of componentStates) {
       if (componentState.studentData.isSubmit) {
         componentState.replies = [];

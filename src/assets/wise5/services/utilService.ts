@@ -8,24 +8,6 @@ export class UtilService {
   constructor() {}
 
   /**
-   * Sort the objects by server save time
-   * @param object1 an object
-   * @param object2 an object
-   * @return -1 if object1 server save time comes before object2 server save time
-   * 1 if object1 server save time comes after object2 server save time
-   * 0 if object1 server save time is equal to object2 server save time
-   */
-  sortByServerSaveTime(object1, object2) {
-    if (object1.serverSaveTime < object2.serverSaveTime) {
-      return -1;
-    } else if (object1.serverSaveTime > object2.serverSaveTime) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
-  /**
    * Determine whether the component has been authored to import work.
    * @param componentContent The component content.
    * @return Whether to import work in this component.
