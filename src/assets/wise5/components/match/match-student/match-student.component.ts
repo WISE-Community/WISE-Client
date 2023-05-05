@@ -12,19 +12,13 @@ import { MatchService } from '../matchService';
 import { MatDialog } from '@angular/material/dialog';
 import { AddMatchChoiceDialog } from './add-match-choice-dialog/add-match-choice-dialog';
 import { ProjectService } from '../../../services/projectService';
-import {
-  CdkDragDrop,
-  CdkDragEnter,
-  CdkDragExit,
-  copyArrayItem,
-  moveItemInArray,
-  transferArrayItem
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragEnter, CdkDragExit } from '@angular/cdk/drag-drop';
 import { copy } from '../../../common/object/object';
 import { generateRandomKey } from '../../../common/string/string';
 import { filter } from 'rxjs';
 import { NotebookItem } from '../../../common/notebook/notebookItem';
 import { Choice, createChoiceFromNotebookItem } from '../choice';
+import { moveItem } from './move-item';
 
 @Component({
   selector: 'match-student',
@@ -138,32 +132,8 @@ export class MatchStudent extends ComponentStudent {
     event.container.element.nativeElement.classList.remove('primary-bg');
   }
 
-  drop(event: CdkDragDrop<any>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data.items, event.item.data.position, event.currentIndex);
-    } else {
-      if (event.container.data.items.includes(event.item.data.item)) {
-        if (!event.previousContainer.data.isSourceBucket) {
-          event.previousContainer.data.items.splice(event.previousIndex, 1);
-        }
-      } else if (event.previousContainer.data.isSourceBucket) {
-        copyArrayItem(
-          event.previousContainer.data.items,
-          event.container.data.items,
-          event.item.data.position,
-          event.currentIndex
-        );
-      } else if (event.container.data.isSourceBucket) {
-        event.previousContainer.data.items.splice(event.previousIndex, 1);
-      } else {
-        transferArrayItem(
-          event.previousContainer.data.items,
-          event.container.data.items,
-          event.item.data.position,
-          event.currentIndex
-        );
-      }
-    }
+  protected drop(event: CdkDragDrop<any>): void {
+    moveItem(event);
     event.container.element.nativeElement.classList.remove('primary-bg');
     this.studentDataChanged();
   }
