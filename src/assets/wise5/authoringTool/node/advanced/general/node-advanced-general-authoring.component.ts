@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 
 @Component({
-  templateUrl: 'node-advanced-general-authoring.component.html'
+  selector: 'node-advanced-general-authoring',
+  templateUrl: './node-advanced-general-authoring.component.html'
 })
-export class NodeAdvancedGeneralAuthoringComponent {
+export class NodeAdvancedGeneralAuthoringComponent implements OnInit {
   node: any;
 
   constructor(

@@ -28,6 +28,7 @@ import { NodeConstraintAuthoringComponent } from '../../assets/wise5/authoringTo
 import { ConcurrentAuthorsMessageComponent } from '../../assets/wise5/authoringTool/concurrent-authors-message/concurrent-authors-message.component';
 import { EditNodeRubricComponent } from '../../assets/wise5/authoringTool/node/editRubric/edit-node-rubric.component';
 import { ImportComponentModule } from '../../assets/wise5/authoringTool/importComponent/import-component-module';
+import { NodeAdvancedAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ImportComponentModule } from '../../assets/wise5/authoringTool/importCo
     ChooseNewNodeTemplate,
     ConcurrentAuthorsMessageComponent,
     EditNodeRubricComponent,
+    NodeAdvancedAuthoringComponent,
     NodeAdvancedBranchAuthoringComponent,
     NodeAdvancedConstraintAuthoringComponent,
     NodeAdvancedGeneralAuthoringComponent,
