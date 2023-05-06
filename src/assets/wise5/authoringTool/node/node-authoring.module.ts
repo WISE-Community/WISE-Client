@@ -1,16 +1,19 @@
 import * as angular from 'angular';
 import { downgradeComponent } from '@angular/upgrade/static';
-import { NodeAdvancedAuthoringComponent } from './advanced/node-advanced-authoring.component';
 import { NodeAdvancedBranchAuthoringComponent } from './advanced/branch/node-advanced-branch-authoring.component';
 import { NodeAdvancedConstraintAuthoringComponent } from './advanced/constraint/node-advanced-constraint-authoring.component';
 import { NodeAdvancedGeneralAuthoringComponent } from './advanced/general/node-advanced-general-authoring.component';
 import { NodeAdvancedJsonAuthoringComponent } from './advanced/json/node-advanced-json-authoring.component';
 import { NodeAdvancedPathAuthoringComponent } from './advanced/path/node-advanced-path-authoring.component';
 import { NodeAuthoringComponent } from './nodeAuthoringComponent';
+import { NodeAdvancedAuthoringComponent } from './advanced/node-advanced-authoring/node-advanced-authoring.component';
 
 export default angular
   .module('nodeAuthoringModule', [])
-  .component('nodeAdvancedAuthoringComponent', NodeAdvancedAuthoringComponent)
+  .directive(
+    'nodeAdvancedAuthoringComponent',
+    downgradeComponent({ component: NodeAdvancedAuthoringComponent })
+  )
   .directive(
     'nodeAdvancedBranchAuthoringComponent',
     downgradeComponent({

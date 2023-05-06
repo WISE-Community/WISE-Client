@@ -1,0 +1,81 @@
+<div class="main-div" fxLayoutGap="20px">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="goBack()"
+    matTooltip="Back"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
+    (click)="showGeneralAdvancedView()"
+    matTooltip="General Advanced"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>settings</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
+    (click)="showEditTransitionsView()"
+    matTooltip="Edit Transitions"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>trending_up</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
+    (click)="showEditConstraintsView()"
+    matTooltip="Edit Constraints"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>block</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
+    (click)="showCreateBranchView()"
+    matTooltip="Create Branch"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon class="branch-icon">call_split</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="showJSONView()"
+    matTooltip="Show JSON"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>code</mat-icon>
+  </button>
+</div>
+<node-advanced-general-authoring
+  *ngIf="$state.$current.name === 'root.at.project.node.advanced.general'"
+></node-advanced-general-authoring>
+<node-advanced-path-authoring
+  *ngIf="$state.$current.name === 'root.at.project.node.advanced.path'"
+></node-advanced-path-authoring>
+<node-advanced-constraint-authoring
+  *ngIf="$state.$current.name === 'root.at.project.node.advanced.constraint'"
+></node-advanced-constraint-authoring>
+<node-advanced-branch-authoring
+  *ngIf="$state.$current.name === 'root.at.project.node.advanced.branch'"
+></node-advanced-branch-authoring>
+<node-advanced-json-authoring
+  *ngIf="$state.$current.name === 'root.at.project.node.advanced.json'"
+></node-advanced-json-authoring>

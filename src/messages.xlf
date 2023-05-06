@@ -907,6 +907,10 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
           <context context-type="linenumber">24</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="d1ee280fdc6bfc1ea2be84a9c2e38d0a69f432c7" datatype="html">
         <source>Close the JSON view to save the changes</source>
@@ -8702,6 +8706,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">65</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/editRubric/edit-node-rubric.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
@@ -9419,7 +9427,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Please select a component to import.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2544043210306731906" datatype="html">
@@ -9434,6 +9442,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
           <context context-type="linenumber">2,5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="06c301fa0994d4b67e51eeb201f1d3d9988c7a23" datatype="html">
@@ -9667,14 +9679,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Show Save Button </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/general/node-advanced-general-authoring.component.html</context>
-          <context context-type="linenumber">8,10</context>
+          <context context-type="linenumber">3,5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="770c5cff3389877453481f51ed615bc3e2e3ae44" datatype="html">
         <source> Show Submit Button </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/general/node-advanced-general-authoring.component.html</context>
-          <context context-type="linenumber">18,20</context>
+          <context context-type="linenumber">8,10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="397caaa290032309390882c11de492805dead8e4" datatype="html">
@@ -9682,6 +9694,27 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/json/node-advanced-json-authoring.component.html</context>
           <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="51a31d79bf9fa97a95b5b582f6696208b0c3f71a" datatype="html">
+        <source>General Advanced</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e74ea3a712135535547f38ad9f80fadee0809ff1" datatype="html">
+        <source>Edit Transitions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eb1c424eae0d4935e4106511760b7a830ebcbf82" datatype="html">
+        <source>Edit Constraints</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f70f8b1d5244e87cb949377f5ea3722f7a52d553" datatype="html">
@@ -12216,182 +12249,182 @@ Are you sure you want to proceed?</source>
         <source>The row number.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">119</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6762344227516737409" datatype="html">
         <source>The ID of the group.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">120</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4865611134297059875" datatype="html">
         <source>The User ID of the first student in the group. This ID follows the student for all runs.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6094360476665736430" datatype="html">
         <source>The name of the first student. This only shows up if you have permission to view the student names and you enabled the &apos;Include Student Names&apos; checkbox.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">127</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3218313612421482606" datatype="html">
         <source>The UserID of the second student in the group. This ID follows the student for all runs.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7028977280415527175" datatype="html">
         <source>The name of the second student. This only shows up if you have permission to view the student names and you enabled the &apos;Include Student Names&apos; checkbox.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1023494801489640410" datatype="html">
         <source>The User ID of the third student in the group. This ID follows the student for all runs.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6821521304721264074" datatype="html">
         <source>The name of the third student. This only shows up if you have permission to view the student names and you enabled the &apos;Include Student Names&apos; checkbox.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2725632926588852438" datatype="html">
         <source>The ID of the run.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2553098812333252400" datatype="html">
         <source>The ID of the project.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">148</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8554241691493928314" datatype="html">
         <source>The name of the project.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="980683300985052358" datatype="html">
         <source>The ID of the period that this student is in.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">148</context>
         </context-group>
       </trans-unit>
       <trans-unit id="708828689664873333" datatype="html">
         <source>The period name that this student is in. This name is chosen by the teacher that created the run.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">153</context>
+          <context context-type="linenumber">151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2115511022422895526" datatype="html">
         <source>The start date of the run.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">155</context>
+          <context context-type="linenumber">153</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2920338708437937140" datatype="html">
         <source>The end date of the run.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">156</context>
+          <context context-type="linenumber">154</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3282378625746052322" datatype="html">
         <source>The ID of the step. Each step in a unit has a unique Node ID.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">159</context>
+          <context context-type="linenumber">157</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2952979264056475018" datatype="html">
         <source>The title of the step.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">161</context>
+          <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3129501014700466003" datatype="html">
         <source>The timestamp when the student entered the step.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">164</context>
+          <context context-type="linenumber">162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1828893478542670614" datatype="html">
         <source>The timestamp when the student exited the step. This value can be empty if WISE did not get the chance to save a step exit event. This can happen if the student closes their laptop without signing out of WISE or if they refresh the WISE page.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">168</context>
+          <context context-type="linenumber">166</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1645101974849817047" datatype="html">
         <source>The amount of time the student spent on the step during this visit measured in seconds.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">172</context>
+          <context context-type="linenumber">170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9023465221442752203" datatype="html">
         <source>The number of times the student has visited this step so far.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">176</context>
+          <context context-type="linenumber">174</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8682366037978376097" datatype="html">
         <source>The number of times the student has revisited this step so far. This will always be 1 less than the &apos;Visit Counter&apos; for a given visit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">178</context>
         </context-group>
       </trans-unit>
       <trans-unit id="43084675266421813" datatype="html">
         <source>The Node ID of the step the student was on before visiting this step.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">184</context>
+          <context context-type="linenumber">182</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6569498545356491838" datatype="html">
         <source>The step title of the step the student was on before visiting this step.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">186</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7667604754494120173" datatype="html">
         <source>A list of Node IDs that contain the steps the student visited before revisiting this step. This cell will only contain values if they revisit a step. For example if the student navigated to node1, then node2, then node3, then node1. For the second visit to node1, the &apos;Node IDs Since Last Visit&apos; will show node2, node3.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">192</context>
+          <context context-type="linenumber">190</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7838118030077253133" datatype="html">
         <source>A list of step numbers that contain the steps the student visited before revisiting this step. This cell will only contain values if they revisit a step. For example if the student navigated to 1.1, then 1.2, then 1.3, then 1.1. For the second visit to 1.1, the &apos;Steps Since Last Visit&apos; will show 1.2, 1.3.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
-          <context context-type="linenumber">196</context>
+          <context context-type="linenumber">194</context>
         </context-group>
       </trans-unit>
       <trans-unit id="24d2ea13091f19a68c4bc99ed75c4d38fd29ac49" datatype="html">
