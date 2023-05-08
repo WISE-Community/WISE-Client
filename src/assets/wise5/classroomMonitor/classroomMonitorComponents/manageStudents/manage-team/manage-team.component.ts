@@ -94,10 +94,13 @@ export class ManageTeamComponent {
         this.team.periodId
       )
       .subscribe(() => {
+        const previousIndex = event.previousContainer.data.findIndex(
+          (user) => user === event.item.data.user
+        );
         transferArrayItem(
           event.previousContainer.data,
           event.container.data,
-          event.previousIndex,
+          previousIndex,
           event.currentIndex
         );
         this.configService.retrieveConfig(
