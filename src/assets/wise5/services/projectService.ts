@@ -225,9 +225,9 @@ export class ProjectService {
     return this.groupNodes.filter((node) => activeNodeIds.includes(node.id));
   }
 
-  instantiateDefaults(): void {
-    this.project.nodes = this.project.nodes ? this.project.nodes : [];
-    this.project.inactiveNodes = this.project.inactiveNodes ? this.project.inactiveNodes : [];
+  private instantiateDefaults(): void {
+    this.project.nodes = this.project.nodes ?? [];
+    this.project.inactiveNodes = this.project.inactiveNodes ?? [];
   }
 
   private calculateNodeOrderOfProject(): void {
@@ -727,7 +727,7 @@ export class ProjectService {
     return nodesByToNodeId;
   }
 
-  getInactiveNodes(): any {
+  getInactiveNodes(): any[] {
     return this.project.inactiveNodes;
   }
 

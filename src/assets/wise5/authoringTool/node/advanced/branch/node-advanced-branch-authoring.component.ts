@@ -262,58 +262,30 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     if (this.createBranchCriterion != null) {
       let nodeId = this.node.id;
       if (this.createBranchCriterion === 'workgroupId') {
-        this.ProjectService.setTransitionLogicField(
-          nodeId,
-          'howToChooseAmongAvailablePaths',
-          'workgroupId'
-        );
-        this.ProjectService.setTransitionLogicField(nodeId, 'whenToChoosePath', 'enterNode');
-        this.ProjectService.setTransitionLogicField(nodeId, 'canChangePath', false);
-        this.ProjectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
+        this.setTransitionLogicField(nodeId, 'howToChooseAmongAvailablePaths', 'workgroupId');
+        this.setTransitionLogicField(nodeId, 'whenToChoosePath', 'enterNode');
+        this.setTransitionLogicField(nodeId, 'canChangePath', false);
+        this.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
       } else if (this.createBranchCriterion === 'score') {
-        this.ProjectService.setTransitionLogicField(
-          nodeId,
-          'howToChooseAmongAvailablePaths',
-          'random'
-        );
-        this.ProjectService.setTransitionLogicField(
-          nodeId,
-          'whenToChoosePath',
-          'studentDataChanged'
-        );
-        this.ProjectService.setTransitionLogicField(nodeId, 'canChangePath', false);
-        this.ProjectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
+        this.setTransitionLogicField(nodeId, 'howToChooseAmongAvailablePaths', 'random');
+        this.setTransitionLogicField(nodeId, 'whenToChoosePath', 'studentDataChanged');
+        this.setTransitionLogicField(nodeId, 'canChangePath', false);
+        this.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
       } else if (this.createBranchCriterion === 'choiceChosen') {
-        this.ProjectService.setTransitionLogicField(
-          nodeId,
-          'howToChooseAmongAvailablePaths',
-          'random'
-        );
-        this.ProjectService.setTransitionLogicField(
-          nodeId,
-          'whenToChoosePath',
-          'studentDataChanged'
-        );
-        this.ProjectService.setTransitionLogicField(nodeId, 'canChangePath', false);
-        this.ProjectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
+        this.setTransitionLogicField(nodeId, 'howToChooseAmongAvailablePaths', 'random');
+        this.setTransitionLogicField(nodeId, 'whenToChoosePath', 'studentDataChanged');
+        this.setTransitionLogicField(nodeId, 'canChangePath', false);
+        this.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
       } else if (this.createBranchCriterion === 'random') {
-        this.ProjectService.setTransitionLogicField(
-          nodeId,
-          'howToChooseAmongAvailablePaths',
-          'random'
-        );
-        this.ProjectService.setTransitionLogicField(nodeId, 'whenToChoosePath', 'enterNode');
-        this.ProjectService.setTransitionLogicField(nodeId, 'canChangePath', false);
-        this.ProjectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
+        this.setTransitionLogicField(nodeId, 'howToChooseAmongAvailablePaths', 'random');
+        this.setTransitionLogicField(nodeId, 'whenToChoosePath', 'enterNode');
+        this.setTransitionLogicField(nodeId, 'canChangePath', false);
+        this.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
       } else if (this.createBranchCriterion === 'tag') {
-        this.ProjectService.setTransitionLogicField(
-          nodeId,
-          'howToChooseAmongAvailablePaths',
-          'tag'
-        );
-        this.ProjectService.setTransitionLogicField(nodeId, 'whenToChoosePath', 'enterNode');
-        this.ProjectService.setTransitionLogicField(nodeId, 'canChangePath', false);
-        this.ProjectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
+        this.setTransitionLogicField(nodeId, 'howToChooseAmongAvailablePaths', 'tag');
+        this.setTransitionLogicField(nodeId, 'whenToChoosePath', 'enterNode');
+        this.setTransitionLogicField(nodeId, 'canChangePath', false);
+        this.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
       }
     }
     this.createBranchUpdateTransitions();
@@ -569,9 +541,9 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
       if (item.checked) {
         let fromNodeId = this.nodeId;
         let toNodeId = firstNodeId;
-        this.ProjectService.addBranchPathTakenConstraints(nodeId, fromNodeId, toNodeId);
+        this.addBranchPathTakenConstraints(nodeId, fromNodeId, toNodeId);
       } else {
-        this.ProjectService.setTransition(nodeId, nodeIdAfter);
+        this.setTransition(nodeId, nodeIdAfter);
       }
     }
 
@@ -583,7 +555,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
       // the branch path taken constraints will be from this node to the first node in the branch path
       const fromNodeId = this.nodeId;
       const toNodeId = firstNodeId;
-      this.ProjectService.addBranchPathTakenConstraints(itemNodeId, fromNodeId, toNodeId);
+      this.addBranchPathTakenConstraints(itemNodeId, fromNodeId, toNodeId);
     }
     this.ProjectService.calculateNodeNumbers();
     this.saveProject();
@@ -662,12 +634,12 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
      * in the project. this may be different than the next step
      * if it was still the branch point.
      */
-    this.ProjectService.setTransition(nodeId, nodeIdAfter);
+    this.setTransition(nodeId, nodeIdAfter);
 
-    this.ProjectService.setTransitionLogicField(nodeId, 'howToChooseAmongAvailablePaths', null);
-    this.ProjectService.setTransitionLogicField(nodeId, 'whenToChoosePath', null);
-    this.ProjectService.setTransitionLogicField(nodeId, 'canChangePath', null);
-    this.ProjectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', null);
+    this.setTransitionLogicField(nodeId, 'howToChooseAmongAvailablePaths', null);
+    this.setTransitionLogicField(nodeId, 'whenToChoosePath', null);
+    this.setTransitionLogicField(nodeId, 'canChangePath', null);
+    this.setTransitionLogicField(nodeId, 'maxPathsVisitable', null);
 
     this.createBranchNumberOfBranches = 1;
     this.createBranchCriterion = null;
@@ -723,7 +695,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
          * if it was still in the branch path.
          */
         const nodeIdAfter = this.ProjectService.getNodeIdAfter(nodeId);
-        this.ProjectService.setTransition(nodeId, nodeIdAfter);
+        this.setTransition(nodeId, nodeIdAfter);
       }
     }
     const branchPathIndex = this.createBranchBranches.indexOf(branch);
@@ -771,5 +743,88 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
       }
     }
     this.saveProject();
+  }
+
+  private setTransitionLogicField(nodeId: string, field: string, value: any): void {
+    const node = this.ProjectService.getNodeById(nodeId);
+    const transitionLogic = node.transitionLogic;
+    if (transitionLogic != null) {
+      transitionLogic[field] = value;
+    }
+  }
+
+  private setTransition(fromNodeId: string, toNodeId: string): void {
+    const node = this.ProjectService.getNodeById(fromNodeId);
+    const transitionLogic = node.transitionLogic;
+    if (transitionLogic != null) {
+      let transitions = transitionLogic.transitions;
+      if (transitions == null || transitions.length == 0) {
+        transitionLogic.transitions = [];
+        const transition = {};
+        transitionLogic.transitions.push();
+        transitions = transitionLogic.transitions;
+      }
+
+      if (transitions != null && transitions.length > 0) {
+        // get the first transition. we will assume there is only one transition.
+        const transition = transitions[0];
+        if (transition != null) {
+          transition.to = toNodeId;
+        }
+      }
+    }
+  }
+
+  /**
+   * Add branch path taken constraints to the node
+   * @param targetNodeId the node to add the constraints to
+   * @param fromNodeId the from node id of the branch path taken constraint
+   * @param toNodeId the to node id of the branch path taken constraint
+   */
+  private addBranchPathTakenConstraints(
+    targetNodeId: string,
+    fromNodeId: string,
+    toNodeId: string
+  ): void {
+    const node = this.ProjectService.getNodeById(targetNodeId);
+    node.constraints.push(
+      this.createBranchPathTakenContraint(
+        targetNodeId,
+        fromNodeId,
+        toNodeId,
+        'makeThisNodeNotVisible'
+      )
+    );
+    node.constraints.push(
+      this.createBranchPathTakenContraint(
+        targetNodeId,
+        fromNodeId,
+        toNodeId,
+        'makeThisNodeNotVisitable'
+      )
+    );
+  }
+
+  private createBranchPathTakenContraint(
+    targetNodeId: string,
+    fromNodeId: string,
+    toNodeId: string,
+    action: string
+  ): any {
+    return {
+      id: this.ProjectService.getNextAvailableConstraintIdForNodeId(targetNodeId),
+      action: action,
+      targetId: targetNodeId,
+      removalConditional: 'all',
+      removalCriteria: [
+        {
+          name: 'branchPathTaken',
+          params: {
+            fromNodeId: fromNodeId,
+            toNodeId: toNodeId
+          }
+        }
+      ]
+    };
   }
 }
