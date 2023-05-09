@@ -2,15 +2,15 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { Component } from '../../../common/Component';
-import { copy } from '../../../common/object/object';
-import { ClickToSnipImageService } from '../../../services/clickToSnipImageService';
-import { ProjectService } from '../../../services/projectService';
-import { MatchStudent } from './match-student.component';
+import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
+import { Component } from '../../../../common/Component';
+import { copy } from '../../../../common/object/object';
+import { ClickToSnipImageService } from '../../../../services/clickToSnipImageService';
+import { ProjectService } from '../../../../services/projectService';
+import { MatchStudentDefault } from './match-student-default.component';
 
-let component: MatchStudent;
-let fixture: ComponentFixture<MatchStudent>;
+let component: MatchStudentDefault;
+let fixture: ComponentFixture<MatchStudentDefault>;
 let bucket1: any;
 let bucket2: any;
 let bucket3: any;
@@ -50,10 +50,10 @@ describe('MatchStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [MatchStudent],
+      declarations: [MatchStudentDefault],
       schemas: [NO_ERRORS_SCHEMA]
     });
-    fixture = TestBed.createComponent(MatchStudent);
+    fixture = TestBed.createComponent(MatchStudentDefault);
     component = fixture.componentInstance;
     choice1 = createChoice(choiceId1, choiceValue1);
     choice2 = createChoice(choiceId2, choiceValue2);
