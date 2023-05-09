@@ -53,7 +53,7 @@ export class MatchStudentDefault extends ComponentStudent {
     protected componentService: ComponentService,
     protected configService: ConfigService,
     protected dialog: MatDialog,
-    private matchService: MatchService,
+    protected matchService: MatchService,
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
     private projectService: ProjectService,
@@ -216,7 +216,7 @@ export class MatchStudentDefault extends ComponentStudent {
     }
   }
 
-  private addAuthoredChoiceToBucket(choiceId: string, bucket: any): void {
+  protected addAuthoredChoiceToBucket(choiceId: string, bucket: any): void {
     bucket.items.push(this.matchService.getChoiceById(choiceId, this.choices));
   }
 
@@ -305,13 +305,14 @@ export class MatchStudentDefault extends ComponentStudent {
     });
   }
 
-  getChoicesThatChangedSinceLastSubmit(latestSubmitComponentState: any): any[] {
+  protected getChoicesThatChangedSinceLastSubmit(latestSubmitComponentState: any): string[] {
     const choicesThatChanged = [];
     const previousBuckets = latestSubmitComponentState.studentData.buckets;
     for (const currentBucket of this.buckets) {
-      const currentBucketChoiceIds = this.getIds(currentBucket.items);
-      const previousBucket = this.matchService.getBucketById(currentBucket.id, previousBuckets);
-      const previousBucketChoiceIds = this.getIds(previousBucket.items);
+      const {
+        currentBucketChoiceIds,
+        previousBucketChoiceIds
+      } = this.getPreviousAndCurrentChoiceIds(previousBuckets, currentBucket);
       for (
         let currentChoiceIndex = 0;
         currentChoiceIndex < currentBucketChoiceIds.length;
@@ -325,6 +326,16 @@ export class MatchStudentDefault extends ComponentStudent {
       }
     }
     return choicesThatChanged;
+  }
+
+  protected getPreviousAndCurrentChoiceIds(previousBuckets: any[], currentBucket: any): any {
+    const currentBucketChoiceIds = this.getIds(currentBucket.items);
+    const previousBucket = this.matchService.getBucketById(currentBucket.id, previousBuckets);
+    const previousBucketChoiceIds = this.getIds(previousBucket.items);
+    return {
+      currentBucketChoiceIds,
+      previousBucketChoiceIds
+    };
   }
 
   isChoiceChanged(
@@ -383,18 +394,23 @@ export class MatchStudentDefault extends ComponentStudent {
       : $localize`Choices`;
   }
 
+  protected checkAnswer(choiceIdsExcludedFromFeedback: string[] = []): void {
+    this.checkAnswerHelper(this.buckets, choiceIdsExcludedFromFeedback);
+  }
+
   /**
    * Check if the student has answered correctly and show feedback.
-   * @param {array} choiceIds to not show feedback for. This is used in the scenario where the
+   * @param buckets to check
+   * @param choiceIds to not show feedback for. This is used in the scenario where the
    * student submits and feedback for all the choices are displayed. Then the student moves a choice
    * to a different bucket but does not submit. They leave the step and then come back. At this
    * point, we want to show the feedback for all the choices that the student has not moved since
    * the submit. We do not want to show the feedback for the choice that the student moved after the
    * submit because that would let them receive feedback without submitting.
    */
-  checkAnswer(choiceIdsExcludedFromFeedback = []): void {
+  protected checkAnswerHelper(buckets: any[], choiceIdsExcludedFromFeedback: string[] = []): void {
     let isCorrect = true;
-    for (const bucket of this.buckets) {
+    for (const bucket of buckets) {
       const bucketId = bucket.id;
       const items = bucket.items;
       for (let i = 0; i < items.length; i++) {
