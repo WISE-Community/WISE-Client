@@ -1,13 +1,7 @@
-import {
-  CdkDragDrop,
-  copyArrayItem,
-  moveItemInArray,
-  transferArrayItem
-} from '@angular/cdk/drag-drop';
+import { copyArrayItem, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Item } from './item';
 import { Container } from './container';
-
-interface MatchCdkDragDrop<Container, Item> extends CdkDragDrop<Container, Container, Item> {}
+import { MatchCdkDragDrop } from './MatchCdkDragDrop';
 
 export function moveItem(event: MatchCdkDragDrop<Container, Item>): void {
   if (event.previousContainer === event.container) {
