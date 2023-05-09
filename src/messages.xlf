@@ -10676,7 +10676,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Moved student to Team <x id="PH" equiv-text="this.team.workgroupId"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-team/manage-team.component.ts</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9b83b532c3f74e3d6e25a6ba749eef54324bea48" datatype="html">
