@@ -19,13 +19,13 @@ export class MatchAuthoring extends ComponentAuthoring {
   feedbackChange: Subject<string> = new Subject<string>();
 
   constructor(
-    protected ConfigService: ConfigService,
-    private MatchService: MatchService,
-    protected NodeService: NodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    protected configService: ConfigService,
+    private matchService: MatchService,
+    protected nodeService: NodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+    super(configService, nodeService, projectAssetService, projectService);
     this.subscriptions.add(
       this.feedbackChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.turnOnSubmitButtonIfFeedbackExists();
@@ -290,7 +290,7 @@ export class MatchAuthoring extends ComponentAuthoring {
   }
 
   getChoiceTextById(choiceId: string): string {
-    const choice = this.MatchService.getChoiceById(choiceId, this.componentContent.choices);
+    const choice = this.matchService.getChoiceById(choiceId, this.componentContent.choices);
     return choice ? choice.value : null;
   }
 
@@ -299,7 +299,7 @@ export class MatchAuthoring extends ComponentAuthoring {
       const choicesLabel = this.componentContent.choicesLabel;
       return choicesLabel ? choicesLabel : $localize`Choices`;
     }
-    const bucket = this.MatchService.getBucketById(bucketId, this.componentContent.buckets);
+    const bucket = this.matchService.getBucketById(bucketId, this.componentContent.buckets);
     return bucket ? bucket.value : null;
   }
 }
