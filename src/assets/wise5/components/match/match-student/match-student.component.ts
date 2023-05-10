@@ -19,6 +19,7 @@ import { MatchContent } from '../MatchContent';
 })
 export class MatchStudent {
   @Input() component: any;
+  componentRef: any;
   @Input() componentState: any;
   @Input() mode: string;
   @Input() workgroupId: number;
@@ -28,7 +29,7 @@ export class MatchStudent {
   constructor(private applicationRef: ApplicationRef, private injector: EnvironmentInjector) {}
 
   ngAfterViewInit(): void {
-    const componentRef = createComponent(
+    this.componentRef = createComponent(
       (this.component.content as MatchContent).choiceReuseEnabled
         ? MatchStudentChoiceReuse
         : MatchStudentDefault,
@@ -37,13 +38,17 @@ export class MatchStudent {
         environmentInjector: this.injector
       }
     );
-    Object.assign(componentRef.instance, {
+    Object.assign(this.componentRef.instance, {
       component: this.component,
       componentState: this.componentState,
       mode: this.mode,
       workgroupId: this.workgroupId,
       saveComponentStateEvent: this.saveComponentStateEvent
     });
-    this.applicationRef.attachView(componentRef.hostView);
+    this.applicationRef.attachView(this.componentRef.hostView);
+  }
+
+  ngOnDestroy(): void {
+    this.componentRef.destroy();
   }
 }

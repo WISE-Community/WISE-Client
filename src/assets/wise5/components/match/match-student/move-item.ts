@@ -2,6 +2,7 @@ import { copyArrayItem, moveItemInArray, transferArrayItem } from '@angular/cdk/
 import { Item } from './item';
 import { Container } from './container';
 import { MatchCdkDragDrop } from './MatchCdkDragDrop';
+import { copy } from '../../../common/object/object';
 
 export function moveItem(event: MatchCdkDragDrop<Container, Item>): void {
   if (event.previousContainer === event.container) {
@@ -19,7 +20,7 @@ function dropToDifferentContainer(event: MatchCdkDragDrop<Container, Item>): voi
   } else {
     if (fromContainerIsSourceBucket(event)) {
       copyArrayItem(
-        event.previousContainer.data.items,
+        copy(event.previousContainer.data.items),
         event.container.data.items,
         event.item.data.position,
         event.currentIndex
@@ -36,7 +37,7 @@ function dropToDifferentContainer(event: MatchCdkDragDrop<Container, Item>): voi
 }
 
 function toContainerContainsItem(event: MatchCdkDragDrop<Container, Item>): boolean {
-  return event.container.data.items.includes(event.item.data.item);
+  return event.container.data.items.some((item) => item.id === event.item.data.item.id);
 }
 
 function fromContainerIsSourceBucket(event: MatchCdkDragDrop<Container, Item>): boolean {
