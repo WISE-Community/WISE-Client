@@ -16231,8 +16231,8 @@ Warning: This will delete all existing choices and buckets in this component.</s
           <context context-type="linenumber">23,25</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a6d26c86f19efc7c9cd43f222e1ab8f03cecfa7c" datatype="html">
-        <source> The student can put each choice in multiple buckets </source>
+      <trans-unit id="2a8d9285c38c030d83bc350fdf528a50ef767284" datatype="html">
+        <source> Students can put each choice in multiple buckets </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
           <context context-type="linenumber">34,36</context>
