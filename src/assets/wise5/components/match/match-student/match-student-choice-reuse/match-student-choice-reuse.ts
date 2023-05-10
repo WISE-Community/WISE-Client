@@ -22,25 +22,26 @@ export class MatchStudentChoiceReuse extends MatchStudentDefault {
   }
 
   protected getChoicesThatChangedSinceLastSubmit(latestSubmitComponentState: any): string[] {
-    const choicesThatChanged = super.getChoicesThatChangedSinceLastSubmit(
-      latestSubmitComponentState
-    );
     const previousBuckets = latestSubmitComponentState.studentData.buckets;
-    for (const currentBucket of this.getNonSourceBuckets()) {
+    const removedChoices = this.getNonSourceBuckets().flatMap((bucket: any) => {
       const {
         currentBucketChoiceIds,
         previousBucketChoiceIds
-      } = this.getPreviousAndCurrentChoiceIds(previousBuckets, currentBucket);
-      const choicesThatWereRemoved = previousBucketChoiceIds.filter(
+      } = this.getPreviousAndCurrentChoiceIds(previousBuckets, bucket);
+      return previousBucketChoiceIds.filter(
         (choiceId: string) => !currentBucketChoiceIds.includes(choiceId)
       );
-      choicesThatChanged.push(...choicesThatWereRemoved);
-    }
-    return choicesThatChanged;
+    });
+    return super
+      .getChoicesThatChangedSinceLastSubmit(latestSubmitComponentState)
+      .concat(removedChoices);
   }
 
-  protected checkAnswer(choiceIdsExcludedFromFeedback: string[] = []): void {
-    this.checkAnswerHelper(this.getNonSourceBuckets(), choiceIdsExcludedFromFeedback);
+  protected checkAnswer(
+    choiceIdsExcludedFromFeedback: string[] = [],
+    buckets: any[] = this.getNonSourceBuckets()
+  ): void {
+    super.checkAnswer(choiceIdsExcludedFromFeedback, buckets);
   }
 
   private getNonSourceBuckets(): any[] {

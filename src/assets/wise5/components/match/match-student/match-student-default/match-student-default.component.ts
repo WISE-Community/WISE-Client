@@ -394,21 +394,20 @@ export class MatchStudentDefault extends ComponentStudent {
       : $localize`Choices`;
   }
 
-  protected checkAnswer(choiceIdsExcludedFromFeedback: string[] = []): void {
-    this.checkAnswerHelper(this.buckets, choiceIdsExcludedFromFeedback);
-  }
-
   /**
    * Check if the student has answered correctly and show feedback.
-   * @param buckets to check
    * @param choiceIds to not show feedback for. This is used in the scenario where the
+   * @param buckets to check
    * student submits and feedback for all the choices are displayed. Then the student moves a choice
    * to a different bucket but does not submit. They leave the step and then come back. At this
    * point, we want to show the feedback for all the choices that the student has not moved since
    * the submit. We do not want to show the feedback for the choice that the student moved after the
    * submit because that would let them receive feedback without submitting.
    */
-  protected checkAnswerHelper(buckets: any[], choiceIdsExcludedFromFeedback: string[] = []): void {
+  protected checkAnswer(
+    choiceIdsExcludedFromFeedback: string[] = [],
+    buckets: any[] = this.buckets
+  ): void {
     let isCorrect = true;
     for (const bucket of buckets) {
       const bucketId = bucket.id;
