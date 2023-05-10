@@ -24,6 +24,17 @@
     Show Choices After Target Buckets
   </mat-checkbox>
 </p>
+<p>
+  <mat-checkbox
+    color="primary"
+    class="checkbox"
+    [(ngModel)]="componentContent.choiceReuseEnabled"
+    (ngModelChange)="componentChanged()"
+    i18n
+  >
+    Students can put each choice in multiple buckets
+  </mat-checkbox>
+</p>
 <div class="section">
   <span i18n>Choices</span>
   <button
