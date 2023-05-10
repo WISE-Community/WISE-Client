@@ -33,7 +33,6 @@ describe('PeerGroupGroupingComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PeerGroupGroupingComponent);
-    spyOn(TestBed.inject(ConfigService), 'getAvatarColorForWorkgroupId').and.returnValue('#E91E63');
     container1 = createContainer(1);
     container2 = createContainer(2);
     component = fixture.componentInstance;

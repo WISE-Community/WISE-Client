@@ -13,6 +13,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { MoveUserConfirmDialogComponent } from '../move-user-confirm-dialog/move-user-confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 
 @Component({
   selector: 'manage-team',
@@ -33,7 +34,7 @@ export class ManageTeamComponent {
   ) {}
 
   ngOnInit() {
-    this.avatarColor = this.configService.getAvatarColorForWorkgroupId(this.team.workgroupId);
+    this.avatarColor = getAvatarColorForWorkgroupId(this.team.workgroupId);
     this.isUnassigned = this.team.workgroupId == null;
     this.canChangePeriod =
       this.configService.getPermissions().canGradeStudentWork &&

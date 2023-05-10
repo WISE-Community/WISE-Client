@@ -5,6 +5,7 @@ import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
 import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
+import { getAvatarColorForWorkgroupId } from '../../common/workgroup/workgroup';
 
 @Component({
   selector: 'student-account-menu',
@@ -107,7 +108,7 @@ export class StudentAccountMenuComponent implements OnInit, OnDestroy {
   }
 
   getAvatarColorForWorkgroupId(workgroupId: number): string {
-    return this.configService.getAvatarColorForWorkgroupId(workgroupId);
+    return getAvatarColorForWorkgroupId(workgroupId);
   }
 
   goHome() {

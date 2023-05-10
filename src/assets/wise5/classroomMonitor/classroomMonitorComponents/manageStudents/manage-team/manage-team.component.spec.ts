@@ -9,7 +9,6 @@ import { ManageTeamComponent } from './manage-team.component';
 
 class ConfigServiceStub {
   getPermissions() {}
-  getAvatarColorForWorkgroupId() {}
   retrieveConfig() {
     return {};
   }

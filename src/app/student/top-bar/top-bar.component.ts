@@ -10,6 +10,7 @@ import { StudentDataService } from '../../../assets/wise5/services/studentDataSe
 import { NotificationsDialogComponent } from '../../../assets/wise5/vle/notifications-dialog/notifications-dialog.component';
 import { StudentAccountMenuComponent } from '../../../assets/wise5/vle/student-account-menu/student-account-menu.component';
 import { Notification } from '../../domain/notification';
+import { getAvatarColorForWorkgroupId } from '../../../assets/wise5/common/workgroup/workgroup';
 
 @Component({
   selector: 'top-bar',
@@ -41,9 +42,7 @@ export class TopBarComponent {
   ) {}
 
   ngOnInit() {
-    this.avatarColor = this.configService.getAvatarColorForWorkgroupId(
-      this.configService.getWorkgroupId()
-    );
+    this.avatarColor = getAvatarColorForWorkgroupId(this.configService.getWorkgroupId());
     this.logoURL = `${this.projectService.getThemePath()}/images/WISE-logo-ffffff.svg`;
     this.projectName = this.projectService.getProjectTitle();
     this.isPreview = this.configService.isPreview();

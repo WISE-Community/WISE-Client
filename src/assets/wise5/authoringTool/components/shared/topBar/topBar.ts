@@ -4,6 +4,7 @@ import { ConfigService } from '../../../../services/configService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { SessionService } from '../../../../services/sessionService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
+import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 
 class TopBarController {
   translate: any;
@@ -31,20 +32,20 @@ class TopBarController {
     private $filter: any,
     private $state: any,
     private $window: any,
-    private ConfigService: ConfigService,
-    private ProjectService: TeacherProjectService,
-    private SessionService: SessionService,
-    private TeacherDataService: TeacherDataService
+    private configService: ConfigService,
+    private projectService: TeacherProjectService,
+    private sessionService: SessionService,
+    private teacherDataService: TeacherDataService
   ) {
     this.translate = this.$filter('translate');
-    this.workgroupId = this.ConfigService.getWorkgroupId();
+    this.workgroupId = this.configService.getWorkgroupId();
     if (this.workgroupId == null) {
       this.workgroupId = 100 * Math.random();
     }
-    this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.workgroupId);
-    this.userInfo = this.ConfigService.getMyUserInfo();
-    this.themePath = this.ProjectService.getThemePath();
-    this.contextPath = this.ConfigService.getContextPath();
+    this.avatarColor = getAvatarColorForWorkgroupId(this.workgroupId);
+    this.userInfo = this.configService.getMyUserInfo();
+    this.themePath = this.projectService.getThemePath();
+    this.contextPath = this.configService.getContextPath();
   }
 
   $onChanges() {
@@ -85,8 +86,8 @@ class TopBarController {
   }
 
   goHome() {
-    this.ProjectService.notifyAuthorProjectEnd().then(() => {
-      this.SessionService.goHome();
+    this.projectService.notifyAuthorProjectEnd().then(() => {
+      this.sessionService.goHome();
     });
   }
 
@@ -98,17 +99,11 @@ class TopBarController {
     const componentId = null;
     const componentType = null;
     const data = {};
-    this.TeacherDataService.saveEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      eventName,
-      data
-    ).then((result) => {
-      this.SessionService.logOut();
-    });
+    this.teacherDataService
+      .saveEvent(context, nodeId, componentId, componentType, category, eventName, data)
+      .then((result) => {
+        this.sessionService.logOut();
+      });
   }
 }
 

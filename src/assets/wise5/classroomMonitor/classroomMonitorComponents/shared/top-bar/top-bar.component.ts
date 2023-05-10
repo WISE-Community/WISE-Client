@@ -7,6 +7,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { NotificationService } from '../../../../services/notificationService';
 import { Notification } from '../../../../../../app/domain/notification';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 
 @Component({
   selector: 'top-bar',
@@ -46,7 +47,7 @@ export class TopBarComponent implements OnInit {
     if (this.workgroupId == null) {
       this.workgroupId = 100 * Math.random();
     }
-    this.avatarColor = this.configService.getAvatarColorForWorkgroupId(this.workgroupId);
+    this.avatarColor = getAvatarColorForWorkgroupId(this.workgroupId);
     this.userInfo = this.configService.getMyUserInfo();
     this.notificationChangedSubscription = this.notificationService.notificationChanged$.subscribe(
       () => {
