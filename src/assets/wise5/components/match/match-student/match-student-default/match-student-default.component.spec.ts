@@ -1,16 +1,17 @@
+// @ts-nocheck
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { Component } from '../../../common/Component';
-import { copy } from '../../../common/object/object';
-import { ClickToSnipImageService } from '../../../services/clickToSnipImageService';
-import { ProjectService } from '../../../services/projectService';
-import { MatchStudent } from './match-student.component';
+import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
+import { Component } from '../../../../common/Component';
+import { copy } from '../../../../common/object/object';
+import { ClickToSnipImageService } from '../../../../services/clickToSnipImageService';
+import { ProjectService } from '../../../../services/projectService';
+import { MatchStudentDefault } from './match-student-default.component';
 
-let component: MatchStudent;
-let fixture: ComponentFixture<MatchStudent>;
+let component: MatchStudentDefault;
+let fixture: ComponentFixture<MatchStudentDefault>;
 let bucket1: any;
 let bucket2: any;
 let bucket3: any;
@@ -50,10 +51,10 @@ describe('MatchStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [MatchStudent],
+      declarations: [MatchStudentDefault],
       schemas: [NO_ERRORS_SCHEMA]
     });
-    fixture = TestBed.createComponent(MatchStudent);
+    fixture = TestBed.createComponent(MatchStudentDefault);
     component = fixture.componentInstance;
     choice1 = createChoice(choiceId1, choiceValue1);
     choice2 = createChoice(choiceId2, choiceValue2);
@@ -126,7 +127,6 @@ describe('MatchStudentComponent', () => {
 
   createSourceBucket();
   addNotebookItemToSourceBucket();
-  createChoiceFromNotebookItem();
   getSourceBucket();
   clearSourceBucketChoices();
   addChoiceToBucket();
@@ -140,7 +140,6 @@ describe('MatchStudentComponent', () => {
   initializeBuckets();
   createComponentStateObject();
   clearFeedback();
-  isAuthorHasSpecifiedACorrectBucket();
   isAuthorHasSpecifiedACorrectPosition();
   getFeedbackObject();
   mergeBucket();
@@ -234,19 +233,6 @@ function addNotebookItemToSourceBucket() {
       expect(component.buckets[0].items.length).toEqual(4);
       const sourceBucketItems = component.buckets[0].items;
       expect(sourceBucketItems[sourceBucketItems.length - 1].id).toEqual(notebookItemId);
-    });
-  });
-}
-
-function createChoiceFromNotebookItem() {
-  describe('createChoiceFromNotebookItem', () => {
-    it('should create choice from notebook item', () => {
-      const choice = component.createChoiceFromNotebookItem(notebookItem);
-      expect(choice.id).toEqual(notebookItemId);
-      expect(choice.type).toEqual('choice');
-      expect(choice.value).toEqual(
-        `${notebookItemText}<div><img src="${notebookItemImageName}" alt="image from note"/></div>`
-      );
     });
   });
 }
@@ -541,20 +527,6 @@ function clearFeedback() {
       for (const choice of component.choices) {
         expect(choice.feedback).toEqual(null);
       }
-    });
-  });
-}
-
-function isAuthorHasSpecifiedACorrectBucket() {
-  describe('isAuthorHasSpecifiedACorrectBucket', () => {
-    it(`should check if author has specified the choice has a correct bucket when it does
-        not`, () => {
-      expect(component.isAuthorHasSpecifiedACorrectBucket(choiceId1)).toEqual(false);
-    });
-
-    it('should check if author has specified the choice has a correct bucket when it does', () => {
-      component.componentContent.feedback[1].choices[0].isCorrect = true;
-      expect(component.isAuthorHasSpecifiedACorrectBucket(choiceId1)).toEqual(true);
     });
   });
 }

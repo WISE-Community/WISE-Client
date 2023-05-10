@@ -7,7 +7,10 @@ import { MatchService } from '../matchService';
 @Component({
   selector: 'match-show-work',
   templateUrl: 'match-show-work.component.html',
-  styleUrls: ['../match-student/match-student.component.scss', 'match-show-work.component.scss']
+  styleUrls: [
+    '../match-student/match-student-default/match-student-default.component.scss',
+    'match-show-work.component.scss'
+  ]
 })
 export class MatchShowWorkComponent extends ComponentShowWorkDirective {
   sourceBucketId = '0';
