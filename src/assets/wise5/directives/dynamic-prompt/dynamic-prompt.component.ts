@@ -15,6 +15,7 @@ import { PeerGroupService } from '../../services/peerGroupService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 import { DynamicPrompt } from './DynamicPrompt';
+import { FeedbackRuleEvaluatorMultipleStudents } from '../../components/common/feedbackRule/FeedbackRuleEvaluatorMultipleStudents';
 
 @Component({
   selector: 'dynamic-prompt',
@@ -70,9 +71,12 @@ export class DynamicPromptComponent implements OnInit {
           submitCounter: this.getSubmitCounter(peerMemberData.studentWork)
         });
       });
-      const feedbackRuleEvaluator = this.getFeedbackRuleEvaluator(
-        this.dynamicPrompt.getRules(),
-        referenceComponentContent.maxSubmitCount
+      const feedbackRuleEvaluator = new FeedbackRuleEvaluatorMultipleStudents(
+        new FeedbackRuleComponent(
+          this.dynamicPrompt.getRules(),
+          referenceComponentContent.maxSubmitCount,
+          false
+        )
       );
       const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(cRaterResponses);
       this.prompt = feedbackRule.prompt;
@@ -117,21 +121,17 @@ export class DynamicPromptComponent implements OnInit {
         scores: latestAutoScoreAnnotation.data.scores,
         submitCounter: this.getSubmitCounter(latestComponentState)
       });
-      const feedbackRuleEvaluator = this.getFeedbackRuleEvaluator(
-        this.dynamicPrompt.getRules(),
-        referenceComponentContent.maxSubmitCount
+      const feedbackRuleEvaluator = new FeedbackRuleEvaluator(
+        new FeedbackRuleComponent(
+          this.dynamicPrompt.getRules(),
+          referenceComponentContent.maxSubmitCount,
+          false
+        )
       );
       const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(cRaterResponse);
       this.prompt = feedbackRule.prompt;
       this.dynamicPromptChanged.emit(feedbackRule);
     }
-  }
-
-  private getFeedbackRuleEvaluator(
-    rules: FeedbackRule[],
-    maxSubmitCount: number
-  ): FeedbackRuleEvaluator {
-    return new FeedbackRuleEvaluator(new FeedbackRuleComponent(rules, maxSubmitCount, false));
   }
 
   private getSubmitCounter(componentState: any): number {

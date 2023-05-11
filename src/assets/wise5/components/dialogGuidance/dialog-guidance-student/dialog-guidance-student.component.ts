@@ -35,7 +35,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   component: DialogGuidanceComponent;
   computerAvatar: ComputerAvatar;
   cRaterTimeout: number = 40000;
-  feedbackRuleEvaluator: FeedbackRuleEvaluator;
+  feedbackRuleEvaluator: FeedbackRuleEvaluator<CRaterResponse>;
   isShowComputerAvatarSelector: boolean = false;
   isSubmitEnabled: boolean = false;
   isWaitingForComputerResponse: boolean = false;
