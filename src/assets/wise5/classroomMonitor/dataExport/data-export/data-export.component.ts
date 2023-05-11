@@ -23,6 +23,8 @@ import { LabelComponentDataExportStrategy } from '../strategies/LabelComponentDa
 import { Component as WISEComponent } from '../../../common/Component';
 import { removeHTMLTags } from '../../../common/string/string';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
+import { Choice } from '../../../components/match/choice';
+import { Bucket } from '../../../components/match/bucket';
 
 @Component({
   selector: 'data-export',
@@ -1171,11 +1173,7 @@ export class DataExportComponent implements OnInit {
     componentRevisionCounter: any,
     matchComponentState: any
   ): string[] {
-    /*
-     * Populate the cells in the row that contain the information about the
-     * student, project, run, step, and component.
-     */
-    let row = this.createStudentWorkExportRow(
+    const row = this.createStudentWorkExportRow(
       columnNames,
       columnNameToNumber,
       rowCounter,
@@ -1190,8 +1188,22 @@ export class DataExportComponent implements OnInit {
       componentRevisionCounter,
       matchComponentState
     );
-    for (const bucket of matchComponentState.studentData.buckets) {
-      for (const item of bucket.items) {
+    if (component.choiceReuseEnabled) {
+      this.insertMatchChoiceReuseValues(row, columnNameToNumber, component, matchComponentState);
+    } else {
+      this.insertMatchDefaultValues(row, columnNameToNumber, component, matchComponentState);
+    }
+    return row;
+  }
+
+  private insertMatchDefaultValues(
+    row: string[],
+    columnNameToNumber: any,
+    component: any,
+    matchComponentState: any
+  ): void {
+    matchComponentState.studentData.buckets.forEach((bucket: Bucket) => {
+      bucket.items.forEach((item: Choice) => {
         row[columnNameToNumber[item.id]] = this.getBucketValueById(component, bucket.id);
         if (
           this.includeCorrectnessColumns &&
@@ -1199,9 +1211,104 @@ export class DataExportComponent implements OnInit {
         ) {
           this.setCorrectnessValue(row, columnNameToNumber, item);
         }
+      });
+    });
+  }
+
+  private insertMatchChoiceReuseValues(
+    row: string[],
+    columnNameToNumber: any,
+    component: any,
+    matchComponentState: any
+  ): void {
+    matchComponentState.studentData.buckets
+      .filter((bucket: Bucket) => bucket.id !== '0')
+      .forEach((bucket: Bucket) => {
+        bucket.items.forEach((item: Choice) => {
+          this.setBucketValueWithAppending(row, columnNameToNumber, component, bucket, item);
+          if (
+            this.includeCorrectnessColumns &&
+            this.matchService.componentHasCorrectAnswer(component)
+          ) {
+            this.setCorrectnessValueForChoiceReuse(row, columnNameToNumber, item);
+          }
+        });
+      });
+  }
+
+  private setBucketValueWithAppending(
+    row: string[],
+    columnNameToNumber: any,
+    component: any,
+    bucket: any,
+    item: any
+  ): void {
+    if (row[columnNameToNumber[item.id]] == null || row[columnNameToNumber[item.id]] === '') {
+      row[columnNameToNumber[item.id]] = this.getBucketValueById(component, bucket.id);
+    } else {
+      row[columnNameToNumber[item.id]] = `${
+        row[columnNameToNumber[item.id]]
+      }, ${this.getBucketValueById(component, bucket.id)}`;
+    }
+  }
+
+  private setCorrectnessValueForChoiceReuse(row: any[], columnNameToNumber: any, item: any): void {
+    const columnName = item.id + '-boolean';
+    if (item.isCorrect == null) {
+      // The item does not have an isCorrect field so we will not show anything in the cell.
+    } else if (item.isCorrect) {
+      this.mergeCorrectnessValue(row, columnNameToNumber, columnName, 1);
+    } else {
+      if (item.isIncorrectPosition) {
+        this.mergeCorrectnessValue(row, columnNameToNumber, columnName, 2);
+      } else {
+        this.mergeCorrectnessValue(row, columnNameToNumber, columnName, 0);
       }
     }
-    return row;
+  }
+
+  /**
+   * Matrix to determine the merged correctness value.
+   * Legend
+   * e = empty
+   * 0 = incorrect
+   * 1 = correct
+   * 2 = correct bucket but incorrect position
+   *        previous
+   *        e 0 1 2
+   *       --------
+   * n  0 | 0 0 0 0
+   * e  1 | 1 0 1 2
+   * w  2 | 2 0 2 2
+   * @param row: any[]
+   * @param columnNameToNumber: any
+   * @param columnName: string
+   * @param newValue: number
+   */
+  private mergeCorrectnessValue(
+    row: any,
+    columnNameToNumber: any,
+    columnName: string,
+    newValue: any
+  ): void {
+    const previousValue = row[columnNameToNumber[columnName]];
+    if (previousValue === '') {
+      row[columnNameToNumber[columnName]] = newValue;
+    } else if (this.bothValuesAreX(previousValue, newValue, 1)) {
+      row[columnNameToNumber[columnName]] = 1;
+    } else if (this.eitherValuesAreX(previousValue, newValue, 0)) {
+      row[columnNameToNumber[columnName]] = 0;
+    } else if (this.eitherValuesAreX(previousValue, newValue, 2)) {
+      row[columnNameToNumber[columnName]] = 2;
+    }
+  }
+
+  private bothValuesAreX(value1: number, value2: number, expectedValue: number): boolean {
+    return value1 === expectedValue && value2 === expectedValue;
+  }
+
+  private eitherValuesAreX(value1: number, value2: number, expectedValue: number): boolean {
+    return value1 === expectedValue || value2 === expectedValue;
   }
 
   getBucketValueById(component: any, id: string): string {
