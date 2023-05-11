@@ -13,15 +13,6 @@ export class FeedbackRuleEvaluatorMultipleStudents extends FeedbackRuleEvaluator
       : [this.getDefaultRule(this.component.getFeedbackRules())];
   }
 
-  getFeedbackRule(responses: CRaterResponse[]): FeedbackRule {
-    for (const feedbackRule of this.component.getFeedbackRules()) {
-      if (this.satisfiesRule(responses, Object.assign(new FeedbackRule(), feedbackRule))) {
-        return feedbackRule;
-      }
-    }
-    return this.getDefaultRule(this.component.getFeedbackRules());
-  }
-
   protected satisfiesFinalSubmitRule(
     responses: CRaterResponse[],
     feedbackRule: FeedbackRule
