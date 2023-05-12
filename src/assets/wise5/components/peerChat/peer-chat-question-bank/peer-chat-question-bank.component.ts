@@ -7,7 +7,7 @@ import { QuestionBank } from './QuestionBank';
 import { Component as WISEComponent } from '../../../common/Component';
 import { PeerGroupStudentData } from '../../../../../app/domain/peerGroupStudentData';
 import { CRaterResponse } from '../../common/cRater/CRaterResponse';
-import { FeedbackRuleEvaluator } from '../../common/feedbackRule/FeedbackRuleEvaluator';
+import { FeedbackRuleEvaluatorMultipleStudents } from '../../common/feedbackRule/FeedbackRuleEvaluatorMultipleStudents';
 import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
 import { QuestionBankRule } from './QuestionBankRule';
 import { concatMap, map } from 'rxjs/operators';
@@ -75,7 +75,7 @@ export class PeerChatQuestionBankComponent implements OnInit {
         submitCounter: peerMemberData.studentWork.studentData.submitCounter
       });
     });
-    const feedbackRuleEvaluator = new FeedbackRuleEvaluator(
+    const feedbackRuleEvaluator = new FeedbackRuleEvaluatorMultipleStudents(
       new FeedbackRuleComponent(
         this.content.questionBank.getRules(),
         (referenceComponent.content as OpenResponseContent).maxSubmitCount,
