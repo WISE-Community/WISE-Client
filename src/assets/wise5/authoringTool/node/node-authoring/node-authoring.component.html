@@ -1,0 +1,428 @@
+<choose-new-component
+  *ngIf="$state.current.name === 'root.at.project.node.add-component.choose-component'"
+></choose-new-component>
+<choose-new-component-location
+  *ngIf="$state.current.name === 'root.at.project.node.add-component.choose-location'"
+></choose-new-component-location>
+<choose-import-component
+  *ngIf="$state.current.name === 'root.at.project.node.import-component.choose-step'"
+></choose-import-component>
+<choose-import-component-location
+  *ngIf="$state.current.name === 'root.at.project.node.import-component.choose-location'"
+></choose-import-component-location>
+<edit-node-rubric
+  *ngIf="$state.current.name === 'root.at.project.node.edit-rubric'"
+></edit-node-rubric>
+<node-advanced-authoring
+  *ngIf="$state.current.name.startsWith('root.at.project.node.advanced')"
+></node-advanced-authoring>
+<div *ngIf="$state.current.name === 'root.at.project.node'">
+  <div class="top-button-bar">
+    <div fxLayout="row wrap">
+      <button
+        mat-raised-button
+        color="primary"
+        class="top-button"
+        (click)="close()"
+        [disabled]="insertComponentMode"
+        matTooltip="Back"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button
+        *ngIf="showStepButtons && !isGroupNode"
+        mat-raised-button
+        color="primary"
+        class="top-button"
+        (click)="addComponent()"
+        [disabled]="getSelectedComponentIds().length !== 0 || insertComponentMode"
+        matTooltip="Add New Component"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+      <button
+        *ngIf="showStepButtons && !isGroupNode"
+        mat-raised-button
+        color="primary"
+        class="top-button"
+        (click)="importComponent()"
+        [disabled]="getSelectedComponentIds().length !== 0 || insertComponentMode"
+        matTooltip="Import Component"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>system_update_alt</mat-icon>
+      </button>
+      <div>
+        <button
+          *ngIf="showStepButtons && !isGroupNode"
+          mat-raised-button
+          color="primary"
+          class="top-button"
+          (click)="moveButtonClicked()"
+          [disabled]="!isAnyComponentSelected || insertComponentMode"
+          matTooltip="Move Component"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>redo</mat-icon>
+        </button>
+      </div>
+      <div>
+        <button
+          *ngIf="showStepButtons && !isGroupNode"
+          mat-raised-button
+          color="primary"
+          class="top-button"
+          (click)="copyButtonClicked()"
+          [disabled]="!isAnyComponentSelected || insertComponentMode"
+          matTooltip="Copy Component"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </div>
+      <div>
+        <button
+          *ngIf="showStepButtons && !isGroupNode"
+          mat-raised-button
+          color="primary"
+          class="top-button"
+          (click)="deleteButtonClicked()"
+          [disabled]="!isAnyComponentSelected || insertComponentMode"
+          matTooltip="Delete Component"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <button
+        *ngIf="showStepButtons"
+        mat-raised-button
+        color="primary"
+        class="top-button"
+        (click)="editRubric()"
+        [disabled]="getSelectedComponentIds().length !== 0 || insertComponentMode"
+        matTooltip="Edit Step Rubric"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>message</mat-icon>
+      </button>
+      <button
+        *ngIf="showStepButtons"
+        mat-raised-button
+        color="primary"
+        class="top-button"
+        (click)="showAdvancedView()"
+        [disabled]="getSelectedComponentIds().length !== 0 || insertComponentMode"
+        matTooltip="Advanced"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>build</mat-icon>
+      </button>
+      <button
+        *ngIf="!isGroupNode && showStepButtons"
+        mat-raised-button
+        color="primary"
+        class="top-button"
+        (click)="undo()"
+        [disabled]="
+          getSelectedComponentIds().length !== 0 || undoStack.length === 0 || insertComponentMode
+        "
+        matTooltip="Undo"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>undo</mat-icon>
+      </button>
+      <span fxFlex></span>
+      <button
+        *ngIf="!isGroupNode"
+        mat-raised-button
+        color="primary"
+        class="top-button"
+        (click)="previewStepInNewWindow(true)"
+        [disabled]="showEditTransitions || insertComponentMode"
+        matTooltip="Preview Step"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button
+        *ngIf="!isGroupNode"
+        mat-raised-button
+        color="primary"
+        class="top-button"
+        (click)="previewStepInNewWindow(false)"
+        [disabled]="showEditTransitions || insertComponentMode"
+        matTooltip="Preview Step Without Constraints"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>visibility_off</mat-icon>
+      </button>
+    </div>
+    <div
+      *ngIf="insertComponentMode"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="20px"
+      class="insert-component-message"
+    >
+      <span i18n>Choose the new location by clicking one of the buttons below</span>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="cancelInsertClicked()"
+        aria-label="Cancel"
+        i18n-aria-label
+        i18n
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+  <div
+    *ngIf="showComponents && !insertComponentMode"
+    fxLayout="row wrap"
+    fxLayoutAlign="start center"
+    fxLayoutGap="20px"
+    class="step-title-bar"
+  >
+    <teacher-node-icon [nodeId]="nodeId" [canEdit]="true" size="18"></teacher-node-icon>
+    <div class="step-title-input-div">
+      <mat-form-field class="step-title-input">
+        <mat-label *ngIf="!isGroupNode" i18n>Step Title {{ nodePosition }}:</mat-label>
+        <mat-label *ngIf="isGroupNode" i18n> Activity Title {{ nodePosition }}: </mat-label>
+        <input
+          matInput
+          [(ngModel)]="nodeJson.title"
+          [ngModelOptions]="{ debounce: 500 }"
+          (change)="authoringViewNodeChanged()"
+          aria-label="Title"
+          i18n-aria-label
+        />
+      </mat-form-field>
+    </div>
+    <div class="empty-div-after-step-title"></div>
+    <div class="expand-collapse-buttons-div" fxLayoutGap="20px">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="expandAllComponents()"
+        [disabled]="getNumberOfComponentsExpanded() === components.length"
+        i18n
+      >
+        + Expand All
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="collapseAllComponents()"
+        [disabled]="getNumberOfComponentsExpanded() === 0"
+        i18n
+      >
+        - Collapse All
+      </button>
+    </div>
+  </div>
+  <div *ngIf="insertComponentMode" class="insert-as-first-component-div" fxLayoutGap="20px">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="insertComponentAsFirst()"
+      matTooltip="Insert as First Component"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+    <span class="insert-as-first-component-message" i18n>Insert as First Component</span>
+  </div>
+  <div
+    *ngIf="showComponents && components.length === 0 && !insertComponentMode && !isGroupNode"
+    class="no-components-message"
+  >
+    <em i18n>This step does not have any components. Click the + button to add a component.</em>
+  </div>
+  <div *ngFor="let component of components; let i = index">
+    <div *ngIf="showComponents" class="component">
+      <div
+        id="component.id"
+        (click)="toggleComponent(component.id)"
+        class="component-header"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="20px"
+        aria-label="Toggle component authoring"
+        i18n-aria-label
+      >
+        <mat-checkbox
+          [(ngModel)]="componentsToChecked[component.id]"
+          [disabled]="insertComponentMode"
+          (change)="componentCheckboxChanged()"
+          (click)="componentCheckboxClicked($event)"
+          aria-label="Select component"
+          i18n-aria-label
+        >
+          <span class="component-label"
+            >{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span
+          >
+        </mat-checkbox>
+        <ng-container *ngIf="!insertComponentMode && showComponentAuthoringViews">
+          <button
+            mat-raised-button
+            color="primary"
+            class="top-button"
+            (click)="showComponentAdvancedAuthoring(component, $event)"
+            matTooltip="Advanced"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
+            <mat-icon>build</mat-icon>
+          </button>
+          <preview-component-button
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></preview-component-button>
+        </ng-container>
+        <div
+          *ngIf="!insertComponentMode"
+          fxLayout="row"
+          fxLayoutAlign="end center"
+          class="component-expand-collapse-div"
+          matTooltip="Click to expand/collapse"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <div *ngIf="!componentsToIsExpanded[component.id]" fxLayoutAlign="end center">
+            <mat-icon>expand_more</mat-icon>
+          </div>
+          <div *ngIf="componentsToIsExpanded[component.id]" fxLayoutAlign="end center">
+            <mat-icon>expand_less</mat-icon>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="showComponentAuthoringViews && componentsToIsExpanded[component.id]">
+        <ng-container [ngSwitch]="component.type">
+          <animation-authoring
+            *ngSwitchCase="'Animation'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></animation-authoring>
+          <audio-oscillator-authoring
+            *ngSwitchCase="'AudioOscillator'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></audio-oscillator-authoring>
+          <concept-map-authoring
+            *ngSwitchCase="'ConceptMap'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></concept-map-authoring>
+          <dialog-guidance-authoring
+            *ngSwitchCase="'DialogGuidance'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></dialog-guidance-authoring>
+          <discussion-authoring
+            *ngSwitchCase="'Discussion'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></discussion-authoring>
+          <draw-authoring
+            *ngSwitchCase="'Draw'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></draw-authoring>
+          <embedded-authoring
+            *ngSwitchCase="'Embedded'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></embedded-authoring>
+          <graph-authoring
+            *ngSwitchCase="'Graph'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></graph-authoring>
+          <html-authoring
+            *ngSwitchCase="'HTML'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></html-authoring>
+          <label-authoring
+            *ngSwitchCase="'Label'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></label-authoring>
+          <match-authoring
+            *ngSwitchCase="'Match'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></match-authoring>
+          <multiple-choice-authoring
+            *ngSwitchCase="'MultipleChoice'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></multiple-choice-authoring>
+          <open-response-authoring
+            *ngSwitchCase="'OpenResponse'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></open-response-authoring>
+          <outside-url-authoring
+            *ngSwitchCase="'OutsideURL'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></outside-url-authoring>
+          <peer-chat-authoring
+            *ngSwitchCase="'PeerChat'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></peer-chat-authoring>
+          <show-group-work-authoring
+            *ngSwitchCase="'ShowGroupWork'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></show-group-work-authoring>
+          <show-my-work-authoring
+            *ngSwitchCase="'ShowMyWork'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></show-my-work-authoring>
+          <summary-authoring
+            *ngSwitchCase="'Summary'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></summary-authoring>
+          <table-authoring
+            *ngSwitchCase="'Table'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></table-authoring>
+        </ng-container>
+      </div>
+    </div>
+    <div *ngIf="insertComponentMode" class="insert-after-div">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="insertComponentAfter(component.id)"
+        matTooltip="Insert After"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>keyboard_backspace</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

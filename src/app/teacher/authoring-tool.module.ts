@@ -23,6 +23,8 @@ import { ConcurrentAuthorsMessageComponent } from '../../assets/wise5/authoringT
 import { EditNodeRubricComponent } from '../../assets/wise5/authoringTool/node/editRubric/edit-node-rubric.component';
 import { ImportComponentModule } from '../../assets/wise5/authoringTool/importComponent/import-component-module';
 import { NodeAdvancedAuthoringModule } from '../../assets/wise5/authoringTool/node/advanced/node-advanced-authoring.module';
+import { NodeAuthoringComponent } from '../../assets/wise5/authoringTool/node/node-authoring/node-authoring.component';
+import { TeacherNodeIconComponent } from '../../assets/wise5/authoringTool/teacher-node-icon/teacher-node-icon.component';
 
 @NgModule({
   declarations: [
@@ -39,10 +41,12 @@ import { NodeAdvancedAuthoringModule } from '../../assets/wise5/authoringTool/no
     ChooseNewNodeTemplate,
     ConcurrentAuthorsMessageComponent,
     EditNodeRubricComponent,
+    NodeAuthoringComponent,
     NodeIconChooserDialog,
     RecoveryAuthoringComponent,
     RequiredErrorLabelComponent,
-    RubricAuthoringComponent
+    RubricAuthoringComponent,
+    TeacherNodeIconComponent
   ],
   imports: [
     StudentTeacherCommonModule,

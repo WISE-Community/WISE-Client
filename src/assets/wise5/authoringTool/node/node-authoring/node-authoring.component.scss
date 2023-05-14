@@ -1,0 +1,78 @@
+.top-button-bar {
+  margin: 0px 10px;
+  background-color: white;
+  position: sticky;
+  top: 26px;
+  z-index: 2;
+}
+
+.top-button {
+  margin: 6px 8px;
+}
+
+.step-title-bar {
+  margin-top: 20px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.insert-component-message {
+  margin-top: 10px;
+}
+
+.insert-as-first-component-div {
+  margin: 10px 30px;
+}
+
+.insert-as-first-component-message {
+  font-weight: bold;
+}
+
+.step-title-input-div {
+  width: 50%;
+}
+
+.step-title-input {
+  width: 100%;
+}
+
+.empty-div-after-step-title {
+  flex-grow: 1;
+}
+
+.expand-collapse-buttons-div {
+  flex-shrink: 0;
+  margin-top: 10px;
+}
+
+.no-components-message {
+  margin-left: 45px;
+  margin-top: 45px;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.component {
+  margin: 16px;
+  border: 2px solid #dddddd;
+  border-radius: 6px;
+  padding: 0px 20px;
+}
+
+.component-header {
+  height: 48px;
+  cursor: pointer;
+}
+
+.component-label {
+  font-weight: bold;
+}
+
+.component-expand-collapse-div {
+  flex-grow: 1;
+  align-self: stretch;
+}
+
+.insert-after-div {
+  margin: 0px 30px;
+}
