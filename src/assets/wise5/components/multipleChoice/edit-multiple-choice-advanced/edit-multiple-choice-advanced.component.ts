@@ -3,7 +3,7 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { MultipleChoiceContent } from '../MultipleChoiceContent';
 
 @Component({
-  template: 'edit-multiple-choice-advanced',
+  selector: 'edit-multiple-choice-advanced',
   templateUrl: 'edit-multiple-choice-advanced.component.html',
   styleUrls: ['edit-multiple-choice-advanced.component.scss']
 })
