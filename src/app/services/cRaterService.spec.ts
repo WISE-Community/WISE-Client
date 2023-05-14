@@ -5,6 +5,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { CRaterIdea } from '../../assets/wise5/components/common/cRater/CRaterIdea';
 import { CRaterScore } from '../../assets/wise5/components/common/cRater/CRaterScore';
+import { CRaterResponses } from '../../assets/wise5/components/common/cRater/CRaterResponses';
 let service: CRaterService;
 let configService: ConfigService;
 let http: HttpTestingController;
@@ -183,19 +184,17 @@ function getDataFromResponse() {
       const score = 1;
       const idea1Detected = true;
       const response = {
-        responses: {
-          feedback: {
-            ideas: {
-              1: {
-                detected: idea1Detected
-              }
+        feedback: {
+          ideas: {
+            1: {
+              detected: idea1Detected
             }
-          },
-          scores: {
-            raw_trim_round: score
           }
+        },
+        scores: {
+          raw_trim_round: score
         }
-      };
+      } as CRaterResponses;
       const cRaterResponse = service.getCRaterResponse(response, 1);
       expect(cRaterResponse.score).toEqual(score);
       expect(cRaterResponse.ideas).toEqual([new CRaterIdea('1', idea1Detected)]);
@@ -213,33 +212,31 @@ function getDataFromResponse() {
       const idea1Detected = true;
       const idea2Detected = false;
       const response = {
-        responses: {
-          feedback: {
-            ideas: {
-              1: {
-                detected: idea1Detected
-              },
-              2: {
-                detected: idea2Detected
-              }
-            }
-          },
-          trait_scores: {
-            ki: {
-              raw: kiRaw,
-              raw_trim_round: kiRawTrimRound,
-              score_range_max: kiScoreRangeMax,
-              score_range_min: kiScoreRangeMin
+        feedback: {
+          ideas: {
+            1: {
+              detected: idea1Detected
             },
-            dci: {
-              raw: dciRaw,
-              raw_trim_round: dciRawTrimRound,
-              score_range_max: dciScoreRangeMax,
-              score_range_min: dciScoreRangeMin
+            2: {
+              detected: idea2Detected
             }
           }
+        },
+        trait_scores: {
+          ki: {
+            raw: kiRaw,
+            raw_trim_round: kiRawTrimRound,
+            score_range_max: kiScoreRangeMax,
+            score_range_min: kiScoreRangeMin
+          },
+          dci: {
+            raw: dciRaw,
+            raw_trim_round: dciRawTrimRound,
+            score_range_max: dciScoreRangeMax,
+            score_range_min: dciScoreRangeMin
+          }
         }
-      };
+      } as CRaterResponses;
       const cRaterResponse = service.getCRaterResponse(response, 1);
       expect(cRaterResponse.scores).toEqual([
         new CRaterScore('ki', kiRawTrimRound, kiRaw, kiScoreRangeMin, kiScoreRangeMax),
@@ -254,15 +251,13 @@ function getDataFromResponse() {
     it('should get data from response when there are no ideas', () => {
       const score = 1;
       const response = {
-        responses: {
-          feedback: {
-            ideas: {}
-          },
-          scores: {
-            raw_trim_round: score
-          }
+        feedback: {
+          ideas: {}
+        },
+        scores: {
+          raw_trim_round: score
         }
-      };
+      } as CRaterResponses;
       const cRaterResponse = service.getCRaterResponse(response, 1);
       expect(cRaterResponse.score).toEqual(score);
       expect(cRaterResponse.ideas).toEqual([]);

@@ -8,6 +8,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { generateRandomKey } from '../common/string/string';
+import { CRaterResponse } from '../components/common/cRater/CRaterResponse';
+import { DialogResponse } from '../components/dialogGuidance/DialogResponse';
 
 @Injectable()
 export class StudentDataService extends DataService {

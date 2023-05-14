@@ -34,7 +34,7 @@ export class DynamicPromptComponent implements OnInit {
     private configService: ConfigService,
     private peerGroupService: PeerGroupService,
     private projectService: ProjectService,
-    private studentDataService: StudentDataService
+    private dataService: StudentDataService
   ) {}
 
   ngOnInit(): void {
@@ -105,7 +105,7 @@ export class DynamicPromptComponent implements OnInit {
   private evaluatePersonalOpenResponse(referenceComponentContent: OpenResponseContent): void {
     const nodeId = this.dynamicPrompt.getReferenceNodeId();
     const componentId = referenceComponentContent.id;
-    const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+    const latestComponentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
       nodeId,
       componentId
     );
@@ -128,7 +128,7 @@ export class DynamicPromptComponent implements OnInit {
           false
         )
       );
-      const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(cRaterResponse);
+      const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule([cRaterResponse]);
       this.prompt = feedbackRule.prompt;
       this.dynamicPromptChanged.emit(feedbackRule);
     }
