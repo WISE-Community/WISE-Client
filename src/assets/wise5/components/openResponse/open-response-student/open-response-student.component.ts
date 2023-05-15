@@ -20,7 +20,7 @@ import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
 import { OpenResponseService } from '../openResponseService';
 import { copy } from '../../../common/object/object';
-import { CRaterResponses } from '../../common/cRater/CRaterResponses';
+import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 
 @Component({
   selector: 'open-response-student',
@@ -326,7 +326,7 @@ export class OpenResponseStudent extends ComponentStudent {
   }
 
   private cRaterSuccessResponse(
-    responses: CRaterResponses,
+    responses: RawCRaterResponse,
     componentState: any,
     deferred: any,
     dialogRef: any

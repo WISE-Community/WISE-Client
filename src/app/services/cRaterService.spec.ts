@@ -5,7 +5,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { CRaterIdea } from '../../assets/wise5/components/common/cRater/CRaterIdea';
 import { CRaterScore } from '../../assets/wise5/components/common/cRater/CRaterScore';
-import { CRaterResponses } from '../../assets/wise5/components/common/cRater/CRaterResponses';
+import { RawCRaterResponse } from '../../assets/wise5/components/common/cRater/RawCRaterResponse';
 let service: CRaterService;
 let configService: ConfigService;
 let http: HttpTestingController;
@@ -194,7 +194,7 @@ function getDataFromResponse() {
         scores: {
           raw_trim_round: score
         }
-      } as CRaterResponses;
+      } as RawCRaterResponse;
       const cRaterResponse = service.getCRaterResponse(response, 1);
       expect(cRaterResponse.score).toEqual(score);
       expect(cRaterResponse.ideas).toEqual([new CRaterIdea('1', idea1Detected)]);
@@ -236,7 +236,7 @@ function getDataFromResponse() {
             score_range_min: dciScoreRangeMin
           }
         }
-      } as CRaterResponses;
+      } as RawCRaterResponse;
       const cRaterResponse = service.getCRaterResponse(response, 1);
       expect(cRaterResponse.scores).toEqual([
         new CRaterScore('ki', kiRawTrimRound, kiRaw, kiScoreRangeMin, kiScoreRangeMax),
@@ -257,7 +257,7 @@ function getDataFromResponse() {
         scores: {
           raw_trim_round: score
         }
-      } as CRaterResponses;
+      } as RawCRaterResponse;
       const cRaterResponse = service.getCRaterResponse(response, 1);
       expect(cRaterResponse.score).toEqual(score);
       expect(cRaterResponse.ideas).toEqual([]);

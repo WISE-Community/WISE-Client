@@ -1,3 +1,9 @@
+<ng-template #accumulatedIdeaCountSupportMessage
+  ><i i18n>
+    Note: this term currently works in the Dialog Guidance component only. Support in the Open
+    Response component and the Dynamic Prompt will be coming soon.</i
+  ></ng-template
+>
 <h2 class="mat-dialog-title" i18n>Feedback Rule Authoring</h2>
 <mat-dialog-content class="dialog-content-scroll">
   <h3 i18n>Introduction</h3>
@@ -35,7 +41,8 @@
         Evaluates to true if more than X ideas were found in all (both past and current) of
         student's responses.<br />
         Ex: <b>accumulatedIdeaCountMoreThan(2)</b> evaluates to true if the student had more than 2
-        ideas in all of their responses.
+        ideas in all of their responses.<br />
+        <ng-template [ngTemplateOutlet]="accumulatedIdeaCountSupportMessage"></ng-template>
       </td>
     </tr>
     <tr>
@@ -44,7 +51,8 @@
         Evaluates to true if less than X ideas were found in all (both past and current) of
         student's responses.<br />
         Ex: <b>accumulatedIdeaCountLessThan(2)</b> evaluates to true if the student had less than 2
-        ideas in all of their responses.
+        ideas in all of their responses.<br />
+        <ng-template [ngTemplateOutlet]="accumulatedIdeaCountSupportMessage"></ng-template>
       </td>
     </tr>
     <tr>
@@ -53,7 +61,8 @@
         Evaluates to true if exactly X ideas were found in all (both past and current) of student's
         responses.<br />
         Ex: <b>accumulatedIdeaCountEquals(2)</b> evaluates to true if the student had exactly 2
-        ideas in all of their responses.
+        ideas in all of their responses.<br />
+        <ng-template [ngTemplateOutlet]="accumulatedIdeaCountSupportMessage"></ng-template>
       </td>
     </tr>
     <tr>

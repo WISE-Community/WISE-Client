@@ -24,7 +24,7 @@ import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.c
 import { DialogGuidanceService } from '../dialogGuidanceService';
 import { DialogGuidanceStudentComponent } from './dialog-guidance-student.component';
 import { DialogGuidanceComponent } from '../DialogGuidanceComponent';
-import { CRaterResponses } from '../../common/cRater/CRaterResponses';
+import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 
 let component: DialogGuidanceStudentComponent;
 let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
@@ -232,7 +232,7 @@ function expectIsShowComputerAvatarSelector(
   expect(component.isShowComputerAvatarSelector).toEqual(expectedIsShowComputerAvatarSelector);
 }
 
-function createDummyScoringResponse(): CRaterResponses {
+function createDummyScoringResponse(): RawCRaterResponse {
   return {
     feedback: {
       ideas: [{ 2: false }, { 3: false }]
@@ -240,5 +240,5 @@ function createDummyScoringResponse(): CRaterResponses {
     trait_scores: {
       ki: { score: 1 }
     }
-  } as CRaterResponses;
+  } as RawCRaterResponse;
 }

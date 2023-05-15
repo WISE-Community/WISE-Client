@@ -25,7 +25,7 @@ import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent'
 import { ComponentStudent } from '../../component-student.component';
 import { DialogGuidanceComponent } from '../DialogGuidanceComponent';
 import { copy } from '../../../common/object/object';
-import { CRaterResponses } from '../../common/cRater/CRaterResponses';
+import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -233,7 +233,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     this.studentCanRespond = false;
   }
 
-  cRaterSuccessResponse(responses: CRaterResponses): void {
+  cRaterSuccessResponse(responses: RawCRaterResponse): void {
     this.hideWaitingForComputerResponse();
     this.submitButtonClicked();
     const cRaterResponse = this.cRaterService.getCRaterResponse(responses, this.submitCounter);
