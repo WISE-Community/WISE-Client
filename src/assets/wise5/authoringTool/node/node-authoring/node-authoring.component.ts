@@ -24,7 +24,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
   styleUrls: ['./node-authoring.component.scss']
 })
 export class NodeAuthoringComponent implements OnInit {
-  components: any;
+  components: any = [];
   componentsToChecked = {};
   componentsToIsExpanded = {};
   copyComponentMode: boolean = false;
@@ -259,13 +259,9 @@ export class NodeAuthoringComponent implements OnInit {
 
   getSelectedComponentIds(): string[] {
     const selectedComponents = [];
-    if (this.components != null) {
-      for (const component of this.components) {
-        if (component != null && component.id != null) {
-          if (this.componentsToChecked[component.id]) {
-            selectedComponents.push(component.id);
-          }
-        }
+    for (const component of this.components) {
+      if (this.componentsToChecked[component.id]) {
+        selectedComponents.push(component.id);
       }
     }
     return selectedComponents;
@@ -287,15 +283,11 @@ export class NodeAuthoringComponent implements OnInit {
    */
   getSelectedComponentNumbersAndTypes(): string[] {
     const selectedComponents = [];
-    if (this.components != null) {
-      for (let c = 0; c < this.components.length; c++) {
-        const component = this.components[c];
-        if (component != null && component.id != null) {
-          if (this.componentsToChecked[component.id]) {
-            const componentNumberAndType = c + 1 + '. ' + component.type;
-            selectedComponents.push(componentNumberAndType);
-          }
-        }
+    for (let c = 0; c < this.components.length; c++) {
+      const component = this.components[c];
+      if (this.componentsToChecked[component.id]) {
+        const componentNumberAndType = c + 1 + '. ' + component.type;
+        selectedComponents.push(componentNumberAndType);
       }
     }
     return selectedComponents;
