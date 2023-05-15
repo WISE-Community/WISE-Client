@@ -1225,7 +1225,7 @@ export class DataExportComponent implements OnInit {
       .filter((bucket: Bucket) => bucket.id !== '0')
       .forEach((bucket: Bucket) => {
         bucket.items.forEach((item: Choice) => {
-          this.setBucketValueWithAppending(row, columnNameToNumber, component, bucket, item);
+          this.setBucketValue(row, columnNameToNumber, component, bucket, item);
           if (
             this.includeCorrectnessColumns &&
             this.matchService.componentHasCorrectAnswer(component)
@@ -1236,23 +1236,24 @@ export class DataExportComponent implements OnInit {
       });
   }
 
-  private setBucketValueWithAppending(
+  private setBucketValue(
     row: string[],
     columnNameToNumber: any,
     component: any,
-    bucket: any,
-    item: any
+    bucket: Bucket,
+    item: Choice
   ): void {
-    if (row[columnNameToNumber[item.id]] == null || row[columnNameToNumber[item.id]] === '') {
-      row[columnNameToNumber[item.id]] = this.getBucketValueById(component, bucket.id);
-    } else {
-      row[columnNameToNumber[item.id]] = `${
-        row[columnNameToNumber[item.id]]
-      }, ${this.getBucketValueById(component, bucket.id)}`;
-    }
+    const previousValue = row[columnNameToNumber[item.id]];
+    const bucketValue = this.getBucketValueById(component, bucket.id);
+    row[columnNameToNumber[item.id]] =
+      previousValue === '' ? bucketValue : `${previousValue}, ${bucketValue}`;
   }
 
-  private setCorrectnessValueForChoiceReuse(row: any[], columnNameToNumber: any, item: any): void {
+  private setCorrectnessValueForChoiceReuse(
+    row: any[],
+    columnNameToNumber: any,
+    item: Choice
+  ): void {
     const columnName = item.id + '-boolean';
     if (item.isCorrect == null) {
       // The item does not have an isCorrect field so we will not show anything in the cell.
@@ -1289,26 +1290,30 @@ export class DataExportComponent implements OnInit {
     row: any,
     columnNameToNumber: any,
     columnName: string,
-    newValue: any
+    newValue: number
   ): void {
     const previousValue = row[columnNameToNumber[columnName]];
     if (previousValue === '') {
       row[columnNameToNumber[columnName]] = newValue;
-    } else if (this.bothValuesAreX(previousValue, newValue, 1)) {
+    } else if (this.bothValuesAreCorrect(previousValue, newValue)) {
       row[columnNameToNumber[columnName]] = 1;
-    } else if (this.eitherValuesAreX(previousValue, newValue, 0)) {
+    } else if (this.eitherValuesAreIncorrect(previousValue, newValue)) {
       row[columnNameToNumber[columnName]] = 0;
-    } else if (this.eitherValuesAreX(previousValue, newValue, 2)) {
+    } else if (this.eitherValuesAreIncorrectPosition(previousValue, newValue)) {
       row[columnNameToNumber[columnName]] = 2;
     }
   }
 
-  private bothValuesAreX(value1: number, value2: number, expectedValue: number): boolean {
-    return value1 === expectedValue && value2 === expectedValue;
+  private bothValuesAreCorrect(value1: number, value2: number): boolean {
+    return value1 === 1 && value2 === 1;
   }
 
-  private eitherValuesAreX(value1: number, value2: number, expectedValue: number): boolean {
-    return value1 === expectedValue || value2 === expectedValue;
+  private eitherValuesAreIncorrect(value1: number, value2: number): boolean {
+    return value1 === 0 || value2 === 0;
+  }
+
+  private eitherValuesAreIncorrectPosition(value1: number, value2: number): boolean {
+    return value1 === 2 || value2 === 2;
   }
 
   getBucketValueById(component: any, id: string): string {
