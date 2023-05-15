@@ -267,6 +267,7 @@
         i18n-aria-label
       >
         <mat-checkbox
+          color="primary"
           [(ngModel)]="componentsToChecked[component.id]"
           [disabled]="insertComponentMode"
           (change)="componentCheckboxChanged()"
