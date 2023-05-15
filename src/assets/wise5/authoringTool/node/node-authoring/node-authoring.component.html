@@ -255,9 +255,8 @@
     <em i18n>This step does not have any components. Click the + button to add a component.</em>
   </div>
   <div *ngFor="let component of components; let i = index">
-    <div *ngIf="showComponents" class="component">
+    <div *ngIf="showComponents" [id]="component.id" class="component">
       <div
-        id="component.id"
         (click)="toggleComponent(component.id)"
         class="component-header"
         fxLayout="row"

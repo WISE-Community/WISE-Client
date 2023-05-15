@@ -123,7 +123,6 @@ export class NodeAuthoringComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.teacherDataService.setCurrentNode(null);
     this.subscriptions.unsubscribe();
   }
 
@@ -459,7 +458,7 @@ export class NodeAuthoringComponent implements OnInit {
    * authoring views. Used to bring user's attention to new changes.
    * @param newComponents an array of the new components we have just added
    */
-  highlightNewComponentsAndThenShowComponentAuthoring(newComponents: any): void {
+  highlightNewComponentsAndThenShowComponentAuthoring(newComponents: any = []): void {
     this.showComponentAuthoring();
     this.turnOffInsertComponentMode();
     this.showDefaultComponentsView();
@@ -467,7 +466,7 @@ export class NodeAuthoringComponent implements OnInit {
 
     // wait for the UI to update and then scroll to the first new component
     setTimeout(() => {
-      if (newComponents != null && newComponents.length > 0) {
+      if (newComponents.length > 0) {
         const componentElement = $('#' + newComponents[0].id);
         $('#content').scrollTop(componentElement.offset().top - 200);
         for (const newComponent of newComponents) {
