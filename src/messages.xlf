@@ -13895,8 +13895,8 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">67,70</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="62a78a93ebb5236c1a6ade1793758c83b54e87cd" datatype="html">
-        <source> Evaluates to true if more than X ideas were found in the student&apos;s Y-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountMoreThan(2, 3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had more than 2 ideas in their third response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></source>
+      <trans-unit id="e04b6cd0cf044eabd1d5f09a51d88a54f10aacbe" datatype="html">
+        <source> Evaluates to true if more than X ideas were found in the student&apos;s Y-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountMoreThan(2, 3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had more than 2 ideas in their 3rd response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">74,78</context>
@@ -13909,8 +13909,8 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">83,86</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="268845fd30e31dce1afa239f99bb88b094439b55" datatype="html">
-        <source> Evaluates to true if less than X ideas were found in the student&apos;s Y-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountLessThan(2, 3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had less than 2 ideas in their third response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></source>
+      <trans-unit id="79beee3a035e6163a916539a4f9493ed5e8e40c3" datatype="html">
+        <source> Evaluates to true if less than X ideas were found in the student&apos;s Y-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountLessThan(2, 3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had less than 2 ideas in their 3rd response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">90,94</context>
@@ -13923,8 +13923,8 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">99,102</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="c55a2693ca5f800e3c28e971526b5950d4637d02" datatype="html">
-        <source> Evaluates to true if exactly X ideas were found in the student&apos;s Y-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2, 3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas in their third response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></source>
+      <trans-unit id="2d05e3d5853bc13670778644a91cb4a915d5b3ce" datatype="html">
+        <source> Evaluates to true if exactly X ideas were found in the student&apos;s Y-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2, 3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas in their 3rd response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">106,110</context>
