@@ -4,12 +4,13 @@ import { TermEvaluator } from './TermEvaluator';
 export abstract class AbstractIdeaCountTermEvaluator extends TermEvaluator {
   comparer: 'MoreThan' | 'Equals' | 'LessThan';
   expectedIdeaCount: number;
+  matches: RegExpMatchArray;
 
   constructor(term: string, matcher: RegExp) {
     super(term);
-    const matches = term.match(matcher);
-    this.comparer = matches[1] as 'MoreThan' | 'Equals' | 'LessThan';
-    this.expectedIdeaCount = parseInt(matches[2]);
+    this.matches = term.match(matcher);
+    this.comparer = this.matches[1] as 'MoreThan' | 'Equals' | 'LessThan';
+    this.expectedIdeaCount = parseInt(this.matches[2]);
   }
 
   evaluate(response: CRaterResponse | CRaterResponse[]): boolean {
