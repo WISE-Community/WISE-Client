@@ -169,7 +169,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     const computerAvatarInitialResponse = this.component.getComputerAvatarInitialResponse();
     if (computerAvatarInitialResponse != null && computerAvatarInitialResponse !== '') {
       this.addDialogResponse(
-        new ComputerDialogResponse(computerAvatarInitialResponse, [], new Date().getTime())
+        new ComputerDialogResponse(computerAvatarInitialResponse, [], new Date().getTime(), true)
       );
     }
   }
@@ -274,7 +274,10 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     return (
       this.dataService
         .getLatestComponentStateByNodeIdAndComponentId(this.nodeId, this.componentId)
-        ?.studentData.responses.filter((response: DialogResponse) => response.user === 'Computer')
+        ?.studentData.responses.filter(
+          (response: DialogResponse) =>
+            response.user === 'Computer' && !(response as ComputerDialogResponse).initialResponse
+        )
         .map((response: DialogResponse) => {
           const cRaterResponse = new CRaterResponse(response);
           cRaterResponse.submitCounter = submitCounter++;
