@@ -5,6 +5,7 @@ import { StudentTeacherCommonModule } from '../../../../app/student-teacher-comm
 
 @NgModule({
   declarations: [ChooseImportComponentComponent, ChooseImportComponentLocationComponent],
+  exports: [ChooseImportComponentComponent, ChooseImportComponentLocationComponent],
   imports: [StudentTeacherCommonModule]
 })
 export class ImportComponentModule {}

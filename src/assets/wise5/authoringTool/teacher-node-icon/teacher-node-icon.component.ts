@@ -5,6 +5,7 @@ import { NodeIconChooserDialog } from '../../common/node-icon-chooser-dialog/nod
 import { Component } from '@angular/core';
 
 @Component({
+  selector: 'teacher-node-icon',
   templateUrl: '../../vle/node-icon/node-icon.component.html',
   styleUrls: ['../../vle/node-icon/node-icon.component.scss']
 })

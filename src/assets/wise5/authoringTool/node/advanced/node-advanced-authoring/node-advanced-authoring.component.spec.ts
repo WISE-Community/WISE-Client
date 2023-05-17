@@ -25,7 +25,7 @@ describe('NodeAdvancedAuthoringComponent', () => {
     TestBed.inject(UpgradeModule).$injector = {
       get: () => {
         return {
-          $current: { name: '' },
+          current: { name: '' },
           go: (route: string, params: any) => {},
           nodeId: ''
         };

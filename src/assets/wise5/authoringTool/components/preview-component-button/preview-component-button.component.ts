@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PreviewComponentDialogComponent } from '../preview-component-dialog/preview-component-dialog.component';
 
 @Component({
+  selector: 'preview-component-button',
   templateUrl: 'preview-component-button.component.html'
 })
 export class PreviewComponentButtonComponent implements OnInit {

@@ -3,7 +3,7 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { EmbeddedContent } from '../EmbeddedContent';
 
 @Component({
-  template: 'edit-embedded-advanced',
+  selector: 'edit-embedded-advanced',
   templateUrl: 'edit-embedded-advanced.component.html',
   styleUrls: ['edit-embedded-advanced.component.scss']
 })

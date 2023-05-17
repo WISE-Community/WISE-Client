@@ -19,6 +19,15 @@ import { ConstraintAuthoringModule } from '../../constraint/constraint-authoring
     NodeAdvancedPathAuthoringComponent,
     NodeConstraintAuthoringComponent
   ],
+  exports: [
+    NodeAdvancedAuthoringComponent,
+    NodeAdvancedBranchAuthoringComponent,
+    NodeAdvancedConstraintAuthoringComponent,
+    NodeAdvancedGeneralAuthoringComponent,
+    NodeAdvancedJsonAuthoringComponent,
+    NodeAdvancedPathAuthoringComponent,
+    NodeConstraintAuthoringComponent
+  ],
   imports: [ConstraintAuthoringModule, StudentTeacherCommonModule]
 })
 export class NodeAdvancedAuthoringModule {}

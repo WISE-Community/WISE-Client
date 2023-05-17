@@ -5,8 +5,8 @@ import { NodeAdvancedConstraintAuthoringComponent } from './advanced/constraint/
 import { NodeAdvancedGeneralAuthoringComponent } from './advanced/general/node-advanced-general-authoring.component';
 import { NodeAdvancedJsonAuthoringComponent } from './advanced/json/node-advanced-json-authoring.component';
 import { NodeAdvancedPathAuthoringComponent } from './advanced/path/node-advanced-path-authoring.component';
-import { NodeAuthoringComponent } from './nodeAuthoringComponent';
 import { NodeAdvancedAuthoringComponent } from './advanced/node-advanced-authoring/node-advanced-authoring.component';
+import { NodeAuthoringComponent } from './node-authoring/node-authoring.component';
 
 export default angular
   .module('nodeAuthoringModule', [])
@@ -44,7 +44,10 @@ export default angular
       component: NodeAdvancedJsonAuthoringComponent
     }) as angular.IDirectiveFactory
   )
-  .component('nodeAuthoringComponent', NodeAuthoringComponent)
+  .directive(
+    'nodeAuthoringComponent',
+    downgradeComponent({ component: NodeAuthoringComponent }) as angular.IDirectiveFactory
+  )
   .config([
     '$stateProvider',
     ($stateProvider) => {
