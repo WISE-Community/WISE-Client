@@ -11,7 +11,7 @@ import { MultipleChoiceContent } from '../../multipleChoice/MultipleChoiceConten
 import { SummaryService } from '../summaryService';
 
 @Component({
-  selector: 'summary-authoring.component',
+  selector: 'summary-authoring',
   templateUrl: 'summary-authoring.component.html',
   styleUrls: ['summary-authoring.component.scss']
 })
