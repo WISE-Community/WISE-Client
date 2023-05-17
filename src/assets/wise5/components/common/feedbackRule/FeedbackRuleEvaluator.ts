@@ -5,126 +5,123 @@ import { FeedbackRuleExpression } from './FeedbackRuleExpression';
 import { TermEvaluator } from './TermEvaluator/TermEvaluator';
 import { TermEvaluatorFactory } from './TermEvaluator/TermEvaluatorFactory';
 
-export class FeedbackRuleEvaluator<T extends CRaterResponse | CRaterResponse[]> {
+export class FeedbackRuleEvaluator<T extends CRaterResponse[]> {
   defaultFeedback = $localize`Thanks for submitting your response.`;
   protected factory = new TermEvaluatorFactory();
 
   constructor(protected component: FeedbackRuleComponent) {}
 
-  getFeedbackRule(response: T): FeedbackRule {
-    for (const feedbackRule of this.component.getFeedbackRules()) {
-      if (this.satisfiesRule(response, Object.assign(new FeedbackRule(), feedbackRule))) {
-        return feedbackRule;
-      }
-    }
-    return this.getDefaultRule(this.component.getFeedbackRules());
-  }
-
-  protected satisfiesRule(response: T, feedbackRule: FeedbackRule): boolean {
-    return this.isSpecialRule(feedbackRule)
-      ? this.satisfiesSpecialRule(response, feedbackRule)
-      : this.satisfiesSpecificRule(response, feedbackRule);
-  }
-
-  private satisfiesSpecialRule(response: T, feedbackRule: FeedbackRule): boolean {
+  getFeedbackRule(responses: T): FeedbackRule {
     return (
-      this.satisfiesNonScorableRule(response, feedbackRule) ||
-      this.satisfiesFinalSubmitRule(response, feedbackRule) ||
-      this.satisfiesSecondToLastSubmitRule(response, feedbackRule)
+      this.component
+        .getFeedbackRules()
+        .find((rule) => this.satisfiesRule(responses, Object.assign(new FeedbackRule(), rule))) ??
+      this.getDefaultRule(this.component.getFeedbackRules())
     );
   }
 
-  protected satisfiesFinalSubmitRule(response: T, feedbackRule: FeedbackRule): boolean {
+  protected satisfiesRule(responses: T, rule: FeedbackRule): boolean {
+    return FeedbackRule.isSpecialRule(rule)
+      ? this.satisfiesSpecialRule(responses, rule)
+      : this.satisfiesSpecificRule(responses, rule);
+  }
+
+  private satisfiesSpecialRule(responses: T, rule: FeedbackRule): boolean {
     return (
-      this.hasMaxSubmitAndIsFinalSubmitRule(feedbackRule) &&
-      this.component.hasMaxSubmitCountAndUsedAllSubmits((response as CRaterResponse).submitCounter)
+      this.satisfiesNonScorableRule(responses, rule) ||
+      this.satisfiesFinalSubmitRule(responses, rule) ||
+      this.satisfiesSecondToLastSubmitRule(responses, rule)
     );
   }
 
-  protected hasMaxSubmitAndIsFinalSubmitRule(feedbackRule: FeedbackRule): boolean {
-    return this.component.hasMaxSubmitCount() && FeedbackRule.isFinalSubmitRule(feedbackRule);
-  }
-
-  protected satisfiesSecondToLastSubmitRule(response: T, feedbackRule: FeedbackRule): boolean {
+  protected satisfiesFinalSubmitRule(responses: T, rule: FeedbackRule): boolean {
     return (
-      this.hasMaxSubmitAndIsSecondToLastSubmitRule(feedbackRule) &&
-      this.isSecondToLastSubmit((response as CRaterResponse).submitCounter)
+      this.hasMaxSubmitAndIsFinalSubmitRule(rule) &&
+      this.component.hasMaxSubmitCountAndUsedAllSubmits(
+        (responses[responses.length - 1] as CRaterResponse).submitCounter
+      )
     );
   }
 
-  protected hasMaxSubmitAndIsSecondToLastSubmitRule(feedbackRule: FeedbackRule): boolean {
+  protected hasMaxSubmitAndIsFinalSubmitRule(rule: FeedbackRule): boolean {
+    return this.component.hasMaxSubmitCount() && FeedbackRule.isFinalSubmitRule(rule);
+  }
+
+  protected satisfiesSecondToLastSubmitRule(responses: T, rule: FeedbackRule): boolean {
     return (
-      this.component.hasMaxSubmitCount() && FeedbackRule.isSecondToLastSubmitRule(feedbackRule)
+      this.hasMaxSubmitAndIsSecondToLastSubmitRule(rule) &&
+      this.isSecondToLastSubmit((responses[responses.length - 1] as CRaterResponse).submitCounter)
     );
+  }
+
+  protected hasMaxSubmitAndIsSecondToLastSubmitRule(rule: FeedbackRule): boolean {
+    return this.component.hasMaxSubmitCount() && FeedbackRule.isSecondToLastSubmitRule(rule);
   }
 
   protected isSecondToLastSubmit(submitCounter: number): boolean {
     return this.component.getNumberOfSubmitsLeft(submitCounter) === 1;
   }
 
-  protected satisfiesNonScorableRule(response: T, feedbackRule: FeedbackRule): boolean {
+  protected satisfiesNonScorableRule(responses: T, rule: FeedbackRule): boolean {
     return (
-      feedbackRule.expression === 'isNonScorable' && (response as CRaterResponse).isNonScorable()
+      rule.expression === 'isNonScorable' &&
+      (responses[responses.length - 1] as CRaterResponse).isNonScorable()
     );
   }
 
-  private isSpecialRule(feedbackRule: FeedbackRule): boolean {
-    return ['isFinalSubmit', 'isSecondToLastSubmit', 'isNonScorable'].includes(
-      feedbackRule.expression
-    );
-  }
-
-  private satisfiesSpecificRule(response: T, feedbackRule: FeedbackRule): boolean {
+  private satisfiesSpecificRule(responses: T, rule: FeedbackRule): boolean {
     const termStack = [];
-    for (const term of feedbackRule.getPostfixExpression()) {
+    for (const term of rule.getPostfixExpression()) {
       if (FeedbackRuleExpression.isOperand(term)) {
         termStack.push(term);
       } else {
-        this.evaluateOperator(term, termStack, response);
+        this.evaluateOperator(term, termStack, responses);
       }
     }
     if (termStack.length === 1) {
-      return this.evaluateTerm(termStack.pop(), response);
+      return this.evaluateTerm(termStack.pop(), responses);
     }
     return true;
   }
 
-  private evaluateOperator(operator: string, termStack: string[], response: T) {
-    if (this.evaluateOperatorExpression(operator, termStack, response)) {
+  private evaluateOperator(operator: string, termStack: string[], responses: T) {
+    if (this.evaluateOperatorExpression(operator, termStack, responses)) {
       termStack.push('true');
     } else {
       termStack.push('false');
     }
   }
 
-  private evaluateOperatorExpression(operator: string, termStack: string[], response: T): boolean {
+  private evaluateOperatorExpression(operator: string, termStack: string[], responses: T): boolean {
     if (['&&', '||'].includes(operator)) {
-      return this.evaluateAndOrExpression(operator, termStack, response);
+      return this.evaluateAndOrExpression(operator, termStack, responses);
     } else {
-      return this.evaluateNotExpression(termStack, response);
+      return this.evaluateNotExpression(termStack, responses);
     }
   }
 
-  private evaluateAndOrExpression(operator: string, termStack: string[], response: T): boolean {
+  private evaluateAndOrExpression(operator: string, termStack: string[], responses: T): boolean {
     const term1 = termStack.pop();
     const term2 = termStack.pop();
     return operator === '&&'
-      ? this.evaluateTerm(term1, response) && this.evaluateTerm(term2, response)
-      : this.evaluateTerm(term1, response) || this.evaluateTerm(term2, response);
+      ? this.evaluateTerm(term1, responses) && this.evaluateTerm(term2, responses)
+      : this.evaluateTerm(term1, responses) || this.evaluateTerm(term2, responses);
   }
 
-  private evaluateNotExpression(termStack: string[], response: T): boolean {
-    return !this.evaluateTerm(termStack.pop(), response);
+  private evaluateNotExpression(termStack: string[], responses: T): boolean {
+    return !this.evaluateTerm(termStack.pop(), responses);
   }
 
-  protected evaluateTerm(term: string, response: T): boolean {
+  protected evaluateTerm(term: string, responses: T): boolean {
     const evaluator: TermEvaluator = this.factory.getTermEvaluator(term);
-    return evaluator.evaluate(response as CRaterResponse);
+    return TermEvaluator.requiresAllResponses(term)
+      ? evaluator.evaluate(responses)
+      : evaluator.evaluate(responses[responses.length - 1]);
   }
 
-  protected getDefaultRule(feedbackRules: FeedbackRule[]): FeedbackRule {
+  protected getDefaultRule(rules: FeedbackRule[]): FeedbackRule {
     return (
-      feedbackRules.find((rule) => FeedbackRule.isDefaultRule(rule)) ||
+      rules.find((rule) => FeedbackRule.isDefaultRule(rule)) ||
       Object.assign(new FeedbackRule(), {
         id: 'default',
         expression: 'isDefault',

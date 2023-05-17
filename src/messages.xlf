@@ -319,7 +319,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">205</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/dialog-with-close/dialog-with-close.component.html</context>
@@ -1902,15 +1902,15 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">151</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">185</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7491b1ebfc5dd457492a5c481e2d2254216dc1fc" datatype="html">
@@ -13659,11 +13659,11 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">158</context>
+          <context context-type="linenumber">159</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4965414112249568013" datatype="html">
@@ -14030,221 +14030,270 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="82efdf880fe90640388310171d05401a6fc62663" datatype="html">
+        <source>Note: this term currently only works in the Dialog Guidance component.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="21a9fc818b21be4ca6e733d9cf3defc9b28f3879" datatype="html">
         <source>Feedback Rule Authoring</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">1</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5499b81e5db6d551e39b1731b360d787148bfea2" datatype="html">
         <source>Introduction</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2b697376f40eff0851d7401d0e93b7243059e8ef" datatype="html">
         <source> Rules are evaluated top to bottom. The first rule <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expression<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> that matches the student&apos;s response is used to provide feedback. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">4,7</context>
+          <context context-type="linenumber">7,10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2f65cedf60cf1bf82125ec83f1de1859614cf944" datatype="html">
         <source> You can add multiple <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Feedback<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> items per rule. The first time a rule matches, Feedback #1 will be shown to the student.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> If the rule matches a second time (in a subsequent round), Feedback #2 will be shown, and so on. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">8,12</context>
+          <context context-type="linenumber">11,15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d8b6142c3d02b165711db70e94cc65d49a2dfabe" datatype="html">
         <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expressions<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> are made up of terms, operators, and parentheses:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="69580f2c2dbf4edf7096820ba8c393367352d774" datatype="html">
         <source>Terms</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4386e2f920c44a2d81df324615b6daba105a6d92" datatype="html">
         <source>Terms lets you specify what to look for in a student response.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="be1c273fc76e686667bff39d321970c9487f9ee7" datatype="html">
         <source>Term</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a8ea043c9dd022c74447e7e816841d378138ecd9" datatype="html">
         <source>Evaluates to true if idea 1, 2, 18, etc was found in the student&apos;s response.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b76eb1dfebc7cbec7f95dae60708804c3eb23e15" datatype="html">
         <source> Evaluates to true if the student received a KI score of X.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>hasKIScore(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student received KI score 3. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">27,30</context>
+          <context context-type="linenumber">30,33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="71a4930ba088b909b7923626580adac30640c167" datatype="html">
+        <source> Evaluates to true if more than X ideas were found in all (both past and current) of student&apos;s responses.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>accumulatedIdeaCountMoreThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had more than 2 ideas in all of their responses.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">37,42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="734b33e9a431f6b0663b3aca75e1fd1321dce3dd" datatype="html">
+        <source> Evaluates to true if less than X ideas were found in all (both past and current) of student&apos;s responses.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>accumulatedIdeaCountLessThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had less than 2 ideas in all of their responses.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">47,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="10049e4579770c0e82f53ae155be74d948eae034" datatype="html">
+        <source> Evaluates to true if exactly X ideas were found in all (both past and current) of student&apos;s responses.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>accumulatedIdeaCountEquals(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas in all of their responses.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">57,62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e5f60118e592df5cd7aed342976c7b0ecc4da547" datatype="html">
         <source> Evaluates to true if more than X ideas were found in the student&apos;s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountMoreThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had more than 2 ideas. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">34,37</context>
+          <context context-type="linenumber">67,70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e04b6cd0cf044eabd1d5f09a51d88a54f10aacbe" datatype="html">
+        <source> Evaluates to true if more than X ideas were found in the student&apos;s Y-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountMoreThan(2, 3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had more than 2 ideas in their 3rd response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">74,78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6b884914cb98d7d84efe99d0b60f778c30c3a9f3" datatype="html">
         <source> Evaluates to true if less than X ideas were found in the student&apos;s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountLessThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had less than 2 ideas. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">41,44</context>
+          <context context-type="linenumber">83,86</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="79beee3a035e6163a916539a4f9493ed5e8e40c3" datatype="html">
+        <source> Evaluates to true if less than X ideas were found in the student&apos;s Y-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountLessThan(2, 3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had less than 2 ideas in their 3rd response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">90,94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c299449835a6844a97d1120d96268ec889e221ee" datatype="html">
         <source> Evaluates to true if exactly X ideas were found in the student&apos;s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">48,51</context>
+          <context context-type="linenumber">99,102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2d05e3d5853bc13670778644a91cb4a915d5b3ce" datatype="html">
+        <source> Evaluates to true if exactly X ideas were found in the student&apos;s Y-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2, 3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas in their 3rd response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">106,110</context>
         </context-group>
       </trans-unit>
       <trans-unit id="acb957d799796d719108eeb1d0ed9ca4880c9f0c" datatype="html">
         <source> Evaluates to true if this is the student&apos;s X-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>isSubmitNumber(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if this is the student&apos;s third response. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">55,58</context>
+          <context context-type="linenumber">115,118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ab15bc35d4c4c975e2cd82171bd30ef3fbf8f226" datatype="html">
         <source> Evaluates to true if this is the student&apos;s second to last response when the max number of submits is specified. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">62,65</context>
+          <context context-type="linenumber">122,125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bc1cca966f287a319703db89b22d379a6c1455cb" datatype="html">
         <source> Evaluates to true if this is the student&apos;s final response when the max number of submits is specified. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">69,72</context>
+          <context context-type="linenumber">129,132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3783efe04c66c9d80d09506ec8b7ad29167aacd8" datatype="html">
         <source>Evaluates to true if the student&apos;s response was not scorable.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="298fc1d863b0fb7a33b6825d43981e09e151cb5a" datatype="html">
         <source> Evaluates to true if no other terms were matched. Add this term as the final rule to specify a default feedback. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">80,83</context>
+          <context context-type="linenumber">140,143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9d4ed1f582fafcfd1035ea83e58a5e1fe8d6a1a5" datatype="html">
         <source>Operators</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b2145d0c97ccffaf79c5770f967a429c84af4123" datatype="html">
         <source>Operators let you combine one or more terms together to make a rule.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c39d43f18d10f925621abc77ad15de80a9cc7516" datatype="html">
         <source>Operator</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e4b8724800156a9aef6d6f0f31f67431957cc24e" datatype="html">
         <source> Evaluates to true if terms on both sides of this operator evaluate to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; hasKIScore(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was found and the student received a KI score of 2. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">95,100</context>
+          <context context-type="linenumber">155,160</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1f50d4313ef8ddef3a1d6d3fd464ec3dd3c21f03" datatype="html">
         <source> Evaluates to true if a term on either side of this operator evaluates to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 || 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if either idea 1 or 2 was found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2 || 3<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found or idea 3 was found. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">104,109</context>
+          <context context-type="linenumber">164,169</context>
         </context-group>
       </trans-unit>
       <trans-unit id="414f2fd4ea5c948c6ebbf8417e6afe371bea442d" datatype="html">
         <source> Evaluates to true if a term following this operator evaluates to false.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>!1<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was not found. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">113,116</context>
+          <context context-type="linenumber">173,176</context>
         </context-group>
       </trans-unit>
       <trans-unit id="46b1ed215e53246db19c5bde05ea87e08a5c2705" datatype="html">
         <source>Parentheses</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">179</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8df5a6f6a83598ccc0f22b86f8ca75661ef5a302" datatype="html">
         <source>Parentheses let you group expressions and prioritize evaluation.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">180</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dae69adfd569cdbaa366470ec24471bf01c7db66" datatype="html">
         <source>You can add multiple parentheses in an expression. You can even nest parentheses.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">181</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6db909a826f1878ad78bf853a62b6cc5cbda3d3f" datatype="html">
         <source>Example</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f5d726bee0fd8a545258990d929f39b68549dd87" datatype="html">
         <source>Evaluates to true if neither idea 4a nor idea 12 were found.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">189</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a8eebb4afda178aca31b3fdc61eb0f6d91837041" datatype="html">
         <source>Evaluates to true if idea 5a and either idea 4a or idea 12 was found.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">193</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5dcea69981a857fdd51521e3a1ba0b455ce1fdc9" datatype="html">
         <source> Evaluates to true if idea 5a and either idea 4a or idea 12 was found, and the student received a KI score of 3. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">137,140</context>
+          <context context-type="linenumber">197,200</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dc34bee07a6ceed8f010d89d1fcbda15a5abee8c" datatype="html">
@@ -14504,7 +14553,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">161</context>
+          <context context-type="linenumber">162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8429316238784832901" datatype="html">
@@ -17471,7 +17520,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></source>
 Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">165</context>
+          <context context-type="linenumber">166</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7482125205220618294" datatype="html">
@@ -17480,7 +17529,7 @@ Are you ready to receive feedback on this answer?</source>
 Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">177</context>
+          <context context-type="linenumber">178</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6316287012266891697" datatype="html">
@@ -17489,21 +17538,21 @@ Are you ready to receive feedback on this answer?</source>
 Are you ready to submit this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">181</context>
+          <context context-type="linenumber">182</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8936495196157450285" datatype="html">
         <source>We are scoring your work...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">295</context>
+          <context context-type="linenumber">296</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2283191014272031538" datatype="html">
         <source>Please Wait</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">296</context>
+          <context context-type="linenumber">297</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8785209093929133444" datatype="html">
@@ -17511,7 +17560,7 @@ Are you ready to submit this answer?</source>
 If this problem continues, let your teacher know and move on to the next activity. Your work will still be saved.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">318</context>
+          <context context-type="linenumber">319</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5623290610025495479" datatype="html">

@@ -14,7 +14,7 @@ import {
 } from './test-utils';
 import { CRaterResponse } from '../cRater/CRaterResponse';
 
-let evaluator: FeedbackRuleEvaluator<CRaterResponse>;
+let evaluator: FeedbackRuleEvaluator<CRaterResponse[]>;
 describe('FeedbackRuleEvaluator', () => {
   beforeEach(() => {
     evaluator = new FeedbackRuleEvaluator(
@@ -177,6 +177,6 @@ function expectFeedback(
   submitCounter: number,
   expectedFeedback: string
 ) {
-  const rule = evaluator.getFeedbackRule(createCRaterResponse(ideas, scores, submitCounter));
+  const rule = evaluator.getFeedbackRule([createCRaterResponse(ideas, scores, submitCounter)]);
   expect(rule.feedback).toContain(expectedFeedback);
 }
