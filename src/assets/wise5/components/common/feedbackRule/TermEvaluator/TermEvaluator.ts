@@ -16,7 +16,18 @@ export abstract class TermEvaluator {
     return /ideaCount(MoreThan|Equals|LessThan)\([\d+]\)/.test(term);
   }
 
+  static isIdeaCountWithResponseIndexTerm(term: string): boolean {
+    return /ideaCount(MoreThan|Equals|LessThan)\(\d+,\s*\d+\)/.test(term);
+  }
+
   static isSubmitNumberTerm(term: string): boolean {
     return /isSubmitNumber\(\d+\)/.test(term);
+  }
+
+  static requiresAllResponses(term: string): boolean {
+    return (
+      TermEvaluator.isAccumulatedIdeaCountTerm(term) ||
+      TermEvaluator.isIdeaCountWithResponseIndexTerm(term)
+    );
   }
 }

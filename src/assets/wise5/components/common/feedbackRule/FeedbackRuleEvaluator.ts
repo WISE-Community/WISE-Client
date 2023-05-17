@@ -114,7 +114,7 @@ export class FeedbackRuleEvaluator<T extends CRaterResponse[]> {
 
   protected evaluateTerm(term: string, responses: T): boolean {
     const evaluator: TermEvaluator = this.factory.getTermEvaluator(term);
-    return TermEvaluator.isAccumulatedIdeaCountTerm(term)
+    return TermEvaluator.requiresAllResponses(term)
       ? evaluator.evaluate(responses)
       : evaluator.evaluate(responses[responses.length - 1]);
   }
