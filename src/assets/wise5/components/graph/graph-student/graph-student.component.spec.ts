@@ -136,7 +136,6 @@ describe('GraphStudentComponent', () => {
   setStudentWork();
   setTheDefaultActiveSeries();
   setTheTrialIdsToShow();
-  setVerticalPlotLine();
   setYAxisLabelsWhenMultipleYAxes();
   setYAxisLabelsWhenSingleYAxis();
   showOrHideTrials();
@@ -185,7 +184,8 @@ function createComponentContent() {
         color: 'blue',
         canEdit: true
       }
-    ]
+    ],
+    showMouseXPlotLine: true
   };
 }
 
@@ -304,16 +304,6 @@ function deleteTrial() {
       component.deleteTrial(0);
       expect(component.trials.length).toEqual(1);
       expect(component.trials[0].name).toEqual('Trial 2');
-    });
-  });
-}
-
-function setVerticalPlotLine() {
-  describe('setVerticalPlotLine', () => {
-    it('should set vertical plot line', () => {
-      component.setVerticalPlotLine(10);
-      expect(component.plotLines.length).toEqual(1);
-      expect(component.plotLines[0].value).toEqual(10);
     });
   });
 }
@@ -2091,9 +2081,8 @@ function getTrialsFromClassmates() {
 function mouseDownEventOccurred() {
   describe('mouseDownEventOccurred()', () => {
     it('should draw an x plot line', () => {
-      component.componentContent.showMouseXPlotLine = true;
       const chart = component.getChartById(component.chartId);
-      expect(chart.xAxis[0].userOptions.plotLines).toBeUndefined();
+      expect(chart.xAxis[0].userOptions.plotLines).toEqual([]);
       component.mouseDownEventOccurred({ offsetX: 1000 });
       expect(chart.xAxis[0].userOptions.plotLines).toEqual([new XPlotLine(100, '') as any]);
     });
