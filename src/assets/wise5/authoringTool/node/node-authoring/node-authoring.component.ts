@@ -123,6 +123,9 @@ export class NodeAuthoringComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+    if (this.teacherDataService.getCurrentNodeId() === this.nodeId) {
+      this.teacherDataService.setCurrentNode(null);
+    }
     this.subscriptions.unsubscribe();
   }
 
