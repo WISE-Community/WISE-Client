@@ -2,7 +2,7 @@
   'style/abstracts/variables',
   'style/abstracts/functions';
 
-.mat-card-avatar {
+.mat-mdc-card-avatar {
   background-size: cover;
   border-radius: 4px;
   margin-bottom: 4px;
@@ -13,7 +13,7 @@
   }
 }
 
-.mat-card-title {
+.mat-mdc-card-title {
   margin-bottom: 6px;
 
   @media (max-width: breakpoint('xs.max')) {
@@ -23,7 +23,7 @@
   }
 }
 
-.mat-card-subtitle {
+.mat-mdc-card-subtitle {
   margin-bottom: 2px;
 }
 

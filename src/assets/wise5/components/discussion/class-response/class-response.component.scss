@@ -3,7 +3,7 @@
 .class-response {
   margin: 0 auto 16px;
 
-  &.mat-card {
+  &.mat-mdc-card {
     padding: 0px;
   }
 
@@ -28,7 +28,7 @@
     overflow-y: auto;
   }
 
-  .mat-list-base .mat-list-item {
+  .mat-mdc-list-base .mat-mdc-list-item {
     &.mat-2-line {
       height: auto;
       margin-bottom: 12px;
@@ -37,11 +37,11 @@
     .mat-line {
       white-space: normal;
     }
-
+    /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
     .mat-list-item-content {
       align-items: flex-start;
     }
-
+    /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
     &.mat-list-item-with-avatar .mat-list-item-content .mat-list-text {
       padding-left: 8px;
 

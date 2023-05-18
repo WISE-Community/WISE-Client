@@ -1,4 +1,4 @@
-.mat-card {
+.mat-mdc-card {
   margin: 8px;
   padding-top: 0;
   padding-bottom: 8px;
@@ -9,12 +9,12 @@
   }
 }
 
-.mat-card-content, .mat-card-header {
+.mat-mdc-card-content, .mat-mdc-card-header {
   margin: 0 -16px;
   padding: 16px;
 }
 
-.mat-card-header {
+.mat-mdc-card-header {
   cursor: pointer;
 
   &:focus, &:hover {
@@ -29,13 +29,13 @@
   }
 }
 
-.mat-card-actions {
+.mat-mdc-card-actions {
   padding: 8px 16px;
   margin: 0 -16px;
   border-top: 1px solid #dddddd;
 }
 
-.mat-list-base {
+.mat-mdc-list-base {
   padding-top: 0;
 }
 
@@ -61,6 +61,6 @@
   width: 48px;
 }
 
-.mat-card .mat-divider-horizontal {
+.mat-mdc-card .mat-divider-horizontal {
   position: relative;
 }

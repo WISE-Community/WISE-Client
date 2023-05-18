@@ -15,14 +15,14 @@
 </h3>
 <mat-dialog-content class="dialog-content-scroll notifications">
   <p *ngIf="!hasNewNotifications()" class="no-notifications-message">
-    <span class="mat-body-1" i18n>Hi there! You currently have no alerts.</span>
+    <span class="mat-body-2" i18n>Hi there! You currently have no alerts.</span>
   </p>
   <mat-list *ngIf="hasNewNotifications()">
     <mat-list-item
       *ngFor="let notificationAggregate of newNotifications; let last = last"
       class="notification-item"
     >
-      <p matLine class="mat-body-1">
+      <p matLine class="mat-body-2">
         <a
           (click)="dismissNotificationAggregateAndVisitNode(notificationAggregate)"
           tabindex="0"

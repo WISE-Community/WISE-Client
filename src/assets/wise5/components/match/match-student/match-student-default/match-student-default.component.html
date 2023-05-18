@@ -11,7 +11,7 @@
       [ngStyle]="{ 'margin-bottom': isHorizontal ? '0' : '8px' }"
     >
       <div class="bucket-title" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
-        <h3 class="mat-body-2" [innerHTML]="buckets[0].value"></h3>
+        <h3 class="mat-subtitle-2" [innerHTML]="buckets[0].value"></h3>
         <div *ngIf="componentContent.canCreateChoices">
           <add-choice-button [isDisabled]="isDisabled" (onClick)="addChoice()"></add-choice-button>
         </div>
@@ -67,7 +67,7 @@
           fxLayoutAlign="start center"
           fxLayoutGap="8px"
         >
-          <h3 class="mat-body-2" [innerHTML]="bucket.value"></h3>
+          <h3 class="mat-subtitle-2" [innerHTML]="bucket.value"></h3>
         </div>
         <ul
           class="items"

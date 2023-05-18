@@ -1,4 +1,4 @@
-<mat-card class="class-response">
+<mat-card appearance="outlined" class="class-response">
   <div class="contents">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
       <mat-icon
@@ -8,7 +8,7 @@
         account_circle
       </mat-icon>
       <div>
-        <div class="mat-body-2">{{ response.usernames }}</div>
+        <div class="mat-subtitle-2">{{ response.usernames }}</div>
         <div class="mat-caption secondary-text">
           <save-time-message
             [saveTime]="adjustClientSaveTime(response.serverSaveTime)"
@@ -87,7 +87,7 @@
           account_circle
         </mat-icon>
         <h3 matLine>
-          <span class="mat-body-2">{{ reply.usernames }}</span
+          <span class="mat-subtitle-2">{{ reply.usernames }}</span
           >&nbsp;
           <save-time-message
             [saveTime]="adjustClientSaveTime(reply.serverSaveTime)"

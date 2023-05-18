@@ -17,7 +17,7 @@
   }
 }
 
-.mat-icon-button {
+.mat-mdc-icon-button {
   margin: 0 4px;
 }
 
@@ -25,6 +25,7 @@
   width: 40px !important;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
 .mat-list-item-content {
   padding: 0;
 }

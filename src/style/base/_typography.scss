@@ -5,7 +5,7 @@ strong, b {
 a {
   text-decoration: none;
 
-  &:not(.mat-button):not(.mat-raised-button):not(.mat-menu-item):not(.mat-flat-button):not(.mat-stroked-button):not(.mat-tab-link) {
+  &:not(.mat-mdc-button):not(.mat-mdc-raised-button):not(.mat-mdc-menu-item):not(.mat-mdc-unelevated-button):not(.mat-mdc-outlined-button):not(.mat-mdc-tab-link) {
     &:hover, &:focus {
       text-decoration: underline;
     }

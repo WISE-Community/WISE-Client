@@ -4,7 +4,7 @@
       <div class="mat-card-avatar" [style.background-image]="project.thumbStyle"></div>
       <div fxFlex="1 1 100%" fxLayout="row" fxLayoutWrap>
         <div fxLayout="column">
-          <div class="mat-card-title mat-body-2">{{ project.metadata.title }}</div>
+          <div class="mat-card-title mat-subtitle-2">{{ project.metadata.title }}</div>
           <div class="mat-card-subtitle">
             <div *ngIf="project.metadata.grades.length || project.metadata.totalTime">
               <ng-container *ngIf="project.metadata.grades.length" i18n>Grade level:</ng-container>

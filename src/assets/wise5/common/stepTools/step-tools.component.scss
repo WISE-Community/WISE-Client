@@ -3,6 +3,7 @@
   'style/abstracts/variables';
 
 .step-tools {
+  /* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
   mat-select {
     text-align: left;
     text-transform: none;
@@ -18,7 +19,7 @@
   }
 }
 
-.mat-option.node-select-option {
+.mat-mdc-option.node-select-option {
   &.step {
     padding-left: 20px;
   }

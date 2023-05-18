@@ -12,15 +12,15 @@ $new-note-bottom: 24px;
   .mat-divider {
     margin: -1px 0 0;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
   .mat-tab-label {
     height: 42px;
   }
 
-  .mat-tab-group {
+  .mat-mdc-tab-group {
     height: 100%;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
   .mat-tab-body-content {
     overflow: auto;
   }

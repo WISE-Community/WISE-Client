@@ -3,7 +3,7 @@
     <mat-icon class="mat-36" style="color: {{ getAvatarColorForWorkgroupId(workgroupId) }}">
       account_circle
     </mat-icon>
-    <div class="mat-body-2">
+    <div class="mat-subtitle-2">
       <span>{{ usernamesDisplay }}</span
       >&nbsp;<span class="mat-small" i18n>(Team {{ workgroupId }})</span>
     </div>
@@ -12,8 +12,8 @@
   <div class="menu-section" *ngIf="rootNodeStatus != null">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div fxLayout="column">
-        <span class="mat-body-2" i18n>Unit Completion</span>
-        <span class="mat-body-1 text-secondary" i18n>
+        <span class="mat-subtitle-2" i18n>Unit Completion</span>
+        <span class="mat-body-2 text-secondary" i18n>
           {{ rootNodeStatus.progress.completedItems }}/{{
             rootNodeStatus.progress.totalItems
           }}
@@ -27,7 +27,7 @@
           aria-label-i18n
           aria-label="completion percentage"
         ></mat-progress-bar>
-        <h3 class="mat-display-1">{{ rootNodeStatus.progress.completionPct }}%</h3>
+        <h3 class="mat-headline-4">{{ rootNodeStatus.progress.completionPct }}%</h3>
       </div>
     </div>
   </div>
@@ -35,8 +35,8 @@
   <div class="menu-section" *ngIf="showScore">
     <div fxLayout="row" fxLayoutAlign="start center">
       <div fxLayout="column">
-        <span class="mat-body-2" i18n>Total Score</span>
-        <span class="mat-body-1 text-secondary" i18n>{{ totalScore }}/{{ maxScore }} points</span>
+        <span class="mat-subtitle-2" i18n>Total Score</span>
+        <span class="mat-body-2 text-secondary" i18n>{{ totalScore }}/{{ maxScore }} points</span>
       </div>
       <span fxFlex></span>
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
@@ -49,7 +49,7 @@
             aria-label="total score percentage"
           ></mat-progress-bar>
         </div>
-        <h3 class="mat-display-1" *ngIf="maxScore > 0">{{ scorePercentage }}%</h3>
+        <h3 class="mat-headline-4" *ngIf="maxScore > 0">{{ scorePercentage }}%</h3>
       </div>
     </div>
   </div>

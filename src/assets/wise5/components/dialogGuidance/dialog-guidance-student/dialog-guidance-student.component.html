@@ -4,7 +4,7 @@
   (chooseAvatarEvent)="selectComputerAvatar($event)"
 >
 </computer-avatar-selector>
-<mat-card *ngIf="!isShowComputerAvatarSelector" class="mat-elevation-z2">
+<mat-card appearance="outlined" *ngIf="!isShowComputerAvatarSelector" class="mat-elevation-z2">
   <component-header [component]="component"></component-header>
   <dialog-responses
     [responses]="responses"

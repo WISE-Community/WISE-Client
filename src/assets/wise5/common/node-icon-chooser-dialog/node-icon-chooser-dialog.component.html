@@ -24,37 +24,33 @@
   <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
     <div>
       <h3 i18n>Icon:</h3>
-      <mat-chip-list aria-label="Select an icon" i18n-aria-label>
-        <mat-chip
+      <mat-chip-set aria-label="Select an icon" i18n-aria-label>
+        <mat-chip-option
           *ngFor="let fontName of fontNames"
-          #chip="matChip"
           class="icon-choice"
           color="null"
           [value]="fontName"
           [ariaLabel]="fontName"
           [selected]="newNodeIcon.type === 'font' && fontName === newNodeIcon.fontName"
           (selectionChange)="chooseFontName($event)"
-          (click)="chip.select()"
         >
           <mat-icon>{{ fontName }}</mat-icon>
-        </mat-chip>
-      </mat-chip-list>
+        </mat-chip-option>
+      </mat-chip-set>
     </div>
     <div fxFlex.gt-sm="18">
       <h3 i18n>Color:</h3>
-      <mat-chip-list aria-label="Select a color" i18n-aria-label>
-        <mat-chip
+      <mat-chip-set aria-label="Select a color" i18n-aria-label>
+        <mat-chip-option
           *ngFor="let color of colors"
           class="color-choice icon-choice"
-          #chip="matChip"
           [value]="color"
           [ariaLabel]="color"
           [selected]="newNodeIcon.type === 'font' && color === newNodeIcon.color"
           (selectionChange)="chooseFontColor($event)"
-          (click)="chip.select()"
           style="background-color: {{ color }}"
-        ></mat-chip>
-      </mat-chip-list>
+        ></mat-chip-option>
+      </mat-chip-set>
     </div>
   </div>
   <mat-divider></mat-divider>
@@ -72,10 +68,9 @@
       <mat-icon>info</mat-icon>
     </a>
   </h3>
-  <mat-chip-list aria-label="Select a KI icon" i18n-aria-label>
-    <mat-chip
+  <mat-chip-set aria-label="Select a KI icon" i18n-aria-label>
+    <mat-chip-option
       *ngFor="let kiIcon of kiIcons"
-      #chip="matChip"
       class="ki-choice"
       color="null"
       [value]="kiIcon"
@@ -88,8 +83,8 @@
         <img class="ki-icon" [src]="kiIcon.imgSrc" [alt]="kiIcon.imgAlt" />
       </mat-chip-avatar>
       {{ kiIcon.imgLabel }}
-    </mat-chip>
-  </mat-chip-list>
+    </mat-chip-option>
+  </mat-chip-set>
 </mat-dialog-content>
 <mat-dialog-actions fxLayoutAlign="end">
   <button mat-button mat-dialog-close i18n>Cancel</button>

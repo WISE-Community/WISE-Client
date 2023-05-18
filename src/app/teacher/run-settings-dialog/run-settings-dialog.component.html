@@ -1,12 +1,12 @@
 <h2 class="mat-dialog-title" i18n>Edit Settings</h2>
 <mat-dialog-content class="dialog-content-scroll">
-  <p class="mat-subheading-2 accent-1">
+  <p class="mat-subtitle-1 accent-1">
     {{ run.name }} <span class="mat-caption" i18n>(Run ID: {{ run.id }})</span>
   </p>
   <h3 i18n>Class Periods</h3>
   <div fxLayoutGap="8px" fxLayout="row wrap">
     <div *ngFor="let period of run.periods" class="info-block" fxLayoutAlign="center center">
-      <span class="mat-body-2">{{ period }}</span>
+      <span class="mat-subtitle-2">{{ period }}</span>
       <button
         mat-icon-button
         color="accent"

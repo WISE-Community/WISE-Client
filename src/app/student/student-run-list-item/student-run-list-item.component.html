@@ -18,6 +18,7 @@
 </ng-template>
 
 <mat-card
+  appearance="outlined"
   class="mat-elevation-z3 can-highlight"
   [ngClass]="{ 'highlighted-bg': run.isHighlighted }"
   [@flash]="{ value: '*', params: { duration: animateDuration, delay: animateDelay } }"
@@ -33,7 +34,7 @@
     ></div>
     <div fxFlex="1 1 100%" fxLayout="row" fxLayoutWrap>
       <div fxLayout="column">
-        <mat-card-title [class.secondary-text]="isRunCompleted(run)" class="mat-body-2">
+        <mat-card-title [class.secondary-text]="isRunCompleted(run)" class="mat-subtitle-2">
           {{ run.project.name }}
         </mat-card-title>
         <mat-card-subtitle fxHide fxShow.gt-xs>

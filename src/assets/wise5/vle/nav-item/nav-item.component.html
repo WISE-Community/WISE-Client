@@ -1,5 +1,5 @@
 <ng-container *ngIf="nodeStatus.isVisible" [ngSwitch]="type">
-  <mat-card *ngSwitchCase="'card'" [ngClass]="{ 'expanded mat-elevation-z6': expanded }">
+  <mat-card appearance="outlined" *ngSwitchCase="'card'" [ngClass]="{ 'expanded mat-elevation-z6': expanded }">
     <mat-card-header
       (click)="itemClicked($event)"
       (keyup.enter)="itemClicked($event)"

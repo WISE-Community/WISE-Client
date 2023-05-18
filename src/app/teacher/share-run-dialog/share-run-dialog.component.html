@@ -11,7 +11,7 @@
 </h2>
 <div mat-dialog-content [class.dialog-content-scroll]="!transferRunWarning" *ngIf="run != null">
   <div [class.info-block]="transferRunWarning">
-    <p class="mat-subheading-1 accent-1">
+    <p class="mat-body-1 accent-1">
       {{ run.name }} <span class="mat-caption" i18n>(Run ID: {{ run.id }})</span>
     </p>
     <ng-container *ngIf="!isTransfer">

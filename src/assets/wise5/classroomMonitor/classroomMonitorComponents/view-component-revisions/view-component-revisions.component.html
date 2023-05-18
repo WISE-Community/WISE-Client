@@ -7,7 +7,7 @@
       [ngClass]="{ 'revision-latest': isFirst }"
     >
       <div *ngIf="i < numRevisionsShown" fxFlex>
-        <h3 class="accent-1 mat-body-2 component-header">
+        <h3 class="accent-1 mat-subtitle-2 component-header">
           #{{ totalRevisions - i }} <span *ngIf="isFirst">(Latest)</span>
         </h3>
         <div class="revision-content" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">

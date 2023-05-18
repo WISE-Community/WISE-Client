@@ -24,14 +24,14 @@
       *ngFor="let rule of feedbackRules; let ruleIndex = index; let first = first; let last = last"
     >
       <li cdkDrag>
-        <mat-card class="rule" fxLayout="row wrap" fxLayoutGap="8px">
+        <mat-card appearance="outlined" class="rule" fxLayout="row wrap" fxLayoutGap="8px">
           <div
             class="text-secondary"
             fxLayout="column"
             fxLayoutAlign="start center"
             fxLayoutGap="22px"
           >
-            <span class="mat-subheading-2">{{ ruleIndex + 1 }}</span>
+            <span class="mat-subtitle-1">{{ ruleIndex + 1 }}</span>
             <mat-icon cdkDragHandle title="Drag to reorder" i18n-title>drag_indicator</mat-icon>
           </div>
           <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="8px" fxFlex>

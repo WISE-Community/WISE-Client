@@ -7,11 +7,11 @@
   border-radius: $card-border-radius;
 }
 
-.mat-table {
+.mat-mdc-table {
   max-width: 100%;
 }
 
-th.mat-header-cell {
+th.mat-mdc-header-cell {
   font-weight: 600;
 }
 
@@ -19,8 +19,8 @@ div.mat-sort-header-content {
   text-align: start;
 }
 
-.mat-cell {
-  .mat-form-field {
+.mat-mdc-cell {
+  .mat-mdc-form-field {
     max-width: 100%;
     padding-top: 4px;
     padding-bottom: 4px;

@@ -7,33 +7,33 @@
   @media (min-width: breakpoint('md.min')) {
     width: 360px;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-wrapper {
     padding: 0;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-flex {
     align-items: center;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-infix {
     padding-top: 0;
     border-top-width: 0;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
   .mat-select-arrow-wrapper {
     display: block;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-label-wrapper {
     display: none;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-underline {
     bottom: 0;
   }
-
-  .mat-form-field-suffix .mat-icon-button.workgroup-select-autocomplete-suffix {
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+  .mat-form-field-suffix .mat-mdc-icon-button.workgroup-select-autocomplete-suffix {
     height: auto;
     width: auto;
     margin-top: -0.625em;

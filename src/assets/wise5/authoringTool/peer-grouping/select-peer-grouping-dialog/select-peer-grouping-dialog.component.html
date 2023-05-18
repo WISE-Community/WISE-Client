@@ -4,7 +4,7 @@
   <p *ngIf="peerGroupings.length === 0" i18n>
     (There are no Peer Groupings. Please create a new one.)
   </p>
-  <mat-card *ngFor="let peerGrouping of peerGroupings" class="peer-grouping">
+  <mat-card appearance="outlined" *ngFor="let peerGrouping of peerGroupings" class="peer-grouping">
     <select-peer-grouping-option
       [peerGrouping]="peerGrouping"
       [selectedPeerGrouping]="dialogData.peerGrouping"

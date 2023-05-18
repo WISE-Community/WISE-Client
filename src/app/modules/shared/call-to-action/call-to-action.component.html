@@ -14,7 +14,7 @@
     <mat-icon *ngIf="!isSvgIcon" class="cta__icon" [ngClass]="iconColor">{{ icon }}</mat-icon>
     <ng-template #defaultHeadline>{{ headline }}</ng-template>
     <ng-template #defaultContent>{{ content }}</ng-template>
-    <div *ngIf="content || contentRef" class="cta__tagline mat-subheading-1">
+    <div *ngIf="content || contentRef" class="cta__tagline mat-body-1">
       <span *ngTemplateOutlet="contentRef ? contentRef : defaultContent"></span>
     </div>
   </div>

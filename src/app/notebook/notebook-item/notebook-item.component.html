@@ -1,4 +1,5 @@
 <mat-card
+  appearance="outlined"
   class="notebook-item"
   (click)="doSelect($event)"
   (keyup.enter)="doSelect($event)"
@@ -11,14 +12,14 @@
       class="attachment-content"
       style="background-image: url('{{ item.content.attachments[0].iconURL }}')"
     ></div>
-    <div *ngIf="item.content.text" class="text-content mat-body-1" style="color: {{ label.color }}">
+    <div *ngIf="item.content.text" class="text-content mat-body-2" style="color: {{ label.color }}">
       {{ item.content.text }}
     </div>
   </mat-card-content>
   <mat-card-actions class="dark-theme">
     <div class="actions app-bar" fxLayoutAlign="start center" style="background-color: {{ color }}">
       <span class="location" fxLayoutAlign="start center">
-        <mat-icon>place</mat-icon><span class="mat-body-1">{{ getItemNodePosition() }}</span>
+        <mat-icon>place</mat-icon><span class="mat-body-2">{{ getItemNodePosition() }}</span>
       </span>
       <span fxFlex></span>
       <button

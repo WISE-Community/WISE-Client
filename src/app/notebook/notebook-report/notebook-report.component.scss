@@ -35,13 +35,13 @@ $width-collapsed: 300px !default;
   display: none;
 }
 
-.mat-card-header {
+.mat-mdc-card-header {
   cursor: pointer;
   border-top-left-radius: $card-border-radius;
   border-top-right-radius: $card-border-radius;
 }
 
-.mat-card-header .mat-card-title {
+.mat-mdc-card-header .mat-mdc-card-title {
   max-width: $title-width;
   margin-bottom: 0;
   margin-left: -12px;
@@ -56,15 +56,15 @@ $width-collapsed: 300px !default;
   }
 }
 
-.mat-card-content {
+.mat-mdc-card-content {
   margin-bottom: 0;
 }
 
-.mat-card-actions {
+.mat-mdc-card-actions {
   margin: 0;
   padding: 0;
 
-  .mat-button {
+  .mat-mdc-button {
     margin: 0;
   }
 }

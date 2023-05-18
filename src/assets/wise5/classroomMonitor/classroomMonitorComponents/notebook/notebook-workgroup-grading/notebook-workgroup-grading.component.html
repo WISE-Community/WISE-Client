@@ -16,7 +16,7 @@
         </div>
         <div
           *ngIf="notesEnabled"
-          class="mat-title"
+          class="mat-headline-6"
           fxLayout="row"
           fxLayoutAlign="center center"
           fxFlex="15"
@@ -35,7 +35,7 @@
     </button>
   </div>
   <mat-list-item *ngIf="expand" class="grading__item-container">
-    <mat-tab-group class="mat-body-2 app-bg-bg" fxFlex>
+    <mat-tab-group class="mat-subtitle-2 app-bg-bg" fxFlex>
       <mat-tab *ngIf="notesEnabled" label="Notes" i18n-label>
         <notebook-notes
           [mode]="'classroomMonitor'"

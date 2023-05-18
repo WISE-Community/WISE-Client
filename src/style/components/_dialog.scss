@@ -1,8 +1,10 @@
-mat-dialog-container.mat-dialog-container {
+
+/* TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version. */
+mat-dialog-container.mat-mdc-dialog-container {
   max-width: 100%;
   padding: 16px;
 
-  .mat-dialog-content {
+  .mat-mdc-dialog-content {
     margin: 0 -16px;
     padding: 0 16px;
     font-size: mat-font-size($config, body-1);

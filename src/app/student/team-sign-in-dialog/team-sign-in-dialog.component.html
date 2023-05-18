@@ -1,8 +1,8 @@
 <h2 class="mat-dialog-title" i18n>Team Sign In</h2>
 <mat-dialog-content class="dialog-content-scroll">
-  <p class="mat-subheading-2 accent-1">{{ run.name }}</p>
+  <p class="mat-subtitle-1 accent-1">{{ run.name }}</p>
   <mat-divider></mat-divider>
-  <p class="mat-body-2" fxLayoutAlign="start center" fxLayoutGap="2px">
+  <p class="mat-subtitle-2" fxLayoutAlign="start center" fxLayoutGap="2px">
     <mat-icon class="success" i18n-aria-label aria-label="Signed In">check</mat-icon>
     <span
       >{{ user.firstName }} {{ user.lastName }}
@@ -22,7 +22,7 @@
           >
             check
           </mat-icon>
-          <span class="mat-body-2"
+          <span class="mat-subtitle-2"
             >{{ teamMember.firstName }} {{ teamMember.lastName }}
             <span class="mat-caption">({{ teamMember.username }})</span></span
           >
@@ -34,7 +34,7 @@
       </p>
     </ng-container>
     <ng-container *ngIf="!isSignedIn(teamMember)">
-      <p *ngIf="!isExistingStudent(teamMember)" class="mat-body-2 center">
+      <p *ngIf="!isExistingStudent(teamMember)" class="mat-subtitle-2 center">
         <button mat-button color="primary" (click)="hiddenMembers[i] = !hiddenMembers[i]" i18n>
           Add Teammate
         </button>
@@ -64,7 +64,7 @@
           *ngIf="isShowSignInWithGoogle(teamMember)"
           [class.center]="!isExistingStudent(teamMember)"
         >
-          <p *ngIf="!isExistingStudent(teamMember)" class="mat-body-2">- OR -</p>
+          <p *ngIf="!isExistingStudent(teamMember)" class="mat-subtitle-2">- OR -</p>
           <google-sign-in-button (signedIn)="googleSignIn($event, teamMember)">
           </google-sign-in-button>
         </div>

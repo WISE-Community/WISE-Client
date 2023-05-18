@@ -1,6 +1,7 @@
 <ng-container [ngSwitch]="type" *ngIf="nodeHasWork || isGroup">
   <div id="nav-item-{{ nodeId }}"></div>
   <mat-card
+    appearance="outlined"
     *ngSwitchCase="'card'"
     class="nav-item--card"
     [ngClass]="{ 'nav-item--card--group': isGroup, 'expanded mat-elevation-z3': expanded }"
@@ -48,7 +49,7 @@
       </mat-list>
     </mat-card-content>
     <mat-card-actions
-      class="nav-item__more mat-body-1"
+      class="nav-item__more mat-body-2"
       fxLayout="row"
       fxLayoutAlign="start center"
       fxLayoutGap="8px"

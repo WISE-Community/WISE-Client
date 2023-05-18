@@ -1,12 +1,12 @@
 @import '@angular/material/theming';
 
-.mat-button, .mat-raised-button, .mat-flat-button, .mat-stroked-button {
+.mat-mdc-button, .mat-mdc-raised-button, .mat-mdc-unelevated-button, .mat-mdc-outlined-button {
   text-transform: uppercase;
 
   &:hover, &:focus {
     text-decoration: none;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of progress-bar that may no longer apply for the MDC version. */
   mat-progress-bar {
     position: absolute;
     left: 0;
@@ -16,20 +16,20 @@
   }
 }
 
-.mat-raised-button {
-  &:not(.mat-icon-button) {
+.mat-mdc-raised-button {
+  &:not(.mat-mdc-icon-button) {
     &:not([class*=mat-elevation-z]) {
       @include mat-elevation(3);
     }
   }
 }
 
-.mat-fab.mat-fab--extended {
+.mat-mdc-fab.mat-fab--extended {
   border-radius: 24px;
   padding: 0px 16px;
   width: auto;
   height: 48px;
-
+  /* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
   .mat-button-wrapper {
     padding: 8px 0;
   }
@@ -45,6 +45,7 @@
 }
 
 .button--social-login {
+  /* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
   .mat-button-wrapper {
     display: flex;
     align-items: center;
