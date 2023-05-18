@@ -4,7 +4,7 @@ let plotLineManager: PlotLineManager;
 
 describe('PlotLineManager', () => {
   beforeEach(() => {
-    plotLineManager = new PlotLineManager([], [], true, true);
+    plotLineManager = new PlotLineManager([], true, true);
   });
 
   getXPlotLines();
@@ -14,7 +14,7 @@ describe('PlotLineManager', () => {
   isShowMouseYPlotLine();
 });
 
-function getXPlotLines() {
+function getXPlotLines(): void {
   describe('getXPlotLines()', () => {
     it('should return the x axis plot lines', () => {
       const xPlotLines = [
@@ -25,13 +25,13 @@ function getXPlotLines() {
           zIndex: 5
         }
       ];
-      plotLineManager = new PlotLineManager(xPlotLines, [], true, true);
+      plotLineManager = new PlotLineManager(xPlotLines, true, true);
       expect(plotLineManager.getXPlotLines()).toEqual(xPlotLines);
     });
   });
 }
 
-function setXPlotLine() {
+function setXPlotLine(): void {
   describe('setXPlotLine()', () => {
     it('should set the plot line', () => {
       plotLineManager.setXPlotLine(1);
@@ -47,65 +47,72 @@ function setXPlotLine() {
   });
 }
 
-function isShowMousePlotLine() {
+function isShowMousePlotLine(): void {
   describe('isShowMousePlotLine()', () => {
     describe('when show mouse x and y plot line are false', () => {
       it('should return show mouse plot line false', () => {
-        plotLineManager = new PlotLineManager([], [], false, false);
+        setPlotLineManagerShowMouseXY(false, false);
         expect(plotLineManager.isShowMousePlotLine()).toBe(false);
       });
     });
     describe('when show mouse x is true and y is false', () => {
       it('should return show mouse plot line true', () => {
-        plotLineManager = new PlotLineManager([], [], true, false);
+        setPlotLineManagerShowMouseXY(true, false);
         expect(plotLineManager.isShowMousePlotLine()).toBe(true);
       });
     });
     describe('when show mouse x is false and y is true', () => {
       it('should return show mouse plot line true', () => {
-        plotLineManager = new PlotLineManager([], [], false, true);
+        setPlotLineManagerShowMouseXY(false, true);
         expect(plotLineManager.isShowMousePlotLine()).toBe(true);
       });
     });
     describe('when show mouse x and y plot line are true', () => {
       it('should return show mouse plot line true', () => {
-        plotLineManager = new PlotLineManager([], [], true, true);
+        setPlotLineManagerShowMouseXY(true, true);
         expect(plotLineManager.isShowMousePlotLine()).toBe(true);
       });
     });
   });
 }
 
-function isShowMouseXPlotLine() {
+function isShowMouseXPlotLine(): void {
   describe('isShowMouseXPlotLine()', () => {
     describe('when show mouse x plot line is false', () => {
       it('should return false', () => {
-        plotLineManager = new PlotLineManager([], [], false, false);
+        setPlotLineManagerShowMouseXY(false, true);
         expect(plotLineManager.isShowMouseXPlotLine()).toBe(false);
       });
     });
     describe('when show mouse x plot line is true', () => {
       it('should return true', () => {
-        plotLineManager = new PlotLineManager([], [], true, true);
+        setPlotLineManagerShowMouseXY(true, false);
         expect(plotLineManager.isShowMouseXPlotLine()).toBe(true);
       });
     });
   });
 }
 
-function isShowMouseYPlotLine() {
+function isShowMouseYPlotLine(): void {
   describe('isShowMouseYPlotLine()', () => {
     describe('when show mouse y plot line is false', () => {
       it('should return false', () => {
-        plotLineManager = new PlotLineManager([], [], false, false);
+        setPlotLineManagerShowMouseXY(true, false);
         expect(plotLineManager.isShowMouseYPlotLine()).toBe(false);
       });
     });
     describe('when show mouse y plot line is true', () => {
       it('should return true', () => {
-        plotLineManager = new PlotLineManager([], [], true, true);
+        setPlotLineManagerShowMouseXY(false, true);
         expect(plotLineManager.isShowMouseYPlotLine()).toBe(true);
       });
     });
   });
+}
+
+function setPlotLineManagerShowMouseXY(
+  showMouseXPlotLine: boolean,
+  showMouseYPlotLine: boolean
+): void {
+  plotLineManager = new PlotLineManager([], showMouseXPlotLine, showMouseYPlotLine);
 }

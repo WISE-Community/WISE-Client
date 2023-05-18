@@ -1,24 +1,14 @@
 import * as Highcharts from 'highcharts';
 import { XPlotLine } from './domain/xPlotLine';
 import { YPlotLine } from './domain/yPlotLine';
+import { PlotLine } from './domain/plotLine';
 
 export class PlotLineManager {
-  showMouseXPlotLine: boolean;
-  showMouseYPlotLine: boolean;
-  xAxisPlotLines: any[] = [];
-  yAxisPlotLines: any[] = [];
-
   constructor(
-    xAxisPlotLines: any[] = [],
-    yAxisPlotLines: any[] = [],
-    showMouseXPlotLine: boolean = false,
-    showMouseYPlotLine: boolean = false
-  ) {
-    this.showMouseXPlotLine = showMouseXPlotLine;
-    this.showMouseYPlotLine = showMouseYPlotLine;
-    this.xAxisPlotLines = xAxisPlotLines;
-    this.yAxisPlotLines = yAxisPlotLines;
-  }
+    private xAxisPlotLines: any[] = [],
+    private showMouseXPlotLine: boolean = false,
+    private showMouseYPlotLine: boolean = false
+  ) {}
 
   getXPlotLines(): any[] {
     return this.xAxisPlotLines;
@@ -62,9 +52,7 @@ export class PlotLineManager {
    * @param text The text to show on the plot line.
    */
   showXPlotLine(chart: any, x: number, text: string = ''): void {
-    const chartXAxis = chart.xAxis[0];
-    chartXAxis.removePlotLine(XPlotLine.id);
-    chartXAxis.addPlotLine(new XPlotLine(x, text));
+    this.removeAndAddPlotLine(chart.xAxis[0], new XPlotLine(x, text));
   }
 
   /**
@@ -73,8 +61,11 @@ export class PlotLineManager {
    * @param text The text to show on the plot line.
    */
   showYPlotLine(chart: any, y: number, text: string = ''): void {
-    const chartYAxis = chart.yAxis[0];
-    chartYAxis.removePlotLine(YPlotLine.id);
-    chartYAxis.addPlotLine(new YPlotLine(y, text));
+    this.removeAndAddPlotLine(chart.yAxis[0], new YPlotLine(y, text));
+  }
+
+  private removeAndAddPlotLine(axis: any, newPlotLine: PlotLine): void {
+    axis.removePlotLine(newPlotLine.id);
+    axis.addPlotLine(newPlotLine);
   }
 }

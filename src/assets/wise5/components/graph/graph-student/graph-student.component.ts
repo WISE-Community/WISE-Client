@@ -118,7 +118,6 @@ export class GraphStudent extends ComponentStudent {
     this.dataExplorerColors = ['blue', 'orange', 'purple', 'black', 'green'];
     this.plotLineManager = new PlotLineManager(
       this.componentContent.xAxis.plotLines,
-      this.componentContent.yAxis.plotLines,
       this.componentContent.showMouseXPlotLine,
       this.componentContent.showMouseYPlotLine
     );
