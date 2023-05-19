@@ -10,8 +10,6 @@ describe('PlotLineManager', () => {
   getXPlotLines();
   setXPlotLine();
   isShowMousePlotLine();
-  isShowMouseXPlotLine();
-  isShowMouseYPlotLine();
 });
 
 function getXPlotLines(): void {
@@ -55,56 +53,14 @@ function isShowMousePlotLine(): void {
         expect(plotLineManager.isShowMousePlotLine()).toBe(false);
       });
     });
-    describe('when show mouse x is true and y is false', () => {
+    describe('when show mouse x or y plot line is true', () => {
       it('should return show mouse plot line true', () => {
         setPlotLineManagerShowMouseXY(true, false);
         expect(plotLineManager.isShowMousePlotLine()).toBe(true);
-      });
-    });
-    describe('when show mouse x is false and y is true', () => {
-      it('should return show mouse plot line true', () => {
         setPlotLineManagerShowMouseXY(false, true);
         expect(plotLineManager.isShowMousePlotLine()).toBe(true);
-      });
-    });
-    describe('when show mouse x and y plot line are true', () => {
-      it('should return show mouse plot line true', () => {
         setPlotLineManagerShowMouseXY(true, true);
         expect(plotLineManager.isShowMousePlotLine()).toBe(true);
-      });
-    });
-  });
-}
-
-function isShowMouseXPlotLine(): void {
-  describe('isShowMouseXPlotLine()', () => {
-    describe('when show mouse x plot line is false', () => {
-      it('should return false', () => {
-        setPlotLineManagerShowMouseXY(false, true);
-        expect(plotLineManager.isShowMouseXPlotLine()).toBe(false);
-      });
-    });
-    describe('when show mouse x plot line is true', () => {
-      it('should return true', () => {
-        setPlotLineManagerShowMouseXY(true, false);
-        expect(plotLineManager.isShowMouseXPlotLine()).toBe(true);
-      });
-    });
-  });
-}
-
-function isShowMouseYPlotLine(): void {
-  describe('isShowMouseYPlotLine()', () => {
-    describe('when show mouse y plot line is false', () => {
-      it('should return false', () => {
-        setPlotLineManagerShowMouseXY(true, false);
-        expect(plotLineManager.isShowMouseYPlotLine()).toBe(false);
-      });
-    });
-    describe('when show mouse y plot line is true', () => {
-      it('should return true', () => {
-        setPlotLineManagerShowMouseXY(false, true);
-        expect(plotLineManager.isShowMouseYPlotLine()).toBe(true);
       });
     });
   });
