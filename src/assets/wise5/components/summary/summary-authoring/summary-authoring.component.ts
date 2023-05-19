@@ -2,7 +2,7 @@
 
 import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -15,7 +15,7 @@ import { SummaryService } from '../summaryService';
   templateUrl: 'summary-authoring.component.html',
   styleUrls: ['summary-authoring.component.scss']
 })
-export class SummaryAuthoring extends ComponentAuthoring {
+export class SummaryAuthoring extends AbstractComponentAuthoring {
   isResponsesOptionAvailable: boolean = false;
   isHighlightCorrectAnswerAvailable: boolean = false;
   isPieChartAllowed: boolean = true;

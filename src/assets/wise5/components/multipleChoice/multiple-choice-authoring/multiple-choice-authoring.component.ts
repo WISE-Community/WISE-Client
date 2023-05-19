@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -13,7 +13,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   templateUrl: 'multiple-choice-authoring.component.html',
   styleUrls: ['multiple-choice-authoring.component.scss']
 })
-export class MultipleChoiceAuthoring extends ComponentAuthoring {
+export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
   allowedConnectedComponentTypes = ['MultipleChoice'];
   choiceTextChange: Subject<string> = new Subject<string>();
   feedbackTextChange: Subject<string> = new Subject<string>();

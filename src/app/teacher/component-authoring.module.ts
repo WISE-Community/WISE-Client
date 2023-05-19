@@ -81,12 +81,14 @@ import { EditComponentConstraintsComponent } from '../authoring-tool/edit-compon
 import { ComponentConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/constraint/component-constraint-authoring/component-constraint-authoring.component';
 import { ConstraintAuthoringModule } from '../../assets/wise5/authoringTool/constraint/constraint-authoring.module';
 import { EditComponentAdvancedComponent } from '../authoring-tool/edit-component-advanced/edit-component-advanced.component';
+import { ComponentAuthoringComponent } from '../../assets/wise5/authoringTool/components/component-authoring.component';
 
 @NgModule({
   declarations: [
     AnimationAuthoring,
     AudioOscillatorAuthoring,
     AuthorUrlParametersComponent,
+    ComponentAuthoringComponent,
     ComponentConstraintAuthoringComponent,
     ConceptMapAuthoring,
     CreateNewPeerGroupingDialogComponent,
@@ -168,6 +170,7 @@ import { EditComponentAdvancedComponent } from '../authoring-tool/edit-component
   exports: [
     AnimationAuthoring,
     AudioOscillatorAuthoring,
+    ComponentAuthoringComponent,
     ConceptMapAuthoring,
     DialogGuidanceAuthoringComponent,
     DiscussionAuthoring,
