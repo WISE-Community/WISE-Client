@@ -1,4 +1,3 @@
-import * as Highcharts from 'highcharts';
 import { XPlotLine } from './domain/xPlotLine';
 import { YPlotLine } from './domain/yPlotLine';
 import { PlotLine } from './domain/plotLine';
@@ -34,16 +33,6 @@ export class PlotLineManager {
 
   isShowMouseYPlotLine(): boolean {
     return this.showMouseYPlotLine;
-  }
-
-  applyHighchartsPlotLinesLabelFix(): void {
-    Highcharts.wrap(Highcharts.Axis.prototype, 'getPlotLinePath', function (proceed) {
-      var path = proceed.apply(this, Array.prototype.slice.call(arguments, 1));
-      if (path) {
-        path.flat = false;
-      }
-      return path;
-    });
   }
 
   /**

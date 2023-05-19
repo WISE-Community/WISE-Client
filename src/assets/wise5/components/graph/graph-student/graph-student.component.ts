@@ -121,7 +121,6 @@ export class GraphStudent extends ComponentStudent {
       this.componentContent.showMouseXPlotLine,
       this.componentContent.showMouseYPlotLine
     );
-    this.plotLineManager.applyHighchartsPlotLinesLabelFix();
     this.initializeComponentContentParams();
     this.initializeStudentMode(this.componentState);
     this.initialComponentState = this.componentState;
