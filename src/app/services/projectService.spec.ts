@@ -441,6 +441,12 @@ function parseProject(): void {
 }
 
 function calculateNodeNumbers() {
+  calculateNodeNumbersWhenNoBranches();
+  calculateNodeNumbersWhenBranchInOneActivity();
+  calculateNodeNumbersWhenBranchSpansMultipleActivities();
+}
+
+function calculateNodeNumbersWhenNoBranches() {
   describe('project with no branches', () => {
     it('should calculate node numbers correctly', () => {
       service.project = twoStepsProjectJSON;
@@ -451,6 +457,9 @@ function calculateNodeNumbers() {
       ]);
     });
   });
+}
+
+function calculateNodeNumbersWhenBranchInOneActivity() {
   describe('project with a branch in an activity', () => {
     it('should calculate node numbers and branch letters correctly', () => {
       service.project = oneBranchTwoPathsProjectJSON;
@@ -467,6 +476,9 @@ function calculateNodeNumbers() {
       ]);
     });
   });
+}
+
+function calculateNodeNumbersWhenBranchSpansMultipleActivities() {
   describe('project with a branch that spans multiple activities', () => {
     it('should calculate node numbers and branch letters correctly', () => {
       service.project = branchSpansActivitiesProjectJSON;
@@ -483,7 +495,6 @@ function calculateNodeNumbers() {
     });
   });
 }
-
 function expectNodeIdsToHaveNumbers(objs: any[]): void {
   objs.forEach((obj: any) => {
     expectNodeIdToHaveNumber(obj.nodeId, obj.number);
