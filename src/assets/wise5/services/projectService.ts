@@ -1441,7 +1441,7 @@ export class ProjectService {
     currentActivityNumber: any,
     currentStepNumber: number,
     branchLetterCode = null
-  ): void {
+  ): number {
     if (nodeId != null) {
       if (this.isApplicationNode(nodeId)) {
         const node = this.getNodeById(nodeId);
@@ -1508,6 +1508,10 @@ export class ProjectService {
 
               for (let bpn = 0; bpn < branchPath.length; bpn++) {
                 if (bpn == 0) {
+                  if (this.getParentGroupId(nodeId) !== this.getParentGroupId(branchPath[bpn])) {
+                    branchCurrentStepNumber = 1;
+                  }
+
                   /*
                    * Recursively call calculateNodeNumbersHelper on the
                    * first step in this branch path. This will recursively
@@ -1515,15 +1519,13 @@ export class ProjectService {
                    * branch path.
                    */
                   const branchPathNodeId = branchPath[bpn];
-                  this.calculateNodeNumbersHelper(
+                  branchCurrentStepNumber = this.calculateNodeNumbersHelper(
                     branchPathNodeId,
                     currentActivityNumber,
                     branchCurrentStepNumber,
                     branchLetterCode
                   );
                 }
-
-                branchCurrentStepNumber++;
 
                 /*
                  * update the max current step number if we have found
@@ -1614,7 +1616,10 @@ export class ProjectService {
                 if (transition != null) {
                   if (this.isBranchMergePoint(transition.to)) {
                   } else {
-                    this.calculateNodeNumbersHelper(
+                    if (this.getParentGroupId(nodeId) !== this.getParentGroupId(transition.to)) {
+                      currentStepNumber = 1;
+                    }
+                    currentStepNumber = this.calculateNodeNumbersHelper(
                       transition.to,
                       currentActivityNumber,
                       currentStepNumber,
@@ -1724,6 +1729,7 @@ export class ProjectService {
         }
       }
     }
+    return currentStepNumber;
   }
 
   getProjectScript(): any {

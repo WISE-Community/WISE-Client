@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
+import branchSpansMultipleActivitiesJSON_import from './sampleData/curriculum/BranchSpansActivities.project.json';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import oneBranchTwoPathsProjectJSON_import from './sampleData/curriculum/OneBranchTwoPaths.project.json';
 import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVehiclesChallenge.project.json';
@@ -19,6 +20,7 @@ const wiseBaseURL = '/wise';
 let service: ProjectService;
 let configService: ConfigService;
 let http: HttpTestingController;
+let branchSpansActivitiesProjectJSON: any;
 let demoProjectJSON: any;
 let oneBranchTwoPathsProjectJSON: any;
 let scootersProjectJSON: any;
@@ -31,6 +33,7 @@ describe('ProjectService', () => {
     http = TestBed.inject(HttpTestingController);
     configService = TestBed.inject(ConfigService);
     service = TestBed.inject(ProjectService);
+    branchSpansActivitiesProjectJSON = copy(branchSpansMultipleActivitiesJSON_import);
     demoProjectJSON = copy(demoProjectJSON_import);
     oneBranchTwoPathsProjectJSON = copy(oneBranchTwoPathsProjectJSON_import);
     scootersProjectJSON = copy(scootersProjectJSON_import);
@@ -433,5 +436,60 @@ function parseProject(): void {
       service.parseProject();
       expect(service.getGroupNodes().map((node) => node.id)).toEqual(['group0', 'group1']);
     });
+    calculateNodeNumbers();
   });
+}
+
+function calculateNodeNumbers() {
+  describe('project with no branches', () => {
+    it('should calculate node numbers correctly', () => {
+      service.project = twoStepsProjectJSON;
+      service.parseProject();
+      expectNodeIdsToHaveNumbers([
+        { nodeId: 'node1', number: '1.1' },
+        { nodeId: 'node2', number: '1.2' }
+      ]);
+    });
+  });
+  describe('project with a branch in an activity', () => {
+    it('should calculate node numbers and branch letters correctly', () => {
+      service.project = oneBranchTwoPathsProjectJSON;
+      service.parseProject();
+      expectNodeIdsToHaveNumbers([
+        { nodeId: 'node1', number: '1.1' },
+        { nodeId: 'node2', number: '1.2' },
+        { nodeId: 'node3', number: '1.3 A' },
+        { nodeId: 'node4', number: '1.4 A' },
+        { nodeId: 'node5', number: '1.3 B' },
+        { nodeId: 'node6', number: '1.4 B' },
+        { nodeId: 'node7', number: '1.5 B' },
+        { nodeId: 'node8', number: '1.6' }
+      ]);
+    });
+  });
+  describe('project with a branch that spans multiple activities', () => {
+    it('should calculate node numbers and branch letters correctly', () => {
+      service.project = branchSpansActivitiesProjectJSON;
+      service.parseProject();
+      expectNodeIdsToHaveNumbers([
+        { nodeId: 'node1', number: '1.1' },
+        { nodeId: 'node2', number: '1.2 A' },
+        { nodeId: 'node3', number: '1.2 B' },
+        { nodeId: 'node4', number: '2.1 A' },
+        { nodeId: 'node5', number: '2.1 B' },
+        { nodeId: 'node6', number: '2.2 B' },
+        { nodeId: 'node7', number: '2.3' }
+      ]);
+    });
+  });
+}
+
+function expectNodeIdsToHaveNumbers(objs: any[]): void {
+  objs.forEach((obj: any) => {
+    expectNodeIdToHaveNumber(obj.nodeId, obj.number);
+  });
+}
+
+function expectNodeIdToHaveNumber(nodeId: string, number: string): void {
+  expect(service.nodeIdToNumber[nodeId]).toEqual(number);
 }
