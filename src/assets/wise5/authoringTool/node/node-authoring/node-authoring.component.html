@@ -259,6 +259,10 @@
       <div
         (click)="toggleComponent(component.id)"
         class="component-header"
+        [ngClass]="{
+          'component-header-highlight':
+            !insertComponentMode && !componentsToIsExpanded[component.id]
+        }"
         fxLayout="row"
         fxLayoutAlign="start center"
         fxLayoutGap="20px"
@@ -279,7 +283,12 @@
           >
         </mat-checkbox>
         <ng-container *ngIf="!insertComponentMode && showComponentAuthoringViews">
+          <preview-component-button
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></preview-component-button>
           <button
+            *ngIf="componentsToIsExpanded[component.id]"
             mat-raised-button
             color="primary"
             class="top-button"
@@ -290,10 +299,6 @@
           >
             <mat-icon>build</mat-icon>
           </button>
-          <preview-component-button
-            [nodeId]="nodeId"
-            [componentId]="component.id"
-          ></preview-component-button>
         </ng-container>
         <div
           *ngIf="!insertComponentMode"
@@ -312,7 +317,10 @@
           </div>
         </div>
       </div>
-      <div *ngIf="showComponentAuthoringViews && componentsToIsExpanded[component.id]">
+      <div
+        *ngIf="showComponentAuthoringViews && componentsToIsExpanded[component.id]"
+        class="component-authoring"
+      >
         <ng-container [ngSwitch]="component.type">
           <animation-authoring
             *ngSwitchCase="'Animation'"
