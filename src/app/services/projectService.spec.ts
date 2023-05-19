@@ -440,13 +440,13 @@ function parseProject(): void {
   });
 }
 
-function calculateNodeNumbers() {
+function calculateNodeNumbers(): void {
   calculateNodeNumbersWhenNoBranches();
   calculateNodeNumbersWhenBranchInOneActivity();
   calculateNodeNumbersWhenBranchSpansMultipleActivities();
 }
 
-function calculateNodeNumbersWhenNoBranches() {
+function calculateNodeNumbersWhenNoBranches(): void {
   describe('project with no branches', () => {
     it('should calculate node numbers correctly', () => {
       service.project = twoStepsProjectJSON;
@@ -459,7 +459,7 @@ function calculateNodeNumbersWhenNoBranches() {
   });
 }
 
-function calculateNodeNumbersWhenBranchInOneActivity() {
+function calculateNodeNumbersWhenBranchInOneActivity(): void {
   describe('project with a branch in an activity', () => {
     it('should calculate node numbers and branch letters correctly', () => {
       service.project = oneBranchTwoPathsProjectJSON;
@@ -478,7 +478,7 @@ function calculateNodeNumbersWhenBranchInOneActivity() {
   });
 }
 
-function calculateNodeNumbersWhenBranchSpansMultipleActivities() {
+function calculateNodeNumbersWhenBranchSpansMultipleActivities(): void {
   describe('project with a branch that spans multiple activities', () => {
     it('should calculate node numbers and branch letters correctly', () => {
       service.project = branchSpansActivitiesProjectJSON;
@@ -495,6 +495,7 @@ function calculateNodeNumbersWhenBranchSpansMultipleActivities() {
     });
   });
 }
+
 function expectNodeIdsToHaveNumbers(objs: any[]): void {
   objs.forEach((obj: any) => {
     expectNodeIdToHaveNumber(obj.nodeId, obj.number);
