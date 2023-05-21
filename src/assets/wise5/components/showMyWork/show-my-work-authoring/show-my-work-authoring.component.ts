@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -10,7 +10,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   templateUrl: './show-my-work-authoring.component.html',
   styleUrls: ['./show-my-work-authoring.component.scss']
 })
-export class ShowMyWorkAuthoringComponent extends ComponentAuthoring {
+export class ShowMyWorkAuthoringComponent extends AbstractComponentAuthoring {
   allowedShowWorkComponentTypes: string[] = [
     'Animation',
     'AudioOscillator',
@@ -39,15 +39,15 @@ export class ShowMyWorkAuthoringComponent extends ComponentAuthoring {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds();
+    this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds();
   }
 
   isApplicationNode(nodeId: string): boolean {
-    return this.ProjectService.isApplicationNode(nodeId);
+    return this.projectService.isApplicationNode(nodeId);
   }
 
   getNodePositionAndTitle(nodeId: string): string {
-    return this.ProjectService.getNodePositionAndTitle(nodeId);
+    return this.projectService.getNodePositionAndTitle(nodeId);
   }
 
   isShowWorkComponentTypeAllowed(componentType: string): boolean {

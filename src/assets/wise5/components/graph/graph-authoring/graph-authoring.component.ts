@@ -2,7 +2,7 @@
 
 import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -14,7 +14,7 @@ import { GraphService } from '../graphService';
   templateUrl: 'graph-authoring.component.html',
   styleUrls: ['graph-authoring.component.scss']
 })
-export class GraphAuthoring extends ComponentAuthoring {
+export class GraphAuthoring extends AbstractComponentAuthoring {
   availableGraphTypes = [
     {
       value: 'line',

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -14,7 +14,7 @@ import { MatchService } from '../matchService';
   templateUrl: 'match-authoring.component.html',
   styleUrls: ['match-authoring.component.scss']
 })
-export class MatchAuthoring extends ComponentAuthoring {
+export class MatchAuthoring extends AbstractComponentAuthoring {
   defaultSourceBucketId: string = '0';
   feedbackChange: Subject<string> = new Subject<string>();
 
