@@ -21,8 +21,8 @@ import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { arraysContainSameValues } from '../../../common/array/array';
 import { generateRandomKey } from '../../../common/string/string';
 import { GraphCustomLegend } from '../GraphCustomLegend';
-import { showXPlotLine, showYPlotLine } from '../graph-plot-line';
 import { calculateMean } from '../util';
+import { PlotLineManager } from '../plot-line-manager';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -62,7 +62,7 @@ export class GraphStudent extends ComponentStudent {
   mouseDown: boolean = false;
   mouseOverPoints: any[] = [];
   notebookConfig: any = this.NotebookService.getNotebookConfig();
-  plotLines: any[];
+  plotLineManager: PlotLineManager;
   previousComponentState: any;
   previousTrialIdsToShow: string[];
   rectangle: any;
@@ -116,7 +116,11 @@ export class GraphStudent extends ComponentStudent {
     this.chartId = 'chart_' + this.componentId;
     this.hiddenCanvasId = 'hiddenCanvas_' + this.componentId;
     this.dataExplorerColors = ['blue', 'orange', 'purple', 'black', 'green'];
-    this.applyHighchartsPlotLinesLabelFix();
+    this.plotLineManager = new PlotLineManager(
+      this.componentContent.xAxis.plotLines,
+      this.componentContent.showMouseXPlotLine,
+      this.componentContent.showMouseYPlotLine
+    );
     this.initializeComponentContentParams();
     this.initializeStudentMode(this.componentState);
     this.initialComponentState = this.componentState;
@@ -133,16 +137,6 @@ export class GraphStudent extends ComponentStudent {
 
   ngOnDestroy(): void {
     super.ngOnDestroy();
-  }
-
-  applyHighchartsPlotLinesLabelFix() {
-    Highcharts.wrap(Highcharts.Axis.prototype, 'getPlotLinePath', function (proceed) {
-      var path = proceed.apply(this, Array.prototype.slice.call(arguments, 1));
-      if (path) {
-        path.flat = false;
-      }
-      return path;
-    });
   }
 
   initializeComponentContentParams() {
@@ -606,7 +600,7 @@ export class GraphStudent extends ComponentStudent {
 
   handleAnimationConnectedComponentStudentDataChanged(connectedComponent, componentState) {
     if (componentState.t != null) {
-      this.setVerticalPlotLine(componentState.t);
+      this.plotLineManager.setXPlotLine(componentState.t);
       this.drawGraph();
     }
   }
@@ -681,7 +675,7 @@ export class GraphStudent extends ComponentStudent {
     const chartXAxis = chart.xAxis[0];
     let x = chartXAxis.toValue(e.offsetX, false);
     x = this.makeSureXIsWithinXMinMaxLimits(x);
-    if (this.componentContent.showMouseXPlotLine) {
+    if (this.plotLineManager.isShowMouseXPlotLine()) {
       this.showXPlotLine(x);
     }
     return x;
@@ -692,8 +686,8 @@ export class GraphStudent extends ComponentStudent {
     const chartYAxis = chart.yAxis[0];
     let y = chartYAxis.toValue(e.offsetY, false);
     y = this.makeSureYIsWithinYMinMaxLimits(y);
-    if (this.componentContent.showMouseYPlotLine) {
-      showYPlotLine(this.getChartById(this.chartId), y);
+    if (this.plotLineManager.isShowMouseYPlotLine()) {
+      this.plotLineManager.showYPlotLine(this.getChartById(this.chartId), y);
     }
     return y;
   }
@@ -853,9 +847,7 @@ export class GraphStudent extends ComponentStudent {
     this.setAllSeriesFields(series);
     this.refreshSeriesIds(series);
     this.updateMinMaxAxisValues(series, this.xAxis, this.yAxis);
-    if (this.plotLines != null) {
-      this.xAxis.plotLines = this.plotLines;
-    }
+    this.xAxis.plotLines = this.plotLineManager.getXPlotLines();
     // Make a copy of the series so when the highcharts-chart modifies the series it won't modify
     // our original series in our trials. There was a problem that occurred when there were two
     // trials and the student hides the first trial which would cause the the data points in the
@@ -1094,7 +1086,7 @@ export class GraphStudent extends ComponentStudent {
         this.addNextComponentStateToUndoStack = true;
         this.studentDataChanged();
       } else {
-        if (!this.isMousePlotLineOn()) {
+        if (!this.plotLineManager.isShowMousePlotLine()) {
           // the student is trying to add a point to a series that can't be edited
           alert(
             $localize`You can not edit this series. Please choose a series that can be edited.`
@@ -1183,8 +1175,8 @@ export class GraphStudent extends ComponentStudent {
         thisGraphController.showXPlotLineIfOn('Drag Me');
         thisGraphController.showYPlotLineIfOn('Drag Me');
         if (
-          thisGraphController.isMouseXPlotLineOn() ||
-          thisGraphController.isMouseYPlotLineOn() ||
+          thisGraphController.plotLineManager.isShowMouseXPlotLine() ||
+          thisGraphController.plotLineManager.isShowMouseYPlotLine() ||
           thisGraphController.isSaveMouseOverPoints()
         ) {
           thisGraphController.setupMouseMoveListener();
@@ -2497,16 +2489,6 @@ export class GraphStudent extends ComponentStudent {
     }
   }
 
-  setVerticalPlotLine(x) {
-    const plotLine = {
-      color: 'red',
-      width: 2,
-      value: x,
-      zIndex: 5
-    };
-    this.plotLines = [plotLine];
-  }
-
   /**
    * Import any work we need from connected components
    * @param {boolean} isReset (optional) Whether this function call was
@@ -2937,18 +2919,6 @@ export class GraphStudent extends ComponentStudent {
     this.addNextComponentStateToUndoStack = true;
   }
 
-  isMousePlotLineOn() {
-    return this.isMouseXPlotLineOn() || this.isMouseYPlotLineOn();
-  }
-
-  isMouseXPlotLineOn() {
-    return this.componentContent.showMouseXPlotLine;
-  }
-
-  isMouseYPlotLineOn() {
-    return this.componentContent.showMouseYPlotLine;
-  }
-
   isSaveMouseOverPoints() {
     return this.componentContent.saveMouseOverPoints;
   }
@@ -2986,7 +2956,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   showXPlotLineIfOn(text = null) {
-    if (this.isMouseXPlotLineOn()) {
+    if (this.plotLineManager.isShowMouseXPlotLine()) {
       let x = this.getLatestMouseOverPointX();
       if (x == null) {
         x = 0;
@@ -2996,12 +2966,12 @@ export class GraphStudent extends ComponentStudent {
   }
 
   showYPlotLineIfOn(text = null) {
-    if (this.isMouseYPlotLineOn()) {
+    if (this.plotLineManager.isShowMouseYPlotLine()) {
       let y = this.getLatestMouseOverPointY();
       if (y == null) {
         y = 0;
       }
-      showYPlotLine(this.getChartById(this.chartId), y, text);
+      this.plotLineManager.showYPlotLine(this.getChartById(this.chartId), y, text);
     }
   }
 
@@ -3064,7 +3034,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   private showXPlotLine(x: number, text: string = ''): void {
-    showXPlotLine(this.getChartById(this.chartId), x, text);
+    this.plotLineManager.showXPlotLine(this.getChartById(this.chartId), x, text);
     this.drawRectangleIfNecessary(x);
   }
 
