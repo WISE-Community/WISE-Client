@@ -39,31 +39,31 @@ import { TableStudent } from './table/table-student/table-student.component';
 
 export const components = {
   Animation: {
-    student: AnimationStudent,
-    authoring: AnimationAuthoring
+    authoring: AnimationAuthoring,
+    student: AnimationStudent
   },
-  AudioOscillator: { student: AudioOscillatorStudent, authoring: AudioOscillatorAuthoring },
-  ConceptMap: { student: ConceptMapStudent, authoring: ConceptMapAuthoring },
+  AudioOscillator: { authoring: AudioOscillatorAuthoring, student: AudioOscillatorStudent },
+  ConceptMap: { authoring: ConceptMapAuthoring, student: ConceptMapStudent },
   DialogGuidance: {
-    student: DialogGuidanceStudentComponent,
-    authoring: DialogGuidanceAuthoringComponent
+    authoring: DialogGuidanceAuthoringComponent,
+    student: DialogGuidanceStudentComponent
   },
-  Discussion: { student: DiscussionStudent, authoring: DiscussionAuthoring },
-  Draw: { student: DrawStudent, authoring: DrawAuthoring },
-  Embedded: { student: EmbeddedStudent, authoring: EmbeddedAuthoring },
-  Graph: { student: GraphStudent, authoring: GraphAuthoring },
-  HTML: { student: HtmlStudent, authoring: HtmlAuthoring },
-  Label: { student: LabelStudent, authoring: LabelAuthoring },
-  Match: { student: MatchStudent, authoring: MatchAuthoring },
-  MultipleChoice: { student: MultipleChoiceStudent, authoring: MultipleChoiceAuthoring },
-  OpenResponse: { student: OpenResponseStudent, authoring: OpenResponseAuthoring },
-  OutsideURL: { student: OutsideUrlStudent, authoring: OutsideUrlAuthoring },
-  PeerChat: { student: PeerChatStudentComponent, authoring: PeerChatAuthoringComponent },
+  Discussion: { authoring: DiscussionAuthoring, student: DiscussionStudent },
+  Draw: { authoring: DrawAuthoring, student: DrawStudent },
+  Embedded: { authoring: EmbeddedAuthoring, student: EmbeddedStudent },
+  Graph: { authoring: GraphAuthoring, student: GraphStudent },
+  HTML: { authoring: HtmlAuthoring, student: HtmlStudent },
+  Label: { authoring: LabelAuthoring, student: LabelStudent },
+  Match: { authoring: MatchAuthoring, student: MatchStudent },
+  MultipleChoice: { authoring: MultipleChoiceAuthoring, student: MultipleChoiceStudent },
+  OpenResponse: { authoring: OpenResponseAuthoring, student: OpenResponseStudent },
+  OutsideURL: { authoring: OutsideUrlAuthoring, student: OutsideUrlStudent },
+  PeerChat: { authoring: PeerChatAuthoringComponent, student: PeerChatStudentComponent },
   ShowGroupWork: {
-    student: ShowGroupWorkStudentComponent,
-    authoring: ShowGroupWorkAuthoringComponent
+    authoring: ShowGroupWorkAuthoringComponent,
+    student: ShowGroupWorkStudentComponent
   },
-  ShowMyWork: { student: ShowMyWorkStudentComponent, authoring: ShowMyWorkAuthoringComponent },
-  Summary: { student: SummaryStudent, authoring: SummaryAuthoring },
-  Table: { student: TableStudent, authoring: TableAuthoring }
+  ShowMyWork: { authoring: ShowMyWorkAuthoringComponent, student: ShowMyWorkStudentComponent },
+  Summary: { authoring: SummaryAuthoring, student: SummaryStudent },
+  Table: { authoring: TableAuthoring, student: TableStudent }
 };
