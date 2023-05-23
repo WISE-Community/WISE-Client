@@ -20,7 +20,7 @@ import { ReferenceComponent } from '../../../app/domain/referenceComponent';
 export class ProjectService {
   achievements: any = [];
   additionalProcessingFunctionsMap: any = {};
-  allPaths: string[] = [];
+  allPaths: string[][] = [];
   applicationNodes: any = [];
   flattenedProjectAsNodeIds: any = null;
   groupNodes: any[] = [];
@@ -646,7 +646,7 @@ export class ProjectService {
         return false;
       } else {
         for (const onePath of this.getOrCalculateAllPaths()) {
-          if (onePath.indexOf(nodeId1) < onePath.indexOf(nodeId2)) {
+          if (this.pathIncludesNodesAndOneComesBeforeTwo(onePath, nodeId1, nodeId2)) {
             return true;
           }
         }
@@ -657,7 +657,15 @@ export class ProjectService {
     return false;
   }
 
-  private getOrCalculateAllPaths(): string[] {
+  pathIncludesNodesAndOneComesBeforeTwo(path: string[], nodeId1: string, nodeId2: string): boolean {
+    return (
+      path.includes(nodeId1) &&
+      path.includes(nodeId2) &&
+      path.indexOf(nodeId1) < path.indexOf(nodeId2)
+    );
+  }
+
+  private getOrCalculateAllPaths(): string[][] {
     if (this.allPaths.length === 0) {
       this.allPaths = this.getAllPaths([], this.getStartNodeId(), true);
     }
@@ -841,7 +849,7 @@ export class ProjectService {
    * @param includeGroups whether to include the group node ids in the paths
    * @return an array of paths. each path is an array of node ids.
    */
-  getAllPaths(pathSoFar: string[], nodeId: string = '', includeGroups: boolean = false): any[] {
+  getAllPaths(pathSoFar: string[], nodeId: string = '', includeGroups: boolean = false): any[][] {
     const allPaths = [];
     if (this.isApplicationNode(nodeId)) {
       const path = [];
