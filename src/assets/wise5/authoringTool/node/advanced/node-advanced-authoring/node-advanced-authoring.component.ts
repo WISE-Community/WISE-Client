@@ -44,4 +44,8 @@ export class NodeAdvancedAuthoringComponent implements OnInit {
   showJSONView(): void {
     this.$state.go('root.at.project.node.advanced.json');
   }
+
+  showRubricView(): void {
+    this.$state.go('root.at.project.node.advanced.rubric');
+  }
 }

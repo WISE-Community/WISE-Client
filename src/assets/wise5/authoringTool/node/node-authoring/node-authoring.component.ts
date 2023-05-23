@@ -210,10 +210,6 @@ export class NodeAuthoringComponent implements OnInit {
     this.upgrade.$injector.get('$state').go('root.at.project.node.advanced');
   }
 
-  protected editRubric(): void {
-    this.upgrade.$injector.get('$state').go('root.at.project.node.edit-rubric');
-  }
-
   protected showComponentAuthoring(): void {
     this.showComponentAuthoringViews = true;
   }

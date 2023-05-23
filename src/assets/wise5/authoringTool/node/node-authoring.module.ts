@@ -7,6 +7,7 @@ import { NodeAdvancedJsonAuthoringComponent } from './advanced/json/node-advance
 import { NodeAdvancedPathAuthoringComponent } from './advanced/path/node-advanced-path-authoring.component';
 import { NodeAdvancedAuthoringComponent } from './advanced/node-advanced-authoring/node-advanced-authoring.component';
 import { NodeAuthoringComponent } from './node-authoring/node-authoring.component';
+import { EditNodeRubricComponent } from './editRubric/edit-node-rubric.component';
 
 export default angular
   .module('nodeAuthoringModule', [])
@@ -43,6 +44,10 @@ export default angular
     downgradeComponent({
       component: NodeAdvancedJsonAuthoringComponent
     }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editNodeRubricComponent',
+    downgradeComponent({ component: EditNodeRubricComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'nodeAuthoringComponent',
@@ -91,6 +96,10 @@ export default angular
         .state('root.at.project.node.advanced.path', {
           url: '/path',
           component: 'nodeAdvancedPathAuthoringComponent'
+        })
+        .state('root.at.project.node.advanced.rubric', {
+          url: '/rubric',
+          component: 'editNodeRubricComponent'
         });
     }
   ]);

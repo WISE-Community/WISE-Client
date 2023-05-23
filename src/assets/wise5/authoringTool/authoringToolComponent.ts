@@ -200,7 +200,7 @@ class AuthoringToolController {
         active: false
       },
       {
-        route: 'root.at.project.node.edit-rubric',
+        route: 'root.at.project.node.advanced.rubric',
         name: '',
         label: '',
         icon: '',
@@ -322,6 +322,7 @@ class AuthoringToolController {
       'root.at.project.node',
       'root.at.project.node.advanced',
       'root.at.project.node.advanced.branch',
+      'root.at.project.node.advanced.rubric',
       'root.at.project.node.advanced.constraint',
       'root.at.project.node.advanced.general',
       'root.at.project.node.advanced.json',
