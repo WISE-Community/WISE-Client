@@ -10,9 +10,6 @@
 <choose-import-component-location
   *ngIf="$state.current.name === 'root.at.project.node.import-component.choose-location'"
 ></choose-import-component-location>
-<edit-node-rubric
-  *ngIf="$state.current.name === 'root.at.project.node.edit-rubric'"
-></edit-node-rubric>
 <node-advanced-authoring
   *ngIf="$state.current.name.startsWith('root.at.project.node.advanced')"
 ></node-advanced-authoring>
@@ -102,19 +99,6 @@
           <mat-icon>delete</mat-icon>
         </button>
       </div>
-      <button
-        *ngIf="showStepButtons"
-        mat-raised-button
-        color="primary"
-        class="top-button"
-        (click)="editRubric()"
-        [disabled]="getSelectedComponentIds().length !== 0 || insertComponentMode"
-        matTooltip="Edit Step Rubric"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>message</mat-icon>
-      </button>
       <button
         *ngIf="showStepButtons"
         mat-raised-button

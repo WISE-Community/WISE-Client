@@ -24,6 +24,17 @@
     *ngIf="!isGroupNode"
     mat-raised-button
     color="primary"
+    (click)="showRubricView()"
+    matTooltip="Edit Step Rubric"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>message</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
     (click)="showEditTransitionsView()"
     matTooltip="Edit Transitions"
     matTooltipPosition="above"
@@ -67,6 +78,9 @@
 <node-advanced-general-authoring
   *ngIf="$state.current.name === 'root.at.project.node.advanced.general'"
 ></node-advanced-general-authoring>
+<edit-node-rubric
+  *ngIf="$state.current.name === 'root.at.project.node.advanced.rubric'"
+></edit-node-rubric>
 <node-advanced-path-authoring
   *ngIf="$state.current.name === 'root.at.project.node.advanced.path'"
 ></node-advanced-path-authoring>

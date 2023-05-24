@@ -20,11 +20,11 @@ import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/rec
 import { AddLessonConfigureComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component';
 import { AddLessonChooseLocationComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-location/add-lesson-choose-location.component';
 import { ConcurrentAuthorsMessageComponent } from '../../assets/wise5/authoringTool/concurrent-authors-message/concurrent-authors-message.component';
-import { EditNodeRubricComponent } from '../../assets/wise5/authoringTool/node/editRubric/edit-node-rubric.component';
 import { ImportComponentModule } from '../../assets/wise5/authoringTool/importComponent/import-component-module';
 import { NodeAdvancedAuthoringModule } from '../../assets/wise5/authoringTool/node/advanced/node-advanced-authoring.module';
 import { NodeAuthoringComponent } from '../../assets/wise5/authoringTool/node/node-authoring/node-authoring.component';
 import { TeacherNodeIconComponent } from '../../assets/wise5/authoringTool/teacher-node-icon/teacher-node-icon.component';
+import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,6 @@ import { TeacherNodeIconComponent } from '../../assets/wise5/authoringTool/teach
     ChooseNewNodeLocation,
     ChooseNewNodeTemplate,
     ConcurrentAuthorsMessageComponent,
-    EditNodeRubricComponent,
     NodeAuthoringComponent,
     NodeIconChooserDialog,
     RecoveryAuthoringComponent,
@@ -55,7 +54,8 @@ import { TeacherNodeIconComponent } from '../../assets/wise5/authoringTool/teach
     ImportComponentModule,
     NodeAdvancedAuthoringModule,
     PreviewComponentModule,
-    RouterModule
+    RouterModule,
+    WiseTinymceEditorModule
   ]
 })
 export class AuthoringToolModule {}

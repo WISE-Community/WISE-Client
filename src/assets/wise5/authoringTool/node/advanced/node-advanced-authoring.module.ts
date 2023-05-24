@@ -8,9 +8,12 @@ import { NodeAdvancedPathAuthoringComponent } from './path/node-advanced-path-au
 import { StudentTeacherCommonModule } from '../../../../../app/student-teacher-common.module';
 import { NodeConstraintAuthoringComponent } from '../../constraint/node-constraint-authoring/node-constraint-authoring.component';
 import { ConstraintAuthoringModule } from '../../constraint/constraint-authoring.module';
+import { EditNodeRubricComponent } from '../editRubric/edit-node-rubric.component';
+import { WiseTinymceEditorModule } from '../../../directives/wise-tinymce-editor/wise-tinymce-editor.module';
 
 @NgModule({
   declarations: [
+    EditNodeRubricComponent,
     NodeAdvancedAuthoringComponent,
     NodeAdvancedBranchAuthoringComponent,
     NodeAdvancedConstraintAuthoringComponent,
@@ -20,6 +23,7 @@ import { ConstraintAuthoringModule } from '../../constraint/constraint-authoring
     NodeConstraintAuthoringComponent
   ],
   exports: [
+    EditNodeRubricComponent,
     NodeAdvancedAuthoringComponent,
     NodeAdvancedBranchAuthoringComponent,
     NodeAdvancedConstraintAuthoringComponent,
@@ -28,6 +32,6 @@ import { ConstraintAuthoringModule } from '../../constraint/constraint-authoring
     NodeAdvancedPathAuthoringComponent,
     NodeConstraintAuthoringComponent
   ],
-  imports: [ConstraintAuthoringModule, StudentTeacherCommonModule]
+  imports: [ConstraintAuthoringModule, StudentTeacherCommonModule, WiseTinymceEditorModule]
 })
 export class NodeAdvancedAuthoringModule {}
