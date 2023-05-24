@@ -282,11 +282,11 @@ export class DiscussionStudent extends ComponentStudent {
     }
   }
 
-  subscribeToAttachStudentAsset() {
+  protected subscribeToAttachStudentAsset(): void {
     this.subscriptions.add(
       this.StudentAssetService.attachStudentAsset$.subscribe(
         (studentAssetRequest: StudentAssetRequest) => {
-          if (this.isForThisComponent(studentAssetRequest)) {
+          if (this.isSameComponent(studentAssetRequest.component)) {
             this.attachStudentAsset(studentAssetRequest.asset);
           }
         }

@@ -19099,14 +19099,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>There was an error uploading.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentAssetService.ts</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7911256030566990381" datatype="html">
         <source>There was an error uploading. You might have reached your file upload limit or the file you tried to upload was too large. Please ask your teacher for help.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentAssetService.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7178340069631637479" datatype="html">
