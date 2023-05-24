@@ -282,16 +282,8 @@ export class DiscussionStudent extends ComponentStudent {
     }
   }
 
-  protected subscribeToAttachStudentAsset(): void {
-    this.subscriptions.add(
-      this.StudentAssetService.attachStudentAsset$.subscribe(
-        (studentAssetRequest: StudentAssetRequest) => {
-          if (this.isSameComponent(studentAssetRequest.component)) {
-            this.attachStudentAsset(studentAssetRequest.asset);
-          }
-        }
-      )
-    );
+  protected doAttachStudentAsset(studentAssetRequest: StudentAssetRequest): void {
+    this.attachStudentAsset(studentAssetRequest.asset);
   }
 
   registerStudentWorkReceivedListener() {

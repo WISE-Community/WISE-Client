@@ -201,16 +201,20 @@ export abstract class ComponentStudent {
       this.StudentAssetService.attachStudentAsset$.subscribe(
         (studentAssetRequest: StudentAssetRequest) => {
           if (this.isSameComponent(studentAssetRequest.component)) {
-            this.copyAndAttachStudentAsset(studentAssetRequest.asset);
+            this.doAttachStudentAsset(studentAssetRequest);
           }
         }
       )
     );
   }
 
+  protected doAttachStudentAsset(studentAssetRequest: StudentAssetRequest): void {
+    this.copyAndAttachStudentAsset(studentAssetRequest.asset);
+  }
+
   generateStarterState() {}
 
-  copyAndAttachStudentAsset(studentAsset: any): any {
+  private copyAndAttachStudentAsset(studentAsset: any): void {
     this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset: any) => {
       const attachment = {
         studentAssetId: copiedAsset.id,
