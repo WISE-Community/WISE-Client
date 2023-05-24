@@ -12,15 +12,15 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import { EditorModule } from '@tinymce/tinymce-angular';
 import { ComponentStateInfoModule } from '../../assets/wise5/common/component-state-info/component-state-info.module';
-import { WiseTinymceEditorComponent } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component';
 import { NotebookItemComponent } from './notebook-item/notebook-item.component';
 import { NotebookLauncherComponent } from './notebook-launcher/notebook-launcher.component';
 import { NotebookNotesComponent } from './notebook-notes/notebook-notes.component';
 import { NotebookParentComponent } from './notebook-parent/notebook-parent.component';
 import { NotebookReportAnnotationsComponent } from './notebook-report-annotations/notebook-report-annotations.component';
 import { NotebookReportComponent } from './notebook-report/notebook-report.component';
+import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
 
 @NgModule({
   declarations: [
@@ -29,8 +29,7 @@ import { NotebookReportComponent } from './notebook-report/notebook-report.compo
     NotebookLauncherComponent,
     NotebookNotesComponent,
     NotebookReportComponent,
-    NotebookReportAnnotationsComponent,
-    WiseTinymceEditorComponent
+    NotebookReportAnnotationsComponent
   ],
   imports: [
     CommonModule,
@@ -48,8 +47,8 @@ import { NotebookReportComponent } from './notebook-report/notebook-report.compo
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    WiseTinymceEditorModule
   ],
-  providers: [{ provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],
   exports: [
     NotebookParentComponent,
     NotebookItemComponent,

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wise-link';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -11,7 +11,7 @@ import { UtilService } from '../../../services/utilService';
   selector: 'html-authoring',
   templateUrl: 'html-authoring.component.html'
 })
-export class HtmlAuthoring extends ComponentAuthoring {
+export class HtmlAuthoring extends AbstractComponentAuthoring {
   html: string = '';
 
   constructor(

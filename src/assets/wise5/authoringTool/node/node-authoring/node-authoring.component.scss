@@ -56,12 +56,16 @@
   margin: 16px;
   border: 2px solid #dddddd;
   border-radius: 6px;
-  padding: 0px 20px;
 }
 
 .component-header {
   height: 48px;
+  padding: 0px 20px;
   cursor: pointer;
+}
+
+.component-header-highlight:hover {
+    background-color: #add8e6;
 }
 
 .component-label {
@@ -71,6 +75,10 @@
 .component-expand-collapse-div {
   flex-grow: 1;
   align-self: stretch;
+}
+
+.component-authoring {
+  padding: 0px 20px;
 }
 
 .insert-after-div {

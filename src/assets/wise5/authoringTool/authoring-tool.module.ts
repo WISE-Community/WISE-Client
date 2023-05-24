@@ -9,7 +9,6 @@ import '../components/component-authoring.module';
 import './components/shared/shared';
 import './importComponent/importComponentModule';
 import './importStep/importStepModule';
-import './node/editRubric/editRubricModule';
 import './node/node-authoring.module';
 import './project/project-authoring.module';
 import './structure/structureAuthoringModule';
@@ -26,7 +25,6 @@ export default angular
     'addNodeModule',
     'atShared',
     'componentAuthoringModule',
-    'editRubricModule',
     'importComponentModule',
     'importStepModule',
     'nodeAuthoringModule',

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { ComponentTypeService } from '../../../assets/wise5/services/componentTypeService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
@@ -18,7 +18,8 @@ export class ComponentSelectComponent {
     private projectService: TeacherProjectService
   ) {}
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.nodeId = changes.nodeId.currentValue;
     this.components = this.projectService.getComponents(this.nodeId).filter((component) => {
       return this.projectService.componentHasWork(component);
     });

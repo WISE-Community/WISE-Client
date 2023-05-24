@@ -2,7 +2,7 @@
 
 import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -13,7 +13,7 @@ import { EmbeddedService } from '../embeddedService';
   templateUrl: 'embedded-authoring.component.html',
   styleUrls: ['embedded-authoring.component.scss']
 })
-export class EmbeddedAuthoring extends ComponentAuthoring {
+export class EmbeddedAuthoring extends AbstractComponentAuthoring {
   embeddedApplicationIFrameId: string;
 
   constructor(
