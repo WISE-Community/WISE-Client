@@ -21,31 +21,31 @@ export class NodeAdvancedAuthoringComponent implements OnInit {
     this.isGroupNode = this.node.isGroup();
   }
 
-  goBack(): void {
+  protected goBack(): void {
     this.$state.go('root.at.project.node', { nodeId: this.node.id });
   }
 
-  showCreateBranchView(): void {
+  protected showCreateBranchView(): void {
     this.$state.go('root.at.project.node.advanced.branch');
   }
 
-  showEditTransitionsView(): void {
+  protected showEditTransitionsView(): void {
     this.$state.go('root.at.project.node.advanced.path');
   }
 
-  showEditConstraintsView(): void {
+  protected showEditConstraintsView(): void {
     this.$state.go('root.at.project.node.advanced.constraint');
   }
 
-  showGeneralAdvancedView(): void {
+  protected showGeneralAdvancedView(): void {
     this.$state.go('root.at.project.node.advanced.general');
   }
 
-  showJSONView(): void {
+  protected showJSONView(): void {
     this.$state.go('root.at.project.node.advanced.json');
   }
 
-  showRubricView(): void {
+  protected showRubricView(): void {
     this.$state.go('root.at.project.node.advanced.rubric');
   }
 }
