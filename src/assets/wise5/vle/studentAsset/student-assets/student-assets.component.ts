@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ConfigService } from '../../../services/configService';
-import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
+import { Component as WISEComponent } from '../../../common/Component';
 
 @Component({
   selector: 'student-assets',
@@ -9,19 +9,12 @@ import { StudentAssetService } from '../../../services/studentAssetService';
   styleUrls: ['./student-assets.component.scss']
 })
 export class StudentAssetsComponent implements OnInit {
-  @Input()
-  componentId: string;
-
-  @Input()
-  nodeId: string;
-
-  mode: string;
+  @Input() component: WISEComponent;
+  protected mode: string;
   studentAssets: any;
-  componentsThatCanAcceptAssets: string[] = ['ConceptMap', 'Discussion', 'Draw', 'Label', 'Table'];
 
   constructor(
     private configService: ConfigService,
-    private projectService: ProjectService,
     private studentAssetService: StudentAssetService
   ) {}
 
@@ -33,7 +26,7 @@ export class StudentAssetsComponent implements OnInit {
     }
   }
 
-  retrieveStudentAssets(): void {
+  private retrieveStudentAssets(): void {
     this.studentAssetService.retrieveAssets().then((studentAssets) => {
       this.studentAssets = studentAssets;
     });
@@ -48,7 +41,7 @@ export class StudentAssetsComponent implements OnInit {
     }
   }
 
-  attachStudentAssetToComponent($event, studentAsset: any): void {
+  protected attachStudentAssetToComponent($event, studentAsset: any): void {
     // prevents parent student asset list item from getting the onclick event so this item won't be
     // re-selected.
     $event.stopPropagation();
@@ -56,13 +49,8 @@ export class StudentAssetsComponent implements OnInit {
   }
 
   attachStudentAsset(studentAsset: any): void {
-    const component = this.projectService.getComponent(this.nodeId, this.componentId);
-    if (this.componentsThatCanAcceptAssets.includes(component.type)) {
-      this.studentAssetService.broadcastAttachStudentAsset(
-        this.nodeId,
-        this.componentId,
-        studentAsset
-      );
+    if (this.component.isAcceptsAssets()) {
+      this.studentAssetService.broadcastAttachStudentAsset(this.component, studentAsset);
     }
   }
 }

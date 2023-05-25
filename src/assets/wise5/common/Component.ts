@@ -31,6 +31,11 @@ export class Component {
     return false;
   }
 
+  isAcceptsAssets(): boolean {
+    // TODO: move these to individual component classes when we have them
+    return ['ConceptMap', 'Discussion', 'Draw', 'Label', 'Table'].includes(this.content.type);
+  }
+
   isGradable(): boolean {
     return true;
   }
