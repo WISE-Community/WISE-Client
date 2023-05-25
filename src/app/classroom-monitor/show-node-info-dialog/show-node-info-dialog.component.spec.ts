@@ -15,6 +15,7 @@ import { TeacherDataService } from '../../../assets/wise5/services/teacherDataSe
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { VLEProjectService } from '../../../assets/wise5/vle/vleProjectService';
 import { ShowNodeInfoDialogComponent } from './show-node-info-dialog.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let component: ShowNodeInfoDialogComponent;
 const componentRubric: string = 'This is the component rubric.';
@@ -59,7 +60,8 @@ describe('ShowNodeInfoDialogComponent', () => {
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: nodeId1 },
         { provide: MatDialogRef, useValue: {} }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ShowNodeInfoDialogComponent);

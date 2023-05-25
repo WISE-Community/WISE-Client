@@ -13,6 +13,7 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { ComponentConstraintAuthoringComponent } from './component-constraint-authoring.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let component: ComponentConstraintAuthoringComponent;
 let fixture: ComponentFixture<ComponentConstraintAuthoringComponent>;
@@ -37,7 +38,8 @@ describe('ComponentConstraintAuthoringComponent', () => {
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ComponentConstraintAuthoringComponent);

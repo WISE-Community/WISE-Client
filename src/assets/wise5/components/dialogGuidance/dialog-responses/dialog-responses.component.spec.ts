@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { DialogResponsesComponent } from './dialog-responses.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('DialogResponsesComponent', () => {
   let component: DialogResponsesComponent;
@@ -8,7 +9,8 @@ describe('DialogResponsesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ComponentHeader, DialogResponsesComponent]
+      declarations: [ComponentHeader, DialogResponsesComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

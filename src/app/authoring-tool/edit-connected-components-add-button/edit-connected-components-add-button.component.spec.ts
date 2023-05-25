@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditConnectedComponentsAddButtonComponent } from './edit-connected-components-add-button.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('EditConnectedComponentsAddButtonComponent', () => {
   let component: EditConnectedComponentsAddButtonComponent;
@@ -8,9 +9,9 @@ describe('EditConnectedComponentsAddButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditConnectedComponentsAddButtonComponent ]
-    })
-    .compileComponents();
+      declarations: [EditConnectedComponentsAddButtonComponent],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
   });
 
   beforeEach(() => {

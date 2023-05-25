@@ -10,6 +10,7 @@ import { ClassroomStatusService } from '../../../services/classroomStatusService
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let component: EditNodeRubricComponent;
 let fixture: ComponentFixture<EditNodeRubricComponent>;
@@ -33,7 +34,8 @@ describe('EditNodeRubricComponent', () => {
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

@@ -14,6 +14,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { NodeGradingViewComponent } from '../../nodeGrading/node-grading-view/node-grading-view.component';
 import { NodeProgressViewComponent } from './node-progress-view.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 const rubric = 'This is the unit rubric.';
 const title = 'Photosynthesis';
@@ -129,7 +130,8 @@ describe('NodeProgressViewComponent', () => {
           provide: UpgradeModule,
           useClass: MockUpgradeModule
         }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

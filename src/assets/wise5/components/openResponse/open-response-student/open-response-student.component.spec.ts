@@ -21,6 +21,7 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { OpenResponseContent } from '../OpenResponseContent';
 import { OpenResponseService } from '../openResponseService';
 import { OpenResponseStudent } from './open-response-student.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let component: OpenResponseStudent;
 const componentId = 'component1';
@@ -50,7 +51,7 @@ describe('OpenResponseStudent', () => {
         PossibleScoreComponent
       ],
       providers: [AudioRecorderService],
-      schemas: []
+      schemas: [NO_ERRORS_SCHEMA]
     });
   });
 

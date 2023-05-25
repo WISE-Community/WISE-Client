@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditConnectedComponentDeleteButtonComponent } from './edit-connected-component-delete-button.component';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('EditConnectedComponentDeleteButtonComponent', () => {
   let component: EditConnectedComponentDeleteButtonComponent;
@@ -8,7 +9,8 @@ describe('EditConnectedComponentDeleteButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditConnectedComponentDeleteButtonComponent]
+      declarations: [EditConnectedComponentDeleteButtonComponent],
+      imports: [MatIconModule]
     }).compileComponents();
   });
 
