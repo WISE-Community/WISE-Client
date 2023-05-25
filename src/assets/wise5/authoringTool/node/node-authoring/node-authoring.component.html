@@ -294,6 +294,9 @@
             mat-raised-button
             color="primary"
             (click)="deleteComponent($event, i + 1, component)"
+            matTooltip="Delete Component"
+            matTooltipPosition="above"
+            i18n-matTooltip
           >
             <mat-icon>delete</mat-icon>
           </button>
