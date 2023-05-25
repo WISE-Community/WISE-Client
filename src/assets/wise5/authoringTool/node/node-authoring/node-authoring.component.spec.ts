@@ -134,23 +134,28 @@ function deleteComponents() {
 }
 
 function clickComponentHeader(componentId: string): void {
-  fixture.debugElement.query(By.css(`#${componentId} .component-header`)).nativeElement.click();
+  queryByCssAndClick(`#${componentId} .component-header`);
 }
 
 function clickComponentDeleteButton(componentId: string): void {
-  fixture.debugElement
-    .queryAll(By.css(`#${componentId} button`))
-    .find((button) => button.nativeElement.innerText === 'delete')
-    .nativeElement.click();
+  queryAllByCssAndClickDelete(`#${componentId} button`);
 }
 
 function clickComponentCheckbox(componentId: string): void {
-  fixture.debugElement.query(By.css(`#${componentId} mat-checkbox label`)).nativeElement.click();
+  queryByCssAndClick(`#${componentId} mat-checkbox label`);
 }
 
 function clickDeleteComponentsButton(): void {
+  queryAllByCssAndClickDelete('button');
+}
+
+function queryByCssAndClick(css: string): void {
+  fixture.debugElement.query(By.css(css)).nativeElement.click();
+}
+
+function queryAllByCssAndClickDelete(css: string): void {
   fixture.debugElement
-    .queryAll(By.css('button'))
+    .queryAll(By.css(css))
     .find((button) => button.nativeElement.innerText === 'delete')
     .nativeElement.click();
 }
