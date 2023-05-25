@@ -84,4 +84,8 @@ describe('PeerChatAuthoringComponent', () => {
     component.componentContent = copy(componentContent);
     fixture.detectChanges();
   });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

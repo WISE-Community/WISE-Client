@@ -58,4 +58,8 @@ describe('NodeComponent', () => {
     });
     fixture.destroy();
   });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
