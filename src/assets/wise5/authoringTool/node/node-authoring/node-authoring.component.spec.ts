@@ -99,7 +99,7 @@ describe('NodeAuthoringComponent', () => {
 });
 
 function deleteComponent() {
-  describe('deleteComponent()3', () => {
+  describe('deleteComponent()', () => {
     it('should delete component', () => {
       clickComponentHeader(component2.id);
       fixture.detectChanges();
