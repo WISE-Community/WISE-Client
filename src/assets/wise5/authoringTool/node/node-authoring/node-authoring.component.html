@@ -290,9 +290,10 @@
             i18n-matTooltip
           ></div>
           <button
-            *ngIf="componentsToIsExpanded[component.id]"
             mat-raised-button
             color="primary"
+            class="component-delete-button"
+            [ngClass]="{ 'component-delete-button-show': componentsToIsExpanded[component.id] }"
             (click)="deleteComponent($event, i + 1, component)"
             matTooltip="Delete Component"
             matTooltipPosition="above"
