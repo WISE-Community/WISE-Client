@@ -382,7 +382,10 @@ export class NodeAuthoringComponent implements OnInit {
       };
       this.saveEvent('componentMoved', 'Authoring', eventData);
       this.turnOffMoveComponentMode();
-      this.highlightNewComponentsAndThenShowComponentAuthoring();
+      this.highlightNewComponentsAndThenShowComponentAuthoring(
+        selectedComponentIds.map((componentId) => ({ id: componentId })),
+        false
+      );
     }
   }
 
@@ -419,8 +422,12 @@ export class NodeAuthoringComponent implements OnInit {
    * Temporarily highlight the new components and then show the component
    * authoring views. Used to bring user's attention to new changes.
    * @param newComponents an array of the new components we have just added
+   * @param expandComponents expand component(s)' authoring views after highlighting
    */
-  private highlightNewComponentsAndThenShowComponentAuthoring(newComponents: any = []): void {
+  private highlightNewComponentsAndThenShowComponentAuthoring(
+    newComponents: any = [],
+    expandComponents: boolean = true
+  ): void {
     this.showComponentAuthoring();
     this.turnOffInsertComponentMode();
     this.showDefaultComponentsView();
@@ -433,7 +440,7 @@ export class NodeAuthoringComponent implements OnInit {
         $('#content').scrollTop(componentElement.offset().top - 200);
         for (const newComponent of newComponents) {
           temporarilyHighlightElement(newComponent.id);
-          this.componentsToIsExpanded[newComponent.id] = true;
+          this.componentsToIsExpanded[newComponent.id] = expandComponents;
         }
       }
     });
