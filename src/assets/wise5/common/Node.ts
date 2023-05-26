@@ -65,4 +65,36 @@ export class Node {
     }
     return this.transitionLogic;
   }
+
+  /**
+   * Move the component(s) within this node
+   * @param componentIds the id(s) of the component(s) to move
+   * @param insertAfterComponentId insert the component(s) after this component id.
+   * If this argument is null, place the new component(s) in the first position.
+   */
+  moveComponents(componentIds: string[], insertAfterComponentId: string = null): void {
+    const components = this.extractComponents(componentIds);
+    if (insertAfterComponentId == null) {
+      this.components.unshift(...components);
+    } else {
+      this.insertComponentsAfter(components, insertAfterComponentId);
+    }
+  }
+
+  private extractComponents(componentIds: string[]): any[] {
+    const components = [];
+    for (let i = 0; i < this.components.length; i++) {
+      if (componentIds.includes(this.components[i].id)) {
+        components.push(this.components.splice(i--, 1)[0]);
+      }
+    }
+    return components;
+  }
+
+  private insertComponentsAfter(components: any[], insertAfterComponentId: string): void {
+    const insertAfterComponentIndex = this.components.findIndex(
+      (component) => component.id === insertAfterComponentId
+    );
+    this.components.splice(insertAfterComponentIndex + 1, 0, ...components);
+  }
 }

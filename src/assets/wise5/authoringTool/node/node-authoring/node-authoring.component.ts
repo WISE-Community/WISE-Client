@@ -375,18 +375,17 @@ export class NodeAuthoringComponent implements OnInit {
         alert($localize`You are not allowed to insert the selected items after itself.`);
       }
     } else {
-      const newComponents = this.nodeService.moveComponent(
-        this.nodeId,
-        selectedComponentIds,
-        componentId
-      );
+      this.projectService.getNode(this.nodeId).moveComponents(selectedComponentIds, componentId);
       this.projectService.saveProject();
       const eventData = {
         componentsMoved: this.getComponentObjectsForEventData(selectedComponentIds)
       };
       this.saveEvent('componentMoved', 'Authoring', eventData);
       this.turnOffMoveComponentMode();
-      this.highlightNewComponentsAndThenShowComponentAuthoring(newComponents);
+      this.highlightNewComponentsAndThenShowComponentAuthoring(
+        selectedComponentIds.map((componentId) => ({ id: componentId })),
+        false
+      );
     }
   }
 
@@ -423,8 +422,12 @@ export class NodeAuthoringComponent implements OnInit {
    * Temporarily highlight the new components and then show the component
    * authoring views. Used to bring user's attention to new changes.
    * @param newComponents an array of the new components we have just added
+   * @param expandComponents expand component(s)' authoring views after highlighting
    */
-  private highlightNewComponentsAndThenShowComponentAuthoring(newComponents: any = []): void {
+  private highlightNewComponentsAndThenShowComponentAuthoring(
+    newComponents: any = [],
+    expandComponents: boolean = true
+  ): void {
     this.showComponentAuthoring();
     this.turnOffInsertComponentMode();
     this.showDefaultComponentsView();
@@ -437,7 +440,7 @@ export class NodeAuthoringComponent implements OnInit {
         $('#content').scrollTop(componentElement.offset().top - 200);
         for (const newComponent of newComponents) {
           temporarilyHighlightElement(newComponent.id);
-          this.componentsToIsExpanded[newComponent.id] = true;
+          this.componentsToIsExpanded[newComponent.id] = expandComponents;
         }
       }
     });
