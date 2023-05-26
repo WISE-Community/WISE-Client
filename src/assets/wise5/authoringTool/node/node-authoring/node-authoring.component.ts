@@ -375,18 +375,14 @@ export class NodeAuthoringComponent implements OnInit {
         alert($localize`You are not allowed to insert the selected items after itself.`);
       }
     } else {
-      const newComponents = this.nodeService.moveComponent(
-        this.nodeId,
-        selectedComponentIds,
-        componentId
-      );
+      this.projectService.getNode(this.nodeId).moveComponents(selectedComponentIds, componentId);
       this.projectService.saveProject();
       const eventData = {
         componentsMoved: this.getComponentObjectsForEventData(selectedComponentIds)
       };
       this.saveEvent('componentMoved', 'Authoring', eventData);
       this.turnOffMoveComponentMode();
-      this.highlightNewComponentsAndThenShowComponentAuthoring(newComponents);
+      this.highlightNewComponentsAndThenShowComponentAuthoring();
     }
   }
 
