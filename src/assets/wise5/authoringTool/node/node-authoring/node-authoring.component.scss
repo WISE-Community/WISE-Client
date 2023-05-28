@@ -65,7 +65,7 @@
 }
 
 .component-header-highlight:hover {
-    background-color: #add8e6;
+  background-color: #add8e6;
 }
 
 .component-label {
@@ -75,6 +75,18 @@
 .component-expand-collapse-div {
   flex-grow: 1;
   align-self: stretch;
+}
+
+.component-delete-button {
+  display: none;
+  margin-right: 20px;
+  &.component-delete-button-show {
+    display: block;
+  }
+}
+
+.component-header:hover .component-delete-button {
+  display: block;
 }
 
 .component-authoring {

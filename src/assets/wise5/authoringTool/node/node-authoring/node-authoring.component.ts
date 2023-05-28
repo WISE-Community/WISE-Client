@@ -292,35 +292,50 @@ export class NodeAuthoringComponent implements OnInit {
     this.hideComponentAuthoring();
   }
 
-  protected deleteButtonClicked(): void {
+  protected deleteComponents(): void {
     this.scrollToTopOfPage();
     this.hideComponentAuthoring();
-
-    let confirmMessage = '';
-    const selectedComponentNumbersAndTypes = this.getSelectedComponentNumbersAndTypes();
-    if (selectedComponentNumbersAndTypes.length == 1) {
-      confirmMessage = $localize`Are you sure you want to delete this component?\n`;
-    } else if (selectedComponentNumbersAndTypes.length > 1) {
-      confirmMessage = $localize`Are you sure you want to delete these components?\n`;
-    }
-    for (let c = 0; c < selectedComponentNumbersAndTypes.length; c++) {
-      confirmMessage += '\n' + selectedComponentNumbersAndTypes[c];
-    }
-    if (confirm(confirmMessage)) {
-      const selectedComponents = this.getSelectedComponentIds();
-      const data = {
-        componentsDeleted: this.getComponentObjectsForEventData(selectedComponents)
-      };
-      for (const componentId of selectedComponents) {
-        this.projectService.deleteComponent(this.nodeId, componentId);
-      }
-      this.saveEvent('componentDeleted', 'Authoring', data);
-      this.checkIfNeedToShowNodeSaveOrNodeSubmitButtons();
-      this.projectService.saveProject();
+    if (this.confirmDeleteComponent(this.getSelectedComponentNumbersAndTypes())) {
+      const componentIdAndTypes = this.getSelectedComponentIds()
+        .map((componentId) => this.projectService.deleteComponent(this.nodeId, componentId))
+        .map((component) => ({ componentId: component.id, type: component.type }));
+      this.afterDeleteComponent(componentIdAndTypes);
     }
     this.turnOffInsertComponentMode();
-    this.clearComponentsToChecked();
     this.showComponentAuthoring();
+  }
+
+  protected deleteComponent(
+    event: any,
+    componentNumber: number,
+    component: ComponentContent
+  ): void {
+    event.stopPropagation();
+    if (this.confirmDeleteComponent([`${componentNumber}. ${component.type}`])) {
+      const deletedComponent = this.projectService.deleteComponent(this.nodeId, component.id);
+      this.afterDeleteComponent([
+        { componentId: deletedComponent.id, type: deletedComponent.type }
+      ]);
+    }
+  }
+
+  private confirmDeleteComponent(componentLabels: string[]): boolean {
+    let confirmMessage =
+      componentLabels.length === 1
+        ? $localize`Are you sure you want to delete this component?\n`
+        : $localize`Are you sure you want to delete these components?\n`;
+    confirmMessage += `${componentLabels.join('\n')}`;
+    return confirm(confirmMessage);
+  }
+
+  private afterDeleteComponent(componentIdAndTypes: any[]): void {
+    for (const componentIdAndType of componentIdAndTypes) {
+      delete this.componentsToChecked[componentIdAndType.componentId];
+    }
+    this.updateIsAnyComponentSelected();
+    this.saveEvent('componentDeleted', 'Authoring', { componentsDeleted: componentIdAndTypes });
+    this.checkIfNeedToShowNodeSaveOrNodeSubmitButtons();
+    this.projectService.saveProject();
   }
 
   protected cancelInsertClicked(): void {
@@ -508,7 +523,7 @@ export class NodeAuthoringComponent implements OnInit {
     });
   }
 
-  protected componentCheckboxChanged(): void {
+  protected updateIsAnyComponentSelected(): void {
     this.isAnyComponentSelected = Object.values(this.componentsToChecked).some((value) => value);
   }
 
