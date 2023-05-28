@@ -23,6 +23,7 @@ import { generateRandomKey } from '../../../common/string/string';
 import { GraphCustomLegend } from '../GraphCustomLegend';
 import { calculateMean } from '../util';
 import { PlotLineManager } from '../plot-line-manager';
+import { addPointFromTableIntoData, isMultipleYAxes, isSingleYAxis } from '../util';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -421,7 +422,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   setSeriesYAxisIndex(series, seriesIndex) {
-    if (this.GraphService.isMultipleYAxes(this.yAxis) && this.yAxis.length == 2) {
+    if (isMultipleYAxes(this.yAxis) && this.yAxis.length == 2) {
       if (seriesIndex === 0 || seriesIndex === 1) {
         series.yAxis = seriesIndex;
       } else {
@@ -585,7 +586,7 @@ export class GraphStudent extends ComponentStudent {
       const yCell = row[yColumn];
       if (xCell != null && yCell != null) {
         const tooltipHeader = row[tooltipHeaderColumn]?.text;
-        this.addPointFromTableIntoData(xCell, yCell, data, tooltipHeader);
+        addPointFromTableIntoData(xCell, yCell, data, tooltipHeader);
       }
     }
     return data;
@@ -881,7 +882,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   turnOffYAxisDecimals() {
-    if (this.isSingleYAxis(this.yAxis)) {
+    if (isSingleYAxis(this.yAxis)) {
       this.yAxis.allowDecimals = false;
     } else {
       this.yAxis.forEach((yAxis) => (yAxis.allowDecimals = false));
@@ -1101,7 +1102,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   getSeriesYAxisIndex(series) {
-    if (this.GraphService.isMultipleYAxes(this.yAxis) && series.yAxis != null) {
+    if (isMultipleYAxes(this.yAxis) && series.yAxis != null) {
       return series.yAxis;
     } else {
       return 0;
@@ -1661,7 +1662,7 @@ export class GraphStudent extends ComponentStudent {
       const xCell = row[xColumn];
       const yCell = row[yColumn];
       if (xCell != null && yCell != null) {
-        this.addPointFromTableIntoData(xCell, yCell, data, null);
+        addPointFromTableIntoData(xCell, yCell, data, null);
       }
     }
     return data;
@@ -1689,44 +1690,6 @@ export class GraphStudent extends ComponentStudent {
     } else {
       return params.yColumn;
     }
-  }
-
-  addPointFromTableIntoData(xCell: any, yCell: any, data: any[], tooltipHeader: string): void {
-    const xText = xCell.text;
-    const yText = yCell.text;
-    if (xText != null && xText !== '' && yText != null && yText !== '') {
-      data.push(this.createDataPointFromTable(xText, yText, tooltipHeader));
-    } else {
-      data.push([]);
-    }
-  }
-
-  createDataPointFromTable(xText: string, yText: string, tooltipHeader: string): any {
-    let point: any;
-    const xNumber = Number(xText);
-    const yNumber = Number(yText);
-    if (!isNaN(xNumber) && !isNaN(yNumber)) {
-      point = {
-        x: xNumber,
-        y: yNumber
-      };
-      if (tooltipHeader != null) {
-        point.tooltipHeader = tooltipHeader;
-      }
-    } else {
-      point = [];
-      if (!isNaN(xNumber)) {
-        point.push(xNumber);
-      } else {
-        point.push(xText);
-      }
-      if (!isNaN(yNumber)) {
-        point.push(yNumber);
-      } else {
-        point.push(null);
-      }
-    }
-    return point;
   }
 
   setSeriesIds(allSeries) {
