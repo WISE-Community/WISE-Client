@@ -296,13 +296,9 @@ export class NodeAuthoringComponent implements OnInit {
     this.scrollToTopOfPage();
     this.hideComponentAuthoring();
     if (this.confirmDeleteComponent(this.getSelectedComponentNumbersAndTypes())) {
-      const selectedComponentIds = this.getSelectedComponentIds();
-      const deletedComponents = selectedComponentIds.map((componentId) => {
-        return this.projectService.deleteComponent(this.nodeId, componentId);
-      });
-      const componentIdAndTypes = deletedComponents.map((component) => {
-        return { componentId: component.id, type: component.type };
-      });
+      const componentIdAndTypes = this.getSelectedComponentIds()
+        .map((componentId) => this.projectService.deleteComponent(this.nodeId, componentId))
+        .map((component) => ({ componentId: component.id, type: component.type }));
       this.afterDeleteComponent(componentIdAndTypes);
     }
     this.turnOffInsertComponentMode();
