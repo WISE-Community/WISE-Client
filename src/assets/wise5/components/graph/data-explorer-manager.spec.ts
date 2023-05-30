@@ -36,11 +36,11 @@ function handleDataExplorer() {
 function handleDataExplorerXColumnNumbers() {
   it('should process data explorer student data when x column contains numbers', () => {
     const studentData = createStudentData(
-      [
-        [{ text: '% in poverty' }, { text: casesColumnName }],
-        [{ text: '10' }, { text: '100' }],
-        [{ text: '20' }, { text: '200' }]
-      ],
+      createTableData([
+        ['% in poverty', casesColumnName],
+        ['10', '100'],
+        ['20', '200']
+      ]),
       true
     );
     expect(activeTrial.series).toEqual([]);
@@ -76,11 +76,11 @@ function handleDataExplorerXColumnNumbers() {
 function handleDataExplorerXColumnLabels() {
   it('should process data explorer student data when x column contains labels', () => {
     const studentData = createStudentData(
-      [
-        [{ text: 'County' }, { text: casesColumnName }],
-        [{ text: 'Alameda' }, { text: '100' }],
-        [{ text: 'Contra Costa' }, { text: '200' }]
-      ],
+      createTableData([
+        ['County', casesColumnName],
+        ['Alameda', '100'],
+        ['Contra Costa', '200']
+      ]),
       false
     );
     expect(activeTrial.series).toEqual([]);
@@ -112,7 +112,14 @@ function createStudentData(tableData: any[][], isRegressionEnabled: boolean): an
     ],
     dataExplorerGraphType: 'scatter',
     isDataExplorerScatterPlotRegressionLineEnabled: isRegressionEnabled,
-    tableData: tableData,
-    tooltipHeaderColumn: 0
+    tableData: tableData
   };
+}
+
+function createTableData(data: any[][]): any[][] {
+  return data.map((row) => row.map((cell) => createCell(cell)));
+}
+
+function createCell(text: string): any {
+  return { text: text };
 }

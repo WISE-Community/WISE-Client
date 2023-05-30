@@ -18,27 +18,13 @@ export class DataExplorerManager {
     const allRegressionSeries = [];
     const dataExplorerSeries = studentData.dataExplorerSeries;
     for (let seriesIndex = 0; seriesIndex < dataExplorerSeries.length; seriesIndex++) {
-      const xColumn = dataExplorerSeries[seriesIndex].xColumn;
-      const yColumn = dataExplorerSeries[seriesIndex].yColumn;
-      const yAxis = dataExplorerSeries[seriesIndex].yAxis;
-      if (yColumn != null) {
+      if (dataExplorerSeries[seriesIndex].yColumn != null) {
         const color = this.dataExplorerColors[seriesIndex];
-        this.addSeries(
-          seriesIndex,
-          dataExplorerSeries,
-          studentData,
-          xColumn,
-          yColumn,
-          yAxis,
-          color,
-          studentData.dataExplorerTooltipHeaderColumn
-        );
+        this.addSeries(studentData, dataExplorerSeries[seriesIndex], seriesIndex, color);
         this.handleRegressionSeries(
           studentData,
-          xColumn,
-          yColumn,
+          dataExplorerSeries[seriesIndex],
           color,
-          yAxis,
           allRegressionSeries
         );
       }
@@ -47,24 +33,20 @@ export class DataExplorerManager {
   }
 
   private addSeries(
-    seriesIndex: number,
-    dataExplorerSeries: any[],
     studentData: any,
-    xColumn: number,
-    yColumn: number,
-    yAxis: any,
-    color: string,
-    tooltipHeaderColumn: number
+    singleDataExplorerSeries: any,
+    seriesIndex: number,
+    color: string
   ): void {
     const series = this.generateDataExplorerSeries(
       studentData.tableData,
-      xColumn,
-      yColumn,
+      singleDataExplorerSeries.xColumn,
+      singleDataExplorerSeries.yColumn,
       studentData.dataExplorerGraphType,
-      dataExplorerSeries[seriesIndex].name,
+      singleDataExplorerSeries.name,
       color,
-      yAxis,
-      tooltipHeaderColumn
+      singleDataExplorerSeries.yAxis,
+      studentData.dataExplorerTooltipHeaderColumn
     );
     if (series.yAxis == null) {
       this.setSeriesYAxisIndex(series, seriesIndex);
@@ -74,19 +56,17 @@ export class DataExplorerManager {
 
   private handleRegressionSeries(
     studentData: any,
-    xColumn: number,
-    yColumn: number,
+    singleDataExplorerSeries: any,
     color: string,
-    yAxis: any,
     allRegressionSeries: any[]
   ): void {
     if (this.shouldAddRegressionSeries(studentData)) {
       this.addRegressionSeries(
         studentData.tableData,
-        xColumn,
-        yColumn,
+        singleDataExplorerSeries.xColumn,
+        singleDataExplorerSeries.yColumn,
         color,
-        yAxis,
+        singleDataExplorerSeries.yAxis,
         allRegressionSeries
       );
     }
@@ -122,22 +102,30 @@ export class DataExplorerManager {
       this.yAxis.title.text = studentData.dataExplorerYAxisLabel;
     } else if (studentData.dataExplorerYAxisLabels != null) {
       for (let [index, yAxis] of Object.entries(this.yAxis)) {
-        (yAxis as any).title.text = studentData.dataExplorerYAxisLabels[index];
-        const yAxisIndex = studentData.dataExplorerSeries[index].yAxis;
-        (yAxis as any).title.style.color = this.dataExplorerColors[yAxisIndex];
-        (yAxis as any).labels.style.color = this.dataExplorerColors[yAxisIndex];
+        this.setYAxisAttributes(studentData, yAxis, index);
       }
     }
   }
 
+  private setYAxisAttributes(studentData: any, yAxis: any, index: string): void {
+    yAxis.title.text = studentData.dataExplorerYAxisLabels[index];
+    const yAxisIndex = studentData.dataExplorerSeries[index].yAxis;
+    yAxis.title.style.color = this.dataExplorerColors[yAxisIndex];
+    yAxis.labels.style.color = this.dataExplorerColors[yAxisIndex];
+  }
+
   private setSeriesYAxisIndex(series: Series, seriesIndex: number): void {
-    if (isMultipleYAxes(this.yAxis) && this.yAxis.length == 2) {
+    if (this.hasMultipleYAxes(this.yAxis)) {
       if (seriesIndex === 0 || seriesIndex === 1) {
         series.yAxis = seriesIndex;
       } else {
         series.yAxis = 0;
       }
     }
+  }
+
+  private hasMultipleYAxes(yAxis: any): boolean {
+    return isMultipleYAxes(yAxis) && yAxis.length == 2;
   }
 
   private setXAxisLabels(studentData: any): void {
@@ -245,16 +233,19 @@ export class DataExplorerManager {
     tooltipHeaderColumn: number
   ): any[] {
     const data = [];
-    for (let r = 1; r < rows.length; r++) {
-      const row = rows[r];
+    rows.slice(1).forEach((row: any) => {
       const xCell = row[xColumn];
       const yCell = row[yColumn];
-      if (xCell != null && yCell != null) {
+      if (this.isValidDataPoint(xCell, yCell)) {
         const tooltipHeader = row[tooltipHeaderColumn]?.text;
         addPointFromTableIntoData(xCell, yCell, data, tooltipHeader);
       }
-    }
+    });
     return data;
+  }
+
+  private isValidDataPoint(xCell: any, yCell: any): boolean {
+    return xCell != null && yCell != null;
   }
 
   private generateDataExplorerRegressionSeries(
