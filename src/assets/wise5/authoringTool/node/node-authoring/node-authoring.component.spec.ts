@@ -20,6 +20,7 @@ import { TeacherNodeIconComponent } from '../../teacher-node-icon/teacher-node-i
 import { ComponentAuthoringModule } from '../../../../../app/teacher/component-authoring.module';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { PreviewComponentModule } from '../../components/preview-component/preview-component.module';
+import { DebugElement } from '@angular/core';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -83,6 +84,10 @@ describe('NodeAuthoringComponent', () => {
         components: node1Components
       }
     };
+    teacherProjectService.project = {
+      nodes: [{ id: nodeId1, components: node1Components }],
+      inactiveNodes: []
+    };
     teacherDataService = TestBed.inject(TeacherDataService);
     spyOn(teacherDataService, 'saveEvent').and.callFake(() => {
       return Promise.resolve();
@@ -94,9 +99,63 @@ describe('NodeAuthoringComponent', () => {
     fixture.detectChanges();
   });
 
+  copyComponent();
+  copyComponents();
   deleteComponent();
   deleteComponents();
 });
+
+function copyComponent() {
+  describe('copyComponent()', () => {
+    it('should copy component', () => {
+      clickComponentHeader(component2.id);
+      fixture.detectChanges();
+      expect(teacherProjectService.idToNode[nodeId1].components).toEqual(node1Components);
+      confirmSpy.and.returnValue(true);
+      clickComponentCopyButton(component2.id);
+      expect(confirmSpy).toHaveBeenCalledWith(
+        `Are you sure you want to copy this component?\n2. MultipleChoice`
+      );
+      const components = teacherProjectService.idToNode[nodeId1].components;
+      expect(components.length).toEqual(4);
+      expect(components[0].id).toEqual(component1.id);
+      expect(components[1].id).toEqual(component2.id);
+      expect(components[2].id).not.toEqual(component2.id);
+      expect(components[3].id).toEqual(component3.id);
+    });
+  });
+}
+
+function copyComponents() {
+  describe('copyComponents()', () => {
+    it('should copy components', () => {
+      clickComponentCheckbox(component1.id);
+      clickComponentCheckbox(component3.id);
+      fixture.detectChanges();
+      expect(component.components).toEqual(node1Components);
+      clickCopyComponentsButton();
+      clickLastInsertButton();
+      expect(component.components.length).toEqual(5);
+      expect(component.components[0].id).toEqual(component1.id);
+      expect(component.components[1].id).toEqual(component2.id);
+      expect(component.components[2].id).toEqual(component3.id);
+      expect(component.components[3].id).not.toEqual(component1.id);
+      expect(component.components[4].id).not.toEqual(component3.id);
+      expect(component.componentsToChecked[component1.id]).toBeUndefined();
+      expect(component.componentsToChecked[component3.id]).toBeUndefined();
+    });
+  });
+}
+
+function clickLastInsertButton(): void {
+  clickNativeElement(
+    fixture.debugElement
+      .queryAll(By.css('button'))
+      .reverse()
+      .find((button) => button.nativeElement.innerText === 'keyboard_backspace')
+  );
+  fixture.detectChanges();
+}
 
 function deleteComponent() {
   describe('deleteComponent()', () => {
@@ -133,29 +192,49 @@ function deleteComponents() {
   });
 }
 
-function clickComponentHeader(componentId: string): void {
-  queryByCssAndClick(`#${componentId} .component-header`);
-}
-
-function clickComponentDeleteButton(componentId: string): void {
-  queryAllByCssAndClickDelete(`#${componentId} button`);
-}
-
 function clickComponentCheckbox(componentId: string): void {
   queryByCssAndClick(`#${componentId} mat-checkbox label`);
 }
 
-function clickDeleteComponentsButton(): void {
-  queryAllByCssAndClickDelete('button');
+function clickComponentHeader(componentId: string): void {
+  queryByCssAndClick(`#${componentId} .component-header`);
 }
 
 function queryByCssAndClick(css: string): void {
-  fixture.debugElement.query(By.css(css)).nativeElement.click();
+  clickNativeElement(fixture.debugElement.query(By.css(css)));
 }
 
-function queryAllByCssAndClickDelete(css: string): void {
-  fixture.debugElement
+function clickComponentCopyButton(componentId: string): void {
+  queryByCssAndClickCopy(`#${componentId} button`);
+}
+
+function clickCopyComponentsButton(): void {
+  queryByCssAndClickCopy('button');
+  fixture.detectChanges();
+}
+
+function queryByCssAndClickCopy(css: string): void {
+  clickNativeElement(queryByCssAndInnerText(css, 'content_copy'));
+}
+
+function clickComponentDeleteButton(componentId: string): void {
+  queryByCssAndClickDelete(`#${componentId} button`);
+}
+
+function clickDeleteComponentsButton(): void {
+  queryByCssAndClickDelete('button');
+}
+
+function queryByCssAndClickDelete(css: string): void {
+  clickNativeElement(queryByCssAndInnerText(css, 'delete'));
+}
+
+function queryByCssAndInnerText(css: string, innerText: string): DebugElement {
+  return fixture.debugElement
     .queryAll(By.css(css))
-    .find((button) => button.nativeElement.innerText === 'delete')
-    .nativeElement.click();
+    .find((element) => element.nativeElement.innerText === innerText);
+}
+
+function clickNativeElement(element: DebugElement): void {
+  element.nativeElement.click();
 }

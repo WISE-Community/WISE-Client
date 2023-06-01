@@ -292,6 +292,17 @@ export class NodeAuthoringComponent implements OnInit {
     this.hideComponentAuthoring();
   }
 
+  protected copyComponent(event: any, componentNumber: number, component: ComponentContent): void {
+    event.stopPropagation();
+    if (
+      confirm(
+        $localize`Are you sure you want to copy this component?\n${componentNumber}. ${component.type}`
+      )
+    ) {
+      this.handleCopyComponent([component.id], component.id);
+    }
+  }
+
   protected deleteComponents(): void {
     this.scrollToTopOfPage();
     this.hideComponentAuthoring();
@@ -363,7 +374,7 @@ export class NodeAuthoringComponent implements OnInit {
     if (this.moveComponentMode) {
       this.handleMoveComponent();
     } else if (this.copyComponentMode) {
-      this.handleCopyComponent();
+      this.handleCopyComponent(this.getSelectedComponentIds());
     }
   }
 
@@ -371,7 +382,7 @@ export class NodeAuthoringComponent implements OnInit {
     if (this.moveComponentMode) {
       this.handleMoveComponent(componentId);
     } else if (this.copyComponentMode) {
-      this.handleCopyComponent(componentId);
+      this.handleCopyComponent(this.getSelectedComponentIds(), componentId);
     }
   }
 
@@ -406,11 +417,11 @@ export class NodeAuthoringComponent implements OnInit {
 
   /**
    * Copy components in this step.
+   * @param selectedComponentIds The ids of the components to copy.
    * @param componentId (optional) Put the copied components after this component id. If the
    * componentId is not provided, put the components at the beginning of the step.
    */
-  protected handleCopyComponent(componentId: string = null): void {
-    const selectedComponentIds = this.getSelectedComponentIds();
+  protected handleCopyComponent(selectedComponentIds: string[], componentId: string = null): void {
     const newComponents = this.copyComponentService.copyComponents(
       this.nodeId,
       selectedComponentIds

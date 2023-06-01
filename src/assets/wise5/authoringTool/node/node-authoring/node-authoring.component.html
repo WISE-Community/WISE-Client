@@ -272,10 +272,21 @@
             [componentId]="component.id"
           ></preview-component-button>
           <button
+            mat-raised-button
+            color="primary"
+            class="dynamic-component-button"
+            [ngClass]="{ 'show-dynamic-component-button': componentsToIsExpanded[component.id] }"
+            (click)="copyComponent($event, i + 1, component)"
+            matTooltip="Copy Component"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
+            <mat-icon>content_copy</mat-icon>
+          </button>
+          <button
             *ngIf="componentsToIsExpanded[component.id]"
             mat-raised-button
             color="primary"
-            class="top-button"
             (click)="showComponentAdvancedAuthoring(component, $event)"
             matTooltip="Advanced"
             matTooltipPosition="above"
@@ -292,8 +303,8 @@
           <button
             mat-raised-button
             color="primary"
-            class="component-delete-button"
-            [ngClass]="{ 'component-delete-button-show': componentsToIsExpanded[component.id] }"
+            class="dynamic-component-button"
+            [ngClass]="{ 'show-dynamic-component-button': componentsToIsExpanded[component.id] }"
             (click)="deleteComponent($event, i + 1, component)"
             matTooltip="Delete Component"
             matTooltipPosition="above"
