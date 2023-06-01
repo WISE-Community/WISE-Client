@@ -27,10 +27,13 @@ import { ProjectService } from './projectService';
 import { StudentDataService } from './studentDataService';
 import { TagService } from './tagService';
 import { CompletionService } from './completionService';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class ConstraintService {
   activeConstraints: any[] = [];
+  private constraintsUpdatedSource: Subject<void> = new Subject<void>();
+  public constraintsUpdated$: Observable<void> = this.constraintsUpdatedSource.asObservable();
   criteriaFunctionNameToStrategy = {
     addXNumberOfNotesOnThisStep: new AddXNumberOfNotesOnThisStepConstraintStrategy(),
     branchPathTaken: new BranchPathTakenConstraintStrategy(),
@@ -257,5 +260,14 @@ export class ConstraintService {
       const constraintBIndex = orderedNodeIds.indexOf(constraintB.targetId);
       return constraintAIndex - constraintBIndex;
     };
+  }
+
+  clearActiveConstraints(): void {
+    this.activeConstraints = [];
+    this.constraintsUpdatedSource.next();
+  }
+
+  hasActiveConstraints(): boolean {
+    return this.activeConstraints.length > 0;
   }
 }
