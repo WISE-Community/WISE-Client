@@ -267,12 +267,31 @@
           >
         </mat-checkbox>
         <ng-container *ngIf="!insertComponentMode && showComponentAuthoringViews">
+          <div
+            class="component-expand-collapse-div"
+            matTooltip="Click to expand/collapse"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          ></div>
+          <button
+            *ngIf="componentsToIsExpanded[component.id]"
+            mat-icon-button
+            color="primary"
+            (click)="showComponentAdvancedAuthoring(component, $event)"
+            matTooltip="Advanced"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
+            <mat-icon>build</mat-icon>
+          </button>
           <preview-component-button
+            class="dynamic-component-button"
+            [ngClass]="{ 'show-dynamic-component-button': componentsToIsExpanded[component.id] }"
             [nodeId]="nodeId"
             [componentId]="component.id"
           ></preview-component-button>
           <button
-            mat-raised-button
+            mat-icon-button
             color="primary"
             class="dynamic-component-button"
             [ngClass]="{ 'show-dynamic-component-button': componentsToIsExpanded[component.id] }"
@@ -284,24 +303,7 @@
             <mat-icon>content_copy</mat-icon>
           </button>
           <button
-            *ngIf="componentsToIsExpanded[component.id]"
-            mat-raised-button
-            color="primary"
-            (click)="showComponentAdvancedAuthoring(component, $event)"
-            matTooltip="Advanced"
-            matTooltipPosition="above"
-            i18n-matTooltip
-          >
-            <mat-icon>build</mat-icon>
-          </button>
-          <div
-            class="component-expand-collapse-div"
-            matTooltip="Click to expand/collapse"
-            matTooltipPosition="above"
-            i18n-matTooltip
-          ></div>
-          <button
-            mat-raised-button
+            mat-icon-button
             color="primary"
             class="dynamic-component-button"
             [ngClass]="{ 'show-dynamic-component-button': componentsToIsExpanded[component.id] }"
