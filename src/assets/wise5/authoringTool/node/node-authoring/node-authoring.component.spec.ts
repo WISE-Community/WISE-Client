@@ -4,7 +4,6 @@ import { NodeAuthoringComponent } from './node-authoring.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CopyComponentService } from '../../../services/copyComponentService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InsertComponentService } from '../../../services/insertComponentService';
@@ -52,9 +51,7 @@ describe('NodeAuthoringComponent', () => {
       ],
       providers: [
         ClassroomStatusService,
-        CopyComponentService,
         ProjectAssetService,
-        InsertComponentService,
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService
