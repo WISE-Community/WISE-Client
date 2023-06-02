@@ -77,15 +77,13 @@ export class TopBarComponent {
     return this.newNotifications.length > 0;
   }
 
-  disableConstraints($event: any): void {
+  protected disableConstraints(): void {
     this.isConstraintsDisabled = true;
-    this.constraintService.activeConstraints = [];
-    this.studentDataService.updateNodeStatuses();
+    this.constraintService.clearActiveConstraints();
   }
 
-  hasConstraints(): boolean {
-    const activeConstraints = this.constraintService.activeConstraints;
-    return activeConstraints != null && activeConstraints.length > 0;
+  protected hasConstraints(): boolean {
+    return this.constraintService.hasActiveConstraints();
   }
 
   viewCurrentAmbientNotification($event: any): void {

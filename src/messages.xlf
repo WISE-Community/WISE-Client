@@ -10189,14 +10189,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>There are no changes to undo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">182</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5830582794567943525" datatype="html">
         <source>Are you sure you want to undo the last change?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">187</context>
+          <context context-type="linenumber">184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7035134055292483273" datatype="html">
@@ -10204,7 +10204,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">330</context>
+          <context context-type="linenumber">327</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5170405945214763287" datatype="html">
@@ -10212,21 +10212,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">331</context>
+          <context context-type="linenumber">328</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2190832726503337912" datatype="html">
         <source>You are not allowed to insert the selected item after itself.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">393</context>
+          <context context-type="linenumber">390</context>
         </context-group>
       </trans-unit>
       <trans-unit id="975312545937364411" datatype="html">
         <source>You are not allowed to insert the selected items after itself.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">395</context>
+          <context context-type="linenumber">392</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4199930238964775542" datatype="html">
