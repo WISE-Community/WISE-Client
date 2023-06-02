@@ -29,7 +29,6 @@ import { InitializeVLEService } from '../services/initializeVLEService';
 import { StudentTeacherCommonServicesModule } from '../../../app/student-teacher-common-services.module';
 import { PauseScreenService } from '../services/pauseScreenService';
 import { StudentNotificationService } from '../services/studentNotificationService';
-import { NodeClickLockedService } from '../services/nodeClickLockedService';
 
 let component: VLEComponent;
 let fixture: ComponentFixture<VLEComponent>;
@@ -68,7 +67,6 @@ describe('VLEComponent', () => {
       ],
       providers: [
         InitializeVLEService,
-        NodeClickLockedService,
         PauseScreenService,
         StudentNotificationService,
         VLEProjectService

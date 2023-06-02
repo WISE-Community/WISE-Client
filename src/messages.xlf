@@ -18850,27 +18850,6 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">573</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3178064088723974543" datatype="html">
-        <source>Sorry, you cannot view this item yet.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/nodeClickLockedService.ts</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="685273827497092928" datatype="html">
-        <source>&lt;p&gt;To visit &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt; you need to:&lt;/p&gt;&lt;ul&gt;</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/nodeClickLockedService.ts</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2738912629247967660" datatype="html">
-        <source>Item Locked</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/nodeClickLockedService.ts</context>
-          <context context-type="linenumber">36</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="1384916903989385807" datatype="html">
         <source>Notebook</source>
         <context-group purpose="location">
@@ -19117,28 +19096,49 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Preview Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1967824796880640028" datatype="html">
         <source>StudentDataService.saveComponentEvent: component, category, event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">253</context>
+          <context context-type="linenumber">251</context>
         </context-group>
       </trans-unit>
       <trans-unit id="944638387659785956" datatype="html">
         <source>StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">263</context>
+          <context context-type="linenumber">261</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4924640921903672943" datatype="html">
         <source>StudentDataService.saveVLEEvent: category and event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">272</context>
+          <context context-type="linenumber">270</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3178064088723974543" datatype="html">
+        <source>Sorry, you cannot view this item yet.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/studentNodeService.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="685273827497092928" datatype="html">
+        <source>&lt;p&gt;To visit &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt; you need to:&lt;/p&gt;&lt;ul&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/studentNodeService.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2738912629247967660" datatype="html">
+        <source>Item Locked</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/studentNodeService.ts</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8725215606116054825" datatype="html">
