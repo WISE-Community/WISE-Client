@@ -295,7 +295,7 @@
             color="primary"
             class="dynamic-component-button"
             [ngClass]="{ 'show-dynamic-component-button': componentsToIsExpanded[component.id] }"
-            (click)="copyComponent($event, i + 1, component)"
+            (click)="copyComponent($event, component)"
             matTooltip="Copy Component"
             matTooltipPosition="above"
             i18n-matTooltip

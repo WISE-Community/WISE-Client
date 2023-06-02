@@ -111,11 +111,7 @@ function copyComponent() {
       clickComponentHeader(component2.id);
       fixture.detectChanges();
       expect(teacherProjectService.idToNode[nodeId1].components).toEqual(node1Components);
-      confirmSpy.and.returnValue(true);
       clickComponentCopyButton(component2.id);
-      expect(confirmSpy).toHaveBeenCalledWith(
-        `Are you sure you want to copy this component?\n2. MultipleChoice`
-      );
       const components = teacherProjectService.idToNode[nodeId1].components;
       expect(components.length).toEqual(4);
       expect(components[0].id).toEqual(component1.id);

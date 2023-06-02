@@ -292,15 +292,9 @@ export class NodeAuthoringComponent implements OnInit {
     this.hideComponentAuthoring();
   }
 
-  protected copyComponent(event: any, componentNumber: number, component: ComponentContent): void {
+  protected copyComponent(event: any, component: ComponentContent): void {
     event.stopPropagation();
-    if (
-      confirm(
-        $localize`Are you sure you want to copy this component?\n${componentNumber}. ${component.type}`
-      )
-    ) {
-      this.handleCopyComponent([component.id], component.id);
-    }
+    this.handleCopyComponent([component.id], component.id);
   }
 
   protected deleteComponents(): void {
