@@ -31,20 +31,12 @@ export class StudentNodeService extends NodeService {
   }
 
   private showNodeLockedDialog(nodeId: string): void {
-    let message = $localize`Sorry, you cannot view this item yet.`;
     const node = this.projectService.getNodeById(nodeId);
     const constraints = this.constraintService.getConstraintsThatAffectNode(node);
-    if (constraints.length > 0) {
-      const nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
-      message = $localize`<p>To visit <b>${nodeTitle}</b> you need to:</p><ul>`;
-      this.constraintService.orderConstraints(constraints);
-      for (const constraint of constraints) {
-        if (!this.constraintService.evaluateConstraint(constraint)) {
-          message += `<li>${this.getConstraintMessage(constraint)}</li>`;
-        }
-      }
-      message += `</ul>`;
-    }
+    const message =
+      constraints.length > 0
+        ? this.getConstraintsMessage(nodeId, constraints)
+        : $localize`Sorry, you cannot view this item yet.`;
     this.dialog.open(DialogWithCloseComponent, {
       data: {
         content: message,
@@ -53,22 +45,28 @@ export class StudentNodeService extends NodeService {
     });
   }
 
+  private getConstraintsMessage(nodeId: string, constraints: Constraint[]): string {
+    const nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
+    let message = $localize`<p>To visit <b>${nodeTitle}</b> you need to:</p><ul>`;
+    this.constraintService.orderConstraints(constraints);
+    for (const constraint of constraints) {
+      if (!this.constraintService.evaluateConstraint(constraint)) {
+        message += `<li>${this.getConstraintMessage(constraint)}</li>`;
+      }
+    }
+    message += `</ul>`;
+    return message;
+  }
+
   /**
    * Get the message that describes how to disable the constraint
    * @param constraint the constraint that is preventing the student from going to the node
    * @returns the message to display to the student that describes how to disable the constraint
    */
   private getConstraintMessage(constraint: Constraint): string {
-    let message = '';
-    for (const criterion of constraint.removalCriteria) {
-      const criteriaMessage = this.projectService.getCriteriaMessage(criterion);
-      if (criteriaMessage != '') {
-        if (message != '') {
-          message += '<br/>';
-        }
-        message += criteriaMessage;
-      }
-    }
-    return message;
+    return constraint.removalCriteria
+      .map((criterion) => this.projectService.getCriteriaMessage(criterion))
+      .filter((message) => message != '')
+      .join('<br/>');
   }
 }
