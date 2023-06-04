@@ -267,22 +267,6 @@
           >
         </mat-checkbox>
         <ng-container *ngIf="!insertComponentMode && showComponentAuthoringViews">
-          <preview-component-button
-            [nodeId]="nodeId"
-            [componentId]="component.id"
-          ></preview-component-button>
-          <button
-            *ngIf="componentsToIsExpanded[component.id]"
-            mat-raised-button
-            color="primary"
-            class="top-button"
-            (click)="showComponentAdvancedAuthoring(component, $event)"
-            matTooltip="Advanced"
-            matTooltipPosition="above"
-            i18n-matTooltip
-          >
-            <mat-icon>build</mat-icon>
-          </button>
           <div
             class="component-expand-collapse-div"
             matTooltip="Click to expand/collapse"
@@ -290,10 +274,39 @@
             i18n-matTooltip
           ></div>
           <button
-            mat-raised-button
+            *ngIf="componentsToIsExpanded[component.id]"
+            mat-icon-button
             color="primary"
-            class="component-delete-button"
-            [ngClass]="{ 'component-delete-button-show': componentsToIsExpanded[component.id] }"
+            (click)="showComponentAdvancedAuthoring(component, $event)"
+            matTooltip="Advanced"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
+            <mat-icon>build</mat-icon>
+          </button>
+          <preview-component-button
+            class="dynamic-component-button"
+            [ngClass]="{ 'show-dynamic-component-button': componentsToIsExpanded[component.id] }"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></preview-component-button>
+          <button
+            mat-icon-button
+            color="primary"
+            class="dynamic-component-button"
+            [ngClass]="{ 'show-dynamic-component-button': componentsToIsExpanded[component.id] }"
+            (click)="copyComponent($event, component)"
+            matTooltip="Copy Component"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
+            <mat-icon>content_copy</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="primary"
+            class="dynamic-component-button"
+            [ngClass]="{ 'show-dynamic-component-button': componentsToIsExpanded[component.id] }"
             (click)="deleteComponent($event, i + 1, component)"
             matTooltip="Delete Component"
             matTooltipPosition="above"

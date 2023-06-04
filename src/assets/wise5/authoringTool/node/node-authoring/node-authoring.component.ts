@@ -4,10 +4,8 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { NotificationService } from '../../../services/notificationService';
 import { NodeService } from '../../../services/nodeService';
-import { InsertComponentService } from '../../../services/insertComponentService';
 import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
-import { CopyComponentService } from '../../../services/copyComponentService';
 import { Node } from '../../../common/Node';
 import { copy } from '../../../common/object/object';
 import { ComponentContent } from '../../../common/ComponentContent';
@@ -52,11 +50,9 @@ export class NodeAuthoringComponent implements OnInit {
 
   constructor(
     private configService: ConfigService,
-    private copyComponentService: CopyComponentService,
     private componentServiceLookupService: ComponentServiceLookupService,
     private componentTypeService: ComponentTypeService,
     private dialog: MatDialog,
-    private insertComponentService: InsertComponentService,
     private nodeService: NodeService,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService,
@@ -67,6 +63,7 @@ export class NodeAuthoringComponent implements OnInit {
   ngOnInit(): void {
     this.$state = this.upgrade.$injector.get('$state');
     this.nodeId = this.upgrade.$injector.get('$stateParams').nodeId;
+    this.node = this.projectService.getNode(this.nodeId);
     this.isGroupNode = this.projectService.isGroupNode(this.nodeId);
     this.teacherDataService.setCurrentNodeByNodeId(this.nodeId);
     this.nodeJson = this.projectService.getNodeById(this.nodeId);
@@ -292,6 +289,11 @@ export class NodeAuthoringComponent implements OnInit {
     this.hideComponentAuthoring();
   }
 
+  protected copyComponent(event: any, component: ComponentContent): void {
+    event.stopPropagation();
+    this.handleCopyComponent([component.id], component.id);
+  }
+
   protected deleteComponents(): void {
     this.scrollToTopOfPage();
     this.hideComponentAuthoring();
@@ -363,7 +365,7 @@ export class NodeAuthoringComponent implements OnInit {
     if (this.moveComponentMode) {
       this.handleMoveComponent();
     } else if (this.copyComponentMode) {
-      this.handleCopyComponent();
+      this.handleCopyComponent(this.getSelectedComponentIds());
     }
   }
 
@@ -371,7 +373,7 @@ export class NodeAuthoringComponent implements OnInit {
     if (this.moveComponentMode) {
       this.handleMoveComponent(componentId);
     } else if (this.copyComponentMode) {
-      this.handleCopyComponent(componentId);
+      this.handleCopyComponent(this.getSelectedComponentIds(), componentId);
     }
   }
 
@@ -406,16 +408,13 @@ export class NodeAuthoringComponent implements OnInit {
 
   /**
    * Copy components in this step.
+   * @param selectedComponentIds The ids of the components to copy.
    * @param componentId (optional) Put the copied components after this component id. If the
    * componentId is not provided, put the components at the beginning of the step.
    */
-  protected handleCopyComponent(componentId: string = null): void {
-    const selectedComponentIds = this.getSelectedComponentIds();
-    const newComponents = this.copyComponentService.copyComponents(
-      this.nodeId,
-      selectedComponentIds
-    );
-    this.insertComponentService.insertComponents(newComponents, this.nodeId, componentId);
+  protected handleCopyComponent(selectedComponentIds: string[], componentId: string = null): void {
+    const newComponents = this.node.copyComponents(selectedComponentIds);
+    this.node.insertComponents(newComponents, componentId);
     const componentsCopied = this.getComponentObjectsForEventData(selectedComponentIds);
     for (let c = 0; c < componentsCopied.length; c++) {
       const componentCopied = componentsCopied[c];
