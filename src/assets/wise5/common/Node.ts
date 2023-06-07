@@ -1,3 +1,4 @@
+import { ComponentContent } from './ComponentContent';
 import { TransitionLogic } from './TransitionLogic';
 import { copy } from './object/object';
 import { generateRandomKey } from './string/string';
@@ -139,5 +140,10 @@ export class Node {
     return insertAfterComponentId == null
       ? 0
       : this.components.findIndex((component) => component.id === insertAfterComponentId) + 1;
+  }
+
+  deleteComponent(componentId: string): ComponentContent {
+    const componentIndex = this.components.findIndex((component) => component.id === componentId);
+    return this.components.splice(componentIndex, 1)[0];
   }
 }

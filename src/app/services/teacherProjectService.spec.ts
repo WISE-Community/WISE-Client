@@ -44,7 +44,6 @@ describe('TeacherProjectService', () => {
   registerNewProject();
   isNodeIdUsed();
   isNodeIdToInsertTargetNotSpecified();
-  testDeleteComponent();
   testDeleteTransition();
   testGetNodeIdAfter();
   testCreateNodeAfter();
@@ -159,17 +158,6 @@ function isNodeIdToInsertTargetNotSpecified() {
     it('should return false for active nodes and groups', () => {
       expect(service.isNodeIdToInsertTargetNotSpecified('activeNodes')).toBeFalsy();
       expect(service.isNodeIdToInsertTargetNotSpecified('activeGroups')).toBeFalsy();
-    });
-  });
-}
-
-function testDeleteComponent() {
-  describe('deleteComponent', () => {
-    it('should delete the component from the node', () => {
-      service.setProject(demoProjectJSON);
-      expect(service.getComponent('node1', 'zh4h1urdys')).not.toBeNull();
-      service.deleteComponent('node1', 'zh4h1urdys');
-      expect(service.getComponent('node1', 'zh4h1urdys')).toBeNull();
     });
   });
 }

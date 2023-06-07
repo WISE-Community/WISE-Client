@@ -8,6 +8,7 @@ let node = new Node();
 
 describe('Node', () => {
   copyComponents();
+  deleteComponent();
   getNodeIcon();
   getNodeIdComponentIds();
   insertComponents();
@@ -17,13 +18,29 @@ describe('Node', () => {
 function copyComponents() {
   describe('copyComponents()', () => {
     it('should return a copy of the specified components with new ids', () => {
-      node = Object.assign(new Node(), {
-        components: [{ id: componentId1 }, { id: componentId2 }]
-      });
+      resetComponents();
       const copies = node.copyComponents([componentId1, componentId2]);
       expect(copies.length).toEqual(2);
       expect(copies[0].id).not.toEqual(componentId1);
       expect(copies[1].id).not.toEqual(componentId2);
+    });
+  });
+}
+
+function resetComponents() {
+  node = Object.assign(new Node(), {
+    components: [{ id: componentId1 }, { id: componentId2 }]
+  });
+}
+
+function deleteComponent() {
+  describe('deleteComponent()', () => {
+    it('should delete the component from the node and return the component', () => {
+      resetComponents();
+      const deletedComponent = node.deleteComponent(componentId1);
+      expect(deletedComponent.id).toEqual(componentId1);
+      expect(node.components.length).toEqual(1);
+      expect(node.components[0].id).toEqual(componentId2);
     });
   });
 }
