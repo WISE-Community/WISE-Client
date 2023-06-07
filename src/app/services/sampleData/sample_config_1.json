@@ -24,7 +24,8 @@
             "periodId": 1,
             "userIds": [6],
             "users": [{ "id": 6 }],
-            "periodName": "1"
+            "periodName": "1",
+            "username": "t t (tt0101)"
           }
         ],
         "sharedTeacherUserInfos": [
