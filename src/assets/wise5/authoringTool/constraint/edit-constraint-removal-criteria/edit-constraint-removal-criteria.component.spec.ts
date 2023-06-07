@@ -149,40 +149,51 @@ function nameChanged_BranchPathTaken() {
 }
 
 function nameChanged_ChoiceChosen() {
-  describe('nameChanged_ChoiceChosen()', () => {
-    describe('there are steps with and without Multiple Choice components', () => {
-      it('should only show the steps with Multiple Choice components', () => {
-        chooseSelectOptionByLabel('Removal Criteria Name', 'Choice Chosen');
-        clickSelectElement('Step');
-        expectOptions(['', nodeId1, nodeId2]);
-      });
-    });
+  choiceChosen_StepsWithAndWithoutMultipleChoice_ShouldOnlyShowStepsWithMultipleChoice();
+  choiceChosen_StepWithAndWithoutMultipleChoice_ShouldOnlyShowMultipleChoiceComponents();
+  choiceChosen_WithOneMultipleChoiceComponent_ShouldAutomaticallySelect();
+  choiceChosen_WithTwoMultipleChoiceComponents_ShouldNotAutomaticallySelect();
+}
 
-    describe('choose a step with and without Multiple Choice components', () => {
-      it('should only show the Multiple Choice components', () => {
-        chooseSelectOptionByLabel('Removal Criteria Name', 'Choice Chosen');
-        chooseSelectOptionByValue('Step', nodeId1);
-        clickSelectElement('Component');
-        expectOptions(['', componentId1]);
-      });
+function choiceChosen_StepsWithAndWithoutMultipleChoice_ShouldOnlyShowStepsWithMultipleChoice() {
+  describe('there are steps with and without Multiple Choice components', () => {
+    it('should only show the steps with Multiple Choice components', () => {
+      chooseSelectOptionByLabel('Removal Criteria Name', 'Choice Chosen');
+      clickSelectElement('Step');
+      expectOptions(['', nodeId1, nodeId2]);
     });
+  });
+}
 
-    describe('choose step with one Multiple Choice component', () => {
-      it('should automatically select the one Multiple Choice component', () => {
-        chooseSelectOptionByLabel('Removal Criteria Name', 'Choice Chosen');
-        chooseSelectOptionByValue('Step', nodeId1);
-        expectComponentIdToEqual(componentId1);
-        expectEmptyRemovalCriterialParamValue('choiceIds');
-      });
+function choiceChosen_StepWithAndWithoutMultipleChoice_ShouldOnlyShowMultipleChoiceComponents() {
+  describe('choose a step with and without Multiple Choice components', () => {
+    it('should only show the Multiple Choice components', () => {
+      chooseSelectOptionByLabel('Removal Criteria Name', 'Choice Chosen');
+      chooseSelectOptionByValue('Step', nodeId1);
+      clickSelectElement('Component');
+      expectOptions(['', componentId1]);
     });
+  });
+}
 
-    describe('choose step with two Multiple Choice components', () => {
-      it('should not automatically select a Multiple Choice compoennt', () => {
-        chooseSelectOptionByLabel('Removal Criteria Name', 'Choice Chosen');
-        chooseSelectOptionByValue('Step', nodeId2);
-        expectComponentIdToEqual('');
-        expectEmptyRemovalCriterialParamValue('choiceIds');
-      });
+function choiceChosen_WithOneMultipleChoiceComponent_ShouldAutomaticallySelect() {
+  describe('choose step with one Multiple Choice component', () => {
+    it('should automatically select the one Multiple Choice component', () => {
+      chooseSelectOptionByLabel('Removal Criteria Name', 'Choice Chosen');
+      chooseSelectOptionByValue('Step', nodeId1);
+      expectComponentIdToEqual(componentId1);
+      expectEmptyRemovalCriterialParamValue('choiceIds');
+    });
+  });
+}
+
+function choiceChosen_WithTwoMultipleChoiceComponents_ShouldNotAutomaticallySelect() {
+  describe('choose step with two Multiple Choice components', () => {
+    it('should not automatically select a Multiple Choice compoennt', () => {
+      chooseSelectOptionByLabel('Removal Criteria Name', 'Choice Chosen');
+      chooseSelectOptionByValue('Step', nodeId2);
+      expectComponentIdToEqual('');
+      expectEmptyRemovalCriterialParamValue('choiceIds');
     });
   });
 }
