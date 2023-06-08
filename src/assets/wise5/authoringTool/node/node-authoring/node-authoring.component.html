@@ -202,7 +202,7 @@
       <button
         mat-raised-button
         color="primary"
-        (click)="expandAllComponents()"
+        (click)="setAllComponentsIsExpanded(true)"
         [disabled]="getNumberOfComponentsExpanded() === components.length"
         i18n
       >
@@ -211,7 +211,7 @@
       <button
         mat-raised-button
         color="primary"
-        (click)="collapseAllComponents()"
+        (click)="setAllComponentsIsExpanded(false)"
         [disabled]="getNumberOfComponentsExpanded() === 0"
         i18n
       >

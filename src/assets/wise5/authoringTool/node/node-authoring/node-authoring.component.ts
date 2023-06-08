@@ -83,14 +83,14 @@ export class NodeAuthoringComponent implements OnInit {
         if (showSubmitButton) {
           this.nodeJson.showSaveButton = false;
           this.nodeJson.showSubmitButton = false;
-          this.projectService.turnOnSaveButtonForAllComponents(this.nodeJson);
+          this.setShowSaveButtonForAllComponents(this.nodeJson, true);
         } else {
           if (this.projectService.doesAnyComponentInNodeShowSubmitButton(this.nodeJson.id)) {
-            this.projectService.turnOnSaveButtonForAllComponents(this.nodeJson);
+            this.setShowSaveButtonForAllComponents(this.nodeJson, true);
           } else {
             this.nodeJson.showSaveButton = true;
             this.nodeJson.showSubmitButton = false;
-            this.projectService.turnOffSaveButtonForAllComponents(this.nodeJson);
+            this.setShowSaveButtonForAllComponents(this.nodeJson, false);
           }
         }
         this.authoringViewNodeChanged();
@@ -207,36 +207,20 @@ export class NodeAuthoringComponent implements OnInit {
     this.upgrade.$injector.get('$state').go('root.at.project.node.advanced');
   }
 
-  protected showComponentAuthoring(): void {
-    this.showComponentAuthoringViews = true;
+  protected setShowComponentAuthoringViews(showComponentAuthoringViews: boolean): void {
+    this.showComponentAuthoringViews = showComponentAuthoringViews;
   }
 
-  private hideComponentAuthoring(): void {
-    this.showComponentAuthoringViews = false;
+  private setInsertComponentMode(insertComponentMode: boolean): void {
+    this.insertComponentMode = insertComponentMode;
   }
 
-  private turnOnInsertComponentMode(): void {
-    this.insertComponentMode = true;
+  private setMoveComponentMode(moveComponentMode: boolean): void {
+    this.moveComponentMode = moveComponentMode;
   }
 
-  private turnOffInsertComponentMode(): void {
-    this.insertComponentMode = false;
-  }
-
-  private turnOnMoveComponentMode(): void {
-    this.moveComponentMode = true;
-  }
-
-  private turnOffMoveComponentMode(): void {
-    this.moveComponentMode = false;
-  }
-
-  private turnOnCopyComponentMode(): void {
-    this.copyComponentMode = true;
-  }
-
-  private turnOffCopyComponentMode(): void {
-    this.copyComponentMode = false;
+  private setCopyComponentMode(copyComponentMode: boolean): void {
+    this.copyComponentMode = copyComponentMode;
   }
 
   protected getSelectedComponentIds(): string[] {
@@ -277,16 +261,16 @@ export class NodeAuthoringComponent implements OnInit {
 
   protected moveButtonClicked(): void {
     this.showDefaultComponentsView();
-    this.turnOnMoveComponentMode();
-    this.turnOnInsertComponentMode();
-    this.hideComponentAuthoring();
+    this.setMoveComponentMode(true);
+    this.setInsertComponentMode(true);
+    this.setShowComponentAuthoringViews(false);
   }
 
   protected copyButtonClicked(): void {
     this.showDefaultComponentsView();
-    this.turnOnCopyComponentMode();
-    this.turnOnInsertComponentMode();
-    this.hideComponentAuthoring();
+    this.setCopyComponentMode(true);
+    this.setInsertComponentMode(true);
+    this.setShowComponentAuthoringViews(false);
   }
 
   protected copyComponent(event: any, component: ComponentContent): void {
@@ -296,15 +280,15 @@ export class NodeAuthoringComponent implements OnInit {
 
   protected deleteComponents(): void {
     this.scrollToTopOfPage();
-    this.hideComponentAuthoring();
+    this.setShowComponentAuthoringViews(false);
     if (this.confirmDeleteComponent(this.getSelectedComponentNumbersAndTypes())) {
       const componentIdAndTypes = this.getSelectedComponentIds()
         .map((componentId) => this.projectService.deleteComponent(this.nodeId, componentId))
         .map((component) => ({ componentId: component.id, type: component.type }));
       this.afterDeleteComponent(componentIdAndTypes);
     }
-    this.turnOffInsertComponentMode();
-    this.showComponentAuthoring();
+    this.setInsertComponentMode(false);
+    this.setShowComponentAuthoringViews(true);
   }
 
   protected deleteComponent(
@@ -342,10 +326,10 @@ export class NodeAuthoringComponent implements OnInit {
 
   protected cancelInsertClicked(): void {
     this.showDefaultComponentsView();
-    this.turnOffMoveComponentMode();
-    this.turnOffInsertComponentMode();
+    this.setMoveComponentMode(false);
+    this.setInsertComponentMode(false);
     this.clearComponentsToChecked();
-    this.showComponentAuthoring();
+    this.setShowComponentAuthoringViews(true);
   }
 
   private checkIfNeedToShowNodeSaveOrNodeSubmitButtons(): void {
@@ -398,7 +382,7 @@ export class NodeAuthoringComponent implements OnInit {
         componentsMoved: this.getComponentObjectsForEventData(selectedComponentIds)
       };
       this.saveEvent('componentMoved', 'Authoring', eventData);
-      this.turnOffMoveComponentMode();
+      this.setMoveComponentMode(false);
       this.highlightNewComponentsAndThenShowComponentAuthoring(
         selectedComponentIds.map((componentId) => ({ id: componentId })),
         false
@@ -427,7 +411,7 @@ export class NodeAuthoringComponent implements OnInit {
       componentsCopied: componentsCopied
     };
     this.saveEvent('componentCopied', 'Authoring', data);
-    this.turnOffCopyComponentMode();
+    this.setCopyComponentMode(false);
     this.projectService.saveProject();
     this.highlightNewComponentsAndThenShowComponentAuthoring(newComponents);
   }
@@ -442,8 +426,8 @@ export class NodeAuthoringComponent implements OnInit {
     newComponents: any = [],
     expandComponents: boolean = true
   ): void {
-    this.showComponentAuthoring();
-    this.turnOffInsertComponentMode();
+    this.setShowComponentAuthoringViews(true);
+    this.setInsertComponentMode(false);
     this.showDefaultComponentsView();
     this.clearComponentsToChecked();
 
@@ -534,19 +518,21 @@ export class NodeAuthoringComponent implements OnInit {
     this.componentsToIsExpanded[componentId] = !this.componentsToIsExpanded[componentId];
   }
 
-  protected expandAllComponents(): void {
-    for (const component of this.components) {
-      this.componentsToIsExpanded[component.id] = true;
-    }
-  }
-
-  protected collapseAllComponents(): void {
-    for (const component of this.components) {
-      this.componentsToIsExpanded[component.id] = false;
-    }
+  protected setAllComponentsIsExpanded(isExpanded: boolean): void {
+    this.components.forEach((component) => {
+      this.componentsToIsExpanded[component.id] = isExpanded;
+    });
   }
 
   protected getNumberOfComponentsExpanded(): number {
     return Object.values(this.componentsToIsExpanded).filter((value) => value).length;
+  }
+
+  private setShowSaveButtonForAllComponents(node: Node, showSaveButton: boolean): void {
+    node.components
+      .filter((component) =>
+        this.componentServiceLookupService.getService(component.type).componentUsesSaveButton()
+      )
+      .forEach((component) => (component.showSaveButton = showSaveButton));
   }
 }

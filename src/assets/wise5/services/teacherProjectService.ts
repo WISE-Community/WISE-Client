@@ -652,24 +652,6 @@ export class TeacherProjectService extends ProjectService {
     return this.idToNode;
   }
 
-  turnOnSaveButtonForAllComponents(node) {
-    for (const component of node.components) {
-      const service = this.componentServiceLookupService.getService(component.type);
-      if (service.componentUsesSaveButton()) {
-        component.showSaveButton = true;
-      }
-    }
-  }
-
-  turnOffSaveButtonForAllComponents(node) {
-    for (const component of node.components) {
-      const service = this.componentServiceLookupService.getService(component.type);
-      if (service.componentUsesSaveButton()) {
-        component.showSaveButton = false;
-      }
-    }
-  }
-
   checkPotentialStartNodeIdChangeThenSaveProject() {
     this.checkPotentialStartNodeIdChange();
     return this.saveProject();

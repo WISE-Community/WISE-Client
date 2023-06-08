@@ -10204,7 +10204,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">327</context>
+          <context context-type="linenumber">311</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5170405945214763287" datatype="html">
@@ -10212,21 +10212,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">328</context>
+          <context context-type="linenumber">312</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2190832726503337912" datatype="html">
         <source>You are not allowed to insert the selected item after itself.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">390</context>
+          <context context-type="linenumber">374</context>
         </context-group>
       </trans-unit>
       <trans-unit id="975312545937364411" datatype="html">
         <source>You are not allowed to insert the selected items after itself.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">392</context>
+          <context context-type="linenumber">376</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4199930238964775542" datatype="html">
@@ -16284,46 +16284,46 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Are you sure you want to overwrite the current line data?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">236</context>
+          <context context-type="linenumber">233</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6882380861047606832" datatype="html">
         <source>The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1079</context>
+          <context context-type="linenumber">848</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2852989551014711458" datatype="html">
         <source>You can not edit this series. Please choose a series that can be edited.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1093</context>
+          <context context-type="linenumber">862</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7053114367342967943" datatype="html">
         <source>Are you sure you want to reset the series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1326</context>
+          <context context-type="linenumber">1095</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7889560203726829643" datatype="html">
         <source>Are you sure you want to reset the &quot;<x id="PH" equiv-text="seriesName"/>&quot; series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1328</context>
+          <context context-type="linenumber">1097</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6999515396807067782" datatype="html">
         <source>Trial</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1826</context>
+          <context context-type="linenumber">1595</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">2650</context>
+          <context context-type="linenumber">2419</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9070768663485888935" datatype="html">
@@ -19252,42 +19252,42 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>All steps after this one will not be visitable until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">998</context>
+          <context context-type="linenumber">980</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5548702737138673668" datatype="html">
         <source>All steps after this one will not be visible until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">1001</context>
+          <context context-type="linenumber">983</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3112051127445790513" datatype="html">
         <source>All other steps will not be visitable until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">1004</context>
+          <context context-type="linenumber">986</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2264443134334419091" datatype="html">
         <source>All other steps will not be visible until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">1007</context>
+          <context context-type="linenumber">989</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6819040711904864999" datatype="html">
         <source>This step will not be visitable until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">1010</context>
+          <context context-type="linenumber">992</context>
         </context-group>
       </trans-unit>
       <trans-unit id="816962217622004346" datatype="html">
         <source>This step will not be visible until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">1013</context>
+          <context context-type="linenumber">995</context>
         </context-group>
       </trans-unit>
       <trans-unit id="846fecebb7756c6127955bc2c08d2111dce64c3c" datatype="html">
