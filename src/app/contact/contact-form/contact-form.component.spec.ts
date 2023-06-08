@@ -144,37 +144,45 @@ describe('ContactFormComponent', () => {
   submit();
 });
 
-function submit() {
+function submit(): void {
   describe('submit()', () => {
-    it('should show error message', async () => {
-      const httpPostSpy = httpPostSpyAndReturn('error');
-      await submitAndDetectChanges();
-      expect(httpPostSpy).toHaveBeenCalled();
-      expect(getErrorMessage()).toContain(
-        'Sorry, there was a problem submitting the form. Please try again.'
-      );
-    });
+    submit_showErrorMessage();
+    submit_showRecaptchaErrorMessage();
+    submit_showSuccess();
+  });
+}
 
-    it('should show recaptcha error message', async () => {
-      isRecaptchaEnabledSpy.and.returnValue(true);
-      component.ngOnInit();
-      spyOn(recaptchaV3Service, 'execute').and.returnValue(of('generated-token'));
-      const httpPostSpy = httpPostSpyAndReturn('error');
-      await submitAndDetectChanges();
-      expect(httpPostSpy).toHaveBeenCalled();
-      expect(getErrorMessage()).toContain(
-        'Recaptcha failed. Please reload the page and try again!'
-      );
-    });
+function submit_showErrorMessage(): void {
+  it('should show error message', async () => {
+    const httpPostSpy = httpPostSpyAndReturn('error');
+    await submitAndDetectChanges();
+    expect(httpPostSpy).toHaveBeenCalled();
+    expect(getErrorMessage()).toContain(
+      'Sorry, there was a problem submitting the form. Please try again.'
+    );
+  });
+}
 
-    it('should successfully submit', async () => {
-      const httpPostSpy = httpPostSpyAndReturn('success');
-      await submitAndDetectChanges();
-      expect(httpPostSpy).toHaveBeenCalled();
-      expect(fixture.nativeElement.textContent).toContain(
-        'Your message has been sent. We will get back to you as soon as possible.'
-      );
-    });
+function submit_showRecaptchaErrorMessage(): void {
+  it('should show recaptcha error message', async () => {
+    isRecaptchaEnabledSpy.and.returnValue(true);
+    component.ngOnInit();
+    spyOn(recaptchaV3Service, 'execute').and.returnValue(of('generated-token'));
+    const httpPostSpy = httpPostSpyAndReturn('error');
+    await submitAndDetectChanges();
+    expect(httpPostSpy).toHaveBeenCalled();
+    expect(getErrorMessage()).toContain('Recaptcha failed. Please reload the page and try again!');
+  });
+}
+
+function submit_showSuccess(): void {
+  it('should successfully submit', async () => {
+    const httpPostSpy = httpPostSpyAndReturn('success');
+    await submitAndDetectChanges();
+    expect(httpPostSpy).toHaveBeenCalled();
+    expect(fixture.nativeElement.textContent).toContain(
+      'Your message has been sent. We will get back to you as soon as possible.'
+    );
   });
 }
 
