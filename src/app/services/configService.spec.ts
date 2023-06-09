@@ -83,9 +83,7 @@ function retrieveConfig() {
 function sortTheClassmatesAlphabeticallyByNameWhenSettingConfig() {
   it('should sort the classmates alphabetically by name when setting config', () => {
     const classmateUserInfos = sampleConfig1.userInfo.myUserInfo.myClassInfo.classmateUserInfos;
-    spyOn(service, 'sortClassmateUserInfosAlphabeticallyByNameHelper').and.callThrough();
     service.setConfig(sampleConfig1);
-    expect(service.sortClassmateUserInfosAlphabeticallyByNameHelper).toHaveBeenCalled();
     expect(classmateUserInfos[0].workgroupId).toEqual(8);
     expect(classmateUserInfos[1].workgroupId).toEqual(3);
   });

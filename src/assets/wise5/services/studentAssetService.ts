@@ -6,6 +6,7 @@ import { ConfigService } from './configService';
 import { Observable, Subject } from 'rxjs';
 import { StudentAssetRequest } from '../vle/studentAsset/StudentAssetRequest';
 import { isAudio, isImage } from '../common/file/file';
+import { Component } from '../common/Component';
 
 @Injectable()
 export class StudentAssetService {
@@ -205,11 +206,10 @@ export class StudentAssetService {
     }
   }
 
-  broadcastAttachStudentAsset(nodeId: string, componentId: string, asset: any): void {
+  broadcastAttachStudentAsset(component: Component, asset: any): void {
     this.attachStudentAssetSource.next({
-      nodeId: nodeId,
-      componentId: componentId,
-      asset: asset
+      asset: asset,
+      component: component
     });
   }
 }

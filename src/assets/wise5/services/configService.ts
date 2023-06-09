@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { isMatchingPeriods } from '../common/period/period';
 import { millisecondsToDateTime } from '../common/datetime/datetime';
+import { usernameComparator } from '../common/user/user';
 
 @Injectable()
 export class ConfigService {
@@ -358,22 +359,9 @@ export class ConfigService {
   sortClassmateUserInfosAlphabeticallyByName() {
     const classmateUserInfos = this.getClassmateUserInfos();
     if (classmateUserInfos != null) {
-      classmateUserInfos.sort(this.sortClassmateUserInfosAlphabeticallyByNameHelper);
+      classmateUserInfos.sort(usernameComparator);
     }
     return classmateUserInfos;
-  }
-
-  sortClassmateUserInfosAlphabeticallyByNameHelper(a, b) {
-    if (a != null && a.username != null && b != null && b.username != null) {
-      const aUsername = a.username.toLowerCase();
-      const bUsername = b.username.toLowerCase();
-      if (aUsername < bUsername) {
-        return -1;
-      } else if (aUsername > bUsername) {
-        return 1;
-      }
-    }
-    return 0;
   }
 
   getPermissions() {

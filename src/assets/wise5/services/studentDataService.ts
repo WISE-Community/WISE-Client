@@ -23,8 +23,6 @@ export class StudentDataService extends DataService {
     annotations: []
   };
 
-  private nodeClickLockedSource: Subject<any> = new Subject<any>();
-  public nodeClickLocked$: Observable<any> = this.nodeClickLockedSource.asObservable();
   private componentDirtySource: Subject<boolean> = new Subject<boolean>();
   public componentDirty$: Observable<any> = this.componentDirtySource.asObservable();
   private componentSaveTriggeredSource: Subject<boolean> = new Subject<boolean>();
@@ -634,14 +632,6 @@ export class StudentDataService extends DataService {
 
   isNodeExistAndActive(nodeId) {
     return this.ProjectService.getNodeById(nodeId) != null && this.ProjectService.isActive(nodeId);
-  }
-
-  nodeClickLocked(nodeId: string): void {
-    this.broadcastNodeClickLocked({ nodeId: nodeId });
-  }
-
-  broadcastNodeClickLocked(args: any) {
-    this.nodeClickLockedSource.next(args);
   }
 
   getTotalScore() {

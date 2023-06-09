@@ -29,7 +29,6 @@ import { StudentNotificationService } from '../../../assets/wise5/services/stude
 import { NotificationService } from '../../../assets/wise5/services/notificationService';
 import { VLEParentComponent } from '../../../assets/wise5/vle/vle-parent/vle-parent.component';
 import { RunEndedAndLockedMessageComponent } from '../../../assets/wise5/vle/run-ended-and-locked-message/run-ended-and-locked-message.component';
-import { NodeClickLockedService } from '../../../assets/wise5/services/nodeClickLockedService';
 import { NodeNavigationComponent } from '../../../assets/wise5/directives/node-navigation/node-navigation.component';
 import { GroupTabsComponent } from '../../../assets/wise5/directives/group-tabs/group-tabs.component';
 import { StudentPeerGroupService } from '../../../assets/wise5/services/studentPeerGroupService';
@@ -64,7 +63,6 @@ import { PeerGroupService } from '../../../assets/wise5/services/peerGroupServic
   ],
   providers: [
     InitializeVLEService,
-    NodeClickLockedService,
     PauseScreenService,
     { provide: DataService, useExisting: StudentDataService },
     { provide: NotificationService, useExisting: StudentNotificationService },

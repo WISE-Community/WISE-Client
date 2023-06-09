@@ -8,6 +8,7 @@ import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
 import { GraphService } from '../graphService';
+import { isMultipleYAxes } from '../util';
 
 @Component({
   selector: 'graph-authoring',
@@ -140,15 +141,11 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.enableMultipleYAxes = this.isMultipleYAxesEnabled();
+    this.enableMultipleYAxes = isMultipleYAxes(this.componentContent.yAxis);
     if (this.enableMultipleYAxes) {
       this.numYAxes = this.componentContent.yAxis.length;
     }
     this.addAnyMissingYAxisFieldsToAllYAxes(this.componentContent.yAxis);
-  }
-
-  isMultipleYAxesEnabled(): boolean {
-    return Array.isArray(this.componentContent.yAxis);
   }
 
   addSeriesClicked(): void {
@@ -484,7 +481,7 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
   }
 
   addAnyMissingYAxisFieldsToAllYAxes(yAxis: any): void {
-    if (this.GraphService.isMultipleYAxes(yAxis)) {
+    if (isMultipleYAxes(yAxis)) {
       yAxis.forEach((yAxis) => this.addAnyMissingYAxisFields(yAxis));
     } else {
       this.addAnyMissingYAxisFields(yAxis);

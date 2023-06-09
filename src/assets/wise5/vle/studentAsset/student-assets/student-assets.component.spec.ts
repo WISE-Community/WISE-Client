@@ -1,10 +1,10 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StudentAssetsComponent } from './student-assets.component';
-import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComponentContent } from '../../../common/ComponentContent';
+import { Component } from '../../../common/Component';
 
 describe('StudentAssetsComponent', () => {
   let component: StudentAssetsComponent;
@@ -28,6 +28,7 @@ describe('StudentAssetsComponent', () => {
     assetFile1 = createAssetFile(fileName1, filePath1);
     assetFile2 = createAssetFile(fileName2, filePath2);
     component = fixture.componentInstance;
+    component.component = new Component({ type: 'Draw' } as ComponentContent, 'node1');
     fixture.detectChanges();
   });
 
@@ -40,27 +41,22 @@ describe('StudentAssetsComponent', () => {
 
   it('should upload student assets', fakeAsync(() => {
     const uploadAssetSpy = spyOnUploadAsset();
-    const getComponentSpy = spyOnGetComponent('Draw');
     const files = [assetFile1, assetFile2];
     component.uploadStudentAssets(files);
     tick();
     expect(uploadAssetSpy).toHaveBeenCalledTimes(2);
-    expect(getComponentSpy).toHaveBeenCalledTimes(2);
   }));
 
-  it('should attach student asset', () => {
-    const getComponentSpy = spyOnGetComponent('Draw');
+  it('should attach student asset if component accepts assets', () => {
     const broadcastAttachStudentAssetSpy = spyOnBroadcastAttachStudentAsset();
     component.attachStudentAsset(assetFile1);
-    expect(getComponentSpy).toHaveBeenCalled();
     expect(broadcastAttachStudentAssetSpy).toHaveBeenCalled();
   });
 
-  it('should not attach student asset', () => {
-    const getComponentSpy = spyOnGetComponent('MultipleChoice');
+  it('should not attach student asset if component does not accept assets', () => {
+    component.component = new Component({ type: 'MultipleChoice' } as ComponentContent, 'node1');
     const broadcastAttachStudentAssetSpy = spyOnBroadcastAttachStudentAsset();
     component.attachStudentAsset(assetFile1);
-    expect(getComponentSpy).toHaveBeenCalled();
     expect(broadcastAttachStudentAssetSpy).not.toHaveBeenCalled();
   });
 
@@ -68,12 +64,6 @@ describe('StudentAssetsComponent', () => {
     return spyOn(TestBed.inject(StudentAssetService), 'uploadAsset').and.returnValue(
       Promise.resolve({})
     );
-  }
-
-  function spyOnGetComponent(componentType: string) {
-    return spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
-      type: componentType
-    } as ComponentContent);
   }
 
   function spyOnBroadcastAttachStudentAsset() {
