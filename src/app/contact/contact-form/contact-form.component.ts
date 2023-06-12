@@ -256,7 +256,7 @@ export class ContactFormComponent implements OnInit {
     this.router.navigate(['contact/complete', {}]);
   }
 
-  async getRecaptchaResponse(): Promise<string> {
+  private async getRecaptchaResponse(): Promise<string> {
     return this.configService.isRecaptchaEnabled()
       ? await lastValueFrom(this.recaptchaV3Service.execute('importantAction'))
       : '';
