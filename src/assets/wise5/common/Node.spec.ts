@@ -4,9 +4,13 @@ const componentId1 = 'c1';
 const componentId2 = 'c2';
 const componentId3 = 'c3';
 const componentId4 = 'c4';
-let node = new Node();
+let node: Node;
 
 describe('Node', () => {
+  beforeEach(() => {
+    node = new Node();
+    node.components = [{ id: componentId1 }, { id: componentId2 }];
+  });
   copyComponents();
   deleteComponent();
   getNodeIcon();
@@ -18,7 +22,6 @@ describe('Node', () => {
 function copyComponents() {
   describe('copyComponents()', () => {
     it('should return a copy of the specified components with new ids', () => {
-      resetComponents();
       const copies = node.copyComponents([componentId1, componentId2]);
       expect(copies.length).toEqual(2);
       expect(copies[0].id).not.toEqual(componentId1);
@@ -27,16 +30,9 @@ function copyComponents() {
   });
 }
 
-function resetComponents() {
-  node = Object.assign(new Node(), {
-    components: [{ id: componentId1 }, { id: componentId2 }]
-  });
-}
-
 function deleteComponent() {
   describe('deleteComponent()', () => {
     it('should delete the component from the node and return the component', () => {
-      resetComponents();
       const deletedComponent = node.deleteComponent(componentId1);
       expect(deletedComponent.id).toEqual(componentId1);
       expect(node.components.length).toEqual(1);
@@ -54,7 +50,7 @@ function getNodeIcon() {
 
 function getNodeIcon_noIconSpecified_returnDefaultIcon() {
   it('should return default icon if icon is not set', () => {
-    const icon = new Node().getIcon();
+    const icon = node.getIcon();
     expect(icon.color).toEqual('#757575');
     expect(icon.type).toEqual('font');
   });
@@ -62,7 +58,6 @@ function getNodeIcon_noIconSpecified_returnDefaultIcon() {
 
 function getNodeIcon_iconSpecified_returnMergedIcon() {
   it('should return merged icon if an icon is set', () => {
-    const node = new Node();
     node.icons = {
       default: {
         color: 'rgba(0,1,1,0)',
@@ -90,12 +85,6 @@ function getNodeIdComponentIds() {
 
 function insertComponents() {
   describe('insertComponents()', () => {
-    beforeEach(() => {
-      node = Object.assign(new Node(), {
-        components: [{ id: componentId1 }, { id: componentId2 }]
-      });
-    });
-
     it('should insert components at the beginning of the node', () => {
       node.insertComponents([{ id: componentId3 }, { id: componentId4 }], null);
       expectComponentsMatchIds(node.components, [
