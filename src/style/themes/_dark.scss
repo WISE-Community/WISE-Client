@@ -84,41 +84,14 @@ $dark: mat.define-dark-theme((
 
 // custom background and foreground palettes for this theme
 $dark-theme-background: (
-  status-bar: black,
   app-bar:    #333333,
-  background: #303030,
-  hover:      rgba(white, 0.04),
-  card:       map.get($mat-grey, 800),
-  dialog:     map.get($mat-grey, 800),
-  disabled-button: rgba(white, 0.12),
-  raised-button: map.get($mat-grey, 800),
-  // focused-button: $light-focused,
-  selected-button: map.get($mat-grey, 900),
-  selected-disabled-button: map.get($mat-grey, 800),
-  disabled-button-toggle: black,
-  unselected-chip: map.get($mat-grey, 700),
-  disabled-list-option: black,
-  tooltip: map.get($mat-grey, 700)
 );
 
-$dark-theme-foreground: (
-  base:              white,
-  divider:           rgba(white, 0.12),
-  dividers:          rgba(white, 0.12),
-  disabled:          rgba(white, 0.5),
-  disabled-button:   rgba(white, 0.3),
-  disabled-text:     rgba(white, 0.5),
-  hint-text:         rgba(white, 0.5),
-  secondary-text:    rgba(white, 0.7),
-  icon:              white,
-  icons:             white,
-  text:              white,
-  slider-min:        white,
-  slider-off:        rgba(white, 0.3),
-  slider-off-active: rgba(white, 0.3)
-);
-
-$dark-theme: map.merge($dark, (background: $dark-theme-background, foreground: $dark-theme-foreground));;
+$dark-theme: map.deep-merge($dark, (
+  'color': (
+    'background': $dark-theme-background,
+  ),
+));
 
 // get theme color variables
 $foreground: map.get($dark-theme, foreground);

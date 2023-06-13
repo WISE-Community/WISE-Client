@@ -106,22 +106,13 @@ $author-theme-background: (
   status-bar: map.get($mat-grey, 400),
   app-bar:    map.get($mat-grey, 300),
   background: map.get($mat-grey, 100),
-  hover:      rgba(black, 0.04), // TODO(kara): check style with Material Design UX
-  card:       white,
-  dialog:     white,
-  disabled-button: rgba(black, 0.12),
-  raised-button: white,
-  //focused-button: $dark-focused,
-  focused-button: rgba(black, 0.12),
-  selected-button: map.get($mat-grey, 300),
-  selected-disabled-button: map.get($mat-grey, 400),
-  disabled-button-toggle: map.get($mat-grey, 200),
-  unselected-chip: map.get($mat-grey, 300),
-  disabled-list-option: map.get($mat-grey, 200),
-  tooltip: map.get($mat-grey, 700)
 );
 
-$author-theme: map.merge($author, (background: $author-theme-background));
+$author-theme: map.deep-merge($author, (
+  'color': (
+    'background': $author-theme-background,
+  ),
+));
 
 // get theme color variables
 $foreground: map.get($author-theme, foreground);
