@@ -88,4 +88,5 @@
 .dark-theme {
   @include mat.all-component-colors($dark-theme);
   @include theme-setup($dark-theme, $dark-colors);
+  color: white;
 }

@@ -10,13 +10,13 @@
 
   h1 {
     .mat-icon {
-      @include mat-icon-size(mat.font-size($wise-typography, 'headline-5'));
+      @include mat-icon-size(mat.font-size($wise-typography, 'headline-1'));
     }
   }
 
   h2 {
     .mat-icon {
-      @include mat-icon-size(mat.font-size($wise-typography, 'headline-6'));
+      @include mat-icon-size(mat.font-size($wise-typography, 'headline-2'));
     }
   }
 
@@ -24,7 +24,7 @@
       margin-bottom: 36px;
 
     .mat-icon {
-      @include mat-icon-size(mat.font-size($wise-typography, 'subtitle-2'));
+      @include mat-icon-size(mat.font-size($wise-typography, 'headline-4'));
     }
   }
 
@@ -32,7 +32,7 @@
     margin-bottom: 40px;
 
     .mat-icon {
-      @include mat-icon-size(mat.font-size($wise-typography, 'subtitle-1'));
+      @include mat-icon-size(mat.font-size($wise-typography, 'headline-3'));
     }
   }
 
@@ -44,6 +44,8 @@
 
   .mat-mdc-button, .mat-mdc-raised-button, .mat-mdc-unelevated-button, .mat-mdc-outlined-button {
     min-width: 0;
+    text-transform: uppercase;
+    font-weight: 600;
   }
 
   .mat-mdc-raised-button, .mat-mdc-fab, .mat-mdc-mini-fab {
