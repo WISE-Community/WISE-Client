@@ -1,4 +1,4 @@
-@import '@angular/material/theming';
+@use '@angular/material' as mat;
 
 .mat-mdc-button, .mat-mdc-raised-button, .mat-mdc-unelevated-button, .mat-mdc-outlined-button {
   text-transform: uppercase;
@@ -19,7 +19,7 @@
 .mat-mdc-raised-button {
   &:not(.mat-mdc-icon-button) {
     &:not([class*=mat-elevation-z]) {
-      @include mat-elevation(3);
+      @include mat.elevation(3);
     }
   }
 }
@@ -40,7 +40,7 @@
 
   &:hover, &:focus {
     outline: none;
-    @include mat-elevation(8);
+    @include mat.elevation(8);
   }
 }
 

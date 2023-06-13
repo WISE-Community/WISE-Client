@@ -1,13 +1,10 @@
-strong, b {
-  font-weight: 500;
-}
+@use '@angular/material' as mat;
 
-a {
-  text-decoration: none;
-
-  &:not(.mat-mdc-button):not(.mat-mdc-raised-button):not(.mat-mdc-menu-item):not(.mat-mdc-unelevated-button):not(.mat-mdc-outlined-button):not(.mat-mdc-tab-link) {
-    &:hover, &:focus {
-      text-decoration: underline;
-    }
-  }
-}
+$wise-typography: mat.define-typography-config(
+  $headline-5: mat.define-typography-level(24px, 32px, 500),
+  $subtitle-1: mat.define-typography-level(17px, 24px, 400),
+  $subtitle-2: mat.define-typography-level(17px, 24px, 500),
+  $body-1: mat.define-typography-level(16px, 22px, 400),
+  $body-2: mat.define-typography-level(16px, 22px, 500),
+  $caption: mat.define-typography-level(14px, 20px, 400),
+);

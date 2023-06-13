@@ -1,7 +1,8 @@
-@import '@angular/material/theming';
+@use '@angular/material' as mat;
+@import '../../../style/base/typography';
 
 // Create a config with the default typography levels.
-$config: mat-typography-config();
+$typography: mat.define-typography-config();
 
 .mobile-menu {
   width: 300px;
@@ -17,5 +18,5 @@ $config: mat-typography-config();
 a {
   text-transform: none;
   text-align: start;
-  font-size: mat-font-size($config, subheading-2);
+  font-size: mat.font-size($wise-typography, 'subtitle-2');
 }

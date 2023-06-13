@@ -1,4 +1,7 @@
 
+@use '@angular/material' as mat;
+@use '../../style/base/typography';
+
 /* TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version. */
 mat-dialog-container.mat-mdc-dialog-container {
   max-width: 100%;
@@ -7,7 +10,7 @@ mat-dialog-container.mat-mdc-dialog-container {
   .mat-mdc-dialog-content {
     margin: 0 -16px;
     padding: 0 16px;
-    font-size: mat-font-size($config, body-1);
+    font-size: mat.font-size($wise-typography, 'body-1');
   }
 
   .dialog-content-scroll {

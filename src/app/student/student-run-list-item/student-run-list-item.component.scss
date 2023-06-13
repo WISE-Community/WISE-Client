@@ -1,4 +1,6 @@
+@use '@angular/material' as mat;
 @import
+  'style/base/typography',
   'style/abstracts/variables',
   'style/abstracts/functions';
 
@@ -17,7 +19,7 @@
   margin-bottom: 6px;
 
   @media (max-width: breakpoint('xs.max')) {
-    @include mat-typography-level-to-styles($config, body-1);
+    @include mat.typography-level($wise-typography, 'body-1');
     font-weight: 500;
     margin-bottom: 0;
   }
