@@ -1934,6 +1934,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">117,120</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
+          <context context-type="linenumber">51,55</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
           <context context-type="linenumber">152,155</context>
         </context-group>
@@ -2518,7 +2522,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">57,61</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
@@ -2552,6 +2556,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.html</context>
           <context context-type="linenumber">29,33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
+          <context context-type="linenumber">44,48</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
@@ -2607,7 +2615,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">19,22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.html</context>
@@ -3001,7 +3009,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">32,35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit/edit.component.html</context>
@@ -4838,35 +4846,28 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Sign in to WISE</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cf89cf2c175e2a0a3bf631094e463210e1ee54e9" datatype="html">
         <source> Username and password not recognized. Please try again. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">5,7</context>
+          <context context-type="linenumber">6,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="336c793a83fa2b4ec5409abd6a156b1bed182521" datatype="html">
         <source> There was an error saving data. Please log in again. You may need to re-do your recent work. We apologize for the inconvenience. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">13,16</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1ef5bd5470fff28fcb0082392b207b5e7ef5a48d" datatype="html">
-        <source> Please try again and verify that you are not a robot. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">22,24</context>
+          <context context-type="linenumber">14,18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d745a22ae7b825b146ca8185126c482597f1d485" datatype="html">
         <source>Sign in with Google</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">71,75</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-google-user-already-exists/register-google-user-already-exists.component.html</context>
@@ -4885,14 +4886,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Forgot username or password?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="linenumber">78,79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c6c31f501feef87ab274bd3a000b99eeb7434cff" datatype="html">
         <source>New to WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Join for free!<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">79,80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="acd82db1a5e5f81b87f6a6b1639f028a4d106d49" datatype="html">
