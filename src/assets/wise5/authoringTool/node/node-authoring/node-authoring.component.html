@@ -90,7 +90,7 @@
           mat-raised-button
           color="primary"
           class="top-button"
-          (click)="deleteButtonClicked()"
+          (click)="deleteComponents()"
           [disabled]="!isAnyComponentSelected || insertComponentMode"
           matTooltip="Delete Component"
           matTooltipPosition="above"
@@ -202,7 +202,7 @@
       <button
         mat-raised-button
         color="primary"
-        (click)="expandAllComponents()"
+        (click)="setAllComponentsIsExpanded(true)"
         [disabled]="getNumberOfComponentsExpanded() === components.length"
         i18n
       >
@@ -211,7 +211,7 @@
       <button
         mat-raised-button
         color="primary"
-        (click)="collapseAllComponents()"
+        (click)="setAllComponentsIsExpanded(false)"
         [disabled]="getNumberOfComponentsExpanded() === 0"
         i18n
       >
@@ -257,7 +257,7 @@
           color="primary"
           [(ngModel)]="componentsToChecked[component.id]"
           [disabled]="insertComponentMode"
-          (change)="componentCheckboxChanged()"
+          (change)="updateIsAnyComponentSelected()"
           (click)="componentCheckboxClicked($event)"
           aria-label="Select component"
           i18n-aria-label
@@ -267,15 +267,16 @@
           >
         </mat-checkbox>
         <ng-container *ngIf="!insertComponentMode && showComponentAuthoringViews">
-          <preview-component-button
-            [nodeId]="nodeId"
-            [componentId]="component.id"
-          ></preview-component-button>
+          <div
+            class="component-expand-collapse-div"
+            matTooltip="Click to expand/collapse"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          ></div>
           <button
             *ngIf="componentsToIsExpanded[component.id]"
-            mat-raised-button
+            mat-icon-button
             color="primary"
-            class="top-button"
             (click)="showComponentAdvancedAuthoring(component, $event)"
             matTooltip="Advanced"
             matTooltipPosition="above"
@@ -283,16 +284,38 @@
           >
             <mat-icon>build</mat-icon>
           </button>
+          <preview-component-button
+            class="dynamic-component-button"
+            [ngClass]="{ 'show-dynamic-component-button': componentsToIsExpanded[component.id] }"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+          ></preview-component-button>
+          <button
+            mat-icon-button
+            color="primary"
+            class="dynamic-component-button"
+            [ngClass]="{ 'show-dynamic-component-button': componentsToIsExpanded[component.id] }"
+            (click)="copyComponent($event, component)"
+            matTooltip="Copy Component"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
+            <mat-icon>content_copy</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="primary"
+            class="dynamic-component-button"
+            [ngClass]="{ 'show-dynamic-component-button': componentsToIsExpanded[component.id] }"
+            (click)="deleteComponent($event, i + 1, component)"
+            matTooltip="Delete Component"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
         </ng-container>
-        <div
-          *ngIf="!insertComponentMode"
-          fxLayout="row"
-          fxLayoutAlign="end center"
-          class="component-expand-collapse-div"
-          matTooltip="Click to expand/collapse"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
+        <div *ngIf="!insertComponentMode" fxLayout="row" fxLayoutAlign="end center">
           <div *ngIf="!componentsToIsExpanded[component.id]" fxLayoutAlign="end center">
             <mat-icon>expand_more</mat-icon>
           </div>

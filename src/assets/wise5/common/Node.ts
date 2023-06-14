@@ -1,4 +1,6 @@
 import { TransitionLogic } from './TransitionLogic';
+import { copy } from './object/object';
+import { generateRandomKey } from './string/string';
 
 export class Node {
   components: any[] = [];
@@ -64,5 +66,78 @@ export class Node {
       };
     }
     return this.transitionLogic;
+  }
+
+  /**
+   * Move the component(s) within this node
+   * @param componentIds the id(s) of the component(s) to move
+   * @param insertAfterComponentId insert the component(s) after this component id.
+   * If this argument is null, place the new component(s) in the first position.
+   */
+  moveComponents(componentIds: string[], insertAfterComponentId: string = null): void {
+    const components = this.extractComponents(componentIds);
+    if (insertAfterComponentId == null) {
+      this.components.unshift(...components);
+    } else {
+      this.insertComponentsAfter(components, insertAfterComponentId);
+    }
+  }
+
+  private extractComponents(componentIds: string[]): any[] {
+    const components = [];
+    for (let i = 0; i < this.components.length; i++) {
+      if (componentIds.includes(this.components[i].id)) {
+        components.push(this.components.splice(i--, 1)[0]);
+      }
+    }
+    return components;
+  }
+
+  private insertComponentsAfter(components: any[], insertAfterComponentId: string): void {
+    const insertAfterComponentIndex = this.components.findIndex(
+      (component) => component.id === insertAfterComponentId
+    );
+    this.components.splice(insertAfterComponentIndex + 1, 0, ...components);
+  }
+
+  copyComponents(componentIds: string[]): any[] {
+    const newComponents = [];
+    const newComponentIds = [];
+    for (const componentId of componentIds) {
+      const newComponent = this.copyComponent(componentId, newComponentIds);
+      newComponents.push(newComponent);
+      newComponentIds.push(newComponent.id);
+    }
+    return newComponents;
+  }
+
+  private copyComponent(componentId: string, componentIdsToSkip: string[]): any {
+    const component = this.getComponent(componentId);
+    const newComponent = copy(component);
+    newComponent.id = this.getUnusedComponentId(componentIdsToSkip);
+    return newComponent;
+  }
+
+  private getUnusedComponentId(componentIdsToSkip: string[]): string {
+    let newComponentId = generateRandomKey();
+    while (this.isComponentIdInUse(newComponentId) || componentIdsToSkip.includes(newComponentId)) {
+      newComponentId = generateRandomKey();
+    }
+    return newComponentId;
+  }
+
+  private isComponentIdInUse(componentId: string): boolean {
+    return this.components.some((component) => component.id === componentId);
+  }
+
+  insertComponents(components: any[], insertAfterComponentId: string): void {
+    const insertPosition = this.getInitialInsertPosition(insertAfterComponentId);
+    this.components.splice(insertPosition, 0, ...components);
+  }
+
+  private getInitialInsertPosition(insertAfterComponentId: string): number {
+    return insertAfterComponentId == null
+      ? 0
+      : this.components.findIndex((component) => component.id === insertAfterComponentId) + 1;
   }
 }

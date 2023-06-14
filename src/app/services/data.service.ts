@@ -63,6 +63,4 @@ export class DataService {
   broadcastStudentWorkReceived(studentWork: any) {
     this.studentWorkReceivedSource.next(studentWork);
   }
-
-  nodeClickLocked(nodeId: string): void {}
 }

@@ -1,5 +1,6 @@
+import { Component } from '../../common/Component';
+
 export interface StudentAssetRequest {
-  nodeId: string;
-  componentId: string;
   asset: any;
+  component: Component;
 }

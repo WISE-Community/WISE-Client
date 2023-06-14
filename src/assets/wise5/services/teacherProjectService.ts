@@ -10,6 +10,7 @@ import { ConfigService } from './configService';
 import { PathService } from './pathService';
 import { copy } from '../common/object/object';
 import { generateRandomKey } from '../common/string/string';
+import { ComponentContent } from '../common/ComponentContent';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -590,15 +591,15 @@ export class TeacherProjectService extends ProjectService {
    * @param nodeId the node id containing the node
    * @param componentId the component id
    */
-  deleteComponent(nodeId, componentId) {
+  deleteComponent(nodeId: string, componentId: string): ComponentContent {
     const node = this.getNodeById(nodeId);
     const components = node.components;
     for (let c = 0; c < components.length; c++) {
       if (components[c].id === componentId) {
-        components.splice(c, 1);
-        break;
+        return components.splice(c, 1)[0];
       }
     }
+    return null;
   }
 
   deleteTransition(node, transition) {
@@ -649,24 +650,6 @@ export class TeacherProjectService extends ProjectService {
 
   getIdToNode() {
     return this.idToNode;
-  }
-
-  turnOnSaveButtonForAllComponents(node) {
-    for (const component of node.components) {
-      const service = this.componentServiceLookupService.getService(component.type);
-      if (service.componentUsesSaveButton()) {
-        component.showSaveButton = true;
-      }
-    }
-  }
-
-  turnOffSaveButtonForAllComponents(node) {
-    for (const component of node.components) {
-      const service = this.componentServiceLookupService.getService(component.type);
-      if (service.componentUsesSaveButton()) {
-        component.showSaveButton = false;
-      }
-    }
   }
 
   checkPotentialStartNodeIdChangeThenSaveProject() {

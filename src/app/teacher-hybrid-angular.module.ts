@@ -12,7 +12,6 @@ import { TeacherDataService } from '../assets/wise5/services/teacherDataService'
 import { TeacherWebSocketService } from '../assets/wise5/services/teacherWebSocketService';
 import { DataService } from './services/data.service';
 import { MilestoneService } from '../assets/wise5/services/milestoneService';
-import { CopyComponentService } from '../assets/wise5/services/copyComponentService';
 import { CopyNodesService } from '../assets/wise5/services/copyNodesService';
 import { CopyProjectService } from '../assets/wise5/services/copyProjectService';
 import { DeleteNodeService } from '../assets/wise5/services/deleteNodeService';
@@ -48,7 +47,6 @@ export class EmptyComponent {}
   ],
   providers: [
     ClassroomStatusService,
-    CopyComponentService,
     CopyNodesService,
     CopyProjectService,
     DataExportService,

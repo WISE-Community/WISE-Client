@@ -12,7 +12,6 @@ import { ComponentService } from '../../componentService';
 import { GraphService } from '../graphService';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
-import * as covariance from 'compute-covariance';
 import canvg from 'canvg';
 import { MatDialog } from '@angular/material/dialog';
 import { GraphContent } from '../GraphContent';
@@ -21,8 +20,9 @@ import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { arraysContainSameValues } from '../../../common/array/array';
 import { generateRandomKey } from '../../../common/string/string';
 import { GraphCustomLegend } from '../GraphCustomLegend';
-import { calculateMean } from '../util';
 import { PlotLineManager } from '../plot-line-manager';
+import { DataExplorerManager } from '../data-explorer-manager';
+import { addPointFromTableIntoData, isMultipleYAxes, isSingleYAxis } from '../util';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -43,7 +43,6 @@ export class GraphStudent extends ComponentStudent {
   chartCallback: any;
   chartConfig: any;
   chartId: string = 'chart1';
-  dataExplorerColors: string[] = ['blue', 'orange', 'purple', 'black', 'green'];
   fileName: string;
   graphType: string;
   hasCustomLegendBeenSet: boolean = false;
@@ -115,7 +114,6 @@ export class GraphStudent extends ComponentStudent {
     super.ngOnInit();
     this.chartId = 'chart_' + this.componentId;
     this.hiddenCanvasId = 'hiddenCanvas_' + this.componentId;
-    this.dataExplorerColors = ['blue', 'orange', 'purple', 'black', 'green'];
     this.plotLineManager = new PlotLineManager(
       this.componentContent.xAxis.plotLines,
       this.componentContent.showMouseXPlotLine,
@@ -325,48 +323,8 @@ export class GraphStudent extends ComponentStudent {
     this.activeTrial.series = [];
     this.drawGraph();
     this.changeDetectorRef.detectChanges();
-
-    const dataExplorerSeries = studentData.dataExplorerSeries;
-    const graphType = studentData.dataExplorerGraphType;
-    const tooltipHeaderColumn = studentData.dataExplorerTooltipHeaderColumn;
-    this.xAxis.title.text = studentData.dataExplorerXAxisLabel;
-    this.setYAxisLabels(studentData);
-    this.setXAxisLabels(studentData);
-
-    const allRegressionSeries = [];
-    for (let seriesIndex = 0; seriesIndex < dataExplorerSeries.length; seriesIndex++) {
-      const xColumn = dataExplorerSeries[seriesIndex].xColumn;
-      const yColumn = dataExplorerSeries[seriesIndex].yColumn;
-      const yAxis = dataExplorerSeries[seriesIndex].yAxis;
-      if (yColumn != null) {
-        const color = this.dataExplorerColors[seriesIndex];
-        const name = dataExplorerSeries[seriesIndex].name;
-        const series = this.generateDataExplorerSeries(
-          studentData.tableData,
-          xColumn,
-          yColumn,
-          graphType,
-          name,
-          color,
-          yAxis,
-          tooltipHeaderColumn
-        );
-        if (series.yAxis == null) {
-          this.setSeriesYAxisIndex(series, seriesIndex);
-        }
-        this.activeTrial.series.push(series);
-        if (graphType === 'scatter' && studentData.isDataExplorerScatterPlotRegressionLineEnabled) {
-          const singleRegressionSeries = this.generateDataExplorerRegressionSeries(
-            studentData.tableData,
-            xColumn,
-            yColumn,
-            color,
-            yAxis
-          );
-          allRegressionSeries.push(singleRegressionSeries);
-        }
-      }
-    }
+    const dataExplorerManager = new DataExplorerManager(this.xAxis, this.yAxis, this.activeTrial);
+    const allRegressionSeries = dataExplorerManager.handleDataExplorer(studentData);
 
     // Add all the regression series after all the data series so that all the data series are
     // located at the expected index within the active trial. We need to do this because we expect
@@ -401,194 +359,6 @@ export class GraphStudent extends ComponentStudent {
         series.data = data;
       }
     }
-  }
-
-  isSingleYAxis(yAxis) {
-    return !Array.isArray(yAxis);
-  }
-
-  setYAxisLabels(studentData: any): void {
-    if (this.isSingleYAxis(this.yAxis)) {
-      this.yAxis.title.text = studentData.dataExplorerYAxisLabel;
-    } else if (studentData.dataExplorerYAxisLabels != null) {
-      for (let [index, yAxis] of Object.entries(this.yAxis)) {
-        (yAxis as any).title.text = studentData.dataExplorerYAxisLabels[index];
-        const yAxisIndex = studentData.dataExplorerSeries[index].yAxis;
-        (yAxis as any).title.style.color = this.dataExplorerColors[yAxisIndex];
-        (yAxis as any).labels.style.color = this.dataExplorerColors[yAxisIndex];
-      }
-    }
-  }
-
-  setSeriesYAxisIndex(series, seriesIndex) {
-    if (this.GraphService.isMultipleYAxes(this.yAxis) && this.yAxis.length == 2) {
-      if (seriesIndex === 0 || seriesIndex === 1) {
-        series.yAxis = seriesIndex;
-      } else {
-        series.yAxis = 0;
-      }
-    }
-  }
-
-  setXAxisLabels(studentData: any): void {
-    const thisComponent = this;
-    this.xAxis.labels = {
-      formatter: function () {
-        if (
-          this.value + 1 < studentData.tableData.length &&
-          studentData.isDataExplorerEnabled != null &&
-          studentData.dataExplorerSeries != null &&
-          studentData.tableData != null
-        ) {
-          // try to convert the x value number to a category string on the x axis
-          const textValue = thisComponent.getXColumnTextValue(
-            studentData.dataExplorerSeries,
-            studentData.tableData,
-            this.value
-          );
-          if (
-            typeof textValue === 'string' &&
-            textValue !== '' &&
-            !thisComponent.isNA(textValue) &&
-            isNaN(parseFloat(textValue))
-          ) {
-            return studentData.tableData[this.value + 1][studentData.dataExplorerSeries[0].xColumn]
-              .text;
-          }
-        }
-        return this.value;
-      }
-    };
-  }
-
-  isNA(text: string): boolean {
-    const textUpperCase = text.toUpperCase();
-    return textUpperCase === 'NA' || textUpperCase === 'N/A';
-  }
-
-  getXColumnTextValue(dataExplorerSeries: any[], tableData: any[][], value: number): string {
-    const xColumn = dataExplorerSeries[0].xColumn;
-    const dataRow = tableData[value + 1];
-    return dataRow[xColumn].text;
-  }
-
-  generateDataExplorerSeries(
-    tableData: any[],
-    xColumn: number,
-    yColumn: number,
-    graphType: string,
-    name: string,
-    color: string,
-    yAxis: any,
-    tooltipHeaderColumn: number
-  ): any {
-    const series = {
-      type: graphType,
-      name: name,
-      color: color,
-      yAxis: yAxis,
-      data: this.convertDataExplorerDataToSeriesData(
-        tableData,
-        xColumn,
-        yColumn,
-        tooltipHeaderColumn
-      )
-    };
-    if (graphType === 'line') {
-      series.data.sort(this.sortLineData);
-    }
-    return series;
-  }
-
-  private generateDataExplorerRegressionSeries(
-    tableData: any[],
-    xColumn: number,
-    yColumn: number,
-    color: string,
-    yAxis: number
-  ): any {
-    const regressionLineData = this.calculateRegressionLineData(tableData, xColumn, yColumn);
-    return {
-      type: 'line',
-      name: 'Regression Line',
-      color: color,
-      data: regressionLineData,
-      yAxis: yAxis,
-      enableMouseTracking: false
-    };
-  }
-
-  calculateRegressionLineData(tableData, xColumn, yColumn) {
-    const xValues = this.getValuesInColumn(tableData, xColumn);
-    const yValues = this.getValuesInColumn(tableData, yColumn);
-    const covarianceMatrix = covariance(xValues, yValues);
-    const covarianceXY = covarianceMatrix[0][1];
-    const varianceX = covarianceMatrix[0][0];
-    const meanY = calculateMean(yValues);
-    const meanX = calculateMean(xValues);
-    const slope = covarianceXY / varianceX;
-    const intercept = meanY - slope * meanX;
-    let firstX = Math.min(...xValues);
-    let firstY = slope * firstX + intercept;
-    if (firstY < 0) {
-      firstY = 0;
-      firstX = (firstY - intercept) / slope;
-    }
-    let secondX = Math.max(...xValues);
-    let secondY = slope * secondX + intercept;
-    if (secondY < 0) {
-      secondY = 0;
-      secondX = (secondY - intercept) / slope;
-    }
-    return [
-      [firstX, firstY],
-      [secondX, secondY]
-    ];
-  }
-
-  getValuesInColumn(tableData, columnIndex) {
-    const values = [];
-    for (let r = 1; r < tableData.length; r++) {
-      const row = tableData[r];
-      const value = Number(row[columnIndex].text);
-      values.push(value);
-    }
-    return values;
-  }
-
-  sortLineData(a, b) {
-    if (a[0] > b[0]) {
-      return 1;
-    } else if (a[0] < b[0]) {
-      return -1;
-    } else {
-      if (a[1] > b[1]) {
-        return 1;
-      } else if (a[1] < b[1]) {
-        return -1;
-      } else {
-        return 0;
-      }
-    }
-  }
-
-  convertDataExplorerDataToSeriesData(
-    rows: any[],
-    xColumn: number,
-    yColumn: number,
-    tooltipHeaderColumn: number
-  ): any[] {
-    const data = [];
-    for (let r = 1; r < rows.length; r++) {
-      const row = rows[r];
-      const xCell = row[xColumn];
-      const yCell = row[yColumn];
-      if (xCell != null && yCell != null) {
-        const tooltipHeader = row[tooltipHeaderColumn]?.text;
-        this.addPointFromTableIntoData(xCell, yCell, data, tooltipHeader);
-      }
-    }
-    return data;
   }
 
   handleEmbeddedConnectedComponentStudentDataChanged(connectedComponent, componentState) {
@@ -881,7 +651,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   turnOffYAxisDecimals() {
-    if (this.isSingleYAxis(this.yAxis)) {
+    if (isSingleYAxis(this.yAxis)) {
       this.yAxis.allowDecimals = false;
     } else {
       this.yAxis.forEach((yAxis) => (yAxis.allowDecimals = false));
@@ -1101,7 +871,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   getSeriesYAxisIndex(series) {
-    if (this.GraphService.isMultipleYAxes(this.yAxis) && series.yAxis != null) {
+    if (isMultipleYAxes(this.yAxis) && series.yAxis != null) {
       return series.yAxis;
     } else {
       return 0;
@@ -1661,7 +1431,7 @@ export class GraphStudent extends ComponentStudent {
       const xCell = row[xColumn];
       const yCell = row[yColumn];
       if (xCell != null && yCell != null) {
-        this.addPointFromTableIntoData(xCell, yCell, data, null);
+        addPointFromTableIntoData(xCell, yCell, data, null);
       }
     }
     return data;
@@ -1689,44 +1459,6 @@ export class GraphStudent extends ComponentStudent {
     } else {
       return params.yColumn;
     }
-  }
-
-  addPointFromTableIntoData(xCell: any, yCell: any, data: any[], tooltipHeader: string): void {
-    const xText = xCell.text;
-    const yText = yCell.text;
-    if (xText != null && xText !== '' && yText != null && yText !== '') {
-      data.push(this.createDataPointFromTable(xText, yText, tooltipHeader));
-    } else {
-      data.push([]);
-    }
-  }
-
-  createDataPointFromTable(xText: string, yText: string, tooltipHeader: string): any {
-    let point: any;
-    const xNumber = Number(xText);
-    const yNumber = Number(yText);
-    if (!isNaN(xNumber) && !isNaN(yNumber)) {
-      point = {
-        x: xNumber,
-        y: yNumber
-      };
-      if (tooltipHeader != null) {
-        point.tooltipHeader = tooltipHeader;
-      }
-    } else {
-      point = [];
-      if (!isNaN(xNumber)) {
-        point.push(xNumber);
-      } else {
-        point.push(xText);
-      }
-      if (!isNaN(yNumber)) {
-        point.push(yNumber);
-      } else {
-        point.push(null);
-      }
-    }
-    return point;
   }
 
   setSeriesIds(allSeries) {

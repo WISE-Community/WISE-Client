@@ -59,7 +59,6 @@ describe('GraphStudentComponent', () => {
   });
 
   addPointToSeries();
-  calculateRegressionLine();
   convertRowDataToSeriesData();
   checkIfASeriesIsEditable();
   checkIfASeriesIsEmpty();
@@ -72,7 +71,6 @@ describe('GraphStudentComponent', () => {
   checkIfYAxisIsLockedWithOneYAxisTrue();
   clearSeriesIds();
   clickUndo();
-  convertDataExplorerDataToSeriesData();
   convertNullSelectedCellsToEmptyArrayOfTrialIds();
   convertSelectedCellsToTrialIds();
   copyASeries();
@@ -86,7 +84,6 @@ describe('GraphStudentComponent', () => {
   deleteTrial();
   deleteTrialById();
   deleteTrialsById();
-  generateDataExplorerSeries();
   getEventYValueWhenThereIsOneYAxis();
   getEventYValueWhenThereAreMultipleYAxes();
   getHighestTrial();
@@ -107,7 +104,6 @@ describe('GraphStudentComponent', () => {
   getTheYColumnValueFromParams();
   getTheYValueFromDataPoint();
   getTrialNumbers();
-  getValuesInColumn();
   handleDeleteKeyPressed();
   handleTableConnectedComponentStudentDataChanged();
   handleTrialIdsToShowChanged();
@@ -132,15 +128,11 @@ describe('GraphStudentComponent', () => {
   removeDefaultTrialIfNecessary();
   resetSeriesHelper();
   setActiveTrialAndSeriesByTrialIdsToShow();
-  setSeriesYIndex();
   setStudentWork();
   setTheDefaultActiveSeries();
   setTheTrialIdsToShow();
-  setYAxisLabelsWhenMultipleYAxes();
-  setYAxisLabelsWhenSingleYAxis();
   showOrHideTrials();
   showTrialsAndHideTheCurrentlyActiveTrial();
-  sortLineData();
   turnOffXAxisDecimals();
   turnOffYAxisDecimalsWhenThereIsOneYAxis();
   turnOffYAxisDecimalsWhenThereAreMultipleYAxes();
@@ -1658,116 +1650,6 @@ function notSetTheActiveTrialAndSeriesIfTheTrialCanNotBeEdited() {
   });
 }
 
-function generateDataExplorerSeries() {
-  it('should generate data explorer series', () => {
-    const tableData = [
-      [{ text: 'ID' }, { text: 'Age' }, { text: 'Score' }],
-      [{ text: '1' }, { text: '10' }, { text: '100' }],
-      [{ text: '2' }, { text: '20' }, { text: '200' }],
-      [{ text: '3' }, { text: '30' }, { text: '300' }]
-    ];
-    const xColumn = 0;
-    const yColumn = 1;
-    const graphType = 'scatter';
-    const name = 'Age';
-    const color = 'blue';
-    const yAxis = {};
-    const series = component.generateDataExplorerSeries(
-      tableData,
-      xColumn,
-      yColumn,
-      graphType,
-      name,
-      color,
-      yAxis,
-      null
-    );
-    expect(series.name).toEqual('Age');
-    expect(series.type).toEqual('scatter');
-    expect(series.color).toEqual('blue');
-    expect(series.data.length).toEqual(3);
-    expect(series.data).toEqual([
-      { x: 1, y: 10 },
-      { x: 2, y: 20 },
-      { x: 3, y: 30 }
-    ]);
-  });
-}
-
-function calculateRegressionLine() {
-  it('should calculate regression line', () => {
-    const tableData = [
-      [{ text: 'ID' }, { text: 'Age' }, { text: 'Score' }],
-      [{ text: '1' }, { text: '10' }, { text: '100' }],
-      [{ text: '2' }, { text: '20' }, { text: '200' }],
-      [{ text: '3' }, { text: '30' }, { text: '300' }]
-    ];
-    const regressionLineData = component.calculateRegressionLineData(tableData, 0, 1);
-    expect(regressionLineData[0][0]).toEqual(1);
-    expect(regressionLineData[0][1]).toEqual(10);
-    expect(regressionLineData[1][0]).toEqual(3);
-    expect(regressionLineData[1][1]).toEqual(30);
-  });
-}
-
-function getValuesInColumn() {
-  it('should get values in column', () => {
-    const tableData = [
-      [{ text: 'ID' }, { text: 'Age' }, { text: 'Score' }],
-      [{ text: '1' }, { text: '10' }, { text: '100' }],
-      [{ text: '2' }, { text: '20' }, { text: '200' }],
-      [{ text: '3' }, { text: '30' }, { text: '300' }]
-    ];
-    const column0 = component.getValuesInColumn(tableData, 0);
-    const column1 = component.getValuesInColumn(tableData, 1);
-    const column2 = component.getValuesInColumn(tableData, 2);
-    expect(column0[0]).toEqual(1);
-    expect(column0[1]).toEqual(2);
-    expect(column0[2]).toEqual(3);
-    expect(column1[0]).toEqual(10);
-    expect(column1[1]).toEqual(20);
-    expect(column1[2]).toEqual(30);
-    expect(column2[0]).toEqual(100);
-    expect(column2[1]).toEqual(200);
-    expect(column2[2]).toEqual(300);
-  });
-}
-
-function sortLineData() {
-  it('should sort line data', () => {
-    const line = [
-      [1, 10],
-      [2, 20],
-      [3, 30],
-      [3, 40]
-    ];
-    expect(component.sortLineData(line[0], line[1])).toEqual(-1);
-    expect(component.sortLineData(line[1], line[0])).toEqual(1);
-    expect(component.sortLineData(line[0], line[0])).toEqual(0);
-    expect(component.sortLineData(line[2], line[3])).toEqual(-1);
-  });
-}
-
-function convertDataExplorerDataToSeriesData() {
-  it('should convert data explorer data to series data', () => {
-    const rows = [
-      [{ text: 'ID' }, { text: 'Age' }, { text: 'Score' }],
-      [{ text: '1' }, { text: '10' }, { text: '100' }],
-      [{ text: '2' }, { text: '20' }, { text: '200' }],
-      [{ text: '3' }, { text: '30' }, { text: '300' }]
-    ];
-    const xColumn = 0;
-    const yColumn = 1;
-    const data = component.convertDataExplorerDataToSeriesData(rows, xColumn, yColumn, null);
-    expect(data.length).toEqual(3);
-    expect(data).toEqual([
-      { x: 1, y: 10 },
-      { x: 2, y: 20 },
-      { x: 3, y: 30 }
-    ]);
-  });
-}
-
 function checkIfYAxisIsLockedWithOneYAxisTrue() {
   it('should check if Y axis is locked with one Y axis true', () => {
     expect(component.isYAxisLocked()).toEqual(true);
@@ -1832,93 +1714,6 @@ function checkIfYAxisIsLockedWithMultipleYAxesFalse() {
     expect(component.isYAxisLocked()).toEqual(false);
   });
 }
-
-function setYAxisLabelsWhenSingleYAxis() {
-  it('should set y axis labels when there is one y axis', () => {
-    component.yAxis = {
-      title: {
-        text: ''
-      }
-    };
-    const studentData = {
-      dataExplorerYAxisLabel: 'Count'
-    };
-    component.setYAxisLabels(studentData);
-    expect(component.yAxis.title.text).toEqual('Count');
-  });
-}
-
-function setYAxisLabelsWhenMultipleYAxes() {
-  it('should set y axis labels when there are multiple y axes', () => {
-    component.yAxis = [
-      {
-        labels: {
-          style: {
-            color: ''
-          }
-        },
-        title: {
-          style: {
-            color: ''
-          },
-          text: ''
-        }
-      },
-      {
-        labels: {
-          style: {
-            color: ''
-          }
-        },
-        title: {
-          style: {
-            color: ''
-          },
-          text: ''
-        }
-      }
-    ];
-    const studentData = {
-      dataExplorerYAxisLabels: ['Count', 'Price'],
-      dataExplorerSeries: [{ yAxis: 0 }, { yAxis: 1 }]
-    };
-    component.setYAxisLabels(studentData);
-    expect(component.yAxis[0].title.text).toEqual('Count');
-    expect(component.yAxis[1].title.text).toEqual('Price');
-  });
-}
-
-function setSeriesYIndex() {
-  it('should set series Y index', () => {
-    const firstYAxis = {
-      title: {
-        text: ''
-      },
-      min: 0,
-      max: 100,
-      units: '',
-      locked: false
-    };
-    const secondYAxis = {
-      title: {
-        text: ''
-      },
-      min: 0,
-      max: 1000,
-      units: '',
-      locked: false,
-      opposite: true
-    };
-    component.yAxis = [firstYAxis, secondYAxis];
-    const seriesOne: any = {};
-    const seriesTwo: any = {};
-    component.setSeriesYAxisIndex(seriesOne, 0);
-    component.setSeriesYAxisIndex(seriesTwo, 1);
-    expect(seriesOne.yAxis).toEqual(0);
-    expect(seriesTwo.yAxis).toEqual(1);
-  });
-}
-
 function getEventYValueWhenThereIsOneYAxis() {
   it('should get event y value when there is one y axis', () => {
     const event = {

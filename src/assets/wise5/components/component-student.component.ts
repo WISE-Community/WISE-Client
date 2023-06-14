@@ -184,7 +184,11 @@ export abstract class ComponentStudent {
     // overridden by children
   }
 
-  isForThisComponent(object: any) {
+  protected isSameComponent(component: Component): boolean {
+    return component.nodeId === this.nodeId && component.content.id === this.componentId;
+  }
+
+  isForThisComponent(object: any): boolean {
     return this.nodeId === object.nodeId && this.componentId === object.componentId;
   }
 
@@ -192,21 +196,25 @@ export abstract class ComponentStudent {
     return componentState.workgroupId !== this.ConfigService.getWorkgroupId();
   }
 
-  subscribeToAttachStudentAsset() {
+  protected subscribeToAttachStudentAsset(): void {
     this.subscriptions.add(
       this.StudentAssetService.attachStudentAsset$.subscribe(
         (studentAssetRequest: StudentAssetRequest) => {
-          if (this.isForThisComponent(studentAssetRequest)) {
-            this.copyAndAttachStudentAsset(studentAssetRequest.asset);
+          if (this.isSameComponent(studentAssetRequest.component)) {
+            this.doAttachStudentAsset(studentAssetRequest);
           }
         }
       )
     );
   }
 
+  protected doAttachStudentAsset(studentAssetRequest: StudentAssetRequest): void {
+    this.copyAndAttachStudentAsset(studentAssetRequest.asset);
+  }
+
   generateStarterState() {}
 
-  copyAndAttachStudentAsset(studentAsset: any): any {
+  private copyAndAttachStudentAsset(studentAsset: any): void {
     this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset: any) => {
       const attachment = {
         studentAssetId: copiedAsset.id,
@@ -639,12 +647,9 @@ export abstract class ComponentStudent {
     return this.NotebookService.isStudentNoteClippingEnabled();
   }
 
-  showStudentAssets() {
+  protected showStudentAssets(): void {
     this.dialog.open(StudentAssetsDialogComponent, {
-      data: {
-        nodeId: this.nodeId,
-        componentId: this.componentId
-      },
+      data: this.component,
       panelClass: 'dialog-md'
     });
   }
