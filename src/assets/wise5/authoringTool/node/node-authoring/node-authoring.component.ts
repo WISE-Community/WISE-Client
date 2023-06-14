@@ -283,7 +283,7 @@ export class NodeAuthoringComponent implements OnInit {
     this.setShowComponentAuthoringViews(false);
     if (this.confirmDeleteComponent(this.getSelectedComponentNumbersAndTypes())) {
       const componentIdAndTypes = this.getSelectedComponentIds()
-        .map((componentId) => this.projectService.deleteComponent(this.nodeId, componentId))
+        .map((componentId) => this.node.deleteComponent(componentId))
         .map((component) => ({ componentId: component.id, type: component.type }));
       this.afterDeleteComponent(componentIdAndTypes);
     }
@@ -298,7 +298,7 @@ export class NodeAuthoringComponent implements OnInit {
   ): void {
     event.stopPropagation();
     if (this.confirmDeleteComponent([`${componentNumber}. ${component.type}`])) {
-      const deletedComponent = this.projectService.deleteComponent(this.nodeId, component.id);
+      const deletedComponent = this.node.deleteComponent(component.id);
       this.afterDeleteComponent([
         { componentId: deletedComponent.id, type: deletedComponent.type }
       ]);
