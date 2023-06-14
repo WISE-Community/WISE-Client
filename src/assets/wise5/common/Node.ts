@@ -143,7 +143,14 @@ export class Node {
   }
 
   deleteComponent(componentId: string): ComponentContent {
-    const componentIndex = this.components.findIndex((component) => component.id === componentId);
-    return this.components.splice(componentIndex, 1)[0];
+    return this.components.splice(this.getComponentIndex(componentId), 1)[0];
+  }
+
+  replaceComponent(componentId: string, component: ComponentContent): void {
+    this.components[this.getComponentIndex(componentId)] = component;
+  }
+
+  private getComponentIndex(componentId: string): number {
+    return this.components.findIndex((component) => component.id === componentId);
   }
 }
