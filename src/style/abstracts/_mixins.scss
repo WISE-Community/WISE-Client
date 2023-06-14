@@ -45,7 +45,10 @@
   .mat-mdc-button, .mat-mdc-raised-button, .mat-mdc-unelevated-button, .mat-mdc-outlined-button {
     min-width: 0;
     text-transform: uppercase;
-    font-weight: 600;
+  }
+
+  .mdc-button {
+    padding: 0 16px;
   }
 
   .mat-mdc-raised-button, .mat-mdc-fab, .mat-mdc-mini-fab {
@@ -62,6 +65,10 @@
 
   .mat-divider-horizontal {
     margin: 16px 0;
+  }
+
+  .mdc-menu-surface.mat-mdc-select-panel {
+    margin-top: -2px;
   }
 
   .mat-mdc-menu-content {
@@ -137,8 +144,14 @@
     font-weight: 500;
   }
 
-  .mat-mdc-form-field {
+  .mat-mdc-option {
     font-size: 14px;
+  }
+  
+  .mdc-text-field {
+    &.mdc-text-field--filled {
+      border-radius: $card-border-radius;
+    }
   }
   /* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.*/
   .mat-tab-label-active {
@@ -266,6 +279,14 @@
       }
     }
   }
+
+  .mdc-text-field {
+    &.mdc-text-field--filled {
+      .mdc-line-ripple::before {
+        border-bottom-color: transparent;
+      }
+    }
+  }
   /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
   .mat-form-field-prefix, .mat-form-field-suffix {
     color: mat.get-color-from-palette($foreground, 'secondary-text');
@@ -303,7 +324,7 @@
 
 // Set Angular Material icon button size (use mat-icon size as the $size parameter)
 @mixin mat-icon-button-size($size: 24px) {
-  $button-size: ($size*1) + 16px;
+  $button-size: ($size*1) + 24px;
   height: $button-size;
   width: $button-size;
   line-height: $button-size;

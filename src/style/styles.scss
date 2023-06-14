@@ -89,4 +89,10 @@
   @include mat.all-component-colors($dark-theme);
   @include theme-setup($dark-theme, $dark-colors);
   color: white;
+
+  .mdc-text-field--filled {
+    &:not(.mdc-text-field--disabled) {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
 }
