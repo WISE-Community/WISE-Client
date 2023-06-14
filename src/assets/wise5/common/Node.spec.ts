@@ -1,3 +1,4 @@
+import { ComponentContent } from './ComponentContent';
 import { Node } from './Node';
 
 const componentId1 = 'c1';
@@ -9,7 +10,10 @@ let node: Node;
 describe('Node', () => {
   beforeEach(() => {
     node = new Node();
-    node.components = [{ id: componentId1 }, { id: componentId2 }];
+    node.components = [
+      { id: componentId1, prompt: 'a' },
+      { id: componentId2, prompt: 'b' }
+    ];
   });
   copyComponents();
   deleteComponent();
@@ -17,6 +21,7 @@ describe('Node', () => {
   getNodeIdComponentIds();
   insertComponents();
   moveComponents();
+  replaceComponent();
 });
 
 function copyComponents() {
@@ -138,6 +143,15 @@ function moveComponents_NonNullInsertAfterComponentId_MoveMultipleComponentsAfte
     it('should move components after the specified component', () => {
       node.moveComponents(['b', 'c', 'e'], 'a');
       expect(node.components.map((component) => component.id).join(',')).toEqual('a,b,c,e,d');
+    });
+  });
+}
+
+function replaceComponent() {
+  describe('replaceComponent()', () => {
+    it('should replace the specified component', () => {
+      node.replaceComponent(componentId2, { id: componentId2, prompt: 'c' } as ComponentContent);
+      expect(node.components[1].prompt).toEqual('c');
     });
   });
 }

@@ -240,22 +240,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Replace a component
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @param component the new component
-   */
-  replaceComponent(nodeId, componentId, component) {
-    const components = this.getComponents(nodeId);
-    for (let c = 0; c < components.length; c++) {
-      if (components[c].id === componentId) {
-        components[c] = component;
-        break;
-      }
-    }
-  }
-
-  /**
    * Create a new group
    * @param title the title of the group
    * @returns the group object
