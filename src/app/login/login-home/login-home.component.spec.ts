@@ -80,35 +80,41 @@ function loginWithRecaptchaDisabled() {
     beforeEach(() => {
       component.isRecaptchaEnabled = false;
     });
+    incorrectPassword();
+    correctPassword();
+  });
+}
 
-    describe('user enters incorrect password', () => {
-      it('should show error message', fakeAsync(() => {
-        spyOn(http, 'post').and.returnValue(of({}));
-        spyOn(http, 'get').and.returnValue(of(null));
-        component.login();
-        tickAndDetectChanges();
-        const errorMessageElement = fixture.debugElement
-          .queryAll(By.css('p'))
-          .find(
-            (element) =>
-              element.nativeElement.textContent.trim() ===
-              'Username and password not recognized. Please try again.'
-          );
-        expect(errorMessageElement.nativeElement.classList.contains('active')).toBeTruthy();
-        expect(component.credentials.password).toEqual('');
-      }));
-    });
+function incorrectPassword() {
+  describe('user enters incorrect password', () => {
+    it('should show error message', fakeAsync(() => {
+      spyOn(http, 'post').and.returnValue(of({}));
+      spyOn(http, 'get').and.returnValue(of(null));
+      component.login();
+      tickAndDetectChanges();
+      const errorMessageElement = fixture.debugElement
+        .queryAll(By.css('p'))
+        .find(
+          (element) =>
+            element.nativeElement.textContent.trim() ===
+            'Username and password not recognized. Please try again.'
+        );
+      expect(errorMessageElement.nativeElement.classList.contains('active')).toBeTruthy();
+      expect(component.credentials.password).toEqual('');
+    }));
+  });
+}
 
-    describe('user enters correct password', () => {
-      it('should navigate to home page', fakeAsync(() => {
-        spyOn(http, 'post').and.returnValue(of({}));
-        spyOn(http, 'get').and.returnValue(of({ id: 1 }));
-        const routerNavigateSpy = spyOn(router, 'navigateByUrl');
-        component.login();
-        tickAndDetectChanges();
-        expect(routerNavigateSpy).toHaveBeenCalledWith(redirectUrl);
-      }));
-    });
+function correctPassword() {
+  describe('user enters correct password', () => {
+    it('should navigate to home page', fakeAsync(() => {
+      spyOn(http, 'post').and.returnValue(of({}));
+      spyOn(http, 'get').and.returnValue(of({ id: 1 }));
+      const routerNavigateSpy = spyOn(router, 'navigateByUrl');
+      component.login();
+      tickAndDetectChanges();
+      expect(routerNavigateSpy).toHaveBeenCalledWith(redirectUrl);
+    }));
   });
 }
 

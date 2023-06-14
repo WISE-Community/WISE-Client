@@ -15,7 +15,6 @@ import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service, RecaptchaV3Module } from 'ng
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
-import { By } from '@angular/platform-browser';
 import { getErrorMessage } from '../../common/test-helper';
 
 export class MockStudentService {
