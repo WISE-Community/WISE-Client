@@ -16,6 +16,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
 import { By } from '@angular/platform-browser';
+import { getErrorMessage } from '../../common/test-helper';
 
 export class MockStudentService {
   getTeacherList(): Observable<User> {
@@ -155,7 +156,7 @@ function submit_showErrorMessage(): void {
     const httpPostSpy = httpPostSpyAndReturn('error');
     await submitAndDetectChanges();
     expect(httpPostSpy).toHaveBeenCalled();
-    expect(getErrorMessage()).toContain(
+    expect(getErrorMessage(fixture)).toContain(
       'Sorry, there was a problem submitting the form. Please try again.'
     );
   });
@@ -169,7 +170,9 @@ function submit_showRecaptchaErrorMessage(): void {
     const httpPostSpy = httpPostSpyAndReturn('error');
     await submitAndDetectChanges();
     expect(httpPostSpy).toHaveBeenCalled();
-    expect(getErrorMessage()).toContain('Recaptcha failed. Please reload the page and try again!');
+    expect(getErrorMessage(fixture)).toContain(
+      'Recaptcha failed. Please reload the page and try again!'
+    );
   });
 }
 
@@ -191,9 +194,4 @@ async function submitAndDetectChanges(): Promise<void> {
 
 function httpPostSpyAndReturn(status: string): jasmine.Spy {
   return spyOn(http, 'post').and.returnValue(of({ status: status }));
-}
-
-function getErrorMessage(): string {
-  const error = fixture.debugElement.query(By.css('mat-error'));
-  return error.nativeElement.textContent;
 }

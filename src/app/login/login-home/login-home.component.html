@@ -14,14 +14,6 @@
         There was an error saving data. Please log in again. You may need to re-do your recent work.
         We apologize for the inconvenience.
       </p>
-      <p
-        *ngIf="isRecaptchaRequired"
-        class="warn center standalone__error inactive"
-        [ngClass]="{ active: isRecaptchaRequired }"
-        i18n
-      >
-        Please try again and verify that you are not a robot.
-      </p>
       <p>
         <mat-form-field appearance="fill" fxFlex>
           <mat-label i18n>Username</mat-label>
@@ -48,13 +40,17 @@
           />
         </mat-form-field>
       </p>
-      <p *ngIf="isRecaptchaRequired" class="recaptcha-container">
-        <re-captcha
-          #recaptchaRef="reCaptcha"
-          (resolved)="recaptchaResolved($event)"
-          [siteKey]="recaptchaPublicKey"
-        ></re-captcha>
+      <p *ngIf="isRecaptchaEnabled" class="center" i18n>
+        This site is protected by reCAPTCHA and the Google
+        <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+        <a href="https://policies.google.com/terms">Terms of Service</a> apply.
       </p>
+      <ng-container *ngIf="isRecaptchaEnabled">
+        <div *ngIf="!isRecaptchaVerificationFailed">&nbsp;</div>
+        <mat-error *ngIf="isRecaptchaVerificationFailed" class="center" i18n
+          >Recaptcha failed. Please reload the page and try again!</mat-error
+        >
+      </ng-container>
       <p>
         <button fxFlex mat-flat-button color="primary" type="submit" [disabled]="processing">
           <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
