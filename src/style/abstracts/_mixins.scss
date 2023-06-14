@@ -10,18 +10,18 @@
 
   h1 {
     .mat-icon {
-      @include mat-icon-size(mat.font-size($wise-typography, 'headline-1'));
+      @include mat-icon-size(mat.font-size($wise-typography, 'headline-5'));
     }
   }
 
   h2 {
     .mat-icon {
-      @include mat-icon-size(mat.font-size($wise-typography, 'headline-2'));
+      @include mat-icon-size(mat.font-size($wise-typography, 'headline-6'));
     }
   }
 
   .mat-headline-4 {
-      margin-bottom: 36px;
+    margin-bottom: 36px;
 
     .mat-icon {
       @include mat-icon-size(mat.font-size($wise-typography, 'headline-4'));
