@@ -137,6 +137,7 @@
       color="primary"
       type="submit"
       [disabled]="!editProfileFormGroup.valid || !changed || isSaving"
+      class="button--progress"
     >
       <mat-progress-bar mode="indeterminate" *ngIf="isSaving"></mat-progress-bar>
       <ng-container i18n>Save Changes</ng-container>

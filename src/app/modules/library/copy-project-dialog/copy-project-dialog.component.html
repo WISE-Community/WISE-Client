@@ -12,7 +12,13 @@
 </mat-dialog-content>
 <mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="8px">
   <button mat-button mat-dialog-close [disabled]="isCopying" i18n>Cancel</button>
-  <button mat-flat-button color="primary" (click)="copy()" [disabled]="isCopying">
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="copy()"
+    [disabled]="isCopying"
+    class="button--progress"
+  >
     <mat-progress-bar *ngIf="isCopying" mode="indeterminate"></mat-progress-bar>
     <ng-container i18n>Copy</ng-container>
   </button>

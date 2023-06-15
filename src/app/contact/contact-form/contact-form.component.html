@@ -118,6 +118,7 @@
             color="primary"
             type="submit"
             [disabled]="!contactFormGroup.valid || isSendingRequest"
+            class="button--progress"
           >
             <mat-progress-bar *ngIf="isSendingRequest" mode="indeterminate"></mat-progress-bar>
             <ng-container i18n>Submit</ng-container>

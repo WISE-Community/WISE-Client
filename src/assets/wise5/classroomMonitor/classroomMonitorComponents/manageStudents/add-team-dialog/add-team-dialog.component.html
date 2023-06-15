@@ -57,6 +57,7 @@
     color="primary"
     [disabled]="isProcessing || initialTeamMembers.length == 0"
     (click)="createTeam()"
+    class="button--progress"
   >
     <mat-progress-bar *ngIf="isProcessing" mode="indeterminate"></mat-progress-bar>
     <ng-container i18n>Create</ng-container>

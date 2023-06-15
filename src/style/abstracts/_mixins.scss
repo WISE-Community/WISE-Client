@@ -77,22 +77,8 @@
     }
   }
 
-  .mat-mdc-card-actions {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
   .mat-mdc-card {
     border-radius: $card-border-radius;
-    padding: 16px;
-
-    >.mat-mdc-card-actions:last-child {
-      margin-bottom: 0;
-    }
-
-    .mat-divider-horizontal {
-      margin: 0;
-    }
   }
   /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
   .mat-card--button {
@@ -147,7 +133,7 @@
   .mat-mdc-option {
     font-size: 14px;
   }
-  
+
   .mdc-text-field {
     &.mdc-text-field--filled {
       border-radius: $card-border-radius;

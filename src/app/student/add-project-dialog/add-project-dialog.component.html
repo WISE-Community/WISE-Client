@@ -45,6 +45,7 @@
       color="primary"
       (click)="submit()"
       [disabled]="addProjectForm.invalid || isAdding"
+      class="button--progress"
     >
       <mat-progress-bar *ngIf="isAdding" mode="indeterminate"></mat-progress-bar>
       <ng-container i18n>Add</ng-container>

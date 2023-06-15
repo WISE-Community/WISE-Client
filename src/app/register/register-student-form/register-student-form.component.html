@@ -1,4 +1,4 @@
-<mat-card appearance="outlined" class="standalone__content mat-elevation-z4 center">
+<mat-card class="standalone__content mat-elevation-z4 center">
   <mat-card-content>
     <form
       role="form"
@@ -158,6 +158,7 @@
         color="primary"
         type="submit"
         [disabled]="!createStudentAccountFormGroup.valid || processing"
+        class="button--progress"
       >
         <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
         <span i18n>Create Account</span>

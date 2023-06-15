@@ -88,7 +88,13 @@
   </mat-dialog-content>
   <mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="8px">
     <button mat-button mat-dialog-close [disabled]="isCreating" i18n>Cancel</button>
-    <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid || isCreating">
+    <button
+      type="submit"
+      mat-flat-button
+      color="primary"
+      [disabled]="form.invalid || isCreating"
+      class="button--progress"
+    >
       <mat-progress-bar *ngIf="isCreating" mode="indeterminate"></mat-progress-bar>
       <ng-container i18n>Create Run</ng-container>
     </button>

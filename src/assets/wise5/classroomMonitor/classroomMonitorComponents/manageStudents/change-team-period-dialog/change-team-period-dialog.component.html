@@ -32,6 +32,7 @@
     color="primary"
     (click)="changePeriod()"
     [disabled]="selectPeriodForm.invalid || isChangingPeriod"
+    class="button--progress"
   >
     <mat-progress-bar *ngIf="isChangingPeriod" mode="indeterminate"></mat-progress-bar>
     <ng-container i18n>Confirm</ng-container>
