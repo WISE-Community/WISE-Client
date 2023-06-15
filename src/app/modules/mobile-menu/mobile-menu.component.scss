@@ -12,11 +12,12 @@ $typography: mat.define-typography-config();
 .mobile-menu__close {
   height: 48px;
   margin-bottom: 16px;
-  margin-right: 16px;
 }
 
-a {
+a.mat-mdc-button {
   text-transform: none;
-  text-align: start;
+  justify-content: flex-start;
   font-size: mat.font-size($wise-typography, 'subtitle-2');
 }
+
+
