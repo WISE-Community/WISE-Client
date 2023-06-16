@@ -126,22 +126,9 @@ export class NodeAuthoringComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  protected previewStepInNewWindow(constraints: boolean): void {
-    this.saveStepPreviewedEvent(constraints);
-    window.open(this.createPreviewURL(this.nodeId, constraints));
-  }
-
-  private saveStepPreviewedEvent(constraints: boolean): void {
-    const data = { constraints: constraints };
-    this.saveEvent('stepPreviewed', 'Navigation', data);
-  }
-
-  private createPreviewURL(nodeId: string, constraints: boolean): string {
-    let previewURL = `${this.configService.getConfigParam('previewProjectURL')}/${nodeId}`;
-    if (!constraints) {
-      previewURL += '?constraints=false';
-    }
-    return previewURL;
+  protected previewStepInNewWindow(): void {
+    this.saveEvent('stepPreviewed', 'Navigation', { constraints: true });
+    window.open(`${this.configService.getConfigParam('previewProjectURL')}/${this.nodeId}`);
   }
 
   protected close(): void {
