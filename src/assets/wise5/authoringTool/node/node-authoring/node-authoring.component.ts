@@ -255,10 +255,6 @@ export class NodeAuthoringComponent implements OnInit {
     return selectedComponents;
   }
 
-  protected importComponent(): void {
-    this.upgrade.$injector.get('$state').go('root.at.project.node.import-component.choose-step');
-  }
-
   protected moveButtonClicked(): void {
     this.showDefaultComponentsView();
     this.setMoveComponentMode(true);

@@ -59,6 +59,10 @@ export class ChooseNewComponent {
     });
   }
 
+  protected importComponent(): void {
+    this.upgrade.$injector.get('$state').go('root.at.project.node.import-component.choose-step');
+  }
+
   cancel() {
     this.upgrade.$injector.get('$state').go('root.at.project.node', {
       nodeId: this.upgrade.$injector.get('$stateParams').nodeId
