@@ -41,19 +41,6 @@
       >
         <mat-icon>add</mat-icon>
       </button>
-      <button
-        *ngIf="showStepButtons && !isGroupNode"
-        mat-raised-button
-        color="primary"
-        class="top-button"
-        (click)="importComponent()"
-        [disabled]="getSelectedComponentIds().length !== 0 || insertComponentMode"
-        matTooltip="Import Component"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>system_update_alt</mat-icon>
-      </button>
       <div>
         <button
           *ngIf="showStepButtons && !isGroupNode"

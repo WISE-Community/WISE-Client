@@ -99,6 +99,15 @@ export class ChooseImportComponentComponent implements OnInit {
     window.open(`${this.importProject.previewProjectURL}/${node.id}`);
   }
 
+  protected goToChooseNewComponent(): void {
+    this.upgrade.$injector
+      .get('$state')
+      .go(
+        'root.at.project.node.add-component.choose-component',
+        this.upgrade.$injector.get('$stateParams')
+      );
+  }
+
   cancel(): void {
     this.upgrade.$injector.get('$state').go('root.at.project.node', {
       projectId: this.configService.getProjectId(),
