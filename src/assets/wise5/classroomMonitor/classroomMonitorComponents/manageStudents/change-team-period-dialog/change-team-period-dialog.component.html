@@ -1,5 +1,5 @@
 <h2 mat-dialog-title i18n>Change Period</h2>
-<div mat-dialog-content class="dialog-content-scroll">
+<mat-dialog-content class="dialog-content-scroll">
   <div class="mat-body-2">
     <span i18n
       >Select a new period for <strong>Team {{ team.workgroupId }}</strong
@@ -24,8 +24,8 @@
       </mat-select>
     </mat-form-field>
   </form>
-</div>
-<div mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="8px">
+</mat-dialog-content>
+<mat-dialog-actions align="end">
   <button mat-button mat-dialog-close [disabled]="isChangingPeriod" i18n>Cancel</button>
   <button
     mat-flat-button
@@ -37,4 +37,4 @@
     <mat-progress-bar *ngIf="isChangingPeriod" mode="indeterminate"></mat-progress-bar>
     <ng-container i18n>Confirm</ng-container>
   </button>
-</div>
+</mat-dialog-actions>

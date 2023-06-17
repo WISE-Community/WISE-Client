@@ -1,4 +1,4 @@
-<h2 class="mat-dialog-title" i18n>Use with Class</h2>
+<h2 mat-dialog-title i18n>Use with Class</h2>
 <form *ngIf="!isCreated" [formGroup]="form" (ngSubmit)="create()">
   <mat-dialog-content class="dialog-content-scroll">
     <p class="mat-subtitle-1 accent-1">
@@ -74,6 +74,7 @@
         >&nbsp;
         <mat-icon
           class="info"
+          tabindex="0"
           matTooltip="If the End Date has passed and the unit is locked, students will no longer be able to save new work"
           matTooltipPosition="above"
           i18n-matTooltip
@@ -117,7 +118,7 @@
       </p>
     </div>
   </mat-dialog-content>
-  <mat-dialog-actions fxLayoutAlign="end">
+  <mat-dialog-actions align="end">
     <button
       mat-button
       color="primary"

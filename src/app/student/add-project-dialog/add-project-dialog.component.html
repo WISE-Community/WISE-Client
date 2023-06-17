@@ -1,4 +1,4 @@
-<h2 i18n>Add Unit</h2>
+<h2 mat-dialog-title i18n>Add Unit</h2>
 <form [formGroup]="addProjectForm">
   <mat-dialog-content fxLayout="column">
     <p>
@@ -37,7 +37,7 @@
       </mat-form-field>
     </p>
   </mat-dialog-content>
-  <mat-dialog-actions fxLayoutAlign="end">
+  <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close [disabled]="isAdding" i18n>Cancel</button>
     <button
       mat-button

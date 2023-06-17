@@ -1,5 +1,5 @@
-<h1 mat-dialog-title i18n>Create New Team (Period {{ period.periodName }})</h1>
-<div mat-dialog-content class="dialog-content-scroll" cdkFocusRegionStart>
+<h2 mat-dialog-title i18n>Create New Team (Period {{ period.periodName }})</h2>
+<mat-dialog-content class="dialog-content-scroll" cdkFocusRegionStart>
   <p class="mat-body-2" i18n>Select students to add to the new team:</p>
   <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px">
     <div class="initial-members notice-bg-bg" fxFlex="100" fxFlex.gt-sm="33">
@@ -49,8 +49,8 @@
       </p>
     </div>
   </div>
-</div>
-<div mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="8px">
+</mat-dialog-content>
+<mat-dialog-actions align="end">
   <button mat-button mat-dialog-close [disabled]="isProcessing" i18n>Cancel</button>
   <button
     mat-flat-button
@@ -62,4 +62,4 @@
     <mat-progress-bar *ngIf="isProcessing" mode="indeterminate"></mat-progress-bar>
     <ng-container i18n>Create</ng-container>
   </button>
-</div>
+</mat-dialog-actions>

@@ -4,7 +4,7 @@
 .info-block {
   border-radius: $card-border-radius;
   padding: 12px;
-  font-size: mat.font-size($wise-typography, 'body-1');
+  font-size: mat.font-size($wise-typography, 'caption');
 
   p {
     &:last-of-type {

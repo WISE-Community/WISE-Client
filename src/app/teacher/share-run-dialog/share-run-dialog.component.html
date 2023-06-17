@@ -2,6 +2,7 @@
 <h2
   *ngIf="isTransfer"
   mat-dialog-title
+  class="mat-dialog-title--icons"
   fxLayoutAlign="start center"
   [class.warn]="transferRunWarning"
 >
@@ -9,7 +10,7 @@
   <span fxFlex></span>
   <mat-icon *ngIf="transferRunWarning" color="warn">warning</mat-icon>
 </h2>
-<div mat-dialog-content [class.dialog-content-scroll]="!transferRunWarning" *ngIf="run != null">
+<mat-dialog-content [class.dialog-content-scroll]="!transferRunWarning" *ngIf="run != null">
   <div [class.info-block]="transferRunWarning">
     <p class="mat-body-1 accent-1">
       {{ run.name }} <span class="mat-caption" i18n>(Run ID: {{ run.id }})</span>
@@ -38,7 +39,6 @@
         [matAutocomplete]="auto"
       />
       <button
-        mat-button
         matSuffix
         mat-icon-button
         [ngClass]="{ invisible: !teacherSearchControl.value }"
@@ -132,8 +132,8 @@
       </p>
     </ng-container>
   </div>
-</div>
-<div mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="8px">
+</mat-dialog-content>
+<mat-dialog-actions align="end">
   <button
     mat-button
     color="accent"
@@ -162,4 +162,4 @@
     Proceed
   </button>
   <button mat-flat-button color="primary" mat-dialog-close *ngIf="!isTransfer" i18n>Done</button>
-</div>
+</mat-dialog-actions>

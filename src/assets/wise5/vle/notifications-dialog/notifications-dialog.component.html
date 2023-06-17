@@ -1,4 +1,4 @@
-<h3 class="mat-dialog-title" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+<h2 mat-dialog-title class="mat-dialog-title--icons" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
   <mat-icon color="accent">notifications</mat-icon>
   <span i18n>Alerts</span>
   <span fxFlex></span>
@@ -12,7 +12,7 @@
   >
     <mat-icon class="text-secondary">clear_all</mat-icon>
   </button>
-</h3>
+</h2>
 <mat-dialog-content class="dialog-content-scroll notifications">
   <p *ngIf="!hasNewNotifications()" class="no-notifications-message">
     <span class="mat-body-2" i18n>Hi there! You currently have no alerts.</span>
@@ -54,6 +54,6 @@
     </mat-list-item>
   </mat-list>
 </mat-dialog-content>
-<mat-dialog-actions fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end" fxLayoutGap="8px">
+<mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close] i18n>Close</button>
 </mat-dialog-actions>

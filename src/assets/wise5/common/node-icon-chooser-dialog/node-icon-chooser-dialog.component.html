@@ -1,4 +1,4 @@
-<h2 mat-dialog-title fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+<h2 mat-dialog-title class="mat-dialog-title--icons" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
   <div
     *ngIf="newNodeIcon.type === 'font'"
     style="background-color: {{ newNodeIcon.color }}"
@@ -86,7 +86,7 @@
     </mat-chip-option>
   </mat-chip-set>
 </mat-dialog-content>
-<mat-dialog-actions fxLayoutAlign="end">
+<mat-dialog-actions align="end">
   <button mat-button mat-dialog-close i18n>Cancel</button>
   <button mat-flat-button color="primary" (click)="save()" i18n>Save</button>
 </mat-dialog-actions>

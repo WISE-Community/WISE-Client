@@ -95,20 +95,6 @@
     }
   }
 
-  .mat-mdc-dialog-container {
-    border-radius: $card-border-radius;
-  }
-
-  .dialog-content-scroll {
-    border-bottom: 1px solid;
-    border-top: 1px solid;
-  }
-
-  .mat-mdc-dialog-actions {
-    padding: 16px 0 0;
-    margin-bottom: 0;
-  }
-
   .mat-accordion .mat-expansion-panel {
     @include mat.elevation(3);
     @include mat.elevation-transition;

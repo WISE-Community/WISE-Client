@@ -1,5 +1,5 @@
 <div aria-label="View alert" class="notification-dismiss">
-  <h2 i18n>Action Required</h2>
+  <h2 mat-dialog-title i18n>Action Required</h2>
   <mat-dialog-content>
     <p class="center">{{ notification.message }}</p>
     <p class="center md-title">
@@ -24,7 +24,7 @@
       </div>
     </div>
   </mat-dialog-content>
-  <mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+  <mat-dialog-actions align="end">
     <button mat-button (click)="closeDialog()" aria-label="Cancel" i18n-aria-label i18n>
       Cancel
     </button>

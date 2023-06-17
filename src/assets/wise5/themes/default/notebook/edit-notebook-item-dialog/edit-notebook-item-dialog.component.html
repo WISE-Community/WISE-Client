@@ -1,4 +1,4 @@
-<h2 class="mat-dialog-title">{{ title }}</h2>
+<h2 mat-dialog-title>{{ title }}</h2>
 <form role="form" (submit)="save()" [formGroup]="noteFormGroup" fxLayout="column">
   <mat-dialog-content>
     <mat-form-field appearance="fill">
@@ -53,7 +53,7 @@
       </wise-link>
     </div>
   </mat-dialog-content>
-  <mat-dialog-actions fxLayout="row" fxLayoutAlign="start center" *ngIf="isEditMode">
+  <mat-dialog-actions *ngIf="isEditMode">
     <div>
       <mat-checkbox
         color="primary"
@@ -82,7 +82,7 @@
       </button>
     </div>
   </mat-dialog-actions>
-  <mat-dialog-actions *ngIf="!isEditMode" fxLayout="row" fxLayoutAlign="end center">
+  <mat-dialog-actions *ngIf="!isEditMode" align="end">
     <div>
       <button
         class="primary"

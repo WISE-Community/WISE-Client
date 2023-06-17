@@ -1,21 +1,42 @@
 
 @use '@angular/material' as mat;
-@use '../../style/base/typography';
 
-/* TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version. */
 mat-dialog-container.mat-mdc-dialog-container {
+  border-radius: $card-border-radius;
   max-width: 100%;
-  padding: 16px;
+
+  .mdc-dialog__title {
+    padding: 0 16px 16px;
+    margin: 0;
+    font-family: $heading-font-family
+  }
+
+  .mat-dialog-title--icons {
+    padding-top: 16px;
+  }
 
   .mat-mdc-dialog-content {
-    margin: 0 -16px;
-    padding: 0 16px;
     font-size: mat.font-size($wise-typography, 'body-1');
+    padding: 0 16px;
+    color: inherit;
+    font-weight: 400;
+
+    &:first-child {
+      padding-top: 16px;
+    }
+
+    &:last-child {
+      padding-bottom: 16px;
+    }
   }
 
   .dialog-content-scroll {
     padding-top: 16px;
     padding-bottom: 16px;
+  }
+
+  .mat-mdc-dialog-actions {
+    padding: 16px;
   }
 }
 
@@ -41,4 +62,8 @@ mat-dialog-container.mat-mdc-dialog-container {
   @media (max-width: breakpoint('xs.max')) {
     max-width: 95vw !important;
   }
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  overflow-x: hidden;
 }
