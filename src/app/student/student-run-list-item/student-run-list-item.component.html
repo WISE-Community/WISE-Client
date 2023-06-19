@@ -18,8 +18,7 @@
 </ng-template>
 
 <mat-card
-  appearance="outlined"
-  class="mat-elevation-z3 can-highlight"
+  class="can-highlight"
   [ngClass]="{ 'highlighted-bg': run.isHighlighted }"
   [@flash]="{ value: '*', params: { duration: animateDuration, delay: animateDelay } }"
 >
@@ -34,10 +33,10 @@
     ></div>
     <div fxFlex="1 1 100%" fxLayout="row" fxLayoutWrap>
       <div fxLayout="column">
-        <mat-card-title [class.secondary-text]="isRunCompleted(run)" class="mat-subtitle-2">
+        <mat-card-title [class.secondary-text]="isRunCompleted(run)" class="mat-body-1">
           {{ run.project.name }}
         </mat-card-title>
-        <mat-card-subtitle fxHide fxShow.gt-xs>
+        <mat-card-subtitle class="mat-caption" fxHide fxShow.gt-xs>
           <ng-container *ngTemplateOutlet="runInfo"></ng-container>
         </mat-card-subtitle>
       </div>
@@ -48,46 +47,24 @@
       <ng-container *ngTemplateOutlet="runInfo"></ng-container>
     </div>
   </mat-card-content>
-  <mat-card-actions>
-    <div
-      fxLayout="row wrap"
-      fxLayout.xs="column"
-      fxLayoutAlign.gt-xs="start center"
-      fxLayoutGap="8px"
-    >
-      <span fxFlex="1 1 auto" fxShow fxHide.xs></span>
-      <a mat-button href="{{ problemLink }}" fxFlex="0 0 auto" fxFlex.xs="100">
-        <ng-container i18n>Report Problem</ng-container>
-      </a>
-      <button
-        *ngIf="!isRunActive(run) && !isRunCompleted(run)"
-        mat-flat-button
-        disabled
-        fxFlex="0 0 auto"
-        fxFlex.xs="100"
-      >
-        <ng-container i18n>Starts {{ run.startTime | date }}</ng-container>
-      </button>
-      <button
-        mat-flat-button
-        *ngIf="isRunActive(run)"
-        (click)="launchRun()"
-        color="primary"
-        fxFlex="0 0 auto"
-        fxFlex.xs="100"
-      >
-        <mat-icon>play_circle_filled</mat-icon>&nbsp;<ng-container i18n>Launch</ng-container>
-      </button>
-      <button
-        mat-flat-button
-        *ngIf="isRunCompleted(run)"
-        (click)="reviewRun()"
-        color="primary"
-        fxFlex="0 0 auto"
-        fxFlex.xs="100"
-      >
-        <mat-icon>visibility</mat-icon>&nbsp;<ng-container i18n>Review Work</ng-container>
-      </button>
-    </div>
+  <mat-card-actions
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="center"
+    fxLayoutAlign.gt-xs="end center"
+    fxLayoutGap="8px"
+  >
+    <a mat-button href="{{ problemLink }}">
+      <ng-container i18n>Report Problem</ng-container>
+    </a>
+    <button *ngIf="!isRunActive(run) && !isRunCompleted(run)" mat-flat-button disabled>
+      <ng-container i18n>Starts {{ run.startTime | date }}</ng-container>
+    </button>
+    <button mat-flat-button *ngIf="isRunActive(run)" (click)="launchRun()" color="primary">
+      <mat-icon>play_circle_filled</mat-icon>&nbsp;<ng-container i18n>Launch</ng-container>
+    </button>
+    <button mat-flat-button *ngIf="isRunCompleted(run)" (click)="reviewRun()" color="primary">
+      <mat-icon>visibility</mat-icon>&nbsp;<ng-container i18n>Review Work</ng-container>
+    </button>
   </mat-card-actions>
 </mat-card>

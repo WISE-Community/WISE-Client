@@ -16,13 +16,11 @@
 }
 
 .mat-mdc-card-title {
-  margin-bottom: 6px;
+  margin-bottom: 0;
+}
 
-  @media (max-width: breakpoint('xs.max')) {
-    @include mat.typography-level($wise-typography, 'body-1');
-    font-weight: 500;
-    margin-bottom: 0;
-  }
+.info-block {
+  margin-top: 8px;
 }
 
 .mat-mdc-card-subtitle {

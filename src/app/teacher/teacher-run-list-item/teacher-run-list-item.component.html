@@ -51,8 +51,7 @@
 </ng-template>
 
 <mat-card
-  appearance="outlined"
-  class="mat-elevation-z3 can-highlight"
+  class="can-highlight"
   [ngClass]="{ 'highlighted-bg': run.isHighlighted }"
   [@flash]="{ value: '*', params: { duration: animateDuration, delay: animateDelay } }"
 >
@@ -64,7 +63,7 @@
     ></div>
     <div fxFlex="1 1 100%" fxLayout="row" fxLayoutWrap>
       <div fxLayout="column">
-        <mat-card-title [class.secondary-text]="isRunCompleted(run)" class="mat-subtitle-2">
+        <mat-card-title [class.secondary-text]="isRunCompleted(run)" class="mat-body-1">
           {{ run.project.name }}
           <span
             *ngIf="run.project.wiseVersion === 4"
@@ -77,7 +76,7 @@
             >(Legacy Unit)</span
           >
         </mat-card-title>
-        <mat-card-subtitle fxHide fxShow.gt-xs>
+        <mat-card-subtitle class="mat-caption" fxHide fxShow.gt-xs>
           <ng-container *ngTemplateOutlet="runInfo"></ng-container>
         </mat-card-subtitle>
       </div>
@@ -90,38 +89,30 @@
       <ng-container *ngTemplateOutlet="runInfo"></ng-container>
     </div>
   </mat-card-content>
-  <mat-card-actions>
-    <div
-      fxLayout="row wrap"
-      fxLayout.xs="column"
-      fxLayoutAlign="center"
-      fxLayoutAlign.gt-xs="end center"
-      fxLayoutGap="16px"
+  <mat-card-actions
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="center"
+    fxLayoutAlign.gt-xs="end center"
+    fxLayoutGap="8px"
+  >
+    <span *ngIf="run.lastRun" class="mat-caption secondary-text center" i18n
+      >Last student login: {{ run.lastRun | date: 'short' }}</span
     >
-      <span *ngIf="run.lastRun" class="mat-caption secondary-text center" i18n
-        >Last student login: {{ run.lastRun | date : 'short' }}</span
-      >
-      <button
-        *ngIf="!isRunActive(run) && !isRunCompleted(run)"
-        mat-flat-button
-        disabled
-        fxFlex="0 0 auto"
-        fxFlex.xs="100"
-      >
-        <ng-container i18n>Starts {{ run.startTime | date }}</ng-container>
-      </button>
-      <button
-        *ngIf="isRunActive(run) || isRunCompleted(run)"
-        mat-flat-button
-        (click)="launchGradeAndManageTool()"
-        color="primary"
-        fxFlex="0 0 auto"
-        fxFlex.xs="100"
-      >
-        <mat-icon>assignment_turned_in</mat-icon>&nbsp;<ng-container i18n
-          >Teacher Tools</ng-container
-        >
-      </button>
-    </div>
+    <button
+      *ngIf="!isRunActive(run) && !isRunCompleted(run)"
+      mat-flat-button
+      disabled
+    >
+      <ng-container i18n>Starts {{ run.startTime | date }}</ng-container>
+    </button>
+    <button
+      *ngIf="isRunActive(run) || isRunCompleted(run)"
+      mat-flat-button
+      (click)="launchGradeAndManageTool()"
+      color="primary"
+    >
+      <mat-icon>assignment_turned_in</mat-icon>&nbsp;<ng-container i18n>Teacher Tools</ng-container>
+    </button>
   </mat-card-actions>
 </mat-card>

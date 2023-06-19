@@ -16,24 +16,9 @@
 }
 
 .mat-mdc-card-title {
-  margin-bottom: 6px;
-
-  @media (max-width: breakpoint('xs.max')) {
-    @include mat.typography-level($wise-typography, 'body-1');
-    font-weight: 500;
-    margin-bottom: 0;
-  }
+  margin-bottom: 0;
 }
 
-.mat-mdc-card-subtitle {
-  margin-bottom: 2px;
-}
-
-.mat-mdc-card-actions {
-  .mat-mdc-button {
-    &:first-of-type, &:last-of-type {
-      margin-right: 0;
-      margin-left: 0;
-    }
-  }
+.info-block {
+  margin-top: 8px;
 }
