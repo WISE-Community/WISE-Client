@@ -1,5 +1,7 @@
+@use '@angular/material' as mat;
+
 @import
-  '@angular/material/theming',
+  'style/base/typography',
   'style/abstracts/functions',
   'style/abstracts/variables';
 
@@ -7,7 +9,6 @@
 }
 
 .info-block {
-  margin: 16px 0 0;
   padding: 12px;
   overflow: hidden;
 }
@@ -24,16 +25,10 @@
 }
 
 .mat-mdc-card-title {
-  margin-bottom: 4px;
-
-  @media (max-width: breakpoint('xs.max')) {
-    @include mat-typography-level-to-styles($config, body-1);
-    font-weight: 500;
-  }
+  margin-bottom: 2px;
 }
 
 .mat-mdc-card-subtitle {
-  margin-bottom: 2px;
 }
 
 .mat-mdc-dialog-actions {
