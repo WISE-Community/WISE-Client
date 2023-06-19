@@ -155,12 +155,6 @@
     max-height: 80vh;
   }
 
-  td {
-    &.mat-mdc-cell, &.mat-mdc-footer-cell, &.mat-mdc-header-cell {
-      padding: 4px 8px 4px 0;
-    }
-  }
-
   img[snip] {
     cursor: pointer;
   }
