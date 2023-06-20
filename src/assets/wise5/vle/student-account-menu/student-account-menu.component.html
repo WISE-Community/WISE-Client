@@ -12,8 +12,8 @@
   <div class="menu-section" *ngIf="rootNodeStatus != null">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div fxLayout="column">
-        <span class="mat-subtitle-2" i18n>Unit Completion</span>
-        <span class="mat-body-2 text-secondary" i18n>
+        <span class="mat-body-2" i18n>Unit Completion</span>
+        <span class="mat-caption text-secondary" i18n>
           {{ rootNodeStatus.progress.completedItems }}/{{
             rootNodeStatus.progress.totalItems
           }}
@@ -35,8 +35,8 @@
   <div class="menu-section" *ngIf="showScore">
     <div fxLayout="row" fxLayoutAlign="start center">
       <div fxLayout="column">
-        <span class="mat-subtitle-2" i18n>Total Score</span>
-        <span class="mat-body-2 text-secondary" i18n>{{ totalScore }}/{{ maxScore }} points</span>
+        <span class="mat-body-2" i18n>Total Score</span>
+        <span class="mat-caption text-secondary" i18n>{{ totalScore }}/{{ maxScore }} points</span>
       </div>
       <span fxFlex></span>
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
@@ -55,12 +55,11 @@
   </div>
   <mat-divider class="divider"></mat-divider>
   <div class="notice-bg-bg controls" fxLayout="row">
-    <button mat-menu-item class="mat-button mat-primary" (click)="goHome()" i18n>Go Home</button>
+    <button mat-button color="primary" (click)="goHome()" i18n>Go Home</button>
     <span fxFlex></span>
     <button
-      *ngIf="isAuthenticated"
-      mat-menu-item
-      class="mat-button mat-primary"
+      mat-button
+      color="primary"
       (click)="logOut('logOutButtonClicked')"
       i18n
     >
