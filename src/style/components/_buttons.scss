@@ -14,14 +14,6 @@
     }
 }
 
-.mat-mdc-raised-button {
-  &:not(.mat-mdc-icon-button) {
-    &:not([class*=mat-elevation-z]) {
-      @include mat.elevation(3);
-    }
-  }
-}
-
 .mat-mdc-fab.mat-fab--extended {
   border-radius: 24px;
   padding: 0px 16px;

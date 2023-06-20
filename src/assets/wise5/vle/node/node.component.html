@@ -37,8 +37,8 @@
     >
       <button
         *ngIf="node.showSaveButton"
-        mat-button
-        class="mat-primary mat-raised-button"
+        mat-raised-button
+        color="primary"
         (click)="saveButtonClicked()"
         [disabled]="isDisabled || !dirtyComponentIds.length"
         aria-label="Save"
@@ -49,8 +49,8 @@
       </button>
       <button
         *ngIf="node.showSubmitButton"
-        mat-button
-        class="mat-primary mat-raised-button"
+        mat-raised-button
+        color="primary"
         (click)="submitButtonClicked()"
         [disabled]="isDisabled || !dirtySubmitComponentIds.length"
         aria-label="Submit"
