@@ -121,8 +121,8 @@
     font-weight: 500;
   }
 
-  .mat-mdc-option {
-    font-size: 14px;
+  .mat-mdc-option, .mat-mdc-optgroup-label {
+    @include mat.typography-level($wise-typography, 'caption');
   }
 
   .mdc-text-field {
@@ -305,5 +305,29 @@
     height: $size;
     width: $size;
     line-height: $size;
+  }
+}
+
+@mixin filled-input-bg($dark: false) {
+  @if ($dark) {
+    .mdc-text-field--filled {
+      &:not(.mdc-text-field--disabled) {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      &.mdc-text-field--disabled {
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+    }
+  } @else {
+    .mdc-text-field--filled {
+      &:not(.mdc-text-field--disabled) {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+
+      &.mdc-text-field--disabled {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+    }
   }
 }

@@ -138,5 +138,5 @@ $monitor-colors: (
   'success': #00C853,
   'success-contrast': black,
   'text': mat.get-color-from-palette($foreground, 'text'),
-  'warn': mat.get-color-from-palette($monitor-theme-warn, 50),
+  'warn': mat.get-color-from-palette($monitor-theme-warn, 800),
 );

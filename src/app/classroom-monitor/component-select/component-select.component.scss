@@ -1,10 +1,28 @@
+@use '@angular/material' as mat;
+@import 'style/base/typography';
 
-/* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
-mat-select {
-  min-width: 150px;
-}
+.component-select {
+  .mdc-line-ripple {
+    &:before, &:after {
+      display: none;
+    }
+  }
 
-/* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
-mat-select, mat-select-trigger {
-  text-transform: none;
+  .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    min-height: 28px;
+  }
+
+  .mat-mdc-form-field-flex {
+    height: 36px;
+  }
+
+  .mat-mdc-select-value-text, .mat-mdc-select-placeholder {
+    font-size: mat.font-size($wise-typography, 'caption');
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
 }

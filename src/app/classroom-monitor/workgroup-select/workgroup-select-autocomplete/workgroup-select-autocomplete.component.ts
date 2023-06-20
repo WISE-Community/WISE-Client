@@ -8,6 +8,7 @@ import { filter, map, startWith } from 'rxjs/operators';
 import { ConfigService } from '../../../../assets/wise5/services/configService';
 import { TeacherDataService } from '../../../../assets/wise5/services/teacherDataService';
 import { copy } from '../../../../assets/wise5/common/object/object';
+import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'workgroup-select-autocomplete',
@@ -96,6 +97,12 @@ export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectCompone
       this.myControl.setValue(workgroup.displayNames);
     } else {
       this.myControl.setValue('');
+    }
+  }
+
+  closed(event: any) {
+    if (this.myControl.value === '') {
+      this.itemSelected(null);
     }
   }
 }

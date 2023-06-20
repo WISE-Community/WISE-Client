@@ -1,5 +1,10 @@
 <mat-form-field appearance="fill" class="select-period-form-field">
-  <mat-select [(value)]="selectedPeriodId" (selectionChange)="currentPeriodChanged()">
+  <mat-select
+    [(value)]="selectedPeriodId"
+    (selectionChange)="currentPeriodChanged()"
+    panelWidth="null"
+    hideSingleSelectionIndicator="true"
+  >
     <mat-select-trigger>{{ selectedPeriodText }}</mat-select-trigger>
     <mat-option *ngFor="let period of periods" [value]="period.periodId">
       <span *ngIf="period.periodId === -1" i18n>All Periods</span>
