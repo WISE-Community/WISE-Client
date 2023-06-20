@@ -13118,7 +13118,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">55</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
@@ -15127,28 +15127,28 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Share with class...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b87e7abf15926adeca15e38e887a4c21121c9587" datatype="html">
         <source>Remove file</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c648889391b76acac6870869f928f33920241c76" datatype="html">
         <source>Add picture</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cf52ff0f4f9dc792b81e652fc6f0c2e83d14d56b" datatype="html">
         <source> Post </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">95,97</context>
+          <context context-type="linenumber">94,96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3210146777760299474" datatype="html">
@@ -19452,35 +19452,35 @@ If this problem continues, let your teacher know and move on to the next activit
         <source><x id="INTERPOLATION" equiv-text="{{ nodeStatus.progress.completionPct }}"/>% completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ec00010f282c04bdcdc31d8a1bdc2a0b235b2cf9" datatype="html">
         <source> <x id="INTERPOLATION" equiv-text="{{ nodeStatus.progress.completedItems }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ nodeStatus.progress.totalItems }}"/> items </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">48,50</context>
+          <context context-type="linenumber">49,51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3a46d8b67c3dede35e374f9c0a758feb64e7032b" datatype="html">
         <source>Lesson is locked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e25238529ab9ece99e3514fdd3ac78b400a215e7" datatype="html">
         <source>Go to <x id="INTERPOLATION" equiv-text="{{ nodeTitle }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b73fb34ae49aef54ad30ef3b47b73bb3987c8c51" datatype="html">
         <source>Item is locked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b570c9b6f5d96fb6f6969cb9397019829c34e82c" datatype="html">
