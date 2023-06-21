@@ -5966,28 +5966,28 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Are you sure you want to delete this <x id="singular term for note in unit" equiv-text="this.label.singular"/>?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-item/notebook-item.component.ts</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4834867472814496978" datatype="html">
         <source>Delete <x id="singular term for note in unit" equiv-text="this.label.singular"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-item/notebook-item.component.ts</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5523476455115843494" datatype="html">
         <source>Are you sure you want to revive this <x id="singular term for note in unit" equiv-text="this.label.singular"/>?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-item/notebook-item.component.ts</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">111</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2421229851977962666" datatype="html">
         <source>Revive <x id="singular term for note in unit" equiv-text="this.label.singular"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-item/notebook-item.component.ts</context>
-          <context context-type="linenumber">108</context>
+          <context context-type="linenumber">112</context>
         </context-group>
       </trans-unit>
       <trans-unit id="58856baa2a91a512984bddd54ec1d2fe794d5da7" datatype="html">
@@ -6061,28 +6061,28 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Toggle Full Screen</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e8bcb762b48cf52fbea66ce9c4f6b970b99a80fd" datatype="html">
         <source>Collapse</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d5cec7468241d72cafd86ad1af6d55b09a6e3ae5" datatype="html">
         <source>Restore</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f8b53b407af242e77dc3391947f23988f3451e64" datatype="html">
         <source> Save </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">73,75</context>
+          <context context-type="linenumber">72,74</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
@@ -6097,7 +6097,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Team hasn&apos;t worked on <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> yet. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">94,96</context>
+          <context context-type="linenumber">93,95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a8d79c94172b18dbceadb046a6f53999bd5684f6" datatype="html">

@@ -1,33 +1,38 @@
 
-/* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
-.mat-list-item-content {
-  margin-bottom: 16px;
-}
+.notebook-workgroup-grading {
+  .mat-mdc-button {
+    text-transform: none;
+  }
 
-.grading__item-container {
-  height: auto;
-}
+  .grading__item-container {
+    height: auto;
+  }
 
-.list-item {
-  height: auto;
-}
+  .list-item {
+    height: auto;
+  }
 
-.row-button {
-  height: 60px;
-  border-radius: 0;
-}
+  .row-button {
+    height: 60px;
+    border-radius: 0;
+  }
 
-.list-item__subheader-button {
-  padding: 8px 0;
-}
+  .list-item__subheader-button {
+    padding: 8px 0;
+  }
 
-.report-grading {
-  right: 0;
-  display: block;
-  position: relative;
-  margin: 16px;
-}
+  .report-grading {
+    right: 0;
+    display: block;
+    position: relative;
+    margin: 16px;
+  }
 
-.mat-headline-6 {
-  margin: 0;
+  .mat-headline-6 {
+    margin: 0;
+  }
+
+  .mdc-button__label {
+    width: 100%;
+  }
 }
