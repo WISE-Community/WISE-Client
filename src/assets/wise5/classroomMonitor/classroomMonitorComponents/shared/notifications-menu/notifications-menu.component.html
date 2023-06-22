@@ -24,7 +24,7 @@
     </button>
   </mat-toolbar>
   <div class="account-menu__actions notifications-content" fxFlex>
-    <p *ngIf="newNotifications.length === 0" i18n>You have no new alerts at this time.</p>
+    <p class="no-notifications" *ngIf="newNotifications.length === 0" i18n>You have no new alerts at this time.</p>
     <mat-list *ngIf="newNotifications.length > 0">
       <ng-container *ngFor="let notification of newNotifications; let last = last">
         <mat-list-item>

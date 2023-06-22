@@ -12763,6 +12763,13 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="eaab09dc930a0ad5a78dfa05cea4546ae25224b2" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ view.label }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/main-menu/main-menu.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="058b73757ea9dc14dee9cb48d52bf312fbb8ab15" datatype="html">
         <source>Selected icon</source>
         <context-group purpose="location">
