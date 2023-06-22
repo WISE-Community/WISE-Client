@@ -7,7 +7,6 @@ import { ComponentSelectComponent } from '../classroom-monitor/component-select/
 import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress/nav-item-progress.component';
 import { StatusIconComponent } from '../classroom-monitor/status-icon/status-icon.component';
 import { StepInfoComponent } from '../classroom-monitor/step-info/step-info.component';
-import { WorkgroupSelectDropdownComponent } from '../classroom-monitor/workgroup-select/workgroup-select-dropdown/workgroup-select-dropdown.component';
 import { PeerGroupGradingModule } from './peer-group-grading.module';
 import { SelectPeriodModule } from './select-period.module';
 import { ComponentGradingModule } from './component-grading.module';
@@ -71,7 +70,6 @@ import { DataExportModule } from '../../assets/wise5/classroomMonitor/dataExport
     ToolBarComponent,
     TopBarComponent,
     ViewComponentRevisionsComponent,
-    WorkgroupSelectDropdownComponent,
     NavItemScoreComponent
   ],
   imports: [

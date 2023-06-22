@@ -15,23 +15,21 @@
       (click)="toggleExpand()"
       [disabled]="disabled"
     >
-      <div fxLayout="row">
-        <div fxFlex fxLayout="row" fxLayoutAlign="start center">
-          <step-info
-            [hasAlert]="hasAlert"
-            [hasNewAlert]="hasNewAlert"
-            [hasNewWork]="hasNewWork"
-            [nodeId]="nodeId"
-          >
-          </step-info>
-        </div>
-        <div fxFlex="{{ showScore ? 30 : 20 }}" fxLayout="row" fxLayoutAlign="center center">
-          <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass">
-          </workgroup-node-status>
-        </div>
-        <div *ngIf="showScore" fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
-          <workgroup-node-score [score]="score" [maxScore]="maxScore"></workgroup-node-score>
-        </div>
+      <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+        <step-info
+          [hasAlert]="hasAlert"
+          [hasNewAlert]="hasNewAlert"
+          [hasNewWork]="hasNewWork"
+          [nodeId]="nodeId"
+        >
+        </step-info>
+      </div>
+      <div fxFlex="{{ showScore ? 30 : 20 }}" fxLayout="row" fxLayoutAlign="center center">
+        <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass">
+        </workgroup-node-status>
+      </div>
+      <div *ngIf="showScore" fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+        <workgroup-node-score [score]="score" [maxScore]="maxScore"></workgroup-node-score>
       </div>
     </button>
   </div>
