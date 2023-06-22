@@ -1,9 +1,8 @@
 <mat-card
-  appearance="outlined"
   class="team notice-bg-bg"
   [class]="{ 'disabled-text': team.users.length === 0, warn: isUnassigned }"
 >
-  <div class="mat-card-title" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
     <mat-icon
       *ngIf="team.workgroupId"
       class="mat-24 secondary-text"

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfigService } from '../../../../services/configService';
@@ -10,7 +10,8 @@ import { RemoveUserConfirmDialogComponent } from '../remove-user-confirm-dialog/
 @Component({
   selector: 'manage-user',
   styleUrls: ['manage-user.component.scss'],
-  templateUrl: 'manage-user.component.html'
+  templateUrl: 'manage-user.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class ManageUserComponent {
   @Input() user: any;
