@@ -15,6 +15,7 @@ export class Run {
   owner: User;
   sharedOwners: User[] = [];
   project: Project;
+  tags: string[];
 
   static readonly VIEW_STUDENT_WORK_PERMISSION: number = 1;
   static readonly GRADE_AND_MANAGE_PERMISSION: number = 2;

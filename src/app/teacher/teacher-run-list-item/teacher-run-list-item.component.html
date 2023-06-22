@@ -52,7 +52,7 @@
 
 <mat-card
   class="mat-elevation-z3 can-highlight"
-  [ngClass]="{ 'highlighted-bg': run.isHighlighted, 'archived-run': run.project.isDeleted }"
+  [ngClass]="{ 'highlighted-bg': run.isHighlighted, 'archived-run': run.isArchived }"
   [@flash]="{ value: '*', params: { duration: animateDuration, delay: animateDelay } }"
 >
   <mat-card-content fxLayout="row" fxLayoutGap="12px">

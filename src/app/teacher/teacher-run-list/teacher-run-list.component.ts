@@ -75,6 +75,7 @@ export class TeacherRunListComponent implements OnInit {
     this.runs = runs.map((run) => {
       const teacherRun = new TeacherRun(run);
       teacherRun.shared = !teacherRun.isOwner(userId);
+      teacherRun.isArchived = teacherRun.tags.includes('archived');
       return teacherRun;
     });
     this.filteredRuns = this.runs;
@@ -146,10 +147,7 @@ export class TeacherRunListComponent implements OnInit {
 
   private performFilter(): void {
     this.filteredRuns = this.filteredRuns.filter((run: TeacherRun) => {
-      return (
-        (!this.isShowArchived && !run.project.isDeleted) ||
-        (this.isShowArchived && run.project.isDeleted)
-      );
+      return (!this.isShowArchived && !run.isArchived) || (this.isShowArchived && run.isArchived);
     });
   }
 
@@ -283,7 +281,7 @@ export class TeacherRunListComponent implements OnInit {
     const runs = this.getSelectedRuns();
     return this.teacherService.archiveRuns(runs).subscribe({
       next: () => {
-        this.setRunsIsDeleted(runs, true);
+        this.setRunsIsArchived(runs, true);
         this.unselectAllRuns();
         this.updateSelectAllCheckboxAndNumRunsSelected();
         this.performSearchAndFilter();
@@ -299,7 +297,7 @@ export class TeacherRunListComponent implements OnInit {
     const runs = this.getSelectedRuns();
     return this.teacherService.unarchiveRuns(runs).subscribe({
       next: () => {
-        this.setRunsIsDeleted(runs, false);
+        this.setRunsIsArchived(runs, false);
         this.unselectAllRuns();
         this.updateSelectAllCheckboxAndNumRunsSelected();
         this.performSearchAndFilter();
@@ -311,9 +309,9 @@ export class TeacherRunListComponent implements OnInit {
     });
   }
 
-  private setRunsIsDeleted(runs: TeacherRun[], isDeleted: boolean): void {
+  private setRunsIsArchived(runs: TeacherRun[], isArchived: boolean): void {
     for (const run of runs) {
-      run.project.isDeleted = isDeleted;
+      run.isArchived = isArchived;
     }
   }
 

@@ -94,7 +94,7 @@ export class RunMenuComponent implements OnInit {
     const run = this.run;
     this.teacherService.archiveRun(run).subscribe({
       next: () => {
-        run.project.isDeleted = true;
+        run.isArchived = true;
         this.runArchiveStatusChangedEvent.emit(run);
         this.snackBar.open($localize`Successfully Archived Run`);
       },
@@ -108,7 +108,7 @@ export class RunMenuComponent implements OnInit {
     const run = this.run;
     this.teacherService.unarchiveRun(run).subscribe({
       next: () => {
-        run.project.isDeleted = false;
+        run.isArchived = false;
         this.runArchiveStatusChangedEvent.emit(run);
         this.snackBar.open($localize`Successfully Unarchived Run`);
       },
