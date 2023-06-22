@@ -1,29 +1,47 @@
+import { ComponentContent } from './ComponentContent';
 import { Node } from './Node';
 
 const componentId1 = 'c1';
 const componentId2 = 'c2';
 const componentId3 = 'c3';
 const componentId4 = 'c4';
-let node = new Node();
+let node: Node;
 
 describe('Node', () => {
+  beforeEach(() => {
+    node = new Node();
+    node.components = [
+      { id: componentId1, prompt: 'a' },
+      { id: componentId2, prompt: 'b' }
+    ];
+  });
   copyComponents();
+  deleteComponent();
   getNodeIcon();
   getNodeIdComponentIds();
   insertComponents();
   moveComponents();
+  replaceComponent();
 });
 
 function copyComponents() {
   describe('copyComponents()', () => {
     it('should return a copy of the specified components with new ids', () => {
-      node = Object.assign(new Node(), {
-        components: [{ id: componentId1 }, { id: componentId2 }]
-      });
       const copies = node.copyComponents([componentId1, componentId2]);
       expect(copies.length).toEqual(2);
       expect(copies[0].id).not.toEqual(componentId1);
       expect(copies[1].id).not.toEqual(componentId2);
+    });
+  });
+}
+
+function deleteComponent() {
+  describe('deleteComponent()', () => {
+    it('should delete the component from the node and return the component', () => {
+      const deletedComponent = node.deleteComponent(componentId1);
+      expect(deletedComponent.id).toEqual(componentId1);
+      expect(node.components.length).toEqual(1);
+      expect(node.components[0].id).toEqual(componentId2);
     });
   });
 }
@@ -37,7 +55,7 @@ function getNodeIcon() {
 
 function getNodeIcon_noIconSpecified_returnDefaultIcon() {
   it('should return default icon if icon is not set', () => {
-    const icon = new Node().getIcon();
+    const icon = node.getIcon();
     expect(icon.color).toEqual('#757575');
     expect(icon.type).toEqual('font');
   });
@@ -45,7 +63,6 @@ function getNodeIcon_noIconSpecified_returnDefaultIcon() {
 
 function getNodeIcon_iconSpecified_returnMergedIcon() {
   it('should return merged icon if an icon is set', () => {
-    const node = new Node();
     node.icons = {
       default: {
         color: 'rgba(0,1,1,0)',
@@ -73,12 +90,6 @@ function getNodeIdComponentIds() {
 
 function insertComponents() {
   describe('insertComponents()', () => {
-    beforeEach(() => {
-      node = Object.assign(new Node(), {
-        components: [{ id: componentId1 }, { id: componentId2 }]
-      });
-    });
-
     it('should insert components at the beginning of the node', () => {
       node.insertComponents([{ id: componentId3 }, { id: componentId4 }], null);
       expectComponentsMatchIds(node.components, [
@@ -132,6 +143,15 @@ function moveComponents_NonNullInsertAfterComponentId_MoveMultipleComponentsAfte
     it('should move components after the specified component', () => {
       node.moveComponents(['b', 'c', 'e'], 'a');
       expect(node.components.map((component) => component.id).join(',')).toEqual('a,b,c,e,d');
+    });
+  });
+}
+
+function replaceComponent() {
+  describe('replaceComponent()', () => {
+    it('should replace the specified component', () => {
+      node.replaceComponent(componentId2, { id: componentId2, prompt: 'c' } as ComponentContent);
+      expect(node.components[1].prompt).toEqual('c');
     });
   });
 }
