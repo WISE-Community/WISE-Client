@@ -4,7 +4,8 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-  templateUrl: './add-lesson-choose-location.component.html'
+  templateUrl: './add-lesson-choose-location.component.html',
+  styleUrls: ['./add-lesson-choose-location.component.scss']
 })
 export class AddLessonChooseLocationComponent implements OnInit {
   title: string;

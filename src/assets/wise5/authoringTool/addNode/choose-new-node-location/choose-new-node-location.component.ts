@@ -4,7 +4,8 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-  templateUrl: 'choose-new-node-location.component.html'
+  templateUrl: 'choose-new-node-location.component.html',
+  styleUrls: ['./choose-new-node-location.component.scss']
 })
 export class ChooseNewNodeLocation {
   nodeIds: string[];

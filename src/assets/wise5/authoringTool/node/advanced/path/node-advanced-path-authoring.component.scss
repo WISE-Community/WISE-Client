@@ -29,3 +29,7 @@ $notice-bg: map-get($default-colors, notice-bg);
   border-radius: $card-border-radius;
   padding: 16px;
 }
+
+.mat-icon {
+  margin: 0px;
+}

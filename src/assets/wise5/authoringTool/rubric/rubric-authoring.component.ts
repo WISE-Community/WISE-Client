@@ -5,7 +5,8 @@ import { Component } from '@angular/core';
 import { insertWiseLinks } from '../../common/wise-link/wise-link';
 
 @Component({
-  templateUrl: 'rubric-authoring.component.html'
+  templateUrl: 'rubric-authoring.component.html',
+  styleUrls: ['./rubric-authoring.component.scss']
 })
 export class RubricAuthoringComponent {
   rubric: string = '';

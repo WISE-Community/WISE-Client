@@ -16,7 +16,9 @@
   </div>
 </div>
 <hr />
-<button mat-button class="mat-primary" (click)="cancel()" aria-label="Cancel" i18n>Cancel</button>
+<button mat-raised-button color="primary" (click)="cancel()" aria-label="Cancel" i18n>
+  Cancel
+</button>
 
 <ng-template #group let-groupId="groupId">
   <div fxLayout="row" fxLayoutGap="16px" style="margin: 4px 0px">
@@ -27,8 +29,8 @@
       </p>
     </div>
     <button
-      mat-button
-      class="mat-raised-button mat-primary"
+      mat-raised-button
+      color="primary"
       matTooltip="Insert After"
       i18n-matTooltip
       matTooltipPosition="above"
@@ -41,8 +43,8 @@
 
 <ng-template #insertInsideButton let-active="active">
   <button
-    mat-button
-    class="mat-raised-button mat-primary"
+    mat-raised-button
+    color="primary"
     style="margin: 8px 8px"
     matTooltip="Insert at the Beginning"
     i18n-matTooltip
