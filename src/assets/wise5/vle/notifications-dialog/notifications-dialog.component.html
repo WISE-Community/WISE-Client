@@ -39,7 +39,7 @@
               </a>
             </div>
             <div class="secondary-text">
-              <ng-container  *ngIf="notificationAggregate.nodeId != null">
+              <ng-container *ngIf="notificationAggregate.nodeId != null">
                 {{ getNodePositionAndTitle(notificationAggregate.nodeId) }}
               </ng-container>
               <ng-container *ngIf="notificationAggregate.notebookItemId != null">
@@ -51,11 +51,12 @@
           <button
             mat-icon-button
             matListIcon
+            class="text-secondary mat-body-2"
             (click)="dismissNotificationAggregate(notificationAggregate); $event.stopPropagation()"
             aria-label="Dismiss"
             i18n-aria-label
           >
-            <mat-icon class="text-secondary mat-body-2">clear</mat-icon>
+            <mat-icon>clear</mat-icon>
           </button>
         </div>
       </mat-list-item>
