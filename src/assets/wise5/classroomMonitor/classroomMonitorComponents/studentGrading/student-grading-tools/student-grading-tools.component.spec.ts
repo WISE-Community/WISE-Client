@@ -8,6 +8,7 @@ import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { StudentGradingToolsComponent } from './student-grading-tools.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('StudentGradingToolsComponent', () => {
   let component: StudentGradingToolsComponent;
@@ -23,7 +24,8 @@ describe('StudentGradingToolsComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatSelectModule
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

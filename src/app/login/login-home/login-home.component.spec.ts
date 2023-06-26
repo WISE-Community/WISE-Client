@@ -99,7 +99,7 @@ function incorrectPassword() {
             element.nativeElement.textContent.trim() ===
             'Username and password not recognized. Please try again.'
         );
-      expect(errorMessageElement.nativeElement.classList.contains('active')).toBeTruthy();
+      expect(errorMessageElement.nativeElement.classList.contains('warn')).toBeTruthy();
       expect(component.credentials.password).toEqual('');
     }));
   });
