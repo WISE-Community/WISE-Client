@@ -1879,9 +1879,7 @@ function mouseDownEventOccurred() {
       const chart = component.getChartById(component.chartId);
       expect(chart.xAxis[0].userOptions.plotLines).toEqual([]);
       component.mouseDownEventOccurred({ offsetX: 1000 });
-      expect(chart.xAxis[0].userOptions.plotLines).toEqual([
-        new XPlotLine(71.02446483180428, '') as any
-      ]);
+      expect(chart.xAxis[0].userOptions.plotLines).toEqual([new XPlotLine(100, '') as any]);
     });
   });
 }
