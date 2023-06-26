@@ -22,10 +22,18 @@
     margin-top: 16px;
   }
 
+  .comment-divider {
+    margin: 0px;
+  }
+
   .comments {
-    padding: 0;
+    padding: 16px;
     max-height: 400px;
     overflow-y: auto;
+  }
+
+  .comment {
+    padding-bottom: 16px;
   }
 
   .mat-mdc-list-base .mat-mdc-list-item {
