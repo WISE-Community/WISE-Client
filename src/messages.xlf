@@ -450,7 +450,7 @@
       <trans-unit id="bf18b09fd55c7bc40ce38d6b715ca20598a5d798" datatype="html">
         <source> Click the new component type you want to add, or <x id="START_TAG_BUTTON" ctype="x-button" equiv-text="&lt;button
         mat-raised-button
-        class=&quot;mat-primary&quot;
+        color=&quot;primary&quot;
         (click)=&quot;importComponent()&quot;
         arial-label=&quot;import components&quot;
       &gt;"/> import component(s) from other units <x id="CLOSE_TAG_BUTTON" ctype="x-button" equiv-text="&lt;/button&gt;"/></source>
