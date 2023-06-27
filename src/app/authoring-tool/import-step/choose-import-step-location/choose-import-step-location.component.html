@@ -24,8 +24,8 @@
           </p>
         </div>
         <button
-          mat-button
-          class="mat-raised-button mat-primary"
+          mat-raised-button
+          color="primary"
           *ngIf="isGroupNode(nodeId)"
           matTooltip="Insert As First Step"
           i18n-matTooltip
@@ -35,8 +35,8 @@
           <mat-icon>call_received</mat-icon>
         </button>
         <button
-          mat-button
-          class="mat-raised-button mat-primary"
+          mat-raised-button
+          color="primary"
           *ngIf="!isGroupNode(nodeId)"
           matTooltip="Insert After"
           i18n-matTooltip
@@ -50,4 +50,6 @@
   </div>
 </div>
 <hr />
-<button mat-button class="mat-primary" (click)="cancel()" aria-label="Cancel" i18n>Cancel</button>
+<button mat-raised-button color="primary" (click)="cancel()" aria-label="Cancel" i18n>
+  Cancel
+</button>

@@ -1,3 +1,5 @@
+
+/* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
 label.mat-slide-toggle-label {
   display: flex;
 }
@@ -75,4 +77,8 @@ p.select-oer-instructions {
 .dimension-input-container {
   margin-right: 20px;
   width: 150px;
+}
+
+.mat-icon {
+  margin: 0px;
 }

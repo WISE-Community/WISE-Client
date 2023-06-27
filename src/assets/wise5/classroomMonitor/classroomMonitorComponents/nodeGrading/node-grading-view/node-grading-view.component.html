@@ -38,11 +38,7 @@
       fxLayoutAlign="center center"
       fxLayoutGap="8px"
     >
-      <component-select
-        [nodeId]="nodeId"
-        (modelChange)="onUpdateHiddenComponents($event)"
-        class="component-select"
-      >
+      <component-select [nodeId]="nodeId" (modelChange)="onUpdateHiddenComponents($event)">
       </component-select>
       <button *ngIf="milestoneReport" mat-stroked-button (click)="showReport($event)" class="info">
         <div fxLayoutAlign="center center" fxLayoutGap="4px">
@@ -115,14 +111,11 @@
         <button
           mat-button
           class="table--list__thead__link"
-          fxFlex
-          fxLayout="row"
-          fxLayoutAlign="start center"
           (click)="setSort('team')"
           aria-label="Sort by team"
           i18n-aria-label
         >
-          <span i18n>Team</span>
+          <span i18n fxLayout="row" fxLayoutAlign="start center">Team</span>
           <mat-icon
             *ngIf="sort === 'team' || sort === '-team'"
             class="table--list__thead__sort"

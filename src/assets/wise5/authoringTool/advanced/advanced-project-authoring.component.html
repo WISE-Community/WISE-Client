@@ -1,8 +1,9 @@
 <div fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="start center">
   <button
-    mat-button
+    mat-raised-button
+    color="primary"
     id="backToProjectButton"
-    class="topButton mat-raised-button mat-primary"
+    class="topButton"
     (click)="goBack()"
   >
     <mat-icon
@@ -14,9 +15,10 @@
     >
   </button>
   <button
-    mat-button
+    mat-raised-button
+    color="primary"
     id="showProjectJSONButton"
-    class="topButton mat-raised-button mat-primary"
+    class="topButton"
     (click)="toggleJSON()"
   >
     <mat-icon
@@ -27,7 +29,7 @@
       >code</mat-icon
     >
   </button>
-  <button mat-button class="topButton mat-raised-button mat-primary" (click)="downloadProject()">
+  <button mat-raised-button color="primary" class="topButton" (click)="downloadProject()">
     <mat-icon
       class="projectButtonTooltip"
       matTooltip="Download Unit"
@@ -42,7 +44,7 @@
   <mat-form-field fxFlex appearance="outline">
     <mat-label i18n>Edit Unit JSON</mat-label>
     <textarea
-      class="mat-body-1"
+      class="mat-body-2"
       matInput
       cdkTextareaAutosize
       [(ngModel)]="projectJSONString"
@@ -55,11 +57,7 @@
     <mat-label i18n>Script Filename</mat-label>
     <input matInput [(ngModel)]="projectScriptFilename" (change)="projectScriptFilenameChanged()" />
   </mat-form-field>
-  <button
-    mat-button
-    class="topButton mat-raised-button mat-primary"
-    (click)="chooseProjectScriptFile()"
-  >
+  <button mat-raised-button color="primary" class="topButton" (click)="chooseProjectScriptFile()">
     <mat-icon
       class="projectButtonTooltip"
       matTooltip="Choose"
@@ -74,7 +72,7 @@
     <mat-label i18n>Unit URL</mat-label>
     <input matInput value="{{ getProjectURL() }}" disabled="true" />
   </mat-form-field>
-  <button mat-button class="topButton mat-raised-button mat-primary" (click)="copyProjectURL()">
+  <button mat-raised-button color="primary" class="topButton" (click)="copyProjectURL()">
     <mat-icon
       class="projectButtonTooltip"
       matTooltip="Copy Unit URL to Clipboard"
@@ -83,11 +81,7 @@
       >content_paste</mat-icon
     >
   </button>
-  <button
-    mat-button
-    class="topButton mat-raised-button mat-primary"
-    (click)="openProjectURLInNewTab()"
-  >
+  <button mat-raised-button color="primary" class="topButton" (click)="openProjectURLInNewTab()">
     <mat-icon
       class="projectButtonTooltip"
       matTooltip="Open Unit URL in New Tab"

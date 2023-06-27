@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { NotebookService } from '../../../../services/notebookService';
 
 @Component({
   selector: 'notebook-workgroup-grading',
   templateUrl: './notebook-workgroup-grading.component.html',
-  styleUrls: ['./notebook-workgroup-grading.component.scss']
+  styleUrls: ['./notebook-workgroup-grading.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NotebookWorkgroupGradingComponent implements OnInit {
   @Input() expand: boolean;

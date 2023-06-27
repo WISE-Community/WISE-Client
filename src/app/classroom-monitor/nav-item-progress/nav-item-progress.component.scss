@@ -1,3 +1,10 @@
-mat-progress-bar {
-  height: 14px;
+
+.progress-wrapper {
+  .mat-mdc-progress-bar, .mdc-linear-progress__bar-inner {
+    height: 14px;
+  }
+
+  .mdc-linear-progress__bar-inner {
+    border-top-width: 14px;
+  }
 }

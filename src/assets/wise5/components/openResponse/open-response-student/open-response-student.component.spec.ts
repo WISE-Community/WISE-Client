@@ -21,6 +21,8 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { OpenResponseContent } from '../OpenResponseContent';
 import { OpenResponseService } from '../openResponseService';
 import { OpenResponseStudent } from './open-response-student.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { DialogWithoutCloseComponent } from '../../../directives/dialog-without-close/dialog-without-close.component';
 
 let component: OpenResponseStudent;
 const componentId = 'component1';
@@ -46,11 +48,12 @@ describe('OpenResponseStudent', () => {
       declarations: [
         ComponentHeader,
         ComponentSaveSubmitButtons,
+        DialogWithoutCloseComponent,
         OpenResponseStudent,
         PossibleScoreComponent
       ],
       providers: [AudioRecorderService],
-      schemas: []
+      schemas: [NO_ERRORS_SCHEMA]
     });
   });
 
@@ -204,32 +207,30 @@ function createComponentState() {
 
 function createComponentStateAdditionalProcessing() {
   describe('createComponentStateAdditionalProcessing', () => {
-    it(
-      'should perform create component state additional processing',
-      waitForAsync(() => {
-        spyOn(TestBed.inject(OpenResponseService), 'isCompletedV2').and.returnValue(true);
-        spyOn(TestBed.inject(CRaterService), 'isCRaterScoreOnEvent').and.returnValue(true);
-        spyOn(TestBed.inject(CRaterService), 'makeCRaterScoringRequest').and.returnValue(
-          of({
-            responses: {
-              feedback: {
-                ideas: {}
-              },
-              scores: {
-                raw_trim_round: 1
-              }
+    it('should perform create component state additional processing', (done) => {
+      spyOn(TestBed.inject(OpenResponseService), 'isCompletedV2').and.returnValue(true);
+      spyOn(TestBed.inject(CRaterService), 'isCRaterScoreOnEvent').and.returnValue(true);
+      spyOn(TestBed.inject(CRaterService), 'makeCRaterScoringRequest').and.returnValue(
+        of({
+          responses: {
+            feedback: {
+              ideas: {}
+            },
+            scores: {
+              raw_trim_round: 1
             }
-          })
-        );
-        component.isSubmit = true;
-        component.createComponentState('submit').then((componentState: any) => {
-          expect(componentState.componentId).toEqual(componentId);
-          expect(componentState.nodeId).toEqual(nodeId);
-          expect(componentState.annotations.length).toEqual(1);
-          expect(componentState.annotations[0].data.value).toEqual(1);
-        });
-      })
-    );
+          }
+        })
+      );
+      component.isSubmit = true;
+      component.createComponentState('submit').then((componentState: any) => {
+        expect(componentState.componentId).toEqual(componentId);
+        expect(componentState.nodeId).toEqual(nodeId);
+        expect(componentState.annotations.length).toEqual(1);
+        expect(componentState.annotations[0].data.value).toEqual(1);
+        done();
+      });
+    });
   });
 }
 

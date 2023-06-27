@@ -59,10 +59,9 @@ export function initialize(
     MatDialogModule,
     RecaptchaV3Module,
     RouterModule.forRoot([], {
-      scrollPositionRestoration: 'enabled',
-      anchorScrolling: 'enabled',
-      relativeLinkResolution: 'legacy'
-    })
+    scrollPositionRestoration: 'enabled',
+    anchorScrolling: 'enabled'
+})
   ],
   providers: [
     ConfigService,

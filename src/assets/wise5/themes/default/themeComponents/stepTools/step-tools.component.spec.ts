@@ -12,6 +12,7 @@ import { NodeStatusIcon } from '../nodeStatusIcon/node-status-icon.component';
 import { StepToolsComponent } from './step-tools.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 import { NodeStatusService } from '../../../../services/nodeStatusService';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 const nodeId1 = 'node1';
 const nodeId2 = 'node2';
@@ -31,6 +32,7 @@ describe('StepToolsComponent', () => {
         MatDialogModule,
         MatIconModule,
         MatSelectModule,
+        NoopAnimationsModule,
         StudentTeacherCommonServicesModule
       ],
       declarations: [NodeIconComponent, NodeStatusIcon, StepToolsComponent]

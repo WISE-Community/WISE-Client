@@ -20,7 +20,7 @@
       class="to-top dark-theme"
       [ngClass]="{ active: scroll, inactive: !scroll }"
     >
-      <button mat-fab class="mat-fab--extended" color="default" (click)="scrollToTop()">
+      <button mat-raised-button (click)="scrollToTop()">
         <mat-icon>arrow_upward</mat-icon>
         &nbsp;<ng-container i18n>Back to Top</ng-container>
       </button>

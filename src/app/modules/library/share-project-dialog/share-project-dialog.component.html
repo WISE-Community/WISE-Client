@@ -1,6 +1,6 @@
-<h2 class="mat-dialog-title" i18n>Share Unit</h2>
+<h2 mat-dialog-title i18n>Share Unit</h2>
 <mat-dialog-content class="dialog-content-scroll">
-  <p class="mat-subheading-1 accent-1">
+  <p class="mat-body-1 accent-1">
     {{ project.name }} <span class="mat-caption" i18n>(Unit ID: {{ project.id }})</span>
   </p>
   <p>
@@ -22,7 +22,6 @@
       [matAutocomplete]="auto"
     />
     <button
-      mat-button
       matSuffix
       mat-icon-button
       [ngClass]="{ invisible: !teacherSearchControl.value }"
@@ -95,6 +94,6 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </mat-dialog-content>
-<mat-dialog-actions fxLayoutAlign="end">
+<mat-dialog-actions align="end">
   <button mat-flat-button color="primary" mat-dialog-close i18n>Done</button>
 </mat-dialog-actions>

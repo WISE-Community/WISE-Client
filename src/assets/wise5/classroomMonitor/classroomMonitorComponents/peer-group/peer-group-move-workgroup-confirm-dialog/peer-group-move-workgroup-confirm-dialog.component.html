@@ -1,4 +1,4 @@
-<h2 mat-dialog-title fxLayoutAlign="start center">
+<h2 mat-dialog-title class="mat-dialog-title--icons" fxLayoutAlign="start center">
   <span i18n>Change Grouping</span>
   <span fxFlex></span>
   <mat-icon *ngIf="isMovingFromPeerGroup" color="warn" i18n-aria-label aria-label="Warning"
@@ -17,7 +17,7 @@
     <p i18n>Are you sure you want to move this team?</p>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end" fxLayoutGap="8px">
+<mat-dialog-actions align="end">
   <button
     *ngIf="isMovingFromPeerGroup"
     mat-flat-button

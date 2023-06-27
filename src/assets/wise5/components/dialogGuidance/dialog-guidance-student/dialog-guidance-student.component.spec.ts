@@ -25,6 +25,7 @@ import { DialogGuidanceService } from '../dialogGuidanceService';
 import { DialogGuidanceStudentComponent } from './dialog-guidance-student.component';
 import { DialogGuidanceComponent } from '../DialogGuidanceComponent';
 import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let component: DialogGuidanceStudentComponent;
 let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
@@ -50,7 +51,8 @@ describe('DialogGuidanceStudentComponent', () => {
         MatInputModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [DialogGuidanceFeedbackService]
+      providers: [DialogGuidanceFeedbackService],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

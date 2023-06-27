@@ -1,39 +1,21 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ComponentService } from '../../components/componentService';
-import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
-import { NodeService } from '../../services/nodeService';
-import { ProjectService } from '../../services/projectService';
-import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
-import { TagService } from '../../services/tagService';
-import { UtilService } from '../../services/utilService';
 import { VLEProjectService } from '../vleProjectService';
 import { NodeComponent } from './node.component';
+import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 
 let component: NodeComponent;
-let createComponentStatesSpy: jasmine.Spy;
 let fixture: ComponentFixture<NodeComponent>;
 
 describe('NodeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule],
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
       declarations: [NodeComponent],
-      providers: [
-        AnnotationService,
-        ComponentService,
-        ConfigService,
-        NodeService,
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        TagService,
-        UtilService,
-        VLEProjectService
-      ]
+      providers: []
     }).compileComponents();
   });
 
@@ -53,9 +35,10 @@ describe('NodeComponent', () => {
   });
 
   afterEach(() => {
-    createComponentStatesSpy.and.callFake(() => {
-      return Promise.resolve([]);
-    });
     fixture.destroy();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 });

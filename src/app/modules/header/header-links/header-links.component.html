@@ -1,5 +1,5 @@
 <nav class="header__links" [ngSwitch]="location" fxLayout="row" fxLayoutAlign="start center">
-  <span class="mat-body-1">
+  <span class="mat-body-2">
     <ng-container *ngSwitchCase="'teacher'" i18n>Welcome {{ user.firstName }}!</ng-container>
     <ng-container *ngSwitchCase="'student'" i18n>Welcome {{ user.firstName }}!</ng-container>
   </span>

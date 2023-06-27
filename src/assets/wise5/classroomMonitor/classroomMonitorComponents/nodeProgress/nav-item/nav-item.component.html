@@ -7,9 +7,10 @@
   >
     <mat-card-header
       class="nav-item--card__content"
+      tabindex="0"
       (click)="itemClicked($event)"
+      (keyup.enter)="itemClicked($event)"
       role="button"
-      md-ink-ripple
     >
       <node-icon
         mat-card-avatar
@@ -48,7 +49,7 @@
       </mat-list>
     </mat-card-content>
     <mat-card-actions
-      class="nav-item__more mat-body-1"
+      class="nav-item__more mat-body-2"
       fxLayout="row"
       fxLayoutAlign="start center"
       fxLayoutGap="8px"
@@ -76,8 +77,8 @@
     class="list-item"
     [ngClass]="{ 'nav-item--list--group': isGroup, 'text-secondary': !nodeHasWork }"
   >
-    <node-icon [nodeId]="nodeId" class="step-icon" customClass="mat-24"></node-icon>
-    <p fxFlex fxLayout="row" fxfxLayoutAlign="start center">
+    <span fxLayout="row" fxLayoutAlign="start center">
+      <node-icon [nodeId]="nodeId" class="step-icon" customClass="mat-24"></node-icon>
       <span [ngClass]="{ warn: newAlert }">{{ nodeTitle }}</span
       >&nbsp;
       <span fxFlex fxHide.gt-xs></span>
@@ -105,6 +106,6 @@
         [nodeCompletion]="getNodeCompletion()"
         [period]="currentPeriod"
       ></nav-item-progress>
-    </p>
+    </span>
   </mat-list-item>
 </ng-container>

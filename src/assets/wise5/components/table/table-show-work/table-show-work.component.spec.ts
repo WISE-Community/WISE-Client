@@ -6,6 +6,7 @@ import { ComponentContent } from '../../../common/ComponentContent';
 import { ProjectService } from '../../../services/projectService';
 import { TabulatorDataService } from '../tabulatorDataService';
 import { TableShowWorkComponent } from './table-show-work.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let fixture: ComponentFixture<TableShowWorkComponent>;
 let component: TableShowWorkComponent;
@@ -14,7 +15,8 @@ describe('TableShowWorkComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [TableShowWorkComponent]
+      declarations: [TableShowWorkComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(TableShowWorkComponent);
     const componentContent = {

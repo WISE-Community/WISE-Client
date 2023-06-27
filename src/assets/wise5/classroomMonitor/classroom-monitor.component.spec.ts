@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { ClassroomMonitorTestingModule } from './classroom-monitor-testing.module';
 import { ClassroomMonitorComponent } from './classroom-monitor.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 class MockUpgradeModule {
   $injector = {
@@ -21,7 +22,8 @@ describe('ClassroomMonitorComponent', () => {
           provide: UpgradeModule,
           useClass: MockUpgradeModule
         }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

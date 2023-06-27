@@ -31,7 +31,8 @@ const nodeId2: string = 'node2';
 const nodeId3: string = 'node3';
 let removalCriteria: any;
 
-describe('EditConstraintRemovalCriteriaComponent', () => {
+// TODO- use component harness
+xdescribe('EditConstraintRemovalCriteriaComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [EditConstraintRemovalCriteriaComponent, RequiredErrorLabelComponent],

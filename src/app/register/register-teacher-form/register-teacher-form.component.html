@@ -177,11 +177,11 @@
         <div *ngSwitchDefault i18n>&nbsp;</div>
       </ng-container>
       <button
-        fxFlex
         mat-flat-button
         color="primary"
         type="submit"
         [disabled]="!createTeacherAccountFormGroup.valid || processing"
+        class="button--progress"
       >
         <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
         <span i18n>Create Account</span>

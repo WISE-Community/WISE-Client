@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from '../../../services/user.service';
 import { CreateRunDialogComponent } from '../../../teacher/create-run-dialog/create-run-dialog.component';
-import { UseWithClassWarningDialogComponent } from '../../../teacher/use-with-class-warning-dialog/use-with-class-warning-dialog.component';
 import { NGSSStandards } from '../ngssStandards';
 import { Project } from '../../../domain/project';
 import { ParentProject } from '../../../domain/parentProject';
@@ -108,18 +107,11 @@ export class LibraryProjectDetailsComponent implements OnInit {
   }
 
   runProject() {
-    if (this.project.wiseVersion === 4) {
-      this.dialog.open(UseWithClassWarningDialogComponent, {
-        data: this.data,
-        panelClass: 'dialog-md'
-      });
-    } else {
-      this.dialog.open(CreateRunDialogComponent, {
-        data: this.data,
-        panelClass: 'dialog-md',
-        disableClose: true
-      });
-    }
+    this.dialog.open(CreateRunDialogComponent, {
+      data: this.data,
+      panelClass: 'dialog-md',
+      disableClose: true
+    });
     this.dialogRef.close();
   }
 

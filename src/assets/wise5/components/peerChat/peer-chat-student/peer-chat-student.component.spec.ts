@@ -34,6 +34,7 @@ import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { DynamicPromptComponent } from '../../../directives/dynamic-prompt/dynamic-prompt.component';
 import { PromptComponent } from '../../../directives/prompt/prompt.component';
 import { PeerChatComponent } from '../PeerChatComponent';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let component: PeerChatStudentComponent;
 const componentId = 'component1';
@@ -152,7 +153,8 @@ describe('PeerChatStudentComponent', () => {
         StudentDataService,
         StudentWebSocketService,
         TagService
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

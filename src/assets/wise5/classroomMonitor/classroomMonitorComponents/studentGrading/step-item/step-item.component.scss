@@ -1,20 +1,37 @@
 .step-item {
-  .mat-list-item .mat-list-item-content {
-    padding: 0;
-  }
+  // /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
+  // .mat-mdc-list-item .mat-list-item-content {
+  //   padding: 0;
+  // }
 
-  .grading__item {
-    width: 100%;
-    margin: 0;
-  }
+  // .grading__item {
+  //   width: 100%;
+  //   margin: 0;
+  // }
 
-  .list-item {
-    height: auto;
-    padding: 0;
-    margin: 0 !important;
-  }
+  // .list-item {
+  //   height: auto;
+  //   padding: 0;
+  //   margin: 0 !important;
+  // }
 
   .grading__item-container {
     height: auto;
+  }
+
+  .mat-mdc-list-base {
+    .mat-mdc-list-item.user-list-controls {
+      height: auto;
+      padding: 8px;
+    }
+  }
+
+  .mat-mdc-button {
+    min-height: 56px;
+    text-transform: none;
+  }
+  
+  .mdc-button__label {
+    width: 100%;
   }
 }

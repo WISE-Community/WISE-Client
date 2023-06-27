@@ -7,7 +7,7 @@
 >
   <button
     mat-button
-    class="list-item__subheader-button"
+    class="list-item__subheader-button team-button"
     i18n-aria-label
     aria-label="Show/hide team's work for this step"
     [ngClass]="{ 'list-item--noclick': !showScore || disabled }"
@@ -42,7 +42,7 @@
           class="component component--grading"
         >
           <div [hidden]="!isComponentVisible(component.id)">
-            <h3 class="accent-1 mat-body-2 gray-lightest-bg component__header">
+            <h3 class="accent-1 mat-subtitle-2 gray-lightest-bg component__header">
               {{ i + 1 + '. ' + getComponentTypeLabel(component.type) }}&nbsp;
               <component-new-work-badge
                 [componentId]="component.id"
@@ -51,6 +51,7 @@
               ></component-new-work-badge>
             </h3>
             <workgroup-component-grading
+              class="component--grading__response__content"
               [componentId]="component.id"
               [workgroupId]="workgroupId"
               [nodeId]="nodeId"

@@ -1,26 +1,28 @@
+@use '@angular/material' as mat;
+@import 'style/base/typography';
+
 .select-period-form-field {
-  mat-select-trigger {
-    margin-right: 8px;
+  .mdc-line-ripple {
+    &:before, &:after {
+      display: none;
+    }
   }
-  .mat-form-field-wrapper {
-    padding-bottom: 0px;
-    font-weight: 500;
+
+  .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    min-height: 24px;
   }
-  .mat-form-field-underline {
-    display: none;
-  }
-  .mat-form-field-infix {
-    border-top: 0px;
-    width: auto;
-  }
-  .mat-form-field-flex {
-    padding-top: 5px !important;
+
+  .mat-mdc-form-field-flex {
     height: 32px;
   }
-  .mat-select-arrow {
-    margin-top: 14px;
+
+  .mat-mdc-select-value-text {
+    font-size: mat.font-size($wise-typography, 'caption');
   }
-  .mat-select-value {
-    display: inherit;
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
   }
 }

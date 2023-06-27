@@ -9,7 +9,8 @@ import { isValidJSONString } from '../../common/string/string';
 
 @Component({
   selector: 'advanced-project-authoring',
-  templateUrl: 'advanced-project-authoring.component.html'
+  templateUrl: 'advanced-project-authoring.component.html',
+  styleUrls: ['./advanced-project-authoring.component.scss']
 })
 export class AdvancedProjectAuthoringComponent {
   isJSONDisplayed: boolean = false;
