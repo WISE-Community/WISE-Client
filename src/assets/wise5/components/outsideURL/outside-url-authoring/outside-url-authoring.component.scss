@@ -46,15 +46,19 @@ p.select-oer-instructions {
 
 .oer-card-title {
   font-size: 14px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .oer-card-image {
-  margin-left: -16px;
-  margin-right: -16px;
   position: relative;
   padding-top: 60%;
   background-size: cover;
   background-position: center;
+}
+
+.oer-card-actions {
+  padding: 0px 16px 0px 16px !important;
 }
 
 .oer-card-actions-spacer {
