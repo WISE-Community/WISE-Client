@@ -10,7 +10,6 @@ import {
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { ProjectAuthoringComponent } from '../../authoringTool/project/projectAuthoringComponent';
 import { ProjectInfoAuthoringComponent } from '../../authoringTool/info/projectInfoAuthoringComponent';
-import { RubricAuthoringComponent } from '../../authoringTool/rubric/rubric-authoring.component';
 import { RecoveryAuthoringComponent } from '../recovery-authoring/recovery-authoring.component';
 import { ConcurrentAuthorsMessageComponent } from '../concurrent-authors-message/concurrent-authors-message.component';
 
@@ -33,10 +32,6 @@ export default angular
     downgradeComponent({
       component: ConcurrentAuthorsMessageComponent
     }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'rubricAuthoringComponent',
-    downgradeComponent({ component: RubricAuthoringComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'recoveryAuthoringComponent',
@@ -106,10 +101,6 @@ export default angular
         .state('root.at.project.advanced', {
           url: '/advanced',
           component: 'advancedProjectAuthoringComponent'
-        })
-        .state('root.at.project.rubric', {
-          url: '/rubric',
-          component: 'rubricAuthoringComponent'
         })
         .state('root.at.project.notebook', {
           url: '/notebook',

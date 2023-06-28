@@ -560,10 +560,6 @@ class ProjectAuthoringController {
     this.$state.go('root.at.project.import-step.choose-step');
   }
 
-  editProjectRubric() {
-    this.$state.go('root.at.project.rubric');
-  }
-
   goToAdvancedAuthoring() {
     this.$state.go('root.at.project.advanced');
   }

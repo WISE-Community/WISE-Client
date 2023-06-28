@@ -17,6 +17,7 @@ export class AdvancedProjectAuthoringComponent {
   projectId: number;
   projectJSONString: string;
   projectScriptFilename: string;
+  rubricDisplayed: boolean;
 
   constructor(
     private upgrade: UpgradeModule,
@@ -30,6 +31,10 @@ export class AdvancedProjectAuthoringComponent {
 
   ngOnInit() {
     this.setProjectScriptFilename();
+  }
+
+  protected toggleRubric(): void {
+    this.rubricDisplayed = !this.rubricDisplayed;
   }
 
   toggleJSON() {
