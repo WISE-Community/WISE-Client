@@ -1,6 +1,16 @@
 <div layout="row" style="margin-left: 10px">
   <div layout="row">
-    <h5 i18n>Click the new component type you want to add</h5>
+    <h5 i18n>
+      Click the new component type you want to add, or
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="importComponent()"
+        arial-label="import components"
+      >
+        import component(s) from other units
+      </button>
+    </h5>
   </div>
 </div>
 <div fxLayout="row wrap" fxLayoutAlign="start center">

@@ -1,16 +1,6 @@
 <h4 i18n>Import Component(s)</h4>
 <div fxLayoutGap="20px">
   <span i18n>Choose a unit to import from and then choose which component(s) to import</span>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="cancel()"
-    aria-label="Cancel"
-    i18n-aria-label
-    i18n
-  >
-    Cancel
-  </button>
 </div>
 <mat-form-field class="unit-select">
   <mat-label i18n>My Units</mat-label>
@@ -140,3 +130,11 @@
     <mat-icon>vertical_align_bottom</mat-icon>
   </button>
 </span>
+<hr />
+<div fxLayout="row">
+  <button mat-button color="primary" (click)="goToChooseNewComponent()" aria-label="Back" i18n>
+    Back
+  </button>
+  <span fxFlex></span>
+  <button mat-button color="primary" (click)="cancel()" aria-label="Cancel" i18n>Cancel</button>
+</div>
