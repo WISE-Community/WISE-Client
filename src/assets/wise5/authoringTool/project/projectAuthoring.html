@@ -219,17 +219,6 @@
                   >{{ ::'previewProject' | translate }}
                 </md-tooltip>
               </md-button>
-              <md-button
-                id="previewProjectWithoutConstraintsButton"
-                class="topButton md-raised md-primary"
-                ng-click="$ctrl.previewProject(false)"
-                ng-disabled="$ctrl.insertGroupMode || $ctrl.insertNodeMode"
-              >
-                <md-icon>visibility_off</md-icon>
-                <md-tooltip md-direction="top" class="projectButtonTooltip"
-                  >{{ ::'previewProjectWithoutConstraints' | translate }}</md-tooltip
-                >
-              </md-button>
             </div>
             <div
               ng-if="$ctrl.insertGroupMode || $ctrl.insertNodeMode"
