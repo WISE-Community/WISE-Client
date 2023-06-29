@@ -37,6 +37,7 @@
   </div>
   <div>
     <span i18n>Access Code: {{ run.runCode }}</span> (<a
+      class="share-with-students-link"
       [routerLink]=""
       (click)="shareCode()"
       (keyup.enter)="shareCode()"
@@ -99,11 +100,7 @@
     <span *ngIf="run.lastRun" class="mat-caption secondary-text center" i18n
       >Last student login: {{ run.lastRun | date: 'short' }}</span
     >
-    <button
-      *ngIf="!isRunActive(run) && !isRunCompleted(run)"
-      mat-flat-button
-      disabled
-    >
+    <button *ngIf="!isRunActive(run) && !isRunCompleted(run)" mat-flat-button disabled>
       <ng-container i18n>Starts {{ run.startTime | date }}</ng-container>
     </button>
     <button
