@@ -13,7 +13,7 @@ import { isValidJSONString } from '../../common/string/string';
   styleUrls: ['./advanced-project-authoring.component.scss']
 })
 export class AdvancedProjectAuthoringComponent {
-  isJSONDisplayed: boolean = false;
+  isJSONDisplayed: boolean;
   projectId: number;
   projectJSONString: string;
   projectScriptFilename: string;
@@ -21,12 +21,12 @@ export class AdvancedProjectAuthoringComponent {
 
   constructor(
     private upgrade: UpgradeModule,
-    private ConfigService: ConfigService,
-    private NotificationService: NotificationService,
-    private ProjectAssetService: ProjectAssetService,
-    private ProjectService: TeacherProjectService
+    private configService: ConfigService,
+    private notificationService: NotificationService,
+    private projectAssetService: ProjectAssetService,
+    private projectService: TeacherProjectService
   ) {
-    this.projectId = this.ConfigService.getProjectId();
+    this.projectId = this.configService.getProjectId();
   }
 
   ngOnInit() {
@@ -34,10 +34,12 @@ export class AdvancedProjectAuthoringComponent {
   }
 
   protected toggleRubric(): void {
+    this.isJSONDisplayed = false;
     this.rubricDisplayed = !this.rubricDisplayed;
   }
 
   toggleJSON() {
+    this.rubricDisplayed = false;
     if (this.isJSONDisplayed) {
       this.hideJSON();
     } else {
@@ -48,41 +50,41 @@ export class AdvancedProjectAuthoringComponent {
   hideJSON() {
     if (isValidJSONString(this.projectJSONString)) {
       this.isJSONDisplayed = false;
-      this.NotificationService.hideJSONValidMessage();
+      this.notificationService.hideJSONValidMessage();
     } else if (
       confirm(
         $localize`The JSON is invalid. Invalid JSON will not be saved.\nClick "OK" to revert back to the last valid JSON.\nClick "Cancel" to keep the invalid JSON open so you can fix it.`
       )
     ) {
       this.isJSONDisplayed = false;
-      this.NotificationService.hideJSONValidMessage();
+      this.notificationService.hideJSONValidMessage();
     }
   }
 
   showJSON() {
     this.isJSONDisplayed = true;
-    this.projectJSONString = angular.toJson(this.ProjectService.project, 4);
-    this.NotificationService.showJSONValidMessage();
+    this.projectJSONString = angular.toJson(this.projectService.project, 4);
+    this.notificationService.showJSONValidMessage();
   }
 
   autoSaveProjectJSONString() {
     try {
       this.saveProjectJSON(this.projectJSONString);
-      this.NotificationService.showJSONValidMessage();
+      this.notificationService.showJSONValidMessage();
     } catch (e) {
-      this.NotificationService.showJSONInvalidMessage();
+      this.notificationService.showJSONInvalidMessage();
     }
   }
 
   saveProjectJSON(projectJSONString) {
     const project = angular.fromJson(projectJSONString);
-    this.ProjectService.setProject(project);
+    this.projectService.setProject(project);
     this.setProjectScriptFilename();
-    this.ProjectService.checkPotentialStartNodeIdChangeThenSaveProject();
+    this.projectService.checkPotentialStartNodeIdChangeThenSaveProject();
   }
 
   setProjectScriptFilename() {
-    this.projectScriptFilename = this.ProjectService.getProjectScriptFilename();
+    this.projectScriptFilename = this.projectService.getProjectScriptFilename();
   }
 
   chooseProjectScriptFile() {
@@ -91,7 +93,7 @@ export class AdvancedProjectAuthoringComponent {
       projectId: this.projectId,
       target: 'scriptFilename'
     };
-    this.ProjectAssetService.openAssetChooser(params).then((data: any) => {
+    this.projectAssetService.openAssetChooser(params).then((data: any) => {
       this.assetSelected(data);
     });
   }
@@ -102,7 +104,7 @@ export class AdvancedProjectAuthoringComponent {
   }
 
   downloadProject() {
-    window.location.href = `${this.ConfigService.getWISEBaseURL()}/api/project/export/${
+    window.location.href = `${this.configService.getWISEBaseURL()}/api/project/export/${
       this.projectId
     }`;
   }
@@ -121,15 +123,15 @@ export class AdvancedProjectAuthoringComponent {
   }
 
   getProjectURL() {
-    return window.location.origin + this.ConfigService.getConfigParam('projectURL');
+    return window.location.origin + this.configService.getConfigParam('projectURL');
   }
 
   projectScriptFilenameChanged() {
-    this.ProjectService.setProjectScriptFilename(this.projectScriptFilename);
+    this.projectService.setProjectScriptFilename(this.projectScriptFilename);
     if (this.showJSON) {
-      this.projectJSONString = angular.toJson(this.ProjectService.project, 4);
+      this.projectJSONString = angular.toJson(this.projectService.project, 4);
     }
-    this.ProjectService.saveProject();
+    this.projectService.saveProject();
   }
 
   goBack() {
