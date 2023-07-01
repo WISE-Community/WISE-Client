@@ -7,9 +7,6 @@ import { ConfigureStructureComponent } from '../configure-structure.component';
   styleUrls: ['./self-directed-investigation.component.scss']
 })
 export class SelfDirectedInvestigationComponent extends ConfigureStructureComponent {
-  ngOnInit(): void {
-    this.groupsPath = `self-directed-investigation/groups.json`;
-    this.nodesPath = `self-directed-investigation/nodes.json`;
-    super.ngOnInit();
-  }
+  groupsPath = `self-directed-investigation/groups.json`;
+  nodesPath = `self-directed-investigation/nodes.json`;
 }

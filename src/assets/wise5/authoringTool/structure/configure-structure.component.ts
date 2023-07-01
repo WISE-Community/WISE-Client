@@ -35,13 +35,13 @@ export abstract class ConfigureStructureComponent {
   }
 
   protected fetchGroups(groupsPath: string = this.groupsPath): void {
-    this.http.get(`${this.structureDir}/${groupsPath}`).subscribe(({ data: group }: any) => {
+    this.http.get(`${this.structureDir}/${groupsPath}`).subscribe((group: any) => {
       this.structure.group = group;
     });
   }
 
   protected fetchNodes(nodesPath: string = this.nodesPath): void {
-    this.http.get(`${this.structureDir}/${nodesPath}`).subscribe(({ data: nodes }: any) => {
+    this.http.get(`${this.structureDir}/${nodesPath}`).subscribe((nodes: any[]) => {
       this.structure.nodes = nodes;
     });
   }
