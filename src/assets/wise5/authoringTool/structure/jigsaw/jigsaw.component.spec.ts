@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { JigsawComponent } from './jigsaw.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatRadioModule } from '@angular/material/radio';
 
 describe('JigsawComponent', () => {
   let component: JigsawComponent;
@@ -7,7 +9,8 @@ describe('JigsawComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [JigsawComponent]
+      declarations: [JigsawComponent],
+      imports: [HttpClientTestingModule, MatRadioModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(JigsawComponent);
