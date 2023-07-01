@@ -191,15 +191,6 @@ class AuthoringToolController {
         active: false
       },
       {
-        route: 'root.at.project.rubric',
-        name: '',
-        label: '',
-        icon: '',
-        type: 'secondary',
-        showToolbar: true,
-        active: false
-      },
-      {
         route: 'root.at.project.node.advanced.rubric',
         name: '',
         label: '',
