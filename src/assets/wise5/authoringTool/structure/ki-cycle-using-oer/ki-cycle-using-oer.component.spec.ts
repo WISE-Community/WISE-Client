@@ -13,6 +13,13 @@ describe('KiCycleUsingOERComponent', () => {
       imports: [HttpClientTestingModule, UpgradeModule]
     }).compileComponents();
 
+    TestBed.inject(UpgradeModule).$injector = {
+      get: () => {
+        return {
+          go: (route: string, params: any) => {}
+        };
+      }
+    };
     fixture = TestBed.createComponent(KiCycleUsingOerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

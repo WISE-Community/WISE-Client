@@ -9,15 +9,13 @@ export abstract class ConfigureStructureComponent {
   groupsPath: string;
   nodesPath: string;
   $state: any;
-  structure: any;
+  structure: any = {};
   structureDir: string = 'assets/wise5/authoringTool/structure';
 
-  constructor(private http: HttpClient, private upgrade: UpgradeModule) {
-    this.$state = this.upgrade.$injector.get('$state');
-    this.structure = {};
-  }
+  constructor(private http: HttpClient, private upgrade: UpgradeModule) {}
 
   ngOnInit(): void {
+    this.$state = this.upgrade.$injector.get('$state');
     this.injectGroupAndNodes();
   }
 

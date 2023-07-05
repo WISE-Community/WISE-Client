@@ -13,6 +13,13 @@ describe('PeerReviewAndRevisionComponent', () => {
       imports: [HttpClientTestingModule, UpgradeModule]
     }).compileComponents();
 
+    TestBed.inject(UpgradeModule).$injector = {
+      get: () => {
+        return {
+          go: (route: string, params: any) => {}
+        };
+      }
+    };
     fixture = TestBed.createComponent(PeerReviewAndRevisionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
