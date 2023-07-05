@@ -3,7 +3,6 @@
 import * as angular from 'angular';
 import ChooseStructureController from './chooseStructureController';
 import ChooseStructureLocationController from './chooseStructureLocationController';
-import ConfigureStructureController from './configureStructureController';
 import GuidanceChoiceController from './guidanceChoice/guidanceChoiceController';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { JigsawComponent } from './jigsaw/jigsaw.component';
@@ -13,7 +12,6 @@ import { PeerReviewAndRevisionComponent } from './peer-review-and-revision/peer-
 
 const structureAuthoringModule = angular
   .module('structureAuthoringModule', ['ui.router'])
-  .controller('ConfigureStructureController', ConfigureStructureController)
   .controller('ChooseStructureLocationController', ChooseStructureLocationController)
   .controller('ChooseStructureController', ChooseStructureController)
   .directive('jigsawComponent', downgradeComponent({ component: JigsawComponent }))
@@ -41,16 +39,6 @@ const structureAuthoringModule = angular
           templateUrl: 'assets/wise5/authoringTool/structure/chooseStructure.html',
           controller: 'ChooseStructureController',
           controllerAs: 'chooseStructureController',
-          params: {
-            structure: null
-          }
-        })
-        .state('root.at.project.structure.configure', {
-          url: '/configure',
-          templateUrl: 'assets/wise5/authoringTool/structure/configureStructure.html',
-          controller: 'ConfigureStructureController',
-          controllerAs: 'configureStructureController',
-          abstract: true,
           params: {
             structure: null
           }
