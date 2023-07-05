@@ -3,7 +3,6 @@
 import * as angular from 'angular';
 import ChooseStructureController from './chooseStructureController';
 import ChooseStructureLocationController from './chooseStructureLocationController';
-import GuidanceChoiceController from './guidanceChoice/guidanceChoiceController';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { JigsawComponent } from './jigsaw/jigsaw.component';
 import { SelfDirectedInvestigationComponent } from './self-directed-investigation/self-directed-investigation.component';
@@ -15,7 +14,6 @@ const structureAuthoringModule = angular
   .controller('ChooseStructureLocationController', ChooseStructureLocationController)
   .controller('ChooseStructureController', ChooseStructureController)
   .directive('jigsawComponent', downgradeComponent({ component: JigsawComponent }))
-  .controller('GuidanceChoiceController', GuidanceChoiceController)
   .directive(
     'selfDirectedInvestigation',
     downgradeComponent({ component: SelfDirectedInvestigationComponent })
@@ -46,15 +44,6 @@ const structureAuthoringModule = angular
         .state('root.at.project.structure.jigsaw', {
           url: '/jigsaw',
           component: 'jigsawComponent',
-          params: {
-            structure: null
-          }
-        })
-        .state('root.at.project.structure.guidance-choice', {
-          url: '/guidance-choice',
-          templateUrl: 'assets/wise5/authoringTool/structure/guidanceChoice/guidanceChoice.html',
-          controller: 'GuidanceChoiceController',
-          controllerAs: 'guidanceChoiceController',
           params: {
             structure: null
           }
