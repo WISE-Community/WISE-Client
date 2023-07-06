@@ -1,89 +1,84 @@
-'use strict';
-
+import { Component } from '@angular/core';
 import { insertWiseLinks, replaceWiseLinks } from '../../common/wise-link/wise-link';
 import { ConfigService } from '../../services/configService';
 import { SpaceService } from '../../services/spaceService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { UtilService } from '../../services/utilService';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { Subject, debounceTime } from 'rxjs';
 
-class NotebookAuthoringController {
-  $translate: any;
+@Component({
+  selector: 'notebook-authoring',
+  templateUrl: './notebook-authoring.component.html',
+  styleUrls: ['./notebook-authoring.component.scss']
+})
+export class NotebookAuthoringComponent {
+  notebookChanged: Subject<void> = new Subject<void>();
   isPublicNotebookEnabled: boolean;
   projectId: number;
   project: any;
   reportIdToAuthoringNote: any;
 
-  static $inject = [
-    '$filter',
-    '$stateParams',
-    'ConfigService',
-    'ProjectService',
-    'SpaceService',
-    'UtilService'
-  ];
-
   constructor(
-    $filter: any,
-    private $stateParams: any,
-    private ConfigService: ConfigService,
-    private ProjectService: TeacherProjectService,
-    private SpaceService: SpaceService,
-    private UtilService: UtilService
-  ) {
-    this.$translate = $filter('translate');
-  }
+    private configService: ConfigService,
+    private projectService: TeacherProjectService,
+    private spaceService: SpaceService,
+    private upgrade: UpgradeModule
+  ) {}
 
-  $onInit() {
-    this.projectId = this.$stateParams.projectId;
-    this.project = this.ProjectService.project;
+  ngOnInit(): void {
+    this.projectId = this.upgrade.$injector.get('$stateParams').projectId;
+    this.project = this.projectService.project;
     this.reportIdToAuthoringNote = {};
 
     if (this.project.notebook == null) {
-      const projectTemplate = this.ProjectService.getNewProjectTemplate();
+      const projectTemplate = this.projectService.getNewProjectTemplate();
       this.project.notebook = projectTemplate.notebook;
     }
 
     if (this.project.teacherNotebook == null) {
-      const projectTemplate = this.ProjectService.getNewProjectTemplate();
+      const projectTemplate = this.projectService.getNewProjectTemplate();
       projectTemplate.teacherNotebook.enabled = false;
       this.project.teacherNotebook = projectTemplate.teacherNotebook;
     }
 
     this.initializeStudentNotesAuthoring();
     this.initializeTeacherNotesAuthoring();
-    this.isPublicNotebookEnabled = this.ProjectService.isSpaceExists('public');
+    this.isPublicNotebookEnabled = this.projectService.isSpaceExists('public');
+    this.notebookChanged.pipe(debounceTime(1000)).subscribe(() => {
+      this.save();
+    });
   }
 
-  initializeStudentNotesAuthoring() {
+  initializeStudentNotesAuthoring(): void {
     this.initializeNotesAuthoring(this.project.notebook.itemTypes.report.notes);
   }
 
-  initializeTeacherNotesAuthoring() {
+  initializeTeacherNotesAuthoring(): void {
     this.initializeNotesAuthoring(this.project.teacherNotebook.itemTypes.report.notes);
   }
 
-  initializeNotesAuthoring(notes) {
+  initializeNotesAuthoring(notes: any[]): void {
     for (const note of notes) {
       this.initializeNoteAuthoring(note);
     }
   }
 
-  initializeNoteAuthoring(note) {
+  initializeNoteAuthoring(note: any): void {
     const authoringReportNote = {
-      html: replaceWiseLinks(this.ProjectService.replaceAssetPaths(note.content))
+      html: replaceWiseLinks(this.projectService.replaceAssetPaths(note.content))
     };
     this.setReportIdToAuthoringNote(note.reportId, authoringReportNote);
   }
 
-  setReportIdToAuthoringNote(reportId, authoringReportNote) {
+  setReportIdToAuthoringNote(reportId: string, authoringReportNote: any): void {
     this.reportIdToAuthoringNote[reportId] = authoringReportNote;
   }
 
-  getAuthoringReportNote(id) {
+  getAuthoringReportNote(id: string): any {
     return this.reportIdToAuthoringNote[id];
   }
 
-  getReportNote(id) {
+  getReportNote(id: string): any {
     const studentNotes = this.project.notebook.itemTypes.report.notes;
     for (const note of studentNotes) {
       if (note.reportId === id) {
@@ -99,8 +94,8 @@ class NotebookAuthoringController {
     return null;
   }
 
-  addReportNote() {
-    const projectTemplate = this.ProjectService.getNewProjectTemplate();
+  addReportNote(): void {
+    const projectTemplate = this.projectService.getNewProjectTemplate();
     if (this.project.notebook.itemTypes.report.notes == null) {
       this.project.notebook.itemTypes.report.notes = [];
     }
@@ -111,35 +106,30 @@ class NotebookAuthoringController {
     }
   }
 
-  reportStarterTextChanged(reportId) {
+  reportStarterTextChanged(reportId: string): void {
     const note = this.getReportNote(reportId);
     const authoringNote = this.getAuthoringReportNote(reportId);
-    note.content = insertWiseLinks(this.ConfigService.removeAbsoluteAssetPaths(authoringNote.html));
+    note.content = insertWiseLinks(this.configService.removeAbsoluteAssetPaths(authoringNote.html));
     this.save();
   }
 
-  togglePublicNotebook() {
+  togglePublicNotebook(): void {
     if (this.isPublicNotebookEnabled) {
-      this.SpaceService.addSpace('public', 'Public');
+      this.spaceService.addSpace('public', 'Public');
     } else {
-      this.SpaceService.removeSpace('public');
+      this.spaceService.removeSpace('public');
     }
   }
 
-  disablePublicSpace() {
-    this.SpaceService.removeSpace('public');
+  disablePublicSpace(): void {
+    this.spaceService.removeSpace('public');
   }
 
-  componentChanged() {
-    this.save();
+  contentChanged(): void {
+    this.notebookChanged.next();
   }
 
-  save() {
-    this.ProjectService.saveProject();
+  save(): void {
+    this.projectService.saveProject();
   }
 }
-
-export const NotebookAuthoringComponent = {
-  templateUrl: `/assets/wise5/authoringTool/notebook/notebookAuthoring.html`,
-  controller: NotebookAuthoringController
-};

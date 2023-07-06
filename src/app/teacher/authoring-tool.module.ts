@@ -26,6 +26,7 @@ import { NodeAuthoringComponent } from '../../assets/wise5/authoringTool/node/no
 import { TeacherNodeIconComponent } from '../../assets/wise5/authoringTool/teacher-node-icon/teacher-node-icon.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
+import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tiny
     ConcurrentAuthorsMessageComponent,
     NodeAuthoringComponent,
     NodeIconChooserDialog,
+    NotebookAuthoringComponent,
     RecoveryAuthoringComponent,
     RequiredErrorLabelComponent,
     RubricAuthoringComponent,
