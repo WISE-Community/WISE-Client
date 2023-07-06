@@ -1,18 +1,21 @@
 'use strict';
 
 import * as angular from 'angular';
-import ChooseStructureController from './chooseStructureController';
-import ChooseStructureLocationController from './chooseStructureLocationController';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { JigsawComponent } from './jigsaw/jigsaw.component';
 import { SelfDirectedInvestigationComponent } from './self-directed-investigation/self-directed-investigation.component';
 import { KiCycleUsingOerComponent } from './ki-cycle-using-oer/ki-cycle-using-oer.component';
 import { PeerReviewAndRevisionComponent } from './peer-review-and-revision/peer-review-and-revision.component';
+import { ChooseStructureComponent } from './choose-structure/choose-structure.component';
+import { ChooseStructureLocationComponent } from './choose-structure-location/choose-structure-location.component';
 
 const structureAuthoringModule = angular
   .module('structureAuthoringModule', ['ui.router'])
-  .controller('ChooseStructureLocationController', ChooseStructureLocationController)
-  .controller('ChooseStructureController', ChooseStructureController)
+  .directive(
+    'chooseStructureLocation',
+    downgradeComponent({ component: ChooseStructureLocationComponent })
+  )
+  .directive('chooseStructure', downgradeComponent({ component: ChooseStructureComponent }))
   .directive('jigsawComponent', downgradeComponent({ component: JigsawComponent }))
   .directive(
     'selfDirectedInvestigation',
@@ -34,9 +37,7 @@ const structureAuthoringModule = angular
         })
         .state('root.at.project.structure.choose', {
           url: '/choose',
-          templateUrl: 'assets/wise5/authoringTool/structure/chooseStructure.html',
-          controller: 'ChooseStructureController',
-          controllerAs: 'chooseStructureController',
+          component: 'chooseStructure',
           params: {
             structure: null
           }
@@ -71,9 +72,7 @@ const structureAuthoringModule = angular
         })
         .state('root.at.project.structure.location', {
           url: '/location',
-          templateUrl: 'assets/wise5/authoringTool/structure/chooseStructureLocation.html',
-          controller: 'ChooseStructureLocationController',
-          controllerAs: 'chooseStructureLocationController',
+          component: 'chooseStructureLocation',
           params: {
             structure: null
           }
