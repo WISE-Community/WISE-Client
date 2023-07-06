@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { insertWiseLinks, replaceWiseLinks } from '../../common/wise-link/wise-link';
 import { ConfigService } from '../../services/configService';
-import { SpaceService } from '../../services/spaceService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Subject, debounceTime } from 'rxjs';
@@ -13,7 +12,6 @@ import { Subject, debounceTime } from 'rxjs';
 })
 export class NotebookAuthoringComponent {
   notebookChanged: Subject<void> = new Subject<void>();
-  isPublicNotebookEnabled: boolean;
   projectId: number;
   project: any;
   reportIdToAuthoringNote: any;
@@ -21,7 +19,6 @@ export class NotebookAuthoringComponent {
   constructor(
     private configService: ConfigService,
     private projectService: TeacherProjectService,
-    private spaceService: SpaceService,
     private upgrade: UpgradeModule
   ) {}
 
@@ -43,42 +40,41 @@ export class NotebookAuthoringComponent {
 
     this.initializeStudentNotesAuthoring();
     this.initializeTeacherNotesAuthoring();
-    this.isPublicNotebookEnabled = this.projectService.isSpaceExists('public');
     this.notebookChanged.pipe(debounceTime(1000)).subscribe(() => {
       this.save();
     });
   }
 
-  initializeStudentNotesAuthoring(): void {
+  private initializeStudentNotesAuthoring(): void {
     this.initializeNotesAuthoring(this.project.notebook.itemTypes.report.notes);
   }
 
-  initializeTeacherNotesAuthoring(): void {
+  private initializeTeacherNotesAuthoring(): void {
     this.initializeNotesAuthoring(this.project.teacherNotebook.itemTypes.report.notes);
   }
 
-  initializeNotesAuthoring(notes: any[]): void {
+  private initializeNotesAuthoring(notes: any[]): void {
     for (const note of notes) {
       this.initializeNoteAuthoring(note);
     }
   }
 
-  initializeNoteAuthoring(note: any): void {
+  private initializeNoteAuthoring(note: any): void {
     const authoringReportNote = {
       html: replaceWiseLinks(this.projectService.replaceAssetPaths(note.content))
     };
     this.setReportIdToAuthoringNote(note.reportId, authoringReportNote);
   }
 
-  setReportIdToAuthoringNote(reportId: string, authoringReportNote: any): void {
+  private setReportIdToAuthoringNote(reportId: string, authoringReportNote: any): void {
     this.reportIdToAuthoringNote[reportId] = authoringReportNote;
   }
 
-  getAuthoringReportNote(id: string): any {
+  private getAuthoringReportNote(id: string): any {
     return this.reportIdToAuthoringNote[id];
   }
 
-  getReportNote(id: string): any {
+  private getReportNote(id: string): any {
     const studentNotes = this.project.notebook.itemTypes.report.notes;
     for (const note of studentNotes) {
       if (note.reportId === id) {
@@ -94,42 +90,18 @@ export class NotebookAuthoringComponent {
     return null;
   }
 
-  addReportNote(): void {
-    const projectTemplate = this.projectService.getNewProjectTemplate();
-    if (this.project.notebook.itemTypes.report.notes == null) {
-      this.project.notebook.itemTypes.report.notes = [];
-    }
-    if (this.project.notebook.itemTypes.report.notes < 1) {
-      this.project.notebook.itemTypes.report.notes.push(
-        projectTemplate.notebook.itemTypes.report.notes[0]
-      );
-    }
-  }
-
-  reportStarterTextChanged(reportId: string): void {
+  protected reportStarterTextChanged(reportId: string): void {
     const note = this.getReportNote(reportId);
     const authoringNote = this.getAuthoringReportNote(reportId);
     note.content = insertWiseLinks(this.configService.removeAbsoluteAssetPaths(authoringNote.html));
     this.save();
   }
 
-  togglePublicNotebook(): void {
-    if (this.isPublicNotebookEnabled) {
-      this.spaceService.addSpace('public', 'Public');
-    } else {
-      this.spaceService.removeSpace('public');
-    }
-  }
-
-  disablePublicSpace(): void {
-    this.spaceService.removeSpace('public');
-  }
-
-  contentChanged(): void {
+  protected contentChanged(): void {
     this.notebookChanged.next();
   }
 
-  save(): void {
+  private save(): void {
     this.projectService.saveProject();
   }
 }

@@ -3,7 +3,6 @@ import { NotebookAuthoringComponent } from './notebook-authoring.component';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { SpaceService } from '../../services/spaceService';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -29,7 +28,7 @@ describe('NotebookAuthoringComponent', () => {
         StudentTeacherCommonServicesModule,
         UpgradeModule
       ],
-      providers: [ConfigService, TeacherProjectService, SpaceService]
+      providers: [ConfigService, TeacherProjectService]
     }).compileComponents();
 
     TestBed.inject(UpgradeModule).$injector = {
