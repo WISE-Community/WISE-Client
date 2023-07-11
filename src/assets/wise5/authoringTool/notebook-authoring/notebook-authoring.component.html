@@ -1,15 +1,17 @@
 <div>
   <h4 i18n>Notebook Settings</h4>
 </div>
-<mat-slide-toggle
-  color="primary"
-  class="toggle"
-  [(ngModel)]="project.notebook.enabled"
-  (ngModelChange)="contentChanged()"
-  i18n
->
-  Student Notebook
-</mat-slide-toggle>
+<div>
+  <mat-slide-toggle
+    color="primary"
+    class="toggle"
+    [(ngModel)]="project.notebook.enabled"
+    (ngModelChange)="contentChanged()"
+    i18n
+  >
+    Student Notebook
+  </mat-slide-toggle>
+</div>
 <div *ngIf="project.notebook.enabled" class="notebook-div">
   <div>
     <mat-form-field>
@@ -173,15 +175,17 @@
     </div>
   </div>
 </div>
-<mat-slide-toggle
-  color="primary"
-  class="toggle"
-  [(ngModel)]="project.teacherNotebook.enabled"
-  (ngModelChange)="contentChanged()"
-  i18n
->
-  Teacher Notebook
-</mat-slide-toggle>
+<div>
+  <mat-slide-toggle
+    color="primary"
+    class="toggle"
+    [(ngModel)]="project.teacherNotebook.enabled"
+    (ngModelChange)="contentChanged()"
+    i18n
+  >
+    Teacher Notebook
+  </mat-slide-toggle>
+</div>
 <div *ngIf="project.teacherNotebook.enabled" class="notebook-div">
   <div>
     <mat-form-field>

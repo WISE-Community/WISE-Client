@@ -970,7 +970,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e5bfb1c8202a7255708c24e046e647ccbdd95693" datatype="html">
@@ -992,11 +992,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">158</context>
+          <context context-type="linenumber">160</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">249</context>
+          <context context-type="linenumber">253</context>
         </context-group>
       </trans-unit>
       <trans-unit id="495b53dee6164e1c3ec7d95ee3527bb23b62a8c2" datatype="html">
@@ -1893,11 +1893,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">148</context>
+          <context context-type="linenumber">150</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">239</context>
+          <context context-type="linenumber">243</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
@@ -10082,11 +10082,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">234</context>
+          <context context-type="linenumber">238</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -10205,133 +10205,131 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="20abeb0b218d279640a05a046fcd98c2b4b30b79" datatype="html">
-        <source> Student Notebook
-</source>
+      <trans-unit id="80801429a07d2dcc6d5e6bc89cf95f6ae87a3837" datatype="html">
+        <source> Student Notebook </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">10,12</context>
+          <context context-type="linenumber">11,13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5a63da76438cf2de8ab3090b30301e76ecb0297b" datatype="html">
         <source>Notebook Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">192</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8d39e7a8a3bd007e5e2d7849161f5b889f0dcaf5" datatype="html">
         <source> Enable Note </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">27,29</context>
+          <context context-type="linenumber">29,31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d68f1b31f3cbd1b30b3636d345a39fa325147196" datatype="html">
         <source>Label (Singular)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">109</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">208</context>
+          <context context-type="linenumber">212</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8a47226bd3bdacc082629e439e94e09f34dc6e49" datatype="html">
         <source>Label (Plural)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">117</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">216</context>
+          <context context-type="linenumber">220</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2c660aa7c76de50c1b41d2ebd298c915d9ec5014" datatype="html">
         <source>Label (Link)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">52</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">125</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">224</context>
+          <context context-type="linenumber">228</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8939b0942e4470509efee81a517a37ed0172c6e3" datatype="html">
         <source> Enable Add Note Button </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">63,65</context>
+          <context context-type="linenumber">65,67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2171379d08d0377804e100f871c8e96ff20c5239" datatype="html">
         <source> Require students to write text on every note </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">73,75</context>
+          <context context-type="linenumber">75,77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f0c7f017ce69101e8b7b60163c94e05292175b7d" datatype="html">
         <source> Enable Clipping </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">82,84</context>
+          <context context-type="linenumber">84,86</context>
         </context-group>
       </trans-unit>
       <trans-unit id="881f27fd5138b6c7c0b3402575377b552606abfd" datatype="html">
         <source> Enable Student Uploads </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">91,93</context>
+          <context context-type="linenumber">93,95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="00d9fa046e02414bb4726dc04aeeff2429203220" datatype="html">
         <source> Enable Report </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">101,103</context>
+          <context context-type="linenumber">103,105</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">202,204</context>
+          <context context-type="linenumber">206,208</context>
         </context-group>
       </trans-unit>
       <trans-unit id="814bb9115573edc442f7afdafa03c3e46cbc0ddc" datatype="html">
         <source>Starter Text</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">167</context>
+          <context context-type="linenumber">169</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">258</context>
+          <context context-type="linenumber">262</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="e80a09b5c159e8ebf315b28f6809f538d983d345" datatype="html">
-        <source> Teacher Notebook
-</source>
+      <trans-unit id="c5f210eb923dd7a5eaf665c440fdf98cd541508a" datatype="html">
+        <source> Teacher Notebook </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">182,184</context>
+          <context context-type="linenumber">185,187</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4199930238964775542" datatype="html">
