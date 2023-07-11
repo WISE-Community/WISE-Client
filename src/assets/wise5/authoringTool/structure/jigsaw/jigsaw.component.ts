@@ -9,10 +9,6 @@ import { ConfigureStructureComponent } from '../configure-structure.component';
 export class JigsawComponent extends ConfigureStructureComponent {
   numGroups: string = '2';
 
-  ngOnChanges(): void {
-    this.injectGroupAndNodes(this.numGroups);
-  }
-
   protected fetchGroups(numGroups: string): void {
     super.fetchGroups(`jigsaw/groups-${numGroups}.json`);
   }
