@@ -30,6 +30,7 @@ describe('MilestonesAuthoringComponent', () => {
       providers: [TeacherProjectService]
     }).compileComponents();
 
+    TestBed.inject(TeacherProjectService).project = {};
     fixture = TestBed.createComponent(MilestonesAuthoringComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
