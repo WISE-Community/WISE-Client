@@ -237,6 +237,7 @@ import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tiny
     ShowGroupWorkAuthoringComponent,
     ShowMyWorkAuthoringComponent,
     SelectStepAndComponentComponent,
+    StudentTeacherCommonModule,
     SummaryAuthoring,
     TableAuthoring
   ]

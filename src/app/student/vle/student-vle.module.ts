@@ -33,6 +33,9 @@ import { NodeNavigationComponent } from '../../../assets/wise5/directives/node-n
 import { GroupTabsComponent } from '../../../assets/wise5/directives/group-tabs/group-tabs.component';
 import { StudentPeerGroupService } from '../../../assets/wise5/services/studentPeerGroupService';
 import { PeerGroupService } from '../../../assets/wise5/services/peerGroupService';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,10 @@ import { PeerGroupService } from '../../../assets/wise5/services/peerGroupServic
     StudentTeacherCommonModule,
     CommonModule,
     ComponentStudentModule,
+    HttpClientModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
     NodeModule,
     SimpleDialogModule,
     StudentAssetsDialogModule,
@@ -71,6 +77,14 @@ import { PeerGroupService } from '../../../assets/wise5/services/peerGroupServic
     StudentNotificationService,
     VLEProjectService
   ],
-  exports: [CommonModule, MatButtonModule, MatDialogModule, MatListModule]
+  exports: [
+    CommonModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatListModule,
+    StudentTeacherCommonModule
+  ]
 })
 export class StudentVLEModule {}

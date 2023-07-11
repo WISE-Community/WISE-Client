@@ -1,10 +1,7 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './http-error.interceptor';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -23,6 +20,7 @@ import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementDialogComponent } from './announcement/announcement.component';
 import { TrackScrollDirective } from './track-scroll.directive';
 import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY, RECAPTCHA_BASE_URL } from 'ng-recaptcha';
+import { CommonModule } from '@angular/common';
 
 export function initialize(
   configService: ConfigService,
@@ -45,8 +43,7 @@ export function initialize(
     TrackScrollDirective
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
+    CommonModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
@@ -57,11 +54,7 @@ export function initialize(
     MatSidenavModule,
     MatSnackBarModule,
     MatDialogModule,
-    RecaptchaV3Module,
-    RouterModule.forRoot([], {
-    scrollPositionRestoration: 'enabled',
-    anchorScrolling: 'enabled'
-})
+    RecaptchaV3Module
   ],
   providers: [
     ConfigService,
@@ -101,4 +94,12 @@ export function initialize(
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(configService: ConfigService, userService: UserService) {
+    userService.retrieveUserPromise().then((user) => {
+      userService.getUser().subscribe((user) => {
+        configService.retrieveConfig();
+      });
+    });
+  }
+}

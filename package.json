@@ -130,8 +130,8 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "serve-dev": "npm install && node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng serve --hmr --host 0.0.0.0",
-    "build-prod": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --configuration production; gulp copy-site-styles",
+    "serve-dev": "npm install && node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng serve --hmr --host 0.0.0.0 --project=site-learning-environment",
+    "build-prod": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build site-learning-environment --configuration production; gulp copy-site-styles",
     "bundle-report": "node ./node_modules/webpack-bundle-analyzer/lib/bin/analyzer.js dist/stats.json",
     "prettier-format": "prettier --config .prettierrc 'src' --write",
     "watch-sass": "node ./node_modules/gulp/bin/gulp.js watch-sass",
@@ -141,7 +141,10 @@
     "test-coverage": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng test wise --source-map=false --browsers ChromeHeadlessNoSandbox --watch=false --code-coverage",
     "test-e2e-comment": "test-e2e assumes wise is already running.",
     "test-e2e": "node ./node_modules/protractor/bin/protractor src/assets/wise5/test-e2e/conf.js",
-    "extract-i18n": "ng extract-i18n --output-path=src"
+    "extract-i18n": "ng extract-i18n site-learning-environment --output-path=src",
+    "start:site-learning-environment":"ng serve --project=site-learning-environment --port 4001",
+    "start:site":"ng serve --project=site --port 4002",
+    "start:learning-environment":"ng serve --project=learning-environment --port 4003"
   },
   "repository": {
     "type": "git",

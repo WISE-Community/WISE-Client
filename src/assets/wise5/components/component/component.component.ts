@@ -17,7 +17,7 @@ import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 import { Component as WISEComponent } from '../../common/Component';
 import { ComponentFactory } from '../../common/ComponentFactory';
-import { components } from '../Components';
+import { studentComponents } from '../StudentComponents';
 
 @Component({
   selector: 'component',
@@ -77,7 +77,7 @@ export class ComponentComponent {
   }
 
   ngAfterViewInit(): void {
-    this.componentRef = createComponent(components[this.component.content.type].student, {
+    this.componentRef = createComponent(studentComponents[this.component.content.type], {
       hostElement: this.componentElementRef.nativeElement,
       environmentInjector: this.injector
     });

@@ -12,7 +12,7 @@ import { environment } from '../environments/environment';
 declare let gtag: Function;
 
 @Component({
-  selector: 'app-root',
+  selector: 'site-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
@@ -125,7 +125,7 @@ export class AppComponent {
 
   subscribeToRouterEvents() {
     this.router.events.subscribe((ev: any) => {
-      if (ev instanceof NavigationEnd) {
+      if (ev.routerEvent instanceof NavigationEnd) {
         this.showDefaultMode = this.isShowDefaultMode();
         this.showHeaderAndFooter = this.isShowHeaderAndFooter();
         this.isShowUIView = this.isTeacherAngularJSPath();

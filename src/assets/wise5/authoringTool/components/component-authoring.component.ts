@@ -9,7 +9,7 @@ import {
   createComponent
 } from '@angular/core';
 import { ComponentContent } from '../../common/ComponentContent';
-import { components } from '../../components/Components';
+import { authoringComponents } from '../../components/AuthoringComponents';
 
 @Component({
   selector: 'component-authoring-component',
@@ -24,7 +24,7 @@ export class ComponentAuthoringComponent {
   constructor(private applicationRef: ApplicationRef, private injector: EnvironmentInjector) {}
 
   ngAfterViewInit(): void {
-    this.componentRef = createComponent(components[this.componentContent.type].authoring, {
+    this.componentRef = createComponent(authoringComponents[this.componentContent.type], {
       hostElement: this.componentElementRef.nativeElement,
       environmentInjector: this.injector
     });

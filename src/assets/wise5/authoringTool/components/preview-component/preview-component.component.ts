@@ -12,7 +12,7 @@ import {
   createComponent
 } from '@angular/core';
 import { Component as WISEComponent } from '../../../common/Component';
-import { components } from '../../../components/Components';
+import { studentComponents } from '../../../components/StudentComponents';
 
 @Component({
   selector: 'preview-component',
@@ -30,7 +30,7 @@ export class PreviewComponentComponent implements OnInit {
   ngOnInit() {}
 
   ngAfterViewInit(): void {
-    this.componentRef = createComponent(components[this.component.content.type].student, {
+    this.componentRef = createComponent(studentComponents[this.component.content.type], {
       hostElement: this.componentElementRef.nativeElement,
       environmentInjector: this.injector
     });

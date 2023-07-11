@@ -37,6 +37,7 @@ import { EditNotebookItemDialogModule } from '../assets/wise5/themes/default/not
 import { StudentTeacherCommonServicesModule } from './student-teacher-common-services.module';
 import { MathModule } from './math/math.module';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSelectModule,
     MatSidenavModule,
     MatSliderModule,
+    MatSnackBarModule,
     MatTabsModule,
     MatToolbarModule,
     MatSlideToggleModule,
@@ -109,6 +111,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSidenavModule,
     MatSliderModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
