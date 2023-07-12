@@ -1,25 +1,31 @@
 'use strict';
 
 import * as angular from 'angular';
-import ChooseStructureController from './chooseStructureController';
-import ChooseStructureLocationController from './chooseStructureLocationController';
-import ConfigureStructureController from './configureStructureController';
-import PeerReviewAndRevisionController from './peerReviewAndRevision/peerReviewAndRevisionController';
-import JigsawController from './jigsaw/jigsawController';
-import GuidanceChoiceController from './guidanceChoice/guidanceChoiceController';
-import SelfDirectedInvestigationController from './selfDirectedInvestigation/selfDirectedInvestigationController';
-import KICycleUSINGOERController from './kiCycleUsingOER/kiCycleUsingOERController';
+import { downgradeComponent } from '@angular/upgrade/static';
+import { JigsawComponent } from './jigsaw/jigsaw.component';
+import { SelfDirectedInvestigationComponent } from './self-directed-investigation/self-directed-investigation.component';
+import { KiCycleUsingOerComponent } from './ki-cycle-using-oer/ki-cycle-using-oer.component';
+import { PeerReviewAndRevisionComponent } from './peer-review-and-revision/peer-review-and-revision.component';
+import { ChooseStructureComponent } from './choose-structure/choose-structure.component';
+import { ChooseStructureLocationComponent } from './choose-structure-location/choose-structure-location.component';
 
 const structureAuthoringModule = angular
   .module('structureAuthoringModule', ['ui.router'])
-  .controller('ConfigureStructureController', ConfigureStructureController)
-  .controller('ChooseStructureLocationController', ChooseStructureLocationController)
-  .controller('ChooseStructureController', ChooseStructureController)
-  .controller('JigsawController', JigsawController)
-  .controller('GuidanceChoiceController', GuidanceChoiceController)
-  .controller('SelfDirectedInvestigationController', SelfDirectedInvestigationController)
-  .controller('PeerReviewAndRevisionController', PeerReviewAndRevisionController)
-  .controller('KICycleUsingOERController', KICycleUSINGOERController)
+  .directive(
+    'chooseStructureLocation',
+    downgradeComponent({ component: ChooseStructureLocationComponent })
+  )
+  .directive('chooseStructure', downgradeComponent({ component: ChooseStructureComponent }))
+  .directive('jigsawComponent', downgradeComponent({ component: JigsawComponent }))
+  .directive(
+    'selfDirectedInvestigation',
+    downgradeComponent({ component: SelfDirectedInvestigationComponent })
+  )
+  .directive(
+    'peerReviewAndRevisionComponent',
+    downgradeComponent({ component: PeerReviewAndRevisionComponent })
+  )
+  .directive('kiCycleUsingOer', downgradeComponent({ component: KiCycleUsingOerComponent }))
   .config([
     '$stateProvider',
     ($stateProvider) => {
@@ -31,75 +37,42 @@ const structureAuthoringModule = angular
         })
         .state('root.at.project.structure.choose', {
           url: '/choose',
-          templateUrl: 'assets/wise5/authoringTool/structure/chooseStructure.html',
-          controller: 'ChooseStructureController',
-          controllerAs: 'chooseStructureController',
-          params: {
-            structure: null
-          }
-        })
-        .state('root.at.project.structure.configure', {
-          url: '/configure',
-          templateUrl: 'assets/wise5/authoringTool/structure/configureStructure.html',
-          controller: 'ConfigureStructureController',
-          controllerAs: 'configureStructureController',
-          abstract: true,
+          component: 'chooseStructure',
           params: {
             structure: null
           }
         })
         .state('root.at.project.structure.jigsaw', {
           url: '/jigsaw',
-          templateUrl: 'assets/wise5/authoringTool/structure/jigsaw/jigsaw.html',
-          controller: 'JigsawController',
-          controllerAs: 'jigsawController',
-          params: {
-            structure: null
-          }
-        })
-        .state('root.at.project.structure.guidance-choice', {
-          url: '/guidance-choice',
-          templateUrl: 'assets/wise5/authoringTool/structure/guidanceChoice/guidanceChoice.html',
-          controller: 'GuidanceChoiceController',
-          controllerAs: 'guidanceChoiceController',
+          component: 'jigsawComponent',
           params: {
             structure: null
           }
         })
         .state('root.at.project.structure.self-directed-investigation', {
           url: '/self-directed-investigation',
-          templateUrl:
-            'assets/wise5/authoringTool/structure/selfDirectedInvestigation/selfDirectedInvestigation.html',
-          controller: 'SelfDirectedInvestigationController',
-          controllerAs: 'selfDirectedInvestigationController',
+          component: 'selfDirectedInvestigation',
           params: {
             structure: null
           }
         })
         .state('root.at.project.structure.peer-review-and-revision', {
           url: '/peer-review-and-revision',
-          templateUrl:
-            'assets/wise5/authoringTool/structure/peerReviewAndRevision/peerReviewAndRevision.html',
-          controller: 'PeerReviewAndRevisionController',
-          controllerAs: 'peerReviewAndRevisionController',
+          component: 'peerReviewAndRevisionComponent',
           params: {
             structure: null
           }
         })
         .state('root.at.project.structure.ki-cycle-using-oer', {
           url: '/ki-cycle-using-oer',
-          templateUrl: 'assets/wise5/authoringTool/structure/kiCycleUsingOER/kiCycleUsingOER.html',
-          controller: 'KICycleUsingOERController',
-          controllerAs: 'kiCycleUsingOERController',
+          component: 'kiCycleUsingOer',
           params: {
             structure: null
           }
         })
         .state('root.at.project.structure.location', {
           url: '/location',
-          templateUrl: 'assets/wise5/authoringTool/structure/chooseStructureLocation.html',
-          controller: 'ChooseStructureLocationController',
-          controllerAs: 'chooseStructureLocationController',
+          component: 'chooseStructureLocation',
           params: {
             structure: null
           }

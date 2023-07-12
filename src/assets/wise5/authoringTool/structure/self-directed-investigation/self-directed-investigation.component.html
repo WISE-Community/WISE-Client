@@ -1,0 +1,34 @@
+<h5 i18n>Self-Directed Investigation</h5>
+<p i18n>
+  The Self-Directed Investigation KI lesson structure helps students ask research questions about a
+  science topic, guides them through refining their initial questions to researchable questions, and
+  supports them in finding and evaluating evidence using online resources of their choice. Students
+  synthesize their findings into a product of your choice.
+</p>
+<hr />
+<div>
+  <button
+    mat-button
+    color="primary"
+    (click)="goToChooseStructure()"
+    aria-label="Back"
+    i18n-aria-label
+    i18n
+  >
+    Back
+  </button>
+  <span fxFlex></span>
+  <button mat-button color="primary" (click)="cancel()" aria-label="Cancel" i18n-aria-label i18n>
+    Cancel
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="chooseLocation()"
+    aria-label="Next"
+    i18n-aria-label
+    i18n
+  >
+    Next
+  </button>
+</div>
