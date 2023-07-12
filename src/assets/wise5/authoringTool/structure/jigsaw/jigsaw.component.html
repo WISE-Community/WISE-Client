@@ -6,7 +6,11 @@
 </p>
 <hr />
 <p i18n>Choose number of groups in this Jigsaw activity:</p>
-<mat-radio-group class="num-groups-radio-group" [(ngModel)]="numGroups">
+<mat-radio-group
+  class="num-groups-radio-group"
+  [(ngModel)]="numGroups"
+  (ngModelChange)="injectGroupAndNodes(numGroups)"
+>
   <mat-radio-button color="primary" value="2" i18n>Two groups</mat-radio-button>
   <mat-radio-button color="primary" value="3" i18n>Three groups</mat-radio-button>
   <mat-radio-button color="primary" value="4" i18n>Four groups</mat-radio-button>

@@ -11,7 +11,7 @@ import { StudentRun } from './student-run';
 export class StudentService {
   private runsUrl = '/api/student/runs';
   private runInfoUrl = '/api/student/run/info';
-  private runInfoByIdUrl = '/api/student/run/info-by-id';
+  private runInfoByIdUrl = '/api/user/run/info-by-id';
   private addRunUrl = '/api/student/run/register';
   private launchRunUrl = '/api/student/run/launch';
   private registerUrl = '/api/student/register';

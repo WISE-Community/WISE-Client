@@ -185,17 +185,7 @@
                   {{ ::'DELETE' | translate }}
                 </md-tooltip>
               </md-button>
-              <md-button
-                id="editProjectRubricButton"
-                class="topButton md-raised md-primary"
-                ng-click="$ctrl.editProjectRubric()"
-                ng-disabled="$ctrl.insertGroupMode || $ctrl.insertNodeMode || $ctrl.stepNodeSelected || $ctrl.activityNodeSelected"
-              >
-                <md-icon>message</md-icon>
-                <md-tooltip md-direction="top" class="projectButtonTooltip">
-                  {{ ::'editProjectRubric' | translate }}
-                </md-tooltip>
-              </md-button>
+
               <md-button
                 id="advancedProjectAuthoringButton"
                 class="topButton md-raised md-primary"
@@ -218,17 +208,6 @@
                 <md-tooltip md-direction="top" class="projectButtonTooltip"
                   >{{ ::'previewProject' | translate }}
                 </md-tooltip>
-              </md-button>
-              <md-button
-                id="previewProjectWithoutConstraintsButton"
-                class="topButton md-raised md-primary"
-                ng-click="$ctrl.previewProject(false)"
-                ng-disabled="$ctrl.insertGroupMode || $ctrl.insertNodeMode"
-              >
-                <md-icon>visibility_off</md-icon>
-                <md-tooltip md-direction="top" class="projectButtonTooltip"
-                  >{{ ::'previewProjectWithoutConstraints' | translate }}</md-tooltip
-                >
               </md-button>
             </div>
             <div

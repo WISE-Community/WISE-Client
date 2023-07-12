@@ -2,7 +2,6 @@ import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { AdvancedProjectAuthoringComponent } from '../../authoringTool/advanced/advanced-project-authoring.component';
 import { MilestonesAuthoringComponent } from '../../authoringTool/milestones/milestonesAuthoringComponent';
-import { NotebookAuthoringComponent } from '../../authoringTool/notebook/notebookAuthoringComponent';
 import {
   ProjectAssetAuthoringController,
   ProjectAssetAuthoringComponent
@@ -10,14 +9,17 @@ import {
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { ProjectAuthoringComponent } from '../../authoringTool/project/projectAuthoringComponent';
 import { ProjectInfoAuthoringComponent } from '../../authoringTool/info/projectInfoAuthoringComponent';
-import { RubricAuthoringComponent } from '../../authoringTool/rubric/rubric-authoring.component';
 import { RecoveryAuthoringComponent } from '../recovery-authoring/recovery-authoring.component';
 import { ConcurrentAuthorsMessageComponent } from '../concurrent-authors-message/concurrent-authors-message.component';
+import { NotebookAuthoringComponent } from '../notebook-authoring/notebook-authoring.component';
 
 export default angular
   .module('projectAuthoringModule', [])
   .component('milestonesAuthoringComponent', MilestonesAuthoringComponent)
-  .component('notebookAuthoringComponent', NotebookAuthoringComponent)
+  .directive(
+    'notebookAuthoringComponent',
+    downgradeComponent({ component: NotebookAuthoringComponent })
+  )
   .component('projectAssetAuthoringComponent', ProjectAssetAuthoringComponent)
   .component('projectAuthoringComponent', ProjectAuthoringComponent)
   .component('projectInfoAuthoringComponent', ProjectInfoAuthoringComponent)
@@ -33,10 +35,6 @@ export default angular
     downgradeComponent({
       component: ConcurrentAuthorsMessageComponent
     }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'rubricAuthoringComponent',
-    downgradeComponent({ component: RubricAuthoringComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'recoveryAuthoringComponent',
@@ -106,10 +104,6 @@ export default angular
         .state('root.at.project.advanced', {
           url: '/advanced',
           component: 'advancedProjectAuthoringComponent'
-        })
-        .state('root.at.project.rubric', {
-          url: '/rubric',
-          component: 'rubricAuthoringComponent'
         })
         .state('root.at.project.notebook', {
           url: '/notebook',
