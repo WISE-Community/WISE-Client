@@ -145,11 +145,9 @@ class ProjectAuthoringController {
     this.ProjectService.notifyAuthorProjectEnd(this.projectId);
   }
 
-  previewProject(enableConstraints: boolean = true): void {
-    this.saveEvent('projectPreviewed', 'Navigation', { constraints: enableConstraints });
-    window.open(
-      `${this.ConfigService.getConfigParam('previewProjectURL')}?constraints=${enableConstraints}`
-    );
+  previewProject(): void {
+    this.saveEvent('projectPreviewed', 'Navigation', { constraints: true });
+    window.open(`${this.ConfigService.getConfigParam('previewProjectURL')}`);
   }
 
   saveProject() {
@@ -560,10 +558,6 @@ class ProjectAuthoringController {
 
   importStep() {
     this.$state.go('root.at.project.import-step.choose-step');
-  }
-
-  editProjectRubric() {
-    this.$state.go('root.at.project.rubric');
   }
 
   goToAdvancedAuthoring() {

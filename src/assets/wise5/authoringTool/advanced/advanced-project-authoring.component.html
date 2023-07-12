@@ -4,42 +4,52 @@
     color="primary"
     id="backToProjectButton"
     class="topButton"
+    matTooltip="Back to Unit Plan"
+    matTooltipPosition="above"
+    i18n-matTooltip
     (click)="goBack()"
   >
-    <mat-icon
-      class="projectButtonTooltip"
-      matTooltip="Back to Unit Plan"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      >arrow_back</mat-icon
-    >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    class="topButton"
+    matTooltip="Show Rubric"
+    matTooltipPosition="above"
+    i18n-matTooltip
+    (click)="toggleRubric()"
+  >
+    <mat-icon>message</mat-icon>
   </button>
   <button
     mat-raised-button
     color="primary"
     id="showProjectJSONButton"
     class="topButton"
+    matTooltip="Show JSON"
+    matTooltipPosition="above"
+    i18n-matTooltip
     (click)="toggleJSON()"
   >
-    <mat-icon
-      class="projectButtonTooltip"
-      matTooltip="Show JSON"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      >code</mat-icon
-    >
+    <mat-icon>code</mat-icon>
   </button>
-  <button mat-raised-button color="primary" class="topButton" (click)="downloadProject()">
-    <mat-icon
-      class="projectButtonTooltip"
-      matTooltip="Download Unit"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      >file_download</mat-icon
-    >
+  <button
+    mat-raised-button
+    color="primary"
+    class="topButton"
+    matTooltip="Download Unit"
+    matTooltipPosition="above"
+    i18n-matTooltip
+    (click)="downloadProject()"
+  >
+    <mat-icon>file_download</mat-icon>
   </button>
 </div>
 <br />
+<div *ngIf="rubricDisplayed" class="rubric-div">
+  <rubric-authoring></rubric-authoring>
+</div>
 <div *ngIf="isJSONDisplayed">
   <mat-form-field fxFlex appearance="outline">
     <mat-label i18n>Edit Unit JSON</mat-label>
@@ -57,14 +67,16 @@
     <mat-label i18n>Script Filename</mat-label>
     <input matInput [(ngModel)]="projectScriptFilename" (change)="projectScriptFilenameChanged()" />
   </mat-form-field>
-  <button mat-raised-button color="primary" class="topButton" (click)="chooseProjectScriptFile()">
-    <mat-icon
-      class="projectButtonTooltip"
-      matTooltip="Choose"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      >attach_file</mat-icon
-    >
+  <button
+    mat-raised-button
+    color="primary"
+    class="topButton"
+    matTooltip="Choose"
+    matTooltipPosition="above"
+    i18n-matTooltip
+    (click)="chooseProjectScriptFile()"
+  >
+    <mat-icon>attach_file</mat-icon>
   </button>
 </div>
 <div fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="start center">
@@ -72,22 +84,25 @@
     <mat-label i18n>Unit URL</mat-label>
     <input matInput value="{{ getProjectURL() }}" disabled="true" />
   </mat-form-field>
-  <button mat-raised-button color="primary" class="topButton" (click)="copyProjectURL()">
-    <mat-icon
-      class="projectButtonTooltip"
-      matTooltip="Copy Unit URL to Clipboard"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      >content_paste</mat-icon
-    >
+  <button
+    mat-raised-button
+    color="primary"
+    class="topButton"
+    matTooltip="Copy Unit URL to Clipboard"
+    matTooltipPosition="above"
+    i18n-matTooltip(click)="copyProjectURL()"
+  >
+    <mat-icon>content_paste</mat-icon>
   </button>
-  <button mat-raised-button color="primary" class="topButton" (click)="openProjectURLInNewTab()">
-    <mat-icon
-      class="projectButtonTooltip"
-      matTooltip="Open Unit URL in New Tab"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      >open_in_new</mat-icon
-    >
+  <button
+    mat-raised-button
+    color="primary"
+    class="topButton"
+    matTooltip="Open Unit URL in New Tab"
+    matTooltipPosition="above"
+    i18n-matTooltip
+    (click)="openProjectURLInNewTab()"
+  >
+    <mat-icon>open_in_new</mat-icon>
   </button>
 </div>

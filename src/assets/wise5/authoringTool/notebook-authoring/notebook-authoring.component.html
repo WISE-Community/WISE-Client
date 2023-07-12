@@ -1,0 +1,270 @@
+<div>
+  <h4 i18n>Notebook Settings</h4>
+</div>
+<div>
+  <mat-slide-toggle
+    color="primary"
+    class="toggle"
+    [(ngModel)]="project.notebook.enabled"
+    (ngModelChange)="contentChanged()"
+    i18n
+  >
+    Student Notebook
+  </mat-slide-toggle>
+</div>
+<div *ngIf="project.notebook.enabled" class="notebook-div">
+  <div>
+    <mat-form-field>
+      <mat-label i18n>Notebook Label</mat-label>
+      <input matInput [(ngModel)]="project.notebook.label" (ngModelChange)="contentChanged()" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-slide-toggle
+      color="primary"
+      class="toggle"
+      [(ngModel)]="project.notebook.itemTypes.note.enabled"
+      (ngModelChange)="contentChanged()"
+      i18n
+    >
+      Enable Note
+    </mat-slide-toggle>
+  </div>
+  <div *ngIf="project.notebook.itemTypes.note.enabled" class="notebook-child-div">
+    <div fxLayoutGap="20px">
+      <mat-form-field>
+        <mat-label i18n>Label (Singular)</mat-label>
+        <input
+          matInput
+          [(ngModel)]="project.notebook.itemTypes.note.label.singular"
+          (ngModelChange)="contentChanged()"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>Label (Plural)</mat-label>
+        <input
+          matInput
+          [(ngModel)]="project.notebook.itemTypes.note.label.plural"
+          (ngModelChange)="contentChanged()"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>Label (Link)</mat-label>
+        <input
+          matInput
+          [(ngModel)]="project.notebook.itemTypes.note.label.link"
+          (ngModelChange)="contentChanged()"
+        />
+      </mat-form-field>
+    </div>
+    <mat-checkbox
+      color="primary"
+      [(ngModel)]="project.notebook.itemTypes.note.enableAddNote"
+      (ngModelChange)="contentChanged()"
+      i18n
+    >
+      Enable Add Note Button
+    </mat-checkbox>
+    <br />
+    <mat-checkbox
+      color="primary"
+      [(ngModel)]="project.notebook.itemTypes.note.enableDeleteNote"
+      [(ngModel)]="project.notebook.itemTypes.note.requireTextOnEveryNote"
+      (ngModelChange)="contentChanged()"
+      i18n
+    >
+      Require students to write text on every note
+    </mat-checkbox>
+    <br />
+    <mat-checkbox
+      color="primary"
+      [(ngModel)]="project.notebook.itemTypes.note.enableClipping"
+      (ngModelChange)="contentChanged()"
+      i18n
+    >
+      Enable Clipping
+    </mat-checkbox>
+    <br />
+    <mat-checkbox
+      color="primary"
+      [(ngModel)]="project.notebook.itemTypes.note.enableStudentUploads"
+      (ngModelChange)="contentChanged()"
+      i18n
+    >
+      Enable Student Uploads
+    </mat-checkbox>
+  </div>
+  <mat-slide-toggle
+    color="primary"
+    class="toggle"
+    [(ngModel)]="project.notebook.itemTypes.report.enabled"
+    (ngModelChange)="contentChanged()"
+    i18n
+  >
+    Enable Report
+  </mat-slide-toggle>
+  <div *ngIf="project.notebook.itemTypes.report.enabled" class="notebook-child-div">
+    <div fxLayoutGap="20px">
+      <mat-form-field>
+        <mat-label i18n>Label (Singular)</mat-label>
+        <input
+          matInput
+          [(ngModel)]="project.notebook.itemTypes.report.label.singular"
+          (ngModelChange)="contentChanged()"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>Label (Plural)</mat-label>
+        <input
+          matInput
+          [(ngModel)]="project.notebook.itemTypes.report.label.plural"
+          (ngModelChange)="contentChanged()"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>Label (Link)</mat-label>
+        <input
+          matInput
+          [(ngModel)]="project.notebook.itemTypes.report.label.link"
+          (ngModelChange)="contentChanged()"
+        />
+      </mat-form-field>
+    </div>
+    <div *ngFor="let reportNote of project.notebook.itemTypes.report.notes">
+      <mat-form-field>
+        <mat-label i18n>Title</mat-label>
+        <input matInput [(ngModel)]="reportNote.title" (ngModelChange)="contentChanged()" />
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label i18n>Max Score</mat-label>
+        <input
+          matInput
+          [(ngModel)]="reportNote.maxScore"
+          type="number"
+          (ngModelChange)="contentChanged()"
+        />
+      </mat-form-field>
+      <br />
+      <mat-form-field class="textarea">
+        <mat-label i18n>Description</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          [(ngModel)]="reportNote.description"
+          (ngModelChange)="contentChanged()"
+        ></textarea>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="textarea">
+        <mat-label i18n>Prompt</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          [(ngModel)]="reportNote.prompt"
+          (ngModelChange)="contentChanged()"
+        ></textarea>
+      </mat-form-field>
+      <br />
+      <mat-label i18n>Starter Text</mat-label>
+      <wise-authoring-tinymce-editor
+        [(model)]="reportIdToAuthoringNote[reportNote.reportId].html"
+        (modelChange)="reportStarterTextChanged(reportNote.reportId)"
+      >
+      </wise-authoring-tinymce-editor>
+    </div>
+  </div>
+</div>
+<div>
+  <mat-slide-toggle
+    color="primary"
+    class="toggle"
+    [(ngModel)]="project.teacherNotebook.enabled"
+    (ngModelChange)="contentChanged()"
+    i18n
+  >
+    Teacher Notebook
+  </mat-slide-toggle>
+</div>
+<div *ngIf="project.teacherNotebook.enabled" class="notebook-div">
+  <div>
+    <mat-form-field>
+      <mat-label i18n>Notebook Label</mat-label>
+      <input
+        matInput
+        [(ngModel)]="project.teacherNotebook.label"
+        (ngModelChange)="contentChanged()"
+      />
+    </mat-form-field>
+  </div>
+  <mat-slide-toggle
+    color="primary"
+    class="toggle"
+    [(ngModel)]="project.teacherNotebook.itemTypes.report.enabled"
+    (ngModelChange)="contentChanged()"
+    i18n
+  >
+    Enable Report
+  </mat-slide-toggle>
+  <div *ngIf="project.teacherNotebook.itemTypes.report.enabled" class="notebook-child-div">
+    <div fxLayoutGap="20px">
+      <mat-form-field>
+        <mat-label i18n>Label (Singular)</mat-label>
+        <input
+          matInput
+          [(ngModel)]="project.teacherNotebook.itemTypes.report.label.singular"
+          (ngModelChange)="contentChanged()"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>Label (Plural)</mat-label>
+        <input
+          matInput
+          [(ngModel)]="project.teacherNotebook.itemTypes.report.label.plural"
+          (ngModelChange)="contentChanged()"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>Label (Link)</mat-label>
+        <input
+          matInput
+          [(ngModel)]="project.teacherNotebook.itemTypes.report.label.link"
+          (ngModelChange)="contentChanged()"
+        />
+      </mat-form-field>
+    </div>
+    <div *ngFor="let reportNote of project.teacherNotebook.itemTypes.report.notes">
+      <mat-form-field>
+        <mat-label i18n>Title</mat-label>
+        <input matInput [(ngModel)]="reportNote.title" (ngModelChange)="contentChanged()" />
+      </mat-form-field>
+      <br />
+      <mat-form-field class="textarea">
+        <mat-label i18n>Description</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          [(ngModel)]="reportNote.description"
+          (ngModelChange)="contentChanged()"
+        ></textarea>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="textarea">
+        <mat-label i18n>Prompt</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          [(ngModel)]="reportNote.prompt"
+          (ngModelChange)="contentChanged()"
+        ></textarea>
+      </mat-form-field>
+      <br />
+      <mat-label i18n>Starter Text</mat-label>
+      <wise-authoring-tinymce-editor
+        [(model)]="reportIdToAuthoringNote[reportNote.reportId].html"
+        (modelChange)="reportStarterTextChanged(reportNote.reportId)"
+      >
+      </wise-authoring-tinymce-editor>
+    </div>
+  </div>
+</div>
