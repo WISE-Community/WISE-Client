@@ -4,6 +4,8 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { ProjectLibraryService } from '../../../services/projectLibraryService';
 import { Component, OnInit } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { ImportComponentService } from '../../../services/importComponentService';
+import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 
 @Component({
   selector: 'choose-import-component',
@@ -22,6 +24,8 @@ export class ChooseImportComponentComponent implements OnInit {
 
   constructor(
     private configService: ConfigService,
+    private importComponentService: ImportComponentService,
+    private projectAssetService: ProjectAssetService,
     private projectLibraryService: ProjectLibraryService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
@@ -69,11 +73,22 @@ export class ChooseImportComponentComponent implements OnInit {
     if (selectedComponents.length === 0) {
       alert($localize`Please select a component to import.`);
     } else {
-      this.upgrade.$injector
-        .get('$state')
-        .go('root.at.project.node.import-component.choose-location', {
-          importFromProjectId: this.importProjectId,
-          selectedComponents: selectedComponents
+      this.importComponentService
+        .importComponents(
+          selectedComponents,
+          this.importProjectId,
+          this.dataService.getCurrentNodeId(),
+          this.upgrade.$injector.get('$stateParams').componentId
+        )
+        .then((newComponents) => {
+          this.projectService.saveProject();
+          // refresh the project assets in case any of the imported components also imported assets
+          this.projectAssetService.retrieveProjectAssets();
+          this.upgrade.$injector.get('$state').go('root.at.project.node', {
+            projectId: this.configService.getProjectId(),
+            nodeId: this.dataService.getCurrentNodeId(),
+            newComponents: newComponents
+          });
         });
     }
   }
@@ -97,15 +112,6 @@ export class ChooseImportComponentComponent implements OnInit {
 
   previewImportNode(node: any): void {
     window.open(`${this.importProject.previewProjectURL}/${node.id}`);
-  }
-
-  protected goToChooseNewComponent(): void {
-    this.upgrade.$injector
-      .get('$state')
-      .go(
-        'root.at.project.node.add-component.choose-component',
-        this.upgrade.$injector.get('$stateParams')
-      );
   }
 
   cancel(): void {

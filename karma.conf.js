@@ -26,6 +26,7 @@ module.exports = function (config) {
     specReporter: {
       suppressSkipped: true
     },
+    browserNoActivityTimeout: 500000,
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

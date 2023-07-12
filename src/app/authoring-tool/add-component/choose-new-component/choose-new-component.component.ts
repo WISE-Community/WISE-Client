@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { goToNodeAuthoring } from '../../../../assets/wise5/common/ui-router/ui-router';
 import { ComponentTypeService } from '../../../../assets/wise5/services/componentTypeService';
-import { ConfigService } from '../../../../assets/wise5/services/configService';
-import { TeacherDataService } from '../../../../assets/wise5/services/teacherDataService';
-import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'choose-new-component',
@@ -17,55 +14,28 @@ export class ChooseNewComponent {
 
   constructor(
     private componentTypeService: ComponentTypeService,
-    private configService: ConfigService,
-    private dataService: TeacherDataService,
-    private projectService: TeacherProjectService,
+    private dialogRef: MatDialogRef<ChooseNewComponent>,
+    @Inject(MAT_DIALOG_DATA) private insertAfterComponentId: string,
     private upgrade: UpgradeModule
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.componentTypes = this.componentTypeService.getComponentTypes();
     this.selectedComponentType = this.upgrade.$injector.get('$stateParams').componentType;
   }
 
-  setComponentType(componentType) {
-    this.selectedComponentType = componentType;
-  }
-
-  next(): void {
-    const nodeId = this.dataService.getCurrentNodeId();
-    const components = this.projectService.getComponents(nodeId);
-    if (components.length === 0) {
-      this.insertComponentAsFirst(nodeId, this.selectedComponentType);
-    } else {
-      this.upgrade.$injector
-        .get('$state')
-        .go('root.at.project.node.add-component.choose-location', {
-          componentType: this.selectedComponentType
-        });
-    }
-  }
-
-  private insertComponentAsFirst(nodeId: string, componentType: string): void {
-    const newComponent = this.projectService.createComponent(nodeId, componentType, null);
-    this.projectService.saveProject().then(() => {
-      this.dataService.saveAddComponentEvent(nodeId, newComponent);
-      goToNodeAuthoring(
-        this.upgrade.$injector.get('$state'),
-        this.configService.getProjectId(),
-        nodeId,
-        [newComponent]
-      );
+  protected goToImportComponent(): void {
+    this.dialogRef.close();
+    this.upgrade.$injector.get('$state').go('root.at.project.node.import-component.choose-step', {
+      insertAfterComponentId: this.insertAfterComponentId
     });
   }
 
-  protected importComponent(): void {
-    this.upgrade.$injector.get('$state').go('root.at.project.node.import-component.choose-step');
+  protected selectComponent(componentType: string): void {
+    this.dialogRef.close(componentType);
   }
 
-  cancel() {
-    this.upgrade.$injector.get('$state').go('root.at.project.node', {
-      nodeId: this.upgrade.$injector.get('$stateParams').nodeId
-    });
+  protected cancel(): void {
+    this.dialogRef.close();
   }
 }
