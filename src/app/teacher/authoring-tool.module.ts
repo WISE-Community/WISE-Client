@@ -27,6 +27,7 @@ import { TeacherNodeIconComponent } from '../../assets/wise5/authoringTool/teach
 import { MatChipsModule } from '@angular/material/chips';
 import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
+import { StructureAuthoringModule } from '../../assets/wise5/authoringTool/structure/structure-authoring.module';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/not
     NodeAdvancedAuthoringModule,
     PreviewComponentModule,
     RouterModule,
+    StructureAuthoringModule,
     WiseTinymceEditorModule
   ]
 })
