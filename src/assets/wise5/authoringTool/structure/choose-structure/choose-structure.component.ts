@@ -7,8 +7,8 @@ import { UpgradeModule } from '@angular/upgrade/static';
   styleUrls: ['./choose-structure.component.scss']
 })
 export class ChooseStructureComponent {
-  $state: any;
-  structures = [
+  private $state: any;
+  protected structures = [
     {
       label: $localize`Jigsaw`,
       description: $localize`The Jigsaw KI lesson structure guides students through learning about specific aspects of a science topic of their choice and engages them in collaboration to learn more. Students share their own ideas and reflect on what they learned from their classmates.`,
@@ -41,11 +41,11 @@ export class ChooseStructureComponent {
     this.$state = this.upgrade.$injector.get('$state');
   }
 
-  chooseStructure(route: string): void {
+  protected chooseStructure(route: string): void {
     this.$state.go(route);
   }
 
-  cancel(): void {
+  protected cancel(): void {
     this.$state.go('root.at.project');
   }
 }
