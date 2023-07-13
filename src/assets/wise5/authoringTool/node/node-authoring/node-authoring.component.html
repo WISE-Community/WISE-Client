@@ -65,25 +65,6 @@
         <mat-icon>visibility</mat-icon>
       </button>
     </div>
-    <div
-      *ngIf="insertComponentMode"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      fxLayoutGap="20px"
-      class="insert-component-message"
-    >
-      <span i18n>Choose the new location by clicking one of the buttons below</span>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="cancelInsertClicked()"
-        aria-label="Cancel"
-        i18n-aria-label
-        i18n
-      >
-        Cancel
-      </button>
-    </div>
   </div>
   <div
     *ngIf="showComponents && !insertComponentMode"
@@ -129,21 +110,9 @@
       </button>
     </div>
   </div>
-  <div *ngIf="insertComponentMode" class="insert-as-first-component-div" fxLayoutGap="20px">
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="insertComponentAsFirst()"
-      matTooltip="Insert as First Component"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>keyboard_backspace</mat-icon>
-    </button>
-    <span class="insert-as-first-component-message" i18n>Insert as First Component</span>
-  </div>
   <ng-template #addComponentButtonTemplate let-componentId="componentId">
     <button
+      *ngIf="!isAnyComponentSelected && !insertComponentMode"
       mat-icon-button
       color="primary"
       matTooltip="Add a new component"
@@ -165,7 +134,7 @@
     <ng-container
       *ngTemplateOutlet="addComponentButtonTemplate; context: { componentId: null }"
     ></ng-container>
-    <div *ngIf="isAnyComponentSelected">
+    <div *ngIf="isAnyComponentSelected && !insertComponentMode">
       <button
         mat-icon-button
         color="primary"
@@ -198,6 +167,39 @@
       </button>
     </div>
   </h5>
+  <div
+    *ngIf="insertComponentMode"
+    style="margin-left: 16px"
+    fxLayout="row"
+    fxLayoutAlign="start center"
+    fxLayoutGap="20px"
+    class="insert-component-message"
+  >
+    <span i18n>Choose the new location by clicking one of the buttons below</span>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="cancelInsertClicked()"
+      aria-label="Cancel"
+      i18n-aria-label
+      i18n
+    >
+      Cancel
+    </button>
+  </div>
+  <div *ngIf="insertComponentMode" class="insert-as-first-component-div" fxLayoutGap="20px">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="insertComponentAsFirst()"
+      matTooltip="Insert as First Component"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+    <span class="insert-as-first-component-message" i18n>Insert as First Component</span>
+  </div>
   <div
     *ngIf="showComponents && components.length === 0 && !insertComponentMode && !isGroupNode"
     class="no-components-message"
