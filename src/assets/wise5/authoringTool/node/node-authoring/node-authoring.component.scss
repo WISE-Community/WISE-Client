@@ -104,7 +104,8 @@
 
 .add-component {
   position: absolute;
-  bottom: -24px;
+  bottom: 24px;
+  height: 0px;
   width: 100%;
   text-align: center;
   z-index: 1;
