@@ -78,7 +78,7 @@ export class ChooseImportComponentComponent implements OnInit {
           selectedComponents,
           this.importProjectId,
           this.dataService.getCurrentNodeId(),
-          this.upgrade.$injector.get('$stateParams').componentId
+          this.upgrade.$injector.get('$stateParams').insertAfterComponentId
         )
         .then((newComponents) => {
           this.projectService.saveProject();
