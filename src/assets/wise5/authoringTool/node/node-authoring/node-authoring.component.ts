@@ -258,14 +258,14 @@ export class NodeAuthoringComponent implements OnInit {
     return selectedComponents;
   }
 
-  protected moveButtonClicked(): void {
+  protected moveComponents(): void {
     this.showDefaultComponentsView();
     this.setMoveComponentMode(true);
     this.setInsertComponentMode(true);
     this.setShowComponentAuthoringViews(false);
   }
 
-  protected copyButtonClicked(): void {
+  protected copyComponents(): void {
     this.showDefaultComponentsView();
     this.setCopyComponentMode(true);
     this.setInsertComponentMode(true);

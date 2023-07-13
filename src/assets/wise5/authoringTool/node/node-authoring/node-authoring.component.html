@@ -22,58 +22,14 @@
       >
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <div>
-        <button
-          *ngIf="showStepButtons && !isGroupNode"
-          mat-raised-button
-          color="primary"
-          class="top-button"
-          (click)="moveButtonClicked()"
-          [disabled]="!isAnyComponentSelected || insertComponentMode"
-          matTooltip="Move Component"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>redo</mat-icon>
-        </button>
-      </div>
-      <div>
-        <button
-          *ngIf="showStepButtons && !isGroupNode"
-          mat-raised-button
-          color="primary"
-          class="top-button"
-          (click)="copyButtonClicked()"
-          [disabled]="!isAnyComponentSelected || insertComponentMode"
-          matTooltip="Copy Component"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>content_copy</mat-icon>
-        </button>
-      </div>
-      <div>
-        <button
-          *ngIf="showStepButtons && !isGroupNode"
-          mat-raised-button
-          color="primary"
-          class="top-button"
-          (click)="deleteComponents()"
-          [disabled]="!isAnyComponentSelected || insertComponentMode"
-          matTooltip="Delete Component"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
+
       <button
         *ngIf="showStepButtons"
         mat-raised-button
         color="primary"
         class="top-button"
         (click)="showAdvancedView()"
-        [disabled]="getSelectedComponentIds().length !== 0 || insertComponentMode"
+        [disabled]="insertComponentMode"
         matTooltip="Advanced"
         matTooltipPosition="above"
         i18n-matTooltip
@@ -210,6 +166,38 @@
     <ng-container
       *ngTemplateOutlet="addComponentButtonTemplate; context: { componentId: null }"
     ></ng-container>
+    <div *ngIf="isAnyComponentSelected">
+      <button
+        mat-icon-button
+        color="primary"
+        (click)="moveComponents()"
+        matTooltip="Move Components"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>redo</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="primary"
+        (click)="copyComponents()"
+        matTooltip="Copy Components"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>content_copy</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="primary"
+        (click)="deleteComponents()"
+        matTooltip="Delete Components"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
   </h5>
   <div
     *ngIf="showComponents && components.length === 0 && !insertComponentMode && !isGroupNode"
