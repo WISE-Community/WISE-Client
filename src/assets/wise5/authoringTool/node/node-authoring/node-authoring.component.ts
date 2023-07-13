@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { NotificationService } from '../../../services/notificationService';
@@ -15,6 +15,7 @@ import { ConfigService } from '../../../../wise5/services/configService';
 import { EditComponentAdvancedComponent } from '../../../../../app/authoring-tool/edit-component-advanced/edit-component-advanced.component';
 import { Component as WiseComponent } from '../../../common/Component';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { ChooseNewComponent } from '../../../../../app/authoring-tool/add-component/choose-new-component/choose-new-component.component';
 
 @Component({
   selector: 'node-authoring',
@@ -136,8 +137,23 @@ export class NodeAuthoringComponent implements OnInit {
     this.scrollToTopOfPage();
   }
 
-  protected addComponent(): void {
-    this.upgrade.$injector.get('$state').go('root.at.project.node.add-component.choose-component');
+  protected addComponent(insertAfterComponentId: string): void {
+    const dialogRef = this.dialog.open(ChooseNewComponent, {
+      data: insertAfterComponentId,
+      width: '80%'
+    });
+    dialogRef
+      .afterClosed()
+      .pipe(filter((componentType) => componentType != null))
+      .subscribe((componentType) => {
+        const component = this.projectService.createComponent(
+          this.nodeId,
+          componentType,
+          insertAfterComponentId
+        );
+        this.projectService.saveProject();
+        this.highlightNewComponentsAndThenShowComponentAuthoring([component]);
+      });
   }
 
   protected hideAllComponentSaveButtons(): void {

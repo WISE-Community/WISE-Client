@@ -8,7 +8,6 @@ import { CardSelectorComponent } from '../../assets/wise5/authoringTool/componen
 import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component';
 import { RubricAuthoringComponent } from '../../assets/wise5/authoringTool/rubric/rubric-authoring.component';
 import { NodeIconChooserDialog } from '../../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
-import { ChooseNewComponentLocation } from '../authoring-tool/add-component/choose-new-component-location/choose-new-component-location.component';
 import { ChooseNewComponent } from '../authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { ChooseImportStepLocationComponent } from '../authoring-tool/import-step/choose-import-step-location/choose-import-step-location.component';
 import { ChooseImportStepComponent } from '../authoring-tool/import-step/choose-import-step/choose-import-step.component';
@@ -39,7 +38,6 @@ import { StructureAuthoringModule } from '../../assets/wise5/authoringTool/struc
     ChooseImportStepComponent,
     ChooseImportStepLocationComponent,
     ChooseNewComponent,
-    ChooseNewComponentLocation,
     ChooseNewNodeLocation,
     ChooseNewNodeTemplate,
     ConcurrentAuthorsMessageComponent,
