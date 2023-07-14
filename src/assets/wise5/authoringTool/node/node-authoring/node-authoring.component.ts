@@ -43,8 +43,6 @@ export class NodeAuthoringComponent implements OnInit {
   selectedComponent: any = null;
   showAdvanced: boolean = false;
   showComponentAuthoringViews: boolean = true;
-  showComponents: boolean = true;
-  showStepButtons: boolean = true;
   undoStack: any[] = [];
   subscriptions: Subscription = new Subscription();
   $state: any;
@@ -194,16 +192,8 @@ export class NodeAuthoringComponent implements OnInit {
     }
   }
 
-  private hideAllViews(): void {
-    this.showStepButtons = false;
-    this.showComponents = false;
-    this.notificationService.hideJSONValidMessage();
-  }
-
   private showDefaultComponentsView(): void {
-    this.hideAllViews();
-    this.showStepButtons = true;
-    this.showComponents = true;
+    this.notificationService.hideJSONValidMessage();
   }
 
   protected showAdvancedView(): void {
@@ -258,14 +248,14 @@ export class NodeAuthoringComponent implements OnInit {
     return selectedComponents;
   }
 
-  protected moveButtonClicked(): void {
+  protected moveComponents(): void {
     this.showDefaultComponentsView();
     this.setMoveComponentMode(true);
     this.setInsertComponentMode(true);
     this.setShowComponentAuthoringViews(false);
   }
 
-  protected copyButtonClicked(): void {
+  protected copyComponents(): void {
     this.showDefaultComponentsView();
     this.setCopyComponentMode(true);
     this.setInsertComponentMode(true);
