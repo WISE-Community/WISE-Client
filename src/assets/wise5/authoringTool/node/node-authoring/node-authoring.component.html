@@ -111,7 +111,7 @@
   </div>
   <ng-template #addComponentButtonTemplate let-componentId="componentId">
     <button
-      *ngIf="!isAnyComponentSelected && !insertComponentMode"
+      *ngIf="!insertComponentMode"
       mat-icon-button
       color="primary"
       matTooltip="Add a new component"
