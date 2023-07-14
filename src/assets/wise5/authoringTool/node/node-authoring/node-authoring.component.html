@@ -23,7 +23,6 @@
         <mat-icon>arrow_back</mat-icon>
       </button>
       <button
-        *ngIf="showStepButtons"
         mat-raised-button
         color="primary"
         class="top-button"
@@ -36,7 +35,7 @@
         <mat-icon>build</mat-icon>
       </button>
       <button
-        *ngIf="!isGroupNode && showStepButtons"
+        *ngIf="!isGroupNode"
         mat-raised-button
         color="primary"
         class="top-button"
@@ -67,7 +66,7 @@
     </div>
   </div>
   <div
-    *ngIf="showComponents && !insertComponentMode"
+    *ngIf="!insertComponentMode"
     fxLayout="row wrap"
     fxLayoutAlign="start center"
     fxLayoutGap="20px"
@@ -201,13 +200,13 @@
     <span class="insert-as-first-component-message" i18n>Insert as First Component</span>
   </div>
   <div
-    *ngIf="showComponents && components.length === 0 && !insertComponentMode && !isGroupNode"
+    *ngIf="components.length === 0 && !insertComponentMode && !isGroupNode"
     class="no-components-message"
   >
     <em i18n>This step does not have any components. Click the + button to add a component.</em>
   </div>
   <div *ngFor="let component of components; let i = index">
-    <div *ngIf="showComponents" [id]="component.id" class="component">
+    <div [id]="component.id" class="component">
       <div
         (click)="toggleComponent(component.id)"
         class="component-header"

@@ -43,8 +43,6 @@ export class NodeAuthoringComponent implements OnInit {
   selectedComponent: any = null;
   showAdvanced: boolean = false;
   showComponentAuthoringViews: boolean = true;
-  showComponents: boolean = true;
-  showStepButtons: boolean = true;
   undoStack: any[] = [];
   subscriptions: Subscription = new Subscription();
   $state: any;
@@ -194,16 +192,8 @@ export class NodeAuthoringComponent implements OnInit {
     }
   }
 
-  private hideAllViews(): void {
-    this.showStepButtons = false;
-    this.showComponents = false;
-    this.notificationService.hideJSONValidMessage();
-  }
-
   private showDefaultComponentsView(): void {
-    this.hideAllViews();
-    this.showStepButtons = true;
-    this.showComponents = true;
+    this.notificationService.hideJSONValidMessage();
   }
 
   protected showAdvancedView(): void {
