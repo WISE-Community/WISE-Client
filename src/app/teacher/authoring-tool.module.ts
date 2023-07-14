@@ -27,6 +27,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { StructureAuthoringModule } from '../../assets/wise5/authoringTool/structure/structure-authoring.module';
+import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { StructureAuthoringModule } from '../../assets/wise5/authoringTool/struc
     ChooseNewNodeLocation,
     ChooseNewNodeTemplate,
     ConcurrentAuthorsMessageComponent,
+    MilestonesAuthoringComponent,
     NodeAuthoringComponent,
     NodeIconChooserDialog,
     NotebookAuthoringComponent,

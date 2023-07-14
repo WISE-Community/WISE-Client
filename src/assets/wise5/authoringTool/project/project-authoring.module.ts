@@ -1,7 +1,6 @@
 import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { AdvancedProjectAuthoringComponent } from '../../authoringTool/advanced/advanced-project-authoring.component';
-import { MilestonesAuthoringComponent } from '../../authoringTool/milestones/milestonesAuthoringComponent';
 import {
   ProjectAssetAuthoringController,
   ProjectAssetAuthoringComponent
@@ -12,10 +11,14 @@ import { ProjectInfoAuthoringComponent } from '../../authoringTool/info/projectI
 import { RecoveryAuthoringComponent } from '../recovery-authoring/recovery-authoring.component';
 import { ConcurrentAuthorsMessageComponent } from '../concurrent-authors-message/concurrent-authors-message.component';
 import { NotebookAuthoringComponent } from '../notebook-authoring/notebook-authoring.component';
+import { MilestonesAuthoringComponent } from '../milestones-authoring/milestones-authoring.component';
 
 export default angular
   .module('projectAuthoringModule', [])
-  .component('milestonesAuthoringComponent', MilestonesAuthoringComponent)
+  .directive(
+    'milestonesAuthoringComponent',
+    downgradeComponent({ component: MilestonesAuthoringComponent })
+  )
   .directive(
     'notebookAuthoringComponent',
     downgradeComponent({ component: NotebookAuthoringComponent })
