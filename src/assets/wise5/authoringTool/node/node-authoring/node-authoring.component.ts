@@ -16,6 +16,7 @@ import { EditComponentAdvancedComponent } from '../../../../../app/authoring-too
 import { Component as WiseComponent } from '../../../common/Component';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { ChooseNewComponent } from '../../../../../app/authoring-tool/add-component/choose-new-component/choose-new-component.component';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'node-authoring',
@@ -523,5 +524,10 @@ export class NodeAuthoringComponent implements OnInit {
         this.componentServiceLookupService.getService(component.type).componentUsesSaveButton()
       )
       .forEach((component) => (component.showSaveButton = showSaveButton));
+  }
+
+  protected dropComponent(event: CdkDragDrop<string[]>): void {
+    moveItemInArray(this.components, event.previousIndex, event.currentIndex);
+    this.projectService.saveProject();
   }
 }

@@ -61,7 +61,7 @@
 
 .component-header {
   height: 48px;
-  padding: 0px 20px;
+  padding: 0px 20px 0px 0px;
   cursor: pointer;
 }
 
@@ -109,4 +109,12 @@
   width: 100%;
   text-align: center;
   z-index: 1;
+}
+
+.cdk-drag-handle {
+  cursor: move;
+}
+
+.cdk-drag-placeholder {
+  opacity: .4;
 }
