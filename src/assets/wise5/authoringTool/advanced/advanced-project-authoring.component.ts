@@ -93,9 +93,12 @@ export class AdvancedProjectAuthoringComponent {
       projectId: this.projectId,
       target: 'scriptFilename'
     };
-    this.projectAssetService.openAssetChooser(params).then((data: any) => {
-      this.assetSelected(data);
-    });
+    this.projectAssetService
+      .openAssetChooser(params)
+      .afterClosed()
+      .subscribe((data: any) => {
+        this.assetSelected(data);
+      });
   }
 
   assetSelected({ assetItem }) {

@@ -8,6 +8,8 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { isAudio, isImage, isVideo } from '../../assets/wise5/common/file/file';
+import { ProjectAssetAuthoringComponent } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable()
 export class ProjectAssetService {
@@ -19,6 +21,7 @@ export class ProjectAssetService {
 
   constructor(
     protected configService: ConfigService,
+    private dialog: MatDialog,
     protected http: HttpClient,
     protected projectService: ProjectService,
     protected upgrade: UpgradeModule
@@ -237,13 +240,9 @@ export class ProjectAssetService {
   }
 
   openAssetChooser(params: any) {
-    return this.upgrade.$injector.get('$mdDialog').show({
-      templateUrl: 'assets/wise5/authoringTool/asset/assetAuthoring.html',
-      controller: 'ProjectAssetAuthoringController',
-      controllerAs: '$ctrl',
-      $stateParams: params,
-      clickOutsideToClose: true,
-      escapeToClose: true
+    return this.dialog.open(ProjectAssetAuthoringComponent, {
+      data: params,
+      width: '80%'
     });
   }
 }

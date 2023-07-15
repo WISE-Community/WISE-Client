@@ -104,12 +104,14 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
       isPopup: true,
       allowedFileTypes: this.getAllowedFileTypesFromMeta(meta)
     };
-    this.ProjectAssetService.openAssetChooser(params).then((result: any) => {
-      const fileName = result.assetItem.fileName;
-      const fileNameNoExt = fileName.substr(0, fileName.lastIndexOf('.')) || fileName;
-      const fullFilePath = `${this.ConfigService.getProjectAssetsDirectoryPath()}/${fileName}`;
-      callback(fullFilePath, { alt: fileNameNoExt, text: fileNameNoExt });
-    });
+    this.ProjectAssetService.openAssetChooser(params)
+      .afterClosed()
+      .subscribe((result: any) => {
+        const fileName = result.assetItem.fileName;
+        const fileNameNoExt = fileName.substr(0, fileName.lastIndexOf('.')) || fileName;
+        const fullFilePath = `${this.ConfigService.getProjectAssetsDirectoryPath()}/${fileName}`;
+        callback(fullFilePath, { alt: fileNameNoExt, text: fileNameNoExt });
+      });
   }
 
   getAllowedFileTypesFromMeta(meta: any): string[] {

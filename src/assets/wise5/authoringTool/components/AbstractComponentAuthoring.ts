@@ -107,9 +107,12 @@ export abstract class AbstractComponentAuthoring {
   }
 
   openAssetChooser(params: any): any {
-    return this.projectAssetService.openAssetChooser(params).then((data: any) => {
-      return this.assetSelected(data);
-    });
+    return this.projectAssetService
+      .openAssetChooser(params)
+      .afterClosed()
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 
   assetSelected({ nodeId, componentId, assetItem, target }): void {}

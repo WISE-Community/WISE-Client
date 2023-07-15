@@ -28,6 +28,7 @@ import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tiny
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { StructureAuthoringModule } from '../../assets/wise5/authoringTool/structure/structure-authoring.module';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
+import { ProjectAssetAuthoringModule } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.module';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/m
     ImportComponentModule,
     NodeAdvancedAuthoringModule,
     PreviewComponentModule,
+    ProjectAssetAuthoringModule,
     RouterModule,
     StructureAuthoringModule,
     WiseTinymceEditorModule

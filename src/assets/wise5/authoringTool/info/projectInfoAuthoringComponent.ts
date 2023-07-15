@@ -149,9 +149,11 @@ class ProjectInfoAuthoringController {
       isPopup: true,
       target: 'projectIcon'
     };
-    this.ProjectAssetService.openAssetChooser(params).then((data: any) => {
-      this.assetSelected(data);
-    });
+    this.ProjectAssetService.openAssetChooser(params)
+      .afterClosed()
+      .subscribe((data: any) => {
+        this.assetSelected(data);
+      });
   }
 
   assetSelected(args) {
