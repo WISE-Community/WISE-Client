@@ -8,9 +8,14 @@ import { NodeAdvancedPathAuthoringComponent } from './advanced/path/node-advance
 import { NodeAdvancedAuthoringComponent } from './advanced/node-advanced-authoring/node-advanced-authoring.component';
 import { NodeAuthoringComponent } from './node-authoring/node-authoring.component';
 import { EditNodeRubricComponent } from './editRubric/edit-node-rubric.component';
+import { ChooseComponentLocationComponent } from './chooseComponentLocation/choose-component-location.component';
 
 export default angular
   .module('nodeAuthoringModule', [])
+  .directive(
+    'chooseComponentLocationComponent',
+    downgradeComponent({ component: ChooseComponentLocationComponent })
+  )
   .directive(
     'nodeAdvancedAuthoringComponent',
     downgradeComponent({ component: NodeAdvancedAuthoringComponent })
@@ -100,6 +105,14 @@ export default angular
         .state('root.at.project.node.advanced.rubric', {
           url: '/rubric',
           component: 'editNodeRubricComponent'
+        })
+        .state('root.at.project.node.choose-component-location', {
+          url: '/choose-component-location',
+          component: 'chooseComponentLocationComponent',
+          params: {
+            action: 'move',
+            selectedComponents: []
+          }
         });
     }
   ]);

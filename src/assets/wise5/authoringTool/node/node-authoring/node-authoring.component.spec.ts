@@ -96,7 +96,6 @@ describe('NodeAuthoringComponent', () => {
   });
 
   copyComponent();
-  copyComponents();
   deleteComponent();
   deleteComponents();
 });
@@ -116,37 +115,6 @@ function copyComponent() {
       expect(components[3].id).toEqual(component3.id);
     });
   });
-}
-
-function copyComponents() {
-  describe('copyComponents()', () => {
-    it('should copy components', () => {
-      clickComponentCheckbox(component1.id);
-      clickComponentCheckbox(component3.id);
-      fixture.detectChanges();
-      expect(component.components).toEqual(node1Components);
-      clickCopyComponentsButton();
-      clickLastInsertButton();
-      expect(component.components.length).toEqual(5);
-      expect(component.components[0].id).toEqual(component1.id);
-      expect(component.components[1].id).toEqual(component2.id);
-      expect(component.components[2].id).toEqual(component3.id);
-      expect(component.components[3].id).not.toEqual(component1.id);
-      expect(component.components[4].id).not.toEqual(component3.id);
-      expect(component.componentsToChecked[component1.id]).toBeUndefined();
-      expect(component.componentsToChecked[component3.id]).toBeUndefined();
-    });
-  });
-}
-
-function clickLastInsertButton(): void {
-  clickNativeElement(
-    fixture.debugElement
-      .queryAll(By.css('button'))
-      .reverse()
-      .find((button) => button.nativeElement.innerText === 'keyboard_backspace')
-  );
-  fixture.detectChanges();
 }
 
 function deleteComponent() {
