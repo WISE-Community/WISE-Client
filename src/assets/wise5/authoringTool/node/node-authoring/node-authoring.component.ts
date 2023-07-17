@@ -217,16 +217,9 @@ export class NodeAuthoringComponent implements OnInit {
     return selectedComponents;
   }
 
-  protected moveComponents(): void {
+  protected chooseComponentLocation(action: string): void {
     this.upgrade.$injector.get('$state').go('root.at.project.node.choose-component-location', {
-      action: 'move',
-      selectedComponents: this.getSelectedComponents()
-    });
-  }
-
-  protected copyComponents(): void {
-    this.upgrade.$injector.get('$state').go('root.at.project.node.choose-component-location', {
-      action: 'copy',
+      action: action,
       selectedComponents: this.getSelectedComponents()
     });
   }
