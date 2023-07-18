@@ -8,7 +8,6 @@ import { CardSelectorComponent } from '../../assets/wise5/authoringTool/componen
 import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component';
 import { RubricAuthoringComponent } from '../../assets/wise5/authoringTool/rubric/rubric-authoring.component';
 import { NodeIconChooserDialog } from '../../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
-import { ChooseNewComponentLocation } from '../authoring-tool/add-component/choose-new-component-location/choose-new-component-location.component';
 import { ChooseNewComponent } from '../authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { ChooseImportStepLocationComponent } from '../authoring-tool/import-step/choose-import-step-location/choose-import-step-location.component';
 import { ChooseImportStepComponent } from '../authoring-tool/import-step/choose-import-step/choose-import-step.component';
@@ -26,6 +25,10 @@ import { NodeAuthoringComponent } from '../../assets/wise5/authoringTool/node/no
 import { TeacherNodeIconComponent } from '../../assets/wise5/authoringTool/teacher-node-icon/teacher-node-icon.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
+import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
+import { StructureAuthoringModule } from '../../assets/wise5/authoringTool/structure/structure-authoring.module';
+import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
+import { ChooseComponentLocationComponent } from '../../assets/wise5/authoringTool/node/chooseComponentLocation/choose-component-location.component';
 
 @NgModule({
   declarations: [
@@ -34,15 +37,17 @@ import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tiny
     AddYourOwnNode,
     AdvancedProjectAuthoringComponent,
     CardSelectorComponent,
+    ChooseComponentLocationComponent,
     ChooseImportStepComponent,
     ChooseImportStepLocationComponent,
     ChooseNewComponent,
-    ChooseNewComponentLocation,
     ChooseNewNodeLocation,
     ChooseNewNodeTemplate,
     ConcurrentAuthorsMessageComponent,
+    MilestonesAuthoringComponent,
     NodeAuthoringComponent,
     NodeIconChooserDialog,
+    NotebookAuthoringComponent,
     RecoveryAuthoringComponent,
     RequiredErrorLabelComponent,
     RubricAuthoringComponent,
@@ -57,6 +62,7 @@ import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tiny
     NodeAdvancedAuthoringModule,
     PreviewComponentModule,
     RouterModule,
+    StructureAuthoringModule,
     WiseTinymceEditorModule
   ]
 })
