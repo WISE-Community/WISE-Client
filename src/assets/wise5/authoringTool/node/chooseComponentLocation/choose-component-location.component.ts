@@ -47,9 +47,10 @@ export class ChooseComponentLocationComponent {
   }
 
   private copyComponents(insertAfterComponentId: string = null): any[] {
-    const newComponents = this.node.copyComponents(this.selectedComponents.map((c) => c.id));
-    this.node.insertComponents(newComponents, insertAfterComponentId);
-    return newComponents;
+    return this.node.copyComponents(
+      this.selectedComponents.map((c) => c.id),
+      insertAfterComponentId
+    );
   }
 
   private moveComponents(insertAfterComponentId: string = null): any[] {
