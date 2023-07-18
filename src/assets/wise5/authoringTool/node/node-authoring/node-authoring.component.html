@@ -38,7 +38,7 @@
         color="primary"
         class="top-button"
         (click)="undo()"
-        [disabled]="getSelectedComponentIds().length !== 0 || undoStack.length === 0"
+        [disabled]="getSelectedComponents().length !== 0 || undoStack.length === 0"
         matTooltip="Undo"
         matTooltipPosition="above"
         i18n-matTooltip
@@ -172,7 +172,7 @@
         fxLayout="row"
         fxLayoutAlign="start center"
         [ngClass]="{
-          'component-header-highlight': !componentsToIsExpanded[component.id]
+          'component-header-highlight': !componentsToExpanded[component.id]
         }"
       >
         <mat-icon cdkDragHandle title="Drag to reorder" i18n-title>drag_indicator</mat-icon>
@@ -206,7 +206,7 @@
                 i18n-matTooltip
               ></div>
               <button
-                *ngIf="componentsToIsExpanded[component.id]"
+                *ngIf="componentsToExpanded[component.id]"
                 mat-icon-button
                 color="primary"
                 (click)="showComponentAdvancedAuthoring(component, $event)"
@@ -219,7 +219,7 @@
               <preview-component-button
                 class="dynamic-component-button"
                 [ngClass]="{
-                  'show-dynamic-component-button': componentsToIsExpanded[component.id]
+                  'show-dynamic-component-button': componentsToExpanded[component.id]
                 }"
                 [nodeId]="nodeId"
                 [componentId]="component.id"
@@ -229,7 +229,7 @@
                 color="primary"
                 class="dynamic-component-button"
                 [ngClass]="{
-                  'show-dynamic-component-button': componentsToIsExpanded[component.id]
+                  'show-dynamic-component-button': componentsToExpanded[component.id]
                 }"
                 (click)="copyComponent($event, component)"
                 matTooltip="Copy Component"
@@ -243,7 +243,7 @@
                 color="primary"
                 class="dynamic-component-button"
                 [ngClass]="{
-                  'show-dynamic-component-button': componentsToIsExpanded[component.id]
+                  'show-dynamic-component-button': componentsToExpanded[component.id]
                 }"
                 (click)="deleteComponent($event, i + 1, component)"
                 matTooltip="Delete Component"
@@ -254,15 +254,15 @@
               </button>
             </ng-container>
             <div fxLayout="row" fxLayoutAlign="end center">
-              <div *ngIf="!componentsToIsExpanded[component.id]" fxLayoutAlign="end center">
+              <div *ngIf="!componentsToExpanded[component.id]" fxLayoutAlign="end center">
                 <mat-icon>expand_more</mat-icon>
               </div>
-              <div *ngIf="componentsToIsExpanded[component.id]" fxLayoutAlign="end center">
+              <div *ngIf="componentsToExpanded[component.id]" fxLayoutAlign="end center">
                 <mat-icon>expand_less</mat-icon>
               </div>
             </div>
           </div>
-          <div *ngIf="componentsToIsExpanded[component.id]" class="component-authoring">
+          <div *ngIf="componentsToExpanded[component.id]" class="component-authoring">
             <component-authoring-component
               [nodeId]="nodeId"
               [componentContent]="component"
