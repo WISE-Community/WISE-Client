@@ -10700,14 +10700,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>There are no changes to undo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">164</context>
+          <context context-type="linenumber">167</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5830582794567943525" datatype="html">
         <source>Are you sure you want to undo the last change?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">166</context>
+          <context context-type="linenumber">169</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7035134055292483273" datatype="html">
@@ -10715,7 +10715,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">269</context>
+          <context context-type="linenumber">260</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5170405945214763287" datatype="html">
@@ -10723,7 +10723,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">270</context>
+          <context context-type="linenumber">261</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bb39841df2c03f771748c1f986e615bffa7f2593" datatype="html">

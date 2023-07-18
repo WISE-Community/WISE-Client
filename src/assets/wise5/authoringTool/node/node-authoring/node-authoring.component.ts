@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription, filter } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { NotificationService } from '../../../services/notificationService';
 import { NodeService } from '../../../services/nodeService';
 import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
@@ -45,7 +44,6 @@ export class NodeAuthoringComponent implements OnInit {
     private componentTypeService: ComponentTypeService,
     private dialog: MatDialog,
     private nodeService: NodeService,
-    private notificationService: NotificationService,
     private projectService: TeacherProjectService,
     private teacherDataService: TeacherDataService,
     private upgrade: UpgradeModule
@@ -61,14 +59,30 @@ export class NodeAuthoringComponent implements OnInit {
     this.nodePosition = this.projectService.getNodePositionById(this.nodeId);
     this.components = this.projectService.getComponents(this.nodeId);
 
-    /*
-     * remember a copy of the node at the beginning of this node authoring
-     * session in case we need to roll back if the user decides to
-     * cancel/revert all the changes.
-     */
+    // Keep a copy of the node at the beginning of this node authoring session in case we need
+    // to roll back if the user decides to cancel/revert all the changes.
     this.originalNodeCopy = copy(this.nodeJson);
     this.currentNodeCopy = copy(this.nodeJson);
 
+    if (this.upgrade.$injector.get('$stateParams').newComponents.length > 0) {
+      this.highlightNewComponentsAndThenShowComponentAuthoring(
+        this.upgrade.$injector.get('$stateParams').newComponents
+      );
+    } else {
+      this.scrollToTopOfPage();
+    }
+    this.subscribeToShowSubmitButtonValueChanges();
+    this.subscribeToNodeChanges();
+  }
+
+  ngOnDestroy(): void {
+    if (this.$state.current.name !== 'root.at.project.node') {
+      this.teacherDataService.setCurrentNode(null);
+    }
+    this.subscriptions.unsubscribe();
+  }
+
+  private subscribeToShowSubmitButtonValueChanges(): void {
     this.subscriptions.add(
       this.nodeService.componentShowSubmitButtonValueChanged$.subscribe(({ showSubmitButton }) => {
         if (showSubmitButton) {
@@ -87,25 +101,14 @@ export class NodeAuthoringComponent implements OnInit {
         this.authoringViewNodeChanged();
       })
     );
-    if (this.upgrade.$injector.get('$stateParams').newComponents.length > 0) {
-      this.highlightNewComponentsAndThenShowComponentAuthoring(
-        this.upgrade.$injector.get('$stateParams').newComponents
-      );
-    } else {
-      this.scrollToTopOfPage();
-    }
+  }
+
+  private subscribeToNodeChanges(): void {
     this.subscriptions.add(
       this.projectService.nodeChanged$.subscribe((doParseProject) => {
         this.authoringViewNodeChanged(doParseProject);
       })
     );
-  }
-
-  ngOnDestroy(): void {
-    if (this.$state.current.name !== 'root.at.project.node') {
-      this.teacherDataService.setCurrentNode(null);
-    }
-    this.subscriptions.unsubscribe();
   }
 
   protected previewStepInNewWindow(): void {
@@ -173,10 +176,6 @@ export class NodeAuthoringComponent implements OnInit {
     }
   }
 
-  private showDefaultComponentsView(): void {
-    this.notificationService.hideJSONValidMessage();
-  }
-
   protected showAdvancedView(): void {
     this.upgrade.$injector.get('$state').go('root.at.project.node.advanced');
   }
@@ -226,8 +225,7 @@ export class NodeAuthoringComponent implements OnInit {
 
   protected copyComponent(event: any, component: ComponentContent): void {
     event.stopPropagation();
-    const newComponents = this.node.copyComponents([component.id]);
-    this.node.insertComponents(newComponents, component.id);
+    const newComponents = this.node.copyComponents([component.id], component.id);
     this.projectService.saveProject();
     this.highlightNewComponentsAndThenShowComponentAuthoring(newComponents);
   }
@@ -297,7 +295,6 @@ export class NodeAuthoringComponent implements OnInit {
     newComponents: any = [],
     expandComponents: boolean = true
   ): void {
-    this.showDefaultComponentsView();
     this.clearComponentsToChecked();
 
     // wait for the UI to update and then scroll to the first new component
