@@ -3,8 +3,6 @@ import { Node } from './Node';
 
 const componentId1 = 'c1';
 const componentId2 = 'c2';
-const componentId3 = 'c3';
-const componentId4 = 'c4';
 let node: Node;
 
 describe('Node', () => {
@@ -19,15 +17,15 @@ describe('Node', () => {
   deleteComponent();
   getNodeIcon();
   getNodeIdComponentIds();
-  insertComponents();
   moveComponents();
   replaceComponent();
 });
 
 function copyComponents() {
-  describe('copyComponents()', () => {
-    it('should return a copy of the specified components with new ids', () => {
+  describe('copyComponents() without specifying insertAfterComponentId', () => {
+    it('should copy the components, insert at the beginning and return new components', () => {
       const copies = node.copyComponents([componentId1, componentId2]);
+      expect(node.components.length).toEqual(4);
       expect(copies.length).toEqual(2);
       expect(copies[0].id).not.toEqual(componentId1);
       expect(copies[1].id).not.toEqual(componentId2);
@@ -85,37 +83,6 @@ function getNodeIdComponentIds() {
     expect(nodeIdAndComponentIds[0].componentId).toEqual('abc');
     expect(nodeIdAndComponentIds[1].nodeId).toEqual('node1');
     expect(nodeIdAndComponentIds[1].componentId).toEqual('xyz');
-  });
-}
-
-function insertComponents() {
-  describe('insertComponents()', () => {
-    it('should insert components at the beginning of the node', () => {
-      node.insertComponents([{ id: componentId3 }, { id: componentId4 }], null);
-      expectComponentsMatchIds(node.components, [
-        componentId3,
-        componentId4,
-        componentId1,
-        componentId2
-      ]);
-    });
-
-    it('should insert components after the specified component', () => {
-      node.insertComponents([{ id: componentId3 }, { id: componentId4 }], componentId1);
-      expectComponentsMatchIds(node.components, [
-        componentId1,
-        componentId3,
-        componentId4,
-        componentId2
-      ]);
-    });
-  });
-}
-
-function expectComponentsMatchIds(components: any[], ids: string[]) {
-  expect(components.length).toEqual(ids.length);
-  components.forEach((component, i) => {
-    expect(component.id).toEqual(ids[i]);
   });
 }
 
