@@ -8,7 +8,6 @@ import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { TableService } from '../tableService';
@@ -17,6 +16,7 @@ import { TabulatorData } from '../TabulatorData';
 import { TabulatorDataService } from '../tabulatorDataService';
 import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
+import { hasConnectedComponent } from '../../../common/ComponentContent';
 
 @Component({
   selector: 'table-student',
@@ -63,8 +63,7 @@ export class TableStudent extends ComponentStudent {
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     private TableService: TableService,
-    private TabulatorDataService: TabulatorDataService,
-    protected UtilService: UtilService
+    private TabulatorDataService: TabulatorDataService
   ) {
     super(
       AnnotationService,
@@ -100,7 +99,7 @@ export class TableStudent extends ComponentStudent {
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
 
-    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
+    if (hasConnectedComponent(this.componentContent, 'showWork')) {
       // we will show work from another component
       this.handleConnectedComponents();
     } else if (

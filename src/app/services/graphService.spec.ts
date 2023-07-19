@@ -63,6 +63,7 @@ function createComponentState(studentData: any, isSubmit: boolean = false) {
 
 function createComponentContent(series: any[] = [], xAxis: any = {}, yAxis: any = {}) {
   return {
+    connectedComponents: [],
     series: series,
     xAxis: xAxis,
     yAxis: yAxis
@@ -205,16 +206,17 @@ function hasSubmitComponentState() {
 }
 
 function canEdit() {
-  function expectCanEdit(component: any, expectedResult: boolean) {
-    expect(service.canEdit(component)).toEqual(expectedResult);
-  }
-  it('should check if the student can edit the graph when they can not edit', () => {
-    const multipleSeries = [createSingleSeries([], false), createSingleSeries([], false)];
-    expectCanEdit(createComponentContent(multipleSeries), false);
-  });
-  it('should check if the student can edit the graph when they can edit', () => {
-    const multipleSeries = [createSingleSeries([], false), createSingleSeries([], true)];
-    expectCanEdit(createComponentContent(multipleSeries), true);
+  describe('canEdit()', () => {
+    it('should return false when they can not edit', () => {
+      const multipleSeries = [createSingleSeries([], false), createSingleSeries([], false)];
+      const content = createComponentContent(multipleSeries);
+      content.connectedComponents = [{ type: 'showWork' }];
+      expect(service.canEdit(content)).toEqual(false);
+    });
+    it('should return true when they can edit', () => {
+      const multipleSeries = [createSingleSeries([], false), createSingleSeries([], true)];
+      expect(service.canEdit(createComponentContent(multipleSeries))).toEqual(true);
+    });
   });
 }
 
