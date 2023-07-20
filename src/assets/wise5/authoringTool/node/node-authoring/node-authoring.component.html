@@ -175,7 +175,9 @@
           'component-header-highlight': !componentsToExpanded[component.id]
         }"
       >
-        <mat-icon cdkDragHandle title="Drag to reorder" i18n-title>drag_indicator</mat-icon>
+        <mat-icon *ngIf="components.length > 1" cdkDragHandle title="Drag to reorder" i18n-title
+          >drag_indicator</mat-icon
+        >
         <div style="width: 100%">
           <div
             (click)="toggleComponent(component.id)"
