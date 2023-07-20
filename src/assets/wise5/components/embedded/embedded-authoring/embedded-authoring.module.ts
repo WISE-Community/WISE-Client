@@ -20,7 +20,6 @@ import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { EmbeddedService } from '../embeddedService';
 import { EmbeddedAuthoring } from './embedded-authoring.component';
 
@@ -48,8 +47,7 @@ import { EmbeddedAuthoring } from './embedded-authoring.component';
     StudentAssetService,
     StudentDataService,
     TagService,
-    TeacherProjectService,
-    UtilService
+    TeacherProjectService
   ],
   exports: [EmbeddedAuthoring, EditComponentPrompt, AuthorUrlParametersComponent]
 })

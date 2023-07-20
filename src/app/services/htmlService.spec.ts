@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import { HTMLService } from '../../assets/wise5/components/html/htmlService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -22,8 +21,7 @@ describe('HTMLService', () => {
         HTMLService,
         SessionService,
         StudentAssetService,
-        TagService,
-        UtilService
+        TagService
       ]
     });
     service = TestBed.get(HTMLService);

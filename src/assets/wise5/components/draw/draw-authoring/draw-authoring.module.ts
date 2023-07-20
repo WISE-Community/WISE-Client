@@ -18,7 +18,6 @@ import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { DrawService } from '../drawService';
 import { DrawAuthoring } from './draw-authoring.component';
 
@@ -45,8 +44,7 @@ import { DrawAuthoring } from './draw-authoring.component';
     StudentAssetService,
     StudentDataService,
     TagService,
-    TeacherProjectService,
-    UtilService
+    TeacherProjectService
   ],
   exports: [DrawAuthoring, EditComponentPrompt]
 })

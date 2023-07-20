@@ -16,7 +16,6 @@ export default class AutomatedAssessmentChooseItemController extends ConfigureSt
     '$state',
     '$stateParams',
     '$scope',
-    'UtilService',
     'ProjectService'
   ];
 
@@ -27,10 +26,9 @@ export default class AutomatedAssessmentChooseItemController extends ConfigureSt
     $state,
     $stateParams,
     $scope,
-    UtilService,
     private ProjectService: TeacherProjectService
   ) {
-    super($filter, $http, $rootScope, $state, $stateParams, $scope, UtilService);
+    super($filter, $http, $rootScope, $state, $stateParams, $scope);
   }
 
   $onInit() {

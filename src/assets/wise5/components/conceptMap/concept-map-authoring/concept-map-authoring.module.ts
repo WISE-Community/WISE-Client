@@ -18,7 +18,6 @@ import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { ConceptMapService } from '../conceptMapService';
 import { ConceptMapAuthoring } from './concept-map-authoring.component';
 
@@ -45,8 +44,7 @@ import { ConceptMapAuthoring } from './concept-map-authoring.component';
     StudentAssetService,
     StudentDataService,
     TagService,
-    TeacherProjectService,
-    UtilService
+    TeacherProjectService
   ],
   exports: [ConceptMapAuthoring, EditComponentPrompt]
 })

@@ -6,7 +6,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { ConfigService } from '../../../../services/configService';
-import { UtilService } from '../../../../services/utilService';
 
 import { PeerGroupGroupingComponent } from './peer-group-grouping.component';
 
@@ -27,7 +26,7 @@ describe('PeerGroupGroupingComponent', () => {
         MatCardModule,
         MatDialogModule
       ],
-      providers: [ConfigService, UtilService]
+      providers: [ConfigService]
     }).compileComponents();
   });
 

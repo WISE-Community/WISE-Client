@@ -3,13 +3,11 @@ import { TestBed } from '@angular/core/testing';
 import { copy } from '../../assets/wise5/common/object/object';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 
 let service: AnnotationService;
 let projectService: ProjectService;
-let utilService: UtilService;
 let demoProjectJSON: any;
 
 const annotations = [
@@ -34,7 +32,6 @@ describe('AnnotationService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
     });
-    utilService = TestBed.inject(UtilService);
     service = TestBed.inject(AnnotationService);
     projectService = TestBed.inject(ProjectService);
     demoProjectJSON = copy(demoProjectJSON_import);

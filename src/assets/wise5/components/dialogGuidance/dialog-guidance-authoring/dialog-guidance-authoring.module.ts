@@ -19,7 +19,6 @@ import { SessionService } from '../../../services/sessionService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
 import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
@@ -56,8 +55,7 @@ import { FeedbackRuleHelpComponent } from '../../common/feedbackRule/feedback-ru
     SessionService,
     StudentDataService,
     TagService,
-    TeacherProjectService,
-    UtilService
+    TeacherProjectService
   ],
   exports: [
     DialogGuidanceAuthoringComponent,

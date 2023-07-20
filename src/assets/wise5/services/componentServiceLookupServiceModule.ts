@@ -23,7 +23,6 @@ import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { ComputerAvatarService } from './computerAvatarService';
 import { ConfigService } from './configService';
 import { StudentAssetService } from './studentAssetService';
-import { UtilService } from './utilService';
 
 @NgModule({
   declarations: [],
@@ -52,8 +51,7 @@ import { UtilService } from './utilService';
     ShowMyWorkService,
     StudentAssetService,
     SummaryService,
-    TableService,
-    UtilService
+    TableService
   ]
 })
 export class ComponentServiceLookupServiceModule {}

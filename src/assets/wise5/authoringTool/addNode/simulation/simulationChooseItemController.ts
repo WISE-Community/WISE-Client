@@ -29,7 +29,6 @@ export default class SimulationChooseItemController extends ConfigureStructureCo
     '$state',
     '$stateParams',
     '$scope',
-    'UtilService',
     'ProjectService'
   ];
 
@@ -40,10 +39,9 @@ export default class SimulationChooseItemController extends ConfigureStructureCo
     $state,
     $stateParams,
     $scope,
-    UtilService,
     private ProjectService: TeacherProjectService
   ) {
-    super($filter, $http, $rootScope, $state, $stateParams, $scope, UtilService);
+    super($filter, $http, $rootScope, $state, $stateParams, $scope);
   }
 
   $onInit(): void {
