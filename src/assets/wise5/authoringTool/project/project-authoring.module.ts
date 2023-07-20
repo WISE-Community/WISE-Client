@@ -1,6 +1,7 @@
 import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { AdvancedProjectAuthoringComponent } from '../../authoringTool/advanced/advanced-project-authoring.component';
+import { ProjectAssetAuthoringController } from '../asset/projectAssetAuthoringComponent';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { ProjectAuthoringComponent } from '../../authoringTool/project/projectAuthoringComponent';
 import { ProjectInfoAuthoringComponent } from '../../authoringTool/info/projectInfoAuthoringComponent';
@@ -26,6 +27,7 @@ export default angular
   )
   .component('projectAuthoringComponent', ProjectAuthoringComponent)
   .component('projectInfoAuthoringComponent', ProjectInfoAuthoringComponent)
+  .controller('ProjectAssetAuthoringController', ProjectAssetAuthoringController)
   .directive(
     'advancedProjectAuthoringComponent',
     downgradeComponent({

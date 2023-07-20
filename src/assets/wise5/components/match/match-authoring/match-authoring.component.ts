@@ -8,6 +8,8 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MatchService } from '../matchService';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
 
 @Component({
   selector: 'match-authoring',
@@ -20,6 +22,7 @@ export class MatchAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected configService: ConfigService,
+    private dialog: MatDialog,
     private matchService: MatchService,
     protected nodeService: NodeService,
     protected projectAssetService: ProjectAssetService,
@@ -272,13 +275,12 @@ export class MatchAuthoring extends AbstractComponentAuthoring {
   }
 
   openAssetChooserHelper(target: string, targetObject: any): void {
-    this.openAssetChooser({
-      isPopup: true,
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      target: target,
-      targetObject: targetObject
-    });
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open(target, targetObject)
+      .afterClosed()
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 
   assetSelected({ nodeId, componentId, assetItem, target, targetObject }): void {

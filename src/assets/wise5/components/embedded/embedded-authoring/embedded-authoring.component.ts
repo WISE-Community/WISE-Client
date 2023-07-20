@@ -7,6 +7,8 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EmbeddedService } from '../embeddedService';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
 
 @Component({
   selector: 'embedded-authoring',
@@ -18,6 +20,7 @@ export class EmbeddedAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
+    private dialog: MatDialog,
     private EmbeddedService: EmbeddedService,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
@@ -51,5 +54,14 @@ export class EmbeddedAuthoring extends AbstractComponentAuthoring {
   updateUrl(url: string): void {
     this.componentContent.url = url;
     this.componentChanged();
+  }
+
+  chooseModelFile(): void {
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open('modelFile')
+      .afterClosed()
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 }

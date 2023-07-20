@@ -9,6 +9,8 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
 
 @Component({
   selector: 'draw-authoring',
@@ -46,6 +48,7 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
+    private dialog: MatDialog,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
@@ -143,14 +146,12 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
   }
 
   chooseStampImage(stampIndex: number): void {
-    const params = {
-      isPopup: true,
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      target: 'stamp',
-      targetObject: stampIndex
-    };
-    this.openAssetChooser(params);
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open('stamp', stampIndex)
+      .afterClosed()
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 
   assetSelected({ nodeId, componentId, assetItem, target, targetObject }): void {
@@ -269,5 +270,14 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
       stampStrings.push(stampObject.image);
     }
     return stampStrings;
+  }
+
+  chooseBackground(): void {
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open('background')
+      .afterClosed()
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 }

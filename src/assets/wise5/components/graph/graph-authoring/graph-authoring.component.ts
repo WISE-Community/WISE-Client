@@ -9,6 +9,8 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
 import { GraphService } from '../graphService';
 import { isMultipleYAxes } from '../util';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
 
 @Component({
   selector: 'graph-authoring',
@@ -130,6 +132,7 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
+    private dialog: MatDialog,
     private GraphService: GraphService,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
@@ -560,5 +563,14 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
 
   customTrackBy(index: number): number {
     return index;
+  }
+
+  chooseBackground(): void {
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open('background')
+      .afterClosed()
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 }

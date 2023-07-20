@@ -9,6 +9,8 @@ import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
 
 @Component({
   selector: 'animation-authoring',
@@ -23,6 +25,7 @@ export class AnimationAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
+    private dialog: MatDialog,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
@@ -236,8 +239,12 @@ export class AnimationAuthoring extends AbstractComponentAuthoring {
   }
 
   chooseImage(authoredObject: any, targetString: string = 'image'): void {
-    const params = this.createOpenAssetChooserParamsObject(targetString, authoredObject);
-    this.openAssetChooser(params);
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open(targetString, authoredObject)
+      .afterClosed()
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 
   /**
