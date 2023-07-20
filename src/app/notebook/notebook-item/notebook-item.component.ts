@@ -48,7 +48,8 @@ export class NotebookItemComponent {
     this.notebookUpdatedSubscription = this.notebookService.notebookUpdated$.subscribe(
       ({ notebook }) => {
         if (notebook.items[this.itemId]) {
-          this.item = notebook.items[this.itemId].last();
+          const items = notebook.items[this.itemId];
+          this.item = items[items.length - 1];
         }
       }
     );
