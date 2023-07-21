@@ -5,7 +5,6 @@ import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wis
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 
 @Component({
   selector: 'html-authoring',
@@ -19,7 +18,6 @@ export class HtmlAuthoring extends AbstractComponentAuthoring {
     protected nodeService: NodeService,
     protected projectAssetService: ProjectAssetService,
     protected projectService: TeacherProjectService,
-    protected utilService: UtilService
   ) {
     super(configService, nodeService, projectAssetService, projectService);
   }

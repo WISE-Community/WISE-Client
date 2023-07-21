@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConfigService } from '../../services/configService';
 import { TeacherDataService } from '../../services/teacherDataService';
-import { UtilService } from '../../services/utilService';
 import { DiscussionService } from './discussionService';
 
 @Injectable()

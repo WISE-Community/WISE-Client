@@ -37,7 +37,6 @@ import './vle/studentAsset/studentAsset';
 import { StudentAssetService } from './services/studentAssetService';
 import { StudentDataService } from './services/studentDataService';
 import { TagService } from './services/tagService';
-import { UtilService } from './services/utilService';
 import './themes/default/theme';
 import { EditorComponent } from '@tinymce/tinymce-angular';
 import { WiseTinymceEditorComponent } from './directives/wise-tinymce-editor/wise-tinymce-editor.component';
@@ -99,7 +98,6 @@ angular
   .factory('StudentAssetService', downgradeInjectable(StudentAssetService))
   .factory('TagService', downgradeInjectable(TagService))
   .factory('StudentDataService', downgradeInjectable(StudentDataService))
-  .factory('UtilService', downgradeInjectable(UtilService))
   .directive(
     'sideMenu',
     downgradeComponent({ component: SideMenuComponent }) as angular.IDirectiveFactory

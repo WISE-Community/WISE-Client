@@ -6,7 +6,6 @@ import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 
 const nodeId = 'node1';
 const components = [
@@ -57,8 +56,7 @@ describe('InsertComponent', () => {
         ConfigService,
         { provide: TeacherProjectService, useClass: MockProjectService },
         { provide: TeacherDataService, useClass: MockTeacherDataService },
-        { provide: UpgradeModule, useClass: MockUpgradeModule },
-        UtilService
+        { provide: UpgradeModule, useClass: MockUpgradeModule }
       ]
     });
     component = TestBed.inject(ChooseComponentLocationComponent);

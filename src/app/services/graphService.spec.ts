@@ -5,7 +5,6 @@ import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
 import { TagService } from '../../assets/wise5/services/tagService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import { GraphService } from '../../assets/wise5/components/graph/graphService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 
@@ -24,8 +23,7 @@ describe('GraphService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        TagService,
-        UtilService
+        TagService
       ]
     });
     service = TestBed.get(GraphService);

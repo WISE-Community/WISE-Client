@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { UtilService } from '../assets/wise5/services/utilService';
 import { ConfigService } from '../assets/wise5/services/configService';
 import { ProjectService } from '../assets/wise5/services/projectService';
 import { ProjectLibraryService } from '../assets/wise5/services/projectLibraryService';
@@ -109,7 +108,6 @@ import { StudentNodeService } from '../assets/wise5/services/studentNodeService'
     TableService,
     TabulatorDataService,
     TagService,
-    UtilService,
     VLEProjectService,
     WiseLinkService
   ]

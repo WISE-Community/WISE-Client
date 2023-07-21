@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import sampleConfig1 from './sampleData/sample_config_1.json';
-import { UtilService } from '../../assets/wise5/services/utilService';
 let service: ConfigService;
 let http: HttpTestingController;
 
@@ -20,7 +19,7 @@ describe('ConfigService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ConfigService, UtilService]
+      providers: [ConfigService]
     });
     http = TestBed.get(HttpTestingController);
     service = TestBed.get(ConfigService);

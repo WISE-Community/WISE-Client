@@ -8,7 +8,6 @@ import { ProjectService } from '../../services/projectService';
 import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
 import { TagService } from '../../services/tagService';
-import { UtilService } from '../../services/utilService';
 import { ComputerAvatarSelectorComponent } from './computer-avatar-selector.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -35,8 +34,7 @@ describe('ComputerAvatarSelectorComponent', () => {
         ProjectService,
         SessionService,
         StudentDataService,
-        TagService,
-        UtilService
+        TagService
       ]
     }).compileComponents();
   });

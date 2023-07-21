@@ -4,18 +4,10 @@ export default class AutomatedAssessmentConfigureController extends ConfigureStr
   node: any;
   importFromProjectId: number;
 
-  static $inject = [
-    '$filter',
-    '$http',
-    '$rootScope',
-    '$state',
-    '$stateParams',
-    '$scope',
-    'UtilService'
-  ];
+  static $inject = ['$filter', '$http', '$rootScope', '$state', '$stateParams', '$scope'];
 
-  constructor($filter, $http, $rootScope, $state, $stateParams, $scope, UtilService) {
-    super($filter, $http, $rootScope, $state, $stateParams, $scope, UtilService);
+  constructor($filter, $http, $rootScope, $state, $stateParams, $scope) {
+    super($filter, $http, $rootScope, $state, $stateParams, $scope);
   }
 
   $onInit() {
