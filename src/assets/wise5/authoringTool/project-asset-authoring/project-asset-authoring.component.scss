@@ -9,6 +9,7 @@
   text-align: center;
   padding-top: 30px;
   margin-top: 10px;
+  margin-bottom: 10px;
   bottom: 0px;
   position: relative;
   cursor: pointer;
@@ -23,6 +24,10 @@
   opacity: 0;
 }
 
+.storage-usage-message {
+  margin-bottom: 10px;
+}
+
 .assets {
   display: flex;
 }
@@ -34,9 +39,7 @@
 }
 
 .asset-items {
-  list-style-type: none;
   padding: 0px;
-  margin: 0px;
 }
 
 .asset-item {
