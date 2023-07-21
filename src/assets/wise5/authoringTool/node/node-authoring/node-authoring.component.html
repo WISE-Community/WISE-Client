@@ -158,48 +158,50 @@
   <div *ngIf="components.length === 0 && !isGroupNode" class="no-components-message">
     <em i18n>This step does not have any components. Click the + button to add a component.</em>
   </div>
-  <div
-    cdkDropList
-    (cdkDropListDropped)="dropComponent($event)"
-    cdkScrollable
-    style="max-height: 60vh; overflow-y: auto"
-  >
+  <div cdkDropList (cdkDropListDropped)="dropComponent($event)" cdkScrollable>
     <div *ngFor="let component of components; let i = index">
       <div
         [id]="component.id"
         class="component"
         cdkDrag
         fxLayout="row"
-        fxLayoutAlign="start center"
+        fxLayoutAlign="start"
         [ngClass]="{
           'component-header-highlight': !componentsToExpanded[component.id]
         }"
       >
-        <mat-icon *ngIf="components.length > 1" cdkDragHandle title="Drag to reorder" i18n-title
-          >drag_indicator</mat-icon
-        >
         <div style="width: 100%">
           <div
             (click)="toggleComponent(component.id)"
             class="component-header"
             fxLayout="row"
             fxLayoutAlign="start center"
-            fxLayoutGap="20px"
+            fxLayoutGap="8px"
             aria-label="Toggle component authoring"
             i18n-aria-label
           >
-            <mat-checkbox
-              color="primary"
-              [(ngModel)]="componentsToChecked[component.id]"
-              (change)="updateIsAnyComponentSelected()"
-              (click)="componentCheckboxClicked($event)"
-              aria-label="Select component"
-              i18n-aria-label
-            >
-              <span class="component-label"
-                >{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <mat-icon
+                class="drag-handle"
+                *ngIf="components.length > 1"
+                cdkDragHandle
+                title="Drag to reorder"
+                i18n-title
+                >drag_indicator</mat-icon
               >
-            </mat-checkbox>
+              <mat-checkbox
+                color="primary"
+                [(ngModel)]="componentsToChecked[component.id]"
+                (change)="updateIsAnyComponentSelected()"
+                (click)="componentCheckboxClicked($event)"
+                aria-label="Select component"
+                i18n-aria-label
+              >
+                <span class="component-label"
+                  >{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span
+                >
+              </mat-checkbox>
+            </div>
             <ng-container>
               <div
                 class="component-expand-collapse-div"
