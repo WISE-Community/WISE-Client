@@ -11,7 +11,6 @@ import { NotificationService } from '../../../services/notificationService';
 import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { CRaterResponse } from '../../common/cRater/CRaterResponse';
@@ -21,6 +20,7 @@ import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent'
 import { OpenResponseService } from '../openResponseService';
 import { copy } from '../../../common/object/object';
 import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
+import { hasConnectedComponent } from '../../../common/ComponentContent';
 
 @Component({
   selector: 'open-response-student',
@@ -47,8 +47,7 @@ export class OpenResponseStudent extends ComponentStudent {
     private NotificationService: NotificationService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
+    protected StudentDataService: StudentDataService
   ) {
     super(
       AnnotationService,
@@ -64,7 +63,7 @@ export class OpenResponseStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
+    if (hasConnectedComponent(this.componentContent, 'showWork')) {
       this.handleConnectedComponents();
     } else if (
       this.componentState != null &&

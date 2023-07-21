@@ -1,7 +1,5 @@
 'use strict';
 
-import { UtilService } from '../../services/utilService';
-
 abstract class ConfigureStructureController {
   $translate: any;
   structure: any;
@@ -9,15 +7,7 @@ abstract class ConfigureStructureController {
   groupsPath: string;
   nodesPath: string;
 
-  static $inject = [
-    '$filter',
-    '$http',
-    '$rootScope',
-    '$state',
-    '$stateParams',
-    '$scope',
-    'UtilService'
-  ];
+  static $inject = ['$filter', '$http', '$rootScope', '$state', '$stateParams', '$scope'];
 
   constructor(
     protected $filter: any,
@@ -25,8 +15,7 @@ abstract class ConfigureStructureController {
     protected $rootScope: any,
     protected $state: any,
     protected $stateParams: any,
-    protected $scope: any,
-    protected UtilService: UtilService
+    protected $scope: any
   ) {
     this.$translate = this.$filter('translate');
     this.structure = {};

@@ -1,3 +1,4 @@
+import '../../../assets/wise5/lib/jquery/jquery-global';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';

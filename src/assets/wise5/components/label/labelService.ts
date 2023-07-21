@@ -5,9 +5,9 @@ import SVG from 'svg.js';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
-import { UtilService } from '../../services/utilService';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 import { wordWrap } from '../../common/string/string';
+import { hasConnectedComponent } from '../../common/ComponentContent';
 
 @Injectable()
 export class LabelService extends ComponentService {
@@ -16,10 +16,7 @@ export class LabelService extends ComponentService {
   circleZIndex: number = 2;
   defaultTextBackgroundColor: string = 'blue';
 
-  constructor(
-    private StudentAssetService: StudentAssetService,
-    protected UtilService: UtilService
-  ) {
+  constructor(private StudentAssetService: StudentAssetService) {
     super();
   }
 
@@ -83,8 +80,8 @@ export class LabelService extends ComponentService {
    * @param component The component content.
    * @return Whether the student can perform any work on this component.
    */
-  canEdit(component: any) {
-    return !this.UtilService.hasShowWorkConnectedComponent(component);
+  canEdit(component: any): boolean {
+    return !hasConnectedComponent(component, 'showWork');
   }
 
   componentStateHasStudentWork(componentState: any, componentContent: any): boolean {

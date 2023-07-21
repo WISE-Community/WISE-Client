@@ -15,7 +15,6 @@ import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { PeerChatAuthoringComponent } from './peer-chat-authoring.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
@@ -67,8 +66,7 @@ describe('PeerChatAuthoringComponent', () => {
         ProjectAssetService,
         ProjectService,
         SessionService,
-        TeacherProjectService,
-        UtilService
+        TeacherProjectService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

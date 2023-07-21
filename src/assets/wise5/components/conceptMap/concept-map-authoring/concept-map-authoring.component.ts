@@ -6,7 +6,6 @@ import { AbstractComponentAuthoring } from '../../../authoringTool/components/Ab
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { ConceptMapService } from '../conceptMapService';
 import { MatDialog } from '@angular/material/dialog';
 import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
@@ -26,8 +25,7 @@ export class ConceptMapAuthoring extends AbstractComponentAuthoring {
     private dialog: MatDialog,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
   }

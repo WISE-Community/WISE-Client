@@ -6,7 +6,6 @@ import { AbstractComponentAuthoring } from '../../../authoringTool/components/Ab
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { AudioOscillatorService } from '../audioOscillatorService';
 
 @Component({
@@ -26,8 +25,7 @@ export class AudioOscillatorAuthoring extends AbstractComponentAuthoring {
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
   }
