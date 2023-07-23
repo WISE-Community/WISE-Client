@@ -5,6 +5,7 @@ import * as $ from 'jquery';
 import { Subscription } from 'rxjs';
 import { isImage, isVideo } from '../../common/file/file';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { AssetChooserDialogData } from './asset-chooser-dialog-data';
 
 @Component({
   selector: 'project-asset-authoring',
@@ -38,7 +39,7 @@ export class ProjectAssetAuthoringComponent {
 
   constructor(
     private configService: ConfigService,
-    @Optional() @Inject(MAT_DIALOG_DATA) private dialogData: any,
+    @Optional() @Inject(MAT_DIALOG_DATA) private dialogData: AssetChooserDialogData,
     @Optional() protected dialogRef: MatDialogRef<ProjectAssetAuthoringComponent>,
     private projectAssetService: ProjectAssetService
   ) {}
