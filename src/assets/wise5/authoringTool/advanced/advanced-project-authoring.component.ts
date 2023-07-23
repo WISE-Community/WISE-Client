@@ -7,6 +7,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { isValidJSONString } from '../../common/string/string';
 import { MatDialog } from '@angular/material/dialog';
 import { AssetChooser } from '../project-asset-authoring/asset-chooser';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'advanced-project-authoring',
@@ -92,6 +93,7 @@ export class AdvancedProjectAuthoringComponent {
     new AssetChooser(this.dialog, null, null, this.projectId)
       .open('scriptFilename')
       .afterClosed()
+      .pipe(filter((data) => data != null))
       .subscribe((data: any) => {
         this.assetSelected(data);
       });

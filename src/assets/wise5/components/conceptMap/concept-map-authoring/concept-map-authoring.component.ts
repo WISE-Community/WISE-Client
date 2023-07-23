@@ -9,6 +9,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapService } from '../conceptMapService';
 import { MatDialog } from '@angular/material/dialog';
 import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'concept-map-authoring',
@@ -131,6 +132,7 @@ export class ConceptMapAuthoring extends AbstractComponentAuthoring {
     new AssetChooser(this.dialog, this.nodeId, this.componentId)
       .open(target)
       .afterClosed()
+      .pipe(filter((data) => data != null))
       .subscribe((data: any) => {
         return this.assetSelected(data);
       });

@@ -9,6 +9,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EmbeddedService } from '../embeddedService';
 import { MatDialog } from '@angular/material/dialog';
 import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'embedded-authoring',
@@ -60,6 +61,7 @@ export class EmbeddedAuthoring extends AbstractComponentAuthoring {
     new AssetChooser(this.dialog, this.nodeId, this.componentId)
       .open('modelFile')
       .afterClosed()
+      .pipe(filter((data) => data != null))
       .subscribe((data: any) => {
         return this.assetSelected(data);
       });

@@ -8,7 +8,7 @@ import { NodeService } from '../../../services/nodeService';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
 
@@ -149,6 +149,7 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
     new AssetChooser(this.dialog, this.nodeId, this.componentId)
       .open('stamp', stampIndex)
       .afterClosed()
+      .pipe(filter((data) => data != null))
       .subscribe((data: any) => {
         return this.assetSelected(data);
       });
@@ -276,6 +277,7 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
     new AssetChooser(this.dialog, this.nodeId, this.componentId)
       .open('background')
       .afterClosed()
+      .pipe(filter((data) => data != null))
       .subscribe((data: any) => {
         return this.assetSelected(data);
       });

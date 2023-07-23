@@ -6,7 +6,7 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { MatDialog } from '@angular/material/dialog';
 import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
@@ -109,6 +109,7 @@ export class LabelAuthoring extends AbstractComponentAuthoring {
     new AssetChooser(this.dialog, this.nodeId, this.componentId)
       .open('background')
       .afterClosed()
+      .pipe(filter((data) => data != null))
       .subscribe((data: any) => {
         return this.assetSelected(data);
       });

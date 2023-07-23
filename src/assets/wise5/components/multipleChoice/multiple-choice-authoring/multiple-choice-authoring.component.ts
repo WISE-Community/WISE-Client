@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { generateRandomKey } from '../../../common/string/string';
@@ -116,6 +116,7 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
     new AssetChooser(this.dialog, this.nodeId, this.componentId)
       .open('choice', choice)
       .afterClosed()
+      .pipe(filter((data) => data != null))
       .subscribe((data: any) => {
         return this.assetSelected(data);
       });
