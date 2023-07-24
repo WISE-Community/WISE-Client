@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
 
 @Component({
   selector: 'multiple-choice-authoring',
@@ -20,6 +22,7 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
+    private dialog: MatDialog,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
@@ -110,14 +113,13 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
   }
 
   chooseChoiceAsset(choice: any): void {
-    const params = {
-      isPopup: true,
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      target: 'choice',
-      targetObject: choice
-    };
-    this.openAssetChooser(params);
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open('choice', choice)
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 
   assetSelected({ nodeId, componentId, assetItem, target, targetObject }): void {
