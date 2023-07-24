@@ -22,7 +22,6 @@ export class ProjectAssetAuthoringComponent {
   isPopup = false;
   nodeId = null;
   previewAssetURL: string;
-  projectId: number;
   projectAssets: any;
   projectAssetTotalSizeMax = 0;
   projectAssetUsagePercentage: any = 0;
@@ -120,25 +119,11 @@ export class ProjectAssetAuthoringComponent {
   }
 
   private sortAssetsAToZ(a: any, b: any): number {
-    const aFileName = a.fileName.toLowerCase();
-    const bFileName = b.fileName.toLowerCase();
-    if (aFileName < bFileName) {
-      return -1;
-    } else if (aFileName > bFileName) {
-      return 1;
-    }
-    return 0;
+    return a.fileName.toLowerCase().localeCompare(b.fileName.toLowerCase());
   }
 
   private sortAssetsSmallToLarge(a: any, b: any): number {
-    const aFileSize = a.fileSize;
-    const bFileSize = b.fileSize;
-    if (aFileSize < bFileSize) {
-      return -1;
-    } else if (aFileSize > bFileSize) {
-      return 1;
-    }
-    return 0;
+    return a.fileSize - b.fileSize;
   }
 
   protected deleteAsset(assetItem: any): void {
@@ -154,7 +139,6 @@ export class ProjectAssetAuthoringComponent {
   protected chooseAsset(assetItem: any): void {
     const params = {
       assetItem: assetItem,
-      projectId: this.projectId,
       nodeId: this.nodeId,
       componentId: this.componentId,
       target: this.target,
