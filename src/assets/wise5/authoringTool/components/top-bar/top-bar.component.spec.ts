@@ -4,7 +4,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { UpgradeModule } from '@angular/upgrade/static';
-
 import { TopBarComponent } from './top-bar.component';
 import { ConfigService } from '../../../services/configService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
