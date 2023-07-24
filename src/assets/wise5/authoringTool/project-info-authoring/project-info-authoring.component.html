@@ -26,6 +26,7 @@
   <div>
     <img
       *ngFor="let projectIcon of projectIcons"
+      class="project-icon-to-choose"
       src="/projectIcons/{{ projectIcon }}"
       (click)="setFeaturedProjectIcon(projectIcon)"
     />
