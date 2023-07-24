@@ -31,6 +31,7 @@ import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/m
 import { ChooseComponentLocationComponent } from '../../assets/wise5/authoringTool/node/chooseComponentLocation/choose-component-location.component';
 import { ProjectAssetAuthoringModule } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.module';
 import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component';
+import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addN
     NodeAuthoringComponent,
     NodeIconChooserDialog,
     NotebookAuthoringComponent,
+    ProjectInfoAuthoringComponent,
     RecoveryAuthoringComponent,
     RequiredErrorLabelComponent,
     RubricAuthoringComponent,

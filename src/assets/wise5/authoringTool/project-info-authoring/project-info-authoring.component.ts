@@ -1,50 +1,45 @@
-'use strict';
-
-import { ProjectAssetService } from '../../../../app/services/projectAssetService';
+import { Component } from '@angular/core';
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
+import { MatDialog } from '@angular/material/dialog';
+import { Subject, debounceTime } from 'rxjs';
+import { AssetChooser } from '../project-asset-authoring/asset-chooser';
 
-class ProjectInfoAuthoringController {
-  $translate: any;
+@Component({
+  selector: 'project-info-authoring',
+  templateUrl: './project-info-authoring.component.html',
+  styleUrls: ['./project-info-authoring.component.scss']
+})
+export class ProjectInfoAuthoringComponent {
   isEditingProjectIcon: boolean = false;
   isShowProjectIcon: boolean = false;
   isShowProjectIconError: boolean = false;
   isShowProjectIconLoading: boolean = false;
   metadata: any;
   metadataAuthoring: any;
+  metadataChanged: Subject<void> = new Subject<void>();
   projectIcon: string = '';
   projectIcons: any = [];
 
-  static $inject = [
-    '$filter',
-    '$mdDialog',
-    '$timeout',
-    'ConfigService',
-    'ProjectAssetService',
-    'ProjectService'
-  ];
-
   constructor(
-    $filter,
-    private $mdDialog: any,
-    private $timeout: any,
-    private ConfigService: ConfigService,
-    private ProjectAssetService: ProjectAssetService,
-    private ProjectService: TeacherProjectService
-  ) {
-    this.$translate = $filter('translate');
-  }
+    private configService: ConfigService,
+    private dialog: MatDialog,
+    private projectService: TeacherProjectService
+  ) {}
 
-  $onInit() {
-    this.metadata = this.ProjectService.getProjectMetadata();
+  ngOnInit(): void {
+    this.metadata = this.projectService.getProjectMetadata();
     this.metadataAuthoring = JSON.parse(
-      this.ConfigService.getConfigParam('projectMetadataSettings')
+      this.configService.getConfigParam('projectMetadataSettings')
     );
     this.loadProjectIcon();
     this.processMetadata();
+    this.metadataChanged.pipe(debounceTime(1000)).subscribe(() => {
+      this.save();
+    });
   }
 
-  processMetadata() {
+  private processMetadata(): void {
     if (this.metadataAuthoring != null) {
       for (const field of this.metadataAuthoring.fields) {
         this.processMetadataAuthoringField(field);
@@ -52,27 +47,23 @@ class ProjectInfoAuthoringController {
     }
   }
 
-  processMetadataAuthoringField(field) {
-    if (field != null) {
-      if (field.type === 'checkbox') {
-        this.processMetadataAuthoringFieldCheckbox(field);
-      } else if (field.type === 'radio') {
-        // do nothing. Radio buttons work automatically
-      }
+  private processMetadataAuthoringField(field: any): void {
+    if (field?.type === 'checkbox') {
+      this.processMetadataAuthoringFieldCheckbox(field);
     }
   }
 
-  processMetadataAuthoringFieldCheckbox(field) {
+  private processMetadataAuthoringFieldCheckbox(field: any): void {
     const metadataField = this.metadata[field.key];
+    field.choicesMapping = {};
     if (metadataField != null && field.choices != null) {
-      field.choicesMapping = {};
       for (const choice of field.choices) {
         field.choicesMapping[choice] = this.hasUserCheckedThisMetadataField(metadataField, choice);
       }
     }
   }
 
-  hasUserCheckedThisMetadataField(metadataField, choice) {
+  private hasUserCheckedThisMetadataField(metadataField: any, choice: string): boolean {
     let userHasCheckedThisMetadataField = false;
     for (const metadataFieldChoice of metadataField) {
       if (metadataFieldChoice != null && metadataFieldChoice == choice) {
@@ -84,7 +75,7 @@ class ProjectInfoAuthoringController {
   }
 
   // returns the choice text that is appropriate for user's locale
-  getMetadataChoiceText(choice: string): string {
+  protected getMetadataChoiceText(choice: string): string {
     let choiceText = choice;
     const i18nMapping = this.metadataAuthoring.i18n;
     const i18nMappingContainingChoiceTextArray = Object.values(i18nMapping).filter(
@@ -98,7 +89,7 @@ class ProjectInfoAuthoringController {
     ) {
       // shouldn't be more than one, but if so, use the first one we find
       const i18nMappingContainingChoiceText = i18nMappingContainingChoiceTextArray[0];
-      const userLocale = this.ConfigService.getLocale();
+      const userLocale = this.configService.getLocale();
       if (i18nMappingContainingChoiceText[userLocale] != null) {
         choiceText = i18nMappingContainingChoiceText[userLocale];
       }
@@ -106,14 +97,14 @@ class ProjectInfoAuthoringController {
     return choiceText;
   }
 
-  metadataChoiceIsChecked(metadataField, choice) {
+  protected metadataChoiceIsChecked(metadataField: any, choice: string): boolean {
     return (
       this.getMetadataChoiceText(this.metadata[metadataField.key]) ==
       this.getMetadataChoiceText(choice)
     );
   }
 
-  metadataCheckboxClicked(metadataField) {
+  protected metadataCheckboxClicked(metadataField: any): void {
     const checkedChoices = [];
     for (const choice of metadataField.choices) {
       const isChoiceChecked = metadataField.choicesMapping[choice];
@@ -122,48 +113,46 @@ class ProjectInfoAuthoringController {
       }
     }
     this.metadata[metadataField.key] = checkedChoices;
-    this.ProjectService.saveProject();
+    this.save();
   }
 
-  metadataRadioClicked(metadataField, choice) {
+  protected metadataRadioClicked(metadataField: any, choice: string): void {
     this.metadata[metadataField.key] = this.getMetadataChoiceText(choice);
-    this.ProjectService.saveProject();
+    this.save();
   }
 
-  getFeaturedProjectIcons() {
-    this.ProjectService.getFeaturedProjectIcons().then((featuredProjectIcons) => {
+  private getFeaturedProjectIcons(): void {
+    this.projectService.getFeaturedProjectIcons().then((featuredProjectIcons) => {
       this.projectIcons = featuredProjectIcons;
     });
   }
 
-  setFeaturedProjectIcon(projectIcon) {
-    this.ProjectService.setFeaturedProjectIcon(projectIcon).then(() => {
+  protected setFeaturedProjectIcon(projectIcon: string): void {
+    this.projectService.setFeaturedProjectIcon(projectIcon).then(() => {
       this.projectIcon = `projectIcons/${projectIcon}`;
       this.showProjectIcon();
       this.closeEditProjectIconMode();
     });
   }
 
-  chooseCustomProjectIcon() {
-    const params = {
-      isPopup: true,
-      target: 'projectIcon'
-    };
-    this.ProjectAssetService.openAssetChooser(params).then((data: any) => {
-      this.assetSelected(data);
-    });
+  protected chooseCustomProjectIcon(): void {
+    new AssetChooser(this.dialog)
+      .open('projectIcon')
+      .afterClosed()
+      .subscribe((data: any) => {
+        this.assetSelected(data);
+      });
   }
 
-  assetSelected(args) {
+  private assetSelected(args: any): void {
     if (args.target === 'projectIcon') {
       this.setCustomProjectIcon(args.assetItem.fileName);
-      this.$mdDialog.hide();
     }
   }
 
-  setCustomProjectIcon(projectIcon) {
+  private setCustomProjectIcon(projectIcon: string): void {
     this.showProjectIconLoading();
-    this.ProjectService.setCustomProjectIcon(projectIcon).then(() => {
+    this.projectService.setCustomProjectIcon(projectIcon).then(() => {
       this.loadProjectIconAfterTimeout();
     });
   }
@@ -173,18 +162,17 @@ class ProjectInfoAuthoringController {
    * server and browser. This is to prevent the browser from displaying the previous
    * project_thumb.png.
    */
-  loadProjectIconAfterTimeout() {
-    this.$timeout(() => {
+  private loadProjectIconAfterTimeout(): void {
+    setTimeout(() => {
       this.loadProjectIcon();
       this.closeEditProjectIconMode();
     }, 3000);
   }
 
-  loadProjectIcon() {
-    this.projectIcon =
-      this.ConfigService.getConfigParam('projectBaseURL') +
-      'assets/project_thumb.png?timestamp=' +
-      new Date().getTime();
+  private loadProjectIcon(): void {
+    this.projectIcon = `${this.configService.getConfigParam(
+      'projectBaseURL'
+    )}assets/project_thumb.png?timestamp=${new Date().getTime()}`;
     const image = new Image();
     image.onerror = () => {
       this.showProjectIconError();
@@ -195,41 +183,36 @@ class ProjectInfoAuthoringController {
     image.src = this.projectIcon;
   }
 
-  toggleEditProjectIconMode() {
+  protected toggleEditProjectIconMode(): void {
     this.isEditingProjectIcon = !this.isEditingProjectIcon;
     if (this.isEditingProjectIcon) {
       this.getFeaturedProjectIcons();
     }
   }
 
-  closeEditProjectIconMode() {
+  private closeEditProjectIconMode(): void {
     this.isEditingProjectIcon = false;
   }
 
-  showProjectIcon() {
+  private showProjectIcon(): void {
     this.isShowProjectIcon = true;
     this.isShowProjectIconError = false;
     this.isShowProjectIconLoading = false;
   }
 
-  showProjectIconError() {
+  private showProjectIconError(): void {
     this.isShowProjectIcon = false;
     this.isShowProjectIconError = true;
     this.isShowProjectIconLoading = false;
   }
 
-  showProjectIconLoading() {
+  private showProjectIconLoading(): void {
     this.isShowProjectIcon = false;
     this.isShowProjectIconError = false;
     this.isShowProjectIconLoading = true;
   }
 
-  save() {
-    this.ProjectService.saveProject();
+  private save(): void {
+    this.projectService.saveProject();
   }
 }
-
-export const ProjectInfoAuthoringComponent = {
-  templateUrl: `/assets/wise5/authoringTool/info/infoAuthoring.html`,
-  controller: ProjectInfoAuthoringController
-};
