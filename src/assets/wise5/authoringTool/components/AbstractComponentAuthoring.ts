@@ -96,22 +96,6 @@ export abstract class AbstractComponentAuthoring {
     });
   }
 
-  chooseAsset(target: string): void {
-    const params = {
-      isPopup: true,
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      target: target
-    };
-    this.openAssetChooser(params);
-  }
-
-  openAssetChooser(params: any): any {
-    return this.projectAssetService.openAssetChooser(params).then((data: any) => {
-      return this.assetSelected(data);
-    });
-  }
-
   assetSelected({ nodeId, componentId, assetItem, target }): void {}
 
   getComponents(nodeId: string): any[] {

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ConfigService } from '../../services/configService';
-import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { WiseTinymceEditorComponent } from './wise-tinymce-editor.component';
 import { NotebookService } from '../../services/notebookService';
 import 'tinymce';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { MatDialog } from '@angular/material/dialog';
+import { ProjectAssetAuthoringComponent } from '../../authoringTool/project-asset-authoring/project-asset-authoring.component';
 
 declare let tinymce: any;
 
@@ -27,8 +28,8 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
 
   constructor(
     private ConfigService: ConfigService,
+    private dialog: MatDialog,
     NotebookService: NotebookService,
-    private ProjectAssetService: ProjectAssetService,
     private upgrade: UpgradeModule
   ) {
     super(NotebookService);
@@ -100,16 +101,21 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
   }
 
   filePicker(callback: any, value: any, meta: any) {
-    const params = {
-      isPopup: true,
-      allowedFileTypes: this.getAllowedFileTypesFromMeta(meta)
-    };
-    this.ProjectAssetService.openAssetChooser(params).then((result: any) => {
-      const fileName = result.assetItem.fileName;
-      const fileNameNoExt = fileName.substr(0, fileName.lastIndexOf('.')) || fileName;
-      const fullFilePath = `${this.ConfigService.getProjectAssetsDirectoryPath()}/${fileName}`;
-      callback(fullFilePath, { alt: fileNameNoExt, text: fileNameNoExt });
-    });
+    this.dialog
+      .open(ProjectAssetAuthoringComponent, {
+        data: {
+          isPopup: true,
+          allowedFileTypes: this.getAllowedFileTypesFromMeta(meta)
+        },
+        width: '80%'
+      })
+      .afterClosed()
+      .subscribe((result: any) => {
+        const fileName = result.assetItem.fileName;
+        const fileNameNoExt = fileName.substr(0, fileName.lastIndexOf('.')) || fileName;
+        const fullFilePath = `${this.ConfigService.getProjectAssetsDirectoryPath()}/${fileName}`;
+        callback(fullFilePath, { alt: fileNameNoExt, text: fileNameNoExt });
+      });
   }
 
   getAllowedFileTypesFromMeta(meta: any): string[] {

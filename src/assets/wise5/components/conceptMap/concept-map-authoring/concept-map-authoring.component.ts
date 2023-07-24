@@ -7,6 +7,9 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapService } from '../conceptMapService';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'concept-map-authoring',
@@ -20,6 +23,7 @@ export class ConceptMapAuthoring extends AbstractComponentAuthoring {
   constructor(
     private ConceptMapService: ConceptMapService,
     protected ConfigService: ConfigService,
+    private dialog: MatDialog,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
@@ -122,5 +126,15 @@ export class ConceptMapAuthoring extends AbstractComponentAuthoring {
       node.fileName = fileName;
       this.componentChanged();
     }
+  }
+
+  chooseAsset(target: string): void {
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open(target)
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 }

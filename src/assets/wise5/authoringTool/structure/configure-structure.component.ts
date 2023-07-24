@@ -12,7 +12,7 @@ export abstract class ConfigureStructureComponent {
   structure: any = {};
   structureDir: string = 'assets/wise5/authoringTool/structure';
 
-  constructor(private http: HttpClient, private upgrade: UpgradeModule) {}
+  constructor(private http: HttpClient, protected upgrade: UpgradeModule) {}
 
   ngOnInit(): void {
     this.$state = this.upgrade.$injector.get('$state');

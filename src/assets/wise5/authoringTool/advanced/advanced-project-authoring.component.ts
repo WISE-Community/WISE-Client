@@ -1,11 +1,13 @@
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import * as angular from 'angular';
-import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { NotificationService } from '../../services/notificationService';
 import { Component } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { isValidJSONString } from '../../common/string/string';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../project-asset-authoring/asset-chooser';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'advanced-project-authoring',
@@ -20,10 +22,10 @@ export class AdvancedProjectAuthoringComponent {
   rubricDisplayed: boolean;
 
   constructor(
+    private dialog: MatDialog,
     private upgrade: UpgradeModule,
     private configService: ConfigService,
     private notificationService: NotificationService,
-    private projectAssetService: ProjectAssetService,
     private projectService: TeacherProjectService
   ) {
     this.projectId = this.configService.getProjectId();
@@ -88,14 +90,13 @@ export class AdvancedProjectAuthoringComponent {
   }
 
   chooseProjectScriptFile() {
-    const params = {
-      isPopup: true,
-      projectId: this.projectId,
-      target: 'scriptFilename'
-    };
-    this.projectAssetService.openAssetChooser(params).then((data: any) => {
-      this.assetSelected(data);
-    });
+    new AssetChooser(this.dialog, null, null, this.projectId)
+      .open('scriptFilename')
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        this.assetSelected(data);
+      });
   }
 
   assetSelected({ assetItem }) {

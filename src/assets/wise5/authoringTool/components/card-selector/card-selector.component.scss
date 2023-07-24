@@ -11,18 +11,19 @@
 
 .item-card-title {
   font-size: 14px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .item-card-image {
-  margin-left: -16px;
-  margin-right: -16px;
   position: relative;
   padding-top: 60%;
   background-size: cover;
   background-position: center;
+}
+
+.item-card-actions {
+  padding: 0px 16px 0px 16px !important;
 }
 
 .item-card-actions-spacer {
