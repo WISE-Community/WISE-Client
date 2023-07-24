@@ -5,14 +5,14 @@ import { ChooseNewNodeLocation } from './choose-new-node-location/choose-new-nod
 import { ChooseNewNodeTemplate } from './choose-new-node-template/choose-new-node-template.component';
 import AutomatedAssessmentChooseItemController from './automatedAssessment/automatedAssessmentChooseItemController';
 import AutomatedAssessmentConfigureController from './automatedAssessment/automatedAssessmentConfigureController';
-import SimulationChooseItemController from './simulation/simulationChooseItemController';
 import { CardSelectorComponent } from '../components/card-selector/card-selector.component';
+import { ChooseSimulationComponent } from './choose-simulation/choose-simulation.component';
 
 export default angular
   .module('addNodeModule', ['ui.router'])
   .controller('AutomatedAssessmentChooseItemController', AutomatedAssessmentChooseItemController)
   .controller('AutomatedAssessmentConfigureController', AutomatedAssessmentConfigureController)
-  .controller('SimulationChooseItemController', SimulationChooseItemController)
+  .directive('chooseSimulation', downgradeComponent({ component: ChooseSimulationComponent }))
   .directive(
     'addYourOwnNode',
     downgradeComponent({ component: AddYourOwnNode }) as angular.IDirectiveFactory
@@ -90,9 +90,7 @@ export default angular
         })
         .state('root.at.project.add-node.simulation.choose-item', {
           url: '/choose-item',
-          templateUrl: 'assets/wise5/authoringTool/addNode/simulation/choose-item.html',
-          controller: 'SimulationChooseItemController',
-          controllerAs: '$ctrl'
+          component: 'chooseSimulation'
         });
     }
   ]);
