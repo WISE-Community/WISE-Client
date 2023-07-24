@@ -30,6 +30,7 @@ import { StructureAuthoringModule } from '../../assets/wise5/authoringTool/struc
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { ChooseComponentLocationComponent } from '../../assets/wise5/authoringTool/node/chooseComponentLocation/choose-component-location.component';
 import { ProjectAssetAuthoringModule } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.module';
+import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ProjectAssetAuthoringModule } from '../../assets/wise5/authoringTool/pr
     ChooseNewComponent,
     ChooseNewNodeLocation,
     ChooseNewNodeTemplate,
+    ChooseSimulationComponent,
     ConcurrentAuthorsMessageComponent,
     MilestonesAuthoringComponent,
     NodeAuthoringComponent,
