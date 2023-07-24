@@ -1,0 +1,103 @@
+<div class="root">
+  <div
+    class="drop-box"
+    ng2FileDrop
+    (onFileDrop)="fileChosen($event)"
+    accept="image/*,application/pdf,text/csv,text/javascript"
+    i18n
+  >
+    Drop image or file here or click to upload!
+    <input
+      type="file"
+      accept="image/*,application/pdf,text/csv,text/javascript"
+      class="file-input"
+      (onFileSelected)="fileChosen($event)"
+      ng2FileSelect
+      multiple
+    />
+  </div>
+  <div class="storage-usage-message">
+    <span i18n>
+      You are using {{ totalFileSize | filesize }} out of
+      {{ projectAssetTotalSizeMax | filesize }} ({{ projectAssetUsagePercentage.toFixed(0) }}%)
+    </span>
+    <span *ngIf="totalUnusedFilesSize != null && totalUnusedFilesSize !== 0" class="red"
+      >(Unused Files {{ totalUnusedFilesSize | filesize }} ({{
+        unusedFilesPercentage.toFixed(0)
+      }}%))
+    </span>
+  </div>
+  <div class="background-green">
+    {{ uploadSuccessMessage }}
+    <div *ngFor="let successFile of successFiles">
+      <b>{{ successFile.filename }}</b>
+    </div>
+  </div>
+  <div class="background-pink">
+    {{ uploadErrorMessage }}
+    <div *ngFor="let errorFile of errorFiles">
+      <b>{{ errorFile.filename }}</b> {{ errorFile.message }}
+    </div>
+  </div>
+  <mat-form-field>
+    <mat-label i18n>Sort Assets</mat-label>
+    <mat-select [(ngModel)]="assetSortBy" (ngModelChange)="assetSortByChanged()">
+      <mat-option value="aToZ" i18n>File Name A->Z</mat-option>
+      <mat-option value="zToA" i18n>File Name Z->A</mat-option>
+      <mat-option value="smallToLarge" i18n>File Size Small -> Large</mat-option>
+      <mat-option value="largeToSmall" i18n>File Size Large -> Small</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="assets">
+    <div class="asset-items-container">
+      <ul class="asset-items">
+        <ng-container *ngFor="let assetItem of projectAssets.files">
+          <li
+            *ngIf="
+              allowedFileTypes.includes('any') || allowedFileTypes.includes(assetItem.fileType)
+            "
+            class="asset-item cursor-pointer"
+            (mouseover)="previewAsset(assetItem)"
+            [ngStyle]="{ 'background-color': selectedAssetItem === assetItem ? 'yellow' : '' }"
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            fxLayoutGap="10px"
+          >
+            <button mat-stroked-button *ngIf="isPopup" (click)="chooseAsset(assetItem)" i18n>
+              Choose
+            </button>
+            <span>{{ assetItem.fileName }} ({{ assetItem.fileSize | filesize }})</span>
+            <span *ngIf="!assetItem.used">
+              <span class="red" i18n>(Not Used)</span>
+            </span>
+            <div fxFlex></div>
+            <button
+              mat-icon-button
+              (click)="downloadAsset(assetItem)"
+              matTooltip="Download"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
+              <mat-icon>file_download</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              (click)="deleteAsset(assetItem)"
+              matTooltip="Delete"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+    <div class="asset-preview">
+      <img *ngIf="assetIsImage" [src]="previewAssetURL" class="max-width-400" />
+      <video *ngIf="assetIsVideo" class="max-width-400" controls>
+        <source [src]="previewAssetURL" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+</div>

@@ -29,6 +29,7 @@ import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/not
 import { StructureAuthoringModule } from '../../assets/wise5/authoringTool/structure/structure-authoring.module';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { ChooseComponentLocationComponent } from '../../assets/wise5/authoringTool/node/chooseComponentLocation/choose-component-location.component';
+import { ProjectAssetAuthoringModule } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.module';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ChooseComponentLocationComponent } from '../../assets/wise5/authoringTo
     ImportComponentModule,
     NodeAdvancedAuthoringModule,
     PreviewComponentModule,
+    ProjectAssetAuthoringModule,
     RouterModule,
     StructureAuthoringModule,
     WiseTinymceEditorModule
