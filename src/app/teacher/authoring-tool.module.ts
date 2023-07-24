@@ -29,6 +29,7 @@ import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/not
 import { StructureAuthoringModule } from '../../assets/wise5/authoringTool/structure/structure-authoring.module';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { ChooseComponentLocationComponent } from '../../assets/wise5/authoringTool/node/chooseComponentLocation/choose-component-location.component';
+import { TopBarComponent } from '../../assets/wise5/authoringTool/components/top-bar/top-bar.component';
 import { ProjectAssetAuthoringModule } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.module';
 import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component';
 
@@ -54,7 +55,8 @@ import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addN
     RecoveryAuthoringComponent,
     RequiredErrorLabelComponent,
     RubricAuthoringComponent,
-    TeacherNodeIconComponent
+    TeacherNodeIconComponent,
+    TopBarComponent
   ],
   imports: [
     StudentTeacherCommonModule,

@@ -35,9 +35,9 @@ export class TopBarComponent implements OnInit {
 
   constructor(
     private configService: ConfigService,
+    private dataService: TeacherDataService,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService,
-    private teacherDataService: TeacherDataService,
     private sessionService: SessionService,
     private upgrade: UpgradeModule
   ) {}
@@ -98,7 +98,7 @@ export class TopBarComponent implements OnInit {
    * @return Boolean whether any of the periods are paused
    */
   isAnyPeriodPaused(): boolean {
-    return this.teacherDataService.isAnyPeriodPaused();
+    return this.dataService.isAnyPeriodPaused();
   }
 
   switchToAuthoringView(): void {
@@ -154,7 +154,7 @@ export class TopBarComponent implements OnInit {
     const componentId = null;
     const componentType = null;
     const data = {};
-    return this.teacherDataService
+    return this.dataService
       .saveEvent(context, nodeId, componentId, componentType, category, eventName, data)
       .then((result) => {
         return result;
