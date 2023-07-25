@@ -15,6 +15,7 @@ import { EditComponentAdvancedComponent } from '../../../../../app/authoring-too
 import { Component as WiseComponent } from '../../../common/Component';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { ChooseNewComponent } from '../../../../../app/authoring-tool/add-component/choose-new-component/choose-new-component.component';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'node-authoring',
@@ -22,9 +23,9 @@ import { ChooseNewComponent } from '../../../../../app/authoring-tool/add-compon
   styleUrls: ['./node-authoring.component.scss']
 })
 export class NodeAuthoringComponent implements OnInit {
-  components: any = [];
+  components: ComponentContent[] = [];
   componentsToChecked = {};
-  componentsToIsExpanded = {};
+  componentsToExpanded = {};
   currentNodeCopy: any;
   isAnyComponentSelected: boolean = false;
   isGroupNode: boolean;
@@ -45,7 +46,7 @@ export class NodeAuthoringComponent implements OnInit {
     private dialog: MatDialog,
     private nodeService: NodeService,
     private projectService: TeacherProjectService,
-    private teacherDataService: TeacherDataService,
+    private dataService: TeacherDataService,
     private upgrade: UpgradeModule
   ) {}
 
@@ -54,7 +55,7 @@ export class NodeAuthoringComponent implements OnInit {
     this.nodeId = this.upgrade.$injector.get('$stateParams').nodeId;
     this.node = this.projectService.getNode(this.nodeId);
     this.isGroupNode = this.projectService.isGroupNode(this.nodeId);
-    this.teacherDataService.setCurrentNodeByNodeId(this.nodeId);
+    this.dataService.setCurrentNodeByNodeId(this.nodeId);
     this.nodeJson = this.projectService.getNodeById(this.nodeId);
     this.nodePosition = this.projectService.getNodePositionById(this.nodeId);
     this.components = this.projectService.getComponents(this.nodeId);
@@ -77,7 +78,7 @@ export class NodeAuthoringComponent implements OnInit {
 
   ngOnDestroy(): void {
     if (this.$state.current.name !== 'root.at.project.node') {
-      this.teacherDataService.setCurrentNode(null);
+      this.dataService.setCurrentNode(null);
     }
     this.subscriptions.unsubscribe();
   }
@@ -116,7 +117,7 @@ export class NodeAuthoringComponent implements OnInit {
   }
 
   protected close(): void {
-    this.teacherDataService.setCurrentNode(null);
+    this.dataService.setCurrentNode(null);
     this.scrollToTopOfPage();
   }
 
@@ -180,14 +181,10 @@ export class NodeAuthoringComponent implements OnInit {
     this.upgrade.$injector.get('$state').go('root.at.project.node.advanced');
   }
 
-  protected getSelectedComponents(): string[] {
-    return this.components.filter((component: any) => this.componentsToChecked[component.id]);
-  }
-
-  protected getSelectedComponentIds(): string[] {
-    return this.components
-      .filter((component: any) => this.componentsToChecked[component.id])
-      .map((component: any) => component.id);
+  protected getSelectedComponents(): ComponentContent[] {
+    return this.components.filter(
+      (component: ComponentContent) => this.componentsToChecked[component.id]
+    );
   }
 
   private clearComponentsToChecked(): void {
@@ -233,8 +230,8 @@ export class NodeAuthoringComponent implements OnInit {
   protected deleteComponents(): void {
     this.scrollToTopOfPage();
     if (this.confirmDeleteComponent(this.getSelectedComponentNumbersAndTypes())) {
-      const componentIdAndTypes = this.getSelectedComponentIds()
-        .map((componentId) => this.node.deleteComponent(componentId))
+      const componentIdAndTypes = this.getSelectedComponents()
+        .map((component) => this.node.deleteComponent(component.id))
         .map((component) => ({ componentId: component.id, type: component.type }));
       this.afterDeleteComponent(componentIdAndTypes);
     }
@@ -304,7 +301,7 @@ export class NodeAuthoringComponent implements OnInit {
         $('#content').scrollTop(componentElement.offset().top - 200);
         for (const newComponent of newComponents) {
           temporarilyHighlightElement(newComponent.id);
-          this.componentsToIsExpanded[newComponent.id] = expandComponents;
+          this.componentsToExpanded[newComponent.id] = expandComponents;
         }
       }
     });
@@ -335,17 +332,17 @@ export class NodeAuthoringComponent implements OnInit {
   }
 
   protected toggleComponent(componentId: string): void {
-    this.componentsToIsExpanded[componentId] = !this.componentsToIsExpanded[componentId];
+    this.componentsToExpanded[componentId] = !this.componentsToExpanded[componentId];
   }
 
   protected setAllComponentsIsExpanded(isExpanded: boolean): void {
     this.components.forEach((component) => {
-      this.componentsToIsExpanded[component.id] = isExpanded;
+      this.componentsToExpanded[component.id] = isExpanded;
     });
   }
 
   protected getNumberOfComponentsExpanded(): number {
-    return Object.values(this.componentsToIsExpanded).filter((value) => value).length;
+    return Object.values(this.componentsToExpanded).filter((value) => value).length;
   }
 
   private setShowSaveButtonForAllComponents(node: Node, showSaveButton: boolean): void {
@@ -354,5 +351,10 @@ export class NodeAuthoringComponent implements OnInit {
         this.componentServiceLookupService.getService(component.type).componentUsesSaveButton()
       )
       .forEach((component) => (component.showSaveButton = showSaveButton));
+  }
+
+  protected dropComponent(event: CdkDragDrop<ComponentContent[]>): void {
+    moveItemInArray(this.components, event.previousIndex, event.currentIndex);
+    this.projectService.saveProject();
   }
 }
