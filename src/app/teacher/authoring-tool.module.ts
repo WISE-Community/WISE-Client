@@ -29,6 +29,10 @@ import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/not
 import { StructureAuthoringModule } from '../../assets/wise5/authoringTool/structure/structure-authoring.module';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { ChooseComponentLocationComponent } from '../../assets/wise5/authoringTool/node/chooseComponentLocation/choose-component-location.component';
+import { TopBarComponent } from '../../assets/wise5/authoringTool/components/top-bar/top-bar.component';
+import { ProjectAssetAuthoringModule } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.module';
+import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component';
+import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
 
 @NgModule({
   declarations: [
@@ -43,15 +47,18 @@ import { ChooseComponentLocationComponent } from '../../assets/wise5/authoringTo
     ChooseNewComponent,
     ChooseNewNodeLocation,
     ChooseNewNodeTemplate,
+    ChooseSimulationComponent,
     ConcurrentAuthorsMessageComponent,
     MilestonesAuthoringComponent,
     NodeAuthoringComponent,
     NodeIconChooserDialog,
     NotebookAuthoringComponent,
+    ProjectInfoAuthoringComponent,
     RecoveryAuthoringComponent,
     RequiredErrorLabelComponent,
     RubricAuthoringComponent,
-    TeacherNodeIconComponent
+    TeacherNodeIconComponent,
+    TopBarComponent
   ],
   imports: [
     StudentTeacherCommonModule,
@@ -61,6 +68,7 @@ import { ChooseComponentLocationComponent } from '../../assets/wise5/authoringTo
     ImportComponentModule,
     NodeAdvancedAuthoringModule,
     PreviewComponentModule,
+    ProjectAssetAuthoringModule,
     RouterModule,
     StructureAuthoringModule,
     WiseTinymceEditorModule

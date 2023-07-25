@@ -4,7 +4,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { forkJoin, BehaviorSubject } from 'rxjs';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { isAudio, isImage, isVideo } from '../../assets/wise5/common/file/file';
@@ -20,8 +19,7 @@ export class ProjectAssetService {
   constructor(
     protected configService: ConfigService,
     protected http: HttpClient,
-    protected projectService: ProjectService,
-    protected upgrade: UpgradeModule
+    protected projectService: ProjectService
   ) {
     this.getProjectAssets().subscribe((projectAssets) => {
       if (projectAssets != null) {
@@ -234,16 +232,5 @@ export class ProjectAssetService {
 
   isProjectAssetsAvailable() {
     return this.getProjectAssets().getValue() != null;
-  }
-
-  openAssetChooser(params: any) {
-    return this.upgrade.$injector.get('$mdDialog').show({
-      templateUrl: 'assets/wise5/authoringTool/asset/assetAuthoring.html',
-      controller: 'ProjectAssetAuthoringController',
-      controllerAs: '$ctrl',
-      $stateParams: params,
-      clickOutsideToClose: true,
-      escapeToClose: true
-    });
   }
 }

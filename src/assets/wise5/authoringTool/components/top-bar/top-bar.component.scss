@@ -1,0 +1,37 @@
+@import 'style/abstracts/variables','style/abstracts/functions', 'style/abstracts/mixins';
+
+.mat-toolbar {
+  padding: 0 8px;
+}
+
+.title-header {
+  font-weight: inherit !important;
+}
+
+.title {
+  white-space: normal;
+  line-height: 1.2;
+
+  @media (max-width: breakpoint('xs.max')) {
+    font-size: 14px;
+  }
+}
+
+.mat-mdc-icon-button {
+  margin: 0 4px;
+  font-size: 16px;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
+.mat-list-item-content {
+  padding: 0;
+}
+
+.account-menu-avatar {
+  height: 48px;
+  width: 48px;
+}
+
+.account-menu-button {
+  margin: 8px;
+}

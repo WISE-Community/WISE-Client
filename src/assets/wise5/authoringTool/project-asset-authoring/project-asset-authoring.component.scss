@@ -1,0 +1,76 @@
+.root {
+  padding: 0px 16px;
+}
+
+.drop-box {
+  background: #F8F8F8;
+  border: 5px dashed #DDD;
+  height: 100px;
+  text-align: center;
+  padding-top: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  bottom: 0px;
+  position: relative;
+  cursor: pointer;
+}
+
+.file-input {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.storage-usage-message {
+  margin-bottom: 10px;
+}
+
+.assets {
+  display: flex;
+}
+
+.asset-items-container {
+  flex: 1;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.asset-items {
+  padding: 0px;
+}
+
+.asset-item {
+  list-style-type: none;
+}
+
+.asset-preview {
+  flex: 1;
+}
+
+.mat-icon {
+  margin: 0px;
+}
+
+.red {
+  color: red;
+}
+
+.background-green {
+  background-color: lightgreen;
+}
+
+.background-pink {
+  background-color: lightpink;
+}
+
+.max-width-400 {
+  max-width: 400px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

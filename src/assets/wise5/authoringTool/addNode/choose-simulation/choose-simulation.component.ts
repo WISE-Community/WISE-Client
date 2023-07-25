@@ -1,5 +1,8 @@
+import { Component } from '@angular/core';
+import { ConfigureStructureComponent } from '../../structure/configure-structure.component';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import ConfigureStructureController from '../../structure/configureStructureController';
+import { HttpClient } from '@angular/common/http';
+import { UpgradeModule } from '@angular/upgrade/static';
 
 class SimulationNode {
   metadata = {
@@ -11,48 +14,40 @@ class SimulationNode {
   }
 }
 
-export default class SimulationChooseItemController extends ConfigureStructureController {
+@Component({
+  selector: 'choose-simulation',
+  templateUrl: './choose-simulation.component.html',
+  styleUrls: ['./choose-simulation.component.scss']
+})
+export class ChooseSimulationComponent extends ConfigureStructureComponent {
   allNodes: SimulationNode[] = [];
   filteredNodes: SimulationNode[] = [];
   project: any;
   projectItems: any;
   searchText: string = '';
   selectedNode: string;
-  simulationProjectId: number;
   selectedSubjects: string[] = [];
+  simulationProjectId: number;
   subjects: string[] = [];
 
-  static $inject = [
-    '$filter',
-    '$http',
-    '$rootScope',
-    '$state',
-    '$stateParams',
-    '$scope',
-    'ProjectService'
-  ];
-
   constructor(
-    $filter,
-    $http,
-    $rootScope,
-    $state,
-    $stateParams,
-    $scope,
-    private ProjectService: TeacherProjectService
+    http: HttpClient,
+    private projectService: TeacherProjectService,
+    protected upgrade: UpgradeModule
   ) {
-    super($filter, $http, $rootScope, $state, $stateParams, $scope);
+    super(http, upgrade);
   }
 
-  $onInit(): void {
-    this.simulationProjectId = this.ProjectService.getSimulationProjectId();
+  ngOnInit(): void {
+    this.$state = this.upgrade.$injector.get('$state');
+    this.simulationProjectId = this.projectService.getSimulationProjectId();
     this.showSimulationProject();
   }
 
   private showSimulationProject(): void {
-    this.ProjectService.retrieveProjectById(this.simulationProjectId).then((projectJSON) => {
+    this.projectService.retrieveProjectById(this.simulationProjectId).then((projectJSON) => {
       this.project = projectJSON;
-      const nodeOrderOfProject = this.ProjectService.getNodeOrderOfProject(this.project);
+      const nodeOrderOfProject = this.projectService.getNodeOrderOfProject(this.project);
       this.projectItems = nodeOrderOfProject.nodes.slice(1); // remove root node from consideration
       const allSubjects: string[] = [];
       this.projectItems.forEach((item) => {
@@ -67,7 +62,7 @@ export default class SimulationChooseItemController extends ConfigureStructureCo
     });
   }
 
-  filter(): void {
+  protected filter(): void {
     this.filteredNodes = this.allNodes.filter((node: SimulationNode) => {
       const isSearchTextFound = this.isSearchTextFound(this.searchText, JSON.stringify(node));
       if (this.isAnySubjectChosen()) {
@@ -94,34 +89,34 @@ export default class SimulationChooseItemController extends ConfigureStructureCo
     return false;
   }
 
-  clearFilters(): void {
+  protected clearFilters(): void {
     this.searchText = '';
     this.selectedSubjects = [];
     this.filter();
   }
 
-  getNumItemsFound(): number {
+  protected getNumItemsFound(): number {
     return this.filteredNodes.filter((node: SimulationNode) => {
       return node.type != 'group';
     }).length;
   }
 
-  previewNode(node: any): void {
+  protected previewNode(node: any): void {
     window.open(`${this.project.previewProjectURL}/${node.id}`);
   }
 
-  back(): void {
+  protected back(): void {
     this.$state.go('root.at.project.add-node.choose-template');
   }
 
-  next(): void {
+  protected next(): void {
     this.$state.go('root.at.project.import-step.choose-location', {
       importFromProjectId: this.simulationProjectId,
       selectedNodes: [this.selectedNode]
     });
   }
 
-  itemSelected(item: any) {
+  protected itemSelected(item: any): void {
     this.selectedNode = item;
   }
 }
