@@ -32,6 +32,7 @@ import { ChooseComponentLocationComponent } from '../../assets/wise5/authoringTo
 import { TopBarComponent } from '../../assets/wise5/authoringTool/components/top-bar/top-bar.component';
 import { ProjectAssetAuthoringModule } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.module';
 import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component';
+import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addN
     NodeAuthoringComponent,
     NodeIconChooserDialog,
     NotebookAuthoringComponent,
+    ProjectInfoAuthoringComponent,
     RecoveryAuthoringComponent,
     RequiredErrorLabelComponent,
     RubricAuthoringComponent,

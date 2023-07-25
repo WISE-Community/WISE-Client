@@ -4,8 +4,8 @@ import { ProjectAssetAuthoringComponent } from './project-asset-authoring.compon
 export class AssetChooser {
   constructor(
     private dialog: MatDialog,
-    private nodeId: string,
-    private componentId: string,
+    private nodeId: string = null,
+    private componentId: string = null,
     private projectId: number = null
   ) {}
 
