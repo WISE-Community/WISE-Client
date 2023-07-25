@@ -6,6 +6,8 @@ import 'tinymce';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectAssetAuthoringComponent } from '../../authoringTool/project-asset-authoring/project-asset-authoring.component';
+import { WiseLinkAuthoringDialogComponent } from '../../authoringTool/wise-link-authoring-dialog/wise-link-authoring-dialog.component';
+import { filter } from 'rxjs';
 
 declare let tinymce: any;
 
@@ -56,47 +58,33 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
         tooltip: $localize`Insert WISE Link`,
         icon: 'wiselink',
         onAction: function () {
-          const params = {
-            projectId: '',
-            nodeId: '',
-            componentId: '',
-            target: ''
-          };
-          thisComponent.openWISELinkChooser(params).then((result) => {
-            let content = '';
-            if (result.wiseLinkType === 'link') {
-              content =
-                `<a href="#" wiselink="true" node-id="${result.wiseLinkNodeId}" ` +
-                `component-id="${result.wiseLinkComponentId}" ` +
-                `link-text="${result.wiseLinkText}">${result.wiseLinkText}</a>`;
-            } else if (result.wiseLinkType === 'button') {
-              content =
-                `<button wiselink="true" node-id="${result.wiseLinkNodeId}" ` +
-                `component-id="${result.wiseLinkComponentId}" ` +
-                `link-text="${result.wiseLinkText}">${result.wiseLinkText}</button>`;
-            }
-            editor.insertContent(content);
-          });
+          thisComponent
+            .openWISELinkChooser()
+            .afterClosed()
+            .pipe(filter((result: any) => result != null))
+            .subscribe((result: any) => {
+              let content = '';
+              if (result.wiseLinkType === 'link') {
+                content =
+                  `<a href="#" wiselink="true" node-id="${result.wiseLinkNodeId}" ` +
+                  `component-id="${result.wiseLinkComponentId}" ` +
+                  `link-text="${result.wiseLinkText}">${result.wiseLinkText}</a>`;
+              } else if (result.wiseLinkType === 'button') {
+                content =
+                  `<button wiselink="true" node-id="${result.wiseLinkNodeId}" ` +
+                  `component-id="${result.wiseLinkComponentId}" ` +
+                  `link-text="${result.wiseLinkText}">${result.wiseLinkText}</button>`;
+              }
+              editor.insertContent(content);
+            });
         }
       });
     });
   }
 
-  private openWISELinkChooser({ projectId, nodeId, componentId, target }): any {
-    const stateParams = {
-      projectId: projectId,
-      nodeId: nodeId,
-      componentId: componentId,
-      target: target
-    };
-    return this.upgrade.$injector.get('$mdDialog').show({
-      templateUrl: 'assets/wise5/authoringTool/wiseLink/wiseLinkAuthoring.html',
-      controller: 'WISELinkAuthoringController',
-      controllerAs: '$ctrl',
-      $stateParams: stateParams,
-      clickOutsideToClose: true,
-      escapeToClose: true,
-      multiple: true
+  private openWISELinkChooser(): any {
+    return this.dialog.open(WiseLinkAuthoringDialogComponent, {
+      width: '80%'
     });
   }
 

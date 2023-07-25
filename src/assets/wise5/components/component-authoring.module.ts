@@ -28,7 +28,6 @@ import { EditComponentSubmitButtonComponent } from '../../../app/authoring-tool/
 import { EditComponentTagsComponent } from '../../../app/authoring-tool/edit-component-tags/edit-component-tags.component';
 import { EditComponentWidthComponent } from '../../../app/authoring-tool/edit-component-width/edit-component-width.component';
 import { EditComponentExcludeFromTotalScoreComponent } from '../../../app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
-import WISELinkAuthoringController from '../authoringTool/wiseLink/wiseLinkAuthoringController';
 import { EditComponentDefaultFeedback } from '../../../app/authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component';
 import { AuthorUrlParametersComponent } from '../../../app/authoring-tool/author-url-parameters/author-url-parameters.component';
 import { EditConnectedComponentsComponent } from '../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
@@ -62,7 +61,6 @@ export default angular
     'summaryAuthoringComponentModule',
     'tableAuthoringComponentModule'
   ])
-  .controller('WISELinkAuthoringController', WISELinkAuthoringController)
   .directive(
     'authorUrlParameters',
     downgradeComponent({
