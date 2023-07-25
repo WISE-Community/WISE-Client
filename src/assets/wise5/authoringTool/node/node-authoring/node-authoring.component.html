@@ -9,11 +9,10 @@
 ></node-advanced-authoring>
 <div *ngIf="$state.current.name === 'root.at.project.node'">
   <div class="top-button-bar">
-    <div fxLayout="row wrap">
+    <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
       <button
         mat-raised-button
         color="primary"
-        class="top-button"
         (click)="close()"
         matTooltip="Back"
         matTooltipPosition="above"
@@ -21,80 +20,55 @@
       >
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <button
-        mat-raised-button
-        color="primary"
-        class="top-button"
-        (click)="showAdvancedView()"
-        matTooltip="Advanced"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>build</mat-icon>
-      </button>
-      <button
-        *ngIf="!isGroupNode"
-        mat-raised-button
-        color="primary"
-        class="top-button"
-        (click)="undo()"
-        [disabled]="getSelectedComponents().length !== 0 || undoStack.length === 0"
-        matTooltip="Undo"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>undo</mat-icon>
-      </button>
-      <span fxFlex></span>
-      <button
-        *ngIf="!isGroupNode"
-        mat-raised-button
-        color="primary"
-        class="top-button"
-        (click)="previewStepInNewWindow()"
-        [disabled]="showEditTransitions"
-        matTooltip="Preview Step"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>visibility</mat-icon>
-      </button>
-    </div>
-    <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px" class="step-title-bar">
       <teacher-node-icon [nodeId]="nodeId" [canEdit]="true" size="18"></teacher-node-icon>
-      <div class="step-title-input-div">
-        <mat-form-field class="step-title-input">
-          <mat-label *ngIf="!isGroupNode" i18n>Step Title {{ nodePosition }}:</mat-label>
-          <mat-label *ngIf="isGroupNode" i18n> Activity Title {{ nodePosition }}: </mat-label>
-          <input
-            matInput
-            [(ngModel)]="nodeJson.title"
-            [ngModelOptions]="{ debounce: 500 }"
-            (change)="authoringViewNodeChanged()"
-            aria-label="Title"
-            i18n-aria-label
-          />
-        </mat-form-field>
-      </div>
-      <div class="empty-div-after-step-title"></div>
-      <div *ngIf="!isGroupNode" class="expand-collapse-buttons-div" fxLayoutGap="20px">
+      <mat-form-field class="step-title form-field-no-hint">
+        <mat-label *ngIf="!isGroupNode" i18n>Step Title {{ nodePosition }}:</mat-label>
+        <mat-label *ngIf="isGroupNode" i18n> Activity Title {{ nodePosition }}: </mat-label>
+        <input
+          matInput
+          [(ngModel)]="nodeJson.title"
+          [ngModelOptions]="{ debounce: 500 }"
+          (change)="authoringViewNodeChanged()"
+          aria-label="Title"
+          i18n-aria-label
+        />
+      </mat-form-field>
+      <span fxFlex></span>
+      <div class="node-buttons" fxLayoutGap="16px">
         <button
           mat-raised-button
           color="primary"
-          (click)="setAllComponentsIsExpanded(true)"
-          [disabled]="getNumberOfComponentsExpanded() === components.length"
-          i18n
+          (click)="showAdvancedView()"
+          matTooltip="Advanced"
+          matTooltipPosition="above"
+          i18n-matTooltip
         >
-          + Expand All
+          <mat-icon>build</mat-icon>
         </button>
         <button
+          *ngIf="!isGroupNode"
           mat-raised-button
           color="primary"
-          (click)="setAllComponentsIsExpanded(false)"
-          [disabled]="getNumberOfComponentsExpanded() === 0"
-          i18n
+          (click)="undo()"
+          [disabled]="getSelectedComponents().length !== 0 || undoStack.length === 0"
+          matTooltip="Undo"
+          matTooltipPosition="above"
+          i18n-matTooltip
         >
-          - Collapse All
+          <mat-icon>undo</mat-icon>
+        </button>
+        <button
+          *ngIf="!isGroupNode"
+          mat-raised-button
+          color="primary"
+          class="top-button"
+          (click)="previewStepInNewWindow()"
+          [disabled]="showEditTransitions"
+          matTooltip="Preview Step"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>visibility</mat-icon>
         </button>
       </div>
     </div>
@@ -110,14 +84,14 @@
         <mat-icon>add_circle</mat-icon>
       </button>
     </ng-template>
-    <h5
+    <div
       *ngIf="!isGroupNode"
-      style="margin-left: 16px"
+      class="components-header"
       fxLayout="row"
       fxLayoutAlign="start center"
       fxLayoutGap="4px"
     >
-      <span i18n>Components</span>
+      <h5 i18n>Components</h5>
       <ng-container
         *ngTemplateOutlet="addComponentButtonTemplate; context: { componentId: null }"
       ></ng-container>
@@ -153,7 +127,28 @@
           <mat-icon>delete</mat-icon>
         </button>
       </div>
-    </h5>
+      <span fxFlex></span>
+      <div *ngIf="!isGroupNode" fxLayoutGap="16px">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="setAllComponentsIsExpanded(true)"
+          [disabled]="getNumberOfComponentsExpanded() === components.length"
+          i18n
+        >
+          + Expand All
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="setAllComponentsIsExpanded(false)"
+          [disabled]="getNumberOfComponentsExpanded() === 0"
+          i18n
+        >
+          - Collapse All
+        </button>
+      </div>
+    </div>
   </div>
   <div *ngIf="components.length === 0 && !isGroupNode" class="no-components-message">
     <em i18n>This step does not have any components. Click the + button to add a component.</em>
