@@ -10,11 +10,10 @@ import { ConfigureStructureComponent } from '../../structure/configure-structure
   styleUrls: ['./choose-automated-assessment.component.scss']
 })
 export class ChooseAutomatedAssessmentComponent extends ConfigureStructureComponent {
-  automatedAssessmentProjectId: number;
-  items = [];
-  node: string;
-  project: any;
-  projectItems: any;
+  private automatedAssessmentProjectId: number;
+  protected node: any;
+  private project: any;
+  protected projectItems: any;
 
   constructor(
     http: HttpClient,

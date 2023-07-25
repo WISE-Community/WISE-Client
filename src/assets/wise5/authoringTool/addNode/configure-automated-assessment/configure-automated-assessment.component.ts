@@ -9,10 +9,10 @@ import { UpgradeModule } from '@angular/upgrade/static';
   styleUrls: ['./configure-automated-assessment.component.scss']
 })
 export class ConfigureAutomatedAssessmentComponent extends ConfigureStructureComponent {
-  hasCustomization: boolean;
-  importFromProjectId: number;
-  node: any;
-  stateParams: any;
+  protected hasCustomization: boolean;
+  private importFromProjectId: number;
+  protected node: any;
+  private stateParams: any;
 
   constructor(http: HttpClient, protected upgrade: UpgradeModule) {
     super(http, upgrade);
