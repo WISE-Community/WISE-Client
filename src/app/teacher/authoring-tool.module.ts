@@ -33,6 +33,8 @@ import { TopBarComponent } from '../../assets/wise5/authoringTool/components/top
 import { ProjectAssetAuthoringModule } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.module';
 import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component';
 import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
+import { ChooseAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/choose-automated-assessment/choose-automated-assessment.component';
+import { ConfigureAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/
     AddYourOwnNode,
     AdvancedProjectAuthoringComponent,
     CardSelectorComponent,
+    ChooseAutomatedAssessmentComponent,
     ChooseComponentLocationComponent,
     ChooseImportStepComponent,
     ChooseImportStepLocationComponent,
@@ -49,6 +52,7 @@ import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/
     ChooseNewNodeTemplate,
     ChooseSimulationComponent,
     ConcurrentAuthorsMessageComponent,
+    ConfigureAutomatedAssessmentComponent,
     MilestonesAuthoringComponent,
     NodeAuthoringComponent,
     NodeIconChooserDialog,
