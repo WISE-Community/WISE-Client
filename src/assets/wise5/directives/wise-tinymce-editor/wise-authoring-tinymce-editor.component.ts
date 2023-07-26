@@ -31,8 +31,7 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
   constructor(
     private ConfigService: ConfigService,
     private dialog: MatDialog,
-    NotebookService: NotebookService,
-    private upgrade: UpgradeModule
+    NotebookService: NotebookService
   ) {
     super(NotebookService);
   }

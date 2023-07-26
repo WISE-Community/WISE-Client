@@ -8,11 +8,11 @@ import { ProjectService } from '../../services/projectService';
   styleUrls: ['./wise-link-authoring-dialog.component.scss']
 })
 export class WiseLinkAuthoringDialogComponent {
-  items: any[];
-  wiseLinkComponentId: string = '';
-  wiseLinkNodeId: string = '';
-  wiseLinkText: string = '';
-  wiseLinkType: string = 'link';
+  protected items: any[];
+  protected wiseLinkComponentId: string = '';
+  protected wiseLinkNodeId: string = '';
+  protected wiseLinkText: string = '';
+  protected wiseLinkType: string = 'link';
 
   constructor(
     protected dialogRef: MatDialogRef<WiseLinkAuthoringDialogComponent>,
@@ -54,7 +54,7 @@ export class WiseLinkAuthoringDialogComponent {
     return this.projectService.getComponents(nodeId);
   }
 
-  protected createWISELink(): void {
+  protected create(): void {
     if (this.wiseLinkNodeId == null || this.wiseLinkNodeId === '') {
       alert($localize`You must select a step.`);
     } else if (this.wiseLinkText == null || this.wiseLinkText === '') {
@@ -69,7 +69,7 @@ export class WiseLinkAuthoringDialogComponent {
     }
   }
 
-  protected cancelWISELinkAuthoring(): void {
+  protected cancel(): void {
     this.dialogRef.close();
   }
 }
