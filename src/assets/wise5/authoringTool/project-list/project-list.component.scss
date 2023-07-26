@@ -1,0 +1,39 @@
+.projectItem {
+  padding: 2px;
+}
+
+.projectItem:hover {
+  cursor: pointer;
+  background-color: lightgrey;
+}
+
+.md-tooltip.projectButtonTooltip {
+  margin-top: 0px;
+}
+
+.projectButton {
+  margin-right: 15px;
+  opacity: .9;
+}
+
+html[dir='rtl'] .projectButton {
+  margin-right: auto;
+  margin-left: 15px;
+}
+
+.main-box {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+}
+
+html[dir='rtl'] .main-box {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 40px;
+  margin-left: auto;
+}
+
+.mat-icon {
+  margin: 0px;
+}

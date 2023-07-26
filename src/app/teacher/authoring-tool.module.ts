@@ -35,11 +35,14 @@ import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addN
 import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
 import { ChooseAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/choose-automated-assessment/choose-automated-assessment.component';
 import { ConfigureAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component';
+import { ProjectListComponent } from '../../assets/wise5/authoringTool/project-list/project-list.component';
+import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-project/add-project.component';
 
 @NgModule({
   declarations: [
     AddLessonChooseLocationComponent,
     AddLessonConfigureComponent,
+    AddProjectComponent,
     AddYourOwnNode,
     AdvancedProjectAuthoringComponent,
     CardSelectorComponent,
@@ -62,7 +65,8 @@ import { ConfigureAutomatedAssessmentComponent } from '../../assets/wise5/author
     RequiredErrorLabelComponent,
     RubricAuthoringComponent,
     TeacherNodeIconComponent,
-    TopBarComponent
+    TopBarComponent,
+    ProjectListComponent
   ],
   imports: [
     StudentTeacherCommonModule,
