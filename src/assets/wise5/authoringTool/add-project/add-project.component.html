@@ -1,4 +1,4 @@
-<div id="top" class="view-content view-content--with-sidemenu">
+<div class="view-content view-content--with-sidemenu">
   <div class="l-constrained" fxLayout="column">
     <div class="node-content md-whiteframe-1dp" style="position: relative">
       <h5 i18n>Enter a title for the new unit</h5>
@@ -25,21 +25,23 @@
           </mat-error>
         </mat-form-field>
         <mat-divider></mat-divider>
-        <div fxLayout="row">
+        <div fxLayout="row" fxLayoutGap="20px">
           <button
             mat-button
-            class="mat-primary"
+            color="primary"
             (click)="cancel(); $event.preventDefault()"
             aria-label="cancel"
+            i18n-aria-label
             i18n
           >
             Cancel
           </button>
           <button
-            mat-button
-            class="mat-raised-button mat-primary"
+            mat-raised-button
+            color="primary"
             (click)="create()"
             aria-label="create"
+            i18n-aria-label
             [disabled]="!addProjectFormGroup.valid"
             i18n
           >
