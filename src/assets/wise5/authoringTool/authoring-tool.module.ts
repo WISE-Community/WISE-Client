@@ -13,9 +13,10 @@ import './project/project-authoring.module';
 import './structure/structureAuthoringModule';
 import { ProjectLibraryService } from '../services/projectLibraryService';
 import { AuthoringToolComponent } from '../authoringTool/authoringToolComponent';
-import { MainAuthoringComponent } from '../authoringTool/main/mainAuthoringComponent';
 import { WiseAuthoringTinymceEditorComponent } from '../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
 import { StepToolsComponent } from '../common/stepTools/step-tools.component';
+import { ProjectListComponent } from './project-list/project-list.component';
+import { AddProjectComponent } from './add-project/add-project.component';
 
 export default angular
   .module('authoringTool', [
@@ -31,8 +32,16 @@ export default angular
     'ui.router'
   ])
   .directive(
+    'addProjectComponent',
+    downgradeComponent({ component: AddProjectComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
     'stepTools',
     downgradeComponent({ component: StepToolsComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'projectListComponent',
+    downgradeComponent({ component: ProjectListComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'wiseAuthoringTinymceEditor',
@@ -42,7 +51,6 @@ export default angular
   )
   .factory('ProjectLibraryService', downgradeInjectable(ProjectLibraryService))
   .component('authoringToolComponent', AuthoringToolComponent)
-  .component('mainAuthoringComponent', MainAuthoringComponent)
   .config([
     '$stateProvider',
     '$translatePartialLoaderProvider',
@@ -54,9 +62,13 @@ export default angular
           abstract: true,
           component: 'authoringToolComponent'
         })
+        .state('root.at.new-unit', {
+          url: '/new-unit',
+          component: 'addProjectComponent'
+        })
         .state('root.at.main', {
           url: '/home',
-          component: 'mainAuthoringComponent',
+          component: 'projectListComponent',
           resolve: {
             config: [
               'ConfigService',
