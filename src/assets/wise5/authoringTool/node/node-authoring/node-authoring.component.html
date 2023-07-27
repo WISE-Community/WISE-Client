@@ -10,6 +10,16 @@
 <div *ngIf="$state.current.name === 'root.at.project.node'">
   <div class="top-button-bar">
     <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="close()"
+        matTooltip="Back"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
       <teacher-node-icon [nodeId]="nodeId" [canEdit]="true" size="18"></teacher-node-icon>
       <mat-form-field class="step-title form-field-no-hint">
         <mat-label *ngIf="!isGroupNode" i18n>Step Title {{ nodePosition }}:</mat-label>
@@ -23,7 +33,18 @@
           i18n-aria-label
         />
       </mat-form-field>
+      <span fxFlex></span>
       <div class="node-buttons" fxLayoutGap="16px">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="showAdvancedView()"
+          matTooltip="Advanced"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>build</mat-icon>
+        </button>
         <button
           *ngIf="!isGroupNode"
           mat-raised-button
@@ -35,16 +56,6 @@
           i18n-matTooltip
         >
           <mat-icon>undo</mat-icon>
-        </button>
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="showAdvancedView()"
-          matTooltip="Advanced"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>build</mat-icon>
         </button>
         <button
           *ngIf="!isGroupNode"
@@ -60,16 +71,6 @@
           <mat-icon>visibility</mat-icon>
         </button>
       </div>
-      <span fxFlex></span>
-      <button
-        mat-icon-button
-        (click)="close()"
-        matTooltip="Back to unit"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>close</mat-icon>
-      </button>
     </div>
     <ng-template #addComponentButtonTemplate let-componentId="componentId">
       <button
