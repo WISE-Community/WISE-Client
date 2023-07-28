@@ -37,6 +37,7 @@ import { ChooseAutomatedAssessmentComponent } from '../../assets/wise5/authoring
 import { ConfigureAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component';
 import { ProjectListComponent } from '../../assets/wise5/authoringTool/project-list/project-list.component';
 import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-project/add-project.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-projec
     StudentTeacherCommonModule,
     ComponentAuthoringModule,
     ComponentStudentModule,
+    MatBadgeModule,
     MatChipsModule,
     ImportComponentModule,
     NodeAdvancedAuthoringModule,
