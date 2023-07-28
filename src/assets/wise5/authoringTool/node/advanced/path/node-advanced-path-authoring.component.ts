@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MultipleChoiceContent } from '../../../../components/multipleChoice/MultipleChoiceContent';
-import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { UpgradeModule } from '@angular/upgrade/static';
 
 @Component({
   selector: 'node-advanced-path-authoring',
@@ -57,14 +57,10 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
     { value: 'studentDataChanged', text: $localize`Student Data Changed` }
   ];
 
-  constructor(
-    private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService
-  ) {}
+  constructor(private ProjectService: TeacherProjectService, private upgrade: UpgradeModule) {}
 
   ngOnInit() {
-    this.nodeId = this.TeacherDataService.getCurrentNodeId();
-    this.node = this.ProjectService.getNodeById(this.nodeId);
+    this.node = this.ProjectService.getNodeById(this.upgrade.$injector.get('$stateParams').nodeId);
     this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds(true);
   }
 

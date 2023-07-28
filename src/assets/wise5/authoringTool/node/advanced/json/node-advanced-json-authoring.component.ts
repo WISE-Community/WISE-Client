@@ -1,9 +1,9 @@
-import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { NotificationService } from '../../../../services/notificationService';
 import { Component, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { UpgradeModule } from '@angular/upgrade/static';
 
 @Component({
   selector: 'node-advanced-json-authoring',
@@ -19,11 +19,11 @@ export class NodeAdvancedJsonAuthoringComponent implements OnInit {
   constructor(
     private NotificationService: NotificationService,
     private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService
+    private upgrade: UpgradeModule
   ) {}
 
   ngOnInit() {
-    this.nodeId = this.TeacherDataService.getCurrentNodeId();
+    this.nodeId = this.upgrade.$injector.get('$stateParams').nodeId;
     this.node = this.ProjectService.getNodeById(this.nodeId);
     this.nodeContentJSONString = JSON.stringify(this.node, null, 4);
     this.NotificationService.showJSONValidMessage();

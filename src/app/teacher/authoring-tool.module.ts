@@ -37,6 +37,7 @@ import { ChooseAutomatedAssessmentComponent } from '../../assets/wise5/authoring
 import { ConfigureAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component';
 import { ProjectListComponent } from '../../assets/wise5/authoringTool/project-list/project-list.component';
 import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-project/add-project.component';
+import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-projec
     NodeIconChooserDialog,
     NotebookAuthoringComponent,
     ProjectInfoAuthoringComponent,
+    ProjectAuthoringComponent,
     RecoveryAuthoringComponent,
     RequiredErrorLabelComponent,
     RubricAuthoringComponent,

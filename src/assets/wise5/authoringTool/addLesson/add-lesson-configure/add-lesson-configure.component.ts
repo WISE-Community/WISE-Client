@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { UpgradeModule } from '@angular/upgrade/static';
 
 @Component({
+  selector: 'add-lesson-configure',
   styleUrls: ['./add-lesson-configure.component.scss'],
   templateUrl: './add-lesson-configure.component.html'
 })

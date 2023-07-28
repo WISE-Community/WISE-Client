@@ -9,7 +9,7 @@ import './components/shared/shared';
 import './importComponent/importComponentModule';
 import './importStep/importStepModule';
 import './node/node-authoring.module';
-import './project/project-authoring.module';
+import './project-authoring/project-authoring.module';
 import './structure/structureAuthoringModule';
 import { ProjectLibraryService } from '../services/projectLibraryService';
 import { AuthoringToolComponent } from '../authoringTool/authoringToolComponent';

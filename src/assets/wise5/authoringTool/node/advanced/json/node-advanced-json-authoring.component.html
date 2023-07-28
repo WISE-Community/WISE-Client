@@ -1,10 +1,13 @@
-<mat-form-field fxFlex appearance="outline">
-  <mat-label i18n>Edit Step JSON</mat-label>
-  <textarea
-    class="mat-body-2"
-    matInput
-    cdkTextareaAutosize
-    [(ngModel)]="nodeContentJSONString"
-    (ngModelChange)="nodeContentChanged.next($event)"
-  ></textarea>
-</mat-form-field>
+<node-advanced-authoring></node-advanced-authoring>
+<div>
+  <mat-form-field fxFlex appearance="outline">
+    <mat-label i18n>Edit Step JSON</mat-label>
+    <textarea
+      class="mat-body-2"
+      matInput
+      cdkTextareaAutosize
+      [(ngModel)]="nodeContentJSONString"
+      (ngModelChange)="nodeContentChanged.next($event)"
+    ></textarea>
+  </mat-form-field>
+</div>

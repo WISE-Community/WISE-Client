@@ -16,6 +16,14 @@ import { ChooseStructureLocationComponent } from './choose-structure-location/ch
     PeerReviewAndRevisionComponent,
     SelfDirectedInvestigationComponent
   ],
-  imports: [StudentTeacherCommonModule]
+  imports: [StudentTeacherCommonModule],
+  exports: [
+    ChooseStructureComponent,
+    ChooseStructureLocationComponent,
+    JigsawComponent,
+    KiCycleUsingOerComponent,
+    PeerReviewAndRevisionComponent,
+    SelfDirectedInvestigationComponent
+  ]
 })
 export class StructureAuthoringModule {}

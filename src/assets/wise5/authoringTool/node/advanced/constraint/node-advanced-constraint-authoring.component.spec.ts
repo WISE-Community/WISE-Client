@@ -11,6 +11,8 @@ import { TeacherWebSocketService } from '../../../../services/teacherWebSocketSe
 import { NodeAdvancedConstraintAuthoringComponent } from './node-advanced-constraint-authoring.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { NodeAdvancedAuthoringComponent } from '../node-advanced-authoring/node-advanced-authoring.component';
 
 let component: NodeAdvancedConstraintAuthoringComponent;
 let fixture: ComponentFixture<NodeAdvancedConstraintAuthoringComponent>;
@@ -24,9 +26,10 @@ describe('NodeAdvancedConstraintAuthoringComponent', () => {
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
-        StudentTeacherCommonServicesModule
+        StudentTeacherCommonServicesModule,
+        UpgradeModule
       ],
-      declarations: [NodeAdvancedConstraintAuthoringComponent],
+      declarations: [NodeAdvancedAuthoringComponent, NodeAdvancedConstraintAuthoringComponent],
       providers: [
         AchievementService,
         ClassroomStatusService,
@@ -38,6 +41,13 @@ describe('NodeAdvancedConstraintAuthoringComponent', () => {
   });
 
   beforeEach(() => {
+    TestBed.inject(UpgradeModule).$injector = {
+      get: () => {
+        return {
+          go: (route: string, params: any) => {}
+        };
+      }
+    };
     fixture = TestBed.createComponent(NodeAdvancedConstraintAuthoringComponent);
     component = fixture.componentInstance;
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue(

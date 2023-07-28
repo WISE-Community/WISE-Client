@@ -53,12 +53,24 @@ export class NodeAuthoringComponent implements OnInit {
   ngOnInit(): void {
     this.$state = this.upgrade.$injector.get('$state');
     this.nodeId = this.upgrade.$injector.get('$stateParams').nodeId;
+    this.setup(this.nodeId);
+    this.dataService.setCurrentNodeByNodeId(this.nodeId);
+    this.subscribeToShowSubmitButtonValueChanges();
+    this.subscribeToNodeChanges();
+    this.subscribeToCurrentNodeChanged();
+  }
+
+  private setup(nodeId: string): void {
+    this.nodeId = nodeId;
     this.node = this.projectService.getNode(this.nodeId);
     this.isGroupNode = this.projectService.isGroupNode(this.nodeId);
-    this.dataService.setCurrentNodeByNodeId(this.nodeId);
     this.nodeJson = this.projectService.getNodeById(this.nodeId);
     this.nodePosition = this.projectService.getNodePositionById(this.nodeId);
     this.components = this.projectService.getComponents(this.nodeId);
+    this.componentsToChecked = {};
+    this.componentsToExpanded = {};
+    this.isAnyComponentSelected = false;
+    this.undoStack = [];
 
     // Keep a copy of the node at the beginning of this node authoring session in case we need
     // to roll back if the user decides to cancel/revert all the changes.
@@ -72,12 +84,10 @@ export class NodeAuthoringComponent implements OnInit {
     } else {
       this.scrollToTopOfPage();
     }
-    this.subscribeToShowSubmitButtonValueChanges();
-    this.subscribeToNodeChanges();
   }
 
   ngOnDestroy(): void {
-    if (this.$state.current.name !== 'root.at.project.node') {
+    if (!this.$state.current.name.startsWith('root.at.project.node')) {
       this.dataService.setCurrentNode(null);
     }
     this.subscriptions.unsubscribe();
@@ -108,6 +118,16 @@ export class NodeAuthoringComponent implements OnInit {
     this.subscriptions.add(
       this.projectService.nodeChanged$.subscribe((doParseProject) => {
         this.authoringViewNodeChanged(doParseProject);
+      })
+    );
+  }
+
+  private subscribeToCurrentNodeChanged(): void {
+    this.subscriptions.add(
+      this.dataService.currentNodeChanged$.subscribe(({ currentNode }) => {
+        if (currentNode != null) {
+          this.setup(currentNode.id);
+        }
       })
     );
   }
@@ -263,6 +283,7 @@ export class NodeAuthoringComponent implements OnInit {
   private afterDeleteComponent(componentIdAndTypes: any[]): void {
     for (const componentIdAndType of componentIdAndTypes) {
       delete this.componentsToChecked[componentIdAndType.componentId];
+      delete this.componentsToExpanded[componentIdAndType.componentId];
     }
     this.updateIsAnyComponentSelected();
     this.checkIfNeedToShowNodeSaveOrNodeSubmitButtons();

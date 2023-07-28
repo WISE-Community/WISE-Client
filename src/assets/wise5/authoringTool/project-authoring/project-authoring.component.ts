@@ -1,5 +1,4 @@
-'use strict';
-
+import { Component } from '@angular/core';
 import { ConfigService } from '../../services/configService';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { DeleteNodeService } from '../../services/deleteNodeService';
@@ -12,28 +11,34 @@ import { Subscription } from 'rxjs';
 import { Message } from '@stomp/stompjs';
 import { RxStomp } from '@stomp/rx-stomp';
 import { temporarilyHighlightElement } from '../../common/dom/dom';
+import { UpgradeModule } from '@angular/upgrade/static';
 
-class ProjectAuthoringController {
-  $translate: any;
+@Component({
+  selector: 'project-authoring',
+  templateUrl: './project-authoring.component.html',
+  styleUrls: ['./project-authoring.component.scss']
+})
+export class ProjectAuthoringComponent {
+  activityNodeSelected: boolean = false;
   authors: string[] = [];
-  projectId: number;
-  items: any;
-  nodeIds: [];
-  nodeId: string;
-  projectTitle: string;
+  copyMode: boolean;
+  idToNode: any;
   inactiveGroupNodes: any[];
-  inactiveStepNodes: any[];
   inactiveNodes: any[];
+  inactiveStepNodes: any[];
   insertGroupMode: boolean;
   insertNodeMode: boolean;
-  idToNode: any;
-  copyMode: boolean;
-  nodeToAdd: any;
-  stepNodeSelected: boolean = false;
-  activityNodeSelected: boolean = false;
+  items: any;
   moveMode: boolean;
+  nodeId: string;
+  nodeIds: [];
+  nodeToAdd: any;
+  projectId: number;
+  projectTitle: string;
   projectURL: string;
   rxStomp: RxStomp;
+  $state: any;
+  stepNodeSelected: boolean = false;
   subscriptions: Subscription = new Subscription();
 
   /*
@@ -53,40 +58,27 @@ class ProjectAuthoringController {
     '#b3b3b3'
   ];
 
-  static $inject = [
-    '$filter',
-    '$mdDialog',
-    '$state',
-    '$timeout',
-    '$transitions',
-    '$window',
-    'ConfigService',
-    'CopyNodesService',
-    'DeleteNodeService',
-    'MoveNodesService',
-    'ProjectService',
-    'TeacherDataService'
-  ];
-
   constructor(
-    $filter,
-    private $mdDialog,
-    private $state,
-    private $timeout,
-    private $transitions,
-    private $window,
     private ConfigService: ConfigService,
     private CopyNodesService: CopyNodesService,
     private DeleteNodeService: DeleteNodeService,
     private MoveNodesService: MoveNodesService,
     private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService
-  ) {
-    this.$translate = $filter('translate');
-  }
+    private TeacherDataService: TeacherDataService,
+    private upgrade: UpgradeModule
+  ) {}
 
-  $onInit() {
-    this.items = this.ProjectService.idToOrder;
+  ngOnInit(): void {
+    this.$state = this.upgrade.$injector.get('$state');
+    const $stateParams = this.upgrade.$injector.get('$stateParams');
+    this.projectId = $stateParams.projectId;
+    this.items = Object.entries(this.ProjectService.idToOrder)
+      .map((entry: any) => {
+        return { key: entry[0], order: entry[1].order };
+      })
+      .sort((a: any, b: any) => {
+        return a.order - b.order;
+      });
     this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds();
     this.inactiveGroupNodes = this.ProjectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.ProjectService.getInactiveStepNodes();
@@ -96,19 +88,6 @@ class ProjectAuthoringController {
     this.activityNodeSelected = false;
     this.subscribeToCurrentAuthors(this.projectId);
     this.projectURL = window.location.origin + this.ConfigService.getConfigParam('projectURL');
-    this.$transitions.onSuccess({}, ($transition) => {
-      const stateName = $transition.$to().name;
-      if (stateName === 'root.at.project') {
-        this.saveEvent('projectHomeViewOpened', 'Navigation');
-      } else if (stateName === 'root.at.project.asset') {
-        this.saveEvent('assetsViewOpened', 'Navigation');
-      } else if (stateName === 'root.at.project.info') {
-        this.saveEvent('projectInfoViewOpened', 'Navigation');
-      } else if (stateName === 'root.at.project.notebook') {
-        this.saveEvent('notebookViewOpened', 'Navigation');
-      }
-    });
-
     this.subscriptions.add(
       this.ProjectService.refreshProject$.subscribe(() => {
         this.refreshProject();
@@ -123,19 +102,12 @@ class ProjectAuthoringController {
 
     this.saveEvent('projectOpened', 'Navigation');
 
-    /*
-     * When the project is loaded from the project list view, we display a
-     * "Loading Project" message using the mdDialog. Now that the project
-     * has loaded, we will hide the message.
-     */
-    this.$mdDialog.hide();
-
-    this.$window.onbeforeunload = (event) => {
+    window.onbeforeunload = (event) => {
       this.endProjectAuthoringSession();
     };
   }
 
-  $onDestroy() {
+  ngOnDestroy(): void {
     this.endProjectAuthoringSession();
     this.subscriptions.unsubscribe();
   }
@@ -145,55 +117,39 @@ class ProjectAuthoringController {
     this.ProjectService.notifyAuthorProjectEnd(this.projectId);
   }
 
-  previewProject(): void {
+  protected previewProject(): void {
     this.saveEvent('projectPreviewed', 'Navigation', { constraints: true });
     window.open(`${this.ConfigService.getConfigParam('previewProjectURL')}`);
   }
 
-  saveProject() {
-    try {
-      // if projectJSONString is bad json,
-      // an exception will be thrown and it will not save.
-      this.ProjectService.saveProject();
-    } catch (error) {
-      // TODO: i18n
-      alert('Invalid JSON. Please check syntax. Aborting save.');
-      return;
-    }
-  }
-
-  getNodePositionById(nodeId) {
+  protected getNodePositionById(nodeId: string): string {
     return this.ProjectService.getNodePositionById(nodeId);
   }
 
-  getComponents(nodeId: string): any[] {
-    return this.ProjectService.getComponents(nodeId);
-  }
-
-  getNodeTitle(nodeId: string): string {
+  protected getNodeTitle(nodeId: string): string {
     return this.ProjectService.getNodeTitle(nodeId);
   }
 
-  isGroupNode(nodeId) {
+  protected isGroupNode(nodeId: string): boolean {
     return this.ProjectService.isGroupNode(nodeId);
   }
 
-  nodeClicked(nodeId) {
+  protected nodeClicked(nodeId: string): void {
     this.unselectAllItems();
     this.TeacherDataService.setCurrentNodeByNodeId(nodeId);
   }
 
-  constraintIconClicked(nodeId) {
+  protected constraintIconClicked(nodeId: string): void {
     this.TeacherDataService.setCurrentNodeByNodeId(nodeId);
     this.$state.go('root.at.project.node.advanced.constraint', { nodeId: nodeId });
   }
 
-  branchIconClicked(nodeId) {
+  protected branchIconClicked(nodeId: string): void {
     this.TeacherDataService.setCurrentNodeByNodeId(nodeId);
     this.$state.go('root.at.project.node.advanced.path', { nodeId: nodeId });
   }
 
-  insertInside(nodeId) {
+  protected insertInside(nodeId: string): void {
     // TODO check that we are inserting into a group
     if (this.moveMode) {
       this.handleMoveModeInsert(nodeId, 'inside');
@@ -202,7 +158,7 @@ class ProjectAuthoringController {
     }
   }
 
-  insertAfter(nodeId) {
+  protected insertAfter(nodeId: string): void {
     if (this.moveMode) {
       this.handleMoveModeInsert(nodeId, 'after');
     } else if (this.copyMode) {
@@ -215,7 +171,7 @@ class ProjectAuthoringController {
    * @param nodeId insert the new node inside or after this node id
    * @param moveTo whether to insert 'inside' or 'after' the nodeId parameter
    */
-  handleMoveModeInsert(nodeId, moveTo) {
+  private handleMoveModeInsert(nodeId: string, moveTo: string): void {
     let selectedNodeIds = this.getSelectedNodeIds();
     if (selectedNodeIds != null && selectedNodeIds.indexOf(nodeId) != -1) {
       /*
@@ -223,9 +179,9 @@ class ProjectAuthoringController {
        * itself so we will not allow that
        */
       if (selectedNodeIds.length == 1) {
-        alert(this.$translate('youAreNotAllowedToInsertTheSelectedItemAfterItself'));
+        alert($localize`You are not allowed to insert the selected item after itself.`);
       } else if (selectedNodeIds.length > 1) {
-        alert(this.$translate('youAreNotAllowedToInsertTheSelectedItemsAfterItself'));
+        alert($localize`You are not allowed to insert the selected items after itself.`);
       }
     } else {
       let movedNodes = [];
@@ -282,7 +238,7 @@ class ProjectAuthoringController {
    * @param nodeId insert the new node inside or after this node id
    * @param moveTo whether to insert 'inside' or 'after' the nodeId parameter
    */
-  handleCopyModeInsert(nodeId, moveTo) {
+  private handleCopyModeInsert(nodeId: string, moveTo: string): void {
     let selectedNodeIds = this.getSelectedNodeIds();
     let newNodes = [];
     if (moveTo === 'inside') {
@@ -334,27 +290,27 @@ class ProjectAuthoringController {
     });
   }
 
-  copy() {
+  protected copy(): void {
     // make sure there is at least one item selected
     let selectedNodeIds = this.getSelectedNodeIds();
     if (selectedNodeIds == null || selectedNodeIds.length == 0) {
-      alert(this.$translate('pleaseSelectAnItemToCopyAndThenClickTheCopyButtonAgain'));
+      alert($localize`Please select an item to copy and then click the "Copy" button again.`);
     } else {
       let selectedItemTypes = this.getSelectedItemTypes();
       if (selectedItemTypes.length === 1 && selectedItemTypes[0] === 'node') {
         this.insertNodeMode = true;
         this.copyMode = true;
       } else if (selectedItemTypes.length === 1 && selectedItemTypes[0] === 'group') {
-        alert(this.$translate('youCannotCopyActivitiesAtThisTime'));
+        alert($localize`You cannot copy lessons at this time.`);
       }
     }
   }
 
-  move() {
+  protected move(): void {
     // make sure there is at least one item selected
     let selectedNodeIds = this.getSelectedNodeIds();
     if (selectedNodeIds == null || selectedNodeIds.length == 0) {
-      alert(this.$translate('pleaseSelectAnItemToMoveAndThenClickTheMoveButtonAgain'));
+      alert($localize`Please select an item to move and then click the "Move" button again.`);
     } else {
       let selectedItemTypes = this.getSelectedItemTypes();
       if (selectedItemTypes.length === 1 && selectedItemTypes[0] === 'node') {
@@ -367,22 +323,20 @@ class ProjectAuthoringController {
     }
   }
 
-  deleteSelectedNodes() {
+  protected deleteSelectedNodes(): void {
     const selectedNodeIds = this.getSelectedNodeIds();
     let confirmMessage = '';
     if (selectedNodeIds.length === 1) {
-      confirmMessage = this.$translate('areYouSureYouWantToDeleteTheSelectedItem');
+      confirmMessage = $localize`Are you sure you want to delete the selected item?`;
     } else {
-      confirmMessage = this.$translate('areYouSureYouWantToDeleteTheXSelectedItems', {
-        numItems: selectedNodeIds.length
-      });
+      confirmMessage = $localize`Are you sure you want to delete the ${selectedNodeIds.length} selected items?`;
     }
     if (confirm(confirmMessage)) {
       this.deleteNodesById(selectedNodeIds);
     }
   }
 
-  deleteNodesById(nodeIds) {
+  private deleteNodesById(nodeIds: string[]): void {
     let deletedStartNodeId = false;
     const stepsDeleted = [];
     const activitiesDeleted = [];
@@ -425,13 +379,13 @@ class ProjectAuthoringController {
     this.refreshProject();
   }
 
-  getSelectedNodeIds() {
+  private getSelectedNodeIds(): string[] {
     const selectedNodeIds = [];
     angular.forEach(
       this.items,
-      function (value, key) {
-        if (value.checked) {
-          selectedNodeIds.push(key);
+      function (item) {
+        if (item.checked) {
+          selectedNodeIds.push(item.key);
         }
       },
       selectedNodeIds
@@ -451,13 +405,13 @@ class ProjectAuthoringController {
    * Get the distinct types of the selected items, both active and inactive.
    * @returns an array of item types. possible items are group or node.
    */
-  getSelectedItemTypes() {
+  private getSelectedItemTypes(): string[] {
     const selectedItemTypes = [];
     angular.forEach(
       this.items,
-      function (value, key) {
-        if (value.checked) {
-          let node = this.ProjectService.getNodeById(key);
+      function (item) {
+        if (item.checked) {
+          let node = this.ProjectService.getNodeById(item.key);
           if (node != null) {
             let nodeType = node.type;
             if (selectedItemTypes.indexOf(nodeType) == -1) {
@@ -482,7 +436,7 @@ class ProjectAuthoringController {
     return selectedItemTypes;
   }
 
-  unselectAllItems() {
+  private unselectAllItems(): void {
     angular.forEach(this.items, function (value, key) {
       value.checked = false;
     });
@@ -500,15 +454,15 @@ class ProjectAuthoringController {
     this.$state.go('root.at.project.add-lesson.configure');
   }
 
-  createNewStep() {
+  protected createNewStep(): void {
     this.$state.go('root.at.project.add-node.choose-template');
   }
 
-  addStructure() {
+  protected addStructure(): void {
     this.$state.go('root.at.project.structure.choose');
   }
 
-  cancelMove() {
+  protected cancelMove(): void {
     this.insertGroupMode = false;
     this.insertNodeMode = false;
     this.nodeToAdd = null;
@@ -517,7 +471,7 @@ class ProjectAuthoringController {
     this.unselectAllItems();
   }
 
-  updateStartNodeId() {
+  private updateStartNodeId(): void {
     let newStartNodeId = null;
     let startGroupId = this.ProjectService.getStartGroupId();
     let node = this.ProjectService.getNodeById(startGroupId);
@@ -546,9 +500,15 @@ class ProjectAuthoringController {
     }
   }
 
-  refreshProject() {
+  private refreshProject(): void {
     this.ProjectService.parseProject();
-    this.items = this.ProjectService.idToOrder;
+    this.items = Object.entries(this.ProjectService.idToOrder)
+      .map((entry: any) => {
+        return { key: entry[0], order: entry[1].order };
+      })
+      .sort((a: any, b: any) => {
+        return a.order - b.order;
+      });
     this.inactiveGroupNodes = this.ProjectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.ProjectService.getInactiveStepNodes();
     this.inactiveNodes = this.ProjectService.getInactiveNodes();
@@ -556,23 +516,23 @@ class ProjectAuthoringController {
     this.unselectAllItems();
   }
 
-  importStep() {
+  protected importStep(): void {
     this.$state.go('root.at.project.import-step.choose-step');
   }
 
-  goToAdvancedAuthoring() {
+  protected goToAdvancedAuthoring(): void {
     this.$state.go('root.at.project.advanced');
   }
 
-  isNodeInAnyBranchPath(nodeId) {
+  protected isNodeInAnyBranchPath(nodeId: string): boolean {
     return this.ProjectService.isNodeInAnyBranchPath(nodeId);
   }
 
-  goBackToProjectList() {
+  protected goBackToProjectList(): void {
     this.$state.go('root.at.main');
   }
 
-  scrollToBottomOfPage() {
+  private scrollToBottomOfPage(): void {
     $('#content').animate(
       {
         scrollTop: $('#bottom').prop('offsetTop')
@@ -587,8 +547,8 @@ class ProjectAuthoringController {
    * @param doScrollToNewNodes if true, scroll to the first new node added
    * TODO: can we remove the null checks: ensure that newNodes is never null?
    */
-  temporarilyHighlightNewNodes(newNodes, doScrollToNewNodes = false) {
-    this.$timeout(() => {
+  private temporarilyHighlightNewNodes(newNodes, doScrollToNewNodes = false): void {
+    setTimeout(() => {
       if (newNodes != null && newNodes.length > 0) {
         for (let newNode of newNodes) {
           if (newNode != null) {
@@ -618,7 +578,7 @@ class ProjectAuthoringController {
    * @param data (optional) an object that contains more specific data about
    * the event
    */
-  saveEvent(eventName, category, data = null) {
+  private saveEvent(eventName: string, category: string, data: any = null): void {
     let context = 'AuthoringTool';
     let nodeId = null;
     let componentId = null;
@@ -643,7 +603,7 @@ class ProjectAuthoringController {
    * @return If the node is in a branch path it will return a color. If the
    * node is not in a branch path it will return null.
    */
-  getStepBackgroundColor(nodeId) {
+  protected getStepBackgroundColor(nodeId: string): string {
     let color = null;
     let branchPathLetter = this.ProjectService.getBranchPathLetter(nodeId);
     if (branchPathLetter != null) {
@@ -659,7 +619,7 @@ class ProjectAuthoringController {
     return color;
   }
 
-  getNumberOfInactiveGroups() {
+  protected getNumberOfInactiveGroups(): number {
     let count = 0;
     for (let n = 0; n < this.inactiveNodes.length; n++) {
       let inactiveNode = this.inactiveNodes[n];
@@ -678,7 +638,7 @@ class ProjectAuthoringController {
    * @return The number of inactive steps (not including the inactive steps that
    * are in an inactive group).
    */
-  getNumberOfInactiveSteps() {
+  protected getNumberOfInactiveSteps(): number {
     let count = 0;
     for (let n = 0; n < this.inactiveNodes.length; n++) {
       let inactiveNode = this.inactiveNodes[n];
@@ -694,7 +654,7 @@ class ProjectAuthoringController {
     return count;
   }
 
-  getParentGroup(nodeId) {
+  protected getParentGroup(nodeId: string): any {
     return this.ProjectService.getParentGroup(nodeId);
   }
 
@@ -707,15 +667,15 @@ class ProjectAuthoringController {
    * any step nodes selected, we will disable all the activity node check boxes.
    * @param nodeId The node id of the node that was clicked.
    */
-  projectItemClicked(nodeId) {
+  protected projectItemClicked(): void {
     this.stepNodeSelected = false;
     this.activityNodeSelected = false;
 
     // this will check the items that are used in the project
-    for (let nodeId in this.items) {
-      let node = this.items[nodeId];
-      if (node.checked) {
-        if (this.isGroupNode(nodeId)) {
+    for (let item of this.items) {
+      // let node = this.items[item];
+      if (item.checked) {
+        if (this.isGroupNode(item.key)) {
           this.activityNodeSelected = true;
         } else {
           this.stepNodeSelected = true;
@@ -736,27 +696,27 @@ class ProjectAuthoringController {
     }
   }
 
-  isBranchPoint(nodeId) {
+  protected isBranchPoint(nodeId: string): boolean {
     return this.ProjectService.isBranchPoint(nodeId);
   }
 
-  getNumberOfBranchPaths(nodeId) {
+  protected getNumberOfBranchPaths(nodeId: string): number {
     return this.ProjectService.getNumberOfBranchPaths(nodeId);
   }
 
-  getBranchCriteriaDescription(nodeId) {
+  protected getBranchCriteriaDescription(nodeId: string): string {
     return this.ProjectService.getBranchCriteriaDescription(nodeId);
   }
 
-  nodeHasConstraint(nodeId) {
+  protected nodeHasConstraint(nodeId: string): boolean {
     return this.ProjectService.nodeHasConstraint(nodeId);
   }
 
-  getNumberOfConstraintsOnNode(nodeId) {
+  protected getNumberOfConstraintsOnNode(nodeId: string): number {
     return this.ProjectService.getConstraintsOnNode(nodeId).length;
   }
 
-  getConstraintDescriptions(nodeId) {
+  protected getConstraintDescriptions(nodeId: string): string {
     let constraintDescriptions = '';
     const constraints = this.ProjectService.getConstraintsOnNode(nodeId);
     for (let c = 0; c < constraints.length; c++) {
@@ -767,11 +727,11 @@ class ProjectAuthoringController {
     return constraintDescriptions;
   }
 
-  nodeHasRubric(nodeId: string): boolean {
+  protected nodeHasRubric(nodeId: string): boolean {
     return this.ProjectService.nodeHasRubric(nodeId);
   }
 
-  hasSelectedNodes() {
+  protected hasSelectedNodes(): boolean {
     return this.getSelectedNodeIds().length > 0;
   }
 
@@ -789,11 +749,3 @@ class ProjectAuthoringController {
     });
   }
 }
-
-export const ProjectAuthoringComponent = {
-  templateUrl: `/assets/wise5/authoringTool/project/projectAuthoring.html`,
-  controller: ProjectAuthoringController,
-  bindings: {
-    projectId: '<'
-  }
-};

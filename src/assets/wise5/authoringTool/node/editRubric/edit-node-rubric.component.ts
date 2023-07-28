@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wise-link';
 import { ConfigService } from '../../../services/configService';
-import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UpgradeModule } from '@angular/upgrade/static';
 
@@ -16,12 +15,11 @@ export class EditNodeRubricComponent implements OnInit {
   constructor(
     private configService: ConfigService,
     private projectService: TeacherProjectService,
-    private dataService: TeacherDataService,
     private upgrade: UpgradeModule
   ) {}
 
   ngOnInit(): void {
-    this.node = this.projectService.getNodeById(this.dataService.getCurrentNodeId());
+    this.node = this.projectService.getNodeById(this.upgrade.$injector.get('$stateParams').nodeId);
     this.rubric = this.projectService.replaceAssetPaths(replaceWiseLinks(this.node.rubric));
   }
 
