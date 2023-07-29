@@ -37,6 +37,8 @@ import { ChooseAutomatedAssessmentComponent } from '../../assets/wise5/authoring
 import { ConfigureAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component';
 import { ProjectListComponent } from '../../assets/wise5/authoringTool/project-list/project-list.component';
 import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-project/add-project.component';
+import { AuthoringToolBarComponent } from '../../assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component';
+import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponents/stepTools/step-tools.module';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-projec
     AddProjectComponent,
     AddYourOwnNode,
     AdvancedProjectAuthoringComponent,
+    AuthoringToolBarComponent,
     CardSelectorComponent,
     ChooseAutomatedAssessmentComponent,
     ChooseComponentLocationComponent,
@@ -78,6 +81,7 @@ import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-projec
     PreviewComponentModule,
     ProjectAssetAuthoringModule,
     RouterModule,
+    StepToolsModule,
     StructureAuthoringModule,
     WiseTinymceEditorModule
   ]

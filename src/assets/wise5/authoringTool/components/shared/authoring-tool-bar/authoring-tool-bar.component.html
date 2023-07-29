@@ -1,0 +1,28 @@
+<mat-toolbar class="md-whiteframe-z1 toolbar">
+  <div class="toolbar__tools" fxLayout="row wrap" fxLayoutAlign="start center">
+    <button mat-icon-button aria-label="Authoring Tool Menu" i18n-aria-label (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span *ngIf="!showStepTools" class="toolbar__title">{{ viewName }}</span>
+    <step-tools *ngIf="showStepTools"></step-tools>
+    <div fxFlex></div>
+    <span *ngIf="isJSONValid" class="green" fxLayoutAlign="start center">
+      <mat-icon>done</mat-icon>
+      <span>JSON Valid</span></span
+    >
+    <span *ngIf="isJSONValid === false" class="red" fxLayoutAlign="start center">
+      <mat-icon>clear</mat-icon>
+      <span>JSON Invalid</span>
+    </span>
+    <mat-spinner
+      *ngIf="globalMessage.isProgressIndicatorVisible"
+      class="spinner"
+      [mode]="'indeterminate'"
+      [diameter]="24"
+    >
+    </mat-spinner>
+    <span *ngIf="globalMessage.text" class="component__actions__info md-caption global-message">
+      {{ globalMessage.text }} {{ globalMessage.time | date: 'medium' }}
+    </span>
+  </div>
+</mat-toolbar>

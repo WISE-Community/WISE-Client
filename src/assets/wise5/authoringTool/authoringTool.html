@@ -25,10 +25,10 @@
   ></at-top-bar>
   <at-toolbar
     ng-if="$ctrl.showToolbar"
-    number-project="$ctrl.numberProject"
-    show-step-tools="$ctrl.showStepTools"
-    view-name="$ctrl.currentViewName"
-    on-menu-toggle="$ctrl.toggleMenu()"
+    [number-project]="$ctrl.numberProject"
+    [show-step-tools]="$ctrl.showStepTools"
+    [view-name]="$ctrl.currentViewName"
+    (on-menu-toggle)="$ctrl.toggleMenu()"
   ></at-toolbar>
   <md-sidenav md-component-id="monitorSidenav" md-is-open="$ctrl.isMenuOpen" md-whiteframe="4">
     <at-main-menu [state]="$ctrl.$state" [title]="$ctrl.title" [views]="$ctrl.views"></at-main-menu>
