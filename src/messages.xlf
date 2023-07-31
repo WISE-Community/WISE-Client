@@ -9338,6 +9338,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="d9921e33c659c824a3c39062f76cb572394ff373" datatype="html">
+        <source>Authoring Tool Menu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="f55484916445674af355400e564bd149ea564f7d" datatype="html">
         <source>Project Info</source>
         <context-group purpose="location">
