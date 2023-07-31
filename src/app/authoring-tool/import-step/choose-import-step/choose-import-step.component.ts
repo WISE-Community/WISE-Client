@@ -5,6 +5,7 @@ import { ProjectLibraryService } from '../../../../assets/wise5/services/project
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
 
 @Component({
+  selector: 'choose-import-step',
   styleUrls: ['choose-import-step.component.scss'],
   templateUrl: 'choose-import-step.component.html'
 })

@@ -24,6 +24,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSelectModule,
     MatTooltipModule,
     NgxFilesizeModule
-  ]
+  ],
+  exports: [ProjectAssetAuthoringComponent]
 })
 export class ProjectAssetAuthoringModule {}

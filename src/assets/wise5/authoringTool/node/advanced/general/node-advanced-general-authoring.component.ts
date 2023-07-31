@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { UpgradeModule } from '@angular/upgrade/static';
 
 @Component({
   selector: 'node-advanced-general-authoring',
@@ -9,16 +9,13 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 export class NodeAdvancedGeneralAuthoringComponent implements OnInit {
   node: any;
 
-  constructor(
-    private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService
-  ) {}
+  constructor(private projectService: TeacherProjectService, private upgrade: UpgradeModule) {}
 
   ngOnInit() {
-    this.node = this.TeacherDataService.getCurrentNode();
+    this.node = this.projectService.getNodeById(this.upgrade.$injector.get('$stateParams').nodeId);
   }
 
   saveProject() {
-    return this.ProjectService.saveProject();
+    return this.projectService.saveProject();
   }
 }

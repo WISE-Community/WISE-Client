@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { copy } from '../../../../common/object/object';
 import { ConfigService } from '../../../../services/configService';
 import { TagService } from '../../../../services/tagService';
-import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { UpgradeModule } from '@angular/upgrade/static';
 
 @Component({
   selector: 'node-advanced-branch-authoring',
@@ -28,7 +28,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     private ConfigService: ConfigService,
     private TagService: TagService,
     private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService
+    private upgrade: UpgradeModule
   ) {
     this.branchCriteria = [
       {
@@ -55,7 +55,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.nodeId = this.TeacherDataService.getCurrentNodeId();
+    this.nodeId = this.upgrade.$injector.get('$stateParams').nodeId;
     this.node = this.ProjectService.getNodeById(this.nodeId);
     this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds(true);
     this.populateBranchAuthoring();

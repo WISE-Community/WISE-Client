@@ -5,6 +5,7 @@ import { generateRandomKey } from './string/string';
 
 export class Node {
   components: any[] = [];
+  constraints: any[] = [];
   icons: any;
   icon: any;
   id: string;

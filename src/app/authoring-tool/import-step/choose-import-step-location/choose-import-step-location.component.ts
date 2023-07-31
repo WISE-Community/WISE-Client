@@ -6,6 +6,7 @@ import { InsertNodesService } from '../../../../assets/wise5/services/insertNode
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
 
 @Component({
+  selector: 'choose-import-step-location',
   styleUrls: ['choose-import-step-location.component.scss'],
   templateUrl: 'choose-import-step-location.component.html'
 })

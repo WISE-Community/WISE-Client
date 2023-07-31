@@ -40,6 +40,16 @@ describe('EditNodeRubricComponent', () => {
   });
 
   beforeEach(() => {
+    TestBed.inject(UpgradeModule).$injector = {
+      get: () => {
+        return {
+          current: {
+            name: 'root.at.project.node'
+          },
+          go: (route: string, params: any) => {}
+        };
+      }
+    };
     fixture = TestBed.createComponent(EditNodeRubricComponent);
     component = fixture.componentInstance;
     spyOn(TestBed.inject(TeacherDataService), 'getCurrentNodeId').and.returnValue(nodeId1);

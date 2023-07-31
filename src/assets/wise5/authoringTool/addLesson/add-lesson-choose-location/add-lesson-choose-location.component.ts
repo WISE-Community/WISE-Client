@@ -4,6 +4,7 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
+  selector: 'add-lesson-choose-location',
   templateUrl: './add-lesson-choose-location.component.html',
   styleUrls: ['./add-lesson-choose-location.component.scss']
 })

@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 import { ComponentTypeService } from '../../../services/componentTypeService';
 
 @Component({
+  selector: 'add-your-own-node',
   styleUrls: ['add-your-own-node.component.scss'],
   templateUrl: 'add-your-own-node.component.html'
 })

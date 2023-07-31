@@ -1,14 +1,14 @@
 import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
-import { AdvancedProjectAuthoringComponent } from '../../authoringTool/advanced/advanced-project-authoring.component';
+import { AdvancedProjectAuthoringComponent } from '../advanced/advanced-project-authoring.component';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
-import { ProjectAuthoringComponent } from '../../authoringTool/project/projectAuthoringComponent';
 import { RecoveryAuthoringComponent } from '../recovery-authoring/recovery-authoring.component';
 import { ConcurrentAuthorsMessageComponent } from '../concurrent-authors-message/concurrent-authors-message.component';
 import { NotebookAuthoringComponent } from '../notebook-authoring/notebook-authoring.component';
 import { MilestonesAuthoringComponent } from '../milestones-authoring/milestones-authoring.component';
 import { ProjectAssetAuthoringComponent } from '../project-asset-authoring/project-asset-authoring.component';
 import { ProjectInfoAuthoringComponent } from '../project-info-authoring/project-info-authoring.component';
+import { ProjectAuthoringComponent } from './project-authoring.component';
 
 export default angular
   .module('projectAuthoringModule', [])
@@ -24,7 +24,10 @@ export default angular
     'projectAssetAuthoringComponent',
     downgradeComponent({ component: ProjectAssetAuthoringComponent })
   )
-  .component('projectAuthoringComponent', ProjectAuthoringComponent)
+  .directive(
+    'projectAuthoringComponent',
+    downgradeComponent({ component: ProjectAuthoringComponent })
+  )
   .directive(
     'projectInfoAuthoringComponent',
     downgradeComponent({ component: ProjectInfoAuthoringComponent })
