@@ -54,12 +54,12 @@ export class ProjectAuthoringComponent {
   ];
 
   constructor(
-    private ConfigService: ConfigService,
-    private CopyNodesService: CopyNodesService,
-    private DeleteNodeService: DeleteNodeService,
-    private MoveNodesService: MoveNodesService,
-    private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService,
+    private configService: ConfigService,
+    private copyNodesService: CopyNodesService,
+    private deleteNodeService: DeleteNodeService,
+    private moveNodesService: MoveNodesService,
+    private projectService: TeacherProjectService,
+    private dataService: TeacherDataService,
     private upgrade: UpgradeModule
   ) {}
 
@@ -67,28 +67,28 @@ export class ProjectAuthoringComponent {
     this.$state = this.upgrade.$injector.get('$state');
     const $stateParams = this.upgrade.$injector.get('$stateParams');
     this.projectId = $stateParams.projectId;
-    this.items = Object.entries(this.ProjectService.idToOrder)
+    this.items = Object.entries(this.projectService.idToOrder)
       .map((entry: any) => {
         return { key: entry[0], order: entry[1].order };
       })
       .sort((a: any, b: any) => {
         return a.order - b.order;
       });
-    this.inactiveGroupNodes = this.ProjectService.getInactiveGroupNodes();
-    this.inactiveStepNodes = this.ProjectService.getInactiveStepNodes();
-    this.inactiveNodes = this.ProjectService.getInactiveNodes();
-    this.idToNode = this.ProjectService.getIdToNode();
+    this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
+    this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
+    this.inactiveNodes = this.projectService.getInactiveNodes();
+    this.idToNode = this.projectService.getIdToNode();
     this.stepNodeSelected = false;
     this.activityNodeSelected = false;
     this.subscribeToCurrentAuthors(this.projectId);
     this.subscriptions.add(
-      this.ProjectService.refreshProject$.subscribe(() => {
+      this.projectService.refreshProject$.subscribe(() => {
         this.refreshProject();
       })
     );
 
     this.subscriptions.add(
-      this.ProjectService.scrollToBottomOfPage$.subscribe(() => {
+      this.projectService.scrollToBottomOfPage$.subscribe(() => {
         this.scrollToBottomOfPage();
       })
     );
@@ -107,38 +107,38 @@ export class ProjectAuthoringComponent {
 
   private endProjectAuthoringSession(): void {
     this.rxStomp.deactivate();
-    this.ProjectService.notifyAuthorProjectEnd(this.projectId);
+    this.projectService.notifyAuthorProjectEnd(this.projectId);
   }
 
   protected previewProject(): void {
     this.saveEvent('projectPreviewed', 'Navigation', { constraints: true });
-    window.open(`${this.ConfigService.getConfigParam('previewProjectURL')}`);
+    window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
   }
 
   protected getNodePositionById(nodeId: string): string {
-    return this.ProjectService.getNodePositionById(nodeId);
+    return this.projectService.getNodePositionById(nodeId);
   }
 
   protected getNodeTitle(nodeId: string): string {
-    return this.ProjectService.getNodeTitle(nodeId);
+    return this.projectService.getNodeTitle(nodeId);
   }
 
   protected isGroupNode(nodeId: string): boolean {
-    return this.ProjectService.isGroupNode(nodeId);
+    return this.projectService.isGroupNode(nodeId);
   }
 
   protected nodeClicked(nodeId: string): void {
     this.unselectAllItems();
-    this.TeacherDataService.setCurrentNodeByNodeId(nodeId);
+    this.dataService.setCurrentNodeByNodeId(nodeId);
   }
 
   protected constraintIconClicked(nodeId: string): void {
-    this.TeacherDataService.setCurrentNodeByNodeId(nodeId);
+    this.dataService.setCurrentNodeByNodeId(nodeId);
     this.$state.go('root.at.project.node.advanced.constraint', { nodeId: nodeId });
   }
 
   protected branchIconClicked(nodeId: string): void {
-    this.TeacherDataService.setCurrentNodeByNodeId(nodeId);
+    this.dataService.setCurrentNodeByNodeId(nodeId);
     this.$state.go('root.at.project.node.advanced.path', { nodeId: nodeId });
   }
 
@@ -181,16 +181,16 @@ export class ProjectAuthoringComponent {
       for (let selectedNodeId of selectedNodeIds) {
         let node = {
           nodeId: selectedNodeId,
-          fromTitle: this.ProjectService.getNodePositionAndTitle(selectedNodeId)
+          fromTitle: this.projectService.getNodePositionAndTitle(selectedNodeId)
         };
         movedNodes.push(node);
       }
 
       let newNodes = [];
       if (moveTo === 'inside') {
-        newNodes = this.MoveNodesService.moveNodesInsideGroup(selectedNodeIds, nodeId);
+        newNodes = this.moveNodesService.moveNodesInsideGroup(selectedNodeIds, nodeId);
       } else if (moveTo === 'after') {
-        newNodes = this.MoveNodesService.moveNodesAfter(selectedNodeIds, nodeId);
+        newNodes = this.moveNodesService.moveNodesAfter(selectedNodeIds, nodeId);
       } else {
         // an unspecified moveTo was provided
         return;
@@ -200,7 +200,7 @@ export class ProjectAuthoringComponent {
       this.insertGroupMode = false;
       this.insertNodeMode = false;
       this.temporarilyHighlightNewNodes(newNodes);
-      this.ProjectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
+      this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
         this.refreshProject();
         if (newNodes != null && newNodes.length > 0) {
           let firstNewNode = newNodes[0];
@@ -209,11 +209,11 @@ export class ProjectAuthoringComponent {
               let node = movedNodes[n];
               let newNode = newNodes[n];
               if (node != null && newNode != null) {
-                node.toTitle = this.ProjectService.getNodePositionAndTitle(newNode.id);
+                node.toTitle = this.projectService.getNodePositionAndTitle(newNode.id);
               }
             }
 
-            if (this.ProjectService.isGroupNode(firstNewNode.id)) {
+            if (this.projectService.isGroupNode(firstNewNode.id)) {
               let nodeMovedEventData = { activitiesMoved: movedNodes };
               this.saveEvent('activityMoved', 'Authoring', nodeMovedEventData);
             } else {
@@ -235,14 +235,14 @@ export class ProjectAuthoringComponent {
     let selectedNodeIds = this.getSelectedNodeIds();
     let newNodes = [];
     if (moveTo === 'inside') {
-      const firstNode: any = this.CopyNodesService.copyNodeInside(selectedNodeIds[0], nodeId);
-      const otherNodes = this.CopyNodesService.copyNodesAfter(
+      const firstNode: any = this.copyNodesService.copyNodeInside(selectedNodeIds[0], nodeId);
+      const otherNodes = this.copyNodesService.copyNodesAfter(
         selectedNodeIds.slice(1),
         firstNode.id
       );
       newNodes = [firstNode].concat(otherNodes);
     } else if (moveTo === 'after') {
-      newNodes = this.CopyNodesService.copyNodesAfter(selectedNodeIds, nodeId);
+      newNodes = this.copyNodesService.copyNodesAfter(selectedNodeIds, nodeId);
     } else {
       // an unspecified moveTo was provided
       return;
@@ -250,14 +250,14 @@ export class ProjectAuthoringComponent {
     const copiedNodes: any[] = selectedNodeIds.map((selectedNodeId) => {
       return {
         fromNodeId: selectedNodeId,
-        fromTitle: this.ProjectService.getNodePositionAndTitle(selectedNodeId)
+        fromTitle: this.projectService.getNodePositionAndTitle(selectedNodeId)
       };
     });
     this.copyMode = false;
     this.insertGroupMode = false;
     this.insertNodeMode = false;
     this.temporarilyHighlightNewNodes(newNodes);
-    this.ProjectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
+    this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
       this.refreshProject();
       if (newNodes != null && newNodes.length > 0) {
         let firstNewNode = newNodes[0];
@@ -267,11 +267,11 @@ export class ProjectAuthoringComponent {
             let newNode = newNodes[n];
             if (node != null && newNode != null) {
               node.toNodeId = newNode.id;
-              node.toTitle = this.ProjectService.getNodePositionAndTitle(newNode.id);
+              node.toTitle = this.projectService.getNodePositionAndTitle(newNode.id);
             }
           }
 
-          if (this.ProjectService.isGroupNode(firstNewNode.id)) {
+          if (this.projectService.isGroupNode(firstNewNode.id)) {
             let nodeCopiedEventData = { activitiesCopied: copiedNodes };
             this.saveEvent('activityCopied', 'Authoring', nodeCopiedEventData);
           } else {
@@ -334,21 +334,21 @@ export class ProjectAuthoringComponent {
     const stepsDeleted = [];
     const activitiesDeleted = [];
     for (const nodeId of nodeIds) {
-      const node = this.ProjectService.getNodeById(nodeId);
+      const node = this.projectService.getNodeById(nodeId);
       const tempNode = {
         nodeId: node.id,
-        title: this.ProjectService.getNodePositionAndTitle(node.id),
+        title: this.projectService.getNodePositionAndTitle(node.id),
         stepsInActivityDeleted: []
       };
-      if (this.ProjectService.isStartNodeId(nodeId)) {
+      if (this.projectService.isStartNodeId(nodeId)) {
         deletedStartNodeId = true;
       }
-      if (this.ProjectService.isGroupNode(nodeId)) {
+      if (this.projectService.isGroupNode(nodeId)) {
         const stepsInActivityDeleted = [];
         for (const stepNodeId of node.ids) {
           const stepObject = {
             nodeId: stepNodeId,
-            title: this.ProjectService.getNodePositionAndTitle(stepNodeId)
+            title: this.projectService.getNodePositionAndTitle(stepNodeId)
           };
           stepsInActivityDeleted.push(stepObject);
         }
@@ -357,7 +357,7 @@ export class ProjectAuthoringComponent {
       } else {
         stepsDeleted.push(tempNode);
       }
-      this.DeleteNodeService.deleteNode(nodeId);
+      this.deleteNodeService.deleteNode(nodeId);
     }
     if (deletedStartNodeId) {
       this.updateStartNodeId();
@@ -368,7 +368,7 @@ export class ProjectAuthoringComponent {
     if (stepsDeleted.length > 0) {
       this.saveEvent('stepDeleted', 'Authoring', { stepsDeleted: stepsDeleted });
     }
-    this.ProjectService.saveProject();
+    this.projectService.saveProject();
     this.refreshProject();
   }
 
@@ -465,8 +465,8 @@ export class ProjectAuthoringComponent {
 
   private updateStartNodeId(): void {
     let newStartNodeId = null;
-    let startGroupId = this.ProjectService.getStartGroupId();
-    let node = this.ProjectService.getNodeById(startGroupId);
+    let startGroupId = this.projectService.getStartGroupId();
+    let node = this.projectService.getNodeById(startGroupId);
     let done = false;
 
     // recursively traverse the start ids
@@ -474,10 +474,10 @@ export class ProjectAuthoringComponent {
       if (node == null) {
         // base case in case something went wrong
         done = true;
-      } else if (this.ProjectService.isGroupNode(node.id)) {
+      } else if (this.projectService.isGroupNode(node.id)) {
         // the node is a group node so we will get its start node
-        node = this.ProjectService.getNodeById(node.startId);
-      } else if (this.ProjectService.isApplicationNode(node.id)) {
+        node = this.projectService.getNodeById(node.startId);
+      } else if (this.projectService.isApplicationNode(node.id)) {
         // the node is a step node so we have found the new start node id
         newStartNodeId = node.id;
         done = true;
@@ -488,23 +488,23 @@ export class ProjectAuthoringComponent {
     }
 
     if (newStartNodeId) {
-      this.ProjectService.setStartNodeId(newStartNodeId);
+      this.projectService.setStartNodeId(newStartNodeId);
     }
   }
 
   private refreshProject(): void {
-    this.ProjectService.parseProject();
-    this.items = Object.entries(this.ProjectService.idToOrder)
+    this.projectService.parseProject();
+    this.items = Object.entries(this.projectService.idToOrder)
       .map((entry: any) => {
         return { key: entry[0], order: entry[1].order };
       })
       .sort((a: any, b: any) => {
         return a.order - b.order;
       });
-    this.inactiveGroupNodes = this.ProjectService.getInactiveGroupNodes();
-    this.inactiveStepNodes = this.ProjectService.getInactiveStepNodes();
-    this.inactiveNodes = this.ProjectService.getInactiveNodes();
-    this.idToNode = this.ProjectService.getIdToNode();
+    this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
+    this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
+    this.inactiveNodes = this.projectService.getInactiveNodes();
+    this.idToNode = this.projectService.getIdToNode();
     this.unselectAllItems();
   }
 
@@ -517,7 +517,7 @@ export class ProjectAuthoringComponent {
   }
 
   protected isNodeInAnyBranchPath(nodeId: string): boolean {
-    return this.ProjectService.isNodeInAnyBranchPath(nodeId);
+    return this.projectService.isNodeInAnyBranchPath(nodeId);
   }
 
   protected goBackToProjectList(): void {
@@ -578,7 +578,7 @@ export class ProjectAuthoringComponent {
     if (data == null) {
       data = {};
     }
-    this.TeacherDataService.saveEvent(
+    this.dataService.saveEvent(
       context,
       nodeId,
       componentId,
@@ -597,7 +597,7 @@ export class ProjectAuthoringComponent {
    */
   protected getStepBackgroundColor(nodeId: string): string {
     let color = null;
-    let branchPathLetter = this.ProjectService.getBranchPathLetter(nodeId);
+    let branchPathLetter = this.projectService.getBranchPathLetter(nodeId);
     if (branchPathLetter != null) {
       // get the ascii code for the letter. example A=65, B=66, C=67, etc.
       let letterASCIICode = branchPathLetter.charCodeAt(0);
@@ -637,7 +637,7 @@ export class ProjectAuthoringComponent {
       if (inactiveNode != null) {
         if (
           inactiveNode.type == 'node' &&
-          this.ProjectService.getParentGroup(inactiveNode.id) == null
+          this.projectService.getParentGroup(inactiveNode.id) == null
         ) {
           count++;
         }
@@ -647,7 +647,7 @@ export class ProjectAuthoringComponent {
   }
 
   protected getParentGroup(nodeId: string): any {
-    return this.ProjectService.getParentGroup(nodeId);
+    return this.projectService.getParentGroup(nodeId);
   }
 
   /**
@@ -689,38 +689,38 @@ export class ProjectAuthoringComponent {
   }
 
   protected isBranchPoint(nodeId: string): boolean {
-    return this.ProjectService.isBranchPoint(nodeId);
+    return this.projectService.isBranchPoint(nodeId);
   }
 
   protected getNumberOfBranchPaths(nodeId: string): number {
-    return this.ProjectService.getNumberOfBranchPaths(nodeId);
+    return this.projectService.getNumberOfBranchPaths(nodeId);
   }
 
   protected getBranchCriteriaDescription(nodeId: string): string {
-    return this.ProjectService.getBranchCriteriaDescription(nodeId);
+    return this.projectService.getBranchCriteriaDescription(nodeId);
   }
 
   protected nodeHasConstraint(nodeId: string): boolean {
-    return this.ProjectService.nodeHasConstraint(nodeId);
+    return this.projectService.nodeHasConstraint(nodeId);
   }
 
   protected getNumberOfConstraintsOnNode(nodeId: string): number {
-    return this.ProjectService.getConstraintsOnNode(nodeId).length;
+    return this.projectService.getConstraintsOnNode(nodeId).length;
   }
 
   protected getConstraintDescriptions(nodeId: string): string {
     let constraintDescriptions = '';
-    const constraints = this.ProjectService.getConstraintsOnNode(nodeId);
+    const constraints = this.projectService.getConstraintsOnNode(nodeId);
     for (let c = 0; c < constraints.length; c++) {
       let constraint = constraints[c];
-      let description = this.ProjectService.getConstraintDescription(constraint);
+      let description = this.projectService.getConstraintDescription(constraint);
       constraintDescriptions += c + 1 + ' - ' + description + '\n';
     }
     return constraintDescriptions;
   }
 
   protected nodeHasRubric(nodeId: string): boolean {
-    return this.ProjectService.nodeHasRubric(nodeId);
+    return this.projectService.nodeHasRubric(nodeId);
   }
 
   protected hasSelectedNodes(): boolean {
@@ -730,14 +730,14 @@ export class ProjectAuthoringComponent {
   private subscribeToCurrentAuthors(projectId: number): void {
     this.rxStomp = new RxStomp();
     this.rxStomp.configure({
-      brokerURL: this.ConfigService.getWebSocketURL()
+      brokerURL: this.configService.getWebSocketURL()
     });
     this.rxStomp.activate();
     this.rxStomp.watch(`/topic/current-authors/${projectId}`).subscribe((message: Message) => {
       this.authors = JSON.parse(message.body);
     });
     this.rxStomp.connected$.subscribe(() => {
-      this.ProjectService.notifyAuthorProjectBegin(this.projectId);
+      this.projectService.notifyAuthorProjectBegin(this.projectId);
     });
   }
 }
