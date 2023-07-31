@@ -19,27 +19,22 @@ import { UpgradeModule } from '@angular/upgrade/static';
   styleUrls: ['./project-authoring.component.scss']
 })
 export class ProjectAuthoringComponent {
-  activityNodeSelected: boolean = false;
-  authors: string[] = [];
-  copyMode: boolean;
-  idToNode: any;
-  inactiveGroupNodes: any[];
-  inactiveNodes: any[];
-  inactiveStepNodes: any[];
-  insertGroupMode: boolean;
-  insertNodeMode: boolean;
-  items: any;
-  moveMode: boolean;
-  nodeId: string;
-  nodeIds: [];
-  nodeToAdd: any;
-  projectId: number;
-  projectTitle: string;
-  projectURL: string;
-  rxStomp: RxStomp;
-  $state: any;
-  stepNodeSelected: boolean = false;
-  subscriptions: Subscription = new Subscription();
+  protected activityNodeSelected: boolean = false;
+  protected authors: string[] = [];
+  private copyMode: boolean;
+  private idToNode: any;
+  protected inactiveGroupNodes: any[];
+  private inactiveNodes: any[];
+  protected inactiveStepNodes: any[];
+  protected insertGroupMode: boolean;
+  protected insertNodeMode: boolean;
+  protected items: any;
+  private moveMode: boolean;
+  private projectId: number;
+  private rxStomp: RxStomp;
+  protected $state: any;
+  protected stepNodeSelected: boolean = false;
+  private subscriptions: Subscription = new Subscription();
 
   /*
    * The colors for the branch path steps. The colors are from
@@ -79,7 +74,6 @@ export class ProjectAuthoringComponent {
       .sort((a: any, b: any) => {
         return a.order - b.order;
       });
-    this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds();
     this.inactiveGroupNodes = this.ProjectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.ProjectService.getInactiveStepNodes();
     this.inactiveNodes = this.ProjectService.getInactiveNodes();
@@ -87,7 +81,6 @@ export class ProjectAuthoringComponent {
     this.stepNodeSelected = false;
     this.activityNodeSelected = false;
     this.subscribeToCurrentAuthors(this.projectId);
-    this.projectURL = window.location.origin + this.ConfigService.getConfigParam('projectURL');
     this.subscriptions.add(
       this.ProjectService.refreshProject$.subscribe(() => {
         this.refreshProject();
@@ -465,7 +458,6 @@ export class ProjectAuthoringComponent {
   protected cancelMove(): void {
     this.insertGroupMode = false;
     this.insertNodeMode = false;
-    this.nodeToAdd = null;
     this.moveMode = false;
     this.copyMode = false;
     this.unselectAllItems();
