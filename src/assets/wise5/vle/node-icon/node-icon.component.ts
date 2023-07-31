@@ -1,14 +1,15 @@
 'use strict';
 
 import { ProjectService } from '../../services/projectService';
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Node } from '../../common/Node';
 
 @Component({
   selector: 'node-icon',
   templateUrl: 'node-icon.component.html',
-  styleUrls: ['node-icon.component.scss']
+  styleUrls: ['node-icon.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NodeIconComponent {
   @Input()
