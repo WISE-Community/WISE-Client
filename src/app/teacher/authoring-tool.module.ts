@@ -37,6 +37,9 @@ import { ChooseAutomatedAssessmentComponent } from '../../assets/wise5/authoring
 import { ConfigureAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component';
 import { ProjectListComponent } from '../../assets/wise5/authoringTool/project-list/project-list.component';
 import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-project/add-project.component';
+import { MatBadgeModule } from '@angular/material/badge';
+import { AuthoringToolBarComponent } from '../../assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component';
+import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponents/stepTools/step-tools.module';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
 
 @NgModule({
@@ -46,6 +49,7 @@ import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/proj
     AddProjectComponent,
     AddYourOwnNode,
     AdvancedProjectAuthoringComponent,
+    AuthoringToolBarComponent,
     CardSelectorComponent,
     ChooseAutomatedAssessmentComponent,
     ChooseComponentLocationComponent,
@@ -74,12 +78,14 @@ import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/proj
     StudentTeacherCommonModule,
     ComponentAuthoringModule,
     ComponentStudentModule,
+    MatBadgeModule,
     MatChipsModule,
     ImportComponentModule,
     NodeAdvancedAuthoringModule,
     PreviewComponentModule,
     ProjectAssetAuthoringModule,
     RouterModule,
+    StepToolsModule,
     StructureAuthoringModule,
     WiseTinymceEditorModule
   ]

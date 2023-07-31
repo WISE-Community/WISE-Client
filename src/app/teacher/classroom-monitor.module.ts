@@ -22,7 +22,6 @@ import { PauseScreensMenuComponent } from '../../assets/wise5/classroomMonitor/c
 import { StepItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component';
 import { StudentGradingToolsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/student-grading-tools/student-grading-tools.component';
 import { ToolBarComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component';
-import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-tools.component';
 import { NodeGradingViewComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component';
 import { NotificationsMenuComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component';
 import { NavItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component';
@@ -39,6 +38,7 @@ import { MilestoneModule } from './milestone/milestone.module';
 import { GradingCommonModule } from './grading-common.module';
 import { ManageStudentsModule } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students.module';
 import { DataExportModule } from '../../assets/wise5/classroomMonitor/dataExport/data-export.module';
+import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponents/stepTools/step-tools.module';
 
 @NgModule({
   declarations: [
@@ -62,7 +62,6 @@ import { DataExportModule } from '../../assets/wise5/classroomMonitor/dataExport
     StatusIconComponent,
     StepInfoComponent,
     StepItemComponent,
-    StepToolsComponent,
     StudentGradingComponent,
     StudentGradingToolsComponent,
     StudentProgressComponent,
@@ -83,7 +82,8 @@ import { DataExportModule } from '../../assets/wise5/classroomMonitor/dataExport
     MilestoneModule,
     PeerGroupGradingModule,
     PreviewComponentModule,
-    SelectPeriodModule
+    SelectPeriodModule,
+    StepToolsModule
   ]
 })
 export class ClassroomMonitorModule {}

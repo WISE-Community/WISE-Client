@@ -158,6 +158,7 @@
         [id]="component.id"
         class="component"
         cdkDrag
+        [cdkDragDisabled]="components.length < 2"
         fxLayout="row"
         fxLayoutAlign="start"
         [ngClass]="{

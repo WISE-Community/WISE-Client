@@ -14,7 +14,6 @@ class AuthoringToolController {
   currentViewName: string;
   isMenuOpen: boolean = false;
   logoPath: string;
-  numberProject: boolean = true;
   projectId: number;
   projectTitle: string;
   runId: number;
