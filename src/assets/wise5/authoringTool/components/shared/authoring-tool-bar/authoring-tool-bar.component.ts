@@ -10,10 +10,10 @@ import { NotificationService } from '../../../../services/notificationService';
 export class AuthoringToolBarComponent {
   protected globalMessage: any = {};
   protected isJSONValid: boolean = null;
-  @Output() onMenuToggle: EventEmitter<void> = new EventEmitter<void>();
-  @Input() showStepTools: boolean;
+  @Output() private onMenuToggle: EventEmitter<void> = new EventEmitter<void>();
+  @Input() protected showStepTools: boolean;
   private subscriptions: Subscription = new Subscription();
-  @Input() viewName: string;
+  @Input() protected viewName: string;
 
   constructor(private notificationService: NotificationService) {
     this.subscriptions.add(
