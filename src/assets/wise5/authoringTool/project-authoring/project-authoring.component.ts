@@ -5,7 +5,6 @@ import { DeleteNodeService } from '../../services/deleteNodeService';
 import { MoveNodesService } from '../../services/moveNodesService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
-import * as angular from 'angular';
 import * as $ from 'jquery';
 import { Subscription } from 'rxjs';
 import { Message } from '@stomp/stompjs';
@@ -374,15 +373,11 @@ export class ProjectAuthoringComponent {
 
   private getSelectedNodeIds(): string[] {
     const selectedNodeIds = [];
-    angular.forEach(
-      this.items,
-      function (item) {
-        if (item.checked) {
-          selectedNodeIds.push(item.key);
-        }
-      },
-      selectedNodeIds
-    );
+    this.items.forEach((item: any) => {
+      if (item.checked) {
+        selectedNodeIds.push(item.key);
+      }
+    });
 
     if (this.inactiveNodes != null) {
       for (const inactiveNode of this.inactiveNodes) {
@@ -400,21 +395,17 @@ export class ProjectAuthoringComponent {
    */
   private getSelectedItemTypes(): string[] {
     const selectedItemTypes = [];
-    angular.forEach(
-      this.items,
-      function (item) {
-        if (item.checked) {
-          let node = this.ProjectService.getNodeById(item.key);
-          if (node != null) {
-            let nodeType = node.type;
-            if (selectedItemTypes.indexOf(nodeType) == -1) {
-              selectedItemTypes.push(nodeType);
-            }
+    this.items.forEach((item: any) => {
+      if (item.checked) {
+        const node = this.projectService.getNodeById(item.key);
+        if (node != null) {
+          let nodeType = node.type;
+          if (selectedItemTypes.indexOf(nodeType) == -1) {
+            selectedItemTypes.push(nodeType);
           }
         }
-      },
-      this
-    );
+      }
+    });
 
     if (this.inactiveNodes != null) {
       for (let inactiveNode of this.inactiveNodes) {
@@ -430,14 +421,14 @@ export class ProjectAuthoringComponent {
   }
 
   private unselectAllItems(): void {
-    angular.forEach(this.items, function (value, key) {
-      value.checked = false;
+    this.items.forEach((item: any) => {
+      item.checked = false;
     });
-    angular.forEach(this.inactiveGroupNodes, function (value, key) {
-      value.checked = false;
+    this.inactiveGroupNodes.forEach((inactiveGroupNode: any) => {
+      inactiveGroupNode.checked = false;
     });
-    angular.forEach(this.inactiveStepNodes, function (value, key) {
-      value.checked = false;
+    this.inactiveStepNodes.forEach((inactiveStepNode: any) => {
+      inactiveStepNode.checked = false;
     });
     this.stepNodeSelected = false;
     this.activityNodeSelected = false;
