@@ -1,15 +1,16 @@
-.mat-icon {
-  color: #ffffff;
-  margin: 8px !important;
-}
+.node-icon {
+  .mat-icon {
+    color: #ffffff;
+    margin: 8px !important;
+  }
 
-.mat-mdc-button {
-  text-transform: none;
-  padding: 8px;
-  height: 100%;
-}
+  &.mat-mdc-button {
+    text-transform: none;
+    padding: 8px;
+    height: 100%;
+  }
 
-/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
-.mat-form-field-appearance-fill .mat-form-field-flex {
-  padding: .6em
+  .mat-badge-content {
+    font-family: 'Material Icons';
+  }
 }
