@@ -1,16 +1,10 @@
-.node-icon {
-  .mat-icon {
-    color: #ffffff;
-    margin: 8px !important;
-  }
+.mat-icon {
+  color: #ffffff;
+  margin: 8px !important;
+}
 
-  &.mat-mdc-button {
-    text-transform: none;
-    padding: 8px;
-    height: 100%;
-  }
-
-  .mat-badge-content {
-    font-family: 'Material Icons';
-  }
+.mat-mdc-button {
+  text-transform: none;
+  padding: 8px;
+  height: 100%;
 }
