@@ -8,8 +8,7 @@ import { Node } from '../../common/Node';
 @Component({
   selector: 'node-icon',
   templateUrl: 'node-icon.component.html',
-  styleUrls: ['node-icon.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['node-icon.component.scss']
 })
 export class NodeIconComponent {
   @Input()
