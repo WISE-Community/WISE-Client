@@ -21,7 +21,7 @@
       fxLayoutGap.gt-xs="24px"
     >
       <div
-        class="main-content"
+        class="hero-main-content"
         [ngClass]="{ 'with-sidecontent': sideRef }"
         fxLayout="column"
         fxLayoutAlign="center center"
@@ -52,7 +52,6 @@
       </div>
       <div
         *ngIf="sideRef"
-        class="side-content"
         fxLayoutAlign="end center"
         fxFlex="none"
         fxFlex.gt-sm="40"

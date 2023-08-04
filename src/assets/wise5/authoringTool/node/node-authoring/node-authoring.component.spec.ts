@@ -19,6 +19,7 @@ import { ComponentAuthoringModule } from '../../../../../app/teacher/component-a
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { PreviewComponentModule } from '../../components/preview-component/preview-component.module';
 import { DebugElement } from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -38,6 +39,7 @@ describe('NodeAuthoringComponent', () => {
       imports: [
         BrowserAnimationsModule,
         ComponentAuthoringModule,
+        DragDropModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
