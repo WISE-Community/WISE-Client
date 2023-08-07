@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { StudentTeacherCommonModule } from '../../../../../../app/student-teacher-common.module';
 
 @NgModule({
   declarations: [StepToolsComponent],
@@ -20,7 +22,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule,
+    StudentTeacherCommonModule
   ]
 })
 export class StepToolsModule {}

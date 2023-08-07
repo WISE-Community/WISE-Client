@@ -14,7 +14,6 @@ import './structure/structureAuthoringModule';
 import { ProjectLibraryService } from '../services/projectLibraryService';
 import { AuthoringToolComponent } from '../authoringTool/authoringToolComponent';
 import { WiseAuthoringTinymceEditorComponent } from '../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
-import { StepToolsComponent } from '../common/stepTools/step-tools.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { AddProjectComponent } from './add-project/add-project.component';
 
@@ -34,10 +33,6 @@ export default angular
   .directive(
     'addProjectComponent',
     downgradeComponent({ component: AddProjectComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'stepTools',
-    downgradeComponent({ component: StepToolsComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'projectListComponent',
