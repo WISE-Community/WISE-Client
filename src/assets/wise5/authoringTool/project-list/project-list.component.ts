@@ -8,6 +8,7 @@ import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner
 import { SessionService } from '../../services/sessionService';
 
 @Component({
+  selector: 'project-list-authoring',
   styleUrls: ['./project-list.component.scss'],
   templateUrl: './project-list.component.html'
 })

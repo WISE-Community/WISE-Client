@@ -37,13 +37,17 @@ import { EditNotebookItemDialogModule } from '../assets/wise5/themes/default/not
 import { StudentTeacherCommonServicesModule } from './student-teacher-common-services.module';
 import { MathModule } from './math/math.module';
 import { MatMenuModule } from '@angular/material/menu';
+import { MainMenuComponent } from '../assets/wise5/common/main-menu/main-menu.component';
+import { SideMenuComponent } from '../assets/wise5/common/side-menu/side-menu.component';
 
 @NgModule({
   declarations: [
     DialogResponseComponent,
     DialogResponsesComponent,
+    MainMenuComponent,
     NodeIconComponent,
-    NodeStatusIcon
+    NodeStatusIcon,
+    SideMenuComponent
   ],
   imports: [
     UpgradeModule,
@@ -89,6 +93,7 @@ import { MatMenuModule } from '@angular/material/menu';
     EditorModule,
     FlexLayoutModule,
     FormsModule,
+    MainMenuComponent,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -116,7 +121,8 @@ import { MatMenuModule } from '@angular/material/menu';
     NodeIconComponent,
     NodeStatusIcon,
     NotebookModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SideMenuComponent
   ]
 })
 export class StudentTeacherCommonModule {}
