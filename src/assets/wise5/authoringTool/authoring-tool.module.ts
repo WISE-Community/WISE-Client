@@ -4,7 +4,6 @@ import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import './addLesson/addLessonModule';
 import './addNode/addNodeModule';
-import './components/shared/shared';
 import './importComponent/importComponentModule';
 import './importStep/importStepModule';
 import './node/node-authoring.module';
@@ -17,7 +16,6 @@ export default angular
   .module('authoringTool', [
     'addLessonModule',
     'addNodeModule',
-    'atShared',
     'importComponentModule',
     'importStepModule',
     'nodeAuthoringModule',
