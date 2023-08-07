@@ -1,6 +1,6 @@
 import './lib/jquery/jquery-global';
 import * as angular from 'angular';
-import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
+import { downgradeInjectable } from '@angular/upgrade/static';
 import { AchievementService } from './services/achievementService';
 import 'angular-file-saver';
 import 'ng-file-upload';
@@ -33,19 +33,12 @@ import { NodeService } from './services/nodeService';
 import { NotebookService } from './services/notebookService';
 import { NotificationService } from './services/notificationService';
 import { SessionService } from './services/sessionService';
-import './vle/studentAsset/studentAsset';
 import { StudentAssetService } from './services/studentAssetService';
 import { StudentDataService } from './services/studentDataService';
 import { TagService } from './services/tagService';
 import './themes/default/theme';
-import { EditorComponent } from '@tinymce/tinymce-angular';
-import { WiseTinymceEditorComponent } from './directives/wise-tinymce-editor/wise-tinymce-editor.component';
-import { NotebookNotesComponent } from '../../app/notebook/notebook-notes/notebook-notes.component';
-import { NotebookReportComponent } from '../../app/notebook/notebook-report/notebook-report.component';
-import { NotebookReportAnnotationsComponent } from '../../app/notebook/notebook-report-annotations/notebook-report-annotations.component';
 import { ComputerAvatarService } from './services/computerAvatarService';
 import { ComponentTypeService } from './services/componentTypeService';
-import { SideMenuComponent } from './common/side-menu/side-menu.component';
 
 angular
   .module('common', [
@@ -60,28 +53,6 @@ angular
     'pascalprecht.translate',
     'ui.router'
   ])
-  .directive(
-    'editor',
-    downgradeComponent({ component: EditorComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'wiseTinymceEditor',
-    downgradeComponent({ component: WiseTinymceEditorComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'notebookNotes',
-    downgradeComponent({ component: NotebookNotesComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'notebookReport',
-    downgradeComponent({ component: NotebookReportComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'notebookReportAnnotations',
-    downgradeComponent({
-      component: NotebookReportAnnotationsComponent
-    }) as angular.IDirectiveFactory
-  )
   .service('AchievementService', downgradeInjectable(AchievementService))
   .factory('AnnotationService', downgradeInjectable(AnnotationService))
   .factory('AudioRecorderService', downgradeInjectable(AudioRecorderService))
@@ -98,10 +69,6 @@ angular
   .factory('StudentAssetService', downgradeInjectable(StudentAssetService))
   .factory('TagService', downgradeInjectable(TagService))
   .factory('StudentDataService', downgradeInjectable(StudentDataService))
-  .directive(
-    'sideMenu',
-    downgradeComponent({ component: SideMenuComponent }) as angular.IDirectiveFactory
-  )
   .filter('Filters', Filters)
   .config([
     '$httpProvider',
