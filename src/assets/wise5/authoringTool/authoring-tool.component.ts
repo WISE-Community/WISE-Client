@@ -8,6 +8,7 @@ import { SessionService } from '../services/sessionService';
 import { TeacherDataService } from '../services/teacherDataService';
 
 @Component({
+  styleUrls: ['./authoring-tool.component.scss'],
   templateUrl: './authoring-tool.component.html'
 })
 export class AuthoringToolComponent {

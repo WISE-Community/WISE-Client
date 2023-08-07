@@ -1,43 +1,41 @@
 <link rel="stylesheet" href="/assets/wise5/themes/default/style/angular-material.css" />
 <link rel="stylesheet" href="/assets/wise5/themes/default/style/author.css" />
-<div
-  id="top"
-  class="app-styles"
-  disable-delete-keypress
-  role="main"
-  fxLayout="column"
-  layout-fill
-  md-theme="at"
->
-  <at-top-bar
-    [logoPath]="logoPath"
-    [projectId]="projectId"
-    [projectTitle]="projectTitle"
-    [runId]="runId"
-    [runCode]="runCode"
-  ></at-top-bar>
-  <authoring-tool-bar
-    *ngIf="showToolbar"
-    [showStepTools]="showStepTools"
-    [viewName]="currentViewName"
-    (onMenuToggle)="toggleMenu()"
-  ></authoring-tool-bar>
-  <mat-sidenav [(opened)]="isMenuOpen">
-    <main-menu [state]="$state" [title]="title" [views]="views"></main-menu>
-  </mat-sidenav>
-  <div
-    id="content"
-    fxLayout="column"
-    fxFlex
-    class="l-main"
-    [ngClass]="{ 'l-main--with-toolbar': showToolbar }"
-    role="main"
-  >
-    <project-authoring
-      *ngIf="$state.current.name.startsWith('root.at.project')"
-    ></project-authoring>
-    <project-list-authoring *ngIf="$state.current.name === 'root.at.main'"></project-list-authoring>
-    <add-project *ngIf="$state.current.name === 'root.at.new-unit'"></add-project>
-  </div>
-  <side-menu *ngIf="showToolbar" [state]="$state" [views]="views"></side-menu>
+<div id="top" class="app-styles authoring" disable-delete-keypress role="main">
+  <mat-drawer-container>
+    <mat-drawer #drawer [(opened)]="isMenuOpen" mode="over" class="mat-elevation-z4">
+      <main-menu [state]="$state" [title]="title" [views]="views"></main-menu>
+    </mat-drawer>
+    <mat-drawer-content>
+      <at-top-bar
+        [logoPath]="logoPath"
+        [projectId]="projectId"
+        [projectTitle]="projectTitle"
+        [runId]="runId"
+        [runCode]="runCode"
+      ></at-top-bar>
+      <authoring-tool-bar
+        *ngIf="showToolbar"
+        [showStepTools]="showStepTools"
+        [viewName]="currentViewName"
+        (onMenuToggle)="toggleMenu()"
+      ></authoring-tool-bar>
+      <content
+        id="content"
+        fxLayout="column"
+        fxFlex
+        class="l-main"
+        [ngClass]="{ 'l-main--with-toolbar': showToolbar }"
+        role="main"
+      >
+        <project-authoring
+          *ngIf="$state.current.name.startsWith('root.at.project')"
+        ></project-authoring>
+        <project-list-authoring
+          *ngIf="$state.current.name === 'root.at.main'"
+        ></project-list-authoring>
+        <add-project *ngIf="$state.current.name === 'root.at.new-unit'"></add-project>
+      </content>
+      <side-menu *ngIf="showToolbar" [state]="$state" [views]="views"></side-menu>
+    </mat-drawer-content>
+  </mat-drawer-container>
 </div>

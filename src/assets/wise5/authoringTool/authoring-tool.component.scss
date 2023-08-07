@@ -1,0 +1,39 @@
+@import
+  'style/abstracts/functions',
+  'style/abstracts/variables';
+
+.authoring {
+  height: 100%;
+}
+
+at-top-bar {
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+}
+
+.mat-drawer-container {
+  height: 100%;
+}
+
+.mat-drawer {
+  width: 320px;
+}
+
+.mat-drawer-content {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+#content {
+  position: absolute;
+  top: $toolbar-height;
+  bottom: 0;
+  width: 100%;
+  overflow: scroll;
+}
+
+.view-content {
+  margin-bottom: 64px;
+}
