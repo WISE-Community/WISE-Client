@@ -4,7 +4,6 @@ import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import './addLesson/addLessonModule';
 import './addNode/addNodeModule';
-import '../components/component-authoring.module';
 import './components/shared/shared';
 import './importComponent/importComponentModule';
 import './importStep/importStepModule';
@@ -19,7 +18,6 @@ export default angular
     'addLessonModule',
     'addNodeModule',
     'atShared',
-    'componentAuthoringModule',
     'importComponentModule',
     'importStepModule',
     'nodeAuthoringModule',
