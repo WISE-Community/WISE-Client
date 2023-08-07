@@ -37,6 +37,7 @@
       *ngIf="$state.current.name.startsWith('root.at.project')"
     ></project-authoring>
     <project-list-authoring *ngIf="$state.current.name === 'root.at.main'"></project-list-authoring>
+    <add-project *ngIf="$state.current.name === 'root.at.new-unit'"></add-project>
   </div>
   <side-menu *ngIf="showToolbar" [state]="$state" [views]="views"></side-menu>
 </div>

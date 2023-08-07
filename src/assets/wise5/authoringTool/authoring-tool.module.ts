@@ -12,10 +12,6 @@ import './node/node-authoring.module';
 import './project-authoring/project-authoring.module';
 import './structure/structureAuthoringModule';
 import { ProjectLibraryService } from '../services/projectLibraryService';
-import { WiseAuthoringTinymceEditorComponent } from '../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
-import { StepToolsComponent } from '../common/stepTools/step-tools.component';
-import { ProjectListComponent } from './project-list/project-list.component';
-import { AddProjectComponent } from './add-project/add-project.component';
 import { AuthoringToolComponent } from './authoring-tool.component';
 
 export default angular
@@ -34,24 +30,6 @@ export default angular
   .directive(
     'authoringToolComponent',
     downgradeComponent({ component: AuthoringToolComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'addProjectComponent',
-    downgradeComponent({ component: AddProjectComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'stepTools',
-    downgradeComponent({ component: StepToolsComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'projectListComponent',
-    downgradeComponent({ component: ProjectListComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'wiseAuthoringTinymceEditor',
-    downgradeComponent({
-      component: WiseAuthoringTinymceEditorComponent
-    }) as angular.IDirectiveFactory
   )
   .factory('ProjectLibraryService', downgradeInjectable(ProjectLibraryService))
   .config([

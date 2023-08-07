@@ -3,7 +3,6 @@ import { ConfigService } from '../../services/configService';
 import { WiseTinymceEditorComponent } from './wise-tinymce-editor.component';
 import { NotebookService } from '../../services/notebookService';
 import 'tinymce';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectAssetAuthoringComponent } from '../../authoringTool/project-asset-authoring/project-asset-authoring.component';
 import { WiseLinkAuthoringDialogComponent } from '../../authoringTool/wise-link-authoring-dialog/wise-link-authoring-dialog.component';
