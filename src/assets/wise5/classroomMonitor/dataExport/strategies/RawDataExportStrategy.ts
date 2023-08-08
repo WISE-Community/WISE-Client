@@ -1,4 +1,3 @@
-import * as angular from 'angular';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 import * as FileSaver from 'file-saver';
 import { copy } from '../../../common/object/object';
@@ -97,7 +96,7 @@ export class RawDataExportStrategy extends AbstractDataExportStrategy {
         }
       }
       data.workgroups = workgroups;
-      const dataJSONString = angular.toJson(data, 4);
+      const dataJSONString = JSON.stringify(data, null, 4);
       const blob = new Blob([dataJSONString]);
       FileSaver.saveAs(blob, runId + '_raw_data.json');
       this.controller.hideDownloadingExportMessage();

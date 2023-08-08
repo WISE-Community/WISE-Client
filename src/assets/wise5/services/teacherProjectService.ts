@@ -1,5 +1,4 @@
 'use strict';
-import * as angular from 'angular';
 import { ProjectService } from './projectService';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
@@ -1007,10 +1006,7 @@ export class TeacherProjectService extends ProjectService {
       this.addCurrentUserToAuthors(this.getAuthors())
     );
     return this.http
-      .post(
-        this.configService.getConfigParam('saveProjectURL'),
-        angular.toJson(this.project, false)
-      )
+      .post(this.configService.getConfigParam('saveProjectURL'), JSON.stringify(this.project))
       .toPromise()
       .then((response: any) => {
         this.handleSaveProjectResponse(response);
@@ -1214,8 +1210,8 @@ export class TeacherProjectService extends ProjectService {
   }
 
   copyTransitions(previousNode, node) {
-    const transitionsJSONString = angular.toJson(previousNode.transitionLogic.transitions);
-    const transitionsCopy = angular.fromJson(transitionsJSONString);
+    const transitionsJSONString = JSON.stringify(previousNode.transitionLogic.transitions);
+    const transitionsCopy = JSON.parse(transitionsJSONString);
     node.transitionLogic.transitions = transitionsCopy;
   }
 
@@ -1593,8 +1589,7 @@ export class TeacherProjectService extends ProjectService {
               // we have found the transition to the node we are removing
 
               // copy the transitions from the node we are removing
-              let transitionsCopy = angular.toJson(nodeToRemoveTransitions);
-              transitionsCopy = angular.fromJson(transitionsCopy);
+              let transitionsCopy = copy(nodeToRemoveTransitions);
 
               /*
                * if the parent from group is different than the parent removing group

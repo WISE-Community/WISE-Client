@@ -1,6 +1,5 @@
 'use strict';
 
-import * as angular from 'angular';
 import { Component } from '@angular/core';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
@@ -109,14 +108,14 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
 
   updateStarterDrawDataWidth(): void {
     if (this.componentContent.starterDrawData != null) {
-      const starterDrawDataJSONObject = angular.fromJson(this.componentContent.starterDrawData);
+      const starterDrawDataJSONObject = JSON.parse(this.componentContent.starterDrawData);
       if (starterDrawDataJSONObject != null && starterDrawDataJSONObject.dt != null) {
         if (this.width == null) {
           starterDrawDataJSONObject.dt.width = this.defaultWidth;
         } else {
           starterDrawDataJSONObject.dt.width = this.width;
         }
-        this.componentContent.starterDrawData = angular.toJson(starterDrawDataJSONObject);
+        this.componentContent.starterDrawData = JSON.stringify(starterDrawDataJSONObject);
       }
     }
   }
@@ -129,14 +128,14 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
 
   updateStarterDrawDataHeight(): void {
     if (this.componentContent.starterDrawData != null) {
-      const starterDrawDataJSONObject = angular.fromJson(this.componentContent.starterDrawData);
+      const starterDrawDataJSONObject = JSON.parse(this.componentContent.starterDrawData);
       if (starterDrawDataJSONObject != null && starterDrawDataJSONObject.dt != null) {
         if (this.height == null) {
           starterDrawDataJSONObject.dt.height = this.defaultHeight;
         } else {
           starterDrawDataJSONObject.dt.height = this.height;
         }
-        this.componentContent.starterDrawData = angular.toJson(starterDrawDataJSONObject);
+        this.componentContent.starterDrawData = JSON.stringify(starterDrawDataJSONObject);
       }
     }
   }
@@ -176,7 +175,7 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
   updateStarterDrawDataBackground(): void {
     const starterDrawData = this.componentContent.starterDrawData;
     if (starterDrawData != null) {
-      const starterDrawDataJSON = angular.fromJson(starterDrawData);
+      const starterDrawDataJSON = JSON.parse(starterDrawData);
       if (
         starterDrawDataJSON != null &&
         starterDrawDataJSON.canvas != null &&
@@ -187,7 +186,7 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
         const background = this.componentContent.background;
         const newSrc = projectAssetsDirectoryPath + '/' + background;
         starterDrawDataJSON.canvas.backgroundImage.src = newSrc;
-        this.componentContent.starterDrawData = angular.toJson(starterDrawDataJSON);
+        this.componentContent.starterDrawData = JSON.stringify(starterDrawDataJSON);
       }
     }
   }
