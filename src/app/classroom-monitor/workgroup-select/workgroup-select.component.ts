@@ -28,6 +28,7 @@ export class WorkgroupSelectComponent {
       this.TeacherDataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
         if (currentWorkgroup != null) {
           this.setWorkgroups();
+          this.setWorkgroup(currentWorkgroup);
         }
       })
     );
@@ -45,6 +46,8 @@ export class WorkgroupSelectComponent {
   }
 
   setWorkgroups() {}
+
+  protected setWorkgroup(workgroup: any): void {}
 
   currentPeriodChanged() {}
 
