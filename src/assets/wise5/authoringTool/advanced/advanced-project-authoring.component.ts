@@ -1,6 +1,5 @@
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import * as angular from 'angular';
 import { NotificationService } from '../../services/notificationService';
 import { Component } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
@@ -65,7 +64,7 @@ export class AdvancedProjectAuthoringComponent {
 
   showJSON() {
     this.isJSONDisplayed = true;
-    this.projectJSONString = angular.toJson(this.projectService.project, 4);
+    this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
     this.notificationService.showJSONValidMessage();
   }
 
@@ -79,7 +78,7 @@ export class AdvancedProjectAuthoringComponent {
   }
 
   saveProjectJSON(projectJSONString) {
-    const project = angular.fromJson(projectJSONString);
+    const project = JSON.parse(projectJSONString);
     this.projectService.setProject(project);
     this.setProjectScriptFilename();
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject();
@@ -130,7 +129,7 @@ export class AdvancedProjectAuthoringComponent {
   projectScriptFilenameChanged() {
     this.projectService.setProjectScriptFilename(this.projectScriptFilename);
     if (this.showJSON) {
-      this.projectJSONString = angular.toJson(this.projectService.project, 4);
+      this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
     }
     this.projectService.saveProject();
   }
