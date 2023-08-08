@@ -4,8 +4,6 @@ import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import './addLesson/addLessonModule';
 import './addNode/addNodeModule';
-import '../components/component-authoring.module';
-import './components/shared/shared';
 import './importComponent/importComponentModule';
 import './importStep/importStepModule';
 import './node/node-authoring.module';
@@ -13,16 +11,11 @@ import './project-authoring/project-authoring.module';
 import './structure/structureAuthoringModule';
 import { ProjectLibraryService } from '../services/projectLibraryService';
 import { AuthoringToolComponent } from './authoring-tool.component';
-import { WiseAuthoringTinymceEditorComponent } from '../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
-import { ProjectListComponent } from './project-list/project-list.component';
-import { AddProjectComponent } from './add-project/add-project.component';
 
 export default angular
   .module('authoringTool', [
     'addLessonModule',
     'addNodeModule',
-    'atShared',
-    'componentAuthoringModule',
     'importComponentModule',
     'importStepModule',
     'nodeAuthoringModule',
@@ -33,20 +26,6 @@ export default angular
   .directive(
     'authoringToolComponent',
     downgradeComponent({ component: AuthoringToolComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'addProjectComponent',
-    downgradeComponent({ component: AddProjectComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'projectListComponent',
-    downgradeComponent({ component: ProjectListComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'wiseAuthoringTinymceEditor',
-    downgradeComponent({
-      component: WiseAuthoringTinymceEditorComponent
-    }) as angular.IDirectiveFactory
   )
   .factory('ProjectLibraryService', downgradeInjectable(ProjectLibraryService))
   .config([

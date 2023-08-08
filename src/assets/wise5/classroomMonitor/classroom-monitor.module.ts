@@ -2,24 +2,13 @@
 
 import * as angular from 'angular';
 import './classroomMonitorComponents/manageStudents/manageStudentsModule';
-import './classroomMonitorComponents/nodeProgress/nodeProgress';
-import './classroomMonitorComponents/studentProgress/studentProgress';
 import './dataExport/data-export-angular-js-module';
 import { downgradeComponent } from '@angular/upgrade/static';
-import { NotebookGradingComponent } from './notebook-grading/notebook-grading.component';
-import { StudentGradingComponent } from './student-grading/student-grading.component';
-import { StudentProgressComponent } from './student-progress/student-progress.component';
 import { ClassroomMonitorComponent } from './classroom-monitor.component';
 
 export default angular
-  .module('classroomMonitor', ['dataExport', 'manageStudents', 'nodeProgress', 'studentProgress'])
+  .module('classroomMonitor', ['dataExport', 'manageStudents'])
   .directive('classroomMonitor', downgradeComponent({ component: ClassroomMonitorComponent }))
-  .directive('notebookGrading', downgradeComponent({ component: NotebookGradingComponent }))
-  .directive(
-    'studentGrading',
-    downgradeComponent({ component: StudentGradingComponent }) as angular.IDirectiveFactory
-  )
-  .directive('studentProgress', downgradeComponent({ component: StudentProgressComponent }))
   .config([
     '$stateProvider',
     '$translatePartialLoaderProvider',

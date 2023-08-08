@@ -1,53 +1,9 @@
 import * as angular from 'angular';
-import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
-import { AdvancedProjectAuthoringComponent } from '../advanced/advanced-project-authoring.component';
+import { downgradeInjectable } from '@angular/upgrade/static';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
-import { RecoveryAuthoringComponent } from '../recovery-authoring/recovery-authoring.component';
-import { ConcurrentAuthorsMessageComponent } from '../concurrent-authors-message/concurrent-authors-message.component';
-import { NotebookAuthoringComponent } from '../notebook-authoring/notebook-authoring.component';
-import { MilestonesAuthoringComponent } from '../milestones-authoring/milestones-authoring.component';
-import { ProjectAssetAuthoringComponent } from '../project-asset-authoring/project-asset-authoring.component';
-import { ProjectInfoAuthoringComponent } from '../project-info-authoring/project-info-authoring.component';
-import { ProjectAuthoringComponent } from './project-authoring.component';
 
 export default angular
   .module('projectAuthoringModule', [])
-  .directive(
-    'milestonesAuthoringComponent',
-    downgradeComponent({ component: MilestonesAuthoringComponent })
-  )
-  .directive(
-    'notebookAuthoringComponent',
-    downgradeComponent({ component: NotebookAuthoringComponent })
-  )
-  .directive(
-    'projectAssetAuthoringComponent',
-    downgradeComponent({ component: ProjectAssetAuthoringComponent })
-  )
-  .directive(
-    'projectAuthoringComponent',
-    downgradeComponent({ component: ProjectAuthoringComponent })
-  )
-  .directive(
-    'projectInfoAuthoringComponent',
-    downgradeComponent({ component: ProjectInfoAuthoringComponent })
-  )
-  .directive(
-    'advancedProjectAuthoringComponent',
-    downgradeComponent({
-      component: AdvancedProjectAuthoringComponent
-    }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'concurrentAuthorsMessage',
-    downgradeComponent({
-      component: ConcurrentAuthorsMessageComponent
-    }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'recoveryAuthoringComponent',
-    downgradeComponent({ component: RecoveryAuthoringComponent })
-  )
   .factory('ProjectAssetService', downgradeInjectable(ProjectAssetService))
   .config([
     '$stateProvider',
