@@ -41,6 +41,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { AuthoringToolBarComponent } from '../../assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component';
 import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponents/stepTools/step-tools.module';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
+import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authoring-tool.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/proj
     AddProjectComponent,
     AddYourOwnNode,
     AdvancedProjectAuthoringComponent,
+    AuthoringToolComponent,
     AuthoringToolBarComponent,
     CardSelectorComponent,
     ChooseAutomatedAssessmentComponent,

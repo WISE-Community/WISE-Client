@@ -12,7 +12,7 @@ import './node/node-authoring.module';
 import './project-authoring/project-authoring.module';
 import './structure/structureAuthoringModule';
 import { ProjectLibraryService } from '../services/projectLibraryService';
-import { AuthoringToolComponent } from '../authoringTool/authoringToolComponent';
+import { AuthoringToolComponent } from './authoring-tool.component';
 import { WiseAuthoringTinymceEditorComponent } from '../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { AddProjectComponent } from './add-project/add-project.component';
@@ -31,6 +31,10 @@ export default angular
     'ui.router'
   ])
   .directive(
+    'authoringToolComponent',
+    downgradeComponent({ component: AuthoringToolComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
     'addProjectComponent',
     downgradeComponent({ component: AddProjectComponent }) as angular.IDirectiveFactory
   )
@@ -45,7 +49,6 @@ export default angular
     }) as angular.IDirectiveFactory
   )
   .factory('ProjectLibraryService', downgradeInjectable(ProjectLibraryService))
-  .component('authoringToolComponent', AuthoringToolComponent)
   .config([
     '$stateProvider',
     '$translatePartialLoaderProvider',

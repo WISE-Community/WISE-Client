@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
 
 @Component({
+  selector: 'add-project',
   styleUrls: ['./add-project.component.scss'],
   templateUrl: './add-project.component.html'
 })

@@ -31,8 +31,6 @@ import { NotebookGradingComponent } from '../../assets/wise5/classroomMonitor/no
 import { StudentGradingComponent } from '../../assets/wise5/classroomMonitor/student-grading/student-grading.component';
 import { StudentProgressComponent } from '../../assets/wise5/classroomMonitor/student-progress/student-progress.component';
 import { ClassroomMonitorComponent } from '../../assets/wise5/classroomMonitor/classroom-monitor.component';
-import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
-import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu.component';
 import { ShowNodeInfoDialogComponent } from '../classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
 import { MilestoneModule } from './milestone/milestone.module';
 import { GradingCommonModule } from './grading-common.module';
@@ -46,7 +44,6 @@ import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponen
     ClassroomMonitorComponent,
     ComponentNewWorkBadgeComponent,
     ComponentSelectComponent,
-    MainMenuComponent,
     NavItemComponent,
     NavItemProgressComponent,
     NodeInfoComponent,
@@ -58,7 +55,6 @@ import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponen
     PauseScreensMenuComponent,
     ProjectProgressComponent,
     ShowNodeInfoDialogComponent,
-    SideMenuComponent,
     StatusIconComponent,
     StepInfoComponent,
     StepItemComponent,
