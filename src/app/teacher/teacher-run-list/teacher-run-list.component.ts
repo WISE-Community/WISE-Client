@@ -75,7 +75,7 @@ export class TeacherRunListComponent implements OnInit {
     this.runs = runs.map((run) => {
       const teacherRun = new TeacherRun(run);
       teacherRun.shared = !teacherRun.isOwner(userId);
-      teacherRun.isArchived = teacherRun.tags.includes('archived');
+      teacherRun.isArchived = teacherRun.project.tags.includes('archived');
       return teacherRun;
     });
     this.filteredRuns = this.runs;
