@@ -27,11 +27,12 @@
   margin-right: 8px;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of progress-bar that may no longer apply for the MDC version. */
 mat-progress-bar {
   height: 14px;
 }
 
-.mat-list {
+.mat-mdc-list {
   padding: 0;
 }
 

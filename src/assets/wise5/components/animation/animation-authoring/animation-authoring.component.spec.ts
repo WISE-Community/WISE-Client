@@ -16,6 +16,7 @@ import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { AnimationAuthoring } from './animation-authoring.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export class MockConfigService {}
 
@@ -29,6 +30,7 @@ describe('AnimationAuthoring', () => {
         BrowserModule,
         FormsModule,
         HttpClientTestingModule,
+        MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,

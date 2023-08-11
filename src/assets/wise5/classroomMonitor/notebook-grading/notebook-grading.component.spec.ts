@@ -6,6 +6,7 @@ import { TeacherDataService } from '../../services/teacherDataService';
 import { ClassroomMonitorTestingModule } from '../classroom-monitor-testing.module';
 import { NotebookWorkgroupGradingComponent } from '../classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component';
 import { NotebookGradingComponent } from './notebook-grading.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let component: NotebookGradingComponent;
 let fixture: ComponentFixture<NotebookGradingComponent>;
@@ -18,7 +19,8 @@ describe('NotebookGradingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NotebookGradingComponent, NotebookWorkgroupGradingComponent],
-      imports: [ClassroomMonitorTestingModule, MatListModule]
+      imports: [ClassroomMonitorTestingModule, MatListModule],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

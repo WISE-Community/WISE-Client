@@ -3,7 +3,7 @@
   'style/abstracts/functions';
 
 .student-account-menu {
-  &.mat-menu-panel {
+  &.mat-mdc-menu-panel {
     max-width: 480px;
 
     @media (min-width: breakpoint('sm.min')) {
@@ -14,19 +14,19 @@
       min-width: 380px;
     }
 
-    .mat-menu-content {
+    .mat-mdc-menu-content {
       padding: 0;
     }
   }
 
-  button.mat-menu-item {
+  button.mat-mdc-menu-item {
     width: auto;
     font-weight: 500;
     line-height: 36px;
     height: 36px;
   }
 
-  .mat-menu-content {
+  .mat-mdc-menu-content {
     padding: 0;
 
     .mat-divider-horizontal {
@@ -38,14 +38,18 @@
     padding: 8px 12px;
   }
 
-  .mat-display-1 {
+  .mat-headline-4 {
     margin: 0;
   }
 
-  .mat-progress-bar {
+  .mat-mdc-progress-bar {
     transform: rotate(270deg);
     width: 32px;
     height: 14px;
+  }
+
+  .mdc-linear-progress__bar-inner {
+    border-top-width: 14px;
   }
 
   .score-wrap {

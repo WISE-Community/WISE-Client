@@ -15,9 +15,11 @@ import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { PeerChatAuthoringComponent } from './peer-chat-authoring.component';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 const componentContent = {
   id: 'qn3savv52r',
@@ -53,7 +55,9 @@ describe('PeerChatAuthoringComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        MatSelectModule
+        MatSelectModule,
+        StudentTeacherCommonServicesModule,
+        UpgradeModule
       ],
       declarations: [EditComponentPrompt, PeerChatAuthoringComponent],
       providers: [
@@ -62,9 +66,9 @@ describe('PeerChatAuthoringComponent', () => {
         ProjectAssetService,
         ProjectService,
         SessionService,
-        TeacherProjectService,
-        UtilService
-      ]
+        TeacherProjectService
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
@@ -83,5 +87,9 @@ describe('PeerChatAuthoringComponent', () => {
     spyOn(component, 'componentChanged').and.callFake(() => {});
     component.componentContent = copy(componentContent);
     fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 });

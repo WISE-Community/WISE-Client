@@ -1,8 +1,8 @@
 <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="12px">
   <button
     *ngIf="isSaveButtonVisible"
-    mat-button
-    class="mat-primary mat-raised-button"
+    mat-raised-button
+    color="primary"
     (click)="save()"
     [disabled]="isDisabled || !isDirty"
     i18n
@@ -11,8 +11,8 @@
   </button>
   <button
     *ngIf="isSubmitButtonVisible"
-    mat-button
-    class="mat-primary mat-raised-button"
+    mat-raised-button
+    color="primary"
     (click)="submit()"
     [disabled]="isSubmitButtonDisabled || isDisabled || !isSubmitDirty"
     i18n

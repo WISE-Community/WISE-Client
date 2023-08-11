@@ -24,6 +24,8 @@ import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.c
 import { DialogGuidanceService } from '../dialogGuidanceService';
 import { DialogGuidanceStudentComponent } from './dialog-guidance-student.component';
 import { DialogGuidanceComponent } from '../DialogGuidanceComponent';
+import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let component: DialogGuidanceStudentComponent;
 let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
@@ -49,7 +51,8 @@ describe('DialogGuidanceStudentComponent', () => {
         MatInputModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [DialogGuidanceFeedbackService]
+      providers: [DialogGuidanceFeedbackService],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
@@ -231,15 +234,13 @@ function expectIsShowComputerAvatarSelector(
   expect(component.isShowComputerAvatarSelector).toEqual(expectedIsShowComputerAvatarSelector);
 }
 
-function createDummyScoringResponse() {
+function createDummyScoringResponse(): RawCRaterResponse {
   return {
-    responses: {
-      feedback: {
-        ideas: [{ 2: false }, { 3: false }]
-      },
-      trait_scores: {
-        ki: { score: 1 }
-      }
+    feedback: {
+      ideas: [{ 2: false }, { 3: false }]
+    },
+    trait_scores: {
+      ki: { score: 1 }
     }
-  };
+  } as RawCRaterResponse;
 }

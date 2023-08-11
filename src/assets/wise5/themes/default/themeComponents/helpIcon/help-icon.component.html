@@ -1,10 +1,10 @@
 <div class="help-icon mat-elevation-z1" [ngClass]="{ pulse: pulse }">
   <button
-    mat-icon-button
-    md-button
+    mat-mini-fab
+    color="default" 
     [attr.aria-label]="label"
     (click)="showRubric()"
-    class="mat-whiteframe-1dp mat-icon-button help-icon__button"
+    class="help-icon__button"
   >
     <mat-icon [ngClass]="['mat-36', 'help-icon__icon', 'info']">{{ icon }}</mat-icon>
   </button>

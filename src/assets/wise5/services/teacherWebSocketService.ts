@@ -53,7 +53,7 @@ export class TeacherWebSocketService {
         this.classroomStatusService.broadcastStudentStatusReceived({ studentStatus: status });
       } else if (body.type === 'newStudentAchievement') {
         const achievement = JSON.parse(body.content);
-        this.AchievementService.broadcastNewStudentAchievement({ studentAchievement: achievement });
+        this.AchievementService.broadcastNewStudentAchievement(achievement);
       } else if (body.type === 'annotation') {
         const annotationData = JSON.parse(body.content);
         this.broadcastNewAnnotationReceived({ annotation: annotationData });

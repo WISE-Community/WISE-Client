@@ -3,7 +3,6 @@ import { ConfigService } from '../../../services/configService';
 import { DataExportService } from '../../../services/dataExportService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { DataExportComponent } from '../data-export/data-export.component';
 import { DataExportContext } from '../DataExportContext';
 import { DataExportStrategy } from './DataExportStrategy';
@@ -16,7 +15,6 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
   dataExportService: DataExportService;
   projectService: TeacherProjectService;
   teacherDataService: TeacherDataService;
-  utilService: UtilService;
 
   setDataExportContext(context: DataExportContext) {
     this.context = context;
@@ -26,7 +24,6 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
     this.dataExportService = context.controller.dataExportService;
     this.projectService = context.controller.projectService;
     this.teacherDataService = context.controller.teacherDataService;
-    this.utilService = context.controller.utilService;
   }
 
   abstract export();

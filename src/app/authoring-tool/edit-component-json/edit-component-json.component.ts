@@ -1,4 +1,3 @@
-import * as angular from 'angular';
 import { Component, Input } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -47,11 +46,11 @@ export class EditComponentJsonComponent {
     this.subscriptions.unsubscribe();
   }
 
-  setComponentContentJsonString() {
-    this.componentContentJSONString = angular.toJson(this.component.content, 4);
+  private setComponentContentJsonString(): void {
+    this.componentContentJSONString = JSON.stringify(this.component.content, null, 4);
   }
 
-  toggleJSONView(): void {
+  protected toggleJSONView(): void {
     if (this.showJSONAuthoring) {
       if (this.isJSONValid()) {
         this.saveChanges();
@@ -71,7 +70,7 @@ export class EditComponentJsonComponent {
     }
   }
 
-  isJSONValid(): boolean {
+  private isJSONValid(): boolean {
     try {
       JSON.parse(this.componentContentJSONString);
       return true;
@@ -80,25 +79,22 @@ export class EditComponentJsonComponent {
     }
   }
 
-  saveChanges(): void {
+  private saveChanges(): void {
     try {
-      const editedComponentContent = angular.fromJson(this.componentContentJSONString);
-      this.projectService.replaceComponent(
-        this.component.nodeId,
-        this.component.id,
-        editedComponentContent
-      );
+      this.projectService
+        .getNode(this.component.nodeId)
+        .replaceComponent(this.component.id, JSON.parse(this.componentContentJSONString));
       this.projectService.componentChanged();
     } catch (e) {
       this.notificationService.showJSONInvalidMessage();
     }
   }
 
-  rememberRecentValidJSON(): void {
+  private rememberRecentValidJSON(): void {
     this.validComponentContentJSONString = this.componentContentJSONString;
   }
 
-  rollbackToRecentValidJSON(): void {
+  private rollbackToRecentValidJSON(): void {
     this.componentContentJSONString = this.validComponentContentJSONString;
   }
 }

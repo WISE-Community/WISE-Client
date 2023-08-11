@@ -6,6 +6,10 @@ import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
+import {
+  insertWiseLinks,
+  replaceWiseLinks
+} from '../../../assets/wise5/common/wise-link/wise-link';
 
 @Component({
   selector: 'notebook-report',
@@ -51,7 +55,9 @@ export class NotebookReportComponent extends NotebookParentComponent {
     if (this.mode !== 'classroomMonitor') {
       this.reportItem.id = null; // set the id to null so it can be inserted as initial version, as opposed to updated. this is true for both new and just-loaded reports.
     }
-    this.reportItemContent = this.ProjectService.injectAssetPaths(this.reportItem.content.content);
+    this.reportItemContent = this.ProjectService.injectAssetPaths(
+      replaceWiseLinks(this.reportItem.content.content)
+    );
     this.latestAnnotations = this.AnnotationService.getLatestNotebookItemAnnotations(
       this.workgroupId,
       this.reportId
@@ -160,7 +166,9 @@ export class NotebookReportComponent extends NotebookParentComponent {
 
   changed(value: string): void {
     this.dirty = true;
-    this.reportItem.content.content = this.ConfigService.removeAbsoluteAssetPaths(value);
+    this.reportItem.content.content = this.ConfigService.removeAbsoluteAssetPaths(
+      insertWiseLinks(value)
+    );
     this.clearSaveTime();
   }
 

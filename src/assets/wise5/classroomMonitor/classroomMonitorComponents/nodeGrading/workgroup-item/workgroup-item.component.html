@@ -7,7 +7,7 @@
 >
   <button
     mat-button
-    class="list-item__subheader-button"
+    class="list-item__subheader-button team-button"
     i18n-aria-label
     aria-label="Show/hide team's work for this step"
     [ngClass]="{ 'list-item--noclick': !showScore || disabled }"
@@ -35,27 +35,30 @@
   </button>
   <mat-list-item *ngIf="expanded && !disabled" class="grading__item-container">
     <div class="grading__item" style="width: 100%">
-      <div
-        id="component_{{ component.id }}_{{ workgroupId }}"
-        class="component component--grading"
-        *ngFor="let component of components; let i = index"
-      >
-        <div [hidden]="!isComponentVisible(component.id)">
-          <h3 class="accent-1 mat-body-2 gray-lightest-bg component__header">
-            {{ i + 1 + '. ' + getComponentTypeLabel(component.type) }}&nbsp;
-            <component-new-work-badge
+      <ng-container *ngFor="let component of components; let i = index">
+        <div
+          *ngIf="componentIdToIsVisible[component.id]"
+          id="component_{{ component.id }}_{{ workgroupId }}"
+          class="component component--grading"
+        >
+          <div [hidden]="!isComponentVisible(component.id)">
+            <h3 class="accent-1 mat-subtitle-2 gray-lightest-bg component__header">
+              {{ i + 1 + '. ' + getComponentTypeLabel(component.type) }}&nbsp;
+              <component-new-work-badge
+                [componentId]="component.id"
+                [workgroupId]="workgroupId"
+                [nodeId]="nodeId"
+              ></component-new-work-badge>
+            </h3>
+            <workgroup-component-grading
+              class="component--grading__response__content"
               [componentId]="component.id"
               [workgroupId]="workgroupId"
               [nodeId]="nodeId"
-            ></component-new-work-badge>
-          </h3>
-          <workgroup-component-grading
-            [componentId]="component.id"
-            [workgroupId]="workgroupId"
-            [nodeId]="nodeId"
-          ></workgroup-component-grading>
+            ></workgroup-component-grading>
+          </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </mat-list-item>
 </div>

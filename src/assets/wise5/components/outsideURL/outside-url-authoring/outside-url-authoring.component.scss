@@ -1,3 +1,5 @@
+
+/* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
 label.mat-slide-toggle-label {
   display: flex;
 }
@@ -44,15 +46,19 @@ p.select-oer-instructions {
 
 .oer-card-title {
   font-size: 14px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .oer-card-image {
-  margin-left: -16px;
-  margin-right: -16px;
   position: relative;
   padding-top: 60%;
   background-size: cover;
   background-position: center;
+}
+
+.oer-card-actions {
+  padding: 0px 16px 0px 16px !important;
 }
 
 .oer-card-actions-spacer {
@@ -75,4 +81,8 @@ p.select-oer-instructions {
 .dimension-input-container {
   margin-right: 20px;
   width: 150px;
+}
+
+.mat-icon {
+  margin: 0px;
 }

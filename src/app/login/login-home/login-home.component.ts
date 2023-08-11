@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,29 +11,29 @@ import { ConfigService } from '../../services/config.service';
   styleUrls: ['./login-home.component.scss']
 })
 export class LoginHomeComponent implements OnInit {
+  accessCode: string = '';
   credentials: any = { username: '', password: '', recaptchaResponse: null };
-  passwordError: boolean = false;
-  processing: boolean = false;
   isGoogleAuthenticationEnabled: boolean = false;
+  isRecaptchaEnabled: boolean = false;
+  isRecaptchaVerificationFailed: boolean = false;
   isReLoginDueToErrorSavingData: boolean;
   isShowGoogleLogin: boolean = true;
-  recaptchaPublicKey: string = '';
-  isRecaptchaRequired: boolean = false;
-  accessCode: string = '';
+  passwordError: boolean = false;
+  processing: boolean = false;
   @ViewChild('recaptchaRef', { static: false }) recaptchaRef: any;
 
   constructor(
-    private userService: UserService,
+    private configService: ConfigService,
     private router: Router,
     private route: ActivatedRoute,
-    private configService: ConfigService
+    private recaptchaV3Service: ReCaptchaV3Service,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
     this.configService.getConfig().subscribe((config) => {
       if (config != null) {
         this.isGoogleAuthenticationEnabled = config.googleClientId != '';
-        this.recaptchaPublicKey = this.configService.getRecaptchaPublicKey();
       }
       if (this.userService.isSignedIn()) {
         this.router.navigateByUrl(this.getRedirectUrl(''));
@@ -48,14 +49,12 @@ export class LoginHomeComponent implements OnInit {
       if (params['username'] != null) {
         this.credentials.username = params['username'];
       }
-      if (params['is-recaptcha-required'] != null) {
-        this.isRecaptchaRequired = JSON.parse(params['is-recaptcha-required']);
-      }
       if (params['accessCode'] != null) {
         this.accessCode = params['accessCode'];
       }
     });
     this.isReLoginDueToErrorSavingData = this.isRedirectToAppRoutes();
+    this.isRecaptchaEnabled = this.configService.isRecaptchaEnabled();
   }
 
   private isRedirectToAppRoutes(): boolean {
@@ -63,43 +62,27 @@ export class LoginHomeComponent implements OnInit {
     return regExp.test(this.getRedirectUrl(''));
   }
 
-  login(): boolean {
+  async login(): Promise<void> {
     this.processing = true;
     this.passwordError = false;
-    this.userService.authenticate(this.credentials, (response) => {
+    if (this.isRecaptchaEnabled) {
+      this.credentials.recaptchaResponse = await lastValueFrom(
+        this.recaptchaV3Service.execute('importantAction')
+      );
+    }
+    this.userService.authenticate(this.credentials, (response: any) => {
       if (this.userService.isAuthenticated) {
         this.router.navigateByUrl(this.getRedirectUrl(''));
       } else {
         this.processing = false;
-        this.isRecaptchaRequired = response.isRecaptchaRequired;
-        this.credentials.password = null;
-        if (this.isRecaptchaRequired) {
-          this.passwordError = false;
-          this.addParametersToURL();
-          this.resetRecaptcha();
+        this.credentials.password = '';
+        if (response.isRecaptchaVerificationFailed) {
+          this.isRecaptchaVerificationFailed = true;
         } else {
           this.passwordError = true;
         }
       }
     });
-    return false;
-  }
-
-  public addParametersToURL() {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        username: this.credentials.username,
-        'is-recaptcha-required': true
-      },
-      queryParamsHandling: 'merge'
-    });
-  }
-
-  public resetRecaptcha() {
-    if (this.recaptchaRef != null) {
-      this.recaptchaRef.reset();
-    }
   }
 
   public socialSignIn(socialPlatform: string) {

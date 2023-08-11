@@ -2,31 +2,20 @@
 
 import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
-import './addComponent/addComponentModule';
 import './addLesson/addLessonModule';
 import './addNode/addNodeModule';
-import '../components/component-authoring.module';
-import './components/shared/shared';
 import './importComponent/importComponentModule';
 import './importStep/importStepModule';
-import './node/editRubric/editRubricModule';
 import './node/node-authoring.module';
-import './project/project-authoring.module';
+import './project-authoring/project-authoring.module';
 import './structure/structureAuthoringModule';
 import { ProjectLibraryService } from '../services/projectLibraryService';
-import { AuthoringToolComponent } from '../authoringTool/authoringToolComponent';
-import { MainAuthoringComponent } from '../authoringTool/main/mainAuthoringComponent';
-import { WiseAuthoringTinymceEditorComponent } from '../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
-import { StepToolsComponent } from '../common/stepTools/step-tools.component';
+import { AuthoringToolComponent } from './authoring-tool.component';
 
 export default angular
   .module('authoringTool', [
-    'addComponentModule',
     'addLessonModule',
     'addNodeModule',
-    'atShared',
-    'componentAuthoringModule',
-    'editRubricModule',
     'importComponentModule',
     'importStepModule',
     'nodeAuthoringModule',
@@ -35,18 +24,10 @@ export default angular
     'ui.router'
   ])
   .directive(
-    'stepTools',
-    downgradeComponent({ component: StepToolsComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'wiseAuthoringTinymceEditor',
-    downgradeComponent({
-      component: WiseAuthoringTinymceEditorComponent
-    }) as angular.IDirectiveFactory
+    'authoringToolComponent',
+    downgradeComponent({ component: AuthoringToolComponent }) as angular.IDirectiveFactory
   )
   .factory('ProjectLibraryService', downgradeInjectable(ProjectLibraryService))
-  .component('authoringToolComponent', AuthoringToolComponent)
-  .component('mainAuthoringComponent', MainAuthoringComponent)
   .config([
     '$stateProvider',
     '$translatePartialLoaderProvider',
@@ -58,9 +39,13 @@ export default angular
           abstract: true,
           component: 'authoringToolComponent'
         })
+        .state('root.at.new-unit', {
+          url: '/new-unit',
+          component: 'addProjectComponent'
+        })
         .state('root.at.main', {
           url: '/home',
-          component: 'mainAuthoringComponent',
+          component: 'projectListComponent',
           resolve: {
             config: [
               'ConfigService',

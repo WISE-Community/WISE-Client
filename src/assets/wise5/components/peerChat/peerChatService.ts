@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ConfigService } from '../../services/configService';
 import { ComponentService } from '../componentService';
 import { PeerChatMessage } from './PeerChatMessage';
+import { getAvatarColorForWorkgroupId } from '../../common/workgroup/workgroup';
 
 @Injectable()
 export class PeerChatService extends ComponentService {
@@ -59,7 +60,7 @@ export class PeerChatService extends ComponentService {
   setPeerChatWorkgroups(peerChatWorkgroupInfos: any, workgroupIds: number[]): any {
     for (const workgroupId of workgroupIds) {
       peerChatWorkgroupInfos[workgroupId] = {
-        avatarColor: this.configService.getAvatarColorForWorkgroupId(workgroupId),
+        avatarColor: getAvatarColorForWorkgroupId(workgroupId),
         displayNames: this.configService.isTeacherWorkgroupId(workgroupId)
           ? $localize`Teacher`
           : this.configService.getUsernamesStringByWorkgroupId(workgroupId),

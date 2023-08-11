@@ -1,7 +1,7 @@
 'use strict';
 
 import { ProjectService } from '../../services/projectService';
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Node } from '../../common/Node';
 

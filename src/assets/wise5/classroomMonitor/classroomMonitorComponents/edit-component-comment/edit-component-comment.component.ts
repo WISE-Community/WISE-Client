@@ -5,7 +5,7 @@ import { AnnotationService } from '../../../services/annotationService';
 
 @Component({
   selector: 'edit-component-comment',
-  styles: ['.mat-form-field { display: initial }', 'textarea { resize: none }'],
+  styles: ['.mat-mdc-form-field { display: initial }', 'textarea { resize: none }'],
   templateUrl: 'edit-component-comment.component.html'
 })
 export class EditComponentCommentComponent {

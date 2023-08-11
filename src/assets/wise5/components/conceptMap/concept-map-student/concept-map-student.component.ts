@@ -9,13 +9,13 @@ import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { ConceptMapService } from '../conceptMapService';
 import { DialogWithCloseComponent } from '../../../directives/dialog-with-close/dialog-with-close.component';
 import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
+import { hasConnectedComponent } from '../../../common/ComponentContent';
 
 @Component({
   selector: 'concept-map-student',
@@ -75,8 +75,7 @@ export class ConceptMapStudent extends ComponentStudent {
     protected NotebookService: NotebookService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
+    protected StudentDataService: StudentDataService
   ) {
     super(
       AnnotationService,
@@ -156,7 +155,7 @@ export class ConceptMapStudent extends ComponentStudent {
 
   initializeSVG(): void {
     this.setupSVG();
-    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
+    if (hasConnectedComponent(this.componentContent, 'showWork')) {
       this.handleConnectedComponents();
     } else if (this.componentStateHasStudentWork(this.componentState, this.componentContent)) {
       this.componentState = this.ProjectService.injectAssetPaths(this.componentState);

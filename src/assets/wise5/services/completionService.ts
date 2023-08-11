@@ -24,7 +24,7 @@ export class CompletionService {
     } else if (this.projectService.isGroupNode(nodeId)) {
       result = this.isGroupNodeCompleted(nodeId);
     } else if (this.projectService.isApplicationNode(nodeId)) {
-      result = this.isStepNodeCompleted(nodeId);
+      result = this.dataService.nodeStatuses[nodeId]?.isCompleted;
     }
     return result;
   }
@@ -47,12 +47,6 @@ export class CompletionService {
       }
     }
     return false;
-  }
-
-  private isStepNodeCompleted(nodeId: string): boolean {
-    return this.projectService
-      .getComponents(nodeId)
-      .every((component) => this.isComponentCompleted(nodeId, component.id));
   }
 
   private isGroupNodeCompleted(nodeId: string): boolean {

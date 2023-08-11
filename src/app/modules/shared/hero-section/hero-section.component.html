@@ -21,7 +21,7 @@
       fxLayoutGap.gt-xs="24px"
     >
       <div
-        class="main-content"
+        class="hero-main-content"
         [ngClass]="{ 'with-sidecontent': sideRef }"
         fxLayout="column"
         fxLayoutAlign="center center"
@@ -33,8 +33,8 @@
         <h1
           *ngIf="headline || headlineRef"
           class="headline"
-          ngClass="mat-display-2"
-          [ngClass]="{ 'with-tagline': taglineRef, 'mat-display-2': false, 'mat-title': true }"
+          ngClass="mat-headline-3"
+          [ngClass]="{ 'with-tagline': taglineRef, 'mat-headline-3': false, 'mat-title': true }"
         >
           <ng-container
             *ngTemplateOutlet="headlineRef ? headlineRef : defaultHeadline"
@@ -44,15 +44,14 @@
         <h2
           *ngIf="tagline || taglineRef"
           class="tagline"
-          ngClass="mat-display-1"
-          [ngClass.xs]="{ 'mat-display-1': false, 'mat-title': true }"
+          ngClass="mat-headline-4"
+          [ngClass.xs]="{ 'mat-headline-4': false, 'mat-title': true }"
         >
           <ng-container *ngTemplateOutlet="taglineRef ? taglineRef : defaultTagline"></ng-container>
         </h2>
       </div>
       <div
         *ngIf="sideRef"
-        class="side-content"
         fxLayoutAlign="end center"
         fxFlex="none"
         fxFlex.gt-sm="40"

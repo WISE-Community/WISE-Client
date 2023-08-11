@@ -5,40 +5,17 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { UserService } from '../../services/user.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { StudentService } from '../../student/student.service';
 import { User } from '../../domain/user';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { LibraryService } from '../../services/library.service';
-import { Config } from '../../domain/config';
-
-export class MockUserService {
-  getUser(): BehaviorSubject<User> {
-    const user: User = new User();
-    user.firstName = 'Demo';
-    user.lastName = 'User';
-    user.username = 'DemoUser';
-    const userBehaviorSubject: BehaviorSubject<User> = new BehaviorSubject<User>(null);
-    userBehaviorSubject.next(user);
-    return userBehaviorSubject;
-  }
-
-  isSignedIn(): boolean {
-    return true;
-  }
-
-  isStudent(): boolean {
-    return false;
-  }
-}
-
-export class MockConfigService {
-  getConfig(): Observable<Config> {
-    return Observable.create(new Config());
-  }
-}
+import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from '../../services/user.service';
+import { getErrorMessage } from '../../common/test-helper';
 
 export class MockStudentService {
   getTeacherList(): Observable<User> {
@@ -48,26 +25,35 @@ export class MockStudentService {
 
 export class MockLibraryService {}
 
-describe('ContactFormComponent', () => {
-  let component: ContactFormComponent;
-  let fixture: ComponentFixture<ContactFormComponent>;
+let component: ContactFormComponent;
+let configService: ConfigService;
+let fixture: ComponentFixture<ContactFormComponent>;
+let http: HttpClient;
+let isRecaptchaEnabledSpy: jasmine.Spy;
+const recaptchaPrivateKey = '123';
+let recaptchaV3Service: ReCaptchaV3Service;
+let userService: UserService;
 
+describe('ContactFormComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ContactFormComponent],
         imports: [
           BrowserAnimationsModule,
-          RouterTestingModule,
-          ReactiveFormsModule,
+          HttpClientTestingModule,
+          MatInputModule,
           MatSelectModule,
-          MatInputModule
+          ReactiveFormsModule,
+          RecaptchaV3Module,
+          RouterTestingModule
         ],
         providers: [
-          { provide: ConfigService, useClass: MockConfigService },
-          { provide: UserService, useClass: MockUserService },
+          ConfigService,
+          { provide: LibraryService, useClass: MockLibraryService },
+          { provide: RECAPTCHA_V3_SITE_KEY, useValue: recaptchaPrivateKey },
           { provide: StudentService, useClass: MockStudentService },
-          { provide: LibraryService, useClass: MockLibraryService }
+          UserService
         ],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
@@ -75,13 +61,15 @@ describe('ContactFormComponent', () => {
   );
 
   beforeEach(() => {
+    configService = TestBed.inject(ConfigService);
+    recaptchaV3Service = TestBed.inject(ReCaptchaV3Service);
+    userService = TestBed.inject(UserService);
     fixture = TestBed.createComponent(ContactFormComponent);
+    http = TestBed.inject(HttpClient);
+    isRecaptchaEnabledSpy = spyOn(configService, 'isRecaptchaEnabled');
+    isRecaptchaEnabledSpy.and.returnValue(false);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 
   it('should show the email field if the user is not signed in', () => {
@@ -124,6 +112,12 @@ describe('ContactFormComponent', () => {
   });
 
   it('should auto populate the name field if the user is signed in', () => {
+    spyOn(userService, 'isSignedIn').and.returnValue(true);
+    spyOn(userService, 'isStudent').and.returnValue(false);
+    spyOn(userService, 'getUser').and.returnValue(
+      new BehaviorSubject(new User({ firstName: 'Demo', lastName: 'User', username: 'DemoUser' }))
+    );
+    component.ngOnInit();
     const nameInput = fixture.debugElement.nativeElement.querySelector('input[name="name"]');
     const name = nameInput.valueOf().value;
     expect(name).toBe('Demo User');
@@ -144,4 +138,59 @@ describe('ContactFormComponent', () => {
     const submitButton = fixture.debugElement.nativeElement.querySelector('button');
     expect(submitButton.disabled).toBe(false);
   });
+
+  submit();
 });
+
+function submit(): void {
+  describe('submit()', () => {
+    submit_showErrorMessage();
+    submit_showRecaptchaErrorMessage();
+    submit_showSuccess();
+  });
+}
+
+function submit_showErrorMessage(): void {
+  it('should show error message', async () => {
+    const httpPostSpy = httpPostSpyAndReturn('error');
+    await submitAndDetectChanges();
+    expect(httpPostSpy).toHaveBeenCalled();
+    expect(getErrorMessage(fixture)).toContain(
+      'Sorry, there was a problem submitting the form. Please try again.'
+    );
+  });
+}
+
+function submit_showRecaptchaErrorMessage(): void {
+  it('should show recaptcha error message', async () => {
+    isRecaptchaEnabledSpy.and.returnValue(true);
+    component.ngOnInit();
+    spyOn(recaptchaV3Service, 'execute').and.returnValue(of('generated-token'));
+    const httpPostSpy = httpPostSpyAndReturn('error');
+    await submitAndDetectChanges();
+    expect(httpPostSpy).toHaveBeenCalled();
+    expect(getErrorMessage(fixture)).toContain(
+      'Recaptcha failed. Please reload the page and try again!'
+    );
+  });
+}
+
+function submit_showSuccess(): void {
+  it('should successfully submit', async () => {
+    const httpPostSpy = httpPostSpyAndReturn('success');
+    await submitAndDetectChanges();
+    expect(httpPostSpy).toHaveBeenCalled();
+    expect(fixture.nativeElement.textContent).toContain(
+      'Your message has been sent. We will get back to you as soon as possible.'
+    );
+  });
+}
+
+async function submitAndDetectChanges(): Promise<void> {
+  await component.submit();
+  fixture.detectChanges();
+}
+
+function httpPostSpyAndReturn(status: string): jasmine.Spy {
+  return spyOn(http, 'post').and.returnValue(of({ status: status }));
+}

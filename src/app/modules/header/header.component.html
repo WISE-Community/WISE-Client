@@ -1,6 +1,6 @@
 <header class="header">
   <mat-toolbar class="header__content section--slant">
-    <div class="content" fxLayout="row" fxLayoutAlign="start center">
+    <div class="content" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
       <a routerLink="/" class="header__logo">
         <picture>
           <source
@@ -16,8 +16,15 @@
       <span fxFlex="1 1 auto"></span>
       <app-header-links fxHide fxShow.gt-sm [user]="user" [location]="location"></app-header-links>
       <app-header-account-menu *ngIf="role" [user]="user"></app-header-account-menu>
-      <button *ngIf="!location" mat-icon-button fxHide.gt-sm (click)="showMobileMenu()">
-        <mat-icon i18n-aria-label aria-label="Main menu">menu</mat-icon>
+      <button
+        *ngIf="!location"
+        mat-icon-button
+        fxHide.gt-sm
+        (click)="showMobileMenu()"
+        i18n-aria-label
+        aria-label="Main menu"
+      >
+        <mat-icon>menu</mat-icon>
       </button>
     </div>
   </mat-toolbar>

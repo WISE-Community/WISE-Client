@@ -1,4 +1,4 @@
-<h2 class="mat-dialog-title" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+<h2 mat-dialog-title class="mat-dialog-title--icons" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
   <mat-icon svgIcon="google-classroom"></mat-icon>
   <span i18n>Share to Google Classroom</span>
 </h2>
@@ -19,7 +19,7 @@
 <ng-container *ngIf="courses.length && !isAdded">
   <form [formGroup]="form" (ngSubmit)="addToClassroom()">
     <mat-dialog-content class="dialog-content-scroll" fxLayout="column">
-      <p class="mat-subheading-1 accent-1">
+      <p class="mat-body-1 accent-1">
         {{ data.run.name }} <span class="mat-caption" i18n>(Run ID: {{ data.run.id }})</span>
       </p>
       <p i18n>Add an assignment for this unit to Google Classroom.</p>
@@ -50,7 +50,13 @@
       fxLayoutGap="8px"
     >
       <button mat-button (click)="closeAll()" [disabled]="isAdding" i18n>Cancel</button>
-      <button mat-flat-button type="submit" color="primary" [disabled]="form.invalid || isAdding">
+      <button
+        mat-flat-button
+        type="submit"
+        color="primary"
+        [disabled]="form.invalid || isAdding"
+        class="button--progress"
+      >
         <mat-progress-bar *ngIf="isAdding" mode="indeterminate"></mat-progress-bar>
         <ng-container i18n>Add</ng-container>
       </button>
@@ -60,7 +66,7 @@
 <ng-container *ngIf="isAdded && courses.length">
   <mat-dialog-content>
     <div class="info-block">
-      <p class="mat-subheading-1 accent-1">
+      <p class="mat-body-1 accent-1">
         {{ data.run.name }} <span class="mat-caption" i18n>(Run ID: {{ data.run.id }})</span>
       </p>
       <div *ngIf="addSuccessCount > 0">
@@ -75,7 +81,7 @@
       </div>
     </div>
   </mat-dialog-content>
-  <mat-dialog-actions fxLayoutAlign="end">
+  <mat-dialog-actions align="end">
     <button mat-button (click)="closeAll()" i18n>Done</button>
   </mat-dialog-actions>
 </ng-container>

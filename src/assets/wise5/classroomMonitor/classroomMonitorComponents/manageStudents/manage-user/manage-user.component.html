@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px" class="manage-user">
   <show-student-info [user]="user"></show-student-info>
   <span fxFlex></span>
   <button
@@ -19,7 +19,7 @@
     i18n-matTooltip
     matTooltipPosition="above"
   >
-    <mat-icon class="mat-18" svgIcon="google"></mat-icon>
+    <mat-icon svgIcon="google"></mat-icon>
   </button>
   <button
     *ngIf="!user.isGoogleUser"

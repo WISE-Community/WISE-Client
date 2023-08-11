@@ -4,8 +4,9 @@ import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { formatDate } from '@angular/common';
-import { UtilService } from './utilService';
 import { isMatchingPeriods } from '../common/period/period';
+import { millisecondsToDateTime } from '../common/datetime/datetime';
+import { usernameComparator } from '../common/user/user';
 
 @Injectable()
 export class ConfigService {
@@ -13,11 +14,7 @@ export class ConfigService {
   private configRetrievedSource: Subject<any> = new Subject<any>();
   public configRetrieved$: Observable<any> = this.configRetrievedSource.asObservable();
 
-  constructor(
-    private http: HttpClient,
-    @Inject(LOCALE_ID) private localeID: string,
-    private utilService: UtilService
-  ) {}
+  constructor(private http: HttpClient, @Inject(LOCALE_ID) private localeID: string) {}
 
   setConfig(config) {
     this.config = config;
@@ -362,22 +359,9 @@ export class ConfigService {
   sortClassmateUserInfosAlphabeticallyByName() {
     const classmateUserInfos = this.getClassmateUserInfos();
     if (classmateUserInfos != null) {
-      classmateUserInfos.sort(this.sortClassmateUserInfosAlphabeticallyByNameHelper);
+      classmateUserInfos.sort(usernameComparator);
     }
     return classmateUserInfos;
-  }
-
-  sortClassmateUserInfosAlphabeticallyByNameHelper(a, b) {
-    if (a != null && a.username != null && b != null && b.username != null) {
-      const aUsername = a.username.toLowerCase();
-      const bUsername = b.username.toLowerCase();
-      if (aUsername < bUsername) {
-        return -1;
-      } else if (aUsername > bUsername) {
-        return 1;
-      }
-    }
-    return 0;
   }
 
   getPermissions() {
@@ -805,22 +789,6 @@ export class ConfigService {
     return content;
   }
 
-  getAvatarColorForWorkgroupId(workgroupId) {
-    const avatarColors = [
-      '#E91E63',
-      '#9C27B0',
-      '#CDDC39',
-      '#2196F3',
-      '#FDD835',
-      '#43A047',
-      '#795548',
-      '#EF6C00',
-      '#C62828',
-      '#607D8B'
-    ];
-    return avatarColors[workgroupId % 10];
-  }
-
   /**
    * Get the project assets folder path
    * @param includeHost whether to include the host in the URL
@@ -985,12 +953,12 @@ export class ConfigService {
   }
 
   getFormattedStartDate() {
-    return this.utilService.convertMillisecondsToFormattedDateTime(this.getStartDate());
+    return millisecondsToDateTime(this.getStartDate());
   }
 
   getFormattedEndDate() {
     if (this.getEndDate() != null) {
-      return this.utilService.convertMillisecondsToFormattedDateTime(this.getEndDate());
+      return millisecondsToDateTime(this.getEndDate());
     }
     return '';
   }

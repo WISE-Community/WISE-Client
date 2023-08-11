@@ -2,11 +2,10 @@
 
 import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { AudioOscillatorService } from '../audioOscillatorService';
 
 @Component({
@@ -14,7 +13,7 @@ import { AudioOscillatorService } from '../audioOscillatorService';
   templateUrl: 'audio-oscillator-authoring.component.html',
   styleUrls: ['audio-oscillator-authoring.component.scss']
 })
-export class AudioOscillatorAuthoring extends ComponentAuthoring {
+export class AudioOscillatorAuthoring extends AbstractComponentAuthoring {
   maxAmplitude: number = this.AudioOscillatorService.maxAmplitude;
   sawtoothChecked: boolean;
   sineChecked: boolean;
@@ -26,8 +25,7 @@ export class AudioOscillatorAuthoring extends ComponentAuthoring {
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
   }

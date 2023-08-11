@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wise-link';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 
 @Component({
   selector: 'html-authoring',
   templateUrl: 'html-authoring.component.html'
 })
-export class HtmlAuthoring extends ComponentAuthoring {
+export class HtmlAuthoring extends AbstractComponentAuthoring {
   html: string = '';
 
   constructor(
@@ -19,7 +18,6 @@ export class HtmlAuthoring extends ComponentAuthoring {
     protected nodeService: NodeService,
     protected projectAssetService: ProjectAssetService,
     protected projectService: TeacherProjectService,
-    protected utilService: UtilService
   ) {
     super(configService, nodeService, projectAssetService, projectService);
   }

@@ -4,10 +4,10 @@
       <img src="assets/img/wise-web-logo-full.png" alt="WISE logo" />
     </a>
   </div>
-  <mat-card class="standalone__content mat-elevation-z4">
+  <mat-card appearance="outlined" class="standalone__content mat-elevation-z4">
     <mat-card-content>
       <div *ngIf="complete" class="center">
-        <p class="mat-body-2" i18n>Thank you for contacting WISE!</p>
+        <p class="mat-subtitle-2" i18n>Thank you for contacting WISE!</p>
         <p i18n>Your message has been sent. We will get back to you as soon as possible.</p>
         <br />
         <div>
@@ -101,16 +101,27 @@
             >
           </mat-form-field>
         </p>
-        <p *ngIf="isRecaptchaEnabled" class="recaptcha-container">
-          <re-captcha
-            formControlName="recaptcha"
-            (resolved)="recaptchaResolved($event)"
-            [siteKey]="recaptchaPublicKey"
-          ></re-captcha>
+        <p *ngIf="isRecaptchaEnabled" i18n>
+          This site is protected by reCAPTCHA and the Google
+          <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+          <a href="https://policies.google.com/terms">Terms of Service</a> apply.
         </p>
-        <p class="warn center standalone__error inactive" [ngClass]="{ failure: error }" i18n>
-          Sorry, there was a problem submitting the form. Please try again.
-        </p>
+        <ng-container *ngIf="!isError; else error">
+          <div>&nbsp;</div>
+        </ng-container>
+        <ng-template #error>
+          <mat-error
+            *ngIf="isRecaptchaEnabled && isRecaptchaError; else genericError"
+            class="center"
+            i18n
+            >Recaptcha failed. Please reload the page and try again!</mat-error
+          >
+        </ng-template>
+        <ng-template #genericError>
+          <mat-error class="center" i18n>
+            Sorry, there was a problem submitting the form. Please try again.
+          </mat-error>
+        </ng-template>
         <p>
           <button
             fxFlex
@@ -118,6 +129,7 @@
             color="primary"
             type="submit"
             [disabled]="!contactFormGroup.valid || isSendingRequest"
+            class="button--progress"
           >
             <mat-progress-bar *ngIf="isSendingRequest" mode="indeterminate"></mat-progress-bar>
             <ng-container i18n>Submit</ng-container>

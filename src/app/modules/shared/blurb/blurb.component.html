@@ -18,7 +18,7 @@
       <ng-container *ngTemplateOutlet="headlineRef ? headlineRef : defaultHeadline"></ng-container>
     </h2>
     <ng-template #defaultContent>{{ content }}</ng-template>
-    <p *ngIf="content || contentRef" class="mat-subheading-1">
+    <p *ngIf="content || contentRef">
       <ng-container *ngTemplateOutlet="contentRef ? contentRef : defaultContent"></ng-container>
     </p>
   </div>

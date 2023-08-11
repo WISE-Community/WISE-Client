@@ -4,7 +4,9 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-  templateUrl: 'choose-new-node-location.component.html'
+  selector: 'choose-new-node-location',
+  templateUrl: 'choose-new-node-location.component.html',
+  styleUrls: ['./choose-new-node-location.component.scss']
 })
 export class ChooseNewNodeLocation {
   nodeIds: string[];
@@ -34,7 +36,7 @@ export class ChooseNewNodeLocation {
       this.upgrade.$injector.get('$stateParams').initialComponents
     );
     this.save(newNode.id).then(() => {
-      this.goToNode(newNode.id);
+      this.goToNode(newNode);
     });
   }
 
@@ -54,8 +56,10 @@ export class ChooseNewNodeLocation {
     });
   }
 
-  goToNode(nodeId: string) {
-    this.upgrade.$injector.get('$state').go('root.at.project.node', { nodeId: nodeId });
+  private goToNode(node: any): void {
+    this.upgrade.$injector
+      .get('$state')
+      .go('root.at.project.node', { nodeId: node.id, newComponents: node.components });
   }
 
   isGroupNode(nodeId: string) {

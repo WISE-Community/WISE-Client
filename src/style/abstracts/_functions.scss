@@ -1,14 +1,5 @@
+@use 'sass:map';
 // create a custom Angular Material theme
-@function create-custom-theme($primary, $accent, $warn, $foreground, $background, $isDark: false) {
-  @return (
-    primary: $primary,
-    accent: $accent,
-    warn: $warn,
-    is-dark: $isDark,
-    foreground: $foreground,
-    background: $background,
-  );
-}
 
 /// Map deep get (from https://css-tricks.com/snippets/sass/deep-getset-maps/)
 /// @author Hugo Giraudel, modified by commenter Travis
@@ -31,7 +22,7 @@
   $keys: append($keys, $path);
 
   @each $key in $keys {
-    $value: map-get($value, $key);
+    $value: map.get($value, $key);
   }
 
   @return $value;

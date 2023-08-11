@@ -7,6 +7,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { NotificationService } from '../../../../services/notificationService';
 import { Notification } from '../../../../../../app/domain/notification';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 
 @Component({
   selector: 'top-bar',
@@ -34,9 +35,9 @@ export class TopBarComponent implements OnInit {
 
   constructor(
     private configService: ConfigService,
+    private dataService: TeacherDataService,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService,
-    private teacherDataService: TeacherDataService,
     private sessionService: SessionService,
     private upgrade: UpgradeModule
   ) {}
@@ -46,7 +47,7 @@ export class TopBarComponent implements OnInit {
     if (this.workgroupId == null) {
       this.workgroupId = 100 * Math.random();
     }
-    this.avatarColor = this.configService.getAvatarColorForWorkgroupId(this.workgroupId);
+    this.avatarColor = getAvatarColorForWorkgroupId(this.workgroupId);
     this.userInfo = this.configService.getMyUserInfo();
     this.notificationChangedSubscription = this.notificationService.notificationChanged$.subscribe(
       () => {
@@ -97,7 +98,7 @@ export class TopBarComponent implements OnInit {
    * @return Boolean whether any of the periods are paused
    */
   isAnyPeriodPaused(): boolean {
-    return this.teacherDataService.isAnyPeriodPaused();
+    return this.dataService.isAnyPeriodPaused();
   }
 
   switchToAuthoringView(): void {
@@ -153,7 +154,7 @@ export class TopBarComponent implements OnInit {
     const componentId = null;
     const componentType = null;
     const data = {};
-    return this.teacherDataService
+    return this.dataService
       .saveEvent(context, nodeId, componentId, componentType, category, eventName, data)
       .then((result) => {
         return result;

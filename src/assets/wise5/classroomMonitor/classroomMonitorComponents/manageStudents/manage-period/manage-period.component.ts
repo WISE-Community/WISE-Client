@@ -20,9 +20,9 @@ export class ManagePeriodComponent {
   unassignedTeam: any = { users: [] };
 
   constructor(
-    private ConfigService: ConfigService,
-    private GetWorkgroupService: GetWorkgroupService,
-    private WorkgroupService: WorkgroupService
+    private configService: ConfigService,
+    private getWorkgroupService: GetWorkgroupService,
+    private workgroupService: WorkgroupService
   ) {}
 
   ngOnChanges() {
@@ -33,7 +33,7 @@ export class ManagePeriodComponent {
     this.autoScroll = require('dom-autoscroller');
     this.registerAutoScroll();
     this.subscriptions.add(
-      this.ConfigService.configRetrieved$.subscribe(() => {
+      this.configService.configRetrieved$.subscribe(() => {
         this.init();
       })
     );
@@ -49,15 +49,16 @@ export class ManagePeriodComponent {
   }
 
   initTeams() {
-    this.teams = this.WorkgroupService.getWorkgroupsInPeriod(this.period.periodId);
+    this.teams = this.workgroupService.getWorkgroupsInPeriod(this.period.periodId);
     this.initEmptyTeams();
     this.initUnassignedTeam();
   }
 
   private initEmptyTeams() {
     this.emptyTeams.clear();
-    this.GetWorkgroupService.getAllWorkgroupsInPeriod(this.period.periodId).subscribe(
-      (workgroups: any[]) => {
+    this.getWorkgroupService
+      .getAllWorkgroupsInPeriod(this.period.periodId)
+      .subscribe((workgroups: any[]) => {
         for (const workgroup of workgroups) {
           if (!this.teams.has(workgroup.id)) {
             workgroup.workgroupId = workgroup.id;
@@ -65,19 +66,18 @@ export class ManagePeriodComponent {
             this.emptyTeams.set(workgroup.id, workgroup);
           }
         }
-      }
-    );
+      });
   }
 
   private initUnassignedTeam() {
     this.unassignedTeam = {
-      users: this.ConfigService.getUsersNotInWorkgroupInPeriod(this.period.periodId)
+      users: this.configService.getUsersNotInWorkgroupInPeriod(this.period.periodId)
     };
   }
 
   initStudents() {
     this.students.clear();
-    for (const workgroup of this.ConfigService.getClassmateUserInfos()) {
+    for (const workgroup of this.configService.getClassmateUserInfos()) {
       if (workgroup.periodId === this.period.periodId) {
         for (const user of workgroup.users) {
           this.students.add(user);

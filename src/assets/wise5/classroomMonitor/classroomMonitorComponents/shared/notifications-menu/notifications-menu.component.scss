@@ -7,26 +7,25 @@
   overflow-y: auto;
 }
 
-.notification {
-  height: auto !important;
-  padding: 8px 0px !important;
-  cursor: pointer;
-  &:hover {
-    background-color: rgba(158,158,158,0.2);
-  }
+.notifications-content .mat-mdc-list-item {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  height: auto;
 }
 
-.notification-message-div {
-  width: 100%;
+.mat-mdc-list-base {
+  padding: 0;
 }
 
-  .mat-list-item-content {
-  width: 100%;
+.notification-content {
+  white-space: normal;
 }
 
-.notification-step-title {
-  color: rgba(0,0,0,.54);
-  font-size: 12px !important;
-  margin: 0px !important;
-  padding: 0px !important;
+.mat-mdc-menu-content .mat-divider.mat-divider-horizontal {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.no-notifications {
+  padding: 16px;
 }

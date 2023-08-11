@@ -4,10 +4,10 @@ import * as html2canvas from 'html2canvas';
 import { Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
-import { UtilService } from '../../services/utilService';
 import { ConfigService } from '../../services/configService';
 import { HttpClient } from '@angular/common/http';
 import { convertToPNGFile } from '../../common/canvas/canvas';
+import { hasConnectedComponent } from '../../common/ComponentContent';
 
 @Injectable()
 export class GraphService extends ComponentService {
@@ -16,8 +16,7 @@ export class GraphService extends ComponentService {
   constructor(
     private configService: ConfigService,
     private http: HttpClient,
-    private StudentAssetService: StudentAssetService,
-    protected UtilService: UtilService
+    private StudentAssetService: StudentAssetService
   ) {
     super();
   }
@@ -128,17 +127,14 @@ export class GraphService extends ComponentService {
    * @param component The component content.
    * @return Whether the student can perform any work on this component.
    */
-  canEdit(component: any) {
+  canEdit(component: any): boolean {
     const series = component.series;
     for (const singleSeries of series) {
       if (singleSeries.canEdit) {
         return true;
       }
     }
-    if (this.UtilService.hasImportWorkConnectedComponent(component)) {
-      return true;
-    }
-    return false;
+    return hasConnectedComponent(component, 'importWork');
   }
 
   hasSeriesData(studentData: any) {
@@ -319,10 +315,6 @@ export class GraphService extends ComponentService {
     return document.querySelector(`#chart_${componentId} .highcharts-container`);
   }
 
-  isMultipleYAxes(yAxis: any): boolean {
-    return Array.isArray(yAxis);
-  }
-
   getSeriesColor(index: number): string {
     return this.seriesColors[index];
   }
@@ -412,10 +404,13 @@ export class GraphService extends ComponentService {
 
   getAxisTitle(series: any, axisObj: any): string {
     if (Array.isArray(axisObj)) {
-      if (axisObj[series.index].title.text == null || axisObj[series.index].title.text === '') {
-        return series.name;
-      } else {
-        return axisObj[series.index].title.text;
+      const axisIndex = series.options.yAxis == null ? series.index : series.options.yAxis;
+      if (axisObj[axisIndex] != null) {
+        if (axisObj[axisIndex].title.text == null || axisObj[axisIndex].title.text === '') {
+          return series.name;
+        } else {
+          return axisObj[axisIndex].title.text;
+        }
       }
     } else if (axisObj.title.text == null || axisObj.title.text === '') {
       return series.name;

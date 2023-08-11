@@ -9,6 +9,7 @@ import { StudentAccountMenuComponent } from './student-account-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 class MockProjectService {
   rootNode = {};
@@ -51,7 +52,8 @@ describe('StudentAccountMenuComponent', () => {
         StudentTeacherCommonServicesModule
       ],
       declarations: [StudentAccountMenuComponent],
-      providers: [{ provide: ProjectService, useClass: MockProjectService }]
+      providers: [{ provide: ProjectService, useClass: MockProjectService }],
+      schemas: [NO_ERRORS_SCHEMA]
     });
     const studentDataService = TestBed.inject(StudentDataService);
     studentDataService.nodeStatuses = {

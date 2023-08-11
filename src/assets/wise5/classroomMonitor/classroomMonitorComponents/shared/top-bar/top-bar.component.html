@@ -13,7 +13,8 @@
       fxHide.gt-md
       aria-label="Unit Info"
       i18n-aria-label
-      [matTooltip]="runInfo"
+      matTooltip="Unit Info"
+      i18n-matTooltip
     >
       <mat-icon>info</mat-icon>
     </button>
@@ -46,7 +47,6 @@
     mat-icon-button
     aria-label="Alerts"
     i18n-aria-label
-    class="mat-icon-button notification-btn notifications-menu-button"
     [matMenuTriggerFor]="notificationsMenu"
   >
     <span *ngIf="newNotifications.length > 0" class="notification-count"
@@ -97,7 +97,7 @@
           <mat-icon style="color: {{ avatarColor }}" class="mat-36"> account_circle </mat-icon>
         </div>
       </div>
-      <div class="mat-body-2">
+      <div class="mat-subtitle-2">
         {{ userInfo.firstName }} {{ userInfo.lastName }}
         <span class="mat-caption">({{ userInfo.username }})</span>
       </div>

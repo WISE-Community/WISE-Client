@@ -1,5 +1,5 @@
 <ng-container *ngIf="nodeStatus.isVisible" [ngSwitch]="type">
-  <mat-card *ngSwitchCase="'card'" [ngClass]="{ 'expanded mat-elevation-z6': expanded }">
+  <mat-card *ngSwitchCase="'card'" class="nav-item" [ngClass]="{ expanded: expanded }">
     <mat-card-header
       (click)="itemClicked($event)"
       (keyup.enter)="itemClicked($event)"
@@ -38,6 +38,7 @@
     <mat-card-actions fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
       <mat-progress-bar
         class="progress"
+        tabindex="0"
         mode="determinate"
         *ngIf="isGroup"
         value="{{ nodeStatus.progress.completionPct }}"
@@ -67,28 +68,30 @@
   <ng-container *ngSwitchCase="'list'">
     <button
       mat-list-item
-      class="list-item"
+      class="list-item nav-item"
       (click)="itemClicked($event)"
       tabindex="0"
       i18n-title
       title="Go to {{ nodeTitle }}"
       [ngClass]="{ group: isGroup }"
     >
-      <node-icon matListAvatar [nodeId]="nodeId" [icon]="nodeStatus.icon"></node-icon>
-      <p matLine>{{ nodeTitle }}</p>
-      <div fxLayoutAlign="center center" fxLayoutGap="8px">
-        <node-status-icon [nodeId]="nodeId"></node-status-icon>
-        <mat-icon
-          *ngIf="!nodeStatus.isVisitable"
-          class="secondary-text"
-          i18n-matTooltip
-          matTooltip="Item is locked"
-          matTooltipPosition="above"
-        >
-          lock
-        </mat-icon>
-      </div>
+      <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <node-icon matListAvatar [nodeId]="nodeId" [icon]="nodeStatus.icon" size="24"></node-icon>
+        <span class="mat-body-2">{{ nodeTitle }}</span>
+        <span fxFlex></span>
+        <span fxLayoutAlign="center center" fxLayoutGap="8px">
+          <node-status-icon [nodeId]="nodeId"></node-status-icon>
+          <mat-icon
+            *ngIf="!nodeStatus.isVisitable"
+            class="secondary-text"
+            i18n-matTooltip
+            matTooltip="Item is locked"
+            matTooltipPosition="above"
+          >
+            lock
+          </mat-icon>
+        </span>
+      </span>
     </button>
-    <mat-divider></mat-divider>
   </ng-container>
 </ng-container>

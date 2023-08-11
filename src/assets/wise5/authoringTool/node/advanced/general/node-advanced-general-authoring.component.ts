@@ -1,23 +1,21 @@
-import { Component } from '@angular/core';
-import { TeacherDataService } from '../../../../services/teacherDataService';
+import { Component, OnInit } from '@angular/core';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { UpgradeModule } from '@angular/upgrade/static';
 
 @Component({
-  templateUrl: 'node-advanced-general-authoring.component.html'
+  selector: 'node-advanced-general-authoring',
+  templateUrl: './node-advanced-general-authoring.component.html'
 })
-export class NodeAdvancedGeneralAuthoringComponent {
+export class NodeAdvancedGeneralAuthoringComponent implements OnInit {
   node: any;
 
-  constructor(
-    private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService
-  ) {}
+  constructor(private projectService: TeacherProjectService, private upgrade: UpgradeModule) {}
 
   ngOnInit() {
-    this.node = this.TeacherDataService.getCurrentNode();
+    this.node = this.projectService.getNodeById(this.upgrade.$injector.get('$stateParams').nodeId);
   }
 
   saveProject() {
-    return this.ProjectService.saveProject();
+    return this.projectService.saveProject();
   }
 }

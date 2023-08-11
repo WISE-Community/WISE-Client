@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
@@ -31,6 +31,7 @@ describe('MilestoneDetailsDialogComponent', () => {
       imports: [
         ClassroomMonitorTestingModule,
         HttpClientTestingModule,
+        MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
         MatListModule,
@@ -60,7 +61,7 @@ describe('MilestoneDetailsDialogComponent', () => {
   });
 
   it('should show the milestone name', () => {
-    const h1 = fixture.debugElement.query(By.css('h1'));
-    expect(h1.nativeElement.textContent).toContain(milestoneName);
+    const title = fixture.debugElement.query(By.css('[mat-dialog-title]'));
+    expect(title.nativeElement.textContent).toContain(milestoneName);
   });
 });

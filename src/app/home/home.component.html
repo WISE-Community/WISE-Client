@@ -52,8 +52,8 @@
       <div class="content">
         <h1
           class="accent section__header"
-          ngClass="mat-display-1"
-          [ngClass.xs]="{ 'mat-display-1': false }"
+          ngClass="mat-headline-4"
+          [ngClass.xs]="{ 'mat-headline-4': false }"
           i18n
         >
           The WISE Advantage
@@ -93,8 +93,8 @@
       <div class="content">
         <h1
           class="accent section__header"
-          ngClass="mat-display-1"
-          [ngClass.xs]="{ 'mat-display-1': false }"
+          ngClass="mat-headline-4"
+          [ngClass.xs]="{ 'mat-headline-4': false }"
           i18n
         >
           Curriculum Offerings
@@ -121,20 +121,38 @@
       <div class="content">
         <h1
           class="accent section__header"
-          ngClass="mat-display-1"
-          [ngClass.xs]="{ 'mat-display-1': false }"
+          ngClass="mat-headline-4"
+          [ngClass.xs]="{ 'mat-headline-4': false }"
           fxLayoutAlign="start center"
-          fxLayoutGap="16px"
+          fxLayoutGap="24px"
         >
           <span i18n>Connect</span>
-          <a href="https://www.facebook.com/wisetels/" target="_blank" mat-icon-button>
-            <mat-icon svgIcon="facebook" i18n-aria-label aria-label="WISE on Facebook"></mat-icon>
+          <a
+            class="social-link"
+            href="https://www.facebook.com/wisetels/"
+            target="_blank"
+            i18n-aria-label
+            aria-label="WISE on Facebook"
+          >
+            <mat-icon svgIcon="facebook"></mat-icon>
           </a>
-          <a href="https://twitter.com/WISETELS" target="_blank" mat-icon-button>
-            <mat-icon svgIcon="twitter" i18n-aria-label aria-label="WISE on Twitter"></mat-icon>
+          <a
+            class="social-link"
+            href="https://twitter.com/WISETELS"
+            target="_blank"
+            i18n-aria-label
+            aria-label="WISE on Twitter"
+          >
+            <mat-icon svgIcon="twitter"></mat-icon>
           </a>
-          <a href="https://github.com/WISE-Community" target="_blank" mat-icon-button>
-            <mat-icon svgIcon="github" i18n-aria-label aria-label="WISE on Github"></mat-icon>
+          <a
+            class="social-link"
+            href="https://github.com/WISE-Community"
+            target="_blank"
+            i18n-aria-label
+            aria-label="WISE on Github"
+          >
+            <mat-icon svgIcon="github"></mat-icon>
           </a>
         </h1>
         <div

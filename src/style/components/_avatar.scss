@@ -1,6 +1,6 @@
 $icon-padding: 16px !default;
 
-.mat-card-avatar, .mat-list-avatar {
+.mat-mdc-card-avatar, .mat-mdc-list-item-avatar {
   &.disabled {
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);

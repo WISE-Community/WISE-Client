@@ -1,11 +1,11 @@
 <div class="library-project-details" mat-dialog-content>
   <div fxLayout="row">
     <div fxLayout="row">
-      <div class="mat-card-avatar" [style.background-image]="project.thumbStyle"></div>
+      <div class="mat-mdc-card-avatar" [style.background-image]="project.thumbStyle"></div>
       <div fxFlex="1 1 100%" fxLayout="row" fxLayoutWrap>
         <div fxLayout="column">
-          <div class="mat-card-title mat-body-2">{{ project.metadata.title }}</div>
-          <div class="mat-card-subtitle">
+          <div class="mat-mdc-card-title mat-body-1">{{ project.metadata.title }}</div>
+          <div class="mat-mdc-card-subtitle mat-caption">
             <div *ngIf="project.metadata.grades.length || project.metadata.totalTime">
               <ng-container *ngIf="project.metadata.grades.length" i18n>Grade level:</ng-container>
               <span *ngFor="let g of project.metadata.grades; let isLast = last">

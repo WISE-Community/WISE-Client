@@ -1,5 +1,4 @@
 'use strict';
-import * as angular from 'angular';
 import { ProjectService } from './projectService';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
@@ -63,6 +62,9 @@ export class TeacherProjectService extends ProjectService {
               fontSet: 'material-icons',
               fontName: 'info'
             }
+          },
+          transitionLogic: {
+            transitions: []
           }
         },
         {
@@ -234,22 +236,6 @@ export class TeacherProjectService extends ProjectService {
       .then((newProjectId) => {
         return newProjectId;
       });
-  }
-
-  /**
-   * Replace a component
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @param component the new component
-   */
-  replaceComponent(nodeId, componentId, component) {
-    const components = this.getComponents(nodeId);
-    for (let c = 0; c < components.length; c++) {
-      if (components[c].id === componentId) {
-        components[c] = component;
-        break;
-      }
-    }
   }
 
   /**
@@ -582,22 +568,6 @@ export class TeacherProjectService extends ProjectService {
     return numRubrics;
   }
 
-  /**
-   * Delete a component from a node
-   * @param nodeId the node id containing the node
-   * @param componentId the component id
-   */
-  deleteComponent(nodeId, componentId) {
-    const node = this.getNodeById(nodeId);
-    const components = node.components;
-    for (let c = 0; c < components.length; c++) {
-      if (components[c].id === componentId) {
-        components.splice(c, 1);
-        break;
-      }
-    }
-  }
-
   deleteTransition(node, transition) {
     const nodeTransitions = node.transitionLogic.transitions;
     const index = nodeTransitions.indexOf(transition);
@@ -646,24 +616,6 @@ export class TeacherProjectService extends ProjectService {
 
   getIdToNode() {
     return this.idToNode;
-  }
-
-  turnOnSaveButtonForAllComponents(node) {
-    for (const component of node.components) {
-      const service = this.componentServiceLookupService.getService(component.type);
-      if (service.componentUsesSaveButton()) {
-        component.showSaveButton = true;
-      }
-    }
-  }
-
-  turnOffSaveButtonForAllComponents(node) {
-    for (const component of node.components) {
-      const service = this.componentServiceLookupService.getService(component.type);
-      if (service.componentUsesSaveButton()) {
-        component.showSaveButton = false;
-      }
-    }
   }
 
   checkPotentialStartNodeIdChangeThenSaveProject() {
@@ -1054,10 +1006,7 @@ export class TeacherProjectService extends ProjectService {
       this.addCurrentUserToAuthors(this.getAuthors())
     );
     return this.http
-      .post(
-        this.configService.getConfigParam('saveProjectURL'),
-        angular.toJson(this.project, false)
-      )
+      .post(this.configService.getConfigParam('saveProjectURL'), JSON.stringify(this.project))
       .toPromise()
       .then((response: any) => {
         this.handleSaveProjectResponse(response);
@@ -1113,16 +1062,12 @@ export class TeacherProjectService extends ProjectService {
    * objects.
    */
   cleanupBeforeSave() {
-    this.getActiveNodes().forEach((activeNode) => {
+    this.project.nodes.forEach((activeNode) => {
       this.cleanupNode(activeNode);
     });
     this.getInactiveNodes().forEach((inactiveNode) => {
       this.cleanupNode(inactiveNode);
     });
-  }
-
-  getActiveNodes(): any[] {
-    return this.project.nodes;
   }
 
   /**
@@ -1265,8 +1210,8 @@ export class TeacherProjectService extends ProjectService {
   }
 
   copyTransitions(previousNode, node) {
-    const transitionsJSONString = angular.toJson(previousNode.transitionLogic.transitions);
-    const transitionsCopy = angular.fromJson(transitionsJSONString);
+    const transitionsJSONString = JSON.stringify(previousNode.transitionLogic.transitions);
+    const transitionsCopy = JSON.parse(transitionsJSONString);
     node.transitionLogic.transitions = transitionsCopy;
   }
 
@@ -1644,8 +1589,7 @@ export class TeacherProjectService extends ProjectService {
               // we have found the transition to the node we are removing
 
               // copy the transitions from the node we are removing
-              let transitionsCopy = angular.toJson(nodeToRemoveTransitions);
-              transitionsCopy = angular.fromJson(transitionsCopy);
+              let transitionsCopy = copy(nodeToRemoveTransitions);
 
               /*
                * if the parent from group is different than the parent removing group

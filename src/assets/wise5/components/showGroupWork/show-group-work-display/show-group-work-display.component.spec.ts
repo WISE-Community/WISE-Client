@@ -44,9 +44,6 @@ class MockConfigService {
   getWorkgroupId() {
     return workgroupId;
   }
-  getAvatarColorForWorkgroupId(workgroupId: any) {
-    return '#000000';
-  }
   getUsernamesStringByWorkgroupId(workgroupId: number) {
     return `Student ${workgroupId}`;
   }

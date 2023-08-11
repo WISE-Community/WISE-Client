@@ -1,6 +1,6 @@
 <mat-card
   *ngIf="mode !== 'classroomMonitor'"
-  class="notebook-report mat-elevation-3dp"
+  class="notebook-report"
   fxLayout="column"
   [ngClass]="{ collapsed: collapsed, full: full && !collapsed }"
 >
@@ -9,11 +9,11 @@
     (click)="toggleCollapse()"
     fxLayoutAlign="start center"
   >
-    <div mat-card-avatar fxLayoutAlign="center center">
+    <mat-card-title class="mat-body-2 overflow--ellipsis" fxLayoutAlign="start center" fxLayoutGap="4px">
       <mat-icon> assignment </mat-icon>
-    </div>
-    <mat-card-title class="mat-body-1 overflow--ellipsis">
-      {{ reportItem.content.title }}
+      <span>
+        {{ reportItem.content.title }}
+      </span>
     </mat-card-title>
     <span fxFlex></span>
     <button

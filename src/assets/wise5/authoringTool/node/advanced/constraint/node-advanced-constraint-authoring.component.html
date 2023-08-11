@@ -1,3 +1,4 @@
+<node-advanced-authoring></node-advanced-authoring>
 <div class="body-div">
   <div fxLayoutGap="16px">
     <mat-label i18n>Add Constraint</mat-label>
@@ -13,7 +14,7 @@
     </button>
   </div>
   <div
-    *ngFor="let constraint of node.constraints; index as constraintIndex"
+    *ngFor="let constraint of content.constraints; index as constraintIndex"
     class="constraints-div"
     fxLayoutGap="16px"
   >
@@ -29,9 +30,9 @@
       <mat-icon>delete</mat-icon>
     </button>
     <br />
-    <constraint-authoring [constraint]="constraint"></constraint-authoring>
+    <node-constraint-authoring [constraint]="constraint"></node-constraint-authoring>
   </div>
-  <div *ngIf="node.constraints.length > 0" fxLayoutGap="16px">
+  <div *ngIf="content.constraints.length > 0" fxLayoutGap="16px">
     <mat-label i18n>Add Constraint</mat-label>
     <button
       mat-raised-button

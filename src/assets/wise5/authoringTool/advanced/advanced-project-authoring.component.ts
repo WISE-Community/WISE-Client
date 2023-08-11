@@ -1,37 +1,46 @@
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import * as angular from 'angular';
-import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { NotificationService } from '../../services/notificationService';
 import { Component } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { isValidJSONString } from '../../common/string/string';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../project-asset-authoring/asset-chooser';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'advanced-project-authoring',
-  templateUrl: 'advanced-project-authoring.component.html'
+  templateUrl: 'advanced-project-authoring.component.html',
+  styleUrls: ['./advanced-project-authoring.component.scss']
 })
 export class AdvancedProjectAuthoringComponent {
-  isJSONDisplayed: boolean = false;
+  isJSONDisplayed: boolean;
   projectId: number;
   projectJSONString: string;
   projectScriptFilename: string;
+  rubricDisplayed: boolean;
 
   constructor(
+    private dialog: MatDialog,
     private upgrade: UpgradeModule,
-    private ConfigService: ConfigService,
-    private NotificationService: NotificationService,
-    private ProjectAssetService: ProjectAssetService,
-    private ProjectService: TeacherProjectService
+    private configService: ConfigService,
+    private notificationService: NotificationService,
+    private projectService: TeacherProjectService
   ) {
-    this.projectId = this.ConfigService.getProjectId();
+    this.projectId = this.configService.getProjectId();
   }
 
   ngOnInit() {
     this.setProjectScriptFilename();
   }
 
+  protected toggleRubric(): void {
+    this.isJSONDisplayed = false;
+    this.rubricDisplayed = !this.rubricDisplayed;
+  }
+
   toggleJSON() {
+    this.rubricDisplayed = false;
     if (this.isJSONDisplayed) {
       this.hideJSON();
     } else {
@@ -42,52 +51,51 @@ export class AdvancedProjectAuthoringComponent {
   hideJSON() {
     if (isValidJSONString(this.projectJSONString)) {
       this.isJSONDisplayed = false;
-      this.NotificationService.hideJSONValidMessage();
+      this.notificationService.hideJSONValidMessage();
     } else if (
       confirm(
         $localize`The JSON is invalid. Invalid JSON will not be saved.\nClick "OK" to revert back to the last valid JSON.\nClick "Cancel" to keep the invalid JSON open so you can fix it.`
       )
     ) {
       this.isJSONDisplayed = false;
-      this.NotificationService.hideJSONValidMessage();
+      this.notificationService.hideJSONValidMessage();
     }
   }
 
   showJSON() {
     this.isJSONDisplayed = true;
-    this.projectJSONString = angular.toJson(this.ProjectService.project, 4);
-    this.NotificationService.showJSONValidMessage();
+    this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
+    this.notificationService.showJSONValidMessage();
   }
 
   autoSaveProjectJSONString() {
     try {
       this.saveProjectJSON(this.projectJSONString);
-      this.NotificationService.showJSONValidMessage();
+      this.notificationService.showJSONValidMessage();
     } catch (e) {
-      this.NotificationService.showJSONInvalidMessage();
+      this.notificationService.showJSONInvalidMessage();
     }
   }
 
   saveProjectJSON(projectJSONString) {
-    const project = angular.fromJson(projectJSONString);
-    this.ProjectService.setProject(project);
+    const project = JSON.parse(projectJSONString);
+    this.projectService.setProject(project);
     this.setProjectScriptFilename();
-    this.ProjectService.checkPotentialStartNodeIdChangeThenSaveProject();
+    this.projectService.checkPotentialStartNodeIdChangeThenSaveProject();
   }
 
   setProjectScriptFilename() {
-    this.projectScriptFilename = this.ProjectService.getProjectScriptFilename();
+    this.projectScriptFilename = this.projectService.getProjectScriptFilename();
   }
 
   chooseProjectScriptFile() {
-    const params = {
-      isPopup: true,
-      projectId: this.projectId,
-      target: 'scriptFilename'
-    };
-    this.ProjectAssetService.openAssetChooser(params).then((data: any) => {
-      this.assetSelected(data);
-    });
+    new AssetChooser(this.dialog, null, null, this.projectId)
+      .open('scriptFilename')
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        this.assetSelected(data);
+      });
   }
 
   assetSelected({ assetItem }) {
@@ -96,7 +104,7 @@ export class AdvancedProjectAuthoringComponent {
   }
 
   downloadProject() {
-    window.location.href = `${this.ConfigService.getWISEBaseURL()}/api/project/export/${
+    window.location.href = `${this.configService.getWISEBaseURL()}/api/project/export/${
       this.projectId
     }`;
   }
@@ -115,15 +123,15 @@ export class AdvancedProjectAuthoringComponent {
   }
 
   getProjectURL() {
-    return window.location.origin + this.ConfigService.getConfigParam('projectURL');
+    return window.location.origin + this.configService.getConfigParam('projectURL');
   }
 
   projectScriptFilenameChanged() {
-    this.ProjectService.setProjectScriptFilename(this.projectScriptFilename);
+    this.projectService.setProjectScriptFilename(this.projectScriptFilename);
     if (this.showJSON) {
-      this.projectJSONString = angular.toJson(this.ProjectService.project, 4);
+      this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
     }
-    this.ProjectService.saveProject();
+    this.projectService.saveProject();
   }
 
   goBack() {

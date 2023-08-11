@@ -1,14 +1,14 @@
-<button mat-icon-button [matMenuTriggerFor]="accountMenu">
-  <mat-icon *ngIf="role === 'student'; else teacher" i18n-aria-label aria-label="Account Menu"
+<button mat-icon-button [matMenuTriggerFor]="accountMenu" i18n-aria-label aria-label="Account Menu">
+  <mat-icon *ngIf="role === 'student'; else teacher"
     >account_circle</mat-icon
   >
   <ng-template #teacher>
-    <mat-icon i18n-aria-label aria-label="Account Menu">account_box</mat-icon>
+    <mat-icon>account_box</mat-icon>
   </ng-template>
 </button>
 <mat-menu #accountMenu="matMenu" xPosition="before">
   <div class="header-account-menu">
-    <div class="user-info" fxLayout="row" fxLayoutAlign="left center">
+    <div class="user-info" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="8px">
       <mat-icon
         *ngIf="role === 'student'; else teacherAvatar"
         i18n-aria-label

@@ -3,7 +3,6 @@ import { StudentTeacherCommonServicesModule } from '../student-teacher-common-se
 import { ConstraintService } from '../../assets/wise5/services/constraintService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { Constraint } from '../domain/constraint';
@@ -39,11 +38,10 @@ let completionService: CompletionService;
 let configService: ConfigService;
 let criteria1: any;
 let criteria2: any;
-let dataService: StudentDataService;
 const groupId1 = 'group1';
 const groupId2 = 'group2';
 const groupId3 = 'group3';
-let nodeConstraintTwoRemovalCriteria: any;
+let constraintTwoRemovalCriteria: any;
 const nodeId1 = 'node1';
 const nodeId2 = 'node2';
 const nodeId3 = 'node3';
@@ -61,7 +59,6 @@ describe('ConstraintService', () => {
     });
     completionService = TestBed.inject(CompletionService);
     configService = TestBed.inject(ConfigService);
-    dataService = TestBed.inject(StudentDataService);
     projectService = TestBed.inject(ProjectService);
     service = TestBed.inject(ConstraintService);
     criteria1 = {
@@ -76,7 +73,7 @@ describe('ConstraintService', () => {
         nodeId: nodeId2
       }
     };
-    nodeConstraintTwoRemovalCriteria = {
+    constraintTwoRemovalCriteria = {
       id: 'node3Constraint1',
       action: '',
       targetId: nodeId3,
@@ -84,20 +81,20 @@ describe('ConstraintService', () => {
       removalConditional: 'all'
     };
   });
-  evaluateNodeConstraint();
+  evaluateConstraint();
   evaluateCriterias();
   getConstraintsThatAffectNode();
   orderConstraints();
 });
 
-function evaluateNodeConstraint() {
-  describe('evaluateNodeConstraint()', () => {
-    evaluateNodeConstraintWithOneRemovalCriteria();
-    evaluateNodeConstraintWithTwoRemovalCriteria();
+function evaluateConstraint() {
+  describe('evaluateConstraint()', () => {
+    evaluateConstraintWithOneRemovalCriteria();
+    evaluateConstraintWithTwoRemovalCriteria();
   });
 }
 
-function evaluateNodeConstraintWithOneRemovalCriteria() {
+function evaluateConstraintWithOneRemovalCriteria() {
   it('should evaluate node constraint with one removal criteria', () => {
     spyOn(completionService, 'isCompleted').and.returnValue(true);
     const constraint = {
@@ -107,51 +104,48 @@ function evaluateNodeConstraintWithOneRemovalCriteria() {
       removalCriteria: [criteria1],
       removalConditional: 'all'
     };
-    expect(service.evaluateNodeConstraint(constraint)).toEqual(true);
+    expect(service.evaluateConstraint(constraint)).toEqual(true);
   });
 }
 
-function evaluateNodeConstraintWithTwoRemovalCriteria() {
-  function isCompletedSpy(): void {
-    spyOn(completionService, 'isCompleted')
-      .withArgs(nodeId1)
-      .and.returnValue(true)
-      .withArgs(nodeId2)
-      .and.returnValue(false);
-  }
-  it('should evaluate node constraint with two removal criteria requiring all', () => {
+function isCompletedSpy(): void {
+  spyOn(completionService, 'isCompleted')
+    .withArgs(nodeId1, undefined)
+    .and.returnValue(true)
+    .withArgs(nodeId2, undefined)
+    .and.returnValue(false);
+}
+
+function evaluateConstraintWithTwoRemovalCriteria() {
+  it('should evaluate constraint with two removal criteria requiring all', () => {
     isCompletedSpy();
-    expect(service.evaluateNodeConstraint(nodeConstraintTwoRemovalCriteria)).toEqual(false);
+    expect(service.evaluateConstraint(constraintTwoRemovalCriteria)).toEqual(false);
   });
-  it('should evaluate node constraint with two removal criteria requiring any', () => {
+  it('should evaluate constraint with two removal criteria requiring any', () => {
     isCompletedSpy();
-    nodeConstraintTwoRemovalCriteria.removalConditional = 'any';
-    expect(service.evaluateNodeConstraint(nodeConstraintTwoRemovalCriteria)).toEqual(true);
+    constraintTwoRemovalCriteria.removalConditional = 'any';
+    expect(service.evaluateConstraint(constraintTwoRemovalCriteria)).toEqual(true);
   });
 }
 
 function evaluateCriterias() {
   describe('evaluateCriterias()', () => {
     it(`should return false when it is passed one criteria that is false`, () => {
-      const criterias = [criteria1];
-      spyOn(completionService, 'isCompleted').and.returnValue(false);
-      expect(service.evaluateCriterias(criterias)).toEqual(false);
+      expectEvaluateCriterias(false, false);
     });
     it(`should return true when it is passed one criteria that is true`, () => {
-      const criterias = [criteria1];
-      spyOn(completionService, 'isCompleted').and.returnValue(true);
-      expect(service.evaluateCriterias(criterias)).toEqual(true);
+      expectEvaluateCriterias(true, true);
     });
     it(`should return false when it is passed multiple criterias and one is false`, () => {
-      const criterias = [criteria1, criteria2];
-      spyOn(completionService, 'isCompleted')
-        .withArgs(nodeId1)
-        .and.returnValue(true)
-        .withArgs(nodeId2)
-        .and.returnValue(false);
-      expect(service.evaluateCriterias(criterias)).toEqual(false);
+      isCompletedSpy();
+      expect(service.evaluateCriterias([criteria1, criteria2])).toEqual(false);
     });
   });
+}
+
+function expectEvaluateCriterias(isCompleted: boolean, expectedResult: boolean) {
+  spyOn(completionService, 'isCompleted').and.returnValue(isCompleted);
+  expect(service.evaluateCriterias([criteria1])).toEqual(expectedResult);
 }
 
 function getConstraintsThatAffectNode() {

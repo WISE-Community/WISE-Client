@@ -1,0 +1,77 @@
+<div class="main-div" fxLayoutGap="20px">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="goBack()"
+    matTooltip="Back"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
+    (click)="showGeneralAdvancedView()"
+    matTooltip="General Advanced"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>settings</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
+    (click)="showRubricView()"
+    matTooltip="Edit Step Rubric"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>message</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
+    (click)="showEditTransitionsView()"
+    matTooltip="Edit Transitions"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>trending_up</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
+    (click)="showEditConstraintsView()"
+    matTooltip="Edit Constraints"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>block</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
+    (click)="showCreateBranchView()"
+    matTooltip="Create Branch"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon class="branch-icon">call_split</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="showJSONView()"
+    matTooltip="Show JSON"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>code</mat-icon>
+  </button>
+</div>

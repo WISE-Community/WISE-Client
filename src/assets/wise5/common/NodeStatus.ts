@@ -1,4 +1,7 @@
+import { ComponentStatus } from './ComponentStatus';
+
 export class NodeStatus {
+  componentStatuses: { [componentId: string]: ComponentStatus };
   isCompleted: boolean;
   isVisible: boolean;
   isVisitable: boolean;

@@ -63,7 +63,7 @@ export class ClassroomStatusService {
     return null;
   }
 
-  getStudentStatusForWorkgroupId(workgroupId) {
+  getStudentStatusForWorkgroupId(workgroupId: number): any {
     const studentStatuses = this.getStudentStatuses();
     for (let tempStudentStatus of studentStatuses) {
       if (tempStudentStatus != null) {
@@ -74,6 +74,10 @@ export class ClassroomStatusService {
       }
     }
     return null;
+  }
+
+  hasStudentStatus(workgroupId: number): boolean {
+    return this.getStudentStatusForWorkgroupId(workgroupId) != null;
   }
 
   setStudentStatus(studentStatus: any): void {

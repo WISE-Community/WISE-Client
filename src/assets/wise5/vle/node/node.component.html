@@ -20,6 +20,7 @@
       fxFlex.gt-sm="{{ component.componentWidth ? component.componentWidth : 100 }}"
     >
       <component
+        *ngIf="componentToVisible[component.id]"
         [nodeId]="node.id"
         [componentId]="component.id"
         [componentState]="getComponentStateByComponentId(component.id)"
@@ -36,8 +37,8 @@
     >
       <button
         *ngIf="node.showSaveButton"
-        mat-button
-        class="mat-primary mat-raised-button"
+        mat-raised-button
+        color="primary"
         (click)="saveButtonClicked()"
         [disabled]="isDisabled || !dirtyComponentIds.length"
         aria-label="Save"
@@ -48,8 +49,8 @@
       </button>
       <button
         *ngIf="node.showSubmitButton"
-        mat-button
-        class="mat-primary mat-raised-button"
+        mat-raised-button
+        color="primary"
         (click)="submitButtonClicked()"
         [disabled]="isDisabled || !dirtySubmitComponentIds.length"
         aria-label="Submit"

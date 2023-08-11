@@ -2,8 +2,9 @@
 <div class="input-wrapper" fxLayout="row wrap" fxLayoutAlign="start center">
   <button
     *ngIf="isAddNewLabelButtonVisible"
-    mat-button
-    class="mat-primary mat-raised-button add-button"
+    mat-raised-button
+    color="primary"
+    class="add-button"
     (click)="addNewLabel()"
     [disabled]="isDisabled"
     matTooltip="Add New Label"
@@ -29,8 +30,9 @@
     </mat-form-field>
   </div>
   <button
-    mat-button
-    class="mat-primary mat-raised-button delete-button"
+    mat-raised-button
+    color="primary"
+    class="delete-button"
     (click)="deleteLabelButtonClicked()"
     *ngIf="!isDisabled && selectedLabel != null && selectedLabel.canDelete"
     [disabled]="isDisabled"
@@ -50,8 +52,9 @@
   <br />
   <button
     *ngIf="componentContent.enableStudentUploadBackground && backgroundImage == null"
-    mat-button
-    class="mat-primary mat-raised-button upload-button"
+    mat-raised-button
+    color="primary"
+    class="upload-button"
     (click)="showStudentAssets()"
     matTooltip="Upload Background Image"
     matTooltipPosition="above"
@@ -61,8 +64,9 @@
   </button>
   <button
     *ngIf="componentContent.enableStudentUploadBackground && backgroundImage != null"
-    mat-button
-    class="mat-primary mat-raised-button upload-button"
+    mat-raised-button
+    color="primary"
+    class="upload-button"
     (click)="deleteBackgroundImage()"
     matTooltip="Delete Background Image"
     matTooltipPosition="above"
@@ -71,8 +75,9 @@
     <mat-icon>delete_outline</mat-icon>
   </button>
   <button
-    mat-button
-    class="mat-primary mat-raised-button reset-button"
+    mat-raised-button
+    color="primary"
+    class="reset-button"
     (click)="resetButtonClicked()"
     *ngIf="isResetButtonVisible"
     [disabled]="isDisabled"

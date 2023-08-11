@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ComponentStatus } from '../common/ComponentStatus';
 import { NodeStatus } from '../common/NodeStatus';
 import { ConstraintService } from './constraintService';
 import { NodeProgressService } from './nodeProgressService';
@@ -9,6 +10,8 @@ import { CompletionService } from './completionService';
 
 @Injectable()
 export class NodeStatusService {
+  private nodeIdToIsVisited: { [nodeId: string]: boolean } = {};
+
   constructor(
     private completionService: CompletionService,
     private constraintService: ConstraintService,
@@ -17,12 +20,29 @@ export class NodeStatusService {
     private notebookService: NotebookService,
     private projectService: ProjectService
   ) {
+    this.constraintService.constraintsUpdated$.subscribe(() => {
+      this.updateNodeStatuses();
+    });
+    this.dataService.dataRetrieved$.subscribe((studentData) => {
+      this.populateNodeIdToIsVisited(studentData.events);
+      this.updateNodeStatuses();
+    });
     this.dataService.updateNodeStatuses$.subscribe(() => {
       this.updateNodeStatuses();
     });
     this.notebookService.notebookUpdated$.subscribe(() => {
       this.updateNodeStatuses();
     });
+  }
+
+  private populateNodeIdToIsVisited(events: any[]): void {
+    events
+      .filter((event) => event.event === 'nodeEntered')
+      .forEach((event) => this.setNodeIsVisited(event.nodeId));
+  }
+
+  setNodeIsVisited(nodeId: string): void {
+    this.nodeIdToIsVisited[nodeId] = true;
   }
 
   canVisitNode(nodeId: string): boolean {
@@ -46,9 +66,9 @@ export class NodeStatusService {
   }
 
   private updateStepNodeStatuses(): void {
-    for (const node of this.projectService.getNodes()) {
-      if (!this.projectService.isGroupNode(node.id)) {
-        this.updateNodeStatusByNode(node);
+    for (const nodeId of this.projectService.getFlattenedProjectAsNodeIds()) {
+      if (!this.projectService.isGroupNode(nodeId)) {
+        this.updateNodeStatusByNode(this.projectService.getNodeById(nodeId));
       }
     }
   }
@@ -83,9 +103,36 @@ export class NodeStatusService {
     nodeStatus.isVisible = constraintResults.isVisible;
     nodeStatus.isVisitable = constraintResults.isVisitable;
     this.setNotVisibleIfRequired(nodeId, constraintsForNode, nodeStatus);
-    nodeStatus.isCompleted = this.completionService.isCompleted(nodeId);
-    nodeStatus.isVisited = this.dataService.isNodeVisited(nodeId);
+    if (this.projectService.isApplicationNode(node.id)) {
+      nodeStatus.componentStatuses = this.calculateComponentStatuses(node);
+      nodeStatus.isCompleted = this.isAllVisibleComponentsCompleted(nodeStatus.componentStatuses);
+    } else {
+      nodeStatus.isCompleted = this.completionService.isCompleted(nodeId);
+    }
+    nodeStatus.isVisited = this.nodeIdToIsVisited[nodeId] == true;
     return nodeStatus;
+  }
+
+  private isAllVisibleComponentsCompleted(componentStatuses: {
+    [componentId: string]: ComponentStatus;
+  }): boolean {
+    for (const componentId in componentStatuses) {
+      if (componentStatuses[componentId].isVisibleAndNotCompleted()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private calculateComponentStatuses(node: any): { [componentId: string]: ComponentStatus } {
+    const componentStatuses = {};
+    node.components.forEach((component) => {
+      componentStatuses[component.id] = new ComponentStatus(
+        this.completionService.isCompleted(node.id, component.id),
+        this.constraintService.evaluate(component.constraints).isVisible
+      );
+    });
+    return componentStatuses;
   }
 
   private setNotVisibleIfRequired(
@@ -103,6 +150,7 @@ export class NodeStatusService {
   }
 
   private updateNodeStatus(nodeId: string, nodeStatus: NodeStatus): void {
+    // TODO: figure out why we need this if-else check. Why not just over-write the NodeStatus?
     const oldNodeStatus = this.getNodeStatusByNodeId(nodeId);
     if (oldNodeStatus == null) {
       this.setNodeStatusByNodeId(nodeId, nodeStatus);
@@ -111,6 +159,9 @@ export class NodeStatusService {
       this.dataService.nodeStatuses[nodeId].isVisible = nodeStatus.isVisible;
       this.dataService.nodeStatuses[nodeId].isVisitable = nodeStatus.isVisitable;
       this.dataService.nodeStatuses[nodeId].isCompleted = nodeStatus.isCompleted;
+      if (this.projectService.isApplicationNode(nodeId)) {
+        this.dataService.nodeStatuses[nodeId].componentStatuses = nodeStatus.componentStatuses;
+      }
     }
   }
 

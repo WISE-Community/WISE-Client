@@ -11,6 +11,8 @@ import { TeacherWebSocketService } from '../../../../services/teacherWebSocketSe
 import { NodeAdvancedConstraintAuthoringComponent } from './node-advanced-constraint-authoring.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { NodeAdvancedAuthoringComponent } from '../node-advanced-authoring/node-advanced-authoring.component';
 
 let component: NodeAdvancedConstraintAuthoringComponent;
 let fixture: ComponentFixture<NodeAdvancedConstraintAuthoringComponent>;
@@ -24,9 +26,10 @@ describe('NodeAdvancedConstraintAuthoringComponent', () => {
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
-        StudentTeacherCommonServicesModule
+        StudentTeacherCommonServicesModule,
+        UpgradeModule
       ],
-      declarations: [NodeAdvancedConstraintAuthoringComponent],
+      declarations: [NodeAdvancedAuthoringComponent, NodeAdvancedConstraintAuthoringComponent],
       providers: [
         AchievementService,
         ClassroomStatusService,
@@ -38,6 +41,13 @@ describe('NodeAdvancedConstraintAuthoringComponent', () => {
   });
 
   beforeEach(() => {
+    TestBed.inject(UpgradeModule).$injector = {
+      get: () => {
+        return {
+          go: (route: string, params: any) => {}
+        };
+      }
+    };
     fixture = TestBed.createComponent(NodeAdvancedConstraintAuthoringComponent);
     component = fixture.componentInstance;
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue(
@@ -51,44 +61,7 @@ describe('NodeAdvancedConstraintAuthoringComponent', () => {
     fixture.detectChanges();
   });
 
-  addConstraint();
-  deleteConstraint();
-  getNewNodeContraintId();
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
-
-function addConstraint() {
-  describe('addConstraint', () => {
-    it('should add a constraint', () => {
-      expect(component.node.constraints.length).toEqual(0);
-      component.addConstraint();
-      expect(component.node.constraints.length).toEqual(1);
-    });
-  });
-}
-
-function deleteConstraint() {
-  describe('deleteConstraint', () => {
-    it('should delete a constraint', () => {
-      spyOn(window, 'confirm').and.returnValue(true);
-      component.addConstraint();
-      expect(component.node.constraints.length).toEqual(1);
-      component.deleteConstraint(0);
-      expect(component.node.constraints.length).toEqual(0);
-    });
-  });
-}
-
-function getNewNodeContraintId() {
-  describe('getNewNodeContraintId', () => {
-    it('should get new node constraint id when there are no existing constraints', () => {
-      const constraintId = component.getNewNodeConstraintId(nodeId1);
-      expect(constraintId).toEqual(`${nodeId1}Constraint1`);
-    });
-
-    it('should get new node constraint id when there are existing constraints', () => {
-      component.addConstraint();
-      const constraintId = component.getNewNodeConstraintId(nodeId1);
-      expect(constraintId).toEqual(`${nodeId1}Constraint2`);
-    });
-  });
-}

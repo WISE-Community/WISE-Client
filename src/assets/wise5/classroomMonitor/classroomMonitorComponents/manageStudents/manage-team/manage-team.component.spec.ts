@@ -6,10 +6,10 @@ import { By } from '@angular/platform-browser';
 import { UpdateWorkgroupService } from '../../../../../../app/services/updateWorkgroupService';
 import { ConfigService } from '../../../../services/configService';
 import { ManageTeamComponent } from './manage-team.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 class ConfigServiceStub {
   getPermissions() {}
-  getAvatarColorForWorkgroupId() {}
   retrieveConfig() {
     return {};
   }
@@ -30,7 +30,8 @@ describe('ManageTeamComponent', () => {
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: UpdateWorkgroupService, useClass: UpdateWorkgroupServiceStub },
         { provide: MatDialog, useValue: {} }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     });
     configService = TestBed.inject(ConfigService);
     fixture = TestBed.createComponent(ManageTeamComponent);

@@ -7,7 +7,10 @@ import { MatchService } from '../matchService';
 @Component({
   selector: 'match-show-work',
   templateUrl: 'match-show-work.component.html',
-  styleUrls: ['../match-student/match-student.component.scss', 'match-show-work.component.scss']
+  styleUrls: [
+    '../match-student/match-student-default/match-student-default.component.scss',
+    'match-show-work.component.scss'
+  ]
 })
 export class MatchShowWorkComponent extends ComponentShowWorkDirective {
   sourceBucketId = '0';
@@ -31,7 +34,7 @@ export class MatchShowWorkComponent extends ComponentShowWorkDirective {
 
   ngOnInit() {
     super.ngOnInit();
-    this.hasCorrectAnswer = this.matchService.hasCorrectChoices(this.componentContent);
+    this.hasCorrectAnswer = this.matchService.componentHasCorrectAnswer(this.componentContent);
     this.isCorrect = this.componentState.studentData.isCorrect;
     this.isChoicesAfter = this.componentContent.choicesAfter;
     this.isHorizontal = this.componentContent.horizontal;

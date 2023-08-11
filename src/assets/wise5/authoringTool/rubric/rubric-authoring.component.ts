@@ -1,32 +1,28 @@
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { Component } from '@angular/core';
 import { insertWiseLinks } from '../../common/wise-link/wise-link';
 
 @Component({
-  templateUrl: 'rubric-authoring.component.html'
+  selector: 'rubric-authoring',
+  templateUrl: 'rubric-authoring.component.html',
+  styleUrls: ['./rubric-authoring.component.scss']
 })
 export class RubricAuthoringComponent {
   rubric: string = '';
 
   constructor(
-    private upgrade: UpgradeModule,
-    private ConfigService: ConfigService,
-    private ProjectService: TeacherProjectService
+    private configService: ConfigService,
+    private projectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
-    this.rubric = this.ProjectService.replaceAssetPaths(this.ProjectService.getProjectRubric());
+    this.rubric = this.projectService.replaceAssetPaths(this.projectService.getProjectRubric());
   }
 
-  rubricChanged(): void {
-    const html = insertWiseLinks(this.ConfigService.removeAbsoluteAssetPaths(this.rubric));
-    this.ProjectService.setProjectRubric(html);
-    this.ProjectService.saveProject();
-  }
-
-  goBack(): void {
-    this.upgrade.$injector.get('$state').go('root.at.project');
+  protected rubricChanged(): void {
+    const html = insertWiseLinks(this.configService.removeAbsoluteAssetPaths(this.rubric));
+    this.projectService.setProjectRubric(html);
+    this.projectService.saveProject();
   }
 }

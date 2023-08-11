@@ -1,100 +1,30 @@
 'use strict';
 
 import { AchievementService } from './achievementService';
-import { AnnotationService } from './annotationService';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
 import { TeacherDataService } from './teacherDataService';
 import { Injectable } from '@angular/core';
 import { copy } from '../common/object/object';
+import { MilestoneReportService } from './milestoneReportService';
+import { Milestone } from '../../../app/domain/milestone';
 
 @Injectable()
 export class MilestoneService {
-  numberOfStudentsCompletedStorage: any[] = [];
   numberOfStudentsInRun: number;
-  percentageCompletedStorage: any[] = [];
   periodId: any;
   projectMilestones: any[];
   workgroupIds: any[];
-  workgroupsStorage: any[] = [];
-  satisfyCriteriaFuncNameToFunc = {
-    percentOfScoresGreaterThan: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
-      return this.isPercentOfScoresSatisfiesComparator(
-        satisfyCriterion,
-        aggregateAutoScores,
-        this.greaterThan
-      );
-    },
-    percentOfScoresGreaterThanOrEqualTo: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
-      return this.isPercentOfScoresSatisfiesComparator(
-        satisfyCriterion,
-        aggregateAutoScores,
-        this.greaterThanEqualTo
-      );
-    },
-    percentOfScoresLessThan: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
-      return this.isPercentOfScoresSatisfiesComparator(
-        satisfyCriterion,
-        aggregateAutoScores,
-        this.lessThan
-      );
-    },
-    percentOfScoresLessThanOrEqualTo: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
-      return this.isPercentOfScoresSatisfiesComparator(
-        satisfyCriterion,
-        aggregateAutoScores,
-        this.lessThanEqualTo
-      );
-    },
-    percentOfScoresEqualTo: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
-      return this.isPercentOfScoresSatisfiesComparator(
-        satisfyCriterion,
-        aggregateAutoScores,
-        this.equalTo
-      );
-    },
-    percentOfScoresNotEqualTo: (satisfyCriterion: any, aggregateAutoScores: any[]) => {
-      return this.isPercentOfScoresSatisfiesComparator(
-        satisfyCriterion,
-        aggregateAutoScores,
-        this.notEqualTo
-      );
-    }
-  };
 
   constructor(
     private achievementService: AchievementService,
-    private annotationService: AnnotationService,
     private configService: ConfigService,
+    private milestoneReportService: MilestoneReportService,
     private projectService: ProjectService,
     private teacherDataService: TeacherDataService
   ) {}
 
-  private greaterThanEqualTo(a: number, b: number): boolean {
-    return a >= b;
-  }
-
-  private greaterThan(a: number, b: number): boolean {
-    return a > b;
-  }
-
-  private lessThanEqualTo(a: number, b: number): boolean {
-    return a <= b;
-  }
-
-  private lessThan(a: number, b: number): boolean {
-    return a < b;
-  }
-
-  private equalTo(a: number, b: number): boolean {
-    return a === b;
-  }
-
-  private notEqualTo(a: number, b: number): boolean {
-    return a !== b;
-  }
-
-  getProjectMilestones() {
+  getProjectMilestones(): Milestone[] {
     const achievements = this.projectService.getAchievements();
     if (achievements.isEnabled) {
       return achievements.items.filter((achievement) => {
@@ -104,24 +34,21 @@ export class MilestoneService {
     return [];
   }
 
-  getProjectMilestoneReports() {
-    return this.getProjectMilestones().filter((milestone) => {
-      return milestone.type === 'milestoneReport';
-    });
-  }
-
-  getMilestoneReportByNodeId(nodeId: string) {
-    const milestoneReports = this.getProjectMilestoneReports();
-    for (const milestonReport of milestoneReports) {
-      const referencedComponent = this.getReferencedComponent(milestonReport);
+  getMilestoneReportByNodeId(nodeId: string): any {
+    for (const milestoneReport of this.getProjectMilestoneReports()) {
+      const referencedComponent = this.getReferencedComponent(milestoneReport);
       if (referencedComponent.nodeId === nodeId) {
-        return this.getProjectMilestoneStatus(milestonReport.id);
+        return this.getProjectMilestoneStatus(milestoneReport.id);
       }
     }
     return null;
   }
 
-  getProjectMilestoneStatus(milestoneId: string) {
+  private getProjectMilestoneReports(): Milestone[] {
+    return this.getProjectMilestones().filter((milestone) => milestone.type === 'milestoneReport');
+  }
+
+  getProjectMilestoneStatus(milestoneId: string): any {
     this.periodId = this.teacherDataService.getCurrentPeriod().periodId;
     this.setWorkgroupsInCurrentPeriod();
     let milestone = this.projectService.getAchievementByAchievementId(milestoneId);
@@ -133,7 +60,7 @@ export class MilestoneService {
     return milestone;
   }
 
-  insertMilestoneItems(milestone: any) {
+  insertMilestoneItems(milestone: any): any {
     milestone.items = copy(this.projectService.idToOrder);
     if (milestone.params != null && milestone.params.nodeIds != null) {
       for (const nodeId of milestone.params.nodeIds) {
@@ -145,7 +72,7 @@ export class MilestoneService {
     return milestone;
   }
 
-  insertMilestoneCompletion(milestone: any) {
+  insertMilestoneCompletion(milestone: any): any {
     const achievementIdToStudentAchievements = this.achievementService.getAchievementIdToStudentAchievementsMappings();
     const studentAchievements = achievementIdToStudentAchievements[milestone.id];
     const workgroupIdsCompleted = [];
@@ -198,7 +125,7 @@ export class MilestoneService {
     return milestone;
   }
 
-  setWorkgroupsInCurrentPeriod() {
+  setWorkgroupsInCurrentPeriod(): void {
     this.workgroupIds = [];
     for (const workgroupId of this.configService.getClassmateWorkgroupIds()) {
       const currentPeriodId = this.configService.getPeriodIdByWorkgroupId(workgroupId);
@@ -209,168 +136,35 @@ export class MilestoneService {
     this.numberOfStudentsInRun = this.workgroupIds.length;
   }
 
-  insertMilestoneReport(milestone: any) {
+  insertMilestoneReport(milestone: Milestone): Milestone {
     const referencedComponent = this.getReferencedComponent(milestone);
     milestone.nodeId = referencedComponent.nodeId;
     milestone.componentId = referencedComponent.componentId;
     if (this.isCompletionReached(milestone)) {
-      const report = this.generateReport(milestone);
-      this.setReportAvailable(milestone, true);
+      const report = this.milestoneReportService.generate(milestone, this.periodId);
+      milestone.isReportAvailable = true;
       milestone.generatedReport = report.content ? report.content : null;
       milestone.generatedRecommendations = report.recommendations ? report.recommendations : null;
     } else {
-      this.setReportAvailable(milestone, false);
+      milestone.isReportAvailable = false;
     }
     return milestone;
   }
 
-  getReferencedComponent(milestone: any) {
+  getReferencedComponent(milestone: any): any {
     const referencedComponents = this.getSatisfyCriteriaReferencedComponents(milestone);
     const referencedComponentValues: any[] = Object.values(referencedComponents);
     return referencedComponentValues[referencedComponentValues.length - 1];
   }
 
-  isCompletionReached(projectAchievement: any) {
+  isCompletionReached(projectAchievement: any): boolean {
     return (
       projectAchievement.percentageCompleted >= projectAchievement.satisfyMinPercentage &&
       projectAchievement.numberOfStudentsCompleted >= projectAchievement.satisfyMinNumWorkgroups
     );
   }
 
-  generateReport(projectAchievement: any) {
-    const componentAggregateAutoScores = this.getComponentAggregateAutoScores(projectAchievement);
-    const template = this.chooseTemplate(
-      projectAchievement.report.templates,
-      componentAggregateAutoScores
-    );
-    let content = template.content ? template.content : '';
-    if (content) {
-      content = this.processMilestoneGraphsAndData(content, componentAggregateAutoScores);
-    }
-    return {
-      content: content,
-      recommendations: template.recommendations ? template.recommendations : ''
-    };
-  }
-
-  private getComponentAggregateAutoScores(projectAchievement: any): any[] {
-    const componentAggregateAutoScores = [];
-    for (const referencedComponent of projectAchievement.report.locations) {
-      const componentAggregateAutoScore = this.getComponentAggregateAutoScore(
-        referencedComponent.nodeId,
-        referencedComponent.componentId,
-        this.periodId,
-        projectAchievement.report
-      );
-      componentAggregateAutoScores.push(componentAggregateAutoScore);
-    }
-    return componentAggregateAutoScores;
-  }
-
-  private getComponentAggregateAutoScore(
-    nodeId: string,
-    componentId: string,
-    periodId: number,
-    report: any
-  ): any {
-    const aggregateAutoScore: any = this.calculateAggregateAutoScores(
-      nodeId,
-      componentId,
-      periodId,
-      report
-    );
-    return {
-      nodeId: nodeId,
-      componentId: componentId,
-      stepTitle: this.projectService.getNodePositionAndTitle(nodeId),
-      aggregateAutoScore: aggregateAutoScore
-    };
-  }
-
-  chooseTemplate(templates: any[], aggregateAutoScores: any[]) {
-    for (const template of templates) {
-      if (this.isTemplateMatch(template, aggregateAutoScores)) {
-        return template;
-      }
-    }
-    return {
-      content: null
-    };
-  }
-
-  isTemplateMatch(template: any, aggregateAutoScores: any[]) {
-    const matchedCriteria = [];
-    for (const satisfyCriterion of template.satisfyCriteria) {
-      if (this.isTemplateCriterionSatisfied(satisfyCriterion, aggregateAutoScores)) {
-        matchedCriteria.push(satisfyCriterion);
-      }
-    }
-    if (template.satisfyConditional === 'all') {
-      return matchedCriteria.length === template.satisfyCriteria.length;
-    } else if (template.satisfyConditional === 'any') {
-      return matchedCriteria.length > 0;
-    }
-  }
-
-  isTemplateCriterionSatisfied(satisfyCriterion: any, aggregateAutoScores: any[]) {
-    if (satisfyCriterion.function === 'default') {
-      return true;
-    }
-    return this.satisfyCriteriaFuncNameToFunc[satisfyCriterion.function](
-      satisfyCriterion,
-      aggregateAutoScores
-    );
-  }
-
-  private getComparatorSum(
-    satisfyCriterion: any,
-    aggregateData: any,
-    possibleScores: number[],
-    comparator: any
-  ): number {
-    let sum = 0;
-    for (const possibleScore of possibleScores) {
-      if (comparator(possibleScore, satisfyCriterion.value)) {
-        sum += aggregateData.counts[possibleScore];
-      }
-    }
-    return sum;
-  }
-
-  private isPercentOfScoresSatisfiesComparator(
-    satisfyCriterion: any,
-    aggregateAutoScores: any[],
-    comparator: any
-  ): boolean {
-    const aggregateData = this.getAggregateData(satisfyCriterion, aggregateAutoScores);
-    const possibleScores = this.getPossibleScores(aggregateData);
-    const sum = this.getComparatorSum(satisfyCriterion, aggregateData, possibleScores, comparator);
-    return this.isPercentThresholdSatisfied(satisfyCriterion, aggregateData, sum);
-  }
-
-  getAggregateData(satisfyCriterion: any, aggregateAutoScores: any[]) {
-    for (const aggregateAutoScore of aggregateAutoScores) {
-      if (aggregateAutoScore.componentId === satisfyCriterion.componentId) {
-        return aggregateAutoScore.aggregateAutoScore[satisfyCriterion.targetVariable];
-      }
-    }
-    throw new Error(`Aggregate data not found for component ${satisfyCriterion.componentId}`);
-  }
-
-  getPossibleScores(aggregateData: any) {
-    return Object.keys(aggregateData.counts).map(Number).sort();
-  }
-
-  private isPercentThresholdSatisfied(
-    satisfyCriterion: any,
-    aggregateData: any,
-    sum: number
-  ): boolean {
-    const percentOfScores = (100 * sum) / aggregateData.scoreCount;
-    return percentOfScores >= satisfyCriterion.percentThreshold;
-  }
-
-  getSatisfyCriteriaReferencedComponents(projectAchievement: any) {
+  getSatisfyCriteriaReferencedComponents(projectAchievement: any): any {
     const components = {};
     const templates = projectAchievement.report.templates;
     for (const template of templates) {
@@ -385,202 +179,5 @@ export class MilestoneService {
       }
     }
     return components;
-  }
-
-  calculateAggregateAutoScores(
-    nodeId: string,
-    componentId: string,
-    periodId: number,
-    reportSettings: any
-  ) {
-    const aggregate = {};
-    const scoreAnnotations = this.annotationService.getAllLatestScoreAnnotations(
-      nodeId,
-      componentId,
-      periodId
-    );
-    for (const scoreAnnotation of scoreAnnotations) {
-      if (scoreAnnotation.type === 'autoScore') {
-        this.addDataToAggregate(aggregate, scoreAnnotation, reportSettings);
-      } else {
-        const autoScoreAnnotation = this.annotationService.getLatestScoreAnnotation(
-          nodeId,
-          componentId,
-          scoreAnnotation.toWorkgroupId,
-          'autoScore'
-        );
-        if (autoScoreAnnotation) {
-          const mergedAnnotation = this.mergeAutoScoreAndTeacherScore(
-            autoScoreAnnotation,
-            scoreAnnotation,
-            reportSettings
-          );
-          this.addDataToAggregate(aggregate, mergedAnnotation, reportSettings);
-        }
-      }
-    }
-    return aggregate;
-  }
-
-  private mergeAutoScoreAndTeacherScore(
-    autoScoreAnnotation: any,
-    teacherScoreAnnotation: any,
-    reportSettings: any
-  ) {
-    if (autoScoreAnnotation.data.scores) {
-      for (const subScore of autoScoreAnnotation.data.scores) {
-        if (subScore.id === 'ki') {
-          subScore.score = this.adjustKIScore(teacherScoreAnnotation.data.value, reportSettings);
-        }
-      }
-    }
-    return autoScoreAnnotation;
-  }
-
-  adjustKIScore(scoreValue: number, reportSettings: any) {
-    const teacherScore = Math.round(scoreValue);
-    const kiScoreBounds = this.getKIScoreBounds(reportSettings);
-    let score = teacherScore;
-    if (teacherScore > kiScoreBounds.max) {
-      score = kiScoreBounds.max;
-    }
-    if (teacherScore < kiScoreBounds.min) {
-      score = kiScoreBounds.min;
-    }
-    return score;
-  }
-
-  getKIScoreBounds(reportSettings: any) {
-    const bounds = {
-      min: 1,
-      max: 5
-    };
-    if (reportSettings.customScoreValues && reportSettings.customScoreValues['ki']) {
-      bounds.min = Math.min(...reportSettings.customScoreValues['ki']);
-      bounds.max = Math.max(...reportSettings.customScoreValues['ki']);
-    }
-    return bounds;
-  }
-
-  addDataToAggregate(aggregate: any, annotation: any, reportSettings: any) {
-    for (const subScore of annotation.data.scores) {
-      if (aggregate[subScore.id] == null) {
-        aggregate[subScore.id] = this.setupAggregateSubScore(subScore.id, reportSettings);
-      }
-      const subScoreVal = subScore.score;
-      if (aggregate[subScore.id].counts[subScoreVal] > -1) {
-        aggregate[subScore.id].counts[subScoreVal]++;
-        aggregate[subScore.id].scoreSum += subScoreVal;
-        aggregate[subScore.id].scoreCount++;
-        aggregate[subScore.id].average =
-          aggregate[subScore.id].scoreSum / aggregate[subScore.id].scoreCount;
-      }
-    }
-    return aggregate;
-  }
-
-  setupAggregateSubScore(subScoreId: string, reportSettings: any) {
-    let counts = {};
-    if (reportSettings.customScoreValues && reportSettings.customScoreValues[subScoreId]) {
-      counts = this.getCustomScoreValueCounts(reportSettings.customScoreValues[subScoreId]);
-    } else {
-      counts = this.getPossibleScoreValueCounts(subScoreId);
-    }
-    return {
-      scoreSum: 0,
-      scoreCount: 0,
-      counts: counts,
-      average: 0
-    };
-  }
-
-  getCustomScoreValueCounts(scoreValues: any[]) {
-    let counts = {};
-    for (const value of scoreValues) {
-      counts[value] = 0;
-    }
-    return counts;
-  }
-
-  getPossibleScoreValueCounts(subScoreId: string) {
-    if (subScoreId === 'ki') {
-      return {
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 0
-      };
-    } else {
-      return {
-        1: 0,
-        2: 0,
-        3: 0
-      };
-    }
-  }
-
-  processMilestoneGraphsAndData(content: any, componentAggregateAutoScores: any): string {
-    const aggregateDataBySubScoreId = this.getAggregateDataBySubScoreId(
-      componentAggregateAutoScores
-    );
-    for (const [subScoreId, subScoreData] of Object.entries(aggregateDataBySubScoreId)) {
-      const data = JSON.stringify(subScoreData).replace(/\"/g, "'");
-      const graphRegex = new RegExp(`milestone-report-graph{1,} id="(${subScoreId})"`, 'g');
-      content = content.replace(graphRegex, `$& data=\"${data}\"`);
-      const dataRegex = new RegExp(`milestone-report-data{1,} score-id="(${subScoreId})"`, 'g');
-      content = content.replace(dataRegex, `$& data=\"${data}\"`);
-    }
-    return content;
-  }
-
-  private getAggregateDataBySubScoreId(componentAggregateAutoScores: any[]): any {
-    const aggregateDataBySubScoreId = {};
-    for (const componentAggregateAutoScore of componentAggregateAutoScores) {
-      const aggregateAutoScore = componentAggregateAutoScore.aggregateAutoScore;
-      for (const subScoreId of Object.keys(aggregateAutoScore)) {
-        const aggregateData = aggregateAutoScore[subScoreId];
-        this.addAggregateDataBySubScoreId(
-          aggregateDataBySubScoreId,
-          subScoreId,
-          aggregateData,
-          componentAggregateAutoScore.nodeId,
-          componentAggregateAutoScore.componentId,
-          componentAggregateAutoScore.stepTitle
-        );
-      }
-    }
-    return aggregateDataBySubScoreId;
-  }
-
-  private addAggregateDataBySubScoreId(
-    aggregateDataBySubScoreId: any,
-    subScoreId: string,
-    aggregateData: any,
-    nodeId: string,
-    componentId: string,
-    stepTitle: string
-  ): void {
-    if (aggregateDataBySubScoreId[subScoreId] == null) {
-      aggregateDataBySubScoreId[subScoreId] = [];
-    }
-    this.injectAdditionalFieldsIntoAggregateData(aggregateData, nodeId, componentId, stepTitle);
-    aggregateDataBySubScoreId[subScoreId].push(aggregateData);
-  }
-
-  private injectAdditionalFieldsIntoAggregateData(
-    aggregateData: any,
-    nodeId: string,
-    componentId: string,
-    stepTitle: string
-  ): any {
-    aggregateData.nodeId = nodeId;
-    aggregateData.componentId = componentId;
-    aggregateData.stepTitle = stepTitle;
-    return aggregateData;
-  }
-
-  setReportAvailable(projectAchievement: any, reportAvailable: boolean) {
-    projectAchievement.isReportAvailable = reportAvailable;
   }
 }

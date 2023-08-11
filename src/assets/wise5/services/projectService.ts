@@ -20,7 +20,7 @@ import { ReferenceComponent } from '../../../app/domain/referenceComponent';
 export class ProjectService {
   achievements: any = [];
   additionalProcessingFunctionsMap: any = {};
-  allPaths: string[] = [];
+  allPaths: string[][] = [];
   applicationNodes: any = [];
   flattenedProjectAsNodeIds: any = null;
   groupNodes: any[] = [];
@@ -213,10 +213,16 @@ export class ProjectService {
     this.calculateNodeOrderOfProject();
     this.loadNodeIdsInAnyBranch(this.getBranches());
     this.calculateNodeNumbers();
+    this.groupNodes = this.getActiveGroupNodes();
     if (this.project.projectAchievements != null) {
       this.achievements = this.project.projectAchievements;
     }
     this.broadcastProjectParsed();
+  }
+
+  private getActiveGroupNodes(): any[] {
+    const activeNodeIds = Object.keys(this.idToOrder);
+    return this.groupNodes.filter((node) => activeNodeIds.includes(node.id));
   }
 
   instantiateDefaults(): void {
@@ -640,7 +646,7 @@ export class ProjectService {
         return false;
       } else {
         for (const onePath of this.getOrCalculateAllPaths()) {
-          if (onePath.indexOf(nodeId1) < onePath.indexOf(nodeId2)) {
+          if (this.pathIncludesNodesAndOneComesBeforeTwo(onePath, nodeId1, nodeId2)) {
             return true;
           }
         }
@@ -651,7 +657,15 @@ export class ProjectService {
     return false;
   }
 
-  private getOrCalculateAllPaths(): string[] {
+  pathIncludesNodesAndOneComesBeforeTwo(path: string[], nodeId1: string, nodeId2: string): boolean {
+    return (
+      path.includes(nodeId1) &&
+      path.includes(nodeId2) &&
+      path.indexOf(nodeId1) < path.indexOf(nodeId2)
+    );
+  }
+
+  private getOrCalculateAllPaths(): string[][] {
     if (this.allPaths.length === 0) {
       this.allPaths = this.getAllPaths([], this.getStartNodeId(), true);
     }
@@ -835,7 +849,7 @@ export class ProjectService {
    * @param includeGroups whether to include the group node ids in the paths
    * @return an array of paths. each path is an array of node ids.
    */
-  getAllPaths(pathSoFar: string[], nodeId: string = '', includeGroups: boolean = false): any[] {
+  getAllPaths(pathSoFar: string[], nodeId: string = '', includeGroups: boolean = false): any[][] {
     const allPaths = [];
     if (this.isApplicationNode(nodeId)) {
       const path = [];
@@ -1363,6 +1377,16 @@ export class ProjectService {
     return componentService.componentHasWork(component);
   }
 
+  calculateComponentIdToHasWork(
+    components: ComponentContent[]
+  ): { [componentId: string]: boolean } {
+    const componentIdToHasWork: { [componentId: string]: boolean } = {};
+    for (const component of components) {
+      componentIdToHasWork[component.id] = this.componentHasWork(component);
+    }
+    return componentIdToHasWork;
+  }
+
   getComponentType(nodeId: string, componentId: string): string {
     const component = this.getComponent(nodeId, componentId);
     return component.type;
@@ -1425,7 +1449,7 @@ export class ProjectService {
     currentActivityNumber: any,
     currentStepNumber: number,
     branchLetterCode = null
-  ): void {
+  ): number {
     if (nodeId != null) {
       if (this.isApplicationNode(nodeId)) {
         const node = this.getNodeById(nodeId);
@@ -1492,6 +1516,10 @@ export class ProjectService {
 
               for (let bpn = 0; bpn < branchPath.length; bpn++) {
                 if (bpn == 0) {
+                  if (this.getParentGroupId(nodeId) !== this.getParentGroupId(branchPath[bpn])) {
+                    branchCurrentStepNumber = 1;
+                  }
+
                   /*
                    * Recursively call calculateNodeNumbersHelper on the
                    * first step in this branch path. This will recursively
@@ -1499,15 +1527,13 @@ export class ProjectService {
                    * branch path.
                    */
                   const branchPathNodeId = branchPath[bpn];
-                  this.calculateNodeNumbersHelper(
+                  branchCurrentStepNumber = this.calculateNodeNumbersHelper(
                     branchPathNodeId,
                     currentActivityNumber,
                     branchCurrentStepNumber,
                     branchLetterCode
                   );
                 }
-
-                branchCurrentStepNumber++;
 
                 /*
                  * update the max current step number if we have found
@@ -1598,7 +1624,10 @@ export class ProjectService {
                 if (transition != null) {
                   if (this.isBranchMergePoint(transition.to)) {
                   } else {
-                    this.calculateNodeNumbersHelper(
+                    if (this.getParentGroupId(nodeId) !== this.getParentGroupId(transition.to)) {
+                      currentStepNumber = 1;
+                    }
+                    currentStepNumber = this.calculateNodeNumbersHelper(
                       transition.to,
                       currentActivityNumber,
                       currentStepNumber,
@@ -1708,6 +1737,7 @@ export class ProjectService {
         }
       }
     }
+    return currentStepNumber;
   }
 
   getProjectScript(): any {

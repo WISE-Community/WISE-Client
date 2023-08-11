@@ -3,7 +3,7 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { GraphContent } from '../GraphContent';
 
 @Component({
-  template: 'edit-graph-advanced',
+  selector: 'edit-graph-advanced',
   templateUrl: 'edit-graph-advanced.component.html',
   styleUrls: ['edit-graph-advanced.component.scss']
 })

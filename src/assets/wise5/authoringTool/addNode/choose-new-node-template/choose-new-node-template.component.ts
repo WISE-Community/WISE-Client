@@ -3,6 +3,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { NewNodeTemplate } from '../NewNodeTemplate';
 
 @Component({
+  selector: 'choose-new-node-template',
   templateUrl: 'choose-new-node-template.component.html',
   styleUrls: ['choose-new-node-template.component.scss']
 })

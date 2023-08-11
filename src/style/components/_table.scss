@@ -1,28 +1,25 @@
-.table-wrapper {
-  display: inline-block;
-  position: relative;
-  max-width: 100%;
-  max-height: 75vh;
-  overflow: auto;
-  border-radius: $card-border-radius;
-}
+@use '@angular/material' as mat;
+@use 'style/base/typography';
 
-.mat-table {
+.mat-mdc-table {
   max-width: 100%;
 }
 
-th.mat-header-cell {
-  font-weight: 600;
-}
+td.mdc-data-table__cell, th.mdc-data-table__header-cell {
+  font-size: mat.font-size($wise-typography, 'caption');
 
-div.mat-sort-header-content {
-  text-align: start;
-}
-
-.mat-cell {
-  .mat-form-field {
+  .mdc-form-field {
+    font-size: mat.font-size($wise-typography, 'caption');
     max-width: 100%;
     padding-top: 4px;
     padding-bottom: 4px;
   }
+}
+
+th.mat-mdc-header-cell {
+  font-weight: 500;
+}
+
+div.mat-sort-header-content {
+  text-align: start;
 }

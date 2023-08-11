@@ -2,8 +2,9 @@
 <div class="component__actions buttons-div" fxLayout="row wrap">
   <button
     *ngIf="showCopyPublicNotebookItemButton"
-    mat-button
-    class="mat-primary mat-raised-button top-button"
+    mat-raised-button
+    color="primary"
+    class="top-button"
     (click)="copyPublicNotebookItem()"
     [disabled]="isDisabled"
     i18n
@@ -20,8 +21,9 @@
   </add-to-notebook-button>
   <button
     *ngIf="isStudentAttachmentEnabled"
-    mat-button
-    class="mat-primary mat-raised-button top-button"
+    mat-raised-button
+    color="primary"
+    class="top-button"
     (click)="showStudentAssets()"
     [disabled]="isDisabled"
     i18n
@@ -31,8 +33,9 @@
   </button>
   <button
     *ngIf="isResetButtonVisible"
-    mat-button
-    class="mat-primary mat-raised-button top-button"
+    mat-raised-button
+    color="primary"
+    class="top-button"
     (click)="resetDrawing()"
     [disabled]="isDisabled"
     i18n

@@ -5,7 +5,7 @@ import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-  selector: 'edit-peer-chat-advanced-component',
+  selector: 'edit-peer-chat-advanced',
   templateUrl: './edit-peer-chat-advanced-component.component.html',
   styleUrls: ['./edit-peer-chat-advanced-component.component.scss']
 })

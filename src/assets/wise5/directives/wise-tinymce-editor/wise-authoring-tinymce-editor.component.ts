@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { ConfigService } from '../../services/configService';
-import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { WiseTinymceEditorComponent } from './wise-tinymce-editor.component';
 import { NotebookService } from '../../services/notebookService';
 import 'tinymce';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { MatDialog } from '@angular/material/dialog';
+import { ProjectAssetAuthoringComponent } from '../../authoringTool/project-asset-authoring/project-asset-authoring.component';
+import { WiseLinkAuthoringDialogComponent } from '../../authoringTool/wise-link-authoring-dialog/wise-link-authoring-dialog.component';
+import { filter } from 'rxjs';
 
 declare let tinymce: any;
 
@@ -27,9 +29,8 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
 
   constructor(
     private ConfigService: ConfigService,
-    NotebookService: NotebookService,
-    private ProjectAssetService: ProjectAssetService,
-    private upgrade: UpgradeModule
+    private dialog: MatDialog,
+    NotebookService: NotebookService
   ) {
     super(NotebookService);
   }
@@ -55,60 +56,52 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
         tooltip: $localize`Insert WISE Link`,
         icon: 'wiselink',
         onAction: function () {
-          const params = {
-            projectId: '',
-            nodeId: '',
-            componentId: '',
-            target: ''
-          };
-          thisComponent.openWISELinkChooser(params).then((result) => {
-            let content = '';
-            if (result.wiseLinkType === 'link') {
-              content =
-                `<a href="#" wiselink="true" node-id="${result.wiseLinkNodeId}" ` +
-                `component-id="${result.wiseLinkComponentId}" ` +
-                `link-text="${result.wiseLinkText}">${result.wiseLinkText}</a>`;
-            } else if (result.wiseLinkType === 'button') {
-              content =
-                `<button wiselink="true" node-id="${result.wiseLinkNodeId}" ` +
-                `component-id="${result.wiseLinkComponentId}" ` +
-                `link-text="${result.wiseLinkText}">${result.wiseLinkText}</button>`;
-            }
-            editor.insertContent(content);
-          });
+          thisComponent
+            .openWISELinkChooser()
+            .afterClosed()
+            .pipe(filter((result: any) => result != null))
+            .subscribe((result: any) => {
+              let content = '';
+              if (result.wiseLinkType === 'link') {
+                content =
+                  `<a href="#" wiselink="true" node-id="${result.wiseLinkNodeId}" ` +
+                  `component-id="${result.wiseLinkComponentId}" ` +
+                  `link-text="${result.wiseLinkText}">${result.wiseLinkText}</a>`;
+              } else if (result.wiseLinkType === 'button') {
+                content =
+                  `<button wiselink="true" node-id="${result.wiseLinkNodeId}" ` +
+                  `component-id="${result.wiseLinkComponentId}" ` +
+                  `link-text="${result.wiseLinkText}">${result.wiseLinkText}</button>`;
+              }
+              editor.insertContent(content);
+            });
         }
       });
     });
   }
 
-  private openWISELinkChooser({ projectId, nodeId, componentId, target }): any {
-    const stateParams = {
-      projectId: projectId,
-      nodeId: nodeId,
-      componentId: componentId,
-      target: target
-    };
-    return this.upgrade.$injector.get('$mdDialog').show({
-      templateUrl: 'assets/wise5/authoringTool/wiseLink/wiseLinkAuthoring.html',
-      controller: 'WISELinkAuthoringController',
-      controllerAs: '$ctrl',
-      $stateParams: stateParams,
-      clickOutsideToClose: true,
-      escapeToClose: true
+  private openWISELinkChooser(): any {
+    return this.dialog.open(WiseLinkAuthoringDialogComponent, {
+      width: '80%'
     });
   }
 
   filePicker(callback: any, value: any, meta: any) {
-    const params = {
-      isPopup: true,
-      allowedFileTypes: this.getAllowedFileTypesFromMeta(meta)
-    };
-    this.ProjectAssetService.openAssetChooser(params).then((result: any) => {
-      const fileName = result.assetItem.fileName;
-      const fileNameNoExt = fileName.substr(0, fileName.lastIndexOf('.')) || fileName;
-      const fullFilePath = `${this.ConfigService.getProjectAssetsDirectoryPath()}/${fileName}`;
-      callback(fullFilePath, { alt: fileNameNoExt, text: fileNameNoExt });
-    });
+    this.dialog
+      .open(ProjectAssetAuthoringComponent, {
+        data: {
+          isPopup: true,
+          allowedFileTypes: this.getAllowedFileTypesFromMeta(meta)
+        },
+        width: '80%'
+      })
+      .afterClosed()
+      .subscribe((result: any) => {
+        const fileName = result.assetItem.fileName;
+        const fileNameNoExt = fileName.substr(0, fileName.lastIndexOf('.')) || fileName;
+        const fullFilePath = `${this.ConfigService.getProjectAssetsDirectoryPath()}/${fileName}`;
+        callback(fullFilePath, { alt: fileNameNoExt, text: fileNameNoExt });
+      });
   }
 
   getAllowedFileTypesFromMeta(meta: any): string[] {

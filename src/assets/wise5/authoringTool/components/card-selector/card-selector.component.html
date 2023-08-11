@@ -1,11 +1,20 @@
 <div fxLayout="row wrap" fxLayout.xs="column" class="item-cards-container gray-lighter-bg">
   <div fxFlex.sm="50" fxFlex.md="33" fxFlex.gt-md="25" *ngFor="let item of items">
-    <mat-card class="item-card" [ngStyle]="isItemSelected(item) && { border: '4px solid #00C853' }">
+    <mat-card
+      appearance="outlined"
+      class="item-card"
+      [ngStyle]="isItemSelected(item) && { border: '4px solid #00C853' }"
+    >
       <mat-card-title class="item-card-title">
         {{ item.title }}
       </mat-card-title>
       <div class="item-card-image" style="background-image: url('{{ item.thumbnail }}');"></div>
-      <mat-card-actions fxLayout="row" fxLayoutAlign="start center">
+      <mat-card-actions
+        class="item-card-actions"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px"
+      >
         <mat-icon
           class="success"
           aria-label="Selected"

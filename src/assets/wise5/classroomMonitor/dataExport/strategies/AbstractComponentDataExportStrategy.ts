@@ -4,6 +4,7 @@ import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { ComponentRevisionCounter } from '../ComponentRevisionCounter';
 import { UserIdsAndStudentNames } from '../UserIdsAndStudentNames';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
+import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 
 export abstract class AbstractComponentDataExportStrategy extends AbstractDataExportStrategy {
   abstract COMPONENT_TYPE: string;
@@ -167,9 +168,9 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     row[this.columnNameToNumber.get('Project Name')] = this.projectService.getProjectTitle();
     row[this.columnNameToNumber.get('Run ID')] = this.configService.getRunId();
     row[this.columnNameToNumber.get('Student Work ID')] = componentState.id;
-    row[
-      this.columnNameToNumber.get('Server Timestamp')
-    ] = this.utilService.convertMillisecondsToFormattedDateTime(componentState.serverSaveTime);
+    row[this.columnNameToNumber.get('Server Timestamp')] = millisecondsToDateTime(
+      componentState.serverSaveTime
+    );
     const clientSaveTime = new Date(componentState.clientSaveTime);
     const clientSaveTimeString =
       clientSaveTime.toDateString() + ' ' + clientSaveTime.toLocaleTimeString();

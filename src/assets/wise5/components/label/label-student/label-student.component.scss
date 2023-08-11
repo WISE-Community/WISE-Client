@@ -1,7 +1,7 @@
 $margin-spacing: 20px;
 
 .input-wrapper {
-  min-height: 60px;
+  min-height: 80px;
   max-width: 800px;
 }
 
@@ -35,10 +35,13 @@ $margin-spacing: 20px;
 }
 
 .label-canvas-container {
-  margin-top: 10px;
   margin-bottom: $margin-spacing;
 }
 
 .label-canvas {
   border: 1px solid black;
+}
+
+.mat-icon {
+  margin: 0px;
 }

@@ -1,0 +1,107 @@
+<h2 mat-dialog-title i18n>Advanced Settings</h2>
+<mat-divider></mat-divider>
+<div mat-dialog-content>
+  <ng-container [ngSwitch]="component.content.type">
+    <edit-animation-advanced
+      *ngSwitchCase="'Animation'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-animation-advanced>
+    <edit-audio-oscillator-advanced
+      *ngSwitchCase="'AudioOscillator'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-audio-oscillator-advanced>
+    <edit-concept-map-advanced
+      *ngSwitchCase="'ConceptMap'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-concept-map-advanced>
+    <edit-discussion-advanced
+      *ngSwitchCase="'Discussion'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-discussion-advanced>
+    <edit-draw-advanced
+      *ngSwitchCase="'Draw'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-draw-advanced>
+    <edit-embedded-advanced
+      *ngSwitchCase="'Embedded'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-embedded-advanced>
+    <edit-graph-advanced
+      *ngSwitchCase="'Graph'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-graph-advanced>
+    <edit-dialog-guidance-advanced
+      *ngSwitchCase="'DialogGuidance'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-dialog-guidance-advanced>
+    <edit-html-advanced
+      *ngSwitchCase="'HTML'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-html-advanced>
+    <edit-label-advanced
+      *ngSwitchCase="'Label'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-label-advanced>
+    <edit-match-advanced
+      *ngSwitchCase="'Match'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-match-advanced>
+    <edit-multiple-choice-advanced
+      *ngSwitchCase="'MultipleChoice'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-multiple-choice-advanced>
+    <edit-open-response-advanced
+      *ngSwitchCase="'OpenResponse'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-open-response-advanced>
+    <edit-outside-url-advanced
+      *ngSwitchCase="'OutsideURL'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-outside-url-advanced>
+    <edit-peer-chat-advanced
+      *ngSwitchCase="'PeerChat'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-peer-chat-advanced>
+    <ng-container
+      *ngSwitchCase="
+        component.content.type === 'ShowGroupWork' || component.content.type === 'ShowMyWork'
+          ? component.content.type
+          : ''
+      "
+    >
+      <edit-component-constraints
+        [componentContent]="component.content"
+      ></edit-component-constraints>
+      <edit-component-json [component]="component"></edit-component-json>
+    </ng-container>
+    <edit-summary-advanced
+      *ngSwitchCase="'Summary'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-summary-advanced>
+    <edit-table-advanced
+      *ngSwitchCase="'Table'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-table-advanced>
+  </ng-container>
+</div>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close cdkFocusRegionstart i18n>Close</button>
+</mat-dialog-actions>

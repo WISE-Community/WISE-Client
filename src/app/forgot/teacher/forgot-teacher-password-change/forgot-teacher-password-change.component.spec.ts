@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotTeacherPasswordChangeComponent } from './forgot-teacher-password-change.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
@@ -8,6 +7,8 @@ import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { PasswordModule } from '../../../password/password.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 export class MockTeacherService {
   changePassword(
@@ -32,22 +33,28 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
 
   const submitAndReceiveErrorResponse = (messageCode: string) => {
     const observableResponse = throwError({ error: { messageCode: messageCode } });
-    spyOn(TestBed.get(TeacherService), 'changePassword').and.returnValue(observableResponse);
+    spyOn(TestBed.inject(TeacherService), 'changePassword').and.returnValue(observableResponse);
     component.submit();
     fixture.detectChanges();
   };
 
   const getErrorMessage = () => {
-    const errorMessageDiv = fixture.debugElement.nativeElement.querySelector('.error-message');
-    return errorMessageDiv.textContent;
+    return fixture.debugElement.nativeElement.querySelector('.warn').textContent;
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ForgotTeacherPasswordChangeComponent],
-      imports: [BrowserAnimationsModule, PasswordModule, RouterTestingModule, ReactiveFormsModule],
+      imports: [
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatDividerModule,
+        PasswordModule,
+        RouterTestingModule,
+        ReactiveFormsModule
+      ],
       providers: [{ provide: TeacherService, useClass: MockTeacherService }],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: []
     });
     fixture = TestBed.createComponent(ForgotTeacherPasswordChangeComponent);
     component = fixture.componentInstance;
@@ -76,7 +83,7 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
   });
 
   it('should submit and navigate to the complete page', () => {
-    const router = TestBed.get(Router);
+    const router = TestBed.inject(Router);
     const navigateSpy = spyOn(router, 'navigate');
     component.submit();
     const params = {
@@ -89,7 +96,7 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
   });
 
   it('should navigate to the complete page after successfully submitting the new password', () => {
-    const router = TestBed.get(Router);
+    const router = TestBed.inject(Router);
     const navigateSpy = spyOn(router, 'navigate');
     component.username = 'SpongebobSquarepants';
     component.verificationCode = '123456';

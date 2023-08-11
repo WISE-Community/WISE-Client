@@ -1,4 +1,3 @@
-import * as angular from 'angular';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConfigService } from './configService';
@@ -78,7 +77,7 @@ export class CopyNodesService {
    */
   copyNodes(nodes: any[], fromProjectId: number, toProjectId: number) {
     return this.http.post(this.ConfigService.getConfigParam('importStepsURL'), {
-      steps: angular.toJson(nodes),
+      steps: JSON.stringify(nodes),
       fromProjectId: fromProjectId,
       toProjectId: toProjectId
     });
