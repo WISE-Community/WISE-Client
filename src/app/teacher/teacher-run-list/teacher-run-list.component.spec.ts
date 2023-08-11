@@ -11,6 +11,7 @@ import { UserService } from '../../services/user.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { User } from '../../domain/user';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatMenuModule } from '@angular/material/menu';
 
 class TeacherScheduleStubComponent {}
 
@@ -104,6 +105,7 @@ describe('TeacherRunListComponent', () => {
           RouterTestingModule.withRoutes([
             { path: 'teacher/home/schedule', component: TeacherScheduleStubComponent }
           ]),
+          MatMenuModule,
           MatSnackBarModule
         ],
         providers: [
