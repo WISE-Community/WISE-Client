@@ -88,8 +88,9 @@ let teacherService: TeacherService;
 function createRun(id: number, ownerId: number): TeacherRun {
   return new TeacherRun({
     id: id,
-    project: { id: id, isDeleted: false },
-    owner: new User({ id: ownerId })
+    project: { id: id, tags: [] },
+    owner: new User({ id: ownerId }),
+    isArchived: false
   });
 }
 
@@ -181,7 +182,7 @@ function setRunsIsSelected(runs: TeacherRun[], isSelected: boolean[]): void {
 
 function expectRunsIsArchived(runs: TeacherRun[], isArchived: boolean[]): void {
   runs.forEach((run: TeacherRun, index: number) => {
-    expect(run.project.isDeleted).toEqual(isArchived[index]);
+    expect(run.isArchived).toEqual(isArchived[index]);
   });
 }
 
@@ -338,5 +339,5 @@ function runArchiveStatusChanged(): void {
 }
 
 function setRunIsArchived(run: TeacherRun, isArchived: boolean): void {
-  run.project.isDeleted = isArchived;
+  run.isArchived = isArchived;
 }
