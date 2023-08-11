@@ -213,7 +213,6 @@ export class TeacherRunListComponent implements OnInit {
       this.selectAllFilteredRuns();
     }
     this.updateSelectAllCheckboxAndNumRunsSelected();
-    event.preventDefault();
   }
 
   private unselectAllRuns(): void {
@@ -234,8 +233,6 @@ export class TeacherRunListComponent implements OnInit {
 
   selectRunsOptionChosen(value: string): void {
     this.turnOnShowAll();
-    this.isSelectedAllRuns = value === 'all';
-    this.isSelectedAllRuns = value === 'none';
     this.filteredRuns
       .filter((run: TeacherRun) => !run.shared)
       .forEach((run: TeacherRun) => {

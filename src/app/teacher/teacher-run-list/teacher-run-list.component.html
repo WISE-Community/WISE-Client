@@ -72,12 +72,15 @@
       (click)="selectAllRunsCheckboxClicked($event)"
     ></mat-checkbox>
     <div class="select-all-drop-down">
-      <mat-select>
-        <mat-option (click)="selectRunsOptionChosen('all')" i18n>All</mat-option>
-        <mat-option (click)="selectRunsOptionChosen('none')" i18n>None</mat-option>
-        <mat-option (click)="selectRunsOptionChosen('running')" i18n>Running</mat-option>
-        <mat-option (click)="selectRunsOptionChosen('completed')" i18n>Completed</mat-option>
-      </mat-select>
+      <button mat-button [matMenuTriggerFor]="selectRunsMenu">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #selectRunsMenu="matMenu">
+        <button mat-menu-item (click)="selectRunsOptionChosen('all')" i18n>All</button>
+        <button mat-menu-item (click)="selectRunsOptionChosen('none')" i18n>None</button>
+        <button mat-menu-item (click)="selectRunsOptionChosen('running')" i18n>Running</button>
+        <button mat-menu-item (click)="selectRunsOptionChosen('completed')" i18n>Completed</button>
+      </mat-menu>
     </div>
     <div *ngIf="numSelectedRuns > 0" class="num-selected-runs-display" i18n>
       {{ numSelectedRuns }} Run(s) Selected
