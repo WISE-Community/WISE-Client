@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { defer, Observable, of } from 'rxjs';
 import { TeacherRunListComponent } from './teacher-run-list.component';
@@ -11,7 +12,6 @@ import { UserService } from '../../services/user.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { User } from '../../domain/user';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatMenuModule } from '@angular/material/menu';
 
 class TeacherScheduleStubComponent {}
 
@@ -105,7 +105,6 @@ describe('TeacherRunListComponent', () => {
           RouterTestingModule.withRoutes([
             { path: 'teacher/home/schedule', component: TeacherScheduleStubComponent }
           ]),
-          MatMenuModule,
           MatSnackBarModule
         ],
         providers: [
@@ -137,7 +136,6 @@ describe('TeacherRunListComponent', () => {
   isShowArchiveChanged();
   runArchiveStatusChanged();
   runSelectedStatusChanged();
-  selectAllRunsCheckboxClicked();
   selectRunsOptionChosen();
   sortByStartTimeDesc();
   unarchiveSelectedRuns();
@@ -217,52 +215,11 @@ function isShowArchiveChanged(): void {
     describe('active runs are shown and some runs are selected', () => {
       it('should unselect the runs', () => {
         setRunsIsSelected([run1, run2, run3], [true, false, true]);
-        setAllRunsCheckbox(false, true);
         component.isShowArchivedChanged();
         expectRunsIsSelected([run1, run2, run3], [false, false, false]);
-        expectSelectAllRunsCheckbox(false, false);
       });
     });
   });
-}
-
-function selectAllRunsCheckboxClicked(): void {
-  describe('selectAllRunsCheckboxClicked()', () => {
-    describe('select all runs checkbox is not checked', () => {
-      it('when select all runs checkbox is clicked it should select all runs', () => {
-        setAllRunsCheckbox(false, false);
-        component.selectAllRunsCheckboxClicked(dummyClickEvent);
-        expectSelectAllRunsCheckbox(true, false);
-      });
-    });
-    describe('select all runs checkbox is checked', () => {
-      it('when select all runs checkbox is clicked it should unselect all runs', () => {
-        setAllRunsCheckbox(true, false);
-        component.selectAllRunsCheckboxClicked(dummyClickEvent);
-        expectSelectAllRunsCheckbox(false, false);
-      });
-    });
-    describe('select all runs checkbox is indeterminate checked', () => {
-      it('when select all runs checkbox is clicked it should unselect all runs', () => {
-        setAllRunsCheckbox(false, true);
-        component.selectAllRunsCheckboxClicked(dummyClickEvent);
-        expectSelectAllRunsCheckbox(false, false);
-      });
-    });
-  });
-}
-
-function setAllRunsCheckbox(isSelectedAllRuns: boolean, isSelectedSomeRuns: boolean): void {
-  component.isSelectedAllRuns = isSelectedAllRuns;
-  component.isSelectedSomeRuns = isSelectedSomeRuns;
-}
-
-function expectSelectAllRunsCheckbox(
-  isSelectedAllRuns: boolean,
-  isSelectedSomeRuns: boolean
-): void {
-  expect(component.isSelectedAllRuns).toEqual(isSelectedAllRuns);
-  expect(component.isSelectedSomeRuns).toEqual(isSelectedSomeRuns);
 }
 
 function runSelectedStatusChanged(): void {
@@ -272,7 +229,6 @@ function runSelectedStatusChanged(): void {
         setRunsIsSelected([run1, run2, run3], [true, false, false]);
         component.runSelectedStatusChanged();
         expect(component.numSelectedRuns).toEqual(1);
-        expectSelectAllRunsCheckbox(false, true);
       });
     });
     describe('two runs are selected', () => {
@@ -280,7 +236,6 @@ function runSelectedStatusChanged(): void {
         setRunsIsSelected([run1, run2, run3], [true, true, false]);
         component.runSelectedStatusChanged();
         expect(component.numSelectedRuns).toEqual(2);
-        expectSelectAllRunsCheckbox(false, true);
       });
     });
     describe('all runs are selected', () => {
@@ -288,7 +243,6 @@ function runSelectedStatusChanged(): void {
         setRunsIsSelected([run1, run2, run3], [true, true, true]);
         component.runSelectedStatusChanged();
         expect(component.numSelectedRuns).toEqual(3);
-        expectSelectAllRunsCheckbox(true, false);
       });
     });
   });

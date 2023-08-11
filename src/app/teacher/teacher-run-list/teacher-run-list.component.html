@@ -63,32 +63,20 @@
     class="select-all-controls"
     fxLayout="row"
     fxLayoutAlign="start center"
+    fxLayoutGap="20px"
   >
-    <mat-checkbox
-      class="select-all-check-box"
-      color="primary"
-      [checked]="isSelectedAllRuns"
-      [indeterminate]="isSelectedSomeRuns"
-      (click)="selectAllRunsCheckboxClicked($event)"
-    ></mat-checkbox>
-    <div class="select-all-drop-down">
-      <button mat-button [matMenuTriggerFor]="selectRunsMenu">
-        <mat-icon>arrow_drop_down</mat-icon>
-      </button>
-      <mat-menu #selectRunsMenu="matMenu">
-        <button mat-menu-item (click)="selectRunsOptionChosen('all')" i18n>All</button>
-        <button mat-menu-item (click)="selectRunsOptionChosen('none')" i18n>None</button>
-        <button mat-menu-item (click)="selectRunsOptionChosen('running')" i18n>Running</button>
-        <button mat-menu-item (click)="selectRunsOptionChosen('completed')" i18n>Completed</button>
-      </mat-menu>
-    </div>
+    <select-runs-controls
+      [numSelectedRuns]="numSelectedRuns"
+      [numTotalRuns]="filteredRuns.length"
+      (selectRunsOptionChosenEvent)="selectRunsOptionChosen($event)"
+    ></select-runs-controls>
     <div *ngIf="numSelectedRuns > 0" class="num-selected-runs-display" i18n>
       {{ numSelectedRuns }} Run(s) Selected
     </div>
     <button
       mat-raised-button
       color="accent"
-      *ngIf="!isShowArchived && (isSelectedAllRuns || isSelectedSomeRuns)"
+      *ngIf="!isShowArchived && numSelectedRuns > 0"
       (click)="archiveSelectedRuns()"
       i18n
     >
@@ -97,7 +85,7 @@
     <button
       mat-raised-button
       color="accent"
-      *ngIf="isShowArchived && (isSelectedAllRuns || isSelectedSomeRuns)"
+      *ngIf="isShowArchived && numSelectedRuns > 0"
       (click)="unarchiveSelectedRuns()"
       i18n
     >
@@ -123,7 +111,6 @@
       </app-timeline-item>
     </ng-container>
   </app-timeline>
-
   <div class="content-block__actions" *ngIf="filteredRuns.length > 10 && !showAll">
     <button mat-raised-button color="accent" (click)="showAll = true" i18n>Show More</button>
   </div>

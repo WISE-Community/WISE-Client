@@ -23,8 +23,6 @@ export class TeacherRunListComponent implements OnInit {
   searchValue: string = '';
   filterOptions: any[];
   filterValue: string = '';
-  isSelectedAllRuns: boolean = false;
-  isSelectedSomeRuns: boolean = false;
   isShowArchived: boolean = false;
   numSelectedRuns: number = 0;
   showAll: boolean = false;
@@ -101,29 +99,29 @@ export class TeacherRunListComponent implements OnInit {
     this.performSearchAndFilter();
   }
 
-  sortByStartTimeDesc(a: TeacherRun, b: TeacherRun): number {
+  protected sortByStartTimeDesc(a: TeacherRun, b: TeacherRun): number {
     return b.startTime - a.startTime;
   }
 
-  runSpansDays(run: TeacherRun): boolean {
+  protected runSpansDays(run: TeacherRun): boolean {
     const startDay = formatDate(run.startTime, 'shortDate', this.localeID);
     const endDay = formatDate(run.endTime, 'shortDate', this.localeID);
     return startDay != endDay;
   }
 
-  activeTotal(): number {
+  protected activeTotal(): number {
     const now = this.configService.getCurrentServerTime();
     return this.filteredRuns.filter((run: TeacherRun) => run.isActive(now)).length;
   }
 
-  completedTotal(): number {
+  protected completedTotal(): number {
     const now = this.configService.getCurrentServerTime();
     return this.filteredRuns.filter(
       (run: TeacherRun) => !run.isActive(now) && !run.isScheduled(now)
     ).length;
   }
 
-  scheduledTotal(): number {
+  protected scheduledTotal(): number {
     const now = this.configService.getCurrentServerTime();
     return this.filteredRuns.filter((run: TeacherRun) => run.isScheduled(now)).length;
   }
@@ -134,15 +132,10 @@ export class TeacherRunListComponent implements OnInit {
     this.updateNumSelectedRuns();
   }
 
-  searchChanged(searchValue: string): void {
+  protected searchChanged(searchValue: string): void {
     this.searchValue = searchValue;
     this.performSearchAndFilter();
     this.turnOnShowAll();
-  }
-
-  filterChanged(value: string): void {
-    this.filterValue = value;
-    this.performSearchAndFilter();
   }
 
   private performFilter(): void {
@@ -167,13 +160,13 @@ export class TeacherRunListComponent implements OnInit {
     );
   }
 
-  reset(): void {
+  protected reset(): void {
     this.searchValue = '';
     this.filterValue = '';
     this.performSearchAndFilter();
   }
 
-  isRunActive(run: TeacherRun): boolean {
+  protected isRunActive(run: TeacherRun): boolean {
     return run.isActive(this.configService.getCurrentServerTime());
   }
 
@@ -198,40 +191,20 @@ export class TeacherRunListComponent implements OnInit {
     }
   }
 
-  isShowArchivedChanged(): void {
+  protected isShowArchivedChanged(): void {
     this.turnOnShowAll();
     this.unselectAllRuns();
-    this.updateSelectAllCheckboxAndNumRunsSelected();
+    this.updateNumSelectedRuns();
     this.performSearchAndFilter();
   }
 
-  selectAllRunsCheckboxClicked(event: any): void {
-    this.turnOnShowAll();
-    if (this.isSelectedAllRuns || this.isSelectedSomeRuns) {
-      this.unselectAllRuns();
-    } else {
-      this.selectAllFilteredRuns();
-    }
-    this.updateSelectAllCheckboxAndNumRunsSelected();
-  }
-
   private unselectAllRuns(): void {
-    this.isSelectedAllRuns = false;
-    this.isSelectedSomeRuns = false;
     for (const run of this.runs) {
       run.isSelected = false;
     }
   }
 
-  private selectAllFilteredRuns(): void {
-    this.filteredRuns
-      .filter((run: TeacherRun) => !run.shared)
-      .forEach((run: TeacherRun) => {
-        run.isSelected = true;
-      });
-  }
-
-  selectRunsOptionChosen(value: string): void {
+  protected selectRunsOptionChosen(value: string): void {
     this.turnOnShowAll();
     this.filteredRuns
       .filter((run: TeacherRun) => !run.shared)
@@ -251,36 +224,20 @@ export class TeacherRunListComponent implements OnInit {
             break;
         }
       });
-    this.updateSelectAllCheckboxAndNumRunsSelected();
-  }
-
-  private updateSelectAllCheckboxAndNumRunsSelected(): void {
-    this.updateSelectAllCheckbox();
     this.updateNumSelectedRuns();
   }
 
-  private updateSelectAllCheckbox(): void {
-    const numFilteredRuns = this.filteredRuns.length;
-    const numSelectedRuns = this.getNumSelectedRuns();
-    this.isSelectedAllRuns = numSelectedRuns > 0 && numSelectedRuns === numFilteredRuns;
-    this.isSelectedSomeRuns = numSelectedRuns > 0 && numSelectedRuns !== numFilteredRuns;
-  }
-
   private updateNumSelectedRuns(): void {
-    this.numSelectedRuns = this.getNumSelectedRuns();
+    this.numSelectedRuns = this.getSelectedRuns().length;
   }
 
-  private getNumSelectedRuns(): number {
-    return this.getSelectedRuns().length;
-  }
-
-  archiveSelectedRuns(): Subscription {
+  protected archiveSelectedRuns(): Subscription {
     const runs = this.getSelectedRuns();
     return this.teacherService.archiveRuns(runs).subscribe({
       next: () => {
         this.setRunsIsArchived(runs, true);
         this.unselectAllRuns();
-        this.updateSelectAllCheckboxAndNumRunsSelected();
+        this.updateNumSelectedRuns();
         this.performSearchAndFilter();
         this.snackBar.open($localize`Successfully Archived ${runs.length} Runs`);
       },
@@ -290,13 +247,13 @@ export class TeacherRunListComponent implements OnInit {
     });
   }
 
-  unarchiveSelectedRuns(): Subscription {
+  protected unarchiveSelectedRuns(): Subscription {
     const runs = this.getSelectedRuns();
     return this.teacherService.unarchiveRuns(runs).subscribe({
       next: () => {
         this.setRunsIsArchived(runs, false);
         this.unselectAllRuns();
-        this.updateSelectAllCheckboxAndNumRunsSelected();
+        this.updateNumSelectedRuns();
         this.performSearchAndFilter();
         this.snackBar.open($localize`Successfully Unarchived ${runs.length} Runs`);
       },
@@ -312,11 +269,11 @@ export class TeacherRunListComponent implements OnInit {
     }
   }
 
-  runSelectedStatusChanged(): void {
-    this.updateSelectAllCheckboxAndNumRunsSelected();
+  protected runSelectedStatusChanged(): void {
+    this.updateNumSelectedRuns();
   }
 
-  runArchiveStatusChanged(): void {
+  protected runArchiveStatusChanged(): void {
     this.performSearchAndFilter();
   }
 

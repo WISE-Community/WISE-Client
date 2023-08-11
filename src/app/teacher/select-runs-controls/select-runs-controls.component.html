@@ -1,0 +1,20 @@
+<div fxLayout="row wrap" fxLayoutAlign="start center">
+  <mat-checkbox
+    class="select-all-check-box"
+    color="primary"
+    [checked]="isSelectedAllRuns"
+    [indeterminate]="isSelectedSomeRuns"
+    (click)="selectAllRunsCheckboxClicked()"
+  ></mat-checkbox>
+  <div class="select-all-drop-down">
+    <button mat-button [matMenuTriggerFor]="selectRunsMenu">
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #selectRunsMenu="matMenu">
+      <button mat-menu-item (click)="selectRunsOptionChosen('all')" i18n>All</button>
+      <button mat-menu-item (click)="selectRunsOptionChosen('none')" i18n>None</button>
+      <button mat-menu-item (click)="selectRunsOptionChosen('running')" i18n>Running</button>
+      <button mat-menu-item (click)="selectRunsOptionChosen('completed')" i18n>Completed</button>
+    </mat-menu>
+  </div>
+</div>
