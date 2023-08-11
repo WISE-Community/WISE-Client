@@ -58,7 +58,6 @@
 >
   <mat-card-content fxLayout="row" fxLayoutGap="12px">
     <mat-checkbox
-      *ngIf="!run.shared"
       color="primary"
       [(ngModel)]="run.isSelected"
       (ngModelChange)="runSelectedStatusChangedEvent.emit()"
