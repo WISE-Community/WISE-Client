@@ -112,12 +112,15 @@ const routes: Routes = [
           { path: 'milestones', component: MilestonesAuthoringComponent },
           {
             path: 'node/:nodeId',
-            component: NodeAuthoringComponent
+            component: NodeAuthoringComponent,
+            children: [
+              {
+                path: 'choose-component-location',
+                component: ChooseComponentLocationComponent
+              }
+            ]
           },
-          {
-            path: 'node/:nodeId/choose-component-location',
-            component: ChooseComponentLocationComponent
-          },
+
           {
             path: 'node/:nodeId/advanced',
             component: NodeAdvancedAuthoringComponent,

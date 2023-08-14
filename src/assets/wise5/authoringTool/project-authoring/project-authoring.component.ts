@@ -64,12 +64,11 @@ export class ProjectAuthoringComponent {
   ) {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(
-        () => (this.showProjectView = /\/teacher\/edit\/unit\/(\d*)$/.test(this.router.url))
-      );
+      .subscribe(() => this.updateShowProjectView());
   }
 
   ngOnInit(): void {
+    this.updateShowProjectView();
     this.projectId = Number(this.route.snapshot.paramMap.get('unitId'));
     this.items = Object.entries(this.projectService.idToOrder)
       .map((entry: any) => {
@@ -97,8 +96,6 @@ export class ProjectAuthoringComponent {
       })
     );
 
-    this.saveEvent('projectOpened', 'Navigation');
-
     window.onbeforeunload = (event) => {
       this.endProjectAuthoringSession();
     };
@@ -109,13 +106,16 @@ export class ProjectAuthoringComponent {
     this.subscriptions.unsubscribe();
   }
 
+  private updateShowProjectView(): void {
+    this.showProjectView = /\/teacher\/edit\/unit\/(\d*)$/.test(this.router.url);
+  }
+
   private endProjectAuthoringSession(): void {
     this.rxStomp.deactivate();
     this.projectService.notifyAuthorProjectEnd(this.projectId);
   }
 
   protected previewProject(): void {
-    this.saveEvent('projectPreviewed', 'Navigation', { constraints: true });
     window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
   }
 
@@ -218,14 +218,6 @@ export class ProjectAuthoringComponent {
                 node.toTitle = this.projectService.getNodePositionAndTitle(newNode.id);
               }
             }
-
-            if (this.projectService.isGroupNode(firstNewNode.id)) {
-              let nodeMovedEventData = { activitiesMoved: movedNodes };
-              this.saveEvent('activityMoved', 'Authoring', nodeMovedEventData);
-            } else {
-              let nodeMovedEventData = { stepsMoved: movedNodes };
-              this.saveEvent('stepMoved', 'Authoring', nodeMovedEventData);
-            }
           }
         }
       });
@@ -275,14 +267,6 @@ export class ProjectAuthoringComponent {
               node.toNodeId = newNode.id;
               node.toTitle = this.projectService.getNodePositionAndTitle(newNode.id);
             }
-          }
-
-          if (this.projectService.isGroupNode(firstNewNode.id)) {
-            let nodeCopiedEventData = { activitiesCopied: copiedNodes };
-            this.saveEvent('activityCopied', 'Authoring', nodeCopiedEventData);
-          } else {
-            let nodeCopiedEventData = { stepsCopied: copiedNodes };
-            this.saveEvent('stepCopied', 'Authoring', nodeCopiedEventData);
           }
         }
       }
@@ -367,12 +351,6 @@ export class ProjectAuthoringComponent {
     }
     if (deletedStartNodeId) {
       this.updateStartNodeId();
-    }
-    if (activitiesDeleted.length > 0) {
-      this.saveEvent('activityDeleted', 'Authoring', { activitiesDeleted: activitiesDeleted });
-    }
-    if (stepsDeleted.length > 0) {
-      this.saveEvent('stepDeleted', 'Authoring', { stepsDeleted: stepsDeleted });
     }
     this.projectService.saveProject();
     this.refreshProject();
@@ -558,33 +536,6 @@ export class ProjectAuthoringComponent {
         }
       }
     });
-  }
-
-  /**
-   * Save an Authoring Tool event
-   * @param eventName the name of the event
-   * @param category the category of the event
-   * example 'Navigation' or 'Authoring'
-   * @param data (optional) an object that contains more specific data about
-   * the event
-   */
-  private saveEvent(eventName: string, category: string, data: any = null): void {
-    let context = 'AuthoringTool';
-    let nodeId = null;
-    let componentId = null;
-    let componentType = null;
-    if (data == null) {
-      data = {};
-    }
-    this.dataService.saveEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      eventName,
-      data
-    );
   }
 
   /**

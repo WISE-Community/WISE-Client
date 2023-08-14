@@ -95,7 +95,7 @@ export class RecoveryAuthoringComponent implements OnInit {
   }
 
   private hasTransitionToNull(node: any): boolean {
-    return node.transitionLogic.transitions.some((transition: any) => {
+    return node.transitionLogic?.transitions.some((transition: any) => {
       return transition.to == null;
     });
   }
