@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'choose-structure-location',
@@ -9,17 +10,17 @@ import { UpgradeModule } from '@angular/upgrade/static';
 })
 export class ChooseStructureLocationComponent {
   groupNodes: any;
-  projectId: number;
   $state: any;
   structure: any;
 
-  constructor(private projectService: TeacherProjectService, private upgrade: UpgradeModule) {}
+  constructor(
+    private projectService: TeacherProjectService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.$state = this.upgrade.$injector.get('$state');
-    const stateParams = this.upgrade.$injector.get('$stateParams');
-    this.projectId = stateParams.projectId;
-    this.structure = this.injectUniqueIds(stateParams.structure);
+    this.structure = this.injectUniqueIds(history.state.structure);
     const groupNodesIdToOrder = this.projectService.getGroupNodesIdToOrder();
     this.groupNodes = Object.entries(groupNodesIdToOrder).map((entry: any) => {
       return { id: entry[0], order: entry[1].order };
@@ -55,7 +56,7 @@ export class ChooseStructureLocationComponent {
   private saveAndGoBackToProjectHome(): void {
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
       this.projectService.refreshProject();
-      this.$state.go('root.at.project');
+      this.router.navigate(['../..'], { relativeTo: this.route });
     });
   }
 
@@ -71,9 +72,5 @@ export class ChooseStructureLocationComponent {
 
   protected getNodePositionById(nodeId: string): string {
     return this.projectService.getNodePositionById(nodeId);
-  }
-
-  protected cancel(): void {
-    this.$state.go('root.at.project');
   }
 }

@@ -3,7 +3,7 @@
 <div id="top" class="app-styles authoring" disable-delete-keypress role="main">
   <mat-drawer-container>
     <mat-drawer #drawer [(opened)]="isMenuOpen" mode="over" class="mat-elevation-z4">
-      <main-menu [state]="$state" [title]="title" [views]="views"></main-menu>
+      <main-menu [title]="title" [views]="views"></main-menu>
     </mat-drawer>
     <mat-drawer-content>
       <at-top-bar
@@ -27,15 +27,9 @@
         [ngClass]="{ 'l-main--with-toolbar': showToolbar }"
         role="main"
       >
-        <project-authoring
-          *ngIf="$state.current.name.startsWith('root.at.project')"
-        ></project-authoring>
-        <project-list-authoring
-          *ngIf="$state.current.name === 'root.at.main'"
-        ></project-list-authoring>
-        <add-project *ngIf="$state.current.name === 'root.at.new-unit'"></add-project>
+        <router-outlet></router-outlet>
       </content>
-      <side-menu *ngIf="showToolbar" [state]="$state" [views]="views"></side-menu>
+      <side-menu *ngIf="showToolbar" [views]="views"></side-menu>
     </mat-drawer-content>
   </mat-drawer-container>
 </div>

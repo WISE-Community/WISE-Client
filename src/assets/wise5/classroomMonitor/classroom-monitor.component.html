@@ -3,7 +3,7 @@
 <div class="app-styles monitor-theme monitor" disable-delete-keypress role="main">
   <mat-drawer-container>
     <mat-drawer #drawer [(opened)]="menuOpen" mode="over" class="mat-elevation-z4">
-      <main-menu [state]="$state" [title]="title" [views]="views"></main-menu>
+      <main-menu [title]="title" [views]="views"></main-menu>
     </mat-drawer>
     <mat-drawer-content>
       <top-bar
@@ -42,7 +42,7 @@
           *ngIf="$state.$current.name == 'root.cm.exportVisits'"
         ></export-step-visits>
       </content>
-      <side-menu [state]="$state" [views]="views"></side-menu>
+      <side-menu [views]="views"></side-menu>
       <notebook-report
         *ngIf="reportEnabled"
         [ngClass]="{ 'report-full': reportFullscreen }"

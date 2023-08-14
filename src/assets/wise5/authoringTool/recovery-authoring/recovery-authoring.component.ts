@@ -3,8 +3,6 @@ import { Subscription } from 'rxjs';
 import { NotificationService } from '../../services/notificationService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { NodeRecoveryAnalysis } from '../../../../app/domain/nodeRecoveryAnalysis';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { ConfigService } from '../../services/configService';
 import { isValidJSONString } from '../../common/string/string';
 
 @Component({
@@ -14,17 +12,15 @@ import { isValidJSONString } from '../../common/string/string';
 })
 export class RecoveryAuthoringComponent implements OnInit {
   badNodes: NodeRecoveryAnalysis[] = [];
-  globalMessage: any;
+  protected globalMessage: any;
   jsonIsValid: boolean;
   projectJSONString: string;
   saveButtonEnabled: boolean = false;
-  subscriptions: Subscription = new Subscription();
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
-    private configService: ConfigService,
     private notificationService: NotificationService,
-    private projectService: TeacherProjectService,
-    private upgrade: UpgradeModule
+    private projectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
@@ -108,11 +104,5 @@ export class RecoveryAuthoringComponent implements OnInit {
     this.projectService.project = JSON.parse(this.projectJSONString);
     this.projectService.saveProject();
     this.saveButtonEnabled = false;
-  }
-
-  goToAuthoringView(): void {
-    this.upgrade.$injector
-      .get('$state')
-      .go('root.at.project', { projectId: this.configService.getProjectId() });
   }
 }

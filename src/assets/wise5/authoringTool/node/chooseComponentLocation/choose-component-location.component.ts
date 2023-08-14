@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Node } from '../../../common/Node';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'choose-component-location',
@@ -21,15 +21,15 @@ export class ChooseComponentLocationComponent {
     private configService: ConfigService,
     private dataService: TeacherDataService,
     private projectService: TeacherProjectService,
-    private upgrade: UpgradeModule
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.action = this.upgrade.$injector.get('$stateParams').action;
+    this.action = history.state.action;
     const nodeId = this.dataService.getCurrentNodeId();
     this.node = this.projectService.getNode(nodeId);
     this.components = this.projectService.getComponents(nodeId);
-    this.selectedComponents = this.upgrade.$injector.get('$stateParams').selectedComponents;
+    this.selectedComponents = history.state.selectedComponents;
   }
 
   protected getComponentTypeLabel(componentType: any): string {
@@ -62,10 +62,20 @@ export class ChooseComponentLocationComponent {
   }
 
   protected goToNodeAuthoring(components: any[] = []): void {
-    this.upgrade.$injector.get('$state').go('root.at.project.node', {
-      projectId: this.configService.getProjectId(),
-      nodeId: this.node.id,
-      newComponents: components
-    });
+    this.router.navigate(
+      ['/teacher/edit/unit', this.configService.getProjectId(), 'node', this.node.id],
+      {
+        state: {
+          projectId: this.configService.getProjectId(),
+          nodeId: this.node.id,
+          newComponents: components
+        }
+      }
+    );
+    // this.upgrade.$injector.get('$state').go('root.at.project.node', {
+    //   projectId: this.configService.getProjectId(),
+    //   nodeId: this.node.id,
+    //   newComponents: components
+    // });
   }
 }

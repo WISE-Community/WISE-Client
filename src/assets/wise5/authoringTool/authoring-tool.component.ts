@@ -1,21 +1,19 @@
 import { Component, HostListener } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { Subscription } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 import { ConfigService } from '../services/configService';
 import { NotificationService } from '../services/notificationService';
 import { TeacherProjectService } from '../services/teacherProjectService';
 import { SessionService } from '../services/sessionService';
 import { TeacherDataService } from '../services/teacherDataService';
+import { NavigationEnd, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
 
 @Component({
   styleUrls: ['./authoring-tool.component.scss'],
   templateUrl: './authoring-tool.component.html'
 })
 export class AuthoringToolComponent {
-  private $mdDialog: any;
-  protected $state: any;
-  private $transitions: any;
-  private $timeout: any;
   protected currentViewName: string;
   protected isMenuOpen: boolean = false;
   protected logoPath: string;
@@ -26,170 +24,26 @@ export class AuthoringToolComponent {
   protected showStepTools: boolean = false;
   protected showToolbar: boolean = true;
   protected title: string = $localize`Authoring Tool`;
+  protected views: any[] = [];
   private subscriptions: Subscription = new Subscription();
-  protected views = [
-    {
-      route: 'root.at.project',
-      id: 'projectHomeButton',
-      name: $localize`Unit Home`,
-      label: $localize`Unit Home`,
-      icon: 'home',
-      type: 'primary',
-      showToolbar: true,
-      active: true
-    },
-    {
-      route: 'root.at.project.info',
-      id: 'infoButton',
-      name: $localize`Unit Info`,
-      label: $localize`Unit Info`,
-      icon: 'info',
-      type: 'primary',
-      showToolbar: true,
-      active: true
-    },
-    {
-      route: 'root.at.project.asset',
-      id: 'assetButton',
-      name: $localize`File Manager`,
-      label: $localize`File Manager`,
-      icon: 'attach_file',
-      type: 'primary',
-      showToolbar: true,
-      active: true
-    },
-    {
-      route: 'root.at.project.notebook',
-      id: 'notebookButton',
-      name: $localize`Notebook Settings`,
-      label: $localize`Notebook Settings`,
-      icon: 'book',
-      type: 'primary',
-      showToolbar: true,
-      active: true
-    },
-    {
-      route: 'root.at.project.milestones',
-      id: 'milestonesButton',
-      name: $localize`Milestones`,
-      label: $localize`Milestones`,
-      icon: 'flag',
-      type: 'primary',
-      showToolbar: true,
-      active: true
-    },
-    {
-      route: 'root.at.main',
-      id: 'projectListButton',
-      name: $localize`Unit List`,
-      label: $localize`Unit List`,
-      icon: 'reorder',
-      type: 'primary',
-      showToolbar: false,
-      active: true
-    },
-    {
-      route: 'root.at.project.node',
-      name: '',
-      label: '',
-      icon: '',
-      type: 'secondary',
-      showToolbar: true,
-      active: false
-    },
-    {
-      route: 'root.at.project.node.advanced.branch',
-      name: '',
-      label: '',
-      icon: '',
-      type: 'secondary',
-      showToolbar: true,
-      active: false
-    },
-    {
-      route: 'root.at.project.node.advanced.constraint',
-      name: '',
-      label: '',
-      icon: '',
-      type: 'secondary',
-      showToolbar: true,
-      active: false
-    },
-    {
-      route: 'root.at.project.node.advanced.path',
-      name: '',
-      label: '',
-      icon: '',
-      type: 'secondary',
-      showToolbar: true,
-      active: false
-    },
-    {
-      route: 'root.at.project.node.advanced',
-      name: '',
-      label: '',
-      icon: '',
-      type: 'secondary',
-      showToolbar: true,
-      active: false
-    },
-    {
-      route: 'root.at.project.node.advanced.general',
-      name: '',
-      label: '',
-      icon: '',
-      type: 'secondary',
-      showToolbar: true,
-      active: false
-    },
-    {
-      route: 'root.at.project.node.advanced.json',
-      name: '',
-      label: '',
-      icon: '',
-      type: 'secondary',
-      showToolbar: true,
-      active: false
-    },
-    {
-      route: 'root.at.project.advanced',
-      name: '',
-      label: '',
-      icon: '',
-      type: 'secondary',
-      showToolbar: true,
-      active: false
-    },
-    {
-      route: 'root.at.project.node.advanced.rubric',
-      name: '',
-      label: '',
-      icon: '',
-      type: 'secondary',
-      showToolbar: true,
-      active: false
-    }
-  ];
 
   constructor(
     private configService: ConfigService,
+    private dataService: TeacherDataService,
+    private dialog: MatDialog,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService,
     private sessionService: SessionService,
-    private dataService: TeacherDataService,
-    private upgrade: UpgradeModule
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.$mdDialog = this.upgrade.$injector.get('$mdDialog');
-    this.$state = this.upgrade.$injector.get('$state');
-    this.$transitions = this.upgrade.$injector.get('$transitions');
-    this.$timeout = this.upgrade.$injector.get('$timeout');
     this.logoPath = this.projectService.getThemePath() + '/images/WISE-logo-ffffff.svg';
     this.processUI();
+    this.initializeViews();
 
     if (!this.configService.getConfigParam('canEditProject')) {
-      this.$timeout(() => {
+      setTimeout(() => {
         this.setGlobalMessage(
           $localize`You do not have permission to edit this unit.`,
           false,
@@ -197,10 +51,9 @@ export class AuthoringToolComponent {
         );
       }, 1000);
     }
-
-    this.$transitions.onSuccess({}, () => {
-      this.isMenuOpen = false;
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
       this.processUI();
+      this.initializeViews();
     });
 
     this.subscribeToSessionEvents();
@@ -212,27 +65,71 @@ export class AuthoringToolComponent {
     this.subscriptions.unsubscribe();
   }
 
+  private initializeViews(): void {
+    this.views = [
+      {
+        route: ['unit', this.projectId],
+        name: $localize`Unit Home`,
+        icon: 'home',
+        type: 'primary',
+        active: true
+      },
+      {
+        route: ['unit', this.projectId, 'info'],
+        name: $localize`Unit Info`,
+        icon: 'info',
+        type: 'primary',
+        active: true
+      },
+      {
+        route: ['unit', this.projectId, 'asset'],
+        name: $localize`File Manager`,
+        icon: 'attach_file',
+        type: 'primary',
+        active: true
+      },
+      {
+        route: ['unit', this.projectId, 'notebook'],
+        name: $localize`Notebook Settings`,
+        icon: 'book',
+        type: 'primary',
+        active: true
+      },
+      {
+        route: ['unit', this.projectId, 'milestones'],
+        name: $localize`Milestones`,
+        icon: 'flag',
+        type: 'primary',
+        active: true
+      },
+      {
+        route: ['home'],
+        name: $localize`Unit List`,
+        icon: 'reorder',
+        type: 'primary',
+        active: true
+      }
+    ];
+  }
+
   private subscribeToSessionEvents(): void {
     this.subscriptions.add(
       this.sessionService.showSessionWarning$.subscribe(() => {
-        const confirm = this.$mdDialog
-          .confirm()
-          .theme('at')
-          .title($localize`Session Timeout`)
-          .content(
-            $localize`You have been inactive for a long time. Do you want to stay logged in?`
-          )
-          .ariaLabel($localize`Session Timeout`)
-          .ok($localize`Yes`)
-          .cancel($localize`No`);
-        this.$mdDialog.show(confirm).then(
-          () => {
-            this.sessionService.closeWarningAndRenewSession();
-          },
-          () => {
-            this.logOut();
-          }
-        );
+        this.dialog
+          .open(DialogWithConfirmComponent, {
+            data: {
+              content: $localize`You have been inactive for a long time. Do you want to stay logged in?`,
+              title: $localize`Session Timeout`
+            }
+          })
+          .afterClosed()
+          .subscribe((isRenew: boolean) => {
+            if (isRenew) {
+              this.sessionService.closeWarningAndRenewSession();
+            } else {
+              this.logOut();
+            }
+          });
       })
     );
 
@@ -259,7 +156,7 @@ export class AuthoringToolComponent {
          * it will always say 'Saved' and authors may wonder whether the
          * project ever gets saved.
          */
-        this.$timeout(() => {
+        setTimeout(() => {
           this.setGlobalMessage($localize`Saved`, false, new Date().getTime());
         }, 500);
       })
@@ -285,17 +182,11 @@ export class AuthoringToolComponent {
   private subscribeToDataEvents(): void {
     this.subscriptions.add(
       this.dataService.currentNodeChanged$.subscribe(({ currentNode }) => {
-        const currentStateName = this.$state.$current.name;
-        if (
-          currentStateName === 'root.at.project' ||
-          currentStateName.startsWith('root.at.project.node')
-        ) {
-          if (currentNode) {
-            this.$state.go('root.at.project.node', { nodeId: currentNode.id });
-          } else {
-            this.$state.go('root.at.project', { projectId: this.projectId });
-          }
-        }
+        this.router.navigate(
+          currentNode
+            ? [`/teacher/edit/unit/${this.projectId}/node/${currentNode.id}`]
+            : [`/teacher/edit/unit/${this.projectId}`]
+        );
       })
     );
   }
@@ -306,25 +197,12 @@ export class AuthoringToolComponent {
    */
   private processUI(): void {
     document.getElementById('top').scrollIntoView();
-    this.showStepTools = [
-      'root.at.project',
-      'root.at.project.node',
-      'root.at.project.node.advanced',
-      'root.at.project.node.advanced.branch',
-      'root.at.project.node.advanced.rubric',
-      'root.at.project.node.advanced.constraint',
-      'root.at.project.node.advanced.general',
-      'root.at.project.node.advanced.json',
-      'root.at.project.node.advanced.path'
-    ].includes(this.$state.$current.name);
-    const view = this.views.find((view: any) => view.route === this.$state.$current.name);
-    if (view) {
-      this.currentViewName = view.name;
-      this.showToolbar = view.showToolbar;
-    } else {
-      this.currentViewName = '';
-      this.showToolbar = false;
-    }
+    this.showToolbar = this.router.url.startsWith('/teacher/edit/unit');
+    this.isMenuOpen = false;
+    const stepToolPathsFragments = ['advanced', 'branch', 'constraint', 'node', 'unit'];
+    this.showStepTools = this.router.url
+      .split('/')
+      .some((path) => stepToolPathsFragments.includes(path));
     this.projectId = this.configService.getProjectId();
     this.runId = this.configService.getRunId();
     this.runCode = this.configService.getRunCode();

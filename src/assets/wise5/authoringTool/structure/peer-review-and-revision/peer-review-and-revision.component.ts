@@ -7,6 +7,6 @@ import { ConfigureStructureComponent } from '../configure-structure.component';
   styleUrls: ['./peer-review-and-revision.component.scss']
 })
 export class PeerReviewAndRevisionComponent extends ConfigureStructureComponent {
-  groupsPath = `peer-review-and-revision/groups.json`;
-  nodesPath = `peer-review-and-revision/nodes.json`;
+  protected groupsPath = `peer-review-and-revision/groups.json`;
+  protected nodesPath = `peer-review-and-revision/nodes.json`;
 }

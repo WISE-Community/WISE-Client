@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { temporarilyHighlightElement } from '../../../../common/dom/dom';
 import { ConstraintsAuthoringComponent } from '../../../constraint/constraints-authoring/constraints-authoring.component';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'node-advanced-constraint-authoring',
@@ -10,12 +10,12 @@ import { UpgradeModule } from '@angular/upgrade/static';
   styleUrls: ['node-advanced-constraint-authoring.component.scss']
 })
 export class NodeAdvancedConstraintAuthoringComponent extends ConstraintsAuthoringComponent {
-  constructor(protected projectService: TeacherProjectService, private upgrade: UpgradeModule) {
+  constructor(protected projectService: TeacherProjectService, private route: ActivatedRoute) {
     super(projectService);
   }
 
   ngOnInit() {
-    const node = this.projectService.getNodeById(this.upgrade.$injector.get('$stateParams').nodeId);
+    const node = this.projectService.getNodeById(this.route.snapshot.paramMap.get('nodeId'));
     if (node.constraints == null) {
       node.constraints = [];
     }

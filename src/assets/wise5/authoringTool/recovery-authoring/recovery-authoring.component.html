@@ -13,7 +13,7 @@
             >
               Save
             </button>
-            <button mat-raised-button color="primary" (click)="goToAuthoringView()" i18n>
+            <button mat-raised-button color="primary" routerLink=".." i18n>
               Go to Authoring View
             </button>
           </div>
@@ -22,7 +22,7 @@
             <div *ngIf="!jsonIsValid" class="invalid" i18n>JSON Invalid</div>
             <div *ngIf="globalMessage != null">
               <div class="component__actions__info md-caption global-message">
-                {{ globalMessage.text }} {{ globalMessage.time | date : 'medium' }}
+                {{ globalMessage.text }} {{ globalMessage.time | date: 'medium' }}
               </div>
             </div>
           </div>

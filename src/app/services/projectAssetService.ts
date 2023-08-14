@@ -2,7 +2,7 @@
 
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { forkJoin, BehaviorSubject } from 'rxjs';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
@@ -62,11 +62,13 @@ export class ProjectAssetService {
 
   retrieveProjectAssets(): any {
     const url = this.configService.getConfigParam('projectAssetURL');
-    return this.http.get(url).subscribe((projectAssets: any) => {
-      this.totalSizeMax = this.configService.getConfigParam('projectAssetTotalSizeMax');
-      this.injectFileTypeValues(projectAssets.files);
-      this.setProjectAssets(projectAssets);
-    });
+    return this.http.get(url).pipe(
+      tap((projectAssets: any) => {
+        this.totalSizeMax = this.configService.getConfigParam('projectAssetTotalSizeMax');
+        this.injectFileTypeValues(projectAssets.files);
+        this.setProjectAssets(projectAssets);
+      })
+    );
   }
 
   injectFileTypeValues(projectAssets: any[]) {

@@ -21,7 +21,7 @@
       <button
         mat-raised-button
         color="primary"
-        (click)="chooseStructure(structure.route)"
+        (click)="chooseStructure(structure)"
         aria-label="Choose Structure"
         i18n-aria-label
         i18n
@@ -32,6 +32,6 @@
   </mat-card>
 </div>
 <hr />
-<button mat-button color="primary" (click)="cancel()" aria-label="Cancel" i18n-aria-label i18n>
+<button mat-button color="primary" routerLink="../.." aria-label="Cancel" i18n-aria-label i18n>
   Cancel
 </button>

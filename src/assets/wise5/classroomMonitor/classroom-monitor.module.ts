@@ -24,94 +24,118 @@ export default angular
               'ConfigService',
               'SessionService',
               '$stateParams',
-              (ConfigService, SessionService, $stateParams) => {
-                return ConfigService.retrieveConfig(
+              async (ConfigService, SessionService, $stateParams) => {
+                return await ConfigService.retrieveConfig(
                   `/api/config/classroomMonitor/${$stateParams.runId}`
-                ).then(() => {
+                ).subscribe((config) => {
                   SessionService.initializeSession();
                 });
               }
             ],
             project: [
               'ProjectService',
+              'ConfigService',
               'config',
-              (ProjectService, config) => {
+              (ProjectService, ConfigService, config) => {
                 return ProjectService.retrieveProject();
+              }
+            ],
+            parsedProject: [
+              'ProjectService',
+              'project',
+              (ProjectService, project) => {
+                ProjectService.setProject(project);
+                return project;
               }
             ],
             runStatus: [
               'TeacherDataService',
-              'config',
-              (TeacherDataService, config) => {
-                TeacherDataService.currentPeriod = null;
-                return TeacherDataService.retrieveRunStatus();
+              'ConfigService',
+              (TeacherDataService, ConfigService) => {
+                return ConfigService.configRetrieved$.subscribe(() => {
+                  TeacherDataService.currentPeriod = null;
+                  return TeacherDataService.retrieveRunStatus();
+                });
               }
             ],
             studentStatuses: [
               'ClassroomStatusService',
-              'config',
-              (ClassroomStatusService, config) => {
-                return ClassroomStatusService.retrieveStudentStatuses();
+              'ConfigService',
+              (ClassroomStatusService, ConfigService) => {
+                return ConfigService.configRetrieved$.subscribe(() => {
+                  return ClassroomStatusService.retrieveStudentStatuses();
+                });
               }
             ],
             achievements: [
               'AchievementService',
               'studentStatuses',
-              'config',
+              'ConfigService',
               'project',
-              (AchievementService, studentStatuses, config, project) => {
-                return AchievementService.retrieveStudentAchievements();
+              (AchievementService, studentStatuses, ConfigService, project) => {
+                return ConfigService.configRetrieved$.subscribe(() => {
+                  return AchievementService.retrieveStudentAchievements();
+                });
               }
             ],
             notifications: [
               'NotificationService',
               'ConfigService',
               'studentStatuses',
-              'config',
               'project',
-              (NotificationService, ConfigService, studentStatuses, config, project) => {
-                return NotificationService.retrieveNotifications();
+              (NotificationService, ConfigService, studentStatuses, project) => {
+                return ConfigService.configRetrieved$.subscribe(() => {
+                  return NotificationService.retrieveNotifications();
+                });
               }
             ],
             webSocket: [
               'TeacherWebSocketService',
-              'config',
-              (TeacherWebSocketService, config) => {
-                return TeacherWebSocketService.initialize();
+              'ConfigService',
+              (TeacherWebSocketService, ConfigService) => {
+                return ConfigService.configRetrieved$.subscribe(() => {
+                  return TeacherWebSocketService.initialize();
+                });
               }
             ],
             language: [
               '$translate',
               'ConfigService',
-              'config',
-              ($translate, ConfigService, config) => {
-                let locale = ConfigService.getLocale(); // defaults to "en"
-                $translate.use(locale);
+              ($translate, ConfigService) => {
+                return ConfigService.configRetrieved$.subscribe(() => {
+                  let locale = ConfigService.getLocale(); // defaults to "en"
+                  $translate.use(locale);
+                });
               }
             ],
             annotations: [
               'TeacherDataService',
-              'config',
-              (TeacherDataService, config) => {
-                return TeacherDataService.retrieveAnnotations();
+              'ConfigService',
+              (TeacherDataService, ConfigService) => {
+                return ConfigService.configRetrieved$.subscribe(() => {
+                  return TeacherDataService.retrieveAnnotations();
+                });
               }
             ],
             notebook: [
               'NotebookService',
               'ConfigService',
-              'config',
-              'project',
-              (NotebookService, ConfigService, config, project) => {
-                if (
-                  NotebookService.isNotebookEnabled() ||
-                  NotebookService.isNotebookEnabled('teacherNotebook')
-                ) {
-                  return NotebookService.retrieveNotebookItems().then((notebook) => {
-                    return notebook;
+              'ProjectService',
+              (NotebookService, ConfigService, ProjectService) => {
+                return ConfigService.configRetrieved$.subscribe(() => {
+                  ProjectService.projectParsed$.subscribe(() => {
+                    if (
+                      NotebookService.isNotebookEnabled() ||
+                      NotebookService.isNotebookEnabled('teacherNotebook')
+                    ) {
+                      return NotebookService.retrieveNotebookItems().then((notebook) => {
+                        return notebook;
+                      });
+                    } else {
+                      return NotebookService.notebook;
+                    }
                   });
-                } else {
-                  return NotebookService.notebook;
-                }
+                });
               }
             ]
           }

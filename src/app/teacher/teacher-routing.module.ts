@@ -40,9 +40,13 @@ const teacherRoutes: Routes = [
         ]
       },
       {
-        path: '',
+        path: 'edit',
         loadChildren: () =>
-          import('../teacher-hybrid-angular.module').then((m) => m.TeacherAngularJSModule)
+          import('./teacher-authoring.module').then((m) => m.TeacherAuthoringModule)
+      },
+      {
+        path: 'manage',
+        loadChildren: () => import('./teacher-tools.module').then((m) => m.TeacherToolsModule)
       }
     ]
   }

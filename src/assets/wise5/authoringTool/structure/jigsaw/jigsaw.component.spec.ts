@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { JigsawComponent } from './jigsaw.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatRadioModule } from '@angular/material/radio';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('JigsawComponent', () => {
   let component: JigsawComponent;
@@ -12,16 +12,8 @@ describe('JigsawComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [JigsawComponent],
-      imports: [FormsModule, HttpClientTestingModule, MatRadioModule, UpgradeModule]
+      imports: [FormsModule, HttpClientTestingModule, MatRadioModule, RouterTestingModule]
     }).compileComponents();
-
-    TestBed.inject(UpgradeModule).$injector = {
-      get: () => {
-        return {
-          go: (route: string, params: any) => {}
-        };
-      }
-    };
     fixture = TestBed.createComponent(JigsawComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

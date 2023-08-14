@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { KiCycleUsingOerComponent } from './ki-cycle-using-oer.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('KiCycleUsingOERComponent', () => {
   let component: KiCycleUsingOerComponent;
@@ -10,16 +10,8 @@ describe('KiCycleUsingOERComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [KiCycleUsingOerComponent],
-      imports: [HttpClientTestingModule, UpgradeModule]
+      imports: [HttpClientTestingModule, RouterTestingModule]
     }).compileComponents();
-
-    TestBed.inject(UpgradeModule).$injector = {
-      get: () => {
-        return {
-          go: (route: string, params: any) => {}
-        };
-      }
-    };
     fixture = TestBed.createComponent(KiCycleUsingOerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

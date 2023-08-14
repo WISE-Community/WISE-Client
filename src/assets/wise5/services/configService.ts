@@ -2,7 +2,7 @@
 
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, take, tap } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { isMatchingPeriods } from '../common/period/period';
 import { millisecondsToDateTime } from '../common/datetime/datetime';
@@ -23,10 +23,8 @@ export class ConfigService {
   }
 
   retrieveConfig(configURL) {
-    return this.http
-      .get(configURL)
-      .toPromise()
-      .then((configJSON: any) => {
+    return this.http.get(configURL).pipe(
+      tap((configJSON: any) => {
         this.setTimestampDiff(configJSON);
 
         let constraints = true;
@@ -72,7 +70,8 @@ export class ConfigService {
         }
         this.configRetrievedSource.next(configJSON);
         return configJSON;
-      });
+      })
+    );
   }
 
   setTimestampDiff(configJSON) {
