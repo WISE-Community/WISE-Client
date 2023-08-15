@@ -24,12 +24,5 @@ export class AddLessonConfigureComponent {
       relativeTo: this.route,
       state: { title: this.addLessonFormGroup.controls['title'].value }
     });
-
-    // this.router.navigate(['../choose-location'], {
-    //   state: { title: this.addLessonFormGroup.controls['title'].value }
-    // });
-    // this.upgrade.$injector.get('$state').go('root.at.project.add-lesson.choose-location', {
-    //   title: this.addLessonFormGroup.controls['title'].value
-    // });
   }
 }

@@ -9,7 +9,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ChooseStructureLocationComponent {
   groupNodes: any;
-  $state: any;
   structure: any;
 
   constructor(

@@ -30,16 +30,11 @@ import { PeerGroupService } from '../../assets/wise5/services/peerGroupService';
 import { NodeService } from '../../assets/wise5/services/nodeService';
 import { TeacherNodeService } from '../../assets/wise5/services/teacherNodeService';
 import { MilestoneReportService } from '../../assets/wise5/services/milestoneReportService';
-import { TeacherAuthoringRoutingModule } from '../teacher/teacher-authoring-routing.module';
+import { AuthoringRoutingModule } from './authoring-routing.module';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [
-    StudentTeacherCommonModule,
-    AuthoringToolModule,
-    RouterModule,
-    TeacherAuthoringRoutingModule
-  ],
+  imports: [StudentTeacherCommonModule, AuthoringToolModule, RouterModule, AuthoringRoutingModule],
   providers: [
     ClassroomStatusService,
     CopyNodesService,
