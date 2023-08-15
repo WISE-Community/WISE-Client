@@ -31,6 +31,7 @@ import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/
 import { ProjectAssetAuthoringComponent } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component';
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
+import { ChooseImportComponentComponent } from '../../assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component';
 
 const routes: Routes = [
   {
@@ -117,6 +118,10 @@ const routes: Routes = [
               {
                 path: 'choose-component-location',
                 component: ChooseComponentLocationComponent
+              },
+              {
+                path: 'import-component',
+                children: [{ path: 'choose-component', component: ChooseImportComponentComponent }]
               }
             ]
           },

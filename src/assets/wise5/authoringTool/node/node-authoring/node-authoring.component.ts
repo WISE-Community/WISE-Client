@@ -15,7 +15,7 @@ import { EditComponentAdvancedComponent } from '../../../../../app/authoring-too
 import { Component as WiseComponent } from '../../../common/Component';
 import { ChooseNewComponent } from '../../../../../app/authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'node-authoring',
@@ -36,9 +36,9 @@ export class NodeAuthoringComponent implements OnInit {
   nodePosition: any;
   originalNodeCopy: any;
   projectId: number;
-  undoStack: any[] = [];
+  showNodeView: boolean = true;
   subscriptions: Subscription = new Subscription();
-  $state: any;
+  undoStack: any[] = [];
 
   constructor(
     private configService: ConfigService,
@@ -50,9 +50,14 @@ export class NodeAuthoringComponent implements OnInit {
     private dataService: TeacherDataService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => this.updateShowNodeView());
+  }
 
   ngOnInit(): void {
+    this.updateShowNodeView();
     this.nodeId = this.route.snapshot.paramMap.get('nodeId');
     this.route.parent.params.subscribe((params) => {
       this.projectId = Number(params.unitId);
@@ -86,6 +91,12 @@ export class NodeAuthoringComponent implements OnInit {
     } else {
       this.scrollToTopOfPage();
     }
+  }
+
+  private updateShowNodeView(): void {
+    this.showNodeView = /\/teacher\/edit\/unit\/(\d*)\/node\/(node|group)(\d*)$/.test(
+      this.router.url
+    );
   }
 
   ngOnDestroy(): void {
@@ -148,14 +159,23 @@ export class NodeAuthoringComponent implements OnInit {
     dialogRef
       .afterClosed()
       .pipe(filter((componentType) => componentType != null))
-      .subscribe((componentType) => {
-        const component = this.projectService.createComponent(
-          this.nodeId,
-          componentType,
-          insertAfterComponentId
-        );
-        this.projectService.saveProject();
-        this.highlightNewComponentsAndThenShowComponentAuthoring([component]);
+      .subscribe(({ action, componentType }) => {
+        if (action === 'import') {
+          this.router.navigate(['import-component/choose-component'], {
+            relativeTo: this.route,
+            state: {
+              insertAfterComponentId: insertAfterComponentId
+            }
+          });
+        } else {
+          const component = this.projectService.createComponent(
+            this.nodeId,
+            componentType,
+            insertAfterComponentId
+          );
+          this.projectService.saveProject();
+          this.highlightNewComponentsAndThenShowComponentAuthoring([component]);
+        }
       });
   }
 

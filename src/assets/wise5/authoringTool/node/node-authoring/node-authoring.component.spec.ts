@@ -20,7 +20,7 @@ import { PreviewComponentModule } from '../../components/preview-component/previ
 import { DebugElement } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
 let component: NodeAuthoringComponent;
@@ -63,6 +63,13 @@ describe('NodeAuthoringComponent', () => {
           useValue: {
             snapshot: { paramMap: convertToParamMap({ nodeId: 'node1' }) },
             parent: { params: of({ unitId: 1 }) }
+          }
+        },
+        {
+          provide: Router,
+          useValue: {
+            events: of([]),
+            url: '/teacher/edit/unit/123/node/node4'
           }
         }
       ]

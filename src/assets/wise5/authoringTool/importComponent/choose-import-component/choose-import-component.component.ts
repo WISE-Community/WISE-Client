@@ -3,9 +3,9 @@ import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { ProjectLibraryService } from '../../../services/projectLibraryService';
 import { Component, OnInit } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ImportComponentService } from '../../../services/importComponentService';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'choose-import-component',
@@ -15,21 +15,22 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 export class ChooseImportComponentComponent implements OnInit {
   importLibraryProjectId: number;
   importMyProjectId: number;
-  importProject: any = null;
+  protected importProject: any = null;
   importProjectId: number;
   importProjectItems: any = [];
-  libraryProjectsList: any = [];
-  myProjectsList: any = [];
+  protected libraryProjectsList: any = [];
+  protected myProjectsList: any = [];
   nodesInOrder: any[] = [];
 
   constructor(
     private configService: ConfigService,
+    private dataService: TeacherDataService,
     private importComponentService: ImportComponentService,
     private projectAssetService: ProjectAssetService,
     private projectLibraryService: ProjectLibraryService,
     private projectService: TeacherProjectService,
-    private dataService: TeacherDataService,
-    private upgrade: UpgradeModule
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -78,16 +79,19 @@ export class ChooseImportComponentComponent implements OnInit {
           selectedComponents,
           this.importProjectId,
           this.dataService.getCurrentNodeId(),
-          this.upgrade.$injector.get('$stateParams').insertAfterComponentId
+          history.state.insertAfterComponentId
         )
         .then((newComponents) => {
           this.projectService.saveProject();
           // refresh the project assets in case any of the imported components also imported assets
           this.projectAssetService.retrieveProjectAssets();
-          this.upgrade.$injector.get('$state').go('root.at.project.node', {
-            projectId: this.configService.getProjectId(),
-            nodeId: this.dataService.getCurrentNodeId(),
-            newComponents: newComponents
+          this.router.navigate(['../..'], {
+            relativeTo: this.route,
+            state: {
+              projectId: this.configService.getProjectId(),
+              nodeId: this.dataService.getCurrentNodeId(),
+              newComponents: newComponents
+            }
           });
         });
     }
@@ -106,18 +110,21 @@ export class ChooseImportComponentComponent implements OnInit {
     return selectedComponents;
   }
 
-  previewImportProject(): void {
+  protected previewImportProject(): void {
     window.open(`${this.importProject.previewProjectURL}`);
   }
 
-  previewImportNode(node: any): void {
+  protected previewImportNode(node: any): void {
     window.open(`${this.importProject.previewProjectURL}/${node.id}`);
   }
 
-  cancel(): void {
-    this.upgrade.$injector.get('$state').go('root.at.project.node', {
-      projectId: this.configService.getProjectId(),
-      nodeId: this.dataService.getCurrentNodeId()
+  protected cancel(): void {
+    this.router.navigate(['../..'], {
+      relativeTo: this.route,
+      state: {
+        projectId: this.configService.getProjectId(),
+        nodeId: this.dataService.getCurrentNodeId()
+      }
     });
   }
 }
