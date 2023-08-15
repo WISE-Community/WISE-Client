@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

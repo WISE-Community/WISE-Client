@@ -72,10 +72,5 @@ export class ChooseComponentLocationComponent {
         }
       }
     );
-    // this.upgrade.$injector.get('$state').go('root.at.project.node', {
-    //   projectId: this.configService.getProjectId(),
-    //   nodeId: this.node.id,
-    //   newComponents: components
-    // });
   }
 }

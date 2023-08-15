@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UpgradeModule } from '@angular/upgrade/static';
 
 @Component({
   selector: 'choose-structure',
@@ -8,7 +7,6 @@ import { UpgradeModule } from '@angular/upgrade/static';
   styleUrls: ['./choose-structure.component.scss']
 })
 export class ChooseStructureComponent {
-  private $state: any;
   protected structures = [
     {
       label: $localize`Jigsaw`,
@@ -39,10 +37,6 @@ export class ChooseStructureComponent {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {}
-
-  alerts(a) {
-    alert(a);
-  }
 
   protected chooseStructure(structure: any): void {
     this.router.navigate(['..', ...structure.route.split('/')], { relativeTo: this.route });

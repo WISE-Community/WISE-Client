@@ -3,7 +3,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { MatIconModule } from '@angular/material/icon';
 import { AddProjectComponent } from './add-project.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -30,7 +29,7 @@ describe('AddProjectComponent', () => {
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [TeacherProjectService, UpgradeModule],
+      providers: [TeacherProjectService],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
     fixture = TestBed.createComponent(AddProjectComponent);

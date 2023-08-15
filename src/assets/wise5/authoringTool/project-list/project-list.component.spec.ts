@@ -6,7 +6,6 @@ import { StudentTeacherCommonServicesModule } from '../../../../app/student-teac
 import { ConfigService } from '../../services/configService';
 import { ProjectListComponent } from './project-list.component';
 import { CopyProjectService } from '../../services/copyProjectService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { MatIconModule } from '@angular/material/icon';
 
 describe('ProjectListComponent', () => {
@@ -21,20 +20,9 @@ describe('ProjectListComponent', () => {
         MatIconModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [
-        { provide: CopyProjectService, useValue: {} },
-        TeacherProjectService,
-        UpgradeModule
-      ]
+      providers: [{ provide: CopyProjectService, useValue: {} }, TeacherProjectService]
     }).compileComponents();
     spyOn(TestBed.inject(ConfigService), 'getConfigParam').and.returnValue([]);
-    TestBed.inject(UpgradeModule).$injector = {
-      get: () => {
-        return {
-          go: (route: string, params: any) => {}
-        };
-      }
-    };
     fixture = TestBed.createComponent(ProjectListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
