@@ -1,6 +1,5 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
-import '../../assets/wise5/teacher/teacher-angular-js-module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
@@ -18,7 +17,6 @@ import { ImportComponentService } from '../../assets/wise5/services/importCompon
 import { InsertComponentService } from '../../assets/wise5/services/insertComponentService';
 import { InsertNodesService } from '../../assets/wise5/services/insertNodesService';
 import { MoveNodesService } from '../../assets/wise5/services/moveNodesService';
-import { AuthoringToolModule } from '../teacher/authoring-tool.module';
 import { ClassroomMonitorModule } from '../teacher/classroom-monitor.module';
 import { UpdateWorkgroupService } from '../services/updateWorkgroupService';
 import { GetWorkgroupService } from '../services/getWorkgroupService';
@@ -37,7 +35,6 @@ import { TeacherToolsRoutingModule } from './teacher-tools-routing.module';
 @NgModule({
   imports: [
     StudentTeacherCommonModule,
-    AuthoringToolModule,
     ClassroomMonitorModule,
     RouterModule,
     TeacherToolsRoutingModule

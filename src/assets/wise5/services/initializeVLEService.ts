@@ -34,25 +34,29 @@ export class InitializeVLEService {
   ) {}
 
   async initializeStudent(unitId: string) {
-    await this.configService.retrieveConfig(`/api/config/studentRun/${unitId}`);
-    this.sessionService.initializeSession();
-    this.studentStatusService.retrieveStudentStatus();
-    await this.projectService.retrieveProject();
-    await this.stompService.initialize();
-    this.studentWebSocketService.initialize();
-    await this.studentDataService.retrieveStudentData();
-    await this.notificationService.retrieveNotifications();
-    await this.achievementService.retrieveStudentAchievements();
-    await this.studentDataService.retrieveRunStatus();
-    this.pauseScreenService.initialize();
-    this.notificationService.initialize();
-    await this.studentAssetService.retrieveAssets();
-    await this.notebookService.retrieveNotebookItems(this.configService.getWorkgroupId());
-    this.intializedSource.next(true);
+    await this.configService
+      .retrieveConfig(`/api/config/studentRun/${unitId}`)
+      .subscribe(async () => {
+        this.sessionService.initializeSession();
+        this.studentStatusService.retrieveStudentStatus();
+        await this.projectService.retrieveProject().subscribe(async () => {
+          await this.stompService.initialize();
+          this.studentWebSocketService.initialize();
+          await this.studentDataService.retrieveStudentData();
+          await this.notificationService.retrieveNotifications();
+          await this.achievementService.retrieveStudentAchievements();
+          await this.studentDataService.retrieveRunStatus();
+          this.pauseScreenService.initialize();
+          this.notificationService.initialize();
+          await this.studentAssetService.retrieveAssets();
+          await this.notebookService.retrieveNotebookItems(this.configService.getWorkgroupId());
+          this.intializedSource.next(true);
+        });
+      });
   }
 
   async initializePreview(unitId: string) {
-    await this.configService.retrieveConfig(`/api/config/preview/${unitId}`);
+    await this.configService.retrieveConfig(`/api/config/preview/${unitId}`).subscribe();
     this.studentStatusService.retrieveStudentStatus();
     await this.projectService.retrieveProject();
     this.studentDataService.retrieveStudentData();

@@ -35,7 +35,7 @@ function retrieveStudentStatuses_SetStudentStatuses() {
     const workgroupsInRun = [{ workgroupId: workgroup2Id }];
     spyOn(configService, 'getRunId').and.returnValue(runId);
     spyOn(configService, 'getClassmateUserInfos').and.returnValue(workgroupsInRun);
-    service.retrieveStudentStatuses();
+    service.retrieveStudentStatuses().subscribe();
     http.expectOne(`/api/teacher/run/${runId}/student-status`).flush([
       {
         status: `{"runId": ${runId}, "workgroupId": ${workgroup2Id}}`,

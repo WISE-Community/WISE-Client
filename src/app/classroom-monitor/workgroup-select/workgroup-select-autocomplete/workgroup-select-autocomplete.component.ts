@@ -8,7 +8,6 @@ import { filter, map, startWith } from 'rxjs/operators';
 import { ConfigService } from '../../../../assets/wise5/services/configService';
 import { TeacherDataService } from '../../../../assets/wise5/services/teacherDataService';
 import { copy } from '../../../../assets/wise5/common/object/object';
-import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'workgroup-select-autocomplete',
@@ -20,17 +19,14 @@ export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectCompone
   myControl = new FormControl();
   filteredWorkgroups: Observable<any>;
 
-  constructor(
-    protected ConfigService: ConfigService,
-    protected TeacherDataService: TeacherDataService
-  ) {
-    super(ConfigService, TeacherDataService);
+  constructor(protected configService: ConfigService, protected dataService: TeacherDataService) {
+    super(configService, dataService);
   }
 
   ngOnInit() {
     super.ngOnInit();
     this.updateFilteredWorkgroups();
-    const currentWorkgroup = this.TeacherDataService.getCurrentWorkgroup();
+    const currentWorkgroup = this.dataService.getCurrentWorkgroup();
     if (currentWorkgroup) {
       this.myControl.setValue(currentWorkgroup.displayNames);
     }

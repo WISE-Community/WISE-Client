@@ -14,33 +14,9 @@
         [runId]="runId"
         [runCode]="runCode"
       ></top-bar>
-      <tool-bar
-        [showPeriodSelect]="showPeriodSelect"
-        [showStepTools]="showGradeByStepTools"
-        [showTeamTools]="showGradeByTeamTools"
-        [viewName]="currentViewName"
-        [workgroupId]="workgroupId"
-        (onMenuToggle)="toggleMenu()"
-      ></tool-bar>
+      <tool-bar [workgroupId]="workgroupId" (onMenuToggle)="toggleMenu()"></tool-bar>
       <content id="content" fxFlex role="main" fxLayout="column" class="l-main">
-        <node-progress-view
-          *ngIf="
-            $state.$current.name == 'root.cm.unit' || $state.$current.name == 'root.cm.unit.node'
-          "
-        >
-        </node-progress-view>
-        <milestones *ngIf="$state.$current.name == 'root.cm.milestones'"></milestones>
-        <notebook-grading *ngIf="$state.$current.name == 'root.cm.notebooks'"></notebook-grading>
-        <student-progress *ngIf="$state.$current.name == 'root.cm.teamLanding'"></student-progress>
-        <student-grading
-          *ngIf="$state.$current.name == 'root.cm.team'"
-          [workgroupId]="workgroupId"
-        ></student-grading>
-        <manage-students *ngIf="$state.$current.name == 'root.cm.manageStudents'"></manage-students>
-        <data-export *ngIf="$state.$current.name == 'root.cm.export'"></data-export>
-        <export-step-visits
-          *ngIf="$state.$current.name == 'root.cm.exportVisits'"
-        ></export-step-visits>
+        <router-outlet></router-outlet>
       </content>
       <side-menu [views]="views"></side-menu>
       <notebook-report

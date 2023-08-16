@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AnnotationService } from './annotationService';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 
 @Injectable()
 export class ClassroomStatusService {
@@ -18,13 +18,13 @@ export class ClassroomStatusService {
     private projectService: ProjectService
   ) {}
 
-  retrieveStudentStatuses() {
-    return this.http
-      .get(`/api/teacher/run/${this.configService.getRunId()}/student-status`)
-      .subscribe((studentStatuses: any[]) => {
+  retrieveStudentStatuses(): any {
+    return this.http.get(`/api/teacher/run/${this.configService.getRunId()}/student-status`).pipe(
+      tap((studentStatuses: any[]) => {
         this.studentStatuses = this.parseStudentStatuses(studentStatuses);
         return this.studentStatuses;
-      });
+      })
+    );
   }
 
   private parseStudentStatuses(studentStatuses: any[]): any[] {

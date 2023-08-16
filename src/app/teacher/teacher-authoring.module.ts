@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 
-import '../../assets/wise5/teacher/teacher-angular-js-module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';

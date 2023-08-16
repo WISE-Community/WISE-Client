@@ -2,7 +2,7 @@
 
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, take, tap } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { isMatchingPeriods } from '../common/period/period';
 import { millisecondsToDateTime } from '../common/datetime/datetime';
@@ -22,7 +22,7 @@ export class ConfigService {
     this.setClassmateDisplayNames();
   }
 
-  retrieveConfig(configURL) {
+  retrieveConfig(configURL: string) {
     return this.http.get(configURL).pipe(
       tap((configJSON: any) => {
         this.setTimestampDiff(configJSON);

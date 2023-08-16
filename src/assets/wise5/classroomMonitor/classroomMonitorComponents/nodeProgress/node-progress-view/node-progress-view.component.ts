@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { Subscription } from 'rxjs';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithOpenInNewWindowComponent } from '../../../../directives/dialog-with-open-in-new-window/dialog-with-open-in-new-window.component';
 import { NodeService } from '../../../../services/nodeService';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'node-progress-view',
@@ -13,30 +13,31 @@ import { NodeService } from '../../../../services/nodeService';
   styleUrls: ['./node-progress-view.component.scss']
 })
 export class NodeProgressViewComponent implements OnInit {
-  currentGroup: any;
-  currentGroupId: string;
-  currentWorkgroup: any;
-  items: any;
-  maxScore: any;
-  nodeId: string;
+  private currentGroup: any;
+  private currentGroupId: string;
+  private currentWorkgroup: any;
+  private items: any;
+  private maxScore: any;
+  protected nodeId: string;
   nodeIdToExpanded: any = {};
-  rootNode: any;
-  showRubricButton: boolean;
-  subscriptions: Subscription = new Subscription();
+  protected rootNode: any;
+  protected showRubricButton: boolean;
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private dialog: MatDialog,
     private nodeService: NodeService,
     private projectService: TeacherProjectService,
-    private teacherDataService: TeacherDataService,
-    private upgrade: UpgradeModule
+    private route: ActivatedRoute,
+    private router: Router,
+    private dataService: TeacherDataService
   ) {}
 
   ngOnInit(): void {
     this.items = this.projectService.idToOrder;
     this.maxScore = this.projectService.getMaxScore();
-    this.nodeId = this.getNodeId();
-    this.teacherDataService.setCurrentNodeByNodeId(this.nodeId);
+    this.nodeId = this.route.snapshot.paramMap.get('nodeId') || this.projectService.rootNode.id;
+    this.dataService.setCurrentNodeByNodeId(this.nodeId);
     const startNodeId = this.projectService.getStartNodeId();
     this.rootNode = this.projectService.getRootNode(startNodeId);
     this.currentGroup = this.rootNode;
@@ -52,67 +53,47 @@ export class NodeProgressViewComponent implements OnInit {
     }
   }
 
-  private getNodeId(): string {
-    let nodeId = null;
-
-    const stateParams = this.upgrade.$injector.get('$stateParams');
-    if (stateParams != null) {
-      const stateParamNodeId = stateParams.nodeId;
-      if (stateParamNodeId != null && stateParamNodeId !== '') {
-        nodeId = stateParamNodeId;
-      }
-    }
-
-    if (nodeId == null || nodeId === '') {
-      nodeId = this.projectService.rootNode.id;
-    }
-
-    return nodeId;
-  }
-
   private subscribeToCurrentNodeChanged(): void {
     this.subscriptions.add(
-      this.teacherDataService.currentNodeChanged$.subscribe(({ currentNode }) => {
+      this.dataService.currentNodeChanged$.subscribe(({ currentNode }) => {
         this.nodeId = currentNode.id;
-        this.teacherDataService.setCurrentNode(currentNode);
+        this.dataService.setCurrentNode(currentNode);
         if (this.isGroupNode(this.nodeId)) {
           this.currentGroup = currentNode;
           this.currentGroupId = this.currentGroup.id;
         }
-        this.upgrade.$injector.get('$state').go('root.cm.unit.node', { nodeId: this.nodeId });
+        //this.upgrade.$injector.get('$state').go('root.cm.unit.node', { nodeId: this.nodeId });
       })
     );
   }
 
   private subscribeToCurrentWorkgroupChanged(): void {
     this.subscriptions.add(
-      this.teacherDataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
+      this.dataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
         this.currentWorkgroup = currentWorkgroup;
       })
     );
   }
 
   private listenForTransitions(): void {
-    this.upgrade.$injector.get('$transitions').onSuccess({}, ($transition) => {
-      const toNodeId = $transition.params('to').nodeId;
-      const fromNodeId = $transition.params('from').nodeId;
-      if (toNodeId && fromNodeId && toNodeId !== fromNodeId) {
-        this.nodeId = toNodeId;
-        this.nodeService.setCurrentNode(toNodeId);
-      }
-
-      if (toNodeId === 'group0') {
-        this.collapseAll();
-      } else {
-        this.nodeIdToExpanded[toNodeId] = true;
-      }
-
-      if ($transition.name === 'root.cm.unit.node') {
-        if (this.projectService.isApplicationNode(toNodeId)) {
-          document.getElementById('content').scrollTop = 0;
-        }
-      }
-    });
+    // this.upgrade.$injector.get('$transitions').onSuccess({}, ($transition) => {
+    //   const toNodeId = $transition.params('to').nodeId;
+    //   const fromNodeId = $transition.params('from').nodeId;
+    //   if (toNodeId && fromNodeId && toNodeId !== fromNodeId) {
+    //     this.nodeId = toNodeId;
+    //     this.nodeService.setCurrentNode(toNodeId);
+    //   }
+    //   if (toNodeId === 'group0') {
+    //     this.collapseAll();
+    //   } else {
+    //     this.nodeIdToExpanded[toNodeId] = true;
+    //   }
+    //   if ($transition.name === 'root.cm.unit.node') {
+    //     if (this.projectService.isApplicationNode(toNodeId)) {
+    //       document.getElementById('content').scrollTop = 0;
+    //     }
+    //   }
+    // });
   }
 
   ngOnDestroy(): void {
@@ -131,22 +112,14 @@ export class NodeProgressViewComponent implements OnInit {
       category = 'Navigation',
       event = 'nodeProgressViewDisplayed',
       data = { nodeId: this.nodeId };
-    this.teacherDataService.saveEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      data
-    );
+    this.dataService.saveEvent(context, nodeId, componentId, componentType, category, event, data);
   }
 
-  isGroupNode(nodeId: string): boolean {
+  protected isGroupNode(nodeId: string): boolean {
     return this.projectService.isGroupNode(nodeId);
   }
 
-  isApplicationNode(nodeId: string): boolean {
+  protected isApplicationNode(nodeId: string): boolean {
     return this.projectService.isApplicationNode(nodeId);
   }
 
@@ -171,7 +144,7 @@ export class NodeProgressViewComponent implements OnInit {
     this.nodeIdToExpanded[nodeId] = expanded;
   }
 
-  collapseAll(): void {
+  protected collapseAll(): void {
     for (const key of Object.keys(this.nodeIdToExpanded)) {
       this.nodeIdToExpanded[key] = false;
     }

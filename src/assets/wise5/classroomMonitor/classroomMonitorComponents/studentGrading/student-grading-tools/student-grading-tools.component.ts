@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { copy } from '../../../../common/object/object';
 import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 class Workgroup {
   periodId: number;
@@ -16,35 +17,40 @@ class Workgroup {
   templateUrl: './student-grading-tools.component.html'
 })
 export class StudentGradingToolsComponent implements OnInit {
-  avatarColor: string;
-  currentPeriodChangedSubscription: Subscription;
-  icons: any;
-  is_rtl: boolean;
-  nextId: number;
-  periodId: number;
-  prevId: number;
-  @Input() workgroupId: number;
-  workgroups: Workgroup[];
+  protected avatarColor: string;
+  protected nextId: number;
+  private periodId: number;
+  protected prevId: number;
+  private subscriptions: Subscription = new Subscription();
+  private workgroupId: number;
+  private workgroups: Workgroup[];
 
   constructor(
     private configService: ConfigService,
     private dataService: TeacherDataService,
-    private upgrade: UpgradeModule
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.is_rtl = $('html').attr('dir') == 'rtl';
-    this.icons = { prev: 'chevron_left', next: 'chevron_right' };
-    if (this.is_rtl) {
-      this.icons = { prev: 'chevron_right', next: 'chevron_left' };
-    }
-    this.currentPeriodChangedSubscription = this.dataService.currentPeriodChanged$.subscribe(() => {
-      this.updateModel();
-    });
+    this.updateModel();
+    this.subscriptions.add(
+      this.dataService.currentPeriodChanged$.subscribe(() => {
+        this.updateModel();
+      })
+    );
+    this.subscriptions.add(
+      this.dataService.currentWorkgroupChanged$
+        .pipe(filter((workgroup) => workgroup.currentWorkgroup != null))
+        .subscribe(({ currentWorkgroup }) => {
+          this.workgroupId = currentWorkgroup.workgroupId;
+          this.updateModel();
+        })
+    );
   }
 
   ngOnDestroy(): void {
-    this.currentPeriodChangedSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   ngOnChanges(): void {
@@ -89,11 +95,11 @@ export class StudentGradingToolsComponent implements OnInit {
       : null;
   }
 
-  goToPrevTeam(): void {
-    this.upgrade.$injector.get('$state').go('root.cm.team', { workgroupId: this.prevId });
+  protected goToPrevTeam(): void {
+    this.router.navigate(['team', this.prevId], { relativeTo: this.route });
   }
 
-  goToNextTeam(): void {
-    this.upgrade.$injector.get('$state').go('root.cm.team', { workgroupId: this.nextId });
+  protected goToNextTeam(): void {
+    this.router.navigate(['team', this.nextId], { relativeTo: this.route });
   }
 }

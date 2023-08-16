@@ -14,14 +14,12 @@ import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/di
   templateUrl: './authoring-tool.component.html'
 })
 export class AuthoringToolComponent {
-  protected currentViewName: string;
   protected isMenuOpen: boolean = false;
   protected logoPath: string;
   protected projectId: number;
   protected projectTitle: string;
   protected runId: number;
   protected runCode: string;
-  protected showStepTools: boolean = false;
   protected showToolbar: boolean = true;
   protected title: string = $localize`Authoring Tool`;
   protected views: any[] = [];
@@ -41,24 +39,11 @@ export class AuthoringToolComponent {
     this.logoPath = this.projectService.getThemePath() + '/images/WISE-logo-ffffff.svg';
     this.processUI();
     this.initializeViews();
-
-    if (!this.configService.getConfigParam('canEditProject')) {
-      setTimeout(() => {
-        this.setGlobalMessage(
-          $localize`You do not have permission to edit this unit.`,
-          false,
-          null
-        );
-      }, 1000);
-    }
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-      this.processUI();
-      this.initializeViews();
-    });
-
     this.subscribeToSessionEvents();
     this.subscribeToProjectEvents();
     this.subscribeToDataEvents();
+    this.subscribeToRouterEvents();
+    this.checkPermission();
   }
 
   ngOnDestroy(): void {
@@ -191,18 +176,31 @@ export class AuthoringToolComponent {
     );
   }
 
-  /**
-   * Update UI items based on state, show or hide relevant menus and toolbars
-   * TODO: remove/rework this and put items in their own ui states?
-   */
+  private subscribeToRouterEvents(): void {
+    this.subscriptions.add(
+      this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+        this.processUI();
+        this.initializeViews();
+      })
+    );
+  }
+
+  private checkPermission(): void {
+    if (!this.configService.getConfigParam('canEditProject')) {
+      setTimeout(() => {
+        this.setGlobalMessage(
+          $localize`You do not have permission to edit this unit.`,
+          false,
+          null
+        );
+      }, 1000);
+    }
+  }
+
   private processUI(): void {
     document.getElementById('top').scrollIntoView();
     this.showToolbar = this.router.url.startsWith('/teacher/edit/unit');
     this.isMenuOpen = false;
-    const stepToolPathsFragments = ['advanced', 'branch', 'constraint', 'node', 'unit'];
-    this.showStepTools = this.router.url
-      .split('/')
-      .some((path) => stepToolPathsFragments.includes(path));
     this.projectId = this.configService.getProjectId();
     this.runId = this.configService.getRunId();
     this.runCode = this.configService.getRunCode();

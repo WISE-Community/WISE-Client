@@ -13,12 +13,7 @@
         [runId]="runId"
         [runCode]="runCode"
       ></at-top-bar>
-      <authoring-tool-bar
-        *ngIf="showToolbar"
-        [showStepTools]="showStepTools"
-        [viewName]="currentViewName"
-        (onMenuToggle)="toggleMenu()"
-      ></authoring-tool-bar>
+      <authoring-tool-bar *ngIf="showToolbar" (onMenuToggle)="toggleMenu()"></authoring-tool-bar>
       <content
         id="content"
         fxLayout="column"

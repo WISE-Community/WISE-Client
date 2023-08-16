@@ -7,7 +7,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../../../services/configService';
 import { NotificationService } from '../../../../services/notificationService';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
@@ -15,14 +14,6 @@ import { PauseScreensMenuComponent } from '../../pause-screens-menu/pause-screen
 import { NotificationsMenuComponent } from '../notifications-menu/notifications-menu.component';
 
 import { TopBarComponent } from './top-bar.component';
-
-class MockUpgradeModule {
-  $injector: any = {
-    get() {
-      return {};
-    }
-  };
-}
 
 describe('TopBarComponent', () => {
   let component: TopBarComponent;
@@ -41,8 +32,7 @@ describe('TopBarComponent', () => {
         MatSlideToggleModule,
         MatToolbarModule,
         MatTooltipModule
-      ],
-      providers: [{ provide: UpgradeModule, useClass: MockUpgradeModule }]
+      ]
     }).compileComponents();
   });
 

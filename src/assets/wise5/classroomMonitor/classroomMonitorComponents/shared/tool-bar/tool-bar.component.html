@@ -11,7 +11,7 @@
     >
       <mat-icon>menu</mat-icon>
     </button>
-    <span class="toolbar__title" *ngIf="showTitle">{{ viewName }}</span>
+    <span class="toolbar__title" *ngIf="!(showStepTools || showTeamTools)">{{ viewName }}</span>
     <step-tools *ngIf="showStepTools" [showOnlyStepsWithWork]="true"></step-tools>
     <student-grading-tools *ngIf="showTeamTools" [workgroupId]="workgroupId">
     </student-grading-tools>

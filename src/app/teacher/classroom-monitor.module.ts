@@ -37,6 +37,7 @@ import { GradingCommonModule } from './grading-common.module';
 import { ManageStudentsModule } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students.module';
 import { DataExportModule } from '../../assets/wise5/classroomMonitor/dataExport/data-export.module';
 import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponents/stepTools/step-tools.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponen
     MilestoneModule,
     PeerGroupGradingModule,
     PreviewComponentModule,
+    RouterModule,
     SelectPeriodModule,
     StepToolsModule
   ]

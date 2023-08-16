@@ -61,8 +61,13 @@ export class TopBarComponent implements OnInit {
   }
 
   protected switchToGradingView(): void {
-    if (/\/teacher\/edit\/unit\/(\d*)\/node\/(node|group)(\d*)$/.test(this.router.url)) {
-      this.router.navigate(['/teacher/manage/unit', this.runId, 'node', history.state.nodeId]);
+    if (/unit\/(\d*)\/node\/(\w*)$/.test(this.router.url)) {
+      this.router.navigate([
+        '/teacher/manage/unit',
+        this.runId,
+        'node',
+        this.router.url.match(/\/node\/(\w+)$/)[1]
+      ]);
     } else {
       this.router.navigate(['/teacher/manage/unit', this.runId]);
     }
