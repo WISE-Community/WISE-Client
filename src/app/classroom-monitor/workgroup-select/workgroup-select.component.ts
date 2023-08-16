@@ -7,13 +7,12 @@ import { TeacherDataService } from '../../../assets/wise5/services/teacherDataSe
 
 @Directive({ selector: 'workgroup-select' })
 export class WorkgroupSelectComponent {
-  @Input()
-  customClass: string;
+  @Input() customClass: string;
   canViewStudentNames: boolean;
   periodId: number;
   selectedItem: any;
-  workgroups: any;
   subscriptions: Subscription = new Subscription();
+  workgroups: any;
 
   constructor(protected configService: ConfigService, protected dataService: TeacherDataService) {}
 
@@ -25,6 +24,7 @@ export class WorkgroupSelectComponent {
       this.dataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
         if (currentWorkgroup != null) {
           this.setWorkgroups();
+          this.setWorkgroup(currentWorkgroup);
         }
       })
     );
@@ -42,6 +42,8 @@ export class WorkgroupSelectComponent {
   }
 
   setWorkgroups() {}
+
+  protected setWorkgroup(workgroup: any): void {}
 
   currentPeriodChanged() {}
 

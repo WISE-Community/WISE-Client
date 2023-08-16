@@ -16,8 +16,8 @@ import { copy } from '../../../../assets/wise5/common/object/object';
   encapsulation: ViewEncapsulation.None
 })
 export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectComponent {
-  myControl = new FormControl();
   filteredWorkgroups: Observable<any>;
+  myControl = new FormControl();
 
   constructor(protected configService: ConfigService, protected dataService: TeacherDataService) {
     super(configService, dataService);
@@ -63,6 +63,10 @@ export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectCompone
     this.updateFilteredWorkgroups();
   }
 
+  protected setWorkgroup(workgroup: any): void {
+    this.updateWorkgroupDisplay(workgroup);
+  }
+
   getStudentsFromWorkgroups() {
     const students = [];
     for (const workgroup of this.workgroups) {
@@ -89,6 +93,10 @@ export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectCompone
 
   itemSelected(workgroup: any) {
     this.setCurrentWorkgroup(workgroup);
+    this.updateWorkgroupDisplay(workgroup);
+  }
+
+  private updateWorkgroupDisplay(workgroup: any): void {
     if (workgroup) {
       this.myControl.setValue(workgroup.displayNames);
     } else {
