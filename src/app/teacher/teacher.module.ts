@@ -41,7 +41,7 @@ import { ShareRunCodeDialogComponent } from './share-run-code-dialog/share-run-c
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { SelectRunsControlsComponent } from './select-runs-controls/select-runs-controls.component';
+import { SelectRunsControlsModule } from './select-runs-controls/select-runs-controls.module';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -72,6 +72,7 @@ const materialModules = [
     LibraryModule,
     materialModules,
     SharedModule,
+    SelectRunsControlsModule,
     TeacherRoutingModule,
     TimelineModule,
     ClipboardModule
@@ -85,7 +86,6 @@ const materialModules = [
     ListClassroomCoursesDialogComponent,
     RunMenuComponent,
     RunSettingsDialogComponent,
-    SelectRunsControlsComponent,
     ShareRunCodeDialogComponent,
     ShareRunDialogComponent,
     TeacherComponent,

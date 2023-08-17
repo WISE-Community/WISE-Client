@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectRunsControlsComponent } from './select-runs-controls.component';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatIconModule } from '@angular/material/icon';
+import { SelectRunsControlsModule } from './select-runs-controls.module';
 
 describe('SelectRunsControlsComponent', () => {
   let component: SelectRunsControlsComponent;
@@ -10,8 +8,7 @@ describe('SelectRunsControlsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SelectRunsControlsComponent],
-      imports: [MatCheckboxModule, MatIconModule, MatMenuModule]
+      imports: [SelectRunsControlsModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SelectRunsControlsComponent);

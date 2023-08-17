@@ -1,9 +1,7 @@
-// @ts-nocheck
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { defer, Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { TeacherRunListComponent } from './teacher-run-list.component';
 import { TeacherService } from '../teacher.service';
-import { Project } from '../../domain/project';
 import { TeacherRun } from '../teacher-run';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
@@ -12,86 +10,48 @@ import { UserService } from '../../services/user.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { User } from '../../domain/user';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SelectRunsControlsModule } from '../select-runs-controls/select-runs-controls.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { TeacherRunListItemComponent } from '../teacher-run-list-item/teacher-run-list-item.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { TeacherRunListHarness } from './teacher-run-list.harness';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { RunMenuComponent } from '../run-menu/run-menu.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 class TeacherScheduleStubComponent {}
-
-export function fakeAsyncResponse<T>(data: T) {
-  return defer(() => Promise.resolve(data));
-}
-
-export class MockTeacherService {
-  archiveRuns(): Observable<any[]> {
-    return of([]);
-  }
-  unarchiveRuns(): Observable<any[]> {
-    return of([]);
-  }
-  getRuns(): Observable<TeacherRun[]> {
-    const runs: TeacherRun[] = [];
-    const run1 = new TeacherRun();
-    run1.id = 1;
-    run1.name = 'Photosynthesis';
-    run1.numStudents = 30;
-    run1.periods = ['1', '2'];
-    run1.startTime = new Date('2018-01-01T00:00:00.0').getTime();
-    const project1 = new Project();
-    project1.id = 1;
-    project1.name = 'Photosynthesis';
-    project1.projectThumb = '';
-    run1.project = project1;
-    const run2 = new TeacherRun();
-    run2.id = 2;
-    run2.name = 'Plate Tectonics';
-    run2.numStudents = 15;
-    run2.periods = ['3', '4'];
-    run2.startTime = new Date('2018-03-03T00:00:00.0').getTime();
-    const project2 = new Project();
-    project2.id = 1;
-    project2.name = 'Plate Tectonics';
-    project2.projectThumb = '';
-    run2.project = project2;
-    runs.push(run1);
-    runs.push(run2);
-    return Observable.create((observer) => {
-      observer.next(runs);
-      observer.complete();
-    });
-  }
-  runs$ = fakeAsyncResponse({
-    id: 3,
-    name: 'Global Climate Change',
-    periods: ['1', '2']
-  });
-}
-
-export class MockConfigService {
-  getCurrentServerTime(): number {
-    return new Date('2018-08-24T00:00:00.0').getTime();
-  }
-}
-
-export class MockUserService {
-  getUserId(): number {
-    return 1;
-  }
-}
 
 let component: TeacherRunListComponent;
 let configService: ConfigService;
 const currentTime = new Date().getTime();
-const dummyClickEvent: any = { preventDefault: () => {} };
 let fixture: ComponentFixture<TeacherRunListComponent>;
 let run1: TeacherRun;
 let run2: TeacherRun;
 let run3: TeacherRun;
+let runListHarness: TeacherRunListHarness;
 let teacherService: TeacherService;
+let userService: UserService;
 
-function createRun(id: number, ownerId: number): TeacherRun {
+function createRun(id: number, ownerId: number, startTime: number): TeacherRun {
   return new TeacherRun({
     id: id,
-    project: { id: id, tags: [] },
+    isArchived: false,
+    isSelected: false,
+    numStudents: 10,
     owner: new User({ id: ownerId }),
-    isArchived: false
+    periods: [],
+    project: {
+      id: id,
+      tags: [],
+      owner: new User({ id: ownerId })
+    },
+    startTime: startTime
   });
 }
 
@@ -99,43 +59,77 @@ describe('TeacherRunListComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [TeacherRunListComponent],
+        declarations: [RunMenuComponent, TeacherRunListComponent, TeacherRunListItemComponent],
         imports: [
           BrowserAnimationsModule,
+          BrowserModule,
+          FormsModule,
+          HttpClientTestingModule,
+          MatCheckboxModule,
+          MatDialogModule,
+          MatFormFieldModule,
+          MatInputModule,
+          MatMenuModule,
+          MatSlideToggleModule,
+          MatSnackBarModule,
           RouterTestingModule.withRoutes([
             { path: 'teacher/home/schedule', component: TeacherScheduleStubComponent }
           ]),
-          MatSnackBarModule
+          SelectRunsControlsModule
         ],
-        providers: [
-          { provide: TeacherService, useClass: MockTeacherService },
-          { provide: ConfigService, useClass: MockConfigService },
-          { provide: UserService, useClass: MockUserService }
-        ],
+        providers: [TeacherService, ConfigService, UserService],
         schemas: [NO_ERRORS_SCHEMA]
       });
     })
   );
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(TeacherRunListComponent);
+  beforeEach(async () => {
     configService = TestBed.inject(ConfigService);
     teacherService = TestBed.inject(TeacherService);
-    component = fixture.componentInstance;
+    userService = TestBed.inject(UserService);
     spyOn(teacherService, 'getRuns').and.returnValue(
-      of([createRun(1, 1), createRun(2, 1), createRun(3, 1)])
+      of([
+        createRun(1, 1, new Date('2020-01-01').getTime()),
+        createRun(2, 1, new Date('2020-01-02').getTime()),
+        createRun(3, 1, new Date('2020-01-03').getTime())
+      ])
     );
     spyOn(configService, 'getCurrentServerTime').and.returnValue(currentTime);
+    spyOn(configService, 'getContextPath').and.returnValue('');
+    spyOn(userService, 'getUserId').and.returnValue(1);
+    spyOn(teacherService, 'archiveRun').and.callFake((run: TeacherRun) => {
+      run.isArchived = true;
+      return of(run);
+    });
+    spyOn(teacherService, 'archiveRuns').and.callFake((runs: TeacherRun[]) => {
+      runs.forEach((run) => (run.isArchived = true));
+      return of(runs);
+    });
+    spyOn(teacherService, 'unarchiveRun').and.callFake((run: TeacherRun) => {
+      run.isArchived = false;
+      return of(run);
+    });
+    spyOn(teacherService, 'unarchiveRuns').and.callFake((runs: TeacherRun[]) => {
+      runs.forEach((run) => (run.isArchived = false));
+      return of(runs);
+    });
+    fixture = TestBed.createComponent(TeacherRunListComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
     run1 = component.runs[0];
     run2 = component.runs[1];
     run3 = component.runs[2];
+    runListHarness = await TestbedHarnessEnvironment.harnessForFixture(
+      fixture,
+      TeacherRunListHarness
+    );
   });
 
   archiveSelectedRuns();
   isShowArchiveChanged();
   runArchiveStatusChanged();
   runSelectedStatusChanged();
+  selectAllRunsCheckboxClicked();
   selectRunsOptionChosen();
   sortByStartTimeDesc();
   unarchiveSelectedRuns();
@@ -144,20 +138,7 @@ describe('TeacherRunListComponent', () => {
 function sortByStartTimeDesc() {
   describe('sortByStartTimeDesc()', () => {
     it('should sort runs by start date', () => {
-      const run3 = new TeacherRun();
-      run3.id = 3;
-      run3.name = 'Planet Earth';
-      run3.numStudents = 10;
-      run3.periods = ['6', '7'];
-      run3.startTime = new Date('2018-02-02T00:00:00.0').getTime();
-      const project3 = new Project();
-      project3.id = 1;
-      project3.name = 'Planet Earth';
-      project3.projectThumb = '';
-      run3.project = project3;
-      component.runs.push(run3);
-      component.runs.sort(component.sortByStartTimeDesc);
-      expect(isRunsSortedByStartTimeDesc(component.runs)).toBeTruthy();
+      expect(isRunsSortedByStartTimeDesc(component.filteredRuns)).toBeTruthy();
     });
   });
 }
@@ -174,36 +155,27 @@ function isRunsSortedByStartTimeDesc(runs: TeacherRun[]): boolean {
   return true;
 }
 
-function setRunsIsSelected(runs: TeacherRun[], isSelected: boolean[]): void {
-  runs.forEach((run: TeacherRun, index: number) => {
-    run.isSelected = isSelected[index];
-  });
-}
-
-function expectRunsIsArchived(runs: TeacherRun[], isArchived: boolean[]): void {
-  runs.forEach((run: TeacherRun, index: number) => {
-    expect(run.isArchived).toEqual(isArchived[index]);
-  });
-}
-
 function archiveSelectedRuns(): void {
   describe('archiveSelectedRuns()', () => {
-    it('should archive selected runs', () => {
-      setRunsIsSelected([run1, run2, run3], [true, true, false]);
-      spyOn(teacherService, 'archiveRuns').and.returnValue(of([run1, run2]));
-      component.archiveSelectedRuns();
+    it('should archive selected runs', async () => {
+      await runListHarness.clickRunListItemCheckbox(0);
+      await runListHarness.clickRunListItemCheckbox(1);
+      await runListHarness.clickArchiveButton();
       expectRunsIsSelected([run1, run2, run3], [false, false, false]);
-      expectRunsIsArchived([run1, run2, run3], [true, true, false]);
+      expectRunsIsArchived([run1, run2, run3], [false, true, true]);
     });
   });
 }
 
 function unarchiveSelectedRuns(): void {
   describe('unarchiveSelectedRuns()', () => {
-    it('should unarchive selected runs', () => {
-      setRunsIsSelected([run1, run2, run3], [true, true, false]);
-      spyOn(teacherService, 'unarchiveRuns').and.returnValue(of([run1, run2]));
-      component.unarchiveSelectedRuns();
+    it('should unarchive selected runs', async () => {
+      run1.isArchived = true;
+      run2.isArchived = true;
+      await runListHarness.toggleArchiveToggle();
+      await runListHarness.clickRunListItemCheckbox(0);
+      await runListHarness.clickRunListItemCheckbox(1);
+      await runListHarness.clickUnarchiveButton();
       expectRunsIsSelected([run1, run2, run3], [false, false, false]);
       expectRunsIsArchived([run1, run2, run3], [false, false, false]);
     });
@@ -213,9 +185,12 @@ function unarchiveSelectedRuns(): void {
 function isShowArchiveChanged(): void {
   describe('isShowArchiveChanged()', () => {
     describe('active runs are shown and some runs are selected', () => {
-      it('should unselect the runs', () => {
-        setRunsIsSelected([run1, run2, run3], [true, false, true]);
-        component.isShowArchivedChanged();
+      it('should unselect the runs', async () => {
+        expect(await runListHarness.isShowingArchived()).toBeFalse();
+        await runListHarness.clickRunListItemCheckbox(0);
+        await runListHarness.clickRunListItemCheckbox(2);
+        await runListHarness.toggleArchiveToggle();
+        expect(await runListHarness.isShowingArchived()).toBeTrue();
         expectRunsIsSelected([run1, run2, run3], [false, false, false]);
       });
     });
@@ -225,24 +200,61 @@ function isShowArchiveChanged(): void {
 function runSelectedStatusChanged(): void {
   describe('runSelectedStatusChanged()', () => {
     describe('one run is selected', () => {
-      it('should show 1 run selected and indeterminate for the select all checkbox', () => {
-        setRunsIsSelected([run1, run2, run3], [true, false, false]);
-        component.runSelectedStatusChanged();
+      it('should show 1 run selected and indeterminate for the select all checkbox', async () => {
+        await runListHarness.clickRunListItemCheckbox(0);
+        expect(await runListHarness.isSelectRunsCheckboxIndeterminate()).toBeTrue();
         expect(component.numSelectedRuns).toEqual(1);
       });
     });
     describe('two runs are selected', () => {
-      it('should show 2 runs selected and indeterminate for the select all checkbox', () => {
-        setRunsIsSelected([run1, run2, run3], [true, true, false]);
-        component.runSelectedStatusChanged();
+      it('should show 2 runs selected and indeterminate for the select all checkbox', async () => {
+        await runListHarness.clickRunListItemCheckbox(0);
+        await runListHarness.clickRunListItemCheckbox(1);
+        expect(await runListHarness.isSelectRunsCheckboxIndeterminate()).toBeTrue();
         expect(component.numSelectedRuns).toEqual(2);
       });
     });
     describe('all runs are selected', () => {
-      it('should show 3 runs selected and checked for the select all checkbox', () => {
-        setRunsIsSelected([run1, run2, run3], [true, true, true]);
-        component.runSelectedStatusChanged();
+      it('should show 3 runs selected and checked for the select all checkbox', async () => {
+        await runListHarness.clickRunListItemCheckbox(0);
+        await runListHarness.clickRunListItemCheckbox(1);
+        await runListHarness.clickRunListItemCheckbox(2);
+        expect(await runListHarness.isSelectRunsCheckboxChecked()).toBeTrue();
         expect(component.numSelectedRuns).toEqual(3);
+      });
+    });
+  });
+}
+
+function selectAllRunsCheckboxClicked(): void {
+  describe('selectAllRunsCheckboxClicked()', () => {
+    describe('select all runs checkbox is not checked', () => {
+      it('when select all runs checkbox is checked it should select all runs', async () => {
+        expectRunsIsSelected([run1, run2, run3], [false, false, false]);
+        expect(await runListHarness.isSelectRunsCheckboxChecked()).toBeFalse();
+        await runListHarness.checkSelectRunsCheckbox();
+        expectRunsIsSelected([run1, run2, run3], [true, true, true]);
+        expect(await runListHarness.isSelectRunsCheckboxChecked()).toBeTrue();
+      });
+    });
+    describe('select all runs checkbox is checked', () => {
+      it('when select all runs checkbox is clicked it should unselect all runs', async () => {
+        await runListHarness.checkSelectRunsCheckbox();
+        expectRunsIsSelected([run1, run2, run3], [true, true, true]);
+        expect(await runListHarness.isSelectRunsCheckboxChecked()).toBeTrue();
+        await runListHarness.uncheckSelectRunsCheckbox();
+        expectRunsIsSelected([run1, run2, run3], [false, false, false]);
+        expect(await runListHarness.isSelectRunsCheckboxChecked()).toBeFalse();
+      });
+    });
+    describe('select all runs checkbox is indeterminate checked', () => {
+      it('when select all runs checkbox is unchecked it should unselect all runs', async () => {
+        await runListHarness.clickRunListItemCheckbox(0);
+        expectRunsIsSelected([run1, run2, run3], [false, false, true]);
+        expect(await runListHarness.isSelectRunsCheckboxIndeterminate()).toBeTrue();
+        await runListHarness.toggleSelectRunsCheckbox();
+        expectRunsIsSelected([run1, run2, run3], [false, false, false]);
+        expect(await runListHarness.isSelectRunsCheckboxChecked()).toBeFalse();
       });
     });
   });
@@ -250,22 +262,22 @@ function runSelectedStatusChanged(): void {
 
 function selectRunsOptionChosen(): void {
   describe('selectRunsOptionChosen()', () => {
-    it('when all is chosen, it should select all runs', () => {
-      component.selectRunsOptionChosen('all');
+    it('when all is chosen, it should select all runs2', async () => {
+      await runListHarness.clickSelectRunsMenuButton('All');
       expectRunsIsSelected(component.filteredRuns, [true, true, true]);
     });
-    it('when none is chosen, it should select no runs', () => {
-      component.selectRunsOptionChosen('none');
+    it('when none is chosen, it should select no runs', async () => {
+      await runListHarness.clickSelectRunsMenuButton('None');
       expectRunsIsSelected(component.filteredRuns, [false, false, false]);
     });
-    it('when running is chosen, it should select running runs', () => {
+    it('when running is chosen, it should select running runs', async () => {
       setRunIsCompleted(run2);
-      component.selectRunsOptionChosen('running');
+      await runListHarness.clickSelectRunsMenuButton('Running');
       expectRunsIsSelected(component.filteredRuns, [true, false, true]);
     });
-    it('when completed is chosen, it should select completed runs', () => {
+    it('when completed is chosen, it should select completed runs', async () => {
       setRunIsCompleted(run2);
-      component.selectRunsOptionChosen('completed');
+      await runListHarness.clickSelectRunsMenuButton('Completed');
       expectRunsIsSelected(component.filteredRuns, [false, true, false]);
     });
   });
@@ -275,25 +287,28 @@ function setRunIsCompleted(run: TeacherRun): void {
   run.endTime = currentTime - 1000;
 }
 
+function runArchiveStatusChanged(): void {
+  describe('runArchiveStatusChanged()', () => {
+    it('when a run is archived, it should no longer be displayed in the active view', async () => {
+      expect(!component.isShowArchived);
+      expect(component.filteredRuns.length).toEqual(3);
+      expect(await runListHarness.getNumRunListItems()).toEqual(3);
+      await runListHarness.clickRunListItemMenuButton(1, 'folderArchive');
+      expect(!component.isShowArchived);
+      expect(component.filteredRuns.length).toEqual(2);
+      expect(await runListHarness.getNumRunListItems()).toEqual(2);
+    });
+  });
+}
+
 function expectRunsIsSelected(runs: TeacherRun[], expectRunsIsSelected: boolean[]): void {
   runs.forEach((run: TeacherRun, index: number) => {
     expect(run.isSelected).toEqual(expectRunsIsSelected[index]);
   });
 }
 
-function runArchiveStatusChanged(): void {
-  describe('runArchiveStatusChanged()', () => {
-    it('when a run is archived, it should no longer be displayed in the active view', () => {
-      expect(!component.isShowArchived);
-      expect(component.filteredRuns.length).toEqual(3);
-      setRunIsArchived(run1, true);
-      component.runArchiveStatusChanged();
-      expect(!component.isShowArchived);
-      expect(component.filteredRuns.length).toEqual(2);
-    });
+function expectRunsIsArchived(runs: TeacherRun[], isArchived: boolean[]): void {
+  runs.forEach((run: TeacherRun, index: number) => {
+    expect(run.isArchived).toEqual(isArchived[index]);
   });
-}
-
-function setRunIsArchived(run: TeacherRun, isArchived: boolean): void {
-  run.isArchived = isArchived;
 }
