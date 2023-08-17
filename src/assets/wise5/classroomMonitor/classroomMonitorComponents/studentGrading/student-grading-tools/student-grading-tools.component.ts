@@ -18,9 +18,9 @@ class Workgroup {
 })
 export class StudentGradingToolsComponent implements OnInit {
   protected avatarColor: string;
-  protected nextId: number;
+  protected nextWorkgroup: Workgroup;
   private periodId: number;
-  protected prevId: number;
+  protected prevWorkgroup: Workgroup;
   private subscriptions: Subscription = new Subscription();
   private workgroupId: number;
   private workgroups: Workgroup[];
@@ -33,6 +33,9 @@ export class StudentGradingToolsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (/unit\/(\d*)\/team\/(\w*)$/.test(this.router.url)) {
+      this.workgroupId = parseInt(this.router.url.match(/\/team\/(\d+)$/)[1]);
+    }
     this.updateModel();
     this.subscriptions.add(
       this.dataService.currentPeriodChanged$.subscribe(() => {
@@ -61,7 +64,9 @@ export class StudentGradingToolsComponent implements OnInit {
     this.avatarColor = getAvatarColorForWorkgroupId(this.workgroupId);
     this.periodId = this.dataService.getCurrentPeriod().periodId;
     this.filterWorkgroupsForPeriod();
-    this.workgroups = this.workgroups.sort(this.sortByWorkgroupId);
+    this.workgroups = this.workgroups
+      .sort(this.sortByWorkgroupId)
+      .filter((workgroup) => workgroup.workgroupId != null);
     this.setNextAndPrev();
   }
 
@@ -79,27 +84,22 @@ export class StudentGradingToolsComponent implements OnInit {
     const currentWorkgroupIndex = this.workgroups.findIndex(
       (workgroup) => workgroup.workgroupId === this.workgroupId
     );
-    this.prevId = this.getPreviousWorkgroupId(currentWorkgroupIndex);
-    this.nextId = this.getNextWorkgroupId(currentWorkgroupIndex);
+    this.prevWorkgroup = this.getPreviousWorkgroup(currentWorkgroupIndex);
+    this.nextWorkgroup = this.getNextWorkgroup(currentWorkgroupIndex);
   }
 
-  private getPreviousWorkgroupId(currentWorkgroupIndex: number): number {
-    return currentWorkgroupIndex > 0
-      ? this.workgroups[currentWorkgroupIndex - 1].workgroupId
-      : null;
+  private getPreviousWorkgroup(currentWorkgroupIndex: number): Workgroup {
+    return currentWorkgroupIndex > 0 ? this.workgroups[currentWorkgroupIndex - 1] : null;
   }
 
-  private getNextWorkgroupId(currentWorkgroupIndex: number): number {
+  private getNextWorkgroup(currentWorkgroupIndex: number): Workgroup {
     return currentWorkgroupIndex < this.workgroups.length - 1
-      ? this.workgroups[currentWorkgroupIndex + 1].workgroupId
+      ? this.workgroups[currentWorkgroupIndex + 1]
       : null;
   }
 
-  protected goToPrevTeam(): void {
-    this.router.navigate(['team', this.prevId], { relativeTo: this.route });
-  }
-
-  protected goToNextTeam(): void {
-    this.router.navigate(['team', this.nextId], { relativeTo: this.route });
+  protected goToTeam(workgroup: Workgroup): void {
+    this.dataService.setCurrentWorkgroup(workgroup);
+    this.router.navigate(['team', workgroup.workgroupId], { relativeTo: this.route });
   }
 }

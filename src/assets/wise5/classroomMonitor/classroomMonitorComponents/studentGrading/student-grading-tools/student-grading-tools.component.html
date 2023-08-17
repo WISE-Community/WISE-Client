@@ -3,8 +3,8 @@
     mat-icon-button
     aria-label="Previous Team"
     i18n-aria-label
-    [disabled]="!prevId"
-    (click)="goToPrevTeam()"
+    [disabled]="!prevWorkgroup"
+    (click)="goToTeam(prevWorkgroup)"
     matTooltip="Previous Team"
     matTooltipPosition="below"
     i18n-matTooltip
@@ -17,8 +17,8 @@
     mat-icon-button
     aria-label="Next Team"
     i18n-aria-label
-    [disabled]="!nextId"
-    (click)="goToNextTeam()"
+    [disabled]="!nextWorkgroup"
+    (click)="goToTeam(nextWorkgroup)"
     matTooltip="Next Team"
     matTooltipPosition="below"
     i18n-matTooltip

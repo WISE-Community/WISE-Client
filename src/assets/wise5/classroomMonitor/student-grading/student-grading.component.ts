@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 import { copy } from '../../common/object/object';
 import { AnnotationService } from '../../services/annotationService';
 import { ClassroomStatusService } from '../../services/classroomStatusService';
@@ -7,7 +7,7 @@ import { ConfigService } from '../../services/configService';
 import { NotificationService } from '../../services/notificationService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'student-grading',
@@ -38,8 +38,7 @@ export class StudentGradingComponent implements OnInit {
     private dataService: TeacherDataService,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +48,7 @@ export class StudentGradingComponent implements OnInit {
     this.subscribeToStudentWorkReceived();
     this.subscribeToCurrentWorkgroupChanged();
     this.subscribeToCurrentPeriodChanged();
+    this.workgroupId = parseInt(this.route.snapshot.params['workgroupId']);
     this.initialize();
   }
 
@@ -63,7 +63,6 @@ export class StudentGradingComponent implements OnInit {
     this.sort = this.dataService.studentGradingSort;
     this.dataService.nodeGradingSort = this.sort;
     this.permissions = this.configService.getPermissions();
-    this.workgroupId = parseInt(this.route.snapshot.params['workgroupId']);
     const workgroup = this.configService.getUserInfoByWorkgroupId(this.workgroupId);
     this.dataService.setCurrentWorkgroup(workgroup);
     let maxScore = this.classroomStatusService.getMaxScoreForWorkgroupId(this.workgroupId);
@@ -133,14 +132,15 @@ export class StudentGradingComponent implements OnInit {
 
   private subscribeToCurrentWorkgroupChanged(): void {
     this.subscriptions.add(
-      this.dataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
-        if (currentWorkgroup != null) {
-          let workgroupId = currentWorkgroup.workgroupId;
+      this.dataService.currentWorkgroupChanged$
+        .pipe(filter((workgroup) => workgroup != null))
+        .subscribe(({ currentWorkgroup }) => {
+          const workgroupId = currentWorkgroup.workgroupId;
           if (this.workgroupId !== workgroupId) {
-            this.router.navigate(['..', workgroupId], { relativeTo: this.route });
+            this.workgroupId = workgroupId;
+            this.initialize();
           }
-        }
-      })
+        })
     );
   }
 
@@ -226,18 +226,7 @@ export class StudentGradingComponent implements OnInit {
   }
 
   private nodeHasNewAlert(alertNotifications: any[]): boolean {
-    let newAlert = false;
-
-    let l = alertNotifications.length;
-    for (let i = 0; i < l; i++) {
-      let alert = alertNotifications[i];
-      if (!alert.timeDismissed) {
-        newAlert = true;
-        break;
-      }
-    }
-
-    return newAlert;
+    return alertNotifications.some((notification) => !notification.timeDismissed);
   }
 
   /**
