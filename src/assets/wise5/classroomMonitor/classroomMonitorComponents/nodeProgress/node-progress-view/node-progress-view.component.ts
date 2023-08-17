@@ -4,8 +4,8 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithOpenInNewWindowComponent } from '../../../../directives/dialog-with-open-in-new-window/dialog-with-open-in-new-window.component';
-import { NodeService } from '../../../../services/nodeService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfigService } from '../../../../services/configService';
 
 @Component({
   selector: 'node-progress-view',
@@ -13,11 +13,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./node-progress-view.component.scss']
 })
 export class NodeProgressViewComponent implements OnInit {
-  private currentGroup: any;
-  private currentGroupId: string;
-  private currentWorkgroup: any;
-  private items: any;
-  private maxScore: any;
   protected nodeId: string;
   nodeIdToExpanded: any = {};
   protected rootNode: any;
@@ -25,8 +20,8 @@ export class NodeProgressViewComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
+    private configService: ConfigService,
     private dialog: MatDialog,
-    private nodeService: NodeService,
     private projectService: TeacherProjectService,
     private route: ActivatedRoute,
     private router: Router,
@@ -34,20 +29,12 @@ export class NodeProgressViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.items = this.projectService.idToOrder;
-    this.maxScore = this.projectService.getMaxScore();
     this.nodeId = this.route.snapshot.paramMap.get('nodeId') || this.projectService.rootNode.id;
     this.dataService.setCurrentNodeByNodeId(this.nodeId);
     const startNodeId = this.projectService.getStartNodeId();
     this.rootNode = this.projectService.getRootNode(startNodeId);
-    this.currentGroup = this.rootNode;
-    if (this.currentGroup != null) {
-      this.currentGroupId = this.currentGroup.id;
-    }
     this.showRubricButton = this.projectHasRubric();
     this.subscribeToCurrentNodeChanged();
-    this.subscribeToCurrentWorkgroupChanged();
-    this.listenForTransitions();
     if (!this.isShowingNodeGradingView()) {
       this.saveNodeProgressViewDisplayedEvent();
     }
@@ -58,42 +45,19 @@ export class NodeProgressViewComponent implements OnInit {
       this.dataService.currentNodeChanged$.subscribe(({ currentNode }) => {
         this.nodeId = currentNode.id;
         this.dataService.setCurrentNode(currentNode);
-        if (this.isGroupNode(this.nodeId)) {
-          this.currentGroup = currentNode;
-          this.currentGroupId = this.currentGroup.id;
+        if (this.nodeId === 'group0') {
+          this.collapseAll();
+        } else {
+          this.nodeIdToExpanded[this.nodeId] = true;
         }
-        //this.upgrade.$injector.get('$state').go('root.cm.unit.node', { nodeId: this.nodeId });
+        this.router.navigate([
+          '/teacher/manage/unit',
+          this.configService.getRunId(),
+          'node',
+          this.nodeId
+        ]);
       })
     );
-  }
-
-  private subscribeToCurrentWorkgroupChanged(): void {
-    this.subscriptions.add(
-      this.dataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
-        this.currentWorkgroup = currentWorkgroup;
-      })
-    );
-  }
-
-  private listenForTransitions(): void {
-    // this.upgrade.$injector.get('$transitions').onSuccess({}, ($transition) => {
-    //   const toNodeId = $transition.params('to').nodeId;
-    //   const fromNodeId = $transition.params('from').nodeId;
-    //   if (toNodeId && fromNodeId && toNodeId !== fromNodeId) {
-    //     this.nodeId = toNodeId;
-    //     this.nodeService.setCurrentNode(toNodeId);
-    //   }
-    //   if (toNodeId === 'group0') {
-    //     this.collapseAll();
-    //   } else {
-    //     this.nodeIdToExpanded[toNodeId] = true;
-    //   }
-    //   if ($transition.name === 'root.cm.unit.node') {
-    //     if (this.projectService.isApplicationNode(toNodeId)) {
-    //       document.getElementById('content').scrollTop = 0;
-    //     }
-    //   }
-    // });
   }
 
   ngOnDestroy(): void {
@@ -139,7 +103,7 @@ export class NodeProgressViewComponent implements OnInit {
     });
   }
 
-  protected childExpandedEvent({ nodeId, expanded }): void {
+  childExpandedEvent({ nodeId, expanded }): void {
     this.collapseAll();
     this.nodeIdToExpanded[nodeId] = expanded;
   }

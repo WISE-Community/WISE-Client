@@ -14,6 +14,7 @@ import { StudentTeacherCommonServicesModule } from '../../student-teacher-common
 import satisfyCriterionSample from '../sampleData/sample_satisfyCriterion.json';
 import { MilestoneReportService } from '../../../assets/wise5/services/milestoneReportService';
 import { createSatisfyCriteria, createScoreCounts } from './milestone-test-functions';
+import { copy } from '../../../assets/wise5/common/object/object';
 
 let service: MilestoneService;
 let achievementService: AchievementService;
@@ -397,7 +398,7 @@ function isCompletionReached() {
 function getSatisfyCriteriaReferencedComponents() {
   describe('getSatisfyCriteriaReferencedComponents()', () => {
     it('should return referenced components', () => {
-      const satisfyCriterion = angular.copy(satisfyCriterionSample);
+      const satisfyCriterion = copy(satisfyCriterionSample);
       satisfyCriterion.nodeId = 'node2';
       const projectAchievement = {
         report: {
