@@ -1,4 +1,3 @@
-import * as angular from 'angular';
 import { MilestoneService } from '../../../assets/wise5/services/milestoneService';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';

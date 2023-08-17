@@ -139,7 +139,7 @@ export class NodeProgressViewComponent implements OnInit {
     });
   }
 
-  childExpandedEvent({ nodeId, expanded }): void {
+  protected childExpandedEvent({ nodeId, expanded }): void {
     this.collapseAll();
     this.nodeIdToExpanded[nodeId] = expanded;
   }
