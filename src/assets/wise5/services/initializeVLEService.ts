@@ -56,12 +56,14 @@ export class InitializeVLEService {
   }
 
   async initializePreview(unitId: string) {
-    await this.configService.retrieveConfig(`/api/config/preview/${unitId}`).subscribe();
-    this.studentStatusService.retrieveStudentStatus();
-    await this.projectService.retrieveProject();
-    this.studentDataService.retrieveStudentData();
-    this.studentDataService.retrieveRunStatus();
-    this.notificationService.retrieveNotifications();
-    this.intializedSource.next(true);
+    this.configService.retrieveConfig(`/api/config/preview/${unitId}`).subscribe(async () => {
+      this.studentStatusService.retrieveStudentStatus();
+      await this.projectService.retrieveProject().subscribe(async () => {
+        this.studentDataService.retrieveStudentData();
+        this.studentDataService.retrieveRunStatus();
+        this.notificationService.retrieveNotifications();
+        this.intializedSource.next(true);
+      });
+    });
   }
 }
