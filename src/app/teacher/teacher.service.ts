@@ -65,29 +65,6 @@ export class TeacherService {
     return this.http.get<Run>(`${this.lastRunUrl}/${projectId}`);
   }
 
-  archiveRun(run: Run): Observable<any> {
-    return this.http.put<Run>(`/api/project/${run.project.id}/archived`, null);
-  }
-
-  archiveRuns(runs: Run[]): Observable<any> {
-    const projectIds = runs.map((run) => run.project.id);
-    return this.http.put<Run[]>(`/api/projects/archived`, projectIds);
-  }
-
-  unarchiveRun(run: Run): Observable<any> {
-    return this.http.delete<Run>(`/api/project/${run.project.id}/archived`);
-  }
-
-  unarchiveRuns(runs: Run[]): Observable<any> {
-    let params = new HttpParams();
-    for (const run of runs) {
-      params = params.append('projectIds', run.project.id);
-    }
-    return this.http.delete<any>(`/api/projects/archived`, {
-      params: params
-    });
-  }
-
   registerTeacherAccount(teacherUser: Teacher): Observable<any> {
     const headers = {
       'Content-Type': 'application/json'

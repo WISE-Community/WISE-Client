@@ -2,6 +2,7 @@ import { Run } from './run';
 import { User } from '../domain/user';
 
 export class Project {
+  archived: boolean;
   dateArchived: string;
   dateCreated: string;
   id: number;

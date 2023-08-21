@@ -13,6 +13,9 @@ import { Course } from '../../domain/course';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ArchiveProjectService } from '../../services/archive-project.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Project } from '../../domain/project';
 
 export class MockTeacherService {
   checkClassroomAuthorization(): Observable<string> {
@@ -26,12 +29,6 @@ export class MockTeacherService {
       observer.next(courses);
       observer.complete();
     });
-  }
-  archiveRun(run: TeacherRun) {
-    return of({});
-  }
-  unarchiveRun(run: TeacherRun) {
-    return of({});
   }
 }
 
@@ -63,6 +60,7 @@ export class MockConfigService {
   }
 }
 
+let archiveProjectService: ArchiveProjectService;
 let component: RunMenuComponent;
 let fixture: ComponentFixture<RunMenuComponent>;
 let snackBarSpy: jasmine.Spy;
@@ -72,9 +70,16 @@ describe('RunMenuComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [BrowserAnimationsModule, MatMenuModule, MatSnackBarModule, RouterTestingModule],
+        imports: [
+          BrowserAnimationsModule,
+          HttpClientTestingModule,
+          MatMenuModule,
+          MatSnackBarModule,
+          RouterTestingModule
+        ],
         declarations: [RunMenuComponent],
         providers: [
+          ArchiveProjectService,
           { provide: TeacherService, useClass: MockTeacherService },
           { provide: UserService, useClass: MockUserService },
           { provide: ConfigService, useClass: MockConfigService },
@@ -99,8 +104,17 @@ describe('RunMenuComponent', () => {
         sharedOwners: []
       }
     });
+    archiveProjectService = TestBed.inject(ArchiveProjectService);
     teacherService = TestBed.inject(TeacherService);
     snackBarSpy = spyOn(TestBed.inject(MatSnackBar), 'open');
+    spyOn(archiveProjectService, 'archiveProject').and.callFake((project: Project) => {
+      project.archived = true;
+      return of(project);
+    });
+    spyOn(archiveProjectService, 'unarchiveProject').and.callFake((project: Project) => {
+      project.archived = false;
+      return of(project);
+    });
     fixture.detectChanges();
   });
 

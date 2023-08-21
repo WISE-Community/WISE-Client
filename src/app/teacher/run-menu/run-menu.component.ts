@@ -8,8 +8,8 @@ import { ConfigService } from '../../services/config.service';
 import { RunSettingsDialogComponent } from '../run-settings-dialog/run-settings-dialog.component';
 import { EditRunWarningDialogComponent } from '../edit-run-warning-dialog/edit-run-warning-dialog.component';
 import { Router } from '@angular/router';
-import { TeacherService } from '../teacher.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ArchiveProjectService } from '../../services/archive-project.service';
 
 @Component({
   selector: 'app-run-menu',
@@ -25,12 +25,12 @@ export class RunMenuComponent implements OnInit {
   reportProblemLink: string = '';
 
   constructor(
+    private archiveProjectService: ArchiveProjectService,
     private dialog: MatDialog,
     private userService: UserService,
     private configService: ConfigService,
     private router: Router,
-    private snackBar: MatSnackBar,
-    private teacherService: TeacherService
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -92,7 +92,7 @@ export class RunMenuComponent implements OnInit {
 
   archive(): void {
     const run = this.run;
-    this.teacherService.archiveRun(run).subscribe({
+    this.archiveProjectService.archiveProject(run.project).subscribe({
       next: () => {
         run.isArchived = true;
         this.runArchiveStatusChangedEvent.emit(run);
@@ -106,7 +106,7 @@ export class RunMenuComponent implements OnInit {
 
   unarchive(): void {
     const run = this.run;
-    this.teacherService.unarchiveRun(run).subscribe({
+    this.archiveProjectService.unarchiveProject(run.project).subscribe({
       next: () => {
         run.isArchived = false;
         this.runArchiveStatusChangedEvent.emit(run);

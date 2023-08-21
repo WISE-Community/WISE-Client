@@ -8,6 +8,8 @@ import { Observable, of, Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { mergeMap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ArchiveProjectService } from '../../services/archive-project.service';
+import { Project } from '../../domain/project';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -29,6 +31,7 @@ export class TeacherRunListComponent implements OnInit {
   subscriptions: Subscription = new Subscription();
 
   constructor(
+    private archiveProjectService: ArchiveProjectService,
     private configService: ConfigService,
     @Inject(LOCALE_ID) private localeID: string,
     private route: ActivatedRoute,
@@ -233,7 +236,7 @@ export class TeacherRunListComponent implements OnInit {
 
   protected archiveSelectedRuns(): Subscription {
     const runs = this.getSelectedRuns();
-    return this.teacherService.archiveRuns(runs).subscribe({
+    return this.archiveProjectService.archiveProjects(this.getProjects(runs)).subscribe({
       next: () => {
         this.setRunsIsArchived(runs, true);
         this.unselectAllRuns();
@@ -249,7 +252,7 @@ export class TeacherRunListComponent implements OnInit {
 
   protected unarchiveSelectedRuns(): Subscription {
     const runs = this.getSelectedRuns();
-    return this.teacherService.unarchiveRuns(runs).subscribe({
+    return this.archiveProjectService.unarchiveProjects(this.getProjects(runs)).subscribe({
       next: () => {
         this.setRunsIsArchived(runs, false);
         this.unselectAllRuns();
@@ -261,6 +264,10 @@ export class TeacherRunListComponent implements OnInit {
         this.snackBar.open($localize`Error Unarchiving Runs`);
       }
     });
+  }
+
+  private getProjects(runs: TeacherRun[]): Project[] {
+    return runs.map((run: TeacherRun) => run.project);
   }
 
   private setRunsIsArchived(runs: TeacherRun[], isArchived: boolean): void {

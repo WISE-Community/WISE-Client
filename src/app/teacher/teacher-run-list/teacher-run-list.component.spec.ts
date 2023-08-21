@@ -24,9 +24,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RunMenuComponent } from '../run-menu/run-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { ArchiveProjectService } from '../../services/archive-project.service';
+import { Project } from '../../domain/project';
 
 class TeacherScheduleStubComponent {}
 
+let archiveProjectService: ArchiveProjectService;
 let component: TeacherRunListComponent;
 let configService: ConfigService;
 const currentTime = new Date().getTime();
@@ -77,13 +80,14 @@ describe('TeacherRunListComponent', () => {
           ]),
           SelectRunsControlsModule
         ],
-        providers: [TeacherService, ConfigService, UserService],
+        providers: [ArchiveProjectService, ConfigService, TeacherService, UserService],
         schemas: [NO_ERRORS_SCHEMA]
       });
     })
   );
 
   beforeEach(async () => {
+    archiveProjectService = TestBed.inject(ArchiveProjectService);
     configService = TestBed.inject(ConfigService);
     teacherService = TestBed.inject(TeacherService);
     userService = TestBed.inject(UserService);
@@ -97,21 +101,21 @@ describe('TeacherRunListComponent', () => {
     spyOn(configService, 'getCurrentServerTime').and.returnValue(currentTime);
     spyOn(configService, 'getContextPath').and.returnValue('');
     spyOn(userService, 'getUserId').and.returnValue(1);
-    spyOn(teacherService, 'archiveRun').and.callFake((run: TeacherRun) => {
-      run.isArchived = true;
-      return of(run);
+    spyOn(archiveProjectService, 'archiveProject').and.callFake((project: Project) => {
+      project.archived = true;
+      return of(project);
     });
-    spyOn(teacherService, 'archiveRuns').and.callFake((runs: TeacherRun[]) => {
-      runs.forEach((run) => (run.isArchived = true));
-      return of(runs);
+    spyOn(archiveProjectService, 'archiveProjects').and.callFake((projects: Project[]) => {
+      projects.forEach((project) => (project.archived = true));
+      return of(projects);
     });
-    spyOn(teacherService, 'unarchiveRun').and.callFake((run: TeacherRun) => {
-      run.isArchived = false;
-      return of(run);
+    spyOn(archiveProjectService, 'unarchiveProject').and.callFake((project: Project) => {
+      project.archived = false;
+      return of(project);
     });
-    spyOn(teacherService, 'unarchiveRuns').and.callFake((runs: TeacherRun[]) => {
-      runs.forEach((run) => (run.isArchived = false));
-      return of(runs);
+    spyOn(archiveProjectService, 'unarchiveProjects').and.callFake((projects: Project[]) => {
+      projects.forEach((project) => (project.archived = false));
+      return of(projects);
     });
     fixture = TestBed.createComponent(TeacherRunListComponent);
     component = fixture.componentInstance;
