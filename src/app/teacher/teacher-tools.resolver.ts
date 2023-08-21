@@ -8,10 +8,12 @@ import { ClassroomStatusService } from '../../assets/wise5/services/classroomSta
 import { NotificationService } from '../../assets/wise5/services/notificationService';
 import { TeacherWebSocketService } from '../../assets/wise5/services/teacherWebSocketService';
 import { NotebookService } from '../../assets/wise5/services/notebookService';
+import { AchievementService } from '../../assets/wise5/services/achievementService';
 
 export const TeacherToolsResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
+  achievementService: AchievementService = inject(AchievementService),
   classroomStatusService: ClassroomStatusService = inject(ClassroomStatusService),
   configService: ConfigService = inject(ConfigService),
   dataService: TeacherDataService = inject(TeacherDataService),
@@ -24,6 +26,7 @@ export const TeacherToolsResolver: ResolveFn<any> = (
     .retrieveConfig(`api/config/classroomMonitor/${route.params['unitId']}`)
     .pipe(switchMap(() => projectService.retrieveProject()))
     .pipe(switchMap(() => classroomStatusService.retrieveStudentStatuses()))
+    .pipe(switchMap(() => achievementService.retrieveStudentAchievements()))
     .pipe(switchMap(() => dataService.retrieveRunStatus()))
     .pipe(switchMap(() => notificationService.retrieveNotifications()))
     .pipe(switchMap(() => dataService.retrieveAnnotations()))
