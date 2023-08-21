@@ -30,10 +30,6 @@ export class ToolBarComponent implements OnInit {
   private subscribeToRouterEvents(): void {
     this.subscriptions.add(
       this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-        const stepToolPathsFragments = ['advanced', 'branch', 'constraint', 'node'];
-        this.showStepTools = this.router.url
-          .split('/')
-          .some((path) => stepToolPathsFragments.includes(path));
         this.processUI();
       })
     );
@@ -51,6 +47,7 @@ export class ToolBarComponent implements OnInit {
       }[path] ?? $localize`Grade by Step`;
     this.showPeriodSelect = path != 'export';
     this.showTeamTools = /\/team\/(\d+)$/.test(this.router.url);
+    this.showStepTools = /node\/node(\d+)$/.test(this.router.url);
   }
 
   protected toggleMenu() {
