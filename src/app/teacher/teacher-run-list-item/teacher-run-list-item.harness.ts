@@ -8,18 +8,16 @@ export class TeacherRunListItemHarness extends ComponentHarness {
   protected getMenu = this.locatorFor(MatMenuHarness);
 
   async checkCheckbox(): Promise<void> {
-    const checkbox = await this.getCheckbox();
-    return await checkbox.check();
+    return (await this.getCheckbox()).check();
   }
 
   async isChecked(): Promise<boolean> {
-    const checkbox = await this.getCheckbox();
-    return await checkbox.isChecked();
+    return (await this.getCheckbox()).isChecked();
   }
 
   async clickMenuButton(menuButtonText: string): Promise<void> {
     const menu = await this.getMenu();
     await menu.open();
-    return await menu.clickItem({ text: menuButtonText });
+    return menu.clickItem({ text: menuButtonText });
   }
 }

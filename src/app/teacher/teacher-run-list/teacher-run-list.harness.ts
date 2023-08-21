@@ -15,72 +15,58 @@ export class TeacherRunListHarness extends ComponentHarness {
   );
 
   async isShowingArchived(): Promise<boolean> {
-    const archiveToggle = await this.getArchiveToggle();
-    return await archiveToggle.isChecked();
+    return (await this.getArchiveToggle()).isChecked();
   }
 
   async toggleArchiveToggle(): Promise<void> {
-    const archiveToggle = await this.getArchiveToggle();
-    return await archiveToggle.toggle();
+    return (await this.getArchiveToggle()).toggle();
   }
 
   async checkSelectRunsCheckbox(): Promise<void> {
-    const selectRunsControls = await this.getSelectRunsControls();
-    return await selectRunsControls.checkCheckbox();
+    return (await this.getSelectRunsControls()).checkCheckbox();
   }
 
   async uncheckSelectRunsCheckbox(): Promise<void> {
-    const selectRunsControls = await this.getSelectRunsControls();
-    return await selectRunsControls.uncheckCheckbox();
+    return (await this.getSelectRunsControls()).uncheckCheckbox();
   }
 
   async toggleSelectRunsCheckbox(): Promise<void> {
-    const selectRunsControls = await this.getSelectRunsControls();
-    return await selectRunsControls.toggleCheckbox();
+    return (await this.getSelectRunsControls()).toggleCheckbox();
   }
 
   async isSelectRunsCheckboxChecked(): Promise<boolean> {
-    const selectRunsControls = await this.getSelectRunsControls();
-    return await selectRunsControls.isChecked();
+    return (await this.getSelectRunsControls()).isChecked();
   }
 
   async isSelectRunsCheckboxIndeterminate(): Promise<boolean> {
-    const selectRunsControls = await this.getSelectRunsControls();
-    return await selectRunsControls.isIndeterminate();
+    return (await this.getSelectRunsControls()).isIndeterminate();
   }
 
   async clickSelectRunsMenuButton(menuButtonText: string): Promise<void> {
-    const selectRunsControls = await this.getSelectRunsControls();
-    return await selectRunsControls.clickMenuButton(menuButtonText);
+    return (await this.getSelectRunsControls()).clickMenuButton(menuButtonText);
   }
 
   async clickRunListItemCheckbox(index: number): Promise<void> {
-    const runListItem = await this.getRunListItem(index);
-    return runListItem.checkCheckbox();
+    return (await this.getRunListItem(index)).checkCheckbox();
   }
 
   async getRunListItem(index: number): Promise<any> {
-    const runListItems = await this.getRunListItems();
-    return runListItems[index];
+    return (await this.getRunListItems())[index];
   }
 
   async getNumRunListItems(): Promise<number> {
-    const runListItems = await this.getRunListItems();
-    return runListItems.length;
+    return (await this.getRunListItems()).length;
   }
 
   async clickRunListItemMenuButton(index: number, menuButtonText: string): Promise<void> {
-    const runListItem = await this.getRunListItem(index);
-    return await runListItem.clickMenuButton(menuButtonText);
+    return (await this.getRunListItem(index)).clickMenuButton(menuButtonText);
   }
 
   async clickArchiveButton(): Promise<void> {
-    const button = await this.getArchiveButton();
-    return await button.click();
+    return (await this.getArchiveButton()).click();
   }
 
   async clickUnarchiveButton(): Promise<void> {
-    const button = await this.getUnarchiveButton();
-    return await button.click();
+    return (await this.getUnarchiveButton()).click();
   }
 }

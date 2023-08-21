@@ -8,33 +8,28 @@ export class SelectRunsControlsHarness extends ComponentHarness {
   protected getSelectAllCheckbox = this.locatorFor(MatCheckboxHarness);
 
   async checkCheckbox(): Promise<void> {
-    const selectAllCheckBox = await this.getSelectAllCheckbox();
-    return await selectAllCheckBox.check();
+    return (await this.getSelectAllCheckbox()).check();
   }
 
   async uncheckCheckbox(): Promise<void> {
-    const selectAllCheckBox = await this.getSelectAllCheckbox();
-    return await selectAllCheckBox.uncheck();
+    return (await this.getSelectAllCheckbox()).uncheck();
   }
 
   async toggleCheckbox(): Promise<void> {
-    const selectAllCheckBox = await this.getSelectAllCheckbox();
-    return await selectAllCheckBox.toggle();
+    return (await this.getSelectAllCheckbox()).toggle();
   }
 
   async isChecked(): Promise<boolean> {
-    const checkbox = await this.getSelectAllCheckbox();
-    return await checkbox.isChecked();
+    return (await this.getSelectAllCheckbox()).isChecked();
   }
 
   async isIndeterminate(): Promise<boolean> {
-    const checkbox = await this.getSelectAllCheckbox();
-    return await checkbox.isIndeterminate();
+    return (await this.getSelectAllCheckbox()).isIndeterminate();
   }
 
   async clickMenuButton(menuButtonText: string): Promise<void> {
     const menu = await this.getMenu();
     await menu.open();
-    return await menu.clickItem({ text: menuButtonText });
+    return menu.clickItem({ text: menuButtonText });
   }
 }
