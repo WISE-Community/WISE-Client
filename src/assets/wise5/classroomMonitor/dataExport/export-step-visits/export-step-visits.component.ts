@@ -245,7 +245,7 @@ export class ExportStepVisitsComponent extends ExportController {
     const includeTeacherEvents = false;
     this.dataExportService
       .retrieveEventsExport(includeStudentEvents, includeTeacherEvents, this.includeStudentNames)
-      .then((events: any) => {
+      .subscribe(({ events }: any) => {
         this.handleExportCallback(events);
       });
   }

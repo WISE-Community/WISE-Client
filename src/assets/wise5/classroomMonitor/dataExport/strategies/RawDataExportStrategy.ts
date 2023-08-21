@@ -25,7 +25,7 @@ export class RawDataExportStrategy extends AbstractDataExportStrategy {
         selectedNodesMap = this.getSelectedNodesMap(selectedNodes);
       }
     }
-    this.dataExportService.retrieveStudentData(selectedNodes, true, true, true).then(() => {
+    this.dataExportService.retrieveStudentData(selectedNodes, true, true, true).subscribe(() => {
       var runId = this.configService.getRunId();
       var data: any = {};
       var workgroups = this.configService.getClassmateUserInfosSortedByWorkgroupId();
