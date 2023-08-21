@@ -65,30 +65,27 @@ export class TeacherService {
     return this.http.get<Run>(`${this.lastRunUrl}/${projectId}`);
   }
 
-  archiveRun(run: Run): Observable<Run> {
-    const params = new HttpParams().set('projectId', run.project.id);
-    return this.http.post<Run>(`/api/archive/project`, params);
+  archiveRun(run: Run): Observable<any> {
+    return this.http.put<Run>(`/api/project/${run.project.id}/archived`, null);
   }
 
-  archiveRuns(runs: Run[]): Observable<Run[]> {
+  archiveRuns(runs: Run[]): Observable<any> {
+    const projectIds = runs.map((run) => run.project.id);
+    return this.http.put<Run[]>(`/api/projects/archived`, projectIds);
+  }
+
+  unarchiveRun(run: Run): Observable<any> {
+    return this.http.delete<Run>(`/api/project/${run.project.id}/archived`);
+  }
+
+  unarchiveRuns(runs: Run[]): Observable<any> {
     let params = new HttpParams();
     for (const run of runs) {
       params = params.append('projectIds', run.project.id);
     }
-    return this.http.post<Run[]>(`/api/archive/projects`, params);
-  }
-
-  unarchiveRun(run: Run): Observable<Run> {
-    const params = new HttpParams().set('projectId', run.project.id);
-    return this.http.post<Run>(`/api/unarchive/project`, params);
-  }
-
-  unarchiveRuns(runs: Run[]): Observable<Run[]> {
-    let params = new HttpParams();
-    for (const run of runs) {
-      params = params.append('projectIds', run.project.id);
-    }
-    return this.http.post<Run[]>(`/api/unarchive/projects`, params);
+    return this.http.delete<any>(`/api/projects/archived`, {
+      params: params
+    });
   }
 
   registerTeacherAccount(teacherUser: Teacher): Observable<any> {
