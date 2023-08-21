@@ -243,12 +243,12 @@ export class TeacherDataService extends DataService {
     if (periodId != null) {
       params = params.set('periodId', periodId);
     }
-    return this.retrieveStudentData(params).then((result) => {
+    return this.retrieveStudentData(params).subscribe((result) => {
       return result.studentWorkList;
     });
   }
 
-  retrieveStudentData(params): any {
+  retrieveStudentData(params): Observable<any> {
     const url = this.ConfigService.getConfigParam('teacherDataURL');
     const options = {
       params: params
