@@ -15,11 +15,13 @@ export class NodeAdvancedConstraintAuthoringComponent extends ConstraintsAuthori
   }
 
   ngOnInit() {
-    const node = this.projectService.getNodeById(this.route.snapshot.paramMap.get('nodeId'));
-    if (node.constraints == null) {
-      node.constraints = [];
-    }
-    this.content = node;
+    this.route.parent.params.subscribe((params) => {
+      const node = this.projectService.getNodeById(params.nodeId);
+      if (node.constraints == null) {
+        node.constraints = [];
+      }
+      this.content = node;
+    });
   }
 
   protected addConstraintAndScrollToBottom(): void {
