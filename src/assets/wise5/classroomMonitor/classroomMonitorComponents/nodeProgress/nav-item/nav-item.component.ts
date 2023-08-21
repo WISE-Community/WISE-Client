@@ -219,7 +219,7 @@ export class NavItemComponent implements OnInit {
     return false;
   }
 
-  toggleLockNode(): void {
+  protected toggleLockNode(): void {
     const node = this.projectService.getNodeById(this.nodeId);
     const isLocked = this.isLocked();
     if (isLocked) {
@@ -234,13 +234,11 @@ export class NavItemComponent implements OnInit {
   }
 
   private showToggleLockNodeConfirmation(isLocked: boolean): void {
-    let message = '';
-    if (isLocked) {
-      message = $localize`${this.nodeTitle} has been locked for ${this.getPeriodLabel()}.`;
-    } else {
-      message = $localize`${this.nodeTitle} has been unlocked for ${this.getPeriodLabel()}.`;
-    }
-    this.snackBar.open(message);
+    this.snackBar.open(
+      isLocked
+        ? $localize`${this.nodeTitle} has been locked for ${this.getPeriodLabel()}.`
+        : $localize`${this.nodeTitle} has been unlocked for ${this.getPeriodLabel()}.`
+    );
   }
 
   private unlockNode(node: any): void {
