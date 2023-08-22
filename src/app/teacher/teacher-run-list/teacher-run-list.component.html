@@ -24,7 +24,7 @@
     <div fxLayoutGap="12px">
       <span i18n>Active</span>
       <mat-slide-toggle
-        [(ngModel)]="isShowArchived"
+        [(ngModel)]="showArchived"
         (change)="isShowArchivedChanged()"
       ></mat-slide-toggle>
       <span i18n>Archived</span>
@@ -36,10 +36,10 @@
         >Units found: {{ filteredRuns.length }}</ng-container
       >
       <ng-container *ngIf="!searchValue && !filterValue" i18n
-        >Total {{ isShowArchived ? 'archived' : 'active' }} classroom units:
+        >Total {{ showArchived ? 'archived' : 'active' }} classroom units:
         {{ filteredRuns.length }}</ng-container
       >
-      <span class="mat-caption" *ngIf="!isShowArchived && filteredRuns.length">
+      <span class="mat-caption" *ngIf="!showArchived && filteredRuns.length">
         (<ng-container *ngIf="completedTotal()"
           ><span i18n>{{ completedTotal() }} completed</span>,
         </ng-container>
@@ -76,7 +76,7 @@
     <button
       mat-raised-button
       color="accent"
-      *ngIf="!isShowArchived && numSelectedRuns > 0"
+      *ngIf="!showArchived && numSelectedRuns > 0"
       (click)="archiveSelectedRuns()"
       i18n
     >
@@ -85,7 +85,7 @@
     <button
       mat-raised-button
       color="accent"
-      *ngIf="isShowArchived && numSelectedRuns > 0"
+      *ngIf="showArchived && numSelectedRuns > 0"
       (click)="unarchiveSelectedRuns()"
       i18n
     >

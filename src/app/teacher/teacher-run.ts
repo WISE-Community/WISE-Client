@@ -1,10 +1,10 @@
 import { Run } from '../domain/run';
 
 export class TeacherRun extends Run {
-  isArchived: boolean;
-  isSelected: boolean;
-  isHighlighted: boolean;
+  archived: boolean;
+  selected: boolean;
   shared: boolean;
+  highlighted: boolean;
 
   constructor(jsonObject: any = {}) {
     super(jsonObject);

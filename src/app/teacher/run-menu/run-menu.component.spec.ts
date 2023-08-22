@@ -126,7 +126,7 @@ function archive() {
   describe('archive()', () => {
     it('should archive a run', () => {
       component.archive();
-      expect(component.run.isArchived).toEqual(true);
+      expect(component.run.archived).toEqual(true);
       expect(snackBarSpy).toHaveBeenCalledWith('Successfully Archived Run');
     });
   });
@@ -136,7 +136,7 @@ function unarchive() {
   describe('unarchive()', () => {
     it('should unarchive a run', () => {
       component.unarchive();
-      expect(component.run.isArchived).toEqual(false);
+      expect(component.run.archived).toEqual(false);
       expect(snackBarSpy).toHaveBeenCalledWith('Successfully Unarchived Run');
     });
   });

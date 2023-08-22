@@ -38,17 +38,17 @@ export class TeacherRunListItemComponent implements OnInit {
     this.manageStudentsLink = `${this.configService.getContextPath()}/teacher/manage/unit/${
       this.run.id
     }/manage-students`;
-    if (this.run.isHighlighted) {
+    if (this.run.highlighted) {
       this.animateDuration = '2s';
       this.animateDelay = '1s';
       setTimeout(() => {
-        this.run.isHighlighted = false;
+        this.run.highlighted = false;
       }, 7000);
     }
   }
 
   ngAfterViewInit() {
-    if (this.run.isHighlighted) {
+    if (this.run.highlighted) {
       this.elRef.nativeElement.querySelector('mat-card').scrollIntoView();
     }
   }
@@ -106,7 +106,7 @@ export class TeacherRunListItemComponent implements OnInit {
   }
 
   runArchiveStatusChanged(): void {
-    this.run.isSelected = false;
+    this.run.selected = false;
     this.runSelectedStatusChangedEvent.emit();
     this.runArchiveStatusChangedEvent.emit();
   }

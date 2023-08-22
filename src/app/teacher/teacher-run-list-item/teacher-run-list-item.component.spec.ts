@@ -78,7 +78,7 @@ function runArchiveStatusChanged() {
       const runSelectedSpy = spyOn(component.runSelectedStatusChangedEvent, 'emit');
       const runArchiveSpy = spyOn(component.runArchiveStatusChangedEvent, 'emit');
       component.runArchiveStatusChanged();
-      expect(component.run.isSelected).toEqual(false);
+      expect(component.run.selected).toEqual(false);
       expect(runSelectedSpy).toHaveBeenCalled();
       expect(runArchiveSpy).toHaveBeenCalled();
     });

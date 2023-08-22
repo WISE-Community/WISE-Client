@@ -53,13 +53,13 @@
 
 <mat-card
   class="can-highlight"
-  [ngClass]="{ 'highlighted-bg': run.isHighlighted, 'archived-run': run.isArchived }"
+  [ngClass]="{ 'highlighted-bg': run.highlighted, 'archived-run': run.archived }"
   [@flash]="{ value: '*', params: { duration: animateDuration, delay: animateDelay } }"
 >
   <mat-card-content fxLayout="row" fxLayoutGap="12px">
     <mat-checkbox
       color="primary"
-      [(ngModel)]="run.isSelected"
+      [(ngModel)]="run.selected"
       (ngModelChange)="runSelectedStatusChangedEvent.emit()"
     ></mat-checkbox>
     <div

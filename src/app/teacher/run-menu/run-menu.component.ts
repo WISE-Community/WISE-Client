@@ -10,6 +10,7 @@ import { EditRunWarningDialogComponent } from '../edit-run-warning-dialog/edit-r
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ArchiveProjectService } from '../../services/archive-project.service';
+import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 
 @Component({
   selector: 'app-run-menu',
@@ -93,8 +94,8 @@ export class RunMenuComponent implements OnInit {
   archive(): void {
     const run = this.run;
     this.archiveProjectService.archiveProject(run.project).subscribe({
-      next: () => {
-        run.isArchived = true;
+      next: (response: ArchiveProjectResponse) => {
+        run.archived = response.archived;
         this.runArchiveStatusChangedEvent.emit(run);
         this.snackBar.open($localize`Successfully Archived Run`);
       },
@@ -107,8 +108,8 @@ export class RunMenuComponent implements OnInit {
   unarchive(): void {
     const run = this.run;
     this.archiveProjectService.unarchiveProject(run.project).subscribe({
-      next: () => {
-        run.isArchived = false;
+      next: (response: ArchiveProjectResponse) => {
+        run.archived = response.archived;
         this.runArchiveStatusChangedEvent.emit(run);
         this.snackBar.open($localize`Successfully Unarchived Run`);
       },

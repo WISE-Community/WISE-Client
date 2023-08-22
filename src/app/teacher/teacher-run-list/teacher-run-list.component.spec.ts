@@ -44,8 +44,8 @@ let userService: UserService;
 function createRun(id: number, ownerId: number, startTime: number): TeacherRun {
   return new TeacherRun({
     id: id,
-    isArchived: false,
-    isSelected: false,
+    archived: false,
+    selected: false,
     numStudents: 10,
     owner: new User({ id: ownerId }),
     periods: [],
@@ -174,8 +174,8 @@ function archiveSelectedRuns(): void {
 function unarchiveSelectedRuns(): void {
   describe('unarchiveSelectedRuns()', () => {
     it('should unarchive selected runs', async () => {
-      run1.isArchived = true;
-      run2.isArchived = true;
+      run1.archived = true;
+      run2.archived = true;
       await runListHarness.toggleArchiveToggle();
       await runListHarness.clickRunListItemCheckbox(0);
       await runListHarness.clickRunListItemCheckbox(1);
@@ -294,11 +294,11 @@ function setRunIsCompleted(run: TeacherRun): void {
 function runArchiveStatusChanged(): void {
   describe('runArchiveStatusChanged()', () => {
     it('when a run is archived, it should no longer be displayed in the active view', async () => {
-      expect(!component.isShowArchived);
+      expect(!component.showArchived);
       expect(component.filteredRuns.length).toEqual(3);
       expect(await runListHarness.getNumRunListItems()).toEqual(3);
       await runListHarness.clickRunListItemMenuButton(1, 'folderArchive');
-      expect(!component.isShowArchived);
+      expect(!component.showArchived);
       expect(component.filteredRuns.length).toEqual(2);
       expect(await runListHarness.getNumRunListItems()).toEqual(2);
     });
@@ -307,12 +307,12 @@ function runArchiveStatusChanged(): void {
 
 function expectRunsIsSelected(runs: TeacherRun[], expectRunsIsSelected: boolean[]): void {
   runs.forEach((run: TeacherRun, index: number) => {
-    expect(run.isSelected).toEqual(expectRunsIsSelected[index]);
+    expect(run.selected).toEqual(expectRunsIsSelected[index]);
   });
 }
 
-function expectRunsIsArchived(runs: TeacherRun[], isArchived: boolean[]): void {
+function expectRunsIsArchived(runs: TeacherRun[], archived: boolean[]): void {
   runs.forEach((run: TeacherRun, index: number) => {
-    expect(run.isArchived).toEqual(isArchived[index]);
+    expect(run.archived).toEqual(archived[index]);
   });
 }

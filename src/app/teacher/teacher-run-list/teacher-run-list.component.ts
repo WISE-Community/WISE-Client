@@ -10,6 +10,7 @@ import { mergeMap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ArchiveProjectService } from '../../services/archive-project.service';
 import { Project } from '../../domain/project';
+import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -25,7 +26,7 @@ export class TeacherRunListComponent implements OnInit {
   searchValue: string = '';
   filterOptions: any[];
   filterValue: string = '';
-  isShowArchived: boolean = false;
+  showArchived: boolean = false;
   numSelectedRuns: number = 0;
   showAll: boolean = false;
   subscriptions: Subscription = new Subscription();
@@ -76,7 +77,7 @@ export class TeacherRunListComponent implements OnInit {
     this.runs = runs.map((run) => {
       const teacherRun = new TeacherRun(run);
       teacherRun.shared = !teacherRun.isOwner(userId);
-      teacherRun.isArchived = teacherRun.project.tags.includes('archived');
+      teacherRun.archived = teacherRun.project.tags.includes('archived');
       return teacherRun;
     });
     this.filteredRuns = this.runs;
@@ -143,7 +144,7 @@ export class TeacherRunListComponent implements OnInit {
 
   private performFilter(): void {
     this.filteredRuns = this.filteredRuns.filter((run: TeacherRun) => {
-      return (!this.isShowArchived && !run.isArchived) || (this.isShowArchived && run.isArchived);
+      return (!this.showArchived && !run.archived) || (this.showArchived && run.archived);
     });
   }
 
@@ -189,7 +190,7 @@ export class TeacherRunListComponent implements OnInit {
   private highlightNewRun(runId: number): void {
     for (const run of this.runs) {
       if (run.id === runId) {
-        run.isHighlighted = true;
+        run.highlighted = true;
       }
     }
   }
@@ -203,7 +204,7 @@ export class TeacherRunListComponent implements OnInit {
 
   private unselectAllRuns(): void {
     for (const run of this.runs) {
-      run.isSelected = false;
+      run.selected = false;
     }
   }
 
@@ -214,16 +215,16 @@ export class TeacherRunListComponent implements OnInit {
       .forEach((run: TeacherRun) => {
         switch (value) {
           case 'all':
-            run.isSelected = true;
+            run.selected = true;
             break;
           case 'none':
-            run.isSelected = false;
+            run.selected = false;
             break;
           case 'running':
-            run.isSelected = !run.isCompleted(this.configService.getCurrentServerTime());
+            run.selected = !run.isCompleted(this.configService.getCurrentServerTime());
             break;
           case 'completed':
-            run.isSelected = run.isCompleted(this.configService.getCurrentServerTime());
+            run.selected = run.isCompleted(this.configService.getCurrentServerTime());
             break;
         }
       });
@@ -237,12 +238,14 @@ export class TeacherRunListComponent implements OnInit {
   protected archiveSelectedRuns(): Subscription {
     const runs = this.getSelectedRuns();
     return this.archiveProjectService.archiveProjects(this.getProjects(runs)).subscribe({
-      next: () => {
-        this.setRunsIsArchived(runs, true);
-        this.unselectAllRuns();
-        this.updateNumSelectedRuns();
-        this.performSearchAndFilter();
-        this.snackBar.open($localize`Successfully Archived ${runs.length} Runs`);
+      next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
+        this.updateRunsArchivedStatus(runs, archiveProjectsResponse);
+        this.updateRunsInformation();
+        this.snackBar.open(
+          $localize`Successfully Archived ${
+            archiveProjectsResponse.filter((response) => response.archived).length
+          } Runs`
+        );
       },
       error: () => {
         this.snackBar.open($localize`Error Archiving Runs`);
@@ -253,12 +256,14 @@ export class TeacherRunListComponent implements OnInit {
   protected unarchiveSelectedRuns(): Subscription {
     const runs = this.getSelectedRuns();
     return this.archiveProjectService.unarchiveProjects(this.getProjects(runs)).subscribe({
-      next: () => {
-        this.setRunsIsArchived(runs, false);
-        this.unselectAllRuns();
-        this.updateNumSelectedRuns();
-        this.performSearchAndFilter();
-        this.snackBar.open($localize`Successfully Unarchived ${runs.length} Runs`);
+      next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
+        this.updateRunsArchivedStatus(runs, archiveProjectsResponse);
+        this.updateRunsInformation();
+        this.snackBar.open(
+          $localize`Successfully Unarchived ${
+            archiveProjectsResponse.filter((response) => !response.archived).length
+          } Runs`
+        );
       },
       error: () => {
         this.snackBar.open($localize`Error Unarchiving Runs`);
@@ -266,14 +271,24 @@ export class TeacherRunListComponent implements OnInit {
     });
   }
 
-  private getProjects(runs: TeacherRun[]): Project[] {
-    return runs.map((run: TeacherRun) => run.project);
+  private updateRunsArchivedStatus(
+    runs: TeacherRun[],
+    archiveProjectsResponse: ArchiveProjectResponse[]
+  ): void {
+    for (const archiveProjectResponse of archiveProjectsResponse) {
+      const run = runs.find((run: TeacherRun) => run.project.id === archiveProjectResponse.id);
+      run.archived = archiveProjectResponse.archived;
+    }
   }
 
-  private setRunsIsArchived(runs: TeacherRun[], isArchived: boolean): void {
-    for (const run of runs) {
-      run.isArchived = isArchived;
-    }
+  private updateRunsInformation(): void {
+    this.unselectAllRuns();
+    this.updateNumSelectedRuns();
+    this.performSearchAndFilter();
+  }
+
+  private getProjects(runs: TeacherRun[]): Project[] {
+    return runs.map((run: TeacherRun) => run.project);
   }
 
   protected runSelectedStatusChanged(): void {
@@ -286,7 +301,7 @@ export class TeacherRunListComponent implements OnInit {
 
   private getSelectedRuns(): TeacherRun[] {
     return this.filteredRuns.filter((run: TeacherRun) => {
-      return run.isSelected;
+      return run.selected;
     });
   }
 
