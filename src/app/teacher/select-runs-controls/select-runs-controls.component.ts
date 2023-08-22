@@ -8,27 +8,27 @@ import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
   providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }]
 })
 export class SelectRunsControlsComponent {
-  isSelectedAllRuns: boolean = false;
-  isSelectedSomeRuns: boolean = false;
+  selectedAllRuns: boolean = false;
+  selectedSomeRuns: boolean = false;
   @Input() numSelectedRuns: number = 0;
   @Input() numTotalRuns: number = 0;
   @Output() selectRunsOptionChosenEvent = new EventEmitter<string>();
 
   ngOnChanges(): void {
     if (this.numSelectedRuns === 0) {
-      this.isSelectedAllRuns = false;
-      this.isSelectedSomeRuns = false;
+      this.selectedAllRuns = false;
+      this.selectedSomeRuns = false;
     } else if (this.numSelectedRuns === this.numTotalRuns) {
-      this.isSelectedAllRuns = true;
-      this.isSelectedSomeRuns = false;
+      this.selectedAllRuns = true;
+      this.selectedSomeRuns = false;
     } else {
-      this.isSelectedAllRuns = false;
-      this.isSelectedSomeRuns = true;
+      this.selectedAllRuns = false;
+      this.selectedSomeRuns = true;
     }
   }
 
   protected selectAllRunsCheckboxClicked(): void {
-    if (this.isSelectedAllRuns || this.isSelectedSomeRuns) {
+    if (this.selectedAllRuns || this.selectedSomeRuns) {
       this.selectRunsOptionChosenEvent.emit('none');
     } else {
       this.selectRunsOptionChosenEvent.emit('all');
