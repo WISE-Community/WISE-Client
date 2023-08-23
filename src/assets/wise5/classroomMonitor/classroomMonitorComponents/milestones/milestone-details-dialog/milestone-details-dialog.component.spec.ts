@@ -19,7 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 const milestoneName: string = 'Checkpoint #1';
 
-fdescribe('MilestoneDetailsDialogComponent', () => {
+describe('MilestoneDetailsDialogComponent', () => {
   let component: MilestoneDetailsDialogComponent;
   let fixture: ComponentFixture<MilestoneDetailsDialogComponent>;
 
