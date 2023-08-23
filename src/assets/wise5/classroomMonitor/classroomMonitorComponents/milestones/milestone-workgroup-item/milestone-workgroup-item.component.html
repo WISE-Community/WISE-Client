@@ -7,7 +7,7 @@
 >
   <button
     mat-button
-    class="list-item__subheader-button"
+    class="list-item__subheader-button team-button"
     aria-label="Show/hide team's work for this step"
     i18n-aria-label
     [ngClass]="{ 'list-item--noclick': !showScore || disabled }"
@@ -15,7 +15,7 @@
     [disabled]="disabled"
     fxLayoutWrap
   >
-    <div fxLayout="row" fxFlex>
+    <div fxLayout="row" fxFlex="100">
       <div fxFlex fxLayout="row" fxLayoutAlign="start center">
         <workgroup-info
           [hasAlert]="hasAlert"
