@@ -8,10 +8,10 @@ import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
   providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }]
 })
 export class SelectRunsControlsComponent {
-  selectedAllRuns: boolean = false;
-  selectedSomeRuns: boolean = false;
   @Input() numSelectedRuns: number = 0;
   @Input() numTotalRuns: number = 0;
+  protected selectedAllRuns: boolean = false;
+  protected selectedSomeRuns: boolean = false;
   @Output() selectRunsOptionChosenEvent = new EventEmitter<string>();
 
   ngOnChanges(): void {
