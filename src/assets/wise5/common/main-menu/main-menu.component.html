@@ -7,12 +7,10 @@
       *ngIf="view.type === 'primary' && view.active"
       role="button"
       tabindex="0"
-      aria-label="{{ view.label }}"
-      i18n-aria-label
+      aria-label="{{ view.name }}"
       (click)="goToView(view)"
       (keyup.enter)="goToView(view)"
       class="menu-sidenav__list-item mat-mdc-list-item-interactive"
-      [ngClass]="{ active: state.$current.name === view.route }"
     >
       <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
         <mat-icon class="secondary-text"> {{ view.icon }} </mat-icon>
@@ -28,11 +26,10 @@
       *ngIf="view.type === 'secondary' && view.active"
       role="button"
       tabindex="0"
-      aria-label="{{ view.label }}"
+      aria-label="{{ view.name }}"
       (click)="goToView(view)"
       (keyup.enter)="goToView(view)"
       class="menu-sidenav__list-item mat-mdc-list-item-interactive"
-      [ngClass]="{ active: state.$current.name === view.route }"
     >
       <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
         <mat-icon class="secondary-text"> {{ view.icon }} </mat-icon>

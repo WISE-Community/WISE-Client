@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
+  selector: 'add-lesson-choose-location',
   templateUrl: './add-lesson-choose-location.component.html',
   styleUrls: ['./add-lesson-choose-location.component.scss']
 })
@@ -13,14 +13,13 @@ export class AddLessonChooseLocationComponent implements OnInit {
   unusedGroupIds: string[] = [];
 
   constructor(
-    private dataService: TeacherDataService,
     private projectService: TeacherProjectService,
-    private upgrade: UpgradeModule
-  ) {
-    this.title = this.upgrade.$injector.get('$stateParams').title;
-  }
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.title = history.state.title;
     const nodeIds = Object.keys(this.projectService.idToOrder);
     nodeIds.shift(); // remove the 'group0' master root node from consideration
     this.groupIds = nodeIds.filter((nodeId) => this.isGroupNode(nodeId));
@@ -30,14 +29,14 @@ export class AddLessonChooseLocationComponent implements OnInit {
   protected addLessonAfter(nodeId: string): void {
     const newLesson = this.projectService.createGroup(this.title);
     this.projectService.createNodeAfter(newLesson, nodeId);
-    this.save(newLesson);
+    this.save();
   }
 
   protected addLessonAtBeginning(active: boolean): void {
     const newLesson = this.projectService.createGroup(this.title);
     const insertInsideNodeId = active ? 'group0' : 'inactiveGroups';
     this.projectService.createNodeInside(newLesson, insertInsideNodeId);
-    this.save(newLesson);
+    this.save();
   }
 
   protected cancel(): void {
@@ -52,38 +51,19 @@ export class AddLessonChooseLocationComponent implements OnInit {
   }
 
   private goToProjectView(): void {
-    this.upgrade.$injector.get('$state').go('root.at.project');
+    this.router.navigate(['../..'], { relativeTo: this.route });
   }
 
   private isGroupNode(nodeId: string) {
     return this.projectService.isGroupNode(nodeId);
   }
 
-  private save(newLesson: any): void {
+  private save(): void {
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
-      this.projectService.refreshProject();
-      this.saveEvent('activityCreated', {
-        nodeId: newLesson.id,
-        title: this.projectService.getNodePositionAndTitle(newLesson.id)
-      });
-      this.goToProjectView();
+      setTimeout(() => {
+        this.projectService.refreshProject();
+        this.goToProjectView();
+      }, 500);
     });
-  }
-
-  private saveEvent(eventName: string, data = {}): void {
-    const category = 'Authoring';
-    const context = 'AuthoringTool';
-    const nodeId = null;
-    const componentId = null;
-    const componentType = null;
-    this.dataService.saveEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      eventName,
-      data
-    );
   }
 }

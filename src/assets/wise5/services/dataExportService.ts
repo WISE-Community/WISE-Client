@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { ConfigService } from './configService';
 import { TeacherDataService } from './teacherDataService';
 import { compressToEncodedURIComponent } from 'lz-string';
+import { Observable, tap } from 'rxjs';
 
 @Injectable()
 export class DataExportService {
   constructor(
-    private ConfigService: ConfigService,
+    private configService: ConfigService,
     private http: HttpClient,
-    private TeacherDataService: TeacherDataService
+    private dataService: TeacherDataService
   ) {}
 
   retrieveStudentData(
@@ -17,7 +18,7 @@ export class DataExportService {
     includeStudentWork: boolean,
     includeEvents: boolean,
     includeAnnotations: boolean
-  ): Promise<any> {
+  ): Observable<any> {
     let params = this.createHttpParams(includeStudentWork, includeEvents, includeAnnotations);
     if (selectedNodes.length > 0) {
       params = params.set(
@@ -25,32 +26,25 @@ export class DataExportService {
         compressToEncodedURIComponent(JSON.stringify(selectedNodes))
       );
     }
-    return this.TeacherDataService.retrieveStudentData(params);
+    return this.dataService.retrieveStudentData(params);
   }
 
   retrieveEventsExport(
     includeStudentEvents: boolean,
     includeTeacherEvents: boolean,
     includeNames: boolean
-  ): Promise<any> {
+  ): Observable<any> {
     const params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
+      .set('runId', this.configService.getRunId())
       .set('getStudentWork', 'false')
       .set('getAnnotations', 'false')
       .set('getEvents', 'false')
       .set('includeStudentEvents', includeStudentEvents + '')
       .set('includeTeacherEvents', includeTeacherEvents + '')
       .set('includeNames', includeNames + '');
-    const options = {
+    return this.http.get(this.configService.getConfigParam('runDataExportURL') + '/events', {
       params: params
-    };
-    const url = this.ConfigService.getConfigParam('runDataExportURL') + '/events';
-    return this.http
-      .get(url, options)
-      .toPromise()
-      .then(({ events }: any): any[] => {
-        return events;
-      });
+    });
   }
 
   getStudentEvents(events: any[]): any[] {
@@ -71,32 +65,22 @@ export class DataExportService {
 
   isTeacherEvent(event: any): boolean {
     return (
-      this.ConfigService.isTeacherWorkgroupId(event.workgroupId) ||
-      this.ConfigService.isTeacherUserId(event.userId)
+      this.configService.isTeacherWorkgroupId(event.workgroupId) ||
+      this.configService.isTeacherUserId(event.userId)
     );
   }
 
-  retrieveNotebookExport(exportType: string): Promise<any> {
+  retrieveNotebookExport(exportType: string): Observable<any> {
     const options = { params: new HttpParams().set('exportType', exportType) };
-    return this.http
-      .get(this.ConfigService.getConfigParam('notebookURL'), options)
-      .toPromise()
-      .then((data: any) => {
-        return data;
-      });
+    return this.http.get(this.configService.getConfigParam('notebookURL'), options);
   }
 
-  retrieveNotificationsExport(): Promise<any> {
-    return this.http
-      .get(this.getExportURL(this.ConfigService.getRunId(), 'notifications'))
-      .toPromise()
-      .then((data: any) => {
-        return data;
-      });
+  retrieveNotificationsExport(): Observable<any> {
+    return this.http.get(this.getExportURL(this.configService.getRunId(), 'notifications'));
   }
 
   retrieveStudentAssetsExport(): Promise<any> {
-    window.location.href = this.getExportURL(this.ConfigService.getRunId(), 'studentAssets');
+    window.location.href = this.getExportURL(this.configService.getRunId(), 'studentAssets');
     return new Promise((resolve) => {
       resolve([]);
     });
@@ -108,13 +92,13 @@ export class DataExportService {
     includeAnnotations: boolean
   ): HttpParams {
     return new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
+      .set('runId', this.configService.getRunId())
       .set('getStudentWork', includeStudentWork)
       .set('getEvents', includeEvents)
       .set('getAnnotations', includeAnnotations);
   }
 
   getExportURL(runId: number, exportType: string): string {
-    return this.ConfigService.getConfigParam('runDataExportURL') + `/${runId}/${exportType}`;
+    return this.configService.getConfigParam('runDataExportURL') + `/${runId}/${exportType}`;
   }
 }

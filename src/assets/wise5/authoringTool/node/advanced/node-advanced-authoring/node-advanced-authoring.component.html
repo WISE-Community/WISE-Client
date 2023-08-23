@@ -2,7 +2,7 @@
   <button
     mat-raised-button
     color="primary"
-    (click)="goBack()"
+    [routerLink]="['/teacher/edit/unit', projectId, 'node', nodeId]"
     matTooltip="Back"
     matTooltipPosition="above"
     i18n-matTooltip
@@ -13,7 +13,7 @@
     *ngIf="!isGroupNode"
     mat-raised-button
     color="primary"
-    (click)="showGeneralAdvancedView()"
+    routerLink="general"
     matTooltip="General Advanced"
     matTooltipPosition="above"
     i18n-matTooltip
@@ -24,7 +24,7 @@
     *ngIf="!isGroupNode"
     mat-raised-button
     color="primary"
-    (click)="showRubricView()"
+    routerLink="rubric"
     matTooltip="Edit Step Rubric"
     matTooltipPosition="above"
     i18n-matTooltip
@@ -35,7 +35,7 @@
     *ngIf="!isGroupNode"
     mat-raised-button
     color="primary"
-    (click)="showEditTransitionsView()"
+    routerLink="path"
     matTooltip="Edit Transitions"
     matTooltipPosition="above"
     i18n-matTooltip
@@ -46,7 +46,7 @@
     *ngIf="!isGroupNode"
     mat-raised-button
     color="primary"
-    (click)="showEditConstraintsView()"
+    routerLink="constraint"
     matTooltip="Edit Constraints"
     matTooltipPosition="above"
     i18n-matTooltip
@@ -57,7 +57,7 @@
     *ngIf="!isGroupNode"
     mat-raised-button
     color="primary"
-    (click)="showCreateBranchView()"
+    routerLink="branch"
     matTooltip="Create Branch"
     matTooltipPosition="above"
     i18n-matTooltip
@@ -67,7 +67,7 @@
   <button
     mat-raised-button
     color="primary"
-    (click)="showJSONView()"
+    routerLink="json"
     matTooltip="Show JSON"
     matTooltipPosition="above"
     i18n-matTooltip
@@ -75,21 +75,4 @@
     <mat-icon>code</mat-icon>
   </button>
 </div>
-<node-advanced-general-authoring
-  *ngIf="$state.current.name === 'root.at.project.node.advanced.general'"
-></node-advanced-general-authoring>
-<edit-node-rubric
-  *ngIf="$state.current.name === 'root.at.project.node.advanced.rubric'"
-></edit-node-rubric>
-<node-advanced-path-authoring
-  *ngIf="$state.current.name === 'root.at.project.node.advanced.path'"
-></node-advanced-path-authoring>
-<node-advanced-constraint-authoring
-  *ngIf="$state.current.name === 'root.at.project.node.advanced.constraint'"
-></node-advanced-constraint-authoring>
-<node-advanced-branch-authoring
-  *ngIf="$state.current.name === 'root.at.project.node.advanced.branch'"
-></node-advanced-branch-authoring>
-<node-advanced-json-authoring
-  *ngIf="$state.current.name === 'root.at.project.node.advanced.json'"
-></node-advanced-json-authoring>
+<router-outlet></router-outlet>

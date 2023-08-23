@@ -4,7 +4,7 @@ import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 export class NotificationDataExportStrategy extends AbstractDataExportStrategy {
   export() {
     this.controller.showDownloadingExportMessage();
-    this.dataExportService.retrieveNotificationsExport().then((result) => {
+    this.dataExportService.retrieveNotificationsExport().subscribe((result) => {
       const notifications = result;
       const columnNames = [
         'ID',

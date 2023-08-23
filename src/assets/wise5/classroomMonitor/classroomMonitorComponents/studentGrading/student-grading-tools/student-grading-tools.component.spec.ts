@@ -9,6 +9,7 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { StudentGradingToolsComponent } from './student-grading-tools.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('StudentGradingToolsComponent', () => {
   let component: StudentGradingToolsComponent;
@@ -23,7 +24,8 @@ describe('StudentGradingToolsComponent', () => {
         MatDividerModule,
         MatFormFieldModule,
         MatIconModule,
-        MatSelectModule
+        MatSelectModule,
+        RouterTestingModule
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

@@ -30,7 +30,7 @@ export class NotebookGradingComponent implements OnInit {
   constructor(
     private configService: ConfigService,
     private notebookService: NotebookService,
-    private teacherDataService: TeacherDataService
+    private dataService: TeacherDataService
   ) {}
 
   ngOnInit(): void {
@@ -55,23 +55,6 @@ export class NotebookGradingComponent implements OnInit {
     }
     this.setWorkgroupsById();
     this.sortWorkgroups();
-
-    const context = 'ClassroomMonitor',
-      nodeId = null,
-      componentId = null,
-      componentType = null,
-      category = 'Navigation',
-      event = 'notebookViewDisplayed',
-      data = {};
-    this.teacherDataService.saveEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      data
-    );
   }
 
   sortWorkgroups(): void {
@@ -229,7 +212,7 @@ export class NotebookGradingComponent implements OnInit {
   }
 
   isWorkgroupShown(workgroup: number): boolean {
-    return this.teacherDataService.isWorkgroupShown(workgroup);
+    return this.dataService.isWorkgroupShown(workgroup);
   }
 
   setSort(value: string): void {

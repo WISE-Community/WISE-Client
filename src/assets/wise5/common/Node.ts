@@ -5,6 +5,7 @@ import { generateRandomKey } from './string/string';
 
 export class Node {
   components: any[] = [];
+  constraints: any[] = [];
   icons: any;
   icon: any;
   id: string;
@@ -101,7 +102,7 @@ export class Node {
     this.components.splice(insertAfterComponentIndex + 1, 0, ...components);
   }
 
-  copyComponents(componentIds: string[]): any[] {
+  copyComponents(componentIds: string[], insertAfterComponentId: string = null): any[] {
     const newComponents = [];
     const newComponentIds = [];
     for (const componentId of componentIds) {
@@ -109,6 +110,7 @@ export class Node {
       newComponents.push(newComponent);
       newComponentIds.push(newComponent.id);
     }
+    this.insertComponents(newComponents, insertAfterComponentId);
     return newComponents;
   }
 
@@ -131,7 +133,7 @@ export class Node {
     return this.components.some((component) => component.id === componentId);
   }
 
-  insertComponents(components: any[], insertAfterComponentId: string): void {
+  private insertComponents(components: any[], insertAfterComponentId: string): void {
     const insertPosition = this.getInitialInsertPosition(insertAfterComponentId);
     this.components.splice(insertPosition, 0, ...components);
   }

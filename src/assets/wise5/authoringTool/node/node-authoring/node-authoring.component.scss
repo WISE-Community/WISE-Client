@@ -1,19 +1,25 @@
+@import
+  'style/abstracts/variables',
+  'style/abstracts/functions';
+  
 .top-button-bar {
-  margin: 0px 10px;
+  padding: 16px 8px 4px;
   background-color: white;
   position: sticky;
   top: 26px;
   z-index: 2;
 }
 
-.top-button {
-  margin: 6px 8px;
+.step-title {
+  width: 320px;
+
+  @media (min-width: breakpoint('md.min')) {
+    width: 480px;
+  }
 }
 
-.step-title-bar {
-  margin-top: 20px;
-  margin-left: 16px;
-  margin-right: 16px;
+.node-buttons {
+  margin: 8px 0;
 }
 
 .insert-component-message {
@@ -28,23 +34,6 @@
   font-weight: bold;
 }
 
-.step-title-input-div {
-  width: 50%;
-}
-
-.step-title-input {
-  width: 100%;
-}
-
-.empty-div-after-step-title {
-  flex-grow: 1;
-}
-
-.expand-collapse-buttons-div {
-  flex-shrink: 0;
-  margin-top: 10px;
-}
-
 .no-components-message {
   margin-left: 45px;
   margin-top: 45px;
@@ -52,8 +41,14 @@
   font-weight: bold;
 }
 
+.components-header {
+  margin-top: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
 .component {
-  margin: 16px;
+  margin: 4px 16px 16px;
   border: 2px solid #dddddd;
   border-radius: 6px;
   position: relative;
@@ -61,7 +56,7 @@
 
 .component-header {
   height: 48px;
-  padding: 0px 20px;
+  padding: 0px 20px 0px 10px;
   cursor: pointer;
 }
 
@@ -109,4 +104,14 @@
   width: 100%;
   text-align: center;
   z-index: 1;
+}
+
+.drag-handle {
+  cursor: move;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+.cdk-drag-placeholder {
+  opacity: .4;
 }

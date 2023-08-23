@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { generateRandomKey } from '../../../common/string/string';
@@ -8,6 +8,8 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MatchService } from '../matchService';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
 
 @Component({
   selector: 'match-authoring',
@@ -20,6 +22,7 @@ export class MatchAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected configService: ConfigService,
+    private dialog: MatDialog,
     private matchService: MatchService,
     protected nodeService: NodeService,
     protected projectAssetService: ProjectAssetService,
@@ -272,13 +275,13 @@ export class MatchAuthoring extends AbstractComponentAuthoring {
   }
 
   openAssetChooserHelper(target: string, targetObject: any): void {
-    this.openAssetChooser({
-      isPopup: true,
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      target: target,
-      targetObject: targetObject
-    });
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open(target, targetObject)
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 
   assetSelected({ nodeId, componentId, assetItem, target, targetObject }): void {

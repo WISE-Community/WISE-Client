@@ -9,8 +9,10 @@ import { TeacherWebSocketService } from '../../../services/teacherWebSocketServi
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 let component: EditNodeRubricComponent;
 let fixture: ComponentFixture<EditNodeRubricComponent>;
@@ -25,15 +27,21 @@ describe('EditNodeRubricComponent', () => {
         HttpClientTestingModule,
         MatDialogModule,
         MatIconModule,
-        StudentTeacherCommonServicesModule,
-        UpgradeModule
+        RouterTestingModule,
+        StudentTeacherCommonServicesModule
       ],
       providers: [
         ClassroomStatusService,
         ConfigService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
+        TeacherWebSocketService,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            parent: { params: of({ nodeId: 'node1' }) }
+          }
+        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

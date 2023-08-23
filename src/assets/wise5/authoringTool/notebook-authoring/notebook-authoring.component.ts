@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { insertWiseLinks, replaceWiseLinks } from '../../common/wise-link/wise-link';
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { Subject, debounceTime } from 'rxjs';
 
 @Component({
@@ -11,20 +10,19 @@ import { Subject, debounceTime } from 'rxjs';
   styleUrls: ['./notebook-authoring.component.scss']
 })
 export class NotebookAuthoringComponent {
-  notebookChanged: Subject<void> = new Subject<void>();
-  projectId: number;
-  project: any;
-  reportIdToAuthoringNote: any;
+  protected notebookChanged: Subject<void> = new Subject<void>();
+  protected projectId: number;
+  protected project: any;
+  protected reportIdToAuthoringNote: any;
 
   constructor(
     private configService: ConfigService,
-    private projectService: TeacherProjectService,
-    private upgrade: UpgradeModule
+    private projectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
-    this.projectId = this.upgrade.$injector.get('$stateParams').projectId;
     this.project = this.projectService.project;
+    this.projectId = this.configService.getProjectId();
     this.reportIdToAuthoringNote = {};
 
     if (this.project.notebook == null) {

@@ -13,7 +13,8 @@
       fxHide.gt-md
       aria-label="Unit Info"
       i18n-aria-label
-      [matTooltip]="runInfo"
+      matTooltip="Unit Info"
+      i18n-matTooltip
     >
       <mat-icon>info</mat-icon>
     </button>
@@ -58,7 +59,6 @@
       (click)="$event.stopPropagation()"
       [newNotifications]="newNotifications"
       [withPause]="true"
-      [state]="state"
     >
     </notifications-menu>
   </mat-menu>

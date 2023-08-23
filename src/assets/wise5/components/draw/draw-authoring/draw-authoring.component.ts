@@ -1,6 +1,5 @@
 'use strict';
 
-import * as angular from 'angular';
 import { Component } from '@angular/core';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
@@ -8,7 +7,9 @@ import { NodeService } from '../../../services/nodeService';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
 
 @Component({
   selector: 'draw-authoring',
@@ -46,6 +47,7 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
+    private dialog: MatDialog,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
@@ -106,14 +108,14 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
 
   updateStarterDrawDataWidth(): void {
     if (this.componentContent.starterDrawData != null) {
-      const starterDrawDataJSONObject = angular.fromJson(this.componentContent.starterDrawData);
+      const starterDrawDataJSONObject = JSON.parse(this.componentContent.starterDrawData);
       if (starterDrawDataJSONObject != null && starterDrawDataJSONObject.dt != null) {
         if (this.width == null) {
           starterDrawDataJSONObject.dt.width = this.defaultWidth;
         } else {
           starterDrawDataJSONObject.dt.width = this.width;
         }
-        this.componentContent.starterDrawData = angular.toJson(starterDrawDataJSONObject);
+        this.componentContent.starterDrawData = JSON.stringify(starterDrawDataJSONObject);
       }
     }
   }
@@ -126,14 +128,14 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
 
   updateStarterDrawDataHeight(): void {
     if (this.componentContent.starterDrawData != null) {
-      const starterDrawDataJSONObject = angular.fromJson(this.componentContent.starterDrawData);
+      const starterDrawDataJSONObject = JSON.parse(this.componentContent.starterDrawData);
       if (starterDrawDataJSONObject != null && starterDrawDataJSONObject.dt != null) {
         if (this.height == null) {
           starterDrawDataJSONObject.dt.height = this.defaultHeight;
         } else {
           starterDrawDataJSONObject.dt.height = this.height;
         }
-        this.componentContent.starterDrawData = angular.toJson(starterDrawDataJSONObject);
+        this.componentContent.starterDrawData = JSON.stringify(starterDrawDataJSONObject);
       }
     }
   }
@@ -143,14 +145,13 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
   }
 
   chooseStampImage(stampIndex: number): void {
-    const params = {
-      isPopup: true,
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      target: 'stamp',
-      targetObject: stampIndex
-    };
-    this.openAssetChooser(params);
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open('stamp', stampIndex)
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 
   assetSelected({ nodeId, componentId, assetItem, target, targetObject }): void {
@@ -174,7 +175,7 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
   updateStarterDrawDataBackground(): void {
     const starterDrawData = this.componentContent.starterDrawData;
     if (starterDrawData != null) {
-      const starterDrawDataJSON = angular.fromJson(starterDrawData);
+      const starterDrawDataJSON = JSON.parse(starterDrawData);
       if (
         starterDrawDataJSON != null &&
         starterDrawDataJSON.canvas != null &&
@@ -185,7 +186,7 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
         const background = this.componentContent.background;
         const newSrc = projectAssetsDirectoryPath + '/' + background;
         starterDrawDataJSON.canvas.backgroundImage.src = newSrc;
-        this.componentContent.starterDrawData = angular.toJson(starterDrawDataJSON);
+        this.componentContent.starterDrawData = JSON.stringify(starterDrawDataJSON);
       }
     }
   }
@@ -269,5 +270,15 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
       stampStrings.push(stampObject.image);
     }
     return stampStrings;
+  }
+
+  chooseBackground(): void {
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open('background')
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 }

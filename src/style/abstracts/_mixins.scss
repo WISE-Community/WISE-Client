@@ -160,6 +160,12 @@
   }
 }
 
+.has-icon-badge {
+  .mat-badge-content {
+    font-family: 'Material Icons';
+  }
+}
+
 // Define a custom mixin that takes in the current material theme and colors
 @mixin theme-setup($theme, $colors) {
   a {

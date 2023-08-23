@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
@@ -16,6 +15,7 @@ import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { AnimationAuthoring } from './animation-authoring.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export class MockConfigService {}
 
@@ -29,12 +29,12 @@ describe('AnimationAuthoring', () => {
         BrowserModule,
         FormsModule,
         HttpClientTestingModule,
+        MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
         MatRadioModule,
         ReactiveFormsModule,
-        UpgradeModule,
         StudentTeacherCommonServicesModule
       ],
       declarations: [AnimationAuthoring, EditComponentPrompt],

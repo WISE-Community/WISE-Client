@@ -1,11 +1,11 @@
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import * as angular from 'angular';
-import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { NotificationService } from '../../services/notificationService';
 import { Component } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { isValidJSONString } from '../../common/string/string';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../project-asset-authoring/asset-chooser';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'advanced-project-authoring',
@@ -13,17 +13,16 @@ import { isValidJSONString } from '../../common/string/string';
   styleUrls: ['./advanced-project-authoring.component.scss']
 })
 export class AdvancedProjectAuthoringComponent {
-  isJSONDisplayed: boolean;
-  projectId: number;
-  projectJSONString: string;
-  projectScriptFilename: string;
-  rubricDisplayed: boolean;
+  protected jsonDisplayed: boolean;
+  private projectId: number;
+  protected projectJSONString: string;
+  protected projectScriptFilename: string;
+  protected rubricDisplayed: boolean;
 
   constructor(
-    private upgrade: UpgradeModule,
+    private dialog: MatDialog,
     private configService: ConfigService,
     private notificationService: NotificationService,
-    private projectAssetService: ProjectAssetService,
     private projectService: TeacherProjectService
   ) {
     this.projectId = this.configService.getProjectId();
@@ -34,40 +33,40 @@ export class AdvancedProjectAuthoringComponent {
   }
 
   protected toggleRubric(): void {
-    this.isJSONDisplayed = false;
+    this.jsonDisplayed = false;
     this.rubricDisplayed = !this.rubricDisplayed;
   }
 
-  toggleJSON() {
+  protected toggleJSON(): void {
     this.rubricDisplayed = false;
-    if (this.isJSONDisplayed) {
+    if (this.jsonDisplayed) {
       this.hideJSON();
     } else {
       this.showJSON();
     }
   }
 
-  hideJSON() {
+  private hideJSON(): void {
     if (isValidJSONString(this.projectJSONString)) {
-      this.isJSONDisplayed = false;
+      this.jsonDisplayed = false;
       this.notificationService.hideJSONValidMessage();
     } else if (
       confirm(
         $localize`The JSON is invalid. Invalid JSON will not be saved.\nClick "OK" to revert back to the last valid JSON.\nClick "Cancel" to keep the invalid JSON open so you can fix it.`
       )
     ) {
-      this.isJSONDisplayed = false;
+      this.jsonDisplayed = false;
       this.notificationService.hideJSONValidMessage();
     }
   }
 
-  showJSON() {
-    this.isJSONDisplayed = true;
-    this.projectJSONString = angular.toJson(this.projectService.project, 4);
+  private showJSON(): void {
+    this.jsonDisplayed = true;
+    this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
     this.notificationService.showJSONValidMessage();
   }
 
-  autoSaveProjectJSONString() {
+  protected autoSaveProjectJSONString(): void {
     try {
       this.saveProjectJSON(this.projectJSONString);
       this.notificationService.showJSONValidMessage();
@@ -76,44 +75,43 @@ export class AdvancedProjectAuthoringComponent {
     }
   }
 
-  saveProjectJSON(projectJSONString) {
-    const project = angular.fromJson(projectJSONString);
+  private saveProjectJSON(projectJSONString: string): void {
+    const project = JSON.parse(projectJSONString);
     this.projectService.setProject(project);
     this.setProjectScriptFilename();
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject();
   }
 
-  setProjectScriptFilename() {
+  private setProjectScriptFilename(): void {
     this.projectScriptFilename = this.projectService.getProjectScriptFilename();
   }
 
-  chooseProjectScriptFile() {
-    const params = {
-      isPopup: true,
-      projectId: this.projectId,
-      target: 'scriptFilename'
-    };
-    this.projectAssetService.openAssetChooser(params).then((data: any) => {
-      this.assetSelected(data);
-    });
+  protected chooseProjectScriptFile(): void {
+    new AssetChooser(this.dialog, null, null, this.projectId)
+      .open('scriptFilename')
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        this.assetSelected(data);
+      });
   }
 
-  assetSelected({ assetItem }) {
+  private assetSelected({ assetItem }): void {
     this.projectScriptFilename = assetItem.fileName;
     this.projectScriptFilenameChanged();
   }
 
-  downloadProject() {
+  protected downloadProject(): void {
     window.location.href = `${this.configService.getWISEBaseURL()}/api/project/export/${
       this.projectId
     }`;
   }
 
-  openProjectURLInNewTab() {
+  protected openProjectURLInNewTab(): void {
     window.open(this.getProjectURL(), '_blank');
   }
 
-  copyProjectURL() {
+  protected copyProjectURL(): void {
     const textArea = document.createElement('textarea');
     textArea.value = this.getProjectURL();
     document.body.appendChild(textArea);
@@ -122,19 +120,15 @@ export class AdvancedProjectAuthoringComponent {
     document.body.removeChild(textArea);
   }
 
-  getProjectURL() {
+  protected getProjectURL(): string {
     return window.location.origin + this.configService.getConfigParam('projectURL');
   }
 
-  projectScriptFilenameChanged() {
+  protected projectScriptFilenameChanged(): void {
     this.projectService.setProjectScriptFilename(this.projectScriptFilename);
     if (this.showJSON) {
-      this.projectJSONString = angular.toJson(this.projectService.project, 4);
+      this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
     }
     this.projectService.saveProject();
-  }
-
-  goBack() {
-    this.upgrade.$injector.get('$state').go('root.at.project');
   }
 }

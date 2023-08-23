@@ -6,7 +6,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
@@ -18,7 +17,6 @@ import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { DrawService } from '../drawService';
 import { DrawAuthoring } from './draw-authoring.component';
 
@@ -31,8 +29,7 @@ import { DrawAuthoring } from './draw-authoring.component';
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule,
-    UpgradeModule
+    MatInputModule
   ],
   providers: [
     AnnotationService,
@@ -45,8 +42,7 @@ import { DrawAuthoring } from './draw-authoring.component';
     StudentAssetService,
     StudentDataService,
     TagService,
-    TeacherProjectService,
-    UtilService
+    TeacherProjectService
   ],
   exports: [DrawAuthoring, EditComponentPrompt]
 })

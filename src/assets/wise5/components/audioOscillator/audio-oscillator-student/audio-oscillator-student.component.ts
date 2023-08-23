@@ -7,10 +7,10 @@ import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { AudioOscillatorService } from '../audioOscillatorService';
+import { hasConnectedComponent } from '../../../common/ComponentContent';
 
 @Component({
   selector: 'audio-oscillator-student',
@@ -71,8 +71,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
+    protected StudentDataService: StudentDataService
   ) {
     super(
       AnnotationService,
@@ -97,7 +96,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
     this.setButtonTextToPlay();
     this.setParametersFromComponentContent();
 
-    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
+    if (hasConnectedComponent(this.componentContent, 'showWork')) {
       this.handleConnectedComponents();
     } else if (
       this.AudioOscillatorService.componentStateHasStudentWork(

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { temporarilyHighlightElement } from '../../../../common/dom/dom';
 import { ConstraintsAuthoringComponent } from '../../../constraint/constraints-authoring/constraints-authoring.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'node-advanced-constraint-authoring',
@@ -10,19 +10,18 @@ import { ConstraintsAuthoringComponent } from '../../../constraint/constraints-a
   styleUrls: ['node-advanced-constraint-authoring.component.scss']
 })
 export class NodeAdvancedConstraintAuthoringComponent extends ConstraintsAuthoringComponent {
-  constructor(
-    private dataService: TeacherDataService,
-    protected projectService: TeacherProjectService
-  ) {
+  constructor(protected projectService: TeacherProjectService, private route: ActivatedRoute) {
     super(projectService);
   }
 
   ngOnInit() {
-    const node = this.projectService.getNodeById(this.dataService.getCurrentNodeId());
-    if (node.constraints == null) {
-      node.constraints = [];
-    }
-    this.content = node;
+    this.route.parent.params.subscribe((params) => {
+      const node = this.projectService.getNodeById(params.nodeId);
+      if (node.constraints == null) {
+        node.constraints = [];
+      }
+      this.content = node;
+    });
   }
 
   protected addConstraintAndScrollToBottom(): void {

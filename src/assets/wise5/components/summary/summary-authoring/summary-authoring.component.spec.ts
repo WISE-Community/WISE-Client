@@ -10,7 +10,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
@@ -42,7 +41,6 @@ describe('SummaryAuthoringComponent', () => {
         MatRadioModule,
         MatSelectModule,
         ReactiveFormsModule,
-        UpgradeModule,
         StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, SummaryAuthoring],

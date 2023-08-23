@@ -63,7 +63,6 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
     this.componentId = this.milestone.componentId;
     this.retrieveStudentData();
     this.subscribeToEvents();
-    this.saveNodeGradingViewDisplayedEvent();
     this.getNodePositions();
   }
 

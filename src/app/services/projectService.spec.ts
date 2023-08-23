@@ -150,7 +150,7 @@ function shouldNotReplaceAssetPathsInHtmlComponentContent() {
 function shouldRetrieveProjectWhenConfigProjectURLIsValid() {
   it('should retrieve project when Config.projectURL is valid', () => {
     spyOn(configService, 'getConfigParam').withArgs('projectURL').and.returnValue(projectURL);
-    service.retrieveProject().then((response) => {
+    service.retrieveProject().subscribe((response) => {
       expect(response).toEqual(scootersProjectJSON);
     });
     http.expectOne(projectURL);

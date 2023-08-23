@@ -2,20 +2,22 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Directive } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Directive()
 export abstract class ConfigureStructureComponent {
-  groupsPath: string;
-  nodesPath: string;
-  $state: any;
-  structure: any = {};
-  structureDir: string = 'assets/wise5/authoringTool/structure';
+  protected groupsPath: string;
+  protected nodesPath: string;
+  private structure: any = {};
+  private structureDir: string = 'assets/wise5/authoringTool/structure';
 
-  constructor(private http: HttpClient, private upgrade: UpgradeModule) {}
+  constructor(
+    private http: HttpClient,
+    protected route: ActivatedRoute,
+    protected router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.$state = this.upgrade.$injector.get('$state');
     this.injectGroupAndNodes();
   }
 
@@ -45,14 +47,9 @@ export abstract class ConfigureStructureComponent {
   }
 
   protected chooseLocation(): void {
-    this.$state.go('root.at.project.structure.location', { structure: this.structure });
-  }
-
-  protected goToChooseStructure(): void {
-    this.$state.go('root.at.project.structure.choose');
-  }
-
-  protected cancel() {
-    this.$state.go('root.at.project');
+    this.router.navigate(['../location'], {
+      relativeTo: this.route,
+      state: { structure: this.structure }
+    });
   }
 }

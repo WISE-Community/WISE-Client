@@ -4,6 +4,7 @@ import { DataExportService } from '../../../services/dataExportService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ClassroomMonitorTestingModule } from '../../classroom-monitor-testing.module';
 import { DataExportComponent } from './data-export.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 let component: DataExportComponent;
 let fixture: ComponentFixture<DataExportComponent>;
@@ -30,7 +31,7 @@ describe('DataExportComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DataExportComponent],
-      imports: [ClassroomMonitorTestingModule],
+      imports: [ClassroomMonitorTestingModule, RouterTestingModule],
       providers: [DataExportService]
     }).compileComponents();
   });

@@ -6,6 +6,8 @@ import { KiCycleUsingOerComponent } from './ki-cycle-using-oer/ki-cycle-using-oe
 import { PeerReviewAndRevisionComponent } from './peer-review-and-revision/peer-review-and-revision.component';
 import { ChooseStructureComponent } from './choose-structure/choose-structure.component';
 import { ChooseStructureLocationComponent } from './choose-structure-location/choose-structure-location.component';
+import { RouterModule } from '@angular/router';
+import { StructureAuthoringRoutingModule } from './structure-authoring-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,14 @@ import { ChooseStructureLocationComponent } from './choose-structure-location/ch
     PeerReviewAndRevisionComponent,
     SelfDirectedInvestigationComponent
   ],
-  imports: [StudentTeacherCommonModule]
+  imports: [RouterModule, StudentTeacherCommonModule, StructureAuthoringRoutingModule],
+  exports: [
+    ChooseStructureComponent,
+    ChooseStructureLocationComponent,
+    JigsawComponent,
+    KiCycleUsingOerComponent,
+    PeerReviewAndRevisionComponent,
+    SelfDirectedInvestigationComponent
+  ]
 })
 export class StructureAuthoringModule {}

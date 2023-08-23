@@ -1,7 +1,7 @@
+import '../assets/wise5/lib/jquery/jquery-global';
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -38,16 +38,19 @@ import { StudentTeacherCommonServicesModule } from './student-teacher-common-ser
 import { MathModule } from './math/math.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MainMenuComponent } from '../assets/wise5/common/main-menu/main-menu.component';
+import { SideMenuComponent } from '../assets/wise5/common/side-menu/side-menu.component';
 
 @NgModule({
   declarations: [
     DialogResponseComponent,
     DialogResponsesComponent,
+    MainMenuComponent,
     NodeIconComponent,
-    NodeStatusIcon
+    NodeStatusIcon,
+    SideMenuComponent
   ],
   imports: [
-    UpgradeModule,
     CommonModule,
     DragDropModule,
     EditNotebookItemDialogModule,
@@ -91,6 +94,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     EditorModule,
     FlexLayoutModule,
     FormsModule,
+    MainMenuComponent,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -119,7 +123,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     NodeIconComponent,
     NodeStatusIcon,
     NotebookModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SideMenuComponent
   ]
 })
 export class StudentTeacherCommonModule {}

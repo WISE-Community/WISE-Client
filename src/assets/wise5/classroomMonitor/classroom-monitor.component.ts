@@ -1,8 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { Subscription } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 import { Notification } from '../../../app/domain/notification';
 import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
 import { ConfigService } from '../services/configService';
@@ -12,6 +11,7 @@ import { NotificationService } from '../services/notificationService';
 import { SessionService } from '../services/sessionService';
 import { TeacherDataService } from '../services/teacherDataService';
 import { TeacherProjectService } from '../services/teacherProjectService';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'classroom-monitor',
@@ -19,7 +19,6 @@ import { TeacherProjectService } from '../services/teacherProjectService';
   templateUrl: './classroom-monitor.component.html'
 })
 export class ClassroomMonitorComponent implements OnInit {
-  currentViewName: string;
   logoPath: string;
   menuOpen: boolean;
   notebookConfig: any;
@@ -30,14 +29,11 @@ export class ClassroomMonitorComponent implements OnInit {
   reportFullscreen: boolean;
   runCode: string;
   runId: number;
-  showGradeByStepTools: boolean;
-  showGradeByTeamTools: boolean;
   showPeriodSelect: boolean;
   subscriptions: Subscription = new Subscription();
   title: string = $localize`Classroom Monitor`;
   views: any[];
   workgroupId: number;
-  $state: any;
 
   constructor(
     private configService: ConfigService,
@@ -47,12 +43,10 @@ export class ClassroomMonitorComponent implements OnInit {
     private notebookService: NotebookService,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService,
+    private router: Router,
     private sessionService: SessionService,
-    private snackBar: MatSnackBar,
-    private upgrade: UpgradeModule
-  ) {
-    this.$state = this.upgrade.$injector.get('$state');
-  }
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.logoPath = this.projectService.getThemePath() + '/images/WISE-logo-ffffff.svg';
@@ -66,7 +60,7 @@ export class ClassroomMonitorComponent implements OnInit {
     this.subscribeToServerConnectionStatus();
     this.subscribeToSessionWarning();
     this.subscribeToNotebookFullScreen();
-    this.subscribeToTransitions();
+    this.subscribeToRouterEvents();
     this.processUI();
   }
 
@@ -85,14 +79,14 @@ export class ClassroomMonitorComponent implements OnInit {
   private initializeViews(): void {
     this.views = [
       {
-        route: 'root.cm.milestones',
+        route: ['milestones'],
         name: $localize`Milestones`,
         icon: 'flag',
         type: 'primary',
         active: this.projectService.getAchievements().isEnabled
       },
       {
-        route: 'root.cm.unit',
+        route: ['.'],
         name: $localize`Grade by Step`,
         icon: 'view_list',
         type: 'primary',
@@ -105,28 +99,28 @@ export class ClassroomMonitorComponent implements OnInit {
         active: true
       },
       {
-        route: 'root.cm.teamLanding',
+        route: ['team'],
         name: $localize`Grade by Team`,
         icon: 'people',
         type: 'primary',
         active: true
       },
       {
-        route: 'root.cm.manageStudents',
+        route: ['manage-students'],
         name: $localize`Manage Students`,
         icon: 'face',
         type: 'primary',
         active: true
       },
       {
-        route: 'root.cm.notebooks',
+        route: ['notebook'],
         name: $localize`Student Notebooks`,
         icon: 'chrome_reader_mode',
         type: 'primary',
         active: this.notebookService.isNotebookEnabled()
       },
       {
-        route: 'root.cm.export',
+        route: ['export'],
         name: $localize`Data Export`,
         icon: 'file_download',
         type: 'secondary',
@@ -173,36 +167,16 @@ export class ClassroomMonitorComponent implements OnInit {
     );
   }
 
-  private subscribeToTransitions(): void {
-    this.upgrade.$injector.get('$transitions').onSuccess({}, () => {
-      this.menuOpen = false;
-      this.processUI();
-    });
+  private subscribeToRouterEvents(): void {
+    this.subscriptions.add(
+      this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+        this.processUI();
+      })
+    );
   }
 
-  /**
-   * Update UI items based on state, show or hide relevant menus and toolbars
-   * TODO: remove/rework this and put items in their own ui states?
-   */
   private processUI(): void {
-    const viewName = this.$state.$current.name;
-    const currentView = this.views.find((view: any) => view.route === viewName);
-    if (currentView) {
-      this.currentViewName = currentView.name;
-    }
-    this.showGradeByStepTools = false;
-    this.showGradeByTeamTools = false;
-    this.showPeriodSelect = true;
-    this.workgroupId = null;
-    if (viewName === 'root.cm.unit.node') {
-      let nodeId = this.$state.params.nodeId;
-      this.showGradeByStepTools = this.projectService.isApplicationNode(nodeId);
-    } else if (viewName === 'root.cm.team') {
-      this.workgroupId = parseInt(this.$state.params.workgroupId);
-      this.showGradeByTeamTools = true;
-    } else if (viewName === 'root.cm.export') {
-      this.showPeriodSelect = false;
-    }
+    this.menuOpen = false;
   }
 
   protected toggleMenu(): void {
@@ -222,17 +196,7 @@ export class ClassroomMonitorComponent implements OnInit {
   }
 
   private logOut(): void {
-    this.saveEvent('logOut', 'Navigation').then(() => {
-      this.sessionService.logOut();
-    });
-  }
-
-  private saveEvent(eventName: string, category: string): Promise<any> {
-    return this.dataService
-      .saveEvent('ClassroomMonitor', null, null, null, category, eventName, {})
-      .then((result) => {
-        return result;
-      });
+    this.sessionService.logOut();
   }
 
   @HostListener('window:beforeunload')

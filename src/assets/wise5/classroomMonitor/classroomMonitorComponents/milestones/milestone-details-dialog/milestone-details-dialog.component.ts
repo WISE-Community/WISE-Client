@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { TeacherDataService } from '../../../../services/teacherDataService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'milestone-details-dialog',
@@ -10,10 +10,10 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 })
 export class MilestoneDetailsDialogComponent implements OnInit {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public milestone: any,
+    private dataService: TeacherDataService,
     private dialogRef: MatDialogRef<MilestoneDetailsDialogComponent>,
-    private teacherDataService: TeacherDataService,
-    private upgrade: UpgradeModule
+    @Inject(MAT_DIALOG_DATA) public milestone: any,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class MilestoneDetailsDialogComponent implements OnInit {
 
   protected onVisitNodeGrading(nodeId: string): void {
     this.dialogRef.close();
-    this.upgrade.$injector.get('$state').go('root.cm.node', { nodeId: nodeId });
+    this.router.navigate(['node', nodeId]);
   }
 
   private saveMilestoneOpenedEvent(): void {
@@ -46,14 +46,6 @@ export class MilestoneDetailsDialogComponent implements OnInit {
       category = 'Navigation',
       data = { milestoneId: this.milestone.id },
       projectId = null;
-    this.teacherDataService.saveEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      data
-    );
+    this.dataService.saveEvent(context, nodeId, componentId, componentType, category, event, data);
   }
 }

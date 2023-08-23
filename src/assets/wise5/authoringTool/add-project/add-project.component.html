@@ -1,0 +1,54 @@
+<div class="view-content view-content--with-sidemenu">
+  <div class="l-constrained" fxLayout="column">
+    <div class="node-content md-whiteframe-1dp" style="position: relative">
+      <h5 i18n>Enter a title for the new unit</h5>
+      <form
+        role="form"
+        [formGroup]="addProjectFormGroup"
+        (keydown.enter)="create(); $event.preventDefault()"
+      >
+        <mat-form-field appearance="fill" class="title-field">
+          <mat-label i18n>Unit Title</mat-label>
+          <input
+            #titleField
+            autofocus
+            matInput
+            type="text"
+            id="title"
+            name="title"
+            formControlName="title"
+            (keyup)="$event.keyCode == 13 && create()"
+            required
+          />
+          <mat-error *ngIf="addProjectFormGroup.controls['title'].hasError('required')" i18n>
+            Unit Title is required
+          </mat-error>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <div fxLayout="row" fxLayoutGap="20px">
+          <button
+            mat-button
+            color="primary"
+            (click)="cancel(); $event.preventDefault()"
+            aria-label="cancel"
+            i18n-aria-label
+            i18n
+          >
+            Cancel
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="create()"
+            aria-label="create"
+            i18n-aria-label
+            [disabled]="!addProjectFormGroup.valid"
+            i18n
+          >
+            Create
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

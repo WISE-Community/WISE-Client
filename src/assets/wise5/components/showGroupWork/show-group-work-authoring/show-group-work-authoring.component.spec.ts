@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ShowGroupWorkAuthoringComponent } from './show-group-work-authoring.component';
@@ -33,7 +32,6 @@ describe('ShowGroupWorkAuthoringComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
-        UpgradeModule,
         StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, ShowGroupWorkAuthoringComponent],
