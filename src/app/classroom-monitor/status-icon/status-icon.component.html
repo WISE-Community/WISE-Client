@@ -1,11 +1,9 @@
-<button
-  mat-icon-button
-  class="status-icon"
+<mat-icon
+  class="{{ iconClass }}"
+  tabindex="0"
   [attr.aria-label]="iconLabel"
   matTooltip="{{ iconTooltip }}"
   matTooltipPosition="above"
 >
-  <mat-icon class="{{ iconClass }}">
-    {{ iconName }}
-  </mat-icon>
-</button>
+  {{ iconName }}
+</mat-icon>

@@ -5,7 +5,6 @@ import { AlertStatusCornerComponent } from '../classroom-monitor/alert-status-co
 import { ComponentNewWorkBadgeComponent } from '../classroom-monitor/component-new-work-badge/component-new-work-badge.component';
 import { ComponentSelectComponent } from '../classroom-monitor/component-select/component-select.component';
 import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress/nav-item-progress.component';
-import { StatusIconComponent } from '../classroom-monitor/status-icon/status-icon.component';
 import { StepInfoComponent } from '../classroom-monitor/step-info/step-info.component';
 import { PeerGroupGradingModule } from './peer-group-grading.module';
 import { SelectPeriodModule } from './select-period.module';
@@ -56,7 +55,6 @@ import { RouterModule } from '@angular/router';
     PauseScreensMenuComponent,
     ProjectProgressComponent,
     ShowNodeInfoDialogComponent,
-    StatusIconComponent,
     StepInfoComponent,
     StepItemComponent,
     StudentGradingComponent,
