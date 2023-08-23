@@ -25,12 +25,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RunMenuComponent } from '../run-menu/run-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ArchiveProjectService } from '../../services/archive-project.service';
-import { Project } from '../../domain/project';
 import { MatCardModule } from '@angular/material/card';
+import { MockArchiveProjectService } from '../../services/mock-archive-project.service';
 
 class TeacherScheduleStubComponent {}
 
-let archiveProjectService: ArchiveProjectService;
 let component: TeacherRunListComponent;
 let configService: ConfigService;
 const currentTime = new Date().getTime();
@@ -96,14 +95,18 @@ describe('TeacherRunListComponent', () => {
           ]),
           SelectRunsControlsModule
         ],
-        providers: [ArchiveProjectService, ConfigService, TeacherService, UserService],
+        providers: [
+          { provide: ArchiveProjectService, useClass: MockArchiveProjectService },
+          ConfigService,
+          TeacherService,
+          UserService
+        ],
         schemas: [NO_ERRORS_SCHEMA]
       });
     })
   );
 
   beforeEach(async () => {
-    archiveProjectService = TestBed.inject(ArchiveProjectService);
     configService = TestBed.inject(ConfigService);
     teacherService = TestBed.inject(TeacherService);
     userService = TestBed.inject(UserService);
@@ -118,22 +121,6 @@ describe('TeacherRunListComponent', () => {
     spyOn(configService, 'getCurrentServerTime').and.returnValue(currentTime);
     spyOn(configService, 'getContextPath').and.returnValue('');
     spyOn(userService, 'getUserId').and.returnValue(userId);
-    spyOn(archiveProjectService, 'archiveProject').and.callFake((project: Project) => {
-      project.archived = true;
-      return of(project);
-    });
-    spyOn(archiveProjectService, 'archiveProjects').and.callFake((projects: Project[]) => {
-      projects.forEach((project) => (project.archived = true));
-      return of(projects);
-    });
-    spyOn(archiveProjectService, 'unarchiveProject').and.callFake((project: Project) => {
-      project.archived = false;
-      return of(project);
-    });
-    spyOn(archiveProjectService, 'unarchiveProjects').and.callFake((projects: Project[]) => {
-      projects.forEach((project) => (project.archived = false));
-      return of(projects);
-    });
     fixture = TestBed.createComponent(TeacherRunListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -161,14 +148,6 @@ function sortByStartTimeDesc() {
   });
 }
 
-async function expectRunTitles(expectedRunTitles: string[]): Promise<void> {
-  const numRunListItems = await runListHarness.getNumRunListItems();
-  for (let i = 0; i < numRunListItems; i++) {
-    const runListItem = await runListHarness.getRunListItem(i);
-    expect(await runListItem.getRunTitle()).toEqual(expectedRunTitles[i]);
-  }
-}
-
 function archiveSelectedRuns(): void {
   describe('archiveSelectedRuns()', () => {
     it('should archive selected runs', async () => {
@@ -176,7 +155,7 @@ function archiveSelectedRuns(): void {
       await runListHarness.clickRunListItemCheckbox(1);
       await runListHarness.clickArchiveButton();
       expect(await runListHarness.getNumRunListItems()).toEqual(1);
-      expect(await (await runListHarness.getRunListItem(0)).getRunTitle()).toEqual(run1Title);
+      await expectRunTitles([run1Title]);
     });
   });
 }
@@ -319,11 +298,37 @@ function runArchiveStatusChanged(): void {
     it('when a run is archived, it should no longer be displayed in the active view', async () => {
       expect(await runListHarness.isShowingArchived()).toBeFalse();
       expect(await runListHarness.getNumRunListItems()).toEqual(3);
-      await runListHarness.clickRunListItemMenuButton(1, 'folderArchive');
+      await runListHarness.clickRunListItemMenuArchiveButton(1);
       expect(await runListHarness.isShowingArchived()).toBeFalse();
       expect(await runListHarness.getNumRunListItems()).toEqual(2);
+      await expectRunTitles([run3Title, run1Title]);
+    });
+    it('when a run is unarchived, it should no longer be displayed in the archived view', async () => {
+      getRunsSpy.and.returnValue(
+        of([
+          createRun(1, run1StartTime, null, run1Title),
+          createRun(2, run2StartTime, null, run2Title, ['archived']),
+          createRun(3, run3StartTime, null, run3Title)
+        ])
+      );
+      component.ngOnInit();
+      await runListHarness.toggleArchiveToggle();
+      expect(await runListHarness.isShowingArchived()).toBeTrue();
+      expect(await runListHarness.getNumRunListItems()).toEqual(1);
+      await expectRunTitles([run2Title]);
+      await runListHarness.clickRunListItemMenuUnarchiveButton(0);
+      expect(await runListHarness.isShowingArchived()).toBeTrue();
+      expect(await runListHarness.getNumRunListItems()).toEqual(0);
     });
   });
+}
+
+async function expectRunTitles(expectedRunTitles: string[]): Promise<void> {
+  const numRunListItems = await runListHarness.getNumRunListItems();
+  for (let i = 0; i < numRunListItems; i++) {
+    const runListItem = await runListHarness.getRunListItem(i);
+    expect(await runListItem.getRunTitle()).toEqual(expectedRunTitles[i]);
+  }
 }
 
 async function expectRunsIsSelected(expectRunsIsSelected: boolean[]): Promise<void> {

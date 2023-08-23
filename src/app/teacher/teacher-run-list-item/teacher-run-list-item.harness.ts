@@ -23,7 +23,22 @@ export class TeacherRunListItemHarness extends ComponentHarness {
     return menu.clickItem({ text: menuButtonText });
   }
 
+  async clickArchiveMenuButton(): Promise<void> {
+    return await this.clickMenuButton('folderArchive');
+  }
+
+  async clickUnarchiveMenuButton(): Promise<void> {
+    return await this.clickMenuButton('folder_offUnarchive');
+  }
+
   async getRunTitle(): Promise<string> {
     return (await this.getCard()).getTitleText();
+  }
+
+  async isArchived(): Promise<boolean> {
+    const cardWithArchivedRunClass = await this.locatorForOptional(
+      MatCardHarness.with({ selector: '.archived-run' })
+    )();
+    return cardWithArchivedRunClass != null;
   }
 }

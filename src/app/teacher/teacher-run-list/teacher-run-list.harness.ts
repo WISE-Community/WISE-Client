@@ -72,8 +72,12 @@ export class TeacherRunListHarness extends ComponentHarness {
     return numSelectedRunListItems;
   }
 
-  async clickRunListItemMenuButton(index: number, menuButtonText: string): Promise<void> {
-    return (await this.getRunListItem(index)).clickMenuButton(menuButtonText);
+  async clickRunListItemMenuArchiveButton(index: number): Promise<void> {
+    return (await this.getRunListItem(index)).clickArchiveMenuButton();
+  }
+
+  async clickRunListItemMenuUnarchiveButton(index: number): Promise<void> {
+    return (await this.getRunListItem(index)).clickUnarchiveMenuButton();
   }
 
   async clickArchiveButton(): Promise<void> {
