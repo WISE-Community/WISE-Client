@@ -4,8 +4,6 @@ import { ViewComponentRevisionsComponent } from '../../assets/wise5/classroomMon
 import { AlertStatusCornerComponent } from '../classroom-monitor/alert-status-corner/alert-status-corner.component';
 import { ComponentNewWorkBadgeComponent } from '../classroom-monitor/component-new-work-badge/component-new-work-badge.component';
 import { ComponentSelectComponent } from '../classroom-monitor/component-select/component-select.component';
-import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress/nav-item-progress.component';
-import { StatusIconComponent } from '../classroom-monitor/status-icon/status-icon.component';
 import { StepInfoComponent } from '../classroom-monitor/step-info/step-info.component';
 import { PeerGroupGradingModule } from './peer-group-grading.module';
 import { SelectPeriodModule } from './select-period.module';
@@ -37,6 +35,7 @@ import { GradingCommonModule } from './grading-common.module';
 import { ManageStudentsModule } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students.module';
 import { DataExportModule } from '../../assets/wise5/classroomMonitor/dataExport/data-export.module';
 import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponents/stepTools/step-tools.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,6 @@ import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponen
     ComponentNewWorkBadgeComponent,
     ComponentSelectComponent,
     NavItemComponent,
-    NavItemProgressComponent,
     NodeInfoComponent,
     NodeGradingViewComponent,
     NodeProgressViewComponent,
@@ -55,7 +53,6 @@ import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponen
     PauseScreensMenuComponent,
     ProjectProgressComponent,
     ShowNodeInfoDialogComponent,
-    StatusIconComponent,
     StepInfoComponent,
     StepItemComponent,
     StudentGradingComponent,
@@ -78,6 +75,7 @@ import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponen
     MilestoneModule,
     PeerGroupGradingModule,
     PreviewComponentModule,
+    RouterModule,
     SelectPeriodModule,
     StepToolsModule
   ]

@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectAuthoringComponent } from './project-authoring.component';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CopyNodesService } from '../../services/copyNodesService';
@@ -19,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ProjectAuthoringComponent', () => {
   let component: ProjectAuthoringComponent;
@@ -40,8 +40,8 @@ describe('ProjectAuthoringComponent', () => {
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
-        StudentTeacherCommonServicesModule,
-        UpgradeModule
+        RouterTestingModule,
+        StudentTeacherCommonServicesModule
       ],
       providers: [
         ClassroomStatusService,
@@ -53,17 +53,6 @@ describe('ProjectAuthoringComponent', () => {
         TeacherWebSocketService
       ]
     }).compileComponents();
-    TestBed.inject(UpgradeModule).$injector = {
-      get: () => {
-        return {
-          current: {
-            name: 'root.at.project.node'
-          },
-          go: (route: string, params: any) => {},
-          newComponents: []
-        };
-      }
-    };
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
       'node1'
     ]);

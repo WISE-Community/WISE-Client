@@ -12,7 +12,6 @@
     <app-header *ngIf="showHeaderAndFooter" class="dark-theme top-content"></app-header>
     <div fxFlex>
       <router-outlet></router-outlet>
-      <div ui-view [ngStyle]="{ height: isShowUIView ? '100%' : '0' }"></div>
     </div>
     <app-footer *ngIf="showHeaderAndFooter"></app-footer>
     <div

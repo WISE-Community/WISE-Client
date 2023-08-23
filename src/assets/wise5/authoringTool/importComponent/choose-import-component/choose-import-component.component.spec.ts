@@ -9,7 +9,6 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +17,7 @@ import { ImportComponentService } from '../../../services/importComponentService
 import { CopyNodesService } from '../../../services/copyNodesService';
 import { InsertComponentService } from '../../../services/insertComponentService';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { RouterTestingModule } from '@angular/router/testing';
 
 let component: ChooseImportComponentComponent;
 const component1 = { id: 'component1', type: 'OpenResponse' };
@@ -49,8 +49,8 @@ describe('ChooseImportComponentComponent', () => {
         MatDialogModule,
         MatFormFieldModule,
         MatSelectModule,
-        StudentTeacherCommonServicesModule,
-        UpgradeModule
+        RouterTestingModule,
+        StudentTeacherCommonServicesModule
       ],
       providers: [
         ClassroomStatusService,
@@ -129,15 +129,6 @@ function importComponents() {
 
     xit('when a component is selected, should import component', () => {
       const importProjectId = 1;
-      TestBed.inject(UpgradeModule).$injector = {
-        get: () => {
-          return {
-            go: (route: string, params: any) => {
-              expect(route).toEqual('root.at.project.node');
-            }
-          };
-        }
-      };
       const spy = spyOn(TestBed.inject(ImportComponentService), 'importComponents').and.stub();
       component.importProjectId = importProjectId;
       const node = JSON.parse(JSON.stringify(node1));

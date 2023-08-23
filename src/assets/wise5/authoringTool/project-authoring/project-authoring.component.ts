@@ -6,11 +6,11 @@ import { MoveNodesService } from '../../services/moveNodesService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import * as $ from 'jquery';
-import { Subscription } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 import { Message } from '@stomp/stompjs';
 import { RxStomp } from '@stomp/rx-stomp';
 import { temporarilyHighlightElement } from '../../common/dom/dom';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'project-authoring',
@@ -30,8 +30,8 @@ export class ProjectAuthoringComponent {
   protected items: any;
   private moveMode: boolean;
   private projectId: number;
+  protected showProjectView: boolean = true;
   private rxStomp: RxStomp;
-  protected $state: any;
   protected stepNodeSelected: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
@@ -59,13 +59,17 @@ export class ProjectAuthoringComponent {
     private moveNodesService: MoveNodesService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
-    private upgrade: UpgradeModule
-  ) {}
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => this.updateShowProjectView());
+  }
 
   ngOnInit(): void {
-    this.$state = this.upgrade.$injector.get('$state');
-    const $stateParams = this.upgrade.$injector.get('$stateParams');
-    this.projectId = $stateParams.projectId;
+    this.updateShowProjectView();
+    this.projectId = Number(this.route.snapshot.paramMap.get('unitId'));
     this.items = Object.entries(this.projectService.idToOrder)
       .map((entry: any) => {
         return { key: entry[0], order: entry[1].order };
@@ -92,8 +96,6 @@ export class ProjectAuthoringComponent {
       })
     );
 
-    this.saveEvent('projectOpened', 'Navigation');
-
     window.onbeforeunload = (event) => {
       this.endProjectAuthoringSession();
     };
@@ -104,13 +106,16 @@ export class ProjectAuthoringComponent {
     this.subscriptions.unsubscribe();
   }
 
+  private updateShowProjectView(): void {
+    this.showProjectView = /\/teacher\/edit\/unit\/(\d*)$/.test(this.router.url);
+  }
+
   private endProjectAuthoringSession(): void {
     this.rxStomp.deactivate();
     this.projectService.notifyAuthorProjectEnd(this.projectId);
   }
 
   protected previewProject(): void {
-    this.saveEvent('projectPreviewed', 'Navigation', { constraints: true });
     window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
   }
 
@@ -133,12 +138,14 @@ export class ProjectAuthoringComponent {
 
   protected constraintIconClicked(nodeId: string): void {
     this.dataService.setCurrentNodeByNodeId(nodeId);
-    this.$state.go('root.at.project.node.advanced.constraint', { nodeId: nodeId });
+    this.router.navigate([
+      `/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/constraint`
+    ]);
   }
 
   protected branchIconClicked(nodeId: string): void {
     this.dataService.setCurrentNodeByNodeId(nodeId);
-    this.$state.go('root.at.project.node.advanced.path', { nodeId: nodeId });
+    this.router.navigate([`/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/path`]);
   }
 
   protected insertInside(nodeId: string): void {
@@ -211,14 +218,6 @@ export class ProjectAuthoringComponent {
                 node.toTitle = this.projectService.getNodePositionAndTitle(newNode.id);
               }
             }
-
-            if (this.projectService.isGroupNode(firstNewNode.id)) {
-              let nodeMovedEventData = { activitiesMoved: movedNodes };
-              this.saveEvent('activityMoved', 'Authoring', nodeMovedEventData);
-            } else {
-              let nodeMovedEventData = { stepsMoved: movedNodes };
-              this.saveEvent('stepMoved', 'Authoring', nodeMovedEventData);
-            }
           }
         }
       });
@@ -268,14 +267,6 @@ export class ProjectAuthoringComponent {
               node.toNodeId = newNode.id;
               node.toTitle = this.projectService.getNodePositionAndTitle(newNode.id);
             }
-          }
-
-          if (this.projectService.isGroupNode(firstNewNode.id)) {
-            let nodeCopiedEventData = { activitiesCopied: copiedNodes };
-            this.saveEvent('activityCopied', 'Authoring', nodeCopiedEventData);
-          } else {
-            let nodeCopiedEventData = { stepsCopied: copiedNodes };
-            this.saveEvent('stepCopied', 'Authoring', nodeCopiedEventData);
           }
         }
       }
@@ -361,12 +352,6 @@ export class ProjectAuthoringComponent {
     if (deletedStartNodeId) {
       this.updateStartNodeId();
     }
-    if (activitiesDeleted.length > 0) {
-      this.saveEvent('activityDeleted', 'Authoring', { activitiesDeleted: activitiesDeleted });
-    }
-    if (stepsDeleted.length > 0) {
-      this.saveEvent('stepDeleted', 'Authoring', { stepsDeleted: stepsDeleted });
-    }
     this.projectService.saveProject();
     this.refreshProject();
   }
@@ -435,15 +420,15 @@ export class ProjectAuthoringComponent {
   }
 
   protected createNewLesson(): void {
-    this.$state.go('root.at.project.add-lesson.configure');
+    this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-lesson/configure`]);
   }
 
   protected createNewStep(): void {
-    this.$state.go('root.at.project.add-node.choose-template');
+    this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-node/choose-template`]);
   }
 
   protected addStructure(): void {
-    this.$state.go('root.at.project.structure.choose');
+    this.router.navigate([`/teacher/edit/unit/${this.projectId}/structure/choose`]);
   }
 
   protected cancelMove(): void {
@@ -500,11 +485,11 @@ export class ProjectAuthoringComponent {
   }
 
   protected importStep(): void {
-    this.$state.go('root.at.project.import-step.choose-step');
+    this.router.navigate([`/teacher/edit/unit/${this.projectId}/import-step/choose-step`]);
   }
 
   protected goToAdvancedAuthoring(): void {
-    this.$state.go('root.at.project.advanced');
+    this.router.navigate([`/teacher/edit/unit/${this.projectId}/advanced`]);
   }
 
   protected isNodeInAnyBranchPath(nodeId: string): boolean {
@@ -512,7 +497,7 @@ export class ProjectAuthoringComponent {
   }
 
   protected goBackToProjectList(): void {
-    this.$state.go('root.at.main');
+    this.router.navigate([`/teacher/edit/home`]);
   }
 
   private scrollToBottomOfPage(): void {
@@ -551,33 +536,6 @@ export class ProjectAuthoringComponent {
         }
       }
     });
-  }
-
-  /**
-   * Save an Authoring Tool event
-   * @param eventName the name of the event
-   * @param category the category of the event
-   * example 'Navigation' or 'Authoring'
-   * @param data (optional) an object that contains more specific data about
-   * the event
-   */
-  private saveEvent(eventName: string, category: string, data: any = null): void {
-    let context = 'AuthoringTool';
-    let nodeId = null;
-    let componentId = null;
-    let componentType = null;
-    if (data == null) {
-      data = {};
-    }
-    this.dataService.saveEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      eventName,
-      data
-    );
   }
 
   /**
@@ -656,7 +614,6 @@ export class ProjectAuthoringComponent {
 
     // this will check the items that are used in the project
     for (let item of this.items) {
-      // let node = this.items[item];
       if (item.checked) {
         if (this.isGroupNode(item.key)) {
           this.activityNodeSelected = true;

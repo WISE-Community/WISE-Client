@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { temporarilyHighlightElement } from '../../common/dom/dom';
 import { ConfigService } from '../../services/configService';
 import { CopyProjectService } from '../../services/copyProjectService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { SessionService } from '../../services/sessionService';
+import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'project-list-authoring',
@@ -13,20 +14,18 @@ import { SessionService } from '../../services/sessionService';
   templateUrl: './project-list.component.html'
 })
 export class ProjectListComponent implements OnInit {
-  protected projects: any[];
-  protected sharedProjects: any[];
-  private $state: any;
+  protected projects: any[] = [];
+  protected sharedProjects: any[] = [];
 
   constructor(
     private configService: ConfigService,
     private copyProjectService: CopyProjectService,
     private dialog: MatDialog,
-    private sessionService: SessionService,
-    private upgrade: UpgradeModule
+    private router: Router,
+    private sessionService: SessionService
   ) {}
 
   ngOnInit(): void {
-    this.$state = this.upgrade.$injector.get('$state');
     this.projects = this.configService
       .getConfigParam('projects')
       .filter((project) => !project.isDeleted);
@@ -69,13 +68,15 @@ export class ProjectListComponent implements OnInit {
   }
 
   private highlightNewProject(projectId: number): void {
-    this.configService.retrieveConfig(`/api/author/config`).then(() => {
-      this.projects = this.configService.getConfigParam('projects');
-      // wait for new element to appear on the page
-      setTimeout(() => {
-        temporarilyHighlightElement(projectId.toString(), 3000);
-      });
-    });
+    this.configService.retrieveConfig(`/api/author/config`).pipe(
+      tap(() => {
+        this.projects = this.configService.getConfigParam('projects');
+        // wait for new element to appear on the page
+        setTimeout(() => {
+          temporarilyHighlightElement(projectId.toString(), 3000);
+        });
+      })
+    );
   }
 
   private scrollToTopOfPage(): void {
@@ -93,7 +94,7 @@ export class ProjectListComponent implements OnInit {
 
   protected openProject(projectId: number): void {
     this.showMessageInModalDialog($localize`Loading Unit...`);
-    this.$state.go('root.at.project', { projectId: projectId });
+    this.router.navigate([`/teacher/edit/unit/${projectId}`]);
   }
 
   protected previewProject(projectId: number): void {
@@ -105,6 +106,6 @@ export class ProjectListComponent implements OnInit {
   }
 
   protected addNewProject(): void {
-    this.$state.go('root.at.new-unit');
+    this.router.navigate([`/teacher/edit/new-unit`]);
   }
 }

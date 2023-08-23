@@ -6,7 +6,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
@@ -30,8 +29,7 @@ import { ConceptMapAuthoring } from './concept-map-authoring.component';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatDialogModule,
-    UpgradeModule
+    MatDialogModule
   ],
   providers: [
     AnnotationService,

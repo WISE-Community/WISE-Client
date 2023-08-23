@@ -57,8 +57,8 @@
       <nav-item-progress [nodeCompletion]="getNodeCompletion()" [period]="currentPeriod">
       </nav-item-progress>
       <span fxFlex></span>
-      <a
-        href="#"
+      <button
+        mat-icon-button
         (click)="toggleLockNode()"
         aria-label="{{ getNodeLockedText() }}"
         [matTooltip]="getNodeLockedText()"
@@ -67,7 +67,7 @@
         <mat-icon [ngClass]="{ warn: isLocked() }">
           {{ isLocked() ? 'lock' : 'lock_open' }}
         </mat-icon>
-      </a>
+      </button>
     </mat-card-actions>
   </mat-card>
   <mat-list-item

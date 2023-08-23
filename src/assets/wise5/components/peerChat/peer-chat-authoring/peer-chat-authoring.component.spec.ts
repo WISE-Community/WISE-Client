@@ -18,7 +18,6 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { PeerChatAuthoringComponent } from './peer-chat-authoring.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 const componentContent = {
@@ -56,8 +55,7 @@ describe('PeerChatAuthoringComponent', () => {
         MatIconModule,
         MatInputModule,
         MatSelectModule,
-        StudentTeacherCommonServicesModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, PeerChatAuthoringComponent],
       providers: [

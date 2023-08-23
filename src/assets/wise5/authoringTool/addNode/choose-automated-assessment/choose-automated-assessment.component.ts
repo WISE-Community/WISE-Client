@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { HttpClient } from '@angular/common/http';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { ConfigureStructureComponent } from '../../structure/configure-structure.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'choose-automated-assessment',
   templateUrl: './choose-automated-assessment.component.html',
   styleUrls: ['./choose-automated-assessment.component.scss']
 })
-export class ChooseAutomatedAssessmentComponent extends ConfigureStructureComponent {
+export class ChooseAutomatedAssessmentComponent {
   private automatedAssessmentProjectId: number;
   protected node: any;
   private project: any;
@@ -18,13 +17,11 @@ export class ChooseAutomatedAssessmentComponent extends ConfigureStructureCompon
   constructor(
     http: HttpClient,
     private projectService: TeacherProjectService,
-    protected upgrade: UpgradeModule
-  ) {
-    super(http, upgrade);
-  }
+    protected route: ActivatedRoute,
+    protected router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.$state = this.upgrade.$injector.get('$state');
     this.automatedAssessmentProjectId = this.projectService.getAutomatedAssessmentProjectId();
     this.showAutomatedAssessmentProject();
   }
@@ -49,14 +46,13 @@ export class ChooseAutomatedAssessmentComponent extends ConfigureStructureCompon
     window.open(`${this.project.previewProjectURL}/${node.id}`);
   }
 
-  protected back(): void {
-    this.$state.go('root.at.project.add-node.choose-template');
-  }
-
   protected next(): void {
-    this.$state.go('root.at.project.add-node.automated-assessment.configure', {
-      importFromProjectId: this.automatedAssessmentProjectId,
-      node: this.node
+    this.router.navigate(['..', 'configure'], {
+      relativeTo: this.route,
+      state: {
+        importFromProjectId: this.automatedAssessmentProjectId,
+        node: this.node
+      }
     });
   }
 }

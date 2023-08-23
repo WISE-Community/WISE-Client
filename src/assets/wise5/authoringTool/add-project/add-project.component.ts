@@ -1,9 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'add-project',
@@ -20,7 +20,7 @@ export class AddProjectComponent {
     private dialog: MatDialog,
     private fb: FormBuilder,
     private projectService: TeacherProjectService,
-    private upgrade: UpgradeModule
+    private router: Router
   ) {}
 
   ngAfterViewInit(): void {
@@ -28,7 +28,7 @@ export class AddProjectComponent {
   }
 
   protected cancel(): void {
-    this.upgrade.$injector.get('$state').go('root.at.main');
+    this.router.navigate(['/teacher/edit/home']);
   }
 
   protected create(): void {
@@ -45,7 +45,7 @@ export class AddProjectComponent {
       .registerNewProject(project.metadata.title, projectJSONString)
       .then((projectId) => {
         this.dialog.closeAll();
-        this.upgrade.$injector.get('$state').go('root.at.project', { projectId: projectId });
+        this.router.navigate([`/teacher/edit/unit/${projectId}`]);
       })
       .catch(() => {
         this.dialog.closeAll();

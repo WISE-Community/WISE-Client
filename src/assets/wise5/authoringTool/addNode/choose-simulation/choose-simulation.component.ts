@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { ConfigureStructureComponent } from '../../structure/configure-structure.component';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { HttpClient } from '@angular/common/http';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { ActivatedRoute, Router } from '@angular/router';
 
 class SimulationNode {
   metadata = {
@@ -19,27 +17,24 @@ class SimulationNode {
   templateUrl: './choose-simulation.component.html',
   styleUrls: ['./choose-simulation.component.scss']
 })
-export class ChooseSimulationComponent extends ConfigureStructureComponent {
-  allNodes: SimulationNode[] = [];
-  filteredNodes: SimulationNode[] = [];
-  project: any;
-  projectItems: any;
-  searchText: string = '';
-  selectedNode: string;
-  selectedSubjects: string[] = [];
-  simulationProjectId: number;
-  subjects: string[] = [];
+export class ChooseSimulationComponent {
+  private allNodes: SimulationNode[] = [];
+  protected filteredNodes: SimulationNode[] = [];
+  protected project: any;
+  private projectItems: any;
+  protected searchText: string = '';
+  protected selectedNode: string;
+  protected selectedSubjects: string[] = [];
+  private simulationProjectId: number;
+  protected subjects: string[] = [];
 
   constructor(
-    http: HttpClient,
     private projectService: TeacherProjectService,
-    protected upgrade: UpgradeModule
-  ) {
-    super(http, upgrade);
-  }
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.$state = this.upgrade.$injector.get('$state');
     this.simulationProjectId = this.projectService.getSimulationProjectId();
     this.showSimulationProject();
   }
@@ -81,12 +76,7 @@ export class ChooseSimulationComponent extends ConfigureStructureComponent {
   }
 
   private isSubjectFound(selectedSubjects: any[], resource: any): boolean {
-    for (const subject of selectedSubjects) {
-      if (resource.metadata.subjects.includes(subject)) {
-        return true;
-      }
-    }
-    return false;
+    return selectedSubjects.some((subject) => resource.metadata.subjects.includes(subject));
   }
 
   protected clearFilters(): void {
@@ -105,14 +95,13 @@ export class ChooseSimulationComponent extends ConfigureStructureComponent {
     window.open(`${this.project.previewProjectURL}/${node.id}`);
   }
 
-  protected back(): void {
-    this.$state.go('root.at.project.add-node.choose-template');
-  }
-
   protected next(): void {
-    this.$state.go('root.at.project.import-step.choose-location', {
-      importFromProjectId: this.simulationProjectId,
-      selectedNodes: [this.selectedNode]
+    this.router.navigate(['../../../import-step/choose-location'], {
+      relativeTo: this.route,
+      state: {
+        importFromProjectId: this.simulationProjectId,
+        selectedNodes: [this.selectedNode]
+      }
     });
   }
 

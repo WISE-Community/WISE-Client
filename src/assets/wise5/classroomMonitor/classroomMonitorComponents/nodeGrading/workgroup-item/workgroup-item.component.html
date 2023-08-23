@@ -42,7 +42,7 @@
           class="component component--grading"
         >
           <div [hidden]="!isComponentVisible(component.id)">
-            <h3 class="accent-1 mat-subtitle-2 gray-lightest-bg component__header">
+            <h3 class="accent-1 gray-lightest-bg component__header">
               {{ i + 1 + '. ' + getComponentTypeLabel(component.type) }}&nbsp;
               <component-new-work-badge
                 [componentId]="component.id"

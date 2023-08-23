@@ -907,7 +907,7 @@ export class TeacherProjectService extends ProjectService {
 
   getConstraintsOnNode(nodeId: string): any {
     const node = this.getNodeById(nodeId);
-    return node.constraints;
+    return node.constraints ?? [];
   }
 
   /**

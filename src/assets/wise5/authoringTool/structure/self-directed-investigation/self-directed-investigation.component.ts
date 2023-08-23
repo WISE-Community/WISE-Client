@@ -7,6 +7,6 @@ import { ConfigureStructureComponent } from '../configure-structure.component';
   styleUrls: ['./self-directed-investigation.component.scss']
 })
 export class SelfDirectedInvestigationComponent extends ConfigureStructureComponent {
-  groupsPath = `self-directed-investigation/groups.json`;
-  nodesPath = `self-directed-investigation/nodes.json`;
+  protected groupsPath = `self-directed-investigation/groups.json`;
+  protected nodesPath = `self-directed-investigation/nodes.json`;
 }

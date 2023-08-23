@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NotebookAuthoringComponent } from './notebook-authoring.component';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -25,21 +24,10 @@ describe('NotebookAuthoringComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatSlideToggleModule,
-        StudentTeacherCommonServicesModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       providers: [ConfigService, TeacherProjectService]
     }).compileComponents();
-
-    TestBed.inject(UpgradeModule).$injector = {
-      get: (param: string) => {
-        if (param === '$stateParams') {
-          return {
-            projectId: 1
-          };
-        }
-      }
-    };
     TestBed.inject(TeacherProjectService).project = {};
     fixture = TestBed.createComponent(NotebookAuthoringComponent);
     component = fixture.componentInstance;

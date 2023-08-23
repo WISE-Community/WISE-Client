@@ -10,7 +10,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../services/configService';
 import { PeerGroupingAuthoringService } from '../../services/peerGroupingAuthoringService';
 import { SessionService } from '../../services/sessionService';
@@ -39,8 +38,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatOptionModule,
     MatRadioModule,
     MatSelectModule,
-    MatTooltipModule,
-    UpgradeModule
+    MatTooltipModule
   ],
   declarations: [
     CreateNewPeerGroupingDialogComponent,

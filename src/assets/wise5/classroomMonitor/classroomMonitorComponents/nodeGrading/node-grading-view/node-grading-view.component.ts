@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { Node } from '../../../../common/Node';
 import { AnnotationService } from '../../../../services/annotationService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
@@ -128,7 +128,7 @@ export class NodeGradingViewComponent implements OnInit {
   }
 
   protected retrieveStudentData(node: Node = this.node): void {
-    this.teacherDataService.retrieveStudentDataForNode(node).then(() => {
+    this.teacherDataService.retrieveStudentDataForNode(node).subscribe(() => {
       this.teacherWorkgroupId = this.configService.getWorkgroupId();
       this.workgroups = copy(this.configService.getClassmateUserInfos()).filter(
         (workgroup) =>
@@ -141,25 +141,6 @@ export class NodeGradingViewComponent implements OnInit {
       this.numRubrics = this.projectService.getNumberOfRubricsByNodeId(node.id);
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     });
-  }
-
-  saveNodeGradingViewDisplayedEvent() {
-    const context = 'ClassroomMonitor',
-      nodeId = this.nodeId,
-      componentId = null,
-      componentType = null,
-      category = 'Navigation',
-      event = 'nodeGradingViewDisplayed',
-      data = { nodeId: this.nodeId };
-    this.teacherDataService.saveEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      data
-    );
   }
 
   private getMaxScore(nodeId = this.nodeId): number {

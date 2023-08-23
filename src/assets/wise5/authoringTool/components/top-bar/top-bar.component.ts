@@ -1,11 +1,11 @@
 'use strict';
 
 import { Component, Input, OnInit } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 import { ConfigService } from '../../../services/configService';
 import { SessionService } from '../../../services/sessionService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'at-top-bar',
@@ -27,8 +27,8 @@ export class TopBarComponent implements OnInit {
   constructor(
     private configService: ConfigService,
     private projectService: TeacherProjectService,
-    private sessionService: SessionService,
-    private upgrade: UpgradeModule
+    private router: Router,
+    private sessionService: SessionService
   ) {}
 
   ngOnInit(): void {
@@ -61,16 +61,15 @@ export class TopBarComponent implements OnInit {
   }
 
   protected switchToGradingView(): void {
-    const state = this.upgrade.$injector.get('$state');
-    if (state.current.name === 'root.at.project.notebook') {
-      state.go('root.cm.notebooks', { runId: this.runId });
-    } else if (state.current.name === 'root.at.project.node') {
-      state.go('root.cm.unit.node', {
-        runId: this.runId,
-        nodeId: state.params.nodeId
-      });
+    if (/unit\/(\d*)\/node\/(\w*)$/.test(this.router.url)) {
+      this.router.navigate([
+        '/teacher/manage/unit',
+        this.runId,
+        'node',
+        this.router.url.match(/\/node\/(\w+)$/)[1]
+      ]);
     } else {
-      state.go('root.cm.unit', { runId: this.runId });
+      this.router.navigate(['/teacher/manage/unit', this.runId]);
     }
   }
 

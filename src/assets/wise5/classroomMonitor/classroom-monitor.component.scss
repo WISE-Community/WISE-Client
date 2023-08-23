@@ -27,7 +27,7 @@ top-bar {
 }
 
 #content {
-  position: absolute;
+  position: fixed;
   top: $toolbar-height + $secondary-toolbar-height;
   bottom: 0;
   width: 100%;

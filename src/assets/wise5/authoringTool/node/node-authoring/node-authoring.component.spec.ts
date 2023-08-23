@@ -2,7 +2,6 @@ import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NodeAuthoringComponent } from './node-authoring.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -20,6 +19,9 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 import { PreviewComponentModule } from '../../components/preview-component/preview-component.module';
 import { DebugElement } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
+import { of } from 'rxjs';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -47,29 +49,38 @@ describe('NodeAuthoringComponent', () => {
         MatIconModule,
         MatInputModule,
         PreviewComponentModule,
-        StudentTeacherCommonServicesModule,
-        UpgradeModule
+        RouterTestingModule,
+        StudentTeacherCommonServicesModule
       ],
       providers: [
         ClassroomStatusService,
         ProjectAssetService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
+        TeacherWebSocketService,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { paramMap: convertToParamMap({ nodeId: 'node1' }) },
+            parent: { params: of({ unitId: 1 }) }
+          }
+        },
+        {
+          provide: Router,
+          useValue: {
+            events: of([]),
+            url: '/teacher/edit/unit/123/node/node4'
+          }
+        }
       ]
     }).compileComponents();
-    TestBed.inject(UpgradeModule).$injector = {
-      get: () => {
-        return {
-          current: {
-            name: 'root.at.project.node'
-          },
-          go: (route: string, params: any) => {},
-          newComponents: [],
-          nodeId: nodeId1
-        };
-      }
-    };
+    window.history.pushState(
+      {
+        newComponents: []
+      },
+      '',
+      ''
+    );
     spyOn(document, 'getElementById').and.returnValue(document.createElement('div'));
     confirmSpy = spyOn(window, 'confirm');
     component1 = { id: 'component1', type: 'OpenResponse', showSubmitButton: true };

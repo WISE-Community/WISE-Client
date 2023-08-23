@@ -1,5 +1,5 @@
 <div
-  class="list-item mat-elevation-z1"
+  class="list-item milestone-workgroup-item mat-elevation-z1"
   [ngClass]="{
     'list-item--warn': statusClass === 'warn',
     'list-item--info': statusClass === 'info'
@@ -7,7 +7,7 @@
 >
   <button
     mat-button
-    class="list-item__subheader-button"
+    class="list-item__subheader-button team-button"
     aria-label="Show/hide team's work for this step"
     i18n-aria-label
     [ngClass]="{ 'list-item--noclick': !showScore || disabled }"
@@ -15,7 +15,7 @@
     [disabled]="disabled"
     fxLayoutWrap
   >
-    <div fxLayout="row" fxFlex>
+    <div fxLayout="row" fxFlex="100">
       <div fxFlex fxLayout="row" fxLayoutAlign="start center">
         <workgroup-info
           [hasAlert]="hasAlert"
@@ -69,7 +69,7 @@
         class="component component--grading"
       >
         <div>
-          <h3 class="accent-1 mat-subtitle-2 gray-lightest-bg component__header">
+          <h3 class="accent-1 gray-lightest-bg component__header">
             <span i18n>Step {{ getNodePosition(firstNodeId) }}</span> ({{
               getComponentTypeLabel(firstComponent.type)
             }})&nbsp;
@@ -91,7 +91,7 @@
         class="component component--grading"
       >
         <div>
-          <h3 class="accent-1 mat-subtitle-2 gray-lightest-bg component__header">
+          <h3 class="accent-1 gray-lightest-bg component__header">
             <span i18n>Step {{ getNodePosition(lastNodeId) }}</span> ({{
               getComponentTypeLabel(lastComponent.type)
             }})&nbsp;

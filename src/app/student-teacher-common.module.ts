@@ -1,7 +1,7 @@
+import '../assets/wise5/lib/jquery/jquery-global';
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -50,7 +50,6 @@ import { SideMenuComponent } from '../assets/wise5/common/side-menu/side-menu.co
     SideMenuComponent
   ],
   imports: [
-    UpgradeModule,
     CommonModule,
     DragDropModule,
     EditNotebookItemDialogModule,

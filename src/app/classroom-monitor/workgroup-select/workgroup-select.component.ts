@@ -14,17 +14,14 @@ export class WorkgroupSelectComponent {
   subscriptions: Subscription = new Subscription();
   workgroups: any;
 
-  constructor(
-    protected configService: ConfigService,
-    protected teacherDataService: TeacherDataService
-  ) {}
+  constructor(protected configService: ConfigService, protected dataService: TeacherDataService) {}
 
   ngOnInit() {
     this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;
-    this.periodId = this.teacherDataService.getCurrentPeriod().periodId;
+    this.periodId = this.dataService.getCurrentPeriod().periodId;
     this.setWorkgroups();
     this.subscriptions.add(
-      this.teacherDataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
+      this.dataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
         if (currentWorkgroup != null) {
           this.setWorkgroups();
           this.setWorkgroup(currentWorkgroup);
@@ -32,7 +29,7 @@ export class WorkgroupSelectComponent {
       })
     );
     this.subscriptions.add(
-      this.teacherDataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
+      this.dataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
         this.periodId = currentPeriod.periodId;
         this.setWorkgroups();
         this.currentPeriodChanged();
@@ -72,6 +69,6 @@ export class WorkgroupSelectComponent {
   }
 
   setCurrentWorkgroup(workgroup) {
-    this.teacherDataService.setCurrentWorkgroup(workgroup);
+    this.dataService.setCurrentWorkgroup(workgroup);
   }
 }

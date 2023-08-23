@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { NodeGradingViewComponentTestHelper } from '../../nodeGrading/node-grading-view/node-grading-view.component.test.helper';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { of } from 'rxjs';
 
 let component: NodeGradingViewComponent;
 let fixture: ComponentFixture<NodeGradingViewComponent>;
@@ -60,9 +61,7 @@ describe('NodeGradingViewComponent', () => {
     spyOn(TestBed.inject(TeacherProjectService), 'getMaxScoreForNode').and.returnValue(5);
     spyOn(TestBed.inject(TeacherProjectService), 'nodeHasWork').and.returnValue(true);
     spyOn(TestBed.inject(VLEProjectService), 'getAchievements').and.returnValue({});
-    spyOn(TestBed.inject(TeacherDataService), 'retrieveStudentData').and.returnValue(
-      Promise.resolve({})
-    );
+    spyOn(TestBed.inject(TeacherDataService), 'retrieveStudentDataForNode').and.returnValue(of([]));
     spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriodId').and.returnValue(1);
     spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriod').and.returnValue({ periodId: 1 });
     testHelper = new NodeGradingViewComponentTestHelper();

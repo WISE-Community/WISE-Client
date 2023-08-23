@@ -7,6 +7,6 @@ import { ConfigureStructureComponent } from '../configure-structure.component';
   styleUrls: ['./ki-cycle-using-oer.component.scss']
 })
 export class KiCycleUsingOerComponent extends ConfigureStructureComponent {
-  groupsPath = `ki-cycle-using-oer/groups.json`;
-  nodesPath = `ki-cycle-using-oer/nodes.json`;
+  protected groupsPath = `ki-cycle-using-oer/groups.json`;
+  protected nodesPath = `ki-cycle-using-oer/nodes.json`;
 }

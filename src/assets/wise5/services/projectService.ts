@@ -3,7 +3,7 @@
 import { ConfigService } from './configService';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { Node } from '../common/Node';
 import { PeerGrouping } from '../../../app/domain/peerGrouping';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
@@ -775,10 +775,8 @@ export class ProjectService {
       return null;
     }
     const headers = new HttpHeaders().set('cache-control', 'no-cache');
-    return this.http
-      .get(projectURL, { headers: headers })
-      .toPromise()
-      .then((projectJSON: any) => {
+    return this.http.get(projectURL, { headers: headers }).pipe(
+      tap((projectJSON: any) => {
         if (parseProject) {
           this.setProject(projectJSON);
         } else {
@@ -786,7 +784,8 @@ export class ProjectService {
           this.metadata = projectJSON.metadata;
         }
         return projectJSON;
-      });
+      })
+    );
   }
 
   getThemePath(): string {

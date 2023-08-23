@@ -19,17 +19,14 @@ export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectCompone
   filteredWorkgroups: Observable<any>;
   myControl = new FormControl();
 
-  constructor(
-    protected configService: ConfigService,
-    protected teacherDataService: TeacherDataService
-  ) {
-    super(configService, teacherDataService);
+  constructor(protected configService: ConfigService, protected dataService: TeacherDataService) {
+    super(configService, dataService);
   }
 
   ngOnInit() {
     super.ngOnInit();
     this.updateFilteredWorkgroups();
-    const currentWorkgroup = this.teacherDataService.getCurrentWorkgroup();
+    const currentWorkgroup = this.dataService.getCurrentWorkgroup();
     if (currentWorkgroup) {
       this.myControl.setValue(currentWorkgroup.displayNames);
     }

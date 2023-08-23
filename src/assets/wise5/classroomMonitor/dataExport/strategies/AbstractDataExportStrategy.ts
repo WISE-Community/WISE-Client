@@ -23,7 +23,7 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
     this.configService = context.controller.configService;
     this.dataExportService = context.controller.dataExportService;
     this.projectService = context.controller.projectService;
-    this.teacherDataService = context.controller.teacherDataService;
+    this.teacherDataService = context.controller.dataService;
   }
 
   abstract export();

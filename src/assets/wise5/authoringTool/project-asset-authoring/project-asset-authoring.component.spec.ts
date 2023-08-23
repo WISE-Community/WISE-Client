@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectAssetAuthoringComponent } from './project-asset-authoring.component';
 import { ConfigService } from '../../services/configService';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { ProjectAssetAuthoringModule } from './project-asset-authoring.module';
@@ -21,7 +20,7 @@ describe('ProjectAssetAuthoringComponent', () => {
         ProjectAssetAuthoringModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [ConfigService, ProjectAssetService, UpgradeModule]
+      providers: [ConfigService, ProjectAssetService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProjectAssetAuthoringComponent);

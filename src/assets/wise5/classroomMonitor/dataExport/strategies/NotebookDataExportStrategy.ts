@@ -9,7 +9,7 @@ export class NotebookDataExportStrategy extends AbstractDataExportStrategy {
 
   export() {
     this.controller.showDownloadingExportMessage();
-    this.dataExportService.retrieveNotebookExport(this.exportType).then((result) => {
+    this.dataExportService.retrieveNotebookExport(this.exportType).subscribe((result) => {
       const notebookItems = result;
       const columnNames = [
         'ID',
