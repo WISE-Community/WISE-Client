@@ -18,18 +18,17 @@ import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
   styleUrls: ['./teacher-run-list.component.scss']
 })
 export class TeacherRunListComponent implements OnInit {
-  MAX_RECENT_RUNS = 10;
+  private MAX_RECENT_RUNS = 10;
 
-  runs: TeacherRun[] = [];
-  filteredRuns: TeacherRun[] = [];
-  loaded: boolean = false;
-  searchValue: string = '';
-  filterOptions: any[];
-  filterValue: string = '';
-  showArchived: boolean = false;
-  numSelectedRuns: number = 0;
-  showAll: boolean = false;
-  subscriptions: Subscription = new Subscription();
+  protected filteredRuns: TeacherRun[] = [];
+  protected filterValue: string = '';
+  protected loaded: boolean = false;
+  protected numSelectedRuns: number = 0;
+  protected runs: TeacherRun[] = [];
+  protected searchValue: string = '';
+  protected showAll: boolean = false;
+  protected showArchived: boolean = false;
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private archiveProjectService: ArchiveProjectService,

@@ -50,12 +50,26 @@ export class TeacherRunListHarness extends ComponentHarness {
     return (await this.getRunListItem(index)).checkCheckbox();
   }
 
+  async isRunListItemCheckboxChecked(index: number): Promise<boolean> {
+    return (await this.getRunListItem(index)).isChecked();
+  }
+
   async getRunListItem(index: number): Promise<any> {
     return (await this.getRunListItems())[index];
   }
 
   async getNumRunListItems(): Promise<number> {
     return (await this.getRunListItems()).length;
+  }
+
+  async getNumSelectedRunListItems(): Promise<number> {
+    let numSelectedRunListItems = 0;
+    for (let i = 0; i < (await this.getRunListItems()).length; i++) {
+      if (await this.isRunListItemCheckboxChecked(i)) {
+        numSelectedRunListItems++;
+      }
+    }
+    return numSelectedRunListItems;
   }
 
   async clickRunListItemMenuButton(index: number, menuButtonText: string): Promise<void> {
