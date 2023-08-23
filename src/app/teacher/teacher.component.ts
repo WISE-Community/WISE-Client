@@ -11,7 +11,7 @@ export class TeacherComponent implements OnInit {
 
   ngOnInit() {}
 
-  isShowingAngularJSApp() {
+  isTeacherApp() {
     return this.router.url.includes('/teacher/edit') || this.router.url.includes('/teacher/manage');
   }
 }
