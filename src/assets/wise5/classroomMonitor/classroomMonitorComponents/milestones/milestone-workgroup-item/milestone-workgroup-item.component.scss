@@ -1,13 +1,15 @@
-.team-button {
-  min-height: 56px;
-  text-align: initial;
+.milestone-workgroup-item {
+  .team-button {
+    min-height: 56px;
+    text-align: initial;
+  }
 
   .mdc-button__label {
     text-transform: none;
     width: 100%;
   }
 
-  .grading__item-container {
+  .mdc-list-item.mdc-list-item--with-one-line {
     height: auto;
   }
 }
