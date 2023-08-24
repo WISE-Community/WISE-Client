@@ -18,12 +18,10 @@ import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
   styleUrls: ['./run-menu.component.scss']
 })
 export class RunMenuComponent implements OnInit {
+  private editLink: string = '';
+  protected reportProblemLink: string = '';
   @Input() run: TeacherRun;
   @Output() runArchiveStatusChangedEvent: EventEmitter<any> = new EventEmitter<any>();
-
-  editLink: string = '';
-  isOwner: boolean;
-  reportProblemLink: string = '';
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
@@ -38,18 +36,17 @@ export class RunMenuComponent implements OnInit {
     this.editLink = `${this.configService.getContextPath()}/teacher/edit/unit/${
       this.run.project.id
     }`;
-    this.isOwner = this.run.isOwner(this.userService.getUserId());
     this.reportProblemLink = `${this.configService.getContextPath()}/contact?runId=${this.run.id}`;
   }
 
-  shareRun() {
+  protected shareRun() {
     this.dialog.open(ShareRunDialogComponent, {
       data: { run: this.run },
       panelClass: 'dialog-md'
     });
   }
 
-  showUnitDetails() {
+  protected showUnitDetails() {
     const project = this.run.project;
     this.dialog.open(LibraryProjectDetailsComponent, {
       data: { project: project, isRunProject: true },
@@ -57,19 +54,15 @@ export class RunMenuComponent implements OnInit {
     });
   }
 
-  canEdit() {
+  protected canEdit() {
     return this.run.project.canEdit(this.userService.getUserId());
   }
 
-  canShare() {
+  protected canShare() {
     return this.run.canGradeAndManage(this.userService.getUserId());
   }
 
-  isRunCompleted() {
-    return this.run.isCompleted(this.configService.getCurrentServerTime());
-  }
-
-  showEditRunDetails() {
+  protected showEditRunDetails() {
     const run = this.run;
     this.dialog.open(RunSettingsDialogComponent, {
       ariaLabel: $localize`Run Settings`,
@@ -79,7 +72,7 @@ export class RunMenuComponent implements OnInit {
     });
   }
 
-  editContent() {
+  protected editContent() {
     if (this.run.lastRun) {
       this.dialog.open(EditRunWarningDialogComponent, {
         ariaLabel: $localize`Edit Classroom Unit Warning`,
@@ -91,30 +84,39 @@ export class RunMenuComponent implements OnInit {
     }
   }
 
-  archive(): void {
-    const run = this.run;
-    this.archiveProjectService.archiveProject(run.project).subscribe({
-      next: (response: ArchiveProjectResponse) => {
-        run.archived = response.archived;
-        this.runArchiveStatusChangedEvent.emit(run);
-        this.snackBar.open($localize`Successfully archived unit.`);
-      },
-      error: () => {
-        this.snackBar.open($localize`Error archiving unit.`);
-      }
-    });
+
+  protected archive(): void {
+    this.performArchiveAction(
+      this.run,
+      'archiveProject',
+      $localize`Successfully archived unit.`,
+      $localize`Error archiving unit.`
+    );
   }
 
-  unarchive(): void {
-    const run = this.run;
-    this.archiveProjectService.unarchiveProject(run.project).subscribe({
+  protected unarchive(): void {
+    this.performArchiveAction(
+      this.run,
+      'unarchiveProject',
+      $localize`Successfully restored unit.`,
+      $localize`Error restoring unit.`
+    );
+  }
+
+  private performArchiveAction(
+    run: TeacherRun,
+    archiveFunctionName: 'archiveProject' | 'unarchiveProject',
+    successMessage: string,
+    errorMessage: string
+  ): void {
+    this.archiveProjectService[archiveFunctionName](run.project).subscribe({
       next: (response: ArchiveProjectResponse) => {
         run.archived = response.archived;
         this.runArchiveStatusChangedEvent.emit(run);
-        this.snackBar.open($localize`Successfully restored unit.`);
+        this.snackBar.open(successMessage);
       },
       error: () => {
-        this.snackBar.open($localize`Error restoring unit.`);
+        this.snackBar.open(errorMessage);
       }
     });
   }

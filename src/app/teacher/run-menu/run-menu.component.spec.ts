@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RunMenuComponent } from './run-menu.component';
 import { TeacherService } from '../teacher.service';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { ConfigService } from '../../services/config.service';
@@ -15,7 +15,11 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ArchiveProjectService } from '../../services/archive-project.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Project } from '../../domain/project';
+import { RunMenuHarness } from './run-menu.harness';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MockArchiveProjectService } from '../../services/mock-archive-project.service';
 
 export class MockTeacherService {
   checkClassroomAuthorization(): Observable<string> {
@@ -63,6 +67,8 @@ export class MockConfigService {
 let archiveProjectService: ArchiveProjectService;
 let component: RunMenuComponent;
 let fixture: ComponentFixture<RunMenuComponent>;
+const owner = new User();
+let runMenuHarness: RunMenuHarness;
 let snackBarSpy: jasmine.Spy;
 let teacherService: TeacherService;
 
@@ -73,13 +79,15 @@ describe('RunMenuComponent', () => {
         imports: [
           BrowserAnimationsModule,
           HttpClientTestingModule,
+          MatButtonModule,
+          MatIconModule,
           MatMenuModule,
           MatSnackBarModule,
           RouterTestingModule
         ],
         declarations: [RunMenuComponent],
         providers: [
-          ArchiveProjectService,
+          { provide: ArchiveProjectService, useClass: MockArchiveProjectService },
           { provide: TeacherService, useClass: MockTeacherService },
           { provide: UserService, useClass: MockUserService },
           { provide: ConfigService, useClass: MockConfigService },
@@ -90,54 +98,53 @@ describe('RunMenuComponent', () => {
     })
   );
 
-  beforeEach(() => {
+  beforeEach(async () => {
     fixture = TestBed.createComponent(RunMenuComponent);
     component = fixture.componentInstance;
-    const owner = new User();
-    component.run = new TeacherRun({
-      id: 1,
-      name: 'Photosynthesis',
-      owner: owner,
-      project: {
-        id: 1,
-        owner: owner,
-        sharedOwners: []
-      }
-    });
+    setRun(false);
     archiveProjectService = TestBed.inject(ArchiveProjectService);
     teacherService = TestBed.inject(TeacherService);
     snackBarSpy = spyOn(TestBed.inject(MatSnackBar), 'open');
-    spyOn(archiveProjectService, 'archiveProject').and.callFake((project: Project) => {
-      project.archived = true;
-      return of(project);
-    });
-    spyOn(archiveProjectService, 'unarchiveProject').and.callFake((project: Project) => {
-      project.archived = false;
-      return of(project);
-    });
     fixture.detectChanges();
+    runMenuHarness = await TestbedHarnessEnvironment.harnessForFixture(fixture, RunMenuHarness);
   });
 
   archive();
   unarchive();
 });
 
+function setRun(archived: boolean): void {
+  component.run = new TeacherRun({
+    id: 1,
+    name: 'Photosynthesis',
+    owner: owner,
+    project: {
+      id: 1,
+      owner: owner,
+      sharedOwners: []
+    },
+    archived: archived
+  });
+}
+
 function archive() {
   describe('archive()', () => {
-    it('should archive a run', () => {
-      component.archive();
+    it('should archive a run', async () => {
+      await runMenuHarness.clickArchiveMenuButton();
       expect(component.run.archived).toEqual(true);
-      expect(snackBarSpy).toHaveBeenCalledWith('Successfully Archived Run');
+      expect(snackBarSpy).toHaveBeenCalledWith('Successfully Archived Unit');
     });
   });
 }
 
 function unarchive() {
   describe('unarchive()', () => {
-    it('should unarchive a run', () => {
-      component.unarchive();
+    it('should unarchive a run', async () => {
+      setRun(true);
+      component.ngOnInit();
+      await runMenuHarness.clickUnarchiveMenuButton();
       expect(component.run.archived).toEqual(false);
-      expect(snackBarSpy).toHaveBeenCalledWith('Successfully Unarchived Run');
+      expect(snackBarSpy).toHaveBeenCalledWith('Successfully Unarchived Unit');
     });
   });
 }

@@ -50,6 +50,10 @@ export class TeacherRunListHarness extends ComponentHarness {
     return (await this.getRunListItem(index)).checkCheckbox();
   }
 
+  async isRunListItemCheckboxChecked(index: number): Promise<boolean> {
+    return (await this.getRunListItem(index)).isChecked();
+  }
+
   async getRunListItem(index: number): Promise<any> {
     return (await this.getRunListItems())[index];
   }
@@ -58,8 +62,22 @@ export class TeacherRunListHarness extends ComponentHarness {
     return (await this.getRunListItems()).length;
   }
 
-  async clickRunListItemMenuButton(index: number, menuButtonText: string): Promise<void> {
-    return (await this.getRunListItem(index)).clickMenuButton(menuButtonText);
+  async getNumSelectedRunListItems(): Promise<number> {
+    let numSelectedRunListItems = 0;
+    for (let i = 0; i < (await this.getRunListItems()).length; i++) {
+      if (await this.isRunListItemCheckboxChecked(i)) {
+        numSelectedRunListItems++;
+      }
+    }
+    return numSelectedRunListItems;
+  }
+
+  async clickRunListItemMenuArchiveButton(index: number): Promise<void> {
+    return (await this.getRunListItem(index)).clickArchiveMenuButton();
+  }
+
+  async clickRunListItemMenuUnarchiveButton(index: number): Promise<void> {
+    return (await this.getRunListItem(index)).clickUnarchiveMenuButton();
   }
 
   async clickArchiveButton(): Promise<void> {

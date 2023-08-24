@@ -15,15 +15,14 @@ import { ShareRunCodeDialogComponent } from '../share-run-code-dialog/share-run-
   animations: [flash]
 })
 export class TeacherRunListItemComponent implements OnInit {
+  protected animateDelay: string = '0s';
+  protected animateDuration: string = '0s';
+  protected manageStudentsLink: string = '';
+  protected periodsTooltipText: string;
   @Input() run: TeacherRun = new TeacherRun();
   @Output() runArchiveStatusChangedEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() runSelectedStatusChangedEvent: EventEmitter<any> = new EventEmitter<any>();
-
-  manageStudentsLink: string = '';
-  periodsTooltipText: string;
-  thumbStyle: SafeStyle;
-  animateDuration: string = '0s';
-  animateDelay: string = '0s';
+  protected thumbStyle: SafeStyle;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -63,7 +62,7 @@ export class TeacherRunListItemComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustStyle(STYLE);
   }
 
-  launchGradeAndManageTool(): void {
+  protected launchGradeAndManageTool(): void {
     if (this.run.project.wiseVersion === 4) {
       window.location.href =
         `${this.configService.getWISE4Hostname()}` +
@@ -75,7 +74,7 @@ export class TeacherRunListItemComponent implements OnInit {
     }
   }
 
-  getPeriodsTooltipText(): string {
+  private getPeriodsTooltipText(): string {
     let string = '';
     const length = this.run.periods.length;
     for (let p = 0; p < length; p++) {
@@ -90,22 +89,22 @@ export class TeacherRunListItemComponent implements OnInit {
     return string;
   }
 
-  isRunActive(run: TeacherRun): boolean {
+  protected isRunActive(run: TeacherRun): boolean {
     return run.isActive(this.configService.getCurrentServerTime());
   }
 
-  isRunCompleted(run: TeacherRun): boolean {
+  protected isRunCompleted(run: TeacherRun): boolean {
     return run.isCompleted(this.configService.getCurrentServerTime());
   }
 
-  shareCode(): void {
+  protected shareCode(): void {
     this.dialog.open(ShareRunCodeDialogComponent, {
       data: this.run,
       panelClass: 'dialog-sm'
     });
   }
 
-  runArchiveStatusChanged(): void {
+  protected runArchiveStatusChanged(): void {
     this.run.selected = false;
     this.runSelectedStatusChangedEvent.emit();
     this.runArchiveStatusChangedEvent.emit();

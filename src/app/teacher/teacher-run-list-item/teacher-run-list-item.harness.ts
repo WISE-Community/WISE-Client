@@ -1,11 +1,13 @@
 import { ComponentHarness } from '@angular/cdk/testing';
 import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
-import { MatMenuHarness } from '@angular/material/menu/testing';
+import { MatCardHarness } from '@angular/material/card/testing';
+import { RunMenuHarness } from '../run-menu/run-menu.harness';
 
 export class TeacherRunListItemHarness extends ComponentHarness {
   static hostSelector = 'app-teacher-run-list-item';
+  protected getCard = this.locatorFor(MatCardHarness);
   protected getCheckbox = this.locatorFor(MatCheckboxHarness);
-  protected getMenu = this.locatorFor(MatMenuHarness);
+  protected getMenu = this.locatorFor(RunMenuHarness);
 
   async checkCheckbox(): Promise<void> {
     return (await this.getCheckbox()).check();
@@ -15,9 +17,22 @@ export class TeacherRunListItemHarness extends ComponentHarness {
     return (await this.getCheckbox()).isChecked();
   }
 
-  async clickMenuButton(menuButtonText: string): Promise<void> {
-    const menu = await this.getMenu();
-    await menu.open();
-    return menu.clickItem({ text: menuButtonText });
+  async clickArchiveMenuButton(): Promise<void> {
+    return (await this.getMenu()).clickArchiveMenuButton();
+  }
+
+  async clickUnarchiveMenuButton(): Promise<void> {
+    return (await this.getMenu()).clickUnarchiveMenuButton();
+  }
+
+  async getRunTitle(): Promise<string> {
+    return (await this.getCard()).getTitleText();
+  }
+
+  async isArchived(): Promise<boolean> {
+    const cardWithArchivedRunClass = await this.locatorForOptional(
+      MatCardHarness.with({ selector: '.archived-run' })
+    )();
+    return cardWithArchivedRunClass != null;
   }
 }
