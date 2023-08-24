@@ -29,7 +29,7 @@ export class ChooseMoveNodeLocationComponent {
     this.nodeIds = Object.keys(this.projectService.idToOrder);
     this.nodeIds.shift(); // remove the 'group0' root node from consideration
     if (this.moveGroup) {
-      this.nodeIds = this.nodeIds.filter((nodeId) => this.isGroupNode(nodeId));
+      this.nodeIds = this.nodeIds.filter((nodeId) => this.projectService.isGroupNode(nodeId));
     }
   }
 
@@ -37,13 +37,11 @@ export class ChooseMoveNodeLocationComponent {
     return !this.selectedNodeIds.includes(nodeId);
   }
 
-  protected moveAfter(nodeId: string): void {
-    this.saveAndGoToProjectView(this.moveNodesService.moveNodesAfter(this.selectedNodeIds, nodeId));
-  }
-
-  protected moveInside(nodeId: string): void {
+  protected move(nodeId: string, after: boolean): void {
     this.saveAndGoToProjectView(
-      this.moveNodesService.moveNodesInsideGroup(this.selectedNodeIds, nodeId)
+      after
+        ? this.moveNodesService.moveNodesAfter(this.selectedNodeIds, nodeId)
+        : this.moveNodesService.moveNodesInsideGroup(this.selectedNodeIds, nodeId)
     );
   }
 
@@ -75,5 +73,9 @@ export class ChooseMoveNodeLocationComponent {
 
   protected getParentGroup(nodeId: string): any {
     return this.projectService.getParentGroup(nodeId);
+  }
+
+  protected getBackgroundColor(nodeId: string): string {
+    return this.projectService.getBackgroundColor(nodeId);
   }
 }

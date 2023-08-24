@@ -33,23 +33,6 @@ export class ProjectAuthoringComponent {
   protected stepNodeSelected: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
-  /*
-   * The colors for the branch path steps. The colors are from
-   * http://colorbrewer2.org/
-   * http://colorbrewer2.org/export/colorbrewer.js
-   * The colors chosen are from the 'qualitative', 'Set2'.
-   */
-  stepBackgroundColors: string[] = [
-    '#66c2a5',
-    '#fc8d62',
-    '#8da0cb',
-    '#e78ac3',
-    '#a6d854',
-    '#ffd92f',
-    '#e5c494',
-    '#b3b3b3'
-  ];
-
   constructor(
     private configService: ConfigService,
     private copyNodesService: CopyNodesService,
@@ -458,26 +441,8 @@ export class ProjectAuthoringComponent {
     });
   }
 
-  /**
-   * Get the background color for a step
-   * @param nodeId get the background color for a step in the project view
-   * @return If the node is in a branch path it will return a color. If the
-   * node is not in a branch path it will return null.
-   */
   protected getStepBackgroundColor(nodeId: string): string {
-    let color = null;
-    let branchPathLetter = this.projectService.getBranchPathLetter(nodeId);
-    if (branchPathLetter != null) {
-      // get the ascii code for the letter. example A=65, B=66, C=67, etc.
-      let letterASCIICode = branchPathLetter.charCodeAt(0);
-
-      // get the branch path number A=0, B=1, C=2, etc.
-      let branchPathNumber = letterASCIICode - 65;
-
-      // get the color for the branch path number
-      color = this.stepBackgroundColors[branchPathNumber];
-    }
-    return color;
+    return this.projectService.getBackgroundColor(nodeId);
   }
 
   protected getNumberOfInactiveGroups(): number {
