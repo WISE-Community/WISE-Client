@@ -21,14 +21,13 @@
       (update)="searchChanged($event)"
     ></app-search-bar>
     <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
-    <div fxLayoutGap="12px">
-      <span i18n>Active</span>
-      <mat-slide-toggle
-        [(ngModel)]="showArchived"
-        (change)="isShowArchivedChanged()"
-      ></mat-slide-toggle>
-      <span i18n>Archived</span>
-    </div>
+    <mat-form-field>
+      <mat-label>View</mat-label>
+      <mat-select [(ngModel)]="showArchived" (selectionChange)="isShowArchivedChanged()">
+        <mat-option [value]="false">Active</mat-option>
+        <mat-option [value]="true">Archived</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div class="notice">
     <p [ngStyle]="{ visibility: loaded ? 'visible' : 'hidden' }">
