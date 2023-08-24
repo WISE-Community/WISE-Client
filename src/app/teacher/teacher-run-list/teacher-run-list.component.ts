@@ -243,11 +243,11 @@ export class TeacherRunListComponent implements OnInit {
         this.snackBar.open(
           $localize`Successfully Archived ${
             archiveProjectsResponse.filter((response) => response.archived).length
-          } Runs`
+          } Units`
         );
       },
       error: () => {
-        this.snackBar.open($localize`Error Archiving Runs`);
+        this.snackBar.open($localize`Error Archiving Units`);
       }
     });
   }
@@ -261,11 +261,11 @@ export class TeacherRunListComponent implements OnInit {
         this.snackBar.open(
           $localize`Successfully Unarchived ${
             archiveProjectsResponse.filter((response) => !response.archived).length
-          } Runs`
+          } Units`
         );
       },
       error: () => {
-        this.snackBar.open($localize`Error Unarchiving Runs`);
+        this.snackBar.open($localize`Error Unarchiving Units`);
       }
     });
   }
