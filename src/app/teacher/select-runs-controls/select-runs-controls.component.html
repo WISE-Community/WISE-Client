@@ -1,13 +1,20 @@
 <div fxLayout="row wrap" fxLayoutAlign="start center">
   <mat-checkbox
-    class="select-all-checkbox"
     color="primary"
     [checked]="selectedAllRuns"
     [indeterminate]="selectedSomeRuns"
     (click)="selectAllRunsCheckboxClicked()"
+    matTooltip="Select"
+    i18n-matTooltip
+    matTooltipPosition="above"
   ></mat-checkbox>
   <div class="select-all-drop-down">
-    <button mat-button [matMenuTriggerFor]="selectRunsMenu">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="selectRunsMenu"
+      aria-label="Select units"
+      i18n-aria-label
+    >
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <mat-menu #selectRunsMenu="matMenu">

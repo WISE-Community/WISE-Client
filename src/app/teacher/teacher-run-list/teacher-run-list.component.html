@@ -1,6 +1,6 @@
 <div class="notice" *ngIf="!runs.length && loaded">
   <p i18n>Hey there! Looks like you haven't run any WISE units in your classes yet.</p>
-  <p i18n>Select "Browse Units" to find titles to use with your students.</p>
+  <p i18n>Browse the "Unit Library" to find titles to use with your students.</p>
 </div>
 <div class="content-block" *ngIf="runs.length">
   <div
@@ -29,15 +29,16 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="notice">
+  <div class="notice" [ngClass]="{ warn: showArchived }">
     <p [ngStyle]="{ visibility: loaded ? 'visible' : 'hidden' }">
       <ng-container *ngIf="searchValue || filterValue" i18n
         >Units found: {{ filteredRuns.length }}</ng-container
       >
-      <ng-container *ngIf="!searchValue && !filterValue" i18n
-        >Total {{ showArchived ? 'archived' : 'active' }} classroom units:
-        {{ filteredRuns.length }}</ng-container
-      >
+      <ng-container *ngIf="!searchValue && !filterValue">
+        <ng-container *ngIf="showArchived" i18n>Archived classroom units:</ng-container>
+        <ng-container *ngIf="!showArchived" i18n>Active classroom units:</ng-container>
+        {{ filteredRuns.length }}
+      </ng-container>
       <span class="mat-caption" *ngIf="!showArchived && filteredRuns.length">
         (<ng-container *ngIf="completedTotal()"
           ><span i18n>{{ completedTotal() }} completed</span>,
@@ -51,7 +52,12 @@
       </span>
       <ng-container *ngIf="searchValue || filterValue">
         |
-        <a [routerLink]="" (click)="reset()" (keyup.enter)="reset()" tabindex="0" i18n
+        <a
+          href="#"
+          (click)="clearFilters($event)"
+          (keyup.enter)="clearFilters($event)"
+          tabindex="0"
+          i18n
           >Clear filters</a
         >
       </ng-container>
@@ -62,33 +68,38 @@
     class="select-all-controls"
     fxLayout="row"
     fxLayoutAlign="start center"
-    fxLayoutGap="20px"
+    fxLayoutGap="8px"
   >
     <select-runs-controls
       [numSelectedRuns]="numSelectedRuns"
       [numTotalRuns]="filteredRuns.length"
       (selectRunsOptionChosenEvent)="selectRunsOptionChosen($event)"
     ></select-runs-controls>
-    <div *ngIf="numSelectedRuns > 0" class="num-selected-runs-display" i18n>
-      {{ numSelectedRuns }} Run(s) Selected
+    <div *ngIf="numSelectedRuns > 0" class="secondary-text" i18n>
+      {{ numSelectedRuns }} selected
     </div>
     <button
-      mat-raised-button
-      color="accent"
+      mat-icon-button
       *ngIf="!showArchived && numSelectedRuns > 0"
       (click)="archiveSelectedRuns()"
-      i18n
+      aria-label="Archive selected units"
+      i18n-aria-label
+      matTooltip="Archive"
+      matTooltipPosition="above"
+      i18n-matTooltip
     >
-      Archive Selected
+      <mat-icon>archive</mat-icon>
     </button>
     <button
-      mat-raised-button
-      color="accent"
+      mat-icon-button
       *ngIf="showArchived && numSelectedRuns > 0"
       (click)="unarchiveSelectedRuns()"
-      i18n
+      aria-label="Restore selected units"
+      i18n-aria-label
+      matTooltip="Restore"
+      matTooltipPosition="above"
     >
-      Unarchive Selected
+      <mat-icon>unarchive</mat-icon>
     </button>
   </div>
   <app-timeline>

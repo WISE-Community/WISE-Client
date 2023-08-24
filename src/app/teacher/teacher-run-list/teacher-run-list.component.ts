@@ -164,6 +164,11 @@ export class TeacherRunListComponent implements OnInit {
     );
   }
 
+  protected clearFilters(event: Event): void {
+    event.preventDefault();
+    this.reset();
+  }
+
   protected reset(): void {
     this.searchValue = '';
     this.filterValue = '';
