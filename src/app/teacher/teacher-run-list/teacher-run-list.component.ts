@@ -242,13 +242,13 @@ export class TeacherRunListComponent implements OnInit {
         this.updateRunsArchivedStatus(runs, archiveProjectsResponse);
         this.updateRunsInformation();
         this.snackBar.open(
-          $localize`Successfully Archived ${
+          $localize`Successfully archived ${
             archiveProjectsResponse.filter((response) => response.archived).length
-          } Runs`
+          } unit(s).`
         );
       },
       error: () => {
-        this.snackBar.open($localize`Error Archiving Runs`);
+        this.snackBar.open($localize`Error archiving unit(s).`);
       }
     });
   }
@@ -260,13 +260,13 @@ export class TeacherRunListComponent implements OnInit {
         this.updateRunsArchivedStatus(runs, archiveProjectsResponse);
         this.updateRunsInformation();
         this.snackBar.open(
-          $localize`Successfully Unarchived ${
+          $localize`Successfully restored ${
             archiveProjectsResponse.filter((response) => !response.archived).length
-          } Runs`
+          } unit(s).`
         );
       },
       error: () => {
-        this.snackBar.open($localize`Error Unarchiving Runs`);
+        this.snackBar.open($localize`Error restoring unit(s).`);
       }
     });
   }

@@ -97,10 +97,10 @@ export class RunMenuComponent implements OnInit {
       next: (response: ArchiveProjectResponse) => {
         run.archived = response.archived;
         this.runArchiveStatusChangedEvent.emit(run);
-        this.snackBar.open($localize`Successfully Archived Run`);
+        this.snackBar.open($localize`Successfully archived unit.`);
       },
       error: () => {
-        this.snackBar.open($localize`Error Archiving Run`);
+        this.snackBar.open($localize`Error archiving unit.`);
       }
     });
   }
@@ -111,10 +111,10 @@ export class RunMenuComponent implements OnInit {
       next: (response: ArchiveProjectResponse) => {
         run.archived = response.archived;
         this.runArchiveStatusChangedEvent.emit(run);
-        this.snackBar.open($localize`Successfully Unarchived Run`);
+        this.snackBar.open($localize`Successfully restored unit.`);
       },
       error: () => {
-        this.snackBar.open($localize`Error Unarchiving Run`);
+        this.snackBar.open($localize`Error restoring unit.`);
       }
     });
   }

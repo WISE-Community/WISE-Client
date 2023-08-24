@@ -30,12 +30,12 @@
       <span i18n>Report Problem</span>
     </a>
     <a mat-menu-item *ngIf="!run.archived" (click)="archive()">
-      <mat-icon>folder</mat-icon>
+      <mat-icon>archive</mat-icon>
       <span i18n>Archive</span>
     </a>
     <a mat-menu-item *ngIf="run.archived" (click)="unarchive()">
-      <mat-icon>folder_off</mat-icon>
-      <span i18n>Unarchive</span>
+      <mat-icon>unarchive</mat-icon>
+      <span i18n>Restore</span>
     </a>
   </div>
 </mat-menu>
