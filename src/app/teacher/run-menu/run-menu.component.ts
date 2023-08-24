@@ -85,29 +85,37 @@ export class RunMenuComponent implements OnInit {
   }
 
   protected archive(): void {
-    const run = this.run;
-    this.archiveProjectService.archiveProject(run.project).subscribe({
-      next: (response: ArchiveProjectResponse) => {
-        run.archived = response.archived;
-        this.runArchiveStatusChangedEvent.emit(run);
-        this.snackBar.open($localize`Successfully Archived Run`);
-      },
-      error: () => {
-        this.snackBar.open($localize`Error Archiving Run`);
-      }
-    });
+    this.performArchiveAction(
+      this.run,
+      'archiveProject',
+      $localize`Successfully Archived Unit`,
+      $localize`Error Archiving Unit`
+    );
   }
 
   protected unarchive(): void {
-    const run = this.run;
-    this.archiveProjectService.unarchiveProject(run.project).subscribe({
+    this.performArchiveAction(
+      this.run,
+      'unarchiveProject',
+      $localize`Successfully Unarchived Unit`,
+      $localize`Error Unarchiving Unit`
+    );
+  }
+
+  private performArchiveAction(
+    run: TeacherRun,
+    archiveFunctionName: 'archiveProject' | 'unarchiveProject',
+    successMessage: string,
+    errorMessage: string
+  ): void {
+    this.archiveProjectService[archiveFunctionName](run.project).subscribe({
       next: (response: ArchiveProjectResponse) => {
         run.archived = response.archived;
         this.runArchiveStatusChangedEvent.emit(run);
-        this.snackBar.open($localize`Successfully Unarchived Run`);
+        this.snackBar.open(successMessage);
       },
       error: () => {
-        this.snackBar.open($localize`Error Unarchiving Run`);
+        this.snackBar.open(errorMessage);
       }
     });
   }

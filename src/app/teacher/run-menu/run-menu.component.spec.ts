@@ -132,7 +132,7 @@ function archive() {
     it('should archive a run', async () => {
       await runMenuHarness.clickArchiveMenuButton();
       expect(component.run.archived).toEqual(true);
-      expect(snackBarSpy).toHaveBeenCalledWith('Successfully Archived Run');
+      expect(snackBarSpy).toHaveBeenCalledWith('Successfully Archived Unit');
     });
   });
 }
@@ -144,7 +144,7 @@ function unarchive() {
       component.ngOnInit();
       await runMenuHarness.clickUnarchiveMenuButton();
       expect(component.run.archived).toEqual(false);
-      expect(snackBarSpy).toHaveBeenCalledWith('Successfully Unarchived Run');
+      expect(snackBarSpy).toHaveBeenCalledWith('Successfully Unarchived Unit');
     });
   });
 }
