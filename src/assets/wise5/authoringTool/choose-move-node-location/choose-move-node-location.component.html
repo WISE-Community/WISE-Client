@@ -1,0 +1,199 @@
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+  <h5 i18n>Choose a new location by clicking one of the buttons below</h5>
+  <button mat-raised-button color="primary" routerLink=".." aria-label="Cancel" i18n>Cancel</button>
+</div>
+<div style="margin-top: 20px; margin-left: 20px">
+  <div *ngIf="moveGroup">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="moveInside('group0')"
+      matTooltip="Insert As First Lesson"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+  </div>
+  <div
+    *ngFor="let nodeId of nodeIds"
+    class="project-item"
+    [ngClass]="{
+      'node-select--group': isGroupNode(nodeId),
+      'node-select--node': !isGroupNode(nodeId)
+    }"
+  >
+    <div
+      id="{{ nodeId }}"
+      [ngClass]="{
+        groupHeader: isGroupNode(nodeId),
+        stepHeader: !isGroupNode(nodeId),
+        branchPathStepHeader: isNodeInAnyBranchPath(nodeId) && !isGroupNode(nodeId)
+      }"
+    >
+      <div fxLayout="row" fxLayoutGap="8px">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <node-icon [nodeId]="nodeId" size="18"></node-icon>&nbsp;
+          <p style="display: inline; cursor: pointer">
+            {{ getNodePositionById(nodeId) }}: {{ getNodeTitle(nodeId) }}
+          </p>
+        </div>
+        <button
+          mat-raised-button
+          color="primary"
+          *ngIf="isGroupNode(nodeId) && !moveGroup"
+          matTooltip="Insert As First Step"
+          i18n-matTooltip
+          matTooltipPosition="above"
+          (click)="moveInside(nodeId); $event.stopPropagation()"
+        >
+          <mat-icon>call_received</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          *ngIf="!isGroupNode(nodeId) || (isGroupNode(nodeId) && moveGroup)"
+          matTooltip="Insert After"
+          i18n-matTooltip
+          matTooltipPosition="above"
+          [disabled]="!canMove(nodeId)"
+          (click)="moveAfter(nodeId); $event.stopPropagation()"
+        >
+          <mat-icon>subdirectory_arrow_left</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <h6 class="underline">Unused Lessons</h6>
+    <button
+      *ngIf="moveGroup"
+      mat-raised-button
+      color="primary"
+      (click)="moveInside('inactiveGroups')"
+      matTooltip="Insert Inside"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>call_received</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="inactiveGroupNodes.length == 0">
+    <span i18n>There are no Unused Lessons</span>
+  </div>
+  <ng-container *ngFor="let inactiveNode of inactiveGroupNodes">
+    <div
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      [ngClass]="{ groupHeader: true, }"
+      class="projectItem"
+    >
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <node-icon [nodeId]="inactiveNode.id" size="18"></node-icon>&nbsp;
+        <h6 class="pointer">{{ getNodeTitle(inactiveNode.id) }}</h6>
+        <button
+          mat-raised-button
+          color="primary"
+          mat-raised-buton
+          color="primary"
+          *ngIf="!moveGroup"
+          (click)="moveInside(inactiveNode.id); $event.stopPropagation()"
+          matTooltip="Insert Inside"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>call_received</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          *ngIf="moveGroup"
+          [disabled]="!canMove(inactiveNode.id)"
+          (click)="moveAfter(inactiveNode.id); $event.stopPropagation()"
+          matTooltip="Insert After"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>subdirectory_arrow_left</mat-icon>
+        </button>
+      </div>
+    </div>
+    <ng-container *ngFor="let inactiveChildId of inactiveNode.ids">
+      <div *ngIf="!moveGroup" class="projectItem">
+        <div
+          fxLayout="row"
+          [ngClass]="{
+            stepHeader: true,
+            branchPathStepHeader: isNodeInAnyBranchPath(inactiveChildId.id)
+          }"
+          class="projectItem"
+        >
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <node-icon [nodeId]="inactiveChildId" size="18"></node-icon>&nbsp;
+            <p class="pointer">
+              {{ getNodeTitle(inactiveChildId) }}
+            </p>
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="!canMove(inactiveChildId)"
+              (click)="moveAfter(inactiveChildId); $event.stopPropagation()"
+              matTooltip="Insert After"
+              matTooltipPositin="above"
+              i18n-matTooltip
+            >
+              <mat-icon>subdirectory_arrow_left</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+  <div *ngIf="!moveGroup">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <h6 class="underline" i18n>Unused Steps</h6>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="moveInside('inactiveNodes')"
+        matTooltip="Insert Inside"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>call_received</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="inactiveStepNodes.length == 0">
+      <span i18n>There are no Unused Steps</span>
+    </div>
+    <ng-container *ngFor="let inactiveNode of inactiveStepNodes">
+      <div *ngIf="getParentGroup(inactiveNode.id) == null" class="projectItem">
+        <div
+          fxLayout="row"
+          [ngClass]="{
+            stepHeader: true,
+            branchPathStepHeader: isNodeInAnyBranchPath(inactiveNode.id)
+          }"
+        >
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <node-icon [nodeId]="inactiveNode.id" size="18"></node-icon>
+            <p class="pointer">{{ getNodeTitle(inactiveNode.id) }}</p>
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="!canMove(inactiveNode.id)"
+              (click)="moveAfter(inactiveNode.id); $event.stopPropagation()"
+              matTooltip="Insert After"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
+              <mat-icon>subdirectory_arrow_left</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

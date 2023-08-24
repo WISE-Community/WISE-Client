@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ConfigService } from '../../services/configService';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { DeleteNodeService } from '../../services/deleteNodeService';
-import { MoveNodesService } from '../../services/moveNodesService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import * as $ from 'jquery';
@@ -28,7 +27,6 @@ export class ProjectAuthoringComponent {
   protected insertGroupMode: boolean;
   protected insertNodeMode: boolean;
   protected items: any;
-  private moveMode: boolean;
   private projectId: number;
   protected showProjectView: boolean = true;
   private rxStomp: RxStomp;
@@ -56,7 +54,6 @@ export class ProjectAuthoringComponent {
     private configService: ConfigService,
     private copyNodesService: CopyNodesService,
     private deleteNodeService: DeleteNodeService,
-    private moveNodesService: MoveNodesService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
     private route: ActivatedRoute,
@@ -81,8 +78,6 @@ export class ProjectAuthoringComponent {
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
     this.idToNode = this.projectService.getIdToNode();
-    this.stepNodeSelected = false;
-    this.activityNodeSelected = false;
     this.subscribeToCurrentAuthors(this.projectId);
     this.subscriptions.add(
       this.projectService.refreshProject$.subscribe(() => {
@@ -149,78 +144,14 @@ export class ProjectAuthoringComponent {
   }
 
   protected insertInside(nodeId: string): void {
-    // TODO check that we are inserting into a group
-    if (this.moveMode) {
-      this.handleMoveModeInsert(nodeId, 'inside');
-    } else if (this.copyMode) {
+    if (this.copyMode) {
       this.handleCopyModeInsert(nodeId, 'inside');
     }
   }
 
   protected insertAfter(nodeId: string): void {
-    if (this.moveMode) {
-      this.handleMoveModeInsert(nodeId, 'after');
-    } else if (this.copyMode) {
+    if (this.copyMode) {
       this.handleCopyModeInsert(nodeId, 'after');
-    }
-  }
-
-  /**
-   * Move a node and insert it in the specified location
-   * @param nodeId insert the new node inside or after this node id
-   * @param moveTo whether to insert 'inside' or 'after' the nodeId parameter
-   */
-  private handleMoveModeInsert(nodeId: string, moveTo: string): void {
-    let selectedNodeIds = this.getSelectedNodeIds();
-    if (selectedNodeIds != null && selectedNodeIds.indexOf(nodeId) != -1) {
-      /*
-       * the user is trying to insert the selected node ids after
-       * itself so we will not allow that
-       */
-      if (selectedNodeIds.length == 1) {
-        alert($localize`You are not allowed to insert the selected item after itself.`);
-      } else if (selectedNodeIds.length > 1) {
-        alert($localize`You are not allowed to insert the selected items after itself.`);
-      }
-    } else {
-      let movedNodes = [];
-      for (let selectedNodeId of selectedNodeIds) {
-        let node = {
-          nodeId: selectedNodeId,
-          fromTitle: this.projectService.getNodePositionAndTitle(selectedNodeId)
-        };
-        movedNodes.push(node);
-      }
-
-      let newNodes = [];
-      if (moveTo === 'inside') {
-        newNodes = this.moveNodesService.moveNodesInsideGroup(selectedNodeIds, nodeId);
-      } else if (moveTo === 'after') {
-        newNodes = this.moveNodesService.moveNodesAfter(selectedNodeIds, nodeId);
-      } else {
-        // an unspecified moveTo was provided
-        return;
-      }
-
-      this.moveMode = false;
-      this.insertGroupMode = false;
-      this.insertNodeMode = false;
-      this.temporarilyHighlightNewNodes(newNodes);
-      this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
-        this.refreshProject();
-        if (newNodes != null && newNodes.length > 0) {
-          let firstNewNode = newNodes[0];
-          if (firstNewNode != null && firstNewNode.id != null) {
-            for (let n = 0; n < movedNodes.length; n++) {
-              let node = movedNodes[n];
-              let newNode = newNodes[n];
-              if (node != null && newNode != null) {
-                node.toTitle = this.projectService.getNodePositionAndTitle(newNode.id);
-              }
-            }
-          }
-        }
-      });
     }
   }
 
@@ -290,20 +221,10 @@ export class ProjectAuthoringComponent {
   }
 
   protected move(): void {
-    // make sure there is at least one item selected
-    let selectedNodeIds = this.getSelectedNodeIds();
-    if (selectedNodeIds == null || selectedNodeIds.length == 0) {
-      alert($localize`Please select an item to move and then click the "Move" button again.`);
-    } else {
-      let selectedItemTypes = this.getSelectedItemTypes();
-      if (selectedItemTypes.length === 1 && selectedItemTypes[0] === 'node') {
-        this.insertNodeMode = true;
-        this.moveMode = true;
-      } else if (selectedItemTypes.length === 1 && selectedItemTypes[0] === 'group') {
-        this.insertGroupMode = true;
-        this.moveMode = true;
-      }
-    }
+    this.router.navigate(['choose-move-location'], {
+      relativeTo: this.route,
+      state: { selectedNodeIds: this.getSelectedNodeIds() }
+    });
   }
 
   protected deleteSelectedNodes(): void {
@@ -434,7 +355,6 @@ export class ProjectAuthoringComponent {
   protected cancelMove(): void {
     this.insertGroupMode = false;
     this.insertNodeMode = false;
-    this.moveMode = false;
     this.copyMode = false;
     this.unselectAllItems();
   }
