@@ -30,9 +30,6 @@ export class TeacherRunListItemHarness extends ComponentHarness {
   }
 
   async isArchived(): Promise<boolean> {
-    const cardWithArchivedRunClass = await this.locatorForOptional(
-      MatCardHarness.with({ selector: '.archived-run' })
-    )();
-    return cardWithArchivedRunClass != null;
+    return (await this.locatorForOptional('.mat-mdc-card-title.warn')()) != null;
   }
 }

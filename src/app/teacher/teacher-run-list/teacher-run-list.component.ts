@@ -138,7 +138,6 @@ export class TeacherRunListComponent implements OnInit {
   protected searchChanged(searchValue: string): void {
     this.searchValue = searchValue;
     this.performSearchAndFilter();
-    this.turnOnShowAll();
   }
 
   private performFilter(): void {
@@ -200,7 +199,6 @@ export class TeacherRunListComponent implements OnInit {
   }
 
   protected showArchivedChanged(): void {
-    this.turnOnShowAll();
     this.unselectAllRuns();
     this.updateNumSelectedRuns();
     this.performSearchAndFilter();
@@ -213,25 +211,22 @@ export class TeacherRunListComponent implements OnInit {
   }
 
   protected selectRunsOptionChosen(value: string): void {
-    this.turnOnShowAll();
-    this.filteredRuns
-      .filter((run: TeacherRun) => !run.shared)
-      .forEach((run: TeacherRun) => {
-        switch (value) {
-          case 'all':
-            run.selected = true;
-            break;
-          case 'none':
-            run.selected = false;
-            break;
-          case 'running':
-            run.selected = !run.isCompleted(this.configService.getCurrentServerTime());
-            break;
-          case 'completed':
-            run.selected = run.isCompleted(this.configService.getCurrentServerTime());
-            break;
-        }
-      });
+    this.filteredRuns.forEach((run: TeacherRun) => {
+      switch (value) {
+        case 'all':
+          run.selected = true;
+          break;
+        case 'none':
+          run.selected = false;
+          break;
+        case 'running':
+          run.selected = !run.isCompleted(this.configService.getCurrentServerTime());
+          break;
+        case 'completed':
+          run.selected = run.isCompleted(this.configService.getCurrentServerTime());
+          break;
+      }
+    });
     this.updateNumSelectedRuns();
   }
 
@@ -307,9 +302,5 @@ export class TeacherRunListComponent implements OnInit {
     return this.filteredRuns.filter((run: TeacherRun) => {
       return run.selected;
     });
-  }
-
-  private turnOnShowAll(): void {
-    this.showAll = true;
   }
 }

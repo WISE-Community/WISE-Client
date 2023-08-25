@@ -6,6 +6,7 @@ import { MatSelectHarness } from '@angular/material/select/testing';
 
 export class TeacherRunListHarness extends ComponentHarness {
   static hostSelector = 'app-teacher-run-list';
+  private ARCHIVED_TEXT = 'Archived';
   protected getArchiveButton = this.locatorFor(
     MatButtonHarness.with({ selector: '[aria-label="Archive selected units"]' })
   );
@@ -17,11 +18,11 @@ export class TeacherRunListHarness extends ComponentHarness {
   );
 
   async isShowingArchived(): Promise<boolean> {
-    return (await (await this.getViewSelect()).getValueText()) === 'true';
+    return (await (await this.getViewSelect()).getValueText()) === this.ARCHIVED_TEXT;
   }
 
   async showArchived(): Promise<void> {
-    return await (await this.getViewSelect()).clickOptions({ text: 'Archived' });
+    return (await this.getViewSelect()).clickOptions({ text: this.ARCHIVED_TEXT });
   }
 
   async checkSelectRunsCheckbox(): Promise<void> {
