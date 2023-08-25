@@ -12,10 +12,10 @@ export class RunMenuHarness extends ComponentHarness {
   }
 
   async clickArchiveMenuButton(): Promise<void> {
-    return await this.clickMenuButton('folderArchive');
+    return await this.clickMenuButton('archiveArchive');
   }
 
   async clickUnarchiveMenuButton(): Promise<void> {
-    return await this.clickMenuButton('folder_offUnarchive');
+    return await this.clickMenuButton('unarchiveRestore');
   }
 }

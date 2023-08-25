@@ -21,12 +21,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RunMenuComponent } from '../run-menu/run-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ArchiveProjectService } from '../../services/archive-project.service';
 import { MatCardModule } from '@angular/material/card';
 import { MockArchiveProjectService } from '../../services/mock-archive-project.service';
+import { MatSelectModule } from '@angular/material/select';
 
 class TeacherScheduleStubComponent {}
 
@@ -88,7 +88,7 @@ describe('TeacherRunListComponent', () => {
           MatFormFieldModule,
           MatInputModule,
           MatMenuModule,
-          MatSlideToggleModule,
+          MatSelectModule,
           MatSnackBarModule,
           RouterTestingModule.withRoutes([
             { path: 'teacher/home/schedule', component: TeacherScheduleStubComponent }
@@ -131,7 +131,7 @@ describe('TeacherRunListComponent', () => {
   });
 
   archiveSelectedRuns();
-  isShowArchiveChanged();
+  showArchivedChanged();
   runArchiveStatusChanged();
   runSelectedStatusChanged();
   selectAllRunsCheckboxClicked();
@@ -171,7 +171,7 @@ function unarchiveSelectedRuns(): void {
         ])
       );
       component.ngOnInit();
-      await runListHarness.toggleArchiveToggle();
+      await runListHarness.showArchived();
       expect(await runListHarness.getNumRunListItems()).toEqual(2);
       await runListHarness.clickRunListItemCheckbox(0);
       await runListHarness.clickRunListItemCheckbox(1);
@@ -181,14 +181,14 @@ function unarchiveSelectedRuns(): void {
   });
 }
 
-function isShowArchiveChanged(): void {
-  describe('isShowArchiveChanged()', () => {
+function showArchivedChanged(): void {
+  describe('showArchivedChanged()', () => {
     describe('active runs are shown and some runs are selected', () => {
       it('should unselect the runs', async () => {
         expect(await runListHarness.isShowingArchived()).toBeFalse();
         await runListHarness.clickRunListItemCheckbox(0);
         await runListHarness.clickRunListItemCheckbox(2);
-        await runListHarness.toggleArchiveToggle();
+        await runListHarness.showArchived();
         expect(await runListHarness.isShowingArchived()).toBeTrue();
         await expectRunsIsSelected([false, false, false]);
       });
@@ -312,7 +312,7 @@ function runArchiveStatusChanged(): void {
         ])
       );
       component.ngOnInit();
-      await runListHarness.toggleArchiveToggle();
+      await runListHarness.showArchived();
       expect(await runListHarness.isShowingArchived()).toBeTrue();
       expect(await runListHarness.getNumRunListItems()).toEqual(1);
       await expectRunTitles([run2Title]);

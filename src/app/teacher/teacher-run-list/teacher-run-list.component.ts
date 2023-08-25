@@ -199,7 +199,7 @@ export class TeacherRunListComponent implements OnInit {
     }
   }
 
-  protected isShowArchivedChanged(): void {
+  protected showArchivedChanged(): void {
     this.turnOnShowAll();
     this.unselectAllRuns();
     this.updateNumSelectedRuns();

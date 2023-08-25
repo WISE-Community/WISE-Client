@@ -1,25 +1,27 @@
 import { ComponentHarness } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
-import { MatSlideToggleHarness } from '@angular/material/slide-toggle/testing';
 import { TeacherRunListItemHarness } from '../teacher-run-list-item/teacher-run-list-item.harness';
 import { SelectRunsControlsHarness } from '../select-runs-controls/select-runs-controls.harness';
+import { MatSelectHarness } from '@angular/material/select/testing';
 
 export class TeacherRunListHarness extends ComponentHarness {
   static hostSelector = 'app-teacher-run-list';
-  protected getArchiveButton = this.locatorFor(MatButtonHarness.with({ text: 'Archive Selected' }));
-  protected getArchiveToggle = this.locatorFor(MatSlideToggleHarness);
+  protected getArchiveButton = this.locatorFor(
+    MatButtonHarness.with({ selector: '[aria-label="Archive selected units"]' })
+  );
+  protected getViewSelect = this.locatorFor(MatSelectHarness);
   protected getRunListItems = this.locatorForAll(TeacherRunListItemHarness);
   protected getSelectRunsControls = this.locatorFor(SelectRunsControlsHarness);
   protected getUnarchiveButton = this.locatorFor(
-    MatButtonHarness.with({ text: 'Unarchive Selected' })
+    MatButtonHarness.with({ selector: '[aria-label="Restore selected units"]' })
   );
 
   async isShowingArchived(): Promise<boolean> {
-    return (await this.getArchiveToggle()).isChecked();
+    return (await (await this.getViewSelect()).getValueText()) === 'true';
   }
 
-  async toggleArchiveToggle(): Promise<void> {
-    return (await this.getArchiveToggle()).toggle();
+  async showArchived(): Promise<void> {
+    return await (await this.getViewSelect()).clickOptions({ text: 'Archived' });
   }
 
   async checkSelectRunsCheckbox(): Promise<void> {

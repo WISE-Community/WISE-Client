@@ -34,7 +34,7 @@ export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingDial
         this.dialogRef.close();
       },
       () => {
-        this.snackBar.open($localize`Please Try Again (Error: Duplicate Tag)`);
+        this.snackBar.open($localize`Please try again (Error: duplicate tag).`);
       }
     );
   }
