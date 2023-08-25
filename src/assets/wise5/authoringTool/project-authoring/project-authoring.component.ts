@@ -42,9 +42,12 @@ export class ProjectAuthoringComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => this.updateShowProjectView());
+    this.subscriptions.add(
+      this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+        this.updateShowProjectView();
+        this.temporarilyHighlightNewNodes(history.state.newNodes);
+      })
+    );
   }
 
   ngOnInit(): void {
@@ -415,30 +418,20 @@ export class ProjectAuthoringComponent {
   /**
    * Temporarily highlight the new nodes to draw attention to them
    * @param newNodes the new nodes to highlight
-   * @param doScrollToNewNodes if true, scroll to the first new node added
-   * TODO: can we remove the null checks: ensure that newNodes is never null?
    */
-  private temporarilyHighlightNewNodes(newNodes, doScrollToNewNodes = false): void {
-    setTimeout(() => {
-      if (newNodes != null && newNodes.length > 0) {
-        for (let newNode of newNodes) {
-          if (newNode != null) {
-            temporarilyHighlightElement(newNode.id);
-          }
-        }
-        if (doScrollToNewNodes) {
-          let firstNodeElementAdded = $('#' + newNodes[0].id);
-          if (firstNodeElementAdded != null) {
-            $('#content').animate(
-              {
-                scrollTop: firstNodeElementAdded.prop('offsetTop') - 60
-              },
-              1000
-            );
-          }
-        }
-      }
-    });
+  private temporarilyHighlightNewNodes(newNodes = []): void {
+    if (newNodes.length > 0) {
+      setTimeout(() => {
+        newNodes.forEach((newNode) => temporarilyHighlightElement(newNode.id));
+        const firstNodeElementAdded = $('#' + newNodes[0].id);
+        $('#content').animate(
+          {
+            scrollTop: firstNodeElementAdded.prop('offsetTop') - 60
+          },
+          1000
+        );
+      });
+    }
   }
 
   protected getStepBackgroundColor(nodeId: string): string {
