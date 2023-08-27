@@ -23,7 +23,7 @@
     <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
     <mat-form-field>
       <mat-label>View</mat-label>
-      <mat-select [(ngModel)]="showArchived" (selectionChange)="showArchivedChanged()">
+      <mat-select [(ngModel)]="showArchived" (selectionChange)="updateRunsInformation()">
         <mat-option [value]="false" i18n>Active</mat-option>
         <mat-option [value]="true" i18n>Archived</mat-option>
       </mat-select>
@@ -63,45 +63,13 @@
       </ng-container>
     </p>
   </div>
-  <div
-    *ngIf="filteredRuns.length > 0"
-    class="select-all-controls"
-    fxLayout="row"
-    fxLayoutAlign="start center"
-    fxLayoutGap="8px"
-  >
-    <select-runs-controls
-      [numSelectedRuns]="numSelectedRuns"
-      [numTotalRuns]="filteredRuns.length"
-      (selectRunsOptionChosenEvent)="selectRunsOptionChosen($event)"
-    ></select-runs-controls>
-    <div *ngIf="numSelectedRuns > 0" class="secondary-text" i18n>
-      {{ numSelectedRuns }} selected
-    </div>
-    <button
-      mat-icon-button
-      *ngIf="!showArchived && numSelectedRuns > 0"
-      (click)="archiveSelectedRuns()"
-      aria-label="Archive selected units"
-      i18n-aria-label
-      matTooltip="Archive"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>archive</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      *ngIf="showArchived && numSelectedRuns > 0"
-      (click)="unarchiveSelectedRuns()"
-      aria-label="Restore selected units"
-      i18n-aria-label
-      matTooltip="Restore"
-      matTooltipPosition="above"
-    >
-      <mat-icon>unarchive</mat-icon>
-    </button>
-  </div>
+  <select-runs-controls
+    (archiveActionEvent)="updateRunsInformation()"
+    [runChangedEventEmitter]="runChangedEventEmitter"
+    [runs]="filteredRuns"
+    (selectRunsOptionChosenEvent)="selectRunsOptionChosen($event)"
+    [showArchived]="showArchived"
+  ></select-runs-controls>
   <app-timeline>
     <ng-container *ngFor="let run of filteredRuns.sort(sortByStartTimeDesc); let i = index">
       <app-timeline-item [active]="isRunActive(run)" *ngIf="i < 10 || showAll" id="run{{ run.id }}">

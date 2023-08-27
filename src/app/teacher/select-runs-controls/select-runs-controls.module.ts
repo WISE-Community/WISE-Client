@@ -6,11 +6,13 @@ import { SelectRunsControlsComponent } from './select-runs-controls.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [SelectRunsControlsComponent],
   exports: [SelectRunsControlsComponent],
   imports: [
+    CommonModule,
     FlexLayoutModule,
     MatButtonModule,
     MatCheckboxModule,

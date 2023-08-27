@@ -1,4 +1,4 @@
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { TeacherService } from '../teacher.service';
 import { TeacherRun } from '../teacher-run';
 import { ConfigService } from '../../services/config.service';
@@ -7,10 +7,6 @@ import { formatDate } from '@angular/common';
 import { Observable, of, Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { mergeMap } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ArchiveProjectService } from '../../services/archive-project.service';
-import { Project } from '../../domain/project';
-import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -24,6 +20,7 @@ export class TeacherRunListComponent implements OnInit {
   protected filterValue: string = '';
   protected loaded: boolean = false;
   protected numSelectedRuns: number = 0;
+  protected runChangedEventEmitter: EventEmitter<void> = new EventEmitter<void>();
   protected runs: TeacherRun[] = [];
   protected searchValue: string = '';
   protected showAll: boolean = false;
@@ -31,12 +28,10 @@ export class TeacherRunListComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
-    private archiveProjectService: ArchiveProjectService,
     private configService: ConfigService,
     @Inject(LOCALE_ID) private localeID: string,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar,
     private teacherService: TeacherService,
     private userService: UserService
   ) {}
@@ -132,7 +127,7 @@ export class TeacherRunListComponent implements OnInit {
   private performSearchAndFilter(): void {
     this.filteredRuns = this.searchValue ? this.performSearch(this.searchValue) : this.runs;
     this.performFilter();
-    this.updateNumSelectedRuns();
+    this.runSelectedStatusChanged();
   }
 
   protected searchChanged(searchValue: string): void {
@@ -198,12 +193,6 @@ export class TeacherRunListComponent implements OnInit {
     }
   }
 
-  protected showArchivedChanged(): void {
-    this.unselectAllRuns();
-    this.updateNumSelectedRuns();
-    this.performSearchAndFilter();
-  }
-
   private unselectAllRuns(): void {
     for (const run of this.runs) {
       run.selected = false;
@@ -227,80 +216,20 @@ export class TeacherRunListComponent implements OnInit {
           break;
       }
     });
-    this.updateNumSelectedRuns();
+    this.runSelectedStatusChanged();
   }
 
-  private updateNumSelectedRuns(): void {
-    this.numSelectedRuns = this.getSelectedRuns().length;
-  }
-
-  protected archiveSelectedRuns(): Subscription {
-    const runs = this.getSelectedRuns();
-    return this.archiveProjectService.archiveProjects(this.getProjects(runs)).subscribe({
-      next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
-        this.updateRunsArchivedStatus(runs, archiveProjectsResponse);
-        this.updateRunsInformation();
-        this.snackBar.open(
-          $localize`Successfully archived ${
-            archiveProjectsResponse.filter((response) => response.archived).length
-          } unit(s).`
-        );
-      },
-      error: () => {
-        this.snackBar.open($localize`Error archiving unit(s).`);
-      }
-    });
-  }
-
-  protected unarchiveSelectedRuns(): Subscription {
-    const runs = this.getSelectedRuns();
-    return this.archiveProjectService.unarchiveProjects(this.getProjects(runs)).subscribe({
-      next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
-        this.updateRunsArchivedStatus(runs, archiveProjectsResponse);
-        this.updateRunsInformation();
-        this.snackBar.open(
-          $localize`Successfully restored ${
-            archiveProjectsResponse.filter((response) => !response.archived).length
-          } unit(s).`
-        );
-      },
-      error: () => {
-        this.snackBar.open($localize`Error restoring unit(s).`);
-      }
-    });
-  }
-
-  private updateRunsArchivedStatus(
-    runs: TeacherRun[],
-    archiveProjectsResponse: ArchiveProjectResponse[]
-  ): void {
-    for (const archiveProjectResponse of archiveProjectsResponse) {
-      const run = runs.find((run: TeacherRun) => run.project.id === archiveProjectResponse.id);
-      run.archived = archiveProjectResponse.archived;
-    }
-  }
-
-  private updateRunsInformation(): void {
+  protected updateRunsInformation(): void {
     this.unselectAllRuns();
-    this.updateNumSelectedRuns();
+    this.runSelectedStatusChanged();
     this.performSearchAndFilter();
-  }
-
-  private getProjects(runs: TeacherRun[]): Project[] {
-    return runs.map((run: TeacherRun) => run.project);
-  }
-
-  protected runSelectedStatusChanged(): void {
-    this.updateNumSelectedRuns();
   }
 
   protected runArchiveStatusChanged(): void {
     this.performSearchAndFilter();
   }
 
-  private getSelectedRuns(): TeacherRun[] {
-    return this.filteredRuns.filter((run: TeacherRun) => {
-      return run.selected;
-    });
+  private runSelectedStatusChanged(): void {
+    this.runChangedEventEmitter.emit();
   }
 }
