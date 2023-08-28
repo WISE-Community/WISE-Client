@@ -74,8 +74,6 @@
       </div>
     </div>
   </div>
-</div>
-<div>
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
     <h6 class="underline" i18n>Unused Lessons</h6>
     <ng-container *ngIf="moveGroup">
@@ -88,7 +86,7 @@
     <span i18n>There are no Unused Lessons</span>
   </div>
   <ng-container *ngFor="let inactiveNode of inactiveGroupNodes">
-    <div fxLayout="row" fxLayoutAlign="start center" [ngClass]="{ groupHeader: true, }">
+    <div fxLayout="row" fxLayoutAlign="start center" class="lesson-header">
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
         <ng-container
           *ngTemplateOutlet="nodeIconAndTitle; context: { nodeId: inactiveNode.id }"
@@ -109,9 +107,9 @@
       <div *ngIf="!moveGroup">
         <div
           fxLayout="row"
+          class="step-header"
           [ngClass]="{
-            stepHeader: true,
-            branchPathStepHeader: isNodeInAnyBranchPath(inactiveChildId)
+            'branch-path-step-header': isNodeInAnyBranchPath(inactiveChildId)
           }"
           [ngStyle]="{ 'background-color': getBackgroundColor(nodeId) }"
         >
@@ -134,7 +132,7 @@
       <span i18n>There are no Unused Steps</span>
     </div>
     <ng-container *ngFor="let inactiveNode of inactiveStepNodes">
-      <div *ngIf="getParentGroup(inactiveNode.id) == null">
+      <div *ngIf="getParentGroup(inactiveNode.id) == null" class="step-header">
         <ng-container
           *ngTemplateOutlet="nodeWithMoveAfterButton; context: { nodeId: inactiveNode.id }"
         >
