@@ -3,11 +3,11 @@ import { TeacherService } from '../teacher.service';
 import { TeacherRun } from '../teacher-run';
 import { ConfigService } from '../../services/config.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { formatDate } from '@angular/common';
 import { Observable, of, Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { mergeMap } from 'rxjs/operators';
 import { ArchiveProjectService } from '../../services/archive-project.service';
+import { runSpansDays } from '../../../assets/wise5/common/datetime/datetime';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -113,14 +113,11 @@ export class TeacherRunListComponent implements OnInit {
   }
 
   protected runSpansDays(run: TeacherRun): boolean {
-    const startDay = formatDate(run.startTime, 'shortDate', this.localeID);
-    const endDay = formatDate(run.endTime, 'shortDate', this.localeID);
-    return startDay != endDay;
+    return runSpansDays(run, this.localeID);
   }
 
   protected activeTotal(): number {
-    const now = this.configService.getCurrentServerTime();
-    return this.filteredRuns.filter((run: TeacherRun) => run.isActive(now)).length;
+    return this.getTotal('isActive');
   }
 
   protected completedTotal(): number {
@@ -131,8 +128,12 @@ export class TeacherRunListComponent implements OnInit {
   }
 
   protected scheduledTotal(): number {
+    return this.getTotal('isScheduled');
+  }
+
+  private getTotal(filterFunctionName: string): number {
     const now = this.configService.getCurrentServerTime();
-    return this.filteredRuns.filter((run: TeacherRun) => run.isScheduled(now)).length;
+    return this.filteredRuns.filter((run: TeacherRun) => run[filterFunctionName](now)).length;
   }
 
   private performSearchAndFilter(): void {

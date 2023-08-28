@@ -7,22 +7,34 @@ export class MockArchiveProjectService {
   public refreshProjectsEvent$ = this.refreshProjectsEventSource.asObservable();
 
   archiveProject(project: Project): Observable<ArchiveProjectResponse> {
-    project.archived = true;
+    return this.archiveProjectHelper(project, true);
+  }
+
+  unarchiveProject(project: Project): Observable<ArchiveProjectResponse> {
+    return this.archiveProjectHelper(project, false);
+  }
+
+  private archiveProjectHelper(
+    project: Project,
+    archived: boolean
+  ): Observable<ArchiveProjectResponse> {
+    project.archived = archived;
     return of(project);
   }
 
   archiveProjects(projects: Project[]): Observable<ArchiveProjectResponse[]> {
-    projects.forEach((project) => (project.archived = true));
-    return of(projects);
-  }
-
-  unarchiveProject(project: Project): Observable<ArchiveProjectResponse> {
-    project.archived = false;
-    return of(project);
+    return this.archiveProjectsHelper(projects, true);
   }
 
   unarchiveProjects(projects: Project[]): Observable<ArchiveProjectResponse[]> {
-    projects.forEach((project) => (project.archived = false));
+    return this.archiveProjectsHelper(projects, false);
+  }
+
+  private archiveProjectsHelper(
+    projects: Project[],
+    archived: boolean
+  ): Observable<ArchiveProjectResponse[]> {
+    projects.forEach((project) => (project.archived = archived));
     return of(projects);
   }
 

@@ -1,14 +1,12 @@
 import { ComponentHarness } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
-import { MatMenuHarness } from '@angular/material/menu/testing';
 
 export class SelectRunsControlsHarness extends ComponentHarness {
   static hostSelector = 'select-runs-controls';
   protected getArchiveButton = this.locatorFor(
     MatButtonHarness.with({ selector: '[aria-label="Archive selected units"]' })
   );
-  protected getMenu = this.locatorFor(MatMenuHarness);
   protected getSelectAllCheckbox = this.locatorFor(MatCheckboxHarness);
   protected getUnarchiveButton = this.locatorFor(
     MatButtonHarness.with({ selector: '[aria-label="Restore selected units"]' })
@@ -32,12 +30,6 @@ export class SelectRunsControlsHarness extends ComponentHarness {
 
   async isIndeterminate(): Promise<boolean> {
     return (await this.getSelectAllCheckbox()).isIndeterminate();
-  }
-
-  async clickMenuButton(menuButtonText: string): Promise<void> {
-    const menu = await this.getMenu();
-    await menu.open();
-    return menu.clickItem({ text: menuButtonText });
   }
 
   async clickArchiveButton(): Promise<void> {

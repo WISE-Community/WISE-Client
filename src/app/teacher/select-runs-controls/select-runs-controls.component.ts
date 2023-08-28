@@ -35,54 +35,32 @@ export class SelectRunsControlsComponent {
   }
 
   ngOnChanges(): void {
-    const numRuns = this.runs.length;
     this.numSelectedRuns = this.runs.filter((run: TeacherRun) => run.selected).length;
-    if (this.numSelectedRuns === 0) {
-      this.selectedAllRuns = false;
-      this.selectedSomeRuns = false;
-    } else if (this.numSelectedRuns === numRuns) {
-      this.selectedAllRuns = true;
-      this.selectedSomeRuns = false;
-    } else {
-      this.selectedAllRuns = false;
-      this.selectedSomeRuns = true;
-    }
+    this.selectedAllRuns = this.numSelectedRuns === this.runs.length;
+    this.selectedSomeRuns = this.numSelectedRuns !== 0 && !this.selectedAllRuns;
   }
 
   protected selectAllRunsCheckboxClicked(): void {
-    if (this.selectedAllRuns || this.selectedSomeRuns) {
-      this.selectRunsOptionChosenEvent.emit('none');
-    } else {
-      this.selectRunsOptionChosenEvent.emit('all');
-    }
+    this.selectRunsOptionChosenEvent.emit(
+      this.selectedAllRuns || this.selectedSomeRuns ? 'none' : 'all'
+    );
   }
 
   protected selectRunsOptionChosen(value: string): void {
     this.selectRunsOptionChosenEvent.emit(value);
   }
 
-  protected archiveSelectedRuns(): Subscription {
+  protected archiveSelectedRuns(archive: boolean): Subscription {
     const runs = this.getSelectedRuns();
-    return this.archiveProjectService.archiveProjects(this.getProjects(runs)).subscribe({
+    return this.archiveProjectService[archive ? 'archiveProjects' : 'unarchiveProjects'](
+      this.getProjects(runs)
+    ).subscribe({
       next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
         this.updateRunsArchivedStatus(runs, archiveProjectsResponse);
-        this.openSuccessSnackBar(runs, archiveProjectsResponse, true);
+        this.openSuccessSnackBar(runs, archiveProjectsResponse, archive);
       },
       error: () => {
-        this.snackBar.open($localize`Error archiving unit(s).`);
-      }
-    });
-  }
-
-  protected unarchiveSelectedRuns(): Subscription {
-    const runs = this.getSelectedRuns();
-    return this.archiveProjectService.unarchiveProjects(this.getProjects(runs)).subscribe({
-      next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
-        this.updateRunsArchivedStatus(runs, archiveProjectsResponse);
-        this.openSuccessSnackBar(runs, archiveProjectsResponse, false);
-      },
-      error: () => {
-        this.snackBar.open($localize`Error restoring unit(s).`);
+        this.showErrorSnackBar(archive);
       }
     });
   }
@@ -103,19 +81,26 @@ export class SelectRunsControlsComponent {
     archiveProjectsResponse: ArchiveProjectResponse[],
     archived: boolean
   ): void {
+    const count = archiveProjectsResponse.filter(
+      (response: ArchiveProjectResponse) => response.archived === archived
+    ).length;
     this.snackBar
       .open(
-        $localize`Successfully ${archived ? 'archived' : 'restored'} ${
-          archiveProjectsResponse.filter(
-            (response: ArchiveProjectResponse) => response.archived === archived
-          ).length
-        } unit(s).`,
+        archived
+          ? $localize`Successfully archived ${count} unit(s).`
+          : $localize`Successfully restored ${count} unit(s).`,
         $localize`Undo`
       )
       .onAction()
       .subscribe(() => {
         this.undoArchiveAction(runs, archived ? 'unarchiveProjects' : 'archiveProjects');
       });
+  }
+
+  private showErrorSnackBar(archive: boolean): void {
+    this.snackBar.open(
+      archive ? $localize`Error archiving unit(s).` : $localize`Error restoring unit(s).`
+    );
   }
 
   private undoArchiveAction(runs: TeacherRun[], archiveFunctionName: string): void {
@@ -132,9 +117,7 @@ export class SelectRunsControlsComponent {
   }
 
   private getSelectedRuns(): TeacherRun[] {
-    return this.runs.filter((run: TeacherRun) => {
-      return run.selected;
-    });
+    return this.runs.filter((run: TeacherRun) => run.selected);
   }
 
   private getProjects(runs: TeacherRun[]): Project[] {

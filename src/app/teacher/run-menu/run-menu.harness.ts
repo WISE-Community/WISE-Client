@@ -1,21 +1,13 @@
 import { ComponentHarness } from '@angular/cdk/testing';
-import { MatMenuHarness } from '@angular/material/menu/testing';
+import { clickMenuButton } from '../../common/harness-helper';
 
 export class RunMenuHarness extends ComponentHarness {
   static hostSelector = 'app-run-menu';
-  protected getMenu = this.locatorFor(MatMenuHarness);
-
-  async clickMenuButton(menuButtonText: string): Promise<void> {
-    const menu = await this.getMenu();
-    await menu.open();
-    return menu.clickItem({ text: menuButtonText });
-  }
-
   async clickArchiveMenuButton(): Promise<void> {
-    return await this.clickMenuButton('archiveArchive');
+    return await clickMenuButton(this, 'archiveArchive');
   }
 
   async clickUnarchiveMenuButton(): Promise<void> {
-    return await this.clickMenuButton('unarchiveRestore');
+    return await clickMenuButton(this, 'unarchiveRestore');
   }
 }

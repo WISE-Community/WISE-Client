@@ -5,7 +5,7 @@ import { ConfigService } from '../../services/config.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProjectDialogComponent } from '../add-project-dialog/add-project-dialog.component';
-import { formatDate } from '@angular/common';
+import { runSpansDays } from '../../../assets/wise5/common/datetime/datetime';
 
 @Component({
   selector: 'app-student-run-list',
@@ -83,9 +83,7 @@ export class StudentRunListComponent implements OnInit {
   }
 
   runSpansDays(run: StudentRun) {
-    const startDay = formatDate(run.startTime, 'shortDate', this.localeID);
-    const endDay = formatDate(run.endTime, 'shortDate', this.localeID);
-    return startDay != endDay;
+    return runSpansDays(run, this.localeID);
   }
 
   activeTotal(): number {

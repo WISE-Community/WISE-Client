@@ -84,30 +84,30 @@ export class RunMenuComponent implements OnInit {
     }
   }
 
-  protected archive(): void {
-    const run = this.run;
-    this.archiveProjectService.archiveProject(run.project).subscribe({
+  protected archive(archive: boolean): void {
+    this.archiveProjectService[archive ? 'archiveProject' : 'unarchiveProject'](
+      this.run.project
+    ).subscribe({
       next: (response: ArchiveProjectResponse) => {
-        this.updateArchivedStatus(run, response.archived);
-        this.openSnackBar(run, $localize`Successfully archived unit.`, 'unarchiveProject');
+        this.updateArchivedStatus(this.run, response.archived);
+        this.showSuccessMessage(this.run, archive);
       },
       error: () => {
-        this.snackBar.open($localize`Error archiving unit.`);
+        this.showErrorMessage(archive);
       }
     });
   }
 
-  protected unarchive(): void {
-    const run = this.run;
-    this.archiveProjectService.unarchiveProject(run.project).subscribe({
-      next: (response: ArchiveProjectResponse) => {
-        this.updateArchivedStatus(run, response.archived);
-        this.openSnackBar(run, $localize`Successfully restored unit.`, 'archiveProject');
-      },
-      error: () => {
-        this.snackBar.open($localize`Error restoring unit.`);
-      }
-    });
+  private showSuccessMessage(run: TeacherRun, archive: boolean): void {
+    this.openSnackBar(
+      run,
+      $localize`Successfully ${archive ? 'archived' : 'restored'} unit.`,
+      archive ? 'unarchiveProject' : 'archiveProject'
+    );
+  }
+
+  private showErrorMessage(archive: boolean): void {
+    this.snackBar.open($localize`Error ${archive ? 'archiving' : 'unarchiving'} unit.`);
   }
 
   private updateArchivedStatus(run: TeacherRun, archived: boolean): void {

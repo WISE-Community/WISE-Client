@@ -28,7 +28,7 @@
   <button
     mat-icon-button
     *ngIf="!showArchived && numSelectedRuns > 0"
-    (click)="archiveSelectedRuns()"
+    (click)="archiveSelectedRuns(true)"
     aria-label="Archive selected units"
     i18n-aria-label
     matTooltip="Archive"
@@ -40,7 +40,7 @@
   <button
     mat-icon-button
     *ngIf="showArchived && numSelectedRuns > 0"
-    (click)="unarchiveSelectedRuns()"
+    (click)="archiveSelectedRuns(false)"
     aria-label="Restore selected units"
     i18n-aria-label
     matTooltip="Restore"

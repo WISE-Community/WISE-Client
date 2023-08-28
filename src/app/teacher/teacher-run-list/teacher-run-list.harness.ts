@@ -2,6 +2,7 @@ import { ComponentHarness } from '@angular/cdk/testing';
 import { TeacherRunListItemHarness } from '../teacher-run-list-item/teacher-run-list-item.harness';
 import { SelectRunsControlsHarness } from '../select-runs-controls/select-runs-controls.harness';
 import { MatSelectHarness } from '@angular/material/select/testing';
+import { clickMenuButton } from '../../common/harness-helper';
 
 export class TeacherRunListHarness extends ComponentHarness {
   static hostSelector = 'app-teacher-run-list';
@@ -39,7 +40,7 @@ export class TeacherRunListHarness extends ComponentHarness {
   }
 
   async clickSelectRunsMenuButton(menuButtonText: string): Promise<void> {
-    return (await this.getSelectRunsControls()).clickMenuButton(menuButtonText);
+    return clickMenuButton(await this.getSelectRunsControls(), menuButtonText);
   }
 
   async clickRunListItemCheckbox(index: number): Promise<void> {
