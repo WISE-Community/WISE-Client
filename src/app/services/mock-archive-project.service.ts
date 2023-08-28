@@ -1,8 +1,11 @@
-import { Observable, of } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { Project } from '../domain/project';
 import { ArchiveProjectResponse } from '../domain/archiveProjectResponse';
 
 export class MockArchiveProjectService {
+  private refreshProjectsEventSource: Subject<void> = new Subject<void>();
+  public refreshProjectsEvent$ = this.refreshProjectsEventSource.asObservable();
+
   archiveProject(project: Project): Observable<ArchiveProjectResponse> {
     project.archived = true;
     return of(project);
@@ -21,5 +24,9 @@ export class MockArchiveProjectService {
   unarchiveProjects(projects: Project[]): Observable<ArchiveProjectResponse[]> {
     projects.forEach((project) => (project.archived = false));
     return of(projects);
+  }
+
+  refreshProjects(): void {
+    this.refreshProjectsEventSource.next();
   }
 }

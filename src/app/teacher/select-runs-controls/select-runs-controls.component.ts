@@ -66,12 +66,7 @@ export class SelectRunsControlsComponent {
     return this.archiveProjectService.archiveProjects(this.getProjects(runs)).subscribe({
       next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
         this.updateRunsArchivedStatus(runs, archiveProjectsResponse);
-        this.snackBar.open(
-          $localize`Successfully archived ${
-            archiveProjectsResponse.filter((response: ArchiveProjectResponse) => response.archived)
-              .length
-          } unit(s).`
-        );
+        this.openSuccessSnackBar(runs, archiveProjectsResponse, true);
       },
       error: () => {
         this.snackBar.open($localize`Error archiving unit(s).`);
@@ -84,12 +79,7 @@ export class SelectRunsControlsComponent {
     return this.archiveProjectService.unarchiveProjects(this.getProjects(runs)).subscribe({
       next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
         this.updateRunsArchivedStatus(runs, archiveProjectsResponse);
-        this.snackBar.open(
-          $localize`Successfully restored ${
-            archiveProjectsResponse.filter((response: ArchiveProjectResponse) => !response.archived)
-              .length
-          } unit(s).`
-        );
+        this.openSuccessSnackBar(runs, archiveProjectsResponse, false);
       },
       error: () => {
         this.snackBar.open($localize`Error restoring unit(s).`);
@@ -106,6 +96,39 @@ export class SelectRunsControlsComponent {
       run.archived = archiveProjectResponse.archived;
     }
     this.archiveActionEvent.emit();
+  }
+
+  private openSuccessSnackBar(
+    runs: TeacherRun[],
+    archiveProjectsResponse: ArchiveProjectResponse[],
+    archived: boolean
+  ): void {
+    this.snackBar
+      .open(
+        $localize`Successfully ${archived ? 'archived' : 'restored'} ${
+          archiveProjectsResponse.filter(
+            (response: ArchiveProjectResponse) => response.archived === archived
+          ).length
+        } unit(s).`,
+        $localize`Undo`
+      )
+      .onAction()
+      .subscribe(() => {
+        this.undoArchiveAction(runs, archived ? 'unarchiveProjects' : 'archiveProjects');
+      });
+  }
+
+  private undoArchiveAction(runs: TeacherRun[], archiveFunctionName: string): void {
+    this.archiveProjectService[archiveFunctionName](this.getProjects(runs)).subscribe({
+      next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
+        this.updateRunsArchivedStatus(runs, archiveProjectsResponse);
+        this.archiveProjectService.refreshProjects();
+        this.snackBar.open($localize`Action undone.`);
+      },
+      error: () => {
+        this.snackBar.open($localize`Error undoing action.`);
+      }
+    });
   }
 
   private getSelectedRuns(): TeacherRun[] {

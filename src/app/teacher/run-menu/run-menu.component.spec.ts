@@ -20,6 +20,8 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MockArchiveProjectService } from '../../services/mock-archive-project.service';
+import { MatSnackBarHarness } from '@angular/material/snack-bar/testing';
+import { HarnessLoader } from '@angular/cdk/testing';
 
 export class MockTeacherService {
   checkClassroomAuthorization(): Observable<string> {
@@ -68,8 +70,8 @@ let archiveProjectService: ArchiveProjectService;
 let component: RunMenuComponent;
 let fixture: ComponentFixture<RunMenuComponent>;
 const owner = new User();
+let rootLoader: HarnessLoader;
 let runMenuHarness: RunMenuHarness;
-let snackBarSpy: jasmine.Spy;
 let teacherService: TeacherService;
 
 describe('RunMenuComponent', () => {
@@ -104,9 +106,9 @@ describe('RunMenuComponent', () => {
     setRun(false);
     archiveProjectService = TestBed.inject(ArchiveProjectService);
     teacherService = TestBed.inject(TeacherService);
-    snackBarSpy = spyOn(TestBed.inject(MatSnackBar), 'open');
     fixture.detectChanges();
     runMenuHarness = await TestbedHarnessEnvironment.harnessForFixture(fixture, RunMenuHarness);
+    rootLoader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   });
 
   archive();
@@ -132,7 +134,19 @@ function archive() {
     it('should archive a run', async () => {
       await runMenuHarness.clickArchiveMenuButton();
       expect(component.run.archived).toEqual(true);
-      expect(snackBarSpy).toHaveBeenCalledWith('Successfully archived unit.');
+      const snackBar = await getSnackBar();
+      expect(await snackBar.getMessage()).toEqual('Successfully archived unit.');
+    });
+    it('should archive a run and then undo', async () => {
+      await runMenuHarness.clickArchiveMenuButton();
+      expect(component.run.archived).toEqual(true);
+      let snackBar = await getSnackBar();
+      expect(await snackBar.getMessage()).toEqual('Successfully archived unit.');
+      expect(await snackBar.getActionDescription()).toEqual('Undo');
+      await snackBar.dismissWithAction();
+      expect(component.run.archived).toEqual(false);
+      snackBar = await getSnackBar();
+      expect(await snackBar.getMessage()).toEqual('Action undone.');
     });
   });
 }
@@ -144,7 +158,25 @@ function unarchive() {
       component.ngOnInit();
       await runMenuHarness.clickUnarchiveMenuButton();
       expect(component.run.archived).toEqual(false);
-      expect(snackBarSpy).toHaveBeenCalledWith('Successfully restored unit.');
+      const snackBar = await getSnackBar();
+      expect(await snackBar.getMessage()).toEqual('Successfully restored unit.');
+    });
+    it('should unarchive a run and then undo', async () => {
+      setRun(true);
+      component.ngOnInit();
+      await runMenuHarness.clickUnarchiveMenuButton();
+      expect(component.run.archived).toEqual(false);
+      let snackBar = await getSnackBar();
+      expect(await snackBar.getMessage()).toEqual('Successfully restored unit.');
+      expect(await snackBar.getActionDescription()).toEqual('Undo');
+      await snackBar.dismissWithAction();
+      expect(component.run.archived).toEqual(true);
+      snackBar = await getSnackBar();
+      expect(await snackBar.getMessage()).toEqual('Action undone.');
     });
   });
+}
+
+async function getSnackBar() {
+  return await rootLoader.getHarness(MatSnackBarHarness);
 }

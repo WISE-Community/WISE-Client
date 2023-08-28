@@ -84,39 +84,55 @@ export class RunMenuComponent implements OnInit {
     }
   }
 
-
   protected archive(): void {
-    this.performArchiveAction(
-      this.run,
-      'archiveProject',
-      $localize`Successfully archived unit.`,
-      $localize`Error archiving unit.`
-    );
+    const run = this.run;
+    this.archiveProjectService.archiveProject(run.project).subscribe({
+      next: (response: ArchiveProjectResponse) => {
+        this.updateArchivedStatus(run, response.archived);
+        this.openSnackBar(run, $localize`Successfully archived unit.`, 'unarchiveProject');
+      },
+      error: () => {
+        this.snackBar.open($localize`Error archiving unit.`);
+      }
+    });
   }
 
   protected unarchive(): void {
-    this.performArchiveAction(
-      this.run,
-      'unarchiveProject',
-      $localize`Successfully restored unit.`,
-      $localize`Error restoring unit.`
-    );
+    const run = this.run;
+    this.archiveProjectService.unarchiveProject(run.project).subscribe({
+      next: (response: ArchiveProjectResponse) => {
+        this.updateArchivedStatus(run, response.archived);
+        this.openSnackBar(run, $localize`Successfully restored unit.`, 'archiveProject');
+      },
+      error: () => {
+        this.snackBar.open($localize`Error restoring unit.`);
+      }
+    });
   }
 
-  private performArchiveAction(
-    run: TeacherRun,
-    archiveFunctionName: 'archiveProject' | 'unarchiveProject',
-    successMessage: string,
-    errorMessage: string
-  ): void {
+  private updateArchivedStatus(run: TeacherRun, archived: boolean): void {
+    run.archived = archived;
+    this.runArchiveStatusChangedEvent.emit(run);
+  }
+
+  private openSnackBar(run: TeacherRun, message: string, undoFunctionName: string): void {
+    this.snackBar
+      .open(message, $localize`Undo`)
+      .onAction()
+      .subscribe(() => {
+        this.undoArchiveAction(run, undoFunctionName);
+      });
+  }
+
+  private undoArchiveAction(run: TeacherRun, archiveFunctionName: string): void {
     this.archiveProjectService[archiveFunctionName](run.project).subscribe({
       next: (response: ArchiveProjectResponse) => {
         run.archived = response.archived;
-        this.runArchiveStatusChangedEvent.emit(run);
-        this.snackBar.open(successMessage);
+        this.archiveProjectService.refreshProjects();
+        this.snackBar.open($localize`Action undone.`);
       },
       error: () => {
-        this.snackBar.open(errorMessage);
+        this.snackBar.open($localize`Error undoing action.`);
       }
     });
   }

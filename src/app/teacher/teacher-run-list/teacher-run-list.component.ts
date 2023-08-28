@@ -7,6 +7,7 @@ import { formatDate } from '@angular/common';
 import { Observable, of, Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { mergeMap } from 'rxjs/operators';
+import { ArchiveProjectService } from '../../services/archive-project.service';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -28,6 +29,7 @@ export class TeacherRunListComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
+    private archiveProjectService: ArchiveProjectService,
     private configService: ConfigService,
     @Inject(LOCALE_ID) private localeID: string,
     private route: ActivatedRoute,
@@ -39,6 +41,7 @@ export class TeacherRunListComponent implements OnInit {
   ngOnInit() {
     this.getRuns();
     this.subscribeToRuns();
+    this.subscribeToRefreshProjects();
   }
 
   ngOnDestroy() {
@@ -81,6 +84,14 @@ export class TeacherRunListComponent implements OnInit {
     this.subscriptions.add(
       this.teacherService.runs$.subscribe((run: TeacherRun) => {
         this.updateExistingRun(run);
+      })
+    );
+  }
+
+  private subscribeToRefreshProjects(): void {
+    this.subscriptions.add(
+      this.archiveProjectService.refreshProjectsEvent$.subscribe(() => {
+        this.runArchiveStatusChanged();
       })
     );
   }
