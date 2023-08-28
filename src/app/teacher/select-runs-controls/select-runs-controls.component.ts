@@ -74,7 +74,7 @@ export class SelectRunsControlsComponent {
     });
   }
 
-  protected restoreSelectedRuns(): Subscription {
+  protected unarchiveSelectedRuns(): Subscription {
     const runs = this.getSelectedRuns();
     return this.archiveProjectService.unarchiveProjects(this.getProjects(runs)).subscribe({
       next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
