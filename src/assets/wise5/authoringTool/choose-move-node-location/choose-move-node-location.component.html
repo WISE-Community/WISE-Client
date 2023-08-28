@@ -45,19 +45,13 @@
       *ngTemplateOutlet="moveInsideButton; context: { nodeId: 'group0' }"
     ></ng-container>
   </ng-container>
-  <div
-    *ngFor="let nodeId of nodeIds"
-    [ngClass]="{
-      'node-select--group': isGroupNode(nodeId),
-      'node-select--node': !isGroupNode(nodeId)
-    }"
-  >
+  <div *ngFor="let nodeId of nodeIds">
     <div
       id="{{ nodeId }}"
       [ngClass]="{
-        groupHeader: isGroupNode(nodeId),
-        stepHeader: !isGroupNode(nodeId),
-        branchPathStepHeader: isNodeInAnyBranchPath(nodeId) && !isGroupNode(nodeId)
+        'lesson-header': isGroupNode(nodeId),
+        'step-header': !isGroupNode(nodeId),
+        'branch-path-step-header': isNodeInAnyBranchPath(nodeId) && !isGroupNode(nodeId)
       }"
       [ngStyle]="{ 'background-color': getBackgroundColor(nodeId) }"
     >

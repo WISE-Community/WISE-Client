@@ -192,10 +192,6 @@
                   (!insertGroupMode || (insertGroupMode && isGroupNode(item.key)))
                 "
                 class="projectItem"
-                [ngClass]="{
-                  'node-select--group': isGroupNode(item.key),
-                  'node-select--node': !isGroupNode(item.key)
-                }"
               >
                 <div
                   id="{{ item.key }}"
