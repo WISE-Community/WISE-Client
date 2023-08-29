@@ -270,7 +270,7 @@ function someSelectedUnselectAllRuns() {
 
 function selectRunsOptionChosen(): void {
   describe('selectRunsOptionChosen()', () => {
-    selectAllRunsOptionChosen();
+    selectAllOptionChosen();
     selectNoneOptionChosen();
     selectCompletedOptionChosen();
     selectRunningOptionChosen();
@@ -278,11 +278,10 @@ function selectRunsOptionChosen(): void {
   });
 }
 
-function selectAllRunsOptionChosen(): void {
+function selectAllOptionChosen(): void {
   describe('when all is chosen', () => {
     it('should select all runs', async () => {
-      await runListHarness.clickSelectRunsMenuButton('All');
-      await expectRunsIsSelected([true, true, true]);
+      await clickSelectRunsMenuButtonAndExpectSelected('All', [true, true, true]);
     });
   });
 }
@@ -290,8 +289,7 @@ function selectAllRunsOptionChosen(): void {
 function selectNoneOptionChosen(): void {
   describe('when none is chosen', () => {
     it('should select no runs', async () => {
-      await runListHarness.clickSelectRunsMenuButton('None');
-      await expectRunsIsSelected([false, false, false]);
+      await clickSelectRunsMenuButtonAndExpectSelected('None', [false, false, false]);
     });
   });
 }
@@ -300,8 +298,7 @@ function selectCompletedOptionChosen(): void {
   describe('when completed is chosen', () => {
     it('should select completed runs', async () => {
       setRun2Completed();
-      await runListHarness.clickSelectRunsMenuButton('Completed');
-      await expectRunsIsSelected([false, true, false]);
+      await clickSelectRunsMenuButtonAndExpectSelected('Completed', [false, true, false]);
     });
   });
 }
@@ -310,8 +307,7 @@ function selectRunningOptionChosen(): void {
   describe('when running is chosen', () => {
     it('should select running runs', async () => {
       setRun2Completed();
-      await runListHarness.clickSelectRunsMenuButton('Running');
-      await expectRunsIsSelected([true, false, true]);
+      await clickSelectRunsMenuButtonAndExpectSelected('Running', [true, false, true]);
     });
   });
 }
@@ -320,10 +316,17 @@ function selectScheduledOptionChosen(): void {
   describe('when scheduled is chosen', () => {
     it('it should select scheduled runs', async () => {
       setRun3Scheduled();
-      await runListHarness.clickSelectRunsMenuButton('Scheduled');
-      await expectRunsIsSelected([true, false, false]);
+      await clickSelectRunsMenuButtonAndExpectSelected('Scheduled', [true, false, false]);
     });
   });
+}
+
+async function clickSelectRunsMenuButtonAndExpectSelected(
+  menuButtonText: string,
+  selectedRuns: boolean[]
+): Promise<void> {
+  await runListHarness.clickSelectRunsMenuButton(menuButtonText);
+  await expectRunsIsSelected(selectedRuns);
 }
 
 function setRun2Completed(): void {
