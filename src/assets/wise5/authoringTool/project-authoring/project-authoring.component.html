@@ -192,10 +192,6 @@
                   (!insertGroupMode || (insertGroupMode && isGroupNode(item.key)))
                 "
                 class="projectItem"
-                [ngClass]="{
-                  'node-select--group': isGroupNode(item.key),
-                  'node-select--node': !isGroupNode(item.key)
-                }"
               >
                 <div
                   id="{{ item.key }}"
@@ -352,7 +348,7 @@
                 <span i18n>There are no Unused Lessons</span>
               </div>
               <ng-container *ngFor="let inactiveNode of inactiveGroupNodes">
-                <div *ngIf="isGroupNode(inactiveNode.id)">
+                <div *ngIf="isGroupNode(inactiveNode.id)" id="{{ inactiveNode.id }}">
                   <div
                     fxLayout="row"
                     fxLayoutAlign="start center"
@@ -417,7 +413,7 @@
                     </div>
                   </div>
                   <ng-container *ngFor="let inactiveChildId of inactiveNode.ids">
-                    <div *ngIf="!insertGroupMode" class="projectItem">
+                    <div *ngIf="!insertGroupMode" class="projectItem" id="{{ inactiveChildId }}">
                       <div
                         fxLayout="row"
                         [ngClass]="{

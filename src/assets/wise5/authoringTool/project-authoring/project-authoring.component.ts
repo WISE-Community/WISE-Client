@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ConfigService } from '../../services/configService';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { DeleteNodeService } from '../../services/deleteNodeService';
-import { MoveNodesService } from '../../services/moveNodesService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import * as $ from 'jquery';
@@ -28,43 +27,27 @@ export class ProjectAuthoringComponent {
   protected insertGroupMode: boolean;
   protected insertNodeMode: boolean;
   protected items: any;
-  private moveMode: boolean;
   private projectId: number;
   protected showProjectView: boolean = true;
   private rxStomp: RxStomp;
   protected stepNodeSelected: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
-  /*
-   * The colors for the branch path steps. The colors are from
-   * http://colorbrewer2.org/
-   * http://colorbrewer2.org/export/colorbrewer.js
-   * The colors chosen are from the 'qualitative', 'Set2'.
-   */
-  stepBackgroundColors: string[] = [
-    '#66c2a5',
-    '#fc8d62',
-    '#8da0cb',
-    '#e78ac3',
-    '#a6d854',
-    '#ffd92f',
-    '#e5c494',
-    '#b3b3b3'
-  ];
-
   constructor(
     private configService: ConfigService,
     private copyNodesService: CopyNodesService,
     private deleteNodeService: DeleteNodeService,
-    private moveNodesService: MoveNodesService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => this.updateShowProjectView());
+    this.subscriptions.add(
+      this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+        this.updateShowProjectView();
+        this.temporarilyHighlightNewNodes(history.state.newNodes);
+      })
+    );
   }
 
   ngOnInit(): void {
@@ -81,8 +64,6 @@ export class ProjectAuthoringComponent {
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
     this.idToNode = this.projectService.getIdToNode();
-    this.stepNodeSelected = false;
-    this.activityNodeSelected = false;
     this.subscribeToCurrentAuthors(this.projectId);
     this.subscriptions.add(
       this.projectService.refreshProject$.subscribe(() => {
@@ -149,78 +130,14 @@ export class ProjectAuthoringComponent {
   }
 
   protected insertInside(nodeId: string): void {
-    // TODO check that we are inserting into a group
-    if (this.moveMode) {
-      this.handleMoveModeInsert(nodeId, 'inside');
-    } else if (this.copyMode) {
+    if (this.copyMode) {
       this.handleCopyModeInsert(nodeId, 'inside');
     }
   }
 
   protected insertAfter(nodeId: string): void {
-    if (this.moveMode) {
-      this.handleMoveModeInsert(nodeId, 'after');
-    } else if (this.copyMode) {
+    if (this.copyMode) {
       this.handleCopyModeInsert(nodeId, 'after');
-    }
-  }
-
-  /**
-   * Move a node and insert it in the specified location
-   * @param nodeId insert the new node inside or after this node id
-   * @param moveTo whether to insert 'inside' or 'after' the nodeId parameter
-   */
-  private handleMoveModeInsert(nodeId: string, moveTo: string): void {
-    let selectedNodeIds = this.getSelectedNodeIds();
-    if (selectedNodeIds != null && selectedNodeIds.indexOf(nodeId) != -1) {
-      /*
-       * the user is trying to insert the selected node ids after
-       * itself so we will not allow that
-       */
-      if (selectedNodeIds.length == 1) {
-        alert($localize`You are not allowed to insert the selected item after itself.`);
-      } else if (selectedNodeIds.length > 1) {
-        alert($localize`You are not allowed to insert the selected items after itself.`);
-      }
-    } else {
-      let movedNodes = [];
-      for (let selectedNodeId of selectedNodeIds) {
-        let node = {
-          nodeId: selectedNodeId,
-          fromTitle: this.projectService.getNodePositionAndTitle(selectedNodeId)
-        };
-        movedNodes.push(node);
-      }
-
-      let newNodes = [];
-      if (moveTo === 'inside') {
-        newNodes = this.moveNodesService.moveNodesInsideGroup(selectedNodeIds, nodeId);
-      } else if (moveTo === 'after') {
-        newNodes = this.moveNodesService.moveNodesAfter(selectedNodeIds, nodeId);
-      } else {
-        // an unspecified moveTo was provided
-        return;
-      }
-
-      this.moveMode = false;
-      this.insertGroupMode = false;
-      this.insertNodeMode = false;
-      this.temporarilyHighlightNewNodes(newNodes);
-      this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
-        this.refreshProject();
-        if (newNodes != null && newNodes.length > 0) {
-          let firstNewNode = newNodes[0];
-          if (firstNewNode != null && firstNewNode.id != null) {
-            for (let n = 0; n < movedNodes.length; n++) {
-              let node = movedNodes[n];
-              let newNode = newNodes[n];
-              if (node != null && newNode != null) {
-                node.toTitle = this.projectService.getNodePositionAndTitle(newNode.id);
-              }
-            }
-          }
-        }
-      });
     }
   }
 
@@ -290,20 +207,10 @@ export class ProjectAuthoringComponent {
   }
 
   protected move(): void {
-    // make sure there is at least one item selected
-    let selectedNodeIds = this.getSelectedNodeIds();
-    if (selectedNodeIds == null || selectedNodeIds.length == 0) {
-      alert($localize`Please select an item to move and then click the "Move" button again.`);
-    } else {
-      let selectedItemTypes = this.getSelectedItemTypes();
-      if (selectedItemTypes.length === 1 && selectedItemTypes[0] === 'node') {
-        this.insertNodeMode = true;
-        this.moveMode = true;
-      } else if (selectedItemTypes.length === 1 && selectedItemTypes[0] === 'group') {
-        this.insertGroupMode = true;
-        this.moveMode = true;
-      }
-    }
+    this.router.navigate(['choose-move-location'], {
+      relativeTo: this.route,
+      state: { selectedNodeIds: this.getSelectedNodeIds() }
+    });
   }
 
   protected deleteSelectedNodes(): void {
@@ -434,7 +341,6 @@ export class ProjectAuthoringComponent {
   protected cancelMove(): void {
     this.insertGroupMode = false;
     this.insertNodeMode = false;
-    this.moveMode = false;
     this.copyMode = false;
     this.unselectAllItems();
   }
@@ -512,52 +418,24 @@ export class ProjectAuthoringComponent {
   /**
    * Temporarily highlight the new nodes to draw attention to them
    * @param newNodes the new nodes to highlight
-   * @param doScrollToNewNodes if true, scroll to the first new node added
-   * TODO: can we remove the null checks: ensure that newNodes is never null?
    */
-  private temporarilyHighlightNewNodes(newNodes, doScrollToNewNodes = false): void {
-    setTimeout(() => {
-      if (newNodes != null && newNodes.length > 0) {
-        for (let newNode of newNodes) {
-          if (newNode != null) {
-            temporarilyHighlightElement(newNode.id);
-          }
-        }
-        if (doScrollToNewNodes) {
-          let firstNodeElementAdded = $('#' + newNodes[0].id);
-          if (firstNodeElementAdded != null) {
-            $('#content').animate(
-              {
-                scrollTop: firstNodeElementAdded.prop('offsetTop') - 60
-              },
-              1000
-            );
-          }
-        }
-      }
-    });
+  private temporarilyHighlightNewNodes(newNodes = []): void {
+    if (newNodes.length > 0) {
+      setTimeout(() => {
+        newNodes.forEach((newNode) => temporarilyHighlightElement(newNode.id));
+        const firstNodeElementAdded = $('#' + newNodes[0].id);
+        $('#content').animate(
+          {
+            scrollTop: firstNodeElementAdded.prop('offsetTop') - 60
+          },
+          1000
+        );
+      });
+    }
   }
 
-  /**
-   * Get the background color for a step
-   * @param nodeId get the background color for a step in the project view
-   * @return If the node is in a branch path it will return a color. If the
-   * node is not in a branch path it will return null.
-   */
   protected getStepBackgroundColor(nodeId: string): string {
-    let color = null;
-    let branchPathLetter = this.projectService.getBranchPathLetter(nodeId);
-    if (branchPathLetter != null) {
-      // get the ascii code for the letter. example A=65, B=66, C=67, etc.
-      let letterASCIICode = branchPathLetter.charCodeAt(0);
-
-      // get the branch path number A=0, B=1, C=2, etc.
-      let branchPathNumber = letterASCIICode - 65;
-
-      // get the color for the branch path number
-      color = this.stepBackgroundColors[branchPathNumber];
-    }
-    return color;
+    return this.projectService.getBackgroundColor(nodeId);
   }
 
   protected getNumberOfInactiveGroups(): number {
