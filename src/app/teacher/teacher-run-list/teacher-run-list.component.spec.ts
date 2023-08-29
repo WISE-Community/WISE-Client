@@ -134,6 +134,7 @@ describe('TeacherRunListComponent', () => {
   selectRunsOptionChosen();
   sortByStartTimeDesc();
   unarchiveSelectedRuns();
+  noRuns();
 });
 
 function sortByStartTimeDesc() {
@@ -342,6 +343,32 @@ function unarchiveRunNoLongerInArchivedView() {
     await runListHarness.clickRunListItemMenuUnarchiveButton(0);
     expect(await runListHarness.isShowingArchived()).toBeTrue();
     expect(await runListHarness.getNumRunListItems()).toEqual(0);
+  });
+}
+
+function noRuns(): void {
+  describe('when there are no runs', () => {
+    beforeEach(() => {
+      getRunsSpy.and.returnValue(of([]));
+      component.ngOnInit();
+    });
+    describe('in the active view', () => {
+      it('should display a message', async () => {
+        expect(await runListHarness.isShowingArchived()).toBeFalse();
+        expect(await runListHarness.getNoRunsMessage()).toContain(
+          "Looks like you don't have any active WISE units in your classes."
+        );
+      });
+    });
+    describe('in the archived view', () => {
+      it('should display a message', async () => {
+        await runListHarness.showArchived();
+        expect(await runListHarness.isShowingArchived()).toBeTrue();
+        expect(await runListHarness.getNoRunsMessage()).toContain(
+          "Looks like you don't have any archived WISE units."
+        );
+      });
+    });
   });
 }
 

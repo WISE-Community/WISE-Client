@@ -7,6 +7,7 @@ import { clickMenuButton } from '../../common/harness-helper';
 export class TeacherRunListHarness extends ComponentHarness {
   static hostSelector = 'app-teacher-run-list';
   private ARCHIVED_TEXT = 'Archived';
+  protected getNoRunsMessageDiv = this.locatorFor('.no-runs-message');
   protected getRunListItems = this.locatorForAll(TeacherRunListItemHarness);
   protected getSelectRunsControls = this.locatorFor(SelectRunsControlsHarness);
   protected getViewSelect = this.locatorFor(MatSelectHarness);
@@ -83,5 +84,9 @@ export class TeacherRunListHarness extends ComponentHarness {
 
   async clickUnarchiveButton(): Promise<void> {
     return (await this.getSelectRunsControls()).clickUnarchiveButton();
+  }
+
+  async getNoRunsMessage(): Promise<string> {
+    return (await this.getNoRunsMessageDiv()).text();
   }
 }

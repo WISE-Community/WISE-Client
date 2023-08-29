@@ -1,8 +1,4 @@
-<div class="notice" *ngIf="!runs.length && loaded">
-  <p i18n>Hey there! Looks like you haven't run any WISE units in your classes yet.</p>
-  <p i18n>Browse the "Unit Library" to find titles to use with your students.</p>
-</div>
-<div class="content-block" *ngIf="runs.length">
+<div class="content-block">
   <div
     class="content-block__header controls dark-theme primary-bg"
     fxLayout="row"
@@ -63,33 +59,49 @@
       </ng-container>
     </p>
   </div>
-  <select-runs-controls
-    (archiveActionEvent)="updateRunsInformation()"
-    [runChangedEventEmitter]="runChangedEventEmitter"
-    [runs]="filteredRuns"
-    (selectRunsOptionChosenEvent)="selectRunsOptionChosen($event)"
-    [showArchived]="showArchived"
-  ></select-runs-controls>
-  <app-timeline>
-    <ng-container *ngFor="let run of filteredRuns.sort(sortByStartTimeDesc); let i = index">
-      <app-timeline-item [active]="isRunActive(run)" *ngIf="i < 10 || showAll" id="run{{ run.id }}">
-        <app-timeline-item-label>
-          <strong>{{ run.startTime | date: 'mediumDate' }}</strong>
-          <ng-container *ngIf="run.endTime && runSpansDays(run)">
-            - <strong>{{ run.endTime | date: 'mediumDate' }}</strong>
-          </ng-container>
-        </app-timeline-item-label>
-        <app-timeline-item-content>
-          <app-teacher-run-list-item
-            [run]="run"
-            (runArchiveStatusChangedEvent)="runArchiveStatusChanged()"
-            (runSelectedStatusChangedEvent)="runSelectedStatusChanged()"
-          ></app-teacher-run-list-item>
-        </app-timeline-item-content>
-      </app-timeline-item>
+  <ng-container *ngIf="loaded">
+    <ng-container *ngIf="filteredRuns.length === 0">
+      <div class="notice no-runs-message" *ngIf="!showArchived">
+        <p i18n>Hey there! Looks like you don't have any active WISE units in your classes.</p>
+        <p i18n>Browse the "Unit Library" to find titles to use with your students.</p>
+      </div>
+      <div class="notice no-runs-message warn" *ngIf="showArchived">
+        <p i18n>Hey there! Looks like you don't have any archived WISE units.</p>
+      </div>
     </ng-container>
-  </app-timeline>
-  <div class="content-block__actions" *ngIf="filteredRuns.length > 10 && !showAll">
-    <button mat-raised-button color="accent" (click)="showAll = true" i18n>Show More</button>
-  </div>
+    <select-runs-controls
+      *ngIf="filteredRuns.length > 0"
+      (archiveActionEvent)="updateRunsInformation()"
+      [runChangedEventEmitter]="runChangedEventEmitter"
+      [runs]="filteredRuns"
+      (selectRunsOptionChosenEvent)="selectRunsOptionChosen($event)"
+      [showArchived]="showArchived"
+    ></select-runs-controls>
+    <app-timeline>
+      <ng-container *ngFor="let run of filteredRuns.sort(sortByStartTimeDesc); let i = index">
+        <app-timeline-item
+          [active]="isRunActive(run)"
+          *ngIf="i < 10 || showAll"
+          id="run{{ run.id }}"
+        >
+          <app-timeline-item-label>
+            <strong>{{ run.startTime | date: 'mediumDate' }}</strong>
+            <ng-container *ngIf="run.endTime && runSpansDays(run)">
+              - <strong>{{ run.endTime | date: 'mediumDate' }}</strong>
+            </ng-container>
+          </app-timeline-item-label>
+          <app-timeline-item-content>
+            <app-teacher-run-list-item
+              [run]="run"
+              (runArchiveStatusChangedEvent)="runArchiveStatusChanged()"
+              (runSelectedStatusChangedEvent)="runSelectedStatusChanged()"
+            ></app-teacher-run-list-item>
+          </app-timeline-item-content>
+        </app-timeline-item>
+      </ng-container>
+    </app-timeline>
+    <div class="content-block__actions" *ngIf="filteredRuns.length > 10 && !showAll">
+      <button mat-raised-button color="accent" (click)="showAll = true" i18n>Show More</button>
+    </div>
+  </ng-container>
 </div>
