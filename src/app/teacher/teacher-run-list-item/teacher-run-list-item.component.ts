@@ -20,8 +20,8 @@ export class TeacherRunListItemComponent implements OnInit {
   protected manageStudentsLink: string = '';
   protected periodsTooltipText: string;
   @Input() run: TeacherRun = new TeacherRun();
-  @Output() runArchiveStatusChangedEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() runSelectedStatusChangedEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() runArchiveStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() runSelectedStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
   protected thumbStyle: SafeStyle;
 
   constructor(

@@ -21,7 +21,7 @@ export class RunMenuComponent implements OnInit {
   private editLink: string = '';
   protected reportProblemLink: string = '';
   @Input() run: TeacherRun;
-  @Output() runArchiveStatusChangedEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() runArchiveStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
@@ -112,7 +112,7 @@ export class RunMenuComponent implements OnInit {
 
   private updateArchivedStatus(run: TeacherRun, archived: boolean): void {
     run.archived = archived;
-    this.runArchiveStatusChangedEvent.emit(run);
+    this.runArchiveStatusChangedEvent.emit();
   }
 
   private openSnackBar(run: TeacherRun, message: string, undoFunctionName: string): void {
