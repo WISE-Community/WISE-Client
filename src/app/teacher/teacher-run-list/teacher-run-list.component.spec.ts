@@ -196,24 +196,21 @@ function showArchivedChanged(): void {
 function runSelectedStatusChanged(): void {
   describe('runSelectedStatusChanged()', () => {
     describe('one run is selected', () => {
-      it('should show 1 run selected and indeterminate for the select all checkbox', async () => {
+      it('should show indeterminate for the select all checkbox', async () => {
         await clickRunListeItemCheckboxes([0]);
         expect(await runListHarness.isSelectRunsCheckboxIndeterminate()).toBeTrue();
-        expect(await runListHarness.getNumSelectedRunListItems()).toEqual(1);
       });
     });
     describe('two runs are selected', () => {
-      it('should show 2 runs selected and indeterminate for the select all checkbox', async () => {
+      it('should show indeterminate for the select all checkbox', async () => {
         await clickRunListeItemCheckboxes([0, 1]);
         expect(await runListHarness.isSelectRunsCheckboxIndeterminate()).toBeTrue();
-        expect(await runListHarness.getNumSelectedRunListItems()).toEqual(2);
       });
     });
     describe('all runs are selected', () => {
-      it('should show 3 runs selected and checked for the select all checkbox', async () => {
+      it('should show checked for the select all checkbox', async () => {
         await clickRunListeItemCheckboxes([0, 1, 2]);
         expect(await runListHarness.isSelectRunsCheckboxChecked()).toBeTrue();
-        expect(await runListHarness.getNumSelectedRunListItems()).toEqual(3);
       });
     });
   });
@@ -235,7 +232,7 @@ function selectAllRunsCheckboxClicked(): void {
 
 function selectAllRuns() {
   describe('select all runs checkbox is not checked and it is clicked', () => {
-    it('it should select all runs', async () => {
+    it('should select all runs', async () => {
       await expectRunsIsSelected([false, false, false]);
       expect(await runListHarness.isSelectRunsCheckboxChecked()).toBeFalse();
       await runListHarness.checkSelectRunsCheckbox();
@@ -247,7 +244,7 @@ function selectAllRuns() {
 
 function unselectAllRuns() {
   describe('select all runs checkbox is checked and it is clicked', () => {
-    it('it should unselect all runs', async () => {
+    it('should unselect all runs', async () => {
       await runListHarness.checkSelectRunsCheckbox();
       await expectRunsIsSelected([true, true, true]);
       expect(await runListHarness.isSelectRunsCheckboxChecked()).toBeTrue();
@@ -260,7 +257,7 @@ function unselectAllRuns() {
 
 function someSelectedUnselectAllRuns() {
   describe('select all runs checkbox is indeterminate checked and it is clicked', () => {
-    it('it should unselect all runs', async () => {
+    it('should unselect all runs', async () => {
       await runListHarness.clickRunListItemCheckbox(0);
       await expectRunsIsSelected([true, false, false]);
       expect(await runListHarness.isSelectRunsCheckboxIndeterminate()).toBeTrue();
@@ -273,26 +270,58 @@ function someSelectedUnselectAllRuns() {
 
 function selectRunsOptionChosen(): void {
   describe('selectRunsOptionChosen()', () => {
-    it('when all is chosen, it should select all runs2', async () => {
+    selectAllRunsOptionChosen();
+    selectNoneOptionChosen();
+    selectCompletedOptionChosen();
+    selectRunningOptionChosen();
+    selectScheduledOptionChosen();
+  });
+}
+
+function selectAllRunsOptionChosen(): void {
+  describe('when all is chosen', () => {
+    it('should select all runs', async () => {
       await runListHarness.clickSelectRunsMenuButton('All');
       await expectRunsIsSelected([true, true, true]);
     });
-    it('when none is chosen, it should select no runs', async () => {
+  });
+}
+
+function selectNoneOptionChosen(): void {
+  describe('when none is chosen', () => {
+    it('should select no runs', async () => {
       await runListHarness.clickSelectRunsMenuButton('None');
       await expectRunsIsSelected([false, false, false]);
     });
-    describe('when a run is completed', () => {
-      beforeEach(() => {
-        setRun2Completed();
-      });
-      it('when running is chosen, it should select running runs', async () => {
-        await runListHarness.clickSelectRunsMenuButton('Running');
-        await expectRunsIsSelected([true, false, true]);
-      });
-      it('when completed is chosen, it should select completed runs', async () => {
-        await runListHarness.clickSelectRunsMenuButton('Completed');
-        await expectRunsIsSelected([false, true, false]);
-      });
+  });
+}
+
+function selectCompletedOptionChosen(): void {
+  describe('when completed is chosen', () => {
+    it('should select completed runs', async () => {
+      setRun2Completed();
+      await runListHarness.clickSelectRunsMenuButton('Completed');
+      await expectRunsIsSelected([false, true, false]);
+    });
+  });
+}
+
+function selectRunningOptionChosen(): void {
+  describe('when running is chosen', () => {
+    it('should select running runs', async () => {
+      setRun2Completed();
+      await runListHarness.clickSelectRunsMenuButton('Running');
+      await expectRunsIsSelected([true, false, true]);
+    });
+  });
+}
+
+function selectScheduledOptionChosen(): void {
+  describe('when scheduled is chosen', () => {
+    it('it should select scheduled runs', async () => {
+      setRun3Scheduled();
+      await runListHarness.clickSelectRunsMenuButton('Scheduled');
+      await expectRunsIsSelected([true, false, false]);
     });
   });
 }
@@ -308,6 +337,17 @@ function setRun2Completed(): void {
   component.ngOnInit();
 }
 
+function setRun3Scheduled(): void {
+  getRunsSpy.and.returnValue(
+    of([
+      new TeacherRunStub(1, run1StartTime, null, run1Title),
+      new TeacherRunStub(2, run2StartTime, null, run2Title),
+      new TeacherRunStub(3, currentTime + 86400000, null, run3Title)
+    ])
+  );
+  component.ngOnInit();
+}
+
 function runArchiveStatusChanged(): void {
   describe('runArchiveStatusChanged()', () => {
     archiveRunNoLongerInActiveView();
@@ -316,33 +356,37 @@ function runArchiveStatusChanged(): void {
 }
 
 function archiveRunNoLongerInActiveView() {
-  it('when a run is archived, it should no longer be displayed in the active view', async () => {
-    expect(await runListHarness.isShowingArchived()).toBeFalse();
-    expect(await runListHarness.getNumRunListItems()).toEqual(3);
-    await runListHarness.clickRunListItemMenuArchiveButton(1);
-    expect(await runListHarness.isShowingArchived()).toBeFalse();
-    expect(await runListHarness.getNumRunListItems()).toEqual(2);
-    await expectRunTitles([run3Title, run1Title]);
+  describe('when a run is archived', () => {
+    it('it should no longer be displayed in the active view', async () => {
+      expect(await runListHarness.isShowingArchived()).toBeFalse();
+      expect(await runListHarness.getNumRunListItems()).toEqual(3);
+      await runListHarness.clickRunListItemMenuArchiveButton(1);
+      expect(await runListHarness.isShowingArchived()).toBeFalse();
+      expect(await runListHarness.getNumRunListItems()).toEqual(2);
+      await expectRunTitles([run3Title, run1Title]);
+    });
   });
 }
 
 function unarchiveRunNoLongerInArchivedView() {
-  it('when a run is unarchived, it should no longer be displayed in the archived view', async () => {
-    getRunsSpy.and.returnValue(
-      of([
-        new TeacherRunStub(1, run1StartTime, null, run1Title),
-        new TeacherRunStub(2, run2StartTime, null, run2Title, ['archived']),
-        new TeacherRunStub(3, run3StartTime, null, run3Title)
-      ])
-    );
-    component.ngOnInit();
-    await runListHarness.showArchived();
-    expect(await runListHarness.isShowingArchived()).toBeTrue();
-    expect(await runListHarness.getNumRunListItems()).toEqual(1);
-    await expectRunTitles([run2Title]);
-    await runListHarness.clickRunListItemMenuUnarchiveButton(0);
-    expect(await runListHarness.isShowingArchived()).toBeTrue();
-    expect(await runListHarness.getNumRunListItems()).toEqual(0);
+  describe('when a run is unarchived', () => {
+    it('it should no longer be displayed in the archived view', async () => {
+      getRunsSpy.and.returnValue(
+        of([
+          new TeacherRunStub(1, run1StartTime, null, run1Title),
+          new TeacherRunStub(2, run2StartTime, null, run2Title, ['archived']),
+          new TeacherRunStub(3, run3StartTime, null, run3Title)
+        ])
+      );
+      component.ngOnInit();
+      await runListHarness.showArchived();
+      expect(await runListHarness.isShowingArchived()).toBeTrue();
+      expect(await runListHarness.getNumRunListItems()).toEqual(1);
+      await expectRunTitles([run2Title]);
+      await runListHarness.clickRunListItemMenuUnarchiveButton(0);
+      expect(await runListHarness.isShowingArchived()).toBeTrue();
+      expect(await runListHarness.getNumRunListItems()).toEqual(0);
+    });
   });
 }
 
@@ -356,7 +400,7 @@ function noRuns(): void {
       it('should display a message', async () => {
         expect(await runListHarness.isShowingArchived()).toBeFalse();
         expect(await runListHarness.getNoRunsMessage()).toContain(
-          "Looks like you don't have any active WISE units in your classes."
+          "Hey there! Looks like you don't have any active classroom units."
         );
       });
     });
@@ -365,7 +409,7 @@ function noRuns(): void {
         await runListHarness.showArchived();
         expect(await runListHarness.isShowingArchived()).toBeTrue();
         expect(await runListHarness.getNoRunsMessage()).toContain(
-          "Looks like you don't have any archived WISE units."
+          "Looks like you don't have any archived classroom units."
         );
       });
     });

@@ -220,11 +220,14 @@ export class TeacherRunListComponent implements OnInit {
         case 'none':
           run.selected = false;
           break;
-        case 'running':
-          run.selected = !run.isCompleted(this.configService.getCurrentServerTime());
-          break;
         case 'completed':
           run.selected = run.isCompleted(this.configService.getCurrentServerTime());
+          break;
+        case 'running':
+          run.selected = run.isActive(this.configService.getCurrentServerTime());
+          break;
+        case 'scheduled':
+          run.selected = run.isScheduled(this.configService.getCurrentServerTime());
           break;
       }
     });
