@@ -3,7 +3,7 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Component({
   selector: 'node-icon-and-title',
-  template: `<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+  template: `<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
     <node-icon [nodeId]="nodeId" size="18"></node-icon>&nbsp;
     <span *ngIf="showPosition">{{ getNodePosition(nodeId) }}:&nbsp;</span>{{ getNodeTitle(nodeId) }}
   </div>`

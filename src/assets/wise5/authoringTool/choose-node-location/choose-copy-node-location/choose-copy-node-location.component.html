@@ -26,7 +26,7 @@
       </div>
     </div>
   </div>
-  <h6 class="underline" i18n>Unused Lessons</h6>
+  <h6 class="unused-header" i18n>Unused Lessons</h6>
   <div *ngIf="inactiveGroupNodes.length == 0" i18n>There are no Unused Lessons</div>
   <ng-container *ngFor="let inactiveNode of inactiveGroupNodes">
     <div fxLayout="row" fxLayoutAlign="start center" class="lesson-header" fxLayoutGap="10px">
@@ -52,7 +52,7 @@
     </ng-container>
   </ng-container>
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-    <h6 class="underline" i18n>Unused Steps</h6>
+    <h6 class="unused-header" i18n>Unused Steps</h6>
     <insert-node-inside-button
       (insertEvent)="insert('inactiveNodes', false)"
     ></insert-node-inside-button>

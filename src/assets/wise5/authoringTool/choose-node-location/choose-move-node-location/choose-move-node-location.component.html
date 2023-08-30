@@ -32,7 +32,7 @@
     </div>
   </div>
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-    <h6 class="underline" i18n>Unused Lessons</h6>
+    <h6 class="unused-header" i18n>Unused Lessons</h6>
     <insert-node-inside-button
       *ngIf="moveGroup"
       (insertEvent)="insert('inactiveGroups', false)"
@@ -73,7 +73,7 @@
   </ng-container>
   <div *ngIf="!moveGroup">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <h6 class="underline" i18n>Unused Steps</h6>
+      <h6 class="unused-header" i18n>Unused Steps</h6>
       <insert-node-inside-button
         (insertEvent)="insert('inactiveNodes', false)"
       ></insert-node-inside-button>

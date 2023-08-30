@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'node-with-move-after-button',
-  template: `<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+  template: `<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
     <node-icon-and-title [nodeId]="nodeId"></node-icon-and-title>
     <insert-node-after-button
       [disabled]="disabled"

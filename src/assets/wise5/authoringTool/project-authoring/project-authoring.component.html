@@ -219,7 +219,7 @@
               </div>
             </ng-container>
             <div>
-              <h6 class="underline">Unused Lessons</h6>
+              <h6 class="unused-header">Unused Lessons</h6>
               <div *ngIf="getNumberOfInactiveGroups() === 0" i18n>There are no Unused Lessons</div>
               <ng-container *ngFor="let inactiveNode of inactiveGroupNodes">
                 <div *ngIf="isGroupNode(inactiveNode.id)" id="{{ inactiveNode.id }}">
@@ -290,7 +290,7 @@
                 </div>
               </ng-container>
               <div>
-                <h6 class="underline" i18n>Unused Steps</h6>
+                <h6 class="unused-header" i18n>Unused Steps</h6>
                 <div *ngIf="getNumberOfInactiveSteps() === 0" i18n>There are no Unused Steps</div>
                 <ng-container *ngFor="let inactiveNode of inactiveStepNodes">
                   <div
