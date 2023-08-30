@@ -102,7 +102,7 @@
                 color="primary"
                 class="topButton"
                 (click)="copy()"
-                [disabled]="!hasSelectedNodes() || insertGroupMode || insertNodeMode"
+                [disabled]="!hasSelectedStepsOnly() || insertGroupMode || insertNodeMode"
                 matTooltip="Copy"
                 matTooltipPosition="above"
                 i18n-matTooltip

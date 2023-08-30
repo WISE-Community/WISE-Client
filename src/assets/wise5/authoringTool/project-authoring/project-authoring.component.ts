@@ -191,19 +191,10 @@ export class ProjectAuthoringComponent {
   }
 
   protected copy(): void {
-    // make sure there is at least one item selected
-    let selectedNodeIds = this.getSelectedNodeIds();
-    if (selectedNodeIds == null || selectedNodeIds.length == 0) {
-      alert($localize`Please select an item to copy and then click the "Copy" button again.`);
-    } else {
-      let selectedItemTypes = this.getSelectedItemTypes();
-      if (selectedItemTypes.length === 1 && selectedItemTypes[0] === 'node') {
-        this.insertNodeMode = true;
-        this.copyMode = true;
-      } else if (selectedItemTypes.length === 1 && selectedItemTypes[0] === 'group') {
-        alert($localize`You cannot copy lessons at this time.`);
-      }
-    }
+    this.router.navigate(['choose-copy-location'], {
+      relativeTo: this.route,
+      state: { selectedNodeIds: this.getSelectedNodeIds() }
+    });
   }
 
   protected move(): void {
@@ -551,6 +542,13 @@ export class ProjectAuthoringComponent {
 
   protected hasSelectedNodes(): boolean {
     return this.getSelectedNodeIds().length > 0;
+  }
+
+  protected hasSelectedStepsOnly(): boolean {
+    return (
+      this.hasSelectedNodes() &&
+      this.getSelectedNodeIds().every((nodeId) => this.projectService.isApplicationNode(nodeId))
+    );
   }
 
   private subscribeToCurrentAuthors(projectId: number): void {
