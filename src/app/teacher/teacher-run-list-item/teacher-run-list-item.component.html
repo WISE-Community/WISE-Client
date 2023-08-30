@@ -75,10 +75,7 @@
     ></div>
     <div fxFlex="1 1 100%" fxLayout="row" fxLayoutWrap>
       <div fxLayout="column">
-        <mat-card-title
-          [ngClass]="{ 'secondary-text': isRunCompleted(run), warn: run.archived }"
-          class="mat-body-1"
-        >
+        <mat-card-title [ngClass]="{ 'secondary-text': isRunCompleted(run) }" class="mat-body-1">
           {{ run.project.name }}
           <span
             *ngIf="run.project.wiseVersion === 4"

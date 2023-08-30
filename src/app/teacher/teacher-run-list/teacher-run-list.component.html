@@ -25,7 +25,7 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <div *ngIf="filteredRuns.length > 0" class="notice" [ngClass]="{ warn: showArchived }">
+  <div *ngIf="filteredRuns.length > 0" class="notice">
     <p [ngStyle]="{ visibility: loaded ? 'visible' : 'hidden' }">
       <ng-container *ngIf="searchValue || filterValue" i18n
         >Units found: {{ filteredRuns.length }}</ng-container
@@ -65,7 +65,7 @@
         <p i18n>Hey there! Looks like you don't have any active classroom units.</p>
         <p i18n>Browse the "Unit Library" to find titles to use with your students.</p>
       </div>
-      <div class="notice no-runs-message warn" *ngIf="showArchived">
+      <div class="notice no-runs-message" *ngIf="showArchived">
         <p i18n>Looks like you don't have any archived classroom units.</p>
       </div>
     </ng-container>
