@@ -1,15 +1,17 @@
 .lesson-header {
   margin-inline-start: 8px;
+  padding: 2px 0px;
 }
 
 .step-header {
   margin-inline-start: 24px;
+  padding: 2px 0px;
 }
 
 .branch-path-step-header {
   margin-inline-start: 48px;
 }
 
-.mat-icon {
-  margin: 0;
+.unused-header {
+  text-decoration: underline;
 }
