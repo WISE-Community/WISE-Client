@@ -112,10 +112,11 @@ function render() {
 }
 
 function runArchiveStatusChanged() {
-  describe('runArchiveStatusChanged()', () => {
-    it('should unselect run and emit events', async () => {
+  describe('run is not archived and archive menu button is clicked', () => {
+    it('should archive run and emit events', async () => {
       const runSelectedSpy = spyOn(component.runSelectedStatusChangedEvent, 'emit');
       const runArchiveSpy = spyOn(component.runArchiveStatusChangedEvent, 'emit');
+      expect(await runListItemHarness.isArchived()).toBeFalse();
       await runListItemHarness.clickArchiveMenuButton();
       expect(await runListItemHarness.isArchived()).toBeTrue();
       expect(runSelectedSpy).toHaveBeenCalled();

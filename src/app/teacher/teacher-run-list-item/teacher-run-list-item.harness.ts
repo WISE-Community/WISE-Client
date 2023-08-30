@@ -30,6 +30,6 @@ export class TeacherRunListItemHarness extends ComponentHarness {
   }
 
   async isArchived(): Promise<boolean> {
-    return (await this.locatorForOptional('.mat-mdc-card-title.warn')()) != null;
+    return (await this.getMenu()).hasRestoreMenuButton();
   }
 }
