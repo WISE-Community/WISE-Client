@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ConfigService } from '../../services/configService';
-import { CopyNodesService } from '../../services/copyNodesService';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
@@ -19,13 +18,10 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 export class ProjectAuthoringComponent {
   protected activityNodeSelected: boolean = false;
   protected authors: string[] = [];
-  private copyMode: boolean;
   private idToNode: any;
   protected inactiveGroupNodes: any[];
   private inactiveNodes: any[];
   protected inactiveStepNodes: any[];
-  protected insertGroupMode: boolean;
-  protected insertNodeMode: boolean;
   protected items: any;
   private projectId: number;
   protected showProjectView: boolean = true;
@@ -35,7 +31,6 @@ export class ProjectAuthoringComponent {
 
   constructor(
     private configService: ConfigService,
-    private copyNodesService: CopyNodesService,
     private deleteNodeService: DeleteNodeService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
@@ -127,67 +122,6 @@ export class ProjectAuthoringComponent {
   protected branchIconClicked(nodeId: string): void {
     this.dataService.setCurrentNodeByNodeId(nodeId);
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/path`]);
-  }
-
-  protected insertInside(nodeId: string): void {
-    if (this.copyMode) {
-      this.handleCopyModeInsert(nodeId, 'inside');
-    }
-  }
-
-  protected insertAfter(nodeId: string): void {
-    if (this.copyMode) {
-      this.handleCopyModeInsert(nodeId, 'after');
-    }
-  }
-
-  /**
-   * Copy a node and insert it in the specified location
-   * @param nodeId insert the new node inside or after this node id
-   * @param moveTo whether to insert 'inside' or 'after' the nodeId parameter
-   */
-  private handleCopyModeInsert(nodeId: string, moveTo: string): void {
-    let selectedNodeIds = this.getSelectedNodeIds();
-    let newNodes = [];
-    if (moveTo === 'inside') {
-      const firstNode: any = this.copyNodesService.copyNodeInside(selectedNodeIds[0], nodeId);
-      const otherNodes = this.copyNodesService.copyNodesAfter(
-        selectedNodeIds.slice(1),
-        firstNode.id
-      );
-      newNodes = [firstNode].concat(otherNodes);
-    } else if (moveTo === 'after') {
-      newNodes = this.copyNodesService.copyNodesAfter(selectedNodeIds, nodeId);
-    } else {
-      // an unspecified moveTo was provided
-      return;
-    }
-    const copiedNodes: any[] = selectedNodeIds.map((selectedNodeId) => {
-      return {
-        fromNodeId: selectedNodeId,
-        fromTitle: this.projectService.getNodePositionAndTitle(selectedNodeId)
-      };
-    });
-    this.copyMode = false;
-    this.insertGroupMode = false;
-    this.insertNodeMode = false;
-    this.temporarilyHighlightNewNodes(newNodes);
-    this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
-      this.refreshProject();
-      if (newNodes != null && newNodes.length > 0) {
-        let firstNewNode = newNodes[0];
-        if (firstNewNode != null && firstNewNode.id != null) {
-          for (let n = 0; n < copiedNodes.length; n++) {
-            let node = copiedNodes[n];
-            let newNode = newNodes[n];
-            if (node != null && newNode != null) {
-              node.toNodeId = newNode.id;
-              node.toTitle = this.projectService.getNodePositionAndTitle(newNode.id);
-            }
-          }
-        }
-      }
-    });
   }
 
   protected copy(): void {
@@ -327,13 +261,6 @@ export class ProjectAuthoringComponent {
 
   protected addStructure(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/structure/choose`]);
-  }
-
-  protected cancelMove(): void {
-    this.insertGroupMode = false;
-    this.insertNodeMode = false;
-    this.copyMode = false;
-    this.unselectAllItems();
   }
 
   private updateStartNodeId(): void {

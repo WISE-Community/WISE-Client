@@ -38,23 +38,19 @@
       (insertEvent)="insert('inactiveGroups', false)"
     ></insert-node-inside-button>
   </div>
-  <div *ngIf="inactiveGroupNodes.length == 0">
-    <span i18n>There are no Unused Lessons</span>
-  </div>
+  <div *ngIf="inactiveGroupNodes.length == 0" i18n>There are no Unused Lessons</div>
   <ng-container *ngFor="let inactiveNode of inactiveGroupNodes">
-    <div fxLayout="row" fxLayoutAlign="start center" class="lesson-header">
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-        <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
-        <insert-node-inside-button
-          *ngIf="!moveGroup"
-          (insertEvent)="insert(inactiveNode.id, false)"
-        ></insert-node-inside-button>
-        <insert-node-after-button
-          *ngIf="moveGroup"
-          [disabled]="!canInsertAfter(inactiveNode.id)"
-          (insertEvent)="insert(inactiveNode.id, true)"
-        ></insert-node-after-button>
-      </div>
+    <div fxLayout="row" fxLayoutAlign="start center" class="lesson-header" fxLayoutGap="10px">
+      <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
+      <insert-node-inside-button
+        *ngIf="!moveGroup"
+        (insertEvent)="insert(inactiveNode.id, false)"
+      ></insert-node-inside-button>
+      <insert-node-after-button
+        *ngIf="moveGroup"
+        [disabled]="!canInsertAfter(inactiveNode.id)"
+        (insertEvent)="insert(inactiveNode.id, true)"
+      ></insert-node-after-button>
     </div>
     <ng-container *ngFor="let inactiveChildId of inactiveNode.ids">
       <div *ngIf="!moveGroup">
@@ -82,9 +78,7 @@
         (insertEvent)="insert('inactiveNodes', false)"
       ></insert-node-inside-button>
     </div>
-    <div *ngIf="inactiveStepNodes.length == 0">
-      <span i18n>There are no Unused Steps</span>
-    </div>
+    <div *ngIf="inactiveStepNodes.length == 0" i18n>There are no Unused Steps</div>
     <ng-container *ngFor="let inactiveNode of inactiveStepNodes">
       <div *ngIf="getParentGroup(inactiveNode.id) == null" class="step-header">
         <node-with-move-after-button
