@@ -45,7 +45,8 @@ export class OfficialLibraryComponent extends LibraryComponent {
     }
   }
 
-  showInfo() {
+  showInfo(event: Event) {
+    event.preventDefault();
     this.dialog.open(OfficialLibraryDetailsComponent, {
       panelClass: 'dialog-sm'
     });

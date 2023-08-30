@@ -35,7 +35,8 @@ export class CommunityLibraryComponent extends LibraryComponent {
     }
   }
 
-  showInfo() {
+  showInfo(event: Event) {
+    event.preventDefault();
     this.dialog.open(CommunityLibraryDetailsComponent, {
       panelClass: 'dialog-sm'
     });

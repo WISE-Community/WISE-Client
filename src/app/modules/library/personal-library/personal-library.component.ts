@@ -77,7 +77,8 @@ export class PersonalLibraryComponent extends LibraryComponent {
     }
   }
 
-  showInfo() {
+  showInfo(event: Event) {
+    event.preventDefault();
     this.dialog.open(PersonalLibraryDetailsComponent, {
       panelClass: 'dialog-sm'
     });
