@@ -6268,49 +6268,105 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Password required </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
-          <context context-type="linenumber">12,14</context>
+          <context context-type="linenumber">16,18</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="20ffc38442c2312b51df57f07de1154bc0ac6005" datatype="html">
-        <source> Password must be at least 8 characters </source>
+      <trans-unit id="0802c2fb2cd78f567f31cf9a23aed0bf3576f79d" datatype="html">
+        <source>Password Strength:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
-          <context context-type="linenumber">15,17</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="e0ec4c4460849c90579b7bf68cdde586ce2e8ad9" datatype="html">
-        <source> Password must have at least one lowercase, one uppercase, and one number character </source>
+      <trans-unit id="33b896a4116cca3c0a7621bfb78676fadf43feaa" datatype="html">
+        <source>Very Weak</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
-          <context context-type="linenumber">18,20</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="d6d75c1f8f4457d4a266a8818d8cdd8f8b1dd4d6" datatype="html">
-        <source> Confirm Password required </source>
+      <trans-unit id="ba575e9364b43dc870e332265c5182bb357b7a49" datatype="html">
+        <source>Weak</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
-          <context context-type="linenumber">33,35</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7bd34bd120146afef0e0d8fa168d9bdabd594b6a" datatype="html">
+        <source>Good</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3f7349017a01eed18c3daf2b7295ca96ef442eb6" datatype="html">
+        <source>Strong</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a5ffb23b25a3b62f343168c9b68403ceff79982c" datatype="html">
+        <source>Very Strong</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7d66b8b8255bb221e3b708b49dc6092f4c4814b3" datatype="html">
+        <source>Your password needs to:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dfc65391f8c1f0828caf9a92960966d1e316716e" datatype="html">
+        <source>include a letter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0f6a5ff3666e20fe69667b15d18d1526e0b7d976" datatype="html">
+        <source>include a number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="91bdf4491eee607d32c097aa17e13f6ccd5a3ac6" datatype="html">
+        <source>include one of these symbols ! @ # $ % ^ &amp; *</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f4ac3be273f10988147e2f04ddcc9183e84efe6b" datatype="html">
+        <source>be at least 8 characters long</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
+          <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="639218489d72a890a5bed2c090a8ead0ad973d9d" datatype="html">
         <source> Password does not match </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
-          <context context-type="linenumber">36,38</context>
+          <context context-type="linenumber">97,99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="911145468998987410" datatype="html">
         <source>Confirm New Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.ts</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1221596867309460035" datatype="html">
         <source>New Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.ts</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1cde0ecb1655843b8b682674d1ed9ff8138073b2" datatype="html">

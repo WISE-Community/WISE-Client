@@ -50,8 +50,8 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
         MatCardModule,
         MatDividerModule,
         PasswordModule,
-        RouterTestingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RouterTestingModule
       ],
       providers: [{ provide: TeacherService, useClass: MockTeacherService }],
       schemas: []

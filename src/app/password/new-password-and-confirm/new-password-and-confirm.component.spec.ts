@@ -1,119 +1,130 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AbstractControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewPasswordAndConfirmComponent } from './new-password-and-confirm.component';
+import { MatIconModule } from '@angular/material/icon';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { NewPasswordAndConfirmHarness } from './new-password-and-confirm.harness';
+import { PasswordModule } from '../password.module';
 
 let component: NewPasswordAndConfirmComponent;
 let fixture: ComponentFixture<NewPasswordAndConfirmComponent>;
+const INVALID_PASSWORD_MISSING_LETTER = '1234567!';
+const INVALID_PASSWORD_MISSING_NUMBER = 'abcdefg!';
+const INVALID_PASSWORD_MISSING_SYMBOL = 'abcd1234';
+const INVALID_PASSWORD_SHORT_LENGTH = 'abcd12!';
+let newPasswordAndConfirmHarness: NewPasswordAndConfirmHarness;
+const VALID_PASSWORD = 'abcd123!';
 
 describe('NewPasswordAndConfirmComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NewPasswordAndConfirmComponent],
-      imports: [BrowserAnimationsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule]
+      imports: [
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        PasswordModule,
+        ReactiveFormsModule
+      ]
     }).compileComponents();
-
     fixture = TestBed.createComponent(NewPasswordAndConfirmComponent);
     component = fixture.componentInstance;
     component.formGroup = new FormGroup({});
     fixture.detectChanges();
+    newPasswordAndConfirmHarness = await TestbedHarnessEnvironment.harnessForFixture(
+      fixture,
+      NewPasswordAndConfirmHarness
+    );
   });
-  passwordValidation();
+  newPasswordValidation();
   confirmPasswordValidation();
 });
 
-function passwordValidation() {
-  it('should show password required error', () => {
-    setPasswordAndExpectError('', 'required');
+function newPasswordValidation() {
+  describe('password is missing', () => {
+    it('should show password required error', async () => {
+      await newPasswordAndConfirmHarness.setNewPassword('');
+      expect(await newPasswordAndConfirmHarness.isNewPasswordRequiredErrorDisplayed()).toBeTrue();
+    });
   });
-
-  it('should show password length error', () => {
-    setPasswordAndExpectError('1234567', 'minlength');
+  describe('password is valid', () => {
+    it('should not show any error', async () => {
+      await newPasswordAndConfirmHarness.setNewPassword(VALID_PASSWORD);
+      expect(await newPasswordAndConfirmHarness.isNewPasswordRequiredErrorDisplayed()).toBeFalse();
+    });
   });
-
-  it('should show password pattern error', () => {
-    setPasswordAndExpectError('1234567', 'pattern');
+  describe('password is missing a letter', () => {
+    it('should indicate password needs to include a letter', async () => {
+      await setPasswordAndExepctErrors(INVALID_PASSWORD_MISSING_LETTER, true, false, false, false);
+    });
   });
-
-  it('should not show any error when password is valid', () => {
-    setNewPasswordValue('Abcd1234');
-    expect(getNewPasswordFormControl().errors).toBeNull();
+  describe('password is missing a number', () => {
+    it('should indicate password needs to include a number', async () => {
+      await setPasswordAndExepctErrors(INVALID_PASSWORD_MISSING_NUMBER, false, true, false, false);
+    });
+  });
+  describe('password is missing a symbol', () => {
+    it('should indicate password needs to include a symbol', async () => {
+      await setPasswordAndExepctErrors(INVALID_PASSWORD_MISSING_SYMBOL, false, false, true, false);
+    });
+  });
+  describe('password is too short', () => {
+    it('should indicate password needs to be longer', async () => {
+      await setPasswordAndExepctErrors(INVALID_PASSWORD_SHORT_LENGTH, false, false, false, true);
+    });
   });
 }
 
-function setPasswordAndExpectError(password: string, errorName: string): void {
-  setNewPasswordValue(password);
-  expect(newPasswordHasError(errorName)).toBeTrue();
-}
-
-function setNewPasswordValue(value: string): void {
-  setFormControlValue(
-    component,
-    NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME,
-    value
+async function setPasswordAndExepctErrors(
+  password: string,
+  expectedMissingLetter: boolean,
+  expectedMissingNumber: boolean,
+  expectedMissingSymbol: boolean,
+  expectedTooShort: boolean
+): Promise<void> {
+  await newPasswordAndConfirmHarness.setNewPassword(password);
+  await checkPasswordRequirements(
+    expectedMissingLetter,
+    expectedMissingNumber,
+    expectedMissingSymbol,
+    expectedTooShort
   );
 }
 
-function newPasswordHasError(errorName: string): boolean {
-  return hasError(
-    component,
-    NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME,
-    errorName
-  );
-}
-
-function getNewPasswordFormControl(): AbstractControl {
-  return getFormControl(component, NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME);
+async function checkPasswordRequirements(
+  expectedMissingLetter: boolean,
+  expectedMissingNumber: boolean,
+  expectedMissingSymbol: boolean,
+  expectedTooShort: boolean
+): Promise<void> {
+  expect(await newPasswordAndConfirmHarness.isMissingLetter()).toBe(expectedMissingLetter);
+  expect(await newPasswordAndConfirmHarness.isMissingNumber()).toBe(expectedMissingNumber);
+  expect(await newPasswordAndConfirmHarness.isMissingSymbol()).toBe(expectedMissingSymbol);
+  expect(await newPasswordAndConfirmHarness.isTooShort()).toBe(expectedTooShort);
 }
 
 function confirmPasswordValidation() {
-  it('should show password does not match error', () => {
-    setNewPasswordValue('a');
-    setConfirmNewPasswordValue('b');
-    component.formGroup.markAsTouched();
-    expect(confirmNewPasswordHasError('passwordDoesNotMatch')).toBeTrue();
+  describe('passwords do not match', () => {
+    it('should show password does not match error', async () => {
+      await newPasswordAndConfirmHarness.setNewPassword('a');
+      await newPasswordAndConfirmHarness.setConfirmNewPassword('b');
+      expect(
+        await newPasswordAndConfirmHarness.isConfirmNewPasswordDoesNotMatchErrorDisplayed()
+      ).toBeTrue();
+    });
   });
 
-  it('should not show any error when passwords match', () => {
-    setNewPasswordValue('a');
-    setConfirmNewPasswordValue('a');
-    expect(getConfirmNewPasswordFormControl().errors).toBeNull();
+  describe('passwords match', () => {
+    it('should not show any error', async () => {
+      await newPasswordAndConfirmHarness.setNewPassword(VALID_PASSWORD);
+      await newPasswordAndConfirmHarness.setConfirmNewPassword(VALID_PASSWORD);
+      expect(
+        await newPasswordAndConfirmHarness.isConfirmNewPasswordDoesNotMatchErrorDisplayed()
+      ).toBeFalse();
+    });
   });
-}
-
-function setConfirmNewPasswordValue(value: string): void {
-  setFormControlValue(
-    component,
-    NewPasswordAndConfirmComponent.CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME,
-    value
-  );
-}
-
-function confirmNewPasswordHasError(errorName: string): boolean {
-  return hasError(
-    component,
-    NewPasswordAndConfirmComponent.CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME,
-    errorName
-  );
-}
-
-function getConfirmNewPasswordFormControl(): AbstractControl {
-  return getFormControl(
-    component,
-    NewPasswordAndConfirmComponent.CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME
-  );
-}
-
-function setFormControlValue(component: any, formControlName: string, value: string): void {
-  getFormControl(component, formControlName).setValue(value);
-}
-
-function getFormControl(component: any, formControlName: string): AbstractControl {
-  return component.formGroup.controls[formControlName];
-}
-
-function hasError(component: any, formControlName: string, errorName: string): boolean {
-  return getFormControl(component, formControlName).hasError(errorName);
 }

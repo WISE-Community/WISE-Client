@@ -26,7 +26,7 @@ export class MockStudentService {
   }
 }
 
-const PASSWORD = 'Abcd1234';
+const PASSWORD = 'abcd1234!';
 
 describe('ForgotStudentPasswordChangeComponent', () => {
   let component: ForgotStudentPasswordChangeComponent;

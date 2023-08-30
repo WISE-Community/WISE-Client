@@ -26,11 +26,11 @@ describe('UnlinkGoogleAccountPasswordComponent', () => {
       declarations: [UnlinkGoogleAccountPasswordComponent],
       imports: [
         BrowserAnimationsModule,
+        MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
-        ReactiveFormsModule,
         PasswordModule,
-        MatDialogModule
+        ReactiveFormsModule
       ],
       providers: [{ provide: UserService, useValue: userService }],
       schemas: [NO_ERRORS_SCHEMA]

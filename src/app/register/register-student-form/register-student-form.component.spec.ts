@@ -25,7 +25,7 @@ let router: Router;
 let component: RegisterStudentFormComponent;
 let configService: ConfigService;
 let fixture: ComponentFixture<RegisterStudentFormComponent>;
-const PASSWORD: string = 'Abcd1234';
+const PASSWORD: string = 'abcd1234!';
 let recaptchaV3Service: ReCaptchaV3Service;
 let studentService: StudentService;
 let snackBar: MatSnackBar;
@@ -54,14 +54,14 @@ describe('RegisterStudentFormComponent', () => {
         declarations: [RegisterStudentFormComponent],
         imports: [
           BrowserAnimationsModule,
-          PasswordModule,
-          RouterTestingModule,
-          ReactiveFormsModule,
-          MatSelectModule,
-          MatInputModule,
-          MatSnackBarModule,
           BrowserModule,
-          RecaptchaV3Module
+          MatInputModule,
+          MatSelectModule,
+          MatSnackBarModule,
+          PasswordModule,
+          ReactiveFormsModule,
+          RecaptchaV3Module,
+          RouterTestingModule
         ],
         providers: [
           { provide: ConfigService, useClass: MockConfigService },

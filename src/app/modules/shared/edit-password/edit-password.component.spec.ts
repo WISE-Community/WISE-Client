@@ -10,13 +10,14 @@ import { By } from '@angular/platform-browser';
 import { User } from '../../../domain/user';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PasswordModule } from '../../../password/password.module';
+import { MatIconModule } from '@angular/material/icon';
 
 const CORRECT_OLD_PASSWORD = 'correctOldPassword123';
 const INCORRECT_OLD_PASSWORD = 'incorrectOldPassword123';
-const INVALID_PASSWORD_TOO_SHORT = 'Abcd123';
+const INVALID_PASSWORD_TOO_SHORT = 'abc123';
 const INVALID_PASSWORD_PATTERN = 'abcd1234';
-const NEW_PASSWORD_1 = 'Abcd1111';
-const NEW_PASSWORD_2 = 'Abcd2222';
+const NEW_PASSWORD_1 = 'abcd111!';
+const NEW_PASSWORD_2 = 'abcd222!';
 
 export class MockUserService {
   getUser(): BehaviorSubject<User> {
@@ -54,6 +55,7 @@ describe('EditPasswordComponent', () => {
       imports: [
         BrowserAnimationsModule,
         MatDialogModule,
+        MatIconModule,
         MatSnackBarModule,
         PasswordModule,
         ReactiveFormsModule
@@ -76,7 +78,7 @@ describe('EditPasswordComponent', () => {
   notGoogleUser_showUnlinkOption();
   unlinkGoogleButtonClick_showDialog();
   invalidPasswordTooShort_showError();
-  invalidPasswordPattern_showError();
+  invalidPassword_showError();
 });
 
 function initialState_disableSubmitButton() {
@@ -173,18 +175,16 @@ function invalidPasswordTooShort_showError() {
       short`, async () => {
     setPasswords(CORRECT_OLD_PASSWORD, INVALID_PASSWORD_TOO_SHORT, INVALID_PASSWORD_TOO_SHORT);
     expectSubmitButtonDisabled();
-    expect(component.newPasswordFormGroup.get('newPassword').getError('minlength')).toBeTruthy();
-    expect(component.newPasswordFormGroup.get('newPassword').getError('pattern')).toBeFalsy();
+    expect(component.newPasswordFormGroup.get('newPassword').errors.tooShort).toBeTrue();
   });
 }
 
-function invalidPasswordPattern_showError() {
-  it(`should disable submit button and set pattern error when new password does not satisfy the
-      pattern requirements`, async () => {
+function invalidPassword_showError() {
+  it(`should disable submit button and set password error when new password does not satisfy the
+      requirements`, async () => {
     setPasswords(CORRECT_OLD_PASSWORD, INVALID_PASSWORD_PATTERN, INVALID_PASSWORD_PATTERN);
     expectSubmitButtonDisabled();
-    expect(component.newPasswordFormGroup.get('newPassword').getError('minlength')).toBeFalsy();
-    expect(component.newPasswordFormGroup.get('newPassword').getError('pattern')).toBeTruthy();
+    expect(component.newPasswordFormGroup.get('newPassword').errors).not.toBeNull();
   });
 }
 
