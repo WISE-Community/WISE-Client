@@ -124,15 +124,8 @@ export class ProjectAuthoringComponent {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/path`]);
   }
 
-  protected copy(): void {
-    this.router.navigate(['choose-copy-location'], {
-      relativeTo: this.route,
-      state: { selectedNodeIds: this.getSelectedNodeIds() }
-    });
-  }
-
-  protected move(): void {
-    this.router.navigate(['choose-move-location'], {
+  protected chooseLocation(isCopy: boolean): void {
+    this.router.navigate([isCopy ? 'choose-copy-location' : 'choose-move-location'], {
       relativeTo: this.route,
       state: { selectedNodeIds: this.getSelectedNodeIds() }
     });

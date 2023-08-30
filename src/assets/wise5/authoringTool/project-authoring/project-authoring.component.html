@@ -67,7 +67,7 @@
               <button
                 mat-raised-button
                 color="primary"
-                (click)="move()"
+                (click)="chooseLocation(false)"
                 [disabled]="!hasSelectedNodes()"
                 matTooltip="Move"
                 matTooltipPosition="above"
@@ -78,7 +78,7 @@
               <button
                 mat-raised-button
                 color="primary"
-                (click)="copy()"
+                (click)="chooseLocation(true)"
                 [disabled]="!hasSelectedStepsOnly()"
                 matTooltip="Copy"
                 matTooltipPosition="above"
