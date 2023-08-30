@@ -16,7 +16,7 @@ export class DiscussionComponentDataExportStrategy extends AbstractDataExportStr
   export() {
     this.controller.showDownloadingExportMessage();
     const components = [{ nodeId: this.nodeId, componentId: this.component.id }];
-    this.dataExportService.retrieveStudentData(components, true, false, true).then((result) => {
+    this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
       const columnNames = [];
       const columnNameToNumber = {};
       let rows = [this.generateDiscussionComponentHeaderRow(columnNames, columnNameToNumber)];

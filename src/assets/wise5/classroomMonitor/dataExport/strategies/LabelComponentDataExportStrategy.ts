@@ -16,7 +16,7 @@ export class LabelComponentDataExportStrategy extends AbstractComponentDataExpor
   export(): void {
     this.controller.showDownloadingExportMessage();
     const components = [{ nodeId: this.component.nodeId, componentId: this.component.id }];
-    this.dataExportService.retrieveStudentData(components, true, false, true).then((result) => {
+    this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
       let rows = [this.generateComponentHeaderRow(this.columnNames)];
       rows = rows.concat(this.generateComponentWorkRows(this.component));
       this.addLabelHeaders(rows, this.maxNumLabels);

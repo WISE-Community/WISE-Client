@@ -42,6 +42,7 @@ import { AuthoringToolBarComponent } from '../../assets/wise5/authoringTool/comp
 import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponents/stepTools/step-tools.module';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
 import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authoring-tool.component';
+import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-move-node-location/choose-move-node-location.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authori
     ChooseNewComponent,
     ChooseNewNodeLocation,
     ChooseNewNodeTemplate,
+    ChooseMoveNodeLocationComponent,
     ChooseSimulationComponent,
     ConcurrentAuthorsMessageComponent,
     ConfigureAutomatedAssessmentComponent,

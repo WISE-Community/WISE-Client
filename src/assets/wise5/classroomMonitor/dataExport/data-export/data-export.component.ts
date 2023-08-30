@@ -15,7 +15,6 @@ import { NotificationDataExportStrategy } from '../strategies/NotificationDataEx
 import { StudentAssetDataExportStrategy } from '../strategies/StudentAssetDataExportStrategy';
 import { OneWorkgroupPerRowDataExportStrategy } from '../strategies/OneWorkgroupPerRowDataExportStrategy';
 import { RawDataExportStrategy } from '../strategies/RawDataExportStrategy';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { DiscussionComponentDataExportStrategy } from '../strategies/DiscussionComponentDataExportStrategy';
@@ -25,6 +24,7 @@ import { removeHTMLTags } from '../../../common/string/string';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 import { Choice } from '../../../components/match/choice';
 import { Bucket } from '../../../components/match/bucket';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'data-export',
@@ -123,8 +123,9 @@ export class DataExportComponent implements OnInit {
     private dialog: MatDialog,
     private matchService: MatchService,
     public projectService: TeacherProjectService,
-    public teacherDataService: TeacherDataService,
-    private upgrade: UpgradeModule
+    private route: ActivatedRoute,
+    private router: Router,
+    public dataService: TeacherDataService
   ) {}
 
   ngOnInit(): void {
@@ -141,22 +142,6 @@ export class DataExportComponent implements OnInit {
     this.flattenedProjectAsNodeIds = this.projectService.getFlattenedProjectAsNodeIds();
     this.nodes = Object.values(this.projectIdToOrder);
     this.nodes.sort(this.sortNodesByOrder);
-    const context = 'ClassroomMonitor',
-      nodeId = null,
-      componentId = null,
-      componentType = null,
-      category = 'Navigation',
-      event = 'dataExportViewDisplayed',
-      data = {};
-    this.teacherDataService.saveEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      data
-    );
   }
 
   sortNodesByOrder(nodeA: any, nodeB: any): number {
@@ -190,7 +175,7 @@ export class DataExportComponent implements OnInit {
    * latestWork, allWork, and events will call this function with a null exportType.
    */
   export(exportType = this.exportType): void {
-    this.teacherDataService.saveEvent(
+    this.dataService.saveEvent(
       'ClassroomMonitor',
       null,
       null,
@@ -1068,11 +1053,9 @@ export class DataExportComponent implements OnInit {
    */
   exportMatchComponent(nodeId: string, component: any): void {
     const components = this.getComponentsParam(nodeId, component.id);
-    this.dataExportService
-      .retrieveStudentData(components, true, false, true)
-      .then((result: any) => {
-        this.generateMatchComponentExport(nodeId, component);
-      });
+    this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
+      this.generateMatchComponentExport(nodeId, component);
+    });
   }
 
   generateMatchComponentExport(nodeId: string, component: any): void {
@@ -1364,11 +1347,9 @@ export class DataExportComponent implements OnInit {
 
   exportDialogGuidanceComponent(nodeId: string, component: any): void {
     const components = this.getComponentsParam(nodeId, component.id);
-    this.dataExportService
-      .retrieveStudentData(components, true, false, true)
-      .then((result: any) => {
-        this.generateDialogGuidanceComponentExport(nodeId, component);
-      });
+    this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
+      this.generateDialogGuidanceComponentExport(nodeId, component);
+    });
   }
 
   generateDialogGuidanceComponentExport(nodeId: string, component: any): void {
@@ -1380,7 +1361,7 @@ export class DataExportComponent implements OnInit {
 
   exportOpenResponseComponent(nodeId: string, component: any): void {
     const components = this.getComponentsParam(nodeId, component.id);
-    this.dataExportService.retrieveStudentData(components, true, false, true).then(() => {
+    this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
       this.generateOpenResponseComponentExport(nodeId, component);
     });
   }
@@ -1436,7 +1417,7 @@ export class DataExportComponent implements OnInit {
       this.studentResponseLabel
     );
     if (this.isCRaterEnabled(component)) {
-      const annotations = this.teacherDataService.getAnnotationsByNodeIdAndComponentId(
+      const annotations = this.dataService.getAnnotationsByNodeIdAndComponentId(
         nodeId,
         component.id
       );
@@ -1573,7 +1554,7 @@ export class DataExportComponent implements OnInit {
       this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, defaultColumnName);
     }
     this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, this.itemIdLabel);
-    const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
+    const componentStates = this.dataService.getComponentStatesByComponentId(component.id);
     const ideaNames = this.getDialogGuidanceIdeaNames(componentStates);
     const scoreNames = this.getDialogGuidanceScoreNames(componentStates);
     for (let r = 0; r < this.getMaxNumberOfStudentResponses(componentStates); r++) {
@@ -1750,7 +1731,7 @@ export class DataExportComponent implements OnInit {
     // A mapping from component to component revision counter. The key will be
     // {{nodeId}}_{{componentId}} and the value will be a number.
     const componentRevisionCounter = {};
-    const componentStates = this.teacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
+    const componentStates = this.dataService.getComponentStatesByWorkgroupIdAndComponentId(
       workgroupId,
       componentId
     );
@@ -2065,11 +2046,9 @@ export class DataExportComponent implements OnInit {
 
   exportEmbeddedComponent(nodeId: string, component: any): void {
     const components = this.getComponentsParam(nodeId, component.id);
-    this.dataExportService
-      .retrieveStudentData(components, true, false, true)
-      .then((result: any) => {
-        this.generateEmbeddedComponentExport(nodeId, component);
-      });
+    this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
+      this.generateEmbeddedComponentExport(nodeId, component);
+    });
   }
 
   generateEmbeddedComponentExport(nodeId: string, component: any): void {
@@ -2111,7 +2090,7 @@ export class DataExportComponent implements OnInit {
         defaultMatchColumnName
       );
     }
-    const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
+    const componentStates = this.dataService.getComponentStatesByComponentId(component.id);
     const items = this.getEmbeddedTableRowItems(component, componentStates);
     const columnKeys = this.getEmbeddedTableColumnKeys(component);
     if (this.isEmbeddedTableComponentAndCanExport(component)) {
@@ -2241,8 +2220,8 @@ export class DataExportComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  exportVisitsClicked(): void {
-    this.upgrade.$injector.get('$state').go('root.cm.exportVisits');
+  protected exportVisitsClicked(): void {
+    this.router.navigate(['visits'], { relativeTo: this.route });
   }
 
   getComponentsParam(nodeId: string, componentId: string): any[] {

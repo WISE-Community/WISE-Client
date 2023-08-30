@@ -1,7 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../services/teacherProjectService';
@@ -15,12 +14,7 @@ describe('WiseAuthoringTinymceEditorComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [WiseAuthoringTinymceEditorComponent],
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
       providers: [ProjectAssetService, TeacherProjectService],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

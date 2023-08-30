@@ -1,7 +1,6 @@
-import { Component, Inject } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { Component } from '@angular/core';
 import { ComponentTypeService } from '../../../../assets/wise5/services/componentTypeService';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'choose-new-component',
@@ -10,29 +9,22 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class ChooseNewComponent {
   componentTypes: any[];
-  selectedComponentType: string;
 
   constructor(
     private componentTypeService: ComponentTypeService,
-    private dialogRef: MatDialogRef<ChooseNewComponent>,
-    @Inject(MAT_DIALOG_DATA) private insertAfterComponentId: string,
-    private upgrade: UpgradeModule
+    private dialogRef: MatDialogRef<ChooseNewComponent>
   ) {}
 
   ngOnInit(): void {
     this.componentTypes = this.componentTypeService.getComponentTypes();
-    this.selectedComponentType = this.upgrade.$injector.get('$stateParams').componentType;
   }
 
   protected goToImportComponent(): void {
-    this.dialogRef.close();
-    this.upgrade.$injector.get('$state').go('root.at.project.node.import-component.choose-step', {
-      insertAfterComponentId: this.insertAfterComponentId
-    });
+    this.dialogRef.close({ action: 'import' });
   }
 
   protected selectComponent(componentType: string): void {
-    this.dialogRef.close(componentType);
+    this.dialogRef.close({ action: 'create', componentType: componentType });
   }
 
   protected cancel(): void {

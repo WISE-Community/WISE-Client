@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { RecoveryAuthoringComponent } from './recovery-authoring.component';
@@ -47,8 +46,7 @@ describe('RecoveryAuthoringComponent', () => {
         HttpClientTestingModule,
         MatDialogModule,
         MatInputModule,
-        StudentTeacherCommonServicesModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       providers: [{ provide: TeacherProjectService, useClass: MockTeacherProjectService }]
     }).compileComponents();

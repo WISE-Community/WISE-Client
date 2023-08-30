@@ -1,13 +1,5 @@
-<choose-import-component
-  *ngIf="$state.current.name === 'root.at.project.node.import-component.choose-step'"
-></choose-import-component>
-<choose-component-location
-  *ngIf="$state.current.name === 'root.at.project.node.choose-component-location'"
-></choose-component-location>
-<node-advanced-authoring
-  *ngIf="$state.current.name.startsWith('root.at.project.node.advanced')"
-></node-advanced-authoring>
-<div *ngIf="$state.current.name === 'root.at.project.node'">
+<router-outlet></router-outlet>
+<div *ngIf="showNodeView">
   <div class="top-button-bar">
     <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
       <teacher-node-icon [nodeId]="nodeId" [canEdit]="true" size="18"></teacher-node-icon>

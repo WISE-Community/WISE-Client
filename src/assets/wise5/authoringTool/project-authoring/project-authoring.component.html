@@ -6,103 +6,8 @@
           [authors]="authors"
           class="concurrent-authors-message center app-background"
         ></concurrent-authors-message>
-        <add-lesson-configure
-          *ngIf="$state.current.name === 'root.at.project.add-lesson.configure'"
-        ></add-lesson-configure>
-        <add-lesson-choose-location
-          *ngIf="$state.current.name === 'root.at.project.add-lesson.choose-location'"
-        ></add-lesson-choose-location>
-        <node-authoring
-          *ngIf="$state.current.name === 'root.at.project.node.choose-template'"
-        ></node-authoring>
-        <choose-new-node-template
-          *ngIf="$state.current.name === 'root.at.project.add-node.choose-template'"
-        ></choose-new-node-template>
-        <add-your-own-node
-          *ngIf="$state.current.name === 'root.at.project.add-node.add-your-own'"
-        ></add-your-own-node>
-        <choose-new-node-location
-          *ngIf="$state.current.name === 'root.at.project.add-node.choose-location'"
-        ></choose-new-node-location>
-        <choose-automated-assessment
-          *ngIf="
-            $state.current.name === 'root.at.project.add-node.automated-assessment.choose-item'
-          "
-        ></choose-automated-assessment>
-        <configure-automated-assessment
-          *ngIf="$state.current.name === 'root.at.project.add-node.automated-assessment.configure'"
-        >
-        </configure-automated-assessment>
-        <choose-simulation
-          *ngIf="$state.current.name === 'root.at.project.add-node.simulation.choose-item'"
-        ></choose-simulation>
-        <choose-import-component
-          *ngIf="$state.current.name === 'root.at.project.node.import-component.choose-step'"
-        ></choose-import-component>
-        <choose-import-step
-          *ngIf="$state.current.name === 'root.at.project.import-step.choose-step'"
-        ></choose-import-step>
-        <choose-import-step-location
-          *ngIf="$state.current.name === 'root.at.project.import-step.choose-location'"
-        ></choose-import-step-location>
-        <node-authoring *ngIf="$state.current.name === 'root.at.project.node'"></node-authoring>
-        <node-advanced-authoring
-          *ngIf="$state.current.name === 'root.at.project.node.advanced'"
-        ></node-advanced-authoring>
-        <node-advanced-branch-authoring
-          *ngIf="$state.current.name === 'root.at.project.node.advanced.branch'"
-        ></node-advanced-branch-authoring>
-        <node-advanced-constraint-authoring
-          *ngIf="$state.current.name === 'root.at.project.node.advanced.constraint'"
-        ></node-advanced-constraint-authoring>
-        <node-advanced-general-authoring
-          *ngIf="$state.current.name === 'root.at.project.node.advanced.general'"
-        ></node-advanced-general-authoring>
-        <node-advanced-json-authoring
-          *ngIf="$state.current.name === 'root.at.project.node.advanced.json'"
-        ></node-advanced-json-authoring>
-        <node-advanced-path-authoring
-          *ngIf="$state.current.name === 'root.at.project.node.advanced.path'"
-        ></node-advanced-path-authoring>
-        <edit-node-rubric
-          *ngIf="$state.current.name === 'root.at.project.node.advanced.rubric'"
-        ></edit-node-rubric>
-        <choose-component-location
-          *ngIf="$state.current.name === 'root.at.project.node.choose-component-location'"
-        ></choose-component-location>
-        <project-asset-authoring
-          *ngIf="$state.current.name === 'root.at.project.asset'"
-        ></project-asset-authoring>
-        <project-info-authoring
-          *ngIf="$state.current.name === 'root.at.project.info'"
-        ></project-info-authoring>
-        <advanced-project-authoring
-          *ngIf="$state.current.name === 'root.at.project.advanced'"
-        ></advanced-project-authoring>
-        <notebook-authoring
-          *ngIf="$state.current.name === 'root.at.project.notebook'"
-        ></notebook-authoring>
-        <milestones-authoring
-          *ngIf="$state.current.name === 'root.at.project.milestones'"
-        ></milestones-authoring>
-        <recovery-authoring *ngIf="$state.current.name === 'root.at.recovery'"></recovery-authoring>
-        <choose-structure
-          *ngIf="$state.current.name === 'root.at.project.structure.choose'"
-        ></choose-structure>
-        <jigsaw *ngIf="$state.current.name === 'root.at.project.structure.jigsaw'"></jigsaw>
-        <self-directed-investigation
-          *ngIf="$state.current.name === 'root.at.project.structure.self-directed-investigation'"
-        ></self-directed-investigation>
-        <peer-review-and-revision
-          *ngIf="$state.current.name === 'root.at.project.structure.peer-review-and-revision'"
-        ></peer-review-and-revision>
-        <ki-cycle-using-oer
-          *ngIf="$state.current.name === 'root.at.project.structure.ki-cycle-using-oer'"
-        ></ki-cycle-using-oer>
-        <choose-structure-location
-          *ngIf="$state.current.name === 'root.at.project.structure.location'"
-        ></choose-structure-location>
-        <div *ngIf="$state.current.name === 'root.at.project'">
+        <router-outlet></router-outlet>
+        <div *ngIf="showProjectView">
           <div class="project-content">
             <div fxLayout="row wrap" fxLayoutGap="15px">
               <button
@@ -287,10 +192,6 @@
                   (!insertGroupMode || (insertGroupMode && isGroupNode(item.key)))
                 "
                 class="projectItem"
-                [ngClass]="{
-                  'node-select--group': isGroupNode(item.key),
-                  'node-select--node': !isGroupNode(item.key)
-                }"
               >
                 <div
                   id="{{ item.key }}"
@@ -447,7 +348,7 @@
                 <span i18n>There are no Unused Lessons</span>
               </div>
               <ng-container *ngFor="let inactiveNode of inactiveGroupNodes">
-                <div *ngIf="isGroupNode(inactiveNode.id)">
+                <div *ngIf="isGroupNode(inactiveNode.id)" id="{{ inactiveNode.id }}">
                   <div
                     fxLayout="row"
                     fxLayoutAlign="start center"
@@ -512,7 +413,7 @@
                     </div>
                   </div>
                   <ng-container *ngFor="let inactiveChildId of inactiveNode.ids">
-                    <div *ngIf="!insertGroupMode" class="projectItem">
+                    <div *ngIf="!insertGroupMode" class="projectItem" id="{{ inactiveChildId }}">
                       <div
                         fxLayout="row"
                         [ngClass]="{
@@ -642,8 +543,8 @@
               </div>
             </div>
           </div>
+          <div id="bottom"></div>
         </div>
-        <div id="bottom"></div>
       </div>
     </div>
   </div>

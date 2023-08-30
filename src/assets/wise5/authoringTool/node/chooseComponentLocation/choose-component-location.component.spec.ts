@@ -1,6 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ChooseComponentLocationComponent } from './choose-component-location.component';
 import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ConfigService } from '../../../services/configService';
@@ -33,14 +32,6 @@ class MockTeacherDataService {
   }
 }
 
-class MockUpgradeModule {
-  $injector: any = {
-    get() {
-      return { componentType: 'Discussion' };
-    }
-  };
-}
-
 class MockComponentTypeService {}
 
 let component: ChooseComponentLocationComponent;
@@ -55,8 +46,7 @@ describe('InsertComponent', () => {
         { provide: ComponentTypeService, useClass: MockComponentTypeService },
         ConfigService,
         { provide: TeacherProjectService, useClass: MockProjectService },
-        { provide: TeacherDataService, useClass: MockTeacherDataService },
-        { provide: UpgradeModule, useClass: MockUpgradeModule }
+        { provide: TeacherDataService, useClass: MockTeacherDataService }
       ]
     });
     component = TestBed.inject(ChooseComponentLocationComponent);

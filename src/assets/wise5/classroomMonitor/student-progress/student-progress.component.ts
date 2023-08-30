@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { ConfigService } from '../../services/configService';
 import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { TeacherDataService } from '../../services/teacherDataService';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'student-progress',
@@ -23,13 +23,14 @@ export class StudentProgressComponent implements OnInit {
   constructor(
     private classroomStatusService: ClassroomStatusService,
     private configService: ConfigService,
-    private teacherDataService: TeacherDataService,
-    private upgrade: UpgradeModule
+    private dataService: TeacherDataService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.teacherWorkgroupId = this.configService.getWorkgroupId();
-    this.sort = this.teacherDataService.studentProgressSort;
+    this.sort = this.dataService.studentProgressSort;
     this.permissions = this.configService.getPermissions();
     this.initializeStudents();
     this.subscriptions.add(
@@ -40,25 +41,9 @@ export class StudentProgressComponent implements OnInit {
       })
     );
     this.subscriptions.add(
-      this.teacherDataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
+      this.dataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
         this.currentWorkgroup = currentWorkgroup;
       })
-    );
-    const context = 'ClassroomMonitor',
-      nodeId = null,
-      componentId = null,
-      componentType = null,
-      category = 'Navigation',
-      event = 'studentProgressViewDisplayed',
-      data = {};
-    this.teacherDataService.saveEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      data
     );
   }
 
@@ -118,7 +103,7 @@ export class StudentProgressComponent implements OnInit {
   }
 
   private getStudentTotalScore(workgroupId: number): number {
-    return this.teacherDataService.getTotalScoreByWorkgroupId(workgroupId);
+    return this.dataService.getTotalScoreByWorkgroupId(workgroupId);
   }
 
   private sortWorkgroups(): void {
@@ -210,14 +195,12 @@ export class StudentProgressComponent implements OnInit {
   }
 
   isWorkgroupShown(workgroup: number): boolean {
-    return this.teacherDataService.isWorkgroupShown(workgroup);
+    return this.dataService.isWorkgroupShown(workgroup);
   }
 
   showStudentGradingView(workgroup: any): void {
     if (this.classroomStatusService.hasStudentStatus(workgroup.workgroupId)) {
-      this.upgrade.$injector
-        .get('$state')
-        .go('root.cm.team', { workgroupId: workgroup.workgroupId });
+      this.router.navigate([workgroup.workgroupId], { relativeTo: this.route });
     }
   }
 
@@ -227,7 +210,7 @@ export class StudentProgressComponent implements OnInit {
     } else {
       this.sort = value;
     }
-    this.teacherDataService.studentProgressSort = this.sort;
+    this.dataService.studentProgressSort = this.sort;
     this.sortWorkgroups();
   }
 }

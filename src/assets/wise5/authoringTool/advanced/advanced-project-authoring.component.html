@@ -7,7 +7,7 @@
     matTooltip="Back to Unit Plan"
     matTooltipPosition="above"
     i18n-matTooltip
-    (click)="goBack()"
+    routerLink=".."
   >
     <mat-icon>arrow_back</mat-icon>
   </button>
@@ -50,7 +50,7 @@
 <div *ngIf="rubricDisplayed" class="rubric-div">
   <rubric-authoring></rubric-authoring>
 </div>
-<div *ngIf="isJSONDisplayed">
+<div *ngIf="jsonDisplayed">
   <mat-form-field fxFlex appearance="outline">
     <mat-label i18n>Edit Unit JSON</mat-label>
     <textarea
@@ -90,7 +90,8 @@
     class="topButton"
     matTooltip="Copy Unit URL to Clipboard"
     matTooltipPosition="above"
-    i18n-matTooltip(click)="copyProjectURL()"
+    i18n-matTooltip
+    (click)="copyProjectURL()"
   >
     <mat-icon>content_paste</mat-icon>
   </button>

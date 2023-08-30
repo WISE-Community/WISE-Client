@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { Subscription, filter } from 'rxjs';
 import { NotificationService } from '../../../../services/notificationService';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'authoring-tool-bar',
@@ -11,11 +12,23 @@ export class AuthoringToolBarComponent {
   protected globalMessage: any = {};
   protected isJSONValid: boolean = null;
   @Output() private onMenuToggle: EventEmitter<void> = new EventEmitter<void>();
-  @Input() protected showStepTools: boolean;
+  protected showStepTools: boolean;
   private subscriptions: Subscription = new Subscription();
-  @Input() protected viewName: string;
+  protected viewName: string;
 
-  constructor(private notificationService: NotificationService) {
+  constructor(private notificationService: NotificationService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.processUI();
+    this.subscribeToNotifications();
+    this.subscribeToRouterEvents();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  private subscribeToNotifications(): void {
     this.subscriptions.add(
       this.notificationService.setGlobalMessage$.subscribe(({ globalMessage }) => {
         this.globalMessage = globalMessage;
@@ -28,8 +41,27 @@ export class AuthoringToolBarComponent {
     );
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+  private subscribeToRouterEvents(): void {
+    this.subscriptions.add(
+      this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+        this.processUI();
+      })
+    );
+  }
+
+  private processUI(): void {
+    const path = this.router.url.substring(this.router.url.lastIndexOf('/') + 1);
+    this.viewName =
+      {
+        asset: $localize`File Manager`,
+        info: $localize`Unit Info`,
+        milestones: $localize`Milestones`,
+        notebook: $localize`Notebook Settings`
+      }[path] ?? $localize`Authoring Tool`;
+    const stepToolPathsFragments = ['advanced', 'branch', 'constraint', 'node'];
+    this.showStepTools = this.router.url
+      .split('/')
+      .some((path) => stepToolPathsFragments.includes(path));
   }
 
   protected toggleMenu(): void {

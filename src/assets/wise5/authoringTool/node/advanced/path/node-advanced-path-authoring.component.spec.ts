@@ -9,8 +9,10 @@ import { TeacherWebSocketService } from '../../../../services/teacherWebSocketSe
 import { NodeAdvancedPathAuthoringComponent } from './node-advanced-path-authoring.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { NodeAdvancedAuthoringComponent } from '../node-advanced-authoring/node-advanced-authoring.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('NodeAdvancedPathAuthoringComponent', () => {
   let component: NodeAdvancedPathAuthoringComponent;
@@ -23,30 +25,26 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
-        StudentTeacherCommonServicesModule,
-        UpgradeModule
+        RouterTestingModule,
+        StudentTeacherCommonServicesModule
       ],
       declarations: [NodeAdvancedAuthoringComponent, NodeAdvancedPathAuthoringComponent],
       providers: [
         ClassroomStatusService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
+        TeacherWebSocketService,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            parent: { params: of({ nodeId: 'node1' }) }
+          }
+        }
       ]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    TestBed.inject(UpgradeModule).$injector = {
-      get: () => {
-        return {
-          current: {
-            name: 'root.at.project.node'
-          },
-          go: (route: string, params: any) => {}
-        };
-      }
-    };
     fixture = TestBed.createComponent(NodeAdvancedPathAuthoringComponent);
     component = fixture.componentInstance;
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue(

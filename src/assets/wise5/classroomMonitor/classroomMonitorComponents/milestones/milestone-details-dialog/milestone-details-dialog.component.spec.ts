@@ -14,6 +14,8 @@ import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testin
 import { SelectPeriodComponent } from '../../select-period/select-period.component';
 import { MilestoneDetailsComponent } from '../milestone-details/milestone-details.component';
 import { MilestoneDetailsDialogComponent } from './milestone-details-dialog.component';
+import { NavItemProgressComponent } from '../../../../../../app/classroom-monitor/nav-item-progress/nav-item-progress.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const milestoneName: string = 'Checkpoint #1';
 
@@ -26,6 +28,7 @@ describe('MilestoneDetailsDialogComponent', () => {
       declarations: [
         MilestoneDetailsComponent,
         MilestoneDetailsDialogComponent,
+        NavItemProgressComponent,
         SelectPeriodComponent
       ],
       imports: [
@@ -36,7 +39,8 @@ describe('MilestoneDetailsDialogComponent', () => {
         MatInputModule,
         MatListModule,
         MatProgressBarModule,
-        MatSelectModule
+        MatSelectModule,
+        MatTooltipModule
       ],
       providers: [
         {

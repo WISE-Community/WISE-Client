@@ -21,7 +21,6 @@
       *ngFor="let componentType of componentTypes"
       class="mat-card component-type"
       (click)="selectComponent(componentType.type)"
-      [ngClass]="{ 'component-type--selected': componentType.type == selectedComponentType }"
     >
       <mat-card-content>
         <mat-card-title>

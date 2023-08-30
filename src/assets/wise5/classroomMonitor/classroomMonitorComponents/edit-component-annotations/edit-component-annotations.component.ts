@@ -1,6 +1,5 @@
 'use strict';
 
-import * as angular from 'angular';
 import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AnnotationService } from '../../../services/annotationService';
@@ -140,9 +139,7 @@ export class EditComponentAnnotationsComponent {
   toggleEditComment() {
     this.edit = !this.edit;
     if (this.edit) {
-      angular
-        .element(document.querySelector(`#commentInput_${this.componentId}_${this.toWorkgroupId}`))
-        .focus();
+      document.getElementById(`commentInput_${this.componentId}_${this.toWorkgroupId}`).focus();
     }
   }
 }

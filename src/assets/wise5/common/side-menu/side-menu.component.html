@@ -4,14 +4,12 @@
       mat-icon-button
       *ngIf="view.type === 'primary' && view.active"
       id="{{ view.route }}"
-      aria-label="{{ view.label }}"
+      aria-label="{{ view.name }}"
       (click)="goToView(view)"
       matTooltip="{{ view.name }}"
       matTooltipPosition="after"
     >
-      <mat-icon [color]="state.$current.name === view.route ? 'primary' : ''">
-        {{ view.icon }}
-      </mat-icon>
+      <mat-icon>{{ view.icon }}</mat-icon>
     </button>
   </ng-container>
 </div>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Node } from '../../../../common/Node';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'node-advanced-authoring',
@@ -9,43 +8,17 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
   styleUrls: ['./node-advanced-authoring.component.scss']
 })
 export class NodeAdvancedAuthoringComponent implements OnInit {
-  isGroupNode: boolean;
-  node: Node;
-  $state: any;
+  protected isGroupNode: boolean;
+  protected nodeId: string;
+  protected projectId: number;
 
-  constructor(private projectService: TeacherProjectService, private upgrade: UpgradeModule) {}
+  constructor(private projectService: TeacherProjectService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.$state = this.upgrade.$injector.get('$state');
-    this.node = this.projectService.getNode(this.upgrade.$injector.get('$stateParams').nodeId);
-    this.isGroupNode = this.node.isGroup();
-  }
-
-  protected goBack(): void {
-    this.$state.go('root.at.project.node', { nodeId: this.node.id });
-  }
-
-  protected showCreateBranchView(): void {
-    this.$state.go('root.at.project.node.advanced.branch');
-  }
-
-  protected showEditTransitionsView(): void {
-    this.$state.go('root.at.project.node.advanced.path');
-  }
-
-  protected showEditConstraintsView(): void {
-    this.$state.go('root.at.project.node.advanced.constraint');
-  }
-
-  protected showGeneralAdvancedView(): void {
-    this.$state.go('root.at.project.node.advanced.general');
-  }
-
-  protected showJSONView(): void {
-    this.$state.go('root.at.project.node.advanced.json');
-  }
-
-  protected showRubricView(): void {
-    this.$state.go('root.at.project.node.advanced.rubric');
+    this.nodeId = this.route.snapshot.paramMap.get('nodeId');
+    this.route.parent.params.subscribe((params) => {
+      this.projectId = Number(params.unitId);
+    });
+    this.isGroupNode = this.projectService.getNode(this.nodeId).isGroup();
   }
 }

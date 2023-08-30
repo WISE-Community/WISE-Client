@@ -72,7 +72,7 @@ describe('ConfigService', () => {
 function retrieveConfig() {
   it('should retrieve config', () => {
     const configURL = 'http://localhost:8080/wise/config/1';
-    service.retrieveConfig(configURL).then((response) => {
+    service.retrieveConfig(configURL).subscribe((response) => {
       expect(response).toEqual(sampleConfig1);
     });
     http.expectOne(configURL).flush(sampleConfig1);

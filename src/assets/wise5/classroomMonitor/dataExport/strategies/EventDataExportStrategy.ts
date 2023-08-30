@@ -11,7 +11,7 @@ export class EventDataExportStrategy extends AbstractDataExportStrategy {
         this.controller.includeTeacherEvents,
         this.controller.includeStudentNames
       )
-      .then((events: any[]) => {
+      .subscribe(({ events }: any) => {
         this.generateEventsExport(events);
       });
   }

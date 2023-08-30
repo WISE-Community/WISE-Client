@@ -9,6 +9,7 @@ import { ConfigService } from './configService';
 import { PathService } from './pathService';
 import { copy } from '../common/object/object';
 import { generateRandomKey } from '../common/string/string';
+import { branchPathBackgroundColors } from '../common/color/color';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -583,13 +584,14 @@ export class TeacherProjectService extends ProjectService {
     }
   }
 
-  /**
-   * Get the branch path letter
-   * @param nodeId get the branch path letter for this node if it is in a branch
-   * @return the branch path letter for the node if it is in a branch
-   */
-  getBranchPathLetter(nodeId) {
-    return this.nodeIdToBranchPathLetter[nodeId];
+  getBackgroundColor(nodeId: string): string {
+    const branchPathLetter = this.nodeIdToBranchPathLetter[nodeId];
+    if (branchPathLetter != null) {
+      const letterASCIICode = branchPathLetter.charCodeAt(0);
+      const branchPathNumber = letterASCIICode - 65;
+      return branchPathBackgroundColors[branchPathNumber];
+    }
+    return null;
   }
 
   /**
@@ -907,7 +909,7 @@ export class TeacherProjectService extends ProjectService {
 
   getConstraintsOnNode(nodeId: string): any {
     const node = this.getNodeById(nodeId);
-    return node.constraints;
+    return node.constraints ?? [];
   }
 
   /**
