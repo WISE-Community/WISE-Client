@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { Project } from '../../domain/project';
 import { ArchiveProjectService } from '../../services/archive-project.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SelectRunsOption } from './select-runs-option';
 
 @Component({
   selector: 'select-runs-controls',
@@ -20,7 +21,7 @@ export class SelectRunsControlsComponent {
   @Input() runs: TeacherRun[] = [];
   protected selectedAllRuns: boolean = false;
   protected selectedSomeRuns: boolean = false;
-  @Output() selectRunsOptionChosenEvent = new EventEmitter<string>();
+  @Output() selectRunsOptionChosenEvent = new EventEmitter<SelectRunsOption>();
   @Input() showArchived: boolean = false;
 
   constructor(
@@ -42,12 +43,12 @@ export class SelectRunsControlsComponent {
 
   protected selectAllRunsCheckboxClicked(): void {
     this.selectRunsOptionChosenEvent.emit(
-      this.selectedAllRuns || this.selectedSomeRuns ? 'none' : 'all'
+      this.selectedAllRuns || this.selectedSomeRuns ? SelectRunsOption.None : SelectRunsOption.All
     );
   }
 
   protected selectRunsOptionChosen(value: string): void {
-    this.selectRunsOptionChosenEvent.emit(value);
+    this.selectRunsOptionChosenEvent.emit(value as SelectRunsOption);
   }
 
   protected archiveSelectedRuns(archive: boolean): Subscription {

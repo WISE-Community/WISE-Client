@@ -18,11 +18,11 @@
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <mat-menu #selectRunsMenu="matMenu">
-      <button mat-menu-item (click)="selectRunsOptionChosen('all')" i18n>All</button>
-      <button mat-menu-item (click)="selectRunsOptionChosen('none')" i18n>None</button>
-      <button mat-menu-item (click)="selectRunsOptionChosen('completed')" i18n>Completed</button>
-      <button mat-menu-item (click)="selectRunsOptionChosen('running')" i18n>Running</button>
-      <button mat-menu-item (click)="selectRunsOptionChosen('scheduled')" i18n>Scheduled</button>
+      <button mat-menu-item (click)="selectRunsOptionChosen('ALL')" i18n>All</button>
+      <button mat-menu-item (click)="selectRunsOptionChosen('NONE')" i18n>None</button>
+      <button mat-menu-item (click)="selectRunsOptionChosen('COMPLETED')" i18n>Completed</button>
+      <button mat-menu-item (click)="selectRunsOptionChosen('RUNNING')" i18n>Running</button>
+      <button mat-menu-item (click)="selectRunsOptionChosen('SCHEDULED')" i18n>Scheduled</button>
     </mat-menu>
   </div>
   <div *ngIf="numSelectedRuns > 0" class="secondary-text" i18n>{{ numSelectedRuns }} selected</div>

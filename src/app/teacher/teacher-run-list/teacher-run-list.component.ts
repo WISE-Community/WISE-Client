@@ -8,6 +8,7 @@ import { UserService } from '../../services/user.service';
 import { mergeMap } from 'rxjs/operators';
 import { ArchiveProjectService } from '../../services/archive-project.service';
 import { runSpansDays } from '../../../assets/wise5/common/datetime/datetime';
+import { SelectRunsOption } from '../select-runs-controls/select-runs-option';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -210,27 +211,9 @@ export class TeacherRunListComponent implements OnInit {
       run.selected = false;
     }
   }
-
-  protected selectRunsOptionChosen(value: string): void {
-    this.filteredRuns.forEach((run: TeacherRun) => {
-      switch (value) {
-        case 'all':
-          run.selected = true;
-          break;
-        case 'none':
-          run.selected = false;
-          break;
-        case 'completed':
-          run.selected = run.isCompleted(this.configService.getCurrentServerTime());
-          break;
-        case 'running':
-          run.selected = run.isActive(this.configService.getCurrentServerTime());
-          break;
-        case 'scheduled':
-          run.selected = run.isScheduled(this.configService.getCurrentServerTime());
-          break;
-      }
-    });
+  protected selectRunsOptionChosen(option: SelectRunsOption): void {
+    const now = this.configService.getCurrentServerTime();
+    this.filteredRuns.forEach((run: TeacherRun) => run.updateSelected(option, now));
     this.runSelectedStatusChanged();
   }
 
