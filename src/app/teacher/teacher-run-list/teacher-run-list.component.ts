@@ -211,6 +211,7 @@ export class TeacherRunListComponent implements OnInit {
       run.selected = false;
     }
   }
+
   protected selectRunsOptionChosen(option: SelectRunsOption): void {
     const now = this.configService.getCurrentServerTime();
     this.filteredRuns.forEach((run: TeacherRun) => run.updateSelected(option, now));

@@ -35,13 +35,13 @@ let configService: ConfigService;
 const currentTime = new Date().getTime();
 let fixture: ComponentFixture<TeacherRunListComponent>;
 let getRunsSpy: jasmine.Spy;
-let runListHarness: TeacherRunListHarness;
 const run1StartTime = new Date('2020-01-01').getTime();
-const run2StartTime = new Date('2020-01-02').getTime();
-const run3StartTime = new Date('2020-01-03').getTime();
 const run1Title = 'First Run';
+const run2StartTime = new Date('2020-01-02').getTime();
 const run2Title = 'Second Run';
+const run3StartTime = new Date('2020-01-03').getTime();
 const run3Title = 'Third Run';
+let runListHarness: TeacherRunListHarness;
 let teacherService: TeacherService;
 const userId: number = 1;
 let userService: UserService;
@@ -109,9 +109,9 @@ describe('TeacherRunListComponent', () => {
     getRunsSpy = spyOn(teacherService, 'getRuns');
     getRunsSpy.and.returnValue(
       of([
-        new TeacherRunStub(1, run1StartTime, null, run1Title),
+        new TeacherRunStub(1, run1StartTime, currentTime - 1000, run1Title),
         new TeacherRunStub(2, run2StartTime, null, run2Title),
-        new TeacherRunStub(3, run3StartTime, null, run3Title)
+        new TeacherRunStub(3, currentTime + 86400000, null, run3Title)
       ])
     );
     spyOn(configService, 'getCurrentServerTime').and.returnValue(currentTime);
@@ -279,43 +279,40 @@ function selectRunsOptionChosen(): void {
 }
 
 function selectAllOptionChosen(): void {
-  describe('when all is chosen', () => {
-    it('should select all runs', async () => {
+  describe('when all option is chosen', () => {
+    it('should select all runs checkboxes', async () => {
       await clickSelectRunsMenuButtonAndExpectSelected('All', [true, true, true]);
     });
   });
 }
 
 function selectNoneOptionChosen(): void {
-  describe('when none is chosen', () => {
-    it('should select no runs', async () => {
+  describe('when none option is chosen', () => {
+    it('should select no runs checkboxes', async () => {
       await clickSelectRunsMenuButtonAndExpectSelected('None', [false, false, false]);
     });
   });
 }
 
 function selectCompletedOptionChosen(): void {
-  describe('when completed is chosen', () => {
-    it('should select completed runs', async () => {
-      setRun2Completed();
-      await clickSelectRunsMenuButtonAndExpectSelected('Completed', [false, true, false]);
+  describe('when completed option is chosen', () => {
+    it('should select completed runs checkboxes', async () => {
+      await clickSelectRunsMenuButtonAndExpectSelected('Completed', [false, false, true]);
     });
   });
 }
 
 function selectRunningOptionChosen(): void {
-  describe('when running is chosen', () => {
-    it('should select running runs', async () => {
-      setRun2Completed();
-      await clickSelectRunsMenuButtonAndExpectSelected('Running', [true, false, true]);
+  describe('when running option is chosen', () => {
+    it('should select running runs checkboxes', async () => {
+      await clickSelectRunsMenuButtonAndExpectSelected('Running', [false, true, false]);
     });
   });
 }
 
 function selectScheduledOptionChosen(): void {
-  describe('when scheduled is chosen', () => {
-    it('it should select scheduled runs', async () => {
-      setRun3Scheduled();
+  describe('when scheduled option is chosen', () => {
+    it('should select scheduled runs checkboxes', async () => {
       await clickSelectRunsMenuButtonAndExpectSelected('Scheduled', [true, false, false]);
     });
   });
@@ -327,28 +324,6 @@ async function clickSelectRunsMenuButtonAndExpectSelected(
 ): Promise<void> {
   await runListHarness.clickSelectRunsMenuButton(menuButtonText);
   await expectRunsIsSelected(selectedRuns);
-}
-
-function setRun2Completed(): void {
-  getRunsSpy.and.returnValue(
-    of([
-      new TeacherRunStub(1, run1StartTime, null, run1Title),
-      new TeacherRunStub(2, run2StartTime, currentTime - 1000, run2Title),
-      new TeacherRunStub(3, run3StartTime, null, run3Title)
-    ])
-  );
-  component.ngOnInit();
-}
-
-function setRun3Scheduled(): void {
-  getRunsSpy.and.returnValue(
-    of([
-      new TeacherRunStub(1, run1StartTime, null, run1Title),
-      new TeacherRunStub(2, run2StartTime, null, run2Title),
-      new TeacherRunStub(3, currentTime + 86400000, null, run3Title)
-    ])
-  );
-  component.ngOnInit();
 }
 
 function runArchiveStatusChanged(): void {
