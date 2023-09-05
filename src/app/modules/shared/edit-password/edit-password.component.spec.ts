@@ -11,6 +11,7 @@ import { User } from '../../../domain/user';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PasswordModule } from '../../../password/password.module';
 import { MatIconModule } from '@angular/material/icon';
+import { PasswordErrors } from '../../../domain/password/password-errors';
 
 const CORRECT_OLD_PASSWORD = 'correctOldPassword123';
 const INCORRECT_OLD_PASSWORD = 'incorrectOldPassword123';
@@ -72,7 +73,6 @@ describe('EditPasswordComponent', () => {
   validForm_enableSubmitButton();
   passwordMismatch_disableSubmitButtonAndInvalidateForm();
   oldPasswordIncorrect_disableSubmitButtonAndShowError();
-  saveChanges_newPasswordTooShort_ShowError();
   saveChanges_newPasswordPatternInvalid_ShowError();
   formSubmit_disableSubmitButton();
   notGoogleUser_showUnlinkOption();
@@ -120,28 +120,35 @@ function oldPasswordIncorrect_disableSubmitButtonAndShowError() {
   });
 }
 
-function saveChanges_newPasswordTooShort_ShowError() {
-  it(`should set minlength error when changePassword response returns new password is not long
-      enough error`, async () => {
-    spyOn(TestBed.inject(UserService), 'changePassword').and.returnValue(
-      generateObservableResponse('invalidPasswordLength', false)
-    );
-    setPasswords(CORRECT_OLD_PASSWORD, INVALID_PASSWORD_TOO_SHORT, INVALID_PASSWORD_TOO_SHORT);
-    component.saveChanges();
-    expect(component.newPasswordFormGroup.get('newPassword').getError('minlength')).toBe(true);
-  });
-}
-
 function saveChanges_newPasswordPatternInvalid_ShowError() {
   it(`should set pattern error when changePassword response returns new password is not valid
       pattern error`, async () => {
+    const passwordErrors = new PasswordErrors(false, false, true, false);
     spyOn(TestBed.inject(UserService), 'changePassword').and.returnValue(
-      generateObservableResponse('invalidPasswordPattern', false)
+      generateObservableResponse(passwordErrors, false)
     );
     setPasswords(CORRECT_OLD_PASSWORD, INVALID_PASSWORD_PATTERN, INVALID_PASSWORD_PATTERN);
     component.saveChanges();
-    expect(component.newPasswordFormGroup.get('newPassword').getError('pattern')).toBe(true);
+    expectPasswordErrors(false, false, true, false);
   });
+}
+
+function expectPasswordErrors(
+  missingLetter: boolean,
+  missingNumber: boolean,
+  missingSymbol: boolean,
+  tooShort: boolean
+): void {
+  expect(component.newPasswordFormGroup.get('newPassword').getError('missingLetter')).toBe(
+    missingLetter
+  );
+  expect(component.newPasswordFormGroup.get('newPassword').getError('missingNumber')).toBe(
+    missingNumber
+  );
+  expect(component.newPasswordFormGroup.get('newPassword').getError('missingSymbol')).toBe(
+    missingSymbol
+  );
+  expect(component.newPasswordFormGroup.get('newPassword').getError('tooShort')).toBe(tooShort);
 }
 
 function formSubmit_disableSubmitButton() {
@@ -213,16 +220,28 @@ function setPasswords(oldPass: string, newPass: string, newPassConfirm: string) 
   fixture.detectChanges();
 }
 
-function generateObservableResponse(messageCode: string, isSuccess: boolean): Observable<any> {
-  if (isSuccess) {
-    return new Observable((observer) => {
-      observer.next({ messageCode: messageCode });
-      observer.complete();
-    });
-  } else {
-    return new Observable((observer) => {
-      observer.error({ error: { messageCode: messageCode } });
-      observer.complete();
-    });
-  }
+function generateObservableResponse(arg: string | any, isSuccess: boolean): Observable<any> {
+  return isSuccess ? generateSuccessObservable(arg) : generateErrorObservable(arg);
+}
+
+function generateSuccessObservable(arg: string | any): Observable<any> {
+  return new Observable((observer) => {
+    observer.next(generateSuccessResponseValue(arg));
+    observer.complete();
+  });
+}
+
+function generateSuccessResponseValue(arg: string | any): any {
+  return typeof arg === 'string' ? { messageCode: arg } : arg;
+}
+
+function generateErrorObservable(arg: string | any): Observable<any> {
+  return new Observable((observer) => {
+    observer.error(generateErrorResponseValue(arg));
+    observer.complete();
+  });
+}
+
+function generateErrorResponseValue(arg: string | any): any {
+  return typeof arg === 'string' ? { error: { messageCode: arg } } : { error: arg };
 }

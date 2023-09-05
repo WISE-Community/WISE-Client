@@ -10,6 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
 import { ConfigService } from '../../services/config.service';
+import { injectPasswordErrors } from '../../common/password-helper';
 @Component({
   selector: 'register-student-form',
   templateUrl: './register-student-form.component.html',
@@ -129,19 +130,9 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
   }
 
   createAccountError(error: any): void {
-    const formError: any = {};
     switch (error.messageCode) {
-      case 'invalidPasswordLength':
-        formError.minlength = true;
-        this.passwordsFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
-        break;
-      case 'invalidPasswordPattern':
-        formError.pattern = true;
-        this.passwordsFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
+      case 'invalidPassword':
+        injectPasswordErrors(this.passwordsFormGroup, error);
         break;
       case 'recaptchaResponseInvalid':
         this.studentUser['isRecaptchaInvalid'] = true;

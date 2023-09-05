@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from '../../../student/student.service';
 import { finalize } from 'rxjs/operators';
 import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
+import { injectPasswordErrors } from '../../../common/password-helper';
 
 @Component({
   selector: 'forgot-student-password-change',
@@ -63,19 +64,9 @@ export class ForgotStudentPasswordChangeComponent implements OnInit {
   }
 
   private changePasswordError(error: any): void {
-    const formError: any = {};
     switch (error.messageCode) {
-      case 'invalidPasswordLength':
-        formError.minlength = true;
-        this.changePasswordFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
-        break;
-      case 'invalidPasswordPattern':
-        formError.pattern = true;
-        this.changePasswordFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
+      case 'invalidPassword':
+        injectPasswordErrors(this.changePasswordFormGroup, error);
         break;
       default:
         this.setErrorOccurredMessage();

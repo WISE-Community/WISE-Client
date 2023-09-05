@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../services/user.service';
 import { UnlinkGoogleAccountConfirmComponent } from '../unlink-google-account-confirm/unlink-google-account-confirm.component';
 import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
+import { injectPasswordErrors } from '../../../common/password-helper';
 
 @Component({
   selector: 'app-edit-password',
@@ -81,23 +82,12 @@ export class EditPasswordComponent {
   }
 
   private changePasswordError(error: any): void {
-    const formError: any = {};
     switch (error.messageCode) {
       case 'incorrectPassword':
-        formError.incorrectPassword = true;
-        this.changePasswordFormGroup.get('oldPassword').setErrors(formError);
+        this.changePasswordFormGroup.get('oldPassword').setErrors({ incorrectPassword: true });
         break;
-      case 'invalidPasswordLength':
-        formError.minlength = true;
-        this.newPasswordFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
-        break;
-      case 'invalidPasswordPattern':
-        formError.pattern = true;
-        this.newPasswordFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
+      case 'invalidPassword':
+        injectPasswordErrors(this.newPasswordFormGroup, error);
         break;
     }
   }
