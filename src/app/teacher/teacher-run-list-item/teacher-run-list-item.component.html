@@ -37,10 +37,8 @@
   </div>
   <div>
     <span i18n>Access Code: {{ run.runCode }}</span> (<a
-      class="share-with-students-link"
-      [routerLink]=""
-      (click)="shareCode()"
-      (keyup.enter)="shareCode()"
+      href="#"
+      (click)="shareCode($event)"
       tabindex="0"
       i18n
       >Share with students</a
