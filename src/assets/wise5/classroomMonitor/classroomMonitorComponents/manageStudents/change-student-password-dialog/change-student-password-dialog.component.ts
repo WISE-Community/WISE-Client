@@ -5,7 +5,7 @@ import { ConfigService } from '../../../../services/configService';
 import { TeacherService } from '../../../../../../app/teacher/teacher.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NewPasswordAndConfirmComponent } from '../../../../../../app/password/new-password-and-confirm/new-password-and-confirm.component';
-import { injectPasswordErrors } from '../../../../../../app/common/password-helper';
+import { changePasswordError } from '../../../../../../app/common/password-helper';
 
 @Component({
   selector: 'app-change-student-password-dialog',
@@ -76,13 +76,6 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
 
   private changePasswordError(error: any): void {
     this.isChangingPassword = false;
-    switch (error.messageCode) {
-      case 'incorrectPassword':
-        this.changePasswordForm.get('teacherPassword').setErrors({ incorrectPassword: true });
-        break;
-      case 'invalidPassword':
-        injectPasswordErrors(this.changePasswordForm, error);
-        break;
-    }
+    changePasswordError(error, this.changePasswordForm, this.changePasswordForm, 'teacherPassword');
   }
 }

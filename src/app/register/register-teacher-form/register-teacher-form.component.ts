@@ -10,7 +10,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
 import { ConfigService } from '../../services/config.service';
-import { injectPasswordErrors } from '../../common/password-helper';
 
 @Component({
   selector: 'register-teacher-form',
@@ -35,8 +34,6 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
   );
   isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
   isSubmitted = false;
-  passwordsFormGroup = this.fb.group({});
-  processing: boolean = false;
   schoolLevels: any[] = [
     { code: 'ELEMENTARY_SCHOOL', label: $localize`Elementary School` },
     { code: 'MIDDLE_SCHOOL', label: $localize`Middle School` },
@@ -49,15 +46,15 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private configService: ConfigService,
-    private fb: FormBuilder,
+    protected fb: FormBuilder,
     private recaptchaV3Service: ReCaptchaV3Service,
     private router: Router,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
+    protected snackBar: MatSnackBar,
     private teacherService: TeacherService,
     private utilService: UtilService
   ) {
-    super();
+    super(fb, snackBar);
   }
 
   ngOnInit(): void {
@@ -112,17 +109,7 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
   }
 
   private createAccountError(error: any): void {
-    switch (error.messageCode) {
-      case 'invalidPassword':
-        injectPasswordErrors(this.passwordsFormGroup, error);
-        break;
-      case 'recaptchaResponseInvalid':
-        this.teacherUser['isRecaptchaInvalid'] = true;
-        break;
-      default:
-        this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.messageCode));
-    }
-    this.processing = false;
+    this.handleCreateAccountError(error, this.teacherUser);
   }
 
   private async populateTeacherUser() {

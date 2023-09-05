@@ -45,15 +45,16 @@ export class NewPasswordAndConfirmHarness extends ComponentHarness {
   }
 
   async setNewPassword(value: string): Promise<void> {
-    const newPasswordInput = await this.getNewPasswordInput();
-    await newPasswordInput.setValue(value);
-    await newPasswordInput.blur();
+    await this.setInputValue(await this.getNewPasswordInput(), value);
   }
 
   async setConfirmNewPassword(value: string): Promise<void> {
-    const confirmNewPasswordInput = await this.getConfirmNewPasswordInput();
-    await confirmNewPasswordInput.setValue(value);
-    await confirmNewPasswordInput.blur();
+    await this.setInputValue(await this.getConfirmNewPasswordInput(), value);
+  }
+
+  private async setInputValue(input: MatInputHarness, value: string): Promise<void> {
+    await input.setValue(value);
+    await input.blur();
   }
 
   async isNewPasswordRequiredErrorDisplayed(): Promise<boolean> {

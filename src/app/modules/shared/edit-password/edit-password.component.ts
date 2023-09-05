@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,14 +6,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../services/user.service';
 import { UnlinkGoogleAccountConfirmComponent } from '../unlink-google-account-confirm/unlink-google-account-confirm.component';
 import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
-import { injectPasswordErrors } from '../../../common/password-helper';
+import { changePasswordError } from '../../../common/password-helper';
 
 @Component({
   selector: 'app-edit-password',
   templateUrl: './edit-password.component.html',
   styleUrls: ['./edit-password.component.scss']
 })
-export class EditPasswordComponent {
+export class EditPasswordComponent implements OnInit {
   @ViewChild('changePasswordForm', { static: false }) changePasswordForm;
   isSaving: boolean = false;
   isGoogleUser: boolean = false;
@@ -82,14 +82,12 @@ export class EditPasswordComponent {
   }
 
   private changePasswordError(error: any): void {
-    switch (error.messageCode) {
-      case 'incorrectPassword':
-        this.changePasswordFormGroup.get('oldPassword').setErrors({ incorrectPassword: true });
-        break;
-      case 'invalidPassword':
-        injectPasswordErrors(this.newPasswordFormGroup, error);
-        break;
-    }
+    changePasswordError(
+      error,
+      this.changePasswordFormGroup,
+      this.newPasswordFormGroup,
+      'oldPassword'
+    );
   }
 
   unlinkGoogleAccount(): void {

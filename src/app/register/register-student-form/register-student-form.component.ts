@@ -10,7 +10,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
 import { ConfigService } from '../../services/config.service';
-import { injectPasswordErrors } from '../../common/password-helper';
 @Component({
   selector: 'register-student-form',
   templateUrl: './register-student-form.component.html',
@@ -45,23 +44,21 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     { code: '11', label: $localize`11 (Nov)` },
     { code: '12', label: $localize`12 (Dec)` }
   ];
-  passwordsFormGroup: FormGroup = this.fb.group({});
-  processing: boolean = false;
   securityQuestions: object;
   studentUser: Student = new Student();
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private configService: ConfigService,
-    private fb: FormBuilder,
+    protected fb: FormBuilder,
     private recaptchaV3Service: ReCaptchaV3Service,
     private router: Router,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
+    protected snackBar: MatSnackBar,
     private studentService: StudentService,
     private utilService: UtilService
   ) {
-    super();
+    super(fb, snackBar);
     this.studentService.retrieveSecurityQuestions().subscribe((response) => {
       this.securityQuestions = response;
     });
@@ -130,17 +127,7 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
   }
 
   createAccountError(error: any): void {
-    switch (error.messageCode) {
-      case 'invalidPassword':
-        injectPasswordErrors(this.passwordsFormGroup, error);
-        break;
-      case 'recaptchaResponseInvalid':
-        this.studentUser['isRecaptchaInvalid'] = true;
-        break;
-      default:
-        this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.messageCode));
-    }
-    this.processing = false;
+    this.handleCreateAccountError(error, this.studentUser);
   }
 
   async populateStudentUser() {

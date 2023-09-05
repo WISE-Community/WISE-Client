@@ -45,41 +45,65 @@ describe('NewPasswordAndConfirmComponent', () => {
 });
 
 function newPasswordValidation() {
+  passwordIsMissing();
+  passwordIsValid();
+  passwordMissingLetter();
+  passwordMissingNumber();
+  passwordMissingSymbol();
+  passwordTooShort();
+}
+
+function passwordIsMissing(): void {
   describe('password is missing', () => {
     it('should show password required error', async () => {
       await newPasswordAndConfirmHarness.setNewPassword('');
       expect(await newPasswordAndConfirmHarness.isNewPasswordRequiredErrorDisplayed()).toBeTrue();
     });
   });
+}
+
+function passwordIsValid(): void {
   describe('password is valid', () => {
     it('should not show any error', async () => {
       await newPasswordAndConfirmHarness.setNewPassword(VALID_PASSWORD);
       expect(await newPasswordAndConfirmHarness.isNewPasswordRequiredErrorDisplayed()).toBeFalse();
     });
   });
+}
+
+function passwordMissingLetter(): void {
   describe('password is missing a letter', () => {
     it('should indicate password needs to include a letter', async () => {
-      await setPasswordAndExepctErrors(INVALID_PASSWORD_MISSING_LETTER, true, false, false, false);
-    });
-  });
-  describe('password is missing a number', () => {
-    it('should indicate password needs to include a number', async () => {
-      await setPasswordAndExepctErrors(INVALID_PASSWORD_MISSING_NUMBER, false, true, false, false);
-    });
-  });
-  describe('password is missing a symbol', () => {
-    it('should indicate password needs to include a symbol', async () => {
-      await setPasswordAndExepctErrors(INVALID_PASSWORD_MISSING_SYMBOL, false, false, true, false);
-    });
-  });
-  describe('password is too short', () => {
-    it('should indicate password needs to be longer', async () => {
-      await setPasswordAndExepctErrors(INVALID_PASSWORD_SHORT_LENGTH, false, false, false, true);
+      await setPasswordAndExpectErrors(INVALID_PASSWORD_MISSING_LETTER, true, false, false, false);
     });
   });
 }
 
-async function setPasswordAndExepctErrors(
+function passwordMissingNumber(): void {
+  describe('password is missing a number', () => {
+    it('should indicate password needs to include a number', async () => {
+      await setPasswordAndExpectErrors(INVALID_PASSWORD_MISSING_NUMBER, false, true, false, false);
+    });
+  });
+}
+
+function passwordMissingSymbol(): void {
+  describe('password is missing a symbol', () => {
+    it('should indicate password needs to include a symbol', async () => {
+      await setPasswordAndExpectErrors(INVALID_PASSWORD_MISSING_SYMBOL, false, false, true, false);
+    });
+  });
+}
+
+function passwordTooShort(): void {
+  describe('password is too short', () => {
+    it('should indicate password needs to be longer', async () => {
+      await setPasswordAndExpectErrors(INVALID_PASSWORD_SHORT_LENGTH, false, false, false, true);
+    });
+  });
+}
+
+async function setPasswordAndExpectErrors(
   password: string,
   expectedMissingLetter: boolean,
   expectedMissingNumber: boolean,
