@@ -9508,15 +9508,15 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
       <trans-unit id="f951d80b53d5536f79142285e8ba09f190a3c723" datatype="html">
         <source>Insert after</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/insert-node-after-button.component.ts</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/insert-node-after-button/insert-node-after-button.component.html</context>
+          <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="58d8632bc944efc0ead43c0e0cd298492e2f17a5" datatype="html">
         <source>Insert inside</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/insert-node-inside-button.component.ts</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/insert-node-inside-button/insert-node-inside-button.component.html</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f79611b9cc78f612ae8cc2cce08ff9f14581aeb3" datatype="html">
