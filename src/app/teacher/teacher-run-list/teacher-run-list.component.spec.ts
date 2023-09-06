@@ -270,60 +270,24 @@ function someSelectedUnselectAllRuns() {
 
 function selectRunsOptionChosen(): void {
   describe('selectRunsOptionChosen()', () => {
-    selectAllOptionChosen();
-    selectNoneOptionChosen();
-    selectCompletedOptionChosen();
-    selectRunningOptionChosen();
-    selectScheduledOptionChosen();
-  });
-}
-
-function selectAllOptionChosen(): void {
-  describe('when all option is chosen', () => {
-    it('should select all runs checkboxes', async () => {
-      await clickSelectRunsMenuButtonAndExpectSelected('All', [true, true, true]);
+    const testCases = [
+      { menuButtonText: 'All', selectedRuns: [true, true, true] },
+      { menuButtonText: 'None', selectedRuns: [false, false, false] },
+      { menuButtonText: 'Completed', selectedRuns: [false, false, true] },
+      { menuButtonText: 'Running', selectedRuns: [false, true, false] },
+      { menuButtonText: 'Scheduled', selectedRuns: [true, false, false] }
+    ];
+    testCases.forEach(({ menuButtonText, selectedRuns }) => {
+      describe(`when ${menuButtonText} option is chosen`, () => {
+        beforeEach(async () => {
+          await runListHarness.clickSelectRunsMenuButton(menuButtonText);
+        });
+        it(`should select ${menuButtonText} runs`, async () => {
+          await expectRunsIsSelected(selectedRuns);
+        });
+      });
     });
   });
-}
-
-function selectNoneOptionChosen(): void {
-  describe('when none option is chosen', () => {
-    it('should select no runs checkboxes', async () => {
-      await clickSelectRunsMenuButtonAndExpectSelected('None', [false, false, false]);
-    });
-  });
-}
-
-function selectCompletedOptionChosen(): void {
-  describe('when completed option is chosen', () => {
-    it('should select completed runs checkboxes', async () => {
-      await clickSelectRunsMenuButtonAndExpectSelected('Completed', [false, false, true]);
-    });
-  });
-}
-
-function selectRunningOptionChosen(): void {
-  describe('when running option is chosen', () => {
-    it('should select running runs checkboxes', async () => {
-      await clickSelectRunsMenuButtonAndExpectSelected('Running', [false, true, false]);
-    });
-  });
-}
-
-function selectScheduledOptionChosen(): void {
-  describe('when scheduled option is chosen', () => {
-    it('should select scheduled runs checkboxes', async () => {
-      await clickSelectRunsMenuButtonAndExpectSelected('Scheduled', [true, false, false]);
-    });
-  });
-}
-
-async function clickSelectRunsMenuButtonAndExpectSelected(
-  menuButtonText: string,
-  selectedRuns: boolean[]
-): Promise<void> {
-  await runListHarness.clickSelectRunsMenuButton(menuButtonText);
-  await expectRunsIsSelected(selectedRuns);
 }
 
 function runArchiveStatusChanged(): void {
