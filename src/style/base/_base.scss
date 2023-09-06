@@ -7,13 +7,7 @@ strong, b, .strong {
 }
 
 a {
-  text-decoration: none;
-
-  &:not(.mat-mdc-button):not(.mat-mdc-raised-button):not(.mat-mdc-menu-item):not(.mat-mdc-unelevated-button):not(.mat-mdc-outlined-button):not(.mat-mdc-tab-link) {
-    &:hover, &:focus {
-      text-decoration: underline;
-    }
-  }
+  text-decoration: underline;
 }
 
 figure {

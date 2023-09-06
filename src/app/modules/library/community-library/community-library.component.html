@@ -1,8 +1,6 @@
 <div class="content-block library-teacher__paginate">
   <div fxLayoutAlign="center center" fxLayout.xs="column">
-    <a class="info mat-caption" [routerLink]="" (click)="showInfo()" i18n
-      >What is Community Built?</a
-    >
+    <a class="mat-caption" href="#" (click)="showInfo($event)" i18n>What is Community Built?</a>
     <span fxFlex fxHide.xs></span>
     <mat-paginator
       [length]="filteredProjects.length"

@@ -5,6 +5,7 @@ import { Standard } from '../standard';
 import { LibraryProject } from '../libraryProject';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 @Directive()
 export abstract class LibraryComponent implements OnInit {
@@ -30,7 +31,7 @@ export abstract class LibraryComponent implements OnInit {
 
   @ViewChildren(MatPaginator) paginators!: QueryList<MatPaginator>;
 
-  constructor(protected libraryService: LibraryService) {}
+  constructor(protected dialog: MatDialog, protected libraryService: LibraryService) {}
 
   ngOnInit() {
     this.subscriptions.add(
@@ -186,4 +187,13 @@ export abstract class LibraryComponent implements OnInit {
   countVisibleProjects(set: LibraryProject[]): number {
     return set.filter((project) => 'project' && project.visible).length;
   }
+
+  protected showInfo(event: Event): void {
+    event.preventDefault();
+    this.dialog.open(this.getDetailsComponent(), {
+      panelClass: 'dialog-sm'
+    });
+  }
+
+  protected abstract getDetailsComponent(): any;
 }

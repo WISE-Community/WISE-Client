@@ -11,12 +11,9 @@
           <div class="project-content">
             <div fxLayout="row wrap" fxLayoutGap="15px">
               <button
-                id="projectBackButton"
                 mat-raised-button
                 color="primary"
-                class="topButton"
                 (click)="goBackToProjectList()"
-                [disabled]="insertGroupMode || insertNodeMode"
                 matTooltip="Back to Unit List"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -24,14 +21,10 @@
                 <mat-icon>arrow_back</mat-icon>
               </button>
               <button
-                id="createNewActivityButton"
                 mat-raised-button
                 color="primary"
-                class="topButton"
                 (click)="createNewLesson()"
-                [disabled]="
-                  insertGroupMode || insertNodeMode || stepNodeSelected || activityNodeSelected
-                "
+                [disabled]="stepNodeSelected || activityNodeSelected"
                 matTooltip="Create New Lesson"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -39,14 +32,10 @@
                 <mat-icon>queue</mat-icon>
               </button>
               <button
-                id="createNewStepButton"
                 mat-raised-button
                 color="primary"
-                class="topButton"
                 (click)="createNewStep()"
-                [disabled]="
-                  insertGroupMode || insertNodeMode || stepNodeSelected || activityNodeSelected
-                "
+                [disabled]="stepNodeSelected || activityNodeSelected"
                 matTooltip="Create New Step"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -54,14 +43,10 @@
                 <mat-icon>add_box</mat-icon>
               </button>
               <button
-                id="addStructureButton"
                 mat-raised-button
                 color="primary"
-                class="topButton"
                 (click)="addStructure()"
-                [disabled]="
-                  insertGroupMode || insertNodeMode || stepNodeSelected || activityNodeSelected
-                "
+                [disabled]="stepNodeSelected || activityNodeSelected"
                 matTooltip="Add Lesson Structure"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -69,14 +54,10 @@
                 <mat-icon>widgets</mat-icon>
               </button>
               <button
-                id="importStepButton"
                 mat-raised-button
                 color="primary"
-                class="topButton"
                 (click)="importStep()"
-                [disabled]="
-                  insertGroupMode || insertNodeMode || stepNodeSelected || activityNodeSelected
-                "
+                [disabled]="stepNodeSelected || activityNodeSelected"
                 matTooltip="Import Step"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -84,12 +65,10 @@
                 <mat-icon>system_update_alt</mat-icon>
               </button>
               <button
-                id="moveButton"
                 mat-raised-button
                 color="primary"
-                class="topButton"
-                (click)="move()"
-                [disabled]="!hasSelectedNodes() || insertGroupMode || insertNodeMode"
+                (click)="chooseLocation(false)"
+                [disabled]="!hasSelectedNodes()"
                 matTooltip="Move"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -97,12 +76,10 @@
                 <mat-icon>redo</mat-icon>
               </button>
               <button
-                id="copyButton"
                 mat-raised-button
                 color="primary"
-                class="topButton"
-                (click)="copy()"
-                [disabled]="!hasSelectedNodes() || insertGroupMode || insertNodeMode"
+                (click)="chooseLocation(true)"
+                [disabled]="!hasSelectedStepsOnly()"
                 matTooltip="Copy"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -110,12 +87,10 @@
                 <mat-icon>content_copy</mat-icon>
               </button>
               <button
-                id="deleteButton"
                 mat-raised-button
                 color="primary"
-                class="topButton"
                 (click)="deleteSelectedNodes()"
-                [disabled]="!hasSelectedNodes() || insertGroupMode || insertNodeMode"
+                [disabled]="!hasSelectedNodes()"
                 matTooltip="Delete"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -123,14 +98,10 @@
                 <mat-icon>delete</mat-icon>
               </button>
               <button
-                id="advancedProjectAuthoringButton"
                 mat-raised-button
                 color="primary"
-                class="topButton"
                 (click)="goToAdvancedAuthoring()"
-                [disabled]="
-                  insertGroupMode || insertNodeMode || stepNodeSelected || activityNodeSelected
-                "
+                [disabled]="stepNodeSelected || activityNodeSelected"
                 matTooltip="Advanced"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -139,12 +110,9 @@
               </button>
               <span fxFlex></span>
               <button
-                id="previewProjectButton"
                 mat-raised-button
                 color="primary"
-                class="topButton"
                 (click)="previewProject()"
-                [disabled]="insertGroupMode || insertNodeMode"
                 matTooltip="Preview Unit"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -152,47 +120,10 @@
                 <mat-icon>visibility</mat-icon>
               </button>
             </div>
-            <div
-              *ngIf="insertGroupMode || insertNodeMode"
-              fxLayout="row"
-              fxLayoutAlign="start center"
-              fxLayoutGap="10px"
-            >
-              <h6 i18n>Choose the new location by clicking one of the buttons below</h6>
-              <button
-                mat-raised-button
-                color="primary"
-                (click)="cancelMove()"
-                aria-label="Cancel"
-                i18n-aria-label
-                i18n
-              >
-                Cancel
-              </button>
-            </div>
           </div>
           <div class="all-nodes-div">
-            <div *ngIf="insertGroupMode">
-              <button
-                mat-raised-button
-                color="primary"
-                class="insertButton"
-                (click)="insertInside('group0')"
-                matTooltip="Insert As First Lesson"
-                matTooltipPosition="above"
-                i18n-matTooltip
-              >
-                <mat-icon>keyboard_backspace</mat-icon>
-              </button>
-            </div>
             <ng-container *ngFor="let item of items">
-              <div
-                *ngIf="
-                  item.order !== 0 &&
-                  (!insertGroupMode || (insertGroupMode && isGroupNode(item.key)))
-                "
-                class="projectItem"
-              >
+              <div *ngIf="item.order !== 0" class="projectItem">
                 <div
                   id="{{ item.key }}"
                   fxLayout="row"
@@ -210,8 +141,6 @@
                       [(ngModel)]="item.checked"
                       (ngModelChange)="projectItemClicked()"
                       [disabled]="
-                        insertNodeMode ||
-                        insertGroupMode ||
                         (isGroupNode(item.key) && stepNodeSelected) ||
                         (!isGroupNode(item.key) && activityNodeSelected)
                       "
@@ -219,12 +148,7 @@
                     >
                     </mat-checkbox>
                   </div>
-                  <div
-                    class="projectItemTitleDiv"
-                    (click)="
-                      insertGroupMode == true || insertNodeMode == true || nodeClicked(item.key)
-                    "
-                  >
+                  <div class="projectItemTitleDiv" (click)="nodeClicked(item.key)">
                     <div
                       class="pointer"
                       fxLayout="row"
@@ -289,64 +213,14 @@
                           >message</mat-icon
                         >
                       </p>
-                      <button
-                        mat-raised-button
-                        color="primary"
-                        class="insertButton"
-                        *ngIf="
-                          isGroupNode(item.key) &&
-                          ((insertNodeMode && item.order !== 0) ||
-                            (insertGroupMode && item.order == 0))
-                        "
-                        (click)="insertInside(item.key); $event.stopPropagation()"
-                        [matTooltip]="
-                          item.order === 0 ? 'Insert As First Lesson' : 'Insert As First Step'
-                        "
-                        matTooltipPosition="above"
-                        i18n-matTooltip
-                      >
-                        <mat-icon>call_received</mat-icon>
-                      </button>
-                      <button
-                        mat-raised-button
-                        color="primary"
-                        class="insertButton"
-                        *ngIf="
-                          item.order !== 0 &&
-                          ((insertNodeMode && !isGroupNode(item.key)) ||
-                            (insertGroupMode && isGroupNode(item.key)))
-                        "
-                        (click)="insertAfter(item.key); $event.stopPropagation()"
-                        matTooltip="Insert After"
-                        matTooltipPosition="above"
-                        i18n-matTooltip
-                      >
-                        <mat-icon>subdirectory_arrow_left</mat-icon>
-                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </ng-container>
             <div>
-              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                <h6 class="underline">Unused Lessons</h6>
-                <button
-                  *ngIf="insertGroupMode"
-                  mat-raised-button
-                  color="primary"
-                  class="insertButton"
-                  (click)="insertInside('inactiveGroups')"
-                  matTooltip="Insert Inside"
-                  matTooltipPosition="above"
-                  i18n-matTooltip
-                >
-                  <mat-icon>call_received</mat-icon>
-                </button>
-              </div>
-              <div *ngIf="getNumberOfInactiveGroups() === 0">
-                <span i18n>There are no Unused Lessons</span>
-              </div>
+              <h6 class="unused-header">Unused Lessons</h6>
+              <div *ngIf="getNumberOfInactiveGroups() === 0" i18n>There are no Unused Lessons</div>
               <ng-container *ngFor="let inactiveNode of inactiveGroupNodes">
                 <div *ngIf="isGroupNode(inactiveNode.id)" id="{{ inactiveNode.id }}">
                   <div
@@ -365,55 +239,22 @@
                         color="primary"
                         [(ngModel)]="inactiveNode.checked"
                         (ngModelChange)="projectItemClicked()"
-                        [disabled]="insertNodeMode || insertGroupMode || stepNodeSelected"
+                        [disabled]="stepNodeSelected"
                         aria-label="{{ getNodeTitle(inactiveNode.id) }}"
                       >
                       </mat-checkbox>
                     </div>
-                    <div
-                      class="projectItemTitleDiv"
-                      (click)="
-                        insertGroupMode == true ||
-                          insertNodeMode == true ||
-                          nodeClicked(inactiveNode.id)
-                      "
-                    >
+                    <div class="projectItemTitleDiv" (click)="nodeClicked(inactiveNode.id)">
                       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                         <node-icon [nodeId]="inactiveNode.id" size="18"></node-icon>&nbsp;
                         <h6 class="pointer">
                           {{ getNodeTitle(inactiveNode.id) }}
                         </h6>
-                        <button
-                          mat-raised-button
-                          color="primary"
-                          *ngIf="insertNodeMode"
-                          mat-raised-buton
-                          color="primary"
-                          class="insertButton"
-                          (click)="insertInside(inactiveNode.id); $event.stopPropagation()"
-                          matTooltip="Insert Inside"
-                          matTooltipPosition="above"
-                          i18n-matTooltip
-                        >
-                          <mat-icon>call_received</mat-icon>
-                        </button>
-                        <button
-                          mat-raised-button
-                          color="primary"
-                          class="insertButton"
-                          *ngIf="insertGroupMode"
-                          (click)="insertAfter(inactiveNode.id); $event.stopPropagation()"
-                          matTooltip="Insert After"
-                          matTooltipPosition="above"
-                          i18n-matTooltip
-                        >
-                          <mat-icon>subdirectory_arrow_left</mat-icon>
-                        </button>
                       </div>
                     </div>
                   </div>
                   <ng-container *ngFor="let inactiveChildId of inactiveNode.ids">
-                    <div *ngIf="!insertGroupMode" class="projectItem" id="{{ inactiveChildId }}">
+                    <div class="projectItem" id="{{ inactiveChildId }}">
                       <div
                         fxLayout="row"
                         [ngClass]="{
@@ -430,36 +271,17 @@
                             color="primary"
                             [(ngModel)]="idToNode[inactiveChildId].checked"
                             (ngModelChange)="projectItemClicked()"
-                            [disabled]="insertNodeMode || insertGroupMode || activityNodeSelected"
+                            [disabled]="activityNodeSelected"
                             aria-label="{{ getNodeTitle(inactiveChildId.id) }}"
                           >
                           </mat-checkbox>
                         </div>
-                        <div
-                          class="projectItemTitleDiv"
-                          (click)="
-                            insertGroupMode == true ||
-                              insertNodeMode == true ||
-                              nodeClicked(inactiveChildId)
-                          "
-                        >
+                        <div class="projectItemTitleDiv" (click)="nodeClicked(inactiveChildId)">
                           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                             <node-icon [nodeId]="inactiveChildId" size="18"></node-icon>&nbsp;
                             <p class="pointer">
                               {{ getNodeTitle(inactiveChildId) }}
                             </p>
-                            <button
-                              mat-raised-button
-                              color="primary"
-                              class="insertButton"
-                              *ngIf="insertNodeMode && !isGroupNode(inactiveChildId)"
-                              (click)="insertAfter(inactiveChildId); $event.stopPropagation()"
-                              matTooltip="Insert After"
-                              matTooltipPositin="above"
-                              i18n-matTooltip
-                            >
-                              <mat-icon>subdirectory_arrow_left</mat-icon>
-                            </button>
                           </div>
                         </div>
                       </div>
@@ -467,25 +289,9 @@
                   </ng-container>
                 </div>
               </ng-container>
-              <div *ngIf="!insertGroupMode">
-                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                  <h6 class="underline" i18n>Unused Steps</h6>
-                  <button
-                    *ngIf="insertNodeMode"
-                    mat-raised-button
-                    color="primary"
-                    class="insertButton"
-                    (click)="insertInside('inactiveNodes')"
-                    matTooltip="Insert Inside"
-                    matTooltipPosition="above"
-                    i18n-matTooltip
-                  >
-                    <mat-icon>call_received</mat-icon>
-                  </button>
-                </div>
-                <div *ngIf="getNumberOfInactiveSteps() === 0">
-                  <span i18n>There are no Unused Steps</span>
-                </div>
+              <div>
+                <h6 class="unused-header" i18n>Unused Steps</h6>
+                <div *ngIf="getNumberOfInactiveSteps() === 0" i18n>There are no Unused Steps</div>
                 <ng-container *ngFor="let inactiveNode of inactiveStepNodes">
                   <div
                     *ngIf="!isGroupNode(inactiveNode.id) && getParentGroup(inactiveNode.id) == null"
@@ -505,36 +311,17 @@
                           color="primary"
                           [(ngModel)]="inactiveNode.checked"
                           (ngModelChange)="projectItemClicked()"
-                          [disabled]="insertNodeMode || insertGroupMode || activityNodeSelected"
+                          [disabled]="activityNodeSelected"
                           aria-label="{{ getNodeTitle(inactiveNode.id) }}"
                         >
                         </mat-checkbox>
                       </div>
-                      <div
-                        class="projectItemTitleDiv"
-                        (click)="
-                          insertGroupMode == true ||
-                            insertNodeMode == true ||
-                            nodeClicked(inactiveNode.id)
-                        "
-                      >
+                      <div class="projectItemTitleDiv" (click)="nodeClicked(inactiveNode.id)">
                         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                           <node-icon [nodeId]="inactiveNode.id" size="18"></node-icon>
                           <p class="pointer">
                             {{ getNodeTitle(inactiveNode.id) }}
                           </p>
-                          <button
-                            mat-raised-button
-                            color="primary"
-                            class="insertButton"
-                            *ngIf="insertNodeMode && !isGroupNode(inactiveNode.id)"
-                            (click)="insertAfter(inactiveNode.id); $event.stopPropagation()"
-                            matTooltip="Insert After"
-                            matTooltipPosition="above"
-                            i18n-matTooltip
-                          >
-                            <mat-icon>subdirectory_arrow_left</mat-icon>
-                          </button>
                         </div>
                       </div>
                     </div>

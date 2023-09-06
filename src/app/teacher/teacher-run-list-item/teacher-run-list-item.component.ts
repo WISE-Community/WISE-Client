@@ -97,7 +97,8 @@ export class TeacherRunListItemComponent implements OnInit {
     return run.isCompleted(this.configService.getCurrentServerTime());
   }
 
-  protected shareCode(): void {
+  shareCode(event: Event): void {
+    event.preventDefault();
     this.dialog.open(ShareRunCodeDialogComponent, {
       data: this.run,
       panelClass: 'dialog-sm'

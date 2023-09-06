@@ -42,7 +42,12 @@ import { AuthoringToolBarComponent } from '../../assets/wise5/authoringTool/comp
 import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponents/stepTools/step-tools.module';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
 import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authoring-tool.component';
-import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-move-node-location/choose-move-node-location.component';
+import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component';
+import { ChooseCopyNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component';
+import { InsertNodeAfterButtonComponent } from '../../assets/wise5/authoringTool/choose-node-location/insert-node-after-button/insert-node-after-button.component';
+import { InsertNodeInsideButtonComponent } from '../../assets/wise5/authoringTool/choose-node-location/insert-node-inside-button/insert-node-inside-button.component';
+import { NodeIconAndTitleComponent } from '../../assets/wise5/authoringTool/choose-node-location/node-icon-and-title/node-icon-and-title.component';
+import { NodeWithMoveAfterButtonComponent } from '../../assets/wise5/authoringTool/choose-node-location/node-with-move-after-button/node-with-move-after-button.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +61,7 @@ import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringToo
     CardSelectorComponent,
     ChooseAutomatedAssessmentComponent,
     ChooseComponentLocationComponent,
+    ChooseCopyNodeLocationComponent,
     ChooseImportStepComponent,
     ChooseImportStepLocationComponent,
     ChooseNewComponent,
@@ -65,9 +71,13 @@ import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringToo
     ChooseSimulationComponent,
     ConcurrentAuthorsMessageComponent,
     ConfigureAutomatedAssessmentComponent,
+    InsertNodeAfterButtonComponent,
+    InsertNodeInsideButtonComponent,
     MilestonesAuthoringComponent,
     NodeAuthoringComponent,
     NodeIconChooserDialog,
+    NodeIconAndTitleComponent,
+    NodeWithMoveAfterButtonComponent,
     NotebookAuthoringComponent,
     ProjectInfoAuthoringComponent,
     ProjectAuthoringComponent,
