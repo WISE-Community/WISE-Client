@@ -8,13 +8,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { NewPasswordAndConfirmHarness } from './new-password-and-confirm.harness';
 import { PasswordModule } from '../password.module';
+import { PasswordErrors } from '../../domain/password/password-errors';
 
 let component: NewPasswordAndConfirmComponent;
 let fixture: ComponentFixture<NewPasswordAndConfirmComponent>;
 const INVALID_PASSWORD_MISSING_LETTER = '1234567!';
 const INVALID_PASSWORD_MISSING_NUMBER = 'abcdefg!';
 const INVALID_PASSWORD_MISSING_SYMBOL = 'abcd1234';
-const INVALID_PASSWORD_SHORT_LENGTH = 'abcd12!';
+const INVALID_PASSWORD_TOO_SHORT = 'abcd12!';
 let newPasswordAndConfirmHarness: NewPasswordAndConfirmHarness;
 const VALID_PASSWORD = 'abcd123!';
 
@@ -47,10 +48,7 @@ describe('NewPasswordAndConfirmComponent', () => {
 function newPasswordValidation() {
   passwordIsMissing();
   passwordIsValid();
-  passwordMissingLetter();
-  passwordMissingNumber();
-  passwordMissingSymbol();
-  passwordTooShort();
+  passwordErrorCases();
 }
 
 function passwordIsMissing(): void {
@@ -71,64 +69,51 @@ function passwordIsValid(): void {
   });
 }
 
-function passwordMissingLetter(): void {
-  describe('password is missing a letter', () => {
-    it('should indicate password needs to include a letter', async () => {
-      await setPasswordAndExpectErrors(INVALID_PASSWORD_MISSING_LETTER, true, false, false, false);
-    });
-  });
-}
-
-function passwordMissingNumber(): void {
-  describe('password is missing a number', () => {
-    it('should indicate password needs to include a number', async () => {
-      await setPasswordAndExpectErrors(INVALID_PASSWORD_MISSING_NUMBER, false, true, false, false);
-    });
-  });
-}
-
-function passwordMissingSymbol(): void {
-  describe('password is missing a symbol', () => {
-    it('should indicate password needs to include a symbol', async () => {
-      await setPasswordAndExpectErrors(INVALID_PASSWORD_MISSING_SYMBOL, false, false, true, false);
-    });
-  });
-}
-
-function passwordTooShort(): void {
-  describe('password is too short', () => {
-    it('should indicate password needs to be longer', async () => {
-      await setPasswordAndExpectErrors(INVALID_PASSWORD_SHORT_LENGTH, false, false, false, true);
+function passwordErrorCases(): void {
+  const errorCases = [
+    {
+      descriptionText: 'missing a letter',
+      password: INVALID_PASSWORD_MISSING_LETTER,
+      expectedErrors: new PasswordErrors(true, false, false, false)
+    },
+    {
+      descriptionText: 'missing a number',
+      password: INVALID_PASSWORD_MISSING_NUMBER,
+      expectedErrors: new PasswordErrors(false, true, false, false)
+    },
+    {
+      descriptionText: 'missing a symbol',
+      password: INVALID_PASSWORD_MISSING_SYMBOL,
+      expectedErrors: new PasswordErrors(false, false, true, false)
+    },
+    {
+      descriptionText: 'too short',
+      password: INVALID_PASSWORD_TOO_SHORT,
+      expectedErrors: new PasswordErrors(false, false, false, true)
+    }
+  ];
+  errorCases.forEach(({ descriptionText, password, expectedErrors }) => {
+    describe(`password is ${descriptionText}`, () => {
+      it(`should indicate password is ${descriptionText}`, async () => {
+        await setPasswordAndExpectErrors(password, expectedErrors);
+      });
     });
   });
 }
 
 async function setPasswordAndExpectErrors(
   password: string,
-  expectedMissingLetter: boolean,
-  expectedMissingNumber: boolean,
-  expectedMissingSymbol: boolean,
-  expectedTooShort: boolean
+  passwordErrors: PasswordErrors
 ): Promise<void> {
   await newPasswordAndConfirmHarness.setNewPassword(password);
-  await checkPasswordRequirements(
-    expectedMissingLetter,
-    expectedMissingNumber,
-    expectedMissingSymbol,
-    expectedTooShort
-  );
+  await checkPasswordRequirements(passwordErrors);
 }
 
-async function checkPasswordRequirements(
-  expectedMissingLetter: boolean,
-  expectedMissingNumber: boolean,
-  expectedMissingSymbol: boolean,
-  expectedTooShort: boolean
-): Promise<void> {
-  expect(await newPasswordAndConfirmHarness.isMissingLetter()).toBe(expectedMissingLetter);
-  expect(await newPasswordAndConfirmHarness.isMissingNumber()).toBe(expectedMissingNumber);
-  expect(await newPasswordAndConfirmHarness.isMissingSymbol()).toBe(expectedMissingSymbol);
-  expect(await newPasswordAndConfirmHarness.isTooShort()).toBe(expectedTooShort);
+async function checkPasswordRequirements(passwordErrors: PasswordErrors): Promise<void> {
+  expect(await newPasswordAndConfirmHarness.isMissingLetter()).toBe(passwordErrors.missingLetter);
+  expect(await newPasswordAndConfirmHarness.isMissingNumber()).toBe(passwordErrors.missingNumber);
+  expect(await newPasswordAndConfirmHarness.isMissingSymbol()).toBe(passwordErrors.missingSymbol);
+  expect(await newPasswordAndConfirmHarness.isTooShort()).toBe(passwordErrors.tooShort);
 }
 
 function confirmPasswordValidation() {
