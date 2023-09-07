@@ -48,13 +48,7 @@ export class ProjectAuthoringComponent {
   ngOnInit(): void {
     this.updateShowProjectView();
     this.projectId = Number(this.route.snapshot.paramMap.get('unitId'));
-    this.items = Object.entries(this.projectService.idToOrder)
-      .map((entry: any) => {
-        return { key: entry[0], order: entry[1].order };
-      })
-      .sort((a: any, b: any) => {
-        return a.order - b.order;
-      });
+    this.setItems();
     this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
@@ -84,6 +78,16 @@ export class ProjectAuthoringComponent {
 
   private updateShowProjectView(): void {
     this.showProjectView = /\/teacher\/edit\/unit\/(\d*)$/.test(this.router.url);
+  }
+
+  private setItems(): void {
+    this.items = Object.entries(this.projectService.idToOrder)
+      .map((entry: any) => {
+        return { key: entry[0], order: entry[1].order };
+      })
+      .sort((a: any, b: any) => {
+        return a.order - b.order;
+      });
   }
 
   private endProjectAuthoringSession(): void {
@@ -199,37 +203,6 @@ export class ProjectAuthoringComponent {
     return selectedNodeIds;
   }
 
-  /**
-   * Get the distinct types of the selected items, both active and inactive.
-   * @returns an array of item types. possible items are group or node.
-   */
-  private getSelectedItemTypes(): string[] {
-    const selectedItemTypes = [];
-    this.items.forEach((item: any) => {
-      if (item.checked) {
-        const node = this.projectService.getNodeById(item.key);
-        if (node != null) {
-          let nodeType = node.type;
-          if (selectedItemTypes.indexOf(nodeType) == -1) {
-            selectedItemTypes.push(nodeType);
-          }
-        }
-      }
-    });
-
-    if (this.inactiveNodes != null) {
-      for (let inactiveNode of this.inactiveNodes) {
-        if (inactiveNode != null && inactiveNode.checked) {
-          let inactiveNodeType = inactiveNode.type;
-          if (selectedItemTypes.indexOf(inactiveNodeType) == -1) {
-            selectedItemTypes.push(inactiveNodeType);
-          }
-        }
-      }
-    }
-    return selectedItemTypes;
-  }
-
   private unselectAllItems(): void {
     this.items.forEach((item: any) => {
       item.checked = false;
@@ -287,13 +260,7 @@ export class ProjectAuthoringComponent {
 
   private refreshProject(): void {
     this.projectService.parseProject();
-    this.items = Object.entries(this.projectService.idToOrder)
-      .map((entry: any) => {
-        return { key: entry[0], order: entry[1].order };
-      })
-      .sort((a: any, b: any) => {
-        return a.order - b.order;
-      });
+    this.setItems();
     this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
