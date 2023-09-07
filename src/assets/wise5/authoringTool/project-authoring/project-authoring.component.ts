@@ -137,12 +137,10 @@ export class ProjectAuthoringComponent {
 
   protected deleteSelectedNodes(): void {
     const selectedNodeIds = this.getSelectedNodeIds();
-    let confirmMessage = '';
-    if (selectedNodeIds.length === 1) {
-      confirmMessage = $localize`Are you sure you want to delete the selected item?`;
-    } else {
-      confirmMessage = $localize`Are you sure you want to delete the ${selectedNodeIds.length} selected items?`;
-    }
+    const confirmMessage =
+      selectedNodeIds.length === 1
+        ? $localize`Are you sure you want to delete the selected item?`
+        : $localize`Are you sure you want to delete the ${selectedNodeIds.length} selected items?`;
     if (confirm(confirmMessage)) {
       this.deleteNodesById(selectedNodeIds);
     }
@@ -192,12 +190,9 @@ export class ProjectAuthoringComponent {
         selectedNodeIds.push(item.key);
       }
     });
-
-    if (this.inactiveNodes != null) {
-      for (const inactiveNode of this.inactiveNodes) {
-        if (inactiveNode.checked) {
-          selectedNodeIds.push(inactiveNode.id);
-        }
+    for (const inactiveNode of this.inactiveNodes) {
+      if (inactiveNode.checked) {
+        selectedNodeIds.push(inactiveNode.id);
       }
     }
     return selectedNodeIds;
@@ -317,16 +312,7 @@ export class ProjectAuthoringComponent {
   }
 
   protected getNumberOfInactiveGroups(): number {
-    let count = 0;
-    for (let n = 0; n < this.inactiveNodes.length; n++) {
-      let inactiveNode = this.inactiveNodes[n];
-      if (inactiveNode != null) {
-        if (inactiveNode.type == 'group') {
-          count++;
-        }
-      }
-    }
-    return count;
+    return this.inactiveNodes.filter((node) => node.type === 'group').length;
   }
 
   /**
@@ -336,19 +322,9 @@ export class ProjectAuthoringComponent {
    * are in an inactive group).
    */
   protected getNumberOfInactiveSteps(): number {
-    let count = 0;
-    for (let n = 0; n < this.inactiveNodes.length; n++) {
-      let inactiveNode = this.inactiveNodes[n];
-      if (inactiveNode != null) {
-        if (
-          inactiveNode.type == 'node' &&
-          this.projectService.getParentGroup(inactiveNode.id) == null
-        ) {
-          count++;
-        }
-      }
-    }
-    return count;
+    return this.inactiveNodes.filter(
+      (node) => node.type === 'node' && this.projectService.getParentGroup(node.id) == null
+    ).length;
   }
 
   protected getParentGroup(nodeId: string): any {
