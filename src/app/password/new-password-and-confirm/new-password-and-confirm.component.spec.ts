@@ -53,7 +53,7 @@ function newPasswordValidation() {
 
 function passwordIsMissing(): void {
   describe('password is missing', () => {
-    it('should show password required error', async () => {
+    it('shows password required error', async () => {
       await newPasswordAndConfirmHarness.setNewPassword('');
       expect(await newPasswordAndConfirmHarness.isNewPasswordRequiredErrorDisplayed()).toBeTrue();
     });
@@ -62,7 +62,7 @@ function passwordIsMissing(): void {
 
 function passwordIsValid(): void {
   describe('password is valid', () => {
-    it('should not show any error', async () => {
+    it('does not show any error', async () => {
       await newPasswordAndConfirmHarness.setNewPassword(VALID_PASSWORD);
       expect(await newPasswordAndConfirmHarness.isNewPasswordRequiredErrorDisplayed()).toBeFalse();
     });
@@ -94,19 +94,14 @@ function passwordErrorCases(): void {
   ];
   errorCases.forEach(({ descriptionText, password, expectedErrors }) => {
     describe(`password is ${descriptionText}`, () => {
-      it(`should indicate password is ${descriptionText}`, async () => {
-        await setPasswordAndExpectErrors(password, expectedErrors);
+      beforeEach(async () => {
+        await newPasswordAndConfirmHarness.setNewPassword(password);
+      });
+      it(`shows password is ${descriptionText} message`, async () => {
+        await checkPasswordRequirements(expectedErrors);
       });
     });
   });
-}
-
-async function setPasswordAndExpectErrors(
-  password: string,
-  passwordErrors: PasswordErrors
-): Promise<void> {
-  await newPasswordAndConfirmHarness.setNewPassword(password);
-  await checkPasswordRequirements(passwordErrors);
 }
 
 async function checkPasswordRequirements(passwordErrors: PasswordErrors): Promise<void> {
@@ -118,7 +113,7 @@ async function checkPasswordRequirements(passwordErrors: PasswordErrors): Promis
 
 function confirmPasswordValidation() {
   describe('passwords do not match', () => {
-    it('should show password does not match error', async () => {
+    it('shows password does not match error', async () => {
       await newPasswordAndConfirmHarness.setNewPassword('a');
       await newPasswordAndConfirmHarness.setConfirmNewPassword('b');
       expect(
@@ -128,7 +123,7 @@ function confirmPasswordValidation() {
   });
 
   describe('passwords match', () => {
-    it('should not show any error', async () => {
+    it('does not show any error', async () => {
       await newPasswordAndConfirmHarness.setNewPassword(VALID_PASSWORD);
       await newPasswordAndConfirmHarness.setConfirmNewPassword(VALID_PASSWORD);
       expect(

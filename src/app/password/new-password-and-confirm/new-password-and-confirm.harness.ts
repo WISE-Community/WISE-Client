@@ -37,7 +37,7 @@ export class NewPasswordAndConfirmHarness extends ComponentHarness {
     return this.isMissingRequirement('length');
   }
 
-  async isMissingRequirement(
+  private async isMissingRequirement(
     requirement: 'letter' | 'number' | 'symbol' | 'length'
   ): Promise<boolean> {
     const requirementIcon = await this.locatorFor(`.${requirement}-requirement .mat-icon`)();

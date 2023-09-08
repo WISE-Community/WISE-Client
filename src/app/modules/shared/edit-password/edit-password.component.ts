@@ -78,7 +78,7 @@ export class EditPasswordComponent implements OnInit {
 
   private changePasswordSuccess(): void {
     this.resetForm();
-    this.snackBar.open($localize`Password changed.`);
+    this.snackBar.open($localize`Successfully changed password.`);
   }
 
   private changePasswordError(error: any): void {

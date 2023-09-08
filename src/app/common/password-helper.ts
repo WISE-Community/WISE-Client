@@ -3,7 +3,7 @@ import { NewPasswordAndConfirmComponent } from '../password/new-password-and-con
 import { PasswordErrors } from '../domain/password/password-errors';
 
 export function changePasswordError(
-  error: any,
+  error: PasswordErrors,
   incorrectPasswordFormGroup: FormGroup,
   invalidPasswordFormGroup: FormGroup,
   previousPasswordFieldName: string
