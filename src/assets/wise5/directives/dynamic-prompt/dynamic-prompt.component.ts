@@ -16,6 +16,7 @@ import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 import { DynamicPrompt } from './DynamicPrompt';
 import { FeedbackRuleEvaluatorMultipleStudents } from '../../components/common/feedbackRule/FeedbackRuleEvaluatorMultipleStudents';
+import { ConstraintService } from '../../services/constraintService';
 
 @Component({
   selector: 'dynamic-prompt',
@@ -32,6 +33,7 @@ export class DynamicPromptComponent implements OnInit {
   constructor(
     private annotationService: AnnotationService,
     private configService: ConfigService,
+    private constraintService: ConstraintService,
     private peerGroupService: PeerGroupService,
     private projectService: ProjectService,
     private dataService: StudentDataService
@@ -76,7 +78,8 @@ export class DynamicPromptComponent implements OnInit {
           this.dynamicPrompt.getRules(),
           referenceComponentContent.maxSubmitCount,
           false
-        )
+        ),
+        this.constraintService
       );
       const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(cRaterResponses);
       this.prompt = feedbackRule.prompt;
@@ -126,7 +129,8 @@ export class DynamicPromptComponent implements OnInit {
           this.dynamicPrompt.getRules(),
           referenceComponentContent.maxSubmitCount,
           false
-        )
+        ),
+        this.constraintService
       );
       const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule([cRaterResponse]);
       this.prompt = feedbackRule.prompt;

@@ -50,7 +50,7 @@ export class FeedbackRuleEvaluatorMultipleStudents extends FeedbackRuleEvaluator
   }
 
   protected evaluateTerm(term: string, responses: CRaterResponse[]): boolean {
-    const evaluator: TermEvaluator = this.factory.getTermEvaluator(term);
+    const evaluator: TermEvaluator = this.factory.getTermEvaluator(term, this.constraintService);
     return responses.some((response: CRaterResponse) => {
       return evaluator.evaluate(response);
     });

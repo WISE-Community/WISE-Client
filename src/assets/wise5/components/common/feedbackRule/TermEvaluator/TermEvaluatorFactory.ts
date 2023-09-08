@@ -1,4 +1,6 @@
+import { ConstraintService } from '../../../../services/constraintService';
 import { AccumulatedIdeaCountTermEvaluator } from './AccumulatedIdeaCountTermEvaluator';
+import { ChoseChoiceTermEvaluator } from './ChoseChoiceTermEvaluator';
 import { HasKIScoreTermEvaluator } from './HasKIScoreTermEvaluator';
 import { IdeaCountTermEvaluator } from './IdeaCountTermEvaluator';
 import { IdeaCountWithResponseIndexTermEvaluator } from './IdeaCountWithResponseIndexTermEvaluator';
@@ -7,6 +9,8 @@ import { IsSubmitNumberEvaluator } from './IsSubmitNumberEvaluator';
 import { TermEvaluator } from './TermEvaluator';
 
 export class TermEvaluatorFactory {
+  constructor(private constraintService: ConstraintService) {}
+
   getTermEvaluator(term: string): TermEvaluator {
     let evaluator: TermEvaluator;
     if (TermEvaluator.isHasKIScoreTerm(term)) {
@@ -19,9 +23,12 @@ export class TermEvaluatorFactory {
       evaluator = new IsSubmitNumberEvaluator(term);
     } else if (TermEvaluator.isAccumulatedIdeaCountTerm(term)) {
       evaluator = new AccumulatedIdeaCountTermEvaluator(term);
+    } else if (TermEvaluator.isChoseChoiceTerm(term)) {
+      evaluator = new ChoseChoiceTermEvaluator(term);
     } else {
       evaluator = new IdeaTermEvaluator(term);
     }
+    evaluator.setConstraintService(this.constraintService);
     return evaluator;
   }
 }

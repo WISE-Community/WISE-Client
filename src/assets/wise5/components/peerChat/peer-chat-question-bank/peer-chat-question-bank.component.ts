@@ -14,6 +14,7 @@ import { concatMap, map } from 'rxjs/operators';
 import { PeerGroup } from '../PeerGroup';
 import { QuestionBankContent } from './QuestionBankContent';
 import { copy } from '../../../common/object/object';
+import { ConstraintService } from '../../../services/constraintService';
 
 @Component({
   selector: 'peer-chat-question-bank',
@@ -26,7 +27,11 @@ export class PeerChatQuestionBankComponent implements OnInit {
   @Output() displayedQuestionBankRulesChange = new EventEmitter<QuestionBankRule[]>();
   questions: string[];
 
-  constructor(private peerGroupService: PeerGroupService, private projectService: ProjectService) {}
+  constructor(
+    private constraintService: ConstraintService,
+    private peerGroupService: PeerGroupService,
+    private projectService: ProjectService
+  ) {}
 
   ngOnInit(): void {
     if (this.displayedQuestionBankRules == null) {
@@ -80,7 +85,8 @@ export class PeerChatQuestionBankComponent implements OnInit {
         this.content.questionBank.getRules(),
         (referenceComponent.content as OpenResponseContent).maxSubmitCount,
         false
-      )
+      ),
+      this.constraintService
     );
     return this.filterQuestions(
       feedbackRuleEvaluator.getFeedbackRules(cRaterResponses) as QuestionBankRule[],

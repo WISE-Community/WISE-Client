@@ -21,6 +21,7 @@ import { OpenResponseService } from '../openResponseService';
 import { copy } from '../../../common/object/object';
 import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
+import { ConstraintService } from '../../../services/constraintService';
 
 @Component({
   selector: 'open-response-student',
@@ -38,6 +39,7 @@ export class OpenResponseStudent extends ComponentStudent {
     protected AnnotationService: AnnotationService,
     private changeDetector: ChangeDetectorRef,
     protected ComponentService: ComponentService,
+    private constraintService: ConstraintService,
     protected ConfigService: ConfigService,
     private CRaterService: CRaterService,
     protected dialog: MatDialog,
@@ -399,7 +401,8 @@ export class OpenResponseStudent extends ComponentStudent {
             this.getFeedbackRules(),
             this.getMaxSubmitCount(),
             this.isMultipleFeedbackTextsForSameRuleAllowed()
-          )
+          ),
+          this.constraintService
         );
         const rule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule([response]);
         autoComment = this.getFeedbackText(rule);

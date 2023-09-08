@@ -1,11 +1,18 @@
+import { ConstraintService } from '../../../../services/constraintService';
 import { CRaterResponse } from '../../cRater/CRaterResponse';
 
 export abstract class TermEvaluator {
+  protected constraintService: ConstraintService;
+
   constructor(protected term: string) {}
   abstract evaluate(response: CRaterResponse | CRaterResponse[]): boolean;
 
   static isAccumulatedIdeaCountTerm(term: string): boolean {
     return /accumulatedIdeaCount(MoreThan|Equals|LessThan)\([\d+]\)/.test(term);
+  }
+
+  static isChoseChoiceTerm(term: string): boolean {
+    return /choseChoice\("\w+",\s*"\w+",\s*"\w+"\)/.test(term);
   }
 
   static isHasKIScoreTerm(term: string): boolean {
@@ -29,5 +36,9 @@ export abstract class TermEvaluator {
       TermEvaluator.isAccumulatedIdeaCountTerm(term) ||
       TermEvaluator.isIdeaCountWithResponseIndexTerm(term)
     );
+  }
+
+  setConstraintService(service: ConstraintService) {
+    this.constraintService = service;
   }
 }

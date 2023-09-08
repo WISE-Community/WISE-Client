@@ -1,3 +1,4 @@
+import { ConstraintService } from '../../../services/constraintService';
 import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
 import { CRaterResponse } from '../cRater/CRaterResponse';
 import { FeedbackRule } from './FeedbackRule';
@@ -7,9 +8,14 @@ import { TermEvaluatorFactory } from './TermEvaluator/TermEvaluatorFactory';
 
 export class FeedbackRuleEvaluator<T extends CRaterResponse[]> {
   defaultFeedback = $localize`Thanks for submitting your response.`;
-  protected factory = new TermEvaluatorFactory();
+  protected factory;
 
-  constructor(protected component: FeedbackRuleComponent) {}
+  constructor(
+    protected component: FeedbackRuleComponent,
+    protected constraintService: ConstraintService
+  ) {
+    this.factory = new TermEvaluatorFactory(constraintService);
+  }
 
   getFeedbackRule(responses: T): FeedbackRule {
     return (
