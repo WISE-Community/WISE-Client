@@ -48,7 +48,7 @@ export class ProjectAuthoringComponent {
   ngOnInit(): void {
     this.updateShowProjectView();
     this.projectId = Number(this.route.snapshot.paramMap.get('unitId'));
-    this.setItems();
+    this.items = this.projectService.getNodesInOrder();
     this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
@@ -78,16 +78,6 @@ export class ProjectAuthoringComponent {
 
   private updateShowProjectView(): void {
     this.showProjectView = /\/teacher\/edit\/unit\/(\d*)$/.test(this.router.url);
-  }
-
-  private setItems(): void {
-    this.items = Object.entries(this.projectService.idToOrder)
-      .map((entry: any) => {
-        return { key: entry[0], order: entry[1].order };
-      })
-      .sort((a: any, b: any) => {
-        return a.order - b.order;
-      });
   }
 
   private endProjectAuthoringSession(): void {
@@ -255,7 +245,7 @@ export class ProjectAuthoringComponent {
 
   private refreshProject(): void {
     this.projectService.parseProject();
-    this.setItems();
+    this.items = this.projectService.getNodesInOrder();
     this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
