@@ -48,13 +48,7 @@ export class ProjectAuthoringComponent {
   ngOnInit(): void {
     this.updateShowProjectView();
     this.projectId = Number(this.route.snapshot.paramMap.get('unitId'));
-    this.items = Object.entries(this.projectService.idToOrder)
-      .map((entry: any) => {
-        return { key: entry[0], order: entry[1].order };
-      })
-      .sort((a: any, b: any) => {
-        return a.order - b.order;
-      });
+    this.items = this.projectService.getNodesInOrder();
     this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
@@ -133,12 +127,10 @@ export class ProjectAuthoringComponent {
 
   protected deleteSelectedNodes(): void {
     const selectedNodeIds = this.getSelectedNodeIds();
-    let confirmMessage = '';
-    if (selectedNodeIds.length === 1) {
-      confirmMessage = $localize`Are you sure you want to delete the selected item?`;
-    } else {
-      confirmMessage = $localize`Are you sure you want to delete the ${selectedNodeIds.length} selected items?`;
-    }
+    const confirmMessage =
+      selectedNodeIds.length === 1
+        ? $localize`Are you sure you want to delete the selected item?`
+        : $localize`Are you sure you want to delete the ${selectedNodeIds.length} selected items?`;
     if (confirm(confirmMessage)) {
       this.deleteNodesById(selectedNodeIds);
     }
@@ -188,46 +180,12 @@ export class ProjectAuthoringComponent {
         selectedNodeIds.push(item.key);
       }
     });
-
-    if (this.inactiveNodes != null) {
-      for (const inactiveNode of this.inactiveNodes) {
-        if (inactiveNode.checked) {
-          selectedNodeIds.push(inactiveNode.id);
-        }
+    for (const inactiveNode of this.inactiveNodes) {
+      if (inactiveNode.checked) {
+        selectedNodeIds.push(inactiveNode.id);
       }
     }
     return selectedNodeIds;
-  }
-
-  /**
-   * Get the distinct types of the selected items, both active and inactive.
-   * @returns an array of item types. possible items are group or node.
-   */
-  private getSelectedItemTypes(): string[] {
-    const selectedItemTypes = [];
-    this.items.forEach((item: any) => {
-      if (item.checked) {
-        const node = this.projectService.getNodeById(item.key);
-        if (node != null) {
-          let nodeType = node.type;
-          if (selectedItemTypes.indexOf(nodeType) == -1) {
-            selectedItemTypes.push(nodeType);
-          }
-        }
-      }
-    });
-
-    if (this.inactiveNodes != null) {
-      for (let inactiveNode of this.inactiveNodes) {
-        if (inactiveNode != null && inactiveNode.checked) {
-          let inactiveNodeType = inactiveNode.type;
-          if (selectedItemTypes.indexOf(inactiveNodeType) == -1) {
-            selectedItemTypes.push(inactiveNodeType);
-          }
-        }
-      }
-    }
-    return selectedItemTypes;
   }
 
   private unselectAllItems(): void {
@@ -287,13 +245,7 @@ export class ProjectAuthoringComponent {
 
   private refreshProject(): void {
     this.projectService.parseProject();
-    this.items = Object.entries(this.projectService.idToOrder)
-      .map((entry: any) => {
-        return { key: entry[0], order: entry[1].order };
-      })
-      .sort((a: any, b: any) => {
-        return a.order - b.order;
-      });
+    this.items = this.projectService.getNodesInOrder();
     this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
@@ -350,16 +302,7 @@ export class ProjectAuthoringComponent {
   }
 
   protected getNumberOfInactiveGroups(): number {
-    let count = 0;
-    for (let n = 0; n < this.inactiveNodes.length; n++) {
-      let inactiveNode = this.inactiveNodes[n];
-      if (inactiveNode != null) {
-        if (inactiveNode.type == 'group') {
-          count++;
-        }
-      }
-    }
-    return count;
+    return this.inactiveNodes.filter((node) => node.type === 'group').length;
   }
 
   /**
@@ -369,19 +312,9 @@ export class ProjectAuthoringComponent {
    * are in an inactive group).
    */
   protected getNumberOfInactiveSteps(): number {
-    let count = 0;
-    for (let n = 0; n < this.inactiveNodes.length; n++) {
-      let inactiveNode = this.inactiveNodes[n];
-      if (inactiveNode != null) {
-        if (
-          inactiveNode.type == 'node' &&
-          this.projectService.getParentGroup(inactiveNode.id) == null
-        ) {
-          count++;
-        }
-      }
-    }
-    return count;
+    return this.inactiveNodes.filter(
+      (node) => node.type === 'node' && this.projectService.getParentGroup(node.id) == null
+    ).length;
   }
 
   protected getParentGroup(nodeId: string): any {

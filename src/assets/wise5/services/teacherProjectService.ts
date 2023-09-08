@@ -3103,4 +3103,14 @@ export class TeacherProjectService extends ProjectService {
       objects.splice(index + 1, 0, object);
     }
   }
+
+  getNodesInOrder(): any[] {
+    return Object.entries(this.idToOrder)
+      .map((entry: any) => {
+        return { key: entry[0], order: entry[1].order };
+      })
+      .sort((a: any, b: any) => {
+        return a.order - b.order;
+      });
+  }
 }
