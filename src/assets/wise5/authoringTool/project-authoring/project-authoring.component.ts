@@ -132,45 +132,10 @@ export class ProjectAuthoringComponent {
         ? $localize`Are you sure you want to delete the selected item?`
         : $localize`Are you sure you want to delete the ${selectedNodeIds.length} selected items?`;
     if (confirm(confirmMessage)) {
-      this.deleteNodesById(selectedNodeIds);
+      selectedNodeIds.forEach((nodeId) => this.deleteNodeService.deleteNode(nodeId));
+      this.projectService.saveProject();
+      this.refreshProject();
     }
-  }
-
-  private deleteNodesById(nodeIds: string[]): void {
-    let deletedStartNodeId = false;
-    const stepsDeleted = [];
-    const activitiesDeleted = [];
-    for (const nodeId of nodeIds) {
-      const node = this.projectService.getNodeById(nodeId);
-      const tempNode = {
-        nodeId: node.id,
-        title: this.projectService.getNodePositionAndTitle(node.id),
-        stepsInActivityDeleted: []
-      };
-      if (this.projectService.isStartNodeId(nodeId)) {
-        deletedStartNodeId = true;
-      }
-      if (this.projectService.isGroupNode(nodeId)) {
-        const stepsInActivityDeleted = [];
-        for (const stepNodeId of node.ids) {
-          const stepObject = {
-            nodeId: stepNodeId,
-            title: this.projectService.getNodePositionAndTitle(stepNodeId)
-          };
-          stepsInActivityDeleted.push(stepObject);
-        }
-        tempNode.stepsInActivityDeleted = stepsInActivityDeleted;
-        activitiesDeleted.push(tempNode);
-      } else {
-        stepsDeleted.push(tempNode);
-      }
-      this.deleteNodeService.deleteNode(nodeId);
-    }
-    if (deletedStartNodeId) {
-      this.updateStartNodeId();
-    }
-    this.projectService.saveProject();
-    this.refreshProject();
   }
 
   private getSelectedNodeIds(): string[] {
@@ -212,35 +177,6 @@ export class ProjectAuthoringComponent {
 
   protected addStructure(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/structure/choose`]);
-  }
-
-  private updateStartNodeId(): void {
-    let newStartNodeId = null;
-    let startGroupId = this.projectService.getStartGroupId();
-    let node = this.projectService.getNodeById(startGroupId);
-    let done = false;
-
-    // recursively traverse the start ids
-    while (!done) {
-      if (node == null) {
-        // base case in case something went wrong
-        done = true;
-      } else if (this.projectService.isGroupNode(node.id)) {
-        // the node is a group node so we will get its start node
-        node = this.projectService.getNodeById(node.startId);
-      } else if (this.projectService.isApplicationNode(node.id)) {
-        // the node is a step node so we have found the new start node id
-        newStartNodeId = node.id;
-        done = true;
-      } else {
-        // base case in case something went wrong
-        done = true;
-      }
-    }
-
-    if (newStartNodeId) {
-      this.projectService.setStartNodeId(newStartNodeId);
-    }
   }
 
   private refreshProject(): void {
