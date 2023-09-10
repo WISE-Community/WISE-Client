@@ -24,7 +24,7 @@
                 mat-raised-button
                 color="primary"
                 (click)="createNewLesson()"
-                [disabled]="stepNodeSelected || activityNodeSelected"
+                [disabled]="stepNodeSelected || groupNodeSelected"
                 matTooltip="Create New Lesson"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -35,7 +35,7 @@
                 mat-raised-button
                 color="primary"
                 (click)="createNewStep()"
-                [disabled]="stepNodeSelected || activityNodeSelected"
+                [disabled]="stepNodeSelected || groupNodeSelected"
                 matTooltip="Create New Step"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -46,7 +46,7 @@
                 mat-raised-button
                 color="primary"
                 (click)="addStructure()"
-                [disabled]="stepNodeSelected || activityNodeSelected"
+                [disabled]="stepNodeSelected || groupNodeSelected"
                 matTooltip="Add Lesson Structure"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -57,7 +57,7 @@
                 mat-raised-button
                 color="primary"
                 (click)="importStep()"
-                [disabled]="stepNodeSelected || activityNodeSelected"
+                [disabled]="stepNodeSelected || groupNodeSelected"
                 matTooltip="Import Step"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -101,7 +101,7 @@
                 mat-raised-button
                 color="primary"
                 (click)="goToAdvancedAuthoring()"
-                [disabled]="stepNodeSelected || activityNodeSelected"
+                [disabled]="stepNodeSelected || groupNodeSelected"
                 matTooltip="Advanced"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -139,10 +139,10 @@
                     <mat-checkbox
                       color="primary"
                       [(ngModel)]="item.checked"
-                      (ngModelChange)="projectItemClicked()"
+                      (ngModelChange)="selectNode()"
                       [disabled]="
                         (isGroupNode(item.key) && stepNodeSelected) ||
-                        (!isGroupNode(item.key) && activityNodeSelected)
+                        (!isGroupNode(item.key) && groupNodeSelected)
                       "
                       aria-label="{{ getNodePositionById(item.key) }} {{ getNodeTitle(item.key) }}"
                     >
@@ -238,7 +238,7 @@
                       <mat-checkbox
                         color="primary"
                         [(ngModel)]="inactiveNode.checked"
-                        (ngModelChange)="projectItemClicked()"
+                        (ngModelChange)="selectNode()"
                         [disabled]="stepNodeSelected"
                         aria-label="{{ getNodeTitle(inactiveNode.id) }}"
                       >
@@ -270,9 +270,9 @@
                           <mat-checkbox
                             color="primary"
                             [(ngModel)]="idToNode[inactiveChildId].checked"
-                            (ngModelChange)="projectItemClicked()"
-                            [disabled]="activityNodeSelected"
-                            aria-label="{{ getNodeTitle(inactiveChildId.id) }}"
+                            (ngModelChange)="selectNode()"
+                            [disabled]="groupNodeSelected"
+                            aria-label="{{ getNodeTitle(inactiveChildId) }}"
                           >
                           </mat-checkbox>
                         </div>
@@ -310,8 +310,8 @@
                         <mat-checkbox
                           color="primary"
                           [(ngModel)]="inactiveNode.checked"
-                          (ngModelChange)="projectItemClicked()"
-                          [disabled]="activityNodeSelected"
+                          (ngModelChange)="selectNode()"
+                          [disabled]="groupNodeSelected"
                           aria-label="{{ getNodeTitle(inactiveNode.id) }}"
                         >
                         </mat-checkbox>
