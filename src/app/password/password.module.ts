@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { NewPasswordAndConfirmComponent } from './new-password-and-confirm/new-password-and-confirm.component';
 import { MatIconModule } from '@angular/material/icon';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
+import { PasswordRequirementComponent } from './password-requirement/password-requirement.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
     PasswordStrengthMeterModule.forRoot(),
     ReactiveFormsModule
   ],
-  declarations: [NewPasswordAndConfirmComponent],
+  declarations: [NewPasswordAndConfirmComponent, PasswordRequirementComponent],
   exports: [NewPasswordAndConfirmComponent]
 })
 export class PasswordModule {}

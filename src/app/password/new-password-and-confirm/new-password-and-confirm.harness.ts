@@ -1,6 +1,7 @@
 import { ComponentHarness } from '@angular/cdk/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatErrorHarness } from '@angular/material/form-field/testing';
+import { PasswordRequirementHarness } from '../password-requirement/password-requirement.harness';
 
 export class NewPasswordAndConfirmHarness extends ComponentHarness {
   static hostSelector = 'new-password-and-confirm';
@@ -20,28 +21,29 @@ export class NewPasswordAndConfirmHarness extends ComponentHarness {
   protected getConfirmNewPasswordDoesNotMatchError = this.locatorForOptional(
     MatErrorHarness.with({ selector: '.confirm-new-password-does-not-match-error' })
   );
+  protected getPasswordRequirements = this.locatorForAll(PasswordRequirementHarness);
 
   async isMissingLetter(): Promise<boolean> {
-    return this.isMissingRequirement('letter');
+    return this.isMissingRequirement('include a letter');
   }
 
   async isMissingNumber(): Promise<boolean> {
-    return this.isMissingRequirement('number');
+    return this.isMissingRequirement('include a number');
   }
 
   async isMissingSymbol(): Promise<boolean> {
-    return this.isMissingRequirement('symbol');
+    return this.isMissingRequirement('include one of these symbols ! @ # $ % ^ & *');
   }
 
   async isTooShort(): Promise<boolean> {
-    return this.isMissingRequirement('length');
+    return this.isMissingRequirement('be at least 8 characters long');
   }
 
-  private async isMissingRequirement(
-    requirement: 'letter' | 'number' | 'symbol' | 'length'
-  ): Promise<boolean> {
-    const requirementIcon = await this.locatorFor(`.${requirement}-requirement .mat-icon`)();
-    return (await requirementIcon.text()) === 'close';
+  private async isMissingRequirement(requirement: string): Promise<boolean> {
+    const passwordRequirement = await this.locatorFor(
+      PasswordRequirementHarness.with({ text: requirement })
+    )();
+    return await passwordRequirement.isFail();
   }
 
   async setNewPassword(value: string): Promise<void> {

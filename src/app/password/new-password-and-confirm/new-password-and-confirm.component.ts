@@ -16,7 +16,12 @@ import {
 export class NewPasswordAndConfirmComponent implements OnInit {
   static readonly CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME: string = 'confirmNewPassword';
   static readonly NEW_PASSWORD_FORM_CONTROL_NAME: string = 'newPassword';
+
+  LENGTH_REQUIREMENT_TEXT: string = $localize`be at least 8 characters long`;
+  LETTER_REQUIREMENT_TEXT: string = $localize`include a letter`;
+  NUMBER_REQUIREMENT_TEXT: string = $localize`include a number`;
   PASSWORD_MIN_LENGTH: number = 8;
+  SYMBOL_REQUIREMENT_TEXT: string = $localize`include one of these symbols ! @ # $ % ^ & *`;
 
   protected confirmNewPasswordFormControl: FormControl;
   protected confirmNewPasswordFormControlName: string =
@@ -78,6 +83,6 @@ export class NewPasswordAndConfirmComponent implements OnInit {
   }
 
   protected passwordStrengthChange(value: number): void {
-    this.passwordStrength = value;
+    this.passwordStrength = value ? value : 0;
   }
 }
