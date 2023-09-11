@@ -35,13 +35,16 @@ export class PasswordRequirementHarness extends ComponentHarness {
   }
 
   async isFail(): Promise<boolean> {
-    const icon = await this.getIcon();
-    return (await icon.text()) === 'close';
+    return this.iconHasText('close');
   }
 
   async isPass(): Promise<boolean> {
+    return this.iconHasText('done');
+  }
+
+  private async iconHasText(text: string): Promise<boolean> {
     const icon = await this.getIcon();
-    return (await icon.text()) === 'done';
+    return (await icon.text()) === text;
   }
 
   private async getIcon(): Promise<TestElement> {

@@ -16,12 +16,7 @@ import {
 export class NewPasswordAndConfirmComponent implements OnInit {
   static readonly CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME: string = 'confirmNewPassword';
   static readonly NEW_PASSWORD_FORM_CONTROL_NAME: string = 'newPassword';
-
-  LENGTH_REQUIREMENT_TEXT: string = $localize`be at least 8 characters long`;
-  LETTER_REQUIREMENT_TEXT: string = $localize`include a letter`;
-  NUMBER_REQUIREMENT_TEXT: string = $localize`include a number`;
   PASSWORD_MIN_LENGTH: number = 8;
-  SYMBOL_REQUIREMENT_TEXT: string = $localize`include one of these symbols ! @ # $ % ^ & *`;
 
   protected confirmNewPasswordFormControl: FormControl;
   protected confirmNewPasswordFormControlName: string =
@@ -32,6 +27,15 @@ export class NewPasswordAndConfirmComponent implements OnInit {
   protected newPasswordFormControlName: string =
     NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME;
   @Input() passwordLabel: string = $localize`New Password`;
+  protected passwordRequirements: any[] = [
+    { errorFieldName: 'missingLetter', text: $localize`include a letter` },
+    { errorFieldName: 'missingNumber', text: $localize`include a number` },
+    {
+      errorFieldName: 'missingSymbol',
+      text: $localize`include one of these symbols ! @ # $ % ^ & *`
+    },
+    { errorFieldName: 'tooShort', text: $localize`be at least 8 characters long` }
+  ];
   protected passwordStrength: number = 0;
 
   constructor() {}
