@@ -31,3 +31,21 @@ export function temporarilyHighlightElement(id: string, duration: number = 1000)
     }, 2000);
   }, duration);
 }
+
+/**
+ * Temporarily highlight the nodes and scroll to the first node to draw attention to them
+ * @param nodes the nodes to highlight
+ */
+export function highlightNodesAndScroll(nodes = []): void {
+  if (nodes.length > 0) {
+    setTimeout(() => {
+      nodes.forEach((node) => temporarilyHighlightElement(node.id));
+      $('#content').animate(
+        {
+          scrollTop: $('#' + nodes[0].id).prop('offsetTop') - 60
+        },
+        1000
+      );
+    });
+  }
+}

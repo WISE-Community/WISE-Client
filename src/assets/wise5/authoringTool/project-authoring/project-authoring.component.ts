@@ -3,11 +3,10 @@ import { ConfigService } from '../../services/configService';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
-import * as $ from 'jquery';
 import { Subscription, filter } from 'rxjs';
 import { Message } from '@stomp/stompjs';
 import { RxStomp } from '@stomp/rx-stomp';
-import { temporarilyHighlightElement } from '../../common/dom/dom';
+import { highlightNodesAndScroll } from '../../common/dom/dom';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
@@ -40,7 +39,7 @@ export class ProjectAuthoringComponent {
     this.subscriptions.add(
       this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
         this.updateShowProjectView();
-        this.temporarilyHighlightNewNodes(history.state.newNodes);
+        highlightNodesAndScroll(history.state.newNodes);
       })
     );
   }
@@ -212,25 +211,6 @@ export class ProjectAuthoringComponent {
       },
       1000
     );
-  }
-
-  /**
-   * Temporarily highlight the new nodes to draw attention to them
-   * @param newNodes the new nodes to highlight
-   */
-  private temporarilyHighlightNewNodes(newNodes = []): void {
-    if (newNodes.length > 0) {
-      setTimeout(() => {
-        newNodes.forEach((newNode) => temporarilyHighlightElement(newNode.id));
-        const firstNodeElementAdded = $('#' + newNodes[0].id);
-        $('#content').animate(
-          {
-            scrollTop: firstNodeElementAdded.prop('offsetTop') - 60
-          },
-          1000
-        );
-      });
-    }
   }
 
   protected getStepBackgroundColor(nodeId: string): string {
