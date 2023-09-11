@@ -3107,7 +3107,7 @@ export class TeacherProjectService extends ProjectService {
   getNodesInOrder(): any[] {
     return Object.entries(this.idToOrder)
       .map((entry: any) => {
-        return { key: entry[0], order: entry[1].order };
+        return { key: entry[0], id: entry[0], order: entry[1].order };
       })
       .sort((a: any, b: any) => {
         return a.order - b.order;
