@@ -35,9 +35,9 @@ export class ChooseNewNodeLocation {
   }
 
   private addInitialComponents(nodeId: string, components: any[]): void {
-    for (const component of components.reverse()) {
-      this.projectService.createComponent(nodeId, component.type);
-    }
+    components
+      .reverse()
+      .forEach((component) => this.projectService.createComponent(nodeId, component.type));
   }
 
   private save(): any {
@@ -47,9 +47,9 @@ export class ChooseNewNodeLocation {
   }
 
   private goToNode(node: any): void {
-    this.router.navigate(['../../node', node.id], {
+    this.router.navigate(['../..'], {
       relativeTo: this.route,
-      state: { newComponents: node.components }
+      state: { newNodes: [node] }
     });
   }
 
