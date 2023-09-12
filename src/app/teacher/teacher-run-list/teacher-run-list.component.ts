@@ -57,7 +57,6 @@ export class TeacherRunListComponent implements OnInit {
         this.setRuns(runs);
         this.processRuns();
         this.highlightNewRunIfNecessary();
-        this.loaded = true;
       });
   }
 
@@ -79,6 +78,7 @@ export class TeacherRunListComponent implements OnInit {
       return teacherRun;
     });
     this.filteredRuns = this.runs;
+    this.loaded = true;
   }
 
   private subscribeToRuns(): void {
