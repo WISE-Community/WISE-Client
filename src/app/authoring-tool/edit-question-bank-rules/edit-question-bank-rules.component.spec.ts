@@ -7,11 +7,12 @@ import { QuestionBankRule } from '../../../assets/wise5/components/peerChat/peer
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { EditQuestionBankRulesComponent } from './edit-question-bank-rules.component';
+import { Question } from '../../../assets/wise5/components/peerChat/peer-chat-question-bank/Question';
 
 let component: EditQuestionBankRulesComponent;
 let fixture: ComponentFixture<EditQuestionBankRulesComponent>;
 let projectService: TeacherProjectService;
-let nodeChangedSpy;
+let nodeChangedSpy: jasmine.Spy;
 
 describe('EditQuestionBankRulesComponent', () => {
   beforeEach(async () => {
@@ -42,12 +43,35 @@ describe('EditQuestionBankRulesComponent', () => {
 
 function addNewFeedbackToRule() {
   describe('addNewFeedbackToRule()', () => {
+    addNewFeedbackToRuleVersion1();
+    addNewFeedbackToRuleVersion2();
+  });
+}
+
+function addNewFeedbackToRuleVersion1() {
+  describe('using question bank content version 1', () => {
     it('should add new question to rule', () => {
-      const rule = new QuestionBankRule({ questions: ['Q1'] });
+      component.version = undefined;
+      const rule = new QuestionBankRule({ questions: [] });
       component.addNewFeedbackToRule(rule);
       expect(nodeChangedSpy).toHaveBeenCalled();
-      expect(rule.questions.length).toEqual(2);
-      expect(rule.questions[1]).toEqual('');
+      expect(rule.questions.length).toEqual(1);
+      expect(rule.questions[0]).toEqual('');
+    });
+  });
+}
+
+function addNewFeedbackToRuleVersion2() {
+  describe('using question bank content version 2', () => {
+    it('should add new question to rule', () => {
+      component.version = 2;
+      const rule = new QuestionBankRule({ questions: [] });
+      component.addNewFeedbackToRule(rule);
+      expect(nodeChangedSpy).toHaveBeenCalled();
+      expect(rule.questions.length).toEqual(1);
+      const question = rule.questions[0] as Question;
+      expect(question.hasOwnProperty('id')).toEqual(true);
+      expect(question.text).toEqual('');
     });
   });
 }

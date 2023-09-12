@@ -14,6 +14,8 @@ import { concatMap, map } from 'rxjs/operators';
 import { PeerGroup } from '../PeerGroup';
 import { QuestionBankContent } from './QuestionBankContent';
 import { copy } from '../../../common/object/object';
+import { Question } from './Question';
+import { QuestionBankService } from './questionBank.service';
 
 @Component({
   selector: 'peer-chat-question-bank',
@@ -24,9 +26,15 @@ export class PeerChatQuestionBankComponent implements OnInit {
   @Input() content: QuestionBankContent;
   @Input() displayedQuestionBankRules: QuestionBankRule[];
   @Output() displayedQuestionBankRulesChange = new EventEmitter<QuestionBankRule[]>();
-  questions: string[];
+  @Output() questionClickedEvent = new EventEmitter<string>();
+  questions: (string | Question)[];
+  @Input() questionIdsUsed: string[] = [];
 
-  constructor(private peerGroupService: PeerGroupService, private projectService: ProjectService) {}
+  constructor(
+    private peerGroupService: PeerGroupService,
+    private projectService: ProjectService,
+    private questionBankService: QuestionBankService
+  ) {}
 
   ngOnInit(): void {
     if (this.displayedQuestionBankRules == null) {
@@ -40,6 +48,13 @@ export class PeerChatQuestionBankComponent implements OnInit {
     } else {
       this.setQuestions(this.displayedQuestionBankRules);
     }
+    this.subscribeToQuestionUsed();
+  }
+
+  private subscribeToQuestionUsed(): void {
+    this.questionBankService.questionUsed$.subscribe((question: Question) => {
+      this.questionIdsUsed.push(question.id);
+    });
   }
 
   private getReferenceComponent(questionBank: QuestionBank): WISEComponent {
@@ -130,5 +145,9 @@ export class PeerChatQuestionBankComponent implements OnInit {
 
   private setQuestions(rules: QuestionBankRule[]): void {
     this.questions = rules.flatMap((rule) => rule.questions);
+  }
+
+  protected questionClicked(question: string): void {
+    this.questionClickedEvent.emit(question);
   }
 }

@@ -7,29 +7,17 @@ import { PeerChatMessage } from '../PeerChatMessage';
   styleUrls: ['./peer-chat-chat-box.component.scss']
 })
 export class PeerChatChatBoxComponent implements OnInit {
-  @Input()
-  isEnabled: boolean = true;
-
-  @Input()
-  isGrading: boolean = false;
-
-  @Input()
-  messages: PeerChatMessage[] = [];
-
-  @Input()
-  myWorkgroupId: number;
-
-  @Input()
-  workgroupInfos: any = {};
-
+  @Input() isEnabled: boolean = true;
+  @Input() isGrading: boolean = false;
+  @Input() messages: PeerChatMessage[] = [];
+  @Input() myWorkgroupId: number;
+  @Input() response: string;
+  @Input() workgroupInfos: any = {};
   workgroupInfosWithoutTeachers: any[];
 
-  @Output()
-  deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
-
-  @Output('onSubmit')
-  submit: EventEmitter<string> = new EventEmitter<string>();
-
+  @Output() deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
+  @Output() responseChangedEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output('onSubmit') submit: EventEmitter<string> = new EventEmitter<string>();
   @Output()
   undeleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
 
@@ -47,5 +35,14 @@ export class PeerChatChatBoxComponent implements OnInit {
 
   protected undeleteClicked(peerChatMessage: PeerChatMessage): void {
     this.undeleteClickedEvent.emit(peerChatMessage);
+  }
+
+  protected submitResponse(event: string): void {
+    this.submit.emit(event);
+    this.response = '';
+  }
+
+  protected responseChanged(event: string): void {
+    this.responseChangedEvent.emit(event);
   }
 }

@@ -1,12 +1,58 @@
 <mat-card appearance="outlined" class="mat-elevation-z0 primary-bg">
-  <div class="dark-theme mat-subtitle-2" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+  <div
+    class="dark-theme mat-subtitle-2"
+    fxLayout="row"
+    fxLayoutAlign="start center"
+    fxLayoutGap="4px"
+  >
     <mat-icon class="mat-30">help</mat-icon>
-    <span i18n>Question Bank</span>
+    <ng-container
+      *ngIf="
+        content.questionBank.label != null && content.questionBank.label !== '';
+        then customLabel;
+        else defaultLabel
+      "
+    ></ng-container>
+    <ng-template #customLabel
+      ><span>{{ content.questionBank.label }}</span></ng-template
+    >
+    <ng-template #defaultLabel><span i18n>Question Bank</span></ng-template>
   </div>
   <mat-card-content class="app-bg-bg">
     <ul>
       <li *ngFor="let question of questions" class="question">
-        {{ question }}
+        <ng-container
+          *ngIf="content.questionBank.version === 2; then version2; else version1"
+        ></ng-container>
+        <ng-template #version2>
+          <ng-container
+            *ngIf="
+              content.questionBank.clickToAddEnabled;
+              then version2ClickToAdd;
+              else version2Default
+            "
+          ></ng-container>
+          <ng-template #version2ClickToAdd>
+            <mat-checkbox
+              color="primary"
+              [disabled]="true"
+              [checked]="questionIdsUsed.includes(question.id)"
+            ></mat-checkbox>
+            <button
+              *ngIf="question.text != null"
+              mat-stroked-button
+              (click)="questionClicked(question)"
+            >
+              {{ question.text }}
+            </button>
+          </ng-template>
+          <ng-template #version2Default>
+            {{ question.text }}
+          </ng-template>
+        </ng-template>
+        <ng-template #version1>
+          {{ question }}
+        </ng-template>
       </li>
     </ul>
   </mat-card-content>

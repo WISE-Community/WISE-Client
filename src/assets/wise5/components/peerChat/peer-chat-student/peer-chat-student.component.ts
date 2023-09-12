@@ -20,6 +20,9 @@ import { PeerChatComponent } from '../PeerChatComponent';
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
+import { Question } from '../peer-chat-question-bank/Question';
+import { ComponentState } from '../../../../../app/domain/componentState';
+import { QuestionBankService } from '../peer-chat-question-bank/questionBank.service';
 
 @Component({
   selector: 'peer-chat-student',
@@ -37,7 +40,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
   peerChatWorkgroupIds: number[] = [];
   peerChatWorkgroupInfos: any = {};
   peerGroup: PeerGroup;
+  question: Question;
   questionBankContent: QuestionBankContent;
+  questionIdsUsed: string[] = [];
   requestTimeout: number = 10000;
   response: string;
 
@@ -52,6 +57,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     private notificationService: NotificationService,
     private peerChatService: PeerChatService,
     private peerGroupService: PeerGroupService,
+    private questionBankService: QuestionBankService,
     protected studentAssetService: StudentAssetService,
     protected studentDataService: StudentDataService,
     private studentWebSocketService: StudentWebSocketService
@@ -118,6 +124,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
             ]).subscribe(([componentStates, annotations]) => {
               this.setPeerChatMessages(componentStates);
               this.peerChatService.processIsDeletedAnnotations(annotations, this.peerChatMessages);
+              this.questionIdsUsed = this.getQuestionIdsUsed(componentStates);
             });
           }
         },
@@ -125,6 +132,12 @@ export class PeerChatStudentComponent extends ComponentStudent {
           this.isPeerChatWorkgroupsResponseReceived = true;
         }
       );
+  }
+
+  private getQuestionIdsUsed(componentStates: ComponentState[]): string[] {
+    return componentStates
+      .filter((componentState) => componentState.studentData.questionId != null)
+      .map((componentState) => componentState.studentData.questionId);
   }
 
   private addTeacherWorkgroupIds(workgroupIds: number[]): void {
@@ -176,6 +189,10 @@ export class PeerChatStudentComponent extends ComponentStudent {
       response: this.response,
       submitCounter: this.submitCounter
     };
+    if (this.question != null) {
+      componentState.studentData.questionId = this.question.id;
+      this.questionBankService.questionUsed(this.question);
+    }
     if (this.dynamicPrompt != null) {
       componentState.studentData.dynamicPrompt = this.dynamicPrompt;
     }
@@ -197,6 +214,8 @@ export class PeerChatStudentComponent extends ComponentStudent {
         action
       );
     });
+    this.response = '';
+    this.question = null;
     return promise;
   }
 
@@ -269,5 +288,16 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   onDynamicPromptChanged(feedbackRule: FeedbackRule): void {
     this.dynamicPrompt = feedbackRule;
+  }
+
+  protected questionClicked(question: Question): void {
+    this.question = question;
+    this.response = question.text;
+  }
+
+  protected responseChanged(event: any): void {
+    if (event?.length < 2) {
+      this.question = null;
+    }
   }
 }

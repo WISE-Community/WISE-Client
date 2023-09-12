@@ -6,6 +6,7 @@ import { PeerChatMessagesComponent } from './peer-chat-messages/peer-chat-messag
 import { PeerChatQuestionBankComponent } from './peer-chat-question-bank/peer-chat-question-bank.component';
 import { PeerChatMembersComponent } from './peer-chat-members/peer-chat-members.component';
 import { StudentTeacherCommonModule } from '../../../../app/student-teacher-common.module';
+import { QuestionBankService } from './peer-chat-question-bank/questionBank.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { StudentTeacherCommonModule } from '../../../../app/student-teacher-comm
     PeerChatMessageInputComponent,
     PeerChatMessagesComponent,
     PeerChatQuestionBankComponent
-  ]
+  ],
+  providers: [QuestionBankService]
 })
 export class PeerChatModule {}

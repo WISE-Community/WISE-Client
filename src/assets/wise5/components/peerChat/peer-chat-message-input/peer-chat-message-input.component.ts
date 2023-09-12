@@ -1,20 +1,24 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'peer-chat-message-input',
   templateUrl: './peer-chat-message-input.component.html'
 })
 export class PeerChatMessageInputComponent implements OnInit {
-  @Output('onSubmit')
-  submit: EventEmitter<string> = new EventEmitter<string>();
-
   isSubmitEnabled: boolean = false;
-  messageText: string;
+  @Input() messageText: string;
+  @Output() responseChangedEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output('onSubmit') submit: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit(): void {}
 
+  ngOnChanges(): void {
+    this.responseChanged();
+  }
+
   responseChanged(): void {
-    this.isSubmitEnabled = this.messageText.length > 0;
+    this.isSubmitEnabled = this.messageText?.length > 0;
+    this.responseChangedEvent.emit(this.messageText);
   }
 
   keyPressed(event: any): void {
