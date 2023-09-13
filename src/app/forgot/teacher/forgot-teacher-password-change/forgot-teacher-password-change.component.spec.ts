@@ -9,6 +9,7 @@ import { PasswordModule } from '../../../password/password.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { PasswordRequirementComponent } from '../../../password/password-requirement/password-requirement.component';
 
 export class MockTeacherService {
   changePassword(
@@ -100,7 +101,7 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
     const navigateSpy = spyOn(router, 'navigate');
     component.username = 'SpongebobSquarepants';
     component.verificationCode = '123456';
-    const newPassword = 'Abcd1234';
+    const newPassword = PasswordRequirementComponent.VALID_PASSWORD;
     component.changePasswordFormGroup.controls['newPassword'].setValue(newPassword);
     component.changePasswordFormGroup.controls['confirmNewPassword'].setValue(newPassword);
     component.submit();

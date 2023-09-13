@@ -31,10 +31,6 @@ export class NewPasswordAndConfirmHarness extends ComponentHarness {
     return this.isMissingRequirement('include a number');
   }
 
-  async isMissingSymbol(): Promise<boolean> {
-    return this.isMissingRequirement('include one of these symbols ! @ # $ % ^ & *');
-  }
-
   async isTooShort(): Promise<boolean> {
     return this.isMissingRequirement('be at least 8 characters long');
   }

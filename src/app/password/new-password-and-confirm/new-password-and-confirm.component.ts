@@ -30,10 +30,6 @@ export class NewPasswordAndConfirmComponent implements OnInit {
   protected passwordRequirements: any[] = [
     { errorFieldName: 'missingLetter', text: $localize`include a letter` },
     { errorFieldName: 'missingNumber', text: $localize`include a number` },
-    {
-      errorFieldName: 'missingSymbol',
-      text: $localize`include one of these symbols ! @ # $ % ^ & *`
-    },
     { errorFieldName: 'tooShort', text: $localize`be at least 8 characters long` }
   ];
   protected passwordStrength: number = 0;
@@ -59,14 +55,12 @@ export class NewPasswordAndConfirmComponent implements OnInit {
       const value = control.value ? control.value : '';
       const hasLetter = /[a-zA-Z]+/.test(value);
       const hasNumber = /[0-9]+/.test(value);
-      const hasSymbol = /[!@#$%^&*]+/.test(value);
       const appropriateLength = value.length >= this.PASSWORD_MIN_LENGTH;
-      const passwordValid = hasLetter && hasNumber && hasSymbol && appropriateLength;
+      const passwordValid = hasLetter && hasNumber && appropriateLength;
       return !passwordValid
         ? {
             missingLetter: !hasLetter,
             missingNumber: !hasNumber,
-            missingSymbol: !hasSymbol,
             tooShort: !appropriateLength
           }
         : null;

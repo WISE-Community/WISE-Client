@@ -12,12 +12,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PasswordModule } from '../../../password/password.module';
 import { MatIconModule } from '@angular/material/icon';
 import { PasswordErrors } from '../../../domain/password/password-errors';
+import { PasswordRequirementComponent } from '../../../password/password-requirement/password-requirement.component';
 
 const CORRECT_OLD_PASSWORD = 'correctOldPassword123';
 const INCORRECT_OLD_PASSWORD = 'incorrectOldPassword123';
-const INVALID_PASSWORD_PATTERN = 'abcd1234';
-const NEW_PASSWORD_1 = 'abcd111!';
-const NEW_PASSWORD_2 = 'abcd222!';
+const INVALID_PASSWORD = PasswordRequirementComponent.INVALID_PASSWORD_TOO_SHORT;
+const NEW_PASSWORD_1 = PasswordRequirementComponent.VALID_PASSWORD;
+const NEW_PASSWORD_2 = PasswordRequirementComponent.VALID_PASSWORD + '!';
 
 export class MockUserService {
   getUser(): BehaviorSubject<User> {
@@ -127,13 +128,13 @@ function oldPasswordIncorrect_disableSubmitButtonAndShowError() {
 function saveChanges_newPasswordPatternInvalid_ShowError() {
   describe('server returns response that says new password is not valid', () => {
     it('shows the new password error messages and disables the submit button', async () => {
-      const passwordErrors = new PasswordErrors(false, false, true, false);
+      const passwordErrors = new PasswordErrors(false, false, true);
       spyOn(TestBed.inject(UserService), 'changePassword').and.returnValue(
         generateErrorObservable(passwordErrors)
       );
-      setPasswords(CORRECT_OLD_PASSWORD, INVALID_PASSWORD_PATTERN, INVALID_PASSWORD_PATTERN);
+      setPasswords(CORRECT_OLD_PASSWORD, INVALID_PASSWORD, INVALID_PASSWORD);
       component.saveChanges();
-      expectPasswordErrors(false, false, true, false);
+      expectPasswordErrors(false, false, true);
       expectSubmitButtonDisabled();
     });
   });
@@ -142,7 +143,6 @@ function saveChanges_newPasswordPatternInvalid_ShowError() {
 function expectPasswordErrors(
   missingLetter: boolean,
   missingNumber: boolean,
-  missingSymbol: boolean,
   tooShort: boolean
 ): void {
   expect(component.newPasswordFormGroup.get('newPassword').getError('missingLetter')).toBe(
@@ -150,9 +150,6 @@ function expectPasswordErrors(
   );
   expect(component.newPasswordFormGroup.get('newPassword').getError('missingNumber')).toBe(
     missingNumber
-  );
-  expect(component.newPasswordFormGroup.get('newPassword').getError('missingSymbol')).toBe(
-    missingSymbol
   );
   expect(component.newPasswordFormGroup.get('newPassword').getError('tooShort')).toBe(tooShort);
 }
@@ -192,7 +189,7 @@ function unlinkGoogleButtonClick_showDialog() {
 function invalidPassword_showError() {
   describe('new password does not satisfy the requirements', () => {
     it('shows password errors and disables submit button', async () => {
-      setPasswords(CORRECT_OLD_PASSWORD, INVALID_PASSWORD_PATTERN, INVALID_PASSWORD_PATTERN);
+      setPasswords(CORRECT_OLD_PASSWORD, INVALID_PASSWORD, INVALID_PASSWORD);
       expect(component.newPasswordFormGroup.get('newPassword').errors).not.toBeNull();
       expectSubmitButtonDisabled();
     });

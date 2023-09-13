@@ -9,15 +9,11 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { NewPasswordAndConfirmHarness } from './new-password-and-confirm.harness';
 import { PasswordModule } from '../password.module';
 import { PasswordErrors } from '../../domain/password/password-errors';
+import { PasswordRequirementComponent } from '../password-requirement/password-requirement.component';
 
 let component: NewPasswordAndConfirmComponent;
 let fixture: ComponentFixture<NewPasswordAndConfirmComponent>;
-const INVALID_PASSWORD_MISSING_LETTER = '1234567!';
-const INVALID_PASSWORD_MISSING_NUMBER = 'abcdefg!';
-const INVALID_PASSWORD_MISSING_SYMBOL = 'abcd1234';
-const INVALID_PASSWORD_TOO_SHORT = 'abcd12!';
 let newPasswordAndConfirmHarness: NewPasswordAndConfirmHarness;
-const VALID_PASSWORD = 'abcd123!';
 
 describe('NewPasswordAndConfirmComponent', () => {
   beforeEach(async () => {
@@ -62,34 +58,40 @@ function passwordIsMissing(): void {
 
 function passwordIsValid(): void {
   describe('password is valid', () => {
-    it('does not show any error', async () => {
-      await newPasswordAndConfirmHarness.setNewPassword(VALID_PASSWORD);
-      expect(await newPasswordAndConfirmHarness.isNewPasswordRequiredErrorDisplayed()).toBeFalse();
+    describe('password contains letters and numbers', () => {
+      it('does not show any error', async () => {
+        await setPasswordAndExpectNoErrors(PasswordRequirementComponent.VALID_PASSWORD);
+      });
+    });
+    describe('password contains letters, numbers, and symbols', () => {
+      it('does not show any error', async () => {
+        await setPasswordAndExpectNoErrors(PasswordRequirementComponent.VALID_PASSWORD + '!$');
+      });
     });
   });
+}
+
+async function setPasswordAndExpectNoErrors(password: string): Promise<void> {
+  await newPasswordAndConfirmHarness.setNewPassword(password);
+  expect(await newPasswordAndConfirmHarness.isNewPasswordRequiredErrorDisplayed()).toBeFalse();
 }
 
 function passwordErrorCases(): void {
   const errorCases = [
     {
       descriptionText: 'missing a letter',
-      password: INVALID_PASSWORD_MISSING_LETTER,
-      expectedErrors: new PasswordErrors(true, false, false, false)
+      password: PasswordRequirementComponent.INVALID_PASSWORD_MISSING_LETTER,
+      expectedErrors: new PasswordErrors(true, false, false)
     },
     {
       descriptionText: 'missing a number',
-      password: INVALID_PASSWORD_MISSING_NUMBER,
-      expectedErrors: new PasswordErrors(false, true, false, false)
-    },
-    {
-      descriptionText: 'missing a symbol',
-      password: INVALID_PASSWORD_MISSING_SYMBOL,
-      expectedErrors: new PasswordErrors(false, false, true, false)
+      password: PasswordRequirementComponent.INVALID_PASSWORD_MISSING_NUMBER,
+      expectedErrors: new PasswordErrors(false, true, false)
     },
     {
       descriptionText: 'too short',
-      password: INVALID_PASSWORD_TOO_SHORT,
-      expectedErrors: new PasswordErrors(false, false, false, true)
+      password: PasswordRequirementComponent.INVALID_PASSWORD_TOO_SHORT,
+      expectedErrors: new PasswordErrors(false, false, true)
     }
   ];
   errorCases.forEach(({ descriptionText, password, expectedErrors }) => {
@@ -107,7 +109,6 @@ function passwordErrorCases(): void {
 async function checkPasswordRequirements(passwordErrors: PasswordErrors): Promise<void> {
   expect(await newPasswordAndConfirmHarness.isMissingLetter()).toBe(passwordErrors.missingLetter);
   expect(await newPasswordAndConfirmHarness.isMissingNumber()).toBe(passwordErrors.missingNumber);
-  expect(await newPasswordAndConfirmHarness.isMissingSymbol()).toBe(passwordErrors.missingSymbol);
   expect(await newPasswordAndConfirmHarness.isTooShort()).toBe(passwordErrors.tooShort);
 }
 
@@ -124,8 +125,9 @@ function confirmPasswordValidation() {
 
   describe('passwords match', () => {
     it('does not show any error', async () => {
-      await newPasswordAndConfirmHarness.setNewPassword(VALID_PASSWORD);
-      await newPasswordAndConfirmHarness.setConfirmNewPassword(VALID_PASSWORD);
+      const password = PasswordRequirementComponent.VALID_PASSWORD;
+      await newPasswordAndConfirmHarness.setNewPassword(password);
+      await newPasswordAndConfirmHarness.setConfirmNewPassword(password);
       expect(
         await newPasswordAndConfirmHarness.isConfirmNewPasswordDoesNotMatchErrorDisplayed()
       ).toBeFalse();
