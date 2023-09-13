@@ -1,18 +1,20 @@
+import { Component } from '../../../../common/Component';
 import { ConstraintService } from '../../../../services/constraintService';
-import { CRaterResponse } from '../../cRater/CRaterResponse';
+import { Response } from '../Response';
 
 export abstract class TermEvaluator {
+  protected referenceComponent: Component;
   protected constraintService: ConstraintService;
 
   constructor(protected term: string) {}
-  abstract evaluate(response: CRaterResponse | CRaterResponse[]): boolean;
+  abstract evaluate(response: Response | Response[]): boolean;
 
   static isAccumulatedIdeaCountTerm(term: string): boolean {
     return /accumulatedIdeaCount(MoreThan|Equals|LessThan)\([\d+]\)/.test(term);
   }
 
-  static isChoseChoiceTerm(term: string): boolean {
-    return /choseChoice\("\w+",\s*"\w+",\s*"\w+"\)/.test(term);
+  static isMyChoiceChosenTerm(term: string): boolean {
+    return /myChoiceChosen\("\w+"\)/.test(term);
   }
 
   static isHasKIScoreTerm(term: string): boolean {
@@ -38,7 +40,11 @@ export abstract class TermEvaluator {
     );
   }
 
-  setConstraintService(service: ConstraintService) {
+  setConstraintService(service: ConstraintService): void {
     this.constraintService = service;
+  }
+
+  setReferenceComponent(referenceComponent: Component): void {
+    this.referenceComponent = referenceComponent;
   }
 }

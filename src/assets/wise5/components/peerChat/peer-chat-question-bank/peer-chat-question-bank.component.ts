@@ -38,7 +38,7 @@ export class PeerChatQuestionBankComponent implements OnInit {
       const referenceComponent = this.getReferenceComponent(this.content.questionBank);
       if (
         this.content.questionBank.isPeerGroupingTagSpecified() &&
-        referenceComponent.content.type === 'OpenResponse'
+        ['OpenResponse', 'MultipleChoice'].includes(referenceComponent.content.type)
       ) {
         this.evaluatePeerGroup(referenceComponent);
       }
@@ -75,8 +75,8 @@ export class PeerChatQuestionBankComponent implements OnInit {
   ): QuestionBankRule[] {
     const cRaterResponses = peerGroupStudentData.map((peerMemberData: PeerGroupStudentData) => {
       return new CRaterResponse({
-        ideas: peerMemberData.annotation.data.ideas,
-        scores: peerMemberData.annotation.data.scores,
+        ideas: peerMemberData.annotation?.data.ideas,
+        scores: peerMemberData.annotation?.data.scores,
         submitCounter: peerMemberData.studentWork.studentData.submitCounter
       });
     });
@@ -88,6 +88,7 @@ export class PeerChatQuestionBankComponent implements OnInit {
       ),
       this.constraintService
     );
+    feedbackRuleEvaluator.setReferenceComponent(referenceComponent);
     return this.filterQuestions(
       feedbackRuleEvaluator.getFeedbackRules(cRaterResponses) as QuestionBankRule[],
       this.content.questionBank.maxQuestionsToShow

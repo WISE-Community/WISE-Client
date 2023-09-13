@@ -1,14 +1,17 @@
+import { Component } from '../../../common/Component';
 import { ConstraintService } from '../../../services/constraintService';
 import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
 import { CRaterResponse } from '../cRater/CRaterResponse';
 import { FeedbackRule } from './FeedbackRule';
 import { FeedbackRuleExpression } from './FeedbackRuleExpression';
+import { Response } from './Response';
 import { TermEvaluator } from './TermEvaluator/TermEvaluator';
 import { TermEvaluatorFactory } from './TermEvaluator/TermEvaluatorFactory';
 
-export class FeedbackRuleEvaluator<T extends CRaterResponse[]> {
+export class FeedbackRuleEvaluator<T extends Response[]> {
   defaultFeedback = $localize`Thanks for submitting your response.`;
   protected factory;
+  protected referenceComponent: Component;
 
   constructor(
     protected component: FeedbackRuleComponent,
@@ -44,7 +47,7 @@ export class FeedbackRuleEvaluator<T extends CRaterResponse[]> {
     return (
       this.hasMaxSubmitAndIsFinalSubmitRule(rule) &&
       this.component.hasMaxSubmitCountAndUsedAllSubmits(
-        (responses[responses.length - 1] as CRaterResponse).submitCounter
+        responses[responses.length - 1].submitCounter
       )
     );
   }
@@ -56,7 +59,7 @@ export class FeedbackRuleEvaluator<T extends CRaterResponse[]> {
   protected satisfiesSecondToLastSubmitRule(responses: T, rule: FeedbackRule): boolean {
     return (
       this.hasMaxSubmitAndIsSecondToLastSubmitRule(rule) &&
-      this.isSecondToLastSubmit((responses[responses.length - 1] as CRaterResponse).submitCounter)
+      this.isSecondToLastSubmit(responses[responses.length - 1].submitCounter)
     );
   }
 
@@ -120,6 +123,7 @@ export class FeedbackRuleEvaluator<T extends CRaterResponse[]> {
 
   protected evaluateTerm(term: string, responses: T): boolean {
     const evaluator: TermEvaluator = this.factory.getTermEvaluator(term);
+    evaluator.setReferenceComponent(this.referenceComponent);
     return TermEvaluator.requiresAllResponses(term)
       ? evaluator.evaluate(responses)
       : evaluator.evaluate(responses[responses.length - 1]);
@@ -136,5 +140,9 @@ export class FeedbackRuleEvaluator<T extends CRaterResponse[]> {
           : this.defaultFeedback
       })
     );
+  }
+
+  setReferenceComponent(referenceComponent: Component): void {
+    this.referenceComponent = referenceComponent;
   }
 }

@@ -1,6 +1,6 @@
 import { ConstraintService } from '../../../../services/constraintService';
 import { AccumulatedIdeaCountTermEvaluator } from './AccumulatedIdeaCountTermEvaluator';
-import { ChoseChoiceTermEvaluator } from './ChoseChoiceTermEvaluator';
+import { MyChoiceChosenTermEvaluator } from './MyChoiceChosenTermEvaluator';
 import { HasKIScoreTermEvaluator } from './HasKIScoreTermEvaluator';
 import { IdeaCountTermEvaluator } from './IdeaCountTermEvaluator';
 import { IdeaCountWithResponseIndexTermEvaluator } from './IdeaCountWithResponseIndexTermEvaluator';
@@ -23,8 +23,8 @@ export class TermEvaluatorFactory {
       evaluator = new IsSubmitNumberEvaluator(term);
     } else if (TermEvaluator.isAccumulatedIdeaCountTerm(term)) {
       evaluator = new AccumulatedIdeaCountTermEvaluator(term);
-    } else if (TermEvaluator.isChoseChoiceTerm(term)) {
-      evaluator = new ChoseChoiceTermEvaluator(term);
+    } else if (TermEvaluator.isMyChoiceChosenTerm(term)) {
+      evaluator = new MyChoiceChosenTermEvaluator(term);
     } else {
       evaluator = new IdeaTermEvaluator(term);
     }

@@ -1,6 +1,8 @@
+import { Component } from '../../../../common/Component';
+import { ComponentContent } from '../../../../common/ComponentContent';
 import { ConstraintService } from '../../../../services/constraintService';
 import { CRaterResponse } from '../../cRater/CRaterResponse';
-import { ChoseChoiceTermEvaluator } from './ChoseChoiceTermEvaluator';
+import { MyChoiceChosenTermEvaluator } from './MyChoiceChosenTermEvaluator';
 
 class ConstraintServiceStub {
   evaluateCriteria(criteria: any): boolean {
@@ -8,10 +10,13 @@ class ConstraintServiceStub {
   }
 }
 
-describe('ChoseChoiceTermEvaluator', () => {
+describe('MyChoiceChosenTermEvaluator', () => {
   let evaluator1, mockConstraintService;
   beforeEach(() => {
-    evaluator1 = new ChoseChoiceTermEvaluator('choseChoice("node1", "componentA", "choice1")');
+    evaluator1 = new MyChoiceChosenTermEvaluator('myChoiceChosen("choice1")');
+    evaluator1.setReferenceComponent(
+      new Component({ id: 'componentA' } as ComponentContent, 'node1')
+    );
     mockConstraintService = new ConstraintServiceStub();
     evaluator1.setConstraintService(mockConstraintService as ConstraintService);
   });

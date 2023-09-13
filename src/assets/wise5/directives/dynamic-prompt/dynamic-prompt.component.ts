@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { concatMap, map } from 'rxjs/operators';
 import { PeerGroupStudentData } from '../../../../app/domain/peerGroupStudentData';
-import { ComponentContent } from '../../common/ComponentContent';
 import { CRaterResponse } from '../../components/common/cRater/CRaterResponse';
 import { FeedbackRule } from '../../components/common/feedbackRule/FeedbackRule';
 import { FeedbackRuleEvaluator } from '../../components/common/feedbackRule/FeedbackRuleEvaluator';
@@ -17,6 +16,8 @@ import { StudentDataService } from '../../services/studentDataService';
 import { DynamicPrompt } from './DynamicPrompt';
 import { FeedbackRuleEvaluatorMultipleStudents } from '../../components/common/feedbackRule/FeedbackRuleEvaluatorMultipleStudents';
 import { ConstraintService } from '../../services/constraintService';
+import { Component as WISEComponent } from '../../common/Component';
+import { Response } from '../../components/common/feedbackRule/Response';
 
 @Component({
   selector: 'dynamic-prompt',
@@ -40,16 +41,18 @@ export class DynamicPromptComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const referenceComponentContent = this.getReferenceComponent(this.dynamicPrompt);
-    if (referenceComponentContent.type === 'OpenResponse') {
-      this.evaluateOpenResponseComponent(referenceComponentContent as OpenResponseContent);
+    const referenceComponent = this.getReferenceComponent(this.dynamicPrompt);
+    if (referenceComponent.content.type === 'OpenResponse') {
+      this.evaluateOpenResponseComponent(referenceComponent.content as OpenResponseContent);
+    } else if (referenceComponent.content.type === 'MultipleChoice') {
+      this.evaluateMultipleChoiceComponent(referenceComponent);
     }
   }
 
-  private getReferenceComponent(dynamicPrompt: DynamicPrompt): ComponentContent {
+  private getReferenceComponent(dynamicPrompt: DynamicPrompt): WISEComponent {
     const nodeId = dynamicPrompt.getReferenceNodeId();
     const componentId = dynamicPrompt.getReferenceComponentId();
-    return this.projectService.getComponent(nodeId, componentId);
+    return new WISEComponent(this.projectService.getComponent(nodeId, componentId), nodeId);
   }
 
   private evaluateOpenResponseComponent(referenceComponentContent: OpenResponseContent): void {
@@ -136,6 +139,64 @@ export class DynamicPromptComponent implements OnInit {
       this.prompt = feedbackRule.prompt;
       this.dynamicPromptChanged.emit(feedbackRule);
     }
+  }
+
+  private evaluateMultipleChoiceComponent(referenceComponent: WISEComponent): void {
+    if (this.dynamicPrompt.isPeerGroupingTagSpecified()) {
+      this.evaluatePeerGroupMultipleChoice(referenceComponent);
+    } else {
+      this.evaluatePersonalMultipleChoice(referenceComponent);
+    }
+  }
+
+  private evaluatePeerGroupMultipleChoice(referenceComponent: WISEComponent): void {
+    this.getPeerGroupData(
+      this.dynamicPrompt.getPeerGroupingTag(),
+      this.nodeId,
+      this.componentId
+    ).subscribe((peerGroupStudentData: PeerGroupStudentData[]) => {
+      const responses = peerGroupStudentData.map((peerMemberData: PeerGroupStudentData) => {
+        return new Response({
+          submitCounter: this.getSubmitCounter(peerMemberData.studentWork)
+        });
+      });
+      const feedbackRuleEvaluator = new FeedbackRuleEvaluatorMultipleStudents(
+        new FeedbackRuleComponent(
+          this.dynamicPrompt.getRules(),
+          referenceComponent.content.maxSubmitCount,
+          false
+        ),
+        this.constraintService
+      );
+      feedbackRuleEvaluator.setReferenceComponent(referenceComponent);
+      const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(responses);
+      this.prompt = feedbackRule.prompt;
+      this.dynamicPromptChanged.emit(feedbackRule); // TODO: change to two-way binding variable
+    });
+  }
+
+  private evaluatePersonalMultipleChoice(referenceComponent: WISEComponent): void {
+    const feedbackRuleEvaluator = new FeedbackRuleEvaluator(
+      new FeedbackRuleComponent(
+        this.dynamicPrompt.getRules(),
+        referenceComponent.content.maxSubmitCount,
+        false
+      ),
+      this.constraintService
+    );
+    feedbackRuleEvaluator.setReferenceComponent(referenceComponent);
+    const nodeId = this.dynamicPrompt.getReferenceNodeId();
+    const componentId = referenceComponent.content.id;
+    const latestComponentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
+      nodeId,
+      componentId
+    );
+    const response = new Response({
+      submitCounter: this.getSubmitCounter(latestComponentState)
+    });
+    const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule([response]);
+    this.prompt = feedbackRule.prompt;
+    this.dynamicPromptChanged.emit(feedbackRule);
   }
 
   private getSubmitCounter(componentState: any): number {

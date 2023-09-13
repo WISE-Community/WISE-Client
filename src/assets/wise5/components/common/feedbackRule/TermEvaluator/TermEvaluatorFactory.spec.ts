@@ -1,4 +1,4 @@
-import { ChoseChoiceTermEvaluator } from './ChoseChoiceTermEvaluator';
+import { MyChoiceChosenTermEvaluator } from './MyChoiceChosenTermEvaluator';
 import { HasKIScoreTermEvaluator } from './HasKIScoreTermEvaluator';
 import { IdeaCountTermEvaluator } from './IdeaCountTermEvaluator';
 import { IdeaTermEvaluator } from './IdeaTermEvaluator';
@@ -11,8 +11,8 @@ describe('TermEvaluatorFactory', () => {
     it('should return correct evaluator', () => {
       [
         {
-          term: 'choseChoice("node1", "componentA", "choice1")',
-          instanceType: ChoseChoiceTermEvaluator
+          term: 'myChoiceChosen("choice1")',
+          instanceType: MyChoiceChosenTermEvaluator
         },
         { term: 'hasKIScore(3)', instanceType: HasKIScoreTermEvaluator },
         { term: 'ideaCountMoreThan(1)', instanceType: IdeaCountTermEvaluator },
