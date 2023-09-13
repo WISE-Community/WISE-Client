@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
 import { OpenResponseContent } from '../../openResponse/OpenResponseContent';
-import { QuestionBank } from './QuestionBank';
 import { Component as WISEComponent } from '../../../common/Component';
 import { PeerGroupStudentData } from '../../../../../app/domain/peerGroupStudentData';
 import { CRaterResponse } from '../../common/cRater/CRaterResponse';
@@ -35,7 +34,9 @@ export class PeerChatQuestionBankComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.displayedQuestionBankRules == null) {
-      const referenceComponent = this.getReferenceComponent(this.content.questionBank);
+      const referenceComponent = this.projectService.getReferenceComponent(
+        this.content.questionBank
+      );
       if (
         this.content.questionBank.isPeerGroupingTagSpecified() &&
         ['OpenResponse', 'MultipleChoice'].includes(referenceComponent.content.type)
@@ -45,12 +46,6 @@ export class PeerChatQuestionBankComponent implements OnInit {
     } else {
       this.setQuestions(this.displayedQuestionBankRules);
     }
-  }
-
-  private getReferenceComponent(questionBank: QuestionBank): WISEComponent {
-    const nodeId = questionBank.getReferenceNodeId();
-    const componentId = questionBank.getReferenceComponentId();
-    return new WISEComponent(this.projectService.getComponent(nodeId, componentId), nodeId);
   }
 
   private evaluatePeerGroup(referenceComponent: WISEComponent): void {

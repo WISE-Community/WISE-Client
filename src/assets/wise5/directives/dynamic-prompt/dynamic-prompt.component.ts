@@ -7,7 +7,6 @@ import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 import { DynamicPrompt } from './DynamicPrompt';
 import { ConstraintService } from '../../services/constraintService';
-import { Component as WISEComponent } from '../../common/Component';
 import { DynamicPromptOpenResponseEvaluator } from './DynamicPromptOpenResponseEvaluator';
 import { DynamicPromptMultipleChoiceEvaluator } from './DynamicPromptMultipleChoiceEvaluator';
 
@@ -44,17 +43,11 @@ export class DynamicPromptComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const referenceComponent = this.getReferenceComponent(this.dynamicPrompt);
+    const referenceComponent = this.projectService.getReferenceComponent(this.dynamicPrompt);
     if (referenceComponent.content.type === 'OpenResponse') {
       new DynamicPromptOpenResponseEvaluator(this).evaluate(referenceComponent);
     } else if (referenceComponent.content.type === 'MultipleChoice') {
       new DynamicPromptMultipleChoiceEvaluator(this).evaluate(referenceComponent);
     }
-  }
-
-  private getReferenceComponent(dynamicPrompt: DynamicPrompt): WISEComponent {
-    const nodeId = dynamicPrompt.getReferenceNodeId();
-    const componentId = dynamicPrompt.getReferenceComponentId();
-    return new WISEComponent(this.projectService.getComponent(nodeId, componentId), nodeId);
   }
 }
