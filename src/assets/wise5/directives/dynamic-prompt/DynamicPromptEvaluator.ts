@@ -23,23 +23,17 @@ export abstract class DynamicPromptEvaluator {
   protected getFeedbackRuleEvaluator(
     referenceComponent: Component
   ): FeedbackRuleEvaluator<Response[]> {
+    const feedbackRuleComponent = new FeedbackRuleComponent(
+      this.component.dynamicPrompt.getRules(),
+      referenceComponent.content.maxSubmitCount,
+      false
+    );
     const evaluator = this.component.dynamicPrompt.isPeerGroupingTagSpecified()
       ? new FeedbackRuleEvaluatorMultipleStudents(
-          new FeedbackRuleComponent(
-            this.component.dynamicPrompt.getRules(),
-            referenceComponent.content.maxSubmitCount,
-            false
-          ),
+          feedbackRuleComponent,
           this.component.constraintService
         )
-      : new FeedbackRuleEvaluator(
-          new FeedbackRuleComponent(
-            this.component.dynamicPrompt.getRules(),
-            referenceComponent.content.maxSubmitCount,
-            false
-          ),
-          this.component.constraintService
-        );
+      : new FeedbackRuleEvaluator(feedbackRuleComponent, this.component.constraintService);
     evaluator.setReferenceComponent(referenceComponent);
     return evaluator;
   }
