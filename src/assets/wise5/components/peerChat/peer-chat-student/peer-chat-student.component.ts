@@ -21,8 +21,8 @@ import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
 import { Question } from '../peer-chat-question-bank/Question';
-import { ComponentState } from '../../../../../app/domain/componentState';
 import { QuestionBankService } from '../peer-chat-question-bank/questionBank.service';
+import { getQuestionIdsUsed } from '../peer-chat-question-bank/question-bank-helper';
 
 @Component({
   selector: 'peer-chat-student',
@@ -124,7 +124,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
             ]).subscribe(([componentStates, annotations]) => {
               this.setPeerChatMessages(componentStates);
               this.peerChatService.processIsDeletedAnnotations(annotations, this.peerChatMessages);
-              this.questionIdsUsed = this.getQuestionIdsUsed(componentStates);
+              this.questionIdsUsed = getQuestionIdsUsed(componentStates, this.myWorkgroupId);
             });
           }
         },
@@ -132,12 +132,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
           this.isPeerChatWorkgroupsResponseReceived = true;
         }
       );
-  }
-
-  private getQuestionIdsUsed(componentStates: ComponentState[]): string[] {
-    return componentStates
-      .filter((componentState) => componentState.studentData.questionId != null)
-      .map((componentState) => componentState.studentData.questionId);
   }
 
   private addTeacherWorkgroupIds(workgroupIds: number[]): void {

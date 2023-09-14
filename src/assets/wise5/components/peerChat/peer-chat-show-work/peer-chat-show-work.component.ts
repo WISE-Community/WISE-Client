@@ -12,6 +12,7 @@ import { NodeService } from '../../../services/nodeService';
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { QuestionBankRule } from '../peer-chat-question-bank/QuestionBankRule';
 import { forkJoin, Observable } from 'rxjs';
+import { getQuestionIdsUsed } from '../peer-chat-question-bank/question-bank-helper';
 
 @Component({
   selector: 'peer-chat-show-work',
@@ -102,7 +103,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
     this.peerChatService.setPeerChatMessages(this.peerChatMessages, componentStates);
     this.dynamicPrompt = this.getDynamicPrompt(componentStates, this.workgroupId);
     this.questionBankRules = this.getQuestionBankRule(componentStates, this.workgroupId);
-    this.questionIdsUsed = this.getQuestionIdsUsed(componentStates, this.workgroupId);
+    this.questionIdsUsed = getQuestionIdsUsed(componentStates, this.workgroupId);
   }
 
   private getDynamicPrompt(componentStates: any[], workgroupId: number): FeedbackRule {
@@ -132,13 +133,6 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
       }
     }
     return null;
-  }
-
-  private getQuestionIdsUsed(componentStates: any[], workgroupId: number): string[] {
-    return componentStates
-      .filter((componentState) => componentState.workgroupId === workgroupId)
-      .filter((componentState) => componentState.studentData.questionId != null)
-      .map((componentState) => componentState.studentData.questionId);
   }
 
   private addWorkgroupIdsFromPeerChatMessages(
