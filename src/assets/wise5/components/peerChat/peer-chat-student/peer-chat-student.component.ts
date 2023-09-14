@@ -44,7 +44,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   questionBankContent: QuestionBankContent;
   questionIdsUsed: string[] = [];
   requestTimeout: number = 10000;
-  response: string;
+  response: string = '';
 
   constructor(
     protected annotationService: AnnotationService,
@@ -295,8 +295,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.response = question.text;
   }
 
-  protected responseChanged(event: any): void {
-    if (event?.length < 2) {
+  protected responseChanged(response: string): void {
+    this.response = response;
+    if (response.length < 2) {
       this.question = null;
     }
   }
