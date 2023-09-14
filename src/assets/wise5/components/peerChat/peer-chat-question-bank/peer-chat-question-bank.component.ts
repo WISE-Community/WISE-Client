@@ -27,8 +27,8 @@ export class PeerChatQuestionBankComponent implements OnInit {
   @Input() displayedQuestionBankRules: QuestionBankRule[];
   @Output() displayedQuestionBankRulesChange = new EventEmitter<QuestionBankRule[]>();
   @Output() questionClickedEvent = new EventEmitter<string>();
-  questions: (string | Question)[];
   @Input() questionIdsUsed: string[] = [];
+  questions: (string | Question)[];
 
   constructor(
     private peerGroupService: PeerGroupService,

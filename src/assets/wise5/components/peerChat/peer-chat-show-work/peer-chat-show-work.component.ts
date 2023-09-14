@@ -25,6 +25,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   peerChatWorkgroupInfos: any = {};
   peerGroup: PeerGroup;
   questionBankRules: QuestionBankRule[];
+  questionIdsUsed: string[] = [];
   requestTimeout: number = 10000;
 
   @Input() workgroupId: number;
@@ -99,28 +100,45 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   private setPeerChatMessages(componentStates: any[]): void {
     this.peerChatMessages = [];
     this.peerChatService.setPeerChatMessages(this.peerChatMessages, componentStates);
-    this.dynamicPrompt = this.getDynamicPrompt(componentStates);
-    this.questionBankRules = this.getQuestionBankRule(componentStates);
+    this.dynamicPrompt = this.getDynamicPrompt(componentStates, this.workgroupId);
+    this.questionBankRules = this.getQuestionBankRule(componentStates, this.workgroupId);
+    this.questionIdsUsed = this.getQuestionIdsUsed(componentStates, this.workgroupId);
   }
 
-  private getDynamicPrompt(componentStates: any[]): FeedbackRule {
+  private getDynamicPrompt(componentStates: any[], workgroupId: number): FeedbackRule {
+    return this.getLatestStudentDataFieldForWorkgroup(
+      componentStates,
+      workgroupId,
+      'dynamicPrompt'
+    );
+  }
+
+  private getQuestionBankRule(componentStates: any[], workgroupId: number): QuestionBankRule[] {
+    return this.getLatestStudentDataFieldForWorkgroup(componentStates, workgroupId, 'questionBank');
+  }
+
+  private getLatestStudentDataFieldForWorkgroup(
+    componentStates: any[],
+    workgroupId: number,
+    fieldName: string
+  ): any {
     for (let c = componentStates.length - 1; c >= 0; c--) {
-      const dynamicPrompt = componentStates[c].studentData.dynamicPrompt;
-      if (dynamicPrompt != null) {
-        return dynamicPrompt;
+      const componentState = componentStates[c];
+      if (
+        componentState.workgroupId === workgroupId &&
+        componentState.studentData[fieldName] != null
+      ) {
+        return componentState.studentData[fieldName];
       }
     }
     return null;
   }
 
-  private getQuestionBankRule(componentStates: any[]): QuestionBankRule[] {
-    for (let c = componentStates.length - 1; c >= 0; c--) {
-      const questionBank = componentStates[c].studentData.questionBank;
-      if (questionBank != null) {
-        return questionBank;
-      }
-    }
-    return null;
+  private getQuestionIdsUsed(componentStates: any[], workgroupId: number): string[] {
+    return componentStates
+      .filter((componentState) => componentState.workgroupId === workgroupId)
+      .filter((componentState) => componentState.studentData.questionId != null)
+      .map((componentState) => componentState.studentData.questionId);
   }
 
   private addWorkgroupIdsFromPeerChatMessages(
