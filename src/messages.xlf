@@ -1366,8 +1366,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="181966d8a82791ada532d8af7b95068102acd3f7" datatype="html">
-        <source> Enable Student Click To Add </source>
+      <trans-unit id="26588ea759dfa38ebc47e7546f2e2ffd4946d28c" datatype="html">
+        <source> Student can click questions to use in Peer Chat </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank/edit-question-bank.component.html</context>
           <context context-type="linenumber">31,33</context>
@@ -19552,11 +19552,11 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> This Peer Chat activity is not yet available. Please check back later or wait for a notification to return. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-grading/peer-chat-grading.component.html</context>
-          <context context-type="linenumber">38,41</context>
+          <context context-type="linenumber">40,43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-show-work/peer-chat-show-work.component.html</context>
-          <context context-type="linenumber">25,28</context>
+          <context context-type="linenumber">27,30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.html</context>
@@ -19574,7 +19574,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Send </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-message-input/peer-chat-message-input.component.html</context>
-          <context context-type="linenumber">20,22</context>
+          <context context-type="linenumber">21,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="81a5df0547de12ef2c96486e6618669b3bdd704f" datatype="html">
@@ -19595,14 +19595,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Add to chat</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-question-bank/peer-chat-question-bank.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4a01d2b686a9af6d84795b6925eb442375af818d" datatype="html">
         <source>Used in chat</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-question-bank/peer-chat-question-bank.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="225777916942997365" datatype="html">
@@ -19610,6 +19610,13 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.ts</context>
           <context context-type="linenumber">247</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3115733598954818213" datatype="html">
+        <source>Are you sure you want to put this question into your input box? The question will overwrite the current text in your input box.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.ts</context>
+          <context context-type="linenumber">297</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6310961320545154131" datatype="html">

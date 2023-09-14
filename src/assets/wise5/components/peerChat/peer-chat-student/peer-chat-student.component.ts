@@ -291,8 +291,15 @@ export class PeerChatStudentComponent extends ComponentStudent {
   }
 
   protected useQuestion(question: Question): void {
-    this.question = question;
-    this.response = question.text;
+    if (
+      this.response === '' ||
+      confirm(
+        $localize`Are you sure you want to put this question into your input box? The question will overwrite the current text in your input box.`
+      )
+    ) {
+      this.question = question;
+      this.response = question.text;
+    }
   }
 
   protected responseChanged(response: string): void {
