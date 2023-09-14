@@ -31,9 +31,9 @@
         [messages]="peerChatMessages"
         [myWorkgroupId]="myWorkgroupId"
         [response]="response"
-        (responseChangedEvent)="responseChanged($event)"
         [workgroupInfos]="peerChatWorkgroupInfos"
         (onSubmit)="submitStudentResponse($event)"
+        (responseChangedEvent)="responseChanged($event)"
       ></peer-chat-chat-box>
     </div>
   </div>

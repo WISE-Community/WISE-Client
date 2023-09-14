@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PeerChatMessageInputComponent implements OnInit {
   isSubmitEnabled: boolean = false;
-  @Input() messageText: string;
+  @Input() messageText: string = '';
   @Output() responseChangedEvent: EventEmitter<string> = new EventEmitter<string>();
   @Output('onSubmit') submit: EventEmitter<string> = new EventEmitter<string>();
 
@@ -34,5 +34,15 @@ export class PeerChatMessageInputComponent implements OnInit {
     this.submit.emit(this.messageText);
     this.messageText = '';
     this.isSubmitEnabled = false;
+  }
+
+  onFocus(event: any): void {
+    this.placeCursorAtEndOfMessageText(event);
+  }
+
+  placeCursorAtEndOfMessageText(event: any): void {
+    const messageLength = this.messageText.length;
+    event.srcElement.selectionStart = messageLength;
+    event.srcElement.selectionEnd = messageLength;
   }
 }

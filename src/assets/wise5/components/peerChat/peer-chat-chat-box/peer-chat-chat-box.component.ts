@@ -11,7 +11,7 @@ export class PeerChatChatBoxComponent implements OnInit {
   @Input() isGrading: boolean = false;
   @Input() messages: PeerChatMessage[] = [];
   @Input() myWorkgroupId: number;
-  @Input() response: string;
+  @Input() response: string = '';
   @Input() workgroupInfos: any = {};
   workgroupInfosWithoutTeachers: any[];
 
@@ -42,7 +42,7 @@ export class PeerChatChatBoxComponent implements OnInit {
     this.response = '';
   }
 
-  protected responseChanged(event: string): void {
-    this.responseChangedEvent.emit(event);
+  protected responseChanged(response: string): void {
+    this.responseChangedEvent.emit(response);
   }
 }
