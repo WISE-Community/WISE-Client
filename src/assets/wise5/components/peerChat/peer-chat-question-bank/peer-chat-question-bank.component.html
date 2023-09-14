@@ -44,10 +44,12 @@
               >
                 {{ question.text }}
               </button>
-              <ng-container *ngIf="questionIdsUsed.includes(question.id)">
-                <mat-icon class="secondary-text"> check_circle </mat-icon>
-                <span class="cdk-visually-hidden" i18n>Used in chat</span>
-              </ng-container>
+              <div class="question-used-indicator">
+                <ng-container *ngIf="questionIdsUsed.includes(question.id)">
+                  <mat-icon class="secondary-text"> check_circle </mat-icon>
+                  <span class="cdk-visually-hidden" i18n>Used in chat</span>
+                </ng-container>
+              </div>
             </div>
           </ng-template>
           <ng-template #version2Default>

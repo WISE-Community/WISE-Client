@@ -19602,7 +19602,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Used in chat</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-question-bank/peer-chat-question-bank.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="225777916942997365" datatype="html">
