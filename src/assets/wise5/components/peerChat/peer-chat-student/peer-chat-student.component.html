@@ -22,7 +22,7 @@
         *ngIf="questionBankContent.questionBank?.enabled"
         [content]="questionBankContent"
         [(displayedQuestionBankRules)]="displayedQuestionBankRules"
-        (questionClickedEvent)="questionClicked($event)"
+        (useQuestionEvent)="useQuestion($event)"
         [questionIdsUsed]="questionIdsUsed"
       ></peer-chat-question-bank>
     </div>

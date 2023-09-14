@@ -290,7 +290,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.dynamicPrompt = feedbackRule;
   }
 
-  protected questionClicked(question: Question): void {
+  protected useQuestion(question: Question): void {
     this.question = question;
     this.response = question.text;
   }

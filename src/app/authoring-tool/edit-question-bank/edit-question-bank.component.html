@@ -24,12 +24,12 @@
     </div>
     <div *ngIf="componentContent.questionBank.version === 2">
       <mat-checkbox
-        [(ngModel)]="componentContent.questionBank.clickToAddEnabled"
+        [(ngModel)]="componentContent.questionBank.clickToUseEnabled"
         (ngModelChange)="saveChanges()"
         color="primary"
         i18n
       >
-        Enable Student Click To Add
+        Student can click questions to use in Peer Chat
       </mat-checkbox>
     </div>
     <div class="max-questions">

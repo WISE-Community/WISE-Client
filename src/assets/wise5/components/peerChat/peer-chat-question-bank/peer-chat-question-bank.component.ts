@@ -26,9 +26,9 @@ export class PeerChatQuestionBankComponent implements OnInit {
   @Input() content: QuestionBankContent;
   @Input() displayedQuestionBankRules: QuestionBankRule[];
   @Output() displayedQuestionBankRulesChange = new EventEmitter<QuestionBankRule[]>();
-  @Output() questionClickedEvent = new EventEmitter<string>();
   @Input() questionIdsUsed: string[] = [];
   questions: (string | Question)[];
+  @Output() useQuestionEvent = new EventEmitter<string>();
 
   constructor(
     private peerGroupService: PeerGroupService,
@@ -147,7 +147,7 @@ export class PeerChatQuestionBankComponent implements OnInit {
     this.questions = rules.flatMap((rule) => rule.questions);
   }
 
-  protected questionClicked(question: string): void {
-    this.questionClickedEvent.emit(question);
+  protected useQuestion(question: string): void {
+    this.useQuestionEvent.emit(question);
   }
 }

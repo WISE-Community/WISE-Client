@@ -27,7 +27,7 @@
         <ng-template #version2>
           <ng-container
             *ngIf="
-              content.questionBank.clickToAddEnabled;
+              content.questionBank.clickToUseEnabled;
               then version2ClickToAdd;
               else version2Default
             "
@@ -35,10 +35,9 @@
           <ng-template #version2ClickToAdd>
             <div fxLayoutAlign="start center" fxLayoutGap="8px">
               <button
-                *ngIf="question.text != null"
                 mat-stroked-button
                 class="question-button"
-                (click)="questionClicked(question)"
+                (click)="useQuestion(question)"
                 matTooltip="Add to chat"
                 matTooltipPosition="after"
                 i18n-matTooltip
