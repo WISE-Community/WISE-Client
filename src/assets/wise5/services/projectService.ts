@@ -15,6 +15,9 @@ import { MultipleChoiceContent } from '../components/multipleChoice/MultipleChoi
 import { TransitionLogic } from '../common/TransitionLogic';
 import { Transition } from '../common/Transition';
 import { ReferenceComponent } from '../../../app/domain/referenceComponent';
+import { QuestionBank } from '../components/peerChat/peer-chat-question-bank/QuestionBank';
+import { DynamicPrompt } from '../directives/dynamic-prompt/DynamicPrompt';
+import { Component } from '../common/Component';
 
 @Injectable()
 export class ProjectService {
@@ -1971,12 +1974,18 @@ export class ProjectService {
    * }
    * @returns the referenceComponent object from a component
    */
-  getReferenceComponent(
+  getReferenceComponentForField(
     nodeId: string,
     componentId: string,
-    fieldName: string
+    fieldName: 'dynamicPrompt' | 'questionBank'
   ): ReferenceComponent {
     const component = this.getComponent(nodeId, componentId);
     return component[fieldName]?.referenceComponent;
+  }
+
+  getReferenceComponent(content: QuestionBank | DynamicPrompt): Component {
+    const nodeId = content.getReferenceNodeId();
+    const componentId = content.getReferenceComponentId();
+    return new Component(this.getComponent(nodeId, componentId), nodeId);
   }
 }

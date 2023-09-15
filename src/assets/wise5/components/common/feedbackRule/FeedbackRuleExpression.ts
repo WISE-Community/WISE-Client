@@ -28,7 +28,7 @@ export class FeedbackRuleExpression {
     return this.text
       .replace(/ /g, '')
       .split(
-        /(hasKIScore\(\d\)|accumulatedIdeaCountEquals\(\d\)|accumulatedIdeaCountLessThan\(\d\)|accumulatedIdeaCountMoreThan\(\d\)|ideaCountEquals\(\S+\)|ideaCountLessThan\(\S+\)|ideaCountMoreThan\(\S+\)|isSubmitNumber\(\d+\)|&&|\|\||!|\(|\))/g
+        /(hasKIScore\(\d\)|accumulatedIdeaCountEquals\(\d\)|accumulatedIdeaCountLessThan\(\d\)|accumulatedIdeaCountMoreThan\(\d\)|ideaCountEquals\(\S+\)|ideaCountLessThan\(\S+\)|ideaCountMoreThan\(\S+\)|myChoiceChosen\(\S+\)|isSubmitNumber\(\d+\)|&&|\|\||!|\(|\))/g
       )
       .filter((el) => el !== '');
   }
