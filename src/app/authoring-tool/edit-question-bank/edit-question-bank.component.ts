@@ -9,7 +9,7 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
   styleUrls: ['./edit-question-bank.component.scss']
 })
 export class EditQuestionBankComponent implements OnInit {
-  allowedReferenceComponentTypes: string[] = ['OpenResponse'];
+  allowedReferenceComponentTypes: string[] = ['MultipleChoice', 'OpenResponse'];
   @Input() componentContent: any;
 
   constructor(private projectService: TeacherProjectService) {}

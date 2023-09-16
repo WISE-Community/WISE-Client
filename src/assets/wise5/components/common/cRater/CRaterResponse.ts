@@ -1,18 +1,15 @@
+import { Response } from '../feedbackRule/Response';
 import { CRaterIdea } from './CRaterIdea';
 import { CRaterScore } from './CRaterScore';
 
-export class CRaterResponse {
+export class CRaterResponse extends Response {
   ideas: CRaterIdea[] = [];
   score: number;
   scores: CRaterScore[];
-  submitCounter: number;
 
   constructor(jsonObject: any = {}) {
-    for (const key of Object.keys(jsonObject)) {
-      if (jsonObject[key] != null) {
-        this[key] = jsonObject[key];
-      }
-    }
+    super(jsonObject);
+    this.populateFields(jsonObject);
   }
 
   getDetectedIdeaCount(): number {

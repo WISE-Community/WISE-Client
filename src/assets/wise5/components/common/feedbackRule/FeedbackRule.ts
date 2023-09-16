@@ -15,7 +15,7 @@ export class FeedbackRule {
   }
 
   static isSpecialRule(feedbackRule: FeedbackRule): boolean {
-    return ['isFinalSubmit', 'isSecondToLastSubmit', 'isNonScorable'].includes(
+    return ['isDefault', 'isFinalSubmit', 'isSecondToLastSubmit', 'isNonScorable'].includes(
       feedbackRule.expression
     );
   }

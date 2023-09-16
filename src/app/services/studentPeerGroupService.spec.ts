@@ -137,7 +137,7 @@ function retrieveQuestionBankStudentData() {
   describe('retrieveQuestionBankStudentData()', () => {
     it('should retrieve question bank student data in preview', () => {
       setIsPreview(true);
-      spyOn(projectService, 'getReferenceComponent').and.returnValue({
+      spyOn(projectService, 'getReferenceComponentForField').and.returnValue({
         nodeId: nodeId1,
         componentId: componentId1
       });
