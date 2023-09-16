@@ -37,17 +37,10 @@ export class ChooseImportStepLocationComponent {
         this.insertNodesService.insertNodes(nodesWithNewNodeIds, nodeIdToInsertInsideOrAfter);
         this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
           this.projectService.refreshProject();
-          if (nodesWithNewNodeIds.length === 1) {
-            const newNode = nodesWithNewNodeIds[0];
-            this.router.navigate(['../../node', newNode.id], {
-              relativeTo: this.route,
-              state: {
-                newComponents: newNode.components
-              }
-            });
-          } else {
-            this.router.navigate(['../..'], { relativeTo: this.route });
-          }
+          this.router.navigate(['../..'], {
+            relativeTo: this.route,
+            state: { newNodes: nodesWithNewNodeIds }
+          });
         });
       });
   }
