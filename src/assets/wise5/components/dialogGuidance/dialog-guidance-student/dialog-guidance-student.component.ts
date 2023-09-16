@@ -89,6 +89,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
         this.getMaxSubmitCount(),
         this.component.isMultipleFeedbackTextsForSameRuleAllowed()
       ),
+      this.configService,
       this.constraintService
     );
     if (this.component.isComputerAvatarEnabled()) {

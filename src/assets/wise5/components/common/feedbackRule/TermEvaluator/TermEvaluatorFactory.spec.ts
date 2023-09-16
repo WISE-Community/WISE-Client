@@ -6,7 +6,7 @@ import { IsSubmitNumberEvaluator } from './IsSubmitNumberEvaluator';
 import { TermEvaluatorFactory } from './TermEvaluatorFactory';
 
 describe('TermEvaluatorFactory', () => {
-  const factory = new TermEvaluatorFactory(null);
+  const factory = new TermEvaluatorFactory(null, null);
   describe('getTermEvaluator()', () => {
     it('should return correct evaluator', () => {
       [

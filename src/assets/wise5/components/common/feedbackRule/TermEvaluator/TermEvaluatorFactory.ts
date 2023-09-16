@@ -7,9 +7,11 @@ import { IdeaCountWithResponseIndexTermEvaluator } from './IdeaCountWithResponse
 import { IdeaTermEvaluator } from './IdeaTermEvaluator';
 import { IsSubmitNumberEvaluator } from './IsSubmitNumberEvaluator';
 import { TermEvaluator } from './TermEvaluator';
+import { ConfigService } from '../../../../services/configService';
+import { IsLowestWorkgroupIdInPeerGroupTermEvaluator } from './IsLowestWorkgroupIdInPeerGroupTermEvaluator';
 
 export class TermEvaluatorFactory {
-  constructor(private constraintService: ConstraintService) {}
+  constructor(private configService: ConfigService, private constraintService: ConstraintService) {}
 
   getTermEvaluator(term: string): TermEvaluator {
     let evaluator: TermEvaluator;
@@ -25,9 +27,12 @@ export class TermEvaluatorFactory {
       evaluator = new AccumulatedIdeaCountTermEvaluator(term);
     } else if (TermEvaluator.isMyChoiceChosenTerm(term)) {
       evaluator = new MyChoiceChosenTermEvaluator(term);
+    } else if (TermEvaluator.isLowestWorkgroupIdInPeerGroupTerm(term)) {
+      evaluator = new IsLowestWorkgroupIdInPeerGroupTermEvaluator(term);
     } else {
       evaluator = new IdeaTermEvaluator(term);
     }
+    evaluator.setConfigService(this.configService);
     evaluator.setConstraintService(this.constraintService);
     return evaluator;
   }

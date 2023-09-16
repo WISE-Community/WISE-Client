@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
 import { OpenResponseContent } from '../../openResponse/OpenResponseContent';
@@ -14,6 +14,7 @@ import { PeerGroup } from '../PeerGroup';
 import { QuestionBankContent } from './QuestionBankContent';
 import { copy } from '../../../common/object/object';
 import { ConstraintService } from '../../../services/constraintService';
+import { ConfigService } from '../../../services/configService';
 
 @Component({
   selector: 'peer-chat-question-bank',
@@ -27,6 +28,7 @@ export class PeerChatQuestionBankComponent implements OnInit {
   questions: string[];
 
   constructor(
+    private configService: ConfigService,
     private constraintService: ConstraintService,
     private peerGroupService: PeerGroupService,
     private projectService: ProjectService
@@ -49,13 +51,20 @@ export class PeerChatQuestionBankComponent implements OnInit {
   }
 
   private evaluatePeerGroup(referenceComponent: WISEComponent): void {
-    this.getPeerGroupData(
+    const peerGroupRequest = this.peerGroupService.retrievePeerGroup(
+      this.content.questionBank.getPeerGroupingTag()
+    );
+    const peerGroupDataRequest = this.getPeerGroupData(
       this.content.questionBank.getPeerGroupingTag(),
       this.content.nodeId,
       this.content.componentId
-    ).subscribe((peerGroupStudentData: PeerGroupStudentData[]) => {
+    );
+    forkJoin([peerGroupRequest, peerGroupDataRequest]).subscribe((response) => {
+      const peerGroup = response[0];
+      const peerGroupStudentData = response[1];
       const questionBankRules = this.chooseQuestionBankRulesToDisplay(
         referenceComponent,
+        peerGroup,
         peerGroupStudentData
       );
       this.displayedQuestionBankRules = questionBankRules;
@@ -66,6 +75,7 @@ export class PeerChatQuestionBankComponent implements OnInit {
 
   private chooseQuestionBankRulesToDisplay(
     referenceComponent: WISEComponent,
+    peerGroup: PeerGroup,
     peerGroupStudentData: PeerGroupStudentData[]
   ): QuestionBankRule[] {
     const responses = peerGroupStudentData.map((peerMemberData: PeerGroupStudentData) => {
@@ -81,9 +91,11 @@ export class PeerChatQuestionBankComponent implements OnInit {
         (referenceComponent.content as OpenResponseContent).maxSubmitCount,
         false
       ),
+      this.configService,
       this.constraintService
     );
     feedbackRuleEvaluator.setReferenceComponent(referenceComponent);
+    feedbackRuleEvaluator.setPeerGroup(peerGroup);
     return this.filterQuestions(
       feedbackRuleEvaluator.getFeedbackRules(responses) as QuestionBankRule[],
       this.content.questionBank.maxQuestionsToShow

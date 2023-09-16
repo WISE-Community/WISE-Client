@@ -9,6 +9,7 @@ import { DynamicPrompt } from './DynamicPrompt';
 import { ConstraintService } from '../../services/constraintService';
 import { DynamicPromptOpenResponseEvaluator } from './DynamicPromptOpenResponseEvaluator';
 import { DynamicPromptMultipleChoiceEvaluator } from './DynamicPromptMultipleChoiceEvaluator';
+import { PeerGroup } from '../../components/peerChat/PeerGroup';
 
 @Component({
   selector: 'dynamic-prompt',
@@ -24,8 +25,9 @@ export class DynamicPromptComponent implements OnInit {
   @Input() dynamicPrompt: DynamicPrompt;
   @Output() dynamicPromptChanged: EventEmitter<FeedbackRule> = new EventEmitter<FeedbackRule>();
   @Input() nodeId: string;
-  prompt: string;
+  peerGroup: PeerGroup;
   peerGroupService: PeerGroupService;
+  prompt: string;
 
   constructor(
     annotationService: AnnotationService,

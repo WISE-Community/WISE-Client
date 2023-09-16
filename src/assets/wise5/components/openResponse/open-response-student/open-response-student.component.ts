@@ -402,6 +402,7 @@ export class OpenResponseStudent extends ComponentStudent {
             this.getMaxSubmitCount(),
             this.isMultipleFeedbackTextsForSameRuleAllowed()
           ),
+          this.ConfigService,
           this.constraintService
         );
         const rule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule([response]);

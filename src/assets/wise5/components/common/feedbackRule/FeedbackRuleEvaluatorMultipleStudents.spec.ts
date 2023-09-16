@@ -16,6 +16,7 @@ describe('FeedbackRuleEvaluatorMultipleStudents', () => {
   beforeEach(() => {
     evaluator = new FeedbackRuleEvaluatorMultipleStudents(
       new FeedbackRuleComponent(DEFAULT_FEEDBACK_RULES, 5, true),
+      null,
       null
     );
   });
@@ -40,6 +41,7 @@ function matchRules_HasKIScore() {
     beforeEach(() => {
       evaluator = new FeedbackRuleEvaluatorMultipleStudents(
         new FeedbackRuleComponent(HAS_KI_SCORE_FEEDBACK_RULES, 5, true),
+        null,
         null
       );
     });
@@ -73,6 +75,7 @@ function matchNoRule_NoDefaultFeedbackAuthored_ReturnApplicationDefault() {
       authored`, () => {
     evaluator = new FeedbackRuleEvaluatorMultipleStudents(
       new FeedbackRuleComponent([], 5, true),
+      null,
       null
     );
     expectRules([createCRaterResponse(['idea10', 'idea11'], [KI_SCORE_1], 1)], ['default']);
