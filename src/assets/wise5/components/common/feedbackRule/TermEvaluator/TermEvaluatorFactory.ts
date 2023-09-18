@@ -9,13 +9,16 @@ import { IsSubmitNumberEvaluator } from './IsSubmitNumberEvaluator';
 import { TermEvaluator } from './TermEvaluator';
 import { ConfigService } from '../../../../services/configService';
 import { IsLowestWorkgroupIdInPeerGroupTermEvaluator } from './IsLowestWorkgroupIdInPeerGroupTermEvaluator';
+import { BooleanTermEvaluator } from './BooleanTermEvaluator';
 
 export class TermEvaluatorFactory {
   constructor(private configService: ConfigService, private constraintService: ConstraintService) {}
 
   getTermEvaluator(term: string): TermEvaluator {
     let evaluator: TermEvaluator;
-    if (TermEvaluator.isHasKIScoreTerm(term)) {
+    if (TermEvaluator.isBooleanTerm(term)) {
+      evaluator = new BooleanTermEvaluator(term);
+    } else if (TermEvaluator.isHasKIScoreTerm(term)) {
       evaluator = new HasKIScoreTermEvaluator(term);
     } else if (TermEvaluator.isIdeaCountTerm(term)) {
       evaluator = new IdeaCountTermEvaluator(term);

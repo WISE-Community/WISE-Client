@@ -17,6 +17,10 @@ export abstract class TermEvaluator {
     return /accumulatedIdeaCount(MoreThan|Equals|LessThan)\([\d+]\)/.test(term);
   }
 
+  static isBooleanTerm(term: string): boolean {
+    return ['true', 'false'].includes(term);
+  }
+
   static isLowestWorkgroupIdInPeerGroupTerm(term: string): boolean {
     return term === 'isLowestWorkgroupIdInPeerGroup';
   }
