@@ -10,10 +10,10 @@ import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs'
   styleUrls: ['./edit-question-bank.component.scss']
 })
 export class EditQuestionBankComponent implements OnInit {
-  allowedReferenceComponentTypes: string[] = ['OpenResponse'];
+  protected allowedReferenceComponentTypes: string[] = ['OpenResponse'];
   @Input() componentContent: any;
-  inputChanged: Subject<string> = new Subject<string>();
-  subscriptions: Subscription = new Subscription();
+  protected inputChanged: Subject<string> = new Subject<string>();
+  private subscriptions: Subscription = new Subscription();
 
   constructor(private projectService: TeacherProjectService) {}
 

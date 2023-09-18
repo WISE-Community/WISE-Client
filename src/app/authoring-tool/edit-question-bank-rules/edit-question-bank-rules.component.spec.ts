@@ -50,7 +50,7 @@ function addNewFeedbackToRule() {
 
 function addNewFeedbackToRuleVersion1() {
   describe('using question bank content version 1', () => {
-    it('should add new question to rule', () => {
+    it('adds new question to rule', () => {
       component.version = undefined;
       const rule = new QuestionBankRule({ questions: [] });
       component.addNewFeedbackToRule(rule);
@@ -63,7 +63,7 @@ function addNewFeedbackToRuleVersion1() {
 
 function addNewFeedbackToRuleVersion2() {
   describe('using question bank content version 2', () => {
-    it('should add new question to rule', () => {
+    it('adds new question to rule', () => {
       component.version = 2;
       const rule = new QuestionBankRule({ questions: [] });
       component.addNewFeedbackToRule(rule);
@@ -78,7 +78,7 @@ function addNewFeedbackToRuleVersion2() {
 
 function deleteFeedbackInRule() {
   describe('deleteFeedbackInRule()', () => {
-    it('should delete specified feedback', () => {
+    it('deletes specified feedback', () => {
       const rule = new QuestionBankRule({ questions: ['Q1', 'Q2'] });
       spyOn(window, 'confirm').and.returnValue(true);
       component.deleteFeedbackInRule(rule, 0);
