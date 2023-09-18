@@ -14,7 +14,9 @@
     >
       <peer-chat-question-bank
         *ngIf="componentContent.questionBank?.enabled"
+        [content]="componentContent"
         [displayedQuestionBankRules]="questionBankRules"
+        [questionIdsUsed]="questionIdsUsed"
       ></peer-chat-question-bank>
     </div>
     <div
