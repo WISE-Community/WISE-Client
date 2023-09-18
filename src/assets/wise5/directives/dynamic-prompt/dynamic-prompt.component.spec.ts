@@ -62,9 +62,9 @@ function peerGroupingTagDisabled(): void {
     });
 
     it('should display the post prompt', () => {
-      const prompts = fixture.debugElement.nativeElement.querySelectorAll('.prompt');
-      const lastPrompt = prompts[prompts.length - 1];
-      expect(lastPrompt.textContent).toEqual(postPrompt);
+      expect(fixture.debugElement.nativeElement.querySelectorAll('.prompt')[2].textContent).toEqual(
+        postPrompt
+      );
     });
 
     it('should display the dynamic prompt', () => {
@@ -114,9 +114,9 @@ function createPeerGroupStudentData(
 }
 
 function expectDynamicPromptToEqual(text: string): void {
-  const prompts = fixture.debugElement.nativeElement.querySelectorAll('.prompt');
-  const dynamicPrompt = prompts[prompts.length - 2];
-  expect(dynamicPrompt.textContent).toEqual(text);
+  expect(fixture.debugElement.nativeElement.querySelectorAll('.prompt')[1].textContent).toEqual(
+    text
+  );
 }
 
 function createDynamicPrompt(): DynamicPrompt {

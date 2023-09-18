@@ -5,8 +5,6 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import * as $ from 'jquery';
 import { Subscription, filter } from 'rxjs';
-import { Message } from '@stomp/stompjs';
-import { RxStomp } from '@stomp/rx-stomp';
 import { temporarilyHighlightElement } from '../../common/dom/dom';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
@@ -16,16 +14,14 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./project-authoring.component.scss']
 })
 export class ProjectAuthoringComponent {
-  protected activityNodeSelected: boolean = false;
-  protected authors: string[] = [];
+  protected groupNodeSelected: boolean = false;
   private idToNode: any;
   protected inactiveGroupNodes: any[];
   private inactiveNodes: any[];
   protected inactiveStepNodes: any[];
   protected items: any;
-  private projectId: number;
+  protected projectId: number;
   protected showProjectView: boolean = true;
-  private rxStomp: RxStomp;
   protected stepNodeSelected: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
@@ -53,7 +49,7 @@ export class ProjectAuthoringComponent {
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
     this.idToNode = this.projectService.getIdToNode();
-    this.subscribeToCurrentAuthors(this.projectId);
+    this.projectService.notifyAuthorProjectBegin(this.projectId);
     this.subscriptions.add(
       this.projectService.refreshProject$.subscribe(() => {
         this.refreshProject();
@@ -67,22 +63,17 @@ export class ProjectAuthoringComponent {
     );
 
     window.onbeforeunload = (event) => {
-      this.endProjectAuthoringSession();
+      this.projectService.notifyAuthorProjectEnd(this.projectId);
     };
   }
 
   ngOnDestroy(): void {
-    this.endProjectAuthoringSession();
+    this.projectService.notifyAuthorProjectEnd(this.projectId);
     this.subscriptions.unsubscribe();
   }
 
   private updateShowProjectView(): void {
     this.showProjectView = /\/teacher\/edit\/unit\/(\d*)$/.test(this.router.url);
-  }
-
-  private endProjectAuthoringSession(): void {
-    this.rxStomp.deactivate();
-    this.projectService.notifyAuthorProjectEnd(this.projectId);
   }
 
   protected previewProject(): void {
@@ -132,45 +123,10 @@ export class ProjectAuthoringComponent {
         ? $localize`Are you sure you want to delete the selected item?`
         : $localize`Are you sure you want to delete the ${selectedNodeIds.length} selected items?`;
     if (confirm(confirmMessage)) {
-      this.deleteNodesById(selectedNodeIds);
+      selectedNodeIds.forEach((nodeId) => this.deleteNodeService.deleteNode(nodeId));
+      this.projectService.saveProject();
+      this.refreshProject();
     }
-  }
-
-  private deleteNodesById(nodeIds: string[]): void {
-    let deletedStartNodeId = false;
-    const stepsDeleted = [];
-    const activitiesDeleted = [];
-    for (const nodeId of nodeIds) {
-      const node = this.projectService.getNodeById(nodeId);
-      const tempNode = {
-        nodeId: node.id,
-        title: this.projectService.getNodePositionAndTitle(node.id),
-        stepsInActivityDeleted: []
-      };
-      if (this.projectService.isStartNodeId(nodeId)) {
-        deletedStartNodeId = true;
-      }
-      if (this.projectService.isGroupNode(nodeId)) {
-        const stepsInActivityDeleted = [];
-        for (const stepNodeId of node.ids) {
-          const stepObject = {
-            nodeId: stepNodeId,
-            title: this.projectService.getNodePositionAndTitle(stepNodeId)
-          };
-          stepsInActivityDeleted.push(stepObject);
-        }
-        tempNode.stepsInActivityDeleted = stepsInActivityDeleted;
-        activitiesDeleted.push(tempNode);
-      } else {
-        stepsDeleted.push(tempNode);
-      }
-      this.deleteNodeService.deleteNode(nodeId);
-    }
-    if (deletedStartNodeId) {
-      this.updateStartNodeId();
-    }
-    this.projectService.saveProject();
-    this.refreshProject();
   }
 
   private getSelectedNodeIds(): string[] {
@@ -199,7 +155,7 @@ export class ProjectAuthoringComponent {
       inactiveStepNode.checked = false;
     });
     this.stepNodeSelected = false;
-    this.activityNodeSelected = false;
+    this.groupNodeSelected = false;
   }
 
   protected createNewLesson(): void {
@@ -212,35 +168,6 @@ export class ProjectAuthoringComponent {
 
   protected addStructure(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/structure/choose`]);
-  }
-
-  private updateStartNodeId(): void {
-    let newStartNodeId = null;
-    let startGroupId = this.projectService.getStartGroupId();
-    let node = this.projectService.getNodeById(startGroupId);
-    let done = false;
-
-    // recursively traverse the start ids
-    while (!done) {
-      if (node == null) {
-        // base case in case something went wrong
-        done = true;
-      } else if (this.projectService.isGroupNode(node.id)) {
-        // the node is a group node so we will get its start node
-        node = this.projectService.getNodeById(node.startId);
-      } else if (this.projectService.isApplicationNode(node.id)) {
-        // the node is a step node so we have found the new start node id
-        newStartNodeId = node.id;
-        done = true;
-      } else {
-        // base case in case something went wrong
-        done = true;
-      }
-    }
-
-    if (newStartNodeId) {
-      this.projectService.setStartNodeId(newStartNodeId);
-    }
   }
 
   private refreshProject(): void {
@@ -322,39 +249,19 @@ export class ProjectAuthoringComponent {
   }
 
   /**
-   * The checkbox for a node was clicked. We will determine whether there are
-   * any activity nodes that are selected or whether there are any step nodes
-   * that are selected. We do this because we do not allow selecting a mix of
-   * activities and steps. If there are any activity nodes that are selected,
-   * we will disable all the step node check boxes. Alternatively, if there are
-   * any step nodes selected, we will disable all the activity node check boxes.
-   * @param nodeId The node id of the node that was clicked.
+   * The checkbox for a node was clicked. We do not allow selecting a mix of group and step nodes.
+   * If any group nodes are selected, disable all step node checkboxes, and vise-versa.
    */
-  protected projectItemClicked(): void {
-    this.stepNodeSelected = false;
-    this.activityNodeSelected = false;
-
-    // this will check the items that are used in the project
-    for (let item of this.items) {
-      if (item.checked) {
-        if (this.isGroupNode(item.key)) {
-          this.activityNodeSelected = true;
-        } else {
-          this.stepNodeSelected = true;
-        }
-      }
-    }
-
-    // this will check the items that are unused in the project
-    for (let key in this.idToNode) {
-      let node = this.idToNode[key];
-      if (node.checked) {
-        if (this.isGroupNode(key)) {
-          this.activityNodeSelected = true;
-        } else {
-          this.stepNodeSelected = true;
-        }
-      }
+  protected selectNode(): void {
+    const checkedNodes = this.items
+      .concat(Object.values(this.idToNode))
+      .filter((item) => item.checked);
+    if (checkedNodes.length === 0) {
+      this.groupNodeSelected = false;
+      this.stepNodeSelected = false;
+    } else {
+      this.groupNodeSelected = this.isGroupNode(checkedNodes[0].id);
+      this.stepNodeSelected = !this.groupNodeSelected;
     }
   }
 
@@ -402,19 +309,5 @@ export class ProjectAuthoringComponent {
       this.hasSelectedNodes() &&
       this.getSelectedNodeIds().every((nodeId) => this.projectService.isApplicationNode(nodeId))
     );
-  }
-
-  private subscribeToCurrentAuthors(projectId: number): void {
-    this.rxStomp = new RxStomp();
-    this.rxStomp.configure({
-      brokerURL: this.configService.getWebSocketURL()
-    });
-    this.rxStomp.activate();
-    this.rxStomp.watch(`/topic/current-authors/${projectId}`).subscribe((message: Message) => {
-      this.authors = JSON.parse(message.body);
-    });
-    this.rxStomp.connected$.subscribe(() => {
-      this.projectService.notifyAuthorProjectBegin(this.projectId);
-    });
   }
 }

@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
 import { OpenResponseContent } from '../../openResponse/OpenResponseContent';
-import { QuestionBank } from './QuestionBank';
 import { Component as WISEComponent } from '../../../common/Component';
 import { PeerGroupStudentData } from '../../../../../app/domain/peerGroupStudentData';
 import { CRaterResponse } from '../../common/cRater/CRaterResponse';
@@ -16,6 +15,7 @@ import { QuestionBankContent } from './QuestionBankContent';
 import { copy } from '../../../common/object/object';
 import { Question } from './Question';
 import { QuestionBankService } from './questionBank.service';
+import { ConstraintService } from '../../../services/constraintService';
 
 @Component({
   selector: 'peer-chat-question-bank',
@@ -31,6 +31,7 @@ export class PeerChatQuestionBankComponent implements OnInit {
   @Output() useQuestionEvent = new EventEmitter<string>();
 
   constructor(
+    private constraintService: ConstraintService,
     private peerGroupService: PeerGroupService,
     private projectService: ProjectService,
     private questionBankService: QuestionBankService
@@ -38,10 +39,12 @@ export class PeerChatQuestionBankComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.displayedQuestionBankRules == null) {
-      const referenceComponent = this.getReferenceComponent(this.content.questionBank);
+      const referenceComponent = this.projectService.getReferenceComponent(
+        this.content.questionBank
+      );
       if (
         this.content.questionBank.isPeerGroupingTagSpecified() &&
-        referenceComponent.content.type === 'OpenResponse'
+        ['MultipleChoice', 'OpenResponse'].includes(referenceComponent.content.type)
       ) {
         this.evaluatePeerGroup(referenceComponent);
       }
@@ -55,12 +58,6 @@ export class PeerChatQuestionBankComponent implements OnInit {
     this.questionBankService.questionUsed$.subscribe((question: Question) => {
       this.questionIdsUsed.push(question.id);
     });
-  }
-
-  private getReferenceComponent(questionBank: QuestionBank): WISEComponent {
-    const nodeId = questionBank.getReferenceNodeId();
-    const componentId = questionBank.getReferenceComponentId();
-    return new WISEComponent(this.projectService.getComponent(nodeId, componentId), nodeId);
   }
 
   private evaluatePeerGroup(referenceComponent: WISEComponent): void {
@@ -83,10 +80,10 @@ export class PeerChatQuestionBankComponent implements OnInit {
     referenceComponent: WISEComponent,
     peerGroupStudentData: PeerGroupStudentData[]
   ): QuestionBankRule[] {
-    const cRaterResponses = peerGroupStudentData.map((peerMemberData: PeerGroupStudentData) => {
+    const responses = peerGroupStudentData.map((peerMemberData: PeerGroupStudentData) => {
       return new CRaterResponse({
-        ideas: peerMemberData.annotation.data.ideas,
-        scores: peerMemberData.annotation.data.scores,
+        ideas: peerMemberData.annotation?.data.ideas,
+        scores: peerMemberData.annotation?.data.scores,
         submitCounter: peerMemberData.studentWork.studentData.submitCounter
       });
     });
@@ -95,10 +92,12 @@ export class PeerChatQuestionBankComponent implements OnInit {
         this.content.questionBank.getRules(),
         (referenceComponent.content as OpenResponseContent).maxSubmitCount,
         false
-      )
+      ),
+      this.constraintService
     );
+    feedbackRuleEvaluator.setReferenceComponent(referenceComponent);
     return this.filterQuestions(
-      feedbackRuleEvaluator.getFeedbackRules(cRaterResponses) as QuestionBankRule[],
+      feedbackRuleEvaluator.getFeedbackRules(responses) as QuestionBankRule[],
       this.content.questionBank.maxQuestionsToShow
     );
   }
