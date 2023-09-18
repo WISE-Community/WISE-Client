@@ -19612,8 +19612,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">241</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="307281951617783008" datatype="html">
-        <source>Are you sure you want to replace the current text in your chat response with this text?</source>
+      <trans-unit id="8602610569031787041" datatype="html">
+        <source>Are you sure you want to replace the current text in your response input box with this text?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.ts</context>
           <context context-type="linenumber">291</context>
