@@ -288,7 +288,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     if (
       this.response === '' ||
       confirm(
-        $localize`Are you sure you want to put this question into your input box? The question will overwrite the current text in your input box.`
+        $localize`Are you sure you want to replace the current text in your chat response with this text?`
       )
     ) {
       this.question = question;
