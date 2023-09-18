@@ -40,6 +40,8 @@ import { DiscourseRecentActivityComponent } from './discourse-recent-activity/di
 import { ShareRunCodeDialogComponent } from './share-run-code-dialog/share-run-code-dialog.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { SelectRunsControlsModule } from './select-runs-controls/select-runs-controls.module';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -55,6 +57,7 @@ const materialModules = [
   MatNativeDateModule,
   MatProgressBarModule,
   MatRadioModule,
+  MatSlideToggleModule,
   MatSnackBarModule,
   MatTabsModule,
   MatTableModule,
@@ -69,6 +72,7 @@ const materialModules = [
     LibraryModule,
     materialModules,
     SharedModule,
+    SelectRunsControlsModule,
     TeacherRoutingModule,
     TimelineModule,
     ClipboardModule

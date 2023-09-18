@@ -23,6 +23,7 @@ import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementDialogComponent } from './announcement/announcement.component';
 import { TrackScrollDirective } from './track-scroll.directive';
 import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY, RECAPTCHA_BASE_URL } from 'ng-recaptcha';
+import { ArchiveProjectService } from './services/archive-project.service';
 
 export function initialize(
   configService: ConfigService,
@@ -59,11 +60,12 @@ export function initialize(
     MatDialogModule,
     RecaptchaV3Module,
     RouterModule.forRoot([], {
-    scrollPositionRestoration: 'enabled',
-    anchorScrolling: 'enabled'
-})
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled'
+    })
   ],
   providers: [
+    ArchiveProjectService,
     ConfigService,
     StudentService,
     TeacherService,
