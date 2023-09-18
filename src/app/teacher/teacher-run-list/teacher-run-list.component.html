@@ -12,7 +12,7 @@
       fxFlex.sm="0 0 calc(50%-8px)"
       i18n-placeholderText
       placeholderText="Search"
-      [disable]="!loaded"
+      [disable]="!recentRunsLoaded"
       [value]="searchValue"
       (update)="searchChanged($event)"
     ></app-search-bar>
@@ -26,7 +26,7 @@
     </mat-form-field>
   </div>
   <div *ngIf="filteredRuns.length > 0" class="notice">
-    <p [ngStyle]="{ visibility: loaded ? 'visible' : 'hidden' }">
+    <p [ngStyle]="{ visibility: allRunsLoaded ? 'visible' : 'hidden' }">
       <ng-container *ngIf="searchValue || filterValue" i18n
         >Units found: {{ filteredRuns.length }}</ng-container
       >
@@ -59,7 +59,7 @@
       </ng-container>
     </p>
   </div>
-  <ng-container *ngIf="loaded">
+  <ng-container *ngIf="recentRunsLoaded">
     <ng-container *ngIf="filteredRuns.length === 0">
       <div class="notice no-runs-message" *ngIf="!showArchived">
         <p i18n>Hey there! Looks like you don't have any active classroom units.</p>

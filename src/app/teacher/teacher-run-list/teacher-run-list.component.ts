@@ -18,10 +18,11 @@ import { SelectRunsOption } from '../select-runs-controls/select-runs-option';
 export class TeacherRunListComponent implements OnInit {
   private MAX_RECENT_RUNS = 10;
 
+  protected allRunsLoaded: boolean = false;
   protected filteredRuns: TeacherRun[] = [];
   protected filterValue: string = '';
-  protected loaded: boolean = false;
   protected numSelectedRuns: number = 0;
+  protected recentRunsLoaded: boolean = false;
   protected runChangedEventEmitter: EventEmitter<void> = new EventEmitter<void>();
   protected runs: TeacherRun[] = [];
   protected searchValue: string = '';
@@ -57,6 +58,7 @@ export class TeacherRunListComponent implements OnInit {
         this.setRuns(runs);
         this.processRuns();
         this.highlightNewRunIfNecessary();
+        this.allRunsLoaded = true;
       });
   }
 
@@ -78,7 +80,7 @@ export class TeacherRunListComponent implements OnInit {
       return teacherRun;
     });
     this.filteredRuns = this.runs;
-    this.loaded = true;
+    this.recentRunsLoaded = true;
   }
 
   private subscribeToRuns(): void {
