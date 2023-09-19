@@ -4,25 +4,36 @@ import { IdeaCountTermEvaluator } from './IdeaCountTermEvaluator';
 import { IdeaTermEvaluator } from './IdeaTermEvaluator';
 import { IsSubmitNumberEvaluator } from './IsSubmitNumberEvaluator';
 import { TermEvaluatorFactory } from './TermEvaluatorFactory';
+import { AccumulatedIdeaCountTermEvaluator } from './AccumulatedIdeaCountTermEvaluator';
+import { IsLowestWorkgroupIdInPeerGroupTermEvaluator } from './IsLowestWorkgroupIdInPeerGroupTermEvaluator';
+import { BooleanTermEvaluator } from './BooleanTermEvaluator';
 
 describe('TermEvaluatorFactory', () => {
   const factory = new TermEvaluatorFactory(null, null);
-  describe('getTermEvaluator()', () => {
-    it('should return correct evaluator', () => {
-      [
-        {
-          term: 'myChoiceChosen("choice1")',
-          instanceType: MyChoiceChosenTermEvaluator
-        },
-        { term: 'hasKIScore(3)', instanceType: HasKIScoreTermEvaluator },
-        { term: 'ideaCountMoreThan(1)', instanceType: IdeaCountTermEvaluator },
-        { term: 'ideaCountEquals(3)', instanceType: IdeaCountTermEvaluator },
-        { term: 'ideaCountLessThan(2)', instanceType: IdeaCountTermEvaluator },
-        { term: 'isSubmitNumber(2)', instanceType: IsSubmitNumberEvaluator },
-        { term: 'isSubmitNumber(23)', instanceType: IsSubmitNumberEvaluator },
-        { term: '2', instanceType: IdeaTermEvaluator }
-      ].forEach(({ term, instanceType }) => {
-        expect(factory.getTermEvaluator(term) instanceof instanceType).toBeTrue();
+  describe('getTermEvaluator(term)', () => {
+    [
+      { term: 'true', evaluator: BooleanTermEvaluator },
+      { term: 'false', evaluator: BooleanTermEvaluator },
+      { term: 'hasKIScore(3)', evaluator: HasKIScoreTermEvaluator },
+      { term: 'ideaCountMoreThan(1)', evaluator: IdeaCountTermEvaluator },
+      { term: 'ideaCountEquals(3)', evaluator: IdeaCountTermEvaluator },
+      { term: 'ideaCountLessThan(2)', evaluator: IdeaCountTermEvaluator },
+      { term: 'isSubmitNumber(2)', evaluator: IsSubmitNumberEvaluator },
+      { term: 'isSubmitNumber(23)', evaluator: IsSubmitNumberEvaluator },
+      { term: 'accumulatedIdeaCountMoreThan(1)', evaluator: AccumulatedIdeaCountTermEvaluator },
+      { term: 'accumulatedIdeaCountEquals(3)', evaluator: AccumulatedIdeaCountTermEvaluator },
+      { term: 'accumulatedIdeaCountLessThan(2)', evaluator: AccumulatedIdeaCountTermEvaluator },
+      { term: 'myChoiceChosen("1")', evaluator: MyChoiceChosenTermEvaluator },
+      {
+        term: 'isLowestWorkgroupIdInPeerGroup',
+        evaluator: IsLowestWorkgroupIdInPeerGroupTermEvaluator
+      },
+      { term: '2', evaluator: IdeaTermEvaluator }
+    ].forEach(({ term, evaluator }) => {
+      describe(`term is ${term}`, () => {
+        it(`returns ${evaluator.name}`, () => {
+          expect(factory.getTermEvaluator(term) instanceof evaluator).toBeTrue();
+        });
       });
     });
   });

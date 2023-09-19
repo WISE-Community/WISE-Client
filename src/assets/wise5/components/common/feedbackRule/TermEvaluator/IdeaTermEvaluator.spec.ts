@@ -3,14 +3,24 @@ import { CRaterResponse } from '../../cRater/CRaterResponse';
 import { IdeaTermEvaluator } from './IdeaTermEvaluator';
 
 describe('IdeaTermEvaluator', () => {
-  describe('evaluate()', () => {
-    const response_with_no_ideas = new CRaterResponse();
-    const response_with_2_ideas = new CRaterResponse();
-    response_with_2_ideas.ideas = [new CRaterIdea('1', true), new CRaterIdea('2', true)];
-    it('returns true iff idea term is found in the response', () => {
-      const evaluator_idea1 = new IdeaTermEvaluator('1');
-      expect(evaluator_idea1.evaluate(response_with_no_ideas)).toBeFalse();
-      expect(evaluator_idea1.evaluate(response_with_2_ideas)).toBeTrue();
+  const evaluator = new IdeaTermEvaluator('1');
+  describe('evaluate(response)', () => {
+    let response: CRaterResponse;
+    beforeEach(() => {
+      response = new CRaterResponse();
+    });
+    describe('response does not contain the idea', () => {
+      it('returns false', () => {
+        expect(evaluator.evaluate(response)).toBeFalse();
+      });
+    });
+    describe('response contains the idea', () => {
+      beforeEach(() => {
+        response.ideas = [new CRaterIdea('1', true), new CRaterIdea('2', true)];
+      });
+      it('returns true', () => {
+        expect(evaluator.evaluate(response)).toBeTrue();
+      });
     });
   });
 });
