@@ -11,33 +11,16 @@
     >
       <div fxLayout="row" fxLayoutGap="8px" class="projectItemTitleDiv">
         <div fxLayout="row" fxLayoutAlign="start center">
-          <node-icon [nodeId]="nodeId" size="18"></node-icon>&nbsp;
-          <p style="display: inline; cursor: pointer">
-            {{ getNodePositionById(nodeId) }}: {{ getNodeTitle(nodeId) }}
-          </p>
+          <node-icon-and-title [nodeId]="nodeId" [showPosition]="true"></node-icon-and-title>
         </div>
-        <button
-          mat-raised-button
-          color="primary"
+        <insert-node-inside-button
           *ngIf="isGroupNode(nodeId)"
-          matTooltip="Insert As First Step"
-          i18n-matTooltip
-          matTooltipPosition="above"
-          (click)="importSelectedNodes(nodeId); $event.stopPropagation()"
-        >
-          <mat-icon>call_received</mat-icon>
-        </button>
-        <button
-          mat-raised-button
-          color="primary"
+          (insertEvent)="insert(nodeId, false)"
+        ></insert-node-inside-button>
+        <insert-node-after-button
           *ngIf="!isGroupNode(nodeId)"
-          matTooltip="Insert After"
-          i18n-matTooltip
-          matTooltipPosition="above"
-          (click)="importSelectedNodes(nodeId); $event.stopPropagation()"
-        >
-          <mat-icon>subdirectory_arrow_left</mat-icon>
-        </button>
+          (insertEvent)="insert(nodeId, true)"
+        ></insert-node-after-button>
       </div>
     </div>
   </div>

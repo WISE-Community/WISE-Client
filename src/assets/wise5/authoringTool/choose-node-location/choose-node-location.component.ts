@@ -9,6 +9,7 @@ export abstract class ChooseNodeLocationComponent {
   protected inactiveGroupNodes: any[];
   protected inactiveStepNodes: any[];
   protected nodeIds: string[];
+  protected pathToProjectAuthoringView = '..';
   protected selectedNodeIds: string[];
 
   constructor(
@@ -25,18 +26,20 @@ export abstract class ChooseNodeLocationComponent {
     this.selectedNodeIds = history.state.selectedNodeIds;
   }
 
-  protected insert(nodeId: string, after: boolean): void {
-    this.saveAndGoToProjectView(after ? this.insertAfter(nodeId) : this.insertInside(nodeId));
+  protected async insert(nodeId: string, after: boolean): Promise<void> {
+    this.saveAndGoToProjectView(
+      after ? await this.insertAfter(nodeId) : await this.insertInside(nodeId)
+    );
   }
 
-  protected abstract insertAfter(nodeId: string): any[];
+  protected abstract insertAfter(nodeId: string): Promise<any[]>;
 
-  protected abstract insertInside(groupNodeId: string): any[];
+  protected abstract insertInside(groupNodeId: string): Promise<any[]>;
 
   protected saveAndGoToProjectView(newNodes: any[]): void {
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
       this.projectService.refreshProject();
-      this.router.navigate(['..'], {
+      this.router.navigate([this.pathToProjectAuthoringView], {
         relativeTo: this.route,
         state: { newNodes: newNodes }
       });

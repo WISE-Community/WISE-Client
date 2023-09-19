@@ -32,11 +32,15 @@ export class ChooseMoveNodeLocationComponent extends ChooseNodeLocationComponent
     return !this.selectedNodeIds.includes(nodeId);
   }
 
-  protected insertAfter(nodeId: string): any[] {
-    return this.moveNodesService.moveNodesAfter(this.selectedNodeIds, nodeId);
+  protected insertAfter(nodeId: string): Promise<any[]> {
+    return new Promise((resolve) => {
+      resolve(this.moveNodesService.moveNodesAfter(this.selectedNodeIds, nodeId));
+    });
   }
 
-  protected insertInside(groupNodeId: string): any[] {
-    return this.moveNodesService.moveNodesInsideGroup(this.selectedNodeIds, groupNodeId);
+  protected insertInside(groupNodeId: string): Promise<any[]> {
+    return new Promise((resolve) => {
+      resolve(this.moveNodesService.moveNodesInsideGroup(this.selectedNodeIds, groupNodeId));
+    });
   }
 }

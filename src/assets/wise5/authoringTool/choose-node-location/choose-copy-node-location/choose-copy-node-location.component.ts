@@ -18,11 +18,15 @@ export class ChooseCopyNodeLocationComponent extends ChooseNodeLocationComponent
     super(projectService, route, router);
   }
 
-  protected insertAfter(nodeId: string): any[] {
-    return this.copyNodesService.copyNodesAfter(this.selectedNodeIds, nodeId);
+  protected insertAfter(nodeId: string): Promise<any[]> {
+    return new Promise((resolve) => {
+      resolve(this.copyNodesService.copyNodesAfter(this.selectedNodeIds, nodeId));
+    });
   }
 
-  protected insertInside(groupNodeId: string): any[] {
-    return this.copyNodesService.copyNodesInsideGroup(this.selectedNodeIds, groupNodeId);
+  protected insertInside(groupNodeId: string): Promise<any[]> {
+    return new Promise((resolve) => {
+      resolve(this.copyNodesService.copyNodesInsideGroup(this.selectedNodeIds, groupNodeId));
+    });
   }
 }

@@ -4,60 +4,52 @@ import { CopyNodesService } from '../../../../assets/wise5/services/copyNodesSer
 import { InsertNodesService } from '../../../../assets/wise5/services/insertNodesService';
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ChooseNodeLocationComponent } from '../../../../assets/wise5/authoringTool/choose-node-location/choose-node-location.component';
+import { lastValueFrom, map } from 'rxjs';
 
 @Component({
   selector: 'choose-import-step-location',
   styleUrls: ['choose-import-step-location.component.scss'],
   templateUrl: 'choose-import-step-location.component.html'
 })
-export class ChooseImportStepLocationComponent {
+export class ChooseImportStepLocationComponent extends ChooseNodeLocationComponent {
   protected nodeIds: string[];
 
   constructor(
     private configService: ConfigService,
     private copyNodesService: CopyNodesService,
     private insertNodesService: InsertNodesService,
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
+    protected projectService: TeacherProjectService,
+    protected route: ActivatedRoute,
+    protected router: Router
   ) {
-    this.nodeIds = Object.keys(this.projectService.idToOrder);
-    this.nodeIds.shift(); // remove the 'group0' master root node from consideration
+    super(projectService, route, router);
+    this.pathToProjectAuthoringView = '../..';
   }
 
-  protected importSelectedNodes(nodeIdToInsertInsideOrAfter: string): void {
-    this.copyNodesService
-      .copyNodes(
-        history.state.selectedNodes,
-        history.state.importFromProjectId,
-        this.configService.getProjectId()
-      )
-      .subscribe((copiedNodes: any[]) => {
-        const nodesWithNewNodeIds = this.projectService.getNodesWithNewIds(copiedNodes);
-        this.insertNodesService.insertNodes(nodesWithNewNodeIds, nodeIdToInsertInsideOrAfter);
-        this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
-          this.projectService.refreshProject();
-          this.router.navigate(['../..'], {
-            relativeTo: this.route,
-            state: { newNodes: nodesWithNewNodeIds }
-          });
-        });
-      });
+  protected insertAfter(nodeId: string): Promise<any[]> {
+    return this.importSelectedNodes(nodeId);
   }
 
-  protected isGroupNode(nodeId: string): boolean {
-    return this.projectService.isGroupNode(nodeId);
+  protected insertInside(groupNodeId: string): Promise<any[]> {
+    return this.importSelectedNodes(groupNodeId);
   }
 
-  protected getNodeTitle(nodeId: string): string {
-    return this.projectService.getNodeTitle(nodeId);
-  }
-
-  protected getNodePositionById(nodeId: string): string {
-    return this.projectService.getNodePositionById(nodeId);
-  }
-
-  protected isNodeInAnyBranchPath(nodeId: string): boolean {
-    return this.projectService.isNodeInAnyBranchPath(nodeId);
+  protected importSelectedNodes(nodeIdToInsertInsideOrAfter: string): Promise<any[]> {
+    return lastValueFrom(
+      this.copyNodesService
+        .copyNodes(
+          history.state.selectedNodes,
+          history.state.importFromProjectId,
+          this.configService.getProjectId()
+        )
+        .pipe(
+          map((copiedNodes: any[]): any[] => {
+            const nodesWithNewNodeIds = this.projectService.getNodesWithNewIds(copiedNodes);
+            this.insertNodesService.insertNodes(nodesWithNewNodeIds, nodeIdToInsertInsideOrAfter);
+            return nodesWithNewNodeIds;
+          })
+        )
+    );
   }
 }
