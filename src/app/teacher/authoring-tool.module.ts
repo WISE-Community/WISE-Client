@@ -48,6 +48,7 @@ import { InsertNodeAfterButtonComponent } from '../../assets/wise5/authoringTool
 import { InsertNodeInsideButtonComponent } from '../../assets/wise5/authoringTool/choose-node-location/insert-node-inside-button/insert-node-inside-button.component';
 import { NodeIconAndTitleComponent } from '../../assets/wise5/authoringTool/choose-node-location/node-icon-and-title/node-icon-and-title.component';
 import { NodeWithMoveAfterButtonComponent } from '../../assets/wise5/authoringTool/choose-node-location/node-with-move-after-button/node-with-move-after-button.component';
+import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { NodeWithMoveAfterButtonComponent } from '../../assets/wise5/authoringTo
     NotebookAuthoringComponent,
     ProjectInfoAuthoringComponent,
     ProjectAuthoringComponent,
+    ProjectAuthoringParentComponent,
     RecoveryAuthoringComponent,
     RequiredErrorLabelComponent,
     RubricAuthoringComponent,
