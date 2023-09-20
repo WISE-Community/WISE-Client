@@ -56,12 +56,6 @@ export class ProjectAuthoringComponent {
       })
     );
 
-    this.subscriptions.add(
-      this.projectService.scrollToBottomOfPage$.subscribe(() => {
-        this.scrollToBottomOfPage();
-      })
-    );
-
     window.onbeforeunload = (event) => {
       this.projectService.notifyAuthorProjectEnd(this.projectId);
     };
@@ -194,15 +188,6 @@ export class ProjectAuthoringComponent {
 
   protected goBackToProjectList(): void {
     this.router.navigate([`/teacher/edit/home`]);
-  }
-
-  private scrollToBottomOfPage(): void {
-    $('#content').animate(
-      {
-        scrollTop: $('#bottom').prop('offsetTop')
-      },
-      1000
-    );
   }
 
   /**
