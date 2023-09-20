@@ -49,6 +49,7 @@ export class FeedbackRuleEvaluatorMultipleStudents extends FeedbackRuleEvaluator
 
   protected evaluateTerm(term: string, responses: Response[]): boolean {
     const evaluator: TermEvaluator = this.factory.getTermEvaluator(term);
+    evaluator.setPeerGroup(this.peerGroup);
     evaluator.setReferenceComponent(this.referenceComponent);
     return responses.some((response: Response) => {
       return evaluator.evaluate(response);

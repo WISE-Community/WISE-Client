@@ -19,6 +19,7 @@ describe('FeedbackRuleEvaluator', () => {
   beforeEach(() => {
     evaluator = new FeedbackRuleEvaluator(
       new FeedbackRuleComponent(DEFAULT_FEEDBACK_RULES, 5, true),
+      null,
       null
     );
   });
@@ -78,6 +79,7 @@ function matchRule_hasKIScore() {
     beforeEach(() => {
       evaluator = new FeedbackRuleEvaluator(
         new FeedbackRuleComponent(HAS_KI_SCORE_FEEDBACK_RULES, 5, true),
+        null,
         null
       );
     });
@@ -123,6 +125,7 @@ function matchRule_ideaCount() {
       ];
       evaluator = new FeedbackRuleEvaluator(
         new FeedbackRuleComponent(feedbackRules, 5, true),
+        null,
         null
       );
     });
@@ -147,7 +150,7 @@ function matchNoRule_ReturnDefault() {
 function matchNoRule_NoDefaultFeedbackAuthored_ReturnApplicationDefault() {
   it(`should return application default rule when no rule is matched and no default is
       authored`, () => {
-    evaluator = new FeedbackRuleEvaluator(new FeedbackRuleComponent([], 5, true), null);
+    evaluator = new FeedbackRuleEvaluator(new FeedbackRuleComponent([], 5, true), null, null);
     expectFeedback(['idea10', 'idea11'], [KI_SCORE_1], 1, evaluator.defaultFeedback);
   });
 }

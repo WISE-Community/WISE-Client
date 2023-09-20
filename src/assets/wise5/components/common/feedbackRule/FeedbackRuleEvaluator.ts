@@ -1,6 +1,8 @@
 import { Component } from '../../../common/Component';
+import { ConfigService } from '../../../services/configService';
 import { ConstraintService } from '../../../services/constraintService';
 import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
+import { PeerGroup } from '../../peerChat/PeerGroup';
 import { CRaterResponse } from '../cRater/CRaterResponse';
 import { FeedbackRule } from './FeedbackRule';
 import { FeedbackRuleExpression } from './FeedbackRuleExpression';
@@ -12,12 +14,14 @@ export class FeedbackRuleEvaluator<T extends Response[]> {
   defaultFeedback = $localize`Thanks for submitting your response.`;
   protected factory;
   protected referenceComponent: Component;
+  protected peerGroup: PeerGroup;
 
   constructor(
     protected component: FeedbackRuleComponent,
+    protected configService: ConfigService,
     protected constraintService: ConstraintService
   ) {
-    this.factory = new TermEvaluatorFactory(constraintService);
+    this.factory = new TermEvaluatorFactory(configService, constraintService);
   }
 
   getFeedbackRule(responses: T): FeedbackRule {
@@ -140,6 +144,10 @@ export class FeedbackRuleEvaluator<T extends Response[]> {
           : this.defaultFeedback
       })
     );
+  }
+
+  setPeerGroup(peerGroup: PeerGroup): void {
+    this.peerGroup = peerGroup;
   }
 
   setReferenceComponent(referenceComponent: Component): void {

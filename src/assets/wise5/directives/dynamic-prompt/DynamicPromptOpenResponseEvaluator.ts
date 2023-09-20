@@ -14,6 +14,7 @@ export class DynamicPromptOpenResponseEvaluator extends DynamicPromptEvaluator {
         });
       });
       const feedbackRuleEvaluator = this.getFeedbackRuleEvaluator(referenceComponent);
+      feedbackRuleEvaluator.setPeerGroup(this.component.peerGroup);
       this.setPromptAndEmitRule(feedbackRuleEvaluator.getFeedbackRule(cRaterResponses));
     });
   }

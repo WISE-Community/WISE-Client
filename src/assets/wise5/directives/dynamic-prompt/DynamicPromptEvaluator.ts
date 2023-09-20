@@ -14,7 +14,12 @@ export abstract class DynamicPromptEvaluator {
 
   evaluate(referenceComponent: Component): void {
     if (this.component.dynamicPrompt.isPeerGroupingTagSpecified()) {
-      this.evaluatePeerGroup(referenceComponent);
+      this.component.peerGroupService
+        .retrievePeerGroup(this.component.dynamicPrompt.getPeerGroupingTag())
+        .subscribe((peerGroup) => {
+          this.component.peerGroup = peerGroup;
+          this.evaluatePeerGroup(referenceComponent);
+        });
     } else {
       this.evaluatePersonal(referenceComponent);
     }
@@ -31,9 +36,14 @@ export abstract class DynamicPromptEvaluator {
     const evaluator = this.component.dynamicPrompt.isPeerGroupingTagSpecified()
       ? new FeedbackRuleEvaluatorMultipleStudents(
           feedbackRuleComponent,
+          this.component.configService,
           this.component.constraintService
         )
-      : new FeedbackRuleEvaluator(feedbackRuleComponent, this.component.constraintService);
+      : new FeedbackRuleEvaluator(
+          feedbackRuleComponent,
+          this.component.configService,
+          this.component.constraintService
+        );
     evaluator.setReferenceComponent(referenceComponent);
     return evaluator;
   }
