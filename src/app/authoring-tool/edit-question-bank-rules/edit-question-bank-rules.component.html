@@ -63,13 +63,25 @@
                 <mat-label *ngIf="rule.questions.length > 1" i18n
                   >Question #{{ questionIndex + 1 }}</mat-label
                 >
-                <textarea
-                  matInput
-                  [(ngModel)]="rule.questions[questionIndex]"
-                  (ngModelChange)="inputChanged.next($event)"
-                  cdkTextareaAutosize
-                >
-                </textarea>
+                <ng-container *ngIf="version === 2; then version2; else version1"></ng-container>
+                <ng-template #version2>
+                  <textarea
+                    matInput
+                    [(ngModel)]="rule.questions[questionIndex].text"
+                    (ngModelChange)="inputChanged.next($event)"
+                    cdkTextareaAutosize
+                  >
+                  </textarea>
+                </ng-template>
+                <ng-template #version1>
+                  <textarea
+                    matInput
+                    [(ngModel)]="rule.questions[questionIndex]"
+                    (ngModelChange)="inputChanged.next($event)"
+                    cdkTextareaAutosize
+                  >
+                  </textarea>
+                </ng-template>
                 <button
                   mat-icon-button
                   matSuffix

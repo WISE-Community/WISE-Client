@@ -19,8 +19,6 @@ export class TeacherProjectService extends ProjectService {
   public nodeChanged$: Observable<boolean> = this.nodeChangedSource.asObservable();
   private refreshProjectSource: Subject<void> = new Subject<void>();
   public refreshProject$ = this.refreshProjectSource.asObservable();
-  private scrollToBottomOfPageSource: Subject<void> = new Subject<void>();
-  public scrollToBottomOfPage$ = this.scrollToBottomOfPageSource.asObservable();
   private errorSavingProjectSource: Subject<void> = new Subject<void>();
   public errorSavingProject$: Observable<void> = this.errorSavingProjectSource.asObservable();
   private notAllowedToEditThisProjectSource: Subject<void> = new Subject<void>();
@@ -896,10 +894,6 @@ export class TeacherProjectService extends ProjectService {
 
   refreshProject() {
     this.refreshProjectSource.next();
-  }
-
-  scrollToBottomOfPage() {
-    this.scrollToBottomOfPageSource.next();
   }
 
   nodeHasConstraint(nodeId: string): boolean {

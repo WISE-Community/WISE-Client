@@ -2,22 +2,24 @@ import { Run } from './run';
 import { User } from '../domain/user';
 
 export class Project {
-  id: number;
-  name: string;
-  metadata: any;
-  dateCreated: string;
+  archived: boolean;
   dateArchived: string;
-  lastEdited: string;
-  projectThumb: string;
-  thumbStyle: any;
+  dateCreated: string;
+  id: number;
   isHighlighted: boolean;
-  owner: User;
-  sharedOwners: User[] = [];
-  run: Run;
-  parentId: number;
-  wiseVersion: number;
-  uri: String;
+  lastEdited: string;
   license: String;
+  metadata: any;
+  name: string;
+  owner: User;
+  parentId: number;
+  projectThumb: string;
+  run: Run;
+  sharedOwners: User[] = [];
+  tags: string[];
+  thumbStyle: any;
+  uri: String;
+  wiseVersion: number;
 
   static readonly VIEW_PERMISSION: number = 1;
   static readonly EDIT_PERMISSION: number = 2;

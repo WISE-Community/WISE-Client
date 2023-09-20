@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { temporarilyHighlightElement } from '../../../../common/dom/dom';
+import { scrollToElement, temporarilyHighlightElement } from '../../../../common/dom/dom';
 import { ConstraintsAuthoringComponent } from '../../../constraint/constraints-authoring/constraints-authoring.component';
 import { ActivatedRoute } from '@angular/router';
+import { Constraint } from '../../../../../../app/domain/constraint';
 
 @Component({
   selector: 'node-advanced-constraint-authoring',
@@ -24,12 +25,13 @@ export class NodeAdvancedConstraintAuthoringComponent extends ConstraintsAuthori
     });
   }
 
-  protected addConstraintAndScrollToBottom(): void {
-    const constraint = this.addConstraint();
+  protected addConstraint(): Constraint {
+    const constraint = super.addConstraint();
     constraint.targetId = this.content.id;
     setTimeout(() => {
-      this.projectService.scrollToBottomOfPage();
+      scrollToElement('bottom');
       temporarilyHighlightElement(constraint.id);
     });
+    return constraint;
   }
 }

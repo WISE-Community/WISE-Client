@@ -5,8 +5,6 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import * as $ from 'jquery';
 import { Subscription, filter } from 'rxjs';
-import { Message } from '@stomp/stompjs';
-import { RxStomp } from '@stomp/rx-stomp';
 import { temporarilyHighlightElement } from '../../common/dom/dom';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
@@ -17,15 +15,13 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 })
 export class ProjectAuthoringComponent {
   protected groupNodeSelected: boolean = false;
-  protected authors: string[] = [];
   private idToNode: any;
   protected inactiveGroupNodes: any[];
   private inactiveNodes: any[];
   protected inactiveStepNodes: any[];
   protected items: any;
-  private projectId: number;
+  protected projectId: number;
   protected showProjectView: boolean = true;
-  private rxStomp: RxStomp;
   protected stepNodeSelected: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
@@ -53,36 +49,25 @@ export class ProjectAuthoringComponent {
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
     this.idToNode = this.projectService.getIdToNode();
-    this.subscribeToCurrentAuthors(this.projectId);
+    this.projectService.notifyAuthorProjectBegin(this.projectId);
     this.subscriptions.add(
       this.projectService.refreshProject$.subscribe(() => {
         this.refreshProject();
       })
     );
 
-    this.subscriptions.add(
-      this.projectService.scrollToBottomOfPage$.subscribe(() => {
-        this.scrollToBottomOfPage();
-      })
-    );
-
     window.onbeforeunload = (event) => {
-      this.endProjectAuthoringSession();
+      this.projectService.notifyAuthorProjectEnd(this.projectId);
     };
   }
 
   ngOnDestroy(): void {
-    this.endProjectAuthoringSession();
+    this.projectService.notifyAuthorProjectEnd(this.projectId);
     this.subscriptions.unsubscribe();
   }
 
   private updateShowProjectView(): void {
     this.showProjectView = /\/teacher\/edit\/unit\/(\d*)$/.test(this.router.url);
-  }
-
-  private endProjectAuthoringSession(): void {
-    this.rxStomp.deactivate();
-    this.projectService.notifyAuthorProjectEnd(this.projectId);
   }
 
   protected previewProject(): void {
@@ -205,15 +190,6 @@ export class ProjectAuthoringComponent {
     this.router.navigate([`/teacher/edit/home`]);
   }
 
-  private scrollToBottomOfPage(): void {
-    $('#content').animate(
-      {
-        scrollTop: $('#bottom').prop('offsetTop')
-      },
-      1000
-    );
-  }
-
   /**
    * Temporarily highlight the new nodes to draw attention to them
    * @param newNodes the new nodes to highlight
@@ -318,19 +294,5 @@ export class ProjectAuthoringComponent {
       this.hasSelectedNodes() &&
       this.getSelectedNodeIds().every((nodeId) => this.projectService.isApplicationNode(nodeId))
     );
-  }
-
-  private subscribeToCurrentAuthors(projectId: number): void {
-    this.rxStomp = new RxStomp();
-    this.rxStomp.configure({
-      brokerURL: this.configService.getWebSocketURL()
-    });
-    this.rxStomp.activate();
-    this.rxStomp.watch(`/topic/current-authors/${projectId}`).subscribe((message: Message) => {
-      this.authors = JSON.parse(message.body);
-    });
-    this.rxStomp.connected$.subscribe(() => {
-      this.projectService.notifyAuthorProjectBegin(this.projectId);
-    });
   }
 }

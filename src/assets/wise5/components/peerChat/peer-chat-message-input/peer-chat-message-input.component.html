@@ -5,6 +5,7 @@
       cdkTextareaAutosize
       placeholder="Add response..."
       i18n-placeholder
+      (focus)="onFocus($event)"
       [(ngModel)]="messageText"
       (ngModelChange)="responseChanged()"
       (keypress)="keyPressed($event)"
