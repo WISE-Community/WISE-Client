@@ -4,9 +4,9 @@ import { DeleteNodeService } from '../../services/deleteNodeService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import * as $ from 'jquery';
-import { Subscription, filter } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { temporarilyHighlightElement } from '../../common/dom/dom';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'project-authoring',
@@ -21,7 +21,6 @@ export class ProjectAuthoringComponent {
   protected inactiveStepNodes: any[];
   protected items: any;
   protected projectId: number;
-  protected showProjectView: boolean = true;
   protected stepNodeSelected: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
@@ -32,42 +31,31 @@ export class ProjectAuthoringComponent {
     private dataService: TeacherDataService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-    this.subscriptions.add(
-      this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-        this.updateShowProjectView();
-        this.temporarilyHighlightNewNodes(history.state.newNodes);
-      })
-    );
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.updateShowProjectView();
     this.projectId = Number(this.route.snapshot.paramMap.get('unitId'));
-    this.items = this.projectService.getNodesInOrder();
-    this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
-    this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
-    this.inactiveNodes = this.projectService.getInactiveNodes();
-    this.idToNode = this.projectService.getIdToNode();
-    this.projectService.notifyAuthorProjectBegin(this.projectId);
+    this.refreshProject();
+    this.temporarilyHighlightNewNodes(history.state.newNodes);
     this.subscriptions.add(
       this.projectService.refreshProject$.subscribe(() => {
         this.refreshProject();
       })
     );
-
-    window.onbeforeunload = (event) => {
-      this.projectService.notifyAuthorProjectEnd(this.projectId);
-    };
   }
 
   ngOnDestroy(): void {
-    this.projectService.notifyAuthorProjectEnd(this.projectId);
     this.subscriptions.unsubscribe();
   }
 
-  private updateShowProjectView(): void {
-    this.showProjectView = /\/teacher\/edit\/unit\/(\d*)$/.test(this.router.url);
+  private refreshProject(): void {
+    this.projectService.parseProject();
+    this.items = this.projectService.getNodesInOrder();
+    this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
+    this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
+    this.inactiveNodes = this.projectService.getInactiveNodes();
+    this.idToNode = this.projectService.getIdToNode();
+    this.unselectAllItems();
   }
 
   protected previewProject(): void {
@@ -162,16 +150,6 @@ export class ProjectAuthoringComponent {
 
   protected addStructure(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/structure/choose`]);
-  }
-
-  private refreshProject(): void {
-    this.projectService.parseProject();
-    this.items = this.projectService.getNodesInOrder();
-    this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
-    this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
-    this.inactiveNodes = this.projectService.getInactiveNodes();
-    this.idToNode = this.projectService.getIdToNode();
-    this.unselectAllItems();
   }
 
   protected importStep(): void {

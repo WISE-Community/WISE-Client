@@ -34,6 +34,7 @@ import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/rec
 import { ChooseImportComponentComponent } from '../../assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component';
 import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component';
 import { ChooseCopyNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component';
+import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component';
 
 const routes: Routes = [
   {
@@ -46,9 +47,10 @@ const routes: Routes = [
       { path: 'new-unit', component: AddProjectComponent },
       {
         path: 'unit/:unitId',
-        component: ProjectAuthoringComponent,
+        component: ProjectAuthoringParentComponent,
         resolve: { project: AuthoringProjectResolver },
         children: [
+          { path: '', component: ProjectAuthoringComponent },
           {
             path: 'add-lesson',
             children: [
