@@ -115,7 +115,7 @@
           <mat-label i18n>School Level</mat-label>
           <mat-select
             placeholder="School Level"
-            [(value)]="teacherUser.schoolLevel"
+            [(value)]="user.schoolLevel"
             formControlName="schoolLevel"
             required
           >
@@ -141,7 +141,7 @@
           />
         </mat-form-field>
       </p>
-      <div *ngIf="teacherUser.googleUserId == null" formGroupName="passwords">
+      <div *ngIf="user.googleUserId == null" formGroupName="passwords">
         <new-password-and-confirm
           [formGroup]="passwordsFormGroup"
           [passwordLabel]="passwordLabel"
@@ -170,7 +170,7 @@
         <a href="https://policies.google.com/privacy">Privacy Policy</a> and
         <a href="https://policies.google.com/terms">Terms of Service</a> apply.
       </p>
-      <ng-container *ngIf="isRecaptchaEnabled" [ngSwitch]="teacherUser.isRecaptchaInvalid">
+      <ng-container *ngIf="isRecaptchaEnabled" [ngSwitch]="user.isRecaptchaInvalid">
         <mat-error *ngSwitchCase="true" class="center recaptchaError" i18n
           >Recaptcha failed. Please reload the page and try again!</mat-error
         >
