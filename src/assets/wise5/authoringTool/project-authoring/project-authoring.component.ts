@@ -153,7 +153,7 @@ export class ProjectAuthoringComponent {
   }
 
   protected importStep(): void {
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/import-step/choose-step`]);
+    this.router.navigate([`/teacher/edit/unit/${this.projectId}/import-step/choose-unit`]);
   }
 
   protected goToAdvancedAuthoring(): void {
