@@ -33,7 +33,7 @@ import { StudentRunListItemComponent } from './student-run-list-item/student-run
 import { AuthGuard } from './auth.guard';
 import { AddProjectDialogComponent } from './add-project-dialog/add-project-dialog.component';
 import { EditComponent } from './account/edit/edit.component';
-import { EditProfileComponent } from './account/edit-profile/edit-profile.component';
+import { StudentEditProfileComponent } from './account/edit-profile/edit-profile.component';
 import { TimelineModule } from '../modules/timeline/timeline.module';
 import { TeamSignInDialogComponent } from './team-sign-in-dialog/team-sign-in-dialog.component';
 import { GoogleSignInModule } from '../modules/google-sign-in/google-sign-in.module';
@@ -57,7 +57,7 @@ import { GoogleSignInModule } from '../modules/google-sign-in/google-sign-in.mod
     StudentRunListComponent,
     StudentRunListItemComponent,
     EditComponent,
-    EditProfileComponent,
+    StudentEditProfileComponent,
     TeamSignInDialogComponent
   ],
   providers: [AuthGuard],

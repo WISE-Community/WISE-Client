@@ -6,15 +6,18 @@ import { UserService } from '../../../services/user.service';
 import { Teacher } from '../../../domain/teacher';
 import { TeacherService } from '../../teacher.service';
 import { MatDialog } from '@angular/material/dialog';
-import { UnlinkGoogleAccountConfirmComponent } from '../../../modules/shared/unlink-google-account-confirm/unlink-google-account-confirm.component';
 import { Subscription } from 'rxjs';
+import { EditProfileComponent } from '../../../common/edit-profile/edit-profile.component';
 
 @Component({
-  selector: 'app-edit-profile',
+  selector: 'teacher-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  styleUrls: [
+    '../../../common/edit-profile/edit-profile.component.scss',
+    './edit-profile.component.scss'
+  ]
 })
-export class EditProfileComponent {
+export class TeacherEditProfileComponent extends EditProfileComponent {
   user: Teacher;
   schoolLevels: any[] = [
     { id: 'ELEMENTARY_SCHOOL', label: $localize`Elementary School` },
@@ -24,7 +27,6 @@ export class EditProfileComponent {
     { id: 'OTHER', label: $localize`Other` }
   ];
   languages: object[];
-  changed: boolean = false;
   isSaving: boolean = false;
   subscriptions: Subscription = new Subscription();
 
@@ -48,7 +50,9 @@ export class EditProfileComponent {
     private userService: UserService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
-  ) {}
+  ) {
+    super(dialog, snackBar);
+  }
 
   getUser() {
     this.subscriptions.add(
@@ -139,20 +143,5 @@ export class EditProfileComponent {
 
   getControlFieldValue(fieldName) {
     return this.editProfileFormGroup.get(fieldName).value;
-  }
-
-  handleUpdateProfileResponse(response) {
-    if (response.status === 'success') {
-      this.changed = false;
-      this.snackBar.open($localize`Profile updated.`);
-    } else {
-      this.snackBar.open($localize`An error occurred. Please try again.`);
-    }
-  }
-
-  unlinkGoogleAccount() {
-    this.dialog.open(UnlinkGoogleAccountConfirmComponent, {
-      panelClass: 'dialog-sm'
-    });
   }
 }
