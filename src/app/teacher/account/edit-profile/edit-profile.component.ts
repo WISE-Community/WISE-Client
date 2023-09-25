@@ -7,6 +7,7 @@ import { Teacher } from '../../../domain/teacher';
 import { TeacherService } from '../../teacher.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { SchoolLevel, schoolLevels } from '../../../domain/profile.constants';
 import { EditProfileComponent } from '../../../common/edit-profile/edit-profile.component';
 
 @Component({
@@ -19,13 +20,7 @@ import { EditProfileComponent } from '../../../common/edit-profile/edit-profile.
 })
 export class TeacherEditProfileComponent extends EditProfileComponent {
   user: Teacher;
-  schoolLevels: any[] = [
-    { id: 'ELEMENTARY_SCHOOL', label: $localize`Elementary School` },
-    { id: 'MIDDLE_SCHOOL', label: $localize`Middle School` },
-    { id: 'HIGH_SCHOOL', label: $localize`High School` },
-    { id: 'COLLEGE', label: $localize`College` },
-    { id: 'OTHER', label: $localize`Other` }
-  ];
+  schoolLevels: SchoolLevel[] = schoolLevels;
   languages: object[];
   isSaving: boolean = false;
   subscriptions: Subscription = new Subscription();
