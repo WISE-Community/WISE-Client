@@ -29,13 +29,24 @@ export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingDial
   create(): Subscription {
     this.peerGrouping.tag = this.peerGroupingAuthoringService.getUniqueTag();
     this.updatePeerGroupingLogic();
-    return this.peerGroupingAuthoringService.createNewPeerGrouping(this.peerGrouping).subscribe(
-      () => {
+    return this.peerGroupingAuthoringService.createNewPeerGrouping(this.peerGrouping).subscribe({
+      next: () => {
         this.dialogRef.close();
       },
-      () => {
-        this.snackBar.open($localize`Please try again (Error: duplicate tag).`);
+      error: ({ error }) => {
+        this.handleError(error);
       }
-    );
+    });
+  }
+
+  private handleError(error: any): void {
+    switch (error.messageCode) {
+      case 'genericError':
+        this.snackBar.open($localize`An error occurred. Please try again.`);
+        break;
+      case 'notAuthorized':
+        this.snackBar.open($localize`You are not allowed to perform this action.`);
+        break;
+    }
   }
 }

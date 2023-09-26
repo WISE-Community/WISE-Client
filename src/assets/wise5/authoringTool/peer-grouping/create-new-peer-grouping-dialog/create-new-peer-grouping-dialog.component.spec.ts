@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { of } from 'rxjs';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { of, throwError } from 'rxjs';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { ReferenceComponent } from '../../../../../app/domain/referenceComponent';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
@@ -15,6 +15,7 @@ const REFERENCE_COMPONENT_COMPONENT_ID1 = 'component1';
 let component: CreateNewPeerGroupingDialogComponent;
 let createNewPeerGroupingSpy: jasmine.Spy, dialogCloseSpy: jasmine.Spy;
 let fixture: ComponentFixture<CreateNewPeerGroupingDialogComponent>;
+let snackBar: MatSnackBar;
 
 describe('CreateNewPeerGroupingDialogComponent', () => {
   beforeEach(async () => {
@@ -30,6 +31,7 @@ describe('CreateNewPeerGroupingDialogComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CreateNewPeerGroupingDialogComponent);
     component = fixture.componentInstance;
+    snackBar = TestBed.inject(MatSnackBar);
     fixture.detectChanges();
   });
   create();
@@ -41,6 +43,7 @@ function create() {
   create_DifferentIdeasMaximizeLogic_ShouldCreatePeerGroup();
   create_DifferentScoresAnyLogic_ShouldCreatePeerGroup();
   create_DifferentScoresMaximizeLogic_ShouldCreatePeerGroup();
+  create_ErrorOccurs_ShowsError();
 }
 
 function create_RandomLogic_ShouldCreatePeerGroup() {
@@ -97,4 +100,42 @@ function expectLogicCreateNewPeerGrouping(logicType: string, mode: string) {
   component.create();
   expect(createNewPeerGroupingSpy).toHaveBeenCalledWith(newPeerGrouping);
   expect(dialogCloseSpy).toHaveBeenCalled();
+}
+
+function create_ErrorOccurs_ShowsError(): void {
+  describe('create new peer grouping returns error', () => {
+    create_GenericErrorOccurs_ShowsError();
+    create_NotAuthorizedErrorOccurs_ShowsError();
+  });
+}
+
+function create_GenericErrorOccurs_ShowsError(): void {
+  describe('returns generic error', () => {
+    it('shows generic error message in snackbar', async () => {
+      returnErrorExpectErrorMessage('genericError', 'An error occurred. Please try again.');
+    });
+  });
+}
+
+function create_NotAuthorizedErrorOccurs_ShowsError(): void {
+  describe('returns not authorized error', () => {
+    it('shows not authorized error in snackbar', async () => {
+      returnErrorExpectErrorMessage('notAuthorized', 'You are not allowed to perform this action.');
+    });
+  });
+}
+
+function returnErrorExpectErrorMessage(messageCode: string, errorMessage: string): void {
+  const snackBarSpy = spyOn(snackBar, 'open');
+  createNewPeerGroupingSpy.and.returnValue(
+    throwError(() => {
+      return {
+        error: {
+          messageCode: messageCode
+        }
+      };
+    })
+  );
+  component.create();
+  expect(snackBarSpy).toHaveBeenCalledWith(errorMessage);
 }
