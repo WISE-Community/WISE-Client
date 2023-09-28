@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'choose-import-unit',
-  styleUrls: ['./choose-import-unit.component.scss'],
+  styleUrls: ['./choose-import-unit.component.scss', '../import-step.scss'],
   templateUrl: './choose-import-unit.component.html'
 })
 export class ChooseImportUnitComponent {
