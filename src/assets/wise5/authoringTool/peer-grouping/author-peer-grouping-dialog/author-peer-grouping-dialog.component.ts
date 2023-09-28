@@ -4,6 +4,7 @@ import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { ReferenceComponent } from '../../../../../app/domain/referenceComponent';
 import { ProjectService } from '../../../services/projectService';
 import { AVAILABLE_LOGIC, AVAILABLE_MODES, PeerGroupingLogic } from '../PeerGroupingLogic';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Directive()
 export abstract class AuthorPeerGroupingDialogComponent implements OnInit {
@@ -18,7 +19,8 @@ export abstract class AuthorPeerGroupingDialogComponent implements OnInit {
 
   constructor(
     protected dialogRef: MatDialogRef<AuthorPeerGroupingDialogComponent>,
-    protected projectService: ProjectService
+    protected projectService: ProjectService,
+    protected snackBar: MatSnackBar
   ) {
     this.availableLogic = AVAILABLE_LOGIC;
   }
@@ -51,5 +53,16 @@ export abstract class AuthorPeerGroupingDialogComponent implements OnInit {
 
   cancel(): void {
     this.dialogRef.close();
+  }
+
+  protected handleError(error: any): void {
+    switch (error.messageCode) {
+      case 'genericError':
+        this.snackBar.open($localize`An error occurred. Please try again.`);
+        break;
+      case 'notAuthorized':
+        this.snackBar.open($localize`You are not allowed to perform this action.`);
+        break;
+    }
   }
 }
