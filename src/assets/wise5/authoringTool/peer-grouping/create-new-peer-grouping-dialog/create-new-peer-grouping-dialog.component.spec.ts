@@ -13,7 +13,8 @@ const TAG1: string = 'tag1';
 const REFERENCE_COMPONENT_NODE_ID1 = 'node1';
 const REFERENCE_COMPONENT_COMPONENT_ID1 = 'component1';
 let component: CreateNewPeerGroupingDialogComponent;
-let createNewPeerGroupingSpy: jasmine.Spy, dialogCloseSpy: jasmine.Spy;
+let createNewPeerGroupingSpy: jasmine.Spy;
+let dialogCloseSpy: jasmine.Spy;
 let fixture: ComponentFixture<CreateNewPeerGroupingDialogComponent>;
 let snackBar: MatSnackBar;
 

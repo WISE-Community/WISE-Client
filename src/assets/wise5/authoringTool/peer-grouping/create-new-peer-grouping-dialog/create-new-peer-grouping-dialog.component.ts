@@ -17,9 +17,9 @@ export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingDial
     protected dialogRef: MatDialogRef<CreateNewPeerGroupingDialogComponent>,
     private peerGroupingAuthoringService: PeerGroupingAuthoringService,
     protected projectService: ProjectService,
-    private snackBar: MatSnackBar
+    protected snackBar: MatSnackBar
   ) {
-    super(dialogRef, projectService);
+    super(dialogRef, projectService, snackBar);
   }
 
   ngOnInit(): void {
@@ -37,16 +37,5 @@ export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingDial
         this.handleError(error);
       }
     });
-  }
-
-  private handleError(error: any): void {
-    switch (error.messageCode) {
-      case 'genericError':
-        this.snackBar.open($localize`An error occurred. Please try again.`);
-        break;
-      case 'notAuthorized':
-        this.snackBar.open($localize`You are not allowed to perform this action.`);
-        break;
-    }
   }
 }
