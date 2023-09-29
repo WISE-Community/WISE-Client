@@ -1,15 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { TeacherDataService } from '../../assets/wise5/services/teacherDataService';
 
 @Injectable()
 export class UpdateWorkgroupService {
-  constructor(
-    private ConfigService: ConfigService,
-    private TeacherDataService: TeacherDataService,
-    private http: HttpClient
-  ) {}
+  constructor(private ConfigService: ConfigService, private http: HttpClient) {}
 
   /**
    * Move student between workgroups, or to/from workgroup and unassigned students
@@ -18,18 +13,11 @@ export class UpdateWorkgroupService {
    * @param workgroupIdTo Workgroup ID to move student to. -1 if moving student to unassigned
    * @param periodId Period ID the student is in.
    */
-  moveMember(
-    userId: number,
-    workgroupIdFrom: number = -1,
-    workgroupIdTo: number = -1,
-    periodId: number = this.TeacherDataService.getCurrentPeriodId()
-  ) {
+  moveMember(userId: number, workgroupIdTo: number) {
     return this.http.post(
       `/api/teacher/run/${this.ConfigService.getRunId()}/workgroup/move-user/${userId}`,
       {
-        workgroupIdFrom: workgroupIdFrom,
-        workgroupIdTo: workgroupIdTo,
-        periodId: periodId
+        workgroupIdTo: workgroupIdTo
       }
     );
   }
