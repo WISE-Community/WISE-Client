@@ -35,6 +35,7 @@ import { ChooseImportComponentComponent } from '../../assets/wise5/authoringTool
 import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component';
 import { ChooseCopyNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component';
 import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component';
+import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
 
 const routes: Routes = [
   {
@@ -112,6 +113,10 @@ const routes: Routes = [
               {
                 path: 'choose-step',
                 component: ChooseImportStepComponent
+              },
+              {
+                path: 'choose-unit',
+                component: ChooseImportUnitComponent
               }
             ]
           },
