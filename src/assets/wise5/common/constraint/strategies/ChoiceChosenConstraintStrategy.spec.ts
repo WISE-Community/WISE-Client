@@ -3,10 +3,13 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { ChoiceChosenConstraintStrategy } from './ChoiceChosenConstraintStrategy';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 
 const choiceId1 = 'choice1';
 const choiceId2 = 'choice2';
 const choiceId3 = 'choice3';
+let componentServiceLookupService: ComponentServiceLookupService;
 let dataService: StudentDataService;
 let getLatestComponentStateSpy: jasmine.Spy;
 let strategy: ChoiceChosenConstraintStrategy;
@@ -25,9 +28,15 @@ const criteria = {
 describe('ChoiceChosenConstraintStrategy', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
+      imports: [
+        ComponentServiceLookupServiceModule,
+        HttpClientTestingModule,
+        StudentTeacherCommonServicesModule
+      ]
     });
     strategy = new ChoiceChosenConstraintStrategy();
+    componentServiceLookupService = TestBed.inject(ComponentServiceLookupService);
+    strategy.componentServiceLookupService = componentServiceLookupService;
     dataService = TestBed.inject(StudentDataService);
     strategy.dataService = dataService;
     getLatestComponentStateSpy = spyOn(
@@ -70,7 +79,7 @@ function oneChoiceChosen(): void {
 }
 
 function multipleChoicesChosen(): void {
-  describe('multipe choices are chosen', () => {
+  describe('multiple choices are chosen', () => {
     describe('the expected choice is not chosen', () => {
       it('returns false', () => {
         setStudentChoicesEvaluateAndExpect([choice2, choice3], false);

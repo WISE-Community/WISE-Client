@@ -35,9 +35,11 @@ export class MultipleChoiceService extends ComponentService {
     studentChoiceIds: string[],
     constraintChoiceIds: string | string[]
   ): boolean {
-    return typeof constraintChoiceIds === 'string'
-      ? studentChoiceIds.length === 1 && studentChoiceIds[0] === constraintChoiceIds
-      : arraysContainSameValues(studentChoiceIds, constraintChoiceIds);
+    if (constraintChoiceIds instanceof Array) {
+      return arraysContainSameValues(studentChoiceIds, constraintChoiceIds);
+    } else {
+      return studentChoiceIds.includes(constraintChoiceIds);
+    }
   }
 
   isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
