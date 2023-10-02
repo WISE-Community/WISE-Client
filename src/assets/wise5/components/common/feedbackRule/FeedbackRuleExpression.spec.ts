@@ -14,6 +14,16 @@ function getPostfix() {
       expectPostfixExpression('(1 && 2) || (3 && 4)', ['1', '2', '&&', '3', '4', '&&', '||']);
       expectPostfixExpression('!(1 || 2) && 3', ['1', '2', '||', '!', '3', '&&']);
       expectPostfixExpression('(!1 || (2 && 3)) || 4', ['1', '!', '2', '3', '&&', '||', '4', '||']);
+      expectPostfixExpression(
+        'isLowestWorkgroupIdInPeerGroup() && myChoiceChosen("choice1") && myChoiceChosen("choice2")',
+        [
+          'isLowestWorkgroupIdInPeerGroup',
+          'myChoiceChosen("choice1")',
+          '&&',
+          'myChoiceChosen("choice2")',
+          '&&'
+        ]
+      );
     });
   });
 }
