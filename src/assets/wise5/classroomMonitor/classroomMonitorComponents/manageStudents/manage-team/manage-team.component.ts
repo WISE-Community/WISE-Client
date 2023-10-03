@@ -88,26 +88,26 @@ export class ManageTeamComponent {
 
   private moveUser(event: CdkDragDrop<string[]>): void {
     this.updateWorkgroupService
-      .moveMember(
-        event.item.data.user.id,
-        event.item.data.workgroupId,
-        this.team.workgroupId,
-        this.team.periodId
-      )
-      .subscribe(() => {
-        const previousIndex = event.previousContainer.data.findIndex(
-          (user) => user === event.item.data.user
-        );
-        transferArrayItem(
-          event.previousContainer.data,
-          event.container.data,
-          previousIndex,
-          event.currentIndex
-        );
-        this.configService.retrieveConfig(
-          `/api/config/classroomMonitor/${this.configService.getRunId()}`
-        );
-        this.snackBar.open($localize`Moved student to Team ${this.team.workgroupId}.`);
+      .moveMember(event.item.data.user.id, this.team.workgroupId)
+      .subscribe({
+        next: (workgroupId: number) => {
+          const previousIndex = event.previousContainer.data.findIndex(
+            (user) => user === event.item.data.user
+          );
+          transferArrayItem(
+            event.previousContainer.data,
+            event.container.data,
+            previousIndex,
+            event.currentIndex
+          );
+          this.configService.retrieveConfig(
+            `/api/config/classroomMonitor/${this.configService.getRunId()}`
+          );
+          this.snackBar.open($localize`Moved student to Team ${workgroupId}.`);
+        },
+        error: () => {
+          this.snackBar.open($localize`Error: Could not move student.`);
+        }
       });
   }
 }
