@@ -36,6 +36,7 @@ export class ProjectAuthoringComponent {
   ngOnInit(): void {
     this.projectId = Number(this.route.snapshot.paramMap.get('unitId'));
     this.refreshProject();
+    this.dataService.setCurrentNode(null);
     this.temporarilyHighlightNewNodes(history.state.newNodes);
     this.subscriptions.add(
       this.projectService.refreshProject$.subscribe(() => {
@@ -153,7 +154,7 @@ export class ProjectAuthoringComponent {
   }
 
   protected importStep(): void {
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/import-step/choose-step`]);
+    this.router.navigate([`/teacher/edit/unit/${this.projectId}/import-step/choose-unit`]);
   }
 
   protected goToAdvancedAuthoring(): void {

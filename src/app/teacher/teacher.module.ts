@@ -32,7 +32,7 @@ import { LibraryModule } from '../modules/library/library.module';
 import { ShareRunDialogComponent } from './share-run-dialog/share-run-dialog.component';
 import { TimelineModule } from '../modules/timeline/timeline.module';
 import { EditComponent } from './account/edit/edit.component';
-import { EditProfileComponent } from './account/edit-profile/edit-profile.component';
+import { TeacherEditProfileComponent } from './account/edit-profile/edit-profile.component';
 import { RunSettingsDialogComponent } from './run-settings-dialog/run-settings-dialog.component';
 import { EditRunWarningDialogComponent } from './edit-run-warning-dialog/edit-run-warning-dialog.component';
 import { ListClassroomCoursesDialogComponent } from './list-classroom-courses-dialog/list-classroom-courses-dialog.component';
@@ -81,7 +81,6 @@ const materialModules = [
     CreateRunDialogComponent,
     DiscourseRecentActivityComponent,
     EditComponent,
-    EditProfileComponent,
     EditRunWarningDialogComponent,
     ListClassroomCoursesDialogComponent,
     RunMenuComponent,
@@ -89,6 +88,7 @@ const materialModules = [
     ShareRunCodeDialogComponent,
     ShareRunDialogComponent,
     TeacherComponent,
+    TeacherEditProfileComponent,
     TeacherHomeComponent,
     TeacherRunListComponent,
     TeacherRunListItemComponent

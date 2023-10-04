@@ -3,6 +3,36 @@ import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 
 export class DiscussionComponentDataExportStrategy extends AbstractDataExportStrategy {
+  defaultDiscussionColumnNames = [
+    '#',
+    'Workgroup ID',
+    'User ID 1',
+    'Student Name 1',
+    'User ID 2',
+    'Student Name 2',
+    'User ID 3',
+    'Student Name 3',
+    'Class Period',
+    'Project ID',
+    'Project Name',
+    'Run ID',
+    'Start Date',
+    'End Date',
+    'Server Timestamp',
+    'Client Timestamp',
+    'Node ID',
+    'Component ID',
+    'Component Part Number',
+    'Step Title',
+    'Component Type',
+    'Component Prompt',
+    'Student Data',
+    'Thread ID',
+    'Student Work ID',
+    'Post Level',
+    'Post Text'
+  ];
+
   constructor(private nodeId: string, private component: any) {
     super();
   }
@@ -149,7 +179,7 @@ export class DiscussionComponentDataExportStrategy extends AbstractDataExportStr
     row[columnNameToNumber['Component Prompt']] = removeHTMLTags(component.prompt);
     row[columnNameToNumber['Student Data']] = componentState.studentData;
     row[columnNameToNumber['Student Work ID']] = componentState.id;
-    row[columnNameToNumber['Thread ID']] = threadId;
+    row[columnNameToNumber['Thread ID']] = Number(threadId);
     row[columnNameToNumber['Workgroup ID']] = workgroupId;
     row[columnNameToNumber['Post Level']] = this.getPostLevel(componentState);
     row[columnNameToNumber['Post Text']] = removeHTMLTags(componentState.studentData.response);
@@ -203,37 +233,8 @@ export class DiscussionComponentDataExportStrategy extends AbstractDataExportStr
   }
 
   private populateDiscussionColumnNames(columnNames, columnNameToNumber) {
-    const defaultDiscussionColumnNames = [
-      '#',
-      'Workgroup ID',
-      'User ID 1',
-      'Student Name 1',
-      'User ID 2',
-      'Student Name 2',
-      'User ID 3',
-      'Student Name 3',
-      'Class Period',
-      'Project ID',
-      'Project Name',
-      'Run ID',
-      'Start Date',
-      'End Date',
-      'Server Timestamp',
-      'Client Timestamp',
-      'Node ID',
-      'Component ID',
-      'Component Part Number',
-      'Step Title',
-      'Component Type',
-      'Component Prompt',
-      'Student Data',
-      'Thread ID',
-      'Student Work ID',
-      'Post Level',
-      'Post Text'
-    ];
-    for (let c = 0; c < defaultDiscussionColumnNames.length; c++) {
-      const defaultDiscussionColumnName = defaultDiscussionColumnNames[c];
+    for (let c = 0; c < this.defaultDiscussionColumnNames.length; c++) {
+      const defaultDiscussionColumnName = this.defaultDiscussionColumnNames[c];
       columnNameToNumber[defaultDiscussionColumnName] = c;
       columnNames.push(defaultDiscussionColumnName);
     }

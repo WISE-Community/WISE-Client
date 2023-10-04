@@ -10,6 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
 import { ConfigService } from '../../services/config.service';
+import { SchoolLevel, schoolLevels } from '../../domain/profile.constants';
 
 @Component({
   selector: 'register-teacher-form',
@@ -34,13 +35,9 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
   );
   isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
   isSubmitted = false;
-  schoolLevels: any[] = [
-    { code: 'ELEMENTARY_SCHOOL', label: $localize`Elementary School` },
-    { code: 'MIDDLE_SCHOOL', label: $localize`Middle School` },
-    { code: 'HIGH_SCHOOL', label: $localize`High School` },
-    { code: 'COLLEGE', label: $localize`College` },
-    { code: 'OTHER', label: $localize`Other` }
-  ];
+  passwordsFormGroup = this.fb.group({});
+  processing: boolean = false;
+  schoolLevels: SchoolLevel[] = schoolLevels;
   user: Teacher = new Teacher();
 
   constructor(
