@@ -7,8 +7,8 @@ export class RegisterUserFormComponent {
   protected NAME_REGEX = '^[a-zA-Z]+([ -]?[a-zA-Z]+)*$';
 
   protected confirmPasswordLabel: string = $localize`Confirm Password`;
-  protected passwordsFormGroup: FormGroup = this.fb.group({});
   protected passwordLabel: string = $localize`Password`;
+  protected passwordsFormGroup: FormGroup = this.fb.group({});
   protected processing: boolean = false;
   user: User;
 
