@@ -168,7 +168,7 @@ async function createAccount() {
             PASSWORD
           )
         );
-        component.studentUser.isRecaptchaInvalid = true;
+        component.user.isRecaptchaInvalid = true;
         spyOn(recaptchaV3Service, 'execute').and.returnValue(of(''));
         const errorMessage = 'recaptchaResponseInvalid';
         const response: any = helpers.createAccountErrorResponse(errorMessage);
