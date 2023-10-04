@@ -36,6 +36,7 @@ export class ProjectAuthoringComponent {
   ngOnInit(): void {
     this.projectId = Number(this.route.snapshot.paramMap.get('unitId'));
     this.refreshProject();
+    this.dataService.setCurrentNode(null);
     this.temporarilyHighlightNewNodes(history.state.newNodes);
     this.subscriptions.add(
       this.projectService.refreshProject$.subscribe(() => {
