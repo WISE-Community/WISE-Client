@@ -6,7 +6,6 @@ import { NodeService } from '../../../services/nodeService';
 import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { Node } from '../../../common/Node';
-import { copy } from '../../../common/object/object';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { temporarilyHighlightElement } from '../../../common/dom/dom';
 import { MatDialog } from '@angular/material/dialog';
@@ -26,19 +25,15 @@ export class NodeAuthoringComponent implements OnInit {
   components: ComponentContent[] = [];
   componentsToChecked = {};
   componentsToExpanded = {};
-  currentNodeCopy: any;
   isAnyComponentSelected: boolean = false;
   isGroupNode: boolean;
   node: Node;
   nodeJson: any;
-  nodeCopy: any = null;
   nodeId: string;
   nodePosition: any;
-  originalNodeCopy: any;
   projectId: number;
   showNodeView: boolean = true;
   subscriptions: Subscription = new Subscription();
-  undoStack: any[] = [];
 
   constructor(
     private configService: ConfigService,
@@ -79,12 +74,6 @@ export class NodeAuthoringComponent implements OnInit {
     this.componentsToChecked = {};
     this.componentsToExpanded = {};
     this.isAnyComponentSelected = false;
-    this.undoStack = [];
-
-    // Keep a copy of the node at the beginning of this node authoring session in case we need
-    // to roll back if the user decides to cancel/revert all the changes.
-    this.originalNodeCopy = copy(this.nodeJson);
-    this.currentNodeCopy = copy(this.nodeJson);
 
     if (history.state.newComponents && history.state.newComponents.length > 0) {
       this.highlightNewComponentsAndThenShowComponentAuthoring(history.state.newComponents);
@@ -194,26 +183,10 @@ export class NodeAuthoringComponent implements OnInit {
    * significant changes such as branch paths
    */
   protected authoringViewNodeChanged(parseProject = false): any {
-    this.undoStack.push(this.currentNodeCopy);
-    this.currentNodeCopy = copy(this.nodeJson);
     if (parseProject) {
       this.projectService.parseProject();
     }
     return this.projectService.saveProject();
-  }
-
-  protected undo(): void {
-    if (this.undoStack.length === 0) {
-      alert($localize`There are no changes to undo`);
-    } else if (this.undoStack.length > 0) {
-      if (confirm($localize`Are you sure you want to undo the last change?`)) {
-        const nodePreviousVersion = this.undoStack.pop();
-        this.projectService.replaceNode(this.nodeId, nodePreviousVersion);
-        this.nodeJson = this.projectService.getNodeById(this.nodeId);
-        this.components = this.projectService.getComponents(this.nodeId);
-        this.projectService.saveProject();
-      }
-    }
   }
 
   protected showAdvancedView(): void {
