@@ -30,18 +30,6 @@
           *ngIf="!isGroupNode"
           mat-raised-button
           color="primary"
-          (click)="undo()"
-          [disabled]="getSelectedComponents().length !== 0 || undoStack.length === 0"
-          matTooltip="Undo"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>undo</mat-icon>
-        </button>
-        <button
-          *ngIf="!isGroupNode"
-          mat-raised-button
-          color="primary"
           class="top-button"
           (click)="previewStepInNewWindow()"
           [disabled]="showEditTransitions"
