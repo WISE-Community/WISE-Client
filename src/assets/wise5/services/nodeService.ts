@@ -58,7 +58,7 @@ export class NodeService {
       let nextNodeId = null;
       const currentNodeId = currentId ?? this.DataService.getCurrentNodeId();
       if (currentNodeId) {
-        if (['classroomMonitor', 'author'].includes(this.ConfigService.getMode())) {
+        if (['author', 'classroomMonitor'].includes(this.ConfigService.getMode())) {
           const currentNodeOrder = this.ProjectService.getNodeOrderById(currentNodeId);
           if (currentNodeOrder) {
             const nextId = this.ProjectService.getNodeIdByOrder(currentNodeOrder + 1);
