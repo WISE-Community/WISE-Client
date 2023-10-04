@@ -16,8 +16,14 @@ export class ChooseNewNodeTemplate {
       route: 'add-your-own'
     },
     {
+      label: $localize`Import from Another Unit`,
+      description: $localize`Import a step from another unit`,
+      icon: 'system_update_alt',
+      route: 'import-step/choose-unit'
+    },
+    {
       label: $localize`Automated Assessment`,
-      description: $localize`Automated Assessment Description`,
+      description: $localize`Automated Assessment`,
       icon: 'fact_check',
       route: 'automated-assessment/choose-item'
     },

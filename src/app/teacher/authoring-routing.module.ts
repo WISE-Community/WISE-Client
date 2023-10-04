@@ -91,6 +91,23 @@ const routes: Routes = [
                 component: ChooseNewNodeLocation
               },
               {
+                path: 'import-step',
+                children: [
+                  {
+                    path: 'choose-location',
+                    component: ChooseImportStepLocationComponent
+                  },
+                  {
+                    path: 'choose-step',
+                    component: ChooseImportStepComponent
+                  },
+                  {
+                    path: 'choose-unit',
+                    component: ChooseImportUnitComponent
+                  }
+                ]
+              },
+              {
                 path: 'simulation',
                 children: [{ path: 'choose-item', component: ChooseSimulationComponent }]
               }
@@ -103,23 +120,6 @@ const routes: Routes = [
           },
           { path: 'choose-copy-location', component: ChooseCopyNodeLocationComponent },
           { path: 'choose-move-location', component: ChooseMoveNodeLocationComponent },
-          {
-            path: 'import-step',
-            children: [
-              {
-                path: 'choose-location',
-                component: ChooseImportStepLocationComponent
-              },
-              {
-                path: 'choose-step',
-                component: ChooseImportStepComponent
-              },
-              {
-                path: 'choose-unit',
-                component: ChooseImportUnitComponent
-              }
-            ]
-          },
           { path: 'info', component: ProjectInfoAuthoringComponent },
           { path: 'milestones', component: MilestonesAuthoringComponent },
           {

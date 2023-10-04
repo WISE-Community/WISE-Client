@@ -39,14 +39,14 @@ export class ChooseImportStepLocationComponent {
           this.projectService.refreshProject();
           if (nodesWithNewNodeIds.length === 1) {
             const newNode = nodesWithNewNodeIds[0];
-            this.router.navigate(['../../node', newNode.id], {
+            this.router.navigate(['../../../node', newNode.id], {
               relativeTo: this.route,
               state: {
                 newComponents: newNode.components
               }
             });
           } else {
-            this.router.navigate(['../..'], { relativeTo: this.route });
+            this.router.navigate(['../../..'], { relativeTo: this.route });
           }
         });
       });

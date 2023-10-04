@@ -152,10 +152,6 @@ export class ProjectAuthoringComponent {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/structure/choose`]);
   }
 
-  protected importStep(): void {
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/import-step/choose-unit`]);
-  }
-
   protected goToAdvancedAuthoring(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/advanced`]);
   }

@@ -46,17 +46,6 @@
     <button
       mat-raised-button
       color="primary"
-      (click)="importStep()"
-      [disabled]="stepNodeSelected || groupNodeSelected"
-      matTooltip="Import Step"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>system_update_alt</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
       (click)="chooseLocation(false)"
       [disabled]="!hasSelectedNodes()"
       matTooltip="Move"
