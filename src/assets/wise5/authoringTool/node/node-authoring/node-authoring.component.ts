@@ -14,7 +14,7 @@ import { EditComponentAdvancedComponent } from '../../../../../app/authoring-too
 import { Component as WiseComponent } from '../../../common/Component';
 import { ChooseNewComponent } from '../../../../../app/authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'node-authoring',
@@ -32,7 +32,6 @@ export class NodeAuthoringComponent implements OnInit {
   nodeId: string;
   nodePosition: any;
   projectId: number;
-  showNodeView: boolean = true;
   subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -45,14 +44,9 @@ export class NodeAuthoringComponent implements OnInit {
     private dataService: TeacherDataService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => this.updateShowNodeView());
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.updateShowNodeView();
     this.nodeId = this.route.snapshot.paramMap.get('nodeId');
     this.route.parent.params.subscribe((params) => {
       this.projectId = Number(params.unitId);
@@ -80,12 +74,6 @@ export class NodeAuthoringComponent implements OnInit {
     } else {
       this.scrollToTopOfPage();
     }
-  }
-
-  private updateShowNodeView(): void {
-    this.showNodeView = /\/teacher\/edit\/unit\/(\d*)\/node\/(node|group)(\d*)$/.test(
-      this.router.url
-    );
   }
 
   ngOnDestroy(): void {
@@ -187,10 +175,6 @@ export class NodeAuthoringComponent implements OnInit {
       this.projectService.parseProject();
     }
     return this.projectService.saveProject();
-  }
-
-  protected showAdvancedView(): void {
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/node/${this.nodeId}/advanced`]);
   }
 
   protected getSelectedComponents(): ComponentContent[] {

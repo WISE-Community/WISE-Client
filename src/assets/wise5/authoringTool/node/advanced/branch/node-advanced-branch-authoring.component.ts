@@ -53,7 +53,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.parent.params.subscribe((params) => {
+    this.route.parent.parent.params.subscribe((params) => {
       this.nodeId = params.nodeId;
       this.node = this.projectService.getNodeById(this.nodeId);
       this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);

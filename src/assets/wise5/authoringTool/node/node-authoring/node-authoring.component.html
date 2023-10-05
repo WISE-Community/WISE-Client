@@ -1,257 +1,254 @@
-<router-outlet></router-outlet>
-<div *ngIf="showNodeView">
-  <div class="top-button-bar">
-    <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-      <teacher-node-icon [nodeId]="nodeId" [canEdit]="true" size="18"></teacher-node-icon>
-      <mat-form-field class="step-title form-field-no-hint">
-        <mat-label *ngIf="!isGroupNode" i18n>Step Title {{ nodePosition }}:</mat-label>
-        <mat-label *ngIf="isGroupNode" i18n> Activity Title {{ nodePosition }}: </mat-label>
-        <input
-          matInput
-          [(ngModel)]="nodeJson.title"
-          [ngModelOptions]="{ debounce: 500 }"
-          (change)="authoringViewNodeChanged()"
-          aria-label="Title"
-          i18n-aria-label
-        />
-      </mat-form-field>
-      <div class="node-buttons" fxLayoutGap="16px">
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="showAdvancedView()"
-          matTooltip="Advanced"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>build</mat-icon>
-        </button>
-        <button
-          *ngIf="!isGroupNode"
-          mat-raised-button
-          color="primary"
-          class="top-button"
-          (click)="previewStepInNewWindow()"
-          [disabled]="showEditTransitions"
-          matTooltip="Preview Step"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>visibility</mat-icon>
-        </button>
-      </div>
-      <span fxFlex></span>
+<div class="top-button-bar">
+  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+    <teacher-node-icon [nodeId]="nodeId" [canEdit]="true" size="18"></teacher-node-icon>
+    <mat-form-field class="step-title form-field-no-hint">
+      <mat-label *ngIf="!isGroupNode" i18n>Step Title {{ nodePosition }}:</mat-label>
+      <mat-label *ngIf="isGroupNode" i18n> Activity Title {{ nodePosition }}: </mat-label>
+      <input
+        matInput
+        [(ngModel)]="nodeJson.title"
+        [ngModelOptions]="{ debounce: 500 }"
+        (change)="authoringViewNodeChanged()"
+        aria-label="Title"
+        i18n-aria-label
+      />
+    </mat-form-field>
+    <div class="node-buttons" fxLayoutGap="16px">
       <button
-        mat-icon-button
-        (click)="close()"
-        matTooltip="Back to unit"
+        mat-raised-button
+        color="primary"
+        routerLink="advanced"
+        matTooltip="Advanced"
         matTooltipPosition="above"
         i18n-matTooltip
       >
-        <mat-icon>close</mat-icon>
+        <mat-icon>build</mat-icon>
+      </button>
+      <button
+        *ngIf="!isGroupNode"
+        mat-raised-button
+        color="primary"
+        class="top-button"
+        (click)="previewStepInNewWindow()"
+        [disabled]="showEditTransitions"
+        matTooltip="Preview Step"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>visibility</mat-icon>
       </button>
     </div>
-    <ng-template #addComponentButtonTemplate let-componentId="componentId">
+    <span fxFlex></span>
+    <button
+      mat-icon-button
+      (click)="close()"
+      matTooltip="Back to unit"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <ng-template #addComponentButtonTemplate let-componentId="componentId">
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Add a new component"
+      i18n-matTooltip
+      matTooltipPosition="above"
+      (click)="addComponent(componentId)"
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </ng-template>
+  <div
+    *ngIf="!isGroupNode"
+    class="components-header"
+    fxLayout="row"
+    fxLayoutAlign="start center"
+    fxLayoutGap="4px"
+  >
+    <h5 i18n>Components</h5>
+    <ng-container
+      *ngTemplateOutlet="addComponentButtonTemplate; context: { componentId: null }"
+    ></ng-container>
+    <div *ngIf="isAnyComponentSelected">
       <button
         mat-icon-button
         color="primary"
-        matTooltip="Add a new component"
-        i18n-matTooltip
+        (click)="chooseComponentLocation('move')"
+        matTooltip="Move Components"
         matTooltipPosition="above"
-        (click)="addComponent(componentId)"
+        i18n-matTooltip
       >
-        <mat-icon>add_circle</mat-icon>
+        <mat-icon>redo</mat-icon>
       </button>
-    </ng-template>
-    <div
-      *ngIf="!isGroupNode"
-      class="components-header"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      fxLayoutGap="4px"
-    >
-      <h5 i18n>Components</h5>
-      <ng-container
-        *ngTemplateOutlet="addComponentButtonTemplate; context: { componentId: null }"
-      ></ng-container>
-      <div *ngIf="isAnyComponentSelected">
-        <button
-          mat-icon-button
-          color="primary"
-          (click)="chooseComponentLocation('move')"
-          matTooltip="Move Components"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>redo</mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          color="primary"
-          (click)="chooseComponentLocation('copy')"
-          matTooltip="Copy Components"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>content_copy</mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          color="primary"
-          (click)="deleteComponents()"
-          matTooltip="Delete Components"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-      <span fxFlex></span>
-      <div *ngIf="!isGroupNode" fxLayoutGap="16px">
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="setAllComponentsIsExpanded(true)"
-          [disabled]="getNumberOfComponentsExpanded() === components.length"
-          i18n
-        >
-          + Expand All
-        </button>
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="setAllComponentsIsExpanded(false)"
-          [disabled]="getNumberOfComponentsExpanded() === 0"
-          i18n
-        >
-          - Collapse All
-        </button>
-      </div>
+      <button
+        mat-icon-button
+        color="primary"
+        (click)="chooseComponentLocation('copy')"
+        matTooltip="Copy Components"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>content_copy</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="primary"
+        (click)="deleteComponents()"
+        matTooltip="Delete Components"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <span fxFlex></span>
+    <div *ngIf="!isGroupNode" fxLayoutGap="16px">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="setAllComponentsIsExpanded(true)"
+        [disabled]="getNumberOfComponentsExpanded() === components.length"
+        i18n
+      >
+        + Expand All
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="setAllComponentsIsExpanded(false)"
+        [disabled]="getNumberOfComponentsExpanded() === 0"
+        i18n
+      >
+        - Collapse All
+      </button>
     </div>
   </div>
-  <div *ngIf="components.length === 0 && !isGroupNode" class="no-components-message">
-    <em i18n>This step does not have any components. Click the + button to add a component.</em>
-  </div>
-  <div cdkDropList (cdkDropListDropped)="dropComponent($event)" cdkScrollable>
-    <div *ngFor="let component of components; let i = index">
-      <div
-        [id]="component.id"
-        class="component"
-        cdkDrag
-        [cdkDragDisabled]="components.length < 2"
-        fxLayout="row"
-        fxLayoutAlign="start"
-        [ngClass]="{
-          'component-header-highlight': !componentsToExpanded[component.id]
-        }"
-      >
-        <div style="width: 100%">
-          <div
-            (click)="toggleComponent(component.id)"
-            class="component-header"
-            fxLayout="row"
-            fxLayoutAlign="start center"
-            fxLayoutGap="8px"
-            aria-label="Toggle component authoring"
-            i18n-aria-label
-          >
-            <div fxLayout="row" fxLayoutAlign="start center">
-              <mat-icon
-                class="drag-handle"
-                *ngIf="components.length > 1"
-                cdkDragHandle
-                title="Drag to reorder"
-                i18n-title
-                >drag_indicator</mat-icon
+</div>
+<div *ngIf="components.length === 0 && !isGroupNode" class="no-components-message">
+  <em i18n>This step does not have any components. Click the + button to add a component.</em>
+</div>
+<div cdkDropList (cdkDropListDropped)="dropComponent($event)" cdkScrollable>
+  <div *ngFor="let component of components; let i = index">
+    <div
+      [id]="component.id"
+      class="component"
+      cdkDrag
+      [cdkDragDisabled]="components.length < 2"
+      fxLayout="row"
+      fxLayoutAlign="start"
+      [ngClass]="{
+        'component-header-highlight': !componentsToExpanded[component.id]
+      }"
+    >
+      <div style="width: 100%">
+        <div
+          (click)="toggleComponent(component.id)"
+          class="component-header"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="8px"
+          aria-label="Toggle component authoring"
+          i18n-aria-label
+        >
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon
+              class="drag-handle"
+              *ngIf="components.length > 1"
+              cdkDragHandle
+              title="Drag to reorder"
+              i18n-title
+              >drag_indicator</mat-icon
+            >
+            <mat-checkbox
+              color="primary"
+              [(ngModel)]="componentsToChecked[component.id]"
+              (change)="updateIsAnyComponentSelected()"
+              (click)="componentCheckboxClicked($event)"
+              aria-label="Select component"
+              i18n-aria-label
+            >
+              <span class="component-label"
+                >{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span
               >
-              <mat-checkbox
-                color="primary"
-                [(ngModel)]="componentsToChecked[component.id]"
-                (change)="updateIsAnyComponentSelected()"
-                (click)="componentCheckboxClicked($event)"
-                aria-label="Select component"
-                i18n-aria-label
-              >
-                <span class="component-label"
-                  >{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span
-                >
-              </mat-checkbox>
-            </div>
-            <ng-container>
-              <div
-                class="component-expand-collapse-div"
-                matTooltip="Click to expand/collapse"
-                matTooltipPosition="above"
-                i18n-matTooltip
-              ></div>
-              <button
-                *ngIf="componentsToExpanded[component.id]"
-                mat-icon-button
-                color="primary"
-                (click)="showComponentAdvancedAuthoring(component, $event)"
-                matTooltip="Advanced"
-                matTooltipPosition="above"
-                i18n-matTooltip
-              >
-                <mat-icon>build</mat-icon>
-              </button>
-              <preview-component-button
-                class="dynamic-component-button"
-                [ngClass]="{
-                  'show-dynamic-component-button': componentsToExpanded[component.id]
-                }"
-                [nodeId]="nodeId"
-                [componentId]="component.id"
-              ></preview-component-button>
-              <button
-                mat-icon-button
-                color="primary"
-                class="dynamic-component-button"
-                [ngClass]="{
-                  'show-dynamic-component-button': componentsToExpanded[component.id]
-                }"
-                (click)="copyComponent($event, component)"
-                matTooltip="Copy Component"
-                matTooltipPosition="above"
-                i18n-matTooltip
-              >
-                <mat-icon>content_copy</mat-icon>
-              </button>
-              <button
-                mat-icon-button
-                color="primary"
-                class="dynamic-component-button"
-                [ngClass]="{
-                  'show-dynamic-component-button': componentsToExpanded[component.id]
-                }"
-                (click)="deleteComponent($event, i + 1, component)"
-                matTooltip="Delete Component"
-                matTooltipPosition="above"
-                i18n-matTooltip
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-            </ng-container>
-            <div fxLayout="row" fxLayoutAlign="end center">
-              <div *ngIf="!componentsToExpanded[component.id]" fxLayoutAlign="end center">
-                <mat-icon>expand_more</mat-icon>
-              </div>
-              <div *ngIf="componentsToExpanded[component.id]" fxLayoutAlign="end center">
-                <mat-icon>expand_less</mat-icon>
-              </div>
-            </div>
+            </mat-checkbox>
           </div>
-          <div *ngIf="componentsToExpanded[component.id]" class="component-authoring">
-            <component-authoring-component
+          <ng-container>
+            <div
+              class="component-expand-collapse-div"
+              matTooltip="Click to expand/collapse"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            ></div>
+            <button
+              *ngIf="componentsToExpanded[component.id]"
+              mat-icon-button
+              color="primary"
+              (click)="showComponentAdvancedAuthoring(component, $event)"
+              matTooltip="Advanced"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
+              <mat-icon>build</mat-icon>
+            </button>
+            <preview-component-button
+              class="dynamic-component-button"
+              [ngClass]="{
+                'show-dynamic-component-button': componentsToExpanded[component.id]
+              }"
               [nodeId]="nodeId"
-              [componentContent]="component"
-            ></component-authoring-component>
+              [componentId]="component.id"
+            ></preview-component-button>
+            <button
+              mat-icon-button
+              color="primary"
+              class="dynamic-component-button"
+              [ngClass]="{
+                'show-dynamic-component-button': componentsToExpanded[component.id]
+              }"
+              (click)="copyComponent($event, component)"
+              matTooltip="Copy Component"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
+              <mat-icon>content_copy</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="primary"
+              class="dynamic-component-button"
+              [ngClass]="{
+                'show-dynamic-component-button': componentsToExpanded[component.id]
+              }"
+              (click)="deleteComponent($event, i + 1, component)"
+              matTooltip="Delete Component"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </ng-container>
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <div *ngIf="!componentsToExpanded[component.id]" fxLayoutAlign="end center">
+              <mat-icon>expand_more</mat-icon>
+            </div>
+            <div *ngIf="componentsToExpanded[component.id]" fxLayoutAlign="end center">
+              <mat-icon>expand_less</mat-icon>
+            </div>
           </div>
-          <div class="add-component">
-            <ng-container
-              *ngTemplateOutlet="addComponentButtonTemplate; context: { componentId: component.id }"
-            ></ng-container>
-          </div>
+        </div>
+        <div *ngIf="componentsToExpanded[component.id]" class="component-authoring">
+          <component-authoring-component
+            [nodeId]="nodeId"
+            [componentContent]="component"
+          ></component-authoring-component>
+        </div>
+        <div class="add-component">
+          <ng-container
+            *ngTemplateOutlet="addComponentButtonTemplate; context: { componentId: component.id }"
+          ></ng-container>
         </div>
       </div>
     </div>
