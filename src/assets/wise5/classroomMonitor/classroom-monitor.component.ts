@@ -66,6 +66,7 @@ export class ClassroomMonitorComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+    this.dataService.clearCurrentPeriod();
   }
 
   private initializeNotebook(): void {

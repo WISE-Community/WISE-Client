@@ -683,6 +683,10 @@ export class TeacherDataService extends DataService {
     }
   }
 
+  clearCurrentPeriod(): void {
+    this.currentPeriod = null;
+  }
+
   getCurrentPeriod() {
     return this.currentPeriod;
   }
