@@ -53,8 +53,13 @@ export class ManageUserComponent {
     this.http.delete(`/api/teacher/run/${runId}/student/${studentId}/remove`).subscribe({
       next: () => {
         this.removeUserEvent.emit(this.user);
-        this.snackBar.open($localize`Removed ${this.user.name} (${this.user.username}) from unit.`);
-        this.configService.retrieveConfig(`/api/config/classroomMonitor/${runId}`);
+        this.configService.retrieveConfig(`/api/config/classroomMonitor/${runId}`).subscribe({
+          next: () => {
+            this.snackBar.open(
+              $localize`Removed ${this.user.name} (${this.user.username}) from unit.`
+            );
+          }
+        });
       },
       error: () => {
         this.snackBar.open(
