@@ -23,7 +23,7 @@ export class NodeAdvancedJsonAuthoringComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.parent.params.subscribe((params) => {
+    this.route.parent.parent.params.subscribe((params) => {
       this.nodeId = params.nodeId;
       this.node = this.projectService.getNodeById(this.nodeId);
       this.nodeContentJSONString = JSON.stringify(this.node, null, 4);

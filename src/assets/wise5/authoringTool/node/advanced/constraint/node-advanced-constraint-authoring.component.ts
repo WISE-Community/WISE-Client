@@ -16,7 +16,7 @@ export class NodeAdvancedConstraintAuthoringComponent extends ConstraintsAuthori
   }
 
   ngOnInit() {
-    this.route.parent.params.subscribe((params) => {
+    this.route.parent.parent.params.subscribe((params) => {
       const node = this.projectService.getNodeById(params.nodeId);
       if (node.constraints == null) {
         node.constraints = [];
