@@ -53,32 +53,19 @@ export class NodeService {
    * @param currentId (optional)
    * @returns a promise that returns the next node id
    */
-  getNextNodeId(currentId?): Promise<any> {
+  getNextNodeId(currentId?: string): Promise<any> {
     const promise = new Promise((resolve, reject) => {
       let nextNodeId = null;
-      let currentNodeId = null;
-      let mode = this.ConfigService.getMode();
-      if (currentId) {
-        currentNodeId = currentId;
-      } else {
-        let currentNode = null;
-        currentNode = this.DataService.getCurrentNode();
-        if (currentNode) {
-          currentNodeId = currentNode.id;
-        }
-      }
+      const currentNodeId = currentId ?? this.DataService.getCurrentNodeId();
       if (currentNodeId) {
-        if (mode === 'classroomMonitor' || mode === 'author') {
-          let currentNodeOrder = this.ProjectService.getNodeOrderById(currentNodeId);
+        if (['author', 'classroomMonitor'].includes(this.ConfigService.getMode())) {
+          const currentNodeOrder = this.ProjectService.getNodeOrderById(currentNodeId);
           if (currentNodeOrder) {
-            let nextNodeOrder = currentNodeOrder + 1;
-            let nextId = this.ProjectService.getNodeIdByOrder(nextNodeOrder);
+            const nextId = this.ProjectService.getNodeIdByOrder(currentNodeOrder + 1);
             if (nextId) {
-              if (this.ProjectService.isApplicationNode(nextId)) {
-                nextNodeId = nextId;
-              } else if (this.ProjectService.isGroupNode(nextId)) {
-                nextNodeId = this.getNextNodeId(nextId);
-              }
+              nextNodeId = this.ProjectService.isApplicationNode(nextId)
+                ? nextId
+                : this.getNextNodeId(nextId);
             }
           }
           resolve(nextNodeId);

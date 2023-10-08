@@ -26,6 +26,7 @@ import { ComponentStudent } from '../../component-student.component';
 import { DialogGuidanceComponent } from '../DialogGuidanceComponent';
 import { copy } from '../../../common/object/object';
 import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
+import { ConstraintService } from '../../../services/constraintService';
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -50,6 +51,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     protected componentService: ComponentService,
     protected computerAvatarService: ComputerAvatarService,
     protected configService: ConfigService,
+    private constraintService: ConstraintService,
     protected cRaterService: CRaterService,
     protected dialog: MatDialog,
     protected dialogGuidanceFeedbackService: DialogGuidanceFeedbackService,
@@ -86,7 +88,9 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
         this.component.getFeedbackRules(),
         this.getMaxSubmitCount(),
         this.component.isMultipleFeedbackTextsForSameRuleAllowed()
-      )
+      ),
+      this.configService,
+      this.constraintService
     );
     if (this.component.isComputerAvatarEnabled()) {
       this.initializeComputerAvatar();

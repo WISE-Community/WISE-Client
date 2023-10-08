@@ -7,4 +7,4 @@ export const AuthoringConfigResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
   configService: ConfigService = inject(ConfigService)
-): Observable<any> => configService.retrieveConfig('api/author/config');
+): Observable<any> => configService.retrieveConfig('/api/author/config');

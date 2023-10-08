@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EditProfileComponent } from './edit-profile.component';
+import { StudentEditProfileComponent } from './edit-profile.component';
 import { User } from '../../../domain/user';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { UserService } from '../../../services/user.service';
@@ -53,9 +53,9 @@ export class MockStudentService {
   }
 }
 
-describe('EditProfileComponent', () => {
-  let component: EditProfileComponent;
-  let fixture: ComponentFixture<EditProfileComponent>;
+describe('StudentEditProfileComponent', () => {
+  let component: StudentEditProfileComponent;
+  let fixture: ComponentFixture<StudentEditProfileComponent>;
 
   const getSubmitButton = () => {
     return fixture.debugElement.nativeElement.querySelector('button[type="submit"]');
@@ -72,7 +72,7 @@ describe('EditProfileComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EditProfileComponent],
+      declarations: [StudentEditProfileComponent],
       imports: [
         BrowserAnimationsModule,
         ReactiveFormsModule,
@@ -87,7 +87,7 @@ describe('EditProfileComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-    fixture = TestBed.createComponent(EditProfileComponent);
+    fixture = TestBed.createComponent(StudentEditProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

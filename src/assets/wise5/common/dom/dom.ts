@@ -31,3 +31,12 @@ export function temporarilyHighlightElement(id: string, duration: number = 1000)
     }, 2000);
   }, duration);
 }
+
+export function scrollToElement(elementId: string) {
+  $('#content').animate(
+    {
+      scrollTop: $(`#${elementId}`).prop('offsetTop')
+    },
+    1000
+  );
+}

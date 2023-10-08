@@ -37,7 +37,7 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            parent: { params: of({ nodeId: 'node1' }) }
+            parent: { parent: { params: of({ nodeId: 'node1' }) } }
           }
         }
       ]

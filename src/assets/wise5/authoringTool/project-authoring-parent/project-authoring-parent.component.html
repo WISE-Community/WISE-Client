@@ -1,0 +1,13 @@
+<div id="top" class="view-content view-content--with-sidemenu">
+  <div class="l-constrained" fxLayout="column">
+    <div class="node-content md-whiteframe-1dp" fxLayout="row wrap">
+      <div class="main-content">
+        <concurrent-authors-message
+          [projectId]="projectId"
+          class="concurrent-authors-message center app-background"
+        ></concurrent-authors-message>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

@@ -32,7 +32,11 @@ import { ProjectAssetAuthoringComponent } from '../../assets/wise5/authoringTool
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
 import { ChooseImportComponentComponent } from '../../assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component';
-import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-move-node-location/choose-move-node-location.component';
+import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component';
+import { ChooseCopyNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component';
+import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component';
+import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
+import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
 
 const routes: Routes = [
   {
@@ -45,9 +49,10 @@ const routes: Routes = [
       { path: 'new-unit', component: AddProjectComponent },
       {
         path: 'unit/:unitId',
-        component: ProjectAuthoringComponent,
+        component: ProjectAuthoringParentComponent,
         resolve: { project: AuthoringProjectResolver },
         children: [
+          { path: '', component: ProjectAuthoringComponent },
           {
             path: 'add-lesson',
             children: [
@@ -97,6 +102,7 @@ const routes: Routes = [
             path: 'asset',
             component: ProjectAssetAuthoringComponent
           },
+          { path: 'choose-copy-location', component: ChooseCopyNodeLocationComponent },
           { path: 'choose-move-location', component: ChooseMoveNodeLocationComponent },
           {
             path: 'import-step',
@@ -108,6 +114,10 @@ const routes: Routes = [
               {
                 path: 'choose-step',
                 component: ChooseImportStepComponent
+              },
+              {
+                path: 'choose-unit',
+                component: ChooseImportUnitComponent
               }
             ]
           },
@@ -115,8 +125,24 @@ const routes: Routes = [
           { path: 'milestones', component: MilestonesAuthoringComponent },
           {
             path: 'node/:nodeId',
-            component: NodeAuthoringComponent,
+            component: NodeAuthoringParentComponent,
             children: [
+              {
+                path: '',
+                component: NodeAuthoringComponent
+              },
+              {
+                path: 'advanced',
+                component: NodeAdvancedAuthoringComponent,
+                children: [
+                  { path: 'branch', component: NodeAdvancedBranchAuthoringComponent },
+                  { path: 'constraint', component: NodeAdvancedConstraintAuthoringComponent },
+                  { path: 'general', component: NodeAdvancedGeneralAuthoringComponent },
+                  { path: 'json', component: NodeAdvancedJsonAuthoringComponent },
+                  { path: 'path', component: NodeAdvancedPathAuthoringComponent },
+                  { path: 'rubric', component: EditNodeRubricComponent }
+                ]
+              },
               {
                 path: 'choose-component-location',
                 component: ChooseComponentLocationComponent
@@ -125,19 +151,6 @@ const routes: Routes = [
                 path: 'import-component',
                 children: [{ path: 'choose-component', component: ChooseImportComponentComponent }]
               }
-            ]
-          },
-
-          {
-            path: 'node/:nodeId/advanced',
-            component: NodeAdvancedAuthoringComponent,
-            children: [
-              { path: 'branch', component: NodeAdvancedBranchAuthoringComponent },
-              { path: 'constraint', component: NodeAdvancedConstraintAuthoringComponent },
-              { path: 'general', component: NodeAdvancedGeneralAuthoringComponent },
-              { path: 'json', component: NodeAdvancedJsonAuthoringComponent },
-              { path: 'path', component: NodeAdvancedPathAuthoringComponent },
-              { path: 'rubric', component: EditNodeRubricComponent }
             ]
           },
           { path: 'notebook', component: NotebookAuthoringComponent },

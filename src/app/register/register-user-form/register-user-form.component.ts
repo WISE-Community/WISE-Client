@@ -1,15 +1,16 @@
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { User } from '../../domain/user';
 import { injectPasswordErrors } from '../../common/password-helper';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class RegisterUserFormComponent {
-  NAME_REGEX = '^[a-zA-Z]+([ -]?[a-zA-Z]+)*$';
+  protected NAME_REGEX = '^[a-zA-Z]+([ -]?[a-zA-Z]+)*$';
 
-  confirmPasswordLabel: string = $localize`Confirm Password`;
-  passwordLabel: string = $localize`Password`;
-  passwordsFormGroup = this.fb.group({});
-  processing: boolean = false;
+  protected confirmPasswordLabel: string = $localize`Confirm Password`;
+  protected passwordLabel: string = $localize`Password`;
+  protected passwordsFormGroup: FormGroup = this.fb.group({});
+  protected processing: boolean = false;
+  user: User;
 
   constructor(protected fb: FormBuilder, protected snackBar: MatSnackBar) {}
 
@@ -27,7 +28,7 @@ export class RegisterUserFormComponent {
     this.processing = false;
   }
 
-  translateCreateAccountErrorMessageCode(messageCode: string) {
+  private translateCreateAccountErrorMessageCode(messageCode: string): string {
     switch (messageCode) {
       case 'invalidFirstAndLastName':
         return $localize`Error: First Name and Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash`;

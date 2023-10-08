@@ -19,8 +19,6 @@ export class TeacherProjectService extends ProjectService {
   public nodeChanged$: Observable<boolean> = this.nodeChangedSource.asObservable();
   private refreshProjectSource: Subject<void> = new Subject<void>();
   public refreshProject$ = this.refreshProjectSource.asObservable();
-  private scrollToBottomOfPageSource: Subject<void> = new Subject<void>();
-  public scrollToBottomOfPage$ = this.scrollToBottomOfPageSource.asObservable();
   private errorSavingProjectSource: Subject<void> = new Subject<void>();
   public errorSavingProject$: Observable<void> = this.errorSavingProjectSource.asObservable();
   private notAllowedToEditThisProjectSource: Subject<void> = new Subject<void>();
@@ -896,10 +894,6 @@ export class TeacherProjectService extends ProjectService {
 
   refreshProject() {
     this.refreshProjectSource.next();
-  }
-
-  scrollToBottomOfPage() {
-    this.scrollToBottomOfPageSource.next();
   }
 
   nodeHasConstraint(nodeId: string): boolean {
@@ -3102,5 +3096,15 @@ export class TeacherProjectService extends ProjectService {
       objects.splice(index, 1);
       objects.splice(index + 1, 0, object);
     }
+  }
+
+  getNodesInOrder(): any[] {
+    return Object.entries(this.idToOrder)
+      .map((entry: any) => {
+        return { key: entry[0], id: entry[0], order: entry[1].order };
+      })
+      .sort((a: any, b: any) => {
+        return a.order - b.order;
+      });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ComponentTypeService } from '../../../services/componentTypeService';
@@ -11,11 +11,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AddYourOwnNode {
   protected addNodeFormGroup: FormGroup = this.fb.group({
-    title: new FormControl('', [Validators.required])
+    title: new FormControl($localize`New Step`, [Validators.required])
   });
   protected componentTypes: any[];
   protected initialComponents: string[] = [];
-  protected title: string;
 
   constructor(
     private componentTypeService: ComponentTypeService,
@@ -26,11 +25,6 @@ export class AddYourOwnNode {
 
   ngOnInit() {
     this.componentTypes = this.componentTypeService.getComponentTypes();
-  }
-
-  @ViewChild('titleField') titleField: ElementRef;
-  ngAfterViewInit() {
-    this.titleField.nativeElement.focus();
   }
 
   protected addComponent(componentType: any): void {

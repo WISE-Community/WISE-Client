@@ -1,23 +1,19 @@
 .project-item {
-  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .project-item:hover {
   background-color: #add8e6;
 }
 
-.groupHeader {
-  margin-left: 5px !important;
+.step-header {
+  margin-inline-start: 24px;
 }
 
-.stepHeader {
-  margin-left: 30px !important;
-}
-
-.branchPathStepHeader {
-  margin-left: 55px !important;
+.branch-path-step-header {
+  margin-inline-start: 48px;
 }
 
 .mat-icon {
-  margin: 0px;
+  margin: 0;
 }

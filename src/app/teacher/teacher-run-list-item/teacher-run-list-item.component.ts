@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, Output, EventEmitter } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafeStyle } from '@angular/platform-browser';
 import { TeacherRun } from '../teacher-run';
@@ -15,13 +15,14 @@ import { ShareRunCodeDialogComponent } from '../share-run-code-dialog/share-run-
   animations: [flash]
 })
 export class TeacherRunListItemComponent implements OnInit {
+  protected animateDelay: string = '0s';
+  protected animateDuration: string = '0s';
+  protected manageStudentsLink: string = '';
+  protected periodsTooltipText: string;
   @Input() run: TeacherRun = new TeacherRun();
-
-  manageStudentsLink: string = '';
-  periodsTooltipText: string;
-  thumbStyle: SafeStyle;
-  animateDuration: string = '0s';
-  animateDelay: string = '0s';
+  @Output() runArchiveStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() runSelectedStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
+  protected thumbStyle: SafeStyle;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -36,17 +37,17 @@ export class TeacherRunListItemComponent implements OnInit {
     this.manageStudentsLink = `${this.configService.getContextPath()}/teacher/manage/unit/${
       this.run.id
     }/manage-students`;
-    if (this.run.isHighlighted) {
+    if (this.run.highlighted) {
       this.animateDuration = '2s';
       this.animateDelay = '1s';
       setTimeout(() => {
-        this.run.isHighlighted = false;
+        this.run.highlighted = false;
       }, 7000);
     }
   }
 
   ngAfterViewInit() {
-    if (this.run.isHighlighted) {
+    if (this.run.highlighted) {
       this.elRef.nativeElement.querySelector('mat-card').scrollIntoView();
     }
   }
@@ -61,7 +62,7 @@ export class TeacherRunListItemComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustStyle(STYLE);
   }
 
-  launchGradeAndManageTool(): void {
+  protected launchGradeAndManageTool(): void {
     if (this.run.project.wiseVersion === 4) {
       window.location.href =
         `${this.configService.getWISE4Hostname()}` +
@@ -73,7 +74,7 @@ export class TeacherRunListItemComponent implements OnInit {
     }
   }
 
-  getPeriodsTooltipText(): string {
+  private getPeriodsTooltipText(): string {
     let string = '';
     const length = this.run.periods.length;
     for (let p = 0; p < length; p++) {
@@ -88,18 +89,25 @@ export class TeacherRunListItemComponent implements OnInit {
     return string;
   }
 
-  isRunActive(run) {
+  protected isRunActive(run: TeacherRun): boolean {
     return run.isActive(this.configService.getCurrentServerTime());
   }
 
-  isRunCompleted(run) {
+  protected isRunCompleted(run: TeacherRun): boolean {
     return run.isCompleted(this.configService.getCurrentServerTime());
   }
 
-  shareCode(): void {
+  shareCode(event: Event): void {
+    event.preventDefault();
     this.dialog.open(ShareRunCodeDialogComponent, {
       data: this.run,
       panelClass: 'dialog-sm'
     });
+  }
+
+  protected runArchiveStatusChanged(): void {
+    this.run.selected = false;
+    this.runSelectedStatusChangedEvent.emit();
+    this.runArchiveStatusChangedEvent.emit();
   }
 }

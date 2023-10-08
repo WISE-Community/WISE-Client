@@ -23,7 +23,7 @@ export const TeacherToolsResolver: ResolveFn<any> = (
   websocketService: TeacherWebSocketService = inject(TeacherWebSocketService)
 ): Observable<any> =>
   configService
-    .retrieveConfig(`api/config/classroomMonitor/${route.params['unitId']}`)
+    .retrieveConfig(`/api/config/classroomMonitor/${route.params['unitId']}`)
     .pipe(switchMap(() => projectService.retrieveProject()))
     .pipe(switchMap(() => classroomStatusService.retrieveStudentStatuses()))
     .pipe(switchMap(() => achievementService.retrieveStudentAchievements()))

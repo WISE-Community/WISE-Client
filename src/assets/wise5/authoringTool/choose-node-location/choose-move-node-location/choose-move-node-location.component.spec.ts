@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChooseMoveNodeLocationComponent } from './choose-move-node-location.component';
-import { MoveNodesService } from '../../services/moveNodesService';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TeacherProjectService } from '../../services/teacherProjectService';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { MoveNodesService } from '../../../services/moveNodesService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 let component: ChooseMoveNodeLocationComponent;
 let fixture: ComponentFixture<ChooseMoveNodeLocationComponent>;

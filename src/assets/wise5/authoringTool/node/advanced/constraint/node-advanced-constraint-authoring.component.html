@@ -1,10 +1,10 @@
-<div class="body-div">
+<ng-template #addConstraintButton>
   <div fxLayoutGap="16px">
     <mat-label i18n>Add Constraint</mat-label>
     <button
       mat-raised-button
       color="primary"
-      (click)="addConstraintAndScrollToBottom()"
+      (click)="addConstraint()"
       matTooltip="Add Constraint"
       matTooltipPosition="above"
       i18n-matTooltip
@@ -12,7 +12,11 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
+</ng-template>
+<div class="body-div">
+  <ng-template [ngTemplateOutlet]="addConstraintButton"></ng-template>
   <div
+    id="{{ constraint.id }}"
     *ngFor="let constraint of content.constraints; index as constraintIndex"
     class="constraints-div"
     fxLayoutGap="16px"
@@ -31,17 +35,9 @@
     <br />
     <node-constraint-authoring [constraint]="constraint"></node-constraint-authoring>
   </div>
-  <div *ngIf="content.constraints.length > 0" fxLayoutGap="16px">
-    <mat-label i18n>Add Constraint</mat-label>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="addConstraintAndScrollToBottom()"
-      matTooltip="Add Constraint"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+  <ng-template
+    *ngIf="content.constraints.length > 0"
+    [ngTemplateOutlet]="addConstraintButton"
+  ></ng-template>
 </div>
+<span id="bottom"></span>

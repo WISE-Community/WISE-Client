@@ -93,7 +93,7 @@
           >
         </mat-form-field>
       </p>
-      <div *ngIf="studentUser.googleUserId == null">
+      <div *ngIf="user.googleUserId == null">
         <p>
           <mat-form-field appearance="fill" fxFlex>
             <mat-label i18n>Security Question</mat-label>
@@ -130,7 +130,7 @@
           </mat-form-field>
         </p>
       </div>
-      <div *ngIf="studentUser.googleUserId == null" formGroupName="passwords">
+      <div *ngIf="user.googleUserId == null" formGroupName="passwords">
         <new-password-and-confirm
           [formGroup]="passwordsFormGroup"
           [passwordLabel]="passwordLabel"
@@ -147,7 +147,7 @@
         <a href="https://policies.google.com/privacy">Privacy Policy</a> and
         <a href="https://policies.google.com/terms">Terms of Service</a> apply.
       </p>
-      <ng-container *ngIf="isRecaptchaEnabled" [ngSwitch]="studentUser.isRecaptchaInvalid">
+      <ng-container *ngIf="isRecaptchaEnabled" [ngSwitch]="user.isRecaptchaInvalid">
         <mat-error *ngSwitchCase="true" class="recaptchaError" i18n
           >Recaptcha failed. Please reload the page and try again!</mat-error
         >

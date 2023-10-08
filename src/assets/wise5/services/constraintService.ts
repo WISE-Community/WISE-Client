@@ -144,7 +144,7 @@ export class ConstraintService {
       : multipleRemovalCriteria.every((criteria) => this.evaluateCriteria(criteria));
   }
 
-  private evaluateCriteria(criteria: any): boolean {
+  evaluateCriteria(criteria: any): boolean {
     const strategy = this.criteriaFunctionNameToStrategy[criteria.name];
     return strategy == null || this.evaluateStrategy(criteria, strategy);
   }
