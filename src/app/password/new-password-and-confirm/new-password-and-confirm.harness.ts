@@ -43,11 +43,11 @@ export class NewPasswordAndConfirmHarness extends ComponentHarness {
   }
 
   async setNewPassword(value: string): Promise<void> {
-    this.setPassword(value, false);
+    await this.setPassword(value, false);
   }
 
   async setConfirmNewPassword(value: string): Promise<void> {
-    this.setPassword(value, true);
+    await this.setPassword(value, true);
   }
 
   async setPassword(value: string, isConfirm: boolean): Promise<void> {
