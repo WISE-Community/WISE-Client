@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ShowMyWorkAuthoringComponent } from '../../showMyWork/show-my-work-authoring/show-my-work-authoring.component';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'show-group-work-authoring',
@@ -13,7 +13,7 @@ import { ShowMyWorkAuthoringComponent } from '../../showMyWork/show-my-work-auth
 export class ShowGroupWorkAuthoringComponent extends ShowMyWorkAuthoringComponent {
   constructor(
     protected configService: ConfigService,
-    protected nodeService: NodeService,
+    protected nodeService: TeacherNodeService,
     protected projectAssetService: ProjectAssetService,
     protected projectService: TeacherProjectService
   ) {

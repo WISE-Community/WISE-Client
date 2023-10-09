@@ -3,13 +3,13 @@
 import { Component } from '@angular/core';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { MatDialog } from '@angular/material/dialog';
 import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'label-authoring',
@@ -23,7 +23,7 @@ export class LabelAuthoring extends AbstractComponentAuthoring {
   constructor(
     protected ConfigService: ConfigService,
     private dialog: MatDialog,
-    protected NodeService: NodeService,
+    protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
   ) {

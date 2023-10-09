@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'show-my-work-authoring',
@@ -30,7 +30,7 @@ export class ShowMyWorkAuthoringComponent extends AbstractComponentAuthoring {
 
   constructor(
     protected configService: ConfigService,
-    protected nodeService: NodeService,
+    protected nodeService: TeacherNodeService,
     protected projectAssetService: ProjectAssetService,
     protected projectService: TeacherProjectService
   ) {

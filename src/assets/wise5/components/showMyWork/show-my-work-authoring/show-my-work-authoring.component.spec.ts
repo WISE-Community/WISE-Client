@@ -12,6 +12,7 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ShowMyWorkAuthoringComponent } from './show-my-work-authoring.component';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 describe('ShowMyWorkAuthoringComponent', () => {
   let component: ShowMyWorkAuthoringComponent;
@@ -43,7 +44,7 @@ describe('ShowMyWorkAuthoringComponent', () => {
         StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, ShowMyWorkAuthoringComponent],
-      providers: [ProjectAssetService, TeacherProjectService]
+      providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
     }).compileComponents();
   });
 
