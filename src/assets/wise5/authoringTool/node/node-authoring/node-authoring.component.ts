@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription, filter } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { NodeService } from '../../../services/nodeService';
 import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { Node } from '../../../common/Node';
@@ -15,6 +14,7 @@ import { Component as WiseComponent } from '../../../common/Component';
 import { ChooseNewComponent } from '../../../../../app/authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'node-authoring',
@@ -39,7 +39,7 @@ export class NodeAuthoringComponent implements OnInit {
     private componentServiceLookupService: ComponentServiceLookupService,
     private componentTypeService: ComponentTypeService,
     private dialog: MatDialog,
-    private nodeService: NodeService,
+    private nodeService: TeacherNodeService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
     private route: ActivatedRoute,

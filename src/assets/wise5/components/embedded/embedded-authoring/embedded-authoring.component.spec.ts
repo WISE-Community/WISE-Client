@@ -6,6 +6,7 @@ import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EmbeddedAuthoring } from './embedded-authoring.component';
 import { EmbeddedAuthoringModule } from './embedded-authoring.module';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 let component: EmbeddedAuthoring;
 let fixture: ComponentFixture<EmbeddedAuthoring>;
@@ -18,7 +19,8 @@ describe('EmbeddedAuthoringComponent', () => {
         EmbeddedAuthoringModule,
         HttpClientTestingModule,
         StudentTeacherCommonServicesModule
-      ]
+      ],
+      providers: [TeacherNodeService]
     });
     fixture = TestBed.createComponent(EmbeddedAuthoring);
     component = fixture.componentInstance;

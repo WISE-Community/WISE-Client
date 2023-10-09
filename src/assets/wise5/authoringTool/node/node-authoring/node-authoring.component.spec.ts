@@ -22,6 +22,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -56,6 +57,7 @@ describe('NodeAuthoringComponent', () => {
         ClassroomStatusService,
         ProjectAssetService,
         TeacherDataService,
+        TeacherNodeService,
         TeacherProjectService,
         TeacherWebSocketService,
         {

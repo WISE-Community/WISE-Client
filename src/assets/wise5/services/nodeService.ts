@@ -17,12 +17,6 @@ export class NodeService {
   public nodeSubmitClicked$: Observable<any> = this.nodeSubmitClickedSource.asObservable();
   private doneRenderingComponentSource: Subject<any> = new Subject<any>();
   public doneRenderingComponent$ = this.doneRenderingComponentSource.asObservable();
-  private componentShowSubmitButtonValueChangedSource: Subject<any> = new Subject<any>();
-  public componentShowSubmitButtonValueChanged$: Observable<any> = this.componentShowSubmitButtonValueChangedSource.asObservable();
-  private starterStateResponseSource: Subject<any> = new Subject<any>();
-  public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
-  private deleteStarterStateSource: Subject<any> = new Subject<any>();
-  public deleteStarterState$: Observable<any> = this.deleteStarterStateSource.asObservable();
 
   constructor(
     protected dialog: MatDialog,
@@ -544,18 +538,6 @@ export class NodeService {
 
   broadcastDoneRenderingComponent(nodeIdAndComponentId: any) {
     this.doneRenderingComponentSource.next(nodeIdAndComponentId);
-  }
-
-  broadcastComponentShowSubmitButtonValueChanged(args: any) {
-    this.componentShowSubmitButtonValueChangedSource.next(args);
-  }
-
-  deleteStarterState(args: any) {
-    this.deleteStarterStateSource.next(args);
-  }
-
-  respondStarterState(args: any) {
-    this.starterStateResponseSource.next(args);
   }
 
   scrollToComponentAndHighlight(componentId: string): void {

@@ -26,6 +26,7 @@ import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { OpenResponseContent } from '../OpenResponseContent';
 import { EditOpenResponseAdvancedComponent } from './edit-open-response-advanced.component';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 let component: EditOpenResponseAdvancedComponent;
 let fixture: ComponentFixture<EditOpenResponseAdvancedComponent>;
@@ -62,7 +63,7 @@ describe('EditOpenResponseAdvancedComponent', () => {
         EditConnectedComponentsComponent,
         EditOpenResponseAdvancedComponent
       ],
-      providers: [TeacherProjectService],
+      providers: [TeacherNodeService, TeacherProjectService],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
