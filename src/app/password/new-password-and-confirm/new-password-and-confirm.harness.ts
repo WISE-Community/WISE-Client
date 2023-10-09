@@ -43,11 +43,18 @@ export class NewPasswordAndConfirmHarness extends ComponentHarness {
   }
 
   async setNewPassword(value: string): Promise<void> {
-    await this.setInputValue(await this.getNewPasswordInput(), value);
+    this.setPassword(value, false);
   }
 
   async setConfirmNewPassword(value: string): Promise<void> {
-    await this.setInputValue(await this.getConfirmNewPasswordInput(), value);
+    this.setPassword(value, true);
+  }
+
+  async setPassword(value: string, isConfirm: boolean): Promise<void> {
+    await this.setInputValue(
+      await (isConfirm ? this.getConfirmNewPasswordInput() : this.getNewPasswordInput()),
+      value
+    );
   }
 
   private async setInputValue(input: MatInputHarness, value: string): Promise<void> {

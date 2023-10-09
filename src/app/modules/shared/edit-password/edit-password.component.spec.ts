@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditPasswordComponent } from './edit-password.component';
 import { UserService } from '../../../services/user.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -221,20 +221,23 @@ function setPasswords(oldPass: string, newPass: string, newPassConfirm: string) 
   fixture.detectChanges();
 }
 
-function generateSuccessObservable(arg: string | any): Observable<any> {
-  return new Observable((observer) => {
-    observer.next(generateSuccessResponseValue(arg));
-    observer.complete();
-  });
+function generateSuccessObservable(arg: string | any): Observable<void> {
+  return generateResponseObservable(arg, true);
 }
 
 function generateSuccessResponseValue(arg: string | any): any {
   return typeof arg === 'string' ? { messageCode: arg } : arg;
 }
 
-function generateErrorObservable(arg: string | any): Observable<any> {
-  return new Observable((observer) => {
-    observer.error(generateErrorResponseValue(arg));
+function generateErrorObservable(arg: string | any): Observable<void> {
+  return generateResponseObservable(arg, false);
+}
+
+function generateResponseObservable(arg: string | any, isSuccess: boolean): Observable<void> {
+  return new Observable((observer: Subscriber<void>) => {
+    isSuccess
+      ? observer.next(generateSuccessResponseValue(arg))
+      : observer.error(generateErrorResponseValue(arg));
     observer.complete();
   });
 }
