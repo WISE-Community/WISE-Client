@@ -9,6 +9,7 @@ import { ConfigService } from './configService';
 import { PathService } from './pathService';
 import { copy } from '../common/object/object';
 import { generateRandomKey } from '../common/string/string';
+import { branchPathBackgroundColors } from '../common/color/color';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -18,8 +19,6 @@ export class TeacherProjectService extends ProjectService {
   public nodeChanged$: Observable<boolean> = this.nodeChangedSource.asObservable();
   private refreshProjectSource: Subject<void> = new Subject<void>();
   public refreshProject$ = this.refreshProjectSource.asObservable();
-  private scrollToBottomOfPageSource: Subject<void> = new Subject<void>();
-  public scrollToBottomOfPage$ = this.scrollToBottomOfPageSource.asObservable();
   private errorSavingProjectSource: Subject<void> = new Subject<void>();
   public errorSavingProject$: Observable<void> = this.errorSavingProjectSource.asObservable();
   private notAllowedToEditThisProjectSource: Subject<void> = new Subject<void>();
@@ -583,13 +582,14 @@ export class TeacherProjectService extends ProjectService {
     }
   }
 
-  /**
-   * Get the branch path letter
-   * @param nodeId get the branch path letter for this node if it is in a branch
-   * @return the branch path letter for the node if it is in a branch
-   */
-  getBranchPathLetter(nodeId) {
-    return this.nodeIdToBranchPathLetter[nodeId];
+  getBackgroundColor(nodeId: string): string {
+    const branchPathLetter = this.nodeIdToBranchPathLetter[nodeId];
+    if (branchPathLetter != null) {
+      const letterASCIICode = branchPathLetter.charCodeAt(0);
+      const branchPathNumber = letterASCIICode - 65;
+      return branchPathBackgroundColors[branchPathNumber];
+    }
+    return null;
   }
 
   /**
@@ -894,10 +894,6 @@ export class TeacherProjectService extends ProjectService {
 
   refreshProject() {
     this.refreshProjectSource.next();
-  }
-
-  scrollToBottomOfPage() {
-    this.scrollToBottomOfPageSource.next();
   }
 
   nodeHasConstraint(nodeId: string): boolean {
@@ -3100,5 +3096,15 @@ export class TeacherProjectService extends ProjectService {
       objects.splice(index, 1);
       objects.splice(index + 1, 0, object);
     }
+  }
+
+  getNodesInOrder(): any[] {
+    return Object.entries(this.idToOrder)
+      .map((entry: any) => {
+        return { key: entry[0], id: entry[0], order: entry[1].order };
+      })
+      .sort((a: any, b: any) => {
+        return a.order - b.order;
+      });
   }
 }

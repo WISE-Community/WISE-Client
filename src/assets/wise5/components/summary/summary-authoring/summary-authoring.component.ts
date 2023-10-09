@@ -5,10 +5,10 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MultipleChoiceContent } from '../../multipleChoice/MultipleChoiceContent';
 import { SummaryService } from '../summaryService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'summary-authoring',
@@ -24,7 +24,7 @@ export class SummaryAuthoring extends AbstractComponentAuthoring {
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
     protected ConfigService: ConfigService,
-    protected NodeService: NodeService,
+    protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService,
     private SummaryService: SummaryService

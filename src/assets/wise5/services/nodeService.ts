@@ -17,12 +17,6 @@ export class NodeService {
   public nodeSubmitClicked$: Observable<any> = this.nodeSubmitClickedSource.asObservable();
   private doneRenderingComponentSource: Subject<any> = new Subject<any>();
   public doneRenderingComponent$ = this.doneRenderingComponentSource.asObservable();
-  private componentShowSubmitButtonValueChangedSource: Subject<any> = new Subject<any>();
-  public componentShowSubmitButtonValueChanged$: Observable<any> = this.componentShowSubmitButtonValueChangedSource.asObservable();
-  private starterStateResponseSource: Subject<any> = new Subject<any>();
-  public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
-  private deleteStarterStateSource: Subject<any> = new Subject<any>();
-  public deleteStarterState$: Observable<any> = this.deleteStarterStateSource.asObservable();
 
   constructor(
     protected dialog: MatDialog,
@@ -53,32 +47,19 @@ export class NodeService {
    * @param currentId (optional)
    * @returns a promise that returns the next node id
    */
-  getNextNodeId(currentId?): Promise<any> {
+  getNextNodeId(currentId?: string): Promise<any> {
     const promise = new Promise((resolve, reject) => {
       let nextNodeId = null;
-      let currentNodeId = null;
-      let mode = this.ConfigService.getMode();
-      if (currentId) {
-        currentNodeId = currentId;
-      } else {
-        let currentNode = null;
-        currentNode = this.DataService.getCurrentNode();
-        if (currentNode) {
-          currentNodeId = currentNode.id;
-        }
-      }
+      const currentNodeId = currentId ?? this.DataService.getCurrentNodeId();
       if (currentNodeId) {
-        if (mode === 'classroomMonitor' || mode === 'author') {
-          let currentNodeOrder = this.ProjectService.getNodeOrderById(currentNodeId);
+        if (['author', 'classroomMonitor'].includes(this.ConfigService.getMode())) {
+          const currentNodeOrder = this.ProjectService.getNodeOrderById(currentNodeId);
           if (currentNodeOrder) {
-            let nextNodeOrder = currentNodeOrder + 1;
-            let nextId = this.ProjectService.getNodeIdByOrder(nextNodeOrder);
+            const nextId = this.ProjectService.getNodeIdByOrder(currentNodeOrder + 1);
             if (nextId) {
-              if (this.ProjectService.isApplicationNode(nextId)) {
-                nextNodeId = nextId;
-              } else if (this.ProjectService.isGroupNode(nextId)) {
-                nextNodeId = this.getNextNodeId(nextId);
-              }
+              nextNodeId = this.ProjectService.isApplicationNode(nextId)
+                ? nextId
+                : this.getNextNodeId(nextId);
             }
           }
           resolve(nextNodeId);
@@ -557,18 +538,6 @@ export class NodeService {
 
   broadcastDoneRenderingComponent(nodeIdAndComponentId: any) {
     this.doneRenderingComponentSource.next(nodeIdAndComponentId);
-  }
-
-  broadcastComponentShowSubmitButtonValueChanged(args: any) {
-    this.componentShowSubmitButtonValueChangedSource.next(args);
-  }
-
-  deleteStarterState(args: any) {
-    this.deleteStarterStateSource.next(args);
-  }
-
-  respondStarterState(args: any) {
-    this.starterStateResponseSource.next(args);
   }
 
   scrollToComponentAndHighlight(componentId: string): void {

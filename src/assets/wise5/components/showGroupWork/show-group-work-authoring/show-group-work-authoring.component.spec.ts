@@ -14,6 +14,7 @@ import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-comp
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 describe('ShowGroupWorkAuthoringComponent', () => {
   let component: ShowGroupWorkAuthoringComponent;
@@ -35,7 +36,7 @@ describe('ShowGroupWorkAuthoringComponent', () => {
         StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, ShowGroupWorkAuthoringComponent],
-      providers: [ProjectAssetService, TeacherProjectService],
+      providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });

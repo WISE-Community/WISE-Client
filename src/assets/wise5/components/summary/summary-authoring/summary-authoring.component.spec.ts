@@ -14,10 +14,10 @@ import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-comp
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { copy } from '../../../common/object/object';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { SummaryAuthoring } from './summary-authoring.component';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 export class MockConfigService {}
 
@@ -45,7 +45,7 @@ describe('SummaryAuthoringComponent', () => {
       ],
       declarations: [EditComponentPrompt, SummaryAuthoring],
       providers: [
-        { provide: NodeService, useClass: MockNodeService },
+        { provide: TeacherNodeService, useClass: MockNodeService },
         ProjectAssetService,
         TeacherProjectService
       ]

@@ -12,6 +12,8 @@ import { WorkgroupNodeStatusComponent } from '../classroom-monitor/workgroup-nod
 import { WorkgroupSelectAutocompleteComponent } from '../classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { ComponentGradingModule } from './component-grading.module';
+import { StatusIconComponent } from '../classroom-monitor/status-icon/status-icon.component';
+import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress/nav-item-progress.component';
 
 @NgModule({
   imports: [ComponentGradingModule, IntersectionObserverModule, StudentTeacherCommonModule],
@@ -20,6 +22,8 @@ import { ComponentGradingModule } from './component-grading.module';
     EditComponentCommentComponent,
     EditComponentScoreComponent,
     GradingEditComponentMaxScoreComponent,
+    NavItemProgressComponent,
+    StatusIconComponent,
     WorkgroupComponentGradingComponent,
     WorkgroupInfoComponent,
     WorkgroupItemComponent,
@@ -34,6 +38,8 @@ import { ComponentGradingModule } from './component-grading.module';
     EditComponentScoreComponent,
     GradingEditComponentMaxScoreComponent,
     IntersectionObserverModule,
+    NavItemProgressComponent,
+    StatusIconComponent,
     WorkgroupComponentGradingComponent,
     WorkgroupInfoComponent,
     WorkgroupItemComponent,

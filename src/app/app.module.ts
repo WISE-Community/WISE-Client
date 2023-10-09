@@ -21,6 +21,7 @@ import { AnnouncementDialogComponent } from './announcement/announcement.compone
 import { TrackScrollDirective } from './track-scroll.directive';
 import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY, RECAPTCHA_BASE_URL } from 'ng-recaptcha';
 import { CommonModule } from '@angular/common';
+import { ArchiveProjectService } from './services/archive-project.service';
 
 export function initialize(
   configService: ConfigService,
@@ -57,6 +58,7 @@ export function initialize(
     RecaptchaV3Module
   ],
   providers: [
+    ArchiveProjectService,
     ConfigService,
     StudentService,
     TeacherService,

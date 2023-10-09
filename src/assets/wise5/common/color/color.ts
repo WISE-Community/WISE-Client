@@ -29,3 +29,18 @@ function isRGB(str: string): boolean {
   const rgbRegex = /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/;
   return rgbRegex.test(str);
 }
+
+/**
+ * The colors for the branch path steps. The colors are from
+ * http://colorbrewer2.org/export/colorbrewer.js, 'qualitative', 'Set2'.
+ */
+export const branchPathBackgroundColors = [
+  '#66c2a5',
+  '#fc8d62',
+  '#8da0cb',
+  '#e78ac3',
+  '#a6d854',
+  '#ffd92f',
+  '#e5c494',
+  '#b3b3b3'
+];

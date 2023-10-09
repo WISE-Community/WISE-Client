@@ -20,6 +20,9 @@ import { PeerChatComponent } from '../PeerChatComponent';
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
+import { Question } from '../peer-chat-question-bank/Question';
+import { QuestionBankService } from '../peer-chat-question-bank/questionBank.service';
+import { getQuestionIdsUsed } from '../peer-chat-question-bank/question-bank-helper';
 
 @Component({
   selector: 'peer-chat-student',
@@ -37,9 +40,11 @@ export class PeerChatStudentComponent extends ComponentStudent {
   peerChatWorkgroupIds: number[] = [];
   peerChatWorkgroupInfos: any = {};
   peerGroup: PeerGroup;
+  question: Question;
   questionBankContent: QuestionBankContent;
+  questionIdsUsed: string[] = [];
   requestTimeout: number = 10000;
-  response: string;
+  response: string = '';
 
   constructor(
     protected annotationService: AnnotationService,
@@ -52,6 +57,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     private notificationService: NotificationService,
     private peerChatService: PeerChatService,
     private peerGroupService: PeerGroupService,
+    private questionBankService: QuestionBankService,
     protected studentAssetService: StudentAssetService,
     protected studentDataService: StudentDataService,
     private studentWebSocketService: StudentWebSocketService
@@ -118,6 +124,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
             ]).subscribe(([componentStates, annotations]) => {
               this.setPeerChatMessages(componentStates);
               this.peerChatService.processIsDeletedAnnotations(annotations, this.peerChatMessages);
+              this.questionIdsUsed = getQuestionIdsUsed(componentStates, this.myWorkgroupId);
             });
           }
         },
@@ -176,6 +183,10 @@ export class PeerChatStudentComponent extends ComponentStudent {
       response: this.response,
       submitCounter: this.submitCounter
     };
+    if (this.question != null) {
+      componentState.studentData.questionId = this.question.id;
+      this.questionBankService.questionUsed(this.question);
+    }
     if (this.dynamicPrompt != null) {
       componentState.studentData.dynamicPrompt = this.dynamicPrompt;
     }
@@ -197,6 +208,8 @@ export class PeerChatStudentComponent extends ComponentStudent {
         action
       );
     });
+    this.response = '';
+    this.question = null;
     return promise;
   }
 
@@ -269,5 +282,24 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   onDynamicPromptChanged(feedbackRule: FeedbackRule): void {
     this.dynamicPrompt = feedbackRule;
+  }
+
+  protected useQuestion(question: Question): void {
+    if (
+      this.response === '' ||
+      confirm(
+        $localize`Are you sure you want to replace the current text in your response input box with this text?`
+      )
+    ) {
+      this.question = question;
+      this.response = question.text;
+    }
+  }
+
+  protected responseChanged(response: string): void {
+    this.response = response;
+    if (response.length < 2) {
+      this.question = null;
+    }
   }
 }

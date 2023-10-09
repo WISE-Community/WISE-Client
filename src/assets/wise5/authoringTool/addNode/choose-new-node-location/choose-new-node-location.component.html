@@ -1,13 +1,6 @@
 <h5 i18n>Choose a location for the new step</h5>
 <div style="margin-top: 20px; margin-left: 20px">
-  <div
-    *ngFor="let nodeId of nodeIds"
-    class="project-item"
-    [ngClass]="{
-      'node-select--group': isGroupNode(nodeId),
-      'node-select--node': !isGroupNode(nodeId)
-    }"
-  >
+  <div *ngFor="let nodeId of nodeIds">
     <div
       id="{{ nodeId }}"
       [ngClass]="{

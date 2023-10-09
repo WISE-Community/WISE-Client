@@ -37,10 +37,8 @@
   </div>
   <div>
     <span i18n>Access Code: {{ run.runCode }}</span> (<a
-      class="share-with-students-link"
-      [routerLink]=""
-      (click)="shareCode()"
-      (keyup.enter)="shareCode()"
+      href="#"
+      (click)="shareCode($event)"
       tabindex="0"
       i18n
       >Share with students</a
@@ -53,10 +51,21 @@
 
 <mat-card
   class="can-highlight"
-  [ngClass]="{ 'highlighted-bg': run.isHighlighted }"
+  [ngClass]="{ 'highlighted-bg': run.highlighted }"
   [@flash]="{ value: '*', params: { duration: animateDuration, delay: animateDelay } }"
 >
   <mat-card-content fxLayout="row" fxLayoutGap="12px">
+    <div>
+      <mat-checkbox
+        class="run-action"
+        color="primary"
+        matTooltip="Select"
+        i18n-matTooltip
+        matTooltipPosition="above"
+        [(ngModel)]="run.selected"
+        (ngModelChange)="runSelectedStatusChangedEvent.emit()"
+      ></mat-checkbox>
+    </div>
     <div
       mat-card-avatar
       [style.background-image]="run.project.thumbStyle"
@@ -64,7 +73,7 @@
     ></div>
     <div fxFlex="1 1 100%" fxLayout="row" fxLayoutWrap>
       <div fxLayout="column">
-        <mat-card-title [class.secondary-text]="isRunCompleted(run)" class="mat-body-1">
+        <mat-card-title [ngClass]="{ 'secondary-text': isRunCompleted(run) }" class="mat-body-1">
           {{ run.project.name }}
           <span
             *ngIf="run.project.wiseVersion === 4"
@@ -82,7 +91,13 @@
         </mat-card-subtitle>
       </div>
       <span fxFlex="1 1 auto"></span>
-      <app-run-menu [run]="run"></app-run-menu>
+      <div>
+        <app-run-menu
+          class="run-action"
+          [run]="run"
+          (runArchiveStatusChangedEvent)="runArchiveStatusChanged()"
+        ></app-run-menu>
+      </div>
     </div>
   </mat-card-content>
   <mat-card-content fxHide fxShow.xs>

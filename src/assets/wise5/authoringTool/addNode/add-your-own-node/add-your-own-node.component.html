@@ -1,16 +1,7 @@
 <form role="form" [formGroup]="addNodeFormGroup">
   <mat-form-field appearance="fill" class="title-field">
     <mat-label i18n>Step Title</mat-label>
-    <input
-      #titleField
-      autofocus
-      matInput
-      type="text"
-      id="title"
-      name="title"
-      formControlName="title"
-      required
-    />
+    <input matInput type="text" id="title" name="title" formControlName="title" required />
     <mat-error *ngIf="addNodeFormGroup.controls['title'].hasError('required')" i18n>
       Step Title is required
     </mat-error>

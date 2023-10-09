@@ -95,7 +95,7 @@
       <mat-form-field appearance="fill" fxFlex>
         <mat-label i18n>School Level</mat-label>
         <mat-select formControlName="schoolLevel">
-          <mat-option *ngFor="let schoolLevel of schoolLevels" [value]="schoolLevel.id">
+          <mat-option *ngFor="let schoolLevel of schoolLevels" [value]="schoolLevel.code">
             {{ schoolLevel.label }}
           </mat-option>
         </mat-select>

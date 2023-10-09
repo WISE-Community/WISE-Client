@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 import { CRaterService } from '../../../services/cRaterService';
-import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { OpenResponseContent } from '../OpenResponseContent';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'edit-open-response-advanced',
@@ -28,7 +28,7 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
 
   constructor(
     protected cRaterService: CRaterService,
-    protected nodeService: NodeService,
+    protected nodeService: TeacherNodeService,
     protected notebookService: NotebookService,
     protected teacherProjectService: TeacherProjectService
   ) {

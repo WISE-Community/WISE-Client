@@ -7,17 +7,19 @@ import { UserService } from '../../../services/user.service';
 import { StudentService } from '../../student.service';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { UnlinkGoogleAccountConfirmComponent } from '../../../modules/shared/unlink-google-account-confirm/unlink-google-account-confirm.component';
+import { EditProfileComponent } from '../../../common/edit-profile/edit-profile.component';
 
 @Component({
-  selector: 'app-edit-profile',
+  selector: 'student-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  styleUrls: [
+    '../../../common/edit-profile/edit-profile.component.scss',
+    './edit-profile.component.scss'
+  ]
 })
-export class EditProfileComponent {
+export class StudentEditProfileComponent extends EditProfileComponent {
   user: Student;
   languages: object[];
-  changed: boolean = false;
   isSaving: boolean = false;
   isGoogleUser: boolean = false;
   userSubscription: Subscription;
@@ -35,6 +37,7 @@ export class EditProfileComponent {
     public dialog: MatDialog,
     public snackBar: MatSnackBar
   ) {
+    super(dialog, snackBar);
     this.user = <Student>this.getUser().getValue();
     this.setControlFieldValue('firstName', this.user.firstName);
     this.setControlFieldValue('lastName', this.user.lastName);
@@ -85,21 +88,5 @@ export class EditProfileComponent {
 
   getControlFieldValue(fieldName) {
     return this.editProfileFormGroup.get(fieldName).value;
-  }
-
-  handleUpdateProfileResponse(response) {
-    if (response.status === 'success') {
-      this.changed = false;
-      this.snackBar.open($localize`Profile updated.`);
-    } else {
-      this.snackBar.open($localize`An error occurred. Please try again.`);
-    }
-    this.isSaving = false;
-  }
-
-  unlinkGoogleAccount() {
-    this.dialog.open(UnlinkGoogleAccountConfirmComponent, {
-      panelClass: 'dialog-sm'
-    });
   }
 }

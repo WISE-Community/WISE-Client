@@ -23,6 +23,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 describe('ProjectAuthoringComponent', () => {
   let component: ProjectAuthoringComponent;
   let fixture: ComponentFixture<ProjectAuthoringComponent>;
+  let projectService: TeacherProjectService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -53,13 +54,12 @@ describe('ProjectAuthoringComponent', () => {
         TeacherWebSocketService
       ]
     }).compileComponents();
-    spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
-      'node1'
-    ]);
-    spyOn(TestBed.inject(TeacherProjectService), 'getNodeById').and.returnValue({
-      title: 'Step 1'
-    });
-    spyOn(TestBed.inject(TeacherProjectService), 'getInactiveNodes').and.returnValue([]);
+    projectService = TestBed.inject(TeacherProjectService);
+    spyOn(projectService, 'parseProject').and.callFake(() => {});
+    spyOn(projectService, 'getFlattenedProjectAsNodeIds').and.returnValue(['node1']);
+    spyOn(projectService, 'getNodeById').and.returnValue({ title: 'Step 1' });
+    spyOn(projectService, 'getInactiveNodes').and.returnValue([]);
+    window.history.pushState({}, '', '');
     fixture = TestBed.createComponent(ProjectAuthoringComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

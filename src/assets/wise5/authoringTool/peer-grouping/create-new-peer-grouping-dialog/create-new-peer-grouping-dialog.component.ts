@@ -17,9 +17,9 @@ export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingDial
     protected dialogRef: MatDialogRef<CreateNewPeerGroupingDialogComponent>,
     private peerGroupingAuthoringService: PeerGroupingAuthoringService,
     protected projectService: ProjectService,
-    private snackBar: MatSnackBar
+    protected snackBar: MatSnackBar
   ) {
-    super(dialogRef, projectService);
+    super(dialogRef, projectService, snackBar);
   }
 
   ngOnInit(): void {
@@ -29,13 +29,13 @@ export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingDial
   create(): Subscription {
     this.peerGrouping.tag = this.peerGroupingAuthoringService.getUniqueTag();
     this.updatePeerGroupingLogic();
-    return this.peerGroupingAuthoringService.createNewPeerGrouping(this.peerGrouping).subscribe(
-      () => {
+    return this.peerGroupingAuthoringService.createNewPeerGrouping(this.peerGrouping).subscribe({
+      next: () => {
         this.dialogRef.close();
       },
-      () => {
-        this.snackBar.open($localize`Please Try Again (Error: Duplicate Tag)`);
+      error: ({ error }) => {
+        this.handleError(error);
       }
-    );
+    });
   }
 }

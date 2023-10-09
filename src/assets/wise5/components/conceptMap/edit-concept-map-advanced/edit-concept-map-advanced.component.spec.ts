@@ -24,6 +24,7 @@ import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapContent } from '../ConceptMapContent';
 import { EditConceptMapAdvancedComponent } from './edit-concept-map-advanced.component';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 let component: EditConceptMapAdvancedComponent;
 let fixture: ComponentFixture<EditConceptMapAdvancedComponent>;
@@ -57,7 +58,7 @@ describe('EditConceptMapAdvancedComponent', () => {
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent
       ],
-      providers: [TeacherProjectService],
+      providers: [TeacherNodeService, TeacherProjectService],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });

@@ -19,7 +19,7 @@ export class EditNodeRubricComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.parent.params.subscribe((params) => {
+    this.route.parent.parent.params.subscribe((params) => {
       this.node = this.projectService.getNodeById(params.nodeId);
       this.rubric = this.projectService.replaceAssetPaths(replaceWiseLinks(this.node.rubric));
     });

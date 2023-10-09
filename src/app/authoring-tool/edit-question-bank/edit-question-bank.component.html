@@ -10,6 +10,28 @@
     </mat-checkbox>
   </div>
   <div *ngIf="componentContent.questionBank?.enabled">
+    <div class="custom-label">
+      <mat-form-field appearance="fill">
+        <mat-label i18n>Custom Label</mat-label>
+        <input
+          matInput
+          [(ngModel)]="componentContent.questionBank.label"
+          (ngModelChange)="inputChanged.next($event)"
+          placeholder="Question Bank"
+          i18n-placeholder
+        />
+      </mat-form-field>
+    </div>
+    <div *ngIf="componentContent.questionBank.version === 2">
+      <mat-checkbox
+        [(ngModel)]="componentContent.questionBank.clickToUseEnabled"
+        (ngModelChange)="saveChanges()"
+        color="primary"
+        i18n
+      >
+        Student can select questions to use in Peer Chat
+      </mat-checkbox>
+    </div>
     <div class="max-questions">
       <mat-form-field appearance="fill">
         <mat-label i18n>Max Number of Questions</mat-label>
@@ -17,7 +39,7 @@
           matInput
           type="number"
           [(ngModel)]="componentContent.questionBank.maxQuestionsToShow"
-          (ngModelChange)="saveChanges()"
+          (ngModelChange)="inputChanged.next($event)"
         />
       </mat-form-field>
     </div>
@@ -40,7 +62,10 @@
       </edit-component-peer-grouping-tag>
     </div>
     <div class="feedback-rules">
-      <edit-question-bank-rules [feedbackRules]="componentContent.questionBank.rules">
+      <edit-question-bank-rules
+        [feedbackRules]="componentContent.questionBank.rules"
+        [version]="componentContent.questionBank.version"
+      >
       </edit-question-bank-rules>
     </div>
   </div>

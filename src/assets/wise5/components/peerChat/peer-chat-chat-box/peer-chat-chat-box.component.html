@@ -11,6 +11,8 @@
   ></peer-chat-messages>
   <peer-chat-message-input
     *ngIf="isEnabled"
-    (onSubmit)="submit.emit($event)"
+    [messageText]="response"
+    (onSubmit)="submitResponse($event)"
+    (responseChangedEvent)="responseChanged($event)"
   ></peer-chat-message-input>
 </mat-card>

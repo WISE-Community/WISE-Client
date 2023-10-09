@@ -4,9 +4,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { OutsideURLService } from '../outsideURLService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'outside-url-authoring',
@@ -45,7 +45,7 @@ export class OutsideUrlAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
-    protected NodeService: NodeService,
+    protected NodeService: TeacherNodeService,
     protected OutsideURLService: OutsideURLService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService

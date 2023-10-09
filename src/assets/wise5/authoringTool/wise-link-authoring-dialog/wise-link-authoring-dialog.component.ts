@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ProjectService } from '../../services/projectService';
+import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Component({
   selector: 'wise-link-authoring-dialog',
@@ -16,17 +16,11 @@ export class WiseLinkAuthoringDialogComponent {
 
   constructor(
     protected dialogRef: MatDialogRef<WiseLinkAuthoringDialogComponent>,
-    private projectService: ProjectService
+    private projectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
-    this.items = Object.entries(this.projectService.idToOrder)
-      .map((entry: any) => {
-        return { key: entry[0], order: entry[1].order };
-      })
-      .sort((a: any, b: any) => {
-        return a.order - b.order;
-      });
+    this.items = this.projectService.getNodesInOrder();
   }
 
   protected wiseLinkNodeIdChanged(): void {

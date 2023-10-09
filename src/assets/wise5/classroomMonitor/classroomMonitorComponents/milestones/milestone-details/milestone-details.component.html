@@ -4,14 +4,9 @@
       <select-period></select-period>
       <span fxFlex></span>
       <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-progress-bar
-          class="milestone-details__progress"
-          mode="determinate"
-          value="{{ milestone.percentageCompleted }}"
-        ></mat-progress-bar>
-        <span class="mat-subtitle-2 text-secondary ng-binding">
-          {{ milestone.percentageCompleted }}%
-        </span>
+        <nav-item-progress
+          [period]="currentPeriod"
+          [nodeCompletion]="milestone.percentageCompleted"></nav-item-progress>
       </div>
     </div>
     <p *ngIf="milestone.description">

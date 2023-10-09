@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
 import { LibraryService } from '../../../services/library.service';
 import { LibraryComponent } from '../library/library.component';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-personal-library',
@@ -15,8 +15,8 @@ export class PersonalLibraryComponent extends LibraryComponent {
   personalProjects: LibraryProject[] = [];
   sharedProjects: LibraryProject[] = [];
 
-  constructor(protected libraryService: LibraryService, private dialog: MatDialog) {
-    super(libraryService);
+  constructor(protected dialog: MatDialog, protected libraryService: LibraryService) {
+    super(dialog, libraryService);
   }
 
   ngOnInit() {
@@ -77,10 +77,8 @@ export class PersonalLibraryComponent extends LibraryComponent {
     }
   }
 
-  showInfo() {
-    this.dialog.open(PersonalLibraryDetailsComponent, {
-      panelClass: 'dialog-sm'
-    });
+  protected getDetailsComponent(): any {
+    return PersonalLibraryDetailsComponent;
   }
 }
 

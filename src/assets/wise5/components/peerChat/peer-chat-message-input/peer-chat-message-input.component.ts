@@ -1,23 +1,27 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'peer-chat-message-input',
   templateUrl: './peer-chat-message-input.component.html'
 })
 export class PeerChatMessageInputComponent implements OnInit {
-  @Output('onSubmit')
-  submit: EventEmitter<string> = new EventEmitter<string>();
-
-  isSubmitEnabled: boolean = false;
-  messageText: string;
+  protected isSubmitEnabled: boolean = false;
+  @Input() messageText: string = '';
+  @Output() responseChangedEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output('onSubmit') submit: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit(): void {}
 
-  responseChanged(): void {
-    this.isSubmitEnabled = this.messageText.length > 0;
+  ngOnChanges(): void {
+    this.responseChanged();
   }
 
-  keyPressed(event: any): void {
+  protected responseChanged(): void {
+    this.isSubmitEnabled = this.messageText?.length > 0;
+    this.responseChangedEvent.emit(this.messageText);
+  }
+
+  protected keyPressed(event: any): void {
     if (event.keyCode === 13) {
       event.preventDefault();
       if (this.isSubmitEnabled) {
@@ -26,9 +30,19 @@ export class PeerChatMessageInputComponent implements OnInit {
     }
   }
 
-  submitResponse(): void {
+  protected submitResponse(): void {
     this.submit.emit(this.messageText);
     this.messageText = '';
     this.isSubmitEnabled = false;
+  }
+
+  protected onFocus(event: any): void {
+    this.placeCursorAtEndOfMessageText(event);
+  }
+
+  private placeCursorAtEndOfMessageText(event: any): void {
+    const messageLength = this.messageText.length;
+    event.srcElement.selectionStart = messageLength;
+    event.srcElement.selectionEnd = messageLength;
   }
 }
