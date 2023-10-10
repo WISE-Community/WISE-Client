@@ -539,28 +539,4 @@ export class NodeService {
   broadcastDoneRenderingComponent(nodeIdAndComponentId: any) {
     this.doneRenderingComponentSource.next(nodeIdAndComponentId);
   }
-
-  scrollToComponentAndHighlight(componentId: string): void {
-    setTimeout(() => {
-      const componentElement = $('#component_' + componentId);
-      const originalBackgroundColor = componentElement.css('backgroundColor');
-      componentElement.css('background-color', '#FFFF9C');
-      $('#content').animate({ scrollTop: componentElement.prop('offsetTop') }, 1000);
-      componentElement.css({
-        transition: 'background-color 3s ease-in-out',
-        'background-color': originalBackgroundColor
-      });
-      setTimeout(() => {
-        // ensures the highlight works for the second time linking to this same step
-        componentElement.css('transition', '');
-      }, 4000);
-    }, 500);
-  }
-
-  registerScrollToComponent(componentId: string): void {
-    const subscription = this.DataService.currentNodeChanged$.subscribe(() => {
-      this.scrollToComponentAndHighlight(componentId);
-      subscription.unsubscribe();
-    });
-  }
 }
