@@ -738,35 +738,8 @@ export class TeacherDataService extends DataService {
     );
   }
 
-  isAnyPeriodPaused() {
-    return this.getPeriods().some((period) => {
-      return period.paused;
-    });
-  }
-
-  isPeriodPaused(periodId: number): boolean {
-    if (periodId === -1) {
-      return this.isAllPeriodsPaused();
-    } else {
-      return this.getPeriodById(periodId).paused;
-    }
-  }
-
-  isAllPeriodsPaused() {
-    let numPausedPeriods = 0;
-    const periods = this.getPeriods();
-    for (const period of periods) {
-      if (period.paused) {
-        numPausedPeriods++;
-      }
-    }
-    return numPausedPeriods === periods.length;
-  }
-
-  getPeriodById(periodId: number): any {
-    return this.getPeriods().find((period) => {
-      return period.periodId === periodId;
-    });
+  private getPeriodById(periodId: number): any {
+    return this.getPeriods().find((period) => period.periodId === periodId);
   }
 
   /**
@@ -774,9 +747,9 @@ export class TeacherDataService extends DataService {
    * @param periodId the id of the period to toggle
    * @param isPaused Boolean whether the period should be paused or not
    */
-  pauseScreensChanged(periodId, isPaused) {
+  pauseScreensChanged(periodId: number, isPaused: boolean): void {
     this.updatePausedRunStatusValue(periodId, isPaused);
-    this.sendRunStatusThenHandlePauseScreen(periodId, isPaused);
+    this.saveRunStatusThenHandlePauseScreen(periodId, isPaused);
     const context = 'ClassroomMonitor',
       nodeId = null,
       componentId = null,
@@ -787,19 +760,17 @@ export class TeacherDataService extends DataService {
     this.saveEvent(context, nodeId, componentId, componentType, category, event, data);
   }
 
-  sendRunStatusThenHandlePauseScreen(periodId, isPaused) {
-    this.sendRunStatus()
-      .toPromise()
-      .then(() => {
-        if (isPaused) {
-          this.TeacherWebSocketService.pauseScreens(periodId);
-        } else {
-          this.TeacherWebSocketService.unPauseScreens(periodId);
-        }
-      });
+  private saveRunStatusThenHandlePauseScreen(periodId: number, isPaused: boolean): void {
+    this.saveRunStatus().subscribe(() => {
+      if (isPaused) {
+        this.TeacherWebSocketService.pauseScreens(periodId);
+      } else {
+        this.TeacherWebSocketService.unPauseScreens(periodId);
+      }
+    });
   }
 
-  sendRunStatus() {
+  private saveRunStatus(): Observable<void> {
     const url = this.ConfigService.getConfigParam('runStatusURL');
     const body = new HttpParams()
       .set('runId', this.ConfigService.getConfigParam('runId'))
@@ -807,46 +778,44 @@ export class TeacherDataService extends DataService {
     const options = {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     };
-    return this.http.post(url, body, options);
+    return this.http.post<void>(url, body, options);
   }
 
-  createRunStatus() {
-    const periods = this.ConfigService.getPeriods();
-    for (const period of periods) {
-      period.paused = false;
+  /**
+   * Update the paused value for a period in our run status
+   * @param periodId the period id or -1 for all periods
+   * @param isPaused whether the period is paused or not
+   */
+  private updatePausedRunStatusValue(periodId: number, isPaused: boolean): void {
+    if (this.runStatus == null) {
+      this.runStatus = this.createRunStatus();
     }
+    if (periodId === -1) {
+      this.updateAllPeriodsPausedValue(isPaused);
+    } else {
+      this.updatePeriodPausedValue(periodId, isPaused);
+    }
+  }
+
+  private createRunStatus(): any {
+    const periods = this.ConfigService.getPeriods();
+    periods.forEach((period) => (period.paused = false));
     return {
       runId: this.ConfigService.getConfigParam('runId'),
       periods: periods
     };
   }
 
-  /**
-   * Update the paused value for a period in our run status
-   * @param periodId the period id or -1 for all periods
-   * @param value whether the period is paused or not
-   */
-  updatePausedRunStatusValue(periodId, value) {
-    if (this.runStatus == null) {
-      this.runStatus = this.createRunStatus();
-    }
-    if (periodId === -1) {
-      this.updateAllPeriodsPausedValue(value);
-    } else {
-      this.updatePeriodPausedValue(periodId, value);
-    }
-  }
-
-  updateAllPeriodsPausedValue(value) {
+  private updateAllPeriodsPausedValue(isPaused: boolean): void {
     for (const period of this.runStatus.periods) {
-      period.paused = value;
+      period.paused = isPaused;
     }
   }
 
-  updatePeriodPausedValue(periodId, value) {
+  private updatePeriodPausedValue(periodId: number, isPaused: boolean): void {
     for (const period of this.runStatus.periods) {
       if (period.periodId === periodId) {
-        period.paused = value;
+        period.paused = isPaused;
       }
     }
   }
