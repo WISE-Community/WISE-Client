@@ -100,10 +100,13 @@ export class ManageTeamComponent {
             previousIndex,
             event.currentIndex
           );
-          this.configService.retrieveConfig(
-            `/api/config/classroomMonitor/${this.configService.getRunId()}`
-          );
-          this.snackBar.open($localize`Moved student to Team ${workgroupId}.`);
+          this.configService
+            .retrieveConfig(`/api/config/classroomMonitor/${this.configService.getRunId()}`)
+            .subscribe({
+              next: () => {
+                this.snackBar.open($localize`Moved student to Team ${workgroupId}.`);
+              }
+            });
         },
         error: () => {
           this.snackBar.open($localize`Error: Could not move student.`);
