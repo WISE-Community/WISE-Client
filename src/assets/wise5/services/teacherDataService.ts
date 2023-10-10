@@ -13,6 +13,7 @@ import { compressToEncodedURIComponent } from 'lz-string';
 import { isMatchingPeriods } from '../common/period/period';
 import { getIntersectOfArrays } from '../common/array/array';
 import { serverSaveTimeComparator } from '../common/object/object';
+import { Annotation } from '../common/Annotation';
 
 @Injectable()
 export class TeacherDataService extends DataService {
@@ -50,11 +51,11 @@ export class TeacherDataService extends DataService {
   }
 
   subscribeToEvents() {
-    this.AnnotationService.annotationSavedToServer$.subscribe(({ annotation }) => {
+    this.AnnotationService.annotationSavedToServer$.subscribe((annotation: Annotation) => {
       this.handleAnnotationReceived(annotation);
     });
 
-    this.TeacherWebSocketService.newAnnotationReceived$.subscribe(({ annotation }) => {
+    this.TeacherWebSocketService.newAnnotationReceived$.subscribe((annotation: Annotation) => {
       this.handleAnnotationReceived(annotation);
     });
 
@@ -70,7 +71,7 @@ export class TeacherDataService extends DataService {
     });
   }
 
-  handleAnnotationReceived(annotation) {
+  private handleAnnotationReceived(annotation: Annotation): void {
     this.studentData.annotations.push(annotation);
     const toWorkgroupId = annotation.toWorkgroupId;
     if (this.studentData.annotationsToWorkgroupId[toWorkgroupId] == null) {
@@ -83,7 +84,7 @@ export class TeacherDataService extends DataService {
     }
     this.studentData.annotationsByNodeId[nodeId].push(annotation);
     this.AnnotationService.setAnnotations(this.studentData.annotations);
-    this.AnnotationService.broadcastAnnotationReceived({ annotation: annotation });
+    this.AnnotationService.broadcastAnnotationReceived(annotation);
   }
 
   saveEvent(context, nodeId, componentId, componentType, category, event, data) {

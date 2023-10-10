@@ -7,6 +7,7 @@ import { AnnotationService } from '../../../assets/wise5/services/annotationServ
 import { MilestoneService } from '../../../assets/wise5/services/milestoneService';
 import { TeacherDataService } from '../../../assets/wise5/services/teacherDataService';
 import { Milestone } from '../../domain/milestone';
+import { Annotation } from '../../../assets/wise5/common/Annotation';
 
 @Component({
   selector: 'milestones',
@@ -62,7 +63,7 @@ export class MilestonesComponent {
 
   private subscribeToAnnotationChanges(): void {
     this.subscriptions.add(
-      this.annotationService.annotationReceived$.subscribe(({ annotation }) => {
+      this.annotationService.annotationReceived$.subscribe((annotation: Annotation) => {
         this.milestones
           .filter(
             (milestone) =>
