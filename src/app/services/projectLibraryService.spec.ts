@@ -22,22 +22,24 @@ describe('ProjectLibraryService', () => {
 
 function getLibraryProjects() {
   describe('getLibraryProjects()', () => {
-    it('gets the library projects, sorted and filtered', () => {
-      const getLibraryProjectsURL = '/api/project/library';
-      spyOn(configService, 'getConfigParam').and.callFake((param) => {
+    const getLibraryProjectsURL = '/api/project/library';
+    const unit1 = { id: 1, name: 'one' };
+    const unit2 = { id: 2, name: 'two' };
+    const unit3 = { id: 3, name: 'three' };
+    const libraryProjects = [
+      {
+        children: [unit3, unit1]
+      },
+      {
+        children: [unit2, unit1]
+      }
+    ];
+    beforeEach(() => {
+      spyOn(configService, 'getConfigParam').and.callFake(() => {
         return getLibraryProjectsURL;
       });
-      const unit1 = { id: 1, name: 'one' };
-      const unit2 = { id: 2, name: 'two' };
-      const unit3 = { id: 3, name: 'three' };
-      const libraryProjects = [
-        {
-          children: [unit3, unit1]
-        },
-        {
-          children: [unit2, unit1]
-        }
-      ];
+    });
+    it('gets the library projects, sorted and filtered', () => {
       service.getLibraryProjects().subscribe((projects) => {
         expect(projects).toEqual([unit3, unit2, unit1]);
       });
