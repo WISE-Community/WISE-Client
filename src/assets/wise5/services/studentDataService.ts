@@ -491,7 +491,7 @@ export class StudentDataService extends DataService {
           this.setRemoteIdIntoLocalId(savedAnnotation, localAnnotation);
           this.setRemoteServerSaveTimeIntoLocalServerSaveTime(savedAnnotation, localAnnotation);
           this.clearRequestToken(localAnnotation);
-          this.AnnotationService.broadcastAnnotationSavedToServer({ annotation: localAnnotation });
+          this.AnnotationService.broadcastAnnotationSavedToServer(localAnnotation);
           break;
         }
       }

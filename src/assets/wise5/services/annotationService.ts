@@ -7,15 +7,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { isMatchingPeriods } from '../common/period/period';
 import { generateRandomKey } from '../common/string/string';
+import { Annotation } from '../common/Annotation';
 
 @Injectable()
 export class AnnotationService {
-  annotations: any = [];
+  annotations: Annotation[] = [];
   dummyAnnotationId: number = 1; // used in preview mode when we simulate saving of annotation
-  private annotationSavedToServerSource: Subject<any> = new Subject<any>();
-  public annotationSavedToServer$: Observable<any> = this.annotationSavedToServerSource.asObservable();
-  private annotationReceivedSource: Subject<any> = new Subject<any>();
-  public annotationReceived$: Observable<any> = this.annotationReceivedSource.asObservable();
+  private annotationSavedToServerSource: Subject<Annotation> = new Subject<Annotation>();
+  public annotationSavedToServer$: Observable<Annotation> = this.annotationSavedToServerSource.asObservable();
+  private annotationReceivedSource: Subject<Annotation> = new Subject<Annotation>();
+  public annotationReceived$: Observable<Annotation> = this.annotationReceivedSource.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -23,7 +24,7 @@ export class AnnotationService {
     private ProjectService: ProjectService
   ) {}
 
-  getAnnotations() {
+  getAnnotations(): Annotation[] {
     return this.annotations;
   }
 
@@ -197,7 +198,7 @@ export class AnnotationService {
               localAnnotation.serverSaveTime = savedAnnotation.serverSaveTime;
               //localAnnotation.requestToken = null; // requestToken is no longer needed.
 
-              this.broadcastAnnotationSavedToServer({ annotation: localAnnotation });
+              this.broadcastAnnotationSavedToServer(localAnnotation);
               break;
             } else if (
               localAnnotation.requestToken != null &&
@@ -221,7 +222,7 @@ export class AnnotationService {
                 this.dummyAnnotationId++;
               }
 
-              this.broadcastAnnotationSavedToServer({ annotation: localAnnotation });
+              this.broadcastAnnotationSavedToServer(localAnnotation);
               break;
             }
           }
@@ -798,11 +799,11 @@ export class AnnotationService {
     return null;
   }
 
-  broadcastAnnotationSavedToServer(args: any) {
-    this.annotationSavedToServerSource.next(args);
+  broadcastAnnotationSavedToServer(annotation: Annotation): void {
+    this.annotationSavedToServerSource.next(annotation);
   }
 
-  broadcastAnnotationReceived(args: any) {
-    this.annotationReceivedSource.next(args);
+  broadcastAnnotationReceived(annotation: Annotation): void {
+    this.annotationReceivedSource.next(annotation);
   }
 }
