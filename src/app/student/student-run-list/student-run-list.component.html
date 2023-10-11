@@ -26,11 +26,11 @@
         <ng-container *ngIf="search" i18n>Units found: {{ filteredRuns.length }}</ng-container>
         <ng-container *ngIf="!search" i18n>My WISE units: {{ filteredRuns.length }}</ng-container>
         <span class="mat-caption" *ngIf="filteredRuns.length">
-          (<ng-container *ngIf="scheduledTotal()"
-            ><span i18n>{{ scheduledTotal() }} scheduled</span>,
+          (<ng-container *ngIf="getRunTotal('isScheduled')"
+            ><span i18n>{{ getRunTotal('isScheduled') }} scheduled</span>,
           </ng-container>
           <ng-container
-            ><span i18n>{{ activeTotal() }} active</span></ng-container
+            ><span i18n>{{ getRunTotal('isActive') }} active</span></ng-container
           >)
         </span>
         <ng-container *ngIf="search">
@@ -49,9 +49,9 @@
           id="run{{ run.id }}"
         >
           <app-timeline-item-label>
-            <strong>{{ run.startTime | date : 'mediumDate' }}</strong>
+            <strong>{{ run.startTime | date: 'mediumDate' }}</strong>
             <ng-container *ngIf="run.endTime && runSpansDays(run)">
-              - <strong>{{ run.endTime | date : 'mediumDate' }}</strong>
+              - <strong>{{ run.endTime | date: 'mediumDate' }}</strong>
             </ng-container>
           </app-timeline-item-label>
           <app-timeline-item-content>
