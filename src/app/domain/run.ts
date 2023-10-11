@@ -93,3 +93,7 @@ export class Run {
     return this.endTime != null;
   }
 }
+
+export function sortByRunStartTimeDesc(a: Run, b: Run): number {
+  return b.startTime - a.startTime;
+}
