@@ -232,23 +232,6 @@ export class TeacherDataService extends DataService {
     return this.retrieveStudentData(params);
   }
 
-  retrieveLatestStudentDataByNodeIdAndComponentIdAndPeriodId(nodeId, componentId, periodId) {
-    let params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
-      .set('nodeId', nodeId)
-      .set('componentId', componentId)
-      .set('getStudentWork', 'true')
-      .set('getEvents', 'false')
-      .set('getAnnotations', 'false')
-      .set('onlyGetLatest', 'true');
-    if (periodId != null) {
-      params = params.set('periodId', periodId);
-    }
-    return this.retrieveStudentData(params).subscribe((result) => {
-      return result.studentWorkList;
-    });
-  }
-
   retrieveStudentData(params): Observable<any> {
     const url = this.ConfigService.getConfigParam('teacherDataURL');
     const options = {
@@ -440,20 +423,17 @@ export class TeacherDataService extends DataService {
     return -1;
   }
 
-  retrieveRunStatus() {
-    const url = this.ConfigService.getConfigParam('runStatusURL');
-    const params = new HttpParams().set('runId', this.ConfigService.getConfigParam('runId'));
+  retrieveRunStatus(): Observable<any> {
     const options = {
-      params: params,
+      params: new HttpParams().set('runId', this.ConfigService.getConfigParam('runId')),
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     };
-    return this.http
-      .get(url, options)
-      .toPromise()
-      .then((data: any) => {
-        this.runStatus = data;
+    return this.http.get(this.ConfigService.getConfigParam('runStatusURL'), options).pipe(
+      tap((runStatus: any) => {
+        this.runStatus = runStatus;
         this.initializePeriods();
-      });
+      })
+    );
   }
 
   getComponentStatesByWorkgroupId(workgroupId) {
@@ -616,12 +596,12 @@ export class TeacherDataService extends DataService {
     }
   }
 
-  initializePeriods() {
+  private initializePeriods(): void {
     const periods = [...this.ConfigService.getPeriods()];
     if (this.currentPeriod == null) {
       this.setCurrentPeriod(periods[0]);
     }
-    this.addAllPeriods(periods);
+    periods.unshift({ periodId: -1, periodName: $localize`All Periods` });
     let mergedPeriods = periods;
     if (this.runStatus.periods != null) {
       mergedPeriods = this.mergeConfigAndRunStatusPeriods(periods, this.runStatus.periods);
@@ -630,33 +610,15 @@ export class TeacherDataService extends DataService {
     this.runStatus.periods = mergedPeriods;
   }
 
-  addAllPeriods(periods: any[]): void {
-    periods.unshift({
-      periodId: -1,
-      periodName: $localize`All Periods`
-    });
-  }
-
-  mergeConfigAndRunStatusPeriods(configPeriods, runStatusPeriods) {
+  private mergeConfigAndRunStatusPeriods(configPeriods: any[], runStatusPeriods: any[]): any[] {
     const mergedPeriods = [];
-    for (const configPeriod of configPeriods) {
-      const runStatusPeriod = this.getRunStatusPeriodById(runStatusPeriods, configPeriod.periodId);
-      if (runStatusPeriod == null) {
-        mergedPeriods.push(configPeriod);
-      } else {
-        mergedPeriods.push(runStatusPeriod);
-      }
-    }
+    configPeriods.forEach((configPeriod) => {
+      const runStatusPeriod = runStatusPeriods.find(
+        (runStatusPeriod) => runStatusPeriod.periodId === configPeriod.periodId
+      );
+      mergedPeriods.push(runStatusPeriod != null ? runStatusPeriod : configPeriod);
+    });
     return mergedPeriods;
-  }
-
-  getRunStatusPeriodById(runStatusPeriods, periodId) {
-    for (const runStatusPeriod of runStatusPeriods) {
-      if (runStatusPeriod.periodId == periodId) {
-        return runStatusPeriod;
-      }
-    }
-    return null;
   }
 
   setCurrentPeriod(period) {
