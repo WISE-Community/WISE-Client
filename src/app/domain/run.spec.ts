@@ -1,4 +1,3 @@
-import { title } from 'process';
 import { Run, sortByRunStartTimeDesc } from './run';
 
 describe('Run', () => {
@@ -48,7 +47,7 @@ describe('Run', () => {
       runList = [run2, run3, run];
       runList.sort(sortByRunStartTimeDesc);
     });
-    it('should sort runs by start date', async () => {
+    it('sorts runs by start date', async () => {
       expect(runList).toEqual([run3, run2, run]);
     });
   });

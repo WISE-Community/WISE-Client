@@ -79,15 +79,9 @@ export class StudentRunListComponent implements OnInit {
     return runSpansDays(run, this.localeID);
   }
 
-  getRunTotal(type: 'isActive' | 'isScheduled'): number {
-    let total = 0;
+  protected getRunTotal(type: 'isActive' | 'isScheduled'): number {
     const now = this.configService.getCurrentServerTime();
-    for (let run of this.filteredRuns) {
-      if (run[type](now)) {
-        total++;
-      }
-    }
-    return total;
+    return this.filteredRuns.filter((run) => run[type](now)).length;
   }
 
   searchUpdated(value: string) {
