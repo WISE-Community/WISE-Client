@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { ImportComponentService } from '../../../services/importComponentService';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'choose-import-component',
@@ -21,6 +22,7 @@ export class ChooseImportComponentComponent implements OnInit {
   protected libraryProjectsList: any = [];
   protected myProjectsList: any = [];
   nodesInOrder: any[] = [];
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private configService: ConfigService,
@@ -33,18 +35,22 @@ export class ChooseImportComponentComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.importProjectItems = [];
     this.importMyProjectId = null;
     this.importLibraryProjectId = null;
     this.importProjectId = null;
     this.importProject = null;
     this.myProjectsList = this.configService.getAuthorableProjects();
-    this.projectLibraryService.getLibraryProjects().then((libraryProjects) => {
-      this.libraryProjectsList = this.projectLibraryService.sortAndFilterUniqueProjects(
-        libraryProjects
-      );
-    });
+    this.subscriptions.add(
+      this.projectLibraryService.getLibraryProjects().subscribe((libraryProjects) => {
+        this.libraryProjectsList = libraryProjects;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   showMyImportProject(importProjectId: number): void {
