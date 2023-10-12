@@ -35,17 +35,6 @@
     <button
       mat-raised-button
       color="primary"
-      (click)="addStructure()"
-      [disabled]="stepNodeSelected || groupNodeSelected"
-      matTooltip="Add Lesson Structure"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>widgets</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
       (click)="chooseLocation(false)"
       [disabled]="!hasSelectedNodes()"
       matTooltip="Move"

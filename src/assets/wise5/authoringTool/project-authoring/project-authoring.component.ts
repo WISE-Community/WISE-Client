@@ -142,15 +142,11 @@ export class ProjectAuthoringComponent {
   }
 
   protected addNewLesson(): void {
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-lesson/configure`]);
+    this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-lesson`]);
   }
 
   protected addNewStep(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-node/choose-template`]);
-  }
-
-  protected addStructure(): void {
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/structure/choose`]);
   }
 
   protected goToAdvancedAuthoring(): void {

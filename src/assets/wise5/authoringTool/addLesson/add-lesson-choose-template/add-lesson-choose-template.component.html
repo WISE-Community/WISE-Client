@@ -1,0 +1,28 @@
+<h5 i18n>Start from scratch or choose a Lesson Structure*</h5>
+<div fxLayout="row wrap" fxLayoutAlign="start stretch">
+  <mat-card *ngFor="let template of templates">
+    <mat-card-title>
+      <h6 class="center">{{ template.label }}</h6>
+    </mat-card-title>
+    <mat-card-content fxLayoutAlign="center center">
+      <mat-icon>{{ template.icon }}</mat-icon>
+    </mat-card-content>
+    <mat-card-actions fxLayout="column" fxLayoutAlign="start">
+      <button mat-raised-button color="primary" (click)="chooseTemplate(template)" i18n>
+        Select
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<p i18n>
+  *Based on our work with classroom teachers, we have developed several lesson structures that
+  follow the
+  <a href="https://wise.berkeley.edu/about#ki" target="_blank">Knowledge Integration</a> framework
+  and help teachers productively integrate open educational resources (OERs) into their curricula.
+  These structures have also proven useful for developing students' capacity for self-directed
+  learning. We have made the structures very general, so that teachers can customize and incorporate
+  them into any WISE unit to strengthen support for knowledge integration and self-directed
+  learning.
+</p>
+<hr />
+<button mat-button color="primary" routerLink=".." i18n>Cancel</button>

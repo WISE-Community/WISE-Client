@@ -54,7 +54,7 @@ export class ChooseStructureLocationComponent {
   private saveAndGoBackToProjectHome(): void {
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
       this.projectService.refreshProject();
-      this.router.navigate(['../..'], { relativeTo: this.route });
+      this.router.navigate(['../../..'], { relativeTo: this.route });
     });
   }
 
