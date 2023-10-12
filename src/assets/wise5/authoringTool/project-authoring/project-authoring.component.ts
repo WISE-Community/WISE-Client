@@ -140,11 +140,11 @@ export class ProjectAuthoringComponent {
     this.groupNodeSelected = false;
   }
 
-  protected createNewLesson(): void {
+  protected addNewLesson(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-lesson/configure`]);
   }
 
-  protected createNewStep(): void {
+  protected addNewStep(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-node/choose-template`]);
   }
 
