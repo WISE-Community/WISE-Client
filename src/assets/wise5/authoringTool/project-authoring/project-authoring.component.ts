@@ -157,10 +157,6 @@ export class ProjectAuthoringComponent {
     return this.projectService.isNodeInAnyBranchPath(nodeId);
   }
 
-  protected goBackToProjectList(): void {
-    this.router.navigate([`/teacher/edit/home`]);
-  }
-
   /**
    * Temporarily highlight the new nodes to draw attention to them
    * @param newNodes the new nodes to highlight
