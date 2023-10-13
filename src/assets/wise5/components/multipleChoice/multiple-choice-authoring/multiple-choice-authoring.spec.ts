@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MultipleChoiceAuthoringHarness } from './multiple-choice-authoring.harness';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 let component: MultipleChoiceAuthoring;
 let fixture: ComponentFixture<MultipleChoiceAuthoring>;
@@ -37,7 +38,7 @@ describe('MultipleChoiceAuthoringComponent', () => {
           MatRadioModule,
           StudentTeacherCommonServicesModule
         ],
-        providers: [ProjectAssetService, TeacherProjectService]
+        providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
       });
     })
   );
