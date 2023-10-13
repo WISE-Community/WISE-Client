@@ -49,6 +49,8 @@ import { InsertNodeInsideButtonComponent } from '../../assets/wise5/authoringToo
 import { NodeIconAndTitleComponent } from '../../assets/wise5/authoringTool/choose-node-location/node-icon-and-title/node-icon-and-title.component';
 import { NodeWithMoveAfterButtonComponent } from '../../assets/wise5/authoringTool/choose-node-location/node-with-move-after-button/node-with-move-after-button.component';
 import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component';
+import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
+import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringToo
     ChooseCopyNodeLocationComponent,
     ChooseImportStepComponent,
     ChooseImportStepLocationComponent,
+    ChooseImportUnitComponent,
     ChooseNewComponent,
     ChooseNewNodeLocation,
     ChooseNewNodeTemplate,
@@ -76,6 +79,7 @@ import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringToo
     InsertNodeInsideButtonComponent,
     MilestonesAuthoringComponent,
     NodeAuthoringComponent,
+    NodeAuthoringParentComponent,
     NodeIconChooserDialog,
     NodeIconAndTitleComponent,
     NodeWithMoveAfterButtonComponent,

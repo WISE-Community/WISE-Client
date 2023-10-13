@@ -6,6 +6,7 @@ import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
 import { DialogGuidanceAuthoringModule } from './dialog-guidance-authoring.module';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 const componentContent = {
   id: 'i64ex48j1z',
@@ -28,7 +29,8 @@ describe('DialogGuidanceAuthoringComponent', () => {
         DialogGuidanceAuthoringModule,
         HttpClientTestingModule,
         StudentTeacherCommonServicesModule
-      ]
+      ],
+      providers: [TeacherNodeService]
     });
     fixture = TestBed.createComponent(DialogGuidanceAuthoringComponent);
     component = fixture.componentInstance;

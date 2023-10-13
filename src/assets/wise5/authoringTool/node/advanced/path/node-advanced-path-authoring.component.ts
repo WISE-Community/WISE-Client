@@ -60,7 +60,7 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
   constructor(private projectService: TeacherProjectService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.parent.params.subscribe((params) => {
+    this.route.parent.parent.params.subscribe((params) => {
       this.node = this.projectService.getNodeById(params.nodeId);
       this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);
     });

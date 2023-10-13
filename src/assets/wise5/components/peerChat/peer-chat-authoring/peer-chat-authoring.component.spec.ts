@@ -11,7 +11,6 @@ import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-comp
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { copy } from '../../../common/object/object';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -19,6 +18,7 @@ import { MockNodeService } from '../../common/MockNodeService';
 import { PeerChatAuthoringComponent } from './peer-chat-authoring.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 const componentContent = {
   id: 'qn3savv52r',
@@ -60,7 +60,7 @@ describe('PeerChatAuthoringComponent', () => {
       declarations: [EditComponentPrompt, PeerChatAuthoringComponent],
       providers: [
         ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
+        { provide: TeacherNodeService, useClass: MockNodeService },
         ProjectAssetService,
         ProjectService,
         SessionService,

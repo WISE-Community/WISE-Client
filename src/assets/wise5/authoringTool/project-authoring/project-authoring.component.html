@@ -13,9 +13,9 @@
     <button
       mat-raised-button
       color="primary"
-      (click)="createNewLesson()"
+      (click)="addNewLesson()"
       [disabled]="stepNodeSelected || groupNodeSelected"
-      matTooltip="Create New Lesson"
+      matTooltip="Add New Lesson"
       matTooltipPosition="above"
       i18n-matTooltip
     >
@@ -24,9 +24,9 @@
     <button
       mat-raised-button
       color="primary"
-      (click)="createNewStep()"
+      (click)="addNewStep()"
       [disabled]="stepNodeSelected || groupNodeSelected"
-      matTooltip="Create New Step"
+      matTooltip="Add New Step"
       matTooltipPosition="above"
       i18n-matTooltip
     >
@@ -42,17 +42,6 @@
       i18n-matTooltip
     >
       <mat-icon>widgets</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="importStep()"
-      [disabled]="stepNodeSelected || groupNodeSelected"
-      matTooltip="Import Step"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>system_update_alt</mat-icon>
     </button>
     <button
       mat-raised-button

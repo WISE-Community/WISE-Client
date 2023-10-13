@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'choose-import-step-location',
-  styleUrls: ['choose-import-step-location.component.scss'],
+  styleUrls: ['choose-import-step-location.component.scss', '../import-step.scss'],
   templateUrl: 'choose-import-step-location.component.html'
 })
 export class ChooseImportStepLocationComponent {
@@ -39,14 +39,14 @@ export class ChooseImportStepLocationComponent {
           this.projectService.refreshProject();
           if (nodesWithNewNodeIds.length === 1) {
             const newNode = nodesWithNewNodeIds[0];
-            this.router.navigate(['../../node', newNode.id], {
+            this.router.navigate(['../../../node', newNode.id], {
               relativeTo: this.route,
               state: {
                 newComponents: newNode.components
               }
             });
           } else {
-            this.router.navigate(['../..'], { relativeTo: this.route });
+            this.router.navigate(['../../..'], { relativeTo: this.route });
           }
         });
       });

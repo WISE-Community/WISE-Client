@@ -8,6 +8,7 @@ import { NotificationService } from '../../services/notificationService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { ActivatedRoute } from '@angular/router';
+import { Annotation } from '../../common/Annotation';
 
 @Component({
   selector: 'student-grading',
@@ -104,7 +105,7 @@ export class StudentGradingComponent implements OnInit {
 
   private subscribeToAnnotationReceived(): void {
     this.subscriptions.add(
-      this.annotationService.annotationReceived$.subscribe(({ annotation }) => {
+      this.annotationService.annotationReceived$.subscribe((annotation: Annotation) => {
         const workgroupId = annotation.toWorkgroupId;
         const nodeId = annotation.nodeId;
         if (workgroupId === this.workgroupId && this.nodesById[nodeId]) {

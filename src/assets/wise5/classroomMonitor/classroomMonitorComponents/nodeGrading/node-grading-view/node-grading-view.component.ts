@@ -15,6 +15,7 @@ import { copy } from '../../../../common/object/object';
 import { ShowNodeInfoDialogComponent } from '../../../../../../app/classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MilestoneDetailsDialogComponent } from '../../milestones/milestone-details-dialog/milestone-details-dialog.component';
+import { Annotation } from '../../../../common/Annotation';
 
 @Component({
   selector: 'node-grading-view',
@@ -103,7 +104,7 @@ export class NodeGradingViewComponent implements OnInit {
     );
 
     this.subscriptions.add(
-      this.annotationService.annotationReceived$.subscribe(({ annotation }) => {
+      this.annotationService.annotationReceived$.subscribe((annotation: Annotation) => {
         const workgroupId = annotation.toWorkgroupId;
         if (annotation.nodeId === this.nodeId && this.workgroupsById[workgroupId]) {
           this.updateWorkgroup(workgroupId);

@@ -10,7 +10,6 @@ import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-comp
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { StudentAssetService } from '../../../services/studentAssetService';
@@ -19,6 +18,7 @@ import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapService } from '../conceptMapService';
 import { ConceptMapAuthoring } from './concept-map-authoring.component';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @NgModule({
   declarations: [ConceptMapAuthoring, EditComponentPrompt],
@@ -35,13 +35,13 @@ import { ConceptMapAuthoring } from './concept-map-authoring.component';
     AnnotationService,
     ConceptMapService,
     ConfigService,
-    NodeService,
     ProjectAssetService,
     ProjectService,
     SessionService,
     StudentAssetService,
     StudentDataService,
     TagService,
+    TeacherNodeService,
     TeacherProjectService
   ],
   exports: [ConceptMapAuthoring, EditComponentPrompt]

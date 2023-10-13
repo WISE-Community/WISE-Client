@@ -22,7 +22,7 @@ import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workg
 })
 export class ManageTeamComponent {
   avatarColor: string;
-  canChangePeriod: boolean;
+  canGradeStudentWork: boolean;
   isUnassigned: boolean;
   @Input() team: any;
 
@@ -35,11 +35,8 @@ export class ManageTeamComponent {
 
   ngOnInit() {
     this.avatarColor = getAvatarColorForWorkgroupId(this.team.workgroupId);
+    this.canGradeStudentWork = this.configService.getPermissions().canGradeStudentWork;
     this.isUnassigned = this.team.workgroupId == null;
-    this.canChangePeriod =
-      this.configService.getPermissions().canGradeStudentWork &&
-      this.team.users.length > 0 &&
-      !this.isUnassigned;
   }
 
   changePeriod(event: Event) {
@@ -88,26 +85,33 @@ export class ManageTeamComponent {
 
   private moveUser(event: CdkDragDrop<string[]>): void {
     this.updateWorkgroupService
-      .moveMember(
-        event.item.data.user.id,
-        event.item.data.workgroupId,
-        this.team.workgroupId,
-        this.team.periodId
-      )
-      .subscribe(() => {
-        const previousIndex = event.previousContainer.data.findIndex(
-          (user) => user === event.item.data.user
-        );
-        transferArrayItem(
-          event.previousContainer.data,
-          event.container.data,
-          previousIndex,
-          event.currentIndex
-        );
-        this.configService.retrieveConfig(
-          `/api/config/classroomMonitor/${this.configService.getRunId()}`
-        );
-        this.snackBar.open($localize`Moved student to Team ${this.team.workgroupId}.`);
+      .moveMember(event.item.data.user.id, this.team.workgroupId)
+      .subscribe({
+        next: (workgroupId: number) => {
+          const previousIndex = event.previousContainer.data.findIndex(
+            (user) => user === event.item.data.user
+          );
+          transferArrayItem(
+            event.previousContainer.data,
+            event.container.data,
+            previousIndex,
+            event.currentIndex
+          );
+          this.configService
+            .retrieveConfig(`/api/config/classroomMonitor/${this.configService.getRunId()}`)
+            .subscribe({
+              next: () => {
+                this.snackBar.open($localize`Moved student to Team ${workgroupId}.`);
+              }
+            });
+        },
+        error: () => {
+          this.snackBar.open($localize`Error: Could not move student.`);
+        }
       });
+  }
+
+  protected removeUser(user: any): void {
+    this.team.users.splice(this.team.users.indexOf(user), 1);
   }
 }

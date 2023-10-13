@@ -36,6 +36,7 @@ export class ProjectAuthoringComponent {
   ngOnInit(): void {
     this.projectId = Number(this.route.snapshot.paramMap.get('unitId'));
     this.refreshProject();
+    this.dataService.setCurrentNode(null);
     this.temporarilyHighlightNewNodes(history.state.newNodes);
     this.subscriptions.add(
       this.projectService.refreshProject$.subscribe(() => {
@@ -140,20 +141,16 @@ export class ProjectAuthoringComponent {
     this.groupNodeSelected = false;
   }
 
-  protected createNewLesson(): void {
+  protected addNewLesson(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-lesson/configure`]);
   }
 
-  protected createNewStep(): void {
+  protected addNewStep(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-node/choose-template`]);
   }
 
   protected addStructure(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/structure/choose`]);
-  }
-
-  protected importStep(): void {
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/import-step/choose-step`]);
   }
 
   protected goToAdvancedAuthoring(): void {

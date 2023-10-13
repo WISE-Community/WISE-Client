@@ -6,21 +6,6 @@ import { ProjectLibraryService } from '../../assets/wise5/services/projectLibrar
 let configService: ConfigService;
 let http: HttpTestingController;
 let service: ProjectLibraryService;
-const getLibraryProjectsURL = '/api/project/library';
-const libraryProjects = [
-  {
-    children: [
-      { id: 3, name: 'three' },
-      { id: 1, name: 'one' }
-    ]
-  },
-  {
-    children: [
-      { id: 2, name: 'two' },
-      { id: 1, name: 'one' }
-    ]
-  }
-];
 
 describe('ProjectLibraryService', () => {
   beforeEach(() => {
@@ -33,56 +18,32 @@ describe('ProjectLibraryService', () => {
     configService = TestBed.inject(ConfigService);
   });
   getLibraryProjects();
-  sortAndFilterUniqueProjects();
-  filterUniqueProjects();
 });
 
 function getLibraryProjects() {
-  describe('getLibraryProjects', () => {
-    it('should get the library projects', () => {
-      spyOnLibraryProjectsURLFromConfig();
-      const result = service.getLibraryProjects();
-      http.expectOne(getLibraryProjectsURL).flush(libraryProjects);
-      result.then((projects) => {
-        expect(projects).toEqual(libraryProjects);
+  describe('getLibraryProjects()', () => {
+    const getLibraryProjectsURL = '/api/project/library';
+    const unit1 = { id: 1, name: 'one' };
+    const unit2 = { id: 2, name: 'two' };
+    const unit3 = { id: 3, name: 'three' };
+    const libraryProjects = [
+      {
+        children: [unit3, unit1]
+      },
+      {
+        children: [unit2, unit1]
+      }
+    ];
+    beforeEach(() => {
+      spyOn(configService, 'getConfigParam').and.callFake(() => {
+        return getLibraryProjectsURL;
       });
     });
-  });
-}
-
-function spyOnLibraryProjectsURLFromConfig() {
-  spyOn(configService, 'getConfigParam').and.callFake((param) => {
-    return getLibraryProjectsURL;
-  });
-}
-
-function sortAndFilterUniqueProjects() {
-  describe('sortAndFilterUniqueProjects', () => {
-    it('should filter and sort unique projects', () => {
-      const result = service.sortAndFilterUniqueProjects(libraryProjects);
-      expect(result).toEqual([
-        { id: 3, name: 'three' },
-        { id: 2, name: 'two' },
-        { id: 1, name: 'one' }
-      ]);
-    });
-  });
-}
-
-function filterUniqueProjects() {
-  describe('filterUniqueProjects', () => {
-    it('should filter unique projects based on id', () => {
-      const nonUniqueProjects = [
-        { id: 3, name: 'three' },
-        { id: 1, name: 'one' },
-        { id: 2, name: 'two' },
-        { id: 1, name: 'one' }
-      ];
-      const uniqueProjects = service.filterUniqueProjects(nonUniqueProjects);
-      expect(uniqueProjects.length).toEqual(3);
-      expect(uniqueProjects[0].id).toEqual(3);
-      expect(uniqueProjects[1].id).toEqual(1);
-      expect(uniqueProjects[2].id).toEqual(2);
+    it('gets the library projects, sorted and filtered', () => {
+      service.getLibraryProjects().subscribe((projects) => {
+        expect(projects).toEqual([unit3, unit2, unit1]);
+      });
+      http.expectOne(getLibraryProjectsURL).flush(libraryProjects);
     });
   });
 }

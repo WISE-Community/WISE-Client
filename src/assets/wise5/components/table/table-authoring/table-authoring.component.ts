@@ -6,8 +6,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'table-authoring',
@@ -25,7 +25,7 @@ export class TableAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
-    protected NodeService: NodeService,
+    protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
   ) {

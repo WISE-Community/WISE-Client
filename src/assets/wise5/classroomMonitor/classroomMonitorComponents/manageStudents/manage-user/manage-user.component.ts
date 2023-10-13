@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfigService } from '../../../../services/configService';
@@ -15,6 +15,7 @@ import { RemoveUserConfirmDialogComponent } from '../remove-user-confirm-dialog/
 })
 export class ManageUserComponent {
   @Input() user: any;
+  @Output() removeUserEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private dialog: MatDialog,
@@ -49,9 +50,22 @@ export class ManageUserComponent {
   performRemoveUser() {
     const runId = this.configService.getRunId();
     const studentId = this.user.id;
-    this.http.delete(`/api/teacher/run/${runId}/student/${studentId}/remove`).subscribe(() => {
-      this.snackBar.open($localize`Removed ${this.user.name} (${this.user.username}) from unit.`);
-      this.configService.retrieveConfig(`/api/config/classroomMonitor/${runId}`);
+    this.http.delete(`/api/teacher/run/${runId}/student/${studentId}/remove`).subscribe({
+      next: () => {
+        this.removeUserEvent.emit(this.user);
+        this.configService.retrieveConfig(`/api/config/classroomMonitor/${runId}`).subscribe({
+          next: () => {
+            this.snackBar.open(
+              $localize`Removed ${this.user.name} (${this.user.username}) from unit.`
+            );
+          }
+        });
+      },
+      error: () => {
+        this.snackBar.open(
+          $localize`Error: Could not remove ${this.user.name} (${this.user.username}) from unit.`
+        );
+      }
     });
   }
 

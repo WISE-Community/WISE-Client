@@ -5,11 +5,11 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MatchService } from '../matchService';
 import { MatDialog } from '@angular/material/dialog';
 import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'match-authoring',
@@ -24,7 +24,7 @@ export class MatchAuthoring extends AbstractComponentAuthoring {
     protected configService: ConfigService,
     private dialog: MatDialog,
     private matchService: MatchService,
-    protected nodeService: NodeService,
+    protected nodeService: TeacherNodeService,
     protected projectAssetService: ProjectAssetService,
     protected projectService: TeacherProjectService
   ) {

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
-import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapContent } from '../ConceptMapContent';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'edit-concept-map-advanced',
@@ -15,7 +15,7 @@ export class EditConceptMapAdvancedComponent extends EditAdvancedComponentCompon
   allowedConnectedComponentTypes = ['ConceptMap', 'Draw', 'Embedded', 'Graph', 'Label', 'Table'];
 
   constructor(
-    protected nodeService: NodeService,
+    protected nodeService: TeacherNodeService,
     protected notebookService: NotebookService,
     protected projectService: TeacherProjectService
   ) {

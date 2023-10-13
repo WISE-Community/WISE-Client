@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 import { CSVToArray } from '../../../common/array/array';
-import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TableContent } from '../TableContent';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'edit-table-advanced',
@@ -25,7 +25,7 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   importTableMessage: string;
 
   constructor(
-    protected nodeService: NodeService,
+    protected nodeService: TeacherNodeService,
     protected notebookService: NotebookService,
     protected teacherProjectService: TeacherProjectService
   ) {

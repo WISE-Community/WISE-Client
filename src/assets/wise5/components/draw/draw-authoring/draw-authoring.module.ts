@@ -10,7 +10,6 @@ import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-comp
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { StudentAssetService } from '../../../services/studentAssetService';
@@ -19,6 +18,7 @@ import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { DrawService } from '../drawService';
 import { DrawAuthoring } from './draw-authoring.component';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @NgModule({
   declarations: [DrawAuthoring, EditComponentPrompt],
@@ -35,13 +35,13 @@ import { DrawAuthoring } from './draw-authoring.component';
     AnnotationService,
     ConfigService,
     DrawService,
-    NodeService,
     ProjectAssetService,
     ProjectService,
     SessionService,
     StudentAssetService,
     StudentDataService,
     TagService,
+    TeacherNodeService,
     TeacherProjectService
   ],
   exports: [DrawAuthoring, EditComponentPrompt]

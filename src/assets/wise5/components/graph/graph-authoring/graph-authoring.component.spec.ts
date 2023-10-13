@@ -17,6 +17,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { GraphAuthoring } from './graph-authoring.component';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 let component: GraphAuthoring;
 let fixture: ComponentFixture<GraphAuthoring>;
@@ -41,7 +42,7 @@ describe('GraphAuthoringComponent', () => {
         StudentTeacherCommonServicesModule
       ],
       declarations: [GraphAuthoring, EditComponentPrompt],
-      providers: [ProjectAssetService, TeacherProjectService]
+      providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
     });
     fixture = TestBed.createComponent(GraphAuthoring);
     component = fixture.componentInstance;

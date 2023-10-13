@@ -1,9 +1,9 @@
 import { Directive, Input } from '@angular/core';
 import { ComponentContent } from '../../../assets/wise5/common/ComponentContent';
 import { Component } from '../../../assets/wise5/common/Component';
-import { NodeService } from '../../../assets/wise5/services/nodeService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
+import { TeacherNodeService } from '../../../assets/wise5/services/teacherNodeService';
 
 @Directive()
 export abstract class EditAdvancedComponentComponent {
@@ -13,7 +13,7 @@ export abstract class EditAdvancedComponentComponent {
   @Input() nodeId: string;
 
   constructor(
-    protected nodeService: NodeService,
+    protected nodeService: TeacherNodeService,
     protected notebookService: NotebookService,
     protected teacherProjectService: TeacherProjectService
   ) {}
