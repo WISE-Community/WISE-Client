@@ -62,7 +62,7 @@ export class ComponentNewWorkBadgeComponent {
       }
       let latestTeacherScore = null;
       if (latestAnnotations && latestAnnotations.score) {
-        if (latestAnnotations.score !== 'autoScore') {
+        if (latestAnnotations.score.type !== 'autoScore') {
           latestTeacherScore = latestAnnotations.score;
         }
       }

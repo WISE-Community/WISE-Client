@@ -11,11 +11,12 @@ import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { StudentPeerGroupService } from '../../assets/wise5/services/studentPeerGroupService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { Annotation } from '../../assets/wise5/common/Annotation';
 
 let annotationService: AnnotationService;
 const componentId1 = 'component1';
 let configService: ConfigService;
-const dummyAnnotation = { id: 200, data: {} };
+const dummyAnnotation = { id: 200, data: {} } as Annotation;
 const dummyStudentData = { id: 100, studentData: {} };
 let http: HttpClient;
 const nodeId1 = 'node1';

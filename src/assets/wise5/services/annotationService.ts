@@ -443,7 +443,7 @@ export class AnnotationService {
     nodeId,
     componentId,
     workgroupId,
-    scoreType = null,
+    scoreType: 'score' | 'autoScore' | 'any' = 'any',
     commentType = null
   ) {
     let latestScoreAnnotation = this.getLatestScoreAnnotation(
@@ -530,59 +530,31 @@ export class AnnotationService {
     return null;
   }
 
-  /**
-   * Get the latest score annotation
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @param workgroupId the workgroup id
-   * @param scoreType (optional) the type of score
-   * e.g.
-   * 'autoScore' for auto graded score
-   * 'score' for teacher graded score
-   * 'any' for auto graded score or teacher graded score
-   * @returns the latest score annotation
-   */
-  getLatestScoreAnnotation(nodeId, componentId, workgroupId, scoreType = null) {
-    let annotation = null;
-    const annotations = this.getAnnotations();
+  getLatestScoreAnnotation(
+    nodeId: string,
+    componentId: string,
+    workgroupId: number,
+    scoreType: 'score' | 'autoScore' | 'any' = 'any'
+  ): Annotation {
+    return this.getAnnotations()
+      .filter(
+        (annotation) =>
+          annotation.nodeId == nodeId &&
+          annotation.componentId == componentId &&
+          annotation.toWorkgroupId == workgroupId &&
+          this.matchesScoreType(annotation, scoreType)
+      )
+      .at(-1);
+  }
 
-    if (scoreType == null) {
-      scoreType = 'any';
-    }
-
-    for (let a = annotations.length - 1; a >= 0; a--) {
-      const tempAnnotation = annotations[a];
-      if (tempAnnotation != null) {
-        let acceptAnnotation = false;
-        const tempNodeId = tempAnnotation.nodeId;
-        const tempComponentId = tempAnnotation.componentId;
-        const tempToWorkgroupId = tempAnnotation.toWorkgroupId;
-        const tempAnnotationType = tempAnnotation.type;
-
-        if (
-          nodeId == tempNodeId &&
-          componentId == tempComponentId &&
-          workgroupId == tempToWorkgroupId
-        ) {
-          if (
-            scoreType === 'any' &&
-            (tempAnnotationType === 'autoScore' || tempAnnotationType === 'score')
-          ) {
-            acceptAnnotation = true;
-          } else if (scoreType === 'autoScore' && tempAnnotationType === 'autoScore') {
-            acceptAnnotation = true;
-          } else if (scoreType === 'score' && tempAnnotationType === 'score') {
-            acceptAnnotation = true;
-          }
-
-          if (acceptAnnotation) {
-            annotation = tempAnnotation;
-            break;
-          }
-        }
-      }
-    }
-    return annotation;
+  private matchesScoreType(
+    annotation: Annotation,
+    scoreType: 'score' | 'autoScore' | 'any'
+  ): boolean {
+    return (
+      ['autoScore', 'score'].includes(annotation.type) &&
+      (scoreType === 'any' || annotation.type === scoreType)
+    );
   }
 
   isThereAnyScoreAnnotation(nodeId, componentId, periodId) {

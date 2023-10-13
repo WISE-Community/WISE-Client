@@ -5,6 +5,7 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { ScoreConstraintStrategy } from './ScoreConstraintStrategy';
+import { Annotation } from '../../Annotation';
 
 let annotationService: AnnotationService;
 let configService: ConfigService;
@@ -47,7 +48,7 @@ function evaluate() {
 
 function expectEvaluate(criteria: any, score: number, expected: boolean): void {
   spyOn(configService, 'getWorkgroupId').and.returnValue(1);
-  spyOn(annotationService, 'getLatestScoreAnnotation').and.returnValue({});
+  spyOn(annotationService, 'getLatestScoreAnnotation').and.returnValue({} as Annotation);
   spyOn(annotationService, 'getScoreValueFromScoreAnnotation').and.returnValue(score);
   expect(strategy.evaluate(criteria)).toEqual(expected);
 }
