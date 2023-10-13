@@ -10,10 +10,13 @@ import { NewPasswordAndConfirmHarness } from './new-password-and-confirm.harness
 import { PasswordModule } from '../password.module';
 import { PasswordErrors } from '../../domain/password/password-errors';
 import { PasswordRequirementComponent } from '../password-requirement/password-requirement.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { HarnessLoader } from '@angular/cdk/testing';
 
 let component: NewPasswordAndConfirmComponent;
 let fixture: ComponentFixture<NewPasswordAndConfirmComponent>;
 let newPasswordAndConfirmHarness: NewPasswordAndConfirmHarness;
+let rootLoader: HarnessLoader;
 
 describe('NewPasswordAndConfirmComponent', () => {
   beforeEach(async () => {
@@ -24,6 +27,7 @@ describe('NewPasswordAndConfirmComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
+        MatMenuModule,
         PasswordModule,
         ReactiveFormsModule
       ]
@@ -36,6 +40,7 @@ describe('NewPasswordAndConfirmComponent', () => {
       fixture,
       NewPasswordAndConfirmHarness
     );
+    rootLoader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   });
   newPasswordValidation();
   confirmPasswordValidation();
@@ -107,9 +112,13 @@ function passwordErrorCases(): void {
 }
 
 async function checkPasswordRequirements(passwordErrors: PasswordErrors): Promise<void> {
-  expect(await newPasswordAndConfirmHarness.isMissingLetter()).toBe(passwordErrors.missingLetter);
-  expect(await newPasswordAndConfirmHarness.isMissingNumber()).toBe(passwordErrors.missingNumber);
-  expect(await newPasswordAndConfirmHarness.isTooShort()).toBe(passwordErrors.tooShort);
+  expect(await newPasswordAndConfirmHarness.isMissingLetter(rootLoader)).toBe(
+    passwordErrors.missingLetter
+  );
+  expect(await newPasswordAndConfirmHarness.isMissingNumber(rootLoader)).toBe(
+    passwordErrors.missingNumber
+  );
+  expect(await newPasswordAndConfirmHarness.isTooShort(rootLoader)).toBe(passwordErrors.tooShort);
 }
 
 function confirmPasswordValidation() {

@@ -1,4 +1,4 @@
-import { ComponentHarness } from '@angular/cdk/testing';
+import { ComponentHarness, HarnessLoader } from '@angular/cdk/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatErrorHarness } from '@angular/material/form-field/testing';
 import { PasswordRequirementHarness } from '../password-requirement/password-requirement.harness';
@@ -6,39 +6,42 @@ import { PasswordRequirementHarness } from '../password-requirement/password-req
 export class NewPasswordAndConfirmHarness extends ComponentHarness {
   static hostSelector = 'new-password-and-confirm';
 
-  protected getNewPasswordInput = this.locatorFor(
+  getNewPasswordInput = this.locatorFor(
     MatInputHarness.with({ selector: 'input[name="newPassword"]' })
   );
-  protected getConfirmNewPasswordInput = this.locatorFor(
+  getConfirmNewPasswordInput = this.locatorFor(
     MatInputHarness.with({ selector: 'input[name="confirmNewPassword"]' })
   );
-  protected getNewPasswordRequiredError = this.locatorForOptional(
+  getNewPasswordRequiredError = this.locatorForOptional(
     MatErrorHarness.with({ selector: '.new-password-required-error' })
   );
-  protected getConfirmNewPasswordRequiredError = this.locatorForOptional(
+  getConfirmNewPasswordRequiredError = this.locatorForOptional(
     MatErrorHarness.with({ selector: '.confirm-new-password-required-error' })
   );
-  protected getConfirmNewPasswordDoesNotMatchError = this.locatorForOptional(
+  getConfirmNewPasswordDoesNotMatchError = this.locatorForOptional(
     MatErrorHarness.with({ selector: '.confirm-new-password-does-not-match-error' })
   );
-  protected getPasswordRequirements = this.locatorForAll(PasswordRequirementHarness);
+  getPasswordRequirements = this.locatorForAll(PasswordRequirementHarness);
 
-  async isMissingLetter(): Promise<boolean> {
-    return this.isMissingRequirement('include a letter');
+  async isMissingLetter(rootLoader: HarnessLoader): Promise<boolean> {
+    return this.isMissingRequirement(rootLoader, 'include a letter');
   }
 
-  async isMissingNumber(): Promise<boolean> {
-    return this.isMissingRequirement('include a number');
+  async isMissingNumber(rootLoader: HarnessLoader): Promise<boolean> {
+    return this.isMissingRequirement(rootLoader, 'include a number');
   }
 
-  async isTooShort(): Promise<boolean> {
-    return this.isMissingRequirement('be at least 8 characters long');
+  async isTooShort(rootLoader: HarnessLoader): Promise<boolean> {
+    return this.isMissingRequirement(rootLoader, 'be at least 8 characters long');
   }
 
-  private async isMissingRequirement(requirement: string): Promise<boolean> {
-    const passwordRequirement = await this.locatorFor(
+  private async isMissingRequirement(
+    rootLoader: HarnessLoader,
+    requirement: string
+  ): Promise<boolean> {
+    const passwordRequirement = await rootLoader.getHarness(
       PasswordRequirementHarness.with({ text: requirement })
-    )();
+    );
     return await passwordRequirement.isFail();
   }
 

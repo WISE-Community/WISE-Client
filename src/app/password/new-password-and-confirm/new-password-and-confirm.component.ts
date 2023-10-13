@@ -7,6 +7,7 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'new-password-and-confirm',
@@ -82,5 +83,19 @@ export class NewPasswordAndConfirmComponent implements OnInit {
 
   protected passwordStrengthChange(value: number): void {
     this.passwordStrength = value ? value : 0;
+  }
+
+  onNewPasswordFocus(menuTrigger: MatMenuTrigger): void {
+    // This setTimeout is required because sometimes when the user clicks on the input, it will
+    // trigger a blur and then a focus which can lead to the menu not opening. This makes sure that
+    // if a blur and a focus occur right after each other, the openMenu() will be called after the
+    // blur is complete.
+    setTimeout(() => {
+      menuTrigger.openMenu();
+    });
+  }
+
+  onNewPasswordBlur(menuTrigger: MatMenuTrigger): void {
+    menuTrigger.closeMenu();
   }
 }
