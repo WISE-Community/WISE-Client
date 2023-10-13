@@ -22,7 +22,7 @@ import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workg
 })
 export class ManageTeamComponent {
   avatarColor: string;
-  canChangePeriod: boolean;
+  canGradeStudentWork: boolean;
   isUnassigned: boolean;
   @Input() team: any;
 
@@ -35,11 +35,8 @@ export class ManageTeamComponent {
 
   ngOnInit() {
     this.avatarColor = getAvatarColorForWorkgroupId(this.team.workgroupId);
+    this.canGradeStudentWork = this.configService.getPermissions().canGradeStudentWork;
     this.isUnassigned = this.team.workgroupId == null;
-    this.canChangePeriod =
-      this.configService.getPermissions().canGradeStudentWork &&
-      this.team.users.length > 0 &&
-      !this.isUnassigned;
   }
 
   changePeriod(event: Event) {
@@ -112,5 +109,9 @@ export class ManageTeamComponent {
           this.snackBar.open($localize`Error: Could not move student.`);
         }
       });
+  }
+
+  protected removeUser(user: any): void {
+    this.team.users.splice(this.team.users.indexOf(user), 1);
   }
 }

@@ -13,7 +13,12 @@
     <h4 class="mat-subtitle-2" *ngIf="!isUnassigned" i18n>Team {{ team.workgroupId }}</h4>
     <span fxFlex></span>
     <span class="mat-small">
-      <a *ngIf="canChangePeriod" class="change-period" href="#" (click)="changePeriod($event)" i18n
+      <a
+        *ngIf="canGradeStudentWork && team.users.length > 0 && !isUnassigned"
+        class="change-period"
+        href="#"
+        (click)="changePeriod($event)"
+        i18n
         >Change Period</a
       >
       <span *ngIf="this.team.users.length === 0" i18n>No students</span>
@@ -39,7 +44,11 @@
           (cdkDragExited)="dragExit($event)"
           [cdkDragPreviewContainer]="'parent'"
         >
-          <manage-user class="user control-bg-bg mat-elevation-z1" [user]="user"></manage-user>
+          <manage-user
+            class="user control-bg-bg mat-elevation-z1"
+            [user]="user"
+            (removeUserEvent)="removeUser($event)"
+          ></manage-user>
         </li>
       </ng-container>
     </ul>

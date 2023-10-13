@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfigService } from '../../../../services/configService';
 import { ManageUserComponent } from './manage-user.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { of } from 'rxjs';
 
 class ConfigServiceStub {
   getPermissions() {}
@@ -13,7 +14,7 @@ class ConfigServiceStub {
     return 123;
   }
   retrieveConfig() {
-    return {};
+    return of({});
   }
 }
 
