@@ -68,7 +68,7 @@ describe('MultipleChoiceAuthoringComponent', () => {
 function addChoice() {
   describe('add choice button is clicked', () => {
     it('adds a new choice', async () => {
-      await multipleChoiceAuthoringHarness.clickAddChoiceButton();
+      await (await multipleChoiceAuthoringHarness.getAddChoiceButton()).click();
       expect(await multipleChoiceAuthoringHarness.getNumChoices()).toBe(1);
     });
   });
@@ -81,7 +81,7 @@ function deleteChoice() {
     });
     it('deletes a choice', async () => {
       spyOn(window, 'confirm').and.returnValue(true);
-      await multipleChoiceAuthoringHarness.clickDeleteChoiceButton(0);
+      await (await multipleChoiceAuthoringHarness.getDeleteChoiceButton(0)).click();
       expect(await multipleChoiceAuthoringHarness.getNumChoices()).toBe(0);
     });
   });
@@ -91,7 +91,7 @@ function changeChoiceType() {
   describe('single answer is currently selected', () => {
     describe('multiple answer is clicked', () => {
       it('sets the choice type to checkbox', async () => {
-        await multipleChoiceAuthoringHarness.clickMultipleAnswerRadioChoice();
+        await (await multipleChoiceAuthoringHarness.getMultipleAnswerRadioChoice()).check();
         expect(component.componentContent.choiceType).toBe('checkbox');
       });
     });
@@ -102,7 +102,7 @@ function changeChoiceType() {
         component.componentContent.choiceType = 'checkbox';
       });
       it('sets the choice type to radio', async () => {
-        await multipleChoiceAuthoringHarness.clickSingleAnswerRadioChoice();
+        await (await multipleChoiceAuthoringHarness.getSingleAnswerRadioChoice()).check();
         expect(component.componentContent.choiceType).toBe('radio');
       });
     });
@@ -119,13 +119,13 @@ function moveChoice() {
     });
     describe('move choice down is clicked on the first choice', () => {
       it('moves the choice down', async () => {
-        await multipleChoiceAuthoringHarness.clickMoveChoiceDownButton(0);
+        await (await multipleChoiceAuthoringHarness.getMoveChoiceDownButton(0)).click();
         expectChoiceOrder(['choice2', 'choice1']);
       });
     });
     describe('move choice up is clicked on the second choice', () => {
       it('moves the choice up', async () => {
-        await multipleChoiceAuthoringHarness.clickMoveChoiceUpButton(1);
+        await (await multipleChoiceAuthoringHarness.getMoveChoiceUpButton(1)).click();
         expectChoiceOrder(['choice2', 'choice1']);
       });
     });

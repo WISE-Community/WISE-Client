@@ -4,48 +4,32 @@ import { MatRadioButtonHarness } from '@angular/material/radio/testing';
 
 export class MultipleChoiceAuthoringHarness extends ComponentHarness {
   static hostSelector = 'multiple-choice-authoring';
-  protected getAddChoiceButton = this.locatorFor(
-    MatButtonHarness.with({ selector: '.add-choice-button' })
-  );
-  protected getChoices = this.locatorForAll('.choice-container');
-  protected getDeleteChoiceButtons = this.locatorForAll(
+  getAddChoiceButton = this.locatorFor(MatButtonHarness.with({ selector: '.add-choice-button' }));
+  getChoices = this.locatorForAll('.choice-container');
+  getDeleteChoiceButtons = this.locatorForAll(
     MatButtonHarness.with({ selector: '[aria-label="Delete"]' })
   );
-  protected getMoveDownButtons = this.locatorForAll(
+  getMoveDownButtons = this.locatorForAll(
     MatButtonHarness.with({ selector: '[aria-label="Down"]' })
   );
-  protected getMoveUpButtons = this.locatorForAll(
-    MatButtonHarness.with({ selector: '[aria-label="Up"]' })
-  );
-  protected getMultipleAnswerRadioChoice = this.locatorFor(
+  getMoveUpButtons = this.locatorForAll(MatButtonHarness.with({ selector: '[aria-label="Up"]' }));
+  getMultipleAnswerRadioChoice = this.locatorFor(
     MatRadioButtonHarness.with({ label: 'Multiple Answer' })
   );
-  protected getSingleAnswerRadioChoice = this.locatorFor(
+  getSingleAnswerRadioChoice = this.locatorFor(
     MatRadioButtonHarness.with({ label: 'Single Answer' })
   );
 
-  async clickAddChoiceButton(): Promise<void> {
-    return (await this.getAddChoiceButton()).click();
+  async getDeleteChoiceButton(index: number): Promise<MatButtonHarness> {
+    return (await this.getDeleteChoiceButtons())[index];
   }
 
-  async clickDeleteChoiceButton(index: number): Promise<void> {
-    await (await this.getDeleteChoiceButtons())[index].click();
+  async getMoveChoiceDownButton(index: number): Promise<MatButtonHarness> {
+    return (await this.getMoveDownButtons())[index];
   }
 
-  async clickMoveChoiceDownButton(index: number): Promise<void> {
-    await (await this.getMoveDownButtons())[index].click();
-  }
-
-  async clickMoveChoiceUpButton(index: number): Promise<void> {
-    await (await this.getMoveUpButtons())[index].click();
-  }
-
-  async clickMultipleAnswerRadioChoice(): Promise<void> {
-    return (await this.getMultipleAnswerRadioChoice()).check();
-  }
-
-  async clickSingleAnswerRadioChoice(): Promise<void> {
-    return (await this.getSingleAnswerRadioChoice()).check();
+  async getMoveChoiceUpButton(index: number): Promise<MatButtonHarness> {
+    return (await this.getMoveUpButtons())[index];
   }
 
   async getNumChoices(): Promise<number> {
