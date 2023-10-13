@@ -32,7 +32,7 @@ export function temporarilyHighlightElement(id: string, duration: number = 1000)
   }, duration);
 }
 
-export function scrollToElement(elementId: string) {
+export function scrollToElement(elementId: string): void {
   $('#content').animate(
     {
       scrollTop: $(`#${elementId}`).prop('offsetTop')

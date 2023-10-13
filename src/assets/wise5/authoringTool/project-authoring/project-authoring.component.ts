@@ -141,20 +141,16 @@ export class ProjectAuthoringComponent {
     this.groupNodeSelected = false;
   }
 
-  protected createNewLesson(): void {
+  protected addNewLesson(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-lesson/configure`]);
   }
 
-  protected createNewStep(): void {
+  protected addNewStep(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-node/choose-template`]);
   }
 
   protected addStructure(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/structure/choose`]);
-  }
-
-  protected importStep(): void {
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/import-step/choose-unit`]);
   }
 
   protected goToAdvancedAuthoring(): void {

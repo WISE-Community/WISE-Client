@@ -24,7 +24,9 @@ class ConfigServiceStub {
   getAllUsersInPeriod() {
     return [{ name: 'c' }, { name: 'b' }, { name: 'a' }];
   }
-  retrieveConfig() {}
+  retrieveConfig() {
+    return of({});
+  }
 }
 class TeacherDataServiceStub {
   getCurrentPeriodId() {
@@ -33,7 +35,9 @@ class TeacherDataServiceStub {
 }
 class WorkgroupServiceStub {
   isUserInAnyWorkgroup() {}
-  createWorkgroup() {}
+  createWorkgroup() {
+    return of(10);
+  }
 }
 let component: AddTeamDialogComponent;
 let fixture: ComponentFixture<AddTeamDialogComponent>;
@@ -126,8 +130,7 @@ function createTeam() {
     });
     it('should not ask for confirmation when initialMember is not in a workgroup', () => {
       spyOn(workgroupService, 'isUserInAnyWorkgroup').and.returnValue(false);
-      const createWorkgroupSpy = spyOn(workgroupService, 'createWorkgroup').and.returnValue(of(1));
-      spyOn(configService, 'retrieveConfig');
+      const createWorkgroupSpy = spyOn(workgroupService, 'createWorkgroup').and.returnValue(of(10));
       component.createTeam();
       expect(dialogSpy).not.toHaveBeenCalled();
       expect(createWorkgroupSpy).toHaveBeenCalled();

@@ -484,9 +484,10 @@ export class OpenResponseStudent extends ComponentStudent {
   }
 
   private getFeedbackText(rule: FeedbackRule): string {
-    const annotationsForFeedbackRule = this.AnnotationService.annotations.filter((annotation) => {
-      return this.isForThisComponent(annotation) && annotation.data.feedbackRuleId === rule.id;
-    });
+    const annotationsForFeedbackRule = this.AnnotationService.getAnnotations().filter(
+      (annotation) =>
+        this.isForThisComponent(annotation) && annotation.data.feedbackRuleId === rule.id
+    );
     return rule.feedback[annotationsForFeedbackRule.length % rule.feedback.length];
   }
 

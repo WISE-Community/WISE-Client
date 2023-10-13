@@ -9,6 +9,7 @@ import { mergeMap } from 'rxjs/operators';
 import { ArchiveProjectService } from '../../services/archive-project.service';
 import { runSpansDays } from '../../../assets/wise5/common/datetime/datetime';
 import { SelectRunsOption } from '../select-runs-controls/select-runs-option';
+import { sortByRunStartTimeDesc } from '../../domain/run';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -112,7 +113,7 @@ export class TeacherRunListComponent implements OnInit {
   }
 
   protected sortByStartTimeDesc(a: TeacherRun, b: TeacherRun): number {
-    return b.startTime - a.startTime;
+    return sortByRunStartTimeDesc(a, b);
   }
 
   protected runSpansDays(run: TeacherRun): boolean {

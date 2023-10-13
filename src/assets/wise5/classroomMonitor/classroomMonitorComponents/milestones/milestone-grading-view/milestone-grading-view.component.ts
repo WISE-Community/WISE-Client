@@ -10,6 +10,7 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherPeerGroupService } from '../../../../services/teacherPeerGroupService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { NodeGradingViewComponent } from '../../nodeGrading/node-grading-view/node-grading-view.component';
+import { Annotation } from '../../../../common/Annotation';
 
 @Component({
   selector: 'milestone-grading-view',
@@ -70,7 +71,7 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
     super.subscribeToEvents();
     if (this.milestone.report.locations.length > 1) {
       this.subscriptions.add(
-        this.annotationService.annotationReceived$.subscribe(({ annotation }) => {
+        this.annotationService.annotationReceived$.subscribe((annotation: Annotation) => {
           const workgroupId = annotation.toWorkgroupId;
           if (annotation.nodeId === this.firstNodeId && this.workgroupsById[workgroupId]) {
             this.updateWorkgroup(workgroupId);

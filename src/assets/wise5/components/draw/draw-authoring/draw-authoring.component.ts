@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'draw-authoring',
@@ -48,7 +49,7 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
   constructor(
     protected ConfigService: ConfigService,
     private dialog: MatDialog,
-    protected NodeService: NodeService,
+    protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
   ) {

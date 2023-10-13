@@ -7,10 +7,10 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MatDialog } from '@angular/material/dialog';
 import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'animation-authoring',
@@ -26,7 +26,7 @@ export class AnimationAuthoring extends AbstractComponentAuthoring {
   constructor(
     protected ConfigService: ConfigService,
     private dialog: MatDialog,
-    protected NodeService: NodeService,
+    protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
   ) {

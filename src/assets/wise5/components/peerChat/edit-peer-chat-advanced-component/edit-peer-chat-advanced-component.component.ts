@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
-import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'edit-peer-chat-advanced',
@@ -11,7 +11,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 })
 export class EditPeerChatAdvancedComponentComponent extends EditAdvancedComponentComponent {
   constructor(
-    protected nodeService: NodeService,
+    protected nodeService: TeacherNodeService,
     protected notebookService: NotebookService,
     protected projectService: TeacherProjectService
   ) {

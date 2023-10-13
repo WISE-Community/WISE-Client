@@ -3,8 +3,8 @@ import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { ConfigService } from '../../services/configService';
-import { NodeService } from '../../services/nodeService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
+import { TeacherNodeService } from '../../services/teacherNodeService';
 
 @Directive()
 export abstract class AbstractComponentAuthoring {
@@ -19,7 +19,7 @@ export abstract class AbstractComponentAuthoring {
 
   constructor(
     protected configService: ConfigService,
-    protected nodeService: NodeService,
+    protected nodeService: TeacherNodeService,
     protected projectAssetService: ProjectAssetService,
     protected projectService: TeacherProjectService
   ) {}

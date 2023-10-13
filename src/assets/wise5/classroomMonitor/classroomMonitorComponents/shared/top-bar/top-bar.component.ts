@@ -91,12 +91,8 @@ export class TopBarComponent implements OnInit {
     );
   }
 
-  /**
-   * Check whether any period in the run is paused
-   * @return Boolean whether any of the periods are paused
-   */
   protected isAnyPeriodPaused(): boolean {
-    return this.dataService.isAnyPeriodPaused();
+    return this.dataService.getPeriods().some((period) => period.paused);
   }
 
   protected switchToAuthoringView(): void {

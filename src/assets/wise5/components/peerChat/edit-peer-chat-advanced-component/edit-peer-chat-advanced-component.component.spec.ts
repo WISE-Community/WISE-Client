@@ -6,6 +6,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { PeerChatContent } from '../PeerChatContent';
 import { EditPeerChatAdvancedComponentComponent } from './edit-peer-chat-advanced-component.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 describe('EditPeerChatAdvancedComponentComponent', () => {
   let component: EditPeerChatAdvancedComponentComponent;
@@ -15,7 +16,7 @@ describe('EditPeerChatAdvancedComponentComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
       declarations: [EditPeerChatAdvancedComponentComponent],
-      providers: [TeacherProjectService],
+      providers: [TeacherNodeService, TeacherProjectService],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });

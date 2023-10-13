@@ -76,12 +76,15 @@ export class AddTeamDialogComponent {
       )
       .subscribe({
         next: (newWorkgroupId: number) => {
-          this.configService.retrieveConfig(
-            `/api/config/classroomMonitor/${this.configService.getRunId()}`
-          );
-          this.snackBar.open($localize`New Team ${newWorkgroupId} has been created.`);
-          this.isProcessing = false;
-          this.dialog.closeAll();
+          this.configService
+            .retrieveConfig(`/api/config/classroomMonitor/${this.configService.getRunId()}`)
+            .subscribe({
+              next: () => {
+                this.snackBar.open($localize`New Team ${newWorkgroupId} has been created.`);
+                this.isProcessing = false;
+                this.dialog.closeAll();
+              }
+            });
         },
         error: () => {
           this.snackBar.open($localize`Error: Could not create team.`);

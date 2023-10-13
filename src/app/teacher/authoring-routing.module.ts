@@ -36,6 +36,7 @@ import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringToo
 import { ChooseCopyNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component';
 import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component';
 import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
+import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
 
 const routes: Routes = [
   {
@@ -91,6 +92,23 @@ const routes: Routes = [
                 component: ChooseNewNodeLocation
               },
               {
+                path: 'import-step',
+                children: [
+                  {
+                    path: 'choose-location',
+                    component: ChooseImportStepLocationComponent
+                  },
+                  {
+                    path: 'choose-step',
+                    component: ChooseImportStepComponent
+                  },
+                  {
+                    path: 'choose-unit',
+                    component: ChooseImportUnitComponent
+                  }
+                ]
+              },
+              {
                 path: 'simulation',
                 children: [{ path: 'choose-item', component: ChooseSimulationComponent }]
               }
@@ -103,29 +121,28 @@ const routes: Routes = [
           },
           { path: 'choose-copy-location', component: ChooseCopyNodeLocationComponent },
           { path: 'choose-move-location', component: ChooseMoveNodeLocationComponent },
-          {
-            path: 'import-step',
-            children: [
-              {
-                path: 'choose-location',
-                component: ChooseImportStepLocationComponent
-              },
-              {
-                path: 'choose-step',
-                component: ChooseImportStepComponent
-              },
-              {
-                path: 'choose-unit',
-                component: ChooseImportUnitComponent
-              }
-            ]
-          },
           { path: 'info', component: ProjectInfoAuthoringComponent },
           { path: 'milestones', component: MilestonesAuthoringComponent },
           {
             path: 'node/:nodeId',
-            component: NodeAuthoringComponent,
+            component: NodeAuthoringParentComponent,
             children: [
+              {
+                path: '',
+                component: NodeAuthoringComponent
+              },
+              {
+                path: 'advanced',
+                component: NodeAdvancedAuthoringComponent,
+                children: [
+                  { path: 'branch', component: NodeAdvancedBranchAuthoringComponent },
+                  { path: 'constraint', component: NodeAdvancedConstraintAuthoringComponent },
+                  { path: 'general', component: NodeAdvancedGeneralAuthoringComponent },
+                  { path: 'json', component: NodeAdvancedJsonAuthoringComponent },
+                  { path: 'path', component: NodeAdvancedPathAuthoringComponent },
+                  { path: 'rubric', component: EditNodeRubricComponent }
+                ]
+              },
               {
                 path: 'choose-component-location',
                 component: ChooseComponentLocationComponent
@@ -134,19 +151,6 @@ const routes: Routes = [
                 path: 'import-component',
                 children: [{ path: 'choose-component', component: ChooseImportComponentComponent }]
               }
-            ]
-          },
-
-          {
-            path: 'node/:nodeId/advanced',
-            component: NodeAdvancedAuthoringComponent,
-            children: [
-              { path: 'branch', component: NodeAdvancedBranchAuthoringComponent },
-              { path: 'constraint', component: NodeAdvancedConstraintAuthoringComponent },
-              { path: 'general', component: NodeAdvancedGeneralAuthoringComponent },
-              { path: 'json', component: NodeAdvancedJsonAuthoringComponent },
-              { path: 'path', component: NodeAdvancedPathAuthoringComponent },
-              { path: 'rubric', component: EditNodeRubricComponent }
             ]
           },
           { path: 'notebook', component: NotebookAuthoringComponent },

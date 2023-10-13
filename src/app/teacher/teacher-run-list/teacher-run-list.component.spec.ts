@@ -132,18 +132,9 @@ describe('TeacherRunListComponent', () => {
   runSelectedStatusChanged();
   selectAllRunsCheckboxClicked();
   selectRunsOptionChosen();
-  sortByStartTimeDesc();
   unarchiveSelectedRuns();
   noRuns();
 });
-
-function sortByStartTimeDesc() {
-  describe('sortByStartTimeDesc()', () => {
-    it('should sort runs by start date', async () => {
-      await expectRunTitles([run3Title, run2Title, run1Title]);
-    });
-  });
-}
 
 function archiveSelectedRuns(): void {
   describe('archiveSelectedRuns()', () => {
