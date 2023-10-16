@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -12,7 +12,8 @@ import { MatMenuTrigger } from '@angular/material/menu';
 @Component({
   selector: 'new-password-and-confirm',
   templateUrl: './new-password-and-confirm.component.html',
-  styleUrls: ['./new-password-and-confirm.component.scss']
+  styleUrls: ['./new-password-and-confirm.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NewPasswordAndConfirmComponent implements OnInit {
   static readonly CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME: string = 'confirmNewPassword';
