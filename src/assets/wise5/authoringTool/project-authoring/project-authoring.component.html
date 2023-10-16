@@ -127,55 +127,53 @@
           >
           </mat-checkbox>
         </div>
-        <div class="projectItemTitleDiv" (click)="nodeClicked(item.key)">
-          <div class="pointer" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-            <node-icon [nodeId]="item.key" size="18"></node-icon>
-            <h6 *ngIf="isGroupNode(item.key)">
-              {{ getNodePositionById(item.key) }}:
-              {{ getNodeTitle(item.key) }}
-            </h6>
-            <p *ngIf="!isGroupNode(item.key)" fxLayoutAlign="start center" fxLayoutGap="10px">
-              <span>{{ getNodePositionById(item.key) }}: {{ getNodeTitle(item.key) }}</span>
-              <mat-icon
-                *ngIf="isBranchPoint(item.key)"
-                class="rotate-180"
-                (click)="branchIconClicked(item.key); $event.stopPropagation()"
-                matTooltip="Branch point with {{
-                  getNumberOfBranchPaths(item.key)
-                }} paths based on {{ getBranchCriteriaDescription(item.key) }}"
-                matTooltipPosition="right"
-                i18n-matTooltip
-                >call_split</mat-icon
-              >
-              <mat-icon
-                *ngIf="nodeHasConstraint(item.key) && getNumberOfConstraintsOnNode(item.key) == 1"
-                (click)="constraintIconClicked(item.key); $event.stopPropagation()"
-                matTooltip="{{ getNumberOfConstraintsOnNode(item.key) }} Constraint\n\n{{
-                  getConstraintDescriptions(item.key)
-                }}"
-                matTooltipPosition="right"
-                i18n-matTooltip
-                >block</mat-icon
-              >
-              <mat-icon
-                *ngIf="nodeHasConstraint(item.key) && getNumberOfConstraintsOnNode(item.key) > 1"
-                (click)="constraintIconClicked(item.key); $event.stopPropagation()"
-                matTooltip="{{ getNumberOfConstraintsOnNode(item.key) }} Constraints\n\n{{
-                  getConstraintDescriptions(item.key)
-                }}"
-                matTooltipPosition="right"
-                i18n-matTooltip
-                >block</mat-icon
-              >
-              <mat-icon
-                *ngIf="nodeHasRubric(item.key)"
-                matTooltip="Has Rubric"
-                matTooltipPosition="right"
-                i18n-matTooltip
-                >message</mat-icon
-              >
-            </p>
-          </div>
+        <div
+          class="projectItemTitleDiv pointer"
+          fxLayoutAlign="start center"
+          fxLayoutGap="10px"
+          (click)="nodeClicked(item.key)"
+        >
+          <node-icon-and-title [nodeId]="item.key" [showPosition]="true"></node-icon-and-title>
+          <p *ngIf="!isGroupNode(item.key)" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <mat-icon
+              *ngIf="isBranchPoint(item.key)"
+              class="rotate-180"
+              (click)="branchIconClicked(item.key); $event.stopPropagation()"
+              matTooltip="Branch point with {{ getNumberOfBranchPaths(item.key) }} paths based on {{
+                getBranchCriteriaDescription(item.key)
+              }}"
+              matTooltipPosition="right"
+              i18n-matTooltip
+              >call_split</mat-icon
+            >
+            <mat-icon
+              *ngIf="nodeHasConstraint(item.key) && getNumberOfConstraintsOnNode(item.key) == 1"
+              (click)="constraintIconClicked(item.key); $event.stopPropagation()"
+              matTooltip="{{ getNumberOfConstraintsOnNode(item.key) }} Constraint\n\n{{
+                getConstraintDescriptions(item.key)
+              }}"
+              matTooltipPosition="right"
+              i18n-matTooltip
+              >block</mat-icon
+            >
+            <mat-icon
+              *ngIf="nodeHasConstraint(item.key) && getNumberOfConstraintsOnNode(item.key) > 1"
+              (click)="constraintIconClicked(item.key); $event.stopPropagation()"
+              matTooltip="{{ getNumberOfConstraintsOnNode(item.key) }} Constraints\n\n{{
+                getConstraintDescriptions(item.key)
+              }}"
+              matTooltipPosition="right"
+              i18n-matTooltip
+              >block</mat-icon
+            >
+            <mat-icon
+              *ngIf="nodeHasRubric(item.key)"
+              matTooltip="Has Rubric"
+              matTooltipPosition="right"
+              i18n-matTooltip
+              >message</mat-icon
+            >
+          </p>
         </div>
       </div>
     </div>
@@ -206,13 +204,12 @@
             >
             </mat-checkbox>
           </div>
-          <div class="projectItemTitleDiv" (click)="nodeClicked(inactiveNode.id)">
-            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-              <node-icon [nodeId]="inactiveNode.id" size="18"></node-icon>&nbsp;
-              <h6 class="pointer">
-                {{ getNodeTitle(inactiveNode.id) }}
-              </h6>
-            </div>
+          <div
+            class="projectItemTitleDiv pointer"
+            fxLayoutAlign="start center"
+            (click)="nodeClicked(inactiveNode.id)"
+          >
+            <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
           </div>
         </div>
         <ng-container *ngFor="let inactiveChildId of inactiveNode.ids">
@@ -237,13 +234,12 @@
                 >
                 </mat-checkbox>
               </div>
-              <div class="projectItemTitleDiv" (click)="nodeClicked(inactiveChildId)">
-                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                  <node-icon [nodeId]="inactiveChildId" size="18"></node-icon>&nbsp;
-                  <p class="pointer">
-                    {{ getNodeTitle(inactiveChildId) }}
-                  </p>
-                </div>
+              <div
+                class="projectItemTitleDiv pointer"
+                fxLayoutAlign="start center"
+                (click)="nodeClicked(inactiveChildId)"
+              >
+                <node-icon-and-title [nodeId]="inactiveChildId"></node-icon-and-title>
               </div>
             </div>
           </div>
@@ -277,13 +273,12 @@
               >
               </mat-checkbox>
             </div>
-            <div class="projectItemTitleDiv" (click)="nodeClicked(inactiveNode.id)">
-              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                <node-icon [nodeId]="inactiveNode.id" size="18"></node-icon>
-                <p class="pointer">
-                  {{ getNodeTitle(inactiveNode.id) }}
-                </p>
-              </div>
+            <div
+              class="projectItemTitleDiv pointer"
+              fxLayoutAlign="start center"
+              (click)="nodeClicked(inactiveNode.id)"
+            >
+              <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
             </div>
           </div>
         </div>
