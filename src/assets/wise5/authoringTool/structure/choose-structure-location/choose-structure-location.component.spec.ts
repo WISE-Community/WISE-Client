@@ -5,6 +5,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatDividerModule } from '@angular/material/divider';
 
 describe('ChooseStructureLocationComponent', () => {
   let component: ChooseStructureLocationComponent;
@@ -16,6 +17,7 @@ describe('ChooseStructureLocationComponent', () => {
       imports: [
         HttpClientTestingModule,
         MatIconModule,
+        MatDividerModule,
         RouterTestingModule,
         StudentTeacherCommonServicesModule
       ],

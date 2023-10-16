@@ -4,6 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatDividerModule } from '@angular/material/divider';
 
 describe('ConfigureAutomatedAssessmentComponent', () => {
   let component: ConfigureAutomatedAssessmentComponent;
@@ -15,6 +16,7 @@ describe('ConfigureAutomatedAssessmentComponent', () => {
       imports: [
         FormsModule,
         HttpClientTestingModule,
+        MatDividerModule,
         RouterTestingModule,
         StudentTeacherCommonServicesModule
       ]
