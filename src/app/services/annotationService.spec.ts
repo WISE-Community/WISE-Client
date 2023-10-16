@@ -66,7 +66,7 @@ function getLatestScoreAnnotation() {
 function getLatestScoreAnnotation_NoMatch_ReturnNull() {
   describe('no matching annotation is found', () => {
     it('returns null', () => {
-      expect(service.getLatestScoreAnnotation('nodeX', 'componentX', 10, 'any')).toBeUndefined();
+      expect(service.getLatestScoreAnnotation('nodeX', 'componentX', 10, 'any')).toBeNull();
     });
   });
 }

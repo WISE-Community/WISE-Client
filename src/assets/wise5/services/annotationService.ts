@@ -536,15 +536,17 @@ export class AnnotationService {
     workgroupId: number,
     scoreType: 'score' | 'autoScore' | 'any' = 'any'
   ): Annotation {
-    return this.getAnnotations()
-      .filter(
-        (annotation) =>
-          annotation.nodeId == nodeId &&
-          annotation.componentId == componentId &&
-          annotation.toWorkgroupId == workgroupId &&
-          this.matchesScoreType(annotation, scoreType)
-      )
-      .at(-1);
+    return (
+      this.getAnnotations()
+        .filter(
+          (annotation) =>
+            annotation.nodeId == nodeId &&
+            annotation.componentId == componentId &&
+            annotation.toWorkgroupId == workgroupId &&
+            this.matchesScoreType(annotation, scoreType)
+        )
+        .at(-1) || null
+    );
   }
 
   private matchesScoreType(
@@ -552,8 +554,8 @@ export class AnnotationService {
     scoreType: 'score' | 'autoScore' | 'any'
   ): boolean {
     return (
-      ['autoScore', 'score'].includes(annotation.type) &&
-      (scoreType === 'any' || annotation.type === scoreType)
+      (scoreType === 'any' && ['autoScore', 'score'].includes(annotation.type)) ||
+      annotation.type === scoreType
     );
   }
 
