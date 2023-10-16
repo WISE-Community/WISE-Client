@@ -69,4 +69,62 @@ export class StudentNodeService extends NodeService {
       .filter((message) => message != '')
       .join('<br/>');
   }
+
+  /**
+   * Get the next node in the project sequence. We return a promise because in preview mode we allow
+   * the user to specify which branch path they want to go to. In all other cases we will resolve
+   * the promise immediately.
+   * @param currentId (optional) the current node id
+   * @returns a promise that returns the next node id
+   */
+  getNextNodeId(currentId?: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const currentNodeId = currentId ?? this.DataService.getCurrentNodeId();
+      const transitionLogic = this.ProjectService.getTransitionLogicByFromNodeId(currentNodeId);
+      const branchPathTakenEvents = this.DataService.getBranchPathTakenEventsByNodeId(
+        currentNodeId
+      );
+      if (this.hasPreviouslyBranchedAndCannotChange(branchPathTakenEvents, transitionLogic)) {
+        if (branchPathTakenEvents.at(-1)) {
+          resolve(branchPathTakenEvents.at(-1).data.toNodeId);
+        }
+      } else {
+        this.resolveNextNodeIdFromTransition(resolve, currentNodeId);
+      }
+    });
+  }
+
+  private hasPreviouslyBranchedAndCannotChange(
+    branchPathTakenEvents: any[],
+    transitionLogic: any
+  ): boolean {
+    return branchPathTakenEvents.length > 0 && !transitionLogic.canChangePath;
+  }
+
+  private resolveNextNodeIdFromTransition(resolve: any, currentNodeId: string): void {
+    const transitionLogic = this.ProjectService.getTransitionLogicByFromNodeId(currentNodeId);
+    if (transitionLogic.transitions.length == 0) {
+      this.getNextNodeIdFromParent(resolve, currentNodeId);
+    } else {
+      this.chooseTransition(currentNodeId, transitionLogic).then((transition: any) => {
+        resolve(transition.to);
+      });
+    }
+  }
+
+  private getNextNodeIdFromParent(resolve: any, currentNodeId: string): void {
+    const parentGroupId = this.ProjectService.getParentGroupId(currentNodeId);
+    if (parentGroupId != null) {
+      const parentTransitionLogic = this.ProjectService.getTransitionLogicByFromNodeId(
+        parentGroupId
+      );
+      this.chooseTransition(parentGroupId, parentTransitionLogic).then((transition: any) => {
+        const transitionToNodeId = transition.to;
+        const startId = this.ProjectService.isGroupNode(transitionToNodeId)
+          ? this.ProjectService.getGroupStartId(transitionToNodeId)
+          : null;
+        resolve(startId == null || startId === '' ? transitionToNodeId : startId);
+      });
+    }
+  }
 }

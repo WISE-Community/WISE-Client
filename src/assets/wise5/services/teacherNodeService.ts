@@ -22,4 +22,21 @@ export class TeacherNodeService extends NodeService {
   respondStarterState(args: any): void {
     this.starterStateResponseSource.next(args);
   }
+
+  getNextNodeId(currentId?: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let nextNodeId = null;
+      const currentNodeId = currentId ?? this.DataService.getCurrentNodeId();
+      const currentNodeOrder = this.ProjectService.getNodeOrderById(currentNodeId);
+      if (currentNodeOrder) {
+        const nextId = this.ProjectService.getNodeIdByOrder(currentNodeOrder + 1);
+        if (nextId) {
+          nextNodeId = this.ProjectService.isApplicationNode(nextId)
+            ? nextId
+            : this.getNextNodeId(nextId);
+        }
+      }
+      resolve(nextNodeId);
+    });
+  }
 }
