@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'choose-new-node-template',
   templateUrl: 'choose-new-node-template.component.html',
-  styleUrls: ['choose-new-node-template.component.scss']
+  styleUrls: ['choose-new-node-template.component.scss', '../../add-content.scss']
 })
 export class ChooseNewNodeTemplate {
   protected templates: NewNodeTemplate[] = [

@@ -1,14 +1,16 @@
-<h5 i18n>Start from scratch or choose a Lesson Structure*</h5>
-<div fxLayout="row wrap" fxLayoutAlign="start stretch">
-  <mat-card *ngFor="let template of templates">
+<h5 i18n>Start from scratch or choose a Lesson Structure*:</h5>
+<div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutAlign.gt-sm="start">
+  <mat-card *ngFor="let template of templates" appearance="outlined">
     <mat-card-title>
-      <h6 class="center">{{ template.label }}</h6>
+      <h6 class="center">
+        <strong>{{ template.label }}</strong>
+      </h6>
     </mat-card-title>
     <mat-card-content fxLayoutAlign="center center">
       <mat-icon>{{ template.icon }}</mat-icon>
     </mat-card-content>
     <mat-card-actions fxLayout="column" fxLayoutAlign="start">
-      <button mat-raised-button color="primary" (click)="chooseTemplate(template)" i18n>
+      <button mat-flat-button color="primary" (click)="chooseTemplate(template)" i18n>
         Select
       </button>
     </mat-card-actions>
@@ -24,5 +26,9 @@
   them into any WISE unit to strengthen support for knowledge integration and self-directed
   learning.
 </p>
-<hr />
-<button mat-button color="primary" routerLink=".." i18n>Cancel</button>
+<div class="nav-controls">
+  <mat-divider></mat-divider>
+  <div>
+    <button mat-button color="primary" routerLink=".." i18n>Cancel</button>
+  </div>
+</div>

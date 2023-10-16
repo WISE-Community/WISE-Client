@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'add-lesson-choose-template',
-  styleUrls: ['./add-lesson-choose-template.component.scss'],
+  styleUrls: ['./add-lesson-choose-template.component.scss', '../../add-content.scss'],
   templateUrl: './add-lesson-choose-template.component.html'
 })
 export class AddLessonChooseTemplateComponent {

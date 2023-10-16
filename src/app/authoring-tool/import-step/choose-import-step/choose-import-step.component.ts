@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'choose-import-step',
-  styleUrls: ['choose-import-step.component.scss', '../import-step.scss'],
+  styleUrls: ['choose-import-step.component.scss', '../../add-content.scss'],
   templateUrl: 'choose-import-step.component.html'
 })
 export class ChooseImportStepComponent {

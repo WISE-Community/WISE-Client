@@ -51,24 +51,26 @@
       </p>
     </div>
   </div>
-  <mat-divider></mat-divider>
-  <div fxLayout="row">
-    <button mat-button class="mat-primary" routerLink="../choose-template" aria-label="back" i18n>
-      Back
-    </button>
-    <span fxFlex></span>
-    <button mat-button class="mat-primary" routerLink="../.." aria-label="cancel" i18n>
-      Cancel
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      [disabled]="!addNodeFormGroup.valid"
-      (click)="chooseLocation()"
-      aria-label="next"
-      i18n
-    >
-      Next
-    </button>
+  <div class="nav-controls">
+    <mat-divider></mat-divider>
+    <div>
+      <button mat-button class="mat-primary" routerLink="../choose-template" aria-label="back" i18n>
+        Back
+      </button>
+      <span fxFlex></span>
+      <button mat-button class="mat-primary" routerLink="../.." aria-label="cancel" i18n>
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!addNodeFormGroup.valid"
+        (click)="chooseLocation()"
+        aria-label="next"
+        i18n
+      >
+        Next
+      </button>
+    </div>
   </div>
 </form>
