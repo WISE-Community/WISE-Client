@@ -25,6 +25,7 @@ import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 import { Choice } from '../../../components/match/choice';
 import { Bucket } from '../../../components/match/bucket';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PeerChatComponentDataExportStrategy } from '../strategies/PeerChatComponentDataExportStrategy';
 
 @Component({
   selector: 'data-export',
@@ -37,7 +38,8 @@ export class DataExportComponent implements OnInit {
     'Discussion',
     'Label',
     'Match',
-    'OpenResponse'
+    'OpenResponse',
+    'PeerChat'
   ];
   allowedComponentTypesForLatestRevisions = ['DialogGuidance', 'Label', 'Match', 'OpenResponse'];
   autoScoreLabel: string = 'Auto Score';
@@ -1010,6 +1012,11 @@ export class DataExportComponent implements OnInit {
       this.exportEmbeddedComponent(nodeId, component);
     } else if (component.type === 'Label') {
       this.exportLabelComponent(nodeId, component);
+    } else if (component.type === 'PeerChat') {
+      this.dataExportContext.setStrategy(
+        new PeerChatComponentDataExportStrategy(nodeId, component)
+      );
+      this.dataExportContext.export();
     }
   }
 
