@@ -52,10 +52,18 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
   private generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {
     const headerRow = this.defaultColumnNames.map((columnName: string) => columnName);
     const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
+    this.insertPrePromptColumnIfNecessary(headerRow, component);
     this.insertDynamicPromptColumnIfNecessary(headerRow, componentStates);
+    this.insertPostPromptColumnIfNecessary(headerRow, component);
     this.insertQuestionColumnsIfNecessary(headerRow, componentStates);
     this.populateColumnNameMappings(headerRow, columnNameToNumber);
     return headerRow;
+  }
+
+  private insertPrePromptColumnIfNecessary(headerRow: string[], component: any): void {
+    if (this.hasPrePrompt(component)) {
+      headerRow.splice(headerRow.indexOf('Response'), 0, 'Pre Prompt');
+    }
   }
 
   private insertDynamicPromptColumnIfNecessary(headerRow: string[], componentStates: any[]): void {
@@ -64,10 +72,26 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     }
   }
 
+  private insertPostPromptColumnIfNecessary(headerRow: string[], component: any): void {
+    if (this.hasPostPrompt(component)) {
+      headerRow.splice(headerRow.indexOf('Response'), 0, 'Post Prompt');
+    }
+  }
+
+  private hasPrePrompt(component: any): boolean {
+    const prePrompt = component.dynamicPrompt?.prePrompt;
+    return prePrompt != null && prePrompt !== '';
+  }
+
   private hasDynamicPrompt(componentStates: any[]): boolean {
     return componentStates.some(
       (componentState: any) => componentState.studentData.dynamicPrompt?.prompt != null
     );
+  }
+
+  private hasPostPrompt(component: any): boolean {
+    const postPrompt = component.dynamicPrompt?.postPrompt;
+    return postPrompt != null && postPrompt !== '';
   }
 
   private insertQuestionColumnsIfNecessary(headerRow: string[], componentStates: any[]): void {
@@ -122,7 +146,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
       this.setStudentInfo(row, columnNameToNumber, componentState);
       this.setRunInfo(row, columnNameToNumber, componentState);
       this.setComponentInfo(row, columnNameToNumber, nodeId, component);
-      this.setStudentWork(row, columnNameToNumber, componentState);
+      this.setStudentWork(row, columnNameToNumber, component, componentState);
       workRows.push(row);
     }
     return workRows;
@@ -197,7 +221,12 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     this.setColumnValue(row, columnNameToNumber, 'Component Prompt', component.prompt);
   }
 
-  private setStudentWork(row: any[], columnNameToNumber: any, componentState: any): void {
+  private setStudentWork(
+    row: any[],
+    columnNameToNumber: any,
+    component: any,
+    componentState: any
+  ): void {
     this.setColumnValue(
       row,
       columnNameToNumber,
@@ -210,11 +239,18 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
       'Client Timestamp',
       millisecondsToDateTime(componentState.clientSaveTime)
     );
+    this.setColumnValue(row, columnNameToNumber, 'Pre Prompt', component.dynamicPrompt?.prePrompt);
     this.setColumnValue(
       row,
       columnNameToNumber,
       'Dynamic Prompt',
       componentState.studentData.dynamicPrompt?.prompt
+    );
+    this.setColumnValue(
+      row,
+      columnNameToNumber,
+      'Post Prompt',
+      component.dynamicPrompt?.postPrompt
     );
     if (componentState.studentData.questionBank != null) {
       this.setQuestions(row, columnNameToNumber, componentState);
@@ -230,7 +266,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
           row,
           columnNameToNumber,
           `Question ${questionCounter++}`,
-          question.text
+          typeof question === 'string' ? question : question.text
         );
       }
     }
