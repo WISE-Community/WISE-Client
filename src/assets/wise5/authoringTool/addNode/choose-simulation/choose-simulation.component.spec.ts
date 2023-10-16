@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatDividerModule } from '@angular/material/divider';
 
 describe('ChooseSimulationComponent', () => {
   let component: ChooseSimulationComponent;
@@ -21,6 +22,7 @@ describe('ChooseSimulationComponent', () => {
         BrowserAnimationsModule,
         FormsModule,
         HttpClientTestingModule,
+        MatDividerModule,
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,

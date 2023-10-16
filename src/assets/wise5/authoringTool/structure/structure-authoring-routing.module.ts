@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChooseStructureLocationComponent } from './choose-structure-location/choose-structure-location.component';
-import { ChooseStructureComponent } from './choose-structure/choose-structure.component';
 import { JigsawComponent } from './jigsaw/jigsaw.component';
 import { SelfDirectedInvestigationComponent } from './self-directed-investigation/self-directed-investigation.component';
 import { KiCycleUsingOerComponent } from './ki-cycle-using-oer/ki-cycle-using-oer.component';
@@ -11,10 +10,6 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      {
-        path: 'choose',
-        component: ChooseStructureComponent
-      },
       {
         path: 'jigsaw',
         component: JigsawComponent

@@ -15,10 +15,8 @@
     <ng-container *ngTemplateOutlet="group; context: { groupId: groupId }"></ng-container>
   </div>
 </div>
-<hr />
-<button mat-raised-button color="primary" (click)="cancel()" aria-label="Cancel" i18n>
-  Cancel
-</button>
+<mat-divider></mat-divider>
+<button mat-button color="primary" (click)="cancel()" aria-label="Cancel" i18n>Cancel</button>
 
 <ng-template #group let-groupId="groupId">
   <div fxLayout="row" fxLayoutGap="16px" style="margin: 4px 0px">

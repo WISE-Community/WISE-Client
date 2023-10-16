@@ -1,0 +1,11 @@
+.nav-controls {
+  background-color: white;
+  position: sticky;
+  bottom: 0;
+  padding-bottom: 8px;
+  z-index: 1;
+
+  .mat-divider {
+    margin: 16px 0 8px 0;
+  }
+}

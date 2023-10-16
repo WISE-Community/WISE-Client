@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'choose-import-unit',
-  styleUrls: ['./choose-import-unit.component.scss', '../import-step.scss'],
+  styleUrls: ['./choose-import-unit.component.scss', '../../add-content.scss'],
   templateUrl: './choose-import-unit.component.html'
 })
 export class ChooseImportUnitComponent {

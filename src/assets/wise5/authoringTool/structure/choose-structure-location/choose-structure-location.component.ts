@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'choose-structure-location',
   templateUrl: './choose-structure-location.component.html',
-  styleUrls: ['./choose-structure-location.component.scss']
+  styleUrls: ['./choose-structure-location.component.scss', '../../add-content.scss']
 })
 export class ChooseStructureLocationComponent {
   groupNodes: any;
@@ -54,7 +54,7 @@ export class ChooseStructureLocationComponent {
   private saveAndGoBackToProjectHome(): void {
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
       this.projectService.refreshProject();
-      this.router.navigate(['../..'], { relativeTo: this.route });
+      this.router.navigate(['../../..'], { relativeTo: this.route });
     });
   }
 

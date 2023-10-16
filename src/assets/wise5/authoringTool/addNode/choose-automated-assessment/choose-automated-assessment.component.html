@@ -3,7 +3,6 @@
   Automated Assessments will automatically score student responses and provide feedback for
   reflection.
 </p>
-<hr />
 <h6 i18n>Choose an assessment item:</h6>
 <mat-radio-group [(ngModel)]="node">
   <div
@@ -35,38 +34,20 @@
     </div>
   </div>
 </mat-radio-group>
-<hr />
-<div fxLayout="row" fxLayoutGap="20px">
-  <button
-    mat-button
-    color="primary"
-    routerLink="../../choose-template"
-    aria-label="Back"
-    i18n-aria-label
-    i18n
-  >
-    Back
-  </button>
-  <span fxFlex></span>
-  <button
-    mat-button
-    color="primary"
-    routerLink="../../../"
-    aria-label="Cancel"
-    i18n-aria-label
-    i18n
-  >
-    Cancel
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    [disabled]="node == null"
-    (click)="next()"
-    aria-label="Next"
-    i18n-aria-label
-    i18n
-  >
-    Next
-  </button>
+<div class="nav-controls">
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutGap="8px">
+    <button mat-button color="primary" routerLink="../../choose-template" i18n>Back</button>
+    <span fxFlex></span>
+    <button mat-button color="primary" routerLink="../../../" aria-label="Cancel">Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="node == null"
+      (click)="next()"
+      aria-label="Next"
+    >
+      Next
+    </button>
+  </div>
 </div>

@@ -3,16 +3,6 @@
     <button
       mat-raised-button
       color="primary"
-      (click)="goBackToProjectList()"
-      matTooltip="Back to Unit List"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
       (click)="addNewLesson()"
       [disabled]="stepNodeSelected || groupNodeSelected"
       matTooltip="Add New Lesson"
@@ -31,17 +21,6 @@
       i18n-matTooltip
     >
       <mat-icon>add_box</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="addStructure()"
-      [disabled]="stepNodeSelected || groupNodeSelected"
-      matTooltip="Add Lesson Structure"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>widgets</mat-icon>
     </button>
     <button
       mat-raised-button

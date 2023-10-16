@@ -6,6 +6,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatDividerModule } from '@angular/material/divider';
 
 describe('ChooseAutomatedAssessmentComponent', () => {
   let component: ChooseAutomatedAssessmentComponent;
@@ -17,6 +18,7 @@ describe('ChooseAutomatedAssessmentComponent', () => {
       imports: [
         FormsModule,
         HttpClientTestingModule,
+        MatDividerModule,
         MatRadioModule,
         RouterTestingModule,
         StudentTeacherCommonServicesModule

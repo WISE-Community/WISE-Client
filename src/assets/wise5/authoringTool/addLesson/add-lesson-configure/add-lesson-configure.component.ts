@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'add-lesson-configure',
-  styleUrls: ['./add-lesson-configure.component.scss'],
+  styleUrls: ['./add-lesson-configure.component.scss', '../../add-content.scss'],
   templateUrl: './add-lesson-configure.component.html'
 })
 export class AddLessonConfigureComponent {

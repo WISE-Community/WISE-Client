@@ -4,7 +4,7 @@ import { ConfigureStructureComponent } from '../configure-structure.component';
 @Component({
   selector: 'jigsaw',
   templateUrl: './jigsaw.component.html',
-  styleUrls: ['./jigsaw.component.scss']
+  styleUrls: ['./jigsaw.component.scss', '../../add-content.scss']
 })
 export class JigsawComponent extends ConfigureStructureComponent {
   protected numGroups: string = '2';
