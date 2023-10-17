@@ -52,6 +52,7 @@ export class ProjectAuthoringComponent {
   private refreshProject(): void {
     this.projectService.parseProject();
     this.items = this.projectService.getNodesInOrder();
+    this.items.shift(); // remove the 'group0' master root node from consideration
     this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
