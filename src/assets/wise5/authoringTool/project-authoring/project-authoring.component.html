@@ -82,6 +82,7 @@
     <div
       id="{{ item.key }}"
       fxLayoutAlign="start center"
+      class="pointer"
       [ngClass]="{
         groupHeader: isGroupNode(item.key),
         stepHeader: !isGroupNode(item.key),
@@ -101,7 +102,7 @@
         i18n-aria-label
       >
         <div
-          class="projectItemTitleDiv pointer"
+          class="projectItemTitleDiv"
           fxLayoutAlign="start center"
           fxLayoutGap="10px"
           (click)="nodeClicked(item.key)"
@@ -164,7 +165,7 @@
             branchPathStepHeader:
               isNodeInAnyBranchPath(inactiveNode.id) && !isGroupNode(inactiveNode.id)
           }"
-          class="projectItem"
+          class="pointer projectItem"
         >
           <mat-checkbox
             color="primary"
@@ -175,7 +176,7 @@
             i18n-aria-label
           >
             <div
-              class="projectItemTitleDiv pointer"
+              class="projectItemTitleDiv"
               fxLayoutAlign="start center"
               (click)="nodeClicked(inactiveNode.id)"
             >
@@ -192,7 +193,7 @@
                 branchPathStepHeader:
                   isNodeInAnyBranchPath(inactiveChildId.id) && !isGroupNode(inactiveChildId.id)
               }"
-              class="projectItem"
+              class="pointer projectItem"
             >
               <mat-checkbox
                 color="primary"
@@ -203,7 +204,7 @@
                 i18n-aria-label
               >
                 <div
-                  class="projectItemTitleDiv pointer"
+                  class="projectItemTitleDiv"
                   fxLayoutAlign="start center"
                   (click)="nodeClicked(inactiveChildId)"
                 >
@@ -221,7 +222,7 @@
       <ng-container *ngFor="let inactiveNode of inactiveStepNodes">
         <div
           *ngIf="!isGroupNode(inactiveNode.id) && getParentGroup(inactiveNode.id) == null"
-          class="projectItem"
+          class="pointer projectItem"
         >
           <div
             [ngClass]="{
@@ -240,7 +241,7 @@
               i18n-aria-label
             >
               <div
-                class="projectItemTitleDiv pointer"
+                class="projectItemTitleDiv"
                 fxLayoutAlign="start center"
                 (click)="nodeClicked(inactiveNode.id)"
               >
