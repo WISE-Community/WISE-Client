@@ -64,14 +64,6 @@ export class ProjectAuthoringComponent {
     window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
   }
 
-  protected getNodePositionById(nodeId: string): string {
-    return this.projectService.getNodePositionById(nodeId);
-  }
-
-  protected getNodeTitle(nodeId: string): string {
-    return this.projectService.getNodeTitle(nodeId);
-  }
-
   protected isGroupNode(nodeId: string): boolean {
     return this.projectService.isGroupNode(nodeId);
   }
@@ -158,10 +150,6 @@ export class ProjectAuthoringComponent {
     return this.projectService.isNodeInAnyBranchPath(nodeId);
   }
 
-  /**
-   * Temporarily highlight the new nodes to draw attention to them
-   * @param newNodes the new nodes to highlight
-   */
   private temporarilyHighlightNewNodes(newNodes = []): void {
     if (newNodes.length > 0) {
       setTimeout(() => {
