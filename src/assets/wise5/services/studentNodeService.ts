@@ -8,6 +8,7 @@ import { ProjectService } from './projectService';
 import { NodeStatusService } from './nodeStatusService';
 import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
 import { Constraint } from '../../../app/domain/constraint';
+import { TransitionLogic } from '../common/TransitionLogic';
 
 @Injectable()
 export class StudentNodeService extends NodeService {
@@ -85,9 +86,7 @@ export class StudentNodeService extends NodeService {
         currentNodeId
       );
       if (this.hasPreviouslyBranchedAndCannotChange(branchPathTakenEvents, transitionLogic)) {
-        if (branchPathTakenEvents.at(-1)) {
-          resolve(branchPathTakenEvents.at(-1).data.toNodeId);
-        }
+        resolve(branchPathTakenEvents.at(-1).data.toNodeId);
       } else {
         this.resolveNextNodeIdFromTransition(resolve, currentNodeId);
       }
@@ -96,7 +95,7 @@ export class StudentNodeService extends NodeService {
 
   private hasPreviouslyBranchedAndCannotChange(
     branchPathTakenEvents: any[],
-    transitionLogic: any
+    transitionLogic: TransitionLogic
   ): boolean {
     return branchPathTakenEvents.length > 0 && !transitionLogic.canChangePath;
   }
