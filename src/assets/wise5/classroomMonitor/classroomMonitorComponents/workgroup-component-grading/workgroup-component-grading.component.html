@@ -1,113 +1,13 @@
 <div class="component__content" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
   <div fxLayout="column" fxFlex="100" [fxFlex.gt-sm]="isGradable ? 66 : 100">
-    <ng-container *ngIf="latestComponentState != null">
-      <animation-grading
-        *ngIf="component.type === 'Animation'"
-        [nodeId]="nodeId"
-        [componentId]="component.id"
-        [componentState]="latestComponentState"
-      >
-      </animation-grading>
-      <audio-oscillator-grading
-        *ngIf="component.type === 'AudioOscillator'"
-        [nodeId]="nodeId"
-        [componentId]="component.id"
-        [componentState]="latestComponentState"
-      >
-      </audio-oscillator-grading>
-      <concept-map-grading
-        *ngIf="component.type === 'ConceptMap'"
-        [nodeId]="nodeId"
-        [componentId]="component.id"
-        [componentState]="latestComponentState"
-      >
-      </concept-map-grading>
-      <dialog-guidance-grading
-        *ngIf="component.type === 'DialogGuidance'"
-        [nodeId]="nodeId"
-        [componentId]="component.id"
-        [componentState]="latestComponentState"
-      >
-      </dialog-guidance-grading>
-      <discussion-grading
-        *ngIf="component.type === 'Discussion'"
+    <ng-container *ngIf="latestComponentState != null || component.type === 'ShowGroupWork'">
+      <component-grading-component
         [nodeId]="nodeId"
         [componentId]="component.id"
         [componentState]="latestComponentState"
         [workgroupId]="workgroupId"
-      >
-      </discussion-grading>
-      <draw-grading
-        *ngIf="component.type === 'Draw'"
-        [nodeId]="nodeId"
-        [componentId]="component.id"
-        [componentState]="latestComponentState"
-      >
-      </draw-grading>
-      <embedded-grading
-        *ngIf="component.type === 'Embedded'"
-        [nodeId]="nodeId"
-        [componentId]="component.id"
-        [componentState]="latestComponentState"
-      >
-      </embedded-grading>
-      <graph-grading
-        *ngIf="component.type === 'Graph'"
-        [nodeId]="nodeId"
-        [componentId]="component.id"
-        [componentState]="latestComponentState"
-      >
-      </graph-grading>
-      <label-grading
-        *ngIf="component.type === 'Label'"
-        [nodeId]="nodeId"
-        [componentId]="component.id"
-        [componentState]="latestComponentState"
-      >
-      </label-grading>
-      <match-grading
-        *ngIf="component.type === 'Match'"
-        [nodeId]="nodeId"
-        [componentId]="component.id"
-        [componentState]="latestComponentState"
-      >
-      </match-grading>
-      <multiple-choice-grading
-        *ngIf="component.type === 'MultipleChoice'"
-        [nodeId]="nodeId"
-        [componentId]="component.id"
-        [componentState]="latestComponentState"
-      >
-      </multiple-choice-grading>
-      <open-response-grading
-        *ngIf="component.type === 'OpenResponse'"
-        [nodeId]="nodeId"
-        [componentId]="component.id"
-        [componentState]="latestComponentState"
-      >
-      </open-response-grading>
-      <peer-chat-grading
-        *ngIf="component.type === 'PeerChat'"
-        [nodeId]="nodeId"
-        [componentId]="component.id"
-        [componentState]="latestComponentState"
-        [workgroupId]="workgroupId"
-      >
-      </peer-chat-grading>
-      <table-grading
-        *ngIf="component.type === 'Table'"
-        [nodeId]="nodeId"
-        [componentId]="component.id"
-        [componentState]="latestComponentState"
-      >
-      </table-grading>
+      ></component-grading-component>
     </ng-container>
-    <show-group-work-grading
-      *ngIf="component.type === 'ShowGroupWork'"
-      [nodeId]="nodeId"
-      [componentId]="component.id"
-      [workgroupId]="workgroupId"
-    ></show-group-work-grading>
     <span fxFlex></span>
     <div
       *ngIf="componentStates.length === 0 && component.type !== 'ShowGroupWork'"

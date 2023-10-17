@@ -15,8 +15,10 @@ import { OpenResponseGradingModule } from '../../assets/wise5/components/openRes
 import { PeerChatGradingModule } from '../../assets/wise5/components/peerChat/peer-chat-grading/peer-chat-grading.module';
 import { ShowGroupWorkGradingModule } from '../../assets/wise5/components/showGroupWork/show-group-work-grading/show-group-work-grading.module';
 import { TableGradingModule } from '../../assets/wise5/components/table/table-grading/table-grading.module';
+import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
 
 @NgModule({
+  declarations: [ComponentGradingComponent],
   imports: [
     AnimationGradingModule,
     AudioOscillatorGradingModule,
@@ -38,6 +40,7 @@ import { TableGradingModule } from '../../assets/wise5/components/table/table-gr
   exports: [
     AnimationGradingModule,
     AudioOscillatorGradingModule,
+    ComponentGradingComponent,
     ComponentStateInfoModule,
     ConceptMapGradingModule,
     DialogGuidanceGradingModule,
