@@ -5,23 +5,12 @@
   supports them in finding and evaluating evidence using online resources of their choice. Students
   synthesize their findings into a product of your choice.
 </p>
-<hr />
-<div>
-  <button mat-button color="primary" routerLink="../choose" aria-label="Back" i18n-aria-label i18n>
-    Back
-  </button>
-  <span fxFlex></span>
-  <button mat-button color="primary" routerLink="../.." aria-label="Cancel" i18n-aria-label i18n>
-    Cancel
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="chooseLocation()"
-    aria-label="Next"
-    i18n-aria-label
-    i18n
-  >
-    Next
-  </button>
+<div class="nav-controls">
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutGap="8px">
+    <button mat-button color="primary" routerLink="../.." i18n>Back</button>
+    <span fxFlex></span>
+    <button mat-button color="primary" routerLink="../../.." i18n>Cancel</button>
+    <button mat-raised-button color="primary" (click)="chooseLocation()" i18n>Next</button>
+  </div>
 </div>

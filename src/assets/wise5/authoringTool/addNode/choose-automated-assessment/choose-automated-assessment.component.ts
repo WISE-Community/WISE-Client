@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'choose-automated-assessment',
   templateUrl: './choose-automated-assessment.component.html',
-  styleUrls: ['./choose-automated-assessment.component.scss']
+  styleUrls: ['./choose-automated-assessment.component.scss', '../../add-content.scss']
 })
 export class ChooseAutomatedAssessmentComponent {
   private automatedAssessmentProjectId: number;

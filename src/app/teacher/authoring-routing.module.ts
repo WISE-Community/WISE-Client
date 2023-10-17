@@ -37,6 +37,7 @@ import { ChooseCopyNodeLocationComponent } from '../../assets/wise5/authoringToo
 import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component';
 import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
 import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
+import { AddLessonChooseTemplateComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-template/add-lesson-choose-template.component';
 
 const routes: Routes = [
   {
@@ -57,12 +58,23 @@ const routes: Routes = [
             path: 'add-lesson',
             children: [
               {
+                path: '',
+                component: AddLessonChooseTemplateComponent
+              },
+              {
                 path: 'configure',
                 component: AddLessonConfigureComponent
               },
               {
                 path: 'choose-location',
                 component: AddLessonChooseLocationComponent
+              },
+              {
+                path: 'structure',
+                loadChildren: () =>
+                  import(
+                    '../../assets/wise5/authoringTool/structure/structure-authoring.module'
+                  ).then((m) => m.StructureAuthoringModule)
               }
             ]
           },
@@ -154,14 +166,7 @@ const routes: Routes = [
             ]
           },
           { path: 'notebook', component: NotebookAuthoringComponent },
-          { path: 'recovery', component: RecoveryAuthoringComponent },
-          {
-            path: 'structure',
-            loadChildren: () =>
-              import('../../assets/wise5/authoringTool/structure/structure-authoring.module').then(
-                (m) => m.StructureAuthoringModule
-              )
-          }
+          { path: 'recovery', component: RecoveryAuthoringComponent }
         ]
       }
     ]

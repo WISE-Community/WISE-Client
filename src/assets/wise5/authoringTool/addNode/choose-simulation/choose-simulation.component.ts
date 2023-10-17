@@ -15,7 +15,7 @@ class SimulationNode {
 @Component({
   selector: 'choose-simulation',
   templateUrl: './choose-simulation.component.html',
-  styleUrls: ['./choose-simulation.component.scss']
+  styleUrls: ['./choose-simulation.component.scss', '../../add-content.scss']
 })
 export class ChooseSimulationComponent {
   private allNodes: SimulationNode[] = [];

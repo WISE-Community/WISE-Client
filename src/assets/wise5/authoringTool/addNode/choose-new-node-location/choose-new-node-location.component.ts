@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'choose-new-node-location',
   templateUrl: 'choose-new-node-location.component.html',
-  styleUrls: ['./choose-new-node-location.component.scss']
+  styleUrls: ['./choose-new-node-location.component.scss', '../../add-content.scss']
 })
 export class ChooseNewNodeLocation {
   protected nodeIds: string[];

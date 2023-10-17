@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'add-your-own-node',
-  styleUrls: ['add-your-own-node.component.scss'],
+  styleUrls: ['add-your-own-node.component.scss', '../../add-content.scss'],
   templateUrl: 'add-your-own-node.component.html'
 })
 export class AddYourOwnNode {

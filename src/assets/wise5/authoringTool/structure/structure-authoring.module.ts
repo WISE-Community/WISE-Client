@@ -4,14 +4,12 @@ import { JigsawComponent } from './jigsaw/jigsaw.component';
 import { SelfDirectedInvestigationComponent } from './self-directed-investigation/self-directed-investigation.component';
 import { KiCycleUsingOerComponent } from './ki-cycle-using-oer/ki-cycle-using-oer.component';
 import { PeerReviewAndRevisionComponent } from './peer-review-and-revision/peer-review-and-revision.component';
-import { ChooseStructureComponent } from './choose-structure/choose-structure.component';
 import { ChooseStructureLocationComponent } from './choose-structure-location/choose-structure-location.component';
 import { RouterModule } from '@angular/router';
 import { StructureAuthoringRoutingModule } from './structure-authoring-routing.module';
 
 @NgModule({
   declarations: [
-    ChooseStructureComponent,
     ChooseStructureLocationComponent,
     JigsawComponent,
     KiCycleUsingOerComponent,
@@ -20,7 +18,6 @@ import { StructureAuthoringRoutingModule } from './structure-authoring-routing.m
   ],
   imports: [RouterModule, StudentTeacherCommonModule, StructureAuthoringRoutingModule],
   exports: [
-    ChooseStructureComponent,
     ChooseStructureLocationComponent,
     JigsawComponent,
     KiCycleUsingOerComponent,

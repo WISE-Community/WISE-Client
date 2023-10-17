@@ -142,15 +142,11 @@ export class ProjectAuthoringComponent {
   }
 
   protected addNewLesson(): void {
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-lesson/configure`]);
+    this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-lesson`]);
   }
 
   protected addNewStep(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-node/choose-template`]);
-  }
-
-  protected addStructure(): void {
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/structure/choose`]);
   }
 
   protected goToAdvancedAuthoring(): void {
@@ -159,10 +155,6 @@ export class ProjectAuthoringComponent {
 
   protected isNodeInAnyBranchPath(nodeId: string): boolean {
     return this.projectService.isNodeInAnyBranchPath(nodeId);
-  }
-
-  protected goBackToProjectList(): void {
-    this.router.navigate([`/teacher/edit/home`]);
   }
 
   /**

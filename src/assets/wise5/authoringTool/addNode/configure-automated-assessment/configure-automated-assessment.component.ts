@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'configure-automated-assessment',
   templateUrl: './configure-automated-assessment.component.html',
-  styleUrls: ['./configure-automated-assessment.component.scss']
+  styleUrls: ['./configure-automated-assessment.component.scss', '../../add-content.scss']
 })
 export class ConfigureAutomatedAssessmentComponent {
   protected hasCustomization: boolean;

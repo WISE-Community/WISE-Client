@@ -4,7 +4,7 @@
   science topic of their choice and engages them in collaboration to learn more. Students share
   their own ideas and reflect on what they learned from their classmates.
 </p>
-<hr />
+<mat-divider></mat-divider>
 <p i18n>Choose number of groups in this Jigsaw activity:</p>
 <mat-radio-group
   class="num-groups-radio-group"
@@ -15,23 +15,12 @@
   <mat-radio-button color="primary" value="3" i18n>Three groups</mat-radio-button>
   <mat-radio-button color="primary" value="4" i18n>Four groups</mat-radio-button>
 </mat-radio-group>
-<hr />
-<div>
-  <button mat-button color="primary" routerLink="../choose" aria-label="Back" i18n-aria-label i18n>
-    Back
-  </button>
-  <span fxFlex></span>
-  <button mat-button color="primary" routerLink="../.." aria-label="Cancel" i18n-aria-label i18n>
-    Cancel
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="chooseLocation()"
-    aria-label="Next"
-    i18n-aria-label
-    i18n
-  >
-    Next
-  </button>
+<div class="nav-controls">
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutGap="8px">
+    <button mat-button color="primary" routerLink="../.." i18n>Back</button>
+    <span fxFlex></span>
+    <button mat-button color="primary" routerLink="../../.." i18n>Cancel</button>
+    <button mat-raised-button color="primary" (click)="chooseLocation()" i18n>Next</button>
+  </div>
 </div>
