@@ -39,11 +39,12 @@
       </div>
     </div>
     <div fxFlex="100" fxFlex.gt-sm="67">
-      <div fxLayout="row wrap" fxLayoutAlign="start start">
+      <div class="component-types" fxLayout="row wrap" fxLayoutAlign="start start">
         <div class="component-type" *ngFor="let componentType of componentTypes">
-          <button mat-stroked-button (click)="addComponent(componentType)">
-            {{ componentType.name }}
-          </button>
+          <component-selector
+            [componentType]="componentType.type"
+            (componentSelectedEvent)="addComponent($event)"
+          ></component-selector>
         </div>
       </div>
       <p class="info mat-small" i18n>

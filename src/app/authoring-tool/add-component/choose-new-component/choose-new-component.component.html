@@ -16,18 +16,12 @@
     </div>
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="start center">
-    <button
-      mat-stroked-button
-      *ngFor="let componentType of componentTypes"
-      class="mat-card component-type"
-      (click)="selectComponent(componentType.type)"
-    >
-      <mat-card-content>
-        <mat-card-title>
-          {{ componentType.name }}
-        </mat-card-title>
-      </mat-card-content>
-    </button>
+    <ng-container *ngFor="let componentType of componentTypes">
+      <component-selector
+        [componentType]="componentType.type"
+        (componentSelectedEvent)="selectComponent($event.type)"
+      ></component-selector>
+    </ng-container>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
