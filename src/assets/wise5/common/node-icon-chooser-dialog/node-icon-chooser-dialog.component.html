@@ -41,7 +41,7 @@
       <mat-icon>info</mat-icon>
     </a>
   </h3>
-  <mat-chip-set aria-label="Select a KI icon" i18n-aria-label>
+  <mat-chip-listbox aria-label="Select a KI icon" i18n-aria-label>
     <mat-chip-option
       *ngFor="let kiIcon of kiIcons"
       class="ki-choice"
@@ -57,12 +57,12 @@
       </mat-chip-avatar>
       {{ kiIcon.imgLabel }}
     </mat-chip-option>
-  </mat-chip-set>
+  </mat-chip-listbox>
   <mat-divider></mat-divider>
   <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
     <div>
       <h3 i18n>Or choose your own icon:</h3>
-      <mat-chip-set aria-label="Select an icon" i18n-aria-label>
+      <mat-chip-listbox aria-label="Select an icon" i18n-aria-label>
         <mat-chip-option
           *ngFor="let fontName of fontNames"
           class="icon-choice"
@@ -74,11 +74,11 @@
         >
           <mat-icon>{{ fontName }}</mat-icon>
         </mat-chip-option>
-      </mat-chip-set>
+      </mat-chip-listbox>
     </div>
     <div fxFlex.gt-sm="18">
       <h3 i18n>Color:</h3>
-      <mat-chip-set aria-label="Select a color" i18n-aria-label>
+      <mat-chip-listbox aria-label="Select a color" i18n-aria-label>
         <mat-chip-option
           *ngFor="let color of colors"
           class="color-choice icon-choice"
@@ -88,7 +88,7 @@
           (selectionChange)="chooseFontColor($event)"
           style="background-color: {{ color }}"
         ></mat-chip-option>
-      </mat-chip-set>
+      </mat-chip-listbox>
     </div>
   </div>
 </mat-dialog-content>
