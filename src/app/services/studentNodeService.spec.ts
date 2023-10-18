@@ -5,11 +5,15 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { NodeStatusService } from '../../assets/wise5/services/nodeStatusService';
 import { DataService } from './data.service';
+import { ProjectService } from '../../assets/wise5/services/projectService';
 
 let dataService: DataService;
 let dialog: MatDialog;
+const nodeId2 = 'node2';
 let nodeStatusService: NodeStatusService;
+let projectService: ProjectService;
 let service: StudentNodeService;
+
 describe('StudentNodeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -19,8 +23,10 @@ describe('StudentNodeService', () => {
     dialog = TestBed.inject(MatDialog);
     service = TestBed.inject(StudentNodeService);
     nodeStatusService = TestBed.inject(NodeStatusService);
+    projectService = TestBed.inject(ProjectService);
   });
   setCurrentNode();
+  getNextNodeId();
 });
 
 function setCurrentNode() {
@@ -55,5 +61,34 @@ function setCurrentNode_isNotVisitable_nodeClickLocked() {
 function spyOnIsVisitable(isVisitable: boolean) {
   spyOn(nodeStatusService, 'getNodeStatusByNodeId').and.returnValue({
     isVisitable: isVisitable
+  });
+}
+
+function getNextNodeId() {
+  describe('getNextNodeId()', () => {
+    getNextNodeId_currentNodeHasTransition_getsNodeFromTransition();
+    getNextNodeId_previouslyBranched_getsNodeFromPreviousBranchPathTaken();
+  });
+}
+
+function getNextNodeId_previouslyBranched_getsNodeFromPreviousBranchPathTaken() {
+  describe('has previous branch path taken', () => {
+    it('gets the node id from the previous branch path taken', async () => {
+      spyOn(dataService, 'getBranchPathTakenEventsByNodeId').and.returnValue([
+        { data: { toNodeId: nodeId2 } }
+      ]);
+      expect(await service.getNextNodeId()).toEqual(nodeId2);
+    });
+  });
+}
+
+function getNextNodeId_currentNodeHasTransition_getsNodeFromTransition() {
+  describe('current node has a transition', () => {
+    it('gets the node id from the transition', async () => {
+      spyOn(projectService, 'getTransitionLogicByFromNodeId').and.returnValue({
+        transitions: [{ to: nodeId2 }]
+      });
+      expect(await service.getNextNodeId()).toEqual(nodeId2);
+    });
   });
 }
