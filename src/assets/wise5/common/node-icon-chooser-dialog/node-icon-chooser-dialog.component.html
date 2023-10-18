@@ -1,4 +1,10 @@
-<h2 mat-dialog-title class="mat-dialog-title--icons" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+<h2
+  mat-dialog-title
+  class="mat-dialog-title--icons"
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="8px"
+>
   <div
     *ngIf="newNodeIcon.type === 'font'"
     style="background-color: {{ newNodeIcon.color }}"
@@ -21,41 +27,8 @@
   <span i18n>Choose an Icon</span>
 </h2>
 <mat-dialog-content class="dialog-content-scroll">
-  <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
-    <div>
-      <h3 i18n>Icon:</h3>
-      <mat-chip-set aria-label="Select an icon" i18n-aria-label>
-        <mat-chip-option
-          *ngFor="let fontName of fontNames"
-          class="icon-choice"
-          color="null"
-          [value]="fontName"
-          [ariaLabel]="fontName"
-          [selected]="newNodeIcon.type === 'font' && fontName === newNodeIcon.fontName"
-          (selectionChange)="chooseFontName($event)"
-        >
-          <mat-icon>{{ fontName }}</mat-icon>
-        </mat-chip-option>
-      </mat-chip-set>
-    </div>
-    <div fxFlex.gt-sm="18">
-      <h3 i18n>Color:</h3>
-      <mat-chip-set aria-label="Select a color" i18n-aria-label>
-        <mat-chip-option
-          *ngFor="let color of colors"
-          class="color-choice icon-choice"
-          [value]="color"
-          [ariaLabel]="color"
-          [selected]="newNodeIcon.type === 'font' && color === newNodeIcon.color"
-          (selectionChange)="chooseFontColor($event)"
-          style="background-color: {{ color }}"
-        ></mat-chip-option>
-      </mat-chip-set>
-    </div>
-  </div>
-  <mat-divider></mat-divider>
   <h3 fxLayout="row" fxLayoutAlign="start center">
-    <span i18n>Or use a Knowledge Integration (KI) icon:</span>
+    <span i18n>Use a Knowledge Integration (KI) icon:</span>
     <a
       mat-icon-button
       class="info"
@@ -85,6 +58,39 @@
       {{ kiIcon.imgLabel }}
     </mat-chip-option>
   </mat-chip-set>
+  <mat-divider></mat-divider>
+  <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
+    <div>
+      <h3 i18n>Or choose your own icon:</h3>
+      <mat-chip-set aria-label="Select an icon" i18n-aria-label>
+        <mat-chip-option
+          *ngFor="let fontName of fontNames"
+          class="icon-choice"
+          color="null"
+          [value]="fontName"
+          [ariaLabel]="fontName"
+          [selected]="newNodeIcon.type === 'font' && fontName === newNodeIcon.fontName"
+          (selectionChange)="chooseFontName($event)"
+        >
+          <mat-icon>{{ fontName }}</mat-icon>
+        </mat-chip-option>
+      </mat-chip-set>
+    </div>
+    <div fxFlex.gt-sm="18">
+      <h3 i18n>Color:</h3>
+      <mat-chip-set aria-label="Select a color" i18n-aria-label>
+        <mat-chip-option
+          *ngFor="let color of colors"
+          class="color-choice icon-choice"
+          [value]="color"
+          [ariaLabel]="color"
+          [selected]="newNodeIcon.type === 'font' && color === newNodeIcon.color"
+          (selectionChange)="chooseFontColor($event)"
+          style="background-color: {{ color }}"
+        ></mat-chip-option>
+      </mat-chip-set>
+    </div>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close i18n>Cancel</button>
