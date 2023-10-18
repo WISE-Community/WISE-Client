@@ -89,11 +89,12 @@
         branchPathStepHeader: isNodeInAnyBranchPath(item.key) && !isGroupNode(item.key)
       }"
       [ngStyle]="{ 'background-color': getStepBackgroundColor(item.key) }"
+      (click)="nodeClicked(item.key)"
     >
       <mat-checkbox
         color="primary"
         [(ngModel)]="item.checked"
-        (ngModelChange)="selectNode()"
+        (click)="selectNode($event)"
         [disabled]="
           (isGroupNode(item.key) && stepNodeSelected) ||
           (!isGroupNode(item.key) && groupNodeSelected)
@@ -101,12 +102,7 @@
         aria-label="Select lesson or step"
         i18n-aria-label
       >
-        <div
-          class="projectItemTitleDiv"
-          fxLayoutAlign="start center"
-          fxLayoutGap="10px"
-          (click)="nodeClicked(item.key)"
-        >
+        <div class="projectItemTitleDiv" fxLayoutAlign="start center" fxLayoutGap="10px">
           <node-icon-and-title [nodeId]="item.key" [showPosition]="true"></node-icon-and-title>
           <p *ngIf="!isGroupNode(item.key)" fxLayoutAlign="start center" fxLayoutGap="10px">
             <mat-icon
@@ -166,20 +162,17 @@
               isNodeInAnyBranchPath(inactiveNode.id) && !isGroupNode(inactiveNode.id)
           }"
           class="pointer projectItem"
+          (click)="nodeClicked(inactiveNode.id)"
         >
           <mat-checkbox
             color="primary"
             [(ngModel)]="inactiveNode.checked"
-            (ngModelChange)="selectNode()"
+            (click)="selectNode($event)"
             [disabled]="stepNodeSelected"
             aria-label="Select lesson"
             i18n-aria-label
           >
-            <div
-              class="projectItemTitleDiv"
-              fxLayoutAlign="start center"
-              (click)="nodeClicked(inactiveNode.id)"
-            >
+            <div class="projectItemTitleDiv" fxLayoutAlign="start center">
               <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
             </div>
           </mat-checkbox>
@@ -194,20 +187,17 @@
                   isNodeInAnyBranchPath(inactiveChildId.id) && !isGroupNode(inactiveChildId.id)
               }"
               class="pointer projectItem"
+              (click)="nodeClicked(inactiveChildId)"
             >
               <mat-checkbox
                 color="primary"
                 [(ngModel)]="idToNode[inactiveChildId].checked"
-                (ngModelChange)="selectNode()"
+                (change)="selectNode($event)"
                 [disabled]="groupNodeSelected"
                 aria-label="Select step"
                 i18n-aria-label
               >
-                <div
-                  class="projectItemTitleDiv"
-                  fxLayoutAlign="start center"
-                  (click)="nodeClicked(inactiveChildId)"
-                >
+                <div class="projectItemTitleDiv" fxLayoutAlign="start center">
                   <node-icon-and-title [nodeId]="inactiveChildId"></node-icon-and-title>
                 </div>
               </mat-checkbox>
@@ -231,20 +221,17 @@
               branchPathStepHeader:
                 isNodeInAnyBranchPath(inactiveNode.id) && !isGroupNode(inactiveNode.id)
             }"
+            (click)="nodeClicked(inactiveNode.id)"
           >
             <mat-checkbox
               color="primary"
               [(ngModel)]="inactiveNode.checked"
-              (ngModelChange)="selectNode()"
+              (click)="selectNode($event)"
               [disabled]="groupNodeSelected"
               aria-label="Select step"
               i18n-aria-label
             >
-              <div
-                class="projectItemTitleDiv"
-                fxLayoutAlign="start center"
-                (click)="nodeClicked(inactiveNode.id)"
-              >
+              <div class="projectItemTitleDiv" fxLayoutAlign="start center">
                 <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
               </div>
             </mat-checkbox>

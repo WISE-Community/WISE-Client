@@ -193,7 +193,7 @@ export class ProjectAuthoringComponent {
    * The checkbox for a node was clicked. We do not allow selecting a mix of group and step nodes.
    * If any group nodes are selected, disable all step node checkboxes, and vise-versa.
    */
-  protected selectNode(): void {
+  protected selectNode($event: Event): void {
     const checkedNodes = this.items
       .concat(Object.values(this.idToNode))
       .filter((item) => item.checked);
@@ -204,6 +204,7 @@ export class ProjectAuthoringComponent {
       this.groupNodeSelected = this.isGroupNode(checkedNodes[0].id);
       this.stepNodeSelected = !this.groupNodeSelected;
     }
+    $event.stopPropagation();
   }
 
   protected isBranchPoint(nodeId: string): boolean {
