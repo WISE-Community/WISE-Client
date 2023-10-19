@@ -1,12 +1,8 @@
-<div class="component-container" fxLayout="column" fxLayoutGap="4px">
-  <div fxLayoutAlign="start center" fxLayoutGap="8px">
-    <span>{{ label }}</span>
-    <span fxFlex></span>
-    <button mat-stroked-button (click)="preview()">
-      <mat-icon>info</mat-icon>
-    </button>
-    <button mat-flat-button color="primary" (click)="select()">
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+<div class="component-div" fxLayoutAlign="space-between center">
+  <button mat-flat-button class="component-button" (click)="select()">
+    {{ label }}
+  </button>
+  <button mat-flat-button (click)="preview()">
+    <mat-icon>info</mat-icon>
+  </button>
 </div>
