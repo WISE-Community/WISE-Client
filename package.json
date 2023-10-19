@@ -26,7 +26,7 @@
     "@ng-web-apis/intersection-observer": "^3.0.0",
     "@stomp/rx-stomp": "^1.1.4",
     "@stomp/stompjs": "^5.4.4",
-    "@tinymce/tinymce-angular": "^4.2.4",
+    "@tinymce/tinymce-angular": "^7.0.0",
     "canvg": "^2.0.0",
     "compute-covariance": "^1.0.1",
     "core-js": "^3.22.0",
