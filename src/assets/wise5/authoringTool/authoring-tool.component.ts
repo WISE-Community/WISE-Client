@@ -88,6 +88,13 @@ export class AuthoringToolComponent {
         active: true
       },
       {
+        route: ['unit', this.projectId, 'advanced'],
+        name: $localize`Advanced Settings`,
+        icon: 'build',
+        type: 'primary',
+        active: true
+      },
+      {
         route: ['home'],
         name: $localize`Unit List`,
         icon: 'reorder',
