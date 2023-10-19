@@ -440,28 +440,15 @@ export class AnnotationService {
    * @return object containing the component's latest score and comment annotations
    */
   getLatestComponentAnnotations(
-    nodeId,
-    componentId,
-    workgroupId,
+    nodeId: string,
+    componentId: string,
+    workgroupId: number,
     scoreType: 'score' | 'autoScore' | 'any' = 'any',
-    commentType = null
-  ) {
-    let latestScoreAnnotation = this.getLatestScoreAnnotation(
-      nodeId,
-      componentId,
-      workgroupId,
-      scoreType
-    );
-    let latestCommentAnnotation = this.getLatestCommentAnnotation(
-      nodeId,
-      componentId,
-      workgroupId,
-      commentType
-    );
-
+    commentType: 'comment' | 'autoComment' | 'any' = 'any'
+  ): any {
     return {
-      score: latestScoreAnnotation,
-      comment: latestCommentAnnotation
+      score: this.getLatestScoreAnnotation(nodeId, componentId, workgroupId, scoreType),
+      comment: this.getLatestCommentAnnotation(nodeId, componentId, workgroupId, commentType)
     };
   }
 
@@ -574,59 +561,33 @@ export class AnnotationService {
     return false;
   }
 
-  /**
-   * Get the latest comment annotation
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @param workgroupId the workgroup id
-   * @param commentType (optional) the type of comment
-   * e.g.
-   * 'autoComment' for auto graded comment
-   * 'comment' for teacher graded comment
-   * 'any' for auto graded comment or teacher graded comment
-   * @returns the latest comment annotation
-   */
-  getLatestCommentAnnotation(nodeId, componentId, workgroupId, commentType) {
-    let annotation = null;
-    const annotations = this.getAnnotations();
+  getLatestCommentAnnotation(
+    nodeId: string,
+    componentId: string,
+    workgroupId: number,
+    commentType: 'comment' | 'autoComment' | 'any' = 'any'
+  ): Annotation {
+    return (
+      this.getAnnotations()
+        .filter(
+          (annotation) =>
+            annotation.nodeId == nodeId &&
+            annotation.componentId == componentId &&
+            annotation.toWorkgroupId == workgroupId &&
+            this.matchesCommentType(annotation, commentType)
+        )
+        .at(-1) || null
+    );
+  }
 
-    if (commentType == null) {
-      commentType = 'any';
-    }
-
-    for (let a = annotations.length - 1; a >= 0; a--) {
-      const tempAnnotation = annotations[a];
-      if (tempAnnotation != null) {
-        let acceptAnnotation = false;
-        const tempNodeId = tempAnnotation.nodeId;
-        const tempComponentId = tempAnnotation.componentId;
-        const tempToWorkgroupId = tempAnnotation.toWorkgroupId;
-        const tempAnnotationType = tempAnnotation.type;
-
-        if (
-          nodeId == tempNodeId &&
-          componentId == tempComponentId &&
-          workgroupId == tempToWorkgroupId
-        ) {
-          if (
-            commentType === 'any' &&
-            (tempAnnotationType === 'autoComment' || tempAnnotationType === 'comment')
-          ) {
-            acceptAnnotation = true;
-          } else if (commentType === 'autoComment' && tempAnnotationType === 'autoComment') {
-            acceptAnnotation = true;
-          } else if (commentType === 'comment' && tempAnnotationType === 'comment') {
-            acceptAnnotation = true;
-          }
-
-          if (acceptAnnotation) {
-            annotation = tempAnnotation;
-            break;
-          }
-        }
-      }
-    }
-    return annotation;
+  private matchesCommentType(
+    annotation: Annotation,
+    commentType: 'comment' | 'autoComment' | 'any'
+  ): boolean {
+    return (
+      (commentType === 'any' && ['autoComment', 'comment'].includes(annotation.type)) ||
+      annotation.type === commentType
+    );
   }
 
   getScoreValueFromScoreAnnotation(scoreAnnotation: any): number {
