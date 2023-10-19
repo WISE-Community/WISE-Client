@@ -102,50 +102,50 @@
         aria-label="Select lesson or step"
         i18n-aria-label
       >
-        <div class="projectItemTitleDiv" fxLayoutAlign="start center" fxLayoutGap="10px">
-          <node-icon-and-title [nodeId]="item.key" [showPosition]="true"></node-icon-and-title>
-          <p *ngIf="!isGroupNode(item.key)" fxLayoutAlign="start center" fxLayoutGap="10px">
-            <mat-icon
-              *ngIf="isBranchPoint(item.key)"
-              class="rotate-180"
-              (click)="branchIconClicked(item.key); $event.stopPropagation()"
-              matTooltip="Branch point with {{ getNumberOfBranchPaths(item.key) }} paths based on {{
-                getBranchCriteriaDescription(item.key)
-              }}"
-              matTooltipPosition="right"
-              i18n-matTooltip
-              >call_split</mat-icon
-            >
-            <mat-icon
-              *ngIf="nodeHasConstraint(item.key) && getNumberOfConstraintsOnNode(item.key) == 1"
-              (click)="constraintIconClicked(item.key); $event.stopPropagation()"
-              matTooltip="{{ getNumberOfConstraintsOnNode(item.key) }} Constraint\n\n{{
-                getConstraintDescriptions(item.key)
-              }}"
-              matTooltipPosition="right"
-              i18n-matTooltip
-              >block</mat-icon
-            >
-            <mat-icon
-              *ngIf="nodeHasConstraint(item.key) && getNumberOfConstraintsOnNode(item.key) > 1"
-              (click)="constraintIconClicked(item.key); $event.stopPropagation()"
-              matTooltip="{{ getNumberOfConstraintsOnNode(item.key) }} Constraints\n\n{{
-                getConstraintDescriptions(item.key)
-              }}"
-              matTooltipPosition="right"
-              i18n-matTooltip
-              >block</mat-icon
-            >
-            <mat-icon
-              *ngIf="nodeHasRubric(item.key)"
-              matTooltip="Has Rubric"
-              matTooltipPosition="right"
-              i18n-matTooltip
-              >message</mat-icon
-            >
-          </p>
-        </div>
       </mat-checkbox>
+      <div class="projectItemTitleDiv" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <node-icon-and-title [nodeId]="item.key" [showPosition]="true"></node-icon-and-title>
+        <p *ngIf="!isGroupNode(item.key)" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <mat-icon
+            *ngIf="isBranchPoint(item.key)"
+            class="rotate-180"
+            (click)="branchIconClicked(item.key); $event.stopPropagation()"
+            matTooltip="Branch point with {{ getNumberOfBranchPaths(item.key) }} paths based on {{
+              getBranchCriteriaDescription(item.key)
+            }}"
+            matTooltipPosition="right"
+            i18n-matTooltip
+            >call_split</mat-icon
+          >
+          <mat-icon
+            *ngIf="nodeHasConstraint(item.key) && getNumberOfConstraintsOnNode(item.key) == 1"
+            (click)="constraintIconClicked(item.key); $event.stopPropagation()"
+            matTooltip="{{ getNumberOfConstraintsOnNode(item.key) }} Constraint\n\n{{
+              getConstraintDescriptions(item.key)
+            }}"
+            matTooltipPosition="right"
+            i18n-matTooltip
+            >block</mat-icon
+          >
+          <mat-icon
+            *ngIf="nodeHasConstraint(item.key) && getNumberOfConstraintsOnNode(item.key) > 1"
+            (click)="constraintIconClicked(item.key); $event.stopPropagation()"
+            matTooltip="{{ getNumberOfConstraintsOnNode(item.key) }} Constraints\n\n{{
+              getConstraintDescriptions(item.key)
+            }}"
+            matTooltipPosition="right"
+            i18n-matTooltip
+            >block</mat-icon
+          >
+          <mat-icon
+            *ngIf="nodeHasRubric(item.key)"
+            matTooltip="Has Rubric"
+            matTooltipPosition="right"
+            i18n-matTooltip
+            >message</mat-icon
+          >
+        </p>
+      </div>
     </div>
   </div>
   <div>
@@ -172,10 +172,10 @@
             aria-label="Select lesson"
             i18n-aria-label
           >
-            <div class="projectItemTitleDiv" fxLayoutAlign="start center">
-              <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
-            </div>
           </mat-checkbox>
+          <div class="projectItemTitleDiv" fxLayoutAlign="start center">
+            <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
+          </div>
         </div>
         <ng-container *ngFor="let inactiveChildId of inactiveNode.ids">
           <div class="projectItem" id="{{ inactiveChildId }}">
@@ -197,10 +197,10 @@
                 aria-label="Select step"
                 i18n-aria-label
               >
-                <div class="projectItemTitleDiv" fxLayoutAlign="start center">
-                  <node-icon-and-title [nodeId]="inactiveChildId"></node-icon-and-title>
-                </div>
               </mat-checkbox>
+              <div class="projectItemTitleDiv" fxLayoutAlign="start center">
+                <node-icon-and-title [nodeId]="inactiveChildId"></node-icon-and-title>
+              </div>
             </div>
           </div>
         </ng-container>
@@ -231,10 +231,10 @@
               aria-label="Select step"
               i18n-aria-label
             >
-              <div class="projectItemTitleDiv" fxLayoutAlign="start center">
-                <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
-              </div>
             </mat-checkbox>
+            <div class="projectItemTitleDiv" fxLayoutAlign="start center">
+              <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
+            </div>
           </div>
         </div>
       </ng-container>
