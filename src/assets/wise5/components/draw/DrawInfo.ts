@@ -1,8 +1,9 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class DrawInfo extends ComponentInfo {
-  description: string = $localize`The student draws on a canvas.`;
-  previewContent: any = {
+  protected description: string = $localize`The student draws on a canvas.`;
+  protected label: string = $localize`Draw`;
+  protected previewContent: any = {
     id: 'abcde12345',
     type: 'Draw',
     prompt: 'Draw a house.',

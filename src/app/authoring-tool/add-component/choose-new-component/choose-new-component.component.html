@@ -19,7 +19,7 @@
     <ng-container *ngFor="let componentType of componentTypes">
       <component-selector
         [componentType]="componentType.type"
-        (componentSelectedEvent)="selectComponent($event.type)"
+        (componentSelectedEvent)="selectComponent(componentType.type)"
       ></component-selector>
     </ng-container>
   </div>

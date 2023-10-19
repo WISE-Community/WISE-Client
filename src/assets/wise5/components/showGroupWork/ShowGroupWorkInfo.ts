@@ -1,8 +1,9 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class ShowGroupWorkInfo extends ComponentInfo {
-  description: string = $localize`The student is shown work that their group submitted for a specific step.`;
-  previewContent: any = {
+  protected description: string = $localize`The student is shown work that their group submitted for a specific step.`;
+  protected label: string = $localize`Show Group Work`;
+  protected previewContent: any = {
     id: 'abcde12345',
     type: 'ShowGroupWork',
     prompt: 'This is the work that your group submitted for a previous step.',

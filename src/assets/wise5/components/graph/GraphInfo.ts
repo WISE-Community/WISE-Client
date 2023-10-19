@@ -1,8 +1,9 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class GraphInfo extends ComponentInfo {
-  description: string = $localize`The student views graph data or adds points to a graph.`;
-  previewContent: any = {
+  protected description: string = $localize`The student views graph data or adds points to a graph.`;
+  protected label: string = $localize`Graph`;
+  protected previewContent: any = {
     id: 'abcde12345',
     type: 'Graph',
     prompt:

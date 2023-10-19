@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ComponentTypeService } from './componentTypeService';
 import { MultipleChoiceInfo } from '../components/multipleChoice/MultipleChoiceInfo';
 import { OpenResponseInfo } from '../components/openResponse/OpenResponseInfo';
 import { AnimationInfo } from '../components/animation/AnimationInfo';
@@ -19,6 +18,7 @@ import { ShowGroupWorkInfo } from '../components/showGroupWork/ShowGroupWorkInfo
 import { ShowMyWorkInfo } from '../components/showMyWork/ShowMyWorkInfo';
 import { SummaryInfo } from '../components/summary/SummaryInfo';
 import { TableInfo } from '../components/table/TableInfo';
+import { ComponentInfo } from '../components/ComponentInfo';
 
 @Injectable()
 export class ComponentInfoService {
@@ -44,17 +44,7 @@ export class ComponentInfoService {
     Table: new TableInfo()
   };
 
-  constructor(private componentTypeService: ComponentTypeService) {}
-
-  getLabel(componentType: string): string {
-    return this.componentTypeService.getComponentTypeLabel(componentType);
-  }
-
-  getDescription(componentType: string): string {
-    return this.componentInfo[componentType].getDescription();
-  }
-
-  getPreviewContent(componentType: string): string {
-    return this.componentInfo[componentType].getPreviewContent();
+  getInfo(componentType: string): ComponentInfo {
+    return this.componentInfo[componentType];
   }
 }

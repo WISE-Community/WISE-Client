@@ -1,8 +1,9 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class MultipleChoiceInfo extends ComponentInfo {
-  description: string = $localize`The student chooses one or more choices.`;
-  previewContent: any = {
+  protected description: string = $localize`The student chooses one or more choices.`;
+  protected label: string = $localize`Multiple Choice`;
+  protected previewContent: any = {
     id: 'abcde12345',
     type: 'MultipleChoice',
     prompt: 'Choose the fruit.',

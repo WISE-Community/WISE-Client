@@ -1,8 +1,9 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class HtmlInfo extends ComponentInfo {
-  description: string = $localize`The student views html content.`;
-  previewContent: any = {
+  protected description: string = $localize`The student views html content.`;
+  protected label: string = $localize`Rich Text (HTML)`;
+  protected previewContent: any = {
     id: 'abcde12345',
     type: 'HTML',
     prompt: '',

@@ -1,8 +1,9 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class TableInfo extends ComponentInfo {
-  description: string = $localize`The student views a table that they may or may not be able to change.`;
-  previewContent: any = {
+  protected description: string = $localize`The student views a table that they may or may not be able to change.`;
+  protected label: string = $localize`Table`;
+  protected previewContent: any = {
     id: 'abcde12345',
     type: 'Table',
     prompt: 'Add the number of elephants to the graph.',

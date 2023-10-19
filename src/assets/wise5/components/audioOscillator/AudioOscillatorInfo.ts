@@ -1,8 +1,9 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class AudioOscillatorInfo extends ComponentInfo {
-  description: string = $localize`The student changes the frequency of a sound wave while they listen to it.`;
-  previewContent: any = {
+  protected description: string = $localize`The student changes the frequency of a sound wave while they listen to it.`;
+  protected label: string = $localize`Audio Oscillator`;
+  protected previewContent: any = {
     id: 'abcde12345',
     type: 'AudioOscillator',
     prompt:

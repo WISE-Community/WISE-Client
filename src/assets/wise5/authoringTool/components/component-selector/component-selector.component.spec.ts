@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ComponentSelectorComponent } from './component-selector.component';
 import { ComponentInfoService } from '../../../services/componentInfoService';
-import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -21,7 +20,7 @@ describe('ComponentSelectorComponent', () => {
         MatIconModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [ComponentInfoService, ComponentServiceLookupService, ComponentTypeService]
+      providers: [ComponentInfoService, ComponentServiceLookupService]
     }).compileComponents();
     fixture = TestBed.createComponent(ComponentSelectorComponent);
     component = fixture.componentInstance;

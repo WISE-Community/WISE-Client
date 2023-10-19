@@ -1,8 +1,9 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class MatchInfo extends ComponentInfo {
-  description: string = $localize`The student places items into buckets.`;
-  previewContent: any = {
+  protected description: string = $localize`The student places items into buckets.`;
+  protected label: string = $localize`Match`;
+  protected previewContent: any = {
     id: 'abcde12345',
     type: 'Match',
     prompt: '',

@@ -1,8 +1,9 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class DialogGuidanceInfo extends ComponentInfo {
-  description: string = $localize`The student chats with a computer avatar about a specific topic.`;
-  previewContent: any = {
+  protected description: string = $localize`The student chats with a computer avatar about a specific topic.`;
+  protected label: string = $localize`Dialog Guidance`;
+  protected previewContent: any = {
     id: 'abcde12345',
     type: 'DialogGuidance',
     prompt:

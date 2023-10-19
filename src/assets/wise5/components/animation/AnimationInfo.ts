@@ -1,8 +1,9 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class AnimationInfo extends ComponentInfo {
-  description: string = $localize`The student watches an animation.`;
-  previewContent: any = {
+  protected description: string = $localize`The student watches an animation.`;
+  protected label: string = $localize`Animation`;
+  protected previewContent: any = {
     id: 'abcde12345',
     type: 'Animation',
     prompt: 'Press play to watch the animation.',

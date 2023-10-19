@@ -1,8 +1,9 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class LabelInfo extends ComponentInfo {
-  description: string = $localize`The student adds label to a canvas.`;
-  previewContent: any = {
+  protected description: string = $localize`The student adds label to a canvas.`;
+  protected label: string = $localize`Label`;
+  protected previewContent: any = {
     id: 'abcde12345',
     type: 'Label',
     prompt: 'Label the layers of the Earth by moving the labels to the correct location.',

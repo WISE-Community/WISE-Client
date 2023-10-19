@@ -10,27 +10,26 @@ import { ComponentInfoDialogComponent } from '../component-info-dialog/component
   styleUrls: ['./component-selector.component.scss']
 })
 export class ComponentSelectorComponent {
-  @Output() componentSelectedEvent: EventEmitter<any> = new EventEmitter<any>();
+  private componentInfo: any;
+  @Output() componentSelectedEvent: EventEmitter<void> = new EventEmitter<void>();
   @Input() componentType: string;
-  private componentTypeObject: any;
-  private description: string;
   protected label: string;
-  private previewContent: any;
 
   constructor(private componentInfoService: ComponentInfoService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.label = this.componentInfoService.getLabel(this.componentType);
-    this.componentTypeObject = { type: this.componentType, name: this.label };
-    this.description = this.componentInfoService.getDescription(this.componentType);
-    this.previewContent = this.componentInfoService.getPreviewContent(this.componentType);
+    this.componentInfo = this.componentInfoService.getInfo(this.componentType);
+    this.label = this.componentInfo.getLabel();
   }
 
   protected preview(): void {
     this.dialog.open(ComponentInfoDialogComponent, {
       data: {
-        component: new ComponentFactory().getComponent(this.previewContent, 'node1'),
-        description: this.description,
+        component: new ComponentFactory().getComponent(
+          this.componentInfo.getPreviewContent(),
+          'node1'
+        ),
+        description: this.componentInfo.getDescription(),
         label: this.label
       },
       panelClass: 'dialog-lg'
@@ -38,6 +37,6 @@ export class ComponentSelectorComponent {
   }
 
   protected select(): void {
-    this.componentSelectedEvent.emit(this.componentTypeObject);
+    this.componentSelectedEvent.emit();
   }
 }

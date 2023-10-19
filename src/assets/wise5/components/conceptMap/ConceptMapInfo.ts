@@ -1,8 +1,9 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class ConceptMapInfo extends ComponentInfo {
-  description: string = $localize`The student adds items to a canvas and connects the items with links.`;
-  previewContent: any = {
+  protected description: string = $localize`The student adds items to a canvas and connects the items with links.`;
+  protected label: string = $localize`Concept Map`;
+  protected previewContent: any = {
     id: 'abcde12345',
     type: 'ConceptMap',
     prompt: 'Link the sun to the plant.',
