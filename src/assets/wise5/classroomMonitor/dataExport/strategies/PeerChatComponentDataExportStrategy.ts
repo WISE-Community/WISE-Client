@@ -25,7 +25,6 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     'Component Part Number',
     'Step Title',
     'Component Type',
-    'Component Prompt',
     'Response'
   ];
 
@@ -52,12 +51,20 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
   private generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {
     const headerRow = this.defaultColumnNames.map((columnName: string) => columnName);
     const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
+    this.insertPromptColumnIfNecessary(headerRow, component);
     this.insertPrePromptColumnIfNecessary(headerRow, component);
-    this.insertDynamicPromptColumnIfNecessary(headerRow, componentStates);
+    this.insertDynamicPromptColumnIfNecessary(headerRow, component);
     this.insertPostPromptColumnIfNecessary(headerRow, component);
     this.insertQuestionColumnsIfNecessary(headerRow, componentStates);
+    this.insertQuestionUsedColumnIfNecessary(headerRow, component);
     this.populateColumnNameMappings(headerRow, columnNameToNumber);
     return headerRow;
+  }
+
+  private insertPromptColumnIfNecessary(headerRow: string[], component: any): void {
+    if (!this.hasDynamicPrompt(component)) {
+      headerRow.splice(headerRow.indexOf('Response'), 0, 'Prompt');
+    }
   }
 
   private insertPrePromptColumnIfNecessary(headerRow: string[], component: any): void {
@@ -66,8 +73,8 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     }
   }
 
-  private insertDynamicPromptColumnIfNecessary(headerRow: string[], componentStates: any[]): void {
-    if (this.hasDynamicPrompt(componentStates)) {
+  private insertDynamicPromptColumnIfNecessary(headerRow: string[], component: any): void {
+    if (this.hasDynamicPrompt(component)) {
       headerRow.splice(headerRow.indexOf('Response'), 0, 'Dynamic Prompt');
     }
   }
@@ -78,20 +85,28 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     }
   }
 
+  private insertQuestionUsedColumnIfNecessary(headerRow: string[], component: any): void {
+    if (this.isClickToAddEnabled(component)) {
+      headerRow.splice(headerRow.indexOf('Response'), 0, 'Question Used');
+    }
+  }
+
   private hasPrePrompt(component: any): boolean {
     const prePrompt = component.dynamicPrompt?.prePrompt;
     return prePrompt != null && prePrompt !== '';
   }
 
-  private hasDynamicPrompt(componentStates: any[]): boolean {
-    return componentStates.some(
-      (componentState: any) => componentState.studentData.dynamicPrompt?.prompt != null
-    );
+  private hasDynamicPrompt(component: any): boolean {
+    return component.dynamicPrompt?.enabled;
   }
 
   private hasPostPrompt(component: any): boolean {
     const postPrompt = component.dynamicPrompt?.postPrompt;
     return postPrompt != null && postPrompt !== '';
+  }
+
+  private isClickToAddEnabled(component: any): boolean {
+    return component.questionBank?.clickToAddEnabled;
   }
 
   private insertQuestionColumnsIfNecessary(headerRow: string[], componentStates: any[]): void {
@@ -218,7 +233,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
       this.projectService.getNodePositionAndTitle(nodeId)
     );
     this.setColumnValue(row, columnNameToNumber, 'Component Type', component.type);
-    this.setColumnValue(row, columnNameToNumber, 'Component Prompt', component.prompt);
+    this.setColumnValue(row, columnNameToNumber, 'Prompt', component.prompt);
   }
 
   private setStudentWork(
@@ -255,6 +270,14 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     if (componentState.studentData.questionBank != null) {
       this.setQuestions(row, columnNameToNumber, componentState);
     }
+    if (this.isClickToAddEnabled(component)) {
+      this.setColumnValue(
+        row,
+        columnNameToNumber,
+        'Question Used',
+        this.getQuestionText(component, componentState.studentData.questionId)
+      );
+    }
     this.setColumnValue(row, columnNameToNumber, 'Response', componentState.studentData.response);
   }
 
@@ -270,6 +293,17 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
         );
       }
     }
+  }
+
+  private getQuestionText(component: any, questionId: string): string {
+    for (const rule of component.questionBank.rules) {
+      for (const question of rule.questions) {
+        if (question.id === questionId) {
+          return question.text;
+        }
+      }
+    }
+    return null;
   }
 
   private setColumnValue(
