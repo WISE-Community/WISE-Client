@@ -69,8 +69,6 @@ mat-icon {
 }
 
 md-toolbar {
-    min-height: $baseline-grid * 6.5;
-
     .md-menu {
         padding-top: 0;
         padding-bottom: 0;
@@ -83,10 +81,6 @@ md-toolbar {
 
     .md-button {
         align-self: flex-start;
-    }
-
-    h1, h2, h3 {
-        padding: $baseline-grid 0;
     }
 }
 
