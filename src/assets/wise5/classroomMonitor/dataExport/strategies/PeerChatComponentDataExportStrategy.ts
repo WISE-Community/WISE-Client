@@ -93,7 +93,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
 
   private hasPrePrompt(component: any): boolean {
     const prePrompt = component.dynamicPrompt?.prePrompt;
-    return prePrompt != null && prePrompt !== '';
+    return this.hasDynamicPrompt(component) && prePrompt != null && prePrompt !== '';
   }
 
   private hasDynamicPrompt(component: any): boolean {
@@ -102,7 +102,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
 
   private hasPostPrompt(component: any): boolean {
     const postPrompt = component.dynamicPrompt?.postPrompt;
-    return postPrompt != null && postPrompt !== '';
+    return this.hasDynamicPrompt(component) && postPrompt != null && postPrompt !== '';
   }
 
   private isClickToAddEnabled(component: any): boolean {
@@ -254,19 +254,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
       'Client Timestamp',
       millisecondsToDateTime(componentState.clientSaveTime)
     );
-    this.setColumnValue(row, columnNameToNumber, 'Pre Prompt', component.dynamicPrompt?.prePrompt);
-    this.setColumnValue(
-      row,
-      columnNameToNumber,
-      'Dynamic Prompt',
-      componentState.studentData.dynamicPrompt?.prompt
-    );
-    this.setColumnValue(
-      row,
-      columnNameToNumber,
-      'Post Prompt',
-      component.dynamicPrompt?.postPrompt
-    );
+    this.setDynamicPrompts(row, columnNameToNumber, component, componentState);
     if (componentState.studentData.questionBank != null) {
       this.setQuestions(row, columnNameToNumber, componentState);
     }
@@ -279,6 +267,38 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
       );
     }
     this.setColumnValue(row, columnNameToNumber, 'Response', componentState.studentData.response);
+  }
+
+  private setDynamicPrompts(
+    row: any,
+    columnNameToNumber: any,
+    component: any,
+    componentState: any
+  ): void {
+    if (this.hasPrePrompt(component)) {
+      this.setColumnValue(
+        row,
+        columnNameToNumber,
+        'Pre Prompt',
+        component.dynamicPrompt?.prePrompt
+      );
+    }
+    if (this.hasDynamicPrompt(component)) {
+      this.setColumnValue(
+        row,
+        columnNameToNumber,
+        'Dynamic Prompt',
+        componentState.studentData.dynamicPrompt?.prompt
+      );
+    }
+    if (this.hasPostPrompt(component)) {
+      this.setColumnValue(
+        row,
+        columnNameToNumber,
+        'Post Prompt',
+        component.dynamicPrompt?.postPrompt
+      );
+    }
   }
 
   private setQuestions(row: any[], columnNameToNumber: any, componentState: any): void {
