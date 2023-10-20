@@ -1,5 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ComponentInfoService } from '../../../services/componentInfoService';
+import { ComponentInfo } from '../../../components/ComponentInfo';
+import { ComponentFactory } from '../../../common/ComponentFactory';
 
 @Component({
   selector: 'component-info-dialog',
@@ -7,5 +10,23 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./component-info-dialog.component.scss']
 })
 export class ComponentInfoDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) protected data: any) {}
+  protected component: any;
+  private componentInfo: ComponentInfo;
+  protected description: string;
+  protected label: string;
+
+  constructor(
+    private componentInfoService: ComponentInfoService,
+    @Inject(MAT_DIALOG_DATA) private componentType: string
+  ) {}
+
+  ngOnInit(): void {
+    this.componentInfo = this.componentInfoService.getInfo(this.componentType);
+    this.label = this.componentInfo.getLabel();
+    this.description = this.componentInfo.getDescription();
+    this.component = new ComponentFactory().getComponent(
+      this.componentInfo.getPreviewContent(),
+      'node1'
+    );
+  }
 }

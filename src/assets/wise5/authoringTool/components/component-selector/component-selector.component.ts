@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ComponentFactory } from '../../../common/ComponentFactory';
 import { MatDialog } from '@angular/material/dialog';
 import { ComponentInfoService } from '../../../services/componentInfoService';
 import { ComponentInfoDialogComponent } from '../component-info-dialog/component-info-dialog.component';
@@ -24,14 +23,7 @@ export class ComponentSelectorComponent {
 
   protected preview(): void {
     this.dialog.open(ComponentInfoDialogComponent, {
-      data: {
-        component: new ComponentFactory().getComponent(
-          this.componentInfo.getPreviewContent(),
-          'node1'
-        ),
-        description: this.componentInfo.getDescription(),
-        label: this.label
-      },
+      data: this.componentType,
       panelClass: 'dialog-lg'
     });
   }

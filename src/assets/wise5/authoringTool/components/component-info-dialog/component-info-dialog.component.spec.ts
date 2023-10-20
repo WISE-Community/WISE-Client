@@ -6,7 +6,7 @@ import { PreviewComponentModule } from '../preview-component/preview-component.m
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { PreviewComponentComponent } from '../preview-component/preview-component.component';
 import { ProjectService } from '../../../services/projectService';
-import { Component } from '../../../common/Component';
+import { ComponentInfoService } from '../../../services/componentInfoService';
 
 describe('ComponentInfoDialogComponent', () => {
   let component: ComponentInfoDialogComponent;
@@ -16,14 +16,7 @@ describe('ComponentInfoDialogComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ComponentInfoDialogComponent, PreviewComponentComponent],
       imports: [HttpClientTestingModule, MatDialogModule, MatDividerModule, PreviewComponentModule],
-      providers: [
-        {
-          provide: MAT_DIALOG_DATA,
-          useValue: {
-            component: new Component({ id: 'abcde12345', type: 'OpenResponse' }, 'node1')
-          }
-        }
-      ]
+      providers: [ComponentInfoService, { provide: MAT_DIALOG_DATA, useValue: 'OpenResponse' }]
     }).compileComponents();
     fixture = TestBed.createComponent(ComponentInfoDialogComponent);
     const projectService = TestBed.inject(ProjectService);
