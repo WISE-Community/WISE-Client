@@ -63,37 +63,40 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
 
   private insertPromptColumnIfNecessary(headerRow: string[], component: any): void {
     if (!this.hasDynamicPrompt(component)) {
-      headerRow.splice(headerRow.indexOf('Response'), 0, 'Prompt');
+      this.insertBeforeResponseColumn(headerRow, 'Prompt');
     }
   }
 
   private insertPrePromptColumnIfNecessary(headerRow: string[], component: any): void {
     if (this.hasPrePrompt(component)) {
-      headerRow.splice(headerRow.indexOf('Response'), 0, 'Pre Prompt');
+      this.insertBeforeResponseColumn(headerRow, 'Pre Prompt');
     }
   }
 
   private insertDynamicPromptColumnIfNecessary(headerRow: string[], component: any): void {
     if (this.hasDynamicPrompt(component)) {
-      headerRow.splice(headerRow.indexOf('Response'), 0, 'Dynamic Prompt');
+      this.insertBeforeResponseColumn(headerRow, 'Dynamic Prompt');
     }
   }
 
   private insertPostPromptColumnIfNecessary(headerRow: string[], component: any): void {
     if (this.hasPostPrompt(component)) {
-      headerRow.splice(headerRow.indexOf('Response'), 0, 'Post Prompt');
+      this.insertBeforeResponseColumn(headerRow, 'Post Prompt');
     }
   }
 
   private insertQuestionUsedColumnIfNecessary(headerRow: string[], component: any): void {
     if (this.isClickToAddEnabled(component)) {
-      headerRow.splice(headerRow.indexOf('Response'), 0, 'Question Used');
+      this.insertBeforeResponseColumn(headerRow, 'Question Used');
     }
   }
 
+  private insertBeforeResponseColumn(headerRow: string[], columnName: string): void {
+    headerRow.splice(headerRow.indexOf('Response'), 0, columnName);
+  }
+
   private hasPrePrompt(component: any): boolean {
-    const prePrompt = component.dynamicPrompt?.prePrompt;
-    return this.hasDynamicPrompt(component) && prePrompt != null && prePrompt !== '';
+    return this.hasDynamicPrompt(component) && this.hasValue(component.dynamicPrompt?.prePrompt);
   }
 
   private hasDynamicPrompt(component: any): boolean {
@@ -101,8 +104,11 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
   }
 
   private hasPostPrompt(component: any): boolean {
-    const postPrompt = component.dynamicPrompt?.postPrompt;
-    return this.hasDynamicPrompt(component) && postPrompt != null && postPrompt !== '';
+    return this.hasDynamicPrompt(component) && this.hasValue(component.dynamicPrompt?.postPrompt);
+  }
+
+  private hasValue(value: any): boolean {
+    return value != null && value !== '';
   }
 
   private isClickToAddEnabled(component: any): boolean {
