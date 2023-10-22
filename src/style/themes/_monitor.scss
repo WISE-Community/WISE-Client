@@ -135,8 +135,8 @@ $monitor-colors: (
   'score': #FFC107,
   'secondary-text': mat.get-color-from-palette($foreground, 'secondary-text'),
   'selected-bg': mat.get-color-from-palette($monitor-theme-primary, 50),
-  'success': #00C853,
+  'success': #008004,
   'success-contrast': black,
   'text': mat.get-color-from-palette($foreground, 'text'),
-  'warn': mat.get-color-from-palette($monitor-theme-warn, 800),
+  'warn': 'mat.get-color-from-palette($monitor-theme-warn, 800)',
 );
