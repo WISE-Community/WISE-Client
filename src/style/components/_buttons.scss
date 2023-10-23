@@ -7,11 +7,16 @@
 
   mat-progress-bar {
       position: absolute;
-      left: 0;
-      bottom: 0;
-      border-bottom-left-radius: $card-border-radius;
-      border-bottom-right-radius: $card-border-radius;
-    }
+    left: 0;
+    bottom: 0;
+    border-bottom-left-radius: $card-border-radius;
+    border-bottom-right-radius: $card-border-radius;
+  }
+
+  .mat-mdc-progress-bar {
+    --mdc-linear-progress-active-indicator-height: 4px;
+    --mdc-linear-progress-track-height: 4px;
+  }
 }
 
 .mat-mdc-fab.mat-fab--extended {
