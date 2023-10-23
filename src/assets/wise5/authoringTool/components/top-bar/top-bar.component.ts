@@ -53,6 +53,10 @@ export class TopBarComponent implements OnInit {
     return projectInfo;
   }
 
+  protected previewProject(): void {
+    window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
+  }
+
   protected showHelp(): void {
     window.open(
       'https://docs.google.com/document/d/1G8lVtiUlGXLRAyFOvkEdadHYhJhJLW4aor9dol2VzeU',

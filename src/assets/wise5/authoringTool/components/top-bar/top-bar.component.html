@@ -20,6 +20,16 @@
       </button>
       <button
         mat-icon-button
+        aria-label="Preview Unit"
+        i18n-aria-label
+        matTooltip="Preview Unit"
+        i18n-matTooltip
+        (click)="previewProject()"
+      >
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button
+        mat-icon-button
         *ngIf="runId"
         fxHide.xs
         aria-label="Switch to Grading View"
