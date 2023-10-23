@@ -5,7 +5,6 @@ import { ProjectService } from './projectService';
 import { ConfigService } from './configService';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { isMatchingPeriods } from '../common/period/period';
 import { generateRandomKey } from '../common/string/string';
 import { Annotation } from '../common/Annotation';
 
@@ -30,6 +29,12 @@ export class AnnotationService {
 
   getAnnotationById(annotationId: number): Annotation {
     return this.annotations.find((annotation) => annotation.id === annotationId) || null;
+  }
+
+  getAnnotationsByNodeIdComponentId(nodeId: string, componentId: string): Annotation[] {
+    return this.annotations.filter(
+      (annotation) => annotation.nodeId === nodeId && annotation.componentId === componentId
+    );
   }
 
   /**
@@ -515,13 +520,10 @@ export class AnnotationService {
     scoreType: 'score' | 'autoScore' | 'any' = 'any'
   ): Annotation {
     return (
-      this.getAnnotations()
+      this.getAnnotationsByNodeIdComponentId(nodeId, componentId)
         .filter(
           (annotation) =>
-            annotation.nodeId == nodeId &&
-            annotation.componentId == componentId &&
-            annotation.toWorkgroupId == workgroupId &&
-            this.matchesScoreType(annotation, scoreType)
+            annotation.toWorkgroupId == workgroupId && this.matchesScoreType(annotation, scoreType)
         )
         .at(-1) || null
     );
@@ -537,21 +539,6 @@ export class AnnotationService {
     );
   }
 
-  isThereAnyScoreAnnotation(nodeId, componentId, periodId) {
-    const annotations = this.getAnnotations();
-    for (const annotation of annotations) {
-      if (
-        annotation.nodeId === nodeId &&
-        annotation.componentId === componentId &&
-        isMatchingPeriods(annotation.periodId, periodId) &&
-        this.isScoreOrAutoScore(annotation)
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   getLatestCommentAnnotation(
     nodeId: string,
     componentId: string,
@@ -559,11 +546,9 @@ export class AnnotationService {
     commentType: 'comment' | 'autoComment' | 'any' = 'any'
   ): Annotation {
     return (
-      this.getAnnotations()
+      this.getAnnotationsByNodeIdComponentId(nodeId, componentId)
         .filter(
           (annotation) =>
-            annotation.nodeId == nodeId &&
-            annotation.componentId == componentId &&
             annotation.toWorkgroupId == workgroupId &&
             this.matchesCommentType(annotation, commentType)
         )
