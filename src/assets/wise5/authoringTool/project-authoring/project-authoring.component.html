@@ -168,6 +168,7 @@
         <ng-container *ngFor="let inactiveChildId of inactiveNode.ids">
           <div class="projectItem" id="{{ inactiveChildId }}">
             <div
+              fxLayoutAlign="start center"
               [ngClass]="{
                 groupHeader: isGroupNode(inactiveChildId.id),
                 stepHeader: !isGroupNode(inactiveChildId.id),
@@ -180,7 +181,7 @@
               <mat-checkbox
                 color="primary"
                 [(ngModel)]="idToNode[inactiveChildId].checked"
-                (change)="selectNode($event)"
+                (click)="selectNode($event)"
                 [disabled]="groupNodeSelected"
                 aria-label="Select step"
                 i18n-aria-label
@@ -201,8 +202,10 @@
         <div
           *ngIf="!isGroupNode(inactiveNode.id) && getParentGroup(inactiveNode.id) == null"
           class="pointer projectItem"
+          id="{{ inactiveNode.id }}"
         >
           <div
+            fxLayoutAlign="start center"
             [ngClass]="{
               groupHeader: isGroupNode(inactiveNode.id),
               stepHeader: !isGroupNode(inactiveNode.id),
