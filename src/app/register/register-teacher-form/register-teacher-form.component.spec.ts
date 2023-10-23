@@ -21,6 +21,7 @@ import { By } from '@angular/platform-browser';
 import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { PasswordModule } from '../../password/password.module';
 import { ConfigService } from '../../services/config.service';
+import { PasswordRequirementComponent } from '../../password/password-requirement/password-requirement.component';
 
 class MockTeacherService {
   registerTeacherAccount() {}
@@ -35,7 +36,7 @@ class MockConfigService {
 let component: RegisterTeacherFormComponent;
 let configService: ConfigService;
 let fixture: ComponentFixture<RegisterTeacherFormComponent>;
-const PASSWORD: string = 'Abcd1234';
+const PASSWORD: string = PasswordRequirementComponent.VALID_PASSWORD;
 let teacherService: TeacherService;
 let recaptchaV3Service: ReCaptchaV3Service;
 let router: Router;
@@ -48,14 +49,14 @@ describe('RegisterTeacherFormComponent', () => {
         declarations: [RegisterTeacherFormComponent],
         imports: [
           BrowserAnimationsModule,
-          RouterTestingModule,
-          ReactiveFormsModule,
           MatCheckboxModule,
-          MatSelectModule,
           MatInputModule,
+          MatSelectModule,
           MatSnackBarModule,
+          PasswordModule,
+          ReactiveFormsModule,
           RecaptchaV3Module,
-          PasswordModule
+          RouterTestingModule
         ],
         providers: [
           { provide: ConfigService, useClass: MockConfigService },

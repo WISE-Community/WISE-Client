@@ -142,10 +142,6 @@ export class ProjectAuthoringComponent {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-node/choose-template`]);
   }
 
-  protected goToAdvancedAuthoring(): void {
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/advanced`]);
-  }
-
   protected isNodeInAnyBranchPath(nodeId: string): boolean {
     return this.projectService.isNodeInAnyBranchPath(nodeId);
   }
