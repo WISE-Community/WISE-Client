@@ -28,17 +28,8 @@ export class AnnotationService {
     return this.annotations;
   }
 
-  /**
-   * Get the annotation with the specified id, or null if not found
-   * @param annotationId
-   */
-  getAnnotationById(annotationId) {
-    for (let annotation of this.annotations) {
-      if (annotation.id === annotationId) {
-        return annotation;
-      }
-    }
-    return null;
+  getAnnotationById(annotationId: number): Annotation {
+    return this.annotations.find((annotation) => annotation.id === annotationId) || null;
   }
 
   /**
@@ -645,21 +636,14 @@ export class AnnotationService {
    * @param type the type of annotation
    * @return the latest annotation for the given student work and annotation type
    */
-  getLatestAnnotationByStudentWorkIdAndType(studentWorkId, type) {
-    for (let a = this.annotations.length - 1; a >= 0; a--) {
-      const annotation = this.annotations[a];
-
-      if (annotation != null) {
-        if (studentWorkId == annotation.studentWorkId && type == annotation.type) {
-          /*
-           * we have found an annotation with the given student work
-           * id and annotation type
-           */
-          return annotation;
-        }
-      }
-    }
-    return null;
+  getLatestAnnotationByStudentWorkIdAndType(studentWorkId: number, type: string): Annotation {
+    return (
+      this.annotations
+        .filter(
+          (annotation) => annotation.studentWorkId === studentWorkId && annotation.type === type
+        )
+        .at(-1) || null
+    );
   }
 
   /**
@@ -667,38 +651,8 @@ export class AnnotationService {
    * @param studentWorkId the student work id
    * @return array of annotations for the given student work
    */
-  getAnnotationsByStudentWorkId(studentWorkId) {
-    let annotations = [];
-    for (let annotation of this.annotations) {
-      if (annotation && studentWorkId == annotation.studentWorkId) {
-        annotations.push(annotation);
-      }
-    }
-    return annotations;
-  }
-
-  getAverageAutoScore(nodeId, componentId, periodId = -1, type = null) {
-    let totalScoreSoFar = 0;
-    let annotationsCounted = 0;
-    for (let annotation of this.getAllLatestScoreAnnotations(nodeId, componentId, periodId)) {
-      if (
-        annotation.nodeId === nodeId &&
-        annotation.componentId === componentId &&
-        (periodId === -1 || annotation.periodId === periodId)
-      ) {
-        let score = null;
-        if (type != null) {
-          score = this.getSubScore(annotation, type);
-        } else {
-          score = this.getScoreFromAnnotation(annotation);
-        }
-        if (score != null) {
-          totalScoreSoFar += score;
-          annotationsCounted++;
-        }
-      }
-    }
-    return totalScoreSoFar / annotationsCounted;
+  getAnnotationsByStudentWorkId(studentWorkId: number): Annotation[] {
+    return this.annotations.filter((annotation) => annotation.studentWorkId === studentWorkId);
   }
 
   getAllLatestScoreAnnotations(nodeId, componentId, periodId) {
@@ -719,19 +673,6 @@ export class AnnotationService {
       }
     }
     return latestScoreAnnotations;
-  }
-
-  getScoreFromAnnotation(annotation) {
-    return annotation.data.value;
-  }
-
-  getSubScore(annotation, type) {
-    for (let score of annotation.data.scores) {
-      if (score.id === type) {
-        return score.score;
-      }
-    }
-    return null;
   }
 
   broadcastAnnotationSavedToServer(annotation: Annotation): void {
