@@ -70,10 +70,11 @@ export class NodeInfoComponent {
   private hasScoreAnnotation(nodeId: string, componentId: string, periodId: number): boolean {
     return this.annotationService
       .getAnnotationsByNodeIdComponentId(nodeId, componentId)
-      .some((annotation) => {
-        isMatchingPeriods(annotation.periodId, periodId) &&
-          ['score', 'autoScore'].includes(annotation.type);
-      });
+      .some(
+        (annotation) =>
+          isMatchingPeriods(annotation.periodId, periodId) &&
+          ['score', 'autoScore'].includes(annotation.type)
+      );
   }
 
   private componentHasCorrectAnswer(component: any): boolean {
