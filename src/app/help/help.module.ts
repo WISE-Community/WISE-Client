@@ -4,8 +4,8 @@ import { HelpComponent } from './help.component';
 import { HelpRoutingModule } from './help-routing.module';
 import { SharedModule } from '../modules/shared/shared.module';
 import { GettingStartedComponent } from './getting-started/getting-started.component';
-import { TeacherFaqComponent } from './teacher-faq/teacher-faq.component';
-import { StudentFaqComponent } from './student-faq/student-faq.component';
+import { TeacherFaqComponent } from './faq/teacher-faq/teacher-faq.component';
+import { StudentFaqComponent } from './faq/student-faq/student-faq.component';
 import { HelpHomeComponent } from './help-home/help-home.component';
 
 @NgModule({
