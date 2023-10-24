@@ -52,6 +52,7 @@ export class ProjectAuthoringComponent {
   private refreshProject(): void {
     this.projectService.parseProject();
     this.items = this.projectService.getNodesInOrder();
+    this.items.shift(); // remove the 'group0' master root node from consideration
     this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
@@ -61,14 +62,6 @@ export class ProjectAuthoringComponent {
 
   protected previewProject(): void {
     window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
-  }
-
-  protected getNodePositionById(nodeId: string): string {
-    return this.projectService.getNodePositionById(nodeId);
-  }
-
-  protected getNodeTitle(nodeId: string): string {
-    return this.projectService.getNodeTitle(nodeId);
   }
 
   protected isGroupNode(nodeId: string): boolean {
@@ -153,10 +146,6 @@ export class ProjectAuthoringComponent {
     return this.projectService.isNodeInAnyBranchPath(nodeId);
   }
 
-  /**
-   * Temporarily highlight the new nodes to draw attention to them
-   * @param newNodes the new nodes to highlight
-   */
   private temporarilyHighlightNewNodes(newNodes = []): void {
     if (newNodes.length > 0) {
       setTimeout(() => {
@@ -200,7 +189,7 @@ export class ProjectAuthoringComponent {
    * The checkbox for a node was clicked. We do not allow selecting a mix of group and step nodes.
    * If any group nodes are selected, disable all step node checkboxes, and vise-versa.
    */
-  protected selectNode(): void {
+  protected selectNode($event: Event): void {
     const checkedNodes = this.items
       .concat(Object.values(this.idToNode))
       .filter((item) => item.checked);
@@ -211,6 +200,7 @@ export class ProjectAuthoringComponent {
       this.groupNodeSelected = this.isGroupNode(checkedNodes[0].id);
       this.stepNodeSelected = !this.groupNodeSelected;
     }
+    $event.stopPropagation();
   }
 
   protected isBranchPoint(nodeId: string): boolean {
