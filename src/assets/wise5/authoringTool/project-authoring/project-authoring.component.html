@@ -1,147 +1,137 @@
-<div class="project-content">
-  <div fxLayout="row wrap" fxLayoutGap="15px">
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="addNewLesson()"
-      [disabled]="stepNodeSelected || groupNodeSelected"
-      matTooltip="Add New Lesson"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>queue</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="addNewStep()"
-      [disabled]="stepNodeSelected || groupNodeSelected"
-      matTooltip="Add New Step"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>add_box</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="chooseLocation(false)"
-      [disabled]="!hasSelectedNodes()"
-      matTooltip="Move"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>redo</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="chooseLocation(true)"
-      [disabled]="!hasSelectedStepsOnly()"
-      matTooltip="Copy"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>content_copy</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="deleteSelectedNodes()"
-      [disabled]="!hasSelectedNodes()"
-      matTooltip="Delete"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>delete</mat-icon>
-    </button>
-  </div>
+<div class="project-content" fxLayout="row wrap" fxLayoutGap="15px">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="addNewLesson()"
+    [disabled]="stepNodeSelected || groupNodeSelected"
+    matTooltip="Add New Lesson"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>queue</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="addNewStep()"
+    [disabled]="stepNodeSelected || groupNodeSelected"
+    matTooltip="Add New Step"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>add_box</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="chooseLocation(false)"
+    [disabled]="!hasSelectedNodes()"
+    matTooltip="Move"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>redo</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="chooseLocation(true)"
+    [disabled]="!hasSelectedStepsOnly()"
+    matTooltip="Copy"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>content_copy</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="deleteSelectedNodes()"
+    [disabled]="!hasSelectedNodes()"
+    matTooltip="Delete"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>delete</mat-icon>
+  </button>
 </div>
 <div class="all-nodes-div">
-  <ng-container *ngFor="let item of items">
-    <div *ngIf="item.order !== 0" class="projectItem">
-      <div
-        id="{{ item.key }}"
-        fxLayout="row"
-        fxLayoutAlign="start center"
-        [ngClass]="{
-          groupHeader: isGroupNode(item.key),
-          stepHeader: !isGroupNode(item.key),
-          branchPathStepHeader: isNodeInAnyBranchPath(item.key) && !isGroupNode(item.key)
-        }"
-        [ngStyle]="{ 'background-color': getStepBackgroundColor(item.key) }"
+  <div class="projectItem" *ngFor="let item of items">
+    <div
+      id="{{ item.key }}"
+      fxLayoutAlign="start center"
+      class="pointer"
+      [ngClass]="{
+        groupHeader: isGroupNode(item.key),
+        stepHeader: !isGroupNode(item.key),
+        branchPathStepHeader: isNodeInAnyBranchPath(item.key) && !isGroupNode(item.key)
+      }"
+      [ngStyle]="{ 'background-color': getStepBackgroundColor(item.key) }"
+      (click)="nodeClicked(item.key)"
+    >
+      <mat-checkbox
+        color="primary"
+        [(ngModel)]="item.checked"
+        (click)="selectNode($event)"
+        [disabled]="
+          (isGroupNode(item.key) && stepNodeSelected) ||
+          (!isGroupNode(item.key) && groupNodeSelected)
+        "
+        aria-label="Select lesson or step"
+        i18n-aria-label
       >
-        <div>
-          <mat-checkbox
-            color="primary"
-            [(ngModel)]="item.checked"
-            (ngModelChange)="selectNode()"
-            [disabled]="
-              (isGroupNode(item.key) && stepNodeSelected) ||
-              (!isGroupNode(item.key) && groupNodeSelected)
-            "
-            aria-label="{{ getNodePositionById(item.key) }} {{ getNodeTitle(item.key) }}"
+      </mat-checkbox>
+      <div class="projectItemTitleDiv" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <node-icon-and-title [nodeId]="item.key" [showPosition]="true"></node-icon-and-title>
+        <p *ngIf="!isGroupNode(item.key)" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <mat-icon
+            *ngIf="isBranchPoint(item.key)"
+            class="rotate-180"
+            (click)="branchIconClicked(item.key); $event.stopPropagation()"
+            matTooltip="Branch point with {{ getNumberOfBranchPaths(item.key) }} paths based on {{
+              getBranchCriteriaDescription(item.key)
+            }}"
+            matTooltipPosition="right"
+            i18n-matTooltip
+            >call_split</mat-icon
           >
-          </mat-checkbox>
-        </div>
-        <div
-          class="projectItemTitleDiv pointer"
-          fxLayoutAlign="start center"
-          fxLayoutGap="10px"
-          (click)="nodeClicked(item.key)"
-        >
-          <node-icon-and-title [nodeId]="item.key" [showPosition]="true"></node-icon-and-title>
-          <p *ngIf="!isGroupNode(item.key)" fxLayoutAlign="start center" fxLayoutGap="10px">
-            <mat-icon
-              *ngIf="isBranchPoint(item.key)"
-              class="rotate-180"
-              (click)="branchIconClicked(item.key); $event.stopPropagation()"
-              matTooltip="Branch point with {{ getNumberOfBranchPaths(item.key) }} paths based on {{
-                getBranchCriteriaDescription(item.key)
-              }}"
-              matTooltipPosition="right"
-              i18n-matTooltip
-              >call_split</mat-icon
-            >
-            <mat-icon
-              *ngIf="nodeHasConstraint(item.key) && getNumberOfConstraintsOnNode(item.key) == 1"
-              (click)="constraintIconClicked(item.key); $event.stopPropagation()"
-              matTooltip="{{ getNumberOfConstraintsOnNode(item.key) }} Constraint\n\n{{
-                getConstraintDescriptions(item.key)
-              }}"
-              matTooltipPosition="right"
-              i18n-matTooltip
-              >block</mat-icon
-            >
-            <mat-icon
-              *ngIf="nodeHasConstraint(item.key) && getNumberOfConstraintsOnNode(item.key) > 1"
-              (click)="constraintIconClicked(item.key); $event.stopPropagation()"
-              matTooltip="{{ getNumberOfConstraintsOnNode(item.key) }} Constraints\n\n{{
-                getConstraintDescriptions(item.key)
-              }}"
-              matTooltipPosition="right"
-              i18n-matTooltip
-              >block</mat-icon
-            >
-            <mat-icon
-              *ngIf="nodeHasRubric(item.key)"
-              matTooltip="Has Rubric"
-              matTooltipPosition="right"
-              i18n-matTooltip
-              >message</mat-icon
-            >
-          </p>
-        </div>
+          <mat-icon
+            *ngIf="nodeHasConstraint(item.key) && getNumberOfConstraintsOnNode(item.key) == 1"
+            (click)="constraintIconClicked(item.key); $event.stopPropagation()"
+            matTooltip="{{ getNumberOfConstraintsOnNode(item.key) }} Constraint\n\n{{
+              getConstraintDescriptions(item.key)
+            }}"
+            matTooltipPosition="right"
+            i18n-matTooltip
+            >block</mat-icon
+          >
+          <mat-icon
+            *ngIf="nodeHasConstraint(item.key) && getNumberOfConstraintsOnNode(item.key) > 1"
+            (click)="constraintIconClicked(item.key); $event.stopPropagation()"
+            matTooltip="{{ getNumberOfConstraintsOnNode(item.key) }} Constraints\n\n{{
+              getConstraintDescriptions(item.key)
+            }}"
+            matTooltipPosition="right"
+            i18n-matTooltip
+            >block</mat-icon
+          >
+          <mat-icon
+            *ngIf="nodeHasRubric(item.key)"
+            matTooltip="Has Rubric"
+            matTooltipPosition="right"
+            i18n-matTooltip
+            >message</mat-icon
+          >
+        </p>
       </div>
     </div>
-  </ng-container>
+  </div>
   <div>
     <h6 class="unused-header">Unused Lessons</h6>
     <div *ngIf="getNumberOfInactiveGroups() === 0" i18n>There are no Unused Lessons</div>
     <ng-container *ngFor="let inactiveNode of inactiveGroupNodes">
       <div *ngIf="isGroupNode(inactiveNode.id)" id="{{ inactiveNode.id }}">
         <div
-          fxLayout="row"
           fxLayoutAlign="start center"
           [ngClass]="{
             groupHeader: isGroupNode(inactiveNode.id),
@@ -149,53 +139,45 @@
             branchPathStepHeader:
               isNodeInAnyBranchPath(inactiveNode.id) && !isGroupNode(inactiveNode.id)
           }"
-          class="projectItem"
+          class="pointer projectItem"
+          (click)="nodeClicked(inactiveNode.id)"
         >
-          <div>
-            <mat-checkbox
-              color="primary"
-              [(ngModel)]="inactiveNode.checked"
-              (ngModelChange)="selectNode()"
-              [disabled]="stepNodeSelected"
-              aria-label="{{ getNodeTitle(inactiveNode.id) }}"
-            >
-            </mat-checkbox>
-          </div>
-          <div
-            class="projectItemTitleDiv pointer"
-            fxLayoutAlign="start center"
-            (click)="nodeClicked(inactiveNode.id)"
+          <mat-checkbox
+            color="primary"
+            [(ngModel)]="inactiveNode.checked"
+            (click)="selectNode($event)"
+            [disabled]="stepNodeSelected"
+            aria-label="Select lesson"
+            i18n-aria-label
           >
+          </mat-checkbox>
+          <div class="projectItemTitleDiv" fxLayoutAlign="start center">
             <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
           </div>
         </div>
         <ng-container *ngFor="let inactiveChildId of inactiveNode.ids">
           <div class="projectItem" id="{{ inactiveChildId }}">
             <div
-              fxLayout="row"
+              fxLayoutAlign="start center"
               [ngClass]="{
                 groupHeader: isGroupNode(inactiveChildId.id),
                 stepHeader: !isGroupNode(inactiveChildId.id),
                 branchPathStepHeader:
                   isNodeInAnyBranchPath(inactiveChildId.id) && !isGroupNode(inactiveChildId.id)
               }"
-              class="projectItem"
+              class="pointer projectItem"
+              (click)="nodeClicked(inactiveChildId)"
             >
-              <div>
-                <mat-checkbox
-                  color="primary"
-                  [(ngModel)]="idToNode[inactiveChildId].checked"
-                  (ngModelChange)="selectNode()"
-                  [disabled]="groupNodeSelected"
-                  aria-label="{{ getNodeTitle(inactiveChildId) }}"
-                >
-                </mat-checkbox>
-              </div>
-              <div
-                class="projectItemTitleDiv pointer"
-                fxLayoutAlign="start center"
-                (click)="nodeClicked(inactiveChildId)"
+              <mat-checkbox
+                color="primary"
+                [(ngModel)]="idToNode[inactiveChildId].checked"
+                (click)="selectNode($event)"
+                [disabled]="groupNodeSelected"
+                aria-label="Select step"
+                i18n-aria-label
               >
+              </mat-checkbox>
+              <div class="projectItemTitleDiv" fxLayoutAlign="start center">
                 <node-icon-and-title [nodeId]="inactiveChildId"></node-icon-and-title>
               </div>
             </div>
@@ -209,32 +191,29 @@
       <ng-container *ngFor="let inactiveNode of inactiveStepNodes">
         <div
           *ngIf="!isGroupNode(inactiveNode.id) && getParentGroup(inactiveNode.id) == null"
-          class="projectItem"
+          class="pointer projectItem"
+          id="{{ inactiveNode.id }}"
         >
           <div
-            fxLayout="row"
+            fxLayoutAlign="start center"
             [ngClass]="{
               groupHeader: isGroupNode(inactiveNode.id),
               stepHeader: !isGroupNode(inactiveNode.id),
               branchPathStepHeader:
                 isNodeInAnyBranchPath(inactiveNode.id) && !isGroupNode(inactiveNode.id)
             }"
+            (click)="nodeClicked(inactiveNode.id)"
           >
-            <div>
-              <mat-checkbox
-                color="primary"
-                [(ngModel)]="inactiveNode.checked"
-                (ngModelChange)="selectNode()"
-                [disabled]="groupNodeSelected"
-                aria-label="{{ getNodeTitle(inactiveNode.id) }}"
-              >
-              </mat-checkbox>
-            </div>
-            <div
-              class="projectItemTitleDiv pointer"
-              fxLayoutAlign="start center"
-              (click)="nodeClicked(inactiveNode.id)"
+            <mat-checkbox
+              color="primary"
+              [(ngModel)]="inactiveNode.checked"
+              (click)="selectNode($event)"
+              [disabled]="groupNodeSelected"
+              aria-label="Select step"
+              i18n-aria-label
             >
+            </mat-checkbox>
+            <div class="projectItemTitleDiv" fxLayoutAlign="start center">
               <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
             </div>
           </div>
@@ -243,4 +222,3 @@
     </div>
   </div>
 </div>
-<div id="bottom"></div>
