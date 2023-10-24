@@ -51,41 +51,34 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
   private generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {
     const headerRow = this.defaultColumnNames.map((columnName: string) => columnName);
     const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
-    this.insertPromptColumnIfNecessary(headerRow, component);
-    this.insertPrePromptColumnIfNecessary(headerRow, component);
-    this.insertDynamicPromptColumnIfNecessary(headerRow, component);
-    this.insertPostPromptColumnIfNecessary(headerRow, component);
-    this.insertQuestionColumnsIfNecessary(headerRow, componentStates);
-    this.insertQuestionUsedColumnIfNecessary(headerRow, component);
+    this.insertPromptColumns(headerRow, component);
+    this.insertQuestionColumns(headerRow, component, componentStates);
     this.populateColumnNameMappings(headerRow, columnNameToNumber);
     return headerRow;
   }
 
-  private insertPromptColumnIfNecessary(headerRow: string[], component: any): void {
+  private insertPromptColumns(headerRow: string[], component: any): void {
     if (!this.hasDynamicPrompt(component)) {
       this.insertBeforeResponseColumn(headerRow, 'Prompt');
     }
-  }
-
-  private insertPrePromptColumnIfNecessary(headerRow: string[], component: any): void {
     if (this.hasPrePrompt(component)) {
       this.insertBeforeResponseColumn(headerRow, 'Pre Prompt');
     }
-  }
-
-  private insertDynamicPromptColumnIfNecessary(headerRow: string[], component: any): void {
     if (this.hasDynamicPrompt(component)) {
       this.insertBeforeResponseColumn(headerRow, 'Dynamic Prompt');
     }
-  }
-
-  private insertPostPromptColumnIfNecessary(headerRow: string[], component: any): void {
     if (this.hasPostPrompt(component)) {
       this.insertBeforeResponseColumn(headerRow, 'Post Prompt');
     }
   }
 
-  private insertQuestionUsedColumnIfNecessary(headerRow: string[], component: any): void {
+  private insertQuestionColumns(headerRow: string[], component: any, componentStates: any[]): void {
+    const maxQuestions = this.getMaxQuestionBankCount(componentStates);
+    if (maxQuestions > 0) {
+      for (let q = 0; q < maxQuestions; q++) {
+        headerRow.splice(headerRow.indexOf('Response'), 0, `Question ${q + 1}`);
+      }
+    }
     if (this.isClickToAddEnabled(component)) {
       this.insertBeforeResponseColumn(headerRow, 'Question Used');
     }
@@ -113,15 +106,6 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
 
   private isClickToAddEnabled(component: any): boolean {
     return component.questionBank?.clickToAddEnabled;
-  }
-
-  private insertQuestionColumnsIfNecessary(headerRow: string[], componentStates: any[]): void {
-    const maxQuestions = this.getMaxQuestionBankCount(componentStates);
-    if (maxQuestions > 0) {
-      for (let q = 0; q < maxQuestions; q++) {
-        headerRow.splice(headerRow.indexOf('Response'), 0, `Question ${q + 1}`);
-      }
-    }
   }
 
   private getMaxQuestionBankCount(componentStates: any[]): number {
