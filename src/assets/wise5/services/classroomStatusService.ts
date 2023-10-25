@@ -65,19 +65,6 @@ export class ClassroomStatusService {
     return null;
   }
 
-  getStudentStatusForWorkgroupId0(workgroupId: number): any {
-    const studentStatuses = this.getStudentStatuses();
-    for (let tempStudentStatus of studentStatuses) {
-      if (tempStudentStatus != null) {
-        const tempWorkgroupId = tempStudentStatus.workgroupId;
-        if (workgroupId === tempWorkgroupId) {
-          return tempStudentStatus;
-        }
-      }
-    }
-    return null;
-  }
-
   getStudentStatusForWorkgroupId(workgroupId: number): any {
     return (
       this.getStudentStatuses().find(
