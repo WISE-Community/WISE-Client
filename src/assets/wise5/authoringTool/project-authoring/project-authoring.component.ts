@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ConfigService } from '../../services/configService';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
@@ -25,7 +24,6 @@ export class ProjectAuthoringComponent {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
-    private configService: ConfigService,
     private deleteNodeService: DeleteNodeService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
@@ -58,10 +56,6 @@ export class ProjectAuthoringComponent {
     this.inactiveNodes = this.projectService.getInactiveNodes();
     this.idToNode = this.projectService.getIdToNode();
     this.unselectAllItems();
-  }
-
-  protected previewProject(): void {
-    window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
   }
 
   protected isGroupNode(nodeId: string): boolean {
