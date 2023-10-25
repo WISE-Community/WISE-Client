@@ -4,6 +4,8 @@ import { AnnotationService } from './annotationService';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
 import { Observable, Subject, tap } from 'rxjs';
+import { NodeProgress } from '../common/NodeProgress';
+import { ProjectCompletion } from '../common/ProjectCompletion';
 
 @Injectable()
 export class ClassroomStatusService {
@@ -63,7 +65,7 @@ export class ClassroomStatusService {
     return null;
   }
 
-  getStudentStatusForWorkgroupId(workgroupId: number): any {
+  getStudentStatusForWorkgroupId0(workgroupId: number): any {
     const studentStatuses = this.getStudentStatuses();
     for (let tempStudentStatus of studentStatuses) {
       if (tempStudentStatus != null) {
@@ -74,6 +76,14 @@ export class ClassroomStatusService {
       }
     }
     return null;
+  }
+
+  getStudentStatusForWorkgroupId(workgroupId: number): any {
+    return (
+      this.getStudentStatuses().find(
+        (studentStatus) => studentStatus.workgroupId === workgroupId
+      ) || null
+    );
   }
 
   hasStudentStatus(workgroupId: number): boolean {
@@ -96,77 +106,23 @@ export class ClassroomStatusService {
     }
   }
 
-  /**
-   * Get the student project completion data by workgroup id
-   * @param workgroupId the workgroup id
-   * @param excludeNonWorkNodes boolean whether to exclude nodes without
-   * @returns object with completed, total, and percent completed (integer
-   * between 0 and 100)
-   */
-  getStudentProjectCompletion(workgroupId, excludeNonWorkNodes) {
-    let completion = {
-      totalItems: 0,
-      completedItems: 0,
-      completionPct: 0
-    };
-
-    // get the student status for the workgroup
-    let studentStatus = this.getStudentStatusForWorkgroupId(workgroupId);
-
+  getStudentProjectCompletion(workgroupId: number): ProjectCompletion {
+    let completion: ProjectCompletion = new ProjectCompletion();
+    const studentStatus = this.getStudentStatusForWorkgroupId(workgroupId);
     if (studentStatus) {
-      let projectCompletion = studentStatus.projectCompletion;
-
-      if (projectCompletion) {
-        if (excludeNonWorkNodes) {
-          // we're only looking for completion of nodes with work
-          let completionPctWithWork = projectCompletion.completionPctWithWork;
-
-          if (completionPctWithWork) {
-            completion.totalItems = projectCompletion.totalItemsWithWork;
-            completion.completedItems = projectCompletion.completedItemsWithWork;
-            completion.completionPct = projectCompletion.completionPctWithWork;
-          } else {
-            /*
-             * we have a legacy projectCompletion object that only includes information for all nodes
-             * so we need to calculate manually
-             */
-            completion = this.getNodeCompletion('group0', -1, workgroupId, true);
-          }
-        } else {
-          completion = projectCompletion;
-        }
+      const projectCompletion = studentStatus.projectCompletion;
+      const completionPctWithWork = projectCompletion.completionPctWithWork;
+      if (completionPctWithWork) {
+        completion.totalItems = projectCompletion.totalItemsWithWork;
+        completion.completedItems = projectCompletion.completedItemsWithWork;
+        completion.completionPct = projectCompletion.completionPctWithWork;
+      } else {
+        // we have a legacy projectCompletion object that only includes information for all nodes so
+        // we need to calculate completion manually
+        completion = this.getNodeCompletion('group0', -1, workgroupId, true);
       }
     }
     return completion;
-  }
-
-  /**
-   * Get the workgroups on a node in the given period
-   * @param nodeId the node id
-   * @param periodId the period id. pass in -1 to select all periods.
-   * @returns an array of workgroup ids on a node in a period
-   */
-  getWorkgroupIdsOnNode(nodeId, periodId) {
-    let workgroupIds = [];
-    let studentStatuses = this.studentStatuses;
-    for (let studentStatus of studentStatuses) {
-      if (studentStatus != null) {
-        if (periodId === -1 || periodId === studentStatus.periodId) {
-          let currentNodeId = studentStatus.currentNodeId;
-          if (nodeId === currentNodeId) {
-            workgroupIds.push(studentStatus.workgroupId);
-          } else if (this.projectService.isGroupNode(nodeId)) {
-            let currentNode = this.projectService.getNodeById(currentNodeId);
-            let group = this.projectService.getNodeById(nodeId);
-
-            if (this.projectService.isNodeDescendentOfGroup(currentNode, group)) {
-              workgroupIds.push(studentStatus.workgroupId);
-            }
-          }
-        }
-      }
-    }
-    return workgroupIds;
   }
 
   /**

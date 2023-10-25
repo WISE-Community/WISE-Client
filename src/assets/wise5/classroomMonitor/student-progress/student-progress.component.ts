@@ -53,7 +53,9 @@ export class StudentProgressComponent implements OnInit {
 
   private initializeStudents(): void {
     this.teams = [];
-    const workgroups = this.configService.getClassmateUserInfos();
+    const workgroups = this.configService
+      .getClassmateUserInfos()
+      .filter((workgroup: any) => workgroup.workgroupId != null);
     for (const workgroup of workgroups) {
       const workgroupId = workgroup.workgroupId;
       const displayNames = this.configService.getDisplayUsernamesByWorkgroupId(workgroupId);
@@ -99,7 +101,7 @@ export class StudentProgressComponent implements OnInit {
    * @return object with completed, total, and percent completed (integer between 0 and 100)
    */
   private getStudentProjectCompletion(workgroupId: number): any {
-    return this.classroomStatusService.getStudentProjectCompletion(workgroupId, true);
+    return this.classroomStatusService.getStudentProjectCompletion(workgroupId);
   }
 
   private getStudentTotalScore(workgroupId: number): number {
