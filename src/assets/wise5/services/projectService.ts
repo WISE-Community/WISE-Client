@@ -772,23 +772,29 @@ export class ProjectService {
    * Retrieves the project JSON from Config.projectURL and returns it.
    * If Config.projectURL is undefined, returns null.
    */
-  retrieveProject(parseProject: boolean = true): any {
-    let projectURL = this.configService.getConfigParam('projectURL');
-    if (projectURL == null) {
-      return null;
-    }
-    const headers = new HttpHeaders().set('cache-control', 'no-cache');
-    return this.http.get(projectURL, { headers: headers }).pipe(
+  retrieveProject(): Observable<any> {
+    return this.makeProjectRequest().pipe(
       tap((projectJSON: any) => {
-        if (parseProject) {
-          this.setProject(projectJSON);
-        } else {
-          this.project = projectJSON;
-          this.metadata = projectJSON.metadata;
-        }
+        this.setProject(projectJSON);
         return projectJSON;
       })
     );
+  }
+
+  retrieveProjectWithoutParsing(): Observable<any> {
+    return this.makeProjectRequest().pipe(
+      tap((projectJSON: any) => {
+        this.project = projectJSON;
+        this.metadata = projectJSON.metadata;
+        return projectJSON;
+      })
+    );
+  }
+
+  private makeProjectRequest(): Observable<any> {
+    const projectURL = this.configService.getConfigParam('projectURL');
+    const headers = new HttpHeaders().set('cache-control', 'no-cache');
+    return this.http.get(projectURL, { headers: headers });
   }
 
   getThemePath(): string {
