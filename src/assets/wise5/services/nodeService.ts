@@ -88,33 +88,18 @@ export class NodeService {
    * Get the previous node in the project sequence
    * @param currentId (optional)
    */
-  getPrevNodeId(currentId?) {
+  getPrevNodeId(currentId?: string): string {
     let prevNodeId = null;
-    let currentNodeId = null;
-    const mode = this.ConfigService.getMode();
-    if (currentId) {
-      currentNodeId = currentId;
-    } else {
-      let currentNode = null;
-      currentNode = this.DataService.getCurrentNode();
-      if (currentNode) {
-        currentNodeId = currentNode.id;
-      }
-    }
+    const currentNodeId = currentId ?? this.DataService.getCurrentNodeId();
     if (currentNodeId) {
-      if (['classroomMonitor', 'author'].includes(mode)) {
-        let currentNodeOrder = this.ProjectService.getNodeOrderById(currentNodeId);
+      if (['author', 'classroomMonitor'].includes(this.ConfigService.getMode())) {
+        const currentNodeOrder = this.ProjectService.getNodeOrderById(currentNodeId);
         if (currentNodeOrder) {
-          let prevNodeOrder = currentNodeOrder - 1;
-          let prevId = this.ProjectService.getNodeIdByOrder(prevNodeOrder);
+          const prevId = this.ProjectService.getNodeIdByOrder(currentNodeOrder - 1);
           if (prevId) {
-            if (this.ProjectService.isApplicationNode(prevId)) {
-              // node is a step, so set it as the next node
-              prevNodeId = prevId;
-            } else if (this.ProjectService.isGroupNode(prevId)) {
-              // node is an activity, so get next nodeId
-              prevNodeId = this.getPrevNodeId(prevId);
-            }
+            prevNodeId = this.ProjectService.isApplicationNode(prevId)
+              ? prevId
+              : this.getPrevNodeId(prevId);
           }
         }
       } else {
