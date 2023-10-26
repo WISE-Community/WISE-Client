@@ -63,7 +63,7 @@
       matTooltipPosition="above"
       i18n-matTooltip
     >
-      <mat-icon>visibility</mat-icon>
+      <mat-icon>preview</mat-icon>
     </button>
   </div>
   <div
@@ -82,13 +82,11 @@
         color="primary"
         *ngIf="importItem.node.type !== 'group'"
         (click)="previewImportNode(importItem.node)"
-        aria-label="Preview Step"
-        i18n-aria-label
         matTooltip="Preview Step"
         matTooltipPosition="above"
         i18n-matTooltip
       >
-        <mat-icon>visibility</mat-icon>
+        <mat-icon>preview</mat-icon>
       </button>
     </div>
     <div
@@ -107,13 +105,11 @@
             color="primary"
             *ngIf="importItem.node.type !== 'group'"
             (click)="previewImportNode(importItem.node)"
-            aria-label="Preview Component"
-            i18n-aria-label
             matTooltip="Preview Component"
             matTooltipPosition="above"
             i18n-matTooltip
           >
-            <mat-icon>visibility</mat-icon>
+            <mat-icon>preview</mat-icon>
           </button>
         </div>
       </div>
