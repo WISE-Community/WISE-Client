@@ -70,8 +70,7 @@ export class StudentGradingComponent implements OnInit {
     this.maxScore = maxScore ? maxScore : 0;
     this.totalScore = this.dataService.getTotalScoreByWorkgroupId(this.workgroupId);
     this.projectCompletion = this.classroomStatusService.getStudentProjectCompletion(
-      this.workgroupId,
-      true
+      this.workgroupId
     );
     this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds();
     this.setNodesById();
