@@ -133,7 +133,7 @@ export class StudentGradingComponent implements OnInit {
   private subscribeToCurrentWorkgroupChanged(): void {
     this.subscriptions.add(
       this.dataService.currentWorkgroupChanged$
-        .pipe(filter((workgroup) => workgroup != null))
+        .pipe(filter(({ currentWorkgroup }) => currentWorkgroup != null))
         .subscribe(({ currentWorkgroup }) => {
           const workgroupId = currentWorkgroup.workgroupId;
           if (this.workgroupId !== workgroupId) {
