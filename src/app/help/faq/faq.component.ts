@@ -20,8 +20,4 @@ export abstract class FaqComponent implements OnInit {
   ngAfterViewInit(): void {
     document.getElementsByTagName('app-help')[0]?.scrollIntoView();
   }
-
-  protected scrollTo(id: string): void {
-    document.getElementById(id).scrollIntoView();
-  }
 }
