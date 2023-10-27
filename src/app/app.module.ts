@@ -61,7 +61,8 @@ export function initialize(
     RecaptchaV3Module,
     RouterModule.forRoot([], {
       scrollPositionRestoration: 'enabled',
-      anchorScrolling: 'enabled'
+      anchorScrolling: 'enabled',
+      onSameUrlNavigation: 'reload'
     })
   ],
   providers: [
