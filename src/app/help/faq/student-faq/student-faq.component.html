@@ -1,17 +1,19 @@
-<div id="studentFAQTop" class="content-block">
-  <h1 fxLayoutAlign="left center">
-    <mat-icon class="title-icon">face</mat-icon><span i18n>Student Frequently Asked Questions</span>
+<div class="content-block">
+  <h1 fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon>face</mat-icon><span i18n>Student Frequently Asked Questions</span>
   </h1>
-  <hr />
-  <h2 id="generalQuestions" i18n>Table of Contents</h2>
-  <p class="indented-text">
-    <a (click)="scrollTo('generalQuestions')" class="link" i18n>General Questions</a>
-  </p>
-  <p class="indented-text">
-    <a (click)="scrollTo('technicalQuestions')" class="link" i18n>Technical Questions</a>
-  </p>
-  <hr />
-  <h2 i18n>General Questions</h2>
+  <mat-divider></mat-divider>
+  <h2 i18n>Table of Contents</h2>
+  <ul>
+    <li>
+      <a routerLink="." fragment="general" i18n>General Questions</a>
+    </li>
+    <li>
+      <a routerLink="." fragment="technical" i18n>Technical Questions</a>
+    </li>
+  </ul>
+  <mat-divider></mat-divider>
+  <h2 id="general" i18n>General Questions</h2>
   <h3 i18n>How do I create an account?</h3>
   <ol>
     <li i18n>Go to the <a href="{{ contextPath }}/join" target="_blank">Register</a> page.</li>
@@ -49,14 +51,14 @@
     <li i18n>Choose your period.</li>
     <li i18n>Click "Add".</li>
     <li i18n>The run will be added to your list of runs.</li>
-    <li id="technicalQuestions" i18n>Click "Launch" to open the project.</li>
+    <li i18n>Click "Launch" to open the project.</li>
   </ol>
   <h3 i18n>I chose the wrong period, how can I change it?</h3>
   <ul>
     <li i18n>Only your teacher can change your period. Please ask them for assistance.</li>
   </ul>
-  <hr />
-  <h2 i18n>Technical Questions</h2>
+  <mat-divider></mat-divider>
+  <h2 id="technical" i18n>Technical Questions</h2>
   <h3 i18n>The WISE web site won't load on my web browser. What do I do?</h3>
   <ul>
     <li i18n>
@@ -76,7 +78,7 @@
     </li>
   </ul>
   <h3 i18n>Can I use WISE in another language?</h3>
-  <span class="indented-text" i18n>Yes!</span>
+  <p>Yes!</p>
   <ol>
     <li i18n>Sign into WISE with your student account.</li>
     <li i18n>
