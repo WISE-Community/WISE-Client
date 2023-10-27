@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AnnotationService } from './annotationService';
 import { ProjectService } from './projectService';
 import { MilestoneCriteriaEvaluator } from '../classroomMonitor/milestones/milestoneCriteriaEvaluator';
+import { Annotation } from '../common/Annotation';
+import { isMatchingPeriods } from '../common/period/period';
 
 @Injectable()
 export class MilestoneReportService {
@@ -72,11 +74,7 @@ export class MilestoneReportService {
     reportSettings: any
   ) {
     const aggregate = {};
-    const scoreAnnotations = this.annotationService.getAllLatestScoreAnnotations(
-      nodeId,
-      componentId,
-      periodId
-    );
+    const scoreAnnotations = this.getAllLatestScoreAnnotations(nodeId, componentId, periodId);
     for (const scoreAnnotation of scoreAnnotations) {
       if (scoreAnnotation.type === 'autoScore') {
         this.addDataToAggregate(aggregate, scoreAnnotation, reportSettings);
@@ -98,6 +96,29 @@ export class MilestoneReportService {
       }
     }
     return aggregate;
+  }
+
+  private getAllLatestScoreAnnotations(
+    nodeId: string,
+    componentId: string,
+    periodId: number
+  ): Annotation[] {
+    return this.annotationService
+      .getAnnotationsByNodeIdComponentId(nodeId, componentId)
+      .filter(
+        (annotation) =>
+          isMatchingPeriods(annotation.periodId, periodId) &&
+          ['autoScore', 'score'].includes(annotation.type)
+      )
+      .reduceRight(
+        (latestAnnotations, annotation) =>
+          latestAnnotations.some(
+            (latestAnnotation) => latestAnnotation.toWorkgroupId === annotation.toWorkgroupId
+          )
+            ? latestAnnotations
+            : latestAnnotations.concat(annotation),
+        []
+      );
   }
 
   private mergeAutoScoreAndTeacherScore(

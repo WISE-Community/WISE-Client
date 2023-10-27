@@ -640,26 +640,6 @@ export class AnnotationService {
     return this.annotations.filter((annotation) => annotation.studentWorkId === studentWorkId);
   }
 
-  getAllLatestScoreAnnotations(nodeId, componentId, periodId) {
-    const workgroupIdsFound = {};
-    const latestScoreAnnotations = [];
-    for (let a = this.annotations.length - 1; a >= 0; a--) {
-      const annotation = this.annotations[a];
-      const workgroupId = annotation.toWorkgroupId;
-      if (
-        workgroupIdsFound[workgroupId] == null &&
-        nodeId === annotation.nodeId &&
-        componentId === annotation.componentId &&
-        (periodId === -1 || periodId === annotation.periodId) &&
-        ('score' === annotation.type || 'autoScore' === annotation.type)
-      ) {
-        workgroupIdsFound[workgroupId] = annotation;
-        latestScoreAnnotations.push(annotation);
-      }
-    }
-    return latestScoreAnnotations;
-  }
-
   broadcastAnnotationSavedToServer(annotation: Annotation): void {
     this.annotationSavedToServerSource.next(annotation);
   }
