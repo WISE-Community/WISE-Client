@@ -76,10 +76,10 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     const maxQuestions = this.getMaxQuestionBankCount(componentStates);
     if (maxQuestions > 0) {
       for (let q = 0; q < maxQuestions; q++) {
-        headerRow.splice(headerRow.indexOf('Response'), 0, `Question ${q + 1}`);
+        this.insertBeforeResponseColumn(headerRow, `Question ${q + 1}`);
       }
     }
-    if (this.isClickToAddEnabled(component)) {
+    if (this.isClickToUseEnabled(component)) {
       this.insertBeforeResponseColumn(headerRow, 'Question Used');
     }
   }
@@ -104,8 +104,8 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     return value != null && value !== '';
   }
 
-  private isClickToAddEnabled(component: any): boolean {
-    return component.questionBank?.clickToAddEnabled;
+  private isClickToUseEnabled(component: any): boolean {
+    return component.questionBank?.clickToUseEnabled;
   }
 
   private getMaxQuestionBankCount(componentStates: any[]): number {
@@ -248,7 +248,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     if (componentState.studentData.questionBank != null) {
       this.setQuestions(row, columnNameToNumber, componentState);
     }
-    if (this.isClickToAddEnabled(component)) {
+    if (this.isClickToUseEnabled(component)) {
       this.setColumnValue(
         row,
         columnNameToNumber,
