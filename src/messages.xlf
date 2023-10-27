@@ -3354,6 +3354,318 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="486c6addfeb93356cab8bbb37310c8f61534e1f2" datatype="html">
+        <source>Getting Started</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
+          <context context-type="linenumber">132</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">407</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d8a1b53c813ad335ed55f8201498c45af536f8b5" datatype="html">
+        <source>Creating an Account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e335c1909d4122bc81b461339b48f28e70d90593" datatype="html">
+        <source> All users must create their own account. Teachers must create a teacher account and students must create a student account. Users can create an account by going to the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ contextPath }}&quot; target=&quot;_blank&quot;&gt;"/>WISE Home Page<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and clicking on the <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ contextPath }}/join&quot; target=&quot;_blank&quot;&gt;"/>Register<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> link at the upper right of the screen. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">7,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8667ecd04a352367c4c964c92a7763320d3f8946" datatype="html">
+        <source>Here are instructions on how to create a teacher account.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2964f6a797ee681e920953a80029f041f0edc7bf" datatype="html">
+        <source>Go to the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ contextPath }}&quot; target=&quot;_blank&quot;&gt;"/>WISE Home Page<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c33845a66f745408b47fae2ec9b94afe98aeb00a" datatype="html">
+        <source> Click the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ contextPath }}/join&quot; target=&quot;_blank&quot;&gt;"/>Register<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> link at the upper right of the screen. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">17,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2e06e81d5bce0468d498f4f754a63511b54a31f1" datatype="html">
+        <source>Click on <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ contextPath }}/join/teacher&quot; target=&quot;_blank&quot;&gt;"/>Teacher<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="802cc87d8831d0d77405a7acd6d0ac904580d1f8" datatype="html">
+        <source>Choose to sign up with your email or with your Google Account.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="96dd8e77e6d9cc5a20a58f0e665033c9bbb453a2" datatype="html">
+        <source>Fill out the form and submit it.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a99a9e90d0e75bf537c04f38e7acbb345b5419d1" datatype="html">
+        <source> If you created an account using your email, you will be given a username that you will need to remember. Your username will be your first name and your last name with no space inbetween. There may be a number added at the end of your username if someone has the same name as you. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">24,28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
+          <context context-type="linenumber">23,27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">35,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="905ffa00030446fe94ad48b0690cf4c703ddf061" datatype="html">
+        <source>Using a WISE Unit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3a208598e3a63c1f1fce098a5b87f90366a8e106" datatype="html">
+        <source> To use a WISE unit with your class, you must first choose a unit to use and then set up a &quot;Run&quot; of that unit. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">32,35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b76ba9990938b43e176c04d0e0d9ba95aa6ee325" datatype="html">
+        <source>Here are instructions on how to set up a Run.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e9a22cb12f2c9f5db14a01d04ae6d9e829cd5b48" datatype="html">
+        <source>Sign in to WISE with your teacher account.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="95c22fc191e91241d3fe6293898fec4d41e20c7d" datatype="html">
+        <source>Click the &quot;Unit Library&quot; tab.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">201</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6aad599c3073e68956b4f15a368db489510bbe7e" datatype="html">
+        <source>Find a project that you would like to use with your class.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="034f8c49e52de836444ee0a380700af6068d299f" datatype="html">
+        <source>Click on the project to open the information for the project.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f5d3e0352ec003e7072916f913e6340c4e2d3613" datatype="html">
+        <source>Click the &quot;Use With Class&quot; button.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0b4cc6a461d3a489f1aad44dfcd492bc70cbac56" datatype="html">
+        <source>Choose the periods you will use the project in.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a4ddf0715f3033bce36442c01d5d193c0f27075a" datatype="html">
+        <source> Choose the number of students per team. Choosing 1-3 will allow students to work together in a team. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">44,47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">49,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="004911a5b952e535b79f805a8ecdd3902b787a3c" datatype="html">
+        <source> Choose the start date. Students will not be able to use the project until this date. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">48,50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">53,55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="de1a012e22926afd24e72b207b9ac213c07f1074" datatype="html">
+        <source>Click &quot;Create Run&quot;.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0c5a5bce36e8ec29c3ec29d0697113c7fda37b2a" datatype="html">
+        <source>The run will be created and added to your Teacher Home.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c9dcaa89a2617bf7e757cec50ad493ee24d99801" datatype="html">
+        <source> Copy the &quot;Access Code&quot; for the new run and write it down somewhere like on the white board. Students will need to use this access code to work on the run you created. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">53,56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">58,61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="688edac32995bc4fd9d4d04172c545200250a958" datatype="html">
+        <source>Teacher FAQ</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d8f48c61abfa7f1be0a4b4c00eca42c3c29f35be" datatype="html">
+        <source>Questions from teachers.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
+          <context context-type="linenumber">145</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="419c84ee97b4daf0f91e70af256dc7a4e8e11de8" datatype="html">
+        <source>Student FAQ</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">418</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5eef4cac2276bc97a3b1cc8a29b21436112bdaab" datatype="html">
+        <source>Questions from students.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
+          <context context-type="linenumber">420</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="3ba2943f558468dbbc717d0d93b708c05640f297" datatype="html">
         <source>Student Frequently Asked Questions</source>
         <context-group purpose="location">
@@ -3441,51 +3753,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">20</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="802cc87d8831d0d77405a7acd6d0ac904580d1f8" datatype="html">
-        <source>Choose to sign up with your email or with your Google Account.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">33</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="96dd8e77e6d9cc5a20a58f0e665033c9bbb453a2" datatype="html">
-        <source>Fill out the form and submit it.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="a99a9e90d0e75bf537c04f38e7acbb345b5419d1" datatype="html">
-        <source> If you created an account using your email, you will be given a username that you will need to remember. Your username will be your first name and your last name with no space inbetween. There may be a number added at the end of your username if someone has the same name as you. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
-          <context context-type="linenumber">23,27</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">35,39</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">24,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ae21d5a7a66ab2122f138b30d6aec4e8538ee94c" datatype="html">
@@ -3756,25 +4023,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">382,387</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="486c6addfeb93356cab8bbb37310c8f61534e1f2" datatype="html">
-        <source>Getting Started</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
-          <context context-type="linenumber">132</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">407</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
-          <context context-type="linenumber">18</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="0b66532dc98434ee7c1a4b609e3f3a7d49c23d60" datatype="html">
         <source>Information for new users.</source>
         <context-group purpose="location">
@@ -3788,36 +4036,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
           <context context-type="linenumber">20</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="688edac32995bc4fd9d4d04172c545200250a958" datatype="html">
-        <source>Teacher FAQ</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
-          <context context-type="linenumber">143</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">76</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="d8f48c61abfa7f1be0a4b4c00eca42c3c29f35be" datatype="html">
-        <source>Questions from teachers.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
-          <context context-type="linenumber">145</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">78</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
-          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="38e95ec15a2f0fb793f968881f7579478c680f40" datatype="html">
@@ -3883,131 +4101,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">41</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="e9a22cb12f2c9f5db14a01d04ae6d9e829cd5b48" datatype="html">
-        <source>Sign in to WISE with your teacher account.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">38</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="95c22fc191e91241d3fe6293898fec4d41e20c7d" datatype="html">
-        <source>Click the &quot;Unit Library&quot; tab.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">201</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6aad599c3073e68956b4f15a368db489510bbe7e" datatype="html">
-        <source>Find a project that you would like to use with your class.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">45</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="034f8c49e52de836444ee0a380700af6068d299f" datatype="html">
-        <source>Click on the project to open the information for the project.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">41</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="f5d3e0352ec003e7072916f913e6340c4e2d3613" datatype="html">
-        <source>Click the &quot;Use With Class&quot; button.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">47</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="0b4cc6a461d3a489f1aad44dfcd492bc70cbac56" datatype="html">
-        <source>Choose the periods you will use the project in.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">48</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="a4ddf0715f3033bce36442c01d5d193c0f27075a" datatype="html">
-        <source> Choose the number of students per team. Choosing 1-3 will allow students to work together in a team. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">49,52</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">44,47</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="004911a5b952e535b79f805a8ecdd3902b787a3c" datatype="html">
-        <source> Choose the start date. Students will not be able to use the project until this date. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">53,55</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">48,50</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="de1a012e22926afd24e72b207b9ac213c07f1074" datatype="html">
-        <source>Click &quot;Create Run&quot;.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">56</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">51</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="0c5a5bce36e8ec29c3ec29d0697113c7fda37b2a" datatype="html">
-        <source>The run will be created and added to your Teacher Home.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">52</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="c9dcaa89a2617bf7e757cec50ad493ee24d99801" datatype="html">
-        <source> Copy the &quot;Access Code&quot; for the new run and write it down somewhere like on the white board. Students will need to use this access code to work on the run you created. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">58,61</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">53,56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3576f8940d17f62b1c8f4fbed932067ac0fdb673" datatype="html">
@@ -4687,99 +4780,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">356</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="419c84ee97b4daf0f91e70af256dc7a4e8e11de8" datatype="html">
-        <source>Student FAQ</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">418</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">87</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5eef4cac2276bc97a3b1cc8a29b21436112bdaab" datatype="html">
-        <source>Questions from students.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">420</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">89</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="d8a1b53c813ad335ed55f8201498c45af536f8b5" datatype="html">
-        <source>Creating an Account</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="e335c1909d4122bc81b461339b48f28e70d90593" datatype="html">
-        <source> All users must create their own account. Teachers must create a teacher account and students must create a student account. Users can create an account by going to the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ contextPath }}&quot; target=&quot;_blank&quot;&gt;"/>WISE Home Page<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and clicking on the <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ contextPath }}/join&quot; target=&quot;_blank&quot;&gt;"/>Register<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> link at the upper right of the screen. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">7,13</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8667ecd04a352367c4c964c92a7763320d3f8946" datatype="html">
-        <source>Here are instructions on how to create a teacher account.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2964f6a797ee681e920953a80029f041f0edc7bf" datatype="html">
-        <source>Go to the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ contextPath }}&quot; target=&quot;_blank&quot;&gt;"/>WISE Home Page<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="c33845a66f745408b47fae2ec9b94afe98aeb00a" datatype="html">
-        <source> Click the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ contextPath }}/join&quot; target=&quot;_blank&quot;&gt;"/>Register<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> link at the upper right of the screen. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">17,20</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2e06e81d5bce0468d498f4f754a63511b54a31f1" datatype="html">
-        <source>Click on <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ contextPath }}/join/teacher&quot; target=&quot;_blank&quot;&gt;"/>Teacher<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="905ffa00030446fe94ad48b0690cf4c703ddf061" datatype="html">
-        <source>Using a WISE Unit</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3a208598e3a63c1f1fce098a5b87f90366a8e106" datatype="html">
-        <source> To use a WISE unit with your class, you must first choose a unit to use and then set up a &quot;Run&quot; of that unit. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">32,35</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="b76ba9990938b43e176c04d0e0d9ba95aa6ee325" datatype="html">
-        <source>Here are instructions on how to set up a Run.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="69780389024fe4b31a860424a4ca428609fdde0f" datatype="html">
@@ -21007,21 +21007,21 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>StudentDataService.saveComponentEvent: component, category, event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">251</context>
+          <context context-type="linenumber">241</context>
         </context-group>
       </trans-unit>
       <trans-unit id="944638387659785956" datatype="html">
         <source>StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">261</context>
+          <context context-type="linenumber">251</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4924640921903672943" datatype="html">
         <source>StudentDataService.saveVLEEvent: category and event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">270</context>
+          <context context-type="linenumber">260</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3178064088723974543" datatype="html">

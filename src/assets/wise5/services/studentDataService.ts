@@ -185,16 +185,6 @@ export class StudentDataService extends DataService {
     );
   }
 
-  getNotebookItemsByNodeId(notebook, nodeId) {
-    const notebookItemsByNodeId = [];
-    for (const notebookItem of notebook.allItems) {
-      if (notebookItem.nodeId === nodeId) {
-        notebookItemsByNodeId.push(notebookItem);
-      }
-    }
-    return notebookItemsByNodeId;
-  }
-
   populateHistories(events) {
     this.stackHistory = [];
     for (const event of events) {
