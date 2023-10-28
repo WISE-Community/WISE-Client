@@ -49,10 +49,9 @@ const routes: Routes = [
       { path: 'home', component: ProjectListComponent },
       { path: 'new-unit', component: AddProjectComponent },
       {
-        path: 'unit/:unitId/recovery',
-        component: ProjectAuthoringParentComponent,
-        resolve: { project: RecoveryAuthoringProjectResolver },
-        children: [{ path: '', component: RecoveryAuthoringComponent }]
+        path: 'recovery/:unitId',
+        component: RecoveryAuthoringComponent,
+        resolve: { project: RecoveryAuthoringProjectResolver }
       },
       {
         path: 'unit/:unitId',

@@ -4,6 +4,7 @@ import { NotificationService } from '../../services/notificationService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { NodeRecoveryAnalysis } from '../../../../app/domain/nodeRecoveryAnalysis';
 import { isValidJSONString } from '../../common/string/string';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'recovery-authoring',
@@ -13,17 +14,20 @@ import { isValidJSONString } from '../../common/string/string';
 export class RecoveryAuthoringComponent implements OnInit {
   badNodes: NodeRecoveryAnalysis[] = [];
   protected globalMessage: any;
-  jsonIsValid: boolean;
+  jsonValid: boolean;
   projectJSONString: string;
   saveButtonEnabled: boolean = false;
   private subscriptions: Subscription = new Subscription();
+  protected unitId: string;
 
   constructor(
+    private route: ActivatedRoute,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
+    this.unitId = this.route.snapshot.paramMap.get('unitId');
     this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
     this.checkProjectJSONValidity();
     this.subscribeToGlobalMessage();
@@ -36,14 +40,14 @@ export class RecoveryAuthoringComponent implements OnInit {
 
   projectJSONChanged(): void {
     this.checkProjectJSONValidity();
-    this.saveButtonEnabled = this.jsonIsValid;
-    if (this.jsonIsValid) {
+    this.saveButtonEnabled = this.jsonValid;
+    if (this.jsonValid) {
       this.checkNodes();
     }
   }
 
   private checkProjectJSONValidity(): void {
-    this.jsonIsValid = isValidJSONString(this.projectJSONString);
+    this.jsonValid = isValidJSONString(this.projectJSONString);
   }
 
   private subscribeToGlobalMessage(): void {
