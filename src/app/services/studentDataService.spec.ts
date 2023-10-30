@@ -31,7 +31,6 @@ describe('StudentDataService', () => {
   shouldEvaluateHasWorkCreatedAfterTimestampFalse();
   shouldEvaluateHasWorkCreatedAfterTimestampTrue();
   shouldGetBranchPathTakenEventsByNodeId();
-  shouldGetNotebookItemsByNodeId();
   shouldHandleSaveStudentWorkToServerSuccess();
   shouldHandleSaveEventsToServerSuccess();
   shouldHandleSaveAnnotationsToServerSuccess();
@@ -91,32 +90,6 @@ function shouldGetBranchPathTakenEventsByNodeId() {
     };
     const events = service.getBranchPathTakenEventsByNodeId('node2');
     expect(events.length).toEqual(1);
-  });
-}
-
-function shouldGetNotebookItemsByNodeId() {
-  it('should get notebook items by node id', () => {
-    const notebook = {
-      allItems: [
-        { nodeId: 'node1' },
-        { nodeId: 'node1' },
-        { nodeId: 'node1' },
-        { nodeId: 'node1' },
-        { nodeId: 'node1' },
-        { nodeId: 'node2' },
-        { nodeId: 'node2' },
-        { nodeId: 'node2' },
-        { nodeId: 'node2' },
-        { nodeId: 'node2' }
-      ]
-    };
-    const notebookItems = service.getNotebookItemsByNodeId(notebook, 'node1');
-    expect(notebookItems.length).toEqual(5);
-    expect(notebookItems[0].nodeId).toEqual('node1');
-    expect(notebookItems[1].nodeId).toEqual('node1');
-    expect(notebookItems[2].nodeId).toEqual('node1');
-    expect(notebookItems[3].nodeId).toEqual('node1');
-    expect(notebookItems[4].nodeId).toEqual('node1');
   });
 }
 
