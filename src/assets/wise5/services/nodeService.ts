@@ -297,17 +297,6 @@ export class NodeService {
     return availableTransitions;
   }
 
-  currentNodeHasTransitionLogic() {
-    const currentNode: any = this.DataService.getCurrentNode();
-    if (currentNode != null) {
-      const transitionLogic = currentNode.transitionLogic;
-      if (transitionLogic != null) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   /**
    * Evaluate the transition logic for the current node and create branch
    * path taken events if necessary.
