@@ -1,4 +1,8 @@
-<div class="component-div" fxLayoutAlign="space-between center">
-  <button mat-flat-button class="component-button" (click)="select()">{{ label }}</button>
-  <button mat-flat-button (click)="preview()"><mat-icon>info</mat-icon></button>
-</div>
+<mat-card appearance="outlined">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <button mat-button (click)="select()" i18n>{{ label }}</button>
+    <button mat-icon-button (click)="preview()" aria-label="Component type details" i18n-aria-label>
+      <mat-icon>info</mat-icon>
+    </button>
+  </div>
+</mat-card>
