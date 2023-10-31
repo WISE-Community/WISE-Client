@@ -1,7 +1,7 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { User } from '../../domain/user';
-import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { User } from '../../domain/user';
+import { injectPasswordErrors } from '../../common/password-helper';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class RegisterUserFormComponent {
   protected NAME_REGEX = '^[a-zA-Z]+([ -]?[a-zA-Z]+)*$';
@@ -14,23 +14,13 @@ export class RegisterUserFormComponent {
 
   constructor(protected fb: FormBuilder, protected snackBar: MatSnackBar) {}
 
-  protected createAccountError(error: any): void {
-    const formError: any = {};
+  handleCreateAccountError(error: any, userObject: User): void {
     switch (error.messageCode) {
-      case 'invalidPasswordLength':
-        formError.minlength = true;
-        this.passwordsFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
-        break;
-      case 'invalidPasswordPattern':
-        formError.pattern = true;
-        this.passwordsFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
+      case 'invalidPassword':
+        injectPasswordErrors(this.passwordsFormGroup, error);
         break;
       case 'recaptchaResponseInvalid':
-        this.user['isRecaptchaInvalid'] = true;
+        userObject['isRecaptchaInvalid'] = true;
         break;
       default:
         this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.messageCode));

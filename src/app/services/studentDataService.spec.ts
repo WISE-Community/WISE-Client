@@ -31,7 +31,6 @@ describe('StudentDataService', () => {
   shouldEvaluateHasWorkCreatedAfterTimestampFalse();
   shouldEvaluateHasWorkCreatedAfterTimestampTrue();
   shouldGetBranchPathTakenEventsByNodeId();
-  shouldGetNotebookItemsByNodeId();
   shouldHandleSaveStudentWorkToServerSuccess();
   shouldHandleSaveEventsToServerSuccess();
   shouldHandleSaveAnnotationsToServerSuccess();
@@ -39,11 +38,9 @@ describe('StudentDataService', () => {
   shouldCheckIsComponentSubmitDirty();
   shouldGetLatestComponentStateByNodeIdAndComponentId();
   shouldGetLatestSubmitComponentState();
-  shouldGetStudentWorkByStudentWorkId();
   shouldGetComponentStatesByNodeId();
   shouldGetComponentStatesByNodeIdAndComponentId();
   shouldGetEventsByNodeId();
-  shouldGetEventsByNodeIdAndComponentId();
   shouldGetLatestNodeEnteredEventNodeIdWithExistingNode();
   shouldCalculateCanVisitNode();
   shouldGetNodeStatusByNodeId();
@@ -93,32 +90,6 @@ function shouldGetBranchPathTakenEventsByNodeId() {
     };
     const events = service.getBranchPathTakenEventsByNodeId('node2');
     expect(events.length).toEqual(1);
-  });
-}
-
-function shouldGetNotebookItemsByNodeId() {
-  it('should get notebook items by node id', () => {
-    const notebook = {
-      allItems: [
-        { nodeId: 'node1' },
-        { nodeId: 'node1' },
-        { nodeId: 'node1' },
-        { nodeId: 'node1' },
-        { nodeId: 'node1' },
-        { nodeId: 'node2' },
-        { nodeId: 'node2' },
-        { nodeId: 'node2' },
-        { nodeId: 'node2' },
-        { nodeId: 'node2' }
-      ]
-    };
-    const notebookItems = service.getNotebookItemsByNodeId(notebook, 'node1');
-    expect(notebookItems.length).toEqual(5);
-    expect(notebookItems[0].nodeId).toEqual('node1');
-    expect(notebookItems[1].nodeId).toEqual('node1');
-    expect(notebookItems[2].nodeId).toEqual('node1');
-    expect(notebookItems[3].nodeId).toEqual('node1');
-    expect(notebookItems[4].nodeId).toEqual('node1');
   });
 }
 
@@ -408,31 +379,6 @@ function shouldGetLatestSubmitComponentState() {
   });
 }
 
-function shouldGetStudentWorkByStudentWorkId() {
-  it('should get student work by student work id with an id that does not exist', () => {
-    service.studentData = {
-      componentStates: [
-        createComponentState(1, 'node1', 'component1'),
-        createComponentState(2, 'node2', 'component2'),
-        createComponentState(3, 'node3', 'component3')
-      ]
-    };
-    const componentState = service.getStudentWorkByStudentWorkId(4);
-    expect(componentState).toEqual(null);
-  });
-  it('should get student work by student work id with an id that does exist', () => {
-    service.studentData = {
-      componentStates: [
-        createComponentState(1, 'node1', 'component1'),
-        createComponentState(2, 'node1', 'component1'),
-        createComponentState(3, 'node1', 'component1')
-      ]
-    };
-    const componentState = service.getStudentWorkByStudentWorkId(2);
-    expect(componentState.id).toEqual(2);
-  });
-}
-
 function shouldGetComponentStatesByNodeId() {
   it('should get component states by node id', () => {
     service.studentData = {
@@ -486,24 +432,6 @@ function shouldGetEventsByNodeId() {
     expect(events[0].id).toEqual(1);
     expect(events[1].id).toEqual(2);
     expect(events[2].id).toEqual(5);
-  });
-}
-
-function shouldGetEventsByNodeIdAndComponentId() {
-  it('should get events by node id and component id', () => {
-    service.studentData = {
-      events: [
-        createEvent(1, 'node1', 'component1'),
-        createEvent(2, 'node1', 'component2'),
-        createEvent(3, 'node2', 'component3'),
-        createEvent(4, 'node3', 'component4'),
-        createEvent(5, 'node1', 'component1')
-      ]
-    };
-    const events = service.getEventsByNodeIdAndComponentId('node1', 'component1');
-    expect(events.length).toEqual(2);
-    expect(events[0].id).toEqual(1);
-    expect(events[1].id).toEqual(5);
   });
 }
 

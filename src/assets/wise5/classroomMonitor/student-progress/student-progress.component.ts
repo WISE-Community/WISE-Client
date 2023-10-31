@@ -53,7 +53,9 @@ export class StudentProgressComponent implements OnInit {
 
   private initializeStudents(): void {
     this.teams = [];
-    const workgroups = this.configService.getClassmateUserInfos();
+    const workgroups = this.configService
+      .getClassmateUserInfos()
+      .filter((workgroup: any) => workgroup.workgroupId != null);
     for (const workgroup of workgroups) {
       const workgroupId = workgroup.workgroupId;
       const displayNames = this.configService.getDisplayUsernamesByWorkgroupId(workgroupId);
@@ -71,7 +73,7 @@ export class StudentProgressComponent implements OnInit {
 
   private updateTeam(workgroupId: number): void {
     const location = this.getCurrentNodeForWorkgroupId(workgroupId);
-    const completion = this.getStudentProjectCompletion(workgroupId);
+    const completion = this.classroomStatusService.getStudentProjectCompletion(workgroupId);
     const score = this.getStudentTotalScore(workgroupId);
     let maxScore = this.classroomStatusService.getMaxScoreForWorkgroupId(workgroupId);
     maxScore = maxScore ? maxScore : 0;
@@ -91,15 +93,6 @@ export class StudentProgressComponent implements OnInit {
     return this.classroomStatusService.getCurrentNodePositionAndNodeTitleForWorkgroupId(
       workgroupId
     );
-  }
-
-  /**
-   * Get project completion data for the given workgroup (only include nodes with student work)
-   * @param workgroupId the workgroup id
-   * @return object with completed, total, and percent completed (integer between 0 and 100)
-   */
-  private getStudentProjectCompletion(workgroupId: number): any {
-    return this.classroomStatusService.getStudentProjectCompletion(workgroupId, true);
   }
 
   private getStudentTotalScore(workgroupId: number): number {

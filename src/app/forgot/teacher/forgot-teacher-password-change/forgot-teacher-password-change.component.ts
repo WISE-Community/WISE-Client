@@ -4,6 +4,8 @@ import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { finalize } from 'rxjs/operators';
 import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
+import { injectPasswordErrors } from '../../../common/password-helper';
+import { PasswordErrors } from '../../../domain/password/password-errors';
 
 @Component({
   selector: 'app-forgot-teacher-password-change',
@@ -67,8 +69,7 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
     this.goToSuccessPage();
   }
 
-  private changePasswordError(error: any): void {
-    const formError: any = {};
+  private changePasswordError(error: PasswordErrors): void {
     switch (error.messageCode) {
       case 'tooManyVerificationCodeAttempts':
         this.setTooManyVerificationCodeAttemptsMessage();
@@ -85,23 +86,13 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
       case 'verificationCodeIncorrect':
         this.setVerificationCodeIncorrectMessage();
         break;
-      case 'invalidPasswordLength':
-        formError.minlength = true;
-        this.changePasswordFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
-        break;
-      case 'invalidPasswordPattern':
-        formError.pattern = true;
-        this.changePasswordFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
+      case 'invalidPassword':
+        injectPasswordErrors(this.changePasswordFormGroup, error);
         break;
       case 'passwordDoesNotMatch':
-        formError.passwordDoesNotMatch = true;
         this.changePasswordFormGroup
           .get(NewPasswordAndConfirmComponent.CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
+          .setErrors({ passwordDoesNotMatch: true });
         break;
       default:
         this.setErrorOccurredMessage();

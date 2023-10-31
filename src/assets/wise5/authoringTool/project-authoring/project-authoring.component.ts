@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ConfigService } from '../../services/configService';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
@@ -25,7 +24,6 @@ export class ProjectAuthoringComponent {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
-    private configService: ConfigService,
     private deleteNodeService: DeleteNodeService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
@@ -52,23 +50,12 @@ export class ProjectAuthoringComponent {
   private refreshProject(): void {
     this.projectService.parseProject();
     this.items = this.projectService.getNodesInOrder();
+    this.items.shift(); // remove the 'group0' master root node from consideration
     this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
     this.idToNode = this.projectService.getIdToNode();
     this.unselectAllItems();
-  }
-
-  protected previewProject(): void {
-    window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
-  }
-
-  protected getNodePositionById(nodeId: string): string {
-    return this.projectService.getNodePositionById(nodeId);
-  }
-
-  protected getNodeTitle(nodeId: string): string {
-    return this.projectService.getNodeTitle(nodeId);
   }
 
   protected isGroupNode(nodeId: string): boolean {
@@ -149,18 +136,10 @@ export class ProjectAuthoringComponent {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-node/choose-template`]);
   }
 
-  protected goToAdvancedAuthoring(): void {
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/advanced`]);
-  }
-
   protected isNodeInAnyBranchPath(nodeId: string): boolean {
     return this.projectService.isNodeInAnyBranchPath(nodeId);
   }
 
-  /**
-   * Temporarily highlight the new nodes to draw attention to them
-   * @param newNodes the new nodes to highlight
-   */
   private temporarilyHighlightNewNodes(newNodes = []): void {
     if (newNodes.length > 0) {
       setTimeout(() => {
@@ -204,7 +183,7 @@ export class ProjectAuthoringComponent {
    * The checkbox for a node was clicked. We do not allow selecting a mix of group and step nodes.
    * If any group nodes are selected, disable all step node checkboxes, and vise-versa.
    */
-  protected selectNode(): void {
+  protected selectNode($event: Event): void {
     const checkedNodes = this.items
       .concat(Object.values(this.idToNode))
       .filter((item) => item.checked);
@@ -215,6 +194,7 @@ export class ProjectAuthoringComponent {
       this.groupNodeSelected = this.isGroupNode(checkedNodes[0].id);
       this.stepNodeSelected = !this.groupNodeSelected;
     }
+    $event.stopPropagation();
   }
 
   protected isBranchPoint(nodeId: string): boolean {

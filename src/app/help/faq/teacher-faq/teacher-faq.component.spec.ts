@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TeacherFaqComponent } from './teacher-faq.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ConfigService } from '../../services/config.service';
+import { ConfigService } from '../../../services/config.service';
 import { Observable } from 'rxjs';
-import { Config } from '../../domain/config';
+import { Config } from '../../../domain/config';
 
 export class MockConfigService {
   getConfig(): Observable<Config> {
@@ -24,13 +24,15 @@ describe('TeacherFaqComponent', () => {
   let component: TeacherFaqComponent;
   let fixture: ComponentFixture<TeacherFaqComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [TeacherFaqComponent],
-      providers: [{ provide: ConfigService, useClass: MockConfigService }],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TeacherFaqComponent],
+        providers: [{ provide: ConfigService, useClass: MockConfigService }],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TeacherFaqComponent);

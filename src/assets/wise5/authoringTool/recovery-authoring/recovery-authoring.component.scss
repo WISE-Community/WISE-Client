@@ -1,15 +1,5 @@
-.main-box {
-  position: relative;
-  padding: 16px !important;
-}
-
-.top-div {
-  background-color: white;
-  position: sticky;
-  top: 0px;
-  z-index: 2;
-  padding-top: 4px;
-  padding-bottom: 4px;
+.body {
+  padding: 0px 32px;
 }
 
 .save-bar {
@@ -22,6 +12,10 @@
 
 .invalid {
   color: red;
+}
+
+.view-title {
+  margin-bottom: 20px;
 }
 
 .warning-div {
@@ -42,7 +36,7 @@
   border: 1px solid red;
   border-radius: 8px;
   padding: 8px;
-  margin-bottom: 4px;
+  margin-bottom: 20px;
 }
 
 .node-id {

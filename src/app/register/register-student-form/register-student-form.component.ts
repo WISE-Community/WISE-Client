@@ -112,7 +112,7 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
           this.createAccountSuccess(response);
         },
         (response: HttpErrorResponse) => {
-          this.createAccountError(response.error);
+          this.handleCreateAccountError(response.error, this.user);
         }
       );
     }
