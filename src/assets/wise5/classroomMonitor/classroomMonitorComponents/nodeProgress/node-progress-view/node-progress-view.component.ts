@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { Subscription } from 'rxjs';
@@ -20,6 +20,7 @@ export class NodeProgressViewComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private configService: ConfigService,
     private dialog: MatDialog,
     private projectService: TeacherProjectService,
@@ -38,6 +39,10 @@ export class NodeProgressViewComponent implements OnInit {
     if (!this.isShowingNodeGradingView()) {
       this.saveNodeProgressViewDisplayedEvent();
     }
+  }
+
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   private subscribeToCurrentNodeChanged(): void {
