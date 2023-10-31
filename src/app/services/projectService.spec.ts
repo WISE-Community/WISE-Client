@@ -43,7 +43,6 @@ describe('ProjectService', () => {
   shouldReplaceAssetPathsInHtmlComponentContent();
   shouldNotReplaceAssetPathsInHtmlComponentContent();
   shouldRetrieveProjectWhenConfigProjectURLIsValid();
-  shouldNotRetrieveProjectWhenConfigProjectURLIsUndefined();
   shouldGetDefaultThemePath();
   shouldReturnTheStartNodeOfTheProject();
   shouldReturnTheNodeByNodeId();
@@ -154,15 +153,6 @@ function shouldRetrieveProjectWhenConfigProjectURLIsValid() {
       expect(response).toEqual(scootersProjectJSON);
     });
     http.expectOne(projectURL);
-  });
-}
-
-function shouldNotRetrieveProjectWhenConfigProjectURLIsUndefined() {
-  it('should not retrieve project when Config.projectURL is undefined', () => {
-    spyOn(configService, 'getConfigParam').and.returnValue(null);
-    const project = service.retrieveProject();
-    expect(configService.getConfigParam).toHaveBeenCalledWith('projectURL');
-    expect(project).toBeNull();
   });
 }
 
