@@ -151,7 +151,7 @@ export class NodeComponent implements OnInit {
     this.dirtySubmitComponentIds = [];
     this.updateComponentVisibility();
 
-    if (this.nodeService.evaluateTransitionLogicOn('enterNode')) {
+    if (this.node.isEvaluateTransitionLogicOn('enterNode')) {
       this.nodeService.evaluateTransitionLogic();
     }
 
@@ -201,7 +201,7 @@ export class NodeComponent implements OnInit {
   ngOnDestroy() {
     this.stopAutoSaveInterval();
     this.nodeUnloaded(this.node.id);
-    if (this.nodeService.evaluateTransitionLogicOn('exitNode')) {
+    if (this.node.isEvaluateTransitionLogicOn('exitNode')) {
       this.nodeService.evaluateTransitionLogic();
     }
     this.subscriptions.unsubscribe();
@@ -280,10 +280,10 @@ export class NodeComponent implements OnInit {
         .saveToServer(componentStates, componentEvents, componentAnnotations)
         .then((savedStudentDataResponse) => {
           if (savedStudentDataResponse) {
-            if (this.nodeService.evaluateTransitionLogicOn('studentDataChanged')) {
+            if (this.node.isEvaluateTransitionLogicOn('studentDataChanged')) {
               this.nodeService.evaluateTransitionLogic();
             }
-            if (this.nodeService.evaluateTransitionLogicOn('scoreChanged')) {
+            if (this.node.isEvaluateTransitionLogicOn('scoreChanged')) {
               if (componentAnnotations != null && componentAnnotations.length > 0) {
                 let evaluateTransitionLogic = false;
                 for (const componentAnnotation of componentAnnotations) {

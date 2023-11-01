@@ -361,18 +361,6 @@ export class NodeService {
     this.DataService.saveVLEEvent(nodeId, componentId, componentType, category, event, eventData);
   }
 
-  evaluateTransitionLogicOn(event) {
-    const currentNode: any = this.DataService.getCurrentNode();
-    if (currentNode != null) {
-      const transitionLogic = currentNode.transitionLogic;
-      const whenToChoosePath = transitionLogic.whenToChoosePath;
-      if (event === whenToChoosePath) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   /**
    * Get the transition result for a node
    * @param nodeId the the node id

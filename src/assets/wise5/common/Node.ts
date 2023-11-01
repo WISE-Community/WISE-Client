@@ -47,6 +47,10 @@ export class Node {
     return this.type === 'group';
   }
 
+  isEvaluateTransitionLogicOn(event: string): boolean {
+    return this.getTransitionLogic().whenToChoosePath === event;
+  }
+
   getNodeIdComponentIds(): any {
     return this.components.map((component) => {
       return { nodeId: this.id, componentId: component.id };
