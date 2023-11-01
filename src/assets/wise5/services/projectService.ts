@@ -594,7 +594,7 @@ export class ProjectService {
 
   isNodeDescendentOfGroup(node: any, group: any): boolean {
     if (node != null && group != null) {
-      const descendents = this.getDescendentsOfGroup(group);
+      const descendents = this.getDescendentIdsOfGroup(group);
       const nodeId = node.id;
       if (descendents.indexOf(nodeId) != -1) {
         return true;
@@ -603,7 +603,7 @@ export class ProjectService {
     return false;
   }
 
-  getDescendentsOfGroup(group: any): any {
+  getDescendentIdsOfGroup(group: any): string[] {
     let descendents = [];
     if (group != null) {
       const childIds = group.ids;
@@ -612,7 +612,7 @@ export class ProjectService {
         for (let childId of childIds) {
           const node = this.getNodeById(childId);
           if (node != null) {
-            const childDescendents = this.getDescendentsOfGroup(node);
+            const childDescendents = this.getDescendentIdsOfGroup(node);
             descendents = descendents.concat(childDescendents);
           }
         }
