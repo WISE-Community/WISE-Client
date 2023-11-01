@@ -1,4 +1,5 @@
 import { ComponentStatus } from './ComponentStatus';
+import { NodeProgress } from './NodeProgress';
 
 export class NodeStatus {
   componentStatuses: { [componentId: string]: ComponentStatus };
@@ -7,6 +8,7 @@ export class NodeStatus {
   isVisitable: boolean;
   isVisited: boolean;
   nodeId: string;
+  progress?: NodeProgress;
 
   constructor(nodeId: string) {
     this.isCompleted = true;

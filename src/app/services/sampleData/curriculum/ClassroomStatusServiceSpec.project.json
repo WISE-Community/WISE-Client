@@ -1,0 +1,246 @@
+{
+  "nodes": [
+    {
+      "id": "group0",
+      "type": "group",
+      "title": "Master",
+      "startId": "group1",
+      "ids": [
+        "group1"
+      ]
+    },
+    {
+      "id": "group1",
+      "type": "group",
+      "title": "First Lesson",
+      "startId": "node1",
+      "ids": [
+        "node1",
+        "node2",
+        "node3",
+        "node4"
+      ],
+      "icons": {
+        "default": {
+          "color": "#2196F3",
+          "type": "font",
+          "fontSet": "material-icons",
+          "fontName": "info"
+        }
+      },
+      "transitionLogic": {
+        "transitions": []
+      }
+    },
+    {
+      "id": "node1",
+      "type": "node",
+      "title": "HTML",
+      "components": [
+        {
+          "id": "6bumus8k6t",
+          "type": "HTML",
+          "prompt": "",
+          "showSaveButton": false,
+          "showSubmitButton": false,
+          "html": "Enter html here"
+        }
+      ],
+      "constraints": [],
+      "showSaveButton": false,
+      "showSubmitButton": false,
+      "transitionLogic": {
+        "transitions": [
+          {
+            "to": "node2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "node2",
+      "title": "HTML and Open Response",
+      "type": "node",
+      "constraints": [],
+      "transitionLogic": {
+        "transitions": [
+          {
+            "to": "node3"
+          }
+        ]
+      },
+      "showSaveButton": true,
+      "showSubmitButton": false,
+      "components": [
+        {
+          "id": "lka77rsbz8",
+          "type": "HTML",
+          "prompt": "",
+          "showSaveButton": false,
+          "showSubmitButton": false,
+          "html": "Enter html here"
+        },
+        {
+          "id": "3b6qffbtfh",
+          "type": "OpenResponse",
+          "prompt": "",
+          "showSaveButton": false,
+          "showSubmitButton": false,
+          "starterSentence": null,
+          "isStudentAttachmentEnabled": false
+        }
+      ]
+    },
+    {
+      "id": "node3",
+      "title": "Multiple Choice",
+      "type": "node",
+      "constraints": [],
+      "transitionLogic": {
+        "transitions": [
+          {
+            "to": "node4"
+          }
+        ]
+      },
+      "showSaveButton": true,
+      "showSubmitButton": false,
+      "components": [
+        {
+          "id": "adq3csjo54",
+          "type": "MultipleChoice",
+          "prompt": "",
+          "showSaveButton": false,
+          "showSubmitButton": false,
+          "choiceType": "radio",
+          "choices": [],
+          "showFeedback": true
+        }
+      ]
+    },
+    {
+      "id": "node4",
+      "title": "HTML",
+      "type": "node",
+      "constraints": [],
+      "transitionLogic": {
+        "transitions": []
+      },
+      "showSaveButton": false,
+      "showSubmitButton": false,
+      "components": [
+        {
+          "id": "86ehfc5rcm",
+          "type": "HTML",
+          "prompt": "",
+          "showSaveButton": false,
+          "showSubmitButton": false,
+          "html": "Enter html here"
+        }
+      ]
+    }
+  ],
+  "constraints": [],
+  "startGroupId": "group0",
+  "startNodeId": "node1",
+  "navigationMode": "guided",
+  "layout": {
+    "template": "starmap|leftNav|rightNav"
+  },
+  "metadata": {
+    "title": "Test Unit",
+    "authors": [
+      {
+        "firstName": "g",
+        "lastName": "k",
+        "id": 3,
+        "username": "gk"
+      }
+    ]
+  },
+  "notebook": {
+    "enabled": false,
+    "label": "Notebook",
+    "enableAddNew": true,
+    "itemTypes": {
+      "note": {
+        "type": "note",
+        "enabled": true,
+        "enableLink": true,
+        "enableAddNote": true,
+        "enableClipping": true,
+        "enableStudentUploads": true,
+        "requireTextOnEveryNote": false,
+        "label": {
+          "singular": "note",
+          "plural": "notes",
+          "link": "Notes",
+          "icon": "note",
+          "color": "#1565C0"
+        }
+      },
+      "report": {
+        "enabled": false,
+        "label": {
+          "singular": "report",
+          "plural": "reports",
+          "link": "Report",
+          "icon": "assignment",
+          "color": "#AD1457"
+        },
+        "notes": [
+          {
+            "reportId": "finalReport",
+            "title": "Final Report",
+            "description": "Final summary report of what you learned in this unit",
+            "prompt": "Use this space to write your final report using evidence from your notebook.",
+            "content": "<h3>This is a heading</h3><p>This is a paragraph.</p>"
+          }
+        ]
+      }
+    }
+  },
+  "teacherNotebook": {
+    "enabled": true,
+    "label": "Teacher Notebook",
+    "enableAddNew": true,
+    "itemTypes": {
+      "note": {
+        "type": "note",
+        "enabled": false,
+        "enableLink": true,
+        "enableAddNote": true,
+        "enableClipping": true,
+        "enableStudentUploads": true,
+        "requireTextOnEveryNote": false,
+        "label": {
+          "singular": "note",
+          "plural": "notes",
+          "link": "Notes",
+          "icon": "note",
+          "color": "#1565C0"
+        }
+      },
+      "report": {
+        "enabled": true,
+        "label": {
+          "singular": "teacher notes",
+          "plural": "teacher notes",
+          "link": "Teacher Notes",
+          "icon": "assignment",
+          "color": "#AD1457"
+        },
+        "notes": [
+          {
+            "reportId": "teacherReport",
+            "title": "Teacher Notes",
+            "description": "Notes for the teacher as they're running the WISE unit",
+            "prompt": "Use this space to take notes for this unit",
+            "content": "<p>Use this space to take notes for this unit</p>"
+          }
+        ]
+      }
+    }
+  },
+  "inactiveNodes": []
+}
