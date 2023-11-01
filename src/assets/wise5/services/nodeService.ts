@@ -301,44 +301,30 @@ export class NodeService {
    * Evaluate the transition logic for the current node and create branch
    * path taken events if necessary.
    */
-  evaluateTransitionLogic() {
+  evaluateTransitionLogic(): void {
     const currentNode: any = this.DataService.getCurrentNode();
-    if (currentNode != null) {
-      const nodeId = currentNode.id;
-      const transitionLogic = currentNode.transitionLogic;
-      if (transitionLogic != null) {
-        const transitions = transitionLogic.transitions;
-        const canChangePath = transitionLogic.canChangePath;
-        let alreadyBranched = false;
-        const events = this.DataService.getBranchPathTakenEventsByNodeId(currentNode.id);
-        if (events.length > 0) {
-          alreadyBranched = true;
-        }
-
-        let transition, fromNodeId, toNodeId;
-        if (alreadyBranched) {
-          if (canChangePath) {
-            this.chooseTransition(nodeId, transitionLogic).then((transition) => {
-              if (transition != null) {
-                fromNodeId = currentNode.id;
-                toNodeId = transition.to;
-                this.createBranchPathTakenEvent(fromNodeId, toNodeId);
-              }
-            });
-          } else {
-            // student can't change path
-          }
-        } else {
-          // student has not branched yet
-
+    const nodeId = currentNode.id;
+    const transitionLogic = currentNode.transitionLogic;
+    if (transitionLogic != null) {
+      let alreadyBranched = false;
+      const events = this.DataService.getBranchPathTakenEventsByNodeId(currentNode.id);
+      if (events.length > 0) {
+        alreadyBranched = true;
+      }
+      if (alreadyBranched) {
+        if (transitionLogic.canChangePath) {
           this.chooseTransition(nodeId, transitionLogic).then((transition) => {
             if (transition != null) {
-              fromNodeId = currentNode.id;
-              toNodeId = transition.to;
-              this.createBranchPathTakenEvent(fromNodeId, toNodeId);
+              this.createBranchPathTakenEvent(currentNode.id, transition.to);
             }
           });
         }
+      } else {
+        this.chooseTransition(nodeId, transitionLogic).then((transition) => {
+          if (transition != null) {
+            this.createBranchPathTakenEvent(currentNode.id, transition.to);
+          }
+        });
       }
     }
   }
