@@ -4,20 +4,28 @@
       <mat-card
         appearance="outlined"
         *ngFor="let milestone of milestones"
-        class="milestone md-button"
-        md-ink-ripple
+        class="milestone"
+        role="button"
+        tabindex="0"
+        aria-label="Show milestone details"
+        i18-aria-label
         (click)="showMilestoneDetails(milestone, $event)"
+        (keyup.enter)="showMilestoneDetails(milestone, $event)"
       >
         <mat-card-content fxLayout="column" fxLayoutAlign="center center">
           <div class="milestone__title" md-truncate>{{ milestone.name }}</div>
-          <div class="milestone__progress">
+          <div class="milestone__progress mat-app-background">
             <mat-progress-spinner
               diameter="96"
               mode="determinate"
               [value]="milestone.percentageCompleted"
               [ngClass]="{ success: milestone.percentageCompleted === 100 }"
             ></mat-progress-spinner>
-            <div class="milestone__progress__percent" fxLayout="row" fxLayoutAlign="center center">
+            <div
+              class="milestone__progress__percent mat-subtitle-2"
+              fxLayout="row"
+              fxLayoutAlign="center center"
+            >
               <span *ngIf="milestone.percentageCompleted < 100"
                 >{{ milestone.percentageCompleted }}%</span
               >
@@ -26,13 +34,11 @@
               </mat-icon>
             </div>
           </div>
-          <p class="md-body-1 text-secondary">
+          <p class="text-secondary" i18n>
             {{ milestone.numberOfStudentsCompleted }}/{{ milestone.numberOfStudentsInRun }} teams
             completed
           </p>
-          <p *ngIf="milestone.isReportAvailable" class="md-body-2 info" i18n>
-            ~ Report Available ~
-          </p>
+          <p *ngIf="milestone.isReportAvailable" class="info" i18n>~ Report Available ~</p>
         </mat-card-content>
       </mat-card>
     </div>

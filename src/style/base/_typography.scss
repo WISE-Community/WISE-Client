@@ -9,3 +9,8 @@ $wise-typography: mat.define-typography-config(
   $caption: mat.define-typography-level(14px, 20px, 400),
   $button: mat.define-typography-level(14px, 14px, 500, $letter-spacing: 'normal'),
 );
+
+textarea {
+  font-family: Roboto,Helvetica Neue,sans-serif;
+  font-size: 100%;
+}

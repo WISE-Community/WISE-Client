@@ -6,7 +6,8 @@
       <div fxLayout="row" fxLayoutAlign="start center">
         <nav-item-progress
           [period]="currentPeriod"
-          [nodeCompletion]="milestone.percentageCompleted"></nav-item-progress>
+          [nodeCompletion]="milestone.percentageCompleted"
+        ></nav-item-progress>
       </div>
     </div>
     <p *ngIf="milestone.description">
@@ -49,7 +50,11 @@
   </section>
   <section class="mat-elevation-z1 app-bg-bg">
     <div *ngIf="milestone.generatedRecommendations && milestone.isReportAvailable">
-      <mat-tab-group (selectedTabChange)="saveTabSelectedEvent($event)" class="notice-bg-bg">
+      <mat-tab-group
+        (selectedTabChange)="saveTabSelectedEvent($event)"
+        mat-stretch-tabs="false"
+        class="notice-bg-bg"
+      >
         <mat-tab label="Recommendation" i18n-label>
           <div class="milestone-details__section" [innerHTML]="recommendations"></div>
         </mat-tab>
@@ -92,7 +97,9 @@
               account_circle
             </mat-icon>
           </span>
-          <span class="mat-subtitle-2">{{ getDisplayNamesByWorkgroupId(workgroup.workgroupId) }}</span>
+          <span class="mat-subtitle-2">{{
+            getDisplayNamesByWorkgroupId(workgroup.workgroupId)
+          }}</span>
         </span>
         <span fxFlex></span>
         <span class="mat-subtitle-2">

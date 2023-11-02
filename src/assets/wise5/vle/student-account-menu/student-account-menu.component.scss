@@ -45,11 +45,6 @@
   .mat-mdc-progress-bar {
     transform: rotate(270deg);
     width: 32px;
-    height: 14px;
-  }
-
-  .mdc-linear-progress__bar-inner {
-    border-top-width: 14px;
   }
 
   .score-wrap {
@@ -58,6 +53,10 @@
 
   .score {
     height: 32px;
+
+    .mdc-linear-progress__buffer {
+      height: 32px;
+    }
   }
 
   .controls {

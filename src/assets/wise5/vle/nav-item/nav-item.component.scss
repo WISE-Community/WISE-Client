@@ -61,16 +61,7 @@
   }
 
   .progress {
-    height: 14px;
     width: 48px;
-
-    .mat-mdc-progress-bar, .mdc-linear-progress__bar-inner {
-      height: 14px;
-    }
-
-    .mdc-linear-progress__bar-inner {
-      border-top-width: 14px;
-    }
   }
 
   .mat-mdc-card .mat-divider-horizontal {
