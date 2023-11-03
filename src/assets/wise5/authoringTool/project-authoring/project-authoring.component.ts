@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
@@ -19,7 +19,7 @@ export class ProjectAuthoringComponent {
   private inactiveNodes: any[];
   protected inactiveStepNodes: any[];
   protected items: any;
-  protected projectId: number;
+  @Input('unitId') protected projectId?: number;
   protected stepNodeSelected: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
@@ -32,7 +32,7 @@ export class ProjectAuthoringComponent {
   ) {}
 
   ngOnInit(): void {
-    this.projectId = Number(this.route.snapshot.paramMap.get('unitId'));
+    this.projectId = Number(this.projectId);
     this.refreshProject();
     this.dataService.setCurrentNode(null);
     this.temporarilyHighlightNewNodes(history.state.newNodes);
