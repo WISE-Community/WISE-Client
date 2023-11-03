@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NotificationService } from '../../services/notificationService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { NodeRecoveryAnalysis } from '../../../../app/domain/nodeRecoveryAnalysis';
 import { isValidJSONString } from '../../common/string/string';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'recovery-authoring',
@@ -18,16 +17,14 @@ export class RecoveryAuthoringComponent implements OnInit {
   projectJSONString: string;
   saveButtonEnabled: boolean = false;
   private subscriptions: Subscription = new Subscription();
-  protected unitId: string;
+  @Input() protected unitId?: string;
 
   constructor(
-    private route: ActivatedRoute,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
-    this.unitId = this.route.snapshot.paramMap.get('unitId');
     this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
     this.checkProjectJSONValidity();
     this.subscribeToGlobalMessage();

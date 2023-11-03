@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription, filter } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -29,9 +29,8 @@ export class NodeAuthoringComponent implements OnInit {
   isGroupNode: boolean;
   node: Node;
   nodeJson: any;
-  nodeId: string;
+  @Input() nodeId?: string;
   nodePosition: any;
-  projectId: number;
   subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -47,10 +46,6 @@ export class NodeAuthoringComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.nodeId = this.route.snapshot.paramMap.get('nodeId');
-    this.route.parent.params.subscribe((params) => {
-      this.projectId = Number(params.unitId);
-    });
     this.setup(this.nodeId);
     this.dataService.setCurrentNodeByNodeId(this.nodeId);
     this.subscribeToShowSubmitButtonValueChanges();
@@ -210,15 +205,13 @@ export class NodeAuthoringComponent implements OnInit {
   }
 
   protected chooseComponentLocation(action: string): void {
-    this.router.navigate(
-      ['/teacher/edit/unit', this.projectId, 'node', this.nodeId, 'choose-component-location'],
-      {
-        state: {
-          action: action,
-          selectedComponents: this.getSelectedComponents()
-        }
+    this.router.navigate(['choose-component-location'], {
+      relativeTo: this.route,
+      state: {
+        action: action,
+        selectedComponents: this.getSelectedComponents()
       }
-    );
+    });
   }
 
   protected copyComponent(event: any, component: ComponentContent): void {

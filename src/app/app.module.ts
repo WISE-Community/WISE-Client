@@ -62,6 +62,7 @@ export function initialize(
     RouterModule.forRoot([], {
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
+      bindToComponentInputs: true,
       onSameUrlNavigation: 'reload'
     })
   ],
