@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-teacher-password-complete',
@@ -7,22 +7,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./forgot-teacher-password-complete.component.scss']
 })
 export class ForgotTeacherPasswordCompleteComponent implements OnInit {
-  username: string = null;
+  @Input() username: string;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router) {}
 
-  ngOnInit() {
-    const username = this.route.snapshot.queryParamMap.get('username');
-    if (username != null) {
-      this.username = username;
-    }
-  }
+  ngOnInit() {}
 
   goToLoginPage() {
-    const params: any = {};
-    if (this.username != null) {
-      params.username = this.username;
-    }
-    this.router.navigate(['/login', params]);
+    this.router.navigate(['/login', { username: this.username }]);
   }
 }

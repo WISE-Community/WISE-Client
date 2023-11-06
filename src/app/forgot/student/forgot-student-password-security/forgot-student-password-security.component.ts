@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StudentService } from '../../../student/student.service';
 import { finalize } from 'rxjs/operators';
@@ -19,24 +19,19 @@ export class ForgotStudentPasswordSecurityComponent implements OnInit {
   isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
   message: string;
   processing: boolean = false;
-  question: string;
-  questionKey: string;
-  username: string;
+  @Input() question: string;
+  @Input() questionKey: string;
+  @Input() username: string;
 
   constructor(
     private configService: ConfigService,
     private fb: FormBuilder,
     private recaptchaV3Service: ReCaptchaV3Service,
     private router: Router,
-    private route: ActivatedRoute,
     private studentService: StudentService
   ) {}
 
-  ngOnInit() {
-    this.username = this.route.snapshot.queryParamMap.get('username');
-    this.questionKey = this.route.snapshot.queryParamMap.get('questionKey');
-    this.question = this.route.snapshot.queryParamMap.get('question');
-  }
+  ngOnInit() {}
 
   async submit() {
     this.processing = true;

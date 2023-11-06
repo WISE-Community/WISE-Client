@@ -7,7 +7,6 @@ import { ConfigService } from '../../services/configService';
 import { NotificationService } from '../../services/notificationService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { ActivatedRoute } from '@angular/router';
 import { Annotation } from '../../common/Annotation';
 
 @Component({
@@ -38,8 +37,7 @@ export class StudentGradingComponent implements OnInit {
     private configService: ConfigService,
     private dataService: TeacherDataService,
     private notificationService: NotificationService,
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute
+    private projectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +47,7 @@ export class StudentGradingComponent implements OnInit {
     this.subscribeToStudentWorkReceived();
     this.subscribeToCurrentWorkgroupChanged();
     this.subscribeToCurrentPeriodChanged();
-    this.workgroupId = parseInt(this.route.snapshot.params['workgroupId']);
+    this.workgroupId = Number(this.workgroupId);
     this.initialize();
   }
 
