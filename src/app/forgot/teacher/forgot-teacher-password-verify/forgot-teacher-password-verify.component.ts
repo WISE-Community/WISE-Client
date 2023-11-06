@@ -10,7 +10,7 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./forgot-teacher-password-verify.component.scss']
 })
 export class ForgotTeacherPasswordVerifyComponent implements OnInit {
-  @Input() username: string;
+  @Input() username: string = null;
   verificationCodeFormGroup: FormGroup = this.fb.group({
     verificationCode: new FormControl('', [Validators.required])
   });

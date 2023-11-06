@@ -18,7 +18,7 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
   message: string = '';
   processing: boolean = false;
   showForgotPasswordLink = false;
-  @Input() username: string;
+  @Input() username: string = null;
   @Input() verificationCode: string;
 
   constructor(
