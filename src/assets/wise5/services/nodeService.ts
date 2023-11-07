@@ -299,33 +299,19 @@ export class NodeService {
 
   /**
    * Evaluate the transition logic for the current node and create branch
-   * path taken events if necessary.
+   * path taken event if necessary.
    */
   evaluateTransitionLogic(): void {
-    const currentNode: any = this.DataService.getCurrentNode();
-    const nodeId = currentNode.id;
-    const transitionLogic = currentNode.transitionLogic;
-    if (transitionLogic != null) {
-      let alreadyBranched = false;
-      const events = this.DataService.getBranchPathTakenEventsByNodeId(currentNode.id);
-      if (events.length > 0) {
-        alreadyBranched = true;
-      }
-      if (alreadyBranched) {
-        if (transitionLogic.canChangePath) {
-          this.chooseTransition(nodeId, transitionLogic).then((transition) => {
-            if (transition != null) {
-              this.createBranchPathTakenEvent(currentNode.id, transition.to);
-            }
-          });
+    const currentNode = this.ProjectService.getNode(this.DataService.getCurrentNodeId());
+    const transitionLogic = currentNode.getTransitionLogic();
+    const branchEvents = this.DataService.getBranchPathTakenEventsByNodeId(currentNode.id);
+    const alreadyBranched = branchEvents.length > 0;
+    if ((alreadyBranched && transitionLogic.canChangePath) || !alreadyBranched) {
+      this.chooseTransition(currentNode.id, transitionLogic).then((transition) => {
+        if (transition != null) {
+          this.createBranchPathTakenEvent(currentNode.id, transition.to);
         }
-      } else {
-        this.chooseTransition(nodeId, transitionLogic).then((transition) => {
-          if (transition != null) {
-            this.createBranchPathTakenEvent(currentNode.id, transition.to);
-          }
-        });
-      }
+      });
     }
   }
 
