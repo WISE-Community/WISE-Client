@@ -3,7 +3,7 @@
 import { ConfigService } from './configService';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject, max, tap } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { Node } from '../common/Node';
 import { PeerGrouping } from '../../../app/domain/peerGrouping';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
@@ -1450,7 +1450,7 @@ export class ProjectService {
    * @param currentStepNumber the current step number
    * @param branchLetterCode (optional) the character code for the branch letter e.g. 0=A, 1=B, etc.
    */
-  calculateNodeNumbersHelper(
+  private calculateNodeNumbersHelper(
     nodeId: string,
     currentActivityNumber: any,
     currentStepNumber: number,
