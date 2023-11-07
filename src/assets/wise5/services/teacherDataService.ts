@@ -185,7 +185,28 @@ export class TeacherDataService extends DataService {
 
   getAllRelatedComponents(node: Node): any {
     const components = node.getNodeIdComponentIds();
-    return components.concat(this.getConnectedComponentsWithRequiredStudentData(components));
+    return [
+      ...components,
+      ...this.getShowMyWorkStudentData(components),
+      ...this.getConnectedComponentsWithRequiredStudentData(components)
+    ];
+  }
+
+  getShowMyWorkStudentData(components: any[]): any[] {
+    const showMyWorkComponents = [];
+    for (const component of components) {
+      const componentContent: any = this.ProjectService.getComponent(
+        component.nodeId,
+        component.componentId
+      );
+      if (componentContent.type === 'ShowMyWork') {
+        showMyWorkComponents.push({
+          nodeId: componentContent.showWorkNodeId,
+          componentId: componentContent.showWorkComponentId
+        });
+      }
+    }
+    return showMyWorkComponents;
   }
 
   getConnectedComponentsWithRequiredStudentData(components): any {

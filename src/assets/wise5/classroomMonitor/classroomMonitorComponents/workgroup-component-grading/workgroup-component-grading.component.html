@@ -1,6 +1,12 @@
 <div class="component__content" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
   <div fxLayout="column" fxFlex="100" [fxFlex.gt-sm]="isGradable ? 66 : 100">
-    <ng-container *ngIf="latestComponentState != null || component.type === 'ShowGroupWork'">
+    <ng-container
+      *ngIf="
+        latestComponentState != null ||
+        component.type === 'ShowGroupWork' ||
+        component.type === 'ShowMyWork'
+      "
+    >
       <component-grading-component
         [nodeId]="nodeId"
         [componentId]="component.id"
