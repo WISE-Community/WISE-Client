@@ -6,6 +6,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 describe('ComponentSelectorComponent', () => {
   let component: ComponentSelectorComponent;
@@ -16,6 +17,7 @@ describe('ComponentSelectorComponent', () => {
       declarations: [ComponentSelectorComponent],
       imports: [
         HttpClientTestingModule,
+        MatCardModule,
         MatDialogModule,
         MatIconModule,
         StudentTeacherCommonServicesModule
