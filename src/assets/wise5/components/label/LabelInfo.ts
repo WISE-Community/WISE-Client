@@ -1,7 +1,7 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class LabelInfo extends ComponentInfo {
-  protected description: string = $localize`The student adds label to a canvas.`;
+  protected description: string = $localize`Students add labels to a canvas.`;
   protected label: string = $localize`Label`;
   protected previewContent: any = {
     id: 'abcde12345',
@@ -9,6 +9,7 @@ export class LabelInfo extends ComponentInfo {
     prompt: 'Label the layers of the Earth by moving the labels to the correct location.',
     showSaveButton: false,
     showSubmitButton: false,
+    showAddToNotebookButton: false,
     backgroundImage: '/assets/img/component-preview/earth-layers.jpg',
     canCreateLabels: true,
     canEditLabels: true,

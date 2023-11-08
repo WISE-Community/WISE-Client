@@ -1,33 +1,30 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class MultipleChoiceInfo extends ComponentInfo {
-  protected description: string = $localize`The student chooses one or more choices.`;
+  protected description: string = $localize`Students select one or more choices.`;
   protected label: string = $localize`Multiple Choice`;
   protected previewContent: any = {
     id: 'abcde12345',
     type: 'MultipleChoice',
-    prompt: 'Choose the fruit.',
+    prompt: 'When touching a hot METAL bowl and a hot WOODEN bowl that have the same temperature:',
     showSaveButton: false,
     showSubmitButton: true,
     choiceType: 'radio',
     choices: [
       {
-        id: 'h0bdww4oh5',
-        text: '<img src="/assets/img/component-preview/sun.png"/>',
         feedback: '',
-        isCorrect: false
+        id: '1jmi01ht6t',
+        text: 'The metal bowl will feel hotter.'
       },
       {
-        id: 're6btejd1o',
-        text: '<img src="/assets/img/component-preview/leaf.png"/>',
         feedback: '',
-        isCorrect: true
+        id: '46r96bhek5',
+        text: 'The wooden bowl will feel hotter.'
       },
       {
-        id: '5u2px4yxj3',
-        text: 'Apple',
         feedback: '',
-        isCorrect: true
+        id: 'xuikkjc99u',
+        text: 'The bowls will feel the same.'
       }
     ],
     showFeedback: true,

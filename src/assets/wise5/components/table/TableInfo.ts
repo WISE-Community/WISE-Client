@@ -1,76 +1,138 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class TableInfo extends ComponentInfo {
-  protected description: string = $localize`The student views a table that they may or may not be able to change.`;
+  protected description: string = $localize`Students view and/or edit table data.`;
   protected label: string = $localize`Table`;
   protected previewContent: any = {
     id: 'abcde12345',
     type: 'Table',
-    prompt: 'Add the number of elephants to the graph.',
+    prompt: `<p>Document your findings!</p>
+      <p>Run at least 3 trials with the simulation: one with dark sand, one with medium colored sand, and one with light sand. Record the results in the table below.</p>`,
     showSaveButton: false,
     showSubmitButton: false,
-    globalCellSize: 10,
-    numRows: 5,
-    numColumns: 2,
+    showAddToNotebookButton: false,
+    globalCellSize: 9,
+    numRows: 4,
+    nuColumns: 8,
     tableData: [
       [
         {
-          text: 'Animal',
           editable: false,
-          size: null
+          text: 'Trial'
         },
         {
-          text: 'Count',
           editable: false,
-          size: null
+          text: 'Sand Color'
+        },
+        {
+          editable: false,
+          text: 'Initial number of fish'
+        },
+        {
+          editable: false,
+          text: 'Initial number of sharks'
+        },
+        {
+          editable: false,
+          text: 'Generations passed'
+        },
+        {
+          editable: false,
+          text: 'Resulting number of dark fish'
+        },
+        {
+          editable: false,
+          text: 'Resulting number of light fish'
         }
       ],
       [
         {
-          text: 'Bears',
           editable: false,
-          size: null
+          text: '1'
         },
         {
-          text: '1',
-          editable: false,
-          size: null
-        }
-      ],
-      [
-        {
-          text: 'Cats',
-          editable: false,
-          size: null
-        },
-        {
-          text: '4',
-          editable: false,
-          size: null
-        }
-      ],
-      [
-        {
-          text: 'Dogs',
-          editable: false,
-          size: null
-        },
-        {
-          text: '6',
-          editable: false,
-          size: null
-        }
-      ],
-      [
-        {
-          text: 'Elephants',
-          editable: false,
-          size: null
-        },
-        {
-          text: '',
           editable: true,
-          size: null
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
+        }
+      ],
+      [
+        {
+          editable: false,
+          text: '2'
+        },
+        {
+          editable: true,
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
+        }
+      ],
+      [
+        {
+          editable: false,
+          text: '3'
+        },
+        {
+          editable: true,
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
+        },
+        {
+          editable: true,
+          text: ''
         }
       ]
     ],

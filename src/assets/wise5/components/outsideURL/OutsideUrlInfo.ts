@@ -1,7 +1,7 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class OutsideUrlInfo extends ComponentInfo {
-  protected description: string = $localize`The student views a webpage.`;
+  protected description: string = $localize`Students view an external website.`;
   protected label: string = $localize`Outside Resource`;
   protected previewContent: any = {
     id: 'abcde12345',

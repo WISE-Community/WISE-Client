@@ -14975,8 +14975,8 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8924316916640674069" datatype="html">
-        <source>The student watches an animation.</source>
+      <trans-unit id="555720515547706264" datatype="html">
+        <source>Students watch an animation.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/AnimationInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -15623,8 +15623,8 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">330</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5403836192714639652" datatype="html">
-        <source>The student changes the frequency of a sound wave while they listen to it.</source>
+      <trans-unit id="3308736994783976865" datatype="html">
+        <source>Students change the frequency and amplitude of a sound wave. They listen to the resulting sounds and view graphs of the waves.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/AudioOscillatorInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -16216,8 +16216,8 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2347126354076252477" datatype="html">
-        <source>The student adds items to a canvas and connects the items with links.</source>
+      <trans-unit id="687454984939780519" datatype="html">
+        <source>Students add items to a canvas and connect the items with links.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/ConceptMapInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -16744,8 +16744,8 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4894373145042760028" datatype="html">
-        <source>The student chats with a computer avatar about a specific topic.</source>
+      <trans-unit id="6591302615932523578" datatype="html">
+        <source>Students chat with a computer avatar about a specific topic.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/DialogGuidanceInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -16952,8 +16952,8 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">99</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2671695220417934142" datatype="html">
-        <source>The student posts messages for the whole class to see.</source>
+      <trans-unit id="1942410144330587547" datatype="html">
+        <source>Students post messages for the whole class to see and can reply to other students&apos; posts.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/DiscussionInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -17129,8 +17129,8 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">196</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3467226478937946735" datatype="html">
-        <source>The student draws on a canvas.</source>
+      <trans-unit id="831017338718169987" datatype="html">
+        <source>Students draw on a canvas using a variety of tools.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/DrawInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -17363,8 +17363,8 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1122742094811105700" datatype="html">
-        <source>The student interacts with a custom model.</source>
+      <trans-unit id="136621085447874306" datatype="html">
+        <source>Students interact with a custom applicatio, such as a model or simulation.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/EmbeddedInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -17445,8 +17445,8 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2716190683406260129" datatype="html">
-        <source>The student views graph data or adds points to a graph.</source>
+      <trans-unit id="7956799829776596403" datatype="html">
+        <source>Students view graph data or add points to a graph.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/GraphInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -18328,8 +18328,8 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4961326623498511154" datatype="html">
-        <source>The student views html content.</source>
+      <trans-unit id="2625259185007890834" datatype="html">
+        <source>Students view rich text (HTML) content.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/html/HtmlInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -18353,8 +18353,8 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8274597641543294224" datatype="html">
-        <source>The student adds label to a canvas.</source>
+      <trans-unit id="6834864406146550455" datatype="html">
+        <source>Students add labels to a canvas.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/LabelInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -18591,8 +18591,8 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">906</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4087524914668052867" datatype="html">
-        <source>The student places items into buckets.</source>
+      <trans-unit id="5508586823060600561" datatype="html">
+        <source>Students sort items into different buckets.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/MatchInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -18941,8 +18941,8 @@ Warning: This will delete all existing choices and buckets in this component.</s
           <context context-type="linenumber">690</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2658693051060258363" datatype="html">
-        <source>The student chooses one or more choices.</source>
+      <trans-unit id="3309404570196522710" datatype="html">
+        <source>Students select one or more choices.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/MultipleChoiceInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -19057,8 +19057,8 @@ Warning: This will delete all existing choices in this component.</source>
           <context context-type="linenumber">72,74</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1028655982364991844" datatype="html">
-        <source>The student types a text response.</source>
+      <trans-unit id="7864549548500976713" datatype="html">
+        <source>Students type a response to a question or prompt.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/OpenResponseInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -19589,8 +19589,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">320</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5677688832128432995" datatype="html">
-        <source>The student views a webpage.</source>
+      <trans-unit id="1509148984305384330" datatype="html">
+        <source>Students view an external website.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/OutsideUrlInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -19710,8 +19710,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4549398534062821593" datatype="html">
-        <source>The student is paired up with another student and they chat about a topic.</source>
+      <trans-unit id="5734555357630269297" datatype="html">
+        <source>Students are grouped with other students to discuss a topic.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/PeerChatInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -19834,8 +19834,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="349225902046372709" datatype="html">
-        <source>The student is shown work that their group submitted for a specific step.</source>
+      <trans-unit id="1798145324838976344" datatype="html">
+        <source>Students are shown work that everyone in their group submitted for a specific item.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/ShowGroupWorkInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -19943,8 +19943,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">21,23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2816092756166406461" datatype="html">
-        <source>The student is shown work that that they submitted for a specific step.</source>
+      <trans-unit id="6297717923875088216" datatype="html">
+        <source>Students are shown work that they submitted for a specific item.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showMyWork/ShowMyWorkInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -19971,8 +19971,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3949592287971618934" datatype="html">
-        <source>The student is shown aggregate graph data of the class.</source>
+      <trans-unit id="5536408973677447769" datatype="html">
+        <source>Students are shown an aggregate graph summarizing data from the class.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/SummaryInfo.ts</context>
           <context context-type="linenumber">4</context>
@@ -20172,8 +20172,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8790251282673898344" datatype="html">
-        <source>The student views a table that they may or may not be able to change.</source>
+      <trans-unit id="6594489851569621957" datatype="html">
+        <source>Students view and/or edit table data.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/TableInfo.ts</context>
           <context context-type="linenumber">4</context>

@@ -1,7 +1,7 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class GraphInfo extends ComponentInfo {
-  protected description: string = $localize`The student views graph data or adds points to a graph.`;
+  protected description: string = $localize`Students view graph data or add points to a graph.`;
   protected label: string = $localize`Graph`;
   protected previewContent: any = {
     id: 'abcde12345',
@@ -10,6 +10,7 @@ export class GraphInfo extends ComponentInfo {
       'Draw a line that shows the position graph of a person that starts at position 0 meters and then takes 50 seconds to walk 50 meters and then comes back to their start position while moving at a constant speed.',
     showSaveButton: false,
     showSubmitButton: false,
+    showAddToNotebookButton: false,
     title: '',
     width: 800,
     height: 500,

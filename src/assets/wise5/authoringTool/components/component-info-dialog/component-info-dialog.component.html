@@ -1,13 +1,10 @@
 <h2 mat-dialog-title i18n>{{ label }}</h2>
 <mat-dialog-content>
   <p>{{ description }}</p>
-</mat-dialog-content>
-<mat-divider></mat-divider>
-<mat-dialog-content>
-  <div class="example-label" i18n>Example</div>
+  <mat-divider></mat-divider>
+  <h3 i18n>Example</h3>
   <preview-component [component]="component"> </preview-component>
 </mat-dialog-content>
-<mat-divider></mat-divider>
-<mat-dialog-actions align="end">
+<mat-dialog-actions fxLayoutAlign="end">
   <button mat-button mat-dialog-close cdkFocusRegionstart i18n>Close</button>
 </mat-dialog-actions>

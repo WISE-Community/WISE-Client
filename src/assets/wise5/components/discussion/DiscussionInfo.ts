@@ -1,12 +1,13 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class DiscussionInfo extends ComponentInfo {
-  protected description: string = $localize`The student posts messages for the whole class to see.`;
+  protected description: string = $localize`Students post messages for the whole class to see and can reply to other students' posts.`;
   protected label: string = $localize`Discussion`;
   protected previewContent: any = {
     id: 'abcde12345',
     type: 'Discussion',
-    prompt: 'Post a message for the class to view.',
+    prompt:
+      'Based on your findings, how does the color of the sand affect the population of fish? Post your ideas to share with the class.',
     showSaveButton: false,
     showSubmitButton: false,
     isStudentAttachmentEnabled: true,
