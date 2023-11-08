@@ -187,37 +187,24 @@ export class TeacherDataService extends DataService {
     const components = node.getNodeIdComponentIds();
     return [
       ...components,
-      ...this.getShowMyWorkStudentData(components),
-      ...this.getConnectedComponentsWithRequiredStudentData(components)
+      ...this.getShowMyWorkStudentData(node),
+      ...this.getConnectedComponentsWithRequiredStudentData(node)
     ];
   }
 
-  getShowMyWorkStudentData(components: any[]): any[] {
-    const showMyWorkComponents = [];
-    for (const component of components) {
-      const componentContent: any = this.ProjectService.getComponent(
-        component.nodeId,
-        component.componentId
-      );
-      if (componentContent.type === 'ShowMyWork') {
-        showMyWorkComponents.push({
-          nodeId: componentContent.showWorkNodeId,
-          componentId: componentContent.showWorkComponentId
-        });
-      }
-    }
-    return showMyWorkComponents;
+  getShowMyWorkStudentData(node: Node): any[] {
+    return node.components
+      .filter((component: any) => component.type === 'ShowMyWork')
+      .map((component: any) => {
+        return { nodeId: component.showWorkNodeId, componentId: component.showWorkComponentId };
+      });
   }
 
-  getConnectedComponentsWithRequiredStudentData(components): any {
+  getConnectedComponentsWithRequiredStudentData(node: Node): any[] {
     const connectedComponents = [];
-    for (const component of components) {
-      const componentContent = this.ProjectService.getComponent(
-        component.nodeId,
-        component.componentId
-      );
-      if (this.isConnectedComponentStudentDataRequired(componentContent)) {
-        for (const connectedComponent of componentContent.connectedComponents) {
+    for (const component of node.components) {
+      if (this.isConnectedComponentStudentDataRequired(component)) {
+        for (const connectedComponent of component.connectedComponents) {
           connectedComponents.push(connectedComponent);
         }
       }

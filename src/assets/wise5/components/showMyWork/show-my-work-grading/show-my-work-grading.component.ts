@@ -15,16 +15,13 @@ export class ShowMyWorkGradingComponent implements OnInit {
   protected showWorkNodeId: string;
   @Input() workgroupId: number;
 
-  constructor(
-    private projectService: ProjectService,
-    private teacherDataService: TeacherDataService
-  ) {}
+  constructor(private dataService: TeacherDataService, private projectService: ProjectService) {}
 
   ngOnInit(): void {
     const component: any = this.projectService.getComponent(this.nodeId, this.componentId);
     this.showWorkNodeId = component.showWorkNodeId;
     this.showWorkComponentId = component.showWorkComponentId;
-    this.componentState = this.teacherDataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
+    this.componentState = this.dataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
       this.workgroupId,
       this.showWorkNodeId,
       this.showWorkComponentId
