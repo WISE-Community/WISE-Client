@@ -4,6 +4,8 @@ import { ConfigService } from '../../services/configService';
 import { By } from '@angular/platform-browser';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { of } from 'rxjs';
+import { SessionService } from '../../services/sessionService';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 class MockConfigService {
   getMyUsername(): string {
@@ -22,8 +24,10 @@ describe('ConcurrentAuthorsMessageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ConcurrentAuthorsMessageComponent],
+      imports: [HttpClientTestingModule],
       providers: [
         { provide: ConfigService, useClass: MockConfigService },
+        SessionService,
         { provide: TeacherProjectService, useClass: MockTeacherProjectService }
       ]
     });

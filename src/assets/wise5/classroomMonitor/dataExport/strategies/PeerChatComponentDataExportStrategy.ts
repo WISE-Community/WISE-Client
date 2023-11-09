@@ -146,7 +146,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     const workRows = [];
     for (let r = 0; r < sortedComponentStates.length; r++) {
       const componentState = sortedComponentStates[r];
-      const row = new Array(columnNames.length);
+      const row = new Array(columnNames.length).fill('');
       this.setColumnValue(row, columnNameToNumber, '#', r + 1);
       this.setStudentInfo(row, columnNameToNumber, componentState);
       this.setRunInfo(row, columnNameToNumber, componentState);
@@ -223,7 +223,9 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
       this.projectService.getNodePositionAndTitle(nodeId)
     );
     this.setColumnValue(row, columnNameToNumber, 'Component Type', component.type);
-    this.setColumnValue(row, columnNameToNumber, 'Prompt', component.prompt);
+    if (!this.hasDynamicPrompt(component)) {
+      this.setColumnValue(row, columnNameToNumber, 'Prompt', component.prompt);
+    }
   }
 
   private setStudentWork(
