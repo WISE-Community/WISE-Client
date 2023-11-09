@@ -176,48 +176,11 @@ export class TeacherDataService extends DataService {
       .set('getStudentWork', 'true')
       .set('getAnnotations', 'false')
       .set('getEvents', 'false');
-    const components = this.getAllRelatedComponents(node);
+    const components = node.getAllRelatedComponents();
     if (components.length > 0) {
       params = params.set('components', compressToEncodedURIComponent(JSON.stringify(components)));
     }
     return this.retrieveStudentData(params);
-  }
-
-  getAllRelatedComponents(node: Node): any {
-    const components = node.getNodeIdComponentIds();
-    return [
-      ...components,
-      ...this.getShowMyWorkStudentData(node),
-      ...this.getConnectedComponentsWithRequiredStudentData(node)
-    ];
-  }
-
-  getShowMyWorkStudentData(node: Node): any[] {
-    return node.components
-      .filter((component: any) => component.type === 'ShowMyWork')
-      .map((component: any) => {
-        return { nodeId: component.showWorkNodeId, componentId: component.showWorkComponentId };
-      });
-  }
-
-  getConnectedComponentsWithRequiredStudentData(node: Node): any[] {
-    const connectedComponents = [];
-    for (const component of node.components) {
-      if (this.isConnectedComponentStudentDataRequired(component)) {
-        for (const connectedComponent of component.connectedComponents) {
-          connectedComponents.push(connectedComponent);
-        }
-      }
-    }
-    return connectedComponents;
-  }
-
-  isConnectedComponentStudentDataRequired(componentContent) {
-    return (
-      componentContent.type === 'Discussion' &&
-      componentContent.connectedComponents != null &&
-      componentContent.connectedComponents.length !== 0
-    );
   }
 
   retrieveStudentDataByWorkgroupId(workgroupId) {

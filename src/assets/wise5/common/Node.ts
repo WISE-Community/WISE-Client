@@ -159,4 +159,41 @@ export class Node {
   private getComponentIndex(componentId: string): number {
     return this.components.findIndex((component) => component.id === componentId);
   }
+
+  getAllRelatedComponents(): any {
+    const components = this.getNodeIdComponentIds();
+    return [
+      ...components,
+      ...this.getShowMyWorkStudentData(),
+      ...this.getConnectedComponentsWithRequiredStudentData()
+    ];
+  }
+
+  private getShowMyWorkStudentData(): any[] {
+    return this.components
+      .filter((component: any) => component.type === 'ShowMyWork')
+      .map((component: any) => {
+        return { nodeId: component.showWorkNodeId, componentId: component.showWorkComponentId };
+      });
+  }
+
+  private getConnectedComponentsWithRequiredStudentData(): any[] {
+    const connectedComponents = [];
+    for (const component of this.components) {
+      if (this.isConnectedComponentStudentDataRequired(component)) {
+        for (const connectedComponent of component.connectedComponents) {
+          connectedComponents.push(connectedComponent);
+        }
+      }
+    }
+    return connectedComponents;
+  }
+
+  private isConnectedComponentStudentDataRequired(componentContent: any): boolean {
+    return (
+      componentContent.type === 'Discussion' &&
+      componentContent.connectedComponents != null &&
+      componentContent.connectedComponents.length !== 0
+    );
+  }
 }

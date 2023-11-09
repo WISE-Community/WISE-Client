@@ -103,28 +103,6 @@ function initializeIdToNode() {
   };
 }
 
-function shouldGetAllRelatedComponents() {
-  it('should get all related components', () => {
-    initializeIdToNode();
-    const node1Components = TeacherDataService.getAllRelatedComponents('node1');
-    expect(node1Components.length).toEqual(2);
-    expect(node1Components[0].nodeId).toEqual('node1');
-    expect(node1Components[0].componentId).toEqual('vg5uzarhir');
-    expect(node1Components[1].nodeId).toEqual('node1');
-    expect(node1Components[1].componentId).toEqual('4h834b2zbd');
-    const node2Components = TeacherDataService.getAllRelatedComponents('node2');
-    expect(node2Components.length).toEqual(2);
-    expect(node2Components[0].nodeId).toEqual('node2');
-    expect(node2Components[0].componentId).toEqual('1xph6u3mea');
-    expect(node2Components[1].nodeId).toEqual('node1');
-    expect(node2Components[1].componentId).toEqual('vg5uzarhir');
-    const node3Components = TeacherDataService.getAllRelatedComponents('node3');
-    expect(node3Components.length).toEqual(1);
-    expect(node3Components[0].nodeId).toEqual('node3');
-    expect(node3Components[0].componentId).toEqual('j2fsu892t3');
-  });
-}
-
 function shouldGetConnectedComponentsIfNecessary() {
   it('should get connected components if necessary', () => {
     initializeIdToNode();

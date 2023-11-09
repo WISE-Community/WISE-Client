@@ -4,10 +4,13 @@ import { Node } from './Node';
 const componentId1 = 'c1';
 const componentId2 = 'c2';
 let node: Node;
+const nodeId1 = 'node1';
+const nodeId2 = 'node2';
 
 describe('Node', () => {
   beforeEach(() => {
     node = new Node();
+    node.id = 'node1';
     node.components = [
       { id: componentId1, prompt: 'a' },
       { id: componentId2, prompt: 'b' }
@@ -19,6 +22,7 @@ describe('Node', () => {
   getNodeIdComponentIds();
   moveComponents();
   replaceComponent();
+  getAllRelatedComponents();
 });
 
 function copyComponents() {
@@ -119,6 +123,78 @@ function replaceComponent() {
     it('should replace the specified component', () => {
       node.replaceComponent(componentId2, { id: componentId2, prompt: 'c' } as ComponentContent);
       expect(node.components[1].prompt).toEqual('c');
+    });
+  });
+}
+
+function getAllRelatedComponents() {
+  describe('getAllRelatedComponents()', () => {
+    getAllRelatedComponents_stepHasRegularComponents_getsRelatedComponents();
+    getAllRelatedComponents_stepHasShowMyWorkComponent_getsRelatedComponents();
+    getAllRelatedComponents_stepHasDiscussionWithConnectedComponent_getsRelatedComponents();
+  });
+}
+
+function getAllRelatedComponents_stepHasRegularComponents_getsRelatedComponents() {
+  describe('step has regular components', () => {
+    it('gets the related components', () => {
+      node.components = [
+        {
+          id: componentId1,
+          type: 'OpenResponse'
+        },
+        {
+          id: componentId2,
+          type: 'MultipleChoice'
+        }
+      ];
+      expect(node.getAllRelatedComponents()).toEqual([
+        { nodeId: nodeId1, componentId: componentId1 },
+        { nodeId: nodeId1, componentId: componentId2 }
+      ]);
+    });
+  });
+}
+
+function getAllRelatedComponents_stepHasShowMyWorkComponent_getsRelatedComponents() {
+  describe('step has a show my work component', () => {
+    it('gets the related components', () => {
+      node.components = [
+        {
+          id: componentId1,
+          type: 'ShowMyWork',
+          showWorkNodeId: nodeId2,
+          showWorkComponentId: componentId2
+        }
+      ];
+      expect(node.getAllRelatedComponents()).toEqual([
+        { nodeId: nodeId1, componentId: componentId1 },
+        { nodeId: nodeId2, componentId: componentId2 }
+      ]);
+    });
+  });
+}
+
+function getAllRelatedComponents_stepHasDiscussionWithConnectedComponent_getsRelatedComponents() {
+  describe('step has a discussion component with a connected component', () => {
+    it('gets the related components', () => {
+      node.components = [
+        {
+          id: componentId1,
+          type: 'Discussion',
+          connectedComponents: [
+            {
+              nodeId: nodeId2,
+              componentId: componentId2,
+              type: 'importWork'
+            }
+          ]
+        }
+      ];
+      expect(node.getAllRelatedComponents()).toEqual([
+        { nodeId: nodeId1, componentId: componentId1 },
+        { nodeId: nodeId2, componentId: componentId2, type: 'importWork' }
+      ]);
     });
   });
 }
