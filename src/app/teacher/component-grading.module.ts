@@ -16,6 +16,7 @@ import { PeerChatGradingModule } from '../../assets/wise5/components/peerChat/pe
 import { ShowGroupWorkGradingModule } from '../../assets/wise5/components/showGroupWork/show-group-work-grading/show-group-work-grading.module';
 import { TableGradingModule } from '../../assets/wise5/components/table/table-grading/table-grading.module';
 import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
+import { ShowMyWorkGradingModule } from '../../assets/wise5/components/showMyWork/show-my-work-grading/show-my-work-grading.module';
 
 @NgModule({
   declarations: [ComponentGradingComponent],
@@ -35,6 +36,7 @@ import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/c
     OpenResponseGradingModule,
     PeerChatGradingModule,
     ShowGroupWorkGradingModule,
+    ShowMyWorkGradingModule,
     TableGradingModule
   ],
   exports: [
@@ -54,6 +56,7 @@ import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/c
     OpenResponseGradingModule,
     PeerChatGradingModule,
     ShowGroupWorkGradingModule,
+    ShowMyWorkGradingModule,
     TableGradingModule
   ]
 })

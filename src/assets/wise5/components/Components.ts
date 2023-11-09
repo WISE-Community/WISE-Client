@@ -45,6 +45,7 @@ import { ShowGroupWorkAuthoringComponent } from './showGroupWork/show-group-work
 import { ShowGroupWorkGradingComponent } from './showGroupWork/show-group-work-grading/show-group-work-grading.component';
 import { ShowGroupWorkStudentComponent } from './showGroupWork/show-group-work-student/show-group-work-student.component';
 import { ShowMyWorkAuthoringComponent } from './showMyWork/show-my-work-authoring/show-my-work-authoring.component';
+import { ShowMyWorkGradingComponent } from './showMyWork/show-my-work-grading/show-my-work-grading.component';
 import { ShowMyWorkStudentComponent } from './showMyWork/show-my-work-student/show-my-work-student.component';
 import { SummaryAuthoring } from './summary/summary-authoring/summary-authoring.component';
 import { SummaryStudent } from './summary/summary-student/summary-student.component';
@@ -109,7 +110,11 @@ export const components = {
     grading: ShowGroupWorkGradingComponent,
     student: ShowGroupWorkStudentComponent
   },
-  ShowMyWork: { authoring: ShowMyWorkAuthoringComponent, student: ShowMyWorkStudentComponent },
+  ShowMyWork: {
+    authoring: ShowMyWorkAuthoringComponent,
+    grading: ShowMyWorkGradingComponent,
+    student: ShowMyWorkStudentComponent
+  },
   Summary: { authoring: SummaryAuthoring, student: SummaryStudent },
   Table: { authoring: TableAuthoring, grading: TableGradingComponent, student: TableStudent }
 };

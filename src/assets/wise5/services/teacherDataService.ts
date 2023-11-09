@@ -176,40 +176,11 @@ export class TeacherDataService extends DataService {
       .set('getStudentWork', 'true')
       .set('getAnnotations', 'false')
       .set('getEvents', 'false');
-    const components = this.getAllRelatedComponents(node);
+    const components = node.getAllRelatedComponents();
     if (components.length > 0) {
       params = params.set('components', compressToEncodedURIComponent(JSON.stringify(components)));
     }
     return this.retrieveStudentData(params);
-  }
-
-  getAllRelatedComponents(node: Node): any {
-    const components = node.getNodeIdComponentIds();
-    return components.concat(this.getConnectedComponentsWithRequiredStudentData(components));
-  }
-
-  getConnectedComponentsWithRequiredStudentData(components): any {
-    const connectedComponents = [];
-    for (const component of components) {
-      const componentContent = this.ProjectService.getComponent(
-        component.nodeId,
-        component.componentId
-      );
-      if (this.isConnectedComponentStudentDataRequired(componentContent)) {
-        for (const connectedComponent of componentContent.connectedComponents) {
-          connectedComponents.push(connectedComponent);
-        }
-      }
-    }
-    return connectedComponents;
-  }
-
-  isConnectedComponentStudentDataRequired(componentContent) {
-    return (
-      componentContent.type === 'Discussion' &&
-      componentContent.connectedComponents != null &&
-      componentContent.connectedComponents.length !== 0
-    );
   }
 
   retrieveStudentDataByWorkgroupId(workgroupId) {
