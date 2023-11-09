@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StudentService } from '../../../student/student.service';
@@ -12,7 +12,7 @@ import { PasswordErrors } from '../../../domain/password/password-errors';
   templateUrl: './forgot-student-password-change.component.html',
   styleUrls: ['./forgot-student-password-change.component.scss']
 })
-export class ForgotStudentPasswordChangeComponent implements OnInit {
+export class ForgotStudentPasswordChangeComponent {
   @Input() answer: string;
   changePasswordFormGroup: FormGroup = this.fb.group({});
   message: string = '';
@@ -26,8 +26,6 @@ export class ForgotStudentPasswordChangeComponent implements OnInit {
     private router: Router,
     private studentService: StudentService
   ) {}
-
-  ngOnInit(): void {}
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();

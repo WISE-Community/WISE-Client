@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,12 +6,10 @@ import { Router } from '@angular/router';
   templateUrl: './forgot-teacher-password-complete.component.html',
   styleUrls: ['./forgot-teacher-password-complete.component.scss']
 })
-export class ForgotTeacherPasswordCompleteComponent implements OnInit {
+export class ForgotTeacherPasswordCompleteComponent {
   @Input() username: string;
 
   constructor(private router: Router) {}
-
-  ngOnInit() {}
 
   goToLoginPage() {
     this.router.navigate(['/login', { username: this.username }]);

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StudentService } from '../../../student/student.service';
@@ -11,7 +11,7 @@ import { ConfigService } from '../../../services/config.service';
   templateUrl: './forgot-student-password-security.component.html',
   styleUrls: ['./forgot-student-password-security.component.scss']
 })
-export class ForgotStudentPasswordSecurityComponent implements OnInit {
+export class ForgotStudentPasswordSecurityComponent {
   answer: string;
   answerSecurityQuestionFormGroup: FormGroup = this.fb.group({
     answer: new FormControl('', [Validators.required])
@@ -30,8 +30,6 @@ export class ForgotStudentPasswordSecurityComponent implements OnInit {
     private router: Router,
     private studentService: StudentService
   ) {}
-
-  ngOnInit() {}
 
   async submit() {
     this.processing = true;

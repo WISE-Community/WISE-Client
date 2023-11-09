@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
@@ -12,7 +12,7 @@ import { PasswordErrors } from '../../../domain/password/password-errors';
   templateUrl: './forgot-teacher-password-change.component.html',
   styleUrls: ['./forgot-teacher-password-change.component.scss']
 })
-export class ForgotTeacherPasswordChangeComponent implements OnInit {
+export class ForgotTeacherPasswordChangeComponent {
   changePasswordFormGroup: FormGroup = this.fb.group({});
   isSubmitButtonEnabled: boolean = true;
   message: string = '';
@@ -27,8 +27,6 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
     private router: Router,
     private teacherService: TeacherService
   ) {}
-
-  ngOnInit(): void {}
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();
