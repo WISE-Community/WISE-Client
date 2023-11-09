@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { StudentService } from '../../../student/student.service';
 import { finalize } from 'rxjs/operators';
 import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
@@ -12,27 +12,20 @@ import { PasswordErrors } from '../../../domain/password/password-errors';
   templateUrl: './forgot-student-password-change.component.html',
   styleUrls: ['./forgot-student-password-change.component.scss']
 })
-export class ForgotStudentPasswordChangeComponent implements OnInit {
-  answer: string;
+export class ForgotStudentPasswordChangeComponent {
+  @Input() answer: string;
   changePasswordFormGroup: FormGroup = this.fb.group({});
   message: string = '';
   processing: boolean = false;
-  questionKey: string;
-  username: string;
+  @Input() questionKey: string;
+  @Input() username: string;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
     private studentService: StudentService
   ) {}
-
-  ngOnInit(): void {
-    this.username = this.route.snapshot.queryParamMap.get('username');
-    this.questionKey = this.route.snapshot.queryParamMap.get('questionKey');
-    this.answer = this.route.snapshot.queryParamMap.get('answer');
-  }
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();

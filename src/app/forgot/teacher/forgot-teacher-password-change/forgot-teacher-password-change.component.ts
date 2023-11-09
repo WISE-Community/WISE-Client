@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { finalize } from 'rxjs/operators';
@@ -12,27 +12,21 @@ import { PasswordErrors } from '../../../domain/password/password-errors';
   templateUrl: './forgot-teacher-password-change.component.html',
   styleUrls: ['./forgot-teacher-password-change.component.scss']
 })
-export class ForgotTeacherPasswordChangeComponent implements OnInit {
+export class ForgotTeacherPasswordChangeComponent {
   changePasswordFormGroup: FormGroup = this.fb.group({});
   isSubmitButtonEnabled: boolean = true;
   message: string = '';
   processing: boolean = false;
   showForgotPasswordLink = false;
-  username: string;
-  verificationCode: string;
+  @Input() username: string = null;
+  @Input() verificationCode: string;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
     private teacherService: TeacherService
   ) {}
-
-  ngOnInit(): void {
-    this.username = this.route.snapshot.queryParamMap.get('username');
-    this.verificationCode = this.route.snapshot.queryParamMap.get('verificationCode');
-  }
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();
