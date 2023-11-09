@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Component({
@@ -7,12 +6,12 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
   styleUrls: ['./project-authoring-parent.component.scss']
 })
 export class ProjectAuthoringParentComponent {
-  protected projectId: number;
+  @Input('unitId') protected projectId?: number;
 
-  constructor(private projectService: TeacherProjectService, private route: ActivatedRoute) {}
+  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
-    this.projectId = Number(this.route.snapshot.paramMap.get('unitId'));
+    this.projectId = Number(this.projectId);
     this.projectService.notifyAuthorProjectBegin(this.projectId);
     window.onbeforeunload = (event) => {
       this.projectService.notifyAuthorProjectEnd(this.projectId);

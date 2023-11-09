@@ -1,36 +1,31 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { StudentService } from '../../../student/student.service';
 import { finalize } from 'rxjs/operators';
 import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
+import { injectPasswordErrors } from '../../../common/password-helper';
+import { PasswordErrors } from '../../../domain/password/password-errors';
 
 @Component({
   selector: 'forgot-student-password-change',
   templateUrl: './forgot-student-password-change.component.html',
   styleUrls: ['./forgot-student-password-change.component.scss']
 })
-export class ForgotStudentPasswordChangeComponent implements OnInit {
-  answer: string;
+export class ForgotStudentPasswordChangeComponent {
+  @Input() answer: string;
   changePasswordFormGroup: FormGroup = this.fb.group({});
   message: string = '';
   processing: boolean = false;
-  questionKey: string;
-  username: string;
+  @Input() questionKey: string;
+  @Input() username: string;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
     private studentService: StudentService
   ) {}
-
-  ngOnInit(): void {
-    this.username = this.route.snapshot.queryParamMap.get('username');
-    this.questionKey = this.route.snapshot.queryParamMap.get('questionKey');
-    this.answer = this.route.snapshot.queryParamMap.get('answer');
-  }
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();
@@ -62,20 +57,10 @@ export class ForgotStudentPasswordChangeComponent implements OnInit {
     this.goToSuccessPage();
   }
 
-  private changePasswordError(error: any): void {
-    const formError: any = {};
+  private changePasswordError(error: PasswordErrors): void {
     switch (error.messageCode) {
-      case 'invalidPasswordLength':
-        formError.minlength = true;
-        this.changePasswordFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
-        break;
-      case 'invalidPasswordPattern':
-        formError.pattern = true;
-        this.changePasswordFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
+      case 'invalidPassword':
+        injectPasswordErrors(this.changePasswordFormGroup, error);
         break;
       default:
         this.setErrorOccurredMessage();

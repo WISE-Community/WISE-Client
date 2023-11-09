@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
 import { UserService } from '../../../services/user.service';
 import { UnlinkGoogleAccountSuccessComponent } from '../unlink-google-account-success/unlink-google-account-success.component';
+import { injectPasswordErrors } from '../../../common/password-helper';
 
 @Component({
   styleUrls: ['./unlink-google-account-password.component.scss'],
@@ -51,20 +52,8 @@ export class UnlinkGoogleAccountPasswordComponent {
 
   private error(error: any): void {
     this.isSaving = false;
-    const formError: any = {};
-    switch (error.messageCode) {
-      case 'invalidPasswordLength':
-        formError.minlength = true;
-        this.newPasswordFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
-        break;
-      case 'invalidPasswordPattern':
-        formError.pattern = true;
-        this.newPasswordFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
-        break;
+    if (error.messageCode === 'invalidPassword') {
+      injectPasswordErrors(this.newPasswordFormGroup, error);
     }
   }
 }

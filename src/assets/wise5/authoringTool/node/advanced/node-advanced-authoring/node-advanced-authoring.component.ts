@@ -10,15 +10,13 @@ import { ActivatedRoute } from '@angular/router';
 export class NodeAdvancedAuthoringComponent implements OnInit {
   protected isGroupNode: boolean;
   protected nodeId: string;
-  protected projectId: number;
 
   constructor(private projectService: TeacherProjectService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.nodeId = this.route.snapshot.paramMap.get('nodeId');
     this.route.parent.params.subscribe((params) => {
-      this.projectId = Number(params.unitId);
+      this.nodeId = params.nodeId;
+      this.isGroupNode = this.projectService.getNode(this.nodeId).isGroup();
     });
-    this.isGroupNode = this.projectService.getNode(this.nodeId).isGroup();
   }
 }

@@ -22,13 +22,14 @@
         mat-icon-button
         *ngIf="runId"
         fxHide.xs
-        aria-label="Switch to Grading View"
-        i18n-aria-label
         matTooltip="Switch to Grading View"
         i18n-matTooltip
         (click)="switchToGradingView()"
       >
         <mat-icon mat-menu-origin>assignment_turned_in</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Preview Unit" i18n-matTooltip (click)="previewProject()">
+        <mat-icon>preview</mat-icon>
       </button>
     </span>
   </h3>

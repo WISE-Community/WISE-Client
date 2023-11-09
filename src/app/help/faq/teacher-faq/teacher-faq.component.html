@@ -1,34 +1,31 @@
 <div class="content-block">
-  <h1 fxLayoutAlign="left center">
-    <mat-icon class="title-icon">school</mat-icon
-    ><span i18n>Teacher Frequently Asked Questions</span>
+  <h1 fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon>school</mat-icon><span i18n>Teacher Frequently Asked Questions</span>
   </h1>
-  <hr />
+  <mat-divider></mat-divider>
   <h2 i18n>Table of Contents</h2>
-  <p class="indented-text">
-    <a (click)="scrollTo('generalQuestions')" class="link" i18n>General Questions</a>
-  </p>
-  <p class="indented-text">
-    <a (click)="scrollTo('studentManagement')" class="link" i18n>Student Management</a>
-  </p>
-  <p class="indented-text">
-    <a (click)="scrollTo('projectManagement')" class="link" i18n>Project Management</a>
-  </p>
-  <p class="indented-text" id="generalQuestions">
-    <a (click)="scrollTo('assessmentOfStudentWork')" class="link" i18n
-      >Assessment of Student Work</a
-    >
-  </p>
-  <p class="indented-text">
-    <a (click)="scrollTo('realTimeClassroomMonitor')" class="link" i18n
-      >Real Time Classroom Monitor</a
-    >
-  </p>
-  <p class="indented-text">
-    <a (click)="scrollTo('technicalQuestions')" class="link" i18n>Technical Questions</a>
-  </p>
-  <hr />
-  <h2 i18n>General Questions</h2>
+  <ul>
+    <li>
+      <a routerLink="." fragment="general" i18n>General Questions</a>
+    </li>
+    <li>
+      <a routerLink="." fragment="student-management" i18n>Student Management</a>
+    </li>
+    <li>
+      <a routerLink="." fragment="project-management" i18n>Project Management</a>
+    </li>
+    <li>
+      <a routerLink="." fragment="assessment" i18n>Assessment of Student Work</a>
+    </li>
+    <li>
+      <a routerLink="." fragment="classroom-monitor" i18n>Real Time Classroom Monitor</a>
+    </li>
+    <li>
+      <a routerLink="." fragment="technical" i18n>Technical Questions</a>
+    </li>
+  </ul>
+  <mat-divider></mat-divider>
+  <h2 id="general" i18n>General Questions</h2>
   <h3 i18n>How do I create an account?</h3>
   <ol>
     <li i18n>Go to the <a href="{{ contextPath }}/join" target="_blank">Register</a> page.</li>
@@ -53,7 +50,7 @@
       Choose the number of students per team. Choosing 1-3 will allow students to work together in a
       team.
     </li>
-    <li id="studentManagement" i18n>
+    <li i18n>
       Choose the start date. Students will not be able to use the project until this date.
     </li>
     <li i18n>Click "Create Run".</li>
@@ -63,10 +60,10 @@
       Students will need to use this access code to work on the run you created.
     </li>
   </ol>
-  <hr />
-  <h2 i18n>Student Management</h2>
+  <mat-divider></mat-divider>
+  <h2 id="student-management" i18n>Student Management</h2>
   <h3 i18n>Should I register my students for WISE or have them do it themselves?</h3>
-  <p class="indented-text" i18n>
+  <p i18n>
     WISE makes student registration simple and intuitive -- direct your students to the register
     page by having them go to the WISE home page and clicking the "Register" link at the upper
     right. They should be able to register in 10 minutes or less. However, you can also opt to
@@ -128,14 +125,14 @@
       students into the new team. Save your changes.
     </li>
     <li>
-      <span class="warning" i18n>Warning 1</span>:
+      <span class="warn" i18n>Warning 1</span>:
       <span i18n
         >If you move Student A into an established team, student A loses all of their current work
         and inherits the current work of the established team.</span
       >
     </li>
     <li>
-      <span class="warning" i18n>Warning 2</span>:
+      <span class="warn" i18n>Warning 2</span>:
       <span i18n
         >If you move Student A into a newly created (blank) team, student A will lose all of their
         work.</span
@@ -157,13 +154,13 @@
     <li i18n>Choose a different period.</li>
     <li i18n>Click "Save Changes".</li>
     <li>
-      <span class="warning" i18n>Warning</span>:
+      <span class="warn" i18n>Warning</span>:
       <span i18n
         >If you move a student to a different period, they will lose all of their work.</span
       >
     </li>
   </ol>
-  <h3 id="projectManagement" i18n>
+  <h3 i18n>
     I do not remember my teacher access code that students need to create their account for my new
     students.
   </h3>
@@ -172,8 +169,8 @@
     <li i18n>Find the run in your Teacher Home Page.</li>
     <li i18n>The Access Code will be displayed below the run title.</li>
   </ul>
-  <hr />
-  <h2 i18n>Project Management</h2>
+  <mat-divider></mat-divider>
+  <h2 id="project-management" i18n>Project Management</h2>
   <h3 i18n>When should I set up my project run?</h3>
   <ul>
     <li i18n>
@@ -238,7 +235,7 @@
     <li i18n>Find the period you want to delete and click the "Delete" button next to it.</li>
     <li i18n>Note: You are not allowed to delete a period that has students in it.</li>
   </ol>
-  <h3 id="assessmentOfStudentWork" i18n>
+  <h3 i18n>
     What if I run out of computer lab time but some of my students are not finished with the
     project?
   </h3>
@@ -249,8 +246,8 @@
       computer, per the teacher's discretion.
     </li>
   </ul>
-  <hr />
-  <h2 i18n>Assessment of Student Work</h2>
+  <mat-divider></mat-divider>
+  <h2 id="assessment" i18n>Assessment of Student Work</h2>
   <h3 i18n>How do I review and grade student work?</h3>
   <ul>
     <li i18n>Sign into WISE with your teacher account.</li>
@@ -295,7 +292,7 @@
       some sample responses and have the class critique the work.
     </li>
   </ul>
-  <h3 id="realTimeClassroomMonitor" i18n>How do I find time to grade all of the student work?</h3>
+  <h3 i18n>How do I find time to grade all of the student work?</h3>
   <ul>
     <li i18n>
       We recommend that you go through the project and select a few steps that you think best
@@ -305,8 +302,8 @@
       very time consuming and unpractical.
     </li>
   </ul>
-  <hr />
-  <h2 i18n>Real Time Classroom Monitor</h2>
+  <mat-divider></mat-divider>
+  <h2 id="classroom-monitor" i18n>Real Time Classroom Monitor</h2>
   <h3 i18n>What is the Real Time Classroom Monitor?</h3>
   <ul>
     <li i18n>
@@ -318,7 +315,7 @@
   </ul>
   <h3 i18n>Does the Real Time Classroom Monitor work on a tablet like the iPad?</h3>
   <ul>
-    <li id="technicalQuestions" i18n>Yes it does.</li>
+    <li i18n>Yes it does.</li>
   </ul>
   <h3 i18n>Can I use the Real Time Classroom Monitor to pause student screens?</h3>
   <ul>
@@ -327,8 +324,8 @@
       discussion or to make an announcement.
     </li>
   </ul>
-  <hr />
-  <h2 i18n>Technical Questions</h2>
+  <mat-divider></mat-divider>
+  <h2 id="technical" i18n>Technical Questions</h2>
   <h3 i18n>The WISE web site won't load on my web browser. What do I do?</h3>
   <ul>
     <li i18n>
@@ -356,7 +353,7 @@
     </li>
   </ul>
   <h3 i18n>Can I use WISE in another language?</h3>
-  <span class="indented-text" i18n>Yes!</span>
+  <p i18n>Yes!</p>
   <ol>
     <li i18n>Sign into WISE with your teacher account.</li>
     <li i18n>

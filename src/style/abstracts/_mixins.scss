@@ -121,6 +121,11 @@
     font-weight: 500;
   }
 
+  .mat-mdc-progress-bar {
+    --mdc-linear-progress-active-indicator-height: 12px;
+    --mdc-linear-progress-track-height: 12px;
+  }
+
   .mat-mdc-option, .mat-mdc-optgroup-label {
     @include mat.typography-level($wise-typography, 'caption');
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NotificationService } from '../../services/notificationService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
@@ -13,10 +13,11 @@ import { isValidJSONString } from '../../common/string/string';
 export class RecoveryAuthoringComponent implements OnInit {
   badNodes: NodeRecoveryAnalysis[] = [];
   protected globalMessage: any;
-  jsonIsValid: boolean;
+  jsonValid: boolean;
   projectJSONString: string;
   saveButtonEnabled: boolean = false;
   private subscriptions: Subscription = new Subscription();
+  @Input() protected unitId?: string;
 
   constructor(
     private notificationService: NotificationService,
@@ -36,14 +37,14 @@ export class RecoveryAuthoringComponent implements OnInit {
 
   projectJSONChanged(): void {
     this.checkProjectJSONValidity();
-    this.saveButtonEnabled = this.jsonIsValid;
-    if (this.jsonIsValid) {
+    this.saveButtonEnabled = this.jsonValid;
+    if (this.jsonValid) {
       this.checkNodes();
     }
   }
 
   private checkProjectJSONValidity(): void {
-    this.jsonIsValid = isValidJSONString(this.projectJSONString);
+    this.jsonValid = isValidJSONString(this.projectJSONString);
   }
 
   private subscribeToGlobalMessage(): void {

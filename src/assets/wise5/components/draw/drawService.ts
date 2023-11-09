@@ -5,7 +5,7 @@ import * as fabric from 'fabric';
 window['fabric'] = fabric.fabric;
 import * as EventEmitter2 from 'eventemitter2';
 window['EventEmitter2'] = EventEmitter2;
-import DrawingTool from 'drawing-tool/dist/drawing-tool';
+import DrawingTool from '@wise-community/drawing-tool/dist/drawing-tool';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';

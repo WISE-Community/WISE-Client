@@ -3,6 +3,7 @@ import { ConfigService } from '../../services/configService';
 import { RxStomp } from '@stomp/rx-stomp';
 import { Message } from '@stomp/stompjs';
 import { TeacherProjectService } from '../../services/teacherProjectService';
+import { SessionService } from '../../services/sessionService';
 
 @Component({
   selector: 'concurrent-authors-message',
@@ -14,7 +15,11 @@ export class ConcurrentAuthorsMessageComponent {
   @Input() private projectId: number;
   private rxStomp: RxStomp = new RxStomp();
 
-  constructor(private configService: ConfigService, private projectService: TeacherProjectService) {
+  constructor(
+    private configService: ConfigService,
+    private projectService: TeacherProjectService,
+    private sessionService: SessionService
+  ) {
     this.myUsername = this.configService.getMyUsername();
     this.rxStomp.configure({
       brokerURL: this.configService.getWebSocketURL()
@@ -27,6 +32,7 @@ export class ConcurrentAuthorsMessageComponent {
       this.projectService.notifyAuthorProjectBegin(this.projectId);
     });
     this.subscribeToCurrentAuthors();
+    this.subscribeToSessionExit();
   }
 
   private subscribeToCurrentAuthors(): void {
@@ -38,6 +44,12 @@ export class ConcurrentAuthorsMessageComponent {
               ', '
             )}. Be careful not to overwrite each other's work!`
           : '';
+    });
+  }
+
+  private subscribeToSessionExit(): void {
+    this.sessionService.exit$.subscribe(() => {
+      this.projectService.notifyAuthorProjectEnd();
     });
   }
 

@@ -1,0 +1,143 @@
+{
+  "nodes": [
+      {
+          "id": "group0",
+          "type": "group",
+          "title": "Master",
+          "startId": "group1",
+          "ids": [
+              "group1",
+              "group2"
+          ]
+      },
+      {
+          "id": "group1",
+          "type": "group",
+          "title": "Lesson 1",
+          "startId": "",
+          "constraints": [],
+          "transitionLogic": {
+              "transitions": [
+                  {
+                      "to": "group2"
+                  }
+              ]
+          },
+          "ids": []
+      },
+      {
+          "id": "group2",
+          "type": "group",
+          "title": "Lesson 2",
+          "startId": "",
+          "constraints": [],
+          "transitionLogic": {
+              "transitions": []
+          },
+          "ids": []
+      }
+  ],
+  "constraints": [],
+  "startGroupId": "group0",
+  "startNodeId": "group1",
+  "navigationMode": "guided",
+  "layout": {
+      "template": "starmap|leftNav|rightNav"
+  },
+  "metadata": {
+      "title": "Node Number Test",
+      "authors": [
+          {
+              "firstName": "g",
+              "lastName": "k",
+              "id": 3,
+              "username": "gk"
+          }
+      ]
+  },
+  "notebook": {
+      "enabled": false,
+      "label": "Notebook",
+      "enableAddNew": true,
+      "itemTypes": {
+          "note": {
+              "type": "note",
+              "enabled": true,
+              "enableLink": true,
+              "enableAddNote": true,
+              "enableClipping": true,
+              "enableStudentUploads": true,
+              "requireTextOnEveryNote": false,
+              "label": {
+                  "singular": "note",
+                  "plural": "notes",
+                  "link": "Notes",
+                  "icon": "note",
+                  "color": "#1565C0"
+              }
+          },
+          "report": {
+              "enabled": false,
+              "label": {
+                  "singular": "report",
+                  "plural": "reports",
+                  "link": "Report",
+                  "icon": "assignment",
+                  "color": "#AD1457"
+              },
+              "notes": [
+                  {
+                      "reportId": "finalReport",
+                      "title": "Final Report",
+                      "description": "Final summary report of what you learned in this unit",
+                      "prompt": "Use this space to write your final report using evidence from your notebook.",
+                      "content": "<h3>This is a heading</h3><p>This is a paragraph.</p>"
+                  }
+              ]
+          }
+      }
+  },
+  "teacherNotebook": {
+      "enabled": true,
+      "label": "Teacher Notebook",
+      "enableAddNew": true,
+      "itemTypes": {
+          "note": {
+              "type": "note",
+              "enabled": false,
+              "enableLink": true,
+              "enableAddNote": true,
+              "enableClipping": true,
+              "enableStudentUploads": true,
+              "requireTextOnEveryNote": false,
+              "label": {
+                  "singular": "note",
+                  "plural": "notes",
+                  "link": "Notes",
+                  "icon": "note",
+                  "color": "#1565C0"
+              }
+          },
+          "report": {
+              "enabled": true,
+              "label": {
+                  "singular": "teacher notes",
+                  "plural": "teacher notes",
+                  "link": "Teacher Notes",
+                  "icon": "assignment",
+                  "color": "#AD1457"
+              },
+              "notes": [
+                  {
+                      "reportId": "teacherReport",
+                      "title": "Teacher Notes",
+                      "description": "Notes for the teacher as they're running the WISE unit",
+                      "prompt": "Use this space to take notes for this unit",
+                      "content": "<p>Use this space to take notes for this unit</p>"
+                  }
+              ]
+          }
+      }
+  },
+  "inactiveNodes": []
+}

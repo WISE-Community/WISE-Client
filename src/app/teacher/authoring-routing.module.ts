@@ -38,6 +38,7 @@ import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringToo
 import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
 import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
 import { AddLessonChooseTemplateComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-template/add-lesson-choose-template.component';
+import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.resolver';
 
 const routes: Routes = [
   {
@@ -46,8 +47,12 @@ const routes: Routes = [
     resolve: { config: AuthoringConfigResolver },
     children: [
       { path: 'home', component: ProjectListComponent },
-
       { path: 'new-unit', component: AddProjectComponent },
+      {
+        path: 'recovery/:unitId',
+        component: RecoveryAuthoringComponent,
+        resolve: { project: RecoveryAuthoringProjectResolver }
+      },
       {
         path: 'unit/:unitId',
         component: ProjectAuthoringParentComponent,
@@ -165,8 +170,7 @@ const routes: Routes = [
               }
             ]
           },
-          { path: 'notebook', component: NotebookAuthoringComponent },
-          { path: 'recovery', component: RecoveryAuthoringComponent }
+          { path: 'notebook', component: NotebookAuthoringComponent }
         ]
       }
     ]

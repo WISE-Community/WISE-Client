@@ -136,7 +136,7 @@ $default-colors: (
   'score': #FFC107,
   'secondary-text': mat.get-color-from-palette($foreground, 'secondary-text'),
   'selected-bg': mat.get-color-from-palette($default-theme-primary, 50),
-  'success': #00C853,
+  'success': #008A05,
   'success-contrast': black,
   'text': mat.get-color-from-palette($foreground, 'text'),
   'warn': mat.get-color-from-palette($default-theme-warn, 800),

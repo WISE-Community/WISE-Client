@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithOpenInNewWindowComponent } from '../../../../directives/dialog-with-open-in-new-window/dialog-with-open-in-new-window.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ConfigService } from '../../../../services/configService';
 
 @Component({
@@ -13,23 +13,23 @@ import { ConfigService } from '../../../../services/configService';
   styleUrls: ['./node-progress-view.component.scss']
 })
 export class NodeProgressViewComponent implements OnInit {
-  protected nodeId: string;
+  @Input() protected nodeId: string;
   nodeIdToExpanded: any = {};
   protected rootNode: any;
   protected showRubricButton: boolean;
   private subscriptions: Subscription = new Subscription();
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private configService: ConfigService,
     private dialog: MatDialog,
     private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
     private router: Router,
     private dataService: TeacherDataService
   ) {}
 
   ngOnInit(): void {
-    this.nodeId = this.route.snapshot.paramMap.get('nodeId') || this.projectService.rootNode.id;
+    this.nodeId = this.nodeId || this.projectService.rootNode.id;
     this.dataService.setCurrentNodeByNodeId(this.nodeId);
     const startNodeId = this.projectService.getStartNodeId();
     this.rootNode = this.projectService.getRootNode(startNodeId);
@@ -38,6 +38,10 @@ export class NodeProgressViewComponent implements OnInit {
     if (!this.isShowingNodeGradingView()) {
       this.saveNodeProgressViewDisplayedEvent();
     }
+  }
+
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   private subscribeToCurrentNodeChanged(): void {

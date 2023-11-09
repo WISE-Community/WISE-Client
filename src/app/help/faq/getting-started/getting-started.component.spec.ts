@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { GettingStartedComponent } from './getting-started.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ConfigService } from '../../services/config.service';
-import { Config } from '../../domain/config';
+import { ConfigService } from '../../../services/config.service';
+import { Config } from '../../../domain/config';
 import { Observable } from 'rxjs';
 
 export class MockConfigService {
@@ -24,13 +24,15 @@ describe('GettingStartedComponent', () => {
   let component: GettingStartedComponent;
   let fixture: ComponentFixture<GettingStartedComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [GettingStartedComponent],
-      providers: [{ provide: ConfigService, useClass: MockConfigService }],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [GettingStartedComponent],
+        providers: [{ provide: ConfigService, useClass: MockConfigService }],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GettingStartedComponent);

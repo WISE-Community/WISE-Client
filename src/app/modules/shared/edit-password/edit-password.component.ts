@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,13 +6,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../services/user.service';
 import { UnlinkGoogleAccountConfirmComponent } from '../unlink-google-account-confirm/unlink-google-account-confirm.component';
 import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
+import { changePasswordError } from '../../../common/password-helper';
 
 @Component({
   selector: 'app-edit-password',
   templateUrl: './edit-password.component.html',
   styleUrls: ['./edit-password.component.scss']
 })
-export class EditPasswordComponent {
+export class EditPasswordComponent implements OnInit {
   @ViewChild('changePasswordForm', { static: false }) changePasswordForm;
   isSaving: boolean = false;
   isGoogleUser: boolean = false;
@@ -77,29 +78,16 @@ export class EditPasswordComponent {
 
   private changePasswordSuccess(): void {
     this.resetForm();
-    this.snackBar.open($localize`Password changed.`);
+    this.snackBar.open($localize`Successfully changed password.`);
   }
 
   private changePasswordError(error: any): void {
-    const formError: any = {};
-    switch (error.messageCode) {
-      case 'incorrectPassword':
-        formError.incorrectPassword = true;
-        this.changePasswordFormGroup.get('oldPassword').setErrors(formError);
-        break;
-      case 'invalidPasswordLength':
-        formError.minlength = true;
-        this.newPasswordFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
-        break;
-      case 'invalidPasswordPattern':
-        formError.pattern = true;
-        this.newPasswordFormGroup
-          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-          .setErrors(formError);
-        break;
-    }
+    changePasswordError(
+      error,
+      this.changePasswordFormGroup,
+      this.newPasswordFormGroup,
+      'oldPassword'
+    );
   }
 
   unlinkGoogleAccount(): void {

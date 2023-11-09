@@ -7,7 +7,6 @@ import { ConfigService } from '../../services/configService';
 import { NotificationService } from '../../services/notificationService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { ActivatedRoute } from '@angular/router';
 import { Annotation } from '../../common/Annotation';
 
 @Component({
@@ -38,8 +37,7 @@ export class StudentGradingComponent implements OnInit {
     private configService: ConfigService,
     private dataService: TeacherDataService,
     private notificationService: NotificationService,
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute
+    private projectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +47,7 @@ export class StudentGradingComponent implements OnInit {
     this.subscribeToStudentWorkReceived();
     this.subscribeToCurrentWorkgroupChanged();
     this.subscribeToCurrentPeriodChanged();
-    this.workgroupId = parseInt(this.route.snapshot.params['workgroupId']);
+    this.workgroupId = Number(this.workgroupId);
     this.initialize();
   }
 
@@ -70,8 +68,7 @@ export class StudentGradingComponent implements OnInit {
     this.maxScore = maxScore ? maxScore : 0;
     this.totalScore = this.dataService.getTotalScoreByWorkgroupId(this.workgroupId);
     this.projectCompletion = this.classroomStatusService.getStudentProjectCompletion(
-      this.workgroupId,
-      true
+      this.workgroupId
     );
     this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds();
     this.setNodesById();
@@ -134,7 +131,7 @@ export class StudentGradingComponent implements OnInit {
   private subscribeToCurrentWorkgroupChanged(): void {
     this.subscriptions.add(
       this.dataService.currentWorkgroupChanged$
-        .pipe(filter((workgroup) => workgroup != null))
+        .pipe(filter(({ currentWorkgroup }) => currentWorkgroup != null))
         .subscribe(({ currentWorkgroup }) => {
           const workgroupId = currentWorkgroup.workgroupId;
           if (this.workgroupId !== workgroupId) {
