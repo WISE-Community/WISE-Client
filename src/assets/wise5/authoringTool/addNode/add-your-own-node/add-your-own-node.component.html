@@ -8,7 +8,7 @@
   </mat-form-field>
   <h5 i18n>Select components to add to your new step (optional):</h5>
   <div fxLayout="column" fxLayout.gt-sm="row">
-    <div class="initial-components notice-bg-bg" fxFlex="100" fxFlex.gt-sm="33">
+    <div class="initial-components notice-bg-bg" fxFlex="100" fxFlex.gt-sm="25">
       <div *ngIf="initialComponents.length == 0" class="mat-small" i18n>No components added</div>
       <div
         class="component-list"
@@ -38,12 +38,13 @@
         </div>
       </div>
     </div>
-    <div fxFlex="100" fxFlex.gt-sm="67">
-      <div fxLayout="row wrap" fxLayoutAlign="start start">
+    <div fxFlex="100" fxFlex.gt-sm="75">
+      <div class="component-types" fxLayout="row wrap" fxLayoutAlign="start start">
         <div class="component-type" *ngFor="let componentType of componentTypes">
-          <button mat-stroked-button (click)="addComponent(componentType)">
-            {{ componentType.name }}
-          </button>
+          <component-selector
+            [componentType]="componentType.type"
+            (componentSelectedEvent)="addComponent(componentType)"
+          ></component-selector>
         </div>
       </div>
       <p class="info mat-small" i18n>

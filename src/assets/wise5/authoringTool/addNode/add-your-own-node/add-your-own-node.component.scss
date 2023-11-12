@@ -29,6 +29,7 @@ $transform: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .component-type {
+  width: 30%;
   padding: 4px;
 
   button {
@@ -53,4 +54,9 @@ $transform: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 
 .component-list.cdk-drop-list-dragging .component-list-item:not(.cdk-drag-placeholder) {
   transition: $transform;
+}
+
+.component-types {
+  overflow-y: scroll;
+  max-height: 50vh;
 }

@@ -52,6 +52,8 @@ import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringToo
 import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
 import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
 import { AddLessonChooseTemplateComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-template/add-lesson-choose-template.component';
+import { ComponentSelectorComponent } from '../../assets/wise5/authoringTool/components/component-selector/component-selector.component';
+import { ComponentInfoDialogComponent } from '../../assets/wise5/authoringTool/components/component-info-dialog/component-info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +77,8 @@ import { AddLessonChooseTemplateComponent } from '../../assets/wise5/authoringTo
     ChooseNewNodeTemplate,
     ChooseMoveNodeLocationComponent,
     ChooseSimulationComponent,
+    ComponentInfoDialogComponent,
+    ComponentSelectorComponent,
     ConcurrentAuthorsMessageComponent,
     ConfigureAutomatedAssessmentComponent,
     InsertNodeAfterButtonComponent,

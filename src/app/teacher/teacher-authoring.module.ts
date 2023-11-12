@@ -31,11 +31,13 @@ import { TeacherNodeService } from '../../assets/wise5/services/teacherNodeServi
 import { MilestoneReportService } from '../../assets/wise5/services/milestoneReportService';
 import { AuthoringRoutingModule } from './authoring-routing.module';
 import { RouterModule } from '@angular/router';
+import { ComponentInfoService } from '../../assets/wise5/services/componentInfoService';
 
 @NgModule({
   imports: [StudentTeacherCommonModule, AuthoringToolModule, RouterModule, AuthoringRoutingModule],
   providers: [
     ClassroomStatusService,
+    ComponentInfoService,
     CopyNodesService,
     CopyProjectService,
     DataExportService,
