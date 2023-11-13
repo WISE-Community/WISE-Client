@@ -2,7 +2,7 @@ export class Annotation {
   clientSaveTime: number;
   componentId: string;
   data: any;
-  fromWorkgroupId: number;
+  fromWorkgroupId?: number;
   id: number;
   localNotebookItemId?: number;
   nodeId: string;
@@ -12,4 +12,10 @@ export class Annotation {
   studentWorkId: number;
   toWorkgroupId: number;
   type: string;
+
+  constructor(jsonObject: any = {}) {
+    for (const key of Object.keys(jsonObject)) {
+      this[key] = jsonObject[key];
+    }
+  }
 }

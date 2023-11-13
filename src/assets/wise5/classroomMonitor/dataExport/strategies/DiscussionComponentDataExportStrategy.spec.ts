@@ -1,36 +1,40 @@
 import { DiscussionComponentDataExportStrategy } from './DiscussionComponentDataExportStrategy';
 import { ExportStrategyTester } from './ExportStrategyTester';
 
+const componentType: string = 'Discussion';
 let exportStrategyTester: ExportStrategyTester;
-const studentWorkId1 = 10000;
-const studentWorkId2 = 10001;
-const studentWorkResponse1 = 'Hello';
-const studentWorkResponse2 = 'World';
-const studentData1 = { response: studentWorkResponse1 };
-const studentData2 = { componentStateIdReplyingTo: studentWorkId1, response: studentWorkResponse2 };
+let studentData1: any;
+let studentData2: any;
 
 describe('DiscussionComponentDataExportStrategy', () => {
   beforeEach(() => {
     exportStrategyTester = new ExportStrategyTester();
     exportStrategyTester.setUpServices();
+    initializeStudentWork();
   });
   describe('export', () => {
     it('generates export with correct rows of data', () => {
       exportStrategyTester.setComponent({
         id: exportStrategyTester.componentId,
-        type: 'Discussion',
+        type: componentType,
         prompt: exportStrategyTester.componentPrompt
       });
       exportStrategyTester.setStudentData([
-        createDiscussionComponentState(
-          studentWorkId1,
-          exportStrategyTester.workgroupId1,
-          studentData1
+        exportStrategyTester.createComponentState(
+          componentType,
+          exportStrategyTester.studentWorkId1,
+          exportStrategyTester.studentWorkTimestampMilliseconds1,
+          true,
+          studentData1,
+          exportStrategyTester.workgroupId1
         ),
-        createDiscussionComponentState(
-          studentWorkId2,
-          exportStrategyTester.workgroupId2,
-          studentData2
+        exportStrategyTester.createComponentState(
+          componentType,
+          exportStrategyTester.studentWorkId2,
+          exportStrategyTester.studentWorkTimestampMilliseconds2,
+          true,
+          studentData2,
+          exportStrategyTester.workgroupId2
         )
       ]);
       setUpExportStrategy();
@@ -53,10 +57,10 @@ describe('DiscussionComponentDataExportStrategy', () => {
             exportStrategyTester.projectId,
             exportStrategyTester.projectTitle,
             exportStrategyTester.runId,
-            '',
-            '',
-            '',
-            '',
+            exportStrategyTester.startDate,
+            exportStrategyTester.endDate,
+            exportStrategyTester.studentWorkTimestamp1,
+            exportStrategyTester.studentWorkTimestamp1,
             exportStrategyTester.nodeId,
             exportStrategyTester.component.id,
             exportStrategyTester.componentPartNumber,
@@ -64,10 +68,10 @@ describe('DiscussionComponentDataExportStrategy', () => {
             exportStrategyTester.component.type,
             exportStrategyTester.component.prompt,
             studentData1,
-            studentWorkId1,
-            studentWorkId1,
+            exportStrategyTester.studentWorkId1,
+            exportStrategyTester.studentWorkId1,
             1,
-            studentWorkResponse1
+            exportStrategyTester.studentWorkResponse1
           ],
           [
             2,
@@ -82,10 +86,10 @@ describe('DiscussionComponentDataExportStrategy', () => {
             exportStrategyTester.projectId,
             exportStrategyTester.projectTitle,
             exportStrategyTester.runId,
-            '',
-            '',
-            '',
-            '',
+            exportStrategyTester.startDate,
+            exportStrategyTester.endDate,
+            exportStrategyTester.studentWorkTimestamp2,
+            exportStrategyTester.studentWorkTimestamp2,
             exportStrategyTester.nodeId,
             exportStrategyTester.componentId,
             exportStrategyTester.componentPartNumber,
@@ -93,10 +97,10 @@ describe('DiscussionComponentDataExportStrategy', () => {
             exportStrategyTester.component.type,
             exportStrategyTester.component.prompt,
             studentData2,
-            studentWorkId1,
-            studentWorkId2,
+            exportStrategyTester.studentWorkId1,
+            exportStrategyTester.studentWorkId2,
             2,
-            studentWorkResponse2
+            exportStrategyTester.studentWorkResponse2
           ]
         ],
         exportStrategyTester.createExpectedFileName('discussion')
@@ -114,10 +118,10 @@ function setUpExportStrategy(): void {
   );
 }
 
-function createDiscussionComponentState(id: number, workgroupId: number, studentData: any): any {
-  return {
-    id: id,
-    workgroupId: workgroupId,
-    studentData: studentData
+function initializeStudentWork(): void {
+  studentData1 = { response: exportStrategyTester.studentWorkResponse1 };
+  studentData2 = {
+    componentStateIdReplyingTo: exportStrategyTester.studentWorkId1,
+    response: exportStrategyTester.studentWorkResponse2
   };
 }

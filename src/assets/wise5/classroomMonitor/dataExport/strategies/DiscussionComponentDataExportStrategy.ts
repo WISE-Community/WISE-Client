@@ -58,7 +58,7 @@ export class DiscussionComponentDataExportStrategy extends AbstractDataExportStr
           this.nodeId
         )
       );
-      const fileName = this.generateDiscussionExportFileName(this.nodeId, this.component.id);
+      const fileName = super.generateExportFileName(this.nodeId, this.component.id, 'discussion');
       this.controller.generateCSVFile(rows, fileName);
       this.controller.hideDownloadingExportMessage();
     });
@@ -157,7 +157,16 @@ export class DiscussionComponentDataExportStrategy extends AbstractDataExportStr
     row[columnNameToNumber['Project ID']] = this.configService.getProjectId();
     row[columnNameToNumber['Project Name']] = this.projectService.getProjectTitle();
     row[columnNameToNumber['Run ID']] = this.configService.getRunId();
-
+    this.setColumnValue(
+      row,
+      columnNameToNumber,
+      'Start Date',
+      millisecondsToDateTime(this.configService.getStartDate())
+    );
+    const endDate = this.configService.getEndDate();
+    if (endDate != null) {
+      this.setColumnValue(row, columnNameToNumber, 'End Date', millisecondsToDateTime(endDate));
+    }
     if (componentState.serverSaveTime != null) {
       row[columnNameToNumber['Server Timestamp']] = millisecondsToDateTime(
         componentState.serverSaveTime
@@ -238,12 +247,5 @@ export class DiscussionComponentDataExportStrategy extends AbstractDataExportStr
       columnNameToNumber[defaultDiscussionColumnName] = c;
       columnNames.push(defaultDiscussionColumnName);
     }
-  }
-
-  private generateDiscussionExportFileName(nodeId, componentId) {
-    const runId = this.configService.getRunId();
-    const stepNumber = this.projectService.getNodePositionById(nodeId);
-    const componentNumber = this.projectService.getComponentPosition(nodeId, componentId) + 1;
-    return runId + '_step_' + stepNumber + '_component_' + componentNumber + '_discussion_work.csv';
   }
 }

@@ -14,6 +14,7 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
   configService: ConfigService;
   dataExportService: DataExportService;
   projectService: TeacherProjectService;
+  protected allOrLatest: 'all' | 'latest' = 'all';
   teacherDataService: TeacherDataService;
 
   setDataExportContext(context: DataExportContext) {
@@ -75,5 +76,37 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
       }
     }
     return selectedNodesMap;
+  }
+
+  populateColumnNameMappings(columnNames: string[], columnNameToNumber: any): void {
+    for (let c = 0; c < columnNames.length; c++) {
+      columnNameToNumber[columnNames[c]] = c;
+    }
+  }
+
+  setColumnValue(row: any[], columnNameToNumber: any, columnName: string, value: any): void {
+    row[columnNameToNumber[columnName]] = value;
+  }
+
+  insertColumnBeforeResponseColumn(headerRow: string[], columnName: string): void {
+    headerRow.splice(headerRow.indexOf('Response'), 0, columnName);
+  }
+
+  insertColumnAtEnd(headerRow: string[], columnName: string): void {
+    headerRow.push(columnName);
+  }
+
+  generateExportFileName(
+    nodeId: string,
+    componentId: string,
+    componentTypeWithUnderscore: string
+  ): string {
+    const runId = this.configService.getRunId();
+    const stepNumber = this.projectService.getNodePositionById(nodeId);
+    const componentNumber = this.projectService.getComponentPosition(nodeId, componentId) + 1;
+    return (
+      `${runId}_step_${stepNumber}_component_` +
+      `${componentNumber}_${componentTypeWithUnderscore}_work.csv`
+    );
   }
 }

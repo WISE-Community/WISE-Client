@@ -14,7 +14,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     'Student Name 3',
     'Class Period',
     'Project ID',
-    'Unit Name',
+    'Project Name',
     'Run ID',
     'Start Date',
     'End Date',
@@ -42,7 +42,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
       rows = rows.concat(
         this.generateComponentWorkRows(this.component, headerRow, columnNameToNumber, this.nodeId)
       );
-      const fileName = this.generateExportFileName(this.nodeId, this.component.id);
+      const fileName = super.generateExportFileName(this.nodeId, this.component.id, 'peer_chat');
       this.controller.generateCSVFile(rows, fileName);
       this.controller.hideDownloadingExportMessage();
     });
@@ -59,16 +59,16 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
 
   private insertPromptColumns(headerRow: string[], component: any): void {
     if (!this.hasDynamicPrompt(component)) {
-      this.insertBeforeResponseColumn(headerRow, 'Prompt');
+      this.insertColumnBeforeResponseColumn(headerRow, 'Prompt');
     }
     if (this.hasPrePrompt(component)) {
-      this.insertBeforeResponseColumn(headerRow, 'Pre Prompt');
+      this.insertColumnBeforeResponseColumn(headerRow, 'Pre Prompt');
     }
     if (this.hasDynamicPrompt(component)) {
-      this.insertBeforeResponseColumn(headerRow, 'Dynamic Prompt');
+      this.insertColumnBeforeResponseColumn(headerRow, 'Dynamic Prompt');
     }
     if (this.hasPostPrompt(component)) {
-      this.insertBeforeResponseColumn(headerRow, 'Post Prompt');
+      this.insertColumnBeforeResponseColumn(headerRow, 'Post Prompt');
     }
   }
 
@@ -76,16 +76,12 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     const maxQuestions = this.getMaxQuestionBankCount(componentStates);
     if (maxQuestions > 0) {
       for (let q = 0; q < maxQuestions; q++) {
-        this.insertBeforeResponseColumn(headerRow, `Question ${q + 1}`);
+        this.insertColumnBeforeResponseColumn(headerRow, `Question ${q + 1}`);
       }
     }
     if (this.isClickToUseEnabled(component)) {
-      this.insertBeforeResponseColumn(headerRow, 'Question Used');
+      this.insertColumnBeforeResponseColumn(headerRow, 'Question Used');
     }
-  }
-
-  private insertBeforeResponseColumn(headerRow: string[], columnName: string): void {
-    headerRow.splice(headerRow.indexOf('Response'), 0, columnName);
   }
 
   private hasPrePrompt(component: any): boolean {
@@ -127,12 +123,6 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
       }
     }
     return questionCount;
-  }
-
-  private populateColumnNameMappings(columnNames: string[], columnNameToNumber: any): void {
-    for (let c = 0; c < columnNames.length; c++) {
-      columnNameToNumber[columnNames[c]] = c;
-    }
   }
 
   private generateComponentWorkRows(
@@ -188,7 +178,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
       this.setColumnValue(row, columnNameToNumber, 'Class Period', userInfo.periodName);
     }
     this.setColumnValue(row, columnNameToNumber, 'Project ID', this.configService.getProjectId());
-    this.setColumnValue(row, columnNameToNumber, 'Unit Name', this.configService.getRunName());
+    this.setColumnValue(row, columnNameToNumber, 'Project Name', this.configService.getRunName());
     this.setColumnValue(row, columnNameToNumber, 'Run ID', this.configService.getRunId());
     this.setColumnValue(
       row,
@@ -316,21 +306,5 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
       }
     }
     return null;
-  }
-
-  private setColumnValue(
-    row: any[],
-    columnNameToNumber: any,
-    columnName: string,
-    value: any
-  ): void {
-    row[columnNameToNumber[columnName]] = value;
-  }
-
-  private generateExportFileName(nodeId: string, componentId: string): string {
-    const runId = this.configService.getRunId();
-    const stepNumber = this.projectService.getNodePositionById(nodeId);
-    const componentNumber = this.projectService.getComponentPosition(nodeId, componentId) + 1;
-    return `${runId}_step_${stepNumber}_component_${componentNumber}_peer_chat_work.csv`;
   }
 }
