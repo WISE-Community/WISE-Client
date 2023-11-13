@@ -376,6 +376,7 @@ function setUpExportStrategy(allOrLatest: 'all' | 'latest'): void {
     new OpenResponseComponentDataExportStrategy(
       exportStrategyTester.nodeId,
       exportStrategyTester.component,
+      exportStrategyTester.createComponentDataExportParams(),
       allOrLatest
     )
   );

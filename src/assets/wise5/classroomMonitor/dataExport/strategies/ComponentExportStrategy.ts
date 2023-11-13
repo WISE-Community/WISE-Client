@@ -1,8 +1,16 @@
+import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
 export abstract class ComponentDataExportStrategy extends AbstractDataExportStrategy {
-  constructor(protected nodeId: string, protected component: any) {
+  includeStudentNames: boolean;
+
+  constructor(
+    protected nodeId: string,
+    protected component: any,
+    additionalParams: ComponentDataExportParams
+  ) {
     super();
+    this.includeStudentNames = additionalParams.includeStudentNames;
   }
 
   export(): void {
@@ -41,7 +49,12 @@ export abstract class ComponentDataExportStrategy extends AbstractDataExportStra
       for (let u = 0; u < userInfo.users.length; u++) {
         const user = userInfo.users[u];
         this.setColumnValue(row, columnNameToNumber, `User ID ${u + 1}`, user.id);
-        this.setColumnValue(row, columnNameToNumber, `Student Name ${u + 1}`, user.name);
+        this.setColumnValue(
+          row,
+          columnNameToNumber,
+          `Student Name ${u + 1}`,
+          this.includeStudentNames ? user.name : ''
+        );
       }
     }
   }

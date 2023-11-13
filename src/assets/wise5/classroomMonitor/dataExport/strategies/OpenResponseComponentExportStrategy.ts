@@ -1,5 +1,6 @@
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
+import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { ComponentDataExportStrategy } from './ComponentExportStrategy';
 
 export class OpenResponseComponentDataExportStrategy extends ComponentDataExportStrategy {
@@ -42,9 +43,10 @@ export class OpenResponseComponentDataExportStrategy extends ComponentDataExport
   constructor(
     protected nodeId: string,
     protected component: any,
+    additionalParams: ComponentDataExportParams,
     protected allOrLatest: 'all' | 'latest'
   ) {
-    super(nodeId, component);
+    super(nodeId, component, additionalParams);
   }
 
   protected generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {

@@ -113,7 +113,8 @@ function setUpExportStrategy(): void {
   exportStrategyTester.setUpExportStrategy(
     new DiscussionComponentDataExportStrategy(
       exportStrategyTester.nodeId,
-      exportStrategyTester.component
+      exportStrategyTester.component,
+      exportStrategyTester.createComponentDataExportParams()
     )
   );
 }

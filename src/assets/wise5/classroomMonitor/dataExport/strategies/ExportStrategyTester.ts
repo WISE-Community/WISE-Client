@@ -11,6 +11,7 @@ import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 import { copy } from '../../../common/object/object';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { Annotation } from '../../../common/Annotation';
+import { ComponentDataExportParams } from '../ComponentDataExportParams';
 
 export class ExportStrategyTester {
   annotationService: AnnotationService = new AnnotationService(null, null, null);
@@ -195,6 +196,15 @@ export class ExportStrategyTester {
   createHeaderRowAddAdditionalColumnsAtEnd(additionalHeaderColumns: string[]): string[] {
     const headerRow = copy(this.componentExportStrategy.defaultColumnNames);
     return headerRow.concat(additionalHeaderColumns);
+  }
+
+  createComponentDataExportParams(): ComponentDataExportParams {
+    return {
+      canViewStudentNames: true,
+      includeOnlySubmits: false,
+      includeStudentNames: true,
+      workSelectionType: 'all'
+    };
   }
 
   createComponentState(

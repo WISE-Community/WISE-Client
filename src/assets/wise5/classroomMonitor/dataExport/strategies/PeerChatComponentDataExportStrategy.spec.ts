@@ -365,7 +365,8 @@ function setUpExportStrategy(): void {
   exportStrategyTester.setUpExportStrategy(
     new PeerChatComponentDataExportStrategy(
       exportStrategyTester.nodeId,
-      exportStrategyTester.component
+      exportStrategyTester.component,
+      exportStrategyTester.createComponentDataExportParams()
     )
   );
 }

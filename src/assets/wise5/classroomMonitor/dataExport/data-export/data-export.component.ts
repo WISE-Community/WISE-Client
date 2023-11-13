@@ -27,6 +27,7 @@ import { Bucket } from '../../../components/match/bucket';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PeerChatComponentDataExportStrategy } from '../strategies/PeerChatComponentDataExportStrategy';
 import { OpenResponseComponentDataExportStrategy } from '../strategies/OpenResponseComponentExportStrategy';
+import { ComponentDataExportParams } from '../ComponentDataExportParams';
 
 @Component({
   selector: 'data-export',
@@ -1002,14 +1003,23 @@ export class DataExportComponent implements OnInit {
       this.exportMatchComponent(nodeId, component);
     } else if (component.type === 'Discussion') {
       this.dataExportContext.setStrategy(
-        new DiscussionComponentDataExportStrategy(nodeId, component)
+        new DiscussionComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams()
+        )
       );
       this.dataExportContext.export();
     } else if (component.type === 'DialogGuidance') {
       this.exportDialogGuidanceComponent(nodeId, component);
     } else if (component.type === 'OpenResponse') {
       this.dataExportContext.setStrategy(
-        new OpenResponseComponentDataExportStrategy(nodeId, component, 'all')
+        new OpenResponseComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'all'
+        )
       );
       this.dataExportContext.export();
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
@@ -1018,7 +1028,11 @@ export class DataExportComponent implements OnInit {
       this.exportLabelComponent(nodeId, component);
     } else if (component.type === 'PeerChat') {
       this.dataExportContext.setStrategy(
-        new PeerChatComponentDataExportStrategy(nodeId, component)
+        new PeerChatComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams()
+        )
       );
       this.dataExportContext.export();
     }
@@ -1037,7 +1051,12 @@ export class DataExportComponent implements OnInit {
       this.exportDialogGuidanceComponent(nodeId, component);
     } else if (component.type === 'OpenResponse') {
       this.dataExportContext.setStrategy(
-        new OpenResponseComponentDataExportStrategy(nodeId, component, 'latest')
+        new OpenResponseComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'latest'
+        )
       );
       this.dataExportContext.export();
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
@@ -1049,14 +1068,21 @@ export class DataExportComponent implements OnInit {
 
   private exportLabelComponent(nodeId: string, component: any): void {
     this.dataExportContext.setStrategy(
-      new LabelComponentDataExportStrategy(new WISEComponent(component, nodeId), {
-        canViewStudentNames: this.canViewStudentNames,
-        includeOnlySubmits: this.includeOnlySubmits,
-        includeStudentNames: this.includeStudentNames,
-        workSelectionType: this.workSelectionType
-      })
+      new LabelComponentDataExportStrategy(
+        new WISEComponent(component, nodeId),
+        this.getComponentDataExportParams()
+      )
     );
     this.dataExportContext.export();
+  }
+
+  private getComponentDataExportParams(): ComponentDataExportParams {
+    return {
+      canViewStudentNames: this.canViewStudentNames,
+      includeOnlySubmits: this.includeOnlySubmits,
+      includeStudentNames: this.includeStudentNames,
+      workSelectionType: this.workSelectionType
+    };
   }
 
   /**
