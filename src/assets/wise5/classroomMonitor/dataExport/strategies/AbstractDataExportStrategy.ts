@@ -1,3 +1,4 @@
+import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { DataExportService } from '../../../services/dataExportService';
@@ -76,6 +77,26 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
       }
     }
     return selectedNodesMap;
+  }
+
+  setRunInfo(row: any[], columnNameToNumber: any, componentState: any): void {
+    const userInfo = this.configService.getUserInfoByWorkgroupId(componentState.workgroupId);
+    if (userInfo != null) {
+      this.setColumnValue(row, columnNameToNumber, 'Class Period', userInfo.periodName);
+    }
+    this.setColumnValue(row, columnNameToNumber, 'Project ID', this.configService.getProjectId());
+    this.setColumnValue(row, columnNameToNumber, 'Project Name', this.configService.getRunName());
+    this.setColumnValue(row, columnNameToNumber, 'Run ID', this.configService.getRunId());
+    this.setColumnValue(
+      row,
+      columnNameToNumber,
+      'Start Date',
+      millisecondsToDateTime(this.configService.getStartDate())
+    );
+    const endDate = this.configService.getEndDate();
+    if (endDate != null) {
+      this.setColumnValue(row, columnNameToNumber, 'End Date', millisecondsToDateTime(endDate));
+    }
   }
 
   populateColumnNameMappings(columnNames: string[], columnNameToNumber: any): void {

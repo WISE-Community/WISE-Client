@@ -1,8 +1,8 @@
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
-import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
+import { ComponentDataExportStrategy } from './ComponentExportStrategy';
 
-export class OpenResponseComponentDataExportStrategy extends AbstractDataExportStrategy {
+export class OpenResponseComponentDataExportStrategy extends ComponentDataExportStrategy {
   autoScoreLabel: string = 'Auto Score';
   defaultColumnNames = [
     '#',
@@ -40,35 +40,15 @@ export class OpenResponseComponentDataExportStrategy extends AbstractDataExportS
   scoreLabel: string = 'Score';
 
   constructor(
-    private nodeId: string,
-    private component: any,
+    protected nodeId: string,
+    protected component: any,
     protected allOrLatest: 'all' | 'latest'
   ) {
-    super();
+    super(nodeId, component);
   }
 
-  export(): void {
-    this.controller.showDownloadingExportMessage();
-    const components = [{ nodeId: this.nodeId, componentId: this.component.id }];
-    this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
-      const columnNameToNumber = {};
-      const headerRow = this.generateComponentHeaderRow(this.component, columnNameToNumber);
-      let rows = [headerRow];
-      rows = rows.concat(
-        this.generateComponentWorkRows(this.component, headerRow, columnNameToNumber, this.nodeId)
-      );
-      const fileName = super.generateExportFileName(
-        this.nodeId,
-        this.component.id,
-        'open_response'
-      );
-      this.controller.generateCSVFile(rows, fileName);
-      this.controller.hideDownloadingExportMessage();
-    });
-  }
-
-  private generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {
-    const headerRow = this.defaultColumnNames.map((columnName: string) => columnName);
+  protected generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {
+    const headerRow = [...this.defaultColumnNames];
     if (this.isCRaterEnabled(component)) {
       const annotations = this.annotationService.getAnnotationsByNodeIdComponentId(
         this.nodeId,
@@ -160,7 +140,7 @@ export class OpenResponseComponentDataExportStrategy extends AbstractDataExportS
     return scoreNames.sort();
   }
 
-  private generateComponentWorkRows(
+  protected generateComponentWorkRows(
     component: any,
     columnNames: string[],
     columnNameToNumber: any,
@@ -204,38 +184,6 @@ export class OpenResponseComponentDataExportStrategy extends AbstractDataExportS
         ? a.serverSaveTime - b.serverSaveTime
         : a.workgroupId - b.workgroupId;
     });
-  }
-
-  private setStudentInfo(row: any[], columnNameToNumber: any, componentState: any): void {
-    this.setColumnValue(row, columnNameToNumber, 'Workgroup ID', componentState.workgroupId);
-    const userInfo = this.configService.getUserInfoByWorkgroupId(componentState.workgroupId);
-    if (userInfo != null) {
-      for (let u = 0; u < userInfo.users.length; u++) {
-        const user = userInfo.users[u];
-        this.setColumnValue(row, columnNameToNumber, `User ID ${u + 1}`, user.id);
-        this.setColumnValue(row, columnNameToNumber, `Student Name ${u + 1}`, user.name);
-      }
-    }
-  }
-
-  private setRunInfo(row: any[], columnNameToNumber: any, componentState: any): void {
-    const userInfo = this.configService.getUserInfoByWorkgroupId(componentState.workgroupId);
-    if (userInfo != null) {
-      this.setColumnValue(row, columnNameToNumber, 'Class Period', userInfo.periodName);
-    }
-    this.setColumnValue(row, columnNameToNumber, 'Project ID', this.configService.getProjectId());
-    this.setColumnValue(row, columnNameToNumber, 'Project Name', this.configService.getRunName());
-    this.setColumnValue(row, columnNameToNumber, 'Run ID', this.configService.getRunId());
-    this.setColumnValue(
-      row,
-      columnNameToNumber,
-      'Start Date',
-      millisecondsToDateTime(this.configService.getStartDate())
-    );
-    const endDate = this.configService.getEndDate();
-    if (endDate != null) {
-      this.setColumnValue(row, columnNameToNumber, 'End Date', millisecondsToDateTime(endDate));
-    }
   }
 
   private setComponentInfo(
@@ -301,14 +249,7 @@ export class OpenResponseComponentDataExportStrategy extends AbstractDataExportS
       'Submit Count',
       componentState.studentData.submitCounter ? componentState.studentData.submitCounter : 0
     );
-    const annotation = this.annotationService.getLatestAnnotationByStudentWorkIdAndType(
-      componentState.id,
-      'autoScore'
-    );
-    if (annotation != null) {
-      this.tryToAddOpenResponseAnnotationIdeas(row, columnNameToNumber, annotation);
-      this.tryToAddOpenResponseAnnotationScores(row, columnNameToNumber, annotation);
-    }
+    this.setAnnotationData(row, columnNameToNumber, componentState);
   }
 
   private getRevisionCounter(workgroupId: number, nodeId: string, componentId: string): number {
@@ -326,6 +267,17 @@ export class OpenResponseComponentDataExportStrategy extends AbstractDataExportS
 
   private getRevisionCounterKey(workgroupId: number, nodeId: string, componentId: string): string {
     return `${workgroupId}-${nodeId}-${componentId}`;
+  }
+
+  private setAnnotationData(row: any[], columnNameToNumber: any, componentState: any): void {
+    const annotation = this.annotationService.getLatestAnnotationByStudentWorkIdAndType(
+      componentState.id,
+      'autoScore'
+    );
+    if (annotation != null) {
+      this.tryToAddOpenResponseAnnotationIdeas(row, columnNameToNumber, annotation);
+      this.tryToAddOpenResponseAnnotationScores(row, columnNameToNumber, annotation);
+    }
   }
 
   private tryToAddOpenResponseAnnotationIdeas(
@@ -352,5 +304,9 @@ export class OpenResponseComponentDataExportStrategy extends AbstractDataExportS
     } else if (annotation.data.value != null) {
       row[columnNameToNumber[`${this.autoScoreLabel}`]] = annotation.data.value;
     }
+  }
+
+  protected getComponentTypeWithUnderscore(): string {
+    return 'open_response';
   }
 }

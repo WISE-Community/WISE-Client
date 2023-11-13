@@ -1,7 +1,7 @@
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
-import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
+import { ComponentDataExportStrategy } from './ComponentExportStrategy';
 
-export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrategy {
+export class PeerChatComponentDataExportStrategy extends ComponentDataExportStrategy {
   defaultColumnNames = [
     '#',
     'Peer Group ID',
@@ -28,28 +28,8 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     'Response'
   ];
 
-  constructor(private nodeId: string, private component: any) {
-    super();
-  }
-
-  export(): void {
-    this.controller.showDownloadingExportMessage();
-    const components = [{ nodeId: this.nodeId, componentId: this.component.id }];
-    this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
-      const columnNameToNumber = {};
-      const headerRow = this.generateComponentHeaderRow(this.component, columnNameToNumber);
-      let rows = [headerRow];
-      rows = rows.concat(
-        this.generateComponentWorkRows(this.component, headerRow, columnNameToNumber, this.nodeId)
-      );
-      const fileName = super.generateExportFileName(this.nodeId, this.component.id, 'peer_chat');
-      this.controller.generateCSVFile(rows, fileName);
-      this.controller.hideDownloadingExportMessage();
-    });
-  }
-
-  private generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {
-    const headerRow = this.defaultColumnNames.map((columnName: string) => columnName);
+  protected generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {
+    const headerRow = [...this.defaultColumnNames];
     const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
     this.insertPromptColumns(headerRow, component);
     this.insertQuestionColumns(headerRow, component, componentStates);
@@ -125,7 +105,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     return questionCount;
   }
 
-  private generateComponentWorkRows(
+  protected generateComponentWorkRows(
     component: any,
     columnNames: string[],
     columnNameToNumber: any,
@@ -159,37 +139,9 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
     });
   }
 
-  private setStudentInfo(row: any[], columnNameToNumber: any, componentState: any): void {
+  protected setStudentInfo(row: any[], columnNameToNumber: any, componentState: any): void {
     this.setColumnValue(row, columnNameToNumber, 'Peer Group ID', componentState.peerGroupId);
-    this.setColumnValue(row, columnNameToNumber, 'Workgroup ID', componentState.workgroupId);
-    const userInfo = this.configService.getUserInfoByWorkgroupId(componentState.workgroupId);
-    if (userInfo != null) {
-      for (let u = 0; u < userInfo.users.length; u++) {
-        const user = userInfo.users[u];
-        this.setColumnValue(row, columnNameToNumber, `User ID ${u + 1}`, user.id);
-        this.setColumnValue(row, columnNameToNumber, `Student Name ${u + 1}`, user.name);
-      }
-    }
-  }
-
-  private setRunInfo(row: any[], columnNameToNumber: any, componentState: any): void {
-    const userInfo = this.configService.getUserInfoByWorkgroupId(componentState.workgroupId);
-    if (userInfo != null) {
-      this.setColumnValue(row, columnNameToNumber, 'Class Period', userInfo.periodName);
-    }
-    this.setColumnValue(row, columnNameToNumber, 'Project ID', this.configService.getProjectId());
-    this.setColumnValue(row, columnNameToNumber, 'Project Name', this.configService.getRunName());
-    this.setColumnValue(row, columnNameToNumber, 'Run ID', this.configService.getRunId());
-    this.setColumnValue(
-      row,
-      columnNameToNumber,
-      'Start Date',
-      millisecondsToDateTime(this.configService.getStartDate())
-    );
-    const endDate = this.configService.getEndDate();
-    if (endDate != null) {
-      this.setColumnValue(row, columnNameToNumber, 'End Date', millisecondsToDateTime(endDate));
-    }
+    super.setStudentInfo(row, columnNameToNumber, componentState);
   }
 
   private setComponentInfo(
@@ -306,5 +258,9 @@ export class PeerChatComponentDataExportStrategy extends AbstractDataExportStrat
       }
     }
     return null;
+  }
+
+  protected getComponentTypeWithUnderscore(): string {
+    return 'peer_chat';
   }
 }
