@@ -147,8 +147,8 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
     this.saveMilestoneWorkgroupItemViewedEvent(workgroupId, value);
   }
 
-  updateWorkgroup(workgroupId: number, init = false): void {
-    super.updateWorkgroup(workgroupId, init);
+  protected updateWorkgroup(workgroupId: number): void {
+    super.updateWorkgroup(workgroupId);
     const workgroup = this.workgroupsById[workgroupId];
     workgroup.score = this.getScoreByWorkgroupId(workgroupId);
     if (this.milestone.report.locations.length > 1) {
@@ -160,9 +160,7 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
       );
       workgroup.changeInScore = this.getChangeInScore(workgroup.initialScore, workgroup.score);
     }
-    if (!init) {
-      this.workgroupsById[workgroupId] = copy(workgroup);
-    }
+    this.workgroupsById[workgroupId] = copy(workgroup);
   }
 
   private getChangeInScore(initialScore: number, revisedScore: number): number {
