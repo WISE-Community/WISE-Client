@@ -103,8 +103,8 @@ export class NavItemComponent {
 
   private setNodeTitle(): void {
     this.nodeTitle = this.showPosition
-      ? this.ProjectService.nodeIdToNumber[this.nodeId] + ': ' + this.item.title
-      : this.item.title;
+      ? this.ProjectService.getNodePositionAndTitle(this.nodeId)
+      : this.ProjectService.getNodeTitle(this.nodeId);
   }
 
   ngOnDestroy() {
