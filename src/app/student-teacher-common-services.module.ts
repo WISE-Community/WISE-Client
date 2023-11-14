@@ -53,6 +53,7 @@ import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 import { NodeProgressService } from '../assets/wise5/services/nodeProgressService';
 import { CompletionService } from '../assets/wise5/services/completionService';
 import { StudentNodeService } from '../assets/wise5/services/studentNodeService';
+import { TranslateProjectService } from '../assets/wise5/services/translateProjectService';
 
 @NgModule({
   providers: [
@@ -108,6 +109,7 @@ import { StudentNodeService } from '../assets/wise5/services/studentNodeService'
     TableService,
     TabulatorDataService,
     TagService,
+    TranslateProjectService,
     VLEProjectService,
     WiseLinkService
   ]

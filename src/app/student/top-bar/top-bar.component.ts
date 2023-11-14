@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
@@ -22,13 +22,14 @@ export class TopBarComponent {
 
   avatarColor: string;
   completionPercent: number;
+  protected hasTranslations: boolean;
   homeURL: string;
   isConstraintsDisabled: boolean = false;
   isPreview: boolean = false;
   logoURL: string;
   newNotifications: Notification[] = [];
   notifications: Notification[] = [];
-  projectName: string;
+  @Input() projectName: string;
   subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -44,7 +45,7 @@ export class TopBarComponent {
   ngOnInit() {
     this.avatarColor = getAvatarColorForWorkgroupId(this.configService.getWorkgroupId());
     this.logoURL = `${this.projectService.getThemePath()}/images/WISE-logo-ffffff.svg`;
-    this.projectName = this.projectService.getProjectTitle();
+    this.hasTranslations = this.projectService.getLocale().hasTranslations();
     this.isPreview = this.configService.isPreview();
     this.isConstraintsDisabled = !this.configService.getConfigParam('constraints');
 

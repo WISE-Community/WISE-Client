@@ -14,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WiseLinkService } from '../../../app/services/wiseLinkService';
 import { convertToPNGFile } from '../common/canvas/canvas';
 import { NodeStatusService } from '../services/nodeStatusService';
+import { Node } from '../common/Node';
 
 @Component({
   selector: 'vle',
@@ -25,15 +26,17 @@ export class VLEComponent implements AfterViewInit {
   @ViewChild('drawer') public drawer: any;
   @ViewChild('tabbedVLETemplate') private tabbedVLETemplate: TemplateRef<any>;
 
-  currentNode: any;
+  currentNode: Node;
   initialized: boolean;
   layoutState: string;
   notebookConfig: any;
   notesEnabled: boolean = false;
   notesVisible: boolean = false;
+  project: any;
   projectStyle: string;
   reportEnabled: boolean = false;
   reportFullscreen: boolean = false;
+  rootNode: any;
   runEndedAndLocked: boolean;
   subscriptions: Subscription = new Subscription();
   vleTemplate: TemplateRef<any>;
@@ -65,6 +68,7 @@ export class VLEComponent implements AfterViewInit {
   }
 
   initRestOfVLE() {
+    this.setProject();
     this.vleTemplate =
       this.projectService.project.theme === 'tab'
         ? this.tabbedVLETemplate
@@ -98,7 +102,6 @@ export class VLEComponent implements AfterViewInit {
 
     // TODO: set these variables dynamically from theme settings
     this.notebookConfig = this.notebookService.getNotebookConfig();
-    this.currentNode = this.studentDataService.getCurrentNode();
     this.setLayoutState();
     this.initializeSubscriptions();
   }
@@ -107,6 +110,16 @@ export class VLEComponent implements AfterViewInit {
     this.subscriptions.unsubscribe();
     this.wiseLinkService.removeWiseLinkClickedListener();
     this.sessionService.broadcastExit();
+  }
+
+  private setProject(): void {
+    this.project = this.projectService.getProject();
+    this.rootNode = this.projectService.rootNode;
+    this.setCurrentNode();
+  }
+
+  private setCurrentNode(): void {
+    this.currentNode = this.projectService.getNode(this.studentDataService.getCurrentNodeId());
   }
 
   @HostListener('window:snip-image', ['$event.detail.target'])
@@ -135,6 +148,7 @@ export class VLEComponent implements AfterViewInit {
     this.subscribeToNotesVisible();
     this.subscribeToReportFullScreen();
     this.subscribeToViewCurrentAmbientNotification();
+    this.subscriptions.add(this.projectService.projectParsed$.subscribe(() => this.setProject()));
   }
 
   private subscribeToShowSessionWarning(): void {
@@ -162,7 +176,7 @@ export class VLEComponent implements AfterViewInit {
   private subscribeToCurrentNodeChanged(): void {
     this.subscriptions.add(
       this.studentDataService.currentNodeChanged$.subscribe(({ previousNode }) => {
-        this.currentNode = this.studentDataService.getCurrentNode();
+        this.setCurrentNode();
         let currentNodeId = this.currentNode.id;
 
         this.studentDataService.updateStackHistory(currentNodeId);
