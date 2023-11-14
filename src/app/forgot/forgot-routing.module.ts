@@ -7,14 +7,13 @@ import { ForgotStudentUsernameComponent } from './student/forgot-student-usernam
 import { ForgotStudentPasswordComponent } from './student/forgot-student-password/forgot-student-password.component';
 import { ForgotStudentPasswordSecurityComponent } from './student/forgot-student-password-security/forgot-student-password-security.component';
 import { ForgotStudentPasswordChangeComponent } from './student/forgot-student-password-change/forgot-student-password-change.component';
-import { ForgotStudentPasswordCompleteComponent } from './student/forgot-student-password-complete/forgot-student-password-complete.component';
 import { ForgotTeacherComponent } from './teacher/forgot-teacher/forgot-teacher.component';
 import { ForgotTeacherUsernameComponent } from './teacher/forgot-teacher-username/forgot-teacher-username.component';
 import { ForgotTeacherUsernameCompleteComponent } from './teacher/forgot-teacher-username-complete/forgot-teacher-username-complete.component';
 import { ForgotTeacherPasswordComponent } from './teacher/forgot-teacher-password/forgot-teacher-password.component';
 import { ForgotTeacherPasswordVerifyComponent } from './teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component';
 import { ForgotTeacherPasswordChangeComponent } from './teacher/forgot-teacher-password-change/forgot-teacher-password-change.component';
-import { ForgotTeacherPasswordCompleteComponent } from './teacher/forgot-teacher-password-complete/forgot-teacher-password-complete.component';
+import { ForgotUserPasswordCompleteComponent } from './forgot-user-password-complete/forgot-user-password-complete.component';
 
 const routes: Routes = [
   {
@@ -27,14 +26,14 @@ const routes: Routes = [
       { path: 'student/password', component: ForgotStudentPasswordComponent },
       { path: 'student/password/security', component: ForgotStudentPasswordSecurityComponent },
       { path: 'student/password/change', component: ForgotStudentPasswordChangeComponent },
-      { path: 'student/password/complete', component: ForgotStudentPasswordCompleteComponent },
+      { path: 'student/password/complete', component: ForgotUserPasswordCompleteComponent },
       { path: 'teacher', component: ForgotTeacherComponent },
       { path: 'teacher/username', component: ForgotTeacherUsernameComponent },
       { path: 'teacher/username/complete', component: ForgotTeacherUsernameCompleteComponent },
       { path: 'teacher/password', component: ForgotTeacherPasswordComponent },
       { path: 'teacher/password/verify', component: ForgotTeacherPasswordVerifyComponent },
       { path: 'teacher/password/change', component: ForgotTeacherPasswordChangeComponent },
-      { path: 'teacher/password/complete', component: ForgotTeacherPasswordCompleteComponent }
+      { path: 'teacher/password/complete', component: ForgotUserPasswordCompleteComponent }
     ]
   }
 ];
