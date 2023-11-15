@@ -139,7 +139,8 @@ export class NodeComponent implements OnInit {
       })
     );
 
-    this.studentDataService.currentNodeChanged$.subscribe(() => {
+    this.studentDataService.currentNodeChanged$.subscribe(({ currentNode }) => {
+      this.node = this.projectService.getNode(currentNode.id);
       this.initializeNode();
     });
     this.studentDataService.nodeStatusesChanged$.subscribe(() => {
