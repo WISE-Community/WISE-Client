@@ -31,6 +31,6 @@ export class ProjectLanguageChooserComponent implements OnInit {
   }
 
   protected changeLanguage(): void {
-    this.translateProjectService.translate(this.selectedLanguage.locale).subscribe();
+    this.translateProjectService.translate(this.selectedLanguage.locale);
   }
 }

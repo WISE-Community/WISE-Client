@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ProjectService } from './projectService';
 import { ConfigService } from './configService';
-import { Observable, of, tap } from 'rxjs';
+import { lastValueFrom, of, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { copy } from '../common/object/object';
 
@@ -13,20 +13,22 @@ export class TranslateProjectService {
     private projectService: ProjectService
   ) {}
 
-  translate(locale = 'en_US'): Observable<any> {
+  translate(locale = 'en_US'): Promise<any> {
     const project = this.revertToOriginalProject();
-    return this.projectService.getLocale().hasTranslationsToApply(locale)
-      ? this.http
-          .get(this.getTranslationMappingURL(locale), {
-            headers: new HttpHeaders().set('cache-control', 'no-cache')
-          })
-          .pipe(
-            tap((translations: any) => {
-              this.applyTranslations(project, translations);
-              this.projectService.setProject(project);
+    return lastValueFrom(
+      this.projectService.getLocale().hasTranslationsToApply(locale)
+        ? this.http
+            .get(this.getTranslationMappingURL(locale), {
+              headers: new HttpHeaders().set('cache-control', 'no-cache')
             })
-          )
-      : of({});
+            .pipe(
+              tap((translations: any) => {
+                this.applyTranslations(project, translations);
+                this.projectService.setProject(project);
+              })
+            )
+        : of({})
+    );
   }
 
   private revertToOriginalProject(): any {
