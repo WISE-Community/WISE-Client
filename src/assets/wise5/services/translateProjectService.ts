@@ -43,10 +43,11 @@ export class TranslateProjectService {
     Object.keys(projectElement)
       .filter((key) => key.endsWith('.i18nId'))
       .forEach((key) => {
-        const keyWithoutI18NId = key.substring(0, key.lastIndexOf('.i18nId'));
         const translationKey = projectElement[key];
-        projectElement[keyWithoutI18NId] =
-          translations[translationKey] ?? projectElement[keyWithoutI18NId];
+        if (translations[translationKey]) {
+          const keyWithoutI18NId = key.substring(0, key.lastIndexOf('.i18nId'));
+          projectElement[keyWithoutI18NId] = translations[translationKey];
+        }
       });
     Object.values(projectElement).forEach((value) => {
       if (Array.isArray(value)) {
