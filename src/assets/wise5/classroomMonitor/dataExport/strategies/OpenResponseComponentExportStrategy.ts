@@ -1,7 +1,7 @@
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
-import { ComponentDataExportStrategy } from './ComponentExportStrategy';
+import { ComponentDataExportStrategy } from './ComponentDataExportStrategy';
 
 export class OpenResponseComponentDataExportStrategy extends ComponentDataExportStrategy {
   autoScoreLabel: string = 'Auto Score';

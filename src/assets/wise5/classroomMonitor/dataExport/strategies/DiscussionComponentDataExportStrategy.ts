@@ -1,6 +1,6 @@
 import { removeHTMLTags } from '../../../common/string/string';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
-import { ComponentDataExportStrategy } from './ComponentExportStrategy';
+import { ComponentDataExportStrategy } from './ComponentDataExportStrategy';
 
 export class DiscussionComponentDataExportStrategy extends ComponentDataExportStrategy {
   defaultDiscussionColumnNames = [

@@ -1,5 +1,5 @@
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
-import { ComponentDataExportStrategy } from './ComponentExportStrategy';
+import { ComponentDataExportStrategy } from './ComponentDataExportStrategy';
 
 export class PeerChatComponentDataExportStrategy extends ComponentDataExportStrategy {
   defaultColumnNames = [
