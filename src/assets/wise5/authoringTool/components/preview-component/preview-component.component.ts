@@ -6,7 +6,6 @@ import {
   EnvironmentInjector,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   ViewChild,
   createComponent
@@ -18,7 +17,7 @@ import { components } from '../../../components/Components';
   selector: 'preview-component',
   template: '<div class="component__wrapper"><div #component></div></div>'
 })
-export class PreviewComponentComponent implements OnInit {
+export class PreviewComponentComponent {
   @Input() protected component: WISEComponent;
   @ViewChild('component') private componentElementRef: ElementRef;
   private componentRef: ComponentRef<WISEComponent>;
@@ -27,9 +26,17 @@ export class PreviewComponentComponent implements OnInit {
 
   constructor(private applicationRef: ApplicationRef, private injector: EnvironmentInjector) {}
 
-  ngOnInit() {}
-
   ngAfterViewInit(): void {
+    this.renderComponent();
+  }
+
+  ngOnChanges(): void {
+    if (this.componentElementRef != null) {
+      this.renderComponent();
+    }
+  }
+
+  renderComponent(): void {
     this.componentRef = createComponent(components[this.component.content.type].student, {
       hostElement: this.componentElementRef.nativeElement,
       environmentInjector: this.injector

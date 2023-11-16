@@ -24,7 +24,10 @@ export class ComponentSelectorComponent {
   protected preview(): void {
     this.dialog.open(ComponentInfoDialogComponent, {
       data: this.componentType,
-      panelClass: 'dialog-lg'
+      panelClass: 'dialog-lg',
+      position: {
+        top: '100px'
+      }
     });
   }
 

@@ -7,6 +7,11 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { PreviewComponentComponent } from '../preview-component/preview-component.component';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentInfoService } from '../../../services/componentInfoService';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ComponentInfoDialogComponent', () => {
   let component: ComponentInfoDialogComponent;
@@ -15,7 +20,17 @@ describe('ComponentInfoDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ComponentInfoDialogComponent, PreviewComponentComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, MatDividerModule, PreviewComponentModule],
+      imports: [
+        BrowserAnimationsModule,
+        HttpClientTestingModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatSelectModule,
+        PreviewComponentModule
+      ],
       providers: [ComponentInfoService, { provide: MAT_DIALOG_DATA, useValue: 'OpenResponse' }]
     }).compileComponents();
     fixture = TestBed.createComponent(ComponentInfoDialogComponent);

@@ -1,3 +1,41 @@
-.example-label {
-  padding: 0 24px;
+@use '@angular/material' as mat;
+@import
+  'style/abstracts/variables',
+  'style/abstracts/functions',
+  'style/base/typography';
+
+.component-info-top-bar {
+  padding: 12px 6px;
+  
+  .mdc-line-ripple {
+    &:before, &:after {
+      display: none;
+    }
+  }
+
+  .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    min-height: 24px;
+  }
+
+  .mat-mdc-form-field-flex {
+    height: 32px;
+  }
+
+  .mat-mdc-select-value-text, .mat-mdc-form-field-input-control.mat-mdc-form-field-input-control {
+    font-size: mat.font-size($wise-typography, 'caption');
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+}
+
+.description {
+  padding: 0px 24px;
+}
+
+.mat-mdc-dialog-content {
+  margin: 0px 24px;
 }
