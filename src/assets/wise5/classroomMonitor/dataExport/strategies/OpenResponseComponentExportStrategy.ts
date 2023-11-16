@@ -210,7 +210,9 @@ export class OpenResponseComponentDataExportStrategy extends ComponentDataExport
     );
     this.setColumnValue(row, columnNameToNumber, 'Component Type', component.type);
     this.setColumnValue(row, columnNameToNumber, 'Component Prompt', component.prompt);
-    this.setColumnValue(row, columnNameToNumber, 'Item ID', component.cRater.itemId);
+    if (this.isCRaterEnabled(component)) {
+      this.setColumnValue(row, columnNameToNumber, 'Item ID', component.cRater.itemId);
+    }
   }
 
   private setStudentWork(row: any[], columnNameToNumber: any, componentState: any): void {
