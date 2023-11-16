@@ -7,6 +7,7 @@ import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
+import { copy } from '../../../../assets/wise5/common/object/object';
 
 @Component({
   selector: 'app-personal-library',
@@ -132,13 +133,12 @@ export class PersonalLibraryComponent extends LibraryComponent {
   protected updateSelectedProjects(event: ProjectSelectionEvent): void {
     if (event.selected) {
       this.selectedProjects.update((selectedProjects) => {
-        selectedProjects.push(event.project);
-        return selectedProjects;
+        return [...selectedProjects, event.project];
       });
     } else {
       this.selectedProjects.update((selectedProjects) => {
         selectedProjects.splice(selectedProjects.indexOf(event.project), 1);
-        return selectedProjects;
+        return [...selectedProjects];
       });
     }
   }
