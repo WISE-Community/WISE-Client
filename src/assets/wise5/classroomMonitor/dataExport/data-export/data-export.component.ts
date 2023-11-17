@@ -26,6 +26,8 @@ import { Choice } from '../../../components/match/choice';
 import { Bucket } from '../../../components/match/bucket';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PeerChatComponentDataExportStrategy } from '../strategies/PeerChatComponentDataExportStrategy';
+import { OpenResponseComponentDataExportStrategy } from '../strategies/OpenResponseComponentExportStrategy';
+import { ComponentDataExportParams } from '../ComponentDataExportParams';
 
 @Component({
   selector: 'data-export',
@@ -1001,20 +1003,36 @@ export class DataExportComponent implements OnInit {
       this.exportMatchComponent(nodeId, component);
     } else if (component.type === 'Discussion') {
       this.dataExportContext.setStrategy(
-        new DiscussionComponentDataExportStrategy(nodeId, component)
+        new DiscussionComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams()
+        )
       );
       this.dataExportContext.export();
     } else if (component.type === 'DialogGuidance') {
       this.exportDialogGuidanceComponent(nodeId, component);
     } else if (component.type === 'OpenResponse') {
-      this.exportOpenResponseComponent(nodeId, component);
+      this.dataExportContext.setStrategy(
+        new OpenResponseComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'all'
+        )
+      );
+      this.dataExportContext.export();
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       this.exportEmbeddedComponent(nodeId, component);
     } else if (component.type === 'Label') {
       this.exportLabelComponent(nodeId, component);
     } else if (component.type === 'PeerChat') {
       this.dataExportContext.setStrategy(
-        new PeerChatComponentDataExportStrategy(nodeId, component)
+        new PeerChatComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams()
+        )
       );
       this.dataExportContext.export();
     }
@@ -1032,7 +1050,15 @@ export class DataExportComponent implements OnInit {
     } else if (component.type === 'DialogGuidance') {
       this.exportDialogGuidanceComponent(nodeId, component);
     } else if (component.type === 'OpenResponse') {
-      this.exportOpenResponseComponent(nodeId, component);
+      this.dataExportContext.setStrategy(
+        new OpenResponseComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'latest'
+        )
+      );
+      this.dataExportContext.export();
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       this.exportEmbeddedComponent(nodeId, component);
     } else if (component.type === 'Label') {
@@ -1042,14 +1068,21 @@ export class DataExportComponent implements OnInit {
 
   private exportLabelComponent(nodeId: string, component: any): void {
     this.dataExportContext.setStrategy(
-      new LabelComponentDataExportStrategy(new WISEComponent(component, nodeId), {
-        canViewStudentNames: this.canViewStudentNames,
-        includeOnlySubmits: this.includeOnlySubmits,
-        includeStudentNames: this.includeStudentNames,
-        workSelectionType: this.workSelectionType
-      })
+      new LabelComponentDataExportStrategy(
+        new WISEComponent(component, nodeId),
+        this.getComponentDataExportParams()
+      )
     );
     this.dataExportContext.export();
+  }
+
+  private getComponentDataExportParams(): ComponentDataExportParams {
+    return {
+      canViewStudentNames: this.canViewStudentNames,
+      includeOnlySubmits: this.includeOnlySubmits,
+      includeStudentNames: this.includeStudentNames,
+      workSelectionType: this.workSelectionType
+    };
   }
 
   /**
@@ -1364,157 +1397,6 @@ export class DataExportComponent implements OnInit {
     const fileName = this.getComponentExportFileName(nodeId, component.id, 'dialog_guidance');
     this.generateCSVFile(rows, fileName);
     this.hideDownloadingExportMessage();
-  }
-
-  exportOpenResponseComponent(nodeId: string, component: any): void {
-    const components = this.getComponentsParam(nodeId, component.id);
-    this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
-      this.generateOpenResponseComponentExport(nodeId, component);
-    });
-  }
-
-  generateOpenResponseComponentExport(nodeId: string, component: any): void {
-    const rows = this.getExportOpenResponseComponentRows(nodeId, component);
-    const fileName = this.getComponentExportFileName(nodeId, component.id, 'open_response');
-    this.generateCSVFile(rows, fileName);
-    this.hideDownloadingExportMessage();
-  }
-
-  getExportOpenResponseComponentRows(nodeId: string, component: any): string[] {
-    const columnNames = [];
-    const columnNameToNumber = {};
-    let rows = [];
-    rows.push(
-      this.generateOpenResponseComponentHeaderRow(
-        component,
-        columnNames,
-        columnNameToNumber,
-        nodeId
-      )
-    );
-    rows = rows.concat(
-      this.generateComponentWorkRows(component, columnNames, columnNameToNumber, nodeId)
-    );
-    return rows;
-  }
-
-  generateOpenResponseComponentHeaderRow(
-    component: any,
-    columnNames: string[],
-    columnNameToNumber: any,
-    nodeId: string
-  ): string[] {
-    this.populateOpenResponseColumnNames(component, columnNames, columnNameToNumber, nodeId);
-    return columnNames;
-  }
-
-  populateOpenResponseColumnNames(
-    component: any,
-    columnNames: string[],
-    columnNameToNumber: any,
-    nodeId: string
-  ): void {
-    for (const defaultColumnName of this.componentExportDefaultColumnNames) {
-      this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, defaultColumnName);
-    }
-    this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, this.itemIdLabel);
-    this.addColumnNameToColumnDataStructures(
-      columnNameToNumber,
-      columnNames,
-      this.studentResponseLabel
-    );
-    if (this.isCRaterEnabled(component)) {
-      const annotations = this.dataService.getAnnotationsByNodeIdAndComponentId(
-        nodeId,
-        component.id
-      );
-      this.tryToAddIdeaColumnNames(columnNames, columnNameToNumber, annotations);
-      this.tryToAddScoreColumnNames(columnNames, columnNameToNumber, annotations);
-    }
-  }
-
-  isCRaterEnabled(component: any): boolean {
-    return component.enableCRater && component.cRater.itemId !== '';
-  }
-
-  tryToAddIdeaColumnNames(
-    columnNames: string[],
-    columnNameToNumber: any,
-    annotations: any[]
-  ): void {
-    const ideaNames = this.getIdeaNamesFromAnnotations(annotations);
-    for (const ideaName of ideaNames) {
-      this.addColumnNameToColumnDataStructures(
-        columnNameToNumber,
-        columnNames,
-        `${this.ideaLabel} ${ideaName}`
-      );
-    }
-  }
-
-  getIdeaNamesFromAnnotations(annotations: any[]): string[] {
-    const ideaNames = new Set();
-    for (const annotation of annotations) {
-      const ideaNamesFromAnnotation = this.getIdeaNamesFromAnnotation(annotation);
-      for (const ideaName of ideaNamesFromAnnotation) {
-        ideaNames.add(ideaName);
-      }
-    }
-    return Array.from(ideaNames).sort(this.sortIdeaNames) as string[];
-  }
-
-  getIdeaNamesFromAnnotation(annotation: any): string[] {
-    const ideaNames = [];
-    if (annotation.data.ideas != null) {
-      for (const idea of annotation.data.ideas) {
-        ideaNames.push(idea.name);
-      }
-    }
-    return ideaNames;
-  }
-
-  tryToAddScoreColumnNames(
-    columnNames: string[],
-    columnNameToNumber: any,
-    annotations: any[]
-  ): void {
-    const scoreNames = this.getScoreNamesFromAnnotations(annotations);
-    if (scoreNames.length === 0) {
-      this.addColumnNameToColumnDataStructures(
-        columnNameToNumber,
-        columnNames,
-        `${this.autoScoreLabel}`
-      );
-    } else {
-      for (const scoreName of scoreNames) {
-        this.addColumnNameToColumnDataStructures(
-          columnNameToNumber,
-          columnNames,
-          `${this.scoreLabel} ${scoreName}`
-        );
-      }
-    }
-  }
-
-  getScoreNamesFromAnnotations(annotations: any[]): string[] {
-    const scoreNames = new Set();
-    for (const annotation of annotations) {
-      const scoreNamesFromAnnotation = this.getScoreNamesFromAnnotation(annotation);
-      for (const scoreName of scoreNamesFromAnnotation) {
-        scoreNames.add(scoreName);
-      }
-    }
-    return Array.from(scoreNames).sort() as string[];
-  }
-
-  getScoreNamesFromAnnotation(annotation: any): string[] {
-    const scoreNames = [];
-    if (annotation.data.scores != null) {
-      for (const score of annotation.data.scores) {
-        scoreNames.push(score.id);
-      }
-    }
-    return scoreNames.sort();
   }
 
   getComponentExportFileName(nodeId: string, componentId: string, componentType: string): string {
@@ -1839,23 +1721,6 @@ export class DataExportComponent implements OnInit {
         componentRevisionCounter,
         componentState
       );
-    } else if (componentState.componentType === 'OpenResponse') {
-      return this.generateOpenResponseComponentWorkRow(
-        component,
-        columnNames,
-        columnNameToNumber,
-        rowCounter,
-        workgroupId,
-        userId1,
-        userId2,
-        userId3,
-        studentName1,
-        studentName2,
-        studentName3,
-        periodName,
-        componentRevisionCounter,
-        componentState
-      );
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       return this.generateEmbeddedComponentWorkRow(
         component,
@@ -1986,69 +1851,6 @@ export class DataExportComponent implements OnInit {
     text: string
   ): void {
     row[columnNameToNumber[`${this.dialogGuidanceComputerResponseLabel} ${revisionLabel}`]] = text;
-  }
-
-  generateOpenResponseComponentWorkRow(
-    component: any,
-    columnNames: string[],
-    columnNameToNumber: any,
-    rowCounter: number,
-    workgroupId: number,
-    userId1: number,
-    userId2: number,
-    userId3: number,
-    studentName1: string,
-    studentName2: string,
-    studentName3: string,
-    periodName: string,
-    componentRevisionCounter: any,
-    componentState: any
-  ): string[] {
-    const row = this.createStudentWorkExportRow(
-      columnNames,
-      columnNameToNumber,
-      rowCounter,
-      workgroupId,
-      userId1,
-      userId2,
-      userId3,
-      studentName1,
-      studentName2,
-      studentName3,
-      periodName,
-      componentRevisionCounter,
-      componentState
-    );
-    row[columnNameToNumber[this.itemIdLabel]] = component?.cRater?.itemId;
-    row[columnNameToNumber[this.studentResponseLabel]] = componentState.studentData.response;
-    const annotation = this.annotationService.getLatestAnnotationByStudentWorkIdAndType(
-      componentState.id,
-      'autoScore'
-    );
-    if (annotation != null) {
-      this.tryToAddOpenResponseAnnotationIdeas(row, columnNameToNumber, annotation);
-      this.tryToAddOpenResponseAnnotationScores(row, columnNameToNumber, annotation);
-    }
-    return row;
-  }
-
-  tryToAddOpenResponseAnnotationIdeas(row: any[], columnNameToNumber: any, annotation: any): void {
-    if (annotation.data.ideas != null) {
-      for (const idea of annotation.data.ideas) {
-        row[columnNameToNumber[`${this.ideaLabel} ${idea.name}`]] = idea.detected ? 1 : 0;
-      }
-    }
-  }
-
-  tryToAddOpenResponseAnnotationScores(row: any[], columnNameToNumber: any, annotation: any): void {
-    if (annotation.data.scores != null) {
-      for (const score of annotation.data.scores) {
-        row[columnNameToNumber[`${this.scoreLabel} ${score.id}`]] = score.score;
-      }
-    }
-    if (annotation.data.value != null) {
-      row[columnNameToNumber[`${this.autoScoreLabel}`]] = annotation.data.value;
-    }
   }
 
   exportEmbeddedComponent(nodeId: string, component: any): void {
