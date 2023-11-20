@@ -295,7 +295,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-info-dialog/component-info-dialog.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/preview-component-dialog/preview-component-dialog.component.html</context>
@@ -2070,7 +2070,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-info-dialog/component-info-dialog.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
@@ -9781,7 +9781,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Example</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-info-dialog/component-info-dialog.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">12</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
@@ -9791,15 +9791,29 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
       <trans-unit id="4f8b454722a2bba14ed946866b9d66957ffd38fa" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ label }}"/></source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-selector/component-selector.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-type-button/component-type-button.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
       <trans-unit id="63cfbdaea090979cbc69e892eeda366948a4d566" datatype="html">
         <source>Component type details</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-selector/component-selector.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-type-button/component-type-button.component.html</context>
           <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ebbcf6818088a0f2e6ab6736c04262b123a0e7b6" datatype="html">
+        <source>Previous component type</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-type-selector/component-type-selector.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="86ed4d8c7cfee3301023535e81359c8154bb81ac" datatype="html">
+        <source>Next component type</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-type-selector/component-type-selector.component.html</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="929954f6e28805c5a7c03aac44c9e48cad2ab3e3" datatype="html">
