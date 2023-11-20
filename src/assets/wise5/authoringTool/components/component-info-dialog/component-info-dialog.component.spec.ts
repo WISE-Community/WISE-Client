@@ -12,14 +12,22 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ComponentTypeSelectorComponent } from '../component-type-selector/component-type-selector.component';
+import { ComponentInfoDialogHarness } from './component-info-dialog.harness';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+
+let component: ComponentInfoDialogComponent;
+let componentInfoDialogHarness: ComponentInfoDialogHarness;
+let fixture: ComponentFixture<ComponentInfoDialogComponent>;
 
 describe('ComponentInfoDialogComponent', () => {
-  let component: ComponentInfoDialogComponent;
-  let fixture: ComponentFixture<ComponentInfoDialogComponent>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ComponentInfoDialogComponent, PreviewComponentComponent],
+      declarations: [
+        ComponentInfoDialogComponent,
+        ComponentTypeSelectorComponent,
+        PreviewComponentComponent
+      ],
       imports: [
         BrowserAnimationsModule,
         HttpClientTestingModule,
@@ -37,10 +45,29 @@ describe('ComponentInfoDialogComponent', () => {
     const projectService = TestBed.inject(ProjectService);
     projectService.project = {};
     component = fixture.componentInstance;
+    window.MathJax = {
+      startup: {
+        promise: new Promise((resolve, reject) => {
+          resolve({});
+        })
+      },
+      typesetPromise: () => {}
+    };
     fixture.detectChanges();
+    componentInfoDialogHarness = await TestbedHarnessEnvironment.harnessForFixture(
+      fixture,
+      ComponentInfoDialogHarness
+    );
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  displayComponent();
 });
+
+function displayComponent() {
+  describe('display component', async () => {
+    it('displays the component description', async () => {
+      expect(await (await componentInfoDialogHarness.getDescription()).text()).toEqual(
+        'Students type a response to a question or prompt.'
+      );
+    });
+  });
+}

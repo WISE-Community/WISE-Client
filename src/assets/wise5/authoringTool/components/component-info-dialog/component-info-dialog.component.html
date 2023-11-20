@@ -1,22 +1,10 @@
-<div class="component-info-top-bar" fxLayoutAlign="start center" fxLayoutGap="12px">
+<div class="component-info-top-bar" fxLayoutAlign="start center">
   <h2 mat-dialog-title i18n>Component Info</h2>
   <div fxFlex></div>
-  <button mat-icon-button (click)="goToPreviousComponent()" [disabled]="firstComponent">
-    <mat-icon>chevron_left</mat-icon>
-  </button>
-  <mat-form-field>
-    <mat-select [(value)]="componentType" (selectionChange)="displayComponent(componentType)">
-      <mat-option
-        *ngFor="let componentTypeOption of componentTypes"
-        [value]="componentTypeOption.type"
-      >
-        {{ componentTypeOption.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button mat-icon-button (click)="goToNextComponent()" [disabled]="lastComponent">
-    <mat-icon>chevron_right</mat-icon>
-  </button>
+  <component-type-selector
+    [componentType]="componentType"
+    (componentTypeSelectedEvent)="changeComponentType($event)"
+  ></component-type-selector>
 </div>
 <mat-dialog-content>
   <h3 i18n>Description</h3>
