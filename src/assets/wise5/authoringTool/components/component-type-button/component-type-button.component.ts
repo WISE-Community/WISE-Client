@@ -4,11 +4,11 @@ import { ComponentInfoService } from '../../../services/componentInfoService';
 import { ComponentInfoDialogComponent } from '../component-info-dialog/component-info-dialog.component';
 
 @Component({
-  selector: 'component-selector',
-  templateUrl: './component-selector.component.html',
-  styleUrls: ['./component-selector.component.scss']
+  selector: 'component-type-button',
+  templateUrl: './component-type-button.component.html',
+  styleUrls: ['./component-type-button.component.scss']
 })
-export class ComponentSelectorComponent {
+export class ComponentTypeButtonComponent {
   private componentInfo: any;
   @Output() componentSelectedEvent: EventEmitter<void> = new EventEmitter<void>();
   @Input() componentType: string;
