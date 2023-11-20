@@ -266,18 +266,14 @@ export class NodeComponent implements OnInit {
   }
 
   private createComponentStatesResponseHandler(isAutoSave, componentId = null, isSubmit = null) {
-    return (componentStatesFromComponents) => {
-      const {
-        componentStates,
-        componentEvents,
-        componentAnnotations
-      } = this.getDataArraysToSaveFromComponentStates(componentStatesFromComponents);
+    return (componentStates) => {
+      const componentAnnotations = this.getAnnotationsFromComponentStates(componentStates);
       componentStates.forEach((componentState: any) => {
         this.injectAdditionalComponentStateFields(componentState, isAutoSave, isSubmit);
         this.notifyConnectedParts(componentId, componentState);
       });
       return this.studentDataService
-        .saveToServer(componentStates, componentEvents, componentAnnotations)
+        .saveToServer(componentStates, [], componentAnnotations)
         .then((savedStudentDataResponse) => {
           if (savedStudentDataResponse) {
             if (this.node.isEvaluateTransitionLogicOn('studentDataChanged')) {
@@ -310,14 +306,6 @@ export class NodeComponent implements OnInit {
           }
           return savedStudentDataResponse;
         });
-    };
-  }
-
-  private getDataArraysToSaveFromComponentStates(componentStates: any[]): any {
-    return {
-      componentStates: componentStates,
-      componentEvents: [],
-      componentAnnotations: this.getAnnotationsFromComponentStates(componentStates)
     };
   }
 
