@@ -279,20 +279,11 @@ export class NodeComponent implements OnInit {
             if (this.node.isEvaluateTransitionLogicOn('studentDataChanged')) {
               this.nodeService.evaluateTransitionLogic();
             }
-            if (this.node.isEvaluateTransitionLogicOn('scoreChanged')) {
-              if (componentAnnotations != null && componentAnnotations.length > 0) {
-                let evaluateTransitionLogic = false;
-                for (const componentAnnotation of componentAnnotations) {
-                  if (componentAnnotation != null) {
-                    if (componentAnnotation.type === 'autoScore') {
-                      evaluateTransitionLogic = true;
-                    }
-                  }
-                }
-                if (evaluateTransitionLogic) {
-                  this.nodeService.evaluateTransitionLogic();
-                }
-              }
+            if (
+              this.node.isEvaluateTransitionLogicOn('scoreChanged') &&
+              componentAnnotations.some((annotation) => annotation.type === 'autoScore')
+            ) {
+              this.nodeService.evaluateTransitionLogic();
             }
             const studentWorkList = savedStudentDataResponse.studentWorkList;
             if (!componentId && studentWorkList && studentWorkList.length) {
