@@ -13,7 +13,6 @@ export class ComponentInfoDialogComponent {
   protected component: any;
   private componentInfo: ComponentInfo;
   protected description: string;
-  protected label: string;
 
   constructor(
     private componentInfoService: ComponentInfoService,
@@ -27,15 +26,10 @@ export class ComponentInfoDialogComponent {
   protected displayComponent(componentType: any): void {
     this.componentType = componentType;
     this.componentInfo = this.componentInfoService.getInfo(componentType);
-    this.label = this.componentInfo.getLabel();
     this.description = this.componentInfo.getDescription();
     this.component = new ComponentFactory().getComponent(
       this.componentInfo.getPreviewContent(),
       'node1'
     );
-  }
-
-  protected changeComponentType(componentType: string): void {
-    this.displayComponent(componentType);
   }
 }
