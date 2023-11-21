@@ -181,17 +181,11 @@
               matTooltipPosition="above"
               i18n-matTooltip
             ></div>
-            <button
+            <edit-component-advanced-button
               *ngIf="componentsToExpanded[component.id]"
-              mat-icon-button
-              color="primary"
-              (click)="showComponentAdvancedAuthoring(component, $event)"
-              matTooltip="Advanced"
-              matTooltipPosition="above"
-              i18n-matTooltip
-            >
-              <mat-icon>build</mat-icon>
-            </button>
+              [componentContent]="component"
+              [nodeId]="nodeId"
+            ></edit-component-advanced-button>
             <preview-component-button
               class="dynamic-component-button"
               [ngClass]="{

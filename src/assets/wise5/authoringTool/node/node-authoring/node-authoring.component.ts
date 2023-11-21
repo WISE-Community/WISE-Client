@@ -9,8 +9,6 @@ import { ComponentContent } from '../../../common/ComponentContent';
 import { temporarilyHighlightElement } from '../../../common/dom/dom';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfigService } from '../../../../wise5/services/configService';
-import { EditComponentAdvancedComponent } from '../../../../../app/authoring-tool/edit-component-advanced/edit-component-advanced.component';
-import { Component as WiseComponent } from '../../../common/Component';
 import { ChooseNewComponent } from '../../../../../app/authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -308,14 +306,6 @@ export class NodeAuthoringComponent implements OnInit {
 
   protected getComponentTypeLabel(componentType: string): string {
     return this.componentTypeService.getComponentTypeLabel(componentType);
-  }
-
-  protected showComponentAdvancedAuthoring(componentContent: ComponentContent, event: any): void {
-    event.stopPropagation();
-    this.dialog.open(EditComponentAdvancedComponent, {
-      data: new WiseComponent(componentContent, this.nodeId),
-      width: '80%'
-    });
   }
 
   protected updateIsAnyComponentSelected(): void {
