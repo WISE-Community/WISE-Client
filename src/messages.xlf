@@ -9802,13 +9802,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="63cfbdaea090979cbc69e892eeda366948a4d566" datatype="html">
-        <source>Component type details</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-type-button/component-type-button.component.html</context>
-          <context context-type="linenumber">12</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="ebbcf6818088a0f2e6ab6736c04262b123a0e7b6" datatype="html">
         <source>Previous component type</source>
         <context-group purpose="location">
