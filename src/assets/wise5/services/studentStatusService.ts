@@ -9,7 +9,7 @@ import { StudentDataService } from './studentDataService';
 
 @Injectable()
 export class StudentStatusService {
-  studentStatus: StudentStatus;
+  private studentStatus: StudentStatus = new StudentStatus();
 
   constructor(
     private http: HttpClient,
@@ -24,19 +24,15 @@ export class StudentStatusService {
   }
 
   retrieveStudentStatus(): any {
-    if (this.configService.isPreview()) {
-      this.setStudentStatus(new StudentStatus());
-    } else {
-      return this.http
-        .get(`/api/studentStatus/${this.configService.getWorkgroupId()}`)
-        .subscribe((studentStatus: any) => {
-          if (studentStatus == null) {
-            this.setStudentStatus(new StudentStatus());
-          } else {
-            this.setStudentStatus(new StudentStatus(JSON.parse(studentStatus.status)));
-          }
-        });
-    }
+    return this.http
+      .get(`/api/studentStatus/${this.configService.getWorkgroupId()}`)
+      .subscribe((studentStatus: any) => {
+        if (studentStatus == null) {
+          this.setStudentStatus(new StudentStatus());
+        } else {
+          this.setStudentStatus(new StudentStatus(JSON.parse(studentStatus.status)));
+        }
+      });
   }
 
   private setStudentStatus(studentStatus: StudentStatus): void {
