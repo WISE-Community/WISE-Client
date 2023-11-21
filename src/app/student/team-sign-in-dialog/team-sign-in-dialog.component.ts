@@ -103,7 +103,7 @@ export class TeamSignInDialogComponent implements OnInit {
                   this.run.workgroupId = canBeAddedToWorkgroupResponse.workgroupId;
                 }
               } else if (
-                canBeAddedToWorkgroupResponse.workgroupMembers.length ===
+                canBeAddedToWorkgroupResponse.workgroupMembers?.length ===
                 this.run.maxStudentsPerTeam
               ) {
                 alert(
