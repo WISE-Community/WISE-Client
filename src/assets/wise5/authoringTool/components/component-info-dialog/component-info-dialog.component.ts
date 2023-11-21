@@ -13,16 +13,19 @@ export class ComponentInfoDialogComponent {
   protected component: any;
   private componentInfo: ComponentInfo;
   protected description: string;
-  protected label: string;
 
   constructor(
     private componentInfoService: ComponentInfoService,
-    @Inject(MAT_DIALOG_DATA) private componentType: string
+    @Inject(MAT_DIALOG_DATA) protected componentType: string
   ) {}
 
   ngOnInit(): void {
-    this.componentInfo = this.componentInfoService.getInfo(this.componentType);
-    this.label = this.componentInfo.getLabel();
+    this.displayComponent(this.componentType);
+  }
+
+  protected displayComponent(componentType: any): void {
+    this.componentType = componentType;
+    this.componentInfo = this.componentInfoService.getInfo(componentType);
     this.description = this.componentInfo.getDescription();
     this.component = new ComponentFactory().getComponent(
       this.componentInfo.getPreviewContent(),

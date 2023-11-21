@@ -1,7 +1,14 @@
-<h2 mat-dialog-title i18n>{{ label }}</h2>
+<div class="component-info-top-bar" fxLayoutAlign="start center">
+  <h2 mat-dialog-title i18n>Component Info</h2>
+  <div fxFlex></div>
+  <component-type-selector
+    [componentType]="componentType"
+    (componentTypeSelectedEvent)="displayComponent($event)"
+  ></component-type-selector>
+</div>
 <mat-dialog-content>
-  <p>{{ description }}</p>
-  <mat-divider></mat-divider>
+  <h3 i18n>Description</h3>
+  <p class="description">{{ description }}</p>
   <h3 i18n>Example</h3>
   <preview-component [component]="component"> </preview-component>
 </mat-dialog-content>

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ComponentSelectorComponent } from './component-selector.component';
+import { ComponentTypeButtonComponent } from './component-type-button.component';
 import { ComponentInfoService } from '../../../services/componentInfoService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
@@ -8,13 +8,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 
-describe('ComponentSelectorComponent', () => {
-  let component: ComponentSelectorComponent;
-  let fixture: ComponentFixture<ComponentSelectorComponent>;
+describe('ComponentTypeButtonComponent', () => {
+  let component: ComponentTypeButtonComponent;
+  let fixture: ComponentFixture<ComponentTypeButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ComponentSelectorComponent],
+      declarations: [ComponentTypeButtonComponent],
       imports: [
         HttpClientTestingModule,
         MatCardModule,
@@ -24,7 +24,7 @@ describe('ComponentSelectorComponent', () => {
       ],
       providers: [ComponentInfoService, ComponentServiceLookupService]
     }).compileComponents();
-    fixture = TestBed.createComponent(ComponentSelectorComponent);
+    fixture = TestBed.createComponent(ComponentTypeButtonComponent);
     component = fixture.componentInstance;
     component.componentType = 'OpenResponse';
     fixture.detectChanges();
