@@ -266,37 +266,24 @@ export class NodeComponent implements OnInit {
   }
 
   private createComponentStatesResponseHandler(isAutoSave, componentId = null, isSubmit = null) {
-    return (componentStatesFromComponents) => {
-      const {
-        componentStates,
-        componentEvents,
-        componentAnnotations
-      } = this.getDataArraysToSaveFromComponentStates(componentStatesFromComponents);
+    return (componentStates) => {
+      const componentAnnotations = this.getAnnotationsFromComponentStates(componentStates);
       componentStates.forEach((componentState: any) => {
         this.injectAdditionalComponentStateFields(componentState, isAutoSave, isSubmit);
         this.notifyConnectedParts(componentId, componentState);
       });
       return this.studentDataService
-        .saveToServer(componentStates, componentEvents, componentAnnotations)
+        .saveToServer(componentStates, [], componentAnnotations)
         .then((savedStudentDataResponse) => {
           if (savedStudentDataResponse) {
             if (this.node.isEvaluateTransitionLogicOn('studentDataChanged')) {
               this.nodeService.evaluateTransitionLogic();
             }
-            if (this.node.isEvaluateTransitionLogicOn('scoreChanged')) {
-              if (componentAnnotations != null && componentAnnotations.length > 0) {
-                let evaluateTransitionLogic = false;
-                for (const componentAnnotation of componentAnnotations) {
-                  if (componentAnnotation != null) {
-                    if (componentAnnotation.type === 'autoScore') {
-                      evaluateTransitionLogic = true;
-                    }
-                  }
-                }
-                if (evaluateTransitionLogic) {
-                  this.nodeService.evaluateTransitionLogic();
-                }
-              }
+            if (
+              this.node.isEvaluateTransitionLogicOn('scoreChanged') &&
+              componentAnnotations.some((annotation) => annotation.type === 'autoScore')
+            ) {
+              this.nodeService.evaluateTransitionLogic();
             }
             const studentWorkList = savedStudentDataResponse.studentWorkList;
             if (!componentId && studentWorkList && studentWorkList.length) {
@@ -310,14 +297,6 @@ export class NodeComponent implements OnInit {
           }
           return savedStudentDataResponse;
         });
-    };
-  }
-
-  private getDataArraysToSaveFromComponentStates(componentStates: any[]): any {
-    return {
-      componentStates: componentStates,
-      componentEvents: [],
-      componentAnnotations: this.getAnnotationsFromComponentStates(componentStates)
     };
   }
 
