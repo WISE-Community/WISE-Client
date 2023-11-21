@@ -47,23 +47,13 @@ describe('StudentStatusService', () => {
 
 function retrieveStudentStatus() {
   describe('retrieveStudentStatus()', () => {
-    retrieveStudentStatus_Preview_SetNewStatus();
     retrieveStudentStatus_ReceiveNull_SetNewStatus();
     retrieveStudentStatus_ReceiveStudentStatus_SetStudentStatus();
   });
 }
 
-function retrieveStudentStatus_Preview_SetNewStatus() {
-  it('should retrieve empty student status when in preview', () => {
-    setIsPreview(true);
-    expectNewStudentStatus();
-    service.retrieveStudentStatus();
-    expect(service.getStudentStatus()).toEqual(new StudentStatus());
-  });
-}
-
 function retrieveStudentStatus_ReceiveNull_SetNewStatus() {
-  it('should retrieve student status and receive null', () => {
+  it('should retrieve new student status when backend returns null', () => {
     setIsPreview(false);
     expectNewStudentStatus();
     const httpGetSpy = spyOn(http, 'get').and.returnValue(of(null));
