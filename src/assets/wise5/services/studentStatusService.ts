@@ -27,16 +27,11 @@ export class StudentStatusService {
     return this.http
       .get(`/api/studentStatus/${this.configService.getWorkgroupId()}`)
       .subscribe((studentStatus: any) => {
-        if (studentStatus == null) {
-          this.setStudentStatus(new StudentStatus());
-        } else {
-          this.setStudentStatus(new StudentStatus(JSON.parse(studentStatus.status)));
-        }
+        this.studentStatus =
+          studentStatus == null
+            ? new StudentStatus()
+            : new StudentStatus(JSON.parse(studentStatus.status));
       });
-  }
-
-  private setStudentStatus(studentStatus: StudentStatus): void {
-    this.studentStatus = studentStatus;
   }
 
   getStudentStatus(): StudentStatus {
@@ -68,7 +63,7 @@ export class StudentStatusService {
       if (computerAvatarId != null) {
         studentStatusJSON.computerAvatarId = computerAvatarId;
       }
-      this.setStudentStatus(studentStatusJSON);
+      this.studentStatus = studentStatusJSON;
       const studentStatusParams = {
         runId: runId,
         periodId: periodId,
