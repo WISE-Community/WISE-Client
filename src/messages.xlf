@@ -9788,18 +9788,25 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">184</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4f8b454722a2bba14ed946866b9d66957ffd38fa" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ label }}"/></source>
+      <trans-unit id="7e3335111c33faf6526597a2b84893369b11bc60" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ label }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-type-button/component-type-button.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="linenumber">3,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d502ff69ac61a0dc636f0e98d3e70b59e9caf7b6" datatype="html">
+        <source>More Info</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-type-button/component-type-button.component.html</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="63cfbdaea090979cbc69e892eeda366948a4d566" datatype="html">
         <source>Component type details</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-type-button/component-type-button.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ebbcf6818088a0f2e6ab6736c04262b123a0e7b6" datatype="html">
