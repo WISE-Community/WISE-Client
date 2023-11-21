@@ -379,26 +379,11 @@ export class NodeComponent implements OnInit {
     const componentStatePromises = [];
     for (const component of components) {
       componentStatePromises.push(
-        this.getComponentStatePromiseFromService(this.node.id, component.id, isAutoSave, isSubmit)
+        this.getComponentStatePromise(this.node.id, component.id, isAutoSave, isSubmit)
       );
       this.componentService.requestComponentState(this.node.id, component.id, isSubmit);
     }
     return componentStatePromises;
-  }
-
-  private getComponentStatePromiseFromService(
-    nodeId: string,
-    componentId: string,
-    isAutoSave: boolean = false,
-    isSubmit: boolean = false
-  ): Promise<any> {
-    const componentStatePromise = this.getComponentStatePromise(
-      nodeId,
-      componentId,
-      isAutoSave,
-      isSubmit
-    );
-    return componentStatePromise;
   }
 
   private getComponentStatePromise(
@@ -410,9 +395,10 @@ export class NodeComponent implements OnInit {
     return new Promise((resolve) => {
       this.componentService.sendComponentStateSource$
         .pipe(
-          filter((data: any) => {
-            return data.nodeId === nodeId && data.componentId === componentId;
-          }),
+          filter(
+            (data: ComponentStateWrapper) =>
+              data.nodeId === nodeId && data.componentId === componentId
+          ),
           take(1)
         )
         .toPromise()

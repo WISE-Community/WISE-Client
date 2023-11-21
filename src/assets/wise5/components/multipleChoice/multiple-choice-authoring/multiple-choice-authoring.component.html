@@ -9,12 +9,8 @@
     [(ngModel)]="componentContent.choiceType"
     (ngModelChange)="componentChanged()"
   >
-    <mat-radio-button class="choice-radio-button" color="primary" value="radio" i18n>
-      Single Answer
-    </mat-radio-button>
-    <mat-radio-button class="choice-radio-button" color="primary" value="checkbox" i18n>
-      Multiple Answer
-    </mat-radio-button>
+    <mat-radio-button color="primary" value="radio" i18n>Single Answer</mat-radio-button>
+    <mat-radio-button color="primary" value="checkbox" i18n>Multiple Answer</mat-radio-button>
   </mat-radio-group>
 </p>
 <span class="choices-label" i18n>Choices</span>
