@@ -17,7 +17,7 @@ import { TeacherNodeIconComponent } from '../../teacher-node-icon/teacher-node-i
 import { ComponentAuthoringModule } from '../../../../../app/teacher/component-authoring.module';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { PreviewComponentModule } from '../../components/preview-component/preview-component.module';
-import { DebugElement } from '@angular/core';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
@@ -74,7 +74,8 @@ describe('NodeAuthoringComponent', () => {
             url: '/teacher/edit/unit/123/node/node4'
           }
         }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
     window.history.pushState(
       {
