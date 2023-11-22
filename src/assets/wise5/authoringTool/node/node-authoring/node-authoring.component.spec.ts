@@ -161,10 +161,14 @@ function deleteComponents() {
         `Are you sure you want to delete these components?\n1. OpenResponse\n3. Match`
       );
       expect(component.components).toEqual([component2]);
-      expect(component.componentsToChecked[component1.id]).toBeUndefined();
-      expect(component.componentsToChecked[component3.id]).toBeUndefined();
+      expect(expectCheckboxValue(component1.id)).toBeFalsy();
+      expect(expectCheckboxValue(component3.id)).toBeFalsy();
     });
   });
+}
+
+function expectCheckboxValue(componentId: string): void {
+  return fixture.debugElement.query(By.css(`#${componentId} mat-checkbox`)).nativeElement.checked;
 }
 
 function clickComponentCheckbox(componentId: string): void {
