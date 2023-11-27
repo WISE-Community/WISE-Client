@@ -17,12 +17,13 @@ import { TeacherNodeIconComponent } from '../../teacher-node-icon/teacher-node-i
 import { ComponentAuthoringModule } from '../../../../../app/teacher/component-authoring.module';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { PreviewComponentModule } from '../../components/preview-component/preview-component.module';
-import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { EditNodeTitleComponent } from '../edit-node-title/edit-node-title.component';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -38,7 +39,7 @@ let teacherProjectService: TeacherProjectService;
 describe('NodeAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NodeAuthoringComponent, TeacherNodeIconComponent],
+      declarations: [EditNodeTitleComponent, NodeAuthoringComponent, TeacherNodeIconComponent],
       imports: [
         BrowserAnimationsModule,
         ComponentAuthoringModule,
@@ -74,8 +75,7 @@ describe('NodeAuthoringComponent', () => {
             url: '/teacher/edit/unit/123/node/node4'
           }
         }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
     }).compileComponents();
     window.history.pushState(
       {
@@ -91,15 +91,13 @@ describe('NodeAuthoringComponent', () => {
     component3 = { id: 'component3', type: 'Match', showSubmitButton: true };
     node1Components = [component1, component2, component3];
     teacherProjectService = TestBed.inject(TeacherProjectService);
-    teacherProjectService.idToNode = {
-      node1: {
-        components: node1Components
-      }
-    };
+    const node1 = { components: node1Components };
+    teacherProjectService.idToNode = { node1: node1 };
     teacherProjectService.project = {
       nodes: [{ id: nodeId1, components: node1Components }],
       inactiveNodes: []
     };
+    spyOn(teacherProjectService, 'getNodeById').and.returnValue(node1);
     teacherDataService = TestBed.inject(TeacherDataService);
     spyOn(teacherDataService, 'saveEvent').and.callFake(() => {
       return Promise.resolve();
