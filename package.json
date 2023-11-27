@@ -168,7 +168,14 @@
           "npmPublish": false
         }
       ],
-      "@semantic-release/github"
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            { "path": "dist/en-US/**", "label": "English build" }
+          ]
+        }
+      ]
     ]
   }
 }
