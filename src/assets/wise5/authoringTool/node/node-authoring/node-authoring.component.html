@@ -71,7 +71,7 @@
     <ng-container
       *ngTemplateOutlet="addComponentButtonTemplate; context: { componentId: null }"
     ></ng-container>
-    <div *ngIf="isAnyComponentSelected">
+    <div *ngIf="isAnyComponentSelected()">
       <button
         mat-icon-button
         color="primary"
@@ -163,9 +163,9 @@
             >
             <mat-checkbox
               color="primary"
-              [(ngModel)]="componentsToChecked[component.id]"
-              (change)="updateIsAnyComponentSelected()"
-              (click)="componentCheckboxClicked($event)"
+              [(ngModel)]="componentsToChecked()[component.id]"
+              (change)="componentCheckboxChanged(component.id, $event.checked)"
+              (click)="$event.stopPropagation()"
               aria-label="Select component"
               i18n-aria-label
             >
