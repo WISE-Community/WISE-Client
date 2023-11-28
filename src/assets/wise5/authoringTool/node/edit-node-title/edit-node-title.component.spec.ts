@@ -34,7 +34,7 @@ describe('EditNodeTitleComponent', () => {
     component.ngOnChanges();
     fixture.detectChanges();
   });
-  it('should show step position and title', () => {
+  it('shows step position and title', () => {
     expect(fixture.debugElement.query(By.css('mat-label')).nativeElement.textContent).toContain(
       'Step Title 1.1'
     );
