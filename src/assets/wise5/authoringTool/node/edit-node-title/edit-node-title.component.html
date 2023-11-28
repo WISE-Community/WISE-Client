@@ -4,7 +4,6 @@
   <input
     matInput
     [(ngModel)]="nodeJson.title"
-    [ngModelOptions]="{ debounce: 500 }"
     (change)="save()"
     aria-label="Title"
     i18n-aria-label

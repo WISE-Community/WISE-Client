@@ -11497,7 +11497,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Title</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
