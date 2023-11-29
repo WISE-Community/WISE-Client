@@ -55,6 +55,7 @@ import { AddLessonChooseTemplateComponent } from '../../assets/wise5/authoringTo
 import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 import { ComponentInfoDialogComponent } from '../../assets/wise5/authoringTool/components/component-info-dialog/component-info-dialog.component';
 import { ComponentTypeSelectorComponent } from '../../assets/wise5/authoringTool/components/component-type-selector/component-type-selector.component';
+import { EditNodeTitleComponent } from '../../assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { ComponentTypeSelectorComponent } from '../../assets/wise5/authoringTool
     ComponentTypeSelectorComponent,
     ConcurrentAuthorsMessageComponent,
     ConfigureAutomatedAssessmentComponent,
+    EditNodeTitleComponent,
     InsertNodeAfterButtonComponent,
     InsertNodeInsideButtonComponent,
     MilestonesAuthoringComponent,
