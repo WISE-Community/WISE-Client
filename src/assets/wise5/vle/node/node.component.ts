@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { ComponentState } from '../../../../app/domain/componentState';
@@ -12,6 +12,7 @@ import { NodeStatusService } from '../../services/nodeStatusService';
 import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../vleProjectService';
+import { copy } from '../../common/object/object';
 
 @Component({
   selector: 'node',
@@ -26,7 +27,7 @@ export class NodeComponent implements OnInit {
   dirtyComponentIds: any = [];
   dirtySubmitComponentIds: any = [];
   isDisabled: boolean;
-  node: Node;
+  @Input() node: Node;
   nodeContent: any;
   nodeStatus: any;
   rubric: string;
@@ -64,6 +65,11 @@ export class NodeComponent implements OnInit {
     private sessionService: SessionService,
     private studentDataService: StudentDataService
   ) {}
+
+  ngOnChanges(): void {
+    // copy is needed to trigger change detection for current node.components array
+    this.components = copy(this.getComponents());
+  }
 
   ngOnInit(): void {
     this.workgroupId = this.configService.getWorkgroupId();
@@ -133,7 +139,8 @@ export class NodeComponent implements OnInit {
       })
     );
 
-    this.studentDataService.currentNodeChanged$.subscribe(() => {
+    this.studentDataService.currentNodeChanged$.subscribe(({ currentNode }) => {
+      this.node = this.projectService.getNode(currentNode.id);
       this.initializeNode();
     });
     this.studentDataService.nodeStatusesChanged$.subscribe(() => {
@@ -143,10 +150,9 @@ export class NodeComponent implements OnInit {
 
   initializeNode(): void {
     this.clearLatestComponentState();
-    this.node = this.projectService.getNode(this.studentDataService.getCurrentNodeId());
     this.nodeContent = this.projectService.getNodeById(this.node.id);
-    this.nodeStatus = this.nodeStatusService.getNodeStatusByNodeId(this.node.id);
     this.components = this.getComponents();
+    this.nodeStatus = this.nodeStatusService.getNodeStatusByNodeId(this.node.id);
     this.dirtyComponentIds = [];
     this.dirtySubmitComponentIds = [];
     this.updateComponentVisibility();
@@ -373,26 +379,11 @@ export class NodeComponent implements OnInit {
     const componentStatePromises = [];
     for (const component of components) {
       componentStatePromises.push(
-        this.getComponentStatePromiseFromService(this.node.id, component.id, isAutoSave, isSubmit)
+        this.getComponentStatePromise(this.node.id, component.id, isAutoSave, isSubmit)
       );
       this.componentService.requestComponentState(this.node.id, component.id, isSubmit);
     }
     return componentStatePromises;
-  }
-
-  private getComponentStatePromiseFromService(
-    nodeId: string,
-    componentId: string,
-    isAutoSave: boolean = false,
-    isSubmit: boolean = false
-  ): Promise<any> {
-    const componentStatePromise = this.getComponentStatePromise(
-      nodeId,
-      componentId,
-      isAutoSave,
-      isSubmit
-    );
-    return componentStatePromise;
   }
 
   private getComponentStatePromise(
@@ -404,9 +395,10 @@ export class NodeComponent implements OnInit {
     return new Promise((resolve) => {
       this.componentService.sendComponentStateSource$
         .pipe(
-          filter((data: any) => {
-            return data.nodeId === nodeId && data.componentId === componentId;
-          }),
+          filter(
+            (data: ComponentStateWrapper) =>
+              data.nodeId === nodeId && data.componentId === componentId
+          ),
           take(1)
         )
         .toPromise()

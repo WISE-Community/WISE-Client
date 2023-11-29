@@ -1,8 +1,8 @@
 import { removeHTMLTags } from '../../../common/string/string';
-import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
+import { ComponentDataExportStrategy } from './ComponentDataExportStrategy';
 
-export class DiscussionComponentDataExportStrategy extends AbstractDataExportStrategy {
+export class DiscussionComponentDataExportStrategy extends ComponentDataExportStrategy {
   defaultDiscussionColumnNames = [
     '#',
     'Workgroup ID',
@@ -33,38 +33,18 @@ export class DiscussionComponentDataExportStrategy extends AbstractDataExportStr
     'Post Text'
   ];
 
-  constructor(private nodeId: string, private component: any) {
-    super();
+  protected generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {
+    const headerRow = [...this.defaultDiscussionColumnNames];
+    this.populateColumnNameMappings(headerRow, columnNameToNumber);
+    return headerRow;
   }
 
-  /**
-   * Generate an export for a specific Discussion component.
-   * TODO: Move these Discussion export functions to the DiscussionService.
-   * @param nodeId The node id.
-   * @param component The component content object.
-   */
-  export() {
-    this.controller.showDownloadingExportMessage();
-    const components = [{ nodeId: this.nodeId, componentId: this.component.id }];
-    this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
-      const columnNames = [];
-      const columnNameToNumber = {};
-      let rows = [this.generateDiscussionComponentHeaderRow(columnNames, columnNameToNumber)];
-      rows = rows.concat(
-        this.generateDiscussionComponentWorkRows(
-          this.component,
-          columnNames,
-          columnNameToNumber,
-          this.nodeId
-        )
-      );
-      const fileName = this.generateDiscussionExportFileName(this.nodeId, this.component.id);
-      this.controller.generateCSVFile(rows, fileName);
-      this.controller.hideDownloadingExportMessage();
-    });
-  }
-
-  private generateDiscussionComponentWorkRows(component, columnNames, columnNameToNumber, nodeId) {
+  protected generateComponentWorkRows(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any,
+    nodeId: string
+  ) {
     const rows = [];
     const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
     const structuredPosts = this.getStructuredPosts(componentStates);
@@ -157,7 +137,16 @@ export class DiscussionComponentDataExportStrategy extends AbstractDataExportStr
     row[columnNameToNumber['Project ID']] = this.configService.getProjectId();
     row[columnNameToNumber['Project Name']] = this.projectService.getProjectTitle();
     row[columnNameToNumber['Run ID']] = this.configService.getRunId();
-
+    this.setColumnValue(
+      row,
+      columnNameToNumber,
+      'Start Date',
+      millisecondsToDateTime(this.configService.getStartDate())
+    );
+    const endDate = this.configService.getEndDate();
+    if (endDate != null) {
+      this.setColumnValue(row, columnNameToNumber, 'End Date', millisecondsToDateTime(endDate));
+    }
     if (componentState.serverSaveTime != null) {
       row[columnNameToNumber['Server Timestamp']] = millisecondsToDateTime(
         componentState.serverSaveTime
@@ -223,27 +212,7 @@ export class DiscussionComponentDataExportStrategy extends AbstractDataExportStr
     parentPost.replies.push(replyComponentState);
   }
 
-  private generateDiscussionComponentHeaderRow(columnNames, columnNameToNumber) {
-    this.populateDiscussionColumnNames(columnNames, columnNameToNumber);
-    const headerRow = [];
-    for (let columnName of columnNames) {
-      headerRow.push(columnName);
-    }
-    return headerRow;
-  }
-
-  private populateDiscussionColumnNames(columnNames, columnNameToNumber) {
-    for (let c = 0; c < this.defaultDiscussionColumnNames.length; c++) {
-      const defaultDiscussionColumnName = this.defaultDiscussionColumnNames[c];
-      columnNameToNumber[defaultDiscussionColumnName] = c;
-      columnNames.push(defaultDiscussionColumnName);
-    }
-  }
-
-  private generateDiscussionExportFileName(nodeId, componentId) {
-    const runId = this.configService.getRunId();
-    const stepNumber = this.projectService.getNodePositionById(nodeId);
-    const componentNumber = this.projectService.getComponentPosition(nodeId, componentId) + 1;
-    return runId + '_step_' + stepNumber + '_component_' + componentNumber + '_discussion_work.csv';
+  protected getComponentTypeWithUnderscore(): string {
+    return 'discussion';
   }
 }

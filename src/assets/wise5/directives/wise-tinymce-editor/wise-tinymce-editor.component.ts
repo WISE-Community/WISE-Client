@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { debounceTime } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 import { NotebookService } from '../../services/notebookService';
@@ -17,7 +17,7 @@ export class WiseTinymceEditorComponent {
   private previousContent: string;
 
   @Input()
-  model: any;
+  model: string;
 
   @Input()
   isAddNoteButtonAvailable: boolean;
@@ -106,6 +106,12 @@ export class WiseTinymceEditorComponent {
     this.initializeTinyMCE();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.model) {
+      this.editor.setContent(changes.model.currentValue);
+    }
+  }
+
   addPluginName(pluginName: string): void {
     this.plugins.push(pluginName);
   }
@@ -122,9 +128,9 @@ export class WiseTinymceEditorComponent {
       media_live_embeds: true,
       extended_valid_elements: this.extendedValidElements,
       font_formats: `Roboto=Roboto,Helvetica Neue,sans-serif; Raleway=Raleway,sans-serif;
-        Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; 
-        Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; 
-        Helvetica=helvetica; Impact=impact,chicago; Tahoma=tahoma,arial,helvetica,sans-serif; 
+        Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde;
+        Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino;
+        Helvetica=helvetica; Impact=impact,chicago; Tahoma=tahoma,arial,helvetica,sans-serif;
         Terminal=terminal,monaco; Times New Roman=times new roman,times; Verdana=verdana,geneva`,
       plugins: this.plugins,
       quickbars_insert_toolbar: false,

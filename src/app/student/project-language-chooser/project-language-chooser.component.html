@@ -1,0 +1,8 @@
+<span i18n>Language:</span>
+<mat-form-field fxFlex appearance="fill">
+  <mat-select [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage()">
+    <mat-option *ngFor="let language of availableLanguages" [value]="language">
+      {{ language.language }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

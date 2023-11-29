@@ -18,6 +18,7 @@ import { ReferenceComponent } from '../../../app/domain/referenceComponent';
 import { QuestionBank } from '../components/peerChat/peer-chat-question-bank/QuestionBank';
 import { DynamicPrompt } from '../directives/dynamic-prompt/DynamicPrompt';
 import { Component } from '../common/Component';
+import { ProjectLocale } from '../../../app/domain/projectLocale';
 
 @Injectable()
 export class ProjectService {
@@ -38,6 +39,7 @@ export class ProjectService {
   nodeIdToIsInBranchPath: any = {};
   nodeIdsInAnyBranch: any = [];
   nodeIdToBranchPathLetter: any = {};
+  private originalProject: any;
   project: any = null;
   rootNode: any = null;
   transitions: Transition[] = [];
@@ -51,6 +53,10 @@ export class ProjectService {
     protected configService: ConfigService,
     protected pathService: PathService
   ) {}
+
+  getProject(): any {
+    return this.project;
+  }
 
   setProject(project: any): void {
     this.project = project;
@@ -775,6 +781,7 @@ export class ProjectService {
   retrieveProject(): Observable<any> {
     return this.makeProjectRequest().pipe(
       tap((projectJSON: any) => {
+        this.originalProject = projectJSON;
         this.setProject(projectJSON);
         return projectJSON;
       })
@@ -784,6 +791,7 @@ export class ProjectService {
   retrieveProjectWithoutParsing(): Observable<any> {
     return this.makeProjectRequest().pipe(
       tap((projectJSON: any) => {
+        this.originalProject = projectJSON;
         this.project = projectJSON;
         this.metadata = projectJSON.metadata;
         return projectJSON;
@@ -795,6 +803,10 @@ export class ProjectService {
     const projectURL = this.configService.getConfigParam('projectURL');
     const headers = new HttpHeaders().set('cache-control', 'no-cache');
     return this.http.get(projectURL, { headers: headers });
+  }
+
+  getOriginalProject(): any {
+    return this.originalProject;
   }
 
   getThemePath(): string {
@@ -1990,5 +2002,9 @@ export class ProjectService {
     const nodeId = content.getReferenceNodeId();
     const componentId = content.getReferenceComponentId();
     return new Component(this.getComponent(nodeId, componentId), nodeId);
+  }
+
+  getLocale(): ProjectLocale {
+    return new ProjectLocale(this.project.metadata.locale);
   }
 }

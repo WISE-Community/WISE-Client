@@ -6,6 +6,7 @@ import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../vleProjectService';
 import { NodeComponent } from './node.component';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
+import { Node } from '../../common/Node';
 
 let component: NodeComponent;
 let fixture: ComponentFixture<NodeComponent>;
@@ -31,6 +32,7 @@ describe('NodeComponent', () => {
     spyOn(TestBed.inject(VLEProjectService), 'getNodeById').and.returnValue({ components: [] });
     spyOn(TestBed.inject(VLEProjectService), 'getNodeTitle').and.returnValue('');
     component = fixture.componentInstance;
+    component.node = new Node();
     fixture.detectChanges();
   });
 
