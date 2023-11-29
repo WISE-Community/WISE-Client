@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Signal, WritableSignal, computed, signal } from '@angular/core';
-import { Subscription, filter } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ComponentTypeService } from '../../../services/componentTypeService';
@@ -7,9 +7,7 @@ import { ComponentServiceLookupService } from '../../../services/componentServic
 import { Node } from '../../../common/Node';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { temporarilyHighlightElement } from '../../../common/dom/dom';
-import { MatDialog } from '@angular/material/dialog';
 import { ConfigService } from '../../../../wise5/services/configService';
-import { ChooseNewComponent } from '../../../../../app/authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
@@ -37,7 +35,6 @@ export class NodeAuthoringComponent implements OnInit {
     private configService: ConfigService,
     private componentServiceLookupService: ComponentServiceLookupService,
     private componentTypeService: ComponentTypeService,
-    private dialog: MatDialog,
     private nodeService: TeacherNodeService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
@@ -120,34 +117,6 @@ export class NodeAuthoringComponent implements OnInit {
   protected close(): void {
     this.dataService.setCurrentNode(null);
     this.scrollToTopOfPage();
-  }
-
-  protected addComponent(insertAfterComponentId: string): void {
-    const dialogRef = this.dialog.open(ChooseNewComponent, {
-      data: insertAfterComponentId,
-      width: '80%'
-    });
-    dialogRef
-      .afterClosed()
-      .pipe(filter((componentType) => componentType != null))
-      .subscribe(({ action, componentType }) => {
-        if (action === 'import') {
-          this.router.navigate(['import-component/choose-component'], {
-            relativeTo: this.route,
-            state: {
-              insertAfterComponentId: insertAfterComponentId
-            }
-          });
-        } else {
-          const component = this.projectService.createComponent(
-            this.nodeId,
-            componentType,
-            insertAfterComponentId
-          );
-          this.projectService.saveProject();
-          this.highlightNewComponentsAndThenShowComponentAuthoring([component]);
-        }
-      });
   }
 
   protected hideAllComponentSaveButtons(): void {
@@ -276,7 +245,7 @@ export class NodeAuthoringComponent implements OnInit {
    * @param newComponents an array of the new components we have just added
    * @param expandComponents expand component(s)' authoring views after highlighting
    */
-  private highlightNewComponentsAndThenShowComponentAuthoring(
+  protected highlightNewComponentsAndThenShowComponentAuthoring(
     newComponents: any = [],
     expandComponents: boolean = true
   ): void {
