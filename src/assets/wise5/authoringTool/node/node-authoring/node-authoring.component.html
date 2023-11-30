@@ -37,18 +37,6 @@
       <mat-icon>close</mat-icon>
     </button>
   </div>
-  <ng-template #addComponentButtonTemplate let-componentId="componentId">
-    <button
-      mat-icon-button
-      color="primary"
-      matTooltip="Add a new component"
-      i18n-matTooltip
-      matTooltipPosition="above"
-      (click)="addComponent(componentId)"
-    >
-      <mat-icon>add_circle</mat-icon>
-    </button>
-  </ng-template>
   <div
     *ngIf="!isGroupNode"
     class="components-header"
@@ -57,9 +45,10 @@
     fxLayoutGap="4px"
   >
     <h5 i18n>Components</h5>
-    <ng-container
-      *ngTemplateOutlet="addComponentButtonTemplate; context: { componentId: null }"
-    ></ng-container>
+    <add-component-button
+      [node]="node"
+      (newComponentsEvent)="highlightNewComponentsAndThenShowComponentAuthoring($event)"
+    ></add-component-button>
     <div *ngIf="isAnyComponentSelected()">
       <button
         mat-icon-button
@@ -227,11 +216,12 @@
             [componentContent]="component"
           ></component-authoring-component>
         </div>
-        <div class="add-component">
-          <ng-container
-            *ngTemplateOutlet="addComponentButtonTemplate; context: { componentId: component.id }"
-          ></ng-container>
-        </div>
+        <add-component-button
+          class="add-component"
+          [insertAfterComponentId]="component.id"
+          [node]="node"
+          (newComponentsEvent)="highlightNewComponentsAndThenShowComponentAuthoring($event)"
+        ></add-component-button>
       </div>
     </div>
   </div>

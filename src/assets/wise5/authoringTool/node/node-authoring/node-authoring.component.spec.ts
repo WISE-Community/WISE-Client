@@ -4,7 +4,6 @@ import { NodeAuthoringComponent } from './node-authoring.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { MatDialogModule } from '@angular/material/dialog';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
@@ -24,6 +23,7 @@ import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { EditNodeTitleComponent } from '../edit-node-title/edit-node-title.component';
+import { AddComponentButtonComponent } from '../add-component-button/add-component-button.component';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -39,7 +39,12 @@ let teacherProjectService: TeacherProjectService;
 describe('NodeAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditNodeTitleComponent, NodeAuthoringComponent, TeacherNodeIconComponent],
+      declarations: [
+        AddComponentButtonComponent,
+        EditNodeTitleComponent,
+        NodeAuthoringComponent,
+        TeacherNodeIconComponent
+      ],
       imports: [
         BrowserAnimationsModule,
         ComponentAuthoringModule,
@@ -47,7 +52,6 @@ describe('NodeAuthoringComponent', () => {
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
-        MatDialogModule,
         MatIconModule,
         MatInputModule,
         PreviewComponentModule,
