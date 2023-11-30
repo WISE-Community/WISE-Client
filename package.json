@@ -71,6 +71,7 @@
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
     "@ngtools/webpack": "^16.2.6",
+    "@semantic-release/exec": "^6.0.3",
     "@semantic-release/github": "^8.0.4",
     "@types/dom-mediacapture-record": "^1.0.11",
     "@types/jasmine": "^4.3.1",
@@ -169,10 +170,19 @@
         }
       ],
       [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "cd dist; tar -czf en-US.tar.gz en-US"
+        }
+      ],
+      [
         "@semantic-release/github",
         {
           "assets": [
-            { "path": "dist/en-US/**", "label": "English build" }
+            {
+              "path": "dist/en-US.tar.gz",
+              "label": "English build"
+            }
           ]
         }
       ]
