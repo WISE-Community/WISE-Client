@@ -23,6 +23,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { EditNodeTitleComponent } from '../edit-node-title/edit-node-title.component';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -38,7 +39,7 @@ let teacherProjectService: TeacherProjectService;
 describe('NodeAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NodeAuthoringComponent, TeacherNodeIconComponent],
+      declarations: [EditNodeTitleComponent, NodeAuthoringComponent, TeacherNodeIconComponent],
       imports: [
         BrowserAnimationsModule,
         ComponentAuthoringModule,
@@ -90,15 +91,13 @@ describe('NodeAuthoringComponent', () => {
     component3 = { id: 'component3', type: 'Match', showSubmitButton: true };
     node1Components = [component1, component2, component3];
     teacherProjectService = TestBed.inject(TeacherProjectService);
-    teacherProjectService.idToNode = {
-      node1: {
-        components: node1Components
-      }
-    };
+    const node1 = { components: node1Components };
+    teacherProjectService.idToNode = { node1: node1 };
     teacherProjectService.project = {
       nodes: [{ id: nodeId1, components: node1Components }],
       inactiveNodes: []
     };
+    spyOn(teacherProjectService, 'getNodeById').and.returnValue(node1);
     teacherDataService = TestBed.inject(TeacherDataService);
     spyOn(teacherDataService, 'saveEvent').and.callFake(() => {
       return Promise.resolve();
@@ -161,10 +160,14 @@ function deleteComponents() {
         `Are you sure you want to delete these components?\n1. OpenResponse\n3. Match`
       );
       expect(component.components).toEqual([component2]);
-      expect(component.componentsToChecked[component1.id]).toBeUndefined();
-      expect(component.componentsToChecked[component3.id]).toBeUndefined();
+      expect(expectCheckboxValue(component1.id)).toBeFalsy();
+      expect(expectCheckboxValue(component3.id)).toBeFalsy();
     });
   });
+}
+
+function expectCheckboxValue(componentId: string): void {
+  return fixture.debugElement.query(By.css(`#${componentId} mat-checkbox`)).nativeElement.checked;
 }
 
 function clickComponentCheckbox(componentId: string): void {

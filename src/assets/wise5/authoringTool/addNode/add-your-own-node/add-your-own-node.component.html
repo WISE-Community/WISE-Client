@@ -41,10 +41,10 @@
     <div fxFlex="100" fxFlex.gt-sm="75">
       <div class="component-types" fxLayout="row wrap" fxLayoutAlign="start start">
         <div class="component-type" *ngFor="let componentType of componentTypes">
-          <component-selector
+          <component-type-button
             [componentType]="componentType.type"
             (componentSelectedEvent)="addComponent(componentType)"
-          ></component-selector>
+          ></component-type-button>
         </div>
       </div>
       <p class="info mat-small" i18n>

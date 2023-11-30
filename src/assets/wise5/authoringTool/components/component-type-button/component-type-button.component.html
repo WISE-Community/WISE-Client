@@ -1,0 +1,16 @@
+<mat-card appearance="outlined">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <button mat-button (click)="select()" class="select-button" i18n>
+      {{ label }}
+    </button>
+    <button
+      mat-icon-button
+      (click)="preview()"
+      matTooltip="More Info"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>info</mat-icon>
+    </button>
+  </div>
+</mat-card>

@@ -57,7 +57,6 @@ export class InitializeVLEService {
 
   async initializePreview(unitId: string) {
     this.configService.retrieveConfig(`/api/config/preview/${unitId}`).subscribe(async () => {
-      this.studentStatusService.retrieveStudentStatus();
       await this.projectService.retrieveProject().subscribe(async () => {
         this.studentDataService.retrieveStudentData();
         this.studentDataService.retrieveRunStatus();

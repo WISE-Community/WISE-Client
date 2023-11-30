@@ -9,7 +9,7 @@ import { StudentDataService } from './studentDataService';
 
 @Injectable()
 export class StudentStatusService {
-  studentStatus: StudentStatus;
+  private studentStatus: StudentStatus = new StudentStatus();
 
   constructor(
     private http: HttpClient,
@@ -19,28 +19,21 @@ export class StudentStatusService {
     private studentDataService: StudentDataService
   ) {
     studentDataService.nodeStatusesChanged$.subscribe(() => {
-      this.saveStudentStatus();
+      if (!this.configService.isPreview() && this.configService.isRunActive()) {
+        this.saveStudentStatus();
+      }
     });
   }
 
   retrieveStudentStatus(): any {
-    if (this.configService.isPreview()) {
-      this.setStudentStatus(new StudentStatus());
-    } else {
-      return this.http
-        .get(`/api/studentStatus/${this.configService.getWorkgroupId()}`)
-        .subscribe((studentStatus: any) => {
-          if (studentStatus == null) {
-            this.setStudentStatus(new StudentStatus());
-          } else {
-            this.setStudentStatus(new StudentStatus(JSON.parse(studentStatus.status)));
-          }
-        });
-    }
-  }
-
-  private setStudentStatus(studentStatus: StudentStatus): void {
-    this.studentStatus = studentStatus;
+    return this.http
+      .get(`/api/studentStatus/${this.configService.getWorkgroupId()}`)
+      .subscribe((studentStatus: any) => {
+        this.studentStatus =
+          studentStatus == null
+            ? new StudentStatus()
+            : new StudentStatus(JSON.parse(studentStatus.status));
+      });
   }
 
   getStudentStatus(): StudentStatus {
@@ -55,42 +48,30 @@ export class StudentStatusService {
     return this.studentStatus.computerAvatarId;
   }
 
-  private saveStudentStatus() {
-    if (!this.configService.isPreview() && this.configService.isRunActive()) {
-      const runId = this.configService.getRunId();
-      const periodId = this.configService.getPeriodId();
-      const workgroupId = this.configService.getWorkgroupId();
-      const studentStatusJSON: StudentStatus = {
-        runId: runId,
-        periodId: periodId,
-        workgroupId: workgroupId,
-        currentNodeId: this.studentDataService.getCurrentNodeId(),
-        nodeStatuses: this.nodeStatusService.getNodeStatuses(),
-        projectCompletion: this.getProjectCompletion()
-      };
-      const computerAvatarId = this.getComputerAvatarId();
-      if (computerAvatarId != null) {
-        studentStatusJSON.computerAvatarId = computerAvatarId;
-      }
-      this.setStudentStatus(studentStatusJSON);
-      const studentStatusParams = {
-        runId: runId,
-        periodId: periodId,
-        workgroupId: workgroupId,
-        status: JSON.stringify(studentStatusJSON)
-      };
-      return this.http
-        .post(this.configService.getStudentStatusURL(), studentStatusParams)
-        .toPromise()
-        .then(
-          (result) => {
-            return true;
-          },
-          (result) => {
-            return false;
-          }
-        );
+  private saveStudentStatus(): void {
+    const runId = this.configService.getRunId();
+    const periodId = this.configService.getPeriodId();
+    const workgroupId = this.configService.getWorkgroupId();
+    const studentStatusJSON: StudentStatus = {
+      runId: runId,
+      periodId: periodId,
+      workgroupId: workgroupId,
+      currentNodeId: this.studentDataService.getCurrentNodeId(),
+      nodeStatuses: this.nodeStatusService.getNodeStatuses(),
+      projectCompletion: this.getProjectCompletion()
+    };
+    const computerAvatarId = this.getComputerAvatarId();
+    if (computerAvatarId != null) {
+      studentStatusJSON.computerAvatarId = computerAvatarId;
     }
+    this.studentStatus = studentStatusJSON;
+    const studentStatusParams = {
+      runId: runId,
+      periodId: periodId,
+      workgroupId: workgroupId,
+      status: JSON.stringify(studentStatusJSON)
+    };
+    this.http.post(this.configService.getStudentStatusURL(), studentStatusParams).subscribe();
   }
 
   private getProjectCompletion(): NodeProgress {

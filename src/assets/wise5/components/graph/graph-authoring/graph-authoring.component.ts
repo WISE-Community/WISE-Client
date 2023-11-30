@@ -247,7 +247,7 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
       ) {
         series.data.push([]);
       } else if (this.componentContent.xAxis.type === 'categories') {
-        series.data.push(null);
+        series.data.push(0);
       }
     }
     this.componentChanged();

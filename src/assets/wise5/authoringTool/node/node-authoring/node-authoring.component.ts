@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { Subscription, filter } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -9,8 +9,6 @@ import { ComponentContent } from '../../../common/ComponentContent';
 import { temporarilyHighlightElement } from '../../../common/dom/dom';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfigService } from '../../../../wise5/services/configService';
-import { EditComponentAdvancedComponent } from '../../../../../app/authoring-tool/edit-component-advanced/edit-component-advanced.component';
-import { Component as WiseComponent } from '../../../common/Component';
 import { ChooseNewComponent } from '../../../../../app/authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,9 +21,11 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 })
 export class NodeAuthoringComponent implements OnInit {
   components: ComponentContent[] = [];
-  componentsToChecked = {};
+  protected componentsToChecked: WritableSignal<{ [key: string]: boolean }> = signal({});
   componentsToExpanded = {};
-  isAnyComponentSelected: boolean = false;
+  protected isAnyComponentSelected: Signal<boolean> = computed(() =>
+    Object.values(this.componentsToChecked()).some((value) => value)
+  );
   isGroupNode: boolean;
   node: Node;
   nodeJson: any;
@@ -60,9 +60,8 @@ export class NodeAuthoringComponent implements OnInit {
     this.nodeJson = this.projectService.getNodeById(this.nodeId);
     this.nodePosition = this.projectService.getNodePositionById(this.nodeId);
     this.components = this.projectService.getComponents(this.nodeId);
-    this.componentsToChecked = {};
+    this.componentsToChecked.set({});
     this.componentsToExpanded = {};
-    this.isAnyComponentSelected = false;
 
     if (history.state.newComponents && history.state.newComponents.length > 0) {
       this.highlightNewComponentsAndThenShowComponentAuthoring(history.state.newComponents);
@@ -174,13 +173,8 @@ export class NodeAuthoringComponent implements OnInit {
 
   protected getSelectedComponents(): ComponentContent[] {
     return this.components.filter(
-      (component: ComponentContent) => this.componentsToChecked[component.id]
+      (component: ComponentContent) => this.componentsToChecked()[component.id]
     );
-  }
-
-  private clearComponentsToChecked(): void {
-    this.componentsToChecked = {};
-    this.isAnyComponentSelected = false;
   }
 
   /**
@@ -196,7 +190,7 @@ export class NodeAuthoringComponent implements OnInit {
     const selectedComponents = [];
     for (let c = 0; c < this.components.length; c++) {
       const component = this.components[c];
-      if (this.componentsToChecked[component.id]) {
+      if (this.componentsToChecked()[component.id]) {
         const componentNumberAndType = c + 1 + '. ' + component.type;
         selectedComponents.push(componentNumberAndType);
       }
@@ -256,10 +250,9 @@ export class NodeAuthoringComponent implements OnInit {
 
   private afterDeleteComponent(componentIdAndTypes: any[]): void {
     for (const componentIdAndType of componentIdAndTypes) {
-      delete this.componentsToChecked[componentIdAndType.componentId];
+      this.componentsToChecked.mutate((obj) => delete obj[componentIdAndType.componentId]);
       delete this.componentsToExpanded[componentIdAndType.componentId];
     }
-    this.updateIsAnyComponentSelected();
     this.checkIfNeedToShowNodeSaveOrNodeSubmitButtons();
     this.projectService.saveProject();
   }
@@ -287,7 +280,7 @@ export class NodeAuthoringComponent implements OnInit {
     newComponents: any = [],
     expandComponents: boolean = true
   ): void {
-    this.clearComponentsToChecked();
+    this.componentsToChecked.set({});
 
     // wait for the UI to update and then scroll to the first new component
     setTimeout(() => {
@@ -310,20 +303,8 @@ export class NodeAuthoringComponent implements OnInit {
     return this.componentTypeService.getComponentTypeLabel(componentType);
   }
 
-  protected showComponentAdvancedAuthoring(componentContent: ComponentContent, event: any): void {
-    event.stopPropagation();
-    this.dialog.open(EditComponentAdvancedComponent, {
-      data: new WiseComponent(componentContent, this.nodeId),
-      width: '80%'
-    });
-  }
-
-  protected updateIsAnyComponentSelected(): void {
-    this.isAnyComponentSelected = Object.values(this.componentsToChecked).some((value) => value);
-  }
-
-  protected componentCheckboxClicked(event: any): void {
-    event.stopPropagation();
+  protected componentCheckboxChanged(componentId: string, checked: boolean): void {
+    this.componentsToChecked.mutate((obj) => (obj[componentId] = checked));
   }
 
   protected toggleComponent(componentId: string): void {
