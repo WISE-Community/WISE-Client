@@ -16,7 +16,7 @@ export class EditGraphConnectedComponentsComponent extends EditConnectedComponen
     if (connectedComponent.seriesNumbers == null) {
       connectedComponent.seriesNumbers = [];
     }
-    connectedComponent.seriesNumbers.push(null);
+    connectedComponent.seriesNumbers.push(0);
     this.connectedComponentChanged();
   }
 
