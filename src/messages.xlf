@@ -2279,18 +2279,60 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="1858110241312746425" datatype="html">
+        <source>German</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="6924606686202701860" datatype="html">
         <source>Japanese</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2935232983274991580" datatype="html">
         <source>Italian</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6145439649200570157" datatype="html">
+        <source>Korean</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1134844588409242643" datatype="html">
+        <source>Dutch (Netherlands)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3611216939636790848" datatype="html">
+        <source>Vietnamese</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="511208907501917679" datatype="html">
+        <source>Chinese (Simplified)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4303868626158306518" datatype="html">
+        <source>Chinese (Traditional)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
+          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8954371642157143595" datatype="html">
@@ -2790,7 +2832,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6244139ed5734258736685c4d638b4fac1b04bbb" datatype="html">
@@ -2869,7 +2911,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c83b838d845690bcb897f775f53b5316535306dc" datatype="html">
@@ -3342,14 +3384,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, you can try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="243316711119938992" datatype="html">
         <source>The server has encountered an error and was unable to send you an email. Please try again. If the error continues to occur, please contact us.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
-          <context context-type="linenumber">88</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5c112eccf2cd10cf48736fb8fd2c18c1788b6bb9" datatype="html">
@@ -7391,6 +7433,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">109</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component.html</context>
+          <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cabad35c321f1c28ef7c11f848cd458bb934e304" datatype="html">
@@ -12266,6 +12312,20 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
           <context context-type="linenumber">22,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d5633c7ffb5d36eebe0dbe84efa93a1e95713391" datatype="html">
+        <source>Default language:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a4822ae93998e191f2bed67a380af96f2b5e63bb" datatype="html">
+        <source>Additional languages:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component.html</context>
+          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="abf24af7ad0fd7ffecdad3210051c47589373d68" datatype="html">

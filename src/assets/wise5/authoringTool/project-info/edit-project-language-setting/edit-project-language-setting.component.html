@@ -1,0 +1,19 @@
+<h3 i18n>Language</h3>
+<span i18n>Default language:</span>
+<ng-select
+  [items]="availableLanguages"
+  bindLabel="language"
+  [(ngModel)]="defaultLanguage"
+  [clearable]="false"
+  (change)="updateDefaultLanguage()"
+>
+</ng-select>
+<span i18n>Additional languages:</span>
+<ng-select
+  [items]="availableLanguages"
+  bindLabel="language"
+  [(ngModel)]="supportedLanguages"
+  [multiple]="true"
+  (change)="updateSupportedLanguages()"
+>
+</ng-select>

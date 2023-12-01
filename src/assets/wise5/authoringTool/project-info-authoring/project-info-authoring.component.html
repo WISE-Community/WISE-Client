@@ -52,7 +52,10 @@
       (ngModelChange)="metadataChanged.next()"
     />
   </mat-form-field>
-  <ng-container *ngIf="metadataField.type === 'radio'">
+  <edit-project-language-setting
+    *ngIf="metadataField.name === 'Language'"
+  ></edit-project-language-setting>
+  <ng-container *ngIf="metadataField.type === 'radio' && metadataField.name !== 'Language'">
     <label class="bold">{{ metadataField.name }}:</label>
     <mat-radio-group class="radio-group margin-bottom-20" fxLayout="column">
       <ng-container *ngFor="let choice of metadataField.choices">
