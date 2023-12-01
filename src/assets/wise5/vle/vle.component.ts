@@ -14,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WiseLinkService } from '../../../app/services/wiseLinkService';
 import { convertToPNGFile } from '../common/canvas/canvas';
 import { NodeStatusService } from '../services/nodeStatusService';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'vle',
@@ -31,7 +32,7 @@ export class VLEComponent implements AfterViewInit {
   notebookConfig: any;
   notesEnabled: boolean = false;
   notesVisible: boolean = false;
-  projectStyle: string;
+  projectStylePath: SafeResourceUrl;
   reportEnabled: boolean = false;
   reportFullscreen: boolean = false;
   runEndedAndLocked: boolean;
@@ -49,6 +50,7 @@ export class VLEComponent implements AfterViewInit {
     private projectService: VLEProjectService,
     private route: ActivatedRoute,
     private router: Router,
+    private sanitizer: DomSanitizer,
     private sessionService: SessionService,
     private studentDataService: StudentDataService,
     private wiseLinkService: WiseLinkService
@@ -69,7 +71,9 @@ export class VLEComponent implements AfterViewInit {
       this.projectService.project.theme === 'tab'
         ? this.tabbedVLETemplate
         : this.defaultVLETemplate;
-    this.projectStyle = this.projectService.getStyle();
+    this.projectStylePath = this.sanitizer.bypassSecurityTrustResourceUrl(
+      this.configService.getProjectAssetsDirectoryPath() + '/project_styles.css'
+    );
     if (this.notebookService.isNotebookEnabled()) {
       this.notebookConfig = this.notebookService.getStudentNotebookConfig();
       this.notesEnabled = this.notebookConfig.itemTypes.note.enabled;
