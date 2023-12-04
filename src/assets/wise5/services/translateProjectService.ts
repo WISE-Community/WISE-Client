@@ -38,7 +38,9 @@ export class TranslateProjectService {
   }
 
   private getTranslationMappingURL(locale: string): string {
-    return this.configService.getConfigParam('projectURL').replace('.json', `.${locale}.json`);
+    return this.configService
+      .getConfigParam('projectURL')
+      .replace('project.json', `translations.${locale}.json`);
   }
 
   private applyTranslations(projectElement: any, translations: any): void {
