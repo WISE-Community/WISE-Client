@@ -24,7 +24,7 @@ export class ProjectLanguageChooserComponent implements OnInit {
 
   ngOnInit(): void {
     const unitLocale = this.projectService.getLocale();
-    this.availableLanguages = unitLocale.getSupportedLanguages();
+    this.availableLanguages = unitLocale.getAvailableLanguages();
     this.selectedLanguage = this.availableLanguages.find((language) =>
       unitLocale.isDefaultLocale(language.locale)
     );

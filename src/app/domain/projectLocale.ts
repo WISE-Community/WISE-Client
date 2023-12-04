@@ -9,6 +9,10 @@ export class ProjectLocale {
     this.locale = locale;
   }
 
+  getAvailableLanguages(): Language[] {
+    return [this.getDefaultLanguage()].concat(this.getSupportedLanguages());
+  }
+
   getDefaultLanguage(): Language {
     return { language: localeToLanguage[this.locale.default], locale: this.locale.default };
   }
