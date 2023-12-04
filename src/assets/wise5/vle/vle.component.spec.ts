@@ -36,7 +36,7 @@ let fixture: ComponentFixture<VLEComponent>;
 const node1Id: string = 'node1';
 let saveVLEEventSpy: jasmine.Spy;
 
-fdescribe('VLEComponent', () => {
+describe('VLEComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
