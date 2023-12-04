@@ -50,7 +50,6 @@ export class VLEComponent implements AfterViewInit {
     private projectService: VLEProjectService,
     private route: ActivatedRoute,
     private router: Router,
-    private sanitizer: DomSanitizer,
     private sessionService: SessionService,
     private studentDataService: StudentDataService,
     private wiseLinkService: WiseLinkService
@@ -71,9 +70,8 @@ export class VLEComponent implements AfterViewInit {
       this.projectService.project.theme === 'tab'
         ? this.tabbedVLETemplate
         : this.defaultVLETemplate;
-    this.projectStylePath = this.sanitizer.bypassSecurityTrustResourceUrl(
-      this.configService.getProjectAssetsDirectoryPath() + '/project_styles.css'
-    );
+    this.projectStylePath =
+      this.configService.getProjectAssetsDirectoryPath() + '/project_styles.css';
     if (this.notebookService.isNotebookEnabled()) {
       this.notebookConfig = this.notebookService.getStudentNotebookConfig();
       this.notesEnabled = this.notebookConfig.itemTypes.note.enabled;
