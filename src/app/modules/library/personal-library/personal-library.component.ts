@@ -3,6 +3,8 @@ import { LibraryProject } from '../libraryProject';
 import { LibraryService } from '../../../services/library.service';
 import { LibraryComponent } from '../library/library.component';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
+import { ArchiveProjectService } from '../../../services/archive-project.service';
 
 @Component({
   selector: 'app-personal-library',
@@ -14,8 +16,13 @@ export class PersonalLibraryComponent extends LibraryComponent {
   filteredProjects: LibraryProject[] = [];
   personalProjects: LibraryProject[] = [];
   sharedProjects: LibraryProject[] = [];
+  showArchived: boolean = false;
 
-  constructor(protected dialog: MatDialog, protected libraryService: LibraryService) {
+  constructor(
+    private archiveProjectService: ArchiveProjectService,
+    protected dialog: MatDialog,
+    protected libraryService: LibraryService
+  ) {
     super(dialog, libraryService);
   }
 
@@ -44,6 +51,15 @@ export class PersonalLibraryComponent extends LibraryComponent {
           this.projects.unshift(project);
           this.filterUpdated();
         }
+      })
+    );
+    this.subscribeToRefreshProjects();
+  }
+
+  private subscribeToRefreshProjects(): void {
+    this.subscriptions.add(
+      this.archiveProjectService.refreshProjectsEvent$.subscribe(() => {
+        this.updateProjects();
       })
     );
   }
@@ -79,6 +95,13 @@ export class PersonalLibraryComponent extends LibraryComponent {
 
   protected getDetailsComponent(): any {
     return PersonalLibraryDetailsComponent;
+  }
+
+  public filterUpdated(filterValues: ProjectFilterValues = null): void {
+    super.filterUpdated(filterValues);
+    this.filteredProjects = this.filteredProjects.filter(
+      (project) => project.tags.includes('archived') == this.showArchived
+    );
   }
 }
 

@@ -4,9 +4,10 @@ import { Project } from '../../../domain/project';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { ShareProjectDialogComponent } from '../share-project-dialog/share-project-dialog.component';
 import { UserService } from '../../../services/user.service';
-import { CopyProjectDialogComponent } from '../copy-project-dialog/copy-project-dialog.component';
 import { ConfigService } from '../../../services/config.service';
 import { EditRunWarningDialogComponent } from '../../../teacher/edit-run-warning-dialog/edit-run-warning-dialog.component';
+import { ArchiveProjectService } from '../../../services/archive-project.service';
+import { ArchiveProjectResponse } from '../../../domain/archiveProjectResponse';
 
 @Component({
   selector: 'app-library-project-menu',
@@ -20,6 +21,7 @@ export class LibraryProjectMenuComponent {
   @Input()
   isRun: boolean;
 
+  archived: boolean = false;
   editLink: string = '';
   previewLink: string = '';
   isCanEdit: boolean = false;
@@ -27,6 +29,7 @@ export class LibraryProjectMenuComponent {
   isChild: boolean = false;
 
   constructor(
+    private archiveProjectService: ArchiveProjectService,
     private dialog: MatDialog,
     private teacherService: TeacherService,
     private userService: UserService,
@@ -38,6 +41,7 @@ export class LibraryProjectMenuComponent {
     this.isCanShare = this.isOwner() && !this.isRun;
     this.editLink = `${this.configService.getContextPath()}/teacher/edit/unit/${this.project.id}`;
     this.isChild = this.project.isChild();
+    this.archived = this.project.tags.includes('archived');
   }
 
   isOwner() {
@@ -80,6 +84,20 @@ export class LibraryProjectMenuComponent {
     this.dialog.open(ShareProjectDialogComponent, {
       data: { project: this.project },
       panelClass: 'dialog-md'
+    });
+  }
+
+  protected archive(archive: boolean): void {
+    this.archiveProjectService[archive ? 'archiveProject' : 'unarchiveProject'](
+      this.project
+    ).subscribe({
+      next: (response: ArchiveProjectResponse) => {
+        this.archiveProjectService.updateArchivedStatus(this.project, response.archived);
+        this.archiveProjectService.showSuccessMessage(this.project, archive);
+      },
+      error: () => {
+        this.archiveProjectService.showErrorMessage(archive);
+      }
     });
   }
 }
