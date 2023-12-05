@@ -50,10 +50,10 @@ export class TopBarComponent {
   ngOnInit() {
     this.avatarColor = getAvatarColorForWorkgroupId(this.configService.getWorkgroupId());
     this.logoURL = `${this.projectService.getThemePath()}/images/WISE-logo-ffffff.svg`;
-    this.hasTranslations = this.projectService.getLocale().hasTranslations();
     this.isPreview = this.configService.isPreview();
     this.isConstraintsDisabled = !this.configService.getConfigParam('constraints');
     this.projectLocale = this.projectService.getLocale();
+    this.hasTranslations = this.projectLocale.hasTranslations();
 
     this.setCompletionPercent();
     this.subscribeToStudentData();

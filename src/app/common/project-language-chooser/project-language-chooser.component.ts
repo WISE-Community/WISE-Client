@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -12,13 +12,13 @@ import { ProjectLocale } from '../../domain/projectLocale';
   imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule],
   templateUrl: './project-language-chooser.component.html'
 })
-export class ProjectLanguageChooserComponent implements OnInit {
+export class ProjectLanguageChooserComponent implements OnChanges {
   protected availableLanguages: Language[];
   @Output() languageChangedEvent = new EventEmitter<Language>();
   @Input() projectLocale: ProjectLocale;
   protected selectedLanguage: Language;
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.availableLanguages = this.projectLocale.getAvailableLanguages();
     this.selectedLanguage = this.availableLanguages.find((language) =>
       this.projectLocale.isDefaultLocale(language.locale)

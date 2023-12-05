@@ -23,6 +23,7 @@ describe('ProjectLanguageChooserComponent', () => {
     loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
     component.projectLocale = new ProjectLocale({ default: 'en_US', supported: ['ja', 'es'] });
+    component.ngOnChanges();
     fixture.detectChanges();
   });
 

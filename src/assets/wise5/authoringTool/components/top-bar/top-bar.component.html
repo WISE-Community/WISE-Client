@@ -34,6 +34,11 @@
     </span>
   </h3>
   <span fxFlex></span>
+  <project-language-chooser
+    *ngIf="hasTranslations"
+    [projectLocale]="projectLocale"
+    (languageChangedEvent)="changeLanguage($event)"
+  ></project-language-chooser>
   <button
     mat-button
     aria-label="Help"
