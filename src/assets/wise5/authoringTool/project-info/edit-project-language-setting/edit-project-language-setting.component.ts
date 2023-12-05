@@ -9,9 +9,7 @@ import { localeToLanguage } from '../../../../../app/domain/localeToLanguage';
   templateUrl: './edit-project-language-setting.component.html'
 })
 export class EditProjectLanguageSettingComponent {
-  protected availableLanguages: Language[] = Object.entries(
-    localeToLanguage
-  ).map(([locale, language]) => ({ locale: locale, language: language }));
+  protected availableLanguages: Language[];
   protected defaultLanguage: Language;
   private projectLocale: ProjectLocale;
   protected supportedLanguages: Language[];
@@ -19,18 +17,30 @@ export class EditProjectLanguageSettingComponent {
   constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
+    this.updateModel();
+  }
+
+  private updateModel(): void {
     this.projectLocale = this.projectService.getLocale();
     this.defaultLanguage = this.projectLocale.getDefaultLanguage();
     this.supportedLanguages = this.projectLocale.getSupportedLanguages();
+    this.availableLanguages = Object.entries(localeToLanguage)
+      .map(([locale, language]) => ({
+        locale: locale,
+        language: language
+      }))
+      .filter((language) => language.locale != this.defaultLanguage.locale);
   }
 
   protected updateDefaultLanguage(): void {
     this.projectLocale.setDefaultLocale(this.defaultLanguage.locale);
     this.projectService.saveProject();
+    this.updateModel();
   }
 
   protected updateSupportedLanguages(): void {
     this.projectLocale.setSupportedLanguages(this.supportedLanguages);
     this.projectService.saveProject();
+    this.updateModel();
   }
 }

@@ -19,6 +19,9 @@ export class ProjectLocale {
 
   setDefaultLocale(locale: string): void {
     this.locale.default = locale;
+    this.locale.supported = this.locale.supported.filter(
+      (supportedLocale) => supportedLocale != locale
+    );
   }
 
   getSupportedLanguages(): Language[] {
