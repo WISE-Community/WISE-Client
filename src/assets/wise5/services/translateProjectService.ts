@@ -38,17 +38,19 @@ export class TranslateProjectService {
   }
 
   private getTranslationMappingURL(locale: string): string {
-    return this.configService.getConfigParam('projectURL').replace('.json', `.${locale}.json`);
+    return this.configService
+      .getConfigParam('projectURL')
+      .replace('project.json', `translations.${locale}.json`);
   }
 
   private applyTranslations(projectElement: any, translations: any): void {
     Object.keys(projectElement)
-      .filter((key) => key.endsWith('.i18nId'))
+      .filter((key) => key.endsWith('.i18n'))
       .forEach((key) => {
-        const translationKey = projectElement[key];
+        const translationKey = projectElement[key].id;
         if (translations[translationKey]) {
-          const keyWithoutI18NId = key.substring(0, key.lastIndexOf('.i18nId'));
-          projectElement[keyWithoutI18NId] = translations[translationKey];
+          const keyWithoutI18NId = key.substring(0, key.lastIndexOf('.i18n'));
+          projectElement[keyWithoutI18NId] = translations[translationKey].value;
         }
       });
     Object.values(projectElement).forEach((value) => {
