@@ -28,10 +28,12 @@ describe('TranslateProjectService', () => {
   describe('translate()', () => {
     describe('has no translations to apply', () => {
       beforeEach(() => {
-        spyOn(projectService, 'getLocale').and.returnValue(new ProjectLocale());
+        spyOn(projectService, 'getLocale').and.returnValue(
+          new ProjectLocale({ default: 'en_US', supported: [] })
+        );
       });
       it('should keep original project in tact', () => {
-        service.translate().subscribe(() => {
+        service.translate().then(() => {
           expect(projectService.getProjectTitle()).toEqual('Demo Project');
         });
       });
@@ -44,7 +46,7 @@ describe('TranslateProjectService', () => {
         spyOn(configService, 'getConfigParam').and.returnValue('/123/project.json');
       });
       it('should retrieve translation mapping file and translate project', () => {
-        service.translate('es').subscribe(() => {
+        service.translate('es').then(() => {
           expect(projectService.getProjectTitle()).toEqual('Proyecto de demostración');
         });
         http

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { AddYourOwnNode } from '../../assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component';
 import { ChooseNewNodeLocation } from '../../assets/wise5/authoringTool/addNode/choose-new-node-location/choose-new-node-location.component';
 import { ChooseNewNodeTemplate } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
@@ -56,6 +57,7 @@ import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/c
 import { ComponentInfoDialogComponent } from '../../assets/wise5/authoringTool/components/component-info-dialog/component-info-dialog.component';
 import { ComponentTypeSelectorComponent } from '../../assets/wise5/authoringTool/components/component-type-selector/component-type-selector.component';
 import { EditNodeTitleComponent } from '../../assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component';
+import { EditProjectLanguageSettingComponent } from '../../assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component';
 import { AddComponentButtonComponent } from '../../assets/wise5/authoringTool/node/add-component-button/add-component-button.component';
 
 @NgModule({
@@ -87,6 +89,7 @@ import { AddComponentButtonComponent } from '../../assets/wise5/authoringTool/no
     ConcurrentAuthorsMessageComponent,
     ConfigureAutomatedAssessmentComponent,
     EditNodeTitleComponent,
+    EditProjectLanguageSettingComponent,
     InsertNodeAfterButtonComponent,
     InsertNodeInsideButtonComponent,
     MilestonesAuthoringComponent,
@@ -113,6 +116,7 @@ import { AddComponentButtonComponent } from '../../assets/wise5/authoringTool/no
     MatBadgeModule,
     MatChipsModule,
     ImportComponentModule,
+    NgSelectModule,
     NodeAdvancedAuthoringModule,
     PreviewComponentModule,
     ProjectAssetAuthoringModule,

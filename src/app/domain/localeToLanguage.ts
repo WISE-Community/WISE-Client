@@ -1,6 +1,12 @@
-export const localeToLanguage = {
+export const localeToLanguage: { [locale: string]: string } = {
+  zh_CN: $localize`Chinese (Simplified)`,
+  zh_TW: $localize`Chinese (Traditional)`,
+  nl: $localize`Dutch`,
   en_US: $localize`English`,
-  es: $localize`Spanish`,
+  de: $localize`German`,
+  it: $localize`Italian`,
   ja: $localize`Japanese`,
-  it: $localize`Italian`
+  ko: $localize`Korean`,
+  es: $localize`Spanish`,
+  vi: $localize`Vietnamese`
 };

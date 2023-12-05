@@ -1,32 +1,45 @@
 import { Language } from './language';
 import { localeToLanguage } from './localeToLanguage';
 
-const defaultLocales = {
-  default: 'en_US',
-  supported: []
-};
 export class ProjectLocale {
-  private default: string;
-  private supported: string[];
+  private locale: { default: string; supported: string[] };
 
-  constructor(locales: any = defaultLocales) {
-    this.default = locales.default;
-    this.supported = locales.supported;
+  constructor(locale: any) {
+    this.locale = locale;
+  }
+
+  getAvailableLanguages(): Language[] {
+    return [this.getDefaultLanguage()].concat(this.getSupportedLanguages());
+  }
+
+  getDefaultLanguage(): Language {
+    return { language: localeToLanguage[this.locale.default], locale: this.locale.default };
+  }
+
+  setDefaultLocale(locale: string): void {
+    this.locale.default = locale;
+    this.locale.supported = this.locale.supported.filter(
+      (supportedLocale) => supportedLocale != locale
+    );
   }
 
   getSupportedLanguages(): Language[] {
-    return this.supported.map((locale) => ({
+    return this.locale.supported.map((locale) => ({
       language: localeToLanguage[locale],
       locale: locale
     }));
   }
 
+  setSupportedLanguages(languages: Language[]): void {
+    this.locale.supported = languages.map((language) => language.locale);
+  }
+
   private hasLocale(locale: string): boolean {
-    return this.supported.includes(locale);
+    return this.locale.supported.includes(locale);
   }
 
   hasTranslations(): boolean {
-    return this.supported.length > 1;
+    return this.locale.supported.length > 0;
   }
 
   hasTranslationsToApply(locale: string): boolean {
@@ -34,6 +47,6 @@ export class ProjectLocale {
   }
 
   isDefaultLocale(locale: string): boolean {
-    return this.default === locale;
+    return this.locale.default === locale;
   }
 }

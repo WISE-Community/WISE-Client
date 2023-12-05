@@ -22,6 +22,7 @@
     "@angular/platform-browser": "^16.2.9",
     "@angular/platform-browser-dynamic": "^16.2.9",
     "@angular/router": "^16.2.9",
+    "@ng-select/ng-select": "^11.2.0",
     "@ng-web-apis/common": "^2.0.1",
     "@ng-web-apis/intersection-observer": "^3.0.0",
     "@stomp/rx-stomp": "^1.1.4",

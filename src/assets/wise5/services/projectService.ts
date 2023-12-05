@@ -237,6 +237,10 @@ export class ProjectService {
   instantiateDefaults(): void {
     this.project.nodes = this.project.nodes ? this.project.nodes : [];
     this.project.inactiveNodes = this.project.inactiveNodes ? this.project.inactiveNodes : [];
+    this.project.metadata.locale = this.project.metadata.locale ?? {
+      default: 'en_US',
+      supported: []
+    };
   }
 
   private calculateNodeOrderOfProject(): void {
