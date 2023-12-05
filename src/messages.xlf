@@ -2265,71 +2265,71 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">138</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5866254605255506989" datatype="html">
-        <source>English</source>
+      <trans-unit id="511208907501917679" datatype="html">
+        <source>Chinese (Simplified)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5190825892106392539" datatype="html">
-        <source>Spanish</source>
+      <trans-unit id="4303868626158306518" datatype="html">
+        <source>Chinese (Traditional)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
           <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3071065188816255493" datatype="html">
+        <source>Dutch</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5866254605255506989" datatype="html">
+        <source>English</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1858110241312746425" datatype="html">
         <source>German</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6924606686202701860" datatype="html">
-        <source>Japanese</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2935232983274991580" datatype="html">
         <source>Italian</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6924606686202701860" datatype="html">
+        <source>Japanese</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
+          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6145439649200570157" datatype="html">
         <source>Korean</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1134844588409242643" datatype="html">
-        <source>Dutch (Netherlands)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3611216939636790848" datatype="html">
-        <source>Vietnamese</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
           <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="511208907501917679" datatype="html">
-        <source>Chinese (Simplified)</source>
+      <trans-unit id="5190825892106392539" datatype="html">
+        <source>Spanish</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4303868626158306518" datatype="html">
-        <source>Chinese (Traditional)</source>
+      <trans-unit id="3611216939636790848" datatype="html">
+        <source>Vietnamese</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
           <context context-type="linenumber">11</context>
