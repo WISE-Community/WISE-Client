@@ -58,9 +58,11 @@ import { ComponentInfoDialogComponent } from '../../assets/wise5/authoringTool/c
 import { ComponentTypeSelectorComponent } from '../../assets/wise5/authoringTool/components/component-type-selector/component-type-selector.component';
 import { EditNodeTitleComponent } from '../../assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component';
 import { EditProjectLanguageSettingComponent } from '../../assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component';
+import { AddComponentButtonComponent } from '../../assets/wise5/authoringTool/node/add-component-button/add-component-button.component';
 
 @NgModule({
   declarations: [
+    AddComponentButtonComponent,
     AddLessonChooseLocationComponent,
     AddLessonChooseTemplateComponent,
     AddLessonConfigureComponent,
