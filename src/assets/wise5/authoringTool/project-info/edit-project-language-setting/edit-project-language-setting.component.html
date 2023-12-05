@@ -13,6 +13,7 @@
   [items]="availableLanguages"
   bindLabel="language"
   [(ngModel)]="supportedLanguages"
+  [closeOnSelect]="false"
   [multiple]="true"
   (change)="updateSupportedLanguages()"
 >
