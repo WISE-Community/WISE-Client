@@ -39,7 +39,7 @@ export class ProjectLocale {
   }
 
   hasTranslations(): boolean {
-    return this.locale.supported.length > 1;
+    return this.locale.supported.length > 0;
   }
 
   hasTranslationsToApply(locale: string): boolean {
