@@ -1,15 +1,12 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectLanguageChooserComponent } from './project-language-chooser.component';
-import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
-import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { ProjectLocale } from '../../domain/projectLocale';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatSelectHarness } from '@angular/material/select/testing';
 
-let projectService: ProjectService;
 describe('ProjectLanguageChooserComponent', () => {
   let component: ProjectLanguageChooserComponent;
   let fixture: ComponentFixture<ProjectLanguageChooserComponent>;
@@ -17,23 +14,15 @@ describe('ProjectLanguageChooserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        HttpClientTestingModule,
-        ProjectLanguageChooserComponent,
-        StudentTeacherCommonServicesModule
-      ]
+      imports: [BrowserAnimationsModule, HttpClientTestingModule, ProjectLanguageChooserComponent]
     }).compileComponents();
-    projectService = TestBed.inject(ProjectService);
   });
 
   beforeEach(() => {
-    spyOn(projectService, 'getLocale').and.returnValue(
-      new ProjectLocale({ default: 'en_US', supported: ['ja', 'es'] })
-    );
     fixture = TestBed.createComponent(ProjectLanguageChooserComponent);
     loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
+    component.projectLocale = new ProjectLocale({ default: 'en_US', supported: ['ja', 'es'] });
     fixture.detectChanges();
   });
 

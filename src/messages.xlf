@@ -7887,21 +7887,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>View alerts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c0961a71d775c905195f97cfd155f9b34052b1c6" datatype="html">
         <source>Unit percent completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="72778a65e8adb61055af9ac6e0f5dc566502ed16" datatype="html">
         <source>Open Account Menu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e438ba78cbafdb5bcbce0820bfaad995a504f222" datatype="html">
