@@ -49,9 +49,9 @@ describe('TranslateProjectService', () => {
         service.translate('es').then(() => {
           expect(projectService.getProjectTitle()).toEqual('Proyecto de demostración');
         });
-        http
-          .expectOne('/123/project.es.json')
-          .flush({ d66d3be571e16cf8d0166286a0a632ec: 'Proyecto de demostración' });
+        http.expectOne('/123/translations.es.json').flush({
+          d66d3be571e16cf8d0166286a0a632ec: { value: 'Proyecto de demostración', modified: 456 }
+        });
       });
     });
   });

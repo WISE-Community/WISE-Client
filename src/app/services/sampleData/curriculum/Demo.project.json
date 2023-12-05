@@ -2644,7 +2644,7 @@
   },
   "metadata": {
     "title": "Demo Project",
-    "title.i18nId": "d66d3be571e16cf8d0166286a0a632ec",
+    "title.i18n": { "id": "d66d3be571e16cf8d0166286a0a632ec", "modified": 123 },
     "authors": [
       {
         "firstName": "g",
