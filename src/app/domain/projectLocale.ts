@@ -1,11 +1,10 @@
 import { Language } from './language';
 import { localeToLanguage } from './localeToLanguage';
 
-const defaultProjectLocale = { default: 'en_US', supported: [] };
 export class ProjectLocale {
   private locale: { default: string; supported: string[] };
 
-  constructor(locale: any = defaultProjectLocale) {
+  constructor(locale: any) {
     this.locale = locale;
   }
 

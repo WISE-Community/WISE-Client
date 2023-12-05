@@ -21,7 +21,9 @@ describe('EditProjectLanguageSettingComponent', () => {
     });
     fixture = TestBed.createComponent(EditProjectLanguageSettingComponent);
     component = fixture.componentInstance;
-    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(new ProjectLocale());
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en_US', supported: [] })
+    );
     fixture.detectChanges();
   });
 

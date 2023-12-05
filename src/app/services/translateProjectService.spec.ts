@@ -28,7 +28,9 @@ describe('TranslateProjectService', () => {
   describe('translate()', () => {
     describe('has no translations to apply', () => {
       beforeEach(() => {
-        spyOn(projectService, 'getLocale').and.returnValue(new ProjectLocale());
+        spyOn(projectService, 'getLocale').and.returnValue(
+          new ProjectLocale({ default: 'en_US', supported: [] })
+        );
       });
       it('should keep original project in tact', () => {
         service.translate().then(() => {
