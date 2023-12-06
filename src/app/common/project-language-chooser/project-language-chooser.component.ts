@@ -20,8 +20,17 @@ export class ProjectLanguageChooserComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.availableLanguages = this.projectLocale.getAvailableLanguages();
-    this.selectedLanguage = this.availableLanguages.find((language) =>
-      this.projectLocale.isDefaultLocale(language.locale)
-    );
+    if (
+      this.selectedLanguage == null ||
+      !this.availableLanguages.some((lang) => lang.locale === this.selectedLanguage.locale)
+    ) {
+      this.selectedLanguage = this.availableLanguages.find((lang) =>
+        this.projectLocale.isDefaultLocale(lang.locale)
+      );
+    }
+  }
+
+  protected isSameLanguage(lang1: Language, lang2: Language): boolean {
+    return lang1 && lang2 ? lang1.locale === lang2.locale : lang1 === lang2;
   }
 }

@@ -3,6 +3,7 @@
   <mat-select
     [(ngModel)]="selectedLanguage"
     (ngModelChange)="languageChangedEvent.emit(selectedLanguage)"
+    [compareWith]="isSameLanguage"
   >
     <mat-option *ngFor="let language of availableLanguages" [value]="language">
       {{ language.language }}
