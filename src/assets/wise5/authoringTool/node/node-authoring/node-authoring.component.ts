@@ -177,13 +177,6 @@ export class NodeAuthoringComponent implements OnInit {
     });
   }
 
-  protected copyComponent(event: any, component: ComponentContent): void {
-    event.stopPropagation();
-    const newComponents = this.node.copyComponents([component.id], component.id);
-    this.projectService.saveProject();
-    this.highlightNewComponentsAndThenShowComponentAuthoring(newComponents);
-  }
-
   protected deleteComponents(): void {
     this.scrollToTopOfPage();
     if (this.confirmDeleteComponent(this.getSelectedComponentNumbersAndTypes())) {

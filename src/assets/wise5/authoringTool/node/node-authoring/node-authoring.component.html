@@ -172,20 +172,15 @@
               [nodeId]="nodeId"
               [componentId]="component.id"
             ></preview-component-button>
-            <button
-              mat-icon-button
-              color="primary"
+            <copy-component-button
               class="dynamic-component-button"
               [ngClass]="{
                 'show-dynamic-component-button': componentsToExpanded[component.id]
               }"
-              (click)="copyComponent($event, component)"
-              matTooltip="Copy Component"
-              matTooltipPosition="above"
-              i18n-matTooltip
-            >
-              <mat-icon>content_copy</mat-icon>
-            </button>
+              [node]="node"
+              [componentId]="component.id"
+              (newComponentEvent)="highlightNewComponentsAndThenShowComponentAuthoring($event)"
+            ></copy-component-button>
             <button
               mat-icon-button
               color="primary"
