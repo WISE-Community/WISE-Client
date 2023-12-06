@@ -24,6 +24,7 @@ import { of } from 'rxjs';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { EditNodeTitleComponent } from '../edit-node-title/edit-node-title.component';
 import { AddComponentButtonComponent } from '../add-component-button/add-component-button.component';
+import { CopyComponentButtonComponent } from '../copy-component-button/copy-component-button.component';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -41,6 +42,7 @@ describe('NodeAuthoringComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         AddComponentButtonComponent,
+        CopyComponentButtonComponent,
         EditNodeTitleComponent,
         NodeAuthoringComponent,
         TeacherNodeIconComponent
