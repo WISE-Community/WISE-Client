@@ -10,6 +10,7 @@ import { PathService } from './pathService';
 import { copy } from '../common/object/object';
 import { generateRandomKey } from '../common/string/string';
 import { branchPathBackgroundColors } from '../common/color/color';
+import { reduceByUniqueId } from '../common/array/array';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -991,14 +992,14 @@ export class TeacherProjectService extends ProjectService {
    * Saves the project to Config.saveProjectURL and returns commit history promise.
    * if Config.saveProjectURL or Config.projectId are undefined, does not save and returns null
    */
-  saveProject(): any {
+  saveProject(): Promise<any> {
     if (!this.configService.getConfigParam('canEditProject')) {
       this.broadcastNotAllowedToEditThisProject();
       return null;
     }
     this.broadcastSavingProject();
     this.cleanupBeforeSave();
-    this.project.metadata.authors = this.getUniqueAuthors(
+    this.project.metadata.authors = reduceByUniqueId(
       this.addCurrentUserToAuthors(this.getAuthors())
     );
     return this.http
@@ -1009,7 +1010,7 @@ export class TeacherProjectService extends ProjectService {
       });
   }
 
-  getAuthors(): any[] {
+  private getAuthors(): any[] {
     return this.project.metadata.authors ? this.project.metadata.authors : [];
   }
 
@@ -1025,18 +1026,6 @@ export class TeacherProjectService extends ProjectService {
     }
     authors.push(userInfo);
     return authors;
-  }
-
-  getUniqueAuthors(authors = []): any[] {
-    const idToAuthor = {};
-    const uniqueAuthors = [];
-    for (const author of authors) {
-      if (idToAuthor[author.id] == null) {
-        uniqueAuthors.push(author);
-        idToAuthor[author.id] = author;
-      }
-    }
-    return uniqueAuthors;
   }
 
   handleSaveProjectResponse(response: any): any {
@@ -3066,7 +3055,7 @@ export class TeacherProjectService extends ProjectService {
     return a.order - b.order;
   }
 
-  broadcastSavingProject() {
+  private broadcastSavingProject(): void {
     this.savingProjectSource.next();
   }
 
