@@ -48,6 +48,7 @@ import { ShareProjectDialogComponent } from './share-project-dialog/share-projec
 import { CopyProjectDialogComponent } from './copy-project-dialog/copy-project-dialog.component';
 import { LibraryPaginatorIntl } from './libraryPaginatorIntl';
 import { DiscourseCategoryActivityComponent } from './discourse-category-activity/discourse-category-activity.component';
+import { SelectAllProjectsCheckboxComponent } from './select-all-projects-checkbox/select-all-projects-checkbox.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -96,6 +97,7 @@ const materialModules = [
     CommunityLibraryDetailsComponent,
     PersonalLibraryComponent,
     PersonalLibraryDetailsComponent,
+    SelectAllProjectsCheckboxComponent,
     ShareProjectDialogComponent,
     CopyProjectDialogComponent,
     DiscourseCategoryActivityComponent

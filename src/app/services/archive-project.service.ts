@@ -39,19 +39,28 @@ export class ArchiveProjectService {
     this.refreshProjectsEventSource.next();
   }
 
-  showSuccessMessage(project: Project, archive: boolean): void {
-    this.openSnackBar(
-      project,
-      $localize`Successfully ${archive ? 'archived' : 'restored'} unit.`,
-      archive ? 'unarchiveProject' : 'archiveProject'
-    );
+  showArchiveProjectSuccessMessage(project: Project, archive: boolean): void {
+    this.snackBar
+      .open($localize`Successfully ${archive ? 'archived' : 'restored'} unit.`, $localize`Undo`)
+      .onAction()
+      .subscribe(() => {
+        this.undoArchiveProjectAction(project, archive ? 'unarchiveProject' : 'archiveProject');
+      });
   }
 
-  showErrorMessage(archive: boolean): void {
-    this.snackBar.open($localize`Error ${archive ? 'archiving' : 'unarchiving'} unit.`);
+  undoArchiveProjectAction(project: Project, archiveFunctionName: string): void {
+    this[archiveFunctionName](project).subscribe({
+      next: (response: ArchiveProjectResponse) => {
+        this.updateProjectArchivedStatus(project, response.archived);
+        this.snackBar.open($localize`Action undone.`);
+      },
+      error: () => {
+        this.snackBar.open($localize`Error undoing action.`);
+      }
+    });
   }
 
-  updateArchivedStatus(project: Project, archived: boolean): void {
+  updateProjectArchivedStatus(project: Project, archived: boolean): void {
     project.archived = archived;
     if (archived) {
       project.tags.push('archived');
@@ -61,24 +70,42 @@ export class ArchiveProjectService {
     this.refreshProjects();
   }
 
-  openSnackBar(project: Project, message: string, undoFunctionName: string): void {
+  updateProjectsArchivedStatus(projects: Project[], archived: boolean): void {
+    projects.forEach((project) => {
+      this.updateProjectArchivedStatus(project, archived);
+    });
+  }
+
+  showArchiveProjectsSuccessMessage(projects: Project[], archived: boolean): void {
     this.snackBar
-      .open(message, $localize`Undo`)
+      .open(
+        archived
+          ? $localize`Successfully archived ${projects.length} unit(s).`
+          : $localize`Successfully restored ${projects.length} unit(s).`,
+        $localize`Undo`
+      )
       .onAction()
       .subscribe(() => {
-        this.undoArchiveAction(project, undoFunctionName);
+        this.undoArchiveProjects(projects, archived ? 'unarchiveProjects' : 'archiveProjects');
       });
   }
 
-  undoArchiveAction(project: Project, archiveFunctionName: string): void {
-    this[archiveFunctionName](project).subscribe({
-      next: (response: ArchiveProjectResponse) => {
-        this.updateArchivedStatus(project, response.archived);
+  undoArchiveProjects(projects: Project[], archiveFunctionName: string): void {
+    this[archiveFunctionName](projects).subscribe({
+      next: (response: ArchiveProjectResponse[]) => {
+        for (const projectResponse of response) {
+          const project = projects.find((project) => project.id === projectResponse.id);
+          this.updateProjectArchivedStatus(project, projectResponse.archived);
+        }
         this.snackBar.open($localize`Action undone.`);
       },
       error: () => {
         this.snackBar.open($localize`Error undoing action.`);
       }
     });
+  }
+
+  showArchiveProjectErrorMessage(archive: boolean): void {
+    this.snackBar.open($localize`Error ${archive ? 'archiving' : 'unarchiving'} unit.`);
   }
 }

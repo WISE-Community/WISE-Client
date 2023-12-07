@@ -92,11 +92,11 @@ export class LibraryProjectMenuComponent {
       this.project
     ).subscribe({
       next: (response: ArchiveProjectResponse) => {
-        this.archiveProjectService.updateArchivedStatus(this.project, response.archived);
-        this.archiveProjectService.showSuccessMessage(this.project, archive);
+        this.archiveProjectService.updateProjectArchivedStatus(this.project, response.archived);
+        this.archiveProjectService.showArchiveProjectSuccessMessage(this.project, archive);
       },
       error: () => {
-        this.archiveProjectService.showErrorMessage(archive);
+        this.archiveProjectService.showArchiveProjectErrorMessage(archive);
       }
     });
   }

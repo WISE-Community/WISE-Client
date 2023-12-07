@@ -1,10 +1,42 @@
 <div class="content-block library-teacher__paginate">
   <div fxLayoutAlign="center center" fxLayout.xs="column">
     <a class="mat-caption" href="#" (click)="showInfo($event)" i18n>What are My Units?</a>
+    <select-all-projects-checkbox
+      [selectedAllProjects]="selectedAllProjects()"
+      [selectedSomeProjects]="selectedSomeProjects()"
+      (selectAllProjectsChanged)="selectAllProjectsChanged($event)"
+    ></select-all-projects-checkbox>
+    <div *ngIf="numSelectedProjects() > 0" class="secondary-text" i18n>
+      {{ numSelectedProjects() }} selected
+    </div>
+    <button
+      mat-icon-button
+      *ngIf="!showArchived && selectedProjects().length > 0"
+      (click)="archiveSelectedProjects(true)"
+      aria-label="Archive selected units"
+      i18n-aria-label
+      matTooltip="Archive"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>archive</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      *ngIf="showArchived && selectedProjects().length > 0"
+      (click)="archiveSelectedProjects(false)"
+      aria-label="Restore selected units"
+      i18n-aria-label
+      matTooltip="Restore"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>unarchive</mat-icon>
+    </button>
     <span fxFlex fxHide.xs></span>
     <mat-form-field [subscriptSizing]="'dynamic'">
       <mat-label>View</mat-label>
-      <mat-select [(ngModel)]="showArchived" (selectionChange)="filterUpdated()">
+      <mat-select [(ngModel)]="showArchived" (selectionChange)="switchActiveArchivedView()">
         <mat-option [value]="false" i18n>Active</mat-option>
         <mat-option [value]="true" i18n>Archived</mat-option>
       </mat-select>
@@ -23,6 +55,9 @@
       <app-library-project
         *ngIf="isOnPage(i)"
         [project]="project"
+        [myUnit]="true"
+        [checked]="projectIdToIsSelected()[project.id]"
+        (projectSelectionChanged)="projectSelectionChanged($event)"
         fxFlex.sm="50"
         fxFlex.md="33"
         fxFlex.gt-md="25"

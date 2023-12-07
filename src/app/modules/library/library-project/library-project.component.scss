@@ -81,3 +81,11 @@ $config: mat.define-typography-config();
   top: 10px;
   right: 10px;
 }
+
+.library-project__checkbox {
+  position: absolute;
+  top: 0px;
+
+  background-color: #ffffff;
+  z-index: 1000;
+}
