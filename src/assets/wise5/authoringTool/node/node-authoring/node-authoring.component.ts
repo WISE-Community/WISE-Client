@@ -28,7 +28,6 @@ export class NodeAuthoringComponent implements OnInit {
   node: Node;
   nodeJson: any;
   @Input() nodeId?: string;
-  nodePosition: any;
   subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -55,7 +54,6 @@ export class NodeAuthoringComponent implements OnInit {
     this.node = this.projectService.getNode(this.nodeId);
     this.isGroupNode = this.projectService.isGroupNode(this.nodeId);
     this.nodeJson = this.projectService.getNodeById(this.nodeId);
-    this.nodePosition = this.projectService.getNodePositionById(this.nodeId);
     this.components = this.projectService.getComponents(this.nodeId);
     this.componentsToChecked.set({});
     this.componentsToExpanded = {};
