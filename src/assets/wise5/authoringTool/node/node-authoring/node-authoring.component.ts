@@ -61,7 +61,7 @@ export class NodeAuthoringComponent implements OnInit {
     this.componentsToExpanded = {};
 
     if (history.state.newComponents && history.state.newComponents.length > 0) {
-      this.highlightNewComponentsAndThenShowComponentAuthoring(history.state.newComponents);
+      this.highlightAndExpandComponents(history.state.newComponents);
     } else {
       this.scrollToTopOfPage();
     }
@@ -233,25 +233,21 @@ export class NodeAuthoringComponent implements OnInit {
   }
 
   /**
-   * Temporarily highlight the new components and then show the component
+   * Temporarily highlight the specified components and show the component
    * authoring views. Used to bring user's attention to new changes.
-   * @param newComponents an array of the new components we have just added
-   * @param expandComponents expand component(s)' authoring views after highlighting
+   * @param components an array of components to highlight and expand
    */
-  protected highlightNewComponentsAndThenShowComponentAuthoring(
-    newComponents: any = [],
-    expandComponents: boolean = true
-  ): void {
+  protected highlightAndExpandComponents(components: any = []): void {
     this.componentsToChecked.set({});
 
     // wait for the UI to update and then scroll to the first new component
     setTimeout(() => {
-      if (newComponents.length > 0) {
-        const componentElement = $('#' + newComponents[0].id);
+      if (components.length > 0) {
+        const componentElement = $('#' + components[0].id);
         $('#content').scrollTop(componentElement.offset().top - 200);
-        for (const newComponent of newComponents) {
+        for (const newComponent of components) {
           temporarilyHighlightElement(newComponent.id);
-          this.componentsToExpanded[newComponent.id] = expandComponents;
+          this.componentsToExpanded[newComponent.id] = true;
         }
       }
     }, 100);

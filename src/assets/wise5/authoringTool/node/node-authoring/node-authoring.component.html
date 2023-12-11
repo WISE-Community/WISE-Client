@@ -47,7 +47,7 @@
     <h5 i18n>Components</h5>
     <add-component-button
       [node]="node"
-      (newComponentsEvent)="highlightNewComponentsAndThenShowComponentAuthoring($event)"
+      (newComponentsEvent)="highlightAndExpandComponents($event)"
     ></add-component-button>
     <div *ngIf="isAnyComponentSelected()">
       <button
@@ -179,7 +179,7 @@
               }"
               [node]="node"
               [componentId]="component.id"
-              (newComponentEvent)="highlightNewComponentsAndThenShowComponentAuthoring($event)"
+              (newComponentEvent)="highlightAndExpandComponents($event)"
             ></copy-component-button>
             <button
               mat-icon-button
@@ -215,7 +215,7 @@
           class="add-component"
           [insertAfterComponentId]="component.id"
           [node]="node"
-          (newComponentsEvent)="highlightNewComponentsAndThenShowComponentAuthoring($event)"
+          (newComponentsEvent)="highlightAndExpandComponents($event)"
         ></add-component-button>
       </div>
     </div>
