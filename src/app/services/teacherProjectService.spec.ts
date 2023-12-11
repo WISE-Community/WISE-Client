@@ -65,7 +65,6 @@ describe('TeacherProjectService', () => {
   shouldBeAbleToInsertAGroupNodeInsideAGroupNode();
   shouldNotBeAbleToInsertAStepNodeInsideAStepNode();
   getComponentPosition();
-  getUniqueAuthors();
   addCurrentUserToAuthors_CM_shouldAddUserInfo();
   getNodeIds();
   getInactiveNodeIds();
@@ -483,66 +482,6 @@ function getComponentPosition() {
     expect(componentExists).toEqual(0);
     const componentExists2 = service.getComponentPosition('node9', 'mnzx68ix8h');
     expect(componentExists2).toEqual(1);
-  });
-}
-
-function getUniqueAuthors() {
-  describe('getUniqueAuthors', () => {
-    it('should get unique authors when there are no authors', () => {
-      const authors = [];
-      const uniqueAuthors = service.getUniqueAuthors(authors);
-      expect(uniqueAuthors.length).toEqual(0);
-    });
-
-    it('should get unique authors when there is one author', () => {
-      const authors = [{ id: 1, firstName: 'a', lastName: 'a' }];
-      const uniqueAuthors = service.getUniqueAuthors(authors);
-      expect(uniqueAuthors.length).toEqual(1);
-      expect(uniqueAuthors[0].id).toEqual(1);
-      expect(uniqueAuthors[0].firstName).toEqual('a');
-      expect(uniqueAuthors[0].lastName).toEqual('a');
-    });
-
-    it('should get unique authors when there are multiple duplicates', () => {
-      const authors = [
-        { id: 1, firstName: 'a', lastName: 'a' },
-        { id: 2, firstName: 'b', lastName: 'b' },
-        { id: 1, firstName: 'a', lastName: 'a' },
-        { id: 3, firstName: 'c', lastName: 'c' },
-        { id: 3, firstName: 'c', lastName: 'c' },
-        { id: 1, firstName: 'a', lastName: 'a' }
-      ];
-      const uniqueAuthors = service.getUniqueAuthors(authors);
-      expect(uniqueAuthors.length).toEqual(3);
-      expect(uniqueAuthors[0].id).toEqual(1);
-      expect(uniqueAuthors[0].firstName).toEqual('a');
-      expect(uniqueAuthors[0].lastName).toEqual('a');
-      expect(uniqueAuthors[1].id).toEqual(2);
-      expect(uniqueAuthors[1].firstName).toEqual('b');
-      expect(uniqueAuthors[1].lastName).toEqual('b');
-      expect(uniqueAuthors[2].id).toEqual(3);
-      expect(uniqueAuthors[2].firstName).toEqual('c');
-      expect(uniqueAuthors[2].lastName).toEqual('c');
-    });
-
-    it('should get unique authors when there are no duplicates', () => {
-      const authors = [
-        { id: 1, firstName: 'a', lastName: 'a' },
-        { id: 2, firstName: 'b', lastName: 'b' },
-        { id: 3, firstName: 'c', lastName: 'c' }
-      ];
-      const uniqueAuthors = service.getUniqueAuthors(authors);
-      expect(uniqueAuthors.length).toEqual(3);
-      expect(uniqueAuthors[0].id).toEqual(1);
-      expect(uniqueAuthors[0].firstName).toEqual('a');
-      expect(uniqueAuthors[0].lastName).toEqual('a');
-      expect(uniqueAuthors[1].id).toEqual(2);
-      expect(uniqueAuthors[1].firstName).toEqual('b');
-      expect(uniqueAuthors[1].lastName).toEqual('b');
-      expect(uniqueAuthors[2].id).toEqual(3);
-      expect(uniqueAuthors[2].firstName).toEqual('c');
-      expect(uniqueAuthors[2].lastName).toEqual('c');
-    });
   });
 }
 
