@@ -6,7 +6,7 @@ import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { Node } from '../../../common/Node';
 import { ComponentContent } from '../../../common/ComponentContent';
-import { temporarilyHighlightElement } from '../../../common/dom/dom';
+import { scrollToTopOfPage, temporarilyHighlightElement } from '../../../common/dom/dom';
 import { ConfigService } from '../../../../wise5/services/configService';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -61,7 +61,7 @@ export class NodeAuthoringComponent implements OnInit {
     if (history.state.newComponents && history.state.newComponents.length > 0) {
       this.highlightAndExpandComponents(history.state.newComponents);
     } else {
-      this.scrollToTopOfPage();
+      scrollToTopOfPage();
     }
   }
 
@@ -114,7 +114,7 @@ export class NodeAuthoringComponent implements OnInit {
 
   protected close(): void {
     this.dataService.setCurrentNode(null);
-    this.scrollToTopOfPage();
+    scrollToTopOfPage();
   }
 
   protected hideAllComponentSaveButtons(): void {
@@ -176,7 +176,7 @@ export class NodeAuthoringComponent implements OnInit {
   }
 
   protected deleteComponents(): void {
-    this.scrollToTopOfPage();
+    scrollToTopOfPage();
     if (this.confirmDeleteComponent(this.getSelectedComponentNumbersAndTypes())) {
       const componentIdAndTypes = this.getSelectedComponents()
         .map((component) => this.node.deleteComponent(component.id))
@@ -249,10 +249,6 @@ export class NodeAuthoringComponent implements OnInit {
         }
       }
     }, 100);
-  }
-
-  private scrollToTopOfPage(): void {
-    document.getElementById('top').scrollIntoView();
   }
 
   protected getComponentTypeLabel(componentType: string): string {

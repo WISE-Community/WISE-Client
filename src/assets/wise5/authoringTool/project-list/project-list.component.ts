@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { temporarilyHighlightElement } from '../../common/dom/dom';
+import { scrollToTopOfPage, temporarilyHighlightElement } from '../../common/dom/dom';
 import { ConfigService } from '../../services/configService';
 import { CopyProjectService } from '../../services/copyProjectService';
 import { MatDialog } from '@angular/material/dialog';
@@ -43,7 +43,7 @@ export class ProjectListComponent implements OnInit {
       this.showMessageInModalDialog($localize`Copying Unit...`);
       this.copyProjectService.copyProject(projectId).subscribe({
         next: (project: any) => {
-          this.scrollToTopOfPage();
+          scrollToTopOfPage();
           this.highlightNewProject(project.id);
         },
         error: () => {
@@ -77,10 +77,6 @@ export class ProjectListComponent implements OnInit {
         });
       })
     );
-  }
-
-  private scrollToTopOfPage(): void {
-    document.getElementById('top').scrollIntoView();
   }
 
   private showMessageInModalDialog(message: string): void {
