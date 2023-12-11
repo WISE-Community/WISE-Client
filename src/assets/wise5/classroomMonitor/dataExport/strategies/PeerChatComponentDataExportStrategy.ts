@@ -1,8 +1,8 @@
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
-import { ComponentDataExportStrategy } from './ComponentDataExportStrategy';
+import { AbstractComponentDataExportStrategy } from './AbstractComponentDataExportStrategy';
 
-export class PeerChatComponentDataExportStrategy extends ComponentDataExportStrategy {
-  defaultColumnNames = [
+export class PeerChatComponentDataExportStrategy extends AbstractComponentDataExportStrategy {
+  protected defaultColumnNames = [
     '#',
     'Peer Group ID',
     'Workgroup ID',
@@ -33,7 +33,6 @@ export class PeerChatComponentDataExportStrategy extends ComponentDataExportStra
     const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
     this.insertPromptColumns(headerRow, component);
     this.insertQuestionColumns(headerRow, component, componentStates);
-    this.populateColumnNameMappings(headerRow, columnNameToNumber);
     return headerRow;
   }
 
@@ -144,7 +143,7 @@ export class PeerChatComponentDataExportStrategy extends ComponentDataExportStra
     super.setStudentInfo(row, columnNameToNumber, componentState);
   }
 
-  private setComponentInfo(
+  protected setComponentInfo(
     row: any[],
     columnNameToNumber: any,
     nodeId: string,
@@ -170,7 +169,7 @@ export class PeerChatComponentDataExportStrategy extends ComponentDataExportStra
     }
   }
 
-  private setStudentWork(
+  protected setStudentWork(
     row: any[],
     columnNameToNumber: any,
     component: any,

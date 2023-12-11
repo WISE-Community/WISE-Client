@@ -12,8 +12,12 @@ describe('DiscussionComponentDataExportStrategy', () => {
     exportStrategyTester.setUpServices();
     initializeStudentWork();
   });
-  describe('export', () => {
-    it('generates export with correct rows of data', () => {
+  exportDiscussion();
+});
+
+function exportDiscussion(): void {
+  describe('discussion export', () => {
+    it('generates export with all student posts', () => {
       exportStrategyTester.setComponent({
         id: exportStrategyTester.componentId,
         type: componentType,
@@ -43,7 +47,7 @@ describe('DiscussionComponentDataExportStrategy', () => {
         exportStrategyTester.componentExportStrategy.controller.generateCSVFile
       ).toHaveBeenCalledWith(
         [
-          exportStrategyTester.componentExportStrategy.defaultDiscussionColumnNames,
+          exportStrategyTester.componentExportStrategy.defaultColumnNames,
           [
             1,
             exportStrategyTester.workgroupId1,
@@ -107,7 +111,7 @@ describe('DiscussionComponentDataExportStrategy', () => {
       );
     });
   });
-});
+}
 
 function setUpExportStrategy(): void {
   exportStrategyTester.setUpExportStrategy(

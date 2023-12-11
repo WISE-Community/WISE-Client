@@ -1,9 +1,9 @@
 import { removeHTMLTags } from '../../../common/string/string';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
-import { ComponentDataExportStrategy } from './ComponentDataExportStrategy';
+import { AbstractComponentDataExportStrategy } from './AbstractComponentDataExportStrategy';
 
-export class DiscussionComponentDataExportStrategy extends ComponentDataExportStrategy {
-  defaultDiscussionColumnNames = [
+export class DiscussionComponentDataExportStrategy extends AbstractComponentDataExportStrategy {
+  protected defaultColumnNames = [
     '#',
     'Workgroup ID',
     'User ID 1',
@@ -34,9 +34,7 @@ export class DiscussionComponentDataExportStrategy extends ComponentDataExportSt
   ];
 
   protected generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {
-    const headerRow = [...this.defaultDiscussionColumnNames];
-    this.populateColumnNameMappings(headerRow, columnNameToNumber);
-    return headerRow;
+    return [...this.defaultColumnNames];
   }
 
   protected generateComponentWorkRows(
