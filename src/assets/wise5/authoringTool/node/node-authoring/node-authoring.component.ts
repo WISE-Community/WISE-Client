@@ -6,7 +6,7 @@ import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { Node } from '../../../common/Node';
 import { ComponentContent } from '../../../common/ComponentContent';
-import { temporarilyHighlightElement } from '../../../common/dom/dom';
+import { scrollToTopOfPage, temporarilyHighlightElement } from '../../../common/dom/dom';
 import { ConfigService } from '../../../../wise5/services/configService';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -28,7 +28,6 @@ export class NodeAuthoringComponent implements OnInit {
   node: Node;
   nodeJson: any;
   @Input() nodeId?: string;
-  nodePosition: any;
   subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -55,15 +54,14 @@ export class NodeAuthoringComponent implements OnInit {
     this.node = this.projectService.getNode(this.nodeId);
     this.isGroupNode = this.projectService.isGroupNode(this.nodeId);
     this.nodeJson = this.projectService.getNodeById(this.nodeId);
-    this.nodePosition = this.projectService.getNodePositionById(this.nodeId);
     this.components = this.projectService.getComponents(this.nodeId);
     this.componentsToChecked.set({});
     this.componentsToExpanded = {};
 
     if (history.state.newComponents && history.state.newComponents.length > 0) {
-      this.highlightNewComponentsAndThenShowComponentAuthoring(history.state.newComponents);
+      this.highlightAndExpandComponents(history.state.newComponents);
     } else {
-      this.scrollToTopOfPage();
+      scrollToTopOfPage();
     }
   }
 
@@ -116,7 +114,7 @@ export class NodeAuthoringComponent implements OnInit {
 
   protected close(): void {
     this.dataService.setCurrentNode(null);
-    this.scrollToTopOfPage();
+    scrollToTopOfPage();
   }
 
   protected hideAllComponentSaveButtons(): void {
@@ -178,7 +176,7 @@ export class NodeAuthoringComponent implements OnInit {
   }
 
   protected deleteComponents(): void {
-    this.scrollToTopOfPage();
+    scrollToTopOfPage();
     if (this.confirmDeleteComponent(this.getSelectedComponentNumbersAndTypes())) {
       const componentIdAndTypes = this.getSelectedComponents()
         .map((component) => this.node.deleteComponent(component.id))
@@ -233,32 +231,24 @@ export class NodeAuthoringComponent implements OnInit {
   }
 
   /**
-   * Temporarily highlight the new components and then show the component
+   * Temporarily highlight the specified components and show the component
    * authoring views. Used to bring user's attention to new changes.
-   * @param newComponents an array of the new components we have just added
-   * @param expandComponents expand component(s)' authoring views after highlighting
+   * @param components an array of components to highlight and expand
    */
-  protected highlightNewComponentsAndThenShowComponentAuthoring(
-    newComponents: any = [],
-    expandComponents: boolean = true
-  ): void {
+  protected highlightAndExpandComponents(components: any = []): void {
     this.componentsToChecked.set({});
 
     // wait for the UI to update and then scroll to the first new component
     setTimeout(() => {
-      if (newComponents.length > 0) {
-        const componentElement = $('#' + newComponents[0].id);
+      if (components.length > 0) {
+        const componentElement = $('#' + components[0].id);
         $('#content').scrollTop(componentElement.offset().top - 200);
-        for (const newComponent of newComponents) {
-          temporarilyHighlightElement(newComponent.id);
-          this.componentsToExpanded[newComponent.id] = expandComponents;
+        for (const component of components) {
+          temporarilyHighlightElement(component.id);
+          this.componentsToExpanded[component.id] = true;
         }
       }
     }, 100);
-  }
-
-  private scrollToTopOfPage(): void {
-    document.getElementById('top').scrollIntoView();
   }
 
   protected getComponentTypeLabel(componentType: string): string {

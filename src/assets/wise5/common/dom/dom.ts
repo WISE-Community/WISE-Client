@@ -40,3 +40,7 @@ export function scrollToElement(elementId: string): void {
     1000
   );
 }
+
+export function scrollToTopOfPage(): void {
+  document.getElementById('top').scrollIntoView();
+}
