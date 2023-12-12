@@ -243,9 +243,9 @@ export class NodeAuthoringComponent implements OnInit {
       if (components.length > 0) {
         const componentElement = $('#' + components[0].id);
         $('#content').scrollTop(componentElement.offset().top - 200);
-        for (const newComponent of components) {
-          temporarilyHighlightElement(newComponent.id);
-          this.componentsToExpanded[newComponent.id] = true;
+        for (const component of components) {
+          temporarilyHighlightElement(component.id);
+          this.componentsToExpanded[component.id] = true;
         }
       }
     }, 100);
