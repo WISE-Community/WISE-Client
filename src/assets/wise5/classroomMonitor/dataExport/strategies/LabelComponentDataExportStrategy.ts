@@ -11,7 +11,7 @@ export class LabelComponentDataExportStrategy extends AbstractComponentDataExpor
     super(nodeId, component, additionalParams);
   }
 
-  protected generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {
+  protected generateComponentHeaderRow(component: any): string[] {
     const headerRow = [...this.defaultColumnNames];
     const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
     const maxCountLabel = this.getMaxLabelCount(componentStates);

@@ -15,7 +15,7 @@ export class OpenResponseComponentDataExportStrategy extends AbstractComponentDa
     super(nodeId, component, additionalParams);
   }
 
-  protected generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {
+  protected generateComponentHeaderRow(component: any): string[] {
     const headerRow = [...this.defaultColumnNames];
     headerRow.push('Item ID');
     headerRow.push('Response');

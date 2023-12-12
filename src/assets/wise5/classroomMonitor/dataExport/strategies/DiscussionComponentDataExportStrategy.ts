@@ -33,7 +33,7 @@ export class DiscussionComponentDataExportStrategy extends AbstractComponentData
     'Post Text'
   ];
 
-  protected generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {
+  protected generateComponentHeaderRow(component: any): string[] {
     return [...this.defaultColumnNames];
   }
 

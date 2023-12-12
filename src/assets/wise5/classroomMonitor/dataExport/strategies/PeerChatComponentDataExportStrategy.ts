@@ -28,7 +28,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractComponentDataEx
     'Response'
   ];
 
-  protected generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {
+  protected generateComponentHeaderRow(component: any): string[] {
     const headerRow = [...this.defaultColumnNames];
     const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
     this.insertPromptColumns(headerRow, component);

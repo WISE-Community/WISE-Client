@@ -54,7 +54,7 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     const components = [{ nodeId: this.nodeId, componentId: this.component.id }];
     this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
       const columnNameToNumber = {};
-      const headerRow = this.generateComponentHeaderRow(this.component, columnNameToNumber);
+      const headerRow = this.generateComponentHeaderRow(this.component);
       this.populateColumnNameMappings(headerRow, columnNameToNumber);
       let rows = [headerRow];
       rows = rows.concat(
@@ -70,7 +70,7 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     });
   }
 
-  protected abstract generateComponentHeaderRow(component: any, columnNameToNumber: any): string[];
+  protected abstract generateComponentHeaderRow(component: any): string[];
 
   protected abstract generateComponentWorkRows(
     component: any,
