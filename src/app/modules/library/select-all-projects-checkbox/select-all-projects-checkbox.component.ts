@@ -10,16 +10,9 @@ import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
 export class SelectAllProjectsCheckboxComponent {
   @Input() selectedAllProjects: boolean = false;
   @Input() selectedSomeProjects: boolean = false;
-  @Output()
-  selectAllProjectsChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() selectAllProjectsEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   protected selectAllProjectsCheckboxClicked(): void {
-    if (this.selectedAllProjects || this.selectedSomeProjects) {
-      this.selectedAllProjects = false;
-      this.selectedSomeProjects = false;
-    } else {
-      this.selectedAllProjects = true;
-    }
-    this.selectAllProjectsChanged.emit(this.selectedAllProjects);
+    this.selectAllProjectsEvent.emit(!(this.selectedAllProjects || this.selectedSomeProjects));
   }
 }

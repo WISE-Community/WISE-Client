@@ -5907,11 +5907,19 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">66,68</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="21fc0e266ff702781e65600a67c0e8f052018d43" datatype="html">
-        <source>Select all projects</source>
+      <trans-unit id="9ca82952a6bc860b5391d5975322d8af8ceddfa4" datatype="html">
+        <source>Select</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/select-all-projects-checkbox/select-all-projects-checkbox.component.html</context>
           <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6028472408314831177" datatype="html">
@@ -7454,7 +7462,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">80</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
@@ -7473,7 +7481,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="linenumber">95</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
@@ -7492,7 +7500,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">98</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
@@ -7507,7 +7515,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Successfully archived <x id="PH" equiv-text="projects.length"/> unit(s).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">78</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.ts</context>
@@ -7518,22 +7526,25 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Successfully restored <x id="PH" equiv-text="projects.length"/> unit(s).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">79</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.ts</context>
           <context context-type="linenumber">92</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2351493690393455691" datatype="html">
-        <source>Error <x id="PH" equiv-text="archive ? &apos;archiving&apos; : &apos;unarchiving&apos;"/> unit.</source>
+      <trans-unit id="4649373271512187502" datatype="html">
+        <source>Error archiving unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">105</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="3781019523543102447" datatype="html">
+        <source>Error restoring unit.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
+          <context context-type="linenumber">105</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e931f6b80399785ea1647269f43ffeea54327cb6" datatype="html">
@@ -8467,6 +8478,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2351493690393455691" datatype="html">
+        <source>Error <x id="PH" equiv-text="archive ? &apos;archiving&apos; : &apos;unarchiving&apos;"/> unit.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="9cce5b778a46771992b9753e43f7f3dbcc8c322a" datatype="html">
         <source>Class Periods</source>
         <context-group purpose="location">
@@ -8668,17 +8686,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">305</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9ca82952a6bc860b5391d5975322d8af8ceddfa4" datatype="html">
-        <source>Select</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.html</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
-          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cf5b9a99a7f19adbf75653f4c7ff54dc64afbff6" datatype="html">

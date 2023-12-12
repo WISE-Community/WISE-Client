@@ -91,4 +91,17 @@ export class Project {
     }
     return metadata;
   }
+
+  hasTag(tag: string) {
+    return this.tags.includes(tag);
+  }
+
+  updateArchivedStatus(archived: boolean) {
+    this.archived = archived;
+    if (archived) {
+      this.tags.push('archived');
+    } else {
+      this.tags.splice(this.tags.indexOf('archived'), 1);
+    }
+  }
 }

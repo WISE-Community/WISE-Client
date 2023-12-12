@@ -4,7 +4,7 @@
     <select-all-projects-checkbox
       [selectedAllProjects]="selectedAllProjects()"
       [selectedSomeProjects]="selectedSomeProjects()"
-      (selectAllProjectsChanged)="selectAllProjectsChanged($event)"
+      (selectAllProjectsEvent)="selectAllProjects($event)"
     ></select-all-projects-checkbox>
     <div *ngIf="numSelectedProjects() > 0" class="secondary-text" i18n>
       {{ numSelectedProjects() }} selected

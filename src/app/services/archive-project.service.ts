@@ -61,12 +61,7 @@ export class ArchiveProjectService {
   }
 
   updateProjectArchivedStatus(project: Project, archived: boolean): void {
-    project.archived = archived;
-    if (archived) {
-      project.tags.push('archived');
-    } else {
-      project.tags.splice(project.tags.indexOf('archived'), 1);
-    }
+    project.updateArchivedStatus(archived);
     this.refreshProjects();
   }
 
@@ -106,6 +101,8 @@ export class ArchiveProjectService {
   }
 
   showArchiveProjectErrorMessage(archive: boolean): void {
-    this.snackBar.open($localize`Error ${archive ? 'archiving' : 'unarchiving'} unit.`);
+    this.snackBar.open(
+      archive ? $localize`Error archiving unit.` : $localize`Error restoring unit.`
+    );
   }
 }

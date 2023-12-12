@@ -66,7 +66,7 @@ export class LibraryProjectComponent implements OnInit {
     });
   }
 
-  protected projectSelected(event: any): void {
+  protected selectProject(event: any): void {
     event.stopPropagation();
     this.projectSelectionChanged.emit({ checked: event.target.checked, project: this.project });
   }

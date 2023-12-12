@@ -21,22 +21,20 @@ export class PersonalLibraryComponent extends LibraryComponent {
   protected sharedProjects: LibraryProject[] = [];
   protected showArchived: boolean = false;
 
-  protected numSelectedProjects: Signal<number> = computed(() => {
-    return this.selectedProjects().length;
-  });
-  protected projectIdToIsSelected: Signal<any> = computed(() => {
-    return this.selectedProjects().reduce((accumulator, project) => {
+  protected numSelectedProjects: Signal<number> = computed(() => this.selectedProjects().length);
+  protected projectIdToIsSelected: Signal<any> = computed(() =>
+    this.selectedProjects().reduce((accumulator, project) => {
       accumulator[project.id] = true;
       return accumulator;
-    }, {});
-  });
+    }, {})
+  );
   protected selectedAllProjects: Signal<boolean> = computed(() => {
     const numSelectedProjects = this.numSelectedProjects();
     return numSelectedProjects !== 0 && numSelectedProjects === this.getProjectsInView().length;
   });
-  protected selectedSomeProjects: Signal<boolean> = computed(() => {
-    return this.numSelectedProjects() !== 0 && !this.selectedAllProjects();
-  });
+  protected selectedSomeProjects: Signal<boolean> = computed(
+    () => this.numSelectedProjects() !== 0 && !this.selectedAllProjects()
+  );
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
@@ -93,7 +91,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
   updateProjects() {
     this.combinePersonalAndSharedProjects();
     this.filterUpdated();
-    this.clearSelectedProjects();
+    this.unselectAllProjects();
   }
 
   sortByProjectIdDesc(a, b) {
@@ -127,12 +125,12 @@ export class PersonalLibraryComponent extends LibraryComponent {
 
   protected switchActiveArchivedView(): void {
     this.filterUpdated();
-    this.clearSelectedProjects();
+    this.unselectAllProjects();
   }
 
   pageChange(event?: PageEvent, scroll?: boolean): void {
     super.pageChange(event, scroll);
-    this.clearSelectedProjects();
+    this.unselectAllProjects();
   }
 
   protected projectSelectionChanged(event: any): void {
@@ -159,7 +157,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
           archive
         );
         this.archiveProjectService.updateProjectsArchivedStatus(this.selectedProjects(), archive);
-        this.clearSelectedProjects();
+        this.unselectAllProjects();
       },
       error: () => {
         this.archiveProjectService.showArchiveProjectErrorMessage(archive);
@@ -167,11 +165,11 @@ export class PersonalLibraryComponent extends LibraryComponent {
     });
   }
 
-  private clearSelectedProjects(): void {
-    this.selectAllProjectsChanged(false);
+  private unselectAllProjects(): void {
+    this.selectAllProjects(false);
   }
 
-  protected selectAllProjectsChanged(selectAll: any): void {
+  protected selectAllProjects(selectAll: boolean): void {
     this.selectedProjects.update(() => (selectAll ? this.getProjectsInView() : []));
   }
 
