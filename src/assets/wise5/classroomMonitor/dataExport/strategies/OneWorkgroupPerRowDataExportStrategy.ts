@@ -222,7 +222,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                 }
               }
               if (this.controller.includeBranchPathTaken) {
-                var branchLetter = this.projectService.getBranchLetter(toNodeId);
+                var branchLetter = this.getBranchLetter(toNodeId);
                 if (stepTitle != null) {
                   workgroupRow[columnIdToColumnIndex[nodeId + '-branchPathTaken']] = branchLetter;
                 } else {
@@ -247,6 +247,21 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
       this.controller.generateCSVFile(rows, fileName);
       this.controller.hideDownloadingExportMessage();
     });
+  }
+
+  /**
+   * Get the branch letter in the node position string if the node is in a branch path
+   * @param nodeId the node id we want the branch letter for
+   * @return the branch letter in the node position if the node is in a branch path
+   */
+  getBranchLetter(nodeId: string): string {
+    const nodePosition = this.projectService.getNodePositionById(nodeId);
+    const branchLetterRegex = /.*([A-Z])/;
+    const match = branchLetterRegex.exec(nodePosition);
+    if (match != null) {
+      return match[1];
+    }
+    return null;
   }
 
   /**

@@ -47,7 +47,6 @@ describe('TeacherProjectService', () => {
   testDeleteTransition();
   testGetNodeIdAfter();
   testCreateNodeAfter();
-  shouldGetTheBranchLetter();
   lockNode();
   unlockNode();
   getNextAvailableNodeId();
@@ -201,24 +200,6 @@ function testCreateNodeAfter() {
       expect(newNode.transitionLogic.transitions[0].to).toEqual('node20');
       expect(service.getNodeIdAfter('node19')).toEqual('node1000');
     });
-  });
-}
-
-function shouldGetTheBranchLetter() {
-  it('should get the branch letter', () => {
-    service.setProject(teacherProjectJSON);
-    let branchLetter = service.getBranchLetter('node1');
-    expect(branchLetter).toEqual(null);
-    branchLetter = service.getBranchLetter('node2');
-    expect(branchLetter).toEqual('A');
-    branchLetter = service.getBranchLetter('node3');
-    expect(branchLetter).toEqual('A');
-    branchLetter = service.getBranchLetter('node4');
-    expect(branchLetter).toEqual('B');
-    branchLetter = service.getBranchLetter('node5');
-    expect(branchLetter).toEqual('B');
-    branchLetter = service.getBranchLetter('node6');
-    expect(branchLetter).toEqual(null);
   });
 }
 
