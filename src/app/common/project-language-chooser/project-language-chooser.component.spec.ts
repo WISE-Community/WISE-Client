@@ -35,11 +35,10 @@ describe('ProjectLanguageChooserComponent', () => {
   });
 
   it('keeps selected language option when language option changes', async () => {
-    const options = await getOptions();
-    await options[1].click();
+    const selectHarness = await loader.getHarness(MatSelectHarness);
+    await selectHarness.clickOptions({ text: 'Japanese' });
     setProjectLocale(new ProjectLocale({ default: 'it', supported: ['de', 'fr', 'ja', 'es'] }));
-    const newOptions = await getOptions();
-    expect(await newOptions[3].isSelected()).toBeTrue();
+    expect(await selectHarness.getValueText()).toEqual('Japanese');
   });
 });
 
@@ -50,8 +49,7 @@ function setProjectLocale(locale: ProjectLocale): void {
 }
 
 async function getOptions(): Promise<MatOptionHarness[]> {
-  const selects = await loader.getAllHarnesses(MatSelectHarness);
-  const selectComponent = selects[0];
-  await selectComponent.open();
-  return await selectComponent.getOptions();
+  const selectHarness = await loader.getHarness(MatSelectHarness);
+  await selectHarness.open();
+  return await selectHarness.getOptions();
 }
