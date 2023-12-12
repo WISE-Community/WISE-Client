@@ -474,4 +474,34 @@ export class NotificationService {
   broadcastViewCurrentAmbientNotification(args: any) {
     this.viewCurrentAmbientNotificationSource.next(args);
   }
+
+  showSavingMessage(): void {
+    this.broadcastSetGlobalMessage({
+      globalMessage: {
+        text: $localize`Saving...`,
+        isProgressIndicatorVisible: true,
+        time: null
+      }
+    });
+  }
+
+  /*
+   * @param message The message to show.
+   * @param timeout The amount of time to wait in milliseconds before changing the message from
+   * 'Saving...' to 'Saved' assuming showSavingMessage() was previously called. We do this to make
+   * sure the 'Saving...' message is visible long enough for the user to notice otherwise it might
+   * switch too fast from 'Saving...' to 'Saved'. If we don't perform the wait, it will always say
+   * 'Saved' and the author might wonder whether anything was ever saved.
+   */
+  showSavedMessage(message: string, timeout: number = 500): void {
+    setTimeout(() => {
+      this.broadcastSetGlobalMessage({
+        globalMessage: {
+          text: message,
+          isProgressIndicatorVisible: false,
+          time: new Date().getTime()
+        }
+      });
+    }, timeout);
+  }
 }
