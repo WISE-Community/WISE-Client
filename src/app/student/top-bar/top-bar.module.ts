@@ -12,7 +12,7 @@ import { DismissAmbientNotificationDialogModule } from '../../../assets/wise5/vl
 import { NotificationsDialogModule } from '../../../assets/wise5/vle/notifications-dialog/notifications-dialog.module';
 import { StudentAccountMenuModule } from '../../../assets/wise5/vle/student-account-menu/student-account-menu.module';
 import { TopBarComponent } from './top-bar.component';
-import { ProjectLanguageChooserComponent } from '../project-language-chooser/project-language-chooser.component';
+import { ProjectLanguageChooserComponent } from '../../common/project-language-chooser/project-language-chooser.component';
 
 @NgModule({
   declarations: [TopBarComponent],

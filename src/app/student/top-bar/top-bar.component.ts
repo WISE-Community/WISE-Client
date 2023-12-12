@@ -11,6 +11,9 @@ import { NotificationsDialogComponent } from '../../../assets/wise5/vle/notifica
 import { StudentAccountMenuComponent } from '../../../assets/wise5/vle/student-account-menu/student-account-menu.component';
 import { Notification } from '../../domain/notification';
 import { getAvatarColorForWorkgroupId } from '../../../assets/wise5/common/workgroup/workgroup';
+import { Language } from '../../domain/language';
+import { TranslateProjectService } from '../../../assets/wise5/services/translateProjectService';
+import { ProjectLocale } from '../../domain/projectLocale';
 
 @Component({
   selector: 'top-bar',
@@ -29,6 +32,7 @@ export class TopBarComponent {
   logoURL: string;
   newNotifications: Notification[] = [];
   notifications: Notification[] = [];
+  protected projectLocale: ProjectLocale;
   @Input() projectName: string;
   subscriptions: Subscription = new Subscription();
 
@@ -39,15 +43,17 @@ export class TopBarComponent {
     private nodeStatusService: NodeStatusService,
     private notificationService: NotificationService,
     private projectService: ProjectService,
-    private studentDataService: StudentDataService
+    private studentDataService: StudentDataService,
+    private translateProjectService: TranslateProjectService
   ) {}
 
   ngOnInit() {
     this.avatarColor = getAvatarColorForWorkgroupId(this.configService.getWorkgroupId());
     this.logoURL = `${this.projectService.getThemePath()}/images/WISE-logo-ffffff.svg`;
-    this.hasTranslations = this.projectService.getLocale().hasTranslations();
     this.isPreview = this.configService.isPreview();
     this.isConstraintsDisabled = !this.configService.getConfigParam('constraints');
+    this.projectLocale = this.projectService.getLocale();
+    this.hasTranslations = this.projectLocale.hasTranslations();
 
     this.setCompletionPercent();
     this.subscribeToStudentData();
@@ -141,5 +147,9 @@ export class TopBarComponent {
     } else {
       this.homeURL = '/';
     }
+  }
+
+  protected changeLanguage(language: Language): void {
+    this.translateProjectService.translate(language.locale);
   }
 }

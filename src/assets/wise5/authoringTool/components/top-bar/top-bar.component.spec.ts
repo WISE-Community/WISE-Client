@@ -8,6 +8,7 @@ import { ConfigService } from '../../../services/configService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 
 describe('TopBarComponent', () => {
   let component: TopBarComponent;
@@ -32,6 +33,9 @@ describe('TopBarComponent', () => {
     fixture = TestBed.createComponent(TopBarComponent);
     component = fixture.componentInstance;
     spyOn(TestBed.inject(ConfigService), 'getMyUserInfo').and.returnValue({});
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en_US', supported: [] })
+    );
     fixture.detectChanges();
   });
 

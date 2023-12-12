@@ -25,7 +25,11 @@
       </button>
       <span *ngIf="isConstraintsDisabled" i18n>Constraints Are Off</span>
     </div>
-    <project-language-chooser *ngIf="hasTranslations"></project-language-chooser>
+    <project-language-chooser
+      *ngIf="hasTranslations"
+      [projectLocale]="projectLocale"
+      (languageChangedEvent)="changeLanguage($event)"
+    ></project-language-chooser>
     <div fxLayout="row" fxLayoutGap="16px">
       <div>
         <button

@@ -59,6 +59,7 @@ import { ComponentTypeSelectorComponent } from '../../assets/wise5/authoringTool
 import { EditNodeTitleComponent } from '../../assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component';
 import { EditProjectLanguageSettingComponent } from '../../assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component';
 import { AddComponentButtonComponent } from '../../assets/wise5/authoringTool/node/add-component-button/add-component-button.component';
+import { ProjectLanguageChooserComponent } from '../common/project-language-chooser/project-language-chooser.component';
 
 @NgModule({
   declarations: [
@@ -120,6 +121,7 @@ import { AddComponentButtonComponent } from '../../assets/wise5/authoringTool/no
     NodeAdvancedAuthoringModule,
     PreviewComponentModule,
     ProjectAssetAuthoringModule,
+    ProjectLanguageChooserComponent,
     RouterModule,
     StepToolsModule,
     StructureAuthoringModule,
