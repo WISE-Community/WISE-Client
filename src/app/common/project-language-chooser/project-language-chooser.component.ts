@@ -24,9 +24,7 @@ export class ProjectLanguageChooserComponent implements OnChanges {
       this.selectedLanguage == null ||
       !this.availableLanguages.some((lang) => lang.locale === this.selectedLanguage.locale)
     ) {
-      this.selectedLanguage = this.availableLanguages.find((lang) =>
-        this.projectLocale.isDefaultLocale(lang.locale)
-      );
+      this.selectedLanguage = this.projectLocale.getDefaultLanguage();
     }
   }
 

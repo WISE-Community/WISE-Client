@@ -34,10 +34,6 @@ export class ProjectLocale {
     this.locale.supported = languages.map((language) => language.locale);
   }
 
-  private hasLocale(locale: string): boolean {
-    return this.locale.supported.includes(locale);
-  }
-
   hasTranslations(): boolean {
     return this.locale.supported.length > 0;
   }
@@ -46,7 +42,11 @@ export class ProjectLocale {
     return !this.isDefaultLocale(locale) && this.hasLocale(locale);
   }
 
-  isDefaultLocale(locale: string): boolean {
+  private isDefaultLocale(locale: string): boolean {
     return this.locale.default === locale;
+  }
+
+  private hasLocale(locale: string): boolean {
+    return this.locale.supported.includes(locale);
   }
 }
