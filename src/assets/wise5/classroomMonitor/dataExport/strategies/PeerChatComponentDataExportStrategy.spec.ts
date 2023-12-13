@@ -18,11 +18,9 @@ describe('PeerChatComponentDataExportStrategy', () => {
     exportStrategyTester = new ExportStrategyTester();
     exportStrategyTester.setUpServices();
   });
-  describe('export', () => {
-    exportWithRegularPrompt();
-    exportWithDynamicPrompt();
-    exportWithQuestionBank();
-  });
+  exportWithRegularPrompt();
+  exportWithDynamicPrompt();
+  exportWithQuestionBank();
 });
 
 function exportWithRegularPrompt(): void {

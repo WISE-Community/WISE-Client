@@ -1,44 +1,10 @@
-import { ComponentState } from '../../../../../app/domain/componentState';
-import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
-import { ComponentDataExportStrategy } from './ComponentDataExportStrategy';
+import { AbstractComponentDataExportStrategy } from './AbstractComponentDataExportStrategy';
 
-export class OpenResponseComponentDataExportStrategy extends ComponentDataExportStrategy {
-  autoScoreLabel: string = 'Auto Score';
-  defaultColumnNames = [
-    '#',
-    'Workgroup ID',
-    'User ID 1',
-    'Student Name 1',
-    'User ID 2',
-    'Student Name 2',
-    'User ID 3',
-    'Student Name 3',
-    'Class Period',
-    'Project ID',
-    'Project Name',
-    'Run ID',
-    'Start Date',
-    'End Date',
-    'Student Work ID',
-    'Server Timestamp',
-    'Client Timestamp',
-    'Node ID',
-    'Component ID',
-    'Component Part Number',
-    'Step Title',
-    'Component Type',
-    'Component Prompt',
-    'Student Data',
-    'Component Revision Counter',
-    'Is Submit',
-    'Submit Count',
-    'Item ID',
-    'Response'
-  ];
-  ideaLabel: string = 'Idea';
-  revisionCounter: any = {};
-  scoreLabel: string = 'Score';
+export class OpenResponseComponentDataExportStrategy extends AbstractComponentDataExportStrategy {
+  protected autoScoreLabel: string = 'Auto Score';
+  protected ideaLabel: string = 'Idea';
+  protected scoreLabel: string = 'Score';
 
   constructor(
     protected nodeId: string,
@@ -49,8 +15,10 @@ export class OpenResponseComponentDataExportStrategy extends ComponentDataExport
     super(nodeId, component, additionalParams);
   }
 
-  protected generateComponentHeaderRow(component: any, columnNameToNumber: any): string[] {
+  protected generateComponentHeaderRow(component: any): string[] {
     const headerRow = [...this.defaultColumnNames];
+    headerRow.push('Item ID');
+    headerRow.push('Response');
     if (this.isCRaterEnabled(component)) {
       const annotations = this.annotationService.getAnnotationsByNodeIdComponentId(
         this.nodeId,
@@ -59,7 +27,6 @@ export class OpenResponseComponentDataExportStrategy extends ComponentDataExport
       this.tryToAddIdeaColumnNames(headerRow, annotations);
       this.tryToAddScoreColumnNames(headerRow, annotations);
     }
-    this.populateColumnNameMappings(headerRow, columnNameToNumber);
     return headerRow;
   }
 
@@ -148,11 +115,7 @@ export class OpenResponseComponentDataExportStrategy extends ComponentDataExport
     columnNameToNumber: any,
     nodeId: string
   ): any[] {
-    let componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
-    this.sortByWorkgroupIdAndTimestamp(componentStates);
-    if (this.allOrLatest === 'latest') {
-      componentStates = this.getLatestRevisions(componentStates);
-    }
+    const componentStates = this.getComponentStates(component);
     const workRows = [];
     for (let r = 0; r < componentStates.length; r++) {
       const componentState = componentStates[r];
@@ -161,116 +124,33 @@ export class OpenResponseComponentDataExportStrategy extends ComponentDataExport
       this.setStudentInfo(row, columnNameToNumber, componentState);
       this.setRunInfo(row, columnNameToNumber, componentState);
       this.setComponentInfo(row, columnNameToNumber, nodeId, component);
-      this.setStudentWork(row, columnNameToNumber, componentState);
+      this.setStudentWork(row, columnNameToNumber, component, componentState);
       workRows.push(row);
     }
     return workRows;
   }
 
-  private getLatestRevisions(componentStates: ComponentState[]): ComponentState[] {
-    const latestRevisions = [];
-    const workgroupIdsFound = {};
-    for (let c = componentStates.length - 1; c >= 0; c--) {
-      const componentState = componentStates[c];
-      if (workgroupIdsFound[componentState.workgroupId] == null) {
-        latestRevisions.unshift(componentState);
-        workgroupIdsFound[componentState.workgroupId] = true;
-      }
-    }
-    return latestRevisions;
-  }
-
-  private sortByWorkgroupIdAndTimestamp(componentStates: any[]): any[] {
-    return componentStates.sort((a: any, b: any) => {
-      return a.workgroupId == b.workgroupId
-        ? a.serverSaveTime - b.serverSaveTime
-        : a.workgroupId - b.workgroupId;
-    });
-  }
-
-  private setComponentInfo(
+  protected setComponentInfo(
     row: any[],
     columnNameToNumber: any,
     nodeId: string,
     component: any
   ): void {
-    this.setColumnValue(row, columnNameToNumber, 'Node ID', nodeId);
-    this.setColumnValue(row, columnNameToNumber, 'Component ID', component.id);
-    this.setColumnValue(
-      row,
-      columnNameToNumber,
-      'Component Part Number',
-      this.projectService.getComponentPosition(nodeId, component.id) + 1
-    );
-    this.setColumnValue(
-      row,
-      columnNameToNumber,
-      'Step Title',
-      this.projectService.getNodePositionAndTitle(nodeId)
-    );
-    this.setColumnValue(row, columnNameToNumber, 'Component Type', component.type);
-    this.setColumnValue(row, columnNameToNumber, 'Component Prompt', component.prompt);
+    super.setComponentInfo(row, columnNameToNumber, nodeId, component);
     if (this.isCRaterEnabled(component)) {
       this.setColumnValue(row, columnNameToNumber, 'Item ID', component.cRater.itemId);
     }
   }
 
-  private setStudentWork(row: any[], columnNameToNumber: any, componentState: any): void {
-    this.setColumnValue(
-      row,
-      columnNameToNumber,
-      'Server Timestamp',
-      millisecondsToDateTime(componentState.serverSaveTime)
-    );
-    this.setColumnValue(
-      row,
-      columnNameToNumber,
-      'Client Timestamp',
-      millisecondsToDateTime(componentState.clientSaveTime)
-    );
-    this.setColumnValue(row, columnNameToNumber, 'Student Work ID', componentState.id);
-    this.setColumnValue(row, columnNameToNumber, 'Student Data', componentState.studentData);
+  protected setStudentWork(
+    row: any[],
+    columnNameToNumber: any,
+    component: any,
+    componentState: any
+  ): void {
+    super.setStudentWork(row, columnNameToNumber, component, componentState);
     this.setColumnValue(row, columnNameToNumber, 'Response', componentState.studentData.response);
-    this.incrementRevisionCounter(
-      componentState.workgroupId,
-      componentState.nodeId,
-      componentState.componentId
-    );
-    this.setColumnValue(
-      row,
-      columnNameToNumber,
-      'Component Revision Counter',
-      this.getRevisionCounter(
-        componentState.workgroupId,
-        componentState.nodeId,
-        componentState.componentId
-      )
-    );
-    this.setColumnValue(row, columnNameToNumber, 'Is Submit', componentState.isSubmit ? 1 : 0);
-    this.setColumnValue(
-      row,
-      columnNameToNumber,
-      'Submit Count',
-      componentState.studentData.submitCounter ? componentState.studentData.submitCounter : 0
-    );
     this.setAnnotationData(row, columnNameToNumber, componentState);
-  }
-
-  private getRevisionCounter(workgroupId: number, nodeId: string, componentId: string): number {
-    return this.revisionCounter[this.getRevisionCounterKey(workgroupId, nodeId, componentId)];
-  }
-
-  private incrementRevisionCounter(workgroupId: number, nodeId: string, componentId: string): void {
-    const key = this.getRevisionCounterKey(workgroupId, nodeId, componentId);
-    if (this.revisionCounter[key] == null) {
-      this.revisionCounter[key] = 1;
-    } else {
-      this.revisionCounter[key]++;
-    }
-  }
-
-  private getRevisionCounterKey(workgroupId: number, nodeId: string, componentId: string): string {
-    return `${workgroupId}-${nodeId}-${componentId}`;
   }
 
   private setAnnotationData(row: any[], columnNameToNumber: any, componentState: any): void {

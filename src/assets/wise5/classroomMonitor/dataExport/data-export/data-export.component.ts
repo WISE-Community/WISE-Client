@@ -19,7 +19,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { DiscussionComponentDataExportStrategy } from '../strategies/DiscussionComponentDataExportStrategy';
 import { LabelComponentDataExportStrategy } from '../strategies/LabelComponentDataExportStrategy';
-import { Component as WISEComponent } from '../../../common/Component';
 import { removeHTMLTags } from '../../../common/string/string';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 import { Choice } from '../../../components/match/choice';
@@ -1025,7 +1024,15 @@ export class DataExportComponent implements OnInit {
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       this.exportEmbeddedComponent(nodeId, component);
     } else if (component.type === 'Label') {
-      this.exportLabelComponent(nodeId, component);
+      this.dataExportContext.setStrategy(
+        new LabelComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'all'
+        )
+      );
+      this.dataExportContext.export();
     } else if (component.type === 'PeerChat') {
       this.dataExportContext.setStrategy(
         new PeerChatComponentDataExportStrategy(
@@ -1062,18 +1069,16 @@ export class DataExportComponent implements OnInit {
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       this.exportEmbeddedComponent(nodeId, component);
     } else if (component.type === 'Label') {
-      this.exportLabelComponent(nodeId, component);
+      this.dataExportContext.setStrategy(
+        new LabelComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'latest'
+        )
+      );
+      this.dataExportContext.export();
     }
-  }
-
-  private exportLabelComponent(nodeId: string, component: any): void {
-    this.dataExportContext.setStrategy(
-      new LabelComponentDataExportStrategy(
-        new WISEComponent(component, nodeId),
-        this.getComponentDataExportParams()
-      )
-    );
-    this.dataExportContext.export();
   }
 
   private getComponentDataExportParams(): ComponentDataExportParams {
