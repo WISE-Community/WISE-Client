@@ -7,6 +7,7 @@ import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
 import { Subscription } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
+import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
 
 @Component({
   selector: 'app-personal-library',
@@ -22,7 +23,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
   protected showArchived: boolean = false;
 
   protected numSelectedProjects: Signal<number> = computed(() => this.selectedProjects().length);
-  protected projectIdToIsSelected: Signal<any> = computed(() =>
+  protected projectIdToIsSelected: Signal<{ [key: number]: boolean }> = computed(() =>
     this.selectedProjects().reduce((accumulator, project) => {
       accumulator[project.id] = true;
       return accumulator;
@@ -133,8 +134,8 @@ export class PersonalLibraryComponent extends LibraryComponent {
     this.unselectAllProjects();
   }
 
-  protected projectSelectionChanged(event: any): void {
-    if (event.checked) {
+  protected updateSelectedProjects(event: ProjectSelectionEvent): void {
+    if (event.selected) {
       this.selectedProjects.update((selectedProjects) => {
         selectedProjects.push(event.project);
         return selectedProjects;
@@ -170,7 +171,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
   }
 
   protected selectAllProjects(selectAll: boolean): void {
-    this.selectedProjects.update(() => (selectAll ? this.getProjectsInView() : []));
+    this.selectedProjects.set(selectAll ? this.getProjectsInView() : []);
   }
 
   private getProjectsInView(): LibraryProject[] {

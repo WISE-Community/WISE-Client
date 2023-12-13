@@ -92,11 +92,11 @@ export class Project {
     return metadata;
   }
 
-  hasTag(tag: string) {
+  hasTag(tag: string): boolean {
     return this.tags.includes(tag);
   }
 
-  updateArchivedStatus(archived: boolean) {
+  updateArchivedStatus(archived: boolean): void {
     this.archived = archived;
     if (archived) {
       this.tags.push('archived');

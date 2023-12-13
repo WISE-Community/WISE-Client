@@ -16,8 +16,9 @@
       [(ngModel)]="checked"
       class="library-project__checkbox"
       color="primary"
-      aria-label="Select project"
-      i18n-aria-label
+      matTooltip="Select Unit"
+      matTooltipPosition="above"
+      i18n-matTooltip
       (click)="selectProject($event)"
     ></mat-checkbox>
   </div>

@@ -57,7 +57,7 @@
         [project]="project"
         [myUnit]="true"
         [checked]="projectIdToIsSelected()[project.id]"
-        (projectSelectionChanged)="projectSelectionChanged($event)"
+        (projectSelectionEvent)="updateSelectedProjects($event)"
         fxFlex.sm="50"
         fxFlex.md="33"
         fxFlex.gt-md="25"

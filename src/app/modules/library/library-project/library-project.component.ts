@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LibraryProject } from '../libraryProject';
 import { LibraryProjectDetailsComponent } from '../library-project-details/library-project-details.component';
 import { flash } from '../../../animations';
+import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
 
 @Component({
   selector: 'app-library-project',
@@ -24,7 +25,8 @@ export class LibraryProjectComponent implements OnInit {
   @Input() checked: boolean = false;
   @Input() myUnit: boolean = false;
   @Input() project: LibraryProject = new LibraryProject();
-  @Output() projectSelectionChanged: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  projectSelectionEvent: EventEmitter<ProjectSelectionEvent> = new EventEmitter<ProjectSelectionEvent>();
 
   animateDuration: string = '0s';
   animateDelay: string = '0s';
@@ -68,6 +70,6 @@ export class LibraryProjectComponent implements OnInit {
 
   protected selectProject(event: any): void {
     event.stopPropagation();
-    this.projectSelectionChanged.emit({ checked: event.target.checked, project: this.project });
+    this.projectSelectionEvent.emit({ selected: event.target.checked, project: this.project });
   }
 }
