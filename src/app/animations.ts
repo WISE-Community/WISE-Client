@@ -52,109 +52,64 @@ export const bounceIn = trigger('bounceIn', [
   )
 ]);
 
-export const flipInX = trigger('flipInX', [
-  state(
-    'void',
-    style({
-      opacity: 0,
-      backfaceVisibility: 'visible !important'
-    })
-  ),
-  state(
-    '*',
-    style({
-      opacity: 1,
-      backfaceVisibility: 'visible !important'
-    })
-  ),
-  transition(
-    'void => *',
-    [
-      animate(
-        '{{ duration }} {{ delay }}',
-        keyframes([
-          style({
-            transform: 'perspective(400px) rotate3d(1, 0, 0, 90deg)',
-            animationTimingFunction: 'ease-in',
-            opacity: 0,
-            offset: 0
-          }),
-          style({
-            transform: 'perspective(400px) rotate3d(1, 0, 0, -20deg)',
-            animationTimingFunction: 'ease-in',
-            opacity: 1,
-            offset: 0.4
-          }),
-          style({
-            transform: 'perspective(400px) rotate3d(1, 0, 0, 10deg)',
-            offset: 0.6
-          }),
-          style({
-            transform: 'perspective(400px) rotate3d(1, 0, 0, -5deg)',
-            offset: 0.8
-          }),
-          style({
-            transform: 'perspective(400px)',
-            offset: 1
-          })
-        ])
-      )
-    ],
-    { params: { duration: '1s', delay: '0s' } }
-  )
-]);
+export const flipInX = triggerFlipIn('X');
+export const flipInY = triggerFlipIn('Y');
 
-export const flipInY = trigger('flipInY', [
-  state(
-    'void',
-    style({
-      opacity: 0,
-      backfaceVisibility: 'visible !important'
-    })
-  ),
-  state(
-    '*',
-    style({
-      opacity: 1,
-      backfaceVisibility: 'visible !important'
-    })
-  ),
-  transition(
-    'void => *',
-    [
-      animate(
-        '{{ duration }} {{ delay }}',
-        keyframes([
-          style({
-            transform: 'perspective(400px) rotate3d(0, 1, 0, 90deg)',
-            animationTimingFunction: 'ease-in',
-            opacity: 0,
-            offset: 0
-          }),
-          style({
-            transform: 'perspective(400px) rotate3d(0, 1, 0, -20deg)',
-            animationTimingFunction: 'ease-in',
-            opacity: 1,
-            offset: 0.4
-          }),
-          style({
-            transform: 'perspective(400px) rotate3d(0, 1, 0, 10deg)',
-            offset: 0.6
-          }),
-          style({
-            transform: 'perspective(400px) rotate3d(0, 1, 0, -5deg)',
-            offset: 0.8
-          }),
-          style({
-            transform: 'perspective(400px)',
-            offset: 1
-          })
-        ])
-      )
-    ],
-    { params: { duration: '1s', delay: '0s' } }
-  )
-]);
+function triggerFlipIn(axis: 'X' | 'Y') {
+  const x = axis == 'X' ? 1 : 0;
+  const y = 1 - x;
+  return trigger(`flipIn${axis}`, [
+    state(
+      'void',
+      style({
+        opacity: 0,
+        backfaceVisibility: 'visible !important'
+      })
+    ),
+    state(
+      '*',
+      style({
+        opacity: 1,
+        backfaceVisibility: 'visible !important'
+      })
+    ),
+    transition(
+      'void => *',
+      [
+        animate(
+          '{{ duration }} {{ delay }}',
+          keyframes([
+            style({
+              transform: `perspective(400px) rotate3d(${x}, ${y}, 0, 90deg)`,
+              animationTimingFunction: 'ease-in',
+              opacity: 0,
+              offset: 0
+            }),
+            style({
+              transform: `perspective(400px) rotate3d(${x}, ${y}, 0, -20deg)`,
+              animationTimingFunction: 'ease-in',
+              opacity: 1,
+              offset: 0.4
+            }),
+            style({
+              transform: `perspective(400px) rotate3d(${x}, ${y}, 0, 10deg)`,
+              offset: 0.6
+            }),
+            style({
+              transform: `perspective(400px) rotate3d(${x}, ${y}, 0, -5deg)`,
+              offset: 0.8
+            }),
+            style({
+              transform: 'perspective(400px)',
+              offset: 1
+            })
+          ])
+        )
+      ],
+      { params: { duration: '1s', delay: '0s' } }
+    )
+  ]);
+}
 
 export const rotateIn = trigger('rotateIn', [
   state(
