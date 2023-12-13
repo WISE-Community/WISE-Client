@@ -1525,40 +1525,7 @@ export class TeacherProjectService extends ProjectService {
     }
 
     const parentIdOfNodeToRemove = this.getParentGroupId(nodeId);
-    const parentGroup = this.getNodeById(parentIdOfNodeToRemove);
-
-    // update the start id if we are removing the start node of a group
-    if (parentGroup != null) {
-      const parentGroupStartId = parentGroup.startId;
-      if (parentGroupStartId != null) {
-        if (parentGroupStartId === nodeId) {
-          // the node we are removing is the start node
-
-          if (nodeToRemoveTransitions != null && nodeToRemoveTransitions.length > 0) {
-            for (let nodeToRemoveTransition of nodeToRemoveTransitions) {
-              if (nodeToRemoveTransition != null) {
-                const toNodeId = nodeToRemoveTransition.to;
-                if (toNodeId != null) {
-                  /*
-                   * we need to check that the to node id is in the
-                   * same group. some transitions point to a node id
-                   * in the next group which we would not want to use
-                   * for the start id.
-                   */
-                  if (this.getParentGroupId(toNodeId) == parentIdOfNodeToRemove) {
-                    // set the new start id
-                    parentGroup.startId = toNodeId;
-                  }
-                }
-              }
-            }
-          } else {
-            // there are no transitions so we will have an empty start id
-            parentGroup.startId = '';
-          }
-        }
-      }
-    }
+    this.updateParentGroupStartId(nodeId);
 
     for (let n = 0; n < nodesByToNodeId.length; n++) {
       const node = nodesByToNodeId[n];
@@ -1776,6 +1743,30 @@ export class TeacherProjectService extends ProjectService {
 
     if (this.isGroupNode(nodeId)) {
       this.removeTransitionsOutOfGroup(nodeId);
+    }
+  }
+
+  /**
+   * Update the parent group start id if the node we are removing is the start id
+   * @param nodeId The node we are removing
+   */
+  private updateParentGroupStartId(nodeId: string): void {
+    const parentGroup = this.getParentGroup(nodeId);
+    if (parentGroup != null && parentGroup.startId === nodeId) {
+      const transitions = this.getTransitionsFromNode(nodeId);
+      if (transitions.length > 0) {
+        for (const transition of transitions) {
+          const toNodeId = transition.to;
+          // Make sure the to node id is in the same group because a step can transition to a step
+          // in a different group. If the to node id is in a different group, we would not want to
+          // use it as the start id of this group.
+          if (this.getParentGroupId(toNodeId) === parentGroup.id) {
+            parentGroup.startId = toNodeId;
+          }
+        }
+      } else {
+        parentGroup.startId = '';
+      }
     }
   }
 

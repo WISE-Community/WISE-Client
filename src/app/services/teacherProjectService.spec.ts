@@ -7,8 +7,10 @@ import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVeh
 import teacherProjctJSON_import from './sampleData/curriculum/TeacherProjectServiceSpec.project.json';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import { copy } from '../../assets/wise5/common/object/object';
+import { DeleteNodeService } from '../../assets/wise5/services/deleteNodeService';
 let service: TeacherProjectService;
 let configService: ConfigService;
+let deleteNodeService: DeleteNodeService;
 let http: HttpTestingController;
 let demoProjectJSON: any;
 let scootersProjectJSON: any;
@@ -27,11 +29,12 @@ describe('TeacherProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
-      providers: [TeacherProjectService]
+      providers: [DeleteNodeService, TeacherProjectService]
     });
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(TeacherProjectService);
     configService = TestBed.inject(ConfigService);
+    deleteNodeService = TestBed.inject(DeleteNodeService);
     demoProjectJSON = copy(demoProjectJSON_import);
     scootersProjectJSON = copy(scootersProjectJSON_import);
     teacherProjectJSON = copy(teacherProjctJSON_import);
@@ -77,6 +80,7 @@ describe('TeacherProjectService', () => {
   replaceIds();
   moveObjectUp();
   moveObjectDown();
+  removeNodeIdFromTransitions();
 });
 
 function createNormalSpy() {
@@ -790,5 +794,26 @@ function moveObjectDownIsBottomElement() {
   it('should not move an object down when the object is the bottom element', () => {
     service.moveObjectDown(objects, 2);
     expect(objects).toEqual([1, 2, 3]);
+  });
+}
+
+function removeNodeIdFromTransitions() {
+  describe('removeNodeIdFromTransitions()', () => {
+    beforeEach(() => {
+      service.setProject(demoProjectJSON);
+    });
+    describe('remove the first step in the lesson', () => {
+      it('changes the start id of the parent group to the next step', () => {
+        deleteNodeService.deleteNode('node790');
+        expect(service.getNodeById('group3').startId).toEqual('node791');
+      });
+    });
+    describe('remove all steps in the lesson', () => {
+      it('changes the start id of the parent group to empty string', () => {
+        deleteNodeService.deleteNode('node790');
+        deleteNodeService.deleteNode('node791');
+        expect(service.getNodeById('group3').startId).toEqual('');
+      });
+    });
   });
 }
