@@ -13,11 +13,12 @@
   <mat-divider></mat-divider>
   <div fxLayoutAlign="start center" fxLayout.xs="column" fxLayoutGap="8px">
     <div fxLayoutAlign="center center" fxLayoutGap="4px" fxFlexAlign.xs="start" fxFlexOrder.xs="1">
-      <select-all-projects-checkbox
-        [selectedAllProjects]="selectedAllProjects()"
-        [selectedSomeProjects]="selectedSomeProjects()"
-        (selectAllProjectsEvent)="selectAllProjects($event)"
-      ></select-all-projects-checkbox>
+      <select-all-items-checkbox
+        [label]="projectsLabel"
+        [selectedAllItems]="selectedAllProjects()"
+        [selectedSomeItems]="selectedSomeProjects()"
+        (selectAllItemsEvent)="selectAllProjects($event)"
+      ></select-all-items-checkbox>
       <span *ngIf="numSelectedProjects() > 0" class="secondary-text" i18n>
         {{ numSelectedProjects() }} selected
       </span>
@@ -25,9 +26,7 @@
         mat-icon-button
         *ngIf="!showArchived && selectedProjects().length > 0"
         (click)="archiveSelectedProjects(true)"
-        aria-label="Archive selected units"
-        i18n-aria-label
-        matTooltip="Archive"
+        matTooltip="Archive selected units"
         matTooltipPosition="above"
         i18n-matTooltip
       >
@@ -37,9 +36,7 @@
         mat-icon-button
         *ngIf="showArchived && selectedProjects().length > 0"
         (click)="archiveSelectedProjects(false)"
-        aria-label="Restore selected units"
-        i18n-aria-label
-        matTooltip="Restore"
+        matTooltip="Restore selected units"
         matTooltipPosition="above"
         i18n-matTooltip
       >

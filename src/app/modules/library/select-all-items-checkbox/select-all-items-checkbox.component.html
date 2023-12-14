@@ -1,9 +1,9 @@
 <mat-checkbox
   color="primary"
-  [checked]="selectedAllProjects"
-  [indeterminate]="selectedSomeProjects"
+  [checked]="selectedAllItems"
+  [indeterminate]="selectedSomeItems"
   (click)="select()"
-  matTooltip="Select All Units"
+  [matTooltip]="'Select all ' + label"
   matTooltipPosition="above"
   i18n-matTooltip
 ></mat-checkbox>

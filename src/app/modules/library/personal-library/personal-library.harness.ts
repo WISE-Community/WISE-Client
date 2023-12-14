@@ -2,7 +2,7 @@ import { ComponentHarness } from '@angular/cdk/testing';
 import { MatSelectHarness } from '@angular/material/select/testing';
 import { LibraryProjectHarness } from '../library-project/library-project.harness';
 import { MatButtonHarness } from '@angular/material/button/testing';
-import { SelectAllProjectsCheckboxHarness } from '../select-all-projects-checkbox/select-all-projects-checkbox.harness';
+import { SelectAllItemsCheckboxHarness } from '../select-all-items-checkbox/select-all-items-checkbox.harness';
 import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
 import { MatPaginatorHarness } from '@angular/material/paginator/testing';
 
@@ -10,15 +10,15 @@ export class PersonalLibraryHarness extends ComponentHarness {
   static hostSelector = 'app-personal-library';
   protected getViewSelect = this.locatorFor(MatSelectHarness);
   getArchiveButton = this.locatorFor(
-    MatButtonHarness.with({ selector: '[aria-label="Archive selected units"]' })
+    MatButtonHarness.with({ selector: '[matTooltip="Archive selected units"]' })
   );
   getUnarchiveButton = this.locatorFor(
-    MatButtonHarness.with({ selector: '[aria-label="Restore selected units"]' })
+    MatButtonHarness.with({ selector: '[matTooltip="Restore selected units"]' })
   );
   getPaginator = this.locatorFor(MatPaginatorHarness);
 
   async getSelectAllCheckbox(): Promise<MatCheckboxHarness> {
-    return (await this.locatorFor(SelectAllProjectsCheckboxHarness)()).getCheckbox();
+    return (await this.locatorFor(SelectAllItemsCheckboxHarness)()).getCheckbox();
   }
 
   async getProjectsInView(): Promise<LibraryProjectHarness[]> {

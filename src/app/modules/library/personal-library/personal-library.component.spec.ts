@@ -17,7 +17,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { LibraryProjectComponent } from '../library-project/library-project.component';
-import { SelectAllProjectsCheckboxComponent } from '../select-all-projects-checkbox/select-all-projects-checkbox.component';
+import { SelectAllItemsCheckboxComponent } from '../select-all-items-checkbox/select-all-items-checkbox.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ArchiveProjectResponse } from '../../../domain/archiveProjectResponse';
 import { of } from 'rxjs';
@@ -53,7 +53,7 @@ describe('PersonalLibraryComponent', () => {
         declarations: [
           LibraryProjectComponent,
           PersonalLibraryComponent,
-          SelectAllProjectsCheckboxComponent
+          SelectAllItemsCheckboxComponent
         ],
         providers: [ArchiveProjectService, LibraryService],
         schemas: [NO_ERRORS_SCHEMA]

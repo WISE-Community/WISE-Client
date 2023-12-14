@@ -16,26 +16,26 @@ import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
 })
 export class PersonalLibraryComponent extends LibraryComponent {
   filteredProjects: LibraryProject[] = [];
-  protected personalProjects: LibraryProject[] = [];
-  projects: LibraryProject[] = [];
-  protected selectedProjects: WritableSignal<LibraryProject[]> = signal([]);
-  protected sharedProjects: LibraryProject[] = [];
-  protected showArchived: boolean = false;
-
   protected numSelectedProjects: Signal<number> = computed(() => this.selectedProjects().length);
+  protected personalProjects: LibraryProject[] = [];
   protected projectIdToIsSelected: Signal<{ [key: number]: boolean }> = computed(() =>
     this.selectedProjects().reduce((accumulator, project) => {
       accumulator[project.id] = true;
       return accumulator;
     }, {})
   );
+  projects: LibraryProject[] = [];
+  protected projectsLabel: string = $localize`units`;
   protected selectedAllProjects: Signal<boolean> = computed(() => {
     const numSelectedProjects = this.numSelectedProjects();
     return numSelectedProjects !== 0 && numSelectedProjects === this.getProjectsInView().length;
   });
+  protected selectedProjects: WritableSignal<LibraryProject[]> = signal([]);
   protected selectedSomeProjects: Signal<boolean> = computed(
     () => this.numSelectedProjects() !== 0 && !this.selectedAllProjects()
   );
+  protected sharedProjects: LibraryProject[] = [];
+  protected showArchived: boolean = false;
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
@@ -120,7 +120,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
   public filterUpdated(filterValues: ProjectFilterValues = null): void {
     super.filterUpdated(filterValues);
     this.filteredProjects = this.filteredProjects.filter(
-      (project) => project.tags.includes('archived') == this.showArchived
+      (project) => project.hasTag('archived') == this.showArchived
     );
   }
 
