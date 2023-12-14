@@ -20,4 +20,8 @@ export class SaveIndicatorComponent implements OnInit {
       })
     );
   }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 }
