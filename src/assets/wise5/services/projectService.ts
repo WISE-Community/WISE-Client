@@ -1712,8 +1712,7 @@ export class ProjectService {
         currentStepNumber,
         branchLetterCode
       );
-    } else {
-      // this activity doesn't have a start step so we will look for a transition
+    } else if (node.transitionLogic != null) {
       for (const transition of node.transitionLogic.transitions) {
         // calculate the node number for the next node and all its children steps
         this.calculateNodeNumbersHelper(
