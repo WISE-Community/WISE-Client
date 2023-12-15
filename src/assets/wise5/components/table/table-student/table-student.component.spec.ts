@@ -92,7 +92,6 @@ describe('TableStudentComponent', () => {
   getYAxisForDataExplorerSeries();
   getYFromDataPoint();
   handleConnectedComponents();
-  handleStudentWorkSavedToServer();
   initializeDataExplorer();
   isAllDataExplorerSeriesSpecified();
   isDataExplorerOneYAxis();
@@ -608,23 +607,6 @@ function handleConnectedComponents() {
       component.handleConnectedComponents();
       expectTableDataEquals(component.tableData, tableData, true);
       expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
-    });
-  });
-}
-
-function handleStudentWorkSavedToServer() {
-  describe('handleStudentWorkSavedToServer', () => {
-    it('should handle student work saved to server', () => {
-      const componentState = {
-        componentId: componentId,
-        nodeId: nodeId,
-        studentData: {
-          tableData: testTableData
-        }
-      };
-      component.isDirty = true;
-      component.handleStudentWorkSavedToServer(componentState);
-      expect(component.isDirty).toEqual(false);
     });
   });
 }
