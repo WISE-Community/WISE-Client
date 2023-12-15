@@ -15,10 +15,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentTypeSelectorComponent } from '../component-type-selector/component-type-selector.component';
 import { ComponentInfoDialogHarness } from './component-info-dialog.harness';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MultipleChoiceInfo } from '../../../components/multipleChoice/MultipleChoiceInfo';
+import { OutsideUrlInfo } from '../../../components/outsideURL/OutsideUrlInfo';
+import { OpenResponseInfo } from '../../../components/openResponse/OpenResponseInfo';
+import { ComponentInfo } from '../../../components/ComponentInfo';
 
 let component: ComponentInfoDialogComponent;
-let componentInfoDialogHarness: ComponentInfoDialogHarness;
 let fixture: ComponentFixture<ComponentInfoDialogComponent>;
+let harness: ComponentInfoDialogHarness;
+let multipleChoiceInfo = new MultipleChoiceInfo();
+let openResponseInfo = new OpenResponseInfo();
+let outsideUrlInfo = new OutsideUrlInfo();
 
 describe('ComponentInfoDialogComponent', () => {
   beforeEach(async () => {
@@ -37,6 +45,7 @@ describe('ComponentInfoDialogComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatSelectModule,
+        MatTabsModule,
         PreviewComponentModule
       ],
       providers: [ComponentInfoService, { provide: MAT_DIALOG_DATA, useValue: 'OpenResponse' }]
@@ -54,20 +63,85 @@ describe('ComponentInfoDialogComponent', () => {
       typesetPromise: () => {}
     };
     fixture.detectChanges();
-    componentInfoDialogHarness = await TestbedHarnessEnvironment.harnessForFixture(
+    harness = await TestbedHarnessEnvironment.harnessForFixture(
       fixture,
       ComponentInfoDialogHarness
     );
   });
-  displayComponent();
+  displayComponentWhenLoaded();
+  goToPreviousComponent();
+  goToNextComponent();
+  selectComponent();
+  selectComponentWithMultipleExamples();
 });
 
-function displayComponent() {
-  describe('display component', async () => {
-    it('displays the component description', async () => {
-      expect(await (await componentInfoDialogHarness.getDescription()).text()).toEqual(
-        'Students type a response to a question or prompt.'
-      );
+function displayComponentWhenLoaded(): void {
+  describe('initially loads with a component type', () => {
+    it('displays the component', async () => {
+      await expectComponentType(openResponseInfo);
     });
   });
+}
+
+function goToPreviousComponent(): void {
+  describe('go to previous component', () => {
+    it('displays the previous component', async () => {
+      const componentTypeSelector = await harness.getComponentTypeSelector();
+      (await componentTypeSelector.getPreviousComponentTypeButton()).click();
+      await expectComponentType(multipleChoiceInfo);
+    });
+  });
+}
+
+function goToNextComponent(): void {
+  describe('go to next component', () => {
+    it('displays the next component', async () => {
+      const componentTypeSelector = await harness.getComponentTypeSelector();
+      (await componentTypeSelector.getNextComponentTypeButton()).click();
+      await expectComponentType(outsideUrlInfo);
+    });
+  });
+}
+
+function selectComponent(): void {
+  describe('select component', () => {
+    it('displays the selected component', async () => {
+      await selectComponentType('Multiple Choice');
+      await expectComponentType(multipleChoiceInfo);
+    });
+  });
+}
+
+function selectComponentWithMultipleExamples(): void {
+  describe('change to component type with multiple examples', () => {
+    it('displays multiple examples', async () => {
+      await selectComponentType('Multiple Choice');
+      const tabGroup = await harness.getTabGroup();
+      const expectedLabels = multipleChoiceInfo
+        .getPreviewExamples()
+        .map((example: any) => example.label);
+      await expectTabLabels(await tabGroup.getTabs(), expectedLabels);
+    });
+  });
+}
+
+async function selectComponentType(componentType: string): Promise<void> {
+  const componentTypeSelector = await harness.getComponentTypeSelector();
+  const select = await componentTypeSelector.getComponentTypeSelect();
+  await select.clickOptions({ text: componentType });
+}
+
+async function expectComponentType(componentInfo: ComponentInfo): Promise<void> {
+  const componentTypeSelector = await harness.getComponentTypeSelector();
+  const select = await componentTypeSelector.getComponentTypeSelect();
+  expect(await select.getValueText()).toEqual(componentInfo.getLabel());
+  const description = await harness.getDescription();
+  expect(await description.text()).toEqual(componentInfo.getDescription());
+}
+
+async function expectTabLabels(tabs: any[], expectedLabels: string[]): Promise<void> {
+  for (let i = 0; i < tabs.length; i++) {
+    const tabLabel = await tabs[i].getLabel();
+    expect(tabLabel).toEqual(expectedLabels[i]);
+  }
 }
