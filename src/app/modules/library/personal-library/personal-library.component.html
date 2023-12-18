@@ -15,9 +15,10 @@
     <div fxLayoutAlign="center center" fxLayoutGap="4px" fxFlexAlign.xs="start" fxFlexOrder.xs="1">
       <select-all-items-checkbox
         [label]="projectsLabel"
-        [selectedAllItems]="selectedAllProjects()"
-        [selectedSomeItems]="selectedSomeProjects()"
-        (selectAllItemsEvent)="selectAllProjects($event)"
+        [numAllItems]="numProjectsInView"
+        [numSelectedItems]="numSelectedProjects()"
+        (selectAllItemsEvent)="selectAllProjects()"
+        (selectNoItemsEvent)="unselectAllProjects()"
       ></select-all-items-checkbox>
       <span *ngIf="numSelectedProjects() > 0" class="secondary-text" i18n>
         {{ numSelectedProjects() }} selected
