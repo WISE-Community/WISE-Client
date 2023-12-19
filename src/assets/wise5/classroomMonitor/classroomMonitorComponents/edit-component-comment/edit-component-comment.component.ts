@@ -71,7 +71,7 @@ export class EditComponentCommentComponent {
     );
     this.annotationService.saveAnnotation(annotation).then(() => {
       this.setIsDirty(false);
-      this.notificationService.showSavedMessage($localize`Saved Comment`);
+      this.notificationService.showSavedMessage($localize`Saved comment`);
     });
   }
 

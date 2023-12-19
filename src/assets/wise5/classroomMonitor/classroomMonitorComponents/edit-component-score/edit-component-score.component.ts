@@ -62,7 +62,7 @@ export class EditComponentScoreComponent {
       new Date().getTime()
     );
     this.annotationService.saveAnnotation(annotation).then(() => {
-      this.notificationService.showSavedMessage($localize`Saved Score`);
+      this.notificationService.showSavedMessage($localize`Saved score`);
     });
   }
 

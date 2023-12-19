@@ -12656,8 +12656,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1043824604272788384" datatype="html">
-        <source>Saved Comment</source>
+      <trans-unit id="4288751301092959187" datatype="html">
+        <source>Saved comment</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-comment/edit-component-comment.component.ts</context>
           <context context-type="linenumber">74</context>
@@ -12684,8 +12684,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3896680733357333416" datatype="html">
-        <source>Saved Score</source>
+      <trans-unit id="6225667577278887616" datatype="html">
+        <source>Saved score</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component.ts</context>
           <context context-type="linenumber">65</context>
