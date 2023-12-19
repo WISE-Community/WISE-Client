@@ -67,7 +67,7 @@ function saveScore() {
       expect(createAnnotationSpy).toHaveBeenCalled();
       expect(saveAnnotationSpy).toHaveBeenCalledWith(annotation);
       fixture.whenStable().then(() => {
-        expect(notificationShowSavedMessageSpy).toHaveBeenCalledWith('Saved Score');
+        expect(notificationShowSavedMessageSpy).toHaveBeenCalledWith('Saved score');
       });
     });
   });

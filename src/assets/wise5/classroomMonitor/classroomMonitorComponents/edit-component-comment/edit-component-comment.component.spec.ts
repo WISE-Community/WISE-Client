@@ -44,7 +44,7 @@ function saveComment() {
       expect(createAnnotationSpy).toHaveBeenCalled();
       expect(saveAnnotationSpy).toHaveBeenCalledWith(annotation);
       fixture.whenStable().then(() => {
-        expect(notificationShowSavedMessageSpy).toHaveBeenCalledWith('Saved Comment');
+        expect(notificationShowSavedMessageSpy).toHaveBeenCalledWith('Saved comment');
       });
     });
   });
