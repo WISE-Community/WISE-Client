@@ -1,0 +1,11 @@
+<div fxLayout="row wrap" fxLayoutAlign="start center">
+  <mat-spinner
+    *ngIf="globalMessage.isProgressIndicatorVisible"
+    [mode]="'indeterminate'"
+    [diameter]="24"
+  >
+  </mat-spinner>
+  <span *ngIf="globalMessage.text" class="component__actions__info mat-small global-message">
+    {{ globalMessage.text }} {{ globalMessage.time | date: 'medium' }}
+  </span>
+</div>

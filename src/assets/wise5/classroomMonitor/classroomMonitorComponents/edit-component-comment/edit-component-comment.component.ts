@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { AnnotationService } from '../../../services/annotationService';
+import { NotificationService } from '../../../services/notificationService';
 
 @Component({
   selector: 'edit-component-comment',
@@ -23,31 +24,37 @@ export class EditComponentCommentComponent {
   isDirty: boolean;
   subscriptions: Subscription = new Subscription();
 
-  constructor(private AnnotationService: AnnotationService) {}
+  constructor(
+    private annotationService: AnnotationService,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {
     this.subscriptions.add(
       this.commentChanged
         .pipe(
-          tap(() => this.setIsDirty(true)),
-          debounceTime(5000),
-          distinctUntilChanged()
+          debounceTime(1000),
+          distinctUntilChanged(),
+          tap(() => {
+            this.setIsDirty(true);
+            this.notificationService.showSavingMessage();
+          })
         )
         .subscribe(() => {
-          this.saveComment();
+          this.saveComment(this.comment);
         })
     );
   }
 
   ngOnDestroy() {
     if (this.isDirty) {
-      this.saveComment();
+      this.saveComment(this.comment);
     }
     this.subscriptions.unsubscribe();
   }
 
-  saveComment() {
-    const annotation = this.AnnotationService.createAnnotation(
+  saveComment(comment: string): void {
+    const annotation = this.annotationService.createAnnotation(
       null,
       this.runId,
       this.periodId,
@@ -59,10 +66,13 @@ export class EditComponentCommentComponent {
       null,
       null,
       'comment',
-      { value: this.comment },
+      { value: comment },
       new Date().getTime()
     );
-    this.AnnotationService.saveAnnotation(annotation).then(() => this.setIsDirty(false));
+    this.annotationService.saveAnnotation(annotation).then(() => {
+      this.setIsDirty(false);
+      this.notificationService.showSavedMessage($localize`Saved comment`);
+    });
   }
 
   setIsDirty(isDirty: boolean) {
