@@ -404,7 +404,7 @@ export abstract class ComponentStudent {
     this.createComponentState(action).then((componentState: any) => {
       this.StudentDataService.setDummyIdIntoLocalId(componentState);
       this.StudentDataService.setDummyServerSaveTimeIntoLocalServerSaveTime(componentState);
-      this.handleStudentWorkSavedToServer({ studentWork: componentState });
+      this.handleStudentWorkSavedToServer(componentState);
     });
   }
 

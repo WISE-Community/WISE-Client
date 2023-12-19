@@ -275,14 +275,6 @@ export class TableStudent extends ComponentStudent {
     }
   }
 
-  handleStudentWorkSavedToServer(componentState: any): void {
-    if (this.isForThisComponent(componentState)) {
-      this.isDirty = false;
-      this.emitComponentDirty(false);
-      this.latestComponentState = componentState;
-    }
-  }
-
   /**
    * Get a copy of the table data
    * @param tableData the table data to copy
