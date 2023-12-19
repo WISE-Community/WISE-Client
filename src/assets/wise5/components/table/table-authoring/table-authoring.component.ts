@@ -299,11 +299,9 @@ export class TableAuthoring extends AbstractComponentAuthoring {
     const columnCellSizes = {};
     const tableData = componentContent.tableData;
     const firstRow = tableData[0];
-    if (firstRow != null) {
-      for (let x = 0; x < firstRow.length; x++) {
-        const cell = firstRow[x];
-        columnCellSizes[x] = cell.size;
-      }
+    for (let x = 0; x < firstRow.length; x++) {
+      const cell = firstRow[x];
+      columnCellSizes[x] = cell.size;
     }
     return columnCellSizes;
   }
@@ -319,11 +317,9 @@ export class TableAuthoring extends AbstractComponentAuthoring {
   private setColumnCellSize(column: number, size: number): void {
     const tableData = this.componentContent.tableData;
     const firstRow = tableData[0];
-    if (firstRow != null) {
-      const cell = firstRow[column];
-      if (cell != null) {
-        cell.size = size;
-      }
+    const cell = firstRow[column];
+    if (cell != null) {
+      cell.size = size;
     }
     this.componentChanged();
   }
@@ -331,11 +327,9 @@ export class TableAuthoring extends AbstractComponentAuthoring {
   private parseFrozenColumns(componentContent: any): any {
     const frozenColumns = {};
     const firstRow = componentContent.tableData[0];
-    if (firstRow != null) {
-      for (const key in firstRow) {
-        const cell = firstRow[key];
-        frozenColumns[key] = cell.frozen;
-      }
+    for (const key in firstRow) {
+      const cell = firstRow[key];
+      frozenColumns[key] = cell.frozen;
     }
     this.frozenColumnsLimitReached = this.isfrozenColumnsLimitReached();
     return frozenColumns;
@@ -344,11 +338,9 @@ export class TableAuthoring extends AbstractComponentAuthoring {
   frozenColumnsChanged(index: number): void {
     let frozen = this.frozenColumns[index];
     const firstRow = this.componentContent.tableData[0];
-    if (firstRow != null) {
-      const cell = firstRow[index];
-      if (cell != null) {
-        cell.frozen = frozen;
-      }
+    const cell = firstRow[index];
+    if (cell != null) {
+      cell.frozen = frozen;
     }
     this.componentChanged();
     this.frozenColumnsLimitReached = this.isfrozenColumnsLimitReached();
@@ -356,9 +348,6 @@ export class TableAuthoring extends AbstractComponentAuthoring {
 
   private isfrozenColumnsLimitReached(): boolean {
     const firstRow = this.componentContent.tableData[0];
-    if (firstRow == null) {
-      return false;
-    }
     let count = 0;
     for (const key in firstRow) {
       if (firstRow[key].frozen) {
@@ -380,5 +369,9 @@ export class TableAuthoring extends AbstractComponentAuthoring {
   connectedComponentTypeChanged(connectedComponent) {
     this.automaticallySetConnectedComponentFieldsIfPossible(connectedComponent);
     this.componentChanged();
+  }
+
+  isNumberChar(event: any): boolean {
+    return event.charCode >= 48 && event.charCode <= 57;
   }
 }
