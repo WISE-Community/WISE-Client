@@ -10,7 +10,7 @@
       type="number"
       min="1"
       [(ngModel)]="componentContent.numColumns"
-      (ngModelChange)="numColumnsChange.next($event)"
+      (ngModelChange)="numColumnsChanged($event)"
       (keypress)="isNumberChar($event)"
     />
   </mat-form-field>
@@ -21,7 +21,7 @@
       type="number"
       min="1"
       [(ngModel)]="componentContent.numRows"
-      (ngModelChange)="numRowsChange.next($event)"
+      (ngModelChange)="numRowsChanged($event)"
       (keypress)="isNumberChar($event)"
     />
   </mat-form-field>
@@ -67,6 +67,7 @@
             color="primary"
             class="column-buttons"
             (click)="deleteColumn(columnIndex)"
+            [disabled]="componentContent.numColumns === 1"
             matTooltip="Delete Column"
             matTooltipPosition="above"
             i18n-matTooltip
@@ -113,6 +114,7 @@
           color="primary"
           class="row-buttons"
           (click)="deleteRow(rowIndex)"
+          [disabled]="componentContent.numRows === 1"
           matTooltip="Delete Row"
           matTooltipPosition="above"
           i18n-matTooltip

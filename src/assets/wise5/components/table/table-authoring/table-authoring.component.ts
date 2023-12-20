@@ -371,7 +371,23 @@ export class TableAuthoring extends AbstractComponentAuthoring {
     this.componentChanged();
   }
 
-  isNumberChar(event: any): boolean {
+  protected numColumnsChanged(value: number): void {
+    const newValue = this.validateTableDimensionValue(value);
+    this.componentContent.numColumns = newValue;
+    this.numColumnsChange.next(newValue);
+  }
+
+  protected numRowsChanged(value: number): void {
+    const newValue = this.validateTableDimensionValue(value);
+    this.componentContent.numRows = newValue;
+    this.numRowsChange.next(newValue);
+  }
+
+  private validateTableDimensionValue(value: number): number {
+    return value < 1 || value == null ? 1 : value;
+  }
+
+  protected isNumberChar(event: any): boolean {
     return event.charCode >= 48 && event.charCode <= 57;
   }
 }
