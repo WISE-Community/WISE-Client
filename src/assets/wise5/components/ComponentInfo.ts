@@ -1,7 +1,7 @@
 export abstract class ComponentInfo {
   protected abstract description: string;
   protected abstract label: string;
-  protected abstract previewContent: any;
+  protected abstract previewExamples: any[];
 
   getDescription(): string {
     return this.description;
@@ -11,7 +11,7 @@ export abstract class ComponentInfo {
     return this.label;
   }
 
-  getPreviewContent(): any {
-    return this.previewContent;
+  getPreviewExamples(): any[] {
+    return this.previewExamples;
   }
 }

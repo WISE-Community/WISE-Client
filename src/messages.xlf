@@ -295,7 +295,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-info-dialog/component-info-dialog.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/preview-component-dialog/preview-component-dialog.component.html</context>
@@ -2067,10 +2067,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">89</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-info-dialog/component-info-dialog.component.html</context>
-          <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
@@ -9769,15 +9765,18 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6db909a826f1878ad78bf853a62b6cc5cbda3d3f" datatype="html">
-        <source>Example</source>
+      <trans-unit id="4a22c6843133f0b0d7dc0d28f864f2f90c1de7ad" datatype="html">
+        <source>Description:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-info-dialog/component-info-dialog.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">10</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="5473e36f5102e2ae22ce4c6620cacc40cc98da95" datatype="html">
+        <source>Example:</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">184</context>
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-info-dialog/component-info-dialog.component.html</context>
+          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7e3335111c33faf6526597a2b84893369b11bc60" datatype="html">
@@ -14387,49 +14386,49 @@ Are you sure you want to proceed?</source>
         <source>Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7865202073915909645" datatype="html">
         <source>One Workgroup Per Row</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">163</context>
+          <context context-type="linenumber">162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="789970879723970594" datatype="html">
         <source>Latest Student Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">165</context>
+          <context context-type="linenumber">164</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6593306077428507515" datatype="html">
         <source>All Student Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">167</context>
+          <context context-type="linenumber">166</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5729418620241283277" datatype="html">
         <source>Events</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">168</context>
         </context-group>
       </trans-unit>
       <trans-unit id="347166173746466674" datatype="html">
         <source>Raw Data</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">171</context>
+          <context context-type="linenumber">170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="456492495567778711" datatype="html">
         <source>Downloading Export</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">2022</context>
+          <context context-type="linenumber">2027</context>
         </context-group>
       </trans-unit>
       <trans-unit id="18a393cd6211a7e1f51159db6b49637ee7c61490" datatype="html">
@@ -15086,6 +15085,10 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">5</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/AnimationInfo.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/animationService.ts</context>
           <context context-type="linenumber">9</context>
         </context-group>
@@ -15190,7 +15193,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
@@ -15732,6 +15735,10 @@ Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/AudioOscillatorInfo.ts</context>
           <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/AudioOscillatorInfo.ts</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audioOscillatorService.ts</context>
@@ -16285,6 +16292,13 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">181</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="6db909a826f1878ad78bf853a62b6cc5cbda3d3f" datatype="html">
+        <source>Example</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">184</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="f5d726bee0fd8a545258990d929f39b68549dd87" datatype="html">
         <source>Evaluates to true if neither idea 4a nor idea 12 were found.</source>
         <context-group purpose="location">
@@ -16325,6 +16339,10 @@ Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/ConceptMapInfo.ts</context>
           <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/ConceptMapInfo.ts</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/conceptMapService.ts</context>
@@ -16855,6 +16873,10 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">5</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/DialogGuidanceInfo.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
           <context context-type="linenumber">12</context>
         </context-group>
@@ -17063,6 +17085,10 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">5</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/DiscussionInfo.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussionService.ts</context>
           <context context-type="linenumber">16</context>
         </context-group>
@@ -17202,21 +17228,21 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Remove file</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c648889391b76acac6870869f928f33920241c76" datatype="html">
         <source>Add picture</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cf52ff0f4f9dc792b81e652fc6f0c2e83d14d56b" datatype="html">
         <source> Post </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">92,94</context>
+          <context context-type="linenumber">93,95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3210146777760299474" datatype="html">
@@ -17238,6 +17264,10 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/DrawInfo.ts</context>
           <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/DrawInfo.ts</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/drawService.ts</context>
@@ -17478,6 +17508,13 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="7120485563504644471" datatype="html">
+        <source>Embedded</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/embedded/EmbeddedInfo.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="f753799cecb5ea7e8d3c0c69851d91ce5303b08a" datatype="html">
         <source>Model Parameters</source>
         <context-group purpose="location">
@@ -17554,6 +17591,10 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/GraphInfo.ts</context>
           <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/GraphInfo.ts</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
@@ -18439,6 +18480,10 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">5</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/html/HtmlInfo.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/html/htmlService.ts</context>
           <context context-type="linenumber">7</context>
         </context-group>
@@ -18462,6 +18507,10 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/LabelInfo.ts</context>
           <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/label/LabelInfo.ts</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/labelService.ts</context>
@@ -18700,6 +18749,10 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/MatchInfo.ts</context>
           <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/MatchInfo.ts</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/matchService.ts</context>
@@ -19056,6 +19109,20 @@ Warning: This will delete all existing choices and buckets in this component.</s
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="9007972153162147219" datatype="html">
+        <source>Single Answer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/MultipleChoiceInfo.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3410089385743867046" datatype="html">
+        <source>Multiple Answer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/MultipleChoiceInfo.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="2d07aed510fda739dd79dcbc3a9d807af224e41f" datatype="html">
         <source> Show Feedback </source>
         <context-group purpose="location">
@@ -19166,6 +19233,10 @@ Warning: This will delete all existing choices in this component.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/OpenResponseInfo.ts</context>
           <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/openResponse/OpenResponseInfo.ts</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/openResponseService.ts</context>
@@ -19700,6 +19771,10 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">5</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/outsideURL/OutsideUrlInfo.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outsideURLService.ts</context>
           <context context-type="linenumber">14</context>
         </context-group>
@@ -19819,6 +19894,10 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/PeerChatInfo.ts</context>
           <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/PeerChatInfo.ts</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peerChatService.ts</context>
@@ -19945,6 +20024,10 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">5</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/ShowGroupWorkInfo.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/showGroupWorkService.ts</context>
           <context context-type="linenumber">7</context>
         </context-group>
@@ -20053,6 +20136,10 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/components/showMyWork/ShowMyWorkInfo.ts</context>
           <context context-type="linenumber">5</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showMyWork/ShowMyWorkInfo.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="3e4063d41615b0bdb15dd79a55e0334dabeb361f" datatype="html">
         <source>(No response)</source>
@@ -20080,6 +20167,10 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/SummaryInfo.ts</context>
           <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/summary/SummaryInfo.ts</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summaryService.ts</context>
@@ -20281,6 +20372,10 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/TableInfo.ts</context>
           <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/TableInfo.ts</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/tableService.ts</context>
