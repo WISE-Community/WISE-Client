@@ -11,7 +11,7 @@
   <p class="description">{{ description }}</p>
   <mat-divider></mat-divider>
   <h3 i18n>Example:</h3>
-  <div class="example app-background">
+  <mat-card appearance="outlined">
     <preview-component
       *ngIf="previewComponents.length === 1"
       [component]="previewComponents[0]"
@@ -24,7 +24,7 @@
         <preview-component [component]="component"></preview-component>
       </mat-tab>
     </mat-tab-group>
-  </div>
+  </mat-card>
 </mat-dialog-content>
 <mat-dialog-actions fxLayoutAlign="end">
   <button mat-button mat-dialog-close cdkFocusRegionstart i18n>Close</button>
