@@ -2,12 +2,12 @@ import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { AbstractComponentDataExportStrategy } from './AbstractComponentDataExportStrategy';
 
 export class DialogGuidanceComponentDataExportStrategy extends AbstractComponentDataExportStrategy {
-  computerLabel = 'Computer';
-  ideaLabel = 'Idea';
-  itemIdLabel = 'Item ID';
-  responseLabel = 'Response';
-  scoreLabel = 'Score';
-  studentLabel = 'Student';
+  private computerLabel = 'Computer';
+  private ideaLabel = 'Idea';
+  private itemIdLabel = 'Item ID';
+  private responseLabel = 'Response';
+  private scoreLabel = 'Score';
+  private studentLabel = 'Student';
 
   constructor(
     protected nodeId: string,
