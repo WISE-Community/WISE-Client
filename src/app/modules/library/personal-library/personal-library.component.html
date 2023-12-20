@@ -17,8 +17,8 @@
         [label]="projectsLabel"
         [numAllItems]="numProjectsInView"
         [numSelectedItems]="numSelectedProjects()"
-        (selectAllItemsEvent)="selectAllProjects()"
-        (selectNoItemsEvent)="unselectAllProjects()"
+        (allSelectedEvent)="selectAllProjects()"
+        (noneSelectedEvent)="unselectAllProjects()"
       ></select-all-items-checkbox>
       <span *ngIf="numSelectedProjects() > 0" class="secondary-text" i18n>
         {{ numSelectedProjects() }} selected

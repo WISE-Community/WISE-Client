@@ -9,11 +9,11 @@ type SelectAllItemsStatus = 'none' | 'some' | 'all';
   providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }]
 })
 export class SelectAllItemsCheckboxComponent {
+  @Output() allSelectedEvent: EventEmitter<void> = new EventEmitter<void>();
   @Input() label: string = $localize`items`;
+  @Output() noneSelectedEvent: EventEmitter<void> = new EventEmitter<void>();
   @Input() numAllItems: number;
   @Input() numSelectedItems: number;
-  @Output() selectAllItemsEvent: EventEmitter<void> = new EventEmitter<void>();
-  @Output() selectNoItemsEvent: EventEmitter<void> = new EventEmitter<void>();
   protected status: SelectAllItemsStatus;
 
   ngOnChanges(): void {
@@ -28,9 +28,9 @@ export class SelectAllItemsCheckboxComponent {
 
   protected select(): void {
     if (this.status === 'none') {
-      this.selectAllItemsEvent.emit();
+      this.allSelectedEvent.emit();
     } else {
-      this.selectNoItemsEvent.emit();
+      this.noneSelectedEvent.emit();
     }
   }
 }
