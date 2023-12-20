@@ -20,6 +20,7 @@ import { MultipleChoiceInfo } from '../../../components/multipleChoice/MultipleC
 import { OutsideUrlInfo } from '../../../components/outsideURL/OutsideUrlInfo';
 import { OpenResponseInfo } from '../../../components/openResponse/OpenResponseInfo';
 import { ComponentInfo } from '../../../components/ComponentInfo';
+import { MatCardModule } from '@angular/material/card';
 
 let component: ComponentInfoDialogComponent;
 let fixture: ComponentFixture<ComponentInfoDialogComponent>;
@@ -40,6 +41,7 @@ describe('ComponentInfoDialogComponent', () => {
         BrowserAnimationsModule,
         HttpClientTestingModule,
         MatButtonModule,
+        MatCardModule,
         MatDialogModule,
         MatDividerModule,
         MatFormFieldModule,
