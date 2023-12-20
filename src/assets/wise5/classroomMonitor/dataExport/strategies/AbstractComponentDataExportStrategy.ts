@@ -1,5 +1,6 @@
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
+import { removeHTMLTags } from '../../../common/string/string';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
@@ -192,7 +193,11 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
       this.projectService.getNodePositionAndTitle(nodeId)
     );
     this.setColumnValue(row, columnNameToNumber, 'Component Type', component.type);
-    this.setColumnValue(row, columnNameToNumber, 'Component Prompt', component.prompt);
+    this.setColumnValue(row, columnNameToNumber, 'Component Prompt', this.getPrompt(component));
+  }
+
+  private getPrompt(component: any): string {
+    return removeHTMLTags(component.prompt).replace(/"/g, '""');
   }
 
   protected setStudentWork(
