@@ -1,7 +1,7 @@
 <mat-checkbox
   color="primary"
-  [checked]="selectedAllItems"
-  [indeterminate]="selectedSomeItems"
+  [checked]="status === 'all'"
+  [indeterminate]="status === 'some'"
   (click)="select()"
   [matTooltip]="'Select all ' + label"
   matTooltipPosition="above"

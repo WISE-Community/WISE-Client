@@ -16,6 +16,7 @@ import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
 })
 export class PersonalLibraryComponent extends LibraryComponent {
   filteredProjects: LibraryProject[] = [];
+  protected numProjectsInView: number;
   protected numSelectedProjects: Signal<number> = computed(() => this.selectedProjects().length);
   protected personalProjects: LibraryProject[] = [];
   protected projectIdToIsSelected: Signal<{ [key: number]: boolean }> = computed(() =>
@@ -26,14 +27,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
   );
   projects: LibraryProject[] = [];
   protected projectsLabel: string = $localize`units`;
-  protected selectedAllProjects: Signal<boolean> = computed(() => {
-    const numSelectedProjects = this.numSelectedProjects();
-    return numSelectedProjects !== 0 && numSelectedProjects === this.getProjectsInView().length;
-  });
   protected selectedProjects: WritableSignal<LibraryProject[]> = signal([]);
-  protected selectedSomeProjects: Signal<boolean> = computed(
-    () => this.numSelectedProjects() !== 0 && !this.selectedAllProjects()
-  );
   protected sharedProjects: LibraryProject[] = [];
   protected showArchived: boolean = false;
 
@@ -122,6 +116,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
     this.filteredProjects = this.filteredProjects.filter(
       (project) => project.hasTag('archived') == this.showArchived
     );
+    this.numProjectsInView = this.getProjectsInView().length;
   }
 
   protected switchActiveArchivedView(): void {
@@ -166,12 +161,12 @@ export class PersonalLibraryComponent extends LibraryComponent {
     });
   }
 
-  private unselectAllProjects(): void {
-    this.selectAllProjects(false);
+  protected unselectAllProjects(): void {
+    this.selectedProjects.set([]);
   }
 
-  protected selectAllProjects(selectAll: boolean): void {
-    this.selectedProjects.set(selectAll ? this.getProjectsInView() : []);
+  protected selectAllProjects(): void {
+    this.selectedProjects.set(this.getProjectsInView());
   }
 
   private getProjectsInView(): LibraryProject[] {
