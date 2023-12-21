@@ -147,7 +147,6 @@ export class ExportStrategyTester {
       this.configService,
       this.dataExportService,
       null,
-      null,
       this.teacherProjectService,
       null,
       null,
