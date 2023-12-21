@@ -14,15 +14,6 @@
       <mat-icon>clear</mat-icon>
       <span>JSON Invalid</span>
     </span>
-    <mat-spinner
-      *ngIf="globalMessage.isProgressIndicatorVisible"
-      class="spinner"
-      [mode]="'indeterminate'"
-      [diameter]="24"
-    >
-    </mat-spinner>
-    <span *ngIf="globalMessage.text" class="component__actions__info mat-small global-message">
-      {{ globalMessage.text }} {{ globalMessage.time | date: 'medium' }}
-    </span>
+    <save-indicator></save-indicator>
   </div>
 </mat-toolbar>

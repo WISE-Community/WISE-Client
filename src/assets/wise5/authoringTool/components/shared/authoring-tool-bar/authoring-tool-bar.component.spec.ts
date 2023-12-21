@@ -7,6 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { SaveIndicatorModule } from '../../../../../wise5/common/save-indicator/save-indicator.module';
 
 describe('AuthoringToolBarComponent', () => {
   let component: AuthoringToolBarComponent;
@@ -21,6 +22,7 @@ describe('AuthoringToolBarComponent', () => {
         MatIconModule,
         MatProgressSpinnerModule,
         MatToolbarModule,
+        SaveIndicatorModule,
         StudentTeacherCommonServicesModule
       ],
       providers: [NotificationService]
