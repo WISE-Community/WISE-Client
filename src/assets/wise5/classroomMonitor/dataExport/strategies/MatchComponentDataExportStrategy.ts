@@ -5,6 +5,9 @@ import { Bucket } from '../../../components/match/bucket';
 import { Choice } from '../../../components/match/choice';
 
 export class MatchComponentDataExportStrategy extends AbstractComponentDataExportStrategy {
+  private correctnessLabel = 'Correctness';
+  private isCorrectLabel = 'Is Correct';
+
   constructor(
     protected nodeId: string,
     protected component: any,
@@ -26,9 +29,9 @@ export class MatchComponentDataExportStrategy extends AbstractComponentDataExpor
     }
     if (this.componentHasCorrectAnswer(component)) {
       for (const choice of component.choices) {
-        headerRow.push(`${choice.value} Correctness`);
+        headerRow.push(`${choice.value} ${this.correctnessLabel}`);
       }
-      headerRow.push('Is Correct');
+      headerRow.push(this.isCorrectLabel);
     }
   }
 
@@ -75,7 +78,7 @@ export class MatchComponentDataExportStrategy extends AbstractComponentDataExpor
       this.setColumnValue(
         row,
         columnNameToNumber,
-        'Is Correct',
+        this.isCorrectLabel,
         componentState.studentData.isCorrect ? 1 : 0
       );
     }
@@ -140,7 +143,7 @@ export class MatchComponentDataExportStrategy extends AbstractComponentDataExpor
     columnNameToNumber: any,
     item: Choice
   ): void {
-    const columnName = `${item.value} Correctness`;
+    const columnName = `${item.value} ${this.correctnessLabel}`;
     if (item.isCorrect == null) {
       // The item does not have an isCorrect field so we will not show anything in the cell.
     } else if (item.isCorrect) {
@@ -219,7 +222,7 @@ export class MatchComponentDataExportStrategy extends AbstractComponentDataExpor
    * @param item The choice object.
    */
   private setCorrectnessValue(row: any[], columnNameToNumber: any, item: any): void {
-    const columnName = `${item.value} Correctness`;
+    const columnName = `${item.value} ${this.correctnessLabel}`;
     if (item.isCorrect == null) {
       /*
        * The item does not have an isCorrect field so we will not show
