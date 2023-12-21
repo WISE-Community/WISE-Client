@@ -3,7 +3,6 @@ import { SaveIndicatorComponent } from './save-indicator.component';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SaveIndicatorModule } from './save-indicator.module';
 
 describe('SaveIndicatorComponent', () => {
   let component: SaveIndicatorComponent;
@@ -14,7 +13,7 @@ describe('SaveIndicatorComponent', () => {
       imports: [
         HttpClientTestingModule,
         MatDialogModule,
-        SaveIndicatorModule,
+        SaveIndicatorComponent,
         StudentTeacherCommonServicesModule
       ]
     });
