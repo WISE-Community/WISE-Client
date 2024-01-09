@@ -1,8 +1,13 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
 import { LibraryService } from '../../../services/library.service';
 import { LibraryComponent } from '../library/library.component';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
+import { ArchiveProjectService } from '../../../services/archive-project.service';
+import { Subscription } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
+import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
 
 @Component({
   selector: 'app-personal-library',
@@ -10,12 +15,27 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
   styleUrls: ['./personal-library.component.scss']
 })
 export class PersonalLibraryComponent extends LibraryComponent {
-  projects: LibraryProject[] = [];
   filteredProjects: LibraryProject[] = [];
-  personalProjects: LibraryProject[] = [];
-  sharedProjects: LibraryProject[] = [];
+  protected numProjectsInView: number;
+  protected numSelectedProjects: Signal<number> = computed(() => this.selectedProjects().length);
+  protected personalProjects: LibraryProject[] = [];
+  protected projectIdToIsSelected: Signal<{ [key: number]: boolean }> = computed(() =>
+    this.selectedProjects().reduce((accumulator, project) => {
+      accumulator[project.id] = true;
+      return accumulator;
+    }, {})
+  );
+  projects: LibraryProject[] = [];
+  protected projectsLabel: string = $localize`units`;
+  protected selectedProjects: WritableSignal<LibraryProject[]> = signal([]);
+  protected sharedProjects: LibraryProject[] = [];
+  protected showArchived: boolean = false;
 
-  constructor(protected dialog: MatDialog, protected libraryService: LibraryService) {
+  constructor(
+    private archiveProjectService: ArchiveProjectService,
+    protected dialog: MatDialog,
+    protected libraryService: LibraryService
+  ) {
     super(dialog, libraryService);
   }
 
@@ -46,6 +66,15 @@ export class PersonalLibraryComponent extends LibraryComponent {
         }
       })
     );
+    this.subscribeToRefreshProjects();
+  }
+
+  private subscribeToRefreshProjects(): void {
+    this.subscriptions.add(
+      this.archiveProjectService.refreshProjectsEvent$.subscribe(() => {
+        this.updateProjects();
+      })
+    );
   }
 
   combinePersonalAndSharedProjects() {
@@ -57,6 +86,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
   updateProjects() {
     this.combinePersonalAndSharedProjects();
     this.filterUpdated();
+    this.unselectAllProjects();
   }
 
   sortByProjectIdDesc(a, b) {
@@ -79,6 +109,70 @@ export class PersonalLibraryComponent extends LibraryComponent {
 
   protected getDetailsComponent(): any {
     return PersonalLibraryDetailsComponent;
+  }
+
+  public filterUpdated(filterValues: ProjectFilterValues = null): void {
+    super.filterUpdated(filterValues);
+    this.filteredProjects = this.filteredProjects.filter(
+      (project) => project.hasTag('archived') == this.showArchived
+    );
+    this.numProjectsInView = this.getProjectsInView().length;
+  }
+
+  protected switchActiveArchivedView(): void {
+    this.filterUpdated();
+    this.unselectAllProjects();
+  }
+
+  pageChange(event?: PageEvent, scroll?: boolean): void {
+    super.pageChange(event, scroll);
+    this.unselectAllProjects();
+  }
+
+  protected updateSelectedProjects(event: ProjectSelectionEvent): void {
+    if (event.selected) {
+      this.selectedProjects.update((selectedProjects) => {
+        selectedProjects.push(event.project);
+        return selectedProjects;
+      });
+    } else {
+      this.selectedProjects.update((selectedProjects) => {
+        selectedProjects.splice(selectedProjects.indexOf(event.project), 1);
+        return selectedProjects;
+      });
+    }
+  }
+
+  protected archiveSelectedProjects(archive: boolean): Subscription {
+    return this.archiveProjectService[archive ? 'archiveProjects' : 'unarchiveProjects'](
+      this.selectedProjects()
+    ).subscribe({
+      next: () => {
+        this.archiveProjectService.showArchiveProjectsSuccessMessage(
+          this.selectedProjects(),
+          archive
+        );
+        this.archiveProjectService.updateProjectsArchivedStatus(this.selectedProjects(), archive);
+        this.unselectAllProjects();
+      },
+      error: () => {
+        this.archiveProjectService.showArchiveProjectErrorMessage(archive);
+      }
+    });
+  }
+
+  protected unselectAllProjects(): void {
+    this.selectedProjects.set([]);
+  }
+
+  protected selectAllProjects(): void {
+    this.selectedProjects.set(this.getProjectsInView());
+  }
+
+  private getProjectsInView(): LibraryProject[] {
+    return this.filteredProjects.filter(
+      (project, index) => this.lowIndex <= index && index < this.highIndex
+    );
   }
 }
 

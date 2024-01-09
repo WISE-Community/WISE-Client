@@ -1,0 +1,9 @@
+<mat-checkbox
+  color="primary"
+  [checked]="status === 'all'"
+  [indeterminate]="status === 'some'"
+  (click)="select()"
+  [matTooltip]="'Select all ' + label"
+  matTooltipPosition="above"
+  i18n-matTooltip
+></mat-checkbox>

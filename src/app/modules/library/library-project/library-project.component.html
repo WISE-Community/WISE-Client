@@ -10,7 +10,18 @@
   i18n-aria-label
   aria-label="Show project details"
 >
-  <div class="library-project__cover" [style.background-image]="project.thumbStyle"></div>
+  <div class="library-project__cover" [style.background-image]="project.thumbStyle">
+    <mat-checkbox
+      *ngIf="myUnit"
+      [(ngModel)]="checked"
+      class="library-project__checkbox app-bg-bg"
+      color="primary"
+      matTooltip="Select unit"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      (click)="selectProject($event)"
+    ></mat-checkbox>
+  </div>
   <app-library-project-disciplines [project]="project"></app-library-project-disciplines>
   <div
     class="library-project__details can-highlight"
