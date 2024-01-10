@@ -31,13 +31,14 @@ import { EditPasswordComponent } from './edit-password/edit-password.component';
 import { UnlinkGoogleAccountConfirmComponent } from './unlink-google-account-confirm/unlink-google-account-confirm.component';
 import { UnlinkGoogleAccountPasswordComponent } from './unlink-google-account-password/unlink-google-account-password.component';
 import { UnlinkGoogleAccountSuccessComponent } from './unlink-google-account-success/unlink-google-account-success.component';
-import { PasswordService } from '../../services/password.service';
+import { PasswordModule } from '../../password/password.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FlexLayoutModule,
     FormsModule,
+    PasswordModule,
     ReactiveFormsModule,
     RouterModule,
     materialModules
@@ -63,6 +64,6 @@ import { PasswordService } from '../../services/password.service';
     UnlinkGoogleAccountPasswordComponent,
     UnlinkGoogleAccountSuccessComponent
   ],
-  providers: [PasswordService]
+  providers: []
 })
 export class SharedModule {}

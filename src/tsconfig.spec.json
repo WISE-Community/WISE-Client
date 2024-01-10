@@ -10,8 +10,8 @@
       "dom-mediacapture-record"
     ]
   },
+  "target": "ES2016",
   "files": [
-    "test.ts",
     "polyfills.ts"
   ],
   "include": [

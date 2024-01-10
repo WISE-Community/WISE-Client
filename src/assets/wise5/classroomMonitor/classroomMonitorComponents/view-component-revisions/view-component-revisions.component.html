@@ -1,128 +1,24 @@
-<span class="mat-dialog-title" i18n>Revisions for {{usernames}}</span>
+<h2 mat-dialog-title i18n>Revisions for {{ usernames }}</h2>
 <mat-dialog-content class="dialog-content-scroll">
   <mat-list class="component-revisions">
-    <mat-list-item *ngFor="let revision of revisionsSorted; index as i; first as isFirst"
-        class="list-item mat-elevation-z1 revision"
-        [ngClass]="{'revision-latest': isFirst}">
-      <div *ngIf="i < numRevisionsShown"
-          fxFlex>
-        <h3 class="accent-1 mat-body-2 component-header">
-          #{{totalRevisions - i}} <span *ngIf="isFirst">(Latest)</span>
+    <mat-list-item
+      *ngFor="let revision of revisionsSorted; index as i; first as isFirst"
+      class="list-item mat-elevation-z1 revision"
+      [ngClass]="{ 'revision-latest': isFirst }"
+    >
+      <div *ngIf="i < numRevisionsShown" fxFlex>
+        <h3 class="accent-1 mat-caption gray-lightest-bg component-header">
+          #{{ totalRevisions - i }} <span *ngIf="isFirst">(Latest)</span>
         </h3>
         <div class="revision-content" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
           <div fxFlex="100" fxFlex.gt-sm="66.67" fxLayout="column" class="revision-response">
-            <animation-grading
-                *ngIf="revision.componentState.componentType === 'Animation'"
-                [nodeId]="nodeId"
-                [componentId]="componentId"
-                [componentState]="revision.componentState"
-                [workgroupId]="workgroupId"
-                [isRevision]="true">
-            </animation-grading>
-            <audio-oscillator-grading
-                *ngIf="revision.componentState.componentType === 'AudioOscillator'"
-                [nodeId]="nodeId"
-                [componentId]="componentId"
-                [componentState]="revision.componentState"
-                [workgroupId]="workgroupId"
-                [isRevision]="true">
-            </audio-oscillator-grading>
-            <concept-map-grading
-                *ngIf="revision.componentState.componentType === 'ConceptMap'"
-                [nodeId]="nodeId"
-                [componentId]="componentId"
-                [componentState]="revision.componentState"
-                [workgroupId]="workgroupId"
-                [isRevision]="true">
-            </concept-map-grading>
-            <dialog-guidance-grading
-                *ngIf="revision.componentState.componentType === 'DialogGuidance'"
-                [nodeId]="nodeId"
-                [componentId]="componentId"
-                [componentState]="revision.componentState"
-                [workgroupId]="workgroupId"
-                [isRevision]="true">
-            </dialog-guidance-grading>
-            <discussion-grading
-                *ngIf="revision.componentState.componentType === 'Discussion'"
-                [nodeId]="nodeId"
-                [componentId]="componentId"
-                [componentState]="revision.componentState"
-                [workgroupId]="workgroupId"
-                [isRevision]="true">
-            </discussion-grading>
-            <draw-grading
-                *ngIf="revision.componentState.componentType === 'Draw'"
-                [nodeId]="nodeId"
-                [componentId]="componentId"
-                [componentState]="revision.componentState"
-                [workgroupId]="workgroupId"
-                [isRevision]="true">
-            </draw-grading>
-            <embedded-grading
-                *ngIf="revision.componentState.componentType === 'Embedded'"
-                [nodeId]="nodeId"
-                [componentId]="componentId"
-                [componentState]="revision.componentState"
-                [workgroupId]="workgroupId"
-                [isRevision]="true">
-            </embedded-grading>
-            <graph-grading
-                *ngIf="revision.componentState.componentType === 'Graph'"
-                [nodeId]="nodeId"
-                [componentId]="componentId"
-                [componentState]="revision.componentState"
-                [workgroupId]="workgroupId"
-                [isRevision]="true">
-            </graph-grading>
-            <label-grading
-                *ngIf="revision.componentState.componentType === 'Label'"
-                [nodeId]="nodeId"
-                [componentId]="componentId"
-                [componentState]="revision.componentState"
-                [workgroupId]="workgroupId"
-                [isRevision]="true">
-            </label-grading>
-            <match-grading
-                *ngIf="revision.componentState.componentType === 'Match'"
-                [nodeId]="nodeId"
-                [componentId]="componentId"
-                [componentState]="revision.componentState"
-                [workgroupId]="workgroupId"
-                [isRevision]="true">
-            </match-grading>
-            <multiple-choice-grading
-                *ngIf="revision.componentState.componentType === 'MultipleChoice'"
-                [nodeId]="nodeId"
-                [componentId]="componentId"
-                [componentState]="revision.componentState"
-                [workgroupId]="workgroupId"
-                [isRevision]="true">
-            </multiple-choice-grading>
-            <open-response-grading
-                *ngIf="revision.componentState.componentType === 'OpenResponse'"
-                [nodeId]="nodeId"
-                [componentId]="componentId"
-                [componentState]="revision.componentState"
-                [workgroupId]="workgroupId"
-                [isRevision]="true">
-            </open-response-grading>
-            <peer-chat-grading
-                *ngIf="revision.componentState.componentType === 'PeerChat'"
-                [nodeId]="nodeId"
-                [componentId]="componentId"
-                [componentState]="revision.componentState"
-                [workgroupId]="workgroupId"
-                [isRevision]="true">
-            </peer-chat-grading>
-            <table-grading
-                *ngIf="revision.componentState.componentType === 'Table'"
-                [nodeId]="nodeId"
-                [componentId]="componentId"
-                [componentState]="revision.componentState"
-                [workgroupId]="workgroupId"
-                [isRevision]="true">
-            </table-grading>
+            <component-grading-component
+              [nodeId]="nodeId"
+              [componentId]="componentId"
+              [componentState]="revision.componentState"
+              [workgroupId]="workgroupId"
+              [isRevision]="true"
+            ></component-grading-component>
             <span fxFlex></span>
             <div class="component__actions__info component--grading__actions__info md-caption">
               <component-state-info [componentState]="revision.componentState" [isInactive]="true">
@@ -130,15 +26,17 @@
             </div>
           </div>
           <edit-component-annotations
-              fxFlex="100"
-              fxFlex.gt-sm="33.33"
-              [componentId]="componentId"
-              [componentStateId]="revision.componentState.id"
-              [fromWorkgroupId]="fromWorkgroupId"
-              [isDisabled]="true"
-              [nodeId]="nodeId"
-              [showAllAnnotations]="true"
-              [toWorkgroupId]="workgroupId">
+            class="selected-bg-bg"
+            fxFlex="100"
+            fxFlex.gt-sm="33.33"
+            [componentId]="componentId"
+            [componentStateId]="revision.componentState.id"
+            [fromWorkgroupId]="fromWorkgroupId"
+            [isDisabled]="true"
+            [nodeId]="nodeId"
+            [showAllAnnotations]="true"
+            [toWorkgroupId]="workgroupId"
+          >
           </edit-component-annotations>
         </div>
       </div>
@@ -148,6 +46,6 @@
     </div>
   </mat-list>
 </mat-dialog-content>
-<mat-dialog-actions fxLayoutAlign="end">
+<mat-dialog-actions align="end">
   <button mat-button mat-dialog-close cdkFocusRegionstart i18n>Close</button>
 </mat-dialog-actions>

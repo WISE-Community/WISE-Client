@@ -3,10 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { of, throwError } from 'rxjs';
-import { PasswordService } from '../../../../../../app/services/password.service';
 import { TeacherService } from '../../../../../../app/teacher/teacher.service';
 import { ConfigService } from '../../../../services/configService';
 import { ChangeStudentPasswordDialogComponent } from './change-student-password-dialog.component';
+import { PasswordModule } from '../../../../../../app/password/password.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 class ConfigServiceStub {
   getPermissions() {
@@ -28,15 +29,15 @@ let fixture: ComponentFixture<ChangeStudentPasswordDialogComponent>;
 let teacherService: TeacherService;
 let snackBar: MatSnackBar;
 let dialog: MatDialog;
-let snackBarSpy, dialogSpy;
+let snackBarOpenSpy, dialogCloseAllSpy;
+
 describe('ChangeStudentPasswordDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ChangeStudentPasswordDialogComponent],
-      imports: [MatSnackBarModule, MatDialogModule],
+      imports: [BrowserAnimationsModule, MatSnackBarModule, MatDialogModule, PasswordModule],
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
-        PasswordService,
         { provide: TeacherService, useClass: TeacherServiceStub },
         { provide: MAT_DIALOG_DATA, useValue: user }
       ],
@@ -59,8 +60,8 @@ describe('ChangeStudentPasswordDialogComponent', () => {
 function changePassword() {
   describe('changePassword()', () => {
     beforeEach(() => {
-      snackBarSpy = spyOn(snackBar, 'open');
-      dialogSpy = spyOn(dialog, 'closeAll');
+      snackBarOpenSpy = spyOn(snackBar, 'open');
+      dialogCloseAllSpy = spyOn(dialog, 'closeAll');
     });
     afterEach(() => {
       expect(component.isChangingPassword).toBeFalsy();
@@ -74,8 +75,8 @@ function changePassword_success_closeDialog() {
   it('should close dialog on success', () => {
     spyOn(teacherService, 'changeStudentPassword').and.returnValue(of({}));
     component.changePassword();
-    expect(snackBarSpy).toHaveBeenCalled();
-    expect(dialogSpy).toHaveBeenCalled();
+    expect(snackBarOpenSpy).toHaveBeenCalled();
+    expect(dialogCloseAllSpy).toHaveBeenCalled();
   });
 }
 
@@ -83,10 +84,10 @@ function changePassword_failure_keepDialogOpen() {
   it('should keep dialog open on failure', () => {
     spyOn(teacherService, 'changeStudentPassword').and.returnValue(
       throwError({
-        error: { messageCode: 'invalidPasswordLength' }
+        error: { messageCode: 'invalidPassword' }
       })
     );
     component.changePassword();
-    expect(dialogSpy).not.toHaveBeenCalled();
+    expect(dialogCloseAllSpy).not.toHaveBeenCalled();
   });
 }

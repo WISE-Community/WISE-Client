@@ -7,6 +7,7 @@ import { ProjectService } from './projectService';
 import { ChooseBranchPathDialogComponent } from '../../../app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
 import { DataService } from '../../../app/services/data.service';
 import { Observable, Subject } from 'rxjs';
+import { ConstraintService } from './constraintService';
 
 @Injectable()
 export class NodeService {
@@ -16,138 +17,34 @@ export class NodeService {
   public nodeSubmitClicked$: Observable<any> = this.nodeSubmitClickedSource.asObservable();
   private doneRenderingComponentSource: Subject<any> = new Subject<any>();
   public doneRenderingComponent$ = this.doneRenderingComponentSource.asObservable();
-  private componentShowSubmitButtonValueChangedSource: Subject<any> = new Subject<any>();
-  public componentShowSubmitButtonValueChanged$: Observable<any> = this.componentShowSubmitButtonValueChangedSource.asObservable();
-  private starterStateResponseSource: Subject<any> = new Subject<any>();
-  public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
-  private deleteStarterStateSource: Subject<any> = new Subject<any>();
-  public deleteStarterState$: Observable<any> = this.deleteStarterStateSource.asObservable();
 
   constructor(
-    private dialog: MatDialog,
-    private ConfigService: ConfigService,
-    private ProjectService: ProjectService,
-    private DataService: DataService
+    protected dialog: MatDialog,
+    protected ConfigService: ConfigService,
+    protected constraintService: ConstraintService,
+    protected ProjectService: ProjectService,
+    protected DataService: DataService
   ) {}
+
+  setCurrentNode(nodeId: string): void {
+    this.DataService.setCurrentNodeByNodeId(nodeId);
+  }
 
   goToNextNode() {
     return this.getNextNodeId().then((nextNodeId) => {
       if (nextNodeId != null) {
         const mode = this.ConfigService.getMode();
-        this.DataService.endCurrentNodeAndSetCurrentNodeByNodeId(nextNodeId);
+        this.setCurrentNode(nextNodeId);
       }
       return nextNodeId;
     });
   }
 
   /**
-   * Get the next node in the project sequence. We return a promise because
-   * in preview mode we allow the user to specify which branch path they want
-   * to go to. In all other cases we will resolve the promise immediately.
-   * @param currentId (optional)
-   * @returns a promise that returns the next node id
+   * This function should be implemented by the child service classes
    */
-  getNextNodeId(currentId?): Promise<any> {
-    const promise = new Promise((resolve, reject) => {
-      let nextNodeId = null;
-      let currentNodeId = null;
-      let mode = this.ConfigService.getMode();
-      if (currentId) {
-        currentNodeId = currentId;
-      } else {
-        let currentNode = null;
-        currentNode = this.DataService.getCurrentNode();
-        if (currentNode) {
-          currentNodeId = currentNode.id;
-        }
-      }
-      if (currentNodeId) {
-        if (mode === 'classroomMonitor' || mode === 'author') {
-          let currentNodeOrder = this.ProjectService.getNodeOrderById(currentNodeId);
-          if (currentNodeOrder) {
-            let nextNodeOrder = currentNodeOrder + 1;
-            let nextId = this.ProjectService.getNodeIdByOrder(nextNodeOrder);
-            if (nextId) {
-              if (this.ProjectService.isApplicationNode(nextId)) {
-                nextNodeId = nextId;
-              } else if (this.ProjectService.isGroupNode(nextId)) {
-                nextNodeId = this.getNextNodeId(nextId);
-              }
-            }
-          }
-          resolve(nextNodeId);
-        } else {
-          const transitionLogic = this.ProjectService.getTransitionLogicByFromNodeId(currentNodeId);
-          const branchPathTakenEvents = this.DataService.getBranchPathTakenEventsByNodeId(
-            currentNodeId
-          );
-          if (
-            branchPathTakenEvents != null &&
-            branchPathTakenEvents.length > 0 &&
-            transitionLogic != null &&
-            transitionLogic.canChangePath != true
-          ) {
-            // the student has branched on this node before and they are not allowed to change paths
-            for (let b = branchPathTakenEvents.length - 1; b >= 0; b--) {
-              const branchPathTakenEvent = branchPathTakenEvents[b];
-              if (branchPathTakenEvent != null) {
-                const data = branchPathTakenEvent.data;
-                if (data != null) {
-                  const toNodeId = data.toNodeId;
-                  nextNodeId = toNodeId;
-                  resolve(nextNodeId);
-                  break;
-                }
-              }
-            }
-          } else {
-            // the student has not branched on this node before
-            if (transitionLogic != null) {
-              const transitions = transitionLogic.transitions;
-              if (transitions == null || transitions.length == 0) {
-                /*
-                 * this node does not have any transitions so we will
-                 * check if the parent group has transitions
-                 */
-                const parentGroupId = this.ProjectService.getParentGroupId(currentNodeId);
-                let parentHasTransitionLogic = false;
-                if (parentGroupId != null) {
-                  const parentTransitionLogic = this.ProjectService.getTransitionLogicByFromNodeId(
-                    parentGroupId
-                  );
-                  if (parentTransitionLogic != null) {
-                    parentHasTransitionLogic = true;
-                    this.chooseTransition(parentGroupId, parentTransitionLogic).then(
-                      (transition) => {
-                        if (transition != null) {
-                          const transitionToNodeId = transition.to;
-                          if (this.ProjectService.isGroupNode(transitionToNodeId)) {
-                            const startId = this.ProjectService.getGroupStartId(transitionToNodeId);
-                            if (startId == null || startId == '') {
-                              nextNodeId = transitionToNodeId;
-                            } else {
-                              nextNodeId = startId;
-                            }
-                          } else {
-                            nextNodeId = transitionToNodeId;
-                          }
-                        }
-                        resolve(nextNodeId);
-                      }
-                    );
-                  }
-                }
-              } else {
-                this.chooseTransition(currentNodeId, transitionLogic).then((transition) => {
-                  resolve(transition.to);
-                });
-              }
-            }
-          }
-        }
-      }
-    });
-    return promise;
+  getNextNodeId(currentId?: string): Promise<any> {
+    return null;
   }
 
   /**
@@ -157,7 +54,7 @@ export class NodeService {
   goToNextNodeWithWork(): Promise<string> {
     return this.getNextNodeIdWithWork().then((nextNodeId: string) => {
       if (nextNodeId) {
-        this.DataService.endCurrentNodeAndSetCurrentNodeByNodeId(nextNodeId);
+        this.setCurrentNode(nextNodeId);
       }
       return nextNodeId;
     });
@@ -184,40 +81,25 @@ export class NodeService {
 
   goToPrevNode() {
     const prevNodeId = this.getPrevNodeId();
-    this.DataService.endCurrentNodeAndSetCurrentNodeByNodeId(prevNodeId);
+    this.setCurrentNode(prevNodeId);
   }
 
   /**
    * Get the previous node in the project sequence
    * @param currentId (optional)
    */
-  getPrevNodeId(currentId?) {
+  getPrevNodeId(currentId?: string): string {
     let prevNodeId = null;
-    let currentNodeId = null;
-    const mode = this.ConfigService.getMode();
-    if (currentId) {
-      currentNodeId = currentId;
-    } else {
-      let currentNode = null;
-      currentNode = this.DataService.getCurrentNode();
-      if (currentNode) {
-        currentNodeId = currentNode.id;
-      }
-    }
+    const currentNodeId = currentId ?? this.DataService.getCurrentNodeId();
     if (currentNodeId) {
-      if (['classroomMonitor', 'author'].includes(mode)) {
-        let currentNodeOrder = this.ProjectService.getNodeOrderById(currentNodeId);
+      if (['author', 'classroomMonitor'].includes(this.ConfigService.getMode())) {
+        const currentNodeOrder = this.ProjectService.getNodeOrderById(currentNodeId);
         if (currentNodeOrder) {
-          let prevNodeOrder = currentNodeOrder - 1;
-          let prevId = this.ProjectService.getNodeIdByOrder(prevNodeOrder);
+          const prevId = this.ProjectService.getNodeIdByOrder(currentNodeOrder - 1);
           if (prevId) {
-            if (this.ProjectService.isApplicationNode(prevId)) {
-              // node is a step, so set it as the next node
-              prevNodeId = prevId;
-            } else if (this.ProjectService.isGroupNode(prevId)) {
-              // node is an activity, so get next nodeId
-              prevNodeId = this.getPrevNodeId(prevId);
-            }
+            prevNodeId = this.ProjectService.isApplicationNode(prevId)
+              ? prevId
+              : this.getPrevNodeId(prevId);
           }
         }
       } else {
@@ -252,7 +134,7 @@ export class NodeService {
    */
   goToPrevNodeWithWork() {
     const prevNodeId = this.getPrevNodeIdWithWork();
-    this.DataService.endCurrentNodeAndSetCurrentNodeByNodeId(prevNodeId);
+    this.setCurrentNode(prevNodeId);
   }
 
   /**
@@ -283,7 +165,7 @@ export class NodeService {
       let currentNodeId = currentNode.id;
       let parentNode = this.ProjectService.getParentGroup(currentNodeId);
       let parentNodeId = parentNode.id;
-      this.DataService.endCurrentNodeAndSetCurrentNodeByNodeId(parentNodeId);
+      this.setCurrentNode(parentNodeId);
     }
   }
 
@@ -405,67 +287,31 @@ export class NodeService {
     const availableTransitions = [];
     for (const transition of transitions) {
       const criteria = transition.criteria;
-      if (criteria == null || (criteria != null && this.DataService.evaluateCriterias(criteria))) {
+      if (
+        criteria == null ||
+        (criteria != null && this.constraintService.evaluateCriterias(criteria))
+      ) {
         availableTransitions.push(transition);
       }
     }
     return availableTransitions;
   }
 
-  currentNodeHasTransitionLogic() {
-    const currentNode: any = this.DataService.getCurrentNode();
-    if (currentNode != null) {
-      const transitionLogic = currentNode.transitionLogic;
-      if (transitionLogic != null) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   /**
    * Evaluate the transition logic for the current node and create branch
-   * path taken events if necessary.
+   * path taken event if necessary.
    */
-  evaluateTransitionLogic() {
-    const currentNode: any = this.DataService.getCurrentNode();
-    if (currentNode != null) {
-      const nodeId = currentNode.id;
-      const transitionLogic = currentNode.transitionLogic;
-      if (transitionLogic != null) {
-        const transitions = transitionLogic.transitions;
-        const canChangePath = transitionLogic.canChangePath;
-        let alreadyBranched = false;
-        const events = this.DataService.getBranchPathTakenEventsByNodeId(currentNode.id);
-        if (events.length > 0) {
-          alreadyBranched = true;
+  evaluateTransitionLogic(): void {
+    const currentNode = this.ProjectService.getNode(this.DataService.getCurrentNodeId());
+    const transitionLogic = currentNode.getTransitionLogic();
+    const branchEvents = this.DataService.getBranchPathTakenEventsByNodeId(currentNode.id);
+    const alreadyBranched = branchEvents.length > 0;
+    if ((alreadyBranched && transitionLogic.canChangePath) || !alreadyBranched) {
+      this.chooseTransition(currentNode.id, transitionLogic).then((transition) => {
+        if (transition != null) {
+          this.createBranchPathTakenEvent(currentNode.id, transition.to);
         }
-
-        let transition, fromNodeId, toNodeId;
-        if (alreadyBranched) {
-          if (canChangePath) {
-            this.chooseTransition(nodeId, transitionLogic).then((transition) => {
-              if (transition != null) {
-                fromNodeId = currentNode.id;
-                toNodeId = transition.to;
-                this.createBranchPathTakenEvent(fromNodeId, toNodeId);
-              }
-            });
-          } else {
-            // student can't change path
-          }
-        } else {
-          // student has not branched yet
-
-          this.chooseTransition(nodeId, transitionLogic).then((transition) => {
-            if (transition != null) {
-              fromNodeId = currentNode.id;
-              toNodeId = transition.to;
-              this.createBranchPathTakenEvent(fromNodeId, toNodeId);
-            }
-          });
-        }
-      }
+      });
     }
   }
 
@@ -485,18 +331,6 @@ export class NodeService {
       toNodeId: toNodeId
     };
     this.DataService.saveVLEEvent(nodeId, componentId, componentType, category, event, eventData);
-  }
-
-  evaluateTransitionLogicOn(event) {
-    const currentNode: any = this.DataService.getCurrentNode();
-    if (currentNode != null) {
-      const transitionLogic = currentNode.transitionLogic;
-      const whenToChoosePath = transitionLogic.whenToChoosePath;
-      if (event === whenToChoosePath) {
-        return true;
-      }
-    }
-    return false;
   }
 
   /**
@@ -542,85 +376,11 @@ export class NodeService {
     this.chooseTransitionPromises[nodeId] = promise;
   }
 
-  /**
-   * Move the component(s) within the node
-   * @param nodeId we are moving component(s) in this node
-   * @param componentIds the component(s) we are moving
-   * @param insertAfterComponentId Insert the component(s) after this given
-   * component id. If this argument is null, we will place the new
-   * component(s) in the first position.
-   */
-  moveComponent(nodeId: string, componentIds: string[], insertAfterComponentId: string): void {
-    const node = this.ProjectService.getNodeById(nodeId);
-    const components = node.components;
-    const extractedComponents = this.extractComponents(components, componentIds);
-    if (insertAfterComponentId == null) {
-      components.unshift(...extractedComponents);
-    } else {
-      this.insertComponentsAfter(extractedComponents, components, insertAfterComponentId);
-    }
-  }
-
-  extractComponents(components, componentIds) {
-    const extractedComponents = [];
-    for (let i = 0; i < components.length; i++) {
-      if (componentIds.includes(components[i].id)) {
-        extractedComponents.push(components.splice(i--, 1)[0]);
-      }
-    }
-    return extractedComponents;
-  }
-
-  insertComponentsAfter(componentsToInsert, components, insertAfterComponentId) {
-    for (let i = 0; i < components.length; i++) {
-      if (components[i].id === insertAfterComponentId) {
-        components.splice(i + 1, 0, ...componentsToInsert);
-        return;
-      }
-    }
-  }
-
   broadcastNodeSubmitClicked(args: any) {
     this.nodeSubmitClickedSource.next(args);
   }
 
   broadcastDoneRenderingComponent(nodeIdAndComponentId: any) {
     this.doneRenderingComponentSource.next(nodeIdAndComponentId);
-  }
-
-  broadcastComponentShowSubmitButtonValueChanged(args: any) {
-    this.componentShowSubmitButtonValueChangedSource.next(args);
-  }
-
-  deleteStarterState(args: any) {
-    this.deleteStarterStateSource.next(args);
-  }
-
-  respondStarterState(args: any) {
-    this.starterStateResponseSource.next(args);
-  }
-
-  scrollToComponentAndHighlight(componentId: string): void {
-    setTimeout(() => {
-      const componentElement = $('#component_' + componentId);
-      const originalBackgroundColor = componentElement.css('backgroundColor');
-      componentElement.css('background-color', '#FFFF9C');
-      $('#content').animate({ scrollTop: componentElement.prop('offsetTop') }, 1000);
-      componentElement.css({
-        transition: 'background-color 3s ease-in-out',
-        'background-color': originalBackgroundColor
-      });
-      setTimeout(() => {
-        // ensures the highlight works for the second time linking to this same step
-        componentElement.css('transition', '');
-      }, 4000);
-    }, 500);
-  }
-
-  registerScrollToComponent(componentId: string): void {
-    const subscription = this.DataService.currentNodeChanged$.subscribe(() => {
-      this.scrollToComponentAndHighlight(componentId);
-      subscription.unsubscribe();
-    });
   }
 }

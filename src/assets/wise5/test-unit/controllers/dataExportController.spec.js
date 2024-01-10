@@ -27,7 +27,7 @@ describe('DataExportController', () => {
     TeacherDataService = _TeacherDataService_;
     spyOn(ConfigService, 'getPermissions').and.returnValue({ canViewStudentNames: true });
     spyOn(TeacherDataService, 'saveEvent').and.callFake(() => {});
-    demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSONOriginal));
+    demoProjectJSON = copy(demoProjectJSONOriginal);
     ProjectService.setProject(demoProjectJSON);
     dataExportController = $controller('DataExportController', { $scope: $scope });
   }));

@@ -34,7 +34,7 @@ export class VLEParentComponent implements OnInit {
   }
 
   private getStartingNodeId(): string {
-    const urlMatch = window.location.href.match(/unit\/[0-9]*\/(.*)/);
+    const urlMatch = this.router.url.match(/unit\/[0-9]*\/([^?]*)/);
     let nodeId =
       urlMatch != null
         ? urlMatch[1]

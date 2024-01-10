@@ -1,4 +1,6 @@
+import { removeHTMLTags } from '../../../common/string/string';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
+import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 
 export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStrategy {
   /**
@@ -27,7 +29,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
       }
     }
 
-    this.dataExportService.retrieveOneWorkgroupPerRowExport(selectedNodes).then((result) => {
+    this.dataExportService.retrieveStudentData(selectedNodes, true, true, true).subscribe(() => {
       var rows = [];
       var projectId = this.configService.getProjectId();
       var projectTitle = this.projectService.getProjectTitle();
@@ -125,7 +127,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                     }
                     if (this.controller.includeStudentWorkTimestamps) {
                       if (componentState.serverSaveTime != null) {
-                        var formattedDateTime = this.utilService.convertMillisecondsToFormattedDateTime(
+                        var formattedDateTime = millisecondsToDateTime(
                           componentState.serverSaveTime
                         );
                         workgroupRow[
@@ -147,7 +149,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                         var commentAnnotation = latestComponentAnnotations.comment;
                         if (scoreAnnotation != null) {
                           if (this.controller.includeScoreTimestamps) {
-                            var scoreTimestamp = this.utilService.convertMillisecondsToFormattedDateTime(
+                            var scoreTimestamp = millisecondsToDateTime(
                               scoreAnnotation.serverSaveTime
                             );
                             workgroupRow[
@@ -168,7 +170,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                         }
                         if (commentAnnotation != null) {
                           if (this.controller.includeCommentTimestamps) {
-                            var commentTimestamp = this.utilService.convertMillisecondsToFormattedDateTime(
+                            var commentTimestamp = millisecondsToDateTime(
                               commentAnnotation.serverSaveTime
                             );
                             workgroupRow[
@@ -385,7 +387,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
             if (component != null) {
               var componentId = component.id;
               var columnIdPrefix = nodeId + '-' + componentId;
-              var prompt = this.utilService.removeHTMLTags(component.prompt);
+              var prompt = removeHTMLTags(component.prompt);
               prompt = prompt.replace(/"/g, '""');
               if (prompt == '') {
                 prompt = ' ';

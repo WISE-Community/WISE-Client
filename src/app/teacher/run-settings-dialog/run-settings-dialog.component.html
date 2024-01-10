@@ -1,15 +1,19 @@
-<h2 class="mat-dialog-title" i18n>Edit Settings</h2>
+<h2 mat-dialog-title i18n>Edit Settings</h2>
 <mat-dialog-content class="dialog-content-scroll">
-  <p class="mat-subheading-2 accent-1"> {{ run.name }} <span class="mat-caption" i18n>(Run ID: {{ run.id }})</span> </p>
+  <p class="mat-subtitle-1 accent-1">
+    {{ run.name }} <span class="mat-caption" i18n>(Run ID: {{ run.id }})</span>
+  </p>
   <h3 i18n>Class Periods</h3>
   <div fxLayoutGap="8px" fxLayout="row wrap">
     <div *ngFor="let period of run.periods" class="info-block" fxLayoutAlign="center center">
-      <span class="mat-body-2 ">{{ period }}</span>
-      <button mat-icon-button
-          color="accent"
-          (click)="deletePeriod(period)"
-          i18n-aria-label
-          aria-label="Delete period">
+      <span class="mat-subtitle-2">{{ period }}</span>
+      <button
+        mat-icon-button
+        color="accent"
+        (click)="deletePeriod(period)"
+        i18n-aria-label
+        aria-label="Delete period"
+      >
         <mat-icon>close</mat-icon>
       </button>
     </div>
@@ -17,14 +21,23 @@
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
     <mat-form-field appearance="fill" fxFlex="0 0 auto" fxFlex.xs="0 0 100%">
       <mat-label i18n>Add new period</mat-label>
-      <input [(ngModel)]="newPeriodName"
-          (keyup)="newPeriodNameKeyUp($event)"
-          (keyup.enter)="addPeriod()"
-          matInput
-          id="newPeriod"
-          name="newPeriod" 
-          maxlength="16" />
-      <button mat-icon-button matSuffix color="primary" (click)="addPeriod()" i18n-aria-label aria-label="Add period">
+      <input
+        [(ngModel)]="newPeriodName"
+        (keyup)="newPeriodNameKeyUp($event)"
+        (keyup.enter)="addPeriod()"
+        matInput
+        id="newPeriod"
+        name="newPeriod"
+        maxlength="16"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        color="primary"
+        (click)="addPeriod()"
+        i18n-aria-label
+        aria-label="Add period"
+      >
         <mat-icon>add_circle</mat-icon>
       </button>
       <mat-hint *ngIf="addPeriodMessage" class="warn">{{ addPeriodMessage }}</mat-hint>
@@ -45,18 +58,20 @@
   <h3>
     <ng-container i18n>Schedule</ng-container>&nbsp;
     <span *ngIf="run.lastRun" class="mat-caption" i18n>
-      (Last student login: {{ run.lastRun | date: 'short' }})
+      (Last student login: {{ run.lastRun | date : 'short' }})
     </span>
   </h3>
   <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap.gt-xs="16px">
     <div>
       <mat-form-field appearance="fill" fxFlexAlign="start" fxFlex="0 0 auto" fxFlex.xs="0 0 100%">
         <mat-label i18n>Start date</mat-label>
-        <input [(ngModel)]="startDate"
-            matInput
-            [matDatepicker]="startDatePicker"
-            (dateChange)="updateStartTime()"
-            [max]="maxStartDate">
+        <input
+          [(ngModel)]="startDate"
+          matInput
+          [matDatepicker]="startDatePicker"
+          (dateChange)="updateStartTime()"
+          [max]="maxStartDate"
+        />
         <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #startDatePicker></mat-datepicker>
         <mat-error i18n>Start date is required.</mat-error>
@@ -66,30 +81,37 @@
     <div>
       <mat-form-field appearance="fill" fxFlexAlign="start" fxFlex="0 0 auto" fxFlex.xs="0 0 100%">
         <mat-label i18n>End date</mat-label>
-        <input [(ngModel)]="endDate"
-            matInput
-            [matDatepicker]="endDatePicker"
-            (dateChange)="updateEndTime()"
-            [min]="minEndDate">
+        <input
+          [(ngModel)]="endDate"
+          matInput
+          [matDatepicker]="endDatePicker"
+          (dateChange)="updateEndTime()"
+          [min]="minEndDate"
+        />
         <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #endDatePicker [startAt]="targetEndDate"></mat-datepicker>
         <mat-hint *ngIf="endDateMessage" class="warn">{{ endDateMessage }}</mat-hint>
       </mat-form-field>
     </div>
-    <div fxLayoutAlign="center center" style="padding-bottom: 1.34375em;">
-      <mat-checkbox [(ngModel)]="isLockedAfterEndDate"
-          (change)="updateIsLockedAfterEndDate()"
-          [disabled]="!isLockedAfterEndDateCheckboxEnabled"
-          i18n>
-        Lock After End Date
-      </mat-checkbox>&nbsp;
-      <mat-icon class="info"
-          matTooltip="If the End Date has passed and the unit is locked, students will no longer be able to save new work"
-          matTooltipPosition="above"
-          i18n-matTooltip>help</mat-icon>
+    <div fxLayoutAlign="center center" style="padding-bottom: 1.34375em">
+      <mat-checkbox
+        [(ngModel)]="isLockedAfterEndDate"
+        (change)="updateIsLockedAfterEndDate()"
+        [disabled]="!isLockedAfterEndDateCheckboxEnabled"
+        i18n
+      >
+        Lock After End Date </mat-checkbox
+      >&nbsp;
+      <mat-icon
+        class="info"
+        matTooltip="If the End Date has passed and the unit is locked, students will no longer be able to save new work"
+        matTooltipPosition="above"
+        i18n-matTooltip
+        >help</mat-icon
+      >
     </div>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions fxLayoutAlign="end">
+<mat-dialog-actions align="end">
   <button mat-flat-button color="primary" mat-dialog-close i18n>Done</button>
 </mat-dialog-actions>

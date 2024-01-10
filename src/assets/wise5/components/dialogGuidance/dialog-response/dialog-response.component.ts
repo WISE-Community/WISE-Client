@@ -5,6 +5,7 @@ import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
 import { DialogResponse } from '../DialogResponse';
+import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 
 @Component({
   selector: 'dialog-response',
@@ -33,7 +34,7 @@ export class DialogResponseComponent implements OnInit {
   ngOnInit(): void {
     this.isStudent = this.response.user === 'Student';
     if (this.isStudent) {
-      this.avatarColor = this.configService.getAvatarColorForWorkgroupId(this.response.workgroupId);
+      this.avatarColor = getAvatarColorForWorkgroupId(this.response.workgroupId);
       const firstNames = this.configService.getStudentFirstNamesByWorkgroupId(
         this.response.workgroupId
       );

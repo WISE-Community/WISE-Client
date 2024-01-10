@@ -10,7 +10,7 @@
       <span i18n>Edit Settings</span>
     </a>
     <a mat-menu-item href="{{ run.project.uri }}" target="_blank">
-      <mat-icon>tv</mat-icon>
+      <mat-icon>preview</mat-icon>
       <span i18n>Preview</span>
     </a>
     <a mat-menu-item (click)="showUnitDetails()">
@@ -28,6 +28,14 @@
     <a mat-menu-item href="{{ reportProblemLink }}">
       <mat-icon>report_problem</mat-icon>
       <span i18n>Report Problem</span>
+    </a>
+    <a mat-menu-item *ngIf="!run.archived" (click)="archive(true)">
+      <mat-icon>archive</mat-icon>
+      <span i18n>Archive</span>
+    </a>
+    <a mat-menu-item *ngIf="run.archived" (click)="archive(false)">
+      <mat-icon>unarchive</mat-icon>
+      <span i18n>Restore</span>
     </a>
   </div>
 </mat-menu>

@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NodeService } from '../../../../services/nodeService';
+import { NodeStatusService } from '../../../../services/nodeStatusService';
 import { ProjectService } from '../../../../services/projectService';
 import { StudentDataService } from '../../../../services/studentDataService';
 
 @Component({
   selector: 'step-tools',
   templateUrl: './step-tools.component.html',
-  styleUrls: ['./step-tools.component.scss']
+  styleUrls: ['./step-tools.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class StepToolsComponent implements OnInit {
   icons: any;
@@ -24,6 +26,7 @@ export class StepToolsComponent implements OnInit {
 
   constructor(
     private nodeService: NodeService,
+    private nodeStatusService: NodeStatusService,
     private projectService: ProjectService,
     private studentDataService: StudentDataService
   ) {}
@@ -35,7 +38,7 @@ export class StepToolsComponent implements OnInit {
       this.icons = { prev: 'chevron_right', next: 'chevron_left' };
     }
     this.calculateNodeIds();
-    this.nodeStatuses = this.studentDataService.getNodeStatuses();
+    this.nodeStatuses = this.nodeStatusService.getNodeStatuses();
     this.idToOrder = this.projectService.idToOrder;
     this.updateModel();
     this.subscribeToChanges();
@@ -64,7 +67,7 @@ export class StepToolsComponent implements OnInit {
   }
 
   toNodeIdChanged(): void {
-    this.studentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.toNodeId);
+    this.nodeService.setCurrentNode(this.toNodeId);
   }
 
   updateModel(): void {

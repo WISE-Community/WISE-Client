@@ -1,11 +1,11 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { WiseAuthoringTinymceEditorComponent } from './wise-authoring-tinymce-editor.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let component: WiseAuthoringTinymceEditorComponent;
 let fixture: ComponentFixture<WiseAuthoringTinymceEditorComponent>;
@@ -14,13 +14,9 @@ describe('WiseAuthoringTinymceEditorComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [WiseAuthoringTinymceEditorComponent],
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [ProjectAssetService, TeacherProjectService]
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
+      providers: [ProjectAssetService, TeacherProjectService],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
     fixture = TestBed.createComponent(WiseAuthoringTinymceEditorComponent);
     component = fixture.componentInstance;

@@ -1,29 +1,16 @@
-.user-list {
-  &.mat-list-base {
-    .mat-list-item .mat-list-item-content {
-      padding: 0 8px;
-    }
+.milestone-grading {
+  workgroup-select-autocomplete {
+    width: 100%;
+  }
 
-    workgroup-item {
-      .mat-list-item .mat-list-item-content {
-        padding: 0;
-      }
+  .mat-mdc-list-base {
+    .mat-mdc-list-item.user-list-controls {
+      height: auto;
+      padding: 8px;
     }
   }
-}
 
-workgroup-select-autocomplete {
-  width: 100%;
-}
-
-.mat-list-base {
-  .mat-list-item.user-list-controls {
-    height: auto;
-    padding-top: 8px;
-    padding-bottom: 8px;
+  .column-header-label {
+    color: #fff;
   }
-}
-
-.column-header-label {
-  color: #fff;
 }

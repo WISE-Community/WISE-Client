@@ -12,7 +12,6 @@ import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { StudentWebSocketService } from '../../../services/studentWebSocketService';
 import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentService } from '../../componentService';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
@@ -34,7 +33,8 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { DynamicPromptComponent } from '../../../directives/dynamic-prompt/dynamic-prompt.component';
 import { PromptComponent } from '../../../directives/prompt/prompt.component';
-import { Component } from '../../../common/Component';
+import { PeerChatComponent } from '../PeerChatComponent';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let component: PeerChatStudentComponent;
 const componentId = 'component1';
@@ -147,15 +147,14 @@ describe('PeerChatStudentComponent', () => {
         NotificationService,
         PauseScreenService,
         PeerChatService,
-        PeerGroupService,
         ProjectService,
         SessionService,
         StudentAssetService,
         StudentDataService,
         StudentWebSocketService,
-        TagService,
-        UtilService
-      ]
+        TagService
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
@@ -175,8 +174,9 @@ describe('PeerChatStudentComponent', () => {
     spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroupWork').and.returnValue(
       of([componentState1, componentState2])
     );
+    spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroupAnnotations').and.returnValue(of([]));
     component = fixture.componentInstance;
-    component.component = new Component(componentContent, nodeId);
+    component.component = new PeerChatComponent(componentContent, nodeId);
     component.workgroupId = studentWorkgroupId1;
     component.peerGroup = peerGroup;
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});

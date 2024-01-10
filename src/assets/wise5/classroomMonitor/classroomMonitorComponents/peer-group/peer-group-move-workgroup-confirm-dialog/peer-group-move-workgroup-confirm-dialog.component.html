@@ -1,20 +1,43 @@
-<h2 mat-dialog-title fxLayoutAlign="start center">
+<h2 mat-dialog-title class="mat-dialog-title--icons" fxLayoutAlign="start center">
   <span i18n>Change Grouping</span>
   <span fxFlex></span>
-  <mat-icon *ngIf="isMovingFromPeerGroup" color="warn" i18n-aria-label aria-label="Warning">warning</mat-icon>
+  <mat-icon *ngIf="isMovingFromPeerGroup" color="warn" i18n-aria-label aria-label="Warning"
+    >warning</mat-icon
+  >
 </h2>
 <mat-dialog-content>
   <div class="info-block">
     <ng-container *ngIf="isMovingFromPeerGroup">
-      <p class="warn" i18n>Warning: If you remove students from a Peer Group, they will no longer see any contributions they made to that group.</p>
+      <p class="warn" i18n>
+        Warning: If you remove students from a Peer Group, they will no longer see any contributions
+        they made to that group.
+      </p>
       <p>Their contributions will still be visible to remaining group members.</p>
     </ng-container>
     <p i18n>Are you sure you want to move this team?</p>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end" fxLayoutGap="8px">
-  <button *ngIf="isMovingFromPeerGroup" mat-flat-button color="primary" [mat-dialog-close]="false" i18n>Cancel</button>
+<mat-dialog-actions align="end">
+  <button
+    *ngIf="isMovingFromPeerGroup"
+    mat-flat-button
+    color="primary"
+    [mat-dialog-close]="false"
+    i18n
+  >
+    Cancel
+  </button>
   <button *ngIf="!isMovingFromPeerGroup" mat-button [mat-dialog-close]="false" i18n>Cancel</button>
-  <button *ngIf="isMovingFromPeerGroup" mat-button color="warn" [mat-dialog-close]="true" i18n>Proceed</button>
-  <button *ngIf="!isMovingFromPeerGroup" mat-flat-button color="primary" [mat-dialog-close]="true" i18n>Proceed</button>
+  <button *ngIf="isMovingFromPeerGroup" mat-button color="warn" [mat-dialog-close]="true" i18n>
+    Proceed
+  </button>
+  <button
+    *ngIf="!isMovingFromPeerGroup"
+    mat-flat-button
+    color="primary"
+    [mat-dialog-close]="true"
+    i18n
+  >
+    Proceed
+  </button>
 </mat-dialog-actions>

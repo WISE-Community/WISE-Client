@@ -9,12 +9,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
-import {
-  SocialLoginModule,
-  GoogleLoginProvider,
-  SocialAuthServiceConfig
-} from '@abacritt/angularx-social-login';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ConfigService } from './services/config.service';
@@ -28,6 +22,8 @@ import { MobileMenuModule } from './modules/mobile-menu/mobile-menu.module';
 import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementDialogComponent } from './announcement/announcement.component';
 import { TrackScrollDirective } from './track-scroll.directive';
+import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY, RECAPTCHA_BASE_URL } from 'ng-recaptcha';
+import { ArchiveProjectService } from './services/archive-project.service';
 
 export function initialize(
   configService: ConfigService,
@@ -40,27 +36,6 @@ export function initialize(
       });
     });
   };
-}
-
-export function getAuthServiceConfigs(configService: ConfigService) {
-  const authServiceConfig: SocialAuthServiceConfig = {
-    providers: []
-  };
-  const googleLoginOptions = {
-    scope: 'profile email',
-    prompt: 'select_account'
-  };
-  configService.getConfig().subscribe((config) => {
-    if (config != null) {
-      if (configService.getGoogleClientId() != null) {
-        authServiceConfig.providers.push({
-          id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider(configService.getGoogleClientId(), googleLoginOptions)
-        });
-      }
-    }
-  });
-  return authServiceConfig;
 }
 
 @NgModule({
@@ -80,17 +55,19 @@ export function getAuthServiceConfigs(configService: ConfigService) {
     HeaderModule,
     HomeModule,
     MobileMenuModule,
-    SocialLoginModule,
     MatSidenavModule,
     MatSnackBarModule,
     MatDialogModule,
+    RecaptchaV3Module,
     RouterModule.forRoot([], {
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
-      relativeLinkResolution: 'legacy'
+      bindToComponentInputs: true,
+      onSameUrlNavigation: 'reload'
     })
   ],
   providers: [
+    ArchiveProjectService,
     ConfigService,
     StudentService,
     TeacherService,
@@ -100,11 +77,6 @@ export function getAuthServiceConfigs(configService: ConfigService) {
       useFactory: initialize,
       deps: [ConfigService, UserService],
       multi: true
-    },
-    {
-      provide: 'SocialAuthServiceConfig',
-      useFactory: getAuthServiceConfigs,
-      deps: [ConfigService]
     },
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
@@ -118,6 +90,17 @@ export function getAuthServiceConfigs(configService: ConfigService) {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
+    },
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useFactory: (configService: ConfigService) => {
+        return configService.getRecaptchaPublicKey();
+      },
+      deps: [ConfigService]
+    },
+    {
+      provide: RECAPTCHA_BASE_URL,
+      useValue: 'https://recaptcha.net/recaptcha/api.js'
     }
   ],
   bootstrap: [AppComponent]

@@ -1,20 +1,24 @@
 <div fxLayoutAlign="start center" fxLayoutGap="8px">
   <span i18n>To set a starter state, edit the content below and save:</span>
   <div>
-    <button mat-icon-button
-        color="primary"
-        matTooltip="Save Starter State"
-        matTooltipPosition="above"
-        (click)="confirmSave()"
-        [disabled]="!isDirty"
-        i18n-matToolTip>
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Save Starter State"
+      matTooltipPosition="above"
+      (click)="confirmSave()"
+      [disabled]="!isDirty"
+      i18n-matToolTip
+    >
       <mat-icon>save</mat-icon>
     </button>
-    <button mat-icon-button
-        matTooltip="Delete Starter State"
-        matTooltipPosition="above"
-        (click)="confirmDelete()"
-        i18n-matToolTip>
+    <button
+      mat-icon-button
+      matTooltip="Delete Starter State"
+      matTooltipPosition="above"
+      (click)="confirmDelete()"
+      i18n-matToolTip
+    >
       <mat-icon>close</mat-icon>
     </button>
   </div>

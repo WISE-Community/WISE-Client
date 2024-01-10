@@ -6,21 +6,19 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { DrawService } from '../drawService';
 import { DrawAuthoring } from './draw-authoring.component';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @NgModule({
   declarations: [DrawAuthoring, EditComponentPrompt],
@@ -31,22 +29,20 @@ import { DrawAuthoring } from './draw-authoring.component';
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule,
-    UpgradeModule
+    MatInputModule
   ],
   providers: [
     AnnotationService,
     ConfigService,
     DrawService,
-    NodeService,
     ProjectAssetService,
     ProjectService,
     SessionService,
     StudentAssetService,
     StudentDataService,
     TagService,
-    TeacherProjectService,
-    UtilService
+    TeacherNodeService,
+    TeacherProjectService
   ],
   exports: [DrawAuthoring, EditComponentPrompt]
 })

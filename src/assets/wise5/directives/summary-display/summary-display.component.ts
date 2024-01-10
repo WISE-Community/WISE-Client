@@ -4,10 +4,11 @@ import { Observable, Subscription } from 'rxjs';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
-import { UtilService } from '../../services/utilService';
 import { SummaryService } from '../../components/summary/summaryService';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { copy } from '../../common/object/object';
+import { rgbToHex } from '../../common/color/color';
 
 @Component({
   selector: 'summary-display',
@@ -68,8 +69,7 @@ export abstract class SummaryDisplay {
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
     protected projectService: ProjectService,
-    protected summaryService: SummaryService,
-    protected utilService: UtilService
+    protected summaryService: SummaryService
   ) {}
 
   ngOnInit() {
@@ -398,7 +398,7 @@ export abstract class SummaryDisplay {
       this.componentId
     );
     if (componentState != null) {
-      tableData = this.utilService.makeCopyOfJSONObject(componentState.studentData.tableData);
+      tableData = copy(componentState.studentData.tableData);
       for (let r = 1; r < tableData.length; r++) {
         tableData[r][1].text = this.getRandomSimilarNumber(tableData[r][1].text);
       }
@@ -758,7 +758,7 @@ export abstract class SummaryDisplay {
       let opacity = 0.1;
       for (let i = 0; i < this.maxScore; i++) {
         opacity = opacity + step;
-        const color = this.utilService.rgbToHex(this.colors.singleHue, opacity);
+        const color = rgbToHex(this.colors.singleHue, opacity);
         colors.push(color);
       }
       return colors;

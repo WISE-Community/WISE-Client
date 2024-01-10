@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { UtilService } from '../assets/wise5/services/utilService';
 import { ConfigService } from '../assets/wise5/services/configService';
 import { ProjectService } from '../assets/wise5/services/projectService';
 import { ProjectLibraryService } from '../assets/wise5/services/projectLibraryService';
@@ -37,7 +36,6 @@ import { DialogGuidanceService } from '../assets/wise5/components/dialogGuidance
 import { PeerChatService } from '../assets/wise5/components/peerChat/peerChatService';
 import { ShowMyWorkService } from '../assets/wise5/components/showMyWork/showMyWorkService';
 import { ShowGroupWorkService } from '../assets/wise5/components/showGroupWork/showGroupWorkService';
-import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 import { ComputerAvatarService } from '../assets/wise5/services/computerAvatarService';
 import { StudentStatusService } from '../assets/wise5/services/studentStatusService';
 import { OpenResponseCompletionCriteriaService } from '../assets/wise5/components/openResponse/openResponseCompletionCriteriaService';
@@ -48,7 +46,13 @@ import { PathService } from '../assets/wise5/services/pathService';
 import { TabulatorDataService } from '../assets/wise5/components/table/tabulatorDataService';
 import { StompService } from '../assets/wise5/services/stompService';
 import { ClickToSnipImageService } from '../assets/wise5/services/clickToSnipImageService';
-import { PasswordService } from './services/password.service';
+import { StudentPeerGroupService } from '../assets/wise5/services/studentPeerGroupService';
+import { ConstraintService } from '../assets/wise5/services/constraintService';
+import { NodeStatusService } from '../assets/wise5/services/nodeStatusService';
+import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
+import { NodeProgressService } from '../assets/wise5/services/nodeProgressService';
+import { CompletionService } from '../assets/wise5/services/completionService';
+import { StudentNodeService } from '../assets/wise5/services/studentNodeService';
 
 @NgModule({
   providers: [
@@ -60,6 +64,8 @@ import { PasswordService } from './services/password.service';
     BranchService,
     ClickToSnipImageService,
     ConceptMapService,
+    ConstraintService,
+    CompletionService,
     ComponentService,
     ComponentServiceLookupService,
     ComponentTypeService,
@@ -75,13 +81,14 @@ import { PasswordService } from './services/password.service';
     LabelService,
     MatchService,
     MultipleChoiceService,
-    NodeService,
+    NodeProgressService,
+    { provide: NodeService, useExisting: StudentNodeService },
+    NodeStatusService,
     NotebookService,
     NotificationService,
     OutsideURLService,
     OpenResponseCompletionCriteriaService,
     OpenResponseService,
-    PasswordService,
     PathService,
     PeerChatService,
     PeerGroupService,
@@ -93,13 +100,14 @@ import { PasswordService } from './services/password.service';
     StompService,
     StudentAssetService,
     StudentDataService,
+    StudentNodeService,
+    StudentPeerGroupService,
     StudentStatusService,
     StudentWebSocketService,
     SummaryService,
     TableService,
     TabulatorDataService,
     TagService,
-    UtilService,
     VLEProjectService,
     WiseLinkService
   ]

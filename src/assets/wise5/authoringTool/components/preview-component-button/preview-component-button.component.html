@@ -1,8 +1,10 @@
-<button mat-raised-button
-    color="primary"
-    matTooltip="Preview Component"
-    matTooltipPosition="above"
-    i18n-matTooltip
-    (click)="popUpComponentPreview()">
-  <mat-icon>visibility</mat-icon>
+<button
+  mat-icon-button
+  color="primary"
+  matTooltip="Preview Component"
+  matTooltipPosition="above"
+  i18n-matTooltip
+  (click)="popUpComponentPreview($event)"
+>
+  <mat-icon>preview</mat-icon>
 </button>

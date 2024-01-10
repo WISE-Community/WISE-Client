@@ -1,13 +1,13 @@
-@import '~style/abstracts/variables';
+@import 'style/abstracts/variables';
 
 .team {
-  &.mat-card {
+  &.mat-mdc-card {
     padding: 8px 8px 0;
     box-shadow: none;
   }
 
-  .mat-card-title {
-    margin-bottom: 4px;
+  .mat-mdc-card-content {
+    padding: 8px 0 0;
   }
 }
 
@@ -44,6 +44,6 @@ li {
   opacity: .4;
 }
 
-.mat-card-content {
+.mat-mdc-card-content {
   margin: 0;
 }

@@ -8,13 +8,15 @@ import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { TableService } from '../tableService';
 import { MatDialog } from '@angular/material/dialog';
 import { TabulatorData } from '../TabulatorData';
 import { TabulatorDataService } from '../tabulatorDataService';
+import { copy } from '../../../common/object/object';
+import { convertToPNGFile } from '../../../common/canvas/canvas';
+import { hasConnectedComponent } from '../../../common/ComponentContent';
 
 @Component({
   selector: 'table-student',
@@ -30,6 +32,7 @@ export class TableStudent extends ComponentStudent {
   dataExplorerGraphType: string;
   dataExplorerSeries: any[];
   dataExplorerSeriesParams: any[];
+  dataExplorerTooltipHeaderColumn: number;
   dataExplorerXAxisLabel: string;
   dataExplorerXColumn: number;
   dataExplorerYAxisLabel: string;
@@ -60,8 +63,7 @@ export class TableStudent extends ComponentStudent {
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     private TableService: TableService,
-    private TabulatorDataService: TabulatorDataService,
-    protected UtilService: UtilService
+    private TabulatorDataService: TabulatorDataService
   ) {
     super(
       AnnotationService,
@@ -71,8 +73,7 @@ export class TableStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 
@@ -81,9 +82,6 @@ export class TableStudent extends ComponentStudent {
 
     // holds the the table data
     this.tableData = null;
-
-    // whether the reset table button is shown or not
-    this.isResetTableButtonVisible = true;
 
     // the label for the notebook in thos project
     this.notebookConfig = this.NotebookService.getNotebookConfig();
@@ -100,9 +98,8 @@ export class TableStudent extends ComponentStudent {
 
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
-    this.isResetTableButtonVisible = true;
 
-    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
+    if (hasConnectedComponent(this.componentContent, 'showWork')) {
       // we will show work from another component
       this.handleConnectedComponents();
     } else if (
@@ -146,6 +143,9 @@ export class TableStudent extends ComponentStudent {
       this.isDisabled = true;
     }
 
+    this.isResetTableButtonVisible = this.TableService.componentHasEditableCells(
+      this.componentContent
+    );
     this.disableComponentIfNecessary();
 
     if (this.isDataExplorerEnabled && this.componentContent.dataExplorerDataToColumn != null) {
@@ -168,6 +168,7 @@ export class TableStudent extends ComponentStudent {
     this.isDataExplorerScatterPlotRegressionLineEnabled = this.componentContent.isDataExplorerScatterPlotRegressionLineEnabled;
     this.dataExplorerYAxisLabels = Array(this.componentContent.numDataExplorerYAxis).fill('');
     this.dataExplorerSeriesParams = this.componentContent.dataExplorerSeriesParams;
+    this.dataExplorerTooltipHeaderColumn = this.componentContent.dataExplorerTooltipHeaderColumn;
   }
 
   setDataExplorerDataToColumn(): void {
@@ -271,14 +272,6 @@ export class TableStudent extends ComponentStudent {
       this.dataExplorerColumnToIsDisabled['y'] = true;
     } else {
       this.dataExplorerColumnToIsDisabled[`y${yColumnNumber}`] = true;
-    }
-  }
-
-  handleStudentWorkSavedToServer(componentState: any): void {
-    if (this.isForThisComponent(componentState)) {
-      this.isDirty = false;
-      this.emitComponentDirty(false);
-      this.latestComponentState = componentState;
     }
   }
 
@@ -404,6 +397,7 @@ export class TableStudent extends ComponentStudent {
     studentData.isDataExplorerEnabled = this.isDataExplorerEnabled;
     studentData.dataExplorerGraphType = this.dataExplorerGraphType;
     studentData.dataExplorerXAxisLabel = this.dataExplorerXAxisLabel;
+    studentData.dataExplorerTooltipHeaderColumn = this.dataExplorerTooltipHeaderColumn;
     if (this.dataExplorerYAxisLabel != null) {
       studentData.dataExplorerYAxisLabel = this.dataExplorerYAxisLabel;
     }
@@ -411,7 +405,7 @@ export class TableStudent extends ComponentStudent {
       studentData.dataExplorerYAxisLabels = this.dataExplorerYAxisLabels;
     }
     studentData.isDataExplorerScatterPlotRegressionLineEnabled = this.isDataExplorerScatterPlotRegressionLineEnabled;
-    studentData.dataExplorerSeries = this.UtilService.makeCopyOfJSONObject(this.dataExplorerSeries);
+    studentData.dataExplorerSeries = copy(this.dataExplorerSeries);
 
     studentData.submitCounter = this.submitCounter;
     componentState.isSubmit = this.isSubmit;
@@ -897,9 +891,8 @@ export class TableStudent extends ComponentStudent {
       true
     );
     html2canvas(tableElement).then((canvas: any) => {
-      const base64Image = canvas.toDataURL('image/png');
-      const imageObject = this.UtilService.getImageObjectFromBase64String(base64Image);
-      this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), imageObject);
+      const pngFile = convertToPNGFile(canvas);
+      this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), pngFile);
     });
   }
 
@@ -954,7 +947,7 @@ export class TableStudent extends ComponentStudent {
       );
       const connectedComponentsAndComponentState = {
         connectedComponent: connectedComponent,
-        componentState: this.UtilService.makeCopyOfJSONObject(componentState)
+        componentState: copy(componentState)
       };
       connectedComponentsAndTheirComponentStates.push(connectedComponentsAndComponentState);
     }
@@ -1132,23 +1125,21 @@ export class TableStudent extends ComponentStudent {
     this.dataExplorerYAxisLabel = componentState.studentData.dataExplorerYAxisLabel;
     this.dataExplorerYAxisLabels = componentState.studentData.dataExplorerYAxisLabels;
     if (componentState.studentData.dataExplorerSeries != null) {
-      this.dataExplorerSeries = this.UtilService.makeCopyOfJSONObject(
-        componentState.studentData.dataExplorerSeries
-      );
+      this.dataExplorerSeries = copy(componentState.studentData.dataExplorerSeries);
       this.dataExplorerXColumn = this.dataExplorerSeries[0].xColumn;
     }
   }
 
   processConnectedComponentState(componentState: any): void {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
+    const connectedComponent = this.component.getConnectedComponent(
+      componentState.nodeId,
+      componentState.componentId
     );
     const componentType = this.ProjectService.getComponentType(
       connectedComponent.nodeId,
       connectedComponent.componentId
     );
-    const componentStateCopy = this.UtilService.makeCopyOfJSONObject(componentState);
+    const componentStateCopy = copy(componentState);
     if (componentType === 'Table') {
       this.setStudentWork(componentStateCopy);
       this.isDirty = true;

@@ -40,7 +40,7 @@ describe('ChooseStructureLocationController', () => {
     $state = _$state_;
     _$stateParams_.structure = structure;
     $scope = $rootScope.$new();
-    demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSONOriginal));
+    demoProjectJSON = copy(demoProjectJSONOriginal);
     ProjectService.setProject(demoProjectJSON);
     controller = $controller('ChooseStructureLocationController', {
       $scope: $scope,

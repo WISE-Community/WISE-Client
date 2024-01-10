@@ -1,0 +1,55 @@
+@import 'style/abstracts/variables', 'style/abstracts/functions', 'style/abstracts/mixins';
+
+.match {
+  margin: 0 -4px;
+}
+
+.bucket {
+  border-radius: $button-border-radius;
+  margin: 4px;
+}
+
+.bucket-title {
+  padding: 8px 12px 0;
+
+  h3 {
+    margin: 0;
+  }
+}
+
+.items {
+  column-gap: 0;
+  margin: 0;
+  padding: 4px;
+  height: 100%;
+  min-height: 48px;
+  border-bottom-left-radius: $button-border-radius;
+  border-bottom-right-radius: $button-border-radius;
+  transition: background-color 250ms;
+}
+
+.item {
+  padding: 4px;
+  list-style-type: none;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+
+  &:not(.disabled) {
+    cursor: move;
+  }
+}
+
+.target {
+  height: 100%;
+}
+
+.cdk-drag-placeholder {
+  opacity: .4;
+}
+
+component-save-submit-buttons {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}

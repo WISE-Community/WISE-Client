@@ -1,12 +1,12 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Student } from '../../domain/student';
 import { StudentRun } from '../student-run';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { SocialAuthService, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { ConfigService } from '../../services/config.service';
 import { StudentService } from '../student.service';
 import { Router } from '@angular/router';
+import { GoogleUser } from '../../modules/google-sign-in/GoogleUser';
 
 @Component({
   selector: 'app-team-sign-in-dialog',
@@ -24,7 +24,6 @@ export class TeamSignInDialogComponent implements OnInit {
 
   constructor(
     private configService: ConfigService,
-    private socialAuthService: SocialAuthService,
     private userService: UserService,
     private studentService: StudentService,
     private router: Router,
@@ -104,7 +103,7 @@ export class TeamSignInDialogComponent implements OnInit {
                   this.run.workgroupId = canBeAddedToWorkgroupResponse.workgroupId;
                 }
               } else if (
-                canBeAddedToWorkgroupResponse.workgroupMembers.length ===
+                canBeAddedToWorkgroupResponse.workgroupMembers?.length ===
                 this.run.maxStudentsPerTeam
               ) {
                 alert(
@@ -139,67 +138,59 @@ export class TeamSignInDialogComponent implements OnInit {
       });
   }
 
-  socialSignIn(socialPlatform: string, teamMember: any) {
-    let socialPlatformProvider;
-    if (socialPlatform == 'google') {
-      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-    }
-
-    this.socialAuthService.signIn(socialPlatformProvider).then((userData) => {
-      const googleUserId = userData.id;
-      if (this.isExistingStudent(teamMember)) {
-        this.userService.isGoogleIdCorrect(googleUserId, teamMember.id).subscribe((isCorrect) => {
-          if (isCorrect) {
-            this.markAsSignedIn(teamMember);
-          } else {
-            alert($localize`Incorrect Google user. Please try again.`);
-          }
-        });
-      } else {
-        this.userService.getUserByGoogleId(googleUserId).subscribe((response) => {
-          if (response.status === 'success') {
-            this.studentService
-              .canBeAddedToWorkgroup(this.run.id, this.run.workgroupId, response.userId)
-              .subscribe((canBeAddedToWorkgroupResponse) => {
-                if (canBeAddedToWorkgroupResponse.isTeacher) {
-                  alert($localize`A teacher cannot be added as a team member.`);
-                } else if (canBeAddedToWorkgroupResponse.status && this.allowSignIn(response, 0)) {
-                  for (const member of canBeAddedToWorkgroupResponse.workgroupMembers) {
-                    if (!this.isLoggedInUser(member.username)) {
-                      const currentMember = this.getTeamMemberByUsernameOrAvailableSlot(
-                        member.username
-                      );
-                      this.updateTeamMember(this.teamMembers.indexOf(currentMember), member);
-                    }
+  googleSignIn(credential: GoogleUser, teamMember: any): void {
+    if (this.isExistingStudent(teamMember)) {
+      this.userService.isGoogleIdCorrect(credential.sub, teamMember.id).subscribe((isCorrect) => {
+        if (isCorrect) {
+          this.markAsSignedIn(teamMember);
+        } else {
+          alert($localize`Incorrect Google user. Please try again.`);
+        }
+      });
+    } else {
+      this.userService.getUserByGoogleId(credential.sub).subscribe((response) => {
+        if (response.status === 'success') {
+          this.studentService
+            .canBeAddedToWorkgroup(this.run.id, this.run.workgroupId, response.userId)
+            .subscribe((canBeAddedToWorkgroupResponse) => {
+              if (canBeAddedToWorkgroupResponse.isTeacher) {
+                alert($localize`A teacher cannot be added as a team member.`);
+              } else if (canBeAddedToWorkgroupResponse.status && this.allowSignIn(response, 0)) {
+                for (const member of canBeAddedToWorkgroupResponse.workgroupMembers) {
+                  if (!this.isLoggedInUser(member.username)) {
+                    const currentMember = this.getTeamMemberByUsernameOrAvailableSlot(
+                      member.username
+                    );
+                    this.updateTeamMember(this.teamMembers.indexOf(currentMember), member);
                   }
-                  this.markAsSignedIn(teamMember);
-                } else if (
-                  canBeAddedToWorkgroupResponse.workgroupMembers.length ===
-                  this.run.maxStudentsPerTeam
-                ) {
-                  alert(
-                    $localize`${this.getNameDisplay(
-                      response
-                    )}:studentName: is already in a team that is full`
-                  );
-                } else if (!this.allowSignIn(response, 0)) {
-                  alert(
-                    $localize`${this.getNameDisplay(response)}:studentName: is already in the team`
-                  );
-                } else {
-                  alert(
-                    $localize`${this.getNameDisplay(
-                      response
-                    )}:studentName: is already on another team`
-                  );
                 }
-              });
-          } else if (response.status === 'error') {
-            alert($localize`No WISE user with this Google ID found.`);
-          }
-        });
-      }
-    });
+                this.markAsSignedIn(teamMember);
+              } else if (
+                canBeAddedToWorkgroupResponse.workgroupMembers.length ===
+                this.run.maxStudentsPerTeam
+              ) {
+                alert(
+                  $localize`${this.getNameDisplay(
+                    response
+                  )}:studentName: is already in a team that is full`
+                );
+              } else if (!this.allowSignIn(response, 0)) {
+                alert(
+                  $localize`${this.getNameDisplay(response)}:studentName: is already in the team`
+                );
+              } else {
+                alert(
+                  $localize`${this.getNameDisplay(
+                    response
+                  )}:studentName: is already on another team`
+                );
+              }
+            });
+        } else if (response.status === 'error') {
+          alert($localize`No WISE user with this Google ID found.`);
+        }
+      });
+    }
   }
 
   markAsSignedIn(teamMember: any) {

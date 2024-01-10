@@ -8,6 +8,7 @@ import { StudentAssetService } from './studentAssetService';
 import { Subject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { EditNotebookItemDialogComponent } from '../themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component';
+import { Annotation } from '../common/Annotation';
 
 @Injectable()
 export class NotebookService {
@@ -52,7 +53,7 @@ export class NotebookService {
   reports = [];
   publicNotebookItems = {};
   notebooksByWorkgroup = {};
-  private notebookItemAnnotationReceivedSource: Subject<any> = new Subject<any>();
+  private notebookItemAnnotationReceivedSource: Subject<Annotation> = new Subject<Annotation>();
   public notebookItemAnnotationReceived$ = this.notebookItemAnnotationReceivedSource.asObservable();
   private notebookItemChosenSource: Subject<any> = new Subject<any>();
   public notebookItemChosen$ = this.notebookItemChosenSource.asObservable();
@@ -60,7 +61,7 @@ export class NotebookService {
   public notebookUpdated$ = this.notebookUpdatedSource.asObservable();
   private publicNotebookItemsRetrievedSource: Subject<any> = new Subject<any>();
   public publicNotebookItemsRetrieved$ = this.publicNotebookItemsRetrievedSource.asObservable();
-  private showReportAnnotationsSource: Subject<any> = new Subject<any>();
+  private showReportAnnotationsSource: Subject<void> = new Subject<void>();
   public showReportAnnotations$ = this.showReportAnnotationsSource.asObservable();
   private notesVisibleSource: Subject<boolean> = new Subject<boolean>();
   public notesVisible$ = this.notesVisibleSource.asObservable();
@@ -77,7 +78,7 @@ export class NotebookService {
     private StudentAssetService: StudentAssetService
   ) {}
 
-  broadcastNotebookItemAnnotationReceived(annotation: any) {
+  broadcastNotebookItemAnnotationReceived(annotation: Annotation) {
     this.notebookItemAnnotationReceivedSource.next(annotation);
   }
 
@@ -91,7 +92,7 @@ export class NotebookService {
 
   addNote(
     nodeId: string,
-    file: any = null,
+    file: File = null,
     text: string = null,
     studentWorkIds: number[] = null,
     isEditTextEnabled: boolean = true,

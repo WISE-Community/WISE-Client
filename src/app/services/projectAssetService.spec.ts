@@ -2,7 +2,6 @@ import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ProjectAssetService } from './projectAssetService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 let service: ProjectAssetService;
 let configService: ConfigService;
@@ -12,12 +11,12 @@ let spongeBobAndPatrickAssets: any;
 describe('ProjectAssetService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule, StudentTeacherCommonServicesModule],
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
       providers: [ProjectAssetService]
     });
-    http = TestBed.get(HttpTestingController);
-    configService = TestBed.get(ConfigService);
-    service = TestBed.get(ProjectAssetService);
+    http = TestBed.inject(HttpTestingController);
+    configService = TestBed.inject(ConfigService);
+    service = TestBed.inject(ProjectAssetService);
     spyOn(configService, 'getConfigParam').and.callFake((param) => {
       if (param === 'projectAssetURL') {
         return '/author/project/asset/1';
@@ -43,8 +42,6 @@ describe('ProjectAssetService', () => {
   retrieveTextFilesAndCalculateUsedFiles();
   getAllUsedTextContent();
   isFileAlreadyAdded();
-  getAllTextFiles();
-  isTextFile();
   calculateUsedFiles();
   getFileNameFromURL();
   getTextFiles();
@@ -53,7 +50,7 @@ describe('ProjectAssetService', () => {
 
 function retrieveProjectAssets() {
   it('should make a request to retrieve project assets', fakeAsync(() => {
-    service.retrieveProjectAssets();
+    service.retrieveProjectAssets().subscribe();
     const request = http.expectOne({ url: '/author/project/asset/1', method: 'GET' });
     request.flush(spongeBobAndPatrickAssets);
     expect(service.totalSizeMax).toEqual(10000);
@@ -132,39 +129,6 @@ function calculateAssetUsage() {
       spongeBobAndPatrickAssets,
       usedTextContent
     );
-  });
-}
-
-function getAllTextFiles() {
-  it('should get all text files when there are no files', () => {
-    const assets = {
-      files: []
-    };
-    const allTextFiles = service.getAllTextFiles(assets);
-    expect(allTextFiles.length).toEqual(0);
-  });
-  it('should get all text files when there are no text files', () => {
-    const assets = {
-      files: [{ fileName: 'spongebob.png' }]
-    };
-    const allTextFiles = service.getAllTextFiles(assets);
-    expect(allTextFiles.length).toEqual(0);
-  });
-  it('should get all text files when there are text files', () => {
-    const assets = {
-      files: [{ fileName: 'spongebob.png' }, { fileName: 'model.html' }]
-    };
-    const allTextFiles = service.getAllTextFiles(assets);
-    expect(allTextFiles.length).toEqual(1);
-  });
-}
-
-function isTextFile() {
-  it('should check if a file is a text file when it is not', () => {
-    expect(service.isTextFile('spongebob.png')).toEqual(false);
-  });
-  it('should check if a file is a text file when it is', () => {
-    expect(service.isTextFile('model.html')).toEqual(true);
   });
 }
 

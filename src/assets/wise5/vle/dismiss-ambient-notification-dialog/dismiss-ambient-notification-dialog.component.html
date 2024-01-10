@@ -1,8 +1,10 @@
 <div aria-label="View alert" class="notification-dismiss">
-  <h2 i18n>Action Required</h2>
+  <h2 mat-dialog-title i18n>Action Required</h2>
   <mat-dialog-content>
     <p class="center">{{ notification.message }}</p>
-    <p class="center md-title"><a (click)="visitNode()">{{ nodePositionAndTitle }}</a></p>
+    <p class="center md-title">
+      <a (click)="visitNode()">{{ nodePositionAndTitle }}</a>
+    </p>
     <div *ngIf="hasDismissCode">
       <hr />
       <div [formGroup]="formGroup">
@@ -10,33 +12,30 @@
         <mat-form-field class="notification-dismiss__input">
           <mat-label i18n>Dismiss Code</mat-label>
           <input
-              matInput
-              [(ngModel)]="dismissCodeInput"
-              formControlName="dismissCode"
-              type="password"
-              placeholder="Dismiss code"
-              i18n-placeholder />
+            matInput
+            [(ngModel)]="dismissCodeInput"
+            formControlName="dismissCode"
+            type="password"
+            placeholder="Dismiss code"
+            i18n-placeholder
+          />
           <mat-error *ngIf="formGroup.controls['dismissCode'].errors">{{ errorMessage }}</mat-error>
         </mat-form-field>
       </div>
     </div>
   </mat-dialog-content>
-  <mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
-    <button
-        mat-button
-        (click)="closeDialog()"
-        aria-label="Cancel"
-        i18n-aria-label
-        i18n>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="closeDialog()" aria-label="Cancel" i18n-aria-label i18n>
       Cancel
     </button>
     <button
-        mat-button
-        (click)="checkDismissCode()"
-        [disabled]="hasDismissCode && !dismissCodeInput"
-        aria-label="Dismiss"
-        i18n-aria-label
-        i18n>
+      mat-button
+      (click)="checkDismissCode()"
+      [disabled]="hasDismissCode && !dismissCodeInput"
+      aria-label="Dismiss"
+      i18n-aria-label
+      i18n
+    >
       Dismiss
     </button>
   </mat-dialog-actions>

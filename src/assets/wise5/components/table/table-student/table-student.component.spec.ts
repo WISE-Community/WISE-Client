@@ -7,7 +7,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
 import { ProjectService } from '../../../services/projectService';
-import { UtilService } from '../../../services/utilService';
 import { TabulatorDataService } from '../tabulatorDataService';
 import { TableStudent } from './table-student.component';
 
@@ -93,7 +92,6 @@ describe('TableStudentComponent', () => {
   getYAxisForDataExplorerSeries();
   getYFromDataPoint();
   handleConnectedComponents();
-  handleStudentWorkSavedToServer();
   initializeDataExplorer();
   isAllDataExplorerSeriesSpecified();
   isDataExplorerOneYAxis();
@@ -613,23 +611,6 @@ function handleConnectedComponents() {
   });
 }
 
-function handleStudentWorkSavedToServer() {
-  describe('handleStudentWorkSavedToServer', () => {
-    it('should handle student work saved to server', () => {
-      const componentState = {
-        componentId: componentId,
-        nodeId: nodeId,
-        studentData: {
-          tableData: testTableData
-        }
-      };
-      component.isDirty = true;
-      component.handleStudentWorkSavedToServer(componentState);
-      expect(component.isDirty).toEqual(false);
-    });
-  });
-}
-
 function isAllDataExplorerSeriesSpecified() {
   describe('isAllDataExplorerSeriesSpecified', () => {
     it('should check if all data explorer series are specified when it is', () => {
@@ -652,7 +633,7 @@ function isAllDataExplorerSeriesSpecified() {
 function processConnectedComponentState() {
   describe('processConnectedComponentState', () => {
     beforeEach(() => {
-      spyOn(TestBed.inject(UtilService), 'getConnectedComponentByComponentState').and.returnValue({
+      spyOn(component.component, 'getConnectedComponent').and.returnValue({
         nodeId: nodeId,
         componentId: componentId
       });

@@ -1,6 +1,11 @@
-<div *ngIf="dynamicPrompt.prePrompt !== ''" [innerHTML]="dynamicPrompt.prePrompt" class="prompt">
-</div>
-<div *ngIf="prompt !== ''" [innerHTML]="prompt" class="prompt">
-</div>
-<div *ngIf="dynamicPrompt.postPrompt !== ''" [innerHTML]="dynamicPrompt.postPrompt" class="prompt">
-</div>
+<div
+  *ngIf="dynamicPrompt.prePrompt !== ''"
+  [innerHTML]="dynamicPrompt.prePrompt"
+  class="prompt"
+></div>
+<div *ngIf="prompt !== ''" [innerHTML]="prompt" class="prompt"></div>
+<div
+  *ngIf="dynamicPrompt.postPrompt !== ''"
+  [innerHTML]="dynamicPrompt.postPrompt"
+  class="prompt"
+></div>

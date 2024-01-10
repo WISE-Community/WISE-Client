@@ -1,285 +1,43 @@
-<div class="body-div">
+<ng-template #addConstraintButton>
   <div fxLayoutGap="16px">
     <mat-label i18n>Add Constraint</mat-label>
-    <button mat-raised-button
-        color="primary"
-        (click)="addConstraintAndScrollToBottom()"
-        matTooltip="Add Constraint"
-        matTooltipPosition="above"
-        i18n-matTooltip>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="addConstraint()"
+      matTooltip="Add Constraint"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <div *ngFor="let constraint of node.constraints; index as constraintIndex"
-      class="constraints-div"
-      fxLayoutGap="16px">
+</ng-template>
+<div class="body-div">
+  <ng-template [ngTemplateOutlet]="addConstraintButton"></ng-template>
+  <div
+    id="{{ constraint.id }}"
+    *ngFor="let constraint of content.constraints; index as constraintIndex"
+    class="constraints-div"
+    fxLayoutGap="16px"
+  >
     <b i18n>Constraint {{ constraintIndex + 1 }}</b>
-    <button mat-raised-button
-        color="primary"
-        (click)="deleteConstraint(constraintIndex)"
-        matTooltip="Delete Constraint"
-        matTooltipPosition="above"
-        i18n-matTooltip>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="deleteConstraint(constraintIndex)"
+      matTooltip="Delete Constraint"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
       <mat-icon>delete</mat-icon>
     </button>
-    <br/>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-      <mat-form-field class="common-width">
-        <mat-label i18n>Action</mat-label>
-        <mat-select [(ngModel)]="constraint.action"
-            (ngModelChange)="saveProject()">
-          <mat-option *ngFor="let action of constraintActions; index as actionIndex"
-              [value]="action.value">
-            <span [ngStyle]="actionIndex === 0 && { 'color': 'red' }">{{ action.text }}</span>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <required-error-label *ngIf="constraint.action === ''">
-      </required-error-label>
-      <div fxFlex></div>
-      <mat-form-field class="removal-conditional-select">
-        <mat-label i18n>Removal Conditional</mat-label>
-        <mat-select [(ngModel)]="constraint.removalConditional"
-            (ngModelChange)="saveProject()">
-          <mat-option *ngFor="let availableRemovalConditional of removalConditionals"
-              [value]="availableRemovalConditional.value">
-            <span>{{ availableRemovalConditional.text }}</span>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div *ngFor="let criteria of constraint.removalCriteria; index as criteriaIndex"
-        class="constraint-div" fxLayoutGap="16px">
-      <div fxLayoutGap="16px">
-        <b i18n>Removal Criteria</b>
-        <button mat-raised-button
-            color="primary"
-            (click)="deleteRemovalCriteria(constraint, criteriaIndex)"
-            matTooltip="Delete Removal Criteria"
-            matTooltipPosition="above"
-            i18n-matTooltip>
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-        <mat-form-field class="common-width">
-          <mat-label i18n>Removal Criteria Name</mat-label>
-          <mat-select [(ngModel)]="criteria.name"
-              (ngModelChange)="removalCriteriaNameChanged(criteria)">
-            <mat-option *ngFor="let availableRemovalCriteria of removalCriteria; index as availableRemovalCriteriaIndex"
-                [value]="availableRemovalCriteria.value">
-              <span [ngStyle]="availableRemovalCriteriaIndex === 0 && { 'color': 'red' }">{{ availableRemovalCriteria.text }}</span>
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <required-error-label *ngIf="criteria.name === ''">
-        </required-error-label>
-      </div>
-      <div *ngFor="let param of getRemovalCriteriaParamsByName(criteria.name)">
-        <div *ngIf="param.value === 'nodeId'"
-            fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-          <mat-form-field class="common-width">
-            <mat-label>{{ param.text }}</mat-label>
-            <mat-select
-                [(ngModel)]="criteria.params.nodeId"
-                (ngModelChange)="constraintRemovalCriteriaNodeIdChanged(criteria)">
-              <mat-option [value]="''">
-                <span class="red" i18n>Please Choose a Step</span>
-              </mat-option>
-              <mat-option *ngFor="let nodeId of nodeIds" [value]="nodeId">
-                <span i18n>{{ getNodePositionById(nodeId) + ':'}} {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span>
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <required-error-label *ngIf="criteria.params.nodeId === ''">
-          </required-error-label>
-        </div>
-        <div *ngIf="param.value === 'componentId'"
-            fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-          <mat-form-field class="common-width">
-            <mat-label>{{ param.text }}</mat-label>
-            <mat-select
-                [(ngModel)]="criteria.params.componentId"
-                (ngModelChange)="constraintRemovalCriteriaComponentIdChanged()">
-              <mat-option [value]="''">
-                <span class="red" i18n>Please Choose a Component</span>
-              </mat-option>
-              <mat-option *ngFor="let component of getComponents(criteria.params.nodeId); index as componentIndex"
-                  [value]="component.id">
-                <span i18n>{{ (componentIndex + 1) }}. {{ component.type }} (Prompt: {{ component.prompt }})</span>
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <required-error-label *ngIf="criteria.params.componentId === ''">
-          </required-error-label>
-        </div>
-        <div *ngIf="param.value === 'fromNodeId'"
-            fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-          <mat-form-field class="common-width">
-            <mat-label>{{ param.text }}</mat-label>
-            <mat-select
-                [(ngModel)]="criteria.params.fromNodeId"
-                (ngModelChange)="saveProject()">
-              <mat-option [value]="''">
-                <span class="red" i18n>Please Select a From Step</span>
-              </mat-option>
-              <mat-option *ngFor="let nodeId of nodeIds"
-                  [value]="nodeId">
-                <span>{{ getNodePositionById(nodeId) + ':'}} {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span>
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <required-error-label *ngIf="criteria.params.fromNodeId == null || criteria.params.fromNodeId === ''">
-          </required-error-label>
-        </div>
-        <div *ngIf="param.value === 'toNodeId'"
-            fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-          <mat-form-field class="common-width">
-            <mat-label>{{ param.text }}</mat-label>
-            <mat-select
-                [(ngModel)]="criteria.params.toNodeId"
-                (ngModelChange)="saveProject()">
-              <mat-option [value]="''">
-                <span class="red" i18n>Please Select a To Step</span>
-              </mat-option>
-              <mat-option *ngFor="let nodeId of nodeIds"
-                  [value]="nodeId">
-                <span>{{ getNodePositionById(nodeId) + ':'}} {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span>
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <required-error-label *ngIf="criteria.params.toNodeId == null || criteria.params.toNodeId === ''">
-          </required-error-label>
-        </div>
-        <div *ngIf="param.value === 'scores'"
-            fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-          <mat-form-field>
-            <mat-label>{{ param.text }}</mat-label>
-            <input matInput
-                [(ngModel)]="criteria.params.scores"
-                (ngModelChange)="scoresChanged($event, criteria.params)"/>
-          </mat-form-field>
-          <required-error-label *ngIf="criteria.params.scores.length === 0 || (criteria.params.scores.length === 1 && criteria.params.scores[0] === '')">
-          </required-error-label>
-        </div>
-        <div *ngIf="param.value === 'requiredSubmitCount'"
-            fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-          <mat-form-field>
-            <mat-label>{{ param.text }}</mat-label>
-            <input matInput
-                type="number"
-                *ngIf="param.value === 'requiredSubmitCount'"
-                [(ngModel)]="criteria.params.requiredSubmitCount"
-                (ngModelChange)="saveProject()"/>
-          </mat-form-field>
-          <required-error-label *ngIf="criteria.params.requiredSubmitCount == null || criteria.params.requiredSubmitCount === ''">
-          </required-error-label>
-        </div>
-        <div *ngIf="param.value === 'choiceIds' && getChoiceTypeByNodeIdAndComponentId(criteria.params.nodeId, criteria.params.componentId) === 'radio'"
-            fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-          <mat-form-field class="common-width">
-            <mat-label>{{ param.text }}</mat-label>
-            <mat-select [(ngModel)]="criteria.params.choiceIds"
-                (ngModelChange)="saveProject()">
-              <mat-option [value]="''">
-                <span fxLayout="row" fxLayoutAlign="start center">
-                  <span class="red" i18n>Please Select a Choice</span>
-                </span>
-              </mat-option>
-              <mat-option *ngFor="let choice of getChoices(criteria.params.nodeId, criteria.params.componentId)"
-                  [value]="choice.id">
-                <span>{{ choice.text }}</span>
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <required-error-label *ngIf="criteria.params.choiceIds === ''">
-          </required-error-label>
-        </div>
-        <div *ngIf="param.value === 'choiceIds' && getChoiceTypeByNodeIdAndComponentId(criteria.params.nodeId, criteria.params.componentId) === 'checkbox'"
-            fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-          <mat-form-field class="common-width">
-            <mat-label>{{ param.text }}</mat-label>
-            <mat-select
-                [(ngModel)]="criteria.params.choiceIds"
-                (ngModelChange)="saveProject()"
-                multiple="{{getChoiceTypeByNodeIdAndComponentId(criteria.params.nodeId, criteria.params.componentId)}}">
-              <mat-option [value]="choice.id" *ngFor="let choice of getChoices(criteria.params.nodeId, criteria.params.componentId)">{{choice.text}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <required-error-label *ngIf="criteria.params.choiceIds.length === 0">
-          </required-error-label>
-        </div>
-        <div *ngIf="param.value === 'requiredNumberOfWords'"
-            fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-          <mat-form-field class="common-width">
-            <mat-label i18n>{{ param.text }}</mat-label>
-            <input matInput
-                type="number"
-                [(ngModel)]="criteria.params.requiredNumberOfWords"
-                (ngModelChange)="saveProject()"/>
-          </mat-form-field>
-          <required-error-label *ngIf="criteria.params.requiredNumberOfWords == null || criteria.params.requiredNumberOfWords === ''">
-          </required-error-label>
-        </div>
-        <div *ngIf="param.value === 'requiredNumberOfNotes'"
-            fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-          <mat-form-field class="common-width">
-            <mat-label i18n>{{ param.text }}</mat-label>
-            <input matInput
-                type="number"
-                [(ngModel)]="criteria.params.requiredNumberOfNotes"
-                (ngModelChange)="saveProject()"/>
-          </mat-form-field>
-          <required-error-label *ngIf="criteria.params.requiredNumberOfNotes == null || criteria.params.requiredNumberOfNotes === ''">
-          </required-error-label>
-        </div>
-        <div *ngIf="param.value === 'requiredNumberOfFilledRows'"
-            fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-          <mat-form-field class="common-width">
-            <mat-label i18n>{{ param.text }}</mat-label>
-            <input matInput
-                type="number"
-                [(ngModel)]="criteria.params.requiredNumberOfFilledRows"
-                (ngModelChange)="saveProject()"/>
-          </mat-form-field>
-          <required-error-label *ngIf="criteria.params.requiredNumberOfFilledRows == null || criteria.params.requiredNumberOfFilledRows === ''">
-          </required-error-label>
-        </div>
-        <mat-checkbox *ngIf="param.value === 'tableHasHeaderRow'"
-            color="primary"
-            [(ngModel)]="criteria.params.tableHasHeaderRow"
-            (ngModelChange)="saveProject()">
-          {{ param.text }}
-        </mat-checkbox>
-        <mat-checkbox *ngIf="param.value === 'requireAllCellsInARowToBeFilled'"
-            color="primary"
-            [(ngModel)]="criteria.params.requireAllCellsInARowToBeFilled"
-            (ngModelChange)="saveProject()">
-          {{ param.text }}
-        </mat-checkbox>
-      </div>
-    </div>
-    <div fxLayoutGap="16px">
-      <mat-label i18n>Add Removal Criteria</mat-label>
-      <button mat-raised-button
-          color="primary"
-          (click)="addRemovalCriteria(constraint)"
-          matTooltip="Add Removal Criteria"
-          matTooltipPosition="above"
-          i18n-matTooltip>
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
+    <br />
+    <node-constraint-authoring [constraint]="constraint"></node-constraint-authoring>
   </div>
-  <div *ngIf="node.constraints.length > 0" fxLayoutGap="16px">
-    <mat-label i18n>Add Constraint</mat-label>
-    <button mat-raised-button
-        color="primary"
-        (click)="addConstraintAndScrollToBottom()"
-        matTooltip="Add Constraint"
-        matTooltipPosition="above"
-        i18n-matTooltip>
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+  <ng-template
+    *ngIf="content.constraints.length > 0"
+    [ngTemplateOutlet]="addConstraintButton"
+  ></ng-template>
 </div>
+<span id="bottom"></span>

@@ -1,48 +1,61 @@
 <section class="hero section" [style.background-image]="bgStyle">
-  <picture style="display: none;">
+  <picture style="display: none">
     <ng-container *ngFor="let source of imgSources">
-      <source media="{{ source.media }}"
-          sizes="{{ source.sizes }}"
-          src="{{ source.src }}"
-          srcset="{{ source.srcset }}"
-          type="{{ source.type }}">
+      <source
+        media="{{ source.media }}"
+        sizes="{{ source.sizes }}"
+        src="{{ source.src }}"
+        srcset="{{ source.srcset }}"
+        type="{{ source.type }}"
+      />
     </ng-container>
-    <img #bgRef src="{{ imgSrc }}" alt="{{ imgDescription }}">
+    <img #bgRef src="{{ imgSrc }}" alt="{{ imgDescription }}" />
   </picture>
   <div class="hero-wrap" fxLayoutAlign="center">
-    <div class="hero-content"
+    <div
+      class="hero-content"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayout.gt-sm="row"
+      fxLayoutGap="8px"
+      fxLayoutGap.gt-xs="24px"
+    >
+      <div
+        class="hero-main-content"
+        [ngClass]="{ 'with-sidecontent': sideRef }"
         fxLayout="column"
         fxLayoutAlign="center center"
-        fxLayout.gt-sm="row"
-        fxLayoutGap="8px"
-        fxLayoutGap.gt-xs="24px">
-      <div class="main-content"
-          [ngClass]="{ 'with-sidecontent': sideRef }"
-          fxLayout="column"
-          fxLayoutAlign="center center"
-          fxLayoutAlign.gt-sm="{sideRef ? 'start center' : 'center center'}"
-          fxFlex="none"
-          fxFlex.gt-sm="60">
+        fxLayoutAlign.gt-sm="{sideRef ? 'start center' : 'center center'}"
+        fxFlex="none"
+        fxFlex.gt-sm="60"
+      >
         <ng-template #defaultHeadline>{{ headline }}</ng-template>
-        <h1 *ngIf="headline || headlineRef"
-            class="headline"
-            ngClass="mat-display-2"
-            [ngClass]="{ 'with-tagline': taglineRef, 'mat-display-2': false, 'mat-title': true }">
-          <ng-container *ngTemplateOutlet="headlineRef ? headlineRef: defaultHeadline"></ng-container>
+        <h1
+          *ngIf="headline || headlineRef"
+          class="headline"
+          ngClass="mat-headline-3"
+          [ngClass]="{ 'with-tagline': taglineRef, 'mat-headline-3': false, 'mat-title': true }"
+        >
+          <ng-container
+            *ngTemplateOutlet="headlineRef ? headlineRef : defaultHeadline"
+          ></ng-container>
         </h1>
         <ng-template #defaultTagline>{{ tagline }}</ng-template>
-        <h2 *ngIf="tagline || taglineRef"
-            class="tagline"
-            ngClass="mat-display-1"
-            [ngClass.xs]="{ 'mat-display-1': false, 'mat-title': true }">
-          <ng-container *ngTemplateOutlet="taglineRef ? taglineRef: defaultTagline"></ng-container>
+        <h2
+          *ngIf="tagline || taglineRef"
+          class="tagline"
+          ngClass="mat-headline-4"
+          [ngClass.xs]="{ 'mat-headline-4': false, 'mat-title': true }"
+        >
+          <ng-container *ngTemplateOutlet="taglineRef ? taglineRef : defaultTagline"></ng-container>
         </h2>
       </div>
-      <div *ngIf="sideRef"
-          class="side-content"
-          fxLayoutAlign="end center"
-          fxFlex="none"
-          fxFlex.gt-sm="40">
+      <div
+        *ngIf="sideRef"
+        fxLayoutAlign="end center"
+        fxFlex="none"
+        fxFlex.gt-sm="40"
+      >
         <ng-container *ngTemplateOutlet="sideRef"></ng-container>
       </div>
     </div>

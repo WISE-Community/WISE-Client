@@ -1,25 +1,22 @@
 import { Injectable } from '@angular/core';
-import { DialogGuidanceStudentComponent } from '../components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component';
 import { FeedbackRule } from '../components/common/feedbackRule/FeedbackRule';
 import { StudentDataService } from './studentDataService';
+import { DialogGuidanceComponent } from '../components/dialogGuidance/DialogGuidanceComponent';
 
 @Injectable()
 export class DialogGuidanceFeedbackService {
   constructor(private studentDataService: StudentDataService) {}
 
-  getFeedbackText(component: DialogGuidanceStudentComponent, feedbackRule: FeedbackRule): string {
+  getFeedbackText(component: DialogGuidanceComponent, feedbackRule: FeedbackRule): string {
     return component.isVersion1()
       ? <string>feedbackRule.feedback
       : this.getFeedbackTextVersion2(component, feedbackRule);
   }
 
-  private getFeedbackTextVersion2(
-    component: DialogGuidanceStudentComponent,
-    feedbackRule: FeedbackRule
-  ) {
+  private getFeedbackTextVersion2(component: DialogGuidanceComponent, feedbackRule: FeedbackRule) {
     const latestSubmitComponentState = this.studentDataService.getLatestSubmitComponentState(
       component.nodeId,
-      component.componentId
+      component.id
     );
     return feedbackRule.feedback[
       this.getCountFeedbackRuleShown(latestSubmitComponentState, feedbackRule) %

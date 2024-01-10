@@ -1,7 +1,7 @@
 'use strict';
 
 import { Component, Input } from '@angular/core';
-import { ConfigService } from '../../../../services/configService';
+import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 
 @Component({
   selector: 'workgroup-info',
@@ -28,10 +28,10 @@ export class WorkgroupInfoComponent {
   @Input()
   workgroupId: number;
 
-  constructor(private ConfigService: ConfigService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.workgroupId);
+    this.avatarColor = getAvatarColorForWorkgroupId(this.workgroupId);
     this.alertIconClass = this.hasNewAlert ? 'warn' : 'text-disabled';
     this.alertIconName = 'notifications';
     this.alertLabel = this.hasNewAlert

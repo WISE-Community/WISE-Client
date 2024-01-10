@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 import { CRaterIdea } from '../components/common/cRater/CRaterIdea';
 import { CRaterScore } from '../components/common/cRater/CRaterScore';
 import { CRaterResponse } from '../components/common/cRater/CRaterResponse';
+import { RawCRaterResponse } from '../components/common/cRater/RawCRaterResponse';
 
 @Injectable()
 export class CRaterService {
@@ -214,30 +215,30 @@ export class CRaterService {
       });
   }
 
-  getCRaterResponse(response: any, submitCounter: number): CRaterResponse {
+  getCRaterResponse(responses: RawCRaterResponse, submitCounter: number): CRaterResponse {
     const cRaterResponse: CRaterResponse = new CRaterResponse();
-    if (this.isSingleScore(response)) {
-      cRaterResponse.score = this.getScore(response);
+    if (this.isSingleScore(responses)) {
+      cRaterResponse.score = this.getScore(responses);
     } else {
-      cRaterResponse.scores = this.getScores(response);
+      cRaterResponse.scores = this.getScores(responses);
     }
-    cRaterResponse.ideas = this.getIdeas(response);
+    cRaterResponse.ideas = this.getIdeas(responses);
     cRaterResponse.submitCounter = submitCounter;
     return cRaterResponse;
   }
 
-  private isSingleScore(response: any): boolean {
-    return response.responses.scores != null;
+  private isSingleScore(responses: RawCRaterResponse): boolean {
+    return responses.scores != null;
   }
 
-  private getScore(response: any): number {
-    return parseInt(response.responses.scores.raw_trim_round);
+  private getScore(responses: RawCRaterResponse): number {
+    return parseInt(responses.scores.raw_trim_round);
   }
 
-  private getScores(response: any): CRaterScore[] {
+  private getScores(responses: RawCRaterResponse): CRaterScore[] {
     const scores = [];
-    for (const key in response.responses.trait_scores) {
-      const value = response.responses.trait_scores[key];
+    for (const key in responses.trait_scores) {
+      const value = responses.trait_scores[key];
       scores.push(
         new CRaterScore(
           key,
@@ -251,10 +252,10 @@ export class CRaterService {
     return scores;
   }
 
-  private getIdeas(response: any): CRaterIdea[] {
+  private getIdeas(responses: RawCRaterResponse): CRaterIdea[] {
     const ideas = [];
-    for (const key in response.responses.feedback.ideas) {
-      const value = response.responses.feedback.ideas[key];
+    for (const key in responses.feedback.ideas) {
+      const value = responses.feedback.ideas[key];
       ideas.push(new CRaterIdea(key, value.detected));
     }
     return ideas;

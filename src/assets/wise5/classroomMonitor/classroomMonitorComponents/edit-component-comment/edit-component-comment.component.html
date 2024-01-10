@@ -1,13 +1,14 @@
 <mat-form-field class="input-container md-block md-no-float" fxFlex>
   <mat-label i18n>Teacher Comment:</mat-label>
   <textarea
-      id="{{ 'commentInput_' + componentId + '_' + toWorkgroupId }}"
-      matInput
-      placeholder="Enter comment here"
-      i18n-placeholder
-      rows="1"
-      cdkTextareaAutosize
-      [(ngModel)]="comment"
-      [disabled]="disabled"
-      (ngModelChange)="commentChanged.next($event)"></textarea>
+    id="{{ 'commentInput_' + componentId + '_' + toWorkgroupId }}"
+    matInput
+    placeholder="Enter comment here"
+    i18n-placeholder
+    rows="1"
+    cdkTextareaAutosize
+    [(ngModel)]="comment"
+    [disabled]="disabled"
+    (ngModelChange)="commentChanged.next($event)"
+  ></textarea>
 </mat-form-field>

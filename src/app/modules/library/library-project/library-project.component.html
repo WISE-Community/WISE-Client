@@ -1,25 +1,46 @@
-<mat-card *ngIf="project.visible" 
-          class="library-project mat-card--button"
-          (click)="showDetails()"
-          (keyup.enter)="showDetails()"
-          [@flash]="{value: '*', params: {duration: animateDuration, delay: animateDelay}}"
-          role="button"
-          tabindex="0"
-          i18n-aria-label
-          aria-label="Show project details">
-  <div class="library-project__cover" [style.background-image]="project.thumbStyle"></div>
+<mat-card
+  appearance="outlined"
+  *ngIf="project.visible"
+  class="library-project mat-card--button"
+  (click)="showDetails()"
+  (keyup.enter)="showDetails()"
+  [@flash]="{ value: '*', params: { duration: animateDuration, delay: animateDelay } }"
+  role="button"
+  tabindex="0"
+  i18n-aria-label
+  aria-label="Show project details"
+>
+  <div class="library-project__cover" [style.background-image]="project.thumbStyle">
+    <mat-checkbox
+      *ngIf="myUnit"
+      [(ngModel)]="checked"
+      class="library-project__checkbox app-bg-bg"
+      color="primary"
+      matTooltip="Select unit"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      (click)="selectProject($event)"
+    ></mat-checkbox>
+  </div>
   <app-library-project-disciplines [project]="project"></app-library-project-disciplines>
-  <div class="library-project__details can-highlight"
-       [ngClass]="{'highlighted-bg': project.isHighlighted}">
+  <div
+    class="library-project__details can-highlight"
+    [ngClass]="{ 'highlighted-bg': project.isHighlighted }"
+  >
     <p class="library-project__title">
       {{ project.metadata.title }}&nbsp;
       <span class="mat-caption secondary-text" i18n>(ID: {{ project.id }})</span>&nbsp;
-      <mat-icon *ngIf="project.wiseVersion === 4"
-                color="warn"
-                i18n-matTooltip
-                matTooltip="Legacy Unit"
-                [matTooltipPosition]="'above'">warning</mat-icon>
+      <mat-icon
+        *ngIf="project.wiseVersion === 4"
+        color="warn"
+        i18n-matTooltip
+        matTooltip="Legacy Unit"
+        [matTooltipPosition]="'above'"
+        >warning</mat-icon
+      >
     </p>
-    <p *ngIf="project.shared" class="info mat-caption" i18n>Shared by {{ project.owner.displayName }}</p>
+    <p *ngIf="project.shared" class="info mat-caption" i18n>
+      Shared by {{ project.owner.displayName }}
+    </p>
   </div>
 </mat-card>

@@ -1,7 +1,7 @@
 @import
-  '~style/abstracts/variables',
-  '~style/abstracts/functions',
-  '~style/abstracts/mixins';
+  'style/abstracts/variables',
+  'style/abstracts/functions',
+  'style/abstracts/mixins';
 
 .header {
   padding: 0;
@@ -35,6 +35,6 @@
   }
 }
 
-.mat-icon-button {
-  @include mat-icon-button-size(32px);
+.mat-mdc-icon-button {
+  @include mat-icon-button-size(36px);
 }

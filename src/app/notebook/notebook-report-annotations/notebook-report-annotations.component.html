@@ -1,12 +1,11 @@
-<div class="md-padding gray-lightest-bg annotations-container--student--report"
-    *ngIf="show">
-  <mat-card class="annotations annotations--report">
+<div class="md-padding gray-lightest-bg annotations-container--student--report" *ngIf="show">
+  <mat-card appearance="outlined" class="annotations annotations--report">
     <mat-card-title class="annotations__header">
       <div class="annotations__avatar avatar--icon avatar--square md-36 avatar md-whiteframe-1dp">
-        <mat-icon class="annotations__icon md-36">{{icon}}</mat-icon>
+        <mat-icon class="annotations__icon md-36">{{ icon }}</mat-icon>
       </div>
       <div class="annotations__title" layout="row" flex>
-        <span>{{label}}</span>
+        <span>{{ label }}</span>
         <span flex></span>
         <span *ngIf="hasNew" class="badge annotations__status animate-fade" translate="new"></span>
       </div>
@@ -18,15 +17,17 @@
       <hr *ngIf="annotations.comment" />
       <div layout="row" laoyut-align="start center">
         <span *ngIf="showScore && annotations.score" class="annotations__score" i18n>
-          Score: {{annotations.score.data.value}}{{maxScoreDisplay}}
+          Score: {{ annotations.score.data.value }}{{ maxScoreDisplay }}
         </span>
         <span flex></span>
         <span>
-          <span class="annotations__info"
-              am-time-ago="latestAnnotationTime"
-              matTooltip="{{ latestAnnotationTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}"
-              matTooltipPosition="above"
-              i18n-matTooltip>
+          <span
+            class="annotations__info"
+            am-time-ago="latestAnnotationTime"
+            matTooltip="{{ latestAnnotationTime | amDateFormat : 'ddd, MMM D YYYY, h:mm a' }}"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
           </span>
         </span>
       </div>

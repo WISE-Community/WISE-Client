@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="/assets/wise5/themes/default/style/angular-material.css" />
+<link rel="stylesheet" href="/assets/wise5/themes/default/style/monitor.css" />
+<div class="app-styles monitor-theme monitor" disable-delete-keypress role="main">
+  <mat-sidenav-container>
+    <mat-sidenav #drawer [(opened)]="menuOpen" mode="over" class="mat-elevation-z4">
+      <main-menu [title]="title" [views]="views"></main-menu>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <top-bar
+        [logoPath]="logoPath"
+        [notifications]="notifications"
+        [projectId]="projectId"
+        [projectTitle]="projectTitle"
+        [runId]="runId"
+        [runCode]="runCode"
+      ></top-bar>
+      <tool-bar [workgroupId]="workgroupId" (onMenuToggle)="toggleMenu()"></tool-bar>
+      <content id="content" fxFlex role="main" fxLayout="column" class="l-main">
+        <router-outlet></router-outlet>
+      </content>
+      <side-menu [views]="views"></side-menu>
+      <notebook-report
+        *ngIf="reportEnabled"
+        [ngClass]="{ 'report-full': reportFullscreen }"
+        [notebookConfig]="notebookConfig"
+      ></notebook-report>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

@@ -1,8 +1,8 @@
 @import
-  '~@angular/material/theming',
-  '~style/abstracts/variables',
-  '~style/abstracts/mixins',
-  '~style/abstracts/functions';
+  '@angular/material/theming',
+  'style/abstracts/variables',
+  'style/abstracts/mixins',
+  'style/abstracts/functions';
 
 .library-home {
   margin-bottom: 32px;
@@ -15,6 +15,6 @@
 }
 
 .notice {
-  max-width: none; 
+  max-width: none;
 }
 

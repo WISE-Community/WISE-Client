@@ -39,6 +39,12 @@ sed 's/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enab
 echo "Adding gzip_types to nginx.conf"
 sed 's/gzip on;/gzip on;\n        gzip_types text\/plain text\/xml image\/gif image\/jpeg image\/png image\/svg+xml application\/json application\/javascript application\/x-javascript text\/javascript text\/css;/' -i /etc/nginx/nginx.conf
 
+echo "Remove TLS 1.0 from nginx.conf"
+sed 's/TLSv1 //g' -i /etc/nginx/nginx.conf
+
+echo "Remove TLS 1.1 from nginx.conf"
+sed 's/TLSv1.1 //g' -i /etc/nginx/nginx.conf
+
 echo "Copying WISE Nginx config file to Nginx sites-enabled folder"
 rm -f /etc/nginx/sites-enabled/*
 cp $WISE_BUILD_FILES/client/$ENV/wise.conf /etc/nginx/sites-enabled/wise.conf

@@ -5,8 +5,12 @@ import { AnnotationService } from '../../../assets/wise5/services/annotationServ
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
-import { UtilService } from '../../../assets/wise5/services/utilService';
 import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
+import {
+  insertWiseLinks,
+  replaceWiseLinks
+} from '../../../assets/wise5/common/wise-link/wise-link';
+import { Annotation } from '../../../assets/wise5/common/Annotation';
 
 @Component({
   selector: 'notebook-report',
@@ -36,10 +40,9 @@ export class NotebookReportComponent extends NotebookParentComponent {
     ConfigService: ConfigService,
     NotebookService: NotebookService,
     private ProjectService: ProjectService,
-    UtilService: UtilService,
     private mediaObserver: MediaObserver
   ) {
-    super(ConfigService, NotebookService, UtilService);
+    super(ConfigService, NotebookService);
   }
 
   ngOnInit(): void {
@@ -53,7 +56,9 @@ export class NotebookReportComponent extends NotebookParentComponent {
     if (this.mode !== 'classroomMonitor') {
       this.reportItem.id = null; // set the id to null so it can be inserted as initial version, as opposed to updated. this is true for both new and just-loaded reports.
     }
-    this.reportItemContent = this.ProjectService.injectAssetPaths(this.reportItem.content.content);
+    this.reportItemContent = this.ProjectService.injectAssetPaths(
+      replaceWiseLinks(this.reportItem.content.content)
+    );
     this.latestAnnotations = this.AnnotationService.getLatestNotebookItemAnnotations(
       this.workgroupId,
       this.reportId
@@ -63,7 +68,7 @@ export class NotebookReportComponent extends NotebookParentComponent {
     this.isAddNoteButtonAvailable = this.isNoteEnabled();
 
     this.subscriptions.add(
-      this.NotebookService.notebookItemAnnotationReceived$.subscribe(({ annotation }: any) => {
+      this.NotebookService.notebookItemAnnotationReceived$.subscribe((annotation: Annotation) => {
         if (annotation.localNotebookItemId === this.reportId) {
           this.hasNewAnnotation = true;
           this.latestAnnotations = this.AnnotationService.getLatestNotebookItemAnnotations(
@@ -93,8 +98,8 @@ export class NotebookReportComponent extends NotebookParentComponent {
     );
 
     this.subscriptions.add(
-      this.mediaObserver.media$.subscribe((change: MediaChange) => {
-        if (change.mqAlias == 'xs' && !this.collapsed) {
+      this.mediaObserver.asObservable().subscribe((change: MediaChange[]) => {
+        if (change[0].mqAlias == 'xs' && !this.collapsed) {
           this.collapsed = true;
           this.fullscreen();
         }
@@ -162,7 +167,9 @@ export class NotebookReportComponent extends NotebookParentComponent {
 
   changed(value: string): void {
     this.dirty = true;
-    this.reportItem.content.content = this.ConfigService.removeAbsoluteAssetPaths(value);
+    this.reportItem.content.content = this.ConfigService.removeAbsoluteAssetPaths(
+      insertWiseLinks(value)
+    );
     this.clearSaveTime();
   }
 

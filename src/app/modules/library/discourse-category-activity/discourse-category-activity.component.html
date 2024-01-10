@@ -2,13 +2,13 @@
   <mat-divider></mat-divider>
   <p fxLayoutAlign="start center">
     <mat-icon>forum</mat-icon>&nbsp;
-    <a href="{{categoryURL}}" target="_blank">
-      <strong i18n>Discuss ({{postCount}}{{hasMoreTopics ? '+' : ''}})</strong>
+    <a href="{{ categoryURL }}" target="_blank">
+      <strong i18n>Discuss ({{ postCount }}{{ hasMoreTopics ? '+' : '' }})</strong>
     </a>
   </p>
   <ul class="topics" *ngIf="topics.length">
     <li *ngFor="let topic of topics.slice(0, 3)">
-      <a href="{{discourseBaseUrl}}/t/{{topic.slug}}/{{topic.id}}" target="_blank">
+      <a href="{{ discourseBaseUrl }}/t/{{ topic.slug }}/{{ topic.id }}" target="_blank">
         {{ topic.title }}
       </a>
     </li>

@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { copy } from '../../assets/wise5/common/object/object';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
 import { DeleteNodeService } from '../../assets/wise5/services/deleteNodeService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
@@ -16,7 +17,7 @@ describe('DeleteNodeService', () => {
       imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
       providers: [CopyNodesService, DeleteNodeService, TeacherProjectService]
     });
-    demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
+    demoProjectJSON = copy(demoProjectJSON_import);
     projectService = TestBed.inject(TeacherProjectService);
     service = TestBed.inject(DeleteNodeService);
   });

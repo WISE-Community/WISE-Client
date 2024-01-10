@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { copy } from '../../../../common/object/object';
 import { ConfigService } from '../../../../services/configService';
 import { TagService } from '../../../../services/tagService';
-import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { UtilService } from '../../../../services/utilService';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'node-advanced-branch-authoring',
@@ -11,59 +11,58 @@ import { UtilService } from '../../../../services/utilService';
   styleUrls: ['node-advanced-branch-authoring.component.scss']
 })
 export class NodeAdvancedBranchAuthoringComponent implements OnInit {
-  branchCriteria: any;
-  createBranchBranches = [];
-  createBranchComponentId: string;
-  createBranchMergePointNodeId: string;
-  createBranchNodeId: string;
-  createBranchNumberOfBranches: any;
-  createBranchCriterion: any;
-  items: any[];
-  node: any;
-  nodeId: string;
-  nodeIds: string[];
-  scoreId: string;
+  protected branchCriteria: any = [
+    {
+      value: 'workgroupId',
+      text: $localize`Workgroup ID`
+    },
+    {
+      value: 'score',
+      text: $localize`Score`
+    },
+    {
+      value: 'choiceChosen',
+      text: $localize`Choice Chosen`
+    },
+    {
+      value: 'random',
+      text: $localize`Random`
+    },
+    {
+      value: 'tag',
+      text: $localize`Tag`
+    }
+  ];
+  protected createBranchBranches = [];
+  protected createBranchComponentId: string;
+  protected createBranchMergePointNodeId: string;
+  protected createBranchNodeId: string;
+  protected createBranchNumberOfBranches: any;
+  protected createBranchCriterion: any;
+  protected items: any[];
+  protected node: any;
+  protected nodeId: string;
+  protected nodeIds: string[];
+  protected scoreId: string;
 
   constructor(
-    private ConfigService: ConfigService,
-    private TagService: TagService,
-    private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
-  ) {
-    this.branchCriteria = [
-      {
-        value: 'workgroupId',
-        text: $localize`Workgroup ID`
-      },
-      {
-        value: 'score',
-        text: $localize`Score`
-      },
-      {
-        value: 'choiceChosen',
-        text: $localize`Choice Chosen`
-      },
-      {
-        value: 'random',
-        text: $localize`Random`
-      },
-      {
-        value: 'tag',
-        text: $localize`Tag`
-      }
-    ];
-  }
+    private configService: ConfigService,
+    private tagService: TagService,
+    private projectService: TeacherProjectService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.nodeId = this.TeacherDataService.getCurrentNodeId();
-    this.node = this.ProjectService.getNodeById(this.nodeId);
-    this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds(true);
-    this.populateBranchAuthoring();
-    this.populateScoreId();
+    this.route.parent.parent.params.subscribe((params) => {
+      this.nodeId = params.nodeId;
+      this.node = this.projectService.getNodeById(this.nodeId);
+      this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);
+      this.populateBranchAuthoring();
+      this.populateScoreId();
+    });
   }
 
-  populateBranchAuthoring() {
+  protected populateBranchAuthoring() {
     if (this.node.transitionLogic != null) {
       this.createBranchBranches = [];
       if (this.node.transitionLogic.transitions != null) {
@@ -101,19 +100,19 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
               }
 
               if (this.createBranchNodeId && this.createBranchComponentId) {
-                const choices = this.ProjectService.getChoices(
+                const choices = this.projectService.getChoices(
                   this.createBranchNodeId,
                   this.createBranchComponentId
                 );
                 if (choices != null) {
-                  branch.choices = this.UtilService.makeCopyOfJSONObject(choices);
+                  branch.choices = copy(choices);
                 }
               }
             }
           }
         }
 
-        const nodeIdsInBranch = this.ProjectService.getNodeIdsInBranch(this.nodeId, transition.to);
+        const nodeIdsInBranch = this.projectService.getNodeIdsInBranch(this.nodeId, transition.to);
         for (const nodeId of nodeIdsInBranch) {
           const item = branch.items[nodeId];
           if (item != null) {
@@ -125,7 +124,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
         branch.nodeIdsInBranch = nodeIdsInBranch;
         if (nodeIdsInBranch.length > 0) {
           const lastNodeIdInBranch = nodeIdsInBranch[nodeIdsInBranch.length - 1];
-          const transitionsFromLastNode = this.ProjectService.getTransitionsByFromNodeId(
+          const transitionsFromLastNode = this.projectService.getTransitionsByFromNodeId(
             lastNodeIdInBranch
           );
           if (transitionsFromLastNode != null && transitionsFromLastNode.length > 0) {
@@ -147,7 +146,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     }
   }
 
-  populateScoreId(): void {
+  protected populateScoreId(): void {
     for (const transition of this.node.transitionLogic.transitions) {
       if (transition.criteria != null) {
         const scoreId = this.getScoreId(transition.criteria[0]);
@@ -158,7 +157,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     }
   }
 
-  getScoreId(transitionCriteria: any): string {
+  protected getScoreId(transitionCriteria: any): string {
     if (transitionCriteria != null) {
       return transitionCriteria?.params?.scoreId;
     } else {
@@ -166,7 +165,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     }
   }
 
-  createBranchNumberOfBranchesChanged() {
+  protected createBranchNumberOfBranchesChanged() {
     if (this.createBranchNumberOfBranches === 0) {
       alert($localize`Error: You can't have 0 branch paths`);
       this.createBranchNumberOfBranches = this.createBranchBranches.length;
@@ -259,71 +258,71 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     this.saveProject();
   }
 
-  createBranchCriterionChanged() {
+  protected createBranchCriterionChanged() {
     if (this.createBranchCriterion != null) {
       let nodeId = this.node.id;
       if (this.createBranchCriterion === 'workgroupId') {
-        this.ProjectService.setTransitionLogicField(
+        this.projectService.setTransitionLogicField(
           nodeId,
           'howToChooseAmongAvailablePaths',
           'workgroupId'
         );
-        this.ProjectService.setTransitionLogicField(nodeId, 'whenToChoosePath', 'enterNode');
-        this.ProjectService.setTransitionLogicField(nodeId, 'canChangePath', false);
-        this.ProjectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
+        this.projectService.setTransitionLogicField(nodeId, 'whenToChoosePath', 'enterNode');
+        this.projectService.setTransitionLogicField(nodeId, 'canChangePath', false);
+        this.projectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
       } else if (this.createBranchCriterion === 'score') {
-        this.ProjectService.setTransitionLogicField(
+        this.projectService.setTransitionLogicField(
           nodeId,
           'howToChooseAmongAvailablePaths',
           'random'
         );
-        this.ProjectService.setTransitionLogicField(
+        this.projectService.setTransitionLogicField(
           nodeId,
           'whenToChoosePath',
           'studentDataChanged'
         );
-        this.ProjectService.setTransitionLogicField(nodeId, 'canChangePath', false);
-        this.ProjectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
+        this.projectService.setTransitionLogicField(nodeId, 'canChangePath', false);
+        this.projectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
       } else if (this.createBranchCriterion === 'choiceChosen') {
-        this.ProjectService.setTransitionLogicField(
+        this.projectService.setTransitionLogicField(
           nodeId,
           'howToChooseAmongAvailablePaths',
           'random'
         );
-        this.ProjectService.setTransitionLogicField(
+        this.projectService.setTransitionLogicField(
           nodeId,
           'whenToChoosePath',
           'studentDataChanged'
         );
-        this.ProjectService.setTransitionLogicField(nodeId, 'canChangePath', false);
-        this.ProjectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
+        this.projectService.setTransitionLogicField(nodeId, 'canChangePath', false);
+        this.projectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
       } else if (this.createBranchCriterion === 'random') {
-        this.ProjectService.setTransitionLogicField(
+        this.projectService.setTransitionLogicField(
           nodeId,
           'howToChooseAmongAvailablePaths',
           'random'
         );
-        this.ProjectService.setTransitionLogicField(nodeId, 'whenToChoosePath', 'enterNode');
-        this.ProjectService.setTransitionLogicField(nodeId, 'canChangePath', false);
-        this.ProjectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
+        this.projectService.setTransitionLogicField(nodeId, 'whenToChoosePath', 'enterNode');
+        this.projectService.setTransitionLogicField(nodeId, 'canChangePath', false);
+        this.projectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
       } else if (this.createBranchCriterion === 'tag') {
-        this.ProjectService.setTransitionLogicField(
+        this.projectService.setTransitionLogicField(
           nodeId,
           'howToChooseAmongAvailablePaths',
           'tag'
         );
-        this.ProjectService.setTransitionLogicField(nodeId, 'whenToChoosePath', 'enterNode');
-        this.ProjectService.setTransitionLogicField(nodeId, 'canChangePath', false);
-        this.ProjectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
+        this.projectService.setTransitionLogicField(nodeId, 'whenToChoosePath', 'enterNode');
+        this.projectService.setTransitionLogicField(nodeId, 'canChangePath', false);
+        this.projectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', 1);
       }
     }
     this.createBranchUpdateTransitions();
     this.saveProject();
   }
 
-  createBranchNodeIdChanged() {
+  protected createBranchNodeIdChanged() {
     this.createBranchComponentId = null;
-    let selectedNode = this.ProjectService.getNodeById(this.createBranchNodeId);
+    let selectedNode = this.projectService.getNodeById(this.createBranchNodeId);
     if (selectedNode != null) {
       let components = selectedNode.components;
       if (components != null) {
@@ -336,12 +335,12 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     this.saveProject();
   }
 
-  createBranchComponentIdChanged() {
+  protected createBranchComponentIdChanged() {
     this.createBranchUpdateTransitions();
     this.saveProject();
   }
 
-  async createBranchUpdateTransitions() {
+  protected async createBranchUpdateTransitions() {
     for (let b = 0; b < this.createBranchBranches.length; b++) {
       let branch = this.createBranchBranches[b];
       if (branch != null) {
@@ -404,15 +403,15 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
             branch.choiceId = null;
             branch.scores = null;
           } else if (this.createBranchCriterion === 'tag') {
-            const runId = this.ConfigService.getRunId();
+            const runId = this.configService.getRunId();
             if (runId != null) {
-              await this.TagService.retrieveRunTags().subscribe(() => {});
+              await this.tagService.retrieveRunTags().subscribe(() => {});
             }
             transition.criteria = [];
             const criterion = {
               name: 'hasTag',
               params: {
-                tag: this.TagService.getNextAvailableTag()
+                tag: this.tagService.getNextAvailableTag()
               }
             };
             transition.criteria.push(criterion);
@@ -426,8 +425,8 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     }
   }
 
-  createBranchUpdateChoiceChosenIds() {
-    const component = this.ProjectService.getComponent(
+  protected createBranchUpdateChoiceChosenIds() {
+    const component = this.projectService.getComponent(
       this.createBranchNodeId,
       this.createBranchComponentId
     );
@@ -453,7 +452,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
         if (branch != null) {
           const id = choices[c].id;
           branch.choiceId = id;
-          branch.choices = this.UtilService.makeCopyOfJSONObject(choices);
+          branch.choices = copy(choices);
           const transition = branch.transition;
           if (transition != null) {
             // get the first transition criterion. Assume there is only one transition criterion
@@ -475,7 +474,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     }
   }
 
-  createBranchStepClicked(branch, item) {
+  protected createBranchStepClicked(branch, item) {
     const items = branch.items;
     branch.checkedItemsInBranchPath = [];
     const checkedItemsInBranchPath = branch.checkedItemsInBranchPath;
@@ -493,7 +492,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
       const orderedItem = items[nodeId];
       if (orderedItem != null && orderedItem.checked) {
         if (previousCheckedNodeId != null) {
-          const previousCheckedNode = this.ProjectService.getNodeById(previousCheckedNodeId);
+          const previousCheckedNode = this.projectService.getNodeById(previousCheckedNodeId);
           if (previousCheckedNode != null) {
             const transitionLogic = previousCheckedNode.transitionLogic;
             if (transitionLogic != null) {
@@ -531,7 +530,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
        */
 
       // this is the last node in the branch path so we will make it transition to the merge point
-      let node = this.ProjectService.getNodeById(previousCheckedNodeId);
+      let node = this.projectService.getNodeById(previousCheckedNodeId);
       if (node != null) {
         let transitionLogic = node.transitionLogic;
         if (transitionLogic != null) {
@@ -564,33 +563,33 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
       }
     }
 
-    let node = this.ProjectService.getNodeById(nodeId);
+    let node = this.projectService.getNodeById(nodeId);
     if (node != null) {
-      this.ProjectService.removeBranchPathTakenNodeConstraintsIfAny(nodeId);
+      this.projectService.removeBranchPathTakenNodeConstraintsIfAny(nodeId);
       if (item.checked) {
         let fromNodeId = this.nodeId;
         let toNodeId = firstNodeId;
-        this.ProjectService.addBranchPathTakenConstraints(nodeId, fromNodeId, toNodeId);
+        this.projectService.addBranchPathTakenConstraints(nodeId, fromNodeId, toNodeId);
       } else {
-        this.ProjectService.setTransition(nodeId, nodeIdAfter);
+        this.projectService.setTransition(nodeId, nodeIdAfter);
       }
     }
 
     // update the constraints of other steps in the branch path if necessary.
     for (const item of checkedItemsInBranchPath) {
       const itemNodeId = item.$key;
-      this.ProjectService.removeBranchPathTakenNodeConstraintsIfAny(itemNodeId);
+      this.projectService.removeBranchPathTakenNodeConstraintsIfAny(itemNodeId);
 
       // the branch path taken constraints will be from this node to the first node in the branch path
       const fromNodeId = this.nodeId;
       const toNodeId = firstNodeId;
-      this.ProjectService.addBranchPathTakenConstraints(itemNodeId, fromNodeId, toNodeId);
+      this.projectService.addBranchPathTakenConstraints(itemNodeId, fromNodeId, toNodeId);
     }
-    this.ProjectService.calculateNodeNumbers();
+    this.projectService.calculateNodeNumbers();
     this.saveProject();
   }
 
-  createBranchScoreChanged(branch) {
+  protected createBranchScoreChanged(branch) {
     branch.scores = branch.scores.split(',');
     let transition = branch.transition;
     if (transition != null) {
@@ -620,7 +619,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
         if (nodeIdsInBranch != null && nodeIdsInBranch.length > 0) {
           let lastNodeIdInBranchPath = nodeIdsInBranch[nodeIdsInBranch.length - 1];
           if (lastNodeIdInBranchPath != null) {
-            let lastNodeInBranchPath = this.ProjectService.getNodeById(lastNodeIdInBranchPath);
+            let lastNodeInBranchPath = this.projectService.getNodeById(lastNodeIdInBranchPath);
             if (lastNodeInBranchPath != null) {
               let transitionLogic = lastNodeInBranchPath.transitionLogic;
               if (transitionLogic != null) {
@@ -637,7 +636,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
         }
       }
     }
-    this.ProjectService.calculateNodeNumbers();
+    this.projectService.calculateNodeNumbers();
     const parseProject = true;
     this.saveProject(parseProject);
   }
@@ -656,19 +655,19 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     }
 
     const nodeId = this.node.id; // branch point node
-    const nodeIdAfter = this.ProjectService.getNodeIdAfter(nodeId);
+    const nodeIdAfter = this.projectService.getNodeIdAfter(nodeId);
 
     /*
      * update the transition of this step to point to the next step
      * in the project. this may be different than the next step
      * if it was still the branch point.
      */
-    this.ProjectService.setTransition(nodeId, nodeIdAfter);
+    this.projectService.setTransition(nodeId, nodeIdAfter);
 
-    this.ProjectService.setTransitionLogicField(nodeId, 'howToChooseAmongAvailablePaths', null);
-    this.ProjectService.setTransitionLogicField(nodeId, 'whenToChoosePath', null);
-    this.ProjectService.setTransitionLogicField(nodeId, 'canChangePath', null);
-    this.ProjectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', null);
+    this.projectService.setTransitionLogicField(nodeId, 'howToChooseAmongAvailablePaths', null);
+    this.projectService.setTransitionLogicField(nodeId, 'whenToChoosePath', null);
+    this.projectService.setTransitionLogicField(nodeId, 'canChangePath', null);
+    this.projectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', null);
 
     this.createBranchNumberOfBranches = 1;
     this.createBranchCriterion = null;
@@ -694,13 +693,13 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     branch.items = this.getBranchItems();
     branch.checkedItemsInBranchPath = [];
     let transition = null;
-    const transitions = this.ProjectService.getTransitionsByFromNodeId(nodeId);
+    const transitions = this.projectService.getTransitionsByFromNodeId(nodeId);
     if (transitions != null && transitions.length > 0) {
       transition = transitions[0];
     }
     branch.transition = transition;
     this.createBranchBranches.push(branch);
-    this.ProjectService.calculateNodeNumbers();
+    this.projectService.calculateNodeNumbers();
     const parseProject = true;
     this.saveProject(parseProject);
   }
@@ -712,19 +711,19 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
    * the branch path in this branch point node.
    * @param branch the branch object
    */
-  removeBranchPath(branch) {
+  protected removeBranchPath(branch) {
     const checkedItemsInBranchPath = branch.checkedItemsInBranchPath;
     if (checkedItemsInBranchPath != null) {
       for (const checkedItem of checkedItemsInBranchPath) {
         const nodeId = checkedItem.$key;
-        this.ProjectService.removeBranchPathTakenNodeConstraintsIfAny(nodeId);
+        this.projectService.removeBranchPathTakenNodeConstraintsIfAny(nodeId);
         /*
          * update the transition of the step to point to the next step
          * in the project. this may be different than the next step
          * if it was still in the branch path.
          */
-        const nodeIdAfter = this.ProjectService.getNodeIdAfter(nodeId);
-        this.ProjectService.setTransition(nodeId, nodeIdAfter);
+        const nodeIdAfter = this.projectService.getNodeIdAfter(nodeId);
+        this.projectService.setTransition(nodeId, nodeIdAfter);
       }
     }
     const branchPathIndex = this.createBranchBranches.indexOf(branch);
@@ -732,38 +731,38 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     this.node.transitionLogic.transitions.splice(branchPathIndex, 1);
   }
 
-  getBranchItems() {
-    const items = this.UtilService.makeCopyOfJSONObject(this.ProjectService.idToOrder);
+  protected getBranchItems() {
+    const items = copy(this.projectService.idToOrder);
     for (const nodeId of Object.keys(items)) {
       items[nodeId]['$key'] = nodeId;
     }
     return items;
   }
 
-  saveProject(parseProject = false) {
+  protected saveProject(parseProject = false) {
     if (parseProject) {
-      this.ProjectService.parseProject();
+      this.projectService.parseProject();
     }
-    return this.ProjectService.saveProject();
+    return this.projectService.saveProject();
   }
 
-  isGroupNode(nodeId) {
-    return this.ProjectService.isGroupNode(nodeId);
+  protected isGroupNode(nodeId) {
+    return this.projectService.isGroupNode(nodeId);
   }
 
-  getComponents(nodeId: string): any[] {
-    return this.ProjectService.getComponents(nodeId);
+  protected getComponents(nodeId: string): any[] {
+    return this.projectService.getComponents(nodeId);
   }
 
-  getNodeTitle(nodeId: string): string {
-    return this.ProjectService.getNodeTitle(nodeId);
+  protected getNodeTitle(nodeId: string): string {
+    return this.projectService.getNodeTitle(nodeId);
   }
 
-  getNodePositionById(nodeId) {
-    return this.ProjectService.getNodePositionById(nodeId);
+  protected getNodePositionById(nodeId) {
+    return this.projectService.getNodePositionById(nodeId);
   }
 
-  scoreIdChanged(): void {
+  protected scoreIdChanged(): void {
     for (const branch of this.createBranchBranches) {
       if (this.scoreId === '') {
         delete branch.transition.criteria[0].params.scoreId;

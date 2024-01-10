@@ -15,10 +15,6 @@ export class DataService {
 
   constructor(protected ProjectService: ProjectService) {}
 
-  isCompleted(nodeId, componentId) {}
-
-  endCurrentNodeAndSetCurrentNodeByNodeId(nextNodeId) {}
-
   getCurrentNode() {
     return this.currentNode;
   }

@@ -19,7 +19,7 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
         selectedNodesMap = this.getSelectedNodesMap(selectedNodes);
       }
     }
-    this.dataExportService.retrieveStudentDataExport(selectedNodes).then((result) => {
+    this.dataExportService.retrieveStudentData(selectedNodes, true, false, true).subscribe(() => {
       var runId = this.configService.getRunId();
       var rows = [];
       var rowCounter = 1;

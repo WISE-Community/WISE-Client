@@ -1,11 +1,11 @@
+@use '@angular/material' as mat;
 @import
-  '~style/abstracts/functions',
-  '~style/abstracts/variables';
+  'style/abstracts/variables',
+  'style/abstracts/functions',
+  'style/base/typography';
 
 .step-tools {
-  mat-select {
-    text-align: left;
-    text-transform: none;
+  mat-form-field {
     width: 168px;
 
     @media only screen and (min-width: breakpoint('sm.min')) {
@@ -16,14 +16,28 @@
       width: 432px;
     }
   }
-}
 
-.mat-option.node-select-option {
-  &.step {
-    padding-left: 20px;
+  .mdc-line-ripple {
+    &:before, &:after {
+      display: none;
+    }
   }
 
-  .mat-icon {
-    margin-right: 8px;
+  .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    min-height: 24px;
+  }
+
+  .mat-mdc-form-field-flex {
+    height: 32px;
+  }
+
+  .mat-mdc-select-value-text, .mat-mdc-form-field-input-control.mat-mdc-form-field-input-control {
+    font-size: mat.font-size($wise-typography, 'caption');
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
   }
 }

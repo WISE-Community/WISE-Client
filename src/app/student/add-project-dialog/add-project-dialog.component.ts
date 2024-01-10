@@ -86,6 +86,7 @@ export class AddProjectDialogComponent implements OnInit {
       if (runInfo.wiseVersion === 4) {
         this.setInvalidRunCode();
       } else {
+        this.addProjectForm.controls['runCode'].setErrors(null);
         this.registerRunPeriods = runInfo.periods;
         this.addProjectForm.controls['period'].enable();
       }

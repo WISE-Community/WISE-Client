@@ -9552,6 +9552,10 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
+        <target state="needs-translation"> Password must be at least 8 characters </target>
+      </trans-unit>
+      <trans-unit id="e0ec4c4460849c90579b7bf68cdde586ce2e8ad9" datatype="html">
+        <source> Password must have at least one lowercase, one uppercase, and one number character </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
           <context context-type="linenumber">62</context>
@@ -13014,6 +13018,10 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
           <context context-type="linenumber">109</context>
         </context-group>
+        <target state="needs-translation">Required Number of Filled Rows (Not Including Header Row)</target>
+      </trans-unit>
+      <trans-unit id="3373179210544883044" datatype="html">
+        <source>Table Has Header Row</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
           <context context-type="linenumber">212</context>
@@ -13026,6 +13034,10 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
           <context context-type="linenumber">44</context>
         </context-group>
+        <target state="needs-translation">Require All Cells In a Row To Be Filled</target>
+      </trans-unit>
+      <trans-unit id="6549053190457916462" datatype="html">
+        <source>Teacher Removes Constraint</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
           <context context-type="linenumber">117</context>
@@ -13174,6 +13186,10 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
+        <target state="needs-translation">Choose Component</target>
+      </trans-unit>
+      <trans-unit id="2a87e4e9560ba4599248ad3e3dbb9237b5dbefef" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ componentIndex + 1 }}"/>. <x id="INTERPOLATION_1" equiv-text="{{ component.type }}"/> (<x id="INTERPOLATION_2" equiv-text="{{ component.id }}"/>) Prompt: <x id="INTERPOLATION_3" equiv-text="{{ component.prompt }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component.html</context>
           <context context-type="linenumber">4</context>
@@ -13186,6 +13202,10 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
+        <target state="needs-translation">Score ID (Optional)</target>
+      </trans-unit>
+      <trans-unit id="9f4555e33775bcbf87a421550dd26288b2bb9f4a" datatype="html">
+        <source>Branch Path</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component.html</context>
           <context context-type="linenumber">9</context>
@@ -14312,7 +14332,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component.html</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="needs-translation">Confirm</target>
+        <target state="needs-translation">New Student Password</target>
       </trans-unit>
       <trans-unit id="6726159975238623949" datatype="html">
         <source>Confirm New Student Password</source>
@@ -14556,13 +14576,9 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">The student will adopt the work of their new team.</target>
-      </trans-unit>
-      <trans-unit id="ad0adea4bea4ed22adcf8a1ed09c68c8bb955b37" datatype="html">
-        <source>Remove Student</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component.html</context>
-          <context context-type="linenumber">1</context>
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
+          <context context-type="linenumber">52</context>
         </context-group>
         <target state="needs-translation">Remove Student</target>
       </trans-unit>
@@ -15480,7 +15496,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">9</context>
         </context-group>
         <target state="needs-translation">Main Menu</target>
       </trans-unit>
@@ -17552,7 +17568,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">330</context>
+          <context context-type="linenumber">331</context>
         </context-group>
         <target state="needs-translation">You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chances to receive feedback on your answer so this this should be your best work.
 
@@ -18538,7 +18554,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></target>
         <source>You have no more chances to receive feedback on your answer.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">324</context>
+          <context context-type="linenumber">325</context>
         </context-group>
         <target state="needs-translation">You have no more chances to receive feedback on your answer.</target>
       </trans-unit>
@@ -18548,7 +18564,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></target>
 Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">327</context>
+          <context context-type="linenumber">328</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
@@ -18562,11 +18578,11 @@ Are you ready to receive feedback on this answer?</target>
         <source>Feedback</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">405</context>
+          <context context-type="linenumber">406</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">414</context>
+          <context context-type="linenumber">415</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
@@ -18578,7 +18594,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Are you sure you want to reset your work?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">1413</context>
+          <context context-type="linenumber">1414</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset your work?</target>
       </trans-unit>
@@ -19548,7 +19564,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to clear your drawing?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.ts</context>
-          <context context-type="linenumber">198</context>
+          <context context-type="linenumber">199</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to clear your drawing?</target>
       </trans-unit>
@@ -19556,7 +19572,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Do you want to update the connected drawing?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.ts</context>
-          <context context-type="linenumber">285</context>
+          <context context-type="linenumber">286</context>
         </context-group>
         <target state="needs-translation">Do you want to update the connected drawing?</target>
       </trans-unit>
@@ -20634,7 +20650,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Time (seconds)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <target state="needs-translation">Time (seconds)</target>
       </trans-unit>
@@ -20642,7 +20658,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>s</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <target state="needs-translation">s</target>
       </trans-unit>
@@ -20650,7 +20666,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Position (meters)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <target state="needs-translation">Position (meters)</target>
       </trans-unit>
@@ -20658,7 +20674,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>m</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <target state="needs-translation">m</target>
       </trans-unit>
@@ -20666,7 +20682,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Prediction</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">79</context>
         </context-group>
         <target state="needs-translation">Prediction</target>
       </trans-unit>
@@ -21266,7 +21282,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Add item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-choice-button/add-choice-button.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="linenumber">7</context>
         </context-group>
         <target state="needs-translation">Add item</target>
       </trans-unit>
@@ -22382,7 +22398,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-message-input/peer-chat-message-input.component.html</context>
           <context context-type="linenumber">21,23</context>
         </context-group>
-        <target state="needs-translation"> Send </target>
+        <target state="needs-translation">Delete this message so students won't see it</target>
       </trans-unit>
       <trans-unit id="81a5df0547de12ef2c96486e6618669b3bdd704f" datatype="html">
         <source>Make this message viewable to students again</source>

@@ -1,4 +1,6 @@
+import { removeHTMLTags } from '../../../common/string/string';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
+import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 
 export class EventDataExportStrategy extends AbstractDataExportStrategy {
   export() {
@@ -9,7 +11,7 @@ export class EventDataExportStrategy extends AbstractDataExportStrategy {
         this.controller.includeTeacherEvents,
         this.controller.includeStudentNames
       )
-      .then((events: any[]) => {
+      .subscribe(({ events }: any) => {
         this.generateEventsExport(events);
       });
   }
@@ -385,15 +387,11 @@ export class EventDataExportStrategy extends AbstractDataExportStrategy {
   }
 
   private setServerSaveTime(row, columnNameToNumber, data) {
-    row[
-      columnNameToNumber['Server Timestamp']
-    ] = this.utilService.convertMillisecondsToFormattedDateTime(data.serverSaveTime);
+    row[columnNameToNumber['Server Timestamp']] = millisecondsToDateTime(data.serverSaveTime);
   }
 
   private setClientSaveTime(row, columnNameToNumber, data) {
-    row[
-      columnNameToNumber['Client Timestamp']
-    ] = this.utilService.convertMillisecondsToFormattedDateTime(data.clientSaveTime);
+    row[columnNameToNumber['Client Timestamp']] = millisecondsToDateTime(data.clientSaveTime);
   }
 
   private setNodeId(row, columnNameToNumber, data) {
@@ -455,7 +453,7 @@ export class EventDataExportStrategy extends AbstractDataExportStrategy {
 
   private setComponentPrompt(row, columnNameToNumber, component) {
     if (component != null) {
-      let prompt = this.utilService.removeHTMLTags(component.prompt);
+      let prompt = removeHTMLTags(component.prompt);
       prompt = prompt.replace(/"/g, '""');
       row[columnNameToNumber['Component Prompt']] = prompt;
     }

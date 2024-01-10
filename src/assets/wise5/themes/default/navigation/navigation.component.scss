@@ -1,6 +1,6 @@
 @import
-  '~style/abstracts/functions',
-  '~style/abstracts/variables';
+  'style/abstracts/functions',
+  'style/abstracts/variables';
 
 .nav {
   margin: 0 auto 16px;
@@ -17,5 +17,5 @@
 }
 
 .expanded {
-  margin: 4px -8px 4px 0; 
+  margin: 4px -8px 4px 0;
 }

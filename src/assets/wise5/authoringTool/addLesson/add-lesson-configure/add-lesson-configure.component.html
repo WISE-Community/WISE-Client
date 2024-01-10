@@ -1,0 +1,41 @@
+<h5 i18n>Enter a title for the new lesson</h5>
+<form
+  role="form"
+  [formGroup]="addLessonFormGroup"
+  (keydown.enter)="next(); $event.preventDefault()"
+>
+  <mat-form-field appearance="fill" class="title-field">
+    <mat-label i18n>Lesson Title</mat-label>
+    <input
+      #titleField
+      autofocus
+      matInput
+      type="text"
+      id="title"
+      name="title"
+      formControlName="title"
+      (keyup)="$event.keyCode == 13 && next()"
+      required
+    />
+    <mat-error *ngIf="addLessonFormGroup.controls['title'].hasError('required')" i18n>
+      Lesson Title is required
+    </mat-error>
+  </mat-form-field>
+  <div class="nav-controls">
+    <mat-divider></mat-divider>
+    <div fxLayout="row" fxLayoutGap="8px">
+      <button mat-button color="primary" routerLink=".." i18n>Back</button>
+      <span fxFlex></span>
+      <button mat-button color="primary" routerLink="../.." i18n>Cancel</button>
+      <button
+        mat-button
+        class="mat-raised-button mat-primary"
+        (click)="next()"
+        [disabled]="!addLessonFormGroup.valid"
+        i18n
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</form>

@@ -10,9 +10,11 @@ import { StudentDataService } from '../services/studentDataService';
 import { VLEProjectService } from './vleProjectService';
 import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
 import { AnnotationService } from '../services/annotationService';
-import { UtilService } from '../services/utilService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WiseLinkService } from '../../../app/services/wiseLinkService';
+import { convertToPNGFile } from '../common/canvas/canvas';
+import { NodeStatusService } from '../services/nodeStatusService';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'vle',
@@ -30,7 +32,7 @@ export class VLEComponent implements AfterViewInit {
   notebookConfig: any;
   notesEnabled: boolean = false;
   notesVisible: boolean = false;
-  projectStyle: string;
+  projectStylePath: SafeResourceUrl;
   reportEnabled: boolean = false;
   reportFullscreen: boolean = false;
   runEndedAndLocked: boolean;
@@ -42,6 +44,7 @@ export class VLEComponent implements AfterViewInit {
     private configService: ConfigService,
     private dialog: MatDialog,
     private initializeVLEService: InitializeVLEService,
+    private nodeStatusService: NodeStatusService,
     private notebookService: NotebookService,
     private notificationService: NotificationService,
     private projectService: VLEProjectService,
@@ -49,7 +52,6 @@ export class VLEComponent implements AfterViewInit {
     private router: Router,
     private sessionService: SessionService,
     private studentDataService: StudentDataService,
-    private utilService: UtilService,
     private wiseLinkService: WiseLinkService
   ) {}
 
@@ -68,7 +70,8 @@ export class VLEComponent implements AfterViewInit {
       this.projectService.project.theme === 'tab'
         ? this.tabbedVLETemplate
         : this.defaultVLETemplate;
-    this.projectStyle = this.projectService.getStyle();
+    this.projectStylePath =
+      this.configService.getProjectAssetsDirectoryPath() + '/project_styles.css';
     if (this.notebookService.isNotebookEnabled()) {
       this.notebookConfig = this.notebookService.getStudentNotebookConfig();
       this.notesEnabled = this.notebookConfig.itemTypes.note.enabled;
@@ -77,7 +80,7 @@ export class VLEComponent implements AfterViewInit {
 
     this.runEndedAndLocked = this.configService.isEndedAndLocked();
     let script = this.projectService.getProjectScript();
-    if (script != null) {
+    if (script != null && script !== '') {
       this.projectService.retrieveScript(script).then((script: string) => {
         new Function(script).call(this);
       });
@@ -109,11 +112,19 @@ export class VLEComponent implements AfterViewInit {
   }
 
   @HostListener('window:snip-image', ['$event.detail.target'])
-  snipImage(image: Element): void {
+  snipImage(image: HTMLImageElement): void {
     this.notebookService.addNote(
       this.studentDataService.getCurrentNodeId(),
-      this.utilService.getImageObjectFromImageElement(image)
+      this.getImageObjectFromImageElement(image)
     );
+  }
+
+  private getImageObjectFromImageElement(image: HTMLImageElement): File {
+    const canvas = document.createElement('canvas');
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+    canvas.getContext('2d').drawImage(image, 0, 0);
+    return convertToPNGFile(canvas);
   }
 
   closeNotes(): void {
@@ -157,7 +168,7 @@ export class VLEComponent implements AfterViewInit {
         let currentNodeId = this.currentNode.id;
 
         this.studentDataService.updateStackHistory(currentNodeId);
-        this.studentDataService.updateVisitedNodesHistory(currentNodeId);
+        this.nodeStatusService.setNodeIsVisited(currentNodeId);
 
         let componentId, componentType, category, eventName, eventData, eventNodeId;
         if (previousNode != null && this.projectService.isGroupNode(previousNode.id)) {

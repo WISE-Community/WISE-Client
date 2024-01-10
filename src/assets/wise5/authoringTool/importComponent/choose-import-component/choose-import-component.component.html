@@ -1,0 +1,132 @@
+<h4 i18n>Import Component(s)</h4>
+<div fxLayoutGap="20px">
+  <span i18n>Choose a unit to import from and then choose which component(s) to import</span>
+</div>
+<mat-form-field class="unit-select">
+  <mat-label i18n>My Units</mat-label>
+  <mat-select
+    [(ngModel)]="importMyProjectId"
+    (ngModelChange)="showMyImportProject(importMyProjectId)"
+  >
+    <mat-option *ngFor="let project of myProjectsList" [value]="project.id" i18n>
+      {{
+        project.id +
+          ' - ' +
+          project.name +
+          (project.runId ? ' (Run ID: ' + project.runId + ')' : '')
+      }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br />
+<mat-form-field class="unit-select">
+  <mat-label i18n>Library Units</mat-label>
+  <mat-select
+    [(ngModel)]="importLibraryProjectId"
+    (ngModelChange)="showLibraryImportProject(importLibraryProjectId)"
+  >
+    <mat-option *ngFor="let project of libraryProjectsList" [value]="project.id" i18n>
+      {{
+        project.id +
+          ' - ' +
+          project.name +
+          (project.runId ? ' (Run ID: ' + project.runId + ')' : '')
+      }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br />
+<span *ngIf="importProject != null">
+  <div class="import-message-bar" fxLayoutGap="20px">
+    <span i18n
+      >After you have chosen the component(s) you want to import, click this button to import
+      them</span
+    >
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="importComponents()"
+      matTooltip="Import Component(s)"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>vertical_align_bottom</mat-icon>
+    </button>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h4>{{ importProject.metadata.title }}</h4>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="previewImportProject()"
+      matTooltip="Preview Project"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>preview</mat-icon>
+    </button>
+  </div>
+  <div
+    *ngFor="let importItem of nodesInOrder"
+    [ngClass]="{
+      groupHeader: importItem.node.type === 'group',
+      stepHeader: importItem.node.type !== 'group'
+    }"
+  >
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h6 *ngIf="importItem.order !== 0">
+        {{ importItem.stepNumber }}: {{ importItem.node.title }}
+      </h6>
+      <button
+        mat-raised-button
+        color="primary"
+        *ngIf="importItem.node.type !== 'group'"
+        (click)="previewImportNode(importItem.node)"
+        matTooltip="Preview Step"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>preview</mat-icon>
+      </button>
+    </div>
+    <div
+      *ngFor="let component of importItem.node.components; let i = index"
+      class="componentHeader"
+    >
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+        <div>
+          <mat-checkbox [(ngModel)]="component.checked" color="primary">
+            <span>{{ i + 1 }}. {{ component.type }}</span>
+          </mat-checkbox>
+        </div>
+        <div>
+          <button
+            mat-raised-button
+            color="primary"
+            *ngIf="importItem.node.type !== 'group'"
+            (click)="previewImportNode(importItem.node)"
+            matTooltip="Preview Component"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
+            <mat-icon>preview</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="importComponents()"
+    matTooltip="Import Component(s)"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>vertical_align_bottom</mat-icon>
+  </button>
+</span>
+<hr />
+<div fxLayout="row">
+  <button mat-button color="primary" (click)="cancel()" aria-label="Cancel" i18n>Cancel</button>
+</div>

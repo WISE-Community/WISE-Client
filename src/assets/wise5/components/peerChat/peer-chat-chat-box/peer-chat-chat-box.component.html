@@ -1,8 +1,18 @@
-<mat-card class="chat-box mat-elevation-z2">
+<mat-card appearance="outlined" class="chat-box mat-elevation-z2">
   <peer-chat-members [peerChatWorkgroupInfos]="workgroupInfosWithoutTeachers"></peer-chat-members>
-  <peer-chat-messages *ngIf="messages.length > 0"
-      [peerChatMessages]="messages"
-      [myWorkgroupId]="myWorkgroupId"
-      [workgroupInfos]="workgroupInfos"></peer-chat-messages>
-  <peer-chat-message-input *ngIf="isEnabled" (onSubmit)="submit.emit($event)"></peer-chat-message-input>
+  <peer-chat-messages
+    *ngIf="messages.length > 0"
+    [peerChatMessages]="messages"
+    [myWorkgroupId]="myWorkgroupId"
+    [workgroupInfos]="workgroupInfos"
+    [isGrading]="isGrading"
+    (deleteClickedEvent)="deleteClicked($event)"
+    (undeleteClickedEvent)="undeleteClicked($event)"
+  ></peer-chat-messages>
+  <peer-chat-message-input
+    *ngIf="isEnabled"
+    [messageText]="response"
+    (onSubmit)="submitResponse($event)"
+    (responseChangedEvent)="responseChanged($event)"
+  ></peer-chat-message-input>
 </mat-card>

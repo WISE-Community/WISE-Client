@@ -2,9 +2,11 @@
 
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { formatDate } from '@angular/common';
-import { UtilService } from './utilService';
+import { isMatchingPeriods } from '../common/period/period';
+import { millisecondsToDateTime } from '../common/datetime/datetime';
+import { usernameComparator } from '../common/user/user';
 
 @Injectable()
 export class ConfigService {
@@ -12,11 +14,7 @@ export class ConfigService {
   private configRetrievedSource: Subject<any> = new Subject<any>();
   public configRetrieved$: Observable<any> = this.configRetrievedSource.asObservable();
 
-  constructor(
-    private http: HttpClient,
-    @Inject(LOCALE_ID) private localeID: string,
-    private utilService: UtilService
-  ) {}
+  constructor(private http: HttpClient, @Inject(LOCALE_ID) private localeID: string) {}
 
   setConfig(config) {
     this.config = config;
@@ -24,11 +22,9 @@ export class ConfigService {
     this.setClassmateDisplayNames();
   }
 
-  retrieveConfig(configURL) {
-    return this.http
-      .get(configURL)
-      .toPromise()
-      .then((configJSON: any) => {
+  retrieveConfig(configURL: string) {
+    return this.http.get(configURL).pipe(
+      tap((configJSON: any) => {
         this.setTimestampDiff(configJSON);
 
         let constraints = true;
@@ -74,7 +70,8 @@ export class ConfigService {
         }
         this.configRetrievedSource.next(configJSON);
         return configJSON;
-      });
+      })
+    );
   }
 
   setTimestampDiff(configJSON) {
@@ -289,7 +286,10 @@ export class ConfigService {
 
   getTeacherWorkgroupIds(): number[] {
     const teacherWorkgroupIds = [];
-    teacherWorkgroupIds.push(this.getTeacherWorkgroupId());
+    const teacherWorkgroupId = this.getTeacherWorkgroupId();
+    if (teacherWorkgroupId != null) {
+      teacherWorkgroupIds.push(teacherWorkgroupId);
+    }
     teacherWorkgroupIds.push(...this.getSharedTeacherWorkgroupIds());
     return teacherWorkgroupIds;
   }
@@ -332,7 +332,7 @@ export class ConfigService {
         return myClassInfo.sharedTeacherUserInfos;
       }
     }
-    return null;
+    return [];
   }
 
   getClassmateWorkgroupIds(includeSelf = false) {
@@ -358,22 +358,9 @@ export class ConfigService {
   sortClassmateUserInfosAlphabeticallyByName() {
     const classmateUserInfos = this.getClassmateUserInfos();
     if (classmateUserInfos != null) {
-      classmateUserInfos.sort(this.sortClassmateUserInfosAlphabeticallyByNameHelper);
+      classmateUserInfos.sort(usernameComparator);
     }
     return classmateUserInfos;
-  }
-
-  sortClassmateUserInfosAlphabeticallyByNameHelper(a, b) {
-    if (a != null && a.username != null && b != null && b.username != null) {
-      const aUsername = a.username.toLowerCase();
-      const bUsername = b.username.toLowerCase();
-      if (aUsername < bUsername) {
-        return -1;
-      } else if (aUsername > bUsername) {
-        return 1;
-      }
-    }
-    return 0;
   }
 
   getPermissions() {
@@ -440,11 +427,11 @@ export class ConfigService {
   getWorkgroupsByPeriod(periodId) {
     const workgroupsInPeriod = [];
     const myUserInfo = this.getMyUserInfo();
-    if (this.isStudent() && this.utilService.isMatchingPeriods(myUserInfo.periodId, periodId)) {
+    if (this.isStudent() && isMatchingPeriods(myUserInfo.periodId, periodId)) {
       workgroupsInPeriod.push(myUserInfo);
     }
     for (const classmateUserInfo of this.getClassmateUserInfos()) {
-      if (this.utilService.isMatchingPeriods(classmateUserInfo.periodId, periodId)) {
+      if (isMatchingPeriods(classmateUserInfo.periodId, periodId)) {
         workgroupsInPeriod.push(classmateUserInfo);
       }
     }
@@ -614,6 +601,10 @@ export class ConfigService {
     return !this.isRunOwner(workgroupId) && !this.isRunSharedTeacher();
   }
 
+  isSignedInUserATeacher(): boolean {
+    return this.isRunOwner() || this.isRunSharedTeacher();
+  }
+
   isTeacherWorkgroupId(workgroupId: number): boolean {
     return this.isTeacherIdentifyingId('workgroupId', workgroupId);
   }
@@ -624,6 +615,9 @@ export class ConfigService {
 
   isTeacherIdentifyingId(fieldName: string, value: number): boolean {
     const teacherUserInfo = this.getTeacherUserInfo();
+    if (teacherUserInfo == null) {
+      return false;
+    }
     if (teacherUserInfo[fieldName] === value) {
       return true;
     }
@@ -794,22 +788,6 @@ export class ConfigService {
     return content;
   }
 
-  getAvatarColorForWorkgroupId(workgroupId) {
-    const avatarColors = [
-      '#E91E63',
-      '#9C27B0',
-      '#CDDC39',
-      '#2196F3',
-      '#FDD835',
-      '#43A047',
-      '#795548',
-      '#EF6C00',
-      '#C62828',
-      '#607D8B'
-    ];
-    return avatarColors[workgroupId % 10];
-  }
-
   /**
    * Get the project assets folder path
    * @param includeHost whether to include the host in the URL
@@ -974,12 +952,12 @@ export class ConfigService {
   }
 
   getFormattedStartDate() {
-    return this.utilService.convertMillisecondsToFormattedDateTime(this.getStartDate());
+    return millisecondsToDateTime(this.getStartDate());
   }
 
   getFormattedEndDate() {
     if (this.getEndDate() != null) {
-      return this.utilService.convertMillisecondsToFormattedDateTime(this.getEndDate());
+      return millisecondsToDateTime(this.getEndDate());
     }
     return '';
   }

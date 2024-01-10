@@ -1,22 +1,31 @@
 <mat-card>
-  <div fxLayoutAlign="start center">
-    <h3 class="mat-display-1 accent-1" i18n>Period {{period.periodName}}</h3>
-    <span fxFlex></span>
-    <button mat-stroked-button
+  <mat-card-content>
+    <div fxLayoutAlign="start center">
+      <h3 class="mat-headline-4 accent-1" i18n>Period {{ period.periodName }}</h3>
+      <span fxFlex></span>
+      <button
+        mat-stroked-button
         color="primary"
         aria-label="Create a new group"
         i18n-aria-label
-        (click)="createNewGroup()">
-      <mat-icon class="text-secondary" color="primary">group_add</mat-icon>
-      &nbsp;
-      <span i18n>New Group</span>
-    </button>
-  </div>
-  <div class="groups" cdkDropListGroup>
-    <peer-group-unassigned-workgroups [unassignedWorkgroups]="unassignedWorkgroups"
-        (moveWorkgroup)="moveWorkgroup($event)">
-    </peer-group-unassigned-workgroups>
-    <peer-group-assigned-workgroups [groupings]="groupings" (moveWorkgroup)="moveWorkgroup($event)">
-    </peer-group-assigned-workgroups>
-  </div>
+        (click)="createNewGroup()"
+      >
+        <mat-icon class="text-secondary" color="primary">group_add</mat-icon>
+        &nbsp;
+        <span i18n>New Group</span>
+      </button>
+    </div>
+    <div class="groups" cdkDropListGroup>
+      <peer-group-unassigned-workgroups
+        [unassignedWorkgroups]="unassignedWorkgroups"
+        (moveWorkgroup)="moveWorkgroup($event)"
+      >
+      </peer-group-unassigned-workgroups>
+      <peer-group-assigned-workgroups
+        [groupings]="groupings"
+        (moveWorkgroup)="moveWorkgroup($event)"
+      >
+      </peer-group-assigned-workgroups>
+    </div>
+  </mat-card-content>
 </mat-card>

@@ -1,8 +1,13 @@
-<h1 mat-dialog-title [innerHTML]="dialogData.title"></h1>
-<div *ngIf="dialogData.scroll" mat-dialog-content class="dialog-content-scroll" [innerHTML]="dialogData.content"></div>
+<h2 mat-dialog-title [innerHTML]="dialogData.title"></h2>
+<div
+  *ngIf="dialogData.scroll"
+  mat-dialog-content
+  class="dialog-content-scroll"
+  [innerHTML]="dialogData.content"
+></div>
 <div *ngIf="!dialogData.scroll" mat-dialog-content>
   <div class="info-block" [innerHTML]="dialogData.content"></div>
 </div>
-<mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+<mat-dialog-actions align="end">
   <button mat-button mat-dialog-close i18n>Close</button>
 </mat-dialog-actions>

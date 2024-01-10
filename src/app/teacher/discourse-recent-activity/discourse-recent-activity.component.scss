@@ -1,4 +1,4 @@
-@import '~style/abstracts/functions', '~style/abstracts/variables', '~style/abstracts/mixins';
+@import 'style/abstracts/functions', 'style/abstracts/variables', 'style/abstracts/mixins';
 
 ul {
   list-style-type: none;
@@ -14,7 +14,7 @@ li {
   a {
     max-width: 660px;
     vertical-align: middle;
-    
+
     @media (min-width: breakpoint('md.min')) {
       max-width: 300px;
       display: inline-block;

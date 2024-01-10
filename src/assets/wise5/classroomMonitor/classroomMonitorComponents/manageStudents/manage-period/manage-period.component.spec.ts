@@ -8,7 +8,6 @@ import { ConfigService } from '../../../../services/configService';
 import { ManagePeriodComponent } from './manage-period.component';
 import classmateUserInfos from '../../../../../../app/services/sampleData/sample_classmateUserInfos.json';
 import { ManageTeamsComponent } from '../manage-teams/manage-teams.component';
-import { UtilService } from '../../../../services/utilService';
 
 let fixture: ComponentFixture<ManagePeriodComponent>;
 let component: ManagePeriodComponent;
@@ -27,7 +26,7 @@ describe('ManagePeriodComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatCardModule],
       declarations: [ManagePeriodComponent, ManageTeamsComponent],
-      providers: [ConfigService, GetWorkgroupService, UtilService, WorkgroupService]
+      providers: [ConfigService, GetWorkgroupService, WorkgroupService]
     });
     configService = TestBed.inject(ConfigService);
     workgroupService = TestBed.inject(WorkgroupService);

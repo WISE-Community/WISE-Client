@@ -1,4 +1,6 @@
-.register {
+.register-home {
+  padding: 0 8px;
+  
   h1 {
    margin-bottom: 0;
   }
@@ -6,7 +8,7 @@
   app-call-to-action {
     margin: 16px;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
   .cta, .cta__wrap, .mat-button-wrapper {
     height: 100%;
   }

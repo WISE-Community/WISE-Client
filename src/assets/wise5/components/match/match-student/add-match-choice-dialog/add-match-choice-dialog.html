@@ -1,22 +1,29 @@
 <form role="form" [formGroup]="addChoiceFormGroup" (submit)="save()">
-  <h2 class="mat-dialog-title" i18n>Enter Item Text</h2>
+  <h2 mat-dialog-title i18n>Enter Item Text</h2>
   <mat-dialog-content>
     <mat-form-field style="width: 100%">
-      <input matInput
-          id="choiceText"
-          name="choiceText"
-          formControlName="choiceText"
-          (keydown.enter)="save()">
-      <mat-error *ngIf="addChoiceFormGroup.controls['choiceText'].hasError('required')"
-          i18n>Item Text required</mat-error>
+      <input
+        matInput
+        id="choiceText"
+        name="choiceText"
+        formControlName="choiceText"
+        (keydown.enter)="save()"
+      />
+      <mat-error *ngIf="addChoiceFormGroup.controls['choiceText'].hasError('required')" i18n
+        >Item Text required</mat-error
+      >
     </mat-form-field>
   </mat-dialog-content>
-  <mat-dialog-actions fxLayoutAlign="end">
+  <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close i18n>Cancel</button>
-    <button mat-flat-button
-        color="primary"
-        type="submit"
-        [disabled]="!addChoiceFormGroup.valid"
-        i18n>OK</button>
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="!addChoiceFormGroup.valid"
+      i18n
+    >
+      OK
+    </button>
   </mat-dialog-actions>
 </form>

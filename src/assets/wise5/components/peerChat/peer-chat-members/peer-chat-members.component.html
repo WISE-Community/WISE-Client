@@ -1,7 +1,12 @@
-<div class="mat-small secondary-text" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="6px">
+<div
+  class="mat-small secondary-text"
+  fxLayout="row wrap"
+  fxLayoutAlign="start center"
+  fxLayoutGap="6px"
+>
   <span i18n>Chat members:</span>
   <span *ngFor="let peerChatWorkgroupInfo of peerChatWorkgroupInfos">
-    <mat-icon class="mat-24" [ngStyle]="{'color': peerChatWorkgroupInfo.avatarColor}">
+    <mat-icon class="mat-24" [ngStyle]="{ color: peerChatWorkgroupInfo.avatarColor }">
       account_circle
     </mat-icon>
     <span class="names">{{ peerChatWorkgroupInfo.displayNames }}</span>

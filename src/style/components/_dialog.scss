@@ -1,16 +1,47 @@
-mat-dialog-container.mat-dialog-container {
-  max-width: 100%;
-  padding: 16px;
 
-  .mat-dialog-content {
-    margin: 0 -16px;
+@use '@angular/material' as mat;
+
+mat-dialog-container.mat-mdc-dialog-container {
+  border-radius: $card-border-radius;
+  max-width: 100%;
+
+  .mdc-dialog__title {
+    padding: 0 16px 16px;
+    margin: 0;
+    font-family: $heading-font-family
+  }
+
+  .mat-dialog-title--icons {
+    padding-top: 16px;
+  }
+
+  .mat-dialog-title--actions {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .mat-mdc-dialog-content {
+    font-size: mat.font-size($wise-typography, 'body-1');
     padding: 0 16px;
-    font-size: mat-font-size($config, body-1);
+    color: inherit;
+    font-weight: 400;
+
+    &:first-child {
+      padding-top: 16px;
+    }
+
+    &:last-child {
+      padding-bottom: 16px;
+    }
   }
 
   .dialog-content-scroll {
     padding-top: 16px;
     padding-bottom: 16px;
+  }
+
+  .mat-mdc-dialog-actions {
+    padding: 16px;
   }
 }
 
@@ -36,4 +67,8 @@ mat-dialog-container.mat-dialog-container {
   @media (max-width: breakpoint('xs.max')) {
     max-width: 95vw !important;
   }
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  overflow-x: hidden;
 }

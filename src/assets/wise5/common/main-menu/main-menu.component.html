@@ -1,28 +1,40 @@
 <mat-toolbar class="md-toolbar--sidenav">
-  <div class="md-toolbar-tools" i18n>{{ title }}</div>
+  <div class="md-toolbar-tools dark-theme" i18n>{{ title }}</div>
 </mat-toolbar>
 <mat-list class="menu-sidenav">
   <ng-container *ngFor="let view of views">
-    <mat-list-item *ngIf="view.type === 'primary' && view.active"
-        aria-label="{{ view.label }}"
-        (click)="goToView(view)"
-        class="menu-sidenav__list-item"
-        [ngClass]="{'active': state.$current.name === view.route}">
-      <mat-icon class="menu-sidenav__icon"> {{ view.icon }} </mat-icon>
-      <p class="menu-sidenav__item">{{ view.name }}</p>
+    <mat-list-item
+      *ngIf="view.type === 'primary' && view.active"
+      role="button"
+      tabindex="0"
+      aria-label="{{ view.name }}"
+      (click)="goToView(view)"
+      (keyup.enter)="goToView(view)"
+      class="menu-sidenav__list-item mat-mdc-list-item-interactive"
+    >
+      <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <mat-icon class="secondary-text"> {{ view.icon }} </mat-icon>
+        <span class="mat-caption">{{ view.name }}</span>
+      </span>
     </mat-list-item>
   </ng-container>
 </mat-list>
 <mat-divider class="menu-sidenav__divider"></mat-divider>
 <mat-list class="menu-sidenav">
   <ng-container *ngFor="let view of views">
-    <mat-list-item *ngIf="view.type === 'secondary' && view.active"
-        aria-label="{{ view.label }}"
-        (click)="goToView(view)"
-        class="menu-sidenav__list-item"
-        [ngClass]="{'active': state.$current.name === view.route}">
-      <mat-icon class="menu-sidenav__icon"> {{ view.icon }} </mat-icon>
-      <p class="menu-sidenav__item">{{ view.name }}</p>
+    <mat-list-item
+      *ngIf="view.type === 'secondary' && view.active"
+      role="button"
+      tabindex="0"
+      aria-label="{{ view.name }}"
+      (click)="goToView(view)"
+      (keyup.enter)="goToView(view)"
+      class="menu-sidenav__list-item mat-mdc-list-item-interactive"
+    >
+      <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <mat-icon class="secondary-text"> {{ view.icon }} </mat-icon>
+        <span class="mat-caption">{{ view.name }}</span>
+      </span>
     </mat-list-item>
   </ng-container>
 </mat-list>

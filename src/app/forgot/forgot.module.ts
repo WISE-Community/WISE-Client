@@ -16,11 +16,11 @@ import { ForgotTeacherUsernameComponent } from './teacher/forgot-teacher-usernam
 import { ForgotTeacherPasswordComponent } from './teacher/forgot-teacher-password/forgot-teacher-password.component';
 import { ForgotStudentPasswordSecurityComponent } from './student/forgot-student-password-security/forgot-student-password-security.component';
 import { ForgotStudentPasswordChangeComponent } from './student/forgot-student-password-change/forgot-student-password-change.component';
-import { ForgotStudentPasswordCompleteComponent } from './student/forgot-student-password-complete/forgot-student-password-complete.component';
 import { ForgotTeacherUsernameCompleteComponent } from './teacher/forgot-teacher-username-complete/forgot-teacher-username-complete.component';
 import { ForgotTeacherPasswordChangeComponent } from './teacher/forgot-teacher-password-change/forgot-teacher-password-change.component';
-import { ForgotTeacherPasswordCompleteComponent } from './teacher/forgot-teacher-password-complete/forgot-teacher-password-complete.component';
 import { ForgotTeacherPasswordVerifyComponent } from './teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component';
+import { PasswordModule } from '../password/password.module';
+import { ForgotUserPasswordCompleteComponent } from './forgot-user-password-complete/forgot-user-password-complete.component';
 
 @NgModule({
   imports: [
@@ -29,6 +29,7 @@ import { ForgotTeacherPasswordVerifyComponent } from './teacher/forgot-teacher-p
     FormsModule,
     MatDividerModule,
     MatProgressBarModule,
+    PasswordModule,
     ReactiveFormsModule,
     SharedModule
   ],
@@ -43,11 +44,10 @@ import { ForgotTeacherPasswordVerifyComponent } from './teacher/forgot-teacher-p
     ForgotTeacherPasswordComponent,
     ForgotStudentPasswordSecurityComponent,
     ForgotStudentPasswordChangeComponent,
-    ForgotStudentPasswordCompleteComponent,
     ForgotTeacherUsernameCompleteComponent,
     ForgotTeacherPasswordChangeComponent,
-    ForgotTeacherPasswordCompleteComponent,
-    ForgotTeacherPasswordVerifyComponent
+    ForgotTeacherPasswordVerifyComponent,
+    ForgotUserPasswordCompleteComponent
   ],
   exports: [ForgotComponent]
 })

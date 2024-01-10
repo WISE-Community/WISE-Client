@@ -1,9 +1,8 @@
 <div class="outside-content">
-  <div style="width: {{width}}; height: {{height}}">
-    <iframe [src]="url" width="100%" height="100%" allowfullscreen>
-    </iframe>
+  <div style="width: {{ width }}; height: {{ height }}">
+    <iframe [src]="url" width="100%" height="100%" allowfullscreen> </iframe>
   </div>
   <div *ngIf="infoString !== ''" class="outside-content__source md-caption">
-    <a [href]="infoUrl" target="_blank" i18n>Credit: {{infoString}}</a>
+    <a [href]="infoUrl" target="_blank" i18n>Credit: {{ infoString }}</a>
   </div>
 </div>

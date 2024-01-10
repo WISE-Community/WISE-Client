@@ -1,28 +1,28 @@
 <div fxLayoutAlign="center center" fxLayoutGap="4px">
-  <button mat-icon-button
-      aria-label="Previous Team"
-      i18n-aria-label
-      [disabled]="!prevId"
-      (click)="goToPrevTeam()"
-      matTooltip="Previous Team"
-      matTooltipPosition="below"
-      i18n-matTooltip>
-    <mat-icon>{{ icons.prev }}</mat-icon>
+  <button
+    mat-icon-button
+    aria-label="Previous Team"
+    i18n-aria-label
+    [disabled]="!prevWorkgroup"
+    (click)="goToTeam(prevWorkgroup)"
+    matTooltip="Previous Team"
+    matTooltipPosition="below"
+    i18n-matTooltip
+  >
+    <mat-icon>chevron_left</mat-icon>
   </button>
-  <mat-icon class="mat-30"
-      fxHide.xs
-      style="color: {{ avatarColor }};">
-    account_circle
-  </mat-icon>
-  <workgroup-select-dropdown></workgroup-select-dropdown>
-  <button mat-icon-button
-      aria-label="Next Team"
-      i18n-aria-label
-      [disabled]="!nextId"
-      (click)="goToNextTeam()"
-      matTooltip="Next Team"
-      matTooltipPosition="below"
-      i18n-matTooltip>
-    <mat-icon>{{ icons.next }}</mat-icon>
+  <mat-icon class="mat-30" fxHide.xs style="color: {{ avatarColor }};"> account_circle </mat-icon>
+  <workgroup-select-autocomplete></workgroup-select-autocomplete>
+  <button
+    mat-icon-button
+    aria-label="Next Team"
+    i18n-aria-label
+    [disabled]="!nextWorkgroup"
+    (click)="goToTeam(nextWorkgroup)"
+    matTooltip="Next Team"
+    matTooltipPosition="below"
+    i18n-matTooltip
+  >
+    <mat-icon>chevron_right</mat-icon>
   </button>
 </div>

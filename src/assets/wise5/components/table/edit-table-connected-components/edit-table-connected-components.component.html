@@ -1,35 +1,46 @@
 <edit-connected-components-add-button (connectedComponentsChanged)="addConnectedComponent()">
 </edit-connected-components-add-button>
-<div *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
-    class="connected-components-div">
+<div
+  *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
+  class="connected-components-div"
+>
   <div fxLayout="row wrap" fxLayoutGap="20px">
     <edit-connected-component-default-selects
-        [connectedComponent]="connectedComponent"
-        [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-        (connectedComponentNodeIdChange)="connectedComponentNodeIdChanged(connectedComponent)"
-        (connectedComponentComponentIdChange)="connectedComponentComponentIdChanged(connectedComponent)"
-        (connectedComponentTypeChange)="connectedComponentTypeChanged(connectedComponent)">
+      [connectedComponent]="connectedComponent"
+      [componentId]="componentId"
+      [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+      (connectedComponentNodeIdChange)="connectedComponentNodeIdChanged(connectedComponent)"
+      (connectedComponentComponentIdChange)="
+        connectedComponentComponentIdChanged(connectedComponent)
+      "
+      (connectedComponentTypeChange)="connectedComponentTypeChanged(connectedComponent)"
+    >
     </edit-connected-component-default-selects>
     <mat-form-field *ngIf="connectedComponent.type === 'importWork'">
       <mat-label i18n>Action</mat-label>
-      <mat-select [(ngModel)]="connectedComponent.action"
-          (ngModelChange)="connectedComponentChanged()">
+      <mat-select
+        [(ngModel)]="connectedComponent.action"
+        (ngModelChange)="connectedComponentChanged()"
+      >
         <mat-option value="merge" i18n>Merge</mat-option>
         <mat-option value="append" i18n>Append</mat-option>
       </mat-select>
     </mat-form-field>
     <div *ngIf="getConnectedComponentType(connectedComponent) === 'Graph'">
-      <mat-checkbox color="primary"
-          [(ngModel)]="connectedComponent.showDataAtMouseX"
-          (ngModelChange)="connectedComponentChanged()"
-          i18n>
+      <mat-checkbox
+        color="primary"
+        [(ngModel)]="connectedComponent.showDataAtMouseX"
+        (ngModelChange)="connectedComponentChanged()"
+        i18n
+      >
         Only Show Data At Mouse X Position
       </mat-checkbox>
     </div>
     <span fxFlex></span>
     <edit-connected-component-delete-button
-        [connectedComponentIndex]="connectedComponentIndex"
-        (connectedComponentChange)="deleteConnectedComponent(index)">
+      [connectedComponentIndex]="connectedComponentIndex"
+      (connectedComponentChange)="deleteConnectedComponent(index)"
+    >
     </edit-connected-component-delete-button>
   </div>
 </div>

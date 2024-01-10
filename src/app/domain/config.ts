@@ -8,5 +8,6 @@ export class Config {
   currentTime: number;
   wiseHostname?: string;
   wise4Hostname?: string;
+  discourseNewsCategory?: string;
   discourseURL?: string;
 }

@@ -4,13 +4,15 @@
     <span *ngSwitchCase="null" i18n>(None Selected)</span>
     <span *ngSwitchDefault>{{ peerGrouping.name }}</span>
   </ng-container>
-  <button mat-raised-button
-      color="primary"
-      (click)="selectGroupingLogic()"
-      matTooltip="Select Grouping Logic"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      i18n>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="selectGroupingLogic()"
+    matTooltip="Select Grouping Logic"
+    matTooltipPosition="above"
+    i18n-matTooltip
+    i18n
+  >
     Select
   </button>
 </div>

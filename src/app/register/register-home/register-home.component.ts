@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-register-home',
@@ -7,7 +8,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class RegisterHomeComponent implements OnInit {
-  constructor() {}
+  googleUserNotFoundError: boolean;
 
-  ngOnInit() {}
+  constructor(private activatedRoute: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.googleUserNotFoundError = params['googleUserNotFound'] === 'true';
+    });
+  }
 }

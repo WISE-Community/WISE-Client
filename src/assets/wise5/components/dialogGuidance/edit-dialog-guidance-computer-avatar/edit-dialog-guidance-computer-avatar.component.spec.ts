@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
+import { copy } from '../../../common/object/object';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EditDialogGuidanceComputerAvatarComponent } from './edit-dialog-guidance-computer-avatar.component';
@@ -54,7 +55,7 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
     ];
     spyOn(TestBed.inject(ComputerAvatarService), 'getAvatars').and.returnValue(allComputerAvatars);
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
-      JSON.parse(JSON.stringify(componentContent))
+      copy(componentContent)
     );
     component.computerAvatarSettings = {
       ids: [],

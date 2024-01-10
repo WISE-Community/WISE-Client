@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
-import { NodeService } from '../../../services/nodeService';
+import { CSVToArray } from '../../../common/array/array';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { TableContent } from '../TableContent';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'edit-table-advanced',
@@ -25,10 +25,9 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   importTableMessage: string;
 
   constructor(
-    protected nodeService: NodeService,
+    protected nodeService: TeacherNodeService,
     protected notebookService: NotebookService,
-    protected teacherProjectService: TeacherProjectService,
-    private utilService: UtilService
+    protected teacherProjectService: TeacherProjectService
   ) {
     super(nodeService, notebookService, teacherProjectService);
   }
@@ -193,7 +192,7 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
       const reader: FileReader = new FileReader();
       reader.onload = () => {
         const fileContent = reader.result as string;
-        const tableContent = this.utilService.CSVToArray(fileContent);
+        const tableContent = CSVToArray(fileContent);
         const numCells = this.getNumCells(tableContent);
         if (numCells > this.MAX_ALLOWED_CELLS_IN_IMPORT) {
           this.setImportTableMessage(
@@ -210,7 +209,7 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
     event.target.value = null;
   }
 
-  getNumCells(tableContent: string[][]): number {
+  getNumCells(tableContent: (string | number)[][]): number {
     let numCells = 0;
     for (const row of tableContent) {
       numCells += row.length;
@@ -218,7 +217,7 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
     return numCells;
   }
 
-  importTable(tableContent: string[][]): void {
+  importTable(tableContent: (string | number)[][]): void {
     const tableData = this.convertToTableData(tableContent);
     this.componentContent.tableData = tableData;
     this.componentContent.numRows = this.getNumRows(tableData);
@@ -226,9 +225,9 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
     this.componentChanged();
   }
 
-  convertToTableData(stringArray: string[][]): any[][] {
+  convertToTableData(array: (string | number)[][]): any[][] {
     const table = [];
-    for (const row of stringArray) {
+    for (const row of array) {
       const tableRow = [];
       for (const cell of row) {
         tableRow.push({ text: cell, editable: true, size: null });

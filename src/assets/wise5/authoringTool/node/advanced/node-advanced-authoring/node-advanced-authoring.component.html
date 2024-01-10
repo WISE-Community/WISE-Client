@@ -1,0 +1,78 @@
+<div class="main-div" fxLayoutGap="20px">
+  <button
+    mat-raised-button
+    color="primary"
+    routerLink=".."
+    matTooltip="Back"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
+    routerLink="general"
+    matTooltip="General Advanced"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>settings</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
+    routerLink="rubric"
+    matTooltip="Edit Step Rubric"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>message</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
+    routerLink="path"
+    matTooltip="Edit Transitions"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>trending_up</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
+    routerLink="constraint"
+    matTooltip="Edit Constraints"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>block</mat-icon>
+  </button>
+  <button
+    *ngIf="!isGroupNode"
+    mat-raised-button
+    color="primary"
+    routerLink="branch"
+    matTooltip="Create Branch"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon class="branch-icon">call_split</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    routerLink="json"
+    matTooltip="Show JSON"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>code</mat-icon>
+  </button>
+</div>
+<router-outlet></router-outlet>

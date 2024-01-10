@@ -3,7 +3,7 @@
 import { ConfigService } from './configService';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { Node } from '../common/Node';
 import { PeerGrouping } from '../../../app/domain/peerGrouping';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
@@ -12,22 +12,25 @@ import { BranchService } from './branchService';
 import { PathService } from './pathService';
 import { ComponentContent } from '../common/ComponentContent';
 import { MultipleChoiceContent } from '../components/multipleChoice/MultipleChoiceContent';
+import { TransitionLogic } from '../common/TransitionLogic';
+import { Transition } from '../common/Transition';
+import { ReferenceComponent } from '../../../app/domain/referenceComponent';
+import { QuestionBank } from '../components/peerChat/peer-chat-question-bank/QuestionBank';
+import { DynamicPrompt } from '../directives/dynamic-prompt/DynamicPrompt';
+import { Component } from '../common/Component';
 
 @Injectable()
 export class ProjectService {
   achievements: any = [];
-  activeConstraints: any = [];
   additionalProcessingFunctionsMap: any = {};
-  allPaths: string[] = [];
+  allPaths: string[][] = [];
   applicationNodes: any = [];
-  filters: any[] = [{ name: 'all', label: 'All' }];
   flattenedProjectAsNodeIds: any = null;
   groupNodes: any[] = [];
   idToNode: any = {};
   idToOrder: any = {};
   inactiveGroupNodes: any[] = [];
   inactiveStepNodes: any[] = [];
-  isNodeAffectedByConstraintResult: any = {};
   metadata: any = {};
   nodes: any = {};
   nodeCount: number = 0;
@@ -37,9 +40,9 @@ export class ProjectService {
   nodeIdToBranchPathLetter: any = {};
   project: any = null;
   rootNode: any = null;
-  transitions: any = [];
-  private projectChangedSource: Subject<any> = new Subject<any>();
-  public projectChanged$: Observable<any> = this.projectChangedSource.asObservable();
+  transitions: Transition[] = [];
+  private projectParsedSource: Subject<void> = new Subject<void>();
+  public projectParsed$: Observable<void> = this.projectParsedSource.asObservable();
 
   constructor(
     protected branchService: BranchService,
@@ -55,29 +58,26 @@ export class ProjectService {
   }
 
   clearProjectFields(): void {
-    this.transitions = [];
+    this.allPaths = [];
     this.applicationNodes = [];
+    this.flattenedProjectAsNodeIds = null;
     this.inactiveStepNodes = [];
     this.inactiveGroupNodes = [];
     this.groupNodes = [];
     this.idToNode = {};
     this.metadata = {};
-    this.activeConstraints = [];
     this.rootNode = null;
     this.idToOrder = {};
     this.nodeCount = 0;
     this.nodeIdToIsInBranchPath = {};
     this.nodeIdsInAnyBranch = [];
+    this.nodes = {};
     this.achievements = [];
     this.branchService.clearBranchesCache();
   }
 
   getStyle(): any {
     return this.project.style;
-  }
-
-  getFilters(): any[] {
-    return this.filters;
   }
 
   getProjectTitle(): string {
@@ -181,12 +181,6 @@ export class ProjectService {
     for (const node of nodes) {
       const nodeId = node.id;
       const nodeType = node.type;
-      const content = node.content;
-      const constraints = node.constraints;
-
-      if (content != null) {
-        //node.content = this.injectAssetPaths(content);
-      }
 
       this.setIdToNode(nodeId, node);
       this.addNode(node);
@@ -200,23 +194,6 @@ export class ProjectService {
       const groupId = node.groupId;
       if (groupId != null) {
         this.addNodeToGroupNode(groupId, nodeId);
-      }
-
-      if (constraints != null) {
-        if (
-          this.configService.isPreview() == true &&
-          this.configService.getConfigParam('constraints') === false
-        ) {
-          /*
-           * if we are in preview mode and constraints are set
-           * to false, we will not add the constraints
-           */
-        } else {
-          // all other cases we will add the constraints
-          for (const constraint of constraints) {
-            this.activeConstraints.push(constraint);
-          }
-        }
       }
     }
   }
@@ -235,21 +212,25 @@ export class ProjectService {
     this.metadata = this.project.metadata;
     this.loadNodes(this.project.nodes);
     this.loadInactiveNodes(this.project.inactiveNodes);
-    this.loadConstraints(this.project.constraints);
     this.rootNode = this.getRootNode(this.project.nodes[0].id);
     this.calculateNodeOrderOfProject();
     this.loadNodeIdsInAnyBranch(this.getBranches());
     this.calculateNodeNumbers();
+    this.groupNodes = this.getActiveGroupNodes();
     if (this.project.projectAchievements != null) {
       this.achievements = this.project.projectAchievements;
     }
-    this.broadcastProjectChanged();
+    this.broadcastProjectParsed();
+  }
+
+  private getActiveGroupNodes(): any[] {
+    const activeNodeIds = Object.keys(this.idToOrder);
+    return this.groupNodes.filter((node) => activeNodeIds.includes(node.id));
   }
 
   instantiateDefaults(): void {
     this.project.nodes = this.project.nodes ? this.project.nodes : [];
     this.project.inactiveNodes = this.project.inactiveNodes ? this.project.inactiveNodes : [];
-    this.project.constraints = this.project.constraints ? this.project.constraints : [];
   }
 
   private calculateNodeOrderOfProject(): void {
@@ -613,7 +594,7 @@ export class ProjectService {
 
   isNodeDescendentOfGroup(node: any, group: any): boolean {
     if (node != null && group != null) {
-      const descendents = this.getDescendentsOfGroup(group);
+      const descendents = this.getDescendentIdsOfGroup(group);
       const nodeId = node.id;
       if (descendents.indexOf(nodeId) != -1) {
         return true;
@@ -622,7 +603,7 @@ export class ProjectService {
     return false;
   }
 
-  getDescendentsOfGroup(group: any): any {
+  getDescendentIdsOfGroup(group: any): string[] {
     let descendents = [];
     if (group != null) {
       const childIds = group.ids;
@@ -631,7 +612,7 @@ export class ProjectService {
         for (let childId of childIds) {
           const node = this.getNodeById(childId);
           if (node != null) {
-            const childDescendents = this.getDescendentsOfGroup(node);
+            const childDescendents = this.getDescendentIdsOfGroup(node);
             descendents = descendents.concat(childDescendents);
           }
         }
@@ -656,93 +637,6 @@ export class ProjectService {
     return this.project.startNodeId === nodeId;
   }
 
-  getConstraintsThatAffectNode(node: any): any[] {
-    const constraints = [];
-    const allConstraints = this.activeConstraints;
-    for (let constraint of allConstraints) {
-      if (this.isNodeAffectedByConstraint(node, constraint)) {
-        constraints.push(constraint);
-      }
-    }
-    return constraints;
-  }
-
-  /**
-   * Order the constraints so that they show up in the same order as in the
-   * project.
-   * @param constraints An array of constraint objects.
-   * @return An array of ordered constraints.
-   */
-  orderConstraints(constraints: any[]): any[] {
-    let orderedNodeIds = this.getFlattenedProjectAsNodeIds();
-    return constraints.sort(this.constraintsComparatorGenerator(orderedNodeIds));
-  }
-
-  /**
-   * Create the constraints comparator function that is used for sorting an
-   * array of constraint objects.
-   * @param orderedNodeIds An array of node ids in the order in which they
-   * show up in the project.
-   * @return A comparator that orders constraint objects in the order in which
-   * the target ids show up in the project.
-   */
-  private constraintsComparatorGenerator(orderedNodeIds: string[]): any {
-    return function (constraintA, constraintB) {
-      let constraintAIndex = orderedNodeIds.indexOf(constraintA.targetId);
-      let constraintBIndex = orderedNodeIds.indexOf(constraintB.targetId);
-      if (constraintAIndex < constraintBIndex) {
-        return -1;
-      } else if (constraintAIndex > constraintBIndex) {
-        return 1;
-      }
-      return 0;
-    };
-  }
-
-  /**
-   * Check if a node is affected by the constraint
-   * @param node check if the node is affected
-   * @param constraint the constraint that might affect the node
-   * @returns whether the node is affected by the constraint
-   */
-  private isNodeAffectedByConstraint(node: any, constraint: any): boolean {
-    const cachedResult = this.getCachedIsNodeAffectedByConstraintResult(node.id, constraint.id);
-    if (cachedResult != null) {
-      return cachedResult;
-    } else {
-      let result = false;
-      const nodeId = node.id;
-      const targetId = constraint.targetId;
-      const action = constraint.action;
-
-      if (action === 'makeAllNodesAfterThisNotVisible') {
-        if (this.isNodeIdAfter(targetId, node.id)) {
-          result = true;
-        }
-      } else if (action === 'makeAllNodesAfterThisNotVisitable') {
-        if (this.isNodeIdAfter(targetId, node.id)) {
-          result = true;
-        }
-      } else {
-        const targetNode = this.getNodeById(targetId);
-        if (targetNode != null) {
-          const nodeType = targetNode.type;
-          if (nodeType === 'node' && nodeId === targetId) {
-            result = true;
-          } else if (
-            nodeType === 'group' &&
-            (nodeId === targetId || this.isNodeDescendentOfGroup(node, targetNode))
-          ) {
-            result = true;
-          }
-        }
-      }
-
-      this.cacheIsNodeAffectedByConstraintResult(node.id, constraint.id, result);
-      return result;
-    }
-  }
-
   /**
    * Check if a node id comes after another node id in the project.
    * @param nodeId1 The node id of a step or group.
@@ -755,7 +649,7 @@ export class ProjectService {
         return false;
       } else {
         for (const onePath of this.getOrCalculateAllPaths()) {
-          if (onePath.indexOf(nodeId1) < onePath.indexOf(nodeId2)) {
+          if (this.pathIncludesNodesAndOneComesBeforeTwo(onePath, nodeId1, nodeId2)) {
             return true;
           }
         }
@@ -766,7 +660,15 @@ export class ProjectService {
     return false;
   }
 
-  private getOrCalculateAllPaths(): string[] {
+  pathIncludesNodesAndOneComesBeforeTwo(path: string[], nodeId1: string, nodeId2: string): boolean {
+    return (
+      path.includes(nodeId1) &&
+      path.includes(nodeId2) &&
+      path.indexOf(nodeId1) < path.indexOf(nodeId2)
+    );
+  }
+
+  private getOrCalculateAllPaths(): string[][] {
     if (this.allPaths.length === 0) {
       this.allPaths = this.getAllPaths([], this.getStartNodeId(), true);
     }
@@ -779,9 +681,8 @@ export class ProjectService {
    * @returns {boolean} True iff nodeId comes after groupId.
    */
   private isNodeAfterGroup(groupId: string, nodeId: string): boolean {
-    const transitions = this.getTransitionsByFromNodeId(groupId);
     try {
-      for (let transition of transitions) {
+      for (const transition of this.getTransitionsByFromNodeId(groupId)) {
         const pathFromGroupToEnd = this.getAllPaths([], transition.to, true);
         for (let pathToEnd of pathFromGroupToEnd) {
           if (pathToEnd.indexOf(nodeId) != -1) {
@@ -798,14 +699,8 @@ export class ProjectService {
    * @param fromNodeId the from node id
    * @returns the transition logic object
    */
-  getTransitionLogicByFromNodeId(fromNodeId: string): any {
-    const node = this.getNodeById(fromNodeId);
-    if (node.transitionLogic == null) {
-      node.transitionLogic = {
-        transitions: []
-      };
-    }
-    return node.transitionLogic;
+  getTransitionLogicByFromNodeId(fromNodeId: string): TransitionLogic {
+    return this.getNode(fromNodeId).getTransitionLogic();
   }
 
   /**
@@ -813,9 +708,9 @@ export class ProjectService {
    * @param fromNodeId the node to get transitions from
    * @returns {Array} an array of transitions
    */
-  getTransitionsByFromNodeId(fromNodeId: string) {
+  getTransitionsByFromNodeId(fromNodeId: string): Transition[] {
     const transitionLogic = this.getTransitionLogicByFromNodeId(fromNodeId);
-    return transitionLogic.transitions;
+    return transitionLogic.transitions ?? [];
   }
 
   /**
@@ -853,16 +748,10 @@ export class ProjectService {
    * @param toNodeId We are looking for a transition to this node id.
    * @returns Whether the node has a transition to the given nodeId.
    */
-  nodeHasTransitionToNodeId(node: any, toNodeId: string): boolean {
-    const transitions = this.getTransitionsByFromNodeId(node.id);
-    if (transitions != null) {
-      for (let transition of transitions) {
-        if (toNodeId === transition.to) {
-          return true;
-        }
-      }
-    }
-    return false;
+  nodeHasTransitionToNodeId(node: Node, toNodeId: string): boolean {
+    return this.getTransitionsByFromNodeId(node.id).some(
+      (transition) => transition.to === toNodeId
+    );
   }
 
   /**
@@ -883,19 +772,29 @@ export class ProjectService {
    * Retrieves the project JSON from Config.projectURL and returns it.
    * If Config.projectURL is undefined, returns null.
    */
-  retrieveProject(): any {
-    let projectURL = this.configService.getConfigParam('projectURL');
-    if (projectURL == null) {
-      return null;
-    }
-    const headers = new HttpHeaders().set('cache-control', 'no-cache');
-    return this.http
-      .get(projectURL, { headers: headers })
-      .toPromise()
-      .then((projectJSON) => {
+  retrieveProject(): Observable<any> {
+    return this.makeProjectRequest().pipe(
+      tap((projectJSON: any) => {
         this.setProject(projectJSON);
         return projectJSON;
-      });
+      })
+    );
+  }
+
+  retrieveProjectWithoutParsing(): Observable<any> {
+    return this.makeProjectRequest().pipe(
+      tap((projectJSON: any) => {
+        this.project = projectJSON;
+        this.metadata = projectJSON.metadata;
+        return projectJSON;
+      })
+    );
+  }
+
+  private makeProjectRequest(): Observable<any> {
+    const projectURL = this.configService.getConfigParam('projectURL');
+    const headers = new HttpHeaders().set('cache-control', 'no-cache');
+    return this.http.get(projectURL, { headers: headers });
   }
 
   getThemePath(): string {
@@ -958,174 +857,169 @@ export class ProjectService {
    * @param includeGroups whether to include the group node ids in the paths
    * @return an array of paths. each path is an array of node ids.
    */
-  getAllPaths(pathSoFar: string[], nodeId: string = '', includeGroups: boolean = false): any[] {
+  getAllPaths(pathSoFar: string[], nodeId: string = '', includeGroups: boolean = false): any[][] {
     const allPaths = [];
     if (this.isApplicationNode(nodeId)) {
       const path = [];
       const transitions = this.getTransitionsByFromNodeId(nodeId);
-      if (transitions != null) {
-        if (includeGroups) {
-          const parentGroup = this.getParentGroup(nodeId);
-          if (parentGroup != null) {
-            const parentGroupId = parentGroup.id;
-            if (parentGroupId != null && pathSoFar.indexOf(parentGroupId) == -1) {
-              pathSoFar.push(parentGroup.id);
+      if (includeGroups) {
+        const parentGroup = this.getParentGroup(nodeId);
+        if (parentGroup != null) {
+          const parentGroupId = parentGroup.id;
+          if (parentGroupId != null && pathSoFar.indexOf(parentGroupId) == -1) {
+            pathSoFar.push(parentGroup.id);
+          }
+        }
+      }
+
+      /*
+       * add the node id to the path so far so we can later check
+       * which nodes are already in the path to prevent looping
+       * back in the path
+       */
+      pathSoFar.push(nodeId);
+
+      if (transitions.length === 0) {
+        /*
+         * there are no transitions from the node id so we will
+         * look for a transition in the parent group
+         */
+
+        let addedCurrentNodeId = false;
+        const parentGroupId = this.getParentGroupId(nodeId);
+        const parentGroupTransitions = this.getTransitionsByFromNodeId(parentGroupId);
+        for (const parentGroupTransition of parentGroupTransitions) {
+          if (parentGroupTransition != null) {
+            const toNodeId = parentGroupTransition.to;
+            if (pathSoFar.indexOf(toNodeId) == -1) {
+              /*
+               * recursively get the paths by getting all
+               * the paths for the to node
+               */
+              const allPathsFromToNode = this.getAllPaths(pathSoFar, toNodeId, includeGroups);
+
+              for (let tempPath of allPathsFromToNode) {
+                tempPath.unshift(nodeId);
+                allPaths.push(tempPath);
+                addedCurrentNodeId = true;
+              }
             }
           }
         }
 
-        /*
-         * add the node id to the path so far so we can later check
-         * which nodes are already in the path to prevent looping
-         * back in the path
-         */
-        pathSoFar.push(nodeId);
-
-        if (transitions.length === 0) {
+        if (!addedCurrentNodeId) {
           /*
-           * there are no transitions from the node id so we will
-           * look for a transition in the parent group
+           * if the parent group doesn't have any transitions we will
+           * need to add the current node id to the path
            */
+          path.push(nodeId);
+          allPaths.push(path);
+        }
+      } else {
+        // there are transitions from this node id
 
-          let addedCurrentNodeId = false;
-          const parentGroupId = this.getParentGroupId(nodeId);
-          const parentGroupTransitions = this.getTransitionsByFromNodeId(parentGroupId);
+        for (let transition of transitions) {
+          if (transition != null) {
+            const toNodeId = transition.to;
+            if (toNodeId != null && pathSoFar.indexOf(toNodeId) == -1) {
+              // we have not found the to node in the path yet so we can traverse it
 
-          if (parentGroupTransitions != null) {
-            for (let parentGroupTransition of parentGroupTransitions) {
-              if (parentGroupTransition != null) {
-                const toNodeId = parentGroupTransition.to;
-                if (pathSoFar.indexOf(toNodeId) == -1) {
-                  /*
-                   * recursively get the paths by getting all
-                   * the paths for the to node
-                   */
-                  const allPathsFromToNode = this.getAllPaths(pathSoFar, toNodeId, includeGroups);
+              /*
+               * recursively get the paths by getting all
+               * the paths from the to node
+               */
+              const allPathsFromToNode = this.getAllPaths(pathSoFar, toNodeId, includeGroups);
 
-                  for (let tempPath of allPathsFromToNode) {
-                    tempPath.unshift(nodeId);
-                    allPaths.push(tempPath);
-                    addedCurrentNodeId = true;
-                  }
-                }
-              }
-            }
-          }
+              if (allPathsFromToNode != null) {
+                for (let tempPath of allPathsFromToNode) {
+                  if (includeGroups) {
+                    // we need to add the group id to the path
 
-          if (!addedCurrentNodeId) {
-            /*
-             * if the parent group doesn't have any transitions we will
-             * need to add the current node id to the path
-             */
-            path.push(nodeId);
-            allPaths.push(path);
-          }
-        } else {
-          // there are transitions from this node id
-
-          for (let transition of transitions) {
-            if (transition != null) {
-              const toNodeId = transition.to;
-              if (toNodeId != null && pathSoFar.indexOf(toNodeId) == -1) {
-                // we have not found the to node in the path yet so we can traverse it
-
-                /*
-                 * recursively get the paths by getting all
-                 * the paths from the to node
-                 */
-                const allPathsFromToNode = this.getAllPaths(pathSoFar, toNodeId, includeGroups);
-
-                if (allPathsFromToNode != null) {
-                  for (let tempPath of allPathsFromToNode) {
-                    if (includeGroups) {
-                      // we need to add the group id to the path
-
-                      if (tempPath.length > 0) {
-                        const firstNodeId = tempPath[0];
-                        const firstParentGroupId = this.getParentGroupId(firstNodeId);
-                        const parentGroupId = this.getParentGroupId(nodeId);
-                        if (parentGroupId != firstParentGroupId) {
-                          /*
-                           * the parent ids are different which means this is a boundary
-                           * between two groups. for example if the project looked like
-                           * group1>node1>node2>group2>node3>node4
-                           * and the current node was node2 then the first node in the
-                           * path would be node3 which means we would need to place
-                           * group2 on the path before node3
-                           */
-                          tempPath.unshift(firstParentGroupId);
-                        }
+                    if (tempPath.length > 0) {
+                      const firstNodeId = tempPath[0];
+                      const firstParentGroupId = this.getParentGroupId(firstNodeId);
+                      const parentGroupId = this.getParentGroupId(nodeId);
+                      if (parentGroupId != firstParentGroupId) {
+                        /*
+                         * the parent ids are different which means this is a boundary
+                         * between two groups. for example if the project looked like
+                         * group1>node1>node2>group2>node3>node4
+                         * and the current node was node2 then the first node in the
+                         * path would be node3 which means we would need to place
+                         * group2 on the path before node3
+                         */
+                        tempPath.unshift(firstParentGroupId);
                       }
                     }
-
-                    tempPath.unshift(nodeId);
-                    allPaths.push(tempPath);
                   }
+
+                  tempPath.unshift(nodeId);
+                  allPaths.push(tempPath);
                 }
-              } else {
-                /*
-                 * the node is already in the path so far which means
-                 * the transition is looping back to a previous node.
-                 * we do not want to take this transition because
-                 * it will lead to an infinite loop. we will just
-                 * add the current node id to the path and not take
-                 * the transition which essentially ends the path.
-                 */
-                path.push(nodeId);
-                allPaths.push(path);
               }
+            } else {
+              /*
+               * the node is already in the path so far which means
+               * the transition is looping back to a previous node.
+               * we do not want to take this transition because
+               * it will lead to an infinite loop. we will just
+               * add the current node id to the path and not take
+               * the transition which essentially ends the path.
+               */
+              path.push(nodeId);
+              allPaths.push(path);
             }
           }
         }
+      }
 
-        if (pathSoFar.length > 0) {
-          const lastNodeId = pathSoFar[pathSoFar.length - 1];
-          if (this.isGroupNode(lastNodeId)) {
-            /*
-             * the last node id is a group id so we will remove it
-             * since we are moving back up the path as we traverse
-             * the nodes depth first
-             */
-            pathSoFar.pop();
-          }
+      if (pathSoFar.length > 0) {
+        const lastNodeId = pathSoFar[pathSoFar.length - 1];
+        if (this.isGroupNode(lastNodeId)) {
+          /*
+           * the last node id is a group id so we will remove it
+           * since we are moving back up the path as we traverse
+           * the nodes depth first
+           */
+          pathSoFar.pop();
         }
+      }
 
-        /*
-         * remove the latest node id (this will be a step node id)
-         * since we are moving back up the path as we traverse the
-         * nodes depth first
-         */
-        pathSoFar.pop();
+      /*
+       * remove the latest node id (this will be a step node id)
+       * since we are moving back up the path as we traverse the
+       * nodes depth first
+       */
+      pathSoFar.pop();
 
-        if (includeGroups) {
-          if (pathSoFar.length == 1) {
-            /*
-             * we are including groups and we have traversed
-             * back up to the start node id for the project.
-             * the only node id left in pathSoFar is now the
-             * parent group of the start node id. we will
-             * now add this parent group of the start node id
-             * to all of the paths
-             */
+      if (includeGroups) {
+        if (pathSoFar.length == 1) {
+          /*
+           * we are including groups and we have traversed
+           * back up to the start node id for the project.
+           * the only node id left in pathSoFar is now the
+           * parent group of the start node id. we will
+           * now add this parent group of the start node id
+           * to all of the paths
+           */
 
-            for (let path of allPaths) {
-              if (path != null) {
-                /*
-                 * prepend the parent group of the start node id
-                 * to the path
-                 */
-                path.unshift(pathSoFar[0]);
-              }
+          for (let path of allPaths) {
+            if (path != null) {
+              /*
+               * prepend the parent group of the start node id
+               * to the path
+               */
+              path.unshift(pathSoFar[0]);
             }
-
-            /*
-             * remove the parent group of the start node id from
-             * pathSoFar which leaves us with an empty pathSoFar
-             * which means we are completely done with
-             * calculating all the paths
-             */
-            pathSoFar.pop();
           }
+
+          /*
+           * remove the parent group of the start node id from
+           * pathSoFar which leaves us with an empty pathSoFar
+           * which means we are completely done with
+           * calculating all the paths
+           */
+          pathSoFar.pop();
         }
       }
     } else {
@@ -1144,7 +1038,7 @@ export class ProjectService {
           // TODO? there is no start id so we will loop through all the child nodes
 
           const transitions = this.getTransitionsByFromNodeId(groupNode.id);
-          if (transitions != null && transitions.length > 0) {
+          if (transitions.length > 0) {
             for (let transition of transitions) {
               if (transition != null) {
                 const toNodeId = transition.to;
@@ -1190,6 +1084,12 @@ export class ProjectService {
       pathSoFar.pop();
     }
     return allPaths;
+  }
+
+  getStepNodeIds(): string[] {
+    return this.getFlattenedProjectAsNodeIds().filter((nodeId: string) => {
+      return this.isApplicationNode(nodeId);
+    });
   }
 
   /**
@@ -1430,12 +1330,6 @@ export class ProjectService {
     }
   }
 
-  loadConstraints(constraints: any[]): void {
-    for (const constraint of constraints) {
-      constraint.active = true;
-    }
-  }
-
   shouldIncludeInTotalScore(nodeId: string, componentId: string): boolean {
     const component = this.getComponent(nodeId, componentId);
     return this.isNodeActive(nodeId) && component != null && !component.excludeFromTotalScore;
@@ -1491,6 +1385,16 @@ export class ProjectService {
     return componentService.componentHasWork(component);
   }
 
+  calculateComponentIdToHasWork(
+    components: ComponentContent[]
+  ): { [componentId: string]: boolean } {
+    const componentIdToHasWork: { [componentId: string]: boolean } = {};
+    for (const component of components) {
+      componentIdToHasWork[component.id] = this.componentHasWork(component);
+    }
+    return componentIdToHasWork;
+  }
+
   getComponentType(nodeId: string, componentId: string): string {
     const component = this.getComponent(nodeId, componentId);
     return component.type;
@@ -1540,302 +1444,304 @@ export class ProjectService {
   }
 
   /**
-   * Recursively calcualte the node numbers by traversing the project tree
-   * using transitions
+   * Recursively calculate the node numbers by traversing the project tree using transitions
    * @param nodeId the current node id we are on
    * @param currentActivityNumber the current activity number
    * @param currentStepNumber the current step number
-   * @param branchLetterCode (optional) the character code for the branch
-   * letter e.g. 1=A, 2=B, etc.
+   * @param branchLetterCode (optional) the character code for the branch letter e.g. 0=A, 1=B, etc.
    */
-  calculateNodeNumbersHelper(
+  private calculateNodeNumbersHelper(
     nodeId: string,
     currentActivityNumber: any,
     currentStepNumber: number,
-    branchLetterCode = null
-  ): void {
-    if (nodeId != null) {
-      if (this.isApplicationNode(nodeId)) {
-        const node = this.getNodeById(nodeId);
-        if (node != null) {
-          const parentGroup = this.getParentGroup(nodeId);
-          if (parentGroup != null) {
-            if (this.nodeIdToNumber[parentGroup.id] == null) {
-              /*
-               * the parent group has not been assigned a number so
-               * we will assign a number now
-               */
+    branchLetterCode: number = null
+  ): number {
+    if (this.isApplicationNode(nodeId)) {
+      currentStepNumber = this.calculateNodeNumberForStep(
+        nodeId,
+        currentActivityNumber,
+        currentStepNumber,
+        branchLetterCode
+      );
+    } else {
+      currentStepNumber = this.calculateNodeNumberForLesson(
+        nodeId,
+        currentActivityNumber,
+        currentStepNumber,
+        branchLetterCode
+      );
+    }
+    return currentStepNumber;
+  }
 
-              currentActivityNumber = parseInt(currentActivityNumber) + 1;
+  private calculateNodeNumberForStep(
+    nodeId: string,
+    currentActivityNumber: any,
+    currentStepNumber: number,
+    branchLetterCode: number = null
+  ): number {
+    ({ currentActivityNumber, currentStepNumber, branchLetterCode } = this.getCurrentActivityNumber(
+      nodeId,
+      currentActivityNumber,
+      currentStepNumber,
+      branchLetterCode
+    ));
+    if (this.isBranchStartPoint(nodeId)) {
+      currentStepNumber = this.calculateNodeNumberForBranchStartPoint(
+        nodeId,
+        currentActivityNumber,
+        currentStepNumber
+      );
+    } else {
+      currentStepNumber = this.calculateNodeNumberForRegularStep(
+        nodeId,
+        currentActivityNumber,
+        currentStepNumber,
+        branchLetterCode
+      );
+    }
+    return currentStepNumber;
+  }
 
-              /*
-               * set the current step number to 1 now that we have
-               * entered a new group
-               */
-              currentStepNumber = 1;
+  private getCurrentActivityNumber(
+    nodeId: string,
+    currentActivityNumber: any,
+    currentStepNumber: number,
+    branchLetterCode: number = null
+  ): any {
+    const parentGroup = this.getParentGroup(nodeId);
+    if (parentGroup != null) {
+      if (this.nodeIdToNumber[parentGroup.id] == null) {
+        // the parent group has not been assigned a number so we will assign a number now
+        currentActivityNumber = parseInt(currentActivityNumber) + 1;
 
-              this.nodeIdToNumber[parentGroup.id] = '' + currentActivityNumber;
-            } else {
-              /*
-               * the parent group has previously been assigned a number so we
-               * will use it
-               */
-              currentActivityNumber = this.nodeIdToNumber[parentGroup.id];
-            }
-          }
-
-          if (this.isBranchMergePoint(nodeId)) {
-            /*
-             * the node is a merge point so we will not use a letter
-             * anymore now that we are no longer in a branch path
-             */
-            branchLetterCode = null;
-          }
-
-          if (this.isBranchStartPoint(nodeId)) {
-            const branchesByBranchStartPointNodeId = this.getBranchesByBranchStartPointNodeId(
-              nodeId
-            );
-            const branches = branchesByBranchStartPointNodeId[0];
-
-            /*
-             * been used in the branch paths so that we know what
-             * step number to give the merge end point
-             * this is used to obtain the max step number that has
-             */
-            let maxCurrentStepNumber = 0;
-
-            // set the step number for the branch start point
-            this.nodeIdToNumber[nodeId] = currentActivityNumber + '.' + currentStepNumber;
-
-            currentStepNumber++;
-            const branchPaths = branches.paths;
-
-            for (let bp = 0; bp < branchPaths.length; bp++) {
-              const branchPath = branchPaths[bp];
-              let branchCurrentStepNumber = currentStepNumber;
-
-              // get the letter code e.g. 1=A, 2=B, etc.
-              const branchLetterCode = bp;
-
-              for (let bpn = 0; bpn < branchPath.length; bpn++) {
-                if (bpn == 0) {
-                  /*
-                   * Recursively call calculateNodeNumbersHelper on the
-                   * first step in this branch path. This will recursively
-                   * calculate the numbers for all the nodes in this
-                   * branch path.
-                   */
-                  const branchPathNodeId = branchPath[bpn];
-                  this.calculateNodeNumbersHelper(
-                    branchPathNodeId,
-                    currentActivityNumber,
-                    branchCurrentStepNumber,
-                    branchLetterCode
-                  );
-                }
-
-                branchCurrentStepNumber++;
-
-                /*
-                 * update the max current step number if we have found
-                 * a larger number
-                 */
-                if (branchCurrentStepNumber > maxCurrentStepNumber) {
-                  maxCurrentStepNumber = branchCurrentStepNumber;
-                }
-              }
-            }
-
-            // get the step number we should use for the end point
-            currentStepNumber = maxCurrentStepNumber;
-
-            const branchEndPointNodeId = branches.endPoint;
-
-            /*
-             * calculate the node number for the branch end point and
-             * continue calculating node numbers for the nodes that
-             * come after it
-             */
-            this.calculateNodeNumbersHelper(
-              branchEndPointNodeId,
-              currentActivityNumber,
-              currentStepNumber
-            );
-          } else {
-            // the node is not a branch start point
-
-            /*
-             * check if we have already set the number for this node so
-             * that we don't need to unnecessarily re-calculate the
-             * node number
-             */
-            if (this.nodeIdToNumber[nodeId] == null) {
-              // we have not calculated the node number yet
-
-              let number = null;
-
-              if (branchLetterCode == null) {
-                // we do not need to add a branch letter
-
-                // get the node number e.g. 1.5
-                number = currentActivityNumber + '.' + currentStepNumber;
-              } else {
-                // we need to add a branch letter
-
-                // get the branch letter
-                const branchLetter = String.fromCharCode(65 + branchLetterCode);
-
-                // get the node number e.g. 1.5 A
-                number = currentActivityNumber + '.' + currentStepNumber + ' ' + branchLetter;
-
-                // remember the branch path letter for this node
-                this.nodeIdToBranchPathLetter[nodeId] = branchLetter;
-              }
-
-              // set the number for the node
-              this.nodeIdToNumber[nodeId] = number;
-            } else {
-              /*
-               * We have calculated the node number before so we
-               * will return. This will prevent infinite looping
-               * within the project.
-               */
-              return;
-            }
-
-            // increment the step number for the next node to use
-            currentStepNumber++;
-
-            let transitions = [];
-
-            if (node.transitionLogic != null && node.transitionLogic.transitions) {
-              transitions = node.transitionLogic.transitions;
-            }
-
-            if (transitions.length > 0) {
-              /*
-               * loop through all the transitions, there should only
-               * be one but we will loop through them just to be complete.
-               * if there was more than one transition, it would mean
-               * this node is a branch start point in which case we
-               * would have gone inside the other block of code where
-               * this.isBranchStartPoint() is true.
-               */
-              for (let transition of transitions) {
-                if (transition != null) {
-                  if (this.isBranchMergePoint(transition.to)) {
-                  } else {
-                    this.calculateNodeNumbersHelper(
-                      transition.to,
-                      currentActivityNumber,
-                      currentStepNumber,
-                      branchLetterCode
-                    );
-                  }
-                }
-              }
-            } else {
-              // if there are no transitions, check if the parent group has a transition
-
-              if (
-                parentGroup != null &&
-                parentGroup.transitionLogic != null &&
-                parentGroup.transitionLogic.transitions != null &&
-                parentGroup.transitionLogic.transitions.length > 0
-              ) {
-                for (let transition of parentGroup.transitionLogic.transitions) {
-                  if (transition != null) {
-                    this.calculateNodeNumbersHelper(
-                      transition.to,
-                      currentActivityNumber,
-                      currentStepNumber,
-                      branchLetterCode
-                    );
-                  }
-                }
-              }
-            }
-          }
-        }
+        // set the current step number to 1 now that we have entered a new group
+        currentStepNumber = 1;
+        this.nodeIdToNumber[parentGroup.id] = '' + currentActivityNumber;
       } else {
-        // the node is a group node
-
-        const node = this.getNodeById(nodeId);
-        if (node != null) {
-          // check if the group has previously been assigned a number
-          if (this.nodeIdToNumber[nodeId] == null) {
-            /*
-             * the group has not been assigned a number so
-             * we will assign a number now
-             */
-            if (nodeId == 'group0') {
-              // group 0 will always be given the activity number of 0
-              this.nodeIdToNumber[nodeId] = '' + 0;
-            } else {
-              // set the activity number
-              currentActivityNumber = parseInt(currentActivityNumber) + 1;
-
-              /*
-               * set the current step number to 1 now that we have
-               * entered a new group
-               */
-              currentStepNumber = 1;
-
-              // set the activity number
-              this.nodeIdToNumber[nodeId] = '' + currentActivityNumber;
-            }
-          } else {
-            /*
-             * We have calculated the node number before so we
-             * will return. This will prevent infinite looping
-             * within the project.
-             */
-            return;
-          }
-
-          if (node.startId != null && node.startId != '') {
-            /*
-             * calculate the node number for the first step in this
-             * activity and any steps after it
-             */
-            this.calculateNodeNumbersHelper(
-              node.startId,
-              currentActivityNumber,
-              currentStepNumber,
-              branchLetterCode
-            );
-          } else {
-            /*
-             * this activity doesn't have a start step so we will
-             * look for a transition
-             */
-
-            if (
-              node != null &&
-              node.transitionLogic != null &&
-              node.transitionLogic.transitions != null &&
-              node.transitionLogic.transitions.length > 0
-            ) {
-              for (let transition of node.transitionLogic.transitions) {
-                if (transition != null) {
-                  /*
-                   * calculate the node number for the next group
-                   * and all its children steps
-                   */
-                  this.calculateNodeNumbersHelper(
-                    transition.to,
-                    currentActivityNumber,
-                    currentStepNumber,
-                    branchLetterCode
-                  );
-                }
-              }
-            }
-          }
-        }
+        // the parent group has previously been assigned a number so we will use it
+        currentActivityNumber = this.nodeIdToNumber[parentGroup.id];
       }
     }
+    if (this.isBranchMergePoint(nodeId)) {
+      // the node is a merge point so we will not use a letter anymore now that we are no longer in
+      // a branch path
+      branchLetterCode = null;
+    }
+    return { currentActivityNumber, currentStepNumber, branchLetterCode };
+  }
+
+  private calculateNodeNumberForBranchStartPoint(
+    nodeId: string,
+    currentActivityNumber: any,
+    currentStepNumber: number
+  ): number {
+    this.nodeIdToNumber[nodeId] = currentActivityNumber + '.' + currentStepNumber;
+    currentStepNumber++;
+    let maxCurrentStepNumber = 0;
+    const branchesByBranchStartPointNodeId = this.getBranchesByBranchStartPointNodeId(nodeId);
+    const branches = branchesByBranchStartPointNodeId[0];
+    const branchPaths = branches.paths;
+    for (let branchPathNumber = 0; branchPathNumber < branchPaths.length; branchPathNumber++) {
+      maxCurrentStepNumber = this.calculateBranchPathNodeNumbers(
+        nodeId,
+        currentActivityNumber,
+        currentStepNumber,
+        branchPaths[branchPathNumber],
+        branchPathNumber,
+        maxCurrentStepNumber
+      );
+    }
+    currentStepNumber = maxCurrentStepNumber;
+    this.calculateNodeNumbersHelper(branches.endPoint, currentActivityNumber, currentStepNumber);
+    return currentStepNumber;
+  }
+
+  private calculateBranchPathNodeNumbers(
+    nodeId: string,
+    currentActivityNumber: any,
+    currentStepNumber: number,
+    branchPath: any,
+    branchPathNumber: number,
+    maxCurrentStepNumber: number
+  ): number {
+    // get the letter code e.g. 0=A, 1=B, etc.
+    const branchLetterCode = branchPathNumber;
+    let branchCurrentStepNumber = currentStepNumber;
+    for (let bpn = 0; bpn < branchPath.length; bpn++) {
+      if (bpn == 0) {
+        if (this.getParentGroupId(nodeId) !== this.getParentGroupId(branchPath[bpn])) {
+          branchCurrentStepNumber = 1;
+        }
+        // Calculate the node numbers for the steps in this branch path
+        const branchPathNodeId = branchPath[bpn];
+        branchCurrentStepNumber = this.calculateNodeNumbersHelper(
+          branchPathNodeId,
+          currentActivityNumber,
+          branchCurrentStepNumber,
+          branchLetterCode
+        );
+      }
+      if (branchCurrentStepNumber > maxCurrentStepNumber) {
+        maxCurrentStepNumber = branchCurrentStepNumber;
+      }
+    }
+    return maxCurrentStepNumber;
+  }
+
+  private calculateNodeNumberForRegularStep(
+    nodeId: string,
+    currentActivityNumber: any,
+    currentStepNumber: number,
+    branchLetterCode: number = null
+  ): number {
+    // Check if we have already set the number for this node so that we don't need to unnecessarily
+    // re-calculate the node number
+    if (this.nodeIdToNumber[nodeId] == null) {
+      this.setStepNodeNumber(nodeId, currentActivityNumber, currentStepNumber, branchLetterCode);
+    } else {
+      // We have calculated the node number before so we will return.
+      // This will prevent infinite looping within the project.
+      return currentStepNumber;
+    }
+    currentStepNumber++;
+    const node = this.getNodeById(nodeId);
+    const transitions = node.transitionLogic.transitions;
+    if (transitions.length > 0) {
+      currentStepNumber = this.calculateNodeNumberForRegularStepThatHasTransitions(
+        nodeId,
+        currentActivityNumber,
+        currentStepNumber,
+        branchLetterCode
+      );
+    } else {
+      currentStepNumber = this.calculateNodeNumberForRegularStepThatDoesNotHaveTransitions(
+        nodeId,
+        currentActivityNumber,
+        currentStepNumber,
+        branchLetterCode
+      );
+    }
+    return currentStepNumber;
+  }
+
+  private calculateNodeNumberForRegularStepThatHasTransitions(
+    nodeId: string,
+    currentActivityNumber: any,
+    currentStepNumber: number,
+    branchLetterCode: number = null
+  ) {
+    const node = this.getNodeById(nodeId);
+    for (const transition of node.transitionLogic.transitions) {
+      if (!this.isBranchMergePoint(transition.to)) {
+        if (this.getParentGroupId(nodeId) !== this.getParentGroupId(transition.to)) {
+          currentStepNumber = 1;
+        }
+        currentStepNumber = this.calculateNodeNumbersHelper(
+          transition.to,
+          currentActivityNumber,
+          currentStepNumber,
+          branchLetterCode
+        );
+      }
+    }
+    return currentStepNumber;
+  }
+
+  private calculateNodeNumberForRegularStepThatDoesNotHaveTransitions(
+    nodeId: string,
+    currentActivityNumber: any,
+    currentStepNumber: number,
+    branchLetterCode: number = null
+  ): number {
+    const parentGroup = this.getParentGroup(nodeId);
+    if (parentGroup.transitionLogic?.transitions != null) {
+      for (const transition of parentGroup.transitionLogic.transitions) {
+        currentStepNumber = this.calculateNodeNumbersHelper(
+          transition.to,
+          currentActivityNumber,
+          currentStepNumber,
+          branchLetterCode
+        );
+      }
+    }
+    return currentStepNumber;
+  }
+
+  private setStepNodeNumber(
+    nodeId: string,
+    currentActivityNumber: any,
+    currentStepNumber: number,
+    branchLetterCode: number
+  ) {
+    let number = null;
+    if (branchLetterCode == null) {
+      number = currentActivityNumber + '.' + currentStepNumber;
+    } else {
+      const branchLetter = String.fromCharCode(65 + branchLetterCode);
+      number = `${currentActivityNumber}.${currentStepNumber} ${branchLetter}`;
+      this.nodeIdToBranchPathLetter[nodeId] = branchLetter;
+    }
+    this.nodeIdToNumber[nodeId] = number;
+  }
+
+  private calculateNodeNumberForLesson(
+    nodeId: string,
+    currentActivityNumber: any,
+    currentStepNumber: number,
+    branchLetterCode: number = null
+  ): number {
+    // check if the group has previously been assigned a number
+    if (this.nodeIdToNumber[nodeId] == null) {
+      ({ currentActivityNumber, currentStepNumber } = this.setLessonNodeNumber(
+        nodeId,
+        currentActivityNumber,
+        currentStepNumber
+      ));
+    } else {
+      // We have calculated the node number before so we will return.
+      // This will prevent infinite looping within the project.
+      return currentStepNumber;
+    }
+    const node = this.getNodeById(nodeId);
+    if (node.startId != '') {
+      // calculate the node number for the first step in this activity and any steps after it
+      this.calculateNodeNumbersHelper(
+        node.startId,
+        currentActivityNumber,
+        currentStepNumber,
+        branchLetterCode
+      );
+    } else if (node.transitionLogic != null) {
+      for (const transition of node.transitionLogic.transitions) {
+        // calculate the node number for the next node and all its children steps
+        this.calculateNodeNumbersHelper(
+          transition.to,
+          currentActivityNumber,
+          currentStepNumber,
+          branchLetterCode
+        );
+      }
+    }
+    return currentStepNumber;
+  }
+
+  private setLessonNodeNumber(
+    nodeId: string,
+    currentActivityNumber: any,
+    currentStepNumber: number
+  ): any {
+    // the group has not been assigned a number so we will assign a number now/
+    if (nodeId == 'group0') {
+      // group 0 will always be given the activity number of 0
+      this.nodeIdToNumber[nodeId] = '0';
+    } else {
+      // set the current step number to 1 now that we have entered a new group
+      currentStepNumber = 1;
+      currentActivityNumber = parseInt(currentActivityNumber) + 1;
+      this.nodeIdToNumber[nodeId] = '' + currentActivityNumber;
+    }
+    return { currentActivityNumber, currentStepNumber };
   }
 
   getProjectScript(): any {
@@ -1906,28 +1812,6 @@ export class ProjectService {
       }
     }
     return null;
-  }
-
-  /**
-   * Remember the result for whether the node is affected by the constraint
-   * @param nodeId the node id
-   * @param constraintId the constraint id
-   * @param whether the node is affected by the constraint
-   */
-  cacheIsNodeAffectedByConstraintResult(nodeId: string, constraintId: string, result: any): void {
-    this.isNodeAffectedByConstraintResult[nodeId + '-' + constraintId] = result;
-  }
-
-  /**
-   * Check if we have calculated the result for whether the node is affected
-   * by the constraint
-   * @param nodeId the node id
-   * @param constraintId the constraint id
-   * @return Return the result if we have calculated the result before. If we
-   * have not calculated the result before, we will return null
-   */
-  getCachedIsNodeAffectedByConstraintResult(nodeId: string, constraintId: string): any {
-    return this.isNodeAffectedByConstraintResult[nodeId + '-' + constraintId];
   }
 
   getSpaces(): any[] {
@@ -2022,7 +1906,7 @@ export class ProjectService {
     return tags;
   }
 
-  getTransitionsFromNode(node: any): any[] {
+  getTransitionsFromNode(node: any): Transition[] {
     const transitionLogic = node.transitionLogic;
     if (transitionLogic == null) {
       return [];
@@ -2031,7 +1915,7 @@ export class ProjectService {
     }
   }
 
-  getCriteriaArrayFromTransition(transition: any): any[] {
+  getCriteriaArrayFromTransition(transition: Transition): any[] {
     if (transition.criteria == null) {
       return [];
     } else {
@@ -2056,8 +1940,8 @@ export class ProjectService {
     }
   }
 
-  broadcastProjectChanged(): void {
-    this.projectChangedSource.next();
+  broadcastProjectParsed(): void {
+    this.projectParsedSource.next();
   }
 
   getPeerGroupings(): PeerGrouping[] {
@@ -2073,5 +1957,37 @@ export class ProjectService {
 
   getProjectRootNode(): any {
     return this.rootNode;
+  }
+
+  /**
+   * Get the reference component from a field in the component content
+   * @param nodeId the node id
+   * @param componentId the component id
+   * @param fieldName the name of the object that contains a referenceComponent object
+   * In this example the fieldName would be 'dynamicPrompt'
+   * {
+   *   id: 'component2',
+   *   dynamicPrompt: {
+   *     referenceComponent: {
+   *       nodeId: 'node1',
+   *       componentId: 'component1'
+   *     }
+   *   }
+   * }
+   * @returns the referenceComponent object from a component
+   */
+  getReferenceComponentForField(
+    nodeId: string,
+    componentId: string,
+    fieldName: 'dynamicPrompt' | 'questionBank'
+  ): ReferenceComponent {
+    const component = this.getComponent(nodeId, componentId);
+    return component[fieldName]?.referenceComponent;
+  }
+
+  getReferenceComponent(content: QuestionBank | DynamicPrompt): Component {
+    const nodeId = content.getReferenceNodeId();
+    const componentId = content.getReferenceComponentId();
+    return new Component(this.getComponent(nodeId, componentId), nodeId);
   }
 }

@@ -2,48 +2,49 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConfigService } from './configService';
 import { TeacherDataService } from './teacherDataService';
-import { UtilService } from './utilService';
+import { compressToEncodedURIComponent } from 'lz-string';
+import { Observable, tap } from 'rxjs';
 
 @Injectable()
 export class DataExportService {
   constructor(
-    private ConfigService: ConfigService,
+    private configService: ConfigService,
     private http: HttpClient,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
+    private dataService: TeacherDataService
   ) {}
 
-  retrieveStudentDataExport(selectedNodes = []): Promise<any> {
-    let params = this.createHttpParams('true', 'false', 'true');
-    for (const selectedNode of selectedNodes) {
-      params = params.append('components', JSON.stringify(selectedNode));
+  retrieveStudentData(
+    selectedNodes = [],
+    includeStudentWork: boolean,
+    includeEvents: boolean,
+    includeAnnotations: boolean
+  ): Observable<any> {
+    let params = this.createHttpParams(includeStudentWork, includeEvents, includeAnnotations);
+    if (selectedNodes.length > 0) {
+      params = params.set(
+        'components',
+        compressToEncodedURIComponent(JSON.stringify(selectedNodes))
+      );
     }
-    return this.TeacherDataService.retrieveStudentData(params);
+    return this.dataService.retrieveStudentData(params);
   }
 
   retrieveEventsExport(
     includeStudentEvents: boolean,
     includeTeacherEvents: boolean,
     includeNames: boolean
-  ): Promise<any> {
+  ): Observable<any> {
     const params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
+      .set('runId', this.configService.getRunId())
       .set('getStudentWork', 'false')
       .set('getAnnotations', 'false')
       .set('getEvents', 'false')
       .set('includeStudentEvents', includeStudentEvents + '')
       .set('includeTeacherEvents', includeTeacherEvents + '')
       .set('includeNames', includeNames + '');
-    const options = {
+    return this.http.get(this.configService.getConfigParam('runDataExportURL') + '/events', {
       params: params
-    };
-    const url = this.ConfigService.getConfigParam('runDataExportURL') + '/events';
-    return this.http
-      .get(url, options)
-      .toPromise()
-      .then(({ events }: any): any[] => {
-        return events;
-      });
+    });
   }
 
   getStudentEvents(events: any[]): any[] {
@@ -64,62 +65,40 @@ export class DataExportService {
 
   isTeacherEvent(event: any): boolean {
     return (
-      this.ConfigService.isTeacherWorkgroupId(event.workgroupId) ||
-      this.ConfigService.isTeacherUserId(event.userId)
+      this.configService.isTeacherWorkgroupId(event.workgroupId) ||
+      this.configService.isTeacherUserId(event.userId)
     );
   }
 
-  retrieveNotebookExport(exportType: string): Promise<any> {
+  retrieveNotebookExport(exportType: string): Observable<any> {
     const options = { params: new HttpParams().set('exportType', exportType) };
-    return this.http
-      .get(this.ConfigService.getConfigParam('notebookURL'), options)
-      .toPromise()
-      .then((data: any) => {
-        return data;
-      });
+    return this.http.get(this.configService.getConfigParam('notebookURL'), options);
   }
 
-  retrieveNotificationsExport(): Promise<any> {
-    return this.http
-      .get(this.getExportURL(this.ConfigService.getRunId(), 'notifications'))
-      .toPromise()
-      .then((data: any) => {
-        return data;
-      });
-  }
-
-  retrieveOneWorkgroupPerRowExport(selectedNodes = []): Promise<any> {
-    let params = this.createHttpParams('true', 'true', 'true');
-    for (const selectedNode of selectedNodes) {
-      params = params.append('components', JSON.stringify(selectedNode));
-    }
-    return this.TeacherDataService.retrieveStudentData(params);
+  retrieveNotificationsExport(): Observable<any> {
+    return this.http.get(this.getExportURL(this.configService.getRunId(), 'notifications'));
   }
 
   retrieveStudentAssetsExport(): Promise<any> {
-    window.location.href = this.getExportURL(this.ConfigService.getRunId(), 'studentAssets');
+    window.location.href = this.getExportURL(this.configService.getRunId(), 'studentAssets');
     return new Promise((resolve) => {
       resolve([]);
     });
   }
 
-  retrieveRawDataExport(selectedNodes: any[] = []): Promise<any> {
-    let params = this.createHttpParams('true', 'true', 'true');
-    for (const selectedNode of selectedNodes) {
-      params = params.append('components', JSON.stringify(selectedNode));
-    }
-    return this.TeacherDataService.retrieveStudentData(params);
-  }
-
-  private createHttpParams(studentWork: string, events: string, annotations: string): HttpParams {
+  private createHttpParams(
+    includeStudentWork: boolean,
+    includeEvents: boolean,
+    includeAnnotations: boolean
+  ): HttpParams {
     return new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
-      .set('getStudentWork', studentWork)
-      .set('getEvents', events)
-      .set('getAnnotations', annotations);
+      .set('runId', this.configService.getRunId())
+      .set('getStudentWork', includeStudentWork)
+      .set('getEvents', includeEvents)
+      .set('getAnnotations', includeAnnotations);
   }
 
   getExportURL(runId: number, exportType: string): string {
-    return this.ConfigService.getConfigParam('runDataExportURL') + `/${runId}/${exportType}`;
+    return this.configService.getConfigParam('runDataExportURL') + `/${runId}/${exportType}`;
   }
 }

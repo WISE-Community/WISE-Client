@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { RandomKeyService } from '../services/randomKeyService';
+import { generateRandomKey } from '../common/string/string';
 import { ComponentStateRequest } from './ComponentStateRequest';
 import { ComponentStateWrapper } from './ComponentStateWrapper';
 
@@ -67,7 +67,7 @@ export class ComponentService {
    */
   createComponent() {
     return {
-      id: RandomKeyService.generate(),
+      id: generateRandomKey(),
       type: '',
       prompt: '',
       showSaveButton: false,
@@ -152,5 +152,11 @@ export class ComponentService {
 
   isSubmitRequired(node: any, component: any) {
     return node.showSubmitButton || (component.showSubmitButton && !node.showSaveButton);
+  }
+
+  hasNodeEnteredEvent(nodeEvents: any[]): boolean {
+    return nodeEvents.some((nodeEvent: any) => {
+      return nodeEvent.event === 'nodeEntered';
+    });
   }
 }

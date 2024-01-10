@@ -17,6 +17,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { User } from '../../domain/user';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
+import { Router } from '@angular/router';
 
 export class MockTeacherService {
   createRun() {
@@ -28,8 +29,6 @@ export class MockTeacherService {
       observer.complete();
     });
   }
-
-  broadcastRunChanges() {}
 
   setTabIndex() {}
 
@@ -67,6 +66,10 @@ export class MockConfigService {
   isGoogleClassroomEnabled(): boolean {
     return false;
   }
+}
+
+class MockRouter {
+  navigate() {}
 }
 
 describe('CreateRunDialogComponent', () => {
@@ -113,7 +116,8 @@ describe('CreateRunDialogComponent', () => {
             close: () => {}
           }
         },
-        { provide: MAT_DIALOG_DATA, useValue: { project: project } }
+        { provide: MAT_DIALOG_DATA, useValue: { project: project } },
+        { provide: Router, useClass: MockRouter }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });

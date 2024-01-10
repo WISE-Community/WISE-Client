@@ -1,6 +1,6 @@
-import * as angular from 'angular';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 import * as FileSaver from 'file-saver';
+import { copy } from '../../../common/object/object';
 
 export class RawDataExportStrategy extends AbstractDataExportStrategy {
   export() {
@@ -25,11 +25,11 @@ export class RawDataExportStrategy extends AbstractDataExportStrategy {
         selectedNodesMap = this.getSelectedNodesMap(selectedNodes);
       }
     }
-    this.dataExportService.retrieveRawDataExport(selectedNodes).then((result) => {
+    this.dataExportService.retrieveStudentData(selectedNodes, true, true, true).subscribe(() => {
       var runId = this.configService.getRunId();
       var data: any = {};
       var workgroups = this.configService.getClassmateUserInfosSortedByWorkgroupId();
-      workgroups = this.utilService.makeCopyOfJSONObject(workgroups);
+      workgroups = copy(workgroups);
       for (var w = 0; w < workgroups.length; w++) {
         var workgroup = workgroups[w];
         if (workgroup != null) {
@@ -96,7 +96,7 @@ export class RawDataExportStrategy extends AbstractDataExportStrategy {
         }
       }
       data.workgroups = workgroups;
-      const dataJSONString = angular.toJson(data, 4);
+      const dataJSONString = JSON.stringify(data, null, 4);
       const blob = new Blob([dataJSONString]);
       FileSaver.saveAs(blob, runId + '_raw_data.json');
       this.controller.hideDownloadingExportMessage();

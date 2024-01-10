@@ -1,31 +1,39 @@
-<header class="content__header"
-    fxLayout="row wrap"
-    fxLayoutAlign="start start"
-    fxLayoutAlign.gt-sm="space-between start"
-    fxLayoutGap.gt-sm="16px">
-  <h1 class="accent"
-      fxLayoutAlign="center center"
-      fxLayoutGap="8px"
-      ngClass="mat-display-1"
-      [ngClass.xs]="{ 'mat-display-1': false }">
+<header
+  class="content__header"
+  fxLayout="row wrap"
+  fxLayoutAlign="start start"
+  fxLayoutAlign.gt-sm="space-between start"
+  fxLayoutGap.gt-sm="16px"
+>
+  <h1
+    class="accent"
+    fxLayoutAlign="center center"
+    fxLayoutGap="8px"
+    ngClass="mat-headline-4"
+    [ngClass.xs]="{ 'mat-headline-4': false }"
+  >
     <mat-icon>home</mat-icon><span i18n>Teacher Home</span>
   </h1>
-  <discourse-recent-activity *ngIf="discourseUrl"
-      [baseUrl]="discourseUrl"
-      category="latest"
-      queryString="order=activity"
-      fxFlex="100%"
-      fxFlex.gt-sm="0 0 auto"></discourse-recent-activity>
+  <discourse-recent-activity
+    *ngIf="discourseUrl"
+    [baseUrl]="discourseUrl"
+    category="latest"
+    queryString="order=activity"
+    fxFlex="100%"
+    fxFlex.gt-sm="0 0 auto"
+  ></discourse-recent-activity>
 </header>
 <section>
   <nav mat-tab-nav-bar i18n-aria-label aria-label="Teacher home navigation" [tabPanel]="tabPanel">
-    <a mat-tab-link
-        *ngFor="let tab of tabLinks"
-        [routerLink]="[tab.path]"
-        routerLinkActive
-        #rla="routerLinkActive"
-        [active]="rla.isActive">
-      {{tab.label}}
+    <a
+      mat-tab-link
+      *ngFor="let tab of tabLinks"
+      [routerLink]="[tab.path]"
+      routerLinkActive
+      #rla="routerLinkActive"
+      [active]="rla.isActive"
+    >
+      {{ tab.label }}
     </a>
     <a mat-tab-link (click)="openAuthoringTool()">
       <ng-container i18n>Authoring Tool</ng-container>

@@ -1,4 +1,4 @@
-<h2 class="mat-dialog-title" fxLayoutAlign="start center" fxLayoutGap="8px">
+<h2 mat-dialog-title class="mat-dialog-title--icons" fxLayoutAlign="start center" fxLayoutGap="8px">
   <img class="google-icon" src="assets/img/icons/google-logo.svg" i18n-alt alt="Google logo" />
   <span i18n>Unlink Google Account</span>
   <span fxFlex></span>
@@ -6,11 +6,19 @@
 </h2>
 <mat-dialog-content>
   <div class="info-block">
-    <p i18n>To remove the link to your Google account, you will be asked to create a WISE password. In the future, you'll sign in to WISE using your username and password.</p>
-    <p><strong i18n>You will no longer be able to sign in to WISE using Google. Would you like to continue?</strong></p>
+    <p i18n>
+      To remove the link to your Google account, you will be asked to create a WISE password. In the
+      future, you'll sign in to WISE using your username and password.
+    </p>
+    <p>
+      <strong i18n
+        >You will no longer be able to sign in to WISE using Google. Would you like to
+        continue?</strong
+      >
+    </p>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+<mat-dialog-actions align="end">
   <button mat-flat-button color="primary" mat-dialog-close i18n>Cancel</button>
-  <a mat-button color="warn" (click)="continue()" i18n>Continue</a>
+  <button mat-button color="warn" (click)="continue()" i18n>Continue</button>
 </mat-dialog-actions>

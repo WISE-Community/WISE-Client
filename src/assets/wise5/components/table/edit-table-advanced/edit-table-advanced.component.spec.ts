@@ -26,6 +26,8 @@ import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EditTableConnectedComponentsComponent } from '../edit-table-connected-components/edit-table-connected-components.component';
 import { EditTableAdvancedComponent } from './edit-table-advanced.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 let component: EditTableAdvancedComponent;
 let fixture: ComponentFixture<EditTableAdvancedComponent>;
@@ -61,7 +63,8 @@ describe('EditTableAdvancedComponent', () => {
         EditTableAdvancedComponent,
         EditTableConnectedComponentsComponent
       ],
-      providers: [TeacherProjectService]
+      providers: [TeacherNodeService, TeacherProjectService],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

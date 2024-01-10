@@ -1,15 +1,10 @@
 @import
-  '~style/abstracts/variables',
-  '~style/abstracts/functions',
-  '~style/abstracts/mixins';
+  'style/abstracts/variables',
+  'style/abstracts/functions',
+  'style/abstracts/mixins';
 
-.mat-icon-button {
+.mat-mdc-icon-button {
   @include mat-icon-button-size(36px);
-  margin-left: 8px;
-
-  @media (min-width: breakpoint('sm.min')) {
-    margin: 8px;
-  }
 }
 
 .header-account-menu {
@@ -22,7 +17,6 @@
 
   mat-icon {
     @include mat-icon-size(36px);
-    margin-right: 8px;
   }
 }
 

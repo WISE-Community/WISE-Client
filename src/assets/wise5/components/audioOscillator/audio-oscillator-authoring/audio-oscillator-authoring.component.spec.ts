@@ -5,13 +5,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { AudioOscillatorService } from '../audioOscillatorService';
 import { AudioOscillatorAuthoring } from './audio-oscillator-authoring.component';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 let component: AudioOscillatorAuthoring;
 let fixture: ComponentFixture<AudioOscillatorAuthoring>;
@@ -28,11 +28,10 @@ describe('AudioOscillatorAuthoring', () => {
         MatDialogModule,
         MatInputModule,
         ReactiveFormsModule,
-        UpgradeModule,
         StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, AudioOscillatorAuthoring],
-      providers: [ProjectAssetService, TeacherProjectService]
+      providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
     });
     fixture = TestBed.createComponent(AudioOscillatorAuthoring);
     component = fixture.componentInstance;

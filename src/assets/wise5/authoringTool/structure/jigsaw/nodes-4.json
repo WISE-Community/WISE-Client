@@ -647,9 +647,9 @@
     "constraints": [
       {
         "removalConditional": "all",
-        "targetId": "node6",
+        "targetId": "node7",
         "action": "makeThisNodeNotVisible",
-        "id": "node6Constraint1",
+        "id": "node7Constraint1",
         "removalCriteria": [
           {
             "name": "branchPathTaken",
@@ -662,9 +662,9 @@
       },
       {
         "removalConditional": "all",
-        "targetId": "node6",
+        "targetId": "node7",
         "action": "makeThisNodeNotVisitable",
-        "id": "node6Constraint2",
+        "id": "node7Constraint2",
         "removalCriteria": [
           {
             "name": "branchPathTaken",
@@ -832,9 +832,9 @@
     "constraints": [
       {
         "removalConditional": "all",
-        "targetId": "node8",
+        "targetId": "node9",
         "action": "makeThisNodeNotVisible",
-        "id": "node8Constraint1",
+        "id": "node9Constraint1",
         "removalCriteria": [
           {
             "name": "branchPathTaken",
@@ -847,9 +847,9 @@
       },
       {
         "removalConditional": "all",
-        "targetId": "node8",
+        "targetId": "node9",
         "action": "makeThisNodeNotVisitable",
-        "id": "node8Constraint2",
+        "id": "node9Constraint2",
         "removalCriteria": [
           {
             "name": "branchPathTaken",

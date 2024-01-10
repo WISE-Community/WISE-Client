@@ -2,13 +2,13 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapAuthoring } from './concept-map-authoring.component';
 import { ConceptMapAuthoringModule } from './concept-map-authoring.module';
 
 let component: ConceptMapAuthoring;
 let fixture: ComponentFixture<ConceptMapAuthoring>;
-
 const componentContent = {
   id: 'ut00qpig10',
   type: 'ConceptMap',
@@ -75,7 +75,6 @@ const componentContent = {
   showNodeLabels: true,
   showAddToNotebookButton: true
 };
-
 describe('ConceptMapAuthoringComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -89,9 +88,9 @@ describe('ConceptMapAuthoringComponent', () => {
     fixture = TestBed.createComponent(ConceptMapAuthoring);
     component = fixture.componentInstance;
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
-      JSON.parse(JSON.stringify(componentContent))
+      copy(componentContent)
     );
-    component.componentContent = JSON.parse(JSON.stringify(componentContent));
+    component.componentContent = copy(componentContent);
     fixture.detectChanges();
   });
   it('should create component', () => {

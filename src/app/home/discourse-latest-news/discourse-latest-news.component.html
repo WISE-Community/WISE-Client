@@ -1,21 +1,25 @@
-<div class="latest-news dark-theme primary-border" [ngClass]="{'loaded': isLoaded}">
-  <h2 fxLayoutAlign.gt-sm="start center"
-      [ngClass]="{'mat-small': xsScreen, 'mat-body-1': smallScreen && !xsScreen}">
+<div class="latest-news dark-theme primary-border" [ngClass]="{ loaded: isLoaded }">
+  <h2
+    fxLayoutAlign.gt-sm="start center"
+    [ngClass]="{ 'mat-small': xsScreen, 'mat-body-1': smallScreen && !xsScreen }"
+  >
     <mat-icon>rss_feed</mat-icon>
     <ng-container i18n>What's New?</ng-container>&nbsp;
   </h2>
   <ul>
-    <ng-container *ngFor="let topic of topics; let index = index;">
-      <li *ngIf="!xsScreen || index === 0"
-          [ngClass]="{'mat-small': xsScreen, 'mat-body-1': !xsScreen}">
-        <a href="{{baseUrl}}/t/{{topic.slug}}/{{topic.id}}">
-          {{topic.title}}
+    <ng-container *ngFor="let topic of topics; let index = index">
+      <li
+        *ngIf="!xsScreen || index === 0"
+        [ngClass]="{ 'mat-small': xsScreen, 'mat-body-1': !xsScreen }"
+      >
+        <a href="{{ baseUrl }}/t/{{ topic.slug }}/{{ topic.id }}">
+          {{ topic.title }}
         </a>
         <ng-container *ngIf="smallScreen"> • </ng-container>
       </li>
     </ng-container>
   </ul>
-  <div [ngClass]="{'mat-small': xsScreen, 'mat-body-1': !xsScreen}">
-    <a href="{{baseUrl}}/{{category}}" i18n>More news</a>
+  <div [ngClass]="{ 'mat-small': xsScreen, 'mat-body-1': !xsScreen }">
+    <a href="{{ baseUrl }}/{{ category }}" i18n>More news</a>
   </div>
 </div>

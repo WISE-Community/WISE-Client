@@ -1,0 +1,85 @@
+<div class="project-icon-label" fxLayoutGap="20px">
+  <span i18n>Unit Icon</span>
+  <button mat-raised-button color="primary" (click)="toggleEditProjectIconMode()" i18n>Edit</button>
+</div>
+<div class="project-icon-container">
+  <div *ngIf="isShowProjectIcon">
+    <img [src]="projectIcon" class="project-icon" />
+  </div>
+  <div *ngIf="isShowProjectIconError" class="project-icon-error">
+    <p class="red margin-bottom-20" i18n>This unit does not have a unit icon.</p>
+    <p class="red" i18n>Click the edit button to set one.</p>
+  </div>
+  <div *ngIf="isShowProjectIconLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+<div *ngIf="isEditingProjectIcon">
+  <div class="choose-project-icon-message" fxLayoutGap="20px">
+    <span i18n
+      >Choose a new Unit Icon by clicking on one below or upload your own custom icon.</span
+    >
+    <button mat-raised-button color="primary" (click)="chooseCustomProjectIcon()" i18n>
+      Upload
+    </button>
+  </div>
+  <div>
+    <img
+      *ngFor="let projectIcon of projectIcons"
+      class="project-icon-to-choose"
+      src="/projectIcons/{{ projectIcon }}"
+      (click)="setFeaturedProjectIcon(projectIcon)"
+    />
+  </div>
+  <br />
+</div>
+<br />
+<div *ngFor="let metadataField of metadataAuthoring.fields">
+  <mat-form-field *ngIf="metadataField.type === 'textarea'" class="textarea">
+    <mat-label>{{ metadataField.name }}</mat-label>
+    <textarea
+      matInput
+      [(ngModel)]="metadata[metadataField.key]"
+      (ngModelChange)="metadataChanged.next()"
+      cdkTextareaAutosize
+    ></textarea>
+  </mat-form-field>
+  <mat-form-field *ngIf="metadataField.type === 'input'" class="input">
+    <mat-label>{{ metadataField.name }}</mat-label>
+    <input
+      matInput
+      [(ngModel)]="metadata[metadataField.key]"
+      (ngModelChange)="metadataChanged.next()"
+    />
+  </mat-form-field>
+  <ng-container *ngIf="metadataField.type === 'radio'">
+    <label class="bold">{{ metadataField.name }}:</label>
+    <mat-radio-group class="radio-group margin-bottom-20" fxLayout="column">
+      <ng-container *ngFor="let choice of metadataField.choices">
+        <mat-radio-button
+          type="radio"
+          color="primary"
+          [value]="choice"
+          [checked]="metadataChoiceIsChecked(metadataField, choice)"
+          (click)="metadataRadioClicked(metadataField, choice)"
+        >
+          {{ getMetadataChoiceText(choice) }}
+        </mat-radio-button>
+      </ng-container>
+    </mat-radio-group>
+  </ng-container>
+  <ng-container *ngIf="metadataField.type === 'checkbox'">
+    <label class="bold">{{ metadataField.name }}:</label>
+    <div fxLayout="column margin-bottom-20">
+      <ng-container *ngFor="let choice of metadataField.choices">
+        <mat-checkbox
+          color="primary"
+          [(ngModel)]="metadataField.choicesMapping[choice]"
+          (click)="metadataCheckboxClicked(metadataField)"
+        >
+          {{ getMetadataChoiceText(choice) }}
+        </mat-checkbox>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

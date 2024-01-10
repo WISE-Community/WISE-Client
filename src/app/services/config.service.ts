@@ -35,6 +35,10 @@ export class ConfigService {
     return this.config$.getValue().discourseURL;
   }
 
+  getDiscourseNewsCategory() {
+    return this.config$.getValue().discourseNewsCategory;
+  }
+
   getGoogleAnalyticsId() {
     return this.config$.getValue().googleAnalyticsId;
   }
@@ -45,6 +49,11 @@ export class ConfigService {
 
   isGoogleClassroomEnabled() {
     return this.config$.getValue().isGoogleClassroomEnabled;
+  }
+
+  isRecaptchaEnabled() {
+    const recaptchaPublicKey = this.getRecaptchaPublicKey();
+    return recaptchaPublicKey != null && recaptchaPublicKey != '';
   }
 
   getRecaptchaPublicKey() {

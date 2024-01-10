@@ -1,28 +1,83 @@
 <div class="content-block library-teacher__paginate">
-  <div fxLayoutAlign="center center" fxLayout.xs="column">
-    <a class="info mat-caption" [routerLink]="" (click)="showInfo()" i18n>What are My Units?</a>
+  <div class="personal-library-header" fxLayoutAlign="center center" fxLayoutGap="8px">
+    <a class="mat-caption" href="#" (click)="showInfo($event)" i18n>What are My Units?</a>
+    <span fxFlex></span>
+    <mat-form-field [subscriptSizing]="'dynamic'">
+      <mat-label>View</mat-label>
+      <mat-select [(ngModel)]="showArchived" (selectionChange)="switchActiveArchivedView()">
+        <mat-option [value]="false" i18n>Active</mat-option>
+        <mat-option [value]="true" i18n>Archived</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-divider></mat-divider>
+  <div fxLayoutAlign="start center" fxLayout.xs="column" fxLayoutGap="8px">
+    <div fxLayoutAlign="center center" fxLayoutGap="4px" fxFlexAlign.xs="start" fxFlexOrder.xs="1">
+      <select-all-items-checkbox
+        [label]="projectsLabel"
+        [numAllItems]="numProjectsInView"
+        [numSelectedItems]="numSelectedProjects()"
+        (allSelectedEvent)="selectAllProjects()"
+        (noneSelectedEvent)="unselectAllProjects()"
+      ></select-all-items-checkbox>
+      <span *ngIf="numSelectedProjects() > 0" class="secondary-text" i18n>
+        {{ numSelectedProjects() }} selected
+      </span>
+      <button
+        mat-icon-button
+        *ngIf="!showArchived && selectedProjects().length > 0"
+        (click)="archiveSelectedProjects(true)"
+        matTooltip="Archive selected units"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>archive</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        *ngIf="showArchived && selectedProjects().length > 0"
+        (click)="archiveSelectedProjects(false)"
+        matTooltip="Restore selected units"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>unarchive</mat-icon>
+      </button>
+    </div>
     <span fxFlex fxHide.xs></span>
-    <mat-paginator [length]="filteredProjects.length"
+    <mat-paginator
+      fxFlexAlign="end"
+      [length]="filteredProjects.length"
       [pageSize]="pageSize"
       [pageSizeOptions]="pageSizeOptions"
-      (page)="pageChange($event)">
+      (page)="pageChange($event)"
+    >
     </mat-paginator>
   </div>
   <mat-divider></mat-divider>
   <div class="library__list" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="start">
     <ng-container *ngFor="let project of filteredProjects; let i = index">
-        <app-library-project *ngIf="isOnPage(i)"
-                              [project]="project"
-                              fxFlex.sm="50"
-                              fxFlex.md="33"
-                              fxFlex.gt-md="25"></app-library-project>
+      <app-library-project
+        *ngIf="isOnPage(i)"
+        [project]="project"
+        [myUnit]="true"
+        [checked]="projectIdToIsSelected()[project.id]"
+        (projectSelectionEvent)="updateSelectedProjects($event)"
+        fxFlex.sm="50"
+        fxFlex.md="33"
+        fxFlex.gt-md="25"
+      ></app-library-project>
     </ng-container>
-    <div *ngIf="filteredProjects.length === 0" class="notice" i18n>No owned or shared units found.</div>
+    <div *ngIf="filteredProjects.length === 0" class="notice" i18n>
+      No owned or shared units found.
+    </div>
   </div>
   <mat-divider></mat-divider>
-  <mat-paginator [length]="filteredProjects.length"
-                  [pageSize]="pageSize"
-                  [pageSizeOptions]="pageSizeOptions"
-                  (page)="pageChange($event, true)">
+  <mat-paginator
+    [length]="filteredProjects.length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="pageChange($event, true)"
+  >
   </mat-paginator>
 </div>

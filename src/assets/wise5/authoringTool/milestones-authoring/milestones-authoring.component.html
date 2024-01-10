@@ -1,0 +1,576 @@
+<div>
+  <h4 i18n>Milestones Authoring</h4>
+</div>
+<div class="margin-bottom-20">
+  <mat-slide-toggle
+    color="primary"
+    [(ngModel)]="project.achievements.isEnabled"
+    (ngModelChange)="save()"
+    i18n
+  >
+    Enable Milestones
+  </mat-slide-toggle>
+</div>
+<div
+  *ngIf="project.achievements.isEnabled"
+  class="margin-left-20"
+  fxLayout="column"
+  fxLayoutGap="20px"
+>
+  <div>
+    <button mat-raised-button color="primary" (click)="addMilestone(0)">
+      <mat-icon>add</mat-icon>
+      <span i18n>Add Milestone</span>
+    </button>
+  </div>
+  <div *ngFor="let item of project.achievements.items; let milestoneIndex = index">
+    <div class="border margin-bottom-20">
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+        <button
+          *ngIf="idToExpanded[item.id]"
+          mat-raised-button
+          color="primary"
+          (click)="collapse(item.id)"
+          matTooltip="Click to Collapse"
+          i18n-matTooltip
+        >
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          *ngIf="!idToExpanded[item.id]"
+          (click)="expand(item.id)"
+          matTooltip="Click to Expand"
+          i18n-matTooltip
+        >
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+        <h5 i18n>Milestone {{ milestoneIndex + 1 }}</h5>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="deleteMilestone(milestoneIndex)"
+          matTooltip="Delete Milestone"
+          i18n-matTooltip
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="idToExpanded[item.id]" class="margin-left-20">
+        <div>
+          <mat-form-field class="width-300">
+            <mat-label i18n>Milestone Name</mat-label>
+            <input matInput [(ngModel)]="item.name" (ngModelChange)="contentChanged()" />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="full-width">
+            <mat-label i18n>Milestone Description</mat-label>
+            <textarea
+              matInput
+              [(ngModel)]="item.description"
+              (ngModelChange)="contentChanged()"
+              cdkTextareaAutosize
+            >
+            </textarea>
+          </mat-form-field>
+        </div>
+        <div class="margin-bottom-20">
+          <mat-slide-toggle
+            color="primary"
+            [(ngModel)]="item.isEnabled"
+            (ngModelChange)="save()"
+            i18n
+          >
+            Enable Satisfy Criteria
+          </mat-slide-toggle>
+        </div>
+        <div *ngIf="item.isEnabled" class="border">
+          <h5 i18n>Satisfy Criteria</h5>
+          <div fxLayout="row wrap" fxLayoutGap="20px">
+            <mat-form-field class="width-300">
+              <mat-label i18n>Satisfy Minimum Percentage</mat-label>
+              <input
+                matInput
+                [(ngModel)]="item.satisfyMinPercentage"
+                type="number"
+                (ngModelChange)="contentChanged()"
+              />
+            </mat-form-field>
+            <mat-form-field class="width-300">
+              <mat-label i18n>Satisfy Minimum Number Of Workgroups</mat-label>
+              <input
+                matInput
+                [(ngModel)]="item.satisfyMinNumWorkgroups"
+                type="number"
+                (ngModelChange)="contentChanged()"
+              />
+            </mat-form-field>
+            <mat-form-field class="width-200">
+              <mat-label i18n>Satisfy Conditional</mat-label>
+              <mat-select [(ngModel)]="item.satisfyConditional" (ngModelChange)="save()">
+                <mat-option value="any" i18n>Any</mat-option>
+                <mat-option value="all" i18n>All</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="addMilestoneSatisfyCriteria(item, 0)"
+            >
+              <mat-icon>add</mat-icon>
+              <span i18n>Add Milestone Satisfy Criteria</span>
+            </button>
+          </div>
+          <div
+            *ngFor="let satisfyCriteria of item.satisfyCriteria; let satisfyCriteriaIndex = index"
+          >
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+              <h5 i18n>Milestone Satisfy Criteria</h5>
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="deleteMilestoneSatisfyCriteria(item, satisfyCriteriaIndex)"
+                matTooltip="Delete Milestone Satisfy Criteria"
+                i18n-matTooltip
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <div fxLayoutGap="20px">
+              <mat-form-field class="width-300">
+                <mat-label i18n>Node ID</mat-label>
+                <mat-select [(ngModel)]="satisfyCriteria.nodeId" (ngModelChange)="save()">
+                  <ng-container *ngFor="let nodeItem of nodeItems">
+                    <mat-option [value]="nodeItem.key">
+                      {{ getNodePositionAndTitle(nodeItem.key) }}
+                    </mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="width-200">
+                <mat-label i18n>Component ID</mat-label>
+                <mat-select [(ngModel)]="satisfyCriteria.componentId" (ngModelChange)="save()">
+                  <ng-container
+                    *ngFor="
+                      let component of getComponents(satisfyCriteria.nodeId);
+                      let componentIndex = index
+                    "
+                  >
+                    <mat-option [value]="component.id" [disabled]="!isCRaterComponent(component)">
+                      {{ componentIndex + 1 }}. {{ component.type }}
+                      {{ isCRaterComponent(component) ? '(' + getItemId(component) + ')' : '' }}
+                    </mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="width-200">
+                <mat-label i18n>Name</mat-label>
+                <mat-select [(ngModel)]="satisfyCriteria.name" (ngModelChange)="save()">
+                  <mat-option
+                    *ngFor="let availableSatisfyCriteria of availableSatisfyCriteria"
+                    [value]="availableSatisfyCriteria.value"
+                    >{{ availableSatisfyCriteria.text }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="
+                  copySatisfyCriteriaToMilestone(
+                    item,
+                    satisfyCriteria.nodeId,
+                    satisfyCriteria.componentId
+                  )
+                "
+                matTooltip="Copy Node ID and Component ID to Milestone"
+                i18n-matTooltip
+              >
+                <mat-icon>content_copy</mat-icon>
+              </button>
+            </div>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="addMilestoneSatisfyCriteria(item, satisfyCriteriaIndex + 1)"
+            >
+              <mat-icon>add</mat-icon>
+              <span i18n>Add Milestone Satisfy Criteria</span>
+            </button>
+          </div>
+        </div>
+        <div>
+          <h5 i18n>Report</h5>
+          <div class="margin-left-20" fxLayout="column" fxLayoutGap="20px">
+            <div>
+              <button mat-raised-button color="primary" (click)="addLocation(item.report, 0)">
+                <mat-icon>add</mat-icon>
+                <span i18n>Add Report Location</span>
+              </button>
+            </div>
+            <div *ngFor="let location of item.report.locations; let locationIndex = index">
+              <div
+                class="border margin-bottom-20"
+                fxLayout="row wrap"
+                fxLayoutAlign="start center"
+                fxLayoutGap="20px"
+              >
+                <h5 i18n>Location {{ locationIndex + 1 }}</h5>
+                <mat-form-field class="width-300">
+                  <mat-label i18n>Node ID</mat-label>
+                  <mat-select [(ngModel)]="location.nodeId" (ngModelChange)="save()">
+                    <ng-container *ngFor="let nodeItem of nodeItems">
+                      <mat-option [value]="nodeItem.key">
+                        {{ getNodePositionAndTitle(nodeItem.key) }}
+                      </mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="width-200">
+                  <mat-label i18n>Component ID</mat-label>
+                  <mat-select [(ngModel)]="location.componentId" (ngModelChange)="save()">
+                    <ng-container
+                      *ngFor="
+                        let component of getComponents(location.nodeId);
+                        let componentIndex = index
+                      "
+                    >
+                      <mat-option [value]="component.id" [disabled]="!isCRaterComponent(component)">
+                        {{ componentIndex + 1 }}. {{ component.type }}
+                        {{ isCRaterComponent(component) ? '(' + getItemId(component) + ')' : '' }}
+                      </mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-form-field>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="deleteLocation(item.report, locationIndex)"
+                  matTooltip="Delete Location"
+                  i18n-matTooltip
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              <div>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="addLocation(item.report, locationIndex + 1)"
+                >
+                  <mat-icon>add</mat-icon>
+                  <span i18n>Add Report Location</span>
+                </button>
+              </div>
+            </div>
+            <div class="border" fxLayout="column" fxLayoutGap="20px">
+              <h5 i18n>Custom Score Values</h5>
+              <div
+                *ngFor="let customScoreValue of item.report.customScoreValues | keyvalue"
+                class="margin-left-20"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+                fxLayoutGap="20px"
+              >
+                <div>{{ customScoreValue.key }}: {{ customScoreValue.value }}</div>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="deleteCustomScoreValues(item.report, customScoreValue.key)"
+                  matTooltip="Delete Custom Score Values"
+                  i18n-matTooltip
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                <mat-form-field class="width-200">
+                  <mat-label i18n>Custom Score Key</mat-label>
+                  <input matInput [(ngModel)]="customScoreKey" />
+                </mat-form-field>
+                <mat-form-field class="width-200">
+                  <mat-label i18n>Custom Score Values</mat-label>
+                  <input matInput [(ngModel)]="customScoreValues" placeholder="Example 1,2,3" />
+                </mat-form-field>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="addCustomScoreValues(item.report, customScoreKey, customScoreValues)"
+                >
+                  <mat-icon>add</mat-icon>
+                  <span i18n>Add Custom Score Values</span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <button mat-raised-button color="primary" (click)="addTemplate(item.report, 0)">
+                <mat-icon>add</mat-icon>
+                <span i18n>Add Template</span>
+              </button>
+            </div>
+            <div
+              *ngFor="let template of item.report.templates; let templateIndex = index"
+              fxLayout="column"
+              fxLayoutGap="20px"
+            >
+              <div class="border margin-left-20" fxLayout="column" fxLayoutGap="20px">
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    *ngIf="idToExpanded[template.id]"
+                    (click)="collapse(template.id)"
+                    matTooltip="Click to Collapse"
+                    i18n-matTooltip
+                  >
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                  </button>
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    *ngIf="!idToExpanded[template.id]"
+                    (click)="expand(template.id)"
+                    matTooltip="Click to Expand"
+                    i18n-matTooltip
+                  >
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                  </button>
+                  <h5 i18n>Template {{ templateIndex + 1 }}</h5>
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="deleteTemplate(item.report, templateIndex)"
+                    matTooltip="Delete Template"
+                    i18n-matTooltip
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+                <div
+                  *ngIf="idToExpanded[template.id]"
+                  class="margin-left-20"
+                  fxLayout="column"
+                  fxLayoutGap="20px"
+                >
+                  <div>
+                    <mat-form-field class="width-200">
+                      <mat-label i18n>Satisfy Conditional</mat-label>
+                      <mat-select
+                        [(ngModel)]="template.satisfyConditional"
+                        (ngModelChange)="save()"
+                      >
+                        <mat-option value="any" i18n>Any</mat-option>
+                        <mat-option value="all" i18n>All</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      (click)="addTemplateSatisfyCriteria(template, 0)"
+                      matTooltip=""
+                    >
+                      <mat-icon>add</mat-icon>
+                      <span i18n>Add Template Satisfy Criteria</span>
+                    </button>
+                  </div>
+                  <div
+                    *ngFor="
+                      let satisfyCriteria of template.satisfyCriteria;
+                      let satisfyCriteriaIndex = index
+                    "
+                    fxLayout="column"
+                    fxLayoutGap="20px"
+                  >
+                    <div class="border">
+                      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                        <h5 i18n>Template Satisfy Criteria {{ satisfyCriteriaIndex + 1 }}</h5>
+                        <button
+                          mat-raised-button
+                          color="primary"
+                          (click)="deleteTemplateSatisfyCriteria(template, satisfyCriteriaIndex)"
+                          matTooltip="Delete Template Satisfy Criteria"
+                          i18n-matTooltip
+                        >
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                      <div fxLayout="row" fxLayoutGap="20px">
+                        <mat-form-field class="width-300">
+                          <mat-label i18n>Node ID</mat-label>
+                          <mat-select [(ngModel)]="satisfyCriteria.nodeId" (ngModelChange)="save()">
+                            <ng-container *ngFor="let nodeItem of nodeItems">
+                              <mat-option [value]="nodeItem.key">
+                                {{ getNodePositionAndTitle(nodeItem.key) }}
+                              </mat-option>
+                            </ng-container>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="width-300">
+                          <mat-label i18n>Component ID</mat-label>
+                          <mat-select
+                            [(ngModel)]="satisfyCriteria.componentId"
+                            (ngModelChange)="save()"
+                          >
+                            <ng-container
+                              *ngFor="
+                                let component of getComponents(satisfyCriteria.nodeId);
+                                let componentIndex = index
+                              "
+                            >
+                              <mat-option
+                                [value]="component.id"
+                                [disabled]="!isCRaterComponent(component)"
+                              >
+                                {{ componentIndex + 1 }}. {{ component.type }}
+                                {{
+                                  isCRaterComponent(component)
+                                    ? '(' + getItemId(component) + ')'
+                                    : ''
+                                }}
+                              </mat-option>
+                            </ng-container>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div fxLayout="row" fxLayoutGap="20px">
+                        <mat-form-field class="width-300">
+                          <mat-label i18n>Function</mat-label>
+                          <mat-select
+                            [(ngModel)]="satisfyCriteria.function"
+                            (ngModelChange)="save()"
+                          >
+                            <mat-option
+                              *ngFor="
+                                let availableSatisfyCriteriaFunction of availableSatisfyCriteriaFunctions
+                              "
+                              [value]="availableSatisfyCriteriaFunction.value"
+                            >
+                              {{ availableSatisfyCriteriaFunction.text }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="width-200">
+                          <mat-label i18n>Percent Threshold</mat-label>
+                          <input
+                            matInput
+                            type="number"
+                            [(ngModel)]="satisfyCriteria.percentThreshold"
+                            (ngModelChange)="contentChanged()"
+                          />
+                        </mat-form-field>
+                      </div>
+                      <div fxLayout="row" fxLayoutGap="20px">
+                        <mat-form-field class="width-200">
+                          <mat-label i18n>Type</mat-label>
+                          <input
+                            matInput
+                            [(ngModel)]="satisfyCriteria.type"
+                            (ngModelChange)="contentChanged()"
+                          />
+                        </mat-form-field>
+                        <mat-form-field class="width-200">
+                          <mat-label i18n>Target Variable</mat-label>
+                          <input
+                            matInput
+                            [(ngModel)]="satisfyCriteria.targetVariable"
+                            (ngModelChange)="contentChanged()"
+                          />
+                        </mat-form-field>
+                        <mat-form-field class="width-200">
+                          <mat-label i18n>Value</mat-label>
+                          <input
+                            matInput
+                            type="number"
+                            [(ngModel)]="satisfyCriteria.value"
+                            (ngModelChange)="contentChanged()"
+                          />
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div>
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        (click)="addTemplateSatisfyCriteria(template, satisfyCriteriaIndex + 1)"
+                      >
+                        <mat-icon>add</mat-icon>
+                        <span i18n>Add Template Satisfy Criteria</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <mat-form-field class="full-width">
+                      <mat-label i18n>Description</mat-label>
+                      <textarea
+                        matInput
+                        [(ngModel)]="template.description"
+                        (ngModelChange)="contentChanged()"
+                        cdkTextareaAutosize
+                      >
+                      </textarea>
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field class="full-width">
+                      <mat-label i18n>Content</mat-label>
+                      <textarea
+                        matInput
+                        [(ngModel)]="template.content"
+                        (ngModelChange)="contentChanged()"
+                        cdkTextareaAutosize
+                      >
+                      </textarea>
+                    </mat-form-field>
+                  </div>
+                  <span i18n>Content Preview</span>
+                  <section class="milestone-details__section md-whiteframe-1dp">
+                    <div [innerHTML]="template.content"></div>
+                  </section>
+                  <div>
+                    <mat-form-field class="full-width">
+                      <mat-label i18n>Recommendations</mat-label>
+                      <textarea
+                        matInput
+                        [(ngModel)]="template.recommendations"
+                        (ngModelChange)="contentChanged()"
+                        cdkTextareaAutosize
+                      >
+                      </textarea>
+                    </mat-form-field>
+                  </div>
+                  <span i18n>Recommendations Preview</span>
+                  <section class="md-whiteframe-1dp gray-lightest-bg">
+                    <div [innerHTML]="template.recommendations"></div>
+                  </section>
+                  <br />
+                </div>
+              </div>
+              <div>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="addTemplate(item.report, templateIndex + 1)"
+                >
+                  <mat-icon>add</mat-icon>
+                  <span i18n>Add Template</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" (click)="addMilestone(milestoneIndex + 1)">
+        <mat-icon>add</mat-icon>
+        <span i18n>Add Milestone</span>
+      </button>
+    </div>
+  </div>
+</div>

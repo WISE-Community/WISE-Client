@@ -1,8 +1,10 @@
 <mat-form-field>
-  <input matInput
-      min="0"
-      [(ngModel)]="maxScore"
-      (ngModelChange)="maxScoreChanged.next($event)"
-      type="number"
-      [disabled]="disabled" />
+  <input
+    matInput
+    min="0"
+    [(ngModel)]="maxScore"
+    (ngModelChange)="maxScoreChanged.next($event)"
+    type="number"
+    [disabled]="disabled"
+  />
 </mat-form-field>

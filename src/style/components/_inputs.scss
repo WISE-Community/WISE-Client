@@ -4,14 +4,15 @@
 }
 
 .form-field-long-hint {
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-wrapper {
     padding-bottom: 0;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-underline {
     position: initial;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-subscript-wrapper {
     position: relative;
   }
@@ -19,16 +20,18 @@
 
 .form-field-no-label {
   &.mat-form-field-appearance-fill, &.mat-form-field-appearance-outline {
+    /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
     .mat-form-field-wrapper {
       margin: 0;
     }
-
+    /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
     .mat-form-field-infix {
       border-top-width: 0.343em;
     }
   }
 
   &.mat-form-field-appearance-fill {
+    /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
     .mat-form-field-infix {
       padding: 0 0 1em 0;
     }
@@ -36,33 +39,30 @@
 }
 
 .form-field-no-hint {
-  .mat-form-field-wrapper {
-    padding-bottom: 0;
-  }
-
-  .mat-form-field-underline {
-    bottom: 0;
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
   }
 }
 
-.mat-form-field.mat-form-field-appearance-fill {
+.mat-mdc-form-field.mat-form-field-appearance-fill {
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-flex {
     border-radius: $card-border-radius;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-underline {
     &::before {
       max-height: 0;
     }
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-ripple {
     border-bottom-left-radius: $card-border-radius;
     border-bottom-right-radius: $card-border-radius;
   }
 }
 
-.mat-icon-button.input-control--appearance-fill {
+.mat-mdc-icon-button.input-control--appearance-fill {
   margin: 6px 0 6px 4px;
 }
 
@@ -71,6 +71,7 @@
 }
 
 .checkbox-inline {
+  /* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
   .mat-checkbox-layout {
     display: inline;
     white-space: normal;

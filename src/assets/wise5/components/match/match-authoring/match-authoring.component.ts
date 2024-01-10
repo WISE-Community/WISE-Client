@@ -1,31 +1,34 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
+import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { RandomKeyService } from '../../../services/randomKeyService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MatchService } from '../matchService';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'match-authoring',
   templateUrl: 'match-authoring.component.html',
   styleUrls: ['match-authoring.component.scss']
 })
-export class MatchAuthoring extends ComponentAuthoring {
+export class MatchAuthoring extends AbstractComponentAuthoring {
   defaultSourceBucketId: string = '0';
   feedbackChange: Subject<string> = new Subject<string>();
 
   constructor(
-    protected ConfigService: ConfigService,
-    private MatchService: MatchService,
-    protected NodeService: NodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    protected configService: ConfigService,
+    private dialog: MatDialog,
+    private matchService: MatchService,
+    protected nodeService: TeacherNodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+    super(configService, nodeService, projectAssetService, projectService);
     this.subscriptions.add(
       this.feedbackChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.turnOnSubmitButtonIfFeedbackExists();
@@ -42,9 +45,8 @@ export class MatchAuthoring extends ComponentAuthoring {
 
   addChoice(): void {
     const newChoice = {
-      id: RandomKeyService.generate(),
-      value: '',
-      type: 'choice'
+      id: generateRandomKey(),
+      value: ''
     };
     this.componentContent.choices.push(newChoice);
     this.addChoiceToFeedback(newChoice.id);
@@ -53,7 +55,7 @@ export class MatchAuthoring extends ComponentAuthoring {
 
   addBucket(): void {
     const newBucket = {
-      id: RandomKeyService.generate(),
+      id: generateRandomKey(),
       value: '',
       type: 'bucket'
     };
@@ -273,13 +275,13 @@ export class MatchAuthoring extends ComponentAuthoring {
   }
 
   openAssetChooserHelper(target: string, targetObject: any): void {
-    this.openAssetChooser({
-      isPopup: true,
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      target: target,
-      targetObject: targetObject
-    });
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open(target, targetObject)
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 
   assetSelected({ nodeId, componentId, assetItem, target, targetObject }): void {
@@ -291,7 +293,7 @@ export class MatchAuthoring extends ComponentAuthoring {
   }
 
   getChoiceTextById(choiceId: string): string {
-    const choice = this.MatchService.getChoiceById(choiceId, this.componentContent.choices);
+    const choice = this.matchService.getChoiceById(choiceId, this.componentContent.choices);
     return choice ? choice.value : null;
   }
 
@@ -300,7 +302,7 @@ export class MatchAuthoring extends ComponentAuthoring {
       const choicesLabel = this.componentContent.choicesLabel;
       return choicesLabel ? choicesLabel : $localize`Choices`;
     }
-    const bucket = this.MatchService.getBucketById(bucketId, this.componentContent.buckets);
+    const bucket = this.matchService.getBucketById(bucketId, this.componentContent.buckets);
     return bucket ? bucket.value : null;
   }
 }

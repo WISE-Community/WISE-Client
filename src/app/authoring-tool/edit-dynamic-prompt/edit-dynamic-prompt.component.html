@@ -1,42 +1,44 @@
 <div class="section-container">
   <div class="enable-dynamic-prompt-div">
     <mat-checkbox
-        [checked]="componentContent.dynamicPrompt?.enabled"
-        (change)="toggleDynamicPrompt($event)"
-        color="primary"
-        i18n>
+      [checked]="componentContent.dynamicPrompt?.enabled"
+      (change)="toggleDynamicPrompt($event)"
+      color="primary"
+      i18n
+    >
       Enable Dynamic Prompt
     </mat-checkbox>
   </div>
   <div *ngIf="componentContent.dynamicPrompt?.enabled">
-    <div class="reference-component-div"
-        fxLayout="row wrap"
-        fxLayoutAlign="start center"
-        fxLayoutGap="20px">
+    <div
+      class="reference-component-div"
+      fxLayout="row wrap"
+      fxLayoutAlign="start center"
+      fxLayoutGap="20px"
+    >
       <mat-label class="bold" i18n>Reference Component:</mat-label>
-      <edit-connected-component-node-select
-          [connectedComponent]="componentContent.dynamicPrompt.referenceComponent"
-          (connectedComponentChange)="referenceComponentNodeIdChanged($event)">
-      </edit-connected-component-node-select>
-      <edit-connected-component-component-select
-          [componentId]="componentId"
-          [connectedComponent]="componentContent.dynamicPrompt.referenceComponent"
-          [allowedConnectedComponentTypes]="allowedReferenceComponentTypes"
-          (connectedComponentChange)="dynamicPromptChangedEvent.next()">
-      </edit-connected-component-component-select>
-      <edit-component-peer-grouping-tag
-          [componentContent]="componentContent.dynamicPrompt">
+      <select-step-and-component
+        [referenceComponent]="componentContent.dynamicPrompt.referenceComponent"
+        [thisComponentId]="componentId"
+        [allowedComponentTypes]="allowedReferenceComponentTypes"
+        (stepChange)="dynamicPromptChangedEvent.next()"
+        (componentChange)="dynamicPromptChangedEvent.next()"
+      >
+      </select-step-and-component>
+      <edit-component-peer-grouping-tag [componentContent]="componentContent.dynamicPrompt">
       </edit-component-peer-grouping-tag>
     </div>
     <div class="pre-prompt-div">
       <mat-form-field class="prompt" appearance="fill">
         <mat-label i18n>Pre Prompt (Optional)</mat-label>
-        <textarea matInput
-            [(ngModel)]="componentContent.dynamicPrompt.prePrompt"
-            (ngModelChange)="dynamicPromptChangedEvent.next()"
-            placeholder="Enter Pre Prompt Here"
-            i18n-placeholder
-            cdkTextareaAutosize>
+        <textarea
+          matInput
+          [(ngModel)]="componentContent.dynamicPrompt.prePrompt"
+          (ngModelChange)="dynamicPromptChangedEvent.next()"
+          placeholder="Enter Pre Prompt Here"
+          i18n-placeholder
+          cdkTextareaAutosize
+        >
         </textarea>
       </mat-form-field>
     </div>
@@ -47,12 +49,14 @@
     <div>
       <mat-form-field class="prompt" appearance="fill">
         <mat-label i18n>Post Prompt (Optional)</mat-label>
-        <textarea matInput
-            [(ngModel)]="componentContent.dynamicPrompt.postPrompt"
-            (ngModelChange)="dynamicPromptChangedEvent.next()"
-            placeholder="Enter Post Prompt Here"
-            i18n-placeholder
-            cdkTextareaAutosize>
+        <textarea
+          matInput
+          [(ngModel)]="componentContent.dynamicPrompt.postPrompt"
+          (ngModelChange)="dynamicPromptChangedEvent.next()"
+          placeholder="Enter Post Prompt Here"
+          i18n-placeholder
+          cdkTextareaAutosize
+        >
         </textarea>
       </mat-form-field>
     </div>

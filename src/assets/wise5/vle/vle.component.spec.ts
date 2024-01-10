@@ -29,7 +29,7 @@ import { InitializeVLEService } from '../services/initializeVLEService';
 import { StudentTeacherCommonServicesModule } from '../../../app/student-teacher-common-services.module';
 import { PauseScreenService } from '../services/pauseScreenService';
 import { StudentNotificationService } from '../services/studentNotificationService';
-import { NodeClickLockedService } from '../services/nodeClickLockedService';
+import { SafeUrl } from '../../../assets/wise5/directives/safeUrl/safe-url.pipe';
 
 let component: VLEComponent;
 let fixture: ComponentFixture<VLEComponent>;
@@ -61,6 +61,7 @@ describe('VLEComponent', () => {
         NodeIconComponent,
         NodeStatusIcon,
         NotebookNotesComponent,
+        SafeUrl,
         StepToolsComponent,
         StudentAccountMenuComponent,
         TopBarComponent,
@@ -68,7 +69,6 @@ describe('VLEComponent', () => {
       ],
       providers: [
         InitializeVLEService,
-        NodeClickLockedService,
         PauseScreenService,
         StudentNotificationService,
         VLEProjectService
@@ -78,7 +78,6 @@ describe('VLEComponent', () => {
 
   beforeEach(() => {
     const vleProjectService = TestBed.inject(VLEProjectService);
-    spyOn(vleProjectService, 'getStyle').and.returnValue(null);
     spyOn(vleProjectService, 'getProjectScript').and.returnValue(null);
     const notebookService = TestBed.inject(NotebookService);
     spyOn(notebookService, 'isNotebookEnabled').and.returnValue(false);

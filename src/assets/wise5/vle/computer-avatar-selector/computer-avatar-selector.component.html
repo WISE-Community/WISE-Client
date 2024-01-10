@@ -1,33 +1,40 @@
-<mat-card class="mat-elevation-z2">
+<mat-card appearance="outlined" class="mat-elevation-z2">
   <mat-card-content>
     <ng-container *ngIf="computerAvatarSettings.prompt">
-      <div class="mat-body-1" [innerHtml]="computerAvatarSettings.prompt"></div>
+      <div class="mat-body-2" [innerHtml]="computerAvatarSettings.prompt"></div>
       <mat-divider></mat-divider>
     </ng-container>
-    <div *ngIf="avatars.length === 1" class="mat-body-2 accent" i18n>Your {{ label }}:</div>
-    <div *ngIf="avatars.length != 1" class="mat-body-2 accent" i18n>Choose Your {{ label }}:</div>
-    <mat-button-toggle-group [(ngModel)]="avatarSelected"
-        [disabled]="avatars.length === 1"
-        fxLayout="row wrap"
-        aria-label="Selected avatar"
-        i18n-aria-label>
+    <div *ngIf="avatars.length === 1" class="mat-subtitle-2 accent" i18n>Your {{ label }}:</div>
+    <div *ngIf="avatars.length != 1" class="mat-subtitle-2 accent" i18n>Choose Your {{ label }}:</div>
+    <mat-button-toggle-group
+      [(ngModel)]="avatarSelected"
+      [disabled]="avatars.length === 1"
+      fxLayout="row wrap"
+      aria-label="Selected avatar"
+      i18n-aria-label
+    >
       <ng-container *ngFor="let avatar of avatars">
         <mat-button-toggle
-            [value]="avatar"
-            (mousedown)="avatarSelected = avatar"
-            aria-label="{{ avatar.name }}">
+          [value]="avatar"
+          (mousedown)="avatarSelected = avatar"
+          aria-label="{{ avatar.name }}"
+        >
           <img [src]="avatarsPath + avatar.image" alt="{{ avatar.name }}" class="avatar-image" />
-          <div class="name"><b>{{ avatar.name }}</b></div>
+          <div class="name">
+            <b>{{ avatar.name }}</b>
+          </div>
         </mat-button-toggle>
       </ng-container>
     </mat-button-toggle-group>
   </mat-card-content>
   <mat-card-actions fxLayoutAlign="end">
-    <button mat-flat-button
-        color="primary"
-        [disabled]="avatarSelected == null"
-        (click)="chooseAvatar()"
-        i18n>
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="avatarSelected == null"
+      (click)="chooseAvatar()"
+      i18n
+    >
       Continue
     </button>
   </mat-card-actions>

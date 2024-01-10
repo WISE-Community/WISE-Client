@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Student } from '../../domain/student';
 import { StudentService } from '../../student/student.service';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -7,20 +7,29 @@ import { UtilService } from '../../services/util.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { PasswordService } from '../../services/password.service';
-
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
+import { ConfigService } from '../../services/config.service';
 @Component({
-  selector: 'app-register-student-form',
+  selector: 'register-student-form',
   templateUrl: './register-student-form.component.html',
   styleUrls: ['./register-student-form.component.scss']
 })
 export class RegisterStudentFormComponent extends RegisterUserFormComponent implements OnInit {
-  studentUser: Student = new Student();
+  createStudentAccountFormGroup: FormGroup = this.fb.group({
+    firstName: new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]),
+    lastName: new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]),
+    gender: new FormControl('', [Validators.required]),
+    birthMonth: new FormControl('', [Validators.required]),
+    birthDay: new FormControl({ value: '', disabled: true }, [Validators.required])
+  });
+  days: string[] = [];
   genders: any[] = [
     { code: 'FEMALE', label: $localize`Female` },
     { code: 'MALE', label: $localize`Male` },
     { code: 'NO_ANSWER', label: $localize`No Answer/Other` }
   ];
+  isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
   months: any[] = [
     { code: '1', label: $localize`01 (Jan)` },
     { code: '2', label: $localize`02 (Feb)` },
@@ -35,47 +44,21 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     { code: '11', label: $localize`11 (Nov)` },
     { code: '12', label: $localize`12 (Dec)` }
   ];
-  days: string[] = [];
   securityQuestions: object;
-  passwordsFormGroup = this.fb.group(
-    {
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(this.passwordService.minLength),
-          Validators.pattern(this.passwordService.pattern)
-        ]
-      ],
-      confirmPassword: ['', [Validators.required]]
-    },
-    { validator: this.passwordMatchValidator }
-  );
-  createStudentAccountFormGroup: FormGroup = this.fb.group({
-    firstName: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^(?![ -])[a-zA-Z -]+(?<![ -])$')
-    ]),
-    lastName: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^(?![ -])[a-zA-Z -]+(?<![ -])$')
-    ]),
-    gender: new FormControl('', [Validators.required]),
-    birthMonth: new FormControl('', [Validators.required]),
-    birthDay: new FormControl({ value: '', disabled: true }, [Validators.required])
-  });
-  processing: boolean = false;
+  user: Student = new Student();
 
   constructor(
-    private fb: FormBuilder,
-    private passwordService: PasswordService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private configService: ConfigService,
+    protected fb: FormBuilder,
+    private recaptchaV3Service: ReCaptchaV3Service,
     private router: Router,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
+    protected snackBar: MatSnackBar,
     private studentService: StudentService,
     private utilService: UtilService
   ) {
-    super();
+    super(fb, snackBar);
     this.studentService.retrieveSecurityQuestions().subscribe((response) => {
       this.securityQuestions = response;
     });
@@ -83,7 +66,7 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.studentUser.googleUserId = params['gID'];
+      this.user.googleUserId = params['gID'];
       if (!this.isUsingGoogleId()) {
         this.createStudentAccountFormGroup.addControl('passwords', this.passwordsFormGroup);
         this.createStudentAccountFormGroup.addControl(
@@ -112,20 +95,24 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     this.createStudentAccountFormGroup.controls['lastName'].markAsTouched();
   }
 
-  isUsingGoogleId() {
-    return this.studentUser.googleUserId != null;
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
-  createAccount() {
+  isUsingGoogleId() {
+    return this.user.googleUserId != null;
+  }
+
+  async createAccount() {
     if (this.createStudentAccountFormGroup.valid) {
       this.processing = true;
-      this.populateStudentUser();
-      this.studentService.registerStudentAccount(this.studentUser).subscribe(
+      await this.populateStudentUser();
+      this.studentService.registerStudentAccount(this.user).subscribe(
         (response: any) => {
           this.createAccountSuccess(response);
         },
         (response: HttpErrorResponse) => {
-          this.createAccountError(response.error);
+          this.handleCreateAccountError(response.error, this.user);
         }
       );
     }
@@ -139,52 +126,29 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     this.processing = false;
   }
 
-  createAccountError(error: any): void {
-    const formError: any = {};
-    switch (error.messageCode) {
-      case 'invalidPasswordLength':
-        formError.minlength = true;
-        this.passwordsFormGroup.get('password').setErrors(formError);
-        break;
-      case 'invalidPasswordPattern':
-        formError.pattern = true;
-        this.passwordsFormGroup.get('password').setErrors(formError);
-        break;
-      default:
-        this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.messageCode));
-    }
-    this.processing = false;
-  }
-
-  populateStudentUser() {
+  async populateStudentUser() {
     for (let key of Object.keys(this.createStudentAccountFormGroup.controls)) {
       if (key == 'birthMonth' || key == 'birthDay') {
-        this.studentUser[key] = parseInt(this.createStudentAccountFormGroup.get(key).value);
+        this.user[key] = parseInt(this.createStudentAccountFormGroup.get(key).value);
       } else {
-        this.studentUser[key] = this.createStudentAccountFormGroup.get(key).value;
+        this.user[key] = this.createStudentAccountFormGroup.get(key).value;
       }
     }
+    if (this.isRecaptchaEnabled) {
+      const token = await this.recaptchaV3Service.execute('importantAction').toPromise();
+      this.user['token'] = token;
+    }
     if (!this.isUsingGoogleId()) {
-      this.studentUser['password'] = this.getPassword();
-      delete this.studentUser['passwords'];
-      delete this.studentUser['googleUserId'];
+      this.user['password'] = this.getPassword();
+      delete this.user['passwords'];
+      delete this.user['googleUserId'];
     }
   }
 
   getPassword() {
-    return this.passwordsFormGroup.controls['password'].value;
-  }
-
-  passwordMatchValidator(passwordsFormGroup: FormGroup) {
-    const password = passwordsFormGroup.get('password').value;
-    const confirmPassword = passwordsFormGroup.get('confirmPassword').value;
-    if (password == confirmPassword) {
-      return null;
-    } else {
-      const error = { passwordDoesNotMatch: true };
-      passwordsFormGroup.controls['confirmPassword'].setErrors(error);
-      return error;
-    }
+    return this.passwordsFormGroup.controls[
+      NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME
+    ].value;
   }
 
   setControlFieldValue(name: string, value: string) {

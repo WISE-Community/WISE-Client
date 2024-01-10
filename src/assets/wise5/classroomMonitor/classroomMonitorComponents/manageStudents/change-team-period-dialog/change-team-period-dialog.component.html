@@ -1,11 +1,16 @@
 <h2 mat-dialog-title i18n>Change Period</h2>
-<div mat-dialog-content class="dialog-content-scroll">
-  <div class="mat-body-1">
-    <span i18n>Select a new period for <strong>Team {{team.workgroupId}}</strong>:</span>
+<mat-dialog-content class="dialog-content-scroll">
+  <div class="mat-body-2">
+    <span i18n
+      >Select a new period for <strong>Team {{ team.workgroupId }}</strong
+      >:</span
+    >
     <ul class="student-names mat-small">
       <li *ngFor="let user of team.users; last as isLast; first as isFirst">
-        <ng-container *ngIf="canViewStudentNames">{{user.name}} ({{user.username}})</ng-container>
-        <ng-container *ngIf="!canViewStudentNames" i18n>Student {{user.id}}</ng-container>
+        <ng-container *ngIf="canViewStudentNames"
+          >{{ user.name }} ({{ user.username }})</ng-container
+        >
+        <ng-container *ngIf="!canViewStudentNames" i18n>Student {{ user.id }}</ng-container>
       </li>
     </ul>
   </div>
@@ -13,18 +18,23 @@
     <mat-form-field appearance="fill" class="change-team-period-form-field">
       <mat-label i18n>Choose Period</mat-label>
       <mat-select formControlName="period" [(value)]="selectedPeriod">
-        <mat-option *ngFor="let period of periods" [value]="period">{{period.periodName}}</mat-option>
+        <mat-option *ngFor="let period of periods" [value]="period">{{
+          period.periodName
+        }}</mat-option>
       </mat-select>
     </mat-form-field>
   </form>
-</div>
-<div mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="8px">
+</mat-dialog-content>
+<mat-dialog-actions align="end">
   <button mat-button mat-dialog-close [disabled]="isChangingPeriod" i18n>Cancel</button>
-  <button mat-flat-button
-          color="primary"
-          (click)="changePeriod()"
-          [disabled]="selectPeriodForm.invalid || isChangingPeriod">
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="changePeriod()"
+    [disabled]="selectPeriodForm.invalid || isChangingPeriod"
+    class="button--progress"
+  >
     <mat-progress-bar *ngIf="isChangingPeriod" mode="indeterminate"></mat-progress-bar>
     <ng-container i18n>Confirm</ng-container>
   </button>
-</div>
+</mat-dialog-actions>

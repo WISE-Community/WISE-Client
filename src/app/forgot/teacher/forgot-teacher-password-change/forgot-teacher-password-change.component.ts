@@ -1,46 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { finalize } from 'rxjs/operators';
-import { PasswordService } from '../../../services/password.service';
-import { passwordMatchValidator } from '../../../modules/shared/validators/password-match.validator';
+import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
+import { injectPasswordErrors } from '../../../common/password-helper';
+import { PasswordErrors } from '../../../domain/password/password-errors';
 
 @Component({
   selector: 'app-forgot-teacher-password-change',
   templateUrl: './forgot-teacher-password-change.component.html',
   styleUrls: ['./forgot-teacher-password-change.component.scss']
 })
-export class ForgotTeacherPasswordChangeComponent implements OnInit {
-  username: string;
-  verificationCode: string;
-  changePasswordFormGroup: FormGroup = this.fb.group(
-    {
-      newPassword: new FormControl('', [
-        Validators.required,
-        Validators.minLength(this.passwordService.minLength),
-        Validators.pattern(this.passwordService.pattern)
-      ]),
-      confirmNewPassword: new FormControl('', [Validators.required])
-    },
-    { validator: passwordMatchValidator }
-  );
+export class ForgotTeacherPasswordChangeComponent {
+  changePasswordFormGroup: FormGroup = this.fb.group({});
+  isSubmitButtonEnabled: boolean = true;
   message: string = '';
   processing: boolean = false;
-  isSubmitButtonEnabled: boolean = true;
   showForgotPasswordLink = false;
+  @Input() username: string = null;
+  @Input() verificationCode: string;
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private fb: FormBuilder,
-    private passwordService: PasswordService,
     private router: Router,
-    private route: ActivatedRoute,
     private teacherService: TeacherService
   ) {}
 
-  ngOnInit(): void {
-    this.username = this.route.snapshot.queryParamMap.get('username');
-    this.verificationCode = this.route.snapshot.queryParamMap.get('verificationCode');
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   submit(): void {
@@ -74,8 +63,7 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
     this.goToSuccessPage();
   }
 
-  private changePasswordError(error: any): void {
-    const formError: any = {};
+  private changePasswordError(error: PasswordErrors): void {
     switch (error.messageCode) {
       case 'tooManyVerificationCodeAttempts':
         this.setTooManyVerificationCodeAttemptsMessage();
@@ -92,17 +80,13 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
       case 'verificationCodeIncorrect':
         this.setVerificationCodeIncorrectMessage();
         break;
-      case 'invalidPasswordLength':
-        formError.minlength = true;
-        this.changePasswordFormGroup.get('newPassword').setErrors(formError);
-        break;
-      case 'invalidPasswordPattern':
-        formError.pattern = true;
-        this.changePasswordFormGroup.get('newPassword').setErrors(formError);
+      case 'invalidPassword':
+        injectPasswordErrors(this.changePasswordFormGroup, error);
         break;
       case 'passwordDoesNotMatch':
-        formError.passwordDoesNotMatch = true;
-        this.changePasswordFormGroup.get('confirmNewPassword').setErrors(formError);
+        this.changePasswordFormGroup
+          .get(NewPasswordAndConfirmComponent.CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors({ passwordDoesNotMatch: true });
         break;
       default:
         this.setErrorOccurredMessage();
@@ -110,11 +94,13 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
   }
 
   private getNewPassword(): string {
-    return this.getControlFieldValue('newPassword');
+    return this.getControlFieldValue(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME);
   }
 
   private getConfirmNewPassword(): string {
-    return this.getControlFieldValue('confirmNewPassword');
+    return this.getControlFieldValue(
+      NewPasswordAndConfirmComponent.CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME
+    );
   }
 
   private getControlField(fieldName: string): AbstractControl {

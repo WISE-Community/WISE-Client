@@ -1,0 +1,11 @@
+@import
+  'style/abstracts/variables',
+  'style/abstracts/functions';
+
+.step-title {
+  width: 320px;
+
+  @media (min-width: breakpoint('md.min')) {
+    width: 480px;
+  }
+}

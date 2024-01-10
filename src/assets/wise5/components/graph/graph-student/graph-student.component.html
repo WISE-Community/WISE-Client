@@ -1,36 +1,44 @@
 <component-header [component]="component"></component-header>
-<input type="file"
-     accept=".csv"
-     *ngIf="componentContent.enableFileUpload"
-     (change)="fileUploadChanged($event)"
-     [disabled]="isDisabled"/>
+<input
+  type="file"
+  accept=".csv"
+  *ngIf="componentContent.enableFileUpload"
+  (change)="fileUploadChanged($event)"
+  [disabled]="isDisabled"
+/>
 <div class="component__actions" fxLayout="row" fxLayoutGap="20px" *ngIf="showTrialSelect">
   <mat-form-field *ngIf="componentContent.enableTrials">
     <mat-label i18n>Select trials to show</mat-label>
-    <mat-select [(ngModel)]="trialIdsToShow"
-        (ngModelChange)="trialIdsToShowChanged()"
-        [disabled]="isDisabled"
-        multiple>
+    <mat-select
+      [(ngModel)]="trialIdsToShow"
+      (ngModelChange)="trialIdsToShowChanged()"
+      [disabled]="isDisabled"
+      multiple
+    >
       <mat-select-trigger>
         <ng-container *ngFor="let trial of trials">
           <span *ngIf="trialIdsToShow.includes(trial.id)">
-            {{trial.name}}<span *ngIf="trialIdsToShow.indexOf(trial.id) !== trialIdsToShow.length - 1">, </span>
+            {{ trial.name
+            }}<span *ngIf="trialIdsToShow.indexOf(trial.id) !== trialIdsToShow.length - 1">, </span>
           </span>
         </ng-container>
       </mat-select-trigger>
-      <mat-option *ngFor="let trial of trials; let trialIndex = index;"
-             [value]="trial.id"
-             (click)="trialCheckboxClicked()">
-        <span>{{trial.name}}</span>
+      <mat-option
+        *ngFor="let trial of trials; let trialIndex = index"
+        [value]="trial.id"
+        (click)="trialCheckboxClicked()"
+      >
+        <span>{{ trial.name }}</span>
         <span fxFlex></span>
         <button
-            mat-icon-button
-            (click)="deleteTrial(trialIndex)"
-            *ngIf="componentContent.canDeleteTrials"
-            class="delete-trial-button"
-            aria-label="Delete trial"
-            i18n-aria-label
-            [disabled]="isDisabled">
+          mat-icon-button
+          (click)="deleteTrial(trialIndex)"
+          *ngIf="componentContent.canDeleteTrials"
+          class="delete-trial-button"
+          aria-label="Delete trial"
+          i18n-aria-label
+          [disabled]="isDisabled"
+        >
           <mat-icon>delete</mat-icon>
         </button>
       </mat-option>
@@ -39,53 +47,51 @@
   <mat-form-field *ngIf="componentContent.enableTrials && showSelectActiveTrials()">
     <mat-label i18n>Select trial to edit</mat-label>
     <mat-select
-        [(ngModel)]="activeTrial"
-        (ngModelChange)="activeTrialChanged()"
-        class="graph-select"
-        [disabled]="isDisabled">
+      [(ngModel)]="activeTrial"
+      (ngModelChange)="activeTrialChanged()"
+      class="graph-select"
+      [disabled]="isDisabled"
+    >
       <ng-container *ngFor="let trial of trials">
-        <mat-option
-            *ngIf="trial.show && canEditTrial(trial)"
-            [value]="trial">
-          {{trial.name}}
+        <mat-option *ngIf="trial.show && canEditTrial(trial)" [value]="trial">
+          {{ trial.name }}
         </mat-option>
       </ng-container>
     </mat-select>
   </mat-form-field>
   <mat-form-field *ngIf="isShowSelectSeriesInput()">
     <mat-label i18n>Select series to edit</mat-label>
-    <mat-select [(ngModel)]="activeSeries"
-           (ngModelChange)="activeSeriesChanged()"
-           class="graph-select"
-           [disabled]="isDisabled">
-      <mat-option *ngFor="let series of series"
-          [value]="series">
-        {{series.name}}
+    <mat-select
+      [(ngModel)]="activeSeries"
+      (ngModelChange)="activeSeriesChanged()"
+      class="graph-select"
+      [disabled]="isDisabled"
+    >
+      <mat-option *ngFor="let series of series" [value]="series">
+        {{ series.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <div>
     <button
-        #hiddenButton
-        style="height:0; width:0; padding: 0; border: 0 none"
-        aria-role="none"
-        tabindex="-1"></button>
+      #hiddenButton
+      style="height: 0; width: 0; padding: 0; border: 0 none"
+      aria-role="none"
+      tabindex="-1"
+    ></button>
     <button
-        mat-button
-        *ngIf="isResetSeriesButtonVisible && activeSeries != null && activeSeries.canEdit"
-        color="accent"
-        (click)="resetSeries()"
-        [disabled]="isDisabled">
+      mat-button
+      *ngIf="isResetSeriesButtonVisible && activeSeries != null && activeSeries.canEdit"
+      color="accent"
+      (click)="resetSeries()"
+      [disabled]="isDisabled"
+    >
       <mat-icon>restore</mat-icon>
       <span i18n>Reset Series</span>
     </button>
   </div>
   <div *ngIf="showUndoButton">
-    <button
-        mat-button
-        color="accent"
-        (click)="undoClicked()"
-        [disabled]="isDisabled">
+    <button mat-button color="accent" (click)="undoClicked()" [disabled]="isDisabled">
       <mat-icon>undo</mat-icon>
       <span i18n>Undo</span>
     </button>
@@ -93,112 +99,120 @@
 </div>
 <div class="component__actions">
   <button
-      mat-button
-      color="accent"
-      (click)="newTrialButtonClicked()"
-      *ngIf="componentContent.canCreateNewTrials"
-      [disabled]="isDisabled">
+    mat-button
+    color="accent"
+    (click)="newTrialButtonClicked()"
+    *ngIf="componentContent.canCreateNewTrials"
+    [disabled]="isDisabled"
+  >
     <mat-icon>add</mat-icon>
     <span i18n>New Trial</span>
   </button>
   <button
-      mat-button
-      color="accent"
-      *ngIf="isAddToNotebookEnabled()"
-      (click)="snipGraph()"
-      [disabled]="isDisabled">
+    mat-button
+    color="accent"
+    *ngIf="isAddToNotebookEnabled()"
+    (click)="snipGraph()"
+    [disabled]="isDisabled"
+  >
     <mat-icon>note_add</mat-icon>
     <span i18n>Add to Notebook</span>
   </button>
   <button
-      mat-button
-      color="accent"
-      *ngIf="isStudentAttachmentEnabled"
-      (click)="showStudentAssets()"
-      [disabled]="isDisabled">
+    mat-button
+    color="accent"
+    *ngIf="isStudentAttachmentEnabled"
+    (click)="showStudentAssets()"
+    [disabled]="isDisabled"
+  >
     <mat-icon>image</mat-icon>
     <span i18n>Import Data</span>
   </button>
 </div>
 <div fxLayout="column">
   <div fxLayout="row">
-    <div fxLayout="column"
-       class="y-limit-column"
-       *ngIf="!yAxisLocked">
+    <div fxLayout="column" class="y-limit-column" *ngIf="!yAxisLocked">
       <mat-form-field class="limit-input" appearance="fill">
         <mat-label i18n>Y Max</mat-label>
         <input
-            matInput
-            type="number"
-            [(ngModel)]="yAxis.max"
-            (ngModelChange)="studentDataChanged()"
-            [disabled]="isDisabled"/>
+          matInput
+          type="number"
+          [(ngModel)]="yAxis.max"
+          (ngModelChange)="studentDataChanged()"
+          [disabled]="isDisabled"
+        />
       </mat-form-field>
       <span fxFlex></span>
       <mat-form-field class="limit-input" appearance="fill">
         <mat-label i18n>Y Min</mat-label>
         <input
-            matInput
-            type="number"
-            [(ngModel)]="yAxis.min"
-            (ngModelChange)="studentDataChanged()"
-            [disabled]="isDisabled"/>
+          matInput
+          type="number"
+          [(ngModel)]="yAxis.min"
+          (ngModelChange)="studentDataChanged()"
+          [disabled]="isDisabled"
+        />
       </mat-form-field>
     </div>
     <div class="highcharts-container" [class.invisible]="!isLoaded" (click)="focusOnComponent()">
       <highcharts-chart
-          id="{{chartId}}"
-          [Highcharts]="Highcharts"
-          [options]="chartConfig"
-          [callbackFunction]="chartCallback"
-          [(update)]="updateFlag"
-          [oneToOne]="true">
+        [id]="chartId"
+        [Highcharts]="Highcharts"
+        [options]="chartConfig"
+        [callbackFunction]="chartCallback"
+        [(update)]="updateFlag"
+        [oneToOne]="true"
+      >
       </highcharts-chart>
     </div>
   </div>
-  <div fxLayout="row"
-     *ngIf="!componentContent.xAxis.locked">
-    <div fxLayout="row"
-        class="x-limit-row">
+  <div fxLayout="row" *ngIf="!componentContent.xAxis.locked">
+    <div fxLayout="row" class="x-limit-row">
       <div class="limit-input"></div>
       <mat-form-field class="limit-input" appearance="fill">
         <mat-label i18n>X Min</mat-label>
         <input
-            matInput
-            type="number"
-            [(ngModel)]="xAxis.min"
-            (ngModelChange)="studentDataChanged()"
-            [disabled]="isDisabled"/>
+          matInput
+          type="number"
+          [(ngModel)]="xAxis.min"
+          (ngModelChange)="studentDataChanged()"
+          [disabled]="isDisabled"
+        />
       </mat-form-field>
       <span fxFlex></span>
       <mat-form-field class="limit-input" appearance="fill">
         <mat-label i18n>X Max</mat-label>
         <input
-            matInput
-            type="number"
-            [(ngModel)]="xAxis.max"
-            (ngModelChange)="studentDataChanged()"
-            [disabled]="isDisabled"/>
+          matInput
+          type="number"
+          [(ngModel)]="xAxis.max"
+          (ngModelChange)="studentDataChanged()"
+          [disabled]="isDisabled"
+        />
       </mat-form-field>
     </div>
   </div>
 </div>
-<component-save-submit-buttons *ngIf="isSaveOrSubmitButtonVisible"
-    [componentState]="latestComponentState"
-    [isDirty]="isDirty"
-    [isDisabled]="isDisabled"
-    [isSaveButtonVisible]="isSaveButtonVisible"
-    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-    [isSubmitButtonVisible]="isSubmitButtonVisible"
-    [isSubmitDirty]="isSubmitDirty"
-    (saveButtonClicked)="saveButtonClicked($event)"
-    (submitButtonClicked)="submitButtonClicked($event)">
+<component-save-submit-buttons
+  *ngIf="isSaveOrSubmitButtonVisible"
+  [componentState]="latestComponentState"
+  [isDirty]="isDirty"
+  [isDisabled]="isDisabled"
+  [isSaveButtonVisible]="isSaveButtonVisible"
+  [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+  [isSubmitButtonVisible]="isSubmitButtonVisible"
+  [isSubmitDirty]="isSubmitDirty"
+  (saveButtonClicked)="saveButtonClicked($event)"
+  (submitButtonClicked)="submitButtonClicked($event)"
+>
 </component-save-submit-buttons>
-<component-annotations *ngIf="mode === 'student'"
-    [annotations]="latestAnnotations"
-    [maxScore]="componentContent.maxScore"
-    [nodeId]="nodeId"
-    [componentId]="componentId">
+<component-annotations
+  *ngIf="mode === 'student'"
+  [annotations]="latestAnnotations"
+  [maxScore]="componentContent.maxScore"
+  [nodeId]="nodeId"
+  [componentId]="componentId"
+>
 </component-annotations>
 <div class="canvas-div">
   <canvas [id]="hiddenCanvasId"></canvas>

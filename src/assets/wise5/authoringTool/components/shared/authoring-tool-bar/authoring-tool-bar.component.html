@@ -1,0 +1,19 @@
+<mat-toolbar class="mat-elevation-z1 toolbar">
+  <div class="toolbar__tools" fxLayout="row wrap" fxLayoutAlign="start center">
+    <button mat-icon-button aria-label="Authoring Tool Menu" i18n-aria-label (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span *ngIf="!showStepTools" class="toolbar__title">{{ viewName }}</span>
+    <step-tools *ngIf="showStepTools"></step-tools>
+    <div fxFlex></div>
+    <span *ngIf="isJSONValid" class="success" fxLayoutAlign="start center">
+      <mat-icon>done</mat-icon>
+      <span>JSON Valid</span></span
+    >
+    <span *ngIf="isJSONValid === false" class="warn" fxLayoutAlign="start center">
+      <mat-icon>clear</mat-icon>
+      <span>JSON Invalid</span>
+    </span>
+    <save-indicator></save-indicator>
+  </div>
+</mat-toolbar>

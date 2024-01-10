@@ -1,21 +1,32 @@
 <mat-card class="period" cdkDropListGroup>
-  <div class="period-header" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
-    <h2 class="mat-display-1 accent-1"
+  <mat-card-content>
+    <div class="period-header" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <h2
+        class="mat-headline-4 accent-1"
         fxLayout="row wrap"
         fxLayoutAlign="start end"
-        fxLayoutGap="8px">
-      <span i18n>Period {{period.periodName}}</span>
-      <span class="mat-body-1 period-info" i18n>
-        Students: {{students.size}} | Teams: {{teams.size}}
-      </span>
-    </h2>
-    <span fxFlex></span>
-    <add-team-button *ngIf="unassignedTeam.users.length > 0 || teams.size > 0" [period]="period"></add-team-button>
-  </div>
-  <manage-team class="unassigned-team" *ngIf="unassignedTeam.users.length > 0" [team]="unassignedTeam"></manage-team>
-  <manage-teams [teams]="teams"></manage-teams>
-  <ng-container *ngIf="emptyTeams.size > 0">
-    <h3 class="mat-body-2 secondary-text" i18n>Empty Teams</h3>
-    <manage-teams [teams]="emptyTeams"></manage-teams>
-  </ng-container>
+        fxLayoutGap="8px"
+      >
+        <span i18n>Period {{ period.periodName }}</span>
+        <span class="mat-body-2 period-info" i18n>
+          Students: {{ students.size }} | Teams: {{ teams.size }}
+        </span>
+      </h2>
+      <span fxFlex></span>
+      <add-team-button
+        *ngIf="unassignedTeam.users.length > 0 || teams.size > 0"
+        [period]="period"
+      ></add-team-button>
+    </div>
+    <manage-team
+      class="unassigned-team"
+      *ngIf="unassignedTeam.users.length > 0"
+      [team]="unassignedTeam"
+    ></manage-team>
+    <manage-teams [teams]="teams"></manage-teams>
+    <ng-container *ngIf="emptyTeams.size > 0">
+      <h3 class="mat-subtitle-2 secondary-text" i18n>Empty Teams</h3>
+      <manage-teams [teams]="emptyTeams"></manage-teams>
+    </ng-container>
+  </mat-card-content>
 </mat-card>

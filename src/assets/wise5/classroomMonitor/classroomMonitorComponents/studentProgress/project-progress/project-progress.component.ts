@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'project-progress',
   templateUrl: './project-progress.component.html',
-  styleUrls: ['./project-progress.component.scss']
+  styleUrls: ['./project-progress.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ProjectProgressComponent implements OnInit {
   @Input() completed: number;

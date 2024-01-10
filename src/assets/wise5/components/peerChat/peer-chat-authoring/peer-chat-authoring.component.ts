@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import peerChatLogicOptions from './peer-chat-logic-options';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'peer-chat-authoring',
   templateUrl: './peer-chat-authoring.component.html',
   styleUrls: ['./peer-chat-authoring.component.scss']
 })
-export class PeerChatAuthoringComponent extends ComponentAuthoring {
+export class PeerChatAuthoringComponent extends AbstractComponentAuthoring {
   allowedComponentTypes: string[] = [
     'ConceptMap',
     'Draw',
@@ -27,7 +27,7 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
 
   constructor(
     protected configService: ConfigService,
-    protected nodeService: NodeService,
+    protected nodeService: TeacherNodeService,
     protected projectAssetService: ProjectAssetService,
     protected projectService: TeacherProjectService
   ) {

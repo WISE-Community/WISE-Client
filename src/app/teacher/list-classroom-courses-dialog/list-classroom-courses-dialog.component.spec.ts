@@ -3,15 +3,10 @@ import { ListClassroomCoursesDialogComponent } from './list-classroom-courses-di
 import { TeacherService } from '../teacher.service';
 import { UserService } from '../../services/user.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogRef,
-  MatDialogModule
-} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { User } from '../../domain/user';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -35,29 +30,31 @@ describe('ListClassroomCoursesDialogComponent', () => {
   let component: ListClassroomCoursesDialogComponent;
   let fixture: ComponentFixture<ListClassroomCoursesDialogComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, MatCheckboxModule, OverlayModule, MatDialogModule],
-      declarations: [ListClassroomCoursesDialogComponent],
-      providers: [
-        { provide: MatDialogRef, useValue: { close: () => {} } },
-        {
-          provide: MAT_DIALOG_DATA,
-          useValue: {
-            run: {
-              id: 1,
-              name: 'Test',
-              accessCode: 'Test123'
-            },
-            courses: [{ id: '1', name: 'Test' }]
-          }
-        },
-        { provide: TeacherService, useClass: MockTeacherService },
-        { provide: UserService, useClass: MockUserService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [ReactiveFormsModule, MatCheckboxModule, OverlayModule, MatDialogModule],
+        declarations: [ListClassroomCoursesDialogComponent],
+        providers: [
+          { provide: MatDialogRef, useValue: { close: () => {} } },
+          {
+            provide: MAT_DIALOG_DATA,
+            useValue: {
+              run: {
+                id: 1,
+                name: 'Test',
+                accessCode: 'Test123'
+              },
+              courses: [{ id: '1', name: 'Test' }]
+            }
+          },
+          { provide: TeacherService, useClass: MockTeacherService },
+          { provide: UserService, useClass: MockUserService }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ListClassroomCoursesDialogComponent);

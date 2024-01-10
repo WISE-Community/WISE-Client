@@ -23,7 +23,6 @@ export class AppComponent {
   mediaWatcher: Subscription;
   googleAnalyticsId: string = null;
   hasAnnouncement: boolean = false;
-  isShowUIView: boolean = false;
   showDefaultMode: boolean = true;
   showHeaderAndFooter: boolean = true;
   popstate: boolean = false;
@@ -128,7 +127,6 @@ export class AppComponent {
       if (ev instanceof NavigationEnd) {
         this.showDefaultMode = this.isShowDefaultMode();
         this.showHeaderAndFooter = this.isShowHeaderAndFooter();
-        this.isShowUIView = this.isTeacherAngularJSPath();
         this.setTheme();
         this.scroll = false;
       }
@@ -150,15 +148,9 @@ export class AppComponent {
       const script = this.document.createElement('script');
       script.innerHTML = `window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());`;
+          gtag('js', new Date());
+          gtag('config', '${this.googleAnalyticsId}');`;
       this.document.head.appendChild(script);
-      gtag('config', this.googleAnalyticsId, { page_path: this.router.url });
-
-      this.router.events.subscribe((ev: any) => {
-        if (ev instanceof NavigationEnd) {
-          gtag('config', this.googleAnalyticsId, { page_path: ev.urlAfterRedirects });
-        }
-      });
     }
   }
 
@@ -199,7 +191,7 @@ export class AppComponent {
   }
 
   private isTeacherAngularJSPath(): boolean {
-    return this.router.url.includes('/teacher/manage') || this.router.url.includes('/teacher/edit');
+    return this.router.url.includes('/teacher/edit') || this.router.url.includes('/teacher/manage');
   }
 
   setTheme() {

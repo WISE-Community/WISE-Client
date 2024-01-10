@@ -1,7 +1,7 @@
 @import
-  '~@angular/material/theming',
-  '~style/abstracts/functions',
-  '~style/abstracts/variables';
+  '@angular/material/theming',
+  'style/abstracts/functions',
+  'style/abstracts/variables';
 
 @mixin selected {
   background-color: #000000;
@@ -12,7 +12,7 @@
   color: #ffffff;
 }
 
-.mat-chip {
+.mat-mdc-chip {
   cursor: pointer;
 }
 
@@ -22,6 +22,7 @@
 }
 
 .icon-choice, .ki-choice {
+  /* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version. */
   &.mat-chip-selected {
     @include selected;
   }
@@ -29,7 +30,7 @@
 
 .color-choice {
   width: 32px;
-
+  /* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version. */
   &.mat-chip-selected {
     border: 4px solid #000000;
   }

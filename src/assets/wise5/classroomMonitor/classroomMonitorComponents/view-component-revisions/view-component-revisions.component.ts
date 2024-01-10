@@ -3,6 +3,7 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'view-component-revisions.component',
@@ -23,9 +24,9 @@ export class ViewComponentRevisionsComponent {
   workgroupId: number;
 
   constructor(
-    private AnnotationService: AnnotationService,
-    private ConfigService: ConfigService,
-    private TeacherDataService: TeacherDataService,
+    private annotationService: AnnotationService,
+    private configService: ConfigService,
+    private dataService: TeacherDataService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -35,7 +36,7 @@ export class ViewComponentRevisionsComponent {
     this.fromWorkgroupId = this.data.fromWorkgroupId;
     this.nodeId = this.data.nodeId;
     this.workgroupId = this.data.workgroupId;
-    this.usernames = this.ConfigService.getDisplayNamesByWorkgroupId(this.workgroupId);
+    this.usernames = this.configService.getDisplayNamesByWorkgroupId(this.workgroupId);
     this.populateData();
   }
 
@@ -44,10 +45,10 @@ export class ViewComponentRevisionsComponent {
    * A component state counts as a revision if it is a submit, has an annotation associated
    * with it, or is the last component state for a node visit.
    */
-  populateData() {
+  private populateData(): void {
     this.revisions = {};
     this.totalRevisions = 0;
-    this.getNodeEnteredEvents().then(({ events }) => {
+    this.getNodeEnteredEvents().subscribe(({ events }) => {
       const nodeVisits = events.map((event) => {
         return {
           serverSaveTime: event.serverSaveTime,
@@ -92,7 +93,7 @@ export class ViewComponentRevisionsComponent {
         } else if (state.isSubmit) {
           isRevision = true;
         } else {
-          for (const annotation of this.AnnotationService.getAnnotationsByStudentWorkId(state.id)) {
+          for (const annotation of this.annotationService.getAnnotationsByStudentWorkId(state.id)) {
             if (['score', 'autoScore', 'comment', 'autoComment'].includes(annotation.type)) {
               isRevision = true; // is revision if there is an annotation for the component
               break;
@@ -117,21 +118,20 @@ export class ViewComponentRevisionsComponent {
     });
   }
 
-  getNodeEnteredEvents() {
-    const params = {
+  private getNodeEnteredEvents(): Observable<any> {
+    return this.dataService.retrieveStudentData({
       getAnnotations: false,
       getEvents: true,
       getStudentWork: false,
       event: 'nodeEntered',
       nodeId: this.nodeId,
       workgroupId: this.workgroupId,
-      runId: this.ConfigService.getRunId()
-    };
-    return this.TeacherDataService.retrieveStudentData(params);
+      runId: this.configService.getRunId()
+    });
   }
 
   convertToClientTimestamp(time: number) {
-    return this.ConfigService.convertToClientTimestamp(time);
+    return this.configService.convertToClientTimestamp(time);
   }
 
   showMore() {

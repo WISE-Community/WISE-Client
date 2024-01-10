@@ -9,7 +9,7 @@ export class AddToNotebookButton {
   isDisabled: boolean;
 
   @Output()
-  snipImage = new EventEmitter();
+  snipImage = new EventEmitter<void>();
 
   addToNotebook() {
     this.snipImage.next();

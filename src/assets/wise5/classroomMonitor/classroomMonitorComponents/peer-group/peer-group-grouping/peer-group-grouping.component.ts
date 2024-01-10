@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfigService } from '../../../../services/configService';
 import { PeerGroupWorkgroupsContainerComponent } from '../peer-group-workgroups-container/peer-group-workgroups-container.component';
+import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 
 @Component({
   selector: 'peer-group-grouping',
@@ -13,11 +13,11 @@ export class PeerGroupGroupingComponent extends PeerGroupWorkgroupsContainerComp
 
   avatarColor: string;
 
-  constructor(private ConfigService: ConfigService, protected dialog: MatDialog) {
+  constructor(protected dialog: MatDialog) {
     super(dialog);
   }
 
   ngOnInit(): void {
-    this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.grouping.id);
+    this.avatarColor = getAvatarColorForWorkgroupId(this.grouping.id);
   }
 }

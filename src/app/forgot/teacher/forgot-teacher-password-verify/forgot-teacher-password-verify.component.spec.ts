@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotTeacherPasswordVerifyComponent } from './forgot-teacher-password-verify.component';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable } from 'rxjs/index';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 export class MockTeacherService {
@@ -44,8 +44,7 @@ describe('ForgotTeacherPasswordVerifyComponent', () => {
   };
 
   const getErrorMessage = () => {
-    const errorMessageDiv = fixture.debugElement.nativeElement.querySelector('.error-message');
-    return errorMessageDiv.textContent;
+    return fixture.debugElement.nativeElement.querySelector('.warn').textContent;
   };
 
   beforeEach(() => {

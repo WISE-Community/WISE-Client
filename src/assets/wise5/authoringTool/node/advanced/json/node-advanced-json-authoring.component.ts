@@ -1,55 +1,57 @@
-import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import * as angular from 'angular';
 import { NotificationService } from '../../../../services/notificationService';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  templateUrl: 'node-advanced-json-authoring.component.html'
+  selector: 'node-advanced-json-authoring',
+  templateUrl: './node-advanced-json-authoring.component.html'
 })
-export class NodeAdvancedJsonAuthoringComponent {
-  node: any;
-  nodeContentJSONString: string;
-  nodeContentChanged: Subject<string> = new Subject<string>();
-  nodeContentChangedSubscription: Subscription;
-  nodeId: string;
+export class NodeAdvancedJsonAuthoringComponent implements OnInit {
+  protected node: any;
+  protected nodeContentJSONString: string;
+  protected nodeContentChanged: Subject<string> = new Subject<string>();
+  protected nodeContentChangedSubscription: Subscription;
+  protected nodeId: string;
 
   constructor(
-    private NotificationService: NotificationService,
-    private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService
+    private notificationService: NotificationService,
+    private projectService: TeacherProjectService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.nodeId = this.TeacherDataService.getCurrentNodeId();
-    this.node = this.ProjectService.getNodeById(this.nodeId);
-    this.nodeContentJSONString = angular.toJson(this.node, 4);
-    this.NotificationService.showJSONValidMessage();
-    this.nodeContentChangedSubscription = this.nodeContentChanged
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe((newText) => {
-        this.nodeContentJSONString = newText;
-        this.autoSaveJSON();
-      });
+    this.route.parent.parent.params.subscribe((params) => {
+      this.nodeId = params.nodeId;
+      this.node = this.projectService.getNodeById(this.nodeId);
+      this.nodeContentJSONString = JSON.stringify(this.node, null, 4);
+      this.notificationService.showJSONValidMessage();
+      this.nodeContentChangedSubscription = this.nodeContentChanged
+        .pipe(debounceTime(1000), distinctUntilChanged())
+        .subscribe((newText) => {
+          this.nodeContentJSONString = newText;
+          this.autoSaveJSON();
+        });
+    });
   }
 
   ngOnDestroy() {
     this.nodeContentChangedSubscription.unsubscribe();
   }
 
-  autoSaveJSON() {
+  protected autoSaveJSON(): void {
     try {
-      const updatedNode = angular.fromJson(this.nodeContentJSONString);
+      const updatedNode = JSON.parse(this.nodeContentJSONString);
       this.node = updatedNode;
-      this.ProjectService.setNode(this.nodeId, updatedNode);
-      this.ProjectService.saveProject().then(() => {
-        this.ProjectService.refreshProject();
+      this.projectService.setNode(this.nodeId, updatedNode);
+      this.projectService.saveProject().then(() => {
+        this.projectService.refreshProject();
       });
-      this.NotificationService.showJSONValidMessage();
+      this.notificationService.showJSONValidMessage();
     } catch (e) {
-      this.NotificationService.showJSONInvalidMessage();
+      this.notificationService.showJSONInvalidMessage();
     }
   }
 }

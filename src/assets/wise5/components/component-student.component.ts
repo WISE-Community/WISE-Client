@@ -4,6 +4,7 @@ import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { ComponentState } from '../../../app/domain/componentState';
 import { Component } from '../common/Component';
+import { copy } from '../common/object/object';
 import { GenerateImageDialogComponent } from '../directives/generate-image-dialog/generate-image-dialog.component';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
@@ -11,12 +12,12 @@ import { NodeService } from '../services/nodeService';
 import { NotebookService } from '../services/notebookService';
 import { StudentAssetService } from '../services/studentAssetService';
 import { StudentDataService } from '../services/studentDataService';
-import { UtilService } from '../services/utilService';
 import { StudentAssetsDialogComponent } from '../vle/studentAsset/student-assets-dialog/student-assets-dialog.component';
 import { StudentAssetRequest } from '../vle/studentAsset/StudentAssetRequest';
 import { ComponentService } from './componentService';
 import { ComponentStateRequest } from './ComponentStateRequest';
 import { ComponentStateWrapper } from './ComponentStateWrapper';
+import { Annotation } from '../common/Annotation';
 
 @Directive()
 export abstract class ComponentStudent {
@@ -62,8 +63,7 @@ export abstract class ComponentStudent {
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
+    protected StudentDataService: StudentDataService
   ) {}
 
   ngOnInit(): void {
@@ -120,9 +120,9 @@ export abstract class ComponentStudent {
     this.subscribeToRequestComponentState();
   }
 
-  subscribeToAnnotationSavedToServer() {
+  private subscribeToAnnotationSavedToServer(): void {
     this.subscriptions.add(
-      this.AnnotationService.annotationSavedToServer$.subscribe(({ annotation }) => {
+      this.AnnotationService.annotationSavedToServer$.subscribe((annotation: Annotation) => {
         if (this.isForThisComponent(annotation)) {
           this.latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
             this.nodeId,
@@ -185,7 +185,11 @@ export abstract class ComponentStudent {
     // overridden by children
   }
 
-  isForThisComponent(object: any) {
+  protected isSameComponent(component: Component): boolean {
+    return component.nodeId === this.nodeId && component.content.id === this.componentId;
+  }
+
+  isForThisComponent(object: any): boolean {
     return this.nodeId === object.nodeId && this.componentId === object.componentId;
   }
 
@@ -193,21 +197,25 @@ export abstract class ComponentStudent {
     return componentState.workgroupId !== this.ConfigService.getWorkgroupId();
   }
 
-  subscribeToAttachStudentAsset() {
+  protected subscribeToAttachStudentAsset(): void {
     this.subscriptions.add(
       this.StudentAssetService.attachStudentAsset$.subscribe(
         (studentAssetRequest: StudentAssetRequest) => {
-          if (this.isForThisComponent(studentAssetRequest)) {
-            this.copyAndAttachStudentAsset(studentAssetRequest.asset);
+          if (this.isSameComponent(studentAssetRequest.component)) {
+            this.doAttachStudentAsset(studentAssetRequest);
           }
         }
       )
     );
   }
 
+  protected doAttachStudentAsset(studentAssetRequest: StudentAssetRequest): void {
+    this.copyAndAttachStudentAsset(studentAssetRequest.asset);
+  }
+
   generateStarterState() {}
 
-  copyAndAttachStudentAsset(studentAsset: any): any {
+  private copyAndAttachStudentAsset(studentAsset: any): void {
     this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset: any) => {
       const attachment = {
         studentAssetId: copiedAsset.id,
@@ -351,7 +359,7 @@ export abstract class ComponentStudent {
           connectedComponent.componentId
         );
         if (componentState != null) {
-          componentStates.push(this.UtilService.makeCopyOfJSONObject(componentState));
+          componentStates.push(copy(componentState));
         }
         if (connectedComponent.type === 'showWork') {
           this.isDisabled = true;
@@ -396,7 +404,7 @@ export abstract class ComponentStudent {
     this.createComponentState(action).then((componentState: any) => {
       this.StudentDataService.setDummyIdIntoLocalId(componentState);
       this.StudentDataService.setDummyServerSaveTimeIntoLocalServerSaveTime(componentState);
-      this.handleStudentWorkSavedToServer({ studentWork: componentState });
+      this.handleStudentWorkSavedToServer(componentState);
     });
   }
 
@@ -449,7 +457,7 @@ export abstract class ComponentStudent {
   }
 
   getMaxSubmitCount(): number {
-    return this.componentContent.maxSubmitCount;
+    return this.component.content.maxSubmitCount;
   }
 
   setIsSubmit(isSubmit: boolean): void {
@@ -640,20 +648,17 @@ export abstract class ComponentStudent {
     return this.NotebookService.isStudentNoteClippingEnabled();
   }
 
-  showStudentAssets() {
+  protected showStudentAssets(): void {
     this.dialog.open(StudentAssetsDialogComponent, {
-      data: {
-        nodeId: this.nodeId,
-        componentId: this.componentId
-      },
+      data: this.component,
       panelClass: 'dialog-md'
     });
   }
 
   importWorkAsBackground(componentState: any): void {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
+    const connectedComponent = this.component.getConnectedComponent(
+      componentState.nodeId,
+      componentState.componentId
     );
     if (connectedComponent.importWorkAsBackground) {
       this.setComponentStateAsBackgroundImage(componentState);
@@ -726,14 +731,6 @@ export abstract class ComponentStudent {
       this.ConfigService.getWorkgroupId(),
       data
     );
-  }
-
-  updateLatestScoreAnnotation(annotation: any): void {
-    this.latestAnnotations.score = annotation;
-  }
-
-  updateLatestCommentAnnotation(annotation: any): void {
-    this.latestAnnotations.comment = annotation;
   }
 
   registerNotebookItemChosenListener(): void {

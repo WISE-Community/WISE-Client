@@ -1,51 +1,57 @@
 <div class="step-tools" fxLayout="row" fxLayoutAlign="center center">
-  <button id="previousNodeButton"
-      mat-icon-button
-      aria-label="Previous Step"
-      i18n-aria-label
-      [disabled]="!prevId"
-      (click)="goToPrevNode()"
-      matTooltip="Previous Step"
-      i18n-matTooltip
-      matTooltipPosition="below">
-    <mat-icon>{{icons.prev}}</mat-icon>
+  <button
+    id="previousNodeButton"
+    mat-icon-button
+    aria-label="Previous Step"
+    i18n-aria-label
+    [disabled]="!prevId"
+    (click)="goToPrevNode()"
+    matTooltip="Previous Step"
+    i18n-matTooltip
+    matTooltipPosition="below"
+  >
+    <mat-icon>{{ icons.prev }}</mat-icon>
   </button>
   <node-icon *ngIf="nodeId" [nodeId]="nodeId" size="18"></node-icon>&nbsp;
-  <mat-select id="stepSelectMenu"
-      class="mat-button notice-bg-bg"
+  <mat-form-field appearance="fill">
+    <mat-select
+      id="stepSelectMenu"
       [panelClass]="'select-panel-full-height'"
       aria-label="Select a Step"
       i18n-aria-label
       placeholder="Select a Step"
       i18n-placeholder
       [(ngModel)]="nodeId"
-      (selectionChange)="nodeChanged()">
-    <mat-select-trigger>
-      <ng-container *ngIf="nodeId">
-        {{ getNodePositionAndTitle(nodeId) }}
-      </ng-container>
-      <ng-container *ngIf="!nodeId" i18n>
-        Select a Step
-      </ng-container>
-    </mat-select-trigger>
-    <mat-option *ngFor="let nodeId of nodeIds" [value]="nodeId"
-        class="node-select-option"
-        [ngClass]="{'step': !isGroupNode(nodeId)}">
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-        <node-icon [nodeId]="nodeId" size="18"></node-icon>
-        <span>{{ getNodePositionAndTitle(nodeId) }}</span>
-      </div>
-    </mat-option>
-  </mat-select>
-  <button id="nextNodeButton"
-      mat-icon-button
-      aria-label="Next Step"
-      i18n-aria-label
-      [disabled]="!nextId"
-      (click)="goToNextNode()"
-      matTooltip="Next Step"
-      i18n-matTooltip
-      matTooltipPosition="below">
-    <mat-icon>{{icons.next}}</mat-icon>
+      hideSingleSelectionIndicator="true"
+      (selectionChange)="nodeChanged()"
+    >
+      <mat-select-trigger>
+        <ng-container *ngIf="nodeId">
+          {{ getNodePositionAndTitle(nodeId) }}
+        </ng-container>
+        <ng-container *ngIf="!nodeId" i18n> Select a Step </ng-container>
+      </mat-select-trigger>
+      <mat-option *ngFor="let nodeId of nodeIds" [value]="nodeId" class="node-select-option">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+          <node-icon [nodeId]="nodeId" size="18"></node-icon>
+          <span [ngClass]="{ strong: isGroupNode(nodeId) }">{{
+            getNodePositionAndTitle(nodeId)
+          }}</span>
+        </div>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button
+    id="nextNodeButton"
+    mat-icon-button
+    aria-label="Next Step"
+    i18n-aria-label
+    [disabled]="!nextId"
+    (click)="goToNextNode()"
+    matTooltip="Next Step"
+    i18n-matTooltip
+    matTooltipPosition="below"
+  >
+    <mat-icon>{{ icons.next }}</mat-icon>
   </button>
 </div>

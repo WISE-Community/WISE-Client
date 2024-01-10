@@ -1,42 +1,40 @@
 'use strict';
-import * as angular from 'angular';
 import { ProjectService } from './projectService';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { UtilService } from './utilService';
 import { BranchService } from './branchService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { PathService } from './pathService';
-import { RandomKeyService } from './randomKeyService';
+import { copy } from '../common/object/object';
+import { generateRandomKey } from '../common/string/string';
+import { branchPathBackgroundColors } from '../common/color/color';
+import { reduceByUniqueId } from '../common/array/array';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
-  private componentChangedSource: Subject<boolean> = new Subject<boolean>();
-  public componentChanged$: Observable<boolean> = this.componentChangedSource.asObservable();
+  private componentChangedSource: Subject<void> = new Subject<void>();
+  public componentChanged$: Observable<void> = this.componentChangedSource.asObservable();
   private nodeChangedSource: Subject<boolean> = new Subject<boolean>();
   public nodeChanged$: Observable<boolean> = this.nodeChangedSource.asObservable();
   private refreshProjectSource: Subject<void> = new Subject<void>();
   public refreshProject$ = this.refreshProjectSource.asObservable();
-  private scrollToBottomOfPageSource: Subject<void> = new Subject<void>();
-  public scrollToBottomOfPage$ = this.scrollToBottomOfPageSource.asObservable();
-  private errorSavingProjectSource: Subject<any> = new Subject<any>();
-  public errorSavingProject$: Observable<any> = this.errorSavingProjectSource.asObservable();
-  private notAllowedToEditThisProjectSource: Subject<any> = new Subject<any>();
-  public notAllowedToEditThisProject$: Observable<any> = this.notAllowedToEditThisProjectSource.asObservable();
-  private projectSavedSource: Subject<any> = new Subject<any>();
-  public projectSaved$: Observable<any> = this.projectSavedSource.asObservable();
-  private savingProjectSource: Subject<any> = new Subject<any>();
-  public savingProject$: Observable<any> = this.savingProjectSource.asObservable();
+  private errorSavingProjectSource: Subject<void> = new Subject<void>();
+  public errorSavingProject$: Observable<void> = this.errorSavingProjectSource.asObservable();
+  private notAllowedToEditThisProjectSource: Subject<void> = new Subject<void>();
+  public notAllowedToEditThisProject$: Observable<void> = this.notAllowedToEditThisProjectSource.asObservable();
+  private projectSavedSource: Subject<void> = new Subject<void>();
+  public projectSaved$: Observable<void> = this.projectSavedSource.asObservable();
+  private savingProjectSource: Subject<void> = new Subject<void>();
+  public savingProject$: Observable<void> = this.savingProjectSource.asObservable();
 
   constructor(
     protected branchService: BranchService,
     protected componentServiceLookupService: ComponentServiceLookupService,
     protected http: HttpClient,
     protected configService: ConfigService,
-    protected pathService: PathService,
-    private utilService: UtilService
+    protected pathService: PathService
   ) {
     super(branchService, componentServiceLookupService, http, configService, pathService);
   }
@@ -64,6 +62,9 @@ export class TeacherProjectService extends ProjectService {
               fontSet: 'material-icons',
               fontName: 'info'
             }
+          },
+          transitionLogic: {
+            transitions: []
           }
         },
         {
@@ -238,27 +239,11 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Replace a component
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @param component the new component
-   */
-  replaceComponent(nodeId, componentId, component) {
-    const components = this.getComponents(nodeId);
-    for (let c = 0; c < components.length; c++) {
-      if (components[c].id === componentId) {
-        components[c] = component;
-        break;
-      }
-    }
-  }
-
-  /**
    * Create a new group
    * @param title the title of the group
    * @returns the group object
    */
-  createGroup(title) {
+  createGroup(title: string): any {
     return {
       id: this.getNextAvailableGroupId(),
       type: 'group',
@@ -583,22 +568,6 @@ export class TeacherProjectService extends ProjectService {
     return numRubrics;
   }
 
-  /**
-   * Delete a component from a node
-   * @param nodeId the node id containing the node
-   * @param componentId the component id
-   */
-  deleteComponent(nodeId, componentId) {
-    const node = this.getNodeById(nodeId);
-    const components = node.components;
-    for (let c = 0; c < components.length; c++) {
-      if (components[c].id === componentId) {
-        components.splice(c, 1);
-        break;
-      }
-    }
-  }
-
   deleteTransition(node, transition) {
     const nodeTransitions = node.transitionLogic.transitions;
     const index = nodeTransitions.indexOf(transition);
@@ -614,13 +583,14 @@ export class TeacherProjectService extends ProjectService {
     }
   }
 
-  /**
-   * Get the branch path letter
-   * @param nodeId get the branch path letter for this node if it is in a branch
-   * @return the branch path letter for the node if it is in a branch
-   */
-  getBranchPathLetter(nodeId) {
-    return this.nodeIdToBranchPathLetter[nodeId];
+  getBackgroundColor(nodeId: string): string {
+    const branchPathLetter = this.nodeIdToBranchPathLetter[nodeId];
+    if (branchPathLetter != null) {
+      const letterASCIICode = branchPathLetter.charCodeAt(0);
+      const branchPathNumber = letterASCIICode - 65;
+      return branchPathBackgroundColors[branchPathNumber];
+    }
+    return null;
   }
 
   /**
@@ -647,24 +617,6 @@ export class TeacherProjectService extends ProjectService {
 
   getIdToNode() {
     return this.idToNode;
-  }
-
-  turnOnSaveButtonForAllComponents(node) {
-    for (const component of node.components) {
-      const service = this.componentServiceLookupService.getService(component.type);
-      if (service.componentUsesSaveButton()) {
-        component.showSaveButton = true;
-      }
-    }
-  }
-
-  turnOffSaveButtonForAllComponents(node) {
-    for (const component of node.components) {
-      const service = this.componentServiceLookupService.getService(component.type);
-      if (service.componentUsesSaveButton()) {
-        component.showSaveButton = false;
-      }
-    }
   }
 
   checkPotentialStartNodeIdChangeThenSaveProject() {
@@ -945,10 +897,6 @@ export class TeacherProjectService extends ProjectService {
     this.refreshProjectSource.next();
   }
 
-  scrollToBottomOfPage() {
-    this.scrollToBottomOfPageSource.next();
-  }
-
   nodeHasConstraint(nodeId: string): boolean {
     const constraints = this.getConstraintsOnNode(nodeId);
     return constraints.length > 0;
@@ -956,7 +904,7 @@ export class TeacherProjectService extends ProjectService {
 
   getConstraintsOnNode(nodeId: string): any {
     const node = this.getNodeById(nodeId);
-    return node.constraints;
+    return node.constraints ?? [];
   }
 
   /**
@@ -1013,7 +961,7 @@ export class TeacherProjectService extends ProjectService {
 
   addTeacherRemovalConstraint(node: any, periodId: number) {
     const lockConstraint = {
-      id: RandomKeyService.generate(),
+      id: generateRandomKey(),
       action: 'makeThisNodeNotVisitable',
       targetId: node.id,
       removalConditional: 'any',
@@ -1044,28 +992,25 @@ export class TeacherProjectService extends ProjectService {
    * Saves the project to Config.saveProjectURL and returns commit history promise.
    * if Config.saveProjectURL or Config.projectId are undefined, does not save and returns null
    */
-  saveProject(): any {
+  saveProject(): Promise<any> {
     if (!this.configService.getConfigParam('canEditProject')) {
       this.broadcastNotAllowedToEditThisProject();
       return null;
     }
     this.broadcastSavingProject();
     this.cleanupBeforeSave();
-    this.project.metadata.authors = this.getUniqueAuthors(
+    this.project.metadata.authors = reduceByUniqueId(
       this.addCurrentUserToAuthors(this.getAuthors())
     );
     return this.http
-      .post(
-        this.configService.getConfigParam('saveProjectURL'),
-        angular.toJson(this.project, false)
-      )
+      .post(this.configService.getConfigParam('saveProjectURL'), JSON.stringify(this.project))
       .toPromise()
       .then((response: any) => {
         this.handleSaveProjectResponse(response);
       });
   }
 
-  getAuthors(): any[] {
+  private getAuthors(): any[] {
     return this.project.metadata.authors ? this.project.metadata.authors : [];
   }
 
@@ -1081,18 +1026,6 @@ export class TeacherProjectService extends ProjectService {
     }
     authors.push(userInfo);
     return authors;
-  }
-
-  getUniqueAuthors(authors = []): any[] {
-    const idToAuthor = {};
-    const uniqueAuthors = [];
-    for (const author of authors) {
-      if (idToAuthor[author.id] == null) {
-        uniqueAuthors.push(author);
-        idToAuthor[author.id] = author;
-      }
-    }
-    return uniqueAuthors;
   }
 
   handleSaveProjectResponse(response: any): any {
@@ -1114,16 +1047,12 @@ export class TeacherProjectService extends ProjectService {
    * objects.
    */
   cleanupBeforeSave() {
-    this.getActiveNodes().forEach((activeNode) => {
+    this.project.nodes.forEach((activeNode) => {
       this.cleanupNode(activeNode);
     });
     this.getInactiveNodes().forEach((inactiveNode) => {
       this.cleanupNode(inactiveNode);
     });
-  }
-
-  getActiveNodes(): any[] {
-    return this.project.nodes;
   }
 
   /**
@@ -1266,8 +1195,8 @@ export class TeacherProjectService extends ProjectService {
   }
 
   copyTransitions(previousNode, node) {
-    const transitionsJSONString = angular.toJson(previousNode.transitionLogic.transitions);
-    const transitionsCopy = angular.fromJson(transitionsJSONString);
+    const transitionsJSONString = JSON.stringify(previousNode.transitionLogic.transitions);
+    const transitionsCopy = JSON.parse(transitionsJSONString);
     node.transitionLogic.transitions = transitionsCopy;
   }
 
@@ -1285,9 +1214,7 @@ export class TeacherProjectService extends ProjectService {
         id: this.getNextAvailableConstraintIdForNodeId(node.id),
         action: branchPathTakenConstraint.action,
         targetId: node.id,
-        removalCriteria: this.utilService.makeCopyOfJSONObject(
-          branchPathTakenConstraint.removalCriteria
-        )
+        removalCriteria: copy(branchPathTakenConstraint.removalCriteria)
       };
       this.addConstraintToNode(node, newConstraint);
     }
@@ -1598,40 +1525,7 @@ export class TeacherProjectService extends ProjectService {
     }
 
     const parentIdOfNodeToRemove = this.getParentGroupId(nodeId);
-    const parentGroup = this.getNodeById(parentIdOfNodeToRemove);
-
-    // update the start id if we are removing the start node of a group
-    if (parentGroup != null) {
-      const parentGroupStartId = parentGroup.startId;
-      if (parentGroupStartId != null) {
-        if (parentGroupStartId === nodeId) {
-          // the node we are removing is the start node
-
-          if (nodeToRemoveTransitions != null && nodeToRemoveTransitions.length > 0) {
-            for (let nodeToRemoveTransition of nodeToRemoveTransitions) {
-              if (nodeToRemoveTransition != null) {
-                const toNodeId = nodeToRemoveTransition.to;
-                if (toNodeId != null) {
-                  /*
-                   * we need to check that the to node id is in the
-                   * same group. some transitions point to a node id
-                   * in the next group which we would not want to use
-                   * for the start id.
-                   */
-                  if (this.getParentGroupId(toNodeId) == parentIdOfNodeToRemove) {
-                    // set the new start id
-                    parentGroup.startId = toNodeId;
-                  }
-                }
-              }
-            }
-          } else {
-            // there are no transitions so we will have an empty start id
-            parentGroup.startId = '';
-          }
-        }
-      }
-    }
+    this.updateParentGroupStartId(nodeId);
 
     for (let n = 0; n < nodesByToNodeId.length; n++) {
       const node = nodesByToNodeId[n];
@@ -1647,8 +1541,7 @@ export class TeacherProjectService extends ProjectService {
               // we have found the transition to the node we are removing
 
               // copy the transitions from the node we are removing
-              let transitionsCopy = angular.toJson(nodeToRemoveTransitions);
-              transitionsCopy = angular.fromJson(transitionsCopy);
+              let transitionsCopy = copy(nodeToRemoveTransitions);
 
               /*
                * if the parent from group is different than the parent removing group
@@ -1832,9 +1725,7 @@ export class TeacherProjectService extends ProjectService {
              * copy the transition logic to the node that comes
              * before it
              */
-            node.transitionLogic = this.utilService.makeCopyOfJSONObject(
-              nodeToRemoveTransitionLogic
-            );
+            node.transitionLogic = copy(nodeToRemoveTransitionLogic);
 
             /*
              * set the transitions for the node that comes before
@@ -1852,6 +1743,30 @@ export class TeacherProjectService extends ProjectService {
 
     if (this.isGroupNode(nodeId)) {
       this.removeTransitionsOutOfGroup(nodeId);
+    }
+  }
+
+  /**
+   * Update the parent group start id if the node we are removing is the start id
+   * @param nodeId The node we are removing
+   */
+  private updateParentGroupStartId(nodeId: string): void {
+    const parentGroup = this.getParentGroup(nodeId);
+    if (parentGroup != null && parentGroup.startId === nodeId) {
+      const transitions = this.getTransitionsFromNode(nodeId);
+      if (transitions.length > 0) {
+        for (const transition of transitions) {
+          const toNodeId = transition.to;
+          // Make sure the to node id is in the same group because a step can transition to a step
+          // in a different group. If the to node id is in a different group, we would not want to
+          // use it as the start id of this group.
+          if (this.getParentGroupId(toNodeId) === parentGroup.id) {
+            parentGroup.startId = toNodeId;
+          }
+        }
+      } else {
+        parentGroup.startId = '';
+      }
     }
   }
 
@@ -2821,7 +2736,7 @@ export class TeacherProjectService extends ProjectService {
    * @return a component id that isn't already being used in the project
    */
   getUnusedComponentId(componentIdsToSkip = []) {
-    let newComponentId = RandomKeyService.generate();
+    let newComponentId = generateRandomKey();
 
     // check if the component id is already used in the project
     if (this.isComponentIdUsed(newComponentId)) {
@@ -2836,7 +2751,7 @@ export class TeacherProjectService extends ProjectService {
        * one that isn't already being used
        */
       while (!alreadyUsed) {
-        newComponentId = RandomKeyService.generate();
+        newComponentId = generateRandomKey();
 
         // check if the id is already being used in the project
         alreadyUsed = this.isComponentIdUsed(newComponentId);
@@ -3131,7 +3046,7 @@ export class TeacherProjectService extends ProjectService {
     return a.order - b.order;
   }
 
-  broadcastSavingProject() {
+  private broadcastSavingProject(): void {
     this.savingProjectSource.next();
   }
 
@@ -3161,5 +3076,15 @@ export class TeacherProjectService extends ProjectService {
       objects.splice(index, 1);
       objects.splice(index + 1, 0, object);
     }
+  }
+
+  getNodesInOrder(): any[] {
+    return Object.entries(this.idToOrder)
+      .map((entry: any) => {
+        return { key: entry[0], id: entry[0], order: entry[1].order };
+      })
+      .sort((a: any, b: any) => {
+        return a.order - b.order;
+      });
   }
 }

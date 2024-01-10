@@ -1,0 +1,36 @@
+<h5 i18n>Customize Feedback (optional)</h5>
+<p i18n>
+  Choose whether students should see their score and whether they should receive feedback after
+  submitting an answer. Customize the feedback students will receive for each automated score value.
+</p>
+<hr />
+<ng-container *ngFor="let item of node.components">
+  <div *ngIf="item.enableCRater" fxLayout="column">
+    <mat-checkbox [(ngModel)]="item.cRater.showScore" i18n>Show Score</mat-checkbox>
+    <mat-checkbox [(ngModel)]="item.cRater.showFeedback" i18n>Show Feedback</mat-checkbox>
+    <div *ngFor="let scoringRule of item.cRater.scoringRules">
+      <div i18n>Score {{ scoringRule.score }}</div>
+      <mat-form-field class="feedback-textarea">
+        <mat-label i18n>Feedback</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="scoringRule.feedbackText"
+          [disabled]="!item.cRater.showFeedback"
+          cdkTextareaAutosize
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</ng-container>
+<div *ngIf="!hasCustomization" i18n>
+  The step you chose has nothing to customize. Click "Next" to continue.
+</div>
+<div class="nav-controls">
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutGap="8px">
+    <button mat-button color="primary" routerLink="../choose-item" i18n>Back</button>
+    <span fxFlex></span>
+    <button mat-button color="primary" routerLink="../../.." i18n>Cancel</button>
+    <button mat-raised-button color="primary" (click)="next()" i18n>Next</button>
+  </div>
+</div>

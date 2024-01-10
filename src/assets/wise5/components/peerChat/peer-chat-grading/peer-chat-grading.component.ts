@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentState } from '../../../../../app/domain/componentState';
+import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotificationService } from '../../../services/notificationService';
@@ -9,6 +10,7 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { TeacherWorkService } from '../../../services/teacherWorkService';
 import { PeerChatShowWorkComponent } from '../peer-chat-show-work/peer-chat-show-work.component';
+import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
 
@@ -19,6 +21,7 @@ import { PeerGroup } from '../PeerGroup';
 })
 export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
   constructor(
+    protected annotationService: AnnotationService,
     protected configService: ConfigService,
     protected nodeService: NodeService,
     protected notificationService: NotificationService,
@@ -45,7 +48,7 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
     const notificationType = 'PeerChatMessage';
     const teacherWorkgroupId = this.configService.getWorkgroupId();
     const message = 'Your teacher sent a chat message';
-    for (const workgroupId of this.getPeerGroupWorkgroupIds(peerGroup)) {
+    for (const workgroupId of peerGroup.getWorkgroupIds()) {
       const notification = this.notificationService.createNewNotification(
         runId,
         periodId,
@@ -58,10 +61,6 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
       );
       this.notificationService.saveNotificationToServer(notification);
     }
-  }
-
-  private getPeerGroupWorkgroupIds(peerGroup: PeerGroup): number[] {
-    return peerGroup.members.map((member: any) => member.id);
   }
 
   private createComponentState(response: string): ComponentState {
@@ -79,5 +78,45 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
       workgroupId: this.configService.getWorkgroupId(),
       peerGroupId: this.peerGroup.id
     };
+  }
+
+  protected deleteClicked(peerChatMessage: PeerChatMessage): void {
+    this.saveDeleteAnnotation(peerChatMessage, 'Delete');
+  }
+
+  protected undeleteClicked(peerChatMessage: PeerChatMessage): void {
+    this.saveDeleteAnnotation(peerChatMessage, 'Undo Delete');
+  }
+
+  private saveDeleteAnnotation(peerChatMessage: PeerChatMessage, action: string): void {
+    const toWorkgroupId = peerChatMessage.workgroupId;
+    const periodId = this.getPeerGroupPeriodId(this.peerGroup);
+    const teacherUserInfo = this.configService.getMyUserInfo();
+    const fromWorkgroupId = teacherUserInfo.workgroupId;
+    const runId = this.configService.getRunId();
+    const nodeId = this.nodeId;
+    const componentId = this.componentId;
+    const studentWorkId = peerChatMessage.componentStateId;
+    const data = {
+      action: action
+    };
+    const annotation = this.annotationService.createInappropriateFlagAnnotation(
+      runId,
+      periodId,
+      nodeId,
+      componentId,
+      fromWorkgroupId,
+      toWorkgroupId,
+      studentWorkId,
+      data
+    );
+    this.annotationService.saveAnnotation(annotation).then(() => {});
+  }
+
+  private getPeerGroupPeriodId(peerGroup: PeerGroup): number {
+    for (const member of peerGroup.members) {
+      return member.periodId;
+    }
+    return null;
   }
 }

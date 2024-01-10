@@ -1,18 +1,20 @@
 <mat-card class="group notice-bg-bg">
-  <div class="mat-card-title">
-    <h4 class="mat-body-2" i18n>Ungrouped</h4>
-  </div>
-  <mat-card-content>
-    <ul cdkDropList
-        [cdkDropListData]="{ id: 0 }"
-        (cdkDropListDropped)="dropWorkgroup($event)"
-        [ngStyle.gt-sm]="{ columns: 2 }"
-        [ngStyle.gt-md]="{ columns: 3 }">
-      <li *ngFor="let workgroup of unassignedWorkgroups"
-          cdkDrag
-          [cdkDragData]="workgroup.id"
-          (cdkDragEntered)="dragEnter($event)"
-          (cdkDragExited)="dragExit($event)">
+  <h4 mat-card-title class="mat-subtitle-2" i18n>Ungrouped</h4>
+  <mat-card-content class="group-content">
+    <ul
+      cdkDropList
+      [cdkDropListData]="{ id: 0 }"
+      (cdkDropListDropped)="dropWorkgroup($event)"
+      [ngStyle.gt-sm]="{ columns: 2 }"
+      [ngStyle.gt-md]="{ columns: 3 }"
+    >
+      <li
+        *ngFor="let workgroup of unassignedWorkgroups"
+        cdkDrag
+        [cdkDragData]="workgroup.id"
+        (cdkDragEntered)="dragEnter($event)"
+        (cdkDragExited)="dragExit($event)"
+      >
         <peer-group-workgroup [workgroup]="workgroup"></peer-group-workgroup>
       </li>
     </ul>

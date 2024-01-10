@@ -1,12 +1,10 @@
 .mat-icon {
   color: #ffffff;
+  margin: 8px !important;
 }
 
-.mat-button {
+.mat-mdc-button {
   text-transform: none;
-  padding: 0;
-}
-
-.mat-form-field-appearance-fill .mat-form-field-flex {
-  padding: .6em
+  padding: 8px;
+  height: 100%;
 }

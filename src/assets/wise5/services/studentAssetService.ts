@@ -5,12 +5,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { Observable, Subject } from 'rxjs';
 import { StudentAssetRequest } from '../vle/studentAsset/StudentAssetRequest';
+import { isAudio, isImage } from '../common/file/file';
+import { Component } from '../common/Component';
 
 @Injectable()
 export class StudentAssetService {
   allAssets = [];
-  imageFileExtensions = ['png', 'jpg', 'jpeg', 'gif'];
-  audioFileExtensions = ['wav', 'mp3', 'ogg', 'm4a', 'm4p', 'raw', 'aiff', 'webm'];
   private attachStudentAssetSource: Subject<StudentAssetRequest> = new Subject<StudentAssetRequest>();
   public attachStudentAsset$: Observable<StudentAssetRequest> = this.attachStudentAssetSource.asObservable();
 
@@ -70,17 +70,12 @@ export class StudentAssetService {
       });
   }
 
-  hasSuffix(assetURL, suffixes) {
-    const assetExtension = assetURL.substring(assetURL.lastIndexOf('.') + 1);
-    return suffixes.includes(assetExtension.toLowerCase());
-  }
-
   isImage(asset) {
-    return this.hasSuffix(this.getFileNameFromAsset(asset), this.imageFileExtensions);
+    return isImage(this.getFileNameFromAsset(asset));
   }
 
   isAudio(asset) {
-    return this.hasSuffix(this.getFileNameFromAsset(asset), this.audioFileExtensions);
+    return isAudio(this.getFileNameFromAsset(asset));
   }
 
   getFileNameFromAsset(asset) {
@@ -211,11 +206,10 @@ export class StudentAssetService {
     }
   }
 
-  broadcastAttachStudentAsset(nodeId: string, componentId: string, asset: any): void {
+  broadcastAttachStudentAsset(component: Component, asset: any): void {
     this.attachStudentAssetSource.next({
-      nodeId: nodeId,
-      componentId: componentId,
-      asset: asset
+      asset: asset,
+      component: component
     });
   }
 }

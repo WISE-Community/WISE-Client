@@ -11,12 +11,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { GraphAuthoring } from './graph-authoring.component';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 let component: GraphAuthoring;
 let fixture: ComponentFixture<GraphAuthoring>;
@@ -38,20 +39,19 @@ describe('GraphAuthoringComponent', () => {
         MatSelectModule,
         MatSlideToggleModule,
         ReactiveFormsModule,
-        UpgradeModule,
         StudentTeacherCommonServicesModule
       ],
       declarations: [GraphAuthoring, EditComponentPrompt],
-      providers: [ProjectAssetService, TeacherProjectService]
+      providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
     });
     fixture = TestBed.createComponent(GraphAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
-      JSON.parse(JSON.stringify(componentContent))
+      copy(componentContent)
     );
     spyOn(component, 'componentChanged').and.callFake(() => {});
-    component.componentContent = JSON.parse(JSON.stringify(componentContent));
+    component.componentContent = copy(componentContent);
     fixture.detectChanges();
   });
 

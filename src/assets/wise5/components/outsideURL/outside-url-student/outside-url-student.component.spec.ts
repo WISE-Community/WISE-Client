@@ -7,8 +7,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { Component } from '../../../common/Component';
 import { ProjectService } from '../../../services/projectService';
 import { OutsideUrlStudent } from './outside-url-student.component';
+import { OutsideUrlContent } from '../OutsideUrlContent';
 
 let component: OutsideUrlStudent;
 const componentId = 'component1';
@@ -35,13 +37,13 @@ describe('OutsideUrlStudentComponent', () => {
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     component = fixture.componentInstance;
-    component.nodeId = nodeId;
-    component.componentContent = {
+    const componentContent = {
       id: componentId,
       height: 600,
       width: 800,
       url: 'https://www.berkeley.edu'
-    };
+    } as OutsideUrlContent;
+    component.component = new Component(componentContent, nodeId);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {

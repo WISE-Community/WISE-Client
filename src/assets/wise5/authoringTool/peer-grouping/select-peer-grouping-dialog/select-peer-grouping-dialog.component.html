@@ -1,16 +1,19 @@
-<h3 mat-dialog-title i18n>Select Peer Grouping</h3>
+<h2 mat-dialog-title i18n>Select Peer Grouping</h2>
 <mat-dialog-content class="dialog-content-scroll">
   <p i18n>Choose a Peer Grouping to use for this component:</p>
   <p *ngIf="peerGroupings.length === 0" i18n>
     (There are no Peer Groupings. Please create a new one.)
   </p>
   <mat-card *ngFor="let peerGrouping of peerGroupings" class="peer-grouping">
-    <select-peer-grouping-option
+    <mat-card-content>
+      <select-peer-grouping-option
         [peerGrouping]="peerGrouping"
         [selectedPeerGrouping]="dialogData.peerGrouping"
         (selectEvent)="selectPeerGrouping($event)"
-        (deleteEvent)="deletePeerGrouping($event)">
-    </select-peer-grouping-option>
+        (deleteEvent)="deletePeerGrouping($event)"
+      >
+      </select-peer-grouping-option>
+    </mat-card-content>
   </mat-card>
   <button mat-stroked-button (click)="showNewPeerGroupingAuthoring()">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
@@ -19,6 +22,6 @@
     </div>
   </button>
 </mat-dialog-content>
-<mat-dialog-actions fxLayoutAlign="end center">
+<mat-dialog-actions align="end">
   <button mat-button (click)="close()" i18n>Close</button>
 </mat-dialog-actions>

@@ -7,7 +7,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentMaxSubmitComponent } from '../../../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
@@ -19,7 +18,6 @@ import { SessionService } from '../../../services/sessionService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
 import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
@@ -42,8 +40,7 @@ import { FeedbackRuleHelpComponent } from '../../common/feedbackRule/feedback-ru
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule,
-    UpgradeModule
+    MatInputModule
   ],
   providers: [
     AnnotationService,
@@ -56,8 +53,7 @@ import { FeedbackRuleHelpComponent } from '../../common/feedbackRule/feedback-ru
     SessionService,
     StudentDataService,
     TagService,
-    TeacherProjectService,
-    UtilService
+    TeacherProjectService
   ],
   exports: [
     DialogGuidanceAuthoringComponent,

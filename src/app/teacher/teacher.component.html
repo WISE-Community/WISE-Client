@@ -1,5 +1,3 @@
-<div [ngClass]="{'main app-background' : !isShowingAngularJSApp()}">
-  <div class="content">
-    <router-outlet></router-outlet>
-  </div>
+<div [ngClass]="{ 'main app-background content': !isTeacherApp(), 'teacher': isTeacherApp() }">
+  <router-outlet></router-outlet>
 </div>

@@ -1,9 +1,7 @@
 <div fxLayout="column">
-  <edit-component-width [componentContent]="componentContent">
-  </edit-component-width>
-  <edit-component-rubric [componentContent]="componentContent">
-  </edit-component-rubric>
-  <edit-component-tags [componentContent]="componentContent">
-  </edit-component-tags>
-  <edit-component-json [nodeId]="nodeId" [componentId]="componentId"></edit-component-json>
+  <edit-component-width [componentContent]="componentContent"></edit-component-width>
+  <edit-component-rubric [componentContent]="componentContent"></edit-component-rubric>
+  <edit-component-tags [componentContent]="componentContent"></edit-component-tags>
+  <edit-component-constraints [componentContent]="component.content"></edit-component-constraints>
+  <edit-component-json [component]="component"></edit-component-json>
 </div>

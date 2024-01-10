@@ -1,59 +1,63 @@
 <div class="l-constrained grading node-grading">
-  <div class="content-head" fxLayout="row wrap"
-       fxLayoutAlign="center center" fxLayout.gt-sm="start center">
+  <div
+    class="content-head"
+    fxLayout="row wrap"
+    fxLayoutAlign="center center"
+    fxLayout.gt-sm="start center"
+  >
     <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex.lt-md="100">
       <div class="accent-1" fxLayout="row" fxLayoutAlign="center center">
         <h2 class="content-head__item" fxLayout.lt-md="column" fxLayoutGap.gt-sm="4px">
-          <span>{{getNodeCompletion(nodeId)}}%</span>
+          <span>{{ getNodeCompletion(nodeId) }}%</span>
           <span class="content-head-label" i18n>Completion</span>
         </h2>
-        <h2 class="content-head__item"
-            *ngIf="nodeHasWork"
-            fxLayout.lt-md="column"
-            fxLayoutGap.gt-sm="4px">
+        <h2
+          class="content-head__item"
+          *ngIf="nodeHasWork"
+          fxLayout.lt-md="column"
+          fxLayoutGap.gt-sm="4px"
+        >
           <ng-template #averageIsNumber>
-            <span>{{getNodeAverageScore() | number: '1.1'}}</span>
+            <span>{{ getNodeAverageScore() | number: '1.1' }}</span>
           </ng-template>
           <ng-template #avergeIsNa>
             <span i18n>N/A</span>
           </ng-template>
-          <ng-container *ngIf="getNodeAverageScore() !== 'N/A'; then averageIsNumber; else avergeIsNa">
+          <ng-container
+            *ngIf="getNodeAverageScore() !== 'N/A'; then averageIsNumber; else avergeIsNa"
+          >
           </ng-container>
           <span class="content-head-label" i18n>Mean Score</span>
         </h2>
       </div>
     </div>
     <span fxFlex></span>
-    <div class="content-head-label"
-        fxLayout="row wrap"
-        fxLayoutAlign="center center"
-        fxLayoutGap="8px">
-      <component-select
-          [nodeId]="nodeId"
-          (modelChange)="onUpdateHiddenComponents($event)"
-          class="component-select">
+    <div
+      class="content-head-label"
+      fxLayout="row wrap"
+      fxLayoutAlign="center center"
+      fxLayoutGap="8px"
+    >
+      <component-select [nodeId]="nodeId" (modelChange)="onUpdateHiddenComponents($event)">
       </component-select>
-      <button *ngIf="milestoneReport"
-          mat-stroked-button
-          (click)="showReport($event)"
-          class="info">
+      <button *ngIf="milestoneReport" mat-stroked-button (click)="showReport($event)" class="info">
         <div fxLayoutAlign="center center" fxLayoutGap="4px">
           <mat-icon class="info">flag</mat-icon>
           <span i18n>Report</span>
         </div>
       </button>
-      <button *ngFor="let peerGroupingTag of peerGroupingTags"
-          mat-stroked-button
-          class="info"
-          (click)="showPeerGroupDetails(peerGroupingTag)">
+      <button
+        *ngFor="let peerGroupingTag of peerGroupingTags"
+        mat-stroked-button
+        class="info"
+        (click)="showPeerGroupDetails(peerGroupingTag)"
+      >
         <div fxLayoutAlign="center center" fxLayoutGap="4px">
           <mat-icon class="info">groups</mat-icon>
           <span class="info" i18n>Peer Groups</span>
         </div>
       </button>
-      <button mat-stroked-button
-          (click)="showRubric($event)"
-          class="info">
+      <button mat-stroked-button (click)="showRubric()" class="info">
         <div fxLayoutAlign="center center" fxLayoutGap="4px">
           <mat-icon class="info">info_outline</mat-icon>
           <span *ngIf="!numRubrics" i18n>Step Info</span>
@@ -64,30 +68,34 @@
   </div>
   <mat-list class="user-list">
     <mat-list-item class="mat-elevation-z1 list-item user-list-controls">
-      <div fxFlex="100"
-          fxLayout="column"
-          fxLayout.gt-sm="row"
-          fxLayoutAlign="center center"
-          fxLayoutGap.lt-md="8px">
+      <div
+        fxFlex="100"
+        fxLayout="column"
+        fxLayout.gt-sm="row"
+        fxLayoutAlign="center center"
+        fxLayoutGap.lt-md="8px"
+      >
         <workgroup-select-autocomplete></workgroup-select-autocomplete>
         <span fxFlex fxHide fxShow.gt-sm></span>
-        <div *ngIf="nodeHasWork"
-            fxFlex.lt-md="100"
-            fxLayoutAlign="center center">
-          <button mat-button
-              aria-label="Expand all teams"
-              i18n-aria-label
-              color="primary"
-              (click)="expandAll()"
-              i18n>
+        <div *ngIf="nodeHasWork" fxFlex.lt-md="100" fxLayoutAlign="center center">
+          <button
+            mat-button
+            aria-label="Expand all teams"
+            i18n-aria-label
+            color="primary"
+            (click)="expandAll()"
+            i18n
+          >
             + Expand all
           </button>
-          <button mat-button
-              aria-label="Collapse all teams"
-              i18n-aria-label
-              color="primary"
-              (click)="collapseAll()"
-              i18n>
+          <button
+            mat-button
+            aria-label="Collapse all teams"
+            i18n-aria-label
+            color="primary"
+            (click)="collapseAll()"
+            i18n
+          >
             - Collapse all
           </button>
         </div>
@@ -100,45 +108,58 @@
     </mat-list-item>
     <mat-list-item class="table--list__thead table--list__thead__th mat-elevation-z1">
       <div class="table--list__thead__tr dark-theme" fxLayout="row" fxFlex>
-        <button mat-button
-            class="table--list__thead__link" fxFlex fxLayout="row" fxLayoutAlign="start center"
-            (click)="setSort('team')" aria-label="Sort by team" i18n-aria-label>
-          <span i18n>Team</span>
-          <mat-icon *ngIf="sort === 'team' || sort === '-team'"
-              class="table--list__thead__sort"
-              [ngClass]="{'table--list__thead__sort--reverse': sort === '-team'}">
-            arrow_drop_up
-          </mat-icon>
-        </button>
-        <button mat-button
-            class="table--list__thead__link"
-            fxFlex="{{nodeHasWork ? 30 : 20}}"
-            fxLayout="row"
-            fxLayoutAlign="center center"
-            (click)="setSort('status')"
-            aria-label="Sorty by completion"
-            i18n-aria-label>
-          <span i18n>Status</span>
-          <mat-icon *ngIf="sort === 'status' || sort === '-status'"
-              class="table--list__thead__sort"
-              [ngClass]="{'table--list__thead__sort--reverse': sort === '-status'}">
+        <button
+          mat-button
+          class="table--list__thead__link"
+          (click)="setSort('team')"
+          aria-label="Sort by team"
+          i18n-aria-label
+        >
+          <span i18n fxLayout="row" fxLayoutAlign="start center">Team</span>
+          <mat-icon
+            *ngIf="sort === 'team' || sort === '-team'"
+            class="table--list__thead__sort"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-team' }"
+          >
             arrow_drop_up
           </mat-icon>
         </button>
         <button
-            *ngIf="nodeHasWork"
-            mat-button
-            class="table--list__thead__link"
-            fxFlex="20"
-            fxLayout="row"
-            fxLayoutAlign="center center"
-            (click)="setSort('score')"
-            aria-label="Sort by score"
-            i18n-aria-label>
+          mat-button
+          class="table--list__thead__link"
+          fxFlex="{{ nodeHasWork ? 30 : 20 }}"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+          (click)="setSort('status')"
+          aria-label="Sorty by completion"
+          i18n-aria-label
+        >
+          <span i18n>Status</span>
+          <mat-icon
+            *ngIf="sort === 'status' || sort === '-status'"
+            class="table--list__thead__sort"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-status' }"
+          >
+            arrow_drop_up
+          </mat-icon>
+        </button>
+        <button
+          *ngIf="nodeHasWork"
+          mat-button
+          class="table--list__thead__link"
+          fxFlex="20"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+          (click)="setSort('score')"
+          aria-label="Sort by score"
+          i18n-aria-label
+        >
           <span i18n>Score</span>
-          <mat-icon *ngIf="sort === 'score' || sort === '-score'"
-              class="table--list__thead__sort"
-              [ngClass]="{'table--list__thead__sort--reverse': sort === '-score'}">
+          <mat-icon
+            *ngIf="sort === 'score' || sort === '-score'"
+            class="table--list__thead__sort"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-score' }"
+          >
             arrow_drop_up
           </mat-icon>
         </button>
@@ -148,15 +169,16 @@
       <ng-container *ngFor="let workgroup of sortedWorkgroups; trackBy: trackWorkgroup">
         <ng-container *ngIf="isWorkgroupShown(workgroup)">
           <workgroup-item
-              [expanded]="workVisibilityById[workgroup.workgroupId]"
-              [maxScore]="maxScore"
-              [showScore]="nodeHasWork"
-              [nodeId]="nodeId"
-              [workgroupId]="workgroup.workgroupId"
-              [workgroupData]="workgroup"
-              [hiddenComponents]="hiddenComponents"
-              (onUpdateExpand)="onUpdateExpand($event)"
-              (waIntersectionObservee)="onIntersection(workgroup.workgroupId, $event)">
+            [expanded]="workVisibilityById[workgroup.workgroupId]"
+            [maxScore]="maxScore"
+            [showScore]="nodeHasWork"
+            [nodeId]="nodeId"
+            [workgroupId]="workgroup.workgroupId"
+            [workgroupData]="workgroup"
+            [hiddenComponents]="hiddenComponents"
+            (onUpdateExpand)="onUpdateExpand($event)"
+            (waIntersectionObservee)="onIntersection(workgroup.workgroupId, $event)"
+          >
           </workgroup-item>
         </ng-container>
       </ng-container>

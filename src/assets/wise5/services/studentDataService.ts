@@ -4,19 +4,14 @@ import { Injectable } from '@angular/core';
 import { ConfigService } from './configService';
 import { AnnotationService } from './annotationService';
 import { ProjectService } from './projectService';
-import { UtilService } from './utilService';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { TagService } from './tagService';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
-import { ComponentServiceLookupService } from './componentServiceLookupService';
-import { NotebookService } from './notebookService';
-import { RandomKeyService } from './randomKeyService';
+import { generateRandomKey } from '../common/string/string';
 
 @Injectable()
 export class StudentDataService extends DataService {
   dummyStudentWorkId: number = 1;
-  maxScore: any = null;
   nodeStatuses: any = {};
   previousStep = null;
   runStatus: any = null;
@@ -27,63 +22,7 @@ export class StudentDataService extends DataService {
     events: [],
     annotations: []
   };
-  visitedNodesHistory = [];
-  criteriaFunctionNameToFunction = {
-    branchPathTaken: (criteria) => {
-      return this.evaluateBranchPathTakenCriteria(criteria);
-    },
-    isVisible: (criteria) => {
-      return this.evaluateIsVisibleCriteria(criteria);
-    },
-    isVisitable: (criteria) => {
-      return this.evaluateIsVisitableCriteria(criteria);
-    },
-    isVisited: (criteria) => {
-      return this.evaluateIsVisitedCriteria(criteria);
-    },
-    isVisitedAfter: (criteria) => {
-      return this.evaluateIsVisitedAfterCriteria(criteria);
-    },
-    isRevisedAfter: (criteria) => {
-      return this.evaluateIsRevisedAfterCriteria(criteria);
-    },
-    isVisitedAndRevisedAfter: (criteria) => {
-      return this.evaluateIsVisitedAndRevisedAfterCriteria(criteria);
-    },
-    isCompleted: (criteria) => {
-      return this.evaluateIsCompletedCriteria(criteria);
-    },
-    isCorrect: (criteria) => {
-      return this.evaluateIsCorrectCriteria(criteria);
-    },
-    choiceChosen: (criteria) => {
-      return this.evaluateChoiceChosenCriteria(criteria);
-    },
-    score: (criteria) => {
-      return this.evaluateScoreCriteria(criteria);
-    },
-    teacherRemoval: (criteria) => {
-      return this.evaluateTeacherRemovalCriteria(criteria);
-    },
-    usedXSubmits: (criteria) => {
-      return this.evaluateUsedXSubmitsCriteria(criteria);
-    },
-    wroteXNumberOfWords: (criteria) => {
-      return this.evaluateNumberOfWordsWrittenCriteria(criteria);
-    },
-    addXNumberOfNotesOnThisStep: (criteria) => {
-      return this.evaluateAddXNumberOfNotesOnThisStepCriteria(criteria);
-    },
-    fillXNumberOfRows: (criteria) => {
-      return this.evaluateFillXNumberOfRowsCriteria(criteria);
-    },
-    hasTag: (criteria) => {
-      return this.evaluateHasTagCriteria(criteria);
-    }
-  };
 
-  private nodeClickLockedSource: Subject<any> = new Subject<any>();
-  public nodeClickLocked$: Observable<any> = this.nodeClickLockedSource.asObservable();
   private componentDirtySource: Subject<boolean> = new Subject<boolean>();
   public componentDirty$: Observable<any> = this.componentDirtySource.asObservable();
   private componentSaveTriggeredSource: Subject<boolean> = new Subject<boolean>();
@@ -94,27 +33,24 @@ export class StudentDataService extends DataService {
   public componentSubmitTriggered$: Observable<any> = this.componentSubmitTriggeredSource.asObservable();
   private componentStudentDataSource: Subject<any> = new Subject<any>();
   public componentStudentData$: Observable<any> = this.componentStudentDataSource.asObservable();
+  private dataRetrievedSource: Subject<any> = new Subject<any>();
+  public dataRetrieved$: Observable<any> = this.dataRetrievedSource.asObservable();
   private studentWorkSavedToServerSource: Subject<any> = new Subject<any>();
   public studentWorkSavedToServer$: Observable<any> = this.studentWorkSavedToServerSource.asObservable();
   private navItemIsExpandedSource: Subject<any> = new Subject<any>();
   public navItemIsExpanded$: Observable<any> = this.navItemIsExpandedSource.asObservable();
-  private nodeStatusesChangedSource: Subject<any> = new Subject<any>();
-  public nodeStatusesChanged$: Observable<any> = this.nodeStatusesChangedSource.asObservable();
+  private nodeStatusesChangedSource: Subject<void> = new Subject<void>();
+  public nodeStatusesChanged$: Observable<void> = this.nodeStatusesChangedSource.asObservable();
+  private updateNodeStatusesSource: Subject<void> = new Subject<void>();
+  public updateNodeStatuses$: Observable<void> = this.updateNodeStatusesSource.asObservable();
 
   constructor(
     public http: HttpClient,
     private AnnotationService: AnnotationService,
-    private componentServiceLookupService: ComponentServiceLookupService,
     private ConfigService: ConfigService,
-    private notebookService: NotebookService,
-    protected ProjectService: ProjectService,
-    private TagService: TagService,
-    private UtilService: UtilService
+    protected ProjectService: ProjectService
   ) {
     super(ProjectService);
-    this.notebookService.notebookUpdated$.subscribe(() => {
-      this.updateNodeStatuses();
-    });
   }
 
   broadcastComponentStudentData(componentStudentData: any) {
@@ -139,8 +75,15 @@ export class StudentDataService extends DataService {
       userId: '0'
     };
     this.AnnotationService.setAnnotations(this.studentData.annotations);
-    this.populateHistories(this.studentData.events);
-    this.updateNodeStatuses();
+    this.dataRetrievedSource.next(this.studentData);
+  }
+
+  updateNodeStatuses(): void {
+    this.updateNodeStatusesSource.next();
+  }
+
+  getNodeStatusByNodeId(nodeId: string): any {
+    return this.nodeStatuses[nodeId];
   }
 
   retrieveStudentDataForSignedInStudent() {
@@ -176,7 +119,7 @@ export class StudentDataService extends DataService {
     this.studentData.annotations = resultData.annotations;
     this.AnnotationService.setAnnotations(this.studentData.annotations);
     this.populateHistories(this.studentData.events);
-    this.updateNodeStatuses();
+    this.dataRetrievedSource.next(this.studentData);
     return this.studentData;
   }
 
@@ -202,326 +145,8 @@ export class StudentDataService extends DataService {
     }
   }
 
-  getNodeStatuses() {
-    return this.nodeStatuses;
-  }
-
-  setNodeStatusByNodeId(nodeId, nodeStatus) {
-    this.nodeStatuses[nodeId] = nodeStatus;
-  }
-
-  getNodeStatusByNodeId(nodeId) {
-    return this.nodeStatuses[nodeId];
-  }
-
-  updateNodeStatuses() {
-    this.updateStepNodeStatuses();
-    this.updateGroupNodeStatuses();
-    this.maxScore = this.getMaxScore();
-    this.broadcastNodeStatusesChanged();
-  }
-
   broadcastNodeStatusesChanged() {
     this.nodeStatusesChangedSource.next();
-  }
-
-  updateStepNodeStatuses() {
-    const nodes = this.ProjectService.getNodes();
-    for (const node of nodes) {
-      if (!this.ProjectService.isGroupNode(node.id)) {
-        this.updateNodeStatusByNode(node);
-      }
-    }
-  }
-
-  updateGroupNodeStatuses() {
-    const groups = this.ProjectService.getGroups();
-    for (const group of groups) {
-      group.depth = this.ProjectService.getNodeDepth(group.id, 0);
-    }
-    groups.sort(function (a, b) {
-      return b.depth - a.depth;
-    });
-    for (const group of groups) {
-      this.updateNodeStatusByNode(group);
-    }
-  }
-
-  updateNodeStatusByNode(node) {
-    const nodeId = node.id;
-    const nodeStatus = this.calculateNodeStatus(node);
-    this.updateNodeStatus(nodeId, nodeStatus);
-    this.updateNodeStatusProgress(nodeId);
-    this.updateNodeStatusIcon(nodeId);
-    this.updateNodeStatusTimestamps(nodeId);
-  }
-
-  calculateNodeStatus(node) {
-    const nodeId = node.id;
-    const nodeStatus: any = this.createNodeStatus(nodeId);
-    const constraintsForNode = this.getConstraintsThatAffectNode(node);
-    const constraintResults = this.evaluateConstraints(constraintsForNode);
-    nodeStatus.isVisible = constraintResults.isVisible;
-    nodeStatus.isVisitable = constraintResults.isVisitable;
-    this.setNotVisibleIfRequired(nodeId, constraintsForNode, nodeStatus);
-    nodeStatus.isCompleted = this.isCompleted(nodeId);
-    nodeStatus.isVisited = this.isNodeVisited(nodeId);
-    return nodeStatus;
-  }
-
-  createNodeStatus(nodeId) {
-    return {
-      nodeId: nodeId,
-      isVisible: true,
-      isVisitable: true,
-      isCompleted: true
-    };
-  }
-
-  getConstraintsThatAffectNode(node) {
-    if (!this.ConfigService.getConfigParam('constraints')) {
-      // constraints have been disabled which is allowed in preview mode
-      return [];
-    } else {
-      return this.ProjectService.getConstraintsThatAffectNode(node);
-    }
-  }
-
-  evaluateConstraints(constraintsForNode) {
-    let isVisible = true;
-    let isVisitable = true;
-    for (const constraintForNode of constraintsForNode) {
-      const tempResult = this.evaluateConstraint(constraintForNode);
-      const action = constraintForNode.action;
-      if (this.isVisibleConstraintAction(action)) {
-        isVisible = isVisible && tempResult;
-      } else if (this.isVisitableConstraintAction(action)) {
-        isVisitable = isVisitable && tempResult;
-      }
-    }
-    return { isVisible: isVisible, isVisitable: isVisitable };
-  }
-
-  setNotVisibleIfRequired(nodeId, constraintsForNode, nodeStatus) {
-    if (
-      constraintsForNode.length == 0 &&
-      this.ProjectService.getFlattenedProjectAsNodeIds().indexOf(nodeId) == -1 &&
-      !this.ProjectService.isGroupNode(nodeId)
-    ) {
-      nodeStatus.isVisible = false;
-    }
-  }
-
-  isVisibleConstraintAction(action) {
-    return [
-      'makeThisNodeNotVisible',
-      'makeAllNodesAfterThisNotVisible',
-      'makeAllOtherNodesNotVisible'
-    ].includes(action);
-  }
-
-  isVisitableConstraintAction(action) {
-    return [
-      'makeThisNodeNotVisitable',
-      'makeAllNodesAfterThisNotVisitable',
-      'makeAllOtherNodesNotVisitable'
-    ].includes(action);
-  }
-
-  updateNodeStatus(nodeId, nodeStatus) {
-    const oldNodeStatus = this.getNodeStatusByNodeId(nodeId);
-    if (oldNodeStatus == null) {
-      this.setNodeStatusByNodeId(nodeId, nodeStatus);
-    } else {
-      const previousIsCompletedValue = this.nodeStatuses[nodeId].isCompleted;
-      this.nodeStatuses[nodeId].isVisited = nodeStatus.isVisited;
-      this.nodeStatuses[nodeId].isVisible = nodeStatus.isVisible;
-      this.nodeStatuses[nodeId].isVisitable = nodeStatus.isVisitable;
-      this.nodeStatuses[nodeId].isCompleted = nodeStatus.isCompleted;
-    }
-  }
-
-  updateNodeStatusProgress(nodeId) {
-    this.nodeStatuses[nodeId].progress = this.getNodeProgressById(nodeId);
-  }
-
-  updateNodeStatusIcon(nodeId) {
-    this.nodeStatuses[nodeId].icon = this.ProjectService.getNode(nodeId).getIcon();
-  }
-
-  updateNodeStatusTimestamps(nodeId) {
-    const latestComponentStatesForNode = this.getLatestComponentStateByNodeId(nodeId);
-    if (latestComponentStatesForNode != null) {
-      this.updateNodeStatusClientSaveTime(nodeId, latestComponentStatesForNode);
-      this.updateNodeStatusServerSaveTime(nodeId, latestComponentStatesForNode);
-    }
-  }
-
-  updateNodeStatusClientSaveTime(nodeId, latestComponentStatesForNode) {
-    this.nodeStatuses[nodeId].latestComponentStateClientSaveTime =
-      latestComponentStatesForNode.clientSaveTime;
-  }
-
-  updateNodeStatusServerSaveTime(nodeId, latestComponentStatesForNode) {
-    this.nodeStatuses[nodeId].latestComponentStateServerSaveTime =
-      latestComponentStatesForNode.serverSaveTime;
-  }
-
-  evaluateConstraint(constraintForNode) {
-    return this.evaluateNodeConstraint(constraintForNode);
-  }
-
-  evaluateNodeConstraint(constraintForNode) {
-    const removalCriteria = constraintForNode.removalCriteria;
-    const removalConditional = constraintForNode.removalConditional;
-    if (removalCriteria == null) {
-      return true;
-    } else {
-      return this.evaluateMultipleRemovalCriteria(removalCriteria, removalConditional);
-    }
-  }
-
-  evaluateMultipleRemovalCriteria(multipleRemovalCriteria, removalConditional) {
-    let result = false;
-    for (let c = 0; c < multipleRemovalCriteria.length; c++) {
-      const singleCriteriaResult = this.evaluateCriteria(multipleRemovalCriteria[c]);
-      if (c === 0) {
-        result = singleCriteriaResult;
-      } else {
-        if (removalConditional === 'any') {
-          result = result || singleCriteriaResult;
-        } else {
-          result = result && singleCriteriaResult;
-        }
-      }
-    }
-    return result;
-  }
-
-  evaluateCriterias(criterias): boolean {
-    for (const criteria of criterias) {
-      if (!this.evaluateCriteria(criteria)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  evaluateCriteria(criteria: any): boolean {
-    const criteriaFunction = this.criteriaFunctionNameToFunction[criteria.name];
-    if (criteriaFunction == null) {
-      return true;
-    }
-    return criteriaFunction(criteria);
-  }
-
-  evaluateIsCompletedCriteria(criteria) {
-    return this.isCompleted(criteria.params.nodeId);
-  }
-
-  evaluateIsCorrectCriteria(criteria) {
-    const componentStates = this.getComponentStatesByNodeIdAndComponentId(
-      criteria.params.nodeId,
-      criteria.params.componentId
-    );
-    for (const componentState of componentStates) {
-      if (componentState.studentData.isCorrect) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  evaluateBranchPathTakenCriteria(criteria) {
-    const expectedFromNodeId = criteria.params.fromNodeId;
-    const expectedToNodeId = criteria.params.toNodeId;
-    const branchPathTakenEvents = this.getBranchPathTakenEventsByNodeId(expectedFromNodeId);
-    for (const branchPathTakenEvent of branchPathTakenEvents) {
-      const data = branchPathTakenEvent.data;
-      if (criteria.params.fromNodeId === data.fromNodeId && expectedToNodeId === data.toNodeId) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  evaluateIsVisibleCriteria(criteria) {
-    const nodeStatus = this.getNodeStatusByNodeId(criteria.params.nodeId);
-    return nodeStatus.isVisible;
-  }
-
-  evaluateIsVisitableCriteria(criteria) {
-    const nodeStatus = this.getNodeStatusByNodeId(criteria.params.nodeId);
-    return nodeStatus.isVisitable;
-  }
-
-  evaluateIsVisitedCriteria(criteria) {
-    const events = this.getEvents();
-    for (const event of events) {
-      if (event.nodeId === criteria.params.nodeId && event.event === 'nodeEntered') {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  evaluateIsVisitedAfterCriteria(criteria) {
-    const isVisitedAfterNodeId = criteria.params.isVisitedAfterNodeId;
-    const criteriaCreatedTimestamp = criteria.params.criteriaCreatedTimestamp;
-    const events = this.getEvents();
-    for (const event of events) {
-      if (
-        event.nodeId === isVisitedAfterNodeId &&
-        event.event === 'nodeEntered' &&
-        event.clientSaveTime > criteriaCreatedTimestamp
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  evaluateIsRevisedAfterCriteria(criteria) {
-    const isRevisedAfterNodeId = criteria.params.isRevisedAfterNodeId;
-    const isRevisedAfterComponentId = criteria.params.isRevisedAfterComponentId;
-    const criteriaCreatedTimestamp = criteria.params.criteriaCreatedTimestamp;
-    const latestComponentStateForComponent = this.getLatestComponentStateByNodeIdAndComponentId(
-      isRevisedAfterNodeId,
-      isRevisedAfterComponentId
-    );
-    return (
-      latestComponentStateForComponent != null &&
-      latestComponentStateForComponent.clientSaveTime > criteriaCreatedTimestamp
-    );
-  }
-
-  evaluateIsVisitedAndRevisedAfterCriteria(criteria) {
-    const isVisitedAfterNodeId = criteria.params.isVisitedAfterNodeId;
-    const isRevisedAfterNodeId = criteria.params.isRevisedAfterNodeId;
-    const isRevisedAfterComponentId = criteria.params.isRevisedAfterComponentId;
-    const criteriaCreatedTimestamp = criteria.params.criteriaCreatedTimestamp;
-    const events = this.getEvents();
-    for (const event of events) {
-      if (
-        this.isVisitedAndRevisedAfter(
-          isVisitedAfterNodeId,
-          isRevisedAfterNodeId,
-          isRevisedAfterComponentId,
-          event,
-          criteriaCreatedTimestamp
-        )
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  isVisitedAndRevisedAfter(visitNodeId, reviseNodeId, reviseComponentId, event, timestamp) {
-    return (
-      this.isNodeVisitedAfterTimestamp(event, visitNodeId, timestamp) &&
-      this.hasWorkCreatedAfterTimestamp(reviseNodeId, reviseComponentId, event.clientSaveTime)
-    );
   }
 
   isNodeVisitedAfterTimestamp(event, nodeId, timestamp) {
@@ -545,44 +170,12 @@ export class StudentDataService extends DataService {
     return branchPathTakenEvents;
   }
 
-  evaluateChoiceChosenCriteria(criteria: any): boolean {
-    const service = this.componentServiceLookupService.getService('MultipleChoice');
-    const latestComponentState = this.getLatestComponentStateByNodeIdAndComponentId(
-      criteria.params.nodeId,
-      criteria.params.componentId
-    );
-    return latestComponentState != null && service.choiceChosen(criteria, latestComponentState);
-  }
-
-  evaluateScoreCriteria(criteria: any): boolean {
-    const params = criteria.params;
-    const scoreType = 'any';
-    const latestScoreAnnotation = this.AnnotationService.getLatestScoreAnnotation(
-      params.nodeId,
-      params.componentId,
-      this.ConfigService.getWorkgroupId(),
-      scoreType
-    );
-    if (latestScoreAnnotation != null) {
-      const scoreValue = this.getScoreValueFromScoreAnnotation(
-        latestScoreAnnotation,
-        params.scoreId
-      );
-      return this.isScoreInExpectedScores(params.scores, scoreValue);
-    }
-    return false;
-  }
-
   getScoreValueFromScoreAnnotation(scoreAnnotation: any, scoreId: string): number {
     if (scoreId == null) {
       return this.AnnotationService.getScoreValueFromScoreAnnotation(scoreAnnotation);
     } else {
       return this.AnnotationService.getSubScoreValueFromScoreAnnotation(scoreAnnotation, scoreId);
     }
-  }
-
-  evaluateTeacherRemovalCriteria(criteria: any) {
-    return criteria.params.periodId !== this.ConfigService.getPeriodId();
   }
 
   isScoreInExpectedScores(expectedScores, score) {
@@ -592,106 +185,11 @@ export class StudentDataService extends DataService {
     );
   }
 
-  evaluateUsedXSubmitsCriteria(criteria) {
-    const params = criteria.params;
-    return this.getSubmitCount(params.nodeId, params.componentId) >= params.requiredSubmitCount;
-  }
-
-  getSubmitCount(nodeId, componentId) {
-    // counter for manually counting the component states with isSubmit=true
-    let manualSubmitCounter = 0;
-
-    // counter for remembering the highest submitCounter value found in studentData objects
-    let highestSubmitCounter = 0;
-
-    /*
-     * We are counting with two submit counters for backwards compatibility.
-     * Some componentStates only have isSubmit=true and do not keep an
-     * updated submitCounter for the number of submits.
-     */
-    const componentStates = this.getComponentStatesByNodeIdAndComponentId(nodeId, componentId);
-    for (const componentState of componentStates) {
-      if (componentState.isSubmit) {
-        manualSubmitCounter++;
-      }
-      const studentData = componentState.studentData;
-      if (studentData.submitCounter > highestSubmitCounter) {
-        highestSubmitCounter = studentData.submitCounter;
-      }
-    }
-    return Math.max(manualSubmitCounter, highestSubmitCounter);
-  }
-
-  evaluateNumberOfWordsWrittenCriteria(criteria) {
-    const params = criteria.params;
-    const nodeId = params.nodeId;
-    const componentId = params.componentId;
-    const requiredNumberOfWords = params.requiredNumberOfWords;
-    const componentState = this.getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId);
-    if (componentState != null) {
-      const studentData = componentState.studentData;
-      const response = studentData.response;
-      const numberOfWords = this.UtilService.wordCount(response);
-      if (numberOfWords >= requiredNumberOfWords) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  evaluateAddXNumberOfNotesOnThisStepCriteria(criteria) {
-    const params = criteria.params;
-    const nodeId = params.nodeId;
-    const requiredNumberOfNotes = params.requiredNumberOfNotes;
-    try {
-      const notebook = this.notebookService.getNotebookByWorkgroup();
-      const notebookItemsByNodeId = this.getNotebookItemsByNodeId(notebook, nodeId);
-      return notebookItemsByNodeId.length >= requiredNumberOfNotes;
-    } catch (e) {}
-    return false;
-  }
-
-  evaluateFillXNumberOfRowsCriteria(criteria) {
-    const params = criteria.params;
-    const nodeId = params.nodeId;
-    const componentId = params.componentId;
-    const requiredNumberOfFilledRows = params.requiredNumberOfFilledRows;
-    const tableHasHeaderRow = params.tableHasHeaderRow;
-    const requireAllCellsInARowToBeFilled = params.requireAllCellsInARowToBeFilled;
-    const tableService = this.componentServiceLookupService.getService('Table');
-    const componentState = this.getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId);
-    return (
-      componentState != null &&
-      tableService.hasRequiredNumberOfFilledRows(
-        componentState,
-        requiredNumberOfFilledRows,
-        tableHasHeaderRow,
-        requireAllCellsInARowToBeFilled
-      )
-    );
-  }
-
-  evaluateHasTagCriteria(criteria) {
-    return this.TagService.hasTagName(criteria.params.tag);
-  }
-
-  getNotebookItemsByNodeId(notebook, nodeId) {
-    const notebookItemsByNodeId = [];
-    for (const notebookItem of notebook.allItems) {
-      if (notebookItem.nodeId === nodeId) {
-        notebookItemsByNodeId.push(notebookItem);
-      }
-    }
-    return notebookItemsByNodeId;
-  }
-
   populateHistories(events) {
     this.stackHistory = [];
-    this.visitedNodesHistory = [];
     for (const event of events) {
       if (event.event === 'nodeEntered') {
         this.updateStackHistory(event.nodeId);
-        this.updateVisitedNodesHistory(event.nodeId);
       }
     }
   }
@@ -717,23 +215,6 @@ export class StudentDataService extends DataService {
     } else {
       this.stackHistory.splice(indexOfNodeId + 1, this.stackHistory.length);
     }
-  }
-
-  updateVisitedNodesHistory(nodeId) {
-    const indexOfNodeId = this.visitedNodesHistory.indexOf(nodeId);
-    if (indexOfNodeId === -1) {
-      this.visitedNodesHistory.push(nodeId);
-    }
-  }
-
-  getVisitedNodesHistory() {
-    return this.visitedNodesHistory;
-  }
-
-  isNodeVisited(nodeId) {
-    const visitedNodesHistory = this.visitedNodesHistory;
-    const indexOfNodeId = visitedNodesHistory.indexOf(nodeId);
-    return indexOfNodeId !== -1;
   }
 
   createComponentState() {
@@ -858,7 +339,7 @@ export class StudentDataService extends DataService {
   prepareComponentStatesForSave(componentStates) {
     const studentWorkList = [];
     for (const componentState of componentStates) {
-      componentState.requestToken = RandomKeyService.generate();
+      componentState.requestToken = generateRandomKey();
       this.addComponentState(componentState);
       studentWorkList.push(componentState);
     }
@@ -867,14 +348,14 @@ export class StudentDataService extends DataService {
 
   prepareEventsForSave(events) {
     for (const event of events) {
-      event.requestToken = RandomKeyService.generate();
+      event.requestToken = generateRandomKey();
       this.addEvent(event);
     }
   }
 
   prepareAnnotationsForSave(annotations) {
     for (const annotation of annotations) {
-      annotation.requestToken = RandomKeyService.generate();
+      annotation.requestToken = generateRandomKey();
       if (annotation.id == null) {
         this.addAnnotation(annotation);
       }
@@ -1000,7 +481,7 @@ export class StudentDataService extends DataService {
           this.setRemoteIdIntoLocalId(savedAnnotation, localAnnotation);
           this.setRemoteServerSaveTimeIntoLocalServerSaveTime(savedAnnotation, localAnnotation);
           this.clearRequestToken(localAnnotation);
-          this.AnnotationService.broadcastAnnotationSavedToServer({ annotation: localAnnotation });
+          this.AnnotationService.broadcastAnnotationSavedToServer(localAnnotation);
           break;
         }
       }
@@ -1020,12 +501,9 @@ export class StudentDataService extends DataService {
     return null;
   }
 
-  isComponentSubmitDirty() {
+  isComponentSubmitDirty(): boolean {
     const latestComponentState = this.getLatestComponentState();
-    if (latestComponentState && !latestComponentState.isSubmit) {
-      return true;
-    }
-    return false;
+    return latestComponentState && !latestComponentState.isSubmit;
   }
 
   /**
@@ -1035,14 +513,14 @@ export class StudentDataService extends DataService {
    * @return the latest component state with the matching node id and component id or null if none
    * are found
    */
-  getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId = null) {
+  getLatestComponentStateByNodeIdAndComponentId(nodeId: string, componentId: string = null): any {
     const componentStates = this.studentData.componentStates;
     for (let c = componentStates.length - 1; c >= 0; c--) {
       const componentState = componentStates[c];
-      if (componentId == null && componentState.nodeId === nodeId) {
-        return componentState;
-      } else if (componentState.nodeId === nodeId && componentState.componentId === componentId) {
-        return componentState;
+      if (componentState.nodeId === nodeId) {
+        if (componentId == null || componentState.componentId === componentId) {
+          return componentState;
+        }
       }
     }
     return null;
@@ -1063,63 +541,29 @@ export class StudentDataService extends DataService {
     return null;
   }
 
-  getStudentWorkByStudentWorkId(studentWorkId) {
-    for (const componentState of this.studentData.componentStates) {
-      if (componentState.id === studentWorkId) {
-        return componentState;
-      }
-    }
-    return null;
-  }
-
-  getComponentStates() {
+  getComponentStates(): any[] {
     return this.studentData.componentStates;
   }
 
-  getComponentStatesByNodeId(nodeId) {
-    const componentStatesByNodeId = [];
-    for (const componentState of this.studentData.componentStates) {
-      if (componentState.nodeId === nodeId) {
-        componentStatesByNodeId.push(componentState);
-      }
-    }
-    return componentStatesByNodeId;
+  getComponentStatesByNodeId(nodeId: string): any[] {
+    return this.studentData.componentStates.filter(
+      (componentState) => componentState.nodeId === nodeId
+    );
   }
 
-  getComponentStatesByNodeIdAndComponentId(nodeId, componentId) {
-    const componentStatesByNodeIdAndComponentId = [];
-    for (const componentState of this.studentData.componentStates) {
-      if (componentState.nodeId === nodeId && componentState.componentId === componentId) {
-        componentStatesByNodeIdAndComponentId.push(componentState);
-      }
-    }
-    return componentStatesByNodeIdAndComponentId;
+  getComponentStatesByNodeIdAndComponentId(nodeId: string, componentId: string): any[] {
+    return this.studentData.componentStates.filter(
+      (componentState) =>
+        componentState.nodeId === nodeId && componentState.componentId === componentId
+    );
   }
 
-  getEvents() {
+  getEvents(): any[] {
     return this.studentData.events;
   }
 
-  getEventsByNodeId(nodeId) {
-    const eventsByNodeId = [];
-    const events = this.studentData.events;
-    for (const event of events) {
-      if (event.nodeId === nodeId) {
-        eventsByNodeId.push(event);
-      }
-    }
-    return eventsByNodeId;
-  }
-
-  getEventsByNodeIdAndComponentId(nodeId, componentId) {
-    const eventsByNodeId = [];
-    const events = this.studentData.events;
-    for (const event of events) {
-      if (event.nodeId === nodeId && event.componentId === componentId) {
-        eventsByNodeId.push(event);
-      }
-    }
-    return eventsByNodeId;
+  getEventsByNodeId(nodeId: string): any[] {
+    return this.studentData.events.filter((event) => event.nodeId === nodeId);
   }
 
   /**
@@ -1146,173 +590,8 @@ export class StudentDataService extends DataService {
     return this.ProjectService.getNodeById(nodeId) != null && this.ProjectService.isActive(nodeId);
   }
 
-  canVisitNode(nodeId: string): boolean {
-    const nodeStatus = this.getNodeStatusByNodeId(nodeId);
-    return nodeStatus != null && nodeStatus.isVisitable;
-  }
-
-  /**
-   * Get progress information for a given node
-   * @param nodeId the node id
-   * @returns object with number of completed items (both all and for items that capture student
-   * work), number of visible items (all/with work), completion % (for all items, items with student
-   * work)
-   */
-  getNodeProgressById(nodeId) {
-    const progress = {
-      totalItems: 0,
-      totalItemsWithWork: 0,
-      completedItems: 0,
-      completedItemsWithWork: 0
-    };
-    if (this.ProjectService.isGroupNode(nodeId)) {
-      for (const childNodeId of this.ProjectService.getChildNodeIdsById(nodeId)) {
-        const nodeStatus = this.nodeStatuses[childNodeId];
-        if (this.ProjectService.isGroupNode(childNodeId)) {
-          this.updateGroupNodeProgress(childNodeId, progress, nodeStatus);
-        } else {
-          this.updateStepNodeProgress(childNodeId, progress, nodeStatus);
-        }
-      }
-      this.calculateAndInjectCompletionPercentage(progress);
-      this.calculateAndInjectCompletionPercentageWithWork(progress);
-    }
-    // TODO: implement for steps (using components instead of child nodes)?
-    return progress;
-  }
-
-  updateGroupNodeProgress(nodeId, progress, nodeStatus) {
-    if (nodeStatus.progress.totalItemsWithWork > -1) {
-      progress.completedItems += nodeStatus.progress.completedItems;
-      progress.totalItems += nodeStatus.progress.totalItems;
-      progress.completedItemsWithWork += nodeStatus.progress.completedItemsWithWork;
-      progress.totalItemsWithWork += nodeStatus.progress.totalItemsWithWork;
-    } else {
-      // we have a legacy node status so we'll need to calculate manually
-      const groupProgress = this.getNodeProgressById(nodeId);
-      progress.completedItems += groupProgress.completedItems;
-      progress.totalItems += groupProgress.totalItems;
-      progress.completedItemsWithWork += groupProgress.completedItemsWithWork;
-      progress.totalItemsWithWork += groupProgress.totalItemsWithWork;
-    }
-    return progress;
-  }
-
-  updateStepNodeProgress(nodeId, progress, nodeStatus) {
-    if (nodeStatus.isVisible) {
-      progress.totalItems++;
-      const hasWork = this.ProjectService.nodeHasWork(nodeId);
-      if (hasWork) {
-        progress.totalItemsWithWork++;
-      }
-      if (nodeStatus.isCompleted) {
-        progress.completedItems++;
-        if (hasWork) {
-          progress.completedItemsWithWork++;
-        }
-      }
-    }
-    return progress;
-  }
-
-  calculateAndInjectCompletionPercentage(progress) {
-    const totalItems = progress.totalItems;
-    const completedItems = progress.completedItems;
-    progress.completionPct = totalItems ? Math.round((completedItems / totalItems) * 100) : 0;
-  }
-
-  calculateAndInjectCompletionPercentageWithWork(progress) {
-    const totalItemsWithWork = progress.totalItemsWithWork;
-    const completedItemsWithWork = progress.completedItemsWithWork;
-    progress.completionPctWithWork = totalItemsWithWork
-      ? Math.round((completedItemsWithWork / totalItemsWithWork) * 100)
-      : 0;
-  }
-
-  /**
-   * Check if the given node or component is completed
-   * @param nodeId the node id
-   * @param componentId (optional) the component id
-   * @returns whether the node or component is completed
-   */
-  isCompleted(nodeId, componentId = null) {
-    let result = false;
-    if (nodeId && componentId) {
-      result = this.isComponentCompleted(nodeId, componentId);
-    } else if (this.ProjectService.isGroupNode(nodeId)) {
-      result = this.isGroupNodeCompleted(nodeId);
-    } else if (this.ProjectService.isApplicationNode(nodeId)) {
-      result = this.isStepNodeCompleted(nodeId);
-    }
-    return result;
-  }
-
-  private isComponentCompleted(nodeId: string, componentId: string): boolean {
-    const component = this.ProjectService.getComponent(nodeId, componentId);
-    if (component != null) {
-      const node = this.ProjectService.getNodeById(nodeId);
-      const componentType = component.type;
-      const service = this.componentServiceLookupService.getService(componentType);
-      if (['OpenResponse', 'Discussion'].includes(componentType)) {
-        return service.isCompletedV2(node, component, this.studentData);
-      } else {
-        const componentStates = this.getComponentStatesByNodeIdAndComponentId(nodeId, componentId);
-        const nodeEvents = this.getEventsByNodeId(nodeId);
-        return service.isCompleted(component, componentStates, nodeEvents, node);
-      }
-    }
-    return false;
-  }
-
-  isStepNodeCompleted(nodeId) {
-    let result = true;
-    const components = this.ProjectService.getComponents(nodeId);
-    for (const component of components) {
-      const isComponentCompleted = this.isComponentCompleted(nodeId, component.id);
-      result = result && isComponentCompleted;
-    }
-    return result;
-  }
-
-  isGroupNodeCompleted(nodeId) {
-    let result = true;
-    const nodeIds = this.ProjectService.getChildNodeIdsById(nodeId);
-    for (const id of nodeIds) {
-      if (
-        this.nodeStatuses[id] == null ||
-        !this.nodeStatuses[id].isVisible ||
-        !this.nodeStatuses[id].isCompleted
-      ) {
-        result = false;
-        break;
-      }
-    }
-    return result;
-  }
-
-  endCurrentNodeAndSetCurrentNodeByNodeId(nodeId) {
-    if (this.nodeStatuses[nodeId].isVisitable) {
-      this.setCurrentNodeByNodeId(nodeId);
-    } else {
-      this.nodeClickLocked(nodeId);
-    }
-  }
-
-  nodeClickLocked(nodeId) {
-    this.broadcastNodeClickLocked({ nodeId: nodeId });
-  }
-
-  broadcastNodeClickLocked(args: any) {
-    this.nodeClickLockedSource.next(args);
-  }
-
   getTotalScore() {
     return this.AnnotationService.getTotalScore(this.studentData.annotations);
-  }
-
-  getProjectCompletion() {
-    const nodeId = 'group0';
-    return this.getNodeProgressById(nodeId);
   }
 
   getRunStatus() {
@@ -1380,31 +659,6 @@ export class StudentDataService extends DataService {
         }
         return null;
       });
-  }
-
-  /**
-   * Get the max possible score for the project
-   * @returns the sum of the max scores for all the nodes in the project visible
-   * to the current workgroup or null if none of the visible components has max scores.
-   */
-  getMaxScore() {
-    let maxScore = null;
-    for (const property in this.nodeStatuses) {
-      if (this.nodeStatuses.hasOwnProperty(property)) {
-        const nodeStatus = this.nodeStatuses[property];
-        const nodeId = nodeStatus.nodeId;
-        if (nodeStatus.isVisible && !this.ProjectService.isGroupNode(nodeId)) {
-          const nodeMaxScore = this.ProjectService.getMaxScoreForNode(nodeId);
-          if (nodeMaxScore) {
-            if (maxScore == null) {
-              maxScore = 0;
-            }
-            maxScore += nodeMaxScore;
-          }
-        }
-      }
-    }
-    return maxScore;
   }
 
   broadcastComponentDirty(args: any) {

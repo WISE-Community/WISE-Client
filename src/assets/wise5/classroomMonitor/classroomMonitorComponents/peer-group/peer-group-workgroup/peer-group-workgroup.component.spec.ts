@@ -1,7 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../../../services/configService';
-import { UtilService } from '../../../../services/utilService';
 import { PeerGroupWorkgroupComponent } from './peer-group-workgroup.component';
 
 describe('PeerGroupWorkgroupComponent', () => {
@@ -12,7 +11,7 @@ describe('PeerGroupWorkgroupComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [PeerGroupWorkgroupComponent],
-      providers: [ConfigService, UtilService]
+      providers: [ConfigService]
     }).compileComponents();
   });
 

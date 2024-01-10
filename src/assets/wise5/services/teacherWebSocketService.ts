@@ -8,34 +8,36 @@ import { Observable, Subject } from 'rxjs';
 import { AchievementService } from './achievementService';
 import { RxStomp } from '@stomp/rx-stomp';
 import { Message } from '@stomp/stompjs';
+import { Annotation } from '../common/Annotation';
 
 @Injectable()
 export class TeacherWebSocketService {
   runId: number;
   rxStomp: RxStomp;
-  private newAnnotationReceivedSource: Subject<any> = new Subject<any>();
-  public newAnnotationReceived$: Observable<any> = this.newAnnotationReceivedSource.asObservable();
+  private newAnnotationReceivedSource: Subject<Annotation> = new Subject<Annotation>();
+  public newAnnotationReceived$: Observable<Annotation> = this.newAnnotationReceivedSource.asObservable();
   private newStudentWorkReceivedSource: Subject<any> = new Subject<any>();
   public newStudentWorkReceived$: Observable<any> = this.newStudentWorkReceivedSource.asObservable();
 
   constructor(
     private AchievementService: AchievementService,
     private classroomStatusService: ClassroomStatusService,
-    private ConfigService: ConfigService,
+    private configService: ConfigService,
     private NotificationService: NotificationService
   ) {}
 
   initialize() {
-    this.runId = this.ConfigService.getRunId();
+    this.runId = this.configService.getRunId();
     this.initializeStomp();
     this.subscribeToTeacherTopic();
     this.subscribeToTeacherWorkgroupTopic();
+    this.subscribeToClassroomTopics();
   }
 
   initializeStomp() {
     this.rxStomp = new RxStomp();
     this.rxStomp.configure({
-      brokerURL: this.ConfigService.getWebSocketURL()
+      brokerURL: this.configService.getWebSocketURL()
     });
     this.rxStomp.activate();
   }
@@ -52,10 +54,9 @@ export class TeacherWebSocketService {
         this.classroomStatusService.broadcastStudentStatusReceived({ studentStatus: status });
       } else if (body.type === 'newStudentAchievement') {
         const achievement = JSON.parse(body.content);
-        this.AchievementService.broadcastNewStudentAchievement({ studentAchievement: achievement });
+        this.AchievementService.broadcastNewStudentAchievement(achievement);
       } else if (body.type === 'annotation') {
-        const annotationData = JSON.parse(body.content);
-        this.broadcastNewAnnotationReceived({ annotation: annotationData });
+        this.broadcastNewAnnotationReceived(JSON.parse(body.content));
       }
     });
   }
@@ -64,13 +65,13 @@ export class TeacherWebSocketService {
     this.newStudentWorkReceivedSource.next(args);
   }
 
-  broadcastNewAnnotationReceived(args: any) {
-    this.newAnnotationReceivedSource.next(args);
+  broadcastNewAnnotationReceived(annotation: Annotation): void {
+    this.newAnnotationReceivedSource.next(annotation);
   }
 
   subscribeToTeacherWorkgroupTopic() {
     this.rxStomp
-      .watch(`/topic/workgroup/${this.ConfigService.getWorkgroupId()}`)
+      .watch(`/topic/workgroup/${this.configService.getWorkgroupId()}`)
       .subscribe((message: Message) => {
         const body = JSON.parse(message.body);
         if (body.type === 'notification') {
@@ -92,5 +93,20 @@ export class TeacherWebSocketService {
       destination: `/app/api/teacher/run/${this.runId}/node-to-period/${periodId}`,
       body: JSON.stringify(node)
     });
+  }
+
+  private subscribeToClassroomTopics(): void {
+    for (const period of this.configService.getPeriods()) {
+      this.rxStomp
+        .watch(`/topic/classroom/${this.configService.getRunId()}/${period.periodId}`)
+        .subscribe((message: Message) => {
+          const body = JSON.parse(message.body);
+          if (body.type === 'newWorkgroupJoinedRun') {
+            this.configService.retrieveConfig(
+              `/api/config/classroomMonitor/${this.configService.getRunId()}`
+            );
+          }
+        });
+    }
   }
 }

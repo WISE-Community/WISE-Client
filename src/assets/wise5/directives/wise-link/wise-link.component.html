@@ -1,19 +1,23 @@
-<a *ngIf="type === 'link'"
-    href="#"
-    class="{{ linkClass }}"
-    (click)="goToStep()"
-    matTooltip="Go to step"
-    matTooltipPosition="above"
-    i18n-matTooltip>
+<a
+  *ngIf="type === 'link'"
+  href="#"
+  class="{{ linkClass }}"
+  (click)="goToStep()"
+  matTooltip="Go to step"
+  matTooltipPosition="above"
+  i18n-matTooltip
+>
   {{ linkText }}
 </a>
-<button *ngIf="type === 'button'"
-    mat-raised-button
-    color="primary"
-    class="{{ linkClass }}"
-    (click)="goToStep()"
-    matTooltip="Go to step"
-    matTooltipPosition="above"
-    i18n-matTooltip>
+<button
+  *ngIf="type === 'button'"
+  mat-raised-button
+  color="primary"
+  class="{{ linkClass }}"
+  (click)="goToStep()"
+  matTooltip="Go to step"
+  matTooltipPosition="above"
+  i18n-matTooltip
+>
   {{ linkText }}
 </button>

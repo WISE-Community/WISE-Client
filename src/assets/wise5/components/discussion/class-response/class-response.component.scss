@@ -1,9 +1,9 @@
-@import '~style/abstracts/variables', '~style/abstracts/functions';
+@import 'style/abstracts/variables', 'style/abstracts/functions';
 
 .class-response {
   margin: 0 auto 16px;
 
-  &.mat-card {
+  &.mat-mdc-card {
     padding: 0px;
   }
 
@@ -14,6 +14,7 @@
 
   .post {
     margin-top: 16px;
+    overflow-wrap: break-word;
   }
 
   .attachment {
@@ -22,26 +23,35 @@
     margin-top: 16px;
   }
 
+  .comment-divider {
+    margin: 0px;
+  }
+
   .comments {
-    padding: 0;
+    padding: 16px;
     max-height: 400px;
     overflow-y: auto;
   }
 
-  .mat-list-base .mat-list-item {
+  .comment {
+    padding-bottom: 16px;
+    overflow-wrap: break-word;
+  }
+
+  .mat-mdc-list-base .mat-mdc-list-item {
     &.mat-2-line {
       height: auto;
       margin-bottom: 12px;
     }
-    
+
     .mat-line {
       white-space: normal;
     }
-
+    /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
     .mat-list-item-content {
       align-items: flex-start;
     }
-
+    /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
     &.mat-list-item-with-avatar .mat-list-item-content .mat-list-text {
       padding-left: 8px;
 

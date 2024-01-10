@@ -1,6 +1,6 @@
-@import '~style/abstracts/variables', '~style/abstracts/functions';
+@import 'style/abstracts/variables', 'style/abstracts/functions';
 
-.mat-card {
+.mat-mdc-card {
   padding: 12px;
   margin-top: 16px;
   max-width: breakpoint('sm.min');

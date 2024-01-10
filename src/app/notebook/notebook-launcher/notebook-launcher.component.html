@@ -1,9 +1,11 @@
-<button *ngIf="notebookConfig.itemTypes.note.enabled"
-    mat-fab
-    color="accent"
-    [attr.aria-label]="label"
-    [matTooltip]="label"
-    matTooltipPosition="above"
-    (click)="showNotes()">
+<button
+  *ngIf="notebookConfig.itemTypes.note.enabled"
+  mat-fab
+  color="accent"
+  [attr.aria-label]="label"
+  [matTooltip]="label"
+  matTooltipPosition="above"
+  (click)="showNotes()"
+>
   <mat-icon>{{ notebookConfig.icon }}</mat-icon>
 </button>

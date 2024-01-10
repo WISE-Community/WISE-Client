@@ -1,21 +1,29 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { PeerGroupingTestingModule } from '../peer-grouping-testing.module';
 import { EditPeerGroupingDialogComponent } from './edit-peer-grouping-dialog.component';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { DIFFERENT_IDEAS_VALUE } from '../PeerGroupingLogic';
+import { DIFFERENT_IDEAS_VALUE, DIFFERENT_SCORES_VALUE } from '../PeerGroupingLogic';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 let component: EditPeerGroupingDialogComponent;
+const componentId1 = 'component1';
 let dialogCloseSpy: jasmine.Spy;
 let fixture: ComponentFixture<EditPeerGroupingDialogComponent>;
+const modeAny: string = 'any';
+const nodeId1 = 'node1';
+const modeMaximize: string = 'maximize';
+let snackBar: MatSnackBar;
+let peerGroupingAuthoringService;
+let updatePeerGroupingSpy: jasmine.Spy;
 
 describe('EditPeerGroupingDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PeerGroupingTestingModule, StudentTeacherCommonServicesModule],
+      imports: [MatSnackBarModule, PeerGroupingTestingModule, StudentTeacherCommonServicesModule],
       declarations: [EditPeerGroupingDialogComponent],
       providers: [
         {
@@ -32,7 +40,10 @@ describe('EditPeerGroupingDialogComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditPeerGroupingDialogComponent);
     component = fixture.componentInstance;
+    peerGroupingAuthoringService = TestBed.inject(PeerGroupingAuthoringService);
+    updatePeerGroupingSpy = spyOn(peerGroupingAuthoringService, 'updatePeerGrouping');
     dialogCloseSpy = spyOn(TestBed.inject(MatDialogRef), 'close');
+    snackBar = TestBed.inject(MatSnackBar);
     fixture.detectChanges();
   });
 
@@ -42,44 +53,86 @@ describe('EditPeerGroupingDialogComponent', () => {
 });
 
 function savePeerGrouping() {
-  it('should save peer grouping', async () => {
-    const settings = new PeerGrouping();
-    component.peerGrouping = settings;
-    const updatePeerGroupingSpy = spyOn(
-      TestBed.inject(PeerGroupingAuthoringService),
-      'updatePeerGrouping'
-    ).and.returnValue(of(settings));
-    component.save();
-    expect(updatePeerGroupingSpy).toHaveBeenCalledWith(settings);
-    expect(dialogCloseSpy).toHaveBeenCalled();
-  });
+  describe('save is clicked', () => {
+    describe('save to backend is successful', () => {
+      it('closes the dialog', async () => {
+        const settings = new PeerGrouping();
+        component.peerGrouping = settings;
+        updatePeerGroupingSpy.and.returnValue(of(settings));
+        component.save();
+        expect(updatePeerGroupingSpy).toHaveBeenCalledWith(settings);
+        expect(dialogCloseSpy).toHaveBeenCalled();
+      });
+    });
 
-  it('should save peer grouping with random logic', () => {
-    savePeerGroupingWithLogic('random', null, 'random');
-  });
+    describe('peer grouping logic is random', () => {
+      it('properly generates the random logic string', () => {
+        savePeerGroupingWithLogic('random', null, 'random');
+      });
+    });
 
-  it('should save peer grouping with manual logic', () => {
-    savePeerGroupingWithLogic('manual', null, 'manual');
-  });
+    describe('peer grouping logic is manual', () => {
+      it('properly generates the manual logic string', () => {
+        savePeerGroupingWithLogic('manual', null, 'manual');
+      });
+    });
 
-  it('should save peer grouping with different ideas logic', () => {
-    savePeerGroupingWithLogic(DIFFERENT_IDEAS_VALUE, null, 'differentIdeas("node1", "component1")');
-  });
+    describe('peer grouping logic is different ideas', () => {
+      it('properly generates the different ideas logic string', () => {
+        savePeerGroupingWithLogic(
+          DIFFERENT_IDEAS_VALUE,
+          modeAny,
+          `${DIFFERENT_IDEAS_VALUE}("${nodeId1}", "${componentId1}", "${modeAny}")`
+        );
+      });
+    });
 
-  it('should save peer grouping with different scores any logic', () => {
-    savePeerGroupingWithLogic(
-      'differentKIScores',
-      'any',
-      'differentKIScores("node1", "component1", "any")'
-    );
-  });
+    describe('peer grouping logic is different ideas maximize logic', () => {
+      it('properly generates the different ideas maximize logic string', () => {
+        savePeerGroupingWithLogic(
+          DIFFERENT_IDEAS_VALUE,
+          modeMaximize,
+          `${DIFFERENT_IDEAS_VALUE}("${nodeId1}", "${componentId1}", "${modeMaximize}")`
+        );
+      });
+    });
 
-  it('should save peer grouping with different scores maximize logic', () => {
-    savePeerGroupingWithLogic(
-      'differentKIScores',
-      'maximize',
-      'differentKIScores("node1", "component1", "maximize")'
-    );
+    describe('peer grouping logic is different scores', () => {
+      it('properly generates the different scores logic string', () => {
+        savePeerGroupingWithLogic(
+          DIFFERENT_SCORES_VALUE,
+          modeAny,
+          `${DIFFERENT_SCORES_VALUE}("${nodeId1}", "${componentId1}", "${modeAny}")`
+        );
+      });
+    });
+
+    describe('peer grouping logic is different scores maximize logic', () => {
+      it('proplery generates the different scores maximize logic string', () => {
+        savePeerGroupingWithLogic(
+          DIFFERENT_SCORES_VALUE,
+          modeMaximize,
+          `${DIFFERENT_SCORES_VALUE}("${nodeId1}", "${componentId1}", "${modeMaximize}")`
+        );
+      });
+    });
+
+    describe('save to backend returns not authorized error', () => {
+      it('shows not authorized error', () => {
+        const snackBarSpy = spyOn(snackBar, 'open');
+        updatePeerGroupingSpy.and.returnValue(
+          throwError(() => {
+            return {
+              error: {
+                messageCode: 'notAuthorized'
+              }
+            };
+          })
+        );
+        component.save();
+        expect(snackBarSpy).toHaveBeenCalledWith('You are not allowed to perform this action.');
+      });
+    });
   });
 }
 
@@ -92,24 +145,26 @@ function savePeerGroupingWithLogic(logicType: string, mode: string, expectedLogi
     componentId: 'component1'
   };
   component.mode = mode;
-  spyOn(TestBed.inject(PeerGroupingAuthoringService), 'updatePeerGrouping').and.returnValue(
-    of(peerGrouping)
-  );
+  updatePeerGroupingSpy.and.returnValue(of(peerGrouping));
   component.save();
   expect(component.peerGrouping.logic).toEqual(expectedLogic);
 }
 
 function deletePeerGrouping() {
-  it('should delete peer grouping', () => {
-    spyOn(window, 'confirm').and.returnValue(true);
-    component.delete();
-    expect(dialogCloseSpy).toHaveBeenCalled();
+  describe('delete is clicked', () => {
+    it('deletes peer grouping', () => {
+      spyOn(window, 'confirm').and.returnValue(true);
+      component.delete();
+      expect(dialogCloseSpy).toHaveBeenCalled();
+    });
   });
 }
 
 function cancelPeerGrouping() {
-  it('should cancel peer grouping', () => {
-    component.cancel();
-    expect(dialogCloseSpy).toHaveBeenCalled();
+  describe('cancel is clicked', () => {
+    it('cancels peer grouping', () => {
+      component.cancel();
+      expect(dialogCloseSpy).toHaveBeenCalled();
+    });
   });
 }

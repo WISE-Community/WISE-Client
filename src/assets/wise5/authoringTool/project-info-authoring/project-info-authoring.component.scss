@@ -1,0 +1,48 @@
+.project-icon-label {
+  margin-bottom: 10px;
+}
+
+.project-icon-container {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.project-icon {
+  width: 200px;
+}
+
+.project-icon-error {
+  border: 1px solid black;
+  padding: 20px;
+}
+
+.choose-project-icon-message {
+  margin-bottom: 20px;
+}
+
+.project-icon-to-choose {
+  cursor: pointer;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.red {
+  color: red;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+
+.textarea {
+  width: 100%;
+}
+
+.input {
+  width: 50%;
+}

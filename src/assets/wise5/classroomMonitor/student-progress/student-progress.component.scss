@@ -1,0 +1,29 @@
+.student-progress {
+  .table--list {
+    width: 100%;
+  }
+  /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
+  .mat-list-item-content {
+    padding: 0;
+  }
+
+  .user-list {
+    &.mat-mdc-list-base {
+      /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
+      .mat-mdc-list-item .mat-list-item-content {
+        padding: 0;
+      }
+    }
+  }
+
+  .workgroup-row {
+    cursor: pointer;
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+
+  .mat-headline-5 {
+    margin: 0;
+  }
+}

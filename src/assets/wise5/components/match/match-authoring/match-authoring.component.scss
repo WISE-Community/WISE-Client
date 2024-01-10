@@ -1,7 +1,3 @@
-@import '~style/abstracts/variables', '~style/themes/default';
-
-$notice-bg: map-get($default-colors, notice-bg);
-
 .section {
   border: 2px solid #dddddd;
   border-radius: 5px;
@@ -28,7 +24,6 @@ $notice-bg: map-get($default-colors, notice-bg);
 }
 
 .choice-feedback-container {
-  background: $notice-bg;
   border: 1px solid #dddddd;
   border-radius: 5px;
   padding: 20px;
@@ -52,4 +47,8 @@ $notice-bg: map-get($default-colors, notice-bg);
 
 .reload-preview-container {
   margin-bottom: 10px;
+}
+
+.mat-icon {
+  margin: 0px;
 }

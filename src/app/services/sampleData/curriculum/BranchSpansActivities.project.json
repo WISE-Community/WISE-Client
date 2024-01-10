@@ -1,0 +1,553 @@
+{
+  "nodes": [
+      {
+          "id": "group0",
+          "type": "group",
+          "title": "Master",
+          "startId": "group1",
+          "ids": [
+              "group1",
+              "group2"
+          ]
+      },
+      {
+          "id": "group1",
+          "type": "group",
+          "title": "First Lesson",
+          "startId": "node1",
+          "ids": [
+              "node1",
+              "node2",
+              "node3"
+          ],
+          "icons": {
+              "default": {
+                  "color": "#2196F3",
+                  "type": "font",
+                  "fontSet": "material-icons",
+                  "fontName": "info"
+              }
+          },
+          "transitionLogic": {
+              "transitions": [
+                  {
+                      "to": "group2"
+                  }
+              ]
+          }
+      },
+      {
+          "id": "node1",
+          "type": "node",
+          "title": "HTML",
+          "components": [
+              {
+                  "id": "0mcelu2vje",
+                  "type": "HTML",
+                  "prompt": "",
+                  "showSaveButton": false,
+                  "showSubmitButton": false,
+                  "html": "Enter html here"
+              }
+          ],
+          "constraints": [],
+          "showSaveButton": false,
+          "showSubmitButton": false,
+          "transitionLogic": {
+              "transitions": [
+                  {
+                      "to": "node2"
+                  },
+                  {
+                      "to": "node3"
+                  }
+              ],
+              "howToChooseAmongAvailablePaths": "workgroupId",
+              "whenToChoosePath": "enterNode",
+              "canChangePath": false,
+              "maxPathsVisitable": 1
+          }
+      },
+      {
+          "id": "group2",
+          "type": "group",
+          "title": "Second Lesson",
+          "startId": "node4",
+          "constraints": [],
+          "transitionLogic": {
+              "transitions": []
+          },
+          "ids": [
+              "node4",
+              "node5",
+              "node6",
+              "node7"
+          ]
+      },
+      {
+          "id": "node2",
+          "title": "Open Response",
+          "type": "node",
+          "constraints": [
+              {
+                  "id": "node2Constraint1",
+                  "action": "makeThisNodeNotVisible",
+                  "targetId": "node2",
+                  "removalConditional": "all",
+                  "removalCriteria": [
+                      {
+                          "name": "branchPathTaken",
+                          "params": {
+                              "fromNodeId": "node1",
+                              "toNodeId": "node2"
+                          }
+                      }
+                  ]
+              },
+              {
+                  "id": "node2Constraint2",
+                  "action": "makeThisNodeNotVisitable",
+                  "targetId": "node2",
+                  "removalConditional": "all",
+                  "removalCriteria": [
+                      {
+                          "name": "branchPathTaken",
+                          "params": {
+                              "fromNodeId": "node1",
+                              "toNodeId": "node2"
+                          }
+                      }
+                  ]
+              }
+          ],
+          "transitionLogic": {
+              "transitions": [
+                  {
+                      "to": "node4"
+                  }
+              ]
+          },
+          "showSaveButton": true,
+          "showSubmitButton": false,
+          "components": [
+              {
+                  "id": "mycxq2ysn3",
+                  "type": "OpenResponse",
+                  "prompt": "",
+                  "showSaveButton": false,
+                  "showSubmitButton": false,
+                  "starterSentence": null,
+                  "isStudentAttachmentEnabled": false
+              }
+          ]
+      },
+      {
+          "id": "node3",
+          "title": "Open Response",
+          "type": "node",
+          "constraints": [
+              {
+                  "id": "node3Constraint1",
+                  "action": "makeThisNodeNotVisible",
+                  "targetId": "node3",
+                  "removalConditional": "all",
+                  "removalCriteria": [
+                      {
+                          "name": "branchPathTaken",
+                          "params": {
+                              "fromNodeId": "node1",
+                              "toNodeId": "node3"
+                          }
+                      }
+                  ]
+              },
+              {
+                  "id": "node3Constraint2",
+                  "action": "makeThisNodeNotVisitable",
+                  "targetId": "node3",
+                  "removalConditional": "all",
+                  "removalCriteria": [
+                      {
+                          "name": "branchPathTaken",
+                          "params": {
+                              "fromNodeId": "node1",
+                              "toNodeId": "node3"
+                          }
+                      }
+                  ]
+              }
+          ],
+          "transitionLogic": {
+              "transitions": [
+                  {
+                      "to": "node5"
+                  }
+              ]
+          },
+          "showSaveButton": true,
+          "showSubmitButton": false,
+          "components": [
+              {
+                  "id": "6a4o1s1nw0",
+                  "type": "OpenResponse",
+                  "prompt": "",
+                  "showSaveButton": false,
+                  "showSubmitButton": false,
+                  "starterSentence": null,
+                  "isStudentAttachmentEnabled": false
+              }
+          ]
+      },
+      {
+          "id": "node4",
+          "title": "Multiple Choice",
+          "type": "node",
+          "constraints": [
+              {
+                  "id": "node4Constraint1",
+                  "action": "makeThisNodeNotVisible",
+                  "targetId": "node4",
+                  "removalConditional": "all",
+                  "removalCriteria": [
+                      {
+                          "name": "branchPathTaken",
+                          "params": {
+                              "fromNodeId": "node1",
+                              "toNodeId": "node2"
+                          }
+                      }
+                  ]
+              },
+              {
+                  "id": "node4Constraint2",
+                  "action": "makeThisNodeNotVisitable",
+                  "targetId": "node4",
+                  "removalConditional": "all",
+                  "removalCriteria": [
+                      {
+                          "name": "branchPathTaken",
+                          "params": {
+                              "fromNodeId": "node1",
+                              "toNodeId": "node2"
+                          }
+                      }
+                  ]
+              }
+          ],
+          "transitionLogic": {
+              "transitions": [
+                  {
+                      "to": "node7"
+                  }
+              ]
+          },
+          "showSaveButton": true,
+          "showSubmitButton": false,
+          "components": [
+              {
+                  "id": "5uy3znfthp",
+                  "type": "MultipleChoice",
+                  "prompt": "",
+                  "showSaveButton": false,
+                  "showSubmitButton": false,
+                  "choiceType": "radio",
+                  "choices": [],
+                  "showFeedback": true
+              }
+          ]
+      },
+      {
+          "id": "node5",
+          "title": "Multiple Choice",
+          "type": "node",
+          "constraints": [
+              {
+                  "id": "node5Constraint1",
+                  "action": "makeThisNodeNotVisible",
+                  "targetId": "node5",
+                  "removalConditional": "all",
+                  "removalCriteria": [
+                      {
+                          "name": "branchPathTaken",
+                          "params": {
+                              "fromNodeId": "node1",
+                              "toNodeId": "node3"
+                          }
+                      }
+                  ]
+              },
+              {
+                  "id": "node5Constraint2",
+                  "action": "makeThisNodeNotVisitable",
+                  "targetId": "node5",
+                  "removalConditional": "all",
+                  "removalCriteria": [
+                      {
+                          "name": "branchPathTaken",
+                          "params": {
+                              "fromNodeId": "node1",
+                              "toNodeId": "node3"
+                          }
+                      }
+                  ]
+              }
+          ],
+          "transitionLogic": {
+              "transitions": [
+                  {
+                      "to": "node6"
+                  }
+              ]
+          },
+          "showSaveButton": true,
+          "showSubmitButton": false,
+          "components": [
+              {
+                  "id": "3nuujn68v5",
+                  "type": "MultipleChoice",
+                  "prompt": "",
+                  "showSaveButton": false,
+                  "showSubmitButton": false,
+                  "choiceType": "radio",
+                  "choices": [],
+                  "showFeedback": true
+              }
+          ]
+      },
+      {
+          "id": "node6",
+          "title": "Table",
+          "type": "node",
+          "constraints": [
+              {
+                  "id": "node6Constraint1",
+                  "action": "makeThisNodeNotVisible",
+                  "targetId": "node6",
+                  "removalConditional": "all",
+                  "removalCriteria": [
+                      {
+                          "name": "branchPathTaken",
+                          "params": {
+                              "fromNodeId": "node1",
+                              "toNodeId": "node3"
+                          }
+                      }
+                  ]
+              },
+              {
+                  "id": "node6Constraint2",
+                  "action": "makeThisNodeNotVisitable",
+                  "targetId": "node6",
+                  "removalConditional": "all",
+                  "removalCriteria": [
+                      {
+                          "name": "branchPathTaken",
+                          "params": {
+                              "fromNodeId": "node1",
+                              "toNodeId": "node3"
+                          }
+                      }
+                  ]
+              }
+          ],
+          "transitionLogic": {
+              "transitions": [
+                  {
+                      "to": "node7"
+                  }
+              ]
+          },
+          "showSaveButton": true,
+          "showSubmitButton": false,
+          "components": [
+              {
+                  "id": "phegppz6of",
+                  "type": "Table",
+                  "prompt": "",
+                  "showSaveButton": false,
+                  "showSubmitButton": false,
+                  "globalCellSize": 10,
+                  "numRows": 3,
+                  "numColumns": 3,
+                  "tableData": [
+                      [
+                          {
+                              "text": "",
+                              "editable": true,
+                              "size": null
+                          },
+                          {
+                              "text": "",
+                              "editable": true,
+                              "size": null
+                          },
+                          {
+                              "text": "",
+                              "editable": true,
+                              "size": null
+                          }
+                      ],
+                      [
+                          {
+                              "text": "",
+                              "editable": true,
+                              "size": null
+                          },
+                          {
+                              "text": "",
+                              "editable": true,
+                              "size": null
+                          },
+                          {
+                              "text": "",
+                              "editable": true,
+                              "size": null
+                          }
+                      ],
+                      [
+                          {
+                              "text": "",
+                              "editable": true,
+                              "size": null
+                          },
+                          {
+                              "text": "",
+                              "editable": true,
+                              "size": null
+                          },
+                          {
+                              "text": "",
+                              "editable": true,
+                              "size": null
+                          }
+                      ]
+                  ]
+              }
+          ]
+      },
+      {
+          "id": "node7",
+          "title": "HTML",
+          "type": "node",
+          "constraints": [],
+          "transitionLogic": {
+              "transitions": []
+          },
+          "showSaveButton": false,
+          "showSubmitButton": false,
+          "components": [
+              {
+                  "id": "vves3f6hut",
+                  "type": "HTML",
+                  "prompt": "",
+                  "showSaveButton": false,
+                  "showSubmitButton": false,
+                  "html": "Enter html here"
+              }
+          ]
+      }
+  ],
+  "constraints": [],
+  "startGroupId": "group0",
+  "startNodeId": "node1",
+  "navigationMode": "guided",
+  "layout": {
+      "template": "starmap|leftNav|rightNav"
+  },
+  "metadata": {
+      "title": "Branch Test",
+      "authors": [
+          {
+              "firstName": "g",
+              "lastName": "k",
+              "id": 3,
+              "username": "gk"
+          }
+      ]
+  },
+  "notebook": {
+      "enabled": false,
+      "label": "Notebook",
+      "enableAddNew": true,
+      "itemTypes": {
+          "note": {
+              "type": "note",
+              "enabled": true,
+              "enableLink": true,
+              "enableAddNote": true,
+              "enableClipping": true,
+              "enableStudentUploads": true,
+              "requireTextOnEveryNote": false,
+              "label": {
+                  "singular": "note",
+                  "plural": "notes",
+                  "link": "Notes",
+                  "icon": "note",
+                  "color": "#1565C0"
+              }
+          },
+          "report": {
+              "enabled": false,
+              "label": {
+                  "singular": "report",
+                  "plural": "reports",
+                  "link": "Report",
+                  "icon": "assignment",
+                  "color": "#AD1457"
+              },
+              "notes": [
+                  {
+                      "reportId": "finalReport",
+                      "title": "Final Report",
+                      "description": "Final summary report of what you learned in this unit",
+                      "prompt": "Use this space to write your final report using evidence from your notebook.",
+                      "content": "<h3>This is a heading</h3><p>This is a paragraph.</p>"
+                  }
+              ]
+          }
+      }
+  },
+  "teacherNotebook": {
+      "enabled": true,
+      "label": "Teacher Notebook",
+      "enableAddNew": true,
+      "itemTypes": {
+          "note": {
+              "type": "note",
+              "enabled": false,
+              "enableLink": true,
+              "enableAddNote": true,
+              "enableClipping": true,
+              "enableStudentUploads": true,
+              "requireTextOnEveryNote": false,
+              "label": {
+                  "singular": "note",
+                  "plural": "notes",
+                  "link": "Notes",
+                  "icon": "note",
+                  "color": "#1565C0"
+              }
+          },
+          "report": {
+              "enabled": true,
+              "label": {
+                  "singular": "teacher notes",
+                  "plural": "teacher notes",
+                  "link": "Teacher Notes",
+                  "icon": "assignment",
+                  "color": "#AD1457"
+              },
+              "notes": [
+                  {
+                      "reportId": "teacherReport",
+                      "title": "Teacher Notes",
+                      "description": "Notes for the teacher as they're running the WISE unit",
+                      "prompt": "Use this space to take notes for this unit",
+                      "content": "<p>Use this space to take notes for this unit</p>"
+                  }
+              ]
+          }
+      }
+  },
+  "inactiveNodes": []
+}

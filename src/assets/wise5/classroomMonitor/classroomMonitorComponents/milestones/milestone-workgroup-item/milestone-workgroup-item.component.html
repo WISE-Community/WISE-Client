@@ -1,67 +1,111 @@
-<div class="list-item mat-elevation-z1"
-    [ngClass]="{'list-item--warn': statusClass === 'warn', 'list-item--info': statusClass === 'info'}">
-  <button mat-button
-      class="list-item__subheader-button"
-      aria-label="Show/hide team's work for this step"
-      i18n-aria-label
-      [ngClass]="{'list-item--noclick': !showScore || disabled}"
-      (click)="toggleExpand()"
-      [disabled]="disabled"
-      fxLayoutWrap>
-    <div fxLayout="row" fxFlex>
+<div
+  class="list-item milestone-workgroup-item mat-elevation-z1"
+  [ngClass]="{
+    'list-item--warn': statusClass === 'warn',
+    'list-item--info': statusClass === 'info'
+  }"
+>
+  <button
+    mat-button
+    class="list-item__subheader-button team-button"
+    aria-label="Show/hide team's work for this step"
+    i18n-aria-label
+    [ngClass]="{ 'list-item--noclick': !showScore || disabled }"
+    (click)="toggleExpand()"
+    [disabled]="disabled"
+    fxLayoutWrap
+  >
+    <div fxLayout="row" fxFlex="100">
       <div fxFlex fxLayout="row" fxLayoutAlign="start center">
-        <workgroup-info [hasAlert]="hasAlert"
-            [hasNewAlert]="hasNewAlert"
-            [usernames]="workgroupData.displayNames"
-            [workgroupId]="workgroupId"></workgroup-info>
+        <workgroup-info
+          [hasAlert]="hasAlert"
+          [hasNewAlert]="hasNewAlert"
+          [usernames]="workgroupData.displayNames"
+          [workgroupId]="workgroupId"
+        ></workgroup-info>
       </div>
       <div *ngIf="locations.length == 1" fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
         <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass">
         </workgroup-node-status>
       </div>
-      <div *ngIf="showScore && locations.length > 1" fxFlex="10" fxLayout="row" fxLayoutAlign="center center">
+      <div
+        *ngIf="showScore && locations.length > 1"
+        fxFlex="10"
+        fxLayout="row"
+        fxLayoutAlign="center center"
+      >
         <workgroup-node-score [score]="initialScore" [maxScore]="firstComponentMaxScore">
         </workgroup-node-score>
       </div>
-      <div *ngIf="showScore" fxFlex="{{locations.length > 1 ? 10 : 20}}" fxLayout="row" fxLayoutAlign="center center">
+      <div
+        *ngIf="showScore"
+        fxFlex="{{ locations.length > 1 ? 10 : 20 }}"
+        fxLayout="row"
+        fxLayoutAlign="center center"
+      >
         <workgroup-node-score [score]="score" [maxScore]="lastComponentMaxScore">
         </workgroup-node-score>
       </div>
-      <div *ngIf="showScore && locations.length > 1" fxFlex="10" fxLayout="row" fxLayoutAlign="center center">
-        <span class="md-display-1" [ngClass]="{'success': changeInScore > 0, 'warn': changeInScore < 0}">
-          <span *ngIf="changeInScore > 0">+</span>{{changeInScore}}
+      <div
+        *ngIf="showScore && locations.length > 1"
+        fxFlex="10"
+        fxLayout="row"
+        fxLayoutAlign="center center"
+      >
+        <span
+          class="mat-headline-5"
+          [ngClass]="{ success: changeInScore > 0, warn: changeInScore < 0 }"
+        >
+          <span *ngIf="changeInScore > 0">+</span>{{ changeInScore }}
         </span>
       </div>
     </div>
   </button>
   <mat-list-item *ngIf="expanded && !disabled" class="grading__item-container">
-    <div class="grading__item" style="width:100%">
-      <div *ngIf="locations.length > 1"
-          id="component_{{firstComponentId}}_{{workgroupId}}"
-          class="component component--grading">
+    <div class="grading__item" style="width: 100%">
+      <div
+        *ngIf="locations.length > 1"
+        id="component_{{ firstComponentId }}_{{ workgroupId }}"
+        class="component component--grading"
+      >
         <div>
-          <h3 class="accent-1 mat-body-2 gray-lightest-bg component__header">
-            <span i18n>Step {{getNodePosition(firstNodeId)}}</span> ({{ getComponentTypeLabel(firstComponent.type) }})&nbsp;
-            <component-new-work-badge [componentId]="firstComponentId"
-                [workgroupId]="workgroupId"
-                [nodeId]="firstNodeId"></component-new-work-badge>
-          </h3>
-          <workgroup-component-grading [componentId]="firstComponentId"
+          <h3 class="accent-1 gray-lightest-bg component__header">
+            <span i18n>Step {{ getNodePosition(firstNodeId) }}</span> ({{
+              getComponentTypeLabel(firstComponent.type)
+            }})&nbsp;
+            <component-new-work-badge
+              [componentId]="firstComponentId"
               [workgroupId]="workgroupId"
-              [nodeId]="firstNodeId"></workgroup-component-grading>
+              [nodeId]="firstNodeId"
+            ></component-new-work-badge>
+          </h3>
+          <workgroup-component-grading
+            [componentId]="firstComponentId"
+            [workgroupId]="workgroupId"
+            [nodeId]="firstNodeId"
+          ></workgroup-component-grading>
         </div>
       </div>
-      <div id="component_{{lastComponentId}}_{{workgroupId}}" class="component component--grading">
+      <div
+        id="component_{{ lastComponentId }}_{{ workgroupId }}"
+        class="component component--grading"
+      >
         <div>
-          <h3 class="accent-1 mat-body-2 gray-lightest-bg component__header">
-            <span i18n>Step {{getNodePosition(lastNodeId)}}</span> ({{ getComponentTypeLabel(lastComponent.type) }})&nbsp;
-            <component-new-work-badge [componentId]="lastComponentId"
-                [workgroupId]="workgroupId"
-                [nodeId]="lastNodeId"></component-new-work-badge>
-          </h3>
-          <workgroup-component-grading [componentId]="lastComponentId"
+          <h3 class="accent-1 gray-lightest-bg component__header">
+            <span i18n>Step {{ getNodePosition(lastNodeId) }}</span> ({{
+              getComponentTypeLabel(lastComponent.type)
+            }})&nbsp;
+            <component-new-work-badge
+              [componentId]="lastComponentId"
               [workgroupId]="workgroupId"
-              [nodeId]="lastNodeId"></workgroup-component-grading>
+              [nodeId]="lastNodeId"
+            ></component-new-work-badge>
+          </h3>
+          <workgroup-component-grading
+            [componentId]="lastComponentId"
+            [workgroupId]="workgroupId"
+            [nodeId]="lastNodeId"
+          ></workgroup-component-grading>
         </div>
       </div>
     </div>

@@ -2,114 +2,126 @@
   <component-header [component]="component"></component-header>
   <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
     <button
-        mat-raised-button
-        color="primary"
-        *ngIf="animationState === 'stopped'"
-        (click)="playButtonClicked()"
-        [disabled]="isDisabled"
-        matTooltip="Play"
-        matTooltipPosition="above"
-        i18n-matTooltip>
+      mat-raised-button
+      color="primary"
+      *ngIf="animationState === 'stopped'"
+      (click)="playButtonClicked()"
+      [disabled]="isDisabled"
+      matTooltip="Play"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
       <mat-icon>play_arrow</mat-icon>
     </button>
     <button
-        mat-raised-button
-        color="primary"
-        *ngIf="animationState === 'playing'"
-        (click)="pauseButtonClicked()"
-        [disabled]="isDisabled"
-        matTooltip="Pause"
-        matTooltipPosition="above"
-        i18n-matTooltip>
+      mat-raised-button
+      color="primary"
+      *ngIf="animationState === 'playing'"
+      (click)="pauseButtonClicked()"
+      [disabled]="isDisabled"
+      matTooltip="Pause"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
       <mat-icon>pause</mat-icon>
     </button>
     <button
-        mat-raised-button
-        color="primary"
-        *ngIf="animationState === 'paused'"
-        (click)="resumeButtonClicked()"
-        [disabled]="isDisabled"
-        matTooltip="Resume"
-        matTooltipPosition="above"
-        i18n-matTooltip>
+      mat-raised-button
+      color="primary"
+      *ngIf="animationState === 'paused'"
+      (click)="resumeButtonClicked()"
+      [disabled]="isDisabled"
+      matTooltip="Resume"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
       <mat-icon>play_arrow</mat-icon>
     </button>
     <button
-        mat-raised-button
-        color="primary"
-        (click)="resetButtonClicked()"
-        [disabled]="isDisabled"
-        matTooltip="Reset"
-        matTooltipPosition="above"
-        i18n-matTooltip>
+      mat-raised-button
+      color="primary"
+      (click)="resetButtonClicked()"
+      [disabled]="isDisabled"
+      matTooltip="Reset"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
       <mat-icon>replay</mat-icon>
     </button>
     <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
       <span i18n>Slower</span>
       <mat-slider
-          [ngModel]="speedSliderValue"
-          [disabled]="isDisabled"
-          (ngModelChange)="speedSliderChanged($event)"
-          min="1"
-          max="5">
+        [ngModel]="speedSliderValue"
+        [disabled]="isDisabled"
+        (ngModelChange)="speedSliderChanged($event)"
+        min="1"
+        max="5"
+      ><input matSliderThumb />
       </mat-slider>
       <span i18n>Faster</span>
     </span>
-    <div *ngIf="isStudentAttachmentEnabled"
-        class="component__actions"
-        fxLayout="row wrap">
+    <div *ngIf="isStudentAttachmentEnabled" class="component__actions" fxLayout="row wrap">
       <div class="component__add-attachment">
         <button
-            mat-raised-button
-            color="primary"
-            (click)="showStudentAssets()"
-            [disabled]="isDisabled">
+          mat-raised-button
+          color="primary"
+          (click)="showStudentAssets()"
+          [disabled]="isDisabled"
+        >
           <mat-icon>image</mat-icon>
           <span i18n>Add File</span>
         </button>
       </div>
-      <div class="component__attachment"
-          *ngFor="let attachment of attachments">
-        <img [src]="attachment.iconURL"
-            class="component__attachment__content" />
-        <button *ngIf="!isDisabled"
-            mat-raised-button
-            class="component__attachment__delete"
-            (click)="removeAttachment(attachment)"
-            title="Remove file"
-            [disabled]="isDisabled">
+      <div class="component__attachment" *ngFor="let attachment of attachments">
+        <img [src]="attachment.iconURL" class="component__attachment__content" />
+        <button
+          *ngIf="!isDisabled"
+          mat-raised-button
+          class="component__attachment__delete"
+          (click)="removeAttachment(attachment)"
+          title="Remove file"
+          [disabled]="isDisabled"
+        >
           <mat-icon>cancel</mat-icon>
         </button>
       </div>
     </div>
   </div>
-  <svg [id]="svgId"
-      [attr.width]="width"
-      [attr.height]="height"
-      [ngStyle]="{'background-image': componentContent.background != null ? 'url(' + componentContent.background + ')' : '',
+  <svg
+    [id]="svgId"
+    [attr.width]="width"
+    [attr.height]="height"
+    [ngStyle]="{
+      'background-image':
+        componentContent.background != null ? 'url(' + componentContent.background + ')' : '',
       'background-repeat': 'no-repeat',
-      'border': '1px solid black',
+      border: '1px solid black',
       '-moz-user-select': 'none',
       '-webkit-user-select': 'none',
-      '-ms-user-select':'none',
-      'user-select':'none',
-      '-o-user-select':'none'}">
-  </svg>
-  <component-save-submit-buttons *ngIf="isSaveOrSubmitButtonVisible"
-      [componentState]="latestComponentState"
-      [isDirty]="isDirty"
-      [isDisabled]="isDisabled"
-      [isSaveButtonVisible]="isSaveButtonVisible"
-      [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-      [isSubmitButtonVisible]="isSubmitButtonVisible"
-      [isSubmitDirty]="isSubmitDirty"
-      (saveButtonClicked)="saveButtonClicked($event)"
-      (submitButtonClicked)="submitButtonClicked($event)">
+      '-ms-user-select': 'none',
+      'user-select': 'none',
+      '-o-user-select': 'none'
+    }"
+  ></svg>
+  <component-save-submit-buttons
+    *ngIf="isSaveOrSubmitButtonVisible"
+    [componentState]="latestComponentState"
+    [isDirty]="isDirty"
+    [isDisabled]="isDisabled"
+    [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+    [isSubmitButtonVisible]="isSubmitButtonVisible"
+    [isSubmitDirty]="isSubmitDirty"
+    (saveButtonClicked)="saveButtonClicked($event)"
+    (submitButtonClicked)="submitButtonClicked($event)"
+  >
   </component-save-submit-buttons>
-  <component-annotations *ngIf="mode === 'student'"
-      [annotations]="latestAnnotations"
-      [maxScore]="componentContent.maxScore"
-      [nodeId]="nodeId"
-      [componentId]="componentId">
+  <component-annotations
+    *ngIf="mode === 'student'"
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+  >
   </component-annotations>
 </div>

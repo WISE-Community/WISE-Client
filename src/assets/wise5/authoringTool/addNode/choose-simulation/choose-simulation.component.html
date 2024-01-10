@@ -1,0 +1,53 @@
+<h5 i18n>Interactive Simulation</h5>
+<p i18n>
+  Select from a curated library of interactive simulations addressing various science topics.
+</p>
+<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px">
+  <mat-form-field>
+    <mat-label i18n>Filter by Topic</mat-label>
+    <mat-select [(ngModel)]="selectedSubjects" (ngModelChange)="filter()" multiple>
+      <mat-option [value]="subject" *ngFor="let subject of subjects">{{ subject }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label i18n>Search</mat-label>
+    <input matInput [(ngModel)]="searchText" (ngModelChange)="filter()" />
+  </mat-form-field>
+  <button
+    mat-icon-button
+    (click)="clearFilters()"
+    *ngIf="searchText || selectedSubjects.length"
+    aria-label="Clear All"
+    i18n-aria-label
+    matTooltip="Clear All"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>clear</mat-icon>
+  </button>
+  <span class="num-items-found-message" i18n> {{ getNumItemsFound() }} Item(s) Found </span>
+</div>
+<card-selector
+  *ngIf="project != null"
+  [items]="filteredNodes"
+  [previewProjectUrl]="project.previewProjectURL"
+  (itemSelected)="itemSelected($event)"
+>
+</card-selector>
+<div class="nav-controls">
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutGap="8px">
+    <button mat-button color="primary" routerLink="../../choose-template" i18n>Back</button>
+    <span fxFlex></span>
+    <button mat-button color="primary" routerLink="../../.." i18n>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="selectedNode == null"
+      (click)="next()"
+      i18n
+    >
+      Next
+    </button>
+  </div>
+</div>

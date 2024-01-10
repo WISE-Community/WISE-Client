@@ -1,12 +1,6 @@
-//@import '~@angular/material/theming';
-
-// Create a config with the default typography levels.
-//$config: mat-typography-config();
-
 .footer {
   padding: 16px;
   flex-shrink: 0;
-  //font-size: mat-font-size($config, body-1);
 }
 
 .footer__section {
@@ -25,7 +19,7 @@ img {
   padding: 0 4px;
 }
 
-.mat-icon-button {
+.mat-mdc-icon-button {
   opacity: .6;
   margin: 4px;
 

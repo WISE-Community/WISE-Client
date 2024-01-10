@@ -21,17 +21,28 @@ export class PeerGrouping {
   }
 
   getDifferentIdeasReferenceComponent(): ReferenceComponent {
-    const result = new RegExp(DIFFERENT_IDEAS_REGEX).exec(this.logic);
-    return new ReferenceComponent(result[1], result[2]);
+    return this.getReferenceComponent(DIFFERENT_IDEAS_REGEX);
   }
 
   getDifferentScoresReferenceComponent(): ReferenceComponent {
-    const result = new RegExp(DIFFERENT_SCORES_REGEX).exec(this.logic);
+    return this.getReferenceComponent(DIFFERENT_SCORES_REGEX);
+  }
+
+  getReferenceComponent(regex: RegExp) {
+    const result = new RegExp(regex).exec(this.logic);
     return new ReferenceComponent(result[1], result[2]);
   }
 
+  getDifferentIdeasMode(): string {
+    return this.getMode(DIFFERENT_IDEAS_REGEX);
+  }
+
   getDifferentScoresMode(): string {
-    const result = new RegExp(DIFFERENT_SCORES_REGEX).exec(this.logic);
+    return this.getMode(DIFFERENT_SCORES_REGEX);
+  }
+
+  getMode(regex: RegExp) {
+    const result = new RegExp(regex).exec(this.logic);
     return result[4];
   }
 }

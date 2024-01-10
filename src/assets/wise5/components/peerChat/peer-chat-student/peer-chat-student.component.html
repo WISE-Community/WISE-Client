@@ -1,38 +1,48 @@
-<div *ngIf="isPeerChatWorkgroupsResponseReceived && !isPeerChatWorkgroupsAvailable" class="notice mat-body-2" i18n>
-  This Peer Chat activity is not yet available. Please check back later or wait for a notification to return.
+<div
+  *ngIf="isPeerChatWorkgroupsResponseReceived && !isPeerChatWorkgroupsAvailable"
+  class="notice mat-subtitle-2"
+  i18n
+>
+  This Peer Chat activity is not yet available. Please check back later or wait for a notification
+  to return.
   <!-- TODO: Show different message when student has not completed required previous component(s) -->
 </div>
 <ng-container *ngIf="isPeerChatWorkgroupsAvailable">
-  <component-header [component]="component"
-      (dynamicPromptChanged)="onDynamicPromptChanged($event)">
+  <component-header [component]="component" (dynamicPromptChanged)="onDynamicPromptChanged($event)">
   </component-header>
-  <div fxLayout="column"
-      fxLayout.gt-sm="row"
-      fxLayoutAlign.gt-sm="start start"
-      fxLayoutGap="16px">
-    <div *ngIf="questionBankContent != null"
-        fxFlex
-        fxFlex.gt-sm="40"
-        fxFlexOrder="1"
-        fxFlexOrder.gt-sm="2">
-      <peer-chat-question-bank *ngIf="questionBankContent.questionBank?.enabled"
-          [content]="questionBankContent"
-          [(displayedQuestionBankRule)]="displayedQuestionBankRule"></peer-chat-question-bank>
+  <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start" fxLayoutGap="16px">
+    <div
+      *ngIf="questionBankContent != null"
+      fxFlex
+      fxFlex.gt-sm="40"
+      fxFlexOrder="1"
+      fxFlexOrder.gt-sm="2"
+    >
+      <peer-chat-question-bank
+        *ngIf="questionBankContent.questionBank?.enabled"
+        [content]="questionBankContent"
+        [(displayedQuestionBankRules)]="displayedQuestionBankRules"
+        (useQuestionEvent)="useQuestion($event)"
+        [questionIdsUsed]="questionIdsUsed"
+      ></peer-chat-question-bank>
     </div>
-    <div fxFlex
-        fxFlex.gt-sm="60"
-        fxFlexOrder="2"
-        fxFlexOrder.gt-sm="1">
-      <peer-chat-chat-box [messages]="peerChatMessages"
-          [myWorkgroupId]="myWorkgroupId"
-          [workgroupInfos]="peerChatWorkgroupInfos"
-          (onSubmit)="submitStudentResponse($event)"></peer-chat-chat-box>
+    <div fxFlex fxFlex.gt-sm="60" fxFlexOrder="2" fxFlexOrder.gt-sm="1">
+      <peer-chat-chat-box
+        [messages]="peerChatMessages"
+        [myWorkgroupId]="myWorkgroupId"
+        [response]="response"
+        [workgroupInfos]="peerChatWorkgroupInfos"
+        (onSubmit)="submitStudentResponse($event)"
+        (responseChangedEvent)="responseChanged($event)"
+      ></peer-chat-chat-box>
     </div>
   </div>
-  <component-annotations *ngIf="mode === 'student'"
-      [annotations]="latestAnnotations"
-      [maxScore]="componentContent.maxScore"
-      [nodeId]="nodeId"
-      [componentId]="componentId">
+  <component-annotations
+    *ngIf="mode === 'student'"
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+  >
   </component-annotations>
 </ng-container>

@@ -1,10 +1,10 @@
 @charset 'UTF-8';
+@use '@angular/material' as mat;
 
 // 1. Configuration and helpers
 @import
   'abstracts/variables',
-  'abstracts/functions',
-  'abstracts/mixins';
+  'abstracts/functions';
 
 // 2. Vendors
 //@import
@@ -15,7 +15,8 @@
   'base/base',
   'base/fonts',
   'base/typography',
-  'base/helpers';
+  'base/helpers',
+  'abstracts/mixins';
 
 // 4. Layout-related sections
 @import
@@ -37,6 +38,7 @@
   'components/info-block',
   'components/menu',
   'components/notice',
+  'components/table',
   'components/tooltip';
 
 // 6. Page-specific styles
@@ -44,11 +46,12 @@
   //'pages/home';
 
 // 7. Themes
-// Angular Material themes
-@import '~@angular/material/theming';
 
 // always include only once per project
-@include mat-core();
+@include mat.core();
+
+// material typography
+@include mat.typography-hierarchy($wise-typography);
 
 // specify common style class eg: <body class="common-styles"> ... </body>
 .common-styles {
@@ -67,19 +70,30 @@
   @include apps-setup();
 }
 
+$filled-input-bg: rgba(0, 0, 0, 0.04);
+
 // specify custom theme classes eg: <body class="common-styles default-theme"> ... </body>
+@include mat.all-component-themes($default-theme);
 .default-theme {
   @include theme-setup($default-theme, $default-colors);
+  @include filled-input-bg();
 }
 
 .author-theme {
+  @include mat.all-component-colors($author-theme);
   @include theme-setup($author-theme, $author-colors);
+  @include filled-input-bg();
 }
 
 .monitor-theme {
+  @include mat.all-component-colors($monitor-theme);
   @include theme-setup($monitor-theme, $monitor-colors);
+  @include filled-input-bg();
 }
 
 .dark-theme {
+  @include mat.all-component-colors($dark-theme);
   @include theme-setup($dark-theme, $dark-colors);
+  @include filled-input-bg(true);
+  color: white;
 }

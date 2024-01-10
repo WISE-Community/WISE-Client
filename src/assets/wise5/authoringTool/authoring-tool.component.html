@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="/assets/wise5/themes/default/style/angular-material.css" />
+<link rel="stylesheet" href="/assets/wise5/themes/default/style/author.css" />
+<div id="top" class="app-styles authoring" disable-delete-keypress role="main">
+  <mat-drawer-container>
+    <mat-drawer #drawer [(opened)]="isMenuOpen" mode="over" class="mat-elevation-z4">
+      <main-menu [title]="title" [views]="views"></main-menu>
+    </mat-drawer>
+    <mat-drawer-content>
+      <at-top-bar
+        [logoPath]="logoPath"
+        [projectId]="projectId"
+        [projectTitle]="projectTitle"
+        [runId]="runId"
+        [runCode]="runCode"
+      ></at-top-bar>
+      <authoring-tool-bar *ngIf="showToolbar" (onMenuToggle)="toggleMenu()"></authoring-tool-bar>
+      <content
+        id="content"
+        fxLayout="column"
+        fxFlex
+        class="l-main"
+        [ngClass]="{ 'l-main--with-toolbar': showToolbar }"
+        role="main"
+      >
+        <router-outlet></router-outlet>
+      </content>
+      <side-menu *ngIf="showToolbar" [views]="views"></side-menu>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

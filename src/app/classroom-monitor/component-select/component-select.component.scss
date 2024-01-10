@@ -1,7 +1,28 @@
-mat-select {
-  min-width: 150px;
-}
+@use '@angular/material' as mat;
+@import 'style/base/typography';
 
-mat-select, mat-select-trigger {
-  text-transform: none;
+.component-select {
+  .mdc-line-ripple {
+    &:before, &:after {
+      display: none;
+    }
+  }
+
+  .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    min-height: 28px;
+  }
+
+  .mat-mdc-form-field-flex {
+    height: 36px;
+  }
+
+  .mat-mdc-select-value-text, .mat-mdc-select-placeholder {
+    font-size: mat.font-size($wise-typography, 'caption');
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
 }

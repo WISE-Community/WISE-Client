@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { copy } from '../../assets/wise5/common/object/object';
 import { InsertComponentService } from '../../assets/wise5/services/insertComponentService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 
@@ -25,7 +26,7 @@ describe('InsertComponentService', () => {
     });
     service = TestBed.inject(InsertComponentService);
     projectService = TestBed.inject(TeacherProjectService);
-    node = JSON.parse(JSON.stringify(NODE1));
+    node = copy(NODE1);
     spyOn(projectService, 'getNodeById').and.returnValue(node);
   });
   insertComponents();

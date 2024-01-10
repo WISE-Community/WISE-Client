@@ -45,7 +45,7 @@ export class StepToolsComponent {
       })
     );
     this.subscriptions.add(
-      this.ProjectService.projectChanged$.subscribe(() => {
+      this.ProjectService.projectParsed$.subscribe(() => {
         this.calculateNodeIds();
       })
     );

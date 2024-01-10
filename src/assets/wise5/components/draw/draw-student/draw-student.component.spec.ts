@@ -6,7 +6,6 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { Component } from '../../../common/Component';
 import { ProjectService } from '../../../services/projectService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { DrawService } from '../drawService';
 import { DrawStudent } from './draw-student.component';
 
@@ -87,9 +86,8 @@ function createCanvasObject(type: string): any {
 function initializeStudentData() {
   it('should initialize student data when there is a show work connected component', () => {
     component.componentContent.connectedComponents = [
-      { nodeId: 'node', componentId: 'component1' }
+      { nodeId: 'node', componentId: 'component1', type: 'showWork' }
     ];
-    spyOn(TestBed.inject(UtilService), 'hasShowWorkConnectedComponent').and.returnValue(true);
     spyOn(
       TestBed.inject(StudentDataService),
       'getLatestComponentStateByNodeIdAndComponentId'

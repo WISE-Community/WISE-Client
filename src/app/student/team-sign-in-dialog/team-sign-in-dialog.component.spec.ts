@@ -6,7 +6,6 @@ import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Config } from '../../domain/config';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { User } from '../../domain/user';
 import { StudentService } from '../student.service';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -40,8 +39,6 @@ export class MockStudentService {
     });
   }
 }
-
-export class MockAuthService {}
 
 export class MockConfigService {
   getConfig(): Observable<Config> {
@@ -86,7 +83,6 @@ describe('TeamSignInDialogComponent', () => {
         declarations: [TeamSignInDialogComponent],
         imports: [RouterTestingModule],
         providers: [
-          { provide: SocialAuthService, useClass: MockAuthService },
           { provide: ConfigService, useClass: MockConfigService },
           { provide: MAT_DIALOG_DATA, useValue: { run: runObj } },
           { provide: MatDialogRef, useValue: {} },

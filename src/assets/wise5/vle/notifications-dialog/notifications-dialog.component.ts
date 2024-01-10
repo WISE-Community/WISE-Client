@@ -5,7 +5,7 @@ import { Notification } from '../../../../app/domain/notification';
 import { NotebookService } from '../../services/notebookService';
 import { NotificationService } from '../../services/notificationService';
 import { ProjectService } from '../../services/projectService';
-import { StudentDataService } from '../../services/studentDataService';
+import { NodeService } from '../../services/nodeService';
 
 @Component({
   selector: 'notifications-dialog',
@@ -20,10 +20,10 @@ export class NotificationsDialogComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<NotificationsDialogComponent>,
+    private nodeService: NodeService,
     private notebookService: NotebookService,
     private notificationService: NotificationService,
-    private projectService: ProjectService,
-    private studentDataService: StudentDataService
+    private projectService: ProjectService
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +54,7 @@ export class NotificationsDialogComponent implements OnInit {
     let goToNodeId = notificationAggregate.nodeId;
     let notebookItemId = notificationAggregate.notebookItemId;
     if (goToNodeId != null) {
-      this.studentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(goToNodeId);
+      this.nodeService.setCurrentNode(goToNodeId);
       this.dialogRef.close();
     } else if (notebookItemId != null) {
       // assume notification with notebookItemId is for the report for now,

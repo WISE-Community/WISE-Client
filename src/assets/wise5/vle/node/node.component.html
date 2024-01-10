@@ -1,57 +1,68 @@
 <div class="l-constrained">
-  <div class="node-content mat-elevation-z1"
-      style="border-color: {{nodeStatus?.icon?.color}}; position: relative;"
-      fxLayout="row wrap">
-    <div *ngIf="showRubric"
-        class="node-content__rubric"
-        fxLayout="row"
-        fxLayoutAlign="center center">
-      <help-icon
-          [content]="rubric"
-          label="Step Info"
-          i18n-label
-          icon="info">
-      </help-icon>
+  <div
+    class="node-content mat-elevation-z1"
+    style="border-color: {{ nodeStatus?.icon?.color }}; position: relative;"
+    fxLayout="row wrap"
+  >
+    <div
+      *ngIf="showRubric"
+      class="node-content__rubric"
+      fxLayout="row"
+      fxLayoutAlign="center center"
+    >
+      <help-icon [content]="rubric" label="Step Info" i18n-label icon="info"> </help-icon>
     </div>
-    <div *ngFor="let component of components"
-        id="component_{{ component.id }}"
-        class="component"
-        fxFlex="100"
-        fxFlex.gt-sm="{{component.componentWidth ? component.componentWidth : 100}}">
+    <div
+      *ngFor="let component of components"
+      id="component_{{ component.id }}"
+      class="component"
+      fxFlex="100"
+      fxFlex.gt-sm="{{ component.componentWidth ? component.componentWidth : 100 }}"
+    >
       <component
-          [nodeId]="node.id"
-          [componentId]="component.id"
-          [componentState]="getComponentStateByComponentId(component.id)"
-          [workgroupId]="workgroupId"
-          (saveComponentStateEvent)="saveComponentState($event)">
+        *ngIf="componentToVisible[component.id]"
+        [nodeId]="node.id"
+        [componentId]="component.id"
+        [componentState]="getComponentStateByComponentId(component.id)"
+        [workgroupId]="workgroupId"
+        (saveComponentStateEvent)="saveComponentState($event)"
+      >
       </component>
     </div>
-    <div class="node-content__actions"
-        fxLayout="row"
-        fxLayoutAlign="start center"
-        fxLayoutGap="12px">
-      <button *ngIf="node.showSaveButton"
-          mat-button
-          class="mat-primary mat-raised-button"
-          (click)="saveButtonClicked()"
-          [disabled]="isDisabled || !dirtyComponentIds.length"
-          aria-label="Save"
-          i18n-aria-label
-          i18n>
+    <div
+      class="node-content__actions"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="12px"
+    >
+      <button
+        *ngIf="node.showSaveButton"
+        mat-raised-button
+        color="primary"
+        (click)="saveButtonClicked()"
+        [disabled]="isDisabled || !dirtyComponentIds.length"
+        aria-label="Save"
+        i18n-aria-label
+        i18n
+      >
         Save
       </button>
-      <button *ngIf="node.showSubmitButton"
-          mat-button
-          class="mat-primary mat-raised-button"
-          (click)="submitButtonClicked()"
-          [disabled]="isDisabled || !dirtySubmitComponentIds.length"
-          aria-label="Submit"
-          i18n-aria-label
-          i18n>
+      <button
+        *ngIf="node.showSubmitButton"
+        mat-raised-button
+        color="primary"
+        (click)="submitButtonClicked()"
+        [disabled]="isDisabled || !dirtySubmitComponentIds.length"
+        aria-label="Submit"
+        i18n-aria-label
+        i18n
+      >
         Submit
       </button>
-      <component-state-info *ngIf="latestComponentState && (node.showSaveButton || node.showSubmitButton)"
-          [componentState]="latestComponentState"></component-state-info>
+      <component-state-info
+        *ngIf="latestComponentState && (node.showSaveButton || node.showSubmitButton)"
+        [componentState]="latestComponentState"
+      ></component-state-info>
     </div>
   </div>
 </div>

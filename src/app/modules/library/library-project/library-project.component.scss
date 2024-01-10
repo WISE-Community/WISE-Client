@@ -1,16 +1,16 @@
+@use '@angular/material' as mat;
 @import
-  '~@angular/material/theming',
-  '~style/abstracts/functions',
-  '~style/abstracts/variables';
+  'style/abstracts/functions',
+  'style/abstracts/variables';
 
 // Create a config with the default typography levels.
-$config: mat-typography-config();
+$config: mat.define-typography-config();
 
 .library-project {
   margin: 8px;
   overflow: hidden;
 
-  &.mat-card {
+  &.mat-mdc-card {
     padding: 0;
   }
 }
@@ -52,7 +52,7 @@ $config: mat-typography-config();
   right: 0;
   padding: 10px;
   background-color: #ffffff;
-  font-size: mat-font-size($config, body-1);
+  font-size: mat.font-size($config, 'body-1');
 
   p {
     margin-bottom: 6px;
@@ -80,4 +80,10 @@ $config: mat-typography-config();
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+.library-project__checkbox {
+  position: absolute;
+  top: 0;
+  z-index: 1;
 }

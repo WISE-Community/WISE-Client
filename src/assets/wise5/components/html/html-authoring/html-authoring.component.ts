@@ -1,37 +1,34 @@
 import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
+import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wise-link';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'html-authoring',
   templateUrl: 'html-authoring.component.html'
 })
-export class HtmlAuthoring extends ComponentAuthoring {
+export class HtmlAuthoring extends AbstractComponentAuthoring {
   html: string = '';
 
   constructor(
     protected configService: ConfigService,
-    protected nodeService: NodeService,
+    protected nodeService: TeacherNodeService,
     protected projectAssetService: ProjectAssetService,
-    protected projectService: TeacherProjectService,
-    protected utilService: UtilService
+    protected projectService: TeacherProjectService
   ) {
     super(configService, nodeService, projectAssetService, projectService);
   }
 
   ngOnInit() {
     super.ngOnInit();
-    this.html = this.projectService.replaceAssetPaths(
-      this.utilService.replaceWISELinks(this.componentContent.html)
-    );
+    this.html = this.projectService.replaceAssetPaths(replaceWiseLinks(this.componentContent.html));
   }
 
   htmlChanged(): void {
-    this.componentContent.html = this.utilService.insertWISELinks(
+    this.componentContent.html = insertWiseLinks(
       this.configService.removeAbsoluteAssetPaths(this.html)
     );
     this.componentChanged();

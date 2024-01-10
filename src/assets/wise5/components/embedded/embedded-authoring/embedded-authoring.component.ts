@@ -2,24 +2,28 @@
 
 import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EmbeddedService } from '../embeddedService';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
+import { filter } from 'rxjs/operators';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'embedded-authoring',
   templateUrl: 'embedded-authoring.component.html',
   styleUrls: ['embedded-authoring.component.scss']
 })
-export class EmbeddedAuthoring extends ComponentAuthoring {
+export class EmbeddedAuthoring extends AbstractComponentAuthoring {
   embeddedApplicationIFrameId: string;
 
   constructor(
     protected ConfigService: ConfigService,
+    private dialog: MatDialog,
     private EmbeddedService: EmbeddedService,
-    protected NodeService: NodeService,
+    protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
   ) {
@@ -51,5 +55,15 @@ export class EmbeddedAuthoring extends ComponentAuthoring {
   updateUrl(url: string): void {
     this.componentContent.url = url;
     this.componentChanged();
+  }
+
+  chooseModelFile(): void {
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open('modelFile')
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 }

@@ -5,15 +5,33 @@
     </button>
   </div>
   <div fxLayout="column" fxLayoutGap="8px">
-    <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" i18n>WISE Home</a>
-    <a mat-button routerLink="/features" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" i18n>Features</a>
-    <a mat-button routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" i18n>About Us</a>
+    <a
+      mat-button
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      i18n
+      >WISE Home</a
+    >
+    <a
+      mat-button
+      routerLink="/features"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      i18n
+      >Features</a
+    >
+    <a
+      mat-button
+      routerLink="/about"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      i18n
+      >About Us</a
+    >
     <a mat-button href="https://wise-discuss.berkeley.edu" i18n>Community</a>
     <a mat-button href="https://wise-research.berkeley.edu" i18n>Research</a>
-    <div id="mobileMenuAccountLinks"
-         *ngIf="!signedIn"
-         fxLayout="column"
-         fxLayoutGap="8px">
+    <div id="mobileMenuAccountLinks" *ngIf="!signedIn" fxLayout="column" fxLayoutGap="8px">
       <mat-divider></mat-divider>
       <a mat-button routerLink="/login" i18n>Sign In</a>
       <a mat-button routerLink="/join" i18n>Create Account</a>

@@ -2,29 +2,31 @@
 
 import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { ConceptMapService } from '../conceptMapService';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
+import { filter } from 'rxjs/operators';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'concept-map-authoring',
   templateUrl: 'concept-map-authoring.component.html',
   styleUrls: ['concept-map-authoring.component.scss']
 })
-export class ConceptMapAuthoring extends ComponentAuthoring {
+export class ConceptMapAuthoring extends AbstractComponentAuthoring {
   availableNodes: any[];
   availableLinks: any[];
 
   constructor(
     private ConceptMapService: ConceptMapService,
     protected ConfigService: ConfigService,
-    protected NodeService: NodeService,
+    private dialog: MatDialog,
+    protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
   }
@@ -124,5 +126,15 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
       node.fileName = fileName;
       this.componentChanged();
     }
+  }
+
+  chooseAsset(target: string): void {
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open(target)
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 }

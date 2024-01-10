@@ -1,18 +1,21 @@
 import { Component, Input, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { Node } from '../../../../common/Node';
 import { AnnotationService } from '../../../../services/annotationService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { ConfigService } from '../../../../services/configService';
 import { MilestoneService } from '../../../../services/milestoneService';
-import { NodeInfoService } from '../../../../services/nodeInfoService';
 import { NotificationService } from '../../../../services/notificationService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherPeerGroupService } from '../../../../services/teacherPeerGroupService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { UtilService } from '../../../../services/utilService';
 import { Notification } from '../../../../../../app/domain/notification';
 import { CompletionStatus } from '../../shared/CompletionStatus';
+import { copy } from '../../../../common/object/object';
+import { ShowNodeInfoDialogComponent } from '../../../../../../app/classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MilestoneDetailsDialogComponent } from '../../milestones/milestone-details-dialog/milestone-details-dialog.component';
+import { Annotation } from '../../../../common/Annotation';
 
 @Component({
   selector: 'node-grading-view',
@@ -46,13 +49,12 @@ export class NodeGradingViewComponent implements OnInit {
     protected annotationService: AnnotationService,
     protected classroomStatusService: ClassroomStatusService,
     protected configService: ConfigService,
+    protected dialog: MatDialog,
     protected milestoneService: MilestoneService,
-    protected nodeInfoService: NodeInfoService,
     protected notificationService: NotificationService,
     protected peerGroupService: TeacherPeerGroupService,
     protected projectService: TeacherProjectService,
-    protected teacherDataService: TeacherDataService,
-    protected utilService: UtilService
+    protected teacherDataService: TeacherDataService
   ) {}
 
   ngOnInit(): void {
@@ -76,7 +78,7 @@ export class NodeGradingViewComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.nodeId) {
+    if (changes.nodeId && !changes.nodeId.firstChange) {
       this.nodeId = changes.nodeId.currentValue;
       this.setupNode();
     }
@@ -102,7 +104,7 @@ export class NodeGradingViewComponent implements OnInit {
     );
 
     this.subscriptions.add(
-      this.annotationService.annotationReceived$.subscribe(({ annotation }) => {
+      this.annotationService.annotationReceived$.subscribe((annotation: Annotation) => {
         const workgroupId = annotation.toWorkgroupId;
         if (annotation.nodeId === this.nodeId && this.workgroupsById[workgroupId]) {
           this.updateWorkgroup(workgroupId);
@@ -127,10 +129,12 @@ export class NodeGradingViewComponent implements OnInit {
   }
 
   protected retrieveStudentData(node: Node = this.node): void {
-    this.teacherDataService.retrieveStudentDataForNode(node).then(() => {
+    this.teacherDataService.retrieveStudentDataForNode(node).subscribe(() => {
       this.teacherWorkgroupId = this.configService.getWorkgroupId();
-      this.workgroups = this.utilService.makeCopyOfJSONObject(
-        this.configService.getClassmateUserInfos()
+      this.workgroups = copy(this.configService.getClassmateUserInfos()).filter(
+        (workgroup) =>
+          workgroup.workgroupId != null &&
+          this.classroomStatusService.hasStudentStatus(workgroup.workgroupId)
       );
       this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;
       this.setWorkgroupsById();
@@ -138,25 +142,6 @@ export class NodeGradingViewComponent implements OnInit {
       this.numRubrics = this.projectService.getNumberOfRubricsByNodeId(node.id);
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     });
-  }
-
-  saveNodeGradingViewDisplayedEvent() {
-    const context = 'ClassroomMonitor',
-      nodeId = this.nodeId,
-      componentId = null,
-      componentType = null,
-      category = 'Navigation',
-      event = 'nodeGradingViewDisplayed',
-      data = { nodeId: this.nodeId };
-    this.teacherDataService.saveEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      data
-    );
   }
 
   private getMaxScore(nodeId = this.nodeId): number {
@@ -272,6 +257,8 @@ export class NodeGradingViewComponent implements OnInit {
       workgroupId,
       this.nodeId
     );
+    const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
+    workgroup.nodeStatus = studentStatus.nodeStatuses[this.nodeId] || {};
   }
 
   private workgroupHasNewAlert(alertNotifications: Notification[]): boolean {
@@ -380,8 +367,11 @@ export class NodeGradingViewComponent implements OnInit {
     return this.teacherDataService.isWorkgroupShown(workgroup);
   }
 
-  showRubric($event: any) {
-    this.nodeInfoService.showNodeInfo(this.nodeId, $event);
+  protected showRubric(): void {
+    this.dialog.open(ShowNodeInfoDialogComponent, {
+      data: this.nodeId,
+      width: '100%'
+    });
   }
 
   setSort(value: string): void {
@@ -416,7 +406,7 @@ export class NodeGradingViewComponent implements OnInit {
   }
 
   onUpdateHiddenComponents(value: any): void {
-    this.hiddenComponents = this.utilService.makeCopyOfJSONObject(value);
+    this.hiddenComponents = copy(value);
   }
 
   onIntersection(
@@ -431,8 +421,11 @@ export class NodeGradingViewComponent implements OnInit {
     }
   }
 
-  showReport($event: any): void {
-    this.milestoneService.showMilestoneDetails(this.milestoneReport, $event);
+  showReport(): void {
+    this.dialog.open(MilestoneDetailsDialogComponent, {
+      data: this.milestoneReport,
+      panelClass: 'dialog-lg'
+    });
   }
 
   showPeerGroupDetails(peerGroupingTag: string): void {

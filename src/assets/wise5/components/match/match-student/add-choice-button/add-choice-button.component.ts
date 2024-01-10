@@ -5,9 +5,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: 'add-choice-button.component.html'
 })
 export class AddChoiceButton {
-  @Input()
-  isDisabled: boolean;
-
-  @Output()
-  onClick = new EventEmitter();
+  @Input() isDisabled: boolean;
+  @Output() onClick = new EventEmitter<void>();
 }

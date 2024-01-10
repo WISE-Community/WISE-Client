@@ -12,4 +12,8 @@ export class PeerGroup {
     this.members = members;
     this.peerGrouping = peerGrouping;
   }
+
+  getWorkgroupIds(): number[] {
+    return this.members.map((member) => member.id);
+  }
 }

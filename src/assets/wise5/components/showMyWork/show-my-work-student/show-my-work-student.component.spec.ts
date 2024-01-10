@@ -9,6 +9,7 @@ import { ComponentContent } from '../../../common/ComponentContent';
 import { NotebookService } from '../../../services/notebookService';
 
 import { ShowMyWorkStudentComponent } from './show-my-work-student.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 class MockService {}
 
@@ -31,7 +32,8 @@ describe('ShowMyWorkStudentComponent', () => {
       providers: [
         { provide: MatDialog, useClass: MockService },
         { provide: NotebookService, useClass: MockNotebookService }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

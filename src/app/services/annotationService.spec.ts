@@ -1,46 +1,85 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { copy } from '../../assets/wise5/common/object/object';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
+import { Annotation } from '../../assets/wise5/common/Annotation';
 
 let service: AnnotationService;
 let projectService: ProjectService;
-let utilService: UtilService;
 let demoProjectJSON: any;
 
-const annotations = [
-  {
-    toWorkgroupId: 1,
-    type: 'score',
-    nodeId: 'node2',
-    componentId: '7edwu1p29b',
-    data: { value: 1 }
-  },
-  {
-    toWorkgroupId: 1,
-    type: 'autoScore',
-    nodeId: 'node3',
-    componentId: '0sef5ya2wj',
-    data: { value: 2 }
-  }
-];
+const annotation1 = {
+  toWorkgroupId: 1,
+  type: 'score',
+  nodeId: 'node2',
+  componentId: '7edwu1p29b',
+  data: { value: 1 }
+};
+const annotation2 = {
+  toWorkgroupId: 1,
+  type: 'comment',
+  nodeId: 'node2',
+  componentId: '7edwu1p29b',
+  data: { value: 'Nice job!' }
+};
+const annotation3 = {
+  toWorkgroupId: 1,
+  type: 'autoScore',
+  nodeId: 'node3',
+  componentId: '0sef5ya2wj',
+  data: { value: 2 }
+};
+const annotation4 = {
+  toWorkgroupId: 1,
+  type: 'autoScore',
+  nodeId: 'node2',
+  componentId: '7edwu1p29b',
+  data: { value: 5 }
+};
+const annotations = [annotation1, annotation2, annotation3, annotation4];
 
 describe('AnnotationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
     });
-    utilService = TestBed.inject(UtilService);
     service = TestBed.inject(AnnotationService);
+    service.annotations = annotations as Annotation[];
     projectService = TestBed.inject(ProjectService);
-    demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
+    demoProjectJSON = copy(demoProjectJSON_import);
     projectService.setProject(demoProjectJSON);
   });
+  getLatestScoreAnnotation();
   getTotalScore();
 });
+
+function getLatestScoreAnnotation() {
+  describe('getLatestScoreAnnotation()', () => {
+    getLatestScoreAnnotation_NoMatch_ReturnNull();
+    getLatestScoreAnnotation_MultipleMatches_ReturnLatestAnnotation();
+  });
+}
+
+function getLatestScoreAnnotation_NoMatch_ReturnNull() {
+  describe('no matching annotation is found', () => {
+    it('returns null', () => {
+      expect(service.getLatestScoreAnnotation('nodeX', 'componentX', 10, 'any')).toBeNull();
+    });
+  });
+}
+
+function getLatestScoreAnnotation_MultipleMatches_ReturnLatestAnnotation() {
+  describe('multiple annotations are found', () => {
+    it('returns latest annotation', () => {
+      expect(service.getLatestScoreAnnotation('node2', '7edwu1p29b', 1, 'any')).toEqual(
+        annotation4 as Annotation
+      );
+    });
+  });
+}
 
 function getTotalScore() {
   describe('getTotalScore()', () => {
@@ -59,7 +98,7 @@ function getTotalScore_noAnnotationForWorkgroup_return0() {
 
 function getTotalScore_returnSumScoresAutoScoresForWorkgroup() {
   it('should return sum of annotation scores and autoscores for workgroup', () => {
-    expect(service.getTotalScore(annotations)).toEqual(3);
+    expect(service.getTotalScore(annotations)).toEqual(7);
   });
 }
 
@@ -75,6 +114,6 @@ function getTotalScore_omitInActiveNodes() {
 function getTotalScore_omitExcludFromTotalScoreNodes() {
   it('should omit scores for nodes marked as excludeFromTotalScore', () => {
     projectService.getComponent('node3', '0sef5ya2wj').excludeFromTotalScore = true;
-    expect(service.getTotalScore(annotations)).toEqual(1);
+    expect(service.getTotalScore(annotations)).toEqual(5);
   });
 }

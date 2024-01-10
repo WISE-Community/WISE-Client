@@ -2,12 +2,11 @@
 
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { forkJoin, BehaviorSubject } from 'rxjs';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
-import { UtilService } from '../../assets/wise5/services/utilService';
+import { isAudio, isImage, isVideo } from '../../assets/wise5/common/file/file';
 
 @Injectable()
 export class ProjectAssetService {
@@ -18,11 +17,9 @@ export class ProjectAssetService {
   projectThumbnailFileName = 'project_thumb.png';
 
   constructor(
-    protected upgrade: UpgradeModule,
+    protected configService: ConfigService,
     protected http: HttpClient,
-    protected ConfigService: ConfigService,
-    protected ProjectService: ProjectService,
-    protected UtilService: UtilService
+    protected projectService: ProjectService
   ) {
     this.getProjectAssets().subscribe((projectAssets) => {
       if (projectAssets != null) {
@@ -64,21 +61,23 @@ export class ProjectAssetService {
   }
 
   retrieveProjectAssets(): any {
-    const url = this.ConfigService.getConfigParam('projectAssetURL');
-    return this.http.get(url).subscribe((projectAssets: any) => {
-      this.totalSizeMax = this.ConfigService.getConfigParam('projectAssetTotalSizeMax');
-      this.injectFileTypeValues(projectAssets.files);
-      this.setProjectAssets(projectAssets);
-    });
+    const url = this.configService.getConfigParam('projectAssetURL');
+    return this.http.get(url).pipe(
+      tap((projectAssets: any) => {
+        this.totalSizeMax = this.configService.getConfigParam('projectAssetTotalSizeMax');
+        this.injectFileTypeValues(projectAssets.files);
+        this.setProjectAssets(projectAssets);
+      })
+    );
   }
 
   injectFileTypeValues(projectAssets: any[]) {
     projectAssets.forEach((projectAsset) => {
-      if (this.UtilService.isImage(projectAsset.fileName)) {
+      if (isImage(projectAsset.fileName)) {
         projectAsset.fileType = 'image';
-      } else if (this.UtilService.isVideo(projectAsset.fileName)) {
+      } else if (isVideo(projectAsset.fileName)) {
         projectAsset.fileType = 'video';
-      } else if (this.UtilService.isAudio(projectAsset.fileName)) {
+      } else if (isAudio(projectAsset.fileName)) {
         projectAsset.fileType = 'audio';
       } else {
         projectAsset.fileType = 'other';
@@ -87,7 +86,7 @@ export class ProjectAssetService {
   }
 
   uploadAssets(files: any[]) {
-    const url = this.ConfigService.getConfigParam('projectAssetURL');
+    const url = this.configService.getConfigParam('projectAssetURL');
     const formData = new FormData();
     files.forEach((file: any) => formData.append('files', file, file.name));
     return this.http.post(url, formData).pipe(
@@ -101,13 +100,13 @@ export class ProjectAssetService {
 
   downloadAssetItem(assetItem: any) {
     window.open(
-      `${this.ConfigService.getConfigParam('projectAssetURL')}` +
+      `${this.configService.getConfigParam('projectAssetURL')}` +
         `/download?assetFileName=${assetItem.fileName}`
     );
   }
 
   deleteAssetItem(assetItem: any): any {
-    const url = `${this.ConfigService.getConfigParam('projectAssetURL')}/delete`;
+    const url = `${this.configService.getConfigParam('projectAssetURL')}/delete`;
     const params = new HttpParams().set('assetFileName', assetItem.fileName);
     return this.http.post(url, params).subscribe((projectAssets: any) => {
       this.injectFileTypeValues(projectAssets.files);
@@ -115,9 +114,9 @@ export class ProjectAssetService {
     });
   }
 
-  calculateAssetUsage(assets: any = this.getProjectAssets().getValue()) {
-    let usedTextContent = JSON.stringify(this.ProjectService.project);
-    usedTextContent += this.projectThumbnailFileName;
+  calculateAssetUsage(assets: any = this.getProjectAssets().getValue()): void {
+    const usedTextContent =
+      JSON.stringify(this.projectService.project) + this.projectThumbnailFileName;
     const allTextFiles = this.getAllTextFiles(assets);
     if (allTextFiles.length == 0) {
       this.calculateUsedFiles(assets, usedTextContent);
@@ -126,7 +125,7 @@ export class ProjectAssetService {
     }
   }
 
-  getAllTextFiles(assets: any) {
+  private getAllTextFiles(assets: any): any[] {
     const allTextFiles = [];
     for (const asset of assets.files) {
       const fileName = asset.fileName;
@@ -137,12 +136,16 @@ export class ProjectAssetService {
     return allTextFiles;
   }
 
-  isTextFile(fileName: string) {
+  private isTextFile(fileName: string): boolean {
     return (
-      this.UtilService.endsWith(fileName, '.html') ||
-      this.UtilService.endsWith(fileName, '.htm') ||
-      this.UtilService.endsWith(fileName, '.js')
+      this.endsWith(fileName, '.html') ||
+      this.endsWith(fileName, '.htm') ||
+      this.endsWith(fileName, '.js')
     );
+  }
+
+  private endsWith(str: string, suffix: string): boolean {
+    return str.substring(str.length - suffix.length) === suffix;
   }
 
   calculateUsedFiles(assets: any, usedTextContent: string) {
@@ -218,7 +221,7 @@ export class ProjectAssetService {
 
   getTextFiles(textFileNames: string[]): any {
     const requests = [];
-    const projectAssetsDirectoryPath = this.ConfigService.getProjectAssetsDirectoryPath();
+    const projectAssetsDirectoryPath = this.configService.getProjectAssetsDirectoryPath();
     for (const textFileName of textFileNames) {
       const request = this.http.get(`${projectAssetsDirectoryPath}/${textFileName}`, {
         observe: 'response',
@@ -231,16 +234,5 @@ export class ProjectAssetService {
 
   isProjectAssetsAvailable() {
     return this.getProjectAssets().getValue() != null;
-  }
-
-  openAssetChooser(params: any) {
-    return this.upgrade.$injector.get('$mdDialog').show({
-      templateUrl: 'assets/wise5/authoringTool/asset/assetAuthoring.html',
-      controller: 'ProjectAssetAuthoringController',
-      controllerAs: '$ctrl',
-      $stateParams: params,
-      clickOutsideToClose: true,
-      escapeToClose: true
-    });
   }
 }

@@ -1,90 +1,53 @@
 import { Component } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { ConfigService } from '../../../../assets/wise5/services/configService';
-import { ProjectLibraryService } from '../../../../assets/wise5/services/projectLibraryService';
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  styleUrls: ['choose-import-step.component.scss'],
+  selector: 'choose-import-step',
+  styleUrls: ['choose-import-step.component.scss', '../../add-content.scss'],
   templateUrl: 'choose-import-step.component.html'
 })
 export class ChooseImportStepComponent {
-  $state: any;
-  importLibraryProjectId: number;
-  importMyProjectId: number;
-  importProject: any;
-  importProjectId: number;
-  importProjectIdToOrder: any;
-  importProjectItems: any[];
-  libraryProjectsList: any[];
-  myProjectsList: any[];
+  protected project: any;
+  private projectId: number;
+  protected projectIdToOrder: any;
+  private projectItems: any[] = [];
 
   constructor(
-    private upgrade: UpgradeModule,
-    private ConfigService: ConfigService,
-    private ProjectLibraryService: ProjectLibraryService,
-    private ProjectService: TeacherProjectService
-  ) {
-    this.$state = this.upgrade.$injector.get('$state');
-  }
+    private projectService: TeacherProjectService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.myProjectsList = this.ConfigService.getAuthorableProjects();
-    this.ProjectLibraryService.getLibraryProjects().then((libraryProjects) => {
-      this.libraryProjectsList = this.ProjectLibraryService.sortAndFilterUniqueProjects(
-        libraryProjects
-      );
+    this.projectId = history.state.importProjectId;
+    this.projectService.retrieveProjectById(this.projectId).then((projectJSON) => {
+      this.project = projectJSON;
+      const nodeOrderOfProject = this.projectService.getNodeOrderOfProject(this.project);
+      this.projectIdToOrder = Object.values(nodeOrderOfProject.idToOrder);
+      this.projectItems = nodeOrderOfProject.nodes;
     });
   }
 
-  showMyProject() {
-    this.importLibraryProjectId = null;
-    this.showProject(this.importMyProjectId);
+  protected previewNode(node: any): void {
+    window.open(`${this.project.previewProjectURL}/${node.id}`);
   }
 
-  showLibraryProject() {
-    this.importMyProjectId = null;
-    this.showProject(this.importLibraryProjectId);
+  protected previewProject(): void {
+    window.open(`${this.project.previewProjectURL}`);
   }
 
-  showProject(importProjectId) {
-    this.importProjectId = importProjectId;
-    this.ProjectService.retrieveProjectById(this.importProjectId).then((projectJSON) => {
-      this.importProject = projectJSON;
-      const nodeOrderOfProject = this.ProjectService.getNodeOrderOfProject(this.importProject);
-      this.importProjectIdToOrder = Object.values(nodeOrderOfProject.idToOrder);
-      this.importProjectItems = nodeOrderOfProject.nodes;
-    });
-  }
-
-  previewImportNode(node) {
-    window.open(`${this.importProject.previewProjectURL}/${node.id}`);
-  }
-
-  previewImportProject() {
-    window.open(`${this.importProject.previewProjectURL}`);
-  }
-
-  importSteps() {
-    this.$state.go('root.at.project.import-step.choose-location', {
-      importFromProjectId: this.importProjectId,
-      selectedNodes: this.getSelectedNodesToImport()
-    });
-  }
-
-  getSelectedNodesToImport() {
-    const selectedNodes = [];
-    if (this.importProjectItems != null) {
-      for (const item of this.importProjectItems) {
-        if (item.checked) {
-          selectedNodes.push(item.node);
-        }
+  protected goToChooseLocation(): void {
+    this.router.navigate(['../choose-location'], {
+      relativeTo: this.route,
+      state: {
+        importFromProjectId: this.projectId,
+        selectedNodes: this.getSelectedNodesToImport()
       }
-    }
-    return selectedNodes;
+    });
   }
 
-  cancel() {
-    this.$state.go('root.at.project');
+  protected getSelectedNodesToImport(): any[] {
+    return this.projectItems.filter((item) => item.checked).map((item) => item.node);
   }
 }

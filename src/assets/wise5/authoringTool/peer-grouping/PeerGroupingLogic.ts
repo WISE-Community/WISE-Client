@@ -4,7 +4,7 @@ export interface PeerGroupingLogic {
 }
 
 export const DIFFERENT_IDEAS_NAME = $localize`Different Ideas`;
-export const DIFFERENT_IDEAS_REGEX = /differentIdeas\("(\w+)",\s*"(\w+)"\)/g;
+export const DIFFERENT_IDEAS_REGEX = /differentIdeas\("(\w+)",\s*"(\w+)"?"(,\s*")?(\w+)?(")?\)/g;
 export const DIFFERENT_IDEAS_VALUE = 'differentIdeas';
 export const DIFFERENT_SCORES_NAME = $localize`Different Scores`;
 export const DIFFERENT_SCORES_REGEX = /differentKIScores\("(\w+)",\s*"(\w+)?"(,\s*")?(\w+)?(")?\)/g;

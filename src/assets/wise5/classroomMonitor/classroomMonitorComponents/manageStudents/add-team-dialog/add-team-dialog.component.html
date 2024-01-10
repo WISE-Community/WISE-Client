@@ -1,18 +1,28 @@
-<h1 mat-dialog-title i18n>Create New Team (Period {{period.periodName}})</h1>
-<div mat-dialog-content class="dialog-content-scroll" cdkFocusRegionStart>
-  <p class="mat-body-1" i18n>Select students to add to the new team:</p>
+<h2 mat-dialog-title i18n>Create New Team (Period {{ period.periodName }})</h2>
+<mat-dialog-content class="dialog-content-scroll" cdkFocusRegionStart>
+  <p class="mat-body-2" i18n>Select students to add to the new team:</p>
   <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px">
     <div class="initial-members notice-bg-bg" fxFlex="100" fxFlex.gt-sm="33">
       <div *ngIf="initialTeamMembers.length == 0" class="mat-small" i18n>No team members added</div>
       <div class="member-list" *ngIf="initialTeamMembers.length > 0">
-        <div class="member-list-item" *ngFor="let member of initialTeamMembers; let i=index;"
-            fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-          <show-student-info [user]="member" [class]="isUserInAnyWorkgroup(member) ? '' : 'warn'"></show-student-info>
+        <div
+          class="member-list-item"
+          *ngFor="let member of initialTeamMembers; let i = index"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="8px"
+        >
+          <show-student-info
+            [user]="member"
+            [class]="isUserInAnyWorkgroup(member) ? '' : 'warn'"
+          ></show-student-info>
           <span fxFlex></span>
-          <button mat-icon-button
-              (click)="deleteTeamMember(i)"
-              i18n-aria-label
-              aria-label="Delete team member">
+          <button
+            mat-icon-button
+            (click)="deleteTeamMember(i)"
+            i18n-aria-label
+            aria-label="Delete team member"
+          >
             <mat-icon class="secondary-text">close</mat-icon>
           </button>
         </div>
@@ -20,30 +30,36 @@
     </div>
     <div fxLayout="column" fxLayoutGap="8px" fxFlex="100" fxFlex.gt-sm="67">
       <div fxLayout="row wrap" fxLayoutAlign="start start">
-        <div class="member" *ngFor="let user of allUsersInPeriod; let i=index;">
-          <button mat-stroked-button
-              [color]="isUserInAnyWorkgroup(user) ? '' : 'warn'"
-              (click)="addTeamMember(user)"
-              [disabled]="initialTeamMembers.length == 3 || initialTeamMembers.includes(user)"
-              aria-label="Select to add student to new team"
-              i18n-aria-label>
+        <div class="member" *ngFor="let user of allUsersInPeriod; let i = index">
+          <button
+            mat-stroked-button
+            [color]="isUserInAnyWorkgroup(user) ? '' : 'warn'"
+            (click)="addTeamMember(user)"
+            [disabled]="initialTeamMembers.length == 3 || initialTeamMembers.includes(user)"
+            aria-label="Select to add student to new team"
+            i18n-aria-label
+          >
             <show-student-info [user]="user"></show-student-info>
           </button>
         </div>
       </div>
       <p *ngIf="isAnyUnassignedStudent" class="warn mat-small" fxLayoutAlign="start center" i18n>
-        <mat-icon color="warn" aria-label="Warning color" aira-label-18n>stop</mat-icon> = Student without a current team
+        <mat-icon color="warn" aria-label="Warning color" aira-label-18n>stop</mat-icon> = Student
+        without a current team
       </p>
     </div>
   </div>
-</div>
-<div mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="8px">
+</mat-dialog-content>
+<mat-dialog-actions align="end">
   <button mat-button mat-dialog-close [disabled]="isProcessing" i18n>Cancel</button>
-  <button mat-flat-button
-      color="primary"
-      [disabled]="isProcessing || initialTeamMembers.length == 0"
-      (click)="createTeam()">
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="isProcessing || initialTeamMembers.length == 0"
+    (click)="createTeam()"
+    class="button--progress"
+  >
     <mat-progress-bar *ngIf="isProcessing" mode="indeterminate"></mat-progress-bar>
     <ng-container i18n>Create</ng-container>
   </button>
-</div>
+</mat-dialog-actions>

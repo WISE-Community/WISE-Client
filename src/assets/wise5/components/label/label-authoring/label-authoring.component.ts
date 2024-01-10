@@ -1,26 +1,29 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'label-authoring',
   templateUrl: 'label-authoring.component.html',
   styleUrls: ['label-authoring.component.scss']
 })
-export class LabelAuthoring extends ComponentAuthoring {
+export class LabelAuthoring extends AbstractComponentAuthoring {
   numberInputChange: Subject<number> = new Subject<number>();
   textInputChange: Subject<string> = new Subject<string>();
 
   constructor(
     protected ConfigService: ConfigService,
-    protected NodeService: NodeService,
+    private dialog: MatDialog,
+    protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
   ) {
@@ -55,7 +58,8 @@ export class LabelAuthoring extends ComponentAuthoring {
       textX: 200,
       textY: 200,
       canEdit: false,
-      canDelete: false
+      canDelete: false,
+      isStarterLabel: true
     };
     this.componentContent.labels.push(newLabel);
     this.componentChanged();
@@ -99,5 +103,15 @@ export class LabelAuthoring extends ComponentAuthoring {
 
   openColorViewer(): void {
     window.open('http://www.javascripter.net/faq/colornam.htm');
+  }
+
+  chooseBackground(): void {
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open('background')
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 }

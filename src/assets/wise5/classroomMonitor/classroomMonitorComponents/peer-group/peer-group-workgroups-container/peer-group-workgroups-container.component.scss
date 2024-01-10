@@ -1,16 +1,12 @@
-@import '~style/abstracts/variables';
+@import 'style/abstracts/variables';
 
-.group.mat-card {
-    padding: 8px 8px 0;
-    box-shadow: none;
-  }
-
-.mat-card-title {
-  margin-bottom: 4px;
+.group.mat-mdc-card {
+  padding: 8px 8px 0;
+  box-shadow: none;
 }
 
-.mat-card-content {
-  margin: 0;
+.mat-mdc-card-content {
+  padding: 8px 0 0;
 }
 
 h4 {

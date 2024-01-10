@@ -1,0 +1,31 @@
+<div fxLayoutAlign="start center">
+  <h2 mat-dialog-title i18n>Component Info</h2>
+  <div fxFlex></div>
+  <component-type-selector
+    [componentType]="componentType"
+    (componentTypeSelectedEvent)="displayComponent($event)"
+  ></component-type-selector>
+</div>
+<mat-dialog-content class="dialog-content-scroll">
+  <h3 i18n>Description:</h3>
+  <p class="description">{{ description }}</p>
+  <mat-divider></mat-divider>
+  <h3 i18n>Example:</h3>
+  <mat-card appearance="outlined">
+    <preview-component
+      *ngIf="previewComponents.length === 1"
+      [component]="previewComponents[0]"
+    ></preview-component>
+    <mat-tab-group *ngIf="previewComponents.length > 1" mat-stretch-tabs="false">
+      <mat-tab
+        *ngFor="let component of previewComponents; index as i"
+        [label]="previewExamples[i].label"
+      >
+        <preview-component [component]="component"></preview-component>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions fxLayoutAlign="end">
+  <button mat-button mat-dialog-close cdkFocusRegionstart i18n>Close</button>
+</mat-dialog-actions>

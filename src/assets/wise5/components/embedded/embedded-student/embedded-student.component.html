@@ -1,35 +1,39 @@
 <div class="main-div">
   <add-to-notebook-button
-      *ngIf="isShowAddToNotebookButton"
-      [isDisabled]="isDisabled"
-      (snipImage)="snipModel()">
+    *ngIf="isShowAddToNotebookButton"
+    [isDisabled]="isDisabled"
+    (snipImage)="snipModel()"
+  >
   </add-to-notebook-button>
-  <br/>
-  <div style="width: {{width}}; height: {{height}};">
+  <br />
+  <div style="width: {{ width }}; height: {{ height }};">
     <iframe
-        [id]="embeddedApplicationIFrameId"
-        [src]="url"
-        (load)="iframeLoaded()"
-        class="embedded-content__iframe iframe">
+      [id]="embeddedApplicationIFrameId"
+      [src]="url"
+      (load)="iframeLoaded()"
+      class="embedded-content__iframe iframe"
+    >
     </iframe>
   </div>
 </div>
 <component-save-submit-buttons
-    *ngIf="isSaveOrSubmitButtonVisible"
-    [componentState]="latestComponentState"
-    [isDirty]="isDirty"
-    [isDisabled]="isDisabled"
-    [isSaveButtonVisible]="isSaveButtonVisible"
-    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-    [isSubmitButtonVisible]="isSubmitButtonVisible"
-    [isSubmitDirty]="isSubmitDirty"
-    (saveButtonClicked)="saveButtonClicked($event)"
-    (submitButtonClicked)="submitButtonClicked($event)">
+  *ngIf="isSaveOrSubmitButtonVisible"
+  [componentState]="latestComponentState"
+  [isDirty]="isDirty"
+  [isDisabled]="isDisabled"
+  [isSaveButtonVisible]="isSaveButtonVisible"
+  [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+  [isSubmitButtonVisible]="isSubmitButtonVisible"
+  [isSubmitDirty]="isSubmitDirty"
+  (saveButtonClicked)="saveButtonClicked($event)"
+  (submitButtonClicked)="submitButtonClicked($event)"
+>
 </component-save-submit-buttons>
 <component-annotations
-    *ngIf="mode === 'student'"
-    [annotations]="latestAnnotations"
-    [maxScore]="componentContent.maxScore"
-    [nodeId]="nodeId"
-    [componentId]="componentId">
+  *ngIf="mode === 'student'"
+  [annotations]="latestAnnotations"
+  [maxScore]="componentContent.maxScore"
+  [nodeId]="nodeId"
+  [componentId]="componentId"
+>
 </component-annotations>

@@ -1,19 +1,24 @@
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
   <mat-form-field fxFlex class="form-field-no-label form-field-no-hint" appearance="fill">
-    <textarea matInput
-        cdkTextareaAutosize
-        placeholder="Add response..."
-        i18n-placeholder
-        [(ngModel)]="messageText"
-        (ngModelChange)="responseChanged()"
-        (keypress)="keyPressed($event)">
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      placeholder="Add response..."
+      i18n-placeholder
+      (focus)="onFocus($event)"
+      [(ngModel)]="messageText"
+      (ngModelChange)="responseChanged()"
+      (keypress)="keyPressed($event)"
+    >
     </textarea>
   </mat-form-field>
-  <button mat-flat-button
-      color="primary"
-      (click)="submitResponse()"
-      [disabled]="!isSubmitEnabled"
-      i18n>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="submitResponse()"
+    [disabled]="!isSubmitEnabled"
+    i18n
+  >
     Send
   </button>
 </div>

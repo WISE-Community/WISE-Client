@@ -10,6 +10,9 @@ import { PeerGroup } from '../PeerGroup';
 import { PeerGroupMember } from '../PeerGroupMember';
 import { NodeService } from '../../../services/nodeService';
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
+import { QuestionBankRule } from '../peer-chat-question-bank/QuestionBankRule';
+import { forkJoin, Observable } from 'rxjs';
+import { getQuestionIdsUsed } from '../peer-chat-question-bank/question-bank-helper';
 
 @Component({
   selector: 'peer-chat-show-work',
@@ -22,7 +25,8 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   peerChatWorkgroupIds: Set<number> = new Set<number>();
   peerChatWorkgroupInfos: any = {};
   peerGroup: PeerGroup;
-  questionBankRule: string[];
+  questionBankRules: QuestionBankRule[];
+  questionIdsUsed: string[] = [];
   requestTimeout: number = 10000;
 
   @Input() workgroupId: number;
@@ -55,7 +59,15 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
     this.peerGroup = peerGroup;
     this.addWorkgroupIdsFromPeerGroup(this.peerChatWorkgroupIds, peerGroup);
     this.addTeacherWorkgroupIds(this.peerChatWorkgroupIds);
-    this.retrievePeerChatComponentStates();
+    forkJoin([
+      this.retrievePeerChatComponentStates(),
+      this.retrievePeerChatAnnotations()
+    ]).subscribe(([componentStates, annotations]) => {
+      this.setPeerChatMessages(componentStates);
+      this.addWorkgroupIdsFromPeerChatMessages(this.peerChatWorkgroupIds, componentStates);
+      this.setPeerChatWorkgroupInfos(Array.from(this.peerChatWorkgroupIds));
+      this.peerChatService.processIsDeletedAnnotations(annotations, this.peerChatMessages);
+    });
   }
 
   private addWorkgroupIdsFromPeerGroup(workgroupIds: Set<number>, peerGroup: PeerGroup): void {
@@ -70,39 +82,54 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
     });
   }
 
-  private retrievePeerChatComponentStates(): void {
-    this.peerChatService
-      .retrievePeerChatComponentStates(this.nodeId, this.componentId, this.workgroupId)
-      .pipe(timeout(this.requestTimeout))
-      .subscribe((componentStates: any[]) => {
-        this.setPeerChatMessages(componentStates);
-        this.addWorkgroupIdsFromPeerChatMessages(this.peerChatWorkgroupIds, componentStates);
-        this.setPeerChatWorkgroupInfos(Array.from(this.peerChatWorkgroupIds));
-      });
+  private retrievePeerChatComponentStates(): Observable<any> {
+    return this.peerChatService.retrievePeerChatComponentStates(
+      this.nodeId,
+      this.componentId,
+      this.workgroupId
+    );
+  }
+
+  private retrievePeerChatAnnotations(): Observable<any> {
+    return this.peerChatService.retrievePeerChatAnnotations(
+      this.nodeId,
+      this.componentId,
+      this.workgroupId
+    );
   }
 
   private setPeerChatMessages(componentStates: any[]): void {
     this.peerChatMessages = [];
     this.peerChatService.setPeerChatMessages(this.peerChatMessages, componentStates);
-    this.dynamicPrompt = this.getDynamicPrompt(componentStates);
-    this.questionBankRule = this.getQuestionBankRule(componentStates);
+    this.dynamicPrompt = this.getDynamicPrompt(componentStates, this.workgroupId);
+    this.questionBankRules = this.getQuestionBankRule(componentStates, this.workgroupId);
+    this.questionIdsUsed = getQuestionIdsUsed(componentStates, this.workgroupId);
   }
 
-  private getDynamicPrompt(componentStates: any[]): FeedbackRule {
-    for (let c = componentStates.length - 1; c >= 0; c--) {
-      const dynamicPrompt = componentStates[c].studentData.dynamicPrompt;
-      if (dynamicPrompt != null) {
-        return dynamicPrompt;
-      }
-    }
-    return null;
+  private getDynamicPrompt(componentStates: any[], workgroupId: number): FeedbackRule {
+    return this.getLatestStudentDataFieldForWorkgroup(
+      componentStates,
+      workgroupId,
+      'dynamicPrompt'
+    );
   }
 
-  private getQuestionBankRule(componentStates: any[]): string[] {
+  private getQuestionBankRule(componentStates: any[], workgroupId: number): QuestionBankRule[] {
+    return this.getLatestStudentDataFieldForWorkgroup(componentStates, workgroupId, 'questionBank');
+  }
+
+  private getLatestStudentDataFieldForWorkgroup(
+    componentStates: any[],
+    workgroupId: number,
+    fieldName: string
+  ): any {
     for (let c = componentStates.length - 1; c >= 0; c--) {
-      const questionBank = componentStates[c].studentData.questionBank;
-      if (questionBank != null) {
-        return questionBank;
+      const componentState = componentStates[c];
+      if (
+        componentState.workgroupId === workgroupId &&
+        componentState.studentData[fieldName] != null
+      ) {
+        return componentState.studentData[fieldName];
       }
     }
     return null;

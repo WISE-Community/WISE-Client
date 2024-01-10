@@ -8,16 +8,14 @@ import { AddTeamDialogComponent } from '../add-team-dialog/add-team-dialog.compo
   styleUrls: ['./add-team-button.component.scss']
 })
 export class AddTeamButtonComponent {
-  @Input()
-  period: any;
-
   isDisabled: boolean;
+  @Input() period: any;
 
   constructor(private dialog: MatDialog) {}
 
   ngOnInit() {}
 
-  openAddTeamDialog(): void {
+  protected openAddTeamDialog(): void {
     this.dialog.open(AddTeamDialogComponent, {
       panelClass: 'dialog-md',
       data: this.period

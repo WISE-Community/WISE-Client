@@ -1,15 +1,13 @@
-FROM node:14.17-alpine
-RUN apk add chromium
-ENV CHROME_BIN='/usr/bin/chromium-browser'
-RUN apk --no-cache add --virtual native-deps \
-    g++ gcc libgcc libstdc++ linux-headers make python3 && \
-    npm install --quiet node-gyp -g
-
+# Stage 1: build application
+FROM node:latest as node
+RUN apt-get update && apt-get install build-essential \
+    libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev -y
 WORKDIR /app
-
-COPY package*.json ./
-RUN npm install --prefer-dedupe
-
 COPY . .
+RUN npm ci
+RUN npm run build-prod
 
-CMD ["npm", "run", "serve-dev"]
+# Stage 2: Copy to Nginx
+FROM nginx:latest
+RUN mkdir /usr/share/nginx/html/wise-client
+COPY --from=node /app/dist /usr/share/nginx/html/wise-client

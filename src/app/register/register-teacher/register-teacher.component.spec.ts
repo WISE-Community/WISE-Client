@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterTeacherComponent } from './register-teacher.component';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';
@@ -22,8 +21,6 @@ export class MockConfigService {
   }
 }
 
-export class MockAuthService {}
-
 export class MockTeacherService {}
 
 export class MockUserService {}
@@ -38,7 +35,6 @@ describe('RegisterTeacherComponent', () => {
         declarations: [RegisterTeacherComponent],
         imports: [RouterTestingModule],
         providers: [
-          { provide: SocialAuthService, useClass: MockAuthService },
           { provide: UserService, useClass: MockUserService },
           { provide: ConfigService, useClass: MockConfigService }
         ],

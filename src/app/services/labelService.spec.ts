@@ -4,13 +4,11 @@ import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
 import { TagService } from '../../assets/wise5/services/tagService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import { LabelService } from '../../assets/wise5/components/label/labelService';
 import { TestBed } from '@angular/core/testing';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 
 let service: LabelService;
-let utilService: UtilService;
 let label1: any;
 let label2: any;
 let label1Text: any = 'Label 1';
@@ -46,12 +44,10 @@ describe('LabelService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        TagService,
-        UtilService
+        TagService
       ]
     });
-    service = TestBed.get(LabelService);
-    utilService = TestBed.get(UtilService);
+    service = TestBed.inject(LabelService);
     label1 = createLabel(label1Text, label1PointX, label1PointY, label1TextX, label1TextY, color1);
     label2 = createLabel(label2Text, label2PointX, label2PointY, label2TextX, label2TextY, color2);
   });
@@ -135,7 +131,9 @@ function createFabricLabel() {
     pointSize,
     fontSize,
     labelWidth,
-    studentDataVersion
+    studentDataVersion,
+    1,
+    false
   );
 }
 
@@ -231,15 +229,13 @@ function componentStateHasLabel() {
 }
 
 function canEdit() {
-  it(`should check if the component can be edited when it does not have a show work connected
-      component`, () => {
-    spyOn(utilService, 'hasShowWorkConnectedComponent').and.returnValue(false);
-    expect(service.canEdit({})).toEqual(true);
-  });
-  it(`should check if the component can be edited when it does have a show work connected
-      component`, () => {
-    spyOn(utilService, 'hasShowWorkConnectedComponent').and.returnValue(true);
-    expect(service.canEdit({})).toEqual(false);
+  describe('canEdit()', () => {
+    it(`should return true when it does not have a show work connected component`, () => {
+      expect(service.canEdit({})).toEqual(true);
+    });
+    it(`should return false when it does have a show work connected component`, () => {
+      expect(service.canEdit({ connectedComponents: [{ type: 'showWork' }] })).toEqual(false);
+    });
   });
 }
 

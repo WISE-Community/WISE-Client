@@ -1,17 +1,21 @@
 <div class="recording-div" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
-  <button mat-button
-      color="primary"
-      *ngIf="!recording"
-      (click)="startRecording($event, componentId, isDisabled)"
-      [disabled]="isDisabled">
+  <button
+    mat-button
+    color="primary"
+    *ngIf="!recording"
+    (click)="startRecording($event, componentId, isDisabled)"
+    [disabled]="isDisabled"
+  >
     <mat-icon>mic</mat-icon>
     <span i18n>Record Response</span>
   </button>
-  <button mat-button
-      color="primary"
-      *ngIf="recording"
-      (click)="stopRecording($event, componentId, isDisabled)"
-      [disabled]="isDisabled">
+  <button
+    mat-button
+    color="primary"
+    *ngIf="recording"
+    (click)="stopRecording($event, componentId, isDisabled)"
+    [disabled]="isDisabled"
+  >
     <mat-icon>stop</mat-icon>
     <span i18n>Stop Recording</span>
   </button>
@@ -21,17 +25,19 @@
   <div *ngFor="let attachment of audioAttachments" fxLayout="row" fxLayoutAlign="start center">
     <div fxLayout="row" fxLayoutAlign="start center">
       <audio controls>
-        <source [src]="sanitizeUrl(attachment.url)" type="audio/webm">
+        <source [src]="sanitizeUrl(attachment.url)" type="audio/webm" />
       </audio>
-      <button mat-button
-          color="primary"
-          (click)="removeAudioAttachment(attachment)"
-          aria-label="Delete Recording"
-          i18n-aria-label
-          [disabled]="isDisabled"
-          matTooltip="Delete Recording"
-          matTooltipPosition="above"
-          i18n-matTooltip>
+      <button
+        mat-button
+        color="primary"
+        (click)="removeAudioAttachment(attachment)"
+        aria-label="Delete Recording"
+        i18n-aria-label
+        [disabled]="isDisabled"
+        matTooltip="Delete Recording"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
         <mat-icon>cancel</mat-icon>
       </button>
     </div>

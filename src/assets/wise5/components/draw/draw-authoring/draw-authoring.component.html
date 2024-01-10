@@ -1,193 +1,223 @@
-<edit-component-prompt [prompt]="componentContent.prompt"
-   (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
+<edit-component-prompt
+  [prompt]="componentContent.prompt"
+  (promptChangedEvent)="promptChanged($event)"
+></edit-component-prompt>
 <div fxLayout="row" fxLayoutAlign="start center">
   <mat-form-field class="background-input-container">
     <mat-label i18n>Background Image (Optional)</mat-label>
-    <input matInput
-        [(ngModel)]="componentContent.background"
-        (ngModelChange)="backgroundImageChange.next($event)"/>
+    <input
+      matInput
+      [(ngModel)]="componentContent.background"
+      (ngModelChange)="backgroundImageChange.next($event)"
+    />
   </mat-form-field>
-  <button mat-raised-button
-      color="primary"
-      class="authoring-button"
-      (click)="chooseAsset('background')"
-      matTooltip="Choose an Image"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Choose an Image"
-      i18n-aria-label>
+  <button
+    mat-raised-button
+    color="primary"
+    class="authoring-button"
+    (click)="chooseBackground()"
+    matTooltip="Choose an Image"
+    matTooltipPosition="above"
+    i18n-matTooltip
+    aria-label="Choose an Image"
+    i18n-aria-label
+  >
     <mat-icon>insert_photo</mat-icon>
   </button>
 </div>
 <div>
   <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.isStudentAttachmentEnabled"
-      (ngModelChange)="componentChanged()"
-      i18n>
+    color="primary"
+    [(ngModel)]="componentContent.isStudentAttachmentEnabled"
+    (ngModelChange)="componentChanged()"
+    i18n
+  >
     Allow student to upload background image
   </mat-checkbox>
 </div>
 <div>
   <mat-form-field class="canvas-dimension-container">
     <mat-label>Canvas Width (Optional)</mat-label>
-    <input matInput
-        type="number"
-        [(ngModel)]="componentContent.width"
-        (ngModelChange)="canvasWidthChange.next($event)"/>
+    <input
+      matInput
+      type="number"
+      [(ngModel)]="componentContent.width"
+      (ngModelChange)="canvasWidthChange.next($event)"
+    />
   </mat-form-field>
   <mat-form-field class="canvas-dimension-container">
     <mat-label i18n>Canvas Height (Optional)</mat-label>
-    <input matInput
-        type="number"
-        [(ngModel)]="componentContent.height"
-        (ngModelChange)="canvasHeightChange.next($event)"/>
+    <input
+      matInput
+      type="number"
+      [(ngModel)]="componentContent.height"
+      (ngModelChange)="canvasHeightChange.next($event)"
+    />
   </mat-form-field>
 </div>
-<button mat-raised-button
-    color="primary"
-    class="enable-all-tools-button"
-    (click)="enableAllTools(true)"
-    matTooltip="Enable All Tools"
-    matTooltipPosition="above"
-    i18n-matTooltip
-    aria-label="Enable All"
-    i18n-aria-label>
+<button
+  mat-raised-button
+  color="primary"
+  class="enable-all-tools-button"
+  (click)="enableAllTools(true)"
+  matTooltip="Enable All Tools"
+  matTooltipPosition="above"
+  i18n-matTooltip
+  aria-label="Enable All"
+  i18n-aria-label
+>
   <mat-icon>check</mat-icon>
 </button>
-<button mat-raised-button
-    color="primary"
-    class="disable-all-tools-button"
-    (click)="enableAllTools(false)"
-    matTooltip="Disable All Tools"
-    matTooltipPosition="above"
-    i18n-matTooltip
-    aria-label="Disable All"
-    i18n-aria-label>
+<button
+  mat-raised-button
+  color="primary"
+  class="disable-all-tools-button"
+  (click)="enableAllTools(false)"
+  matTooltip="Disable All Tools"
+  matTooltipPosition="above"
+  i18n-matTooltip
+  aria-label="Disable All"
+  i18n-aria-label
+>
   <mat-icon>check_box_outline_blank</mat-icon>
 </button>
 <div fxLayout="row wrap">
   <div class="tools-div">
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.select"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.select"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Select Tool
     </mat-checkbox>
-    <br/>
+    <br />
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.line"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.line"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Line Tool
     </mat-checkbox>
-    <br/>
+    <br />
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.shape"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.shape"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Shape Tool
     </mat-checkbox>
-    <br/>
+    <br />
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.freeHand"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.freeHand"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Free Hand Tool
     </mat-checkbox>
   </div>
   <div class="tools-div">
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.text"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.text"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Text Tool
     </mat-checkbox>
-    <br/>
+    <br />
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.stamp"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.stamp"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Stamp Tool
     </mat-checkbox>
-    <br/>
+    <br />
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.clone"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.clone"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Clone Tool
     </mat-checkbox>
-    <br/>
+    <br />
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.strokeColor"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.strokeColor"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Stroke Color Tool
     </mat-checkbox>
   </div>
   <div class="tools-div">
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.fillColor"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.fillColor"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Fill Color Tool
     </mat-checkbox>
-    <br/>
+    <br />
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.strokeWidth"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.strokeWidth"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Stroke Width Tool
     </mat-checkbox>
-    <br/>
+    <br />
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.sendBack"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.sendBack"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Send Back Tool
     </mat-checkbox>
-    <br/>
+    <br />
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.sendForward"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.sendForward"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Send Forward Tool
     </mat-checkbox>
   </div>
   <div class="tools-div">
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.undo"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.undo"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Undo Tool
     </mat-checkbox>
-    <br/>
+    <br />
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.redo"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.redo"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Redo Tool
     </mat-checkbox>
-    <br/>
+    <br />
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.tools.delete"
-        (ngModelChange)="toolClicked()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.tools.delete"
+      (ngModelChange)="toolClicked()"
+      i18n
+    >
       Delete Tool
     </mat-checkbox>
   </div>
@@ -195,74 +225,86 @@
 <div *ngIf="componentContent.tools.stamp">
   <div class="add-stamps-container">
     <span i18n>Stamps</span>
-    <button mat-raised-button
-        color="primary"
-        class="authoring-button"
-        (click)="addStamp()"
-        matTooltip="Add Stamp"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Add"
-        i18n-aria-label>
+    <button
+      mat-raised-button
+      color="primary"
+      class="authoring-button"
+      (click)="addStamp()"
+      matTooltip="Add Stamp"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      aria-label="Add"
+      i18n-aria-label
+    >
       <mat-icon>add</mat-icon>
     </button>
   </div>
   <div *ngIf="componentContent.stamps.Stamps.length == 0">
     There are no stamps. Click the "Add Stamp" button to add a stamp.
   </div>
-  <div *ngFor="let stamp of stamps; index as stampIndex; first as isFirst; last as isLast;">
+  <div *ngFor="let stamp of stamps; index as stampIndex; first as isFirst; last as isLast">
     <mat-form-field class="stamp-image-input-container">
       <mat-label i81n>Stamp Image</mat-label>
-      <input matInput
-          [(ngModel)]="stamp.image"
-          (ngModelChange)="stampChanged(stamp.image, stampIndex)"
-          placeholder="Choose an Image"
-          i18n-placeholder/>
+      <input
+        matInput
+        [(ngModel)]="stamp.image"
+        (ngModelChange)="stampChanged(stamp.image, stampIndex)"
+        placeholder="Choose an Image"
+        i18n-placeholder
+      />
     </mat-form-field>
-    <button mat-raised-button
-        color="primary"
-        class="authoring-button"
-        (click)="chooseStampImage(stampIndex)"
-        matTooltip="Choose an Image"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Choose an Image"
-        i18n-aria-label>
+    <button
+      mat-raised-button
+      color="primary"
+      class="authoring-button"
+      (click)="chooseStampImage(stampIndex)"
+      matTooltip="Choose an Image"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      aria-label="Choose an Image"
+      i18n-aria-label
+    >
       <mat-icon>insert_photo</mat-icon>
     </button>
-    <button mat-raised-button
-        color="primary"
-        class="authoring-button"
-        [disabled]="isFirst"
-        (click)="moveStampUp(stampIndex)"
-        matTooltip="Move Up"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Up"
-        i18n-aria-label>
+    <button
+      mat-raised-button
+      color="primary"
+      class="authoring-button"
+      [disabled]="isFirst"
+      (click)="moveStampUp(stampIndex)"
+      matTooltip="Move Up"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      aria-label="Up"
+      i18n-aria-label
+    >
       <mat-icon>arrow_upward</mat-icon>
     </button>
-    <button mat-raised-button
-        color="primary"
-        class="authoring-button"
-        [disabled]="isLast"
-        (click)="moveStampDown(stampIndex)"
-        matTooltip="Move Down"
-        matTooltipPosition="above"
-        i18n-matTooltipPosition
-        aria-label="Down"
-        i18n-aria-label>
+    <button
+      mat-raised-button
+      color="primary"
+      class="authoring-button"
+      [disabled]="isLast"
+      (click)="moveStampDown(stampIndex)"
+      matTooltip="Move Down"
+      matTooltipPosition="above"
+      i18n-matTooltipPosition
+      aria-label="Down"
+      i18n-aria-label
+    >
       <mat-icon>arrow_downward</mat-icon>
     </button>
-    <button mat-raised-button
-        color="primary"
-        class="authoring-button"
-        (click)="deleteStamp(stampIndex)"
-        matTooltip="Delete"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Delete"
-        i18n-aria-label>
+    <button
+      mat-raised-button
+      color="primary"
+      class="authoring-button"
+      (click)="deleteStamp(stampIndex)"
+      matTooltip="Delete"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      aria-label="Delete"
+      i18n-aria-label
+    >
       <mat-icon>delete</mat-icon>
     </button>
   </div>

@@ -2,20 +2,22 @@
 
 import { Component } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
+import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { RandomKeyService } from '../../../services/randomKeyService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'animation-authoring',
   templateUrl: 'animation-authoring.component.html',
   styleUrls: ['animation-authoring.component.scss']
 })
-export class AnimationAuthoring extends ComponentAuthoring {
+export class AnimationAuthoring extends AbstractComponentAuthoring {
   stepNodesDetails: string[];
   availableDataSourceComponentTypes = ['Graph'];
   inputChange: Subject<string> = new Subject<string>();
@@ -23,7 +25,8 @@ export class AnimationAuthoring extends ComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
-    protected NodeService: NodeService,
+    private dialog: MatDialog,
+    protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
   ) {
@@ -41,7 +44,7 @@ export class AnimationAuthoring extends ComponentAuthoring {
       this.componentContent.objects = [];
     }
     const newObject = {
-      id: RandomKeyService.generate(),
+      id: generateRandomKey(),
       type: 'image'
     };
     this.componentContent.objects.push(newObject);
@@ -236,8 +239,13 @@ export class AnimationAuthoring extends ComponentAuthoring {
   }
 
   chooseImage(authoredObject: any, targetString: string = 'image'): void {
-    const params = this.createOpenAssetChooserParamsObject(targetString, authoredObject);
-    this.openAssetChooser(params);
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open(targetString, authoredObject)
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 
   /**

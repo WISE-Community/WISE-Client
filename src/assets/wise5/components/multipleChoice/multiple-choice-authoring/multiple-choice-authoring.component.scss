@@ -1,17 +1,12 @@
-@import '~style/abstracts/variables';
+@import 'style/abstracts/variables';
 
-.mat-radio-group {
-  display: block;
+/* TODO(mdc-migration): The following rule targets internal classes of radio that may no longer apply for the MDC version. */
+mat-radio-button {
+  margin-right: 24px;
 }
 
 label.mat-radio-label {
   display: inline-flex;
-}
-
-.mat-radio-button.choice-radio-button {
-  display: block;
-  margin-top: 10px;
-  width: 5%;
 }
 
 .choices-label {
@@ -41,7 +36,7 @@ label.mat-radio-label {
   margin-right: 10px;
 }
 
-.mat-checkbox {
+.mat-mdc-checkbox {
   margin-left: 5px;
 }
 
@@ -51,4 +46,8 @@ label.mat-radio-label {
 
 .reload-preview-container {
   margin-bottom: 10px;
+}
+
+.mat-icon {
+  margin: 0px;
 }

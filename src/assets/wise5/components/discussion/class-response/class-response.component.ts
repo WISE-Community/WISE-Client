@@ -7,6 +7,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ConfigService } from '../../../services/configService';
+import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 
 @Component({
   selector: 'class-response',
@@ -40,7 +41,7 @@ export class ClassResponse {
   expanded: boolean = false;
   repliesToShow: any[] = [];
 
-  constructor(private ConfigService: ConfigService) {}
+  constructor(private configService: ConfigService) {}
 
   ngOnInit(): void {
     this.injectLinksIntoResponse();
@@ -88,11 +89,11 @@ export class ClassResponse {
   }
 
   getAvatarColorForWorkgroupId(workgroupId: number): string {
-    return this.ConfigService.getAvatarColorForWorkgroupId(workgroupId);
+    return getAvatarColorForWorkgroupId(workgroupId);
   }
 
   adjustClientSaveTime(time: any): number {
-    return this.ConfigService.convertToClientTimestamp(time);
+    return this.configService.convertToClientTimestamp(time);
   }
 
   replyEntered($event: any): void {

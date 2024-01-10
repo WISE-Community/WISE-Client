@@ -1,10 +1,12 @@
-<div class="md-whiteframe-1dp">
+<div class="md-whiteframe-1dp notebook-workgroup-grading">
   <div class="list-item">
-    <button mat-button
-        (click)="toggleExpand()"
-        class="list-item__subheader-button row-button "
-        aria-label="Show/hide team's notebook contents"
-        i18n-aria-label>
+    <button
+      mat-button
+      (click)="toggleExpand()"
+      class="list-item__subheader-button row-button"
+      aria-label="Show/hide team's notebook contents"
+      i18n-aria-label
+    >
       <div fxLayout="row" fxFlex>
         <div fxLayout="row" fxLayoutAlign="center center" fxFlex="15">
           {{ workgroup.workgroupId }}
@@ -12,40 +14,44 @@
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
           {{ workgroup.displayNames }}
         </div>
-        <div *ngIf="notesEnabled"
-            class="mat-title"
-            fxLayout="row"
-            fxLayoutAlign="center center"
-            fxFlex="15">
+        <div
+          *ngIf="notesEnabled"
+          class="mat-headline-6"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+          fxFlex="15"
+        >
           <span [ngClass]="{ 'text-secondary': getNumActiveNotes() === 0 }">
             {{ getNumActiveNotes() }}
           </span>
         </div>
         <div *ngIf="reportEnabled" fxLayout="row" fxLayoutAlign="center center" fxFlex="25">
           <span *ngIf="reportHasWork" class="success center" i18n>
-            Latest Work: {{ workgroup.report.serverSaveTime | date: 'mediumDate' }}
+            Latest Work: {{ workgroup.report.serverSaveTime | date : 'mediumDate' }}
           </span>
-          <span *ngIf="!reportHasWork" class="text-secondary" i18n>
-            No Work
-          </span>
+          <span *ngIf="!reportHasWork" class="text-secondary" i18n> No Work </span>
         </div>
       </div>
     </button>
   </div>
   <mat-list-item *ngIf="expand" class="grading__item-container">
-    <mat-tab-group class="mat-body-2 app-bg-bg" fxFlex>
+    <mat-tab-group class="mat-subtitle-2 app-bg-bg" fxFlex>
       <mat-tab *ngIf="notesEnabled" label="Notes" i18n-label>
-        <notebook-notes [mode]="'classroomMonitor'"
-            [config]="notebookConfig"
-            [viewOnly]="true"
-            [workgroupId]="workgroup.workgroupId">
+        <notebook-notes
+          [mode]="'classroomMonitor'"
+          [config]="notebookConfig"
+          [viewOnly]="true"
+          [workgroupId]="workgroup.workgroupId"
+        >
         </notebook-notes>
       </mat-tab>
       <mat-tab *ngIf="reportEnabled" label="{{ reportTitle }}">
-        <notebook-report class="report-grading"
-            [mode]="'classroomMonitor'"
-            [config]="notebookConfig"
-            [workgroupId]="workgroup.workgroupId">
+        <notebook-report
+          class="report-grading"
+          [mode]="'classroomMonitor'"
+          [config]="notebookConfig"
+          [workgroupId]="workgroup.workgroupId"
+        >
         </notebook-report>
       </mat-tab>
     </mat-tab-group>

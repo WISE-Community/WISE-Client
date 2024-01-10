@@ -1,17 +1,20 @@
-<button mat-icon-button [matMenuTriggerFor]="accountMenu">
-  <mat-icon *ngIf="role === 'student' else teacher"
-            i18n-aria-label
-            aria-label="Account Menu">account_circle</mat-icon>
+<button mat-icon-button [matMenuTriggerFor]="accountMenu" i18n-aria-label aria-label="Account Menu">
+  <mat-icon *ngIf="role === 'student'; else teacher"
+    >account_circle</mat-icon
+  >
   <ng-template #teacher>
-    <mat-icon i18n-aria-label aria-label="Account Menu">account_box</mat-icon>
+    <mat-icon>account_box</mat-icon>
   </ng-template>
 </button>
 <mat-menu #accountMenu="matMenu" xPosition="before">
   <div class="header-account-menu">
-    <div class="user-info" fxLayout="row" fxLayoutAlign="left center">
-      <mat-icon *ngIf="role === 'student' else teacherAvatar"
-                i18n-aria-label
-                aria-label="Account avatar">account_circle</mat-icon>
+    <div class="user-info" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="8px">
+      <mat-icon
+        *ngIf="role === 'student'; else teacherAvatar"
+        i18n-aria-label
+        aria-label="Account avatar"
+        >account_circle</mat-icon
+      >
       <ng-template #teacherAvatar>
         <mat-icon i18n-aria-label aria-label="Account avatar">account_box</mat-icon>
       </ng-template>
@@ -21,62 +24,71 @@
       <a (click)="switchToOriginalUser()" i18n>Switch back to original user</a>
     </div>
     <mat-divider></mat-divider>
-    <a *ngIf="role === 'student'"
-       routerLinkActive="active"
-       [routerLinkActiveOptions]="{exact: true}"
-       mat-menu-item routerLink="/student">
+    <a
+      *ngIf="role === 'student'"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      mat-menu-item
+      routerLink="/student"
+    >
       <mat-icon>home</mat-icon>
       <span i18n>Student Home</span>
     </a>
-    <a *ngIf="role !== 'student'"
-       mat-menu-item
-       routerLink="/teacher"
-       routerLinkActive="active"
-       [routerLinkActiveOptions]="{exact: true}">
+    <a
+      *ngIf="role !== 'student'"
+      mat-menu-item
+      routerLink="/teacher"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <mat-icon>home</mat-icon>
       <span i18n>Teacher Home</span>
     </a>
-    <a *ngIf="role === 'student'"
-       mat-menu-item
-       routerLink="/student/profile/edit"
-       routerLinkActive="active"
-       [routerLinkActiveOptions]="{exact: true}">
+    <a
+      *ngIf="role === 'student'"
+      mat-menu-item
+      routerLink="/student/profile/edit"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <mat-icon>edit</mat-icon>
       <span i18n>Edit Profile</span>
     </a>
-    <a *ngIf="role !== 'student'"
-       mat-menu-item
-       routerLink="/teacher/profile/edit"
-       routerLinkActive="active"
-       [routerLinkActiveOptions]="{exact: true}">
+    <a
+      *ngIf="role !== 'student'"
+      mat-menu-item
+      routerLink="/teacher/profile/edit"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <mat-icon>edit</mat-icon>
       <span i18n>Edit Profile</span>
     </a>
-    <a *ngIf="role === 'researcher'"
-       mat-menu-item
-       (click)="switchToAdmin()">
+    <a *ngIf="role === 'researcher'" mat-menu-item (click)="switchToAdmin()">
       <mat-icon>settings</mat-icon>
       <span i18n>Researcher Tools</span>
     </a>
-    <a *ngIf="role === 'admin'"
-       mat-menu-item
-       (click)="switchToAdmin()">
+    <a *ngIf="role === 'admin'" mat-menu-item (click)="switchToAdmin()">
       <mat-icon>settings</mat-icon>
       <span i18n>Admin Tools</span>
     </a>
-    <a *ngIf="role === 'student'"
-       mat-menu-item
-       routerLink="/help"
-       routerLinkActive="active"
-       [routerLinkActiveOptions]="{exact: true}">
+    <a
+      *ngIf="role === 'student'"
+      mat-menu-item
+      routerLink="/help"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <mat-icon>help</mat-icon>
       <span i18n>Help</span>
     </a>
-    <a *ngIf="role !== 'student'"
-       mat-menu-item
-       routerLink="/help"
-       routerLinkActive="active"
-       [routerLinkActiveOptions]="{exact: true}">
+    <a
+      *ngIf="role !== 'student'"
+      mat-menu-item
+      routerLink="/help"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <mat-icon>help</mat-icon>
       <span i18n>Help</span>
     </a>

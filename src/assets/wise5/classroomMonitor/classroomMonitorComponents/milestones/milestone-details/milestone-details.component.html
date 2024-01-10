@@ -1,0 +1,114 @@
+<div class="milestone-details">
+  <section class="milestone-details__section mat-elevation-z1">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <select-period></select-period>
+      <span fxFlex></span>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <nav-item-progress
+          [period]="currentPeriod"
+          [nodeCompletion]="milestone.percentageCompleted"
+        ></nav-item-progress>
+      </div>
+    </div>
+    <p *ngIf="milestone.description">
+      <span class="mat-subtitle-2" i18n>Description: </span>
+      <span [innerHTML]="milestone.description"></span>
+    </p>
+    <p *ngIf="requiredNodeIds.length">
+      <span class="mat-subtitle-2" i18n>Requirements: </span>
+      <a *ngFor="let nodeId of requiredNodeIds; let last = last" (click)="visitNodeGrading(nodeId)">
+        {{ getNodeNumberByNodeId(nodeId) }}: {{ getNodeTitle(nodeId)
+        }}<span *ngIf="!$last">, </span>
+      </a>
+    </p>
+    <p *ngIf="milestone.type === 'milestoneReport'">
+      <span class="mat-subtitle-2" i18n>Item Location: </span>
+      {{ getNodeNumberAndTitleByNodeId(milestone.nodeId) }}
+      (<a (click)="showMilestoneStepInfo()" i18n>Step Info</a>)
+    </p>
+  </section>
+  <section
+    *ngIf="milestone.type === 'milestoneReport'"
+    class="milestone-details__section mat-elevation-z1"
+  >
+    <div class="milestone-details__header mat-subtitle-2 notice-bg-bg" i18n>Class Report</div>
+    <div *ngIf="!milestone.isReportAvailable" class="center">
+      <p i18n>
+        This milestone includes automated reports that analyze student progress. Reports become
+        available for each period once the following conditions are met:
+      </p>
+      <p class="bold" *ngIf="milestone.satisfyConditional === 'any'" i18n>
+        At least {{ milestone.satisfyMinNumWorkgroups }} team(s) or
+        {{ milestone.satisfyMinPercentage }}% of the class have completed the milestone
+      </p>
+      <p class="bold" *ngIf="milestone.satisfyConditional === 'all'" i18n>
+        At least {{ milestone.satisfyMinNumWorkgroups }} team(s) and
+        {{ milestone.satisfyMinPercentage }}% of the class have completed the milestone
+      </p>
+    </div>
+    <div *ngIf="milestone.isReportAvailable" [innerHTML]="report"></div>
+  </section>
+  <section class="mat-elevation-z1 app-bg-bg">
+    <div *ngIf="milestone.generatedRecommendations && milestone.isReportAvailable">
+      <mat-tab-group
+        (selectedTabChange)="saveTabSelectedEvent($event)"
+        mat-stretch-tabs="false"
+        class="notice-bg-bg"
+      >
+        <mat-tab label="Recommendation" i18n-label>
+          <div class="milestone-details__section" [innerHTML]="recommendations"></div>
+        </mat-tab>
+        <mat-tab label="Student Work" i18n-label>
+          <div class="milestone-details__section">
+            <milestone-grading-view [milestone]="milestone"></milestone-grading-view>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <div
+      *ngIf="!milestone.generatedRecommendations && milestone.isReportAvailable"
+      class="milestone-details__section mat-elevation-z1"
+    >
+      <div class="milestone-details__header mat-subtitle-2 notice-bg-bg" i18n>Student Work</div>
+      <milestone-grading-view [milestone]="milestone"></milestone-grading-view>
+    </div>
+  </section>
+  <section *ngIf="!milestone.isReportAvailable" class="milestone-details__section mat-elevation-z1">
+    <div class="milestone-details__header mat-subtitle-2 notice-bg-bg" i18n>Student Completion</div>
+    <ng-container *ngTemplateOutlet="completion"></ng-container>
+  </section>
+  <ng-template #completion>
+    <mat-list class="user-list mat-elevation-z1">
+      <mat-list-item class="notice-bg-bg mat-subtitle-2">
+        <span i18n>Team</span>
+        <span fxFlex></span>
+        <span i18n>Completed</span>
+      </mat-list-item>
+      <mat-list-item
+        class="list-item"
+        *ngFor="let workgroup of sortAchievementTimeDescending(milestone.workgroups)"
+      >
+        <span fxLayoutGap="8px">
+          <span class="mat-avatar" fxHide.xs>
+            <mat-icon
+              class="md-36"
+              style="color: {{ getAvatarColorForWorkgroupId(workgroup.workgroupId) }}"
+            >
+              account_circle
+            </mat-icon>
+          </span>
+          <span class="mat-subtitle-2">{{
+            getDisplayNamesByWorkgroupId(workgroup.workgroupId)
+          }}</span>
+        </span>
+        <span fxFlex></span>
+        <span class="mat-subtitle-2">
+          <span *ngIf="workgroup.achievementTime !== null" class="success">
+            {{ workgroup.achievementTime | date: 'mediumDate' }}
+          </span>
+          <span *ngIf="workgroup.achievementTime === null" class="warn" i18n>Not Completed</span>
+        </span>
+      </mat-list-item>
+    </mat-list>
+  </ng-template>
+</div>

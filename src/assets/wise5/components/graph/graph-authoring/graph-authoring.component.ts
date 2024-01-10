@@ -2,19 +2,22 @@
 
 import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { GraphService } from '../graphService';
+import { isMultipleYAxes } from '../util';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
+import { filter } from 'rxjs/operators';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'graph-authoring',
   templateUrl: 'graph-authoring.component.html',
   styleUrls: ['graph-authoring.component.scss']
 })
-export class GraphAuthoring extends ComponentAuthoring {
+export class GraphAuthoring extends AbstractComponentAuthoring {
   availableGraphTypes = [
     {
       value: 'line',
@@ -129,26 +132,22 @@ export class GraphAuthoring extends ComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
+    private dialog: MatDialog,
     private GraphService: GraphService,
-    protected NodeService: NodeService,
+    protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
   }
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.enableMultipleYAxes = this.isMultipleYAxesEnabled();
+    this.enableMultipleYAxes = isMultipleYAxes(this.componentContent.yAxis);
     if (this.enableMultipleYAxes) {
       this.numYAxes = this.componentContent.yAxis.length;
     }
     this.addAnyMissingYAxisFieldsToAllYAxes(this.componentContent.yAxis);
-  }
-
-  isMultipleYAxesEnabled(): boolean {
-    return Array.isArray(this.componentContent.yAxis);
   }
 
   addSeriesClicked(): void {
@@ -248,7 +247,7 @@ export class GraphAuthoring extends ComponentAuthoring {
       ) {
         series.data.push([]);
       } else if (this.componentContent.xAxis.type === 'categories') {
-        series.data.push(null);
+        series.data.push(0);
       }
     }
     this.componentChanged();
@@ -484,7 +483,7 @@ export class GraphAuthoring extends ComponentAuthoring {
   }
 
   addAnyMissingYAxisFieldsToAllYAxes(yAxis: any): void {
-    if (this.GraphService.isMultipleYAxes(yAxis)) {
+    if (isMultipleYAxes(yAxis)) {
       yAxis.forEach((yAxis) => this.addAnyMissingYAxisFields(yAxis));
     } else {
       this.addAnyMissingYAxisFields(yAxis);
@@ -563,5 +562,15 @@ export class GraphAuthoring extends ComponentAuthoring {
 
   customTrackBy(index: number): number {
     return index;
+  }
+
+  chooseBackground(): void {
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open('background')
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 }

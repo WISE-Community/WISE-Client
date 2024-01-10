@@ -10,12 +10,10 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../services/configService';
 import { PeerGroupingAuthoringService } from '../../services/peerGroupingAuthoringService';
 import { SessionService } from '../../services/sessionService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { UtilService } from '../../services/utilService';
 import { CreateNewPeerGroupingDialogComponent } from './create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component';
 import { EditPeerGroupingDialogComponent } from './edit-peer-grouping-dialog/edit-peer-grouping-dialog.component';
 import { SelectPeerGroupingAuthoringComponent } from './select-peer-grouping-authoring/select-peer-grouping-authoring.component';
@@ -40,8 +38,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatOptionModule,
     MatRadioModule,
     MatSelectModule,
-    MatTooltipModule,
-    UpgradeModule
+    MatTooltipModule
   ],
   declarations: [
     CreateNewPeerGroupingDialogComponent,
@@ -62,8 +59,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     },
     PeerGroupingAuthoringService,
     SessionService,
-    TeacherProjectService,
-    UtilService
+    TeacherProjectService
   ]
 })
 export class PeerGroupingTestingModule {}

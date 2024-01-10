@@ -6,7 +6,6 @@ import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
 import { TagService } from '../../assets/wise5/services/tagService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { TeacherDataService } from '../../assets/wise5/services/teacherDataService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
@@ -45,8 +44,7 @@ describe('DiscussionService', () => {
         TagService,
         { provide: TeacherDataService, useClass: MockTeacherDataService },
         TeacherProjectService,
-        TeacherWebSocketService,
-        UtilService
+        TeacherWebSocketService
       ]
     });
 

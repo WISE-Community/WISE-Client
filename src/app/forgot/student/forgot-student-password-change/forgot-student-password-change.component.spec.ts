@@ -6,8 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StudentService } from '../../../student/student.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/index';
-import { PasswordService } from '../../../services/password.service';
+import { Observable } from 'rxjs';
+import { PasswordModule } from '../../../password/password.module';
+import { PasswordRequirementComponent } from '../../../password/password-requirement/password-requirement.component';
 
 export class MockStudentService {
   changePassword(
@@ -26,8 +27,6 @@ export class MockStudentService {
   }
 }
 
-const PASSWORD = 'Abcd1234';
-
 describe('ForgotStudentPasswordChangeComponent', () => {
   let component: ForgotStudentPasswordChangeComponent;
   let fixture: ComponentFixture<ForgotStudentPasswordChangeComponent>;
@@ -39,8 +38,14 @@ describe('ForgotStudentPasswordChangeComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ForgotStudentPasswordChangeComponent],
-      imports: [RouterTestingModule, BrowserAnimationsModule, ReactiveFormsModule],
-      providers: [PasswordService, { provide: StudentService, useClass: MockStudentService }],
+      imports: [
+        BrowserAnimationsModule,
+        PasswordModule,
+        RouterTestingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule
+      ],
+      providers: [{ provide: StudentService, useClass: MockStudentService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(ForgotStudentPasswordChangeComponent);
@@ -59,8 +64,9 @@ describe('ForgotStudentPasswordChangeComponent', () => {
   });
 
   it('should enable the submit button when the password fields are filled in', () => {
-    component.changePasswordFormGroup.controls['newPassword'].setValue(PASSWORD);
-    component.changePasswordFormGroup.controls['confirmNewPassword'].setValue(PASSWORD);
+    const password = PasswordRequirementComponent.VALID_PASSWORD;
+    component.changePasswordFormGroup.controls['newPassword'].setValue(password);
+    component.changePasswordFormGroup.controls['confirmNewPassword'].setValue(password);
     fixture.detectChanges();
     const submitButton = getSubmitButton();
     expect(submitButton.disabled).toBe(false);

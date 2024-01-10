@@ -4,18 +4,24 @@
       <mat-icon>groups</mat-icon>
       <span i18n>Latest from the WISE Community</span>
     </h3>
-    <a mat-icon-button color="primary" href="{{baseUrl}}/session/sso" target="_blank"
-       i18n-aria-label aria-label="Visit the WISE Community">
+    <a
+      mat-icon-button
+      color="primary"
+      href="{{ baseUrl }}/session/sso"
+      target="_blank"
+      i18n-aria-label
+      aria-label="Visit the WISE Community"
+    >
       <mat-icon>launch</mat-icon>
     </a>
   </div>
   <ul>
     <li *ngFor="let topic of topics">
-      <a class="mat-body-1" href="{{baseUrl}}/t/{{topic.slug}}/{{topic.id}}" target="_blank">
-        {{topic.title}}
+      <a class="mat-body-2" href="{{ baseUrl }}/t/{{ topic.slug }}/{{ topic.id }}" target="_blank">
+        {{ topic.title }}
       </a>
       <span class="secondary-text mat-caption">
-        ({{topic.last_posted_at | date:'MMM dd y'}})
+        ({{ topic.last_posted_at | date : 'MMM dd y' }})
       </span>
     </li>
   </ul>

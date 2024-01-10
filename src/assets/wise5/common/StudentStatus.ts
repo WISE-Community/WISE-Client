@@ -1,9 +1,11 @@
+import { NodeProgress } from './NodeProgress';
+
 export class StudentStatus {
   computerAvatarId?: string;
   currentNodeId: string;
   nodeStatuses: any;
   periodId: number;
-  projectCompletion: any;
+  projectCompletion: NodeProgress;
   runId: number;
   workgroupId: number;
 
@@ -14,4 +16,24 @@ export class StudentStatus {
       }
     }
   }
+}
+
+export function createStudentStatus(
+  computerAvatarId: string,
+  currentNodeId: string,
+  nodeStatuses: any,
+  periodId: number,
+  projectCompletion: NodeProgress,
+  runId: number,
+  workgroupId: number
+) {
+  return new StudentStatus({
+    computerAvatarId,
+    currentNodeId,
+    nodeStatuses,
+    periodId,
+    projectCompletion,
+    runId,
+    workgroupId
+  });
 }

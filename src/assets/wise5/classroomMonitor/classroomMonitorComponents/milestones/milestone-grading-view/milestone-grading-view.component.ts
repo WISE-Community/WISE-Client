@@ -1,20 +1,22 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { copy } from '../../../../common/object/object';
 import { AnnotationService } from '../../../../services/annotationService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { ConfigService } from '../../../../services/configService';
 import { MilestoneService } from '../../../../services/milestoneService';
-import { NodeInfoService } from '../../../../services/nodeInfoService';
 import { NotificationService } from '../../../../services/notificationService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherPeerGroupService } from '../../../../services/teacherPeerGroupService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { UtilService } from '../../../../services/utilService';
 import { NodeGradingViewComponent } from '../../nodeGrading/node-grading-view/node-grading-view.component';
+import { Annotation } from '../../../../common/Annotation';
 
 @Component({
   selector: 'milestone-grading-view',
   templateUrl: './milestone-grading-view.component.html',
-  styleUrls: ['./milestone-grading-view.component.scss']
+  styleUrls: ['./milestone-grading-view.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
   componentId: string;
@@ -30,25 +32,23 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
     protected annotationService: AnnotationService,
     protected classroomStatusService: ClassroomStatusService,
     protected configService: ConfigService,
+    protected dialog: MatDialog,
     protected milestoneService: MilestoneService,
-    protected nodeInfoService: NodeInfoService,
     protected notificationService: NotificationService,
     protected peerGroupService: TeacherPeerGroupService,
     protected projectService: TeacherProjectService,
-    protected teacherDataService: TeacherDataService,
-    protected utilService: UtilService
+    protected teacherDataService: TeacherDataService
   ) {
     super(
       annotationService,
       classroomStatusService,
       configService,
+      dialog,
       milestoneService,
-      nodeInfoService,
       notificationService,
       peerGroupService,
       projectService,
-      teacherDataService,
-      utilService
+      teacherDataService
     );
   }
 
@@ -64,7 +64,6 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
     this.componentId = this.milestone.componentId;
     this.retrieveStudentData();
     this.subscribeToEvents();
-    this.saveNodeGradingViewDisplayedEvent();
     this.getNodePositions();
   }
 
@@ -72,7 +71,7 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
     super.subscribeToEvents();
     if (this.milestone.report.locations.length > 1) {
       this.subscriptions.add(
-        this.annotationService.annotationReceived$.subscribe(({ annotation }) => {
+        this.annotationService.annotationReceived$.subscribe((annotation: Annotation) => {
           const workgroupId = annotation.toWorkgroupId;
           if (annotation.nodeId === this.firstNodeId && this.workgroupsById[workgroupId]) {
             this.updateWorkgroup(workgroupId);
@@ -162,7 +161,7 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
       workgroup.changeInScore = this.getChangeInScore(workgroup.initialScore, workgroup.score);
     }
     if (!init) {
-      this.workgroupsById[workgroupId] = this.utilService.makeCopyOfJSONObject(workgroup);
+      this.workgroupsById[workgroupId] = copy(workgroup);
     }
   }
 

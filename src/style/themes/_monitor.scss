@@ -1,3 +1,6 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+
 // WISE Classroom Monitor theme
 
 // Material grey color palette for reference
@@ -53,26 +56,26 @@ $monitor-primary: (
 );
 
 $monitor-accent: (
-  50 : #fdebe8,
-  100 : #fbcdc7,
-  200 : #f8aca1,
-  300 : #f58a7b,
-  400 : #f2715f,
-  500 : #f05843,
-  600 : #ee503d,
-  700 : #ec4734,
-  800 : #e93d2c,
-  900 : #e52d1e,
-  A100 : #ffffff,
-  A200 : #ffe9e7,
-  A400 : #ffb9b4,
-  A700 : #ffa19b,
+  50 : #FBE0E8,
+  100 : #F6B3C6,
+  200 : #F080A0,
+  300 : #E94D79,
+  400 : #E5265D,
+  500 : #E00040,
+  600 : #DC003A,
+  700 : #D80032,
+  800 : #D3002A,
+  900 : #CB001C,
+  A100 : #FFF3F4,
+  A200 : #FFC0C5,
+  A400 : #FF8D96,
+  A700 : #FF747F,
   contrast: (
     50 : #000000,
     100 : #000000,
     200 : #000000,
     300 : #000000,
-    400 : #000000,
+    400 : #ffffff,
     500 : #ffffff,
     600 : #ffffff,
     700 : #ffffff,
@@ -85,64 +88,55 @@ $monitor-accent: (
   )
 );
 
-$monitor-theme-primary: mat-palette($monitor-primary);
-$monitor-theme-accent: mat-palette($monitor-accent);
-$monitor-theme-warn: mat-palette($mat-red, 800);
+$monitor-theme-primary: mat.define-palette($monitor-primary);
+$monitor-theme-accent: mat.define-palette($monitor-accent);
+$monitor-theme-warn: mat.define-palette(mat.$red-palette, 800);
 
 // create Angular Material theme
-$monitor: mat-light-theme(
-  $monitor-theme-primary,
-  $monitor-theme-accent,
-  $monitor-theme-warn
+$monitor: mat.define-light-theme((
+  color: (
+    primary: $monitor-theme-primary,
+    accent: $monitor-theme-accent,
+    warn: $monitor-theme-warn,
+  ),
+  typography: $wise-typography,
+));
+
+$monitor-theme-background: (
+  status-bar: map.get($mat-grey, 400),
+  app-bar:    map.get($mat-grey, 300),
+  background: map.get($mat-grey, 100),
 );
 
-$monitor-mat-light-theme-background: (
-  status-bar: map_get($mat-grey, 400),
-  app-bar:    map_get($mat-grey, 300),
-  background: map_get($mat-grey, 100),
-  hover:      rgba(black, 0.04), // TODO(kara): check style with Material Design UX
-  card:       white,
-  dialog:     white,
-  disabled-button: rgba(black, 0.12),
-  raised-button: white,
-  //focused-button: $dark-focused,
-  focused-button: rgba(black, 0.12),
-  selected-button: map_get($mat-grey, 300),
-  selected-disabled-button: map_get($mat-grey, 400),
-  disabled-button-toggle: map_get($mat-grey, 200),
-  unselected-chip: map_get($mat-grey, 300),
-  disabled-list-option: map_get($mat-grey, 200),
-  tooltip: map_get($mat-grey, 700)
-);
-
-$monitor-theme: map-merge($monitor, (background: $monitor-mat-light-theme-background));
+$monitor-theme: map.deep-merge($monitor, (
+  'color': (
+    'background': $monitor-theme-background,
+  ),
+));
 
 // get theme color variables
-$primary: map-get($monitor-theme, primary);
-$accent: map-get($monitor-theme, accent);
-$warn: map-get($monitor-theme, warn);
-$foreground: map-get($monitor-theme, foreground);
-$background: map-get($monitor-theme, background);
+$foreground: map.get($monitor-theme, foreground);
+$background: map.get($monitor-theme, background);
 
 // create colors object (including additional colors)
 $monitor-colors: (
-  'accent': mat-color($accent),
+  'accent': mat.get-color-from-palette($monitor-theme-accent, 500),
   'accent-1': #795C3A,
   'accent-2': #CAD266,
   'app-bg': white,
   'control-bg': white,
   'control-bg-active': white,
-  'disabled-text': mat-color($foreground, disabled-text),
+  'disabled-text': mat.get-color-from-palette($foreground, 'disabled-text'),
   'highlighted': #fffaec,
   'info': #ef6c00,
   'info-contrast': white,
   'notice-bg': rgba(black, 0.04),
-  'primary': mat-color($primary),
+  'primary': mat.get-color-from-palette($monitor-theme-primary, 500),
   'score': #FFC107,
-  'secondary-text': mat-color($foreground, secondary-text),
-  'selected-bg': map-get($monitor-theme-primary, 50),
-  'success': #00C853,
+  'secondary-text': mat.get-color-from-palette($foreground, 'secondary-text'),
+  'selected-bg': mat.get-color-from-palette($monitor-theme-primary, 50),
+  'success': #008004,
   'success-contrast': black,
-  'text': mat-color($foreground, text),
-  'warn': mat-color($warn)
+  'text': mat.get-color-from-palette($foreground, 'text'),
+  'warn': 'mat.get-color-from-palette($monitor-theme-warn, 800)',
 );

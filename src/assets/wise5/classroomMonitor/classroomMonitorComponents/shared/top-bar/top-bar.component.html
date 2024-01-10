@@ -1,108 +1,110 @@
 <mat-toolbar class="l-header" color="primary">
   <span class="button logo-link">
-    <a href="{{contextPath}}/teacher" target="_self">
+    <a href="{{ contextPath }}/teacher" target="_self">
       <img [src]="logoPath" alt="WISE logo" i18n-alt class="logo" />
     </a>
   </span>
   <h3 fxLayout="row" fxLayoutAlign="start center" class="title-header">
-    <span class="title">{{ projectTitle }}</span>&nbsp;
+    <span class="title">{{ projectTitle }}</span
+    >&nbsp;
     <span class="mat-caption" fxHide.lt-lg>({{ runInfo }})</span>
-    <button mat-icon-button
-        fxHide.gt-md
-        aria-label="Unit Info"
-        i18n-aria-label
-        [matTooltip]="runInfo">
+    <button
+      mat-icon-button
+      fxHide.gt-md
+      aria-label="Unit Info"
+      i18n-aria-label
+      matTooltip="Unit Info"
+      i18n-matTooltip
+    >
       <mat-icon>info</mat-icon>
     </button>
-    <button mat-icon-button
-        *ngIf="canAuthorProject"
-        fxHide.xs
-        aria-label="Switch to Authoring View"
-        i18n-aria-label
-        (click)="switchToAuthoringView()"
-        matTooltip="Switch to Authoring View"
-        i18n-matTooltip>
+    <button
+      mat-icon-button
+      *ngIf="canAuthorProject"
+      fxHide.xs
+      aria-label="Switch to Authoring View"
+      i18n-aria-label
+      (click)="switchToAuthoringView()"
+      matTooltip="Switch to Authoring View"
+      i18n-matTooltip
+    >
       <mat-icon mat-menu-origin>edit</mat-icon>
     </button>
-    <button mat-icon-button
-        fxHide.xs
-        aria-label="Preview Unit"
-        i18n-aria-label
-        (click)="previewProject()"
-        matTooltip="Preview Unit"
-        i18n-matTooltip>
-      <mat-icon mat-menu-origin>visibility</mat-icon>
+    <button
+      mat-icon-button
+      fxHide.xs
+      (click)="previewProject()"
+      matTooltip="Preview Unit"
+      i18n-matTooltip
+    >
+      <mat-icon mat-menu-origin>preview</mat-icon>
     </button>
   </h3>
   <span fxFlex></span>
-  <button mat-icon-button
-      aria-label="Alerts"
-      i18n-aria-label
-      class="mat-icon-button notification-btn notifications-menu-button"
-      [matMenuTriggerFor]="notificationsMenu">
-    <span *ngIf="newNotifications.length > 0"
-        class="notification-count">{{newNotifications.length}}
+  <button
+    mat-icon-button
+    aria-label="Alerts"
+    i18n-aria-label
+    [matMenuTriggerFor]="notificationsMenu"
+  >
+    <span *ngIf="newNotifications.length > 0" class="notification-count"
+      >{{ newNotifications.length }}
     </span>
     <mat-icon mat-menu-origin>notifications</mat-icon>
   </button>
-  <mat-menu #notificationsMenu
-      class="account-menu account-menu--fixed-width">
+  <mat-menu #notificationsMenu class="account-menu account-menu--fixed-width">
     <notifications-menu
-        (click)="$event.stopPropagation();"
-        [newNotifications]="newNotifications"
-        [withPause]="true"
-        [state]="state">
+      (click)="$event.stopPropagation()"
+      [newNotifications]="newNotifications"
+      [withPause]="true"
+    >
     </notifications-menu>
   </mat-menu>
-  <button mat-icon-button
-      aria-label="Pause Student Screens"
-      i18n-aria-label
-      [ngClass]="{ 'has-indicator has-indicator--icon-button': isAnyPeriodPaused() }"
-      [matMenuTriggerFor]="pauseScreensMenu">
+  <button
+    mat-icon-button
+    aria-label="Pause Student Screens"
+    i18n-aria-label
+    [ngClass]="{ 'has-indicator has-indicator--icon-button': isAnyPeriodPaused() }"
+    [matMenuTriggerFor]="pauseScreensMenu"
+  >
     <mat-icon mat-menu-origin *ngIf="isAnyPeriodPaused()">pause_circle_filled</mat-icon>
     <mat-icon mat-menu-origin *ngIf="!isAnyPeriodPaused()">pause_circle_outline</mat-icon>
   </button>
-  <mat-menu #pauseScreensMenu
-      class="account-menu account-menu--fixed-width">
-    <pause-screens-menu (click)="$event.stopPropagation();"></pause-screens-menu>
+  <mat-menu #pauseScreensMenu class="account-menu account-menu--fixed-width">
+    <pause-screens-menu (click)="$event.stopPropagation()"></pause-screens-menu>
   </mat-menu>
-  <button mat-icon-button
-      aria-label="User Menu"
-      i18n-aria-label
-      class="mat-icon-button"
-      [matMenuTriggerFor]="accountMenu">
+  <button
+    mat-icon-button
+    aria-label="User Menu"
+    i18n-aria-label
+    class="mat-icon-button"
+    [matMenuTriggerFor]="accountMenu"
+  >
     <mat-icon mat-menu-origin>account_box</mat-icon>
   </button>
-  <mat-menu #accountMenu
-      class="account-menu account-menu--fixed-width">
-    <div class="account-menu__info"
-        (click)="$event.stopPropagation();"
-        fxLayout="row"
-        fxLayoutAlign="start center">
+  <mat-menu #accountMenu class="account-menu account-menu--fixed-width">
+    <div
+      class="account-menu__info"
+      (click)="$event.stopPropagation()"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+    >
       <div class="account-menu__info__title">
         <div class="account-menu-avatar" fxLayoutAlign="start center">
-          <mat-icon style="color: {{avatarColor}}" class="mat-36"> account_circle </mat-icon>
+          <mat-icon style="color: {{ avatarColor }}" class="mat-36"> account_circle </mat-icon>
         </div>
       </div>
-      <div class="mat-body-2">
+      <div class="mat-subtitle-2">
         {{ userInfo.firstName }} {{ userInfo.lastName }}
         <span class="mat-caption">({{ userInfo.username }})</span>
       </div>
     </div>
-    <div class="account-menu__actions" (click)="$event.stopPropagation();" fxLayout="row">
-      <button mat-button
-          color="primary"
-          class="account-menu-button"
-          (click)="goHome()"
-          i18n>
+    <div class="account-menu__actions" (click)="$event.stopPropagation()" fxLayout="row">
+      <button mat-button color="primary" class="account-menu-button" (click)="goHome()" i18n>
         Go Home
       </button>
       <span fxFlex></span>
-      <button mat-button
-          color="primary"
-          class="account-menu-button"
-          (click)="logOut()"
-          i18n>
+      <button mat-button color="primary" class="account-menu-button" (click)="logOut()" i18n>
         Sign Out
       </button>
     </div>

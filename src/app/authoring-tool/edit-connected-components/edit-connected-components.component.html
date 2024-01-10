@@ -1,20 +1,26 @@
 <edit-connected-components-add-button (connectedComponentsChanged)="addConnectedComponent()">
 </edit-connected-components-add-button>
-<div *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
-    class="connected-components-div">
+<div
+  *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
+  class="connected-components-div"
+>
   <div fxLayout="row wrap" fxLayoutGap="20px">
     <edit-connected-component-default-selects
-        [componentId]="componentId"
-        [connectedComponent]="connectedComponent"
-        [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-        (connectedComponentNodeIdChange)="connectedComponentNodeIdChanged(connectedComponent)"
-        (connectedComponentComponentIdChange)="connectedComponentComponentIdChanged(connectedComponent)"
-        (connectedComponentTypeChange)="connectedComponentTypeChanged(connectedComponent)">
+      [componentId]="componentId"
+      [connectedComponent]="connectedComponent"
+      [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+      (connectedComponentNodeIdChange)="connectedComponentNodeIdChanged(connectedComponent)"
+      (connectedComponentComponentIdChange)="
+        connectedComponentComponentIdChanged(connectedComponent)
+      "
+      (connectedComponentTypeChange)="connectedComponentTypeChanged(connectedComponent)"
+    >
     </edit-connected-component-default-selects>
     <span fxFlex></span>
     <edit-connected-component-delete-button
-        [connectedComponentIndex]="connectedComponentIndex"
-        (connectedComponentChange)="deleteConnectedComponent(connectedComponentIndex)">
+      [connectedComponentIndex]="connectedComponentIndex"
+      (connectedComponentChange)="deleteConnectedComponent(connectedComponentIndex)"
+    >
     </edit-connected-component-delete-button>
   </div>
 </div>

@@ -1,14 +1,18 @@
-@import
-  '~style/abstracts/mixins',
-  '~style/abstracts/variables';
+@use '@angular/material' as mat;
 
-.cta {
+@import
+  'style/abstracts/mixins',
+  'style/abstracts/variables';
+
+.cta.mat-mdc-raised-button {
   padding: 0;
   display: block;
   overflow: hidden;
+  height: auto;
   text-align: center;
   text-transform: none;
   white-space: normal;
+  font-weight: 500;
   border-radius: $feature-border-radius;
 
   &:hover, &:focus {
@@ -17,16 +21,20 @@
       transition: all 0.5s ease-in-out;
     }
   }
+
+  &:focus {
+    outline: 1px solid;
+  }
 }
 
 .cta__wrap {
-  padding: 16px;
+  padding: 16px 16px 24px;
   display: block !important;
 }
 
 .cta__headline {
   margin: -16px -16px 16px;
-  padding: 4px 12px;
+  padding: 10px 12px;
   border-bottom: 1px solid;
   border-top-left-radius: $feature-border-radius;
   border-top-right-radius: $feature-border-radius;

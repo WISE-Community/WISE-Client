@@ -1,7 +1,19 @@
 .project-item {
-  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .project-item:hover {
   background-color: #add8e6;
+}
+
+.step-header {
+  margin-inline-start: 24px;
+}
+
+.branch-path-step-header {
+  margin-inline-start: 48px;
+}
+
+.mat-icon {
+  margin: 0;
 }

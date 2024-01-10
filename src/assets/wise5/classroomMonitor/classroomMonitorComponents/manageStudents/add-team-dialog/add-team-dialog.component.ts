@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfigService } from '../../../../services/configService';
-import { TeacherDataService } from '../../../../services/teacherDataService';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MoveUserConfirmDialogComponent } from '../move-user-confirm-dialog/move-user-confirm-dialog.component';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
@@ -20,17 +19,17 @@ export class AddTeamDialogComponent {
   constructor(
     protected dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public period: any,
-    private ConfigService: ConfigService,
+    private configService: ConfigService,
     private snackBar: MatSnackBar,
-    private WorkgroupService: WorkgroupService
+    private workgroupService: WorkgroupService
   ) {}
 
   ngOnInit(): void {
-    this.allUsersInPeriod = this.ConfigService.getAllUsersInPeriod(this.period.periodId).sort(
-      (userA, userB) => {
+    this.allUsersInPeriod = this.configService
+      .getAllUsersInPeriod(this.period.periodId)
+      .sort((userA, userB) => {
         return userA.name.localeCompare(userB.name);
-      }
-    );
+      });
     this.isAnyUnassignedStudent = this.allUsersInPeriod.some((student) => {
       return !this.isUserInAnyWorkgroup(student);
     });
@@ -70,17 +69,27 @@ export class AddTeamDialogComponent {
   }
 
   private createTeamOnServer(): void {
-    this.WorkgroupService.createWorkgroup(
-      this.period.periodId,
-      this.initialTeamMembers.map((member) => member.id)
-    ).subscribe((newWorkgroupId: number) => {
-      this.ConfigService.retrieveConfig(
-        `/api/config/classroomMonitor/${this.ConfigService.getRunId()}`
-      );
-      this.snackBar.open($localize`New team ${newWorkgroupId} has been created.`);
-      this.isProcessing = false;
-      this.dialog.closeAll();
-    });
+    this.workgroupService
+      .createWorkgroup(
+        this.period.periodId,
+        this.initialTeamMembers.map((member) => member.id)
+      )
+      .subscribe({
+        next: (newWorkgroupId: number) => {
+          this.configService
+            .retrieveConfig(`/api/config/classroomMonitor/${this.configService.getRunId()}`)
+            .subscribe({
+              next: () => {
+                this.snackBar.open($localize`New Team ${newWorkgroupId} has been created.`);
+                this.isProcessing = false;
+                this.dialog.closeAll();
+              }
+            });
+        },
+        error: () => {
+          this.snackBar.open($localize`Error: Could not create team.`);
+        }
+      });
   }
 
   private isAnyMemberInWorkgroup(): boolean {
@@ -90,6 +99,6 @@ export class AddTeamDialogComponent {
   }
 
   isUserInAnyWorkgroup(user: any): boolean {
-    return this.WorkgroupService.isUserInAnyWorkgroup(user);
+    return this.workgroupService.isUserInAnyWorkgroup(user);
   }
 }

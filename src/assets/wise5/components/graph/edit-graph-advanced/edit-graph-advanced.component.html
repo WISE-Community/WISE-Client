@@ -2,83 +2,94 @@
   <div>
     <mat-form-field class="subtitle">
       <mat-label i18n>Subtitle</mat-label>
-      <input matInput
-          [(ngModel)]="componentContent.subtitle"
-          (ngModelChange)="componentChanged()"/>
+      <input
+        matInput
+        [(ngModel)]="componentContent.subtitle"
+        (ngModelChange)="componentChanged()"
+      />
     </mat-form-field>
   </div>
   <div>
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.showMouseXPlotLine"
-        (ngModelChange)="componentChanged()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.showMouseXPlotLine"
+      (ngModelChange)="componentChanged()"
+      i18n
+    >
       Show Mouse X Plot Line
     </mat-checkbox>
   </div>
   <div class="highlight-x-range-from-zero">
     <mat-checkbox
-        color="primary"
-        [disabled]="!componentContent.showMouseXPlotLine"
-        [(ngModel)]="componentContent.highlightXRangeFromZero"
-        (ngModelChange)="componentChanged()"
-        i18n>
+      color="primary"
+      [disabled]="!componentContent.showMouseXPlotLine"
+      [(ngModel)]="componentContent.highlightXRangeFromZero"
+      (ngModelChange)="componentChanged()"
+      i18n
+    >
       Highlight X Range From Zero
     </mat-checkbox>
   </div>
   <div>
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.showMouseYPlotLine"
-        (ngModelChange)="componentChanged()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.showMouseYPlotLine"
+      (ngModelChange)="componentChanged()"
+      i18n
+    >
       Show Mouse Y Plot Line
     </mat-checkbox>
   </div>
   <div>
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.saveMouseOverPoints"
-        (ngModelChange)="componentChanged()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.saveMouseOverPoints"
+      (ngModelChange)="componentChanged()"
+      i18n
+    >
       Save Mouse Over Points
     </mat-checkbox>
   </div>
   <div>
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.hideTrialSelect"
-        (ngModelChange)="componentChanged()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.hideTrialSelect"
+      (ngModelChange)="componentChanged()"
+      i18n
+    >
       Hide Trial Select
     </mat-checkbox>
   </div>
   <div>
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.useCustomLegend"
-        (ngModelChange)="componentChanged()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.useCustomLegend"
+      (ngModelChange)="componentChanged()"
+      i18n
+    >
       Use Custom Legend
     </mat-checkbox>
   </div>
   <div *ngIf="componentContent.useCustomLegend">
-    <mat-form-field
-        class="custom-legend">
+    <mat-form-field class="custom-legend">
       <mat-label i18n>Custom Legend</mat-label>
-      <input matInput
-          [(ngModel)]="componentContent.customLegend"
-          (ngModelChange)="componentChanged()"/>
+      <input
+        matInput
+        [(ngModel)]="componentContent.customLegend"
+        (ngModelChange)="componentChanged()"
+      />
     </mat-form-field>
   </div>
   <div fxLayoutGap="16px">
     <span i18n>X Axis Plot Line</span>
-    <button mat-raised-button
-        color="primary"
-        (click)="addXAxisPlotLine()"
-        matTooltip="Add X Axis Plot Line"
-        matTooltipPosition="above"
-        i18n-matTooltip>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="addXAxisPlotLine()"
+      matTooltip="Add X Axis Plot Line"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
       <mat-icon>add</mat-icon>
     </button>
   </div>
@@ -86,29 +97,25 @@
     <div fxLayout="row wrap" fxLayoutGap="16px">
       <mat-form-field class="plot-line-text">
         <mat-label i18n>Text</mat-label>
-        <input matInput
-            [(ngModel)]="plotLine.label.text"
-            (ngModelChange)="componentChanged()"/>
+        <input matInput [(ngModel)]="plotLine.label.text" (ngModelChange)="componentChanged()" />
       </mat-form-field>
       <mat-form-field class="plot-line-value">
         <mat-label i18n>X Value</mat-label>
-        <input matInput
-            [(ngModel)]="plotLine.value"
-            (ngModelChange)="componentChanged()"/>
+        <input matInput [(ngModel)]="plotLine.value" (ngModelChange)="componentChanged()" />
       </mat-form-field>
       <mat-form-field class="plot-line-color">
         <mat-label i18n>Color</mat-label>
-        <input matInput
-            [(ngModel)]="plotLine.color"
-            (ngModelChange)="componentChanged()"/>
+        <input matInput [(ngModel)]="plotLine.color" (ngModelChange)="componentChanged()" />
       </mat-form-field>
       <div>
-        <button mat-raised-button
-            color="primary"
-            (click)="deleteXAxisPlotLine(xAxisPlotLineIndex)"
-            matTooltip="Delete"
-            matTooltipPosition="above"
-            i18n-matTooltip>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="deleteXAxisPlotLine(xAxisPlotLineIndex)"
+          matTooltip="Delete"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
           <mat-icon>delete</mat-icon>
         </button>
       </div>
@@ -116,12 +123,14 @@
   </div>
   <div fxLayoutGap="16px">
     <span i18n>Y Axis Plot Line</span>
-    <button mat-raised-button
-        color="primary"
-        (click)="addYAxisPlotLine()"
-        matTooltip="Add Y Axis Plot Line"
-        matTooltipPosition="above"
-        i18n-matTooltip>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="addYAxisPlotLine()"
+      matTooltip="Add Y Axis Plot Line"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
       <mat-icon>add</mat-icon>
     </button>
   </div>
@@ -129,29 +138,25 @@
     <div fxLayout="row wrap" fxLayoutGap="16px">
       <mat-form-field class="plot-line-text">
         <mat-label i18n>Text</mat-label>
-        <input matInput
-            [(ngModel)]="plotLine.label.text"
-            (ngModelChange)="componentChanged()"/>
+        <input matInput [(ngModel)]="plotLine.label.text" (ngModelChange)="componentChanged()" />
       </mat-form-field>
       <mat-form-field class="plot-line-value">
         <mat-label i18n>Y Value</mat-label>
-        <input matInput
-            [(ngModel)]="plotLine.value"
-            (ngModelChange)="componentChanged()"/>
+        <input matInput [(ngModel)]="plotLine.value" (ngModelChange)="componentChanged()" />
       </mat-form-field>
       <mat-form-field class="plot-line-color">
         <mat-label i18n>Color</mat-label>
-        <input matInput
-            [(ngModel)]="plotLine.color"
-            (ngModelChange)="componentChanged()"/>
+        <input matInput [(ngModel)]="plotLine.color" (ngModelChange)="componentChanged()" />
       </mat-form-field>
       <div>
-        <button mat-raised-button
-            color="primary"
-            (click)="deleteYAxisPlotLine(yAxisPlotLineIndex)"
-            matTooltip="Delete"
-            matTooltipPosition="above"
-            i18n-matTooltip>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="deleteYAxisPlotLine(yAxisPlotLineIndex)"
+          matTooltip="Delete"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
           <mat-icon>delete</mat-icon>
         </button>
       </div>
@@ -162,37 +167,33 @@
   <edit-component-add-to-notebook-button [componentContent]="componentContent">
   </edit-component-add-to-notebook-button>
 </div>
-<edit-component-save-button [componentContent]="componentContent">
-</edit-component-save-button>
-<br/>
-<edit-component-submit-button [componentContent]="componentContent">
-</edit-component-submit-button>
+<edit-component-save-button [componentContent]="componentContent"> </edit-component-save-button>
+<br />
+<edit-component-submit-button [componentContent]="componentContent"> </edit-component-submit-button>
 <edit-component-max-submit
-    *ngIf="componentContent.showSubmitButton"
-    [(maxSubmitCount)]="componentContent.maxSubmitCount"
-    (maxSubmitCountChange)="maxSubmitCountChanged($event)">
+  *ngIf="componentContent.showSubmitButton"
+  [(maxSubmitCount)]="componentContent.maxSubmitCount"
+  (maxSubmitCountChange)="maxSubmitCountChanged($event)"
+>
 </edit-component-max-submit>
-<edit-component-default-feedback
-    [componentContent]="componentContent">
+<edit-component-default-feedback [componentContent]="componentContent">
 </edit-component-default-feedback>
 <div fxLayout="column" fxLayoutAlign="start start">
-  <edit-component-max-score [componentContent]="componentContent">
-  </edit-component-max-score>
+  <edit-component-max-score [componentContent]="componentContent"> </edit-component-max-score>
   <edit-component-exclude-from-total-score [componentContent]="componentContent">
   </edit-component-exclude-from-total-score>
-  <edit-component-width [componentContent]="componentContent">
-  </edit-component-width>
-  <edit-component-rubric [componentContent]="componentContent">
-  </edit-component-rubric>
-  <edit-component-tags [componentContent]="componentContent">
-  </edit-component-tags>
+  <edit-component-width [componentContent]="componentContent"> </edit-component-width>
+  <edit-component-rubric [componentContent]="componentContent"> </edit-component-rubric>
+  <edit-component-tags [componentContent]="componentContent"> </edit-component-tags>
 </div>
 <edit-graph-connected-components
-    [nodeId]="nodeId"
-    [componentId]="componentId"
-    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-    [componentContent]="componentContent"
-    [connectedComponents]="componentContent.connectedComponents"
-    (connectedComponentsChanged)="connectedComponentsChanged($event)">
+  [nodeId]="nodeId"
+  [componentId]="componentId"
+  [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+  [componentContent]="componentContent"
+  [connectedComponents]="componentContent.connectedComponents"
+  (connectedComponentsChanged)="connectedComponentsChanged($event)"
+>
 </edit-graph-connected-components>
-<edit-component-json [nodeId]="nodeId" [componentId]="componentId"></edit-component-json>
+<edit-component-constraints [componentContent]="component.content"></edit-component-constraints>
+<edit-component-json [component]="component"></edit-component-json>

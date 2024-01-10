@@ -1,43 +1,73 @@
 <form role="form" [formGroup]="addNodeFormGroup">
   <mat-form-field appearance="fill" class="title-field">
     <mat-label i18n>Step Title</mat-label>
-    <input #titleField autofocus matInput type='text' id="title" name="title" formControlName="title" required>
+    <input matInput type="text" id="title" name="title" formControlName="title" required />
     <mat-error *ngIf="addNodeFormGroup.controls['title'].hasError('required')" i18n>
       Step Title is required
     </mat-error>
   </mat-form-field>
   <h5 i18n>Select components to add to your new step (optional):</h5>
   <div fxLayout="column" fxLayout.gt-sm="row">
-    <div class="initial-components notice-bg-bg" fxFlex="100" fxFlex.gt-sm="33">
+    <div class="initial-components notice-bg-bg" fxFlex="100" fxFlex.gt-sm="25">
       <div *ngIf="initialComponents.length == 0" class="mat-small" i18n>No components added</div>
-      <div class="component-list" *ngIf="initialComponents.length > 0" cdkDropList (cdkDropListDropped)="drop($event)">
-        <div class="component-list-item" *ngFor="let component of initialComponents; let i=index;"
-            cdkDrag fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <div
+        class="component-list"
+        *ngIf="initialComponents.length > 0"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="component-list-item"
+          *ngFor="let component of initialComponents; let i = index"
+          cdkDrag
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="8px"
+        >
           <mat-icon class="secondary-text">reorder</mat-icon>
-          <span class="mat-small">{{component.name}}</span>
+          <span class="mat-small">{{ component.name }}</span>
           <span fxFlex></span>
-          <button mat-icon-button (click)="deleteComponent(i)" i18n-aria-label aria-label="Delete component">
+          <button
+            mat-icon-button
+            (click)="deleteComponent(i)"
+            i18n-aria-label
+            aria-label="Delete component"
+          >
             <mat-icon class="secondary-text">close</mat-icon>
           </button>
         </div>
       </div>
     </div>
-    <div fxFlex="100" fxFlex.gt-sm="67">
-      <div fxLayout="row wrap" fxLayoutAlign="start start">
-        <div class="component-type" *ngFor="let componentType of componentTypes" >
-          <button mat-stroked-button (click)="addComponent(componentType)">
-            {{componentType.name}}
-          </button>
+    <div fxFlex="100" fxFlex.gt-sm="75">
+      <div class="component-types" fxLayout="row wrap" fxLayoutAlign="start start">
+        <div class="component-type" *ngFor="let componentType of componentTypes">
+          <component-type-button
+            [componentType]="componentType.type"
+            (componentSelectedEvent)="addComponent(componentType)"
+          ></component-type-button>
         </div>
       </div>
-      <p class="info mat-small" i18n>*Note: You can always add or remove content later by editing the step.</p>
+      <p class="info mat-small" i18n>
+        *Note: You can always add or remove content later by editing the step.
+      </p>
     </div>
   </div>
-  <mat-divider></mat-divider>
-  <div fxLayout="row">
-    <button mat-button class="mat-primary" (click)="back()" aria-label="back" i18n>Back</button>
-    <span fxFlex></span>
-    <button mat-button class="mat-primary" (click)="cancel($event)" aria-label="cancel" i18n>Cancel</button>
-    <button mat-button class="mat-raised-button mat-primary" (click)="chooseLocation()" aria-label="next" i18n>Next</button>
+  <div class="nav-controls">
+    <mat-divider></mat-divider>
+    <div>
+      <button mat-button class="mat-primary" routerLink="../choose-template" i18n>Back</button>
+      <span fxFlex></span>
+      <button mat-button class="mat-primary" routerLink="../.." i18n>Cancel</button>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!addNodeFormGroup.valid"
+        (click)="chooseLocation()"
+        aria-label="next"
+        i18n
+      >
+        Next
+      </button>
+    </div>
   </div>
 </form>

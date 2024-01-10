@@ -1,16 +1,20 @@
 <div fxLayout="column" fxLayoutAlign="start start">
   <edit-component-max-score [componentContent]="componentContent"></edit-component-max-score>
-  <edit-component-exclude-from-total-score [componentContent]="componentContent"></edit-component-exclude-from-total-score>
+  <edit-component-exclude-from-total-score
+    [componentContent]="componentContent"
+  ></edit-component-exclude-from-total-score>
   <edit-component-width [componentContent]="componentContent"></edit-component-width>
   <edit-component-rubric [componentContent]="componentContent"></edit-component-rubric>
   <edit-component-tags [componentContent]="componentContent"></edit-component-tags>
 </div>
 <edit-discussion-connected-components
-    [nodeId]="nodeId"
-    [componentId]="componentId"
-    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-    [componentContent]="componentContent"
-    [connectedComponents]="componentContent.connectedComponents"
-    (connectedComponentsChanged)="connectedComponentsChanged($event)">
+  [nodeId]="nodeId"
+  [componentId]="componentId"
+  [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+  [componentContent]="componentContent"
+  [connectedComponents]="componentContent.connectedComponents"
+  (connectedComponentsChanged)="connectedComponentsChanged($event)"
+>
 </edit-discussion-connected-components>
-<edit-component-json [nodeId]="nodeId" [componentId]="componentId"></edit-component-json>
+<edit-component-constraints [componentContent]="component.content"></edit-component-constraints>
+<edit-component-json [component]="component"></edit-component-json>

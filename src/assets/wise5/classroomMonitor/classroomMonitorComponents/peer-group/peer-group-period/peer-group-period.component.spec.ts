@@ -21,7 +21,6 @@ import { TagService } from '../../../../services/tagService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../../services/teacherWebSocketService';
-import { UtilService } from '../../../../services/utilService';
 import { SelectPeriodComponent } from '../../select-period/select-period.component';
 import { PeerGroupAssignedWorkgroupsComponent } from '../peer-group-assigned-workgroups/peer-group-assigned-workgroups.component';
 import { PeerGroupUnassignedWorkgroupsComponent } from '../peer-group-unassigned-workgroups/peer-group-unassigned-workgroups.component';
@@ -84,7 +83,6 @@ describe('PeerGroupPeriodComponent', () => {
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,
-        UtilService,
         WorkgroupService
       ]
     }).compileComponents();

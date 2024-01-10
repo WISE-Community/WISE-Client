@@ -3,8 +3,9 @@
     <mat-icon class="mat-36" style="color: {{ getAvatarColorForWorkgroupId(workgroupId) }}">
       account_circle
     </mat-icon>
-    <div class="mat-body-2">
-      <span>{{ usernamesDisplay }}</span>&nbsp;<span class="mat-small" i18n>(Team {{ workgroupId }})</span>
+    <div class="mat-subtitle-2">
+      <span>{{ usernamesDisplay }}</span
+      >&nbsp;<span class="mat-small" i18n>(Team {{ workgroupId }})</span>
     </div>
   </div>
   <mat-divider></mat-divider>
@@ -12,47 +13,57 @@
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div fxLayout="column">
         <span class="mat-body-2" i18n>Unit Completion</span>
-        <span class="mat-body-1 text-secondary" i18n>
-          {{ rootNodeStatus.progress.completedItems }}/{{ rootNodeStatus.progress.totalItems }} items
+        <span class="mat-caption text-secondary" i18n>
+          {{ rootNodeStatus.progress.completedItems }}/{{
+            rootNodeStatus.progress.totalItems
+          }}
+          items
         </span>
       </div>
       <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-progress-bar mode="determinate"
-            value="{{ rootNodeStatus.progress.completionPct }}"
-            aria-label-i18n
-            aria-label="completion percentage"></mat-progress-bar>
-        <h3 class="mat-display-1">{{ rootNodeStatus.progress.completionPct }}%</h3>
+        <mat-progress-bar
+          mode="determinate"
+          value="{{ rootNodeStatus.progress.completionPct }}"
+          aria-label-i18n
+          aria-label="completion percentage"
+        ></mat-progress-bar>
+        <h3 class="mat-headline-4">{{ rootNodeStatus.progress.completionPct }}%</h3>
       </div>
     </div>
   </div>
   <mat-divider class="divider"></mat-divider>
-  <div class="menu-section" *ngIf="maxScore != null">
+  <div class="menu-section" *ngIf="showScore">
     <div fxLayout="row" fxLayoutAlign="start center">
       <div fxLayout="column">
         <span class="mat-body-2" i18n>Total Score</span>
-        <span class="mat-body-1 text-secondary" i18n>{{ totalScore }}/{{ maxScore }} points</span>
+        <span class="mat-caption text-secondary" i18n>{{ totalScore }}/{{ maxScore }} points</span>
       </div>
       <span fxFlex></span>
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
         <div class="score-wrap">
-          <mat-progress-bar class="score"
-              mode="determinate"
-              value="{{ scorePercentage }}"
-              aria-label-i18n
-              aria-label="total score percentage"></mat-progress-bar>
+          <mat-progress-bar
+            class="score"
+            mode="determinate"
+            value="{{ scorePercentage }}"
+            aria-label-i18n
+            aria-label="total score percentage"
+          ></mat-progress-bar>
         </div>
-        <h3 class="mat-display-1" *ngIf="maxScore > 0">{{ scorePercentage }}%</h3>
+        <h3 class="mat-headline-4" *ngIf="maxScore > 0">{{ scorePercentage }}%</h3>
       </div>
     </div>
   </div>
   <mat-divider class="divider"></mat-divider>
   <div class="notice-bg-bg controls" fxLayout="row">
-    <button mat-menu-item class="mat-button mat-primary" (click)="goHome()" i18n>Go Home</button>
+    <button mat-button color="primary" (click)="goHome()" i18n>Go Home</button>
     <span fxFlex></span>
-    <button *ngIf="isAuthenticated"
-        mat-menu-item
-        class="mat-button mat-primary"
-        (click)="logOut('logOutButtonClicked')"
-        i18n>Sign Out</button>
+    <button
+      mat-button
+      color="primary"
+      (click)="logOut('logOutButtonClicked')"
+      i18n
+    >
+      Sign Out
+    </button>
   </div>
 </mat-menu>

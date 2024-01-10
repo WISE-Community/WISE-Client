@@ -1,16 +1,23 @@
-<h2 mat-dialog-title fxLayoutAlign="start center">
+<h2 mat-dialog-title class="mat-dialog-title--icons" fxLayoutAlign="start center">
   <span i18n>Move Student</span>
   <span fxFlex></span>
-  <mat-icon *ngIf="isMovingFromWorkgroup" color="warn" i18n-aria-label aria-label="Warning">warning</mat-icon>
+  <mat-icon *ngIf="isMovingFromWorkgroup" color="warn" i18n-aria-label aria-label="Warning"
+    >warning</mat-icon
+  >
 </h2>
 <mat-dialog-content>
   <div class="info-block">
-    <p *ngIf="isMovingFromWorkgroup" class="warn" i18n>Warning: Removing a student from a team will result in the student losing all the work they completed with that team.</p>
+    <p *ngIf="isMovingFromWorkgroup" class="warn" i18n>
+      Warning: Removing a student from a team will result in the student losing all the work they
+      completed with that team.
+    </p>
     <p i18n>The student will adopt the work of their new team.</p>
     <p i18n>Are you sure you wish to proceed?</p>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end" fxLayoutGap="8px">
+<mat-dialog-actions align="end">
   <button mat-flat-button color="primary" [mat-dialog-close]="false" i18n>Cancel</button>
-  <button mat-button [color]="isMovingFromWorkgroup ? 'warn' : ''" [mat-dialog-close]="true" i18n>Proceed</button>
+  <button mat-button [color]="isMovingFromWorkgroup ? 'warn' : ''" [mat-dialog-close]="true" i18n>
+    Proceed
+  </button>
 </mat-dialog-actions>

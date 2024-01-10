@@ -1,96 +1,99 @@
-<h2 class="mat-dialog-title">{{ title }}</h2>
-<form role="form"
-    (submit)="save()"
-    [formGroup]="noteFormGroup"
-    fxLayout="column">
+<h2 mat-dialog-title>{{ title }}</h2>
+<form role="form" (submit)="save()" [formGroup]="noteFormGroup" fxLayout="column">
   <mat-dialog-content>
     <mat-form-field appearance="fill">
       <mat-label>{{ textInputLabel }}</mat-label>
-      <textarea matInput
-          formControlName="text"
-          [(ngModel)]="item.content.text"
-          (ngModelChange)="update()"
-          cdkTextareaAutosize>
+      <textarea
+        matInput
+        formControlName="text"
+        [(ngModel)]="item.content.text"
+        (ngModelChange)="update()"
+        cdkTextareaAutosize
+      >
       </textarea>
-      <mat-error *ngIf="noteFormGroup.controls['text'].hasError('required')"
-          i18n>{{ textInputLabel }} required</mat-error>
+      <mat-error *ngIf="noteFormGroup.controls['text'].hasError('required')" i18n
+        >{{ textInputLabel }} required</mat-error
+      >
     </mat-form-field>
     <div class="attachment notice-bg-bg" *ngFor="let attachment of item.content.attachments">
       <img [src]="attachment.iconURL" class="attachment-content" />
-      <button mat-mini-fab
-          color="white"
-          class="attachment-delete"
-          fxLayoutAlign="center center"
-          (click)='removeAttachment(attachment)'
-          [disabled]="!isEditMode"
-          title="Remove File"
-          i18n-title>
+      <button
+        mat-mini-fab
+        color="white"
+        class="attachment-delete"
+        fxLayoutAlign="center center"
+        (click)="removeAttachment(attachment)"
+        [disabled]="!isEditMode"
+        title="Remove File"
+        i18n-title
+      >
         <mat-icon>delete</mat-icon>
       </button>
     </div>
-    <div *ngIf="isEditMode && showUpload"
-        class="drop-box"
-        fxLayoutAlign="center center"
-        (fileDropped)="attachStudentAssetToNote($event[0])"
-        dragAndDrop>
+    <div
+      *ngIf="isEditMode && showUpload"
+      class="drop-box"
+      fxLayoutAlign="center center"
+      (fileDropped)="attachStudentAssetToNote($event[0])"
+      dragAndDrop
+    >
       <input
         type="file"
         (change)="attachStudentAssetToNote($event.target.files[0])"
         #fileDropRef
         class="file-input"
         aria-label="Upload file"
-        i18-aria-label />
+        i18-aria-label
+      />
       <mat-icon>image</mat-icon> <span i18n>Drop image or file here or click to upload!</span>
     </div>
-    <div class="item-info mat-small"
-        fxLayout="row" fxLayoutAlign="start center">
+    <div class="item-info mat-small" fxLayout="row" fxLayoutAlign="start center">
       <mat-icon class="secondary-text">place</mat-icon>
-      <wise-link [type]="'link'"
-          [nodeId]="getItemNodeId()"
-          [linkText]="getItemNodeLink()">
+      <wise-link [type]="'link'" [nodeId]="getItemNodeId()" [linkText]="getItemNodeLink()">
       </wise-link>
     </div>
   </mat-dialog-content>
-  <mat-dialog-actions fxLayout="row" fxLayoutAlign="start center" *ngIf="isEditMode">
+  <mat-dialog-actions *ngIf="isEditMode">
     <div>
-      <mat-checkbox color="primary"
+      <mat-checkbox
+        color="primary"
         *ngIf="canShareWithClass()"
         [checked]="isSharedWithClass()"
         (click)="toggleMakeNotePublic()"
-        i18n>
+        i18n
+      >
         <span class="mat-small">Share with Class</span>
       </mat-checkbox>
     </div>
     <span fxFlex></span>
     <div>
-      <button mat-button
-          type="button"
-          class="primary"
-          aria-label="Cancel"
-          (click)="cancel()"
-          i18n>
+      <button mat-button type="button" class="primary" aria-label="Cancel" (click)="cancel()" i18n>
         Cancel
       </button>
-      <button mat-button
-          type="submit"
-          class="primary"
-          aria-label="Save"
-          [disabled]="!saveEnabled"
-          i18n>
+      <button
+        mat-button
+        type="submit"
+        class="primary"
+        aria-label="Save"
+        [disabled]="!saveEnabled"
+        i18n
+      >
         Save
       </button>
     </div>
   </mat-dialog-actions>
-  <mat-dialog-actions *ngIf="!isEditMode" fxLayout="row" fxLayoutAlign="end center">
+  <mat-dialog-actions *ngIf="!isEditMode" align="end">
     <div>
-      <button class="primary"
+      <button
+        class="primary"
         type="button"
         *ngIf="canCopyPublicNotebookItem()"
         (click)="copyPublicNotebookItem($event)"
         aria-label="Copy"
-        i18n-aria-label>
-      <mat-icon class="primary">content_copy</mat-icon>
-      <span i18n>Copy to My Notes</span>
+        i18n-aria-label
+      >
+        <mat-icon class="primary">content_copy</mat-icon>
+        <span i18n>Copy to My Notes</span>
       </button>
     </div>
     <span fxFlex></span>

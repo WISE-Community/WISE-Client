@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
 import { AnnotationService } from './annotationService';
 import { DismissAmbientNotificationDialogComponent } from '../vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { RandomKeyService } from './randomKeyService';
+import { generateRandomKey } from '../common/string/string';
 
 @Injectable()
 export class NotificationService {
@@ -106,11 +106,12 @@ export class NotificationService {
   }
 
   getNewNotifications(): any[] {
-    let newNotificationAggregates = [];
-    for (const notification of this.notifications) {
-      if (notification.timeDismissed == null) {
-        let notificationNodeId = notification.nodeId;
-        let notificationType = notification.type;
+    const newNotificationAggregates = [];
+    this.notifications
+      .filter((notification) => notification.timeDismissed == null)
+      .forEach((notification) => {
+        const notificationNodeId = notification.nodeId;
+        const notificationType = notification.type;
         let newNotificationForNodeIdAndTypeExists = false;
         for (const newNotificationAggregate of newNotificationAggregates) {
           if (
@@ -138,7 +139,7 @@ export class NotificationService {
 
               const annotationId = (notification.data as any).annotationId;
               if (annotationId != null) {
-                let annotation = this.annotationService.getAnnotationById(annotationId);
+                const annotation = this.annotationService.getAnnotationById(annotationId);
                 if (annotation != null && annotation.notebookItemId != null) {
                   notebookItemId = annotation.notebookItemId;
                 }
@@ -149,24 +150,19 @@ export class NotificationService {
           } else {
             message = notification.message;
           }
-          const newNotificationAggregate = {
+          newNotificationAggregates.push({
             latestNotificationTimestamp: notification.timeGenerated,
             message: message,
             nodeId: notificationNodeId,
             notebookItemId: notebookItemId,
             notifications: [notification],
             type: notificationType
-          };
-          newNotificationAggregates.push(newNotificationAggregate);
+          });
         }
-      }
-    }
-
-    // sort the aggregates by latestNotificationTimestamp, latest -> oldest
-    newNotificationAggregates.sort((n1, n2) => {
-      return n2.latestNotificationTimestamp - n1.latestNotificationTimestamp;
-    });
-    return newNotificationAggregates;
+      });
+    return newNotificationAggregates.sort(
+      (n1, n2) => n2.latestNotificationTimestamp - n1.latestNotificationTimestamp
+    );
   }
 
   setNotificationNodePositionAndTitle(notification: Notification) {
@@ -182,7 +178,7 @@ export class NotificationService {
       const fromWorkgroupId = this.ConfigService.getWorkgroupId();
       const runId = this.ConfigService.getRunId();
       const periodId = this.ConfigService.getPeriodId();
-      const notificationGroupId = runId + '_' + RandomKeyService.generate(); // links student and teacher notifications together
+      const notificationGroupId = runId + '_' + generateRandomKey(); // links student and teacher notifications together
       const notificationData: any = {};
       if (notificationForScore.isAmbient) {
         notificationData.isAmbient = true;
@@ -477,5 +473,27 @@ export class NotificationService {
 
   broadcastViewCurrentAmbientNotification(args: any) {
     this.viewCurrentAmbientNotificationSource.next(args);
+  }
+
+  showSavingMessage(): void {
+    this.broadcastSetGlobalMessage({
+      globalMessage: {
+        text: $localize`Saving...`,
+        isProgressIndicatorVisible: true,
+        time: null
+      }
+    });
+  }
+
+  showSavedMessage(message: string, timeout: number = 500): void {
+    setTimeout(() => {
+      this.broadcastSetGlobalMessage({
+        globalMessage: {
+          text: message,
+          isProgressIndicatorVisible: false,
+          time: new Date().getTime()
+        }
+      });
+    }, timeout);
   }
 }

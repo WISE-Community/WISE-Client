@@ -1,22 +1,31 @@
 <ng-container *ngIf="isPeerChatWorkgroupsAvailable">
   <div fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign.gt-md="start start" fxLayoutGap="16px">
-    <div *ngIf="componentContent.questionBank.length > 0"
-        fxFlex
-        fxFlex.gt-md="40"
-        fxFlexOrder="1"
-        fxFlexOrder.gt-md="2">
-      <peer-chat-question-bank *ngIf="componentContent.questionBank?.enabled"
-          [displayedQuestionBankRule]="questionBankRule"></peer-chat-question-bank>
+    <div
+      *ngIf="componentContent.questionBank.length > 0"
+      fxFlex
+      fxFlex.gt-md="40"
+      fxFlexOrder="1"
+      fxFlexOrder.gt-md="2"
+    >
+      <peer-chat-question-bank
+        *ngIf="componentContent.questionBank?.enabled"
+        [content]="componentContent"
+        [displayedQuestionBankRules]="questionBankRules"
+        [questionIdsUsed]="questionIdsUsed"
+      ></peer-chat-question-bank>
     </div>
     <div fxFlex fxFlex.gt-md="60" fxFlexOrder="2" fxFlexOrder.gt-md="1">
-      <peer-chat-chat-box [messages]="peerChatMessages"
-          [myWorkgroupId]="workgroupId"
-          [workgroupInfos]="peerChatWorkgroupInfos"
-          [isEnabled]="false"></peer-chat-chat-box>
+      <peer-chat-chat-box
+        [messages]="peerChatMessages"
+        [myWorkgroupId]="workgroupId"
+        [workgroupInfos]="peerChatWorkgroupInfos"
+        [isEnabled]="false"
+      ></peer-chat-chat-box>
     </div>
   </div>
 </ng-container>
-<div *ngIf="!isPeerChatWorkgroupsAvailable" class="notice mat-body-2" i18n>
-  This Peer Chat activity is not yet available. Please check back later or wait for a notification to return.
+<div *ngIf="!isPeerChatWorkgroupsAvailable" class="notice mat-subtitle-2" i18n>
+  This Peer Chat activity is not yet available. Please check back later or wait for a notification
+  to return.
   <!-- TODO: Show different message when student has not completed required previous component(s) -->
 </div>

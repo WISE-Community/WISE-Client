@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { PeerGrouping } from '../../../../../../app/domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('PeerGroupDialogComponent', () => {
   let component: PeerGroupDialogComponent;
@@ -36,7 +37,8 @@ describe('PeerGroupDialogComponent', () => {
         TeacherProjectService,
         TeacherWebSocketService,
         WorkgroupService
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

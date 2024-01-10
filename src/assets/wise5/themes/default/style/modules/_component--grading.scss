@@ -19,17 +19,8 @@
     }
 }
 
-.component--grading__response {
-    padding-bottom: 16px;
-
-    @media only screen and (min-width: $layout-breakpoint-sm) {
-        padding-right: 16px;
-        padding-bottom: 0;
-    }
-}
-
 .component--grading__response__content {
-    overflow: auto;
+    white-space: pre-wrap;
 }
 
 .component--grading__annotations {

@@ -18,7 +18,6 @@ import { EditOutsideUrlAdvancedComponent } from '../../assets/wise5/components/o
 import { OutsideUrlAuthoring } from '../../assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component';
 import { SummaryAuthoring } from '../../assets/wise5/components/summary/summary-authoring/summary-authoring.component';
 import { TableAuthoring } from '../../assets/wise5/components/table/table-authoring/table-authoring.component';
-import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
 import { AuthorUrlParametersComponent } from '../authoring-tool/author-url-parameters/author-url-parameters.component';
 import { EditComponentDefaultFeedback } from '../authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component';
 import { EditComponentExcludeFromTotalScoreComponent } from '../authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
@@ -32,9 +31,7 @@ import { EditComponentTagsComponent } from '../authoring-tool/edit-component-tag
 import { EditComponentWidthComponent } from '../authoring-tool/edit-component-width/edit-component-width.component';
 import { EditConnectedComponentDefaultSelectsComponent } from '../authoring-tool/edit-connected-component-default-selects/edit-connected-component-default-selects.component';
 import { EditConnectedComponentsAddButtonComponent } from '../authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
-import { EditConnectedComponentComponentSelectComponent } from '../authoring-tool/edit-connected-component-component-select/edit-connected-component-component-select.component';
 import { EditConnectedComponentDeleteButtonComponent } from '../authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component';
-import { EditConnectedComponentNodeSelectComponent } from '../authoring-tool/edit-connected-component-node-select/edit-connected-component-node-select.component';
 import { EditConnectedComponentTypeSelectComponent } from '../authoring-tool/edit-connected-component-type-select/edit-connected-component-type-select.component';
 import { EditConnectedComponentsComponent } from '../authoring-tool/edit-connected-components/edit-connected-components.component';
 import { EditConceptMapConnectedComponentsComponent } from '../../assets/wise5/components/conceptMap/edit-concept-map-connected-components/edit-concept-map-connected-components.component';
@@ -78,12 +75,23 @@ import { EditPeerGroupingDialogComponent } from '../../assets/wise5/authoringToo
 import { CreateNewPeerGroupingDialogComponent } from '../../assets/wise5/authoringTool/peer-grouping/create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component';
 import { EditQuestionBankComponent } from '../authoring-tool/edit-question-bank/edit-question-bank.component';
 import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component';
+import { SelectStepAndComponentComponent } from '../authoring-tool/select-step-and-component/select-step-and-component.component';
+import { EditComponentConstraintsComponent } from '../authoring-tool/edit-component-constraints/edit-component-constraints.component';
+import { ComponentConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/constraint/component-constraint-authoring/component-constraint-authoring.component';
+import { ConstraintAuthoringModule } from '../../assets/wise5/authoringTool/constraint/constraint-authoring.module';
+import { EditComponentAdvancedComponent } from '../authoring-tool/edit-component-advanced/edit-component-advanced.component';
+import { ComponentAuthoringComponent } from '../../assets/wise5/authoringTool/components/component-authoring.component';
+import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
+import { WiseLinkAuthoringDialogComponent } from '../../assets/wise5/authoringTool/wise-link-authoring-dialog/wise-link-authoring-dialog.component';
+import { EditComponentAdvancedButtonComponent } from '../../assets/wise5/authoringTool/components/edit-component-advanced-button/edit-component-advanced-button.component';
 
 @NgModule({
   declarations: [
     AnimationAuthoring,
     AudioOscillatorAuthoring,
     AuthorUrlParametersComponent,
+    ComponentAuthoringComponent,
+    ComponentConstraintAuthoringComponent,
     ConceptMapAuthoring,
     CreateNewPeerGroupingDialogComponent,
     DrawAuthoring,
@@ -92,7 +100,10 @@ import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
+    EditComponentAdvancedButtonComponent,
+    EditComponentAdvancedComponent,
     EditComponentAddToNotebookButtonComponent,
+    EditComponentConstraintsComponent,
     EditComponentDefaultFeedback,
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentJsonComponent,
@@ -111,9 +122,7 @@ import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-
     EditConnectedComponentsAddButtonComponent,
     EditConnectedComponentsComponent,
     EditConnectedComponentsWithBackgroundComponent,
-    EditConnectedComponentComponentSelectComponent,
     EditConnectedComponentDeleteButtonComponent,
-    EditConnectedComponentNodeSelectComponent,
     EditConnectedComponentTypeSelectComponent,
     EditDialogGuidanceAdvancedComponent,
     EditDialogGuidanceComputerAvatarComponent,
@@ -155,21 +164,31 @@ import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-
     PeerChatAuthoringComponent,
     ShowGroupWorkAuthoringComponent,
     ShowMyWorkAuthoringComponent,
+    SelectStepAndComponentComponent,
     SummaryAuthoring,
     TableAuthoring,
-    WiseAuthoringTinymceEditorComponent
+    WiseLinkAuthoringDialogComponent
   ],
-  imports: [StudentTeacherCommonModule, PeerGroupingAuthoringModule],
+  imports: [
+    ConstraintAuthoringModule,
+    StudentTeacherCommonModule,
+    PeerGroupingAuthoringModule,
+    WiseTinymceEditorModule
+  ],
   exports: [
     AnimationAuthoring,
     AudioOscillatorAuthoring,
+    ComponentAuthoringComponent,
     ConceptMapAuthoring,
-    DrawAuthoring,
+    DialogGuidanceAuthoringComponent,
     DiscussionAuthoring,
+    DrawAuthoring,
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
     EditComponentAddToNotebookButtonComponent,
+    EditComponentAdvancedButtonComponent,
+    EditComponentConstraintsComponent,
     EditComponentDefaultFeedback,
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentJsonComponent,
@@ -188,9 +207,7 @@ import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-
     EditConnectedComponentsAddButtonComponent,
     EditConnectedComponentsComponent,
     EditConnectedComponentsWithBackgroundComponent,
-    EditConnectedComponentComponentSelectComponent,
     EditConnectedComponentDeleteButtonComponent,
-    EditConnectedComponentNodeSelectComponent,
     EditConnectedComponentTypeSelectComponent,
     EditDialogGuidanceAdvancedComponent,
     EditDiscussionAdvancedComponent,
@@ -224,9 +241,9 @@ import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-
     PeerChatAuthoringComponent,
     ShowGroupWorkAuthoringComponent,
     ShowMyWorkAuthoringComponent,
+    SelectStepAndComponentComponent,
     SummaryAuthoring,
-    TableAuthoring,
-    WiseAuthoringTinymceEditorComponent
+    TableAuthoring
   ]
 })
 export class ComponentAuthoringModule {}

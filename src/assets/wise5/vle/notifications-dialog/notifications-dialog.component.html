@@ -1,55 +1,69 @@
-<h3 class="mat-dialog-title"
-    fxLayout="row"
-    fxLayoutAlign="start center"
-    fxLayoutGap="4px">
+<h2
+  mat-dialog-title
+  class="mat-dialog-title--actions"
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="4px"
+>
   <mat-icon color="accent">notifications</mat-icon>
   <span i18n>Alerts</span>
   <span fxFlex></span>
-  <button *ngIf="newNotifications.length > 0"
-      mat-icon-button
-      (click)="dismissAll()"
-      matTooltip="Dismiss all alerts"
-      matTooltipPosition="before"
-      i18n-matTooltip>
+  <button
+    *ngIf="newNotifications.length > 0"
+    mat-icon-button
+    (click)="dismissAll()"
+    matTooltip="Dismiss all alerts"
+    matTooltipPosition="before"
+    i18n-matTooltip
+  >
     <mat-icon class="text-secondary">clear_all</mat-icon>
   </button>
-</h3>
+</h2>
 <mat-dialog-content class="dialog-content-scroll notifications">
-  <p *ngIf="!hasNewNotifications()"
-      class="no-notifications-message">
-    <span class="mat-body-1"
-        i18n>Hi there! You currently have no alerts.</span>
+  <p *ngIf="!hasNewNotifications()" class="no-notifications-message">
+    <span class="mat-body-2" i18n>Hi there! You currently have no alerts.</span>
   </p>
   <mat-list *ngIf="hasNewNotifications()">
-    <mat-list-item *ngFor="let notificationAggregate of newNotifications; let last = last;" class="notification-item">
-      <p matLine class="mat-body-1">
-        <a (click)="dismissNotificationAggregateAndVisitNode(notificationAggregate)"
-            tabindex="0"
-            aria-label="View alert"
-            i18n-aria-label>
-          {{ notificationAggregate.message }}
-        </a>
-      </p>
-      <p *ngIf="notificationAggregate.nodeId != null"
-          matLine
-          class="mat-small text-secondary">
-        {{ getNodePositionAndTitle(notificationAggregate.nodeId) }}
-      </p>
-      <p *ngIf="notificationAggregate.notebookItemId != null"
-          matLine
-          class="mat-small text-secondary">
-        {{ reportItem.title }}
-      </p>
-      <button mat-icon-button
-          (click)="dismissNotificationAggregate(notificationAggregate); $event.stopPropagation();"
-          aria-label="Dismiss"
-          i18n-aria-label>
-        <mat-icon class="text-secondary">clear</mat-icon>
-      </button>
+    <ng-container *ngFor="let notificationAggregate of newNotifications; let last = last">
+      <mat-list-item>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="notification-content">
+            <div>
+              <a
+                (click)="dismissNotificationAggregateAndVisitNode(notificationAggregate)"
+                tabindex="0"
+                aria-label="View alert"
+                i18n-aria-label
+              >
+                {{ notificationAggregate.message }}
+              </a>
+            </div>
+            <div class="secondary-text">
+              <ng-container *ngIf="notificationAggregate.nodeId != null">
+                {{ getNodePositionAndTitle(notificationAggregate.nodeId) }}
+              </ng-container>
+              <ng-container *ngIf="notificationAggregate.notebookItemId != null">
+                {{ reportItem.title }}
+              </ng-container>
+            </div>
+          </div>
+          <span fxFlex></span>
+          <button
+            mat-icon-button
+            matListIcon
+            class="text-secondary mat-body-2"
+            (click)="dismissNotificationAggregate(notificationAggregate); $event.stopPropagation()"
+            aria-label="Dismiss"
+            i18n-aria-label
+          >
+            <mat-icon>clear</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
       <mat-divider *ngIf="!last"></mat-divider>
-    </mat-list-item>
+    </ng-container>
   </mat-list>
 </mat-dialog-content>
-<mat-dialog-actions fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end" fxLayoutGap="8px">
+<mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close] i18n>Close</button>
 </mat-dialog-actions>

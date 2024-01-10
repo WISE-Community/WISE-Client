@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { GraphContent } from '../GraphContent';
 
 @Component({
-  template: 'edit-graph-advanced',
+  selector: 'edit-graph-advanced',
   templateUrl: 'edit-graph-advanced.component.html',
   styleUrls: ['edit-graph-advanced.component.scss']
 })
@@ -21,14 +18,6 @@ export class EditGraphAdvancedComponent extends EditAdvancedComponentComponent {
     'Table'
   ];
   componentContent: GraphContent;
-
-  constructor(
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    protected teacherProjectService: TeacherProjectService
-  ) {
-    super(nodeService, notebookService, teacherProjectService);
-  }
 
   addXAxisPlotLine(): void {
     if (this.componentContent.xAxis.plotLines == null) {

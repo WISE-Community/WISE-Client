@@ -1,4 +1,4 @@
-@import '~style/abstracts/variables', '~style/themes/default';
+@import 'style/abstracts/variables', 'style/themes/default';
 
 .prompt {
   width: 100%;
@@ -8,14 +8,14 @@
   padding: 16px;
   border: 2px solid #dddddd;
   border-radius: $card-border-radius;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
-.reference-component-div {
-  margin-top: 10px;
+.custom-label, .reference-component, .max-questions {
+  margin-top: 16px;
 }
 
-.feedback-rules-div {
-  margin-bottom: 20px;
+.feedback-rules {
+  margin-bottom: 16px;
 }

@@ -6,7 +6,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { ConfigService } from '../../../../services/configService';
-import { UtilService } from '../../../../services/utilService';
 
 import { PeerGroupGroupingComponent } from './peer-group-grouping.component';
 
@@ -27,13 +26,12 @@ describe('PeerGroupGroupingComponent', () => {
         MatCardModule,
         MatDialogModule
       ],
-      providers: [ConfigService, UtilService]
+      providers: [ConfigService]
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PeerGroupGroupingComponent);
-    spyOn(TestBed.inject(ConfigService), 'getAvatarColorForWorkgroupId').and.returnValue('#E91E63');
     container1 = createContainer(1);
     container2 = createContainer(2);
     component = fixture.componentInstance;

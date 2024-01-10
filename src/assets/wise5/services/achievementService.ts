@@ -6,6 +6,7 @@ import { ProjectService } from './projectService';
 import { StudentDataService } from './studentDataService';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { CompletionService } from './completionService';
 
 @Injectable()
 export class AchievementService {
@@ -18,6 +19,7 @@ export class AchievementService {
 
   constructor(
     private http: HttpClient,
+    private completionService: CompletionService,
     private ConfigService: ConfigService,
     private ProjectService: ProjectService,
     private StudentDataService: StudentDataService
@@ -337,7 +339,7 @@ export class AchievementService {
 
   isCriterionSatisfied(satisfyCriterion) {
     if (satisfyCriterion.name === 'isCompleted') {
-      return this.StudentDataService.isCompleted(
+      return this.completionService.isCompleted(
         satisfyCriterion.nodeId,
         satisfyCriterion.componentId
       );
@@ -454,7 +456,7 @@ export class AchievementService {
     this.achievementCompletedSource.next(args);
   }
 
-  broadcastNewStudentAchievement(args: any) {
-    this.newStudentAchievementSource.next(args);
+  broadcastNewStudentAchievement(achievement: any): void {
+    this.newStudentAchievementSource.next(achievement);
   }
 }

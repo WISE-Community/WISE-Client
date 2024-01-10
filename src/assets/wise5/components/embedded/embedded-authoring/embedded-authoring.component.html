@@ -1,60 +1,71 @@
 <div>
   <mat-form-field class="model-file">
     <mat-label i18n>Model File Name</mat-label>
-    <input matInput
-        [(ngModel)]="componentContent.url"
-        (ngModelChange)="inputChange.next($event)"/>
+    <input matInput [(ngModel)]="componentContent.url" (ngModelChange)="inputChange.next($event)" />
   </mat-form-field>
-  <button mat-raised-button
-      color="primary"
-      class="button"
-      (click)="chooseAsset('modelFile')"
-      matTooltip="Choose Model File"
-      matTooltipPosition="above"
-      i18n-matTooltip>
+  <button
+    mat-raised-button
+    color="primary"
+    class="button"
+    (click)="chooseModelFile()"
+    matTooltip="Choose Model File"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
     <mat-icon>insert_photo</mat-icon>
   </button>
 </div>
 <author-url-parameters
-    [url]="componentContent.url"
-    [parameters]="componentContent.urlParameters"
-    (generatedUrl)="updateUrl($event)">
+  [url]="componentContent.url"
+  [parameters]="componentContent.urlParameters"
+  (generatedUrl)="updateUrl($event)"
+>
 </author-url-parameters>
 <div fxLayout="row wrap" fxLayoutAlign="start center">
   <mat-form-field class="dimension">
     <mat-label i18n>Width (px) (optional)</mat-label>
-    <input matInput
-        type="number"
-        [(ngModel)]="componentContent.width"
-        (ngModelChange)="inputChange.next($event)"/>
+    <input
+      matInput
+      type="number"
+      [(ngModel)]="componentContent.width"
+      (ngModelChange)="inputChange.next($event)"
+    />
   </mat-form-field>
   <mat-form-field class="dimension">
     <mat-label i18n>Height (px)</mat-label>
-    <input matInput
-        type="number"
-        [(ngModel)]="componentContent.height"
-        (ngModelChange)="inputChange.next($event)"/>
-  </mat-form-field>
-  <mat-checkbox [(ngModel)]="componentContent.hasWork"
+    <input
+      matInput
+      type="number"
+      [(ngModel)]="componentContent.height"
       (ngModelChange)="inputChange.next($event)"
-      color="primary"
-      i18n>
+    />
+  </mat-form-field>
+  <mat-checkbox
+    [(ngModel)]="componentContent.hasWork"
+    (ngModelChange)="inputChange.next($event)"
+    color="primary"
+    i18n
+  >
     <span fxLayout="row" fxLayoutAlign="start center">
-      Saves Student Work
-      &nbsp;
-      <mat-icon matTooltip="Checking this box will enable the Grading Tool to show the student work for the model if the model saves student work. You can also come back later to check this box even after students have saved work for this model. If the model does not save student work, this check box will not do anything.">help</mat-icon>
+      Saves Student Work &nbsp;
+      <mat-icon
+        matTooltip="Checking this box will enable the Grading Tool to show the student work for the model if the model saves student work. You can also come back later to check this box even after students have saved work for this model. If the model does not save student work, this check box will not do anything."
+        >help</mat-icon
+      >
     </span>
   </mat-checkbox>
   <span fxFlex></span>
-  <button mat-raised-button
-      color="primary"
-      class="button"
-      (click)="reloadModel()"
-      matTooltip="Reload Model"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Reload Model"
-      i18n-aria-label>
+  <button
+    mat-raised-button
+    color="primary"
+    class="button"
+    (click)="reloadModel()"
+    matTooltip="Reload Model"
+    matTooltipPosition="above"
+    i18n-matTooltip
+    aria-label="Reload Model"
+    i18n-aria-label
+  >
     <mat-icon>refresh</mat-icon>
   </button>
 </div>

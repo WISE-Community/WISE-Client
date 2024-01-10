@@ -1,15 +1,26 @@
-<h1 class="mat-dialog-title" i18n>Remove Student</h1>
-  <div mat-dialog-content>
-    <div class="info-block">
-      <p i18n>Are you sure you want to remove <strong class="student-name">{{studentDisplayName}}</strong> from the unit?</p>
-      <p class="warn" i18n>Warning: All of the students' work in the unit will be deleted and they will be removed from the class.</p>
-      <p i18n>If you would like to move a student to a different team, drag them to that team. You can also create a new team and add the student there.</p>
-      <p i18n>*Note that removing a student does not delete their WISE account, only their association with this unit.</p>
-      <p i18n>Are you sure you wish to proceed?</p>
-    </div>
+<h2 mat-dialog-title i18n>Remove Student</h2>
+<div mat-dialog-content>
+  <div class="info-block">
+    <p i18n>
+      Are you sure you want to remove
+      <strong class="student-name">{{ studentDisplayName }}</strong> from the unit?
+    </p>
+    <p class="warn" i18n>
+      Warning: All of the students' work in the unit will be deleted and they will be removed from
+      the class.
+    </p>
+    <p i18n>
+      If you would like to move a student to a different team, drag them to that team. You can also
+      create a new team and add the student there.
+    </p>
+    <p i18n>
+      *Note that removing a student does not delete their WISE account, only their association with
+      this unit.
+    </p>
+    <p i18n>Are you sure you wish to proceed?</p>
   </div>
-  <mat-dialog-actions fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end" fxLayoutGap="8px">
-    <button mat-flat-button color="primary" [mat-dialog-close]="false" i18n>Cancel</button>
-    <button mat-button color="warn" [mat-dialog-close]="true" i18n>Proceed</button>
-  </mat-dialog-actions>
-  
+</div>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" [mat-dialog-close]="false" i18n>Cancel</button>
+  <button mat-button color="warn" [mat-dialog-close]="true" i18n>Proceed</button>
+</mat-dialog-actions>

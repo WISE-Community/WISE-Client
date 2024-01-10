@@ -1,9 +1,11 @@
 <ul class="teams" fxLayout="row wrap" fxLayoutAlign="start stretch">
-  <li *ngFor="let team of teams.values()"
-      class="team"
-      fxFlex="100"
-      fxFlex.gt-sm="50"
-      fxFlex.gt-md="33.33">
-    <manage-team [team]="team"></manage-team>
+  <li
+    *ngFor="let team of teams | keyvalue"
+    class="team"
+    fxFlex="100"
+    fxFlex.gt-sm="50"
+    fxFlex.gt-md="33.33"
+  >
+    <manage-team [team]="team.value"></manage-team>
   </li>
 </ul>

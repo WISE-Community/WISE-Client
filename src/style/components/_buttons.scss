@@ -1,35 +1,30 @@
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
 
-.mat-button, .mat-raised-button, .mat-flat-button, .mat-stroked-button {
-  text-transform: uppercase;
-
-  &:hover, &:focus {
-    text-decoration: none;
+.button--progress.mdc-button {
+  .mdc-button__label {
+    position: unset;
   }
 
   mat-progress-bar {
-    position: absolute;
+      position: absolute;
     left: 0;
     bottom: 0;
     border-bottom-left-radius: $card-border-radius;
     border-bottom-right-radius: $card-border-radius;
   }
-}
 
-.mat-raised-button {
-  &:not(.mat-icon-button) {
-    &:not([class*=mat-elevation-z]) {
-      @include mat-elevation(3);
-    }
+  .mat-mdc-progress-bar {
+    --mdc-linear-progress-active-indicator-height: 4px;
+    --mdc-linear-progress-track-height: 4px;
   }
 }
 
-.mat-fab.mat-fab--extended {
+.mat-mdc-fab.mat-fab--extended {
   border-radius: 24px;
   padding: 0px 16px;
   width: auto;
   height: 48px;
-
+  /* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
   .mat-button-wrapper {
     padding: 8px 0;
   }
@@ -40,20 +35,20 @@
 
   &:hover, &:focus {
     outline: none;
-    @include mat-elevation(8);
+    @include mat.elevation(8);
   }
 }
 
 .button--social-login {
-  .mat-button-wrapper {
+  .mdc-button__label {
     display: flex;
     align-items: center;
   }
 
   img {
-    width: 18px;
+    width: 16px;
     height: auto;
-    margin: 0 16px 0 -15px;
+    margin: 0 16px 0 -14px;
     padding: 8px;
     background-color: #fff;
     border-radius: 2px;
@@ -61,5 +56,6 @@
 }
 
 .button--google {
-  background-color: #4285F4 !important;
+  background-color: #1a73e8 !important;
+  text-transform: none;
 }

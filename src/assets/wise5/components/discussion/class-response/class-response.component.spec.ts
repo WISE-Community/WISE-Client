@@ -1,8 +1,8 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../../services/configService';
-import { UtilService } from '../../../services/utilService';
 import { ClassResponse } from './class-response.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let fixture: ComponentFixture<ClassResponse>;
 let component: ClassResponse;
@@ -14,7 +14,8 @@ describe('ClassResponseComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [ClassResponse],
-      providers: [ConfigService, UtilService]
+      providers: [ConfigService],
+      schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(ClassResponse);
     component = fixture.componentInstance;

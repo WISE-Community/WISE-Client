@@ -8,6 +8,13 @@ export class ComponentState {
   peerGroupId?: number;
   periodId: number;
   runId: number;
+  serverSaveTime?: number;
   studentData: any;
   workgroupId: number;
+
+  constructor(jsonObject: any = {}) {
+    for (const key of Object.keys(jsonObject)) {
+      this[key] = jsonObject[key];
+    }
+  }
 }

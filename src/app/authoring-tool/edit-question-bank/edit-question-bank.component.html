@@ -1,35 +1,71 @@
 <div class="section-container">
-  <div class="enable-question-bank-div">
+  <div>
     <mat-checkbox
-        [checked]="componentContent.questionBank?.enabled"
-        (change)="toggleComponent($event)"
-        color="primary"
-        i18n>
+      [checked]="componentContent.questionBank?.enabled"
+      (change)="toggleComponent($event)"
+      color="primary"
+      i18n
+    >
       Enable Question Bank
     </mat-checkbox>
   </div>
   <div *ngIf="componentContent.questionBank?.enabled">
-    <div class="reference-component-div"
-        fxLayout="row wrap"
-        fxLayoutAlign="start center"
-        fxLayoutGap="20px">
+    <div class="custom-label">
+      <mat-form-field appearance="fill">
+        <mat-label i18n>Custom Label</mat-label>
+        <input
+          matInput
+          [(ngModel)]="componentContent.questionBank.label"
+          (ngModelChange)="inputChanged.next($event)"
+          placeholder="Question Bank"
+          i18n-placeholder
+        />
+      </mat-form-field>
+    </div>
+    <div *ngIf="componentContent.questionBank.version === 2">
+      <mat-checkbox
+        [(ngModel)]="componentContent.questionBank.clickToUseEnabled"
+        (ngModelChange)="saveChanges()"
+        color="primary"
+        i18n
+      >
+        Student can select questions to use in Peer Chat
+      </mat-checkbox>
+    </div>
+    <div class="max-questions">
+      <mat-form-field appearance="fill">
+        <mat-label i18n>Max Number of Questions</mat-label>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="componentContent.questionBank.maxQuestionsToShow"
+          (ngModelChange)="inputChanged.next($event)"
+        />
+      </mat-form-field>
+    </div>
+    <div
+      class="reference-component"
+      fxLayout="row wrap"
+      fxLayoutAlign="start center"
+      fxLayoutGap="20px"
+    >
       <mat-label class="bold" i18n>Reference Component:</mat-label>
-      <edit-connected-component-node-select
-          [connectedComponent]="componentContent.questionBank.referenceComponent"
-          (connectedComponentChange)="referenceComponentNodeIdChanged($event)">
-      </edit-connected-component-node-select>
-      <edit-connected-component-component-select
-          [componentId]="componentId"
-          [connectedComponent]="componentContent.questionBank.referenceComponent"
-          [allowedConnectedComponentTypes]="allowedReferenceComponentTypes"
-          (connectedComponentChange)="saveChanges()">
-      </edit-connected-component-component-select>
-      <edit-component-peer-grouping-tag
-          [componentContent]="componentContent.questionBank">
+      <select-step-and-component
+        [referenceComponent]="componentContent.questionBank.referenceComponent"
+        [thisComponentId]="componentId"
+        [allowedComponentTypes]="allowedReferenceComponentTypes"
+        (stepChange)="saveChanges()"
+        (componentChange)="saveChanges()"
+      >
+      </select-step-and-component>
+      <edit-component-peer-grouping-tag [componentContent]="componentContent.questionBank">
       </edit-component-peer-grouping-tag>
     </div>
-    <div class="feedback-rules-div">
-      <edit-question-bank-rules [feedbackRules]="componentContent.questionBank.rules">
+    <div class="feedback-rules">
+      <edit-question-bank-rules
+        [feedbackRules]="componentContent.questionBank.rules"
+        [version]="componentContent.questionBank.version"
+      >
       </edit-question-bank-rules>
     </div>
   </div>

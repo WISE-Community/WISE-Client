@@ -8,10 +8,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { copy } from '../../../common/object/object';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { ProjectService } from '../../../services/projectService';
 import { MultipleChoiceComponent } from '../MultipleChoiceComponent';
 import { MultipleChoiceStudent } from './multiple-choice-student.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 const choiceId1 = 'choice1';
 const choiceId2 = 'choice2';
@@ -117,7 +119,8 @@ describe('MultipleChoiceStudentComponent', () => {
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [ComponentHeader, MultipleChoiceStudent, PossibleScoreComponent]
+      declarations: [ComponentHeader, MultipleChoiceStudent, PossibleScoreComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(MultipleChoiceStudent);
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
@@ -133,7 +136,7 @@ describe('MultipleChoiceStudentComponent', () => {
       ],
       showFeedback: true
     };
-    const componentContent = JSON.parse(JSON.stringify(originalComponentContent));
+    const componentContent = copy(originalComponentContent);
     component.component = new MultipleChoiceComponent(componentContent, nodeId);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
@@ -149,6 +152,7 @@ describe('MultipleChoiceStudentComponent', () => {
   testSingleAnswerSingleCorrectAnswerComponent();
   testSingleAnswerMultipleCorrectAnswersComponent();
   ngOnInit();
+  createComponentState();
 });
 
 function createComponentContentChoice(
@@ -168,7 +172,7 @@ function createComponentContentChoice(
 function testMultipleAnswerComponent() {
   describe('multiple answer component', () => {
     beforeEach(() => {
-      component.componentContent = JSON.parse(JSON.stringify(multipleAnswerComponent));
+      component.componentContent = copy(multipleAnswerComponent);
       component.component = new MultipleChoiceComponent(component.componentContent, nodeId);
       component.ngOnInit();
     });
@@ -328,29 +332,21 @@ function ngOnInit() {
       component.choices.forEach((choice) => {
         expect(choice.feedbackToShow).toBeUndefined();
       });
-      const componentState = createComponentState(
-        [
-          createComponentContentChoice(choiceId1, choiceText1),
-          createComponentContentChoice(choiceId2, choiceText2)
-        ],
-        true
-      );
-      component.componentState = componentState;
+      component.componentState = {
+        isSubmit: true,
+        studentData: {
+          studentChoices: [
+            createComponentContentChoice(choiceId1, choiceText1),
+            createComponentContentChoice(choiceId2, choiceText2)
+          ]
+        }
+      };
       component.ngOnInit();
       expectChoiceToShowFeedback(component.choices[0], feedback1);
       expectChoiceToShowFeedback(component.choices[1], feedback2);
       expectChoiceToNotShowFeedback(component.choices[2]);
     });
   });
-}
-
-function createComponentState(studentChoices: any[], isSubmit: boolean): any {
-  return {
-    isSubmit: isSubmit,
-    studentData: {
-      studentChoices: studentChoices
-    }
-  };
 }
 
 function expectChoiceToShowFeedback(choice: any, expectedFeedback: string): void {
@@ -361,4 +357,27 @@ function expectChoiceToShowFeedback(choice: any, expectedFeedback: string): void
 function expectChoiceToNotShowFeedback(choice: any): void {
   expect(choice.feedbackToShow).toBeUndefined();
   expect(choice.showFeedback).toBeFalsy();
+}
+
+function createComponentState(): void {
+  describe('createComponentState()', () => {
+    describe('radio', () => {
+      it('creates studentData with empty studentChoices', () => {
+        component.componentContent.choiceType = 'radio';
+        expectStudentChoicesToBeEmptyArray();
+      });
+    });
+    describe('checkbox', () => {
+      it('creates studentData with empty studentChoices', () => {
+        component.componentContent.choiceType = 'checkbox';
+        expectStudentChoicesToBeEmptyArray();
+      });
+    });
+  });
+}
+
+function expectStudentChoicesToBeEmptyArray(): void {
+  component.createComponentState('submit').then((componentState) => {
+    expect(componentState.studentData.studentChoices).toEqual([]);
+  });
 }

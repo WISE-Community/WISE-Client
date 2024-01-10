@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { copy } from '../../../common/object/object';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { AudioOscillatorService } from '../audioOscillatorService';
+import { hasConnectedComponent } from '../../../common/ComponentContent';
 
 @Component({
   selector: 'audio-oscillator-student',
@@ -70,8 +71,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
+    protected StudentDataService: StudentDataService
   ) {
     super(
       AnnotationService,
@@ -81,8 +81,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 
@@ -97,7 +96,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
     this.setButtonTextToPlay();
     this.setParametersFromComponentContent();
 
-    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
+    if (hasConnectedComponent(this.componentContent, 'showWork')) {
       this.handleConnectedComponents();
     } else if (
       this.AudioOscillatorService.componentStateHasStudentWork(
@@ -251,9 +250,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
 
   addFrequencyDataToStudentData(studentData: any): void {
     studentData.frequenciesPlayed = this.frequenciesPlayed;
-    studentData.frequenciesPlayedSorted = this.UtilService.makeCopyOfJSONObject(
-      this.frequenciesPlayed
-    ).sort();
+    studentData.frequenciesPlayedSorted = copy(this.frequenciesPlayed).sort();
     studentData.numberOfFrequenciesPlayed = this.frequenciesPlayed.length;
     studentData.numberOfUniqueFrequenciesPlayed = [...new Set(this.frequenciesPlayed)].length;
     studentData.minFrequencyPlayed = Math.min(...this.frequenciesPlayed);
@@ -262,9 +259,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
 
   addAmplitudeDataToStudentData(studentData: any): void {
     studentData.amplitudesPlayed = this.amplitudesPlayed;
-    studentData.amplitudesPlayedSorted = this.UtilService.makeCopyOfJSONObject(
-      this.amplitudesPlayed
-    ).sort();
+    studentData.amplitudesPlayedSorted = copy(this.amplitudesPlayed).sort();
     studentData.numberOfAmplitudesPlayed = this.amplitudesPlayed.length;
     studentData.numberOfUniqueAmplitudesPlayed = [...new Set(this.amplitudesPlayed)].length;
     studentData.minAmplitudePlayed = Math.min(...this.amplitudesPlayed);

@@ -1,33 +1,54 @@
-<mat-card class="team notice-bg-bg" [class]="{'disabled-text': team.users.length === 0, 'warn': isUnassigned}">
-  <div class="mat-card-title" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-    <mat-icon *ngIf="team.workgroupId"
-        class="mat-24 secondary-text"
-        [ngStyle]="{'color': avatarColor}">account_circle</mat-icon>
-    <h4 class="mat-body-2 warn" *ngIf="isUnassigned" i18n>Students without a team</h4>
-    <h4 class="mat-body-2" *ngIf="!isUnassigned" i18n>Team {{team.workgroupId}}</h4>
+<mat-card
+  class="team notice-bg-bg"
+  [class]="{ 'disabled-text': team.users.length === 0, warn: isUnassigned }"
+>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+    <mat-icon
+      *ngIf="team.workgroupId"
+      class="mat-24 secondary-text"
+      [ngStyle]="{ color: avatarColor }"
+      >account_circle</mat-icon
+    >
+    <h4 class="mat-subtitle-2 warn" *ngIf="isUnassigned" i18n>Students without a team</h4>
+    <h4 class="mat-subtitle-2" *ngIf="!isUnassigned" i18n>Team {{ team.workgroupId }}</h4>
     <span fxFlex></span>
     <span class="mat-small">
-      <a *ngIf="canChangePeriod" class="change-period" href="#" (click)="changePeriod($event)" i18n>Change Period</a>
+      <a
+        *ngIf="canGradeStudentWork && team.users.length > 0 && !isUnassigned"
+        class="change-period"
+        href="#"
+        (click)="changePeriod($event)"
+        i18n
+        >Change Period</a
+      >
       <span *ngIf="this.team.users.length === 0" i18n>No students</span>
     </span>
   </div>
   <mat-card-content>
-    <ul id="team-{{team.workgroupId}}"
-        class="users"
-        [class]="{'unassigned': isUnassigned}"
-        cdkDropList
-        [cdkDropListData]="team.users"
-        [cdkDropListEnterPredicate]="canDrop"
-        (cdkDropListDropped)="drop($event)"
-        [ngStyle.gt-sm]="{columns: isUnassigned ? 2 : ''}"
-        [ngStyle.gt-md]="{columns: isUnassigned ? 3 : ''}">
+    <ul
+      id="team-{{ team.workgroupId }}"
+      class="users"
+      [class]="{ unassigned: isUnassigned }"
+      cdkDropList
+      [cdkDropListData]="team.users"
+      [cdkDropListEnterPredicate]="canDrop"
+      (cdkDropListDropped)="drop($event)"
+      [ngStyle.gt-sm]="{ columns: isUnassigned ? 2 : '' }"
+      [ngStyle.gt-md]="{ columns: isUnassigned ? 3 : '' }"
+    >
       <ng-container *ngFor="let user of team.users">
-        <li cdkDrag
-            [cdkDragData]="team.workgroupId"
-            (cdkDragEntered)="dragEnter($event)"
-            (cdkDragExited)="dragExit($event)"
-            [cdkDragPreviewContainer]="'parent'">
-          <manage-user class="user control-bg-bg mat-elevation-z1" [user]="user"></manage-user>
+        <li
+          cdkDrag
+          [cdkDragData]="{ user: user, workgroupId: team.workgroupId }"
+          (cdkDragEntered)="dragEnter($event)"
+          (cdkDragExited)="dragExit($event)"
+          [cdkDragPreviewContainer]="'parent'"
+        >
+          <manage-user
+            class="user control-bg-bg mat-elevation-z1"
+            [user]="user"
+            (removeUserEvent)="removeUser($event)"
+          ></manage-user>
         </li>
       </ng-container>
     </ul>

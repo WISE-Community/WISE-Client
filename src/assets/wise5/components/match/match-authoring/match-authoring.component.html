@@ -1,93 +1,130 @@
-<edit-component-prompt [prompt]="componentContent.prompt"
-   (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
+<edit-component-prompt
+  [prompt]="componentContent.prompt"
+  (promptChangedEvent)="promptChanged($event)"
+></edit-component-prompt>
 <p>
-  <mat-checkbox color="primary"
-      class="checkbox"
-      [(ngModel)]="componentContent.horizontal"
-      (ngModelChange)="componentChanged()"
-      i18n>
+  <mat-checkbox
+    color="primary"
+    class="checkbox"
+    [(ngModel)]="componentContent.horizontal"
+    (ngModelChange)="componentChanged()"
+    i18n
+  >
     Show Source and Target Buckets Side-by-Side
   </mat-checkbox>
 </p>
 <p>
-  <mat-checkbox color="primary"
-      class="checkbox"
-      [(ngModel)]="componentContent.choicesAfter"
-      (ngModelChange)="componentChanged()"
-      i18n>
+  <mat-checkbox
+    color="primary"
+    class="checkbox"
+    [(ngModel)]="componentContent.choicesAfter"
+    (ngModelChange)="componentChanged()"
+    i18n
+  >
     Show Choices After Target Buckets
+  </mat-checkbox>
+</p>
+<p>
+  <mat-checkbox
+    color="primary"
+    class="checkbox"
+    [(ngModel)]="componentContent.choiceReuseEnabled"
+    (ngModelChange)="componentChanged()"
+    i18n
+  >
+    Students can put each choice in multiple buckets
   </mat-checkbox>
 </p>
 <div class="section">
   <span i18n>Choices</span>
-  <button mat-raised-button
-      color="primary"
-      class="authoring-button add-button"
-      (click)="addChoice()"
-      matTooltip="Add Choice"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Add"
-      i18n-aria-label>
+  <button
+    mat-raised-button
+    color="primary"
+    class="authoring-button add-button"
+    (click)="addChoice()"
+    matTooltip="Add Choice"
+    matTooltipPosition="above"
+    i18n-matTooltip
+    aria-label="Add"
+    i18n-aria-label
+  >
     <mat-icon>add</mat-icon>
   </button>
   <div *ngIf="componentContent.choices.length === 0" i18n>
-      There are no choices. Click the "Add Choice" button to add a choice.
+    There are no choices. Click the "Add Choice" button to add a choice.
   </div>
-  <div *ngFor="let choice of componentContent.choices; index as choiceIndex; first as isFirst; last as isLast"
-       fxLayout="row" fxLayoutAlign="start center">
+  <div
+    *ngFor="
+      let choice of componentContent.choices;
+      index as choiceIndex;
+      first as isFirst;
+      last as isLast
+    "
+    fxLayout="row"
+    fxLayoutAlign="start center"
+  >
     <mat-form-field class="name">
       <mat-label i18n>Choice Name</mat-label>
-      <input matInput
-          [(ngModel)]="choice.value"
-          (ngModelChange)="inputChange.next($event)"
-          placeholder="Type text or choose an image"
-          i18n-placeholder/>
+      <input
+        matInput
+        [(ngModel)]="choice.value"
+        (ngModelChange)="inputChange.next($event)"
+        placeholder="Type text or choose an image"
+        i18n-placeholder
+      />
     </mat-form-field>
-    <button mat-raised-button
-        color="primary"
-        class="authoring-button"
-        (click)="chooseChoiceAsset(choice)"
-        matTooltip="Choose an Image"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Choose an Image"
-        i18n-aria-label>
+    <button
+      mat-raised-button
+      color="primary"
+      class="authoring-button"
+      (click)="chooseChoiceAsset(choice)"
+      matTooltip="Choose an Image"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      aria-label="Choose an Image"
+      i18n-aria-label
+    >
       <mat-icon>insert_photo</mat-icon>
     </button>
-    <button mat-raised-button
-        color="primary"
-        class="authoring-button"
-        [disabled]="isFirst"
-        (click)="moveChoiceUp(choiceIndex)"
-        matTooltip="Move Up"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Up"
-        i18n-aria-label>
+    <button
+      mat-raised-button
+      color="primary"
+      class="authoring-button"
+      [disabled]="isFirst"
+      (click)="moveChoiceUp(choiceIndex)"
+      matTooltip="Move Up"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      aria-label="Up"
+      i18n-aria-label
+    >
       <mat-icon>arrow_upward</mat-icon>
     </button>
-    <button mat-raised-button
-        color="primary"
-        class="authoring-button"
-        [disabled]="isLast"
-        (click)="moveChoiceDown(choiceIndex)"
-        matTooltip="Move Down"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Down"
-        i18n-aria-label>
+    <button
+      mat-raised-button
+      color="primary"
+      class="authoring-button"
+      [disabled]="isLast"
+      (click)="moveChoiceDown(choiceIndex)"
+      matTooltip="Move Down"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      aria-label="Down"
+      i18n-aria-label
+    >
       <mat-icon>arrow_downward</mat-icon>
     </button>
-    <button mat-raised-button
-        color="primary"
-        class="authoring-button"
-        (click)="deleteChoice(choiceIndex)"
-        matTooltip="Delete Choice"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Delete"
-        i18n-aria-label>
+    <button
+      mat-raised-button
+      color="primary"
+      class="authoring-button"
+      (click)="deleteChoice(choiceIndex)"
+      matTooltip="Delete Choice"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      aria-label="Delete"
+      i18n-aria-label
+    >
       <mat-icon>delete</mat-icon>
     </button>
   </div>
@@ -95,80 +132,102 @@
 <div class="section">
   <mat-form-field class="name">
     <mat-label i18n>Source Bucket Name</mat-label>
-    <input matInput
-        [(ngModel)]="componentContent.choicesLabel"
-        (ngModelChange)="inputChange.next($event)"/>
+    <input
+      matInput
+      [(ngModel)]="componentContent.choicesLabel"
+      (ngModelChange)="inputChange.next($event)"
+    />
   </mat-form-field>
-  <br/>
+  <br />
   <span i18n>Target Buckets</span>
-  <button mat-raised-button
-      color="primary"
-      class="authoring-button add-button"
-      (click)="addBucket()"
-      matTooltip="Add Target Bucket"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Add"
-      i18n-aria-label>
+  <button
+    mat-raised-button
+    color="primary"
+    class="authoring-button add-button"
+    (click)="addBucket()"
+    matTooltip="Add Target Bucket"
+    matTooltipPosition="above"
+    i18n-matTooltip
+    aria-label="Add"
+    i18n-aria-label
+  >
     <mat-icon>add</mat-icon>
   </button>
   <div *ngIf="componentContent.buckets.length === 0" i18n>
     There are no target buckets. Click the "Add Target Bucket" button to add a bucket.
   </div>
-  <div *ngFor="let bucket of componentContent.buckets; index as bucketIndex; first as isFirst; last as isLast"
-      fxLayout="row" fxLayoutAlign="start center">
+  <div
+    *ngFor="
+      let bucket of componentContent.buckets;
+      index as bucketIndex;
+      first as isFirst;
+      last as isLast
+    "
+    fxLayout="row"
+    fxLayoutAlign="start center"
+  >
     <mat-form-field class="name">
       <mat-label i18n>Target Bucket Name</mat-label>
-      <input matInput
-          [(ngModel)]="bucket.value"
-          (ngModelChange)="inputChange.next($event)"
-          placeholder="Type text or choose an image"
-          i18n-placeholder/>
+      <input
+        matInput
+        [(ngModel)]="bucket.value"
+        (ngModelChange)="inputChange.next($event)"
+        placeholder="Type text or choose an image"
+        i18n-placeholder
+      />
     </mat-form-field>
-    <button mat-raised-button
-        color="primary"
-        class="authoring-button"
-        (click)="chooseBucketAsset(bucket)"
-        matTooltip="Choose an Image"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Choose an Image"
-        i18n-aria-label>
+    <button
+      mat-raised-button
+      color="primary"
+      class="authoring-button"
+      (click)="chooseBucketAsset(bucket)"
+      matTooltip="Choose an Image"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      aria-label="Choose an Image"
+      i18n-aria-label
+    >
       <mat-icon>insert_photo</mat-icon>
     </button>
-    <button mat-raised-button
-        color="primary"
-        class="authoring-button"
-        [disabled]="isFirst"
-        (click)="moveBucketUp(bucketIndex)"
-        matTooltip="Move Up"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Up"
-        i18n-aria-label>
+    <button
+      mat-raised-button
+      color="primary"
+      class="authoring-button"
+      [disabled]="isFirst"
+      (click)="moveBucketUp(bucketIndex)"
+      matTooltip="Move Up"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      aria-label="Up"
+      i18n-aria-label
+    >
       <mat-icon>arrow_upward</mat-icon>
     </button>
-    <button mat-raised-button
-        color="primary"
-        class="authoring-button"
-        [disabled]="isLast"
-        (click)="moveBucketDown(bucketIndex)"
-        matTooltip="Move Down"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Down"
-        i18n-aria-label>
+    <button
+      mat-raised-button
+      color="primary"
+      class="authoring-button"
+      [disabled]="isLast"
+      (click)="moveBucketDown(bucketIndex)"
+      matTooltip="Move Down"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      aria-label="Down"
+      i18n-aria-label
+    >
       <mat-icon>arrow_downward</mat-icon>
     </button>
-    <button mat-raised-button
-        color="primary"
-        class="authoring-button"
-        (click)="deleteBucket(bucketIndex)"
-        matTooltip="Delete Bucket"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Delete"
-        i18n-aria-label>
+    <button
+      mat-raised-button
+      color="primary"
+      class="authoring-button"
+      (click)="deleteBucket(bucketIndex)"
+      matTooltip="Delete Bucket"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      aria-label="Delete"
+      i18n-aria-label
+    >
       <mat-icon>delete</mat-icon>
     </button>
   </div>
@@ -177,53 +236,55 @@
   <div class="choice-ordered-checkbox">
     <p i18n>Feedback</p>
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.ordered"
-        (ngModelChange)="componentChanged()"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.ordered"
+      (ngModelChange)="componentChanged()"
+      i18n
+    >
       Choices need to be ordered within buckets
     </mat-checkbox>
   </div>
-  <div *ngFor="let bucketFeedback of componentContent.feedback"
-      class="section">
-    <p i18n>
-      Bucket Name: {{getBucketNameById(bucketFeedback.bucketId)}}
-    </p>
-    <div *ngFor="let choiceFeedback of bucketFeedback.choices"
-        class="choice-feedback-container">
-      <span i18n>
-        Choice: {{getChoiceTextById(choiceFeedback.choiceId)}}
-      </span>
+  <div *ngFor="let bucketFeedback of componentContent.feedback" class="section">
+    <p i18n>Bucket Name: {{ getBucketNameById(bucketFeedback.bucketId) }}</p>
+    <div *ngFor="let choiceFeedback of bucketFeedback.choices" class="choice-feedback-container notice-bg-bg">
+      <span i18n> Choice: {{ getChoiceTextById(choiceFeedback.choiceId) }} </span>
       <div layout="row">
         <mat-form-field class="feedback">
           <mat-label i18n>Feedback</mat-label>
-          <input matInput
-              color="primary"
-              [(ngModel)]="choiceFeedback.feedback"
-              (ngModelChange)="feedbackChange.next($event)"/>
+          <input
+            matInput
+            color="primary"
+            [(ngModel)]="choiceFeedback.feedback"
+            (ngModelChange)="feedbackChange.next($event)"
+          />
         </mat-form-field>
         <mat-checkbox
-            color="primary"
-            [(ngModel)]="choiceFeedback.isCorrect"
-            (ngModelChange)="isCorrectClicked(choiceFeedback)"
-            layout="row"
-            i18n>
+          color="primary"
+          [(ngModel)]="choiceFeedback.isCorrect"
+          (ngModelChange)="isCorrectClicked(choiceFeedback)"
+          layout="row"
+          i18n
+        >
           Is Correct
         </mat-checkbox>
       </div>
       <div *ngIf="componentContent.ordered && choiceFeedback.isCorrect" fxLayout="row">
         <mat-form-field class="position">
           <mat-label i18n>Position</mat-label>
-          <input matInput
-              type="number"
-              [(ngModel)]="choiceFeedback.position"
-              (ngModelChange)="feedbackChange.next($event)"/>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="choiceFeedback.position"
+            (ngModelChange)="feedbackChange.next($event)"
+          />
         </mat-form-field>
         <mat-form-field class="incorrect-position-feedback">
           <mat-label i18n>Incorrect Position Feedback</mat-label>
-          <input matInput
-              [(ngModel)]="choiceFeedback.incorrectPositionFeedback"
-              (ngModelChange)="feedbackChange.next($event)"/>
+          <input
+            matInput
+            [(ngModel)]="choiceFeedback.incorrectPositionFeedback"
+            (ngModelChange)="feedbackChange.next($event)"
+          />
         </mat-form-field>
       </div>
     </div>

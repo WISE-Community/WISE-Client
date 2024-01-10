@@ -1,50 +1,61 @@
-<mat-card *ngIf="nodeContent.rubric" class="rubric">
+<mat-card appearance="outlined" *ngIf="nodeContent.rubric" class="rubric">
   <mat-card-title fxLayoutAlign="start center" fxLayoutGap="8px">
     <mat-icon class="mat-24 info">info</mat-icon>
-    <span class="mat-body-2" i18n>Step Info</span>
+    <span class="mat-subtitle-2" i18n>Step Info</span>
   </mat-card-title>
-  <mat-card-content [innerHTML]="nodeContent.rubric">
-  </mat-card-content>
+  <mat-card-content [innerHTML]="nodeContent.rubric"> </mat-card-content>
 </mat-card>
-<mat-card class="node-info">
+<mat-card appearance="outlined" class="node-info">
   <mat-card-content>
-    <div id="component_{{component.id}}" class="component"
-         *ngFor="let component of nodeContent.components; first as isFirst">
+    <div
+      id="component_{{ component.id }}"
+      class="component"
+      *ngFor="let component of nodeContent.components; first as isFirst"
+    >
       <mat-divider class="item-divider divider--dashed" *ngIf="!isFirst"></mat-divider>
-      <h3 *ngIf="component.isStudentWorkGenerated"
-          class="accent-1 mat-body-2 gray-lightest-bg component-header">
-        {{ component.assessmentItemIndex + ". " + component.typeLabel }}&nbsp;
+      <h3
+        *ngIf="component.isStudentWorkGenerated"
+        class="accent-1 mat-subtitle-2 gray-lightest-bg component-header"
+      >
+        {{ component.assessmentItemIndex + '. ' + component.typeLabel }}&nbsp;
       </h3>
       <preview-component [component]="component.component" [periodId]="periodId">
       </preview-component>
-      <mat-card *ngIf="component.rubric" class="rubric component-rubric mat-elevation-z0 notice-bg-bg">
-        <mat-card-title class="mat-body-2" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <mat-card
+        appearance="outlined"
+        *ngIf="component.rubric"
+        class="rubric component-rubric mat-elevation-z0 notice-bg-bg"
+      >
+        <mat-card-title class="mat-subtitle-2" fxLayoutAlign="start center" fxLayoutGap="8px">
           <mat-icon class="mat-24 info">info</mat-icon>
           <span i18n>Item Info</span>
         </mat-card-title>
-        <mat-card-content class="app-bg-bg" [innerHTML]="component.rubric">
-        </mat-card-content>
+        <mat-card-content class="app-bg-bg" [innerHTML]="component.rubric"> </mat-card-content>
       </mat-card>
       <div *ngIf="component.hasResponsesSummary">
-        <teacher-summary-display *ngIf="component.type === 'MultipleChoice'"
-            [nodeId]="nodeId"
-            [componentId]="component.id"
-            [periodId]="periodId"
-            [studentDataType]="'responses'"
-            [source]="source"
-            [highlightCorrectAnswer]="component.hasCorrectAnswer"
-            [chartType]="'column'"
-            [doRender]="true">
+        <teacher-summary-display
+          *ngIf="component.type === 'MultipleChoice'"
+          [nodeId]="nodeId"
+          [componentId]="component.id"
+          [periodId]="periodId"
+          [studentDataType]="'responses'"
+          [source]="source"
+          [highlightCorrectAnswer]="component.hasCorrectAnswer"
+          [chartType]="'column'"
+          [doRender]="true"
+        >
         </teacher-summary-display>
       </div>
       <div *ngIf="component.hasScoresSummary && component.hasScoreAnnotation">
-        <teacher-summary-display [nodeId]="nodeId"
-            [componentId]="component.id"
-            [periodId]="periodId"
-            [studentDataType]="'scores'"
-            [source]="source"
-            [chartType]="'column'"
-            [doRender]="true">
+        <teacher-summary-display
+          [nodeId]="nodeId"
+          [componentId]="component.id"
+          [periodId]="periodId"
+          [studentDataType]="'scores'"
+          [source]="source"
+          [chartType]="'column'"
+          [doRender]="true"
+        >
         </teacher-summary-display>
       </div>
     </div>

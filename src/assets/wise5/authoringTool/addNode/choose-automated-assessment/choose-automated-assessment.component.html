@@ -1,0 +1,51 @@
+<h5 i18n>Automated Assessment</h5>
+<p i18n>
+  Automated Assessments will automatically score student responses and provide feedback for
+  reflection.
+</p>
+<h6 i18n>Choose an assessment item:</h6>
+<mat-radio-group [(ngModel)]="node">
+  <div
+    *ngFor="let item of projectItems"
+    [ngClass]="{ groupHeader: item.node.type === 'group', stepHeader: item.node.type !== 'group' }"
+  >
+    <div *ngIf="item.order !== 0 && item.node.type === 'group'">{{ item.node.title }}:</div>
+    <div
+      *ngIf="item.order !== 0 && item.node.type !== 'group'"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="20px"
+    >
+      <mat-radio-button [value]="item.node" color="primary">
+        <span class="bold">{{ item.node.title }}</span>
+      </mat-radio-button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="previewNode(item.node)"
+        matTooltip="Preview Step"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>preview</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-radio-group>
+<div class="nav-controls">
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutGap="8px">
+    <button mat-button color="primary" routerLink="../../choose-template" i18n>Back</button>
+    <span fxFlex></span>
+    <button mat-button color="primary" routerLink="../../../" aria-label="Cancel">Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="node == null"
+      (click)="next()"
+      aria-label="Next"
+    >
+      Next
+    </button>
+  </div>
+</div>

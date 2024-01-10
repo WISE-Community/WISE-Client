@@ -1,0 +1,36 @@
+<h5 i18n>Choose the location for your new lesson:</h5>
+<ng-container *ngFor="let group of groupNodes">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" [ngSwitch]="group.order">
+    <ng-container *ngSwitchCase="0">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="insertAsFirstActivity()"
+        matTooltip="Insert As First Lesson"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>call_received</mat-icon>
+      </button>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <h6>{{ getNodePositionById(group.id) }}: {{ getNodeTitle(group.id) }}</h6>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="insertAfterGroup(group.id)"
+        matTooltip="Insert After"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>subdirectory_arrow_left</mat-icon>
+      </button>
+    </ng-container>
+  </div>
+</ng-container>
+<div class="nav-controls">
+  <mat-divider></mat-divider>
+  <div>
+    <button mat-button color="primary" routerLink="../.." i18n>Cancel</button>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 @import
-  '~style/abstracts/variables',
-  '~style/abstracts/functions',
-  '~style/abstracts/mixins';
+  'style/abstracts/variables',
+  'style/abstracts/functions',
+  'style/abstracts/mixins';
 
 .form-fields {
   margin-bottom: 0 !important;
@@ -20,17 +20,4 @@
       padding: 0 !important;
     }
   }
-}
-
-.actions {
-  margin-top: 8px;
-}
-
-.google-icon {
-  height: 1.8em;
-  width: auto;
-}
-
-.unlink {
-  margin: 8px 0;
 }

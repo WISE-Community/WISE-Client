@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StudentService } from '../../../student/student.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/index';
+import { Observable } from 'rxjs';
 
 export class MockStudentService {
   getSecurityQuestion(username: string): Observable<any> {

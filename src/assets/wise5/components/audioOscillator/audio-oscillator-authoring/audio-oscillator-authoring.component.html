@@ -1,136 +1,164 @@
-<edit-component-prompt [prompt]="componentContent.prompt"
-   (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
+<edit-component-prompt
+  [prompt]="componentContent.prompt"
+  (promptChangedEvent)="promptChanged($event)"
+></edit-component-prompt>
 <span i18n>Oscillator Types</span>
-<span *ngIf="componentContent.oscillatorTypes == null || componentContent.oscillatorTypes.length === 0"
-    class="no-oscillator-type-message"
-    i18n>
+<span
+  *ngIf="componentContent.oscillatorTypes == null || componentContent.oscillatorTypes.length === 0"
+  class="no-oscillator-type-message"
+  i18n
+>
   (There are no oscillator types selected. Please select at least one oscillator type.)
 </span>
 <div class="oscillator-types-container">
   <mat-checkbox
-      color="primary"
-      class="oscillator-type"
-      [(ngModel)]="sineChecked"
-      (ngModelChange)="oscillatorTypeClicked()"
-      i18n>
+    color="primary"
+    class="oscillator-type"
+    [(ngModel)]="sineChecked"
+    (ngModelChange)="oscillatorTypeClicked()"
+    i18n
+  >
     Sine
   </mat-checkbox>
-  <br/>
+  <br />
   <mat-checkbox
-      color="primary"
-      class="oscillator-type"
-      [(ngModel)]="squareChecked"
-      (ngModelChange)="oscillatorTypeClicked()"
-      i18n>
+    color="primary"
+    class="oscillator-type"
+    [(ngModel)]="squareChecked"
+    (ngModelChange)="oscillatorTypeClicked()"
+    i18n
+  >
     Square
   </mat-checkbox>
-  <br/>
+  <br />
   <mat-checkbox
-      color="primary"
-      class="oscillator-type"
-      [(ngModel)]="triangleChecked"
-      (ngModelChange)="oscillatorTypeClicked()"
-      i18n>
+    color="primary"
+    class="oscillator-type"
+    [(ngModel)]="triangleChecked"
+    (ngModelChange)="oscillatorTypeClicked()"
+    i18n
+  >
     Triangle
   </mat-checkbox>
-  <br/>
+  <br />
   <mat-checkbox
-      color="primary"
-      class="oscillator-type"
-      [(ngModel)]="sawtoothChecked"
-      (ngModelChange)="oscillatorTypeClicked()"
-      i18n>
+    color="primary"
+    class="oscillator-type"
+    [(ngModel)]="sawtoothChecked"
+    (ngModelChange)="oscillatorTypeClicked()"
+    i18n
+  >
     Sawtooth
   </mat-checkbox>
 </div>
-<div class="frequency-amplitude-container"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="40px">
+<div
+  class="frequency-amplitude-container"
+  fxLayout="row wrap"
+  fxLayoutAlign="start center"
+  fxLayoutGap="40px"
+>
   <span i18n>Frequency</span>
   <mat-form-field class="number-input-small">
     <mat-label i18n>Starting Frequency (Hz)</mat-label>
-    <input matInput
-        type="number"
-        min="1"
-        [(ngModel)]="componentContent.startingFrequency"
-        (ngModelChange)="inputChange.next($event)"/>
+    <input
+      matInput
+      type="number"
+      min="1"
+      [(ngModel)]="componentContent.startingFrequency"
+      (ngModelChange)="inputChange.next($event)"
+    />
   </mat-form-field>
   <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.canStudentViewFrequencyInput"
-      (ngModelChange)="showFrequencyInputChanged()"
-      i18n>
+    color="primary"
+    [(ngModel)]="componentContent.canStudentViewFrequencyInput"
+    (ngModelChange)="showFrequencyInputChanged()"
+    i18n
+  >
     Show Frequency Input
   </mat-checkbox>
   <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.canStudentEditFrequency"
-      (ngModelChange)="componentChanged()"
-      [disabled]="!componentContent.canStudentViewFrequencyInput"
-      i18n>
+    color="primary"
+    [(ngModel)]="componentContent.canStudentEditFrequency"
+    (ngModelChange)="componentChanged()"
+    [disabled]="!componentContent.canStudentViewFrequencyInput"
+    i18n
+  >
     Allow Student to Edit Frequency
   </mat-checkbox>
 </div>
-<div class="frequency-amplitude-container"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="40px">
+<div
+  class="frequency-amplitude-container"
+  fxLayout="row wrap"
+  fxLayoutAlign="start center"
+  fxLayoutGap="40px"
+>
   <span i18n>Amplitude</span>
   <mat-form-field class="number-input-small">
     <mat-label i18n>Starting Amplitude (dB)</mat-label>
-    <input matInput
-        type="number"
-        min="0"
-        [max]="maxAmplitude"
-        [(ngModel)]="componentContent.startingAmplitude"
-        (ngModelChange)="inputChange.next($event)"/>
+    <input
+      matInput
+      type="number"
+      min="0"
+      [max]="maxAmplitude"
+      [(ngModel)]="componentContent.startingAmplitude"
+      (ngModelChange)="inputChange.next($event)"
+    />
   </mat-form-field>
   <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.canStudentViewAmplitudeInput"
-      (ngModelChange)="showAmplitudeInputChanged()"
-      i18n>
+    color="primary"
+    [(ngModel)]="componentContent.canStudentViewAmplitudeInput"
+    (ngModelChange)="showAmplitudeInputChanged()"
+    i18n
+  >
     Show Amplitude Input
   </mat-checkbox>
   <div>
     <mat-checkbox
-        color="primary"
-        [(ngModel)]="componentContent.canStudentEditAmplitude"
-        (ngModelChange)="componentChanged()"
-        [disabled]="!componentContent.canStudentViewAmplitudeInput"
-        i18n>
+      color="primary"
+      [(ngModel)]="componentContent.canStudentEditAmplitude"
+      (ngModelChange)="componentChanged()"
+      [disabled]="!componentContent.canStudentViewAmplitudeInput"
+      i18n
+    >
       Allow Student to Edit Amplitude
     </mat-checkbox>
   </div>
 </div>
-<div class="frequency-amplitude-container"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="40px">
+<div
+  class="frequency-amplitude-container"
+  fxLayout="row wrap"
+  fxLayoutAlign="start center"
+  fxLayoutGap="40px"
+>
   <span i81n>Grid Dimensions</span>
   <mat-form-field class="number-input-small">
     <mat-label i18n>Oscillator Width (Pixels)</mat-label>
-    <input matInput
-        type="number"
-        min="1"
-        [(ngModel)]="componentContent.oscilloscopeWidth"
-        (ngModelChange)="inputChange.next($event)"/>
+    <input
+      matInput
+      type="number"
+      min="1"
+      [(ngModel)]="componentContent.oscilloscopeWidth"
+      (ngModelChange)="inputChange.next($event)"
+    />
   </mat-form-field>
   <mat-form-field class="number-input-small">
     <mat-label i18n>Oscillator Height (Pixels)</mat-label>
-    <input matInput
-        type="number"
-        min="1"
-        [(ngModel)]="componentContent.oscilloscopeHeight"
-        (ngModelChange)="inputChange.next($event)"/>
+    <input
+      matInput
+      type="number"
+      min="1"
+      [(ngModel)]="componentContent.oscilloscopeHeight"
+      (ngModelChange)="inputChange.next($event)"
+    />
   </mat-form-field>
   <mat-form-field class="number-input-medium">
     <mat-label i18n>Oscillator Grid Size (Pixels)</mat-label>
-    <input matInput
-        type="number"
-        min="1"
-        [(ngModel)]="componentContent.gridCellSize"
-        (ngModelChange)="inputChange.next($event)"/>
+    <input
+      matInput
+      type="number"
+      min="1"
+      [(ngModel)]="componentContent.gridCellSize"
+      (ngModelChange)="inputChange.next($event)"
+    />
   </mat-form-field>
 </div>

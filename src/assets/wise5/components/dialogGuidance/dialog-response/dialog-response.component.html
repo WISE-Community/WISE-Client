@@ -1,29 +1,38 @@
-<div fxLayoutAlign="{{isStudent ? 'end' : 'start'}} start" fxLayoutGap="4px">
+<div fxLayoutAlign="{{ isStudent ? 'end' : 'start' }} start" fxLayoutGap="4px">
   <ng-container *ngIf="isStudent">
-    <mat-icon class="mat-36"
-        [ngStyle]="{'color': avatarColor}"
-        aria-label="Student response"
-        i18n-aria-label
-        fxFlexOrder="2">account_circle</mat-icon>
+    <mat-icon
+      class="mat-36"
+      [ngStyle]="{ color: avatarColor }"
+      aria-label="Student response"
+      i18n-aria-label
+      fxFlexOrder="2"
+      >account_circle</mat-icon
+    >
   </ng-container>
   <ng-container *ngIf="!isStudent">
     <ng-container *ngIf="computerAvatar == null">
-      <mat-icon class="mat-36"
-          color="accent"
-          aria-label="Automated guidance response"
-          i18n-aria-label
-          fxFlexOrder="2">smart_toy</mat-icon>
+      <mat-icon
+        class="mat-36"
+        color="accent"
+        aria-label="Automated guidance response"
+        i18n-aria-label
+        >smart_toy</mat-icon
+      >
     </ng-container>
     <ng-container *ngIf="computerAvatar != null">
-      <img [src]="computerAvatarImageSrc"
-          class="computer-avatar"
-          aria-label="Automated guidance response"
-          i18n-aria-label
-          fxFlexOrder="2" />
+      <img
+        [src]="computerAvatarImageSrc"
+        class="computer-avatar"
+        aria-label="Automated guidance response"
+        i18n-aria-label
+      />
     </ng-container>
   </ng-container>
-  <div fxFlex fxLayoutAlign="{{isStudent ? 'end' : 'start'}}">
-    <div class="response-text" [class]="{'notice-bg-bg': !isStudent, 'selected-bg-bg': isStudent}">
+  <div fxFlex fxLayoutAlign="{{ isStudent ? 'end' : 'start' }}">
+    <div
+      class="response-text"
+      [class]="{ 'notice-bg-bg': !isStudent, 'selected-bg-bg': isStudent }"
+    >
       <div class="mat-small secondary-text poster">{{ displayNames }}</div>
       <div [innerHtml]="text"></div>
     </div>

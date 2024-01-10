@@ -54,7 +54,7 @@ export class XhrInterceptor implements HttpInterceptor {
 
 @NgModule({
   declarations: [PrivacyComponent],
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }), FormsModule],
+  imports: [RouterModule.forRoot(routes, {}), FormsModule],
   exports: [RouterModule],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }]
 })

@@ -7,10 +7,21 @@ export interface ComponentContent {
   dynamicPrompt?: DynamicPrompt;
   excludeFromTotalScore?: boolean;
   maxScore?: number;
+  maxSubmitCount?: number;
   prompt?: string;
   questionBank?: QuestionBank;
   rubric?: string;
   showSaveButton?: boolean;
   showSubmitButton?: boolean;
   type: string;
+}
+
+export function hasConnectedComponent(
+  content: ComponentContent,
+  connectedComponentType: 'importWork' | 'showWork'
+): boolean {
+  return (
+    content.connectedComponents != null &&
+    content.connectedComponents.some((c) => c.type === connectedComponentType)
+  );
 }

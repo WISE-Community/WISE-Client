@@ -4,7 +4,6 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { EmbeddedService } from '../embeddedService';
 
@@ -25,7 +24,6 @@ export class EmbeddedShowWorkComponent extends ComponentShowWorkDirective {
     private EmbeddedService: EmbeddedService,
     protected nodeService: NodeService,
     protected ProjectService: ProjectService,
-    protected UtilService: UtilService,
     private sanitizer: DomSanitizer
   ) {
     super(nodeService, ProjectService);
@@ -33,7 +31,6 @@ export class EmbeddedShowWorkComponent extends ComponentShowWorkDirective {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.componentContent = this.ProjectService.injectAssetPaths(this.componentContent);
     this.embeddedApplicationIFrameId = this.getIframeId();
     this.setHeight(this.componentContent);
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.componentContent.url);

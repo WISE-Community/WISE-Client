@@ -1,9 +1,10 @@
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
+import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 
 export class NotificationDataExportStrategy extends AbstractDataExportStrategy {
   export() {
     this.controller.showDownloadingExportMessage();
-    this.dataExportService.retrieveNotificationsExport().then((result) => {
+    this.dataExportService.retrieveNotificationsExport().subscribe((result) => {
       const notifications = result;
       const columnNames = [
         'ID',
@@ -76,16 +77,14 @@ export class NotificationDataExportStrategy extends AbstractDataExportStrategy {
     if (componentPosition != -1) {
       row[columnNameToNumber['Component Part Number']] = componentPosition + 1;
     }
-    row[
-      columnNameToNumber['Server Save Time']
-    ] = this.utilService.convertMillisecondsToFormattedDateTime(notification.serverSaveTime);
-    row[
-      columnNameToNumber['Time Generated']
-    ] = this.utilService.convertMillisecondsToFormattedDateTime(notification.timeGenerated);
+    row[columnNameToNumber['Server Save Time']] = millisecondsToDateTime(
+      notification.serverSaveTime
+    );
+    row[columnNameToNumber['Time Generated']] = millisecondsToDateTime(notification.timeGenerated);
     if (notification.timeDismissed != null) {
-      row[
-        columnNameToNumber['Time Dismissed']
-      ] = this.utilService.convertMillisecondsToFormattedDateTime(notification.timeDismissed);
+      row[columnNameToNumber['Time Dismissed']] = millisecondsToDateTime(
+        notification.timeDismissed
+      );
     }
     row[columnNameToNumber['Type']] = notification.type;
     if (notification.groupId != null) {

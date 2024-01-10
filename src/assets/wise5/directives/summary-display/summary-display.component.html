@@ -1,6 +1,6 @@
-<mat-card *ngIf="nodeId != null && componentId != null" class="summary-card">
+<mat-card appearance="outlined" *ngIf="nodeId != null && componentId != null" class="summary-card">
   <mat-card-content>
-    <p *ngIf="hasWarning" class="warn center">{{warningMessage}}</p>
+    <p *ngIf="hasWarning" class="warn center">{{ warningMessage }}</p>
     <div *ngIf="doRender && chartConfig != null">
       <highcharts-chart [Highcharts]="Highcharts" [options]="chartConfig" class="highcharts-chart">
       </highcharts-chart>

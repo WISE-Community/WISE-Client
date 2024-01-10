@@ -1,128 +1,169 @@
 <edit-connected-components-add-button (connectedComponentsChanged)="addConnectedComponent()">
 </edit-connected-components-add-button>
-<div *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
-    class="connected-components-div">
+<div
+  *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
+  class="connected-components-div"
+>
   <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
-    <edit-connected-component-node-select
-        [connectedComponent]="connectedComponent"
-        (connectedComponentChange)="connectedComponentNodeIdChanged(connectedComponent)">
-    </edit-connected-component-node-select>
-    <edit-connected-component-component-select
-        [componentId]="componentId"
-        [connectedComponent]="connectedComponent"
-        [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-        (connectedComponentChange)="connectedComponentComponentIdChanged(connectedComponent)">
-    </edit-connected-component-component-select>
+    <select-step-and-component
+      [referenceComponent]="connectedComponent"
+      [thisComponentId]="componentId"
+      [allowedComponentTypes]="allowedConnectedComponentTypes"
+      (stepChange)="connectedComponentNodeIdChanged(connectedComponent)"
+      (componentChange)="connectedComponentComponentIdChanged(connectedComponent)"
+    >
+    </select-step-and-component>
     <mat-form-field>
       <mat-label i18n>Type</mat-label>
-      <mat-select [(ngModel)]="connectedComponent.type"
-          (ngModelChange)="connectedComponentTypeChanged(connectedComponent)">
+      <mat-select
+        [(ngModel)]="connectedComponent.type"
+        (ngModelChange)="connectedComponentTypeChanged(connectedComponent)"
+      >
         <mat-option value="importWork" i18n>Import Work</mat-option>
         <mat-option value="showWork" i18n>Show Work</mat-option>
-        <mat-option value="showClassmateWork"
-            *ngIf="getConnectedComponentType(connectedComponent) === 'Graph'"
-            i18n>
+        <mat-option
+          value="showClassmateWork"
+          *ngIf="getConnectedComponentType(connectedComponent) === 'Graph'"
+          i18n
+        >
           Show Classmate Work
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field *ngIf="connectedComponent.type == 'showClassmateWork' && getConnectedComponentType(connectedComponent) === 'Graph'">
+    <mat-form-field
+      *ngIf="
+        connectedComponent.type == 'showClassmateWork' &&
+        getConnectedComponentType(connectedComponent) === 'Graph'
+      "
+    >
       <mat-label i18n>Show Classmate Work Source</mat-label>
-      <mat-select [(ngModel)]="connectedComponent.showClassmateWorkSource"
-          (ngModelChange)="connectedComponentChanged()">
+      <mat-select
+        [(ngModel)]="connectedComponent.showClassmateWorkSource"
+        (ngModelChange)="connectedComponentChanged()"
+      >
         <mat-option value="period" i18n>Period</mat-option>
         <mat-option value="class" i18n>Class</mat-option>
       </mat-select>
     </mat-form-field>
     <div *ngIf="getConnectedComponentType(connectedComponent) === 'Graph'">
-      <mat-checkbox color="primary"
-          [(ngModel)]="connectedComponent.importGraphSettings"
-          (ngModelChange)="connectedComponentChanged()"
-          i18n>
+      <mat-checkbox
+        color="primary"
+        [(ngModel)]="connectedComponent.importGraphSettings"
+        (ngModelChange)="connectedComponentChanged()"
+        i18n
+      >
         Import Graph Settings
       </mat-checkbox>
     </div>
-    <div *ngIf="getConnectedComponentType(connectedComponent) === 'Table'"
-        fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-      <mat-checkbox color="primary"
-          [(ngModel)]="connectedComponent.skipFirstRow"
-          (ngModelChange)="connectedComponentChanged()"
-          i18n>
+    <div
+      *ngIf="getConnectedComponentType(connectedComponent) === 'Table'"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="20px"
+    >
+      <mat-checkbox
+        color="primary"
+        [(ngModel)]="connectedComponent.skipFirstRow"
+        (ngModelChange)="connectedComponentChanged()"
+        i18n
+      >
         Skip First Row
       </mat-checkbox>
       <mat-form-field>
         <mat-label i18n>X Column</mat-label>
-        <input matInput
-            type="number"
-            [(ngModel)]="connectedComponent.xColumn"
-            (ngModelChange)="connectedComponentChanged()"/>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="connectedComponent.xColumn"
+          (ngModelChange)="connectedComponentChanged()"
+        />
       </mat-form-field>
       <mat-form-field>
         <mat-label i18n>Y Column</mat-label>
-        <input matInput
-            type="number"
-            [(ngModel)]="connectedComponent.yColumn"
-            (ngModelChange)="connectedComponentChanged()"/>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="connectedComponent.yColumn"
+          (ngModelChange)="connectedComponentChanged()"
+        />
       </mat-form-field>
     </div>
     <div *ngIf="getConnectedComponentType(connectedComponent) === 'Embedded'">
       <div fxLayout="column" fxLayoutGap="10px">
-        <mat-checkbox color="primary"
-            [(ngModel)]="connectedComponent.showXPlotLineOnLatestPoint"
-            (ngModelChange)="connectedComponentChanged()"
-            i18n>
+        <mat-checkbox
+          color="primary"
+          [(ngModel)]="connectedComponent.showXPlotLineOnLatestPoint"
+          (ngModelChange)="connectedComponentChanged()"
+          i18n
+        >
           Show X Plot Line On Latest Point
         </mat-checkbox>
-        <mat-checkbox color="primary"
-            [(ngModel)]="connectedComponent.highlightLatestPoint"
-            (ngModelChange)="connectedComponentChanged()"
-            i18n>
+        <mat-checkbox
+          color="primary"
+          [(ngModel)]="connectedComponent.highlightLatestPoint"
+          (ngModelChange)="connectedComponentChanged()"
+          i18n
+        >
           Highlight Latest Point
         </mat-checkbox>
       </div>
       <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
         <label i18n>Series Numbers</label>
-        <button mat-raised-button
-            color="primary"
-            (click)="addConnectedComponentSeriesNumber(connectedComponent)"
-            matTooltip="Add Series Number"
-            matTooltipPosition="above"
-            i18n-matTooltip>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addConnectedComponentSeriesNumber(connectedComponent)"
+          matTooltip="Add Series Number"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div *ngFor="let seriesNumber of connectedComponent.seriesNumbers; let seriesIndex = index; trackBy: customTrackBy"
-          fxLayoutGap="20px">
+      <div
+        *ngFor="
+          let seriesNumber of connectedComponent.seriesNumbers;
+          let seriesIndex = index;
+          trackBy: customTrackBy
+        "
+        fxLayoutGap="20px"
+      >
         <mat-form-field>
           <mat-label i18n>Series Number</mat-label>
-          <input matInput
-              type="number"
-              [(ngModel)]="connectedComponent.seriesNumbers[seriesIndex]"
-              (ngModelChange)="connectedComponentSeriesNumberChanged()"/>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="connectedComponent.seriesNumbers[seriesIndex]"
+            (ngModelChange)="connectedComponentSeriesNumberChanged()"
+          />
         </mat-form-field>
-        <button mat-raised-button
-            color="primary"
-            (click)="deleteConnectedComponentSeriesNumber(connectedComponent, seriesIndex)"
-            matTooltip="Delete Series Number"
-            matTooltipPosition="above"
-            i18n-matTooltip>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="deleteConnectedComponentSeriesNumber(connectedComponent, seriesIndex)"
+          matTooltip="Delete Series Number"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
           <mat-icon>delete</mat-icon>
         </button>
       </div>
     </div>
     <div *ngIf="canConnectedComponentTypeImportWorkAsBackground(connectedComponent)">
       <mat-checkbox
-          [(ngModel)]="connectedComponent.importWorkAsBackground"
-          (ngModelChange)="connectedComponentChanged()"
-          [disabled]="true"
-          i18n>
+        [(ngModel)]="connectedComponent.importWorkAsBackground"
+        (ngModelChange)="connectedComponentChanged()"
+        [disabled]="true"
+        i18n
+      >
         Import Work As Background
       </mat-checkbox>
     </div>
     <span fxFlex></span>
     <edit-connected-component-delete-button
-        [connectedComponentIndex]="connectedComponentIndex"
-        (connectedComponentChange)="deleteConnectedComponent(index)">
+      [connectedComponentIndex]="connectedComponentIndex"
+      (connectedComponentChange)="deleteConnectedComponent(index)"
+    >
     </edit-connected-component-delete-button>
   </div>
 </div>

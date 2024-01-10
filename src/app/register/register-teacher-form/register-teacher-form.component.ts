@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Teacher } from '../../domain/teacher';
 import { TeacherService } from '../../teacher/teacher.service';
@@ -7,46 +7,21 @@ import { UtilService } from '../../services/util.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { PasswordService } from '../../services/password.service';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
+import { ConfigService } from '../../services/config.service';
+import { SchoolLevel, schoolLevels } from '../../domain/profile.constants';
 
 @Component({
-  selector: 'app-register-teacher-form',
+  selector: 'register-teacher-form',
   templateUrl: './register-teacher-form.component.html',
   styleUrls: ['./register-teacher-form.component.scss']
 })
 export class RegisterTeacherFormComponent extends RegisterUserFormComponent implements OnInit {
-  teacherUser: Teacher = new Teacher();
-  schoolLevels: any[] = [
-    { code: 'ELEMENTARY_SCHOOL', label: $localize`Elementary School` },
-    { code: 'MIDDLE_SCHOOL', label: $localize`Middle School` },
-    { code: 'HIGH_SCHOOL', label: $localize`High School` },
-    { code: 'COLLEGE', label: $localize`College` },
-    { code: 'OTHER', label: $localize`Other` }
-  ];
-  passwordsFormGroup = this.fb.group(
-    {
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(this.passwordService.minLength),
-          Validators.pattern(this.passwordService.pattern)
-        ]
-      ],
-      confirmPassword: ['', [Validators.required]]
-    },
-    { validator: this.passwordMatchValidator }
-  );
   createTeacherAccountFormGroup: FormGroup = this.fb.group(
     {
-      firstName: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^(?![ -])[a-zA-Z -]+(?<![ -])$')
-      ]),
-      lastName: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^(?![ -])[a-zA-Z -]+(?<![ -])$')
-      ]),
+      firstName: new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]),
+      lastName: new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       city: new FormControl('', [Validators.required]),
       state: new FormControl('', [Validators.required]),
@@ -58,24 +33,30 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     },
     { validator: this.agreeCheckboxValidator }
   );
+  isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
   isSubmitted = false;
+  passwordsFormGroup = this.fb.group({});
   processing: boolean = false;
+  schoolLevels: SchoolLevel[] = schoolLevels;
+  user: Teacher = new Teacher();
 
   constructor(
-    private fb: FormBuilder,
-    private passwordService: PasswordService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private configService: ConfigService,
+    protected fb: FormBuilder,
+    private recaptchaV3Service: ReCaptchaV3Service,
     private router: Router,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
+    protected snackBar: MatSnackBar,
     private teacherService: TeacherService,
     private utilService: UtilService
   ) {
-    super();
+    super(fb, snackBar);
   }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.teacherUser.googleUserId = params['gID'];
+      this.user.googleUserId = params['gID'];
       if (!this.isUsingGoogleId()) {
         this.createTeacherAccountFormGroup.addControl('passwords', this.passwordsFormGroup);
       }
@@ -88,25 +69,29 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     });
   }
 
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
+  }
+
   private isUsingGoogleId(): boolean {
-    return this.teacherUser.googleUserId != null;
+    return this.user.googleUserId != null;
   }
 
   private setControlFieldValue(name: string, value: string): void {
     this.createTeacherAccountFormGroup.controls[name].setValue(value);
   }
 
-  createAccount(): void {
+  async createAccount() {
     this.isSubmitted = true;
     if (this.createTeacherAccountFormGroup.valid) {
       this.processing = true;
-      this.populateTeacherUser();
-      this.teacherService.registerTeacherAccount(this.teacherUser).subscribe(
+      await this.populateTeacherUser();
+      this.teacherService.registerTeacherAccount(this.user).subscribe(
         (response: any) => {
           this.createAccountSuccess(response);
         },
         (response: HttpErrorResponse) => {
-          this.createAccountError(response.error);
+          this.handleCreateAccountError(response.error, this.user);
         }
       );
     }
@@ -120,48 +105,25 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     this.processing = false;
   }
 
-  private createAccountError(error: any): void {
-    const formError: any = {};
-    switch (error.messageCode) {
-      case 'invalidPasswordLength':
-        formError.minlength = true;
-        this.passwordsFormGroup.get('password').setErrors(formError);
-        break;
-      case 'invalidPasswordPattern':
-        formError.pattern = true;
-        this.passwordsFormGroup.get('password').setErrors(formError);
-        break;
-      default:
-        this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.messageCode));
-    }
-    this.processing = false;
-  }
-
-  private populateTeacherUser(): void {
+  private async populateTeacherUser() {
     for (let key of Object.keys(this.createTeacherAccountFormGroup.controls)) {
-      this.teacherUser[key] = this.createTeacherAccountFormGroup.get(key).value;
+      this.user[key] = this.createTeacherAccountFormGroup.get(key).value;
+    }
+    if (this.isRecaptchaEnabled) {
+      const token = await this.recaptchaV3Service.execute('importantAction').toPromise();
+      this.user['token'] = token;
     }
     if (!this.isUsingGoogleId()) {
-      this.teacherUser['password'] = this.getPassword();
-      delete this.teacherUser['passwords'];
-      delete this.teacherUser['googleUserId'];
+      this.user['password'] = this.getPassword();
+      delete this.user['passwords'];
+      delete this.user['googleUserId'];
     }
   }
 
   private getPassword(): string {
-    return this.passwordsFormGroup.controls['password'].value;
-  }
-
-  private passwordMatchValidator(passwordsFormGroup: FormGroup): any {
-    const password = passwordsFormGroup.get('password').value;
-    const confirmPassword = passwordsFormGroup.get('confirmPassword').value;
-    if (password == confirmPassword) {
-      return null;
-    } else {
-      const error = { passwordDoesNotMatch: true };
-      passwordsFormGroup.controls['confirmPassword'].setErrors(error);
-      return error;
-    }
+    return this.passwordsFormGroup.controls[
+      NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME
+    ].value;
   }
 
   private agreeCheckboxValidator(createTeacherAccountFormGroup: FormGroup): any {

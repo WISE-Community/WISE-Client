@@ -13,10 +13,10 @@ export class SessionService {
   private showWarningInterval: number;
   private checkMouseEventInterval: number;
   private lastActivityTimestamp: number;
-  private exitSource: Subject<any> = new Subject<any>();
-  public exit$: Observable<any> = this.exitSource.asObservable();
-  private showSessionWarningSource: Subject<any> = new Subject<any>();
-  public showSessionWarning$: Observable<any> = this.showSessionWarningSource.asObservable();
+  private exitSource: Subject<void> = new Subject<void>();
+  public exit$: Observable<void> = this.exitSource.asObservable();
+  private showSessionWarningSource: Subject<void> = new Subject<void>();
+  public showSessionWarning$: Observable<void> = this.showSessionWarningSource.asObservable();
   private logOutSource: Subject<void> = new Subject<void>();
   public logOut$ = this.logOutSource.asObservable();
 
@@ -50,6 +50,7 @@ export class SessionService {
   }
 
   logOut() {
+    this.broadcastExit();
     this.http.get(this.configService.getSessionLogOutURL()).subscribe(() => {
       window.location.href = '/';
     });

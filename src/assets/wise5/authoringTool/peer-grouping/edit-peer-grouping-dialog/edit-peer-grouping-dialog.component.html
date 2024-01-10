@@ -1,4 +1,4 @@
-<h3 mat-dialog-title i18n>Edit Peer Grouping</h3>
+<h2 mat-dialog-title i18n>Edit Peer Grouping</h2>
 <mat-dialog-content class="dialog-content-scroll">
   <mat-form-field>
     <mat-label i18n>Grouping Name</mat-label>
@@ -14,16 +14,13 @@
       </mat-select>
     </mat-form-field>
     <ng-container *ngIf="logicType === 'differentIdeas' || logicType === 'differentKIScores'">
-      <edit-connected-component-node-select
-          [connectedComponent]="referenceComponent"
-          (connectedComponentChange)="referenceComponentNodeIdChanged($event)">
-      </edit-connected-component-node-select>
-      <edit-connected-component-component-select
-          [connectedComponent]="referenceComponent"
-          [allowedConnectedComponentTypes]="allowedReferenceComponentTypes">
-      </edit-connected-component-component-select>
+      <select-step-and-component
+        [referenceComponent]="referenceComponent"
+        [allowedComponentTypes]="allowedReferenceComponentTypes"
+      >
+      </select-step-and-component>
     </ng-container>
-    <ng-container *ngIf="logicType === 'differentKIScores'">
+    <ng-container *ngIf="logicTypesWithModes.includes(logicType)">
       <mat-form-field>
         <mat-label i18n>Mode</mat-label>
         <mat-select [(ngModel)]="mode">
@@ -39,28 +36,29 @@
   <div>
     <mat-form-field>
       <mat-label i18n>Teams Per Group</mat-label>
-      <input matInput
-          [(ngModel)]="peerGrouping.maxMembershipCount"
-          type="number" />
+      <input matInput [(ngModel)]="peerGrouping.maxMembershipCount" type="number" />
     </mat-form-field>
   </div>
   <div class="mat-small info">
     <ng-container *ngIf="stepsUsedIn.length > 0">
       <span i18n>Used in </span>
       <span *ngFor="let stepUsedIn of stepsUsedIn; last as isLast">
-        {{ stepUsedIn }}<span *ngIf="!isLast">, </span>
-      </span>.
+        {{ stepUsedIn }}<span *ngIf="!isLast">, </span> </span
+      >.
     </ng-container>
     <span *ngIf="stepsUsedIn.length === 0" i18n>Not used in any steps.</span>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-flat-button
-      color="warn"
-      [disabled]="stepsUsedIn.length > 0"
-      (click)="delete()">
-    <span [matTooltip]="stepsUsedIn.length > 0 ? 'You are not allowed to delete a Peer Grouping that is being used' : ''"
-        i18n>
+  <button mat-flat-button color="warn" [disabled]="stepsUsedIn.length > 0" (click)="delete()">
+    <span
+      [matTooltip]="
+        stepsUsedIn.length > 0
+          ? 'You are not allowed to delete a Peer Grouping that is being used'
+          : ''
+      "
+      i18n
+    >
       Delete
     </span>
   </button>

@@ -1,16 +1,22 @@
 <mat-form-field appearance="fill" class="select-period-form-field">
-  <mat-select [(value)]="selectedPeriodId"
-    (selectionChange)="currentPeriodChanged()">
-    <mat-select-trigger>{{selectedPeriodText}}</mat-select-trigger>
+  <mat-select
+    [(value)]="selectedPeriodId"
+    (selectionChange)="currentPeriodChanged()"
+    panelWidth="null"
+    hideSingleSelectionIndicator="true"
+  >
+    <mat-select-trigger>{{ selectedPeriodText }}</mat-select-trigger>
     <mat-option *ngFor="let period of periods" [value]="period.periodId">
       <span *ngIf="period.periodId === -1" i18n>All Periods</span>
-      <span *ngIf="period.periodId != -1" i18n>Period: {{period.periodName}}</span>
+      <span *ngIf="period.periodId != -1" i18n>Period: {{ period.periodName }}</span>
       <span class="text-secondary">
         (<ng-container [ngPlural]="period.numWorkgroupsInPeriod">
           <ng-template ngPluralCase="=0" i18n>0 teams</ng-template>
           <ng-template ngPluralCase="one" i18n>1 team</ng-template>
-          <ng-template ngPluralCase="other" i18n>{{period.numWorkgroupsInPeriod}} teams</ng-template>
-        </ng-container>)
+          <ng-template ngPluralCase="other" i18n
+            >{{ period.numWorkgroupsInPeriod }} teams</ng-template
+          > </ng-container
+        >)
       </span>
     </mat-option>
   </mat-select>

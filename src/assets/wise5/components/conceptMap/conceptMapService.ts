@@ -7,14 +7,13 @@ import { StudentAssetService } from '../../services/studentAssetService';
 import ConceptMapNode from './conceptMapNode';
 import ConceptMapLink from './conceptMapLink';
 import { Injectable } from '@angular/core';
-import { UtilService } from '../../services/utilService';
+import { convertToPNGFile } from '../../common/canvas/canvas';
 
 @Injectable()
 export class ConceptMapService extends ComponentService {
   constructor(
     private ConfigService: ConfigService,
-    private StudentAssetService: StudentAssetService,
-    protected UtilService: UtilService
+    private StudentAssetService: StudentAssetService
   ) {
     super();
   }
@@ -798,12 +797,6 @@ export class ConceptMapService extends ComponentService {
           const url = domURL.createObjectURL(svg);
           const image = new Image();
 
-          /*
-           * set the UtilService in a local variable so we can access it
-           * in the onload callback function
-           */
-          const thisUtilService = this.UtilService;
-
           // the function that is called after the image is fully loaded
           image.onload = (event) => {
             // get the image that was loaded
@@ -814,14 +807,8 @@ export class ConceptMapService extends ComponentService {
             myCanvas.height = image.height;
             ctx.drawImage(image, 0, 0);
 
-            // get the canvas as a Base64 string
-            const base64Image = myCanvas.toDataURL('image/png');
-
-            // get the image object
-            const imageObject = thisUtilService.getImageObjectFromBase64String(base64Image);
-
-            // create a student asset image
-            this.StudentAssetService.uploadAsset(imageObject).then((unreferencedAsset) => {
+            const pngFile = convertToPNGFile(myCanvas);
+            this.StudentAssetService.uploadAsset(pngFile).then((unreferencedAsset) => {
               /*
                * make a copy of the unreferenced asset so that we
                * get a referenced asset
@@ -1170,14 +1157,8 @@ export class ConceptMapService extends ComponentService {
             myCanvas.height = image.height;
             ctx.drawImage(image, 0, 0);
 
-            // get the canvas as a Base64 string
-            const base64Image = myCanvas.toDataURL('image/png');
-
-            // get the image object
-            const imageObject = this.UtilService.getImageObjectFromBase64String(base64Image);
-
-            // add the image to the student assets
-            this.StudentAssetService.uploadAsset(imageObject).then((asset) => {
+            const pngFile = convertToPNGFile(myCanvas);
+            this.StudentAssetService.uploadAsset(pngFile).then((asset) => {
               resolve(asset);
             });
           };

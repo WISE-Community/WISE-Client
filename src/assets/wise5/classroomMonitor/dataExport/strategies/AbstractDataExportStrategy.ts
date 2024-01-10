@@ -1,9 +1,9 @@
+import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { DataExportService } from '../../../services/dataExportService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { DataExportComponent } from '../data-export/data-export.component';
 import { DataExportContext } from '../DataExportContext';
 import { DataExportStrategy } from './DataExportStrategy';
@@ -15,8 +15,8 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
   configService: ConfigService;
   dataExportService: DataExportService;
   projectService: TeacherProjectService;
+  protected allOrLatest: 'all' | 'latest' = 'all';
   teacherDataService: TeacherDataService;
-  utilService: UtilService;
 
   setDataExportContext(context: DataExportContext) {
     this.context = context;
@@ -25,8 +25,7 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
     this.configService = context.controller.configService;
     this.dataExportService = context.controller.dataExportService;
     this.projectService = context.controller.projectService;
-    this.teacherDataService = context.controller.teacherDataService;
-    this.utilService = context.controller.utilService;
+    this.teacherDataService = context.controller.dataService;
   }
 
   abstract export();
@@ -78,5 +77,57 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
       }
     }
     return selectedNodesMap;
+  }
+
+  setRunInfo(row: any[], columnNameToNumber: any, componentState: any): void {
+    const userInfo = this.configService.getUserInfoByWorkgroupId(componentState.workgroupId);
+    if (userInfo != null) {
+      this.setColumnValue(row, columnNameToNumber, 'Class Period', userInfo.periodName);
+    }
+    this.setColumnValue(row, columnNameToNumber, 'Project ID', this.configService.getProjectId());
+    this.setColumnValue(row, columnNameToNumber, 'Project Name', this.configService.getRunName());
+    this.setColumnValue(row, columnNameToNumber, 'Run ID', this.configService.getRunId());
+    this.setColumnValue(
+      row,
+      columnNameToNumber,
+      'Start Date',
+      millisecondsToDateTime(this.configService.getStartDate())
+    );
+    const endDate = this.configService.getEndDate();
+    if (endDate != null) {
+      this.setColumnValue(row, columnNameToNumber, 'End Date', millisecondsToDateTime(endDate));
+    }
+  }
+
+  populateColumnNameMappings(columnNames: string[], columnNameToNumber: any): void {
+    for (let c = 0; c < columnNames.length; c++) {
+      columnNameToNumber[columnNames[c]] = c;
+    }
+  }
+
+  setColumnValue(row: any[], columnNameToNumber: any, columnName: string, value: any): void {
+    row[columnNameToNumber[columnName]] = value;
+  }
+
+  insertColumnBeforeResponseColumn(headerRow: string[], columnName: string): void {
+    headerRow.splice(headerRow.indexOf('Response'), 0, columnName);
+  }
+
+  insertColumnAtEnd(headerRow: string[], columnName: string): void {
+    headerRow.push(columnName);
+  }
+
+  generateExportFileName(
+    nodeId: string,
+    componentId: string,
+    componentTypeWithUnderscore: string
+  ): string {
+    const runId = this.configService.getRunId();
+    const stepNumber = this.projectService.getNodePositionById(nodeId);
+    const componentNumber = this.projectService.getComponentPosition(nodeId, componentId) + 1;
+    return (
+      `${runId}_step_${stepNumber}_component_` +
+      `${componentNumber}_${componentTypeWithUnderscore}_work.csv`
+    );
   }
 }

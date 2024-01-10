@@ -1,7 +1,14 @@
-<peer-chat-message *ngFor="let peerChatMessage of peerChatMessages"
+<ng-container *ngFor="let peerChatMessage of peerChatMessages">
+  <peer-chat-message
+    *ngIf="isGrading || !peerChatMessage.isDeleted"
     [avatarColor]="workgroupInfos[peerChatMessage.workgroupId].avatarColor"
     [displayNames]="workgroupInfos[peerChatMessage.workgroupId].displayNames"
     [isTeacher]="workgroupInfos[peerChatMessage.workgroupId].isTeacher"
     [peerChatMessage]="peerChatMessage"
-    [myWorkgroupId]="myWorkgroupId">
-</peer-chat-message>
+    [myWorkgroupId]="myWorkgroupId"
+    [isGrading]="isGrading"
+    (deleteClickedEvent)="deleteClicked($event)"
+    (undeleteClickedEvent)="undeleteClicked($event)"
+  >
+  </peer-chat-message>
+</ng-container>

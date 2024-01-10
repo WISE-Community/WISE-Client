@@ -1,18 +1,22 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
 import { OpenResponseContent } from '../../openResponse/OpenResponseContent';
-import { QuestionBank } from './QuestionBank';
 import { Component as WISEComponent } from '../../../common/Component';
 import { PeerGroupStudentData } from '../../../../../app/domain/peerGroupStudentData';
 import { CRaterResponse } from '../../common/cRater/CRaterResponse';
-import { FeedbackRuleEvaluator } from '../../common/feedbackRule/FeedbackRuleEvaluator';
+import { FeedbackRuleEvaluatorMultipleStudents } from '../../common/feedbackRule/FeedbackRuleEvaluatorMultipleStudents';
 import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
 import { QuestionBankRule } from './QuestionBankRule';
 import { concatMap, map } from 'rxjs/operators';
 import { PeerGroup } from '../PeerGroup';
 import { QuestionBankContent } from './QuestionBankContent';
+import { copy } from '../../../common/object/object';
+import { Question } from './Question';
+import { QuestionBankService } from './questionBank.service';
+import { ConstraintService } from '../../../services/constraintService';
+import { ConfigService } from '../../../services/configService';
 
 @Component({
   selector: 'peer-chat-question-bank',
@@ -21,61 +25,115 @@ import { QuestionBankContent } from './QuestionBankContent';
 })
 export class PeerChatQuestionBankComponent implements OnInit {
   @Input() content: QuestionBankContent;
-  @Input() displayedQuestionBankRule: QuestionBankRule;
-  @Output() displayedQuestionBankRuleChange = new EventEmitter<QuestionBankRule>();
-  questions: string[];
+  @Input() displayedQuestionBankRules: QuestionBankRule[];
+  @Output() displayedQuestionBankRulesChange = new EventEmitter<QuestionBankRule[]>();
+  @Input() questionIdsUsed: string[] = [];
+  questions: (string | Question)[];
+  @Output() useQuestionEvent = new EventEmitter<string>();
 
-  constructor(private peerGroupService: PeerGroupService, private projectService: ProjectService) {}
+  constructor(
+    private configService: ConfigService,
+    private constraintService: ConstraintService,
+    private peerGroupService: PeerGroupService,
+    private projectService: ProjectService,
+    private questionBankService: QuestionBankService
+  ) {}
 
   ngOnInit(): void {
-    if (this.displayedQuestionBankRule != null) {
-      this.questions = this.displayedQuestionBankRule.questions;
-    } else {
-      const referenceComponent = this.getReferenceComponent(this.content.questionBank);
-      if (referenceComponent.content.type === 'OpenResponse') {
-        this.evaluate(referenceComponent);
+    if (this.displayedQuestionBankRules == null) {
+      const referenceComponent = this.projectService.getReferenceComponent(
+        this.content.questionBank
+      );
+      if (
+        this.content.questionBank.isPeerGroupingTagSpecified() &&
+        ['MultipleChoice', 'OpenResponse'].includes(referenceComponent.content.type)
+      ) {
+        this.evaluatePeerGroup(referenceComponent);
       }
+    } else {
+      this.setQuestions(this.displayedQuestionBankRules);
     }
+    this.subscribeToQuestionUsed();
   }
 
-  private getReferenceComponent(questionBank: QuestionBank): WISEComponent {
-    const nodeId = questionBank.getReferenceNodeId();
-    const componentId = questionBank.getReferenceComponentId();
-    return new WISEComponent(this.projectService.getComponent(nodeId, componentId), nodeId);
-  }
-
-  private evaluate(referenceComponent: WISEComponent): void {
-    if (this.content.questionBank.isPeerGroupingTagSpecified()) {
-      this.evaluatePeerGroup(referenceComponent);
-    }
+  private subscribeToQuestionUsed(): void {
+    this.questionBankService.questionUsed$.subscribe((question: Question) => {
+      this.questionIdsUsed.push(question.id);
+    });
   }
 
   private evaluatePeerGroup(referenceComponent: WISEComponent): void {
-    this.getPeerGroupData(
+    const peerGroupRequest = this.peerGroupService.retrievePeerGroup(
+      this.content.questionBank.getPeerGroupingTag()
+    );
+    const peerGroupDataRequest = this.getPeerGroupData(
       this.content.questionBank.getPeerGroupingTag(),
       this.content.nodeId,
       this.content.componentId
-    ).subscribe((peerGroupStudentData: PeerGroupStudentData[]) => {
-      const cRaterResponses = peerGroupStudentData.map((peerMemberData: PeerGroupStudentData) => {
-        return new CRaterResponse({
-          ideas: peerMemberData.annotation.data.ideas,
-          scores: peerMemberData.annotation.data.scores,
-          submitCounter: peerMemberData.studentWork.studentData.submitCounter
-        });
-      });
-      const feedbackRuleEvaluator = new FeedbackRuleEvaluator(
-        new FeedbackRuleComponent(
-          this.content.questionBank.getRules(),
-          (referenceComponent.content as OpenResponseContent).maxSubmitCount,
-          false
-        )
+    );
+    forkJoin([peerGroupRequest, peerGroupDataRequest]).subscribe((response) => {
+      const peerGroup = response[0];
+      const peerGroupStudentData = response[1];
+      const questionBankRules = this.chooseQuestionBankRulesToDisplay(
+        referenceComponent,
+        peerGroup,
+        peerGroupStudentData
       );
-      const feedbackRule: QuestionBankRule = feedbackRuleEvaluator.getFeedbackRule(
-        cRaterResponses
-      ) as QuestionBankRule;
-      this.questions = feedbackRule.questions;
-      this.displayedQuestionBankRuleChange.emit(feedbackRule);
+      this.displayedQuestionBankRules = questionBankRules;
+      this.displayedQuestionBankRulesChange.emit(questionBankRules);
+      this.setQuestions(questionBankRules);
     });
+  }
+
+  private chooseQuestionBankRulesToDisplay(
+    referenceComponent: WISEComponent,
+    peerGroup: PeerGroup,
+    peerGroupStudentData: PeerGroupStudentData[]
+  ): QuestionBankRule[] {
+    const responses = peerGroupStudentData.map((peerMemberData: PeerGroupStudentData) => {
+      return new CRaterResponse({
+        ideas: peerMemberData.annotation?.data.ideas,
+        scores: peerMemberData.annotation?.data.scores,
+        submitCounter: peerMemberData.studentWork.studentData.submitCounter
+      });
+    });
+    const feedbackRuleEvaluator = new FeedbackRuleEvaluatorMultipleStudents(
+      new FeedbackRuleComponent(
+        this.content.questionBank.getRules(),
+        (referenceComponent.content as OpenResponseContent).maxSubmitCount,
+        false
+      ),
+      this.configService,
+      this.constraintService
+    );
+    feedbackRuleEvaluator.setReferenceComponent(referenceComponent);
+    feedbackRuleEvaluator.setPeerGroup(peerGroup);
+    return this.filterQuestions(
+      feedbackRuleEvaluator.getFeedbackRules(responses) as QuestionBankRule[],
+      this.content.questionBank.maxQuestionsToShow
+    );
+  }
+
+  private filterQuestions(
+    questionBankRules: QuestionBankRule[],
+    maxQuestionsToShow: number
+  ): QuestionBankRule[] {
+    const rules = copy(questionBankRules);
+    const filteredRules: QuestionBankRule[] = copy(rules);
+    filteredRules.forEach((rule) => (rule.questions = []));
+    let numAdded = 0;
+    let ruleIndex = 0;
+    const totalNumQuestions = rules.map((rule) => rule.questions).flat().length;
+    const maxQuestions = maxQuestionsToShow ?? totalNumQuestions;
+    while (numAdded < maxQuestions && numAdded != totalNumQuestions) {
+      if (rules[ruleIndex].questions.length > 0) {
+        const question = rules[ruleIndex].questions.shift();
+        filteredRules[ruleIndex].questions.push(question);
+        numAdded++;
+      }
+      ruleIndex = (ruleIndex + 1) % rules.length;
+    }
+    return filteredRules.filter((rule) => rule.questions.length > 0);
   }
 
   private getPeerGroupData(
@@ -94,5 +152,13 @@ export class PeerChatQuestionBankComponent implements OnInit {
           );
       })
     );
+  }
+
+  private setQuestions(rules: QuestionBankRule[]): void {
+    this.questions = rules.flatMap((rule) => rule.questions);
+  }
+
+  protected useQuestion(question: string): void {
+    this.useQuestionEvent.emit(question);
   }
 }

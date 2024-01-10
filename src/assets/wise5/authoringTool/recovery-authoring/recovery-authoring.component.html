@@ -1,0 +1,60 @@
+<div class="body">
+  <h4 class="view-title" i18n>Recovery View</h4>
+  <div class="save-bar" fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayoutGap="20px">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="save()"
+        [disabled]="!saveButtonEnabled"
+        i18n
+      >
+        Save
+      </button>
+      <button mat-raised-button color="primary" routerLink="../../unit/{{ unitId }}" i18n>
+        Go to Authoring View
+      </button>
+    </div>
+    <div fxLayout="row">
+      <div *ngIf="jsonValid" class="valid" i18n>JSON Valid</div>
+      <div *ngIf="!jsonValid" class="invalid" i18n>JSON Invalid</div>
+      <div *ngIf="globalMessage != null">
+        <div class="component__actions__info md-caption global-message">
+          {{ globalMessage.text }} {{ globalMessage.time | date: 'medium' }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="warning-div" i18n>
+    Warning: Modifying the JSON may break the project. Please make a backup copy of the JSON before
+    you modify it.
+  </div>
+  <div *ngIf="badNodes.length > 0" class="potential-problems-div">
+    <div class="potential-problems-header" i18n>Potential Problems</div>
+    <div *ngFor="let badNode of badNodes" class="bad-node">
+      <div class="node-id">{{ badNode.nodeId }}</div>
+      <div *ngIf="badNode.referencedIdsThatDoNotExist.length > 0" i18n>
+        This group references the node ID but the node does not exist:
+        {{ badNode.referencedIdsThatDoNotExist }}
+      </div>
+      <div *ngIf="badNode.referencedIdsThatAreDuplicated.length > 0" i18n>
+        This group references the same node ID multiple times:
+        {{ badNode.referencedIdsThatAreDuplicated }}
+      </div>
+      <div *ngIf="badNode.hasTransitionToNull" i18n>This node has a transition to null</div>
+    </div>
+  </div>
+  <div>
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label i18n>Edit Unit JSON</mat-label>
+      <textarea
+        class="mat-body-2"
+        matInput
+        cdkTextareaAutosize
+        [(ngModel)]="projectJSONString"
+        (ngModelChange)="projectJSONChanged()"
+      >
+      </textarea>
+    </mat-form-field>
+  </div>
+</div>

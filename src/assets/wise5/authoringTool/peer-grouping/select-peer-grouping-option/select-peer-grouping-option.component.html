@@ -1,9 +1,10 @@
-<div fxLayoutAlign="space-between start">
+<div class="select-option" fxLayoutAlign="space-between start">
   <mat-radio-button
-      [checked]="selectedPeerGrouping != null && peerGrouping.tag === selectedPeerGrouping.tag"
-      (click)="select()"
-      color="primary">
-    <span class="mat-body-2">{{ peerGrouping.name }}</span>
+    [checked]="selectedPeerGrouping != null && peerGrouping.tag === selectedPeerGrouping.tag"
+    (click)="select()"
+    color="primary"
+  >
+    <span class="mat-subtitle-2">{{ peerGrouping.name }}</span>
   </mat-radio-button>
   <button mat-stroked-button (click)="edit()" i18n>Edit</button>
 </div>
@@ -20,7 +21,8 @@
       <span class="field-label" i18n>Logic: </span><span>{{ peerGroupingLogicName }}</span>
     </div>
     <div>
-      <span class="field-label" i18n>Teams Per Group: </span><span>{{ peerGrouping.maxMembershipCount }}</span>
+      <span class="field-label" i18n>Teams Per Group: </span
+      ><span>{{ peerGrouping.maxMembershipCount }}</span>
     </div>
   </div>
 </div>

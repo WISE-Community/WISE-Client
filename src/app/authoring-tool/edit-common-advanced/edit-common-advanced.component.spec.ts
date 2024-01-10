@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Component } from '../../../assets/wise5/common/Component';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { EditComponentExcludeFromTotalScoreComponent } from '../edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
@@ -20,6 +21,7 @@ import { EditComponentWidthComponent } from '../edit-component-width/edit-compon
 import { EditConnectedComponentsAddButtonComponent } from '../edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsComponent } from '../edit-connected-components/edit-connected-components.component';
 import { EditCommonAdvancedComponent } from './edit-common-advanced.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('EditCommonAdvancedComponent', () => {
   let component: EditCommonAdvancedComponent;
@@ -51,14 +53,15 @@ describe('EditCommonAdvancedComponent', () => {
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent
       ],
-      providers: [TeacherProjectService]
+      providers: [TeacherProjectService],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EditCommonAdvancedComponent);
     component = fixture.componentInstance;
-    component.componentContent = {};
+    component.component = { content: {} } as Component;
     fixture.detectChanges();
   });
 

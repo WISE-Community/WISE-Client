@@ -1,7 +1,7 @@
 @import
-  '~style/abstracts/variables',
-  '~style/abstracts/functions',
-  '~style/abstracts/mixins';
+  'style/abstracts/variables',
+  'style/abstracts/functions',
+  'style/abstracts/mixins';
 
 app-announcement {
   z-index: 3;
@@ -9,6 +9,10 @@ app-announcement {
 
 app-header {
   z-index: 2;
+}
+
+mat-sidenav-container, mat-sidenav-content {
+  overflow: unset;
 }
 
 .to-top {
@@ -20,5 +24,9 @@ app-header {
   @media (min-width: breakpoint('sm.min')) {
     bottom: 32px;
     right: 32px;
+  }
+
+  button {
+    border-radius: 24px;
   }
 }

@@ -1,7 +1,5 @@
-.mat-card {
+.mat-mdc-card {
   margin: 8px;
-  padding-top: 0;
-  padding-bottom: 8px;
 
   &:not([class*=mat-elevation-z]):not(.expanded) {
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.14), 0 2px 2px 0 rgba(0,0,0,.098), 
@@ -9,12 +7,11 @@
   }
 }
 
-.mat-card-content, .mat-card-header {
-  margin: 0 -16px;
+.mat-mdc-card-content, .mat-mdc-card-header {
   padding: 16px;
 }
 
-.mat-card-header {
+.mat-mdc-card-header {
   cursor: pointer;
 
   &:focus, &:hover {
@@ -29,17 +26,16 @@
   }
 }
 
-.mat-card-actions {
-  padding: 8px 16px;
-  margin: 0 -16px;
+.mat-mdc-card-actions {
+  padding: 0 16px;
   border-top: 1px solid #dddddd;
 }
 
-.mat-list {
+.mat-mdc-list {
   padding: 0;
 }
 
-.mat-list-base {
+.mat-mdc-list-base {
   padding-top: 0;
 }
 
@@ -50,6 +46,7 @@
 .group-icon {
   height: auto;
   width: auto;
+  margin-bottom: 0;
 }
 
 .title {
@@ -65,7 +62,7 @@
   width: 48px;
 }
 
-.mat-card .mat-divider-horizontal {
+.mat-mdc-card .mat-divider-horizontal {
   position: relative;
 }
 
@@ -75,13 +72,10 @@
 
 .list-item {
   height: 56px;
+  cursor: pointer;
   &:hover {
     background-color: #f5f5f5;
   }
-}
-
-.title {
-  text-decoration: none !important;
 }
 
 .step-icon {

@@ -1,202 +1,156 @@
+import { Component } from '../../../common/Component';
+import { ConfigService } from '../../../services/configService';
+import { ConstraintService } from '../../../services/constraintService';
 import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
+import { PeerGroup } from '../../peerChat/PeerGroup';
 import { CRaterResponse } from '../cRater/CRaterResponse';
 import { FeedbackRule } from './FeedbackRule';
-import { HasKIScoreTermEvaluator } from './TermEvaluator/HasKIScoreTermEvaluator';
-import { IdeaCountTermEvaluator } from './TermEvaluator/IdeaCountTermEvaluator';
-import { IdeaTermEvaluator } from './TermEvaluator/IdeaTermEvaluator';
+import { FeedbackRuleExpression } from './FeedbackRuleExpression';
+import { Response } from './Response';
 import { TermEvaluator } from './TermEvaluator/TermEvaluator';
+import { TermEvaluatorFactory } from './TermEvaluator/TermEvaluatorFactory';
 
-export class FeedbackRuleEvaluator {
+export class FeedbackRuleEvaluator<T extends Response[]> {
   defaultFeedback = $localize`Thanks for submitting your response.`;
+  protected factory;
+  protected referenceComponent: Component;
+  protected peerGroup: PeerGroup;
 
-  constructor(private component: FeedbackRuleComponent) {}
-
-  getFeedbackRule(response: CRaterResponse | CRaterResponse[]): FeedbackRule {
-    for (const feedbackRule of this.component.getFeedbackRules()) {
-      if (this.satisfiesRule(response, Object.assign(new FeedbackRule(), feedbackRule))) {
-        return feedbackRule;
-      }
-    }
-    return this.getDefaultRule(this.component.getFeedbackRules());
+  constructor(
+    protected component: FeedbackRuleComponent,
+    protected configService: ConfigService,
+    protected constraintService: ConstraintService
+  ) {
+    this.factory = new TermEvaluatorFactory(configService, constraintService);
   }
 
-  private satisfiesRule(
-    response: CRaterResponse | CRaterResponse[],
-    feedbackRule: FeedbackRule
-  ): boolean {
-    return this.isSpecialRule(feedbackRule)
-      ? this.satisfiesSpecialRule(response, feedbackRule)
-      : this.satisfiesSpecificRule(response, feedbackRule);
-  }
-
-  private satisfiesSpecialRule(
-    response: CRaterResponse | CRaterResponse[],
-    feedbackRule: FeedbackRule
-  ): boolean {
+  getFeedbackRule(responses: T): FeedbackRule {
     return (
-      this.satisfiesNonScorableRule(response, feedbackRule) ||
-      this.satisfiesFinalSubmitRule(response, feedbackRule) ||
-      this.satisfiesSecondToLastSubmitRule(response, feedbackRule)
+      this.component
+        .getFeedbackRules()
+        .find((rule) => this.satisfiesRule(responses, Object.assign(new FeedbackRule(), rule))) ??
+      this.getDefaultRule(this.component.getFeedbackRules())
     );
   }
 
-  private satisfiesFinalSubmitRule(
-    response: CRaterResponse | CRaterResponse[],
-    feedbackRule: FeedbackRule
-  ): boolean {
+  protected satisfiesRule(responses: T, rule: FeedbackRule): boolean {
+    return FeedbackRule.isSpecialRule(rule)
+      ? this.satisfiesSpecialRule(responses, rule)
+      : this.satisfiesSpecificRule(responses, rule);
+  }
+
+  private satisfiesSpecialRule(responses: T, rule: FeedbackRule): boolean {
     return (
-      this.hasMaxSubmitAndIsFinalSubmitRule(feedbackRule) &&
-      (response instanceof CRaterResponse
-        ? this.component.hasMaxSubmitCountAndUsedAllSubmits(response.submitCounter)
-        : response.some((response: CRaterResponse) => {
-            return this.component.hasMaxSubmitCountAndUsedAllSubmits(response.submitCounter);
-          }))
+      this.satisfiesNonScorableRule(responses, rule) ||
+      this.satisfiesFinalSubmitRule(responses, rule) ||
+      this.satisfiesSecondToLastSubmitRule(responses, rule)
     );
   }
 
-  private hasMaxSubmitAndIsFinalSubmitRule(feedbackRule: FeedbackRule): boolean {
-    return this.component.hasMaxSubmitCount() && FeedbackRule.isFinalSubmitRule(feedbackRule);
-  }
-
-  private satisfiesSecondToLastSubmitRule(
-    response: CRaterResponse | CRaterResponse[],
-    feedbackRule: FeedbackRule
-  ): boolean {
+  protected satisfiesFinalSubmitRule(responses: T, rule: FeedbackRule): boolean {
     return (
-      this.hasMaxSubmitAndIsSecondToLastSubmitRule(feedbackRule) &&
-      (response instanceof CRaterResponse
-        ? this.isSecondToLastSubmit(response.submitCounter)
-        : response.some((response: CRaterResponse) => {
-            return this.isSecondToLastSubmit(response.submitCounter);
-          }))
+      this.hasMaxSubmitAndIsFinalSubmitRule(rule) &&
+      this.component.hasMaxSubmitCountAndUsedAllSubmits(
+        responses[responses.length - 1].submitCounter
+      )
     );
   }
 
-  private hasMaxSubmitAndIsSecondToLastSubmitRule(feedbackRule: FeedbackRule): boolean {
+  protected hasMaxSubmitAndIsFinalSubmitRule(rule: FeedbackRule): boolean {
+    return this.component.hasMaxSubmitCount() && FeedbackRule.isFinalSubmitRule(rule);
+  }
+
+  protected satisfiesSecondToLastSubmitRule(responses: T, rule: FeedbackRule): boolean {
     return (
-      this.component.hasMaxSubmitCount() && FeedbackRule.isSecondToLastSubmitRule(feedbackRule)
+      this.hasMaxSubmitAndIsSecondToLastSubmitRule(rule) &&
+      this.isSecondToLastSubmit(responses[responses.length - 1].submitCounter)
     );
   }
 
-  private isSecondToLastSubmit(submitCounter: number): boolean {
+  protected hasMaxSubmitAndIsSecondToLastSubmitRule(rule: FeedbackRule): boolean {
+    return this.component.hasMaxSubmitCount() && FeedbackRule.isSecondToLastSubmitRule(rule);
+  }
+
+  protected isSecondToLastSubmit(submitCounter: number): boolean {
     return this.component.getNumberOfSubmitsLeft(submitCounter) === 1;
   }
 
-  private satisfiesNonScorableRule(
-    response: CRaterResponse | CRaterResponse[],
-    feedbackRule: FeedbackRule
-  ): boolean {
+  protected satisfiesNonScorableRule(responses: T, rule: FeedbackRule): boolean {
     return (
-      feedbackRule.expression === 'isNonScorable' &&
-      (response instanceof CRaterResponse
-        ? response.isNonScorable()
-        : response.some((response: CRaterResponse) => {
-            return response.isNonScorable();
-          }))
+      rule.expression === 'isNonScorable' &&
+      (responses[responses.length - 1] as CRaterResponse).isNonScorable()
     );
   }
 
-  private isSpecialRule(feedbackRule: FeedbackRule): boolean {
-    return ['isFinalSubmit', 'isSecondToLastSubmit', 'isNonScorable'].includes(
-      feedbackRule.expression
-    );
-  }
-
-  private satisfiesSpecificRule(
-    response: CRaterResponse | CRaterResponse[],
-    feedbackRule: FeedbackRule
-  ): boolean {
-    const postfixExpression = feedbackRule.getPostfixExpression();
+  private satisfiesSpecificRule(responses: T, rule: FeedbackRule): boolean {
     const termStack = [];
-    for (const term of postfixExpression) {
-      if (FeedbackRule.isOperand(term)) {
+    for (const term of rule.getPostfixExpression()) {
+      if (FeedbackRuleExpression.isOperand(term)) {
         termStack.push(term);
       } else {
-        this.evaluateOperator(term, termStack, response);
+        this.evaluateOperator(term, termStack, responses);
       }
     }
     if (termStack.length === 1) {
-      return this.evaluateTerm(termStack.pop(), response);
+      return this.evaluateTerm(termStack.pop(), responses);
     }
     return true;
   }
 
-  private evaluateOperator(
-    operator: string,
-    termStack: string[],
-    response: CRaterResponse | CRaterResponse[]
-  ) {
-    if (this.evaluateOperatorExpression(operator, termStack, response)) {
+  private evaluateOperator(operator: string, termStack: string[], responses: T) {
+    if (this.evaluateOperatorExpression(operator, termStack, responses)) {
       termStack.push('true');
     } else {
       termStack.push('false');
     }
   }
 
-  private evaluateOperatorExpression(
-    operator: string,
-    termStack: string[],
-    response: CRaterResponse | CRaterResponse[]
-  ): boolean {
+  private evaluateOperatorExpression(operator: string, termStack: string[], responses: T): boolean {
     if (['&&', '||'].includes(operator)) {
-      return this.evaluateAndOrExpression(operator, termStack, response);
+      return this.evaluateAndOrExpression(operator, termStack, responses);
     } else {
-      return this.evaluateNotExpression(termStack, response);
+      return this.evaluateNotExpression(termStack, responses);
     }
   }
 
-  private evaluateAndOrExpression(
-    operator: string,
-    termStack: string[],
-    response: CRaterResponse | CRaterResponse[]
-  ): boolean {
+  private evaluateAndOrExpression(operator: string, termStack: string[], responses: T): boolean {
     const term1 = termStack.pop();
     const term2 = termStack.pop();
     return operator === '&&'
-      ? this.evaluateTerm(term1, response) && this.evaluateTerm(term2, response)
-      : this.evaluateTerm(term1, response) || this.evaluateTerm(term2, response);
+      ? this.evaluateTerm(term1, responses) && this.evaluateTerm(term2, responses)
+      : this.evaluateTerm(term1, responses) || this.evaluateTerm(term2, responses);
   }
 
-  private evaluateNotExpression(
-    termStack: string[],
-    response: CRaterResponse | CRaterResponse[]
-  ): boolean {
-    return !this.evaluateTerm(termStack.pop(), response);
+  private evaluateNotExpression(termStack: string[], responses: T): boolean {
+    return !this.evaluateTerm(termStack.pop(), responses);
   }
 
-  private evaluateTerm(term: string, response: CRaterResponse | CRaterResponse[]): boolean {
-    let evaluator: TermEvaluator;
-    if (this.isHasKIScoreTerm(term)) {
-      evaluator = new HasKIScoreTermEvaluator(term);
-    } else if (this.isIdeaCountTerm(term)) {
-      evaluator = new IdeaCountTermEvaluator(term);
-    } else {
-      evaluator = new IdeaTermEvaluator(term);
-    }
-    return response instanceof CRaterResponse
-      ? evaluator.evaluate(response)
-      : response.some((response: CRaterResponse) => {
-          return evaluator.evaluate(response);
-        });
+  protected evaluateTerm(term: string, responses: T): boolean {
+    const evaluator: TermEvaluator = this.factory.getTermEvaluator(term);
+    evaluator.setReferenceComponent(this.referenceComponent);
+    return TermEvaluator.requiresAllResponses(term)
+      ? evaluator.evaluate(responses)
+      : evaluator.evaluate(responses[responses.length - 1]);
   }
 
-  private isHasKIScoreTerm(term: string): boolean {
-    return /hasKIScore\([1-5]\)/.test(term);
-  }
-
-  private isIdeaCountTerm(term: string): boolean {
-    return /ideaCount(MoreThan|Equals|LessThan)\([\d+]\)/.test(term);
-  }
-
-  private getDefaultRule(feedbackRules: FeedbackRule[]): FeedbackRule {
+  protected getDefaultRule(rules: FeedbackRule[]): FeedbackRule {
     return (
-      feedbackRules.find((rule) => FeedbackRule.isDefaultRule(rule)) ||
+      rules.find((rule) => FeedbackRule.isDefaultRule(rule)) ||
       Object.assign(new FeedbackRule(), {
+        id: 'default',
         expression: 'isDefault',
         feedback: this.component.isMultipleFeedbackTextsForSameRuleAllowed()
           ? [this.defaultFeedback]
           : this.defaultFeedback
       })
     );
+  }
+
+  setPeerGroup(peerGroup: PeerGroup): void {
+    this.peerGroup = peerGroup;
+  }
+
+  setReferenceComponent(referenceComponent: Component): void {
+    this.referenceComponent = referenceComponent;
   }
 }

@@ -5,7 +5,9 @@ import SVG from 'svg.js';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
-import { UtilService } from '../../services/utilService';
+import { convertToPNGFile } from '../../common/canvas/canvas';
+import { wordWrap } from '../../common/string/string';
+import { hasConnectedComponent } from '../../common/ComponentContent';
 
 @Injectable()
 export class LabelService extends ComponentService {
@@ -14,10 +16,7 @@ export class LabelService extends ComponentService {
   circleZIndex: number = 2;
   defaultTextBackgroundColor: string = 'blue';
 
-  constructor(
-    private StudentAssetService: StudentAssetService,
-    protected UtilService: UtilService
-  ) {
+  constructor(private StudentAssetService: StudentAssetService) {
     super();
   }
 
@@ -47,7 +46,7 @@ export class LabelService extends ComponentService {
   }
 
   isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
-    if (!this.canEdit(component) && this.UtilService.hasNodeEnteredEvent(nodeEvents)) {
+    if (!this.canEdit(component) && this.hasNodeEnteredEvent(nodeEvents)) {
       return true;
     }
     if (componentStates != null && componentStates.length > 0) {
@@ -81,8 +80,8 @@ export class LabelService extends ComponentService {
    * @param component The component content.
    * @return Whether the student can perform any work on this component.
    */
-  canEdit(component: any) {
-    return !this.UtilService.hasShowWorkConnectedComponent(component);
+  canEdit(component: any): boolean {
+    return !hasConnectedComponent(component, 'showWork');
   }
 
   componentStateHasStudentWork(componentState: any, componentContent: any): boolean {
@@ -232,7 +231,7 @@ export class LabelService extends ComponentService {
      * Line wrap the text so that each line does not exceed the max number of
      * characters.
      */
-    const textWrapped = this.UtilService.wordWrap(text, maxCharactersPerLine);
+    const textWrapped = wordWrap(text, maxCharactersPerLine);
 
     // create a div to draw the SVG in
     const svgElement = document.createElement('div');
@@ -284,18 +283,14 @@ export class LabelService extends ComponentService {
     const domURL = self.URL || (self as any).webkitURL || self;
     const url = domURL.createObjectURL(svg);
     const image = new Image();
-    const thisUtilService = this.UtilService;
     return new Promise((resolve, reject) => {
       image.onload = (event) => {
         const image: any = event.target;
         myCanvas.width = image.width;
         myCanvas.height = image.height;
         ctx.drawImage(image, 0, 0);
-        const base64Image = myCanvas.toDataURL('image/png');
-        const imageObject = thisUtilService.getImageObjectFromBase64String(base64Image);
-
-        // create a student asset image
-        this.StudentAssetService.uploadAsset(imageObject).then((unreferencedAsset) => {
+        const pngFile = convertToPNGFile(myCanvas);
+        this.StudentAssetService.uploadAsset(pngFile).then((unreferencedAsset) => {
           /*
            * make a copy of the unreferenced asset so that we
            * get a referenced asset
@@ -352,9 +347,8 @@ export class LabelService extends ComponentService {
   generateImageFromRenderedComponentState(componentState: any) {
     return new Promise((resolve, reject) => {
       const canvas = this.getCanvas(componentState);
-      const img_b64 = canvas.toDataURL('image/png');
-      const imageObject = this.UtilService.getImageObjectFromBase64String(img_b64);
-      this.StudentAssetService.uploadAsset(imageObject).then((asset: any) => {
+      const pngFile = convertToPNGFile(canvas);
+      this.StudentAssetService.uploadAsset(pngFile).then((asset: any) => {
         resolve(asset);
       });
     });
@@ -402,6 +396,7 @@ export class LabelService extends ComponentService {
   ): any[] {
     const fabricLabels: any[] = [];
     labels.forEach((label) => {
+      const timestamp = label.timestamp ? label.timestamp : this.getTimestamp();
       const fabricLabel = this.createLabel(
         label.pointX,
         label.pointY,
@@ -416,7 +411,9 @@ export class LabelService extends ComponentService {
         pointSize,
         fontSize,
         labelWidth,
-        studentDataVersion
+        studentDataVersion,
+        timestamp,
+        label.isStarterLabel
       );
       this.addLabelToCanvas(canvas, fabricLabel, enableCircles);
       fabricLabels.push(fabricLabel);
@@ -438,7 +435,9 @@ export class LabelService extends ComponentService {
     pointSize: number = 5,
     fontSize: number = 20,
     labelWidth: number,
-    studentDataVersion: number = 2
+    studentDataVersion: number = 2,
+    timestamp: number,
+    isStarterLabel: boolean
   ): any {
     // get the position of the point
     let x1: number = pointX;
@@ -486,7 +485,7 @@ export class LabelService extends ComponentService {
 
     let wrappedTextString = textString;
     if (labelWidth != null) {
-      wrappedTextString = this.UtilService.wordWrap(textString, labelWidth);
+      wrappedTextString = wordWrap(textString, labelWidth);
     }
 
     // create an editable text element
@@ -525,7 +524,9 @@ export class LabelService extends ComponentService {
       text: text,
       textString: textString,
       canEdit: canEdit,
-      canDelete: canDelete
+      canDelete: canDelete,
+      timestamp: timestamp,
+      isStarterLabel: isStarterLabel
     };
   }
 
@@ -556,5 +557,9 @@ export class LabelService extends ComponentService {
 
   setBackgroundImage(canvas: any, backgroundPath: string): void {
     canvas.setBackgroundImage(backgroundPath, canvas.renderAll.bind(canvas));
+  }
+
+  getTimestamp(): number {
+    return new Date().getTime();
   }
 }

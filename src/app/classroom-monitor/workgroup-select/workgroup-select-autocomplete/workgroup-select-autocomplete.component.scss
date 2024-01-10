@@ -1,4 +1,9 @@
-@import '~style/abstracts/variables','~style/abstracts/functions', '~style/abstracts/mixins';
+@use '@angular/material' as mat;
+@import
+  'style/abstracts/variables',
+  'style/abstracts/functions',
+  'style/abstracts/mixins',
+  'style/base/typography';
 
 .workgroup-select-autocomplete {
   width: 100%;
@@ -8,34 +13,27 @@
     width: 360px;
   }
 
-  .mat-form-field-wrapper {
-    padding: 0;
+  .mdc-line-ripple {
+    &:before, &:after {
+      display: none;
+    }
   }
 
-  .mat-form-field-flex {
-    align-items: center;
+  .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    min-height: 28px;
   }
 
-  .mat-form-field-infix {
-    padding-top: 0;
-    border-top-width: 0;
+  .mat-mdc-form-field-flex {
+    height: 36px;
   }
 
-  .mat-select-arrow-wrapper {
-    display: block;
+  .mat-mdc-select-value-text, .mat-mdc-form-field-input-control.mat-mdc-form-field-input-control {
+    font-size: mat.font-size($wise-typography, 'caption');
   }
 
-  .mat-form-field-label-wrapper {
+  .mat-mdc-form-field-subscript-wrapper {
     display: none;
-  }
-
-  .mat-form-field-underline {
-    bottom: 0;
-  }
-
-  .mat-form-field-suffix .mat-icon-button.workgroup-select-autocomplete-suffix {
-    height: auto;
-    width: auto;
-    margin-top: -0.625em;
   }
 }

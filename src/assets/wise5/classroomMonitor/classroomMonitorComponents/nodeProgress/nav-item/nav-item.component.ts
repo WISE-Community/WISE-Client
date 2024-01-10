@@ -7,6 +7,7 @@ import { NotificationService } from '../../../../services/notificationService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../../services/teacherWebSocketService';
+import { NodeService } from '../../../../services/nodeService';
 
 @Component({
   selector: 'nav-item',
@@ -45,11 +46,12 @@ export class NavItemComponent implements OnInit {
   constructor(
     private annotationService: AnnotationService,
     private classroomStatusService: ClassroomStatusService,
+    private nodeService: NodeService,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService,
     private snackBar: MatSnackBar,
-    private teacherDataService: TeacherDataService,
-    private teacherWebSocketService: TeacherWebSocketService
+    private dataService: TeacherDataService,
+    private webSocketService: TeacherWebSocketService
   ) {}
 
   ngOnInit(): void {
@@ -57,15 +59,15 @@ export class NavItemComponent implements OnInit {
     this.isGroup = this.projectService.isGroupNode(this.nodeId);
     this.nodeHasWork = this.projectService.nodeHasWork(this.nodeId);
     this.nodeTitle = this.projectService.nodeIdToNumber[this.nodeId] + ': ' + this.item.title;
-    this.currentNode = this.teacherDataService.currentNode;
+    this.currentNode = this.dataService.currentNode;
     this.isCurrentNode = this.currentNode.id === this.nodeId;
     if (this.isCurrentNode) {
       this.expanded = true;
       this.onExpandedEvent.emit({ nodeId: this.nodeId, expanded: this.expanded });
       this.zoomToElement();
     }
-    this.currentPeriod = this.teacherDataService.getCurrentPeriod();
-    this.currentWorkgroup = this.teacherDataService.getCurrentWorkgroup();
+    this.currentPeriod = this.dataService.getCurrentPeriod();
+    this.currentWorkgroup = this.dataService.getCurrentWorkgroup();
     this.setCurrentNodeStatus();
     this.maxScore = this.projectService.getMaxScoreForNode(this.nodeId);
     this.icon = this.projectService.getNode(this.nodeId).getIcon();
@@ -101,7 +103,7 @@ export class NavItemComponent implements OnInit {
 
   private subscribeCurrentPeriodChanged(): void {
     this.subscriptions.add(
-      this.teacherDataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
+      this.dataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
         this.currentPeriod = currentPeriod;
         this.getAlertNotifications();
       })
@@ -110,7 +112,7 @@ export class NavItemComponent implements OnInit {
 
   private subscribeCurrentNodeChanged(): void {
     this.subscriptions.add(
-      this.teacherDataService.currentNodeChanged$.subscribe((previousAndCurrentNode) => {
+      this.dataService.currentNodeChanged$.subscribe((previousAndCurrentNode) => {
         const oldNode = previousAndCurrentNode.previousNode;
         const newNode = previousAndCurrentNode.currentNode;
         this.currentNode = newNode;
@@ -167,7 +169,7 @@ export class NavItemComponent implements OnInit {
       this.groupItemClicked();
       this.onExpandedEvent.emit({ nodeId: this.nodeId, expanded: this.expanded });
     } else {
-      this.teacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.nodeId);
+      this.nodeService.setCurrentNode(this.nodeId);
     }
   }
 
@@ -177,7 +179,7 @@ export class NavItemComponent implements OnInit {
       if (this.isCurrentNode) {
         this.zoomToElement();
       } else {
-        this.teacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.nodeId);
+        this.nodeService.setCurrentNode(this.nodeId);
       }
     }
   }
@@ -190,13 +192,13 @@ export class NavItemComponent implements OnInit {
       return (
         (this.isShowingAllPeriods() && this.isLockedForAll(constraints)) ||
         (!this.isShowingAllPeriods() &&
-          this.isLockedForPeriod(constraints, this.teacherDataService.getCurrentPeriod().periodId))
+          this.isLockedForPeriod(constraints, this.dataService.getCurrentPeriod().periodId))
       );
     }
   }
 
   private isLockedForAll(constraints: any): boolean {
-    for (const period of this.teacherDataService.getPeriods()) {
+    for (const period of this.dataService.getPeriods()) {
       if (period.periodId !== -1 && !this.isLockedForPeriod(constraints, period.periodId)) {
         return false;
       }
@@ -217,7 +219,7 @@ export class NavItemComponent implements OnInit {
     return false;
   }
 
-  toggleLockNode(): void {
+  protected toggleLockNode(): void {
     const node = this.projectService.getNodeById(this.nodeId);
     const isLocked = this.isLocked();
     if (isLocked) {
@@ -232,13 +234,11 @@ export class NavItemComponent implements OnInit {
   }
 
   private showToggleLockNodeConfirmation(isLocked: boolean): void {
-    let message = '';
-    if (isLocked) {
-      message = $localize`${this.nodeTitle} has been locked for ${this.getPeriodLabel()}.`;
-    } else {
-      message = $localize`${this.nodeTitle} has been unlocked for ${this.getPeriodLabel()}.`;
-    }
-    this.snackBar.open(message);
+    this.snackBar.open(
+      isLocked
+        ? $localize`${this.nodeTitle} has been locked for ${this.getPeriodLabel()}.`
+        : $localize`${this.nodeTitle} has been unlocked for ${this.getPeriodLabel()}.`
+    );
   }
 
   private unlockNode(node: any): void {
@@ -247,7 +247,7 @@ export class NavItemComponent implements OnInit {
     } else {
       this.projectService.removeTeacherRemovalConstraint(
         node,
-        this.teacherDataService.getCurrentPeriod().periodId
+        this.dataService.getCurrentPeriod().periodId
       );
     }
   }
@@ -258,19 +258,19 @@ export class NavItemComponent implements OnInit {
     } else {
       this.projectService.addTeacherRemovalConstraint(
         node,
-        this.teacherDataService.getCurrentPeriod().periodId
+        this.dataService.getCurrentPeriod().periodId
       );
     }
   }
 
   private unlockNodeForAllPeriods(node: any): void {
-    for (const period of this.teacherDataService.getPeriods()) {
+    for (const period of this.dataService.getPeriods()) {
       this.projectService.removeTeacherRemovalConstraint(node, period.periodId);
     }
   }
 
   private lockNodeForAllPeriods(node: any): void {
-    for (const period of this.teacherDataService.getPeriods()) {
+    for (const period of this.dataService.getPeriods()) {
       if (period.periodId !== -1 && !this.isLockedForPeriod(node.constraints, period.periodId)) {
         this.projectService.addTeacherRemovalConstraint(node, period.periodId);
       }
@@ -278,7 +278,7 @@ export class NavItemComponent implements OnInit {
   }
 
   private isShowingAllPeriods(): boolean {
-    return this.teacherDataService.getCurrentPeriod().periodId === -1;
+    return this.dataService.getCurrentPeriod().periodId === -1;
   }
 
   private sendNodeToClass(node: any): void {
@@ -290,7 +290,7 @@ export class NavItemComponent implements OnInit {
   }
 
   private sendNodeToAllPeriods(node: any): void {
-    for (const period of this.teacherDataService.getPeriods()) {
+    for (const period of this.dataService.getPeriods()) {
       if (period.periodId !== -1) {
         this.sendNodeToPeriod(node, period.periodId);
       }
@@ -298,7 +298,7 @@ export class NavItemComponent implements OnInit {
   }
 
   private sendNodeToPeriod(node: any, periodId: number): void {
-    this.teacherWebSocketService.sendNodeToClass(periodId, node);
+    this.webSocketService.sendNodeToClass(periodId, node);
   }
 
   getNodeCompletion(): number {
@@ -342,12 +342,7 @@ export class NavItemComponent implements OnInit {
   }
 
   private hasNewAlert(): boolean {
-    for (const alert of this.alertNotifications) {
-      if (!alert.timeDismissed) {
-        return true;
-      }
-    }
-    return false;
+    return this.alertNotifications.some((alert) => !alert.timeDismissed);
   }
 
   private getPeriodLabel(): string {
@@ -356,11 +351,9 @@ export class NavItemComponent implements OnInit {
       : $localize`Period: ${this.currentPeriod.periodName}`;
   }
 
-  getNodeLockedText(): string {
-    if (this.isLocked()) {
-      return $localize`Unlock for ${this.getPeriodLabel()}`;
-    } else {
-      return $localize`Lock for ${this.getPeriodLabel()}`;
-    }
+  protected getNodeLockedText(): string {
+    return this.isLocked()
+      ? $localize`Unlock for ${this.getPeriodLabel()}`
+      : $localize`Lock for ${this.getPeriodLabel()}`;
   }
 }

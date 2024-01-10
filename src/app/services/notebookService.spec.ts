@@ -8,6 +8,7 @@ import demoPublicNotebookItems_import from './sampleData/sample_publicNotebookIt
 import demoProject_import from './sampleData/curriculum/Demo.project.json';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { copy } from '../../assets/wise5/common/object/object';
 
 let http: HttpTestingController;
 let configService: ConfigService;
@@ -20,7 +21,6 @@ let editNoteData: any;
 let localNotebookItemId: string;
 const studentNotebookURL = 'http://localhost:8080/student/notebook/run/1';
 const teacherNotebookURL = 'http://localhost:8080/teacher/notebook/run/1';
-
 describe('NotebookService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -29,10 +29,10 @@ describe('NotebookService', () => {
     http = TestBed.inject(HttpTestingController);
     configService = TestBed.inject(ConfigService);
     service = TestBed.inject(NotebookService);
-    demoNotebookItems = JSON.parse(JSON.stringify(demoNotebookItems_import));
-    demoNotebooksByWorkgroupId = JSON.parse(JSON.stringify(demoNotebooksByWorkgroupId_import));
-    demoPublicNotebookItems = JSON.parse(JSON.stringify(demoPublicNotebookItems_import));
-    demoProject = JSON.parse(JSON.stringify(demoProject_import));
+    demoNotebookItems = copy(demoNotebookItems_import);
+    demoNotebooksByWorkgroupId = copy(demoNotebooksByWorkgroupId_import);
+    demoPublicNotebookItems = copy(demoPublicNotebookItems_import);
+    demoProject = copy(demoProject_import);
     service.notebooksByWorkgroup = demoNotebooksByWorkgroupId;
     localNotebookItemId = 'dlh2mz38vb';
     editNoteData = {

@@ -1,14 +1,19 @@
-<div class='openResponse' flex>
+<div class="openResponse" flex>
   <style>
     {{nodeContent.style}}
   </style>
   <div>
-    <div *ngIf='!componentContent.showPreviousWork'>
-      <mat-icon matTooltip="If you want to use rich visuals (images, videos, links, bullets, etc.) in your prompt, use an HTML component above this"
-          matTooltipPosition="right"
-          i18n-matTooltip>announcement</mat-icon>
-      <edit-component-prompt [prompt]="componentContent.prompt"
-          (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
+    <div *ngIf="!componentContent.showPreviousWork">
+      <mat-icon
+        matTooltip="If you want to use rich visuals (images, videos, links, bullets, etc.) in your prompt, use an HTML component above this"
+        matTooltipPosition="right"
+        i18n-matTooltip
+        >announcement</mat-icon
+      >
+      <edit-component-prompt
+        [prompt]="componentContent.prompt"
+        (promptChangedEvent)="promptChanged($event)"
+      ></edit-component-prompt>
     </div>
   </div>
 </div>

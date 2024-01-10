@@ -2,6 +2,7 @@
 
 import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
+import { arraysContainSameValues } from '../../common/array/array';
 
 @Injectable()
 export class MultipleChoiceService extends ComponentService {
@@ -26,49 +27,19 @@ export class MultipleChoiceService extends ComponentService {
    * criteria object
    */
   choiceChosen(criteria: any, componentState: any): boolean {
-    const studentChoiceIds = this.getStudentChoiceIdsFromStudentChoiceObjects(
-      componentState.studentData.studentChoices
-    );
+    const studentChoiceIds = componentState.studentData.studentChoices.map((choice) => choice.id);
     return this.isChoicesSelected(studentChoiceIds, criteria.params.choiceIds);
   }
 
-  isChoicesSelected(studentChoiceIds: any, constraintChoiceIds: any) {
-    if (typeof constraintChoiceIds === 'string') {
-      return studentChoiceIds.length === 1 && studentChoiceIds[0] === constraintChoiceIds;
-    } else if (Array.isArray(constraintChoiceIds)) {
-      return this.isChoiceIdsMatch(studentChoiceIds, constraintChoiceIds);
+  private isChoicesSelected(
+    studentChoiceIds: string[],
+    constraintChoiceIds: string | string[]
+  ): boolean {
+    if (constraintChoiceIds instanceof Array) {
+      return arraysContainSameValues(studentChoiceIds, constraintChoiceIds);
+    } else {
+      return studentChoiceIds.includes(constraintChoiceIds);
     }
-    return false;
-  }
-
-  isChoiceIdsMatch(choiceIds1: string[], choiceIds2: string[]) {
-    if (choiceIds1.length === choiceIds2.length) {
-      for (let choiceId of choiceIds2) {
-        if (choiceIds1.indexOf(choiceId) === -1) {
-          return false;
-        }
-      }
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Get the student choice ids from the student choice objects
-   * @param studentChoices an array of student choice objects. these objects contain
-   * an id and text fields
-   * @returns an array of choice id strings
-   */
-  getStudentChoiceIdsFromStudentChoiceObjects(studentChoices: any[]) {
-    const choiceIds = [];
-    if (studentChoices != null) {
-      for (const studentChoice of studentChoices) {
-        if (studentChoice != null) {
-          choiceIds.push(studentChoice.id);
-        }
-      }
-    }
-    return choiceIds;
   }
 
   isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
@@ -133,72 +104,5 @@ export class MultipleChoiceService extends ComponentService {
       }
     }
     return false;
-  }
-
-  calculateIsCorrect(componentContent: any, componentState: any): boolean {
-    if (this.isRadio(componentContent)) {
-      return this.isRadioCorrect(componentContent, componentState);
-    } else if (this.isCheckbox(componentContent)) {
-      return this.isCheckboxCorrect(componentContent, componentState);
-    }
-  }
-
-  isRadio(componentContent: any): boolean {
-    return componentContent.choiceType === 'radio';
-  }
-
-  isCheckbox(componentContent: any): boolean {
-    return componentContent.choiceType === 'checkbox';
-  }
-
-  isRadioCorrect(componentContent: any, componentState: any): boolean {
-    const correctChoiceId = this.getCorrectChoiceIdForRadio(componentContent);
-    return componentState.studentData.studentChoices[0].id === correctChoiceId;
-  }
-
-  getCorrectChoiceIdForRadio(componentContent: any): string {
-    for (const choice of componentContent.choices) {
-      if (choice.isCorrect) {
-        return choice.id;
-      }
-    }
-    return null;
-  }
-
-  isCheckboxCorrect(componentContent: any, componentState: any): boolean {
-    const correctChoiceIds = this.getCorrectChoiceIdsForCheckbox(componentContent);
-    const choiceIdsStudentChose = this.getChoicesIdsStudentChose(
-      componentState.studentData.studentChoices
-    );
-    return this.isChoiceIdsSame(correctChoiceIds, choiceIdsStudentChose);
-  }
-
-  getCorrectChoiceIdsForCheckbox(componentContent: any): string[] {
-    const correctChoiceIds: string[] = [];
-    for (const choice of componentContent.choices) {
-      if (choice.isCorrect) {
-        correctChoiceIds.push(choice.id);
-      }
-    }
-    return correctChoiceIds;
-  }
-
-  getChoicesIdsStudentChose(studentChoices: any[]): string[] {
-    return studentChoices.map((studentChoice) => studentChoice.id);
-  }
-
-  isChoiceIdsSame(choiceIds1: string[], choiceIds2: string[]): boolean {
-    if (choiceIds1.length !== choiceIds2.length) {
-      return false;
-    } else {
-      choiceIds1.sort();
-      choiceIds2.sort();
-      for (let i = 0; i < choiceIds1.length; i++) {
-        if (choiceIds1[i] !== choiceIds2[i]) {
-          return false;
-        }
-      }
-      return true;
-    }
   }
 }

@@ -6,17 +6,22 @@ import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { GraphService } from '../graphService';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
-import * as covariance from 'compute-covariance';
 import canvg from 'canvg';
 import { MatDialog } from '@angular/material/dialog';
 import { GraphContent } from '../GraphContent';
-import { RandomKeyService } from '../../../services/randomKeyService';
+import { copy } from '../../../common/object/object';
+import { convertToPNGFile } from '../../../common/canvas/canvas';
+import { arraysContainSameValues } from '../../../common/array/array';
+import { generateRandomKey } from '../../../common/string/string';
+import { GraphCustomLegend } from '../GraphCustomLegend';
+import { PlotLineManager } from '../plot-line-manager';
+import { DataExplorerManager } from '../data-explorer-manager';
+import { addPointFromTableIntoData, isMultipleYAxes, isSingleYAxis } from '../util';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -37,7 +42,6 @@ export class GraphStudent extends ComponentStudent {
   chartCallback: any;
   chartConfig: any;
   chartId: string = 'chart1';
-  dataExplorerColors: string[] = ['blue', 'orange', 'purple', 'black', 'green'];
   fileName: string;
   graphType: string;
   hasCustomLegendBeenSet: boolean = false;
@@ -56,7 +60,7 @@ export class GraphStudent extends ComponentStudent {
   mouseDown: boolean = false;
   mouseOverPoints: any[] = [];
   notebookConfig: any = this.NotebookService.getNotebookConfig();
-  plotLines: any[];
+  plotLineManager: PlotLineManager;
   previousComponentState: any;
   previousTrialIdsToShow: string[];
   rectangle: any;
@@ -90,8 +94,7 @@ export class GraphStudent extends ComponentStudent {
     protected NotebookService: NotebookService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
+    protected StudentDataService: StudentDataService
   ) {
     super(
       AnnotationService,
@@ -101,8 +104,7 @@ export class GraphStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 
@@ -110,8 +112,11 @@ export class GraphStudent extends ComponentStudent {
     super.ngOnInit();
     this.chartId = 'chart_' + this.componentId;
     this.hiddenCanvasId = 'hiddenCanvas_' + this.componentId;
-    this.dataExplorerColors = ['blue', 'orange', 'purple', 'black', 'green'];
-    this.applyHighchartsPlotLinesLabelFix();
+    this.plotLineManager = new PlotLineManager(
+      this.componentContent.xAxis.plotLines,
+      this.componentContent.showMouseXPlotLine,
+      this.componentContent.showMouseYPlotLine
+    );
     this.initializeComponentContentParams();
     this.initializeStudentMode(this.componentState);
     this.initialComponentState = this.componentState;
@@ -130,23 +135,13 @@ export class GraphStudent extends ComponentStudent {
     super.ngOnDestroy();
   }
 
-  applyHighchartsPlotLinesLabelFix() {
-    Highcharts.wrap(Highcharts.Axis.prototype, 'getPlotLinePath', function (proceed) {
-      var path = proceed.apply(this, Array.prototype.slice.call(arguments, 1));
-      if (path) {
-        path.flat = false;
-      }
-      return path;
-    });
-  }
-
   initializeComponentContentParams() {
     this.title = this.componentContent.title;
     this.subtitle = this.componentContent.subtitle;
     this.width = this.componentContent.width;
     this.height = this.componentContent.height;
-    this.xAxis = this.UtilService.makeCopyOfJSONObject(this.componentContent.xAxis);
-    this.yAxis = this.UtilService.makeCopyOfJSONObject(this.componentContent.yAxis);
+    this.xAxis = copy(this.componentContent.xAxis);
+    this.yAxis = copy(this.componentContent.yAxis);
     this.graphType = this.componentContent.graphType;
     if (this.graphType == null) {
       this.graphType = 'line';
@@ -212,9 +207,9 @@ export class GraphStudent extends ComponentStudent {
   }
 
   processConnectedComponentState(componentState: any): void {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
+    const connectedComponent = this.component.getConnectedComponent(
+      componentState.nodeId,
+      componentState.componentId
     );
     const componentType = this.ProjectService.getComponentType(
       connectedComponent.nodeId,
@@ -261,7 +256,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState) {
-    const studentData = this.UtilService.makeCopyOfJSONObject(componentState.studentData);
+    const studentData = copy(componentState.studentData);
     if (studentData.tableData.length > 0) {
       studentData.tableData = this.processTableData(
         studentData.tableData,
@@ -326,43 +321,14 @@ export class GraphStudent extends ComponentStudent {
     this.activeTrial.series = [];
     this.drawGraph();
     this.changeDetectorRef.detectChanges();
+    const dataExplorerManager = new DataExplorerManager(this.xAxis, this.yAxis, this.activeTrial);
+    const allRegressionSeries = dataExplorerManager.handleDataExplorer(studentData);
 
-    const dataExplorerSeries = studentData.dataExplorerSeries;
-    const graphType = studentData.dataExplorerGraphType;
-    this.xAxis.title.text = studentData.dataExplorerXAxisLabel;
-    this.setYAxisLabels(studentData);
-    this.setXAxisLabels(studentData);
-
-    for (let seriesIndex = 0; seriesIndex < dataExplorerSeries.length; seriesIndex++) {
-      const xColumn = dataExplorerSeries[seriesIndex].xColumn;
-      const yColumn = dataExplorerSeries[seriesIndex].yColumn;
-      const yAxis = dataExplorerSeries[seriesIndex].yAxis;
-      if (yColumn != null) {
-        const color = this.dataExplorerColors[seriesIndex];
-        const name = dataExplorerSeries[seriesIndex].name;
-        const series = this.generateDataExplorerSeries(
-          studentData.tableData,
-          xColumn,
-          yColumn,
-          graphType,
-          name,
-          color,
-          yAxis
-        );
-        if (series.yAxis == null) {
-          this.setSeriesYAxisIndex(series, seriesIndex);
-        }
-        this.activeTrial.series.push(series);
-        if (graphType === 'scatter' && studentData.isDataExplorerScatterPlotRegressionLineEnabled) {
-          const regressionSeries = this.generateDataExplorerRegressionSeries(
-            studentData.tableData,
-            xColumn,
-            yColumn,
-            color
-          );
-          this.activeTrial.series.push(regressionSeries);
-        }
-      }
+    // Add all the regression series after all the data series so that all the data series are
+    // located at the expected index within the active trial. We need to do this because we expect
+    // the series index to match up with the axis index like in GraphService.getAxisTitle().
+    for (const singleRegressionSeries of allRegressionSeries) {
+      this.activeTrial.series.push(singleRegressionSeries);
     }
   }
 
@@ -393,167 +359,8 @@ export class GraphStudent extends ComponentStudent {
     }
   }
 
-  isSingleYAxis(yAxis) {
-    return !Array.isArray(yAxis);
-  }
-
-  setYAxisLabels(studentData: any): void {
-    if (this.isSingleYAxis(this.yAxis)) {
-      this.yAxis.title.text = studentData.dataExplorerYAxisLabel;
-    } else if (studentData.dataExplorerYAxisLabels != null) {
-      for (let [index, yAxis] of Object.entries(this.yAxis)) {
-        (yAxis as any).title.text = studentData.dataExplorerYAxisLabels[index];
-        (yAxis as any).title.style.color = this.dataExplorerColors[index];
-        (yAxis as any).labels.style.color = this.dataExplorerColors[index];
-      }
-    }
-  }
-
-  setSeriesYAxisIndex(series, seriesIndex) {
-    if (this.GraphService.isMultipleYAxes(this.yAxis) && this.yAxis.length == 2) {
-      if (seriesIndex === 0 || seriesIndex === 1) {
-        series.yAxis = seriesIndex;
-      } else {
-        series.yAxis = 0;
-      }
-    }
-  }
-
-  setXAxisLabels(studentData: any): void {
-    const thisComponent = this;
-    this.xAxis.labels = {
-      formatter: function () {
-        if (
-          this.value + 1 < studentData.tableData.length &&
-          studentData.isDataExplorerEnabled != null &&
-          studentData.dataExplorerSeries != null &&
-          studentData.tableData != null
-        ) {
-          // try to convert the x value number to a category string on the x axis
-          const textValue = thisComponent.getXColumnTextValue(
-            studentData.dataExplorerSeries,
-            studentData.tableData,
-            this.value
-          );
-          if (
-            typeof textValue === 'string' &&
-            textValue !== '' &&
-            !thisComponent.isNA(textValue) &&
-            isNaN(parseFloat(textValue))
-          ) {
-            return studentData.tableData[this.value + 1][studentData.dataExplorerSeries[0].xColumn]
-              .text;
-          }
-        }
-        return this.value;
-      }
-    };
-  }
-
-  isNA(text: string): boolean {
-    const textUpperCase = text.toUpperCase();
-    return textUpperCase === 'NA' || textUpperCase === 'N/A';
-  }
-
-  getXColumnTextValue(dataExplorerSeries: any[], tableData: any[][], value: number): string {
-    const xColumn = dataExplorerSeries[0].xColumn;
-    const dataRow = tableData[value + 1];
-    return dataRow[xColumn].text;
-  }
-
-  generateDataExplorerSeries(tableData, xColumn, yColumn, graphType, name, color, yAxis) {
-    const series = {
-      type: graphType,
-      name: name,
-      color: color,
-      yAxis: yAxis,
-      data: this.convertDataExplorerDataToSeriesData(tableData, xColumn, yColumn)
-    };
-    if (graphType === 'line') {
-      series.data.sort(this.sortLineData);
-    }
-    return series;
-  }
-
-  generateDataExplorerRegressionSeries(tableData, xColumn, yColumn, color) {
-    const regressionLineData = this.calculateRegressionLineData(tableData, xColumn, yColumn);
-    return {
-      type: 'line',
-      name: 'Regression Line',
-      color: color,
-      data: regressionLineData
-    };
-  }
-
-  calculateRegressionLineData(tableData, xColumn, yColumn) {
-    const xValues = this.getValuesInColumn(tableData, xColumn);
-    const yValues = this.getValuesInColumn(tableData, yColumn);
-    const covarianceMatrix = covariance(xValues, yValues);
-    const covarianceXY = covarianceMatrix[0][1];
-    const varianceX = covarianceMatrix[0][0];
-    const meanY = this.UtilService.calculateMean(yValues);
-    const meanX = this.UtilService.calculateMean(xValues);
-    const slope = covarianceXY / varianceX;
-    const intercept = meanY - slope * meanX;
-    let firstX = Math.min(...xValues);
-    let firstY = slope * firstX + intercept;
-    if (firstY < 0) {
-      firstY = 0;
-      firstX = (firstY - intercept) / slope;
-    }
-    let secondX = Math.max(...xValues);
-    let secondY = slope * secondX + intercept;
-    if (secondY < 0) {
-      secondY = 0;
-      secondX = (secondY - intercept) / slope;
-    }
-    return [
-      [firstX, firstY],
-      [secondX, secondY]
-    ];
-  }
-
-  getValuesInColumn(tableData, columnIndex) {
-    const values = [];
-    for (let r = 1; r < tableData.length; r++) {
-      const row = tableData[r];
-      const value = Number(row[columnIndex].text);
-      values.push(value);
-    }
-    return values;
-  }
-
-  sortLineData(a, b) {
-    if (a[0] > b[0]) {
-      return 1;
-    } else if (a[0] < b[0]) {
-      return -1;
-    } else {
-      if (a[1] > b[1]) {
-        return 1;
-      } else if (a[1] < b[1]) {
-        return -1;
-      } else {
-        return 0;
-      }
-    }
-  }
-
-  convertDataExplorerDataToSeriesData(rows, xColumn, yColumn) {
-    const data = [];
-    for (let r = 1; r < rows.length; r++) {
-      const row = rows[r];
-      const xCell = row[xColumn];
-      const yCell = row[yColumn];
-      if (xCell != null && yCell != null) {
-        this.addPointFromTableIntoData(xCell, yCell, data);
-      }
-    }
-    return data;
-  }
-
   handleEmbeddedConnectedComponentStudentDataChanged(connectedComponent, componentState) {
-    componentState = this.UtilService.makeCopyOfJSONObject(componentState);
+    componentState = copy(componentState);
     const studentData = componentState.studentData;
     this.processConnectedComponentStudentData(studentData, connectedComponent);
     this.studentDataChanged();
@@ -561,7 +368,7 @@ export class GraphStudent extends ComponentStudent {
 
   handleAnimationConnectedComponentStudentDataChanged(connectedComponent, componentState) {
     if (componentState.t != null) {
-      this.setVerticalPlotLine(componentState.t);
+      this.plotLineManager.setXPlotLine(componentState.t);
       this.drawGraph();
     }
   }
@@ -636,7 +443,7 @@ export class GraphStudent extends ComponentStudent {
     const chartXAxis = chart.xAxis[0];
     let x = chartXAxis.toValue(e.offsetX, false);
     x = this.makeSureXIsWithinXMinMaxLimits(x);
-    if (this.componentContent.showMouseXPlotLine) {
+    if (this.plotLineManager.isShowMouseXPlotLine()) {
       this.showXPlotLine(x);
     }
     return x;
@@ -647,37 +454,10 @@ export class GraphStudent extends ComponentStudent {
     const chartYAxis = chart.yAxis[0];
     let y = chartYAxis.toValue(e.offsetY, false);
     y = this.makeSureYIsWithinYMinMaxLimits(y);
-    if (this.componentContent.showMouseYPlotLine) {
-      this.showYPlotLine(y);
+    if (this.plotLineManager.isShowMouseYPlotLine()) {
+      this.plotLineManager.showYPlotLine(this.getChartById(this.chartId), y);
     }
     return y;
-  }
-
-  /**
-   * Show the vertical plot line at the given x.
-   * @param x The x value to show the vertical line at.
-   * @param text The text to show on the plot line.
-   */
-  showXPlotLine(x, text: string = null) {
-    const chart = this.getChartById(this.chartId);
-    const chartXAxis = chart.xAxis[0];
-    chartXAxis.removePlotLine('plot-line-x');
-    const plotLine: any = {
-      value: x,
-      color: 'red',
-      width: 4,
-      id: 'plot-line-x'
-    };
-    if (text != null && text !== '') {
-      plotLine.label = {
-        text: text,
-        verticalAlign: 'top'
-      };
-    }
-    chartXAxis.addPlotLine(plotLine);
-    if (this.componentContent.highlightXRangeFromZero) {
-      this.drawRangeRectangle(0, x, chart.yAxis[0].min, chart.yAxis[0].max);
-    }
   }
 
   /**
@@ -742,30 +522,6 @@ export class GraphStudent extends ComponentStudent {
       width: xMax - xMin,
       height: yMax - yMin
     });
-  }
-
-  /**
-   * Show the horizontal plot line at the given y.
-   * @param y The y value to show the horizontal line at.
-   * @param text The text to show on the plot line.
-   */
-  showYPlotLine(y, text: string = null) {
-    const chart = this.getChartById(this.chartId);
-    const chartYAxis = chart.yAxis[0];
-    chartYAxis.removePlotLine('plot-line-y');
-    const plotLine: any = {
-      value: y,
-      color: 'red',
-      width: 2,
-      id: 'plot-line-y'
-    };
-    if (text != null && text !== '') {
-      plotLine.label = {
-        text: text,
-        align: 'right'
-      };
-    }
-    chartYAxis.addPlotLine(plotLine);
   }
 
   /**
@@ -859,9 +615,7 @@ export class GraphStudent extends ComponentStudent {
     this.setAllSeriesFields(series);
     this.refreshSeriesIds(series);
     this.updateMinMaxAxisValues(series, this.xAxis, this.yAxis);
-    if (this.plotLines != null) {
-      this.xAxis.plotLines = this.plotLines;
-    }
+    this.xAxis.plotLines = this.plotLineManager.getXPlotLines();
     // Make a copy of the series so when the highcharts-chart modifies the series it won't modify
     // our original series in our trials. There was a problem that occurred when there were two
     // trials and the student hides the first trial which would cause the the data points in the
@@ -869,7 +623,7 @@ export class GraphStudent extends ComponentStudent {
     // problem. I think this problem occurs because highcharts-chart was expecting two series so
     // when we hide the first trial (and the first series), it moves the second series (from the
     // second trial) to the first series.
-    series = this.UtilService.makeCopyOfJSONObject(series);
+    series = copy(series);
     this.chartConfig = this.createChartConfig(
       resolve,
       this.title,
@@ -881,7 +635,10 @@ export class GraphStudent extends ComponentStudent {
     if (this.componentContent.useCustomLegend) {
       // use a timeout so the graph has a chance to render before we set the custom legend
       setTimeout(() => {
-        this.setCustomLegend();
+        if (!this.hasCustomLegendBeenSet) {
+          this.setCustomLegend();
+          this.hasCustomLegendBeenSet = true;
+        }
       });
     }
     this.changeDetectorRef.detectChanges();
@@ -892,7 +649,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   turnOffYAxisDecimals() {
-    if (this.isSingleYAxis(this.yAxis)) {
+    if (isSingleYAxis(this.yAxis)) {
       this.yAxis.allowDecimals = false;
     } else {
       this.yAxis.forEach((yAxis) => (yAxis.allowDecimals = false));
@@ -1097,7 +854,7 @@ export class GraphStudent extends ComponentStudent {
         this.addNextComponentStateToUndoStack = true;
         this.studentDataChanged();
       } else {
-        if (!this.isMousePlotLineOn()) {
+        if (!this.plotLineManager.isShowMousePlotLine()) {
           // the student is trying to add a point to a series that can't be edited
           alert(
             $localize`You can not edit this series. Please choose a series that can be edited.`
@@ -1112,7 +869,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   getSeriesYAxisIndex(series) {
-    if (this.GraphService.isMultipleYAxes(this.yAxis) && series.yAxis != null) {
+    if (isMultipleYAxes(this.yAxis) && series.yAxis != null) {
       return series.yAxis;
     } else {
       return 0;
@@ -1186,8 +943,8 @@ export class GraphStudent extends ComponentStudent {
         thisGraphController.showXPlotLineIfOn('Drag Me');
         thisGraphController.showYPlotLineIfOn('Drag Me');
         if (
-          thisGraphController.isMouseXPlotLineOn() ||
-          thisGraphController.isMouseYPlotLineOn() ||
+          thisGraphController.plotLineManager.isShowMouseXPlotLine() ||
+          thisGraphController.plotLineManager.isShowMouseYPlotLine() ||
           thisGraphController.isSaveMouseOverPoints()
         ) {
           thisGraphController.setupMouseMoveListener();
@@ -1198,53 +955,8 @@ export class GraphStudent extends ComponentStudent {
     };
   }
 
-  /**
-   * Overwrite the existing legend with the custom authored legend.
-   */
-  setCustomLegend() {
-    if (!this.hasCustomLegendBeenSet) {
-      if ($('.highcharts-legend').length > 0) {
-        // move the legend to the very left by setting the x position to 0
-        const userAgent = navigator.userAgent;
-        if (userAgent.indexOf('Firefox') !== -1) {
-          /*
-           * Regex to split the transform string into three groups. We will use
-           * this to replace the x value of the translate.
-           * Example
-           * "translate(227, 294)"
-           * The regex will create three groups
-           * group 1 = "translate("
-           * group 2 = "227"
-           * group 3 = ", 294)"
-           * The x value of the translate is captured in group 2.
-           */
-          const matrixRegEx = /(translate\()(\d*)(,\s*\d*\))/;
-          const currentTransform = $('.highcharts-legend').attr('transform');
-          // replace the second group with 0
-          const newTransform = currentTransform.replace(matrixRegEx, '$10$3');
-          $('.highcharts-legend').attr('transform', newTransform);
-        } else {
-          /*
-           * Regex to split the transform string into three groups. We will use
-           * this to replace the x value of the matrix.
-           * Example
-           * "matrix(1, 0, 0, 1, 227, 294)"
-           * The regex will create three groups
-           * group 1 = "matrix(1, 0, 0, 1, "
-           * group 2 = "227"
-           * group 3 = ", 294)"
-           * The x value of the matrix is captured in group 2.
-           */
-          const matrixRegEx = /(matrix\(\d*,\s*\d*,\s*\d*,\s*\d*,\s*)(\d*)(,\s*\d*\))/;
-          const currentTransform = $('.highcharts-legend').css('transform');
-          // replace the second group with 0
-          const newTransform = currentTransform.replace(matrixRegEx, '$10$3');
-          $('.highcharts-legend').css('transform', newTransform);
-        }
-        $('.highcharts-legend').html(this.componentContent.customLegend);
-      }
-      this.hasCustomLegendBeenSet = true;
-    }
+  private setCustomLegend(): void {
+    new GraphCustomLegend(this.chartId, this.componentContent.customLegend).render();
   }
 
   addPointToSeries(series, x, y) {
@@ -1347,7 +1059,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   setXAxis(xAxis) {
-    this.xAxis = this.UtilService.makeCopyOfJSONObject(xAxis);
+    this.xAxis = copy(xAxis);
   }
 
   getXAxis() {
@@ -1355,7 +1067,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   setYAxis(yAxis) {
-    this.yAxis = this.UtilService.makeCopyOfJSONObject(yAxis);
+    this.yAxis = copy(yAxis);
   }
 
   getYAxis() {
@@ -1396,7 +1108,7 @@ export class GraphStudent extends ComponentStudent {
       const activeSeriesIndex = this.getSeriesIndex(this.activeSeries);
       let originalSeries = this.componentContent.series[activeSeriesIndex];
       if (originalSeries != null) {
-        originalSeries = this.UtilService.makeCopyOfJSONObject(originalSeries);
+        originalSeries = copy(originalSeries);
         this.setSeriesByIndex(originalSeries, activeSeriesIndex);
         this.setActiveSeriesByIndex(activeSeriesIndex);
         if (this.componentContent.xAxis != null) {
@@ -1416,11 +1128,11 @@ export class GraphStudent extends ComponentStudent {
     const studentData = componentState.studentData;
     if (this.isStudentDataVersion1(studentData.version)) {
       this.studentDataVersion = 1;
-      this.setSeries(this.UtilService.makeCopyOfJSONObject(studentData.series));
+      this.setSeries(copy(studentData.series));
     } else {
       this.studentDataVersion = studentData.version;
       if (studentData.trials != null && studentData.trials.length > 0) {
-        const trialsCopy = this.UtilService.makeCopyOfJSONObject(studentData.trials);
+        const trialsCopy = copy(studentData.trials);
         this.setTrials(trialsCopy);
         const activeTrialIndex = studentData.activeTrialIndex;
         if (activeTrialIndex == null) {
@@ -1517,15 +1229,15 @@ export class GraphStudent extends ComponentStudent {
     const studentData: any = {};
     studentData.version = this.studentDataVersion;
     if (this.isStudentDataVersion1()) {
-      studentData.series = this.UtilService.makeCopyOfJSONObject(this.getSeries());
+      studentData.series = copy(this.getSeries());
     } else {
       if (this.trials != null) {
-        studentData.trials = this.UtilService.makeCopyOfJSONObject(this.trials);
+        studentData.trials = copy(this.trials);
         const activeTrialIndex = this.getTrialIndex(this.activeTrial);
         studentData.activeTrialIndex = activeTrialIndex;
       }
     }
-    studentData.xAxis = this.UtilService.makeCopyOfJSONObject(this.getXAxis());
+    studentData.xAxis = copy(this.getXAxis());
     delete studentData.xAxis.plotBands;
     if (this.componentContent.xAxis != null && this.componentContent.xAxis.plotBands != null) {
       studentData.xAxis.plotBands = this.componentContent.xAxis.plotBands;
@@ -1678,7 +1390,7 @@ export class GraphStudent extends ComponentStudent {
     if (this.isStudentDataVersion1(studentData.version)) {
       const series = studentData.series;
       const newTrial = {
-        id: RandomKeyService.generate(),
+        id: generateRandomKey(),
         name: nodePositionAndTitle,
         show: true,
         series: series
@@ -1688,7 +1400,7 @@ export class GraphStudent extends ComponentStudent {
       const trials = studentData.trials;
       if (trials != null) {
         for (const trial of trials) {
-          const newTrial = this.UtilService.makeCopyOfJSONObject(trial);
+          const newTrial = copy(trial);
           newTrial.name = nodePositionAndTitle;
           newTrial.show = true;
           mergedTrials.push(newTrial);
@@ -1696,38 +1408,6 @@ export class GraphStudent extends ComponentStudent {
       }
     }
     return Promise.resolve(mergedTrials);
-  }
-
-  /**
-   * Handle importing external data (we only support csv for now)
-   * @param studentAsset CSV file student asset
-   */
-  attachStudentAsset(studentAsset) {
-    this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset) => {
-      this.StudentAssetService.getAssetContent(copiedAsset).then((assetContent: string) => {
-        const rowData = this.UtilService.CSVToArray(assetContent, ',');
-        const params = {
-          skipFirstRow: true,
-          xColumn: 0,
-          yColumn: 1
-        };
-        const seriesData = this.convertRowDataToSeriesData(rowData, params);
-        const newSeriesIndex = this.series.length;
-        const series: any = {
-          name: copiedAsset.fileName,
-          color: this.GraphService.getSeriesColor(newSeriesIndex),
-          marker: {
-            symbol: this.seriesMarkers[newSeriesIndex]
-          },
-          canEdit: false
-        };
-        this.series[newSeriesIndex] = series;
-        series.data = seriesData;
-        this.isDirty = true;
-        this.addNextComponentStateToUndoStack = true;
-        this.studentDataChanged();
-      });
-    });
   }
 
   /**
@@ -1749,7 +1429,7 @@ export class GraphStudent extends ComponentStudent {
       const xCell = row[xColumn];
       const yCell = row[yColumn];
       if (xCell != null && yCell != null) {
-        this.addPointFromTableIntoData(xCell, yCell, data);
+        addPointFromTableIntoData(xCell, yCell, data, null);
       }
     }
     return data;
@@ -1776,29 +1456,6 @@ export class GraphStudent extends ComponentStudent {
       return 1;
     } else {
       return params.yColumn;
-    }
-  }
-
-  addPointFromTableIntoData(xCell: any, yCell: any, data: any[]) {
-    const xText = xCell.text;
-    const yText = yCell.text;
-    if (xText != null && xText !== '' && yText != null && yText !== '') {
-      const xNumber = Number(xText);
-      const yNumber = Number(yText);
-      const point = [];
-      if (!isNaN(xNumber)) {
-        point.push(xNumber);
-      } else {
-        point.push(xText);
-      }
-      if (!isNaN(yNumber)) {
-        point.push(yNumber);
-      } else {
-        point.push(null);
-      }
-      data.push(point);
-    } else {
-      data.push([]);
     }
   }
 
@@ -1931,12 +1588,12 @@ export class GraphStudent extends ComponentStudent {
         trial.show = false;
       }
     }
-    const series = this.UtilService.makeCopyOfJSONObject(this.componentContent.series);
+    const series = copy(this.componentContent.series);
     const trial = {
       name: $localize`Trial` + ' ' + (maxTrialNumber + 1),
       series: series,
       show: true,
-      id: RandomKeyService.generate()
+      id: generateRandomKey()
     };
     this.trials.push(trial);
     this.activeTrial = trial;
@@ -2050,7 +1707,7 @@ export class GraphStudent extends ComponentStudent {
     if (
       this.previousTrialIdsToShow != null &&
       this.trialIdsToShow != null &&
-      !this.UtilService.arraysContainSameValues(this.previousTrialIdsToShow, this.trialIdsToShow)
+      !arraysContainSameValues(this.previousTrialIdsToShow, this.trialIdsToShow)
     ) {
       this.trialIdsToShow = this.trialIdsToShow;
       this.studentDataChanged();
@@ -2060,7 +1717,7 @@ export class GraphStudent extends ComponentStudent {
      * trialIdsToShow actually change the next time trialIdsToShowChanged()
      * is called.
      */
-    this.previousTrialIdsToShow = this.UtilService.makeCopyOfJSONObject(this.trialIdsToShow);
+    this.previousTrialIdsToShow = copy(this.trialIdsToShow);
   }
 
   showOrHideTrials(trialIdsToShow) {
@@ -2508,9 +2165,8 @@ export class GraphStudent extends ComponentStudent {
     const hiddenCanvas: any = document.getElementById(this.hiddenCanvasId);
     canvg(hiddenCanvas, svgString, {
       renderCallback: () => {
-        const base64Image = hiddenCanvas.toDataURL('image/png');
-        const imageObject = this.UtilService.getImageObjectFromBase64String(base64Image);
-        this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), imageObject);
+        const pngFile = convertToPNGFile(hiddenCanvas);
+        this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), pngFile);
       }
     });
   }
@@ -2561,16 +2217,6 @@ export class GraphStudent extends ComponentStudent {
        */
       this.setActiveSeriesByIndex(0);
     }
-  }
-
-  setVerticalPlotLine(x) {
-    const plotLine = {
-      color: 'red',
-      width: 2,
-      value: x,
-      zIndex: 5
-    };
-    this.plotLines = [plotLine];
   }
 
   /**
@@ -2665,16 +2311,16 @@ export class GraphStudent extends ComponentStudent {
         latestComponentState.componentType === 'Draw' ||
         latestComponentState.componentType === 'Label'
       ) {
-        let connectedComponentOfComponentState = this.UtilService.getConnectedComponentByComponentState(
-          this.componentContent,
-          latestComponentState
+        const connectedComponentOfComponentState = this.component.getConnectedComponent(
+          latestComponentState.nodeId,
+          latestComponentState.componentId
         );
         if (connectedComponentOfComponentState.importWorkAsBackground === true) {
           promises.push(this.setComponentStateAsBackgroundImage(latestComponentState));
         }
       } else {
         if (connectedComponent.type === 'showWork') {
-          latestComponentState = this.UtilService.makeCopyOfJSONObject(latestComponentState);
+          latestComponentState = copy(latestComponentState);
           const canEdit = false;
           this.setCanEditForAllSeriesInComponentState(latestComponentState, canEdit);
         }
@@ -2767,9 +2413,9 @@ export class GraphStudent extends ComponentStudent {
 
   addTrialFromThisComponentIfNecessary(mergedTrials, trialCount, activeTrialIndex) {
     if (this.componentContent.series.length > 0) {
-      const trial = this.createNewTrial(RandomKeyService.generate());
+      const trial = this.createNewTrial(generateRandomKey());
       trial.name = $localize`Trial` + ' ' + trialCount;
-      trial.series = this.UtilService.makeCopyOfJSONObject(this.componentContent.series);
+      trial.series = copy(this.componentContent.series);
       mergedTrials.push(trial);
       if (this.canEditTrial(trial)) {
         activeTrialIndex = trialCount;
@@ -2876,9 +2522,7 @@ export class GraphStudent extends ComponentStudent {
     if (mergeFields == null) {
       if (connectedComponentState.componentType === 'Graph' && firstTime) {
         // there are no merge fields specified so we will get all of the fields
-        baseComponentState.studentData = this.UtilService.makeCopyOfJSONObject(
-          connectedComponentState.studentData
-        );
+        baseComponentState.studentData = copy(connectedComponentState.studentData);
       }
     } else {
       // we will merge specific fields
@@ -3005,18 +2649,6 @@ export class GraphStudent extends ComponentStudent {
     this.addNextComponentStateToUndoStack = true;
   }
 
-  isMousePlotLineOn() {
-    return this.isMouseXPlotLineOn() || this.isMouseYPlotLineOn();
-  }
-
-  isMouseXPlotLineOn() {
-    return this.componentContent.showMouseXPlotLine;
-  }
-
-  isMouseYPlotLineOn() {
-    return this.componentContent.showMouseYPlotLine;
-  }
-
   isSaveMouseOverPoints() {
     return this.componentContent.saveMouseOverPoints;
   }
@@ -3054,7 +2686,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   showXPlotLineIfOn(text = null) {
-    if (this.isMouseXPlotLineOn()) {
+    if (this.plotLineManager.isShowMouseXPlotLine()) {
       let x = this.getLatestMouseOverPointX();
       if (x == null) {
         x = 0;
@@ -3064,12 +2696,12 @@ export class GraphStudent extends ComponentStudent {
   }
 
   showYPlotLineIfOn(text = null) {
-    if (this.isMouseYPlotLineOn()) {
+    if (this.plotLineManager.isShowMouseYPlotLine()) {
       let y = this.getLatestMouseOverPointY();
       if (y == null) {
         y = 0;
       }
-      this.showYPlotLine(y, text);
+      this.plotLineManager.showYPlotLine(this.getChartById(this.chartId), y, text);
     }
   }
 
@@ -3128,6 +2760,18 @@ export class GraphStudent extends ComponentStudent {
       return this.studentDataVersion == null || this.studentDataVersion === 1;
     } else {
       return version === 1;
+    }
+  }
+
+  private showXPlotLine(x: number, text: string = ''): void {
+    this.plotLineManager.showXPlotLine(this.getChartById(this.chartId), x, text);
+    this.drawRectangleIfNecessary(x);
+  }
+
+  private drawRectangleIfNecessary(x: number): void {
+    if (this.componentContent.highlightXRangeFromZero) {
+      const chart = this.getChartById(this.chartId);
+      this.drawRangeRectangle(0, x, chart.yAxis[0].min, chart.yAxis[0].max);
     }
   }
 }

@@ -1,16 +1,22 @@
-@import '~style/abstracts/variables',
-        '~style/abstracts/mixins',
-        '~style/abstracts/functions';
+@import 'style/abstracts/variables',
+        'style/abstracts/mixins',
+        'style/abstracts/functions';
 
 app-blurb, app-call-to-action {
   width: 360px;
   max-width: 100%;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
 .cta, .cta__wrap, .cta .mat-button-wrapper, .blurb {
   height: 100%;
 }
 
 discourse-latest-news {
   max-width: 100%;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
 }

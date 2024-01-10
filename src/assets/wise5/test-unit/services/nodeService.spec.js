@@ -18,13 +18,12 @@ describe('NodeService', () => {
     ProjectService = _ProjectService_;
     StudentDataService = _StudentDataService_;
     StudentDataService.studentData = { events: [] };
-    demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSONOriginal));
+    demoProjectJSON = copy(demoProjectJSONOriginal);
     ProjectService.setProject(demoProjectJSON);
   }));
   getNextNodeId();
   extractComponents();
   insertComponentsAfter();
-  moveComponent();
 });
 
 function getNextNodeId() {
@@ -76,47 +75,5 @@ function extractComponents_MultipleComponents() {
     expect(extractedComponents[1].id).toEqual(10);
     expect(components.length).toEqual(1);
     expect(components[0].id).toEqual(2);
-  });
-}
-
-function moveComponent() {
-  describe('moveComponent', () => {
-    moveComponent_MoveOneComponentToBeginning();
-    moveComponent_MoveMultipleComponentsToBeginning();
-    moveComponent_MoveMultipleComponentsAfterComponent();
-  });
-}
-
-function moveComponent_MoveOneComponentToBeginning() {
-  it('should move one component to the beginning of the node', () => {
-    expect(ProjectService.getComponentPosition('node10', 'cjv5kq5290')).toEqual(4);
-    expect(ProjectService.getComponentPosition('node10', 'm97kyu4d4v')).toEqual(0);
-    NodeService.moveComponent('node10', ['cjv5kq5290'], null);
-    expect(ProjectService.getComponentPosition('node10', 'cjv5kq5290')).toEqual(0);
-    expect(ProjectService.getComponentPosition('node10', 'm97kyu4d4v')).toEqual(1);
-  });
-}
-
-function moveComponent_MoveMultipleComponentsToBeginning() {
-  it('should move multiple components to the beginning of the node', () => {
-    expect(ProjectService.getComponentPosition('node10', '2upmb3om1q')).toEqual(2);
-    expect(ProjectService.getComponentPosition('node10', 'cjv5kq5290')).toEqual(4);
-    expect(ProjectService.getComponentPosition('node10', 'm97kyu4d4v')).toEqual(0);
-    NodeService.moveComponent('node10', ['2upmb3om1q', 'cjv5kq5290'], null);
-    expect(ProjectService.getComponentPosition('node10', '2upmb3om1q')).toEqual(0);
-    expect(ProjectService.getComponentPosition('node10', 'cjv5kq5290')).toEqual(1);
-    expect(ProjectService.getComponentPosition('node10', 'm97kyu4d4v')).toEqual(2);
-  });
-}
-
-function moveComponent_MoveMultipleComponentsAfterComponent() {
-  it('should move multiple components after another component', () => {
-    expect(ProjectService.getComponentPosition('node10', '2upmb3om1q')).toEqual(2);
-    expect(ProjectService.getComponentPosition('node10', 'cjv5kq5290')).toEqual(4);
-    expect(ProjectService.getComponentPosition('node10', 'm97kyu4d4v')).toEqual(0);
-    NodeService.moveComponent('node10', ['2upmb3om1q', 'cjv5kq5290'], 'm97kyu4d4v');
-    expect(ProjectService.getComponentPosition('node10', '2upmb3om1q')).toEqual(1);
-    expect(ProjectService.getComponentPosition('node10', 'cjv5kq5290')).toEqual(2);
-    expect(ProjectService.getComponentPosition('node10', 'm97kyu4d4v')).toEqual(0);
   });
 }

@@ -3,130 +3,138 @@
   <div class="main-concept-map-div">
     <div class="top-buttons" fxLayout="row">
       <button
-          mat-button
-          class="mat-primary mat-raised-button top-button"
-          (click)="resetConceptMap()"
-          [disabled]="isDisabled"
-          i18n>
+        mat-raised-button
+        color="primary"
+        class="top-button"
+        (click)="resetConceptMap()"
+        [disabled]="isDisabled"
+        i18n
+      >
         Reset
       </button>
       <add-to-notebook-button
-          *ngIf="isShowAddToNotebookButton"
-          class="add-to-notebook-button top-button"
-          [isDisabled]="isDisabled"
-          (snipImage)="snipImage()">
+        *ngIf="isShowAddToNotebookButton"
+        class="add-to-notebook-button top-button"
+        [isDisabled]="isDisabled"
+        (snipImage)="snipImage()"
+      >
       </add-to-notebook-button>
       <div *ngIf="isStudentAttachmentEnabled">
         <button
-            *ngIf="background == null"
-            mat-button
-            class="mat-primary mat-raised-button upload-button"
-            (click)="showStudentAssets()"
-            matTooltip="Upload Background Image"
-            matTooltipPosition="above"
-            i18n-matTooltip>
+          *ngIf="background == null"
+          mat-button
+          class="mat-primary mat-raised-button upload-button"
+          (click)="showStudentAssets()"
+          matTooltip="Upload Background Image"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
           <mat-icon>attach_file</mat-icon>
         </button>
         <button
-            *ngIf="background != null"
-            mat-button
-            class="mat-primary mat-raised-button upload-button"
-            (click)="deleteBackgroundImage()"
-            matTooltip="Delete Background Image"
-            matTooltipPosition="above"
-            i18n-matTooltip>
+          *ngIf="background != null"
+          mat-button
+          class="mat-primary mat-raised-button upload-button"
+          (click)="deleteBackgroundImage()"
+          matTooltip="Delete Background Image"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
           <mat-icon>delete_outline</mat-icon>
         </button>
       </div>
     </div>
-    <div id="{{conceptMapContainerId}}"
-        class="container"
-        fxLayout="row">
-      <div id="{{selectNodeBarId}}"
-          class="side-node-bar">
-        <div *ngFor="let availableNode of availableNodes"
-            class="side-node-container">
-          <img [src]="availableNode.fileName"
-               style="cursor: pointer"
-               (mousedown)="selectNode($event, availableNode)"
-               width="{{availableNode.width}}"
-               height="{{availableNode.height}}"/>
-          <br/>
-          <span>{{availableNode.name}}</span>
+    <div id="{{ conceptMapContainerId }}" class="container" fxLayout="row">
+      <div id="{{ selectNodeBarId }}" class="side-node-bar">
+        <div *ngFor="let availableNode of availableNodes" class="side-node-container">
+          <img
+            [src]="availableNode.fileName"
+            style="cursor: pointer"
+            (mousedown)="selectNode($event, availableNode)"
+            width="{{ availableNode.width }}"
+            height="{{ availableNode.height }}"
+          />
+          <br />
+          <span>{{ availableNode.name }}</span>
         </div>
       </div>
       <div class="concept-map-content">
-        <svg id="{{svgId}}"
-            class="concept-map-svg"
-            [style.background-image]="backgroundUrl"
-            [style.background-size]="backgroundSize">
-        </svg>
+        <svg
+          id="{{ svgId }}"
+          class="concept-map-svg"
+          [style.background-image]="backgroundUrl"
+          [style.background-size]="backgroundSize"
+        ></svg>
       </div>
     </div>
-    <div *ngIf="displayLinkTypeChooser"
-        class="link-type-chooser">
+    <div *ngIf="displayLinkTypeChooser" class="link-type-chooser">
       <div>
-        <span>{{linksTitle}}</span>
+        <span>{{ linksTitle }}</span>
       </div>
       <mat-radio-group
-          [ngModel]="selectedLinkType"
-          (change)="studentDataChanged()"
-          [disabled]="isDisabled">
+        [ngModel]="selectedLinkType"
+        (change)="studentDataChanged()"
+        [disabled]="isDisabled"
+      >
         <div *ngFor="let link of availableLinks">
           <mat-radio-button
-              class="link-radio-choice"
-              color="primary"
-              aria-label="link.label"
-              [value]="link.id"
-              (click)="linkTypeSelected(link)"
-              [disabled]="isDisabled">
-            <div class="link-color" style="background-color: {{link.color}};"></div>
-            <span [innerHTML]="link.label">
-            </span>
+            class="link-radio-choice"
+            color="primary"
+            aria-label="link.label"
+            [value]="link.id"
+            (click)="linkTypeSelected(link)"
+            [disabled]="isDisabled"
+          >
+            <div class="link-color" style="background-color: {{ link.color }};"></div>
+            <span [innerHTML]="link.label"> </span>
           </mat-radio-button>
         </div>
       </mat-radio-group>
       <div fxLayout="row">
         <div>
           <button
-              mat-button
-              class="mat-primary mat-raised-button"
-              (click)="cancelLinkTypeChooser()"
-              i18n>
+            mat-button
+            class="mat-primary mat-raised-button"
+            (click)="cancelLinkTypeChooser()"
+            i18n
+          >
             Cancel
           </button>
         </div>
         <div fxFlex></div>
         <div>
           <button
-              mat-button
-              class="mat-primary mat-raised-button"
-              (click)="linkDeleteButtonClicked($event, highlightedElement)"
-              i18n>
+            mat-button
+            class="mat-primary mat-raised-button"
+            (click)="linkDeleteButtonClicked($event, highlightedElement)"
+            i18n
+          >
             Delete
           </button>
         </div>
       </div>
     </div>
-    <div id="{{feedbackContainerId}}"></div>
+    <div id="{{ feedbackContainerId }}"></div>
   </div>
   <component-save-submit-buttons
-      *ngIf="isSaveOrSubmitButtonVisible"
-      [componentState]="latestComponentState"
-      [isDirty]="isDirty"
-      [isDisabled]="isDisabled"
-      [isSaveButtonVisible]="isSaveButtonVisible"
-      [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-      [isSubmitButtonVisible]="isSubmitButtonVisible"
-      [isSubmitDirty]="isSubmitDirty"
-      (saveButtonClicked)="saveButtonClicked($event)"
-      (submitButtonClicked)="submitButtonClicked($event)">
+    *ngIf="isSaveOrSubmitButtonVisible"
+    [componentState]="latestComponentState"
+    [isDirty]="isDirty"
+    [isDisabled]="isDisabled"
+    [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+    [isSubmitButtonVisible]="isSubmitButtonVisible"
+    [isSubmitDirty]="isSubmitDirty"
+    (saveButtonClicked)="saveButtonClicked($event)"
+    (submitButtonClicked)="submitButtonClicked($event)"
+  >
   </component-save-submit-buttons>
   <component-annotations
-      *ngIf="mode === 'student'"
-      [annotations]="latestAnnotations"
-      [maxScore]="componentContent.maxScore"
-      [nodeId]="nodeId"
-      [componentId]="componentId">
+    *ngIf="mode === 'student'"
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+  >
   </component-annotations>
 </div>

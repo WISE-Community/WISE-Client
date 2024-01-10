@@ -2,65 +2,77 @@
 <div fxLayout="row wrap" fxLayoutAlign="start center" class="interaction-div">
   <mat-form-field *ngIf="oscillatorTypes.length > 1" class="oscillator-type">
     <mat-label i18n>Oscillator Type</mat-label>
-    <mat-select [(ngModel)]="oscillatorType"
-        (ngModelChange)="refreshOscilloscope()"
-        [disabled]="isDisabled">
-      <mat-option *ngFor="let oscillatorType of oscillatorTypes"
-          [value]="oscillatorType">
-        {{oscillatorType}}
+    <mat-select
+      [(ngModel)]="oscillatorType"
+      (ngModelChange)="refreshOscilloscope()"
+      [disabled]="isDisabled"
+    >
+      <mat-option *ngFor="let oscillatorType of oscillatorTypes" [value]="oscillatorType">
+        {{ oscillatorType }}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field *ngIf="canStudentViewFrequencyInput" class="frequency">
     <mat-label i18n>Frequency (Hz)</mat-label>
-    <input matInput
-        type="number"
-        [(ngModel)]="frequency"
-        (ngModelChange)="refreshOscilloscope()"
-        [disabled]="isDisabled || !canStudentEditFrequency"/>
+    <input
+      matInput
+      type="number"
+      [(ngModel)]="frequency"
+      (ngModelChange)="refreshOscilloscope()"
+      [disabled]="isDisabled || !canStudentEditFrequency"
+    />
   </mat-form-field>
   <mat-form-field *ngIf="canStudentViewAmplitudeInput" class="frequency">
     <mat-label i18n>Ampitude (dB)</mat-label>
-    <input matInput
-        type="number"
-        [max]="maxAmplitude"
-        [min]="minAmplitude"
-        name="amplitude"
-        [(ngModel)]="amplitude"
-        (change)="amplitudeChanged()"
-        (keyup)="amplitudeKeyUp($event)"
-        [disabled]="isDisabled || !canStudentEditAmplitude"/>
+    <input
+      matInput
+      type="number"
+      [max]="maxAmplitude"
+      [min]="minAmplitude"
+      name="amplitude"
+      [(ngModel)]="amplitude"
+      (change)="amplitudeChanged()"
+      (keyup)="amplitudeKeyUp($event)"
+      [disabled]="isDisabled || !canStudentEditAmplitude"
+    />
   </mat-form-field>
   <button
-      mat-button
-      class="mat-primary mat-raised-button"
-      (click)="togglePlay()"
-      [disabled]="isDisabled"
-      matTooltip="{{playStopButtonText}}"
-      matTooltipPosition="above">
+    mat-raised-button
+    color="primary"
+    (click)="togglePlay()"
+    [disabled]="isDisabled"
+    matTooltip="{{ playStopButtonText }}"
+    matTooltipPosition="above"
+  >
     <mat-icon *ngIf="!isPlaying">play_arrow</mat-icon>
     <mat-icon *ngIf="isPlaying">stop</mat-icon>
   </button>
 </div>
-<canvas id="{{oscilloscopeId}}"
-    width={{oscilloscopeWidth}}
-    height={{oscilloscopeHeight}}
-    class="oscillator-canvas">
+<canvas
+  id="{{ oscilloscopeId }}"
+  width="{{ oscilloscopeWidth }}"
+  height="{{ oscilloscopeHeight }}"
+  class="oscillator-canvas"
+>
 </canvas>
-<component-save-submit-buttons *ngIf="isSaveOrSubmitButtonVisible"
-    [componentState]="latestComponentState"
-    [isDirty]="isDirty"
-    [isDisabled]="isDisabled"
-    [isSaveButtonVisible]="isSaveButtonVisible"
-    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-    [isSubmitButtonVisible]="isSubmitButtonVisible"
-    [isSubmitDirty]="isSubmitDirty"
-    (saveButtonClicked)="saveButtonClicked($event)"
-    (submitButtonClicked)="submitButtonClicked($event)">
+<component-save-submit-buttons
+  *ngIf="isSaveOrSubmitButtonVisible"
+  [componentState]="latestComponentState"
+  [isDirty]="isDirty"
+  [isDisabled]="isDisabled"
+  [isSaveButtonVisible]="isSaveButtonVisible"
+  [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+  [isSubmitButtonVisible]="isSubmitButtonVisible"
+  [isSubmitDirty]="isSubmitDirty"
+  (saveButtonClicked)="saveButtonClicked($event)"
+  (submitButtonClicked)="submitButtonClicked($event)"
+>
 </component-save-submit-buttons>
-<component-annotations *ngIf="mode === 'student'"
-    [annotations]="latestAnnotations"
-    [maxScore]="componentContent.maxScore"
-    [nodeId]="nodeId"
-    [componentId]="componentId">
+<component-annotations
+  *ngIf="mode === 'student'"
+  [annotations]="latestAnnotations"
+  [maxScore]="componentContent.maxScore"
+  [nodeId]="nodeId"
+  [componentId]="componentId"
+>
 </component-annotations>

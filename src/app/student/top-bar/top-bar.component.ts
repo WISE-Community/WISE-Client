@@ -2,12 +2,15 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
+import { ConstraintService } from '../../../assets/wise5/services/constraintService';
+import { NodeStatusService } from '../../../assets/wise5/services/nodeStatusService';
 import { NotificationService } from '../../../assets/wise5/services/notificationService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
 import { NotificationsDialogComponent } from '../../../assets/wise5/vle/notifications-dialog/notifications-dialog.component';
 import { StudentAccountMenuComponent } from '../../../assets/wise5/vle/student-account-menu/student-account-menu.component';
 import { Notification } from '../../domain/notification';
+import { getAvatarColorForWorkgroupId } from '../../../assets/wise5/common/workgroup/workgroup';
 
 @Component({
   selector: 'top-bar',
@@ -31,15 +34,15 @@ export class TopBarComponent {
   constructor(
     private dialog: MatDialog,
     private configService: ConfigService,
+    private constraintService: ConstraintService,
+    private nodeStatusService: NodeStatusService,
     private notificationService: NotificationService,
     private projectService: ProjectService,
     private studentDataService: StudentDataService
   ) {}
 
   ngOnInit() {
-    this.avatarColor = this.configService.getAvatarColorForWorkgroupId(
-      this.configService.getWorkgroupId()
-    );
+    this.avatarColor = getAvatarColorForWorkgroupId(this.configService.getWorkgroupId());
     this.logoURL = `${this.projectService.getThemePath()}/images/WISE-logo-ffffff.svg`;
     this.projectName = this.projectService.getProjectTitle();
     this.isPreview = this.configService.isPreview();
@@ -74,15 +77,13 @@ export class TopBarComponent {
     return this.newNotifications.length > 0;
   }
 
-  disableConstraints($event: any): void {
+  protected disableConstraints(): void {
     this.isConstraintsDisabled = true;
-    this.projectService.activeConstraints = [];
-    this.studentDataService.updateNodeStatuses();
+    this.constraintService.clearActiveConstraints();
   }
 
-  hasConstraints(): boolean {
-    const activeConstraints = this.projectService.activeConstraints;
-    return activeConstraints != null && activeConstraints.length > 0;
+  protected hasConstraints(): boolean {
+    return this.constraintService.hasActiveConstraints();
   }
 
   viewCurrentAmbientNotification($event: any): void {
@@ -96,7 +97,7 @@ export class TopBarComponent {
   }
 
   private setCompletionPercent(): void {
-    this.completionPercent = this.studentDataService.getNodeStatuses()[
+    this.completionPercent = this.nodeStatusService.getNodeStatuses()[
       this.projectService.getProjectRootNode().id
     ].progress.completionPct;
   }

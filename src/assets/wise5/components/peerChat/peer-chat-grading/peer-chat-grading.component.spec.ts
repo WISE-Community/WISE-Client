@@ -43,6 +43,7 @@ describe('PeerChatGradingComponent', () => {
       declarations: [PeerChatGradingComponent],
       providers: [
         ClassroomStatusService,
+        PeerGroupService,
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,

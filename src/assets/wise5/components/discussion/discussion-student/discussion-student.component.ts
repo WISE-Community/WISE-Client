@@ -1,14 +1,13 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { generateRandomKey } from '../../../common/string/string';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
-import { RandomKeyService } from '../../../services/randomKeyService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { StudentAssetRequest } from '../../../vle/studentAsset/StudentAssetRequest';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
@@ -40,8 +39,7 @@ export class DiscussionStudent extends ComponentStudent {
     protected NotebookService: NotebookService,
     private NotificationService: NotificationService,
     protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
+    protected StudentDataService: StudentDataService
   ) {
     super(
       AnnotationService,
@@ -51,8 +49,7 @@ export class DiscussionStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 
@@ -167,11 +164,18 @@ export class DiscussionStudent extends ComponentStudent {
       nodeId: this.nodeId,
       componentId: this.componentId
     });
+    if (this.isPreviewMode()) {
+      this.saveForAuthoringPreviewMode('submit');
+    }
   }
 
   handleStudentWorkSavedToServerAdditionalProcessing(componentState: any): void {
     this.clearComponentValues();
-    if (this.isClassmateResponsesGated() && !this.retrievedClassmateResponses) {
+    if (
+      !this.isPreviewMode() &&
+      this.isClassmateResponsesGated() &&
+      !this.retrievedClassmateResponses
+    ) {
       this.getClassmateResponses();
     } else {
       this.addClassResponse(componentState);
@@ -285,16 +289,8 @@ export class DiscussionStudent extends ComponentStudent {
     }
   }
 
-  subscribeToAttachStudentAsset() {
-    this.subscriptions.add(
-      this.StudentAssetService.attachStudentAsset$.subscribe(
-        (studentAssetRequest: StudentAssetRequest) => {
-          if (this.isForThisComponent(studentAssetRequest)) {
-            this.attachStudentAsset(studentAssetRequest.asset);
-          }
-        }
-      )
-    );
+  protected doAttachStudentAsset(studentAssetRequest: StudentAssetRequest): void {
+    this.attachStudentAsset(studentAssetRequest.asset);
   }
 
   registerStudentWorkReceivedListener() {
@@ -371,11 +367,12 @@ export class DiscussionStudent extends ComponentStudent {
     componentState.componentType = 'Discussion';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
+    componentState.isSubmit = this.isSubmit;
     if (
       (this.ConfigService.isPreview() && !this.componentStateIdReplyingTo) ||
       this.mode === 'authoring'
     ) {
-      componentState.id = RandomKeyService.generate();
+      componentState.id = generateRandomKey();
     }
     if (this.isSubmit) {
       componentState.studentData.isSubmit = this.isSubmit;

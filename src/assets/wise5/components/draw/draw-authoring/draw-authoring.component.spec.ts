@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { DrawAuthoring } from './draw-authoring.component';
 import { DrawAuthoringModule } from './draw-authoring.module';
@@ -52,9 +53,9 @@ describe('DrawAuthoringComponent', () => {
     fixture = TestBed.createComponent(DrawAuthoring);
     component = fixture.componentInstance;
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
-      JSON.parse(JSON.stringify(componentContent))
+      copy(componentContent)
     );
-    component.componentContent = JSON.parse(JSON.stringify(componentContent));
+    component.componentContent = copy(componentContent);
     fixture.detectChanges();
   });
   moveAStampDown();

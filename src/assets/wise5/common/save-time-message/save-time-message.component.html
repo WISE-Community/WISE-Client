@@ -1,7 +1,10 @@
-<span *ngIf="!isInactive"
-    class="save-message secondary-text more-info"
-    [matTooltip]="tooltip"
-    [matTooltipPosition]="tooltipPosition || 'above'">
+<span
+  *ngIf="!isInactive"
+  tabindex="0"
+  class="save-message secondary-text more-info"
+  [matTooltip]="tooltip"
+  [matTooltipPosition]="tooltipPosition || 'above'"
+>
   {{ message }}
 </span>
 <span *ngIf="isInactive" class="save-message secondary-text">{{ message }}</span>

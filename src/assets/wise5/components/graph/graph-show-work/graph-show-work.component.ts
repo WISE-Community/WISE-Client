@@ -34,8 +34,6 @@ export class GraphShowWorkComponent extends ComponentShowWorkDirective {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.componentContent = this.ProjectService.injectAssetPaths(this.componentContent);
-    this.componentState = this.ProjectService.injectAssetPaths(this.componentState);
     this.graphType = this.componentContent.graphType;
     if (this.graphType == null) {
       this.graphType = 'line';

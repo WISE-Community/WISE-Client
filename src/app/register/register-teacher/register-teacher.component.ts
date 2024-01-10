@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SocialAuthService, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
+import { GoogleUser } from '../../modules/google-sign-in/GoogleUser';
 
 @Component({
   selector: 'app-register-teacher',
@@ -14,10 +14,9 @@ export class RegisterTeacherComponent implements OnInit {
   isGoogleAuthenticationEnabled: boolean = false;
 
   constructor(
-    private socialAuthService: SocialAuthService,
-    private userService: UserService,
     private configService: ConfigService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -32,24 +31,16 @@ export class RegisterTeacherComponent implements OnInit {
     this.router.navigate(['join/teacher/form', { email: this.email }]);
   }
 
-  public socialSignIn(socialPlatform: string) {
-    let socialPlatformProvider;
-    if (socialPlatform == 'google') {
-      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-    }
-
-    this.socialAuthService.signIn(socialPlatformProvider).then((userData) => {
-      const googleUserID = userData.id;
-      this.userService.isGoogleIdExists(googleUserID).subscribe((isExists) => {
-        if (isExists) {
-          this.router.navigate(['join/googleUserAlreadyExists']);
-        } else {
-          this.router.navigate([
-            'join/teacher/form',
-            { gID: googleUserID, name: userData.name, email: userData.email }
-          ]);
-        }
-      });
+  public googleSignIn(credential: GoogleUser): void {
+    this.userService.isGoogleIdExists(credential.sub).subscribe((isExists) => {
+      if (isExists) {
+        this.router.navigate(['join/googleUserAlreadyExists']);
+      } else {
+        this.router.navigate([
+          'join/teacher/form',
+          { gID: credential.sub, name: credential.name, email: credential.email }
+        ]);
+      }
     });
   }
 }

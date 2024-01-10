@@ -1,0 +1,44 @@
+.body {
+  padding: 0px 32px;
+}
+
+.save-bar {
+  margin-bottom: 20px;
+}
+
+.valid {
+  color: green;
+}
+
+.invalid {
+  color: red;
+}
+
+.view-title {
+  margin-bottom: 20px;
+}
+
+.warning-div {
+  margin-bottom: 20px;
+  color: red;
+}
+
+.potential-problems-div {
+  color: red;
+}
+
+.potential-problems-header {
+  text-decoration: underline;
+  margin-bottom: 8px;
+}
+
+.bad-node {
+  border: 1px solid red;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 20px;
+}
+
+.node-id {
+  font-weight: bold;
+}

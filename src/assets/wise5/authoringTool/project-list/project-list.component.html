@@ -1,0 +1,83 @@
+<div id="top" class="view-content view-content--with-sidemenu">
+  <div class="l-constrained" fxLayout="column">
+    <div
+      class="node-content md-whiteframe-1dp"
+      style="position: relative"
+      fxLayout="row"
+      fxLayoutWrap
+    >
+      <div class="main-box">
+        <button
+          mat-raised-button
+          color="primary"
+          matTooltip="Back to Teacher Home"
+          i18n-matTooltip
+          (click)="goHome()"
+        >
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          matTooltip="Create a New Unit"
+          i18n-matTooltip
+          (click)="addNewProject()"
+          style="margin-left: 8px"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <ng-template #projectTemplate let-project="project"
+          ><span
+            (click)="previewProject(project.id)"
+            class="projectButton"
+            matTooltip="Preview"
+            matTooltipPosition="left"
+            i18n-matTooltip
+          >
+            <mat-icon>preview</mat-icon>
+          </span>
+          <span
+            (click)="copyProject(project.id)"
+            class="projectButton"
+            matTooltip="Copy"
+            matTooltipPosition="left"
+            i18n-matTooltip
+          >
+            <mat-icon>content_copy</mat-icon>
+          </span>
+          <span (click)="openProject(project.id)" class="projectButton" fxLayout="row" fxFlex>
+            <span>{{ project.id }} - {{ project.name }}</span
+            >&nbsp;
+            <span *ngIf="project.runId != null" i18n>(Run ID: {{ project.runId }})</span>
+          </span></ng-template
+        >
+        <div style="width: 750px">
+          <h3 i18n>My Units</h3>
+          <div *ngIf="projects.length == 0" i18n>You have no units</div>
+          <div
+            *ngFor="let project of projects"
+            id="{{ project.id }}"
+            class="projectItem"
+            fxLayout="row"
+          >
+            <ng-template
+              *ngTemplateOutlet="projectTemplate; context: { project: project }"
+            ></ng-template>
+          </div>
+          <h3 i18n>Shared Units</h3>
+          <div *ngIf="sharedProjects.length == 0" i18n>You have no shared units</div>
+          <div
+            *ngFor="let project of sharedProjects"
+            id="{{ project.id }}"
+            class="projectItem"
+            fxLayout="row"
+          >
+            <ng-template
+              *ngTemplateOutlet="projectTemplate; context: { project: project }"
+            ></ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditPasswordComponent } from './edit-password.component';
 import { UserService } from '../../../services/user.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -9,13 +9,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
 import { User } from '../../../domain/user';
 import { MatDialogModule } from '@angular/material/dialog';
-import { PasswordService } from '../../../services/password.service';
+import { PasswordModule } from '../../../password/password.module';
+import { MatIconModule } from '@angular/material/icon';
+import { PasswordErrors } from '../../../domain/password/password-errors';
+import { PasswordRequirementComponent } from '../../../password/password-requirement/password-requirement.component';
+
 const CORRECT_OLD_PASSWORD = 'correctOldPassword123';
 const INCORRECT_OLD_PASSWORD = 'incorrectOldPassword123';
-const INVALID_PASSWORD_TOO_SHORT = 'Abcd123';
-const INVALID_PASSWORD_PATTERN = 'abcd1234';
-const NEW_PASSWORD_1 = 'Abcd1111';
-const NEW_PASSWORD_2 = 'Abcd2222';
+const INVALID_PASSWORD = PasswordRequirementComponent.INVALID_PASSWORD_TOO_SHORT;
+const NEW_PASSWORD_1 = PasswordRequirementComponent.VALID_PASSWORD;
+const NEW_PASSWORD_2 = PasswordRequirementComponent.VALID_PASSWORD + '!';
 
 export class MockUserService {
   getUser(): BehaviorSubject<User> {
@@ -50,8 +53,15 @@ describe('EditPasswordComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [EditPasswordComponent],
-      imports: [BrowserAnimationsModule, MatDialogModule, MatSnackBarModule, ReactiveFormsModule],
-      providers: [PasswordService, { provide: UserService, useValue: new MockUserService() }],
+      imports: [
+        BrowserAnimationsModule,
+        MatDialogModule,
+        MatIconModule,
+        MatSnackBarModule,
+        PasswordModule,
+        ReactiveFormsModule
+      ],
+      providers: [{ provide: UserService, useValue: new MockUserService() }],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(EditPasswordComponent);
@@ -63,121 +73,126 @@ describe('EditPasswordComponent', () => {
   validForm_enableSubmitButton();
   passwordMismatch_disableSubmitButtonAndInvalidateForm();
   oldPasswordIncorrect_disableSubmitButtonAndShowError();
-  saveChanges_newPasswordTooShort_ShowError();
   saveChanges_newPasswordPatternInvalid_ShowError();
   formSubmit_disableSubmitButton();
   notGoogleUser_showUnlinkOption();
   unlinkGoogleButtonClick_showDialog();
-  invalidPasswordTooShort_showError();
-  invalidPasswordPattern_showError();
+  invalidPassword_showError();
 });
 
 function initialState_disableSubmitButton() {
-  it('should disable submit button and invalidate form on initial state', () => {
-    expect(component.changePasswordFormGroup.valid).toBeFalsy();
-    expectSubmitButtonDisabled();
+  describe('the form is first loaded', () => {
+    it('disables the submit button', () => {
+      expect(component.changePasswordFormGroup.valid).toBeFalsy();
+      expectSubmitButtonDisabled();
+    });
   });
 }
 
 function validForm_enableSubmitButton() {
-  it('should enable submit button when form is valid', () => {
-    setPasswords(CORRECT_OLD_PASSWORD, NEW_PASSWORD_1, NEW_PASSWORD_1);
-    expectSubmitButtonEnabled();
-    expect(component.changePasswordFormGroup.valid).toBeTruthy();
+  describe('the form is valid', () => {
+    it('enables the submit button', () => {
+      setPasswords(CORRECT_OLD_PASSWORD, NEW_PASSWORD_1, NEW_PASSWORD_1);
+      expectSubmitButtonEnabled();
+      expect(component.changePasswordFormGroup.valid).toBeTruthy();
+    });
   });
 }
 
 function passwordMismatch_disableSubmitButtonAndInvalidateForm() {
-  it(`should disable submit button and invalidate form when new password and confirm new password
-      fields do not match`, () => {
-    setPasswords(CORRECT_OLD_PASSWORD, NEW_PASSWORD_1, NEW_PASSWORD_2);
-    expectSubmitButtonDisabled();
-    expect(component.changePasswordFormGroup.valid).toBeFalsy();
+  describe('new password and confirm new password do not match', () => {
+    it(`disables the submit button`, () => {
+      setPasswords(CORRECT_OLD_PASSWORD, NEW_PASSWORD_1, NEW_PASSWORD_2);
+      expect(component.changePasswordFormGroup.valid).toBeFalsy();
+      expectSubmitButtonDisabled();
+    });
   });
 }
 
 function oldPasswordIncorrect_disableSubmitButtonAndShowError() {
-  it(`should disable submit button and set incorrectPassword error when old password is
-      incorrect`, async () => {
-    spyOn(TestBed.inject(UserService), 'changePassword').and.returnValue(
-      generateObservableResponse('incorrectPassword', false)
-    );
-    setPasswords(INCORRECT_OLD_PASSWORD, NEW_PASSWORD_1, NEW_PASSWORD_1);
-    submitForm();
-    expectSubmitButtonDisabled();
-    expect(component.changePasswordFormGroup.get('oldPassword').getError('incorrectPassword')).toBe(
-      true
-    );
-  });
-}
-
-function saveChanges_newPasswordTooShort_ShowError() {
-  it(`should set minlength error when changePassword response returns new password is not long
-      enough error`, async () => {
-    spyOn(TestBed.inject(UserService), 'changePassword').and.returnValue(
-      generateObservableResponse('invalidPasswordLength', false)
-    );
-    setPasswords(CORRECT_OLD_PASSWORD, INVALID_PASSWORD_TOO_SHORT, INVALID_PASSWORD_TOO_SHORT);
-    component.saveChanges();
-    expect(component.newPasswordFormGroup.get('newPassword').getError('minlength')).toBe(true);
+  describe('server returns response that says old password is incorrect', () => {
+    it('shows the incorrect password error and disables the submit button', async () => {
+      spyOn(TestBed.inject(UserService), 'changePassword').and.returnValue(
+        generateErrorObservable('incorrectPassword')
+      );
+      setPasswords(INCORRECT_OLD_PASSWORD, NEW_PASSWORD_1, NEW_PASSWORD_1);
+      submitForm();
+      expect(
+        component.changePasswordFormGroup.get('oldPassword').getError('incorrectPassword')
+      ).toBe(true);
+      expectSubmitButtonDisabled();
+    });
   });
 }
 
 function saveChanges_newPasswordPatternInvalid_ShowError() {
-  it(`should set pattern error when changePassword response returns new password is not valid
-      pattern error`, async () => {
-    spyOn(TestBed.inject(UserService), 'changePassword').and.returnValue(
-      generateObservableResponse('invalidPasswordPattern', false)
-    );
-    setPasswords(CORRECT_OLD_PASSWORD, INVALID_PASSWORD_PATTERN, INVALID_PASSWORD_PATTERN);
-    component.saveChanges();
-    expect(component.newPasswordFormGroup.get('newPassword').getError('pattern')).toBe(true);
+  describe('server returns response that says new password is not valid', () => {
+    it('shows the new password error messages and disables the submit button', async () => {
+      const passwordErrors = new PasswordErrors(false, false, true);
+      spyOn(TestBed.inject(UserService), 'changePassword').and.returnValue(
+        generateErrorObservable(passwordErrors)
+      );
+      setPasswords(CORRECT_OLD_PASSWORD, INVALID_PASSWORD, INVALID_PASSWORD);
+      component.saveChanges();
+      expectPasswordErrors(false, false, true);
+      expectSubmitButtonDisabled();
+    });
   });
 }
 
+function expectPasswordErrors(
+  missingLetter: boolean,
+  missingNumber: boolean,
+  tooShort: boolean
+): void {
+  expect(component.newPasswordFormGroup.get('newPassword').getError('missingLetter')).toBe(
+    missingLetter
+  );
+  expect(component.newPasswordFormGroup.get('newPassword').getError('missingNumber')).toBe(
+    missingNumber
+  );
+  expect(component.newPasswordFormGroup.get('newPassword').getError('tooShort')).toBe(tooShort);
+}
+
 function formSubmit_disableSubmitButton() {
-  it('should disable submit button when form is successfully submitted', async () => {
-    spyOn(TestBed.inject(UserService), 'changePassword').and.returnValue(
-      generateObservableResponse('passwordChanged', true)
-    );
-    setPasswords(CORRECT_OLD_PASSWORD, NEW_PASSWORD_1, NEW_PASSWORD_1);
-    submitForm();
-    expectSubmitButtonDisabled();
+  describe('form is successfully submitted', () => {
+    it('disables the submit button', async () => {
+      spyOn(TestBed.inject(UserService), 'changePassword').and.returnValue(
+        generateSuccessObservable('passwordChanged')
+      );
+      setPasswords(CORRECT_OLD_PASSWORD, NEW_PASSWORD_1, NEW_PASSWORD_1);
+      submitForm();
+      expectSubmitButtonDisabled();
+    });
   });
 }
 
 function notGoogleUser_showUnlinkOption() {
-  it('should hide show option to unlink google account if the user is not a google user', () => {
-    expect(getUnlinkGoogleAccountButton()).toBeNull();
+  describe('user is not a google user', () => {
+    it('hides the option to unlink google acccount', () => {
+      expect(getUnlinkGoogleAccountButton()).toBeNull();
+    });
   });
 }
 
 function unlinkGoogleButtonClick_showDialog() {
-  it('clicking on unlink google account link should open a dialog', () => {
-    const dialogSpy = spyOn(component.dialog, 'open');
-    setGoogleUser();
-    getUnlinkGoogleAccountButton().click();
-    expect(dialogSpy).toHaveBeenCalled();
+  describe('user is a google user and clicks unlink google account button', () => {
+    it('opens dialog', () => {
+      const dialogSpy = spyOn(component.dialog, 'open');
+      setGoogleUser();
+      getUnlinkGoogleAccountButton().click();
+      expect(dialogSpy).toHaveBeenCalled();
+    });
   });
 }
 
-function invalidPasswordTooShort_showError() {
-  it(`should disable submit button and set min length error when new password is too
-      short`, async () => {
-    setPasswords(CORRECT_OLD_PASSWORD, INVALID_PASSWORD_TOO_SHORT, INVALID_PASSWORD_TOO_SHORT);
-    expectSubmitButtonDisabled();
-    expect(component.newPasswordFormGroup.get('newPassword').getError('minlength')).toBeTruthy();
-    expect(component.newPasswordFormGroup.get('newPassword').getError('pattern')).toBeFalsy();
-  });
-}
-
-function invalidPasswordPattern_showError() {
-  it(`should disable submit button and set pattern error when new password does not satisfy the
-      pattern requirements`, async () => {
-    setPasswords(CORRECT_OLD_PASSWORD, INVALID_PASSWORD_PATTERN, INVALID_PASSWORD_PATTERN);
-    expectSubmitButtonDisabled();
-    expect(component.newPasswordFormGroup.get('newPassword').getError('minlength')).toBeFalsy();
-    expect(component.newPasswordFormGroup.get('newPassword').getError('pattern')).toBeTruthy();
+function invalidPassword_showError() {
+  describe('new password does not satisfy the requirements', () => {
+    it('shows password errors and disables submit button', async () => {
+      setPasswords(CORRECT_OLD_PASSWORD, INVALID_PASSWORD, INVALID_PASSWORD);
+      expect(component.newPasswordFormGroup.get('newPassword').errors).not.toBeNull();
+      expectSubmitButtonDisabled();
+    });
   });
 }
 
@@ -206,16 +221,27 @@ function setPasswords(oldPass: string, newPass: string, newPassConfirm: string) 
   fixture.detectChanges();
 }
 
-function generateObservableResponse(messageCode: string, isSuccess: boolean): Observable<any> {
-  if (isSuccess) {
-    return new Observable((observer) => {
-      observer.next({ messageCode: messageCode });
-      observer.complete();
-    });
-  } else {
-    return new Observable((observer) => {
-      observer.error({ error: { messageCode: messageCode } });
-      observer.complete();
-    });
-  }
+function generateSuccessObservable(arg: string | any): Observable<void> {
+  return generateResponseObservable(arg, true);
+}
+
+function generateSuccessResponseValue(arg: string | any): any {
+  return typeof arg === 'string' ? { messageCode: arg } : arg;
+}
+
+function generateErrorObservable(arg: string | any): Observable<void> {
+  return generateResponseObservable(arg, false);
+}
+
+function generateResponseObservable(arg: string | any, isSuccess: boolean): Observable<void> {
+  return new Observable((observer: Subscriber<void>) => {
+    isSuccess
+      ? observer.next(generateSuccessResponseValue(arg))
+      : observer.error(generateErrorResponseValue(arg));
+    observer.complete();
+  });
+}
+
+function generateErrorResponseValue(arg: string | any): any {
+  return typeof arg === 'string' ? { error: { messageCode: arg } } : { error: arg };
 }

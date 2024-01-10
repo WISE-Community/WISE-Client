@@ -1,24 +1,18 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NodeService } from '../../../services/nodeService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { Component as WISEComponent } from '../../../common/Component';
 
 @Component({
   selector: 'save-starter-state',
   templateUrl: 'save-starter-state.component.html'
 })
 export class SaveStarterStateComponent implements OnInit {
-  @Input()
-  componentId: string;
+  @Input() private component: WISEComponent;
+  protected isDirty: boolean;
+  @Input() private starterState: any;
 
-  isDirty: boolean = false;
-
-  @Input()
-  nodeId: string;
-
-  @Input()
-  starterState: any;
-
-  constructor(private matDialog: MatDialog, private nodeService: NodeService) {}
+  constructor(private matDialog: MatDialog, private nodeService: TeacherNodeService) {}
 
   ngOnInit(): void {}
 
@@ -26,26 +20,26 @@ export class SaveStarterStateComponent implements OnInit {
     this.isDirty = !changes.starterState.isFirstChange();
   }
 
-  confirmSave() {
+  protected confirmSave(): void {
     if (confirm($localize`Are you sure you want to save the starter state?`)) {
       this.nodeService.respondStarterState({
-        nodeId: this.nodeId,
-        componentId: this.componentId,
+        nodeId: this.component.nodeId,
+        componentId: this.component.id,
         starterState: this.starterState
       });
       this.isDirty = false;
     }
   }
 
-  confirmDelete() {
+  protected confirmDelete(): void {
     if (
       confirm(
         $localize`Are you sure you want to delete the starter state? This will also close this preview window.`
       )
     ) {
       this.nodeService.deleteStarterState({
-        nodeId: this.nodeId,
-        componentId: this.componentId
+        nodeId: this.component.nodeId,
+        componentId: this.component.id
       });
       this.matDialog.closeAll();
     }

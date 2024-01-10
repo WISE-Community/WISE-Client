@@ -123,8 +123,8 @@ export class ComponentAnnotationsComponent {
   getLatestAnnotation() {
     let latest = null;
     if (this.annotations.comment || this.annotations.score) {
-      let commentSaveTime = this.annotations.comment ? this.annotations.comment.serverSaveTime : 0;
-      let scoreSaveTime = this.annotations.score ? this.annotations.score.serverSaveTime : 0;
+      const commentSaveTime = this.getSaveTime(this.annotations.comment);
+      const scoreSaveTime = this.getSaveTime(this.annotations.score);
       if (commentSaveTime >= scoreSaveTime) {
         latest = this.annotations.comment;
       } else if (scoreSaveTime > commentSaveTime) {
@@ -134,10 +134,23 @@ export class ComponentAnnotationsComponent {
     return latest;
   }
 
+  getSaveTime(annotation: any): number {
+    let saveTime = null;
+    if (annotation != null) {
+      if (annotation.serverSaveTime != null) {
+        saveTime = annotation.serverSaveTime;
+      }
+      if (annotation.clientSaveTime != null) {
+        saveTime = annotation.clientSaveTime;
+      }
+    }
+    return saveTime;
+  }
+
   getLatestAnnotationTime() {
     const latest = this.getLatestAnnotation();
     if (latest) {
-      return this.configService.convertToClientTimestamp(latest.serverSaveTime);
+      return this.configService.convertToClientTimestamp(this.getSaveTime(latest));
     }
     return null;
   }
@@ -163,7 +176,7 @@ export class ComponentAnnotationsComponent {
     );
     let saveTime = null;
     if (latestState) {
-      saveTime = this.configService.convertToClientTimestamp(latestState.serverSaveTime);
+      saveTime = this.configService.convertToClientTimestamp(this.getSaveTime(latestState));
     }
     return saveTime;
   }

@@ -59,6 +59,7 @@ sans-serif;
 .dt-container {
   white-space: nowrap;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  overflow: auto;
 
   .dt-canvas-container {
     vertical-align: top; // not needed but why not

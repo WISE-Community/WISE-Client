@@ -5,7 +5,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 
@@ -22,8 +21,7 @@ describe('TableService', () => {
         SessionService,
         StudentAssetService,
         TableService,
-        TagService,
-        UtilService
+        TagService
       ]
     });
     service = TestBed.get(TableService);

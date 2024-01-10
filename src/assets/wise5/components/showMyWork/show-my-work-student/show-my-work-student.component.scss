@@ -1,11 +1,11 @@
-@import '~style/abstracts/variables';
+@import 'style/abstracts/variables';
 
-.mat-card {
+.mat-mdc-card {
   margin: 4px;
   padding: 8px;
 }
 
-.mat-card-content {
+.mat-mdc-card-content {
   padding: 8px;
   border-radius: $button-border-radius;
   overflow: auto;

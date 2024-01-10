@@ -1,0 +1,35 @@
+<div *ngIf="isPeerGroupRetrieved">
+  <div *ngIf="peerGroup == null" class="notice mat-subtitle-2" i18n>
+    You have not been paired with a classmate yet. Please check back later.
+  </div>
+  <div [fxLayout]="flexLayout" *ngIf="peerGroup != null">
+    <div
+      *ngFor="let member of peerGroup.members"
+      fxFlex="100"
+      [fxFlex.gt-sm]="widthMd"
+      [fxFlex.gt-md]="widthLg"
+      fxLayout="column"
+    >
+      <mat-card appearance="outlined" class="mat-elevation-z0 notice-bg-bg" fxFlex="100" fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+          <mat-icon class="mat-30" [ngStyle]="{ color: workgroupInfos[member.id].avatarColor }">
+            account_circle
+          </mat-icon>
+          <span class="mat-subtitle-2">{{ workgroupInfos[member.id].displayNames }}</span>
+        </div>
+        <mat-card-content class="app-bg-bg" fxFlex="100">
+          <span class="text-secondary" *ngIf="workgroupIdToWork.get(member.id) == null" i18n>
+            (Waiting for response...)
+          </span>
+          <show-work-student
+            *ngIf="workgroupIdToWork.get(member.id) != null"
+            [studentWork]="workgroupIdToWork.get(member.id)"
+            [componentId]="componentContent.showWorkComponentId"
+            [nodeId]="componentContent.showWorkNodeId"
+          >
+          </show-work-student>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

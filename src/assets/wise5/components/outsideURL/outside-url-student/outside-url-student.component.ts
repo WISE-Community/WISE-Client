@@ -7,7 +7,6 @@ import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 
@@ -31,8 +30,7 @@ export class OutsideUrlStudent extends ComponentStudent {
     protected NotebookService: NotebookService,
     protected sanitizer: DomSanitizer,
     protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
+    protected StudentDataService: StudentDataService
   ) {
     super(
       AnnotationService,
@@ -42,12 +40,12 @@ export class OutsideUrlStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.url = this.getURL(this.componentContent);
     this.infoUrl = this.getInfoUrl(this.componentContent);
     this.infoString = this.getInfoString(this.componentContent);

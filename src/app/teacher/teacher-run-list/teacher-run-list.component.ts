@@ -1,12 +1,15 @@
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { TeacherService } from '../teacher.service';
 import { TeacherRun } from '../teacher-run';
 import { ConfigService } from '../../services/config.service';
-import { Router } from '@angular/router';
-import { formatDate } from '@angular/common';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { mergeMap } from 'rxjs/operators';
+import { ArchiveProjectService } from '../../services/archive-project.service';
+import { runSpansDays } from '../../../assets/wise5/common/datetime/datetime';
+import { SelectRunsOption } from '../select-runs-controls/select-runs-option';
+import { sortByRunStartTimeDesc } from '../../domain/run';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -14,29 +17,34 @@ import { mergeMap } from 'rxjs/operators';
   styleUrls: ['./teacher-run-list.component.scss']
 })
 export class TeacherRunListComponent implements OnInit {
-  MAX_RECENT_RUNS = 10;
+  private MAX_RECENT_RUNS = 10;
 
-  runs: TeacherRun[] = [];
-  filteredRuns: TeacherRun[] = [];
-  loaded: boolean = false;
-  searchValue: string = '';
-  periods: string[] = [];
-  filterOptions: any[];
-  filterValue: string = '';
-  showAll: boolean = false;
-  subscriptions: Subscription = new Subscription();
+  protected allRunsLoaded: boolean = false;
+  protected filteredRuns: TeacherRun[] = [];
+  protected filterValue: string = '';
+  protected numSelectedRuns: number = 0;
+  protected recentRunsLoaded: boolean = false;
+  protected runChangedEventEmitter: EventEmitter<void> = new EventEmitter<void>();
+  protected runs: TeacherRun[] = [];
+  protected searchValue: string = '';
+  protected showAll: boolean = false;
+  protected showArchived: boolean = false;
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
-    private teacherService: TeacherService,
+    private archiveProjectService: ArchiveProjectService,
     private configService: ConfigService,
+    @Inject(LOCALE_ID) private localeID: string,
+    private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService,
-    @Inject(LOCALE_ID) private localeID: string
+    private teacherService: TeacherService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
     this.getRuns();
     this.subscribeToRuns();
+    this.subscribeToRefreshProjects();
   }
 
   ngOnDestroy() {
@@ -50,7 +58,8 @@ export class TeacherRunListComponent implements OnInit {
       .subscribe((runs: TeacherRun[]) => {
         this.setRuns(runs);
         this.processRuns();
-        this.loaded = true;
+        this.highlightNewRunIfNecessary();
+        this.allRunsLoaded = true;
       });
   }
 
@@ -68,42 +77,27 @@ export class TeacherRunListComponent implements OnInit {
     this.runs = runs.map((run) => {
       const teacherRun = new TeacherRun(run);
       teacherRun.shared = !teacherRun.isOwner(userId);
+      teacherRun.archived = teacherRun.project.tags.includes('archived');
       return teacherRun;
     });
     this.filteredRuns = this.runs;
+    this.recentRunsLoaded = true;
   }
 
   private subscribeToRuns(): void {
     this.subscriptions.add(
       this.teacherService.runs$.subscribe((run: TeacherRun) => {
-        if (this.isNewRun(run)) {
-          this.addNewRun(run);
-        } else {
-          this.updateExistingRun(run);
-        }
+        this.updateExistingRun(run);
       })
     );
   }
 
-  private addNewRun(newRun: TeacherRun): void {
-    newRun.isHighlighted = true;
-    this.runs.unshift(newRun);
-    this.runs.sort(this.sortByStartTimeDesc);
-    this.populatePeriods();
-    this.periods.sort();
-    this.populateFilterOptions();
-    this.reset();
-    if (!this.showAll) {
-      const index = this.getRunIndex(newRun);
-      if (index > 9) {
-        this.showAll = true;
-      }
-    }
-    this.router.navigateByUrl('teacher/home/schedule').then(() => {
-      setTimeout(() => {
-        document.getElementById(`run${newRun.id}`).scrollIntoView();
-      }, 1000);
-    });
+  private subscribeToRefreshProjects(): void {
+    this.subscriptions.add(
+      this.archiveProjectService.refreshProjectsEvent$.subscribe(() => {
+        this.runArchiveStatusChanged();
+      })
+    );
   }
 
   private updateExistingRun(updatedRun: TeacherRun): void {
@@ -113,101 +107,58 @@ export class TeacherRunListComponent implements OnInit {
     this.reset();
   }
 
-  private isNewRun(run: TeacherRun) {
-    return !this.runs.some((existingRun) => existingRun.id === run.id);
-  }
-
-  private getRunIndex(run: TeacherRun): number {
-    for (let i = 0; i < this.runs.length; i++) {
-      if (this.runs[i].id === run.id) {
-        return i;
-      }
-    }
-    return null;
-  }
-
   private processRuns(): void {
     this.filteredRuns = this.runs;
-    this.populatePeriods();
-    this.periods.sort();
-    this.populateFilterOptions();
     this.performSearchAndFilter();
   }
 
-  sortByStartTimeDesc(a: TeacherRun, b: TeacherRun): number {
-    return b.startTime - a.startTime;
+  protected sortByStartTimeDesc(a: TeacherRun, b: TeacherRun): number {
+    return sortByRunStartTimeDesc(a, b);
   }
 
-  private populatePeriods(): void {
-    this.periods = [];
-    for (const run of this.runs) {
-      for (const period of run.periods) {
-        if (!this.periods.includes(period)) {
-          this.periods.push(period);
-        }
-      }
-    }
+  protected runSpansDays(run: TeacherRun): boolean {
+    return runSpansDays(run, this.localeID);
   }
 
-  private populateFilterOptions(): void {
-    this.filterOptions = [{ value: '', label: $localize`All Periods` }];
-    for (const period of this.periods) {
-      this.filterOptions.push({ value: period, label: period });
-    }
+  protected activeTotal(): number {
+    return this.getTotal('isActive');
   }
 
-  runSpansDays(run: TeacherRun) {
-    const startDay = formatDate(run.startTime, 'shortDate', this.localeID);
-    const endDay = formatDate(run.endTime, 'shortDate', this.localeID);
-    return startDay != endDay;
-  }
-
-  activeTotal(): number {
-    let total = 0;
+  protected completedTotal(): number {
     const now = this.configService.getCurrentServerTime();
-    for (const run of this.filteredRuns) {
-      if (run.isActive(now)) {
-        total++;
-      }
-    }
-    return total;
+    return this.filteredRuns.filter(
+      (run: TeacherRun) => !run.isActive(now) && !run.isScheduled(now)
+    ).length;
   }
 
-  scheduledTotal(): number {
-    let total = 0;
+  protected scheduledTotal(): number {
+    return this.getTotal('isScheduled');
+  }
+
+  private getTotal(filterFunctionName: string): number {
     const now = this.configService.getCurrentServerTime();
-    for (const run of this.filteredRuns) {
-      if (run.isScheduled(now)) {
-        total++;
-      }
-    }
-    return total;
+    return this.filteredRuns.filter((run: TeacherRun) => run[filterFunctionName](now)).length;
   }
 
   private performSearchAndFilter(): void {
     this.filteredRuns = this.searchValue ? this.performSearch(this.searchValue) : this.runs;
-    this.performFilter(this.filterValue);
+    this.performFilter();
+    this.runSelectedStatusChanged();
   }
 
-  searchChanged(searchValue: string): void {
+  protected searchChanged(searchValue: string): void {
     this.searchValue = searchValue;
     this.performSearchAndFilter();
   }
 
-  filterChanged(value: string): void {
-    this.filterValue = value;
-    this.performSearchAndFilter();
-  }
-
-  private performFilter(value: string): void {
+  private performFilter(): void {
     this.filteredRuns = this.filteredRuns.filter((run: TeacherRun) => {
-      return value === '' || run.periods.includes(value);
+      return (!this.showArchived && !run.archived) || (this.showArchived && run.archived);
     });
   }
 
-  private performSearch(searchValue: string) {
+  private performSearch(searchValue: string): TeacherRun[] {
     searchValue = searchValue.toLocaleLowerCase();
-    // TODO: extract this for global use?
     return this.runs.filter((run: TeacherRun) =>
       Object.keys(run).some((prop) => {
         const value = run[prop];
@@ -222,13 +173,65 @@ export class TeacherRunListComponent implements OnInit {
     );
   }
 
-  reset(): void {
+  protected clearFilters(event: Event): void {
+    event.preventDefault();
+    this.reset();
+  }
+
+  protected reset(): void {
     this.searchValue = '';
     this.filterValue = '';
     this.performSearchAndFilter();
   }
 
-  isRunActive(run) {
+  protected isRunActive(run: TeacherRun): boolean {
     return run.isActive(this.configService.getCurrentServerTime());
+  }
+
+  private highlightNewRunIfNecessary(): void {
+    this.route.queryParams.subscribe((queryParams: Params) => {
+      if (queryParams.newRunId != null) {
+        const newRunId = parseInt(queryParams.newRunId);
+        if (!isNaN(newRunId)) {
+          this.highlightNewRun(newRunId);
+        }
+        // remove the newRunId parameter from the url
+        this.router.navigate(['/teacher/home/schedule'], { queryParams: { newRunId: null } });
+      }
+    });
+  }
+
+  private highlightNewRun(runId: number): void {
+    for (const run of this.runs) {
+      if (run.id === runId) {
+        run.highlighted = true;
+      }
+    }
+  }
+
+  private unselectAllRuns(): void {
+    for (const run of this.runs) {
+      run.selected = false;
+    }
+  }
+
+  protected selectRunsOptionChosen(option: SelectRunsOption): void {
+    const now = this.configService.getCurrentServerTime();
+    this.filteredRuns.forEach((run: TeacherRun) => run.updateSelected(option, now));
+    this.runSelectedStatusChanged();
+  }
+
+  protected updateRunsInformation(): void {
+    this.unselectAllRuns();
+    this.runSelectedStatusChanged();
+    this.performSearchAndFilter();
+  }
+
+  protected runArchiveStatusChanged(): void {
+    this.performSearchAndFilter();
+  }
+
+  private runSelectedStatusChanged(): void {
+    this.runChangedEventEmitter.emit();
   }
 }

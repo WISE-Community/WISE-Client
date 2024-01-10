@@ -7,13 +7,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { ComponentContent } from '../../../common/ComponentContent';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ShowMyWorkAuthoringComponent } from './show-my-work-authoring.component';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 describe('ShowMyWorkAuthoringComponent', () => {
   let component: ShowMyWorkAuthoringComponent;
@@ -42,19 +41,15 @@ describe('ShowMyWorkAuthoringComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
-        StudentTeacherCommonServicesModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, ShowMyWorkAuthoringComponent],
-      providers: [ProjectAssetService, TeacherProjectService]
+      providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShowMyWorkAuthoringComponent);
-    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
-      {} as ComponentContent
-    );
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
       nodeId1
     ]);
@@ -63,6 +58,7 @@ describe('ShowMyWorkAuthoringComponent', () => {
     component3 = createComponent(componentId3, OPEN_RESPONSE_TYPE);
     component4 = createComponent(componentId4, HTML_TYPE);
     component = fixture.componentInstance;
+    component.componentContent = {};
     fixture.detectChanges();
   });
 

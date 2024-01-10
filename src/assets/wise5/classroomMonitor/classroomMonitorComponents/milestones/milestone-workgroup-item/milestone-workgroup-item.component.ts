@@ -10,6 +10,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { copy } from '../../../../common/object/object';
 import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 
@@ -104,7 +105,7 @@ export class MilestoneWorkgroupItemComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.workgroupData) {
-      const workgroupData = JSON.parse(JSON.stringify(changes.workgroupData.currentValue));
+      const workgroupData = copy(changes.workgroupData.currentValue);
       this.hasAlert = workgroupData.hasAlert;
       this.hasNewAlert = workgroupData.hasNewAlert;
       this.status = workgroupData.completionStatus;

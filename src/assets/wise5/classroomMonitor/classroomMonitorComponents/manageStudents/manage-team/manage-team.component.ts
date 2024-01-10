@@ -13,6 +13,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { MoveUserConfirmDialogComponent } from '../move-user-confirm-dialog/move-user-confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 
 @Component({
   selector: 'manage-team',
@@ -20,26 +21,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: 'manage-team.component.html'
 })
 export class ManageTeamComponent {
+  avatarColor: string;
+  canGradeStudentWork: boolean;
+  isUnassigned: boolean;
   @Input() team: any;
 
-  avatarColor: string;
-  canChangePeriod: boolean;
-  isUnassigned: boolean;
-
   constructor(
+    private configService: ConfigService,
     private dialog: MatDialog,
-    private ConfigService: ConfigService,
-    private UpdateWorkgroupService: UpdateWorkgroupService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private updateWorkgroupService: UpdateWorkgroupService
   ) {}
 
   ngOnInit() {
-    this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.team.workgroupId);
+    this.avatarColor = getAvatarColorForWorkgroupId(this.team.workgroupId);
+    this.canGradeStudentWork = this.configService.getPermissions().canGradeStudentWork;
     this.isUnassigned = this.team.workgroupId == null;
-    this.canChangePeriod =
-      this.ConfigService.getPermissions().canGradeStudentWork &&
-      this.team.users.length > 0 &&
-      !this.isUnassigned;
   }
 
   changePeriod(event: Event) {
@@ -62,7 +59,7 @@ export class ManageTeamComponent {
     return !drop.element.nativeElement.classList.contains('unassigned') && drop.data.length < 3;
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  protected drop(event: CdkDragDrop<string[]>): void {
     const containerEl = event.container.element.nativeElement;
     const itemEl = event.item.element.nativeElement;
     if (event.previousContainer !== event.container) {
@@ -86,24 +83,35 @@ export class ManageTeamComponent {
     }
   }
 
-  private moveUser(event: CdkDragDrop<string[]>) {
-    const user: any = event.previousContainer.data[event.previousIndex];
-    this.UpdateWorkgroupService.moveMember(
-      user.id,
-      event.item.data,
-      this.team.workgroupId,
-      this.team.periodId
-    ).subscribe(() => {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-      this.ConfigService.retrieveConfig(
-        `/api/config/classroomMonitor/${this.ConfigService.getRunId()}`
-      );
-      this.snackBar.open($localize`Moved student to Team ${this.team.workgroupId}.`);
-    });
+  private moveUser(event: CdkDragDrop<string[]>): void {
+    this.updateWorkgroupService
+      .moveMember(event.item.data.user.id, this.team.workgroupId)
+      .subscribe({
+        next: (workgroupId: number) => {
+          const previousIndex = event.previousContainer.data.findIndex(
+            (user) => user === event.item.data.user
+          );
+          transferArrayItem(
+            event.previousContainer.data,
+            event.container.data,
+            previousIndex,
+            event.currentIndex
+          );
+          this.configService
+            .retrieveConfig(`/api/config/classroomMonitor/${this.configService.getRunId()}`)
+            .subscribe({
+              next: () => {
+                this.snackBar.open($localize`Moved student to Team ${workgroupId}.`);
+              }
+            });
+        },
+        error: () => {
+          this.snackBar.open($localize`Error: Could not move student.`);
+        }
+      });
+  }
+
+  protected removeUser(user: any): void {
+    this.team.users.splice(this.team.users.indexOf(user), 1);
   }
 }

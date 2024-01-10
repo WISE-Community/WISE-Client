@@ -3,42 +3,38 @@
 import { Injectable } from '@angular/core';
 import { ProjectService } from './projectService';
 import { ConfigService } from './configService';
-import { UtilService } from './utilService';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { RandomKeyService } from './randomKeyService';
+import { generateRandomKey } from '../common/string/string';
+import { Annotation } from '../common/Annotation';
 
 @Injectable()
 export class AnnotationService {
-  annotations: any = [];
+  annotations: Annotation[] = [];
   dummyAnnotationId: number = 1; // used in preview mode when we simulate saving of annotation
-  private annotationSavedToServerSource: Subject<any> = new Subject<any>();
-  public annotationSavedToServer$: Observable<any> = this.annotationSavedToServerSource.asObservable();
-  private annotationReceivedSource: Subject<any> = new Subject<any>();
-  public annotationReceived$: Observable<any> = this.annotationReceivedSource.asObservable();
+  private annotationSavedToServerSource: Subject<Annotation> = new Subject<Annotation>();
+  public annotationSavedToServer$: Observable<Annotation> = this.annotationSavedToServerSource.asObservable();
+  private annotationReceivedSource: Subject<Annotation> = new Subject<Annotation>();
+  public annotationReceived$: Observable<Annotation> = this.annotationReceivedSource.asObservable();
 
   constructor(
     private http: HttpClient,
     private ConfigService: ConfigService,
-    private ProjectService: ProjectService,
-    private UtilService: UtilService
+    private ProjectService: ProjectService
   ) {}
 
-  getAnnotations() {
+  getAnnotations(): Annotation[] {
     return this.annotations;
   }
 
-  /**
-   * Get the annotation with the specified id, or null if not found
-   * @param annotationId
-   */
-  getAnnotationById(annotationId) {
-    for (let annotation of this.annotations) {
-      if (annotation.id === annotationId) {
-        return annotation;
-      }
-    }
-    return null;
+  getAnnotationById(annotationId: number): Annotation {
+    return this.annotations.find((annotation) => annotation.id === annotationId) || null;
+  }
+
+  getAnnotationsByNodeIdComponentId(nodeId: string, componentId: string): Annotation[] {
+    return this.annotations.filter(
+      (annotation) => annotation.nodeId === nodeId && annotation.componentId === componentId
+    );
   }
 
   /**
@@ -155,7 +151,7 @@ export class AnnotationService {
    * @returns a promise
    */
   saveAnnotation(annotation) {
-    annotation.requestToken = RandomKeyService.generate(); // use this to keep track of unsaved annotations.
+    annotation.requestToken = generateRandomKey(); // use this to keep track of unsaved annotations.
     this.addOrUpdateAnnotation(annotation);
     const annotations = [annotation];
     if (this.ConfigService.isPreview()) {
@@ -198,7 +194,7 @@ export class AnnotationService {
               localAnnotation.serverSaveTime = savedAnnotation.serverSaveTime;
               //localAnnotation.requestToken = null; // requestToken is no longer needed.
 
-              this.broadcastAnnotationSavedToServer({ annotation: localAnnotation });
+              this.broadcastAnnotationSavedToServer(localAnnotation);
               break;
             } else if (
               localAnnotation.requestToken != null &&
@@ -222,7 +218,7 @@ export class AnnotationService {
                 this.dummyAnnotationId++;
               }
 
-              this.broadcastAnnotationSavedToServer({ annotation: localAnnotation });
+              this.broadcastAnnotationSavedToServer(localAnnotation);
               break;
             }
           }
@@ -440,28 +436,15 @@ export class AnnotationService {
    * @return object containing the component's latest score and comment annotations
    */
   getLatestComponentAnnotations(
-    nodeId,
-    componentId,
-    workgroupId,
-    scoreType = null,
-    commentType = null
-  ) {
-    let latestScoreAnnotation = this.getLatestScoreAnnotation(
-      nodeId,
-      componentId,
-      workgroupId,
-      scoreType
-    );
-    let latestCommentAnnotation = this.getLatestCommentAnnotation(
-      nodeId,
-      componentId,
-      workgroupId,
-      commentType
-    );
-
+    nodeId: string,
+    componentId: string,
+    workgroupId: number,
+    scoreType: 'score' | 'autoScore' | 'any' = 'any',
+    commentType: 'comment' | 'autoComment' | 'any' = 'any'
+  ): any {
     return {
-      score: latestScoreAnnotation,
-      comment: latestCommentAnnotation
+      score: this.getLatestScoreAnnotation(nodeId, componentId, workgroupId, scoreType),
+      comment: this.getLatestCommentAnnotation(nodeId, componentId, workgroupId, commentType)
     };
   }
 
@@ -530,129 +513,57 @@ export class AnnotationService {
     return null;
   }
 
-  /**
-   * Get the latest score annotation
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @param workgroupId the workgroup id
-   * @param scoreType (optional) the type of score
-   * e.g.
-   * 'autoScore' for auto graded score
-   * 'score' for teacher graded score
-   * 'any' for auto graded score or teacher graded score
-   * @returns the latest score annotation
-   */
-  getLatestScoreAnnotation(nodeId, componentId, workgroupId, scoreType = null) {
-    let annotation = null;
-    const annotations = this.getAnnotations();
-
-    if (scoreType == null) {
-      scoreType = 'any';
-    }
-
-    for (let a = annotations.length - 1; a >= 0; a--) {
-      const tempAnnotation = annotations[a];
-      if (tempAnnotation != null) {
-        let acceptAnnotation = false;
-        const tempNodeId = tempAnnotation.nodeId;
-        const tempComponentId = tempAnnotation.componentId;
-        const tempToWorkgroupId = tempAnnotation.toWorkgroupId;
-        const tempAnnotationType = tempAnnotation.type;
-
-        if (
-          nodeId == tempNodeId &&
-          componentId == tempComponentId &&
-          workgroupId == tempToWorkgroupId
-        ) {
-          if (
-            scoreType === 'any' &&
-            (tempAnnotationType === 'autoScore' || tempAnnotationType === 'score')
-          ) {
-            acceptAnnotation = true;
-          } else if (scoreType === 'autoScore' && tempAnnotationType === 'autoScore') {
-            acceptAnnotation = true;
-          } else if (scoreType === 'score' && tempAnnotationType === 'score') {
-            acceptAnnotation = true;
-          }
-
-          if (acceptAnnotation) {
-            annotation = tempAnnotation;
-            break;
-          }
-        }
-      }
-    }
-    return annotation;
+  getLatestScoreAnnotation(
+    nodeId: string,
+    componentId: string,
+    workgroupId: number,
+    scoreType: 'score' | 'autoScore' | 'any' = 'any'
+  ): Annotation {
+    return (
+      this.getAnnotationsByNodeIdComponentId(nodeId, componentId)
+        .filter(
+          (annotation) =>
+            annotation.toWorkgroupId == workgroupId && this.matchesScoreType(annotation, scoreType)
+        )
+        .at(-1) || null
+    );
   }
 
-  isThereAnyScoreAnnotation(nodeId, componentId, periodId) {
-    const annotations = this.getAnnotations();
-    for (const annotation of annotations) {
-      if (
-        annotation.nodeId === nodeId &&
-        annotation.componentId === componentId &&
-        this.UtilService.isMatchingPeriods(annotation.periodId, periodId) &&
-        this.isScoreOrAutoScore(annotation)
-      ) {
-        return true;
-      }
-    }
-    return false;
+  private matchesScoreType(
+    annotation: Annotation,
+    scoreType: 'score' | 'autoScore' | 'any'
+  ): boolean {
+    return (
+      (scoreType === 'any' && ['autoScore', 'score'].includes(annotation.type)) ||
+      annotation.type === scoreType
+    );
   }
 
-  /**
-   * Get the latest comment annotation
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @param workgroupId the workgroup id
-   * @param commentType (optional) the type of comment
-   * e.g.
-   * 'autoComment' for auto graded comment
-   * 'comment' for teacher graded comment
-   * 'any' for auto graded comment or teacher graded comment
-   * @returns the latest comment annotation
-   */
-  getLatestCommentAnnotation(nodeId, componentId, workgroupId, commentType) {
-    let annotation = null;
-    const annotations = this.getAnnotations();
+  getLatestCommentAnnotation(
+    nodeId: string,
+    componentId: string,
+    workgroupId: number,
+    commentType: 'comment' | 'autoComment' | 'any' = 'any'
+  ): Annotation {
+    return (
+      this.getAnnotationsByNodeIdComponentId(nodeId, componentId)
+        .filter(
+          (annotation) =>
+            annotation.toWorkgroupId == workgroupId &&
+            this.matchesCommentType(annotation, commentType)
+        )
+        .at(-1) || null
+    );
+  }
 
-    if (commentType == null) {
-      commentType = 'any';
-    }
-
-    for (let a = annotations.length - 1; a >= 0; a--) {
-      const tempAnnotation = annotations[a];
-      if (tempAnnotation != null) {
-        let acceptAnnotation = false;
-        const tempNodeId = tempAnnotation.nodeId;
-        const tempComponentId = tempAnnotation.componentId;
-        const tempToWorkgroupId = tempAnnotation.toWorkgroupId;
-        const tempAnnotationType = tempAnnotation.type;
-
-        if (
-          nodeId == tempNodeId &&
-          componentId == tempComponentId &&
-          workgroupId == tempToWorkgroupId
-        ) {
-          if (
-            commentType === 'any' &&
-            (tempAnnotationType === 'autoComment' || tempAnnotationType === 'comment')
-          ) {
-            acceptAnnotation = true;
-          } else if (commentType === 'autoComment' && tempAnnotationType === 'autoComment') {
-            acceptAnnotation = true;
-          } else if (commentType === 'comment' && tempAnnotationType === 'comment') {
-            acceptAnnotation = true;
-          }
-
-          if (acceptAnnotation) {
-            annotation = tempAnnotation;
-            break;
-          }
-        }
-      }
-    }
-    return annotation;
+  private matchesCommentType(
+    annotation: Annotation,
+    commentType: 'comment' | 'autoComment' | 'any'
+  ): boolean {
+    return (
+      (commentType === 'any' && ['autoComment', 'comment'].includes(annotation.type)) ||
+      annotation.type === commentType
+    );
   }
 
   getScoreValueFromScoreAnnotation(scoreAnnotation: any): number {
@@ -710,21 +621,14 @@ export class AnnotationService {
    * @param type the type of annotation
    * @return the latest annotation for the given student work and annotation type
    */
-  getLatestAnnotationByStudentWorkIdAndType(studentWorkId, type) {
-    for (let a = this.annotations.length - 1; a >= 0; a--) {
-      const annotation = this.annotations[a];
-
-      if (annotation != null) {
-        if (studentWorkId == annotation.studentWorkId && type == annotation.type) {
-          /*
-           * we have found an annotation with the given student work
-           * id and annotation type
-           */
-          return annotation;
-        }
-      }
-    }
-    return null;
+  getLatestAnnotationByStudentWorkIdAndType(studentWorkId: number, type: string): Annotation {
+    return (
+      this.annotations
+        .filter(
+          (annotation) => annotation.studentWorkId === studentWorkId && annotation.type === type
+        )
+        .at(-1) || null
+    );
   }
 
   /**
@@ -732,78 +636,15 @@ export class AnnotationService {
    * @param studentWorkId the student work id
    * @return array of annotations for the given student work
    */
-  getAnnotationsByStudentWorkId(studentWorkId) {
-    let annotations = [];
-    for (let annotation of this.annotations) {
-      if (annotation && studentWorkId == annotation.studentWorkId) {
-        annotations.push(annotation);
-      }
-    }
-    return annotations;
+  getAnnotationsByStudentWorkId(studentWorkId: number): Annotation[] {
+    return this.annotations.filter((annotation) => annotation.studentWorkId === studentWorkId);
   }
 
-  getAverageAutoScore(nodeId, componentId, periodId = -1, type = null) {
-    let totalScoreSoFar = 0;
-    let annotationsCounted = 0;
-    for (let annotation of this.getAllLatestScoreAnnotations(nodeId, componentId, periodId)) {
-      if (
-        annotation.nodeId === nodeId &&
-        annotation.componentId === componentId &&
-        (periodId === -1 || annotation.periodId === periodId)
-      ) {
-        let score = null;
-        if (type != null) {
-          score = this.getSubScore(annotation, type);
-        } else {
-          score = this.getScoreFromAnnotation(annotation);
-        }
-        if (score != null) {
-          totalScoreSoFar += score;
-          annotationsCounted++;
-        }
-      }
-    }
-    return totalScoreSoFar / annotationsCounted;
+  broadcastAnnotationSavedToServer(annotation: Annotation): void {
+    this.annotationSavedToServerSource.next(annotation);
   }
 
-  getAllLatestScoreAnnotations(nodeId, componentId, periodId) {
-    const workgroupIdsFound = {};
-    const latestScoreAnnotations = [];
-    for (let a = this.annotations.length - 1; a >= 0; a--) {
-      const annotation = this.annotations[a];
-      const workgroupId = annotation.toWorkgroupId;
-      if (
-        workgroupIdsFound[workgroupId] == null &&
-        nodeId === annotation.nodeId &&
-        componentId === annotation.componentId &&
-        (periodId === -1 || periodId === annotation.periodId) &&
-        ('score' === annotation.type || 'autoScore' === annotation.type)
-      ) {
-        workgroupIdsFound[workgroupId] = annotation;
-        latestScoreAnnotations.push(annotation);
-      }
-    }
-    return latestScoreAnnotations;
-  }
-
-  getScoreFromAnnotation(annotation) {
-    return annotation.data.value;
-  }
-
-  getSubScore(annotation, type) {
-    for (let score of annotation.data.scores) {
-      if (score.id === type) {
-        return score.score;
-      }
-    }
-    return null;
-  }
-
-  broadcastAnnotationSavedToServer(args: any) {
-    this.annotationSavedToServerSource.next(args);
-  }
-
-  broadcastAnnotationReceived(args: any) {
-    this.annotationReceivedSource.next(args);
+  broadcastAnnotationReceived(annotation: Annotation): void {
+    this.annotationReceivedSource.next(annotation);
   }
 }

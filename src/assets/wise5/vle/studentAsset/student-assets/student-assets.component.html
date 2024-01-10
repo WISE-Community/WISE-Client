@@ -1,20 +1,26 @@
-<div class='studentAssets' *ngIf="studentAssets.length > 0">
-  <img *ngFor="let studentAsset of studentAssets"
-      (click)='attachStudentAssetToComponent($event, studentAsset)'
-      [src]='studentAsset.iconURL'
-      class='studentAsset'
-      title="Use this file"
-      i18n-title />
+<div class="studentAssets" *ngIf="studentAssets.length > 0">
+  <img
+    *ngFor="let studentAsset of studentAssets"
+    (click)="attachStudentAssetToComponent($event, studentAsset)"
+    [src]="studentAsset.iconURL"
+    class="studentAsset"
+    title="Use this file"
+    i18n-title
+  />
 </div>
-<div *ngIf="mode !== 'preview'"
-    class="drop-box"
-    (fileDropped)="uploadStudentAssets($event)"
-    dragAndDrop>
-  <input type="file"
-      (change)="uploadStudentAssets($event.target.files)"
-      #fileDropRef
-      multiple
-      class="file-input" />
+<div
+  *ngIf="mode !== 'preview'"
+  class="drop-box"
+  (fileDropped)="uploadStudentAssets($event)"
+  dragAndDrop
+>
+  <input
+    type="file"
+    (change)="uploadStudentAssets($event.target.files)"
+    #fileDropRef
+    multiple
+    class="file-input"
+  />
   <div i18n>Drop image or file here or click to upload!</div>
 </div>
 <div *ngIf="mode === 'preview'" i18n>

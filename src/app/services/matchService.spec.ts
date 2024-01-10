@@ -6,7 +6,6 @@ import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
 import { TagService } from '../../assets/wise5/services/tagService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 
 let service: MatchService;
@@ -23,8 +22,7 @@ describe('MatchService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        TagService,
-        UtilService
+        TagService
       ]
     });
     service = TestBed.get(MatchService);
@@ -35,7 +33,7 @@ describe('MatchService', () => {
   createComponent();
   isCompleted();
   componentStateHasStudentWork();
-  hasCorrectAnswer();
+  componentHasCorrectAnswer();
   getItemById();
 });
 
@@ -165,7 +163,7 @@ function componentStateHasStudentWork() {
   });
 }
 
-function hasCorrectAnswer() {
+function componentHasCorrectAnswer() {
   let component: any;
   beforeEach(() => {
     const choices = [
@@ -176,7 +174,7 @@ function hasCorrectAnswer() {
     component = createMatchComponent([], [], feedback);
   });
   function expectHasCorrectAnswer(component: any, expectedResult: boolean) {
-    expect(service.hasCorrectAnswer(component)).toEqual(expectedResult);
+    expect(service.componentHasCorrectAnswer(component)).toEqual(expectedResult);
   }
   it('should check if there is a correct answer when there is none', () => {
     expectHasCorrectAnswer(component, false);

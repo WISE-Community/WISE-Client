@@ -14,7 +14,10 @@ export abstract class ComponentShowWorkDirective {
   constructor(protected nodeService: NodeService, protected projectService: ProjectService) {}
 
   ngOnInit() {
-    this.componentContent = this.projectService.getComponent(this.nodeId, this.componentId);
+    this.componentContent = this.projectService.injectAssetPaths(
+      this.projectService.getComponent(this.nodeId, this.componentId)
+    );
+    this.componentState = this.projectService.injectAssetPaths(this.componentState);
   }
 
   ngAfterViewInit(): void {

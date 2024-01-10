@@ -1,7 +1,7 @@
 @import
-  '~style/abstracts/variables',
-  '~style/abstracts/functions';
-  
+  'style/abstracts/variables',
+  'style/abstracts/functions';
+
 .topbar {
   z-index: 3;
   position: fixed;
@@ -62,6 +62,6 @@ h3.title {
 
 .menu-progress {
   position: absolute;
-  right: 4px;
-  top: 5px;
+  right: 8px;
+  top: 8px;
 }

@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { copy } from '../../../../common/object/object';
 import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
-import { UtilService } from '../../../../services/utilService';
+import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 class Workgroup {
   periodId: number;
@@ -15,36 +17,43 @@ class Workgroup {
   templateUrl: './student-grading-tools.component.html'
 })
 export class StudentGradingToolsComponent implements OnInit {
-  avatarColor: string;
-  currentPeriodChangedSubscription: Subscription;
-  icons: any;
-  is_rtl: boolean;
-  nextId: number;
-  periodId: number;
-  prevId: number;
-  @Input() workgroupId: number;
-  workgroups: Workgroup[];
+  protected avatarColor: string;
+  protected nextWorkgroup: Workgroup;
+  private periodId: number;
+  protected prevWorkgroup: Workgroup;
+  private subscriptions: Subscription = new Subscription();
+  private workgroupId: number;
+  private workgroups: Workgroup[];
 
   constructor(
     private configService: ConfigService,
     private dataService: TeacherDataService,
-    private upgrade: UpgradeModule,
-    private utilService: UtilService
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.is_rtl = $('html').attr('dir') == 'rtl';
-    this.icons = { prev: 'chevron_left', next: 'chevron_right' };
-    if (this.is_rtl) {
-      this.icons = { prev: 'chevron_right', next: 'chevron_left' };
+    if (/unit\/(\d*)\/team\/(\w*)$/.test(this.router.url)) {
+      this.workgroupId = parseInt(this.router.url.match(/\/team\/(\d+)$/)[1]);
     }
-    this.currentPeriodChangedSubscription = this.dataService.currentPeriodChanged$.subscribe(() => {
-      this.updateModel();
-    });
+    this.updateModel();
+    this.subscriptions.add(
+      this.dataService.currentPeriodChanged$.subscribe(() => {
+        this.updateModel();
+      })
+    );
+    this.subscriptions.add(
+      this.dataService.currentWorkgroupChanged$
+        .pipe(filter((workgroup) => workgroup.currentWorkgroup != null))
+        .subscribe(({ currentWorkgroup }) => {
+          this.workgroupId = currentWorkgroup.workgroupId;
+          this.updateModel();
+        })
+    );
   }
 
   ngOnDestroy(): void {
-    this.currentPeriodChangedSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   ngOnChanges(): void {
@@ -52,10 +61,12 @@ export class StudentGradingToolsComponent implements OnInit {
   }
 
   private updateModel(): void {
-    this.avatarColor = this.configService.getAvatarColorForWorkgroupId(this.workgroupId);
+    this.avatarColor = getAvatarColorForWorkgroupId(this.workgroupId);
     this.periodId = this.dataService.getCurrentPeriod().periodId;
     this.filterWorkgroupsForPeriod();
-    this.workgroups = this.workgroups.sort(this.sortByWorkgroupId);
+    this.workgroups = this.workgroups
+      .sort(this.sortByWorkgroupId)
+      .filter((workgroup) => workgroup.workgroupId != null);
     this.setNextAndPrev();
   }
 
@@ -64,36 +75,31 @@ export class StudentGradingToolsComponent implements OnInit {
   }
 
   private filterWorkgroupsForPeriod(): void {
-    this.workgroups = this.utilService
-      .makeCopyOfJSONObject(this.configService.getClassmateUserInfos())
-      .filter((workgroup) => this.periodId === -1 || workgroup.periodId === this.periodId);
+    this.workgroups = copy(this.configService.getClassmateUserInfos()).filter(
+      (workgroup) => this.periodId === -1 || workgroup.periodId === this.periodId
+    );
   }
 
   private setNextAndPrev(): void {
     const currentWorkgroupIndex = this.workgroups.findIndex(
       (workgroup) => workgroup.workgroupId === this.workgroupId
     );
-    this.prevId = this.getPreviousWorkgroupId(currentWorkgroupIndex);
-    this.nextId = this.getNextWorkgroupId(currentWorkgroupIndex);
+    this.prevWorkgroup = this.getPreviousWorkgroup(currentWorkgroupIndex);
+    this.nextWorkgroup = this.getNextWorkgroup(currentWorkgroupIndex);
   }
 
-  private getPreviousWorkgroupId(currentWorkgroupIndex: number): number {
-    return currentWorkgroupIndex > 0
-      ? this.workgroups[currentWorkgroupIndex - 1].workgroupId
-      : null;
+  private getPreviousWorkgroup(currentWorkgroupIndex: number): Workgroup {
+    return currentWorkgroupIndex > 0 ? this.workgroups[currentWorkgroupIndex - 1] : null;
   }
 
-  private getNextWorkgroupId(currentWorkgroupIndex: number): number {
+  private getNextWorkgroup(currentWorkgroupIndex: number): Workgroup {
     return currentWorkgroupIndex < this.workgroups.length - 1
-      ? this.workgroups[currentWorkgroupIndex + 1].workgroupId
+      ? this.workgroups[currentWorkgroupIndex + 1]
       : null;
   }
 
-  goToPrevTeam(): void {
-    this.upgrade.$injector.get('$state').go('root.cm.team', { workgroupId: this.prevId });
-  }
-
-  goToNextTeam(): void {
-    this.upgrade.$injector.get('$state').go('root.cm.team', { workgroupId: this.nextId });
+  protected goToTeam(workgroup: Workgroup): void {
+    this.dataService.setCurrentWorkgroup(workgroup);
+    this.router.navigate(['team', workgroup.workgroupId], { relativeTo: this.route });
   }
 }

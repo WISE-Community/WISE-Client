@@ -1,80 +1,105 @@
 <div fxLayout="column" fxLayoutGap="16px">
-  <mat-checkbox color="primary"
-      [(ngModel)]="computerAvatarSettings.useGlobalComputerAvatar"
-      (ngModelChange)="componentChanged()"
-      i18n>Use Global Computer Avatar</mat-checkbox>
+  <mat-checkbox
+    color="primary"
+    [(ngModel)]="computerAvatarSettings.useGlobalComputerAvatar"
+    (ngModelChange)="componentChanged()"
+    i18n
+    >Use Global Computer Avatar</mat-checkbox
+  >
   <mat-form-field class="avatar-label" appearance="fill">
     <mat-label i18n>Computer Avatar Label</mat-label>
-    <input matInput
-        [(ngModel)]="computerAvatarSettings.label"
-        (ngModelChange)="componentChanged()"
-        placeholder="Thought Buddy"
-        i18n-placeholder />
+    <input
+      matInput
+      [(ngModel)]="computerAvatarSettings.label"
+      (ngModelChange)="componentChanged()"
+      placeholder="Thought Buddy"
+      i18n-placeholder
+    />
     <mat-hint i18n>This is what the computer avatar will be referred as</mat-hint>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label i18n>Computer Avatar Prompt</mat-label>
-    <textarea matInput
-        [(ngModel)]="computerAvatarSettings.prompt"
-        (ngModelChange)="componentChanged()"
-        placeholder="Discuss your answer with a thought buddy!"
-        i18n-placeholder
-        cdkTextareaAutosize>
+    <textarea
+      matInput
+      [(ngModel)]="computerAvatarSettings.prompt"
+      (ngModelChange)="componentChanged()"
+      placeholder="Discuss your answer with a thought buddy!"
+      i18n-placeholder
+      cdkTextareaAutosize
+    >
     </textarea>
     <mat-hint i18n>This text will introduce the avatar selection task</mat-hint>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label i18n>Computer Avatar Initial Response</mat-label>
-    <input matInput
-        [(ngModel)]="computerAvatarSettings.initialResponse"
-        (ngModelChange)="componentChanged()"
-        placeholder="Hi there! It's nice to meet you. What do you think about..."
-        i18n-placeholder />
+    <input
+      matInput
+      [(ngModel)]="computerAvatarSettings.initialResponse"
+      (ngModelChange)="componentChanged()"
+      placeholder="Hi there! It's nice to meet you. What do you think about..."
+      i18n-placeholder
+    />
     <mat-hint i18n>Computer avatar will initiate dialog with this text</mat-hint>
   </mat-form-field>
   <div class="avatars">
-    <div class="mat-subheading-2">Computer avatars students can choose:</div>
-    <div fxLayout="row wrap"
-        fxLayoutAlign="start center"
-        fxLayoutGap="16px">
-      <button mat-stroked-button
-          color="primary"
-          (click)="selectAllComputerAvatars()"
-          aria-label="Select all avatars"
-          i18n-aria-label
-          i18n>
+    <div class="mat-subtitle-1">Computer avatars students can choose:</div>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="selectAllComputerAvatars()"
+        aria-label="Select all avatars"
+        i18n-aria-label
+        i18n
+      >
         Select All
       </button>
-      <button mat-stroked-button
-          color="primary"
-          (click)="unselectAllComputerAvatars()"
-          aria-label="Select no avatars"
-          i18n-aria-label
-          i18n>
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="unselectAllComputerAvatars()"
+        aria-label="Select no avatars"
+        i18n-aria-label
+        i18n
+      >
         Select None
       </button>
     </div>
     <div fxLayout="row wrap">
-      <mat-button-toggle-group fxLayout="row wrap"
-          aria-label="Avatars available to students"
-          i18n-aria-label
-          multiple>
+      <mat-button-toggle-group
+        fxLayout="row wrap"
+        aria-label="Avatars available to students"
+        i18n-aria-label
+        multiple
+      >
         <ng-container *ngFor="let computerAvatar of allComputerAvatars">
-          <mat-button-toggle (mousedown)="toggleSelectComputerAvatar(computerAvatar)"
-              checked="{{ computerAvatar.isSelected ? true : false }}"
-              aria-label="Toggle {{ computerAvatar.name }}"
-              i18n-aria-label>
-            <img [src]="avatarsPath + computerAvatar.image" alt="{{ computerAvatar.name }}" class="avatar-image" />
+          <mat-button-toggle
+            (mousedown)="toggleSelectComputerAvatar(computerAvatar)"
+            checked="{{ computerAvatar.isSelected ? true : false }}"
+            aria-label="Toggle {{ computerAvatar.name }}"
+            i18n-aria-label
+          >
+            <img
+              [src]="avatarsPath + computerAvatar.image"
+              alt="{{ computerAvatar.name }}"
+              class="avatar-image"
+            />
             <div class="name" fxLayoutAlign="center" fxLayoutGap="4px">
-              <span class="mat-body-2">{{ computerAvatar.name }}</span>
-              <mat-icon *ngIf="computerAvatar.isSelected"
-                  class="success"
-                  aria-label="Selected"
-                  i18n-aria-label>check_circle</mat-icon>
-              <mat-icon color="warn"
-                  *ngIf="!computerAvatar.isSelected"
-                  aria-label="Not selected"
-                  i18n-aria-label>cancel</mat-icon>
+              <span class="mat-subtitle-2">{{ computerAvatar.name }}</span>
+              <mat-icon
+                *ngIf="computerAvatar.isSelected"
+                class="success"
+                aria-label="Selected"
+                i18n-aria-label
+                >check_circle</mat-icon
+              >
+              <mat-icon
+                color="warn"
+                *ngIf="!computerAvatar.isSelected"
+                aria-label="Not selected"
+                i18n-aria-label
+                >cancel</mat-icon
+              >
             </div>
           </mat-button-toggle>
         </ng-container>

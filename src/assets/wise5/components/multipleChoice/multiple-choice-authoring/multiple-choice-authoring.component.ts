@@ -1,26 +1,29 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
+import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { RandomKeyService } from '../../../services/randomKeyService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { MatDialog } from '@angular/material/dialog';
+import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
   selector: 'multiple-choice-authoring',
   templateUrl: 'multiple-choice-authoring.component.html',
   styleUrls: ['multiple-choice-authoring.component.scss']
 })
-export class MultipleChoiceAuthoring extends ComponentAuthoring {
+export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
   allowedConnectedComponentTypes = ['MultipleChoice'];
   choiceTextChange: Subject<string> = new Subject<string>();
   feedbackTextChange: Subject<string> = new Subject<string>();
 
   constructor(
     protected ConfigService: ConfigService,
-    protected NodeService: NodeService,
+    private dialog: MatDialog,
+    protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
   ) {
@@ -57,7 +60,7 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
 
   addChoice(): void {
     const newChoice = {
-      id: RandomKeyService.generate(),
+      id: generateRandomKey(),
       text: '',
       feedback: '',
       isCorrect: false
@@ -110,14 +113,13 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
   }
 
   chooseChoiceAsset(choice: any): void {
-    const params = {
-      isPopup: true,
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      target: 'choice',
-      targetObject: choice
-    };
-    this.openAssetChooser(params);
+    new AssetChooser(this.dialog, this.nodeId, this.componentId)
+      .open('choice', choice)
+      .afterClosed()
+      .pipe(filter((data) => data != null))
+      .subscribe((data: any) => {
+        return this.assetSelected(data);
+      });
   }
 
   assetSelected({ nodeId, componentId, assetItem, target, targetObject }): void {

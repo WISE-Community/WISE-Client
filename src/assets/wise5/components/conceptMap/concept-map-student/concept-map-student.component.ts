@@ -9,11 +9,13 @@ import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { ConceptMapService } from '../conceptMapService';
 import { DialogWithCloseComponent } from '../../../directives/dialog-with-close/dialog-with-close.component';
+import { copy } from '../../../common/object/object';
+import { convertToPNGFile } from '../../../common/canvas/canvas';
+import { hasConnectedComponent } from '../../../common/ComponentContent';
 
 @Component({
   selector: 'concept-map-student',
@@ -73,8 +75,7 @@ export class ConceptMapStudent extends ComponentStudent {
     protected NotebookService: NotebookService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
+    protected StudentDataService: StudentDataService
   ) {
     super(
       AnnotationService,
@@ -84,8 +85,7 @@ export class ConceptMapStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 
@@ -155,7 +155,7 @@ export class ConceptMapStudent extends ComponentStudent {
 
   initializeSVG(): void {
     this.setupSVG();
-    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
+    if (hasConnectedComponent(this.componentContent, 'showWork')) {
       this.handleConnectedComponents();
     } else if (this.componentStateHasStudentWork(this.componentState, this.componentContent)) {
       this.componentState = this.ProjectService.injectAssetPaths(this.componentState);
@@ -307,10 +307,9 @@ export class ConceptMapStudent extends ComponentStudent {
         if (this.hasAutoGrading()) {
           this.performAutoGrading();
         }
-        this.isSubmit = true;
-        this.emitComponentSubmitTriggered();
+        this.performSubmit(submitTriggeredBy);
       } else {
-        this.isSubmit = false;
+        this.setIsSubmit(false);
       }
     }
   }
@@ -1456,15 +1455,13 @@ export class ConceptMapStudent extends ComponentStudent {
     const domURL: any = self.URL || (self as any).webkitURL || self;
     const url = domURL.createObjectURL(svg);
     const image = new Image();
-    const thisUtilService = this.UtilService;
     image.onload = (event) => {
       const image: any = event.target;
       myCanvas.width = image.width;
       myCanvas.height = image.height;
       ctx.drawImage(image, 0, 0);
-      const base64Image = myCanvas.toDataURL('image/png');
-      const imageObject = thisUtilService.getImageObjectFromBase64String(base64Image);
-      this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), imageObject);
+      const pngFile = convertToPNGFile(myCanvas);
+      this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), pngFile);
     };
     image.src = url;
   }
@@ -1502,9 +1499,7 @@ export class ConceptMapStudent extends ComponentStudent {
   }
 
   mergeConceptMapComponentState(componentStateToMergeInto: any, componentStateToMerge: any): any {
-    const componentStateToMergeCopy = this.makeIdsUnique(
-      this.UtilService.makeCopyOfJSONObject(componentStateToMerge)
-    );
+    const componentStateToMergeCopy = this.makeIdsUnique(copy(componentStateToMerge));
     const studentData = componentStateToMergeCopy.studentData;
     const conceptMapData = studentData.conceptMapData;
     const nodes = conceptMapData.nodes;
@@ -1535,9 +1530,9 @@ export class ConceptMapStudent extends ComponentStudent {
   }
 
   mergeOtherComponentState(componentState: any): any {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
+    const connectedComponent = this.component.getConnectedComponent(
+      componentState.nodeId,
+      componentState.componentId
     );
     if (connectedComponent.importWorkAsBackground === true) {
       this.setComponentStateAsBackgroundImage(componentState);

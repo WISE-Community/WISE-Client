@@ -9,13 +9,14 @@
     <span *ngIf="!isAutoScore && !disabled" i18n>Item Score:</span>
   </label>
   <mat-form-field>
-    <input #scoreInput
-        matInput
-        type="number"
-        min="0"
-        [ngModel]="score"
-        [disabled]="disabled"
-        (ngModelChange)="scoreChanged.next($event)">
+    <input
+      #scoreInput
+      matInput
+      type="number"
+      min="0"
+      [ngModel]="score"
+      [disabled]="disabled"
+      (ngModelChange)="scoreChanged.next($event)"
+    />
   </mat-form-field>
 </span>
-

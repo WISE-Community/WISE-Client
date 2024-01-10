@@ -5,7 +5,8 @@ import { ComponentServiceLookupService } from '../../../../services/componentSer
 import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { Component as WISEComponent } from '../../../../common/Component';
+import { ComponentFactory } from '../../../../common/ComponentFactory';
+import { isMatchingPeriods } from '../../../../common/period/period';
 
 @Component({
   selector: 'node-info',
@@ -49,7 +50,7 @@ export class NodeInfoComponent {
       component.hasScoresSummary = this.summaryService.isScoresSummaryAvailableForComponentType(
         component.type
       );
-      component.hasScoreAnnotation = this.annotationService.isThereAnyScoreAnnotation(
+      component.hasScoreAnnotation = this.hasScoreAnnotation(
         this.nodeId,
         component.id,
         this.periodId
@@ -58,11 +59,22 @@ export class NodeInfoComponent {
       if (component.isStudentWorkGenerated) {
         component.assessmentItemIndex = assessmentItemIndex++;
       }
-      component.component = new WISEComponent(
+      const factory = new ComponentFactory();
+      component.component = factory.getComponent(
         this.projectService.injectAssetPaths(component),
         this.nodeId
       );
     }
+  }
+
+  private hasScoreAnnotation(nodeId: string, componentId: string, periodId: number): boolean {
+    return this.annotationService
+      .getAnnotationsByNodeIdComponentId(nodeId, componentId)
+      .some(
+        (annotation) =>
+          isMatchingPeriods(annotation.periodId, periodId) &&
+          ['score', 'autoScore'].includes(annotation.type)
+      );
   }
 
   private componentHasCorrectAnswer(component: any): boolean {

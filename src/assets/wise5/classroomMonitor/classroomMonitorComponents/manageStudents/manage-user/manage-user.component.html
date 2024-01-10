@@ -1,37 +1,47 @@
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px" class="manage-user">
   <show-student-info [user]="user"></show-student-info>
   <span fxFlex></span>
-  <button class="userInfoLink"
-      mat-icon-button
-      matTooltip="View student info"
-      i18n-matTooltip
-      matTooltipPosition="above"
-      (click)="viewUserInfo($event)">
+  <button
+    class="userInfoLink"
+    mat-icon-button
+    matTooltip="View student info"
+    i18n-matTooltip
+    matTooltipPosition="above"
+    (click)="viewUserInfo($event)"
+  >
     <mat-icon class="text-secondary">info</mat-icon>
   </button>
-  <button *ngIf="user.isGoogleUser"
-      class="googleUserButton"
-      mat-icon-button
-      matTooltip="Student signs in with Google"
-      i18n-matTooltip
-      matTooltipPosition="above">
-    <mat-icon class="mat-18" svgIcon="google"></mat-icon>
+  <button
+    *ngIf="user.isGoogleUser"
+    class="googleUserButton"
+    mat-icon-button
+    matTooltip="Student signs in with Google"
+    i18n-matTooltip
+    matTooltipPosition="above"
+  >
+    <mat-icon svgIcon="google"></mat-icon>
   </button>
-  <button *ngIf="!user.isGoogleUser"
-      class="userInfoLink"
-      mat-icon-button
-      matTooltip="Change student password"
-      i18n-matTooltip
-      matTooltipPosition="above"
-      (click)="changePassword($event)">
+  <button
+    *ngIf="!user.isGoogleUser"
+    class="userInfoLink"
+    mat-icon-button
+    matTooltip="Change student password"
+    i18n-matTooltip
+    matTooltipPosition="above"
+    (click)="changePassword($event)"
+  >
     <mat-icon class="text-secondary">vpn_key</mat-icon>
   </button>
-  <button class="userInfoLink"
-      mat-icon-button
-      matTooltip="Remove student"
-      i18n-matTooltip
-      matTooltipPosition="above"
-      (click)="removeUser($event)">
+  <button
+    class="userInfoLink"
+    mat-icon-button
+    matTooltip="Remove student"
+    i18n-matTooltip
+    matTooltipPosition="above"
+    aria-label="Remove student"
+    i18n-aria-label
+    (click)="removeUser($event)"
+  >
     <mat-icon class="text-secondary">clear</mat-icon>
   </button>
 </div>

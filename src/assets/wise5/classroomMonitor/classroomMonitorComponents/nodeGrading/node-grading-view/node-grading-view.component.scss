@@ -1,20 +1,18 @@
 .node-grading {
-  .component-select {
-    margin-right: 16px !important;
-  }
-
   .content-head-label {
     font-size: 50%;
   }
 
   .user-list {
-    &.mat-list-base {
-      .mat-list-item .mat-list-item-content {
+    &.mat-mdc-list-base {
+      /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
+      .mat-mdc-list-item .mat-list-item-content {
         padding: 0 8px;
       }
 
       workgroup-item {
-        .mat-list-item .mat-list-item-content {
+        /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
+        .mat-mdc-list-item .mat-list-item-content {
           padding: 0;
         }
       }
@@ -25,11 +23,18 @@
     width: 100%;
   }
 
-  .mat-list-base {
-    .mat-list-item.user-list-controls {
+  .mat-mdc-list-base {
+    .mat-mdc-list-item.user-list-controls {
       height: auto;
-      padding-top: 8px;
-      padding-bottom: 8px;
+      padding: 8px;
     }
+  }
+  
+  .mdc-button__label {
+    width: 100%;
+  }
+
+  .table--list__thead__link {
+    text-transform: none;
   }
 }

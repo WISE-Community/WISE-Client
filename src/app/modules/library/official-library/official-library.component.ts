@@ -18,8 +18,8 @@ export class OfficialLibraryComponent extends LibraryComponent {
   libraryGroups: LibraryGroup[] = [];
   expandedGroups: object = {};
 
-  constructor(protected libraryService: LibraryService, public dialog: MatDialog) {
-    super(libraryService);
+  constructor(protected dialog: MatDialog, protected libraryService: LibraryService) {
+    super(dialog, libraryService);
   }
 
   ngOnInit() {
@@ -45,10 +45,8 @@ export class OfficialLibraryComponent extends LibraryComponent {
     }
   }
 
-  showInfo() {
-    this.dialog.open(OfficialLibraryDetailsComponent, {
-      panelClass: 'dialog-sm'
-    });
+  protected getDetailsComponent(): any {
+    return OfficialLibraryDetailsComponent;
   }
 }
 

@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { SessionService } from '../../../assets/wise5/services/sessionService';
-import { UtilService } from '../../../assets/wise5/services/utilService';
 import { EditConnectedComponentTypeSelectComponent } from './edit-connected-component-type-select.component';
 import { createConnectedComponentObject } from '../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.spec';
 
@@ -27,7 +26,7 @@ describe('EditConnectedComponentTypeSelectComponent', () => {
         MatSelectModule
       ],
       declarations: [EditConnectedComponentTypeSelectComponent],
-      providers: [ConfigService, ProjectService, SessionService, UtilService]
+      providers: [ConfigService, ProjectService, SessionService]
     }).compileComponents();
   });
 

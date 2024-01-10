@@ -1,4 +1,6 @@
+import { removeHTMLTags } from '../../../common/string/string';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
+import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 
 export class NotebookDataExportStrategy extends AbstractDataExportStrategy {
   constructor(private exportType: string) {
@@ -7,7 +9,7 @@ export class NotebookDataExportStrategy extends AbstractDataExportStrategy {
 
   export() {
     this.controller.showDownloadingExportMessage();
-    this.dataExportService.retrieveNotebookExport(this.exportType).then((result) => {
+    this.dataExportService.retrieveNotebookExport(this.exportType).subscribe((result) => {
       const notebookItems = result;
       const columnNames = [
         'ID',
@@ -89,12 +91,12 @@ export class NotebookDataExportStrategy extends AbstractDataExportStrategy {
     if (position != -1) {
       row[columnNameToNumber['Component Part Number']] = position + 1;
     }
-    row[
-      columnNameToNumber['Client Save Time']
-    ] = this.utilService.convertMillisecondsToFormattedDateTime(notebookItem.clientSaveTime);
-    row[
-      columnNameToNumber['Server Save Time']
-    ] = this.utilService.convertMillisecondsToFormattedDateTime(notebookItem.serverSaveTime);
+    row[columnNameToNumber['Client Save Time']] = millisecondsToDateTime(
+      notebookItem.clientSaveTime
+    );
+    row[columnNameToNumber['Server Save Time']] = millisecondsToDateTime(
+      notebookItem.serverSaveTime
+    );
     row[columnNameToNumber['Type']] = notebookItem.type;
     row[columnNameToNumber['Content']] = JSON.parse(notebookItem.content);
     row[columnNameToNumber['Run ID']] = notebookItem.runId;
@@ -122,7 +124,7 @@ export class NotebookDataExportStrategy extends AbstractDataExportStrategy {
     }
     const responseJSON = JSON.parse(notebookItem.content);
     if (notebookItem.type === 'report') {
-      row[columnNameToNumber['Response']] = this.utilService.removeHTMLTags(responseJSON.content);
+      row[columnNameToNumber['Response']] = removeHTMLTags(responseJSON.content);
     } else {
       row[columnNameToNumber['Response']] = responseJSON.text;
     }

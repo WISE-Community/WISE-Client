@@ -7,9 +7,10 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
+import { copy } from '../../../../common/object/object';
 import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { UtilService } from '../../../../services/utilService';
+import { calculateComponentVisibility } from '../../shared/grading-helpers/grading-helpers';
 
 @Component({
   selector: 'step-item',
@@ -18,6 +19,8 @@ import { UtilService } from '../../../../services/utilService';
   encapsulation: ViewEncapsulation.None
 })
 export class StepItemComponent implements OnInit {
+  componentIdToHasWork: { [componentId: string]: boolean } = {};
+  componentIdToIsVisible: { [componentId: string]: boolean } = {};
   components: any[];
   disabled: boolean;
   @Input() expand: boolean;
@@ -39,15 +42,10 @@ export class StepItemComponent implements OnInit {
 
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
-    private projectService: TeacherProjectService,
-    private utilService: UtilService
+    private projectService: TeacherProjectService
   ) {}
 
-  ngOnInit(): void {
-    this.components = this.projectService.getComponents(this.nodeId).filter((component) => {
-      return this.projectService.componentHasWork(component);
-    });
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(changesObj: SimpleChanges): void {
     if (changesObj.maxScore) {
@@ -55,12 +53,20 @@ export class StepItemComponent implements OnInit {
         typeof changesObj.maxScore.currentValue === 'number' ? changesObj.maxScore.currentValue : 0;
     }
     if (changesObj.stepData) {
-      const stepData = this.utilService.makeCopyOfJSONObject(changesObj.stepData.currentValue);
+      const stepData = copy(changesObj.stepData.currentValue);
       this.title = stepData.title;
       this.hasAlert = stepData.hasAlert;
       this.hasNewAlert = stepData.hasNewAlert;
       this.status = stepData.completionStatus;
       this.score = stepData.score >= 0 ? stepData.score : '-';
+      this.components = this.projectService.getComponents(this.nodeId);
+      this.componentIdToHasWork = this.projectService.calculateComponentIdToHasWork(
+        this.components
+      );
+      this.componentIdToIsVisible = calculateComponentVisibility(
+        this.componentIdToHasWork,
+        stepData.nodeStatus.componentStatuses
+      );
     }
     this.update();
   }

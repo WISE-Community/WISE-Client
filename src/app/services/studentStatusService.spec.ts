@@ -8,9 +8,11 @@ import { StudentStatusService } from '../../assets/wise5/services/studentStatusS
 import { of } from 'rxjs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { NodeProgressService } from '../../assets/wise5/services/nodeProgressService';
 
 let configService: ConfigService;
 let http: HttpClient;
+let nodeProgressService: NodeProgressService;
 let service: StudentStatusService;
 let studentDataService: StudentDataService;
 
@@ -20,9 +22,9 @@ const workgroupId = 3;
 const nodeId = 'node1';
 const nodeStatuses = {};
 const projectCompletion = {
-  totalItems: 0,
+  totalItems: 2,
   totalItemsWithWork: 0,
-  completedItems: 0,
+  completedItems: 1,
   completedItemsWithWork: 0
 };
 const computerAvatarId = 'robot1';
@@ -35,6 +37,7 @@ describe('StudentStatusService', () => {
     });
     configService = TestBed.inject(ConfigService);
     http = TestBed.inject(HttpClient);
+    nodeProgressService = TestBed.inject(NodeProgressService);
     service = TestBed.inject(StudentStatusService);
     studentDataService = TestBed.inject(StudentDataService);
   });
@@ -44,25 +47,15 @@ describe('StudentStatusService', () => {
 
 function retrieveStudentStatus() {
   describe('retrieveStudentStatus()', () => {
-    retrieveStudentStatus_Preview_SetNewStatus();
     retrieveStudentStatus_ReceiveNull_SetNewStatus();
     retrieveStudentStatus_ReceiveStudentStatus_SetStudentStatus();
   });
 }
 
-function retrieveStudentStatus_Preview_SetNewStatus() {
-  it('should retrieve empty student status when in preview', () => {
-    setIsPreview(true);
-    expectStudentStatusToBeUndefined();
-    service.retrieveStudentStatus();
-    expect(service.getStudentStatus()).toEqual(new StudentStatus());
-  });
-}
-
 function retrieveStudentStatus_ReceiveNull_SetNewStatus() {
-  it('should retrieve student status and receive null', () => {
+  it('should retrieve new student status when backend returns null', () => {
     setIsPreview(false);
-    expectStudentStatusToBeUndefined();
+    expectNewStudentStatus();
     const httpGetSpy = spyOn(http, 'get').and.returnValue(of(null));
     service.retrieveStudentStatus();
     expect(httpGetSpy).toHaveBeenCalled();
@@ -73,7 +66,7 @@ function retrieveStudentStatus_ReceiveNull_SetNewStatus() {
 function retrieveStudentStatus_ReceiveStudentStatus_SetStudentStatus() {
   it('should retrieve student status and receive a student status', () => {
     setIsPreview(false);
-    expectStudentStatusToBeUndefined();
+    expectNewStudentStatus();
     const studentStatus = new StudentStatus({ computerAvatarId: 'robot1' });
     const studentStatusWrapper = createStudentStatusWrapper(studentStatus);
     const httpGetSpy = spyOn(http, 'get').and.returnValue(of(studentStatusWrapper));
@@ -98,14 +91,11 @@ function saveStudentStatus_nodeStatusChanged_PostStudentStatus() {
     spyOn(configService, 'getWorkgroupId').and.returnValue(workgroupId);
     spyOn(configService, 'getStudentStatusURL').and.returnValue(studentStatusUrl);
     spyOn(studentDataService, 'getCurrentNodeId').and.returnValue(nodeId);
-    spyOn(studentDataService, 'getNodeStatuses').and.returnValue(nodeStatuses);
-    spyOn(studentDataService, 'getProjectCompletion').and.returnValue(projectCompletion);
+    spyOn(nodeProgressService, 'getNodeProgress').and.returnValue(projectCompletion);
     const httpPostSpy = spyOn(http, 'post').and.callFake((url: string, body: any) => {
       return of({} as any);
     });
-    const studentStatus = new StudentStatus();
-    studentStatus.computerAvatarId = computerAvatarId;
-    service.studentStatus = studentStatus;
+    service.setComputerAvatarId(computerAvatarId);
     studentDataService.broadcastNodeStatusesChanged();
     const studentStatusJSON = {
       runId: runId,
@@ -134,8 +124,8 @@ function setIsRunActive(value: boolean) {
   spyOn(TestBed.inject(ConfigService), 'isRunActive').and.returnValue(value);
 }
 
-function expectStudentStatusToBeUndefined() {
-  expect(service.studentStatus).toBeUndefined();
+function expectNewStudentStatus() {
+  expect(service.getStudentStatus()).toEqual(new StudentStatus());
 }
 
 function createStudentStatusWrapper(studentStatus: StudentStatus): any {

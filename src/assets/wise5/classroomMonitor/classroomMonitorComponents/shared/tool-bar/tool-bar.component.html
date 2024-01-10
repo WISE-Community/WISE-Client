@@ -1,20 +1,22 @@
-<mat-toolbar class="md-whiteframe-1dp toolbar md-toolbar--wise" md-theme="light">
-  <div class="md-toolbar-tools toolbar__tools">
-    <button mat-button
-        aria-label="Main Menu"
-        i18n-aria-label
-        class="md-icon-button"
-        (click)="toggleMenu()"
-        matTooltip="Main Menu"
-        matTooltipPosition="below"
-        i18n-matTooltip>
+<mat-toolbar class="mat-elevation-z1 toolbar">
+  <div class="toolbar__tools" fxLayout="row" fxLayoutAlign="start center">
+    <button
+      mat-icon-button
+      aria-label="Main Menu"
+      i18n-aria-label
+      (click)="toggleMenu()"
+      matTooltip="Main Menu"
+      matTooltipPosition="below"
+      i18n-matTooltip
+    >
       <mat-icon>menu</mat-icon>
     </button>
-    <span class="toolbar__title" *ngIf="showTitle">{{ viewName }}</span>
+    <span class="toolbar__title" *ngIf="!(showStepTools || showTeamTools)">{{ viewName }}</span>
     <step-tools *ngIf="showStepTools" [showOnlyStepsWithWork]="true"></step-tools>
     <student-grading-tools *ngIf="showTeamTools" [workgroupId]="workgroupId">
     </student-grading-tools>
     <span fxFlex></span>
+    <save-indicator></save-indicator>
     <select-period *ngIf="showPeriodSelect"></select-period>
   </div>
 </mat-toolbar>

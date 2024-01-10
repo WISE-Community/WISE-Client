@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfigService } from '../../../../services/configService';
 
 import { ChangeTeamPeriodDialogComponent } from './change-team-period-dialog.component';
+import { of } from 'rxjs';
 
 class ConfigServiceStub {
   getPeriods() {
@@ -20,7 +21,7 @@ class ConfigServiceStub {
     return 123;
   }
   retrieveConfig() {
-    return {};
+    return of({});
   }
 }
 

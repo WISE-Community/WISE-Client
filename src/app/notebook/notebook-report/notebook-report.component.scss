@@ -1,4 +1,4 @@
-@import '~style/abstracts/variables';
+@import 'style/abstracts/variables';
 
 $height: 550px !default;
 $title-width: 240px !default;
@@ -35,17 +35,15 @@ $width-collapsed: 300px !default;
   display: none;
 }
 
-.mat-card-header {
+.mat-mdc-card-header {
   cursor: pointer;
   border-top-left-radius: $card-border-radius;
   border-top-right-radius: $card-border-radius;
+  padding: 0 0 0 12px;
 }
 
-.mat-card-header .mat-card-title {
+.mat-mdc-card-header .mat-mdc-card-title {
   max-width: $title-width;
-  margin-bottom: 0;
-  margin-left: -12px;
-  margin-right: -12px;
 
   .collapsed & {
     max-width: $title-width-collapsed;
@@ -56,24 +54,17 @@ $width-collapsed: 300px !default;
   }
 }
 
-.mat-card-content {
-  margin-bottom: 0;
+.mat-mdc-card-content {
+  padding: 0;
 }
 
-.mat-card-actions {
-  margin: 0;
-  padding: 0;
-
-  .mat-button {
-    margin: 0;
-  }
+.mat-mdc-card-actions {
+  padding: 8px;
 }
 
 .actions {
-  padding: 4px;
-  border-left: 1px solid #cccccc;
-  border-right: 1px solid #cccccc;
-
+  width: 100%;
+  
   .mat-icon {
     cursor: pointer;
   }

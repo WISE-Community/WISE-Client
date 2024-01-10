@@ -10,14 +10,14 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { NodeService } from '../../../services/nodeService';
+import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { SummaryAuthoring } from './summary-authoring.component';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 export class MockConfigService {}
 
@@ -41,12 +41,11 @@ describe('SummaryAuthoringComponent', () => {
         MatRadioModule,
         MatSelectModule,
         ReactiveFormsModule,
-        UpgradeModule,
         StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, SummaryAuthoring],
       providers: [
-        { provide: NodeService, useClass: MockNodeService },
+        { provide: TeacherNodeService, useClass: MockNodeService },
         ProjectAssetService,
         TeacherProjectService
       ]
@@ -54,7 +53,7 @@ describe('SummaryAuthoringComponent', () => {
     fixture = TestBed.createComponent(SummaryAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
-    component.componentContent = JSON.parse(JSON.stringify(componentContent));
+    component.componentContent = copy(componentContent);
     getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
     getComponentSpy.and.returnValue(componentContent);
     spyOn(component, 'componentChanged');

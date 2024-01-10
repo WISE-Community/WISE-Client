@@ -1,23 +1,26 @@
 import { Directive, Input } from '@angular/core';
 import { ComponentContent } from '../../../assets/wise5/common/ComponentContent';
-import { NodeService } from '../../../assets/wise5/services/nodeService';
+import { Component } from '../../../assets/wise5/common/Component';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
+import { TeacherNodeService } from '../../../assets/wise5/services/teacherNodeService';
 
 @Directive()
 export abstract class EditAdvancedComponentComponent {
+  component: Component;
   componentContent: ComponentContent;
   @Input() componentId: string;
   @Input() nodeId: string;
 
   constructor(
-    protected nodeService: NodeService,
+    protected nodeService: TeacherNodeService,
     protected notebookService: NotebookService,
     protected teacherProjectService: TeacherProjectService
   ) {}
 
   ngOnInit() {
     this.componentContent = this.teacherProjectService.getComponent(this.nodeId, this.componentId);
+    this.component = new Component(this.componentContent, this.nodeId);
   }
 
   setShowSubmitButtonValue(show: boolean = false): void {

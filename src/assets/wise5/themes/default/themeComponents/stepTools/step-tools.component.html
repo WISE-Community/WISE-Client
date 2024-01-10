@@ -1,70 +1,75 @@
-<div fxLayout="row" fxLayoutAlign="space-between center">
-  <div class="step-tools" fxLayout="row" fxLayoutAlign="center center">
-    <button mat-icon-button
-        (click)="goToPrevNode()"
-        [disabled]="!prevId"
-        aria-label="Previous Item"
-        i18n-aria-label
-        matTooltip="Previous Step"
-        i18n-matTooltip>
+<div class="step-tools" fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <button
+      mat-icon-button
+      (click)="goToPrevNode()"
+      [disabled]="!prevId"
+      aria-label="Previous Item"
+      i18n-aria-label
+      matTooltip="Previous Step"
+      i18n-matTooltip
+    >
       <mat-icon>{{ icons.prev }}</mat-icon>
     </button>
     <div class="node-icon-div">
-      <node-icon [nodeId]="nodeId"
-          size="18"
-          [icon]="nodeStatus.icon">
-      </node-icon>
-    </div>
-    <mat-select
-          class="mat-button notice-bg-bg"
-          [panelClass]="'select-panel-full-height'"
-          aria-label="Select a Step"
-          i18n-aria-label
-          placeholder="Select a Step"
-          i18n-placeholder
-          [(ngModel)]="toNodeId"
-          (ngModelChange)="toNodeIdChanged()">
-      <mat-select-trigger>
-        {{ getNodePositionAndTitle(nodeId) }}
-      </mat-select-trigger>
-      <ng-container *ngFor="let nodeId of nodeIds">
-        <mat-option *ngIf="nodeStatuses[nodeId].isVisible"
-              [value]="nodeId"
-              class="node-select-option"
-              [ngClass]="{'step': !isGroupNode(nodeId)}">
-          <div fxLayout="row" fxLayoutAlign="start center">
-            <div class="node-icon-div">
-              <node-icon [nodeId]="nodeId"
-                  size="18"
-                  [icon]="nodeStatuses[nodeId].icon"
-                  custom-class="node-select__icon">
+      <node-icon [nodeId]="nodeId" size="18" [icon]="nodeStatus.icon"></node-icon>
+    </div>&nbsp;
+    <mat-form-field appearance="fill">
+      <mat-select
+        [panelClass]="'select-panel-full-height'"
+        aria-label="Select a Step"
+        i18n-aria-label
+        placeholder="Select a Step"
+        i18n-placeholder
+        [(ngModel)]="toNodeId"
+        hideSingleSelectionIndicator="true"
+        (ngModelChange)="toNodeIdChanged()"
+      >
+        <mat-select-trigger>
+          {{ getNodePositionAndTitle(nodeId) }}
+        </mat-select-trigger>
+        <ng-container *ngFor="let nodeId of nodeIds">
+          <mat-option *ngIf="nodeStatuses[nodeId].isVisible" [value]="nodeId">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+              <node-icon
+                [nodeId]="nodeId"
+                size="18"
+                [icon]="nodeStatuses[nodeId].icon"
+                custom-class="node-select__icon"
+              >
               </node-icon>
+              <span [ngClass]="{ strong: isGroupNode(nodeId) }">{{
+                getNodePositionAndTitle(nodeId)
+              }}</span>
             </div>
-            <span>{{ getNodePositionAndTitle(nodeId) }}</span>
-          </div>
-        </mat-option>
-      </ng-container>
-    </mat-select>
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
     <div class="node-status-div">
       <node-status-icon [nodeId]="nodeId"></node-status-icon>
     </div>
-    <button mat-icon-button
-        (click)="goToNextNode()"
-        [disabled]="!nextId"
-        aria-label="Next Item"
-        i18n-aria-label
-        matTooltip="Next Step"
-        i18n-matTooltip>
+    <button
+      mat-icon-button
+      (click)="goToNextNode()"
+      [disabled]="!nextId"
+      aria-label="Next Item"
+      i18n-aria-label
+      matTooltip="Next Step"
+      i18n-matTooltip
+    >
       <mat-icon>{{ icons.next }}</mat-icon>
     </button>
   </div>
   <div>
-    <button mat-icon-button
-        (click)="closeNode()"
-        aria-label="Project Plan"
-        i18n-aria-label
-        matTooltip="Project Plan"
-        i18n-matTooltip>
+    <button
+      mat-icon-button
+      (click)="closeNode()"
+      aria-label="Project Plan"
+      i18n-aria-label
+      matTooltip="Project Plan"
+      i18n-matTooltip
+    >
       <mat-icon class="unit-plan-icon">view_list</mat-icon>
     </button>
   </div>

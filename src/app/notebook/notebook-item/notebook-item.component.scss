@@ -1,8 +1,6 @@
-@import '~@angular/material/theming', 
-    '~style/abstracts/variables',
-    '~style/themes/default';
-
-$light-gray: map-get($mat-grey, 300);
+@use '@angular/material' as mat;
+@import
+    'style/abstracts/variables';
 
 .notebook-item {
   transition: box-shadow 250ms;
@@ -11,7 +9,7 @@ $light-gray: map-get($mat-grey, 300);
   cursor: pointer;
 
   &:hover, &:focus {
-    @include mat-elevation(4);
+    @include mat.elevation(4);
     outline: none;
   }
 
@@ -23,7 +21,7 @@ $light-gray: map-get($mat-grey, 300);
 .content {
   height: 200px;
   padding: 0;
-  background-color: $light-gray;
+  width: 100%;
   border-top-left-radius: $card-border-radius;
   border-top-right-radius: $card-border-radius;
 }
@@ -52,7 +50,8 @@ $light-gray: map-get($mat-grey, 300);
   max-height: 120px;
   min-height: 56px;
   background-color: rgba(255,255,255,0.95);
-  border-top: 1px solid $light-gray;
+  white-space: normal;
+  // border-top: 1px solid $light-gray;
 
   &:after {
     content: "";
@@ -84,22 +83,27 @@ $light-gray: map-get($mat-grey, 300);
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: 'liga';
     font-size: 80px;
-    color: map-get($default-colors, disabled-text);
+    opacity: 0.4;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 24px;
+    text-align: center;
   }
 }
 
 .location {
   opacity: 0.9;
-  padding: 8px 0;
 }
 
-mat-card-actions {
-  padding-top: 0;
-}
-
-.actions {
-  margin: 0;
-  padding: 0 8px;
+.mat-mdc-card-actions {
+  padding: 8px;
+  min-height: 0;
   border-bottom-left-radius: $card-border-radius;
   border-bottom-right-radius: $card-border-radius;
+
+  &.has-action {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }

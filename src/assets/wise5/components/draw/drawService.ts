@@ -5,11 +5,11 @@ import * as fabric from 'fabric';
 window['fabric'] = fabric.fabric;
 import * as EventEmitter2 from 'eventemitter2';
 window['EventEmitter2'] = EventEmitter2;
-import DrawingTool from 'drawing-tool';
+import DrawingTool from '@wise-community/drawing-tool/dist/drawing-tool';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
-import { UtilService } from '../../services/utilService';
+import { convertToPNGFile } from '../../common/canvas/canvas';
 
 @Injectable()
 export class DrawService extends ComponentService {
@@ -31,10 +31,7 @@ export class DrawService extends ComponentService {
     delete: 'Delete selected objects'
   };
 
-  constructor(
-    private StudentAssetService: StudentAssetService,
-    protected UtilService: UtilService
-  ) {
+  constructor(private StudentAssetService: StudentAssetService) {
     super();
   }
 
@@ -159,9 +156,8 @@ export class DrawService extends ComponentService {
         componentState
       );
       const canvas = this.getDrawingToolCanvas(this.getDrawingToolId(domIdEnding));
-      const canvasBase64String = canvas.toDataURL('image/png');
-      const imageObject = this.UtilService.getImageObjectFromBase64String(canvasBase64String);
-      this.StudentAssetService.uploadAsset(imageObject).then((asset) => {
+      const pngFile = convertToPNGFile(canvas);
+      this.StudentAssetService.uploadAsset(pngFile).then((asset) => {
         resolve(asset);
       });
     });

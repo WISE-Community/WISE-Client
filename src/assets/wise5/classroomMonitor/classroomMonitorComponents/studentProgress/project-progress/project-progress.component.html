@@ -1,15 +1,13 @@
-<span fxLayout="row" fxLayoutAlign="start center">
+<span class="project-progress" fxLayout="row" fxLayoutAlign="start center">
   <span
-      class="progress-wrapper"
-      tabindex="0"
-      matTooltip="Completed {{ completed }}/{{ total }} steps with work"
-      matTooltipPosition="above"
-      i18n-matTooltip>
-    <mat-progress-bar
-        class="nav-item__progress"
-        mode="determinate"
-        [value]="percent">
+    class="progress-wrapper"
+    tabindex="0"
+    matTooltip="Completed {{ completed }}/{{ total }} steps with work"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-progress-bar class="nav-item__progress" mode="determinate" [value]="percent">
     </mat-progress-bar>
   </span>
-  <span class="nav-item__progress-value md-body-2 text-secondary">{{ percent }}%</span>
+  <span class="nav-item__progress-value strong text-secondary">{{ percent }}%</span>
 </span>

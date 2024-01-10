@@ -1,41 +1,38 @@
 <ng-template #linkContent>
-  <div *ngIf="headline || headlineRef"
-       class="cta__headline primary"
-       fxLayoutAlign="center center">
-    <span *ngTemplateOutlet="headlineRef ? headlineRef: defaultHeadline"></span>
+  <div *ngIf="headline || headlineRef" class="cta__headline primary" fxLayoutAlign="center center">
+    <span *ngTemplateOutlet="headlineRef ? headlineRef : defaultHeadline"></span>
     <span fxFlex></span>
     <mat-icon color="primary">add_circle</mat-icon>
   </div>
   <div>
-    <mat-icon *ngIf="isSvgIcon"
-              class="cta__icon"
-              [ngClass]="iconColor"
-              svgIcon="{{ icon }}"></mat-icon>
-    <mat-icon *ngIf="!isSvgIcon"
-              class="cta__icon" [ngClass]="iconColor">{{ icon }}</mat-icon>
+    <mat-icon
+      *ngIf="isSvgIcon"
+      class="cta__icon"
+      [ngClass]="iconColor"
+      svgIcon="{{ icon }}"
+    ></mat-icon>
+    <mat-icon *ngIf="!isSvgIcon" class="cta__icon" [ngClass]="iconColor">{{ icon }}</mat-icon>
     <ng-template #defaultHeadline>{{ headline }}</ng-template>
     <ng-template #defaultContent>{{ content }}</ng-template>
-    <div *ngIf="content || contentRef"
-         class="cta__tagline mat-subheading-1">
-      <span *ngTemplateOutlet="contentRef ? contentRef: defaultContent"></span>
+    <div *ngIf="content || contentRef" class="cta__tagline mat-subtitle-2">
+      <span *ngTemplateOutlet="contentRef ? contentRef : defaultContent"></span>
     </div>
   </div>
 </ng-template>
 
-<a *ngIf="isOutsideLink"
-   mat-raised-button
-   class="cta"
-   href="{{ destination }}"
-   target="{{ linkTarget }}">
+<a
+  *ngIf="isOutsideLink"
+  mat-raised-button
+  class="cta"
+  href="{{ destination }}"
+  target="{{ linkTarget }}"
+>
   <div class="cta__wrap">
     <span *ngTemplateOutlet="linkContent"></span>
   </div>
 </a>
 
-<a *ngIf="!isOutsideLink"
-   mat-raised-button
-   class="cta"
-   routerLink="{{ destination }}">
+<a *ngIf="!isOutsideLink" mat-raised-button class="cta" routerLink="{{ destination }}">
   <div class="cta__wrap">
     <span *ngTemplateOutlet="linkContent"></span>
   </div>

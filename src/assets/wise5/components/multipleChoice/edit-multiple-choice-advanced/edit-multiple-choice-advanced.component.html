@@ -1,43 +1,40 @@
 <div class="show-feedback-checkbox">
   <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.showFeedback"
-      (ngModelChange)="componentChanged()"
-      i18n>
+    color="primary"
+    [(ngModel)]="componentContent.showFeedback"
+    (ngModelChange)="componentChanged()"
+    i18n
+  >
     Show Feedback
   </mat-checkbox>
 </div>
-<edit-component-save-button [componentContent]="componentContent">
-</edit-component-save-button>
-<br/>
-<edit-component-submit-button [componentContent]="componentContent">
-</edit-component-submit-button>
+<edit-component-save-button [componentContent]="componentContent"> </edit-component-save-button>
+<br />
+<edit-component-submit-button [componentContent]="componentContent"> </edit-component-submit-button>
 <edit-component-max-submit
-    *ngIf="componentContent.showSubmitButton"
-    [(maxSubmitCount)]="componentContent.maxSubmitCount"
-    (maxSubmitCountChange)="maxSubmitCountChanged($event)">
+  *ngIf="componentContent.showSubmitButton"
+  [(maxSubmitCount)]="componentContent.maxSubmitCount"
+  (maxSubmitCountChange)="maxSubmitCountChanged($event)"
+>
 </edit-component-max-submit>
-<edit-component-default-feedback
-    [componentContent]="componentContent">
+<edit-component-default-feedback [componentContent]="componentContent">
 </edit-component-default-feedback>
 <div fxLayout="column" fxLayoutAlign="start start">
-  <edit-component-max-score [componentContent]="componentContent">
-  </edit-component-max-score>
+  <edit-component-max-score [componentContent]="componentContent"> </edit-component-max-score>
   <edit-component-exclude-from-total-score [componentContent]="componentContent">
   </edit-component-exclude-from-total-score>
-  <edit-component-width [componentContent]="componentContent">
-  </edit-component-width>
-  <edit-component-rubric [componentContent]="componentContent">
-  </edit-component-rubric>
-  <edit-component-tags [componentContent]="componentContent">
-  </edit-component-tags>
+  <edit-component-width [componentContent]="componentContent"> </edit-component-width>
+  <edit-component-rubric [componentContent]="componentContent"> </edit-component-rubric>
+  <edit-component-tags [componentContent]="componentContent"> </edit-component-tags>
 </div>
 <edit-multiple-choice-connected-components
-    [nodeId]="nodeId"
-    [componentId]="componentId"
-    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-    [componentContent]="componentContent"
-    [connectedComponents]="componentContent.connectedComponents"
-    (connectedComponentsChanged)="connectedComponentsChanged($event)">
+  [nodeId]="nodeId"
+  [componentId]="componentId"
+  [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+  [componentContent]="componentContent"
+  [connectedComponents]="componentContent.connectedComponents"
+  (connectedComponentsChanged)="connectedComponentsChanged($event)"
+>
 </edit-multiple-choice-connected-components>
-<edit-component-json [nodeId]="nodeId" [componentId]="componentId"></edit-component-json>
+<edit-component-constraints [componentContent]="component.content"></edit-component-constraints>
+<edit-component-json [component]="component"></edit-component-json>

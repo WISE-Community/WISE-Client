@@ -1,111 +1,103 @@
 <component-header [component]="component"></component-header>
 <div class="discussion-content">
   <component-annotations
-      *ngIf="mode === 'student'"
-      class="annotations--inside"
-      [annotations]="latestAnnotations"
-      [maxScore]="componentContent.maxScore"
-      [nodeId]="nodeId"
-      [componentId]="componentId">
+    *ngIf="mode === 'student'"
+    class="annotations--inside"
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+  >
   </component-annotations>
   <div fxLayout="row">
     <div class="discussion-posts" ngClass.gt-sm="half-width" ngClass.lt-md="full-width">
-      <mat-card class="discussion-new discussion-post"
-          *ngIf="!isDisabled"
-          [ngClass]="{'discussion-new--focused md-whiteframe-z3': focus || newResponse || attachments.length}">
-        <mat-form-field class="input--placeholder-only discussion-new__input-container"
-            appearance="none">
-          <div *ngIf="isDisabled"
-              class="discussion-new__input--textarea input--textarea--disabled"
-              [(ngModel)]="newResponse">
-          </div>
+      <mat-card
+        appearance="outlined"
+        class="discussion-new discussion-post"
+        *ngIf="!isDisabled"
+        [ngClass]="{
+          'discussion-new--focused md-whiteframe-z3': focus || newResponse || attachments.length
+        }"
+      >
+        <mat-form-field class="input--placeholder-only discussion-new__input-container">
+          <div
+            *ngIf="isDisabled"
+            class="discussion-new__input--textarea input--textarea--disabled"
+            [(ngModel)]="newResponse"
+          ></div>
           <textarea
-              *ngIf="!isDisabled"
-              matInput
-              class="discussion-new__input--textarea"
-              placeholder="Share with class..."
-              i18n-placeholder
-              [(ngModel)]="newResponse"
-              [disabled]="isDisabled"
-              (ngModelChange)="studentDataChanged()"
-              (focus)="focus = true"
-              (blur)="focus = false"
-              cdkTextareaAutosize>
+            *ngIf="!isDisabled"
+            matInput
+            class="discussion-new__input--textarea"
+            placeholder="Share with class..."
+            i18n-placeholder
+            [(ngModel)]="newResponse"
+            [disabled]="isDisabled"
+            (ngModelChange)="studentDataChanged()"
+            (focus)="focus = true"
+            (blur)="focus = false"
+            cdkTextareaAutosize
+            maxlength="10000"
+          >
           </textarea>
         </mat-form-field>
-        <div class="discussion-new__actions"
-            *ngIf="!isDisabled && isStudentAttachmentEnabled && attachments.length">
-          <div class="component__attachment discussion-new__attachment"
-              *ngFor="let attachment of attachments">
-            <img [src]="attachment.iconURL"
-                alt="Image"
-                i18n-alt
-                class="discussion-post__attachment discussion-new__attachment__content" />
+        <div
+          class="discussion-new__actions"
+          *ngIf="!isDisabled && isStudentAttachmentEnabled && attachments.length"
+        >
+          <div
+            class="component__attachment discussion-new__attachment"
+            *ngFor="let attachment of attachments"
+          >
+            <img
+              [src]="attachment.iconURL"
+              alt="Image"
+              i18n-alt
+              class="discussion-post__attachment discussion-new__attachment__content"
+            />
             <button
-                mat-button
-                class="component__attachment__delete"
-                (click)="removeAttachment(attachment)"
-                title="Remove file"
-                i18n-title
-                [disabled]="isDisabled">
+              mat-button
+              class="component__attachment__delete"
+              (click)="removeAttachment(attachment)"
+              title="Remove file"
+              i18n-title
+              [disabled]="isDisabled"
+            >
               <mat-icon>cancel</mat-icon>
             </button>
           </div>
         </div>
-        <div class="discussion-new__actions"
-            fxLayout="row"
-            fxLayoutAlign="end center"
-            fxLayoutGap="20px">
+        <div
+          class="discussion-new__actions"
+          fxLayout="row"
+          fxLayoutAlign="end center"
+          fxLayoutGap="20px"
+        >
           <button
-              mat-button
-              *ngIf="isStudentAttachmentEnabled"
-              color="accent"
-              (click)="showStudentAssets()"
-              title="Add picture"
-              i18n-title
-              [disabled]="isDisabled">
+            mat-button
+            *ngIf="isStudentAttachmentEnabled"
+            color="accent"
+            (click)="showStudentAssets()"
+            title="Add picture"
+            i18n-title
+            [disabled]="isDisabled"
+          >
             <mat-icon>image</mat-icon>
           </button>
           <button
-              mat-raised-button
-              color="primary"
-              (click)="handleSubmitButtonClicked()"
-              [disabled]="isDisabled || (!newResponse && attachments.length == 0)"
-              i18n>
+            mat-raised-button
+            color="primary"
+            (click)="handleSubmitButtonClicked()"
+            [disabled]="isDisabled || (!newResponse && attachments.length == 0)"
+            i18n
+          >
             Post
           </button>
         </div>
       </mat-card>
       <div fxHide fxShow.sm fxShow.xs>
         <class-response
-            *ngFor="let componentState of topLevelResponses.all"
-            [response]="componentState"
-            [numReplies]="componentState.replies.length"
-            (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
-            [mode]="mode"
-            (deleteButtonClicked)="deleteButtonClicked($event)"
-            (undoDeleteButtonClicked)="undoDeleteButtonClicked($event)"
-            [isDisabled]="isDisabled"
-            class="post">
-        </class-response>
-      </div>
-      <div fxHide fxShow.gt-sm>
-        <class-response
-            *ngFor="let componentState of topLevelResponses.col2"
-            [response]="componentState"
-            [numReplies]="componentState.replies.length"
-            (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
-            [mode]="mode"
-            (deleteButtonClicked)="deleteButtonClicked($event)"
-            (undoDeleteButtonClicked)="undoDeleteButtonClicked($event)"
-            [isDisabled]="isDisabled"
-            class="post">
-        </class-response>
-      </div>
-    </div>
-    <div class="discussion-posts half-width" fxHide fxShow.gt-sm>
-      <class-response
-          *ngFor="let componentState of topLevelResponses.col1"
+          *ngFor="let componentState of topLevelResponses.all"
           [response]="componentState"
           [numReplies]="componentState.replies.length"
           (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
@@ -114,7 +106,37 @@
           (undoDeleteButtonClicked)="undoDeleteButtonClicked($event)"
           [isDisabled]="isDisabled"
           class="post"
-          style="display: block;">
+        >
+        </class-response>
+      </div>
+      <div fxHide fxShow.gt-sm>
+        <class-response
+          *ngFor="let componentState of topLevelResponses.col2"
+          [response]="componentState"
+          [numReplies]="componentState.replies.length"
+          (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
+          [mode]="mode"
+          (deleteButtonClicked)="deleteButtonClicked($event)"
+          (undoDeleteButtonClicked)="undoDeleteButtonClicked($event)"
+          [isDisabled]="isDisabled"
+          class="post"
+        >
+        </class-response>
+      </div>
+    </div>
+    <div class="discussion-posts half-width" fxHide fxShow.gt-sm>
+      <class-response
+        *ngFor="let componentState of topLevelResponses.col1"
+        [response]="componentState"
+        [numReplies]="componentState.replies.length"
+        (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
+        [mode]="mode"
+        (deleteButtonClicked)="deleteButtonClicked($event)"
+        (undoDeleteButtonClicked)="undoDeleteButtonClicked($event)"
+        [isDisabled]="isDisabled"
+        class="post"
+        style="display: block"
+      >
       </class-response>
     </div>
   </div>
