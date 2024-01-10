@@ -9592,10 +9592,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.html</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="translated"> El equipo no ha trabajo todavía en <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> . </target>
-      </trans-unit>
-      <trans-unit id="a8d79c94172b18dbceadb046a6f53999bd5684f6" datatype="html">
-        <source> Password required </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/select-peer-grouping-option/select-peer-grouping-option.component.html</context>
           <context context-type="linenumber">18</context>
@@ -9608,10 +9604,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation"> Password must be at least 8 characters </target>
-      </trans-unit>
-      <trans-unit id="e0ec4c4460849c90579b7bf68cdde586ce2e8ad9" datatype="html">
-        <source> Password must have at least one lowercase, one uppercase, and one number character </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
           <context context-type="linenumber">85</context>
@@ -13022,10 +13014,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
           <context context-type="linenumber">109</context>
         </context-group>
-        <target state="translated">Requerida la cantidad de filas rellenadas (sin incluir los encabezados de fila)</target>
-      </trans-unit>
-      <trans-unit id="3373179210544883044" datatype="html">
-        <source>Table Has Header Row</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
           <context context-type="linenumber">212</context>
@@ -13038,10 +13026,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <target state="translated">Requiere que todas las celdas en una fila sean rellenadas</target>
-      </trans-unit>
-      <trans-unit id="6549053190457916462" datatype="html">
-        <source>Teacher Removes Constraint</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
           <context context-type="linenumber">117</context>
@@ -13190,10 +13174,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="translated">Elegir Componente</target>
-      </trans-unit>
-      <trans-unit id="2a87e4e9560ba4599248ad3e3dbb9237b5dbefef" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ componentIndex + 1 }}"/>. <x id="INTERPOLATION_1" equiv-text="{{ component.type }}"/> (<x id="INTERPOLATION_2" equiv-text="{{ component.id }}"/>) Prompt: <x id="INTERPOLATION_3" equiv-text="{{ component.prompt }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component.html</context>
           <context context-type="linenumber">4</context>
@@ -13206,10 +13186,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="translated">ID de calificación (opcional)</target>
-      </trans-unit>
-      <trans-unit id="9f4555e33775bcbf87a421550dd26288b2bb9f4a" datatype="html">
-        <source>Branch Path</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component.html</context>
           <context context-type="linenumber">9</context>
@@ -14336,7 +14312,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component.html</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="needs-translation">New Student Password</target>
+        <target state="translated">Confirmar</target>
       </trans-unit>
       <trans-unit id="6726159975238623949" datatype="html">
         <source>Confirm New Student Password</source>
@@ -14580,9 +14556,13 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
+        <target state="translated">El estudiante adoptará el trabajo de su nuevo equipo.</target>
+      </trans-unit>
+      <trans-unit id="ad0adea4bea4ed22adcf8a1ed09c68c8bb955b37" datatype="html">
+        <source>Remove Student</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
         </context-group>
         <target state="translated">Quitar estudiante</target>
       </trans-unit>
@@ -15500,7 +15480,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <target state="translated">Menú ppal</target>
       </trans-unit>
@@ -16844,7 +16824,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">32</context>
         </context-group>
-        <target state="needs-translation"> Select a Step </target>
+        <target state="translated"> Seleccionar un Paso </target>
       </trans-unit>
       <trans-unit id="8b28432b6c78dfa3fb0a921ff13c63faa06457fe" datatype="html">
         <source>Next Step</source>
@@ -17572,7 +17552,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">331</context>
+          <context context-type="linenumber">330</context>
         </context-group>
         <target state="translated">Tenés <x id="PH" equiv-text="numberOfSubmitsLeft"/> oportunidades de recibir retroalimentación sobre tu respuesta, con lo cual ésta debe ser tu mejor versión.
 
@@ -18130,7 +18110,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">122,125</context>
         </context-group>
-        <target state="translated"> Evalúa como verdadero si esta es la X-ava respuesta del/la estudiante.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>isSubmitNumber(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evalúa como verdadero si esta es la tercera respuesta del/de la estudiante. </target>
+        <target state="translated"> Se evalúa como verdadero si esta es la penúltima respuesta del estudiante cuando se especifica el número máximo de envíos. </target>
       </trans-unit>
       <trans-unit id="bc1cca966f287a319703db89b22d379a6c1455cb" datatype="html">
         <source> Evaluates to true if this is the student&apos;s final response when the max number of submits is specified. </source>
@@ -18558,7 +18538,7 @@ Etiqueta: <x id="PH" equiv-text="linkLabel"/></target>
         <source>You have no more chances to receive feedback on your answer.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">325</context>
+          <context context-type="linenumber">324</context>
         </context-group>
         <target state="translated">No tienes más opciones para recibir retroalimentación sobre tu respuesta.</target>
       </trans-unit>
@@ -18568,7 +18548,7 @@ Etiqueta: <x id="PH" equiv-text="linkLabel"/></target>
 Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">328</context>
+          <context context-type="linenumber">327</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
@@ -18582,11 +18562,11 @@ Are you ready to receive feedback on this answer?</source>
         <source>Feedback</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">406</context>
+          <context context-type="linenumber">405</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">415</context>
+          <context context-type="linenumber">414</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
@@ -18598,7 +18578,7 @@ Are you ready to receive feedback on this answer?</source>
         <source>Are you sure you want to reset your work?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">1414</context>
+          <context context-type="linenumber">1413</context>
         </context-group>
         <target state="translated">¿Seguro que deseas resetear tu trabajo?</target>
       </trans-unit>
@@ -18632,7 +18612,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
-        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+        <target state="translated"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>agregar<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
       </trans-unit>
       <trans-unit id="743ec76118803d14b5695bc5915735101fd32fd6" datatype="html">
         <source>Rule Name</source>
@@ -19568,7 +19548,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to clear your drawing?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.ts</context>
-          <context context-type="linenumber">199</context>
+          <context context-type="linenumber">198</context>
         </context-group>
         <target state="translated">¿Seguro que desea borrar el dibujo?</target>
       </trans-unit>
@@ -19576,7 +19556,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Do you want to update the connected drawing?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.ts</context>
-          <context context-type="linenumber">286</context>
+          <context context-type="linenumber">285</context>
         </context-group>
         <target state="translated">¿Desea actualizar el dibujo conectado?</target>
       </trans-unit>
@@ -20654,7 +20634,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Time (seconds)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <target state="translated">Tiempo (segundos)</target>
       </trans-unit>
@@ -20662,7 +20642,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>s</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">52</context>
         </context-group>
         <target state="translated">s</target>
       </trans-unit>
@@ -20670,7 +20650,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Position (meters)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <target state="translated">Posición (metros)</target>
       </trans-unit>
@@ -20678,7 +20658,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>m</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <target state="translated">m</target>
       </trans-unit>
@@ -20686,7 +20666,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Prediction</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">78</context>
         </context-group>
         <target state="translated">Predicción</target>
       </trans-unit>
@@ -21108,7 +21088,7 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
           <context context-type="linenumber">53,55</context>
         </context-group>
-        <target state="needs-translation"> There are no choices. Click the "Add Choice" button to add a choice. </target>
+        <target state="translated"> No hay opciones. Clic en el botón "Agregar opciones" para agregar una opción. </target>
       </trans-unit>
       <trans-unit id="3e20a6ecefca9c87d5dedc6e425a571629d232c5" datatype="html">
         <source>Choice Name</source>
@@ -21286,7 +21266,7 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         <source>Add item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-choice-button/add-choice-button.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <target state="translated">Agregar item</target>
       </trans-unit>
@@ -21871,7 +21851,7 @@ Advertencia: Esto eliminará todas las opciones existentes en este componente.</
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">329</context>
         </context-group>
-        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+        <target state="translated"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>agregar<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
       </trans-unit>
       <trans-unit id="02c1371da872a1989dd16ee5b4bbc60ce619173c" datatype="html">
         <source>Move Notification Up</source>
@@ -22401,7 +22381,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-message-input/peer-chat-message-input.component.html</context>
           <context context-type="linenumber">21,23</context>
         </context-group>
-        <target state="needs-translation">Delete this message so students won't see it</target>
+        <target state="translated"> Enviar </target>
       </trans-unit>
       <trans-unit id="81a5df0547de12ef2c96486e6618669b3bdd704f" datatype="html">
         <source>Make this message viewable to students again</source>
@@ -22665,7 +22645,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">50</context>
         </context-group>
-        <target state="needs-translation"> Responses </target>
+        <target state="translated"> Respuestas </target>
       </trans-unit>
       <trans-unit id="43a90bb443fec3f96765a3477422943b0f12cfac" datatype="html">
         <source> Scores </source>
@@ -22705,7 +22685,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">63</context>
         </context-group>
-        <target state="needs-translation"> Students In All Periods </target>
+        <target state="translated"> Estudiantes en todos los períodos </target>
       </trans-unit>
       <trans-unit id="f2102c0b996b067ab2a46c7743fe5931fa47f16d" datatype="html">
         <source>Chart Type</source>
@@ -22729,7 +22709,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">70</context>
         </context-group>
-        <target state="needs-translation"> Pie </target>
+        <target state="translated"> Torta </target>
       </trans-unit>
       <trans-unit id="728d28a16684461da6666aa5148c2869c10635ff" datatype="html">
         <source>Required to View Summary</source>
@@ -22753,7 +22733,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">80</context>
         </context-group>
-        <target state="needs-translation"> Submit Work </target>
+        <target state="translated"> Enviar trabajo </target>
       </trans-unit>
       <trans-unit id="498795bf57fad2df67afeecf42b860c37dac2289" datatype="html">
         <source> None </source>
@@ -22761,7 +22741,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">81</context>
         </context-group>
-        <target state="needs-translation"> None </target>
+        <target state="translated"> Ninguno </target>
       </trans-unit>
       <trans-unit id="84125df9a0fb34ce56ec38f53126e5077e8b25f1" datatype="html">
         <source> Highlight Correct Answer </source>
@@ -23102,54 +23082,6 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
           <context context-type="linenumber">203</context>
-        </context-group>
-        <target state="translated">La tabla fue importada exitosamente</target>
-      </trans-unit>
-      <trans-unit id="b652160adbee3bf218c97721e5b26a3bccf7b0c9" datatype="html">
-        <source>Import Table</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">143</context>
-        </context-group>
-        <target state="translated">Importar tabla</target>
-      </trans-unit>
-      <trans-unit id="f691a121c479261a164621480b345efc8f65326c" datatype="html">
-        <source>Only .csv (comma separated values) files are allowed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">149</context>
-        </context-group>
-        <target state="translated">Solo se permiten archivos con formato CSV (valores separados por comas)</target>
-      </trans-unit>
-      <trans-unit id="3802284852279199102" datatype="html">
-        <source>Are you sure you want to overwrite the existing table?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">188</context>
-        </context-group>
-        <target state="translated">¿Sobreescribir la tabla existente?</target>
-      </trans-unit>
-      <trans-unit id="5497998297263821629" datatype="html">
-        <source>Importing table...</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">190</context>
-        </context-group>
-        <target state="translated">Importando tabla...</target>
-      </trans-unit>
-      <trans-unit id="4805591784714355993" datatype="html">
-        <source>Error: The table contains more than <x id="PH" equiv-text="this.MAX_ALLOWED_CELLS_IN_IMPORT"/> cells</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">198</context>
-        </context-group>
-        <target state="translated">Error: La tabla contiene más de <x id="PH" equiv-text="this.MAX_ALLOWED_CELLS_IN_IMPORT"/> celdas</target>
-      </trans-unit>
-      <trans-unit id="8522934403801176161" datatype="html">
-        <source>Successfully imported table</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">202</context>
         </context-group>
         <target state="translated">La tabla fue importada exitosamente</target>
       </trans-unit>
