@@ -1,0 +1,162 @@
+<div class="l-constrained grading">
+  <mat-list class="user-list">
+    <mat-list-item class="md-whiteframe-1dp md-with-secondary list-item user-list-controls">
+      <div fxFlex="100"
+          fxLayout="column"
+          fxLayout.gt-sm="row"
+          fxLayoutAlign="center center"
+          fxLayoutGap.lt-md="8px">
+        <workgroup-select-autocomplete></workgroup-select-autocomplete>
+        <span fxFlex fxHide.xs fxHide.sm></span>
+        <div class="md-secondary-container"
+            fxFlex.lt-md="100"
+            fxLayoutAlign="center center">
+          <button mat-button
+              color="primary"
+              aria-label="Expand All"
+              i18n-aria-label
+              class="button--small md-primary"
+              (click)="expandAll()"
+              i18n>
+            + Expand All
+          </button>
+          <button mat-button
+              color="primary"
+              aria-label="Collapse All"
+              i18n-aria-label
+              class="button--small md-primary"
+              (click)="collapseAll()">
+            - Collapse All
+          </button>
+        </div>
+      </div>
+    </mat-list-item>
+    <mat-list-item class="table--list__thead table--list__thead__th md-whiteframe-1dp">
+      <div class="md-list-item-text table--list__thead__tr" fxLayout="row" fxFlex>
+        <button mat-button
+            class="table--list__thead__link"
+            fxFlex
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            (click)="setSort('team')"
+            aria-label="Sort by team"
+            i18n-aria-label>
+          <span class="column-header-label" i18n>Team</span>
+          <mat-icon *ngIf="sort === 'team' || sort === '-team'"
+              class="text-light table--list__thead__sort"
+              md-theme="default"
+              [ngClass]="{'table--list__thead__sort--reverse': sort === '-team'}">
+            arrow_drop_up
+          </mat-icon>
+        </button>
+        <button mat-button
+            *ngIf="milestone.report.locations.length == 1"
+            class="table--list__thead__link"
+            fxFlex="30"
+            fxLayout="row"
+            fxLayoutAlign="center center"
+            (click)="setSort('status')"
+            aria-label="Sort by completion"
+            i18n-aria-label>
+          <span class="column-header-label" i18n>Status</span>
+          <mat-icon *ngIf="sort === 'status' || sort === '-status'"
+              class="text-light table--list__thead__sort" md-theme="default"
+              [ngClass]="{'table--list__thead__sort--reverse': sort === '-status'}">
+            arrow_drop_up
+          </mat-icon>
+        </button>
+        <button mat-button
+            *ngIf="milestone.report.locations.length == 1"
+            class="table--list__thead__link"
+            fxFlex="20"
+            fxLayout="row"
+            fxLayoutAlign="center center"
+            (click)="setSort('score')"
+            aria-label="Sort by score"
+            i18n-aria-label>
+          <span class="column-header-label" i18n>Score</span>
+          <mat-icon *ngIf="sort === 'score' || sort === '-score'"
+              class="text-light table--list__thead__sort"
+              md-theme="default"
+              [ngClass]="{'table--list__thead__sort--reverse': sort === '-score'}">
+            arrow_drop_up
+          </mat-icon>
+        </button>
+        <button mat-button
+            *ngIf="milestone.report.locations.length > 1"
+            class="table--list__thead__link"
+            fxFlex="10"
+            fxLayout="row"
+            fxLayoutAlign="center center"
+            (click)="setSort('initialScore')"
+            aria-label="Sort by score on Step {{ firstNodePosition }}"
+            i18n-aria-label
+            matTooltip="Sort by score on Step {{ firstNodePosition }}"
+            i18n-matTooltip
+            matTooltipPosition="above">
+          <span class="column-header-label">{{ firstNodePosition }}</span>
+          <mat-icon *ngIf="sort === 'initialScore' || sort === '-initialScore'"
+              class="text-light table--list__thead__sort"
+              md-theme="default"
+              [ngClass]="{'table--list__thead__sort--reverse': sort === '-initialScore'}">
+            arrow_drop_up
+          </mat-icon>
+        </button>
+        <button mat-button
+            *ngIf="milestone.report.locations.length > 1"
+            class="table--list__thead__link"
+            fxFlex="10"
+            fxLayout="row"
+            fxLayoutAlign="center center"
+            (click)="setSort('score')"
+            aria-label="Sort by score on Step {{ lastNodePosition }}"
+            i18n-aria-label
+            matTooltip="Sort by score on Step {{ lastNodePosition }}"
+            i18n-matTooltip
+            matTooltipPosition="above">
+          <span class="column-header-label">{{ lastNodePosition }}</span>
+          <mat-icon *ngIf="sort === 'score' || sort === '-score'"
+              class="text-light table--list__thead__sort"
+              md-theme="default"
+              [ngClass]="{'table--list__thead__sort--reverse': sort === '-score'}">
+            arrow_drop_up
+          </mat-icon>
+        </button>
+        <button mat-button
+            *ngIf="milestone.report.locations.length > 1"
+            class="table--list__thead__link"
+            fxFlex="10"
+            fxLayout="row"
+            fxLayoutAlign="center center"
+            (click)="setSort('changeInScore')"
+            aria-label="Sort by change in score"
+            i18n-aria-label
+            matTooltip="Sort by change in score"
+            i18n-matTooltip
+            matTooltipPosition="above">
+          <span class="column-header-label" i18n>+/-</span>
+          <mat-icon *ngIf="sort === 'changeInScore' || sort === '-changeInScore'"
+              class="text-light table--list__thead__sort"
+              md-theme="default"
+              [ngClass]="{'table--list__thead__sort--reverse': sort === '-changeInScore'}">
+            arrow_drop_up
+          </mat-icon>
+        </button>
+      </div>
+    </mat-list-item>
+    <div class="md-whiteframe-1dp" waIntersectionObserver waIntersectionThreshold="0.5">
+      <ng-container *ngFor="let workgroup of sortedWorkgroups">
+        <milestone-workgroup-item *ngIf="isWorkgroupShown(workgroup)"
+            [expanded]="workVisibilityById[workgroup.workgroupId]"
+            [showScore]="true"
+            [locations]="milestone.report.locations"
+            [workgroupId]="workgroup.workgroupId"
+            [workgroupData]="workgroup"
+            (onUpdateExpand)="onUpdateExpand($event)"
+            (waIntersectionObservee)="onIntersection(workgroup.workgroupId, $event)">
+        </milestone-workgroup-item>
+      </ng-container>
+    </div>
+  </mat-list>
+</div>
+

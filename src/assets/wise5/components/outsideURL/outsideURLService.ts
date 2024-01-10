@@ -3,12 +3,11 @@
 import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UtilService } from '../../services/utilService';
 
 @Injectable()
 export class OutsideURLService extends ComponentService {
-  constructor(private http: HttpClient, protected UtilService: UtilService) {
-    super(UtilService);
+  constructor(private http: HttpClient) {
+    super();
   }
 
   getComponentTypeLabel(): string {

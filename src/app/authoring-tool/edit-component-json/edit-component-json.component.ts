@@ -50,11 +50,8 @@ export class EditComponentJsonComponent {
   }
 
   setComponentContentJsonString() {
-    const authoringComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
-    this.componentContentJSONString = angular.toJson(authoringComponentContent, 4);
+    const componentContent = this.ProjectService.getComponent(this.nodeId, this.componentId);
+    this.componentContentJSONString = angular.toJson(componentContent, 4);
   }
 
   toggleJSONView(): void {

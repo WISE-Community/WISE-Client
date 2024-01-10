@@ -58,7 +58,7 @@ export class ClassroomStatusService {
     const studentStatus = this.getStudentStatusForWorkgroupId(workgroupId);
     if (studentStatus != null) {
       const currentNodeId = studentStatus.currentNodeId;
-      return this.projectService.getNodePositionAndTitleByNodeId(currentNodeId);
+      return this.projectService.getNodePositionAndTitle(currentNodeId);
     }
     return null;
   }

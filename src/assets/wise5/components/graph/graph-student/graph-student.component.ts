@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -15,6 +15,8 @@ import HC_exporting from 'highcharts/modules/exporting';
 import * as covariance from 'compute-covariance';
 import canvg from 'canvg';
 import { MatDialog } from '@angular/material/dialog';
+import { GraphContent } from '../GraphContent';
+import { RandomKeyService } from '../../../services/randomKeyService';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -41,6 +43,7 @@ export class GraphStudent extends ComponentStudent {
   hasCustomLegendBeenSet: boolean = false;
   height: number = null;
   hiddenCanvasId: string = 'hiddenCanvas_' + this.componentId;
+  @ViewChild('hiddenButton') hiddenButtonElement: ElementRef;
   hideAllTrialsOnNewTrial: boolean = true;
   Highcharts: typeof Highcharts = Highcharts;
   initialComponentState: any = null;
@@ -78,6 +81,7 @@ export class GraphStudent extends ComponentStudent {
 
   constructor(
     protected AnnotationService: AnnotationService,
+    private changeDetectorRef: ChangeDetectorRef,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected dialog: MatDialog,
@@ -185,7 +189,7 @@ export class GraphStudent extends ComponentStudent {
       this.newTrial();
     }
     if (
-      this.UtilService.hasConnectedComponentAlwaysField(this.componentContent) ||
+      this.component.hasConnectedComponentAlwaysField() ||
       this.hasConnectedComponentShowClassmateWork(this.componentContent)
     ) {
       this.handleConnectedComponents();
@@ -193,7 +197,7 @@ export class GraphStudent extends ComponentStudent {
       this.GraphService.componentStateHasStudentWork(componentState, this.componentContent)
     ) {
       this.setStudentWork(componentState);
-    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    } else if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
     }
   }
@@ -257,46 +261,78 @@ export class GraphStudent extends ComponentStudent {
   }
 
   handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState) {
-    const studentData = componentState.studentData;
+    const studentData = this.UtilService.makeCopyOfJSONObject(componentState.studentData);
+    if (studentData.tableData.length > 0) {
+      studentData.tableData = this.processTableData(
+        studentData.tableData,
+        studentData.sortOrder,
+        studentData.selectedRowIndices
+      );
+    }
     if (studentData.isDataExplorerEnabled) {
       this.handleDataExplorer(studentData);
     } else {
-      const rows = studentData.tableData;
-      const data = this.convertRowDataToSeriesData(rows, connectedComponent);
-      let seriesIndex = connectedComponent.seriesIndex;
-      if (seriesIndex == null) {
-        seriesIndex = 0;
-      }
-      if (this.isStudentDataVersion1()) {
-        let series = this.series[seriesIndex];
-        if (series == null) {
-          series = {};
-          this.series[seriesIndex] = series;
-        }
-        series.data = data;
-      } else {
-        const trial = this.activeTrial;
-        if (trial != null && trial.series != null) {
-          let series = trial.series[seriesIndex];
-          if (series == null) {
-            series = {};
-            this.series[seriesIndex] = series;
-          }
-          series.data = data;
-        }
-      }
+      this.handleConnectedComponentData(studentData, connectedComponent);
     }
     this.drawGraph();
     this.isDirty = true;
   }
 
-  handleDataExplorer(studentData) {
+  private processTableData(
+    tableData: any[],
+    sortOrder: number[] = [],
+    selectedRowIndices: number[] = []
+  ): any[] {
+    if (sortOrder && sortOrder.length > 0) {
+      return this.getSortedAndFilteredTableData(tableData, sortOrder, selectedRowIndices);
+    } else {
+      return this.getFilteredTableData(tableData, selectedRowIndices);
+    }
+  }
+
+  private getSortedAndFilteredTableData(
+    tableData: any[],
+    sortOrder: number[],
+    selectedRowIndices: number[]
+  ): any[] {
+    const sortedTableData = [tableData[0]];
+    sortOrder.forEach((rowNumber, index) => {
+      if (this.isRowSelected(rowNumber, selectedRowIndices)) {
+        sortedTableData.push(tableData[rowNumber + 1]);
+      }
+    });
+    return sortedTableData;
+  }
+
+  private isRowSelected(rowNumber: number, selectedRowIndices: number[]): boolean {
+    return selectedRowIndices.length > 0 ? selectedRowIndices.includes(rowNumber) : true;
+  }
+
+  private getFilteredTableData(tableData: any[], selectedRowIndices: number[]): any[] {
+    let visibleRows = tableData;
+    if (selectedRowIndices && selectedRowIndices.length > 0) {
+      visibleRows = [tableData[0]];
+      tableData.forEach((row, index) => {
+        if (this.isRowSelected(index - 1, selectedRowIndices)) {
+          visibleRows.push(row);
+        }
+      });
+    }
+    return visibleRows;
+  }
+
+  private handleDataExplorer(studentData: any): void {
+    // clear graph to prevent issues with Highcharts merging old series data with new series data
+    this.activeTrial.series = [];
+    this.drawGraph();
+    this.changeDetectorRef.detectChanges();
+
     const dataExplorerSeries = studentData.dataExplorerSeries;
     const graphType = studentData.dataExplorerGraphType;
     this.xAxis.title.text = studentData.dataExplorerXAxisLabel;
     this.setYAxisLabels(studentData);
     this.setXAxisLabels(studentData);
-    this.activeTrial.series = [];
+
     for (let seriesIndex = 0; seriesIndex < dataExplorerSeries.length; seriesIndex++) {
       const xColumn = dataExplorerSeries[seriesIndex].xColumn;
       const yColumn = dataExplorerSeries[seriesIndex].yColumn;
@@ -326,6 +362,33 @@ export class GraphStudent extends ComponentStudent {
           );
           this.activeTrial.series.push(regressionSeries);
         }
+      }
+    }
+  }
+
+  private handleConnectedComponentData(studentData: any, connectedComponent: any): void {
+    const rows = studentData.tableData;
+    const data = this.convertRowDataToSeriesData(rows, connectedComponent);
+    let seriesIndex = connectedComponent.seriesIndex;
+    if (seriesIndex == null) {
+      seriesIndex = 0;
+    }
+    if (this.isStudentDataVersion1()) {
+      let series = this.series[seriesIndex];
+      if (series == null) {
+        series = {};
+        this.series[seriesIndex] = series;
+      }
+      series.data = data;
+    } else {
+      const trial = this.activeTrial;
+      if (trial != null && trial.series != null) {
+        let series = trial.series[seriesIndex];
+        if (series == null) {
+          series = {};
+          this.series[seriesIndex] = series;
+        }
+        series.data = data;
       }
     }
   }
@@ -372,7 +435,12 @@ export class GraphStudent extends ComponentStudent {
             studentData.tableData,
             this.value
           );
-          if (isNaN(parseFloat(textValue))) {
+          if (
+            typeof textValue === 'string' &&
+            textValue !== '' &&
+            !thisComponent.isNA(textValue) &&
+            isNaN(parseFloat(textValue))
+          ) {
             return studentData.tableData[this.value + 1][studentData.dataExplorerSeries[0].xColumn]
               .text;
           }
@@ -380,6 +448,11 @@ export class GraphStudent extends ComponentStudent {
         return this.value;
       }
     };
+  }
+
+  isNA(text: string): boolean {
+    const textUpperCase = text.toUpperCase();
+    return textUpperCase === 'NA' || textUpperCase === 'N/A';
   }
 
   getXColumnTextValue(dataExplorerSeries: any[], tableData: any[][], value: number): string {
@@ -811,6 +884,7 @@ export class GraphStudent extends ComponentStudent {
         this.setCustomLegend();
       });
     }
+    this.changeDetectorRef.detectChanges();
   }
 
   turnOffXAxisDecimals() {
@@ -843,9 +917,8 @@ export class GraphStudent extends ComponentStudent {
   }
 
   setAllSeriesFields(series) {
-    const canAllSeriesMouseTrack = this.getNumberOfEditableSeries(series) === 0;
     for (const singleSeries of series) {
-      this.setSingleSeriesFields(singleSeries, canAllSeriesMouseTrack);
+      this.setSingleSeriesFields(singleSeries);
     }
   }
 
@@ -859,7 +932,7 @@ export class GraphStudent extends ComponentStudent {
     return numberOfEditableSeries;
   }
 
-  setSingleSeriesFields(singleSeries, canAllSeriesMouseTrack) {
+  setSingleSeriesFields(singleSeries) {
     if (singleSeries.canEdit && this.isActiveSeries(singleSeries)) {
       singleSeries.dragDrop = {
         draggableX: true,
@@ -874,7 +947,6 @@ export class GraphStudent extends ComponentStudent {
       singleSeries.stickyTracking = false;
       singleSeries.shared = false;
       singleSeries.allowPointSelect = true;
-      singleSeries.enableMouseTracking = true;
       this.showUndoButton = true;
     } else {
       singleSeries.dragDrop = {
@@ -886,14 +958,9 @@ export class GraphStudent extends ComponentStudent {
       singleSeries.stickyTracking = false;
       singleSeries.shared = false;
       singleSeries.allowPointSelect = false;
-      singleSeries.enableMouseTracking = canAllSeriesMouseTrack;
     }
     if (singleSeries.allowPointMouseOver === true) {
       singleSeries.allowPointSelect = true;
-      singleSeries.enableMouseTracking = true;
-    }
-    if (this.isMousePlotLineOn()) {
-      singleSeries.enableMouseTracking = true;
     }
   }
 
@@ -992,6 +1059,11 @@ export class GraphStudent extends ComponentStudent {
         }
       }
     };
+  }
+
+  focusOnComponent(): void {
+    // allows this component to listen to events (e.g. "keydown.backspace")
+    this.hiddenButtonElement.nativeElement.focus();
   }
 
   /*
@@ -1316,7 +1388,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   resetSeriesHelper() {
-    if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    if (this.component.hasConnectedComponent()) {
       this.newTrial();
       const isReset = true;
       this.handleConnectedComponents(isReset);
@@ -1441,7 +1513,7 @@ export class GraphStudent extends ComponentStudent {
    * @return a promise that will return a component state
    */
   createComponentState(action) {
-    const componentState = this.NodeService.createNewComponentState();
+    const componentState = this.createNewComponentState();
     const studentData: any = {};
     studentData.version = this.studentDataVersion;
     if (this.isStudentDataVersion1()) {
@@ -1601,12 +1673,12 @@ export class GraphStudent extends ComponentStudent {
    */
   getTrialsFromComponentState(nodeId, componentId, componentState) {
     const mergedTrials = [];
-    const nodePositionAndTitle = this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+    const nodePositionAndTitle = this.ProjectService.getNodePositionAndTitle(nodeId);
     const studentData = componentState.studentData;
     if (this.isStudentDataVersion1(studentData.version)) {
       const series = studentData.series;
       const newTrial = {
-        id: this.UtilService.generateKey(10),
+        id: RandomKeyService.generate(),
         name: nodePositionAndTitle,
         show: true,
         series: series
@@ -1708,28 +1780,26 @@ export class GraphStudent extends ComponentStudent {
   }
 
   addPointFromTableIntoData(xCell: any, yCell: any, data: any[]) {
-    let xText = xCell.text;
-    if (xText == null || xText === '') {
-      xText = 'N/A';
-    }
-    let yText = yCell.text;
-    if (yText == null || yText === '') {
-      yText = 'N/A';
-    }
-    const xNumber = Number(xText);
-    const yNumber = Number(yText);
-    const point = [];
-    if (!isNaN(xNumber)) {
-      point.push(xNumber);
+    const xText = xCell.text;
+    const yText = yCell.text;
+    if (xText != null && xText !== '' && yText != null && yText !== '') {
+      const xNumber = Number(xText);
+      const yNumber = Number(yText);
+      const point = [];
+      if (!isNaN(xNumber)) {
+        point.push(xNumber);
+      } else {
+        point.push(xText);
+      }
+      if (!isNaN(yNumber)) {
+        point.push(yNumber);
+      } else {
+        point.push(null);
+      }
+      data.push(point);
     } else {
-      point.push(xText);
+      data.push([]);
     }
-    if (!isNaN(yNumber)) {
-      point.push(yNumber);
-    } else {
-      point.push(yText);
-    }
-    data.push(point);
   }
 
   setSeriesIds(allSeries) {
@@ -1781,7 +1851,7 @@ export class GraphStudent extends ComponentStudent {
     return null;
   }
 
-  @HostListener('document:keydown.backspace')
+  @HostListener('keydown.backspace')
   handleDeleteKeyPressed(): void {
     const series = this.activeSeries;
     if (this.canEdit(series)) {
@@ -1866,7 +1936,7 @@ export class GraphStudent extends ComponentStudent {
       name: $localize`Trial` + ' ' + (maxTrialNumber + 1),
       series: series,
       show: true,
-      id: this.UtilService.generateKey(10)
+      id: RandomKeyService.generate()
     };
     this.trials.push(trial);
     this.activeTrial = trial;
@@ -2574,7 +2644,7 @@ export class GraphStudent extends ComponentStudent {
           connectedComponent.showClassmateWorkSource
         )
       );
-      let component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+      let component = this.ProjectService.getComponent(nodeId, componentId) as GraphContent;
       component = this.ProjectService.injectAssetPaths(component);
       connectedComponentBackgroundImage = component.backgroundImage;
     }
@@ -2617,7 +2687,7 @@ export class GraphStudent extends ComponentStudent {
           connectedComponentBackgroundImage = latestComponentState.studentData.backgroundImage;
         }
         if (connectedComponent.importGraphSettings) {
-          const component = this.ProjectService.getComponentByNodeIdAndComponentId(
+          const component = this.ProjectService.getComponent(
             connectedComponent.nodeId,
             connectedComponent.componentId
           );
@@ -2673,7 +2743,7 @@ export class GraphStudent extends ComponentStudent {
             activeTrialIndex
           );
         }
-        let newComponentState = this.NodeService.createNewComponentState();
+        let newComponentState = this.createNewComponentState();
         newComponentState.studentData = {
           trials: mergedTrials,
           activeTrialIndex: activeTrialIndex,
@@ -2697,7 +2767,7 @@ export class GraphStudent extends ComponentStudent {
 
   addTrialFromThisComponentIfNecessary(mergedTrials, trialCount, activeTrialIndex) {
     if (this.componentContent.series.length > 0) {
-      const trial = this.createNewTrial(this.UtilService.generateKey(10));
+      const trial = this.createNewTrial(RandomKeyService.generate());
       trial.name = $localize`Trial` + ' ' + trialCount;
       trial.series = this.UtilService.makeCopyOfJSONObject(this.componentContent.series);
       mergedTrials.push(trial);

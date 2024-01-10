@@ -19,7 +19,7 @@ export class EmbeddedService extends ComponentService {
     protected StudentAssetService: StudentAssetService,
     protected UtilService: UtilService
   ) {
-    super(UtilService);
+    super();
   }
 
   getEmbeddedApplicationIframeId(componentId: string): string {

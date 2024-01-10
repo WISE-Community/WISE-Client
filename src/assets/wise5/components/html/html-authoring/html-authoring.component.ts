@@ -14,23 +14,25 @@ export class HtmlAuthoring extends ComponentAuthoring {
   html: string = '';
 
   constructor(
-    protected ConfigService: ConfigService,
-    protected NodeService: NodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected configService: ConfigService,
+    protected nodeService: NodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService,
+    protected utilService: UtilService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+    super(configService, nodeService, projectAssetService, projectService);
   }
 
   ngOnInit() {
     super.ngOnInit();
-    this.html = this.UtilService.replaceWISELinks(this.componentContent.html);
+    this.html = this.projectService.replaceAssetPaths(
+      this.utilService.replaceWISELinks(this.componentContent.html)
+    );
   }
 
   htmlChanged(): void {
-    this.authoringComponentContent.html = this.UtilService.insertWISELinks(
-      this.ConfigService.removeAbsoluteAssetPaths(this.html)
+    this.componentContent.html = this.utilService.insertWISELinks(
+      this.configService.removeAbsoluteAssetPaths(this.html)
     );
     this.componentChanged();
   }

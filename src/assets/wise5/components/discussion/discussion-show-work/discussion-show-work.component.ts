@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
+import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { TeacherDiscussionService } from '../teacherDiscussionService';
@@ -11,8 +12,7 @@ import { TeacherDiscussionService } from '../teacherDiscussionService';
   styleUrls: ['discussion-show-work.component.scss']
 })
 export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
-  @Input()
-  workgroupId: any;
+  @Input() workgroupId: any;
 
   topLevelResponses: any = {};
   classResponses: any[] = [];
@@ -23,10 +23,11 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
   constructor(
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
+    protected nodeService: NodeService,
     private TeacherDiscussionService: TeacherDiscussionService,
     protected ProjectService: ProjectService
   ) {
-    super(ProjectService);
+    super(nodeService, ProjectService);
   }
 
   ngOnInit(): void {

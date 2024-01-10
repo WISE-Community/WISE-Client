@@ -95,7 +95,7 @@ class NodeAuthoringController {
     this.TeacherDataService.setCurrentNodeByNodeId(this.nodeId);
     this.nodeJson = this.ProjectService.getNodeById(this.nodeId);
     this.nodePosition = this.ProjectService.getNodePositionById(this.nodeId);
-    this.components = this.ProjectService.getComponentsByNodeId(this.nodeId);
+    this.components = this.ProjectService.getComponents(this.nodeId);
 
     /*
      * remember a copy of the node at the beginning of this node authoring
@@ -125,7 +125,7 @@ class NodeAuthoringController {
     );
 
     const data = {
-      title: this.ProjectService.getNodePositionAndTitleByNodeId(this.nodeId)
+      title: this.ProjectService.getNodePositionAndTitle(this.nodeId)
     };
     if (this.isGroupNode) {
       this.saveEvent('activityViewOpened', 'Navigation', data);
@@ -217,7 +217,7 @@ class NodeAuthoringController {
         const nodePreviousVersion = this.undoStack.pop();
         this.ProjectService.replaceNode(this.nodeId, nodePreviousVersion);
         this.nodeJson = this.ProjectService.getNodeById(this.nodeId);
-        this.components = this.ProjectService.getComponentsByNodeId(this.nodeId);
+        this.components = this.ProjectService.getComponents(this.nodeId);
         this.ProjectService.saveProject();
       }
     }
@@ -417,7 +417,7 @@ class NodeAuthoringController {
     }
   }
 
-  insertComponentAfter(componentId) {
+  insertComponentAfter(componentId: string): void {
     if (this.moveComponentMode) {
       this.handleMoveComponent(componentId);
     } else if (this.copyComponentMode) {
@@ -431,9 +431,9 @@ class NodeAuthoringController {
    * id. If the componentId is not provided, we will put the components at the
    * beginning of the step.
    */
-  handleMoveComponent(componentId = null) {
+  private handleMoveComponent(componentId = null): void {
     const selectedComponentIds = this.getSelectedComponentIds();
-    if (selectedComponentIds != null && selectedComponentIds.indexOf(componentId) != -1) {
+    if (selectedComponentIds.indexOf(componentId) != -1) {
       if (selectedComponentIds.length === 1) {
         alert(this.$translate('youAreNotAllowedToInsertTheSelectedItemAfterItself'));
       } else if (selectedComponentIds.length > 1) {
@@ -576,10 +576,7 @@ class NodeAuthoringController {
   getComponentObjectsForEventData(componentIds) {
     const componentObjects = [];
     for (const componentId of componentIds) {
-      const component = this.ProjectService.getComponentByNodeIdAndComponentId(
-        this.nodeId,
-        componentId
-      );
+      const component = this.ProjectService.getComponent(this.nodeId, componentId);
       if (component != null) {
         componentObjects.push({
           componentId: component.id,

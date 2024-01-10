@@ -3,7 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { EditPeerGroupingDialogComponent } from '../edit-peer-grouping-dialog/edit-peer-grouping-dialog.component';
-import { availableLogic } from '../PeerGroupingLogic';
+import {
+  AVAILABLE_LOGIC,
+  DIFFERENT_IDEAS_NAME,
+  DIFFERENT_IDEAS_REGEX,
+  DIFFERENT_SCORES_NAME,
+  DIFFERENT_SCORES_REGEX
+} from '../PeerGroupingLogic';
 
 @Component({
   selector: 'select-peer-grouping-option',
@@ -34,10 +40,16 @@ export class SelectPeerGroupingOptionComponent implements OnInit {
     }
   }
 
-  setPeerGroupingLogicName(): void {
-    this.peerGroupingLogicName = availableLogic.find(
-      (logic) => logic.value === this.peerGrouping.logic
-    ).name;
+  private setPeerGroupingLogicName(): void {
+    if (new RegExp(DIFFERENT_IDEAS_REGEX).exec(this.peerGrouping.logic) != null) {
+      this.peerGroupingLogicName = DIFFERENT_IDEAS_NAME;
+    } else if (new RegExp(DIFFERENT_SCORES_REGEX).exec(this.peerGrouping.logic) != null) {
+      this.peerGroupingLogicName = DIFFERENT_SCORES_NAME;
+    } else {
+      this.peerGroupingLogicName = AVAILABLE_LOGIC.find(
+        (logic) => logic.value === this.peerGrouping.logic
+      ).name;
+    }
   }
 
   select(): void {
@@ -48,7 +60,7 @@ export class SelectPeerGroupingOptionComponent implements OnInit {
     this.dialog
       .open(EditPeerGroupingDialogComponent, {
         data: this.peerGrouping,
-        panelClass: 'dialog-sm'
+        panelClass: 'dialog-md'
       })
       .afterClosed()
       .subscribe((isDelete: boolean) => {

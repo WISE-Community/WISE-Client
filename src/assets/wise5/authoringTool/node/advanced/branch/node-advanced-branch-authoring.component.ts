@@ -101,7 +101,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
               }
 
               if (this.createBranchNodeId && this.createBranchComponentId) {
-                const choices = this.ProjectService.getChoicesByNodeIdAndComponentId(
+                const choices = this.ProjectService.getChoices(
                   this.createBranchNodeId,
                   this.createBranchComponentId
                 );
@@ -427,7 +427,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
   }
 
   createBranchUpdateChoiceChosenIds() {
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(
+    const component = this.ProjectService.getComponent(
       this.createBranchNodeId,
       this.createBranchComponentId
     );
@@ -751,12 +751,12 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     return this.ProjectService.isGroupNode(nodeId);
   }
 
-  getComponentsByNodeId(nodeId) {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
-  getNodeTitleByNodeId(nodeId) {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   getNodePositionById(nodeId) {

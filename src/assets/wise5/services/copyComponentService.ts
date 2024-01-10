@@ -21,7 +21,7 @@ export class CopyComponentService {
   }
 
   private copyComponent(nodeId: string, componentId: string, componentIdsToSkip: string[]): any {
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    const component = this.ProjectService.getComponent(nodeId, componentId);
     const newComponent = this.UtilService.makeCopyOfJSONObject(component);
     newComponent.id = this.ProjectService.getUnusedComponentId(componentIdsToSkip);
     return newComponent;

@@ -1,0 +1,39 @@
+@import '~style/abstracts/variables','~style/abstracts/functions', '~style/abstracts/mixins';
+
+.mat-toolbar {
+  padding: 0 8px;
+}
+
+.title-header {
+  font-weight: inherit !important;
+}
+
+.title {
+  white-space: normal;
+  line-height: 1.2;
+
+  @media (max-width: breakpoint('xs.max')) {
+    font-size: 14px;
+  }
+}
+
+.mat-icon-button {
+  margin: 0 4px;
+}
+
+.notifications-menu-button {
+  width: 40px !important;
+}
+
+.mat-list-item-content {
+  padding: 0;
+}
+
+.account-menu-avatar {
+  height: 48px;
+  width: 48px;
+}
+
+.account-menu-button {
+  margin: 8px;
+}

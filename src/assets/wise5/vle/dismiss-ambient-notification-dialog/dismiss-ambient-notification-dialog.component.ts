@@ -69,7 +69,7 @@ export class DismissAmbientNotificationDialogComponent implements OnInit {
   }
 
   private initializeNodePositionAndTitle(): void {
-    this.nodePositionAndTitle = this.projectService.getNodePositionAndTitleByNodeId(
+    this.nodePositionAndTitle = this.projectService.getNodePositionAndTitle(
       this.notification.nodeId
     );
   }

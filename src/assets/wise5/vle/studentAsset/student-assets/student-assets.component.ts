@@ -56,10 +56,7 @@ export class StudentAssetsComponent implements OnInit {
   }
 
   attachStudentAsset(studentAsset: any): void {
-    const component = this.projectService.getComponentByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
+    const component = this.projectService.getComponent(this.nodeId, this.componentId);
     if (this.componentsThatCanAcceptAssets.includes(component.type)) {
       this.studentAssetService.broadcastAttachStudentAsset(
         this.nodeId,

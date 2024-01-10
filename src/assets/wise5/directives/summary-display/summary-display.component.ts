@@ -93,10 +93,7 @@ export abstract class SummaryDisplay {
   }
 
   initializeOtherComponent() {
-    this.otherComponent = this.projectService.getComponentByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
+    this.otherComponent = this.projectService.getComponent(this.nodeId, this.componentId);
     if (this.otherComponent != null) {
       this.otherComponentType = this.otherComponent.type;
     }

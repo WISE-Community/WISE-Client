@@ -1,6 +1,7 @@
 <ng-template #runInfo>
   <div>
     <span class="more-info"
+          tabindex="0"
           [matTooltip]="periodsTooltipText"
           matTooltipPosition="above">
       {{run.periods.length}}
@@ -30,7 +31,7 @@
   </div>
   <div>
     <span i18n>Access Code: {{ run.runCode }}</span> (<a [routerLink]=""
-        (click)="shareCode()" i18n>Share with students</a>)
+        (click)="shareCode()" (keyup.enter)="shareCode()" tabindex="0" i18n>Share with students</a>)
   </div>
   <div *ngIf="run.shared" class="info" i18n>
     Shared by {{run.owner.firstName}} {{run.owner.lastName}}
@@ -85,14 +86,14 @@
               fxFlex.xs="100">
         <ng-container i18n>Starts {{run.startTime | date}}</ng-container>
       </button>
-      <a *ngIf="isRunActive(run) || isRunCompleted(run)"
+      <button *ngIf="isRunActive(run) || isRunCompleted(run)"
          mat-flat-button
          (click)="launchGradeAndManageTool()"
          color="primary"
          fxFlex="0 0 auto"
          fxFlex.xs="100">
         <mat-icon>assignment_turned_in</mat-icon>&nbsp;<ng-container i18n>Teacher Tools</ng-container>
-      </a>
+      </button>
     </div>
   </mat-card-actions>
 </mat-card>

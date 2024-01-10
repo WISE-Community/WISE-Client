@@ -93,8 +93,8 @@ export class NotificationsDialogComponent implements OnInit {
     }
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string): string {
-    return this.projectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.projectService.getNodePositionAndTitle(nodeId);
   }
 
   private canDismissWithoutCode(notification: Notification): boolean {

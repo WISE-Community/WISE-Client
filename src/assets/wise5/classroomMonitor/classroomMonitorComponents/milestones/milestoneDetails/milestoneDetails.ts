@@ -92,12 +92,12 @@ class MilestoneDetailsController {
     return this.ProjectService.nodeIdToNumber[nodeId];
   }
 
-  getNodeTitleByNodeId(nodeId) {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   getNodeNumberAndTitleByNodeId(nodeId) {
-    return `${this.getNodeNumberByNodeId(nodeId)}: ${this.getNodeTitleByNodeId(nodeId)}`;
+    return `${this.getNodeNumberByNodeId(nodeId)}: ${this.getNodeTitle(nodeId)}`;
   }
 
   getDisplayNamesByWorkgroupId(workgroupId) {
@@ -167,7 +167,7 @@ const MilestoneDetails = {
         <p ng-if="$ctrl.requirements.length">
           <span class="heavy">{{ ::'REQUIREMENTS' | translate }}: </span>
           <a ng-repeat="requirement in $ctrl.requirements" ui-sref="root.cm.node({nodeId: \'{{ requirement }}\'})" ng-click="$ctrl.visitNodeGrading(event)">
-            {{ ::$ctrl.getNodeNumberByNodeId(requirement) }}: {{ ::$ctrl.getNodeTitleByNodeId(requirement) }}<span ng-if="!$last">, </span>
+            {{ ::$ctrl.getNodeNumberByNodeId(requirement) }}: {{ ::$ctrl.getNodeTitle(requirement) }}<span ng-if="!$last">, </span>
           </a>
         </p>
         <p ng-if="$ctrl.milestone.type === 'milestoneReport'">
@@ -203,7 +203,7 @@ const MilestoneDetails = {
             </md-tab>
             <md-tab label="{{ ::'studentWork' | translate }}" md-on-select="$ctrl.saveTabSelectedEvent('MilestoneStudentWorkTabSelected')">
               <div class="milestone-details__section">
-                <milestone-grading-view milestone="$ctrl.milestone"></milestone-grading-view>
+                <milestone-grading-view [milestone]="$ctrl.milestone"></milestone-grading-view>
               </div>
             </md-tab>
           </md-tabs>
@@ -211,7 +211,7 @@ const MilestoneDetails = {
         <div ng-if="!$ctrl.milestone.generatedRecommendations && $ctrl.milestone.isReportAvailable"
             class="milestone-details__section md-whiteframe-1dp">
           <div class="milestone-details__header primary md-body-2 gray-lightest-bg">{{ ::'studentWork' | translate }}</div>
-          <milestone-grading-view milestone="$ctrl.milestone"></milestone-grading-view>
+          <milestone-grading-view [milestone]="$ctrl.milestone"></milestone-grading-view>
         </div>
       </section>
       <section ng-if="!$ctrl.milestone.isReportAvailable"

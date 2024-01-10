@@ -43,7 +43,7 @@ describe('PeerGroupingAuthoringService', () => {
     );
     saveProjectSpy = spyOn(projectService, 'saveProject');
     spyOn(configService, 'getRunId').and.returnValue(runId);
-    spyOn(projectService, 'getNodePositionAndTitleByNodeId').and.callFake((id: string) => {
+    spyOn(projectService, 'getNodePositionAndTitle').and.callFake((id: string) => {
       switch (id) {
         case nodeId1:
           return nodeTitle1;

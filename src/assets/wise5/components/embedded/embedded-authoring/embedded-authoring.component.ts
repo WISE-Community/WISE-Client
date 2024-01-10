@@ -36,7 +36,7 @@ export class EmbeddedAuthoring extends ComponentAuthoring {
   assetSelected({ nodeId, componentId, assetItem, target }): void {
     super.assetSelected({ nodeId, componentId, assetItem, target });
     if (target === 'modelFile') {
-      this.authoringComponentContent.url = assetItem.fileName;
+      this.componentContent.url = assetItem.fileName;
       this.componentChanged();
     }
   }
@@ -49,7 +49,7 @@ export class EmbeddedAuthoring extends ComponentAuthoring {
   }
 
   updateUrl(url: string): void {
-    this.authoringComponentContent.url = url;
+    this.componentContent.url = url;
     this.componentChanged();
   }
 }

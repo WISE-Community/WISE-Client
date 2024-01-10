@@ -137,7 +137,7 @@
    $ctrl.components.length === 0 && !$ctrl.insertComponentMode && !$ctrl.isGroupNode'>
    <em>{{ ::'stepHasNoComponents' | translate }}</em>
 </div>
-<div ng-repeat='(componentIndex, component) in $ctrl.components'
+<div ng-repeat='component in $ctrl.components track by $index'
     class='component'
     style='padding: 0; margin: 0 16px;'
     ng-if='$ctrl.showComponents'>
@@ -146,7 +146,7 @@
       <md-checkbox ng-model='$ctrl.componentsToChecked[component.id]'
           ng-disabled='$ctrl.insertComponentMode'
           class='md-primary'>
-        <span style='font-weight:bold; margin-right:10px'>{{(componentIndex + 1)}}. {{::$ctrl.getComponentTypeLabel(component.type)}}</span>
+        <span style='font-weight:bold; margin-right:10px'>{{($index + 1)}}. {{$ctrl.getComponentTypeLabel(component.type)}}</span>
       </md-checkbox>
     </div>
     <div ng-if='!$ctrl.insertComponentMode && $ctrl.showComponentAuthoringViews'>

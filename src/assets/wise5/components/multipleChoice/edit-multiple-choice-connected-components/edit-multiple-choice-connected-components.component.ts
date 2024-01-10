@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
 import { ProjectService } from '../../../services/projectService';
 import { UtilService } from '../../../services/utilService';
+import { MultipleChoiceContent } from '../MultipleChoiceContent';
 
 @Component({
   selector: 'edit-multiple-choice-connected-components',
@@ -34,8 +35,8 @@ export class EditMultipleChoiceConnectedComponentsComponent extends EditConnecte
   }
 
   copyChoiceTypeFromComponent(nodeId: string, componentId: string): void {
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
-    this.componentContent.choiceType = component.choiceType;
+    const component = this.ProjectService.getComponent(nodeId, componentId);
+    this.componentContent.choiceType = (component as MultipleChoiceContent).choiceType;
   }
 
   copyChoicesFromComponent(nodeId: string, componentId: string): void {
@@ -43,7 +44,7 @@ export class EditMultipleChoiceConnectedComponentsComponent extends EditConnecte
   }
 
   getCopyOfChoicesFromComponent(nodeId: string, componentId: string): void {
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
-    return this.UtilService.makeCopyOfJSONObject(component.choices);
+    const component = this.ProjectService.getComponent(nodeId, componentId);
+    return this.UtilService.makeCopyOfJSONObject((component as MultipleChoiceContent).choices);
   }
 }

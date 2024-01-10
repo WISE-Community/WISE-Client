@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentStudent } from './component-student.component';
-import { AnnotationService } from '../services/annotationService';
 import { NotebookService } from '../services/notebookService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../app/student-teacher-common-services.module';
+import { Component as WISEComponent } from '../common/Component';
 
 let component: ComponentStudent;
 let fixture: ComponentFixture<ComponentStudent>;
@@ -26,8 +26,8 @@ describe('ComponentStudentComponent', () => {
     fixture = TestBed.createComponent(ComponentStudentImpl);
     component = fixture.componentInstance;
     component.componentContent = {};
+    component.component = { content: {} } as WISEComponent;
     component.isSubmitDirty = true;
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue(null);
     spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(false);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     performSubmitSpy = spyOn(component, 'performSubmit');

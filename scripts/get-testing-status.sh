@@ -11,43 +11,59 @@
 # Recommended
 # Install watch command
 
-pipeline_name=private-wise-client-pipeline
-echo "Status for $pipeline_name"
+any_pipeline_in_use=false
+any_pipeline_ready_for_testing=false
 
-# Get all the stage names and their statuses in an array of objects
-declare -a statuses=($(aws codepipeline get-pipeline-state --name $pipeline_name |
-  jq -c -r '.stageStates[] | { stageName: .stageName, status: .latestExecution.status }'))
+function display_pipeline_status() {
+  pipeline_name=$1
+  echo "- Status for $pipeline_name -"
 
-statusOutput=""
-is_pipeline_in_use=false
-is_pipeline_ready_for_testing=false
+  # Get all the stage names and their statuses in an array of objects
+  declare -a statuses=($(aws codepipeline get-pipeline-state --name $pipeline_name |
+      jq -c -r '.stageStates[] | { stageName: .stageName, status: .latestExecution.status }'))
 
-for status in "${statuses[@]}"; do
-  # Get the stage name without double quotes
-  stageName=$(echo $status | jq '.stageName' | tr -d '"')
+  statusOutput=""
 
-  # Get the status without double quotes
-  status=$(echo $status | jq '.status' | tr -d '"')
+  for status in "${statuses[@]}"; do
+    # Get the stage name without double quotes
+    stageName=$(echo $status | jq '.stageName' | tr -d '"')
 
-  # Accumulate the stage name and status
-  statusOutput+="$stageName $status\n"
-  
-  if [[ "$status" == "InProgress" ]]; then
-    is_pipeline_in_use=true
-    if [[ "$stageName" == "Approve-Terminate-Private-Instances" ]]; then
-      is_pipeline_ready_for_testing=true
+    # Get the status without double quotes
+    status=$(echo $status | jq '.status' | tr -d '"')
+
+    # Accumulate the stage name and status
+    statusOutput+="$stageName $status\n"
+
+    if [[ "$status" == "InProgress" ]]; then
+      any_pipeline_in_use=true
+      if [[ "$stageName" == "Approve-Terminate-Private-Instances" ]]; then
+        any_pipeline_ready_for_testing=true
+      fi
     fi
-  fi
+  done
+
+  # Display the stage names and statuses in a table
+  echo -e "$statusOutput" | column -t
+}
+
+testing_pipelines=(
+  "private-wise-api-and-client-pipeline"
+  "private-wise-api-pipeline"
+  "private-wise-client-github-actions-pipeline"
+  "private-wise-client-pipeline"
+)
+
+# Show the status for all the testing pipelines
+for testing_pipeline in "${testing_pipelines[@]}"; do
+  display_pipeline_status $testing_pipeline
+  echo
 done
 
-# Display the stage names and statuses in a table
-echo -e "$statusOutput" | column -t
-
-# Display whether the pipeline is in use or not
-if [[ "$is_pipeline_ready_for_testing" == true ]]; then
-  echo "Pipeline is currently in use and ready for testing"
-elif [[ "$is_pipeline_in_use" == true ]]; then
-  echo "Pipeline is currently in use"
+# Display whether any testing pipeline is in use
+if [[ "$any_pipeline_ready_for_testing" == true ]]; then
+  echo "A testing pipeline is currently in use and ready for testing"
+elif [[ "$any_pipeline_in_use" == true ]]; then
+  echo "A testing pipeline is currently in use"
 else
-  echo "Pipeline is currently not in use"
+  echo "Testing pipelines are currently not in use"
 fi

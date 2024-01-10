@@ -1,0 +1,32 @@
+.account-menu__info {
+  background-color: rgb(255,255,255) !important;
+  z-index: 1;
+}
+
+.account-menu__actions {
+  overflow-y: auto;
+}
+
+.notification {
+  height: auto !important;
+  padding: 8px 0px !important;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(158,158,158,0.2);
+  }
+}
+
+.notification-message-div {
+  width: 100%;
+}
+
+  .mat-list-item-content {
+  width: 100%;
+}
+
+.notification-step-title {
+  color: rgba(0,0,0,.54);
+  font-size: 12px !important;
+  margin: 0px !important;
+  padding: 0px !important;
+}

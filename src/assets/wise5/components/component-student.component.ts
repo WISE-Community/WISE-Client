@@ -2,6 +2,8 @@ import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
+import { ComponentState } from '../../../app/domain/componentState';
+import { Component } from '../common/Component';
 import { GenerateImageDialogComponent } from '../directives/generate-image-dialog/generate-image-dialog.component';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
@@ -18,31 +20,17 @@ import { ComponentStateWrapper } from './ComponentStateWrapper';
 
 @Directive()
 export abstract class ComponentStudent {
-  @Input()
-  nodeId: string;
-
-  @Input()
-  componentContent: any;
-
-  @Input()
-  componentState: any;
-
-  @Input()
-  isDisabled: boolean = false;
-
-  @Input()
-  mode: string;
-
-  @Input()
-  workgroupId: number;
-
-  @Output()
-  saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
-
-  @Output()
-  starterStateChangedEvent = new EventEmitter<any>();
+  @Input() component: Component;
+  @Input() componentState: any;
+  @Input() isDisabled: boolean = false;
+  @Input() mode: string;
+  @Input() nodeId: string;
+  @Input() workgroupId: number;
+  @Output() saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() starterStateChangedEvent = new EventEmitter<any>();
 
   attachments: any[] = [];
+  componentContent: any;
   componentId: string;
   componentType: string;
   prompt: SafeHtml;
@@ -79,6 +67,8 @@ export abstract class ComponentStudent {
   ) {}
 
   ngOnInit(): void {
+    this.nodeId = this.component.nodeId;
+    this.componentContent = this.component.content;
     this.componentId = this.componentContent.id;
     this.componentType = this.componentContent.type;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
@@ -270,10 +260,7 @@ export abstract class ComponentStudent {
       if (componentState.isSubmit) {
         this.lockIfNecessary();
         this.setIsSubmitDirty(false);
-        this.StudentDataService.broadcastComponentSubmitDirty({
-          componentId: this.componentId,
-          isDirty: this.isSubmitDirty
-        });
+        this.emitComponentSubmitDirty(this.isSubmitDirty);
       }
       this.handleStudentWorkSavedToServerAdditionalProcessing(componentState);
     }
@@ -340,13 +327,17 @@ export abstract class ComponentStudent {
         this.nodeId,
         this.componentId
       );
-      if (this.NodeService.isWorkSubmitted(componentStates)) {
+      if (this.hasAnySubmissions(componentStates)) {
         this.isDisabled = true;
       }
     }
   }
 
-  isLockAfterSubmit(): boolean {
+  private hasAnySubmissions(componentStates: any): boolean {
+    return componentStates.some((componentState) => componentState.isSubmit);
+  }
+
+  private isLockAfterSubmit(): boolean {
     return this.componentContent.lockAfterSubmit;
   }
 
@@ -824,5 +815,11 @@ export abstract class ComponentStudent {
     if (submitCounter != null) {
       this.submitCounter = submitCounter;
     }
+  }
+
+  createNewComponentState(): Partial<ComponentState> {
+    return {
+      clientSaveTime: new Date().getTime()
+    };
   }
 }

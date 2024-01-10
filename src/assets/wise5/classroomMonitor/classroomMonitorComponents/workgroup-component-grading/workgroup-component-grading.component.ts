@@ -31,10 +31,7 @@ export class WorkgroupComponentGradingComponent {
 
   ngOnInit() {
     this.teacherWorkgroupId = this.ConfigService.getWorkgroupId();
-    this.component = this.ProjectService.getComponentByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
+    this.component = this.ProjectService.getComponent(this.nodeId, this.componentId);
     this.componentStates = this.TeacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
       this.workgroupId,
       this.componentId

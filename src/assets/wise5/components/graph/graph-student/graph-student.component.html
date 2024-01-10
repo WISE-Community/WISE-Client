@@ -1,4 +1,4 @@
-<component-header [componentContent]="componentContent"></component-header>
+<component-header [component]="component"></component-header>
 <input type="file"
      accept=".csv"
      *ngIf="componentContent.enableFileUpload"
@@ -65,6 +65,11 @@
     </mat-select>
   </mat-form-field>
   <div>
+    <button
+        #hiddenButton
+        style="height:0; width:0; padding: 0; border: 0 none"
+        aria-role="none"
+        tabindex="-1"></button>
     <button
         mat-button
         *ngIf="isResetSeriesButtonVisible && activeSeries != null && activeSeries.canEdit"
@@ -140,7 +145,7 @@
             [disabled]="isDisabled"/>
       </mat-form-field>
     </div>
-    <div class="highcharts-container" [class.invisible]="!isLoaded">
+    <div class="highcharts-container" [class.invisible]="!isLoaded" (click)="focusOnComponent()">
       <highcharts-chart
           id="{{chartId}}"
           [Highcharts]="Highcharts"

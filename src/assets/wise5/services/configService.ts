@@ -957,7 +957,7 @@ export class ConfigService {
     );
   }
 
-  getPrettyEndDate() {
+  getPrettyEndDate(): string {
     return formatDate(this.getEndDate(), 'mediumDate', this.localeID);
   }
 

@@ -14,6 +14,7 @@ import { ShowGroupWorkAuthoringComponent } from './show-group-work-authoring.com
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { ComponentContent } from '../../../common/ComponentContent';
 
 describe('ShowGroupWorkAuthoringComponent', () => {
   let component: ShowGroupWorkAuthoringComponent;
@@ -42,10 +43,9 @@ describe('ShowGroupWorkAuthoringComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShowGroupWorkAuthoringComponent);
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue({});
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
+      {} as ComponentContent
+    );
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
       nodeId1
     ]);

@@ -84,7 +84,7 @@ export class AnimationStudent extends ComponentStudent {
       this.AnimationService.componentStateHasStudentWork(this.componentState, this.componentContent)
     ) {
       this.setStudentWork(this.componentState);
-    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    } else if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
     }
 
@@ -952,7 +952,7 @@ export class AnimationStudent extends ComponentStudent {
   }
 
   createComponentStateObject(): any {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
     const studentData = {

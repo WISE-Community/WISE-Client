@@ -16,6 +16,7 @@ import { PeerChatGradingComponent } from './peer-chat-grading.component';
 import { of } from 'rxjs';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { ComponentContent } from '../../../common/ComponentContent';
 
 let component: PeerChatGradingComponent;
 let fixture: ComponentFixture<PeerChatGradingComponent>;
@@ -52,7 +53,7 @@ describe('PeerChatGradingComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PeerChatGradingComponent);
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({});
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({} as ComponentContent);
     spyOn(TestBed.inject(ConfigService), 'getRunId').and.returnValue(1);
     spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(100);
     spyOn(TestBed.inject(ConfigService), 'getTeacherWorkgroupIds').and.returnValue([

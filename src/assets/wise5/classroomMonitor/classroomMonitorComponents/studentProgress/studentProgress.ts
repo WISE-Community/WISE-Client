@@ -1,10 +1,11 @@
 'use strict';
 
-import ProjectProgress from './projectProgress/projectProgress';
 import * as angular from 'angular';
+import { downgradeComponent } from '@angular/upgrade/static';
+import { ProjectProgressComponent } from './project-progress/project-progress.component';
 
 const StudentProgress = angular
   .module('studentProgress', [])
-  .component('projectProgress', ProjectProgress);
+  .directive('projectProgress', downgradeComponent({ component: ProjectProgressComponent }));
 
 export default StudentProgress;

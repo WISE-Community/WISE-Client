@@ -6,7 +6,7 @@ import { TeacherProjectService } from '../../assets/wise5/services/teacherProjec
 @Directive()
 export abstract class EditComponentFieldComponent {
   @Input()
-  authoringComponentContent: any;
+  componentContent: any;
   inputChanged: Subject<string> = new Subject<string>();
   inputChangedSubscription: Subscription;
 

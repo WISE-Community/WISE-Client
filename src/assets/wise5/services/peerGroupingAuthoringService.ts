@@ -4,16 +4,15 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { PeerGrouping } from '../../../app/domain/peerGrouping';
 import { ConfigService } from './configService';
+import { RandomKeyService } from './randomKeyService';
 import { TeacherProjectService } from './teacherProjectService';
-import { UtilService } from './utilService';
 
 @Injectable()
 export class PeerGroupingAuthoringService {
   constructor(
     private configService: ConfigService,
     private http: HttpClient,
-    private projectService: TeacherProjectService,
-    private utilService: UtilService
+    private projectService: TeacherProjectService
   ) {}
 
   getPeerGroupings(): PeerGrouping[] {
@@ -91,7 +90,7 @@ export class PeerGroupingAuthoringService {
     for (const node of this.projectService.getApplicationNodes()) {
       for (const component of node.components) {
         if (component.peerGroupingTag === peerGroupingTag) {
-          stepsUsedIn.push(this.projectService.getNodePositionAndTitleByNodeId(node.id));
+          stepsUsedIn.push(this.projectService.getNodePositionAndTitle(node.id));
           break;
         }
       }
@@ -100,10 +99,10 @@ export class PeerGroupingAuthoringService {
   }
 
   getUniqueTag(): string {
-    let newTag = this.utilService.generateKey();
+    let newTag = RandomKeyService.generate();
     const allPeerGroupingTags = this.getAllPeerGroupingTags(this.getPeerGroupings());
     while (allPeerGroupingTags.includes(newTag)) {
-      newTag = this.utilService.generateKey();
+      newTag = RandomKeyService.generate();
     }
     return newTag;
   }

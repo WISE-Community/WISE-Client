@@ -15,7 +15,7 @@
                  autofocus
                  required />
           <mat-error *ngIf="createStudentAccountFormGroup.controls['firstName'].hasError('required')" i18n>First Name required</mat-error>
-          <mat-error *ngIf="createStudentAccountFormGroup.controls['firstName'].hasError('pattern')" i18n>First Name must only contain characters A-Z</mat-error>
+          <mat-error *ngIf="createStudentAccountFormGroup.controls['firstName'].hasError('pattern')" i18n>First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</mat-error>
         </mat-form-field>
       </p>
       <p>
@@ -27,7 +27,7 @@
                  formControlName="lastName"
                  required />
           <mat-error *ngIf="createStudentAccountFormGroup.controls['lastName'].hasError('required')" i18n>Last Name required</mat-error>
-          <mat-error *ngIf="createStudentAccountFormGroup.controls['lastName'].hasError('pattern')" i18n>Last Name must only contain characters A-Z</mat-error>
+          <mat-error *ngIf="createStudentAccountFormGroup.controls['lastName'].hasError('pattern')" i18n>Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</mat-error>
         </mat-form-field>
       </p>
       <p>
@@ -94,6 +94,12 @@
                    formControlName="password"
                    required />
             <mat-error *ngIf="passwordsFormGroup.controls['password'].hasError('required')" i18n>Password required</mat-error>
+            <mat-error *ngIf="passwordsFormGroup.controls['password'].hasError('minlength')">
+              {{ passwordService.minLengthErrorMessage }}
+            </mat-error>
+            <mat-error *ngIf="passwordsFormGroup.controls['password'].hasError('pattern')">
+              {{ passwordService.patternErrorMessage }}
+            </mat-error>
           </mat-form-field>
         </p>
         <p>
@@ -106,12 +112,13 @@
                    formControlName="confirmPassword"
                    required />
             <mat-error *ngIf="passwordsFormGroup.controls['confirmPassword'].hasError('required')" i18n>Confirm Password required</mat-error>
-            <mat-error *ngIf="passwordsFormGroup.hasError('passwordDoesNotMatch')" i18n>Password does not match</mat-error>
+            <mat-error *ngIf="passwordsFormGroup.controls['confirmPassword'].hasError('passwordDoesNotMatch')" i18n>Password does not match</mat-error>
           </mat-form-field>
         </p>
       </div>
       <p i18n>By clicking "Create Account", you agree to our <a href="privacy" target="_blank">Privacy Policy & Terms of Use</a></p>
-      <button mat-flat-button color="primary" type="submit" [disabled]="processing">
+      <button mat-flat-button color="primary" type="submit"
+          [disabled]="!createStudentAccountFormGroup.valid || processing">
         <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
         <span i18n>Create Account</span>
       </button>

@@ -2,7 +2,6 @@
   "openResponse.addFile": "Add File",
   "openResponse.addMultipleAttemptScoringRule": "Add Multiple Attempt Scoring Rule",
   "openResponse.addNewNotification": "Add New Notification",
-  "openResponse.addScoringRule": "Add Scoring Rule",
   "openResponse.areYouSureYouWantToDeleteThisMultipleAttemptScoringRule": "Are you sure you want to delete this scoring rule?\n\nPrevious Score: {{previousScore}}\n\nCurrent Score: {{currentScore}}\n\nFeedback Text: {{feedbackText}}",
   "openResponse.areYouSureYouWantToDeleteThisNotification": "Are you sure you want to delete this notification?\n\nPrevious Score: {{previousScore}}\n\nCurrent Score: {{currentScore}}",
   "openResponse.areYouSureYouWantToDeleteThisScoringRule": "Are you sure you want to delete this scoring rule?\n\nScore: {{score}}\n\nFeedback Text: {{feedbackText}}",

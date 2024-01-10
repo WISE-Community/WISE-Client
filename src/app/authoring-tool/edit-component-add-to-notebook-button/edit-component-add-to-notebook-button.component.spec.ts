@@ -27,7 +27,7 @@ describe('EditComponentAddToNotebookButtonComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditComponentAddToNotebookButtonComponent);
     component = fixture.componentInstance;
-    component.authoringComponentContent = {};
+    component.componentContent = {};
     fixture.detectChanges();
   });
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MultipleChoiceContent } from '../../../../components/multipleChoice/MultipleChoiceContent';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { UtilService } from '../../../../services/utilService';
@@ -383,25 +384,25 @@ export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
     }
   }
 
-  getChoicesByNodeIdAndComponentId(nodeId: string, componentId: string): any[] {
-    return this.ProjectService.getChoicesByNodeIdAndComponentId(nodeId, componentId);
+  getChoices(nodeId: string, componentId: string): any[] {
+    return this.ProjectService.getChoices(nodeId, componentId);
   }
 
   getChoiceTypeByNodeIdAndComponentId(nodeId: string, componentId: string): string {
     let choiceType = null;
-    let component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    let component = this.ProjectService.getComponent(nodeId, componentId) as MultipleChoiceContent;
     if (component != null && component.choiceType != null) {
       choiceType = component.choiceType;
     }
     return choiceType;
   }
 
-  getComponentsByNodeId(nodeId: string): any[] {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
-  getNodeTitleByNodeId(nodeId: string): string {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   getNodePositionById(nodeId: string): string {

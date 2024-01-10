@@ -5,7 +5,8 @@
         fxFlex.gt-md="40"
         fxFlexOrder="1"
         fxFlexOrder.gt-md="2">
-      <peer-chat-question-bank [questions]="componentContent.questionBank"></peer-chat-question-bank>
+      <peer-chat-question-bank *ngIf="componentContent.questionBank?.enabled"
+          [displayedQuestionBankRule]="questionBankRule"></peer-chat-question-bank>
     </div>
     <div fxFlex fxFlex.gt-md="60" fxFlexOrder="2" fxFlexOrder.gt-md="1">
       <peer-chat-chat-box [messages]="peerChatMessages"

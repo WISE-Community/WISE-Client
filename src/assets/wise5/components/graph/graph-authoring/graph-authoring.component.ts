@@ -142,28 +142,28 @@ export class GraphAuthoring extends ComponentAuthoring {
     super.ngOnInit();
     this.enableMultipleYAxes = this.isMultipleYAxesEnabled();
     if (this.enableMultipleYAxes) {
-      this.numYAxes = this.authoringComponentContent.yAxis.length;
+      this.numYAxes = this.componentContent.yAxis.length;
     }
-    this.addAnyMissingYAxisFieldsToAllYAxes(this.authoringComponentContent.yAxis);
+    this.addAnyMissingYAxisFieldsToAllYAxes(this.componentContent.yAxis);
   }
 
   isMultipleYAxesEnabled(): boolean {
-    return Array.isArray(this.authoringComponentContent.yAxis);
+    return Array.isArray(this.componentContent.yAxis);
   }
 
   addSeriesClicked(): void {
     const newSeries: any = this.createNewSeries();
-    if (this.authoringComponentContent.graphType === 'line') {
+    if (this.componentContent.graphType === 'line') {
       newSeries.type = 'line';
       newSeries.dashStyle = 'Solid';
-    } else if (this.authoringComponentContent.graphType === 'scatter') {
+    } else if (this.componentContent.graphType === 'scatter') {
       newSeries.type = 'scatter';
     }
     if (this.enableMultipleYAxes) {
       newSeries.yAxis = 0;
       this.setSeriesColorToMatchYAxisColor(newSeries);
     }
-    this.authoringComponentContent.series.push(newSeries);
+    this.componentContent.series.push(newSeries);
     this.componentChanged();
   }
 
@@ -181,8 +181,8 @@ export class GraphAuthoring extends ComponentAuthoring {
   deleteSeriesClicked(index: number): void {
     let message = '';
     let seriesName = '';
-    if (this.authoringComponentContent.series != null) {
-      const series = this.authoringComponentContent.series[index];
+    if (this.componentContent.series != null) {
+      const series = this.componentContent.series[index];
       if (series != null && series.name != null) {
         seriesName = series.name;
       }
@@ -193,19 +193,19 @@ export class GraphAuthoring extends ComponentAuthoring {
       message = $localize`Are you sure you want to delete the "${seriesName}" series?`;
     }
     if (confirm(message)) {
-      this.authoringComponentContent.series.splice(index, 1);
+      this.componentContent.series.splice(index, 1);
       this.componentChanged();
     }
   }
 
   enableTrialsClicked(): void {
-    if (this.authoringComponentContent.enableTrials) {
-      this.authoringComponentContent.canCreateNewTrials = true;
-      this.authoringComponentContent.canDeleteTrials = true;
+    if (this.componentContent.enableTrials) {
+      this.componentContent.canCreateNewTrials = true;
+      this.componentContent.canDeleteTrials = true;
     } else {
-      this.authoringComponentContent.canCreateNewTrials = false;
-      this.authoringComponentContent.canDeleteTrials = false;
-      this.authoringComponentContent.hideAllTrialsOnNewTrial = true;
+      this.componentContent.canCreateNewTrials = false;
+      this.componentContent.canDeleteTrials = false;
+      this.componentContent.hideAllTrialsOnNewTrial = true;
     }
     this.componentChanged();
   }
@@ -213,24 +213,21 @@ export class GraphAuthoring extends ComponentAuthoring {
   assetSelected({ nodeId, componentId, assetItem, target, targetObject }): void {
     super.assetSelected({ nodeId, componentId, assetItem, target });
     if (target === 'background') {
-      this.authoringComponentContent.backgroundImage = assetItem.fileName;
+      this.componentContent.backgroundImage = assetItem.fileName;
       this.componentChanged();
     }
   }
 
   addXAxisCategory(): void {
-    this.authoringComponentContent.xAxis.categories.push('');
+    this.componentContent.xAxis.categories.push('');
     this.componentChanged();
   }
 
   deleteXAxisCategory(index: number): void {
     let confirmMessage = '';
     let categoryName = '';
-    if (
-      this.authoringComponentContent.xAxis != null &&
-      this.authoringComponentContent.xAxis.categories != null
-    ) {
-      categoryName = this.authoringComponentContent.xAxis.categories[index];
+    if (this.componentContent.xAxis != null && this.componentContent.xAxis.categories != null) {
+      categoryName = this.componentContent.xAxis.categories[index];
     }
     if (categoryName == null || categoryName === '') {
       confirmMessage = $localize`Are you sure you want to delete the category?`;
@@ -238,7 +235,7 @@ export class GraphAuthoring extends ComponentAuthoring {
       confirmMessage = $localize`Are you sure you want to delete the "${categoryName}" category?`;
     }
     if (confirm(confirmMessage)) {
-      this.authoringComponentContent.xAxis.categories.splice(index, 1);
+      this.componentContent.xAxis.categories.splice(index, 1);
       this.componentChanged();
     }
   }
@@ -246,11 +243,11 @@ export class GraphAuthoring extends ComponentAuthoring {
   addSeriesDataPoint(series: any): void {
     if (series != null && series.data != null) {
       if (
-        this.authoringComponentContent.xAxis.type == null ||
-        this.authoringComponentContent.xAxis.type === 'limits'
+        this.componentContent.xAxis.type == null ||
+        this.componentContent.xAxis.type === 'limits'
       ) {
         series.data.push([]);
-      } else if (this.authoringComponentContent.xAxis.type === 'categories') {
+      } else if (this.componentContent.xAxis.type === 'categories') {
         series.data.push(null);
       }
     }
@@ -286,29 +283,26 @@ export class GraphAuthoring extends ComponentAuthoring {
 
   xAxisTypeChanged(newValue: any, oldValue: string): void {
     if (oldValue === 'categories' && newValue === 'limits') {
-      delete this.authoringComponentContent.xAxis.categories;
-      this.authoringComponentContent.xAxis.min = 0;
-      this.authoringComponentContent.xAxis.max = 10;
+      delete this.componentContent.xAxis.categories;
+      this.componentContent.xAxis.min = 0;
+      this.componentContent.xAxis.max = 10;
       this.convertAllSeriesDataPoints(newValue);
     } else if (
       (oldValue === 'limits' || oldValue === '' || oldValue == null) &&
       newValue === 'categories'
     ) {
-      delete this.authoringComponentContent.xAxis.min;
-      delete this.authoringComponentContent.xAxis.max;
-      delete this.authoringComponentContent.xAxis.units;
-      delete this.authoringComponentContent.yAxis.units;
-      this.authoringComponentContent.xAxis.categories = [
-        $localize`Category One`,
-        $localize`Category Two`
-      ];
+      delete this.componentContent.xAxis.min;
+      delete this.componentContent.xAxis.max;
+      delete this.componentContent.xAxis.units;
+      delete this.componentContent.yAxis.units;
+      this.componentContent.xAxis.categories = [$localize`Category One`, $localize`Category Two`];
       this.convertAllSeriesDataPoints(newValue);
     }
     this.componentChanged();
   }
 
   convertAllSeriesDataPoints(xAxisType: string): void {
-    const series = this.authoringComponentContent.series;
+    const series = this.componentContent.series;
     for (const singleSeries of series) {
       this.convertSeriesDataPoints(singleSeries, xAxisType);
     }
@@ -339,7 +333,7 @@ export class GraphAuthoring extends ComponentAuthoring {
   enableMultipleYAxesChanged(): void {
     if (this.enableMultipleYAxes) {
       this.convertSingleYAxisToMultipleYAxes();
-      this.numYAxes = this.authoringComponentContent.yAxis.length;
+      this.numYAxes = this.componentContent.yAxis.length;
       this.addYAxisToAllSeries();
       this.addColorToYAxes();
       this.addColorToSeries();
@@ -347,7 +341,7 @@ export class GraphAuthoring extends ComponentAuthoring {
     } else {
       if (confirm($localize`Are you sure you want to remove multiple Y axes?`)) {
         this.convertMultipleYAxesToSingleYAxis();
-        this.numYAxes = this.authoringComponentContent.yAxis.length;
+        this.numYAxes = this.componentContent.yAxis.length;
         this.removeYAxisFromAllSeries();
         this.componentChanged();
       } else {
@@ -357,11 +351,11 @@ export class GraphAuthoring extends ComponentAuthoring {
   }
 
   convertSingleYAxisToMultipleYAxes(): void {
-    const firstYAxis = this.authoringComponentContent.yAxis;
+    const firstYAxis = this.componentContent.yAxis;
     this.addAnyMissingYAxisFields(firstYAxis);
     const secondYAxis = this.createYAxisObject();
     secondYAxis.opposite = true;
-    this.authoringComponentContent.yAxis = [firstYAxis, secondYAxis];
+    this.componentContent.yAxis = [firstYAxis, secondYAxis];
   }
 
   createYAxisObject(): any {
@@ -388,24 +382,24 @@ export class GraphAuthoring extends ComponentAuthoring {
   }
 
   convertMultipleYAxesToSingleYAxis(): void {
-    this.authoringComponentContent.yAxis = this.authoringComponentContent.yAxis[0];
+    this.componentContent.yAxis = this.componentContent.yAxis[0];
   }
 
   addYAxisToAllSeries(): void {
-    for (const singleSeries of this.authoringComponentContent.series) {
+    for (const singleSeries of this.componentContent.series) {
       singleSeries.yAxis = 0;
     }
   }
 
   removeYAxisFromAllSeries(): void {
-    for (const singleSeries of this.authoringComponentContent.series) {
+    for (const singleSeries of this.componentContent.series) {
       delete singleSeries.yAxis;
     }
   }
 
   addColorToYAxes(): void {
-    for (let index = 0; index < this.authoringComponentContent.yAxis.length; index++) {
-      const yAxis = this.authoringComponentContent.yAxis[index];
+    for (let index = 0; index < this.componentContent.yAxis.length; index++) {
+      const yAxis = this.componentContent.yAxis[index];
       const color = this.GraphService.getSeriesColor(index);
       this.addColorToField(yAxis.title.style, color);
       this.addColorToField(yAxis.labels.style, color);
@@ -419,7 +413,7 @@ export class GraphAuthoring extends ComponentAuthoring {
   }
 
   addColorToSeries(): void {
-    for (const singleSeries of this.authoringComponentContent.series) {
+    for (const singleSeries of this.componentContent.series) {
       this.setSeriesColorToMatchYAxisColor(singleSeries);
     }
   }
@@ -429,7 +423,7 @@ export class GraphAuthoring extends ComponentAuthoring {
   }
 
   getYAxisColor(index: number): string {
-    return this.authoringComponentContent.yAxis[index].labels.style.color;
+    return this.componentContent.yAxis[index].labels.style.color;
   }
 
   numYAxesChanged(newValue: number, oldValue: number): void {
@@ -449,22 +443,19 @@ export class GraphAuthoring extends ComponentAuthoring {
   }
 
   increaseYAxes(newNumYAxes: number): void {
-    const oldNumYAxes = this.authoringComponentContent.yAxis.length;
+    const oldNumYAxes = this.componentContent.yAxis.length;
     const numYAxesToAdd = newNumYAxes - oldNumYAxes;
     for (let n = 0; n < numYAxesToAdd; n++) {
-      this.authoringComponentContent.yAxis.push(this.createYAxisObject());
+      this.componentContent.yAxis.push(this.createYAxisObject());
     }
   }
 
   decreaseYAxes(newNumYAxes: number): void {
-    this.authoringComponentContent.yAxis = this.authoringComponentContent.yAxis.slice(
-      0,
-      newNumYAxes
-    );
+    this.componentContent.yAxis = this.componentContent.yAxis.slice(0, newNumYAxes);
   }
 
   updateSeriesYAxesIfNecessary(): void {
-    for (const singleSeries of this.authoringComponentContent.series) {
+    for (const singleSeries of this.componentContent.series) {
       if (!this.isYAxisIndexExists(singleSeries.yAxis)) {
         singleSeries.yAxis = 0;
         this.setSeriesColorToMatchYAxisColor(singleSeries);
@@ -473,11 +464,11 @@ export class GraphAuthoring extends ComponentAuthoring {
   }
 
   isYAxisIndexExists(yAxisIndex: number): boolean {
-    return this.authoringComponentContent.yAxis[yAxisIndex] != null;
+    return this.componentContent.yAxis[yAxisIndex] != null;
   }
 
   yAxisColorChanged(yAxisIndex: number): void {
-    const yAxis = this.authoringComponentContent.yAxis[yAxisIndex];
+    const yAxis = this.componentContent.yAxis[yAxisIndex];
     const color = yAxis.labels.style.color;
     yAxis.title.style.color = color;
     this.updateSeriesColors(yAxisIndex, color);
@@ -485,7 +476,7 @@ export class GraphAuthoring extends ComponentAuthoring {
   }
 
   updateSeriesColors(yAxisIndex: number, color: string): void {
-    for (const singleSeries of this.authoringComponentContent.series) {
+    for (const singleSeries of this.componentContent.series) {
       if (singleSeries.yAxis === yAxisIndex) {
         singleSeries.color = color;
       }
@@ -534,14 +525,14 @@ export class GraphAuthoring extends ComponentAuthoring {
   }
 
   graphTypeChanged(): void {
-    const graphType = this.authoringComponentContent.graphType;
+    const graphType = this.componentContent.graphType;
     this.updateAllSeriesPlotTypes(graphType);
     this.changeXAxisTypeIfNecessary(graphType);
     this.componentChanged();
   }
 
   updateAllSeriesPlotTypes(plotType: string): void {
-    const multipleSeries = this.authoringComponentContent.series;
+    const multipleSeries = this.componentContent.series;
     for (const singleSeries of multipleSeries) {
       singleSeries.type = plotType;
       this.updateDashStyleField(singleSeries);
@@ -549,10 +540,10 @@ export class GraphAuthoring extends ComponentAuthoring {
   }
 
   changeXAxisTypeIfNecessary(graphType: string): void {
-    const oldXAxisType = this.authoringComponentContent.xAxis.type;
+    const oldXAxisType = this.componentContent.xAxis.type;
     const newXAxisType = this.plotTypeToLimitType[graphType];
     if (oldXAxisType != newXAxisType) {
-      this.authoringComponentContent.xAxis.type = newXAxisType;
+      this.componentContent.xAxis.type = newXAxisType;
       this.xAxisTypeChanged(newXAxisType, oldXAxisType);
     }
   }
@@ -568,5 +559,9 @@ export class GraphAuthoring extends ComponentAuthoring {
     } else {
       delete series.dashStyle;
     }
+  }
+
+  customTrackBy(index: number): number {
+    return index;
   }
 }

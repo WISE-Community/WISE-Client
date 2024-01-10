@@ -74,10 +74,7 @@ function getTotalScore_omitInActiveNodes() {
 
 function getTotalScore_omitExcludFromTotalScoreNodes() {
   it('should omit scores for nodes marked as excludeFromTotalScore', () => {
-    projectService.getComponentByNodeIdAndComponentId(
-      'node3',
-      '0sef5ya2wj'
-    ).excludeFromTotalScore = true;
+    projectService.getComponent('node3', '0sef5ya2wj').excludeFromTotalScore = true;
     expect(service.getTotalScore(annotations)).toEqual(1);
   });
 }

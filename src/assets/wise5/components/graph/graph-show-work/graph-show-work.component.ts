@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
 import { GraphService } from '../graphService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
+import { NodeService } from '../../../services/nodeService';
 
 @Component({
   selector: 'graph-show-work',
@@ -23,8 +24,12 @@ export class GraphShowWorkComponent extends ComponentShowWorkDirective {
   xAxis: any;
   yAxis: any;
 
-  constructor(private GraphService: GraphService, protected ProjectService: ProjectService) {
-    super(ProjectService);
+  constructor(
+    private GraphService: GraphService,
+    protected nodeService: NodeService,
+    protected ProjectService: ProjectService
+  ) {
+    super(nodeService, ProjectService);
   }
 
   ngOnInit(): void {

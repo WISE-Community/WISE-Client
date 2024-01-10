@@ -12,9 +12,10 @@ import './classroomMonitorComponents/notebook/notebook';
 import '../components/component-grading.module';
 import './dataExport/data-export-module';
 import ClassroomMonitorController from './classroomMonitorController';
-import NotebookGradingController from './notebook/notebookGradingController';
-import StudentGradingController from './studentGrading/studentGradingController';
 import StudentProgressController from './studentProgress/studentProgressController';
+import { downgradeComponent } from '@angular/upgrade/static';
+import { NotebookGradingComponent } from './notebook-grading/notebook-grading.component';
+import { StudentGradingComponent } from './student-grading/student-grading.component';
 
 export default angular
   .module('classroomMonitor', [
@@ -30,8 +31,11 @@ export default angular
     'studentProgress'
   ])
   .controller('ClassroomMonitorController', ClassroomMonitorController)
-  .controller('NotebookGradingController', NotebookGradingController)
-  .controller('StudentGradingController', StudentGradingController)
+  .directive('notebookGrading', downgradeComponent({ component: NotebookGradingComponent }))
+  .directive(
+    'studentGrading',
+    downgradeComponent({ component: StudentGradingComponent }) as angular.IDirectiveFactory
+  )
   .controller('StudentProgressController', StudentProgressController)
   .config([
     '$stateProvider',
@@ -150,9 +154,7 @@ export default angular
         })
         .state('root.cm.team', {
           url: '/team/:workgroupId',
-          templateUrl: '/assets/wise5/classroomMonitor/studentGrading/studentGrading.html',
-          controller: 'StudentGradingController',
-          controllerAs: 'studentGradingController',
+          component: 'studentGrading',
           resolve: {
             studentData: [
               '$stateParams',
@@ -168,13 +170,11 @@ export default angular
         })
         .state('root.cm.unit', {
           url: '',
-          component: 'nodeProgressView',
-          params: { nodeId: null }
+          component: 'nodeProgressView'
         })
         .state('root.cm.unit.node', {
           url: '/node/:nodeId',
-          component: 'nodeProgressView',
-          params: { nodeId: null }
+          component: 'nodeProgressView'
         })
         .state('root.cm.dashboard', {
           url: '/dashboard',
@@ -188,9 +188,7 @@ export default angular
         })
         .state('root.cm.notebooks', {
           url: '/notebook',
-          templateUrl: '/assets/wise5/classroomMonitor/notebook/notebookGrading.html',
-          controller: 'NotebookGradingController',
-          controllerAs: 'notebookGradingController'
+          component: 'notebookGrading'
         });
       $translatePartialLoaderProvider.addPart('classroomMonitor/i18n');
       $mdThemingProvider

@@ -2,7 +2,6 @@
   "openResponse.addFile": "إضافة ملف",
   "openResponse.addMultipleAttemptScoringRule": "إضافة محاولات متعددة قاعدة تسجيل النقاط",
   "openResponse.addNewNotification": "إضافة إشعار جديد",
-  "openResponse.addScoringRule": "إضافة قاعدة تسجيل نقاط.",
   "openResponse.areYouSureYouWantToDeleteThisMultipleAttemptScoringRule": "هل أنت متأكد من رغبتك في حذف قاعدة تسجيل النقاط هذه؟\\n\\nالنقطة السابقة: {{previousScore}}\\n\\nالنقطة الحالية: {{النقطة الحالية}}\\n\\nنص التعقيب: {{feedbackText}}",
   "openResponse.areYouSureYouWantToDeleteThisNotification": "هل أنت متأكد من رغبتك في حذف هذا الإشعار؟\\n\\nالنقطة السابقة: {{previousScore}}\\n\\nالنقطة الحالية: {{currentScore}}",
   "openResponse.areYouSureYouWantToDeleteThisScoringRule": "هل أنت متأكد من رغبتك في حذف قاعدة تسجيل النقاط هذه؟\\n\\nالنقطة: {{النقطة}}\\n\\nنص الملاحظات: {{feedbackText}}",

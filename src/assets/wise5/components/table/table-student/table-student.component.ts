@@ -1,5 +1,5 @@
 import * as html2canvas from 'html2canvas';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { Tabulator } from 'tabulator-tables';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -41,12 +41,16 @@ export class TableStudent extends ComponentStudent {
   latestConnectedComponentState: any;
   notebookConfig: any;
   numDataExplorerSeries: number;
+  selectedRowIndices: number[] = [];
+  sortOrder: number[] = [];
   tableData: any;
   tableId: string;
   tabulatorData: TabulatorData;
+  tabulatorSorters: any[] = [];
 
   constructor(
     protected AnnotationService: AnnotationService,
+    private changeDetectorRef: ChangeDetectorRef,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected dialog: MatDialog,
@@ -106,13 +110,13 @@ export class TableStudent extends ComponentStudent {
     ) {
       // the student has work so we will populate the work into this component
       this.setStudentWork(this.componentState);
-    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    } else if (this.component.hasConnectedComponent()) {
       // we will import work from another component
       this.handleConnectedComponents();
     } else if (this.componentState == null) {
       // check if we need to import work
 
-      if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+      if (this.component.hasConnectedComponent()) {
         /*
          * the student does not have any work and there are connected
          * components so we will get the work from the connected
@@ -149,8 +153,6 @@ export class TableStudent extends ComponentStudent {
         this.studentDataChanged();
       }, 1000);
     }
-
-    this.broadcastDoneRenderingComponent();
   }
 
   ngOnDestroy(): void {
@@ -185,9 +187,7 @@ export class TableStudent extends ComponentStudent {
     this.dataExplorerSeries[dataExplorerSeriesIndex].xColumn = columnIndex;
     this.dataExplorerXColumn = columnIndex;
     this.setDataExplorerXColumnIsDisabled();
-    if (this.isDataExplorerXAxisLabelEmpty()) {
-      this.updateDataExplorerXAxisLabel(columnIndex);
-    }
+    this.updateDataExplorerXAxisLabel(columnIndex);
   }
 
   isDataExplorerXAxisLabelEmpty(): boolean {
@@ -277,10 +277,7 @@ export class TableStudent extends ComponentStudent {
   handleStudentWorkSavedToServer(componentState: any): void {
     if (this.isForThisComponent(componentState)) {
       this.isDirty = false;
-      this.StudentDataService.broadcastComponentDirty({
-        componentId: this.componentId,
-        isDirty: false
-      });
+      this.emitComponentDirty(false);
       this.latestComponentState = componentState;
     }
   }
@@ -324,7 +321,7 @@ export class TableStudent extends ComponentStudent {
    * Reset the table data to its initial state from the component content
    */
   resetTable() {
-    if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    if (this.component.hasConnectedComponent()) {
       // this component imports work so we will import the work again
       this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
       this.handleConnectedComponents();
@@ -367,7 +364,7 @@ export class TableStudent extends ComponentStudent {
       // get the student data from the component state
       const studentData = componentState.studentData;
 
-      if (studentData != null) {
+      if (studentData != null && studentData.tableData != null) {
         // set the table into the controller
         this.tableData = studentData.tableData;
 
@@ -377,6 +374,14 @@ export class TableStudent extends ComponentStudent {
           // populate the submit counter
           this.submitCounter = submitCounter;
         }
+
+        this.selectedRowIndices = studentData.selectedRowIndices
+          ? studentData.selectedRowIndices
+          : [];
+
+        this.sortOrder = studentData.sortOrder ? studentData.sortOrder : [];
+
+        this.tabulatorSorters = studentData.tabulatorSorters ? studentData.tabulatorSorters : [];
 
         this.processLatestStudentWork();
       }
@@ -390,9 +395,12 @@ export class TableStudent extends ComponentStudent {
    * @return a promise that will return a component state
    */
   createComponentState(action) {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     const studentData: any = {};
     studentData.tableData = this.getCopyOfTableData(this.tableData);
+    studentData.selectedRowIndices = this.getSelectedRowIndices();
+    studentData.sortOrder = this.sortOrder;
+    studentData.tabulatorSorters = this.tabulatorSorters;
     studentData.isDataExplorerEnabled = this.isDataExplorerEnabled;
     studentData.dataExplorerGraphType = this.dataExplorerGraphType;
     studentData.dataExplorerXAxisLabel = this.dataExplorerXAxisLabel;
@@ -1045,9 +1053,7 @@ export class TableStudent extends ComponentStudent {
     for (const singleSeries of this.dataExplorerSeries) {
       singleSeries.xColumn = this.dataExplorerXColumn;
     }
-    if (this.isDataExplorerXAxisLabelEmpty()) {
-      this.updateDataExplorerXAxisLabel(this.dataExplorerXColumn);
-    }
+    this.updateDataExplorerXAxisLabel(this.dataExplorerXColumn);
     this.studentDataChanged();
   }
 
@@ -1158,6 +1164,9 @@ export class TableStudent extends ComponentStudent {
       });
     }
     this.setTabulatorData();
+    if (componentType === 'Embedded') {
+      this.changeDetectorRef.detectChanges();
+    }
   }
 
   attachStudentAsset(studentAsset: any): void {
@@ -1173,8 +1182,30 @@ export class TableStudent extends ComponentStudent {
 
   tabulatorCellChanged(cell: Tabulator.CellComponent): void {
     const columnIndex = parseInt(cell.getColumn().getField());
-    const rowIndex = cell.getRow().getPosition() + 1;
+    const rowIndex = cell.getRow().getIndex() + 1;
     this.tableData[rowIndex][columnIndex].text = cell.getValue();
+    this.studentDataChanged();
+  }
+
+  tabulatorRendered(): void {
+    this.broadcastDoneRenderingComponent();
+  }
+
+  tabulatorRowSelectionChanged(rows: Tabulator.RowComponent[]): void {
+    this.selectedRowIndices = [];
+    for (const row of rows) {
+      this.selectedRowIndices.push(row.getIndex());
+    }
+    this.studentDataChanged();
+  }
+
+  private getSelectedRowIndices(): number[] {
+    return this.componentContent.enableRowSelection ? this.selectedRowIndices : [];
+  }
+
+  tabulatorRowSortChanged(sortData: any): void {
+    this.sortOrder = sortData.sortOrder;
+    this.tabulatorSorters = sortData.tabSorters;
     this.studentDataChanged();
   }
 }

@@ -10,14 +10,15 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { of } from 'rxjs';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { Component } from '../../../common/Component';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { ComponentSaveSubmitButtons } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
-import { AnnotationService } from '../../../services/annotationService';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
 import { CRaterService } from '../../../services/cRaterService';
 import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
 import { StudentDataService } from '../../../services/studentDataService';
+import { OpenResponseContent } from '../OpenResponseContent';
 import { OpenResponseService } from '../openResponseService';
 import { OpenResponseStudent } from './open-response-student.component';
 
@@ -55,22 +56,18 @@ describe('OpenResponseStudent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(OpenResponseStudent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     component = fixture.componentInstance;
-    component.nodeId = nodeId;
-    component.componentContent = {
+    const componentContent = {
       cRater: {},
       enableCRater: true,
       id: componentId,
       prompt: 'How do plants obtain energy?',
       showSaveButton: true,
       showSubmitButton: true
-    };
+    } as OpenResponseContent;
+    component.component = new Component(componentContent, nodeId);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {
@@ -89,11 +86,7 @@ describe('OpenResponseStudent', () => {
   createComponentState();
   createComponentStateAdditionalProcessing();
   createMergedComponentState();
-  hasAudioResponses();
   hasFeedback();
-  mergeObjects();
-  removeAudioAttachment();
-  removeAudioAttachments();
   setStudentWork();
   snipButtonClicked();
   submitWithFeedback();
@@ -215,9 +208,18 @@ function createComponentStateAdditionalProcessing() {
       'should perform create component state additional processing',
       waitForAsync(() => {
         spyOn(TestBed.inject(OpenResponseService), 'isCompletedV2').and.returnValue(true);
-        spyOn(component, 'isCRaterScoreOnSubmit').and.returnValue(true);
+        spyOn(TestBed.inject(CRaterService), 'isCRaterScoreOnEvent').and.returnValue(true);
         spyOn(TestBed.inject(CRaterService), 'makeCRaterScoringRequest').and.returnValue(
-          of({ score: 1 })
+          of({
+            responses: {
+              feedback: {
+                ideas: {}
+              },
+              scores: {
+                raw_trim_round: 1
+              }
+            }
+          })
         );
         component.isSubmit = true;
         component.createComponentState('submit').then((componentState: any) => {
@@ -247,19 +249,6 @@ function snipButtonClicked() {
   });
 }
 
-function hasAudioResponses() {
-  describe('hasAudioResponses', () => {
-    it('should check if there are audio responses when there are none', () => {
-      component.attachments = [];
-      expect(component.hasAudioResponses()).toEqual(false);
-    });
-    it('should check if there are audio responses when there are some', () => {
-      component.attachments = [{ type: 'audio' }];
-      expect(component.hasAudioResponses()).toEqual(true);
-    });
-  });
-}
-
 function createComponentStateObject(response: string): any {
   return {
     studentData: {
@@ -277,33 +266,6 @@ function createMergedComponentState() {
       ];
       const mergedComponentState = component.createMergedComponentState(componentStates);
       expect(mergedComponentState.studentData.response).toEqual('Hello\nWorld');
-    });
-  });
-}
-
-function removeAudioAttachment() {
-  describe('removeAudioAttachment', () => {
-    it('should remove audio attachment', () => {
-      const audioAttachment = { type: 'audio' };
-      component.attachments = [audioAttachment, { type: 'image' }];
-      spyOn(window, 'confirm').and.returnValue(true);
-      component.removeAudioAttachment(audioAttachment);
-      expect(component.attachments.length).toEqual(1);
-    });
-  });
-}
-
-function removeAudioAttachments() {
-  describe('removeAudioAttachments', () => {
-    it('should remove audio attachments', () => {
-      component.attachments = [
-        { type: 'image' },
-        { type: 'audio' },
-        { type: 'image' },
-        { type: 'audio' }
-      ];
-      component.removeAudioAttachments();
-      expect(component.attachments.length).toEqual(2);
     });
   });
 }
@@ -340,20 +302,6 @@ function hasFeedback() {
 function expectHasFeedbackToBe(isCRaterEnabled: boolean, value: boolean) {
   spyOn(TestBed.inject(CRaterService), 'isCRaterEnabled').and.returnValue(isCRaterEnabled);
   expect(component.hasFeedback()).toEqual(value);
-}
-
-function mergeObjects() {
-  describe('mergeObjects', () => {
-    it('should merge objects', () => {
-      const destination: any = { id: 1, width: 800, height: 600 };
-      const source: any = { id: 2, color: 'blue' };
-      component.mergeObjects(destination, source);
-      expect(destination.id).toEqual(2);
-      expect(destination.width).toEqual(800);
-      expect(destination.height).toEqual(600);
-      expect(destination.color).toEqual('blue');
-    });
-  });
 }
 
 function checkHasFeedbackWhenCRaterIsNotEnabled() {

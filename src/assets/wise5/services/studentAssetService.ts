@@ -85,7 +85,7 @@ export class StudentAssetService {
 
   getFileNameFromAsset(asset) {
     if (this.ConfigService.isPreview()) {
-      return asset.file.name;
+      return asset.file;
     } else {
       return asset.fileName;
     }

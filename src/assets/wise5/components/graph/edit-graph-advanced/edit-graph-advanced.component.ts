@@ -3,6 +3,7 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { GraphContent } from '../GraphContent';
 
 @Component({
   template: 'edit-graph-advanced',
@@ -19,18 +20,19 @@ export class EditGraphAdvancedComponent extends EditAdvancedComponentComponent {
     'Label',
     'Table'
   ];
+  componentContent: GraphContent;
 
   constructor(
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    protected TeacherProjectService: TeacherProjectService
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    protected teacherProjectService: TeacherProjectService
   ) {
-    super(NodeService, NotebookService, TeacherProjectService);
+    super(nodeService, notebookService, teacherProjectService);
   }
 
   addXAxisPlotLine(): void {
-    if (this.authoringComponentContent.xAxis.plotLines == null) {
-      this.authoringComponentContent.xAxis.plotLines = [];
+    if (this.componentContent.xAxis.plotLines == null) {
+      this.componentContent.xAxis.plotLines = [];
     }
     const plotLine = {
       color: 'gray',
@@ -46,18 +48,18 @@ export class EditGraphAdvancedComponent extends EditAdvancedComponentComponent {
         }
       }
     };
-    this.authoringComponentContent.xAxis.plotLines.push(plotLine);
+    this.componentContent.xAxis.plotLines.push(plotLine);
     this.componentChanged();
   }
 
   deleteXAxisPlotLine(index: number): void {
-    this.authoringComponentContent.xAxis.plotLines.splice(index, 1);
+    this.componentContent.xAxis.plotLines.splice(index, 1);
     this.componentChanged();
   }
 
   addYAxisPlotLine(): void {
-    if (this.authoringComponentContent.yAxis.plotLines == null) {
-      this.authoringComponentContent.yAxis.plotLines = [];
+    if (this.componentContent.yAxis.plotLines == null) {
+      this.componentContent.yAxis.plotLines = [];
     }
     const plotLine = {
       color: 'gray',
@@ -70,12 +72,12 @@ export class EditGraphAdvancedComponent extends EditAdvancedComponentComponent {
         }
       }
     };
-    this.authoringComponentContent.yAxis.plotLines.push(plotLine);
+    this.componentContent.yAxis.plotLines.push(plotLine);
     this.componentChanged();
   }
 
   deleteYAxisPlotLine(index: number): void {
-    this.authoringComponentContent.yAxis.plotLines.splice(index, 1);
+    this.componentContent.yAxis.plotLines.splice(index, 1);
     this.componentChanged();
   }
 }

@@ -9,7 +9,7 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
 })
 export class EditComponentRubricComponent {
   @Input()
-  authoringComponentContent: any;
+  componentContent: any;
   rubric: string;
   showRubricAuthoring: boolean = false;
 
@@ -20,7 +20,7 @@ export class EditComponentRubricComponent {
 
   ngOnInit() {
     const componentContent = this.ConfigService.replaceStudentNames(
-      this.ProjectService.injectAssetPaths(this.authoringComponentContent)
+      this.ProjectService.injectAssetPaths(this.componentContent)
     );
     if (componentContent.rubric == null) {
       this.rubric = '';
@@ -30,9 +30,7 @@ export class EditComponentRubricComponent {
   }
 
   rubricChanged(): void {
-    this.authoringComponentContent.rubric = this.ConfigService.removeAbsoluteAssetPaths(
-      this.rubric
-    );
+    this.componentContent.rubric = this.ConfigService.removeAbsoluteAssetPaths(this.rubric);
     this.ProjectService.componentChanged();
   }
 }

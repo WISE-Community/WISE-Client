@@ -22,7 +22,6 @@ import { InsertNodesService } from '../assets/wise5/services/insertNodesService'
 import { MoveNodesService } from '../assets/wise5/services/moveNodesService';
 import { AuthoringToolModule } from './teacher/authoring-tool.module';
 import { ClassroomMonitorModule } from './teacher/classroom-monitor.module';
-import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.component';
 import { UpdateWorkgroupService } from './services/updateWorkgroupService';
 import { GetWorkgroupService } from './services/getWorkgroupService';
 import { WorkgroupService } from './services/workgroup.service';
@@ -39,7 +38,7 @@ import { TeacherNodeIconComponent } from '../assets/wise5/authoringTool/teacher-
 export class EmptyComponent {}
 
 @NgModule({
-  declarations: [StepToolsComponent, TeacherNodeIconComponent],
+  declarations: [TeacherNodeIconComponent],
   imports: [
     StudentTeacherCommonModule,
     AuthoringToolModule,

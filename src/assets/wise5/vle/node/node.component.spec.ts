@@ -47,7 +47,7 @@ describe('NodeComponent', () => {
     });
     spyOn(TestBed.inject(VLEProjectService), 'isApplicationNode').and.returnValue(true);
     spyOn(TestBed.inject(VLEProjectService), 'getNodeById').and.returnValue({ components: [] });
-    spyOn(TestBed.inject(VLEProjectService), 'getNodeTitleByNodeId').and.returnValue('');
+    spyOn(TestBed.inject(VLEProjectService), 'getNodeTitle').and.returnValue('');
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

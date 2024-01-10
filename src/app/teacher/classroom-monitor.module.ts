@@ -13,6 +13,7 @@ import { ManageTeamsComponent } from '../../assets/wise5/classroomMonitor/classr
 import { ManageUserComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-user/manage-user.component';
 import { MoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component';
 import { WorkgroupInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroupInfo/workgroup-info.component';
+import { WorkgroupItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component';
 import { NavItemScoreComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/navItemScore/nav-item-score.component';
 import { WorkgroupNodeScoreComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/workgroupNodeScore/workgroup-node-score.component';
 import { ViewComponentRevisionsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component';
@@ -38,9 +39,28 @@ import { ComponentGradingModule } from './component-grading.module';
 import { TeacherSummaryDisplay } from '../../assets/wise5/directives/teacher-summary-display/teacher-summary-display.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
+import { MilestoneWorkgroupItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component';
 import { NodeInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { PreviewComponentModule } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.module';
+import { NotebookWorkgroupGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component';
+import { ProjectProgressComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentProgress/project-progress/project-progress.component';
+import { PauseScreensMenuComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component';
+import { StepItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component';
+import { StudentGradingToolsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/student-grading-tools/student-grading-tools.component';
+import { ToolBarComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component';
+import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-tools.component';
+import { NodeGradingViewComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component';
+import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
+import { MilestoneGradingViewComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component';
+import { NotificationsMenuComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component';
+import { NavItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component';
+import { NodeProgressViewComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/node-progress-view/node-progress-view.component';
+import { TopBarComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component';
+import { NotebookGradingComponent } from '../../assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component';
+import { StudentGradingComponent } from '../../assets/wise5/classroomMonitor/student-grading/student-grading.component';
+import { ExportStepVisitsComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component';
+import { DataExportComponent } from '../../assets/wise5/classroomMonitor/dataExport/data-export/data-export.component';
 
 @NgModule({
   declarations: [
@@ -51,9 +71,11 @@ import { PreviewComponentModule } from '../../assets/wise5/authoringTool/compone
     ChangeTeamPeriodDialogComponent,
     ComponentNewWorkBadgeComponent,
     ComponentSelectComponent,
+    DataExportComponent,
     EditComponentAnnotationsComponent,
     EditComponentCommentComponent,
     EditComponentScoreComponent,
+    ExportStepVisitsComponent,
     GradingEditComponentMaxScoreComponent,
     ManagePeriodComponent,
     ManageShowStudentInfoComponent,
@@ -62,18 +84,35 @@ import { PreviewComponentModule } from '../../assets/wise5/authoringTool/compone
     ManageTeamsComponent,
     ManageUserComponent,
     MilestonesComponent,
+    MilestoneGradingViewComponent,
     MilestoneReportDataComponent,
+    MilestoneWorkgroupItemComponent,
     MoveUserConfirmDialogComponent,
+    NavItemComponent,
     NavItemProgressComponent,
     NodeInfoComponent,
+    NodeGradingViewComponent,
+    NodeProgressViewComponent,
+    NotebookGradingComponent,
+    NotebookWorkgroupGradingComponent,
+    NotificationsMenuComponent,
+    PauseScreensMenuComponent,
+    ProjectProgressComponent,
     RemoveUserConfirmDialogComponent,
     ShowStudentInfoComponent,
     StatusIconComponent,
     StepInfoComponent,
+    StepItemComponent,
+    StepToolsComponent,
+    StudentGradingComponent,
+    StudentGradingToolsComponent,
     TeacherSummaryDisplay,
+    ToolBarComponent,
+    TopBarComponent,
     ViewComponentRevisionsComponent,
     WorkgroupComponentGradingComponent,
     WorkgroupInfoComponent,
+    WorkgroupItemComponent,
     WorkgroupNodeScoreComponent,
     WorkgroupSelectAutocompleteComponent,
     WorkgroupSelectDropdownComponent,
@@ -85,6 +124,7 @@ import { PreviewComponentModule } from '../../assets/wise5/authoringTool/compone
     ComponentGradingModule,
     ComponentStudentModule,
     HighchartsChartModule,
+    IntersectionObserverModule,
     PeerGroupGradingModule,
     PreviewComponentModule,
     SelectPeriodModule

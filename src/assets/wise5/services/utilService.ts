@@ -6,54 +6,7 @@ import '../lib/jquery/jquery-global';
 
 @Injectable()
 export class UtilService {
-  CHARS = [
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    'k',
-    'l',
-    'm',
-    'n',
-    'o',
-    'p',
-    'q',
-    'r',
-    's',
-    't',
-    'u',
-    'v',
-    'w',
-    'x',
-    'y',
-    'z',
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9'
-  ];
-
   constructor(@Inject(LOCALE_ID) private localeID: string) {}
-
-  generateKey(length = 10) {
-    let key = '';
-    for (let a = 0; a < length; a++) {
-      key += this.CHARS[Math.floor(Math.random() * (this.CHARS.length - 1))];
-    }
-    return key;
-  }
 
   convertStringToNumber(str) {
     if (str != null && str != '' && !isNaN(Number(str))) {
@@ -414,44 +367,6 @@ export class UtilService {
   }
 
   /**
-   * Whether there are any connected components
-   * @param componentContent the component content
-   * @return whether there are any connected components
-   */
-  hasConnectedComponent(componentContent) {
-    if (componentContent != null) {
-      const connectedComponents = componentContent.connectedComponents;
-      if (connectedComponents != null && connectedComponents.length > 0) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * @param componentContent The component content.
-   * @return Whether there are any connected components with a field we always
-   * want to read or write.
-   */
-  hasConnectedComponentAlwaysField(componentContent) {
-    if (componentContent != null) {
-      const connectedComponents = componentContent.connectedComponents;
-      if (connectedComponents != null && connectedComponents.length > 0) {
-        for (let connectedComponent of connectedComponents) {
-          if (connectedComponent.fields != null) {
-            for (let field of connectedComponent.fields) {
-              if (field.when == 'always') {
-                return true;
-              }
-            }
-          }
-        }
-      }
-    }
-    return false;
-  }
-
-  /**
    * Check if an array has any non null elements.
    * @param arrayToCheck An array which may have null and non null elements.
    * @return True if the array has at least one non null element.
@@ -558,15 +473,6 @@ export class UtilService {
    */
   hasShowWorkConnectedComponent(componentContent) {
     return this.hasXConnectedComponent(componentContent, 'showWork');
-  }
-
-  /**
-   * Determine whether the component has been authored to show classmate work.
-   * @param componentContent The component content.
-   * @return Whether to show classmate work in this component.
-   */
-  hasShowClassmateWorkConnectedComponent(componentContent) {
-    return this.hasXConnectedComponent(componentContent, 'showClassmateWork');
   }
 
   /**

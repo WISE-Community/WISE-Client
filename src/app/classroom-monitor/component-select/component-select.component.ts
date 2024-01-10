@@ -9,38 +9,33 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
 })
 export class ComponentSelectComponent {
   components: any[];
-
-  @Output()
-  modelChange: EventEmitter<any> = new EventEmitter<any>();
-
-  @Input()
-  nodeId: string;
-
+  @Output() modelChange: EventEmitter<any> = new EventEmitter<any>();
+  @Input() nodeId: string;
   selectedComponents: any[];
 
   constructor(
     private componentTypeService: ComponentTypeService,
-    private ProjectService: TeacherProjectService
+    private projectService: TeacherProjectService
   ) {}
 
   ngOnInit() {
-    this.components = this.ProjectService.getComponentsByNodeId(this.nodeId).filter((component) => {
-      return this.ProjectService.componentHasWork(component);
+    this.components = this.projectService.getComponents(this.nodeId).filter((component) => {
+      return this.projectService.componentHasWork(component);
     });
     this.selectedComponents = this.components.map((component) => {
       return component.id;
     });
   }
 
-  getComponentTypeLabel(componentType) {
+  getComponentTypeLabel(componentType: string): string {
     return this.componentTypeService.getComponentTypeLabel(componentType);
   }
 
-  getSelectedText() {
+  getSelectedText(): string {
     return $localize`Showing ${this.selectedComponents.length}/${this.components.length} items`;
   }
 
-  selectedComponentsChange() {
+  selectedComponentsChange(): void {
     const hiddenComponents = [];
     for (const component of this.components) {
       const id = component.id;

@@ -60,12 +60,6 @@ export class DataService {
     }
   }
 
-  getActiveAnnototations(annotations): any[] {
-    return annotations.filter((annotation) => {
-      return this.ProjectService.componentExists(annotation.nodeId, annotation.componentId);
-    });
-  }
-
   broadcastCurrentNodeChanged(previousAndCurrentNode: any) {
     this.currentNodeChangedSource.next(previousAndCurrentNode);
   }

@@ -1,10 +1,10 @@
-<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+<edit-component-prompt [prompt]="componentContent.prompt"
    (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <div>
   <mat-form-field class="background-image input">
     <mat-label i18n>Background Image</mat-label>
     <input matInput
-        [(ngModel)]="authoringComponentContent.backgroundImage"
+        [(ngModel)]="componentContent.backgroundImage"
         (ngModelChange)="textInputChange.next($event)"/>
   </mat-form-field>
   <button mat-raised-button
@@ -23,14 +23,14 @@
     <mat-label i18n>Canvas Width (px)</mat-label>
     <input matInput
         type="number"
-        [(ngModel)]="authoringComponentContent.width"
+        [(ngModel)]="componentContent.width"
         (ngModelChange)="numberInputChange.next($event)"/>
   </mat-form-field>
   <mat-form-field class="input">
     <mat-label i18n>Canvas Height (px)</mat-label>
     <input matInput
         type="number"
-        [(ngModel)]="authoringComponentContent.height"
+        [(ngModel)]="componentContent.height"
         (ngModelChange)="numberInputChange.next($event)"/>
   </mat-form-field>
 </div>
@@ -39,21 +39,21 @@
     <mat-label i18n>Point Radius Size (px)</mat-label>
     <input matInput
         type="number"
-        [(ngModel)]="authoringComponentContent.pointSize"
+        [(ngModel)]="componentContent.pointSize"
         (ngModelChange)="numberInputChange.next($event)"/>
   </mat-form-field>
   <mat-form-field class="input">
     <mat-label i18n>Font Size</mat-label>
     <input matInput
         type="number"
-        [(ngModel)]="authoringComponentContent.fontSize"
+        [(ngModel)]="componentContent.fontSize"
         (ngModelChange)="numberInputChange.next($event)"/>
   </mat-form-field>
   <mat-form-field class="input">
     <mat-label i18n>Label Max Character Width</mat-label>
     <input matInput
         type="number"
-        [(ngModel)]="authoringComponentContent.labelWidth"
+        [(ngModel)]="componentContent.labelWidth"
         (ngModelChange)="numberInputChange.next($event)"/>
   </mat-form-field>
 </div>
@@ -61,7 +61,7 @@
   <div class="checkbox">
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.canCreateLabels"
+        [(ngModel)]="componentContent.canCreateLabels"
         (change)="componentChanged()"
         i18n>
       Can Student Create Labels
@@ -70,7 +70,7 @@
   <div class="checkbox">
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.enableCircles"
+        [(ngModel)]="componentContent.enableCircles"
         (ngModelChange)="componentChanged()"
         i18n>
       Enable Dots
@@ -79,7 +79,7 @@
   <div class="checkbox">
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.enableStudentUploadBackground"
+        [(ngModel)]="componentContent.enableStudentUploadBackground"
         (ngModelChange)="componentChanged()"
         i18n>
       Allow Student to Upload Image for Background
@@ -100,12 +100,12 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <div *ngIf="authoringComponentContent.labels == null || authoringComponentContent.labels.length === 0"
+  <div *ngIf="componentContent.labels == null || componentContent.labels.length === 0"
       class="info-block"
       i18n>
     There are no starter labels. Click the "Add Label" button to add a starter label.
   </div>
-  <div *ngFor="let label of authoringComponentContent.labels; index as labelIndex"
+  <div *ngFor="let label of componentContent.labels; index as labelIndex"
       class="starter-label-container">
     <div>
       <mat-form-field class="input label-input">
@@ -154,7 +154,7 @@
       </mat-checkbox>
       </div>
     </div>
-    <div *ngIf="authoringComponentContent.enableCircles"
+    <div *ngIf="componentContent.enableCircles"
         fxLayout="row wrap" fxLayoutAlign="start center">
       <span class="coordinate-location-label" i18n>Point Location</span>
       <mat-form-field class="input coordinate-input">

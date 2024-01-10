@@ -1,7 +1,7 @@
 'use strict';
 
+import { RandomKeyService } from '../../services/randomKeyService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { UtilService } from '../../services/utilService';
 
 class MilestonesAuthoringController {
   $translate: any;
@@ -26,13 +26,9 @@ class MilestonesAuthoringController {
   customScoreKey: string;
   customScoreValues: string;
 
-  static $inject = ['$filter', 'ProjectService', 'UtilService'];
+  static $inject = ['$filter', 'ProjectService'];
 
-  constructor(
-    private $filter: any,
-    private ProjectService: TeacherProjectService,
-    private UtilService: UtilService
-  ) {
+  constructor(private $filter: any, private ProjectService: TeacherProjectService) {
     this.$translate = this.$filter('translate');
   }
 
@@ -93,12 +89,12 @@ class MilestonesAuthoringController {
     return this.ProjectService.isApplicationNode(nodeId);
   }
 
-  getNodePositionAndTitleByNodeId(nodeId) {
-    return this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.ProjectService.getNodePositionAndTitle(nodeId);
   }
 
-  getComponentsByNodeId(nodeId) {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
   isCRaterComponent(component: any): boolean {
@@ -197,7 +193,7 @@ class MilestonesAuthoringController {
   }
 
   generateMilestoneSatisfyCriteriaId() {
-    return this.milestoneSatisfyCriteriaIdPrefix + this.UtilService.generateKey(10);
+    return this.milestoneSatisfyCriteriaIdPrefix + RandomKeyService.generate();
   }
 
   isUniqueMilestoneSatisfyCriteriaId(id) {
@@ -287,7 +283,7 @@ class MilestonesAuthoringController {
   generateUniqueId(prefix: string, existingIds: any[]): string {
     let id: string;
     do {
-      id = prefix + this.UtilService.generateKey(10);
+      id = prefix + RandomKeyService.generate();
     } while (existingIds[id] != null);
     return id;
   }

@@ -11,7 +11,6 @@ import { PossibleScoreComponent } from '../../../../../app/possible-score/possib
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
-import { AnnotationService } from '../../../services/annotationService';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceFeedbackService';
 import { ProjectService } from '../../../services/projectService';
@@ -19,11 +18,12 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { StudentStatusService } from '../../../services/studentStatusService';
 import { ComputerDialogResponseMultipleScores } from '../ComputerDialogResponseMultipleScores';
 import { ComputerDialogResponseSingleScore } from '../ComputerDialogResponseSingleScore';
-import { CRaterResponse } from '../CRaterResponse';
-import { CRaterScore } from '../CRaterScore';
+import { CRaterResponse } from '../../common/cRater/CRaterResponse';
+import { CRaterScore } from '../../common/cRater/CRaterScore';
 import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
 import { DialogGuidanceService } from '../dialogGuidanceService';
 import { DialogGuidanceStudentComponent } from './dialog-guidance-student.component';
+import { Component } from '../../../common/Component';
 
 let component: DialogGuidanceStudentComponent;
 let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
@@ -55,19 +55,16 @@ describe('DialogGuidanceStudentComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogGuidanceStudentComponent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     component = fixture.componentInstance;
-    component.componentContent = TestBed.inject(DialogGuidanceService).createComponent();
-    component.componentContent.feedbackRules = [
+    const componentContent = TestBed.inject(DialogGuidanceService).createComponent();
+    componentContent.feedbackRules = [
       {
         expression: 'isDefault',
         feedback: 'Default Feedback'
       }
     ];
+    component.component = new Component(componentContent, null);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'isNotebookEnabled').and.returnValue(false);
     fixture.detectChanges();
@@ -83,7 +80,7 @@ describe('DialogGuidanceStudentComponent', () => {
 
   it('should create computer dialog response with multiple scores', () => {
     const response = new CRaterResponse();
-    const scores = [new CRaterScore('ki', 5, 5.0), new CRaterScore('science', 4, 4.1)];
+    const scores = [new CRaterScore('ki', 5, 5.0, 1, 5), new CRaterScore('science', 4, 4.1, 1, 5)];
     response.scores = scores;
     const computerDialogResponse = component.createComputerDialogResponse(response);
     expect((computerDialogResponse as ComputerDialogResponseMultipleScores).scores).toEqual(scores);
@@ -95,10 +92,11 @@ describe('DialogGuidanceStudentComponent', () => {
       'broadcastComponentSubmitTriggered'
     );
     component.setIsSubmitDirty(true);
-    const response = new CRaterResponse();
+    const response = createDummyScoringResponse();
+    expect(component.responses.length).toEqual(0);
     component.cRaterSuccessResponse(response);
     expect(broadcastComponentSubmitTriggeredSpy).toHaveBeenCalled();
-    expect(component.submitCounter).toEqual(1);
+    expect(component.responses.length).toEqual(1);
   });
 
   it('should disable submit button after using all submits', () => {
@@ -205,7 +203,7 @@ describe('DialogGuidanceStudentComponent', () => {
 });
 
 function simulateSubmit(component: DialogGuidanceStudentComponent): void {
-  const response = new CRaterResponse();
+  const response = createDummyScoringResponse();
   component.setIsSubmitDirty(true);
   component.cRaterSuccessResponse(response);
 }
@@ -231,4 +229,17 @@ function expectIsShowComputerAvatarSelector(
   expectedIsShowComputerAvatarSelector: boolean
 ) {
   expect(component.isShowComputerAvatarSelector).toEqual(expectedIsShowComputerAvatarSelector);
+}
+
+function createDummyScoringResponse() {
+  return {
+    responses: {
+      feedback: {
+        ideas: [{ 2: false }, { 3: false }]
+      },
+      trait_scores: {
+        ki: { score: 1 }
+      }
+    }
+  };
 }

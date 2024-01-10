@@ -3,7 +3,6 @@ import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
 import { PeerGroupService } from '../../../services/peerGroupService';
@@ -31,12 +30,11 @@ import { FormsModule } from '@angular/forms';
 import { PeerChatModule } from '../peer-chat.module';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PauseScreenService } from '../../../services/pauseScreenService';
-
-export class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
+import { DynamicPromptComponent } from '../../../directives/dynamic-prompt/dynamic-prompt.component';
+import { PromptComponent } from '../../../directives/prompt/prompt.component';
+import { Component } from '../../../common/Component';
 
 let component: PeerChatStudentComponent;
 const componentId = 'component1';
@@ -67,8 +65,7 @@ const componentContent = {
   ],
   logicThresholdCount: 0,
   logicThresholdPercent: 0,
-  maxMembershipCount: 2,
-  questionBank: ['What color is the sky?', 'How deep is the ocean?']
+  maxMembershipCount: 2
 };
 
 class ComponentState {
@@ -132,14 +129,20 @@ describe('PeerChatStudentComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        PeerChatModule
+        PeerChatModule,
+        StudentTeacherCommonServicesModule
       ],
-      declarations: [ComponentHeader, PeerChatStudentComponent, PossibleScoreComponent],
+      declarations: [
+        ComponentHeader,
+        DynamicPromptComponent,
+        PeerChatStudentComponent,
+        PossibleScoreComponent,
+        PromptComponent
+      ],
       providers: [
         AnnotationService,
         ComponentService,
         ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
         NotebookService,
         NotificationService,
         PauseScreenService,
@@ -158,19 +161,12 @@ describe('PeerChatStudentComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PeerChatStudentComponent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
+    const configService = TestBed.inject(ConfigService);
+    spyOn(configService, 'getWorkgroupId').and.returnValue(studentWorkgroupId1);
+    spyOn(configService, 'getTeacherWorkgroupIds').and.returnValue([teacherWorkgroupId]);
+    spyOn(configService, 'isTeacherWorkgroupId').and.callFake((workgroupId: number) => {
+      return workgroupId === teacherWorkgroupId;
     });
-    spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(studentWorkgroupId1);
-    spyOn(TestBed.inject(ConfigService), 'getTeacherWorkgroupIds').and.returnValue([
-      teacherWorkgroupId
-    ]);
-    spyOn(TestBed.inject(ConfigService), 'isTeacherWorkgroupId').and.callFake(
-      (workgroupId: number) => {
-        return workgroupId === teacherWorkgroupId;
-      }
-    );
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     retrievePeerGroupSpy = spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup');
     retrievePeerGroupSpy.and.callFake(() => {
@@ -180,9 +176,7 @@ describe('PeerChatStudentComponent', () => {
       of([componentState1, componentState2])
     );
     component = fixture.componentInstance;
-    component.componentContent = componentContent;
-    component.nodeId = nodeId;
-    component.componentId = componentId;
+    component.component = new Component(componentContent, nodeId);
     component.workgroupId = studentWorkgroupId1;
     component.peerGroup = peerGroup;
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
@@ -233,7 +227,12 @@ function submitStudentResponse() {
 }
 
 function createComponentState() {
-  it('should create component state', () => {
+  createComponentState_WithoutDynamicPrompt_ShouldCreateComponentState();
+  createComponentState_WithDynamicPrompt_ShouldCreateComponentState();
+}
+
+function createComponentState_WithoutDynamicPrompt_ShouldCreateComponentState() {
+  it('should create component state when component does not have dynamic prompt', () => {
     component.peerChatWorkgroupIds = [
       studentWorkgroupId1,
       studentWorkgroupId2,
@@ -250,6 +249,27 @@ function createComponentState() {
     component.createComponentState('submit').then(() => {
       expect(sendMessageToClassmateSpy).toHaveBeenCalledTimes(2);
       expect(saveNotificationToServerSpy).toHaveBeenCalledTimes(2);
+    });
+  });
+}
+
+function createComponentState_WithDynamicPrompt_ShouldCreateComponentState() {
+  it('should create component state when component has dynamic prompt', () => {
+    spyOn(
+      TestBed.inject(StudentWebSocketService),
+      'sendStudentWorkToClassmate'
+    ).and.callFake(() => {});
+    spyOn(TestBed.inject(NotificationService), 'saveNotificationToServer').and.callFake(() => {
+      return Promise.resolve({});
+    });
+    const dynamicPrompt = new FeedbackRule({
+      id: 'abcde12345',
+      expression: '2',
+      prompt: 'You got idea 2'
+    });
+    component.dynamicPrompt = dynamicPrompt;
+    component.createComponentState('save').then((componentState) => {
+      expect(componentState.studentData.dynamicPrompt).toEqual(dynamicPrompt);
     });
   });
 }

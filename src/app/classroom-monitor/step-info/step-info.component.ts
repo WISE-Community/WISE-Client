@@ -6,26 +6,21 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
   templateUrl: 'step-info.component.html'
 })
 export class StepInfoComponent {
-  $translate: any;
   alertIconClass: string;
   alertIconLabel: string;
   alertIconName: string;
-  @Input()
-  hasAlert: boolean;
-  @Input()
-  hasNewAlert: boolean;
-  @Input()
-  hasNewWork: boolean;
+  @Input() hasAlert: boolean;
+  @Input() hasNewAlert: boolean;
+  @Input() hasNewWork: boolean;
   hasRubrics: boolean;
-  @Input()
-  nodeId: string;
+  @Input() nodeId: string;
   rubricIconLabel: string;
   stepTitle: string;
 
-  constructor(private ProjectService: TeacherProjectService) {}
+  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit() {
-    this.stepTitle = this.ProjectService.getNodePositionAndTitleByNodeId(this.nodeId);
+    this.stepTitle = this.projectService.getNodePositionAndTitle(this.nodeId);
     if (this.hasAlert) {
       this.alertIconClass = this.hasNewAlert ? 'warn' : 'text-disabled';
       this.alertIconName = 'notifications';
@@ -33,7 +28,7 @@ export class StepInfoComponent {
         ? $localize`Has new alert(s)`
         : $localize`Has dismissed alert(s)`;
     }
-    this.hasRubrics = this.ProjectService.getNumberOfRubricsByNodeId(this.nodeId) > 0;
+    this.hasRubrics = this.projectService.getNumberOfRubricsByNodeId(this.nodeId) > 0;
     this.rubricIconLabel = $localize`Step has rubrics/teaching tips`;
   }
 }

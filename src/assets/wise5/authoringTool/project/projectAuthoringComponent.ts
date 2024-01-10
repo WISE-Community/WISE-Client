@@ -194,12 +194,12 @@ class ProjectAuthoringController {
     return this.ProjectService.getNodePositionById(nodeId);
   }
 
-  getComponentsByNodeId(nodeId) {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
-  getNodeTitleByNodeId(nodeId) {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   isGroupNode(nodeId) {
@@ -278,7 +278,7 @@ class ProjectAuthoringController {
       if (newNode != null) {
         let nodeCreatedEventData = {
           nodeId: newNode.id,
-          title: this.ProjectService.getNodePositionAndTitleByNodeId(newNode.id)
+          title: this.ProjectService.getNodePositionAndTitle(newNode.id)
         };
         if (this.ProjectService.isGroupNode(newNode.id)) {
           this.saveEvent('activityCreated', 'Authoring', nodeCreatedEventData);
@@ -311,7 +311,7 @@ class ProjectAuthoringController {
       for (let selectedNodeId of selectedNodeIds) {
         let node = {
           nodeId: selectedNodeId,
-          fromTitle: this.ProjectService.getNodePositionAndTitleByNodeId(selectedNodeId)
+          fromTitle: this.ProjectService.getNodePositionAndTitle(selectedNodeId)
         };
         movedNodes.push(node);
       }
@@ -339,7 +339,7 @@ class ProjectAuthoringController {
               let node = movedNodes[n];
               let newNode = newNodes[n];
               if (node != null && newNode != null) {
-                node.toTitle = this.ProjectService.getNodePositionAndTitleByNodeId(newNode.id);
+                node.toTitle = this.ProjectService.getNodePositionAndTitle(newNode.id);
               }
             }
 
@@ -380,7 +380,7 @@ class ProjectAuthoringController {
     const copiedNodes: any[] = selectedNodeIds.map((selectedNodeId) => {
       return {
         fromNodeId: selectedNodeId,
-        fromTitle: this.ProjectService.getNodePositionAndTitleByNodeId(selectedNodeId)
+        fromTitle: this.ProjectService.getNodePositionAndTitle(selectedNodeId)
       };
     });
     this.copyMode = false;
@@ -397,7 +397,7 @@ class ProjectAuthoringController {
             let newNode = newNodes[n];
             if (node != null && newNode != null) {
               node.toNodeId = newNode.id;
-              node.toTitle = this.ProjectService.getNodePositionAndTitleByNodeId(newNode.id);
+              node.toTitle = this.ProjectService.getNodePositionAndTitle(newNode.id);
             }
           }
 
@@ -469,7 +469,7 @@ class ProjectAuthoringController {
       const node = this.ProjectService.getNodeById(nodeId);
       const tempNode = {
         nodeId: node.id,
-        title: this.ProjectService.getNodePositionAndTitleByNodeId(node.id),
+        title: this.ProjectService.getNodePositionAndTitle(node.id),
         stepsInActivityDeleted: []
       };
       if (this.ProjectService.isStartNodeId(nodeId)) {
@@ -480,7 +480,7 @@ class ProjectAuthoringController {
         for (const stepNodeId of node.ids) {
           const stepObject = {
             nodeId: stepNodeId,
-            title: this.ProjectService.getNodePositionAndTitleByNodeId(stepNodeId)
+            title: this.ProjectService.getNodePositionAndTitle(stepNodeId)
           };
           stepsInActivityDeleted.push(stepObject);
         }

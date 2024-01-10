@@ -1,9 +1,13 @@
 <div class="table-container">
   <tabulator-table [editableCells]="tabulatorData.editableCells"
-      [isDisabled]="true"
+      [disabled]="true"
+      [enableRowSelection]="componentContent.enableRowSelection"
+      [selectedRowIndices]="selectedRowIndices"
       [tabColumns]="tabulatorData.columns"
       [tabData]="tabulatorData.data"
-      [tabOptions]="tabulatorData.options"></tabulator-table>
+      [tabOptions]="tabulatorData.options"
+      [tabSorters]="tabulatorSorters"
+      (ready)="tabulatorRendered()"></tabulator-table>
 </div>
 <ng-container *ngIf="componentContent.isDataExplorerEnabled">
   <br />

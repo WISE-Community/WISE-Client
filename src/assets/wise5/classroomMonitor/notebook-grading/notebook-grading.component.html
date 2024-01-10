@@ -1,0 +1,122 @@
+<div class="view-content view-content--with-sidemenu">
+  <div class="l-constrained grading notebook-grading" fxLayout="column">
+    <mat-list class="user-list">
+      <mat-list-item class="list-item user-list-controls mat-elevation-z1">
+        <div fxFlex="100"
+            fxLayout="column"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign="center center"
+            fxLayoutGap.lt-md="8px">
+          <workgroup-select-autocomplete></workgroup-select-autocomplete>
+          <span fxFlex fxHide.xs fxHide.sm></span>
+          <div fxFlex.lt-md="100" fxLayout="row" fxLayoutAlign="center center">
+            <button mat-button
+                color="primary"
+                aria-label="Expand All"
+                i18n-aria-label
+                class="button--small"
+                (click)="expandAll()"
+                i18n>
+              + Expand All
+            </button>
+            <button mat-button
+                color="primary"
+                aria-label="Collapse All"
+                i18n-aria-label
+                class="button--small"
+                (click)="collapseAll()"
+                i18n>
+              - Collapse All
+            </button>
+          </div>
+        </div>
+      </mat-list-item>
+      <mat-list-item class="table--list__thead table--list__thead__th">
+        <div class="table--list__thead__tr dark-theme" fxLayout="row" fxFlex>
+          <button mat-button
+              class="table--list__thead__link"
+              aria-label="Team ID"
+              i18n-aria-label
+              (click)="setSort('team')"
+              title="Sort By Team"
+              i18n-title
+              fxFlex="15">
+            <span i18n>Team</span>
+            <mat-icon *ngIf="sort === 'team' || sort === '-team'"
+                class="text-light table--list__thead__sort"
+                [ngClass]="{'table--list__thead__sort--reverse': sort === '-team'}">
+              arrow_drop_up
+            </mat-icon>
+          </button>
+          <button mat-button
+              class="table--list__thead__link"
+              aria-label="Names"
+              i18n-aria-label
+              (click)="setSort('student')"
+              title="Sort By Student"
+              i18n-title
+              fxLayout="row"
+              fxLayoutAlign="start center">
+            <span i18n>Names</span>
+            <mat-icon *ngIf="sort === 'student' || sort === '-student'"
+                class="text-light table--list__thead__sort"
+                md-theme="default"
+                [ngClass]="{'table--list__thead__sort--reverse': sort === '-student'}">
+              arrow_drop_up
+            </mat-icon>
+          </button>
+          <button *ngIf="notesEnabled"
+              mat-button
+              class="table--list__thead__link"
+              aria-label="Notes"
+              i18n-aria-label
+              (click)="setSort('notes')"
+              title="Sort by number of notes"
+              i18n-title
+              fxLayout="row"
+              fxLayoutAlign="center center"
+              fxFlex="15">
+            <span i18n>Notes</span>
+            <mat-icon *ngIf="sort === 'notes' || sort === '-notes'"
+                class="text-light table--list__thead__sort"
+                md-theme="default"
+                [ngClass]="{'table--list__thead__sort--reverse': sort === '-notes'}">
+              arrow_drop_up
+            </mat-icon>
+          </button>
+          <button *ngIf="reportEnabled"
+              mat-button
+              class="table--list__thead__link"
+              [aria-label]="reportTitle"
+              (click)="setSort('status')"
+              title="Sort by report status"
+              fxLayout="row"
+              fxLayoutAlign="center center"
+              fxFlex="25">
+            <span>{{ reportTitle }}</span>
+            <mat-icon *ngIf="sort === 'status' || sort === '-status'"
+                class="text-light table--list__thead__sort"
+                md-theme="default"
+                [ngClass]="{'table--list__thead__sort--reverse': sort === '-status'}">
+              arrow_drop_up
+            </mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+      <div waIntersectionObserver waIntersectionThreshold="0.5">
+        <ng-container *ngFor="let workgroup of sortedWorkgroups">
+          <notebook-workgroup-grading *ngIf="isWorkgroupShown(workgroup)"
+              [workgroup]="workgroup"
+              [expand]="workVisibilityById[workgroup.workgroupId]"
+              [notebookConfig]="getNotebookConfigForWorkgroup(workgroup.workgroupId)"
+              [notesEnabled]="notesEnabled"
+              [reportEnabled]="reportEnabled"
+              [reportTitle]="reportTitle"
+              (onUpdateExpand)="onUpdateExpand($event)"
+              (waIntersectionObservee)="onIntersection(workgroup.workgroupId, $event)">
+          </notebook-workgroup-grading>
+        </ng-container>
+      </div>
+    </mat-list>
+  </div>
+</div>

@@ -11,7 +11,7 @@ import { UtilService } from '../../../../assets/wise5/services/utilService';
 })
 export class EditComponentDefaultFeedback {
   @Input()
-  authoringComponentContent: any;
+  componentContent: any;
   feedbackChanged: Subject<string> = new Subject<string>();
   feedbackChangedSubscription: Subscription;
 
@@ -30,27 +30,27 @@ export class EditComponentDefaultFeedback {
   }
 
   addDefaultFeedback(): void {
-    if (this.authoringComponentContent.defaultFeedback == null) {
-      this.authoringComponentContent.defaultFeedback = [];
+    if (this.componentContent.defaultFeedback == null) {
+      this.componentContent.defaultFeedback = [];
     }
-    this.authoringComponentContent.defaultFeedback.push('');
-    this.authoringComponentContent.showSubmitButton = true;
+    this.componentContent.defaultFeedback.push('');
+    this.componentContent.showSubmitButton = true;
     this.componentChanged();
   }
 
   moveDefaultFeedbackUp(index: number): void {
-    this.ProjectService.moveObjectUp(this.authoringComponentContent.defaultFeedback, index);
+    this.ProjectService.moveObjectUp(this.componentContent.defaultFeedback, index);
     this.componentChanged();
   }
 
   moveDefaultFeedbackDown(index: number): void {
-    this.ProjectService.moveObjectDown(this.authoringComponentContent.defaultFeedback, index);
+    this.ProjectService.moveObjectDown(this.componentContent.defaultFeedback, index);
     this.componentChanged();
   }
 
   deleteDefaultFeedback(index: number): void {
     if (confirm($localize`Are you sure you want to delete this default feedback?`)) {
-      this.authoringComponentContent.defaultFeedback.splice(index, 1);
+      this.componentContent.defaultFeedback.splice(index, 1);
       this.componentChanged();
     }
   }

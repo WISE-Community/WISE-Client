@@ -2,7 +2,6 @@
   "openResponse.addFile": "新增檔案",
   "openResponse.addMultipleAttemptScoringRule": "新增多次實驗評分規則",
   "openResponse.addNewNotification": "新增新通知",
-  "openResponse.addScoringRule": "新增評分規則",
   "openResponse.areYouSureYouWantToDeleteThisMultipleAttemptScoringRule": "您真的要刪除這條評分規則嗎？先前分數: {{previousScore}}目前分數: {{currentScore}}回饋文字: {{feedbackText}}",
   "openResponse.areYouSureYouWantToDeleteThisNotification": "您真的要刪除這條通知嗎？先前分數: {{previousScore}}目前分數: {{currentScore}}",
   "openResponse.areYouSureYouWantToDeleteThisScoringRule": "您真的要刪除這條評分規則嗎？分數: {{score}}回饋文字: {{feedbackText}}",

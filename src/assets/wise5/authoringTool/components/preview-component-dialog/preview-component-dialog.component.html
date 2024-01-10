@@ -9,8 +9,7 @@
 <mat-divider></mat-divider>
 <mat-dialog-content>
   <preview-component
-      [nodeId]="nodeId"
-      [componentId]="componentId"
+      [component]="component"
       (starterStateChangedEvent)="updateStarterState($event)">
   </preview-component>
 </mat-dialog-content>

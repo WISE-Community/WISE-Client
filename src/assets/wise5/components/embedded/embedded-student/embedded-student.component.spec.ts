@@ -3,7 +3,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { AnnotationService } from '../../../services/annotationService';
+import { Component } from '../../../common/Component';
 import { ProjectService } from '../../../services/projectService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { EmbeddedService } from '../embeddedService';
@@ -36,16 +36,12 @@ describe('EmbeddedStudentComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(EmbeddedStudent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     component = fixture.componentInstance;
-    component.nodeId = nodeId;
-    component.componentContent = TestBed.inject(EmbeddedService).createComponent();
-    component.componentContent.id = componentId;
-    component.componentContent.prompt = 'Play with the simulation.';
+    const componentContent = TestBed.inject(EmbeddedService).createComponent();
+    componentContent.id = componentId;
+    componentContent.prompt = 'Play with the simulation.';
+    component.component = new Component(componentContent, nodeId);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {

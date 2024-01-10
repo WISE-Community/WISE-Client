@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { TabulatorDataService } from '../tabulatorDataService';
@@ -16,19 +17,27 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
   dataExplorerXAxisLabel: string;
   dataExplorerYAxisLabel: string;
   dataExplorerYAxisLabels: string[];
+  selectedRowIndices: number[];
   xColumnIndex: number;
   columnNames: string[] = [];
   noneText: string = $localize`(None)`;
   tabulatorData: TabulatorData;
+  tabulatorSorters: any[];
 
-  constructor(protected ProjectService: ProjectService, private TabulatorDataService: TabulatorDataService) {
-    super(ProjectService);
+  constructor(
+    protected nodeService: NodeService,
+    protected ProjectService: ProjectService,
+    private TabulatorDataService: TabulatorDataService
+  ) {
+    super(nodeService, ProjectService);
   }
 
   ngOnInit(): void {
     super.ngOnInit();
     const studentData = this.componentState.studentData;
     this.tableData = studentData.tableData;
+    this.selectedRowIndices = studentData.selectedRowIndices ? studentData.selectedRowIndices : [];
+    this.tabulatorSorters = studentData.tabulatorSorters ? studentData.tabulatorSorters : [];
     if (studentData.isDataExplorerEnabled) {
       this.dataExplorerGraphType = studentData.dataExplorerGraphType;
       this.dataExplorerSeries = studentData.dataExplorerSeries;
@@ -38,7 +47,7 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
       this.xColumnIndex = this.calculateXColumnIndex(this.componentState);
       this.columnNames = this.calculateColumnNames(this.componentState);
     }
-    this.setupTable()
+    this.setupTable();
   }
 
   calculateXColumnIndex(componentState: any): number {
@@ -60,5 +69,12 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
       this.tableData,
       this.componentContent.globalCellSize
     );
+  }
+
+  tabulatorRendered(): void {
+    this.nodeService.broadcastDoneRenderingComponent({
+      nodeId: this.nodeId,
+      componentId: this.componentId
+    });
   }
 }

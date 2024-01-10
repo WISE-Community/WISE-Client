@@ -3,6 +3,13 @@ import * as angular from 'angular';
 import { ProjectService } from './projectService';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { UtilService } from './utilService';
+import { BranchService } from './branchService';
+import { ComponentServiceLookupService } from './componentServiceLookupService';
+import { HttpClient } from '@angular/common/http';
+import { ConfigService } from './configService';
+import { PathService } from './pathService';
+import { RandomKeyService } from './randomKeyService';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -18,12 +25,21 @@ export class TeacherProjectService extends ProjectService {
   public errorSavingProject$: Observable<any> = this.errorSavingProjectSource.asObservable();
   private notAllowedToEditThisProjectSource: Subject<any> = new Subject<any>();
   public notAllowedToEditThisProject$: Observable<any> = this.notAllowedToEditThisProjectSource.asObservable();
-  private notLoggedInProjectNotSavedSource: Subject<any> = new Subject<any>();
-  public notLoggedInProjectNotSaved$: Observable<any> = this.notLoggedInProjectNotSavedSource.asObservable();
   private projectSavedSource: Subject<any> = new Subject<any>();
   public projectSaved$: Observable<any> = this.projectSavedSource.asObservable();
   private savingProjectSource: Subject<any> = new Subject<any>();
   public savingProject$: Observable<any> = this.savingProjectSource.asObservable();
+
+  constructor(
+    protected branchService: BranchService,
+    protected componentServiceLookupService: ComponentServiceLookupService,
+    protected http: HttpClient,
+    protected configService: ConfigService,
+    protected pathService: PathService,
+    private utilService: UtilService
+  ) {
+    super(branchService, componentServiceLookupService, http, configService, pathService);
+  }
 
   getNewProjectTemplate() {
     return {
@@ -173,7 +189,7 @@ export class TeacherProjectService extends ProjectService {
     return new Promise((resolve, reject) => {
       if (projectId == null) {
         if (this.project != null) {
-          projectId = this.ConfigService.getProjectId();
+          projectId = this.configService.getProjectId();
         } else {
           resolve({});
         }
@@ -211,7 +227,7 @@ export class TeacherProjectService extends ProjectService {
    */
   registerNewProject(projectName, projectJSONString) {
     return this.http
-      .post(this.ConfigService.getConfigParam('registerNewProjectURL'), {
+      .post(this.configService.getConfigParam('registerNewProjectURL'), {
         projectName: projectName,
         projectJSONString: projectJSONString
       })
@@ -228,7 +244,7 @@ export class TeacherProjectService extends ProjectService {
    * @param component the new component
    */
   replaceComponent(nodeId, componentId, component) {
-    const components = this.getComponentsByNodeId(nodeId);
+    const components = this.getComponents(nodeId);
     for (let c = 0; c < components.length; c++) {
       if (components[c].id === componentId) {
         components[c] = component;
@@ -895,11 +911,11 @@ export class TeacherProjectService extends ProjectService {
   }
 
   getAutomatedAssessmentProjectId(): number {
-    return this.ConfigService.getConfigParam('automatedAssessmentProjectId') || -1;
+    return this.configService.getConfigParam('automatedAssessmentProjectId') || -1;
   }
 
   getSimulationProjectId(): number {
-    return this.ConfigService.getConfigParam('simulationProjectId') || -1;
+    return this.configService.getConfigParam('simulationProjectId') || -1;
   }
 
   /**
@@ -997,7 +1013,7 @@ export class TeacherProjectService extends ProjectService {
 
   addTeacherRemovalConstraint(node: any, periodId: number) {
     const lockConstraint = {
-      id: this.UtilService.generateKey(),
+      id: RandomKeyService.generate(),
       action: 'makeThisNodeNotVisitable',
       targetId: node.id,
       removalConditional: 'any',
@@ -1029,7 +1045,7 @@ export class TeacherProjectService extends ProjectService {
    * if Config.saveProjectURL or Config.projectId are undefined, does not save and returns null
    */
   saveProject(): any {
-    if (!this.ConfigService.getConfigParam('canEditProject')) {
+    if (!this.configService.getConfigParam('canEditProject')) {
       this.broadcastNotAllowedToEditThisProject();
       return null;
     }
@@ -1040,7 +1056,7 @@ export class TeacherProjectService extends ProjectService {
     );
     return this.http
       .post(
-        this.ConfigService.getConfigParam('saveProjectURL'),
+        this.configService.getConfigParam('saveProjectURL'),
         angular.toJson(this.project, false)
       )
       .toPromise()
@@ -1054,8 +1070,8 @@ export class TeacherProjectService extends ProjectService {
   }
 
   addCurrentUserToAuthors(authors: any[]): any[] {
-    let userInfo = this.ConfigService.getMyUserInfo();
-    if (this.ConfigService.isClassroomMonitor()) {
+    let userInfo = this.configService.getMyUserInfo();
+    if (this.configService.isClassroomMonitor()) {
       userInfo = {
         id: userInfo.userIds[0],
         firstName: userInfo.firstName,
@@ -1081,10 +1097,7 @@ export class TeacherProjectService extends ProjectService {
 
   handleSaveProjectResponse(response: any): any {
     if (response.status === 'error') {
-      if (response.messageCode === 'notSignedIn') {
-        this.broadcastNotLoggedInProjectNotSaved();
-        this.SessionService.forceLogOut();
-      } else if (response.messageCode === 'notAllowedToEditThisProject') {
+      if (response.messageCode === 'notAllowedToEditThisProject') {
         this.broadcastNotAllowedToEditThisProject();
       } else if (response.messageCode === 'errorSavingProject') {
         this.broadcastErrorSavingProject();
@@ -1272,7 +1285,7 @@ export class TeacherProjectService extends ProjectService {
         id: this.getNextAvailableConstraintIdForNodeId(node.id),
         action: branchPathTakenConstraint.action,
         targetId: node.id,
-        removalCriteria: this.UtilService.makeCopyOfJSONObject(
+        removalCriteria: this.utilService.makeCopyOfJSONObject(
           branchPathTakenConstraint.removalCriteria
         )
       };
@@ -1819,7 +1832,7 @@ export class TeacherProjectService extends ProjectService {
              * copy the transition logic to the node that comes
              * before it
              */
-            node.transitionLogic = this.UtilService.makeCopyOfJSONObject(
+            node.transitionLogic = this.utilService.makeCopyOfJSONObject(
               nodeToRemoveTransitionLogic
             );
 
@@ -2007,6 +2020,30 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
+   * Returns the position of the component in the node by node id and
+   * component id, 0-indexed.
+   * @param nodeId the node id
+   * @param componentId the component id
+   * @returns the component's position or -1 if nodeId or componentId are null
+   * or doesn't exist in the project.
+   */
+  getComponentPosition(nodeId: string, componentId: string): number {
+    if (nodeId != null && componentId != null) {
+      const components = this.getComponents(nodeId);
+      for (let c = 0; c < components.length; c++) {
+        const tempComponent = components[c];
+        if (tempComponent != null) {
+          const tempComponentId = tempComponent.id;
+          if (componentId === tempComponentId) {
+            return c;
+          }
+        }
+      }
+    }
+    return -1;
+  }
+
+  /**
    * Add the component to the node
    * @param node the node
    * @param component the component
@@ -2085,7 +2122,7 @@ export class TeacherProjectService extends ProjectService {
   }
 
   setMaxScoreForComponent(nodeId: string, componentId: string, maxScore: number): void {
-    const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    const component = this.getComponent(nodeId, componentId);
     if (component != null) {
       component.maxScore = maxScore;
     }
@@ -2784,10 +2821,7 @@ export class TeacherProjectService extends ProjectService {
    * @return a component id that isn't already being used in the project
    */
   getUnusedComponentId(componentIdsToSkip = []) {
-    // we want to make an id with 10 characters
-    const idLength = 10;
-
-    let newComponentId = this.UtilService.generateKey(idLength);
+    let newComponentId = RandomKeyService.generate();
 
     // check if the component id is already used in the project
     if (this.isComponentIdUsed(newComponentId)) {
@@ -2802,7 +2836,7 @@ export class TeacherProjectService extends ProjectService {
        * one that isn't already being used
        */
       while (!alreadyUsed) {
-        newComponentId = this.UtilService.generateKey(idLength);
+        newComponentId = RandomKeyService.generate();
 
         // check if the id is already being used in the project
         alreadyUsed = this.isComponentIdUsed(newComponentId);
@@ -3049,7 +3083,7 @@ export class TeacherProjectService extends ProjectService {
 
   getFeaturedProjectIcons() {
     return this.http
-      .get(this.ConfigService.getConfigParam('featuredProjectIconsURL'))
+      .get(this.configService.getConfigParam('featuredProjectIconsURL'))
       .toPromise()
       .then((data) => {
         return data;
@@ -3068,8 +3102,8 @@ export class TeacherProjectService extends ProjectService {
 
   setProjectIcon(projectIcon, isCustom) {
     return this.http
-      .post(this.ConfigService.getConfigParam('projectIconURL'), {
-        projectId: this.ConfigService.getProjectId(),
+      .post(this.configService.getConfigParam('projectIconURL'), {
+        projectId: this.configService.getProjectId(),
         projectIcon: projectIcon,
         isCustom: isCustom
       })
@@ -3086,21 +3120,11 @@ export class TeacherProjectService extends ProjectService {
         stepNodeDetails.push({
           nodeId: nodeId,
           order: objectWithOrder.order,
-          nodePositionAndTitle: this.getNodePositionAndTitleByNodeId(nodeId)
+          nodePositionAndTitle: this.getNodePositionAndTitle(nodeId)
         });
       }
     });
     return stepNodeDetails.sort(this.sortByOrder);
-  }
-
-  getComponents(): any[] {
-    const components = [];
-    for (const node of this.applicationNodes) {
-      for (const component of node.components) {
-        components.push(component);
-      }
-    }
-    return components;
   }
 
   sortByOrder(a: any, b: any): number {
@@ -3117,10 +3141,6 @@ export class TeacherProjectService extends ProjectService {
 
   broadcastNotAllowedToEditThisProject() {
     this.notAllowedToEditThisProjectSource.next();
-  }
-
-  broadcastNotLoggedInProjectNotSaved() {
-    this.notLoggedInProjectNotSavedSource.next();
   }
 
   broadcastProjectSaved() {

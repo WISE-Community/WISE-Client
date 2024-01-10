@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
-import { UtilService } from './utilService';
 import { Notification } from '../../../app/domain/notification';
 import { Observable, Subject } from 'rxjs';
 import { AnnotationService } from './annotationService';
 import { DismissAmbientNotificationDialogComponent } from '../vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { RandomKeyService } from './randomKeyService';
 
 @Injectable()
 export class NotificationService {
@@ -28,8 +28,7 @@ export class NotificationService {
     protected dialog: MatDialog,
     protected http: HttpClient,
     protected ConfigService: ConfigService,
-    protected ProjectService: ProjectService,
-    protected UtilService: UtilService
+    protected ProjectService: ProjectService
   ) {}
 
   /**
@@ -57,8 +56,8 @@ export class NotificationService {
     groupId = null
   ): Notification {
     const nodePosition = this.ProjectService.getNodePositionById(nodeId);
-    const nodePositionAndTitle = this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    const nodePositionAndTitle = this.ProjectService.getNodePositionAndTitle(nodeId);
+    const component = this.ProjectService.getComponent(nodeId, componentId);
     let componentType = null;
     if (component != null) {
       componentType = component.type;
@@ -172,7 +171,7 @@ export class NotificationService {
 
   setNotificationNodePositionAndTitle(notification: Notification) {
     notification.nodePosition = this.ProjectService.getNodePositionById(notification.nodeId);
-    notification.nodePositionAndTitle = this.ProjectService.getNodePositionAndTitleByNodeId(
+    notification.nodePositionAndTitle = this.ProjectService.getNodePositionAndTitle(
       notification.nodeId
     );
   }
@@ -183,7 +182,7 @@ export class NotificationService {
       const fromWorkgroupId = this.ConfigService.getWorkgroupId();
       const runId = this.ConfigService.getRunId();
       const periodId = this.ConfigService.getPeriodId();
-      const notificationGroupId = runId + '_' + this.UtilService.generateKey(10); // links student and teacher notifications together
+      const notificationGroupId = runId + '_' + RandomKeyService.generate(); // links student and teacher notifications together
       const notificationData: any = {};
       if (notificationForScore.isAmbient) {
         notificationData.isAmbient = true;

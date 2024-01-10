@@ -69,8 +69,8 @@ class ChooseStructureLocationController {
     });
   }
 
-  getNodeTitleByNodeId(nodeId: string): string {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   getNodePositionById(nodeId: string): string {

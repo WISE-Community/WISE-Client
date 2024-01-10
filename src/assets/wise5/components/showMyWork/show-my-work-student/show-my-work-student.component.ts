@@ -49,7 +49,7 @@ export class ShowMyWorkStudentComponent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.showWorkComponentContent = this.projectService.getComponentByNodeIdAndComponentId(
+    this.showWorkComponentContent = this.projectService.getComponent(
       this.componentContent.showWorkNodeId,
       this.componentContent.showWorkComponentId
     );

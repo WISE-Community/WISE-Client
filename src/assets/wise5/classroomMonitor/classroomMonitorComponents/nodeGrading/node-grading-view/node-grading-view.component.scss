@@ -1,0 +1,35 @@
+.node-grading {
+  .component-select {
+    margin-right: 16px !important;
+  }
+
+  .content-head-label {
+    font-size: 50%;
+  }
+
+  .user-list {
+    &.mat-list-base {
+      .mat-list-item .mat-list-item-content {
+        padding: 0 8px;
+      }
+
+      workgroup-item {
+        .mat-list-item .mat-list-item-content {
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  workgroup-select-autocomplete {
+    width: 100%;
+  }
+
+  .mat-list-base {
+    .mat-list-item.user-list-controls {
+      height: auto;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+  }
+}

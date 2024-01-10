@@ -39,39 +39,39 @@ export class AudioOscillatorAuthoring extends ComponentAuthoring {
   }
 
   populateCheckedOscillatorTypes(): void {
-    this.sineChecked = this.authoringComponentContent.oscillatorTypes.includes('sine');
-    this.squareChecked = this.authoringComponentContent.oscillatorTypes.includes('square');
-    this.triangleChecked = this.authoringComponentContent.oscillatorTypes.includes('triangle');
-    this.sawtoothChecked = this.authoringComponentContent.oscillatorTypes.includes('sawtooth');
+    this.sineChecked = this.componentContent.oscillatorTypes.includes('sine');
+    this.squareChecked = this.componentContent.oscillatorTypes.includes('square');
+    this.triangleChecked = this.componentContent.oscillatorTypes.includes('triangle');
+    this.sawtoothChecked = this.componentContent.oscillatorTypes.includes('sawtooth');
   }
 
   initializeStartingAmplitude(): void {
-    this.authoringComponentContent.startingAmplitude ??= this.AudioOscillatorService.defaultStartingAmplitude;
+    this.componentContent.startingAmplitude ??= this.AudioOscillatorService.defaultStartingAmplitude;
   }
 
   showFrequencyInputChanged(): void {
-    this.authoringComponentContent.canStudentEditFrequency = false;
+    this.componentContent.canStudentEditFrequency = false;
     this.componentChanged();
   }
 
   showAmplitudeInputChanged(): void {
-    this.authoringComponentContent.canStudentEditAmplitude = false;
+    this.componentContent.canStudentEditAmplitude = false;
     this.componentChanged();
   }
 
   oscillatorTypeClicked(): void {
-    this.authoringComponentContent.oscillatorTypes = [];
+    this.componentContent.oscillatorTypes = [];
     if (this.sineChecked) {
-      this.authoringComponentContent.oscillatorTypes.push('sine');
+      this.componentContent.oscillatorTypes.push('sine');
     }
     if (this.squareChecked) {
-      this.authoringComponentContent.oscillatorTypes.push('square');
+      this.componentContent.oscillatorTypes.push('square');
     }
     if (this.triangleChecked) {
-      this.authoringComponentContent.oscillatorTypes.push('triangle');
+      this.componentContent.oscillatorTypes.push('triangle');
     }
     if (this.sawtoothChecked) {
-      this.authoringComponentContent.oscillatorTypes.push('sawtooth');
+      this.componentContent.oscillatorTypes.push('sawtooth');
     }
     this.componentChanged();
   }

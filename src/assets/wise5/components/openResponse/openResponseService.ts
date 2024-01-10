@@ -2,16 +2,12 @@
 
 import { Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
-import { UtilService } from '../../services/utilService';
 import { OpenResponseCompletionCriteriaService } from './openResponseCompletionCriteriaService';
 
 @Injectable()
 export class OpenResponseService extends ComponentService {
-  constructor(
-    private completionCriteriaService: OpenResponseCompletionCriteriaService,
-    protected UtilService: UtilService
-  ) {
-    super(UtilService);
+  constructor(private completionCriteriaService: OpenResponseCompletionCriteriaService) {
+    super();
   }
 
   getComponentTypeLabel(): string {

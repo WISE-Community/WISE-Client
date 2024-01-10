@@ -65,6 +65,7 @@ describe('TeacherProjectService', () => {
   shouldBeAbleToInsertAStepNodeInsideAGroupNode();
   shouldBeAbleToInsertAGroupNodeInsideAGroupNode();
   shouldNotBeAbleToInsertAStepNodeInsideAStepNode();
+  getComponentPosition();
   getUniqueAuthors();
   addCurrentUserToAuthors_CM_shouldAddUserInfo();
   getNodeIds();
@@ -166,9 +167,9 @@ function testDeleteComponent() {
   describe('deleteComponent', () => {
     it('should delete the component from the node', () => {
       service.setProject(demoProjectJSON);
-      expect(service.getComponentByNodeIdAndComponentId('node1', 'zh4h1urdys')).not.toBeNull();
+      expect(service.getComponent('node1', 'zh4h1urdys')).not.toBeNull();
       service.deleteComponent('node1', 'zh4h1urdys');
-      expect(service.getComponentByNodeIdAndComponentId('node1', 'zh4h1urdys')).toBeNull();
+      expect(service.getComponent('node1', 'zh4h1urdys')).toBeNull();
     });
   });
 }
@@ -479,6 +480,24 @@ function insertNodeAfterInTransitions() {
   });
 }
 
+function getComponentPosition() {
+  it('should get the component position by node id and comonent id', () => {
+    service.setProject(scootersProjectJSON);
+    const nullNodeIdResult = service.getComponentPosition(null, '57lxhwfp5r');
+    expect(nullNodeIdResult).toEqual(-1);
+    const nullComponentIdResult = service.getComponentPosition('node13', null);
+    expect(nullComponentIdResult).toEqual(-1);
+    const nodeIdDNEResult = service.getComponentPosition('badNodeId', '57lxhwfp5r');
+    expect(nodeIdDNEResult).toEqual(-1);
+    const componentIdDNEResult = service.getComponentPosition('node13', 'badComponentId');
+    expect(componentIdDNEResult).toEqual(-1);
+    const componentExists = service.getComponentPosition('node13', '57lxhwfp5r');
+    expect(componentExists).toEqual(0);
+    const componentExists2 = service.getComponentPosition('node9', 'mnzx68ix8h');
+    expect(componentExists2).toEqual(1);
+  });
+}
+
 function getUniqueAuthors() {
   describe('getUniqueAuthors', () => {
     it('should get unique authors when there are no authors', () => {
@@ -613,12 +632,6 @@ function shouldHandleSaveProjectResponse() {
   it('should broadcast project saved', () => {
     shouldHandleSaveProjectResponseSuccessHelper('broadcastProjectSaved');
   });
-  it('should broadcast not logged in project not saved', () => {
-    shouldHandleSaveProjectResponseErrorHelper(
-      'notSignedIn',
-      'broadcastNotLoggedInProjectNotSaved'
-    );
-  });
   it('should broadcast not allowed to edit this project', () => {
     shouldHandleSaveProjectResponseErrorHelper(
       'notAllowedToEditThisProject',
@@ -697,7 +710,7 @@ function getStepNodesDetailsInOrder() {
       spyOn(service, 'isApplicationNode').and.callFake((nodeId: string): boolean => {
         return nodeId.startsWith('node');
       });
-      spyOn(service, 'getNodePositionAndTitleByNodeId').and.callFake((nodeId: string): string => {
+      spyOn(service, 'getNodePositionAndTitle').and.callFake((nodeId: string): string => {
         return nodeIdToPositionAndTitle[nodeId];
       });
       const stepNodesDetailsInOrder = service.getStepNodesDetailsInOrder();

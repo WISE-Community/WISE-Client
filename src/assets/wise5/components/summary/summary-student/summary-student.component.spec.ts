@@ -5,11 +5,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { SummaryStudent } from './summary-student.component';
+import { ComponentContent } from '../../../common/ComponentContent';
+import { Component } from '../../../common/Component';
 
 let component: SummaryStudent;
 const componentId = 'component1';
@@ -31,19 +32,14 @@ describe('SummaryStudentComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(SummaryStudent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
-    spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     component = fixture.componentInstance;
-    component.nodeId = nodeId;
-    component.componentContent = {
+    const componentContent = {
       id: componentId,
       prompt: 'View the the graph of the choices your classmates chose.',
       showSaveButton: true,
       showSubmitButton: true
-    };
+    } as ComponentContent;
+    component.component = new Component(componentContent, nodeId);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {
@@ -100,9 +96,9 @@ function getOtherPrompt() {
   describe('getOtherPrompt', () => {
     it('should get other prompt', () => {
       const prompt = 'Choose your favorite ice cream flavor.';
-      spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({
+      spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
         prompt: prompt
-      });
+      } as ComponentContent);
       expect(component.getOtherPrompt('node2', 'component2')).toEqual(prompt);
     });
   });

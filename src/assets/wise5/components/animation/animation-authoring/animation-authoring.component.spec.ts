@@ -47,10 +47,9 @@ describe('AnimationAuthoring', () => {
     fixture = TestBed.createComponent(AnimationAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue(JSON.parse(JSON.stringify(componentContent)));
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
+      JSON.parse(JSON.stringify(componentContent))
+    );
     spyOn(component, 'componentChanged');
     component.componentContent = JSON.parse(JSON.stringify(componentContent));
     fixture.detectChanges();
@@ -84,7 +83,7 @@ function createComponentContent() {
 function shouldAddAnAnimationObject() {
   it('should add an animation object', () => {
     component.addObject();
-    expect(component.authoringComponentContent.objects.length).toEqual(1);
+    expect(component.componentContent.objects.length).toEqual(1);
   });
 }
 

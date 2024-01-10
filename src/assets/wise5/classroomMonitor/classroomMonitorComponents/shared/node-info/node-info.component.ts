@@ -5,6 +5,7 @@ import { ComponentServiceLookupService } from '../../../../services/componentSer
 import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { Component as WISEComponent } from '../../../../common/Component';
 
 @Component({
   selector: 'node-info',
@@ -57,6 +58,10 @@ export class NodeInfoComponent {
       if (component.isStudentWorkGenerated) {
         component.assessmentItemIndex = assessmentItemIndex++;
       }
+      component.component = new WISEComponent(
+        this.projectService.injectAssetPaths(component),
+        this.nodeId
+      );
     }
   }
 

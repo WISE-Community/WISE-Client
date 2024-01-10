@@ -40,6 +40,7 @@
                 "output": "/assets/"
               },
               "src/favicon.ico",
+              { "glob": "**/*", "input": "node_modules/mathjax", "output": "/mathjax/" },
               { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" }
             ],
             "styles": [

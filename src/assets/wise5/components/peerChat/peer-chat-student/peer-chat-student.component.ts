@@ -11,8 +11,12 @@ import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { StudentWebSocketService } from '../../../services/studentWebSocketService';
 import { UtilService } from '../../../services/utilService';
+import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
+import { QuestionBank } from '../peer-chat-question-bank/QuestionBank';
+import { QuestionBankContent } from '../peer-chat-question-bank/QuestionBankContent';
+import { QuestionBankRule } from '../peer-chat-question-bank/QuestionBankRule';
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
@@ -23,6 +27,8 @@ import { PeerGroup } from '../PeerGroup';
   styleUrls: ['./peer-chat-student.component.scss']
 })
 export class PeerChatStudentComponent extends ComponentStudent {
+  displayedQuestionBankRule: QuestionBankRule;
+  dynamicPrompt: FeedbackRule;
   isPeerChatWorkgroupsResponseReceived: boolean;
   isPeerChatWorkgroupsAvailable: boolean;
   myWorkgroupId: number;
@@ -31,6 +37,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   peerChatWorkgroupInfos: any = {};
   peerGroup: PeerGroup;
   peerGroupingTag: string;
+  questionBankContent: QuestionBankContent;
   requestTimeout: number = 10000;
   response: string;
 
@@ -68,6 +75,13 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.peerGroupingTag = this.componentContent.peerGroupingTag;
     this.requestChatWorkgroups();
     this.registerStudentWorkReceivedListener();
+    if (this.component.content.questionBank != null) {
+      this.questionBankContent = new QuestionBankContent(
+        this.component.nodeId,
+        this.component.id,
+        new QuestionBank(this.component.content.questionBank)
+      );
+    }
   }
 
   private registerStudentWorkReceivedListener(): void {
@@ -156,11 +170,17 @@ export class PeerChatStudentComponent extends ComponentStudent {
   }
 
   createComponentState(action: string): any {
-    const componentState: any = this.nodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     componentState.studentData = {
       response: this.response,
       submitCounter: this.submitCounter
     };
+    if (this.dynamicPrompt != null) {
+      componentState.studentData.dynamicPrompt = this.dynamicPrompt;
+    }
+    if (this.displayedQuestionBankRule != null) {
+      componentState.studentData.questionBank = this.displayedQuestionBankRule;
+    }
     componentState.componentType = 'PeerChat';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
@@ -244,5 +264,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   private isTeacherWorkgroupId(workgroupId: number): boolean {
     return this.configService.getTeacherWorkgroupIds().includes(workgroupId);
+  }
+
+  onDynamicPromptChanged(feedbackRule: FeedbackRule): void {
+    this.dynamicPrompt = feedbackRule;
   }
 }

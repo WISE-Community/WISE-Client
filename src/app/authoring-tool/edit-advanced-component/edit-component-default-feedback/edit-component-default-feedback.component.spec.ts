@@ -34,7 +34,7 @@ describe('EditComponentDefaultFeedback', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditComponentDefaultFeedback);
     component = fixture.componentInstance;
-    component.authoringComponentContent = {
+    component.componentContent = {
       defaultFeedback: [feedback1, feedback2, feedback3]
     };
     fixture.detectChanges();
@@ -49,15 +49,15 @@ describe('EditComponentDefaultFeedback', () => {
 function addDefaultFeedback() {
   describe('addDefaultFeedback', () => {
     it('should add a default feedback when there is no existing default feedback', () => {
-      delete component.authoringComponentContent.defaultFeedback;
-      expect(component.authoringComponentContent.defaultFeedback).toBeUndefined();
+      delete component.componentContent.defaultFeedback;
+      expect(component.componentContent.defaultFeedback).toBeUndefined();
       component.addDefaultFeedback();
-      expect(component.authoringComponentContent.defaultFeedback).not.toBeNull();
-      expectArrayEquals(component.authoringComponentContent.defaultFeedback, ['']);
+      expect(component.componentContent.defaultFeedback).not.toBeNull();
+      expectArrayEquals(component.componentContent.defaultFeedback, ['']);
     });
     it('should add a default feedback when there is existing default feedback', () => {
       component.addDefaultFeedback();
-      expectArrayEquals(component.authoringComponentContent.defaultFeedback, [
+      expectArrayEquals(component.componentContent.defaultFeedback, [
         feedback1,
         feedback2,
         feedback3,
@@ -71,7 +71,7 @@ function moveDefaultFeedbackUp() {
   describe('moveDefaultFeedbackUp', () => {
     it('should move a default feedback up', () => {
       component.moveDefaultFeedbackUp(1);
-      expectArrayEquals(component.authoringComponentContent.defaultFeedback, [
+      expectArrayEquals(component.componentContent.defaultFeedback, [
         feedback2,
         feedback1,
         feedback3
@@ -84,7 +84,7 @@ function moveDefaultFeedbackDown() {
   describe('moveDefaultFeedbackUp', () => {
     it('should move a default feedback down', () => {
       component.moveDefaultFeedbackDown(1);
-      expectArrayEquals(component.authoringComponentContent.defaultFeedback, [
+      expectArrayEquals(component.componentContent.defaultFeedback, [
         feedback1,
         feedback3,
         feedback2
@@ -98,10 +98,7 @@ function deleteDefaultFeedback() {
     it('should delete a default feedback', () => {
       spyOn(window, 'confirm').and.returnValue(true);
       component.deleteDefaultFeedback(1);
-      expectArrayEquals(component.authoringComponentContent.defaultFeedback, [
-        feedback1,
-        feedback3
-      ]);
+      expectArrayEquals(component.componentContent.defaultFeedback, [feedback1, feedback3]);
     });
   });
 }

@@ -23,7 +23,7 @@ export class MockConfigService {}
 
 let component: SummaryAuthoring;
 let fixture: ComponentFixture<SummaryAuthoring>;
-let getComponentByNodeIdAndComponentIdSpy;
+let getComponentSpy;
 
 describe('SummaryAuthoringComponent', () => {
   beforeEach(() => {
@@ -55,11 +55,8 @@ describe('SummaryAuthoringComponent', () => {
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
     component.componentContent = JSON.parse(JSON.stringify(componentContent));
-    getComponentByNodeIdAndComponentIdSpy = spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    );
-    getComponentByNodeIdAndComponentIdSpy.and.returnValue(componentContent);
+    getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
+    getComponentSpy.and.returnValue(componentContent);
     spyOn(component, 'componentChanged');
     fixture.detectChanges();
   });
@@ -116,10 +113,10 @@ function checkThatTheComponentIdIsNotAutomaticallySetWhenNoComponents() {
   it(`should check that the component id is not automatically set when the node id is changed if
   there are no allowed components`, () => {
     const components = [{ id: '4ty89q3hj0', type: 'HTML' }];
-    expect(component.authoringComponentContent.summaryComponentId).toEqual('zptq1ndv4h');
-    spyOn(component, 'getComponentsByNodeId').and.returnValue(components);
+    expect(component.componentContent.summaryComponentId).toEqual('zptq1ndv4h');
+    spyOn(component, 'getComponents').and.returnValue(components);
     component.summaryNodeIdChanged();
-    expect(component.authoringComponentContent.summaryComponentId).toBe(null);
+    expect(component.componentContent.summaryComponentId).toBe(null);
   });
 }
 
@@ -130,10 +127,10 @@ function checkThatTheComponentIdIsNotAutomaticallySetWhenMultipleComponents() {
       { id: '34j45u9w4j', type: 'OpenResponse' },
       { id: 'dghm45su45', type: 'MultipleChoice' }
     ];
-    expect(component.authoringComponentContent.summaryComponentId).toEqual('zptq1ndv4h');
-    spyOn(component, 'getComponentsByNodeId').and.returnValue(components);
+    expect(component.componentContent.summaryComponentId).toEqual('zptq1ndv4h');
+    spyOn(component, 'getComponents').and.returnValue(components);
     component.summaryNodeIdChanged();
-    expect(component.authoringComponentContent.summaryComponentId).toBe(null);
+    expect(component.componentContent.summaryComponentId).toBe(null);
   });
 }
 
@@ -144,10 +141,10 @@ function checkThatTheComponentIdIsAutomaticallySet() {
       { id: '34j45u9w4j', type: 'HTML' },
       { id: 'dghm45su45', type: 'MultipleChoice' }
     ];
-    expect(component.authoringComponentContent.summaryComponentId).toEqual('zptq1ndv4h');
-    spyOn(component, 'getComponentsByNodeId').and.returnValue(components);
+    expect(component.componentContent.summaryComponentId).toEqual('zptq1ndv4h');
+    spyOn(component, 'getComponents').and.returnValue(components);
     component.summaryNodeIdChanged();
-    expect(component.authoringComponentContent.summaryComponentId).toBe('dghm45su45');
+    expect(component.componentContent.summaryComponentId).toBe('dghm45su45');
   });
 }
 
@@ -158,7 +155,7 @@ function checkIfStudentDataTypeIsAvailableForAComponentWhenTrue() {
       prompt: 'This is hxh43zj46j',
       type: 'OpenResponse'
     };
-    getComponentByNodeIdAndComponentIdSpy.and.returnValue(componentContent);
+    getComponentSpy.and.returnValue(componentContent);
     const isAvailable = component.isStudentDataTypeAvailableForComponent(
       'node1',
       'hxh43zj46j',
@@ -175,7 +172,7 @@ function checkIfStudentDataTypeIsAvailableForAComponentWhenFalse() {
       prompt: 'This is hxh43zj46j',
       type: 'OpenResponse'
     };
-    getComponentByNodeIdAndComponentIdSpy.and.returnValue(componentContent);
+    getComponentSpy.and.returnValue(componentContent);
     const isAvailable = component.isStudentDataTypeAvailableForComponent(
       'node1',
       'hxh43zj46j',

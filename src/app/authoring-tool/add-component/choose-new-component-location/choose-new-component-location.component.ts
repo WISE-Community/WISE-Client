@@ -23,7 +23,7 @@ export class ChooseNewComponentLocation {
 
   ngOnInit() {
     this.nodeId = this.TeacherDataService.getCurrentNodeId();
-    this.components = this.TeacherProjectService.getComponentsByNodeId(this.nodeId);
+    this.components = this.TeacherProjectService.getComponents(this.nodeId);
   }
 
   getComponentTypeLabel(componentType) {

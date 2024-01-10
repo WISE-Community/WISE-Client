@@ -2,14 +2,12 @@
   <div class="node-content mat-elevation-z1"
       style="border-color: {{nodeStatus?.icon?.color}}; position: relative;"
       fxLayout="row wrap">
-    <div *ngIf="isShowNodeRubric()"
+    <div *ngIf="showRubric"
         class="node-content__rubric"
         fxLayout="row"
         fxLayoutAlign="center center">
       <help-icon
-          [content]="replaceAssetPaths(rubric)"
-          [pulse]="idToIsPulsing[node.id]"
-          (click)="stopPulsing(node.id)"
+          [content]="rubric"
           label="Step Info"
           i18n-label
           icon="info">
@@ -20,16 +18,6 @@
         class="component"
         fxFlex="100"
         fxFlex.gt-sm="{{component.componentWidth ? component.componentWidth : 100}}">
-      <div *ngIf="isShowComponentRubric(component)" class="component__rubric">
-        <help-icon
-            [content]="replaceAssetPaths(component.rubric)"
-            [pulse]="idToIsPulsing[component.id]"
-            (click)="stopPulsing(component.id)"
-            label="Teaching Tips"
-            i18n-label
-            icon="info">
-        </help-icon>
-      </div>
       <component
           [nodeId]="node.id"
           [componentId]="component.id"

@@ -10,26 +10,11 @@ import { DialogWithCloseComponent } from '../../../../directives/dialog-with-clo
   templateUrl: 'help-icon.component.html'
 })
 export class HelpIconComponent {
-  @Input()
-  color: string;
-
-  @Input()
-  customClass: string;
-
-  @Input()
-  icon: string;
-
-  @Input()
-  iconClass: string;
-
-  @Input()
-  label: string;
-
-  @Input()
-  pulse: boolean;
-
-  @Input()
-  content: string;
+  @Input() content: string;
+  @Input() icon: string;
+  @Input() iconClass: string;
+  @Input() label: string;
+  pulse: boolean = true;
 
   constructor(public dialog: MatDialog) {}
 
@@ -42,5 +27,6 @@ export class HelpIconComponent {
       },
       panelClass: 'dialog-lg'
     });
+    this.pulse = false;
   }
 }

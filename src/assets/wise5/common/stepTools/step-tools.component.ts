@@ -8,14 +8,13 @@ import { Node } from '../Node';
 import { ConfigService } from '../../services/configService';
 
 @Component({
+  selector: 'step-tools',
   styleUrls: ['step-tools.component.scss'],
   templateUrl: 'step-tools.component.html',
   encapsulation: ViewEncapsulation.None
 })
 export class StepToolsComponent {
-  @Input()
-  onlyShowStepsWithWork: boolean = false;
-
+  @Input() showOnlyStepsWithWork: boolean = false;
   icons: any;
   nextId: any;
   node: Node;
@@ -58,7 +57,7 @@ export class StepToolsComponent {
 
   calculateNodeIds() {
     this.nodeIds = Object.keys(this.ProjectService.idToOrder);
-    if (this.onlyShowStepsWithWork) {
+    if (this.showOnlyStepsWithWork) {
       this.nodeIds = this.nodeIds.filter((nodeId) => {
         return this.isGroupNode(nodeId) || this.ProjectService.nodeHasWork(nodeId);
       });
@@ -102,8 +101,8 @@ export class StepToolsComponent {
     }
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string) {
-    return this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.ProjectService.getNodePositionAndTitle(nodeId);
   }
 
   isGroupNode(nodeId: string) {

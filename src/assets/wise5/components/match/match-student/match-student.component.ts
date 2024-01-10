@@ -19,6 +19,7 @@ import {
   moveItemInArray,
   transferArrayItem
 } from '@angular/cdk/drag-drop';
+import { RandomKeyService } from '../../../services/randomKeyService';
 
 @Component({
   selector: 'match-student',
@@ -87,7 +88,7 @@ export class MatchStudent extends ComponentStudent {
       this.MatchService.componentStateHasStudentWork(this.componentState, this.componentContent)
     ) {
       this.setStudentWork(this.componentState);
-    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    } else if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
     }
     if (this.componentState != null && this.componentState.isSubmit) {
@@ -236,10 +237,7 @@ export class MatchStudent extends ComponentStudent {
     }
   }
 
-  setGeneralComponentStatus(
-    isCorrect: boolean,
-    isSubmitDirty: boolean
-  ): void {
+  setGeneralComponentStatus(isCorrect: boolean, isSubmitDirty: boolean): void {
     this.isCorrect = isCorrect;
     this.setIsSubmitDirty(isSubmitDirty);
   }
@@ -283,10 +281,7 @@ export class MatchStudent extends ComponentStudent {
 
   setIsSubmitDirty(isSubmitDirty: boolean): void {
     this.isSubmitDirty = isSubmitDirty;
-    this.StudentDataService.broadcastComponentSubmitDirty({
-      componentId: this.componentId,
-      isDirty: isSubmitDirty
-    });
+    this.emitComponentSubmitDirty(isSubmitDirty);
   }
 
   getBucketIds(): string[] {
@@ -577,14 +572,14 @@ export class MatchStudent extends ComponentStudent {
   }
 
   createComponentStateObject(action: string): any {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     componentState.componentType = 'Match';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
     componentState.isSubmit = this.isSubmit;
     const studentData: any = {
       buckets: this.cleanBuckets(
-        this.ProjectService.getComponentByNodeIdAndComponentId(this.nodeId, this.componentId),
+        this.ProjectService.getComponent(this.nodeId, this.componentId),
         this.getDeepCopyOfBuckets()
       ),
       submitCounter: this.submitCounter
@@ -684,7 +679,7 @@ export class MatchStudent extends ComponentStudent {
         this.mergeBucket(mergedBuckets, bucket);
       }
     }
-    const mergedComponentState: any = this.NodeService.createNewComponentState();
+    const mergedComponentState: any = this.createNewComponentState();
     mergedComponentState.studentData = {
       buckets: mergedBuckets
     };
@@ -739,7 +734,7 @@ export class MatchStudent extends ComponentStudent {
       .subscribe((result) => {
         if (result) {
           const newChoice = {
-            id: this.UtilService.generateKey(10),
+            id: RandomKeyService.generate(),
             value: result,
             type: 'choice',
             studentCreated: true

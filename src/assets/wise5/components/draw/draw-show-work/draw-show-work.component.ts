@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { DrawService } from '../drawService';
@@ -13,8 +14,12 @@ export class DrawShowWorkComponent extends ComponentShowWorkDirective {
   drawingToolId: string;
   drawingTool: any;
 
-  constructor(private DrawService: DrawService, protected ProjectService: ProjectService) {
-    super(ProjectService);
+  constructor(
+    private DrawService: DrawService,
+    protected nodeService: NodeService,
+    protected ProjectService: ProjectService
+  ) {
+    super(nodeService, ProjectService);
   }
 
   ngOnInit(): void {

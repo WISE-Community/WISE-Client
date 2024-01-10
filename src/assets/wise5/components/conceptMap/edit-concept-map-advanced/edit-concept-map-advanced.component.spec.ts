@@ -22,6 +22,7 @@ import { EditConnectedComponentsComponent } from '../../../../../app/authoring-t
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ConceptMapContent } from '../ConceptMapContent';
 import { EditConceptMapAdvancedComponent } from './edit-concept-map-advanced.component';
 
 let component: EditConceptMapAdvancedComponent;
@@ -62,12 +63,9 @@ describe('EditConceptMapAdvancedComponent', () => {
   });
 
   beforeEach(() => {
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue({
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue({
       rules: []
-    });
+    } as ConceptMapContent);
     spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(true);
     fixture = TestBed.createComponent(EditConceptMapAdvancedComponent);
     component = fixture.componentInstance;
@@ -111,7 +109,7 @@ function createRuleObject(
 function ruleTypeChanged() {
   describe('ruleTypeChanged', () => {
     it('should handle rule type changed to node', () => {
-      component.authoringComponentContent.rules = [rule1];
+      component.componentContent.rules = [rule1];
       rule1.type = 'node';
       component.ruleTypeChanged(0);
       expect(rule1.linkLabel).toBeUndefined();
@@ -123,9 +121,9 @@ function ruleTypeChanged() {
 function addRule() {
   describe('addRule', () => {
     it('should add a rule', () => {
-      expect(component.authoringComponentContent.rules.length).toEqual(0);
+      expect(component.componentContent.rules.length).toEqual(0);
       component.addRule();
-      expect(component.authoringComponentContent.rules.length).toEqual(1);
+      expect(component.componentContent.rules.length).toEqual(1);
     });
   });
 }
@@ -133,10 +131,10 @@ function addRule() {
 function ruleDeleteButtonClicked() {
   describe('ruleDeleteButtonClicked', () => {
     it('should delete a rule', () => {
-      component.authoringComponentContent.rules = [rule1];
+      component.componentContent.rules = [rule1];
       spyOn(window, 'confirm').and.returnValue(true);
       component.ruleDeleteButtonClicked(0);
-      expect(component.authoringComponentContent.rules.length).toEqual(0);
+      expect(component.componentContent.rules.length).toEqual(0);
     });
   });
 }

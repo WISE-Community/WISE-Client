@@ -2,7 +2,7 @@ import { NodeService } from '../../../assets/wise5/services/nodeService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 export class EditAdvancedComponentAngularJSController {
-  authoringComponentContent: any;
+  componentContent: any;
   componentId: string;
   nodeId: string;
   allowedConnectedComponentTypes: string[] = [];
@@ -16,10 +16,7 @@ export class EditAdvancedComponentAngularJSController {
   ) {}
 
   $onInit(): void {
-    this.authoringComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
+    this.componentContent = this.ProjectService.getComponent(this.nodeId, this.componentId);
     this.idToOrder = this.ProjectService.idToOrder;
   }
 
@@ -29,11 +26,11 @@ export class EditAdvancedComponentAngularJSController {
 
   setShowSubmitButtonValue(show: boolean): void {
     if (show == null || show == false) {
-      this.authoringComponentContent.showSaveButton = false;
-      this.authoringComponentContent.showSubmitButton = false;
+      this.componentContent.showSaveButton = false;
+      this.componentContent.showSubmitButton = false;
     } else {
-      this.authoringComponentContent.showSaveButton = true;
-      this.authoringComponentContent.showSubmitButton = true;
+      this.componentContent.showSaveButton = true;
+      this.componentContent.showSubmitButton = true;
     }
     this.NodeService.broadcastComponentShowSubmitButtonValueChanged({
       nodeId: this.nodeId,
@@ -43,7 +40,7 @@ export class EditAdvancedComponentAngularJSController {
   }
 
   connectedComponentsChanged(connectedComponents: any[]): void {
-    this.authoringComponentContent.connectedComponents = connectedComponents;
+    this.componentContent.connectedComponents = connectedComponents;
     this.componentChanged();
   }
 

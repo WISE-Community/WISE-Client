@@ -1,7 +1,28 @@
 <mat-card class="standalone__content standalone__content--sm mat-elevation-z4">
-  <mat-card-content i18n>Your Google User ID was not found in WISE.</mat-card-content>
+  <mat-card-content class="center">
+    <h2 class="standalone__title accent" i18n>Sign in With Google</h2>
+    <p class="mat-body-2 warn" i18n>Sorry, your Google User ID was not found in WISE.</p>
+  </mat-card-content>
   <mat-divider></mat-divider>
-  <mat-card-actions>
-    <p i18n>New to WISE? <a routerLink="/join">Join for free!</a></p>
+  <mat-card-actions class="center">
+    <p i18n>New to WISE? Join for free!</p>
+    <p>
+      <button class="button--social-login button--google"
+          color="accent" mat-flat-button
+          (click)="registerStudentWithGoogle()">
+        <img src="assets/img/icons/google-logo.svg" i18n-alt alt="Google logo" />
+        <ng-container i18n>Sign up as a Student</ng-container>
+      </button>
+    </p>
+    <p class="mat-title">- <span i18>or</span> -</p>
+    <p>
+      <button class="button--social-login button--google"
+          color="accent"
+          mat-flat-button
+          (click)="registerTeacherWithGoogle()">
+        <img src="assets/img/icons/google-logo.svg" i18n-alt alt="Google logo" />
+        <ng-container i18n>Sign up as a Teacher</ng-container>
+      </button>
+    </p>
   </mat-card-actions>
 </mat-card>

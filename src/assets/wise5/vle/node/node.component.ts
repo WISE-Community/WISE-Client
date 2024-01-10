@@ -24,16 +24,14 @@ export class NodeComponent implements OnInit {
   dirtyComponentIds: any = [];
   dirtySubmitComponentIds: any = [];
   endedAndLockedMessage: string;
-  idToIsPulsing: any = {};
   isDisabled: boolean;
-  mode: any;
   node: Node;
   nodeContent: any;
   nodeId: string;
   nodeStatus: any;
-  rubric: any;
-  rubricTour: any;
+  rubric: string;
   latestComponentState: ComponentState;
+  showRubric: boolean;
   submit: boolean = false;
   subscriptions: Subscription = new Subscription();
   teacherWorkgroupId: number;
@@ -71,8 +69,6 @@ export class NodeComponent implements OnInit {
     this.teacherWorkgroupId = this.configService.getTeacherWorkgroupId();
     this.isDisabled = !this.configService.isRunActive();
 
-    this.rubric = null;
-    this.mode = this.configService.getMode();
     this.initializeNode();
     this.startAutoSaveInterval();
     this.registerExitListener();
@@ -180,8 +176,10 @@ export class NodeComponent implements OnInit {
       eventData
     );
 
-    this.rubric = this.node.rubric;
-    this.initializeIdToIsPulsing();
+    if (this.configService.isPreview()) {
+      this.rubric = this.projectService.replaceAssetPaths(this.node.rubric);
+      this.showRubric = this.rubric != null && this.rubric != '';
+    }
 
     const script = this.nodeContent.script;
     if (script != null) {
@@ -201,25 +199,6 @@ export class NodeComponent implements OnInit {
       this.nodeService.evaluateTransitionLogic();
     }
     this.subscriptions.unsubscribe();
-  }
-
-  private initializeIdToIsPulsing(): void {
-    this.idToIsPulsing[this.node.id] = true;
-    this.node.components.forEach((component) => {
-      this.idToIsPulsing[component.id] = true;
-    });
-  }
-
-  stopPulsing(id: string): void {
-    this.idToIsPulsing[id] = false;
-  }
-
-  isShowNodeRubric(): boolean {
-    return this.rubric != null && this.rubric != '' && this.mode === 'preview';
-  }
-
-  isShowComponentRubric(component: any): boolean {
-    return component.rubric != null && component.rubric != '' && this.mode === 'preview';
   }
 
   saveButtonClicked(): void {
@@ -525,10 +504,6 @@ export class NodeComponent implements OnInit {
         this.nodeUnloaded(this.nodeId);
       })
     );
-  }
-
-  replaceAssetPaths(content: string): string {
-    return this.projectService.replaceAssetPaths(content);
   }
 
   saveComponentState($event: any): Promise<any> {

@@ -36,7 +36,7 @@ class WISELinkAuthoringController {
     if (this.wiseLinkNodeId != null && this.wiseLinkNodeId != '') {
       this.wiseLinkComponentId = '';
       let position = this.getNodePositionById(this.wiseLinkNodeId);
-      let title = this.getNodeTitleByNodeId(this.wiseLinkNodeId);
+      let title = this.getNodeTitle(this.wiseLinkNodeId);
       this.wiseLinkText = position + ': ' + title;
     }
   }
@@ -45,16 +45,16 @@ class WISELinkAuthoringController {
     return this.ProjectService.getNodePositionById(nodeId);
   }
 
-  getNodeTitleByNodeId(nodeId) {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   isGroupNode(nodeId) {
     return this.ProjectService.isGroupNode(nodeId);
   }
 
-  getComponentsByNodeId(nodeId) {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
   /**

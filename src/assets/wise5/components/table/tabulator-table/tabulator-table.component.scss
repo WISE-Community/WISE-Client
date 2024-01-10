@@ -11,35 +11,61 @@
   }
 }
 
-.tabulator-row .tabulator-cell {
-  min-height: 44px; // temporary hack to fix height for some rows with empty cell values; TODO: investigate and fix
+.tabulator-row {
+  border-bottom: 0 none;
 
-  &.tabulator-cell-editable {
-    &:before {
-      content: "";
-      position: absolute;
-      top: 0.25em;
-      bottom: 0.25em;
-      left: 0.2em;
-      right: 0.2em;
-      border: 1px solid #dddddd;
-      border-radius: 4px;
+  .tabulator-cell {
+    background-color: #ffffff;
+    min-height: 44px; // temporary hack to fix height for some rows with empty cell values; TODO: investigate and fix
+    border-bottom: 1px solid #dddddd;
+    
+    &.tabulator-frozen {
+      background-color: #ffffff;
     }
 
-    &:hover {
+    &.tabulator-cell-editable {
       &:before {
+        content: "";
+        position: absolute;
+        top: 0.25em;
+        bottom: 0.25em;
+        left: 0.2em;
+        right: 0.2em;
+        border: 1px solid #dddddd;
+        border-radius: 4px;
+      }
+
+      &:hover {
+        &:before {
+          border-color: #000000;
+        }
+      }
+    }
+
+    &.tabulator-editing {
+      border: 0 none;
+      padding: 0.5em;
+
+      &:before {
+        border-width: 2px;
         border-color: #000000;
       }
     }
+
+    input[type=checkbox] {
+      vertical-align: middle;
+    }
   }
 
-  &.tabulator-editing {
-    border: 0 none;
-    padding: 0.5em;
+  &.tabulator-selected {
+    background-color: transparent !important;
 
-    &:before {
-      border-width: 2px;
-      border-color: #000000;
+    &:hover {
+      background-color: transparent !important;
+    }
+
+    .tabulator-cell {
+      background-color: #eeeeee;
     }
   }
 }

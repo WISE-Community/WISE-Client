@@ -1,4 +1,4 @@
-<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+<edit-component-prompt [prompt]="componentContent.prompt"
    (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <div>
   <mat-form-field class="size-input">
@@ -6,7 +6,7 @@
     <input matInput
         type="number"
         min="1"
-        [(ngModel)]="authoringComponentContent.numColumns"
+        [(ngModel)]="componentContent.numColumns"
         (ngModelChange)="numColumnsChange.next($event)">
   </mat-form-field>
   <mat-form-field class="size-input">
@@ -14,7 +14,7 @@
     <input matInput
         type="number"
         min="1"
-        [(ngModel)]="authoringComponentContent.numRows"
+        [(ngModel)]="componentContent.numRows"
         (ngModelChange)="numRowsChange.next($event)"/>
   </mat-form-field>
   <mat-form-field class="size-input">
@@ -22,7 +22,7 @@
     <input matInput
         type="number"
         min="1"
-        [(ngModel)]="authoringComponentContent.globalCellSize"
+        [(ngModel)]="componentContent.globalCellSize"
         (ngModelChange)="globalCellSizeChange.next($event)"/>
   </mat-form-field>
 </div>
@@ -72,7 +72,7 @@
         </div>
       </td>
     </tr>
-    <tr *ngFor="let row of authoringComponentContent.tableData; index as rowIndex; last as isLast">
+    <tr *ngFor="let row of componentContent.tableData; index as rowIndex; last as isLast">
       <td class="outer-cell-container" fxLayout="column" fxLayoutAlign="center center">
         <button mat-raised-button
             color="primary"
@@ -143,7 +143,7 @@
       </td>
       <td *ngFor="let x of [].constructor(getNumColumnsInTableData()); index as cellIndex"
           class="inner-cell-container">
-        <div fxLayoutAlign="center center">
+        <div>
           <mat-form-field>
             <mat-label i18n>Column Cell Size</mat-label>
             <input matInput
@@ -152,6 +152,17 @@
                 [(ngModel)]="columnCellSizes[cellIndex]"
                 (ngModelChange)="columnSizeChanged(cellIndex)"/>
           </mat-form-field>
+        </div>
+        <div>
+          <mat-checkbox color="primary"
+              [(ngModel)]="frozenColumns[cellIndex]"
+              (ngModelChange)="frozenColumnsChanged(cellIndex)"
+              [disabled]="frozenColumnsLimitReached && !frozenColumns[cellIndex]"
+              matTooltip="You can freeze the first column and any next to it to the beginning of the table. Other columns you freeze will be pinned to the end."
+              matTooltipPosition="above"
+              i18n-matTooltip>
+            <span i18n>Freeze</span>
+          </mat-checkbox>
         </div>
       </td>
     </tr>

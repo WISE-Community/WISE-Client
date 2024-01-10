@@ -1,0 +1,7 @@
+<mat-tab-group [selectedIndex]="selectedTabIndex"
+    (focusChange)="goToGroupTab($event.index)"
+    animationDuration="0ms"
+    class="app-bg-bg">
+  <mat-tab *ngFor="let node of groupNodes" [label]="node.title" [disabled]="node.disabled">
+  </mat-tab>
+</mat-tab-group>

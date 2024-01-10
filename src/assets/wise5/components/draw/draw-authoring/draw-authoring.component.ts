@@ -75,71 +75,65 @@ export class DrawAuthoring extends ComponentAuthoring {
 
   ngOnInit() {
     super.ngOnInit();
-    this.stamps = this.convertStampStringsToStampObjects(
-      this.authoringComponentContent.stamps.Stamps
-    );
+    this.stamps = this.convertStampStringsToStampObjects(this.componentContent.stamps.Stamps);
   }
 
   enableAllTools(doEnable: boolean) {
-    if (this.authoringComponentContent.tools == null) {
-      this.authoringComponentContent.tools = {};
+    if (this.componentContent.tools == null) {
+      this.componentContent.tools = {};
     }
     this.allToolNames.map((toolName) => {
-      this.authoringComponentContent.tools[toolName] = doEnable;
+      this.componentContent.tools[toolName] = doEnable;
     });
     this.componentChanged();
   }
 
   saveStarterState(starterState: any): void {
-    this.authoringComponentContent.starterDrawData = starterState;
+    this.componentContent.starterDrawData = starterState;
     this.componentChanged();
   }
 
   deleteStarterState(): void {
-    this.authoringComponentContent.starterDrawData = null;
+    this.componentContent.starterDrawData = null;
     this.componentChanged();
   }
 
   canvasWidthChanged(): void {
-    this.width = this.authoringComponentContent.width;
+    this.width = this.componentContent.width;
     this.updateStarterDrawDataWidth();
     this.componentChanged();
   }
 
   updateStarterDrawDataWidth(): void {
-    if (this.authoringComponentContent.starterDrawData != null) {
-      const starterDrawDataJSONObject = angular.fromJson(
-        this.authoringComponentContent.starterDrawData
-      );
+    if (this.componentContent.starterDrawData != null) {
+      const starterDrawDataJSONObject = angular.fromJson(this.componentContent.starterDrawData);
       if (starterDrawDataJSONObject != null && starterDrawDataJSONObject.dt != null) {
         if (this.width == null) {
           starterDrawDataJSONObject.dt.width = this.defaultWidth;
         } else {
           starterDrawDataJSONObject.dt.width = this.width;
         }
-        this.authoringComponentContent.starterDrawData = angular.toJson(starterDrawDataJSONObject);
+        this.componentContent.starterDrawData = angular.toJson(starterDrawDataJSONObject);
       }
     }
   }
 
   canvasHeightChanged(): void {
-    this.height = this.authoringComponentContent.height;
+    this.height = this.componentContent.height;
     this.updateStarterDrawDataHeight();
     this.componentChanged();
   }
 
   updateStarterDrawDataHeight(): void {
-    if (this.authoringComponentContent.starterDrawData != null) {
-      const starterDrawDataJSONObject = angular.fromJson(
-        this.authoringComponentContent.starterDrawData
-      );
+    if (this.componentContent.starterDrawData != null) {
+      const starterDrawDataJSONObject = angular.fromJson(this.componentContent.starterDrawData);
       if (starterDrawDataJSONObject != null && starterDrawDataJSONObject.dt != null) {
         if (this.height == null) {
           starterDrawDataJSONObject.dt.height = this.defaultHeight;
         } else {
           starterDrawDataJSONObject.dt.height = this.height;
         }
-        this.authoringComponentContent.starterDrawData = angular.toJson(starterDrawDataJSONObject);
+        this.componentContent.starterDrawData = angular.toJson(starterDrawDataJSONObject);
       }
     }
   }
@@ -163,7 +157,7 @@ export class DrawAuthoring extends ComponentAuthoring {
     super.assetSelected({ nodeId, componentId, assetItem, target });
     const fileName = assetItem.fileName;
     if (target === 'background') {
-      this.authoringComponentContent.background = fileName;
+      this.componentContent.background = fileName;
       this.updateStarterDrawDataBackgroundAndSave();
     } else if (target === 'stamp') {
       const stampIndex = targetObject;
@@ -178,7 +172,7 @@ export class DrawAuthoring extends ComponentAuthoring {
   }
 
   updateStarterDrawDataBackground(): void {
-    const starterDrawData = this.authoringComponentContent.starterDrawData;
+    const starterDrawData = this.componentContent.starterDrawData;
     if (starterDrawData != null) {
       const starterDrawDataJSON = angular.fromJson(starterDrawData);
       if (
@@ -188,10 +182,10 @@ export class DrawAuthoring extends ComponentAuthoring {
         starterDrawDataJSON.canvas.backgroundImage.src != null
       ) {
         const projectAssetsDirectoryPath = this.ConfigService.getProjectAssetsDirectoryPath(true);
-        const background = this.authoringComponentContent.background;
+        const background = this.componentContent.background;
         const newSrc = projectAssetsDirectoryPath + '/' + background;
         starterDrawDataJSON.canvas.backgroundImage.src = newSrc;
-        this.authoringComponentContent.starterDrawData = angular.toJson(starterDrawDataJSON);
+        this.componentContent.starterDrawData = angular.toJson(starterDrawDataJSON);
       }
     }
   }
@@ -203,11 +197,11 @@ export class DrawAuthoring extends ComponentAuthoring {
   }
 
   initializeAuthoringComponentContentStampsIfNecessary(): void {
-    if (this.authoringComponentContent.stamps == null) {
-      this.authoringComponentContent.stamps = {};
+    if (this.componentContent.stamps == null) {
+      this.componentContent.stamps = {};
     }
-    if (this.authoringComponentContent.stamps.Stamps == null) {
-      this.authoringComponentContent.stamps.Stamps = [];
+    if (this.componentContent.stamps.Stamps == null) {
+      this.componentContent.stamps.Stamps = [];
     }
   }
 
@@ -221,9 +215,7 @@ export class DrawAuthoring extends ComponentAuthoring {
   }
 
   updateAuthoringComponentContentStamps(): void {
-    this.authoringComponentContent.stamps.Stamps = this.convertStampObjectsToStampStrings(
-      this.stamps
-    );
+    this.componentContent.stamps.Stamps = this.convertStampObjectsToStampStrings(this.stamps);
   }
 
   moveStampUp(index: number): void {
@@ -236,7 +228,7 @@ export class DrawAuthoring extends ComponentAuthoring {
   }
 
   moveStampDown(index: number): void {
-    if (index != this.authoringComponentContent.stamps.Stamps.length - 1) {
+    if (index != this.componentContent.stamps.Stamps.length - 1) {
       const stamp = this.stamps[index];
       this.stamps.splice(index, 1);
       this.stamps.splice(index + 1, 0, stamp);
@@ -247,7 +239,7 @@ export class DrawAuthoring extends ComponentAuthoring {
   deleteStamp(index: number): void {
     if (
       confirm(
-        $localize`Are you sure you want to delete this stamp?\n\n${this.authoringComponentContent.stamps.Stamps[index]}`
+        $localize`Are you sure you want to delete this stamp?\n\n${this.componentContent.stamps.Stamps[index]}`
       )
     ) {
       this.stamps.splice(index, 1);

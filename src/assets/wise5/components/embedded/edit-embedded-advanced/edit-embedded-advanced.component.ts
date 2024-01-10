@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
+import { EmbeddedContent } from '../EmbeddedContent';
 
 @Component({
   template: 'edit-embedded-advanced',
@@ -21,4 +22,5 @@ export class EditEmbeddedAdvancedComponent extends EditAdvancedComponentComponen
     'OpenResponse',
     'Table'
   ];
+  componentContent: EmbeddedContent;
 }

@@ -8,7 +8,7 @@
 # Run aws configure on the command line to register your AWS access keys locally
 # Install jq command
 
-pipeline_name=private-wise-client-pipeline
+pipeline_name=private-wise-client-github-actions-pipeline
 
 # Get the execution token from the Approve-Terminate-Private-Instances stage/action
 token=$(aws codepipeline get-pipeline-state --name $pipeline_name |
@@ -18,16 +18,23 @@ token=$(aws codepipeline get-pipeline-state --name $pipeline_name |
 
 # Make sure we were able to retrieve the execution token
 if [[ "$token" == "null" ]]; then
-  echo "Error: Unable to retrieve the execution token."
-  echo "Make sure the Approve-Terminate-Private-Instances stage is InProgress."
-  exit 0
+  echo "Error: unable to retrieve the execution token, make sure the" \
+      "Approve-Terminate-Private-Instances stage is InProgress"
+  exit 1
 fi
 
 # Approve the Approve-Terminate-Private-Instances stage to terminate the test servers
-echo "Stopping $pipeline_name"
 aws codepipeline put-approval-result \
   --pipeline-name $pipeline_name \
   --stage-name Approve-Terminate-Private-Instances \
   --action-name Approve-Terminate-Private-Instances \
   --result "summary=Done testing,status=Approved" \
-  --token $token
+  --token $token > /dev/null
+
+if [[ $? -eq 0 ]]; then
+  echo "Successfully stopped $pipeline_name"
+  exit 0
+else
+  echo "Error: failed to stop $pipeline_name"
+  exit 1
+fi

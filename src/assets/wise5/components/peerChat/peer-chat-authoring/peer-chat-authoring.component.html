@@ -1,53 +1,11 @@
-<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+<edit-component-prompt *ngIf="!componentContent.dynamicPrompt?.enabled"
+    [prompt]="componentContent.prompt"
     (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
-<edit-component-peer-grouping-tag [authoringComponentContent]="authoringComponentContent">
+<edit-dynamic-prompt [componentContent]="componentContent"
+    (dynamicPromptChangedEvent)="componentChanged()">
+</edit-dynamic-prompt>
+<edit-question-bank [componentContent]="componentContent"
+    (dynamicPromptChangedEvent)="componentChanged()">
+</edit-question-bank>
+<edit-component-peer-grouping-tag [componentContent]="componentContent">
 </edit-component-peer-grouping-tag>
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="bottom-spacing">
-  <label i18n>Question Bank</label>
-  <button mat-raised-button
-      color="primary"
-      (click)="addQuestion()"
-      matTooltip="Add Question"
-      matTooltipPosition="above"
-      i18n-matTooltip>
-    <mat-icon>add</mat-icon>
-  </button>
-</div>
-<div *ngIf="authoringComponentContent.questionBank.length === 0" class="bottom-spacing" i18n>
-  There are no questions in the Question Bank
-</div>
-<div *ngFor="let question of authoringComponentContent.questionBank; index as questionIndex; first as isFirst; last as isLast; trackBy: customTrackBy"
-    fxLayoutGap="20px">
-  <mat-form-field class="question">
-    <mat-label i18n>Question</mat-label>
-    <input matInput
-        [(ngModel)]="authoringComponentContent.questionBank[questionIndex]"
-        (ngModelChange)="componentChanged()"/>
-  </mat-form-field>
-  <button mat-raised-button
-      color="primary"
-      (click)="moveObjectUp(authoringComponentContent.questionBank, questionIndex)"
-      [disabled]="isFirst"
-      matTooltip="Move Question Up"
-      matTooltipPosition="above"
-      i18n-matTooltip>
-    <mat-icon>arrow_upward</mat-icon>
-  </button>
-  <button mat-raised-button
-      color="primary"
-      (click)="moveObjectDown(authoringComponentContent.questionBank, questionIndex)"
-      [disabled]="isLast"
-      matTooltip="Move Question Down"
-      matTooltipPosition="above"
-      i18n-matTooltip>
-    <mat-icon>arrow_downward</mat-icon>
-  </button>
-  <button mat-raised-button
-      color="primary"
-      (click)="deleteQuestion(questionIndex)"
-      matTooltip="Delete Question"
-      matTooltipPosition="above"
-      i18n-matTooltip>
-    <mat-icon>delete</mat-icon>
-  </button>
-</div>

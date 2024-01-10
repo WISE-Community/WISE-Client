@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { ConfigService } from '../../../services/configService';
+import { NodeService } from '../../../services/nodeService';
 import { NotificationService } from '../../../services/notificationService';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
@@ -17,10 +18,9 @@ import { PeerGroup } from '../PeerGroup';
   styleUrls: ['./peer-chat-grading.component.scss']
 })
 export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
-  peerGroup: PeerGroup;
-
   constructor(
     protected configService: ConfigService,
+    protected nodeService: NodeService,
     protected notificationService: NotificationService,
     protected peerChatService: PeerChatService,
     protected peerGroupService: PeerGroupService,
@@ -29,16 +29,7 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
     protected teacherWebSocketService: TeacherWebSocketService,
     protected teacherWorkService: TeacherWorkService
   ) {
-    super(configService, peerChatService, peerGroupService, projectService);
-  }
-
-  ngOnInit(): void {
-    super.ngOnInit();
-    this.peerGroupService
-      .retrievePeerGroup(this.componentContent.peerGroupingTag, this.workgroupId)
-      .subscribe((peerGroup) => {
-        this.peerGroup = peerGroup;
-      });
+    super(configService, nodeService, peerChatService, peerGroupService, projectService);
   }
 
   submitTeacherResponse(response: string): void {

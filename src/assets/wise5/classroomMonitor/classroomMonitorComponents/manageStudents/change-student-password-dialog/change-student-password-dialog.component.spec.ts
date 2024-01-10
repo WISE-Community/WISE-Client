@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { of, throwError } from 'rxjs';
+import { PasswordService } from '../../../../../../app/services/password.service';
 import { TeacherService } from '../../../../../../app/teacher/teacher.service';
 import { ConfigService } from '../../../../services/configService';
 import { ChangeStudentPasswordDialogComponent } from './change-student-password-dialog.component';
@@ -35,6 +36,7 @@ describe('ChangeStudentPasswordDialogComponent', () => {
       imports: [MatSnackBarModule, MatDialogModule],
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
+        PasswordService,
         { provide: TeacherService, useClass: TeacherServiceStub },
         { provide: MAT_DIALOG_DATA, useValue: user }
       ],
@@ -61,7 +63,6 @@ function changePassword() {
       dialogSpy = spyOn(dialog, 'closeAll');
     });
     afterEach(() => {
-      expect(snackBarSpy).toHaveBeenCalled();
       expect(component.isChangingPassword).toBeFalsy();
     });
     changePassword_success_closeDialog();
@@ -71,15 +72,20 @@ function changePassword() {
 
 function changePassword_success_closeDialog() {
   it('should close dialog on success', () => {
-    spyOn(teacherService, 'changeStudentPassword').and.returnValue(of(''));
+    spyOn(teacherService, 'changeStudentPassword').and.returnValue(of({}));
     component.changePassword();
+    expect(snackBarSpy).toHaveBeenCalled();
     expect(dialogSpy).toHaveBeenCalled();
   });
 }
 
 function changePassword_failure_keepDialogOpen() {
   it('should keep dialog open on failure', () => {
-    spyOn(teacherService, 'changeStudentPassword').and.returnValue(throwError('error'));
+    spyOn(teacherService, 'changeStudentPassword').and.returnValue(
+      throwError({
+        error: { messageCode: 'invalidPasswordLength' }
+      })
+    );
     component.changePassword();
     expect(dialogSpy).not.toHaveBeenCalled();
   });

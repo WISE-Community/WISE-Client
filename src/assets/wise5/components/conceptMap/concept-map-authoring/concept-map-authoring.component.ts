@@ -35,12 +35,12 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
     this.availableLinks = this.componentContent.links;
     if (this.componentContent.showNodeLabels == null) {
       this.componentContent.showNodeLabels = true;
-      this.authoringComponentContent.showNodeLabels = true;
+      this.componentContent.showNodeLabels = true;
     }
   }
 
   nodeDeleteButtonClicked(index: number): void {
-    const nodes = this.authoringComponentContent.nodes;
+    const nodes = this.componentContent.nodes;
     const node = nodes[index];
     const nodeFileName = node.fileName;
     const nodeLabel = node.label;
@@ -55,7 +55,7 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
   }
 
   linkDeleteButtonClicked(index: number): void {
-    const links = this.authoringComponentContent.links;
+    const links = this.componentContent.links;
     const link = links[index];
     const linkLabel = link.label;
     if (confirm($localize`Are you sure you want to delete this link?\n\nLabel: ${linkLabel}`)) {
@@ -72,12 +72,12 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
       width: 100,
       height: 100
     };
-    this.authoringComponentContent.nodes.push(newNode);
+    this.componentContent.nodes.push(newNode);
     this.componentChanged();
   }
 
   getNodeById(nodeId: number): any {
-    for (const node of this.authoringComponentContent.nodes) {
+    for (const node of this.componentContent.nodes) {
       if (nodeId === node.id) {
         return node;
       }
@@ -91,25 +91,25 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
       label: '',
       color: ''
     };
-    this.authoringComponentContent.links.push(newLink);
+    this.componentContent.links.push(newLink);
     this.componentChanged();
   }
 
   getNewConceptMapNodeId(): string {
-    return this.ConceptMapService.getNextAvailableId(this.authoringComponentContent.nodes, 'node');
+    return this.ConceptMapService.getNextAvailableId(this.componentContent.nodes, 'node');
   }
 
   getNewConceptMapLinkId(): string {
-    return this.ConceptMapService.getNextAvailableId(this.authoringComponentContent.links, 'link');
+    return this.ConceptMapService.getNextAvailableId(this.componentContent.links, 'link');
   }
 
   saveStarterState(starterState: any): void {
-    this.authoringComponentContent.starterConceptMap = starterState;
+    this.componentContent.starterConceptMap = starterState;
     this.componentChanged();
   }
 
   deleteStarterState(): void {
-    this.authoringComponentContent.starterConceptMap = null;
+    this.componentContent.starterConceptMap = null;
     this.componentChanged();
   }
 
@@ -117,7 +117,7 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
     super.assetSelected(args);
     const fileName = args.assetItem.fileName;
     if (args.target === 'background') {
-      this.authoringComponentContent.background = fileName;
+      this.componentContent.background = fileName;
       this.componentChanged();
     } else if (args.target != null && args.target.indexOf('node') == 0) {
       const node = this.getNodeById(args.target);

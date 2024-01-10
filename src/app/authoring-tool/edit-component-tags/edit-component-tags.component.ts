@@ -10,7 +10,7 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
 })
 export class EditComponentTagsComponent {
   @Input()
-  authoringComponentContent: any;
+  componentContent: any;
   tagChanged: Subject<any> = new Subject<any>();
   tagChangedSubscription: Subscription;
 
@@ -20,7 +20,7 @@ export class EditComponentTagsComponent {
     this.tagChangedSubscription = this.tagChanged
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe(({ tagIndex, tag }) => {
-        this.authoringComponentContent.tags[tagIndex] = tag;
+        this.componentContent.tags[tagIndex] = tag;
         this.ProjectService.componentChanged();
       });
   }
@@ -30,34 +30,34 @@ export class EditComponentTagsComponent {
   }
 
   addTag(): void {
-    if (this.authoringComponentContent.tags == null) {
-      this.authoringComponentContent.tags = [];
+    if (this.componentContent.tags == null) {
+      this.componentContent.tags = [];
     }
-    this.authoringComponentContent.tags.push('');
+    this.componentContent.tags.push('');
     this.ProjectService.componentChanged();
   }
 
   moveTagUp(index: number): void {
     if (index > 0) {
-      const tag = this.authoringComponentContent.tags[index];
-      this.authoringComponentContent.tags.splice(index, 1);
-      this.authoringComponentContent.tags.splice(index - 1, 0, tag);
+      const tag = this.componentContent.tags[index];
+      this.componentContent.tags.splice(index, 1);
+      this.componentContent.tags.splice(index - 1, 0, tag);
       this.ProjectService.componentChanged();
     }
   }
 
   moveTagDown(index: number): void {
-    if (index < this.authoringComponentContent.tags.length - 1) {
-      const tag = this.authoringComponentContent.tags[index];
-      this.authoringComponentContent.tags.splice(index, 1);
-      this.authoringComponentContent.tags.splice(index + 1, 0, tag);
+    if (index < this.componentContent.tags.length - 1) {
+      const tag = this.componentContent.tags[index];
+      this.componentContent.tags.splice(index, 1);
+      this.componentContent.tags.splice(index + 1, 0, tag);
       this.ProjectService.componentChanged();
     }
   }
 
   deleteTag(indexOfTagToDelete: number): void {
     if (confirm($localize`Are you sure you want to delete this tag?`)) {
-      this.authoringComponentContent.tags.splice(indexOfTagToDelete, 1);
+      this.componentContent.tags.splice(indexOfTagToDelete, 1);
       this.ProjectService.componentChanged();
     }
   }

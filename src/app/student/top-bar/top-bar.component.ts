@@ -15,8 +15,7 @@ import { Notification } from '../../domain/notification';
   templateUrl: 'top-bar.component.html'
 })
 export class TopBarComponent {
-  @ViewChild(StudentAccountMenuComponent)
-  accountMenu: StudentAccountMenuComponent;
+  @ViewChild(StudentAccountMenuComponent) accountMenu: StudentAccountMenuComponent;
 
   avatarColor: string;
   completionPercent: number;

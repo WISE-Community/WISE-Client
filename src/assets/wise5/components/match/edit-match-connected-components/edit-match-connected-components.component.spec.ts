@@ -6,6 +6,7 @@ import { ProjectService } from '../../../services/projectService';
 import { EditMatchConnectedComponentsComponent } from './edit-match-connected-components.component';
 import { createConnectedComponentObject } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.spec';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { MatchContent } from '../MatchContent';
 
 let component: EditMatchConnectedComponentsComponent;
 let fixture: ComponentFixture<EditMatchConnectedComponentsComponent>;
@@ -60,10 +61,8 @@ function askIfWantToCopyChoicesAndBuckets() {
         id: componentId1,
         choices: [createChoice('choice1', 'A Choice')],
         buckets: [createBucket('bucket1', 'A Bucket')]
-      };
-      spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
-        componentContent
-      );
+      } as MatchContent;
+      spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(componentContent);
       connectedComponent = createConnectedComponentObject(nodeId1, componentId1, 'importWork');
     });
     it('should copy choices and buckets from the connected component', () => {

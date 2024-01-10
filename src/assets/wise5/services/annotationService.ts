@@ -6,6 +6,7 @@ import { ConfigService } from './configService';
 import { UtilService } from './utilService';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { RandomKeyService } from './randomKeyService';
 
 @Injectable()
 export class AnnotationService {
@@ -154,7 +155,7 @@ export class AnnotationService {
    * @returns a promise
    */
   saveAnnotation(annotation) {
-    annotation.requestToken = this.UtilService.generateKey(); // use this to keep track of unsaved annotations.
+    annotation.requestToken = RandomKeyService.generate(); // use this to keep track of unsaved annotations.
     this.addOrUpdateAnnotation(annotation);
     const annotations = [annotation];
     if (this.ConfigService.isPreview()) {

@@ -43,10 +43,6 @@ angular
   .factory('SpaceService', downgradeInjectable(SpaceService))
   .factory('TeacherDataService', downgradeInjectable(TeacherDataService))
   .factory('TeacherWebSocketService', downgradeInjectable(TeacherWebSocketService))
-  .directive(
-    'stepTools',
-    downgradeComponent({ component: StepToolsComponent }) as angular.IDirectiveFactory
-  )
   .config([
     '$stateProvider',
     ($stateProvider) => {

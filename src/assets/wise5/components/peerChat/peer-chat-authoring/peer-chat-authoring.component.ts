@@ -36,19 +36,19 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds();
+    this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds();
   }
 
   isApplicationNode(nodeId: string): boolean {
-    return this.ProjectService.isApplicationNode(nodeId);
+    return this.projectService.isApplicationNode(nodeId);
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string): string {
-    return this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.projectService.getNodePositionAndTitle(nodeId);
   }
 
-  getComponentsByNodeId(nodeId: string): any[] {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.projectService.getComponents(nodeId);
   }
 
   isComponentTypeAllowed(componentType: string): boolean {
@@ -56,7 +56,7 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   }
 
   tryUpdateComponentId(object: any, nodeIdFieldName: string, componentIdFieldName: string): void {
-    const components = this.ProjectService.getComponentsByNodeId(object[nodeIdFieldName]);
+    const components = this.projectService.getComponents(object[nodeIdFieldName]);
     if (components.length === 0) {
       delete object[componentIdFieldName];
     } else if (components.length === 1) {
@@ -65,12 +65,12 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   }
 
   deleteLogic(index: number): void {
-    if (this.authoringComponentContent.logic.length === 1) {
+    if (this.componentContent.logic.length === 1) {
       alert(
         $localize`You are not allowed to delete this Grouping Logic because you must have at least one.`
       );
     } else if (confirm($localize`Are you sure you want to delete this Grouping Logic?`)) {
-      this.authoringComponentContent.logic.splice(index, 1);
+      this.componentContent.logic.splice(index, 1);
       this.componentChanged();
     }
   }
@@ -86,22 +86,5 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   logicNodeIdChanged(logicObject: any): void {
     this.tryUpdateComponentId(logicObject, 'nodeId', 'componentId');
     this.componentChanged();
-  }
-
-  addQuestion(): void {
-    this.authoringComponentContent.questionBank.push('');
-    this.componentChanged();
-  }
-
-  deleteQuestion(index: number): void {
-    this.confirmAndRemove(
-      $localize`Are you sure you want to delete this question?`,
-      this.authoringComponentContent.questionBank,
-      index
-    );
-  }
-
-  customTrackBy(index: number): number {
-    return index;
   }
 }

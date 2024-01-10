@@ -267,7 +267,7 @@ export class MilestoneService {
     return {
       nodeId: nodeId,
       componentId: componentId,
-      stepTitle: this.ProjectService.getNodePositionAndTitleByNodeId(nodeId),
+      stepTitle: this.ProjectService.getNodePositionAndTitle(nodeId),
       aggregateAutoScore: aggregateAutoScore
     };
   }

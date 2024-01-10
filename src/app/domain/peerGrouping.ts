@@ -1,3 +1,9 @@
+import {
+  DIFFERENT_IDEAS_REGEX,
+  DIFFERENT_SCORES_REGEX
+} from '../../assets/wise5/authoringTool/peer-grouping/PeerGroupingLogic';
+import { ReferenceComponent } from './referenceComponent';
+
 export class PeerGrouping {
   logic: string;
   maxMembershipCount: number;
@@ -12,5 +18,20 @@ export class PeerGrouping {
         this[key] = jsonObject[key];
       }
     }
+  }
+
+  getDifferentIdeasReferenceComponent(): ReferenceComponent {
+    const result = new RegExp(DIFFERENT_IDEAS_REGEX).exec(this.logic);
+    return new ReferenceComponent(result[1], result[2]);
+  }
+
+  getDifferentScoresReferenceComponent(): ReferenceComponent {
+    const result = new RegExp(DIFFERENT_SCORES_REGEX).exec(this.logic);
+    return new ReferenceComponent(result[1], result[2]);
+  }
+
+  getDifferentScoresMode(): string {
+    const result = new RegExp(DIFFERENT_SCORES_REGEX).exec(this.logic);
+    return result[4];
   }
 }

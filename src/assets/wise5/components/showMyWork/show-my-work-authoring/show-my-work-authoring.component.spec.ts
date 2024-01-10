@@ -11,6 +11,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { ComponentContent } from '../../../common/ComponentContent';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ShowMyWorkAuthoringComponent } from './show-my-work-authoring.component';
 
@@ -51,10 +52,9 @@ describe('ShowMyWorkAuthoringComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShowMyWorkAuthoringComponent);
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue({});
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
+      {} as ComponentContent
+    );
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
       nodeId1
     ]);
@@ -74,27 +74,23 @@ describe('ShowMyWorkAuthoringComponent', () => {
   }
 
   it('should handle show work node id changed when there are multiple components', () => {
-    component.authoringComponentContent.showWorkNodeId = nodeId1;
-    component.authoringComponentContent.showWorkComponentId = componentId3;
+    component.componentContent.showWorkNodeId = nodeId1;
+    component.componentContent.showWorkComponentId = componentId3;
     const components = [component1, component2];
-    spyOn(TestBed.inject(TeacherProjectService), 'getComponentsByNodeId').and.returnValue(
-      components
-    );
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponents').and.returnValue(components);
     component.showWorkNodeIdChanged();
-    expect(component.authoringComponentContent.showWorkNodeId).toEqual(nodeId1);
-    expect(component.authoringComponentContent.showWorkComponentId).toEqual('');
+    expect(component.componentContent.showWorkNodeId).toEqual(nodeId1);
+    expect(component.componentContent.showWorkComponentId).toEqual('');
   });
 
   it('should handle show work node id changed when there is one component', () => {
-    component.authoringComponentContent.showWorkNodeId = nodeId1;
-    component.authoringComponentContent.showWorkComponentId = componentId3;
+    component.componentContent.showWorkNodeId = nodeId1;
+    component.componentContent.showWorkComponentId = componentId3;
     const components = [component1];
-    spyOn(TestBed.inject(TeacherProjectService), 'getComponentsByNodeId').and.returnValue(
-      components
-    );
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponents').and.returnValue(components);
     component.showWorkNodeIdChanged();
-    expect(component.authoringComponentContent.showWorkNodeId).toEqual(nodeId1);
-    expect(component.authoringComponentContent.showWorkComponentId).toEqual(componentId1);
+    expect(component.componentContent.showWorkNodeId).toEqual(nodeId1);
+    expect(component.componentContent.showWorkComponentId).toEqual(componentId1);
   });
 
   it('should check if allowed to show work for a component when it is this component', () => {

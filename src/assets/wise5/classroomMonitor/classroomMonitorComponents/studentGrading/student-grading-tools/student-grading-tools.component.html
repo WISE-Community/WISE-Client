@@ -1,0 +1,28 @@
+<div fxLayoutAlign="center center" fxLayoutGap="4px">
+  <button mat-icon-button
+      aria-label="Previous Team"
+      i18n-aria-label
+      [disabled]="!prevId"
+      (click)="goToPrevTeam()"
+      matTooltip="Previous Team"
+      matTooltipPosition="below"
+      i18n-matTooltip>
+    <mat-icon>{{ icons.prev }}</mat-icon>
+  </button>
+  <mat-icon class="mat-30"
+      fxHide.xs
+      style="color: {{ avatarColor }};">
+    account_circle
+  </mat-icon>
+  <workgroup-select-dropdown></workgroup-select-dropdown>
+  <button mat-icon-button
+      aria-label="Next Team"
+      i18n-aria-label
+      [disabled]="!nextId"
+      (click)="goToNextTeam()"
+      matTooltip="Next Team"
+      matTooltipPosition="below"
+      i18n-matTooltip>
+    <mat-icon>{{ icons.next }}</mat-icon>
+  </button>
+</div>

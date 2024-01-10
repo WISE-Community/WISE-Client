@@ -102,7 +102,7 @@
                   <md-option ng-repeat="nodeItem in $ctrl.idToOrder | toArray | orderBy: 'order'"
                       value="{{nodeItem.$key}}"
                       ng-if="$ctrl.isApplicationNode(nodeItem.$key)">
-                    {{$ctrl.getNodePositionAndTitleByNodeId(nodeItem.$key)}}
+                    {{$ctrl.getNodePositionAndTitle(nodeItem.$key)}}
                   </md-option>
                 </md-select>
               </md-input-container>
@@ -110,7 +110,7 @@
                 <label>{{ ::'componentID' | translate }}</label>
                 <md-select ng-model="satisfyCriteria.componentId"
                     ng-change="$ctrl.save()">
-                  <ng-container ng-repeat='(componentIndex, component) in $ctrl.getComponentsByNodeId(satisfyCriteria.nodeId)'
+                  <ng-container ng-repeat='(componentIndex, component) in $ctrl.getComponents(satisfyCriteria.nodeId)'
                       ng-init="isCRater = $ctrl.isCRaterComponent(component)">
                     <md-option value="{{component.id}}"
                         ng-disabled="!isCRater">
@@ -159,7 +159,7 @@
                   <md-option ng-repeat="nodeItem in $ctrl.idToOrder | toArray | orderBy: 'order'"
                       value="{{nodeItem.$key}}"
                       ng-if="$ctrl.isApplicationNode(nodeItem.$key)">
-                    {{$ctrl.getNodePositionAndTitleByNodeId(nodeItem.$key)}}
+                    {{$ctrl.getNodePositionAndTitle(nodeItem.$key)}}
                   </md-option>
                 </md-select>
               </md-input-container>
@@ -167,7 +167,7 @@
                 <label>{{ ::'componentID' | translate }}</label>
                 <md-select ng-model="location.componentId"
                     ng-change="$ctrl.save()">
-                  <ng-container ng-repeat='(componentIndex, component) in $ctrl.getComponentsByNodeId(location.nodeId)'
+                  <ng-container ng-repeat='(componentIndex, component) in $ctrl.getComponents(location.nodeId)'
                       ng-init="isCRater = $ctrl.isCRaterComponent(component)">
                     <md-option value="{{component.id}}"
                         ng-disabled="!isCRater">
@@ -272,7 +272,7 @@
                           <md-option ng-repeat="nodeItem in $ctrl.idToOrder | toArray | orderBy: 'order'"
                               value="{{nodeItem.$key}}"
                               ng-if="$ctrl.isApplicationNode(nodeItem.$key)">
-                            {{$ctrl.getNodePositionAndTitleByNodeId(nodeItem.$key)}}
+                            {{$ctrl.getNodePositionAndTitle(nodeItem.$key)}}
                           </md-option>
                         </md-select>
                       </md-input-container>
@@ -280,7 +280,7 @@
                         <label>{{ ::'componentID' | translate }}</label>
                         <md-select ng-model="satisfyCriteria.componentId"
                             ng-change="$ctrl.save()">
-                          <ng-container ng-repeat='(componentIndex, component) in $ctrl.getComponentsByNodeId(satisfyCriteria.nodeId)'
+                          <ng-container ng-repeat='(componentIndex, component) in $ctrl.getComponents(satisfyCriteria.nodeId)'
                               ng-init="isCRater = $ctrl.isCRaterComponent(component)">
                             <md-option value="{{component.id}}"
                                 ng-disabled="!isCRater">

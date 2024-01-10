@@ -1,0 +1,17 @@
+<div fxLayoutAlign="start center" fxLayoutGap="4px">
+  <button *ngIf="hasPrevNode"
+      mat-button
+      class='mat-raised-button mat-primary'
+      (click)='goToPrevNode()'
+      i18n>
+    Previous step
+  </button>
+  <span fxFlex></span>
+  <button *ngIf="hasNextNode"
+      mat-button
+      class='mat-raised-button mat-primary'
+      (click)='goToNextNode()'
+      i18n>
+    Next step
+  </button>
+</div>

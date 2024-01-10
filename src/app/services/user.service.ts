@@ -133,9 +133,11 @@ export class UserService {
     body = body.set('newPassword', newPassword);
     return this.http
       .post<any>(this.unlinkGoogleAccountUrl, body, { headers: headers })
-      .subscribe((user) => {
-        this.user$.next(user);
-      });
+      .pipe(
+        tap((user) => {
+          this.user$.next(user);
+        })
+      );
   }
 
   getUserByGoogleId(googleUserId: string) {

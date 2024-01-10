@@ -1,5 +1,5 @@
 <div [ngSwitch]="choiceType">
-  <component-header [componentContent]="componentContent"></component-header>
+  <component-header [component]="component"></component-header>
   <mat-radio-group *ngSwitchCase="'radio'"
       [(ngModel)]="studentChoices"
       (ngModelChange)="studentDataChanged()">

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { UtilService } from '../../../services/utilService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
@@ -18,10 +19,11 @@ export class MultipleChoiceShowWorkComponent extends ComponentShowWorkDirective 
 
   constructor(
     private MultipleChoiceService: MultipleChoiceService,
+    protected nodeService: NodeService,
     protected ProjectService: ProjectService,
     private UtilService: UtilService
   ) {
-    super(ProjectService);
+    super(nodeService, ProjectService);
   }
 
   ngOnInit(): void {

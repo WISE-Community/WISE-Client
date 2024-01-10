@@ -4,10 +4,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { Observable, of } from 'rxjs';
+import { CRaterIdea } from '../components/common/cRater/CRaterIdea';
+import { CRaterScore } from '../components/common/cRater/CRaterScore';
+import { CRaterResponse } from '../components/common/cRater/CRaterResponse';
 
 @Injectable()
 export class CRaterService {
-  constructor(protected http: HttpClient, protected ConfigService: ConfigService) {}
+  constructor(protected http: HttpClient, protected configService: ConfigService) {}
 
   /**
    * Make a CRater request to score student response
@@ -24,7 +27,7 @@ export class CRaterService {
     if (itemId === 'MOCK') {
       return this.mockResponse(responseText);
     } else {
-      return this.http.post(`${this.ConfigService.getCRaterRequestURL()}/score`, {
+      return this.http.post(`${this.configService.getCRaterRequestURL()}/score`, {
         itemId: itemId,
         responseId: responseId,
         responseText: responseText
@@ -43,26 +46,12 @@ export class CRaterService {
     });
   }
 
-  /**
-   * Get the CRater item type from the component
-   * @param component the component content
-   */
-  getCRaterItemType(component: any) {
-    if (component != null && component.cRater != null) {
-      return component.cRater.itemType;
-    }
-    return null;
+  private getCRaterItemType(component: any): string {
+    return component.cRater != null ? component.cRater.itemType : null;
   }
 
-  /**
-   * Get the CRater item id from the component
-   * @param component the component content
-   */
-  getCRaterItemId(component: any) {
-    if (component != null && component.cRater != null) {
-      return component.cRater.itemId;
-    }
-    return null;
+  getCRaterItemId(component: any): string {
+    return component.cRater != null ? component.cRater.itemId : null;
   }
 
   /**
@@ -70,102 +59,35 @@ export class CRaterService {
    * @param component the component content
    * @returns when to perform the CRater scoring e.g. 'submit', 'save', 'change', 'exit'
    */
-  getCRaterScoreOn(component: any) {
-    if (component != null) {
-      /*
-       * CRater can be enabled in two ways
-       * 1. the enableCRater field is true
-       * 2. there is no enableCRater field but there is a cRater object (this is for legacy purposes)
-       */
-      if (
-        (component.enableCRater && component.cRater != null) ||
-        (!component.hasOwnProperty('enableCRater') && component.cRater != null)
-      ) {
-        // get the score on value e.g. 'submit', 'save', 'change', or 'exit'
-        return component.cRater.scoreOn;
-      }
+  private getCRaterScoreOn(component: any): string {
+    /*
+     * CRater can be enabled in two ways
+     * 1. the enableCRater field is true
+     * 2. there is no enableCRater field but there is a cRater object (this is for legacy purposes)
+     */
+    if (
+      (component.enableCRater && component.cRater != null) ||
+      (!component.hasOwnProperty('enableCRater') && component.cRater != null)
+    ) {
+      return component.cRater.scoreOn;
     }
-    return null;
+  }
+
+  isCRaterEnabled(component: any): boolean {
+    const cRaterItemType = this.getCRaterItemType(component);
+    const cRaterItemId = this.getCRaterItemId(component);
+    return component.enableCRater && cRaterItemType != null && cRaterItemId != null;
   }
 
   /**
-   * Check if CRater is enabled for this component
+   * Check if the CRater is set to score on an event
    * @param component the component content
+   * @param event trigger event, 'save', 'submit', or 'change'
+   * @returns whether the CRater is set to score when the event is triggered
    */
-  isCRaterEnabled(component: any) {
-    if (component != null) {
-      // get the item type and item id
-      const cRaterItemType = this.getCRaterItemType(component);
-      const cRaterItemId = this.getCRaterItemId(component);
-      if (component.enableCRater && cRaterItemType != null && cRaterItemId != null) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Check if the CRater is set to score on save
-   * @param component the component content
-   * @returns whether the CRater is set to score on save
-   */
-  isCRaterScoreOnSave(component: any) {
-    if (component != null) {
-      // find when we should perform the CRater scoring
-      const scoreOn = this.getCRaterScoreOn(component);
-      if (scoreOn != null && scoreOn === 'save') {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Check if the CRater is set to score on submit
-   * @param component the component content
-   * @returns whether the CRater is set to score on submit
-   */
-  isCRaterScoreOnSubmit(component: any) {
-    if (component != null) {
-      // find when we should perform the CRater scoring
-      const scoreOn = this.getCRaterScoreOn(component);
-      if (scoreOn != null && scoreOn === 'submit') {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Check if the CRater is set to score on change
-   * @param component the component content
-   * @returns whether the CRater is set to score on change
-   */
-  isCRaterScoreOnChange(component: any) {
-    if (component != null) {
-      // find when we should perform the CRater scoring
-      const scoreOn = this.getCRaterScoreOn(component);
-      if (scoreOn != null && scoreOn === 'change') {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Check if the CRater is set to score on exit
-   * @param component the component content
-   * @returns whether the CRater is set to score on exit
-   */
-  isCRaterScoreOnExit(component: any) {
-    if (component != null) {
-      // find when we should perform the CRater scoring
-      const scoreOn = this.getCRaterScoreOn(component);
-      if (scoreOn != null && scoreOn === 'exit') {
-        return true;
-      }
-    }
-    return false;
+  isCRaterScoreOnEvent(component: any, event: 'save' | 'submit' | 'change'): boolean {
+    const scoreOn = this.getCRaterScoreOn(component);
+    return scoreOn != null && scoreOn === event;
   }
 
   /**
@@ -174,22 +96,15 @@ export class CRaterService {
    * @param score the score
    * @returns the scoring rule for the given score
    */
-  getCRaterScoringRuleByScore(component: any, score: any) {
-    if (component != null && score != null) {
-      const cRater = component.cRater;
-      if (cRater != null) {
-        const scoringRules = cRater.scoringRules;
-        if (scoringRules != null) {
-          // loop through all the scoring rules
-          for (let tempScoringRule of scoringRules) {
-            if (tempScoringRule != null) {
-              if (tempScoringRule.score == score) {
-                /*
-                 * the score matches so we have found
-                 * the scoring rule that we want
-                 */
-                return tempScoringRule;
-              }
+  private getCRaterScoringRuleByScore(component: any, score: any): any {
+    const cRater = component.cRater;
+    if (cRater != null) {
+      const scoringRules = cRater.scoringRules;
+      if (scoringRules != null) {
+        for (let tempScoringRule of scoringRules) {
+          if (tempScoringRule != null) {
+            if (tempScoringRule.score == score) {
+              return tempScoringRule;
             }
           }
         }
@@ -204,12 +119,9 @@ export class CRaterService {
    * @param score the score we want feedback for
    * @returns the feedback text for the given score
    */
-  getCRaterFeedbackTextByScore(component: any, score: any) {
+  getCRaterFeedbackTextByScore(component: any, score: any): any {
     const scoringRule = this.getCRaterScoringRuleByScore(component, score);
-    if (scoringRule != null) {
-      return scoringRule.feedbackText;
-    }
-    return null;
+    return scoringRule != null ? scoringRule.feedbackText : null;
   }
 
   /**
@@ -223,7 +135,7 @@ export class CRaterService {
     component: any,
     previousScore: any,
     currentScore: any
-  ) {
+  ): string {
     const scoringRule = this.getMultipleAttemptCRaterScoringRuleByScore(
       component,
       previousScore,
@@ -243,12 +155,12 @@ export class CRaterService {
    * @param currentScore the score from the current submit
    * @returns the scoring rule for the given previous score and current score
    */
-  getMultipleAttemptCRaterScoringRuleByScore(
+  private getMultipleAttemptCRaterScoringRuleByScore(
     component: any,
     previousScore: any,
     currentScore: any
-  ) {
-    if (component != null && previousScore != null && currentScore != null) {
+  ): any {
+    if (previousScore != null && currentScore != null) {
       const cRater = component.cRater;
       if (cRater != null) {
         const multipleAttemptScoringRules = cRater.multipleAttemptScoringRules;
@@ -288,8 +200,8 @@ export class CRaterService {
    * @param itemId A string.
    * @return A promise that returns whether the item id is valid.
    */
-  makeCRaterVerifyRequest(itemId: string) {
-    const url = this.ConfigService.getCRaterRequestURL() + '/verify';
+  makeCRaterVerifyRequest(itemId: string): any {
+    const url = this.configService.getCRaterRequestURL() + '/verify';
     const params = new HttpParams().set('itemId', itemId);
     const options = {
       params: params
@@ -300,5 +212,51 @@ export class CRaterService {
       .then((isAvailable: boolean) => {
         return isAvailable;
       });
+  }
+
+  getCRaterResponse(response: any, submitCounter: number): CRaterResponse {
+    const cRaterResponse: CRaterResponse = new CRaterResponse();
+    if (this.isSingleScore(response)) {
+      cRaterResponse.score = this.getScore(response);
+    } else {
+      cRaterResponse.scores = this.getScores(response);
+    }
+    cRaterResponse.ideas = this.getIdeas(response);
+    cRaterResponse.submitCounter = submitCounter;
+    return cRaterResponse;
+  }
+
+  private isSingleScore(response: any): boolean {
+    return response.responses.scores != null;
+  }
+
+  private getScore(response: any): number {
+    return parseInt(response.responses.scores.raw_trim_round);
+  }
+
+  private getScores(response: any): CRaterScore[] {
+    const scores = [];
+    for (const key in response.responses.trait_scores) {
+      const value = response.responses.trait_scores[key];
+      scores.push(
+        new CRaterScore(
+          key,
+          parseInt(value.raw_trim_round),
+          parseFloat(value.raw),
+          parseInt(value.score_range_min),
+          parseInt(value.score_range_max)
+        )
+      );
+    }
+    return scores;
+  }
+
+  private getIdeas(response: any): CRaterIdea[] {
+    const ideas = [];
+    for (const key in response.responses.feedback.ideas) {
+      const value = response.responses.feedback.ideas[key];
+      ideas.push(new CRaterIdea(key, value.detected));
+    }
+    return ideas;
   }
 }

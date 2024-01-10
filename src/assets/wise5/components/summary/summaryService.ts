@@ -1,7 +1,6 @@
 'use strict';
 
 import { ComponentService } from '../componentService';
-import { UtilService } from '../../services/utilService';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -11,8 +10,8 @@ export class SummaryService extends ComponentService {
   componentsWithScoresSummary: string[];
   componentsWithResponsesSummary: string[];
 
-  constructor(private http: HttpClient, protected UtilService: UtilService) {
-    super(UtilService);
+  constructor(private http: HttpClient) {
+    super();
     this.componentsWithScoresSummary = [
       'Animation',
       'AudioOscillator',

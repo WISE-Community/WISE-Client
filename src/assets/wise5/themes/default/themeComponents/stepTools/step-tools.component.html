@@ -25,7 +25,7 @@
           [(ngModel)]="toNodeId"
           (ngModelChange)="toNodeIdChanged()">
       <mat-select-trigger>
-        {{ getNodePositionAndTitleByNodeId(nodeId) }}
+        {{ getNodePositionAndTitle(nodeId) }}
       </mat-select-trigger>
       <ng-container *ngFor="let nodeId of nodeIds">
         <mat-option *ngIf="nodeStatuses[nodeId].isVisible"
@@ -40,7 +40,7 @@
                   custom-class="node-select__icon">
               </node-icon>
             </div>
-            <span>{{ getNodePositionAndTitleByNodeId(nodeId) }}</span>
+            <span>{{ getNodePositionAndTitle(nodeId) }}</span>
           </div>
         </mat-option>
       </ng-container>

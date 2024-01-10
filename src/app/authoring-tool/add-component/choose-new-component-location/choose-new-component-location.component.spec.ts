@@ -19,7 +19,7 @@ class MockProjectService {
     return { id: 'comp3', type: componentType };
   }
 
-  getComponentsByNodeId() {
+  getComponents() {
     return components;
   }
 

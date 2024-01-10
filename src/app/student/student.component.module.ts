@@ -4,6 +4,8 @@ import { AddToNotebookButton } from '../../assets/wise5/directives/add-to-notebo
 import { ComponentHeader } from '../../assets/wise5/directives/component-header/component-header.component';
 import { ComponentSaveSubmitButtons } from '../../assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { ComponentAnnotationsComponent } from '../../assets/wise5/directives/componentAnnotations/component-annotations.component';
+import { DynamicPromptComponent } from '../../assets/wise5/directives/dynamic-prompt/dynamic-prompt.component';
+import { PromptComponent } from '../../assets/wise5/directives/prompt/prompt.component';
 import { PossibleScoreComponent } from '../possible-score/possible-score.component';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 
@@ -13,7 +15,9 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
     ComponentAnnotationsComponent,
     ComponentHeader,
     ComponentSaveSubmitButtons,
-    PossibleScoreComponent
+    DynamicPromptComponent,
+    PossibleScoreComponent,
+    PromptComponent
   ],
   imports: [StudentTeacherCommonModule, ComponentStateInfoModule],
   exports: [
@@ -21,7 +25,9 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
     ComponentAnnotationsComponent,
     ComponentHeader,
     ComponentSaveSubmitButtons,
-    PossibleScoreComponent
+    DynamicPromptComponent,
+    PossibleScoreComponent,
+    PromptComponent
   ]
 })
 export class StudentComponentModule {}

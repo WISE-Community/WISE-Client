@@ -1,4 +1,4 @@
-<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+<edit-component-prompt [prompt]="componentContent.prompt"
    (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <p i18n>
   Choose the step and component to show the summary data for:
@@ -8,7 +8,7 @@
     <mat-label i18n>Step</mat-label>
     <mat-select
         color="primary"
-        [(ngModel)]="authoringComponentContent.summaryNodeId"
+        [(ngModel)]="componentContent.summaryNodeId"
         (ngModelChange)="summaryNodeIdChanged()">
       <mat-option *ngFor="let stepNodeDetails of stepNodesDetails"
           value="{{stepNodeDetails.nodeId}}">
@@ -19,11 +19,11 @@
   <mat-form-field class="wide-drop-down">
     <mat-label i18n>Component</mat-label>
     <mat-select
-        [(ngModel)]="authoringComponentContent.summaryComponentId"
+        [(ngModel)]="componentContent.summaryComponentId"
         (ngModelChange)="summaryComponentIdChanged()">
-      <mat-option *ngFor="let component of getComponentsByNodeId(authoringComponentContent.summaryNodeId); index as componentIndex"
+      <mat-option *ngFor="let component of getComponents(componentContent.summaryNodeId); index as componentIndex"
           value="{{component.id}}"
-          [disabled]="!isComponentTypeAllowed(component.type) || authoringComponentContent.summaryComponentId === componentId">
+          [disabled]="!isComponentTypeAllowed(component.type) || componentContent.summaryComponentId === componentId">
         {{ componentIndex + 1 }}. {{ component.type }} <span *ngIf="component.id === componentId" i18n>(This Component)</span>
       </mat-option>
     </mat-select>
@@ -31,7 +31,7 @@
   <mat-form-field class="short-drop-down">
     <mat-label i18n>Student Data Type</mat-label>
     <mat-select
-        [(ngModel)]="authoringComponentContent.studentDataType"
+        [(ngModel)]="componentContent.studentDataType"
         (ngModelChange)="studentDataTypeChanged()">
       <mat-option value="responses" *ngIf="isResponsesOptionAvailable" i18n>
         Responses
@@ -44,7 +44,7 @@
   <mat-form-field class="short-drop-down">
     <mat-label i18n>Source</mat-label>
     <mat-select
-        [(ngModel)]="authoringComponentContent.source"
+        [(ngModel)]="componentContent.source"
         (ngModelChange)="componentChanged()"
         style="min-width: 200px">
       <mat-option value="self" i18n>
@@ -61,7 +61,7 @@
   <mat-form-field class="short-drop-down">
     <mat-label i18n>Chart Type</mat-label>
     <mat-select
-        [(ngModel)]="authoringComponentContent.chartType"
+        [(ngModel)]="componentContent.chartType"
         (ngModelChange)="componentChanged()">
       <mat-option value="column" i18n>
         Bar
@@ -74,7 +74,7 @@
   <mat-form-field class="short-drop-down">
     <mat-label i18n>Required to View Summary</mat-label>
     <mat-select
-        [(ngModel)]="authoringComponentContent.requirementToSeeSummary"
+        [(ngModel)]="componentContent.requirementToSeeSummary"
         (ngModelChange)="componentChanged()">
         <mat-option value="completeComponent" i18n>
           Complete Component
@@ -92,7 +92,7 @@
   <div *ngIf="isHighlightCorrectAnswerAvailable" class="checkbox">
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.highlightCorrectAnswer"
+        [(ngModel)]="componentContent.highlightCorrectAnswer"
         (ngModelChange)="componentChanged()"
         i18n>
       Highlight Correct Answer
@@ -101,7 +101,7 @@
   <div class="checkbox">
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.showPromptFromOtherComponent"
+        [(ngModel)]="componentContent.showPromptFromOtherComponent"
         (ngModelChange)="componentChanged()"
         i18n>
       Show Prompt From Source Component
@@ -121,12 +121,12 @@
     <mat-icon>add</mat-icon>
   </button>
 </div>
-<div *ngIf="authoringComponentContent.customLabelColors.length === 0"
+<div *ngIf="componentContent.customLabelColors.length === 0"
     class="info-block"
     i18n>
   There are no custom label colors. Click the "Add Custom Label Color" button to give a label a specific color.
 </div>
-<div *ngFor="let customLabelColor of authoringComponentContent.customLabelColors; index as customLabelColorIndex; first as isFirst; last as isLast"
+<div *ngFor="let customLabelColor of componentContent.customLabelColors; index as customLabelColorIndex; first as isFirst; last as isLast"
     fxLayout="row wrap"
     fxLayoutAlign="start center"
     class="custom-label-color-container">
@@ -146,7 +146,7 @@
     <button mat-raised-button
         color="primary"
         class="button"
-        (click)="moveObjectUp(authoringComponentContent.customLabelColors, customLabelColorIndex)"
+        (click)="moveObjectUp(componentContent.customLabelColors, customLabelColorIndex)"
         [disabled]="isFirst"
         matTooltip="Move Up"
         matTooltipPosition="above"
@@ -158,7 +158,7 @@
     <button mat-raised-button
         color="primary"
         class="button"
-        (click)="moveObjectDown(authoringComponentContent.customLabelColors, customLabelColorIndex)"
+        (click)="moveObjectDown(componentContent.customLabelColors, customLabelColorIndex)"
         [disabled]="isLast"
         matTooltip="Move Down"
         matTooltipPosition="above"

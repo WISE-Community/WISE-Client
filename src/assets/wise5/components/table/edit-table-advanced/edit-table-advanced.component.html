@@ -2,13 +2,13 @@
   <div>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.isDataExplorerEnabled"
+        [(ngModel)]="componentContent.isDataExplorerEnabled"
         (ngModelChange)="toggleDataExplorer()"
         i18n>
       Enable Data Explorer
     </mat-checkbox>
   </div>
-  <div *ngIf="authoringComponentContent.isDataExplorerEnabled"
+  <div *ngIf="componentContent.isDataExplorerEnabled"
       fxLayout="column" fxLayoutGap="10px">
     <div fxLayout="row wrap" fxLayoutGap="40px">
       <span i18n>Allowed Graph Types:</span>
@@ -37,7 +37,7 @@
     <div *ngIf="isDataExplorerScatterPlotEnabled">
       <mat-checkbox
           color="primary"
-          [(ngModel)]="authoringComponentContent.isDataExplorerScatterPlotRegressionLineEnabled"
+          [(ngModel)]="componentContent.isDataExplorerScatterPlotRegressionLineEnabled"
           (ngModelChange)="componentChanged()"
           i18n>
         Show Scatter Plot Regression Line
@@ -49,7 +49,7 @@
         <input matInput
             type="number"
             min="1"
-            [(ngModel)]="authoringComponentContent.numDataExplorerSeries"
+            [(ngModel)]="componentContent.numDataExplorerSeries"
             (ngModelChange)="numDataExplorerSeriesChanged()"/>
       </mat-form-field>
     </div>
@@ -59,20 +59,20 @@
         <input matInput
             type="number"
             min="1"
-            [(ngModel)]="authoringComponentContent.numDataExplorerYAxis"
+            [(ngModel)]="componentContent.numDataExplorerYAxis"
             (ngModelChange)="numDataExplorerYAxisChanged()"/>
       </mat-form-field>
     </div>
-    <div *ngIf="authoringComponentContent.numDataExplorerYAxis > 1"
+    <div *ngIf="componentContent.numDataExplorerYAxis > 1"
         fxLayout="column" fxLayoutGap="10px">
       <span i18n>Choose the Y Axis for each Series</span>
-      <div *ngFor="let s of [].constructor(authoringComponentContent.numDataExplorerSeries); index as seriesIndex">
+      <div *ngFor="let s of [].constructor(componentContent.numDataExplorerSeries); index as seriesIndex">
         <mat-form-field>
           <mat-label><span i18n>Series</span> {{ seriesIndex + 1 }}</mat-label>
           <mat-select
-              [(ngModel)]="authoringComponentContent.dataExplorerSeriesParams[seriesIndex].yAxis"
+              [(ngModel)]="componentContent.dataExplorerSeriesParams[seriesIndex].yAxis"
               (ngModelChange)="componentChanged()">
-            <mat-option *ngFor="let y of [].constructor(authoringComponentContent.numDataExplorerYAxis); index as yAxisIndex"
+            <mat-option *ngFor="let y of [].constructor(componentContent.numDataExplorerYAxis); index as yAxisIndex"
                 [value]="yAxisIndex">
               <span i18n>Y Axis</span><span> {{ yAxisIndex + 1 }}</span>
             </mat-option>
@@ -83,7 +83,7 @@
     <div>
       <mat-checkbox
           color="primary"
-          [(ngModel)]="authoringComponentContent.isDataExplorerAxisLabelsEditable"
+          [(ngModel)]="componentContent.isDataExplorerAxisLabelsEditable"
           (ngModelChange)="componentChanged()"
           i18n>
         Can Student Edit Axis Labels
@@ -104,7 +104,7 @@
       </div>
       <mat-form-field>
         <mat-label i18n>X Data</mat-label>
-        <mat-select [(ngModel)]="authoringComponentContent.dataExplorerDataToColumn['x']"
+        <mat-select [(ngModel)]="componentContent.dataExplorerDataToColumn['x']"
             (ngModelChange)="componentChanged()">
           <mat-option [value]="" i18n>(Allow student to select)</mat-option>
           <mat-option *ngFor="let columnName of columnNames; index as columnIndex"
@@ -117,10 +117,10 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field
-          *ngFor="let y of [].constructor(authoringComponentContent.numDataExplorerSeries); index as dataExplorerSeriesIndex">
-        <mat-label i18n>Y Data {{ (authoringComponentContent.numDataExplorerSeries > 1 ? dataExplorerSeriesIndex + 1 : "") }}</mat-label>
+          *ngFor="let y of [].constructor(componentContent.numDataExplorerSeries); index as dataExplorerSeriesIndex">
+        <mat-label i18n>Y Data {{ (componentContent.numDataExplorerSeries > 1 ? dataExplorerSeriesIndex + 1 : "") }}</mat-label>
         <mat-select
-            [(ngModel)]="authoringComponentContent.dataExplorerDataToColumn['y' + (dataExplorerSeriesIndex > 0 ? (dataExplorerSeriesIndex + 1) : '')]"
+            [(ngModel)]="componentContent.dataExplorerDataToColumn['y' + (dataExplorerSeriesIndex > 0 ? (dataExplorerSeriesIndex + 1) : '')]"
             (ngModelChange)="componentChanged()">
           <mat-option [value]="" i18n>(Allow student to select)</mat-option>
           <mat-option *ngFor="let columnName of columnNames; index as columnIndex"
@@ -140,14 +140,16 @@
       color="primary"
       class="import-table-button"
       fxLayoutAlign="center center">
-    <div i18n>Import Table</div>
+    <span i18n>Import Table</span>
     <input type="file"
         accept=".csv"
         class="import-table-input"
         (change)="importTableFile($event)"/>
   </button>
   <mat-icon matTooltip="Only .csv (comma separated values) files are allowed"
-      i18n-matTooltip>
+      i18n-matTooltip
+      tabindex="0"
+      aria-role="button">
     help
   </mat-icon>
   <mat-progress-spinner *ngIf="isImportingTable"
@@ -158,40 +160,48 @@
   <div class="import-table-message">{{importTableMessage}}</div>
 </div>
 <div *ngIf="isNotebookEnabled()">
-  <edit-component-add-to-notebook-button [authoringComponentContent]="authoringComponentContent">
+  <edit-component-add-to-notebook-button [componentContent]="componentContent">
   </edit-component-add-to-notebook-button>
 </div>
-<edit-component-save-button [authoringComponentContent]="authoringComponentContent">
+<edit-component-save-button [componentContent]="componentContent">
 </edit-component-save-button>
 <br/>
-<edit-component-submit-button [authoringComponentContent]="authoringComponentContent">
+<edit-component-submit-button [componentContent]="componentContent">
 </edit-component-submit-button>
+<div>
+  <mat-checkbox color="primary"
+      [(ngModel)]="componentContent.enableRowSelection"
+      (ngModelChange)="componentChanged()"
+      i18n>
+    Enable Row Selection
+  </mat-checkbox>
+</div>
 <edit-component-max-submit
-    *ngIf="authoringComponentContent.showSubmitButton"
-    [(maxSubmitCount)]="authoringComponentContent.maxSubmitCount"
+    *ngIf="componentContent.showSubmitButton"
+    [(maxSubmitCount)]="componentContent.maxSubmitCount"
     (maxSubmitCountChange)="maxSubmitCountChanged($event)">
 </edit-component-max-submit>
 <edit-component-default-feedback
-    [authoringComponentContent]="authoringComponentContent">
+    [componentContent]="componentContent">
 </edit-component-default-feedback>
 <div fxLayout="column" fxLayoutAlign="start start">
-  <edit-component-max-score [authoringComponentContent]="authoringComponentContent">
+  <edit-component-max-score [componentContent]="componentContent">
   </edit-component-max-score>
-  <edit-component-exclude-from-total-score [authoringComponentContent]="authoringComponentContent">
+  <edit-component-exclude-from-total-score [componentContent]="componentContent">
   </edit-component-exclude-from-total-score>
-  <edit-component-width [authoringComponentContent]="authoringComponentContent">
+  <edit-component-width [componentContent]="componentContent">
   </edit-component-width>
-  <edit-component-rubric [authoringComponentContent]="authoringComponentContent">
+  <edit-component-rubric [componentContent]="componentContent">
   </edit-component-rubric>
-  <edit-component-tags [authoringComponentContent]="authoringComponentContent">
+  <edit-component-tags [componentContent]="componentContent">
   </edit-component-tags>
 </div>
 <edit-table-connected-components
     [nodeId]="nodeId"
     [componentId]="componentId"
     [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-    [componentContent]="authoringComponentContent"
-    [connectedComponents]="authoringComponentContent.connectedComponents"
+    [componentContent]="componentContent"
+    [connectedComponents]="componentContent.connectedComponents"
     (connectedComponentsChanged)="connectedComponentsChanged($event)">
 </edit-table-connected-components>
 <edit-component-json [nodeId]="nodeId" [componentId]="componentId"></edit-component-json>

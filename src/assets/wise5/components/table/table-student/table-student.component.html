@@ -1,4 +1,4 @@
-<component-header [componentContent]="componentContent"></component-header>
+<component-header [component]="component"></component-header>
 <div class="tools" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
   <button
       mat-button
@@ -32,10 +32,16 @@
 </div>
 <tabulator-table [id]="tableId"
     [editableCells]="tabulatorData.editableCells"
+    [enableRowSelection]="componentContent.enableRowSelection"
+    [selectedRowIndices]="selectedRowIndices"
     [tabColumns]="tabulatorData.columns"
     [tabData]="tabulatorData.data"
     [tabOptions]="tabulatorData.options"
-    (cellChanged)="tabulatorCellChanged($event)"></tabulator-table>
+    [tabSorters]="tabulatorSorters"
+    (cellChanged)="tabulatorCellChanged($event)"
+    (rowSelectionChanged)="tabulatorRowSelectionChanged($event)"
+    (rowSortChanged)="tabulatorRowSortChanged($event)"
+    (ready)="tabulatorRendered()"></tabulator-table>
 <div *ngIf="isDataExplorerEnabled">
   <br/>
   <mat-form-field *ngIf="componentContent.dataExplorerGraphTypes.length > 1" appearance="fill">

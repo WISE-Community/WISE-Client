@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PeerGroupStudentData } from '../../../app/domain/peerGroupStudentData';
 import { Node } from '../common/Node';
 import { PeerGroup } from '../components/peerChat/PeerGroup';
 import { ConfigService } from './configService';
@@ -9,8 +10,8 @@ import { ConfigService } from './configService';
 export class PeerGroupService {
   runId: number;
 
-  constructor(protected ConfigService: ConfigService, protected http: HttpClient) {
-    this.runId = this.ConfigService.getRunId();
+  constructor(protected configService: ConfigService, protected http: HttpClient) {
+    this.runId = this.configService.getRunId();
   }
 
   getPeerGroupingTags(node: Node): Set<string> {
@@ -25,9 +26,9 @@ export class PeerGroupService {
 
   retrievePeerGroup(
     peerGroupingTag: string,
-    workgroupId = this.ConfigService.getWorkgroupId()
+    workgroupId = this.configService.getWorkgroupId()
   ): Observable<any> {
-    const runId = this.ConfigService.isPreview() ? 1 : this.ConfigService.getRunId();
+    const runId = this.configService.isPreview() ? 1 : this.configService.getRunId();
     return this.http.get(`/api/peer-group/${runId}/${workgroupId}/${peerGroupingTag}`);
   }
 
@@ -68,5 +69,25 @@ export class PeerGroupService {
 
   removeWorkgroupFromGroup(workgroupId: number, groupId: number): Observable<any> {
     return this.http.delete(`/api/peer-group/membership/${groupId}/${workgroupId}`);
+  }
+
+  retrieveDynamicPromptStudentData(
+    peerGroupId: number,
+    nodeId: string,
+    componentId: string
+  ): Observable<PeerGroupStudentData[]> {
+    return this.http.get<PeerGroupStudentData[]>(
+      `/api/peer-group/${peerGroupId}/${nodeId}/${componentId}/student-data/dynamic-prompt`
+    );
+  }
+
+  retrieveQuestionBankStudentData(
+    peerGroupId: number,
+    nodeId: string,
+    componentId: string
+  ): Observable<PeerGroupStudentData[]> {
+    return this.http.get<PeerGroupStudentData[]>(
+      `/api/peer-group/${peerGroupId}/${nodeId}/${componentId}/student-data/question-bank`
+    );
   }
 }

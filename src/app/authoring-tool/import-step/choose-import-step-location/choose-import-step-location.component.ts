@@ -48,8 +48,8 @@ export class ChooseImportStepLocationComponent {
     return this.ProjectService.isGroupNode(nodeId);
   }
 
-  getNodeTitleByNodeId(nodeId) {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   getNodePositionById(nodeId) {

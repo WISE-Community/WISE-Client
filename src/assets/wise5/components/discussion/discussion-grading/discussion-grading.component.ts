@@ -6,6 +6,5 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
   templateUrl: 'discussion-grading.component.html'
 })
 export class DiscussionGradingComponent extends ComponentShowWorkDirective {
-  @Input()
-  workgroupId: any;
+  @Input() workgroupId: any;
 }

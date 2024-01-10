@@ -13,6 +13,11 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import * as helpers from '../register-user-form/register-user-form-spec-helpers';
+import { PasswordService } from '../../services/password.service';
+import {
+  nameTests,
+  validateAndExpect
+} from '../register-user-form/register-user-form-spec-helpers';
 
 class MockTeacherService {
   registerTeacherAccount() {}
@@ -22,30 +27,34 @@ class MockUserService {}
 
 let component: RegisterTeacherFormComponent;
 let fixture: ComponentFixture<RegisterTeacherFormComponent>;
+const PASSWORD: string = 'Abcd1234';
 let teacherService: TeacherService;
 let router: Router;
 let snackBar: MatSnackBar;
 
 describe('RegisterTeacherFormComponent', () => {
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [RegisterTeacherFormComponent],
-      imports: [
-        BrowserAnimationsModule,
-        RouterTestingModule,
-        ReactiveFormsModule,
-        MatCheckboxModule,
-        MatSelectModule,
-        MatInputModule,
-        MatSnackBarModule
-      ],
-      providers: [
-        { provide: TeacherService, useClass: MockTeacherService },
-        { provide: UserService, useClass: MockUserService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [RegisterTeacherFormComponent],
+        imports: [
+          BrowserAnimationsModule,
+          RouterTestingModule,
+          ReactiveFormsModule,
+          MatCheckboxModule,
+          MatSelectModule,
+          MatInputModule,
+          MatSnackBarModule
+        ],
+        providers: [
+          PasswordService,
+          { provide: TeacherService, useClass: MockTeacherService },
+          { provide: UserService, useClass: MockUserService }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterTeacherFormComponent);
@@ -55,10 +64,38 @@ describe('RegisterTeacherFormComponent', () => {
     snackBar = TestBed.get(MatSnackBar);
     fixture.detectChanges();
   });
-
+  validateFirstName();
+  validateLastName();
   createAccount();
 });
 
+function validateFirstName() {
+  describe('validateFirstName()', () => {
+    for (const nameTest of nameTests) {
+      it(nameTest.description, () => {
+        validateAndExpect(
+          component.createTeacherAccountFormGroup.get('firstName'),
+          nameTest.name,
+          nameTest.isValid
+        );
+      });
+    }
+  });
+}
+
+function validateLastName() {
+  describe('validateLastName()', () => {
+    for (const nameTest of nameTests) {
+      it(nameTest.description, () => {
+        validateAndExpect(
+          component.createTeacherAccountFormGroup.get('lastName'),
+          nameTest.name,
+          nameTest.isValid
+        );
+      });
+    }
+  });
+}
 function createAccount() {
   describe('createAccount()', () => {
     it('should create account with valid form fields', () => {
@@ -73,8 +110,8 @@ function createAccount() {
           'Boating School',
           'Other',
           '',
-          'a',
-          'a',
+          PASSWORD,
+          PASSWORD,
           true
         )
       );
@@ -96,21 +133,21 @@ function createAccount() {
     it('should show error when invalid first name is sent to server', () => {
       expectCreateAccountWithInvalidNameToShowError(
         'invalidFirstName',
-        'Error: First Name must only contain characters A-Z'
+        'Error: First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
       );
     });
 
     it('should show error when invalid last name is sent to server', () => {
       expectCreateAccountWithInvalidNameToShowError(
         'invalidLastName',
-        'Error: Last Name must only contain characters A-Z'
+        'Error: Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
       );
     });
 
     it('should show error when invalid first and last name is sent to server', () => {
       expectCreateAccountWithInvalidNameToShowError(
         'invalidFirstAndLastName',
-        'Error: First Name and Last Name must only contain characters A-Z'
+        'Error: First Name and Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
       );
     });
   });
@@ -128,8 +165,8 @@ function expectCreateAccountWithInvalidNameToShowError(errorCode: string, errorM
       'Boating School',
       'Other',
       '',
-      'a',
-      'a',
+      PASSWORD,
+      PASSWORD,
       true
     )
   );

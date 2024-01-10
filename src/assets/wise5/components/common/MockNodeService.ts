@@ -5,7 +5,4 @@ export class MockNodeService {
   public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
   private deleteStarterStateSource: Subject<any> = new Subject<any>();
   public deleteStarterState$: Observable<any> = this.deleteStarterStateSource.asObservable();
-  createNewComponentState() {
-    return {};
-  }
 }

@@ -1,101 +1,54 @@
-<div [ngSwitch]="componentContent.type" class="component__wrapper">
-  <animation-student *ngSwitchCase="'Animation'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      mode="preview">
+<div [ngSwitch]="component.content.type" class="component__wrapper">
+  <animation-student *ngSwitchCase="'Animation'" [component]="component" mode="preview">
   </animation-student>
   <audio-oscillator-student *ngSwitchCase="'AudioOscillator'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
+      [component]="component"
       mode="preview">
   </audio-oscillator-student>
   <concept-map-student *ngSwitchCase="'ConceptMap'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
+      [component]="component"
       (starterStateChangedEvent)="updateStarterState($event)"
       mode="preview">
   </concept-map-student>
-  <dialog-guidance-student *ngSwitchCase="'DialogGuidance'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      mode="preview">
+  <dialog-guidance-student *ngSwitchCase="'DialogGuidance'" [component]="component" mode="preview">
   </dialog-guidance-student>
-  <discussion-student *ngSwitchCase="'Discussion'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      mode="preview">
+  <discussion-student *ngSwitchCase="'Discussion'" [component]="component" mode="preview">
   </discussion-student>
   <draw-student *ngSwitchCase="'Draw'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
+      [component]="component"
       (starterStateChangedEvent)="updateStarterState($event)"
       mode="preview">
   </draw-student>
-  <embedded-student *ngSwitchCase="'Embedded'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      mode="preview">
+  <embedded-student *ngSwitchCase="'Embedded'" [component]="component" mode="preview">
   </embedded-student>
-  <graph-student *ngSwitchCase="'Graph'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      mode="preview">
+  <graph-student *ngSwitchCase="'Graph'" [component]="component" mode="preview">
   </graph-student>
-  <html-student *ngSwitchCase="'HTML'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      mode="preview">
+  <html-student *ngSwitchCase="'HTML'" [component]="component" mode="preview">
   </html-student>
   <label-student *ngSwitchCase="'Label'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
+      [component]="component"
       (starterStateChangedEvent)="updateStarterState($event)"
       mode="preview">
   </label-student>
-  <match-student *ngSwitchCase="'Match'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      mode="preview">
+  <match-student *ngSwitchCase="'Match'" [component]="component" mode="preview">
   </match-student>
-  <multiple-choice-student *ngSwitchCase="'MultipleChoice'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      mode="preview">
+  <multiple-choice-student *ngSwitchCase="'MultipleChoice'" [component]="component" mode="preview">
   </multiple-choice-student>
-  <open-response-student *ngSwitchCase="'OpenResponse'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      mode="preview">
+  <open-response-student *ngSwitchCase="'OpenResponse'" [component]="component" mode="preview">
   </open-response-student>
-  <outside-url-student *ngSwitchCase="'OutsideURL'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      mode="preview">
+  <outside-url-student *ngSwitchCase="'OutsideURL'" [component]="component" mode="preview">
   </outside-url-student>
-  <peer-chat-student *ngSwitchCase="'PeerChat'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      mode="preview">
+  <peer-chat-student *ngSwitchCase="'PeerChat'" [component]="component" mode="preview">
   </peer-chat-student>
-  <show-group-work-student *ngSwitchCase="'ShowGroupWork'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      mode="preview">
+  <show-group-work-student *ngSwitchCase="'ShowGroupWork'" [component]="component" mode="preview">
   </show-group-work-student>
-  <show-my-work-student *ngSwitchCase="'ShowMyWork'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      mode="preview">
+  <show-my-work-student *ngSwitchCase="'ShowMyWork'" [component]="component" mode="preview">
   </show-my-work-student>
   <summary-student *ngSwitchCase="'Summary'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
+      [component]="component"
       [periodId]="periodId"
       mode="preview">
   </summary-student>
-  <table-student *ngSwitchCase="'Table'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      mode="preview">
+  <table-student *ngSwitchCase="'Table'" [component]="component" mode="preview">
   </table-student>
 </div>

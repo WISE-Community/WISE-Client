@@ -180,7 +180,7 @@ export class TeacherDataService extends DataService {
   getConnectedComponentsWithRequiredStudentData(components): any {
     const connectedComponents = [];
     for (const component of components) {
-      const componentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      const componentContent = this.ProjectService.getComponent(
         component.nodeId,
         component.componentId
       );
@@ -303,9 +303,8 @@ export class TeacherDataService extends DataService {
   }
 
   processAnnotations(annotations) {
-    const activeAnnotations = this.getActiveAnnototations(annotations);
-    this.studentData.annotations = activeAnnotations;
-    for (const annotation of activeAnnotations) {
+    this.studentData.annotations = annotations;
+    for (const annotation of annotations) {
       this.addAnnotationToAnnotationsToWorkgroupId(annotation);
       this.addAnnotationToAnnotationsByNodeId(annotation);
     }

@@ -34,7 +34,6 @@ const componentContent = {
   logicThresholdCount: 0,
   logicThresholdPercent: 0,
   maxMembershipCount: 2,
-  questionBank: ['What color is the sky?', 'How deep is the ocean?'],
   showWorkNodeId: 'node8',
   showWorkComponentId: 'vau6ihimfk'
 };
@@ -76,13 +75,12 @@ describe('PeerChatAuthoringComponent', () => {
       'node2',
       'node3'
     ]);
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(
       JSON.parse(JSON.stringify(componentContent))
     );
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue(JSON.parse(JSON.stringify(componentContent)));
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
+      JSON.parse(JSON.stringify(componentContent))
+    );
     spyOn(component, 'componentChanged').and.callFake(() => {});
     component.componentContent = JSON.parse(JSON.stringify(componentContent));
     fixture.detectChanges();

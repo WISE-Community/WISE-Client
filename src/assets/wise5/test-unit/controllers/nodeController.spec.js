@@ -27,7 +27,7 @@ describe('NodeController', () => {
     spyOn(StudentDataService, 'saveVLEEvent').and.callFake(() => {});
     spyOn(ProjectService, 'isApplicationNode').and.returnValue(true);
     spyOn(ProjectService, 'getNodeById').and.returnValue({ components: [] });
-    spyOn(ProjectService, 'getNodeTitleByNodeId').and.returnValue('');
+    spyOn(ProjectService, 'getNodeTitle').and.returnValue('');
     spyOn(ConfigService, 'isRunActive').and.returnValue(true);
     spyOn(ConfigService, 'isEndedAndLocked').and.returnValue(false);
     nodeController = $controller('NodeController', {

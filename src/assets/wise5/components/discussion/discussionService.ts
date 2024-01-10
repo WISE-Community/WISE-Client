@@ -13,7 +13,7 @@ export class DiscussionService extends ComponentService {
     protected ConfigService: ConfigService,
     protected UtilService: UtilService
   ) {
-    super(UtilService);
+    super();
   }
 
   getComponentTypeLabel(): string {
