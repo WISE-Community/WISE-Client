@@ -46,18 +46,19 @@ export class TableAuthoring extends AbstractComponentAuthoring {
   }
 
   private initializeDimensionInputs(): void {
-    this.numColumnsFormControl = new FormControl(this.componentContent.numColumns, [
-      Validators.required,
-      this.positiveNumberValidator()
-    ]);
-    this.numRowsFormControl = new FormControl(this.componentContent.numRows, [
-      Validators.required,
-      this.positiveNumberValidator()
-    ]);
+    this.initializeColumnInput();
+    this.initializeRowInput();
     this.dimensionsForm = new FormGroup({
       numColumnsFormControl: this.numColumnsFormControl,
       numRowsFormControl: this.numRowsFormControl
     });
+  }
+
+  private initializeColumnInput(): void {
+    this.numColumnsFormControl = new FormControl(this.componentContent.numColumns, [
+      Validators.required,
+      this.positiveNumberValidator()
+    ]);
     this.subscriptions.add(
       this.numColumnsFormControl.valueChanges
         .pipe(debounceTime(1000), distinctUntilChanged())
@@ -68,6 +69,13 @@ export class TableAuthoring extends AbstractComponentAuthoring {
           }
         })
     );
+  }
+
+  private initializeRowInput(): void {
+    this.numRowsFormControl = new FormControl(this.componentContent.numRows, [
+      Validators.required,
+      this.positiveNumberValidator()
+    ]);
     this.subscriptions.add(
       this.numRowsFormControl.valueChanges
         .pipe(debounceTime(1000), distinctUntilChanged())
