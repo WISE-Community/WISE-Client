@@ -55,10 +55,7 @@ export class TableAuthoring extends AbstractComponentAuthoring {
   }
 
   private initializeColumnInput(): void {
-    this.numColumnsFormControl = new FormControl(this.componentContent.numColumns, [
-      Validators.required,
-      this.positiveNumberValidator()
-    ]);
+    this.numColumnsFormControl = this.createDimensionFormControl(this.componentContent.numColumns);
     this.subscriptions.add(
       this.numColumnsFormControl.valueChanges
         .pipe(debounceTime(1000), distinctUntilChanged())
@@ -72,10 +69,7 @@ export class TableAuthoring extends AbstractComponentAuthoring {
   }
 
   private initializeRowInput(): void {
-    this.numRowsFormControl = new FormControl(this.componentContent.numRows, [
-      Validators.required,
-      this.positiveNumberValidator()
-    ]);
+    this.numRowsFormControl = this.createDimensionFormControl(this.componentContent.numRows);
     this.subscriptions.add(
       this.numRowsFormControl.valueChanges
         .pipe(debounceTime(1000), distinctUntilChanged())
@@ -86,6 +80,10 @@ export class TableAuthoring extends AbstractComponentAuthoring {
           }
         })
     );
+  }
+
+  private createDimensionFormControl(initialValue: number): FormControl {
+    return new FormControl(initialValue, [Validators.required, this.positiveNumberValidator()]);
   }
 
   private positiveNumberValidator(): ValidatorFn {
