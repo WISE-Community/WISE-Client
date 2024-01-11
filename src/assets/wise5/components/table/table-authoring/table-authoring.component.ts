@@ -8,6 +8,7 @@ import { AbstractComponentAuthoring } from '../../../authoringTool/components/Ab
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'table-authoring',
@@ -16,12 +17,12 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 })
 export class TableAuthoring extends AbstractComponentAuthoring {
   columnCellSizes: any;
+  dimensionsForm: FormGroup;
   frozenColumns: any;
   frozenColumnsLimitReached: boolean = false;
-
-  numColumnsChange: Subject<number> = new Subject<number>();
-  numRowsChange: Subject<number> = new Subject<number>();
   globalCellSizeChange: Subject<number> = new Subject<number>();
+  numColumnsFormControl: FormControl;
+  numRowsFormControl: FormControl;
 
   constructor(
     protected ConfigService: ConfigService,
@@ -30,27 +31,61 @@ export class TableAuthoring extends AbstractComponentAuthoring {
     protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.subscriptions.add(
-      this.numColumnsChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.tableNumColumnsChanged();
-      })
-    );
-    this.subscriptions.add(
-      this.numRowsChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.tableNumRowsChanged();
-      })
-    );
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+    this.initializeDimensionInputs();
     this.subscriptions.add(
       this.globalCellSizeChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
       })
     );
-  }
-
-  ngOnInit() {
-    super.ngOnInit();
     this.columnCellSizes = this.parseColumnCellSizes(this.componentContent);
     this.frozenColumns = this.parseFrozenColumns(this.componentContent);
+  }
+
+  private initializeDimensionInputs(): void {
+    this.numColumnsFormControl = new FormControl(this.componentContent.numColumns, [
+      Validators.required,
+      this.positiveNumberValidator()
+    ]);
+    this.numRowsFormControl = new FormControl(this.componentContent.numRows, [
+      Validators.required,
+      this.positiveNumberValidator()
+    ]);
+    this.dimensionsForm = new FormGroup({
+      numColumnsFormControl: this.numColumnsFormControl,
+      numRowsFormControl: this.numRowsFormControl
+    });
+    this.subscriptions.add(
+      this.numColumnsFormControl.valueChanges
+        .pipe(debounceTime(1000), distinctUntilChanged())
+        .subscribe((value: number): void => {
+          if (this.numColumnsFormControl.valid) {
+            this.componentContent.numColumns = value;
+            this.tableNumColumnsChanged();
+          }
+        })
+    );
+    this.subscriptions.add(
+      this.numRowsFormControl.valueChanges
+        .pipe(debounceTime(1000), distinctUntilChanged())
+        .subscribe((value: number): void => {
+          if (this.numRowsFormControl.valid) {
+            this.componentContent.numRows = value;
+            this.tableNumRowsChanged();
+          }
+        })
+    );
+  }
+
+  private positiveNumberValidator(): ValidatorFn {
+    return (control: FormControl) => {
+      if (control.value < 1) {
+        return { invalid: true };
+      }
+    };
   }
 
   tableNumRowsChanged(): void {
@@ -203,6 +238,7 @@ export class TableAuthoring extends AbstractComponentAuthoring {
     }
     tableData.splice(rowIndex, 0, newRow);
     this.componentContent.numRows++;
+    this.numRowsFormControl.setValue(this.componentContent.numRows);
     this.componentChanged();
   }
 
@@ -213,6 +249,7 @@ export class TableAuthoring extends AbstractComponentAuthoring {
         tableData.splice(rowIndex, 1);
         this.componentContent.numRows--;
       }
+      this.numRowsFormControl.setValue(this.componentContent.numRows);
       this.componentChanged();
     }
   }
@@ -228,6 +265,7 @@ export class TableAuthoring extends AbstractComponentAuthoring {
     this.componentContent.numColumns++;
     this.parseColumnCellSizes(this.componentContent);
     this.parseFrozenColumns(this.componentContent);
+    this.numColumnsFormControl.setValue(this.componentContent.numColumns);
     this.componentChanged();
   }
 
@@ -242,6 +280,7 @@ export class TableAuthoring extends AbstractComponentAuthoring {
       this.componentContent.numColumns--;
       this.parseColumnCellSizes(this.componentContent);
       this.parseFrozenColumns(this.componentContent);
+      this.numColumnsFormControl.setValue(this.componentContent.numColumns);
       this.componentChanged();
     }
   }
@@ -369,22 +408,6 @@ export class TableAuthoring extends AbstractComponentAuthoring {
   connectedComponentTypeChanged(connectedComponent) {
     this.automaticallySetConnectedComponentFieldsIfPossible(connectedComponent);
     this.componentChanged();
-  }
-
-  protected numColumnsChanged(value: number): void {
-    const newValue = this.validateTableDimensionValue(value);
-    this.componentContent.numColumns = newValue;
-    this.numColumnsChange.next(newValue);
-  }
-
-  protected numRowsChanged(value: number): void {
-    const newValue = this.validateTableDimensionValue(value);
-    this.componentContent.numRows = newValue;
-    this.numRowsChange.next(newValue);
-  }
-
-  private validateTableDimensionValue(value: number): number {
-    return value < 1 || value == null ? 1 : value;
   }
 
   protected isNumberChar(event: any): boolean {

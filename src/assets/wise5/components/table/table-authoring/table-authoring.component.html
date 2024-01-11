@@ -2,29 +2,35 @@
   [prompt]="componentContent.prompt"
   (promptChangedEvent)="promptChanged($event)"
 ></edit-component-prompt>
-<div>
-  <mat-form-field class="size-input">
-    <mat-label i18n>Columns</mat-label>
-    <input
-      matInput
-      type="number"
-      min="1"
-      [(ngModel)]="componentContent.numColumns"
-      (ngModelChange)="numColumnsChanged($event)"
-      (keypress)="isNumberChar($event)"
-    />
-  </mat-form-field>
-  <mat-form-field class="size-input">
-    <mat-label i18n>Rows</mat-label>
-    <input
-      matInput
-      type="number"
-      min="1"
-      [(ngModel)]="componentContent.numRows"
-      (ngModelChange)="numRowsChanged($event)"
-      (keypress)="isNumberChar($event)"
-    />
-  </mat-form-field>
+<div fxLayout="row wrap">
+  <form [formGroup]="dimensionsForm">
+    <mat-form-field class="size-input">
+      <mat-label i18n>Columns</mat-label>
+      <input
+        matInput
+        type="number"
+        min="1"
+        formControlName="numColumnsFormControl"
+        (keypress)="isNumberChar($event)"
+      />
+      <mat-error *ngIf="dimensionsForm.controls['numColumnsFormControl'].hasError('invalid')" i18n
+        >Invalid Value</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="size-input">
+      <mat-label i18n>Rows</mat-label>
+      <input
+        matInput
+        type="number"
+        min="1"
+        formControlName="numRowsFormControl"
+        (keypress)="isNumberChar($event)"
+      />
+      <mat-error *ngIf="dimensionsForm.controls['numRowsFormControl'].hasError('invalid')" i18n
+        >Invalid Value</mat-error
+      >
+    </mat-form-field>
+  </form>
   <mat-form-field class="size-input">
     <mat-label i18n>Global Cell Size</mat-label>
     <input
