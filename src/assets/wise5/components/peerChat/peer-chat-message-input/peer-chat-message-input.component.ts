@@ -10,14 +10,14 @@ import { PeerGroup } from '../PeerGroup';
 })
 export class PeerChatMessageInputComponent implements OnInit {
   @Input() component: PeerChatComponent;
-  protected isSubmitEnabled: boolean = false;
   private intervalId: NodeJS.Timeout;
-  private isTypingDurationBuffer: number = 5000;
+  protected isSubmitEnabled: boolean = false;
   private lastTypingTimestamp: number = 0;
   @Input() messageText: string = '';
   @Input() peerGroup: PeerGroup;
   @Output() responseChangedEvent: EventEmitter<string> = new EventEmitter<string>();
   @Output('onSubmit') submit: EventEmitter<string> = new EventEmitter<string>();
+  private typingDurationBuffer: number = 5000;
 
   constructor(private configService: ConfigService, private stompService: StompService) {}
 
@@ -41,7 +41,7 @@ export class PeerChatMessageInputComponent implements OnInit {
   }
 
   private broadcastTypingStatus(): void {
-    if (new Date().getTime() - this.lastTypingTimestamp < this.isTypingDurationBuffer) {
+    if (new Date().getTime() - this.lastTypingTimestamp < this.typingDurationBuffer) {
       this.stompService.rxStomp.publish({
         destination: `/app/api/peer-chat/${this.component.nodeId}/${this.component.id}/${
           this.peerGroup.id

@@ -13,11 +13,11 @@ import { StudentDataService } from '../../../services/studentDataService';
 export class PeerChatMemberTypingIndicatorComponent {
   @Input() component: PeerChatComponent;
   private intervalId: NodeJS.Timeout;
-  private isTypingDurationBuffer: number = 5000;
   protected message: string;
   @Input() myWorkgroupId: number;
   @Input() peerGroup: PeerGroup;
   private subscriptions: Subscription = new Subscription();
+  private typingDurationBuffer: number = 5000;
   private workgroupToLastTypingTimestamp: Map<number, number> = new Map<number, number>();
 
   constructor(
@@ -42,7 +42,7 @@ export class PeerChatMemberTypingIndicatorComponent {
   private updateMessage(): void {
     const workgroupsTyping = [];
     this.workgroupToLastTypingTimestamp.forEach((lastTypingTimestamp, workgroupId) => {
-      if (new Date().getTime() - lastTypingTimestamp < this.isTypingDurationBuffer) {
+      if (new Date().getTime() - lastTypingTimestamp < this.typingDurationBuffer) {
         workgroupsTyping.push(workgroupId);
       }
     });
