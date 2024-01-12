@@ -1,5 +1,5 @@
 .mat-mdc-card {
-  padding: 12px;
+  padding: 16px 16px 20px;
 }
 
 peer-chat-messages, peer-chat-members {
@@ -8,5 +8,7 @@ peer-chat-messages, peer-chat-members {
 }
 
 peer-chat-member-typing-indicator {
-  margin-top: 8px;
+  padding: 0 8px;
+  position: absolute;
+  bottom: 2px;
 }
