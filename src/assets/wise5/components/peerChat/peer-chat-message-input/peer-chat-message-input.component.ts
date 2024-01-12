@@ -65,6 +65,7 @@ export class PeerChatMessageInputComponent implements OnInit {
     this.submit.emit(this.messageText);
     this.messageText = '';
     this.isSubmitEnabled = false;
+    this.lastTypingTimestamp = 0;
   }
 
   protected onFocus(event: any): void {

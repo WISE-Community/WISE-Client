@@ -4,6 +4,7 @@ import { PeerChatComponent } from '../PeerChatComponent';
 import { PeerGroup } from '../PeerGroup';
 import { ConfigService } from '../../../services/configService';
 import { Subscription } from 'rxjs';
+import { StudentDataService } from '../../../services/studentDataService';
 
 @Component({
   selector: 'peer-chat-member-typing-indicator',
@@ -19,13 +20,18 @@ export class PeerChatMemberTypingIndicatorComponent {
   private subscriptions: Subscription = new Subscription();
   private workgroupToLastTypingTimestamp: Map<number, number> = new Map<number, number>();
 
-  constructor(private configService: ConfigService, private stompService: StompService) {}
+  constructor(
+    private configService: ConfigService,
+    private dataService: StudentDataService,
+    private stompService: StompService
+  ) {}
 
   ngOnInit(): void {
     this.intervalId = setInterval(() => {
       this.updateMessage();
     }, 1000);
     this.subscribeToIsTypingMessages();
+    this.subscribeToStudentWork();
   }
 
   ngOnDestroy(): void {
@@ -69,5 +75,35 @@ export class PeerChatMemberTypingIndicatorComponent {
           }
         })
     );
+  }
+
+  private subscribeToStudentWork(): void {
+    this.subscriptions.add(
+      this.dataService.studentWorkReceived$.subscribe((componentState) => {
+        if (this.isMessageFromPeer(componentState)) {
+          this.workgroupToLastTypingTimestamp.delete(componentState.workgroupId);
+          this.updateMessage();
+        }
+      })
+    );
+  }
+
+  private isMessageFromPeer(componentState: any): boolean {
+    return (
+      this.isForThisComponent(componentState) &&
+      this.isFromClassmate(componentState) &&
+      componentState.peerGroupId === this.peerGroup.id
+    );
+  }
+
+  private isForThisComponent(componentState: any): boolean {
+    return (
+      componentState.nodeId === this.component.nodeId &&
+      componentState.componentId === this.component.id
+    );
+  }
+
+  private isFromClassmate(componentState: any): boolean {
+    return componentState.workgroupId !== this.myWorkgroupId;
   }
 }

@@ -3,8 +3,14 @@ import { PeerChatMemberTypingIndicatorComponent } from './peer-chat-member-typin
 import { ConfigService } from '../../../services/configService';
 import { StompService } from '../../../services/stompService';
 import { PeerGroup } from '../PeerGroup';
+import { StudentDataService } from '../../../services/studentDataService';
+import { Subject } from 'rxjs';
 
 class MockConfigService {}
+class MockStudentDataService {
+  private studentWorkReceivedSource: Subject<any> = new Subject<any>();
+  public studentWorkReceived$ = this.studentWorkReceivedSource.asObservable();
+}
 describe('PeerChatMemberTypingIndicatorComponent', () => {
   let component: PeerChatMemberTypingIndicatorComponent;
   let fixture: ComponentFixture<PeerChatMemberTypingIndicatorComponent>;
@@ -12,7 +18,11 @@ describe('PeerChatMemberTypingIndicatorComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PeerChatMemberTypingIndicatorComponent],
-      providers: [{ provide: ConfigService, useClass: MockConfigService }, StompService]
+      providers: [
+        { provide: ConfigService, useClass: MockConfigService },
+        StompService,
+        { provide: StudentDataService, useClass: MockStudentDataService }
+      ]
     });
     fixture = TestBed.createComponent(PeerChatMemberTypingIndicatorComponent);
     component = fixture.componentInstance;
