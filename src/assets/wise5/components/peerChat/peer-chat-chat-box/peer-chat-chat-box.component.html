@@ -11,8 +11,16 @@
   ></peer-chat-messages>
   <peer-chat-message-input
     *ngIf="isEnabled"
+    [component]="component"
     [messageText]="response"
+    [peerGroup]="peerGroup"
     (onSubmit)="submitResponse($event)"
     (responseChangedEvent)="responseChanged($event)"
   ></peer-chat-message-input>
+  <peer-chat-member-typing-indicator
+    [component]="component"
+    [myWorkgroupId]="myWorkgroupId"
+    [peerGroup]="peerGroup"
+    class="mat-caption secondary-text"
+  ></peer-chat-member-typing-indicator>
 </mat-card>
