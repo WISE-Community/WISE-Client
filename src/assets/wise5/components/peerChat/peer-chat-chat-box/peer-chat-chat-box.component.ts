@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PeerChatMessage } from '../PeerChatMessage';
+import { PeerChatComponent } from '../PeerChatComponent';
+import { PeerGroup } from '../PeerGroup';
 
 @Component({
   selector: 'peer-chat-chat-box',
@@ -7,10 +9,12 @@ import { PeerChatMessage } from '../PeerChatMessage';
   styleUrls: ['./peer-chat-chat-box.component.scss']
 })
 export class PeerChatChatBoxComponent implements OnInit {
+  @Input() component: PeerChatComponent;
   @Input() isEnabled: boolean = true;
   @Input() isGrading: boolean = false;
   @Input() messages: PeerChatMessage[] = [];
   @Input() myWorkgroupId: number;
+  @Input() peerGroup: PeerGroup;
   @Input() response: string = '';
   @Input() workgroupInfos: any = {};
   workgroupInfosWithoutTeachers: any[];
