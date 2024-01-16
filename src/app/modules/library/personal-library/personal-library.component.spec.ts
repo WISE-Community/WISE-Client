@@ -4,43 +4,231 @@ import { fakeAsyncResponse } from '../../../student/student-run-list/student-run
 import { LibraryService } from '../../../services/library.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
-import { BehaviorSubject } from 'rxjs';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { ArchiveProjectService } from '../../../services/archive-project.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LibraryProject } from '../libraryProject';
+import { PersonalLibraryHarness } from './personal-library.harness';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatOptionModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { LibraryProjectComponent } from '../library-project/library-project.component';
+import { SelectAllItemsCheckboxComponent } from '../select-all-items-checkbox/select-all-items-checkbox.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ArchiveProjectResponse } from '../../../domain/archiveProjectResponse';
+import { of } from 'rxjs';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
-export class MockLibraryService {
-  implementationModelOptions = [];
-  personalLibraryProjectsSource$ = fakeAsyncResponse([]);
-  sharedLibraryProjectsSource$ = fakeAsyncResponse([]);
-  projectFilterValuesSource$ = fakeAsyncResponse({
-    searchValue: '',
-    disciplineValue: [],
-    dciArrangementValue: [],
-    peValue: []
-  });
-  newProjectSource$ = fakeAsyncResponse({});
-  numberOfPersonalProjectsVisible = new BehaviorSubject<number>(0);
-}
+let archiveProjectService: ArchiveProjectService;
+let component: PersonalLibraryComponent;
+let fixture: ComponentFixture<PersonalLibraryComponent>;
+let harness: PersonalLibraryHarness;
+const projectId1 = 1;
+const projectId2 = 2;
+const projectId3 = 3;
+const projectId4 = 4;
+const projectId5 = 5;
 
 describe('PersonalLibraryComponent', () => {
-  let component: PersonalLibraryComponent;
-  let fixture: ComponentFixture<PersonalLibraryComponent>;
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          BrowserAnimationsModule,
+          FormsModule,
+          HttpClientTestingModule,
+          MatCheckboxModule,
+          MatDialogModule,
+          MatFormFieldModule,
+          MatOptionModule,
+          MatPaginatorModule,
+          MatSelectModule,
+          MatSnackBarModule,
+          OverlayModule
+        ],
+        declarations: [
+          LibraryProjectComponent,
+          PersonalLibraryComponent,
+          SelectAllItemsCheckboxComponent
+        ],
+        providers: [ArchiveProjectService, LibraryService],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [OverlayModule, MatDialogModule],
-      declarations: [PersonalLibraryComponent],
-      providers: [{ provide: LibraryService, useClass: MockLibraryService }],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
-
-  beforeEach(() => {
+  beforeEach(async () => {
     fixture = TestBed.createComponent(PersonalLibraryComponent);
     component = fixture.componentInstance;
+    setUpFiveProjects();
+    archiveProjectService = TestBed.inject(ArchiveProjectService);
     fixture.detectChanges();
+    harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, PersonalLibraryHarness);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  showActiveProjects();
+  showArchivedProjects();
+  archiveMultipleProjects();
+  restoreMultipleProjects();
+  noProjectsSelected_clickSelectAllProjects_selectsAllProjects();
+  someProjectsSelected_clickSelectAllProjects_unselectsAllProjects();
+  allProjectsSelected_clickSelectAllProjects_unselectsAllProjects();
+  projectsAreSelected_goToArchivedView_projectsAreUnselected();
+  projectsAreSelected_goToNextPage_projectsAreUnselected();
 });
+
+function setUpFiveProjects() {
+  TestBed.inject(LibraryService).personalLibraryProjectsSource$ = fakeAsyncResponse([
+    new LibraryProject({ id: projectId1, metadata: {}, tags: ['archived'] }),
+    new LibraryProject({ id: projectId2, metadata: {}, tags: ['archived'] }),
+    new LibraryProject({ id: projectId3, metadata: {}, tags: [] }),
+    new LibraryProject({ id: projectId4, metadata: {}, tags: [] }),
+    new LibraryProject({ id: projectId5, metadata: {}, tags: [] })
+  ]);
+}
+
+function setUpTwentyProjects() {
+  const libraryProjects = [];
+  for (let i = 1; i <= 20; i++) {
+    libraryProjects.push(new LibraryProject({ id: i, metadata: {}, tags: [] }));
+  }
+  TestBed.inject(LibraryService).personalLibraryProjectsSource$ = fakeAsyncResponse(
+    libraryProjects
+  );
+}
+
+function showActiveProjects() {
+  describe('active units view', () => {
+    it('only shows active units', async () => {
+      expect(await harness.getProjectIdsInView()).toEqual([projectId5, projectId4, projectId3]);
+    });
+  });
+}
+
+function showArchivedProjects() {
+  describe('archived units view', () => {
+    it('only shows archived units', async () => {
+      await harness.showArchivedView();
+      expect(await harness.getProjectIdsInView()).toEqual([projectId2, projectId1]);
+    });
+  });
+}
+
+function archiveMultipleProjects() {
+  describe('in active view', () => {
+    describe('select multiple projects and click archive button', () => {
+      it('archives multiple projects', async () => {
+        await harness.selectProjects([projectId4, projectId3]);
+        spyOn(archiveProjectService, 'archiveProjects').and.returnValue(
+          of([new ArchiveProjectResponse(4, true), new ArchiveProjectResponse(3, true)])
+        );
+        await (await harness.getArchiveButton()).click();
+        expect(await harness.getProjectIdsInView()).toEqual([projectId5]);
+      });
+    });
+  });
+}
+
+function restoreMultipleProjects() {
+  describe('in archived view', () => {
+    describe('select multiple projects and click restore button', () => {
+      it('restores multiple projects', async () => {
+        await harness.showArchivedView();
+        await harness.selectProjects([projectId2, projectId1]);
+        spyOn(archiveProjectService, 'unarchiveProjects').and.returnValue(
+          of([new ArchiveProjectResponse(2, true), new ArchiveProjectResponse(1, true)])
+        );
+        await (await harness.getUnarchiveButton()).click();
+        expect(await harness.getProjectIdsInView()).toEqual([]);
+      });
+    });
+  });
+}
+
+function noProjectsSelected_clickSelectAllProjects_selectsAllProjects() {
+  describe('no projects are selected', () => {
+    describe('click the select all projects checkbox', () => {
+      it('selects all projects in view', async () => {
+        setUpTwentyProjects();
+        component.ngOnInit();
+        expect(await harness.getSelectedProjectIds()).toEqual([]);
+        await (await harness.getSelectAllCheckbox()).check();
+        // each page displays 12 projects
+        const expectedSelectedProjectIds = generateExpectedProjectIds(20, 9);
+        expect(await harness.getSelectedProjectIds()).toEqual(expectedSelectedProjectIds);
+      });
+    });
+  });
+}
+
+function someProjectsSelected_clickSelectAllProjects_unselectsAllProjects() {
+  describe('some projects are selected', () => {
+    describe('click the select all projects checkbox', () => {
+      it('unselects all projects', async () => {
+        await harness.selectProjects([projectId4, projectId3]);
+        expect(await harness.getSelectedProjectIds()).toEqual([projectId4, projectId3]);
+        await (await harness.getSelectAllCheckbox()).check();
+        expect(await harness.getSelectedProjectIds()).toEqual([]);
+      });
+    });
+  });
+}
+
+function allProjectsSelected_clickSelectAllProjects_unselectsAllProjects() {
+  describe('all projects are selected', () => {
+    describe('click the select all projects checkbox', () => {
+      it('unselects all projects', async () => {
+        await harness.selectProjects([projectId5, projectId4, projectId3]);
+        expect(await harness.getSelectedProjectIds()).toEqual([projectId5, projectId4, projectId3]);
+        await (await harness.getSelectAllCheckbox()).uncheck();
+        expect(await harness.getSelectedProjectIds()).toEqual([]);
+      });
+    });
+  });
+}
+
+function projectsAreSelected_goToArchivedView_projectsAreUnselected() {
+  describe('projects are selected', () => {
+    describe('go to archived view', () => {
+      it('projects are unselected', async () => {
+        await harness.selectProjects([projectId5, projectId4, projectId3]);
+        expect(await harness.getSelectedProjectIds()).toEqual([projectId5, projectId4, projectId3]);
+        await harness.showArchivedView();
+        expect(await harness.getSelectedProjectIds()).toEqual([]);
+        await harness.showActiveView();
+        expect(await harness.getSelectedProjectIds()).toEqual([]);
+      });
+    });
+  });
+}
+
+function projectsAreSelected_goToNextPage_projectsAreUnselected() {
+  describe('projects are selected', () => {
+    describe('go to next page', () => {
+      it('projects are unselected', async () => {
+        setUpTwentyProjects();
+        component.ngOnInit();
+        await (await harness.getSelectAllCheckbox()).check();
+        // each page displays 12 projects
+        const expectedSelectedProjectIds = generateExpectedProjectIds(20, 9);
+        expect(await harness.getSelectedProjectIds()).toEqual(expectedSelectedProjectIds);
+        await (await harness.getPaginator()).goToNextPage();
+        expect(await harness.getSelectedProjectIds()).toEqual([]);
+        await (await harness.getPaginator()).goToPreviousPage();
+        expect(await harness.getSelectedProjectIds()).toEqual([]);
+      });
+    });
+  });
+}
+
+function generateExpectedProjectIds(startProjectId: number, endProjectId: number): number[] {
+  const expectedProjectIds = [];
+  for (let i = startProjectId; i >= endProjectId; i--) {
+    expectedProjectIds.push(i);
+  }
+  return expectedProjectIds;
+}

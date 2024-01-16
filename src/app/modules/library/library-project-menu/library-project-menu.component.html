@@ -16,5 +16,13 @@
     <a mat-menu-item (click)="shareProject()" *ngIf="isCanShare">
       <mat-icon>share</mat-icon> <ng-container i18n>Share</ng-container>
     </a>
+    <a mat-menu-item *ngIf="!archived" (click)="archive(true)">
+      <mat-icon>archive</mat-icon>
+      <span i18n>Archive</span>
+    </a>
+    <a mat-menu-item *ngIf="archived" (click)="archive(false)">
+      <mat-icon>unarchive</mat-icon>
+      <span i18n>Restore</span>
+    </a>
   </div>
 </mat-menu>

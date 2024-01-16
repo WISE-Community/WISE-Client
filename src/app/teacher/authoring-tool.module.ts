@@ -58,6 +58,7 @@ import { ComponentTypeSelectorComponent } from '../../assets/wise5/authoringTool
 import { EditNodeTitleComponent } from '../../assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component';
 import { AddComponentButtonComponent } from '../../assets/wise5/authoringTool/node/add-component-button/add-component-button.component';
 import { CopyComponentButtonComponent } from '../../assets/wise5/authoringTool/node/copy-component-button/copy-component-button.component';
+import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator/save-indicator.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +120,7 @@ import { CopyComponentButtonComponent } from '../../assets/wise5/authoringTool/n
     PreviewComponentModule,
     ProjectAssetAuthoringModule,
     RouterModule,
+    SaveIndicatorComponent,
     StepToolsModule,
     StructureAuthoringModule,
     WiseTinymceEditorModule

@@ -10,8 +10,12 @@ describe('SaveIndicatorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SaveIndicatorComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule,
+        SaveIndicatorComponent,
+        StudentTeacherCommonServicesModule
+      ]
     });
     fixture = TestBed.createComponent(SaveIndicatorComponent);
     component = fixture.componentInstance;

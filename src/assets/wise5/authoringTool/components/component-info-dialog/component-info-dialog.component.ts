@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ComponentInfoService } from '../../../services/componentInfoService';
 import { ComponentInfo } from '../../../components/ComponentInfo';
 import { ComponentFactory } from '../../../common/ComponentFactory';
+import { Component as WISEComponent } from '../../../common/Component';
 
 @Component({
   selector: 'component-info-dialog',
@@ -10,9 +11,10 @@ import { ComponentFactory } from '../../../common/ComponentFactory';
   styleUrls: ['./component-info-dialog.component.scss']
 })
 export class ComponentInfoDialogComponent {
-  protected component: any;
   private componentInfo: ComponentInfo;
   protected description: string;
+  protected previewComponents: WISEComponent[] = [];
+  protected previewExamples: any[] = [];
 
   constructor(
     private componentInfoService: ComponentInfoService,
@@ -24,12 +26,11 @@ export class ComponentInfoDialogComponent {
   }
 
   protected displayComponent(componentType: any): void {
-    this.componentType = componentType;
     this.componentInfo = this.componentInfoService.getInfo(componentType);
     this.description = this.componentInfo.getDescription();
-    this.component = new ComponentFactory().getComponent(
-      this.componentInfo.getPreviewContent(),
-      'node1'
-    );
+    this.previewExamples = this.componentInfo.getPreviewExamples();
+    this.previewComponents = this.previewExamples.map((example: any) => {
+      return new ComponentFactory().getComponent(example.content, 'node1');
+    });
   }
 }

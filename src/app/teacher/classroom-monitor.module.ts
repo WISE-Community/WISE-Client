@@ -36,6 +36,7 @@ import { ManageStudentsModule } from '../../assets/wise5/classroomMonitor/classr
 import { DataExportModule } from '../../assets/wise5/classroomMonitor/dataExport/data-export.module';
 import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponents/stepTools/step-tools.module';
 import { RouterModule } from '@angular/router';
+import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator/save-indicator.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { RouterModule } from '@angular/router';
     PeerGroupGradingModule,
     PreviewComponentModule,
     RouterModule,
+    SaveIndicatorComponent,
     SelectPeriodModule,
     StepToolsModule
   ]

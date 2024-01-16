@@ -27,6 +27,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PeerChatComponentDataExportStrategy } from '../strategies/PeerChatComponentDataExportStrategy';
 import { OpenResponseComponentDataExportStrategy } from '../strategies/OpenResponseComponentExportStrategy';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
+import { DialogGuidanceComponentDataExportStrategy } from '../strategies/DialogGuidanceComponentDataExportStrategy';
 
 @Component({
   selector: 'data-export',
@@ -77,8 +78,6 @@ export class DataExportComponent implements OnInit {
   canViewStudentNames: boolean = false;
   componentTypeToComponentService: any = {};
   dataExportContext: DataExportContext;
-  dialogGuidanceComputerResponseLabel: string = 'Computer Response';
-  dialogGuidanceRevisionLabel: string = 'Revision';
   embeddedTableKeyToValue = {
     co2saved: 'CO2 Saved',
     current: 'Current',
@@ -1010,7 +1009,15 @@ export class DataExportComponent implements OnInit {
       );
       this.dataExportContext.export();
     } else if (component.type === 'DialogGuidance') {
-      this.exportDialogGuidanceComponent(nodeId, component);
+      this.dataExportContext.setStrategy(
+        new DialogGuidanceComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'all'
+        )
+      );
+      this.dataExportContext.export();
     } else if (component.type === 'OpenResponse') {
       this.dataExportContext.setStrategy(
         new OpenResponseComponentDataExportStrategy(
@@ -1055,7 +1062,15 @@ export class DataExportComponent implements OnInit {
     if (component.type === 'Match') {
       this.exportMatchComponent(nodeId, component);
     } else if (component.type === 'DialogGuidance') {
-      this.exportDialogGuidanceComponent(nodeId, component);
+      this.dataExportContext.setStrategy(
+        new DialogGuidanceComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'latest'
+        )
+      );
+      this.dataExportContext.export();
     } else if (component.type === 'OpenResponse') {
       this.dataExportContext.setStrategy(
         new OpenResponseComponentDataExportStrategy(
@@ -1390,20 +1405,6 @@ export class DataExportComponent implements OnInit {
     this.workSelectionType = workSelectionType;
   }
 
-  exportDialogGuidanceComponent(nodeId: string, component: any): void {
-    const components = this.getComponentsParam(nodeId, component.id);
-    this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
-      this.generateDialogGuidanceComponentExport(nodeId, component);
-    });
-  }
-
-  generateDialogGuidanceComponentExport(nodeId: string, component: any): void {
-    const rows = this.getExportDialogGuidanceComponentRows(nodeId, component);
-    const fileName = this.getComponentExportFileName(nodeId, component.id, 'dialog_guidance');
-    this.generateCSVFile(rows, fileName);
-    this.hideDownloadingExportMessage();
-  }
-
   getComponentExportFileName(nodeId: string, componentId: string, componentType: string): string {
     const runId = this.configService.getRunId();
     const stepNumber = this.projectService.getNodePositionById(nodeId);
@@ -1417,69 +1418,6 @@ export class DataExportComponent implements OnInit {
     return `run_${runId}_step_${stepNumber}_component_${componentNumber}_${allOrLatest}_${componentType}_work.csv`;
   }
 
-  getExportDialogGuidanceComponentRows(nodeId: string, component: any): string[] {
-    const columnNames = [];
-    const columnNameToNumber = {};
-    let rows = [];
-    rows.push(
-      this.generateDialogGuidanceComponentHeaderRow(component, columnNames, columnNameToNumber)
-    );
-    rows = rows.concat(
-      this.generateComponentWorkRows(component, columnNames, columnNameToNumber, nodeId)
-    );
-    return rows;
-  }
-
-  generateDialogGuidanceComponentHeaderRow(
-    component: any,
-    columnNames: string[],
-    columnNameToNumber: any
-  ): string[] {
-    this.populateDialogGuidanceColumnNames(component, columnNames, columnNameToNumber);
-    return columnNames;
-  }
-
-  populateDialogGuidanceColumnNames(
-    component: any,
-    columnNames: string[],
-    columnNameToNumber: any
-  ): void {
-    for (const defaultColumnName of this.componentExportDefaultColumnNames) {
-      this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, defaultColumnName);
-    }
-    this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, this.itemIdLabel);
-    const componentStates = this.dataService.getComponentStatesByComponentId(component.id);
-    const ideaNames = this.getDialogGuidanceIdeaNames(componentStates);
-    const scoreNames = this.getDialogGuidanceScoreNames(componentStates);
-    for (let r = 0; r < this.getMaxNumberOfStudentResponses(componentStates); r++) {
-      const revisionNumber = `${this.dialogGuidanceRevisionLabel} ${r + 1}`;
-      this.addColumnNameToColumnDataStructures(
-        columnNameToNumber,
-        columnNames,
-        `${this.studentResponseLabel} ${revisionNumber}`
-      );
-      for (const ideaName of ideaNames) {
-        this.addColumnNameToColumnDataStructures(
-          columnNameToNumber,
-          columnNames,
-          `${this.ideaLabel} ${ideaName} ${revisionNumber}`
-        );
-      }
-      for (const scoreName of scoreNames) {
-        this.addColumnNameToColumnDataStructures(
-          columnNameToNumber,
-          columnNames,
-          `${this.scoreLabel} ${scoreName} ${revisionNumber}`
-        );
-      }
-      this.addColumnNameToColumnDataStructures(
-        columnNameToNumber,
-        columnNames,
-        `${this.dialogGuidanceComputerResponseLabel} ${revisionNumber}`
-      );
-    }
-  }
-
   addColumnNameToColumnDataStructures(
     columnNameToNumber: any,
     columnNames: string[],
@@ -1487,81 +1425,6 @@ export class DataExportComponent implements OnInit {
   ): void {
     columnNameToNumber[columnName] = columnNames.length;
     columnNames.push(columnName);
-  }
-
-  getDialogGuidanceIdeaNames(componentStates: any[]): string[] {
-    for (const componentState of componentStates) {
-      for (const response of componentState.studentData.responses) {
-        if (response.ideas != null && response.ideas.length > 0) {
-          return this.getIdeaNamesFromIdeas(response.ideas);
-        }
-      }
-    }
-    return [];
-  }
-
-  getIdeaNamesFromIdeas(ideas: any[]): string[] {
-    const ideaNames = [];
-    for (const idea of ideas) {
-      ideaNames.push(idea.name);
-    }
-    return ideaNames.sort(this.sortIdeaNames);
-  }
-
-  sortIdeaNames(a: any, b: any): number {
-    const aInt = parseInt(a);
-    const bInt = parseInt(b);
-    // if a and b are the same number but one of them contains a letter, we will sort alphabetically
-    // when a string like "5a" is given to parseInt(), it will return 5
-    // therefore if we are comparing "5" and "5a" we will sort alphabetically because we want
-    // 5 to show up before 5a
-    if (!isNaN(aInt) && !isNaN(bInt) && aInt !== bInt) {
-      // sort numerically
-      return aInt - bInt;
-    } else {
-      // sort alphabetically
-      return a.localeCompare(b);
-    }
-  }
-
-  getDialogGuidanceScoreNames(componentStates: any[]): string[] {
-    for (const componentState of componentStates) {
-      for (const response of componentState.studentData.responses) {
-        if (response.scores != null && response.scores.length > 0) {
-          return this.getScoreNamesFromScores(response.scores);
-        }
-      }
-    }
-    return [];
-  }
-
-  getScoreNamesFromScores(scores: any[]): string[] {
-    const scoreNames = [];
-    for (const score of scores) {
-      scoreNames.push(score.id);
-    }
-    return scoreNames.sort();
-  }
-
-  getMaxNumberOfStudentResponses(componentStates: any[]): number {
-    let maxNumberOfResponses = 0;
-    for (const componentState of componentStates) {
-      const numberOfStudentResponses = this.getNumberOfStudentResponses(componentState);
-      if (numberOfStudentResponses > maxNumberOfResponses) {
-        maxNumberOfResponses = numberOfStudentResponses;
-      }
-    }
-    return maxNumberOfResponses;
-  }
-
-  getNumberOfStudentResponses(componentState: any): number {
-    let count = 0;
-    for (const response of componentState.studentData.responses) {
-      if (response.user === 'Student') {
-        count++;
-      }
-    }
-    return count;
   }
 
   generateComponentWorkRows(
@@ -1709,23 +1572,6 @@ export class DataExportComponent implements OnInit {
         componentRevisionCounter,
         componentState
       );
-    } else if (componentState.componentType === 'DialogGuidance') {
-      return this.generateDialogGuidanceComponentWorkRow(
-        component,
-        columnNames,
-        columnNameToNumber,
-        rowCounter,
-        workgroupId,
-        userId1,
-        userId2,
-        userId3,
-        studentName1,
-        studentName2,
-        studentName3,
-        periodName,
-        componentRevisionCounter,
-        componentState
-      );
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       return this.generateEmbeddedComponentWorkRow(
         component,
@@ -1744,118 +1590,6 @@ export class DataExportComponent implements OnInit {
         componentState
       );
     }
-  }
-
-  generateDialogGuidanceComponentWorkRow(
-    component: any,
-    columnNames: string[],
-    columnNameToNumber: any,
-    rowCounter: number,
-    workgroupId: number,
-    userId1: number,
-    userId2: number,
-    userId3: number,
-    studentName1: string,
-    studentName2: string,
-    studentName3: string,
-    periodName: string,
-    componentRevisionCounter: any,
-    dialogGuidanceComponentState: any
-  ): string[] {
-    // Populate the cells in the row that contain the information about the student, project, run,
-    // step, and component.
-    let row = this.createStudentWorkExportRow(
-      columnNames,
-      columnNameToNumber,
-      rowCounter,
-      workgroupId,
-      userId1,
-      userId2,
-      userId3,
-      studentName1,
-      studentName2,
-      studentName3,
-      periodName,
-      componentRevisionCounter,
-      dialogGuidanceComponentState
-    );
-    row[columnNameToNumber[this.itemIdLabel]] = component.itemId;
-    let revisionCounter = 0;
-    let revisionLabel = '';
-    for (const response of dialogGuidanceComponentState.studentData.responses) {
-      if (response.user === 'Student') {
-        revisionCounter++;
-        revisionLabel = `${this.dialogGuidanceRevisionLabel} ${revisionCounter}`;
-        this.addDialogGuidanceStudentResponseToRow(
-          row,
-          columnNameToNumber,
-          revisionLabel,
-          response.text
-        );
-      } else if (response.user === 'Computer') {
-        if (response.ideas != null) {
-          this.addDialogGuidanceIdeasToRow(row, columnNameToNumber, revisionLabel, response.ideas);
-        }
-        if (response.scores != null) {
-          this.addDialogGuidanceScoresToRow(
-            row,
-            columnNameToNumber,
-            revisionLabel,
-            response.scores
-          );
-        }
-        this.addDialogGuidanceComputerResponseToRow(
-          row,
-          columnNameToNumber,
-          revisionLabel,
-          response.text
-        );
-      }
-    }
-    return row;
-  }
-
-  addDialogGuidanceStudentResponseToRow(
-    row: any[],
-    columnNameToNumber: any,
-    revisionLabel: string,
-    text: string
-  ): void {
-    row[columnNameToNumber[`${this.studentResponseLabel} ${revisionLabel}`]] = text;
-  }
-
-  addDialogGuidanceIdeasToRow(
-    row: any[],
-    columnNameToNumber: any,
-    revisionLabel: string,
-    ideas: any[]
-  ): void {
-    for (const ideaObject of ideas) {
-      row[
-        columnNameToNumber[`${this.ideaLabel} ${ideaObject.name} ${revisionLabel}`]
-      ] = ideaObject.detected ? 1 : 0;
-    }
-  }
-
-  addDialogGuidanceScoresToRow(
-    row: any[],
-    columnNameToNumber: any,
-    revisionLabel: string,
-    scores: any[]
-  ): void {
-    for (const scoreObject of scores) {
-      row[columnNameToNumber[`${this.scoreLabel} ${scoreObject.id} ${revisionLabel}`]] =
-        scoreObject.score;
-    }
-  }
-
-  addDialogGuidanceComputerResponseToRow(
-    row: any[],
-    columnNameToNumber: any,
-    revisionLabel: string,
-    text: string
-  ): void {
-    row[columnNameToNumber[`${this.dialogGuidanceComputerResponseLabel} ${revisionLabel}`]] = text;
   }
 
   exportEmbeddedComponent(nodeId: string, component: any): void {

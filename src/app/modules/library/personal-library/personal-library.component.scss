@@ -1,0 +1,11 @@
+@import
+  'style/abstracts/variables',
+  'style/abstracts/functions';
+
+.personal-library-header {
+  padding: 0 0 8px;
+  
+  @media (min-width: breakpoint('sm.min')) {
+    padding: 8px 0;
+  }
+}
