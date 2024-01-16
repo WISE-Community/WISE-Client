@@ -8,6 +8,7 @@ import { AbstractComponentAuthoring } from '../../../authoringTool/components/Ab
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'table-authoring',
@@ -15,13 +16,13 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
   styleUrls: ['table-authoring.component.scss']
 })
 export class TableAuthoring extends AbstractComponentAuthoring {
-  columnCellSizes: any;
-  frozenColumns: any;
-  frozenColumnsLimitReached: boolean = false;
-
-  numColumnsChange: Subject<number> = new Subject<number>();
-  numRowsChange: Subject<number> = new Subject<number>();
-  globalCellSizeChange: Subject<number> = new Subject<number>();
+  protected columnCellSizes: any;
+  protected dimensionsForm: FormGroup;
+  protected frozenColumns: any;
+  protected frozenColumnsLimitReached: boolean = false;
+  protected globalCellSizeChange: Subject<number> = new Subject<number>();
+  private numColumnsFormControl: FormControl;
+  private numRowsFormControl: FormControl;
 
   constructor(
     protected ConfigService: ConfigService,
@@ -30,27 +31,67 @@ export class TableAuthoring extends AbstractComponentAuthoring {
     protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.subscriptions.add(
-      this.numColumnsChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.tableNumColumnsChanged();
-      })
-    );
-    this.subscriptions.add(
-      this.numRowsChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.tableNumRowsChanged();
-      })
-    );
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+    this.initializeDimensionInputs();
     this.subscriptions.add(
       this.globalCellSizeChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
       })
     );
-  }
-
-  ngOnInit() {
-    super.ngOnInit();
     this.columnCellSizes = this.parseColumnCellSizes(this.componentContent);
     this.frozenColumns = this.parseFrozenColumns(this.componentContent);
+  }
+
+  private initializeDimensionInputs(): void {
+    this.initializeColumnInput();
+    this.initializeRowInput();
+    this.dimensionsForm = new FormGroup({
+      numColumnsFormControl: this.numColumnsFormControl,
+      numRowsFormControl: this.numRowsFormControl
+    });
+  }
+
+  private initializeColumnInput(): void {
+    this.numColumnsFormControl = this.createDimensionFormControl(this.componentContent.numColumns);
+    this.subscriptions.add(
+      this.numColumnsFormControl.valueChanges
+        .pipe(debounceTime(1000), distinctUntilChanged())
+        .subscribe((value: number): void => {
+          if (this.numColumnsFormControl.valid) {
+            this.componentContent.numColumns = value;
+            this.tableNumColumnsChanged();
+          }
+        })
+    );
+  }
+
+  private initializeRowInput(): void {
+    this.numRowsFormControl = this.createDimensionFormControl(this.componentContent.numRows);
+    this.subscriptions.add(
+      this.numRowsFormControl.valueChanges
+        .pipe(debounceTime(1000), distinctUntilChanged())
+        .subscribe((value: number): void => {
+          if (this.numRowsFormControl.valid) {
+            this.componentContent.numRows = value;
+            this.tableNumRowsChanged();
+          }
+        })
+    );
+  }
+
+  private createDimensionFormControl(initialValue: number): FormControl {
+    return new FormControl(initialValue, [Validators.required, this.positiveNumberValidator()]);
+  }
+
+  private positiveNumberValidator(): ValidatorFn {
+    return (control: FormControl) => {
+      if (control.value < 1) {
+        return { invalid: true };
+      }
+    };
   }
 
   tableNumRowsChanged(): void {
@@ -203,6 +244,7 @@ export class TableAuthoring extends AbstractComponentAuthoring {
     }
     tableData.splice(rowIndex, 0, newRow);
     this.componentContent.numRows++;
+    this.numRowsFormControl.setValue(this.componentContent.numRows);
     this.componentChanged();
   }
 
@@ -213,6 +255,7 @@ export class TableAuthoring extends AbstractComponentAuthoring {
         tableData.splice(rowIndex, 1);
         this.componentContent.numRows--;
       }
+      this.numRowsFormControl.setValue(this.componentContent.numRows);
       this.componentChanged();
     }
   }
@@ -228,6 +271,7 @@ export class TableAuthoring extends AbstractComponentAuthoring {
     this.componentContent.numColumns++;
     this.parseColumnCellSizes(this.componentContent);
     this.parseFrozenColumns(this.componentContent);
+    this.numColumnsFormControl.setValue(this.componentContent.numColumns);
     this.componentChanged();
   }
 
@@ -242,6 +286,7 @@ export class TableAuthoring extends AbstractComponentAuthoring {
       this.componentContent.numColumns--;
       this.parseColumnCellSizes(this.componentContent);
       this.parseFrozenColumns(this.componentContent);
+      this.numColumnsFormControl.setValue(this.componentContent.numColumns);
       this.componentChanged();
     }
   }
@@ -299,11 +344,9 @@ export class TableAuthoring extends AbstractComponentAuthoring {
     const columnCellSizes = {};
     const tableData = componentContent.tableData;
     const firstRow = tableData[0];
-    if (firstRow != null) {
-      for (let x = 0; x < firstRow.length; x++) {
-        const cell = firstRow[x];
-        columnCellSizes[x] = cell.size;
-      }
+    for (let x = 0; x < firstRow.length; x++) {
+      const cell = firstRow[x];
+      columnCellSizes[x] = cell.size;
     }
     return columnCellSizes;
   }
@@ -319,11 +362,9 @@ export class TableAuthoring extends AbstractComponentAuthoring {
   private setColumnCellSize(column: number, size: number): void {
     const tableData = this.componentContent.tableData;
     const firstRow = tableData[0];
-    if (firstRow != null) {
-      const cell = firstRow[column];
-      if (cell != null) {
-        cell.size = size;
-      }
+    const cell = firstRow[column];
+    if (cell != null) {
+      cell.size = size;
     }
     this.componentChanged();
   }
@@ -331,11 +372,9 @@ export class TableAuthoring extends AbstractComponentAuthoring {
   private parseFrozenColumns(componentContent: any): any {
     const frozenColumns = {};
     const firstRow = componentContent.tableData[0];
-    if (firstRow != null) {
-      for (const key in firstRow) {
-        const cell = firstRow[key];
-        frozenColumns[key] = cell.frozen;
-      }
+    for (const key in firstRow) {
+      const cell = firstRow[key];
+      frozenColumns[key] = cell.frozen;
     }
     this.frozenColumnsLimitReached = this.isfrozenColumnsLimitReached();
     return frozenColumns;
@@ -344,11 +383,9 @@ export class TableAuthoring extends AbstractComponentAuthoring {
   frozenColumnsChanged(index: number): void {
     let frozen = this.frozenColumns[index];
     const firstRow = this.componentContent.tableData[0];
-    if (firstRow != null) {
-      const cell = firstRow[index];
-      if (cell != null) {
-        cell.frozen = frozen;
-      }
+    const cell = firstRow[index];
+    if (cell != null) {
+      cell.frozen = frozen;
     }
     this.componentChanged();
     this.frozenColumnsLimitReached = this.isfrozenColumnsLimitReached();
@@ -356,9 +393,6 @@ export class TableAuthoring extends AbstractComponentAuthoring {
 
   private isfrozenColumnsLimitReached(): boolean {
     const firstRow = this.componentContent.tableData[0];
-    if (firstRow == null) {
-      return false;
-    }
     let count = 0;
     for (const key in firstRow) {
       if (firstRow[key].frozen) {
@@ -380,5 +414,9 @@ export class TableAuthoring extends AbstractComponentAuthoring {
   connectedComponentTypeChanged(connectedComponent) {
     this.automaticallySetConnectedComponentFieldsIfPossible(connectedComponent);
     this.componentChanged();
+  }
+
+  protected isNumberChar(event: any): boolean {
+    return event.charCode >= 48 && event.charCode <= 57;
   }
 }
