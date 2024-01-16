@@ -16,13 +16,13 @@ import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms'
   styleUrls: ['table-authoring.component.scss']
 })
 export class TableAuthoring extends AbstractComponentAuthoring {
-  columnCellSizes: any;
-  dimensionsForm: FormGroup;
-  frozenColumns: any;
-  frozenColumnsLimitReached: boolean = false;
-  globalCellSizeChange: Subject<number> = new Subject<number>();
-  numColumnsFormControl: FormControl;
-  numRowsFormControl: FormControl;
+  protected columnCellSizes: any;
+  protected dimensionsForm: FormGroup;
+  protected frozenColumns: any;
+  protected frozenColumnsLimitReached: boolean = false;
+  protected globalCellSizeChange: Subject<number> = new Subject<number>();
+  private numColumnsFormControl: FormControl;
+  private numRowsFormControl: FormControl;
 
   constructor(
     protected ConfigService: ConfigService,
