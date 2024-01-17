@@ -109,6 +109,10 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
     row[columnNameToNumber[columnName]] = value;
   }
 
+  getColumnValue(row: any[], columnNameToNumber: any, columnName: string): any {
+    return row[columnNameToNumber[columnName]];
+  }
+
   insertColumnBeforeResponseColumn(headerRow: string[], columnName: string): void {
     headerRow.splice(headerRow.indexOf('Response'), 0, columnName);
   }

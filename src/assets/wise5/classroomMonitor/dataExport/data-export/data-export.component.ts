@@ -4,7 +4,6 @@ import { DataExportContext } from '../DataExportContext';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { DataExportService } from '../../../services/dataExportService';
-import { MatchService } from '../../../components/match/matchService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
@@ -21,13 +20,12 @@ import { DiscussionComponentDataExportStrategy } from '../strategies/DiscussionC
 import { LabelComponentDataExportStrategy } from '../strategies/LabelComponentDataExportStrategy';
 import { removeHTMLTags } from '../../../common/string/string';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
-import { Choice } from '../../../components/match/choice';
-import { Bucket } from '../../../components/match/bucket';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PeerChatComponentDataExportStrategy } from '../strategies/PeerChatComponentDataExportStrategy';
 import { OpenResponseComponentDataExportStrategy } from '../strategies/OpenResponseComponentExportStrategy';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { DialogGuidanceComponentDataExportStrategy } from '../strategies/DialogGuidanceComponentDataExportStrategy';
+import { MatchComponentDataExportStrategy } from '../strategies/MatchComponentDataExportStrategy';
 
 @Component({
   selector: 'data-export',
@@ -123,7 +121,6 @@ export class DataExportComponent implements OnInit {
     public configService: ConfigService,
     public dataExportService: DataExportService,
     private dialog: MatDialog,
-    private matchService: MatchService,
     public projectService: TeacherProjectService,
     private route: ActivatedRoute,
     private router: Router,
@@ -998,7 +995,15 @@ export class DataExportComponent implements OnInit {
   exportComponentAllRevisions(nodeId: string, component: any): void {
     this.setAllWorkSelectionType();
     if (component.type === 'Match') {
-      this.exportMatchComponent(nodeId, component);
+      this.dataExportContext.setStrategy(
+        new MatchComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'all'
+        )
+      );
+      this.dataExportContext.export();
     } else if (component.type === 'Discussion') {
       this.dataExportContext.setStrategy(
         new DiscussionComponentDataExportStrategy(
@@ -1060,7 +1065,15 @@ export class DataExportComponent implements OnInit {
   exportComponentLatestRevisions(nodeId: string, component: any): void {
     this.setLatestWorkSelectionType();
     if (component.type === 'Match') {
-      this.exportMatchComponent(nodeId, component);
+      this.dataExportContext.setStrategy(
+        new MatchComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'latest'
+        )
+      );
+      this.dataExportContext.export();
     } else if (component.type === 'DialogGuidance') {
       this.dataExportContext.setStrategy(
         new DialogGuidanceComponentDataExportStrategy(
@@ -1103,294 +1116,6 @@ export class DataExportComponent implements OnInit {
       includeStudentNames: this.includeStudentNames,
       workSelectionType: this.workSelectionType
     };
-  }
-
-  /**
-   * Generate an export for a specific match component.
-   * TODO: Move these Match export functions to the MatchService.
-   * @param nodeId The node id.
-   * @param component The component content object.
-   */
-  exportMatchComponent(nodeId: string, component: any): void {
-    const components = this.getComponentsParam(nodeId, component.id);
-    this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
-      this.generateMatchComponentExport(nodeId, component);
-    });
-  }
-
-  generateMatchComponentExport(nodeId: string, component: any): void {
-    const rows = this.getExportMatchComponentRows(nodeId, component);
-    const fileName = this.getComponentExportFileName(nodeId, component.id, 'match');
-    this.generateCSVFile(rows, fileName);
-    this.hideDownloadingExportMessage();
-  }
-
-  getExportMatchComponentRows(nodeId: string, component: any): any[] {
-    const columnNames = [];
-    const columnNameToNumber = {};
-    let rows = [];
-    rows.push(this.generateMatchComponentHeaderRow(component, columnNames, columnNameToNumber));
-    rows = rows.concat(
-      this.generateComponentWorkRows(component, columnNames, columnNameToNumber, nodeId)
-    );
-    return rows;
-  }
-
-  /**
-   * Populate the array of header column names.
-   * Populate the mappings of column name to column number.
-   * @param component The component content object.
-   * @param columnNames An array that we will populate with column names.
-   * @param columnNameToNumber An object that we will populate with mappings
-   * of column name to column number.
-   */
-  populateMatchColumnNames(component: any, columnNames: string[], columnNameToNumber: any): void {
-    /*
-     * Add the default column names that contain the information about the
-     * student, project, run, node, and component.
-     */
-    for (const defaultMatchColumnName of this.componentExportDefaultColumnNames) {
-      this.addColumnNameToColumnDataStructures(
-        columnNameToNumber,
-        columnNames,
-        defaultMatchColumnName
-      );
-    }
-    for (const choice of component.choices) {
-      columnNameToNumber[choice.id] = columnNames.length;
-      columnNames.push(choice.value);
-    }
-    if (this.includeCorrectnessColumns && this.matchService.componentHasCorrectAnswer(component)) {
-      for (let choice of component.choices) {
-        columnNameToNumber[choice.id + '-boolean'] = columnNames.length;
-        columnNames.push(choice.value);
-      }
-      this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, 'Is Correct');
-    }
-  }
-
-  /**
-   * Generate the header row.
-   * @param component The component content object.
-   * @param columnNames An array of column names.
-   * @param columnNameToNumber An object containing the mappings from column
-   * name to column number.
-   */
-  generateMatchComponentHeaderRow(
-    component: any,
-    columnNames: string[],
-    columnNameToNumber: any
-  ): string[] {
-    this.populateMatchColumnNames(component, columnNames, columnNameToNumber);
-    return columnNames;
-  }
-
-  /**
-   * Generate the row for the component state.
-   * @param component The component content object.
-   * @param columnNames All the header column names.
-   * @param columnNameToNumber The mapping from column name to column number.
-   * @param rowCounter The current row number.
-   * @param workgroupId The workgroup id.
-   * @param userId1 The User ID 1.
-   * @param userId2 The User ID 2.
-   * @param userId3 The User ID 3.
-   * @param periodName The period name.
-   * @param componentRevisionCounter The mapping of component to revision counter.
-   * @param matchComponentState The component state.
-   * @return The row with the student work.
-   */
-  generateMatchComponentWorkRow(
-    component: any,
-    columnNames: string[],
-    columnNameToNumber: any,
-    rowCounter: number,
-    workgroupId: number,
-    userId1: number,
-    userId2: number,
-    userId3: number,
-    studentName1: string,
-    studentName2: string,
-    studentName3: string,
-    periodName: string,
-    componentRevisionCounter: any,
-    matchComponentState: any
-  ): string[] {
-    const row = this.createStudentWorkExportRow(
-      columnNames,
-      columnNameToNumber,
-      rowCounter,
-      workgroupId,
-      userId1,
-      userId2,
-      userId3,
-      studentName1,
-      studentName2,
-      studentName3,
-      periodName,
-      componentRevisionCounter,
-      matchComponentState
-    );
-    if (component.choiceReuseEnabled) {
-      this.insertMatchChoiceReuseValues(row, columnNameToNumber, component, matchComponentState);
-    } else {
-      this.insertMatchDefaultValues(row, columnNameToNumber, component, matchComponentState);
-    }
-    return row;
-  }
-
-  private insertMatchDefaultValues(
-    row: string[],
-    columnNameToNumber: any,
-    component: any,
-    matchComponentState: any
-  ): void {
-    matchComponentState.studentData.buckets.forEach((bucket: Bucket) => {
-      bucket.items.forEach((item: Choice) => {
-        row[columnNameToNumber[item.id]] = this.getBucketValueById(component, bucket.id);
-        if (
-          this.includeCorrectnessColumns &&
-          this.matchService.componentHasCorrectAnswer(component)
-        ) {
-          this.setCorrectnessValue(row, columnNameToNumber, item);
-        }
-      });
-    });
-  }
-
-  private insertMatchChoiceReuseValues(
-    row: string[],
-    columnNameToNumber: any,
-    component: any,
-    matchComponentState: any
-  ): void {
-    matchComponentState.studentData.buckets
-      .filter((bucket: Bucket) => bucket.id !== '0')
-      .forEach((bucket: Bucket) => {
-        bucket.items.forEach((item: Choice) => {
-          this.setBucketValue(row, columnNameToNumber, component, bucket, item);
-          if (
-            this.includeCorrectnessColumns &&
-            this.matchService.componentHasCorrectAnswer(component)
-          ) {
-            this.setCorrectnessValueForChoiceReuse(row, columnNameToNumber, item);
-          }
-        });
-      });
-  }
-
-  private setBucketValue(
-    row: string[],
-    columnNameToNumber: any,
-    component: any,
-    bucket: Bucket,
-    item: Choice
-  ): void {
-    const previousValue = row[columnNameToNumber[item.id]];
-    const bucketValue = this.getBucketValueById(component, bucket.id);
-    row[columnNameToNumber[item.id]] =
-      previousValue === '' ? bucketValue : `${previousValue}, ${bucketValue}`;
-  }
-
-  private setCorrectnessValueForChoiceReuse(
-    row: any[],
-    columnNameToNumber: any,
-    item: Choice
-  ): void {
-    const columnName = item.id + '-boolean';
-    if (item.isCorrect == null) {
-      // The item does not have an isCorrect field so we will not show anything in the cell.
-    } else if (item.isCorrect) {
-      this.mergeCorrectnessValue(row, columnNameToNumber, columnName, 1);
-    } else {
-      if (item.isIncorrectPosition) {
-        this.mergeCorrectnessValue(row, columnNameToNumber, columnName, 2);
-      } else {
-        this.mergeCorrectnessValue(row, columnNameToNumber, columnName, 0);
-      }
-    }
-  }
-
-  /**
-   * Matrix to determine the merged correctness value.
-   * Legend
-   * e = empty
-   * 0 = incorrect
-   * 1 = correct
-   * 2 = correct bucket but incorrect position
-   *        previous
-   *        e 0 1 2
-   *       --------
-   * n  0 | 0 0 0 0
-   * e  1 | 1 0 1 2
-   * w  2 | 2 0 2 2
-   * @param row: any[]
-   * @param columnNameToNumber: any
-   * @param columnName: string
-   * @param newValue: number
-   */
-  private mergeCorrectnessValue(
-    row: any,
-    columnNameToNumber: any,
-    columnName: string,
-    newValue: number
-  ): void {
-    const previousValue = row[columnNameToNumber[columnName]];
-    if (previousValue === '') {
-      row[columnNameToNumber[columnName]] = newValue;
-    } else if (this.bothValuesAreCorrect(previousValue, newValue)) {
-      row[columnNameToNumber[columnName]] = 1;
-    } else if (this.eitherValuesAreIncorrect(previousValue, newValue)) {
-      row[columnNameToNumber[columnName]] = 0;
-    } else if (this.eitherValuesAreIncorrectPosition(previousValue, newValue)) {
-      row[columnNameToNumber[columnName]] = 2;
-    }
-  }
-
-  private bothValuesAreCorrect(value1: number, value2: number): boolean {
-    return value1 === 1 && value2 === 1;
-  }
-
-  private eitherValuesAreIncorrect(value1: number, value2: number): boolean {
-    return value1 === 0 || value2 === 0;
-  }
-
-  private eitherValuesAreIncorrectPosition(value1: number, value2: number): boolean {
-    return value1 === 2 || value2 === 2;
-  }
-
-  getBucketValueById(component: any, id: string): string {
-    if (id === '0') {
-      return component.choicesLabel ? component.choicesLabel : 'Choices';
-    }
-    const bucket = component.buckets.find((bucket: any) => {
-      return bucket.id === id;
-    });
-    return bucket ? bucket.value : '';
-  }
-
-  /**
-   * Set the correctness boolean value into the cell.
-   * @param row The row we are working on.
-   * @param columnNameToNumber The mapping from column name to column number.
-   * @param item The choice object.
-   */
-  setCorrectnessValue(row: any[], columnNameToNumber: any, item: any): void {
-    const columnName = item.id + '-boolean';
-    if (item.isCorrect == null) {
-      /*
-       * The item does not have an isCorrect field so we will not show
-       * anything in the cell.
-       */
-    } else if (item.isCorrect) {
-      row[columnNameToNumber[columnName]] = 1;
-    } else {
-      if (item.isIncorrectPosition) {
-        row[columnNameToNumber[columnName]] = 2;
-      } else {
-        row[columnNameToNumber[columnName]] = 0;
-      }
-    }
   }
 
   setAllWorkSelectionType(): void {
@@ -1555,24 +1280,7 @@ export class DataExportComponent implements OnInit {
     componentRevisionCounter: any,
     componentState: any
   ): string[] {
-    if (componentState.componentType === 'Match') {
-      return this.generateMatchComponentWorkRow(
-        component,
-        columnNames,
-        columnNameToNumber,
-        rowCounter,
-        workgroupId,
-        userId1,
-        userId2,
-        userId3,
-        studentName1,
-        studentName2,
-        studentName3,
-        periodName,
-        componentRevisionCounter,
-        componentState
-      );
-    } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
+    if (this.isEmbeddedTableComponentAndCanExport(component)) {
       return this.generateEmbeddedComponentWorkRow(
         component,
         columnNames,
@@ -1631,12 +1339,8 @@ export class DataExportComponent implements OnInit {
     columnNames: string[],
     columnNameToNumber: any
   ): void {
-    for (const defaultMatchColumnName of this.componentExportDefaultColumnNames) {
-      this.addColumnNameToColumnDataStructures(
-        columnNameToNumber,
-        columnNames,
-        defaultMatchColumnName
-      );
+    for (const defaultColumnName of this.componentExportDefaultColumnNames) {
+      this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, defaultColumnName);
     }
     const componentStates = this.dataService.getComponentStatesByComponentId(component.id);
     const items = this.getEmbeddedTableRowItems(component, componentStates);
