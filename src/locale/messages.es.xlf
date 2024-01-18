@@ -6962,7 +6962,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.html</context>
           <context context-type="linenumber">83,85</context>
         </context-group>
-        <target state="translated"> El equipo no ha creado ninguna <x id="INTERPOLATION" equiv-text="{{ label.plural }}"/> todavía. </target>
+        <target state="translated"> El equipo no ha creado <x id="INTERPOLATION" equiv-text="{{ label.plural }}"/> todavía. </target>
       </trans-unit>
       <trans-unit id="1283241409166703000" datatype="html">
         <source>Personal</source>
