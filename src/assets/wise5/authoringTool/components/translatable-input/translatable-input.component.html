@@ -1,0 +1,10 @@
+<ng-content *ngIf="!showTranslationInput()"></ng-content>
+<mat-form-field *ngIf="showTranslationInput()">
+  <mat-label i18n>{{ labelRef.nativeElement.innerHTML }}</mat-label>
+  <input
+    matInput
+    [ngModel]="translatedText()"
+    (ngModelChange)="saveTranslationText($event)"
+    placeholder="{{ input.placeholder }}"
+  />
+</mat-form-field>

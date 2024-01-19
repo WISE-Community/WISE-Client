@@ -1,12 +1,25 @@
 import { Injectable } from '@angular/core';
 import { ProjectService } from './projectService';
 import { ConfigService } from './configService';
-import { lastValueFrom, of, tap } from 'rxjs';
+import { Observable, lastValueFrom, of, switchMap, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { copy } from '../common/object/object';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { Translations } from '../../../app/domain/translations';
 
 @Injectable()
 export class TranslateProjectService {
+  currentTranslations = toSignal(
+    toObservable(this.projectService.currentLanguage).pipe(
+      switchMap((language) =>
+        this.projectService.getLocale().isDefaultLocale(language.locale)
+          ? of({})
+          : lastValueFrom(this.fetchTranslations(language.locale))
+      )
+    ),
+    { initialValue: {} }
+  );
+
   constructor(
     private configService: ConfigService,
     private http: HttpClient,
@@ -17,16 +30,12 @@ export class TranslateProjectService {
     const project = this.revertToOriginalProject();
     return lastValueFrom(
       this.projectService.getLocale().hasTranslationsToApply(locale)
-        ? this.http
-            .get(this.getTranslationMappingURL(locale), {
-              headers: new HttpHeaders().set('cache-control', 'no-cache')
+        ? this.fetchTranslations(locale).pipe(
+            tap((translations: Translations) => {
+              this.applyTranslations(project, translations);
+              this.projectService.setProject(project);
             })
-            .pipe(
-              tap((translations: any) => {
-                this.applyTranslations(project, translations);
-                this.projectService.setProject(project);
-              })
-            )
+          )
         : of({})
     );
   }
@@ -37,13 +46,19 @@ export class TranslateProjectService {
     return project;
   }
 
+  private fetchTranslations(locale: string): Observable<Translations> {
+    return this.http.get<Translations>(this.getTranslationMappingURL(locale), {
+      headers: new HttpHeaders().set('cache-control', 'no-cache')
+    });
+  }
+
   private getTranslationMappingURL(locale: string): string {
     return this.configService
       .getConfigParam('projectURL')
       .replace('project.json', `translations.${locale}.json`);
   }
 
-  private applyTranslations(projectElement: any, translations: any): void {
+  private applyTranslations(projectElement: object, translations: Translations): void {
     Object.keys(projectElement)
       .filter((key) => key.endsWith('.i18n'))
       .forEach((key) => {

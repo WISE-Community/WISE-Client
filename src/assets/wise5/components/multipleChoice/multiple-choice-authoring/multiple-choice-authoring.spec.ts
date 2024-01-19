@@ -16,6 +16,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MultipleChoiceAuthoringHarness } from './multiple-choice-authoring.harness';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 
 let component: MultipleChoiceAuthoring;
 let fixture: ComponentFixture<MultipleChoiceAuthoring>;
@@ -36,7 +37,8 @@ describe('MultipleChoiceAuthoringComponent', () => {
           MatIconModule,
           MatInputModule,
           MatRadioModule,
-          StudentTeacherCommonServicesModule
+          StudentTeacherCommonServicesModule,
+          TranslatableInputComponent
         ],
         providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
       });
@@ -53,6 +55,7 @@ describe('MultipleChoiceAuthoringComponent', () => {
       showFeedback: true,
       type: 'MultipleChoice'
     };
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     fixture.detectChanges();
     multipleChoiceAuthoringHarness = await TestbedHarnessEnvironment.harnessForFixture(
       fixture,

@@ -1,7 +1,7 @@
 'use strict';
 
 import { ConfigService } from './configService';
-import { Injectable } from '@angular/core';
+import { Injectable, WritableSignal, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, tap } from 'rxjs';
 import { Node } from '../common/Node';
@@ -19,6 +19,7 @@ import { QuestionBank } from '../components/peerChat/peer-chat-question-bank/Que
 import { DynamicPrompt } from '../directives/dynamic-prompt/DynamicPrompt';
 import { Component } from '../common/Component';
 import { ProjectLocale } from '../../../app/domain/projectLocale';
+import { Language } from '../../../app/domain/language';
 
 @Injectable()
 export class ProjectService {
@@ -26,6 +27,9 @@ export class ProjectService {
   additionalProcessingFunctionsMap: any = {};
   allPaths: string[][] = [];
   applicationNodes: any = [];
+  private currentLanguageSignal: WritableSignal<Language> = signal(null);
+  readonly currentLanguage = this.currentLanguageSignal.asReadonly();
+
   flattenedProjectAsNodeIds: any = null;
   groupNodes: any[] = [];
   idToNode: any = {};
@@ -226,6 +230,7 @@ export class ProjectService {
     if (this.project.projectAchievements != null) {
       this.achievements = this.project.projectAchievements;
     }
+    this.currentLanguageSignal.set(this.getLocale().getDefaultLanguage());
     this.broadcastProjectParsed();
   }
 
@@ -2010,5 +2015,13 @@ export class ProjectService {
 
   getLocale(): ProjectLocale {
     return new ProjectLocale(this.project.metadata.locale);
+  }
+
+  setCurrentLanguage(language: Language): void {
+    this.currentLanguageSignal.set(language);
+  }
+
+  isDefaultLocale(): boolean {
+    return this.getLocale().isDefaultLocale(this.currentLanguage().locale);
   }
 }

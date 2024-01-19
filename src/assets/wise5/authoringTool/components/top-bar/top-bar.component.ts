@@ -106,5 +106,7 @@ export class TopBarComponent implements OnInit {
     this.sessionService.logOut();
   }
 
-  protected changeLanguage(language: Language): void {}
+  protected changeLanguage(language: Language): void {
+    this.projectService.setCurrentLanguage(language);
+  }
 }
