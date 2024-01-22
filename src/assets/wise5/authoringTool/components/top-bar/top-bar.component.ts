@@ -45,7 +45,6 @@ export class TopBarComponent implements OnInit {
     this.avatarColor = getAvatarColorForWorkgroupId(this.workgroupId);
     this.userInfo = this.configService.getMyUserInfo();
     this.contextPath = this.configService.getContextPath();
-    this.updateTranslationModel();
     this.subscriptions.add(
       this.projectService.projectSaved$.subscribe(() => this.updateTranslationModel())
     );
@@ -61,7 +60,12 @@ export class TopBarComponent implements OnInit {
   }
 
   ngOnChanges() {
-    this.projectInfo = this.getProjectInfo();
+    if (this.projectId) {
+      this.projectInfo = this.getProjectInfo();
+      this.updateTranslationModel();
+    } else {
+      this.hasTranslations = false;
+    }
   }
 
   private getProjectInfo(): string {
