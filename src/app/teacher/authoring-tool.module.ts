@@ -60,6 +60,8 @@ import { EditNodeTitleComponent } from '../../assets/wise5/authoringTool/node/ed
 import { EditProjectLanguageSettingComponent } from '../../assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component';
 import { AddComponentButtonComponent } from '../../assets/wise5/authoringTool/node/add-component-button/add-component-button.component';
 import { ProjectLanguageChooserComponent } from '../common/project-language-chooser/project-language-chooser.component';
+import { CopyComponentButtonComponent } from '../../assets/wise5/authoringTool/node/copy-component-button/copy-component-button.component';
+import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator/save-indicator.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +91,7 @@ import { ProjectLanguageChooserComponent } from '../common/project-language-choo
     ComponentTypeSelectorComponent,
     ConcurrentAuthorsMessageComponent,
     ConfigureAutomatedAssessmentComponent,
+    CopyComponentButtonComponent,
     EditNodeTitleComponent,
     EditProjectLanguageSettingComponent,
     InsertNodeAfterButtonComponent,
@@ -123,6 +126,7 @@ import { ProjectLanguageChooserComponent } from '../common/project-language-choo
     ProjectAssetAuthoringModule,
     ProjectLanguageChooserComponent,
     RouterModule,
+    SaveIndicatorComponent,
     StepToolsModule,
     StructureAuthoringModule,
     WiseTinymceEditorModule

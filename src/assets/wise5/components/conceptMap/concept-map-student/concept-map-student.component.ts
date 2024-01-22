@@ -307,10 +307,9 @@ export class ConceptMapStudent extends ComponentStudent {
         if (this.hasAutoGrading()) {
           this.performAutoGrading();
         }
-        this.isSubmit = true;
-        this.emitComponentSubmitTriggered();
+        this.performSubmit(submitTriggeredBy);
       } else {
-        this.isSubmit = false;
+        this.setIsSubmit(false);
       }
     }
   }

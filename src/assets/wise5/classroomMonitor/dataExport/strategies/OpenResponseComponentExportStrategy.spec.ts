@@ -20,11 +20,10 @@ describe('OpenResponseComponentDataExportStrategy', () => {
     exportStrategyTester.setUpServices();
     initializeStudentWork();
   });
-  describe('export', () => {
-    exportWithSingleAutoScore();
-    exportWithMultipleSubScores();
-    exportLatestRevisions();
-  });
+  exportWithSingleAutoScore();
+  exportWithMultipleSubScores();
+  exportLatestRevisions();
+  exportOnlySubmits();
 });
 
 function exportWithSingleAutoScore(): void {
@@ -57,6 +56,8 @@ function exportWithSingleAutoScore(): void {
       setUpExportStrategy('all');
       exportStrategyTester.componentExportStrategy.export();
       const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd([
+        'Item ID',
+        'Response',
         'Auto Score'
       ]);
       expect(
@@ -185,6 +186,8 @@ function exportWithMultipleSubScores(): void {
       setUpExportStrategy('all');
       exportStrategyTester.componentExportStrategy.export();
       const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd([
+        'Item ID',
+        'Response',
         'Idea 1',
         'Idea 2',
         'Score ki',
@@ -273,8 +276,8 @@ function exportWithMultipleSubScores(): void {
 }
 
 function exportLatestRevisions() {
-  describe('open response export', () => {
-    it('generates export with latest revision', () => {
+  describe('open response export only latest revisions', () => {
+    it('generates export with latest revisions', () => {
       exportStrategyTester.setComponent({
         id: exportStrategyTester.componentId,
         type: componentType,
@@ -293,6 +296,8 @@ function exportLatestRevisions() {
       setUpExportStrategy('latest');
       exportStrategyTester.componentExportStrategy.export();
       const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd([
+        'Item ID',
+        'Response',
         'Auto Score'
       ]);
       expect(
@@ -325,7 +330,7 @@ function exportLatestRevisions() {
             exportStrategyTester.component.type,
             exportStrategyTester.component.prompt,
             studentData3,
-            1,
+            2,
             0,
             1,
             itemId,
@@ -357,7 +362,7 @@ function exportLatestRevisions() {
             exportStrategyTester.component.type,
             exportStrategyTester.component.prompt,
             studentData4,
-            1,
+            2,
             0,
             1,
             itemId,
@@ -371,12 +376,116 @@ function exportLatestRevisions() {
   });
 }
 
-function setUpExportStrategy(allOrLatest: 'all' | 'latest'): void {
+function exportOnlySubmits(): void {
+  describe('open response export only submits', () => {
+    it('generates export with only submits', () => {
+      exportStrategyTester.setComponent({
+        id: exportStrategyTester.componentId,
+        type: componentType,
+        prompt: exportStrategyTester.componentPrompt,
+        enableCRater: true,
+        cRater: {
+          itemId: itemId
+        }
+      });
+      exportStrategyTester.setStudentData([
+        componentState1,
+        componentState2,
+        componentState3,
+        componentState4
+      ]);
+      setUpExportStrategy('all', true);
+      exportStrategyTester.componentExportStrategy.export();
+      const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd([
+        'Item ID',
+        'Response',
+        'Auto Score'
+      ]);
+      expect(
+        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
+      ).toHaveBeenCalledWith(
+        [
+          headerRow,
+          [
+            1,
+            exportStrategyTester.workgroupId1,
+            exportStrategyTester.userId1,
+            exportStrategyTester.studentName1,
+            '',
+            '',
+            '',
+            '',
+            exportStrategyTester.periodName,
+            exportStrategyTester.projectId,
+            exportStrategyTester.projectTitle,
+            exportStrategyTester.runId,
+            exportStrategyTester.startDate,
+            exportStrategyTester.endDate,
+            exportStrategyTester.studentWorkId1,
+            exportStrategyTester.studentWorkTimestamp1,
+            exportStrategyTester.studentWorkTimestamp1,
+            exportStrategyTester.nodeId,
+            exportStrategyTester.component.id,
+            exportStrategyTester.componentPartNumber,
+            exportStrategyTester.nodePositionAndTitle,
+            exportStrategyTester.component.type,
+            exportStrategyTester.component.prompt,
+            studentData1,
+            1,
+            1,
+            1,
+            itemId,
+            exportStrategyTester.studentWorkResponse1,
+            ''
+          ],
+          [
+            2,
+            exportStrategyTester.workgroupId2,
+            exportStrategyTester.userId2,
+            exportStrategyTester.studentName2,
+            '',
+            '',
+            '',
+            '',
+            exportStrategyTester.periodName,
+            exportStrategyTester.projectId,
+            exportStrategyTester.projectTitle,
+            exportStrategyTester.runId,
+            exportStrategyTester.startDate,
+            exportStrategyTester.endDate,
+            exportStrategyTester.studentWorkId2,
+            exportStrategyTester.studentWorkTimestamp2,
+            exportStrategyTester.studentWorkTimestamp2,
+            exportStrategyTester.nodeId,
+            exportStrategyTester.component.id,
+            exportStrategyTester.componentPartNumber,
+            exportStrategyTester.nodePositionAndTitle,
+            exportStrategyTester.component.type,
+            exportStrategyTester.component.prompt,
+            studentData2,
+            1,
+            1,
+            1,
+            itemId,
+            exportStrategyTester.studentWorkResponse2,
+            ''
+          ]
+        ],
+        exportStrategyTester.createExpectedFileName('open_response')
+      );
+    });
+  });
+}
+
+function setUpExportStrategy(
+  allOrLatest: 'all' | 'latest',
+  includeOnlySubmits: boolean = false
+): void {
   exportStrategyTester.setUpExportStrategy(
     new OpenResponseComponentDataExportStrategy(
       exportStrategyTester.nodeId,
       exportStrategyTester.component,
-      exportStrategyTester.createComponentDataExportParams(),
+      exportStrategyTester.createComponentDataExportParams(true, includeOnlySubmits, true),
       allOrLatest
     )
   );

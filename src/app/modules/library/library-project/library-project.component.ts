@@ -1,9 +1,18 @@
-import { Component, Input, OnInit, ViewEncapsulation, ElementRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  ViewEncapsulation,
+  ElementRef,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { LibraryProject } from '../libraryProject';
 import { LibraryProjectDetailsComponent } from '../library-project-details/library-project-details.component';
 import { flash } from '../../../animations';
+import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
 
 @Component({
   selector: 'app-library-project',
@@ -13,8 +22,11 @@ import { flash } from '../../../animations';
   animations: [flash]
 })
 export class LibraryProjectComponent implements OnInit {
-  @Input()
-  project: LibraryProject = new LibraryProject();
+  @Input() checked: boolean = false;
+  @Input() myUnit: boolean = false;
+  @Input() project: LibraryProject = new LibraryProject();
+  @Output()
+  projectSelectionEvent: EventEmitter<ProjectSelectionEvent> = new EventEmitter<ProjectSelectionEvent>();
 
   animateDuration: string = '0s';
   animateDelay: string = '0s';
@@ -54,5 +66,10 @@ export class LibraryProjectComponent implements OnInit {
       data: { project: project },
       panelClass: 'dialog-md'
     });
+  }
+
+  protected selectProject(event: any): void {
+    event.stopPropagation();
+    this.projectSelectionEvent.emit({ selected: event.target.checked, project: this.project });
   }
 }

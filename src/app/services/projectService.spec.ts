@@ -438,6 +438,7 @@ function calculateNodeNumbers(): void {
   calculateNodeNumbersWhenBranchInOneActivity();
   calculateNodeNumbersWhenBranchSpansMultipleActivities();
   calculateNodeNumbersWhenOnlyLessons();
+  calculateNodeNumbersWhenNoLessons();
 }
 
 function calculateNodeNumbersWhenNoBranches(): void {
@@ -503,6 +504,20 @@ function calculateNodeNumbersWhenOnlyLessons(): void {
         { nodeId: 'group1', number: '1' },
         { nodeId: 'group2', number: '2' }
       ]);
+    });
+  });
+}
+
+function calculateNodeNumbersWhenNoLessons(): void {
+  describe('project with no lessons', () => {
+    it('calculates node numbers correctly', () => {
+      service.project = {
+        nodes: [{ id: 'group0', type: 'group', ids: [], startId: '' }],
+        startNodeId: 'group0',
+        startGroupId: 'group0'
+      };
+      service.parseProject();
+      expectNodeIdsToHaveNumbers([{ nodeId: 'group0', number: '0' }]);
     });
   });
 }

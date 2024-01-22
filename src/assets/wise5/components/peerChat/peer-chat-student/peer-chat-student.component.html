@@ -28,8 +28,10 @@
     </div>
     <div fxFlex fxFlex.gt-sm="60" fxFlexOrder="2" fxFlexOrder.gt-sm="1">
       <peer-chat-chat-box
+        [component]="component"
         [messages]="peerChatMessages"
         [myWorkgroupId]="myWorkgroupId"
+        [peerGroup]="peerGroup"
         [response]="response"
         [workgroupInfos]="peerChatWorkgroupInfos"
         (onSubmit)="submitStudentResponse($event)"

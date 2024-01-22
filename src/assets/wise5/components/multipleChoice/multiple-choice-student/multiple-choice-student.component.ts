@@ -6,7 +6,6 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
-import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
@@ -15,6 +14,7 @@ import { MultipleChoiceComponent } from '../MultipleChoiceComponent';
 import { MultipleChoiceService } from '../multipleChoiceService';
 import { MultipleChoiceContent } from '../MultipleChoiceContent';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
+import { copy } from '../../../common/object/object';
 
 @Component({
   selector: 'multiple-choice-student',
@@ -40,7 +40,6 @@ export class MultipleChoiceStudent extends ComponentStudent {
     private multipleChoiceService: MultipleChoiceService,
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
-    private projectService: ProjectService,
     protected studentAssetService: StudentAssetService,
     protected studentDataService: StudentDataService
   ) {
@@ -58,16 +57,13 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.originalComponentContent = copy(this.component.content);
     this.studentChoices = this.component.isRadio() ? '' : [];
     this.isCorrect = null;
     this.choices = this.component.getChoices();
     this.componentHasCorrectAnswer = this.hasCorrectChoices();
     this.showFeedback = this.component.content.showFeedback;
     this.choiceType = this.component.getChoiceType();
-    this.originalComponentContent = this.projectService.getComponent(
-      this.component.nodeId,
-      this.component.id
-    ) as MultipleChoiceContent;
 
     if (hasConnectedComponent(this.componentContent, 'showWork')) {
       this.handleConnectedComponents();

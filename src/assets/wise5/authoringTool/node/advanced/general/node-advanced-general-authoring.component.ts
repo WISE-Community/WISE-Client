@@ -18,6 +18,6 @@ export class NodeAdvancedGeneralAuthoringComponent implements OnInit {
   }
 
   protected saveProject(): void {
-    return this.projectService.saveProject();
+    this.projectService.saveProject();
   }
 }

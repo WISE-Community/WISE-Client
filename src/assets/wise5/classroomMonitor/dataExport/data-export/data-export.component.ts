@@ -4,7 +4,6 @@ import { DataExportContext } from '../DataExportContext';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { DataExportService } from '../../../services/dataExportService';
-import { MatchService } from '../../../components/match/matchService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
@@ -19,15 +18,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { DiscussionComponentDataExportStrategy } from '../strategies/DiscussionComponentDataExportStrategy';
 import { LabelComponentDataExportStrategy } from '../strategies/LabelComponentDataExportStrategy';
-import { Component as WISEComponent } from '../../../common/Component';
 import { removeHTMLTags } from '../../../common/string/string';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
-import { Choice } from '../../../components/match/choice';
-import { Bucket } from '../../../components/match/bucket';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PeerChatComponentDataExportStrategy } from '../strategies/PeerChatComponentDataExportStrategy';
 import { OpenResponseComponentDataExportStrategy } from '../strategies/OpenResponseComponentExportStrategy';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
+import { DialogGuidanceComponentDataExportStrategy } from '../strategies/DialogGuidanceComponentDataExportStrategy';
+import { MatchComponentDataExportStrategy } from '../strategies/MatchComponentDataExportStrategy';
 
 @Component({
   selector: 'data-export',
@@ -78,8 +76,6 @@ export class DataExportComponent implements OnInit {
   canViewStudentNames: boolean = false;
   componentTypeToComponentService: any = {};
   dataExportContext: DataExportContext;
-  dialogGuidanceComputerResponseLabel: string = 'Computer Response';
-  dialogGuidanceRevisionLabel: string = 'Revision';
   embeddedTableKeyToValue = {
     co2saved: 'CO2 Saved',
     current: 'Current',
@@ -125,7 +121,6 @@ export class DataExportComponent implements OnInit {
     public configService: ConfigService,
     public dataExportService: DataExportService,
     private dialog: MatDialog,
-    private matchService: MatchService,
     public projectService: TeacherProjectService,
     private route: ActivatedRoute,
     private router: Router,
@@ -1000,7 +995,15 @@ export class DataExportComponent implements OnInit {
   exportComponentAllRevisions(nodeId: string, component: any): void {
     this.setAllWorkSelectionType();
     if (component.type === 'Match') {
-      this.exportMatchComponent(nodeId, component);
+      this.dataExportContext.setStrategy(
+        new MatchComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'all'
+        )
+      );
+      this.dataExportContext.export();
     } else if (component.type === 'Discussion') {
       this.dataExportContext.setStrategy(
         new DiscussionComponentDataExportStrategy(
@@ -1011,7 +1014,15 @@ export class DataExportComponent implements OnInit {
       );
       this.dataExportContext.export();
     } else if (component.type === 'DialogGuidance') {
-      this.exportDialogGuidanceComponent(nodeId, component);
+      this.dataExportContext.setStrategy(
+        new DialogGuidanceComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'all'
+        )
+      );
+      this.dataExportContext.export();
     } else if (component.type === 'OpenResponse') {
       this.dataExportContext.setStrategy(
         new OpenResponseComponentDataExportStrategy(
@@ -1025,7 +1036,15 @@ export class DataExportComponent implements OnInit {
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       this.exportEmbeddedComponent(nodeId, component);
     } else if (component.type === 'Label') {
-      this.exportLabelComponent(nodeId, component);
+      this.dataExportContext.setStrategy(
+        new LabelComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'all'
+        )
+      );
+      this.dataExportContext.export();
     } else if (component.type === 'PeerChat') {
       this.dataExportContext.setStrategy(
         new PeerChatComponentDataExportStrategy(
@@ -1046,9 +1065,25 @@ export class DataExportComponent implements OnInit {
   exportComponentLatestRevisions(nodeId: string, component: any): void {
     this.setLatestWorkSelectionType();
     if (component.type === 'Match') {
-      this.exportMatchComponent(nodeId, component);
+      this.dataExportContext.setStrategy(
+        new MatchComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'latest'
+        )
+      );
+      this.dataExportContext.export();
     } else if (component.type === 'DialogGuidance') {
-      this.exportDialogGuidanceComponent(nodeId, component);
+      this.dataExportContext.setStrategy(
+        new DialogGuidanceComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'latest'
+        )
+      );
+      this.dataExportContext.export();
     } else if (component.type === 'OpenResponse') {
       this.dataExportContext.setStrategy(
         new OpenResponseComponentDataExportStrategy(
@@ -1062,18 +1097,16 @@ export class DataExportComponent implements OnInit {
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       this.exportEmbeddedComponent(nodeId, component);
     } else if (component.type === 'Label') {
-      this.exportLabelComponent(nodeId, component);
+      this.dataExportContext.setStrategy(
+        new LabelComponentDataExportStrategy(
+          nodeId,
+          component,
+          this.getComponentDataExportParams(),
+          'latest'
+        )
+      );
+      this.dataExportContext.export();
     }
-  }
-
-  private exportLabelComponent(nodeId: string, component: any): void {
-    this.dataExportContext.setStrategy(
-      new LabelComponentDataExportStrategy(
-        new WISEComponent(component, nodeId),
-        this.getComponentDataExportParams()
-      )
-    );
-    this.dataExportContext.export();
   }
 
   private getComponentDataExportParams(): ComponentDataExportParams {
@@ -1083,294 +1116,6 @@ export class DataExportComponent implements OnInit {
       includeStudentNames: this.includeStudentNames,
       workSelectionType: this.workSelectionType
     };
-  }
-
-  /**
-   * Generate an export for a specific match component.
-   * TODO: Move these Match export functions to the MatchService.
-   * @param nodeId The node id.
-   * @param component The component content object.
-   */
-  exportMatchComponent(nodeId: string, component: any): void {
-    const components = this.getComponentsParam(nodeId, component.id);
-    this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
-      this.generateMatchComponentExport(nodeId, component);
-    });
-  }
-
-  generateMatchComponentExport(nodeId: string, component: any): void {
-    const rows = this.getExportMatchComponentRows(nodeId, component);
-    const fileName = this.getComponentExportFileName(nodeId, component.id, 'match');
-    this.generateCSVFile(rows, fileName);
-    this.hideDownloadingExportMessage();
-  }
-
-  getExportMatchComponentRows(nodeId: string, component: any): any[] {
-    const columnNames = [];
-    const columnNameToNumber = {};
-    let rows = [];
-    rows.push(this.generateMatchComponentHeaderRow(component, columnNames, columnNameToNumber));
-    rows = rows.concat(
-      this.generateComponentWorkRows(component, columnNames, columnNameToNumber, nodeId)
-    );
-    return rows;
-  }
-
-  /**
-   * Populate the array of header column names.
-   * Populate the mappings of column name to column number.
-   * @param component The component content object.
-   * @param columnNames An array that we will populate with column names.
-   * @param columnNameToNumber An object that we will populate with mappings
-   * of column name to column number.
-   */
-  populateMatchColumnNames(component: any, columnNames: string[], columnNameToNumber: any): void {
-    /*
-     * Add the default column names that contain the information about the
-     * student, project, run, node, and component.
-     */
-    for (const defaultMatchColumnName of this.componentExportDefaultColumnNames) {
-      this.addColumnNameToColumnDataStructures(
-        columnNameToNumber,
-        columnNames,
-        defaultMatchColumnName
-      );
-    }
-    for (const choice of component.choices) {
-      columnNameToNumber[choice.id] = columnNames.length;
-      columnNames.push(choice.value);
-    }
-    if (this.includeCorrectnessColumns && this.matchService.componentHasCorrectAnswer(component)) {
-      for (let choice of component.choices) {
-        columnNameToNumber[choice.id + '-boolean'] = columnNames.length;
-        columnNames.push(choice.value);
-      }
-      this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, 'Is Correct');
-    }
-  }
-
-  /**
-   * Generate the header row.
-   * @param component The component content object.
-   * @param columnNames An array of column names.
-   * @param columnNameToNumber An object containing the mappings from column
-   * name to column number.
-   */
-  generateMatchComponentHeaderRow(
-    component: any,
-    columnNames: string[],
-    columnNameToNumber: any
-  ): string[] {
-    this.populateMatchColumnNames(component, columnNames, columnNameToNumber);
-    return columnNames;
-  }
-
-  /**
-   * Generate the row for the component state.
-   * @param component The component content object.
-   * @param columnNames All the header column names.
-   * @param columnNameToNumber The mapping from column name to column number.
-   * @param rowCounter The current row number.
-   * @param workgroupId The workgroup id.
-   * @param userId1 The User ID 1.
-   * @param userId2 The User ID 2.
-   * @param userId3 The User ID 3.
-   * @param periodName The period name.
-   * @param componentRevisionCounter The mapping of component to revision counter.
-   * @param matchComponentState The component state.
-   * @return The row with the student work.
-   */
-  generateMatchComponentWorkRow(
-    component: any,
-    columnNames: string[],
-    columnNameToNumber: any,
-    rowCounter: number,
-    workgroupId: number,
-    userId1: number,
-    userId2: number,
-    userId3: number,
-    studentName1: string,
-    studentName2: string,
-    studentName3: string,
-    periodName: string,
-    componentRevisionCounter: any,
-    matchComponentState: any
-  ): string[] {
-    const row = this.createStudentWorkExportRow(
-      columnNames,
-      columnNameToNumber,
-      rowCounter,
-      workgroupId,
-      userId1,
-      userId2,
-      userId3,
-      studentName1,
-      studentName2,
-      studentName3,
-      periodName,
-      componentRevisionCounter,
-      matchComponentState
-    );
-    if (component.choiceReuseEnabled) {
-      this.insertMatchChoiceReuseValues(row, columnNameToNumber, component, matchComponentState);
-    } else {
-      this.insertMatchDefaultValues(row, columnNameToNumber, component, matchComponentState);
-    }
-    return row;
-  }
-
-  private insertMatchDefaultValues(
-    row: string[],
-    columnNameToNumber: any,
-    component: any,
-    matchComponentState: any
-  ): void {
-    matchComponentState.studentData.buckets.forEach((bucket: Bucket) => {
-      bucket.items.forEach((item: Choice) => {
-        row[columnNameToNumber[item.id]] = this.getBucketValueById(component, bucket.id);
-        if (
-          this.includeCorrectnessColumns &&
-          this.matchService.componentHasCorrectAnswer(component)
-        ) {
-          this.setCorrectnessValue(row, columnNameToNumber, item);
-        }
-      });
-    });
-  }
-
-  private insertMatchChoiceReuseValues(
-    row: string[],
-    columnNameToNumber: any,
-    component: any,
-    matchComponentState: any
-  ): void {
-    matchComponentState.studentData.buckets
-      .filter((bucket: Bucket) => bucket.id !== '0')
-      .forEach((bucket: Bucket) => {
-        bucket.items.forEach((item: Choice) => {
-          this.setBucketValue(row, columnNameToNumber, component, bucket, item);
-          if (
-            this.includeCorrectnessColumns &&
-            this.matchService.componentHasCorrectAnswer(component)
-          ) {
-            this.setCorrectnessValueForChoiceReuse(row, columnNameToNumber, item);
-          }
-        });
-      });
-  }
-
-  private setBucketValue(
-    row: string[],
-    columnNameToNumber: any,
-    component: any,
-    bucket: Bucket,
-    item: Choice
-  ): void {
-    const previousValue = row[columnNameToNumber[item.id]];
-    const bucketValue = this.getBucketValueById(component, bucket.id);
-    row[columnNameToNumber[item.id]] =
-      previousValue === '' ? bucketValue : `${previousValue}, ${bucketValue}`;
-  }
-
-  private setCorrectnessValueForChoiceReuse(
-    row: any[],
-    columnNameToNumber: any,
-    item: Choice
-  ): void {
-    const columnName = item.id + '-boolean';
-    if (item.isCorrect == null) {
-      // The item does not have an isCorrect field so we will not show anything in the cell.
-    } else if (item.isCorrect) {
-      this.mergeCorrectnessValue(row, columnNameToNumber, columnName, 1);
-    } else {
-      if (item.isIncorrectPosition) {
-        this.mergeCorrectnessValue(row, columnNameToNumber, columnName, 2);
-      } else {
-        this.mergeCorrectnessValue(row, columnNameToNumber, columnName, 0);
-      }
-    }
-  }
-
-  /**
-   * Matrix to determine the merged correctness value.
-   * Legend
-   * e = empty
-   * 0 = incorrect
-   * 1 = correct
-   * 2 = correct bucket but incorrect position
-   *        previous
-   *        e 0 1 2
-   *       --------
-   * n  0 | 0 0 0 0
-   * e  1 | 1 0 1 2
-   * w  2 | 2 0 2 2
-   * @param row: any[]
-   * @param columnNameToNumber: any
-   * @param columnName: string
-   * @param newValue: number
-   */
-  private mergeCorrectnessValue(
-    row: any,
-    columnNameToNumber: any,
-    columnName: string,
-    newValue: number
-  ): void {
-    const previousValue = row[columnNameToNumber[columnName]];
-    if (previousValue === '') {
-      row[columnNameToNumber[columnName]] = newValue;
-    } else if (this.bothValuesAreCorrect(previousValue, newValue)) {
-      row[columnNameToNumber[columnName]] = 1;
-    } else if (this.eitherValuesAreIncorrect(previousValue, newValue)) {
-      row[columnNameToNumber[columnName]] = 0;
-    } else if (this.eitherValuesAreIncorrectPosition(previousValue, newValue)) {
-      row[columnNameToNumber[columnName]] = 2;
-    }
-  }
-
-  private bothValuesAreCorrect(value1: number, value2: number): boolean {
-    return value1 === 1 && value2 === 1;
-  }
-
-  private eitherValuesAreIncorrect(value1: number, value2: number): boolean {
-    return value1 === 0 || value2 === 0;
-  }
-
-  private eitherValuesAreIncorrectPosition(value1: number, value2: number): boolean {
-    return value1 === 2 || value2 === 2;
-  }
-
-  getBucketValueById(component: any, id: string): string {
-    if (id === '0') {
-      return component.choicesLabel ? component.choicesLabel : 'Choices';
-    }
-    const bucket = component.buckets.find((bucket: any) => {
-      return bucket.id === id;
-    });
-    return bucket ? bucket.value : '';
-  }
-
-  /**
-   * Set the correctness boolean value into the cell.
-   * @param row The row we are working on.
-   * @param columnNameToNumber The mapping from column name to column number.
-   * @param item The choice object.
-   */
-  setCorrectnessValue(row: any[], columnNameToNumber: any, item: any): void {
-    const columnName = item.id + '-boolean';
-    if (item.isCorrect == null) {
-      /*
-       * The item does not have an isCorrect field so we will not show
-       * anything in the cell.
-       */
-    } else if (item.isCorrect) {
-      row[columnNameToNumber[columnName]] = 1;
-    } else {
-      if (item.isIncorrectPosition) {
-        row[columnNameToNumber[columnName]] = 2;
-      } else {
-        row[columnNameToNumber[columnName]] = 0;
-      }
-    }
   }
 
   setAllWorkSelectionType(): void {
@@ -1383,20 +1128,6 @@ export class DataExportComponent implements OnInit {
 
   setWorkSelectionType(workSelectionType: string): void {
     this.workSelectionType = workSelectionType;
-  }
-
-  exportDialogGuidanceComponent(nodeId: string, component: any): void {
-    const components = this.getComponentsParam(nodeId, component.id);
-    this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
-      this.generateDialogGuidanceComponentExport(nodeId, component);
-    });
-  }
-
-  generateDialogGuidanceComponentExport(nodeId: string, component: any): void {
-    const rows = this.getExportDialogGuidanceComponentRows(nodeId, component);
-    const fileName = this.getComponentExportFileName(nodeId, component.id, 'dialog_guidance');
-    this.generateCSVFile(rows, fileName);
-    this.hideDownloadingExportMessage();
   }
 
   getComponentExportFileName(nodeId: string, componentId: string, componentType: string): string {
@@ -1412,69 +1143,6 @@ export class DataExportComponent implements OnInit {
     return `run_${runId}_step_${stepNumber}_component_${componentNumber}_${allOrLatest}_${componentType}_work.csv`;
   }
 
-  getExportDialogGuidanceComponentRows(nodeId: string, component: any): string[] {
-    const columnNames = [];
-    const columnNameToNumber = {};
-    let rows = [];
-    rows.push(
-      this.generateDialogGuidanceComponentHeaderRow(component, columnNames, columnNameToNumber)
-    );
-    rows = rows.concat(
-      this.generateComponentWorkRows(component, columnNames, columnNameToNumber, nodeId)
-    );
-    return rows;
-  }
-
-  generateDialogGuidanceComponentHeaderRow(
-    component: any,
-    columnNames: string[],
-    columnNameToNumber: any
-  ): string[] {
-    this.populateDialogGuidanceColumnNames(component, columnNames, columnNameToNumber);
-    return columnNames;
-  }
-
-  populateDialogGuidanceColumnNames(
-    component: any,
-    columnNames: string[],
-    columnNameToNumber: any
-  ): void {
-    for (const defaultColumnName of this.componentExportDefaultColumnNames) {
-      this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, defaultColumnName);
-    }
-    this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, this.itemIdLabel);
-    const componentStates = this.dataService.getComponentStatesByComponentId(component.id);
-    const ideaNames = this.getDialogGuidanceIdeaNames(componentStates);
-    const scoreNames = this.getDialogGuidanceScoreNames(componentStates);
-    for (let r = 0; r < this.getMaxNumberOfStudentResponses(componentStates); r++) {
-      const revisionNumber = `${this.dialogGuidanceRevisionLabel} ${r + 1}`;
-      this.addColumnNameToColumnDataStructures(
-        columnNameToNumber,
-        columnNames,
-        `${this.studentResponseLabel} ${revisionNumber}`
-      );
-      for (const ideaName of ideaNames) {
-        this.addColumnNameToColumnDataStructures(
-          columnNameToNumber,
-          columnNames,
-          `${this.ideaLabel} ${ideaName} ${revisionNumber}`
-        );
-      }
-      for (const scoreName of scoreNames) {
-        this.addColumnNameToColumnDataStructures(
-          columnNameToNumber,
-          columnNames,
-          `${this.scoreLabel} ${scoreName} ${revisionNumber}`
-        );
-      }
-      this.addColumnNameToColumnDataStructures(
-        columnNameToNumber,
-        columnNames,
-        `${this.dialogGuidanceComputerResponseLabel} ${revisionNumber}`
-      );
-    }
-  }
-
   addColumnNameToColumnDataStructures(
     columnNameToNumber: any,
     columnNames: string[],
@@ -1482,81 +1150,6 @@ export class DataExportComponent implements OnInit {
   ): void {
     columnNameToNumber[columnName] = columnNames.length;
     columnNames.push(columnName);
-  }
-
-  getDialogGuidanceIdeaNames(componentStates: any[]): string[] {
-    for (const componentState of componentStates) {
-      for (const response of componentState.studentData.responses) {
-        if (response.ideas != null && response.ideas.length > 0) {
-          return this.getIdeaNamesFromIdeas(response.ideas);
-        }
-      }
-    }
-    return [];
-  }
-
-  getIdeaNamesFromIdeas(ideas: any[]): string[] {
-    const ideaNames = [];
-    for (const idea of ideas) {
-      ideaNames.push(idea.name);
-    }
-    return ideaNames.sort(this.sortIdeaNames);
-  }
-
-  sortIdeaNames(a: any, b: any): number {
-    const aInt = parseInt(a);
-    const bInt = parseInt(b);
-    // if a and b are the same number but one of them contains a letter, we will sort alphabetically
-    // when a string like "5a" is given to parseInt(), it will return 5
-    // therefore if we are comparing "5" and "5a" we will sort alphabetically because we want
-    // 5 to show up before 5a
-    if (!isNaN(aInt) && !isNaN(bInt) && aInt !== bInt) {
-      // sort numerically
-      return aInt - bInt;
-    } else {
-      // sort alphabetically
-      return a.localeCompare(b);
-    }
-  }
-
-  getDialogGuidanceScoreNames(componentStates: any[]): string[] {
-    for (const componentState of componentStates) {
-      for (const response of componentState.studentData.responses) {
-        if (response.scores != null && response.scores.length > 0) {
-          return this.getScoreNamesFromScores(response.scores);
-        }
-      }
-    }
-    return [];
-  }
-
-  getScoreNamesFromScores(scores: any[]): string[] {
-    const scoreNames = [];
-    for (const score of scores) {
-      scoreNames.push(score.id);
-    }
-    return scoreNames.sort();
-  }
-
-  getMaxNumberOfStudentResponses(componentStates: any[]): number {
-    let maxNumberOfResponses = 0;
-    for (const componentState of componentStates) {
-      const numberOfStudentResponses = this.getNumberOfStudentResponses(componentState);
-      if (numberOfStudentResponses > maxNumberOfResponses) {
-        maxNumberOfResponses = numberOfStudentResponses;
-      }
-    }
-    return maxNumberOfResponses;
-  }
-
-  getNumberOfStudentResponses(componentState: any): number {
-    let count = 0;
-    for (const response of componentState.studentData.responses) {
-      if (response.user === 'Student') {
-        count++;
-      }
-    }
-    return count;
   }
 
   generateComponentWorkRows(
@@ -1687,41 +1280,7 @@ export class DataExportComponent implements OnInit {
     componentRevisionCounter: any,
     componentState: any
   ): string[] {
-    if (componentState.componentType === 'Match') {
-      return this.generateMatchComponentWorkRow(
-        component,
-        columnNames,
-        columnNameToNumber,
-        rowCounter,
-        workgroupId,
-        userId1,
-        userId2,
-        userId3,
-        studentName1,
-        studentName2,
-        studentName3,
-        periodName,
-        componentRevisionCounter,
-        componentState
-      );
-    } else if (componentState.componentType === 'DialogGuidance') {
-      return this.generateDialogGuidanceComponentWorkRow(
-        component,
-        columnNames,
-        columnNameToNumber,
-        rowCounter,
-        workgroupId,
-        userId1,
-        userId2,
-        userId3,
-        studentName1,
-        studentName2,
-        studentName3,
-        periodName,
-        componentRevisionCounter,
-        componentState
-      );
-    } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
+    if (this.isEmbeddedTableComponentAndCanExport(component)) {
       return this.generateEmbeddedComponentWorkRow(
         component,
         columnNames,
@@ -1739,118 +1298,6 @@ export class DataExportComponent implements OnInit {
         componentState
       );
     }
-  }
-
-  generateDialogGuidanceComponentWorkRow(
-    component: any,
-    columnNames: string[],
-    columnNameToNumber: any,
-    rowCounter: number,
-    workgroupId: number,
-    userId1: number,
-    userId2: number,
-    userId3: number,
-    studentName1: string,
-    studentName2: string,
-    studentName3: string,
-    periodName: string,
-    componentRevisionCounter: any,
-    dialogGuidanceComponentState: any
-  ): string[] {
-    // Populate the cells in the row that contain the information about the student, project, run,
-    // step, and component.
-    let row = this.createStudentWorkExportRow(
-      columnNames,
-      columnNameToNumber,
-      rowCounter,
-      workgroupId,
-      userId1,
-      userId2,
-      userId3,
-      studentName1,
-      studentName2,
-      studentName3,
-      periodName,
-      componentRevisionCounter,
-      dialogGuidanceComponentState
-    );
-    row[columnNameToNumber[this.itemIdLabel]] = component.itemId;
-    let revisionCounter = 0;
-    let revisionLabel = '';
-    for (const response of dialogGuidanceComponentState.studentData.responses) {
-      if (response.user === 'Student') {
-        revisionCounter++;
-        revisionLabel = `${this.dialogGuidanceRevisionLabel} ${revisionCounter}`;
-        this.addDialogGuidanceStudentResponseToRow(
-          row,
-          columnNameToNumber,
-          revisionLabel,
-          response.text
-        );
-      } else if (response.user === 'Computer') {
-        if (response.ideas != null) {
-          this.addDialogGuidanceIdeasToRow(row, columnNameToNumber, revisionLabel, response.ideas);
-        }
-        if (response.scores != null) {
-          this.addDialogGuidanceScoresToRow(
-            row,
-            columnNameToNumber,
-            revisionLabel,
-            response.scores
-          );
-        }
-        this.addDialogGuidanceComputerResponseToRow(
-          row,
-          columnNameToNumber,
-          revisionLabel,
-          response.text
-        );
-      }
-    }
-    return row;
-  }
-
-  addDialogGuidanceStudentResponseToRow(
-    row: any[],
-    columnNameToNumber: any,
-    revisionLabel: string,
-    text: string
-  ): void {
-    row[columnNameToNumber[`${this.studentResponseLabel} ${revisionLabel}`]] = text;
-  }
-
-  addDialogGuidanceIdeasToRow(
-    row: any[],
-    columnNameToNumber: any,
-    revisionLabel: string,
-    ideas: any[]
-  ): void {
-    for (const ideaObject of ideas) {
-      row[
-        columnNameToNumber[`${this.ideaLabel} ${ideaObject.name} ${revisionLabel}`]
-      ] = ideaObject.detected ? 1 : 0;
-    }
-  }
-
-  addDialogGuidanceScoresToRow(
-    row: any[],
-    columnNameToNumber: any,
-    revisionLabel: string,
-    scores: any[]
-  ): void {
-    for (const scoreObject of scores) {
-      row[columnNameToNumber[`${this.scoreLabel} ${scoreObject.id} ${revisionLabel}`]] =
-        scoreObject.score;
-    }
-  }
-
-  addDialogGuidanceComputerResponseToRow(
-    row: any[],
-    columnNameToNumber: any,
-    revisionLabel: string,
-    text: string
-  ): void {
-    row[columnNameToNumber[`${this.dialogGuidanceComputerResponseLabel} ${revisionLabel}`]] = text;
   }
 
   exportEmbeddedComponent(nodeId: string, component: any): void {
@@ -1892,12 +1339,8 @@ export class DataExportComponent implements OnInit {
     columnNames: string[],
     columnNameToNumber: any
   ): void {
-    for (const defaultMatchColumnName of this.componentExportDefaultColumnNames) {
-      this.addColumnNameToColumnDataStructures(
-        columnNameToNumber,
-        columnNames,
-        defaultMatchColumnName
-      );
+    for (const defaultColumnName of this.componentExportDefaultColumnNames) {
+      this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, defaultColumnName);
     }
     const componentStates = this.dataService.getComponentStatesByComponentId(component.id);
     const items = this.getEmbeddedTableRowItems(component, componentStates);

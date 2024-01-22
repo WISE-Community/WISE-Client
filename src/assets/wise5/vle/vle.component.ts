@@ -15,6 +15,7 @@ import { WiseLinkService } from '../../../app/services/wiseLinkService';
 import { convertToPNGFile } from '../common/canvas/canvas';
 import { NodeStatusService } from '../services/nodeStatusService';
 import { Node } from '../common/Node';
+import { SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'vle',
@@ -33,7 +34,7 @@ export class VLEComponent implements AfterViewInit {
   notesEnabled: boolean = false;
   notesVisible: boolean = false;
   project: any;
-  projectStyle: string;
+  projectStylePath: SafeResourceUrl;
   reportEnabled: boolean = false;
   reportFullscreen: boolean = false;
   rootNode: any;
@@ -73,7 +74,8 @@ export class VLEComponent implements AfterViewInit {
       this.projectService.project.theme === 'tab'
         ? this.tabbedVLETemplate
         : this.defaultVLETemplate;
-    this.projectStyle = this.projectService.getStyle();
+    this.projectStylePath =
+      this.configService.getProjectAssetsDirectoryPath() + '/project_styles.css';
     if (this.notebookService.isNotebookEnabled()) {
       this.notebookConfig = this.notebookService.getStudentNotebookConfig();
       this.notesEnabled = this.notebookConfig.itemTypes.note.enabled;

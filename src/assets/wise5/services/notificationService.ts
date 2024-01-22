@@ -474,4 +474,26 @@ export class NotificationService {
   broadcastViewCurrentAmbientNotification(args: any) {
     this.viewCurrentAmbientNotificationSource.next(args);
   }
+
+  showSavingMessage(): void {
+    this.broadcastSetGlobalMessage({
+      globalMessage: {
+        text: $localize`Saving...`,
+        isProgressIndicatorVisible: true,
+        time: null
+      }
+    });
+  }
+
+  showSavedMessage(message: string, timeout: number = 500): void {
+    setTimeout(() => {
+      this.broadcastSetGlobalMessage({
+        globalMessage: {
+          text: message,
+          isProgressIndicatorVisible: false,
+          time: new Date().getTime()
+        }
+      });
+    }, timeout);
+  }
 }

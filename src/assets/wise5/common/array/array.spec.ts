@@ -1,4 +1,4 @@
-import { arraysContainSameValues, CSVToArray } from './array';
+import { arraysContainSameValues, CSVToArray, reduceByUniqueId } from './array';
 import csvArraySample from './arraySample';
 import { getIntersectOfArrays } from './array';
 
@@ -59,5 +59,38 @@ describe('arraysContainSameValues()', () => {
   it('should return false when arrays have different values', () => {
     expect(arraysContainSameValues(['a'], [])).toBeFalse();
     expect(arraysContainSameValues(['a', 'b'], ['a'])).toBeFalse();
+  });
+});
+
+describe('reduceByUniqueId', () => {
+  it('should get empty array when input is empty array', () => {
+    const objArr = [];
+    const result = reduceByUniqueId(objArr);
+    expect(result.length).toEqual(0);
+  });
+
+  it('should get one object when there is one object in input array', () => {
+    const objArr = [{ id: 1 }];
+    const result = reduceByUniqueId(objArr);
+    expect(result.length).toEqual(1);
+    expect(result[0].id).toEqual(1);
+  });
+
+  it('should get unique objects when there are multiple duplicates', () => {
+    const objArr = [{ id: 1 }, { id: 2 }, { id: 1 }, { id: 3 }, { id: 3 }, { id: 1 }];
+    const result = reduceByUniqueId(objArr);
+    expect(result.length).toEqual(3);
+    expect(result[0].id).toEqual(1);
+    expect(result[1].id).toEqual(2);
+    expect(result[2].id).toEqual(3);
+  });
+
+  it('should get original array when there are no duplicates', () => {
+    const objArr = [{ id: 1 }, { id: 2 }, { id: 3 }];
+    const result = reduceByUniqueId(objArr);
+    expect(result.length).toEqual(3);
+    expect(result[0].id).toEqual(1);
+    expect(result[1].id).toEqual(2);
+    expect(result[2].id).toEqual(3);
   });
 });

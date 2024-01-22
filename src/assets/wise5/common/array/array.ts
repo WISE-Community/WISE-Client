@@ -83,3 +83,15 @@ export function arraysContainSameValues(array1: string[], array2: string[]): boo
   array2Copy.sort();
   return JSON.stringify(array1Copy) === JSON.stringify(array2Copy);
 }
+
+export function reduceByUniqueId(objArr: any[]): any[] {
+  const idToObj = {};
+  const result = [];
+  for (const obj of objArr) {
+    if (idToObj[obj.id] == null) {
+      result.push(obj);
+      idToObj[obj.id] = obj;
+    }
+  }
+  return result;
+}

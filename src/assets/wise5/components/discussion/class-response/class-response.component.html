@@ -159,7 +159,11 @@
     </div>
   </div>
   <mat-divider class="comment-divider"></mat-divider>
-  <div class="new-reply" fxLayout="row" *ngIf="mode === 'student' && !isDisabled">
+  <div
+    class="new-reply"
+    fxLayout="row"
+    *ngIf="(mode === 'student' || mode === 'preview') && !isDisabled"
+  >
     <textarea
       class="new-reply-input"
       [(ngModel)]="response.replyText"
@@ -169,6 +173,7 @@
       aria-label="Add Comment"
       i18n-aria-label
       cdkTextareaAutosize
+      maxlength="10000"
     >
     </textarea>
   </div>

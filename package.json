@@ -173,7 +173,7 @@
       [
         "@semantic-release/exec",
         {
-          "prepareCmd": "cd dist; tar -czf en-US.tar.gz en-US"
+          "prepareCmd": "cd dist; tar -czf en-US.tar.gz en-US; tar -czf es.tar.gz es; tar -czf ja.tar.gz ja; tar -czf pt.tar.gz pt; tar -czf tr.tar.gz tr; tar -czf zh-Hans.tar.gz zh-Hans; tar -czf zh-Hant.tar.gz zh-Hant"
         }
       ],
       [
@@ -183,6 +183,30 @@
             {
               "path": "dist/en-US.tar.gz",
               "label": "English build"
+            },
+            {
+              "path": "dist/es.tar.gz",
+              "label": "Spanish build"
+            },
+            {
+              "path": "dist/ja.tar.gz",
+              "label": "Japanese build"
+            },
+            {
+              "path": "dist/pt.tar.gz",
+              "label": "Portuguese build"
+            },
+            {
+              "path": "dist/tr.tar.gz",
+              "label": "Turkish build"
+            },
+            {
+              "path": "dist/zh-Hans.tar.gz",
+              "label": "Chinese (Simplified) build"
+            },
+            {
+              "path": "dist/zh-Hant.tar.gz",
+              "label": "Chinese (Traditional) build"
             }
           ]
         }

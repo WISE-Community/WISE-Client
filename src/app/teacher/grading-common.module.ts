@@ -14,6 +14,7 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { ComponentGradingModule } from './component-grading.module';
 import { StatusIconComponent } from '../classroom-monitor/status-icon/status-icon.component';
 import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress/nav-item-progress.component';
+import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator/save-indicator.component';
 
 @NgModule({
   imports: [ComponentGradingModule, IntersectionObserverModule, StudentTeacherCommonModule],

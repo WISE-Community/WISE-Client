@@ -147,7 +147,6 @@ export class ExportStrategyTester {
       this.configService,
       this.dataExportService,
       null,
-      null,
       this.teacherProjectService,
       null,
       null,
@@ -198,12 +197,16 @@ export class ExportStrategyTester {
     return headerRow.concat(additionalHeaderColumns);
   }
 
-  createComponentDataExportParams(): ComponentDataExportParams {
+  createComponentDataExportParams(
+    canViewStudentNames: boolean = true,
+    includeOnlySubmits: boolean = false,
+    includeStudentNames: boolean = true
+  ): ComponentDataExportParams {
     return {
-      canViewStudentNames: true,
-      includeOnlySubmits: false,
-      includeStudentNames: true,
-      workSelectionType: 'all'
+      canViewStudentNames: canViewStudentNames,
+      includeOnlySubmits: includeOnlySubmits,
+      includeStudentNames: includeStudentNames,
+      workSelectionType: null
     };
   }
 

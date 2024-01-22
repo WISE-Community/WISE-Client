@@ -2,27 +2,35 @@
   [prompt]="componentContent.prompt"
   (promptChangedEvent)="promptChanged($event)"
 ></edit-component-prompt>
-<div>
-  <mat-form-field class="size-input">
-    <mat-label i18n>Columns</mat-label>
-    <input
-      matInput
-      type="number"
-      min="1"
-      [(ngModel)]="componentContent.numColumns"
-      (ngModelChange)="numColumnsChange.next($event)"
-    />
-  </mat-form-field>
-  <mat-form-field class="size-input">
-    <mat-label i18n>Rows</mat-label>
-    <input
-      matInput
-      type="number"
-      min="1"
-      [(ngModel)]="componentContent.numRows"
-      (ngModelChange)="numRowsChange.next($event)"
-    />
-  </mat-form-field>
+<div fxLayout="row wrap">
+  <form [formGroup]="dimensionsForm">
+    <mat-form-field class="size-input">
+      <mat-label i18n>Columns</mat-label>
+      <input
+        matInput
+        type="number"
+        min="1"
+        formControlName="numColumnsFormControl"
+        (keypress)="isNumberChar($event)"
+      />
+      <mat-error *ngIf="dimensionsForm.controls['numColumnsFormControl'].hasError('invalid')" i18n
+        >Invalid Value</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="size-input">
+      <mat-label i18n>Rows</mat-label>
+      <input
+        matInput
+        type="number"
+        min="1"
+        formControlName="numRowsFormControl"
+        (keypress)="isNumberChar($event)"
+      />
+      <mat-error *ngIf="dimensionsForm.controls['numRowsFormControl'].hasError('invalid')" i18n
+        >Invalid Value</mat-error
+      >
+    </mat-form-field>
+  </form>
   <mat-form-field class="size-input">
     <mat-label i18n>Global Cell Size</mat-label>
     <input
@@ -65,6 +73,7 @@
             color="primary"
             class="column-buttons"
             (click)="deleteColumn(columnIndex)"
+            [disabled]="componentContent.numColumns === 1"
             matTooltip="Delete Column"
             matTooltipPosition="above"
             i18n-matTooltip
@@ -111,6 +120,7 @@
           color="primary"
           class="row-buttons"
           (click)="deleteRow(rowIndex)"
+          [disabled]="componentContent.numRows === 1"
           matTooltip="Delete Row"
           matTooltipPosition="above"
           i18n-matTooltip

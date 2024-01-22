@@ -14,6 +14,7 @@
 
   .post {
     margin-top: 16px;
+    overflow-wrap: break-word;
   }
 
   .attachment {
@@ -34,6 +35,7 @@
 
   .comment {
     padding-bottom: 16px;
+    overflow-wrap: break-word;
   }
 
   .mat-mdc-list-base .mat-mdc-list-item {
