@@ -15,9 +15,9 @@ import { MatLabel } from '@angular/material/form-field';
 })
 export class TranslatableInputComponent {
   @Input() content: object;
+  @ContentChild(MatInput) defaultLanguageInput: MatInput;
+  @ContentChild(MatLabel, { read: ElementRef }) defaultLanguageLabelRef: ElementRef;
   @Input() key: string;
-  @ContentChild(MatInput) input: MatInput;
-  @ContentChild(MatLabel, { read: ElementRef }) labelRef: ElementRef;
   protected showTranslationInput: Signal<boolean>;
   protected translatedText: Signal<string>;
 
@@ -32,9 +32,7 @@ export class TranslatableInputComponent {
     const i18nId = this.content[`${this.key}.i18n`]?.id;
     this.translatedText = computed(() => {
       if (this.showTranslationInput()) {
-        if (this.translateProjectService.currentTranslations()[i18nId]?.value) {
-          return this.translateProjectService.currentTranslations()[i18nId]?.value;
-        }
+        return this.translateProjectService.currentTranslations()[i18nId]?.value ?? '';
       }
     });
   }
