@@ -42,7 +42,7 @@ export class ProjectLocale {
     return !this.isDefaultLocale(locale) && this.hasLocale(locale);
   }
 
-  private isDefaultLocale(locale: string): boolean {
+  isDefaultLocale(locale: string): boolean {
     return this.locale.default === locale;
   }
 

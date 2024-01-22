@@ -63,16 +63,18 @@
     fxLayout="row"
     fxLayoutAlign="start center"
   >
-    <mat-form-field class="name">
-      <mat-label i18n>Choice Name</mat-label>
-      <input
-        matInput
-        [(ngModel)]="choice.value"
-        (ngModelChange)="inputChange.next($event)"
-        placeholder="Type text or choose an image"
-        i18n-placeholder
-      />
-    </mat-form-field>
+    <translatable-input [content]="choice" key="value" class="name">
+      <mat-form-field>
+        <mat-label i18n>Choice Name</mat-label>
+        <input
+          matInput
+          [(ngModel)]="choice.value"
+          (ngModelChange)="inputChange.next($event)"
+          placeholder="Type text or choose an image"
+          i18n-placeholder
+        />
+      </mat-form-field>
+    </translatable-input>
     <button
       mat-raised-button
       color="primary"
@@ -130,14 +132,16 @@
   </div>
 </div>
 <div class="section">
-  <mat-form-field class="name">
-    <mat-label i18n>Source Bucket Name</mat-label>
-    <input
-      matInput
-      [(ngModel)]="componentContent.choicesLabel"
-      (ngModelChange)="inputChange.next($event)"
-    />
-  </mat-form-field>
+  <translatable-input [content]="componentContent" key="choicesLabel" class="name">
+    <mat-form-field>
+      <mat-label i18n>Source Bucket Name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="componentContent.choicesLabel"
+        (ngModelChange)="inputChange.next($event)"
+      />
+    </mat-form-field>
+  </translatable-input>
   <br />
   <span i18n>Target Buckets</span>
   <button
@@ -246,7 +250,10 @@
   </div>
   <div *ngFor="let bucketFeedback of componentContent.feedback" class="section">
     <p i18n>Bucket Name: {{ getBucketNameById(bucketFeedback.bucketId) }}</p>
-    <div *ngFor="let choiceFeedback of bucketFeedback.choices" class="choice-feedback-container notice-bg-bg">
+    <div
+      *ngFor="let choiceFeedback of bucketFeedback.choices"
+      class="choice-feedback-container notice-bg-bg"
+    >
       <span i18n> Choice: {{ getChoiceTextById(choiceFeedback.choiceId) }} </span>
       <div layout="row">
         <mat-form-field class="feedback">
