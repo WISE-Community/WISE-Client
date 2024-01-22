@@ -1,0 +1,23 @@
+<div fxLayoutAlign="start start" fxLayoutGap="4px">
+  <mat-icon
+    *ngIf="computerAvatarImageSrc == null"
+    class="mat-36"
+    color="accent"
+    aria-label="Automated guidance response"
+    i18n-aria-label
+    >smart_toy</mat-icon
+  >
+  <img
+    *ngIf="computerAvatarImageSrc != null"
+    [src]="computerAvatarImageSrc"
+    class="computer-avatar"
+    aria-label="Automated guidance response"
+    i18n-aria-label
+  />
+  <div fxFlex fxLayoutAlign="start">
+    <div class="response-text notice-bg-bg">
+      <div class="mat-small secondary-text poster">{{ displayNames }}</div>
+      <div [innerHtml]="text"></div>
+    </div>
+  </div>
+</div>

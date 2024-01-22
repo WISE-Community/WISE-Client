@@ -18,12 +18,14 @@ import { ShowGroupWorkService } from '../components/showGroupWork/showGroupWorkS
 import { ShowMyWorkService } from '../components/showMyWork/showMyWorkService';
 import { SummaryService } from '../components/summary/summaryService';
 import { TableService } from '../components/table/tableService';
+import { AiChatService } from '../components/aiChat/aiChatService';
 
 @Injectable()
 export class ComponentServiceLookupService {
   services = new Map<string, any>();
 
   constructor(
+    private aiChatService: AiChatService,
     private animationService: AnimationService,
     private audioOscillatorService: AudioOscillatorService,
     private conceptMapService: ConceptMapService,
@@ -44,6 +46,7 @@ export class ComponentServiceLookupService {
     private summaryService: SummaryService,
     private tableService: TableService
   ) {
+    this.services.set('AiChat', this.aiChatService);
     this.services.set('Animation', this.animationService);
     this.services.set('AudioOscillator', this.audioOscillatorService);
     this.services.set('ConceptMap', this.conceptMapService);
