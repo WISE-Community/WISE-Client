@@ -17,6 +17,7 @@ export class TranslatableInputComponent {
   @Input() content: object;
   @ContentChild(MatInput) defaultLanguageInput: MatInput;
   @ContentChild(MatLabel, { read: ElementRef }) defaultLanguageLabelRef: ElementRef;
+  protected defaultLanguageText: Signal<string>;
   @Input() key: string;
   protected showTranslationInput: Signal<boolean>;
   protected translatedText: Signal<string>;
@@ -30,11 +31,18 @@ export class TranslatableInputComponent {
 
   ngOnInit(): void {
     const i18nId = this.content[`${this.key}.i18n`]?.id;
-    this.translatedText = computed(() => {
-      if (this.showTranslationInput()) {
-        return this.translateProjectService.currentTranslations()[i18nId]?.value ?? '';
-      }
-    });
+    this.translatedText = computed(() =>
+      this.showTranslationInput()
+        ? this.translateProjectService.currentTranslations()[i18nId]?.value
+        : ''
+    );
+    this.defaultLanguageText = computed(() =>
+      this.showTranslationInput()
+        ? $localize`(${this.projectService.getLocale().getDefaultLanguage().language}\: ${
+            this.content[this.key]
+          })`
+        : ''
+    );
   }
 
   protected saveTranslationText(text: string): void {
