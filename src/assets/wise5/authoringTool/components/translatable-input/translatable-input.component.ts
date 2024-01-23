@@ -17,7 +17,7 @@ export class TranslatableInputComponent {
   @Input() content: object;
   @ContentChild(MatInput) defaultLanguageInput: MatInput;
   @ContentChild(MatLabel, { read: ElementRef }) defaultLanguageLabelRef: ElementRef;
-  protected defaultLanguageTextHint: Signal<string>;
+  protected defaultLanguageText: Signal<string>;
   @Input() key: string;
   protected showTranslationInput: Signal<boolean>;
   protected translatedText: Signal<string>;
@@ -36,7 +36,7 @@ export class TranslatableInputComponent {
         ? this.translateProjectService.currentTranslations()[i18nId]?.value
         : ''
     );
-    this.defaultLanguageTextHint = computed(() =>
+    this.defaultLanguageText = computed(() =>
       this.showTranslationInput()
         ? $localize`(${this.projectService.getLocale().getDefaultLanguage().language}\: ${
             this.content[this.key]
