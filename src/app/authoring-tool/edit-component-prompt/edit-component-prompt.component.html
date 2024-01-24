@@ -2,7 +2,7 @@
   <mat-label i18n>Prompt</mat-label>
   <textarea
     matInput
-    [(ngModel)]="prompt"
+    [(ngModel)]="componentContent.prompt"
     (ngModelChange)="promptChangedEvent.next($event)"
     placeholder="Enter Prompt Here"
     i18n-placeholder

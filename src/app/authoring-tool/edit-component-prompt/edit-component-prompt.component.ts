@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ComponentContent } from '../../../assets/wise5/common/ComponentContent';
 
 @Component({
   selector: 'edit-component-prompt',
@@ -6,9 +7,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: 'edit-component-prompt.component.html'
 })
 export class EditComponentPrompt {
-  @Input()
-  prompt: string;
-
-  @Output()
-  promptChangedEvent = new EventEmitter<string>();
+  @Input() componentContent: ComponentContent;
+  @Output() promptChangedEvent = new EventEmitter<string>();
 }

@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutGap="16px">
   <edit-component-prompt
-    [prompt]="componentContent.prompt"
+    [componentContent]="componentContent"
     (promptChangedEvent)="promptChanged($event)"
   ></edit-component-prompt>
   <div fxLayoutGap="16px">
