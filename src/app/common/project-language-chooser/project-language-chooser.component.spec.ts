@@ -5,8 +5,7 @@ import { ProjectLocale } from '../../domain/projectLocale';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { MatSelectHarness } from '@angular/material/select/testing';
-import { MatOptionHarness } from '@angular/material/core/testing';
+import { MatMenuHarness, MatMenuItemHarness } from '@angular/material/menu/testing';
 
 let loader: HarnessLoader;
 let component: ProjectLanguageChooserComponent;
@@ -31,14 +30,17 @@ describe('ProjectLanguageChooserComponent', () => {
     expect(await options[0].getText()).toMatch('English');
     expect(await options[1].getText()).toMatch('Japanese');
     expect(await options[2].getText()).toMatch('Spanish');
-    expect(await options[0].isSelected()).toBeTrue();
+    const selected = await options[0].host();
+    expect(await selected.getAttribute('class')).toContain('primary');
   });
 
   it('keeps selected language option when language option changes', async () => {
-    const selectHarness = await loader.getHarness(MatSelectHarness);
-    await selectHarness.clickOptions({ text: 'Japanese' });
+    const menuHarness = await loader.getHarness(MatMenuHarness);
+    await menuHarness.clickItem({ text: 'Japanese' });
     setProjectLocale(new ProjectLocale({ default: 'it', supported: ['de', 'fr', 'ja', 'es'] }));
-    expect(await selectHarness.getValueText()).toEqual('Japanese');
+    const options = await getOptions();
+    const selected = await options[3].host();
+    expect(await selected.getAttribute('class')).toContain('primary');
   });
 });
 
@@ -48,8 +50,8 @@ function setProjectLocale(locale: ProjectLocale): void {
   fixture.detectChanges();
 }
 
-async function getOptions(): Promise<MatOptionHarness[]> {
-  const selectHarness = await loader.getHarness(MatSelectHarness);
-  await selectHarness.open();
-  return await selectHarness.getOptions();
+async function getOptions(): Promise<MatMenuItemHarness[]> {
+  const menuHarness = await loader.getHarness(MatMenuHarness);
+  await menuHarness.open();
+  return await menuHarness.getItems();
 }
