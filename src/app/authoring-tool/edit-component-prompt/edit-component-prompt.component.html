@@ -1,12 +1,14 @@
-<mat-form-field class="prompt" appearance="fill">
-  <mat-label i18n>Prompt</mat-label>
-  <textarea
-    matInput
-    [(ngModel)]="prompt"
-    (ngModelChange)="promptChangedEvent.next($event)"
-    placeholder="Enter Prompt Here"
-    i18n-placeholder
-    cdkTextareaAutosize
-  >
-  </textarea>
-</mat-form-field>
+<translatable-input [content]="componentContent" key="prompt" class="prompt" appearance="fill">
+  <mat-form-field>
+    <mat-label i18n>Prompt</mat-label>
+    <textarea
+      matInput
+      [(ngModel)]="componentContent.prompt"
+      (ngModelChange)="promptChangedEvent.next($event)"
+      placeholder="Enter Prompt Here"
+      i18n-placeholder
+      cdkTextareaAutosize
+    >
+    </textarea>
+  </mat-form-field>
+</translatable-input>
