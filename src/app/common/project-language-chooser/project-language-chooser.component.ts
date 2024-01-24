@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
 import { Language } from '../../domain/language';
 import { ProjectLocale } from '../../domain/projectLocale';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   standalone: true,
   selector: 'project-language-chooser',
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
   templateUrl: './project-language-chooser.component.html'
 })
 export class ProjectLanguageChooserComponent implements OnChanges {
@@ -28,7 +29,8 @@ export class ProjectLanguageChooserComponent implements OnChanges {
     }
   }
 
-  protected isSameLanguage(lang1: Language, lang2: Language): boolean {
-    return lang1 && lang2 ? lang1.locale === lang2.locale : lang1 === lang2;
+  protected changeLanguage(language: Language): void {
+    this.selectedLanguage = language;
+    this.languageChangedEvent.emit(language);
   }
 }

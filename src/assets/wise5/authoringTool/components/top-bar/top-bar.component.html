@@ -1,38 +1,42 @@
-<mat-toolbar class="l-header" color="primary">
+<mat-toolbar
+  class="l-header"
+  color="primary"
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="4px"
+>
   <span class="button logo-link">
     <a href="{{ contextPath }}/teacher" target="_self">
       <img [src]="logoPath" alt="WISE logo" i18n-alt class="logo" />
     </a>
   </span>
-  <h3 fxLayout="row" fxLayoutAlign="start center" class="title-header">
+  <h3 class="title-header">
     <span *ngIf="projectTitle" id="projectTitleSpan">{{ projectTitle }}</span>
     <span *ngIf="!projectTitle" id="projectTitleSpan" i18n>Authoring Tool</span>&nbsp;
-    <span class="mat-caption" *ngIf="projectId" fxLayout="row" fxLayoutAlign="start center">
-      <span fxHide.xs fxHide.sm fxHide.md>({{ projectInfo }})</span>
-      <button
-        mat-icon-button
-        aria-label="Project Info"
-        i18n-aria-label
-        fxHide.gt-md
-        [matTooltip]="projectInfo"
-      >
-        <mat-icon>info</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        *ngIf="runId"
-        fxHide.xs
-        matTooltip="Switch to Grading View"
-        i18n-matTooltip
-        (click)="switchToGradingView()"
-      >
-        <mat-icon mat-menu-origin>assignment_turned_in</mat-icon>
-      </button>
-      <button mat-icon-button matTooltip="Preview Unit" i18n-matTooltip (click)="previewProject()">
-        <mat-icon>preview</mat-icon>
-      </button>
-    </span>
+    <span class="mat-caption" fxHide.xs fxHide.sm fxHide.md>({{ projectInfo }})</span>
   </h3>
+  <button
+    mat-icon-button
+    aria-label="Project Info"
+    i18n-aria-label
+    fxHide.gt-md
+    [matTooltip]="projectInfo"
+  >
+    <mat-icon>info</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    *ngIf="runId"
+    fxHide.xs
+    matTooltip="Switch to Grading View"
+    i18n-matTooltip
+    (click)="switchToGradingView()"
+  >
+    <mat-icon mat-menu-origin>assignment_turned_in</mat-icon>
+  </button>
+  <button mat-icon-button matTooltip="Preview Unit" i18n-matTooltip (click)="previewProject()">
+    <mat-icon>preview</mat-icon>
+  </button>
   <span fxFlex></span>
   <project-language-chooser
     *ngIf="hasTranslations"

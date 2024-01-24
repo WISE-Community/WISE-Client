@@ -1,12 +1,18 @@
-<span i18n>Language:</span>
-<mat-form-field fxFlex appearance="fill">
-  <mat-select
-    [(ngModel)]="selectedLanguage"
-    (ngModelChange)="languageChangedEvent.emit(selectedLanguage)"
-    [compareWith]="isSameLanguage"
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="languageSelect"
+  matTooltip="Select Language"
+  i18n-matTooltip
+>
+  <mat-icon>translate</mat-icon>
+</button>
+<mat-menu #languageSelect="matMenu">
+  <button
+    *ngFor="let language of availableLanguages"
+    mat-menu-item
+    (click)="changeLanguage(language)"
+    [class]="{ primary: language.locale === selectedLanguage.locale }"
   >
-    <mat-option *ngFor="let language of availableLanguages" [value]="language">
-      {{ language.language }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+    {{ language.language }}
+  </button>
+</mat-menu>

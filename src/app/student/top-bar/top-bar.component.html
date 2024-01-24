@@ -25,29 +25,27 @@
       </button>
       <span *ngIf="isConstraintsDisabled" i18n>Constraints Are Off</span>
     </div>
-    <project-language-chooser
-      *ngIf="hasTranslations"
-      [projectLocale]="projectLocale"
-      (languageChangedEvent)="changeLanguage($event)"
-    ></project-language-chooser>
-    <div fxLayout="row" fxLayoutGap="16px">
-      <div>
-        <button
-          mat-icon-button
-          (click)="viewAlerts($event)"
-          id="viewNotificationsButton"
-          aria-label="View alerts"
-          i18n-aria-label
-          class="alerts"
+    <div fxLayout="row" fxLayoutGap="4px">
+      <project-language-chooser
+        *ngIf="hasTranslations"
+        [projectLocale]="projectLocale"
+        (languageChangedEvent)="changeLanguage($event)"
+      ></project-language-chooser>
+      <button
+        mat-icon-button
+        (click)="viewAlerts($event)"
+        id="viewNotificationsButton"
+        aria-label="View alerts"
+        i18n-aria-label
+        class="alerts"
+      >
+        <mat-icon
+          matBadge="{{ newNotifications.length }}"
+          matBadgeColor="accent"
+          [matBadgeHidden]="!hasNewNotifications()"
+          >notifications</mat-icon
         >
-          <mat-icon
-            matBadge="{{ newNotifications.length }}"
-            matBadgeColor="accent"
-            [matBadgeHidden]="!hasNewNotifications()"
-            >notifications</mat-icon
-          >
-        </button>
-      </div>
+      </button>
       <div class="account-menu-container">
         <mat-progress-spinner
           class="menu-progress"
