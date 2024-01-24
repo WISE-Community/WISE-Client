@@ -1866,6 +1866,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="65f3c9045a86c9daedfe950eebe44ce2392607de" datatype="html">
+        <source>Select Language</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/common/project-language-chooser/project-language-chooser.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4c00c8f929591b166c1e22e74a414a4dd42ff00b" datatype="html">
         <source>Thank you for contacting WISE!</source>
         <context-group purpose="location">

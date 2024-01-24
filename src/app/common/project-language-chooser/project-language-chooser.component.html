@@ -1,4 +1,9 @@
-<button mat-icon-button [matMenuTriggerFor]="languageSelect" matTooltip="Select Language">
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="languageSelect"
+  matTooltip="Select Language"
+  i18n-matTooltip
+>
   <mat-icon>translate</mat-icon>
 </button>
 <mat-menu #languageSelect="matMenu">
