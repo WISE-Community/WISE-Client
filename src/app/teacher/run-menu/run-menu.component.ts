@@ -111,7 +111,7 @@ export class RunMenuComponent implements OnInit {
   }
 
   private updateArchivedStatus(run: TeacherRun, archived: boolean): void {
-    run.archived = archived;
+    run.project.archived = archived;
     this.runArchiveStatusChangedEvent.emit();
   }
 
@@ -127,7 +127,7 @@ export class RunMenuComponent implements OnInit {
   private undoArchiveAction(run: TeacherRun, archiveFunctionName: string): void {
     this.archiveProjectService[archiveFunctionName](run.project).subscribe({
       next: (response: ArchiveProjectResponse) => {
-        run.archived = response.archived;
+        run.project.archived = response.archived;
         this.archiveProjectService.refreshProjects();
         this.snackBar.open($localize`Action undone.`);
       },

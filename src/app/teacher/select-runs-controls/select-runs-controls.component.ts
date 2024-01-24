@@ -72,7 +72,7 @@ export class SelectRunsControlsComponent {
   ): void {
     for (const archiveProjectResponse of archiveProjectsResponse) {
       const run = runs.find((run: TeacherRun) => run.project.id === archiveProjectResponse.id);
-      run.archived = archiveProjectResponse.archived;
+      run.project.archived = archiveProjectResponse.archived;
     }
     this.archiveActionEvent.emit();
   }

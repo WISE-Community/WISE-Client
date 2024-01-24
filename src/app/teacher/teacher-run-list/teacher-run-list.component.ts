@@ -77,7 +77,7 @@ export class TeacherRunListComponent implements OnInit {
     this.runs = runs.map((run) => {
       const teacherRun = new TeacherRun(run);
       teacherRun.shared = !teacherRun.isOwner(userId);
-      teacherRun.archived = teacherRun.project.tags.includes('archived');
+      teacherRun.project.archived = teacherRun.project.tags.includes('archived');
       return teacherRun;
     });
     this.filteredRuns = this.runs;
@@ -153,7 +153,9 @@ export class TeacherRunListComponent implements OnInit {
 
   private performFilter(): void {
     this.filteredRuns = this.filteredRuns.filter((run: TeacherRun) => {
-      return (!this.showArchived && !run.archived) || (this.showArchived && run.archived);
+      return (
+        (!this.showArchived && !run.project.archived) || (this.showArchived && run.project.archived)
+      );
     });
   }
 
