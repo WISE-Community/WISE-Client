@@ -10116,18 +10116,20 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">75</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7bd83cfa9e268b699d003e1b37b428995d29fc27" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ defaultLanguageLabelRef.nativeElement.innerHTML }}"/></source>
+      <trans-unit id="735cfe8637753e64e9adb0e901dcd4b24a3c8aea" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ defaultLanguageLabelRef.nativeElement.innerHTML }}"/> (<x id="INTERPOLATION_1" equiv-text="{{
+      currentLanguage().language
+    }}"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-input/translatable-input.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="linenumber">4,6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4565494938772544139" datatype="html">
         <source>(<x id="PH" equiv-text="this.projectService.getLocale().getDefaultLanguage().language"/>: <x id="PH_1" equiv-text="this.content[this.key]"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-input/translatable-input.component.ts</context>
-          <context context-type="linenumber">41,43</context>
+          <context context-type="linenumber">44,46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1318680729593701201" datatype="html">
