@@ -106,7 +106,7 @@ export class TeacherRunListItemComponent implements OnInit {
   }
 
   protected runArchiveStatusChanged(): void {
-    this.run.selected = false;
+    this.run.project.selected = false;
     this.runSelectedStatusChangedEvent.emit();
     this.runArchiveStatusChangedEvent.emit();
   }

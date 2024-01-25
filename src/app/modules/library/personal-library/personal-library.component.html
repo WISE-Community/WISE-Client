@@ -23,26 +23,12 @@
       <span *ngIf="numSelectedProjects() > 0" class="secondary-text" i18n>
         {{ numSelectedProjects() }} selected
       </span>
-      <button
-        mat-icon-button
-        *ngIf="!showArchived && selectedProjects().length > 0"
-        (click)="archiveSelectedProjects(true)"
-        matTooltip="Archive selected units"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>archive</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        *ngIf="showArchived && selectedProjects().length > 0"
-        (click)="archiveSelectedProjects(false)"
-        matTooltip="Restore selected units"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>unarchive</mat-icon>
-      </button>
+      <archive-projects-button
+        *ngIf="selectedProjects().length > 0"
+        [showArchived]="showArchived"
+        [projects]="filteredProjects"
+        (archiveActionEvent)="archiveActionEvent()"
+      ></archive-projects-button>
     </div>
     <span fxFlex fxHide.xs></span>
     <mat-paginator

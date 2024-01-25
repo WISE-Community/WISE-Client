@@ -27,6 +27,8 @@ import { ArchiveProjectService } from '../../services/archive-project.service';
 import { MatCardModule } from '@angular/material/card';
 import { MockArchiveProjectService } from '../../services/mock-archive-project.service';
 import { MatSelectModule } from '@angular/material/select';
+import { ArchiveProjectsButtonComponent } from '../archive-projects-button/archive-projects-button.component';
+import { Project } from '../../domain/project';
 
 class TeacherScheduleStubComponent {}
 
@@ -56,12 +58,13 @@ class TeacherRunStub extends TeacherRun {
       numStudents: 10,
       owner: new User({ id: userId }),
       periods: [],
-      project: {
+      project: new Project({
+        archived: tags.includes('archived'),
         id: id,
         tags: tags,
         name: name,
         owner: new User({ id: userId })
-      },
+      }),
       startTime: startTime,
       endTime: endTime
     });
@@ -74,6 +77,7 @@ describe('TeacherRunListComponent', () => {
       TestBed.configureTestingModule({
         declarations: [RunMenuComponent, TeacherRunListComponent, TeacherRunListItemComponent],
         imports: [
+          ArchiveProjectsButtonComponent,
           BrowserAnimationsModule,
           BrowserModule,
           FormsModule,

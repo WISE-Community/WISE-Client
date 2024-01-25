@@ -212,7 +212,7 @@ export class TeacherRunListComponent implements OnInit {
 
   private unselectAllRuns(): void {
     for (const run of this.runs) {
-      run.selected = false;
+      run.project.selected = false;
     }
   }
 

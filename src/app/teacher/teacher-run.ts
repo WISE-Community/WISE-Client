@@ -3,7 +3,6 @@ import { SelectRunsOption } from './select-runs-controls/select-runs-option';
 
 export class TeacherRun extends Run {
   archived: boolean;
-  selected: boolean;
   shared: boolean;
   highlighted: boolean;
 
@@ -14,19 +13,19 @@ export class TeacherRun extends Run {
   updateSelected(selectRunsOption: SelectRunsOption, currentTime: number): void {
     switch (selectRunsOption) {
       case SelectRunsOption.All:
-        this.selected = true;
+        this.project.selected = true;
         break;
       case SelectRunsOption.None:
-        this.selected = false;
+        this.project.selected = false;
         break;
       case SelectRunsOption.Completed:
-        this.selected = this.isCompleted(currentTime);
+        this.project.selected = this.isCompleted(currentTime);
         break;
       case SelectRunsOption.Running:
-        this.selected = this.isActive(currentTime);
+        this.project.selected = this.isActive(currentTime);
         break;
       case SelectRunsOption.Scheduled:
-        this.selected = this.isScheduled(currentTime);
+        this.project.selected = this.isScheduled(currentTime);
         break;
     }
   }

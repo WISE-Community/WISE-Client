@@ -9,11 +9,9 @@ import { MatPaginatorHarness } from '@angular/material/paginator/testing';
 export class PersonalLibraryHarness extends ComponentHarness {
   static hostSelector = 'app-personal-library';
   protected getViewSelect = this.locatorFor(MatSelectHarness);
-  getArchiveButton = this.locatorFor(
-    MatButtonHarness.with({ selector: '[matTooltip="Archive selected units"]' })
-  );
+  getArchiveButton = this.locatorFor(MatButtonHarness.with({ selector: '[matTooltip="Archive"]' }));
   getUnarchiveButton = this.locatorFor(
-    MatButtonHarness.with({ selector: '[matTooltip="Restore selected units"]' })
+    MatButtonHarness.with({ selector: '[matTooltip="Restore"]' })
   );
   getPaginator = this.locatorFor(MatPaginatorHarness);
 
