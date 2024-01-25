@@ -18,6 +18,7 @@ export class ProjectLanguageChooserComponent implements OnChanges {
   @Output() languageChangedEvent = new EventEmitter<Language>();
   @Input() projectLocale: ProjectLocale;
   protected selectedLanguage: Language;
+  @Input() tooltip: string = $localize`Select Language`;
 
   ngOnChanges(): void {
     this.availableLanguages = this.projectLocale.getAvailableLanguages();

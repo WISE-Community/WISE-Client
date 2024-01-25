@@ -5,6 +5,7 @@ import { MatInput, MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { TranslateProjectService } from '../../../services/translateProjectService';
 import { MatLabel } from '@angular/material/form-field';
+import { Language } from '../../../../../app/domain/language';
 
 @Component({
   standalone: true,
@@ -15,6 +16,7 @@ import { MatLabel } from '@angular/material/form-field';
 })
 export class TranslatableInputComponent {
   @Input() content: object;
+  protected currentLanguage: Signal<Language>;
   @ContentChild(MatInput) defaultLanguageInput: MatInput;
   @ContentChild(MatLabel, { read: ElementRef }) defaultLanguageLabelRef: ElementRef;
   protected defaultLanguageText: Signal<string>;
@@ -26,6 +28,7 @@ export class TranslatableInputComponent {
     private projectService: TeacherProjectService,
     private translateProjectService: TranslateProjectService
   ) {
+    this.currentLanguage = projectService.currentLanguage;
     this.showTranslationInput = computed(() => !this.projectService.isDefaultLocale());
   }
 
