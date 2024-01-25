@@ -1,6 +1,6 @@
 <ng-content *ngIf="!showTranslationInput()"></ng-content>
 <mat-form-field *ngIf="showTranslationInput()">
-  <mat-label i18n
+  <mat-label
     >{{ defaultLanguageLabelRef.nativeElement.innerHTML }} ({{
       currentLanguage().language
     }})</mat-label
