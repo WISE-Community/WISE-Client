@@ -1153,7 +1153,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component.html</context>
@@ -1866,11 +1866,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="65f3c9045a86c9daedfe950eebe44ce2392607de" datatype="html">
+      <trans-unit id="487077452159084336" datatype="html">
         <source>Select Language</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/common/project-language-chooser/project-language-chooser.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="sourcefile">src/app/common/project-language-chooser/project-language-chooser.component.ts</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4c00c8f929591b166c1e22e74a414a4dd42ff00b" datatype="html">
@@ -10058,18 +10058,25 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="733ba5a196755eafb4999fc2098585829fb03894" datatype="html">
+        <source>Choose Language to Translate</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="b8ae83571c90788bf730befdbb3de4c7cf14ed8e" datatype="html">
         <source> Help </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">53,55</context>
+          <context context-type="linenumber">55,57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ffac8783eaf153173408c8a9014a7484fa6a9175" datatype="html">
         <source>User Menu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
@@ -10080,7 +10087,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Go Home </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">83,85</context>
+          <context context-type="linenumber">85,87</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
@@ -10091,7 +10098,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Sign Out </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">87,89</context>
+          <context context-type="linenumber">89,91</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
