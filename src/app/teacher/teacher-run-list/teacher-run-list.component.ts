@@ -152,11 +152,10 @@ export class TeacherRunListComponent implements OnInit {
   }
 
   private performFilter(): void {
-    this.filteredRuns = this.filteredRuns.filter((run: TeacherRun) => {
-      return (
+    this.filteredRuns = this.filteredRuns.filter(
+      (run: TeacherRun) =>
         (!this.showArchived && !run.project.archived) || (this.showArchived && run.project.archived)
-      );
-    });
+    );
   }
 
   private performSearch(searchValue: string): TeacherRun[] {
