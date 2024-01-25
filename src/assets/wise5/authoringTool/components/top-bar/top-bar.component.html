@@ -42,6 +42,8 @@
     *ngIf="hasTranslations"
     [projectLocale]="projectLocale"
     (languageChangedEvent)="changeLanguage($event)"
+    tooltip="Choose Language to Translate"
+    i18n-tooltip
   ></project-language-chooser>
   <button
     mat-button
