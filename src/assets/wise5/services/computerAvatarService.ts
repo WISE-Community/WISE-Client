@@ -35,17 +35,4 @@ export class ComputerAvatarService {
   getDefaultAvatar(): ComputerAvatar {
     return this.getAvatar('robot1');
   }
-
-  getDefaultComputerAvatarSettings(): any {
-    return {
-      ids: this.getAvatars().map((avatar) => avatar.id),
-      label: this.getDefaultComputerAvatarLabel(),
-      prompt: $localize`Discuss your answer with a thought buddy!`,
-      initialResponse: $localize`Hi there! It's nice to meet you. What do you think about...`
-    };
-  }
-
-  getDefaultComputerAvatarLabel(): string {
-    return $localize`Thought Buddy`;
-  }
 }

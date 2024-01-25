@@ -9,13 +9,11 @@
     *ngIf="message.role === 'assistant'"
     class="ai-chat-message"
     [message]="message"
-    [computerAvatar]="computerAvatar"
   ></ai-chat-bot-message>
 </ng-container>
 <ai-chat-bot-message
   *ngIf="waitingForComputerResponse"
   class="ai-chat-message"
   [message]="{ content: '...', role: 'assistant' }"
-  [computerAvatar]="computerAvatar"
 >
 </ai-chat-bot-message>

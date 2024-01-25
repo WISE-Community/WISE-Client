@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ComputerAvatar } from '../../common/ComputerAvatar';
 import { ComputerAvatarService } from '../../services/computerAvatarService';
 import { ComputerAvatarSettings } from '../../components/dialogGuidance/ComputerAvatarSettings';
+import { DialogGuidanceService } from '../../components/dialogGuidance/dialogGuidanceService';
 
 @Component({
   selector: 'computer-avatar-selector',
@@ -20,7 +21,10 @@ export class ComputerAvatarSelectorComponent implements OnInit {
   avatarsPath: string;
   label: string;
 
-  constructor(private computerAvatarService: ComputerAvatarService) {}
+  constructor(
+    private computerAvatarService: ComputerAvatarService,
+    private dialogGuidanceService: DialogGuidanceService
+  ) {}
 
   ngOnInit(): void {
     this.avatars = this.filterAvatars(
@@ -41,7 +45,7 @@ export class ComputerAvatarSelectorComponent implements OnInit {
   initializeLabel(): void {
     const computerAvatarSettingsLabel = this.computerAvatarSettings.label;
     if (computerAvatarSettingsLabel == null || computerAvatarSettingsLabel === '') {
-      this.label = this.computerAvatarService.getDefaultComputerAvatarLabel();
+      this.label = this.dialogGuidanceService.getDefaultComputerAvatarLabel();
     } else {
       this.label = computerAvatarSettingsLabel;
     }
