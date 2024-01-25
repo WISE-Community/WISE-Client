@@ -10123,13 +10123,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">75</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4565494938772544139" datatype="html">
-        <source>(<x id="PH" equiv-text="this.projectService.getLocale().getDefaultLanguage().language"/>: <x id="PH_1" equiv-text="this.content[this.key]"/>)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-input/translatable-input.component.ts</context>
-          <context context-type="linenumber">44,46</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="1318680729593701201" datatype="html">
         <source>Also currently editing this unit: <x id="PH" equiv-text="otherAuthors.join(
               &apos;, &apos;

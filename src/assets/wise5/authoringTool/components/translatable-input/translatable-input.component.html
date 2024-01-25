@@ -11,5 +11,5 @@
     (ngModelChange)="saveTranslationText($event)"
     placeholder="{{ defaultLanguageInput.placeholder }}"
   />
+  <mat-hint *ngIf="showTranslationInput()">{{ defaultLanguageText() }}</mat-hint>
 </mat-form-field>
-<span *ngIf="showTranslationInput()">{{ defaultLanguageText() }}</span>

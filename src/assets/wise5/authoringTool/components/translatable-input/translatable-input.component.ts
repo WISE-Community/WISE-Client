@@ -41,9 +41,9 @@ export class TranslatableInputComponent {
     );
     this.defaultLanguageText = computed(() =>
       this.showTranslationInput()
-        ? $localize`(${this.projectService.getLocale().getDefaultLanguage().language}\: ${
+        ? `[${this.projectService.getLocale().getDefaultLanguage().language}\] ${
             this.content[this.key]
-          })`
+          }`
         : ''
     );
   }
