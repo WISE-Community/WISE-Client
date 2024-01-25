@@ -18,6 +18,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { SummaryAuthoring } from './summary-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 
 export class MockConfigService {}
 
@@ -41,7 +42,8 @@ describe('SummaryAuthoringComponent', () => {
         MatRadioModule,
         MatSelectModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule
+        StudentTeacherCommonServicesModule,
+        TranslatableInputComponent
       ],
       declarations: [EditComponentPrompt, SummaryAuthoring],
       providers: [
@@ -54,6 +56,7 @@ describe('SummaryAuthoringComponent', () => {
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
     component.componentContent = copy(componentContent);
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
     getComponentSpy.and.returnValue(componentContent);
     spyOn(component, 'componentChanged');

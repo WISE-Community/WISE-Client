@@ -16,6 +16,7 @@ import { MockNodeService } from '../../common/MockNodeService';
 import { AnimationAuthoring } from './animation-authoring.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 
 export class MockConfigService {}
 
@@ -35,7 +36,8 @@ describe('AnimationAuthoring', () => {
         MatInputModule,
         MatRadioModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule
+        StudentTeacherCommonServicesModule,
+        TranslatableInputComponent
       ],
       declarations: [AnimationAuthoring, EditComponentPrompt],
       providers: [
@@ -47,6 +49,7 @@ describe('AnimationAuthoring', () => {
     fixture = TestBed.createComponent(AnimationAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
       copy(componentContent)
     );

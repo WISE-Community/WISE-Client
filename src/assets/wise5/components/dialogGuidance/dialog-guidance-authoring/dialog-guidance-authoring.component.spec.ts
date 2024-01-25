@@ -34,6 +34,7 @@ describe('DialogGuidanceAuthoringComponent', () => {
     });
     fixture = TestBed.createComponent(DialogGuidanceAuthoringComponent);
     component = fixture.componentInstance;
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
       copy(componentContent)
     );

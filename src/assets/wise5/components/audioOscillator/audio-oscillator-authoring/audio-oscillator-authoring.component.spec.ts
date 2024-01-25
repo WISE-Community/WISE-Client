@@ -12,6 +12,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { AudioOscillatorService } from '../audioOscillatorService';
 import { AudioOscillatorAuthoring } from './audio-oscillator-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 
 let component: AudioOscillatorAuthoring;
 let fixture: ComponentFixture<AudioOscillatorAuthoring>;
@@ -28,7 +29,8 @@ describe('AudioOscillatorAuthoring', () => {
         MatDialogModule,
         MatInputModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule
+        StudentTeacherCommonServicesModule,
+        TranslatableInputComponent
       ],
       declarations: [EditComponentPrompt, AudioOscillatorAuthoring],
       providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
@@ -37,6 +39,7 @@ describe('AudioOscillatorAuthoring', () => {
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
     component.componentContent = componentContent;
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
     getComponentSpy.and.returnValue(componentContent);
     fixture.detectChanges();

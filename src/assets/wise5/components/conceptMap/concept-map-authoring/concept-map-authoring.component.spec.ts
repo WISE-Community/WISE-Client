@@ -87,6 +87,7 @@ describe('ConceptMapAuthoringComponent', () => {
     });
     fixture = TestBed.createComponent(ConceptMapAuthoring);
     component = fixture.componentInstance;
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
       copy(componentContent)
     );

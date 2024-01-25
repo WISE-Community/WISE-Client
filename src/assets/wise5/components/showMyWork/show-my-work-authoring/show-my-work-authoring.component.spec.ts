@@ -13,6 +13,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ShowMyWorkAuthoringComponent } from './show-my-work-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 
 describe('ShowMyWorkAuthoringComponent', () => {
   let component: ShowMyWorkAuthoringComponent;
@@ -41,7 +42,8 @@ describe('ShowMyWorkAuthoringComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
-        StudentTeacherCommonServicesModule
+        StudentTeacherCommonServicesModule,
+        TranslatableInputComponent
       ],
       declarations: [EditComponentPrompt, ShowMyWorkAuthoringComponent],
       providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
@@ -50,6 +52,7 @@ describe('ShowMyWorkAuthoringComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShowMyWorkAuthoringComponent);
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
       nodeId1
     ]);

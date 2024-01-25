@@ -19,6 +19,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { DrawService } from '../drawService';
 import { DrawAuthoring } from './draw-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 
 @NgModule({
   declarations: [DrawAuthoring, EditComponentPrompt],
@@ -29,7 +30,8 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    TranslatableInputComponent
   ],
   providers: [
     AnnotationService,

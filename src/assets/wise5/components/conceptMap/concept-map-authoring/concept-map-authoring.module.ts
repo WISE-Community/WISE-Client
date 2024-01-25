@@ -19,6 +19,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapService } from '../conceptMapService';
 import { ConceptMapAuthoring } from './concept-map-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 
 @NgModule({
   declarations: [ConceptMapAuthoring, EditComponentPrompt],
@@ -29,7 +30,8 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    TranslatableInputComponent
   ],
   providers: [
     AnnotationService,

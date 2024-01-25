@@ -23,6 +23,7 @@ import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.co
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { DialogGuidanceService } from '../dialogGuidanceService';
 import { FeedbackRuleHelpComponent } from '../../common/feedbackRule/feedback-rule-help/feedback-rule-help.component';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { FeedbackRuleHelpComponent } from '../../common/feedbackRule/feedback-ru
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    TranslatableInputComponent
   ],
   providers: [
     AnnotationService,

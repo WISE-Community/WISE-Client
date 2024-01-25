@@ -52,6 +52,7 @@ describe('DrawAuthoringComponent', () => {
     });
     fixture = TestBed.createComponent(DrawAuthoring);
     component = fixture.componentInstance;
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
       copy(componentContent)
     );

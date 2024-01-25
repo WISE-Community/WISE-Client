@@ -18,6 +18,7 @@ import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { GraphAuthoring } from './graph-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 
 let component: GraphAuthoring;
 let fixture: ComponentFixture<GraphAuthoring>;
@@ -39,7 +40,8 @@ describe('GraphAuthoringComponent', () => {
         MatSelectModule,
         MatSlideToggleModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule
+        StudentTeacherCommonServicesModule,
+        TranslatableInputComponent
       ],
       declarations: [GraphAuthoring, EditComponentPrompt],
       providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
@@ -47,6 +49,7 @@ describe('GraphAuthoringComponent', () => {
     fixture = TestBed.createComponent(GraphAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
       copy(componentContent)
     );
