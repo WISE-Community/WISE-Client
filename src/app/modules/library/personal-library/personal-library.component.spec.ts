@@ -22,6 +22,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ArchiveProjectResponse } from '../../../domain/archiveProjectResponse';
 import { of } from 'rxjs';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
 
 let archiveProjectService: ArchiveProjectService;
 let component: PersonalLibraryComponent;
@@ -38,6 +39,7 @@ describe('PersonalLibraryComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [
+          ArchiveProjectsButtonComponent,
           BrowserAnimationsModule,
           FormsModule,
           HttpClientTestingModule,
@@ -140,7 +142,7 @@ function restoreMultipleProjects() {
         await harness.showArchivedView();
         await harness.selectProjects([projectId2, projectId1]);
         spyOn(archiveProjectService, 'unarchiveProjects').and.returnValue(
-          of([new ArchiveProjectResponse(2, true), new ArchiveProjectResponse(1, true)])
+          of([new ArchiveProjectResponse(2, false), new ArchiveProjectResponse(1, false)])
         );
         await (await harness.getUnarchiveButton()).click();
         expect(await harness.getProjectIdsInView()).toEqual([]);

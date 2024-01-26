@@ -5,11 +5,11 @@ import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
 export class SelectRunsControlsHarness extends ComponentHarness {
   static hostSelector = 'select-runs-controls';
   protected getArchiveButton = this.locatorFor(
-    MatButtonHarness.with({ selector: '[aria-label="Archive selected units"]' })
+    MatButtonHarness.with({ selector: '[matTooltip="Archive"]' })
   );
   protected getSelectAllCheckbox = this.locatorFor(MatCheckboxHarness);
   protected getUnarchiveButton = this.locatorFor(
-    MatButtonHarness.with({ selector: '[aria-label="Restore selected units"]' })
+    MatButtonHarness.with({ selector: '[matTooltip="Restore"]' })
   );
 
   async checkCheckbox(): Promise<void> {

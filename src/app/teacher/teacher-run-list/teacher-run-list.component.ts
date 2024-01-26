@@ -28,7 +28,7 @@ export class TeacherRunListComponent implements OnInit {
   protected runs: TeacherRun[] = [];
   protected searchValue: string = '';
   protected showAll: boolean = false;
-  protected showArchived: boolean = false;
+  protected showArchivedView: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -154,7 +154,8 @@ export class TeacherRunListComponent implements OnInit {
   private performFilter(): void {
     this.filteredRuns = this.filteredRuns.filter(
       (run: TeacherRun) =>
-        (!this.showArchived && !run.project.archived) || (this.showArchived && run.project.archived)
+        (!this.showArchivedView && !run.project.archived) ||
+        (this.showArchivedView && run.project.archived)
     );
   }
 
@@ -212,7 +213,7 @@ export class TeacherRunListComponent implements OnInit {
 
   private unselectAllRuns(): void {
     for (const run of this.runs) {
-      run.selected = false;
+      run.project.selected = false;
     }
   }
 
@@ -222,7 +223,7 @@ export class TeacherRunListComponent implements OnInit {
     this.runSelectedStatusChanged();
   }
 
-  protected updateRunsInformation(): void {
+  protected refreshProjects(): void {
     this.unselectAllRuns();
     this.runSelectedStatusChanged();
     this.performSearchAndFilter();
