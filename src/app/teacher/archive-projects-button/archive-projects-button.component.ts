@@ -26,14 +26,13 @@ export class ArchiveProjectsButtonComponent {
     private snackBar: MatSnackBar
   ) {}
 
-  protected archiveSelectedProjects(archive: boolean): Subscription {
-    const projects = this.getSelectedProjects();
+  protected archiveProjects(archive: boolean): Subscription {
     return this.archiveProjectService[archive ? 'archiveProjects' : 'unarchiveProjects'](
-      projects
+      this.projects
     ).subscribe({
       next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
-        this.updateProjectsArchivedStatus(projects, archiveProjectsResponse);
-        this.openSuccessSnackBar(projects, archiveProjectsResponse, archive);
+        this.updateProjectsArchivedStatus(this.projects, archiveProjectsResponse);
+        this.openSuccessSnackBar(this.projects, archiveProjectsResponse, archive);
       },
       error: () => {
         this.showErrorSnackBar(archive);
@@ -90,9 +89,5 @@ export class ArchiveProjectsButtonComponent {
         this.snackBar.open($localize`Error undoing action.`);
       }
     });
-  }
-
-  private getSelectedProjects(): Project[] {
-    return this.projects.filter((project: Project) => project.selected);
   }
 }
