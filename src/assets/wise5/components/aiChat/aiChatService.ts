@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
-import { AiChatMessage } from './aiChatMessage';
+import { AiChatMessage } from './AiChatMessage';
+import { AiChatMessageReponse } from './AiChatMessageResponse';
 
 @Injectable()
 export class AiChatService extends ComponentService {
@@ -16,7 +17,7 @@ export class AiChatService extends ComponentService {
     return component;
   }
 
-  async sendChatMessage(messages: AiChatMessage[], model: string): Promise<any> {
+  async sendChatMessage(messages: AiChatMessage[], model: string): Promise<AiChatMessageReponse> {
     const response = await fetch('/api/chat-gpt', {
       method: 'POST',
       body: JSON.stringify({

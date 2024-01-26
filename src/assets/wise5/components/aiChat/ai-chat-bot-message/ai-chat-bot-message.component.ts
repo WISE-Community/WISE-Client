@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AiChatMessage } from '../aiChatMessage';
+import { AiChatMessage } from '../AiChatMessage';
 
 @Component({
   selector: 'ai-chat-bot-message',
@@ -7,12 +7,5 @@ import { AiChatMessage } from '../aiChatMessage';
   styleUrls: ['./ai-chat-bot-message.component.scss']
 })
 export class AiChatBotMessageComponent {
-  protected displayNames: string;
   @Input() message: AiChatMessage;
-  protected text: string;
-
-  ngOnInit(): void {
-    this.displayNames = 'AI Chat Bot';
-    this.text = this.message.content;
-  }
 }

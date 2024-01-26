@@ -8,11 +8,10 @@ import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { AiChatMessage } from '../aiChatMessage';
+import { AiChatMessage } from '../AiChatMessage';
 import { AiChatService } from '../aiChatService';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AiChatComponent } from '../AiChatComponent';
-import { StudentStatusService } from '../../../services/studentStatusService';
 
 @Component({
   selector: 'ai-chat-student',
@@ -25,7 +24,6 @@ export class AiChatStudentComponent extends ComponentStudent {
   protected studentResponse: string = '';
   protected submitEnabled: boolean = false;
   protected waitingForComputerResponse: boolean = false;
-  workgroupId: number;
 
   constructor(
     private aiChatService: AiChatService,
@@ -37,8 +35,7 @@ export class AiChatStudentComponent extends ComponentStudent {
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
     private snackBar: MatSnackBar,
-    protected studentAssetService: StudentAssetService,
-    protected studentStatusService: StudentStatusService
+    protected studentAssetService: StudentAssetService
   ) {
     super(
       annotationService,
@@ -57,19 +54,18 @@ export class AiChatStudentComponent extends ComponentStudent {
     if (this.componentState != null) {
       this.messages = this.componentState.studentData.messages;
     }
-    this.workgroupId = this.configService.getWorkgroupId();
     this.initializeMessages();
   }
 
   private initializeMessages(): void {
     if (this.messages.length === 0) {
-      this.appendMessage(this.createSystemMessage(this.componentContent.systemPrompt));
+      this.messages.push(new AiChatMessage('system', this.componentContent.systemPrompt));
     }
   }
 
   protected async submitStudentResponse(): Promise<void> {
     this.waitingForComputerResponse = true;
-    this.appendMessage(this.createUserMessage(this.studentResponse));
+    this.messages.push(new AiChatMessage('user', this.studentResponse));
     this.clearStudentResponse();
     try {
       const response = await this.aiChatService.sendChatMessage(
@@ -77,7 +73,7 @@ export class AiChatStudentComponent extends ComponentStudent {
         this.componentContent.model
       );
       this.waitingForComputerResponse = false;
-      this.appendMessage(this.createAssistantMessage(this.extractResponseMessageContent(response)));
+      this.messages.push(new AiChatMessage('assistant', response.choices[0].message.content));
       this.emitComponentSubmitTriggered();
     } catch (error) {
       this.waitingForComputerResponse = false;
@@ -85,37 +81,8 @@ export class AiChatStudentComponent extends ComponentStudent {
     }
   }
 
-  private appendMessage(messageObject: any): void {
-    this.messages.push(messageObject);
-  }
-
   private clearStudentResponse(): void {
     this.studentResponse = '';
-  }
-
-  private extractResponseMessageContent(response: any): string {
-    return response.choices[0].message.content;
-  }
-
-  private createSystemMessage(message: string): AiChatMessage {
-    return {
-      role: 'system',
-      content: message
-    };
-  }
-
-  private createUserMessage(message: string): AiChatMessage {
-    return {
-      role: 'user',
-      content: message
-    };
-  }
-
-  private createAssistantMessage(message: string): AiChatMessage {
-    return {
-      role: 'assistant',
-      content: message
-    };
   }
 
   protected keyPressed(event: any): void {

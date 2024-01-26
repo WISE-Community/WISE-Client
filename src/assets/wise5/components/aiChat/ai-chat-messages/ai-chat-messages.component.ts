@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AiChatMessage } from '../aiChatMessage';
+import { AiChatMessage } from '../AiChatMessage';
 
 @Component({
   selector: 'ai-chat-messages',

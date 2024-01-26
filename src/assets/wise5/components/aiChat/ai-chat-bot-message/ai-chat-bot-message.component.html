@@ -4,8 +4,8 @@
   >
   <div fxFlex fxLayoutAlign="start">
     <div class="response-text notice-bg-bg">
-      <div class="mat-small secondary-text poster">{{ displayNames }}</div>
-      <div [innerHtml]="text"></div>
+      <div class="mat-small secondary-text poster" i18n>AI Chat Bot</div>
+      <div [innerHtml]="message.content"></div>
     </div>
   </div>
 </div>
