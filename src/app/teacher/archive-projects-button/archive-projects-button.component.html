@@ -1,9 +1,7 @@
 <button
   mat-icon-button
-  *ngIf="!showArchived"
+  *ngIf="showArchive"
   (click)="archiveSelectedProjects(true)"
-  aria-label="Archive selected units"
-  i18n-aria-label
   matTooltip="Archive"
   matTooltipPosition="above"
   i18n-matTooltip
@@ -12,10 +10,8 @@
 </button>
 <button
   mat-icon-button
-  *ngIf="showArchived"
+  *ngIf="!showArchive"
   (click)="archiveSelectedProjects(false)"
-  aria-label="Restore selected units"
-  i18n-aria-label
   matTooltip="Restore"
   matTooltipPosition="above"
   i18n-matTooltip

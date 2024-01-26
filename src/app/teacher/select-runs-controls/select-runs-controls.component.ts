@@ -19,7 +19,7 @@ export class SelectRunsControlsComponent {
   protected selectedAllRuns: boolean = false;
   protected selectedSomeRuns: boolean = false;
   @Output() selectRunsOptionChosenEvent = new EventEmitter<SelectRunsOption>();
-  @Input() showArchived: boolean = false;
+  @Input() showArchive: boolean = false;
 
   ngOnInit(): void {
     this.extractProjects();

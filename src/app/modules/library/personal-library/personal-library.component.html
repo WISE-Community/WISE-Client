@@ -4,7 +4,7 @@
     <span fxFlex></span>
     <mat-form-field [subscriptSizing]="'dynamic'">
       <mat-label>View</mat-label>
-      <mat-select [(ngModel)]="showArchived" (selectionChange)="switchActiveArchivedView()">
+      <mat-select [(ngModel)]="showArchivedView" (selectionChange)="switchActiveArchivedView()">
         <mat-option [value]="false" i18n>Active</mat-option>
         <mat-option [value]="true" i18n>Archived</mat-option>
       </mat-select>
@@ -25,9 +25,9 @@
       </span>
       <archive-projects-button
         *ngIf="selectedProjects().length > 0"
-        [showArchived]="showArchived"
+        [showArchive]="!showArchivedView"
         [projects]="filteredProjects"
-        (archiveActionEvent)="archiveActionEvent()"
+        (archiveActionEvent)="refreshProjects()"
       ></archive-projects-button>
     </div>
     <span fxFlex fxHide.xs></span>

@@ -28,8 +28,8 @@
   <div *ngIf="numSelectedRuns > 0" class="secondary-text" i18n>{{ numSelectedRuns }} selected</div>
   <archive-projects-button
     *ngIf="numSelectedRuns > 0"
-    [showArchived]="showArchived"
+    [showArchive]="showArchive"
     [projects]="projects"
-    (archiveActionEvent)="archiveActionEvent.emit($event)"
+    (archiveActionEvent)="archiveActionEvent.emit()"
   ></archive-projects-button>
 </div>

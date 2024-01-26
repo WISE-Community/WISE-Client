@@ -28,7 +28,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
   protected projectsLabel: string = $localize`units`;
   protected selectedProjects: WritableSignal<LibraryProject[]> = signal([]);
   protected sharedProjects: LibraryProject[] = [];
-  protected showArchived: boolean = false;
+  protected showArchivedView: boolean = false;
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
@@ -113,7 +113,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
   public filterUpdated(filterValues: ProjectFilterValues = null): void {
     super.filterUpdated(filterValues);
     this.filteredProjects = this.filteredProjects.filter(
-      (project) => project.hasTag('archived') == this.showArchived
+      (project) => project.hasTag('archived') == this.showArchivedView
     );
     this.numProjectsInView = this.getProjectsInView().length;
   }
@@ -142,7 +142,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
     }
   }
 
-  protected archiveActionEvent(): void {
+  protected refreshProjects(): void {
     this.unselectAllProjects();
     this.archiveProjectService.refreshProjects();
   }

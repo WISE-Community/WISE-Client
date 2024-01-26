@@ -19,7 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 export class ArchiveProjectsButtonComponent {
   @Output() archiveActionEvent = new EventEmitter<void>();
   @Input() projects: Project[] = [];
-  @Input() showArchived: boolean = false;
+  @Input() showArchive: boolean = false;
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
@@ -32,7 +32,7 @@ export class ArchiveProjectsButtonComponent {
       projects
     ).subscribe({
       next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
-        this.updateRunsArchivedStatus(projects, archiveProjectsResponse);
+        this.updateProjectsArchivedStatus(projects, archiveProjectsResponse);
         this.openSuccessSnackBar(projects, archiveProjectsResponse, archive);
       },
       error: () => {
@@ -41,7 +41,7 @@ export class ArchiveProjectsButtonComponent {
     });
   }
 
-  private updateRunsArchivedStatus(
+  private updateProjectsArchivedStatus(
     projects: Project[],
     archiveProjectsResponse: ArchiveProjectResponse[]
   ): void {
@@ -82,7 +82,7 @@ export class ArchiveProjectsButtonComponent {
   private undoArchiveAction(projects: Project[], archiveFunctionName: string): void {
     this.archiveProjectService[archiveFunctionName](projects).subscribe({
       next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
-        this.updateRunsArchivedStatus(projects, archiveProjectsResponse);
+        this.updateProjectsArchivedStatus(projects, archiveProjectsResponse);
         this.archiveProjectService.refreshProjects();
         this.snackBar.open($localize`Action undone.`);
       },
