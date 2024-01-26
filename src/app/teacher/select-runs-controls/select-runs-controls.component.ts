@@ -22,21 +22,16 @@ export class SelectRunsControlsComponent {
   @Input() showArchive: boolean = false;
 
   ngOnInit(): void {
-    this.extractProjects();
     this.runChangedEventEmitter.subscribe(() => {
       this.ngOnChanges();
     });
   }
 
   ngOnChanges(): void {
-    this.extractProjects();
+    this.projects = this.runs.map((run: TeacherRun) => run.project);
     this.numSelectedRuns = this.runs.filter((run: TeacherRun) => run.project.selected).length;
     this.selectedAllRuns = this.numSelectedRuns === this.runs.length;
     this.selectedSomeRuns = this.numSelectedRuns !== 0 && !this.selectedAllRuns;
-  }
-
-  private extractProjects(): void {
-    this.projects = this.runs.map((run: TeacherRun) => run.project);
   }
 
   protected selectAllRunsCheckboxClicked(): void {
