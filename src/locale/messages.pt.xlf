@@ -6199,12 +6199,12 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">21</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.html</context>
+          <context context-type="linenumber">5</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <target state="needs-translation">Archive</target>
       </trans-unit>
@@ -6219,12 +6219,12 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.html</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.html</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
+          <context context-type="linenumber">38</context>
         </context-group>
         <target state="needs-translation">Restore</target>
       </trans-unit>
@@ -6264,7 +6264,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Unit Details</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <target state="needs-translation">Unit Details</target>
       </trans-unit>
@@ -6412,35 +6412,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation"> <x id="INTERPOLATION" equiv-text="{{ numSelectedProjects() }}"/> selected </target>
       </trans-unit>
-      <trans-unit id="df4115facc79e0525f99fd896748f35f7a6906ad" datatype="html">
-        <source>Archive selected units</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.html</context>
-          <context context-type="linenumber">33</context>
-        </context-group>
-        <target state="needs-translation">Archive selected units</target>
-      </trans-unit>
-      <trans-unit id="dcb77e7f33fc31138a85418076facc0d0461fe58" datatype="html">
-        <source>Restore selected units</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.html</context>
-          <context context-type="linenumber">45</context>
-        </context-group>
-        <target state="needs-translation">Restore selected units</target>
-      </trans-unit>
       <trans-unit id="050a0b486e807a37ee8dbeeac274d84786bffa34" datatype="html">
         <source> No owned or shared units found. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">71,73</context>
+          <context context-type="linenumber">57,59</context>
         </context-group>
         <target state="needs-translation"> No owned or shared units found. </target>
       </trans-unit>
@@ -6448,7 +6424,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>units</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.ts</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">28</context>
         </context-group>
         <target state="needs-translation">units</target>
       </trans-unit>
@@ -8189,12 +8165,12 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">80</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.ts</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
+          <context context-type="linenumber">120</context>
         </context-group>
         <target state="needs-translation">Undo</target>
       </trans-unit>
@@ -8209,12 +8185,12 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">95</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
+          <context context-type="linenumber">87</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.ts</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
+          <context context-type="linenumber">132</context>
         </context-group>
         <target state="needs-translation">Action undone.</target>
       </trans-unit>
@@ -8229,12 +8205,12 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">98</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
+          <context context-type="linenumber">90</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.ts</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <target state="needs-translation">Error undoing action.</target>
       </trans-unit>
@@ -8245,8 +8221,8 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">78</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.ts</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <target state="needs-translation">Successfully archived <x id="PH" equiv-text="projects.length"/> unit(s).</target>
       </trans-unit>
@@ -8257,8 +8233,8 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">79</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.ts</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <target state="needs-translation">Successfully restored <x id="PH" equiv-text="projects.length"/> unit(s).</target>
       </trans-unit>
@@ -8849,6 +8825,22 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">121,123</context>
         </context-group>
         <target state="needs-translation"> Language required </target>
+      </trans-unit>
+      <trans-unit id="3755123516042132329" datatype="html">
+        <source>Error archiving unit(s).</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <target state="needs-translation">Error archiving unit(s).</target>
+      </trans-unit>
+      <trans-unit id="3419148337120710852" datatype="html">
+        <source>Error restoring unit(s).</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <target state="needs-translation">Error restoring unit(s).</target>
       </trans-unit>
       <trans-unit id="a2d9400df68d9f4e89fe24f6a3f40bc5322f19f2" datatype="html">
         <source>1. Choose Periods</source>
@@ -9637,22 +9629,6 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">28</context>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ numSelectedRuns }}"/> selected</target>
-      </trans-unit>
-      <trans-unit id="3755123516042132329" datatype="html">
-        <source>Error archiving unit(s).</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.ts</context>
-          <context context-type="linenumber">103</context>
-        </context-group>
-        <target state="needs-translation">Error archiving unit(s).</target>
-      </trans-unit>
-      <trans-unit id="3419148337120710852" datatype="html">
-        <source>Error restoring unit(s).</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.ts</context>
-          <context context-type="linenumber">103</context>
-        </context-group>
-        <target state="needs-translation">Error restoring unit(s).</target>
       </trans-unit>
       <trans-unit id="c76c2eeebe0adc81f3434495d189c56d70899cad" datatype="html">
         <source>Share with Students</source>
@@ -16068,7 +16044,7 @@ Are you sure you want to proceed?</target>
         <source>Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <target state="needs-translation">Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position</target>
       </trans-unit>
@@ -16076,7 +16052,7 @@ Are you sure you want to proceed?</target>
         <source>One Workgroup Per Row</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">161</context>
+          <context context-type="linenumber">158</context>
         </context-group>
         <target state="needs-translation">One Workgroup Per Row</target>
       </trans-unit>
@@ -16084,7 +16060,7 @@ Are you sure you want to proceed?</target>
         <source>Latest Student Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">163</context>
+          <context context-type="linenumber">160</context>
         </context-group>
         <target state="needs-translation">Latest Student Work</target>
       </trans-unit>
@@ -16092,7 +16068,7 @@ Are you sure you want to proceed?</target>
         <source>All Student Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">165</context>
+          <context context-type="linenumber">162</context>
         </context-group>
         <target state="needs-translation">All Student Work</target>
       </trans-unit>
@@ -16100,7 +16076,7 @@ Are you sure you want to proceed?</target>
         <source>Events</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">167</context>
+          <context context-type="linenumber">164</context>
         </context-group>
         <target state="needs-translation">Events</target>
       </trans-unit>
@@ -16108,7 +16084,7 @@ Are you sure you want to proceed?</target>
         <source>Raw Data</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">166</context>
         </context-group>
         <target state="needs-translation">Raw Data</target>
       </trans-unit>
@@ -16116,7 +16092,7 @@ Are you sure you want to proceed?</target>
         <source>Downloading Export</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">1761</context>
+          <context context-type="linenumber">1465</context>
         </context-group>
         <target state="needs-translation">Downloading Export</target>
       </trans-unit>
