@@ -18,7 +18,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { SummaryAuthoring } from './summary-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
 
 export class MockConfigService {}
 
@@ -33,6 +33,7 @@ describe('SummaryAuthoringComponent', () => {
         BrowserAnimationsModule,
         BrowserModule,
         CommonModule,
+        ComponentAuthoringModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
@@ -42,8 +43,7 @@ describe('SummaryAuthoringComponent', () => {
         MatRadioModule,
         MatSelectModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule,
-        TranslatableInputComponent
+        StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, SummaryAuthoring],
       providers: [

@@ -12,7 +12,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { AudioOscillatorService } from '../audioOscillatorService';
 import { AudioOscillatorAuthoring } from './audio-oscillator-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
 
 let component: AudioOscillatorAuthoring;
 let fixture: ComponentFixture<AudioOscillatorAuthoring>;
@@ -23,14 +23,14 @@ describe('AudioOscillatorAuthoring', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        ComponentAuthoringModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
         MatDialogModule,
         MatInputModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule,
-        TranslatableInputComponent
+        StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, AudioOscillatorAuthoring],
       providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]

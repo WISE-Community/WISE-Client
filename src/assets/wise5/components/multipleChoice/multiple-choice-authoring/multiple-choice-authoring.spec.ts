@@ -16,7 +16,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MultipleChoiceAuthoringHarness } from './multiple-choice-authoring.harness';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
 
 let component: MultipleChoiceAuthoring;
 let fixture: ComponentFixture<MultipleChoiceAuthoring>;
@@ -29,6 +29,7 @@ describe('MultipleChoiceAuthoringComponent', () => {
         declarations: [EditComponentPrompt, MultipleChoiceAuthoring],
         imports: [
           BrowserAnimationsModule,
+          ComponentAuthoringModule,
           FormsModule,
           HttpClientTestingModule,
           MatDialogModule,
@@ -37,8 +38,7 @@ describe('MultipleChoiceAuthoringComponent', () => {
           MatIconModule,
           MatInputModule,
           MatRadioModule,
-          StudentTeacherCommonServicesModule,
-          TranslatableInputComponent
+          StudentTeacherCommonServicesModule
         ],
         providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
       });

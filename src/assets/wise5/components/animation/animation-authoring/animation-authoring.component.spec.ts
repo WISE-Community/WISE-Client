@@ -16,7 +16,7 @@ import { MockNodeService } from '../../common/MockNodeService';
 import { AnimationAuthoring } from './animation-authoring.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
 
 export class MockConfigService {}
 
@@ -28,6 +28,7 @@ describe('AnimationAuthoring', () => {
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
+        ComponentAuthoringModule,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,
@@ -36,8 +37,7 @@ describe('AnimationAuthoring', () => {
         MatInputModule,
         MatRadioModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule,
-        TranslatableInputComponent
+        StudentTeacherCommonServicesModule
       ],
       declarations: [AnimationAuthoring, EditComponentPrompt],
       providers: [

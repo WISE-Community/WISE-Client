@@ -18,7 +18,7 @@ import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { GraphAuthoring } from './graph-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
 
 let component: GraphAuthoring;
 let fixture: ComponentFixture<GraphAuthoring>;
@@ -29,6 +29,7 @@ describe('GraphAuthoringComponent', () => {
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
+        ComponentAuthoringModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
@@ -40,8 +41,7 @@ describe('GraphAuthoringComponent', () => {
         MatSelectModule,
         MatSlideToggleModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule,
-        TranslatableInputComponent
+        StudentTeacherCommonServicesModule
       ],
       declarations: [GraphAuthoring, EditComponentPrompt],
       providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]

@@ -13,7 +13,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ShowMyWorkAuthoringComponent } from './show-my-work-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
 
 describe('ShowMyWorkAuthoringComponent', () => {
   let component: ShowMyWorkAuthoringComponent;
@@ -36,14 +36,14 @@ describe('ShowMyWorkAuthoringComponent', () => {
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
+        ComponentAuthoringModule,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
-        StudentTeacherCommonServicesModule,
-        TranslatableInputComponent
+        StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, ShowMyWorkAuthoringComponent],
       providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
