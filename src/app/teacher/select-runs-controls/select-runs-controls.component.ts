@@ -13,7 +13,7 @@ import { SelectRunsOption } from './select-runs-option';
 export class SelectRunsControlsComponent {
   @Output() archiveActionEvent = new EventEmitter<void>();
   protected numSelectedRuns: number = 0;
-  protected projects: Project[] = [];
+  protected selectedProjects: Project[] = [];
   @Input() runChangedEventEmitter: EventEmitter<void> = new EventEmitter<void>();
   @Input() runs: TeacherRun[] = [];
   protected selectedAllRuns: boolean = false;
@@ -22,21 +22,18 @@ export class SelectRunsControlsComponent {
   @Input() showArchive: boolean = false;
 
   ngOnInit(): void {
-    this.extractProjects();
     this.runChangedEventEmitter.subscribe(() => {
       this.ngOnChanges();
     });
   }
 
   ngOnChanges(): void {
-    this.extractProjects();
+    this.selectedProjects = this.runs
+      .map((run: TeacherRun) => run.project)
+      .filter((project: Project) => project.selected);
     this.numSelectedRuns = this.runs.filter((run: TeacherRun) => run.project.selected).length;
     this.selectedAllRuns = this.numSelectedRuns === this.runs.length;
     this.selectedSomeRuns = this.numSelectedRuns !== 0 && !this.selectedAllRuns;
-  }
-
-  private extractProjects(): void {
-    this.projects = this.runs.map((run: TeacherRun) => run.project);
   }
 
   protected selectAllRunsCheckboxClicked(): void {
