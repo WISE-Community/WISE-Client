@@ -815,5 +815,11 @@ function removeNodeIdFromTransitions() {
         expect(service.getNodeById('group3').startId).toEqual('');
       });
     });
+    describe('remove the first lesson', () => {
+      it('changes the start id of the root group to be the second lesson', () => {
+        deleteNodeService.deleteNode('group1');
+        expect(service.getNodeById('group0').startId).toEqual('group2');
+      });
+    });
   });
 }

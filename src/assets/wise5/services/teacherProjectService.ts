@@ -1753,7 +1753,7 @@ export class TeacherProjectService extends ProjectService {
   private updateParentGroupStartId(nodeId: string): void {
     const parentGroup = this.getParentGroup(nodeId);
     if (parentGroup != null && parentGroup.startId === nodeId) {
-      const transitions = this.getTransitionsFromNode(nodeId);
+      const transitions = this.getTransitionsFromNode(this.getNodeById(nodeId));
       if (transitions.length > 0) {
         for (const transition of transitions) {
           const toNodeId = transition.to;
