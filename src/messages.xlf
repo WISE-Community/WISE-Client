@@ -15177,7 +15177,11 @@ Are you sure you want to proceed?</source>
         <source>Automated guidance response</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-bot-message/ai-chat-bot-message.component.html</context>
-          <context context-type="linenumber">2</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-bot-message/ai-chat-bot-message.component.html</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component.html</context>
@@ -15188,11 +15192,11 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="220d95da16c9f01d0878a8a12b7ddce7765fe738" datatype="html">
-        <source>AI Chat Bot</source>
+      <trans-unit id="30ca117fa346b3e268376197295c24d5d09eff18" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ displayNames }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-bot-message/ai-chat-bot-message.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c80dd9bfb0bd7a7ce89ef1140e6f35211ab711f0" datatype="html">
@@ -15210,7 +15214,7 @@ Are you sure you want to proceed?</source>
         <source>Add response...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-student/ai-chat-student.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
@@ -15225,7 +15229,7 @@ Are you sure you want to proceed?</source>
         <source> Send </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-student/ai-chat-student.component.html</context>
-          <context context-type="linenumber">27,29</context>
+          <context context-type="linenumber">34,36</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
@@ -15236,14 +15240,14 @@ Are you sure you want to proceed?</source>
         <source>An error occurred.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-student/ai-chat-student.component.ts</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6824763714539805412" datatype="html">
         <source>AI Chat</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/aiChatService.ts</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="555720515547706264" datatype="html">
@@ -17068,27 +17072,6 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
           <context context-type="linenumber">24</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7559493123326903347" datatype="html">
-        <source>Discuss your answer with a thought buddy!</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="817739684653615188" datatype="html">
-        <source>Hi there! It&apos;s nice to meet you. What do you think about...</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6832087445897716825" datatype="html">
-        <source>Thought Buddy</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
-          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1ade6bad596278cd9ac93e7778cc03c68f6a2897" datatype="html">
@@ -21282,6 +21265,27 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">19</context>
         </context-group>
         <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="7559493123326903347" datatype="html">
+        <source>Discuss your answer with a thought buddy!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="817739684653615188" datatype="html">
+        <source>Hi there! It&apos;s nice to meet you. What do you think about...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6832087445897716825" datatype="html">
+        <source>Thought Buddy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="6516762932593571783" datatype="html">
         <source>Student <x id="PH" equiv-text="id"/></source>

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AiChatBotMessageComponent } from './ai-chat-bot-message.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ComputerAvatarService } from '../../../services/computerAvatarService';
 
 describe('AiChatBotMessageComponent', () => {
   let component: AiChatBotMessageComponent;
@@ -9,11 +10,18 @@ describe('AiChatBotMessageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AiChatBotMessageComponent],
-      imports: [MatIconModule]
+      imports: [MatIconModule],
+      providers: [ComputerAvatarService]
     });
     fixture = TestBed.createComponent(AiChatBotMessageComponent);
     component = fixture.componentInstance;
     component.message = { content: 'Hello', role: 'assistant' };
+    component.computerAvatar = {
+      id: 'robot1',
+      name: 'Robot',
+      image: 'robot-1.png',
+      isSelected: true
+    };
     fixture.detectChanges();
   });
 

@@ -12,6 +12,9 @@ import { AiChatMessage } from '../AiChatMessage';
 import { AiChatService } from '../aiChatService';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AiChatComponent } from '../AiChatComponent';
+import { ComputerAvatar } from '../../../common/ComputerAvatar';
+import { ComputerAvatarService } from '../../../services/computerAvatarService';
+import { StudentStatusService } from '../../../services/studentStatusService';
 
 @Component({
   selector: 'ai-chat-student',
@@ -20,6 +23,8 @@ import { AiChatComponent } from '../AiChatComponent';
 })
 export class AiChatStudentComponent extends ComponentStudent {
   component: AiChatComponent;
+  computerAvatar: ComputerAvatar;
+  protected computerAvatarSelectorVisible: boolean = false;
   protected messages: AiChatMessage[] = [];
   protected studentResponse: string = '';
   protected submitEnabled: boolean = false;
@@ -28,6 +33,7 @@ export class AiChatStudentComponent extends ComponentStudent {
   constructor(
     private aiChatService: AiChatService,
     protected annotationService: AnnotationService,
+    protected computerAvatarService: ComputerAvatarService,
     protected componentService: ComponentService,
     protected configService: ConfigService,
     protected dataService: StudentDataService,
@@ -35,7 +41,8 @@ export class AiChatStudentComponent extends ComponentStudent {
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
     private snackBar: MatSnackBar,
-    protected studentAssetService: StudentAssetService
+    protected studentAssetService: StudentAssetService,
+    protected studentStatusService: StudentStatusService
   ) {
     super(
       annotationService,
@@ -51,10 +58,94 @@ export class AiChatStudentComponent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
+    if (this.component.isComputerAvatarEnabled()) {
+      this.initializeComputerAvatar();
+    } else {
+      this.computerAvatar = this.computerAvatarService.getDefaultAvatar();
+    }
     if (this.componentState != null) {
       this.messages = this.componentState.studentData.messages;
     }
     this.initializeMessages();
+  }
+
+  initializeComputerAvatar(): void {
+    this.tryToRepopulateComputerAvatar();
+    if (this.hasStudentPreviouslyChosenComputerAvatar()) {
+      this.hideComputerAvatarSelector();
+    } else if (
+      this.component.isOnlyOneComputerAvatarAvailable() &&
+      !this.component.isComputerAvatarPromptAvailable()
+    ) {
+      this.hideComputerAvatarSelector();
+      this.selectComputerAvatar(this.getTheOnlyComputerAvatarAvailable());
+    } else {
+      this.showComputerAvatarSelector();
+    }
+  }
+
+  private tryToRepopulateComputerAvatar(): void {
+    if (this.includesComputerAvatar(this.componentState)) {
+      this.repopulateComputerAvatarFromComponentState(this.componentState);
+    } else if (
+      this.component.isUseGlobalComputerAvatar() &&
+      this.isGlobalComputerAvatarAvailable()
+    ) {
+      this.repopulateGlobalComputerAvatar();
+    }
+  }
+
+  private includesComputerAvatar(componentState: any): boolean {
+    return componentState?.studentData?.computerAvatarId != null;
+  }
+
+  private isGlobalComputerAvatarAvailable(): boolean {
+    return this.studentStatusService.getComputerAvatarId() != null;
+  }
+
+  private repopulateComputerAvatarFromComponentState(componentState: any): void {
+    this.computerAvatar = this.computerAvatarService.getAvatar(
+      componentState?.studentData?.computerAvatarId
+    );
+  }
+
+  private repopulateGlobalComputerAvatar(): void {
+    const computerAvatarId = this.studentStatusService.getComputerAvatarId();
+    if (computerAvatarId != null) {
+      this.selectComputerAvatar(this.computerAvatarService.getAvatar(computerAvatarId));
+    }
+  }
+
+  private hasStudentPreviouslyChosenComputerAvatar(): boolean {
+    return this.computerAvatar != null;
+  }
+
+  private getTheOnlyComputerAvatarAvailable(): ComputerAvatar {
+    return this.computerAvatarService.getAvatar(
+      this.component.content.computerAvatarSettings.ids[0]
+    );
+  }
+
+  private showComputerAvatarSelector(): void {
+    this.computerAvatarSelectorVisible = true;
+  }
+
+  private hideComputerAvatarSelector(): void {
+    this.computerAvatarSelectorVisible = false;
+  }
+
+  selectComputerAvatar(computerAvatar: ComputerAvatar): void {
+    this.computerAvatar = computerAvatar;
+    if (this.component.isUseGlobalComputerAvatar()) {
+      this.studentStatusService.setComputerAvatarId(computerAvatar.id);
+    }
+    this.hideComputerAvatarSelector();
+    const computerAvatarInitialResponse = this.component.getComputerAvatarInitialResponse();
+    if (computerAvatarInitialResponse != null && computerAvatarInitialResponse !== '') {
+      this.messages.push(
+        new AiChatMessage('assistant', this.componentContent.computerAvatarSettings.initialResponse)
+      );
+    }
   }
 
   private initializeMessages(): void {
@@ -105,6 +196,9 @@ export class AiChatStudentComponent extends ComponentStudent {
       messages: this.messages,
       model: this.componentContent.model
     };
+    if (this.computerAvatar != null) {
+      componentState.studentData.computerAvatarId = this.computerAvatar.id;
+    }
     componentState.componentType = 'AiChat';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.component.id;
