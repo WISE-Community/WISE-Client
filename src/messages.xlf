@@ -21355,6 +21355,13 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">560</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="6103908175957925049" datatype="html">
+        <source>Error saving translation. Please try again later.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/editProjectTranslationService.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="1384916903989385807" datatype="html">
         <source>Notebook</source>
         <context-group purpose="location">
