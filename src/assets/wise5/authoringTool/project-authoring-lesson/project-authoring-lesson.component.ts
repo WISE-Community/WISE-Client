@@ -10,14 +10,11 @@ export class ProjectAuthoringLessonComponent {
   @Input() disableSelection: boolean = false;
   @Input() item: any;
   @Output() selectNodeEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Input() showPosition: boolean;
 
   constructor(private dataService: TeacherDataService) {}
 
-  nodeClicked(nodeId: string): void {
+  protected setCurrentNode(nodeId: string): void {
     this.dataService.setCurrentNodeByNodeId(nodeId);
-  }
-
-  selectNode(): void {
-    this.selectNodeEvent.emit();
   }
 }

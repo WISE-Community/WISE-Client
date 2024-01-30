@@ -1,8 +1,8 @@
-<div id="{{ item.key }}" fxLayoutAlign="start center" class="pointer groupHeader">
+<div id="{{ item.id }}" fxLayoutAlign="start center" class="pointer groupHeader">
   <mat-checkbox
     color="primary"
     [(ngModel)]="item.checked"
-    (click)="selectNode()"
+    (click)="selectNodeEvent.emit()"
     [disabled]="disableSelection"
     aria-label="Select lesson"
     i18n-aria-label
@@ -12,8 +12,8 @@
     class="projectItemTitleDiv"
     fxLayoutAlign="start center"
     fxLayoutGap="10px"
-    (click)="nodeClicked(item.key)"
+    (click)="setCurrentNode(item.id)"
   >
-    <node-icon-and-title [nodeId]="item.key" [showPosition]="true"></node-icon-and-title>
+    <node-icon-and-title [nodeId]="item.id" [showPosition]="showPosition"></node-icon-and-title>
   </div>
 </div>
