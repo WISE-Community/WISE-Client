@@ -116,6 +116,16 @@ export class PersonalLibraryComponent extends LibraryComponent {
       (project) => project.hasTag('archived') == this.showArchivedView
     );
     this.numProjectsInView = this.getProjectsInView().length;
+    this.unselectProjectsOutOfView();
+  }
+
+  private unselectProjectsOutOfView(): void {
+    const projectsInView = this.getProjectsInView();
+    this.projects.forEach((project) => {
+      if (!projectsInView.includes(project)) {
+        this.unselectProject(project);
+      }
+    });
   }
 
   protected switchActiveArchivedView(): void {
@@ -145,6 +155,16 @@ export class PersonalLibraryComponent extends LibraryComponent {
   protected refreshProjects(): void {
     this.unselectAllProjects();
     this.archiveProjectService.refreshProjects();
+  }
+
+  private unselectProject(project: LibraryProject): void {
+    project.selected = false;
+    if (this.selectedProjects().includes(project)) {
+      this.selectedProjects.update((selectedProjects) => {
+        selectedProjects.splice(selectedProjects.indexOf(project), 1);
+        return selectedProjects;
+      });
+    }
   }
 
   protected unselectAllProjects(): void {

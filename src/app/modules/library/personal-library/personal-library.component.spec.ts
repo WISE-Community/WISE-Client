@@ -81,15 +81,36 @@ describe('PersonalLibraryComponent', () => {
   allProjectsSelected_clickSelectAllProjects_unselectsAllProjects();
   projectsAreSelected_goToArchivedView_projectsAreUnselected();
   projectsAreSelected_goToNextPage_projectsAreUnselected();
+  projectsAreSelected_performSearch_projectsNotMatchingSearchAreUnselected();
 });
 
 function setUpFiveProjects() {
   TestBed.inject(LibraryService).personalLibraryProjectsSource$ = fakeAsyncResponse([
-    new LibraryProject({ id: projectId1, metadata: {}, tags: ['archived'] }),
-    new LibraryProject({ id: projectId2, metadata: {}, tags: ['archived'] }),
-    new LibraryProject({ id: projectId3, metadata: {}, tags: [] }),
-    new LibraryProject({ id: projectId4, metadata: {}, tags: [] }),
-    new LibraryProject({ id: projectId5, metadata: {}, tags: [] })
+    new LibraryProject({
+      id: projectId1,
+      metadata: { title: 'Hello' },
+      tags: ['archived']
+    }),
+    new LibraryProject({
+      id: projectId2,
+      metadata: { title: 'Hello World' },
+      tags: ['archived']
+    }),
+    new LibraryProject({
+      id: projectId3,
+      metadata: { title: 'World Energy' },
+      tags: []
+    }),
+    new LibraryProject({
+      id: projectId4,
+      metadata: { title: 'World Climate' },
+      tags: []
+    }),
+    new LibraryProject({
+      id: projectId5,
+      metadata: { title: 'Recycling' },
+      tags: []
+    })
   ]);
 }
 
@@ -222,6 +243,24 @@ function projectsAreSelected_goToNextPage_projectsAreUnselected() {
         expect(await harness.getSelectedProjectIds()).toEqual([]);
         await (await harness.getPaginator()).goToPreviousPage();
         expect(await harness.getSelectedProjectIds()).toEqual([]);
+      });
+    });
+  });
+}
+
+function projectsAreSelected_performSearch_projectsNotMatchingSearchAreUnselected() {
+  describe('projects are selected', () => {
+    describe('perform search', () => {
+      it('projects that do not match search are unselected', async () => {
+        await (await harness.getSelectAllCheckbox()).check();
+        expect(await harness.getSelectedProjectIds()).toEqual([projectId5, projectId4, projectId3]);
+        component.filterUpdated({
+          searchValue: 'world',
+          dciArrangementValue: [],
+          disciplineValue: [],
+          peValue: []
+        });
+        expect(await harness.getSelectedProjectIds()).toEqual([projectId4, projectId3]);
       });
     });
   });
