@@ -721,10 +721,10 @@ export class TeacherProjectService extends ProjectService {
       this.insertNodeAfterInactiveNode(node, nodeIdToInsertAfter);
     }
     if (node.type === 'group') {
-      this.inactiveGroupNodes.push(node.id);
+      this.inactiveGroupNodes.push(node);
       this.addGroupChildNodesToInactive(node);
     } else {
-      this.inactiveStepNodes.push(node.id);
+      this.inactiveStepNodes.push(node);
     }
   }
 
@@ -803,10 +803,10 @@ export class TeacherProjectService extends ProjectService {
       this.insertNodeInsideInactiveNode(node, nodeIdToInsertInside);
     }
     if (node.type === 'group') {
-      this.inactiveGroupNodes.push(node.id);
+      this.inactiveGroupNodes.push(node);
       this.addGroupChildNodesToInactive(node);
     } else {
-      this.inactiveStepNodes.push(node.id);
+      this.inactiveStepNodes.push(node);
     }
   }
 
