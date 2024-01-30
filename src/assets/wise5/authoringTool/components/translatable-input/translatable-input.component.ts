@@ -23,12 +23,12 @@ export class TranslatableInputComponent {
   @ContentChild(MatInput) defaultLanguageInput: MatInput;
   @ContentChild(MatLabel, { read: ElementRef }) defaultLanguageLabelRef: ElementRef;
   protected defaultLanguageText: Signal<string>;
-  @Input() key: string;
   private i18nId: string;
+  @Input() key: string;
   protected showTranslationInput: Signal<boolean>;
-  protected translatedText: Signal<string>;
-  protected translatedTextChanged: Subject<string> = new Subject<string>();
-  protected translatedTextChangedSubscription: Subscription;
+  protected translationText: Signal<string>;
+  protected translationTextChanged: Subject<string> = new Subject<string>();
+  protected translationTextChangedSubscription: Subscription;
 
   constructor(
     private editProjectTranslationService: EditProjectTranslationService,
@@ -41,7 +41,7 @@ export class TranslatableInputComponent {
 
   ngOnInit(): void {
     this.i18nId = this.content[`${this.key}.i18n`]?.id;
-    this.translatedText = computed(() =>
+    this.translationText = computed(() =>
       this.showTranslationInput()
         ? this.translateProjectService.currentTranslations()[this.i18nId]?.value
         : ''
@@ -53,7 +53,7 @@ export class TranslatableInputComponent {
           }`
         : ''
     );
-    this.translatedTextChangedSubscription = this.translatedTextChanged
+    this.translationTextChangedSubscription = this.translationTextChanged
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe((text: string) => {
         this.saveTranslationText(text);
@@ -61,7 +61,7 @@ export class TranslatableInputComponent {
   }
 
   ngOnDestory(): void {
-    this.translatedTextChangedSubscription.unsubscribe();
+    this.translationTextChangedSubscription.unsubscribe();
   }
 
   private saveTranslationText(text: string): void {
