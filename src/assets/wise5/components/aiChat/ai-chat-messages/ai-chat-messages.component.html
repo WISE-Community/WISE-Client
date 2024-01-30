@@ -1,0 +1,19 @@
+<ng-container *ngFor="let message of messages">
+  <ai-chat-student-message
+    *ngIf="message.role === 'user'"
+    class="ai-chat-message"
+    [message]="message"
+    [workgroupId]="workgroupId"
+  ></ai-chat-student-message>
+  <ai-chat-bot-message
+    *ngIf="message.role === 'assistant'"
+    class="ai-chat-message"
+    [message]="message"
+  ></ai-chat-bot-message>
+</ng-container>
+<ai-chat-bot-message
+  *ngIf="waitingForComputerResponse"
+  class="ai-chat-message"
+  [message]="{ content: '...', role: 'assistant' }"
+>
+</ai-chat-bot-message>

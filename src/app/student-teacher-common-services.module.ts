@@ -53,10 +53,12 @@ import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 import { NodeProgressService } from '../assets/wise5/services/nodeProgressService';
 import { CompletionService } from '../assets/wise5/services/completionService';
 import { StudentNodeService } from '../assets/wise5/services/studentNodeService';
+import { AiChatService } from '../assets/wise5/components/aiChat/aiChatService';
 
 @NgModule({
   providers: [
     AchievementService,
+    AiChatService,
     AnimationService,
     AnnotationService,
     AudioOscillatorService,

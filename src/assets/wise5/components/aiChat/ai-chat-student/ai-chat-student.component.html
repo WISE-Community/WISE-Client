@@ -1,0 +1,31 @@
+<mat-card appearance="outlined" class="mat-elevation-z2">
+  <component-header [component]="component"></component-header>
+  <ai-chat-messages
+    [messages]="messages"
+    [workgroupId]="workgroupId"
+    [waitingForComputerResponse]="waitingForComputerResponse"
+  ></ai-chat-messages>
+  <div class="add-response" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-form-field fxFlex class="form-field-no-label form-field-no-hint" appearance="fill">
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        placeholder="Add response..."
+        i18n-placeholder
+        [(ngModel)]="studentResponse"
+        (ngModelChange)="studentResponseChanged()"
+        (keypress)="keyPressed($event)"
+        [disabled]="isDisabled"
+      ></textarea>
+    </mat-form-field>
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="submitStudentResponse()"
+      [disabled]="!submitEnabled || waitingForComputerResponse"
+      i18n
+    >
+      Send
+    </button>
+  </div>
+</mat-card>
