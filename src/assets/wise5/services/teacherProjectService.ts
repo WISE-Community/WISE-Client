@@ -3046,7 +3046,7 @@ export class TeacherProjectService extends ProjectService {
     return a.order - b.order;
   }
 
-  private broadcastSavingProject(): void {
+  broadcastSavingProject(): void {
     this.savingProjectSource.next();
   }
 

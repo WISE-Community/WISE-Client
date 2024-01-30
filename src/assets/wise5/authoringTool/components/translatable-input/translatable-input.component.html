@@ -8,7 +8,7 @@
   <input
     matInput
     [ngModel]="translatedText()"
-    (ngModelChange)="saveTranslationText($event)"
+    (ngModelChange)="translatedTextChanged.next($event)"
     placeholder="{{ defaultLanguageInput.placeholder }}"
   />
   <mat-hint *ngIf="showTranslationInput()">{{ defaultLanguageText() }}</mat-hint>
