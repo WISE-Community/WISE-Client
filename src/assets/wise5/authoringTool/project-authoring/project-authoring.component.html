@@ -75,7 +75,7 @@
       <mat-checkbox
         color="primary"
         [(ngModel)]="item.checked"
-        (click)="selectNode($event)"
+        (click)="selectNode()"
         [disabled]="groupNodeSelected"
         aria-label="Select step"
         i18n-aria-label
@@ -153,18 +153,21 @@
                   isNodeInAnyBranchPath(inactiveChildId.id) && !isGroupNode(inactiveChildId.id)
               }"
               class="pointer projectItem"
-              (click)="nodeClicked(inactiveChildId)"
             >
               <mat-checkbox
                 color="primary"
                 [(ngModel)]="idToNode[inactiveChildId].checked"
-                (click)="selectNode($event)"
+                (click)="selectNode()"
                 [disabled]="groupNodeSelected"
                 aria-label="Select step"
                 i18n-aria-label
               >
               </mat-checkbox>
-              <div class="projectItemTitleDiv" fxLayoutAlign="start center">
+              <div
+                class="projectItemTitleDiv"
+                fxLayoutAlign="start center"
+                (click)="nodeClicked(inactiveChildId)"
+              >
                 <node-icon-and-title [nodeId]="inactiveChildId"></node-icon-and-title>
               </div>
             </div>
@@ -189,18 +192,21 @@
               branchPathStepHeader:
                 isNodeInAnyBranchPath(inactiveNode.id) && !isGroupNode(inactiveNode.id)
             }"
-            (click)="nodeClicked(inactiveNode.id)"
           >
             <mat-checkbox
               color="primary"
               [(ngModel)]="inactiveNode.checked"
-              (click)="selectNode($event)"
+              (click)="selectNode()"
               [disabled]="groupNodeSelected"
               aria-label="Select step"
               i18n-aria-label
             >
             </mat-checkbox>
-            <div class="projectItemTitleDiv" fxLayoutAlign="start center">
+            <div
+              class="projectItemTitleDiv"
+              fxLayoutAlign="start center"
+              (click)="nodeClicked(inactiveNode.id)"
+            >
               <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
             </div>
           </div>
