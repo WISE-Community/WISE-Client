@@ -256,7 +256,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">296,302</context>
         </context-group>
-        <target state="translated"> WISE es <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>free<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>código abierto<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! WISE subsiste gracias al generoso apoyo de la National Science Foundation, lo que significa que está disponible para cualquier persona con conexión a Internet. Impulsado por una comunidad activa de desarrolladores, WISE se amplía y mejora continuamente. ¡Llevar la investigación científica al aula, al museo, al entorno extraescolar o al hogar-escuela! </target>
+        <target state="translated"> WISE es <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>gratuito<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> y de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>código abierto<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! WISE subsiste gracias al generoso apoyo de la National Science Foundation, lo que significa que está disponible para cualquier persona con conexión a Internet. Impulsado por una comunidad activa de desarrolladores, WISE se amplía y mejora continuamente. ¡Llevar la investigación científica al aula, al museo, al entorno extraescolar o al hogar-escuela! </target>
       </trans-unit>
       <trans-unit id="4ad1e5cce5dbc999f93e23e6bc9fa28d9cbb0ee1" datatype="html">
         <source>WISE on student computer</source>
@@ -2502,7 +2502,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">71</context>
         </context-group>
-        <target state="translated">Estudiantes WISE colaboran con:</target>
+        <target state="translated">Estudiantes WISE colaboran entre sí para:</target>
       </trans-unit>
       <trans-unit id="c98d738b85e189cd244839c16b3dcdee30cac973" datatype="html">
         <source>Explore issues of social importance</source>
@@ -2566,7 +2566,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">102,107</context>
         </context-group>
-        <target state="translated"> WISE involucra a los estudiantes en los métodos reales de la ciencia y la ingeniería. Adoptamos un enfoque multidisciplinario para que los estudiantes aprendan a indagar a través de actividades que enfatizan las habilidades esenciales en lectura, escritura y alfabetización multimedia. Muchas de nuestras unidades también se basan en proyectos y presentan desafíos de diseño hands-on. </target>
+        <target state="translated"> WISE involucra a los estudiantes en los métodos reales de la ciencia y la ingeniería. Adoptamos un enfoque multidisciplinario para que los estudiantes aprendan a indagar a través de actividades que enfatizan las habilidades esenciales en lectura, escritura y alfabetización multimedia. Muchas de nuestras unidades también se basan en proyectos y presentan desafíos de diseño "hands-on". </target>
       </trans-unit>
       <trans-unit id="71efdce3e51ac5182d8ae55b0ccd9431835c05d0" datatype="html">
         <source> With WISE inquiry units, students not only learn skills that prepare them to be successful in STEM. They also learn skills necessary to be responsible, critical thinking citizens. </source>
@@ -2598,7 +2598,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">133,139</context>
         </context-group>
-        <target state="translated">Las unidades de WISE apoyan los <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;http://www.nextgenscience.org&quot; target=&quot;_blank&quot;               &gt;"/>Next Generation Science Standards (NGSS)<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a             &gt;"/>, encourage <x id="START_LINK_1" equiv-text="&lt;a href=&quot;http://www.nextgenscience.org/three-dimensions&quot; target=&quot;_blank&quot;               &gt;"/>3-dimensional learning<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a             &gt;"/>, aunque también son fácilmente adaptables a los estándares y diseños curriculares locales.</target>
+        <target state="translated">Las unidades de WISE apoyan los <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;http://www.nextgenscience.org&quot; target=&quot;_blank&quot;               &gt;"/>Next Generation Science Standards (NGSS)<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a             &gt;"/>, y promueven el <x id="START_LINK_1" equiv-text="&lt;a href=&quot;http://www.nextgenscience.org/three-dimensions&quot; target=&quot;_blank&quot;               &gt;"/>aprendizaje 3-dimensional<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a             &gt;"/>, aunque también son fácilmente adaptables a los estándares y diseños curriculares locales.</target>
       </trans-unit>
       <trans-unit id="6e15a0555bed4b010ba36febb47e87ff32616dd8" datatype="html">
         <source>Design Process &amp; Goals</source>
@@ -2710,7 +2710,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">323</context>
         </context-group>
-        <target state="translated">Avance del profesor WISE</target>
+        <target state="translated">Avance del docente WISE</target>
       </trans-unit>
       <trans-unit id="334e3ef2374254d76dfe1f56599cf1d0598372e8" datatype="html">
         <source>WISE teacher grading</source>
@@ -2718,7 +2718,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">344</context>
         </context-group>
-        <target state="translated">Calificación de profesor WISE</target>
+        <target state="translated">Calificación de docente WISE</target>
       </trans-unit>
       <trans-unit id="7f5177858a6d5d359f61637516a36470cbf6ba89" datatype="html">
         <source>Featured Teacher Tools:</source>
@@ -2742,7 +2742,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">360</context>
         </context-group>
-        <target state="translated">Calificar y dar retroalimentación + rúbricas de ejemplo para puntaje</target>
+        <target state="translated">Calificar y dar retroalimentación + rúbricas de ejemplo para evaluación</target>
       </trans-unit>
       <trans-unit id="6047c27c7e32ac81f954987ee2574c123e088014" datatype="html">
         <source>Automatically scored assessment items</source>
@@ -2774,7 +2774,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">377</context>
         </context-group>
-        <target state="translated">Entorno de creación de unidades que permite modificar y crear nuevas unidades</target>
+        <target state="translated">Entorno de creación de unidades que permite modificar unidades existentes y crear nuevas</target>
       </trans-unit>
       <trans-unit id="415c8616bb310cac9d37232c9759bda2899b47ec" datatype="html">
         <source> In development: Automated insights into student NGSS understanding + suggested classroom interventions! </source>
@@ -3666,7 +3666,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
           <context context-type="linenumber">7,13</context>
         </context-group>
-        <target state="translated"> Todos los usuarios deben crear su propia cuenta. Los profesores deben crear una cuenta de profesor y los estudiantes deben crear una cuenta de estudiante. Los usuarios pueden crear una cuenta yendo a la <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ contextPath }}&quot; target=&quot;_blank&quot;&gt;"/>Página principal de WISE<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> y haciendo clic en el enlace de <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ contextPath }}/join&quot; target=&quot;_blank&quot;&gt;"/>Registrarse<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> en la parte superior derecha de la pantalla. </target>
+        <target state="translated"> Todos los usuarios deben crear su propia cuenta. Los docentes deben crear una cuenta de docente y los estudiantes deben crear una cuenta de estudiante. Los usuarios pueden crear una cuenta yendo a la <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ contextPath }}&quot; target=&quot;_blank&quot;&gt;"/>Página principal de WISE<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> y haciendo clic en el enlace de <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ contextPath }}/join&quot; target=&quot;_blank&quot;&gt;"/>Registrarse<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> en la parte superior derecha de la pantalla. </target>
       </trans-unit>
       <trans-unit id="8667ecd04a352367c4c964c92a7763320d3f8946" datatype="html">
         <source>Here are instructions on how to create a teacher account.</source>
@@ -8166,7 +8166,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
@@ -8186,7 +8186,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">86</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
@@ -8206,7 +8206,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">89</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
@@ -8222,7 +8222,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <target state="translated">Unidad(es) archivada(s) exitosamente <x id="PH" equiv-text="projects.length"/>.</target>
       </trans-unit>
@@ -8234,7 +8234,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <target state="translated">Se ha restaurado <x id="PH" equiv-text="projects.length"/> unidad(es).</target>
       </trans-unit>
@@ -8830,7 +8830,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Error archiving unit(s).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">77</context>
         </context-group>
         <target state="translated">Error archivando unidad(es).</target>
       </trans-unit>
@@ -8838,7 +8838,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Error restoring unit(s).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">77</context>
         </context-group>
         <target state="translated">Error al restaurar unidad(es).</target>
       </trans-unit>
@@ -10760,7 +10760,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">136</context>
         </context-group>
         <target state="translated">No hay lecciones sin usar</target>
       </trans-unit>
@@ -10776,7 +10776,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">176</context>
         </context-group>
         <target state="translated">Pasos sin usar</target>
       </trans-unit>
@@ -10792,7 +10792,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">190</context>
+          <context context-type="linenumber">177</context>
         </context-group>
         <target state="translated">No hay pasos sin usar</target>
       </trans-unit>
@@ -13480,6 +13480,14 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">Error subiendo: </target>
       </trans-unit>
+      <trans-unit id="6ab64ec395f796b771a2d87d2801d0fe60b871d2" datatype="html">
+        <source>Select lesson</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target state="translated">Elegir lección</target>
+      </trans-unit>
       <trans-unit id="e5e0c8fd39cb0db7735731e3ae7d2108f430f16e" datatype="html">
         <source>Add New Lesson</source>
         <context-group purpose="location">
@@ -13504,19 +13512,27 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">Mover</target>
       </trans-unit>
-      <trans-unit id="965afa14c7950f1750c389c9e7d636cd0688e79e" datatype="html">
-        <source>Select lesson or step</source>
+      <trans-unit id="0788cea8f340f4f5399901765d2003f90af76669" datatype="html">
+        <source>Select step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
           <context context-type="linenumber">80</context>
         </context-group>
-        <target state="translated">Elegir lección o paso</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
+          <context context-type="linenumber">163</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
+          <context context-type="linenumber">199</context>
+        </context-group>
+        <target state="translated">Elegir paso</target>
       </trans-unit>
       <trans-unit id="acb6e7262d2e956f2b7e0de254cc6cfed8e87f1e" datatype="html">
         <source>Branch point with <x id="INTERPOLATION" equiv-text="{{ getNumberOfBranchPaths(item.key) }}"/> paths based on <x id="INTERPOLATION_1" equiv-text="{{               getBranchCriteriaDescription(item.key)             }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">91,93</context>
+          <context context-type="linenumber">96,98</context>
         </context-group>
         <target state="translated">Punto de bifurcación con <x id="INTERPOLATION" equiv-text="{{ getNumberOfBranchPaths(item.key) }}"/> recorridos basados en <x id="INTERPOLATION_1" equiv-text="{{               getBranchCriteriaDescription(item.key)             }}"/></target>
       </trans-unit>
@@ -13524,7 +13540,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source><x id="INTERPOLATION" equiv-text="{{ getNumberOfConstraintsOnNode(item.key) }}"/> Constraint\n\n<x id="INTERPOLATION_1" equiv-text="{{               getConstraintDescriptions(item.key)             }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">101,103</context>
+          <context context-type="linenumber">106,108</context>
         </context-group>
         <target state="translated"><x id="INTERPOLATION" equiv-text="{{ getNumberOfConstraintsOnNode(item.key) }}"/> Restricción\n\n<x id="INTERPOLATION_1" equiv-text="{{               getConstraintDescriptions(item.key)             }}"/></target>
       </trans-unit>
@@ -13532,7 +13548,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source><x id="INTERPOLATION" equiv-text="{{ getNumberOfConstraintsOnNode(item.key) }}"/> Constraints\n\n<x id="INTERPOLATION_1" equiv-text="{{               getConstraintDescriptions(item.key)             }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">111,113</context>
+          <context context-type="linenumber">116,118</context>
         </context-group>
         <target state="translated"><x id="INTERPOLATION" equiv-text="{{ getNumberOfConstraintsOnNode(item.key) }}"/> Restricciones\n\n<x id="INTERPOLATION_1" equiv-text="{{               getConstraintDescriptions(item.key)             }}"/></target>
       </trans-unit>
@@ -13540,29 +13556,9 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Has Rubric</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">125</context>
         </context-group>
         <target state="translated">Tiene Rúbrica</target>
-      </trans-unit>
-      <trans-unit id="6ab64ec395f796b771a2d87d2801d0fe60b871d2" datatype="html">
-        <source>Select lesson</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">150</context>
-        </context-group>
-        <target state="translated">Elegir lección</target>
-      </trans-unit>
-      <trans-unit id="0788cea8f340f4f5399901765d2003f90af76669" datatype="html">
-        <source>Select step</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">176</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">212</context>
-        </context-group>
-        <target state="translated">Elegir paso</target>
       </trans-unit>
       <trans-unit id="791981839110791639" datatype="html">
         <source>Are you sure you want to delete the selected item?</source>
