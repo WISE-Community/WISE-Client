@@ -8166,7 +8166,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
@@ -8186,7 +8186,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">86</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
@@ -8206,7 +8206,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">89</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
@@ -8222,7 +8222,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <target state="needs-translation">Successfully archived <x id="PH" equiv-text="projects.length"/> unit(s).</target>
       </trans-unit>
@@ -8234,7 +8234,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <target state="needs-translation">Successfully restored <x id="PH" equiv-text="projects.length"/> unit(s).</target>
       </trans-unit>
@@ -8830,7 +8830,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Error archiving unit(s).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">77</context>
         </context-group>
         <target state="needs-translation">Error archiving unit(s).</target>
       </trans-unit>
@@ -8838,7 +8838,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Error restoring unit(s).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">77</context>
         </context-group>
         <target state="needs-translation">Error restoring unit(s).</target>
       </trans-unit>
@@ -10760,7 +10760,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">136</context>
         </context-group>
         <target state="needs-translation">There are no Unused Lessons</target>
       </trans-unit>
@@ -10776,7 +10776,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">176</context>
         </context-group>
         <target state="needs-translation">Unused Steps</target>
       </trans-unit>
@@ -10792,7 +10792,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">190</context>
+          <context context-type="linenumber">177</context>
         </context-group>
         <target state="needs-translation">There are no Unused Steps</target>
       </trans-unit>
@@ -13482,6 +13482,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="needs-translation">Error uploading: </target>
       </trans-unit>
+      <trans-unit id="6ab64ec395f796b771a2d87d2801d0fe60b871d2" datatype="html">
+        <source>Select lesson</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target state="needs-translation">Select lesson</target>
+      </trans-unit>
       <trans-unit id="e5e0c8fd39cb0db7735731e3ae7d2108f430f16e" datatype="html">
         <source>Add New Lesson</source>
         <context-group purpose="location">
@@ -13506,19 +13514,27 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="needs-translation">Move</target>
       </trans-unit>
-      <trans-unit id="965afa14c7950f1750c389c9e7d636cd0688e79e" datatype="html">
-        <source>Select lesson or step</source>
+      <trans-unit id="0788cea8f340f4f5399901765d2003f90af76669" datatype="html">
+        <source>Select step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
           <context context-type="linenumber">80</context>
         </context-group>
-        <target state="needs-translation">Select lesson or step</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
+          <context context-type="linenumber">163</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
+          <context context-type="linenumber">199</context>
+        </context-group>
+        <target state="needs-translation">Select step</target>
       </trans-unit>
       <trans-unit id="acb6e7262d2e956f2b7e0de254cc6cfed8e87f1e" datatype="html">
         <source>Branch point with <x id="INTERPOLATION" equiv-text="{{ getNumberOfBranchPaths(item.key) }}"/> paths based on <x id="INTERPOLATION_1" equiv-text="{{               getBranchCriteriaDescription(item.key)             }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">91,93</context>
+          <context context-type="linenumber">96,98</context>
         </context-group>
         <target state="needs-translation">Branch point with <x id="INTERPOLATION" equiv-text="{{ getNumberOfBranchPaths(item.key) }}"/> paths based on <x id="INTERPOLATION_1" equiv-text="{{               getBranchCriteriaDescription(item.key)             }}"/></target>
       </trans-unit>
@@ -13526,7 +13542,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source><x id="INTERPOLATION" equiv-text="{{ getNumberOfConstraintsOnNode(item.key) }}"/> Constraint\n\n<x id="INTERPOLATION_1" equiv-text="{{               getConstraintDescriptions(item.key)             }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">101,103</context>
+          <context context-type="linenumber">106,108</context>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ getNumberOfConstraintsOnNode(item.key) }}"/> Constraint\n\n<x id="INTERPOLATION_1" equiv-text="{{               getConstraintDescriptions(item.key)             }}"/></target>
       </trans-unit>
@@ -13534,7 +13550,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source><x id="INTERPOLATION" equiv-text="{{ getNumberOfConstraintsOnNode(item.key) }}"/> Constraints\n\n<x id="INTERPOLATION_1" equiv-text="{{               getConstraintDescriptions(item.key)             }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">111,113</context>
+          <context context-type="linenumber">116,118</context>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ getNumberOfConstraintsOnNode(item.key) }}"/> Constraints\n\n<x id="INTERPOLATION_1" equiv-text="{{               getConstraintDescriptions(item.key)             }}"/></target>
       </trans-unit>
@@ -13542,29 +13558,9 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Has Rubric</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">125</context>
         </context-group>
         <target state="needs-translation">Has Rubric</target>
-      </trans-unit>
-      <trans-unit id="6ab64ec395f796b771a2d87d2801d0fe60b871d2" datatype="html">
-        <source>Select lesson</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">150</context>
-        </context-group>
-        <target state="needs-translation">Select lesson</target>
-      </trans-unit>
-      <trans-unit id="0788cea8f340f4f5399901765d2003f90af76669" datatype="html">
-        <source>Select step</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">176</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">212</context>
-        </context-group>
-        <target state="needs-translation">Select step</target>
       </trans-unit>
       <trans-unit id="791981839110791639" datatype="html">
         <source>Are you sure you want to delete the selected item?</source>
