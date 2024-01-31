@@ -11,16 +11,13 @@ import { ComputerAvatarService } from '../../../services/computerAvatarService';
 export class AiChatBotMessageComponent {
   @Input() computerAvatar: ComputerAvatar;
   protected computerAvatarImageSrc: string;
-  protected displayNames: string;
   @Input() message: AiChatMessage;
+
   constructor(private computerAvatarService: ComputerAvatarService) {}
 
   ngOnInit(): void {
-    if (this.computerAvatar != null) {
-      this.displayNames = this.computerAvatar.name;
-      this.computerAvatarImageSrc =
-        this.computerAvatarService.getAvatarsPath() +
-        this.computerAvatarService.getAvatar(this.computerAvatar.id).image;
-    }
+    this.computerAvatarImageSrc =
+      this.computerAvatarService.getAvatarsPath() +
+      this.computerAvatarService.getAvatar(this.computerAvatar.id).image;
   }
 }

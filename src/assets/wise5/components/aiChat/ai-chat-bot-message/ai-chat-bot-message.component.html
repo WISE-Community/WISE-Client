@@ -1,13 +1,5 @@
 <div fxLayoutAlign="start start" fxLayoutGap="4px">
-  <mat-icon
-    *ngIf="computerAvatarImageSrc == null"
-    class="mat-36"
-    color="accent"
-    aria-label="Automated guidance response"
-    i18n-aria-label
-  ></mat-icon>
   <img
-    *ngIf="computerAvatarImageSrc != null"
     [src]="computerAvatarImageSrc"
     class="computer-avatar"
     aria-label="Automated guidance response"
@@ -15,7 +7,7 @@
   />
   <div fxFlex fxLayoutAlign="start">
     <div class="response-text notice-bg-bg">
-      <div class="mat-small secondary-text poster" i18n>{{ displayNames }}</div>
+      <div class="mat-small secondary-text poster" i18n>{{ computerAvatar.name }}</div>
       <div [innerHtml]="message.content"></div>
     </div>
   </div>

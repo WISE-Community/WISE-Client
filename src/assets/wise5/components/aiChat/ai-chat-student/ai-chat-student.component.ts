@@ -23,7 +23,7 @@ import { StudentStatusService } from '../../../services/studentStatusService';
 })
 export class AiChatStudentComponent extends ComponentStudent {
   component: AiChatComponent;
-  computerAvatar: ComputerAvatar;
+  protected computerAvatar: ComputerAvatar;
   protected computerAvatarSelectorVisible: boolean = false;
   protected messages: AiChatMessage[] = [];
   protected studentResponse: string = '';
@@ -69,7 +69,7 @@ export class AiChatStudentComponent extends ComponentStudent {
     this.initializeMessages();
   }
 
-  initializeComputerAvatar(): void {
+  private initializeComputerAvatar(): void {
     this.tryToRepopulateComputerAvatar();
     if (this.hasStudentPreviouslyChosenComputerAvatar()) {
       this.hideComputerAvatarSelector();
@@ -77,8 +77,7 @@ export class AiChatStudentComponent extends ComponentStudent {
       this.component.isOnlyOneComputerAvatarAvailable() &&
       !this.component.isComputerAvatarPromptAvailable()
     ) {
-      this.hideComputerAvatarSelector();
-      this.selectComputerAvatar(this.getTheOnlyComputerAvatarAvailable());
+      this.selectComputerAvatar(this.getFirstComputerAvatar());
     } else {
       this.showComputerAvatarSelector();
     }
@@ -89,7 +88,7 @@ export class AiChatStudentComponent extends ComponentStudent {
       this.repopulateComputerAvatarFromComponentState(this.componentState);
     } else if (
       this.component.isUseGlobalComputerAvatar() &&
-      this.isGlobalComputerAvatarAvailable()
+      this.studentStatusService.isGlobalComputerAvatarAvailable()
     ) {
       this.repopulateGlobalComputerAvatar();
     }
@@ -97,10 +96,6 @@ export class AiChatStudentComponent extends ComponentStudent {
 
   private includesComputerAvatar(componentState: any): boolean {
     return componentState?.studentData?.computerAvatarId != null;
-  }
-
-  private isGlobalComputerAvatarAvailable(): boolean {
-    return this.studentStatusService.getComputerAvatarId() != null;
   }
 
   private repopulateComputerAvatarFromComponentState(componentState: any): void {
@@ -120,7 +115,7 @@ export class AiChatStudentComponent extends ComponentStudent {
     return this.computerAvatar != null;
   }
 
-  private getTheOnlyComputerAvatarAvailable(): ComputerAvatar {
+  private getFirstComputerAvatar(): ComputerAvatar {
     return this.computerAvatarService.getAvatar(
       this.component.content.computerAvatarSettings.ids[0]
     );
@@ -134,7 +129,7 @@ export class AiChatStudentComponent extends ComponentStudent {
     this.computerAvatarSelectorVisible = false;
   }
 
-  selectComputerAvatar(computerAvatar: ComputerAvatar): void {
+  protected selectComputerAvatar(computerAvatar: ComputerAvatar): void {
     this.computerAvatar = computerAvatar;
     if (this.component.isUseGlobalComputerAvatar()) {
       this.studentStatusService.setComputerAvatarId(computerAvatar.id);
@@ -142,9 +137,7 @@ export class AiChatStudentComponent extends ComponentStudent {
     this.hideComputerAvatarSelector();
     const computerAvatarInitialResponse = this.component.getComputerAvatarInitialResponse();
     if (computerAvatarInitialResponse != null && computerAvatarInitialResponse !== '') {
-      this.messages.push(
-        new AiChatMessage('assistant', this.componentContent.computerAvatarSettings.initialResponse)
-      );
+      this.messages.push(new AiChatMessage('assistant', computerAvatarInitialResponse));
     }
   }
 

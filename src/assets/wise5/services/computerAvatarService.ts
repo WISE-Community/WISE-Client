@@ -3,6 +3,7 @@
 import { Injectable } from '@angular/core';
 import { ComputerAvatar } from '../common/ComputerAvatar';
 import { copy } from '../common/object/object';
+import { ComputerAvatarSettings } from '../components/dialogGuidance/ComputerAvatarSettings';
 
 @Injectable()
 export class ComputerAvatarService {
@@ -36,7 +37,7 @@ export class ComputerAvatarService {
     return this.getAvatar('robot1');
   }
 
-  getDefaultComputerAvatarSettings(): any {
+  getDefaultComputerAvatarSettings(): ComputerAvatarSettings {
     return {
       ids: this.getAvatars().map((avatar) => avatar.id),
       label: this.getDefaultComputerAvatarLabel(),
