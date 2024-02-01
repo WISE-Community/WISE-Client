@@ -11,14 +11,6 @@
   margin-left: 20px;
 }
 
-.stepHeader {
-  margin-left: 30px !important;
-}
-
-.branchPathStepHeader {
-  margin-left: 55px !important;
-}
-
 .componentHeader {
   margin-left: 30px !important;
 }
@@ -38,47 +30,8 @@
   line-height: 0px;
 }
 
-.regularButton {
-  min-height: 36px !important;
-  max-height: 36px !important;
-  min-width: 50px !important;
-  font-size: 10px !important;
-  line-height: 0px;
-}
-
-.createButton {
-  min-width: 50px;
-  height: 20px;
-}
-
-.projectItem:hover {
-  background-color: #add8e6;
-}
-
-.projectItemTitleDiv:hover {
-  background-color: #add8e6;
-}
-
-.projectItemTitleDiv {
-  width: 100%;
-  font-weight: initial;
-}
-
-.multiLineTooltip {
-  height: auto !important;
-  white-space: pre-line;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
 .unused-header {
   text-decoration: underline;
-}
-
-.rotate-180 {
-  transform: rotate(180deg);
 }
 
 .mat-icon {
