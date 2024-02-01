@@ -48,6 +48,10 @@ export class StudentStatusService {
     return this.studentStatus.computerAvatarId;
   }
 
+  isGlobalComputerAvatarAvailable(): boolean {
+    return this.getComputerAvatarId() != null;
+  }
+
   private saveStudentStatus(): void {
     const runId = this.configService.getRunId();
     const periodId = this.configService.getPeriodId();
