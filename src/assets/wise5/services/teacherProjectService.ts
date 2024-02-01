@@ -344,8 +344,8 @@ export class TeacherProjectService extends ProjectService {
    */
   createNodeAfter(newNode, nodeId) {
     if (this.isInactive(nodeId)) {
-      this.addInactiveNodeInsertAfter(newNode, nodeId);
       this.setIdToNode(newNode.id, newNode);
+      this.addInactiveNodeInsertAfter(newNode, nodeId);
     } else {
       this.addNode(newNode);
       this.setIdToNode(newNode.id, newNode);
