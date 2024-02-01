@@ -56,161 +56,55 @@
   </button>
 </div>
 <div class="all-nodes-div">
-  <div class="projectItem" *ngFor="let item of items">
+  <div *ngFor="let item of items">
     <project-authoring-lesson
-      *ngIf="isGroupNode(item.key)"
+      *ngIf="isGroupNode(item.id)"
       [item]="item"
       [disableSelection]="stepNodeSelected"
       (selectNodeEvent)="selectNode()"
       [showPosition]="true"
     ></project-authoring-lesson>
-    <div
-      *ngIf="!isGroupNode(item.key)"
-      id="{{ item.key }}"
-      fxLayoutAlign="start center"
-      class="pointer stepHeader"
-      [ngClass]="{ branchPathStepHeader: isNodeInAnyBranchPath(item.key) }"
-      [ngStyle]="{ 'background-color': getStepBackgroundColor(item.key) }"
-    >
-      <mat-checkbox
-        color="primary"
-        [(ngModel)]="item.checked"
-        (click)="selectNode()"
-        [disabled]="groupNodeSelected"
-        aria-label="Select step"
-        i18n-aria-label
-      >
-      </mat-checkbox>
-      <div
-        class="projectItemTitleDiv"
-        fxLayoutAlign="start center"
-        fxLayoutGap="10px"
-        (click)="nodeClicked(item.key)"
-      >
-        <node-icon-and-title [nodeId]="item.key" [showPosition]="true"></node-icon-and-title>
-        <p fxLayoutAlign="start center" fxLayoutGap="10px">
-          <mat-icon
-            *ngIf="isBranchPoint(item.key)"
-            class="rotate-180"
-            (click)="branchIconClicked(item.key); $event.stopPropagation()"
-            matTooltip="Branch point with {{ getNumberOfBranchPaths(item.key) }} paths based on {{
-              getBranchCriteriaDescription(item.key)
-            }}"
-            matTooltipPosition="right"
-            i18n-matTooltip
-            >call_split</mat-icon
-          >
-          <mat-icon
-            *ngIf="nodeHasConstraint(item.key) && getNumberOfConstraintsOnNode(item.key) == 1"
-            (click)="constraintIconClicked(item.key); $event.stopPropagation()"
-            matTooltip="{{ getNumberOfConstraintsOnNode(item.key) }} Constraint\n\n{{
-              getConstraintDescriptions(item.key)
-            }}"
-            matTooltipPosition="right"
-            i18n-matTooltip
-            >block</mat-icon
-          >
-          <mat-icon
-            *ngIf="nodeHasConstraint(item.key) && getNumberOfConstraintsOnNode(item.key) > 1"
-            (click)="constraintIconClicked(item.key); $event.stopPropagation()"
-            matTooltip="{{ getNumberOfConstraintsOnNode(item.key) }} Constraints\n\n{{
-              getConstraintDescriptions(item.key)
-            }}"
-            matTooltipPosition="right"
-            i18n-matTooltip
-            >block</mat-icon
-          >
-          <mat-icon
-            *ngIf="nodeHasRubric(item.key)"
-            matTooltip="Has Rubric"
-            matTooltipPosition="right"
-            i18n-matTooltip
-            >message</mat-icon
-          >
-        </p>
-      </div>
-    </div>
+    <project-authoring-step
+      *ngIf="!isGroupNode(item.id)"
+      [item]="item"
+      (selectNodeEvent)="selectNode()"
+      [disableSelection]="groupNodeSelected"
+      [showPosition]="true"
+      [projectId]="projectId"
+    ></project-authoring-step>
   </div>
   <div>
-    <h6 class="unused-header">Unused Lessons</h6>
-    <div *ngIf="getNumberOfInactiveGroups() === 0" i18n>There are no Unused Lessons</div>
-    <ng-container *ngFor="let inactiveNode of inactiveGroupNodes">
-      <div *ngIf="isGroupNode(inactiveNode.id)" id="{{ inactiveNode.id }}">
-        <project-authoring-lesson
-          [item]="inactiveNode"
-          [disableSelection]="stepNodeSelected"
+    <h6 class="unused-header" i18n>Unused Lessons</h6>
+    <div *ngIf="inactiveGroupNodes.length === 0" i18n>There are no Unused Lessons</div>
+    <div *ngFor="let inactiveGroupNode of inactiveGroupNodes">
+      <project-authoring-lesson
+        [item]="inactiveGroupNode"
+        [disableSelection]="stepNodeSelected"
+        (selectNodeEvent)="selectNode()"
+        [showPosition]="false"
+      ></project-authoring-lesson>
+      <ng-container *ngFor="let inactiveChildId of inactiveGroupNode.ids">
+        <project-authoring-step
+          [item]="idToNode[inactiveChildId]"
           (selectNodeEvent)="selectNode()"
+          [disableSelection]="groupNodeSelected"
           [showPosition]="false"
-        ></project-authoring-lesson>
-        <ng-container *ngFor="let inactiveChildId of inactiveNode.ids">
-          <div class="projectItem" id="{{ inactiveChildId }}">
-            <div
-              fxLayoutAlign="start center"
-              [ngClass]="{
-                groupHeader: isGroupNode(inactiveChildId.id),
-                stepHeader: !isGroupNode(inactiveChildId.id),
-                branchPathStepHeader:
-                  isNodeInAnyBranchPath(inactiveChildId.id) && !isGroupNode(inactiveChildId.id)
-              }"
-              class="pointer projectItem"
-            >
-              <mat-checkbox
-                color="primary"
-                [(ngModel)]="idToNode[inactiveChildId].checked"
-                (click)="selectNode()"
-                [disabled]="groupNodeSelected"
-                aria-label="Select step"
-                i18n-aria-label
-              >
-              </mat-checkbox>
-              <div
-                class="projectItemTitleDiv"
-                fxLayoutAlign="start center"
-                (click)="nodeClicked(inactiveChildId)"
-              >
-                <node-icon-and-title [nodeId]="inactiveChildId"></node-icon-and-title>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-      </div>
-    </ng-container>
+          [projectId]="projectId"
+        ></project-authoring-step>
+      </ng-container>
+    </div>
     <div>
       <h6 class="unused-header" i18n>Unused Steps</h6>
-      <div *ngIf="getNumberOfInactiveSteps() === 0" i18n>There are no Unused Steps</div>
-      <ng-container *ngFor="let inactiveNode of inactiveStepNodes">
-        <div
-          *ngIf="!isGroupNode(inactiveNode.id) && getParentGroup(inactiveNode.id) == null"
-          class="pointer projectItem"
-          id="{{ inactiveNode.id }}"
-        >
-          <div
-            fxLayoutAlign="start center"
-            [ngClass]="{
-              groupHeader: isGroupNode(inactiveNode.id),
-              stepHeader: !isGroupNode(inactiveNode.id),
-              branchPathStepHeader:
-                isNodeInAnyBranchPath(inactiveNode.id) && !isGroupNode(inactiveNode.id)
-            }"
-          >
-            <mat-checkbox
-              color="primary"
-              [(ngModel)]="inactiveNode.checked"
-              (click)="selectNode()"
-              [disabled]="groupNodeSelected"
-              aria-label="Select step"
-              i18n-aria-label
-            >
-            </mat-checkbox>
-            <div
-              class="projectItemTitleDiv"
-              fxLayoutAlign="start center"
-              (click)="nodeClicked(inactiveNode.id)"
-            >
-              <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
-            </div>
-          </div>
-        </div>
+      <div *ngIf="inactiveStepNodes.length === 0" i18n>There are no Unused Steps</div>
+      <ng-container *ngFor="let inactiveStepNode of inactiveStepNodes">
+        <project-authoring-step
+          *ngIf="getParentGroup(inactiveStepNode.id) == null"
+          [item]="inactiveStepNode"
+          (selectNodeEvent)="selectNode()"
+          [disableSelection]="groupNodeSelected"
+          [showPosition]="false"
+          [projectId]="projectId"
+        ></project-authoring-step>
       </ng-container>
     </div>
   </div>

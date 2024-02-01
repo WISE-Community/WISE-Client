@@ -67,18 +67,6 @@ export class ProjectAuthoringComponent {
     this.dataService.setCurrentNodeByNodeId(nodeId);
   }
 
-  protected constraintIconClicked(nodeId: string): void {
-    this.dataService.setCurrentNodeByNodeId(nodeId);
-    this.router.navigate([
-      `/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/constraint`
-    ]);
-  }
-
-  protected branchIconClicked(nodeId: string): void {
-    this.dataService.setCurrentNodeByNodeId(nodeId);
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/path`]);
-  }
-
   protected chooseLocation(isCopy: boolean): void {
     this.router.navigate([isCopy ? 'choose-copy-location' : 'choose-move-location'], {
       relativeTo: this.route,
@@ -136,10 +124,6 @@ export class ProjectAuthoringComponent {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-node/choose-template`]);
   }
 
-  protected isNodeInAnyBranchPath(nodeId: string): boolean {
-    return this.projectService.isNodeInAnyBranchPath(nodeId);
-  }
-
   private temporarilyHighlightNewNodes(newNodes = []): void {
     if (newNodes.length > 0) {
       setTimeout(() => {
@@ -153,26 +137,6 @@ export class ProjectAuthoringComponent {
         );
       });
     }
-  }
-
-  protected getStepBackgroundColor(nodeId: string): string {
-    return this.projectService.getBackgroundColor(nodeId);
-  }
-
-  protected getNumberOfInactiveGroups(): number {
-    return this.inactiveNodes.filter((node) => node.type === 'group').length;
-  }
-
-  /**
-   * Get the number of inactive steps. This only counts the inactive steps that
-   * are not in an inactive group.
-   * @return The number of inactive steps (not including the inactive steps that
-   * are in an inactive group).
-   */
-  protected getNumberOfInactiveSteps(): number {
-    return this.inactiveNodes.filter(
-      (node) => node.type === 'node' && this.projectService.getParentGroup(node.id) == null
-    ).length;
   }
 
   protected getParentGroup(nodeId: string): any {
@@ -194,41 +158,6 @@ export class ProjectAuthoringComponent {
       this.groupNodeSelected = this.isGroupNode(checkedNodes[0].id);
       this.stepNodeSelected = !this.groupNodeSelected;
     }
-  }
-
-  protected isBranchPoint(nodeId: string): boolean {
-    return this.projectService.isBranchPoint(nodeId);
-  }
-
-  protected getNumberOfBranchPaths(nodeId: string): number {
-    return this.projectService.getNumberOfBranchPaths(nodeId);
-  }
-
-  protected getBranchCriteriaDescription(nodeId: string): string {
-    return this.projectService.getBranchCriteriaDescription(nodeId);
-  }
-
-  protected nodeHasConstraint(nodeId: string): boolean {
-    return this.projectService.nodeHasConstraint(nodeId);
-  }
-
-  protected getNumberOfConstraintsOnNode(nodeId: string): number {
-    return this.projectService.getConstraintsOnNode(nodeId).length;
-  }
-
-  protected getConstraintDescriptions(nodeId: string): string {
-    let constraintDescriptions = '';
-    const constraints = this.projectService.getConstraintsOnNode(nodeId);
-    for (let c = 0; c < constraints.length; c++) {
-      let constraint = constraints[c];
-      let description = this.projectService.getConstraintDescription(constraint);
-      constraintDescriptions += c + 1 + ' - ' + description + '\n';
-    }
-    return constraintDescriptions;
-  }
-
-  protected nodeHasRubric(nodeId: string): boolean {
-    return this.projectService.nodeHasRubric(nodeId);
   }
 
   protected hasSelectedNodes(): boolean {

@@ -1,5 +1,9 @@
-.groupHeader {
-  margin-left: 5px !important;
+.stepHeader {
+  margin-left: 30px !important;
+}
+
+.branchPathStepHeader {
+  margin-left: 55px !important;
 }
 
 .pointer {
@@ -17,4 +21,8 @@
 .projectItemTitleDiv {
   width: 100%;
   font-weight: initial;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
 }
