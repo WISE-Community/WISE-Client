@@ -153,7 +153,7 @@ export class NodeGradingViewComponent implements OnInit {
       const workgroupId = workgroup.workgroupId;
       this.workgroupsById[workgroupId] = workgroup;
       this.workVisibilityById[workgroupId] = false;
-      this.updateWorkgroup(workgroupId, true);
+      this.updateWorkgroup(workgroupId);
     }
   }
 
@@ -240,9 +240,8 @@ export class NodeGradingViewComponent implements OnInit {
    * Update statuses, scores, notifications, etc. for a workgroup object. Also check if we need to
    * hide student names because logged-in user does not have the right permissions
    * @param workgroupID a workgroup ID number
-   * @param init Boolean whether we're in controller initialization or not
    */
-  protected updateWorkgroup(workgroupId: number, init = false): void {
+  protected updateWorkgroup(workgroupId: number): void {
     const workgroup = this.workgroupsById[workgroupId];
     const alertNotifications = this.notificationService.getAlertNotifications({
       nodeId: this.nodeId,
