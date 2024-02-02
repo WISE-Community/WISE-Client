@@ -26,6 +26,7 @@ import { DialogGuidanceStudentComponent } from './dialog-guidance-student.compon
 import { DialogGuidanceComponent } from '../DialogGuidanceComponent';
 import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
 
 let component: DialogGuidanceStudentComponent;
 let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
@@ -42,6 +43,7 @@ describe('DialogGuidanceStudentComponent', () => {
       ],
       imports: [
         BrowserAnimationsModule,
+        ChatInputComponent,
         FormsModule,
         HttpClientTestingModule,
         MatCardModule,

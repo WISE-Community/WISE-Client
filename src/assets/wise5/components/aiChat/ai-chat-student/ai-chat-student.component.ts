@@ -147,10 +147,9 @@ export class AiChatStudentComponent extends ComponentStudent {
     }
   }
 
-  protected async submitStudentResponse(): Promise<void> {
+  protected async submitStudentResponse(response: string): Promise<void> {
     this.waitingForComputerResponse = true;
-    this.messages.push(new AiChatMessage('user', this.studentResponse));
-    this.clearStudentResponse();
+    this.messages.push(new AiChatMessage('user', response));
     try {
       const response = await this.aiChatService.sendChatMessage(
         this.messages,
@@ -163,24 +162,6 @@ export class AiChatStudentComponent extends ComponentStudent {
       this.waitingForComputerResponse = false;
       this.snackBar.open($localize`An error occurred.`);
     }
-  }
-
-  private clearStudentResponse(): void {
-    this.studentResponse = '';
-  }
-
-  protected keyPressed(event: any): void {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      if (this.submitEnabled && !this.waitingForComputerResponse) {
-        this.submitStudentResponse();
-      }
-    }
-  }
-
-  studentResponseChanged(): void {
-    this.submitEnabled = this.studentResponse.length > 0;
-    this.setIsSubmitDirty(this.isSubmitDirty || this.submitEnabled);
   }
 
   createComponentState(action: any): any {

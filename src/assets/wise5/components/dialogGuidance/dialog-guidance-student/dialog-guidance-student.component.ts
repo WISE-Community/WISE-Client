@@ -39,11 +39,9 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   cRaterTimeout: number = 40000;
   feedbackRuleEvaluator: FeedbackRuleEvaluator<CRaterResponse[]>;
   isShowComputerAvatarSelector: boolean = false;
-  isSubmitEnabled: boolean = false;
   isWaitingForComputerResponse: boolean = false;
   responses: DialogResponse[] = [];
   studentCanRespond: boolean = true;
-  studentResponse: string;
   workgroupId: number;
 
   constructor(
@@ -178,20 +176,10 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     }
   }
 
-  submitStudentResponse(): void {
-    this.disableInput();
-    const response = this.studentResponse;
+  protected submitStudentResponse(response: string): void {
     this.addStudentDialogResponse(response);
-    this.clearStudentResponse();
-    setTimeout(() => {
-      this.submitToCRater(response);
-      this.studentDataChanged();
-    }, 500);
-  }
-
-  private clearStudentResponse(): void {
-    this.studentResponse = '';
-    this.studentResponseChanged();
+    this.submitToCRater(response);
+    this.studentDataChanged();
   }
 
   private addStudentDialogResponse(text: string): void {
@@ -225,14 +213,6 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     this.isWaitingForComputerResponse = false;
   }
 
-  private disableInput(): void {
-    this.isDisabled = true;
-  }
-
-  private enableInput(): void {
-    this.isDisabled = false;
-  }
-
   private disableStudentResponse(): void {
     this.studentCanRespond = false;
   }
@@ -244,8 +224,6 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     this.addDialogResponse(this.createComputerDialogResponse(cRaterResponse));
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableStudentResponse();
-    } else {
-      this.enableInput();
     }
   }
 
@@ -292,7 +270,6 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
 
   cRaterErrorResponse() {
     this.hideWaitingForComputerResponse();
-    this.enableInput();
     this.saveButtonClicked();
   }
 
@@ -317,10 +294,5 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       );
     });
     return promise;
-  }
-
-  studentResponseChanged(): void {
-    this.isSubmitEnabled = this.studentResponse.length > 0;
-    this.setIsSubmitDirty(this.isSubmitDirty || this.isSubmitEnabled);
   }
 }
