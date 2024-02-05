@@ -38,7 +38,7 @@ export class StudentProgressComponent implements OnInit {
       this.classroomStatusService.studentStatusReceived$.subscribe((args) => {
         const studentStatus = args.studentStatus;
         const workgroupId = studentStatus.workgroupId;
-        this.updateStudent(workgroupId);
+        this.updateTeam(workgroupId);
       })
     );
     this.subscriptions.add(
@@ -73,13 +73,13 @@ export class StudentProgressComponent implements OnInit {
           lastName: names[1]
         });
         this.students.push(student);
-        this.updateStudent(workgroupId);
+        this.updateTeam(workgroupId);
       });
     }
     this.sortWorkgroups();
   }
 
-  private updateStudent(workgroupId: number): void {
+  private updateTeam(workgroupId: number): void {
     const location = this.getCurrentNodeForWorkgroupId(workgroupId);
     const completion = this.classroomStatusService.getStudentProjectCompletion(workgroupId);
     const score = this.getStudentTotalScore(workgroupId);
