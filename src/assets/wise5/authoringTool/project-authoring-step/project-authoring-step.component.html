@@ -1,15 +1,15 @@
 <div
-  id="{{ item.id }}"
+  id="{{ step.id }}"
   fxLayoutAlign="start center"
   class="pointer stepHeader projectItem"
-  [ngClass]="{ branchPathStepHeader: isNodeInAnyBranchPath(item.id) }"
-  [ngStyle]="{ 'background-color': getStepBackgroundColor(item.id) }"
+  [ngClass]="{ branchPathStepHeader: isNodeInAnyBranchPath(step.id) }"
+  [ngStyle]="{ 'background-color': getStepBackgroundColor(step.id) }"
 >
   <mat-checkbox
     color="primary"
-    [(ngModel)]="item.checked"
-    (click)="selectNodeEvent.emit()"
-    [disabled]="disableSelection"
+    [(ngModel)]="checked"
+    (click)="selectNodeEvent.emit({ id: step.id, checked: checked })"
+    [disabled]="nodeTypeSelected === 'lesson'"
     aria-label="Select step"
     i18n-aria-label
   >
@@ -18,33 +18,33 @@
     class="projectItemTitleDiv"
     fxLayoutAlign="start center"
     fxLayoutGap="10px"
-    (click)="setCurrentNode(item.id)"
+    (click)="setCurrentNode(step.id)"
   >
-    <node-icon-and-title [nodeId]="item.id" [showPosition]="showPosition"></node-icon-and-title>
+    <node-icon-and-title [nodeId]="step.id" [showPosition]="showPosition"></node-icon-and-title>
     <p fxLayoutAlign="start center" fxLayoutGap="10px">
       <mat-icon
-        *ngIf="isBranchPoint(item.id)"
+        *ngIf="isBranchPoint(step.id)"
         class="rotate-180"
-        (click)="branchIconClicked(item.id); $event.stopPropagation()"
-        matTooltip="Branch point with {{ getNumberOfBranchPaths(item.id) }} paths based on {{
-          getBranchCriteriaDescription(item.id)
+        (click)="branchIconClicked(step.id); $event.stopPropagation()"
+        matTooltip="Branch point with {{ getNumberOfBranchPaths(step.id) }} paths based on {{
+          getBranchCriteriaDescription(step.id)
         }}"
         matTooltipPosition="right"
         i18n-matTooltip
         >call_split</mat-icon
       >
       <mat-icon
-        *ngIf="nodeHasConstraint(item.id)"
-        (click)="constraintIconClicked(item.id); $event.stopPropagation()"
-        matTooltip="{{ getNumberOfConstraintsOnNode(item.id) }} Constraint(s) {{
-          getConstraintDescriptions(item.id)
+        *ngIf="nodeHasConstraint(step.id)"
+        (click)="constraintIconClicked(step.id); $event.stopPropagation()"
+        matTooltip="{{ getNumberOfConstraintsOnNode(step.id) }} Constraint(s) {{
+          getConstraintDescriptions(step.id)
         }}"
         matTooltipPosition="right"
         i18n-matTooltip
         >block</mat-icon
       >
       <mat-icon
-        *ngIf="nodeHasRubric(item.id)"
+        *ngIf="nodeHasRubric(step.id)"
         matTooltip="Has Rubric"
         matTooltipPosition="right"
         i18n-matTooltip

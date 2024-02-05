@@ -3,7 +3,7 @@
     mat-raised-button
     color="primary"
     (click)="addNewLesson()"
-    [disabled]="stepNodeSelected || groupNodeSelected"
+    [disabled]="nodeTypeSelected != null"
     matTooltip="Add New Lesson"
     matTooltipPosition="above"
     i18n-matTooltip
@@ -14,7 +14,7 @@
     mat-raised-button
     color="primary"
     (click)="addNewStep()"
-    [disabled]="stepNodeSelected || groupNodeSelected"
+    [disabled]="nodeTypeSelected != null"
     matTooltip="Add New Step"
     matTooltipPosition="above"
     i18n-matTooltip
@@ -56,42 +56,26 @@
   </button>
 </div>
 <div class="all-nodes-div">
-  <div *ngFor="let item of items">
+  <div *ngFor="let lesson of lessons">
     <project-authoring-lesson
-      *ngIf="isGroupNode(item.id)"
-      [item]="item"
-      [disableSelection]="stepNodeSelected"
-      (selectNodeEvent)="selectNode()"
-      [showPosition]="true"
-    ></project-authoring-lesson>
-    <project-authoring-step
-      *ngIf="!isGroupNode(item.id)"
-      [item]="item"
-      (selectNodeEvent)="selectNode()"
-      [disableSelection]="groupNodeSelected"
+      [lesson]="lesson"
+      [nodeTypeSelected]="nodeTypeSelected"
+      (selectNodeEvent)="selectNode($event)"
       [showPosition]="true"
       [projectId]="projectId"
-    ></project-authoring-step>
+    ></project-authoring-lesson>
   </div>
   <div>
     <h6 class="unused-header" i18n>Unused Lessons</h6>
     <div *ngIf="inactiveGroupNodes.length === 0" i18n>There are no Unused Lessons</div>
     <div *ngFor="let inactiveGroupNode of inactiveGroupNodes">
       <project-authoring-lesson
-        [item]="inactiveGroupNode"
-        [disableSelection]="stepNodeSelected"
-        (selectNodeEvent)="selectNode()"
+        [lesson]="inactiveGroupNode"
+        [nodeTypeSelected]="nodeTypeSelected"
+        (selectNodeEvent)="selectNode($event)"
         [showPosition]="false"
+        [projectId]="projectId"
       ></project-authoring-lesson>
-      <ng-container *ngFor="let inactiveChildId of inactiveGroupNode.ids">
-        <project-authoring-step
-          [item]="idToNode[inactiveChildId]"
-          (selectNodeEvent)="selectNode()"
-          [disableSelection]="groupNodeSelected"
-          [showPosition]="false"
-          [projectId]="projectId"
-        ></project-authoring-step>
-      </ng-container>
     </div>
     <div>
       <h6 class="unused-header" i18n>Unused Steps</h6>
@@ -99,9 +83,9 @@
       <ng-container *ngFor="let inactiveStepNode of inactiveStepNodes">
         <project-authoring-step
           *ngIf="getParentGroup(inactiveStepNode.id) == null"
-          [item]="inactiveStepNode"
-          (selectNodeEvent)="selectNode()"
-          [disableSelection]="groupNodeSelected"
+          [step]="inactiveStepNode"
+          [nodeTypeSelected]="nodeTypeSelected"
+          (selectNodeEvent)="selectNode($event)"
           [showPosition]="false"
           [projectId]="projectId"
         ></project-authoring-step>

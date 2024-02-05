@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { Router } from '@angular/router';
+import { SelectNodeEvent } from '../domain/select-node-event';
+import { NodeTypeSelected } from '../domain/node-type-selected';
 
 @Component({
   selector: 'project-authoring-step',
@@ -9,11 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./project-authoring-step.component.scss']
 })
 export class ProjectAuthoringStepComponent {
-  @Input() disableSelection: boolean = false;
-  @Input() item: any;
+  checked: boolean = false;
+  @Input() nodeTypeSelected: NodeTypeSelected;
   @Input() projectId: number;
-  @Output() selectNodeEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() selectNodeEvent: EventEmitter<SelectNodeEvent> = new EventEmitter<SelectNodeEvent>();
   @Input() showPosition: boolean;
+  @Input() step: any;
 
   constructor(
     private dataService: TeacherDataService,

@@ -6,6 +6,8 @@ import * as $ from 'jquery';
 import { Subscription } from 'rxjs';
 import { temporarilyHighlightElement } from '../../common/dom/dom';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SelectNodeEvent } from '../domain/select-node-event';
+import { NodeTypeSelected } from '../domain/node-type-selected';
 
 @Component({
   selector: 'project-authoring',
@@ -13,14 +15,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./project-authoring.component.scss']
 })
 export class ProjectAuthoringComponent {
-  protected groupNodeSelected: boolean = false;
-  private idToNode: any;
   protected inactiveGroupNodes: any[];
   private inactiveNodes: any[];
   protected inactiveStepNodes: any[];
   protected items: any;
+  protected lessons: any[] = [];
+  protected nodeIdToChecked: any = {};
+  protected nodeTypeSelected: NodeTypeSelected;
   @Input('unitId') protected projectId?: number;
-  protected stepNodeSelected: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -51,10 +53,10 @@ export class ProjectAuthoringComponent {
     this.projectService.parseProject();
     this.items = this.projectService.getNodesInOrder();
     this.items.shift(); // remove the 'group0' master root node from consideration
+    this.lessons = this.projectService.getOrderedGroupNodes();
     this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
-    this.idToNode = this.projectService.getIdToNode();
     this.unselectAllItems();
   }
 
@@ -90,12 +92,12 @@ export class ProjectAuthoringComponent {
   private getSelectedNodeIds(): string[] {
     const selectedNodeIds = [];
     this.items.forEach((item: any) => {
-      if (item.checked) {
-        selectedNodeIds.push(item.key);
+      if (this.nodeIdToChecked[item.id]) {
+        selectedNodeIds.push(item.id);
       }
     });
     for (const inactiveNode of this.inactiveNodes) {
-      if (inactiveNode.checked) {
+      if (this.nodeIdToChecked[inactiveNode.id]) {
         selectedNodeIds.push(inactiveNode.id);
       }
     }
@@ -112,8 +114,7 @@ export class ProjectAuthoringComponent {
     this.inactiveStepNodes.forEach((inactiveStepNode: any) => {
       inactiveStepNode.checked = false;
     });
-    this.stepNodeSelected = false;
-    this.groupNodeSelected = false;
+    this.setNodeTypeSelected(null);
   }
 
   protected addNewLesson(): void {
@@ -147,16 +148,15 @@ export class ProjectAuthoringComponent {
    * The checkbox for a node was clicked. We do not allow selecting a mix of group and step nodes.
    * If any group nodes are selected, disable all step node checkboxes, and vise-versa.
    */
-  protected selectNode(): void {
-    const checkedNodes = this.items
-      .concat(Object.values(this.idToNode))
-      .filter((item) => item.checked);
+  protected selectNode({ id, checked }: SelectNodeEvent): void {
+    this.nodeIdToChecked[id] = checked;
+    const checkedNodes = Object.entries(this.nodeIdToChecked).filter((entry) => entry[1]);
     if (checkedNodes.length === 0) {
-      this.groupNodeSelected = false;
-      this.stepNodeSelected = false;
+      this.setNodeTypeSelected(null);
     } else {
-      this.groupNodeSelected = this.isGroupNode(checkedNodes[0].id);
-      this.stepNodeSelected = !this.groupNodeSelected;
+      this.setNodeTypeSelected(
+        this.isGroupNode(checkedNodes[0][0]) ? NodeTypeSelected.lesson : NodeTypeSelected.step
+      );
     }
   }
 
@@ -169,5 +169,9 @@ export class ProjectAuthoringComponent {
       this.hasSelectedNodes() &&
       this.getSelectedNodeIds().every((nodeId) => this.projectService.isApplicationNode(nodeId))
     );
+  }
+
+  protected setNodeTypeSelected(nodeType: NodeTypeSelected): void {
+    this.nodeTypeSelected = nodeType;
   }
 }
