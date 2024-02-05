@@ -13,8 +13,6 @@
               <button
                 mat-button
                 class="table--list__thead__link"
-                aria-label="Team ID"
-                i18n-aria-label
                 (click)="setSort('team')"
                 title="Sort by team"
                 i18n-title
@@ -32,19 +30,17 @@
                 </mat-icon>
               </button>
             </th>
-            <th class="table--list__thead__th" sticky>
+            <th *ngIf="!permissions.canViewStudentNames" class="table--list__thead__th" sticky>
               <button
                 mat-button
                 class="table--list__thead__link"
-                aria-label="Names"
-                i18n-aria-label
                 (click)="setSort('student')"
-                title="Sort by names"
+                title="Sort by student"
                 i18n-title
                 fxFill
                 fxLayoutAlign="start center"
               >
-                <span i18n>Names</span>
+                <span i18n>Student</span>
                 <mat-icon
                   *ngIf="sort === 'student' || sort === '-student'"
                   class="table--list__thead__sort"
@@ -54,12 +50,52 @@
                 </mat-icon>
               </button>
             </th>
+            <ng-container *ngIf="permissions.canViewStudentNames">
+              <th class="table--list__thead__th" sticky>
+                <button
+                  mat-button
+                  class="table--list__thead__link"
+                  (click)="setSort('firstName')"
+                  title="Sort by first name"
+                  i18n-title
+                  fxFill
+                  fxLayoutAlign="start center"
+                >
+                  <span i18n>First Name</span>
+                  <mat-icon
+                    *ngIf="sort === 'firstName' || sort === '-firstName'"
+                    class="table--list__thead__sort"
+                    [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-firstName' }"
+                  >
+                    arrow_drop_up
+                  </mat-icon>
+                </button>
+              </th>
+              <th class="table--list__thead__th" sticky>
+                <button
+                  mat-button
+                  class="table--list__thead__link"
+                  (click)="setSort('lastName')"
+                  title="Sort by last name"
+                  i18n-title
+                  fxFill
+                  fxLayoutAlign="start center"
+                >
+                  <span i18n>Last Name</span>
+                  <mat-icon
+                    *ngIf="sort === 'lastName' || sort === '-lastName'"
+                    class="table--list__thead__sort"
+                    [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-lastName' }"
+                  >
+                    arrow_drop_up
+                  </mat-icon>
+                </button>
+              </th>
+            </ng-container>
             <th class="table--list__thead__th" sticky>
               <button
                 mat-button
                 class="table--list__thead__link"
-                aria-label="Current Location"
-                i18n-aria-label
                 (click)="setSort('location')"
                 title="Sort by location"
                 i18n-title
@@ -81,8 +117,6 @@
               <button
                 mat-button
                 class="table--list__thead__link"
-                aria-label="Project Completion"
-                i18n-aria-label
                 (click)="setSort('completion')"
                 title="Sort by completion"
                 i18n-title
@@ -104,8 +138,6 @@
               <button
                 mat-button
                 class="table--list__thead__link"
-                aria-label="Score"
-                i18n-aria-label
                 (click)="setSort('score')"
                 title="Sort by score"
                 i18n-title
@@ -126,24 +158,32 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let team of sortedTeams">
+          <ng-container *ngFor="let student of sortedStudents">
             <tr
               class="list-item workgroup-row button"
-              *ngIf="isWorkgroupShown(team)"
-              (click)="showStudentGradingView(team)"
+              *ngIf="isWorkgroupShown(student)"
+              (click)="showStudentGradingView(student)"
             >
-              <td class="center">{{ team.workgroupId }}</td>
-              <td class="heavy td--wrap">
-                <div fxLayout="row wrap">{{ team.username }}</div>
+              <td class="center">{{ student.workgroupId }}</td>
+              <td *ngIf="!permissions.canViewStudentNames" class="heavy td--wrap">
+                {{ student.username }}
               </td>
+              <ng-container *ngIf="permissions.canViewStudentNames">
+                <td class="heavy td--max-width">
+                  {{ student.firstName }}
+                </td>
+                <td class="heavy td--max-width">
+                  {{ student.lastName }}
+                </td>
+              </ng-container>
               <td class="center td--wrap td--max-width">
-                {{ team.location }}
+                {{ student.location }}
               </td>
               <td fxLayout="row" fxLayoutAlign="center center">
                 <project-progress
-                  [completed]="team.completion.completedItems"
-                  [total]="team.completion.totalItems"
-                  [percent]="team.completion.completionPct"
+                  [completed]="student.completion.completedItems"
+                  [total]="student.completion.totalItems"
+                  [percent]="student.completion.completionPct"
                 >
                 </project-progress>
               </td>
@@ -153,9 +193,9 @@
                   fxLayoutAlign="center center"
                   class="layout-align-center-center layout-row"
                 >
-                  <span class="mat-headline-5">{{ team.score }}</span
+                  <span class="mat-headline-5">{{ student.score }}</span
                   >&nbsp;
-                  <span class="text-secondary mat-body-2">/{{ team.maxScore }}</span>
+                  <span class="text-secondary mat-body-2">/{{ student.maxScore }}</span>
                 </div>
               </td>
             </tr>
