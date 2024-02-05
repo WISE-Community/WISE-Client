@@ -1,41 +1,30 @@
 import { Component } from '../../common/Component';
+import { ComputerAvatarComponent } from '../../common/computer-avatar-component';
+import { applyMixins } from '../../common/apply-mixins';
 import { FeedbackRule } from '../common/feedbackRule/FeedbackRule';
 import { DialogGuidanceContent } from './DialogGuidanceContent';
 
-export class DialogGuidanceComponent extends Component {
+export interface DialogGuidanceComponent {
+  isComputerAvatarEnabled(): boolean;
+  isComputerAvatarPromptAvailable(): boolean;
+  isOnlyOneComputerAvatarAvailable(): boolean;
+  isUseGlobalComputerAvatar(): boolean;
+  getComputerAvatarInitialResponse(): string;
+}
+
+export class DialogGuidanceComponent extends Component implements ComputerAvatarComponent {
   content: DialogGuidanceContent;
 
   getFeedbackRules(): FeedbackRule[] {
     return this.content.feedbackRules;
   }
 
-  getComputerAvatarInitialResponse(): string {
-    return this.content.computerAvatarSettings.initialResponse;
-  }
-
-  isComputerAvatarEnabled(): boolean {
-    return this.content.isComputerAvatarEnabled;
-  }
-
   getItemId(): string {
     return this.content.itemId;
   }
 
-  isComputerAvatarPromptAvailable(): boolean {
-    const computerAvatarPrompt = this.content.computerAvatarSettings.prompt;
-    return computerAvatarPrompt != null && computerAvatarPrompt !== '';
-  }
-
   isMultipleFeedbackTextsForSameRuleAllowed(): boolean {
     return !this.isVersion1();
-  }
-
-  isOnlyOneComputerAvatarAvailable(): boolean {
-    return this.content.computerAvatarSettings.ids.length === 1;
-  }
-
-  isUseGlobalComputerAvatar(): boolean {
-    return this.content.computerAvatarSettings.useGlobalComputerAvatar;
   }
 
   isVersion1(): boolean {
@@ -46,3 +35,5 @@ export class DialogGuidanceComponent extends Component {
     return this.content.version === 2;
   }
 }
+
+applyMixins(DialogGuidanceComponent, [ComputerAvatarComponent]);

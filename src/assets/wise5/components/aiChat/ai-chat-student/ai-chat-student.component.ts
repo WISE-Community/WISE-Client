@@ -13,8 +13,14 @@ import { AiChatService } from '../aiChatService';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AiChatComponent } from '../AiChatComponent';
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
+import { applyMixins } from '../../../common/apply-mixins';
+import { ComputerAvatarMixin } from '../../../common/computer-avatar.mixin';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
+
+export interface AiChatStudentComponent {
+  initializeComputerAvatar: () => void;
+}
 
 @Component({
   selector: 'ai-chat-student',
@@ -58,87 +64,17 @@ export class AiChatStudentComponent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    if (this.component.isComputerAvatarEnabled()) {
-      this.initializeComputerAvatar();
-    } else {
-      this.computerAvatar = this.computerAvatarService.getDefaultAvatar();
-    }
+    this.initializeComputerAvatar();
     if (this.componentState != null) {
       this.messages = this.componentState.studentData.messages;
     }
     this.initializeMessages();
   }
 
-  private initializeComputerAvatar(): void {
-    this.tryToRepopulateComputerAvatar();
-    if (this.hasStudentPreviouslyChosenComputerAvatar()) {
-      this.hideComputerAvatarSelector();
-    } else if (
-      this.component.isOnlyOneComputerAvatarAvailable() &&
-      !this.component.isComputerAvatarPromptAvailable()
-    ) {
-      this.selectComputerAvatar(this.getFirstComputerAvatar());
-    } else {
-      this.showComputerAvatarSelector();
-    }
-  }
-
-  private tryToRepopulateComputerAvatar(): void {
-    if (this.includesComputerAvatar(this.componentState)) {
-      this.repopulateComputerAvatarFromComponentState(this.componentState);
-    } else if (
-      this.component.isUseGlobalComputerAvatar() &&
-      this.studentStatusService.isGlobalComputerAvatarAvailable()
-    ) {
-      this.repopulateGlobalComputerAvatar();
-    }
-  }
-
-  private includesComputerAvatar(componentState: any): boolean {
-    return componentState?.studentData?.computerAvatarId != null;
-  }
-
-  private repopulateComputerAvatarFromComponentState(componentState: any): void {
-    this.computerAvatar = this.computerAvatarService.getAvatar(
-      componentState?.studentData?.computerAvatarId
+  showInitialMessage(): void {
+    this.messages.push(
+      new AiChatMessage('assistant', this.component.getComputerAvatarInitialResponse())
     );
-  }
-
-  private repopulateGlobalComputerAvatar(): void {
-    const computerAvatarId = this.studentStatusService.getComputerAvatarId();
-    if (computerAvatarId != null) {
-      this.selectComputerAvatar(this.computerAvatarService.getAvatar(computerAvatarId));
-    }
-  }
-
-  private hasStudentPreviouslyChosenComputerAvatar(): boolean {
-    return this.computerAvatar != null;
-  }
-
-  private getFirstComputerAvatar(): ComputerAvatar {
-    return this.computerAvatarService.getAvatar(
-      this.component.content.computerAvatarSettings.ids[0]
-    );
-  }
-
-  private showComputerAvatarSelector(): void {
-    this.computerAvatarSelectorVisible = true;
-  }
-
-  private hideComputerAvatarSelector(): void {
-    this.computerAvatarSelectorVisible = false;
-  }
-
-  protected selectComputerAvatar(computerAvatar: ComputerAvatar): void {
-    this.computerAvatar = computerAvatar;
-    if (this.component.isUseGlobalComputerAvatar()) {
-      this.studentStatusService.setComputerAvatarId(computerAvatar.id);
-    }
-    this.hideComputerAvatarSelector();
-    const computerAvatarInitialResponse = this.component.getComputerAvatarInitialResponse();
-    if (computerAvatarInitialResponse != null && computerAvatarInitialResponse !== '') {
-      this.messages.push(new AiChatMessage('assistant', computerAvatarInitialResponse));
-    }
   }
 
   private initializeMessages(): void {
@@ -186,3 +122,5 @@ export class AiChatStudentComponent extends ComponentStudent {
     return promise;
   }
 }
+
+applyMixins(AiChatStudentComponent, [ComputerAvatarMixin]);

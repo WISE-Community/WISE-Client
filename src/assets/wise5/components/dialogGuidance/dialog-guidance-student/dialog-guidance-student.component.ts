@@ -27,6 +27,13 @@ import { DialogGuidanceComponent } from '../DialogGuidanceComponent';
 import { copy } from '../../../common/object/object';
 import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 import { ConstraintService } from '../../../services/constraintService';
+import { applyMixins } from '../../../common/apply-mixins';
+import { ComputerAvatarMixin } from '../../../common/computer-avatar.mixin';
+
+export interface DialogGuidanceStudentComponent {
+  initializeComputerAvatar: () => void;
+  selectComputerAvatar: (computerAvatar: ComputerAvatar) => void;
+}
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -36,9 +43,9 @@ import { ConstraintService } from '../../../services/constraintService';
 export class DialogGuidanceStudentComponent extends ComponentStudent {
   component: DialogGuidanceComponent;
   computerAvatar: ComputerAvatar;
+  protected computerAvatarSelectorVisible: boolean = false;
   cRaterTimeout: number = 40000;
   feedbackRuleEvaluator: FeedbackRuleEvaluator<CRaterResponse[]>;
-  isShowComputerAvatarSelector: boolean = false;
   isWaitingForComputerResponse: boolean = false;
   responses: DialogResponse[] = [];
   studentCanRespond: boolean = true;
@@ -90,90 +97,18 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       this.configService,
       this.constraintService
     );
-    if (this.component.isComputerAvatarEnabled()) {
-      this.initializeComputerAvatar();
-    } else {
-      this.computerAvatar = this.computerAvatarService.getDefaultAvatar();
-    }
+    this.initializeComputerAvatar();
   }
 
-  initializeComputerAvatar(): void {
-    this.tryToRepopulateComputerAvatar();
-    if (this.hasStudentPreviouslyChosenComputerAvatar()) {
-      this.hideComputerAvatarSelector();
-    } else if (
-      this.component.isOnlyOneComputerAvatarAvailable() &&
-      !this.component.isComputerAvatarPromptAvailable()
-    ) {
-      this.hideComputerAvatarSelector();
-      this.selectComputerAvatar(this.getTheOnlyComputerAvatarAvailable());
-    } else {
-      this.showComputerAvatarSelector();
-    }
-  }
-
-  private tryToRepopulateComputerAvatar(): void {
-    if (this.includesComputerAvatar(this.componentState)) {
-      this.repopulateComputerAvatarFromComponentState(this.componentState);
-    } else if (
-      this.component.isUseGlobalComputerAvatar() &&
-      this.isGlobalComputerAvatarAvailable()
-    ) {
-      this.repopulateGlobalComputerAvatar();
-    }
-  }
-
-  private includesComputerAvatar(componentState: any): boolean {
-    return componentState?.studentData?.computerAvatarId != null;
-  }
-
-  private isGlobalComputerAvatarAvailable(): boolean {
-    return this.studentStatusService.getComputerAvatarId() != null;
-  }
-
-  private repopulateComputerAvatarFromComponentState(componentState: any): void {
-    this.computerAvatar = this.computerAvatarService.getAvatar(
-      componentState?.studentData?.computerAvatarId
+  showInitialMessage(): void {
+    this.addDialogResponse(
+      new ComputerDialogResponse(
+        this.component.getComputerAvatarInitialResponse(),
+        [],
+        new Date().getTime(),
+        true
+      )
     );
-  }
-
-  private repopulateGlobalComputerAvatar(): void {
-    const computerAvatarId = this.studentStatusService.getComputerAvatarId();
-    if (computerAvatarId != null) {
-      this.selectComputerAvatar(this.computerAvatarService.getAvatar(computerAvatarId));
-    }
-  }
-
-  private hasStudentPreviouslyChosenComputerAvatar(): boolean {
-    return this.computerAvatar != null;
-  }
-
-  private getTheOnlyComputerAvatarAvailable(): ComputerAvatar {
-    return this.computerAvatarService.getAvatar(
-      this.component.content.computerAvatarSettings.ids[0]
-    );
-  }
-
-  private showComputerAvatarSelector(): void {
-    this.isShowComputerAvatarSelector = true;
-  }
-
-  private hideComputerAvatarSelector(): void {
-    this.isShowComputerAvatarSelector = false;
-  }
-
-  selectComputerAvatar(computerAvatar: ComputerAvatar): void {
-    this.computerAvatar = computerAvatar;
-    if (this.component.isUseGlobalComputerAvatar()) {
-      this.studentStatusService.setComputerAvatarId(computerAvatar.id);
-    }
-    this.hideComputerAvatarSelector();
-    const computerAvatarInitialResponse = this.component.getComputerAvatarInitialResponse();
-    if (computerAvatarInitialResponse != null && computerAvatarInitialResponse !== '') {
-      this.addDialogResponse(
-        new ComputerDialogResponse(computerAvatarInitialResponse, [], new Date().getTime(), true)
-      );
-    }
   }
 
   protected submitStudentResponse(response: string): void {
@@ -296,3 +231,5 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     return promise;
   }
 }
+
+applyMixins(DialogGuidanceStudentComponent, [ComputerAvatarMixin]);

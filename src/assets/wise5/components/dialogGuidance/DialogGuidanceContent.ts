@@ -1,11 +1,9 @@
 import { ComponentContent } from '../../common/ComponentContent';
+import { ComputerAvatarComponentContent } from '../../common/computer-avatar-component-content';
 import { FeedbackRule } from '../common/feedbackRule/FeedbackRule';
-import { ComputerAvatarSettings } from './ComputerAvatarSettings';
 
-export interface DialogGuidanceContent extends ComponentContent {
-  computerAvatarSettings?: ComputerAvatarSettings;
+export interface DialogGuidanceContent extends ComponentContent, ComputerAvatarComponentContent {
   feedbackRules: FeedbackRule[];
-  isComputerAvatarEnabled?: boolean;
   itemId: string;
   version?: number;
 }
