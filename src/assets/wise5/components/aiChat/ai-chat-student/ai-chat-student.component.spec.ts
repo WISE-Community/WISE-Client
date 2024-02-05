@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ProjectService } from '../../../services/projectService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
 
 describe('AiChatStudentComponent', () => {
   let component: AiChatStudentComponent;
@@ -32,6 +33,7 @@ describe('AiChatStudentComponent', () => {
       imports: [
         AiChatModule,
         BrowserAnimationsModule,
+        ChatInputComponent,
         FormsModule,
         HttpClientTestingModule,
         MatCardModule,
