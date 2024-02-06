@@ -1,11 +1,10 @@
-import { Component, ContentChild, ElementRef, Input, Signal, computed } from '@angular/core';
+import { Component, Input, Output, Signal, computed } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EditProjectTranslationService } from '../../../services/editProjectTranslationService';
 import { CommonModule } from '@angular/common';
-import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { TranslateProjectService } from '../../../services/translateProjectService';
-import { MatLabel } from '@angular/material/form-field';
 import { Language } from '../../../../../app/domain/language';
 import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 
@@ -20,11 +19,12 @@ import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs'
 export class TranslatableInputComponent {
   @Input() content: object;
   protected currentLanguage: Signal<Language>;
-  @ContentChild(MatInput) defaultLanguageInput: MatInput;
-  @ContentChild(MatLabel, { read: ElementRef }) defaultLanguageLabelRef: ElementRef;
   protected defaultLanguageText: Signal<string>;
+  @Output() defaultLanguageTextChanged: Subject<string> = new Subject<string>();
   private i18nId: string;
   @Input() key: string;
+  @Input() label: string;
+  @Input() placeholder: string;
   protected showTranslationInput: Signal<boolean>;
   protected translationText: Signal<string>;
   protected translationTextChanged: Subject<string> = new Subject<string>();
@@ -60,7 +60,7 @@ export class TranslatableInputComponent {
       });
   }
 
-  ngOnDestory(): void {
+  ngOnDestroy(): void {
     this.translationTextChangedSubscription.unsubscribe();
   }
 

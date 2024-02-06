@@ -63,18 +63,16 @@
     fxLayout="row"
     fxLayoutAlign="start center"
   >
-    <translatable-input [content]="choice" key="value" class="name">
-      <mat-form-field>
-        <mat-label i18n>Choice Name</mat-label>
-        <input
-          matInput
-          [(ngModel)]="choice.value"
-          (ngModelChange)="inputChange.next($event)"
-          placeholder="Type text or choose an image"
-          i18n-placeholder
-        />
-      </mat-form-field>
-    </translatable-input>
+    <translatable-input
+      [content]="choice"
+      key="value"
+      label="Choice Name"
+      i18n-label
+      placeholder="Type text or choose an image"
+      i18n-placeholder
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+      class="name"
+    />
     <button
       mat-raised-button
       color="primary"
@@ -132,16 +130,13 @@
   </div>
 </div>
 <div class="section">
-  <translatable-input [content]="componentContent" key="choicesLabel" class="name">
-    <mat-form-field>
-      <mat-label i18n>Source Bucket Name</mat-label>
-      <input
-        matInput
-        [(ngModel)]="componentContent.choicesLabel"
-        (ngModelChange)="inputChange.next($event)"
-      />
-    </mat-form-field>
-  </translatable-input>
+  <translatable-input
+    [content]="componentContent"
+    key="choicesLabel"
+    label="Source Bucket Name"
+    i18n-label
+    (defaultLanguageTextChanged)="inputChange.next($event)"
+    class="name"/>
   <br />
   <span i18n>Target Buckets</span>
   <button
