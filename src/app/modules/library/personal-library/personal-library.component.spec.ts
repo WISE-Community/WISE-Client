@@ -81,7 +81,7 @@ describe('PersonalLibraryComponent', () => {
   allProjectsSelected_clickSelectAllProjects_unselectsAllProjects();
   projectsAreSelected_goToArchivedView_projectsAreUnselected();
   projectsAreSelected_goToNextPage_projectsAreUnselected();
-  projectsAreSelected_performSearch_projectsNotMatchingSearchAreUnselected();
+  projectsAreSelected_performSearch_allProjectsAreUnselected();
 });
 
 function setUpFiveProjects() {
@@ -248,10 +248,10 @@ function projectsAreSelected_goToNextPage_projectsAreUnselected() {
   });
 }
 
-function projectsAreSelected_performSearch_projectsNotMatchingSearchAreUnselected() {
+function projectsAreSelected_performSearch_allProjectsAreUnselected() {
   describe('projects are selected', () => {
     describe('perform search', () => {
-      it('projects that do not match search are unselected', async () => {
+      it('unselects all projects', async () => {
         await (await harness.getSelectAllCheckbox()).check();
         expect(await harness.getSelectedProjectIds()).toEqual([projectId5, projectId4, projectId3]);
         component.filterUpdated({
@@ -260,7 +260,7 @@ function projectsAreSelected_performSearch_projectsNotMatchingSearchAreUnselecte
           disciplineValue: [],
           peValue: []
         });
-        expect(await harness.getSelectedProjectIds()).toEqual([projectId4, projectId3]);
+        expect(await harness.getSelectedProjectIds()).toEqual([]);
       });
     });
   });
