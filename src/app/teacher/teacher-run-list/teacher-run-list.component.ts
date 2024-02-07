@@ -143,6 +143,7 @@ export class TeacherRunListComponent implements OnInit {
   private performSearchAndFilter(): void {
     this.filteredRuns = this.searchValue ? this.performSearch(this.searchValue) : this.runs;
     this.performFilter();
+    this.unselectAllRuns();
     this.runSelectedStatusChanged();
   }
 
