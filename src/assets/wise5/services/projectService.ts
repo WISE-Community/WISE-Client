@@ -105,6 +105,12 @@ export class ProjectService {
     return this.groupNodes;
   }
 
+  getOrderedGroupNodes(): any[] {
+    return this.groupNodes
+      .filter((groupNode) => groupNode.id !== 'group0')
+      .sort((a, b) => this.idToOrder[a.id].order - this.idToOrder[b.id].order);
+  }
+
   addNode(node: any): void {
     const existingNodes = this.project.nodes;
     let replaced = false;

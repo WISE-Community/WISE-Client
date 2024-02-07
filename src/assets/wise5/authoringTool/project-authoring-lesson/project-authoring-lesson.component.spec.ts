@@ -37,7 +37,7 @@ describe('ProjectAuthoringLessonComponent', () => {
     });
     fixture = TestBed.createComponent(ProjectAuthoringLessonComponent);
     component = fixture.componentInstance;
-    component.item = {};
+    component.lesson = {};
     fixture.detectChanges();
   });
 

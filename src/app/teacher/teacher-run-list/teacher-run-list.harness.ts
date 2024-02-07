@@ -9,6 +9,7 @@ export class TeacherRunListHarness extends ComponentHarness {
   private ARCHIVED_TEXT = 'Archived';
   protected getNoRunsMessageDiv = this.locatorFor('.no-runs-message');
   protected getRunListItems = this.locatorForAll(TeacherRunListItemHarness);
+  getSearchInput = this.locatorFor('.search-bar input');
   protected getSelectRunsControls = this.locatorFor(SelectRunsControlsHarness);
   protected getViewSelect = this.locatorFor(MatSelectHarness);
 
