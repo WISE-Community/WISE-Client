@@ -39,18 +39,16 @@
   class="choice-container"
 >
   <div fxLayout="row wrap" fxLayoutAlign="start center">
-    <translatable-input [content]="choice" key="text" class="choice-text-input-container">
-      <mat-form-field>
-        <mat-label i18n>Choice Text</mat-label>
-        <input
-          matInput
-          [(ngModel)]="choice.text"
-          (ngModelChange)="choiceTextChange.next($event)"
-          i18n-placeholder
-          placeholder="Type text or choose an image"
-        />
-      </mat-form-field>
-    </translatable-input>
+    <translatable-input
+      [content]="choice"
+      key="text"
+      label="Choice Text"
+      i18n-label
+      placeholder="Type text or choose an image"
+      i18n-placeholder
+      (defaultLanguageTextChanged)="choiceTextChange.next($event)"
+      class="choice-text-input-container"
+    />
     <button
       mat-raised-button
       color="primary"
@@ -78,18 +76,16 @@
     </div>
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="start center">
-    <translatable-input [content]="choice" key="feedback" class="choice-feedback-input-container">
-      <mat-form-field>
-        <mat-label i18n>Feeback</mat-label>
-        <input
-          matInput
-          [(ngModel)]="choice.feedback"
-          (ngModelChange)="feedbackTextChange.next($event)"
-          i18n-placeholder
-          placeholder="Optional"
-        />
-      </mat-form-field>
-    </translatable-input>
+    <translatable-input
+      [content]="choice"
+      key="feedback"
+      label="Feedback"
+      i18n-label
+      placeholder="Optional"
+      i18n-placeholder
+      (defaultLanguageTextChanged)="feedbackTextChange.next($event)"
+      class="choice-feedback-input-container"
+    />
     <button
       mat-raised-button
       color="primary"
