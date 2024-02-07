@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Signal } from '@angular/core';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
@@ -6,6 +6,8 @@ import * as $ from 'jquery';
 import { Subscription } from 'rxjs';
 import { temporarilyHighlightElement } from '../../common/dom/dom';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SelectNodeEvent } from '../domain/select-node-event';
+import { NodeTypeSelected } from '../domain/node-type-selected';
 
 @Component({
   selector: 'project-authoring',
@@ -13,14 +15,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./project-authoring.component.scss']
 })
 export class ProjectAuthoringComponent {
-  protected groupNodeSelected: boolean = false;
-  private idToNode: any;
   protected inactiveGroupNodes: any[];
   private inactiveNodes: any[];
   protected inactiveStepNodes: any[];
   protected items: any;
+  protected lessons: any[] = [];
+  protected nodeIdToChecked: any = {};
+  protected nodeTypeSelected: Signal<NodeTypeSelected>;
   @Input('unitId') protected projectId?: number;
-  protected stepNodeSelected: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -36,6 +38,7 @@ export class ProjectAuthoringComponent {
     this.refreshProject();
     this.dataService.setCurrentNode(null);
     this.temporarilyHighlightNewNodes(history.state.newNodes);
+    this.nodeTypeSelected = this.projectService.getNodeTypeSelected();
     this.subscriptions.add(
       this.projectService.refreshProject$.subscribe(() => {
         this.refreshProject();
@@ -51,15 +54,11 @@ export class ProjectAuthoringComponent {
     this.projectService.parseProject();
     this.items = this.projectService.getNodesInOrder();
     this.items.shift(); // remove the 'group0' master root node from consideration
+    this.lessons = this.projectService.getOrderedGroupNodes();
     this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
-    this.idToNode = this.projectService.getIdToNode();
     this.unselectAllItems();
-  }
-
-  protected isGroupNode(nodeId: string): boolean {
-    return this.projectService.isGroupNode(nodeId);
   }
 
   protected nodeClicked(nodeId: string): void {
@@ -90,12 +89,12 @@ export class ProjectAuthoringComponent {
   private getSelectedNodeIds(): string[] {
     const selectedNodeIds = [];
     this.items.forEach((item: any) => {
-      if (item.checked) {
-        selectedNodeIds.push(item.key);
+      if (this.nodeIdToChecked[item.id]) {
+        selectedNodeIds.push(item.id);
       }
     });
     for (const inactiveNode of this.inactiveNodes) {
-      if (inactiveNode.checked) {
+      if (this.nodeIdToChecked[inactiveNode.id]) {
         selectedNodeIds.push(inactiveNode.id);
       }
     }
@@ -112,8 +111,7 @@ export class ProjectAuthoringComponent {
     this.inactiveStepNodes.forEach((inactiveStepNode: any) => {
       inactiveStepNode.checked = false;
     });
-    this.stepNodeSelected = false;
-    this.groupNodeSelected = false;
+    this.projectService.setNodeTypeSelected(null);
   }
 
   protected addNewLesson(): void {
@@ -147,17 +145,8 @@ export class ProjectAuthoringComponent {
    * The checkbox for a node was clicked. We do not allow selecting a mix of group and step nodes.
    * If any group nodes are selected, disable all step node checkboxes, and vise-versa.
    */
-  protected selectNode(): void {
-    const checkedNodes = this.items
-      .concat(Object.values(this.idToNode))
-      .filter((item) => item.checked);
-    if (checkedNodes.length === 0) {
-      this.groupNodeSelected = false;
-      this.stepNodeSelected = false;
-    } else {
-      this.groupNodeSelected = this.isGroupNode(checkedNodes[0].id);
-      this.stepNodeSelected = !this.groupNodeSelected;
-    }
+  protected selectNode({ id, checked }: SelectNodeEvent): void {
+    this.nodeIdToChecked[id] = checked;
   }
 
   protected hasSelectedNodes(): boolean {

@@ -40,7 +40,7 @@ describe('ProjectAuthoringStepComponent', () => {
     });
     fixture = TestBed.createComponent(ProjectAuthoringStepComponent);
     component = fixture.componentInstance;
-    component.item = node;
+    component.step = node;
     const idToNode = {};
     idToNode[nodeId1] = node;
     TestBed.inject(TeacherProjectService).idToNode = idToNode;

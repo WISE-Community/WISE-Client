@@ -1,6 +1,6 @@
 'use strict';
 import { ProjectService } from './projectService';
-import { Injectable } from '@angular/core';
+import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { BranchService } from './branchService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
@@ -11,6 +11,7 @@ import { copy } from '../common/object/object';
 import { generateRandomKey } from '../common/string/string';
 import { branchPathBackgroundColors } from '../common/color/color';
 import { reduceByUniqueId } from '../common/array/array';
+import { NodeTypeSelected } from '../authoringTool/domain/node-type-selected';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -22,6 +23,7 @@ export class TeacherProjectService extends ProjectService {
   public refreshProject$ = this.refreshProjectSource.asObservable();
   private errorSavingProjectSource: Subject<void> = new Subject<void>();
   public errorSavingProject$: Observable<void> = this.errorSavingProjectSource.asObservable();
+  private nodeTypeSelected: WritableSignal<NodeTypeSelected> = signal(null);
   private notAllowedToEditThisProjectSource: Subject<void> = new Subject<void>();
   public notAllowedToEditThisProject$: Observable<void> = this.notAllowedToEditThisProjectSource.asObservable();
   private projectSavedSource: Subject<void> = new Subject<void>();
@@ -3086,5 +3088,13 @@ export class TeacherProjectService extends ProjectService {
       .sort((a: any, b: any) => {
         return a.order - b.order;
       });
+  }
+
+  setNodeTypeSelected(nodeTypeSelected: NodeTypeSelected): void {
+    this.nodeTypeSelected.set(nodeTypeSelected);
+  }
+
+  getNodeTypeSelected(): Signal<NodeTypeSelected> {
+    return this.nodeTypeSelected.asReadonly();
   }
 }
