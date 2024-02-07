@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Signal } from '@angular/core';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
@@ -21,7 +21,7 @@ export class ProjectAuthoringComponent {
   protected items: any;
   protected lessons: any[] = [];
   protected nodeIdToChecked: any = {};
-  protected nodeTypeSelected: NodeTypeSelected;
+  protected nodeTypeSelected: Signal<NodeTypeSelected>;
   @Input('unitId') protected projectId?: number;
   private subscriptions: Subscription = new Subscription();
 
@@ -38,6 +38,7 @@ export class ProjectAuthoringComponent {
     this.refreshProject();
     this.dataService.setCurrentNode(null);
     this.temporarilyHighlightNewNodes(history.state.newNodes);
+    this.nodeTypeSelected = this.projectService.getNodeTypeSelected();
     this.subscriptions.add(
       this.projectService.refreshProject$.subscribe(() => {
         this.refreshProject();
@@ -58,10 +59,6 @@ export class ProjectAuthoringComponent {
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
     this.unselectAllItems();
-  }
-
-  protected isGroupNode(nodeId: string): boolean {
-    return this.projectService.isGroupNode(nodeId);
   }
 
   protected nodeClicked(nodeId: string): void {
@@ -114,7 +111,7 @@ export class ProjectAuthoringComponent {
     this.inactiveStepNodes.forEach((inactiveStepNode: any) => {
       inactiveStepNode.checked = false;
     });
-    this.setNodeTypeSelected(null);
+    this.projectService.setNodeTypeSelected(null);
   }
 
   protected addNewLesson(): void {
@@ -150,14 +147,6 @@ export class ProjectAuthoringComponent {
    */
   protected selectNode({ id, checked }: SelectNodeEvent): void {
     this.nodeIdToChecked[id] = checked;
-    const checkedNodes = Object.entries(this.nodeIdToChecked).filter((entry) => entry[1]);
-    if (checkedNodes.length === 0) {
-      this.setNodeTypeSelected(null);
-    } else {
-      this.setNodeTypeSelected(
-        this.isGroupNode(checkedNodes[0][0]) ? NodeTypeSelected.lesson : NodeTypeSelected.step
-      );
-    }
   }
 
   protected hasSelectedNodes(): boolean {
@@ -169,9 +158,5 @@ export class ProjectAuthoringComponent {
       this.hasSelectedNodes() &&
       this.getSelectedNodeIds().every((nodeId) => this.projectService.isApplicationNode(nodeId))
     );
-  }
-
-  protected setNodeTypeSelected(nodeType: NodeTypeSelected): void {
-    this.nodeTypeSelected = nodeType;
   }
 }

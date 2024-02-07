@@ -3,7 +3,7 @@
     mat-raised-button
     color="primary"
     (click)="addNewLesson()"
-    [disabled]="nodeTypeSelected != null"
+    [disabled]="nodeTypeSelected() != null"
     matTooltip="Add New Lesson"
     matTooltipPosition="above"
     i18n-matTooltip
@@ -14,7 +14,7 @@
     mat-raised-button
     color="primary"
     (click)="addNewStep()"
-    [disabled]="nodeTypeSelected != null"
+    [disabled]="nodeTypeSelected() != null"
     matTooltip="Add New Step"
     matTooltipPosition="above"
     i18n-matTooltip
@@ -59,7 +59,6 @@
   <div *ngFor="let lesson of lessons">
     <project-authoring-lesson
       [lesson]="lesson"
-      [nodeTypeSelected]="nodeTypeSelected"
       (selectNodeEvent)="selectNode($event)"
       [showPosition]="true"
       [projectId]="projectId"
@@ -71,7 +70,6 @@
     <div *ngFor="let inactiveGroupNode of inactiveGroupNodes">
       <project-authoring-lesson
         [lesson]="inactiveGroupNode"
-        [nodeTypeSelected]="nodeTypeSelected"
         (selectNodeEvent)="selectNode($event)"
         [showPosition]="false"
         [projectId]="projectId"
@@ -84,7 +82,6 @@
         <project-authoring-step
           *ngIf="getParentGroup(inactiveStepNode.id) == null"
           [step]="inactiveStepNode"
-          [nodeTypeSelected]="nodeTypeSelected"
           (selectNodeEvent)="selectNode($event)"
           [showPosition]="false"
           [projectId]="projectId"

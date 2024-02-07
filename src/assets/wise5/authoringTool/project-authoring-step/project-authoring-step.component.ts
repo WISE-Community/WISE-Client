@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Signal } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { Router } from '@angular/router';
@@ -11,8 +11,7 @@ import { NodeTypeSelected } from '../domain/node-type-selected';
   styleUrls: ['./project-authoring-step.component.scss']
 })
 export class ProjectAuthoringStepComponent {
-  checked: boolean = false;
-  @Input() nodeTypeSelected: NodeTypeSelected;
+  protected nodeTypeSelected: Signal<NodeTypeSelected>;
   @Input() projectId: number;
   @Output() selectNodeEvent: EventEmitter<SelectNodeEvent> = new EventEmitter<SelectNodeEvent>();
   @Input() showPosition: boolean;
@@ -23,6 +22,15 @@ export class ProjectAuthoringStepComponent {
     private projectService: TeacherProjectService,
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.nodeTypeSelected = this.projectService.getNodeTypeSelected();
+  }
+
+  protected selectNode(checked: boolean): void {
+    this.projectService.setNodeTypeSelected(checked ? NodeTypeSelected.step : null);
+    this.selectNodeEvent.emit({ id: this.step.id, checked: checked });
+  }
 
   protected isNodeInAnyBranchPath(nodeId: string): boolean {
     return this.projectService.isNodeInAnyBranchPath(nodeId);

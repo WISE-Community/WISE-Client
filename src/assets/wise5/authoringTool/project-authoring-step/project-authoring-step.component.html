@@ -7,9 +7,8 @@
 >
   <mat-checkbox
     color="primary"
-    [(ngModel)]="checked"
-    (click)="selectNodeEvent.emit({ id: step.id, checked: checked })"
-    [disabled]="nodeTypeSelected === 'lesson'"
+    (change)="selectNode($event.checked)"
+    [disabled]="nodeTypeSelected() === 'lesson'"
     aria-label="Select step"
     i18n-aria-label
   >
