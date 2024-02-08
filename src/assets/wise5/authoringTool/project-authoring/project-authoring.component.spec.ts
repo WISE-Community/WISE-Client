@@ -19,28 +19,48 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import * as demoProjectJSON_import from '../../../../app/services/sampleData/curriculum/Demo.project.json';
+import { copy } from '../../common/object/object';
+import { ProjectAuthoringLessonComponent } from '../project-authoring-lesson/project-authoring-lesson.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
+import { NodeIconComponent } from '../../vle/node-icon/node-icon.component';
+import { ProjectAuthoringStepComponent } from '../project-authoring-step/project-authoring-step.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ProjectAuthoringHarness } from './project-authoring.harness';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonHarness } from '@angular/material/button/testing';
+
+let component: ProjectAuthoringComponent;
+let fixture: ComponentFixture<ProjectAuthoringComponent>;
+let harness: ProjectAuthoringHarness;
+let projectService: TeacherProjectService;
 
 describe('ProjectAuthoringComponent', () => {
-  let component: ProjectAuthoringComponent;
-  let fixture: ComponentFixture<ProjectAuthoringComponent>;
-  let projectService: TeacherProjectService;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         ConcurrentAuthorsMessageComponent,
         NodeAuthoringComponent,
+        NodeIconComponent,
+        NodeIconAndTitleComponent,
         ProjectAuthoringComponent,
+        ProjectAuthoringLessonComponent,
+        ProjectAuthoringStepComponent,
         TeacherNodeIconComponent
       ],
       imports: [
         BrowserAnimationsModule,
         FormsModule,
         HttpClientTestingModule,
-        MatInputModule,
+        MatButtonModule,
+        MatCheckboxModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
+        MatInputModule,
+        MatTooltipModule,
         RouterTestingModule,
         StudentTeacherCommonServicesModule
       ],
@@ -55,17 +75,65 @@ describe('ProjectAuthoringComponent', () => {
       ]
     }).compileComponents();
     projectService = TestBed.inject(TeacherProjectService);
-    spyOn(projectService, 'parseProject').and.callFake(() => {});
-    spyOn(projectService, 'getFlattenedProjectAsNodeIds').and.returnValue(['node1']);
-    spyOn(projectService, 'getNodeById').and.returnValue({ title: 'Step 1' });
-    spyOn(projectService, 'getInactiveNodes').and.returnValue([]);
+    projectService.setProject(copy(demoProjectJSON_import));
     window.history.pushState({}, '', '');
     fixture = TestBed.createComponent(ProjectAuthoringComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, ProjectAuthoringHarness);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  collapseAllButtonClicked();
+  expandAllButtonClicked();
 });
+
+function collapseAllButtonClicked() {
+  describe('all lessons are expanded', () => {
+    describe('collapse all button is clicked', () => {
+      let expandAllButton: MatButtonHarness;
+      let collapseAllButton: MatButtonHarness;
+      beforeEach(async () => {
+        expandAllButton = await harness.getExpandAllButton();
+        collapseAllButton = await harness.getCollapseAllButton();
+        await collapseAllButton.click();
+      });
+      it('all lessons are collapsed', async () => {
+        for (const lesson of await harness.getLessons()) {
+          expect(await lesson.isCollapsed()).toBe(true);
+        }
+      });
+      it('expand all button is enabled', async () => {
+        expect(await collapseAllButton.isDisabled()).toBe(true);
+      });
+      it('collapse all button is disabled', async () => {
+        expect(await expandAllButton.isDisabled()).toBe(false);
+      });
+    });
+  });
+}
+
+function expandAllButtonClicked() {
+  describe('all lessons are collapsed', () => {
+    describe('expand all button is clicked', () => {
+      let expandAllButton: MatButtonHarness;
+      let collapseAllButton: MatButtonHarness;
+      beforeEach(async () => {
+        expandAllButton = await harness.getExpandAllButton();
+        collapseAllButton = await harness.getCollapseAllButton();
+        await collapseAllButton.click();
+        await expandAllButton.click();
+      });
+      it('all lessons are expanded', async () => {
+        for (const lesson of await harness.getLessons()) {
+          expect(await lesson.isExpanded()).toBe(true);
+        }
+      });
+      it('collapse all button is enabled', async () => {
+        expect(await collapseAllButton.isDisabled()).toBe(false);
+      });
+      it('expand all button is disabled', async () => {
+        expect(await expandAllButton.isDisabled()).toBe(true);
+      });
+    });
+  });
+}

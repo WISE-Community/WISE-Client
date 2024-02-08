@@ -18,6 +18,9 @@
     fxLayoutAlign="start center"
     fxLayoutGap="10px"
     (click)="setCurrentNode(step.id)"
+    matTooltip="Click to enter step"
+    matTooltipPosition="above"
+    i18n-matTooltip
   >
     <node-icon-and-title [nodeId]="step.id" [showPosition]="showPosition"></node-icon-and-title>
     <p fxLayoutAlign="start center" fxLayoutGap="10px">
