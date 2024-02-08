@@ -4,14 +4,6 @@ import { applyMixins } from '../../common/apply-mixins';
 import { FeedbackRule } from '../common/feedbackRule/FeedbackRule';
 import { DialogGuidanceContent } from './DialogGuidanceContent';
 
-export interface DialogGuidanceComponent {
-  isComputerAvatarEnabled(): boolean;
-  isComputerAvatarPromptAvailable(): boolean;
-  isOnlyOneComputerAvatarAvailable(): boolean;
-  isUseGlobalComputerAvatar(): boolean;
-  getComputerAvatarInitialResponse(): string;
-}
-
 export class DialogGuidanceComponent extends Component implements ComputerAvatarComponent {
   content: DialogGuidanceContent;
 
@@ -34,6 +26,12 @@ export class DialogGuidanceComponent extends Component implements ComputerAvatar
   isVersion2(): boolean {
     return this.content.version === 2;
   }
+
+  isComputerAvatarEnabled: () => boolean;
+  isComputerAvatarPromptAvailable: () => boolean;
+  isOnlyOneComputerAvatarAvailable: () => boolean;
+  isUseGlobalComputerAvatar: () => boolean;
+  getComputerAvatarInitialResponse: () => string;
 }
 
 applyMixins(DialogGuidanceComponent, [ComputerAvatarComponent]);

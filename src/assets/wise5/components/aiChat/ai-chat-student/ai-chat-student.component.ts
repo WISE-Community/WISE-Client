@@ -18,10 +18,6 @@ import { ComputerAvatarMixin } from '../../../common/computer-avatar.mixin';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
 
-export interface AiChatStudentComponent {
-  initializeComputerAvatar: () => void;
-}
-
 @Component({
   selector: 'ai-chat-student',
   templateUrl: './ai-chat-student.component.html',
@@ -121,6 +117,8 @@ export class AiChatStudentComponent extends ComponentStudent {
     });
     return promise;
   }
+
+  initializeComputerAvatar: () => void;
 }
 
 applyMixins(AiChatStudentComponent, [ComputerAvatarMixin]);

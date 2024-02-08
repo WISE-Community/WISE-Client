@@ -30,11 +30,6 @@ import { ConstraintService } from '../../../services/constraintService';
 import { applyMixins } from '../../../common/apply-mixins';
 import { ComputerAvatarMixin } from '../../../common/computer-avatar.mixin';
 
-export interface DialogGuidanceStudentComponent {
-  initializeComputerAvatar: () => void;
-  selectComputerAvatar: (computerAvatar: ComputerAvatar) => void;
-}
-
 @Component({
   selector: 'dialog-guidance-student',
   templateUrl: './dialog-guidance-student.component.html',
@@ -230,6 +225,9 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     });
     return promise;
   }
+
+  initializeComputerAvatar: () => void;
+  selectComputerAvatar: (computerAvatar: ComputerAvatar) => void;
 }
 
 applyMixins(DialogGuidanceStudentComponent, [ComputerAvatarMixin]);
