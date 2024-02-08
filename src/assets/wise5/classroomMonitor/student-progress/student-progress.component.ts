@@ -80,7 +80,7 @@ export class StudentProgressComponent implements OnInit {
   }
 
   private updateTeam(workgroupId: number): void {
-    const location = this.getCurrentNodeForWorkgroupId(workgroupId);
+    const location = this.getCurrentNodeForWorkgroupId(workgroupId) || '';
     const completion = this.classroomStatusService.getStudentProjectCompletion(workgroupId);
     const score = this.getStudentTotalScore(workgroupId);
     let maxScore = this.classroomStatusService.getMaxScoreForWorkgroupId(workgroupId);
@@ -90,7 +90,7 @@ export class StudentProgressComponent implements OnInit {
       if (student.workgroupId === workgroupId) {
         student.location = location;
         student.completion = completion;
-        student.completionPct = completion.completionPct;
+        student.completionPct = completion.completionPct || 0;
         student.score = score;
         student.maxScore = maxScore;
         student.scorePct = maxScore ? score / maxScore : score;
