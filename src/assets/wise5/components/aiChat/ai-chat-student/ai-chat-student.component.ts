@@ -12,9 +12,9 @@ import { AiChatMessage } from '../AiChatMessage';
 import { AiChatService } from '../aiChatService';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AiChatComponent } from '../AiChatComponent';
-import { ComputerAvatar } from '../../../common/ComputerAvatar';
+import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { applyMixins } from '../../../common/apply-mixins';
-import { ComputerAvatarMixin } from '../../../common/computer-avatar.mixin';
+import { ComputerAvatarMixin } from '../../../common/computer-avatar/computer-avatar.mixin';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
 

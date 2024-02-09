@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ComputerAvatar } from '../../../common/ComputerAvatar';
+import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { ComputerAvatarSettings } from '../ComputerAvatarSettings';
+import { ComputerAvatarSettings } from '../../../common/computer-avatar/ComputerAvatarSettings';
 
 @Component({
   selector: 'edit-dialog-guidance-computer-avatar',

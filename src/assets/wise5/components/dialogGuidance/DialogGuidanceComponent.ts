@@ -1,5 +1,5 @@
 import { Component } from '../../common/Component';
-import { ComputerAvatarComponent } from '../../common/computer-avatar-component';
+import { ComputerAvatarComponent } from '../../common/computer-avatar/computer-avatar-component';
 import { applyMixins } from '../../common/apply-mixins';
 import { FeedbackRule } from '../common/feedbackRule/FeedbackRule';
 import { DialogGuidanceContent } from './DialogGuidanceContent';

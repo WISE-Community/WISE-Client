@@ -1,4 +1,4 @@
-import { ComputerAvatarSettings } from '../components/dialogGuidance/ComputerAvatarSettings';
+import { ComputerAvatarSettings } from './ComputerAvatarSettings';
 
 export interface ComputerAvatarComponentContent {
   computerAvatarSettings: ComputerAvatarSettings;

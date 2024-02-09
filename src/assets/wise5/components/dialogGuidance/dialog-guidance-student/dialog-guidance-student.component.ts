@@ -17,7 +17,7 @@ import { FeedbackRuleEvaluator } from '../../common/feedbackRule/FeedbackRuleEva
 import { ComputerDialogResponseMultipleScores } from '../ComputerDialogResponseMultipleScores';
 import { ComputerDialogResponseSingleScore } from '../ComputerDialogResponseSingleScore';
 import { MatDialog } from '@angular/material/dialog';
-import { ComputerAvatar } from '../../../common/ComputerAvatar';
+import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
 import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceFeedbackService';
@@ -28,7 +28,7 @@ import { copy } from '../../../common/object/object';
 import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 import { ConstraintService } from '../../../services/constraintService';
 import { applyMixins } from '../../../common/apply-mixins';
-import { ComputerAvatarMixin } from '../../../common/computer-avatar.mixin';
+import { ComputerAvatarMixin } from '../../../common/computer-avatar/computer-avatar.mixin';
 
 @Component({
   selector: 'dialog-guidance-student',

@@ -1,7 +1,7 @@
 import { ComputerAvatar } from './ComputerAvatar';
 import { ComputerAvatarComponent } from './computer-avatar-component';
-import { ComputerAvatarService } from '../services/computerAvatarService';
-import { StudentStatusService } from '../services/studentStatusService';
+import { ComputerAvatarService } from '../../services/computerAvatarService';
+import { StudentStatusService } from '../../services/studentStatusService';
 
 export abstract class ComputerAvatarMixin {
   component: ComputerAvatarComponent;

@@ -1,9 +1,9 @@
 'use strict';
 
 import { Injectable } from '@angular/core';
-import { ComputerAvatar } from '../common/ComputerAvatar';
+import { ComputerAvatar } from '../common/computer-avatar/ComputerAvatar';
 import { copy } from '../common/object/object';
-import { ComputerAvatarSettings } from '../components/dialogGuidance/ComputerAvatarSettings';
+import { ComputerAvatarSettings } from '../common/computer-avatar/ComputerAvatarSettings';
 
 @Injectable()
 export class ComputerAvatarService {
