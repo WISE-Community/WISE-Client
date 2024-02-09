@@ -1996,4 +1996,8 @@ export class ProjectService {
     const componentId = content.getReferenceComponentId();
     return new Component(this.getComponent(nodeId, componentId), nodeId);
   }
+
+  getSpeechToTextSettings(): any {
+    return this.project.speechToText;
+  }
 }
