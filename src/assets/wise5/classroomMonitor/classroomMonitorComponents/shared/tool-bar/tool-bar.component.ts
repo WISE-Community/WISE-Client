@@ -43,7 +43,7 @@ export class ToolBarComponent implements OnInit {
         'manage-students': $localize`Manage Students`,
         milestones: $localize`Milestones`,
         notebook: $localize`Student Notebooks`,
-        team: $localize`Grade by Team`
+        team: $localize`Grade by Student`
       }[path] ?? $localize`Grade by Step`;
     this.showPeriodSelect = path != 'export';
     this.showTeamTools = /\/team\/(\d+)$/.test(this.router.url);

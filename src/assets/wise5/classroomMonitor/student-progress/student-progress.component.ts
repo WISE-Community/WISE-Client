@@ -4,6 +4,7 @@ import { ConfigService } from '../../services/configService';
 import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProjectCompletion } from '../../common/ProjectCompletion';
 
 @Component({
   selector: 'student-progress',
@@ -15,10 +16,10 @@ export class StudentProgressComponent implements OnInit {
   currentWorkgroup: any;
   permissions: any;
   sort: any;
-  sortedTeams: any[];
+  sortedStudents: StudentProgress[];
   subscriptions: Subscription = new Subscription();
   teacherWorkgroupId: number;
-  teams: any;
+  students: StudentProgress[];
 
   constructor(
     private classroomStatusService: ClassroomStatusService,
@@ -52,39 +53,47 @@ export class StudentProgressComponent implements OnInit {
   }
 
   private initializeStudents(): void {
-    this.teams = [];
+    this.students = [];
     const workgroups = this.configService
       .getClassmateUserInfos()
       .filter((workgroup: any) => workgroup.workgroupId != null);
     for (const workgroup of workgroups) {
       const workgroupId = workgroup.workgroupId;
-      const displayNames = this.configService.getDisplayUsernamesByWorkgroupId(workgroupId);
-      const team = {
-        periodId: workgroup.periodId,
-        periodName: workgroup.periodName,
-        workgroupId: workgroupId,
-        username: displayNames
-      };
-      this.teams.push(team);
-      this.updateTeam(workgroupId);
+      const userNames = this.configService
+        .getDisplayUsernamesByWorkgroupId(workgroupId)
+        .split(', ');
+      userNames.forEach((user: any) => {
+        const names = user.split(' ');
+        const student = new StudentProgress({
+          periodId: workgroup.periodId,
+          periodName: workgroup.periodName,
+          workgroupId: workgroupId,
+          username: names[0] + ' ' + names[1],
+          firstName: names[0],
+          lastName: names[1]
+        });
+        this.students.push(student);
+        this.updateTeam(workgroupId);
+      });
     }
     this.sortWorkgroups();
   }
 
   private updateTeam(workgroupId: number): void {
-    const location = this.getCurrentNodeForWorkgroupId(workgroupId);
+    const location = this.getCurrentNodeForWorkgroupId(workgroupId) || '';
     const completion = this.classroomStatusService.getStudentProjectCompletion(workgroupId);
     const score = this.getStudentTotalScore(workgroupId);
     let maxScore = this.classroomStatusService.getMaxScoreForWorkgroupId(workgroupId);
     maxScore = maxScore ? maxScore : 0;
 
-    for (const team of this.teams) {
-      if (team.workgroupId === workgroupId) {
-        team.location = location;
-        team.completion = completion;
-        team.score = score;
-        team.maxScore = maxScore;
-        team.scorePct = maxScore ? score / maxScore : score;
+    for (const student of this.students) {
+      if (student.workgroupId === workgroupId) {
+        student.location = location;
+        student.completion = completion;
+        student.completionPct = completion.completionPct || 0;
+        student.score = score;
+        student.maxScore = maxScore;
+        student.scorePct = maxScore ? score / maxScore : score;
       }
     }
   }
@@ -100,89 +109,131 @@ export class StudentProgressComponent implements OnInit {
   }
 
   private sortWorkgroups(): void {
-    this.sortedTeams = [...this.teams];
+    this.sortedStudents = [...this.students];
     switch (this.sort) {
       case 'team':
-        this.sortedTeams.sort(this.createSortTeam('asc'));
+        this.sortedStudents.sort(this.createSortTeam('asc'));
         break;
       case '-team':
-        this.sortedTeams.sort(this.createSortTeam('desc'));
+        this.sortedStudents.sort(this.createSortTeam('desc'));
         break;
       case 'student':
-        this.sortedTeams.sort(this.createSortStudent('asc'));
+        this.sortedStudents.sort(this.createSortStudent('asc'));
         break;
       case '-student':
-        this.sortedTeams.sort(this.createSortStudent('desc'));
+        this.sortedStudents.sort(this.createSortStudent('desc'));
+        break;
+      case 'firstName':
+        this.sortedStudents.sort(this.createSortFirstName('asc'));
+        break;
+      case '-firstName':
+        this.sortedStudents.sort(this.createSortFirstName('desc'));
+        break;
+      case 'lastName':
+        this.sortedStudents.sort(this.createSortLastName('asc'));
+        break;
+      case '-lastName':
+        this.sortedStudents.sort(this.createSortLastName('desc'));
         break;
       case 'score':
-        this.sortedTeams.sort(this.createSortScore('asc'));
+        this.sortedStudents.sort(this.createSortScore('asc'));
         break;
       case '-score':
-        this.sortedTeams.sort(this.createSortScore('desc'));
+        this.sortedStudents.sort(this.createSortScore('desc'));
         break;
       case 'completion':
-        this.sortedTeams.sort(this.createSortCompletion('asc'));
+        this.sortedStudents.sort(this.createSortCompletion('asc'));
         break;
       case '-completion':
-        this.sortedTeams.sort(this.createSortCompletion('desc'));
+        this.sortedStudents.sort(this.createSortCompletion('desc'));
         break;
       case 'location':
-        this.sortedTeams.sort(this.createSortLocation('asc'));
+        this.sortedStudents.sort(this.createSortLocation('asc'));
         break;
       case '-location':
-        this.sortedTeams.sort(this.createSortLocation('desc'));
+        this.sortedStudents.sort(this.createSortLocation('desc'));
         break;
     }
   }
 
   private createSortTeam(direction: string): any {
-    return (workgroupA: any, workgroupB: any): number => {
+    return (studentA: any, studentB: any): number => {
       return direction === 'asc'
-        ? workgroupA.workgroupId - workgroupB.workgroupId
-        : workgroupB.workgroupId - workgroupA.workgroupId;
+        ? studentA.workgroupId - studentB.workgroupId
+        : studentB.workgroupId - studentA.workgroupId;
     };
   }
 
   private createSortStudent(direction: string): any {
-    return (workgroupA: any, workgroupB: any): number => {
+    return (studentA: any, studentB: any): number => {
       const localeCompare =
         direction === 'asc'
-          ? workgroupA.username.localeCompare(workgroupB.username)
-          : workgroupB.username.localeCompare(workgroupA.username);
-      return localeCompare === 0 ? workgroupA.workgroupId - workgroupB.workgroupId : localeCompare;
+          ? studentA.username.localeCompare(studentB.username)
+          : studentB.username.localeCompare(studentA.username);
+      return localeCompare === 0 ? studentA.workgroupId - studentB.workgroupId : localeCompare;
+    };
+  }
+
+  private createSortFirstName(direction: string): any {
+    return (studentA: any, studentB: any): number => {
+      const localeCompare =
+        direction === 'asc'
+          ? studentA.firstName.localeCompare(studentB.firstName)
+          : studentB.firstName.localeCompare(studentA.firstName);
+      return localeCompare === 0 ? studentA.workgroupId - studentB.workgroupId : localeCompare;
+    };
+  }
+
+  private createSortLastName(direction: string): any {
+    return (studentA: any, studentB: any): number => {
+      const localeCompare =
+        direction === 'asc'
+          ? studentA.lastName.localeCompare(studentB.lastName)
+          : studentB.lastName.localeCompare(studentA.lastName);
+      return localeCompare === 0 ? studentA.workgroupId - studentB.workgroupId : localeCompare;
     };
   }
 
   private createSortScore(direction: string): any {
-    return (workgroupA: any, workgroupB: any): number => {
-      if (workgroupA.scorePct === workgroupB.scorePct) {
-        return workgroupA.username.localeCompare(workgroupB.username);
+    return (studentA: any, studentB: any): number => {
+      if (studentA.scorePct === studentB.scorePct) {
+        return studentA.workgroupId
+          .toString()
+          .localeCompare(studentB.workgroupId.toString(), undefined, {
+            numeric: true
+          });
       }
       return direction === 'asc'
-        ? workgroupA.scorePct - workgroupB.scorePct
-        : workgroupB.scorePct - workgroupA.scorePct;
+        ? studentA.scorePct - studentB.scorePct
+        : studentB.scorePct - studentA.scorePct;
     };
   }
 
   private createSortCompletion(direction: string): any {
-    return (workgroupA: any, workgroupB: any): number => {
-      const completionA = workgroupA.completion.completionPct;
-      const completionB = workgroupB.completion.completionPct;
+    return (studentA: any, studentB: any): number => {
+      const completionA = studentA.completionPct;
+      const completionB = studentB.completionPct;
       if (completionA === completionB) {
-        return workgroupA.username.localeCompare(workgroupB.username);
+        return studentA.workgroupId
+          .toString()
+          .localeCompare(studentB.workgroupId.toString(), undefined, {
+            numeric: true
+          });
       }
       return direction === 'asc' ? completionA - completionB : completionB - completionA;
     };
   }
 
   private createSortLocation(direction: string): any {
-    return (workgroupA: any, workgroupB: any): number => {
+    return (studentA: any, studentB: any): number => {
       const localeCompare =
         direction === 'asc'
-          ? workgroupA.location.localeCompare(workgroupB.location)
-          : workgroupB.location.localeCompare(workgroupA.location);
+          ? studentA.location.localeCompare(studentB.location)
+          : studentB.location.localeCompare(studentA.location);
       return localeCompare === 0
-        ? workgroupA.username.localeCompare(workgroupB.username)
+        ? studentA.workgroupId
+            .toString()
+            .localeCompare(studentB.workgroupId.toString(), undefined, { numeric: true })
         : localeCompare;
     };
   }
@@ -205,5 +256,26 @@ export class StudentProgressComponent implements OnInit {
     }
     this.dataService.studentProgressSort = this.sort;
     this.sortWorkgroups();
+  }
+}
+
+export class StudentProgress {
+  periodId: string;
+  periodName: string;
+  workgroupId: number;
+  username: string;
+  firstName: string;
+  lastName: string;
+  location: string;
+  completion: ProjectCompletion;
+  completionPct: number;
+  score: number;
+  maxScore: number;
+  scorePct: number;
+
+  constructor(jsonObject: any = {}) {
+    for (const key of Object.keys(jsonObject)) {
+      this[key] = jsonObject[key];
+    }
   }
 }
