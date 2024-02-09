@@ -21,7 +21,7 @@
           [showPosition]="showPosition"
         ></node-icon-and-title>
       </div>
-      <div fxLayout="row" fxLayoutAlign="end center">
+      <div *ngIf="lesson.ids.length > 0" fxLayout="row" fxLayoutAlign="end center">
         <button
           mat-icon-button
           *ngIf="!expanded"

@@ -16,15 +16,15 @@ import { ExpandEvent } from '../domain/expand-event';
   styleUrls: ['./project-authoring.component.scss']
 })
 export class ProjectAuthoringComponent implements OnInit {
+  protected allLessonsCollapsed: Signal<boolean> = computed(() =>
+    this.isAllLessonsExpandedValue(false)
+  );
+  protected allLessonsExpanded: Signal<boolean> = computed(() =>
+    this.isAllLessonsExpandedValue(true)
+  );
   protected inactiveGroupNodes: any[];
   private inactiveNodes: any[];
   protected inactiveStepNodes: any[];
-  protected isAllLessonsCollapsed: Signal<boolean> = computed(() => {
-    return this.isAllLessonsExpandedValue(false);
-  });
-  protected isAllLessonsExpanded: Signal<boolean> = computed(() => {
-    return this.isAllLessonsExpandedValue(true);
-  });
   protected items: any;
   protected lessons: any[] = [];
   protected lessonIdToExpanded: WritableSignal<{ [key: string]: boolean }> = signal({});
@@ -129,6 +129,7 @@ export class ProjectAuthoringComponent implements OnInit {
     this.inactiveStepNodes.forEach((inactiveStepNode: any) => {
       inactiveStepNode.checked = false;
     });
+    this.nodeIdToChecked = {};
     this.projectService.setNodeTypeSelected(null);
   }
 
@@ -165,6 +166,7 @@ export class ProjectAuthoringComponent implements OnInit {
    */
   protected selectNode({ id, checked }: SelectNodeEvent): void {
     this.nodeIdToChecked[id] = checked;
+    this.updateNodeTypeSelected();
   }
 
   protected hasSelectedNodes(): boolean {
@@ -193,6 +195,8 @@ export class ProjectAuthoringComponent implements OnInit {
 
   protected collapseAllLessons(): void {
     this.setAllLessonsExpandedValue(false);
+    this.lessons.forEach((lesson) => this.unselectChildren(lesson));
+    this.updateNodeTypeSelected();
   }
 
   private setAllLessonsExpandedValue(expanded: boolean): void {
@@ -206,9 +210,30 @@ export class ProjectAuthoringComponent implements OnInit {
     });
   }
 
-  protected expandedChangeEvent(event: ExpandEvent): void {
+  protected onExpandedChanged(event: ExpandEvent): void {
     this.lessonIdToExpanded.mutate((value) => {
       value[event.id] = event.expanded;
     });
+    const lesson = this.lessons
+      .concat(this.inactiveGroupNodes)
+      .find((lesson: any) => lesson.id === event.id);
+    this.unselectChildren(lesson);
+    this.updateNodeTypeSelected();
+  }
+
+  private unselectChildren(lesson: any): void {
+    lesson.ids.forEach((childId: string) => (this.nodeIdToChecked[childId] = false));
+  }
+
+  private updateNodeTypeSelected(): void {
+    let nodeTypeSelected = null;
+    Object.entries(this.nodeIdToChecked).forEach(([nodeId, checked]) => {
+      if (checked) {
+        nodeTypeSelected = this.projectService.isGroupNode(nodeId)
+          ? NodeTypeSelected.lesson
+          : NodeTypeSelected.step;
+      }
+    });
+    this.projectService.setNodeTypeSelected(nodeTypeSelected);
   }
 }

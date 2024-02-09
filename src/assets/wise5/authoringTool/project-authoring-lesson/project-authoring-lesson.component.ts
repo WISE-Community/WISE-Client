@@ -12,7 +12,7 @@ import { ExpandEvent } from '../domain/expand-event';
 })
 export class ProjectAuthoringLessonComponent {
   @Input() expanded: boolean = true;
-  @Output() expandedChangeEvent: EventEmitter<ExpandEvent> = new EventEmitter<ExpandEvent>();
+  @Output() onExpandedChanged: EventEmitter<ExpandEvent> = new EventEmitter<ExpandEvent>();
   protected idToNode: any = {};
   @Input() lesson: any;
   protected nodeTypeSelected: Signal<NodeTypeSelected>;
@@ -41,6 +41,6 @@ export class ProjectAuthoringLessonComponent {
 
   protected toggleExpanded(): void {
     this.expanded = !this.expanded;
-    this.expandedChangeEvent.emit({ id: this.lesson.id, expanded: this.expanded });
+    this.onExpandedChanged.emit({ id: this.lesson.id, expanded: this.expanded });
   }
 }

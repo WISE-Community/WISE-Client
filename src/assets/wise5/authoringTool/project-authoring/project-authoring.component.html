@@ -57,7 +57,7 @@
   <div fxFlex></div>
   <button
     (click)="expandAllLessons()"
-    [disabled]="isAllLessonsExpanded()"
+    [disabled]="allLessonsExpanded()"
     mat-raised-button
     color="primary"
     i18n
@@ -66,7 +66,7 @@
   </button>
   <button
     (click)="collapseAllLessons()"
-    [disabled]="isAllLessonsCollapsed()"
+    [disabled]="allLessonsCollapsed()"
     mat-raised-button
     color="primary"
     i18n
@@ -82,7 +82,7 @@
       [showPosition]="true"
       [projectId]="projectId"
       [expanded]="lessonIdToExpanded()[lesson.id]"
-      (expandedChangeEvent)="expandedChangeEvent($event)"
+      (onExpandedChanged)="onExpandedChanged($event)"
     ></project-authoring-lesson>
   </div>
   <div>
@@ -95,7 +95,7 @@
         [showPosition]="false"
         [projectId]="projectId"
         [expanded]="lessonIdToExpanded()[inactiveGroupNode.id]"
-        (expandedChangeEvent)="expandedChangeEvent($event)"
+        (onExpandedChanged)="onExpandedChanged($event)"
       ></project-authoring-lesson>
     </div>
     <div>
