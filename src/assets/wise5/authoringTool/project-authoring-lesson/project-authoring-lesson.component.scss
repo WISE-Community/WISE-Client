@@ -1,20 +1,19 @@
-.groupHeader {
-  margin-left: 5px !important;
+.lesson {
+  padding: 8px;
+  margin: 16px 0px;
+  border: 2px solid #dddddd;
+  border-radius: 6px;
+  position: relative;
+}
+
+.lesson-bar:hover {
+  background-color: #add8e6;
+}
+
+.full-width {
+  width: 100%;
 }
 
 .pointer {
   cursor: pointer;
-}
-
-.projectItem:hover {
-  background-color: #add8e6;
-}
-
-.projectItemTitleDiv:hover {
-  background-color: #add8e6;
-}
-
-.projectItemTitleDiv {
-  width: 100%;
-  font-weight: initial;
 }

@@ -3,6 +3,7 @@ import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { SelectNodeEvent } from '../domain/select-node-event';
 import { NodeTypeSelected } from '../domain/node-type-selected';
+import { ExpandEvent } from '../domain/expand-event';
 
 @Component({
   selector: 'project-authoring-lesson',
@@ -10,6 +11,8 @@ import { NodeTypeSelected } from '../domain/node-type-selected';
   styleUrls: ['./project-authoring-lesson.component.scss']
 })
 export class ProjectAuthoringLessonComponent {
+  @Input() expanded: boolean = true;
+  @Output() onExpandedChanged: EventEmitter<ExpandEvent> = new EventEmitter<ExpandEvent>();
   protected idToNode: any = {};
   @Input() lesson: any;
   protected nodeTypeSelected: Signal<NodeTypeSelected>;
@@ -34,5 +37,10 @@ export class ProjectAuthoringLessonComponent {
 
   protected setCurrentNode(nodeId: string): void {
     this.dataService.setCurrentNodeByNodeId(nodeId);
+  }
+
+  protected toggleExpanded(): void {
+    this.expanded = !this.expanded;
+    this.onExpandedChanged.emit({ id: this.lesson.id, expanded: this.expanded });
   }
 }

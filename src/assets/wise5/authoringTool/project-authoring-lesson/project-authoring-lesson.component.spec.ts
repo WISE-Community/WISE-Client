@@ -12,14 +12,27 @@ import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and
 import { NodeIconComponent } from '../../vle/node-icon/node-icon.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { ProjectAuthoringStepComponent } from '../project-authoring-step/project-authoring-step.component';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { ProjectAuthoringLessonHarness } from './project-authoring-lesson.harness';
+
+let component: ProjectAuthoringLessonComponent;
+let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
+const groupId1 = 'group1';
+let harness: ProjectAuthoringLessonHarness;
+const nodeId1 = 'node1';
+const nodeId2 = 'node2';
+let teacherProjectService: TeacherProjectService;
 
 describe('ProjectAuthoringLessonComponent', () => {
-  let component: ProjectAuthoringLessonComponent;
-  let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
-
-  beforeEach(() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [NodeIconComponent, NodeIconAndTitleComponent, ProjectAuthoringLessonComponent],
+      declarations: [
+        NodeIconComponent,
+        NodeIconAndTitleComponent,
+        ProjectAuthoringLessonComponent,
+        ProjectAuthoringStepComponent
+      ],
       imports: [
         FormsModule,
         HttpClientTestingModule,
@@ -35,13 +48,59 @@ describe('ProjectAuthoringLessonComponent', () => {
         TeacherWebSocketService
       ]
     });
+    teacherProjectService = TestBed.inject(TeacherProjectService);
+    teacherProjectService.idToNode = {
+      node1: {
+        id: nodeId1,
+        title: 'Step 1'
+      },
+      node2: {
+        id: nodeId2,
+        title: 'Step 2'
+      }
+    };
     fixture = TestBed.createComponent(ProjectAuthoringLessonComponent);
     component = fixture.componentInstance;
-    component.lesson = {};
+    component.lesson = {
+      id: groupId1,
+      ids: [nodeId1, nodeId2],
+      type: 'group'
+    };
     fixture.detectChanges();
+    harness = await TestbedHarnessEnvironment.harnessForFixture(
+      fixture,
+      ProjectAuthoringLessonHarness
+    );
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  lessonIsExpanded_clickCollapseButton_hideSteps();
+  lessonIsCollapsed_clickExpandButton_showSteps();
 });
+
+function lessonIsExpanded_clickCollapseButton_hideSteps() {
+  describe('lesson is expanded', () => {
+    describe('collapse button is clicked', () => {
+      it('hides steps', async () => {
+        component.expanded = true;
+        await (await harness.getCollapseButton()).click();
+        expect(component.expanded).toBeFalse();
+        const steps = await harness.getSteps();
+        expect(steps.length).toEqual(0);
+      });
+    });
+  });
+}
+
+function lessonIsCollapsed_clickExpandButton_showSteps() {
+  describe('lesson is collapsed', () => {
+    describe('expand button is clicked', () => {
+      it('shows steps', async () => {
+        component.expanded = false;
+        await (await harness.getExpandButton()).click();
+        expect(component.expanded).toBeTrue();
+        const steps = await harness.getSteps();
+        expect(steps.length).toEqual(2);
+      });
+    });
+  });
+}

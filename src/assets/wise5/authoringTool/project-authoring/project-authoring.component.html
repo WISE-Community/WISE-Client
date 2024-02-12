@@ -54,6 +54,25 @@
   >
     <mat-icon>delete</mat-icon>
   </button>
+  <div fxFlex></div>
+  <button
+    (click)="expandAllLessons()"
+    [disabled]="allLessonsExpanded()"
+    mat-raised-button
+    color="primary"
+    i18n
+  >
+    + Expand All
+  </button>
+  <button
+    (click)="collapseAllLessons()"
+    [disabled]="allLessonsCollapsed()"
+    mat-raised-button
+    color="primary"
+    i18n
+  >
+    - Collapse All
+  </button>
 </div>
 <div class="all-nodes-div">
   <div *ngFor="let lesson of lessons">
@@ -62,6 +81,8 @@
       (selectNodeEvent)="selectNode($event)"
       [showPosition]="true"
       [projectId]="projectId"
+      [expanded]="lessonIdToExpanded()[lesson.id]"
+      (onExpandedChanged)="onExpandedChanged($event)"
     ></project-authoring-lesson>
   </div>
   <div>
@@ -73,6 +94,8 @@
         (selectNodeEvent)="selectNode($event)"
         [showPosition]="false"
         [projectId]="projectId"
+        [expanded]="lessonIdToExpanded()[inactiveGroupNode.id]"
+        (onExpandedChanged)="onExpandedChanged($event)"
       ></project-authoring-lesson>
     </div>
     <div>
