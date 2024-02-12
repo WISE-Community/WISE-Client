@@ -1,9 +1,45 @@
-<mat-form-field>
-  <mat-label i18n>Select the language you are going to speak</mat-label>
-  <mat-select [(ngModel)]="selectedLanguageCode" #inputLanguageList>
-    <mat-option *ngFor="let language of languages" [value]="language.languageCode"
-      >{{ language.language }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<button id="recordButton" (click)="toggleRecording()">◉</button>
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <span class="mat-caption" i18n>Speech to text:</span>
+  <button
+    mat-stroked-button
+    [matMenuTriggerFor]="languageSelect"
+    #languageSelectButton
+    matTooltip="Select language"
+    i18n-mat-tooltip
+  >
+    <mat-icon>translate</mat-icon>
+    <span *ngIf="selectedLanguage">{{ selectedLanguage.language }}</span>
+  </button>
+  <mat-menu #languageSelect="matMenu">
+    <button
+      *ngFor="let language of languages"
+      [value]="language"
+      mat-menu-item
+      (click)="changeLanguage(language)"
+      [class]="{ primary: language.languageCode === selectedLanguage.languageCode }"
+    >
+      {{ language.language }}
+    </button>
+  </mat-menu>
+  <button
+    *ngIf="!recording"
+    mat-icon-button
+    id="recordButton"
+    (click)="toggleRecording()"
+    matTooltip="Record voice"
+    i18n-mat-tooltip
+  >
+    <mat-icon color="primary">mic</mat-icon>
+  </button>
+  <button
+    *ngIf="recording"
+    mat-icon-button
+    id="recordButton"
+    (click)="toggleRecording()"
+    matTooltip="Stop recording"
+    i18n-mat-tooltip
+  >
+    <mat-icon color="warn">stop_circle</mat-icon>
+  </button>
+  <span *ngIf="recording" class="mat-caption text-secondary" i18n>Recording...</span>
+</div>

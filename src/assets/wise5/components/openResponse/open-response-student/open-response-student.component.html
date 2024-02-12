@@ -32,6 +32,10 @@
     cdkTextareaAutosize
   >
   </textarea>
+  <speech-to-text
+    *ngIf="speechToTextEnabled"
+    (newTextEvent)="appendStudentResponse($event)"
+  ></speech-to-text>
 </div>
 <div *ngIf="isStudentAttachmentEnabled" fxLayout="row wrap" fxLayoutAlign="start center">
   <div>
@@ -63,10 +67,6 @@
   [nodeId]="nodeId"
   (removeAttachment)="removeAttachment($event)"
 ></audio-recorder>
-<speech-to-text
-  *ngIf="speechToTextEnabled"
-  (newTextEvent)="appendStudentResponse($event)"
-></speech-to-text>
 <component-save-submit-buttons
   *ngIf="isSaveOrSubmitButtonVisible"
   [componentState]="latestComponentState"
