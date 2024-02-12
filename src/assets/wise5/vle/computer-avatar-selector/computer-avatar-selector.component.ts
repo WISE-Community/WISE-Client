@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ComputerAvatar } from '../../common/ComputerAvatar';
+import { ComputerAvatar } from '../../common/computer-avatar/ComputerAvatar';
 import { ComputerAvatarService } from '../../services/computerAvatarService';
-import { ComputerAvatarSettings } from '../../components/dialogGuidance/ComputerAvatarSettings';
+import { ComputerAvatarSettings } from '../../common/computer-avatar/ComputerAvatarSettings';
 
 @Component({
   selector: 'computer-avatar-selector',

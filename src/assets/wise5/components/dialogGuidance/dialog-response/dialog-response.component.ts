@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { WiseLinkService } from '../../../../../app/services/wiseLinkService';
-import { ComputerAvatar } from '../../../common/ComputerAvatar';
+import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
 import { DialogResponse } from '../DialogResponse';

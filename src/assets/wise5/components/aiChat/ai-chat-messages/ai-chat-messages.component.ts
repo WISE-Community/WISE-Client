@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AiChatMessage } from '../AiChatMessage';
-import { ComputerAvatar } from '../../../common/ComputerAvatar';
+import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 
 @Component({
   selector: 'ai-chat-messages',
