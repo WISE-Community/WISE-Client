@@ -1,0 +1,22 @@
+<mat-form-field *ngIf="!showTranslationInput()">
+  <mat-label>{{ label }}</mat-label>
+  <textarea
+    matInput
+    [(ngModel)]="content[key]"
+    (ngModelChange)="defaultLanguageTextChanged.next($event)"
+    placeholder="{{ placeholder }}"
+    cdkTextareaAutosize
+  >
+  </textarea>
+</mat-form-field>
+<mat-form-field *ngIf="showTranslationInput()">
+  <mat-label>{{ label }} ({{ currentLanguage().language }})</mat-label>
+  <textarea
+    matInput
+    [ngModel]="translationText()"
+    (ngModelChange)="translationTextChanged.next($event)"
+    placeholder="{{ placeholder }}"
+    cdkTextareaAutosize
+  ></textarea>
+  <mat-hint>{{ defaultLanguageText() }}</mat-hint>
+</mat-form-field>
