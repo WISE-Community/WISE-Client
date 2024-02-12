@@ -19,19 +19,19 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapService } from '../conceptMapService';
 import { ConceptMapAuthoring } from './concept-map-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
 
 @NgModule({
   declarations: [ConceptMapAuthoring, EditComponentPrompt],
   imports: [
     CommonModule,
+    ComponentAuthoringModule,
     FormsModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatDialogModule,
-    TranslatableInputComponent
+    MatDialogModule
   ],
   providers: [
     AnnotationService,

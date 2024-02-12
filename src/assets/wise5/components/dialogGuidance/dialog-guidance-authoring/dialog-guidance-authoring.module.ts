@@ -23,7 +23,7 @@ import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.co
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { DialogGuidanceService } from '../dialogGuidanceService';
 import { FeedbackRuleHelpComponent } from '../../common/feedbackRule/feedback-rule-help/feedback-rule-help.component';
-import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
 
 @NgModule({
   declarations: [
@@ -35,14 +35,14 @@ import { TranslatableInputComponent } from '../../../authoringTool/components/tr
   ],
   imports: [
     CommonModule,
+    ComponentAuthoringModule,
     DragDropModule,
     FormsModule,
     MatCheckboxModule,
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule,
-    TranslatableInputComponent
+    MatInputModule
   ],
   providers: [
     AnnotationService,

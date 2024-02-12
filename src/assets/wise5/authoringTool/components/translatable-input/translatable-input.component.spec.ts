@@ -3,6 +3,7 @@ import { TranslatableInputComponent } from './translatable-input.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('TranslatableInputComponent', () => {
   let component: TranslatableInputComponent;
@@ -11,6 +12,7 @@ describe('TranslatableInputComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
+        BrowserAnimationsModule,
         HttpClientTestingModule,
         StudentTeacherCommonServicesModule,
         TranslatableInputComponent

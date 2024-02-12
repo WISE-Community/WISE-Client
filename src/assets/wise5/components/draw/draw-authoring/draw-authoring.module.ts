@@ -19,19 +19,19 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { DrawService } from '../drawService';
 import { DrawAuthoring } from './draw-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
 
 @NgModule({
   declarations: [DrawAuthoring, EditComponentPrompt],
   imports: [
     CommonModule,
+    ComponentAuthoringModule,
     FormsModule,
     MatCheckboxModule,
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule,
-    TranslatableInputComponent
+    MatInputModule
   ],
   providers: [
     AnnotationService,
