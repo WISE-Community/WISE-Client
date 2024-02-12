@@ -8,6 +8,11 @@ import { MatOptionModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { ProjectService } from '../../../services/projectService';
 
+interface Language {
+  languageCode: string;
+  language: string;
+}
+
 @Component({
   standalone: true,
   selector: 'speech-to-text',
@@ -16,8 +21,7 @@ import { ProjectService } from '../../../services/projectService';
   styleUrls: ['./speech-to-text.component.scss']
 })
 export class SpeechToTextComponent {
-  @ViewChild('inputLanguageList') inputLanguageList: MatSelect;
-  private allLanguages = [
+  private allLanguages: Language[] = [
     { languageCode: 'zh-CN', language: $localize`Chinese (Simplified)` },
     { languageCode: 'en-US', language: $localize`English` },
     { languageCode: 'fr-FR', language: $localize`French` },
@@ -28,7 +32,8 @@ export class SpeechToTextComponent {
     { languageCode: 'pt-BR', language: $localize`Portuguese (Brazilian)` },
     { languageCode: 'es-US', language: $localize`Spanish` }
   ];
-  protected languages;
+  @ViewChild('inputLanguageList') inputLanguageList: MatSelect;
+  protected languages: Language[];
   @Output() newTextEvent: EventEmitter<string> = new EventEmitter<string>();
   protected recording: boolean;
   protected selectedLanguageCode: LanguageCode;

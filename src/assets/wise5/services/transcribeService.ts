@@ -85,7 +85,11 @@ export class TranscribeService {
         if (result.IsPartial === false) {
           const noOfResults = result.Alternatives[0].Items.length;
           for (let i = 0; i < noOfResults; i++) {
-            callback(result.Alternatives[0].Items[i].Content + ' ');
+            let text = result.Alternatives[0].Items[i].Content;
+            if (![',', '.', '?', '!', ':', ';'].includes(text)) {
+              text = ' ' + text;
+            }
+            callback(text);
           }
         }
       }
