@@ -28,7 +28,7 @@ import { copy } from '../../../common/object/object';
 import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 import { ConstraintService } from '../../../services/constraintService';
 import { applyMixins } from '../../../common/apply-mixins';
-import { ComputerAvatarMixin } from '../../../common/computer-avatar/computer-avatar.mixin';
+import { ComputerAvatarInitializer } from '../../../common/computer-avatar/computer-avatar-initializer';
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -230,4 +230,4 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   selectComputerAvatar: (computerAvatar: ComputerAvatar) => void;
 }
 
-applyMixins(DialogGuidanceStudentComponent, [ComputerAvatarMixin]);
+applyMixins(DialogGuidanceStudentComponent, [ComputerAvatarInitializer]);

@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AiChatComponent } from '../AiChatComponent';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { applyMixins } from '../../../common/apply-mixins';
-import { ComputerAvatarMixin } from '../../../common/computer-avatar/computer-avatar.mixin';
+import { ComputerAvatarInitializer } from '../../../common/computer-avatar/computer-avatar-initializer';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
 
@@ -121,4 +121,4 @@ export class AiChatStudentComponent extends ComponentStudent {
   initializeComputerAvatar: () => void;
 }
 
-applyMixins(AiChatStudentComponent, [ComputerAvatarMixin]);
+applyMixins(AiChatStudentComponent, [ComputerAvatarInitializer]);
