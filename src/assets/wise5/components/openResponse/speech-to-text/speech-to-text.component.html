@@ -1,0 +1,9 @@
+<mat-form-field>
+  <mat-label i18n>Select the language you are going to speak</mat-label>
+  <mat-select [(ngModel)]="selectedLanguageCode" #inputLanguageList>
+    <mat-option *ngFor="let language of languages" [value]="language.languageCode"
+      >{{ language.language }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<button id="recordButton" (click)="toggleRecording()">◉</button>
