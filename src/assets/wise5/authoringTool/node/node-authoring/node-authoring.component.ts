@@ -7,7 +7,6 @@ import { ComponentServiceLookupService } from '../../../services/componentServic
 import { Node } from '../../../common/Node';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { scrollToTopOfPage, temporarilyHighlightElement } from '../../../common/dom/dom';
-import { ConfigService } from '../../../../wise5/services/configService';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
@@ -31,7 +30,6 @@ export class NodeAuthoringComponent implements OnInit {
   subscriptions: Subscription = new Subscription();
 
   constructor(
-    private configService: ConfigService,
     private componentServiceLookupService: ComponentServiceLookupService,
     private componentTypeService: ComponentTypeService,
     private nodeService: TeacherNodeService,
