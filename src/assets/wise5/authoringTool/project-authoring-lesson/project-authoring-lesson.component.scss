@@ -6,8 +6,18 @@
   position: relative;
 }
 
-.lesson-bar:hover {
-  background-color: #add8e6;
+.lesson:hover {
+  &.lesson-collapsed {
+    background-color: #add8e6;
+  }
+}
+
+.lesson:hover .edit-lesson-button {
+  display: block;
+}
+
+.lesson-bar {
+  height: 40px;
 }
 
 .full-width {
@@ -16,6 +26,14 @@
 
 .pointer {
   cursor: pointer;
+}
+
+.edit-lesson-button {
+  display: none;
+
+  &.lesson-expanded {
+    display: block;
+  }
 }
 
 .expand-collapse-icon {

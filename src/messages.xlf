@@ -5645,7 +5645,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
@@ -11685,10 +11685,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
           <context context-type="linenumber">158</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="46c242cc262ba3a868dfd6bd37f555c1ada6877c" datatype="html">
         <source>Delete Component</source>
@@ -12200,6 +12196,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
           <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ad6affd1feb3803d26ea4c21021ad6d25b1fba13" datatype="html">
+        <source>Click to expand/collapse lesson</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0788cea8f340f4f5399901765d2003f90af76669" datatype="html">
