@@ -108,10 +108,6 @@ export class NodeAuthoringComponent implements OnInit {
     );
   }
 
-  protected previewStepInNewWindow(): void {
-    window.open(`${this.configService.getConfigParam('previewProjectURL')}/${this.nodeId}`);
-  }
-
   protected close(): void {
     this.dataService.setCurrentNode(null);
     scrollToTopOfPage();
