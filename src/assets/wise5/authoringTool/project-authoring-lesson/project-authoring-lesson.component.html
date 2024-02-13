@@ -8,42 +8,35 @@
       i18n-aria-label
     >
     </mat-checkbox>
-    <div class="full-width" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <div
+    <div
+      (click)="toggleExpanded()"
+      class="toggle-div full-width"
+      fxLayout="row wrap"
+      fxLayoutAlign="start center"
+      fxLayoutGap="8px"
+      matTooltip="Click to expand/collapse"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <node-icon-and-title [nodeId]="lesson.id" [showPosition]="showPosition"></node-icon-and-title>
+      <div fxFlex></div>
+      <button
+        mat-icon-button
         (click)="setCurrentNode(lesson.id)"
-        fxFlex
-        matTooltip="Click to enter lesson"
+        color="primary"
+        matTooltip="Edit"
         matTooltipPosition="above"
         i18n-matTooltip
       >
-        <node-icon-and-title
-          [nodeId]="lesson.id"
-          [showPosition]="showPosition"
-        ></node-icon-and-title>
-      </div>
-      <div *ngIf="lesson.ids.length > 0" fxLayout="row" fxLayoutAlign="end center">
-        <button
-          mat-icon-button
-          *ngIf="!expanded"
-          (click)="toggleExpanded()"
-          fxLayoutAlign="end center"
-          matTooltip="Click to expand"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
+        <mat-icon>build</mat-icon>
+      </button>
+      <div class="expand-collapse-icon">
+        <div *ngIf="!expanded" fxLayoutAlign="center center">
           <mat-icon>expand_more</mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          *ngIf="expanded"
-          (click)="toggleExpanded()"
-          fxLayoutAlign="end center"
-          matTooltip="Click to collapse"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
+        </div>
+        <div *ngIf="expanded" fxLayoutAlign="center center">
           <mat-icon>expand_less</mat-icon>
-        </button>
+        </div>
       </div>
     </div>
   </div>
@@ -56,5 +49,8 @@
         [projectId]="projectId"
       ></project-authoring-step>
     </ng-container>
+    <div *ngIf="lesson.ids.length === 0" class="no-steps-message" fxLayoutAlign="start center">
+      This lesson has no steps
+    </div>
   </div>
 </div>
