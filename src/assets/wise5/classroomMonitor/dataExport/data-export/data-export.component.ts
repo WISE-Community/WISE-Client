@@ -363,51 +363,6 @@ export class DataExportComponent implements OnInit {
     return selectedNodes;
   }
 
-  /**
-   * Handle node item clicked
-   * @param nodeItem the item object for a given activity or step
-   */
-  nodeItemClicked(nodeItem: any): void {
-    if (nodeItem.node != null) {
-      var node = nodeItem.node;
-      if (node.ids != null) {
-        for (var n = 0; n < node.ids.length; n++) {
-          var nodeId = node.ids[n];
-          var childNodeItem = this.projectIdToOrder[nodeId];
-          childNodeItem.checked = nodeItem.checked;
-          var components = childNodeItem.node.components;
-          if (components != null) {
-            for (var c = 0; c < components.length; c++) {
-              components[c].checked = nodeItem.checked;
-            }
-          }
-        }
-      } else if (node.components != null) {
-        if (nodeItem.checked) {
-          if (
-            nodeItem.node != null &&
-            nodeItem.node.components != null &&
-            nodeItem.node.components.length > 0
-          ) {
-            nodeItem.node.components.map((componentItem) => {
-              componentItem.checked = true;
-            });
-          }
-        } else {
-          if (
-            nodeItem.node != null &&
-            nodeItem.node.components != null &&
-            nodeItem.node.components.length > 0
-          ) {
-            nodeItem.node.components.map((componentItem) => {
-              componentItem.checked = false;
-            });
-          }
-        }
-      }
-    }
-  }
-
   selectAll(doSelect: boolean = true): void {
     if (this.projectIdToOrder != null) {
       for (let nodeId in this.projectIdToOrder) {
@@ -473,24 +428,6 @@ export class DataExportComponent implements OnInit {
    */
   getNodeTitleByNodeId(nodeId: string): string {
     return this.projectService.getNodeTitle(nodeId);
-  }
-
-  /**
-   * Check if a node id is for a group
-   * @param nodeId
-   * @returns whether the node is a group node
-   */
-  isGroupNode(nodeId: string): boolean {
-    return this.projectService.isGroupNode(nodeId);
-  }
-
-  /**
-   * Check if the node is in any branch path
-   * @param nodeId the node id of the node
-   * @return whether the node is in any branch path
-   */
-  isNodeInAnyBranchPath(nodeId: string): boolean {
-    return this.projectService.isNodeInAnyBranchPath(nodeId);
   }
 
   defaultClicked(): void {
