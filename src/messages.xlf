@@ -19821,8 +19821,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">327</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="e9a82ea36f9f69a388b2e7acd57d5a2732e18e96" datatype="html">
-        <source>Speech to text:</source>
+      <trans-unit id="8c64576457c4e31726ce62e7cc796b6de599678b" datatype="html">
+        <source>Speak to add to your response:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/speech-to-text/speech-to-text.component.html</context>
           <context context-type="linenumber">2</context>
