@@ -79,10 +79,10 @@ describe('ProjectAuthoringLessonComponent', () => {
 
 function lessonIsExpanded_clickCollapseButton_hideSteps() {
   describe('lesson is expanded', () => {
-    describe('collapse button is clicked', () => {
+    describe('lesson div is clicked', () => {
       it('hides steps', async () => {
         component.expanded = true;
-        await (await harness.getCollapseButton()).click();
+        (await harness.getToggleDiv()).click();
         expect(component.expanded).toBeFalse();
         const steps = await harness.getSteps();
         expect(steps.length).toEqual(0);
@@ -93,10 +93,10 @@ function lessonIsExpanded_clickCollapseButton_hideSteps() {
 
 function lessonIsCollapsed_clickExpandButton_showSteps() {
   describe('lesson is collapsed', () => {
-    describe('expand button is clicked', () => {
+    describe('lesson div is clicked', () => {
       it('shows steps', async () => {
         component.expanded = false;
-        await (await harness.getExpandButton()).click();
+        (await harness.getToggleDiv()).click();
         expect(component.expanded).toBeTrue();
         const steps = await harness.getSteps();
         expect(steps.length).toEqual(2);

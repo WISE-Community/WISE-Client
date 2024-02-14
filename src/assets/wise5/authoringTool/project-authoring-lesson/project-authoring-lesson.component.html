@@ -1,4 +1,4 @@
-<div id="{{ lesson.id }}" class="lesson">
+<div id="{{ lesson.id }}" class="lesson" [ngClass]="{ 'lesson-collapsed': !expanded }">
   <div class="lesson-bar full-width pointer" fxLayoutAlign="start center">
     <mat-checkbox
       color="primary"
@@ -8,42 +8,39 @@
       i18n-aria-label
     >
     </mat-checkbox>
-    <div class="full-width" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <div
-        (click)="setCurrentNode(lesson.id)"
-        fxFlex
-        matTooltip="Click to enter lesson"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <node-icon-and-title
-          [nodeId]="lesson.id"
-          [showPosition]="showPosition"
-        ></node-icon-and-title>
-      </div>
-      <div *ngIf="lesson.ids.length > 0" fxLayout="row" fxLayoutAlign="end center">
+    <div
+      (click)="toggleExpanded()"
+      class="toggle-div full-width"
+      fxLayout="row wrap"
+      fxLayoutAlign="start center"
+      fxLayoutGap="8px"
+      matTooltip="Click to expand/collapse lesson"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <node-icon-and-title [nodeId]="lesson.id" [showPosition]="showPosition"></node-icon-and-title>
+      <div fxFlex></div>
+      <div fxLayoutAlign="start center" fxLayoutGap="8px">
         <button
           mat-icon-button
-          *ngIf="!expanded"
-          (click)="toggleExpanded()"
-          fxLayoutAlign="end center"
-          matTooltip="Click to expand"
+          (click)="setCurrentNode(lesson.id)"
+          class="edit-lesson-button"
+          [ngClass]="{ 'lesson-expanded': expanded }"
+          color="primary"
+          matTooltip="Edit lesson"
           matTooltipPosition="above"
           i18n-matTooltip
         >
-          <mat-icon>expand_more</mat-icon>
+          <mat-icon>edit</mat-icon>
         </button>
-        <button
-          mat-icon-button
-          *ngIf="expanded"
-          (click)="toggleExpanded()"
-          fxLayoutAlign="end center"
-          matTooltip="Click to collapse"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>expand_less</mat-icon>
-        </button>
+        <div class="expand-collapse-icon">
+          <div *ngIf="!expanded" fxLayoutAlign="center center">
+            <mat-icon>expand_more</mat-icon>
+          </div>
+          <div *ngIf="expanded" fxLayoutAlign="center center">
+            <mat-icon>expand_less</mat-icon>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -56,5 +53,8 @@
         [projectId]="projectId"
       ></project-authoring-step>
     </ng-container>
+    <div *ngIf="lesson.ids.length === 0" class="no-steps-message" fxLayoutAlign="start center">
+      This lesson has no steps
+    </div>
   </div>
 </div>
