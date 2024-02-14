@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, Output, Signal } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SelectNodeEvent } from '../domain/select-node-event';
 import { NodeTypeSelected } from '../domain/node-type-selected';
+import { DeleteNodeService } from '../../services/deleteNodeService';
+import { CopyNodesService } from '../../services/copyNodesService';
 
 @Component({
   selector: 'project-authoring-step',
@@ -11,6 +13,9 @@ import { NodeTypeSelected } from '../domain/node-type-selected';
   styleUrls: ['./project-authoring-step.component.scss']
 })
 export class ProjectAuthoringStepComponent {
+  @Output() copyEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() moveEvent: EventEmitter<any> = new EventEmitter<any>();
   protected nodeTypeSelected: Signal<NodeTypeSelected>;
   @Input() projectId: number;
   @Output() selectNodeEvent: EventEmitter<SelectNodeEvent> = new EventEmitter<SelectNodeEvent>();
@@ -18,8 +23,11 @@ export class ProjectAuthoringStepComponent {
   @Input() step: any;
 
   constructor(
+    private copyNodesService: CopyNodesService,
     private dataService: TeacherDataService,
+    private deleteNodeService: DeleteNodeService,
     private projectService: TeacherProjectService,
+    private route: ActivatedRoute,
     private router: Router
   ) {}
 
@@ -89,5 +97,32 @@ export class ProjectAuthoringStepComponent {
   protected branchIconClicked(nodeId: string): void {
     this.dataService.setCurrentNodeByNodeId(nodeId);
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/path`]);
+  }
+
+  protected move(event: any): void {
+    event.stopPropagation();
+    this.router.navigate(['choose-move-location'], {
+      relativeTo: this.route,
+      state: { selectedNodeIds: [this.step.id] }
+    });
+  }
+
+  protected copy(event: any): void {
+    event.stopPropagation();
+    this.copyNodesService.copyNodesAfter([this.step.id], this.step.id);
+    this.saveAndRefreshProject();
+  }
+
+  protected delete(event: any): void {
+    event.stopPropagation();
+    if (confirm($localize`Are you sure you want to delete this step?`)) {
+      this.deleteNodeService.deleteNode(this.step.id);
+      this.saveAndRefreshProject();
+    }
+  }
+
+  private saveAndRefreshProject(): void {
+    this.projectService.saveProject();
+    this.projectService.refreshProject();
   }
 }
