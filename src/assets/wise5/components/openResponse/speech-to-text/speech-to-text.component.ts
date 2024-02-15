@@ -47,6 +47,7 @@ export class SpeechToTextComponent {
   protected languages: Language[];
   @Output() newTextEvent: EventEmitter<string> = new EventEmitter<string>();
   protected recording: Signal<boolean> = this.transcribeService.recording;
+  protected requestedRecording = false;
   protected selectedLanguage: Language = { languageCode: null, language: null };
 
   constructor(
@@ -82,6 +83,7 @@ export class SpeechToTextComponent {
 
   private async startRecording(): Promise<void> {
     try {
+      this.requestedRecording = true;
       await this.transcribeService.startRecording(
         this.selectedLanguage.languageCode,
         this.processTranscriptionText.bind(this)
@@ -94,6 +96,7 @@ export class SpeechToTextComponent {
 
   private stopRecording(): void {
     this.transcribeService.stopRecording();
+    this.requestedRecording = false;
   }
 
   private processTranscriptionText(text: string): void {

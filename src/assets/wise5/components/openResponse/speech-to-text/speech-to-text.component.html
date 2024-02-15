@@ -22,7 +22,8 @@
     </button>
   </mat-menu>
   <button
-    *ngIf="!recording()"
+    *ngIf="!(recording() && requestedRecording)"
+    [disabled]="recording() && !requestedRecording"
     mat-icon-button
     id="recordButton"
     (click)="toggleRecording()"
@@ -32,7 +33,7 @@
     <mat-icon color="primary">mic</mat-icon>
   </button>
   <button
-    *ngIf="recording()"
+    *ngIf="recording() && requestedRecording"
     mat-icon-button
     id="recordButton"
     (click)="toggleRecording()"
@@ -41,5 +42,7 @@
   >
     <mat-icon color="warn">stop_circle</mat-icon>
   </button>
-  <span *ngIf="recording()" class="mat-caption text-secondary" i18n>Recording...</span>
+  <span *ngIf="recording() && requestedRecording" class="mat-caption text-secondary" i18n
+    >Recording...</span
+  >
 </div>
