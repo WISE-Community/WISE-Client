@@ -8,7 +8,7 @@
     i18n-mat-tooltip
   >
     <mat-icon>translate</mat-icon>
-    <span *ngIf="selectedLanguage">{{ selectedLanguage.language }}</span>
+    <span *ngIf="selectedLanguage()">{{ selectedLanguage().language }}</span>
   </button>
   <mat-menu #languageSelect="matMenu">
     <button
@@ -16,7 +16,7 @@
       [value]="language"
       mat-menu-item
       (click)="changeLanguage(language)"
-      [class]="{ primary: language.languageCode === selectedLanguage.languageCode }"
+      [class]="{ primary: language.languageCode === selectedLanguage().languageCode }"
     >
       {{ language.language }}
     </button>

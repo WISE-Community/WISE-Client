@@ -19835,74 +19835,11 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="511208907501917679" datatype="html">
-        <source>Chinese (Simplified)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/openResponse/speech-to-text/speech-to-text.component.ts</context>
-          <context context-type="linenumber">37</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5866254605255506989" datatype="html">
-        <source>English</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/openResponse/speech-to-text/speech-to-text.component.ts</context>
-          <context context-type="linenumber">38</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7633754075223722162" datatype="html">
-        <source>French</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/openResponse/speech-to-text/speech-to-text.component.ts</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1858110241312746425" datatype="html">
-        <source>German</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/openResponse/speech-to-text/speech-to-text.component.ts</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2935232983274991580" datatype="html">
-        <source>Italian</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/openResponse/speech-to-text/speech-to-text.component.ts</context>
-          <context context-type="linenumber">41</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6924606686202701860" datatype="html">
-        <source>Japanese</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/openResponse/speech-to-text/speech-to-text.component.ts</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6145439649200570157" datatype="html">
-        <source>Korean</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/openResponse/speech-to-text/speech-to-text.component.ts</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5673214158044687618" datatype="html">
-        <source>Portuguese (Brazilian)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/openResponse/speech-to-text/speech-to-text.component.ts</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5190825892106392539" datatype="html">
-        <source>Spanish</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/openResponse/speech-to-text/speech-to-text.component.ts</context>
-          <context context-type="linenumber">45</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="3885391545392231744" datatype="html">
         <source>An error occurred while recording: <x id="PH" equiv-text="error.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/speech-to-text/speech-to-text.component.ts</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1509148984305384330" datatype="html">
@@ -21733,6 +21670,69 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
           <context context-type="linenumber">960</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="511208907501917679" datatype="html">
+        <source>Chinese (Simplified)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5866254605255506989" datatype="html">
+        <source>English</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7633754075223722162" datatype="html">
+        <source>French</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1858110241312746425" datatype="html">
+        <source>German</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2935232983274991580" datatype="html">
+        <source>Italian</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6924606686202701860" datatype="html">
+        <source>Japanese</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6145439649200570157" datatype="html">
+        <source>Korean</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5673214158044687618" datatype="html">
+        <source>Portuguese (Brazilian)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5190825892106392539" datatype="html">
+        <source>Spanish</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="846fecebb7756c6127955bc2c08d2111dce64c3c" datatype="html">

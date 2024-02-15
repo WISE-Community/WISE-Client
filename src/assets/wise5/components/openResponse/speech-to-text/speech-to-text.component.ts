@@ -1,20 +1,13 @@
 import { Component, EventEmitter, Output, Signal } from '@angular/core';
-import { TranscribeService } from '../../../services/transcribeService';
+import { Language, TranscribeService } from '../../../services/transcribeService';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { LanguageCode } from '@aws-sdk/client-transcribe-streaming';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ProjectService } from '../../../services/projectService';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-interface Language {
-  languageCode: LanguageCode;
-  language: string;
-}
 
 @Component({
   standalone: true,
@@ -33,37 +26,13 @@ interface Language {
   styleUrls: ['./speech-to-text.component.scss']
 })
 export class SpeechToTextComponent {
-  private allLanguages: Language[] = [
-    { languageCode: 'zh-CN', language: $localize`Chinese (Simplified)` },
-    { languageCode: 'en-US', language: $localize`English` },
-    { languageCode: 'fr-FR', language: $localize`French` },
-    { languageCode: 'de-DE', language: $localize`German` },
-    { languageCode: 'it-IT', language: $localize`Italian` },
-    { languageCode: 'ja-JP', language: $localize`Japanese` },
-    { languageCode: 'ko-KR', language: $localize`Korean` },
-    { languageCode: 'pt-BR', language: $localize`Portuguese (Brazilian)` },
-    { languageCode: 'es-US', language: $localize`Spanish` }
-  ];
-  protected languages: Language[];
+  protected languages: Language[] = this.transcribeService.languages;
   @Output() newTextEvent: EventEmitter<string> = new EventEmitter<string>();
   protected recording: Signal<boolean> = this.transcribeService.recording;
   protected recordingRequester = false;
-  protected selectedLanguage: Language = { languageCode: null, language: null };
+  protected selectedLanguage: Signal<Language> = this.transcribeService.selectedLanguage;
 
-  constructor(
-    private projectService: ProjectService,
-    private transcribeService: TranscribeService
-  ) {
-    const speechToText = this.projectService.project.speechToText;
-    this.selectedLanguage.languageCode = speechToText.defaultLanguage;
-    this.selectedLanguage.language = this.allLanguages.find(
-      (language) => language.languageCode === this.selectedLanguage.languageCode
-    ).language;
-    const supportedLanguages = speechToText.supportedLanguages;
-    this.languages = this.allLanguages.filter((language) =>
-      supportedLanguages.includes(language.languageCode)
-    );
-  }
+  constructor(private transcribeService: TranscribeService) {}
 
   ngOnDestroy(): void {
     this.stopRecording();
@@ -78,14 +47,14 @@ export class SpeechToTextComponent {
   }
 
   protected changeLanguage(language: Language): void {
-    this.selectedLanguage = language;
+    this.transcribeService.setSelectedLanguage(language);
   }
 
   private async startRecording(): Promise<void> {
     try {
       this.recordingRequester = true;
       await this.transcribeService.startRecording(
-        this.selectedLanguage.languageCode,
+        this.selectedLanguage().languageCode,
         this.processTranscriptionText.bind(this)
       );
     } catch (error) {
