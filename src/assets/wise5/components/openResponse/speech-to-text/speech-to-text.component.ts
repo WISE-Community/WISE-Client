@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, Signal } from '@angular/core';
 import { TranscribeService } from '../../../services/transcribeService';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LanguageCode } from '@aws-sdk/client-transcribe-streaming';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProjectService } from '../../../services/projectService';
-import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
@@ -44,10 +44,9 @@ export class SpeechToTextComponent {
     { languageCode: 'pt-BR', language: $localize`Portuguese (Brazilian)` },
     { languageCode: 'es-US', language: $localize`Spanish` }
   ];
-  @ViewChild('languageSelectButton') languageSelectButton: MatButton;
   protected languages: Language[];
   @Output() newTextEvent: EventEmitter<string> = new EventEmitter<string>();
-  protected recording: boolean;
+  protected recording: Signal<boolean> = this.transcribeService.recording;
   protected selectedLanguage: Language = { languageCode: null, language: null };
 
   constructor(
@@ -70,9 +69,7 @@ export class SpeechToTextComponent {
   }
 
   protected toggleRecording(): void {
-    this.recording = !this.recording;
-    this.languageSelectButton.disabled = this.recording;
-    if (this.recording) {
+    if (!this.recording()) {
       this.startRecording();
     } else {
       this.stopRecording();
