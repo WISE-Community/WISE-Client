@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, WritableSignal, signal } from '@angular/core';
 import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity';
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-provider-cognito-identity';
 import {
@@ -21,6 +21,9 @@ export class TranscribeService {
   private SAMPLE_RATE = 44100;
   private microphoneStream = undefined;
   private transcribeClient = undefined;
+
+  private recordingSignal: WritableSignal<boolean> = signal(false);
+  readonly recording = this.recordingSignal.asReadonly();
 
   constructor(private configService: ConfigService) {}
 
@@ -46,6 +49,7 @@ export class TranscribeService {
       this.transcribeClient.destroy();
       this.transcribeClient = undefined;
     }
+    this.recordingSignal.set(false);
   }
 
   private createTranscribeClient(): void {
@@ -79,6 +83,7 @@ export class TranscribeService {
       MediaSampleRateHertz: this.SAMPLE_RATE,
       AudioStream: this.getAudioStream()
     });
+    this.recordingSignal.set(true);
     const data = await this.transcribeClient.send(command);
     for await (const event of data.TranscriptResultStream) {
       for (const result of event.TranscriptEvent.Transcript.Results || []) {
