@@ -4,6 +4,7 @@ import { Language } from '../../../../../app/domain/language';
 import { EditProjectTranslationService } from '../../../services/editProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TranslateProjectService } from '../../../services/translateProjectService';
+import { generateRandomKey } from '../../../common/string/string';
 
 @Directive()
 export abstract class AbstractTranslatableFieldComponent {
@@ -45,13 +46,22 @@ export abstract class AbstractTranslatableFieldComponent {
     );
     this.translationTextChangedSubscription = this.translationTextChanged
       .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe((text: string) => {
+      .subscribe(async (text: string) => {
+        if (this.i18nId == null) {
+          await this.createI18NField();
+        }
         this.saveTranslationText(text);
       });
   }
 
   ngOnDestroy(): void {
     this.translationTextChangedSubscription.unsubscribe();
+  }
+
+  private createI18NField(): Promise<any> {
+    this.i18nId = generateRandomKey(30);
+    this.content[`${this.key}.i18n`] = { id: this.i18nId, modified: new Date().getTime() };
+    return this.projectService.saveProject();
   }
 
   private saveTranslationText(text: string): void {
