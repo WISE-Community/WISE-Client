@@ -60,9 +60,7 @@ function exportWithSingleAutoScore(): void {
         'Response',
         'Auto Score'
       ]);
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [
@@ -193,9 +191,7 @@ function exportWithMultipleSubScores(): void {
         'Score ki',
         'Score science'
       ]);
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [
@@ -300,9 +296,7 @@ function exportLatestRevisions() {
         'Response',
         'Auto Score'
       ]);
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [
@@ -401,9 +395,7 @@ function exportOnlySubmits(): void {
         'Response',
         'Auto Score'
       ]);
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [

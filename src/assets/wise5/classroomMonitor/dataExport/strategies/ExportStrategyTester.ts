@@ -5,13 +5,13 @@ import { DataExportService } from '../../../services/dataExportService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
-import { DataExportComponent } from '../data-export/data-export.component';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 import { copy } from '../../../common/object/object';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { Annotation } from '../../../common/Annotation';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
+import { ExportItemComponent } from '../export-item/export-item.component';
 
 export class ExportStrategyTester {
   annotationService: AnnotationService = new AnnotationService(null, null, null);
@@ -141,20 +141,20 @@ export class ExportStrategyTester {
   }
 
   createDataExportComponent(): any {
-    const controller = new DataExportComponent(
+    const controller = new ExportItemComponent(
       this.annotationService,
-      null,
       this.configService,
       this.dataExportService,
+      this.teacherDataService,
       null,
       this.teacherProjectService,
       null,
-      null,
-      this.teacherDataService
+      null
     );
-    spyOn(controller, 'showDownloadingExportMessage').and.callFake(() => {});
-    this.generateCSVFileSpy = spyOn(controller, 'generateCSVFile').and.callFake(() => {});
-    spyOn(controller, 'hideDownloadingExportMessage').and.callFake(() => {});
+    this.generateCSVFileSpy = spyOn(
+      this.componentExportStrategy,
+      'generateCSVFile'
+    ).and.callFake(() => {});
     controller.includeStudentNames = true;
     return controller;
   }
