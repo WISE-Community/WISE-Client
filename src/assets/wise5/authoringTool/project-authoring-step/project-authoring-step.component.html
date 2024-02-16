@@ -6,9 +6,6 @@
   [ngClass]="{ 'branch-path-step': isNodeInAnyBranchPath(step.id) }"
   [ngStyle]="{ 'background-color': getStepBackgroundColor(step.id) }"
   (click)="setCurrentNode(step.id)"
-  matTooltip="Click to enter step"
-  matTooltipPosition="above"
-  i18n-matTooltip
 >
   <mat-checkbox
     color="primary"
@@ -18,8 +15,8 @@
     aria-label="Select step"
     i18n-aria-label
   >
+    <node-icon-and-title [nodeId]="step.id" [showPosition]="showPosition"></node-icon-and-title>
   </mat-checkbox>
-  <node-icon-and-title [nodeId]="step.id" [showPosition]="showPosition"></node-icon-and-title>
   <div fxLayoutAlign="start center" fxLayoutGap="10px">
     <mat-icon
       *ngIf="isBranchPoint(step.id)"
@@ -50,7 +47,13 @@
       >message</mat-icon
     >
   </div>
-  <div fxFlex></div>
+  <div
+    class="step-click-to-enter-div"
+    matTooltip="Click to enter step"
+    matTooltipPosition="above"
+    i18n-matTooltip
+    fxFlex
+  ></div>
   <div class="dynamic-step-buttons">
     <div fxLayoutAlign="start center">
       <button

@@ -27,6 +27,11 @@
   display: block;
 }
 
+.step-click-to-enter-div {
+  flex-grow: 1;
+  align-self: stretch;
+}
+
 .rotate-180 {
   transform: rotate(180deg);
 }

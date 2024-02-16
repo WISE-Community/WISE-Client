@@ -12,7 +12,6 @@ import { DeleteNodeService } from '../../services/deleteNodeService';
   styleUrls: ['./project-authoring-step.component.scss']
 })
 export class ProjectAuthoringStepComponent {
-  @Output() deleteEvent: EventEmitter<any> = new EventEmitter<any>();
   protected nodeTypeSelected: Signal<NodeTypeSelected>;
   @Input() projectId: number;
   @Output() selectNodeEvent: EventEmitter<SelectNodeEvent> = new EventEmitter<SelectNodeEvent>();
@@ -94,7 +93,7 @@ export class ProjectAuthoringStepComponent {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/path`]);
   }
 
-  protected delete(event: any): void {
+  protected delete(event: Event): void {
     event.stopPropagation();
     if (confirm($localize`Are you sure you want to delete this step?`)) {
       this.deleteNodeService.deleteNode(this.step.id);
