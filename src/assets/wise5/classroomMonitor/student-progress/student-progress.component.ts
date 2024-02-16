@@ -28,14 +28,45 @@ export class StudentProgressComponent implements OnInit {
     private dataService: TeacherDataService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.sortOptions = {
+      team: {
+        label: $localize`Team`,
+        method: this.createSortTeam
+      },
+      student: {
+        label: $localize`Student`,
+        method: this.createSortStudent
+      },
+      firstName: {
+        label: $localize`First Name`,
+        method: this.createSortFirstName
+      },
+      lastName: {
+        label: $localize`Last Name`,
+        method: this.createSortLastName
+      },
+      location: {
+        label: $localize`Location`,
+        method: this.createSortLocation
+      },
+      completion: {
+        label: $localize`Completion`,
+        method: this.createSortCompletion
+      },
+      score: {
+        label: $localize`Score`,
+        method: this.createSortScore
+      }
+    };
+  }
 
   ngOnInit(): void {
     this.teacherWorkgroupId = this.configService.getWorkgroupId();
     this.sort = this.dataService.studentProgressSort;
     this.permissions = this.configService.getPermissions();
     this.initializeStudents();
-    this.initializeSorting();
+    this.sortWorkgroups();
     this.subscriptions.add(
       this.classroomStatusService.studentStatusReceived$.subscribe((args) => {
         const studentStatus = args.studentStatus;
@@ -78,40 +109,6 @@ export class StudentProgressComponent implements OnInit {
         this.updateTeam(workgroupId);
       });
     }
-  }
-
-  private initializeSorting(): void {
-    this.sortOptions = {
-      team: {
-        label: $localize`Team`,
-        method: this.createSortTeam
-      },
-      student: {
-        label: $localize`Student`,
-        method: this.createSortStudent
-      },
-      firstName: {
-        label: $localize`First Name`,
-        method: this.createSortFirstName
-      },
-      lastName: {
-        label: $localize`Last Name`,
-        method: this.createSortLastName
-      },
-      location: {
-        label: $localize`Location`,
-        method: this.createSortLocation
-      },
-      completion: {
-        label: $localize`Completion`,
-        method: this.createSortCompletion
-      },
-      score: {
-        label: $localize`Score`,
-        method: this.createSortScore
-      }
-    };
-    this.sortWorkgroups();
   }
 
   private updateTeam(workgroupId: number): void {
