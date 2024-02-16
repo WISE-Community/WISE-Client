@@ -1,3 +1,27 @@
+<ng-template #thead let-sortBy="sortBy">
+  <th class="table--list__thead__th" sticky>
+    <button
+      mat-button
+      class="table--list__thead__link"
+      (click)="setSort(sortBy)"
+      title="Sort by {{ sortOptions[sortBy].label }}"
+      i18n-title
+      fxFill
+      fxLayout="row"
+      fxLayoutAlign="center center"
+    >
+      <span>{{ sortOptions[sortBy].label }}</span>
+      <mat-icon
+        *ngIf="sort === sortBy || sort === '-' + sortBy"
+        class="table--list__thead__sort"
+        [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-' + sortBy }"
+      >
+        arrow_drop_up
+      </mat-icon>
+    </button>
+  </th>
+</ng-template>
+
 <div class="view-content view-content--with-sidemenu">
   <div class="l-constrained student-progress" fxLayout="column">
     <mat-list class="user-list student-select mat-elevation-z1">
@@ -9,152 +33,25 @@
       <table class="table--list mat-elevation-z1">
         <thead class="table--list__thead dark-theme">
           <tr>
-            <th class="table--list__thead__th">
-              <button
-                mat-button
-                class="table--list__thead__link"
-                (click)="setSort('team')"
-                title="Sort by team"
-                i18n-title
-                fxFill
-                fxLayout="row"
-                fxLayoutAlign="center center"
-              >
-                <span i18n>Team</span>
-                <mat-icon
-                  *ngIf="sort === 'team' || sort === '-team'"
-                  class="table--list__thead__sort"
-                  [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-team' }"
-                >
-                  arrow_drop_up
-                </mat-icon>
-              </button>
-            </th>
-            <th *ngIf="!permissions.canViewStudentNames" class="table--list__thead__th" sticky>
-              <button
-                mat-button
-                class="table--list__thead__link"
-                (click)="setSort('student')"
-                title="Sort by student"
-                i18n-title
-                fxFill
-                fxLayoutAlign="start center"
-              >
-                <span i18n>Student</span>
-                <mat-icon
-                  *ngIf="sort === 'student' || sort === '-student'"
-                  class="table--list__thead__sort"
-                  [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-student' }"
-                >
-                  arrow_drop_up
-                </mat-icon>
-              </button>
-            </th>
-            <ng-container *ngIf="permissions.canViewStudentNames">
-              <th class="table--list__thead__th" sticky>
-                <button
-                  mat-button
-                  class="table--list__thead__link"
-                  (click)="setSort('firstName')"
-                  title="Sort by first name"
-                  i18n-title
-                  fxFill
-                  fxLayoutAlign="start center"
-                >
-                  <span i18n>First Name</span>
-                  <mat-icon
-                    *ngIf="sort === 'firstName' || sort === '-firstName'"
-                    class="table--list__thead__sort"
-                    [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-firstName' }"
-                  >
-                    arrow_drop_up
-                  </mat-icon>
-                </button>
-              </th>
-              <th class="table--list__thead__th" sticky>
-                <button
-                  mat-button
-                  class="table--list__thead__link"
-                  (click)="setSort('lastName')"
-                  title="Sort by last name"
-                  i18n-title
-                  fxFill
-                  fxLayoutAlign="start center"
-                >
-                  <span i18n>Last Name</span>
-                  <mat-icon
-                    *ngIf="sort === 'lastName' || sort === '-lastName'"
-                    class="table--list__thead__sort"
-                    [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-lastName' }"
-                  >
-                    arrow_drop_up
-                  </mat-icon>
-                </button>
-              </th>
+            <ng-container *ngTemplateOutlet="thead; context: { sortBy: 'team' }"></ng-container>
+            <ng-container *ngIf="!permissions.canViewStudentNames">
+              <ng-container
+                *ngTemplateOutlet="thead; context: { sortBy: 'student' }"
+              ></ng-container>
             </ng-container>
-            <th class="table--list__thead__th" sticky>
-              <button
-                mat-button
-                class="table--list__thead__link"
-                (click)="setSort('location')"
-                title="Sort by location"
-                i18n-title
-                fxFill
-                fxLayout="row"
-                fxLayoutAlign="center center"
-              >
-                <span i18n>Current Location</span>
-                <mat-icon
-                  *ngIf="sort === 'location' || sort === '-location'"
-                  class="table--list__thead__sort"
-                  [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-location' }"
-                >
-                  arrow_drop_up
-                </mat-icon>
-              </button>
-            </th>
-            <th class="table--list__thead__th" sticky>
-              <button
-                mat-button
-                class="table--list__thead__link"
-                (click)="setSort('completion')"
-                title="Sort by completion"
-                i18n-title
-                fxFill
-                fxLayout="row"
-                fxLayoutAlign="center center"
-              >
-                <span i18n>Unit Completion</span>
-                <mat-icon
-                  *ngIf="sort === 'completion' || sort === '-completion'"
-                  class="table--list__thead__sort"
-                  [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-completion' }"
-                >
-                  arrow_drop_up
-                </mat-icon>
-              </button>
-            </th>
-            <th class="table--list__thead__th" sticky>
-              <button
-                mat-button
-                class="table--list__thead__link"
-                (click)="setSort('score')"
-                title="Sort by score"
-                i18n-title
-                fxFill
-                fxLayout="row"
-                fxLayoutAlign="center center"
-              >
-                <span i18n>Score</span>
-                <mat-icon
-                  *ngIf="sort === 'score' || sort === '-score'"
-                  class="table--list__thead__sort"
-                  [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-score' }"
-                >
-                  arrow_drop_up
-                </mat-icon>
-              </button>
-            </th>
+            <ng-container *ngIf="permissions.canViewStudentNames">
+              <ng-container
+                *ngTemplateOutlet="thead; context: { sortBy: 'firstName' }"
+              ></ng-container>
+              <ng-container
+                *ngTemplateOutlet="thead; context: { sortBy: 'lastName' }"
+              ></ng-container>
+            </ng-container>
+            <ng-container *ngTemplateOutlet="thead; context: { sortBy: 'location' }"></ng-container>
+            <ng-container
+              *ngTemplateOutlet="thead; context: { sortBy: 'completion' }"
+            ></ng-container>
+            <ng-container *ngTemplateOutlet="thead; context: { sortBy: 'score' }"></ng-container>
           </tr>
         </thead>
         <tbody>

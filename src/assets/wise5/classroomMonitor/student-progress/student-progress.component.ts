@@ -19,6 +19,7 @@ export class StudentProgressComponent implements OnInit {
   sortedStudents: StudentProgress[];
   subscriptions: Subscription = new Subscription();
   teacherWorkgroupId: number;
+  sortOptions: any;
   students: StudentProgress[];
 
   constructor(
@@ -34,6 +35,7 @@ export class StudentProgressComponent implements OnInit {
     this.sort = this.dataService.studentProgressSort;
     this.permissions = this.configService.getPermissions();
     this.initializeStudents();
+    this.initializeSorting();
     this.subscriptions.add(
       this.classroomStatusService.studentStatusReceived$.subscribe((args) => {
         const studentStatus = args.studentStatus;
@@ -76,6 +78,39 @@ export class StudentProgressComponent implements OnInit {
         this.updateTeam(workgroupId);
       });
     }
+  }
+
+  private initializeSorting(): void {
+    this.sortOptions = {
+      team: {
+        label: $localize`Team`,
+        method: this.createSortTeam
+      },
+      student: {
+        label: $localize`Student`,
+        method: this.createSortStudent
+      },
+      firstName: {
+        label: $localize`First Name`,
+        method: this.createSortFirstName
+      },
+      lastName: {
+        label: $localize`Last Name`,
+        method: this.createSortLastName
+      },
+      location: {
+        label: $localize`Location`,
+        method: this.createSortLocation
+      },
+      completion: {
+        label: $localize`Completion`,
+        method: this.createSortCompletion
+      },
+      score: {
+        label: $localize`Score`,
+        method: this.createSortScore
+      }
+    };
     this.sortWorkgroups();
   }
 
@@ -110,53 +145,12 @@ export class StudentProgressComponent implements OnInit {
 
   private sortWorkgroups(): void {
     this.sortedStudents = [...this.students];
-    switch (this.sort) {
-      case 'team':
-        this.sortedStudents.sort(this.createSortTeam('asc'));
-        break;
-      case '-team':
-        this.sortedStudents.sort(this.createSortTeam('desc'));
-        break;
-      case 'student':
-        this.sortedStudents.sort(this.createSortStudent('asc'));
-        break;
-      case '-student':
-        this.sortedStudents.sort(this.createSortStudent('desc'));
-        break;
-      case 'firstName':
-        this.sortedStudents.sort(this.createSortFirstName('asc'));
-        break;
-      case '-firstName':
-        this.sortedStudents.sort(this.createSortFirstName('desc'));
-        break;
-      case 'lastName':
-        this.sortedStudents.sort(this.createSortLastName('asc'));
-        break;
-      case '-lastName':
-        this.sortedStudents.sort(this.createSortLastName('desc'));
-        break;
-      case 'score':
-        this.sortedStudents.sort(this.createSortScore('asc'));
-        break;
-      case '-score':
-        this.sortedStudents.sort(this.createSortScore('desc'));
-        break;
-      case 'completion':
-        this.sortedStudents.sort(this.createSortCompletion('asc'));
-        break;
-      case '-completion':
-        this.sortedStudents.sort(this.createSortCompletion('desc'));
-        break;
-      case 'location':
-        this.sortedStudents.sort(this.createSortLocation('asc'));
-        break;
-      case '-location':
-        this.sortedStudents.sort(this.createSortLocation('desc'));
-        break;
-    }
+    const dir = this.sort.charAt(0) === '-' ? 'desc' : 'asc';
+    const sort = this.sort.charAt(0) === '-' ? this.sort.slice(1) : this.sort;
+    this.sortedStudents.sort(this.sortOptions[sort].method(dir));
   }
 
-  private createSortTeam(direction: string): any {
+  private createSortTeam(direction: 'asc' | 'desc'): any {
     return (studentA: any, studentB: any): number => {
       return direction === 'asc'
         ? studentA.workgroupId - studentB.workgroupId
@@ -164,7 +158,7 @@ export class StudentProgressComponent implements OnInit {
     };
   }
 
-  private createSortStudent(direction: string): any {
+  private createSortStudent(direction: 'asc' | 'desc'): any {
     return (studentA: any, studentB: any): number => {
       const localeCompare =
         direction === 'asc'
@@ -174,7 +168,7 @@ export class StudentProgressComponent implements OnInit {
     };
   }
 
-  private createSortFirstName(direction: string): any {
+  private createSortFirstName(direction: 'asc' | 'desc'): any {
     return (studentA: any, studentB: any): number => {
       const localeCompare =
         direction === 'asc'
@@ -184,7 +178,7 @@ export class StudentProgressComponent implements OnInit {
     };
   }
 
-  private createSortLastName(direction: string): any {
+  private createSortLastName(direction: 'asc' | 'desc'): any {
     return (studentA: any, studentB: any): number => {
       const localeCompare =
         direction === 'asc'
@@ -194,7 +188,7 @@ export class StudentProgressComponent implements OnInit {
     };
   }
 
-  private createSortScore(direction: string): any {
+  private createSortScore(direction: 'asc' | 'desc'): any {
     return (studentA: any, studentB: any): number => {
       if (studentA.scorePct === studentB.scorePct) {
         return studentA.workgroupId
@@ -209,7 +203,7 @@ export class StudentProgressComponent implements OnInit {
     };
   }
 
-  private createSortCompletion(direction: string): any {
+  private createSortCompletion(direction: 'asc' | 'desc'): any {
     return (studentA: any, studentB: any): number => {
       const completionA = studentA.completionPct;
       const completionB = studentB.completionPct;
@@ -224,7 +218,7 @@ export class StudentProgressComponent implements OnInit {
     };
   }
 
-  private createSortLocation(direction: string): any {
+  private createSortLocation(direction: 'asc' | 'desc'): any {
     return (studentA: any, studentB: any): number => {
       const localeCompare =
         direction === 'asc'
