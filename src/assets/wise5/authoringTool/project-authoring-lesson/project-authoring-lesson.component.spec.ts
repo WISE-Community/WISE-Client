@@ -15,7 +15,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProjectAuthoringStepComponent } from '../project-authoring-step/project-authoring-step.component';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ProjectAuthoringLessonHarness } from './project-authoring-lesson.harness';
-import { CopyNodesService } from '../../services/copyNodesService';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -47,7 +46,6 @@ describe('ProjectAuthoringLessonComponent', () => {
       ],
       providers: [
         ClassroomStatusService,
-        CopyNodesService,
         DeleteNodeService,
         TeacherDataService,
         TeacherProjectService,

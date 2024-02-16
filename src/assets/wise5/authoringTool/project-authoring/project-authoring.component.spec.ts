@@ -85,7 +85,6 @@ describe('ProjectAuthoringComponent', () => {
 
   collapseAllButtonClicked();
   expandAllButtonClicked();
-  copySpecificStep();
   deleteSpecificStep();
 });
 
@@ -136,20 +135,6 @@ function expandAllButtonClicked() {
       it('expand all button is disabled', async () => {
         expect(await expandAllButton.isDisabled()).toBe(true);
       });
-    });
-  });
-}
-
-function copySpecificStep() {
-  describe('copy step button on a specific step is clicked', () => {
-    it('creates a copy of the step and puts it after the original step', async () => {
-      expect((await harness.getSteps()).length).toEqual(49);
-      const newStepNumberAndTitle = '1.2: HTML Step';
-      expect(await harness.getStep(newStepNumberAndTitle)).toEqual(null);
-      const step = await harness.getStep('1.1: HTML Step');
-      await (await step.getCopyButton()).click();
-      expect(await harness.getStep(newStepNumberAndTitle)).not.toEqual(null);
-      expect((await harness.getSteps()).length).toEqual(50);
     });
   });
 }

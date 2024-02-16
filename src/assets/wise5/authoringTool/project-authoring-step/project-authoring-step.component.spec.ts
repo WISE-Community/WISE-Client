@@ -12,7 +12,6 @@ import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and
 import { NodeIconComponent } from '../../vle/node-icon/node-icon.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { CopyNodesService } from '../../services/copyNodesService';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -37,7 +36,6 @@ describe('ProjectAuthoringStepComponent', () => {
       ],
       providers: [
         ClassroomStatusService,
-        CopyNodesService,
         DeleteNodeService,
         TeacherDataService,
         TeacherProjectService,
