@@ -3,7 +3,6 @@ import { AiChatShowWorkComponent } from '../ai-chat-show-work/ai-chat-show-work.
 
 @Component({
   selector: 'ai-chat-grading',
-  templateUrl: './ai-chat-grading.component.html',
-  styleUrls: ['./ai-chat-grading.component.scss']
+  templateUrl: './ai-chat-grading.component.html'
 })
 export class AiChatGradingComponent extends AiChatShowWorkComponent {}
