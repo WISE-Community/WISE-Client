@@ -54,7 +54,7 @@ export class SpeechToTextComponent {
     try {
       this.recordingRequester = true;
       await this.transcribeService.startRecording(
-        this.selectedLanguage().languageCode,
+        this.selectedLanguage().code,
         this.processTranscriptionText.bind(this)
       );
     } catch (error) {

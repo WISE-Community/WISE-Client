@@ -18,8 +18,8 @@ window.process = process;
 window.Buffer = Buffer;
 
 export interface Language {
-  languageCode: LanguageCode;
-  language: string;
+  code: LanguageCode;
+  name: string;
 }
 
 @Injectable()
@@ -27,23 +27,23 @@ export class TranscribeService {
   private SAMPLE_RATE = 44100;
 
   private allLanguages: Language[] = [
-    { languageCode: 'zh-CN', language: $localize`Chinese (Simplified)` },
-    { languageCode: 'en-US', language: $localize`English` },
-    { languageCode: 'fr-FR', language: $localize`French` },
-    { languageCode: 'de-DE', language: $localize`German` },
-    { languageCode: 'it-IT', language: $localize`Italian` },
-    { languageCode: 'ja-JP', language: $localize`Japanese` },
-    { languageCode: 'ko-KR', language: $localize`Korean` },
-    { languageCode: 'pt-BR', language: $localize`Portuguese (Brazilian)` },
-    { languageCode: 'es-US', language: $localize`Spanish` }
+    { code: 'zh-CN', name: $localize`Chinese (Simplified)` },
+    { code: 'en-US', name: $localize`English` },
+    { code: 'fr-FR', name: $localize`French` },
+    { code: 'de-DE', name: $localize`German` },
+    { code: 'it-IT', name: $localize`Italian` },
+    { code: 'ja-JP', name: $localize`Japanese` },
+    { code: 'ko-KR', name: $localize`Korean` },
+    { code: 'pt-BR', name: $localize`Portuguese (Brazilian)` },
+    { code: 'es-US', name: $localize`Spanish` }
   ];
   readonly languages: Language[];
   private microphoneStream = undefined;
   private recordingSignal: WritableSignal<boolean> = signal(false);
   readonly recording = this.recordingSignal.asReadonly();
   private selectedLanguageSignal: WritableSignal<Language> = signal({
-    languageCode: null,
-    language: null
+    code: null,
+    name: null
   });
   readonly selectedLanguage = this.selectedLanguageSignal.asReadonly();
   private transcribeClient = undefined;
@@ -51,12 +51,11 @@ export class TranscribeService {
   constructor(private configService: ConfigService, private projectService: ProjectService) {
     const { defaultLanguage, supportedLanguages } = this.projectService.project.speechToText;
     this.selectedLanguageSignal.set({
-      languageCode: defaultLanguage,
-      language: this.allLanguages.find((language) => language.languageCode === defaultLanguage)
-        .language
+      code: defaultLanguage,
+      name: this.allLanguages.find((language) => language.code === defaultLanguage).name
     });
     this.languages = this.allLanguages.filter((language) =>
-      supportedLanguages.includes(language.languageCode)
+      supportedLanguages.includes(language.code)
     );
   }
 
