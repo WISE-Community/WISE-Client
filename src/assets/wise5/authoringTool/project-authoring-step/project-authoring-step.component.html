@@ -1,57 +1,72 @@
 <div
   id="{{ step.id }}"
   fxLayoutAlign="start center"
-  class="pointer stepHeader projectItem"
-  [ngClass]="{ branchPathStepHeader: isNodeInAnyBranchPath(step.id) }"
+  fxLayoutGap="10px"
+  class="step pointer"
+  [ngClass]="{ 'branch-path-step': isNodeInAnyBranchPath(step.id) }"
   [ngStyle]="{ 'background-color': getStepBackgroundColor(step.id) }"
+  (click)="setCurrentNode(step.id)"
 >
   <mat-checkbox
     color="primary"
     (change)="selectNode($event.checked)"
+    (click)="$event.stopPropagation()"
     [disabled]="nodeTypeSelected() === 'lesson'"
     aria-label="Select step"
     i18n-aria-label
   >
+    <node-icon-and-title [nodeId]="step.id" [showPosition]="showPosition"></node-icon-and-title>
   </mat-checkbox>
+  <div fxLayoutAlign="start center" fxLayoutGap="10px">
+    <mat-icon
+      *ngIf="isBranchPoint(step.id)"
+      class="rotate-180"
+      (click)="branchIconClicked(step.id); $event.stopPropagation()"
+      matTooltip="Branch point with {{ getNumberOfBranchPaths(step.id) }} paths based on {{
+        getBranchCriteriaDescription(step.id)
+      }}"
+      matTooltipPosition="right"
+      i18n-matTooltip
+      >call_split</mat-icon
+    >
+    <mat-icon
+      *ngIf="nodeHasConstraint(step.id)"
+      (click)="constraintIconClicked(step.id); $event.stopPropagation()"
+      matTooltip="{{ getNumberOfConstraintsOnNode(step.id) }} Constraint(s) {{
+        getConstraintDescriptions(step.id)
+      }}"
+      matTooltipPosition="right"
+      i18n-matTooltip
+      >block</mat-icon
+    >
+    <mat-icon
+      *ngIf="nodeHasRubric(step.id)"
+      matTooltip="Has Rubric"
+      matTooltipPosition="right"
+      i18n-matTooltip
+      >message</mat-icon
+    >
+  </div>
   <div
-    class="projectItemTitleDiv"
-    fxLayoutAlign="start center"
-    fxLayoutGap="10px"
-    (click)="setCurrentNode(step.id)"
+    class="step-click-to-enter-div"
     matTooltip="Click to enter step"
     matTooltipPosition="above"
     i18n-matTooltip
-  >
-    <node-icon-and-title [nodeId]="step.id" [showPosition]="showPosition"></node-icon-and-title>
-    <p fxLayoutAlign="start center" fxLayoutGap="10px">
-      <mat-icon
-        *ngIf="isBranchPoint(step.id)"
-        class="rotate-180"
-        (click)="branchIconClicked(step.id); $event.stopPropagation()"
-        matTooltip="Branch point with {{ getNumberOfBranchPaths(step.id) }} paths based on {{
-          getBranchCriteriaDescription(step.id)
-        }}"
-        matTooltipPosition="right"
+    fxFlex
+  ></div>
+  <div class="dynamic-step-buttons">
+    <div fxLayoutAlign="start center">
+      <button
+        mat-icon-button
+        class="delete-button"
+        (click)="delete($event)"
+        color="primary"
+        matTooltip="Delete step"
+        matTooltipPosition="above"
         i18n-matTooltip
-        >call_split</mat-icon
       >
-      <mat-icon
-        *ngIf="nodeHasConstraint(step.id)"
-        (click)="constraintIconClicked(step.id); $event.stopPropagation()"
-        matTooltip="{{ getNumberOfConstraintsOnNode(step.id) }} Constraint(s) {{
-          getConstraintDescriptions(step.id)
-        }}"
-        matTooltipPosition="right"
-        i18n-matTooltip
-        >block</mat-icon
-      >
-      <mat-icon
-        *ngIf="nodeHasRubric(step.id)"
-        matTooltip="Has Rubric"
-        matTooltipPosition="right"
-        i18n-matTooltip
-        >message</mat-icon
-      >
-    </p>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
   </div>
 </div>

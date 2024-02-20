@@ -4,6 +4,7 @@ import { TeacherDataService } from '../../services/teacherDataService';
 import { Router } from '@angular/router';
 import { SelectNodeEvent } from '../domain/select-node-event';
 import { NodeTypeSelected } from '../domain/node-type-selected';
+import { DeleteNodeService } from '../../services/deleteNodeService';
 
 @Component({
   selector: 'project-authoring-step',
@@ -19,6 +20,7 @@ export class ProjectAuthoringStepComponent {
 
   constructor(
     private dataService: TeacherDataService,
+    private deleteNodeService: DeleteNodeService,
     private projectService: TeacherProjectService,
     private router: Router
   ) {}
@@ -89,5 +91,18 @@ export class ProjectAuthoringStepComponent {
   protected branchIconClicked(nodeId: string): void {
     this.dataService.setCurrentNodeByNodeId(nodeId);
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/path`]);
+  }
+
+  protected delete(event: Event): void {
+    event.stopPropagation();
+    if (confirm($localize`Are you sure you want to delete this step?`)) {
+      this.deleteNodeService.deleteNode(this.step.id);
+      this.saveAndRefreshProject();
+    }
+  }
+
+  private saveAndRefreshProject(): void {
+    this.projectService.saveProject();
+    this.projectService.refreshProject();
   }
 }
