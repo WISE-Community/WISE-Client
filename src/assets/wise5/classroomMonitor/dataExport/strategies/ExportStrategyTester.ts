@@ -155,7 +155,6 @@ export class ExportStrategyTester {
       this.componentExportStrategy,
       'generateCSVFile'
     ).and.callFake(() => {});
-    controller.includeStudentNames = true;
     return controller;
   }
 

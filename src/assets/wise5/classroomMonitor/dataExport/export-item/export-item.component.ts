@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConfigService } from '../../../services/configService';
-import { DataExportContext } from '../DataExportContext';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { MatchComponentDataExportStrategy } from '../strategies/MatchComponentDataExportStrategy';
 import { DiscussionComponentDataExportStrategy } from '../strategies/DiscussionComponentDataExportStrategy';
@@ -23,7 +22,7 @@ import { AnnotationService } from '../../../services/annotationService';
   styleUrls: ['./export-item.component.scss']
 })
 export class ExportItemComponent implements OnInit {
-  allowedComponentTypesForAllRevisions = [
+  private allowedComponentTypesForAllRevisions = [
     'DialogGuidance',
     'Discussion',
     'Label',
@@ -31,19 +30,23 @@ export class ExportItemComponent implements OnInit {
     'OpenResponse',
     'PeerChat'
   ];
-  allowedComponentTypesForLatestRevisions = ['DialogGuidance', 'Label', 'Match', 'OpenResponse'];
-  canViewStudentNames: boolean = false;
-  componentExportTooltips = {
+  private allowedComponentTypesForLatestRevisions = [
+    'DialogGuidance',
+    'Label',
+    'Match',
+    'OpenResponse'
+  ];
+  protected canViewStudentNames: boolean = false;
+  protected componentExportTooltips = {
     match: $localize`Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position`
   };
-  dataExportContext: DataExportContext;
-  includeCorrectnessColumns: boolean = true;
-  includeOnlySubmits: boolean = false;
-  includeStudentNames: boolean;
-  nodes: any[] = [];
-  project: any;
-  projectIdToOrder: any;
-  workSelectionType: string;
+  protected includeCorrectnessColumns: boolean = true;
+  protected includeOnlySubmits: boolean = false;
+  protected includeStudentNames: boolean;
+  protected nodes: any[] = [];
+  protected project: any;
+  private projectIdToOrder: any;
+  private workSelectionType: string;
 
   constructor(
     public annotationService: AnnotationService,
@@ -57,7 +60,6 @@ export class ExportItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dataExportContext = new DataExportContext(this as any);
     this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;
     this.includeStudentNames = this.canViewStudentNames;
     this.project = this.projectService.project;
