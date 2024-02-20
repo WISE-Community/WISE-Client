@@ -12,6 +12,8 @@ import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and
 import { NodeIconComponent } from '../../vle/node-icon/node-icon.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { DeleteNodeService } from '../../services/deleteNodeService';
+import { RouterTestingModule } from '@angular/router/testing';
 
 const nodeId1 = 'nodeId1';
 const node = { id: nodeId1 };
@@ -29,10 +31,12 @@ describe('ProjectAuthoringStepComponent', () => {
         MatCheckboxModule,
         MatDialogModule,
         MatIconModule,
+        RouterTestingModule,
         StudentTeacherCommonServicesModule
       ],
       providers: [
         ClassroomStatusService,
+        DeleteNodeService,
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService

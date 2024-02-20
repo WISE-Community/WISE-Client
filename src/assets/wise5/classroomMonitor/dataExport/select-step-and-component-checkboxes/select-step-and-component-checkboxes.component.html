@@ -1,0 +1,44 @@
+<div *ngFor="let node of nodes" fxLayout="column">
+  <div fxLayoutAlign="start center" fxLayoutAlign="start center">
+    <mat-checkbox
+      *ngIf="node.order !== 0"
+      [(ngModel)]="node.checked"
+      (ngModelChange)="nodeItemClicked(node)"
+      [ngClass]="{
+        step: node.node.type !== 'group',
+        'branch-path-step': isNodeInAnyBranchPath(node.node.id) && node.node.type !== 'group'
+      }"
+      color="primary"
+      aria-label="Item"
+      i18n-aria-label
+    >
+      <h6>{{ nodeIdToPositionAndTitle[node.node.id] }}</h6>
+    </mat-checkbox>
+    <button
+      *ngIf="node.node.type !== 'group'"
+      (click)="previewNode(node.node)"
+      mat-icon-button
+      matTooltip="Preview"
+      matTooltipPosition="right"
+      i18n-matTooltip
+    >
+      <mat-icon>preview</mat-icon>
+    </button>
+  </div>
+  <div fxLayout="column" fxLayoutGap="10px">
+    <ng-container *ngFor="let componentItem of node.node.components; index as componentIndex">
+      <div
+        *ngIf="node.order !== 0 && node.node.type !== 'group' && node.node.components.length > 0"
+      >
+        <mat-checkbox
+          [(ngModel)]="componentItem.checked"
+          color="primary"
+          class="component"
+          aria-label="{{ componentItem.type }}"
+        >
+          {{ componentIndex + 1 }}. {{ componentItem.type }}
+        </mat-checkbox>
+      </div>
+    </ng-container>
+  </div>
+</div>

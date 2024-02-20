@@ -64,7 +64,9 @@ export class ProjectService {
     this.inactiveStepNodes = [];
     this.inactiveGroupNodes = [];
     this.groupNodes = [];
-    this.idToNode = {};
+    Object.keys(this.idToNode).forEach((key) => {
+      delete this.idToNode[key];
+    });
     this.metadata = {};
     this.rootNode = null;
     this.idToOrder = {};

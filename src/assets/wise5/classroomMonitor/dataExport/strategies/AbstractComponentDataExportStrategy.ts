@@ -3,6 +3,7 @@ import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 import { removeHTMLTags } from '../../../common/string/string';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
+import { generateCSVFile } from '../../../common/csv/csv';
 
 export abstract class AbstractComponentDataExportStrategy extends AbstractDataExportStrategy {
   protected allOrLatest: 'all' | 'latest';
@@ -51,7 +52,6 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
   }
 
   export(): void {
-    this.controller.showDownloadingExportMessage();
     const components = [{ nodeId: this.nodeId, componentId: this.component.id }];
     this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
       const columnNameToNumber = {};
@@ -66,9 +66,16 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
         this.component.id,
         this.getComponentTypeWithUnderscore()
       );
-      this.controller.generateCSVFile(rows, fileName);
-      this.controller.hideDownloadingExportMessage();
+      this.generateCSVFile(rows, fileName);
     });
+  }
+
+  /*
+   * This function is for testing purposes to be able to spy on the generateCSVFile() function
+   * and should eventually be removed if we can figure out how to spy on an imported function.
+   */
+  generateCSVFile(rows: any[], fileName: string): void {
+    generateCSVFile(rows, fileName);
   }
 
   protected abstract generateComponentHeaderRow(component: any): string[];

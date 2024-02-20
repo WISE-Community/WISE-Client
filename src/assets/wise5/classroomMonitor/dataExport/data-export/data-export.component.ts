@@ -16,14 +16,7 @@ import { OneWorkgroupPerRowDataExportStrategy } from '../strategies/OneWorkgroup
 import { RawDataExportStrategy } from '../strategies/RawDataExportStrategy';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spinner/dialog-with-spinner.component';
-import { DiscussionComponentDataExportStrategy } from '../strategies/DiscussionComponentDataExportStrategy';
-import { LabelComponentDataExportStrategy } from '../strategies/LabelComponentDataExportStrategy';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PeerChatComponentDataExportStrategy } from '../strategies/PeerChatComponentDataExportStrategy';
-import { OpenResponseComponentDataExportStrategy } from '../strategies/OpenResponseComponentExportStrategy';
-import { ComponentDataExportParams } from '../ComponentDataExportParams';
-import { DialogGuidanceComponentDataExportStrategy } from '../strategies/DialogGuidanceComponentDataExportStrategy';
-import { MatchComponentDataExportStrategy } from '../strategies/MatchComponentDataExportStrategy';
 
 @Component({
   selector: 'data-export',
@@ -31,16 +24,6 @@ import { MatchComponentDataExportStrategy } from '../strategies/MatchComponentDa
   styleUrls: ['./data-export.component.scss']
 })
 export class DataExportComponent implements OnInit {
-  allowedComponentTypesForAllRevisions = [
-    'DialogGuidance',
-    'Discussion',
-    'Label',
-    'Match',
-    'OpenResponse',
-    'PeerChat'
-  ];
-  allowedComponentTypesForLatestRevisions = ['DialogGuidance', 'Label', 'Match', 'OpenResponse'];
-  autoScoreLabel: string = 'Auto Score';
   componentExportTooltips = {};
   componentExportDefaultColumnNames = [
     '#',
@@ -78,17 +61,14 @@ export class DataExportComponent implements OnInit {
   exportType: string = null; // type of export: [latestWork, allWork, events]
   exportTypeLabel: string;
   flattenedProjectAsNodeIds: string[] = [];
-  ideaLabel: string = 'Idea';
   includeAnnotations: boolean;
   includeBranchPathTaken: boolean;
   includeBranchPathTakenNodeId: boolean;
   includeBranchPathTakenStepTitle: boolean;
   includeComments: boolean;
   includeCommentTimestamps: boolean;
-  includeCorrectnessColumns: boolean;
   includeEvents: boolean;
   includeNames: boolean;
-  includeOnlySubmits: boolean;
   includeScores: boolean;
   includeScoreTimestamps: boolean;
   includeStudentEvents: boolean;
@@ -97,14 +77,10 @@ export class DataExportComponent implements OnInit {
   includeStudentWorkIds: boolean;
   includeStudentWorkTimestamps: boolean;
   includeTeacherEvents: boolean;
-  itemIdLabel: string = 'Item ID';
   nodes: any[] = [];
   project: any;
   projectIdToOrder: any;
   projectItems: any;
-  scoreLabel: string = 'Score';
-  studentResponseLabel: string = 'Student Response';
-  workSelectionType: string;
 
   constructor(
     public annotationService: AnnotationService,
@@ -363,51 +339,6 @@ export class DataExportComponent implements OnInit {
     return selectedNodes;
   }
 
-  /**
-   * Handle node item clicked
-   * @param nodeItem the item object for a given activity or step
-   */
-  nodeItemClicked(nodeItem: any): void {
-    if (nodeItem.node != null) {
-      var node = nodeItem.node;
-      if (node.ids != null) {
-        for (var n = 0; n < node.ids.length; n++) {
-          var nodeId = node.ids[n];
-          var childNodeItem = this.projectIdToOrder[nodeId];
-          childNodeItem.checked = nodeItem.checked;
-          var components = childNodeItem.node.components;
-          if (components != null) {
-            for (var c = 0; c < components.length; c++) {
-              components[c].checked = nodeItem.checked;
-            }
-          }
-        }
-      } else if (node.components != null) {
-        if (nodeItem.checked) {
-          if (
-            nodeItem.node != null &&
-            nodeItem.node.components != null &&
-            nodeItem.node.components.length > 0
-          ) {
-            nodeItem.node.components.map((componentItem) => {
-              componentItem.checked = true;
-            });
-          }
-        } else {
-          if (
-            nodeItem.node != null &&
-            nodeItem.node.components != null &&
-            nodeItem.node.components.length > 0
-          ) {
-            nodeItem.node.components.map((componentItem) => {
-              componentItem.checked = false;
-            });
-          }
-        }
-      }
-    }
-  }
-
   selectAll(doSelect: boolean = true): void {
     if (this.projectIdToOrder != null) {
       for (let nodeId in this.projectIdToOrder) {
@@ -436,10 +367,6 @@ export class DataExportComponent implements OnInit {
 
   previewProject(): void {
     window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
-  }
-
-  previewNode(node: any): void {
-    window.open(`${this.configService.getConfigParam('previewProjectURL')}/${node.id}`);
   }
 
   /**
@@ -473,24 +400,6 @@ export class DataExportComponent implements OnInit {
    */
   getNodeTitleByNodeId(nodeId: string): string {
     return this.projectService.getNodeTitle(nodeId);
-  }
-
-  /**
-   * Check if a node id is for a group
-   * @param nodeId
-   * @returns whether the node is a group node
-   */
-  isGroupNode(nodeId: string): boolean {
-    return this.projectService.isGroupNode(nodeId);
-  }
-
-  /**
-   * Check if the node is in any branch path
-   * @param nodeId the node id of the node
-   * @return whether the node is in any branch path
-   */
-  isNodeInAnyBranchPath(nodeId: string): boolean {
-    return this.projectService.isNodeInAnyBranchPath(nodeId);
   }
 
   defaultClicked(): void {
@@ -544,172 +453,6 @@ export class DataExportComponent implements OnInit {
     this.projectService.cleanupBeforeSave();
   }
 
-  canExportAllRevisionsForComponent(component: any): boolean {
-    return this.canExportForComponent(component, this.allowedComponentTypesForAllRevisions);
-  }
-
-  canExportLatestRevisionsForComponent(component: any): boolean {
-    return this.canExportForComponent(component, this.allowedComponentTypesForLatestRevisions);
-  }
-
-  canExportForComponent(component: any, allowedComponentTypes: string[]): boolean {
-    for (const allowedComponentType of allowedComponentTypes) {
-      if (component.type === allowedComponentType) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Show the page where users can export work for a specific component.
-   */
-  showExportComponentDataPage(): void {
-    this.workSelectionType = 'exportAllWork';
-    this.includeCorrectnessColumns = true;
-    this.includeOnlySubmits = false;
-    this.exportType = 'componentData';
-  }
-
-  /**
-   * Export all the work for each student for  a specific component.
-   * @param nodeId The node id.
-   * @param component The component content object.
-   */
-  exportComponentAllRevisions(nodeId: string, component: any): void {
-    this.setAllWorkSelectionType();
-    if (component.type === 'Match') {
-      this.dataExportContext.setStrategy(
-        new MatchComponentDataExportStrategy(
-          nodeId,
-          component,
-          this.getComponentDataExportParams(),
-          'all'
-        )
-      );
-      this.dataExportContext.export();
-    } else if (component.type === 'Discussion') {
-      this.dataExportContext.setStrategy(
-        new DiscussionComponentDataExportStrategy(
-          nodeId,
-          component,
-          this.getComponentDataExportParams()
-        )
-      );
-      this.dataExportContext.export();
-    } else if (component.type === 'DialogGuidance') {
-      this.dataExportContext.setStrategy(
-        new DialogGuidanceComponentDataExportStrategy(
-          nodeId,
-          component,
-          this.getComponentDataExportParams(),
-          'all'
-        )
-      );
-      this.dataExportContext.export();
-    } else if (component.type === 'OpenResponse') {
-      this.dataExportContext.setStrategy(
-        new OpenResponseComponentDataExportStrategy(
-          nodeId,
-          component,
-          this.getComponentDataExportParams(),
-          'all'
-        )
-      );
-      this.dataExportContext.export();
-    } else if (component.type === 'Label') {
-      this.dataExportContext.setStrategy(
-        new LabelComponentDataExportStrategy(
-          nodeId,
-          component,
-          this.getComponentDataExportParams(),
-          'all'
-        )
-      );
-      this.dataExportContext.export();
-    } else if (component.type === 'PeerChat') {
-      this.dataExportContext.setStrategy(
-        new PeerChatComponentDataExportStrategy(
-          nodeId,
-          component,
-          this.getComponentDataExportParams()
-        )
-      );
-      this.dataExportContext.export();
-    }
-  }
-
-  /**
-   * Export the latest work for each student for a given component.
-   * @param nodeId The node id.
-   * @param component The component content object.
-   */
-  exportComponentLatestRevisions(nodeId: string, component: any): void {
-    this.setLatestWorkSelectionType();
-    if (component.type === 'Match') {
-      this.dataExportContext.setStrategy(
-        new MatchComponentDataExportStrategy(
-          nodeId,
-          component,
-          this.getComponentDataExportParams(),
-          'latest'
-        )
-      );
-      this.dataExportContext.export();
-    } else if (component.type === 'DialogGuidance') {
-      this.dataExportContext.setStrategy(
-        new DialogGuidanceComponentDataExportStrategy(
-          nodeId,
-          component,
-          this.getComponentDataExportParams(),
-          'latest'
-        )
-      );
-      this.dataExportContext.export();
-    } else if (component.type === 'OpenResponse') {
-      this.dataExportContext.setStrategy(
-        new OpenResponseComponentDataExportStrategy(
-          nodeId,
-          component,
-          this.getComponentDataExportParams(),
-          'latest'
-        )
-      );
-      this.dataExportContext.export();
-    } else if (component.type === 'Label') {
-      this.dataExportContext.setStrategy(
-        new LabelComponentDataExportStrategy(
-          nodeId,
-          component,
-          this.getComponentDataExportParams(),
-          'latest'
-        )
-      );
-      this.dataExportContext.export();
-    }
-  }
-
-  private getComponentDataExportParams(): ComponentDataExportParams {
-    return {
-      canViewStudentNames: this.canViewStudentNames,
-      includeOnlySubmits: this.includeOnlySubmits,
-      includeStudentNames: this.includeStudentNames,
-      workSelectionType: this.workSelectionType
-    };
-  }
-
-  setAllWorkSelectionType(): void {
-    this.setWorkSelectionType('exportAllWork');
-  }
-
-  setLatestWorkSelectionType(): void {
-    this.setWorkSelectionType('exportLatestWork');
-  }
-
-  setWorkSelectionType(workSelectionType: string): void {
-    this.workSelectionType = workSelectionType;
-  }
-
   showDownloadingExportMessage(): void {
     this.dialog.open(DialogWithSpinnerComponent, {
       data: {
@@ -725,5 +468,9 @@ export class DataExportComponent implements OnInit {
 
   protected exportVisitsClicked(): void {
     this.router.navigate(['visits'], { relativeTo: this.route });
+  }
+
+  protected goToExportItemPage(): void {
+    this.router.navigate(['item'], { relativeTo: this.route });
   }
 }

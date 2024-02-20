@@ -1,20 +1,47 @@
-.groupHeader {
-  margin-left: 5px !important;
+.lesson {
+  padding: 8px;
+  margin: 16px 0px;
+  border: 2px solid #dddddd;
+  border-radius: 6px;
+  position: relative;
+}
+
+.lesson:hover {
+  &.lesson-collapsed {
+    background-color: #add8e6;
+  }
+}
+
+.lesson:hover .edit-lesson-button {
+  display: block;
+}
+
+.lesson-bar {
+  height: 40px;
+}
+
+.full-width {
+  width: 100%;
 }
 
 .pointer {
   cursor: pointer;
 }
 
-.projectItem:hover {
-  background-color: #add8e6;
+.edit-lesson-button {
+  display: none;
+
+  &.lesson-expanded {
+    display: block;
+  }
 }
 
-.projectItemTitleDiv:hover {
-  background-color: #add8e6;
+.expand-collapse-icon {
+  width: 40px;
+  margin-right: 10px;
 }
 
-.projectItemTitleDiv {
-  width: 100%;
-  font-weight: initial;
+.no-steps-message {
+  height: 40px;
+  margin-left: 40px;
 }

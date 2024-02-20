@@ -1,26 +1,60 @@
-<div id="{{ lesson.id }}" fxLayoutAlign="start center" class="pointer groupHeader projectItem">
-  <mat-checkbox
-    color="primary"
-    (change)="selectNode($event.checked)"
-    [disabled]="nodeTypeSelected() === 'step'"
-    aria-label="Select lesson"
-    i18n-aria-label
-  >
-  </mat-checkbox>
-  <div
-    class="projectItemTitleDiv"
-    fxLayoutAlign="start center"
-    fxLayoutGap="10px"
-    (click)="setCurrentNode(lesson.id)"
-  >
-    <node-icon-and-title [nodeId]="lesson.id" [showPosition]="showPosition"></node-icon-and-title>
+<div id="{{ lesson.id }}" class="lesson" [ngClass]="{ 'lesson-collapsed': !expanded }">
+  <div class="lesson-bar full-width pointer" fxLayoutAlign="start center">
+    <mat-checkbox
+      color="primary"
+      (change)="selectNode($event.checked)"
+      [disabled]="nodeTypeSelected() === 'step'"
+      aria-label="Select lesson"
+      i18n-aria-label
+    >
+    </mat-checkbox>
+    <div
+      (click)="toggleExpanded()"
+      class="toggle-div full-width"
+      fxLayout="row wrap"
+      fxLayoutAlign="start center"
+      fxLayoutGap="8px"
+      matTooltip="Click to expand/collapse lesson"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <node-icon-and-title [nodeId]="lesson.id" [showPosition]="showPosition"></node-icon-and-title>
+      <div fxFlex></div>
+      <div fxLayoutAlign="start center" fxLayoutGap="8px">
+        <button
+          mat-icon-button
+          (click)="setCurrentNode(lesson.id)"
+          class="edit-lesson-button"
+          [ngClass]="{ 'lesson-expanded': expanded }"
+          color="primary"
+          matTooltip="Edit lesson"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <div class="expand-collapse-icon">
+          <div *ngIf="!expanded" fxLayoutAlign="center center">
+            <mat-icon>expand_more</mat-icon>
+          </div>
+          <div *ngIf="expanded" fxLayoutAlign="center center">
+            <mat-icon>expand_less</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<div *ngFor="let childId of lesson.ids">
-  <project-authoring-step
-    [step]="idToNode[childId]"
-    (selectNodeEvent)="selectNodeEvent.emit($event)"
-    [showPosition]="showPosition"
-    [projectId]="projectId"
-  ></project-authoring-step>
+  <div *ngIf="expanded" fxLayout="column">
+    <ng-container *ngFor="let childId of lesson.ids">
+      <project-authoring-step
+        [step]="idToNode[childId]"
+        (selectNodeEvent)="selectNodeEvent.emit($event)"
+        [showPosition]="showPosition"
+        [projectId]="projectId"
+      ></project-authoring-step>
+    </ng-container>
+    <div *ngIf="lesson.ids.length === 0" class="no-steps-message" fxLayoutAlign="start center">
+      This lesson has no steps
+    </div>
+  </div>
 </div>
