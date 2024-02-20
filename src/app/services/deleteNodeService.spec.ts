@@ -59,10 +59,10 @@ function shouldDeleteAStepFromTheProject() {
 function shouldDeleteAnInactiveStepFromTheProject() {
   it('should delete an inactive step from the project', () => {
     projectService.setProject(demoProjectJSON);
-    expect(projectService.getInactiveNodes().length).toEqual(1);
+    const numInactiveNodes = projectService.getInactiveNodes().length;
     expect(projectService.getNodeById('node789')).not.toBeNull();
     service.deleteNode('node789');
-    expect(projectService.getInactiveNodes().length).toEqual(0);
+    expect(projectService.getInactiveNodes().length).toEqual(numInactiveNodes - 1);
     expect(projectService.getNodeById('node789')).toBeNull();
   });
 }

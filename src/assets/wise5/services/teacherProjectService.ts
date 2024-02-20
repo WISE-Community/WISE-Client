@@ -2574,9 +2574,11 @@ export class TeacherProjectService extends ProjectService {
    */
   addGroupChildNodesToInactive(node) {
     for (const childId of node.ids) {
-      const childNode = this.getNodeById(childId);
-      this.project.inactiveNodes.push(childNode);
-      this.inactiveStepNodes.push(childNode);
+      if (!this.isInactive(childId)) {
+        const childNode = this.getNodeById(childId);
+        this.project.inactiveNodes.push(childNode);
+        this.inactiveStepNodes.push(childNode);
+      }
     }
   }
 

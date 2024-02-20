@@ -5,7 +5,13 @@
       "type": "group",
       "title": "Master",
       "startId": "group1",
-      "ids": ["group1", "group2", "group3", "group4", "group5"],
+      "ids": [
+        "group1",
+        "group2",
+        "group3",
+        "group4",
+        "group5"
+      ],
       "transitionLogic": {
         "transitions": [
           {
@@ -670,12 +676,16 @@
           "choices": [
             {
               "id": "y1cdkafo2u",
-              "text": ["Enter choice text here"],
+              "text": [
+                "Enter choice text here"
+              ],
               "feedback": ""
             },
             {
               "id": "lcnhnc2myc",
-              "text": ["Enter choice text here"],
+              "text": [
+                "Enter choice text here"
+              ],
               "feedback": ""
             }
           ]
@@ -735,7 +745,11 @@
           "type": "Draw",
           "prompt": "<p style=\"text-align: left;\">This is an auto graded draw step. Click the 'Submit' button to have your drawing auto graded.</p>\n<p style=\"text-align: left;\">&nbsp;</p>\n<p style=\"text-align: left;\">(1) Use stamps to create TWO methane molecules (CH<sub>4</sub>).&nbsp;</p>\n<p style=\"text-align: left;\">(2) Create EXACTLY the number of oxygen molecules (O<sub>2</sub>) needed to react with your TWO methane molecules.</p>\n<p style=\"text-align: left;\">(3) Create a new frame.</p>\n<p style=\"text-align: left;\">(4) REARRANGE the atoms in the 2nd frame to make carbon dioxide (CO<sub>2</sub>) and water (H<sub>2</sub>O) molecules. Show clearly which atoms belong to which molecules.</p>",
           "stamps": {
-            "Stamps": ["carbon.png", "oxygen.png", "hydrogen.png"]
+            "Stamps": [
+              "carbon.png",
+              "oxygen.png",
+              "hydrogen.png"
+            ]
           }
         }
       ]
@@ -1863,7 +1877,10 @@
           }
         ]
       },
-      "ids": ["node790", "node791"]
+      "ids": [
+        "node790",
+        "node791"
+      ]
     },
     {
       "id": "node790",
@@ -1946,7 +1963,9 @@
                 "name": "choiceChosen",
                 "params": {
                   "componentId": "0w3e2kgerw",
-                  "choiceIds": ["4z4f8xiqsj"],
+                  "choiceIds": [
+                    "4z4f8xiqsj"
+                  ],
                   "nodeId": "node792"
                 }
               }
@@ -1959,7 +1978,9 @@
                 "name": "choiceChosen",
                 "params": {
                   "componentId": "0w3e2kgerw",
-                  "choiceIds": ["2824d0tdlr"],
+                  "choiceIds": [
+                    "2824d0tdlr"
+                  ],
                   "nodeId": "node792"
                 }
               }
@@ -2438,7 +2459,15 @@
           }
         ]
       },
-      "ids": ["node792", "node793", "node794", "node795", "node796", "node797", "node798"],
+      "ids": [
+        "node792",
+        "node793",
+        "node794",
+        "node795",
+        "node796",
+        "node797",
+        "node798"
+      ],
       "icons": {
         "default": {
           "color": "#2196F3",
@@ -2461,7 +2490,13 @@
       "transitionLogic": {
         "transitions": []
       },
-      "ids": ["node799", "node800", "node801", "node802", "node803"]
+      "ids": [
+        "node799",
+        "node800",
+        "node801",
+        "node802",
+        "node803"
+      ]
     },
     {
       "id": "node799",
@@ -2654,6 +2689,100 @@
     ]
   },
   "inactiveNodes": [
+    {
+      "id": "group6",
+      "type": "group",
+      "title": "Inactive Lesson One",
+      "startId": "node804",
+      "constraints": [],
+      "transitionLogic": {
+        "transitions": []
+      },
+      "ids": [
+        "node804"
+      ],
+      "checked": false
+    },
+    {
+      "id": "node804",
+      "title": "Inactive Open Response",
+      "type": "node",
+      "constraints": [],
+      "transitionLogic": {
+        "transitions": []
+      },
+      "showSaveButton": true,
+      "showSubmitButton": false,
+      "components": [
+        {
+          "id": "kolblxecom",
+          "type": "OpenResponse",
+          "prompt": "",
+          "showSaveButton": false,
+          "showSubmitButton": false,
+          "starterSentence": null,
+          "isStudentAttachmentEnabled": false
+        }
+      ],
+      "checked": false
+    },
+    {
+      "id": "group7",
+      "type": "group",
+      "title": "Inactive Lesson Two",
+      "startId": "node805",
+      "constraints": [],
+      "transitionLogic": {
+        "transitions": []
+      },
+      "ids": [
+        "node805"
+      ],
+      "checked": false
+    },
+    {
+      "id": "node805",
+      "title": "Inactive Multiple Choice",
+      "type": "node",
+      "constraints": [],
+      "transitionLogic": {
+        "transitions": []
+      },
+      "showSaveButton": true,
+      "showSubmitButton": false,
+      "components": [
+        {
+          "id": "brou4pcdv0",
+          "type": "MultipleChoice",
+          "prompt": "",
+          "showSaveButton": false,
+          "showSubmitButton": false,
+          "choiceType": "radio",
+          "choices": [
+            {
+              "id": "ds1olpz3ny",
+              "text": "A",
+              "feedback": "",
+              "isCorrect": false
+            },
+            {
+              "id": "m2of2ppqrp",
+              "text": "B",
+              "feedback": "",
+              "isCorrect": false
+            },
+            {
+              "id": "h51cxw8h57",
+              "text": "C",
+              "feedback": "",
+              "isCorrect": false
+            }
+          ],
+          "showFeedback": true
+        }
+      ],
+      "checked": false
+    },
     {
       "id": "node789",
       "title": "inactive node",
