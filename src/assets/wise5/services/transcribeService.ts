@@ -11,21 +11,53 @@ import { StartStreamTranscriptionCommand } from '@aws-sdk/client-transcribe-stre
 import { Buffer } from 'buffer';
 import * as process from 'process';
 import { ConfigService } from './configService';
+import { ProjectService } from './projectService';
 
 window.process = process;
 // @ts-ignore
 window.Buffer = Buffer;
 
+export interface Language {
+  code: LanguageCode;
+  name: string;
+}
+
 @Injectable()
 export class TranscribeService {
   private SAMPLE_RATE = 44100;
-  private microphoneStream = undefined;
-  private transcribeClient = undefined;
 
+  private allLanguages: Language[] = [
+    { code: 'zh-CN', name: $localize`Chinese (Simplified)` },
+    { code: 'en-US', name: $localize`English` },
+    { code: 'fr-FR', name: $localize`French` },
+    { code: 'de-DE', name: $localize`German` },
+    { code: 'it-IT', name: $localize`Italian` },
+    { code: 'ja-JP', name: $localize`Japanese` },
+    { code: 'ko-KR', name: $localize`Korean` },
+    { code: 'pt-BR', name: $localize`Portuguese (Brazilian)` },
+    { code: 'es-US', name: $localize`Spanish` }
+  ];
+  readonly languages: Language[];
+  private microphoneStream = undefined;
   private recordingSignal: WritableSignal<boolean> = signal(false);
   readonly recording = this.recordingSignal.asReadonly();
+  private selectedLanguageSignal: WritableSignal<Language> = signal({
+    code: null,
+    name: null
+  });
+  readonly selectedLanguage = this.selectedLanguageSignal.asReadonly();
+  private transcribeClient = undefined;
 
-  constructor(private configService: ConfigService) {}
+  constructor(private configService: ConfigService, private projectService: ProjectService) {
+    const { defaultLanguage, supportedLanguages } = this.projectService.project.speechToText;
+    this.selectedLanguageSignal.set({
+      code: defaultLanguage,
+      name: this.allLanguages.find((language) => language.code === defaultLanguage).name
+    });
+    this.languages = this.allLanguages.filter((language) =>
+      supportedLanguages.includes(language.code)
+    );
+  }
 
   async startRecording(
     languageCode: LanguageCode,
@@ -123,5 +155,9 @@ export class TranscribeService {
       view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7fff, true);
     }
     return Buffer.from(buffer);
+  }
+
+  setSelectedLanguage(language: Language): void {
+    this.selectedLanguageSignal.set(language);
   }
 }
