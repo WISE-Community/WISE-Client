@@ -1,0 +1,114 @@
+<div class="view-content view-content--with-sidemenu top-content">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="goBack()"
+    matTooltip="Back"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h4 i18n>Export Item Data</h4>
+  <div fxLayout="column" fxLayoutGap="10px">
+    <div>
+      <mat-checkbox
+        *ngIf="canViewStudentNames"
+        color="primary"
+        [(ngModel)]="includeStudentNames"
+        i18n
+      >
+        Include Student Names
+      </mat-checkbox>
+    </div>
+    <div *ngIf="canViewStudentNames">
+      <mat-checkbox color="primary" [(ngModel)]="includeCorrectnessColumns" i18n>
+        Include Correctness Columns
+      </mat-checkbox>
+    </div>
+    <div>
+      <mat-checkbox color="primary" [(ngModel)]="includeOnlySubmits" i18n>
+        Include Only Submits
+      </mat-checkbox>
+    </div>
+  </div>
+  <div fxLayoutAlign="start center">
+    <h4>{{ project.metadata.title }}</h4>
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="previewProject()"
+      class="preview-button"
+      matTooltip="Preview"
+      matTooltipPosition="right"
+      i18n-matTooltip
+    >
+      <mat-icon class="preview-icon">preview</mat-icon>
+    </button>
+  </div>
+  <div *ngFor="let node of nodes">
+    <div fxLayoutAlign="start center">
+      <h6 *ngIf="node.order !== 0" [ngClass]="{ stepHeader: node.node.type !== 'group' }">
+        {{ getNodePositionById(node.node.id) }}. {{ getNodeTitleByNodeId(node.node.id) }}
+      </h6>
+      <button
+        *ngIf="node.node.type !== 'group'"
+        mat-icon-button
+        color="primary"
+        (click)="previewNode(node.node)"
+        class="preview-button"
+        matTooltip="Preview"
+        matTooltipPosition="right"
+        i18n-matTooltip
+      >
+        <mat-icon class="preview-icon">preview</mat-icon>
+      </button>
+    </div>
+    <ng-container *ngFor="let componentItem of node.node.components; index as componentIndex">
+      <div
+        *ngIf="node.order !== 0 && node.node.type !== 'group' && node.node.components.length > 0"
+        class="componentHeader"
+      >
+        <div fxLayoutAlign="start center" fxLayoutGap="20px">
+          <span> {{ componentIndex + 1 }}. {{ componentItem.type }} </span>
+          <button
+            mat-raised-button
+            *ngIf="canExportAllRevisionsForComponent(componentItem)"
+            color="primary"
+            class="exportComponentDataButton"
+            (click)="exportComponentAllRevisions(node.node.id, componentItem)"
+            matTooltip="Download All Revisions Export"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
+            <mat-icon>file_download</mat-icon>
+            <span i18n>All</span>
+          </button>
+          <button
+            mat-raised-button
+            *ngIf="canExportLatestRevisionsForComponent(componentItem)"
+            color="primary"
+            class="exportComponentDataButton"
+            (click)="exportComponentLatestRevisions(node.node.id, componentItem)"
+            matTooltip="Download Latest Revisions Export"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
+            <mat-icon>file_download</mat-icon>
+            <span i18n>Latest</span>
+          </button>
+          <span
+            *ngIf="componentExportTooltips[componentItem.type] != null"
+            matTooltip="{{ componentExportTooltips[componentItem.type] }}"
+            matTooltipPosition="right"
+          >
+            <mat-icon class="preview-icon">help</mat-icon>
+          </span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <button mat-raised-button color="primary" (click)="goBack()" matTooltip="Back" i18n-matTooltip>
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</div>

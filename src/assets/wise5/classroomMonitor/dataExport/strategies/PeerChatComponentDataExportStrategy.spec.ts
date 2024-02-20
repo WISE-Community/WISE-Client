@@ -52,9 +52,7 @@ function exportWithRegularPrompt(): void {
       const headerRow = exportStrategyTester.createHeaderRowInsertAdditionalColumnsBeforeResponse([
         'Prompt'
       ]);
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [
@@ -162,9 +160,7 @@ function exportWithDynamicPrompt(): void {
         'Dynamic Prompt',
         'Post Prompt'
       ]);
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [
@@ -289,9 +285,7 @@ function exportWithQuestionBank(): void {
         'Question 2',
         'Question Used'
       ]);
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [
