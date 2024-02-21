@@ -17,6 +17,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ProjectAuthoringLessonHarness } from './project-authoring-lesson.harness';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CopyNodesService } from '../../services/copyNodesService';
 
 let component: ProjectAuthoringLessonComponent;
 let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
@@ -46,6 +47,7 @@ describe('ProjectAuthoringLessonComponent', () => {
       ],
       providers: [
         ClassroomStatusService,
+        CopyNodesService,
         DeleteNodeService,
         TeacherDataService,
         TeacherProjectService,

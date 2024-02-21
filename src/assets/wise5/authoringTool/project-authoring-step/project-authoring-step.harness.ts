@@ -9,8 +9,10 @@ interface ProjectAuthoringStepHarnessFilters extends BaseHarnessFilters {
 export class ProjectAuthoringStepHarness extends ComponentHarness {
   static hostSelector = 'project-authoring-step';
 
-  getStepTitleElement = this.locatorFor(NodeIconAndTitleHarness);
+  getCopyButton = this.locatorFor(MatButtonHarness.with({ selector: '.copy-button' }));
   getDeleteButton = this.locatorFor(MatButtonHarness.with({ selector: '.delete-button' }));
+  getMoveButton = this.locatorFor(MatButtonHarness.with({ selector: '.move-button' }));
+  getStepTitleElement = this.locatorFor(NodeIconAndTitleHarness);
 
   static with(
     options: ProjectAuthoringStepHarnessFilters
