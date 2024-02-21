@@ -46,7 +46,7 @@ export class TranscribeService {
     name: null
   });
   readonly selectedLanguage = this.selectedLanguageSignal.asReadonly();
-  private transcribeClient = undefined;
+  private transcribeClient: TranscribeStreamingClient = undefined;
 
   constructor(private configService: ConfigService, private projectService: ProjectService) {
     const { defaultLanguage, supportedLanguages } = this.projectService.project.speechToText;
@@ -118,18 +118,7 @@ export class TranscribeService {
     this.recordingSignal.set(true);
     const data = await this.transcribeClient.send(command);
     for await (const event of data.TranscriptResultStream) {
-      for (const result of event.TranscriptEvent.Transcript.Results || []) {
-        if (result.IsPartial === false) {
-          const noOfResults = result.Alternatives[0].Items.length;
-          for (let i = 0; i < noOfResults; i++) {
-            let text = result.Alternatives[0].Items[i].Content;
-            if (![',', '.', '?', '!', ':', ';'].includes(text)) {
-              text = ' ' + text;
-            }
-            callback(text);
-          }
-        }
-      }
+      this.processTranscriptResultStreamEvent(event, callback);
     }
   }
 
@@ -155,6 +144,25 @@ export class TranscribeService {
       view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7fff, true);
     }
     return Buffer.from(buffer);
+  }
+
+  private processTranscriptResultStreamEvent(event: any, callback: (text: string) => void): void {
+    for (const result of event.TranscriptEvent.Transcript.Results || []) {
+      if (result.IsPartial === false) {
+        this.processTranscriptResult(result, callback);
+      }
+    }
+  }
+
+  private processTranscriptResult(result: any, callback: (text: string) => void): void {
+    const noOfResults = result.Alternatives[0].Items.length;
+    for (let i = 0; i < noOfResults; i++) {
+      let text = result.Alternatives[0].Items[i].Content;
+      if (![',', '.', '?', '!', ':', ';'].includes(text)) {
+        text = ' ' + text;
+      }
+      callback(text);
+    }
   }
 
   setSelectedLanguage(language: Language): void {
