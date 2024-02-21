@@ -1,3 +1,4 @@
+import { AiChatAuthoringComponent } from './aiChat/ai-chat-authoring/ai-chat-authoring.component';
 import { AiChatGradingComponent } from './aiChat/ai-chat-grading/ai-chat-grading.component';
 import { AiChatStudentComponent } from './aiChat/ai-chat-student/ai-chat-student.component';
 import { AnimationAuthoring } from './animation/animation-authoring/animation-authoring.component';
@@ -57,6 +58,7 @@ import { TableStudent } from './table/table-student/table-student.component';
 
 export const components = {
   AiChat: {
+    authoring: AiChatAuthoringComponent,
     grading: AiChatGradingComponent,
     student: AiChatStudentComponent
   },

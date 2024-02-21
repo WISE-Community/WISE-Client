@@ -2,6 +2,11 @@
 <mat-divider></mat-divider>
 <div mat-dialog-content>
   <ng-container [ngSwitch]="component.content.type">
+    <edit-ai-chat-advanced
+      *ngSwitchCase="'AiChat'"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+    ></edit-ai-chat-advanced>
     <edit-animation-advanced
       *ngSwitchCase="'Animation'"
       [nodeId]="component.nodeId"

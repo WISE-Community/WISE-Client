@@ -1,0 +1,32 @@
+<div>
+  <mat-form-field class="system-prompt" appearance="fill">
+    <mat-label i18n>System Prompt</mat-label>
+    <textarea
+      matInput
+      [(ngModel)]="componentContent.systemPrompt"
+      (ngModelChange)="componentChanged()"
+      cdkTextareaAutosize
+    >
+    </textarea>
+    <mat-hint i18n
+      >Use this to instruct the chat bot how to behave. Students will not see this.</mat-hint
+    >
+  </mat-form-field>
+  <edit-component-prompt
+    [prompt]="componentContent.prompt"
+    (promptChangedEvent)="promptChanged($event)"
+  ></edit-component-prompt>
+  <mat-checkbox
+    color="primary"
+    class="enable-computer-avatar-checkbox"
+    [(ngModel)]="componentContent.isComputerAvatarEnabled"
+    (ngModelChange)="componentChanged()"
+    i18n
+    >Enable Computer Avatar</mat-checkbox
+  >
+  <edit-dialog-guidance-computer-avatar
+    *ngIf="componentContent.isComputerAvatarEnabled"
+    [computerAvatarSettings]="componentContent.computerAvatarSettings"
+  >
+  </edit-dialog-guidance-computer-avatar>
+</div>

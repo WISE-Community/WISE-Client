@@ -7,6 +7,7 @@ export class ComponentTypeService {
 
   getComponentTypes(): any[] {
     return [
+      { type: 'AiChat', name: this.getComponentTypeLabel('AiChat') },
       { type: 'Animation', name: this.getComponentTypeLabel('Animation') },
       { type: 'AudioOscillator', name: this.getComponentTypeLabel('AudioOscillator') },
       { type: 'ConceptMap', name: this.getComponentTypeLabel('ConceptMap') },
