@@ -56,6 +56,7 @@ describe('OpenResponseStudent', () => {
   });
 
   beforeEach(() => {
+    spyOn(TestBed.inject(ProjectService), 'getSpeechToTextSettings').and.returnValue({});
     fixture = TestBed.createComponent(OpenResponseStudent);
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});

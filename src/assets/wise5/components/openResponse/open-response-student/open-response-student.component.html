@@ -32,6 +32,10 @@
     cdkTextareaAutosize
   >
   </textarea>
+  <speech-to-text
+    *ngIf="speechToTextEnabled"
+    (newTextEvent)="appendStudentResponse($event)"
+  ></speech-to-text>
 </div>
 <div *ngIf="isStudentAttachmentEnabled" fxLayout="row wrap" fxLayoutAlign="start center">
   <div>

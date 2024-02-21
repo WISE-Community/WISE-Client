@@ -33,6 +33,7 @@ export class OpenResponseStudent extends ComponentStudent {
   cRaterTimeout: number = 40000;
   isPublicSpaceExist: boolean = false;
   isStudentAudioRecordingEnabled: boolean = false;
+  protected speechToTextEnabled: boolean;
   studentResponse: string = '';
 
   constructor(
@@ -61,6 +62,7 @@ export class OpenResponseStudent extends ComponentStudent {
       StudentAssetService,
       StudentDataService
     );
+    this.speechToTextEnabled = this.ProjectService.getSpeechToTextSettings()?.enabled;
   }
 
   ngOnInit(): void {
@@ -188,6 +190,11 @@ export class OpenResponseStudent extends ComponentStudent {
 
   getStudentResponse(): any {
     return this.studentResponse;
+  }
+
+  protected appendStudentResponse(text: string): void {
+    this.studentResponse += text;
+    this.studentDataChanged();
   }
 
   /**
