@@ -142,11 +142,11 @@ function expandAllButtonClicked() {
 function deleteSpecificStep() {
   describe('delete step button on a specific step is clicked', () => {
     it('deletes the step', async () => {
-      expect((await harness.getSteps()).length).toEqual(49);
+      const stepCount = (await harness.getSteps()).length;
       spyOn(window, 'confirm').and.returnValue(true);
       const step = await harness.getStep('1.1: HTML Step');
       await (await step.getDeleteButton()).click();
-      expect((await harness.getSteps()).length).toEqual(48);
+      expect((await harness.getSteps()).length).toEqual(stepCount - 1);
     });
   });
 }
