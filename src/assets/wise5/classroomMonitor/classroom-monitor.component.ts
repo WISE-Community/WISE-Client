@@ -101,7 +101,7 @@ export class ClassroomMonitorComponent implements OnInit {
       },
       {
         route: ['team'],
-        name: $localize`Grade by Team`,
+        name: $localize`Grade by Student`,
         icon: 'people',
         type: 'primary',
         active: true
