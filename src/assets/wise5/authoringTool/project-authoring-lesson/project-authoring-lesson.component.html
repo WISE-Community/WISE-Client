@@ -35,7 +35,7 @@
       <button
         mat-icon-button
         class="delete-button"
-        (click)="delete($event)"
+        (click)="$event.stopPropagation(); delete()"
         color="primary"
         matTooltip="Delete lesson"
         matTooltipPosition="above"

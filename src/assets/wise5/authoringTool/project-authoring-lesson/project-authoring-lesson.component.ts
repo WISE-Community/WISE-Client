@@ -46,8 +46,7 @@ export class ProjectAuthoringLessonComponent {
     this.onExpandedChanged.emit({ id: this.lesson.id, expanded: this.expanded });
   }
 
-  protected delete(event: Event): void {
-    event.stopPropagation();
+  protected delete(): void {
     if (confirm($localize`Are you sure you want to delete this lesson?`)) {
       this.deleteNodeService.deleteNode(this.lesson.id);
       this.saveAndRefreshProject();
