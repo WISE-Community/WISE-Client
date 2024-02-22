@@ -3,9 +3,13 @@ import {
   ProjectAuthoringNodeHarness,
   ProjectAuthoringNodeHarnessFilters
 } from '../project-authoring/project-authoring-node.harness';
+import { MatButtonHarness } from '@angular/material/button/testing';
 
 export class ProjectAuthoringStepHarness extends ProjectAuthoringNodeHarness {
   static hostSelector = 'project-authoring-step';
+
+  getCopyButton = this.locatorFor(MatButtonHarness.with({ selector: '.copy-button' }));
+  getDeleteButton = this.locatorFor(MatButtonHarness.with({ selector: '.delete-button' }));
 
   static with(
     options: ProjectAuthoringNodeHarnessFilters

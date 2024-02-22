@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { SelectNodeEvent } from '../domain/select-node-event';
 import { NodeTypeSelected } from '../domain/node-type-selected';
 import { DeleteNodeService } from '../../services/deleteNodeService';
+import { CopyNodesService } from '../../services/copyNodesService';
 
 @Component({
   selector: 'project-authoring-step',
@@ -19,6 +20,7 @@ export class ProjectAuthoringStepComponent {
   @Input() step: any;
 
   constructor(
+    private copyNodesService: CopyNodesService,
     private dataService: TeacherDataService,
     private deleteNodeService: DeleteNodeService,
     private projectService: TeacherProjectService,
@@ -91,6 +93,12 @@ export class ProjectAuthoringStepComponent {
   protected branchIconClicked(nodeId: string): void {
     this.dataService.setCurrentNodeByNodeId(nodeId);
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/path`]);
+  }
+
+  protected copy(event: Event): void {
+    event.stopPropagation();
+    this.copyNodesService.copyNodesAfter([this.step.id], this.step.id);
+    this.saveAndRefreshProject();
   }
 
   protected delete(event: Event): void {
