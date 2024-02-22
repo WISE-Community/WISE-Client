@@ -95,7 +95,7 @@ export class ProjectAuthoringStepComponent {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/path`]);
   }
 
-  protected copy(event: any): void {
+  protected copy(event: Event): void {
     event.stopPropagation();
     this.copyNodesService.copyNodesAfter([this.step.id], this.step.id);
     this.saveAndRefreshProject();
