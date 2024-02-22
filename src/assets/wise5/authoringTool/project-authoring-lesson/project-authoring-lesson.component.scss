@@ -28,7 +28,13 @@
   cursor: pointer;
 }
 
+.lesson-expand-collapse-div {
+  flex-grow: 1;
+  align-self: stretch;
+}
+
 .edit-lesson-button {
+  margin-right: 8px;
   display: none;
 
   &.lesson-expanded {

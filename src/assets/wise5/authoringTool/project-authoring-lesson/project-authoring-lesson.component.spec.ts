@@ -86,7 +86,7 @@ function lessonIsExpanded_clickCollapseButton_hideSteps() {
     describe('lesson div is clicked', () => {
       it('hides steps', async () => {
         component.expanded = true;
-        (await harness.getToggleDiv()).click();
+        (await harness.getExpandCollapseDiv()).click();
         expect(component.expanded).toBeFalse();
         const steps = await harness.getSteps();
         expect(steps.length).toEqual(0);
@@ -100,7 +100,7 @@ function lessonIsCollapsed_clickExpandButton_showSteps() {
     describe('lesson div is clicked', () => {
       it('shows steps', async () => {
         component.expanded = false;
-        (await harness.getToggleDiv()).click();
+        (await harness.getExpandCollapseDiv()).click();
         expect(component.expanded).toBeTrue();
         const steps = await harness.getSteps();
         expect(steps.length).toEqual(2);
