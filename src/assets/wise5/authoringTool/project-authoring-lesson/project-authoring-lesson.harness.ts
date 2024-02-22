@@ -3,9 +3,9 @@ import { ProjectAuthoringStepHarness } from '../project-authoring-step/project-a
 
 export class ProjectAuthoringLessonHarness extends ComponentHarness {
   static hostSelector = 'project-authoring-lesson';
+  getExpandCollapseDiv = this.locatorFor('.lesson-expand-collapse-div');
   getExpandCollapseIcon = this.locatorFor('.expand-collapse-icon .mat-icon');
   getSteps = this.locatorForAll(ProjectAuthoringStepHarness);
-  getToggleDiv = this.locatorFor('.toggle-div');
 
   async isExpanded(): Promise<boolean> {
     return (await (await this.getExpandCollapseIcon()).text()) === 'expand_less';
