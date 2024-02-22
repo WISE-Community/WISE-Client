@@ -4,8 +4,7 @@ import { AiChatContent } from '../AiChatContent';
 
 @Component({
   selector: 'edit-ai-chat-advanced',
-  templateUrl: './edit-ai-chat-advanced.component.html',
-  styleUrls: ['./edit-ai-chat-advanced.component.scss']
+  templateUrl: './edit-ai-chat-advanced.component.html'
 })
 export class EditAiChatAdvancedComponent extends EditAdvancedComponentComponent {
   componentContent: AiChatContent;
