@@ -1,12 +1,7 @@
 <mat-form-field>
   <mat-label i18n>Model</mat-label>
-  <input
-    matInput
-    [(ngModel)]="componentContent.model"
-    (ngModelChange)="componentChanged()"
-    placeholder="Enter Model"
-    i18n-placeholder
-    cdkTextareaAutosize
-  />
+  <mat-select [(ngModel)]="componentContent.model" (ngModelChange)="this.componentChanged()">
+    <mat-option *ngFor="let model of models" [value]="model">{{ model }}</mat-option>
+  </mat-select>
 </mat-form-field>
 <edit-component-json [component]="component"></edit-component-json>

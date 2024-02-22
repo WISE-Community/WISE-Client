@@ -9,4 +9,5 @@ import { AiChatContent } from '../AiChatContent';
 })
 export class EditAiChatAdvancedComponent extends EditAdvancedComponentComponent {
   componentContent: AiChatContent;
+  models: string[] = ['gpt-3.5-turbo', 'gpt-4'];
 }

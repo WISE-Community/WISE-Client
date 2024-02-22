@@ -15289,13 +15289,6 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4adcd6d8fca65ac10a4f89273a58a840720ef312" datatype="html">
-        <source>Enter Model</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="555720515547706264" datatype="html">
         <source>Students watch an animation.</source>
         <context-group purpose="location">
