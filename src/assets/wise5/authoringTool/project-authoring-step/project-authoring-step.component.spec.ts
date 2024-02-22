@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CopyNodesService } from '../../services/copyNodesService';
 
 const nodeId1 = 'nodeId1';
 const node = { id: nodeId1 };
@@ -36,6 +37,7 @@ describe('ProjectAuthoringStepComponent', () => {
       ],
       providers: [
         ClassroomStatusService,
+        CopyNodesService,
         DeleteNodeService,
         TeacherDataService,
         TeacherProjectService,
