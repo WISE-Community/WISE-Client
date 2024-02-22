@@ -21,18 +21,29 @@
       matTooltipPosition="above"
       i18n-matTooltip
     ></div>
-    <button
-      mat-icon-button
-      (click)="setCurrentNode(lesson.id)"
-      class="edit-lesson-button"
-      [ngClass]="{ 'lesson-expanded': expanded }"
-      color="primary"
-      matTooltip="Edit lesson"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>edit</mat-icon>
-    </button>
+    <div class="lesson-buttons" [ngClass]="{ 'lesson-expanded': expanded }" fxLayoutGap="8px">
+      <button
+        mat-icon-button
+        (click)="setCurrentNode(lesson.id)"
+        color="primary"
+        matTooltip="Edit lesson"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="delete-button"
+        (click)="delete($event)"
+        color="primary"
+        matTooltip="Delete lesson"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
     <div class="expand-collapse-icon">
       <div *ngIf="!expanded" fxLayoutAlign="center center">
         <mat-icon>expand_more</mat-icon>

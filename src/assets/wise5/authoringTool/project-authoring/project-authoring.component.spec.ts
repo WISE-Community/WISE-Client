@@ -86,6 +86,7 @@ describe('ProjectAuthoringComponent', () => {
   collapseAllButtonClicked();
   expandAllButtonClicked();
   deleteSpecificStep();
+  deleteSpecificLesson();
 });
 
 function collapseAllButtonClicked() {
@@ -147,6 +148,18 @@ function deleteSpecificStep() {
       const step = await harness.getStep('1.1: HTML Step');
       await (await step.getDeleteButton()).click();
       expect((await harness.getSteps()).length).toEqual(stepCount - 1);
+    });
+  });
+}
+
+function deleteSpecificLesson() {
+  describe('delete lesson button on a specific lesson is clicked', () => {
+    it('deletes the lesson', async () => {
+      const lessonCount = (await harness.getLessons()).length;
+      spyOn(window, 'confirm').and.returnValue(true);
+      const lesson = await harness.getLesson('1: Example Steps');
+      await (await lesson.getDeleteButton()).click();
+      expect((await harness.getLessons()).length).toEqual(lessonCount - 1);
     });
   });
 }
