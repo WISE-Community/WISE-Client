@@ -11,7 +11,6 @@ export class ProjectAuthoringStepHarness extends ComponentHarness {
 
   getCopyButton = this.locatorFor(MatButtonHarness.with({ selector: '.copy-button' }));
   getDeleteButton = this.locatorFor(MatButtonHarness.with({ selector: '.delete-button' }));
-  getMoveButton = this.locatorFor(MatButtonHarness.with({ selector: '.move-button' }));
   getStepTitleElement = this.locatorFor(NodeIconAndTitleHarness);
 
   static with(
