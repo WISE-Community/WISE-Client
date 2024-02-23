@@ -22,31 +22,38 @@ export class StudentProgressComponent implements OnInit {
   sortOptions: any = {
     team: {
       label: $localize`Team`,
-      method: this.createSortTeam
+      fieldName: 'workgroupId',
+      isNumeric: true
     },
     student: {
       label: $localize`Student`,
-      method: this.createSortStudent
+      fieldName: 'username',
+      isNumeric: false
     },
     firstName: {
       label: $localize`First Name`,
-      method: this.createSortFirstName
+      fieldName: 'firstName',
+      isNumeric: false
     },
     lastName: {
       label: $localize`Last Name`,
-      method: this.createSortLastName
+      fieldName: 'lastName',
+      isNumeric: false
     },
     location: {
       label: $localize`Location`,
-      method: this.createSortLocation
+      fieldName: 'location',
+      isNumeric: true
     },
     completion: {
       label: $localize`Completion`,
-      method: this.createSortCompletion
+      fieldName: 'completionPct',
+      isNumeric: true
     },
     score: {
       label: $localize`Score`,
-      method: this.createSortScore
+      fieldName: 'scorePct',
+      isNumeric: true
     }
   };
   students: StudentProgress[];
@@ -112,7 +119,7 @@ export class StudentProgressComponent implements OnInit {
   private updateTeam(workgroupId: number): void {
     const location = this.getCurrentNodeForWorkgroupId(workgroupId) || '';
     const completion = this.classroomStatusService.getStudentProjectCompletion(workgroupId);
-    const score = this.getStudentTotalScore(workgroupId);
+    const score = this.getStudentTotalScore(workgroupId) || 0;
     let maxScore = this.classroomStatusService.getMaxScoreForWorkgroupId(workgroupId);
     maxScore = maxScore ? maxScore : 0;
 
@@ -142,89 +149,41 @@ export class StudentProgressComponent implements OnInit {
     this.sortedStudents = [...this.students];
     const dir = this.sort.charAt(0) === '-' ? 'desc' : 'asc';
     const sort = this.sort.charAt(0) === '-' ? this.sort.slice(1) : this.sort;
-    this.sortedStudents.sort(this.sortOptions[sort].method(dir));
+    this.sortedStudents.sort(
+      this.createSort(this.sortOptions[sort].fieldName, dir, this.sortOptions[sort].isNumeric)
+    );
   }
 
-  private createSortTeam(direction: 'asc' | 'desc'): any {
-    return (studentA: any, studentB: any): number => {
-      return direction === 'asc'
-        ? studentA.workgroupId - studentB.workgroupId
-        : studentB.workgroupId - studentA.workgroupId;
-    };
-  }
-
-  private createSortStudent(direction: 'asc' | 'desc'): any {
-    return (studentA: any, studentB: any): number => {
-      const localeCompare =
-        direction === 'asc'
-          ? studentA.username.localeCompare(studentB.username)
-          : studentB.username.localeCompare(studentA.username);
-      return localeCompare === 0 ? studentA.workgroupId - studentB.workgroupId : localeCompare;
-    };
-  }
-
-  private createSortFirstName(direction: 'asc' | 'desc'): any {
-    return (studentA: any, studentB: any): number => {
-      const localeCompare =
-        direction === 'asc'
-          ? studentA.firstName.localeCompare(studentB.firstName)
-          : studentB.firstName.localeCompare(studentA.firstName);
-      return localeCompare === 0 ? studentA.workgroupId - studentB.workgroupId : localeCompare;
-    };
-  }
-
-  private createSortLastName(direction: 'asc' | 'desc'): any {
-    return (studentA: any, studentB: any): number => {
-      const localeCompare =
-        direction === 'asc'
-          ? studentA.lastName.localeCompare(studentB.lastName)
-          : studentB.lastName.localeCompare(studentA.lastName);
-      return localeCompare === 0 ? studentA.workgroupId - studentB.workgroupId : localeCompare;
-    };
-  }
-
-  private createSortScore(direction: 'asc' | 'desc'): any {
-    return (studentA: any, studentB: any): number => {
-      if (studentA.scorePct === studentB.scorePct) {
-        return studentA.workgroupId
-          .toString()
-          .localeCompare(studentB.workgroupId.toString(), undefined, {
-            numeric: true
-          });
-      }
-      return direction === 'asc'
-        ? studentA.scorePct - studentB.scorePct
-        : studentB.scorePct - studentA.scorePct;
-    };
-  }
-
-  private createSortCompletion(direction: 'asc' | 'desc'): any {
-    return (studentA: any, studentB: any): number => {
-      const completionA = studentA.completionPct;
-      const completionB = studentB.completionPct;
-      if (completionA === completionB) {
-        return studentA.workgroupId
-          .toString()
-          .localeCompare(studentB.workgroupId.toString(), undefined, {
-            numeric: true
-          });
-      }
-      return direction === 'asc' ? completionA - completionB : completionB - completionA;
-    };
-  }
-
-  private createSortLocation(direction: 'asc' | 'desc'): any {
-    return (studentA: any, studentB: any): number => {
-      const localeCompare =
-        direction === 'asc'
-          ? studentA.location.localeCompare(studentB.location)
-          : studentB.location.localeCompare(studentA.location);
-      return localeCompare === 0
-        ? studentA.workgroupId
-            .toString()
-            .localeCompare(studentB.workgroupId.toString(), undefined, { numeric: true })
+  private createSort(fieldName: string, direction: 'asc' | 'desc', isNumeric: boolean): any {
+    return (studentA: StudentProgress, studentB: StudentProgress): number => {
+      const localeCompare = this.localeCompareBy(
+        fieldName,
+        studentA,
+        studentB,
+        direction,
+        isNumeric
+      );
+      return fieldName !== 'workgroupId' && localeCompare === 0
+        ? this.localeCompareBy('workgroupId', studentA, studentB, 'asc', true)
         : localeCompare;
     };
+  }
+
+  private localeCompareBy(
+    fieldName: string,
+    studentA: any,
+    studentB: any,
+    direction: 'asc' | 'desc',
+    isNumeric: boolean
+  ): number {
+    const valueA = studentA[fieldName];
+    const valueB = studentB[fieldName];
+    if (isNumeric) {
+      const numA = parseFloat(valueA);
+      const numB = parseFloat(valueB);
+      return direction === 'asc' ? numA - numB : numB - numA;
+    }
+    return direction === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
   }
 
   isWorkgroupShown(workgroup: number): boolean {
