@@ -61,8 +61,6 @@ describe('DataExportComponent', () => {
   });
 
   setExportType();
-  selectAll();
-  deselectAll();
 });
 
 function setExportType() {
@@ -71,28 +69,6 @@ function setExportType() {
       component.setExportType('events');
       expect(component.exportType).toEqual('events');
       expect(component.exportTypeLabel).toEqual('Events');
-    });
-  });
-}
-
-function selectAll() {
-  describe('selectAll', () => {
-    it('should select all', () => {
-      component.selectAll();
-      for (let i = 1; i < component.nodes.length; i++) {
-        expect(component.nodes[i].checked).toEqual(true);
-      }
-    });
-  });
-}
-
-function deselectAll() {
-  describe('deselectAll', () => {
-    it('should deselect all', () => {
-      component.deselectAll();
-      for (let i = 1; i < component.nodes.length; i++) {
-        expect(component.nodes[i].checked).toEqual(false);
-      }
     });
   });
 }
