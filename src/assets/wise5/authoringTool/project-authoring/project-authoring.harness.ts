@@ -5,10 +5,14 @@ import { ProjectAuthoringStepHarness } from '../project-authoring-step/project-a
 
 export class ProjectAuthoringHarness extends ComponentHarness {
   static hostSelector = 'project-authoring';
-  getExpandAllButton = this.locatorFor(MatButtonHarness.with({ text: '+ Expand All' }));
   getCollapseAllButton = this.locatorFor(MatButtonHarness.with({ text: '- Collapse All' }));
+  getExpandAllButton = this.locatorFor(MatButtonHarness.with({ text: '+ Expand All' }));
   getLessons = this.locatorForAll(ProjectAuthoringLessonHarness);
   getSteps = this.locatorForAll(ProjectAuthoringStepHarness);
+
+  getLesson(title: string): Promise<ProjectAuthoringLessonHarness> {
+    return this.locatorForOptional(ProjectAuthoringLessonHarness.with({ title: title }))();
+  }
 
   getStep(title: string): Promise<ProjectAuthoringStepHarness> {
     return this.locatorForOptional(ProjectAuthoringStepHarness.with({ title: title }))();
