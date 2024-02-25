@@ -93,6 +93,7 @@ describe('ProjectAuthoringComponent', () => {
   copySpecificStep();
   deleteSpecificStep();
   moveSpecificStep();
+  deleteSpecificLesson();
 });
 
 function collapseAllButtonClicked() {
@@ -184,6 +185,18 @@ function moveSpecificStep() {
           selectedNodeIds: ['node1']
         }
       });
+    });
+  });
+}
+
+function deleteSpecificLesson() {
+  describe('delete lesson button on a specific lesson is clicked', () => {
+    it('deletes the lesson', async () => {
+      const lessonCount = (await harness.getLessons()).length;
+      spyOn(window, 'confirm').and.returnValue(true);
+      const lesson = await harness.getLesson('1: Example Steps');
+      await (await lesson.getDeleteButton()).click();
+      expect((await harness.getLessons()).length).toEqual(lessonCount - 1);
     });
   });
 }

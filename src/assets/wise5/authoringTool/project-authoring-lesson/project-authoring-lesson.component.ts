@@ -4,6 +4,7 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { SelectNodeEvent } from '../domain/select-node-event';
 import { NodeTypeSelected } from '../domain/node-type-selected';
 import { ExpandEvent } from '../domain/expand-event';
+import { DeleteNodeService } from '../../services/deleteNodeService';
 
 @Component({
   selector: 'project-authoring-lesson',
@@ -22,6 +23,7 @@ export class ProjectAuthoringLessonComponent {
 
   constructor(
     private dataService: TeacherDataService,
+    private deleteNodeService: DeleteNodeService,
     private projectService: TeacherProjectService
   ) {}
 
@@ -42,5 +44,17 @@ export class ProjectAuthoringLessonComponent {
   protected toggleExpanded(): void {
     this.expanded = !this.expanded;
     this.onExpandedChanged.emit({ id: this.lesson.id, expanded: this.expanded });
+  }
+
+  protected delete(): void {
+    if (confirm($localize`Are you sure you want to delete this lesson?`)) {
+      this.deleteNodeService.deleteNode(this.lesson.id);
+      this.saveAndRefreshProject();
+    }
+  }
+
+  private saveAndRefreshProject(): void {
+    this.projectService.saveProject();
+    this.projectService.refreshProject();
   }
 }
