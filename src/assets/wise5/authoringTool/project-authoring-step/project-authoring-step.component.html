@@ -59,7 +59,7 @@
       <button
         mat-icon-button
         class="move-button"
-        (click)="move($event)"
+        (click)="move(); $event.stopPropagation()"
         color="primary"
         matTooltip="Move step"
         matTooltipPosition="above"
@@ -70,7 +70,7 @@
       <button
         mat-icon-button
         class="copy-button"
-        (click)="copy($event)"
+        (click)="copy(); $event.stopPropagation()"
         color="primary"
         matTooltip="Copy step"
         matTooltipPosition="above"
@@ -81,7 +81,7 @@
       <button
         mat-icon-button
         class="delete-button"
-        (click)="delete($event)"
+        (click)="delete(); $event.stopPropagation()"
         color="primary"
         matTooltip="Delete step"
         matTooltipPosition="above"
