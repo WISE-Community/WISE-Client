@@ -31,11 +31,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ProjectAuthoringHarness } from './project-authoring.harness';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonHarness } from '@angular/material/button/testing';
+import { ActivatedRoute, Router } from '@angular/router';
 
 let component: ProjectAuthoringComponent;
 let fixture: ComponentFixture<ProjectAuthoringComponent>;
 let harness: ProjectAuthoringHarness;
 let projectService: TeacherProjectService;
+let route: ActivatedRoute;
+let router: Router;
 
 describe('ProjectAuthoringComponent', () => {
   beforeEach(async () => {
@@ -76,6 +79,8 @@ describe('ProjectAuthoringComponent', () => {
     }).compileComponents();
     projectService = TestBed.inject(TeacherProjectService);
     projectService.setProject(copy(demoProjectJSON_import));
+    route = TestBed.inject(ActivatedRoute);
+    router = TestBed.inject(Router);
     window.history.pushState({}, '', '');
     fixture = TestBed.createComponent(ProjectAuthoringComponent);
     component = fixture.componentInstance;
@@ -87,6 +92,7 @@ describe('ProjectAuthoringComponent', () => {
   expandAllButtonClicked();
   copySpecificStep();
   deleteSpecificStep();
+  moveSpecificStep();
   deleteSpecificLesson();
 });
 
@@ -163,6 +169,22 @@ function deleteSpecificStep() {
       const step = await harness.getStep('1.1: HTML Step');
       await (await step.getDeleteButton()).click();
       expect((await harness.getSteps()).length).toEqual(stepCount - 1);
+    });
+  });
+}
+
+function moveSpecificStep() {
+  describe('move step button on a specific step is clicked', () => {
+    it('navigates to choose location view', async () => {
+      const navigateSpy = spyOn(router, 'navigate');
+      const step = await harness.getStep('1.1: HTML Step');
+      await (await step.getMoveButton()).click();
+      expect(navigateSpy).toHaveBeenCalledWith(['choose-move-location'], {
+        relativeTo: route,
+        state: {
+          selectedNodeIds: ['node1']
+        }
+      });
     });
   });
 }
