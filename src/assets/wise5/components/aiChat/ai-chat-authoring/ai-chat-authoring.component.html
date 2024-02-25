@@ -8,9 +8,17 @@
       cdkTextareaAutosize
     >
     </textarea>
-    <mat-hint i18n
-      >Use this to instruct the chat bot how to behave. Students will not see this.</mat-hint
-    >
+    <mat-hint fxLayoutAlign="start center" i18n
+      >Use this to instruct the chat bot how to behave. Students will not see this.<button
+        mat-icon-button
+        (click)="openSystemPromptHelpDialog()"
+        matTooltip="Help"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>help</mat-icon>
+      </button>
+    </mat-hint>
   </mat-form-field>
   <edit-component-prompt
     [prompt]="componentContent.prompt"
