@@ -1,0 +1,20 @@
+<button
+  mat-icon-button
+  *ngIf="showArchive"
+  (click)="archiveProjects(true)"
+  matTooltip="Archive"
+  matTooltipPosition="above"
+  i18n-matTooltip
+>
+  <mat-icon>archive</mat-icon>
+</button>
+<button
+  mat-icon-button
+  *ngIf="!showArchive"
+  (click)="archiveProjects(false)"
+  matTooltip="Restore"
+  matTooltipPosition="above"
+  i18n-matTooltip
+>
+  <mat-icon>unarchive</mat-icon>
+</button>

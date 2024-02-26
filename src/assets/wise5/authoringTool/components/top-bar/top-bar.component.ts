@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { Language } from '../../../../../app/domain/language';
 import { Subscription } from 'rxjs';
+import { TeacherDataService } from '../../../services/teacherDataService';
 
 @Component({
   selector: 'at-top-bar',
@@ -32,6 +33,7 @@ export class TopBarComponent implements OnInit {
 
   constructor(
     private configService: ConfigService,
+    private dataService: TeacherDataService,
     private projectService: TeacherProjectService,
     private router: Router,
     private sessionService: SessionService
@@ -77,7 +79,12 @@ export class TopBarComponent implements OnInit {
   }
 
   protected previewProject(): void {
-    window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
+    let previewUrl = this.configService.getConfigParam('previewProjectURL');
+    const nodeId = this.dataService.getCurrentNodeId();
+    if (nodeId != null) {
+      previewUrl += `/${nodeId}`;
+    }
+    window.open(previewUrl);
   }
 
   protected showHelp(): void {

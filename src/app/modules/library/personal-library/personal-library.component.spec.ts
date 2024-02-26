@@ -22,6 +22,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ArchiveProjectResponse } from '../../../domain/archiveProjectResponse';
 import { of } from 'rxjs';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
 
 let archiveProjectService: ArchiveProjectService;
 let component: PersonalLibraryComponent;
@@ -38,6 +39,7 @@ describe('PersonalLibraryComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [
+          ArchiveProjectsButtonComponent,
           BrowserAnimationsModule,
           FormsModule,
           HttpClientTestingModule,
@@ -79,15 +81,36 @@ describe('PersonalLibraryComponent', () => {
   allProjectsSelected_clickSelectAllProjects_unselectsAllProjects();
   projectsAreSelected_goToArchivedView_projectsAreUnselected();
   projectsAreSelected_goToNextPage_projectsAreUnselected();
+  projectsAreSelected_performSearch_allProjectsAreUnselected();
 });
 
 function setUpFiveProjects() {
   TestBed.inject(LibraryService).personalLibraryProjectsSource$ = fakeAsyncResponse([
-    new LibraryProject({ id: projectId1, metadata: {}, tags: ['archived'] }),
-    new LibraryProject({ id: projectId2, metadata: {}, tags: ['archived'] }),
-    new LibraryProject({ id: projectId3, metadata: {}, tags: [] }),
-    new LibraryProject({ id: projectId4, metadata: {}, tags: [] }),
-    new LibraryProject({ id: projectId5, metadata: {}, tags: [] })
+    new LibraryProject({
+      id: projectId1,
+      metadata: { title: 'Hello' },
+      tags: ['archived']
+    }),
+    new LibraryProject({
+      id: projectId2,
+      metadata: { title: 'Hello World' },
+      tags: ['archived']
+    }),
+    new LibraryProject({
+      id: projectId3,
+      metadata: { title: 'World Energy' },
+      tags: []
+    }),
+    new LibraryProject({
+      id: projectId4,
+      metadata: { title: 'World Climate' },
+      tags: []
+    }),
+    new LibraryProject({
+      id: projectId5,
+      metadata: { title: 'Recycling' },
+      tags: []
+    })
   ]);
 }
 
@@ -140,7 +163,7 @@ function restoreMultipleProjects() {
         await harness.showArchivedView();
         await harness.selectProjects([projectId2, projectId1]);
         spyOn(archiveProjectService, 'unarchiveProjects').and.returnValue(
-          of([new ArchiveProjectResponse(2, true), new ArchiveProjectResponse(1, true)])
+          of([new ArchiveProjectResponse(2, false), new ArchiveProjectResponse(1, false)])
         );
         await (await harness.getUnarchiveButton()).click();
         expect(await harness.getProjectIdsInView()).toEqual([]);
@@ -219,6 +242,24 @@ function projectsAreSelected_goToNextPage_projectsAreUnselected() {
         await (await harness.getPaginator()).goToNextPage();
         expect(await harness.getSelectedProjectIds()).toEqual([]);
         await (await harness.getPaginator()).goToPreviousPage();
+        expect(await harness.getSelectedProjectIds()).toEqual([]);
+      });
+    });
+  });
+}
+
+function projectsAreSelected_performSearch_allProjectsAreUnselected() {
+  describe('projects are selected', () => {
+    describe('perform search', () => {
+      it('unselects all projects', async () => {
+        await (await harness.getSelectAllCheckbox()).check();
+        expect(await harness.getSelectedProjectIds()).toEqual([projectId5, projectId4, projectId3]);
+        component.filterUpdated({
+          searchValue: 'world',
+          dciArrangementValue: [],
+          disciplineValue: [],
+          peValue: []
+        });
         expect(await harness.getSelectedProjectIds()).toEqual([]);
       });
     });

@@ -118,16 +118,7 @@ export class DiscussionComponentDataExportStrategy extends AbstractComponentData
         userId3 = userInfo.users[2].id;
         studentName3 = userInfo.users[2].name;
       }
-      this.controller.setStudentIDsAndNames(
-        row,
-        columnNameToNumber,
-        userId1,
-        studentName1,
-        userId2,
-        studentName2,
-        userId3,
-        studentName3
-      );
+      this.setStudentInfo(row, columnNameToNumber, componentState);
       row[columnNameToNumber['Class Period']] = userInfo.periodName;
     }
 

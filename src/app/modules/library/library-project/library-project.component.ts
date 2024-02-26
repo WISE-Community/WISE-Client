@@ -1,12 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  ViewEncapsulation,
-  ElementRef,
-  Output,
-  EventEmitter
-} from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { LibraryProject } from '../libraryProject';
@@ -31,11 +23,7 @@ export class LibraryProjectComponent implements OnInit {
   animateDuration: string = '0s';
   animateDelay: string = '0s';
 
-  constructor(
-    public dialog: MatDialog,
-    private sanitizer: DomSanitizer,
-    private elRef: ElementRef
-  ) {}
+  constructor(public dialog: MatDialog, private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
     this.project.thumbStyle = this.getThumbStyle(this.project.projectThumb);
@@ -69,6 +57,7 @@ export class LibraryProjectComponent implements OnInit {
   }
 
   protected selectProject(event: any): void {
+    this.project.selected = event.target.checked;
     event.stopPropagation();
     this.projectSelectionEvent.emit({ selected: event.target.checked, project: this.project });
   }

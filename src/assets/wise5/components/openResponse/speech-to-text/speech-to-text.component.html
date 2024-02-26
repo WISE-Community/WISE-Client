@@ -1,0 +1,46 @@
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <span class="mat-caption" i18n>Speak to add to your response:</span>
+  <button
+    mat-stroked-button
+    [matMenuTriggerFor]="languageSelect"
+    [disabled]="recording()"
+    matTooltip="Select language"
+    i18n-mat-tooltip
+  >
+    <mat-icon>translate</mat-icon>
+    <span *ngIf="selectedLanguage()">{{ selectedLanguage().name }}</span>
+  </button>
+  <mat-menu #languageSelect="matMenu">
+    <button
+      *ngFor="let language of languages"
+      [value]="language"
+      mat-menu-item
+      (click)="changeLanguage(language)"
+      [class]="{ primary: language.code === selectedLanguage().code }"
+    >
+      {{ language.name }}
+    </button>
+  </mat-menu>
+  <button
+    *ngIf="!(recording() && recordingRequester)"
+    [disabled]="recording()"
+    mat-icon-button
+    color="primary"
+    (click)="toggleRecording()"
+    matTooltip="Record voice"
+    i18n-mat-tooltip
+  >
+    <mat-icon>mic</mat-icon>
+  </button>
+  <ng-container *ngIf="recording() && recordingRequester">
+    <button
+      mat-icon-button
+      (click)="toggleRecording()"
+      matTooltip="Stop recording"
+      i18n-mat-tooltip
+    >
+      <mat-icon color="warn">stop_circle</mat-icon>
+    </button>
+    <span class="mat-caption text-secondary" i18n>Recording...</span>
+  </ng-container>
+</div>

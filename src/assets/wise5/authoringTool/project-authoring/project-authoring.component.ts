@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
@@ -6,21 +6,31 @@ import * as $ from 'jquery';
 import { Subscription } from 'rxjs';
 import { temporarilyHighlightElement } from '../../common/dom/dom';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SelectNodeEvent } from '../domain/select-node-event';
+import { NodeTypeSelected } from '../domain/node-type-selected';
+import { ExpandEvent } from '../domain/expand-event';
 
 @Component({
   selector: 'project-authoring',
   templateUrl: './project-authoring.component.html',
   styleUrls: ['./project-authoring.component.scss']
 })
-export class ProjectAuthoringComponent {
-  protected groupNodeSelected: boolean = false;
-  private idToNode: any;
+export class ProjectAuthoringComponent implements OnInit {
+  protected allLessonsCollapsed: Signal<boolean> = computed(() =>
+    this.isAllLessonsExpandedValue(false)
+  );
+  protected allLessonsExpanded: Signal<boolean> = computed(() =>
+    this.isAllLessonsExpandedValue(true)
+  );
   protected inactiveGroupNodes: any[];
   private inactiveNodes: any[];
   protected inactiveStepNodes: any[];
   protected items: any;
+  protected lessons: any[] = [];
+  protected lessonIdToExpanded: WritableSignal<{ [key: string]: boolean }> = signal({});
+  protected nodeIdToChecked: any = {};
+  protected nodeTypeSelected: Signal<NodeTypeSelected>;
   @Input('unitId') protected projectId?: number;
-  protected stepNodeSelected: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -36,11 +46,13 @@ export class ProjectAuthoringComponent {
     this.refreshProject();
     this.dataService.setCurrentNode(null);
     this.temporarilyHighlightNewNodes(history.state.newNodes);
+    this.nodeTypeSelected = this.projectService.getNodeTypeSelected();
     this.subscriptions.add(
       this.projectService.refreshProject$.subscribe(() => {
         this.refreshProject();
       })
     );
+    this.expandAllLessons();
   }
 
   ngOnDestroy(): void {
@@ -51,32 +63,16 @@ export class ProjectAuthoringComponent {
     this.projectService.parseProject();
     this.items = this.projectService.getNodesInOrder();
     this.items.shift(); // remove the 'group0' master root node from consideration
+    this.lessons = this.projectService.getOrderedGroupNodes();
     this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.inactiveNodes = this.projectService.getInactiveNodes();
-    this.idToNode = this.projectService.getIdToNode();
     this.unselectAllItems();
-  }
-
-  protected isGroupNode(nodeId: string): boolean {
-    return this.projectService.isGroupNode(nodeId);
   }
 
   protected nodeClicked(nodeId: string): void {
     this.unselectAllItems();
     this.dataService.setCurrentNodeByNodeId(nodeId);
-  }
-
-  protected constraintIconClicked(nodeId: string): void {
-    this.dataService.setCurrentNodeByNodeId(nodeId);
-    this.router.navigate([
-      `/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/constraint`
-    ]);
-  }
-
-  protected branchIconClicked(nodeId: string): void {
-    this.dataService.setCurrentNodeByNodeId(nodeId);
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/path`]);
   }
 
   protected chooseLocation(isCopy: boolean): void {
@@ -94,6 +90,7 @@ export class ProjectAuthoringComponent {
         : $localize`Are you sure you want to delete the ${selectedNodeIds.length} selected items?`;
     if (confirm(confirmMessage)) {
       selectedNodeIds.forEach((nodeId) => this.deleteNodeService.deleteNode(nodeId));
+      this.removeLessonIdToExpandedEntries(selectedNodeIds);
       this.projectService.saveProject();
       this.refreshProject();
     }
@@ -102,16 +99,24 @@ export class ProjectAuthoringComponent {
   private getSelectedNodeIds(): string[] {
     const selectedNodeIds = [];
     this.items.forEach((item: any) => {
-      if (item.checked) {
-        selectedNodeIds.push(item.key);
+      if (this.nodeIdToChecked[item.id]) {
+        selectedNodeIds.push(item.id);
       }
     });
     for (const inactiveNode of this.inactiveNodes) {
-      if (inactiveNode.checked) {
+      if (this.nodeIdToChecked[inactiveNode.id]) {
         selectedNodeIds.push(inactiveNode.id);
       }
     }
     return selectedNodeIds;
+  }
+
+  private removeLessonIdToExpandedEntries(nodeIds: string[]): void {
+    this.lessonIdToExpanded.mutate((value) => {
+      nodeIds.forEach((nodeId) => {
+        delete value[nodeId];
+      });
+    });
   }
 
   private unselectAllItems(): void {
@@ -124,8 +129,8 @@ export class ProjectAuthoringComponent {
     this.inactiveStepNodes.forEach((inactiveStepNode: any) => {
       inactiveStepNode.checked = false;
     });
-    this.stepNodeSelected = false;
-    this.groupNodeSelected = false;
+    this.nodeIdToChecked = {};
+    this.projectService.setNodeTypeSelected(null);
   }
 
   protected addNewLesson(): void {
@@ -134,10 +139,6 @@ export class ProjectAuthoringComponent {
 
   protected addNewStep(): void {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-node/choose-template`]);
-  }
-
-  protected isNodeInAnyBranchPath(nodeId: string): boolean {
-    return this.projectService.isNodeInAnyBranchPath(nodeId);
   }
 
   private temporarilyHighlightNewNodes(newNodes = []): void {
@@ -155,26 +156,6 @@ export class ProjectAuthoringComponent {
     }
   }
 
-  protected getStepBackgroundColor(nodeId: string): string {
-    return this.projectService.getBackgroundColor(nodeId);
-  }
-
-  protected getNumberOfInactiveGroups(): number {
-    return this.inactiveNodes.filter((node) => node.type === 'group').length;
-  }
-
-  /**
-   * Get the number of inactive steps. This only counts the inactive steps that
-   * are not in an inactive group.
-   * @return The number of inactive steps (not including the inactive steps that
-   * are in an inactive group).
-   */
-  protected getNumberOfInactiveSteps(): number {
-    return this.inactiveNodes.filter(
-      (node) => node.type === 'node' && this.projectService.getParentGroup(node.id) == null
-    ).length;
-  }
-
   protected getParentGroup(nodeId: string): any {
     return this.projectService.getParentGroup(nodeId);
   }
@@ -183,53 +164,9 @@ export class ProjectAuthoringComponent {
    * The checkbox for a node was clicked. We do not allow selecting a mix of group and step nodes.
    * If any group nodes are selected, disable all step node checkboxes, and vise-versa.
    */
-  protected selectNode($event: Event): void {
-    const checkedNodes = this.items
-      .concat(Object.values(this.idToNode))
-      .filter((item) => item.checked);
-    if (checkedNodes.length === 0) {
-      this.groupNodeSelected = false;
-      this.stepNodeSelected = false;
-    } else {
-      this.groupNodeSelected = this.isGroupNode(checkedNodes[0].id);
-      this.stepNodeSelected = !this.groupNodeSelected;
-    }
-    $event.stopPropagation();
-  }
-
-  protected isBranchPoint(nodeId: string): boolean {
-    return this.projectService.isBranchPoint(nodeId);
-  }
-
-  protected getNumberOfBranchPaths(nodeId: string): number {
-    return this.projectService.getNumberOfBranchPaths(nodeId);
-  }
-
-  protected getBranchCriteriaDescription(nodeId: string): string {
-    return this.projectService.getBranchCriteriaDescription(nodeId);
-  }
-
-  protected nodeHasConstraint(nodeId: string): boolean {
-    return this.projectService.nodeHasConstraint(nodeId);
-  }
-
-  protected getNumberOfConstraintsOnNode(nodeId: string): number {
-    return this.projectService.getConstraintsOnNode(nodeId).length;
-  }
-
-  protected getConstraintDescriptions(nodeId: string): string {
-    let constraintDescriptions = '';
-    const constraints = this.projectService.getConstraintsOnNode(nodeId);
-    for (let c = 0; c < constraints.length; c++) {
-      let constraint = constraints[c];
-      let description = this.projectService.getConstraintDescription(constraint);
-      constraintDescriptions += c + 1 + ' - ' + description + '\n';
-    }
-    return constraintDescriptions;
-  }
-
-  protected nodeHasRubric(nodeId: string): boolean {
-    return this.projectService.nodeHasRubric(nodeId);
+  protected selectNode({ id, checked }: SelectNodeEvent): void {
+    this.nodeIdToChecked[id] = checked;
+    this.updateNodeTypeSelected();
   }
 
   protected hasSelectedNodes(): boolean {
@@ -241,5 +178,62 @@ export class ProjectAuthoringComponent {
       this.hasSelectedNodes() &&
       this.getSelectedNodeIds().every((nodeId) => this.projectService.isApplicationNode(nodeId))
     );
+  }
+
+  private isAllLessonsExpandedValue(expanded: boolean): boolean {
+    return (
+      this.lessons.every((lesson) => this.lessonIdToExpanded()[lesson.id] === expanded) &&
+      this.inactiveGroupNodes.every(
+        (inactiveGroupNode) => this.lessonIdToExpanded()[inactiveGroupNode.id] === expanded
+      )
+    );
+  }
+
+  protected expandAllLessons(): void {
+    this.setAllLessonsExpandedValue(true);
+  }
+
+  protected collapseAllLessons(): void {
+    this.setAllLessonsExpandedValue(false);
+    this.lessons.forEach((lesson) => this.unselectChildren(lesson));
+    this.updateNodeTypeSelected();
+  }
+
+  private setAllLessonsExpandedValue(expanded: boolean): void {
+    this.lessonIdToExpanded.mutate((value) => {
+      for (const lesson of this.lessons) {
+        value[lesson.id] = expanded;
+      }
+      for (const inactiveGroupNode of this.inactiveGroupNodes) {
+        value[inactiveGroupNode.id] = expanded;
+      }
+    });
+  }
+
+  protected onExpandedChanged(event: ExpandEvent): void {
+    this.lessonIdToExpanded.mutate((value) => {
+      value[event.id] = event.expanded;
+    });
+    const lesson = this.lessons
+      .concat(this.inactiveGroupNodes)
+      .find((lesson: any) => lesson.id === event.id);
+    this.unselectChildren(lesson);
+    this.updateNodeTypeSelected();
+  }
+
+  private unselectChildren(lesson: any): void {
+    lesson.ids.forEach((childId: string) => (this.nodeIdToChecked[childId] = false));
+  }
+
+  private updateNodeTypeSelected(): void {
+    let nodeTypeSelected = null;
+    Object.entries(this.nodeIdToChecked).forEach(([nodeId, checked]) => {
+      if (checked) {
+        nodeTypeSelected = this.projectService.isGroupNode(nodeId)
+          ? NodeTypeSelected.lesson
+          : NodeTypeSelected.step;
+      }
+    });
+    this.projectService.setNodeTypeSelected(nodeTypeSelected);
   }
 }

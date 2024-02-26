@@ -7,11 +7,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
+import { ArchiveProjectsButtonComponent } from '../archive-projects-button/archive-projects-button.component';
 
 @NgModule({
   declarations: [SelectRunsControlsComponent],
   exports: [SelectRunsControlsComponent],
   imports: [
+    ArchiveProjectsButtonComponent,
     CommonModule,
     FlexLayoutModule,
     MatButtonModule,

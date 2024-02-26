@@ -26,28 +26,10 @@
     </mat-menu>
   </div>
   <div *ngIf="numSelectedRuns > 0" class="secondary-text" i18n>{{ numSelectedRuns }} selected</div>
-  <button
-    mat-icon-button
-    *ngIf="!showArchived && numSelectedRuns > 0"
-    (click)="archiveSelectedRuns(true)"
-    aria-label="Archive selected units"
-    i18n-aria-label
-    matTooltip="Archive"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>archive</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    *ngIf="showArchived && numSelectedRuns > 0"
-    (click)="archiveSelectedRuns(false)"
-    aria-label="Restore selected units"
-    i18n-aria-label
-    matTooltip="Restore"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>unarchive</mat-icon>
-  </button>
+  <archive-projects-button
+    *ngIf="numSelectedRuns > 0"
+    [showArchive]="showArchive"
+    [projects]="selectedProjects"
+    (archiveActionEvent)="archiveActionEvent.emit()"
+  ></archive-projects-button>
 </div>

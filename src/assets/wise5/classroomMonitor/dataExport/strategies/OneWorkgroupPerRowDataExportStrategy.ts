@@ -137,7 +137,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                     }
                     workgroupRow[
                       columnIdToColumnIndex[columnIdPrefix + '-studentWork']
-                    ] = this.controller.getStudentDataString(componentState);
+                    ] = this.getStudentDataString(componentState);
                     if (this.controller.includeScores || this.controller.includeComments) {
                       var latestComponentAnnotations = this.annotationService.getLatestComponentAnnotations(
                         nodeId,

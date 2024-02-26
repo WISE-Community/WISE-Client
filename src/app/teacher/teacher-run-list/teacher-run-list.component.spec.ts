@@ -19,7 +19,7 @@ import { TeacherRunListHarness } from './teacher-run-list.harness';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RunMenuComponent } from '../run-menu/run-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
@@ -27,6 +27,9 @@ import { ArchiveProjectService } from '../../services/archive-project.service';
 import { MatCardModule } from '@angular/material/card';
 import { MockArchiveProjectService } from '../../services/mock-archive-project.service';
 import { MatSelectModule } from '@angular/material/select';
+import { ArchiveProjectsButtonComponent } from '../archive-projects-button/archive-projects-button.component';
+import { Project } from '../../domain/project';
+import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
 
 class TeacherScheduleStubComponent {}
 
@@ -56,12 +59,13 @@ class TeacherRunStub extends TeacherRun {
       numStudents: 10,
       owner: new User({ id: userId }),
       periods: [],
-      project: {
+      project: new Project({
+        archived: tags.includes('archived'),
         id: id,
         tags: tags,
         name: name,
         owner: new User({ id: userId })
-      },
+      }),
       startTime: startTime,
       endTime: endTime
     });
@@ -72,8 +76,14 @@ describe('TeacherRunListComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [RunMenuComponent, TeacherRunListComponent, TeacherRunListItemComponent],
+        declarations: [
+          RunMenuComponent,
+          SearchBarComponent,
+          TeacherRunListComponent,
+          TeacherRunListItemComponent
+        ],
         imports: [
+          ArchiveProjectsButtonComponent,
           BrowserAnimationsModule,
           BrowserModule,
           FormsModule,
@@ -86,6 +96,7 @@ describe('TeacherRunListComponent', () => {
           MatMenuModule,
           MatSelectModule,
           MatSnackBarModule,
+          ReactiveFormsModule,
           RouterTestingModule.withRoutes([
             { path: 'teacher/home/schedule', component: TeacherScheduleStubComponent }
           ]),
@@ -134,6 +145,7 @@ describe('TeacherRunListComponent', () => {
   selectRunsOptionChosen();
   unarchiveSelectedRuns();
   noRuns();
+  searchUnselectAllRuns();
 });
 
 function archiveSelectedRuns(): void {
@@ -344,6 +356,21 @@ function noRuns(): void {
         expect(await runListHarness.getNoRunsMessage()).toContain(
           "Looks like you don't have any archived classroom units."
         );
+      });
+    });
+  });
+}
+
+function searchUnselectAllRuns(): void {
+  describe('runs are selected', () => {
+    describe('perform search', () => {
+      it('unselects all runs', async () => {
+        await runListHarness.clickRunListItemCheckbox(0);
+        await runListHarness.clickRunListItemCheckbox(1);
+        await runListHarness.clickRunListItemCheckbox(2);
+        const searchInput = await runListHarness.getSearchInput();
+        await searchInput.sendKeys('first');
+        await expectRunsIsSelected([false]);
       });
     });
   });

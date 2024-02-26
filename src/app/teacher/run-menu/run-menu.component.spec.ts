@@ -11,7 +11,7 @@ import { TeacherRun } from '../teacher-run';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Course } from '../../domain/course';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ArchiveProjectService } from '../../services/archive-project.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -121,11 +121,11 @@ function setRun(archived: boolean): void {
     name: 'Photosynthesis',
     owner: owner,
     project: {
+      archived: archived,
       id: 1,
       owner: owner,
       sharedOwners: []
-    },
-    archived: archived
+    }
   });
 }
 
@@ -133,18 +133,18 @@ function archive() {
   describe('archive()', () => {
     it('should archive a run', async () => {
       await runMenuHarness.clickArchiveMenuButton();
-      expect(component.run.archived).toEqual(true);
+      expect(component.run.project.archived).toEqual(true);
       const snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Successfully archived unit.');
     });
     it('should archive a run and then undo', async () => {
       await runMenuHarness.clickArchiveMenuButton();
-      expect(component.run.archived).toEqual(true);
+      expect(component.run.project.archived).toEqual(true);
       let snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Successfully archived unit.');
       expect(await snackBar.getActionDescription()).toEqual('Undo');
       await snackBar.dismissWithAction();
-      expect(component.run.archived).toEqual(false);
+      expect(component.run.project.archived).toEqual(false);
       snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Action undone.');
     });
@@ -157,7 +157,7 @@ function unarchive() {
       setRun(true);
       component.ngOnInit();
       await runMenuHarness.clickUnarchiveMenuButton();
-      expect(component.run.archived).toEqual(false);
+      expect(component.run.project.archived).toEqual(false);
       const snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Successfully restored unit.');
     });
@@ -165,12 +165,12 @@ function unarchive() {
       setRun(true);
       component.ngOnInit();
       await runMenuHarness.clickUnarchiveMenuButton();
-      expect(component.run.archived).toEqual(false);
+      expect(component.run.project.archived).toEqual(false);
       let snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Successfully restored unit.');
       expect(await snackBar.getActionDescription()).toEqual('Undo');
       await snackBar.dismissWithAction();
-      expect(component.run.archived).toEqual(true);
+      expect(component.run.project.archived).toEqual(true);
       snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Action undone.');
     });

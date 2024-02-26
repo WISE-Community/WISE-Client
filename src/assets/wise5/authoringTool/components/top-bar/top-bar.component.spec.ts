@@ -9,6 +9,10 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { TeacherDataService } from '../../../services/teacherDataService';
+import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
+import { ClassroomStatusService } from '../../../services/classroomStatusService';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('TopBarComponent', () => {
   let component: TopBarComponent;
@@ -19,13 +23,19 @@ describe('TopBarComponent', () => {
       declarations: [TopBarComponent],
       imports: [
         HttpClientTestingModule,
+        MatDialogModule,
         MatIconModule,
         MatMenuModule,
         MatToolbarModule,
         MatTooltipModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [TeacherProjectService]
+      providers: [
+        ClassroomStatusService,
+        TeacherDataService,
+        TeacherProjectService,
+        TeacherWebSocketService
+      ]
     }).compileComponents();
   });
 

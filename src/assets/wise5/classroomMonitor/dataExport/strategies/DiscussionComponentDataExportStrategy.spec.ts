@@ -43,9 +43,7 @@ function exportDiscussion(): void {
       ]);
       setUpExportStrategy();
       exportStrategyTester.componentExportStrategy.export();
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           exportStrategyTester.componentExportStrategy.defaultColumnNames,
           [

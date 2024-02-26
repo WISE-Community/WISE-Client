@@ -67,9 +67,7 @@ function exportAllRevisions(): void {
       const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(
         additionalColumns
       );
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [
@@ -246,9 +244,7 @@ function exportLatestRevisions(): void {
       const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(
         additionalColumns
       );
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [
@@ -346,9 +342,7 @@ function exportMatchComponentWithChoiceReuse(): void {
       const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(
         additionalColumns
       );
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [
@@ -408,9 +402,7 @@ function exportMatchComponentWithCorrectPosition(): void {
       const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(
         additionalColumns
       );
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [

@@ -74,7 +74,9 @@ export class ProjectService {
     this.inactiveStepNodes = [];
     this.inactiveGroupNodes = [];
     this.groupNodes = [];
-    this.idToNode = {};
+    Object.keys(this.idToNode).forEach((key) => {
+      delete this.idToNode[key];
+    });
     this.metadata = {};
     this.rootNode = null;
     this.idToOrder = {};
@@ -113,6 +115,12 @@ export class ProjectService {
 
   getGroupNodes(): any[] {
     return this.groupNodes;
+  }
+
+  getOrderedGroupNodes(): any[] {
+    return this.groupNodes
+      .filter((groupNode) => groupNode.id !== 'group0')
+      .sort((a, b) => this.idToOrder[a.id].order - this.idToOrder[b.id].order);
   }
 
   addNode(node: any): void {
@@ -2022,5 +2030,9 @@ export class ProjectService {
 
   isDefaultLocale(): boolean {
     return this.getLocale().isDefaultLocale(this.currentLanguage().locale);
+  }
+
+  getSpeechToTextSettings(): any {
+    return this.project.speechToText;
   }
 }

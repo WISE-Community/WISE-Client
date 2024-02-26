@@ -5,7 +5,6 @@ import { LibraryComponent } from '../library/library.component';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
-import { Subscription } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
 
@@ -29,7 +28,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
   protected projectsLabel: string = $localize`units`;
   protected selectedProjects: WritableSignal<LibraryProject[]> = signal([]);
   protected sharedProjects: LibraryProject[] = [];
-  protected showArchived: boolean = false;
+  protected showArchivedView: boolean = false;
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
@@ -114,9 +113,10 @@ export class PersonalLibraryComponent extends LibraryComponent {
   public filterUpdated(filterValues: ProjectFilterValues = null): void {
     super.filterUpdated(filterValues);
     this.filteredProjects = this.filteredProjects.filter(
-      (project) => project.hasTag('archived') == this.showArchived
+      (project) => project.hasTag('archived') == this.showArchivedView
     );
     this.numProjectsInView = this.getProjectsInView().length;
+    this.unselectAllProjects();
   }
 
   protected switchActiveArchivedView(): void {
@@ -143,30 +143,20 @@ export class PersonalLibraryComponent extends LibraryComponent {
     }
   }
 
-  protected archiveSelectedProjects(archive: boolean): Subscription {
-    return this.archiveProjectService[archive ? 'archiveProjects' : 'unarchiveProjects'](
-      this.selectedProjects()
-    ).subscribe({
-      next: () => {
-        this.archiveProjectService.showArchiveProjectsSuccessMessage(
-          this.selectedProjects(),
-          archive
-        );
-        this.archiveProjectService.updateProjectsArchivedStatus(this.selectedProjects(), archive);
-        this.unselectAllProjects();
-      },
-      error: () => {
-        this.archiveProjectService.showArchiveProjectErrorMessage(archive);
-      }
-    });
+  protected refreshProjects(): void {
+    this.unselectAllProjects();
+    this.archiveProjectService.refreshProjects();
   }
 
   protected unselectAllProjects(): void {
+    this.projects.forEach((project) => (project.selected = false));
     this.selectedProjects.set([]);
   }
 
   protected selectAllProjects(): void {
-    this.selectedProjects.set(this.getProjectsInView());
+    const projects = this.getProjectsInView();
+    projects.forEach((project) => (project.selected = true));
+    this.selectedProjects.set(projects);
   }
 
   private getProjectsInView(): LibraryProject[] {

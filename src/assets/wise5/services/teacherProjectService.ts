@@ -1,6 +1,6 @@
 'use strict';
 import { ProjectService } from './projectService';
-import { Injectable } from '@angular/core';
+import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { BranchService } from './branchService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
@@ -11,6 +11,7 @@ import { copy } from '../common/object/object';
 import { generateRandomKey } from '../common/string/string';
 import { branchPathBackgroundColors } from '../common/color/color';
 import { reduceByUniqueId } from '../common/array/array';
+import { NodeTypeSelected } from '../authoringTool/domain/node-type-selected';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -22,6 +23,7 @@ export class TeacherProjectService extends ProjectService {
   public refreshProject$ = this.refreshProjectSource.asObservable();
   private errorSavingProjectSource: Subject<void> = new Subject<void>();
   public errorSavingProject$: Observable<void> = this.errorSavingProjectSource.asObservable();
+  private nodeTypeSelected: WritableSignal<NodeTypeSelected> = signal(null);
   private notAllowedToEditThisProjectSource: Subject<void> = new Subject<void>();
   public notAllowedToEditThisProject$: Observable<void> = this.notAllowedToEditThisProjectSource.asObservable();
   private projectSavedSource: Subject<void> = new Subject<void>();
@@ -344,8 +346,8 @@ export class TeacherProjectService extends ProjectService {
    */
   createNodeAfter(newNode, nodeId) {
     if (this.isInactive(nodeId)) {
-      this.addInactiveNodeInsertAfter(newNode, nodeId);
       this.setIdToNode(newNode.id, newNode);
+      this.addInactiveNodeInsertAfter(newNode, nodeId);
     } else {
       this.addNode(newNode);
       this.setIdToNode(newNode.id, newNode);
@@ -721,10 +723,10 @@ export class TeacherProjectService extends ProjectService {
       this.insertNodeAfterInactiveNode(node, nodeIdToInsertAfter);
     }
     if (node.type === 'group') {
-      this.inactiveGroupNodes.push(node.id);
+      this.inactiveGroupNodes.push(node);
       this.addGroupChildNodesToInactive(node);
     } else {
-      this.inactiveStepNodes.push(node.id);
+      this.inactiveStepNodes.push(node);
     }
   }
 
@@ -803,10 +805,10 @@ export class TeacherProjectService extends ProjectService {
       this.insertNodeInsideInactiveNode(node, nodeIdToInsertInside);
     }
     if (node.type === 'group') {
-      this.inactiveGroupNodes.push(node.id);
+      this.inactiveGroupNodes.push(node);
       this.addGroupChildNodesToInactive(node);
     } else {
-      this.inactiveStepNodes.push(node.id);
+      this.inactiveStepNodes.push(node);
     }
   }
 
@@ -1753,7 +1755,7 @@ export class TeacherProjectService extends ProjectService {
   private updateParentGroupStartId(nodeId: string): void {
     const parentGroup = this.getParentGroup(nodeId);
     if (parentGroup != null && parentGroup.startId === nodeId) {
-      const transitions = this.getTransitionsFromNode(nodeId);
+      const transitions = this.getTransitionsFromNode(this.getNodeById(nodeId));
       if (transitions.length > 0) {
         for (const transition of transitions) {
           const toNodeId = transition.to;
@@ -2572,9 +2574,11 @@ export class TeacherProjectService extends ProjectService {
    */
   addGroupChildNodesToInactive(node) {
     for (const childId of node.ids) {
-      const childNode = this.getNodeById(childId);
-      this.project.inactiveNodes.push(childNode);
-      this.inactiveStepNodes.push(childNode);
+      if (!this.isInactive(childId)) {
+        const childNode = this.getNodeById(childId);
+        this.project.inactiveNodes.push(childNode);
+        this.inactiveStepNodes.push(childNode);
+      }
     }
   }
 
@@ -3086,5 +3090,13 @@ export class TeacherProjectService extends ProjectService {
       .sort((a: any, b: any) => {
         return a.order - b.order;
       });
+  }
+
+  setNodeTypeSelected(nodeTypeSelected: NodeTypeSelected): void {
+    this.nodeTypeSelected.set(nodeTypeSelected);
+  }
+
+  getNodeTypeSelected(): Signal<NodeTypeSelected> {
+    return this.nodeTypeSelected.asReadonly();
   }
 }

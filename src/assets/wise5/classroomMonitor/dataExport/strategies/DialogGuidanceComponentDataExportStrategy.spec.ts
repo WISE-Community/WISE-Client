@@ -82,9 +82,7 @@ function exportAllRevisions(): void {
       const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(
         generateAdditionalHeaderColumns(2)
       );
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [
@@ -298,9 +296,7 @@ function exportLatestRevisions(): void {
       const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(
         generateAdditionalHeaderColumns(2)
       );
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [
@@ -420,9 +416,7 @@ function exportItemWithSingleScore(): void {
       const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(
         generateAdditionalHeaderColumnsForSingleScore(1)
       );
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [
