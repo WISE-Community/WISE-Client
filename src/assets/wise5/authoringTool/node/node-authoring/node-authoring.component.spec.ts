@@ -25,6 +25,7 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { EditNodeTitleComponent } from '../edit-node-title/edit-node-title.component';
 import { AddComponentButtonComponent } from '../add-component-button/add-component-button.component';
 import { CopyComponentButtonComponent } from '../copy-component-button/copy-component-button.component';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -108,6 +109,9 @@ describe('NodeAuthoringComponent', () => {
     spyOn(teacherDataService, 'saveEvent').and.callFake(() => {
       return Promise.resolve();
     });
+    spyOn(teacherProjectService, 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(NodeAuthoringComponent);
     component = fixture.componentInstance;
     component.nodeId = nodeId1;

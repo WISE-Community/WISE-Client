@@ -6,6 +6,7 @@ import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { DrawAuthoring } from './draw-authoring.component';
 import { DrawAuthoringModule } from './draw-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 
 let component: DrawAuthoring;
 let fixture: ComponentFixture<DrawAuthoring>;
@@ -50,6 +51,9 @@ describe('DrawAuthoringComponent', () => {
         StudentTeacherCommonServicesModule
       ]
     });
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(DrawAuthoring);
     component = fixture.componentInstance;
     spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);

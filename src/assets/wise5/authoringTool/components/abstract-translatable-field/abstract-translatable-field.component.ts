@@ -10,6 +10,7 @@ import { generateRandomKey } from '../../../common/string/string';
 export abstract class AbstractTranslatableFieldComponent {
   @Input() content: object;
   protected currentLanguage: Signal<Language>;
+  protected defaultLanguage: Language = this.projectService.getLocale().getDefaultLanguage();
   protected defaultLanguageText: Signal<string>;
   @Output() defaultLanguageTextChanged: Subject<string> = new Subject<string>();
   private i18nId: string;
@@ -38,11 +39,7 @@ export abstract class AbstractTranslatableFieldComponent {
         : ''
     );
     this.defaultLanguageText = computed(() =>
-      this.showTranslationInput()
-        ? `[${this.projectService.getLocale().getDefaultLanguage().language}\] ${
-            this.content[this.key]
-          }`
-        : ''
+      this.showTranslationInput() ? this.content[this.key] : ''
     );
     this.translationTextChangedSubscription = this.translationTextChanged
       .pipe(debounceTime(1000), distinctUntilChanged())

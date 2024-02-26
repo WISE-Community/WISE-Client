@@ -17,6 +17,7 @@ import { MultipleChoiceAuthoringHarness } from './multiple-choice-authoring.harn
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 
 let component: MultipleChoiceAuthoring;
 let fixture: ComponentFixture<MultipleChoiceAuthoring>;
@@ -46,6 +47,9 @@ describe('MultipleChoiceAuthoringComponent', () => {
   );
 
   beforeEach(async () => {
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(MultipleChoiceAuthoring);
     component = fixture.componentInstance;
     component.componentContent = {
