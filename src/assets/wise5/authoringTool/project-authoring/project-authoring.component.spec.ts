@@ -94,6 +94,7 @@ describe('ProjectAuthoringComponent', () => {
   deleteSpecificStep();
   moveSpecificStep();
   deleteSpecificLesson();
+  moveSpecificLesson();
 });
 
 function collapseAllButtonClicked() {
@@ -197,6 +198,22 @@ function deleteSpecificLesson() {
       const lesson = await harness.getLesson('1: Example Steps');
       await (await lesson.getDeleteButton()).click();
       expect((await harness.getLessons()).length).toEqual(lessonCount - 1);
+    });
+  });
+}
+
+function moveSpecificLesson() {
+  describe('move lesson button on a specific lesson is clicked', () => {
+    it('navigates to choose location view', async () => {
+      const navigateSpy = spyOn(router, 'navigate');
+      const lesson = await harness.getLesson('1: Example Steps');
+      await (await lesson.getMoveButton()).click();
+      expect(navigateSpy).toHaveBeenCalledWith(['choose-move-location'], {
+        relativeTo: route,
+        state: {
+          selectedNodeIds: ['group1']
+        }
+      });
     });
   });
 }

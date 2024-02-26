@@ -34,6 +34,16 @@
       </button>
       <button
         mat-icon-button
+        (click)="$event.stopPropagation(); move()"
+        color="primary"
+        matTooltip="Move lesson"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>redo</mat-icon>
+      </button>
+      <button
+        mat-icon-button
         (click)="$event.stopPropagation(); delete()"
         color="primary"
         matTooltip="Delete lesson"

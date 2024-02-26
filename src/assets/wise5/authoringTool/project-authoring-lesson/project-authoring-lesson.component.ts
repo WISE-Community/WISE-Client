@@ -5,6 +5,7 @@ import { SelectNodeEvent } from '../domain/select-node-event';
 import { NodeTypeSelected } from '../domain/node-type-selected';
 import { ExpandEvent } from '../domain/expand-event';
 import { DeleteNodeService } from '../../services/deleteNodeService';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'project-authoring-lesson',
@@ -24,7 +25,9 @@ export class ProjectAuthoringLessonComponent {
   constructor(
     private dataService: TeacherDataService,
     private deleteNodeService: DeleteNodeService,
-    private projectService: TeacherProjectService
+    private projectService: TeacherProjectService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +47,13 @@ export class ProjectAuthoringLessonComponent {
   protected toggleExpanded(): void {
     this.expanded = !this.expanded;
     this.onExpandedChanged.emit({ id: this.lesson.id, expanded: this.expanded });
+  }
+
+  protected move(): void {
+    this.router.navigate(['choose-move-location'], {
+      relativeTo: this.route,
+      state: { selectedNodeIds: [this.lesson.id] }
+    });
   }
 
   protected delete(): void {

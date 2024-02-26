@@ -9,7 +9,6 @@ export class ProjectAuthoringStepHarness extends ProjectAuthoringNodeHarness {
   static hostSelector = 'project-authoring-step';
 
   getCopyButton = this.locatorFor(MatButtonHarness.with({ selector: '[matTooltip="Copy step"]' }));
-  getMoveButton = this.locatorFor(MatButtonHarness.with({ selector: '[matTooltip="Move step"]' }));
 
   static with(
     options: ProjectAuthoringNodeHarnessFilters
