@@ -13550,11 +13550,19 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         </context-group>
         <target state="needs-translation">Click to enter step</target>
       </trans-unit>
+      <trans-unit id="755e89f2e7a2ffda09056f509222d0e405820e4d" datatype="html">
+        <source>Move step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+        <target state="needs-translation">Move step</target>
+      </trans-unit>
       <trans-unit id="6e3d4bf4bfb1dd3195c4e1d59b0fdbacd1d68db4" datatype="html">
         <source>Copy step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">75</context>
         </context-group>
         <target state="needs-translation">Copy step</target>
       </trans-unit>
@@ -13562,7 +13570,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Delete step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">86</context>
         </context-group>
         <target state="needs-translation">Delete step</target>
       </trans-unit>
@@ -13570,7 +13578,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Are you sure you want to delete this step?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.ts</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this step?</target>
       </trans-unit>
