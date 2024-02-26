@@ -96,22 +96,19 @@ export class ProjectAuthoringStepComponent {
     this.router.navigate([`/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/path`]);
   }
 
-  protected move(event: Event): void {
-    event.stopPropagation();
+  protected move(): void {
     this.router.navigate(['choose-move-location'], {
       relativeTo: this.route,
       state: { selectedNodeIds: [this.step.id] }
     });
   }
 
-  protected copy(event: Event): void {
-    event.stopPropagation();
+  protected copy(): void {
     this.copyNodesService.copyNodesAfter([this.step.id], this.step.id);
     this.saveAndRefreshProject();
   }
 
-  protected delete(event: Event): void {
-    event.stopPropagation();
+  protected delete(): void {
     if (confirm($localize`Are you sure you want to delete this step?`)) {
       this.deleteNodeService.deleteNode(this.step.id);
       this.saveAndRefreshProject();
