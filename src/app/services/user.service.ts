@@ -38,14 +38,15 @@ export class UserService {
   }
 
   isStudent(): boolean {
-    return this.isAuthenticated && this.user$.getValue().role === 'student';
+    return this.isAuthenticated && this.getRoles().includes('student');
   }
 
   isTeacher(): boolean {
-    const role = this.user$.getValue().role;
-    return (
-      this.isAuthenticated && (role === 'teacher' || role === 'admin' || role === 'researcher')
-    );
+    return this.isAuthenticated && this.getRoles().includes('teacher');
+  }
+
+  getRoles(): string[] {
+    return this.getUser().getValue().roles;
   }
 
   isGoogleUser(): boolean {

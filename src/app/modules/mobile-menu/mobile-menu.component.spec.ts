@@ -53,7 +53,7 @@ function userLoggedOut() {
 
 function expectUserLoggedIn() {
   const teacher: User = new User();
-  teacher.role = 'teacher';
+  teacher.roles = ['teacher'];
   spyOn(userService, 'getUser').and.returnValue(of(teacher));
 }
 
