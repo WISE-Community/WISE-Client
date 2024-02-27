@@ -7,6 +7,7 @@ export interface ProjectAuthoringNodeHarnessFilters extends BaseHarnessFilters {
 }
 
 export class ProjectAuthoringNodeHarness extends ComponentHarness {
+  getMoveButton = this.locatorFor(MatButtonHarness.with({ selector: '[matTooltip^="Move"]' }));
   getDeleteButton = this.locatorFor(MatButtonHarness.with({ selector: '[matTooltip^="Delete"]' }));
   getTitleElement = this.locatorFor(NodeIconAndTitleHarness);
 
