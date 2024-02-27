@@ -2002,4 +2002,18 @@ export class ProjectService {
   getSpeechToTextSettings(): any {
     return this.project.speechToText;
   }
+
+  getPreviousStepNodeId(nodeId: string): string {
+    const nodeIds = this.getFlattenedProjectAsNodeIds();
+    return nodeIds[nodeIds.indexOf(nodeId) - 1];
+  }
+
+  isFirstStepInLesson(nodeId: string): boolean {
+    for (const lesson of this.getGroupNodes()) {
+      if (lesson.startId === nodeId) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

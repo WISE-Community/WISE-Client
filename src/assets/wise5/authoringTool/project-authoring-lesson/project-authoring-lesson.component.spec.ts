@@ -18,6 +18,7 @@ import { ProjectAuthoringLessonHarness } from './project-authoring-lesson.harnes
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CopyNodesService } from '../../services/copyNodesService';
+import { MatMenuModule } from '@angular/material/menu';
 
 let component: ProjectAuthoringLessonComponent;
 let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
@@ -42,6 +43,7 @@ describe('ProjectAuthoringLessonComponent', () => {
         MatCheckboxModule,
         MatDialogModule,
         MatIconModule,
+        MatMenuModule,
         RouterTestingModule,
         StudentTeacherCommonServicesModule
       ],
