@@ -339,36 +339,6 @@ export class DataExportComponent implements OnInit {
     return selectedNodes;
   }
 
-  selectAll(doSelect: boolean = true): void {
-    if (this.projectIdToOrder != null) {
-      for (let nodeId in this.projectIdToOrder) {
-        let projectItem = this.projectIdToOrder[nodeId];
-        if (projectItem.order != 0) {
-          projectItem.checked = doSelect;
-          if (projectItem.node.type != 'group') {
-            if (
-              projectItem.node != null &&
-              projectItem.node.components != null &&
-              projectItem.node.components.length > 0
-            ) {
-              projectItem.node.components.map((componentItem) => {
-                componentItem.checked = doSelect;
-              });
-            }
-          }
-        }
-      }
-    }
-  }
-
-  deselectAll(): void {
-    this.selectAll(false);
-  }
-
-  previewProject(): void {
-    window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
-  }
-
   /**
    * Check if we want to export this node
    * @param selectedNodesMap a mapping of node id to boolean value of whether

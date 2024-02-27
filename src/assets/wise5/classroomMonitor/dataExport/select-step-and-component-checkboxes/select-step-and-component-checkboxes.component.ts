@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConfigService } from '../../../services/configService';
 
@@ -8,19 +8,51 @@ import { ConfigService } from '../../../services/configService';
   styleUrls: ['./select-step-and-component-checkboxes.component.scss']
 })
 export class SelectStepAndComponentCheckboxesComponent {
+  @Input() exportStepSelectionType: string = 'exportAllSteps';
+  @Output() exportStepSelectionTypeChange: EventEmitter<string> = new EventEmitter<string>();
   protected nodeIdToPositionAndTitle: any = {};
   @Input() nodes: any[] = [];
+  protected project: any;
   @Input() projectIdToOrder: any;
 
   constructor(public configService: ConfigService, public projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
+    this.project = this.projectService.project;
     for (const node of this.nodes) {
       const nodeId = node.node.id;
       const position = this.getNodePositionById(nodeId);
       const title = this.getNodeTitleByNodeId(nodeId);
       this.nodeIdToPositionAndTitle[nodeId] = `${position}: ${title}`;
     }
+  }
+
+  protected previewProject(): void {
+    window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
+  }
+
+  protected selectAll(doSelect: boolean = true): void {
+    for (let nodeId in this.projectIdToOrder) {
+      let projectItem = this.projectIdToOrder[nodeId];
+      if (projectItem.order != 0) {
+        projectItem.checked = doSelect;
+        if (projectItem.node.type != 'group') {
+          if (
+            projectItem.node != null &&
+            projectItem.node.components != null &&
+            projectItem.node.components.length > 0
+          ) {
+            projectItem.node.components.map((componentItem) => {
+              componentItem.checked = doSelect;
+            });
+          }
+        }
+      }
+    }
+  }
+
+  protected deselectAll(): void {
+    this.selectAll(false);
   }
 
   protected nodeItemClicked(nodeItem: any): void {
