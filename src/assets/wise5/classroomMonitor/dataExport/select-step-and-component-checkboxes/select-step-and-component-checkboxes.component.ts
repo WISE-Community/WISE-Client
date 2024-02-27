@@ -32,21 +32,19 @@ export class SelectStepAndComponentCheckboxesComponent {
   }
 
   protected selectAll(doSelect: boolean = true): void {
-    if (this.projectIdToOrder != null) {
-      for (let nodeId in this.projectIdToOrder) {
-        let projectItem = this.projectIdToOrder[nodeId];
-        if (projectItem.order != 0) {
-          projectItem.checked = doSelect;
-          if (projectItem.node.type != 'group') {
-            if (
-              projectItem.node != null &&
-              projectItem.node.components != null &&
-              projectItem.node.components.length > 0
-            ) {
-              projectItem.node.components.map((componentItem) => {
-                componentItem.checked = doSelect;
-              });
-            }
+    for (let nodeId in this.projectIdToOrder) {
+      let projectItem = this.projectIdToOrder[nodeId];
+      if (projectItem.order != 0) {
+        projectItem.checked = doSelect;
+        if (projectItem.node.type != 'group') {
+          if (
+            projectItem.node != null &&
+            projectItem.node.components != null &&
+            projectItem.node.components.length > 0
+          ) {
+            projectItem.node.components.map((componentItem) => {
+              componentItem.checked = doSelect;
+            });
           }
         }
       }
