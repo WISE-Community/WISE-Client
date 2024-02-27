@@ -4,7 +4,7 @@
   (modelChange)="saveDefaultLanguageText()"
 >
 </wise-authoring-tinymce-editor>
-<mat-tab-group *ngIf="showTranslationInput()">
+<mat-tab-group *ngIf="showTranslationInput()" mat-stretch-tabs="false">
   <mat-tab label="{{ currentLanguage().language }}"
     ><ng-template matTabContent
       ><wise-authoring-tinymce-editor
