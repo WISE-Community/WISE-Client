@@ -38,6 +38,12 @@ export class TranslatableRichTextEditorComponent extends AbstractTranslatableFie
     );
   }
 
+  protected setLanguage(): void {
+    // this call is required to fetch and keep the translations for the
+    // current language up-to-date when switching between language tabs
+    this.projectService.setCurrentLanguage(this.projectService.currentLanguage());
+  }
+
   protected saveDefaultLanguageText(): void {
     this.content[this.key] = insertWiseLinks(
       this.configService.removeAbsoluteAssetPaths(this.html)
