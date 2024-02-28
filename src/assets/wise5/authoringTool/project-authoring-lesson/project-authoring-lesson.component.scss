@@ -51,20 +51,3 @@
   height: 40px;
   margin-left: 40px;
 }
-
-.div-next-to-step {
-  min-width: 50px;
-  min-height: 50px;
-}
-
-.add-button-next-to-step {
-  display: none;
-}
-
-.show-add-button-next-to-step {
-  display: block;
-}
-
-.step-div:hover .add-button-next-to-step {
-  display: block;
-}
