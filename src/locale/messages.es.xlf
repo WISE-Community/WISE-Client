@@ -578,11 +578,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">268</context>
+          <context context-type="linenumber">249</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">319</context>
+          <context context-type="linenumber">269</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
@@ -6115,10 +6115,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="linenumber">33</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">301</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-item/export-item.component.html</context>
           <context context-type="linenumber">42</context>
         </context-group>
@@ -6128,7 +6124,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <target state="translated">Vista previa</target>
       </trans-unit>
@@ -10046,7 +10046,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">322,324</context>
+          <context context-type="linenumber">272,274</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.html</context>
@@ -11284,7 +11284,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.ts</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
@@ -13492,11 +13492,19 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="needs-translation">Edit lesson</target>
       </trans-unit>
+      <trans-unit id="05a0c6b8f78fc9a1bbfd393727abbd5a8b6e6b72" datatype="html">
+        <source>Move lesson</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <target state="needs-translation">Move lesson</target>
+      </trans-unit>
       <trans-unit id="d6d3fff4f6ea9c446190a02ed693facc711812fd" datatype="html">
         <source>Delete lesson</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <target state="needs-translation">Delete lesson</target>
       </trans-unit>
@@ -13504,7 +13512,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Are you sure you want to delete this lesson?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this lesson?</target>
       </trans-unit>
@@ -13552,7 +13560,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Move step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <target state="needs-translation">Move step</target>
       </trans-unit>
@@ -13560,7 +13568,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Copy step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <target state="needs-translation">Copy step</target>
       </trans-unit>
@@ -13568,7 +13576,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Delete step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">83</context>
         </context-group>
         <target state="needs-translation">Delete step</target>
       </trans-unit>
@@ -13576,7 +13584,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Are you sure you want to delete this step?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.ts</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">112</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this step?</target>
       </trans-unit>
@@ -15932,31 +15940,15 @@ Are you sure you want to proceed?</source>
         </context-group>
         <target state="translated"> Incluir Nombres </target>
       </trans-unit>
-      <trans-unit id="77c6090ad86bfc30b3621c6871ae61ec3819a544" datatype="html">
-        <source> Export All Steps </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">254,256</context>
-        </context-group>
-        <target state="translated"> Exportar todos los pasos </target>
-      </trans-unit>
-      <trans-unit id="6225800b94ec48a6604e4afa85bb1159b789459f" datatype="html">
-        <source> Select Steps To Export </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">257,259</context>
-        </context-group>
-        <target state="translated"> Seleccionar pasos a exportar </target>
-      </trans-unit>
       <trans-unit id="5f19586aba912ec6eb123ec5ab609a3bcc073066" datatype="html">
         <source>Export</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">262</context>
+          <context context-type="linenumber">243</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">313</context>
+          <context context-type="linenumber">263</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
@@ -15972,7 +15964,7 @@ Are you sure you want to proceed?</source>
         <source> Export </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">262,264</context>
+          <context context-type="linenumber">243,245</context>
         </context-group>
         <target state="translated"> Exportar </target>
       </trans-unit>
@@ -15980,55 +15972,15 @@ Are you sure you want to proceed?</source>
         <source> Cancel </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">271,273</context>
+          <context context-type="linenumber">252,254</context>
         </context-group>
         <target state="translated"> Cancelar </target>
-      </trans-unit>
-      <trans-unit id="f8b403888712c826f65a73a5e2c8204fa95da187" datatype="html">
-        <source>Select All</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">280</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
-          <context context-type="linenumber">50</context>
-        </context-group>
-        <target state="translated">Seleccionar todo</target>
-      </trans-unit>
-      <trans-unit id="0003f701433312bf99d82939dc7c8e8165fb48d3" datatype="html">
-        <source> Select All </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">283,285</context>
-        </context-group>
-        <target state="translated"> Seleccionar todos </target>
-      </trans-unit>
-      <trans-unit id="fdd8c0ec42148f76f93fa98129edf03bb03ac990" datatype="html">
-        <source>Deselect All</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">289</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
-          <context context-type="linenumber">51</context>
-        </context-group>
-        <target state="translated">Deseleccionar todo</target>
-      </trans-unit>
-      <trans-unit id="a287612869eaab8b211c27ea4303d4ef1fdb583e" datatype="html">
-        <source> Deselect All </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">292,294</context>
-        </context-group>
-        <target state="translated"> Deseleccionar todo </target>
       </trans-unit>
       <trans-unit id="c86660a0205c494043043074c0d4bde8bfac9860" datatype="html">
         <source> Export </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">313,315</context>
+          <context context-type="linenumber">263,265</context>
         </context-group>
         <target state="translated"> Exportar </target>
       </trans-unit>
@@ -16088,7 +16040,7 @@ Are you sure you want to proceed?</source>
         <source>Downloading Export</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">459</context>
+          <context context-type="linenumber">429</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-item/export-item.component.ts</context>
@@ -16203,6 +16155,30 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">48</context>
         </context-group>
         <target state="translated">Elegir los pasos</target>
+      </trans-unit>
+      <trans-unit id="f8b403888712c826f65a73a5e2c8204fa95da187" datatype="html">
+        <source>Select All</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <target state="translated">Seleccionar todo</target>
+      </trans-unit>
+      <trans-unit id="fdd8c0ec42148f76f93fa98129edf03bb03ac990" datatype="html">
+        <source>Deselect All</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target state="translated">Deseleccionar todo</target>
       </trans-unit>
       <trans-unit id="ea05c791aa596633c83dad44a5b326da301e16a6" datatype="html">
         <source>Include Deleted Steps (If Any)</source>
@@ -16428,11 +16404,43 @@ Are you sure you want to proceed?</source>
         </context-group>
         <target state="translated">Una lista de números de pasos que contienen los pasos que el/la estudiante visitó antes de volver a visitar este paso. Esta celda solo contendrá valores si vuelven a visitar un paso. Por ejemplo, si el/la estudiante navegó a 1.1, luego a 1.2, luego a 1.3, luego a 1.1. Para la segunda visita a 1.1, los 'Pasos desde la última visita' mostrarán 1.2, 1.3.</target>
       </trans-unit>
+      <trans-unit id="6f5c8f5b728ba5653be9669ebf9db82e9a452aad" datatype="html">
+        <source> Export All Steps </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+        <target state="needs-translation"> Export All Steps </target>
+      </trans-unit>
+      <trans-unit id="12c770d0318a6fe8b38abd58d1d9a810bebd407b" datatype="html">
+        <source> Select Steps To Export </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
+          <context context-type="linenumber">11,13</context>
+        </context-group>
+        <target state="needs-translation"> Select Steps To Export </target>
+      </trans-unit>
+      <trans-unit id="b313d96afe3c6440a8d2bf85e9bb2ca90becc9a5" datatype="html">
+        <source> Select All </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+        <target state="translated"> Seleccionar todos </target>
+      </trans-unit>
+      <trans-unit id="8135f12b229df08daa06809b1d71edb81c12f8fb" datatype="html">
+        <source> Deselect All </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
+          <context context-type="linenumber">26,28</context>
+        </context-group>
+        <target state="needs-translation"> Deselect All </target>
+      </trans-unit>
       <trans-unit id="9bca420227979312de74f0a932a003437410b1ab" datatype="html">
         <source>Item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <target state="needs-translation">Item</target>
       </trans-unit>
@@ -16560,7 +16568,7 @@ Are you sure you want to proceed?</source>
         <source>Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">29</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-show-work/discussion-show-work.component.ts</context>
@@ -16572,7 +16580,7 @@ Are you sure you want to proceed?</source>
         <source>First Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <target state="translated">Nombre</target>
       </trans-unit>
@@ -16580,7 +16588,7 @@ Are you sure you want to proceed?</source>
         <source>Last Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.ts</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <target state="translated">Apellido</target>
       </trans-unit>
@@ -16588,7 +16596,7 @@ Are you sure you want to proceed?</source>
         <source>Location</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <target state="needs-translation">Location</target>
       </trans-unit>
@@ -16596,7 +16604,7 @@ Are you sure you want to proceed?</source>
         <source>Completion</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <target state="translated">Completado</target>
       </trans-unit>
