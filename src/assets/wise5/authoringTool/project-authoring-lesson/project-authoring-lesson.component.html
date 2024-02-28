@@ -96,8 +96,18 @@
         </button>
       </mat-menu>
     </div>
-    <div *ngIf="lesson.ids.length === 0" class="no-steps-message" fxLayoutAlign="start center" i18n>
-      This lesson has no steps
+    <div *ngIf="lesson.ids.length === 0" class="no-steps-message" fxLayoutAlign="start center">
+      <div i18n>This lesson has no steps</div>
+      <button
+        mat-icon-button
+        color="primary"
+        (click)="addStepInside(lesson.id)"
+        matTooltip="Add step"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>add_circle</mat-icon>
+      </button>
     </div>
   </div>
 </div>

@@ -83,6 +83,12 @@ export class ProjectAuthoringLessonComponent {
     this.updateProject(newStep.id);
   }
 
+  protected addStepInside(nodeId: string): void {
+    const newStep = this.createNewEmptyStep();
+    this.projectService.createNodeInside(newStep, nodeId);
+    this.updateProject(newStep.id);
+  }
+
   private createNewEmptyStep(): any {
     return this.projectService.createNode('New Step');
   }

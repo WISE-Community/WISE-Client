@@ -12216,6 +12216,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
           <context context-type="linenumber">84</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="f28facec49bae19961cf1c78a7e6e2c0fcf1e617" datatype="html">
         <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add_circle<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>Add Step Before </source>
@@ -12231,11 +12235,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">95,96</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="25858b2de87dfc281f278554dfa6d2546bbac9ce" datatype="html">
-        <source> This lesson has no steps </source>
+      <trans-unit id="66084384cb169b4f9d7836c16f37b8b9dfc5a049" datatype="html">
+        <source>This lesson has no steps</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
-          <context context-type="linenumber">99,101</context>
+          <context context-type="linenumber">100</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2751426191436053350" datatype="html">
