@@ -14,11 +14,19 @@
 </mat-radio-group>
 <ng-container *ngIf="exportStepSelectionType === 'exportSelectSteps'">
   <div class="button-div" fxLayoutGap="20px">
-    <button mat-raised-button (click)="selectAll()" aria-label="Select All" i18n-aria-label i18n>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="selectAll()"
+      aria-label="Select All"
+      i18n-aria-label
+      i18n
+    >
       Select All
     </button>
     <button
       mat-raised-button
+      color="primary"
       (click)="deselectAll()"
       aria-label="Deselect All"
       i18n-aria-label

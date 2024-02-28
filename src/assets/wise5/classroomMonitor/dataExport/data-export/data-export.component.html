@@ -103,7 +103,7 @@
       <div>
         <button
           mat-raised-button
-          (click)="setExportType('rawData')"
+          (click)="goToExportRawDataPage()"
           aria-label="Export Raw Data"
           i18n-aria-label
           i18n
@@ -128,8 +128,7 @@
         exportType === 'latestStudentWork' ||
         exportType === 'allStudentWork' ||
         exportType === 'events' ||
-        exportType === 'oneWorkgroupPerRow' ||
-        exportType === 'rawData'
+        exportType === 'oneWorkgroupPerRow'
       "
     >
       <h4>{{ exportTypeLabel }}</h4>
@@ -191,32 +190,6 @@
         <div>
           <mat-checkbox color="primary" [(ngModel)]="includeCommentTimestamps" i18n>
             Include Comment Timestamps
-          </mat-checkbox>
-        </div>
-      </div>
-      <div *ngIf="exportType === 'rawData'" fxLayout="column" fxLayoutGap="10px">
-        <div fxLayoutGap="20px">
-          <button mat-raised-button (click)="defaultClicked()" i18n>Default</button>
-          <button mat-raised-button (click)="everythingClicked()" i18n>Everything</button>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeStudentWork" i18n>
-            Include Student Work
-          </mat-checkbox>
-        </div>
-        <div *ngIf="canViewStudentNames">
-          <mat-checkbox color="primary" [(ngModel)]="includeStudentNames" i18n>
-            Include Student Names
-          </mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeAnnotations" i18n>
-            Include Annotations
-          </mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeEvents" i18n>
-            Include Events
           </mat-checkbox>
         </div>
       </div>
