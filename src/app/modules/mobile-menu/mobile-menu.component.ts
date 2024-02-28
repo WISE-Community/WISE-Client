@@ -25,11 +25,7 @@ export class MobileMenuComponent implements OnInit {
 
   getUser() {
     this.userService.getUser().subscribe((user) => {
-      if (user.roles?.length > 0) {
-        this.signedIn = true;
-      } else {
-        this.signedIn = false;
-      }
+      this.signedIn = user.roles?.length > 0;
     });
   }
 }
