@@ -2004,13 +2004,19 @@ export class ProjectService {
   }
 
   getPreviousStepNodeId(nodeId: string): string {
-    const nodeIds = this.getFlattenedProjectAsNodeIds();
-    return nodeIds[nodeIds.indexOf(nodeId) - 1];
+    const parentGroup = this.getParentGroup(nodeId);
+    const childIds = parentGroup.ids;
+    return childIds[childIds.indexOf(nodeId) - 1];
   }
 
   isFirstStepInLesson(nodeId: string): boolean {
     for (const lesson of this.getGroupNodes()) {
       if (lesson.startId === nodeId) {
+        return true;
+      }
+    }
+    for (const inactiveLesson of this.getInactiveGroupNodes()) {
+      if (inactiveLesson.startId === nodeId) {
         return true;
       }
     }
