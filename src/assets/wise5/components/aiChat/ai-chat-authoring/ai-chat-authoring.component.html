@@ -9,9 +9,10 @@
     >
     </textarea>
     <mat-hint fxLayoutAlign="start center" i18n
-      >Use this to instruct the chat bot how to behave. Students will not see this.<button
+      >Use the system prompt to instruct the chat bot how to behave. Students will not see
+      this.<button
         mat-icon-button
-        (click)="openSystemPromptHelpDialog()"
+        (click)="showSystemPromptHelp = !showSystemPromptHelp"
         matTooltip="Help"
         matTooltipPosition="above"
         i18n-matTooltip
@@ -20,6 +21,21 @@
       </button>
     </mat-hint>
   </mat-form-field>
+  <div *ngIf="showSystemPromptHelp" class="system-prompt-help">
+    <strong i18n>System Prompt Instructions</strong>
+    <p i18n>
+      Use the system prompt to instruct the chat bot how to behave. Provide context, instructions,
+      and other relevant information to help the chat bot act the way you want it to. Be as specific
+      as possible. Students will not see the system prompt.
+    </p>
+    <strong i18n>Example System Prompt</strong>
+    <p i18n>
+      You are a teacher helping a student understand the greenhouse effect by using the example of
+      the inside of a car heating up from the sun on a cold day. You do not tell them the correct
+      answer but you do guide them to the correct answer. Also make sure they explain their
+      reasoning. Limit your response to 100 words or less.
+    </p>
+  </div>
   <edit-component-prompt
     [prompt]="componentContent.prompt"
     (promptChangedEvent)="promptChanged($event)"
