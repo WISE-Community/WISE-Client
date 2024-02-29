@@ -11,7 +11,7 @@ export class MockUserService {
     const user: User = new User();
     user.firstName = 'Demo';
     user.lastName = 'User';
-    user.role = 'student';
+    user.roles = ['student'];
     user.username = 'DemoUser0101';
     user.id = 123456;
     return Observable.create((observer) => {
@@ -25,17 +25,19 @@ describe('StudentHomeComponent', () => {
   let component: StudentHomeComponent;
   let fixture: ComponentFixture<StudentHomeComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [StudentHomeComponent],
-      providers: [
-        { provide: UserService, useClass: MockUserService },
-        { provide: MatDialog, useValue: {} }
-      ],
-      imports: [],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [StudentHomeComponent],
+        providers: [
+          { provide: UserService, useClass: MockUserService },
+          { provide: MatDialog, useValue: {} }
+        ],
+        imports: [],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(StudentHomeComponent);
