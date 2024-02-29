@@ -1,0 +1,55 @@
+<div class="view-content view-content--with-sidemenu top-content">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="goBack()"
+    matTooltip="Back"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h4 i18n>Export Raw Data</h4>
+  <div class="parameters-div" fxLayout="column" fxLayoutGap="10px">
+    <div fxLayoutGap="20px">
+      <button mat-raised-button color="primary" (click)="selectDefault()" i18n>Default</button>
+      <button mat-raised-button color="primary" (click)="selectAll()" i18n>Everything</button>
+    </div>
+    <div>
+      <mat-checkbox color="primary" [(ngModel)]="includeStudentWork" i18n>
+        Include Student Work
+      </mat-checkbox>
+    </div>
+    <div *ngIf="canViewStudentNames">
+      <mat-checkbox color="primary" [(ngModel)]="includeStudentNames" i18n>
+        Include Student Names
+      </mat-checkbox>
+    </div>
+    <div>
+      <mat-checkbox color="primary" [(ngModel)]="includeAnnotations" i18n>
+        Include Annotations
+      </mat-checkbox>
+    </div>
+    <div>
+      <mat-checkbox color="primary" [(ngModel)]="includeEvents" i18n>Include Events</mat-checkbox>
+    </div>
+    <select-step-and-component-checkboxes
+      [(exportStepSelectionType)]="exportStepSelectionType"
+      [nodes]="nodes"
+      [projectIdToOrder]="projectIdToOrder"
+    ></select-step-and-component-checkboxes>
+    <div>
+      <button mat-raised-button color="primary" (click)="export()" i18n>Export</button>
+    </div>
+  </div>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="goBack()"
+    matTooltip="Back"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</div>

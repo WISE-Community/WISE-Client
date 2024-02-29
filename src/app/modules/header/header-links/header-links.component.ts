@@ -12,7 +12,7 @@ export class HeaderLinksComponent implements OnInit {
   @Input()
   location: string;
 
-  role: string = '';
+  roles: string[] = [];
 
   constructor() {}
 
@@ -21,9 +21,7 @@ export class HeaderLinksComponent implements OnInit {
   ngOnChanges(changes) {
     if (changes.user) {
       let user = changes.user.currentValue;
-      if (user) {
-        this.role = user.role;
-      }
+      this.roles = user.roles ? user.roles : [];
     }
   }
 }

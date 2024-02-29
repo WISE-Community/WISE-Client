@@ -21,7 +21,7 @@ export class MockUserService {
     const user: Teacher = new Teacher();
     user.firstName = 'Demo';
     user.lastName = 'Teacher';
-    user.role = 'teacher';
+    user.roles = ['teacher'];
     user.username = 'DemoTeacher';
     user.id = 123456;
     user.displayName = 'Demo Teacher';
