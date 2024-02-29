@@ -42,7 +42,7 @@ export class StudentProgressComponent implements OnInit {
     },
     location: {
       label: $localize`Location`,
-      fieldName: 'location',
+      fieldName: 'order',
       isNumeric: true
     },
     completion: {
@@ -117,7 +117,7 @@ export class StudentProgressComponent implements OnInit {
   }
 
   private updateTeam(workgroupId: number): void {
-    const location = this.getCurrentNodeForWorkgroupId(workgroupId) || '';
+    const location = this.classroomStatusService.getCurrentNodeLocationForWorkgroupId(workgroupId);
     const completion = this.classroomStatusService.getStudentProjectCompletion(workgroupId);
     const score = this.getStudentTotalScore(workgroupId) || 0;
     let maxScore = this.classroomStatusService.getMaxScoreForWorkgroupId(workgroupId);
@@ -125,7 +125,8 @@ export class StudentProgressComponent implements OnInit {
 
     for (const student of this.students) {
       if (student.workgroupId === workgroupId) {
-        student.location = location;
+        student.position = location?.position || '';
+        student.order = location?.order || 0;
         student.completion = completion;
         student.completionPct = completion.completionPct || 0;
         student.score = score;
@@ -133,12 +134,6 @@ export class StudentProgressComponent implements OnInit {
         student.scorePct = maxScore ? score / maxScore : score;
       }
     }
-  }
-
-  private getCurrentNodeForWorkgroupId(workgroupId: number): string {
-    return this.classroomStatusService.getCurrentNodePositionAndNodeTitleForWorkgroupId(
-      workgroupId
-    );
   }
 
   private getStudentTotalScore(workgroupId: number): number {
@@ -214,7 +209,8 @@ export class StudentProgress {
   username: string;
   firstName: string;
   lastName: string;
-  location: string;
+  position: string;
+  order: number;
   completion: ProjectCompletion;
   completionPct: number;
   score: number;
