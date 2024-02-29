@@ -8,7 +8,7 @@ export class User {
   language: string;
   lastName: string;
   permissions: number[];
-  role: string;
+  roles: string[];
   token: string;
   username: string;
 
