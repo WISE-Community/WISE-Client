@@ -86,4 +86,26 @@ export abstract class AbstractExportComponent {
     }
     return selectedNodes;
   }
+
+  /**
+   * @param users An array of user objects. Each user object contains an id and name.
+   * @returns {object} An object that contains key/value pairs. The key is userIdX
+   * or studentNameX where X is an integer. The values are the corresponding actual
+   * values of user id and student name.
+   */
+  extractUserIDsAndStudentNames(users: any[]): any {
+    const extractedUserIDsAndStudentNames = {};
+    for (let u = 0; u < users.length; u++) {
+      let user = users[u];
+      extractedUserIDsAndStudentNames['userId' + (u + 1)] = user.id;
+      if (this.canViewStudentNames) {
+        extractedUserIDsAndStudentNames['studentName' + (u + 1)] = user.name;
+      }
+    }
+    return extractedUserIDsAndStudentNames;
+  }
+
+  protected goBack(): void {
+    this.router.navigate(['..'], { relativeTo: this.route });
+  }
 }

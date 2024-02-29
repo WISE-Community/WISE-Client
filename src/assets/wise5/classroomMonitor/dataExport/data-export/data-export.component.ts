@@ -404,9 +404,6 @@ export class DataExportComponent implements OnInit {
     this.includeScoreTimestamps = false;
     this.includeComments = false;
     this.includeCommentTimestamps = false;
-    this.includeStudentEvents = true;
-    this.includeTeacherEvents = true;
-    this.includeNames = false;
     this.exportStepSelectionType = 'exportAllSteps';
     this.includeAnnotations = false;
     this.includeEvents = false;
@@ -441,5 +438,9 @@ export class DataExportComponent implements OnInit {
 
   protected goToExportRawDataPage(): void {
     this.router.navigate(['raw'], { relativeTo: this.route });
+  }
+
+  protected goToExportEventsPage(): void {
+    this.router.navigate(['events'], { relativeTo: this.route });
   }
 }

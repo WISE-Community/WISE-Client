@@ -11,10 +11,6 @@ export class ExportRawDataComponent extends AbstractExportComponent {
   protected includeAnnotations = false;
   protected includeEvents = false;
 
-  protected goBack(): void {
-    this.router.navigate(['..'], { relativeTo: this.route });
-  }
-
   protected selectDefault(): void {
     this.includeStudentWork = true;
     this.includeStudentNames = true;

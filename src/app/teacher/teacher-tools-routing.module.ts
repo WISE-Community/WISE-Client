@@ -13,6 +13,7 @@ import { NotebookGradingComponent } from '../../assets/wise5/classroomMonitor/no
 import { MilestonesComponent } from '../classroom-monitor/milestones/milestones.component';
 import { ExportItemComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-item/export-item.component';
 import { ExportRawDataComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component';
+import { ExportEventsComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-events/export-events.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: '', component: NodeProgressViewComponent },
       { path: 'export', component: DataExportComponent },
       { path: 'export/item', component: ExportItemComponent },
+      { path: 'export/events', component: ExportEventsComponent },
       { path: 'export/raw', component: ExportRawDataComponent },
       { path: 'export/visits', component: ExportStepVisitsComponent },
       { path: 'manage-students', component: ManageStudentsComponent },
