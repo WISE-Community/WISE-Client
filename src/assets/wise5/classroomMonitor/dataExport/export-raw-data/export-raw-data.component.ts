@@ -15,14 +15,14 @@ export class ExportRawDataComponent extends AbstractExportComponent {
     this.router.navigate(['..'], { relativeTo: this.route });
   }
 
-  protected defaultClicked(): void {
+  protected selectDefault(): void {
     this.includeStudentWork = true;
     this.includeStudentNames = true;
     this.includeAnnotations = false;
     this.includeEvents = false;
   }
 
-  protected everythingClicked(): void {
+  protected selectAll(): void {
     this.includeStudentWork = true;
     this.includeStudentNames = true;
     this.includeAnnotations = true;

@@ -12,10 +12,8 @@
   <h4 i18n>Export Raw Data</h4>
   <div class="parameters-div" fxLayout="column" fxLayoutGap="10px">
     <div fxLayoutGap="20px">
-      <button mat-raised-button color="primary" (click)="defaultClicked()" i18n>Default</button>
-      <button mat-raised-button color="primary" (click)="everythingClicked()" i18n>
-        Everything
-      </button>
+      <button mat-raised-button color="primary" (click)="selectDefault()" i18n>Default</button>
+      <button mat-raised-button color="primary" (click)="selectAll()" i18n>Everything</button>
     </div>
     <div>
       <mat-checkbox color="primary" [(ngModel)]="includeStudentWork" i18n>
