@@ -1145,11 +1145,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">83</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">80</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
@@ -1547,7 +1543,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
@@ -5301,25 +5297,25 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Account avatar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c48210e0360714d757f8286144200648dc140e30" datatype="html">
         <source>Switch back to original user</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c4e3e4170654ee5a353d29a0c34b8008cd25a635" datatype="html">
         <source>Student Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-home/student-home.component.html</context>
@@ -5330,7 +5326,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Teacher Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.html</context>
@@ -5341,11 +5337,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Edit Profile</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit/edit.component.html</context>
@@ -5360,21 +5356,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Researcher Tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="593d1ae1c4b71457eda8476df2bb52624a3c6e74" datatype="html">
         <source>Admin Tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">71</context>
         </context-group>
       </trans-unit>
       <trans-unit id="640eec093c685babaa3265137215e3cc92ad704d" datatype="html">
         <source>Sign Out</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="17f37e96c7b8059b23c07791dca1bdb3f3f6853f" datatype="html">
@@ -14398,6 +14394,10 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">138</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="20bbb22e352d5d032b13110d7fc111db453051ff" datatype="html">
         <source> Include Student Work </source>
@@ -14516,7 +14516,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
@@ -14595,7 +14595,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">26,28</context>
+          <context context-type="linenumber">24,26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8ceab0a9b07bda5bc01732412828ffc8272d1352" datatype="html">
@@ -14633,32 +14633,25 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">98</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="9387b6a5443aa7f4f1b86c41fb821509258a068b" datatype="html">
-        <source> Everything </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">16,18</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="230255460fb90e84a3fd489ec7b2761169aad59a" datatype="html">
         <source> Include Student Work </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">21,23</context>
+          <context context-type="linenumber">19,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1430340d92f413a1cbe8f67c1c263dba644bd134" datatype="html">
         <source> Include Annotations </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">31,33</context>
+          <context context-type="linenumber">29,31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bd5b585853f6216ebf24b880288018643e4da2b7" datatype="html">
         <source>Include Events</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="18a393cd6211a7e1f51159db6b49637ee7c61490" datatype="html">
@@ -21332,28 +21325,28 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>File</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">168</context>
+          <context context-type="linenumber">170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3075681036535086015" datatype="html">
         <source>Insert from Notebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">182</context>
+          <context context-type="linenumber">184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="535405804327281099" datatype="html">
         <source>Insert note +</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">183</context>
+          <context context-type="linenumber">185</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7138428925866529608" datatype="html">
         <source>Image from notebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">209</context>
+          <context context-type="linenumber">211</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3570422532828875517" datatype="html">

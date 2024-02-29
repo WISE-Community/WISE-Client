@@ -112,16 +112,18 @@ export class WiseTinymceEditorComponent {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.model && this.editorComponent) {
-      this.editorComponent.editor.setContent(changes.model.currentValue ?? '');
-    }
-    if (changes.language && !this.model) {
-      // handles an edge case in the AT translation mode where
-      // 1. show lang1 (original value: undefined)
-      // 2. translate lang1 (set value to 'XYZ')
-      // 3. switch to lang2 (original value: undefined)
-      // should show empty editor, but is showing 'XYZ'
-      this.editorComponent.editor.setContent('');
+    if (this.editorComponent) {
+      if (changes.model) {
+        this.editorComponent.editor.setContent(changes.model.currentValue ?? '');
+      }
+      if (changes.language && !this.model) {
+        // handles an edge case in the AT translation mode where
+        // 1. show lang1 (original value: undefined)
+        // 2. translate lang1 (set value to 'XYZ')
+        // 3. switch to lang2 (original value: undefined)
+        // should show empty editor, but is showing 'XYZ'
+        this.editorComponent.editor.setContent('');
+      }
     }
   }
 
