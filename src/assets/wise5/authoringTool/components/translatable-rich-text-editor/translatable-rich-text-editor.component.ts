@@ -1,7 +1,7 @@
 import { Component, computed } from '@angular/core';
 import { AbstractTranslatableFieldComponent } from '../abstract-translatable-field/abstract-translatable-field.component';
 import { WiseTinymceEditorModule } from '../../../directives/wise-tinymce-editor/wise-tinymce-editor.module';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wise-link';
 import { ConfigService } from '../../../services/configService';
 import { EditProjectTranslationService } from '../../../services/editProjectTranslationService';
@@ -38,10 +38,12 @@ export class TranslatableRichTextEditorComponent extends AbstractTranslatableFie
     );
   }
 
-  protected setLanguage(): void {
+  protected setLanguage(event: MatTabChangeEvent): void {
     // this call is required to fetch and keep the translations for the
     // current language up-to-date when switching between language tabs
-    this.projectService.setCurrentLanguage(this.projectService.currentLanguage());
+    if (event.index === 0) {
+      this.projectService.setCurrentLanguage(this.projectService.currentLanguage());
+    }
   }
 
   protected saveDefaultLanguageText(): void {
