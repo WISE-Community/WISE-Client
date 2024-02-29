@@ -96,7 +96,11 @@ export class ProjectAuthoringLessonComponent {
   private updateProject(newNodeId: string): void {
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
       this.projectService.refreshProject();
-      temporarilyHighlightElement(newNodeId);
+      // This timeout is used to allow steps to have time to apply background color if they are in a
+      // branch path
+      setTimeout(() => {
+        temporarilyHighlightElement(newNodeId);
+      });
     });
   }
 
