@@ -10,6 +10,7 @@ export class ClassroomMonitorTestHelper {
   students: StudentProgress[] = [
     new StudentProgress({
       location: '1.2: Open Response',
+      order: 2,
       workgroupId: this.workgroupId1,
       username: 'Spongebob Squarepants',
       firstName: 'Spongebob',
@@ -19,6 +20,7 @@ export class ClassroomMonitorTestHelper {
     }),
     new StudentProgress({
       location: '1.1: Open Response',
+      order: 1,
       workgroupId: this.workgroupId5,
       username: 'Patrick Star',
       firstName: 'Patrick',
@@ -28,6 +30,7 @@ export class ClassroomMonitorTestHelper {
     }),
     new StudentProgress({
       location: '1.5: Open Response',
+      order: 5,
       workgroupId: this.workgroupId3,
       username: 'Squidward Tentacles',
       firstName: 'Squidward',
@@ -36,7 +39,8 @@ export class ClassroomMonitorTestHelper {
       scorePct: 0.4
     }),
     new StudentProgress({
-      location: '1.9: Open Response',
+      location: '1.11: Open Response',
+      order: 11,
       workgroupId: this.workgroupId2,
       username: 'Sandy Cheeks',
       firstName: 'Sandy',
@@ -46,6 +50,7 @@ export class ClassroomMonitorTestHelper {
     }),
     new StudentProgress({
       location: '1.5: Open Response',
+      order: 5,
       workgroupId: this.workgroupId4,
       username: 'Sheldon Plankton',
       firstName: 'Sheldon',
