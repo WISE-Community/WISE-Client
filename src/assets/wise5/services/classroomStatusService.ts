@@ -51,7 +51,7 @@ export class ClassroomStatusService {
     return this.studentStatuses;
   }
 
-  getCurrentNodeLocationForWorkgroupId(workgroupId): any {
+  getCurrentNodeLocationForWorkgroupId(workgroupId: number): any {
     const studentStatus = this.getStudentStatusForWorkgroupId(workgroupId);
     if (studentStatus != null) {
       const currentNodeId = studentStatus.currentNodeId;
