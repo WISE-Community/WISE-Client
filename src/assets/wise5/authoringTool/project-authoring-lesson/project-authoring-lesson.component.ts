@@ -64,6 +64,10 @@ export class ProjectAuthoringLessonComponent {
     }
   }
 
+  protected isFirstNodeInBranchPath(nodeId: string): boolean {
+    return this.projectService.isFirstNodeInBranchPath(nodeId);
+  }
+
   protected addStepBefore(nodeId: string): void {
     const newStep = this.createNewEmptyStep();
     if (this.projectService.isFirstStepInLesson(nodeId)) {

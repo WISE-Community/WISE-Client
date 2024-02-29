@@ -28,6 +28,9 @@ const nodeId1 = 'node1';
 const nodeId2 = 'node2';
 let teacherProjectService: TeacherProjectService;
 
+const node1 = { id: nodeId1, title: 'Step 1' };
+const node2 = { id: nodeId2, title: 'Step 2' };
+
 describe('ProjectAuthoringLessonComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
@@ -58,15 +61,10 @@ describe('ProjectAuthoringLessonComponent', () => {
     });
     teacherProjectService = TestBed.inject(TeacherProjectService);
     teacherProjectService.idToNode = {
-      node1: {
-        id: nodeId1,
-        title: 'Step 1'
-      },
-      node2: {
-        id: nodeId2,
-        title: 'Step 2'
-      }
+      node1: node1,
+      node2: node2
     };
+    teacherProjectService.project = { nodes: [node1, node2] };
     fixture = TestBed.createComponent(ProjectAuthoringLessonComponent);
     component = fixture.componentInstance;
     component.lesson = {

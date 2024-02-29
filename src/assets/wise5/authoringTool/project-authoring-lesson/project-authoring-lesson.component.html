@@ -88,7 +88,12 @@
         <mat-icon>add_circle</mat-icon>
       </button>
       <mat-menu #step="matMenu">
-        <button mat-menu-item (click)="addStepBefore(childId)" i18n>
+        <button
+          mat-menu-item
+          (click)="addStepBefore(childId)"
+          [disabled]="isFirstNodeInBranchPath(childId)"
+          i18n
+        >
           <mat-icon>add_circle</mat-icon>Add Step Before
         </button>
         <button mat-menu-item (click)="addStepAfter(childId)" i18n>
