@@ -93,16 +93,16 @@ export abstract class AbstractExportComponent {
    * or studentNameX where X is an integer. The values are the corresponding actual
    * values of user id and student name.
    */
-  extractUserIDsAndStudentNames(users: any[]): any {
-    const extractedUserIDsAndStudentNames = {};
+  extractUserIDsAndStudentNames(users: any[]): Record<string, number | string> {
+    const userIDsAndStudentNames = {};
     for (let u = 0; u < users.length; u++) {
       let user = users[u];
-      extractedUserIDsAndStudentNames['userId' + (u + 1)] = user.id;
+      userIDsAndStudentNames['userId' + (u + 1)] = user.id;
       if (this.canViewStudentNames) {
-        extractedUserIDsAndStudentNames['studentName' + (u + 1)] = user.name;
+        userIDsAndStudentNames['studentName' + (u + 1)] = user.name;
       }
     }
-    return extractedUserIDsAndStudentNames;
+    return userIDsAndStudentNames;
   }
 
   protected goBack(): void {
