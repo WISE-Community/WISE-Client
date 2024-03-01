@@ -6,6 +6,7 @@ import { NodeTypeSelected } from '../domain/node-type-selected';
 import { ExpandEvent } from '../domain/expand-event';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { temporarilyHighlightElement } from '../../common/dom/dom';
 
 @Component({
   selector: 'project-authoring-lesson',
@@ -61,6 +62,50 @@ export class ProjectAuthoringLessonComponent {
       this.deleteNodeService.deleteNode(this.lesson.id);
       this.saveAndRefreshProject();
     }
+  }
+
+  protected isFirstNodeInBranchPath(nodeId: string): boolean {
+    return this.projectService.isFirstNodeInBranchPath(nodeId);
+  }
+
+  protected addStepBefore(nodeId: string): void {
+    const newStep = this.createNewEmptyStep();
+    if (this.projectService.isFirstStepInLesson(nodeId)) {
+      this.projectService.createNodeInside(newStep, this.projectService.getParentGroupId(nodeId));
+    } else {
+      this.projectService.createNodeAfter(
+        newStep,
+        this.projectService.getPreviousStepNodeId(nodeId)
+      );
+    }
+    this.updateProject(newStep.id);
+  }
+
+  protected addStepAfter(nodeId: string): void {
+    const newStep = this.createNewEmptyStep();
+    this.projectService.createNodeAfter(newStep, nodeId);
+    this.updateProject(newStep.id);
+  }
+
+  protected addStepInside(nodeId: string): void {
+    const newStep = this.createNewEmptyStep();
+    this.projectService.createNodeInside(newStep, nodeId);
+    this.updateProject(newStep.id);
+  }
+
+  private createNewEmptyStep(): any {
+    return this.projectService.createNode('New Step');
+  }
+
+  private updateProject(newNodeId: string): void {
+    this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
+      this.projectService.refreshProject();
+      // This timeout is used to allow steps to have time to apply background color if they are in a
+      // branch path
+      setTimeout(() => {
+        temporarilyHighlightElement(newNodeId);
+      });
+    });
   }
 
   private saveAndRefreshProject(): void {

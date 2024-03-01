@@ -18,6 +18,7 @@ import { ProjectAuthoringLessonHarness } from './project-authoring-lesson.harnes
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CopyNodesService } from '../../services/copyNodesService';
+import { MatMenuModule } from '@angular/material/menu';
 
 let component: ProjectAuthoringLessonComponent;
 let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
@@ -26,6 +27,9 @@ let harness: ProjectAuthoringLessonHarness;
 const nodeId1 = 'node1';
 const nodeId2 = 'node2';
 let teacherProjectService: TeacherProjectService;
+
+const node1 = { id: nodeId1, title: 'Step 1' };
+const node2 = { id: nodeId2, title: 'Step 2' };
 
 describe('ProjectAuthoringLessonComponent', () => {
   beforeEach(async () => {
@@ -42,6 +46,7 @@ describe('ProjectAuthoringLessonComponent', () => {
         MatCheckboxModule,
         MatDialogModule,
         MatIconModule,
+        MatMenuModule,
         RouterTestingModule,
         StudentTeacherCommonServicesModule
       ],
@@ -56,15 +61,10 @@ describe('ProjectAuthoringLessonComponent', () => {
     });
     teacherProjectService = TestBed.inject(TeacherProjectService);
     teacherProjectService.idToNode = {
-      node1: {
-        id: nodeId1,
-        title: 'Step 1'
-      },
-      node2: {
-        id: nodeId2,
-        title: 'Step 2'
-      }
+      node1: node1,
+      node2: node2
     };
+    teacherProjectService.project = { nodes: [node1, node2] };
     fixture = TestBed.createComponent(ProjectAuthoringLessonComponent);
     component = fixture.componentInstance;
     component.lesson = {
