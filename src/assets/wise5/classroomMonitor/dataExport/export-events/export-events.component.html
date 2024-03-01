@@ -19,6 +19,14 @@
     <mat-checkbox color="primary" [(ngModel)]="includeNames" i18n>Include Names</mat-checkbox>
   </div>
   <div>
-    <button mat-raised-button color="primary" (click)="export()" i18n>Export</button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="export()"
+      [disabled]="!includeStudentEvents && !includeTeacherEvents"
+      i18n
+    >
+      Export
+    </button>
   </div>
 </div>
