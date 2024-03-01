@@ -17,6 +17,7 @@ export class WiseTinymceEditorComponent {
   @ViewChild(EditorComponent) editorComponent: EditorComponent;
   public editor: any;
   public config: any;
+  @Input() disabled: boolean;
   private previousContent: string;
 
   @Input() language: Language;

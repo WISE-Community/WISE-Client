@@ -21325,28 +21325,28 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>File</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3075681036535086015" datatype="html">
         <source>Insert from Notebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">184</context>
+          <context context-type="linenumber">185</context>
         </context-group>
       </trans-unit>
       <trans-unit id="535405804327281099" datatype="html">
         <source>Insert note +</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">186</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7138428925866529608" datatype="html">
         <source>Image from notebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">211</context>
+          <context context-type="linenumber">212</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3570422532828875517" datatype="html">
