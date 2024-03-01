@@ -13,7 +13,6 @@ import { NotebookDataExportStrategy } from '../strategies/NotebookDataExportStra
 import { NotificationDataExportStrategy } from '../strategies/NotificationDataExportStrategy';
 import { StudentAssetDataExportStrategy } from '../strategies/StudentAssetDataExportStrategy';
 import { OneWorkgroupPerRowDataExportStrategy } from '../strategies/OneWorkgroupPerRowDataExportStrategy';
-import { RawDataExportStrategy } from '../strategies/RawDataExportStrategy';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -129,8 +128,6 @@ export class DataExportComponent implements OnInit {
         return $localize`All Student Work`;
       case 'events':
         return $localize`Events`;
-      case 'rawData':
-        return $localize`Raw Data`;
       default:
         return null;
     }
@@ -162,8 +159,6 @@ export class DataExportComponent implements OnInit {
       this.dataExportContext.setStrategy(new StudentAssetDataExportStrategy());
     } else if (exportType === 'oneWorkgroupPerRow') {
       this.dataExportContext.setStrategy(new OneWorkgroupPerRowDataExportStrategy());
-    } else if (exportType === 'rawData') {
-      this.dataExportContext.setStrategy(new RawDataExportStrategy());
     }
     this.dataExportContext.export();
   }
@@ -339,36 +334,6 @@ export class DataExportComponent implements OnInit {
     return selectedNodes;
   }
 
-  selectAll(doSelect: boolean = true): void {
-    if (this.projectIdToOrder != null) {
-      for (let nodeId in this.projectIdToOrder) {
-        let projectItem = this.projectIdToOrder[nodeId];
-        if (projectItem.order != 0) {
-          projectItem.checked = doSelect;
-          if (projectItem.node.type != 'group') {
-            if (
-              projectItem.node != null &&
-              projectItem.node.components != null &&
-              projectItem.node.components.length > 0
-            ) {
-              projectItem.node.components.map((componentItem) => {
-                componentItem.checked = doSelect;
-              });
-            }
-          }
-        }
-      }
-    }
-  }
-
-  deselectAll(): void {
-    this.selectAll(false);
-  }
-
-  previewProject(): void {
-    window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
-  }
-
   /**
    * Check if we want to export this node
    * @param selectedNodesMap a mapping of node id to boolean value of whether
@@ -472,5 +437,9 @@ export class DataExportComponent implements OnInit {
 
   protected goToExportItemPage(): void {
     this.router.navigate(['item'], { relativeTo: this.route });
+  }
+
+  protected goToExportRawDataPage(): void {
+    this.router.navigate(['raw'], { relativeTo: this.route });
   }
 }

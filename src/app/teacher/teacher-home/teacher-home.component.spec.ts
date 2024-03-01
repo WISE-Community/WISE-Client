@@ -62,7 +62,7 @@ export class MockUserService {
     const user: User = new User();
     user.firstName = 'Demo';
     user.lastName = 'Teacher';
-    user.role = 'teacher';
+    user.roles = ['teacher'];
     user.username = 'DemoTeacher';
     user.id = 123456;
     return Observable.create((observer) => {
@@ -106,19 +106,21 @@ describe('TeacherHomeComponent', () => {
   let component: TeacherHomeComponent;
   let fixture: ComponentFixture<TeacherHomeComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [TeacherHomeComponent],
-      imports: [RouterTestingModule],
-      providers: [
-        { provide: TeacherService, useClass: MockTeacherService },
-        { provide: UserService, useClass: MockUserService },
-        { provide: ConfigService, useClass: MockConfigService },
-        { provide: LibraryService, useClass: MockLibraryService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TeacherHomeComponent],
+        imports: [RouterTestingModule],
+        providers: [
+          { provide: TeacherService, useClass: MockTeacherService },
+          { provide: UserService, useClass: MockUserService },
+          { provide: ConfigService, useClass: MockConfigService },
+          { provide: LibraryService, useClass: MockLibraryService }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TeacherHomeComponent);

@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
 
 let component: SelectStepAndComponentCheckboxesComponent;
 let fixture: ComponentFixture<SelectStepAndComponentCheckboxesComponent>;
@@ -31,6 +32,7 @@ describe('SelectStepAndComponentCheckboxesComponent', () => {
         MatButtonModule,
         MatCheckboxModule,
         MatIconModule,
+        MatRadioModule,
         StudentTeacherCommonServicesModule
       ],
       providers: [TeacherProjectService]
@@ -46,6 +48,7 @@ describe('SelectStepAndComponentCheckboxesComponent', () => {
     nodes = Object.values(projectIdToOrder);
     nodes.sort(sortNodesByOrder);
     component.nodes = nodes;
+    component.exportStepSelectionType = 'exportSelectSteps';
     fixture.detectChanges();
     harness = await TestbedHarnessEnvironment.harnessForFixture(
       fixture,
@@ -55,6 +58,8 @@ describe('SelectStepAndComponentCheckboxesComponent', () => {
 
   selectStep_selectsAllComponentsInStep();
   selectLesson_selectsAllStepsAndComponentsInLesson();
+  selectAll_selectsEverything();
+  deselectAll_deselectsEverything();
 });
 
 function sortNodesByOrder(nodeA: any, nodeB: any): number {
@@ -79,6 +84,30 @@ function selectLesson_selectsAllStepsAndComponentsInLesson() {
       const checkbox = await harness.getCheckbox('1: Example Steps');
       await checkbox.check();
       expectAllChildrenOfLessonToBeCheckedValue(groupId1, true);
+    });
+  });
+}
+
+function selectAll_selectsEverything() {
+  describe('select all button is clicked', () => {
+    it('all lessons, steps, and components are checked', async () => {
+      (await harness.getSelectAllButton()).click();
+      const checkboxes = await harness.getCheckboxes();
+      for (const checkbox of checkboxes) {
+        expect(await checkbox.isChecked()).toEqual(true);
+      }
+    });
+  });
+}
+
+function deselectAll_deselectsEverything() {
+  describe('deselect all button is clicked', () => {
+    it('all lessons, steps, and components are not checked', async () => {
+      (await harness.getDeselectAllButton()).click();
+      const checkboxes = await harness.getCheckboxes();
+      for (const checkbox of checkboxes) {
+        expect(await checkbox.isChecked()).toEqual(false);
+      }
     });
   });
 }

@@ -26,14 +26,16 @@ describe('HeaderAccountMenuComponent', () => {
   let component: HeaderAccountMenuComponent;
   let fixture: ComponentFixture<HeaderAccountMenuComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [HeaderAccountMenuComponent],
-      imports: [HttpClientTestingModule, MatMenuModule],
-      providers: [{ provide: ConfigService, useClass: MockConfigService }],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [HeaderAccountMenuComponent],
+        imports: [HttpClientTestingModule, MatMenuModule],
+        providers: [{ provide: ConfigService, useClass: MockConfigService }],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HeaderAccountMenuComponent);
@@ -42,7 +44,7 @@ describe('HeaderAccountMenuComponent', () => {
     user.id = 1;
     user.firstName = 'Amanda';
     user.lastName = 'Panda';
-    user.role = 'student';
+    user.roles = ['student'];
     user.username = 'AmandaP0101';
     component.user = user;
     fixture.detectChanges();

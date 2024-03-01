@@ -8,9 +8,7 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 export class ProjectAuthoringStepHarness extends ProjectAuthoringNodeHarness {
   static hostSelector = 'project-authoring-step';
 
-  getCopyButton = this.locatorFor(MatButtonHarness.with({ selector: '.copy-button' }));
-  getDeleteButton = this.locatorFor(MatButtonHarness.with({ selector: '.delete-button' }));
-  getMoveButton = this.locatorFor(MatButtonHarness.with({ selector: '.move-button' }));
+  getCopyButton = this.locatorFor(MatButtonHarness.with({ selector: '[matTooltip="Copy step"]' }));
 
   static with(
     options: ProjectAuthoringNodeHarnessFilters

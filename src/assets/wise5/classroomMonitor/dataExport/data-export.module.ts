@@ -5,18 +5,21 @@ import { StudentTeacherCommonModule } from '../../../../app/student-teacher-comm
 import { RouterModule } from '@angular/router';
 import { SelectStepAndComponentCheckboxesComponent } from './select-step-and-component-checkboxes/select-step-and-component-checkboxes.component';
 import { ExportItemComponent } from './export-item/export-item.component';
+import { ExportRawDataComponent } from './export-raw-data/export-raw-data.component';
 
 @NgModule({
   imports: [RouterModule, StudentTeacherCommonModule],
   declarations: [
     DataExportComponent,
     ExportItemComponent,
+    ExportRawDataComponent,
     ExportStepVisitsComponent,
     SelectStepAndComponentCheckboxesComponent
   ],
   exports: [
     DataExportComponent,
     ExportItemComponent,
+    ExportRawDataComponent,
     ExportStepVisitsComponent,
     SelectStepAndComponentCheckboxesComponent
   ]

@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   user: User;
 
   location: string = ''; // current location
-  role: string = '';
+  roles: string[] = [];
   url: string = '';
 
   constructor(
@@ -35,9 +35,7 @@ export class HeaderComponent implements OnInit {
   getUser() {
     this.userService.getUser().subscribe((user) => {
       this.user = user;
-      if (user != null) {
-        this.role = user.role;
-      }
+      this.roles = user.roles ? user.roles : [];
     });
   }
 

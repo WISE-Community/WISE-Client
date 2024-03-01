@@ -13,7 +13,7 @@ export abstract class AbstractTranslatableFieldComponent {
   protected defaultLanguage: Language = this.projectService.getLocale().getDefaultLanguage();
   protected defaultLanguageText: Signal<string>;
   @Output() defaultLanguageTextChanged: Subject<string> = new Subject<string>();
-  private i18nId: string;
+  protected i18nId: string;
   @Input() key: string;
   @Input() label: string;
   @Input() placeholder: string;
@@ -23,9 +23,9 @@ export abstract class AbstractTranslatableFieldComponent {
   protected translationTextChangedSubscription: Subscription;
 
   constructor(
-    private editProjectTranslationService: EditProjectTranslationService,
-    private projectService: TeacherProjectService,
-    private translateProjectService: TranslateProjectService
+    protected editProjectTranslationService: EditProjectTranslationService,
+    protected projectService: TeacherProjectService,
+    protected translateProjectService: TranslateProjectService
   ) {
     this.currentLanguage = projectService.currentLanguage;
     this.showTranslationInput = computed(() => !this.projectService.isDefaultLocale());
@@ -61,7 +61,7 @@ export abstract class AbstractTranslatableFieldComponent {
     return this.projectService.saveProject();
   }
 
-  private saveTranslationText(text: string): void {
+  protected saveTranslationText(text: string): void {
     this.projectService.broadcastSavingProject();
     const currentTranslations = this.translateProjectService.currentTranslations();
     currentTranslations[this.i18nId] = { value: text, modified: new Date().getTime() };

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { User } from '../../domain/user';
 import { UtilService } from '../../services/util.service';
 
 @Component({
@@ -26,11 +25,7 @@ export class MobileMenuComponent implements OnInit {
 
   getUser() {
     this.userService.getUser().subscribe((user) => {
-      if (user && user.role) {
-        this.signedIn = true;
-      } else {
-        this.signedIn = false;
-      }
+      this.signedIn = user.roles?.length > 0;
     });
   }
 }
