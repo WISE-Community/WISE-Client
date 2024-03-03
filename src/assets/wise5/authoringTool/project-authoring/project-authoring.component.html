@@ -75,7 +75,7 @@
   </button>
 </div>
 <div class="all-nodes-div">
-  <div *ngFor="let lesson of lessons">
+  <div *ngFor="let lesson of lessons" fxLayout="row">
     <project-authoring-lesson
       [lesson]="lesson"
       (selectNodeEvent)="selectNode($event)"
@@ -83,7 +83,30 @@
       [projectId]="projectId"
       [expanded]="lessonIdToExpanded()[lesson.id]"
       (onExpandedChanged)="onExpandedChanged($event)"
+      fxFlex
     ></project-authoring-lesson>
+    <button
+      mat-icon-button
+      color="primary"
+      class="add-lesson-button"
+      [matMenuTriggerFor]="lessonMenu"
+      #menuTrigger="matMenuTrigger"
+      matTooltip="Add lesson"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+    <mat-menu #lessonMenu="matMenu">
+      <button mat-menu-item (click)="addLessonBefore(lesson.id)">
+        <mat-icon class="add-lesson-menu-icon">add_circle</mat-icon
+        ><span i18n>Add Lesson Before</span>
+      </button>
+      <button mat-menu-item (click)="addLessonAfter(lesson.id)">
+        <mat-icon class="add-lesson-menu-icon">add_circle</mat-icon
+        ><span i18n>Add Lesson After</span>
+      </button>
+    </mat-menu>
   </div>
   <div>
     <h6 class="unused-header" i18n>Unused Lessons</h6>

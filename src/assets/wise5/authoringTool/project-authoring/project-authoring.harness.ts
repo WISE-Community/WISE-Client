@@ -6,6 +6,9 @@ import { ProjectAuthoringStepHarness } from '../project-authoring-step/project-a
 
 export class ProjectAuthoringHarness extends ComponentHarness {
   static hostSelector = 'project-authoring';
+  getAddLessonButtons = this.locatorForAll(
+    MatButtonHarness.with({ selector: '[matTooltip="Add lesson"]' })
+  );
   getAddStepButtons = this.locatorForAll(
     MatButtonHarness.with({ selector: '[matTooltip="Add step"]' })
   );

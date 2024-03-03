@@ -236,4 +236,28 @@ export class ProjectAuthoringComponent implements OnInit {
     });
     this.projectService.setNodeTypeSelected(nodeTypeSelected);
   }
+
+  protected addLessonBefore(nodeId: string): void {
+    const newLesson = this.projectService.createGroup('New Lesson');
+    const previousLessonId = this.projectService.getPreviousStepNodeId(nodeId);
+    if (previousLessonId == null) {
+      this.projectService.createNodeInside(newLesson, 'group0');
+    } else {
+      this.projectService.createNodeAfter(newLesson, previousLessonId);
+    }
+    this.updateProject(newLesson.id);
+  }
+
+  protected addLessonAfter(nodeId: string): void {
+    const newLesson = this.projectService.createGroup('New Lesson');
+    this.projectService.createNodeAfter(newLesson, nodeId);
+    this.updateProject(newLesson.id);
+  }
+
+  private updateProject(newNodeId: string): void {
+    this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
+      this.projectService.refreshProject();
+      temporarilyHighlightElement(newNodeId);
+    });
+  }
 }

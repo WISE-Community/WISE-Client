@@ -39,6 +39,7 @@ import { HttpClient } from '@angular/common/http';
 
 let configService: ConfigService;
 let component: ProjectAuthoringComponent;
+let getConfigParamSpy: jasmine.Spy;
 let fixture: ComponentFixture<ProjectAuthoringComponent>;
 let harness: ProjectAuthoringHarness;
 let http: HttpClient;
@@ -91,6 +92,17 @@ describe('ProjectAuthoringComponent', () => {
     route = TestBed.inject(ActivatedRoute);
     router = TestBed.inject(Router);
     window.history.pushState({}, '', '');
+    getConfigParamSpy = spyOn(configService, 'getConfigParam');
+    getConfigParamSpy.withArgs('canEditProject').and.returnValue(true);
+    getConfigParamSpy.withArgs('mode').and.returnValue('author');
+    getConfigParamSpy.withArgs('saveProjectURL').and.returnValue('/api/author/project/save/1');
+    spyOn(configService, 'getMyUserInfo').and.returnValue({
+      userId: 4,
+      firstName: 'Spongebob',
+      lastName: 'Squarepants',
+      username: 'spongebobsquarepants'
+    });
+    spyOn(http, 'post').and.returnValue(of({ status: 'success' }) as any);
     fixture = TestBed.createComponent(ProjectAuthoringComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -105,6 +117,7 @@ describe('ProjectAuthoringComponent', () => {
   deleteSpecificLesson();
   moveSpecificLesson();
   addStep();
+  addLesson();
 });
 
 function collapseAllButtonClicked() {
@@ -229,19 +242,6 @@ function moveSpecificLesson() {
 }
 
 function addStep() {
-  beforeEach(() => {
-    const getConfigParamSpy = spyOn(configService, 'getConfigParam');
-    getConfigParamSpy.withArgs('canEditProject').and.returnValue(true);
-    getConfigParamSpy.withArgs('mode').and.returnValue('author');
-    getConfigParamSpy.withArgs('saveProjectURL').and.returnValue('/api/author/project/save/1');
-    spyOn(configService, 'getMyUserInfo').and.returnValue({
-      userId: 4,
-      firstName: 'Spongebob',
-      lastName: 'Squarepants',
-      username: 'spongebobsquarepants'
-    });
-    spyOn(http, 'post').and.returnValue(of({ status: 'success' }) as any);
-  });
   addStepBefore();
   addStepBeforeFirstStepInLesson();
   addStepAfter();
@@ -287,6 +287,57 @@ function addStepAfter() {
         await addStepMenu.clickItem({ text: /Add Step After/ });
         const newStep = await harness.getStep('1.3: New Step');
         expect(newStep).not.toEqual(null);
+      });
+    });
+  });
+}
+
+function addLesson() {
+  addLessonBefore();
+  addLessonBeforeFirstLesson();
+  addLessonAfter();
+}
+
+function addLessonBeforeFirstLesson() {
+  describe('add lesson button is clicked on a lesson that is the first lesson', () => {
+    describe('add lesson before is chosen on the menu', () => {
+      it('adds a lesson before the chosen lesson', async () => {
+        const addLessonButtons = await harness.getAddLessonButtons();
+        addLessonButtons[0].click();
+        const addLessonMenu = await harness.getOpenedAddStepMenu();
+        await addLessonMenu.clickItem({ text: /Add Lesson Before/ });
+        const newLesson = await harness.getLesson('1: New Lesson');
+        expect(newLesson).not.toEqual(null);
+      });
+    });
+  });
+}
+
+function addLessonBefore() {
+  describe('add lesson button is clicked on a lesson that is not the first lesson', () => {
+    describe('add lesson before is chosen on the menu', () => {
+      it('adds a lesson before the chosen lesson', async () => {
+        const addLessonButtons = await harness.getAddLessonButtons();
+        addLessonButtons[1].click();
+        const addLessonMenu = await harness.getOpenedAddStepMenu();
+        await addLessonMenu.clickItem({ text: /Add Lesson Before/ });
+        const newLesson = await harness.getLesson('2: New Lesson');
+        expect(newLesson).not.toEqual(null);
+      });
+    });
+  });
+}
+
+function addLessonAfter() {
+  describe('add lesson button is clicked', () => {
+    describe('add lesson after is chosen on the menu', () => {
+      it('adds a lesson after the chosen lesson', async () => {
+        const addLessonButtons = await harness.getAddLessonButtons();
+        addLessonButtons[0].click();
+        const addLessonMenu = await harness.getOpenedAddStepMenu();
+        await addLessonMenu.clickItem({ text: /Add Lesson After/ });
+        const newLesson = await harness.getLesson('2: New Lesson');
+        expect(newLesson).not.toEqual(null);
       });
     });
   });
