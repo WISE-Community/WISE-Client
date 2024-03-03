@@ -8,6 +8,7 @@ import { DataExportComponent } from '../data-export/data-export.component';
 import { DataExportContext } from '../DataExportContext';
 import { DataExportStrategy } from './DataExportStrategy';
 import { removeHTMLTags } from '../../../common/string/string';
+import { generateCSVFile } from '../../../common/csv/csv';
 
 export abstract class AbstractDataExportStrategy implements DataExportStrategy {
   context: DataExportContext;
@@ -161,5 +162,9 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
       `${runId}_step_${stepNumber}_component_` +
       `${componentNumber}_${componentTypeWithUnderscore}_work.csv`
     );
+  }
+
+  generateCSVFile(rows: any[], fileName: string): void {
+    generateCSVFile(rows, fileName);
   }
 }

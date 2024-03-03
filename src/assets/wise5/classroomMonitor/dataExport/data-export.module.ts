@@ -6,11 +6,13 @@ import { RouterModule } from '@angular/router';
 import { SelectStepAndComponentCheckboxesComponent } from './select-step-and-component-checkboxes/select-step-and-component-checkboxes.component';
 import { ExportItemComponent } from './export-item/export-item.component';
 import { ExportRawDataComponent } from './export-raw-data/export-raw-data.component';
+import { ExportEventsComponent } from './export-events/export-events.component';
 
 @NgModule({
   imports: [RouterModule, StudentTeacherCommonModule],
   declarations: [
     DataExportComponent,
+    ExportEventsComponent,
     ExportItemComponent,
     ExportRawDataComponent,
     ExportStepVisitsComponent,
@@ -18,6 +20,7 @@ import { ExportRawDataComponent } from './export-raw-data/export-raw-data.compon
   ],
   exports: [
     DataExportComponent,
+    ExportEventsComponent,
     ExportItemComponent,
     ExportRawDataComponent,
     ExportStepVisitsComponent,
