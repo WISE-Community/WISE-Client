@@ -36,6 +36,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ConfigService } from '../../services/configService';
 import { of } from 'rxjs/internal/observable/of';
 import { HttpClient } from '@angular/common/http';
+import { AddLessonButtonComponent } from '../add-lesson-button/add-lesson-button.component';
 
 let configService: ConfigService;
 let component: ProjectAuthoringComponent;
@@ -51,6 +52,7 @@ describe('ProjectAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
+        AddLessonButtonComponent,
         ConcurrentAuthorsMessageComponent,
         NodeAuthoringComponent,
         NodeIconComponent,
