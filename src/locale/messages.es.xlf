@@ -578,11 +578,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">222</context>
+          <context context-type="linenumber">212</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">242</context>
+          <context context-type="linenumber">231</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
@@ -1226,11 +1226,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">83</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">80</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
@@ -1649,6 +1645,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-events/export-events.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-item/export-item.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
@@ -1662,7 +1662,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
@@ -5672,11 +5672,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Account avatar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <target state="translated">Avatar de la cuenta</target>
       </trans-unit>
@@ -5684,7 +5684,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Switch back to original user</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <target state="translated">Volver al usuario original</target>
       </trans-unit>
@@ -5692,7 +5692,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Student Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-home/student-home.component.html</context>
@@ -5704,7 +5704,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Teacher Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.html</context>
@@ -5716,11 +5716,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Edit Profile</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit/edit.component.html</context>
@@ -5736,7 +5736,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Researcher Tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <target state="translated">Herramientas de Investigación</target>
       </trans-unit>
@@ -5744,7 +5744,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Admin Tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <target state="translated">Herramientas Administrativas</target>
       </trans-unit>
@@ -5752,7 +5752,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Sign Out</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">85</context>
         </context-group>
         <target state="translated">Cerrar sesión</target>
       </trans-unit>
@@ -10051,10 +10051,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-project/add-project.component.html</context>
           <context context-type="linenumber">36,38</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">245,247</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.html</context>
@@ -15608,7 +15604,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">424</context>
+          <context context-type="linenumber">421</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-item/export-item.component.ts</context>
@@ -15804,7 +15800,7 @@ Are you sure you want to proceed?</source>
         <source>Default</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">136</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
@@ -15816,7 +15812,11 @@ Are you sure you want to proceed?</source>
         <source>Everything</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <target state="translated">Todo</target>
       </trans-unit>
@@ -15824,7 +15824,7 @@ Are you sure you want to proceed?</source>
         <source> Include Student Work </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">141,143</context>
+          <context context-type="linenumber">140,142</context>
         </context-group>
         <target state="translated"> Incluir trabajo de estudiante </target>
       </trans-unit>
@@ -15832,7 +15832,7 @@ Are you sure you want to proceed?</source>
         <source> Include Student Work IDs </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">146,148</context>
+          <context context-type="linenumber">145,147</context>
         </context-group>
         <target state="translated"> Incluir ID de estudiantes </target>
       </trans-unit>
@@ -15840,7 +15840,7 @@ Are you sure you want to proceed?</source>
         <source> Include Student Names </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">151,153</context>
+          <context context-type="linenumber">150,152</context>
         </context-group>
         <target state="translated"> Incluir nombres de estudiantes </target>
       </trans-unit>
@@ -15848,7 +15848,7 @@ Are you sure you want to proceed?</source>
         <source> Include Student Work Timestamps </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">156,158</context>
+          <context context-type="linenumber">155,157</context>
         </context-group>
         <target state="translated"> Incluir registro del momento en que trabajaron los estudiantes </target>
       </trans-unit>
@@ -15856,7 +15856,7 @@ Are you sure you want to proceed?</source>
         <source> Include Branch Path Taken </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">161,163</context>
+          <context context-type="linenumber">160,162</context>
         </context-group>
         <target state="translated"> Incluir la ramificación tomada </target>
       </trans-unit>
@@ -15864,7 +15864,7 @@ Are you sure you want to proceed?</source>
         <source> Include Branch Path Taken Node ID </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">166,168</context>
+          <context context-type="linenumber">165,167</context>
         </context-group>
         <target state="translated"> Incluir el ID de nodo de la ramificación elegida </target>
       </trans-unit>
@@ -15872,7 +15872,7 @@ Are you sure you want to proceed?</source>
         <source> Include Branch Path Taken Step Title </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">171,173</context>
+          <context context-type="linenumber">170,172</context>
         </context-group>
         <target state="translated"> Incluir título del paso de ramificación elegida </target>
       </trans-unit>
@@ -15880,7 +15880,7 @@ Are you sure you want to proceed?</source>
         <source> Include Scores </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">176,178</context>
+          <context context-type="linenumber">175,177</context>
         </context-group>
         <target state="translated"> Incluir puntajes </target>
       </trans-unit>
@@ -15888,7 +15888,7 @@ Are you sure you want to proceed?</source>
         <source> Include Score Timestamps </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">181,183</context>
+          <context context-type="linenumber">180,182</context>
         </context-group>
         <target state="translated"> Incluir tiempos de puntaje </target>
       </trans-unit>
@@ -15896,7 +15896,7 @@ Are you sure you want to proceed?</source>
         <source> Include Comments </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">186,188</context>
+          <context context-type="linenumber">185,187</context>
         </context-group>
         <target state="translated"> Incluir comentarios </target>
       </trans-unit>
@@ -15904,7 +15904,7 @@ Are you sure you want to proceed?</source>
         <source> Include Comment Timestamps </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">191,193</context>
+          <context context-type="linenumber">190,192</context>
         </context-group>
         <target state="translated"> Incluir tiempo de comentarios </target>
       </trans-unit>
@@ -15912,47 +15912,23 @@ Are you sure you want to proceed?</source>
         <source> Include Student Names </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">202,204</context>
+          <context context-type="linenumber">201,203</context>
         </context-group>
         <target state="translated"> Incluir nombres de estudiantes </target>
-      </trans-unit>
-      <trans-unit id="2138028e2d3a92922c98ed07aa4ce816bda472ee" datatype="html">
-        <source> Include Student Events </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">207,209</context>
-        </context-group>
-        <target state="translated"> Incluir eventos de estudiantes </target>
-      </trans-unit>
-      <trans-unit id="29985c3f21e2ce63574d365941a6658116e5e36c" datatype="html">
-        <source> Include Teacher Events </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">210,212</context>
-        </context-group>
-        <target state="translated"> Incluir eventos de docentes </target>
-      </trans-unit>
-      <trans-unit id="ff260d56cce4b799cf4a955c42043e13898df2d2" datatype="html">
-        <source> Include Names </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">213</context>
-        </context-group>
-        <target state="translated"> Incluir Nombres </target>
       </trans-unit>
       <trans-unit id="5f19586aba912ec6eb123ec5ab609a3bcc073066" datatype="html">
         <source>Export</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">216</context>
+          <context context-type="linenumber">206</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">236</context>
+          <context context-type="linenumber">225</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
@@ -15968,7 +15944,11 @@ Are you sure you want to proceed?</source>
         <source> Export </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">216,218</context>
+          <context context-type="linenumber">206,208</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
+          <context context-type="linenumber">225,227</context>
         </context-group>
         <target state="translated"> Exportar </target>
       </trans-unit>
@@ -15976,17 +15956,13 @@ Are you sure you want to proceed?</source>
         <source> Cancel </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">225,227</context>
+          <context context-type="linenumber">215,217</context>
         </context-group>
-        <target state="translated"> Cancelar </target>
-      </trans-unit>
-      <trans-unit id="c86660a0205c494043043074c0d4bde8bfac9860" datatype="html">
-        <source> Export </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">236,238</context>
+          <context context-type="linenumber">234,236</context>
         </context-group>
-        <target state="translated"> Exportar </target>
+        <target state="translated"> Cancelar </target>
       </trans-unit>
       <trans-unit id="2288335752546657530" datatype="html">
         <source>Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position</source>
@@ -16032,6 +16008,38 @@ Are you sure you want to proceed?</source>
         </context-group>
         <target state="translated">Eventos</target>
       </trans-unit>
+      <trans-unit id="f5fe4b095529867ca933b86ccb90fa0252234b48" datatype="html">
+        <source> Include Student Events </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-events/export-events.component.html</context>
+          <context context-type="linenumber">13,15</context>
+        </context-group>
+        <target state="needs-translation"> Include Student Events </target>
+      </trans-unit>
+      <trans-unit id="b652cb921732f903c68379986fb0879f23e51061" datatype="html">
+        <source> Include Teacher Events </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-events/export-events.component.html</context>
+          <context context-type="linenumber">16,18</context>
+        </context-group>
+        <target state="needs-translation"> Include Teacher Events </target>
+      </trans-unit>
+      <trans-unit id="e8904d84b165b1b9f89851bd9813b8e58a1e3772" datatype="html">
+        <source>Include Names</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-events/export-events.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <target state="needs-translation">Include Names</target>
+      </trans-unit>
+      <trans-unit id="4a4b67db85713cd44801ea9be9e3a69c48a3b6f7" datatype="html">
+        <source> Export </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-events/export-events.component.html</context>
+          <context context-type="linenumber">28,30</context>
+        </context-group>
+        <target state="translated"> Exportar </target>
+      </trans-unit>
       <trans-unit id="0b4a69c4ce44d6f54f5a49317dfd16f3b7fe0b51" datatype="html">
         <source> Include Student Names </source>
         <context-group purpose="location">
@@ -16040,7 +16048,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">26,28</context>
+          <context context-type="linenumber">24,26</context>
         </context-group>
         <target state="translated"> Incluir nombres de estudiantes </target>
       </trans-unit>
@@ -16084,19 +16092,11 @@ Are you sure you want to proceed?</source>
         </context-group>
         <target state="translated">Última</target>
       </trans-unit>
-      <trans-unit id="9387b6a5443aa7f4f1b86c41fb821509258a068b" datatype="html">
-        <source> Everything </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">16,18</context>
-        </context-group>
-        <target state="needs-translation"> Everything </target>
-      </trans-unit>
       <trans-unit id="230255460fb90e84a3fd489ec7b2761169aad59a" datatype="html">
         <source> Include Student Work </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">21,23</context>
+          <context context-type="linenumber">19,21</context>
         </context-group>
         <target state="translated"> Incluir trabajo de estudiante </target>
       </trans-unit>
@@ -16104,7 +16104,7 @@ Are you sure you want to proceed?</source>
         <source> Include Annotations </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">31,33</context>
+          <context context-type="linenumber">29,31</context>
         </context-group>
         <target state="needs-translation"> Include Annotations </target>
       </trans-unit>
@@ -16112,7 +16112,7 @@ Are you sure you want to proceed?</source>
         <source>Include Events</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <target state="needs-translation">Include Events</target>
       </trans-unit>
