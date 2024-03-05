@@ -20,6 +20,10 @@
   ></mat-tab>
   <mat-tab label="{{ defaultLanguage.language }}">
     <ng-template matTabContent>
+      <span i18n
+        >Editing is disabled. Please switch back to {{ defaultLanguage.language }} if you want to
+        edit.</span
+      >
       <wise-authoring-tinymce-editor [model]="html" disabled="true"></wise-authoring-tinymce-editor>
     </ng-template>
   </mat-tab>
