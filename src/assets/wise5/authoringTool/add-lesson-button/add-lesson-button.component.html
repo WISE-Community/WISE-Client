@@ -2,8 +2,9 @@
   mat-icon-button
   color="primary"
   class="add-lesson-button"
-  [matMenuTriggerFor]="lessonMenu"
-  #menuTrigger="matMenuTrigger"
+  (click)="addLesson()"
+  [matMenuTriggerFor]="lessonId == null ? null : lessonMenu"
+  #menuTrigger
   matTooltip="Add lesson"
   matTooltipPosition="above"
   i18n-matTooltip

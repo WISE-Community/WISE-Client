@@ -77,16 +77,7 @@
 <div class="all-nodes-div">
   <div *ngIf="lessons.length === 0" fxLayout="row" fxLayoutAlign="start center">
     <div i18n>There are no lessons</div>
-    <button
-      mat-icon-button
-      color="primary"
-      (click)="addLesson()"
-      matTooltip="Add lesson"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>add_circle</mat-icon>
-    </button>
+    <add-lesson-button [active]="true"></add-lesson-button>
   </div>
   <div *ngFor="let lesson of lessons" fxLayout="row">
     <project-authoring-lesson
@@ -98,22 +89,17 @@
       (onExpandedChanged)="onExpandedChanged($event)"
       fxFlex
     ></project-authoring-lesson>
-    <add-lesson-button [lessonId]="lesson.id"></add-lesson-button>
+    <add-lesson-button
+      class="add-lesson-button-next-to-lesson"
+      [active]="true"
+      [lessonId]="lesson.id"
+    ></add-lesson-button>
   </div>
   <div>
     <h6 class="unused-header" i18n>Unused Lessons</h6>
     <div *ngIf="inactiveGroupNodes.length === 0" fxLayout="row" fxLayoutAlign="start center">
       <div i18n>There are no unused lessons</div>
-      <button
-        mat-icon-button
-        color="primary"
-        (click)="addUnusedLesson()"
-        matTooltip="Add lesson"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>add_circle</mat-icon>
-      </button>
+      <add-lesson-button [active]="false"></add-lesson-button>
     </div>
     <div *ngFor="let inactiveGroupNode of inactiveGroupNodes" fxLayout="row">
       <project-authoring-lesson
@@ -125,7 +111,11 @@
         (onExpandedChanged)="onExpandedChanged($event)"
         fxFlex
       ></project-authoring-lesson>
-      <add-lesson-button [lessonId]="inactiveGroupNode.id"></add-lesson-button>
+      <add-lesson-button
+        class="add-lesson-button-next-to-lesson"
+        [active]="false"
+        [lessonId]="inactiveGroupNode.id"
+      ></add-lesson-button>
     </div>
     <div>
       <h6 class="unused-header" i18n>Unused Steps</h6>
