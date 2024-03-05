@@ -22,6 +22,18 @@ export class ProjectAuthoringHarness extends ComponentHarness {
     return this.locatorForOptional(ProjectAuthoringLessonHarness.with({ title: title }))();
   }
 
+  getUnusedLessons(): Promise<ProjectAuthoringLessonHarness[]> {
+    return this.locatorForAll(ProjectAuthoringLessonHarness.with({ title: /^(?!\d*: ).*/ }))();
+  }
+
+  async getUnusedLessonTitles(): Promise<string[]> {
+    const unusedLessonTitles = [];
+    for (const unusedLesson of await this.getUnusedLessons()) {
+      unusedLessonTitles.push(await unusedLesson.getTitle());
+    }
+    return unusedLessonTitles;
+  }
+
   getStep(title: string): Promise<ProjectAuthoringStepHarness> {
     return this.locatorForOptional(ProjectAuthoringStepHarness.with({ title: title }))();
   }

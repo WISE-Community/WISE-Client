@@ -75,6 +75,19 @@
   </button>
 </div>
 <div class="all-nodes-div">
+  <div *ngIf="lessons.length === 0" fxLayout="row" fxLayoutAlign="start center">
+    <div i18n>There are no lessons</div>
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="addLesson()"
+      matTooltip="Add lesson"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
   <div *ngFor="let lesson of lessons" fxLayout="row">
     <project-authoring-lesson
       [lesson]="lesson"
@@ -89,8 +102,20 @@
   </div>
   <div>
     <h6 class="unused-header" i18n>Unused Lessons</h6>
-    <div *ngIf="inactiveGroupNodes.length === 0" i18n>There are no Unused Lessons</div>
-    <div *ngFor="let inactiveGroupNode of inactiveGroupNodes">
+    <div *ngIf="inactiveGroupNodes.length === 0" fxLayout="row" fxLayoutAlign="start center">
+      <div i18n>There are no unused lessons</div>
+      <button
+        mat-icon-button
+        color="primary"
+        (click)="addUnusedLesson()"
+        matTooltip="Add lesson"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
+    <div *ngFor="let inactiveGroupNode of inactiveGroupNodes" fxLayout="row">
       <project-authoring-lesson
         [lesson]="inactiveGroupNode"
         (selectNodeEvent)="selectNode($event)"
@@ -98,11 +123,13 @@
         [projectId]="projectId"
         [expanded]="lessonIdToExpanded()[inactiveGroupNode.id]"
         (onExpandedChanged)="onExpandedChanged($event)"
+        fxFlex
       ></project-authoring-lesson>
+      <add-lesson-button [lessonId]="inactiveGroupNode.id"></add-lesson-button>
     </div>
     <div>
       <h6 class="unused-header" i18n>Unused Steps</h6>
-      <div *ngIf="inactiveStepNodes.length === 0" i18n>There are no Unused Steps</div>
+      <div *ngIf="inactiveStepNodes.length === 0" i18n>There are no unused steps</div>
       <ng-container *ngFor="let inactiveStepNode of inactiveStepNodes">
         <project-authoring-step
           *ngIf="getParentGroup(inactiveStepNode.id) == null"

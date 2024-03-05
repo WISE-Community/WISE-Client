@@ -2003,10 +2003,20 @@ export class ProjectService {
     return this.project.speechToText;
   }
 
-  getPreviousStepNodeId(nodeId: string): string {
-    const parentGroup = this.getParentGroup(nodeId);
-    const childIds = parentGroup.ids;
-    return childIds[childIds.indexOf(nodeId) - 1];
+  getPreviousNodeId(nodeId: string): string {
+    if (this.isActive(nodeId)) {
+      const parentGroup = this.getParentGroup(nodeId);
+      const childIds = parentGroup.ids;
+      return childIds[childIds.indexOf(nodeId) - 1];
+    } else {
+      const inactiveGroupNodes = this.getInactiveGroupNodes();
+      for (let i = 0; i < inactiveGroupNodes.length; i++) {
+        if (inactiveGroupNodes[i].id === nodeId) {
+          return inactiveGroupNodes[i - 1]?.id;
+        }
+      }
+    }
+    return null;
   }
 
   isFirstStepInLesson(nodeId: string): boolean {

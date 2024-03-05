@@ -14,9 +14,12 @@ export class AddLessonButtonComponent {
 
   protected addLessonBefore(): void {
     const newLesson = this.projectService.createGroup('New Lesson');
-    const previousLessonId = this.projectService.getPreviousStepNodeId(this.lessonId);
+    const previousLessonId = this.projectService.getPreviousNodeId(this.lessonId);
     if (previousLessonId == null) {
-      this.projectService.createNodeInside(newLesson, 'group0');
+      const insertLocation = this.projectService.isActive(this.lessonId)
+        ? 'group0'
+        : 'inactiveGroups';
+      this.projectService.createNodeInside(newLesson, insertLocation);
     } else {
       this.projectService.createNodeAfter(newLesson, previousLessonId);
     }

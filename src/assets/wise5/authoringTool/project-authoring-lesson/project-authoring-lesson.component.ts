@@ -73,10 +73,7 @@ export class ProjectAuthoringLessonComponent {
     if (this.projectService.isFirstStepInLesson(nodeId)) {
       this.projectService.createNodeInside(newStep, this.projectService.getParentGroupId(nodeId));
     } else {
-      this.projectService.createNodeAfter(
-        newStep,
-        this.projectService.getPreviousStepNodeId(nodeId)
-      );
+      this.projectService.createNodeAfter(newStep, this.projectService.getPreviousNodeId(nodeId));
     }
     this.updateProject(newStep.id);
   }
