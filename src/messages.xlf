@@ -10129,6 +10129,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">75</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="9c87505361726ff6c363fb8e19efe9832f666c14" datatype="html">
+        <source>Editing is disabled. Please switch back to <x id="INTERPOLATION" equiv-text="{{ defaultLanguage.language }}"/> if you want to edit.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="1318680729593701201" datatype="html">
         <source>Also currently editing this unit: <x id="PH" equiv-text="otherAuthors.join(
               &apos;, &apos;
@@ -21325,28 +21332,28 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>File</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3075681036535086015" datatype="html">
         <source>Insert from Notebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">184</context>
+          <context context-type="linenumber">185</context>
         </context-group>
       </trans-unit>
       <trans-unit id="535405804327281099" datatype="html">
         <source>Insert note +</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">186</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7138428925866529608" datatype="html">
         <source>Image from notebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">211</context>
+          <context context-type="linenumber">212</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3570422532828875517" datatype="html">
