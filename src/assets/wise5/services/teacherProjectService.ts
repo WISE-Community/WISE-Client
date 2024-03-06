@@ -2267,18 +2267,9 @@ export class TeacherProjectService extends ProjectService {
                 const oldToGroup = this.getNodeById(oldToGroupId);
                 if (oldToGroup != null) {
                   const oldToGroupStartId = oldToGroup.startId;
-                  const transition = {};
-                  let toNodeId = '';
-                  if (oldToGroupStartId == null) {
-                    // there is no start node id so we will just point to the group
-                    toNodeId = oldToGroup;
-                  } else {
-                    // there is a start node id so we will point to it
-                    toNodeId = oldToGroupStartId;
+                  if (oldToGroupStartId != null && oldToGroupStartId !== '') {
+                    this.addToTransition(child, oldToGroupStartId);
                   }
-
-                  // create the transition from the child to the old group
-                  this.addToTransition(child, toNodeId);
                 }
               }
             }
