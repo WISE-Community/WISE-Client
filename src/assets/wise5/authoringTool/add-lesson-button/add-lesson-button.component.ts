@@ -48,7 +48,7 @@ export class AddLessonButtonComponent {
   }
 
   private createNewLesson(): any {
-    return this.projectService.createGroup('New Lesson');
+    return this.projectService.createGroup($localize`New Lesson`);
   }
 
   private updateProject(newNodeId: string): void {

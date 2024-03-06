@@ -99,7 +99,7 @@
     <h6 class="unused-header" i18n>Unused Lessons</h6>
     <div *ngIf="inactiveGroupNodes.length === 0" fxLayout="row" fxLayoutAlign="start center">
       <div i18n>There are no unused lessons</div>
-      <add-lesson-button [active]="false"></add-lesson-button>
+      <add-lesson-button></add-lesson-button>
     </div>
     <div *ngFor="let inactiveGroupNode of inactiveGroupNodes" fxLayout="row">
       <project-authoring-lesson
@@ -113,7 +113,6 @@
       ></project-authoring-lesson>
       <add-lesson-button
         class="add-lesson-button-next-to-lesson"
-        [active]="false"
         [lessonId]="inactiveGroupNode.id"
       ></add-lesson-button>
     </div>
