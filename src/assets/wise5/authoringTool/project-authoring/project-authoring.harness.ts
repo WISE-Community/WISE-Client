@@ -6,6 +6,9 @@ import { ProjectAuthoringStepHarness } from '../project-authoring-step/project-a
 
 export class ProjectAuthoringHarness extends ComponentHarness {
   static hostSelector = 'project-authoring';
+  getAddLessonButtons = this.locatorForAll(
+    MatButtonHarness.with({ selector: '[matTooltip="Add lesson"]' })
+  );
   getAddStepButtons = this.locatorForAll(
     MatButtonHarness.with({ selector: '[matTooltip="Add step"]' })
   );
@@ -17,6 +20,18 @@ export class ProjectAuthoringHarness extends ComponentHarness {
 
   getLesson(title: string): Promise<ProjectAuthoringLessonHarness> {
     return this.locatorForOptional(ProjectAuthoringLessonHarness.with({ title: title }))();
+  }
+
+  getUnusedLessons(): Promise<ProjectAuthoringLessonHarness[]> {
+    return this.locatorForAll(ProjectAuthoringLessonHarness.with({ title: /^(?!\d*: ).*/ }))();
+  }
+
+  async getUnusedLessonTitles(): Promise<string[]> {
+    const unusedLessonTitles = [];
+    for (const unusedLesson of await this.getUnusedLessons()) {
+      unusedLessonTitles.push(await unusedLesson.getTitle());
+    }
+    return unusedLessonTitles;
   }
 
   getStep(title: string): Promise<ProjectAuthoringStepHarness> {
