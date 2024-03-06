@@ -33,14 +33,10 @@ export abstract class AbstractTranslatableFieldComponent {
 
   ngOnInit(): void {
     this.i18nId = this.content[`${this.key}.i18n`]?.id;
-    this.translationText = computed(() =>
-      this.showTranslationInput()
-        ? this.translateProjectService.currentTranslations()[this.i18nId]?.value
-        : ''
+    this.translationText = computed(
+      () => this.translateProjectService.currentTranslations()[this.i18nId]?.value
     );
-    this.defaultLanguageText = computed(() =>
-      this.showTranslationInput() ? this.content[this.key] : ''
-    );
+    this.defaultLanguageText = computed(() => this.content[this.key]);
     this.translationTextChangedSubscription = this.translationTextChanged
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe(async (text: string) => {
