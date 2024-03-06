@@ -54,7 +54,10 @@ export class AddLessonButtonComponent {
   private updateProject(newNodeId: string): void {
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
       this.projectService.refreshProject();
-      temporarilyHighlightElement(newNodeId);
+      // This timeout is used to allow the lesson to be added to the DOM before we highlight it
+      setTimeout(() => {
+        temporarilyHighlightElement(newNodeId);
+      });
     });
   }
 }
