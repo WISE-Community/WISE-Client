@@ -2959,7 +2959,7 @@ export class TeacherProjectService extends ProjectService {
    */
   isFirstNodeInBranchPath(nodeId) {
     for (const node of this.getNodes()) {
-      if (node.transitionLogic != null && node.transitionLogic.transitions != null) {
+      if (node.transitionLogic?.transitions?.length > 1) {
         for (const transition of node.transitionLogic.transitions) {
           if (transition.to === nodeId) {
             return true;
