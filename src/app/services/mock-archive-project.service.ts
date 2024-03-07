@@ -1,4 +1,4 @@
-import { Observable, Subject, of } from 'rxjs';
+import { Observable, Subject, Subscription, of } from 'rxjs';
 import { Project } from '../domain/project';
 import { ArchiveProjectResponse } from '../domain/archiveProjectResponse';
 
@@ -22,20 +22,10 @@ export class MockArchiveProjectService {
     return of(project);
   }
 
-  archiveProjects(projects: Project[]): Observable<ArchiveProjectResponse[]> {
-    return this.archiveProjectsHelper(projects, true);
-  }
-
-  unarchiveProjects(projects: Project[]): Observable<ArchiveProjectResponse[]> {
-    return this.archiveProjectsHelper(projects, false);
-  }
-
-  private archiveProjectsHelper(
-    projects: Project[],
-    archived: boolean
-  ): Observable<ArchiveProjectResponse[]> {
+  archiveProjects(projects: Project[], archived: boolean): Subscription {
     projects.forEach((project) => (project.archived = archived));
-    return of(projects);
+    this.refreshProjects();
+    return of(projects).subscribe();
   }
 
   refreshProjects(): void {

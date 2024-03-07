@@ -146,7 +146,7 @@ function archiveMultipleProjects() {
     describe('select multiple projects and click archive button', () => {
       it('archives multiple projects', async () => {
         await harness.selectProjects([projectId4, projectId3]);
-        spyOn(archiveProjectService, 'archiveProjects').and.returnValue(
+        spyOn(archiveProjectService, 'makeArchiveProjectsRequest').and.returnValue(
           of([new ArchiveProjectResponse(4, true), new ArchiveProjectResponse(3, true)])
         );
         await (await harness.getArchiveButton()).click();
@@ -162,7 +162,7 @@ function restoreMultipleProjects() {
       it('restores multiple projects', async () => {
         await harness.showArchivedView();
         await harness.selectProjects([projectId2, projectId1]);
-        spyOn(archiveProjectService, 'unarchiveProjects').and.returnValue(
+        spyOn(archiveProjectService, 'makeUnarchiveProjectsRequest').and.returnValue(
           of([new ArchiveProjectResponse(2, false), new ArchiveProjectResponse(1, false)])
         );
         await (await harness.getUnarchiveButton()).click();

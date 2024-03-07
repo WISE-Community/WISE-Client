@@ -170,70 +170,8 @@ export class PersonalLibraryComponent extends LibraryComponent {
     );
   }
 
-  protected archiveProjects(archive: boolean): Subscription {
-    const selectedProjects = this.selectedProjects();
-    return this.archiveProjectService[archive ? 'archiveProjects' : 'unarchiveProjects'](
-      this.selectedProjects()
-    ).subscribe({
-      next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
-        this.updateProjectsArchivedStatus(selectedProjects, archiveProjectsResponse);
-        this.openSuccessSnackBar(selectedProjects, archiveProjectsResponse, archive);
-      },
-      error: () => {
-        this.showErrorSnackBar(archive);
-      }
-    });
-  }
-
-  private updateProjectsArchivedStatus(
-    projects: Project[],
-    archiveProjectsResponse: ArchiveProjectResponse[]
-  ): void {
-    for (const archiveProjectResponse of archiveProjectsResponse) {
-      const project = projects.find((project: Project) => project.id === archiveProjectResponse.id);
-      project.updateArchivedStatus(archiveProjectResponse.archived);
-    }
-    this.refreshProjects();
-  }
-
-  private openSuccessSnackBar(
-    projects: Project[],
-    archiveProjectsResponse: ArchiveProjectResponse[],
-    archived: boolean
-  ): void {
-    const count = archiveProjectsResponse.filter(
-      (response: ArchiveProjectResponse) => response.archived === archived
-    ).length;
-    this.snackBar
-      .open(
-        archived
-          ? $localize`Successfully archived ${count} unit(s).`
-          : $localize`Successfully restored ${count} unit(s).`,
-        $localize`Undo`
-      )
-      .onAction()
-      .subscribe(() => {
-        this.undoArchiveAction(projects, archived ? 'unarchiveProjects' : 'archiveProjects');
-      });
-  }
-
-  private showErrorSnackBar(archive: boolean): void {
-    this.snackBar.open(
-      archive ? $localize`Error archiving unit(s).` : $localize`Error restoring unit(s).`
-    );
-  }
-
-  private undoArchiveAction(projects: Project[], archiveFunctionName: string): void {
-    this.archiveProjectService[archiveFunctionName](projects).subscribe({
-      next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
-        this.updateProjectsArchivedStatus(projects, archiveProjectsResponse);
-        this.archiveProjectService.refreshProjects();
-        this.snackBar.open($localize`Action undone.`);
-      },
-      error: () => {
-        this.snackBar.open($localize`Error undoing action.`);
-      }
-    });
+  protected archiveProjects(archive: boolean): void {
+    this.archiveProjectService.archiveProjects(this.selectedProjects(), archive);
   }
 }
 

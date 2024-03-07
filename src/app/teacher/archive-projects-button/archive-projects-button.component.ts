@@ -12,6 +12,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   styleUrls: ['./archive-projects-button.component.scss']
 })
 export class ArchiveProjectsButtonComponent {
-  @Output() archiveProjectsEvent = new EventEmitter<void>();
+  @Output() archiveProjectsEvent = new EventEmitter<boolean>();
   @Input() showArchive: boolean = false;
 }

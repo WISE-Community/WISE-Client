@@ -11,7 +11,7 @@ import { SelectRunsOption } from './select-runs-option';
   providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }]
 })
 export class SelectRunsControlsComponent {
-  @Output() archiveActionEvent = new EventEmitter<void>();
+  @Output() archiveProjectsEvent = new EventEmitter<boolean>();
   protected numSelectedRuns: number = 0;
   protected selectedProjects: Project[] = [];
   @Input() runChangedEventEmitter: EventEmitter<void> = new EventEmitter<void>();

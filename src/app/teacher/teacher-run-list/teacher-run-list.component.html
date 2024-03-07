@@ -71,7 +71,7 @@
     </ng-container>
     <select-runs-controls
       *ngIf="filteredRuns.length > 0"
-      (archiveActionEvent)="refreshProjects()"
+      (archiveProjectsEvent)="archiveProjects($event)"
       [runChangedEventEmitter]="runChangedEventEmitter"
       [runs]="filteredRuns"
       (selectRunsOptionChosenEvent)="selectRunsOptionChosen($event)"
