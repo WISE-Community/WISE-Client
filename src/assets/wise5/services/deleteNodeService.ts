@@ -83,7 +83,7 @@ export class DeleteNodeService {
       let nextNodeId = transitions[0].to;
       if (this.ProjectService.isGroupNode(nextNodeId)) {
         const nextGroupStartId = this.ProjectService.getGroupStartId(nextNodeId);
-        if (nextGroupStartId == null) {
+        if (nextGroupStartId == null || nextGroupStartId === '') {
           this.ProjectService.setStartNodeId(nextNodeId);
         } else {
           this.ProjectService.setStartNodeId(nextGroupStartId);
