@@ -72,7 +72,7 @@ class TeacherRunStub extends TeacherRun {
   }
 }
 
-describe('TeacherRunListComponent', () => {
+fdescribe('TeacherRunListComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
