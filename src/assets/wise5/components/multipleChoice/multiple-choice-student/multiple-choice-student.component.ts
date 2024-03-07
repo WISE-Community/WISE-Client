@@ -186,11 +186,11 @@ export class MultipleChoiceStudent extends ComponentStudent {
     }
   }
 
-  checkboxClicked(choiceId: string): void {
+  protected updateStudentChoices(updatedChoiceId: string): void {
     if (this.isDisabled) {
       return;
     }
-    this.addOrRemoveFromStudentChoices(choiceId);
+    this.addOrRemoveFromStudentChoices(updatedChoiceId);
     this.studentDataChanged();
   }
 
