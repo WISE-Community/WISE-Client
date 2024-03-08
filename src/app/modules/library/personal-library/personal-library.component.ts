@@ -7,10 +7,6 @@ import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
-import { Subscription } from 'rxjs';
-import { ArchiveProjectResponse } from '../../../domain/archiveProjectResponse';
-import { Project } from '../../../domain/project';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-personal-library',
@@ -37,8 +33,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
   constructor(
     private archiveProjectService: ArchiveProjectService,
     protected dialog: MatDialog,
-    protected libraryService: LibraryService,
-    private snackBar: MatSnackBar
+    protected libraryService: LibraryService
   ) {
     super(dialog, libraryService);
   }
