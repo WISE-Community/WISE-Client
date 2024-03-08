@@ -16,7 +16,7 @@ export class ArchiveProjectService {
     return this.http.put<ArchiveProjectResponse>(`/api/project/${project.id}/archived`, null);
   }
 
-  makeArchiveProjectsRequest(projects: Project[]): Observable<ArchiveProjectResponse[]> {
+  private makeArchiveProjectsRequest(projects: Project[]): Observable<ArchiveProjectResponse[]> {
     const projectIds = projects.map((project) => project.id);
     return this.http.put<ArchiveProjectResponse[]>(`/api/projects/archived`, projectIds);
   }
@@ -25,7 +25,7 @@ export class ArchiveProjectService {
     return this.http.delete<ArchiveProjectResponse>(`/api/project/${project.id}/archived`);
   }
 
-  makeUnarchiveProjectsRequest(projects: Project[]): Observable<ArchiveProjectResponse[]> {
+  private makeUnarchiveProjectsRequest(projects: Project[]): Observable<ArchiveProjectResponse[]> {
     let params = new HttpParams();
     for (const project of projects) {
       params = params.append('projectIds', project.id);
