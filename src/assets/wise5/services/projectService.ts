@@ -2035,4 +2035,34 @@ export class ProjectService {
   getSpeechToTextSettings(): any {
     return this.project.speechToText;
   }
+
+  getPreviousNodeId(nodeId: string): string {
+    if (this.isActive(nodeId)) {
+      const parentGroup = this.getParentGroup(nodeId);
+      const childIds = parentGroup.ids;
+      return childIds[childIds.indexOf(nodeId) - 1];
+    } else {
+      const inactiveGroupNodes = this.getInactiveGroupNodes();
+      for (let i = 0; i < inactiveGroupNodes.length; i++) {
+        if (inactiveGroupNodes[i].id === nodeId) {
+          return inactiveGroupNodes[i - 1]?.id;
+        }
+      }
+    }
+    return null;
+  }
+
+  isFirstStepInLesson(nodeId: string): boolean {
+    for (const lesson of this.getGroupNodes()) {
+      if (lesson.startId === nodeId) {
+        return true;
+      }
+    }
+    for (const inactiveLesson of this.getInactiveGroupNodes()) {
+      if (inactiveLesson.startId === nodeId) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

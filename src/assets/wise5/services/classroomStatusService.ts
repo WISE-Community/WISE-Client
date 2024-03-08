@@ -51,17 +51,14 @@ export class ClassroomStatusService {
     return this.studentStatuses;
   }
 
-  /**
-   * Get the current node position and title for a workgroup
-   * e.g. 2.2: Newton Scooter Concepts
-   * @param workgroupId the workgroup id
-   * @returns the node position and title
-   */
-  getCurrentNodePositionAndNodeTitleForWorkgroupId(workgroupId) {
+  getCurrentNodeLocationForWorkgroupId(workgroupId: number): any {
     const studentStatus = this.getStudentStatusForWorkgroupId(workgroupId);
     if (studentStatus != null) {
       const currentNodeId = studentStatus.currentNodeId;
-      return this.projectService.getNodePositionAndTitle(currentNodeId);
+      return {
+        position: this.projectService.getNodePositionAndTitle(currentNodeId),
+        order: this.projectService.getNodeOrderById(currentNodeId)
+      };
     }
     return null;
   }

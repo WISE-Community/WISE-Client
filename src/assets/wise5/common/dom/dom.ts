@@ -25,8 +25,7 @@ export function temporarilyHighlightElement(id: string, duration: number = 1000)
      */
     setTimeout(() => {
       element.css({
-        transition: '',
-        'background-color': ''
+        transition: ''
       });
     }, 2000);
   }, duration);

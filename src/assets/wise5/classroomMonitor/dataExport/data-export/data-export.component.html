@@ -37,7 +37,7 @@
       <div>
         <button
           mat-raised-button
-          (click)="setExportType('events')"
+          (click)="goToExportEventsPage()"
           aria-label="Export Events"
           i18n-aria-label
           i18n
@@ -127,7 +127,6 @@
       *ngIf="
         exportType === 'latestStudentWork' ||
         exportType === 'allStudentWork' ||
-        exportType === 'events' ||
         exportType === 'oneWorkgroupPerRow'
       "
     >
@@ -203,15 +202,6 @@
           Include Student Names
         </mat-checkbox>
       </div>
-      <div *ngIf="exportType === 'events'" fxLayout="column" fxLayoutGap="10px">
-        <mat-checkbox color="primary" [(ngModel)]="includeStudentEvents" i18n>
-          Include Student Events
-        </mat-checkbox>
-        <mat-checkbox color="primary" [(ngModel)]="includeTeacherEvents" i18n>
-          Include Teacher Events
-        </mat-checkbox>
-        <mat-checkbox color="primary" [(ngModel)]="includeNames" i18n> Include Names </mat-checkbox>
-      </div>
       <div class="button-div" fxLayoutGap="20px">
         <button mat-raised-button (click)="export()" aria-label="Export" i18n-aria-label i18n>
           Export
@@ -226,27 +216,25 @@
           Cancel
         </button>
       </div>
-      <ng-container *ngIf="exportType !== 'events'">
-        <select-step-and-component-checkboxes
-          [(exportStepSelectionType)]="exportStepSelectionType"
-          [nodes]="nodes"
-          [projectIdToOrder]="projectIdToOrder"
-        ></select-step-and-component-checkboxes>
-        <div class="button-div" fxLayoutGap="20px">
-          <button mat-raised-button (click)="export()" aria-label="Export" i18n-aria-label i18n>
-            Export
-          </button>
-          <button
-            mat-raised-button
-            (click)="setExportType(null)"
-            aria-label="Cancel"
-            i18n-aria-label
-            i18n
-          >
-            Cancel
-          </button>
-        </div>
-      </ng-container>
+      <select-step-and-component-checkboxes
+        [(exportStepSelectionType)]="exportStepSelectionType"
+        [nodes]="nodes"
+        [projectIdToOrder]="projectIdToOrder"
+      ></select-step-and-component-checkboxes>
+      <div class="button-div" fxLayoutGap="20px">
+        <button mat-raised-button (click)="export()" aria-label="Export" i18n-aria-label i18n>
+          Export
+        </button>
+        <button
+          mat-raised-button
+          (click)="setExportType(null)"
+          aria-label="Cancel"
+          i18n-aria-label
+          i18n
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,32 @@
+<div class="view-content view-content--with-sidemenu top-content">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="goBack()"
+    matTooltip="Back"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div class="parameters-div" fxLayout="column" fxLayoutGap="10px">
+    <mat-checkbox color="primary" [(ngModel)]="includeStudentEvents" i18n>
+      Include Student Events
+    </mat-checkbox>
+    <mat-checkbox color="primary" [(ngModel)]="includeTeacherEvents" i18n>
+      Include Teacher Events
+    </mat-checkbox>
+    <mat-checkbox color="primary" [(ngModel)]="includeNames" i18n>Include Names</mat-checkbox>
+  </div>
+  <div>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="export()"
+      [disabled]="!includeStudentEvents && !includeTeacherEvents"
+      i18n
+    >
+      Export
+    </button>
+  </div>
+</div>

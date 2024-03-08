@@ -63,16 +63,56 @@
     </div>
   </div>
   <div *ngIf="expanded" fxLayout="column">
-    <ng-container *ngFor="let childId of lesson.ids">
+    <div
+      *ngFor="let childId of lesson.ids"
+      class="step-div"
+      fxLayout="row wrap"
+      fxLayoutAlign="start center"
+    >
       <project-authoring-step
         [step]="idToNode[childId]"
         (selectNodeEvent)="selectNodeEvent.emit($event)"
         [showPosition]="showPosition"
         [projectId]="projectId"
+        fxFlex
       ></project-authoring-step>
-    </ng-container>
+      <button
+        mat-icon-button
+        color="primary"
+        [matMenuTriggerFor]="step"
+        #menuTrigger="matMenuTrigger"
+        matTooltip="Add step"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>add_circle</mat-icon>
+      </button>
+      <mat-menu #step="matMenu">
+        <button
+          mat-menu-item
+          (click)="addStepBefore(childId)"
+          [disabled]="isFirstNodeInBranchPath(childId)"
+          i18n
+        >
+          <mat-icon>add_circle</mat-icon>Add Step Before
+        </button>
+        <button mat-menu-item (click)="addStepAfter(childId)" i18n>
+          <mat-icon>add_circle</mat-icon>Add Step After
+        </button>
+      </mat-menu>
+    </div>
     <div *ngIf="lesson.ids.length === 0" class="no-steps-message" fxLayoutAlign="start center">
-      This lesson has no steps
+      <div i18n>This lesson has no steps</div>
+      <button
+        mat-icon-button
+        color="primary"
+        (click)="addStepInside(lesson.id)"
+        matTooltip="Add step"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>add_circle</mat-icon>
+      </button>
     </div>
   </div>
 </div>

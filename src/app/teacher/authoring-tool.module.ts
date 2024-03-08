@@ -64,10 +64,12 @@ import { CopyComponentButtonComponent } from '../../assets/wise5/authoringTool/n
 import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator/save-indicator.component';
 import { ProjectAuthoringLessonComponent } from '../../assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component';
 import { ProjectAuthoringStepComponent } from '../../assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component';
+import { AddLessonButtonComponent } from '../../assets/wise5/authoringTool/add-lesson-button/add-lesson-button.component';
 
 @NgModule({
   declarations: [
     AddComponentButtonComponent,
+    AddLessonButtonComponent,
     AddLessonChooseLocationComponent,
     AddLessonChooseTemplateComponent,
     AddLessonConfigureComponent,

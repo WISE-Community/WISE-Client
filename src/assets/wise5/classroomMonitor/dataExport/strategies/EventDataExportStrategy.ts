@@ -45,7 +45,7 @@ export class EventDataExportStrategy extends AbstractDataExportStrategy {
       );
     }
     const fileName = this.configService.getRunId() + '_events.csv';
-    this.controller.generateCSVFile(rows, fileName);
+    this.generateCSVFile(rows, fileName);
     this.controller.hideDownloadingExportMessage();
   }
 
