@@ -25,11 +25,12 @@ import { RunMenuComponent } from '../run-menu/run-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ArchiveProjectService } from '../../services/archive-project.service';
 import { MatCardModule } from '@angular/material/card';
-import { MockArchiveProjectService } from '../../services/mock-archive-project.service';
 import { MatSelectModule } from '@angular/material/select';
 import { ArchiveProjectsButtonComponent } from '../archive-projects-button/archive-projects-button.component';
 import { Project } from '../../domain/project';
 import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
+import { HttpClient } from '@angular/common/http';
+import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 
 class TeacherScheduleStubComponent {}
 
@@ -38,6 +39,7 @@ let configService: ConfigService;
 const currentTime = new Date().getTime();
 let fixture: ComponentFixture<TeacherRunListComponent>;
 let getRunsSpy: jasmine.Spy;
+let http: HttpClient;
 const run1StartTime = new Date('2020-01-01').getTime();
 const run1Title = 'First Run';
 const run2StartTime = new Date('2020-01-02').getTime();
@@ -102,12 +104,7 @@ describe('TeacherRunListComponent', () => {
           ]),
           SelectRunsControlsModule
         ],
-        providers: [
-          { provide: ArchiveProjectService, useClass: MockArchiveProjectService },
-          ConfigService,
-          TeacherService,
-          UserService
-        ],
+        providers: [ArchiveProjectService, ConfigService, TeacherService, UserService],
         schemas: [NO_ERRORS_SCHEMA]
       });
     })
@@ -115,6 +112,7 @@ describe('TeacherRunListComponent', () => {
 
   beforeEach(async () => {
     configService = TestBed.inject(ConfigService);
+    http = TestBed.inject(HttpClient);
     teacherService = TestBed.inject(TeacherService);
     userService = TestBed.inject(UserService);
     getRunsSpy = spyOn(teacherService, 'getRuns');
@@ -153,6 +151,9 @@ function archiveSelectedRuns(): void {
     it('should archive selected runs', async () => {
       await runListHarness.clickRunListItemCheckbox(0);
       await runListHarness.clickRunListItemCheckbox(1);
+      spyOn(http, 'put').and.returnValue(
+        of([new ArchiveProjectResponse(3, true), new ArchiveProjectResponse(2, true)])
+      );
       await runListHarness.clickArchiveButton();
       expect(await runListHarness.getNumRunListItems()).toEqual(1);
       await expectRunTitles([run1Title]);
@@ -175,6 +176,9 @@ function unarchiveSelectedRuns(): void {
       expect(await runListHarness.getNumRunListItems()).toEqual(2);
       await runListHarness.clickRunListItemCheckbox(0);
       await runListHarness.clickRunListItemCheckbox(1);
+      spyOn(http, 'delete').and.returnValue(
+        of([new ArchiveProjectResponse(3, false), new ArchiveProjectResponse(2, false)])
+      );
       await runListHarness.clickUnarchiveButton();
       expect(await runListHarness.getNumRunListItems()).toEqual(0);
     });
@@ -305,6 +309,7 @@ function archiveRunNoLongerInActiveView() {
     it('it should no longer be displayed in the active view', async () => {
       expect(await runListHarness.isShowingArchived()).toBeFalse();
       expect(await runListHarness.getNumRunListItems()).toEqual(3);
+      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(2, true)));
       await runListHarness.clickRunListItemMenuArchiveButton(1);
       expect(await runListHarness.isShowingArchived()).toBeFalse();
       expect(await runListHarness.getNumRunListItems()).toEqual(2);
@@ -328,6 +333,7 @@ function unarchiveRunNoLongerInArchivedView() {
       expect(await runListHarness.isShowingArchived()).toBeTrue();
       expect(await runListHarness.getNumRunListItems()).toEqual(1);
       await expectRunTitles([run2Title]);
+      spyOn(http, 'delete').and.returnValue(of(new ArchiveProjectResponse(2, false)));
       await runListHarness.clickRunListItemMenuUnarchiveButton(0);
       expect(await runListHarness.isShowingArchived()).toBeTrue();
       expect(await runListHarness.getNumRunListItems()).toEqual(0);
