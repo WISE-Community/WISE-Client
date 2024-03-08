@@ -26,8 +26,7 @@
       <archive-projects-button
         *ngIf="selectedProjects().length > 0"
         [showArchive]="!showArchivedView"
-        [projects]="selectedProjects()"
-        (archiveActionEvent)="refreshProjects()"
+        (archiveProjectsEvent)="archiveProjects($event)"
       ></archive-projects-button>
     </div>
     <span fxFlex fxHide.xs></span>

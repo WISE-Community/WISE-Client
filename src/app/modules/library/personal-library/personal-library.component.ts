@@ -164,6 +164,10 @@ export class PersonalLibraryComponent extends LibraryComponent {
       (project, index) => this.lowIndex <= index && index < this.highIndex
     );
   }
+
+  protected archiveProjects(archive: boolean): void {
+    this.archiveProjectService.archiveProjects(this.selectedProjects(), archive);
+  }
 }
 
 @Component({
