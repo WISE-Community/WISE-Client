@@ -143,11 +143,6 @@ export class PersonalLibraryComponent extends LibraryComponent {
     }
   }
 
-  protected refreshProjects(): void {
-    this.unselectAllProjects();
-    this.archiveProjectService.refreshProjects();
-  }
-
   protected unselectAllProjects(): void {
     this.projects.forEach((project) => (project.selected = false));
     this.selectedProjects.set([]);

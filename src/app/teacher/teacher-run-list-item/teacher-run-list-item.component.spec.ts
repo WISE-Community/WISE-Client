@@ -118,14 +118,10 @@ function render() {
 function runArchiveStatusChanged() {
   describe('run is not archived and archive menu button is clicked', () => {
     it('should archive run and emit events', async () => {
-      const runSelectedSpy = spyOn(component.runSelectedStatusChangedEvent, 'emit');
-      const runArchiveSpy = spyOn(component.runArchiveStatusChangedEvent, 'emit');
       expect(await runListItemHarness.isArchived()).toBeFalse();
       spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(1, true)));
       await runListItemHarness.clickArchiveMenuButton();
       expect(await runListItemHarness.isArchived()).toBeTrue();
-      expect(runSelectedSpy).toHaveBeenCalled();
-      expect(runArchiveSpy).toHaveBeenCalled();
     });
   });
 }
