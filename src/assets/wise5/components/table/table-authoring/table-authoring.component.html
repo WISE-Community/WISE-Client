@@ -146,15 +146,14 @@
       </td>
       <td *ngFor="let cell of row" class="inner-cell-container">
         <div fxLayout="column" fxLayoutAlign="center center">
-          <mat-form-field class="cell-text">
-            <input
-              matInput
-              [(ngModel)]="cell.text"
-              (ngModelChange)="inputChange.next($event)"
-              ng-model-options="{ debounce: 1000 }"
-              aria-label="Text"
-            />
-          </mat-form-field>
+          <translatable-input
+            [content]="cell"
+            key="text"
+            label="Text"
+            i18n-label
+            (defaultLanguageTextChanged)="inputChange.next($event)"
+            class="cell-text"
+          ></translatable-input>
           <mat-checkbox
             color="primary"
             [(ngModel)]="cell.editable"
