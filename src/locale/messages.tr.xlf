@@ -6412,7 +6412,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source> No owned or shared units found. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">57,59</context>
+          <context context-type="linenumber">56,58</context>
         </context-group>
         <target state="needs-translation"> No owned or shared units found. </target>
       </trans-unit>
@@ -8142,11 +8142,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Successfully <x id="PH" equiv-text="archive ? &apos;archived&apos; : &apos;restored&apos;"/> unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <target state="needs-translation">Successfully <x id="PH" equiv-text="archive ? 'archived' : 'restored'"/> unit.</target>
       </trans-unit>
@@ -8154,19 +8150,11 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Undo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">80</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">67</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">123</context>
         </context-group>
         <target state="translated">Geri al</target>
       </trans-unit>
@@ -8174,19 +8162,11 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Action undone.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">95</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">86</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">139</context>
         </context-group>
         <target state="needs-translation">Action undone.</target>
       </trans-unit>
@@ -8194,51 +8174,19 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Error undoing action.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">98</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">89</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">142</context>
         </context-group>
         <target state="needs-translation">Error undoing action.</target>
-      </trans-unit>
-      <trans-unit id="4446500764298446942" datatype="html">
-        <source>Successfully archived <x id="PH" equiv-text="projects.length"/> unit(s).</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">78</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">65</context>
-        </context-group>
-        <target state="needs-translation">Successfully archived <x id="PH" equiv-text="projects.length"/> unit(s).</target>
-      </trans-unit>
-      <trans-unit id="6233410407787231949" datatype="html">
-        <source>Successfully restored <x id="PH" equiv-text="projects.length"/> unit(s).</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">79</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">66</context>
-        </context-group>
-        <target state="needs-translation">Successfully restored <x id="PH" equiv-text="projects.length"/> unit(s).</target>
       </trans-unit>
       <trans-unit id="4649373271512187502" datatype="html">
         <source>Error archiving unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <target state="needs-translation">Error archiving unit.</target>
       </trans-unit>
@@ -8246,9 +8194,41 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Error restoring unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <target state="needs-translation">Error restoring unit.</target>
+      </trans-unit>
+      <trans-unit id="4446500764298446942" datatype="html">
+        <source>Successfully archived <x id="PH" equiv-text="count"/> unit(s).</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
+          <context context-type="linenumber">121</context>
+        </context-group>
+        <target state="needs-translation">Successfully archived <x id="PH" equiv-text="count"/> unit(s).</target>
+      </trans-unit>
+      <trans-unit id="6233410407787231949" datatype="html">
+        <source>Successfully restored <x id="PH" equiv-text="count"/> unit(s).</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
+          <context context-type="linenumber">122</context>
+        </context-group>
+        <target state="needs-translation">Successfully restored <x id="PH" equiv-text="count"/> unit(s).</target>
+      </trans-unit>
+      <trans-unit id="3755123516042132329" datatype="html">
+        <source>Error archiving unit(s).</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
+          <context context-type="linenumber">149</context>
+        </context-group>
+        <target state="needs-translation">Error archiving unit(s).</target>
+      </trans-unit>
+      <trans-unit id="3419148337120710852" datatype="html">
+        <source>Error restoring unit(s).</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
+          <context context-type="linenumber">149</context>
+        </context-group>
+        <target state="needs-translation">Error restoring unit(s).</target>
       </trans-unit>
       <trans-unit id="e931f6b80399785ea1647269f43ffeea54327cb6" datatype="html">
         <source>User Name required</source>
@@ -8822,22 +8802,6 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         </context-group>
         <target state="translated"> Dil gerekli </target>
       </trans-unit>
-      <trans-unit id="3755123516042132329" datatype="html">
-        <source>Error archiving unit(s).</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">77</context>
-        </context-group>
-        <target state="needs-translation">Error archiving unit(s).</target>
-      </trans-unit>
-      <trans-unit id="3419148337120710852" datatype="html">
-        <source>Error restoring unit(s).</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.ts</context>
-          <context context-type="linenumber">77</context>
-        </context-group>
-        <target state="needs-translation">Error restoring unit(s).</target>
-      </trans-unit>
       <trans-unit id="a2d9400df68d9f4e89fe24f6a3f40bc5322f19f2" datatype="html">
         <source>1. Choose Periods</source>
         <context-group purpose="location">
@@ -9282,7 +9246,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Run Settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <target state="translated">Ayarları Çalıştır</target>
       </trans-unit>
@@ -9290,17 +9254,9 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Edit Classroom Unit Warning</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">75</context>
         </context-group>
         <target state="translated">Sınıf Ünitesi Uyarısını Düzenle</target>
-      </trans-unit>
-      <trans-unit id="2351493690393455691" datatype="html">
-        <source>Error <x id="PH" equiv-text="archive ? &apos;archiving&apos; : &apos;unarchiving&apos;"/> unit.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
-          <context context-type="linenumber">110</context>
-        </context-group>
-        <target state="needs-translation">Error <x id="PH" equiv-text="archive ? 'archiving' : 'unarchiving'"/> unit.</target>
       </trans-unit>
       <trans-unit id="9cce5b778a46771992b9753e43f7f3dbcc8c322a" datatype="html">
         <source>Class Periods</source>
@@ -15901,10 +15857,6 @@ Are you sure you want to proceed?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">137</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
