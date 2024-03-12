@@ -127,10 +127,14 @@
       fxLayoutAlign="start center"
       class="object-image-input-container"
     >
-      <mat-form-field class="object-image-input">
-        <mat-label i18n>Image</mat-label>
-        <input matInput [(ngModel)]="object.image" (ngModelChange)="inputChange.next($event)" />
-      </mat-form-field>
+      <translatable-input
+        [content]="object"
+        key="image"
+        label="Image"
+        i18n-label
+        (defaultLanguageTextChanged)="inputChange.next($event)"
+        class="object-image-input"
+      />
       <button
         mat-raised-button
         color="primary"
