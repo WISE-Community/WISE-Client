@@ -1,0 +1,23 @@
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="applyTagsMenu"
+  matTooltip="Apply tags"
+  matTooltipPosition="above"
+  i18n-matTooltip
+>
+  <mat-icon>sell</mat-icon>
+</button>
+<mat-menu #applyTagsMenu>
+  <div class="menu-info secondary-text" i18n>Apply tags</div>
+  <mat-divider></mat-divider>
+  <div *ngFor="let tag of tags" mat-menu-item>
+    <mat-checkbox
+      color="primary"
+      [checked]="tag.checked"
+      (change)="toggleTagOnProjects(tag, $event.checked)"
+      (click)="$event.stopPropagation()"
+    >
+      {{ tag.text }}
+    </mat-checkbox>
+  </div>
+</mat-menu>

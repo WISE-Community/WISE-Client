@@ -243,7 +243,7 @@ export class TeacherRunListComponent implements OnInit {
     this.archiveProjectService.archiveProjects(this.getSelectedProjects(), archive);
   }
 
-  private getSelectedProjects(): Project[] {
+  protected getSelectedProjects(): Project[] {
     return this.filteredRuns
       .filter((run: TeacherRun) => run.project.selected)
       .map((run: TeacherRun) => run.project);

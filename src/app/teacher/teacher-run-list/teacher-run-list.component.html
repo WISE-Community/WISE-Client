@@ -69,14 +69,20 @@
         <p i18n>Looks like you don't have any archived classroom units.</p>
       </div>
     </ng-container>
-    <select-runs-controls
-      *ngIf="filteredRuns.length > 0"
-      (archiveProjectsEvent)="archiveProjects($event)"
-      [runChangedEventEmitter]="runChangedEventEmitter"
-      [runs]="filteredRuns"
-      (selectRunsOptionChosenEvent)="selectRunsOptionChosen($event)"
-      [showArchive]="!showArchivedView"
-    ></select-runs-controls>
+    <div fxLayout="row">
+      <select-runs-controls
+        *ngIf="filteredRuns.length > 0"
+        (archiveProjectsEvent)="archiveProjects($event)"
+        [runChangedEventEmitter]="runChangedEventEmitter"
+        [runs]="filteredRuns"
+        (selectRunsOptionChosenEvent)="selectRunsOptionChosen($event)"
+        [showArchive]="!showArchivedView"
+      ></select-runs-controls>
+      <apply-tags-button
+        *ngIf="getSelectedProjects().length > 0"
+        [selectedProjects]="getSelectedProjects()"
+      ></apply-tags-button>
+    </div>
     <app-timeline>
       <ng-container *ngFor="let run of filteredRuns.sort(sortByStartTimeDesc); let i = index">
         <app-timeline-item
