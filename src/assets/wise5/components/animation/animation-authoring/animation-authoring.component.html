@@ -145,10 +145,15 @@
         <mat-icon>insert_photo</mat-icon>
       </button>
     </div>
-    <mat-form-field *ngIf="object.type === 'text'" class="object-text-input">
-      <mat-label i18n>Text</mat-label>
-      <input matInput [(ngModel)]="object.text" (ngModelChange)="inputChange.next($event)" />
-    </mat-form-field>
+    <translatable-input
+      *ngIf="object.type === 'text'" 
+      [content]="object"
+      key="text"
+      label="Text"
+      i18n-label
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+      class="object-text-input"
+    />
     <span fxFlex></span>
     <button
       mat-raised-button
