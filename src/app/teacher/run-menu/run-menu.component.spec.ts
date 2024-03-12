@@ -128,7 +128,8 @@ function setRun(archived: boolean): void {
       archived: archived,
       id: 1,
       owner: owner,
-      sharedOwners: []
+      sharedOwners: [],
+      tags: []
     }
   });
 }

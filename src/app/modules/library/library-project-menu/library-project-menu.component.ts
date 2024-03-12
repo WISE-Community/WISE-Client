@@ -7,7 +7,6 @@ import { UserService } from '../../../services/user.service';
 import { ConfigService } from '../../../services/config.service';
 import { EditRunWarningDialogComponent } from '../../../teacher/edit-run-warning-dialog/edit-run-warning-dialog.component';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
-import { ArchiveProjectResponse } from '../../../domain/archiveProjectResponse';
 
 @Component({
   selector: 'app-library-project-menu',
@@ -88,16 +87,6 @@ export class LibraryProjectMenuComponent {
   }
 
   protected archive(archive: boolean): void {
-    this.archiveProjectService[archive ? 'archiveProject' : 'unarchiveProject'](
-      this.project
-    ).subscribe({
-      next: (response: ArchiveProjectResponse) => {
-        this.archiveProjectService.updateProjectArchivedStatus(this.project, response.archived);
-        this.archiveProjectService.showArchiveProjectSuccessMessage(this.project, archive);
-      },
-      error: () => {
-        this.archiveProjectService.showArchiveProjectErrorMessage(archive);
-      }
-    });
+    this.archiveProjectService.archiveProject(this.project, archive);
   }
 }
