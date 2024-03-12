@@ -1,26 +1,19 @@
 <div>
-  <mat-form-field class="system-prompt" appearance="fill">
-    <mat-label i18n>System Prompt</mat-label>
-    <textarea
-      matInput
-      [(ngModel)]="componentContent.systemPrompt"
-      (ngModelChange)="componentChanged()"
-      cdkTextareaAutosize
+  <div fxLayoutAlign="start center">
+    <span i18n>
+      Use the system prompt to instruct the chat bot how to behave. Students will not see the system
+      prompt.
+    </span>
+    <button
+      mat-icon-button
+      (click)="showSystemPromptHelp = !showSystemPromptHelp"
+      matTooltip="Help"
+      matTooltipPosition="above"
+      i18n-matTooltip
     >
-    </textarea>
-    <mat-hint fxLayoutAlign="start center" i18n
-      >Use the system prompt to instruct the chat bot how to behave. Students will not see
-      this.<button
-        mat-icon-button
-        (click)="showSystemPromptHelp = !showSystemPromptHelp"
-        matTooltip="Help"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>help</mat-icon>
-      </button>
-    </mat-hint>
-  </mat-form-field>
+      <mat-icon>help</mat-icon>
+    </button>
+  </div>
   <div *ngIf="showSystemPromptHelp" class="system-prompt-help">
     <strong i18n>System Prompt Instructions</strong>
     <p i18n>
@@ -36,6 +29,17 @@
       reasoning. Limit your response to 100 words or less.
     </p>
   </div>
+  <mat-form-field class="system-prompt" appearance="fill">
+    <mat-label i18n>System Prompt</mat-label>
+    <textarea
+      matInput
+      [(ngModel)]="componentContent.systemPrompt"
+      (ngModelChange)="componentChanged()"
+      cdkTextareaAutosize
+    >
+    </textarea>
+  </mat-form-field>
+  <p i18n>Use the prompt to instruct students what to do. Students will see the prompt.</p>
   <edit-component-prompt
     [prompt]="componentContent.prompt"
     (promptChangedEvent)="promptChanged($event)"

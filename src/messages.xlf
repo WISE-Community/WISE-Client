@@ -1157,7 +1157,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component.html</context>
@@ -15221,59 +15221,60 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4c58dd3004d2dc9515ab6b2a19c07de08ca215bc" datatype="html">
-        <source>System Prompt</source>
+      <trans-unit id="9b73685ec439da45edb058fa040a2776788680a1" datatype="html">
+        <source> Use the system prompt to instruct the chat bot how to behave. Students will not see the system prompt. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8eb069de7347c8e0a661ce3caeedcc86321b6d68" datatype="html">
-        <source>Use the system prompt to instruct the chat bot how to behave. Students will not see this.<x id="START_TAG_BUTTON" ctype="x-button" equiv-text="&lt;button
-        mat-icon-button
-        (click)=&quot;showSystemPromptHelp = !showSystemPromptHelp&quot;
-        matTooltip=&quot;Help&quot;
-        matTooltipPosition=&quot;above&quot;
-        i18n-matTooltip
-      &gt;"/><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>help<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/><x id="CLOSE_TAG_BUTTON" ctype="x-button" equiv-text="&lt;/button&gt;"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">12,21</context>
+          <context context-type="linenumber">3,6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5295731a6cd416bcfc75bcc270e291529a620b52" datatype="html">
         <source>System Prompt Instructions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6babcd7abfa4dd07470b773f231c5eaf4b399c70" datatype="html">
         <source> Use the system prompt to instruct the chat bot how to behave. Provide context, instructions, and other relevant information to help the chat bot act the way you want it to. Be as specific as possible. Students will not see the system prompt. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">26,30</context>
+          <context context-type="linenumber">19,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8f6fa76d4a23d7f0b39f750714ce4762daebe7aa" datatype="html">
         <source>Example System Prompt</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c502cd8b23fed77f2d65ec586df85a869f4dd912" datatype="html">
         <source> You are a teacher helping a student understand the greenhouse effect by using the example of the inside of a car heating up from the sun on a cold day. You do not tell them the correct answer but you do guide them to the correct answer. Also make sure they explain their reasoning. Limit your response to 100 words or less. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">32,37</context>
+          <context context-type="linenumber">25,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4c58dd3004d2dc9515ab6b2a19c07de08ca215bc" datatype="html">
+        <source>System Prompt</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9dfd95bfa6dcb82d5e54ad8506c559df99d5db0a" datatype="html">
+        <source>Use the prompt to instruct students what to do. Students will see the prompt.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="989e3e512d67ecf1ee51ebf8edc99e048d3c3959" datatype="html">
         <source>Enable Computer Avatar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
