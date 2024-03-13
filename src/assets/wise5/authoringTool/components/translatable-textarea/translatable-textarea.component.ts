@@ -10,6 +10,7 @@ import { AbstractTranslatableFieldComponent } from '../abstract-translatable-fie
   selector: 'translatable-textarea',
   imports: [CommonModule, FormsModule, MatInputModule],
   providers: [EditProjectTranslationService],
+  styleUrls: ['./translatable-textarea.component.scss'],
   templateUrl: './translatable-textarea.component.html'
 })
 export class TranslatableTextareaComponent extends AbstractTranslatableFieldComponent {}
