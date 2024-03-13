@@ -135,19 +135,11 @@
         (defaultLanguageTextChanged)="inputChange.next($event)"
         class="object-image-input"
       />
-      <button
-        mat-raised-button
-        color="primary"
-        class="button"
-        (click)="chooseImage(object)"
-        matTooltip="Choose an Image"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Image"
-        i18n-aria-label
-      >
-        <mat-icon>insert_photo</mat-icon>
-      </button>
+      <translatable-asset-chooser
+        [content]="object"
+        key="image"
+        (defaultLanguageTextChanged)="componentChanged()"
+        ></translatable-asset-chooser>
     </div>
     <mat-form-field *ngIf="object.type === 'text'" class="object-text-input">
       <mat-label i18n>Text</mat-label>
