@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { ProjectService } from './projectService';
 import { Observable, Subscription } from 'rxjs';
 import { Project } from '../../../app/domain/project';
+import { Tag } from '../../../app/domain/tag';
 
 @Injectable()
 export class TagService {
@@ -83,24 +84,20 @@ export class TagService {
     return this.getExistingTagNames().includes(tagName);
   }
 
-  retrieveUserTags(): Observable<any> {
-    return this.http.get(`/api/user/tags`);
+  retrieveUserTags(): Observable<Tag[]> {
+    return this.http.get<Tag[]>(`/api/user/tags`);
   }
 
-  applyTagToProjects(tag: any, projects: Project[]): Subscription {
+  applyTagToProjects(tag: Tag, projects: Project[]): Subscription {
     const projectIds = projects.map((project) => project.id);
-    return this.http.put(`/api/projects/tag/${tag}`, projectIds).subscribe(() => {});
+    return this.http.put(`/api/projects/tag/${tag.text}`, projectIds).subscribe();
   }
 
-  removeTagFromProjects(tag: any, projects: Project[]): Subscription {
+  removeTagFromProjects(tag: Tag, projects: Project[]): Subscription {
     let params = new HttpParams();
     for (const project of projects) {
       params = params.append('projectIds', project.id);
     }
-    return this.http
-      .delete(`/api/projects/tag/${tag}`, {
-        params: params
-      })
-      .subscribe(() => {});
+    return this.http.delete(`/api/projects/tag/${tag.text}`, { params: params }).subscribe();
   }
 }
