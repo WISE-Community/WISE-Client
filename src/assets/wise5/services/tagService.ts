@@ -1,10 +1,13 @@
 'use strict';
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { map } from 'rxjs/operators';
 import { ProjectService } from './projectService';
+import { Observable, Subscription } from 'rxjs';
+import { Project } from '../../../app/domain/project';
+import { Tag } from '../../../app/domain/tag';
 
 @Injectable()
 export class TagService {
@@ -79,5 +82,22 @@ export class TagService {
 
   hasTagName(tagName: string): boolean {
     return this.getExistingTagNames().includes(tagName);
+  }
+
+  retrieveUserTags(): Observable<Tag[]> {
+    return this.http.get<Tag[]>(`/api/user/tags`);
+  }
+
+  applyTagToProjects(tag: Tag, projects: Project[]): Subscription {
+    const projectIds = projects.map((project) => project.id);
+    return this.http.put(`/api/projects/tag/${tag.text}`, projectIds).subscribe();
+  }
+
+  removeTagFromProjects(tag: Tag, projects: Project[]): Subscription {
+    let params = new HttpParams();
+    for (const project of projects) {
+      params = params.append('projectIds', project.id);
+    }
+    return this.http.delete(`/api/projects/tag/${tag.text}`, { params: params }).subscribe();
   }
 }

@@ -47,6 +47,9 @@
   <div *ngIf="run.shared" class="info" i18n>
     Shared by {{ run.owner.firstName }} {{ run.owner.lastName }}
   </div>
+  <div fxLayout="row">
+    <div *ngFor="let tag of run.project.tags" class="tag">{{ tag }}</div>
+  </div>
 </ng-template>
 
 <mat-card
