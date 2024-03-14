@@ -33,9 +33,10 @@ export class TranslatableAssetChooserComponent extends AbstractTranslatableField
       .afterClosed()
       .pipe(filter((data) => data != null))
       .subscribe(({ assetItem }) => {
-        if (this.showTranslationInput) {
+        if (this.showTranslationInput()) {
           this.translationTextChanged.next(assetItem.fileName);
         } else {
+          this.content[this.key] = assetItem.fileName;
           this.defaultLanguageTextChanged.next(assetItem.fileName);
         }
       });
