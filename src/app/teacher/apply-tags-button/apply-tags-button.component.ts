@@ -9,8 +9,8 @@ import { Tag } from '../../domain/tag';
   styleUrls: ['./apply-tags-button.component.scss']
 })
 export class ApplyTagsButtonComponent implements OnInit {
-  protected tags: Tag[] = [];
   @Input() selectedProjects: Project[] = [];
+  protected tags: Tag[] = [];
 
   constructor(private tagService: TagService) {}
 
