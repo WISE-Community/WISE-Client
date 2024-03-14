@@ -1,0 +1,18 @@
+<h2 mat-dialog-title i18n>Manage Tags</h2>
+<mat-dialog-content>
+  <div fxLayout="column" fxLayoutGap="12px">
+    <div *ngFor="let tag of tags" fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field subscriptSizing="dynamic" fxFlex>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="tag.text"
+          (ngModelChange)="inputChanged.next({ tag: tag, text: $event })"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button cdkFocusInitial mat-dialog-close i18n>Close</button>
+</mat-dialog-actions>

@@ -5,13 +5,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { map } from 'rxjs/operators';
 import { ProjectService } from './projectService';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { Project } from '../../../app/domain/project';
 import { Tag } from '../../../app/domain/tag';
 
 @Injectable()
 export class TagService {
-  tags: any[] = [];
+  private tagChangedSource: Subject<Tag> = new Subject<Tag>();
+  public tagChanged$: Observable<Tag> = this.tagChangedSource.asObservable();
+  private tags: any[] = [];
 
   constructor(
     protected http: HttpClient,
@@ -99,5 +101,11 @@ export class TagService {
       params = params.append('projectIds', project.id);
     }
     return this.http.delete(`/api/projects/tag/${tag.text}`, { params: params }).subscribe();
+  }
+
+  updateTag(tag: Tag): Subscription {
+    return this.http.put<Tag>(`/api/user/tag/${tag.id}`, tag).subscribe((tag) => {
+      this.tagChangedSource.next(tag);
+    });
   }
 }
