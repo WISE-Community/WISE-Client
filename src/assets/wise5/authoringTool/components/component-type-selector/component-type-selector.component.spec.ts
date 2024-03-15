@@ -65,9 +65,9 @@ function selectComponent() {
   describe('select first component type', () => {
     it('changes to the first component type and the previous button becomes disabled', async () => {
       await (await componentTypeSelectorHarness.getComponentTypeSelect()).clickOptions({
-        text: 'Animation'
+        text: 'AI Chat'
       });
-      expect(component.componentType).toEqual('Animation');
+      expect(component.componentType).toEqual('AiChat');
       expect(
         await (await componentTypeSelectorHarness.getPreviousComponentTypeButton()).isDisabled()
       ).toBeTrue();
