@@ -114,7 +114,7 @@ export class WiseTinymceEditorComponent {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.editorComponent) {
-      if (changes.model && changes.model.currentValue !== this.model) {
+      if (changes.model) {
         this.editorComponent.editor.setContent(changes.model.currentValue ?? '');
       }
       if (changes.language && !this.model) {

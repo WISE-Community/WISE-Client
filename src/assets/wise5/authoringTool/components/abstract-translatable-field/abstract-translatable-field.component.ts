@@ -5,11 +5,14 @@ import { EditProjectTranslationService } from '../../../services/editProjectTran
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TranslateProjectService } from '../../../services/translateProjectService';
 import { generateRandomKey } from '../../../common/string/string';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { Translations } from '../../../../../app/domain/translations';
 
 @Directive()
 export abstract class AbstractTranslatableFieldComponent {
   @Input() content: object;
   protected currentLanguage: Signal<Language>;
+  private currentTranslations$ = toObservable(this.translateProjectService.currentTranslations);
   protected defaultLanguage: Language = this.projectService.getLocale().getDefaultLanguage();
   protected defaultLanguageText: Signal<string>;
   @Output() defaultLanguageTextChanged: Subject<string> = new Subject<string>();
@@ -18,10 +21,9 @@ export abstract class AbstractTranslatableFieldComponent {
   @Input() label: string;
   @Input() placeholder: string;
   protected showTranslationInput: Signal<boolean>;
-  protected translationText: Signal<string>;
+  protected subscriptions: Subscription = new Subscription();
+  protected translationText: string;
   protected translationTextChanged: Subject<string> = new Subject<string>();
-  protected translationTextChangedSubscription: Subscription;
-
   constructor(
     protected editProjectTranslationService: EditProjectTranslationService,
     protected projectService: TeacherProjectService,
@@ -33,22 +35,30 @@ export abstract class AbstractTranslatableFieldComponent {
 
   ngOnInit(): void {
     this.i18nId = this.content[`${this.key}.i18n`]?.id;
-    this.translationText = computed(
-      () => this.translateProjectService.currentTranslations()[this.i18nId]?.value
-    );
     this.defaultLanguageText = computed(() => this.content[this.key]);
-    this.translationTextChangedSubscription = this.translationTextChanged
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(async (text: string) => {
-        if (this.i18nId == null) {
-          await this.createI18NField();
-        }
-        this.saveTranslationText(text);
-      });
+    this.subscriptions.add(
+      this.currentTranslations$.subscribe((translations: Translations) => {
+        this.setTranslationText(translations[this.i18nId]?.value);
+      })
+    );
+    this.subscriptions.add(
+      this.translationTextChanged
+        .pipe(debounceTime(1000), distinctUntilChanged())
+        .subscribe(async (text: string) => {
+          if (this.i18nId == null) {
+            await this.createI18NField();
+          }
+          this.saveTranslationText(text);
+        })
+    );
   }
 
   ngOnDestroy(): void {
-    this.translationTextChangedSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
+  }
+
+  protected setTranslationText(text: string): void {
+    this.translationText = text;
   }
 
   private createI18NField(): Promise<any> {
