@@ -13,7 +13,7 @@
   <mat-label>{{ label }} ({{ currentLanguage().language }})</mat-label>
   <textarea
     matInput
-    [ngModel]="translationText()"
+    [ngModel]="translationText"
     (ngModelChange)="translationTextChanged.next($event)"
     placeholder="{{ placeholder }}"
     cdkTextareaAutosize
