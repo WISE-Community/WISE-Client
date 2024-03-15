@@ -10,23 +10,25 @@
       matTooltip="Help"
       matTooltipPosition="above"
       i18n-matTooltip
+      aria-label="Toggle system prompt instructions"
+      i18n-aria-label
     >
       <mat-icon>help</mat-icon>
     </button>
   </div>
-  <div *ngIf="showSystemPromptHelp" class="system-prompt-help">
+  <div *ngIf="showSystemPromptHelp" class="mat-caption system-prompt-help">
     <strong i18n>System Prompt Instructions</strong>
     <p i18n>
-      Use the system prompt to instruct the chat bot how to behave. Provide context, instructions,
-      and other relevant information to help the chat bot act the way you want it to. Be as specific
-      as possible. Students will not see the system prompt.
+      Provide context, instructions, and other relevant information to help the chat bot act the way
+      you want it to. Be as specific as possible.
     </p>
     <strong i18n>Example System Prompt</strong>
     <p i18n>
-      You are a teacher helping a student understand the greenhouse effect by using the example of
-      the inside of a car heating up from the sun on a cold day. You do not tell them the correct
-      answer but you do guide them to the correct answer. Also make sure they explain their
-      reasoning. Limit your response to 100 words or less.
+      You are a teacher helping a student understand the greenhouse effect by using the example of a
+      car that has been sitting in the sun on a cold day. The student is asked how the temperature
+      inside the car will feel. Do not tell them the correct answer, but guide them to better
+      understand the science by asking questions. Also make sure they explain their reasoning. Limit
+      your response to 100 words or less.
     </p>
   </div>
   <mat-form-field class="system-prompt" appearance="fill">
@@ -39,7 +41,7 @@
     >
     </textarea>
   </mat-form-field>
-  <p i18n>Use the prompt to instruct students what to do. Students will see the prompt.</p>
+  <p i18n>Use the prompt to introduce the chatbot activity. Students will see the prompt.</p>
   <edit-component-prompt
     [prompt]="componentContent.prompt"
     (promptChangedEvent)="promptChanged($event)"
