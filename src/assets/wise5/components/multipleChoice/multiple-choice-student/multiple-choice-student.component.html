@@ -31,7 +31,7 @@
     <div *ngFor="let choice of choices">
       <mat-checkbox
         [(ngModel)]="choice.isChecked"
-        (click)="checkboxClicked(choice.id)"
+        (change)="updateStudentChoices(choice.id)"
         [disabled]="isDisabled"
         aria-label="choice.text"
         color="primary"

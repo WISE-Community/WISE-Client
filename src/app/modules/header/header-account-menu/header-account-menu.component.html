@@ -1,7 +1,5 @@
 <button mat-icon-button [matMenuTriggerFor]="accountMenu" i18n-aria-label aria-label="Account Menu">
-  <mat-icon *ngIf="role === 'student'; else teacher"
-    >account_circle</mat-icon
-  >
+  <mat-icon *ngIf="roles.includes('student'); else teacher">account_circle</mat-icon>
   <ng-template #teacher>
     <mat-icon>account_box</mat-icon>
   </ng-template>
@@ -10,7 +8,7 @@
   <div class="header-account-menu">
     <div class="user-info" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="8px">
       <mat-icon
-        *ngIf="role === 'student'; else teacherAvatar"
+        *ngIf="roles.includes('student'); else teacherAvatar"
         i18n-aria-label
         aria-label="Account avatar"
         >account_circle</mat-icon
@@ -25,7 +23,7 @@
     </div>
     <mat-divider></mat-divider>
     <a
-      *ngIf="role === 'student'"
+      *ngIf="roles.includes('student')"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
       mat-menu-item
@@ -35,7 +33,7 @@
       <span i18n>Student Home</span>
     </a>
     <a
-      *ngIf="role !== 'student'"
+      *ngIf="roles.includes('teacher')"
       mat-menu-item
       routerLink="/teacher"
       routerLinkActive="active"
@@ -45,7 +43,7 @@
       <span i18n>Teacher Home</span>
     </a>
     <a
-      *ngIf="role === 'student'"
+      *ngIf="roles.includes('student')"
       mat-menu-item
       routerLink="/student/profile/edit"
       routerLinkActive="active"
@@ -55,7 +53,7 @@
       <span i18n>Edit Profile</span>
     </a>
     <a
-      *ngIf="role !== 'student'"
+      *ngIf="roles.includes('teacher')"
       mat-menu-item
       routerLink="/teacher/profile/edit"
       routerLinkActive="active"
@@ -64,26 +62,15 @@
       <mat-icon>edit</mat-icon>
       <span i18n>Edit Profile</span>
     </a>
-    <a *ngIf="role === 'researcher'" mat-menu-item (click)="switchToAdmin()">
+    <a *ngIf="roles.includes('researcher')" mat-menu-item (click)="switchToAdmin()">
       <mat-icon>settings</mat-icon>
       <span i18n>Researcher Tools</span>
     </a>
-    <a *ngIf="role === 'admin'" mat-menu-item (click)="switchToAdmin()">
+    <a *ngIf="roles.includes('admin')" mat-menu-item (click)="switchToAdmin()">
       <mat-icon>settings</mat-icon>
       <span i18n>Admin Tools</span>
     </a>
     <a
-      *ngIf="role === 'student'"
-      mat-menu-item
-      routerLink="/help"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-    >
-      <mat-icon>help</mat-icon>
-      <span i18n>Help</span>
-    </a>
-    <a
-      *ngIf="role !== 'student'"
       mat-menu-item
       routerLink="/help"
       routerLinkActive="active"

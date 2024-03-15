@@ -7,6 +7,8 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { DataExportComponent } from '../data-export/data-export.component';
 import { DataExportContext } from '../DataExportContext';
 import { DataExportStrategy } from './DataExportStrategy';
+import { removeHTMLTags } from '../../../common/string/string';
+import { generateCSVFile } from '../../../common/csv/csv';
 
 export abstract class AbstractDataExportStrategy implements DataExportStrategy {
   context: DataExportContext;
@@ -121,6 +123,33 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
     headerRow.push(columnName);
   }
 
+  /**
+   * Get the plain text representation of the student work.
+   * @param componentState {object} A component state that contains the student work.
+   * @returns {string} A string that can be placed in a csv cell.
+   */
+  getStudentDataString(componentState: any): string {
+    /*
+     * In Excel, if there is a cell with a long string and the cell to the
+     * right of it is empty, the long string will overlap onto cells to the
+     * right until the string ends or hits a cell that contains a value.
+     * To prevent this from occurring, we will default empty cell values to
+     * a string with a space in it. This way all values of cells are limited
+     * to displaying only in its own cell.
+     */
+    let studentDataString = ' ';
+    let componentType = componentState.componentType;
+    let componentService = this.controller.componentServiceLookupService.getService(componentType);
+    if (componentService != null && componentService.getStudentDataString != null) {
+      studentDataString = componentService.getStudentDataString(componentState);
+      studentDataString = removeHTMLTags(studentDataString);
+      studentDataString = studentDataString.replace(/"/g, '""');
+    } else {
+      studentDataString = componentState.studentData;
+    }
+    return studentDataString;
+  }
+
   generateExportFileName(
     nodeId: string,
     componentId: string,
@@ -133,5 +162,9 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
       `${runId}_step_${stepNumber}_component_` +
       `${componentNumber}_${componentTypeWithUnderscore}_work.csv`
     );
+  }
+
+  generateCSVFile(rows: any[], fileName: string): void {
+    generateCSVFile(rows, fileName);
   }
 }

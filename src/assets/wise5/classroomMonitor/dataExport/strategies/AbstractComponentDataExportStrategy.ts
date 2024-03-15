@@ -51,7 +51,6 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
   }
 
   export(): void {
-    this.controller.showDownloadingExportMessage();
     const components = [{ nodeId: this.nodeId, componentId: this.component.id }];
     this.dataExportService.retrieveStudentData(components, true, false, true).subscribe(() => {
       const columnNameToNumber = {};
@@ -66,8 +65,7 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
         this.component.id,
         this.getComponentTypeWithUnderscore()
       );
-      this.controller.generateCSVFile(rows, fileName);
-      this.controller.hideDownloadingExportMessage();
+      this.generateCSVFile(rows, fileName);
     });
   }
 

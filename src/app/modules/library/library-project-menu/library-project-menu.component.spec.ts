@@ -21,7 +21,7 @@ export class MockUserService {
     const user: User = new User();
     user.firstName = 'Demo';
     user.lastName = 'Teacher';
-    user.role = 'teacher';
+    user.roles = ['teacher'];
     user.username = 'DemoTeacher';
     user.id = 123456;
     return Observable.create((observer) => {

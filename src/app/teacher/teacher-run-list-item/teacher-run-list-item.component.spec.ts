@@ -18,7 +18,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { User } from '../../domain/user';
-import { MockArchiveProjectService } from '../../services/mock-archive-project.service';
+import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
+import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 
 export class MockTeacherService {}
 
@@ -36,6 +38,7 @@ export class MockConfigService {
 
 let component: TeacherRunListItemComponent;
 let fixture: ComponentFixture<TeacherRunListItemComponent>;
+let http: HttpClient;
 const periods = ['1', '2'];
 const projectName: string = 'Photosynthesis';
 const numStudents: number = 30;
@@ -59,13 +62,14 @@ describe('TeacherRunListItemComponent', () => {
         RouterTestingModule
       ],
       providers: [
-        { provide: ArchiveProjectService, useClass: MockArchiveProjectService },
+        ArchiveProjectService,
         { provide: ConfigService, useClass: MockConfigService },
         { provide: TeacherService, useClass: MockTeacherService },
         UserService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
+    http = TestBed.inject(HttpClient);
     userService = TestBed.inject(UserService);
     spyOn(userService, 'getUserId').and.returnValue(userId);
     fixture = TestBed.createComponent(TeacherRunListItemComponent);
@@ -114,13 +118,10 @@ function render() {
 function runArchiveStatusChanged() {
   describe('run is not archived and archive menu button is clicked', () => {
     it('should archive run and emit events', async () => {
-      const runSelectedSpy = spyOn(component.runSelectedStatusChangedEvent, 'emit');
-      const runArchiveSpy = spyOn(component.runArchiveStatusChangedEvent, 'emit');
       expect(await runListItemHarness.isArchived()).toBeFalse();
+      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(1, true)));
       await runListItemHarness.clickArchiveMenuButton();
       expect(await runListItemHarness.isArchived()).toBeTrue();
-      expect(runSelectedSpy).toHaveBeenCalled();
-      expect(runArchiveSpy).toHaveBeenCalled();
     });
   });
 }

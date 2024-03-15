@@ -37,7 +37,7 @@
       <div>
         <button
           mat-raised-button
-          (click)="setExportType('events')"
+          (click)="goToExportEventsPage()"
           aria-label="Export Events"
           i18n-aria-label
           i18n
@@ -92,18 +92,18 @@
       <div>
         <button
           mat-raised-button
-          (click)="showExportComponentDataPage()"
-          aria-label="Export Component Data"
+          (click)="goToExportItemPage()"
+          aria-label="Export Item Data"
           i18n-aria-label
           i18n
         >
-          Export Component Data
+          Export Item Data
         </button>
       </div>
       <div>
         <button
           mat-raised-button
-          (click)="setExportType('rawData')"
+          (click)="goToExportRawDataPage()"
           aria-label="Export Raw Data"
           i18n-aria-label
           i18n
@@ -127,9 +127,7 @@
       *ngIf="
         exportType === 'latestStudentWork' ||
         exportType === 'allStudentWork' ||
-        exportType === 'events' ||
-        exportType === 'oneWorkgroupPerRow' ||
-        exportType === 'rawData'
+        exportType === 'oneWorkgroupPerRow'
       "
     >
       <h4>{{ exportTypeLabel }}</h4>
@@ -194,32 +192,6 @@
           </mat-checkbox>
         </div>
       </div>
-      <div *ngIf="exportType === 'rawData'" fxLayout="column" fxLayoutGap="10px">
-        <div fxLayoutGap="20px">
-          <button mat-raised-button (click)="defaultClicked()" i18n>Default</button>
-          <button mat-raised-button (click)="everythingClicked()" i18n>Everything</button>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeStudentWork" i18n>
-            Include Student Work
-          </mat-checkbox>
-        </div>
-        <div *ngIf="canViewStudentNames">
-          <mat-checkbox color="primary" [(ngModel)]="includeStudentNames" i18n>
-            Include Student Names
-          </mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeAnnotations" i18n>
-            Include Annotations
-          </mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeEvents" i18n>
-            Include Events
-          </mat-checkbox>
-        </div>
-      </div>
       <div
         *ngIf="
           canViewStudentNames &&
@@ -230,34 +202,6 @@
           Include Student Names
         </mat-checkbox>
       </div>
-      <div *ngIf="exportType === 'events'" fxLayout="column" fxLayoutGap="10px">
-        <mat-checkbox color="primary" [(ngModel)]="includeStudentEvents" i18n>
-          Include Student Events
-        </mat-checkbox>
-        <mat-checkbox color="primary" [(ngModel)]="includeTeacherEvents" i18n>
-          Include Teacher Events
-        </mat-checkbox>
-        <mat-checkbox color="primary" [(ngModel)]="includeNames" i18n> Include Names </mat-checkbox>
-      </div>
-      <mat-radio-group
-        *ngIf="
-          exportType === 'latestStudentWork' ||
-          exportType === 'allStudentWork' ||
-          exportType === 'oneWorkgroupPerRow' ||
-          exportType === 'rawData'
-        "
-        [(ngModel)]="exportStepSelectionType"
-        class="select-steps-radio-buttons-container"
-        fxLayout="column"
-        fxLayoutGap="10px"
-      >
-        <mat-radio-button value="exportAllSteps" color="primary" i18n>
-          Export All Steps
-        </mat-radio-button>
-        <mat-radio-button value="exportSelectSteps" color="primary" i18n>
-          Select Steps To Export
-        </mat-radio-button>
-      </mat-radio-group>
       <div class="button-div" fxLayoutGap="20px">
         <button mat-raised-button (click)="export()" aria-label="Export" i18n-aria-label i18n>
           Export
@@ -272,217 +216,25 @@
           Cancel
         </button>
       </div>
-      <div *ngIf="exportStepSelectionType === 'exportSelectSteps'">
-        <div class="button-div" fxLayoutGap="20px">
-          <button
-            mat-raised-button
-            (click)="selectAll()"
-            aria-label="Select All"
-            i18n-aria-label
-            i18n
-          >
-            Select All
-          </button>
-          <button
-            mat-raised-button
-            (click)="deselectAll()"
-            aria-label="Deselect All"
-            i18n-aria-label
-            i18n
-          >
-            Deselect All
-          </button>
-        </div>
-        <div fxLayoutAlign="start center">
-          <h4>{{ project.metadata.title }}</h4>
-          <span
-            class="preview-button"
-            (click)="previewProject()"
-            matTooltip="Preview"
-            matTooltipPosition="right"
-            i18n-matTooltip
-          >
-            <mat-icon class="preview-icon">pageview</mat-icon>
-          </span>
-        </div>
-        <div *ngFor="let node of nodes" fxLayout="column">
-          <div fxLayoutAlign="start center">
-            <mat-checkbox
-              [(ngModel)]="node.checked"
-              *ngIf="node.order !== 0"
-              color="primary"
-              (ngModelChange)="nodeItemClicked(node)"
-              [ngClass]="{
-                'md-primary': true,
-                groupHeader: isGroupNode(node.node.id),
-                stepHeader: !isGroupNode(node.node.id),
-                branchPathStepHeader:
-                  isNodeInAnyBranchPath(node.node.id) && !isGroupNode(node.node.id)
-              }"
-              aria-label="Step"
-              i18n-aria-label
-            >
-              <h6>
-                {{ getNodePositionById(node.node.id) }}. {{ getNodeTitleByNodeId(node.node.id) }}
-              </h6>
-            </mat-checkbox>
-            <span
-              *ngIf="node.node.type !== 'group'"
-              class="preview-button"
-              (click)="previewNode(node.node)"
-              matTooltip="Preview"
-              matTooltipPosition="right"
-              i18n-matTooltip
-            >
-              <mat-icon class="preview-icon">pageview</mat-icon>
-            </span>
-          </div>
-          <div fxLayout="column" fxLayoutGap="10px">
-            <ng-container
-              *ngFor="let componentItem of node.node.components; index as componentIndex"
-            >
-              <div
-                *ngIf="
-                  node.order != 0 && node.node.type !== 'group' && node.node.components.length > 0
-                "
-              >
-                <mat-checkbox
-                  [(ngModel)]="componentItem.checked"
-                  color="primary"
-                  class="componentHeader"
-                  aria-label="{{ componentItem.type }}"
-                >
-                  {{ componentIndex + 1 }}. {{ componentItem.type }}
-                </mat-checkbox>
-              </div>
-            </ng-container>
-          </div>
-        </div>
-        <div class="button-div" fxLayoutGap="20px">
-          <button mat-raised-button (click)="export()" aria-label="Export" i18n-aria-label i18n>
-            Export
-          </button>
-          <button
-            mat-raised-button
-            (click)="setExportType(null)"
-            aria-label="Cancel"
-            i18n-aria-label
-            i18n
-          >
-            Cancel
-          </button>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="exportType === 'componentData'">
-      <button
-        mat-raised-button
-        (click)="setExportType(null)"
-        aria-label="Back"
-        i18n-aria-label
-        matTooltip="Back"
-        i18n-matTooltip
-      >
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-      <h4 i18n>Export Component Data</h4>
-      <div fxLayout="column" fxLayoutGap="10px">
-        <div>
-          <mat-checkbox
-            *ngIf="canViewStudentNames"
-            color="primary"
-            [(ngModel)]="includeStudentNames"
-            i18n
-          >
-            Include Student Names
-          </mat-checkbox>
-        </div>
-        <div *ngIf="canViewStudentNames">
-          <mat-checkbox color="primary" [(ngModel)]="includeCorrectnessColumns" i18n>
-            Include Correctness Columns
-          </mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeOnlySubmits" i18n>
-            Include Only Submits
-          </mat-checkbox>
-        </div>
-      </div>
-      <div fxLayoutAlign="start center">
-        <h4>{{ project.metadata.title }}</h4>
-        <span
-          class="preview-button"
-          (click)="previewProject()"
-          matTooltip="Preview"
-          matTooltipPosition="right"
-          i18n-matTooltip
+      <select-step-and-component-checkboxes
+        [(exportStepSelectionType)]="exportStepSelectionType"
+        [nodes]="nodes"
+        [projectIdToOrder]="projectIdToOrder"
+      ></select-step-and-component-checkboxes>
+      <div class="button-div" fxLayoutGap="20px">
+        <button mat-raised-button (click)="export()" aria-label="Export" i18n-aria-label i18n>
+          Export
+        </button>
+        <button
+          mat-raised-button
+          (click)="setExportType(null)"
+          aria-label="Cancel"
+          i18n-aria-label
+          i18n
         >
-          <mat-icon class="preview-icon">pageview</mat-icon>
-        </span>
+          Cancel
+        </button>
       </div>
-      <div *ngFor="let node of nodes">
-        <div fxLayoutAlign="start center">
-          <h6 *ngIf="node.order !== 0" [ngClass]="{ stepHeader: !isGroupNode(node.node.id) }">
-            {{ getNodePositionById(node.node.id) }}. {{ getNodeTitleByNodeId(node.node.id) }}
-          </h6>
-          <span
-            *ngIf="node.node.type !== 'group'"
-            (click)="previewNode(node.node)"
-            class="preview-button"
-            matTooltip="Preview"
-            matTooltipPosition="right"
-            i18n-matTooltip
-          >
-            <mat-icon class="preview-icon">pageview</mat-icon>
-          </span>
-        </div>
-        <ng-container *ngFor="let componentItem of node.node.components; index as componentIndex">
-          <div
-            *ngIf="
-              node.order !== 0 && node.node.type !== 'group' && node.node.components.length > 0
-            "
-            class="componentHeader"
-          >
-            <div fxLayoutAlign="start center" fxLayoutGap="20px">
-              <span> {{ componentIndex + 1 }}. {{ componentItem.type }} </span>
-              <button
-                mat-raised-button
-                *ngIf="canExportAllRevisionsForComponent(componentItem)"
-                color="primary"
-                class="exportComponentDataButton"
-                (click)="exportComponentAllRevisions(node.node.id, componentItem)"
-                matTooltip="Download All Revisions Export"
-                i18n-matTooltip
-              >
-                <mat-icon>file_download</mat-icon>
-                <span i18n>All</span>
-              </button>
-              <button
-                mat-raised-button
-                *ngIf="canExportLatestRevisionsForComponent(componentItem)"
-                color="primary"
-                class="exportComponentDataButton"
-                (click)="exportComponentLatestRevisions(node.node.id, componentItem)"
-                matTooltip="Download Latest Revisions Export"
-                i18n-matTooltip
-              >
-                <mat-icon>file_download</mat-icon>
-                <span i18n>Latest</span>
-              </button>
-              <span
-                *ngIf="componentExportTooltips[componentItem.type] != null"
-                matTooltip="{{ componentExportTooltips[componentItem.type] }}"
-                matTooltipPosition="right"
-              >
-                <mat-icon class="preview-icon">help</mat-icon>
-              </span>
-            </div>
-          </div>
-        </ng-container>
-      </div>
-      <button mat-raised-button (click)="setExportType(null)" matTooltip="Back" i18n-matTooltip>
-        <mat-icon>arrow_back</mat-icon>
-      </button>
     </div>
   </div>
 </div>

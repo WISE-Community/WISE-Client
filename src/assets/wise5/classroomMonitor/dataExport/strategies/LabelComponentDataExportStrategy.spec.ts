@@ -43,9 +43,7 @@ function exportAllRevisions(): void {
         'Label 1',
         'Label 2'
       ]);
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [
@@ -199,9 +197,7 @@ function exportLatestRevisions(): void {
         'Label 1',
         'Label 2'
       ]);
-      expect(
-        exportStrategyTester.componentExportStrategy.controller.generateCSVFile
-      ).toHaveBeenCalledWith(
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
           [

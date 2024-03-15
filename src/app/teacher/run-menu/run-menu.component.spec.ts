@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RunMenuComponent } from './run-menu.component';
 import { TeacherService } from '../teacher.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { ConfigService } from '../../services/config.service';
@@ -11,7 +11,7 @@ import { TeacherRun } from '../teacher-run';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Course } from '../../domain/course';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ArchiveProjectService } from '../../services/archive-project.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -19,9 +19,10 @@ import { RunMenuHarness } from './run-menu.harness';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MockArchiveProjectService } from '../../services/mock-archive-project.service';
 import { MatSnackBarHarness } from '@angular/material/snack-bar/testing';
 import { HarnessLoader } from '@angular/cdk/testing';
+import { HttpClient } from '@angular/common/http';
+import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 
 export class MockTeacherService {
   checkClassroomAuthorization(): Observable<string> {
@@ -43,7 +44,7 @@ export class MockUserService {
     const user: User = new User();
     user.firstName = 'Demo';
     user.lastName = 'Teacher';
-    user.role = 'teacher';
+    user.roles = ['teacher'];
     user.username = 'DemoTeacher';
     user.id = 123456;
     user.isGoogleUser = false;
@@ -69,7 +70,9 @@ export class MockConfigService {
 let archiveProjectService: ArchiveProjectService;
 let component: RunMenuComponent;
 let fixture: ComponentFixture<RunMenuComponent>;
+let http: HttpClient;
 const owner = new User();
+const runId1: number = 1;
 let rootLoader: HarnessLoader;
 let runMenuHarness: RunMenuHarness;
 let teacherService: TeacherService;
@@ -89,7 +92,7 @@ describe('RunMenuComponent', () => {
         ],
         declarations: [RunMenuComponent],
         providers: [
-          { provide: ArchiveProjectService, useClass: MockArchiveProjectService },
+          ArchiveProjectService,
           { provide: TeacherService, useClass: MockTeacherService },
           { provide: UserService, useClass: MockUserService },
           { provide: ConfigService, useClass: MockConfigService },
@@ -105,6 +108,7 @@ describe('RunMenuComponent', () => {
     component = fixture.componentInstance;
     setRun(false);
     archiveProjectService = TestBed.inject(ArchiveProjectService);
+    http = TestBed.inject(HttpClient);
     teacherService = TestBed.inject(TeacherService);
     fixture.detectChanges();
     runMenuHarness = await TestbedHarnessEnvironment.harnessForFixture(fixture, RunMenuHarness);
@@ -121,30 +125,34 @@ function setRun(archived: boolean): void {
     name: 'Photosynthesis',
     owner: owner,
     project: {
+      archived: archived,
       id: 1,
       owner: owner,
-      sharedOwners: []
-    },
-    archived: archived
+      sharedOwners: [],
+      tags: []
+    }
   });
 }
 
 function archive() {
   describe('archive()', () => {
     it('should archive a run', async () => {
+      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(runId1, true)));
       await runMenuHarness.clickArchiveMenuButton();
-      expect(component.run.archived).toEqual(true);
+      expect(component.run.project.archived).toEqual(true);
       const snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Successfully archived unit.');
     });
     it('should archive a run and then undo', async () => {
+      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(runId1, true)));
       await runMenuHarness.clickArchiveMenuButton();
-      expect(component.run.archived).toEqual(true);
+      expect(component.run.project.archived).toEqual(true);
       let snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Successfully archived unit.');
       expect(await snackBar.getActionDescription()).toEqual('Undo');
+      spyOn(http, 'delete').and.returnValue(of(new ArchiveProjectResponse(runId1, false)));
       await snackBar.dismissWithAction();
-      expect(component.run.archived).toEqual(false);
+      expect(component.run.project.archived).toEqual(false);
       snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Action undone.');
     });
@@ -156,21 +164,24 @@ function unarchive() {
     it('should unarchive a run', async () => {
       setRun(true);
       component.ngOnInit();
+      spyOn(http, 'delete').and.returnValue(of(new ArchiveProjectResponse(runId1, false)));
       await runMenuHarness.clickUnarchiveMenuButton();
-      expect(component.run.archived).toEqual(false);
+      expect(component.run.project.archived).toEqual(false);
       const snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Successfully restored unit.');
     });
     it('should unarchive a run and then undo', async () => {
       setRun(true);
       component.ngOnInit();
+      spyOn(http, 'delete').and.returnValue(of(new ArchiveProjectResponse(runId1, false)));
       await runMenuHarness.clickUnarchiveMenuButton();
-      expect(component.run.archived).toEqual(false);
+      expect(component.run.project.archived).toEqual(false);
       let snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Successfully restored unit.');
       expect(await snackBar.getActionDescription()).toEqual('Undo');
+      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(runId1, true)));
       await snackBar.dismissWithAction();
-      expect(component.run.archived).toEqual(true);
+      expect(component.run.project.archived).toEqual(true);
       snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Action undone.');
     });

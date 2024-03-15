@@ -8,9 +8,7 @@ import { ConfigService } from '../../services/config.service';
 import { RunSettingsDialogComponent } from '../run-settings-dialog/run-settings-dialog.component';
 import { EditRunWarningDialogComponent } from '../edit-run-warning-dialog/edit-run-warning-dialog.component';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ArchiveProjectService } from '../../services/archive-project.service';
-import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 
 @Component({
   selector: 'app-run-menu',
@@ -28,8 +26,7 @@ export class RunMenuComponent implements OnInit {
     private dialog: MatDialog,
     private userService: UserService,
     private configService: ConfigService,
-    private router: Router,
-    private snackBar: MatSnackBar
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -85,55 +82,6 @@ export class RunMenuComponent implements OnInit {
   }
 
   protected archive(archive: boolean): void {
-    this.archiveProjectService[archive ? 'archiveProject' : 'unarchiveProject'](
-      this.run.project
-    ).subscribe({
-      next: (response: ArchiveProjectResponse) => {
-        this.updateArchivedStatus(this.run, response.archived);
-        this.showSuccessMessage(this.run, archive);
-      },
-      error: () => {
-        this.showErrorMessage(archive);
-      }
-    });
-  }
-
-  private showSuccessMessage(run: TeacherRun, archive: boolean): void {
-    this.openSnackBar(
-      run,
-      $localize`Successfully ${archive ? 'archived' : 'restored'} unit.`,
-      archive ? 'unarchiveProject' : 'archiveProject'
-    );
-  }
-
-  private showErrorMessage(archive: boolean): void {
-    this.snackBar.open($localize`Error ${archive ? 'archiving' : 'unarchiving'} unit.`);
-  }
-
-  private updateArchivedStatus(run: TeacherRun, archived: boolean): void {
-    run.archived = archived;
-    this.runArchiveStatusChangedEvent.emit();
-  }
-
-  private openSnackBar(run: TeacherRun, message: string, undoFunctionName: string): void {
-    this.snackBar
-      .open(message, $localize`Undo`)
-      .onAction()
-      .subscribe(() => {
-        this.undoArchiveAction(run, undoFunctionName);
-      });
-  }
-
-  private undoArchiveAction(run: TeacherRun, archiveFunctionName: string): void {
-    this.archiveProjectService[archiveFunctionName](run.project).subscribe({
-      next: (response: ArchiveProjectResponse) => {
-        run.archived = response.archived;
-        this.archiveProjectService.refreshProjects();
-        this.snackBar.open($localize`Action undone.`);
-      },
-      error: () => {
-        this.snackBar.open($localize`Error undoing action.`);
-      }
-    });
+    this.archiveProjectService.archiveProject(this.run.project, archive);
   }
 }

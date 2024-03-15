@@ -14,7 +14,7 @@ export class HeaderAccountMenuComponent implements OnInit {
 
   firstName: string = '';
   lastName: string = '';
-  role: string = '';
+  roles: string[] = [];
   isPreviousAdmin: boolean = false;
   logOutURL: string;
   switchToOriginalUserURL = '/api/logout/impersonate';
@@ -37,7 +37,7 @@ export class HeaderAccountMenuComponent implements OnInit {
       if (user) {
         this.firstName = user.firstName;
         this.lastName = user.lastName;
-        this.role = user.role;
+        this.roles = user.roles;
         this.isPreviousAdmin = user.isPreviousAdmin;
       }
     }

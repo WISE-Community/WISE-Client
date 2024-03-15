@@ -64,7 +64,9 @@ export class ProjectService {
     this.inactiveStepNodes = [];
     this.inactiveGroupNodes = [];
     this.groupNodes = [];
-    this.idToNode = {};
+    Object.keys(this.idToNode).forEach((key) => {
+      delete this.idToNode[key];
+    });
     this.metadata = {};
     this.rootNode = null;
     this.idToOrder = {};
@@ -103,6 +105,12 @@ export class ProjectService {
 
   getGroupNodes(): any[] {
     return this.groupNodes;
+  }
+
+  getOrderedGroupNodes(): any[] {
+    return this.groupNodes
+      .filter((groupNode) => groupNode.id !== 'group0')
+      .sort((a, b) => this.idToOrder[a.id].order - this.idToOrder[b.id].order);
   }
 
   addNode(node: any): void {
@@ -1989,5 +1997,39 @@ export class ProjectService {
     const nodeId = content.getReferenceNodeId();
     const componentId = content.getReferenceComponentId();
     return new Component(this.getComponent(nodeId, componentId), nodeId);
+  }
+
+  getSpeechToTextSettings(): any {
+    return this.project.speechToText;
+  }
+
+  getPreviousNodeId(nodeId: string): string {
+    if (this.isActive(nodeId)) {
+      const parentGroup = this.getParentGroup(nodeId);
+      const childIds = parentGroup.ids;
+      return childIds[childIds.indexOf(nodeId) - 1];
+    } else {
+      const inactiveGroupNodes = this.getInactiveGroupNodes();
+      for (let i = 0; i < inactiveGroupNodes.length; i++) {
+        if (inactiveGroupNodes[i].id === nodeId) {
+          return inactiveGroupNodes[i - 1]?.id;
+        }
+      }
+    }
+    return null;
+  }
+
+  isFirstStepInLesson(nodeId: string): boolean {
+    for (const lesson of this.getGroupNodes()) {
+      if (lesson.startId === nodeId) {
+        return true;
+      }
+    }
+    for (const inactiveLesson of this.getInactiveGroupNodes()) {
+      if (inactiveLesson.startId === nodeId) {
+        return true;
+      }
+    }
+    return false;
   }
 }

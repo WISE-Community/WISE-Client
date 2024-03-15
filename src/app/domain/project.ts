@@ -16,6 +16,7 @@ export class Project {
   projectThumb: string;
   run: Run;
   sharedOwners: User[] = [];
+  selected: boolean;
   tags: string[];
   thumbStyle: any;
   uri: String;

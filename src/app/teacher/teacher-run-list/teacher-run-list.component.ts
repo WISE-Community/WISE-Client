@@ -10,6 +10,7 @@ import { ArchiveProjectService } from '../../services/archive-project.service';
 import { runSpansDays } from '../../../assets/wise5/common/datetime/datetime';
 import { SelectRunsOption } from '../select-runs-controls/select-runs-option';
 import { sortByRunStartTimeDesc } from '../../domain/run';
+import { Project } from '../../domain/project';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -28,7 +29,7 @@ export class TeacherRunListComponent implements OnInit {
   protected runs: TeacherRun[] = [];
   protected searchValue: string = '';
   protected showAll: boolean = false;
-  protected showArchived: boolean = false;
+  protected showArchivedView: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -77,7 +78,7 @@ export class TeacherRunListComponent implements OnInit {
     this.runs = runs.map((run) => {
       const teacherRun = new TeacherRun(run);
       teacherRun.shared = !teacherRun.isOwner(userId);
-      teacherRun.archived = teacherRun.project.tags.includes('archived');
+      teacherRun.project.archived = teacherRun.project.tags.includes('archived');
       return teacherRun;
     });
     this.filteredRuns = this.runs;
@@ -143,6 +144,7 @@ export class TeacherRunListComponent implements OnInit {
   private performSearchAndFilter(): void {
     this.filteredRuns = this.searchValue ? this.performSearch(this.searchValue) : this.runs;
     this.performFilter();
+    this.unselectAllRuns();
     this.runSelectedStatusChanged();
   }
 
@@ -152,9 +154,11 @@ export class TeacherRunListComponent implements OnInit {
   }
 
   private performFilter(): void {
-    this.filteredRuns = this.filteredRuns.filter((run: TeacherRun) => {
-      return (!this.showArchived && !run.archived) || (this.showArchived && run.archived);
-    });
+    this.filteredRuns = this.filteredRuns.filter(
+      (run: TeacherRun) =>
+        (!this.showArchivedView && !run.project.archived) ||
+        (this.showArchivedView && run.project.archived)
+    );
   }
 
   private performSearch(searchValue: string): TeacherRun[] {
@@ -211,7 +215,7 @@ export class TeacherRunListComponent implements OnInit {
 
   private unselectAllRuns(): void {
     for (const run of this.runs) {
-      run.selected = false;
+      run.project.selected = false;
     }
   }
 
@@ -221,7 +225,7 @@ export class TeacherRunListComponent implements OnInit {
     this.runSelectedStatusChanged();
   }
 
-  protected updateRunsInformation(): void {
+  protected refreshProjects(): void {
     this.unselectAllRuns();
     this.runSelectedStatusChanged();
     this.performSearchAndFilter();
@@ -233,5 +237,15 @@ export class TeacherRunListComponent implements OnInit {
 
   private runSelectedStatusChanged(): void {
     this.runChangedEventEmitter.emit();
+  }
+
+  protected archiveProjects(archive: boolean): void {
+    this.archiveProjectService.archiveProjects(this.getSelectedProjects(), archive);
+  }
+
+  private getSelectedProjects(): Project[] {
+    return this.filteredRuns
+      .filter((run: TeacherRun) => run.project.selected)
+      .map((run: TeacherRun) => run.project);
   }
 }

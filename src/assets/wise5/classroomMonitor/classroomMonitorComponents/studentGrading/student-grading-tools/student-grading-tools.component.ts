@@ -48,6 +48,7 @@ export class StudentGradingToolsComponent implements OnInit {
         .subscribe(({ currentWorkgroup }) => {
           this.workgroupId = currentWorkgroup.workgroupId;
           this.updateModel();
+          this.router.navigate(['team', this.workgroupId], { relativeTo: this.route });
         })
     );
   }
@@ -100,6 +101,5 @@ export class StudentGradingToolsComponent implements OnInit {
 
   protected goToTeam(workgroup: Workgroup): void {
     this.dataService.setCurrentWorkgroup(workgroup);
-    this.router.navigate(['team', workgroup.workgroupId], { relativeTo: this.route });
   }
 }

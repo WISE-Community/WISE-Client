@@ -19,14 +19,18 @@ import { TeacherRunListHarness } from './teacher-run-list.harness';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RunMenuComponent } from '../run-menu/run-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ArchiveProjectService } from '../../services/archive-project.service';
 import { MatCardModule } from '@angular/material/card';
-import { MockArchiveProjectService } from '../../services/mock-archive-project.service';
 import { MatSelectModule } from '@angular/material/select';
+import { ArchiveProjectsButtonComponent } from '../archive-projects-button/archive-projects-button.component';
+import { Project } from '../../domain/project';
+import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
+import { HttpClient } from '@angular/common/http';
+import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 
 class TeacherScheduleStubComponent {}
 
@@ -35,6 +39,7 @@ let configService: ConfigService;
 const currentTime = new Date().getTime();
 let fixture: ComponentFixture<TeacherRunListComponent>;
 let getRunsSpy: jasmine.Spy;
+let http: HttpClient;
 const run1StartTime = new Date('2020-01-01').getTime();
 const run1Title = 'First Run';
 const run2StartTime = new Date('2020-01-02').getTime();
@@ -56,12 +61,13 @@ class TeacherRunStub extends TeacherRun {
       numStudents: 10,
       owner: new User({ id: userId }),
       periods: [],
-      project: {
+      project: new Project({
+        archived: tags.includes('archived'),
         id: id,
         tags: tags,
         name: name,
         owner: new User({ id: userId })
-      },
+      }),
       startTime: startTime,
       endTime: endTime
     });
@@ -72,8 +78,14 @@ describe('TeacherRunListComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [RunMenuComponent, TeacherRunListComponent, TeacherRunListItemComponent],
+        declarations: [
+          RunMenuComponent,
+          SearchBarComponent,
+          TeacherRunListComponent,
+          TeacherRunListItemComponent
+        ],
         imports: [
+          ArchiveProjectsButtonComponent,
           BrowserAnimationsModule,
           BrowserModule,
           FormsModule,
@@ -86,17 +98,13 @@ describe('TeacherRunListComponent', () => {
           MatMenuModule,
           MatSelectModule,
           MatSnackBarModule,
+          ReactiveFormsModule,
           RouterTestingModule.withRoutes([
             { path: 'teacher/home/schedule', component: TeacherScheduleStubComponent }
           ]),
           SelectRunsControlsModule
         ],
-        providers: [
-          { provide: ArchiveProjectService, useClass: MockArchiveProjectService },
-          ConfigService,
-          TeacherService,
-          UserService
-        ],
+        providers: [ArchiveProjectService, ConfigService, TeacherService, UserService],
         schemas: [NO_ERRORS_SCHEMA]
       });
     })
@@ -104,6 +112,7 @@ describe('TeacherRunListComponent', () => {
 
   beforeEach(async () => {
     configService = TestBed.inject(ConfigService);
+    http = TestBed.inject(HttpClient);
     teacherService = TestBed.inject(TeacherService);
     userService = TestBed.inject(UserService);
     getRunsSpy = spyOn(teacherService, 'getRuns');
@@ -134,6 +143,7 @@ describe('TeacherRunListComponent', () => {
   selectRunsOptionChosen();
   unarchiveSelectedRuns();
   noRuns();
+  searchUnselectAllRuns();
 });
 
 function archiveSelectedRuns(): void {
@@ -141,6 +151,9 @@ function archiveSelectedRuns(): void {
     it('should archive selected runs', async () => {
       await runListHarness.clickRunListItemCheckbox(0);
       await runListHarness.clickRunListItemCheckbox(1);
+      spyOn(http, 'put').and.returnValue(
+        of([new ArchiveProjectResponse(3, true), new ArchiveProjectResponse(2, true)])
+      );
       await runListHarness.clickArchiveButton();
       expect(await runListHarness.getNumRunListItems()).toEqual(1);
       await expectRunTitles([run1Title]);
@@ -163,6 +176,9 @@ function unarchiveSelectedRuns(): void {
       expect(await runListHarness.getNumRunListItems()).toEqual(2);
       await runListHarness.clickRunListItemCheckbox(0);
       await runListHarness.clickRunListItemCheckbox(1);
+      spyOn(http, 'delete').and.returnValue(
+        of([new ArchiveProjectResponse(3, false), new ArchiveProjectResponse(2, false)])
+      );
       await runListHarness.clickUnarchiveButton();
       expect(await runListHarness.getNumRunListItems()).toEqual(0);
     });
@@ -293,6 +309,7 @@ function archiveRunNoLongerInActiveView() {
     it('it should no longer be displayed in the active view', async () => {
       expect(await runListHarness.isShowingArchived()).toBeFalse();
       expect(await runListHarness.getNumRunListItems()).toEqual(3);
+      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(2, true)));
       await runListHarness.clickRunListItemMenuArchiveButton(1);
       expect(await runListHarness.isShowingArchived()).toBeFalse();
       expect(await runListHarness.getNumRunListItems()).toEqual(2);
@@ -316,6 +333,7 @@ function unarchiveRunNoLongerInArchivedView() {
       expect(await runListHarness.isShowingArchived()).toBeTrue();
       expect(await runListHarness.getNumRunListItems()).toEqual(1);
       await expectRunTitles([run2Title]);
+      spyOn(http, 'delete').and.returnValue(of(new ArchiveProjectResponse(2, false)));
       await runListHarness.clickRunListItemMenuUnarchiveButton(0);
       expect(await runListHarness.isShowingArchived()).toBeTrue();
       expect(await runListHarness.getNumRunListItems()).toEqual(0);
@@ -344,6 +362,21 @@ function noRuns(): void {
         expect(await runListHarness.getNoRunsMessage()).toContain(
           "Looks like you don't have any archived classroom units."
         );
+      });
+    });
+  });
+}
+
+function searchUnselectAllRuns(): void {
+  describe('runs are selected', () => {
+    describe('perform search', () => {
+      it('unselects all runs', async () => {
+        await runListHarness.clickRunListItemCheckbox(0);
+        await runListHarness.clickRunListItemCheckbox(1);
+        await runListHarness.clickRunListItemCheckbox(2);
+        const searchInput = await runListHarness.getSearchInput();
+        await searchInput.sendKeys('first');
+        await expectRunsIsSelected([false]);
       });
     });
   });

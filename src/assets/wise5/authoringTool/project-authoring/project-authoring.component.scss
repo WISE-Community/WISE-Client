@@ -8,19 +8,6 @@
 
 .all-nodes-div {
   margin-top: 20px;
-  margin-left: 20px;
-}
-
-.groupHeader {
-  margin-left: 5px !important;
-}
-
-.stepHeader {
-  margin-left: 30px !important;
-}
-
-.branchPathStepHeader {
-  margin-left: 55px !important;
 }
 
 .componentHeader {
@@ -42,49 +29,14 @@
   line-height: 0px;
 }
 
-.regularButton {
-  min-height: 36px !important;
-  max-height: 36px !important;
-  min-width: 50px !important;
-  font-size: 10px !important;
-  line-height: 0px;
-}
-
-.createButton {
-  min-width: 50px;
-  height: 20px;
-}
-
-.projectItem:hover {
-  background-color: #add8e6;
-}
-
-.projectItemTitleDiv:hover {
-  background-color: #add8e6;
-}
-
-.projectItemTitleDiv {
-  width: 100%;
-  font-weight: initial;
-}
-
-.multiLineTooltip {
-  height: auto !important;
-  white-space: pre-line;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
 .unused-header {
   text-decoration: underline;
 }
 
-.rotate-180 {
-  transform: rotate(180deg);
-}
-
 .mat-icon {
   margin: 0px;
+}
+
+.add-lesson-button-next-to-lesson {
+  margin-top: 20px;
 }

@@ -59,10 +59,14 @@ import { EditNodeTitleComponent } from '../../assets/wise5/authoringTool/node/ed
 import { AddComponentButtonComponent } from '../../assets/wise5/authoringTool/node/add-component-button/add-component-button.component';
 import { CopyComponentButtonComponent } from '../../assets/wise5/authoringTool/node/copy-component-button/copy-component-button.component';
 import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator/save-indicator.component';
+import { ProjectAuthoringLessonComponent } from '../../assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component';
+import { ProjectAuthoringStepComponent } from '../../assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component';
+import { AddLessonButtonComponent } from '../../assets/wise5/authoringTool/add-lesson-button/add-lesson-button.component';
 
 @NgModule({
   declarations: [
     AddComponentButtonComponent,
+    AddLessonButtonComponent,
     AddLessonChooseLocationComponent,
     AddLessonChooseTemplateComponent,
     AddLessonConfigureComponent,
@@ -102,6 +106,8 @@ import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator
     ProjectInfoAuthoringComponent,
     ProjectAuthoringComponent,
     ProjectAuthoringParentComponent,
+    ProjectAuthoringLessonComponent,
+    ProjectAuthoringStepComponent,
     RecoveryAuthoringComponent,
     RequiredErrorLabelComponent,
     RubricAuthoringComponent,

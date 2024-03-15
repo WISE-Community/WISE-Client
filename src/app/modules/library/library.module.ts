@@ -49,6 +49,7 @@ import { CopyProjectDialogComponent } from './copy-project-dialog/copy-project-d
 import { LibraryPaginatorIntl } from './libraryPaginatorIntl';
 import { DiscourseCategoryActivityComponent } from './discourse-category-activity/discourse-category-activity.component';
 import { SelectAllItemsCheckboxComponent } from './select-all-items-checkbox/select-all-items-checkbox.component';
+import { ArchiveProjectsButtonComponent } from '../../teacher/archive-projects-button/archive-projects-button.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -73,6 +74,7 @@ const materialModules = [
 
 @NgModule({
   imports: [
+    ArchiveProjectsButtonComponent,
     CommonModule,
     FlexLayoutModule,
     FormsModule,

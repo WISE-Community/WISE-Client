@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { Project } from '../domain/project';
 import { ArchiveProjectResponse } from '../domain/archiveProjectResponse';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,43 +12,44 @@ export class ArchiveProjectService {
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
 
-  archiveProject(project: Project): Observable<ArchiveProjectResponse> {
-    return this.http.put<ArchiveProjectResponse>(`/api/project/${project.id}/archived`, null);
-  }
-
-  archiveProjects(projects: Project[]): Observable<ArchiveProjectResponse[]> {
-    const projectIds = projects.map((project) => project.id);
-    return this.http.put<ArchiveProjectResponse[]>(`/api/projects/archived`, projectIds);
-  }
-
-  unarchiveProject(project: Project): Observable<ArchiveProjectResponse> {
-    return this.http.delete<ArchiveProjectResponse>(`/api/project/${project.id}/archived`);
-  }
-
-  unarchiveProjects(projects: Project[]): Observable<ArchiveProjectResponse[]> {
-    let params = new HttpParams();
-    for (const project of projects) {
-      params = params.append('projectIds', project.id);
-    }
-    return this.http.delete<ArchiveProjectResponse[]>(`/api/projects/archived`, {
-      params: params
+  archiveProject(project: Project, archive: boolean): void {
+    this[archive ? 'makeArchiveProjectRequest' : 'makeUnarchiveProjectRequest'](project).subscribe({
+      next: (response: ArchiveProjectResponse) => {
+        this.updateProjectArchivedStatus(project, response.archived);
+        this.showArchiveProjectSuccessMessage(project, archive);
+      },
+      error: () => {
+        this.showArchiveProjectErrorMessage(archive);
+      }
     });
   }
 
-  refreshProjects(): void {
-    this.refreshProjectsEventSource.next();
+  private makeArchiveProjectRequest(project: Project): Observable<ArchiveProjectResponse> {
+    return this.http.put<ArchiveProjectResponse>(`/api/project/${project.id}/archived`, null);
   }
 
-  showArchiveProjectSuccessMessage(project: Project, archive: boolean): void {
+  private makeUnarchiveProjectRequest(project: Project): Observable<ArchiveProjectResponse> {
+    return this.http.delete<ArchiveProjectResponse>(`/api/project/${project.id}/archived`);
+  }
+
+  private updateProjectArchivedStatus(project: Project, archived: boolean): void {
+    project.updateArchivedStatus(archived);
+    this.refreshProjects();
+  }
+
+  private showArchiveProjectSuccessMessage(project: Project, archive: boolean): void {
     this.snackBar
       .open($localize`Successfully ${archive ? 'archived' : 'restored'} unit.`, $localize`Undo`)
       .onAction()
       .subscribe(() => {
-        this.undoArchiveProjectAction(project, archive ? 'unarchiveProject' : 'archiveProject');
+        this.undoArchiveProjectAction(
+          project,
+          archive ? 'makeUnarchiveProjectRequest' : 'makeArchiveProjectRequest'
+        );
       });
   }
 
-  undoArchiveProjectAction(project: Project, archiveFunctionName: string): void {
+  private undoArchiveProjectAction(project: Project, archiveFunctionName: string): void {
     this[archiveFunctionName](project).subscribe({
       next: (response: ArchiveProjectResponse) => {
         this.updateProjectArchivedStatus(project, response.archived);
@@ -60,38 +61,81 @@ export class ArchiveProjectService {
     });
   }
 
-  updateProjectArchivedStatus(project: Project, archived: boolean): void {
-    project.updateArchivedStatus(archived);
-    this.refreshProjects();
+  private showArchiveProjectErrorMessage(archive: boolean): void {
+    this.snackBar.open(
+      archive ? $localize`Error archiving unit.` : $localize`Error restoring unit.`
+    );
   }
 
-  updateProjectsArchivedStatus(projects: Project[], archived: boolean): void {
-    projects.forEach((project) => {
-      this.updateProjectArchivedStatus(project, archived);
+  archiveProjects(projects: Project[], archive: boolean): Subscription {
+    return this[archive ? 'makeArchiveProjectsRequest' : 'makeUnarchiveProjectsRequest'](
+      projects
+    ).subscribe({
+      next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
+        this.updateProjectsArchivedStatus(projects, archiveProjectsResponse);
+        this.openSuccessSnackBar(projects, archiveProjectsResponse, archive);
+      },
+      error: () => {
+        this.showErrorSnackBar(archive);
+      }
     });
   }
 
-  showArchiveProjectsSuccessMessage(projects: Project[], archived: boolean): void {
+  private makeArchiveProjectsRequest(projects: Project[]): Observable<ArchiveProjectResponse[]> {
+    const projectIds = projects.map((project) => project.id);
+    return this.http.put<ArchiveProjectResponse[]>(`/api/projects/archived`, projectIds);
+  }
+
+  private makeUnarchiveProjectsRequest(projects: Project[]): Observable<ArchiveProjectResponse[]> {
+    let params = new HttpParams();
+    for (const project of projects) {
+      params = params.append('projectIds', project.id);
+    }
+    return this.http.delete<ArchiveProjectResponse[]>(`/api/projects/archived`, {
+      params: params
+    });
+  }
+
+  private updateProjectsArchivedStatus(
+    projects: Project[],
+    archiveProjectsResponse: ArchiveProjectResponse[]
+  ): void {
+    for (const archiveProjectResponse of archiveProjectsResponse) {
+      const project = projects.find((project: Project) => project.id === archiveProjectResponse.id);
+      project.updateArchivedStatus(archiveProjectResponse.archived);
+    }
+    this.refreshProjects();
+  }
+
+  private openSuccessSnackBar(
+    projects: Project[],
+    archiveProjectsResponse: ArchiveProjectResponse[],
+    archived: boolean
+  ): void {
+    const count = archiveProjectsResponse.filter(
+      (response: ArchiveProjectResponse) => response.archived === archived
+    ).length;
     this.snackBar
       .open(
         archived
-          ? $localize`Successfully archived ${projects.length} unit(s).`
-          : $localize`Successfully restored ${projects.length} unit(s).`,
+          ? $localize`Successfully archived ${count} unit(s).`
+          : $localize`Successfully restored ${count} unit(s).`,
         $localize`Undo`
       )
       .onAction()
       .subscribe(() => {
-        this.undoArchiveProjects(projects, archived ? 'unarchiveProjects' : 'archiveProjects');
+        this.undoArchiveAction(
+          projects,
+          archived ? 'makeUnarchiveProjectsRequest' : 'makeArchiveProjectsRequest'
+        );
       });
   }
 
-  undoArchiveProjects(projects: Project[], archiveFunctionName: string): void {
+  private undoArchiveAction(projects: Project[], archiveFunctionName: string): void {
     this[archiveFunctionName](projects).subscribe({
-      next: (response: ArchiveProjectResponse[]) => {
-        for (const projectResponse of response) {
-          const project = projects.find((project) => project.id === projectResponse.id);
-          this.updateProjectArchivedStatus(project, projectResponse.archived);
-        }
+      next: (archiveProjectsResponse: ArchiveProjectResponse[]) => {
+        this.updateProjectsArchivedStatus(projects, archiveProjectsResponse);
+        this.refreshProjects();
         this.snackBar.open($localize`Action undone.`);
       },
       error: () => {
@@ -100,9 +144,13 @@ export class ArchiveProjectService {
     });
   }
 
-  showArchiveProjectErrorMessage(archive: boolean): void {
+  private showErrorSnackBar(archive: boolean): void {
     this.snackBar.open(
-      archive ? $localize`Error archiving unit.` : $localize`Error restoring unit.`
+      archive ? $localize`Error archiving unit(s).` : $localize`Error restoring unit(s).`
     );
+  }
+
+  private refreshProjects(): void {
+    this.refreshProjectsEventSource.next();
   }
 }

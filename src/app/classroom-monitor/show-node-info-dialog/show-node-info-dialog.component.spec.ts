@@ -72,6 +72,7 @@ describe('ShowNodeInfoDialogComponent', () => {
     spyOn(TestBed.inject(ProjectService), 'getNodeById').and.returnValue(node);
     spyOn(TestBed.inject(ProjectService), 'getNodePositionById').and.returnValue('1.1');
     spyOn(TestBed.inject(VLEProjectService), 'getSpaces').and.returnValue([]);
+    spyOn(TestBed.inject(ProjectService), 'getSpeechToTextSettings').and.returnValue({});
     spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(false);
     fixture.detectChanges();
   });
