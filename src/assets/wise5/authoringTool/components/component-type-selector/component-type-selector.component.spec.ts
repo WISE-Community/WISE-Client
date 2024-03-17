@@ -8,10 +8,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentTypeSelectorHarness } from './component-type-selector.harness';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
+import { UserService } from '../../../../../app/services/user.service';
 
 let component: ComponentTypeSelectorComponent;
 let componentTypeSelectorHarness: ComponentTypeSelectorHarness;
 let fixture: ComponentFixture<ComponentTypeSelectorComponent>;
+let userService: UserService;
 
 describe('ComponentTypeSelectorComponent', () => {
   beforeEach(async () => {
@@ -19,6 +22,7 @@ describe('ComponentTypeSelectorComponent', () => {
       declarations: [ComponentTypeSelectorComponent],
       imports: [
         BrowserAnimationsModule,
+        ComponentTypeServiceModule,
         HttpClientTestingModule,
         MatFormFieldModule,
         MatIconModule,
@@ -28,6 +32,9 @@ describe('ComponentTypeSelectorComponent', () => {
       providers: []
     });
     fixture = TestBed.createComponent(ComponentTypeSelectorComponent);
+    userService = TestBed.inject(UserService);
+    userService.isAuthenticated = true;
+    spyOn(userService, 'getRoles').and.returnValue(['researcher', 'teacher']);
     component = fixture.componentInstance;
     component.componentType = 'OpenResponse';
     fixture.detectChanges();
