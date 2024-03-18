@@ -3,6 +3,7 @@ import { ManageTagsDialogComponent } from './manage-tags-dialog.component';
 import { TagService } from '../../../assets/wise5/services/tagService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('ManageTagsDialogComponent', () => {
   let component: ManageTagsDialogComponent;
@@ -13,6 +14,7 @@ describe('ManageTagsDialogComponent', () => {
       imports: [
         HttpClientTestingModule,
         ManageTagsDialogComponent,
+        MatSnackBarModule,
         StudentTeacherCommonServicesModule
       ],
       providers: [TagService]

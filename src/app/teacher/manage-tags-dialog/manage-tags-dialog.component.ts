@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'manage-tags-dialog',
@@ -30,7 +31,7 @@ export class ManageTagsDialogComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
   protected tags: Tag[] = [];
 
-  constructor(private tagService: TagService) {}
+  constructor(private snackBar: MatSnackBar, private tagService: TagService) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -43,6 +44,7 @@ export class ManageTagsDialogComponent implements OnInit {
         .pipe(debounceTime(1000), distinctUntilChanged())
         .subscribe(({ tag }: any) => {
           this.tagService.updateTag(tag);
+          this.snackBar.open($localize`Tag updated`);
         })
     );
   }
