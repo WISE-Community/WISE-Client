@@ -26,28 +26,28 @@ import { MatInputModule } from '@angular/material/input';
   ]
 })
 export class ManageTagsDialogComponent implements OnInit {
-  inputChanged: Subject<string> = new Subject<string>();
-  inputChangedSubscription: Subscription;
+  protected inputChanged: Subject<string> = new Subject<any>();
+  private subscriptions: Subscription = new Subscription();
   protected tags: Tag[] = [];
 
   constructor(private tagService: TagService) {}
 
   ngOnInit(): void {
-    this.tagService.retrieveUserTags().subscribe((tags: Tag[]) => {
-      this.tags = tags;
-    });
-    this.inputChangedSubscription = this.inputChanged
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(({ tag }: any) => {
-        this.updateTag(tag);
-      });
+    this.subscriptions.add(
+      this.tagService.retrieveUserTags().subscribe((tags: Tag[]) => {
+        this.tags = tags;
+      })
+    );
+    this.subscriptions.add(
+      this.inputChanged
+        .pipe(debounceTime(1000), distinctUntilChanged())
+        .subscribe(({ tag }: any) => {
+          this.tagService.updateTag(tag);
+        })
+    );
   }
 
   ngOnDestroy(): void {
-    this.inputChangedSubscription.unsubscribe();
-  }
-
-  private updateTag(tag: Tag): void {
-    this.tagService.updateTag(tag);
+    this.subscriptions.unsubscribe();
   }
 }

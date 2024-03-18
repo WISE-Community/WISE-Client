@@ -4,6 +4,7 @@ import { TagService } from '../../../assets/wise5/services/tagService';
 import { Tag } from '../../domain/tag';
 import { MatDialog } from '@angular/material/dialog';
 import { ManageTagsDialogComponent } from '../manage-tags-dialog/manage-tags-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'apply-tags-button',
@@ -12,21 +13,30 @@ import { ManageTagsDialogComponent } from '../manage-tags-dialog/manage-tags-dia
 })
 export class ApplyTagsButtonComponent implements OnInit {
   @Input() selectedProjects: Project[] = [];
+  private subscriptions: Subscription = new Subscription();
   protected tags: Tag[] = [];
 
   constructor(private dialog: MatDialog, private tagService: TagService) {}
 
   ngOnInit(): void {
-    this.tagService.retrieveUserTags().subscribe((tags: Tag[]) => {
-      for (const tag of tags) {
-        tag.checked = this.doesAnyProjectHaveTag(tag);
-      }
-      this.tags = tags;
-    });
-    this.tagService.tagChanged$.subscribe((tagThatChanged: Tag) => {
-      const tag = this.tags.find((t: Tag) => t.id === tagThatChanged.id);
-      tag.text = tagThatChanged.text;
-    });
+    this.subscriptions.add(
+      this.tagService.retrieveUserTags().subscribe((tags: Tag[]) => {
+        for (const tag of tags) {
+          tag.checked = this.doesAnyProjectHaveTag(tag);
+        }
+        this.tags = tags;
+      })
+    );
+    this.subscriptions.add(
+      this.tagService.tagUpdated$.subscribe((tagThatChanged: Tag) => {
+        const tag = this.tags.find((t: Tag) => t.id === tagThatChanged.id);
+        tag.text = tagThatChanged.text;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   private doesAnyProjectHaveTag(tag: Tag): boolean {
