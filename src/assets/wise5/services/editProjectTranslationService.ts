@@ -5,7 +5,6 @@ import { Translations } from '../../../app/domain/translations';
 import { ProjectTranslationService } from './projectTranslationService';
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './configService';
-import { ProjectService } from './projectService';
 import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable()
@@ -14,7 +13,7 @@ export class EditProjectTranslationService extends ProjectTranslationService {
   constructor(
     protected configService: ConfigService,
     protected http: HttpClient,
-    protected projectService: ProjectService
+    protected projectService: TeacherProjectService
   ) {
     super(configService, http, projectService);
     toObservable(this.projectService.currentLanguage).subscribe(async (language) => {
@@ -35,7 +34,7 @@ export class EditProjectTranslationService extends ProjectTranslationService {
           this.currentTranslations.set(translations);
         }),
         catchError(() => {
-          (this.projectService as TeacherProjectService).broadcastErrorSavingProject();
+          this.projectService.broadcastErrorSavingProject();
           return throwError(
             () => new Error($localize`Error saving translation. Please try again later.`)
           );
