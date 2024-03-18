@@ -4,6 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { signal } from '@angular/core';
+import { ProjectService } from '../../assets/wise5/services/projectService';
 
 class ConfigServiceStub {
   getProjectId() {
@@ -28,6 +29,7 @@ describe('EditProjectTranslationService', () => {
         EditProjectTranslationService,
         HttpClientTestingModule,
         { provide: ConfigService, useClass: ConfigServiceStub },
+        { provide: ProjectService, useClass: TeacherProjectServiceStub },
         { provide: TeacherProjectService, useClass: TeacherProjectServiceStub }
       ],
       imports: [HttpClientTestingModule]
