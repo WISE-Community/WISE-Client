@@ -43,16 +43,15 @@
                 (ngModelChange)="inputChanged.next($event)"
               />
             </mat-form-field>
-            <mat-form-field class="rule-input form-field-no-hint" appearance="fill">
-              <mat-label i18n>Prompt</mat-label>
-              <textarea
-                matInput
-                [(ngModel)]="rule.prompt"
-                (ngModelChange)="inputChanged.next($event)"
-                cdkTextareaAutosize
-              >
-              </textarea>
-            </mat-form-field>
+            <translatable-textarea
+              [content]="rule"
+              key="prompt"
+              label="Prompt"
+              i18n-label
+              (defaultLanguageTextChanged)="inputChanged.next($event)"
+              class="rule-input"
+            >
+            </translatable-textarea>
           </div>
           <div fxLayout="column" fxLayoutAlign="start center">
             <button

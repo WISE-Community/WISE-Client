@@ -11,16 +11,14 @@
   </div>
   <div *ngIf="componentContent.questionBank?.enabled">
     <div class="custom-label">
-      <mat-form-field appearance="fill">
-        <mat-label i18n>Custom Label</mat-label>
-        <input
-          matInput
-          [(ngModel)]="componentContent.questionBank.label"
-          (ngModelChange)="inputChanged.next($event)"
-          placeholder="Question Bank"
-          i18n-placeholder
-        />
-      </mat-form-field>
+      <translatable-input
+        [content]="componentContent.questionBank"
+        key="label"
+        label="Custom Label"
+        i18n-label
+        (defaultLanguageTextChanged)="inputChanged.next($event)"
+      >
+      </translatable-input>
     </div>
     <div *ngIf="componentContent.questionBank.version === 2">
       <mat-checkbox
