@@ -11,7 +11,7 @@ import { Translations } from '../../../../../app/domain/translations';
 @Directive()
 export abstract class AbstractTranslatableFieldComponent {
   @Input() content: object;
-  protected currentLanguage: Signal<Language>;
+  protected currentLanguage: Signal<Language> = this.projectService.currentLanguage;
   private currentTranslations$ = toObservable(this.translateProjectService.currentTranslations);
   protected defaultLanguage: Language = this.projectService.getLocale().getDefaultLanguage();
   @Output() defaultLanguageTextChanged: Subject<string> = new Subject<string>();
@@ -19,7 +19,9 @@ export abstract class AbstractTranslatableFieldComponent {
   @Input() key: string;
   @Input() label: string;
   @Input() placeholder: string;
-  protected showTranslationInput: Signal<boolean>;
+  protected showTranslationInput: Signal<boolean> = computed(
+    () => !this.projectService.isDefaultLocale()
+  );
   protected subscriptions: Subscription = new Subscription();
   protected translationText: string;
   protected translationTextChanged: Subject<string> = new Subject<string>();
@@ -27,10 +29,7 @@ export abstract class AbstractTranslatableFieldComponent {
     protected editProjectTranslationService: EditProjectTranslationService,
     protected projectService: TeacherProjectService,
     protected translateProjectService: TranslateProjectService
-  ) {
-    this.currentLanguage = projectService.currentLanguage;
-    this.showTranslationInput = computed(() => !this.projectService.isDefaultLocale());
-  }
+  ) {}
 
   ngOnInit(): void {
     this.i18nId = this.content[`${this.key}.i18n`]?.id;
