@@ -20,7 +20,7 @@ export class ConfigureAutomatedAssessmentComponent {
   }
 
   protected next(): void {
-    this.router.navigate(['../../../import-step/choose-location'], {
+    this.router.navigate(['../../import-step/choose-location'], {
       relativeTo: this.route,
       state: {
         importFromProjectId: this.importFromProjectId,
