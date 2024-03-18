@@ -15,5 +15,5 @@
     (ngModelChange)="translationTextChanged.next($event)"
     placeholder="{{ placeholder }}"
   />
-  <mat-hint>[{{ defaultLanguage.language }}] {{ defaultLanguageText() }}</mat-hint>
+  <mat-hint>[{{ defaultLanguage.language }}] {{ content[key] }}</mat-hint>
 </mat-form-field>

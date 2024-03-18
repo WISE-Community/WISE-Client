@@ -14,7 +14,6 @@ export abstract class AbstractTranslatableFieldComponent {
   protected currentLanguage: Signal<Language>;
   private currentTranslations$ = toObservable(this.translateProjectService.currentTranslations);
   protected defaultLanguage: Language = this.projectService.getLocale().getDefaultLanguage();
-  protected defaultLanguageText: Signal<string>;
   @Output() defaultLanguageTextChanged: Subject<string> = new Subject<string>();
   protected i18nId: string;
   @Input() key: string;
@@ -35,7 +34,6 @@ export abstract class AbstractTranslatableFieldComponent {
 
   ngOnInit(): void {
     this.i18nId = this.content[`${this.key}.i18n`]?.id;
-    this.defaultLanguageText = computed(() => this.content[this.key]);
     this.subscriptions.add(
       this.currentTranslations$.subscribe((translations: Translations) => {
         this.setTranslationText(translations[this.i18nId]?.value);
