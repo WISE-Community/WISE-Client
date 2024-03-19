@@ -6,7 +6,6 @@ import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wis
 import { ConfigService } from '../../../services/configService';
 import { EditProjectTranslationService } from '../../../services/editProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { TranslateProjectService } from '../../../services/translateProjectService';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -21,11 +20,10 @@ export class TranslatableRichTextEditorComponent extends AbstractTranslatableFie
 
   constructor(
     private configService: ConfigService,
-    protected editProjectTranslationService: EditProjectTranslationService,
     protected projectService: TeacherProjectService,
-    protected translateProjectService: TranslateProjectService
+    protected projectTranslationService: EditProjectTranslationService
   ) {
-    super(editProjectTranslationService, projectService, translateProjectService);
+    super(projectService, projectTranslationService);
   }
 
   ngOnInit(): void {

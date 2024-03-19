@@ -1,17 +1,25 @@
-import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { ConfigService } from './configService';
+import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Observable, catchError, lastValueFrom, map, throwError } from 'rxjs';
 import { TeacherProjectService } from './teacherProjectService';
 import { Translations } from '../../../app/domain/translations';
+import { ProjectTranslationService } from './projectTranslationService';
+import { HttpClient } from '@angular/common/http';
+import { ConfigService } from './configService';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable()
-export class EditProjectTranslationService {
+export class EditProjectTranslationService extends ProjectTranslationService {
+  currentTranslations: WritableSignal<Translations> = signal({});
   constructor(
-    private configService: ConfigService,
-    private http: HttpClient,
-    private projectService: TeacherProjectService
-  ) {}
+    protected configService: ConfigService,
+    protected http: HttpClient,
+    protected projectService: TeacherProjectService
+  ) {
+    super(configService, http, projectService);
+    toObservable(this.projectService.currentLanguage).subscribe(async (language) => {
+      this.currentTranslations.set(await lastValueFrom(this.fetchTranslations(language.locale)));
+    });
+  }
 
   saveCurrentTranslations(translations: Translations): Observable<void> {
     return this.http
@@ -22,6 +30,9 @@ export class EditProjectTranslationService {
         translations
       )
       .pipe(
+        map(() => {
+          this.currentTranslations.set(translations);
+        }),
         catchError(() => {
           this.projectService.broadcastErrorSavingProject();
           return throwError(
