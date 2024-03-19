@@ -1,7 +1,7 @@
 import { Input, Signal, Output, computed, Directive } from '@angular/core';
 import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Language } from '../../../../../app/domain/language';
-import { EditProjectTranslationService } from '../../../services/editProjectTranslationService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { generateRandomKey } from '../../../common/string/string';
 import { toObservable } from '@angular/core/rxjs-interop';
@@ -26,7 +26,7 @@ export abstract class AbstractTranslatableFieldComponent {
   protected translationTextChanged: Subject<string> = new Subject<string>();
   constructor(
     protected projectService: TeacherProjectService,
-    protected projectTranslationService: EditProjectTranslationService
+    protected projectTranslationService: TeacherProjectTranslationService
   ) {}
 
   ngOnInit(): void {

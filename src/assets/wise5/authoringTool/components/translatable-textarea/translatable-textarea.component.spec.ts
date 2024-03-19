@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
-import { EditProjectTranslationService } from '../../../services/editProjectTranslationService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 describe('TranslatableTextareaComponent', () => {
   let component: TranslatableTextareaComponent;
@@ -19,7 +19,7 @@ describe('TranslatableTextareaComponent', () => {
         StudentTeacherCommonServicesModule,
         TranslatableTextareaComponent
       ],
-      providers: [EditProjectTranslationService, TeacherProjectService]
+      providers: [TeacherProjectTranslationService, TeacherProjectService]
     });
     spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
       new ProjectLocale({ default: 'en-US' })

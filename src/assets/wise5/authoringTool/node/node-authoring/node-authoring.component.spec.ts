@@ -26,7 +26,7 @@ import { EditNodeTitleComponent } from '../edit-node-title/edit-node-title.compo
 import { AddComponentButtonComponent } from '../add-component-button/add-component-button.component';
 import { CopyComponentButtonComponent } from '../copy-component-button/copy-component-button.component';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
-import { EditProjectTranslationService } from '../../../services/editProjectTranslationService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -64,7 +64,7 @@ describe('NodeAuthoringComponent', () => {
       ],
       providers: [
         ClassroomStatusService,
-        EditProjectTranslationService,
+        TeacherProjectTranslationService,
         ProjectAssetService,
         TeacherDataService,
         TeacherNodeService,

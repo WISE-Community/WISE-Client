@@ -4,7 +4,7 @@ import { WiseTinymceEditorModule } from '../../../directives/wise-tinymce-editor
 import { MatTabsModule } from '@angular/material/tabs';
 import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wise-link';
 import { ConfigService } from '../../../services/configService';
-import { EditProjectTranslationService } from '../../../services/editProjectTranslationService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -21,7 +21,7 @@ export class TranslatableRichTextEditorComponent extends AbstractTranslatableFie
   constructor(
     private configService: ConfigService,
     protected projectService: TeacherProjectService,
-    protected projectTranslationService: EditProjectTranslationService
+    protected projectTranslationService: TeacherProjectTranslationService
   ) {
     super(projectService, projectTranslationService);
   }

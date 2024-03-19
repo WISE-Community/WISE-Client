@@ -6,7 +6,7 @@ import { ProjectTranslationService } from './projectTranslationService';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable()
-export class TranslateProjectService extends ProjectTranslationService {
+export class StudentProjectTranslationService extends ProjectTranslationService {
   currentTranslations = toSignal(
     toObservable(this.projectService.currentLanguage).pipe(
       switchMap((language) =>

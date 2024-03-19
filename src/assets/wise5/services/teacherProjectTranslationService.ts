@@ -8,7 +8,7 @@ import { ConfigService } from './configService';
 import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable()
-export class EditProjectTranslationService extends ProjectTranslationService {
+export class TeacherProjectTranslationService extends ProjectTranslationService {
   currentTranslations: WritableSignal<Translations> = signal({});
   constructor(
     protected configService: ConfigService,

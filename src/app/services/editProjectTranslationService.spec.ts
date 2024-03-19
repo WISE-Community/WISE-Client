@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { EditProjectTranslationService } from '../../assets/wise5/services/editProjectTranslationService';
+import { TeacherProjectTranslationService } from '../../assets/wise5/services/teacherProjectTranslationService';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -21,12 +21,12 @@ class TeacherProjectServiceStub {
 
 let http: HttpTestingController;
 let projectService: TeacherProjectService;
-let service: EditProjectTranslationService;
-describe('EditProjectTranslationService', () => {
+let service: TeacherProjectTranslationService;
+describe('TeacherProjectTranslationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        EditProjectTranslationService,
+        TeacherProjectTranslationService,
         HttpClientTestingModule,
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: ProjectService, useClass: TeacherProjectServiceStub },
@@ -36,7 +36,7 @@ describe('EditProjectTranslationService', () => {
     });
     http = TestBed.inject(HttpTestingController);
     projectService = TestBed.inject(TeacherProjectService);
-    service = TestBed.inject(EditProjectTranslationService);
+    service = TestBed.inject(TeacherProjectTranslationService);
   });
   describe('saveCurrentTranslations()', () => {
     it('makes a POST request to backend', () => {
