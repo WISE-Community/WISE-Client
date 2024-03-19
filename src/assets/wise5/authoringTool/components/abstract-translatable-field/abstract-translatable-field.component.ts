@@ -63,11 +63,8 @@ export abstract class AbstractTranslatableFieldComponent {
   }
 
   protected saveTranslationText(text: string): void {
-    this.projectService.broadcastSavingProject();
     const currentTranslations = this.projectTranslationService.currentTranslations();
     currentTranslations[this.i18nId] = { value: text, modified: new Date().getTime() };
-    this.projectTranslationService.saveCurrentTranslations(currentTranslations).subscribe(() => {
-      this.projectService.broadcastProjectSaved();
-    });
+    this.projectTranslationService.saveCurrentTranslations(currentTranslations).subscribe();
   }
 }

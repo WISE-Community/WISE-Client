@@ -17,6 +17,8 @@ class TeacherProjectServiceStub {
     language: 'Spanish',
     locale: 'es'
   });
+  broadcastSavingProject(): void {}
+  broadcastProjectSaved(): void {}
 }
 
 let http: HttpTestingController;

@@ -22,6 +22,7 @@ export class TeacherProjectTranslationService extends ProjectTranslationService 
   }
 
   saveCurrentTranslations(translations: Translations): Observable<void> {
+    this.projectService.broadcastSavingProject();
     return this.http
       .post<void>(
         `/api/author/project/translate/${this.configService.getProjectId()}/${
@@ -32,6 +33,7 @@ export class TeacherProjectTranslationService extends ProjectTranslationService 
       .pipe(
         map(() => {
           this.currentTranslations.set(translations);
+          this.projectService.broadcastProjectSaved();
         }),
         catchError(() => {
           this.projectService.broadcastErrorSavingProject();
