@@ -7,6 +7,8 @@
 <mat-tab-group *ngIf="showTranslationInput()" mat-stretch-tabs="false">
   <mat-tab label="{{ currentLanguage().language }}"
     ><ng-template matTabContent
+      ><button mat-button color="primary" (click)="copyDefaultLanguageText()" i18n>
+        Copy content from {{ defaultLanguage.language }}</button
       ><wise-authoring-tinymce-editor
         [language]="currentLanguage()"
         [(model)]="translationText"
@@ -20,6 +22,9 @@
         >Editing is disabled. Please switch back to {{ defaultLanguage.language }} if you want to
         edit.</span
       >
+      <button mat-button color="primary" (click)="copyDefaultLanguageText()" i18n>
+        Copy content to {{ currentLanguage().language }}
+      </button>
       <wise-authoring-tinymce-editor [model]="html" disabled="true"></wise-authoring-tinymce-editor>
     </ng-template>
   </mat-tab>
