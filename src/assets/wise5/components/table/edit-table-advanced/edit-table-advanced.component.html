@@ -255,8 +255,7 @@
 </div>
 <edit-component-max-submit
   *ngIf="componentContent.showSubmitButton"
-  [(maxSubmitCount)]="componentContent.maxSubmitCount"
-  (maxSubmitCountChange)="maxSubmitCountChanged($event)"
+  [componentContent]="componentContent"
 >
 </edit-component-max-submit>
 <edit-component-default-feedback [componentContent]="componentContent">
