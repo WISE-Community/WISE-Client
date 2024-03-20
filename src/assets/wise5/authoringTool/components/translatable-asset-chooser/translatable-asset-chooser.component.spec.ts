@@ -4,9 +4,9 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { MatDialogModule } from '@angular/material/dialog';
-import { EditProjectTranslationService } from '../../../services/editProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 describe('TranslatableAssetChooserComponent', () => {
   let component: TranslatableAssetChooserComponent;
@@ -21,7 +21,7 @@ describe('TranslatableAssetChooserComponent', () => {
         StudentTeacherCommonServicesModule,
         TranslatableAssetChooserComponent
       ],
-      providers: [EditProjectTranslationService, TeacherProjectService]
+      providers: [TeacherProjectService, TeacherProjectTranslationService]
     });
     spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
       new ProjectLocale({ default: 'en-US' })

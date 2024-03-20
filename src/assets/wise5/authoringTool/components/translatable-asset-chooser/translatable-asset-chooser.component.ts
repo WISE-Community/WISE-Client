@@ -7,9 +7,8 @@ import { AssetChooser } from '../../project-asset-authoring/asset-chooser';
 import { MatDialog } from '@angular/material/dialog';
 import { filter } from 'rxjs';
 import { AbstractTranslatableFieldComponent } from '../abstract-translatable-field/abstract-translatable-field.component';
-import { EditProjectTranslationService } from '../../../services/editProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { TranslateProjectService } from '../../../services/translateProjectService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 @Component({
   standalone: true,
@@ -21,11 +20,10 @@ import { TranslateProjectService } from '../../../services/translateProjectServi
 export class TranslatableAssetChooserComponent extends AbstractTranslatableFieldComponent {
   constructor(
     private dialog: MatDialog,
-    protected editProjectTranslationService: EditProjectTranslationService,
     protected projectService: TeacherProjectService,
-    protected translateProjectService: TranslateProjectService
+    protected projectTranslationService: TeacherProjectTranslationService
   ) {
-    super(editProjectTranslationService, projectService, translateProjectService);
+    super(projectService, projectTranslationService);
   }
 
   protected chooseAsset(): void {
