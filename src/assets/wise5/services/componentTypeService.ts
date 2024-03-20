@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
+import { UserService } from '../../../app/services/user.service';
 
 @Injectable()
 export class ComponentTypeService {
-  constructor(private componentServiceLookupService: ComponentServiceLookupService) {}
+  constructor(
+    private componentServiceLookupService: ComponentServiceLookupService,
+    private userService: UserService
+  ) {}
 
   getComponentTypes(): any[] {
-    return [
-      { type: 'AiChat', name: this.getComponentTypeLabel('AiChat') },
+    const componentTypes = [
       { type: 'Animation', name: this.getComponentTypeLabel('Animation') },
       { type: 'AudioOscillator', name: this.getComponentTypeLabel('AudioOscillator') },
       { type: 'ConceptMap', name: this.getComponentTypeLabel('ConceptMap') },
@@ -28,6 +31,14 @@ export class ComponentTypeService {
       { type: 'Summary', name: this.getComponentTypeLabel('Summary') },
       { type: 'Table', name: this.getComponentTypeLabel('Table') }
     ];
+    if (
+      this.userService.isAdmin() ||
+      this.userService.isResearcher() ||
+      this.userService.isTrustedAuthor()
+    ) {
+      componentTypes.unshift({ type: 'AiChat', name: this.getComponentTypeLabel('AiChat') });
+    }
+    return componentTypes;
   }
 
   getComponentTypeLabel(componentType: string): string {

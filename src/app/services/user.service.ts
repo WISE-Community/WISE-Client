@@ -38,11 +38,27 @@ export class UserService {
   }
 
   isStudent(): boolean {
-    return this.isAuthenticated && this.getRoles().includes('student');
+    return this.isRole('student');
   }
 
   isTeacher(): boolean {
-    return this.isAuthenticated && this.getRoles().includes('teacher');
+    return this.isRole('teacher');
+  }
+
+  isTrustedAuthor(): boolean {
+    return this.isRole('trustedAuthor');
+  }
+
+  isResearcher(): boolean {
+    return this.isRole('researcher');
+  }
+
+  isAdmin(): boolean {
+    return this.isRole('admin');
+  }
+
+  private isRole(role: string): boolean {
+    return this.isAuthenticated && this.getRoles().includes(role);
   }
 
   getRoles(): string[] {
