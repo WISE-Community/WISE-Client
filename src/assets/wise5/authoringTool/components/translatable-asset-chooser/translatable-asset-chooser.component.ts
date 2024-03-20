@@ -15,7 +15,8 @@ import { TranslateProjectService } from '../../../services/translateProjectServi
   standalone: true,
   selector: 'translatable-asset-chooser',
   imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
-  templateUrl: './translatable-asset-chooser.component.html'
+  templateUrl: './translatable-asset-chooser.component.html',
+  styleUrls: ['./translatable-asset-chooser.component.scss']
 })
 export class TranslatableAssetChooserComponent extends AbstractTranslatableFieldComponent {
   constructor(
