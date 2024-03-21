@@ -17074,7 +17074,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Enable Computer Avatar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c50661356b4d4941e7eb9b151c65f5f5897d236e" datatype="html">
