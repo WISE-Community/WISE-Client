@@ -44,7 +44,7 @@ $notice-bg: map-get($default-colors, notice-bg);
 }
 
 .scoring-rule-score {
-  width: 5%;
+  width: 10%;
 }
 
 .scoring-rule-feedback-text {
@@ -81,4 +81,8 @@ $notice-bg: map-get($default-colors, notice-bg);
 
 .custom-completion-criteria-action {
   width: 8%;
+}
+
+.mat-icon {
+  margin: 0;
 }
