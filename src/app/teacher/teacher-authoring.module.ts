@@ -32,7 +32,7 @@ import { MilestoneReportService } from '../../assets/wise5/services/milestoneRep
 import { AuthoringRoutingModule } from './authoring-routing.module';
 import { RouterModule } from '@angular/router';
 import { ComponentInfoService } from '../../assets/wise5/services/componentInfoService';
-import { EditProjectTranslationService } from '../../assets/wise5/services/editProjectTranslationService';
+import { TeacherProjectTranslationService } from '../../assets/wise5/services/teacherProjectTranslationService';
 
 @NgModule({
   imports: [StudentTeacherCommonModule, AuthoringToolModule, RouterModule, AuthoringRoutingModule],
@@ -43,7 +43,7 @@ import { EditProjectTranslationService } from '../../assets/wise5/services/editP
     CopyProjectService,
     DataExportService,
     { provide: DataService, useExisting: TeacherDataService },
-    EditProjectTranslationService,
+    TeacherProjectTranslationService,
     GetWorkgroupService,
     DeleteNodeService,
     ImportComponentService,

@@ -1,9 +1,8 @@
 import { Input, Signal, Output, computed, Directive } from '@angular/core';
 import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Language } from '../../../../../app/domain/language';
-import { EditProjectTranslationService } from '../../../services/editProjectTranslationService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { TranslateProjectService } from '../../../services/translateProjectService';
 import { generateRandomKey } from '../../../common/string/string';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Translations } from '../../../../../app/domain/translations';
@@ -12,7 +11,7 @@ import { Translations } from '../../../../../app/domain/translations';
 export abstract class AbstractTranslatableFieldComponent {
   @Input() content: object;
   protected currentLanguage: Signal<Language> = this.projectService.currentLanguage;
-  private currentTranslations$ = toObservable(this.translateProjectService.currentTranslations);
+  private currentTranslations$ = toObservable(this.projectTranslationService.currentTranslations);
   protected defaultLanguage: Language = this.projectService.getLocale().getDefaultLanguage();
   @Output() defaultLanguageTextChanged: Subject<string> = new Subject<string>();
   protected i18nId: string;
@@ -26,9 +25,8 @@ export abstract class AbstractTranslatableFieldComponent {
   protected translationText: string;
   protected translationTextChanged: Subject<string> = new Subject<string>();
   constructor(
-    protected editProjectTranslationService: EditProjectTranslationService,
     protected projectService: TeacherProjectService,
-    protected translateProjectService: TranslateProjectService
+    protected projectTranslationService: TeacherProjectTranslationService
   ) {}
 
   ngOnInit(): void {
@@ -65,13 +63,8 @@ export abstract class AbstractTranslatableFieldComponent {
   }
 
   protected saveTranslationText(text: string): void {
-    this.projectService.broadcastSavingProject();
-    const currentTranslations = this.translateProjectService.currentTranslations();
+    const currentTranslations = this.projectTranslationService.currentTranslations();
     currentTranslations[this.i18nId] = { value: text, modified: new Date().getTime() };
-    this.editProjectTranslationService
-      .saveCurrentTranslations(currentTranslations)
-      .subscribe(() => {
-        this.projectService.broadcastProjectSaved();
-      });
+    this.projectTranslationService.saveCurrentTranslations(currentTranslations).subscribe();
   }
 }

@@ -165,16 +165,17 @@
     fxLayout="row"
     fxLayoutAlign="start center"
   >
-    <mat-form-field class="name">
-      <mat-label i18n>Target Bucket Name</mat-label>
-      <input
-        matInput
-        [(ngModel)]="bucket.value"
-        (ngModelChange)="inputChange.next($event)"
-        placeholder="Type text or choose an image"
-        i18n-placeholder
-      />
-    </mat-form-field>
+    <translatable-input
+      [content]="bucket"
+      key="value"
+      label="Target Bucket Name"
+      i18n-label
+      placeholder="Type text or choose an image"
+      i18n-placeholder
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+      class="name"
+    >
+    </translatable-input>
     <button
       mat-raised-button
       color="primary"
@@ -250,16 +251,16 @@
       class="choice-feedback-container notice-bg-bg"
     >
       <span i18n> Choice: {{ getChoiceTextById(choiceFeedback.choiceId) }} </span>
-      <div layout="row">
-        <mat-form-field class="feedback">
-          <mat-label i18n>Feedback</mat-label>
-          <input
-            matInput
-            color="primary"
-            [(ngModel)]="choiceFeedback.feedback"
-            (ngModelChange)="feedbackChange.next($event)"
-          />
-        </mat-form-field>
+      <div fxLayout="row">
+        <translatable-input
+          [content]="choiceFeedback"
+          key="feedback"
+          label="Feedback"
+          i18n-label
+          (defaultLanguageTextChanged)="feedbackChange.next($event)"
+          class="feedback"
+        >
+        </translatable-input>
         <mat-checkbox
           color="primary"
           [(ngModel)]="choiceFeedback.isCorrect"
@@ -280,14 +281,15 @@
             (ngModelChange)="feedbackChange.next($event)"
           />
         </mat-form-field>
-        <mat-form-field class="incorrect-position-feedback">
-          <mat-label i18n>Incorrect Position Feedback</mat-label>
-          <input
-            matInput
-            [(ngModel)]="choiceFeedback.incorrectPositionFeedback"
-            (ngModelChange)="feedbackChange.next($event)"
-          />
-        </mat-form-field>
+        <translatable-input
+          [content]="choiceFeedback"
+          key="incorrectPositionFeedback"
+          label="Incorrect Position Feedback"
+          i18n-label
+          (defaultLanguageTextChanged)="feedbackChange.next($event)"
+          class="incorrect-position-feedback"
+        >
+        </translatable-input>
       </div>
     </div>
   </div>
