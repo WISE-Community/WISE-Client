@@ -12,7 +12,7 @@ import { StudentAccountMenuComponent } from '../../../assets/wise5/vle/student-a
 import { Notification } from '../../domain/notification';
 import { getAvatarColorForWorkgroupId } from '../../../assets/wise5/common/workgroup/workgroup';
 import { Language } from '../../domain/language';
-import { TranslateProjectService } from '../../../assets/wise5/services/translateProjectService';
+import { StudentProjectTranslationService } from '../../../assets/wise5/services/studentProjectTranslationService';
 import { ProjectLocale } from '../../domain/projectLocale';
 
 @Component({
@@ -44,7 +44,7 @@ export class TopBarComponent {
     private notificationService: NotificationService,
     private projectService: ProjectService,
     private studentDataService: StudentDataService,
-    private translateProjectService: TranslateProjectService
+    private projectTranslationService: StudentProjectTranslationService
   ) {}
 
   ngOnInit() {
@@ -150,6 +150,6 @@ export class TopBarComponent {
   }
 
   protected changeLanguage(language: Language): void {
-    this.translateProjectService.translate(language.locale);
+    this.projectTranslationService.translate(language.locale);
   }
 }

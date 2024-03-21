@@ -5,6 +5,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 describe('TranslatableInputComponent', () => {
   let component: TranslatableInputComponent;
@@ -18,7 +19,7 @@ describe('TranslatableInputComponent', () => {
         StudentTeacherCommonServicesModule,
         TranslatableInputComponent
       ],
-      providers: [TeacherProjectService]
+      providers: [TeacherProjectTranslationService, TeacherProjectService]
     });
     spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
       new ProjectLocale({ default: 'en-US' })

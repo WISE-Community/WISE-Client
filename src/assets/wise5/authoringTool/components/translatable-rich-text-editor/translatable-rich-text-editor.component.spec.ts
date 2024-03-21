@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslatableRichTextEditorComponent } from './translatable-rich-text-editor.component';
 import { ConfigService } from '../../../services/configService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { EditProjectTranslationService } from '../../../services/editProjectTranslationService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
@@ -18,7 +18,7 @@ describe('TranslatableRichTextEditorComponent', () => {
         StudentTeacherCommonServicesModule,
         TranslatableRichTextEditorComponent
       ],
-      providers: [ConfigService, EditProjectTranslationService, TeacherProjectService]
+      providers: [ConfigService, TeacherProjectTranslationService, TeacherProjectService]
     });
     spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
       new ProjectLocale({ default: 'en-US' })

@@ -134,14 +134,14 @@
   fxLayoutAlign="start center"
   class="custom-label-color-container"
 >
-  <mat-form-field class="long-input">
-    <mat-label i18n>Label</mat-label>
-    <input
-      matInput
-      [(ngModel)]="customLabelColor.label"
-      (ngModelChange)="inputChange.next($event)"
-    />
-  </mat-form-field>
+  <translatable-input
+    [content]="customLabelColor"
+    key="label"
+    label="Label"
+    i18n-label
+    (defaultLanguageTextChanged)="inputChange.next($event)"
+    class="long-input"
+  ></translatable-input>
   <mat-form-field class="short-input">
     <mat-label i18n>Color</mat-label>
     <input

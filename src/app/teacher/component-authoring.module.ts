@@ -87,6 +87,7 @@ import { EditComponentAdvancedButtonComponent } from '../../assets/wise5/authori
 import { TranslatableInputComponent } from '../../assets/wise5/authoringTool/components/translatable-input/translatable-input.component';
 import { TranslatableTextareaComponent } from '../../assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';
+import { TranslatableAssetChooserComponent } from '../../assets/wise5/authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
 
 @NgModule({
   declarations: [
@@ -176,6 +177,7 @@ import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authorin
     ConstraintAuthoringModule,
     StudentTeacherCommonModule,
     PeerGroupingAuthoringModule,
+    TranslatableAssetChooserComponent,
     TranslatableInputComponent,
     TranslatableRichTextEditorComponent,
     TranslatableTextareaComponent,

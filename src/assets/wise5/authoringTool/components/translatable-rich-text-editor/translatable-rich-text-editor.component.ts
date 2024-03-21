@@ -1,12 +1,11 @@
-import { Component, computed } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractTranslatableFieldComponent } from '../abstract-translatable-field/abstract-translatable-field.component';
 import { WiseTinymceEditorModule } from '../../../directives/wise-tinymce-editor/wise-tinymce-editor.module';
-import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wise-link';
 import { ConfigService } from '../../../services/configService';
-import { EditProjectTranslationService } from '../../../services/editProjectTranslationService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { TranslateProjectService } from '../../../services/translateProjectService';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -21,29 +20,19 @@ export class TranslatableRichTextEditorComponent extends AbstractTranslatableFie
 
   constructor(
     private configService: ConfigService,
-    protected editProjectTranslationService: EditProjectTranslationService,
     protected projectService: TeacherProjectService,
-    protected translateProjectService: TranslateProjectService
+    protected projectTranslationService: TeacherProjectTranslationService
   ) {
-    super(editProjectTranslationService, projectService, translateProjectService);
+    super(projectService, projectTranslationService);
   }
 
   ngOnInit(): void {
     super.ngOnInit();
     this.html = this.projectService.replaceAssetPaths(replaceWiseLinks(this.content[this.key]));
-    this.translationText = computed(() =>
-      this.projectService.replaceAssetPaths(
-        replaceWiseLinks(this.translateProjectService.currentTranslations()[this.i18nId]?.value)
-      )
-    );
   }
 
-  protected setLanguage(event: MatTabChangeEvent): void {
-    // this call is required to fetch and keep the translations for the
-    // current language up-to-date when switching between language tabs
-    if (event.index === 0) {
-      this.projectService.setCurrentLanguage(this.projectService.currentLanguage());
-    }
+  protected setTranslationText(text: string): void {
+    this.translationText = this.projectService.replaceAssetPaths(replaceWiseLinks(text));
   }
 
   protected saveDefaultLanguageText(): void {
