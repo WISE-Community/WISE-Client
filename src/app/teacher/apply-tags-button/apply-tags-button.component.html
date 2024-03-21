@@ -20,4 +20,6 @@
       {{ tag.text }}
     </mat-checkbox>
   </div>
+  <mat-divider></mat-divider>
+  <div (click)="manageTags(); $event.stopPropagation()" mat-menu-item i18n>Manage Tags</div>
 </mat-menu>

@@ -36,7 +36,7 @@ function retrieveRunTags() {
     const req = http.expectOne(`/api/tag/run/${configService.getRunId()}`);
     expect(req.request.method).toEqual('GET');
     req.flush(response);
-    expect(service.tags).toEqual(response);
+    expect(service.getTags()).toEqual(response);
   });
 }
 

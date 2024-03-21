@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
+import { ManageTagsDialogComponent } from '../manage-tags-dialog/manage-tags-dialog.component';
 
 @NgModule({
   declarations: [ApplyTagsButtonComponent],
@@ -19,6 +20,7 @@ import { MatDividerModule } from '@angular/material/divider';
     CommonModule,
     FlexLayoutModule,
     FormsModule,
+    ManageTagsDialogComponent,
     MatButtonModule,
     MatCheckboxModule,
     MatDividerModule,
