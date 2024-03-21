@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
@@ -11,6 +11,9 @@ import { NotificationsDialogComponent } from '../../../assets/wise5/vle/notifica
 import { StudentAccountMenuComponent } from '../../../assets/wise5/vle/student-account-menu/student-account-menu.component';
 import { Notification } from '../../domain/notification';
 import { getAvatarColorForWorkgroupId } from '../../../assets/wise5/common/workgroup/workgroup';
+import { Language } from '../../domain/language';
+import { StudentProjectTranslationService } from '../../../assets/wise5/services/studentProjectTranslationService';
+import { ProjectLocale } from '../../domain/projectLocale';
 
 @Component({
   selector: 'top-bar',
@@ -22,13 +25,15 @@ export class TopBarComponent {
 
   avatarColor: string;
   completionPercent: number;
+  protected hasTranslations: boolean;
   homeURL: string;
   isConstraintsDisabled: boolean = false;
   isPreview: boolean = false;
   logoURL: string;
   newNotifications: Notification[] = [];
   notifications: Notification[] = [];
-  projectName: string;
+  protected projectLocale: ProjectLocale;
+  @Input() projectName: string;
   subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -38,15 +43,17 @@ export class TopBarComponent {
     private nodeStatusService: NodeStatusService,
     private notificationService: NotificationService,
     private projectService: ProjectService,
-    private studentDataService: StudentDataService
+    private studentDataService: StudentDataService,
+    private projectTranslationService: StudentProjectTranslationService
   ) {}
 
   ngOnInit() {
     this.avatarColor = getAvatarColorForWorkgroupId(this.configService.getWorkgroupId());
     this.logoURL = `${this.projectService.getThemePath()}/images/WISE-logo-ffffff.svg`;
-    this.projectName = this.projectService.getProjectTitle();
     this.isPreview = this.configService.isPreview();
     this.isConstraintsDisabled = !this.configService.getConfigParam('constraints');
+    this.projectLocale = this.projectService.getLocale();
+    this.hasTranslations = this.projectLocale.hasTranslations();
 
     this.setCompletionPercent();
     this.subscribeToStudentData();
@@ -140,5 +147,9 @@ export class TopBarComponent {
     } else {
       this.homeURL = '/';
     }
+  }
+
+  protected changeLanguage(language: Language): void {
+    this.projectTranslationService.translate(language.locale);
   }
 }

@@ -1,0 +1,19 @@
+<mat-form-field *ngIf="!showTranslationInput()">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    [(ngModel)]="content[key]"
+    (ngModelChange)="defaultLanguageTextChanged.next($event)"
+    placeholder="{{ placeholder }}"
+  />
+</mat-form-field>
+<mat-form-field *ngIf="showTranslationInput()">
+  <mat-label>{{ label }} ({{ currentLanguage().language }})</mat-label>
+  <input
+    matInput
+    [ngModel]="translationText"
+    (ngModelChange)="translationTextChanged.next($event)"
+    placeholder="{{ placeholder }}"
+  />
+  <mat-hint>[{{ defaultLanguage.language }}] {{ content[key] }}</mat-hint>
+</mat-form-field>

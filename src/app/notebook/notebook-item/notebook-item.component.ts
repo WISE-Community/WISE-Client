@@ -55,6 +55,10 @@ export class NotebookItemComponent {
     );
   }
 
+  ngOnChanges(): void {
+    this.label = this.config.itemTypes[this.type].label;
+  }
+
   ngOnDestroy(): void {
     this.notebookUpdatedSubscription.unsubscribe();
   }

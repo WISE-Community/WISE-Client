@@ -16,6 +16,8 @@ import { MockNodeService } from '../../common/MockNodeService';
 import { AnimationAuthoring } from './animation-authoring.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 
 export class MockConfigService {}
 
@@ -27,6 +29,7 @@ describe('AnimationAuthoring', () => {
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
+        ComponentAuthoringModule,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,
@@ -44,9 +47,13 @@ describe('AnimationAuthoring', () => {
         TeacherProjectService
       ]
     });
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(AnimationAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
       copy(componentContent)
     );

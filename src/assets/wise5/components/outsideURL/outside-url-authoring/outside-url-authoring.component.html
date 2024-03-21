@@ -99,16 +99,14 @@
   </div>
 </div>
 <div>
-  <mat-form-field class="url-input-container">
-    <mat-label i18n>URL</mat-label>
-    <input
-      matInput
-      [(ngModel)]="componentContent.url"
-      (ngModelChange)="urlChange.next($event)"
-      placeholder="Enter URL Here"
-      i18n-placeholder
-    />
-  </mat-form-field>
+  <translatable-input
+    [content]="componentContent"
+    key="url"
+    label="URL"
+    i18n-label
+    (defaultLanguageTextChanged)="urlChange.next($event)"
+  >
+  </translatable-input>
 </div>
 <div fxLayout="row" fxLayoutAlign="start center">
   <mat-form-field class="dimension-input-container">

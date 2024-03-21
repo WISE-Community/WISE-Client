@@ -514,7 +514,8 @@ function calculateNodeNumbersWhenNoLessons(): void {
       service.project = {
         nodes: [{ id: 'group0', type: 'group', ids: [], startId: '' }],
         startNodeId: 'group0',
-        startGroupId: 'group0'
+        startGroupId: 'group0',
+        metadata: {}
       };
       service.parseProject();
       expectNodeIdsToHaveNumbers([{ nodeId: 'group0', number: '0' }]);

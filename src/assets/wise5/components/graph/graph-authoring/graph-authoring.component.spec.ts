@@ -18,6 +18,8 @@ import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { GraphAuthoring } from './graph-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 
 let component: GraphAuthoring;
 let fixture: ComponentFixture<GraphAuthoring>;
@@ -28,6 +30,7 @@ describe('GraphAuthoringComponent', () => {
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
+        ComponentAuthoringModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
@@ -44,9 +47,13 @@ describe('GraphAuthoringComponent', () => {
       declarations: [GraphAuthoring, EditComponentPrompt],
       providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
     });
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(GraphAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
       copy(componentContent)
     );

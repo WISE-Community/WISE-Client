@@ -1,14 +1,12 @@
 <div fxLayout="column" fxLayoutGap="8px">
-  <div>
-    <mat-form-field class="subtitle">
-      <mat-label i18n>Subtitle</mat-label>
-      <input
-        matInput
-        [(ngModel)]="componentContent.subtitle"
-        (ngModelChange)="componentChanged()"
-      />
-    </mat-form-field>
-  </div>
+  <translatable-input
+    [content]="componentContent"
+    key="subtitle"
+    label="Subtitle"
+    i18n-label
+    (defaultLanguageTextChanged)="componentChanged()"
+    class="subtitle"
+  />
   <div>
     <mat-checkbox
       color="primary"
@@ -70,16 +68,16 @@
       Use Custom Legend
     </mat-checkbox>
   </div>
-  <div *ngIf="componentContent.useCustomLegend">
-    <mat-form-field class="custom-legend">
-      <mat-label i18n>Custom Legend</mat-label>
-      <input
-        matInput
-        [(ngModel)]="componentContent.customLegend"
-        (ngModelChange)="componentChanged()"
-      />
-    </mat-form-field>
-  </div>
+  <ng-container *ngIf="componentContent.useCustomLegend">
+    <translatable-input
+      [content]="componentContent"
+      key="customLegend"
+      label="Custom Legend"
+      i18n-label
+      (defaultLanguageTextChanged)="componentChanged()"
+      class="custom-legend"
+    />
+  </ng-container>
   <div fxLayoutGap="16px">
     <span i18n>X Axis Plot Line</span>
     <button
@@ -95,10 +93,14 @@
   </div>
   <div *ngFor="let plotLine of componentContent.xAxis.plotLines; index as xAxisPlotLineIndex">
     <div fxLayout="row wrap" fxLayoutGap="16px">
-      <mat-form-field class="plot-line-text">
-        <mat-label i18n>Text</mat-label>
-        <input matInput [(ngModel)]="plotLine.label.text" (ngModelChange)="componentChanged()" />
-      </mat-form-field>
+      <translatable-input
+        [content]="plotLine.label"
+        key="text"
+        label="Text"
+        i18n-label
+        (defaultLanguageTextChanged)="componentChanged()"
+        class="plot-line-text"
+      />
       <mat-form-field class="plot-line-value">
         <mat-label i18n>X Value</mat-label>
         <input matInput [(ngModel)]="plotLine.value" (ngModelChange)="componentChanged()" />
@@ -136,10 +138,14 @@
   </div>
   <div *ngFor="let plotLine of componentContent.yAxis.plotLines; index as yAxisPlotLineIndex">
     <div fxLayout="row wrap" fxLayoutGap="16px">
-      <mat-form-field class="plot-line-text">
-        <mat-label i18n>Text</mat-label>
-        <input matInput [(ngModel)]="plotLine.label.text" (ngModelChange)="componentChanged()" />
-      </mat-form-field>
+      <translatable-input
+        [content]="plotLine.label"
+        key="text"
+        label="Text"
+        i18n-label
+        (defaultLanguageTextChanged)="componentChanged()"
+        class="plot-line-text"
+      />
       <mat-form-field class="plot-line-value">
         <mat-label i18n>Y Value</mat-label>
         <input matInput [(ngModel)]="plotLine.value" (ngModelChange)="componentChanged()" />

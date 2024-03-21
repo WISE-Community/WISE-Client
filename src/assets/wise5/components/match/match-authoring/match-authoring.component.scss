@@ -17,6 +17,9 @@
 .name {
   width: 60%;
   margin-right: 10px;
+  mat-form-field {
+    width: 100%;
+  }
 }
 
 .choice-ordered-checkbox {

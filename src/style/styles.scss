@@ -63,6 +63,7 @@
 @import 'themes/dark';
 @import 'themes/author';
 @import 'themes/monitor';
+@import "~@ng-select/ng-select/themes/material.theme.css";
 
 // TODO: remove/merge after upgrading apps to Angular
 @import 'themes/apps';

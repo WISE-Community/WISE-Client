@@ -12,6 +12,8 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { AudioOscillatorService } from '../audioOscillatorService';
 import { AudioOscillatorAuthoring } from './audio-oscillator-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 
 let component: AudioOscillatorAuthoring;
 let fixture: ComponentFixture<AudioOscillatorAuthoring>;
@@ -22,6 +24,7 @@ describe('AudioOscillatorAuthoring', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        ComponentAuthoringModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
@@ -33,10 +36,14 @@ describe('AudioOscillatorAuthoring', () => {
       declarations: [EditComponentPrompt, AudioOscillatorAuthoring],
       providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
     });
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(AudioOscillatorAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
     component.componentContent = componentContent;
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
     getComponentSpy.and.returnValue(componentContent);
     fixture.detectChanges();

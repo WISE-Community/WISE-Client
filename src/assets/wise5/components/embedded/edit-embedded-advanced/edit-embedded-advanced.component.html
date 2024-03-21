@@ -1,12 +1,12 @@
 <div>
-  <mat-form-field class="model-parameters">
-    <mat-label i18n>Model Parameters</mat-label>
-    <input
-      matInput
-      [(ngModel)]="componentContent.parameters"
-      (ngModelChange)="componentChanged()"
-    />
-  </mat-form-field>
+  <translatable-input
+    [content]="componentContent"
+    key="parameters"
+    label="Model Parameters"
+    i18n-label
+    (defaultLanguageTextChanged)="componentChanged()"
+    class="model-parameters"
+  />
 </div>
 <div *ngIf="isNotebookEnabled()">
   <edit-component-add-to-notebook-button [componentContent]="componentContent">

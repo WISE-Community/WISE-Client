@@ -23,6 +23,7 @@ import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.co
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { DialogGuidanceService } from '../dialogGuidanceService';
 import { FeedbackRuleHelpComponent } from '../../common/feedbackRule/feedback-rule-help/feedback-rule-help.component';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { FeedbackRuleHelpComponent } from '../../common/feedbackRule/feedback-ru
   ],
   imports: [
     CommonModule,
+    ComponentAuthoringModule,
     DragDropModule,
     FormsModule,
     MatCheckboxModule,

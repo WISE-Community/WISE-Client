@@ -208,9 +208,15 @@ export class AuthoringToolComponent {
     document.getElementById('top').scrollIntoView();
     this.showToolbar = this.router.url.startsWith('/teacher/edit/unit');
     this.isMenuOpen = false;
-    this.projectId = this.configService.getProjectId();
-    this.runId = this.configService.getRunId();
-    this.runCode = this.configService.getRunCode();
+    if (!this.showToolbar) {
+      delete this.projectId;
+      delete this.runId;
+      delete this.runCode;
+    } else {
+      this.projectId = this.configService.getProjectId();
+      this.runId = this.configService.getRunId();
+      this.runCode = this.configService.getRunCode();
+    }
     if (this.projectId) {
       this.projectTitle = this.projectService.getProjectTitle();
     } else {

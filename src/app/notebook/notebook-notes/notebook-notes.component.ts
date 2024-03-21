@@ -37,7 +37,7 @@ export class NotebookNotesComponent extends NotebookParentComponent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.label = this.config.itemTypes.note.label;
+    this.setLabel();
     this.addPersonalGroupToGroups();
     this.addSpacesToGroups();
     this.hasPrivateNotes = this.isHasPrivateNotes();
@@ -76,11 +76,22 @@ export class NotebookNotesComponent extends NotebookParentComponent {
       })
     );
 
+    this.subscriptions.add(
+      this.ProjectService.projectParsed$.subscribe(() => {
+        this.setConfig();
+        this.setLabel();
+      })
+    );
+
     this.NotebookService.retrievePublicNotebookItems('public');
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  private setLabel(): void {
+    this.label = this.config.itemTypes.note.label;
   }
 
   isHasPrivateNotes(): boolean {

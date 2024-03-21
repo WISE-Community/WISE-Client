@@ -1,13 +1,11 @@
-<mat-form-field class="starter-sentence">
-  <mat-label i18n>Starter Sentence (Optional)</mat-label>
-  <textarea
-    matInput
-    [(ngModel)]="componentContent.starterSentence"
-    (ngModelChange)="componentChanged()"
-    cdkTextareaAutosize
-  >
-  </textarea>
-</mat-form-field>
+<translatable-textarea
+  [content]="componentContent"
+  key="starterSentence"
+  label="Starter Sentence"
+  i18n-label
+  (defaultLanguageTextChanged)="componentChanged()"
+>
+</translatable-textarea>
 <div>
   <mat-checkbox
     color="primary"
@@ -144,16 +142,15 @@
           (ngModelChange)="componentChanged()"
         />
       </mat-form-field>
-      <mat-form-field class="scoring-rule-feedback-text">
-        <mat-label i18n>Feedback Text</mat-label>
-        <textarea
-          matInput
-          [(ngModel)]="scoringRule.feedbackText"
-          (ngModelChange)="componentChanged()"
-          cdkTextareaAutosize
-        >
-        </textarea>
-      </mat-form-field>
+      <translatable-textarea
+        [content]="scoringRule"
+        key="feedbackText"
+        label="Feedback Text"
+        i18n-label
+        (defaultLanguageTextChanged)="componentChanged()"
+        class="scoring-rule-feedback-text"
+      >
+      </translatable-textarea>
       <div fxLayoutGap="10px">
         <button
           mat-raised-button
@@ -246,16 +243,15 @@
             min="0"
           />
         </mat-form-field>
-        <mat-form-field class="multiple-attempt-feedback">
-          <mat-label i18n>Feedback to Student</mat-label>
-          <textarea
-            matInput
-            [(ngModel)]="multipleAttemptScoringRule.feedbackText"
-            (ngModelChange)="componentChanged()"
-            cdkTextareaAutosize
-          >
-          </textarea>
-        </mat-form-field>
+        <translatable-textarea
+          [content]="multipleAttemptScoringRule"
+          key="feedbackText"
+          label="Feedback to Student"
+          i18n-label
+          (defaultLanguageTextChanged)="componentChanged()"
+          class="multiple-attempt-feedback"
+        >
+        </translatable-textarea>
         <div fxLayoutGap="10px">
           <button
             mat-raised-button
@@ -424,16 +420,16 @@
           >
             Notify Student
           </mat-checkbox>
-          <mat-form-field *ngIf="notification.isNotifyStudent" class="notification-feedback">
-            <mat-label i18n>Feedback to Student</mat-label>
-            <textarea
-              matInput
-              [(ngModel)]="notification.notificationMessageToStudent"
-              (ngModelChange)="componentChanged()"
-              cdkTextareaAutosize
-            >
-            </textarea>
-          </mat-form-field>
+          <translatable-textarea
+            *ngIf="notification.isNotifyStudent"
+            [content]="notification"
+            key="notificationMessageToStudent"
+            label="Feedback to Student"
+            i18n-label
+            (defaultLanguageTextChanged)="componentChanged()"
+            class="notification-feedback"
+          >
+          </translatable-textarea>
         </div>
         <div fxLayoutAlign="start start" fxLayoutGap="20px">
           <mat-checkbox
@@ -444,16 +440,16 @@
           >
             Notify Teacher
           </mat-checkbox>
-          <mat-form-field *ngIf="notification.isNotifyTeacher" class="notification-feedback">
-            <mat-label i18n>Feedback to Teacher</mat-label>
-            <textarea
-              matInput
-              [(ngModel)]="notification.notificationMessageToTeacher"
-              (ngModelChange)="componentChanged()"
-              cdkTextareaAutosize
-            >
-            </textarea>
-          </mat-form-field>
+          <translatable-textarea
+            *ngIf="notification.isNotifyTeacher"
+            [content]="notification"
+            key="notificationMessageToTeacher"
+            label="Feedback to Teacher"
+            i18n-label
+            (defaultLanguageTextChanged)="componentChanged()"
+            class="notification-feedback"
+          >
+          </translatable-textarea>
         </div>
       </div>
     </div>

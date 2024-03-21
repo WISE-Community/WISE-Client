@@ -42,14 +42,13 @@ export class NavItemComponent {
     this.item = this.ProjectService.idToNode[this.nodeId];
     this.isGroup = this.ProjectService.isGroupNode(this.nodeId);
     this.nodeStatus = this.StudentDataService.nodeStatuses[this.nodeId];
-    this.nodeTitle = this.showPosition
-      ? this.ProjectService.nodeIdToNumber[this.nodeId] + ': ' + this.item.title
-      : this.item.title;
+    this.setNodeTitle();
     this.currentNode = this.StudentDataService.currentNode;
     this.isCurrentNode = this.currentNode.id === this.nodeId;
     if (this.isGroup && this.isCurrentNode) {
       this.setExpanded();
     }
+    this.subscriptions.add(this.ProjectService.projectParsed$.subscribe(() => this.setNodeTitle()));
     this.subscriptions.add(
       this.StudentDataService.navItemIsExpanded$.subscribe(({ nodeId, isExpanded }) => {
         if (nodeId === this.nodeId) {
@@ -100,6 +99,12 @@ export class NavItemComponent {
         }
       )
     );
+  }
+
+  private setNodeTitle(): void {
+    this.nodeTitle = this.showPosition
+      ? this.ProjectService.getNodePositionAndTitle(this.nodeId)
+      : this.ProjectService.getNodeTitle(this.nodeId);
   }
 
   ngOnDestroy() {
