@@ -27,7 +27,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   ]
 })
 export class ManageTagsDialogComponent implements OnInit {
-  protected inputChanged: Subject<string> = new Subject<any>();
+  protected inputChanged: Subject<any> = new Subject<any>();
   private subscriptions: Subscription = new Subscription();
   protected tags: Tag[] = [];
 
