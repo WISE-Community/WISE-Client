@@ -1,0 +1,11 @@
+<h2 mat-dialog-title i18n>Create New Tag</h2>
+<mat-dialog-content>
+  <mat-form-field class="tag-name">
+    <mat-label i18n>Tag Name</mat-label>
+    <input matInput [(ngModel)]="tagName" (keypress)="keyPressed($event)" autofocus />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close i18n>Cancel</button>
+  <button mat-raised-button color="primary" (click)="create()" i18n>Create</button>
+</mat-dialog-actions>

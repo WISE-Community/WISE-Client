@@ -33,6 +33,11 @@ export class ApplyTagsButtonComponent implements OnInit {
         tag.text = tagThatChanged.text;
       })
     );
+    this.subscriptions.add(
+      this.tagService.newTag$.subscribe((tag: Tag) => {
+        this.tags.push(tag);
+      })
+    );
   }
 
   ngOnDestroy(): void {

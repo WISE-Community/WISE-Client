@@ -6,10 +6,11 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CreateTagDialogComponent } from '../create-tag-dialog/create-tag-dialog.component';
 
 @Component({
   selector: 'manage-tags-dialog',
@@ -17,13 +18,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./manage-tags-dialog.component.scss'],
   standalone: true,
   imports: [
+    CreateTagDialogComponent,
     CommonModule,
     FlexLayoutModule,
     FormsModule,
     MatButtonModule,
     MatDialogModule,
-    MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class ManageTagsDialogComponent implements OnInit {
@@ -31,7 +33,11 @@ export class ManageTagsDialogComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
   protected tags: Tag[] = [];
 
-  constructor(private snackBar: MatSnackBar, private tagService: TagService) {}
+  constructor(
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private tagService: TagService
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -47,9 +53,20 @@ export class ManageTagsDialogComponent implements OnInit {
           this.snackBar.open($localize`Tag updated`);
         })
     );
+    this.subscriptions.add(
+      this.tagService.newTag$.subscribe((tag: Tag) => {
+        this.tags.push(tag);
+      })
+    );
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  protected openCreateTagDialog(): void {
+    this.dialog.open(CreateTagDialogComponent, {
+      panelClass: 'dialog-md'
+    });
   }
 }

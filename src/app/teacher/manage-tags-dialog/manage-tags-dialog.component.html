@@ -1,6 +1,11 @@
 <h2 mat-dialog-title i18n>Manage Tags</h2>
-<mat-dialog-content>
+<mat-dialog-content class="dialog-content-scroll">
   <div fxLayout="column" fxLayoutGap="12px">
+    <div>
+      <button mat-raised-button color="primary" (click)="openCreateTagDialog()" i18n>
+        + New Tag
+      </button>
+    </div>
     <div *ngFor="let tag of tags" fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field subscriptSizing="dynamic" fxFlex>
         <input
