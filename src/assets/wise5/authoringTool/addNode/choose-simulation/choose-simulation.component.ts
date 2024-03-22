@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfigService } from '../../../services/configService';
+import { CopyNodesService } from '../../../services/copyNodesService';
+import { InsertNodesService } from '../../../services/insertNodesService';
+import { AbstractImportStepComponent } from '../abstract-import-step/abstract-import-step.component';
 
 class SimulationNode {
   metadata = {
@@ -17,9 +21,10 @@ class SimulationNode {
   templateUrl: './choose-simulation.component.html',
   styleUrls: ['./choose-simulation.component.scss', '../../add-content.scss']
 })
-export class ChooseSimulationComponent {
+export class ChooseSimulationComponent extends AbstractImportStepComponent {
   private allNodes: SimulationNode[] = [];
   protected filteredNodes: SimulationNode[] = [];
+  protected nodeIdToInsertInsideOrAfter: string;
   protected project: any;
   private projectItems: any;
   protected searchText: string = '';
@@ -29,12 +34,18 @@ export class ChooseSimulationComponent {
   protected subjects: string[] = [];
 
   constructor(
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    protected configService: ConfigService,
+    protected copyNodesService: CopyNodesService,
+    protected insertNodesService: InsertNodesService,
+    protected projectService: TeacherProjectService,
+    protected route: ActivatedRoute,
+    protected router: Router
+  ) {
+    super(configService, copyNodesService, insertNodesService, projectService, route, router);
+  }
 
   ngOnInit(): void {
+    this.nodeIdToInsertInsideOrAfter = history.state.nodeIdToInsertInsideOrAfter;
     this.simulationProjectId = this.projectService.getSimulationProjectId();
     this.showSimulationProject();
   }
@@ -95,14 +106,8 @@ export class ChooseSimulationComponent {
     window.open(`${this.project.previewProjectURL}/${node.id}`);
   }
 
-  protected next(): void {
-    this.router.navigate(['../../import-step/choose-location'], {
-      relativeTo: this.route,
-      state: {
-        importFromProjectId: this.simulationProjectId,
-        selectedNodes: [this.selectedNode]
-      }
-    });
+  protected submit(): void {
+    super.submit([this.selectedNode], this.simulationProjectId, this.nodeIdToInsertInsideOrAfter);
   }
 
   protected itemSelected(item: any): void {

@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatDividerModule } from '@angular/material/divider';
+import { CopyNodesService } from '../../../services/copyNodesService';
+import { InsertNodesService } from '../../../services/insertNodesService';
 
 describe('ChooseSimulationComponent', () => {
   let component: ChooseSimulationComponent;
@@ -29,7 +31,7 @@ describe('ChooseSimulationComponent', () => {
         RouterTestingModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [TeacherProjectService]
+      providers: [CopyNodesService, InsertNodesService, TeacherProjectService]
     }).compileComponents();
     fixture = TestBed.createComponent(ChooseSimulationComponent);
     component = fixture.componentInstance;
