@@ -34,6 +34,11 @@ export class ChooseNewNodeTemplate {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   protected chooseTemplate(template: NewNodeTemplate) {
-    this.router.navigate(['..', ...template.route.split('/')], { relativeTo: this.route });
+    this.router.navigate(['..', ...template.route.split('/')], {
+      relativeTo: this.route,
+      state: {
+        nodeIdToInsertInsideOrAfter: history.state.nodeIdToInsertInsideOrAfter
+      }
+    });
   }
 }

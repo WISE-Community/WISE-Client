@@ -120,7 +120,6 @@ describe('ProjectAuthoringComponent', () => {
   moveSpecificStep();
   deleteSpecificLesson();
   moveSpecificLesson();
-  addStep();
   addLesson();
 });
 
@@ -240,57 +239,6 @@ function moveSpecificLesson() {
         state: {
           selectedNodeIds: ['group1']
         }
-      });
-    });
-  });
-}
-
-function addStep() {
-  addStepBefore();
-  addStepBeforeFirstStepInLesson();
-  addStepAfter();
-}
-
-function addStepBefore() {
-  describe('add step button is clicked on a step that is not the first step in a lesson', () => {
-    describe('add step before is chosen on the menu', () => {
-      it('adds a step before the chosen step', async () => {
-        const addStepButtons = await harness.getAddStepButtons();
-        addStepButtons[1].click();
-        const addStepMenu = await harness.getOpenedAddStepMenu();
-        await addStepMenu.clickItem({ text: /Add Step Before/ });
-        const newStep = await harness.getStep('1.2: New Step');
-        expect(newStep).not.toEqual(null);
-      });
-    });
-  });
-}
-
-function addStepBeforeFirstStepInLesson() {
-  describe('add step button is clicked on a step that is the first step in a lesson', () => {
-    describe('add step before is chosen on the menu', () => {
-      it('adds a step before the chosen step', async () => {
-        const addStepButtons = await harness.getAddStepButtons();
-        addStepButtons[0].click();
-        const addStepMenu = await harness.getOpenedAddStepMenu();
-        await addStepMenu.clickItem({ text: /Add Step Before/ });
-        const newStep = await harness.getStep('1.1: New Step');
-        expect(newStep).not.toEqual(null);
-      });
-    });
-  });
-}
-
-function addStepAfter() {
-  describe('add step button is clicked', () => {
-    describe('add step after is chosen on the menu', () => {
-      it('adds a step after the chosen step', async () => {
-        const addStepButtons = await harness.getAddStepButtons();
-        addStepButtons[1].click();
-        const addStepMenu = await harness.getOpenedAddStepMenu();
-        await addStepMenu.clickItem({ text: /Add Step After/ });
-        const newStep = await harness.getStep('1.3: New Step');
-        expect(newStep).not.toEqual(null);
       });
     });
   });
