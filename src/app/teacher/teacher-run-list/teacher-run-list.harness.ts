@@ -8,7 +8,7 @@ export class TeacherRunListHarness extends ComponentHarness {
   static hostSelector = 'app-teacher-run-list';
   private ARCHIVED_TEXT = 'Archived';
   protected getNoRunsMessageDiv = this.locatorFor('.no-runs-message');
-  protected getRunListItems = this.locatorForAll(TeacherRunListItemHarness);
+  getRunListItems = this.locatorForAll(TeacherRunListItemHarness);
   getSearchInput = this.locatorFor('.search-bar input');
   protected getSelectRunsControls = this.locatorFor(SelectRunsControlsHarness);
   protected getViewSelect = this.locatorFor(MatSelectHarness);
@@ -45,38 +45,12 @@ export class TeacherRunListHarness extends ComponentHarness {
     return clickMenuButton(await this.getSelectRunsControls(), menuButtonText);
   }
 
-  async clickRunListItemCheckbox(index: number): Promise<void> {
-    return (await this.getRunListItem(index)).checkCheckbox();
-  }
-
-  async isRunListItemCheckboxChecked(index: number): Promise<boolean> {
-    return (await this.getRunListItem(index)).isChecked();
-  }
-
-  async getRunListItem(index: number): Promise<any> {
-    return (await this.getRunListItems())[index];
+  async getRunListItem(title: string): Promise<any> {
+    return await this.locatorForOptional(TeacherRunListItemHarness.with({ title: title }))();
   }
 
   async getNumRunListItems(): Promise<number> {
     return (await this.getRunListItems()).length;
-  }
-
-  async getNumSelectedRunListItems(): Promise<number> {
-    let numSelectedRunListItems = 0;
-    for (let i = 0; i < (await this.getRunListItems()).length; i++) {
-      if (await this.isRunListItemCheckboxChecked(i)) {
-        numSelectedRunListItems++;
-      }
-    }
-    return numSelectedRunListItems;
-  }
-
-  async clickRunListItemMenuArchiveButton(index: number): Promise<void> {
-    return (await this.getRunListItem(index)).clickArchiveMenuButton();
-  }
-
-  async clickRunListItemMenuUnarchiveButton(index: number): Promise<void> {
-    return (await this.getRunListItem(index)).clickUnarchiveMenuButton();
   }
 
   async clickArchiveButton(): Promise<void> {
