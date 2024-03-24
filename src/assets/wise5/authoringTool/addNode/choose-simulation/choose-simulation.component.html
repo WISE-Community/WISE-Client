@@ -52,7 +52,7 @@
       mat-raised-button
       color="primary"
       [disabled]="selectedNode == null"
-      (click)="submit()"
+      (click)="import([selectedNode])"
       i18n
     >
       Submit

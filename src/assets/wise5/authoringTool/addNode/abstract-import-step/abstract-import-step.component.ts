@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfigService } from '../../../services/configService';
 import { CopyNodesService } from '../../../services/copyNodesService';
@@ -6,7 +6,10 @@ import { InsertNodesService } from '../../../services/insertNodesService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Directive()
-export abstract class AbstractImportStepComponent {
+export abstract class AbstractImportStepComponent implements OnInit {
+  protected importProjectId: number;
+  protected nodeIdToInsertInsideOrAfter: string;
+
   constructor(
     protected configService: ConfigService,
     protected copyNodesService: CopyNodesService,
@@ -16,16 +19,17 @@ export abstract class AbstractImportStepComponent {
     protected router: Router
   ) {}
 
-  protected submit(
-    nodesToImport: any[],
-    importProjectId: number,
-    nodeIdToInsertInsideOrAfter: string
-  ): void {
+  ngOnInit(): void {
+    this.nodeIdToInsertInsideOrAfter = history.state.nodeIdToInsertInsideOrAfter;
+    this.importProjectId = history.state.importProjectId;
+  }
+
+  protected import(nodesToImport: any[]): void {
     this.copyNodesService
-      .copyNodes(nodesToImport, importProjectId, this.configService.getProjectId())
+      .copyNodes(nodesToImport, this.importProjectId, this.configService.getProjectId())
       .subscribe((copiedNodes: any[]) => {
         const nodesWithNewNodeIds = this.projectService.getNodesWithNewIds(copiedNodes);
-        this.insertNodesService.insertNodes(nodesWithNewNodeIds, nodeIdToInsertInsideOrAfter);
+        this.insertNodesService.insertNodes(nodesWithNewNodeIds, this.nodeIdToInsertInsideOrAfter);
         this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
           this.projectService.refreshProject();
           this.router.navigate(['../../..'], { relativeTo: this.route });

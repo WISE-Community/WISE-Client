@@ -12,9 +12,7 @@ import { AbstractImportStepComponent } from '../../../../assets/wise5/authoringT
   templateUrl: 'choose-import-step.component.html'
 })
 export class ChooseImportStepComponent extends AbstractImportStepComponent {
-  protected nodeIdToInsertInsideOrAfter: string;
   protected project: any;
-  private projectId: number;
   protected projectIdToOrder: any;
   private projectItems: any[] = [];
 
@@ -30,9 +28,8 @@ export class ChooseImportStepComponent extends AbstractImportStepComponent {
   }
 
   ngOnInit() {
-    this.nodeIdToInsertInsideOrAfter = history.state.nodeIdToInsertInsideOrAfter;
-    this.projectId = history.state.importProjectId;
-    this.projectService.retrieveProjectById(this.projectId).then((projectJSON) => {
+    super.ngOnInit();
+    this.projectService.retrieveProjectById(this.importProjectId).then((projectJSON) => {
       this.project = projectJSON;
       const nodeOrderOfProject = this.projectService.getNodeOrderOfProject(this.project);
       this.projectIdToOrder = Object.values(nodeOrderOfProject.idToOrder);
@@ -46,10 +43,6 @@ export class ChooseImportStepComponent extends AbstractImportStepComponent {
 
   protected previewProject(): void {
     window.open(`${this.project.previewProjectURL}`);
-  }
-
-  protected submit(): void {
-    super.submit(this.getSelectedNodesToImport(), this.projectId, this.nodeIdToInsertInsideOrAfter);
   }
 
   protected getSelectedNodesToImport(): any[] {

@@ -24,13 +24,11 @@ class SimulationNode {
 export class ChooseSimulationComponent extends AbstractImportStepComponent {
   private allNodes: SimulationNode[] = [];
   protected filteredNodes: SimulationNode[] = [];
-  protected nodeIdToInsertInsideOrAfter: string;
   protected project: any;
   private projectItems: any;
   protected searchText: string = '';
   protected selectedNode: string;
   protected selectedSubjects: string[] = [];
-  private simulationProjectId: number;
   protected subjects: string[] = [];
 
   constructor(
@@ -45,13 +43,13 @@ export class ChooseSimulationComponent extends AbstractImportStepComponent {
   }
 
   ngOnInit(): void {
-    this.nodeIdToInsertInsideOrAfter = history.state.nodeIdToInsertInsideOrAfter;
-    this.simulationProjectId = this.projectService.getSimulationProjectId();
+    super.ngOnInit();
+    this.importProjectId = this.projectService.getSimulationProjectId();
     this.showSimulationProject();
   }
 
   private showSimulationProject(): void {
-    this.projectService.retrieveProjectById(this.simulationProjectId).then((projectJSON) => {
+    this.projectService.retrieveProjectById(this.importProjectId).then((projectJSON) => {
       this.project = projectJSON;
       const nodeOrderOfProject = this.projectService.getNodeOrderOfProject(this.project);
       this.projectItems = nodeOrderOfProject.nodes.slice(1); // remove root node from consideration
@@ -104,10 +102,6 @@ export class ChooseSimulationComponent extends AbstractImportStepComponent {
 
   protected previewNode(node: any): void {
     window.open(`${this.project.previewProjectURL}/${node.id}`);
-  }
-
-  protected submit(): void {
-    super.submit([this.selectedNode], this.simulationProjectId, this.nodeIdToInsertInsideOrAfter);
   }
 
   protected itemSelected(item: any): void {

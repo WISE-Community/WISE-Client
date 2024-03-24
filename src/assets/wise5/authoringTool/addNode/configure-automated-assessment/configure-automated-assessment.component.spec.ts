@@ -35,7 +35,6 @@ describe('ConfigureAutomatedAssessmentComponent', () => {
       '',
       ''
     );
-
     fixture = TestBed.createComponent(ConfigureAutomatedAssessmentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

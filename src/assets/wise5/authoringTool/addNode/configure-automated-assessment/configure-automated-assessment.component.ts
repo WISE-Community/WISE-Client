@@ -13,9 +13,7 @@ import { AbstractImportStepComponent } from '../abstract-import-step/abstract-im
 })
 export class ConfigureAutomatedAssessmentComponent extends AbstractImportStepComponent {
   protected hasCustomization: boolean;
-  private importFromProjectId: number;
   protected node: any;
-  protected nodeIdToInsertInsideOrAfter: string;
 
   constructor(
     protected configService: ConfigService,
@@ -29,13 +27,8 @@ export class ConfigureAutomatedAssessmentComponent extends AbstractImportStepCom
   }
 
   ngOnInit(): void {
-    this.importFromProjectId = history.state.importFromProjectId;
-    this.nodeIdToInsertInsideOrAfter = history.state.nodeIdToInsertInsideOrAfter;
+    super.ngOnInit();
     this.node = history.state.node;
     this.hasCustomization = this.node.components.some((component: any) => component.enableCRater);
-  }
-
-  protected submit(): void {
-    super.submit([this.node], this.importFromProjectId, this.nodeIdToInsertInsideOrAfter);
   }
 }

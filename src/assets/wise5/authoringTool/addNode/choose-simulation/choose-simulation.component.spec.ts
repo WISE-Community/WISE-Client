@@ -33,6 +33,7 @@ describe('ChooseSimulationComponent', () => {
       ],
       providers: [CopyNodesService, InsertNodesService, TeacherProjectService]
     }).compileComponents();
+    window.history.pushState({}, '', '');
     fixture = TestBed.createComponent(ChooseSimulationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

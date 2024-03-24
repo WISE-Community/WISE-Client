@@ -1,6 +1,6 @@
 <h5 i18n>Choose the step(s) that you want to import, then select Next.</h5>
 <p fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
-  <strong i18n>Selected unit: {{ project.metadata.title }}</strong>
+  <strong i18n>Selected unit: {{ project?.metadata.title }}</strong>
   <button
     mat-raised-button
     color="primary"
@@ -60,7 +60,7 @@
     <button
       mat-raised-button
       color="primary"
-      (click)="submit()"
+      (click)="import(getSelectedNodesToImport())"
       [disabled]="getSelectedNodesToImport().length == 0"
       matTooltip="Submit"
       i18n-matTooltip
