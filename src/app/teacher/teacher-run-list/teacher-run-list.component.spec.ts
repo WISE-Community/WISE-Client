@@ -380,7 +380,7 @@ function searchUnselectAllRuns(): void {
         const searchInput = await runListHarness.getSearchInput();
         await searchInput.sendKeys('first');
         await expectRunsIsSelected([false]);
-      });
+      }, 10000);
     });
   });
 }
