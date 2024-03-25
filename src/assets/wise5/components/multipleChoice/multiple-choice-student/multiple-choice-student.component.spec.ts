@@ -214,7 +214,6 @@ function testSingleAnswerMultipleCorrectAnswersComponent() {
 }
 
 function selectSingleAnswerChoice(choiceId) {
-  component.radioChoiceSelected(choiceId);
   component.studentChoices = choiceId;
 }
 
