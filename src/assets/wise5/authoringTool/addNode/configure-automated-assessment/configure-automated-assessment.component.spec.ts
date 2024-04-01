@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatDividerModule } from '@angular/material/divider';
+import { CopyNodesService } from '../../../services/copyNodesService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { InsertNodesService } from '../../../services/insertNodesService';
 
 describe('ConfigureAutomatedAssessmentComponent', () => {
   let component: ConfigureAutomatedAssessmentComponent;
@@ -19,7 +22,8 @@ describe('ConfigureAutomatedAssessmentComponent', () => {
         MatDividerModule,
         RouterTestingModule,
         StudentTeacherCommonServicesModule
-      ]
+      ],
+      providers: [CopyNodesService, InsertNodesService, TeacherProjectService]
     }).compileComponents();
     window.history.pushState(
       {
@@ -31,7 +35,6 @@ describe('ConfigureAutomatedAssessmentComponent', () => {
       '',
       ''
     );
-
     fixture = TestBed.createComponent(ConfigureAutomatedAssessmentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

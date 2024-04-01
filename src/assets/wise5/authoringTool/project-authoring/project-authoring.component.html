@@ -13,17 +13,6 @@
   <button
     mat-raised-button
     color="primary"
-    (click)="addNewStep()"
-    [disabled]="nodeTypeSelected() != null"
-    matTooltip="Add New Step"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>add_box</mat-icon>
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
     (click)="chooseLocation(false)"
     [disabled]="!hasSelectedNodes()"
     matTooltip="Move"
