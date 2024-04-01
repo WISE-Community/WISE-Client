@@ -37,6 +37,7 @@ import { ConfigService } from '../../services/configService';
 import { of } from 'rxjs/internal/observable/of';
 import { HttpClient } from '@angular/common/http';
 import { AddLessonButtonComponent } from '../add-lesson-button/add-lesson-button.component';
+import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
 
 const addLessonAfterRegex = /Add Lesson After/;
 const addLessonBeforeRegex = /Add Lesson Before/;
@@ -55,6 +56,7 @@ describe('ProjectAuthoringComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         AddLessonButtonComponent,
+        AddStepButtonComponent,
         ConcurrentAuthorsMessageComponent,
         NodeAuthoringComponent,
         NodeIconComponent,

@@ -63,27 +63,6 @@ export class ProjectAuthoringLessonComponent {
     }
   }
 
-  protected isFirstNodeInBranchPath(nodeId: string): boolean {
-    return this.projectService.isFirstNodeInBranchPath(nodeId);
-  }
-
-  protected addStepBefore(nodeId: string): void {
-    if (this.projectService.isFirstStepInLesson(nodeId)) {
-      this.addStepInside(this.projectService.getParentGroupId(nodeId));
-    } else {
-      this.addStepAfter(this.projectService.getPreviousNodeId(nodeId));
-    }
-  }
-
-  protected addStepAfter(nodeId: string): void {
-    this.router.navigate(['add-node', 'choose-template'], {
-      relativeTo: this.route,
-      state: {
-        nodeIdToInsertInsideOrAfter: nodeId
-      }
-    });
-  }
-
   protected addStepInside(nodeId: string): void {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
