@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ManageTagsDialogComponent } from './manage-tags-dialog.component';
-import { TagService } from '../../../assets/wise5/services/tagService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 
 describe('ManageTagsDialogComponent', () => {
   let component: ManageTagsDialogComponent;
@@ -17,7 +17,7 @@ describe('ManageTagsDialogComponent', () => {
         MatSnackBarModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [TagService]
+      providers: [ProjectTagService]
     });
     fixture = TestBed.createComponent(ManageTagsDialogComponent);
     component = fixture.componentInstance;

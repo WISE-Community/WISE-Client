@@ -1,20 +1,13 @@
 'use strict';
 
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { map } from 'rxjs/operators';
 import { ProjectService } from './projectService';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { Project } from '../../../app/domain/project';
-import { Tag } from '../../../app/domain/tag';
 
 @Injectable()
 export class TagService {
-  private newTagSource: Subject<Tag> = new Subject<Tag>();
-  public newTag$: Observable<Tag> = this.newTagSource.asObservable();
-  private tagUpdatedSource: Subject<Tag> = new Subject<Tag>();
-  public tagUpdated$: Observable<Tag> = this.tagUpdatedSource.asObservable();
   private tags: any[] = [];
 
   constructor(
@@ -86,35 +79,5 @@ export class TagService {
 
   hasTagName(tagName: string): boolean {
     return this.getExistingTagNames().includes(tagName);
-  }
-
-  retrieveUserTags(): Observable<Tag[]> {
-    return this.http.get<Tag[]>(`/api/user/tags`);
-  }
-
-  applyTagToProjects(tag: Tag, projects: Project[]): Subscription {
-    const projectIds = projects.map((project) => project.id);
-    return this.http.put(`/api/projects/tag/${tag.text}`, projectIds).subscribe();
-  }
-
-  removeTagFromProjects(tag: Tag, projects: Project[]): Subscription {
-    let params = new HttpParams();
-    for (const project of projects) {
-      params = params.append('projectIds', project.id);
-    }
-    return this.http.delete(`/api/projects/tag/${tag.text}`, { params: params }).subscribe();
-  }
-
-  updateTag(tag: Tag): void {
-    this.http.put<Tag>(`/api/user/tag/${tag.id}`, tag).subscribe((tag) => {
-      this.tagUpdatedSource.next(tag);
-    });
-  }
-
-  createTag(tagName: string): Subscription {
-    return this.http.post(`/api/user/tag`, { text: tagName }).subscribe((tag: Tag) => {
-      this.tags.push(tag);
-      this.newTagSource.next(tag);
-    });
   }
 }

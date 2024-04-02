@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Project } from '../../domain/project';
-import { TagService } from '../../../assets/wise5/services/tagService';
 import { Tag } from '../../domain/tag';
 import { MatDialog } from '@angular/material/dialog';
 import { ManageTagsDialogComponent } from '../manage-tags-dialog/manage-tags-dialog.component';
 import { Subscription } from 'rxjs';
+import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 
 @Component({
   selector: 'apply-tags-button',
@@ -16,11 +16,11 @@ export class ApplyTagsButtonComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
   protected tags: Tag[] = [];
 
-  constructor(private dialog: MatDialog, private tagService: TagService) {}
+  constructor(private dialog: MatDialog, private projectTagService: ProjectTagService) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.tagService.retrieveUserTags().subscribe((tags: Tag[]) => {
+      this.projectTagService.retrieveUserTags().subscribe((tags: Tag[]) => {
         for (const tag of tags) {
           tag.checked = this.doesAnyProjectHaveTag(tag);
         }
@@ -28,13 +28,13 @@ export class ApplyTagsButtonComponent implements OnInit {
       })
     );
     this.subscriptions.add(
-      this.tagService.tagUpdated$.subscribe((tagThatChanged: Tag) => {
+      this.projectTagService.tagUpdated$.subscribe((tagThatChanged: Tag) => {
         const tag = this.tags.find((t: Tag) => t.id === tagThatChanged.id);
         tag.text = tagThatChanged.text;
       })
     );
     this.subscriptions.add(
-      this.tagService.newTag$.subscribe((tag: Tag) => {
+      this.projectTagService.newTag$.subscribe((tag: Tag) => {
         this.tags.push(tag);
       })
     );
@@ -56,10 +56,10 @@ export class ApplyTagsButtonComponent implements OnInit {
   protected toggleTagOnProjects(tag: Tag, addTag: boolean): void {
     if (addTag) {
       this.addTagToProjects(tag, this.selectedProjects);
-      this.tagService.applyTagToProjects(tag, this.selectedProjects);
+      this.projectTagService.applyTagToProjects(tag, this.selectedProjects);
     } else {
       this.removeTagFromProjects(tag, this.selectedProjects);
-      this.tagService.removeTagFromProjects(tag, this.selectedProjects);
+      this.projectTagService.removeTagFromProjects(tag, this.selectedProjects);
     }
   }
 

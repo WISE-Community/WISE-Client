@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TagService } from '../../../assets/wise5/services/tagService';
 import { Tag } from '../../domain/tag';
 import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -11,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CreateTagDialogComponent } from '../create-tag-dialog/create-tag-dialog.component';
+import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 
 @Component({
   selector: 'manage-tags-dialog',
@@ -36,12 +36,12 @@ export class ManageTagsDialogComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private tagService: TagService
+    private projectTagService: ProjectTagService
   ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.tagService.retrieveUserTags().subscribe((tags: Tag[]) => {
+      this.projectTagService.retrieveUserTags().subscribe((tags: Tag[]) => {
         this.tags = tags;
       })
     );
@@ -49,12 +49,12 @@ export class ManageTagsDialogComponent implements OnInit {
       this.inputChanged
         .pipe(debounceTime(1000), distinctUntilChanged())
         .subscribe(({ tag }: any) => {
-          this.tagService.updateTag(tag);
+          this.projectTagService.updateTag(tag);
           this.snackBar.open($localize`Tag updated`);
         })
     );
     this.subscriptions.add(
-      this.tagService.newTag$.subscribe((tag: Tag) => {
+      this.projectTagService.newTag$.subscribe((tag: Tag) => {
         this.tags.push(tag);
       })
     );
