@@ -12,8 +12,8 @@ describe('AddStepButtonComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AddStepButtonComponent],
       imports: [
+        AddStepButtonComponent,
         HttpClientTestingModule,
         MatIconModule,
         RouterTestingModule,

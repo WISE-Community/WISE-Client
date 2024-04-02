@@ -56,7 +56,6 @@ describe('ProjectAuthoringComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         AddLessonButtonComponent,
-        AddStepButtonComponent,
         ConcurrentAuthorsMessageComponent,
         NodeAuthoringComponent,
         NodeIconComponent,
@@ -67,6 +66,7 @@ describe('ProjectAuthoringComponent', () => {
         TeacherNodeIconComponent
       ],
       imports: [
+        AddStepButtonComponent,
         BrowserAnimationsModule,
         FormsModule,
         HttpClientTestingModule,

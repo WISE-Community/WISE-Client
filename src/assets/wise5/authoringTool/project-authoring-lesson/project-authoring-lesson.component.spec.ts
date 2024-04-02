@@ -36,13 +36,13 @@ describe('ProjectAuthoringLessonComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [
-        AddStepButtonComponent,
         NodeIconComponent,
         NodeIconAndTitleComponent,
         ProjectAuthoringLessonComponent,
         ProjectAuthoringStepComponent
       ],
       imports: [
+        AddStepButtonComponent,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,

@@ -1,11 +1,18 @@
 import { Component, Input } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'add-step-button',
   templateUrl: './add-step-button.component.html',
-  styleUrls: ['./add-step-button.component.scss']
+  styleUrls: ['./add-step-button.component.scss'],
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule]
 })
 export class AddStepButtonComponent {
   @Input() first: boolean;
@@ -18,23 +25,18 @@ export class AddStepButtonComponent {
   ) {}
 
   protected addStepBefore(): void {
-    this.addStepInside(this.projectService.getParentGroupId(this.nodeId));
+    this.goToAddStepView(this.projectService.getParentGroupId(this.nodeId));
   }
 
-  private addStepInside(nodeId: string): void {
+  protected addStepAfter(): void {
+    this.goToAddStepView(this.nodeId);
+  }
+
+  private goToAddStepView(nodeId: string): void {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
       state: {
         nodeIdToInsertInsideOrAfter: nodeId
-      }
-    });
-  }
-
-  protected addStepAfter(): void {
-    this.router.navigate(['add-node', 'choose-template'], {
-      relativeTo: this.route,
-      state: {
-        nodeIdToInsertInsideOrAfter: this.nodeId
       }
     });
   }

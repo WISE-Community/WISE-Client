@@ -70,7 +70,6 @@ import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-ste
     AddLessonChooseTemplateComponent,
     AddLessonConfigureComponent,
     AddProjectComponent,
-    AddStepButtonComponent,
     AddYourOwnNode,
     AdvancedProjectAuthoringComponent,
     AuthoringToolComponent,
@@ -114,6 +113,7 @@ import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-ste
     ProjectListComponent
   ],
   imports: [
+    AddStepButtonComponent,
     StudentTeacherCommonModule,
     ComponentAuthoringModule,
     ComponentStudentModule,

@@ -9083,22 +9083,19 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a4f285203b0b63fd0791a62c1ca404c90e1b5c50" datatype="html">
-        <source>Add Step Before</source>
+      <trans-unit id="abeeca08450df34a78cb591b634d6d16ef5b7dad" datatype="html">
+        <source>Add step before</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-step-button/add-step-button.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a15d82403ab103b4c4d110d1d6bbb1a0860678e9" datatype="html">
-        <source>Add Step After</source>
+      <trans-unit id="d59263511cd8dbe0a1eb9bd829aac8d827d8fd83" datatype="html">
+        <source>Add step after</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-step-button/add-step-button.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
-      </trans-unit>
-      <trans-unit id="d59263511cd8dbe0a1eb9bd829aac8d827d8fd83" datatype="html">
-        <source>Add step after</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-step-button/add-step-button.component.html</context>
           <context context-type="linenumber">27</context>
