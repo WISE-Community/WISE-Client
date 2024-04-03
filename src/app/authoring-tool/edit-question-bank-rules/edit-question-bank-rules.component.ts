@@ -54,4 +54,10 @@ export class EditQuestionBankRulesComponent extends EditFeedbackRulesComponent {
   customTrackBy(index: number): number {
     return index;
   }
+
+  protected getQuestionLabel(rule: QuestionBankRule, questionIndex: number): string {
+    return rule.questions.length === 1
+      ? $localize`Question`
+      : $localize`Question #${questionIndex + 1}`;
+  }
 }
