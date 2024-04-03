@@ -87,10 +87,7 @@
                 <translatable-textarea
                   [content]="rule.questions[questionIndex]"
                   key="text"
-                  [label]="
-                    rule.questions.length === 1 ? 'Question' : 'Question #' + (questionIndex + 1)
-                  "
-                  i18n-label
+                  [label]="getQuestionLabel(rule, questionIndex)"
                   (defaultLanguageTextChanged)="inputChanged.next($event)"
                   class="rule-input question-input"
                 >
