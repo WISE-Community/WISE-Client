@@ -12,6 +12,7 @@ import { GoogleUser } from '../../modules/google-sign-in/GoogleUser';
 export class RegisterTeacherComponent implements OnInit {
   email: string = '';
   isGoogleAuthenticationEnabled: boolean = false;
+  microsoftAuthenticationEnabled: boolean;
 
   constructor(
     private configService: ConfigService,
@@ -23,6 +24,7 @@ export class RegisterTeacherComponent implements OnInit {
     this.configService.getConfig().subscribe((config) => {
       if (config != null) {
         this.isGoogleAuthenticationEnabled = config.googleClientId != null;
+        this.microsoftAuthenticationEnabled = config.microsoftClientId != null;
       }
     });
   }
@@ -42,5 +44,9 @@ export class RegisterTeacherComponent implements OnInit {
         ]);
       }
     });
+  }
+
+  protected microsoftSignIn(): void {
+    window.location.href = '/api/microsoft-login?redirectUrl=/join/teacher/form';
   }
 }

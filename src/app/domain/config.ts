@@ -3,6 +3,7 @@ export class Config {
   googleAnalyticsId?: string;
   googleClientId?: string;
   isGoogleClassroomEnabled?: boolean;
+  microsoftClientId?: string;
   recaptchaPublicKey?: string;
   logOutURL: string;
   currentTime: number;
