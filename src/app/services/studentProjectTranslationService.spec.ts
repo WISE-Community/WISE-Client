@@ -1,7 +1,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
-import { TranslateProjectService } from '../../assets/wise5/services/translateProjectService';
+import { StudentProjectTranslationService } from '../../assets/wise5/services/studentProjectTranslationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { ProjectLocale } from '../domain/projectLocale';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
@@ -12,8 +12,8 @@ let http: HttpTestingController;
 let demoProjectJSON: any;
 let configService: ConfigService;
 let projectService: ProjectService;
-let service: TranslateProjectService;
-describe('TranslateProjectService', () => {
+let service: StudentProjectTranslationService;
+describe('StudentProjectTranslationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
@@ -22,7 +22,7 @@ describe('TranslateProjectService', () => {
     demoProjectJSON = copy(demoProjectJSON_import);
     configService = TestBed.inject(ConfigService);
     projectService = TestBed.inject(ProjectService);
-    service = TestBed.inject(TranslateProjectService);
+    service = TestBed.inject(StudentProjectTranslationService);
     spyOn(projectService, 'getOriginalProject').and.returnValue(demoProjectJSON);
   });
   describe('translate()', () => {

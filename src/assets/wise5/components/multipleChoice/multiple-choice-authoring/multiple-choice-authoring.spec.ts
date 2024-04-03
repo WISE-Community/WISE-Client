@@ -18,10 +18,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { ComponentAuthoringModule } from '../../component-authoring.module';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { ProjectService } from '../../../services/projectService';
 
 let component: MultipleChoiceAuthoring;
 let fixture: ComponentFixture<MultipleChoiceAuthoring>;
 let multipleChoiceAuthoringHarness: MultipleChoiceAuthoringHarness;
+let projectService: ProjectService;
+let teacherProjectService: TeacherProjectService;
 
 describe('MultipleChoiceAuthoringComponent', () => {
   beforeEach(
@@ -47,9 +50,13 @@ describe('MultipleChoiceAuthoringComponent', () => {
   );
 
   beforeEach(async () => {
-    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
-      new ProjectLocale({ default: 'en-US' })
-    );
+    projectService = TestBed.inject(ProjectService);
+    teacherProjectService = TestBed.inject(TeacherProjectService);
+    const locale = new ProjectLocale({ default: 'en-US' });
+    spyOn(teacherProjectService, 'getLocale').and.returnValue(locale);
+    spyOn(teacherProjectService, 'isDefaultLocale').and.returnValue(true);
+    spyOn(projectService, 'getLocale').and.returnValue(locale);
+    projectService.setCurrentLanguage(locale.getDefaultLanguage());
     fixture = TestBed.createComponent(MultipleChoiceAuthoring);
     component = fixture.componentInstance;
     component.componentContent = {
@@ -59,7 +66,6 @@ describe('MultipleChoiceAuthoringComponent', () => {
       showFeedback: true,
       type: 'MultipleChoice'
     };
-    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     fixture.detectChanges();
     multipleChoiceAuthoringHarness = await TestbedHarnessEnvironment.harnessForFixture(
       fixture,
