@@ -1,26 +1,31 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { temporarilyHighlightElement } from '../../common/dom/dom';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'add-lesson-button',
   templateUrl: './add-lesson-button.component.html',
-  styleUrls: ['./add-lesson-button.component.scss']
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule]
 })
 export class AddLessonButtonComponent {
   @Input() active: boolean;
+  @Input() first: boolean;
   @Input() lessonId: string;
   @ViewChild(MatMenuTrigger) menuTrigger: MatMenuTrigger;
 
   constructor(private projectService: TeacherProjectService) {}
 
-  protected addLesson(): void {
-    if (this.lessonId == null) {
-      this.addFirstLesson();
-    } else {
-      this.menuTrigger.openMenu();
-    }
+  protected addFirstLesson(): void {
+    const newLesson = this.createNewLesson();
+    const insertLocation = this.active ? 'group0' : 'inactiveGroups';
+    this.projectService.createNodeInside(newLesson, insertLocation);
+    this.updateProject(newLesson.id);
   }
 
   protected addLessonBefore(): void {
@@ -32,13 +37,6 @@ export class AddLessonButtonComponent {
       this.projectService.createNodeAfter(newLesson, previousLessonId);
       this.updateProject(newLesson.id);
     }
-  }
-
-  private addFirstLesson(): void {
-    const newLesson = this.createNewLesson();
-    const insertLocation = this.active ? 'group0' : 'inactiveGroups';
-    this.projectService.createNodeInside(newLesson, insertLocation);
-    this.updateProject(newLesson.id);
   }
 
   protected addLessonAfter(): void {

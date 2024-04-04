@@ -12,8 +12,8 @@ describe('AddLessonButtonComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AddLessonButtonComponent],
       imports: [
+        AddLessonButtonComponent,
         HttpClientTestingModule,
         StudentTeacherCommonServicesModule,
         MatIconModule,
