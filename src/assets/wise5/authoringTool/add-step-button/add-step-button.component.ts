@@ -10,7 +10,6 @@ import { MatMenuModule } from '@angular/material/menu';
 @Component({
   selector: 'add-step-button',
   templateUrl: './add-step-button.component.html',
-  styleUrls: ['./add-step-button.component.scss'],
   standalone: true,
   imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule]
 })
