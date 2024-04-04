@@ -11,6 +11,8 @@ import { Tag } from '../../../app/domain/tag';
 
 @Injectable()
 export class TagService {
+  private newTagSource: Subject<Tag> = new Subject<Tag>();
+  public newTag$: Observable<Tag> = this.newTagSource.asObservable();
   private tagUpdatedSource: Subject<Tag> = new Subject<Tag>();
   public tagUpdated$: Observable<Tag> = this.tagUpdatedSource.asObservable();
   private tags: any[] = [];
@@ -106,6 +108,13 @@ export class TagService {
   updateTag(tag: Tag): void {
     this.http.put<Tag>(`/api/user/tag/${tag.id}`, tag).subscribe((tag) => {
       this.tagUpdatedSource.next(tag);
+    });
+  }
+
+  createTag(tagName: string): Subscription {
+    return this.http.post(`/api/user/tag`, { text: tagName }).subscribe((tag: Tag) => {
+      this.tags.push(tag);
+      this.newTagSource.next(tag);
     });
   }
 }
