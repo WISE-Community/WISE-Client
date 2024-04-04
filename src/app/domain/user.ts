@@ -7,6 +7,7 @@ export class User {
   isRecaptchaRequired: boolean;
   language: string;
   lastName: string;
+  microsoftUserId: string;
   permissions: number[];
   roles: string[];
   token: string;

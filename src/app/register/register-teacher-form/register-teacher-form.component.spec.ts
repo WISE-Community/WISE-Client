@@ -144,7 +144,7 @@ async function createAccount() {
         await component.createAccount();
         expect(routerNavigateSpy).toHaveBeenCalledWith([
           'join/teacher/complete',
-          { username: username, isUsingGoogleId: false }
+          { username: username, isUsingGoogleId: false, isUsingMicrosoftId: false }
         ]);
       })
     );

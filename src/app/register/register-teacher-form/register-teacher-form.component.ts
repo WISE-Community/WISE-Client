@@ -57,7 +57,8 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.user.googleUserId = params['gID'];
-      if (!this.isUsingGoogleId()) {
+      this.user.microsoftUserId = params['mID'];
+      if (!this.isSocialAccount()) {
         this.createTeacherAccountFormGroup.addControl('passwords', this.passwordsFormGroup);
       }
       const name = params['name'];
@@ -73,8 +74,16 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     this.changeDetectorRef.detectChanges();
   }
 
+  private isSocialAccount(): boolean {
+    return this.isUsingGoogleId() || this.isUsingMicrosoftId();
+  }
+
   private isUsingGoogleId(): boolean {
     return this.user.googleUserId != null;
+  }
+
+  private isUsingMicrosoftId(): boolean {
+    return this.user.microsoftUserId != null;
   }
 
   private setControlFieldValue(name: string, value: string): void {
@@ -100,7 +109,11 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
   private createAccountSuccess(response: any): void {
     this.router.navigate([
       'join/teacher/complete',
-      { username: response.username, isUsingGoogleId: this.isUsingGoogleId() }
+      {
+        username: response.username,
+        isUsingGoogleId: this.isUsingGoogleId(),
+        isUsingMicrosoftId: this.isUsingMicrosoftId()
+      }
     ]);
     this.processing = false;
   }
@@ -113,10 +126,11 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
       const token = await this.recaptchaV3Service.execute('importantAction').toPromise();
       this.user['token'] = token;
     }
-    if (!this.isUsingGoogleId()) {
+    if (!this.isSocialAccount()) {
       this.user['password'] = this.getPassword();
       delete this.user['passwords'];
       delete this.user['googleUserId'];
+      delete this.user['microsoftUserId'];
     }
   }
 
