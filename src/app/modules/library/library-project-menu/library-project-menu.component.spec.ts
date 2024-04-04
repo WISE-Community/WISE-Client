@@ -49,6 +49,7 @@ export class MockConfigService {
   }
 }
 
+const archivedTag = { id: 1, text: 'archived' };
 let component: LibraryProjectMenuComponent;
 let fixture: ComponentFixture<LibraryProjectMenuComponent>;
 let harness: LibraryProjectMenuHarness;
@@ -108,7 +109,7 @@ function showsArchiveButton() {
 function showsRestoreButton() {
   describe('project has archived tag', () => {
     beforeEach(() => {
-      component.project.tags = ['archived'];
+      component.project.tags = [archivedTag];
       component.ngOnInit();
     });
     it('shows restore button', async () => {

@@ -36,6 +36,7 @@ export class ApplyTagsButtonComponent implements OnInit {
     this.subscriptions.add(
       this.projectTagService.newTag$.subscribe((tag: Tag) => {
         this.tags.push(tag);
+        this.projectTagService.sortTags(this.tags);
       })
     );
   }
@@ -46,7 +47,7 @@ export class ApplyTagsButtonComponent implements OnInit {
 
   private doesAnyProjectHaveTag(tag: Tag): boolean {
     for (const project of this.selectedProjects) {
-      if (project.tags.includes(tag.text)) {
+      if (project.tags.some((projectTag) => projectTag.id === tag.id)) {
         return true;
       }
     }
@@ -65,15 +66,13 @@ export class ApplyTagsButtonComponent implements OnInit {
 
   private addTagToProjects(tag: Tag, projects: Project[]): void {
     for (const project of projects) {
-      project.tags.push(tag.text);
-      project.tags.sort();
+      project.addTag(tag);
     }
   }
 
   private removeTagFromProjects(tag: Tag, projects: Project[]): void {
     for (const project of projects) {
-      project.tags = project.tags.filter((projectTag: string) => projectTag !== tag.text);
-      project.tags.sort();
+      project.tags = project.tags.filter((projectTag: Tag) => projectTag.id !== tag.id);
     }
   }
 

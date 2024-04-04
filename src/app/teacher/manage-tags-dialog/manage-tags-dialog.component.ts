@@ -56,6 +56,7 @@ export class ManageTagsDialogComponent implements OnInit {
     this.subscriptions.add(
       this.projectTagService.newTag$.subscribe((tag: Tag) => {
         this.tags.push(tag);
+        this.projectTagService.sortTags(this.tags);
       })
     );
   }

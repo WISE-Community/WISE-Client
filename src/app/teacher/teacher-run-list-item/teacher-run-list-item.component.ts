@@ -7,6 +7,9 @@ import { flash } from '../../animations';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ShareRunCodeDialogComponent } from '../share-run-code-dialog/share-run-code-dialog.component';
+import { Subscription } from 'rxjs';
+import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
+import { Tag } from '../../domain/tag';
 
 @Component({
   selector: 'app-teacher-run-list-item',
@@ -22,6 +25,7 @@ export class TeacherRunListItemComponent implements OnInit {
   @Input() run: TeacherRun = new TeacherRun();
   @Output() runArchiveStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
   @Output() runSelectedStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
+  private subscriptions: Subscription = new Subscription();
   protected thumbStyle: SafeStyle;
 
   constructor(
@@ -29,10 +33,11 @@ export class TeacherRunListItemComponent implements OnInit {
     private configService: ConfigService,
     private router: Router,
     private elRef: ElementRef,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private projectTagService: ProjectTagService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.run.project.thumbStyle = this.getThumbStyle();
     this.manageStudentsLink = `${this.configService.getContextPath()}/teacher/manage/unit/${
       this.run.id
@@ -44,16 +49,32 @@ export class TeacherRunListItemComponent implements OnInit {
         this.run.highlighted = false;
       }, 7000);
     }
+    this.subscribeToTagUpdated();
   }
 
-  ngAfterViewInit() {
+  subscribeToTagUpdated(): void {
+    this.subscriptions.add(
+      this.projectTagService.tagUpdated$.subscribe((tagThatChanged: Tag) => {
+        const tagOnProject = this.run.project.tags.find((tag: Tag) => tag.id === tagThatChanged.id);
+        if (tagOnProject != null) {
+          tagOnProject.text = tagThatChanged.text;
+        }
+      })
+    );
+  }
+
+  ngAfterViewInit(): void {
     if (this.run.highlighted) {
       this.elRef.nativeElement.querySelector('mat-card').scrollIntoView();
     }
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.periodsTooltipText = this.getPeriodsTooltipText();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   private getThumbStyle() {
