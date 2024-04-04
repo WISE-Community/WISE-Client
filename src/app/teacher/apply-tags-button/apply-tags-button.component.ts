@@ -31,6 +31,7 @@ export class ApplyTagsButtonComponent implements OnInit {
       this.projectTagService.tagUpdated$.subscribe((tagThatChanged: Tag) => {
         const tag = this.tags.find((t: Tag) => t.id === tagThatChanged.id);
         tag.text = tagThatChanged.text;
+        this.projectTagService.sortTags(this.tags);
       })
     );
     this.subscriptions.add(
