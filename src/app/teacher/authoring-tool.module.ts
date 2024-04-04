@@ -65,7 +65,6 @@ import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-ste
 @NgModule({
   declarations: [
     AddComponentButtonComponent,
-    AddLessonButtonComponent,
     AddLessonChooseLocationComponent,
     AddLessonChooseTemplateComponent,
     AddLessonConfigureComponent,
@@ -113,6 +112,7 @@ import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-ste
     ProjectListComponent
   ],
   imports: [
+    AddLessonButtonComponent,
     AddStepButtonComponent,
     StudentTeacherCommonModule,
     ComponentAuthoringModule,

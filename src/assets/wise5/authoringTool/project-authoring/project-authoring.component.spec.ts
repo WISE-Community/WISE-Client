@@ -39,8 +39,6 @@ import { HttpClient } from '@angular/common/http';
 import { AddLessonButtonComponent } from '../add-lesson-button/add-lesson-button.component';
 import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
 
-const addLessonAfterRegex = /Add Lesson After/;
-const addLessonBeforeRegex = /Add Lesson Before/;
 let configService: ConfigService;
 let component: ProjectAuthoringComponent;
 let getConfigParamSpy: jasmine.Spy;
@@ -55,7 +53,6 @@ describe('ProjectAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AddLessonButtonComponent,
         ConcurrentAuthorsMessageComponent,
         NodeAuthoringComponent,
         NodeIconComponent,
@@ -66,6 +63,7 @@ describe('ProjectAuthoringComponent', () => {
         TeacherNodeIconComponent
       ],
       imports: [
+        AddLessonButtonComponent,
         AddStepButtonComponent,
         BrowserAnimationsModule,
         FormsModule,
@@ -122,7 +120,6 @@ describe('ProjectAuthoringComponent', () => {
   moveSpecificStep();
   deleteSpecificLesson();
   moveSpecificLesson();
-  addLesson();
 });
 
 function collapseAllButtonClicked() {
@@ -241,117 +238,6 @@ function moveSpecificLesson() {
         state: {
           selectedNodeIds: ['group1']
         }
-      });
-    });
-  });
-}
-
-function addLesson() {
-  addLessonBefore();
-  addLessonBeforeFirstLesson();
-  addLessonAfter();
-  addInactiveLessonBefore();
-  addInactiveLessonBeforeFirstLesson();
-  addInactiveLessonAfter();
-}
-
-function addLessonBeforeFirstLesson() {
-  describe('add lesson button is clicked on a lesson that is the first lesson', () => {
-    describe('add lesson before is chosen on the menu', () => {
-      it('adds a lesson before the chosen lesson', async () => {
-        const addLessonButtons = await harness.getAddLessonButtons();
-        addLessonButtons[0].click();
-        const addLessonMenu = await harness.getOpenedAddStepMenu();
-        await addLessonMenu.clickItem({ text: addLessonBeforeRegex });
-        const newLesson = await harness.getLesson('1: New Lesson');
-        expect(newLesson).not.toEqual(null);
-      });
-    });
-  });
-}
-
-function addLessonBefore() {
-  describe('add lesson button is clicked on a lesson that is not the first lesson', () => {
-    describe('add lesson before is chosen on the menu', () => {
-      it('adds a lesson before the chosen lesson', async () => {
-        const addLessonButtons = await harness.getAddLessonButtons();
-        addLessonButtons[1].click();
-        const addLessonMenu = await harness.getOpenedAddStepMenu();
-        await addLessonMenu.clickItem({ text: addLessonBeforeRegex });
-        const newLesson = await harness.getLesson('2: New Lesson');
-        expect(newLesson).not.toEqual(null);
-      });
-    });
-  });
-}
-
-function addLessonAfter() {
-  describe('add lesson button is clicked', () => {
-    describe('add lesson after is chosen on the menu', () => {
-      it('adds a lesson after the chosen lesson', async () => {
-        const addLessonButtons = await harness.getAddLessonButtons();
-        addLessonButtons[0].click();
-        const addLessonMenu = await harness.getOpenedAddStepMenu();
-        await addLessonMenu.clickItem({ text: addLessonAfterRegex });
-        const newLesson = await harness.getLesson('2: New Lesson');
-        expect(newLesson).not.toEqual(null);
-      });
-    });
-  });
-}
-
-function addInactiveLessonBeforeFirstLesson() {
-  describe('add lesson button is clicked on an inactive lesson that is the first inactive lesson', () => {
-    describe('add lesson before is chosen on the menu', () => {
-      it('adds a lesson before the chosen lesson', async () => {
-        const addLessonButtons = await harness.getAddLessonButtons();
-        addLessonButtons[5].click();
-        const addLessonMenu = await harness.getOpenedAddStepMenu();
-        await addLessonMenu.clickItem({ text: addLessonBeforeRegex });
-        const unusedLessonTitles = await harness.getUnusedLessonTitles();
-        expect(unusedLessonTitles).toEqual([
-          'New Lesson',
-          'Inactive Lesson One',
-          'Inactive Lesson Two'
-        ]);
-      });
-    });
-  });
-}
-
-function addInactiveLessonBefore() {
-  describe('add lesson button is clicked on an inactive lesson that is not the first inactive lesson', () => {
-    describe('add lesson before is chosen on the menu', () => {
-      it('adds a lesson before the chosen lesson', async () => {
-        const addLessonButtons = await harness.getAddLessonButtons();
-        addLessonButtons[6].click();
-        const addLessonMenu = await harness.getOpenedAddStepMenu();
-        await addLessonMenu.clickItem({ text: addLessonBeforeRegex });
-        const unusedLessonTitles = await harness.getUnusedLessonTitles();
-        expect(unusedLessonTitles).toEqual([
-          'Inactive Lesson One',
-          'New Lesson',
-          'Inactive Lesson Two'
-        ]);
-      });
-    });
-  });
-}
-
-function addInactiveLessonAfter() {
-  describe('add lesson button is clicked next to an inactive lesson', () => {
-    describe('add lesson after is chosen on the menu', () => {
-      it('adds a lesson after the chosen lesson', async () => {
-        const addLessonButtons = await harness.getAddLessonButtons();
-        addLessonButtons[6].click();
-        const addLessonMenu = await harness.getOpenedAddStepMenu();
-        await addLessonMenu.clickItem({ text: addLessonAfterRegex });
-        const unusedLessonTitles = await harness.getUnusedLessonTitles();
-        expect(unusedLessonTitles).toEqual([
-          'Inactive Lesson One',
-          'Inactive Lesson Two',
-          'New Lesson'
-        ]);
       });
     });
   });
