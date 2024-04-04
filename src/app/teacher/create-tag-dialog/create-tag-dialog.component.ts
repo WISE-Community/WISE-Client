@@ -5,9 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { TagService } from '../../../assets/wise5/services/tagService';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
+import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 
 @Component({
   selector: 'create-tag-dialog',
@@ -30,12 +30,12 @@ export class CreateTagDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<CreateTagDialogComponent>,
     private snackBar: MatSnackBar,
-    private tagService: TagService
+    private projectTagService: ProjectTagService
   ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.tagService.newTag$.subscribe(() => {
+      this.projectTagService.newTag$.subscribe(() => {
         this.snackBar.open($localize`Tag created`);
       })
     );
@@ -52,7 +52,7 @@ export class CreateTagDialogComponent implements OnInit {
   }
 
   protected create(): void {
-    this.tagService.createTag(this.tagName);
+    this.projectTagService.createTag(this.tagName);
     this.dialogRef.close();
   }
 }
