@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RegisterMicrosoftUserAlreadyExistsComponent } from './register-microsoft-user-already-exists.component';
 import { MatCardModule } from '@angular/material/card';
 
