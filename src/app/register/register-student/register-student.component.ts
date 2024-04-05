@@ -13,6 +13,7 @@ export class RegisterStudentComponent implements OnInit {
   firstName: string = '';
   lastName: string = '';
   isGoogleAuthenticationEnabled: boolean = false;
+  microsoftAuthenticationEnabled: boolean;
 
   constructor(
     private configService: ConfigService,
@@ -23,9 +24,14 @@ export class RegisterStudentComponent implements OnInit {
   ngOnInit(): void {
     this.configService.getConfig().subscribe((config) => {
       if (config != null) {
-        this.isGoogleAuthenticationEnabled = config.googleClientId != null;
+        this.isGoogleAuthenticationEnabled = this.isSet(config.googleClientId);
+        this.microsoftAuthenticationEnabled = this.isSet(config.microsoftClientId);
       }
     });
+  }
+
+  private isSet(value: string): boolean {
+    return value != null && value != '';
   }
 
   public signUp(): void {
@@ -43,5 +49,9 @@ export class RegisterStudentComponent implements OnInit {
         this.router.navigate(['join/student/form', { gID: credential.sub, name: credential.name }]);
       }
     });
+  }
+
+  protected microsoftSignIn(): void {
+    window.location.href = '/api/microsoft-login?redirectUrl=/join/student/form';
   }
 }
