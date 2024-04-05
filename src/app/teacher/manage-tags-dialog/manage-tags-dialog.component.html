@@ -6,7 +6,7 @@
         + New Tag
       </button>
     </div>
-    <div *ngFor="let tag of tags" fxLayout="row" fxLayoutAlign="start center">
+    <div *ngFor="let tag of tags" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
       <mat-form-field subscriptSizing="dynamic" fxFlex>
         <input
           matInput
@@ -15,6 +15,9 @@
           (ngModelChange)="inputChanged.next({ tag: tag, text: $event })"
         />
       </mat-form-field>
+      <button mat-icon-button color="primary" (click)="delete(tag)">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
   </div>
 </mat-dialog-content>

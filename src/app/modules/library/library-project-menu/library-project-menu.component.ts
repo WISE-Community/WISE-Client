@@ -40,7 +40,7 @@ export class LibraryProjectMenuComponent {
     this.isCanShare = this.isOwner() && !this.isRun;
     this.editLink = `${this.configService.getContextPath()}/teacher/edit/unit/${this.project.id}`;
     this.isChild = this.project.isChild();
-    this.archived = this.project.hasTag('archived');
+    this.archived = this.project.hasTagWithText('archived');
   }
 
   isOwner() {

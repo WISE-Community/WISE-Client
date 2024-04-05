@@ -19,14 +19,22 @@ export class ApplyTagsButtonComponent implements OnInit {
   constructor(private dialog: MatDialog, private projectTagService: ProjectTagService) {}
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.projectTagService.retrieveUserTags().subscribe((tags: Tag[]) => {
-        for (const tag of tags) {
-          tag.checked = this.doesAnyProjectHaveTag(tag);
-        }
-        this.tags = tags;
-      })
-    );
+    this.retrieveUserTags();
+    this.subscribeToTagUpdated();
+    this.subscribeToNewTag();
+    this.subscribeToTagDeleted();
+  }
+
+  private retrieveUserTags(): void {
+    this.projectTagService.retrieveUserTags().subscribe((tags: Tag[]) => {
+      for (const tag of tags) {
+        tag.checked = this.doesAnyProjectHaveTag(tag);
+      }
+      this.tags = tags;
+    });
+  }
+
+  private subscribeToTagUpdated(): void {
     this.subscriptions.add(
       this.projectTagService.tagUpdated$.subscribe((tagThatChanged: Tag) => {
         const tag = this.tags.find((t: Tag) => t.id === tagThatChanged.id);
@@ -34,10 +42,21 @@ export class ApplyTagsButtonComponent implements OnInit {
         this.projectTagService.sortTags(this.tags);
       })
     );
+  }
+
+  private subscribeToNewTag(): void {
     this.subscriptions.add(
       this.projectTagService.newTag$.subscribe((tag: Tag) => {
         this.tags.push(tag);
         this.projectTagService.sortTags(this.tags);
+      })
+    );
+  }
+
+  private subscribeToTagDeleted(): void {
+    this.subscriptions.add(
+      this.projectTagService.tagDeleted$.subscribe((deletedTag: Tag) => {
+        this.tags = this.tags.filter((tag: Tag) => tag.id !== deletedTag.id);
       })
     );
   }

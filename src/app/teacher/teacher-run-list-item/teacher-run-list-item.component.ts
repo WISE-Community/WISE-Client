@@ -50,6 +50,7 @@ export class TeacherRunListItemComponent implements OnInit {
       }, 7000);
     }
     this.subscribeToTagUpdated();
+    this.subscribeToTagDeleted();
   }
 
   private subscribeToTagUpdated(): void {
@@ -59,6 +60,16 @@ export class TeacherRunListItemComponent implements OnInit {
         if (tagOnProject != null) {
           tagOnProject.text = tagThatChanged.text;
           this.projectTagService.sortTags(this.run.project.tags);
+        }
+      })
+    );
+  }
+
+  private subscribeToTagDeleted(): void {
+    this.subscriptions.add(
+      this.projectTagService.tagDeleted$.subscribe((tag: Tag) => {
+        if (this.run.project.hasTag(tag)) {
+          this.run.project.removeTag(tag);
         }
       })
     );

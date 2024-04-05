@@ -113,7 +113,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
   public filterUpdated(filterValues: ProjectFilterValues = null): void {
     super.filterUpdated(filterValues);
     this.filteredProjects = this.filteredProjects.filter(
-      (project) => project.hasTag('archived') == this.showArchivedView
+      (project) => project.hasTagWithText('archived') == this.showArchivedView
     );
     this.numProjectsInView = this.getProjectsInView().length;
     this.unselectAllProjects();

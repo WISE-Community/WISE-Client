@@ -11,6 +11,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CreateTagDialogComponent } from '../create-tag-dialog/create-tag-dialog.component';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
+import { MatIconModule } from '@angular/material/icon';
+import { TeacherService } from '../teacher.service';
+import { Run } from '../../domain/run';
 
 @Component({
   selector: 'manage-tags-dialog',
@@ -25,6 +28,7 @@ import { ProjectTagService } from '../../../assets/wise5/services/projectTagServ
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule
   ]
 })
@@ -36,6 +40,7 @@ export class ManageTagsDialogComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
+    private teacherService: TeacherService,
     private projectTagService: ProjectTagService
   ) {}
 
@@ -59,6 +64,12 @@ export class ManageTagsDialogComponent implements OnInit {
         this.projectTagService.sortTags(this.tags);
       })
     );
+    this.subscriptions.add(
+      this.projectTagService.tagDeleted$.subscribe((tag: Tag) => {
+        this.tags = this.tags.filter((t) => t.id !== tag.id);
+        this.snackBar.open($localize`Tag deleted`);
+      })
+    );
   }
 
   ngOnDestroy(): void {
@@ -69,5 +80,24 @@ export class ManageTagsDialogComponent implements OnInit {
     this.dialog.open(CreateTagDialogComponent, {
       panelClass: 'dialog-md'
     });
+  }
+
+  protected delete(tag: Tag): void {
+    this.teacherService.getRuns().subscribe((runs) => {
+      if (confirm(this.getDeleteMessage(runs, tag))) {
+        this.projectTagService.deleteTag(tag);
+      }
+    });
+  }
+
+  private getDeleteMessage(runs: Run[], tag: Tag): string {
+    const numProjectsWithTag = runs.filter((run: Run) =>
+      run.project.tags.some((projectTag: Tag) => projectTag.id === tag.id)
+    ).length;
+    const numberOfProjectsMessage =
+      numProjectsWithTag === 1
+        ? $localize`There is ${numProjectsWithTag} unit with this tag.`
+        : $localize`There are ${numProjectsWithTag} units with this tag.`;
+    return $localize`Are you sure you want to delete this tag? ` + numberOfProjectsMessage;
   }
 }
