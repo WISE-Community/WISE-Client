@@ -12,11 +12,11 @@
         <ng-container i18n>Sign Up</ng-container>
       </button>
     </p>
-    <span *ngIf="isGoogleAuthenticationEnabled || microsoftAuthenticationEnabled">
+    <span *ngIf="googleAuthenticationEnabled || microsoftAuthenticationEnabled">
       <p class="center mat-headline-6" i18n>- or -</p>
       <p class="center">
         <google-sign-in-button
-          *ngIf="isGoogleAuthenticationEnabled"
+          *ngIf="googleAuthenticationEnabled"
           (signedIn)="googleSignIn($event)"
           text="signup_with"
         >
