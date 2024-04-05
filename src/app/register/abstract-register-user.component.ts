@@ -7,8 +7,8 @@ import { GoogleUser } from '../modules/google-sign-in/GoogleUser';
 @Directive()
 export abstract class AbstractRegisterUserComponent implements OnInit {
   protected googleAuthenticationEnabled: boolean = false;
-  protected microsoftAuthenticationEnabled: boolean;
   protected abstract joinFormPath: string;
+  protected microsoftAuthenticationEnabled: boolean = false;
 
   constructor(
     private configService: ConfigService,
