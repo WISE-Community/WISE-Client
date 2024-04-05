@@ -23,10 +23,14 @@ export class RegisterTeacherComponent implements OnInit {
   ngOnInit() {
     this.configService.getConfig().subscribe((config) => {
       if (config != null) {
-        this.isGoogleAuthenticationEnabled = config.googleClientId != null;
-        this.microsoftAuthenticationEnabled = config.microsoftClientId != null;
+        this.isGoogleAuthenticationEnabled = this.isSet(config.googleClientId);
+        this.microsoftAuthenticationEnabled = this.isSet(config.microsoftClientId);
       }
     });
+  }
+
+  private isSet(value: string): boolean {
+    return value != null && value != '';
   }
 
   public signUp() {
