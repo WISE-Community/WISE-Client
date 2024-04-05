@@ -41,4 +41,8 @@ export class ProjectTagService {
       this.newTagSource.next(tag);
     });
   }
+
+  sortTags(tags: Tag[]): Tag[] {
+    return tags.sort((a, b) => a.text.toLowerCase().localeCompare(b.text.toLowerCase()));
+  }
 }

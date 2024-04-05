@@ -48,7 +48,7 @@
     Shared by {{ run.owner.firstName }} {{ run.owner.lastName }}
   </div>
   <div fxLayout="row">
-    <div *ngFor="let tag of run.project.tags" class="tag">{{ tag }}</div>
+    <div *ngFor="let tag of run.project.tags" class="tag">{{ tag.text }}</div>
   </div>
 </ng-template>
 

@@ -1,5 +1,6 @@
 import { Run } from './run';
 import { User } from '../domain/user';
+import { Tag } from './tag';
 
 export class Project {
   archived: boolean;
@@ -17,7 +18,7 @@ export class Project {
   run: Run;
   sharedOwners: User[] = [];
   selected: boolean;
-  tags: string[];
+  tags: Tag[];
   thumbStyle: any;
   uri: String;
   wiseVersion: number;
@@ -93,16 +94,21 @@ export class Project {
     return metadata;
   }
 
-  hasTag(tag: string): boolean {
-    return this.tags.includes(tag);
+  hasTag(tagText: string): boolean {
+    return this.tags.some((tag: Tag) => tag.text === tagText);
   }
 
-  updateArchivedStatus(archived: boolean): void {
+  updateArchivedStatus(archived: boolean, tag: Tag): void {
     this.archived = archived;
-    if (archived) {
-      this.tags.push('archived');
-    } else {
-      this.tags.splice(this.tags.indexOf('archived'), 1);
-    }
+    archived ? this.addTag(tag) : this.removeTag(tag);
+  }
+
+  addTag(tag: Tag): void {
+    this.tags.push(tag);
+    this.tags.sort((a, b) => a.text.toLowerCase().localeCompare(b.text.toLowerCase()));
+  }
+
+  removeTag(tag: Tag): void {
+    this.tags = this.tags.filter((projectTag: Tag) => projectTag.id !== tag.id);
   }
 }

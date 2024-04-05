@@ -31,9 +31,12 @@ import { Project } from '../../domain/project';
 import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
 import { HttpClient } from '@angular/common/http';
 import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
+import { Tag } from '../../domain/tag';
+import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 
 class TeacherScheduleStubComponent {}
 
+const archivedTag = { id: 1, text: 'archived' };
 let component: TeacherRunListComponent;
 let configService: ConfigService;
 const currentTime = new Date().getTime();
@@ -52,7 +55,7 @@ const userId: number = 1;
 let userService: UserService;
 
 class TeacherRunStub extends TeacherRun {
-  constructor(id: number, startTime: number, endTime: number, name: string, tags: string[] = []) {
+  constructor(id: number, startTime: number, endTime: number, name: string, tags: Tag[] = []) {
     super({
       id: id,
       archived: false,
@@ -62,7 +65,7 @@ class TeacherRunStub extends TeacherRun {
       owner: new User({ id: userId }),
       periods: [],
       project: new Project({
-        archived: tags.includes('archived'),
+        archived: tags.includes(archivedTag),
         id: id,
         tags: tags,
         name: name,
@@ -104,7 +107,13 @@ describe('TeacherRunListComponent', () => {
           ]),
           SelectRunsControlsModule
         ],
-        providers: [ArchiveProjectService, ConfigService, TeacherService, UserService],
+        providers: [
+          ArchiveProjectService,
+          ConfigService,
+          ProjectTagService,
+          TeacherService,
+          UserService
+        ],
         schemas: [NO_ERRORS_SCHEMA]
       });
     })
@@ -152,7 +161,10 @@ function archiveSelectedRuns(): void {
       await runListHarness.clickRunListItemCheckbox(0);
       await runListHarness.clickRunListItemCheckbox(1);
       spyOn(http, 'put').and.returnValue(
-        of([new ArchiveProjectResponse(3, true), new ArchiveProjectResponse(2, true)])
+        of([
+          new ArchiveProjectResponse(3, true, archivedTag),
+          new ArchiveProjectResponse(2, true, archivedTag)
+        ])
       );
       await runListHarness.clickArchiveButton();
       expect(await runListHarness.getNumRunListItems()).toEqual(1);
@@ -167,8 +179,8 @@ function unarchiveSelectedRuns(): void {
       getRunsSpy.and.returnValue(
         of([
           new TeacherRunStub(1, run1StartTime, null, run1Title),
-          new TeacherRunStub(2, run2StartTime, null, run2Title, ['archived']),
-          new TeacherRunStub(3, run3StartTime, null, run3Title, ['archived'])
+          new TeacherRunStub(2, run2StartTime, null, run2Title, [archivedTag]),
+          new TeacherRunStub(3, run3StartTime, null, run3Title, [archivedTag])
         ])
       );
       component.ngOnInit();
@@ -177,7 +189,10 @@ function unarchiveSelectedRuns(): void {
       await runListHarness.clickRunListItemCheckbox(0);
       await runListHarness.clickRunListItemCheckbox(1);
       spyOn(http, 'delete').and.returnValue(
-        of([new ArchiveProjectResponse(3, false), new ArchiveProjectResponse(2, false)])
+        of([
+          new ArchiveProjectResponse(3, false, archivedTag),
+          new ArchiveProjectResponse(2, false, archivedTag)
+        ])
       );
       await runListHarness.clickUnarchiveButton();
       expect(await runListHarness.getNumRunListItems()).toEqual(0);
@@ -309,7 +324,7 @@ function archiveRunNoLongerInActiveView() {
     it('it should no longer be displayed in the active view', async () => {
       expect(await runListHarness.isShowingArchived()).toBeFalse();
       expect(await runListHarness.getNumRunListItems()).toEqual(3);
-      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(2, true)));
+      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(2, true, archivedTag)));
       await runListHarness.clickRunListItemMenuArchiveButton(1);
       expect(await runListHarness.isShowingArchived()).toBeFalse();
       expect(await runListHarness.getNumRunListItems()).toEqual(2);
@@ -324,7 +339,7 @@ function unarchiveRunNoLongerInArchivedView() {
       getRunsSpy.and.returnValue(
         of([
           new TeacherRunStub(1, run1StartTime, null, run1Title),
-          new TeacherRunStub(2, run2StartTime, null, run2Title, ['archived']),
+          new TeacherRunStub(2, run2StartTime, null, run2Title, [archivedTag]),
           new TeacherRunStub(3, run3StartTime, null, run3Title)
         ])
       );
@@ -333,7 +348,7 @@ function unarchiveRunNoLongerInArchivedView() {
       expect(await runListHarness.isShowingArchived()).toBeTrue();
       expect(await runListHarness.getNumRunListItems()).toEqual(1);
       await expectRunTitles([run2Title]);
-      spyOn(http, 'delete').and.returnValue(of(new ArchiveProjectResponse(2, false)));
+      spyOn(http, 'delete').and.returnValue(of(new ArchiveProjectResponse(2, false, archivedTag)));
       await runListHarness.clickRunListItemMenuUnarchiveButton(0);
       expect(await runListHarness.isShowingArchived()).toBeTrue();
       expect(await runListHarness.getNumRunListItems()).toEqual(0);
