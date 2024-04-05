@@ -1502,13 +1502,13 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Choose the step(s) that you want to import, then select Next.</target>
       </trans-unit>
-      <trans-unit id="2d00759dc177baeb48ce2f3092f5a350caf51b86" datatype="html">
-        <source>Selected unit: <x id="INTERPOLATION" equiv-text="{{ project.metadata.title }}"/></source>
+      <trans-unit id="cf540b0175594b4ab4215257835c477a2fe4cb5f" datatype="html">
+        <source>Selected unit: <x id="INTERPOLATION" equiv-text="{{ project?.metadata.title }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step/choose-import-step.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Selected unit: <x id="INTERPOLATION" equiv-text="{{ project.metadata.title }}"/></target>
+        <target state="needs-translation">Selected unit: <x id="INTERPOLATION" equiv-text="{{ project?.metadata.title }}"/></target>
       </trans-unit>
       <trans-unit id="76176dda9f079e8ab3c78d6975eee76b8b3eddad" datatype="html">
         <source>Preview Unit</source>
@@ -9898,31 +9898,39 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Add lesson</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-lesson-button/add-lesson-button.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/add-lesson-button/add-lesson-button.component.html</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <target state="needs-translation">Add lesson</target>
       </trans-unit>
-      <trans-unit id="d0486a16c279a8f3cf447b35c0bb3ebafff545e0" datatype="html">
-        <source>Add Lesson Before</source>
+      <trans-unit id="f00499cc318eb0e75bbd9f6a08f409e3ed806c5b" datatype="html">
+        <source>Add lesson before</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-lesson-button/add-lesson-button.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">28</context>
         </context-group>
-        <target state="needs-translation">Add Lesson Before</target>
+        <target state="needs-translation">Add lesson before</target>
       </trans-unit>
-      <trans-unit id="af0c4734813fe3427d3723ae7369483ffd2142c6" datatype="html">
-        <source>Add Lesson After</source>
+      <trans-unit id="7c096031ae7c24c22f80edb62bd25896a4cbd2e6" datatype="html">
+        <source>Add lesson after</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-lesson-button/add-lesson-button.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">31</context>
         </context-group>
-        <target state="needs-translation">Add Lesson After</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/add-lesson-button/add-lesson-button.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <target state="needs-translation">Add lesson after</target>
       </trans-unit>
       <trans-unit id="97251568662383277" datatype="html">
         <source>New Lesson</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-lesson-button/add-lesson-button.component.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <target state="needs-translation">New Lesson</target>
       </trans-unit>
@@ -10002,6 +10010,38 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">There was an error creating this unit. Please contact WISE staff.</target>
       </trans-unit>
+      <trans-unit id="3f3eed30db20799da458408b4d53206e5c8c8684" datatype="html">
+        <source>Add step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/add-step-button/add-step-button.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+        <target state="needs-translation">Add step</target>
+      </trans-unit>
+      <trans-unit id="abeeca08450df34a78cb591b634d6d16ef5b7dad" datatype="html">
+        <source>Add step before</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/add-step-button/add-step-button.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <target state="needs-translation">Add step before</target>
+      </trans-unit>
+      <trans-unit id="d59263511cd8dbe0a1eb9bd829aac8d827d8fd83" datatype="html">
+        <source>Add step after</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/add-step-button/add-step-button.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/add-step-button/add-step-button.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <target state="needs-translation">Add step after</target>
+      </trans-unit>
       <trans-unit id="fe6e2f065cc702b14273855c483508aedc35a279" datatype="html">
         <source>Choose a location for the new lesson: <x id="INTERPOLATION" equiv-text="{{ title }}"/></source>
         <context-group purpose="location">
@@ -10034,7 +10074,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">88</context>
+          <context context-type="linenumber">89</context>
         </context-group>
         <target state="needs-translation">Unused Lessons</target>
       </trans-unit>
@@ -10704,7 +10744,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">111</context>
         </context-group>
         <target state="needs-translation">Unused Steps</target>
       </trans-unit>
@@ -13442,39 +13482,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Delete lesson</target>
       </trans-unit>
-      <trans-unit id="3f3eed30db20799da458408b4d53206e5c8c8684" datatype="html">
-        <source>Add step</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
-          <context context-type="linenumber">84</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
-          <context context-type="linenumber">110</context>
-        </context-group>
-        <target state="needs-translation">Add step</target>
-      </trans-unit>
-      <trans-unit id="f28facec49bae19961cf1c78a7e6e2c0fcf1e617" datatype="html">
-        <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add_circle<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>Add Step Before </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
-          <context context-type="linenumber">97,98</context>
-        </context-group>
-        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add_circle<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>Add Step Before </target>
-      </trans-unit>
-      <trans-unit id="b954bd44d8e965f064fddd3ebbf401b71786535d" datatype="html">
-        <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add_circle<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>Add Step After </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
-          <context context-type="linenumber">100,101</context>
-        </context-group>
-        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add_circle<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>Add Step After </target>
-      </trans-unit>
       <trans-unit id="66084384cb169b4f9d7836c16f37b8b9dfc5a049" datatype="html">
         <source>This lesson has no steps</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">82</context>
         </context-group>
         <target state="needs-translation">This lesson has no steps</target>
       </trans-unit>
@@ -13602,7 +13614,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>There are no unused lessons</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">91</context>
         </context-group>
         <target state="needs-translation">There are no unused lessons</target>
       </trans-unit>
@@ -13610,7 +13622,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>There are no unused steps</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">112</context>
         </context-group>
         <target state="needs-translation">There are no unused steps</target>
       </trans-unit>
