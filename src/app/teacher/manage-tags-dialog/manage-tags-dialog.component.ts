@@ -91,18 +91,13 @@ export class ManageTagsDialogComponent implements OnInit {
   }
 
   private getDeleteMessage(runs: Run[], tag: Tag): string {
-    const numberOfProjectsWithTag = this.getNumberOfProjectsWithTag(runs, tag);
-    const numberOfProjectsMessage =
-      numberOfProjectsWithTag === 1
-        ? $localize`There is ${numberOfProjectsWithTag} unit with this tag.`
-        : $localize`There are ${numberOfProjectsWithTag} units with this tag.`;
-    return $localize`Are you sure you want to delete this tag? ` + numberOfProjectsMessage;
-  }
-
-  private getNumberOfProjectsWithTag(runs: Run[], tag: Tag) {
-    const projectsWithTag = runs.filter((run: Run) =>
+    const numProjectsWithTag = runs.filter((run: Run) =>
       run.project.tags.some((projectTag: Tag) => projectTag.id === tag.id)
-    );
-    return projectsWithTag.length;
+    ).length;
+    const numberOfProjectsMessage =
+      numProjectsWithTag === 1
+        ? $localize`There is ${numProjectsWithTag} unit with this tag.`
+        : $localize`There are ${numProjectsWithTag} units with this tag.`;
+    return $localize`Are you sure you want to delete this tag? ` + numberOfProjectsMessage;
   }
 }
