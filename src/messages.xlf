@@ -291,7 +291,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
@@ -7420,82 +7420,82 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Successfully <x id="PH" equiv-text="archive ? &apos;archived&apos; : &apos;restored&apos;"/> unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5775346636203685655" datatype="html">
         <source>Undo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1866036816253590803" datatype="html">
         <source>Action undone.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8310924106294815391" datatype="html">
         <source>Error undoing action.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4649373271512187502" datatype="html">
         <source>Error archiving unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3781019523543102447" datatype="html">
         <source>Error restoring unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4446500764298446942" datatype="html">
         <source>Successfully archived <x id="PH" equiv-text="count"/> unit(s).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6233410407787231949" datatype="html">
         <source>Successfully restored <x id="PH" equiv-text="count"/> unit(s).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3755123516042132329" datatype="html">
         <source>Error archiving unit(s).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3419148337120710852" datatype="html">
         <source>Error restoring unit(s).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e931f6b80399785ea1647269f43ffeea54327cb6" datatype="html">
@@ -8423,7 +8423,35 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Tag updated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8663242190095976332" datatype="html">
+        <source>Tag deleted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9151762754681070291" datatype="html">
+        <source>There is <x id="PH" equiv-text="numberOfProjectsWithTag"/> unit with this tag.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2021640020415028727" datatype="html">
+        <source>There are <x id="PH" equiv-text="numberOfProjectsWithTag"/> units with this tag.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1288226131735320264" datatype="html">
+        <source>Are you sure you want to delete this tag? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
+          <context context-type="linenumber">99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9008968878373693685" datatype="html">
@@ -9064,7 +9092,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Class Periods:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.ts</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dc4130f5eb9a8c04d1b3734d36f745db855fe90f" datatype="html">

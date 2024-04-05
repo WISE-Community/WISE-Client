@@ -8,6 +8,8 @@ import { Tag } from '../../../app/domain/tag';
 export class ProjectTagService {
   private newTagSource: Subject<Tag> = new Subject<Tag>();
   public newTag$: Observable<Tag> = this.newTagSource.asObservable();
+  private tagDeletedSource: Subject<Tag> = new Subject<Tag>();
+  public tagDeleted$: Observable<Tag> = this.tagDeletedSource.asObservable();
   private tagUpdatedSource: Subject<Tag> = new Subject<Tag>();
   public tagUpdated$: Observable<Tag> = this.tagUpdatedSource.asObservable();
 
@@ -44,5 +46,11 @@ export class ProjectTagService {
 
   sortTags(tags: Tag[]): Tag[] {
     return tags.sort((a, b) => a.text.toLowerCase().localeCompare(b.text.toLowerCase()));
+  }
+
+  deleteTag(tag: Tag): void {
+    this.http.delete(`/api/user/tag/${tag.id}`).subscribe((tag: Tag) => {
+      this.tagDeletedSource.next(tag);
+    });
   }
 }

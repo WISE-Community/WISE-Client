@@ -94,8 +94,12 @@ export class Project {
     return metadata;
   }
 
-  hasTag(tagText: string): boolean {
+  hasTagWithText(tagText: string): boolean {
     return this.tags.some((tag: Tag) => tag.text === tagText);
+  }
+
+  hasTag(tag: Tag): boolean {
+    return this.tags.some((projectTag: Tag) => projectTag.id === tag.id);
   }
 
   updateArchivedStatus(archived: boolean, tag: Tag): void {
