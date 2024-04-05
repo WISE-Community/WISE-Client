@@ -13,7 +13,7 @@ import { lastValueFrom } from 'rxjs';
 export class LoginHomeComponent implements OnInit {
   accessCode: string = '';
   credentials: any = { username: '', password: '', recaptchaResponse: null };
-  isGoogleAuthenticationEnabled: boolean = false;
+  protected googleAuthenticationEnabled: boolean = false;
   isRecaptchaEnabled: boolean = false;
   isRecaptchaVerificationFailed: boolean = false;
   isReLoginDueToErrorSavingData: boolean;
@@ -34,14 +34,14 @@ export class LoginHomeComponent implements OnInit {
   ngOnInit(): void {
     this.configService.getConfig().subscribe((config) => {
       if (config != null) {
-        this.isGoogleAuthenticationEnabled = config.googleClientId != '';
+        this.googleAuthenticationEnabled = config.googleClientId != '';
         this.microsoftAuthenticationEnabled = config.microsoftClientId != '';
       }
       if (this.userService.isSignedIn()) {
         this.router.navigateByUrl(this.getRedirectUrl(''));
       }
       this.showSocialLogin =
-        this.isGoogleAuthenticationEnabled || this.microsoftAuthenticationEnabled;
+        this.googleAuthenticationEnabled || this.microsoftAuthenticationEnabled;
     });
     this.route.params.subscribe((params) => {
       if (params['username'] != null) {
