@@ -52,7 +52,7 @@ export class TeacherRunListItemComponent implements OnInit {
     this.subscribeToTagUpdated();
   }
 
-  subscribeToTagUpdated(): void {
+  private subscribeToTagUpdated(): void {
     this.subscriptions.add(
       this.projectTagService.tagUpdated$.subscribe((tagThatChanged: Tag) => {
         const tagOnProject = this.run.project.tags.find((tag: Tag) => tag.id === tagThatChanged.id);
