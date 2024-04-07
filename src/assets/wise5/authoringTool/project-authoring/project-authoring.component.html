@@ -2,17 +2,6 @@
   <button
     mat-raised-button
     color="primary"
-    (click)="addNewLesson()"
-    [disabled]="nodeTypeSelected() != null"
-    matTooltip="Add New Lesson"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>queue</mat-icon>
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
     (click)="chooseLocation(false)"
     [disabled]="!hasSelectedNodes()"
     matTooltip="Move"

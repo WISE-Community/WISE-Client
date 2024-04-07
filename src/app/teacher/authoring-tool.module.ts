@@ -15,7 +15,6 @@ import { PreviewComponentModule } from '../../assets/wise5/authoringTool/compone
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
 import { AddLessonConfigureComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component';
-import { AddLessonChooseLocationComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-location/add-lesson-choose-location.component';
 import { ConcurrentAuthorsMessageComponent } from '../../assets/wise5/authoringTool/concurrent-authors-message/concurrent-authors-message.component';
 import { ImportComponentModule } from '../../assets/wise5/authoringTool/importComponent/import-component-module';
 import { NodeAdvancedAuthoringModule } from '../../assets/wise5/authoringTool/node/advanced/node-advanced-authoring.module';
@@ -65,7 +64,6 @@ import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-ste
 @NgModule({
   declarations: [
     AddComponentButtonComponent,
-    AddLessonChooseLocationComponent,
     AddLessonChooseTemplateComponent,
     AddLessonConfigureComponent,
     AddProjectComponent,

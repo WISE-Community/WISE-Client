@@ -5,6 +5,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatDividerModule } from '@angular/material/divider';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 describe('JigsawComponent', () => {
   let component: JigsawComponent;
@@ -18,9 +20,12 @@ describe('JigsawComponent', () => {
         HttpClientTestingModule,
         MatDividerModule,
         MatRadioModule,
-        RouterTestingModule
-      ]
+        RouterTestingModule,
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [TeacherProjectService]
     }).compileComponents();
+    window.history.pushState({}, '', '');
     fixture = TestBed.createComponent(JigsawComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
