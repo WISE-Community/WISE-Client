@@ -10,10 +10,10 @@ import { temporarilyHighlightElement } from '../../../common/dom/dom';
   templateUrl: './add-lesson-configure.component.html'
 })
 export class AddLessonConfigureComponent {
-  addLessonFormGroup: FormGroup = this.fb.group({
+  protected addLessonFormGroup: FormGroup = this.fb.group({
     title: new FormControl('', [Validators.required])
   });
-  target: string;
+  protected target: string;
   @ViewChild('titleField') titleField: ElementRef;
 
   constructor(
@@ -32,17 +32,15 @@ export class AddLessonConfigureComponent {
   }
 
   protected submit(): void {
-    const newLesson = this.createNewLesson();
+    const newLesson = this.projectService.createGroup(
+      this.addLessonFormGroup.controls['title'].value
+    );
     if (this.target === 'group0' || this.target === 'inactiveGroups') {
       this.projectService.createNodeInside(newLesson, this.target);
     } else {
       this.projectService.createNodeAfter(newLesson, this.target);
     }
     this.updateProject(newLesson.id);
-  }
-
-  private createNewLesson(): any {
-    return this.projectService.createGroup(this.addLessonFormGroup.controls['title'].value);
   }
 
   private updateProject(newNodeId: string): void {
