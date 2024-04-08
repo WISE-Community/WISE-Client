@@ -5,26 +5,32 @@
 >
 </wise-authoring-tinymce-editor>
 <mat-tab-group *ngIf="showTranslationInput()" mat-stretch-tabs="false">
-  <mat-tab label="{{ currentLanguage().language }}"
-    ><ng-template matTabContent
-      ><button mat-button color="primary" (click)="copyDefaultLanguageText()" i18n>
-        Copy content from {{ defaultLanguage.language }}</button
-      ><wise-authoring-tinymce-editor
+  <mat-tab label="{{ currentLanguage().language }}">
+    <ng-template matTabContent>
+      <div class="translation-tools">
+        <button mat-stroked-button color="primary" (click)="copyDefaultLanguageText()" i18n>
+          Copy content from {{ defaultLanguage.language }}
+        </button>
+      </div>
+      <wise-authoring-tinymce-editor
         [language]="currentLanguage()"
         [(model)]="translationText"
         (modelChange)="translationTextChanged.next($event)"
       >
-      </wise-authoring-tinymce-editor></ng-template
-  ></mat-tab>
+      </wise-authoring-tinymce-editor>
+    </ng-template>
+  </mat-tab>
   <mat-tab label="{{ defaultLanguage.language }}">
     <ng-template matTabContent>
-      <span i18n
-        >Editing is disabled. Please switch back to {{ defaultLanguage.language }} if you want to
-        edit.</span
-      >
-      <button mat-button color="primary" (click)="copyDefaultLanguageText()" i18n>
-        Copy content to {{ currentLanguage().language }}
-      </button>
+      <div class="translation-tools" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <span class="info mat-caption" i18n
+          >Note: Editing is disabled. Please switch back to {{ defaultLanguage.language }} if you
+          want to edit.</span
+        >
+        <button mat-stroked-button color="primary" (click)="copyDefaultLanguageText()" i18n>
+          Copy content to {{ currentLanguage().language }}
+        </button>
+      </div>
       <wise-authoring-tinymce-editor [model]="html" disabled="true"></wise-authoring-tinymce-editor>
     </ng-template>
   </mat-tab>
