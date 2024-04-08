@@ -1,5 +1,5 @@
 import { Input, Signal, Output, computed, Directive } from '@angular/core';
-import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Subject, Subscription, debounceTime } from 'rxjs';
 import { Language } from '../../../../../app/domain/language';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -37,14 +37,12 @@ export abstract class AbstractTranslatableFieldComponent {
       })
     );
     this.subscriptions.add(
-      this.translationTextChanged
-        .pipe(debounceTime(1000), distinctUntilChanged())
-        .subscribe(async (text: string) => {
-          if (this.i18nId == null) {
-            await this.createI18NField();
-          }
-          this.saveTranslationText(text);
-        })
+      this.translationTextChanged.pipe(debounceTime(1000)).subscribe(async (text: string) => {
+        if (this.i18nId == null) {
+          await this.createI18NField();
+        }
+        this.saveTranslationText(text);
+      })
     );
   }
 
