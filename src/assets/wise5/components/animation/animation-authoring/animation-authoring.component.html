@@ -127,23 +127,19 @@
       fxLayoutAlign="start center"
       class="object-image-input-container"
     >
-      <mat-form-field class="object-image-input">
-        <mat-label i18n>Image</mat-label>
-        <input matInput [(ngModel)]="object.image" (ngModelChange)="inputChange.next($event)" />
-      </mat-form-field>
-      <button
-        mat-raised-button
-        color="primary"
-        class="button"
-        (click)="chooseImage(object)"
-        matTooltip="Choose an Image"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Image"
-        i18n-aria-label
-      >
-        <mat-icon>insert_photo</mat-icon>
-      </button>
+      <translatable-input
+        [content]="object"
+        key="image"
+        label="Image"
+        i18n-label
+        (defaultLanguageTextChanged)="inputChange.next($event)"
+        class="object-image-input"
+      />
+      <translatable-asset-chooser
+        [content]="object"
+        key="image"
+        (defaultLanguageTextChanged)="componentChanged()"
+      />
     </div>
     <translatable-input
       *ngIf="object.type === 'text'" 
