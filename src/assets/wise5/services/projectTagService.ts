@@ -38,10 +38,12 @@ export class ProjectTagService {
     });
   }
 
-  createTag(tagName: string): Subscription {
-    return this.http.post(`/api/user/tag`, { text: tagName }).subscribe((tag: Tag) => {
-      this.newTagSource.next(tag);
-    });
+  createTag(tagName: string): Observable<Object> {
+    return this.http.post(`/api/user/tag`, { text: tagName });
+  }
+
+  emitNewTag(tag: Tag): void {
+    this.newTagSource.next(tag);
   }
 
   sortTags(tags: Tag[]): Tag[] {
@@ -52,5 +54,9 @@ export class ProjectTagService {
     this.http.delete(`/api/user/tag/${tag.id}`).subscribe((tag: Tag) => {
       this.tagDeletedSource.next(tag);
     });
+  }
+
+  doesTagAlreadyExist(tags: Tag[], tagText: string): boolean {
+    return tags.some((tag: Tag) => tag.text.toLowerCase().trim() === tagText.toLowerCase().trim());
   }
 }
