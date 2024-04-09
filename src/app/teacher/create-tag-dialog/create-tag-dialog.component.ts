@@ -62,7 +62,7 @@ export class CreateTagDialogComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  createUniqueTagValidator(): ValidatorFn {
+  private createUniqueTagValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       return this.tags != null &&
         this.projectTagService.doesTagAlreadyExist(this.tags, control.value)
@@ -79,8 +79,7 @@ export class CreateTagDialogComponent implements OnInit {
 
   protected create(): void {
     this.projectTagService.createTag(this.tagControl.value.trim()).subscribe({
-      next: (tag: Tag) => {
-        this.projectTagService.emitNewTag(tag);
+      next: () => {
         this.dialogRef.close();
       },
       error: ({ error }) => {
