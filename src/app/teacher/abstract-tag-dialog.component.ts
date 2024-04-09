@@ -6,10 +6,7 @@ import {
   AbstractControl,
   ValidationErrors
 } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProjectTagService } from '../../assets/wise5/services/projectTagService';
-import { CreateTagDialogComponent } from './create-tag-dialog/create-tag-dialog.component';
 import { Tag } from '../domain/tag';
 
 @Directive()
@@ -20,11 +17,7 @@ export abstract class AbstractTagDialogComponent implements OnInit {
   ]);
   protected tags: Tag[] = [];
 
-  constructor(
-    protected dialogRef: MatDialogRef<CreateTagDialogComponent>,
-    protected projectTagService: ProjectTagService,
-    protected snackBar: MatSnackBar
-  ) {}
+  constructor(protected projectTagService: ProjectTagService) {}
 
   ngOnInit(): void {
     this.projectTagService.retrieveUserTags().subscribe((tags: Tag[]) => {

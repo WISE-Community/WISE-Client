@@ -26,11 +26,11 @@ import { AbstractTagDialogComponent } from '../abstract-tag-dialog.component';
 })
 export class CreateTagDialogComponent extends AbstractTagDialogComponent {
   constructor(
-    protected dialogRef: MatDialogRef<CreateTagDialogComponent>,
+    private dialogRef: MatDialogRef<CreateTagDialogComponent>,
     protected projectTagService: ProjectTagService,
-    protected snackBar: MatSnackBar
+    private snackBar: MatSnackBar
   ) {
-    super(dialogRef, projectTagService, snackBar);
+    super(projectTagService);
   }
 
   ngOnInit(): void {
