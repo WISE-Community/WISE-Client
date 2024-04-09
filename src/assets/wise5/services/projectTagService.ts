@@ -32,13 +32,15 @@ export class ProjectTagService {
     return this.http.delete(`/api/projects/tag/${tag.text}`, { params: params }).subscribe();
   }
 
-  updateTag(tag: Tag): void {
-    this.http.put<Tag>(`/api/user/tag/${tag.id}`, tag).subscribe((tag) => {
-      this.tagUpdatedSource.next(tag);
-    });
+  updateTag(tag: Tag): Observable<Tag> {
+    return this.http.put<Tag>(`/api/user/tag/${tag.id}`, tag).pipe(
+      tap((tag) => {
+        this.tagUpdatedSource.next(tag);
+      })
+    );
   }
 
-  createTag(tagName: string): Observable<Object> {
+  createTag(tagName: string): Observable<Tag> {
     return this.http.post(`/api/user/tag`, { text: tagName }).pipe(
       tap((tag: Tag) => {
         this.newTagSource.next(tag);
@@ -50,13 +52,11 @@ export class ProjectTagService {
     return tags.sort((a, b) => a.text.toLowerCase().localeCompare(b.text.toLowerCase()));
   }
 
-  deleteTag(tag: Tag): void {
-    this.http.delete(`/api/user/tag/${tag.id}`).subscribe((tag: Tag) => {
-      this.tagDeletedSource.next(tag);
-    });
-  }
-
-  doesTagAlreadyExist(tags: Tag[], tagText: string): boolean {
-    return tags.some((tag: Tag) => tag.text.toLowerCase().trim() === tagText.toLowerCase().trim());
+  deleteTag(tag: Tag): Observable<Tag> {
+    return this.http.delete(`/api/user/tag/${tag.id}`).pipe(
+      tap((tag: Tag) => {
+        this.tagDeletedSource.next(tag);
+      })
+    );
   }
 }
