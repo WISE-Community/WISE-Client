@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, Observable, Subscription } from 'rxjs';
+import { Subject, Observable, Subscription, tap } from 'rxjs';
 import { Project } from '../../../app/domain/project';
 import { Tag } from '../../../app/domain/tag';
 
@@ -38,10 +38,12 @@ export class ProjectTagService {
     });
   }
 
-  createTag(tagName: string): Subscription {
-    return this.http.post(`/api/user/tag`, { text: tagName }).subscribe((tag: Tag) => {
-      this.newTagSource.next(tag);
-    });
+  createTag(tagName: string): Observable<Object> {
+    return this.http.post(`/api/user/tag`, { text: tagName }).pipe(
+      tap((tag: Tag) => {
+        this.newTagSource.next(tag);
+      })
+    );
   }
 
   sortTags(tags: Tag[]): Tag[] {
@@ -52,5 +54,9 @@ export class ProjectTagService {
     this.http.delete(`/api/user/tag/${tag.id}`).subscribe((tag: Tag) => {
       this.tagDeletedSource.next(tag);
     });
+  }
+
+  doesTagAlreadyExist(tags: Tag[], tagText: string): boolean {
+    return tags.some((tag: Tag) => tag.text.toLowerCase().trim() === tagText.toLowerCase().trim());
   }
 }

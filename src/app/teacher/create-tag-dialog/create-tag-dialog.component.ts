@@ -1,6 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
+import { Tag } from '../../domain/tag';
 
 @Component({
   selector: 'create-tag-dialog',
@@ -20,12 +29,17 @@ import { ProjectTagService } from '../../../assets/wise5/services/projectTagServ
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    ReactiveFormsModule
   ]
 })
 export class CreateTagDialogComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
-  protected tagName: string = '';
+  protected tagControl = new FormControl('', [
+    Validators.required,
+    this.createUniqueTagValidator()
+  ]);
+  private tags: Tag[] = [];
 
   constructor(
     private dialogRef: MatDialogRef<CreateTagDialogComponent>,
@@ -34,6 +48,9 @@ export class CreateTagDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.projectTagService.retrieveUserTags().subscribe((tags: Tag[]) => {
+      this.tags = tags;
+    });
     this.subscriptions.add(
       this.projectTagService.newTag$.subscribe(() => {
         this.snackBar.open($localize`Tag created`);
@@ -45,6 +62,15 @@ export class CreateTagDialogComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
+  private createUniqueTagValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return this.tags != null &&
+        this.projectTagService.doesTagAlreadyExist(this.tags, control.value)
+        ? { tagAlreadyExists: true }
+        : null;
+    };
+  }
+
   protected keyPressed(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       this.create();
@@ -52,7 +78,15 @@ export class CreateTagDialogComponent implements OnInit {
   }
 
   protected create(): void {
-    this.projectTagService.createTag(this.tagName);
-    this.dialogRef.close();
+    this.projectTagService.createTag(this.tagControl.value.trim()).subscribe({
+      next: () => {
+        this.dialogRef.close();
+      },
+      error: ({ error }) => {
+        if (error.messageCode === 'tagAlreadyExists') {
+          this.tagControl.setErrors({ tagAlreadyExists: true });
+        }
+      }
+    });
   }
 }

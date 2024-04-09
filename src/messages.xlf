@@ -437,7 +437,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-tag-dialog/create-tag-dialog.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-run-warning-dialog/edit-run-warning-dialog.component.html</context>
@@ -8200,30 +8200,36 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="70a67e04629f6d412db0a12d51820b480788d795" datatype="html">
-        <source>Create</source>
+      <trans-unit id="e5f24fc7a2bf50bd61d109dd9cad3fbff6ec7add" datatype="html">
+        <source>Required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-tag-dialog/create-tag-dialog.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component.html</context>
+          <context context-type="linenumber">3</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="4215210349960e31377ef22c4d2750f626b84067" datatype="html">
+        <source>Tag already exists</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/wise-link-authoring-dialog/wise-link-authoring-dialog.component.html</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="sourcefile">src/app/teacher/create-tag-dialog/create-tag-dialog.component.html</context>
+          <context context-type="linenumber">7</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="5ddde4e47e7de2e987bb8d25dd803b9fa4e775cd" datatype="html">
+        <source> Create </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.html</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="sourcefile">src/app/teacher/create-tag-dialog/create-tag-dialog.component.html</context>
+          <context context-type="linenumber">12,14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5325249077056620539" datatype="html">
         <source>Tag created</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-tag-dialog/create-tag-dialog.component.ts</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="22003a1edfc137e76879183acaaea45adf8452fa" datatype="html">
@@ -11610,13 +11616,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">203</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="e5f24fc7a2bf50bd61d109dd9cad3fbff6ec7add" datatype="html">
-        <source>Required</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="cf11597f80309219c947fba6c22b94290f6371d2" datatype="html">
         <source>Choose the new location by clicking one of the buttons below</source>
         <context-group purpose="location">
@@ -12005,6 +12004,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component.html</context>
           <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="70a67e04629f6d412db0a12d51820b480788d795" datatype="html">
+        <source>Create</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/wise-link-authoring-dialog/wise-link-authoring-dialog.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.html</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f49dc696db7f816c672e23d20e563dd132a8e714" datatype="html">
