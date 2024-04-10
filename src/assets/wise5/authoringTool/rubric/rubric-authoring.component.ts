@@ -1,7 +1,5 @@
-import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Component } from '@angular/core';
-import { insertWiseLinks } from '../../common/wise-link/wise-link';
 
 @Component({
   selector: 'rubric-authoring',
@@ -9,20 +7,15 @@ import { insertWiseLinks } from '../../common/wise-link/wise-link';
   styleUrls: ['./rubric-authoring.component.scss']
 })
 export class RubricAuthoringComponent {
-  rubric: string = '';
+  protected project: any;
 
-  constructor(
-    private configService: ConfigService,
-    private projectService: TeacherProjectService
-  ) {}
+  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
-    this.rubric = this.projectService.replaceAssetPaths(this.projectService.getProjectRubric());
+    this.project = this.projectService.getProject();
   }
 
   protected rubricChanged(): void {
-    const html = insertWiseLinks(this.configService.removeAbsoluteAssetPaths(this.rubric));
-    this.projectService.setProjectRubric(html);
     this.projectService.saveProject();
   }
 }

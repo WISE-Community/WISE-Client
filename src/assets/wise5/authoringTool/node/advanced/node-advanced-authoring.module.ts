@@ -11,6 +11,7 @@ import { ConstraintAuthoringModule } from '../../constraint/constraint-authoring
 import { EditNodeRubricComponent } from '../editRubric/edit-node-rubric.component';
 import { WiseTinymceEditorModule } from '../../../directives/wise-tinymce-editor/wise-tinymce-editor.module';
 import { RouterModule } from '@angular/router';
+import { TranslatableRichTextEditorComponent } from '../../components/translatable-rich-text-editor/translatable-rich-text-editor.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { RouterModule } from '@angular/router';
     ConstraintAuthoringModule,
     RouterModule,
     StudentTeacherCommonModule,
+    TranslatableRichTextEditorComponent,
     WiseTinymceEditorModule
   ]
 })
