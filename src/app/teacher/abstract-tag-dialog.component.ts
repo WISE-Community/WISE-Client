@@ -11,11 +11,11 @@ import { Tag } from '../domain/tag';
 
 @Directive()
 export abstract class AbstractTagDialogComponent implements OnInit {
+  protected tags: Tag[] = [];
   protected tagControl = new FormControl('', [
     Validators.required,
     this.createUniqueTagValidator()
   ]);
-  protected tags: Tag[] = [];
 
   constructor(protected projectTagService: ProjectTagService) {}
 
@@ -27,21 +27,11 @@ export abstract class AbstractTagDialogComponent implements OnInit {
 
   private createUniqueTagValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      return this.tags != null && this.doesTagAlreadyExist(this.tags, control.value)
-        ? { tagAlreadyExists: true }
-        : null;
+      return this.doesTagAlreadyExist(control.value) ? { tagAlreadyExists: true } : null;
     };
   }
 
-  private doesTagAlreadyExist(tags: Tag[], tagText: string): boolean {
-    return tags.some((tag: Tag) => tag.text.toLowerCase() === tagText.toLowerCase().trim());
+  private doesTagAlreadyExist(tagText: string): boolean {
+    return this.tags.some((tag: Tag) => tag.text.toLowerCase() === tagText.toLowerCase().trim());
   }
-
-  protected keyPressed(event: KeyboardEvent): void {
-    if (event.key === 'Enter') {
-      this.enterKeyAction();
-    }
-  }
-
-  protected abstract enterKeyAction(): void;
 }

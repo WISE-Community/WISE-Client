@@ -33,14 +33,6 @@ export class CreateTagDialogComponent extends AbstractTagDialogComponent {
     super(projectTagService);
   }
 
-  ngOnInit(): void {
-    super.ngOnInit();
-  }
-
-  protected enterKeyAction(): void {
-    this.create();
-  }
-
   protected create(): void {
     this.projectTagService.createTag(this.tagControl.value.trim()).subscribe({
       next: () => {

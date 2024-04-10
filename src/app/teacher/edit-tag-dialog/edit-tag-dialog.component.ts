@@ -41,10 +41,6 @@ export class EditTagDialogComponent extends AbstractTagDialogComponent {
     this.tagControl.setValue(this.tag.text);
   }
 
-  protected enterKeyAction(): void {
-    this.save();
-  }
-
   protected save(): void {
     this.tag.text = this.tagControl.value.trim();
     this.projectTagService.updateTag(this.tag).subscribe({
