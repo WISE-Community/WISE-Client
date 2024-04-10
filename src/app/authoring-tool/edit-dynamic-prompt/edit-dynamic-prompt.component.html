@@ -28,37 +28,23 @@
       <edit-component-peer-grouping-tag [componentContent]="componentContent.dynamicPrompt">
       </edit-component-peer-grouping-tag>
     </div>
-    <div class="pre-prompt-div">
-      <mat-form-field class="prompt" appearance="fill">
-        <mat-label i18n>Pre Prompt (Optional)</mat-label>
-        <textarea
-          matInput
-          [(ngModel)]="componentContent.dynamicPrompt.prePrompt"
-          (ngModelChange)="dynamicPromptChangedEvent.next()"
-          placeholder="Enter Pre Prompt Here"
-          i18n-placeholder
-          cdkTextareaAutosize
-        >
-        </textarea>
-      </mat-form-field>
-    </div>
+    <translatable-textarea
+      [content]="componentContent.dynamicPrompt"
+      key="prePrompt"
+      label="Pre Prompt (Optional)"
+      i18n-label
+      (defaultLanguageTextChanged)="dynamicPromptChangedEvent.next()"
+    ></translatable-textarea>
     <div class="feedback-rules-div">
       <edit-dynamic-prompt-rules [feedbackRules]="componentContent.dynamicPrompt.rules">
       </edit-dynamic-prompt-rules>
     </div>
-    <div>
-      <mat-form-field class="prompt" appearance="fill">
-        <mat-label i18n>Post Prompt (Optional)</mat-label>
-        <textarea
-          matInput
-          [(ngModel)]="componentContent.dynamicPrompt.postPrompt"
-          (ngModelChange)="dynamicPromptChangedEvent.next()"
-          placeholder="Enter Post Prompt Here"
-          i18n-placeholder
-          cdkTextareaAutosize
-        >
-        </textarea>
-      </mat-form-field>
-    </div>
+    <translatable-textarea
+      [content]="componentContent.dynamicPrompt"
+      key="postPrompt"
+      label="Post Prompt (Optional)"
+      i18n-label
+      (defaultLanguageTextChanged)="dynamicPromptChangedEvent.next()"
+    ></translatable-textarea>
   </div>
 </div>
