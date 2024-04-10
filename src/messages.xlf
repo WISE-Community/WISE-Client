@@ -787,7 +787,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">239</context>
+          <context context-type="linenumber">237</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
@@ -15602,10 +15602,6 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">144</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">137</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
           <context context-type="linenumber">152</context>
         </context-group>
@@ -15881,11 +15877,11 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">193</context>
+          <context context-type="linenumber">191</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">214</context>
+          <context context-type="linenumber">212</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5f735468df8e1a39a74409adff2c9a9a5f29ead8" datatype="html">
@@ -15900,11 +15896,11 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">202</context>
+          <context context-type="linenumber">200</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">223</context>
+          <context context-type="linenumber">221</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a87cd687ef990679c0deb96f208f06f03422c08c" datatype="html">
@@ -16899,7 +16895,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">145</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
@@ -19002,60 +18998,64 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">128,130</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8cf83753f4aa4dcef3ace7c49f8501c15d2951d2" datatype="html">
-        <source>Enter Label Text Here</source>
+      <trans-unit id="f7d4cd42c1994704c0cc162c8c491897ea62fef4" datatype="html">
+        <source>Label Text</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">139</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5040677be611ec050369ecb2b9c1501219b9a5d1" datatype="html">
         <source>View Colors</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">159</context>
+          <context context-type="linenumber">157</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e534bce868110db32f1c6d91a123548048dc66c1" datatype="html">
         <source>Color Palette</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">160</context>
         </context-group>
       </trans-unit>
       <trans-unit id="83f9f66679651cee5efe7e34a8dc97aaeb02b57a" datatype="html">
         <source> Can Student Edit Label </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">175,177</context>
+          <context context-type="linenumber">173,175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="22b1f5b126e4911f6be9a66144c43f6c8f4bb681" datatype="html">
         <source> Can Student Delete Label </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">185,187</context>
+          <context context-type="linenumber">183,185</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d70bab20ade1a98b907f11f54c14a2c9b9012605" datatype="html">
         <source>Point Location</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">191</context>
+          <context context-type="linenumber">189</context>
         </context-group>
       </trans-unit>
       <trans-unit id="054b7124def3fc0eacfb779c0d98a6dc4dec2ae3" datatype="html">
         <source>Text Location</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">212</context>
+          <context context-type="linenumber">210</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b5b4ee55539c3229b8eb1f201029aeffcbbd0841" datatype="html">
         <source>Delete Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">236</context>
+          <context context-type="linenumber">234</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3544625641256817186" datatype="html">
@@ -19083,13 +19083,6 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
           <context context-type="linenumber">10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="f7d4cd42c1994704c0cc162c8c491897ea62fef4" datatype="html">
-        <source>Label Text</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2518624267018648120" datatype="html">
