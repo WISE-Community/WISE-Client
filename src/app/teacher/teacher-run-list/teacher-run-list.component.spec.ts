@@ -36,7 +36,7 @@ import { ProjectTagService } from '../../../assets/wise5/services/projectTagServ
 
 class TeacherScheduleStubComponent {}
 
-const archivedTag = { id: 1, text: 'archived' };
+const archivedTag = { id: 1, text: 'archived', color: null };
 let component: TeacherRunListComponent;
 let configService: ConfigService;
 const currentTime = new Date().getTime();

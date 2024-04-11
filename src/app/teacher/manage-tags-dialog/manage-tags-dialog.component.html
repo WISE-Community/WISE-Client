@@ -5,7 +5,9 @@
       <button mat-raised-button color="primary" (click)="create()" i18n>+ New Tag</button>
     </div>
     <div *ngFor="let tag of tags" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-      <div class="tag-name" fxFlex>{{ tag.text }}</div>
+      <div class="tag-name" [ngStyle]="{ 'background-color': tag.color }" fxFlex>
+        {{ tag.text }}
+      </div>
       <button
         mat-icon-button
         color="primary"

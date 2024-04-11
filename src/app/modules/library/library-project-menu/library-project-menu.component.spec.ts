@@ -49,7 +49,7 @@ export class MockConfigService {
   }
 }
 
-const archivedTag = { id: 1, text: 'archived' };
+const archivedTag = { id: 1, text: 'archived', color: null };
 let component: LibraryProjectMenuComponent;
 let fixture: ComponentFixture<LibraryProjectMenuComponent>;
 let harness: LibraryProjectMenuHarness;

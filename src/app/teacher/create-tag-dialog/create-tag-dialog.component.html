@@ -1,15 +1,14 @@
 <h2 mat-dialog-title i18n>Create New Tag</h2>
 <mat-dialog-content>
-  <mat-form-field class="tag-name">
-    <mat-label i18n>Tag Name</mat-label>
-    <input matInput (keyup.enter)="create()" [formControl]="tagControl" autofocus />
-    <mat-error *ngIf="tagControl.hasError('required')" i18n>Required</mat-error>
-    <mat-error *ngIf="tagControl.hasError('tagAlreadyExists')" i18n>Tag already exists</mat-error>
-  </mat-form-field>
+  <edit-tag
+    [nameControl]="nameControl"
+    [colorControl]="colorControl"
+    (enterKeyEvent)="create()"
+  ></edit-tag>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close i18n>Cancel</button>
-  <button mat-raised-button color="primary" [disabled]="!tagControl.valid" (click)="create()" i18n>
+  <button mat-raised-button color="primary" [disabled]="!nameControl.valid" (click)="create()" i18n>
     Create
   </button>
 </mat-dialog-actions>

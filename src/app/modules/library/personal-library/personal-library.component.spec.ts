@@ -25,7 +25,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
 import { HttpClient } from '@angular/common/http';
 
-const archivedTag = { id: 1, text: 'archived' };
+const archivedTag = { id: 1, text: 'archived', color: null };
 let archiveProjectService: ArchiveProjectService;
 let component: PersonalLibraryComponent;
 let fixture: ComponentFixture<PersonalLibraryComponent>;
