@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,6 +18,8 @@ import { TeacherProjectTranslationService } from '../../../services/teacherProje
   styleUrls: ['./translatable-asset-chooser.component.scss']
 })
 export class TranslatableAssetChooserComponent extends AbstractTranslatableFieldComponent {
+  @Input() tooltip: String = $localize`Choose image`;
+
   constructor(
     private dialog: MatDialog,
     protected projectService: TeacherProjectService,
