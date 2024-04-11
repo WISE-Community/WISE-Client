@@ -21,18 +21,22 @@ import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EmbeddedService } from '../embeddedService';
 import { EmbeddedAuthoring } from './embedded-authoring.component';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
 
 @NgModule({
   declarations: [EmbeddedAuthoring, EditComponentPrompt, AuthorUrlParametersComponent],
   imports: [
     CommonModule,
+    ComponentAuthoringModule,
     FormsModule,
     MatCheckboxModule,
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatRadioModule
+    MatRadioModule,
+    TranslatableAssetChooserComponent
   ],
   providers: [
     AnnotationService,
