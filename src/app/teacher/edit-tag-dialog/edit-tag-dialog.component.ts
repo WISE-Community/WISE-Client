@@ -1,18 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AbstractTagDialogComponent } from '../abstract-tag-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
-import { AbstractTagDialogComponent } from '../abstract-tag-dialog.component';
+import { CreateTagDialogComponent } from '../create-tag-dialog/create-tag-dialog.component';
+import { Tag } from '../../domain/tag';
 
 @Component({
-  selector: 'create-tag-dialog',
-  templateUrl: './create-tag-dialog.component.html',
-  styleUrls: ['./create-tag-dialog.component.scss'],
+  selector: 'edit-tag-dialog',
+  templateUrl: './edit-tag-dialog.component.html',
+  styleUrls: ['./edit-tag-dialog.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -24,19 +26,26 @@ import { AbstractTagDialogComponent } from '../abstract-tag-dialog.component';
     ReactiveFormsModule
   ]
 })
-export class CreateTagDialogComponent extends AbstractTagDialogComponent {
+export class EditTagDialogComponent extends AbstractTagDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<CreateTagDialogComponent>,
     protected projectTagService: ProjectTagService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) private tag: Tag
   ) {
     super(projectTagService);
   }
 
-  protected create(): void {
-    this.projectTagService.createTag(this.tagControl.value.trim()).subscribe({
+  ngOnInit(): void {
+    super.ngOnInit();
+    this.tagControl.setValue(this.tag.text);
+  }
+
+  protected save(): void {
+    this.tag.text = this.tagControl.value.trim();
+    this.projectTagService.updateTag(this.tag).subscribe({
       next: () => {
-        this.snackBar.open($localize`Tag created`);
+        this.snackBar.open($localize`Tag updated`);
         this.dialogRef.close();
       },
       error: ({ error }) => {

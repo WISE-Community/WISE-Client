@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CreateTagDialogComponent } from './create-tag-dialog.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
@@ -17,8 +16,7 @@ describe('CreateTagDialogComponent', () => {
         CreateTagDialogComponent,
         BrowserAnimationsModule,
         HttpClientTestingModule,
-        MatSnackBarModule,
-        StudentTeacherCommonServicesModule
+        MatSnackBarModule
       ],
       providers: [{ provide: MatDialogRef, useValue: { close() {} } }, ProjectTagService]
     });

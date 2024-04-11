@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tag } from '../../domain/tag';
-import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +14,8 @@ import { ProjectTagService } from '../../../assets/wise5/services/projectTagServ
 import { MatIconModule } from '@angular/material/icon';
 import { TeacherService } from '../teacher.service';
 import { Run } from '../../domain/run';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { EditTagDialogComponent } from '../edit-tag-dialog/edit-tag-dialog.component';
 
 @Component({
   selector: 'manage-tags-dialog',
@@ -29,7 +31,8 @@ import { Run } from '../../domain/run';
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatTooltipModule
   ]
 })
 export class ManageTagsDialogComponent implements OnInit {
@@ -51,23 +54,9 @@ export class ManageTagsDialogComponent implements OnInit {
       })
     );
     this.subscriptions.add(
-      this.inputChanged
-        .pipe(debounceTime(1000), distinctUntilChanged())
-        .subscribe(({ tag }: any) => {
-          this.projectTagService.updateTag(tag);
-          this.snackBar.open($localize`Tag updated`);
-        })
-    );
-    this.subscriptions.add(
       this.projectTagService.newTag$.subscribe((tag: Tag) => {
         this.tags.push(tag);
         this.projectTagService.sortTags(this.tags);
-      })
-    );
-    this.subscriptions.add(
-      this.projectTagService.tagDeleted$.subscribe((tag: Tag) => {
-        this.tags = this.tags.filter((t) => t.id !== tag.id);
-        this.snackBar.open($localize`Tag deleted`);
       })
     );
   }
@@ -76,16 +65,26 @@ export class ManageTagsDialogComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  protected openCreateTagDialog(): void {
+  protected create(): void {
     this.dialog.open(CreateTagDialogComponent, {
       panelClass: 'dialog-md'
+    });
+  }
+
+  protected edit(tag: Tag): void {
+    this.dialog.open(EditTagDialogComponent, {
+      panelClass: 'dialog-md',
+      data: tag
     });
   }
 
   protected delete(tag: Tag): void {
     this.teacherService.getRuns().subscribe((runs) => {
       if (confirm(this.getDeleteMessage(runs, tag))) {
-        this.projectTagService.deleteTag(tag);
+        this.projectTagService.deleteTag(tag).subscribe((tag: Tag) => {
+          this.tags = this.tags.filter((t) => t.id !== tag.id);
+          this.snackBar.open($localize`Tag deleted`);
+        });
       }
     });
   }
