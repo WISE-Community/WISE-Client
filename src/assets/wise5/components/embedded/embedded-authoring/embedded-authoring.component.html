@@ -1,19 +1,19 @@
-<div>
-  <mat-form-field class="model-file">
-    <mat-label i18n>Model File Name</mat-label>
-    <input matInput [(ngModel)]="componentContent.url" (ngModelChange)="inputChange.next($event)" />
-  </mat-form-field>
-  <button
-    mat-raised-button
-    color="primary"
-    class="button"
-    (click)="chooseModelFile()"
-    matTooltip="Choose Model File"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>insert_photo</mat-icon>
-  </button>
+<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <translatable-input
+    [content]="componentContent"
+    key="url"
+    label="Model file name"
+    i18n-label
+    (defaultLanguageTextChanged)="inputChange.next($event)"
+    fxFlex="auto"
+  />
+  <translatable-asset-chooser
+    [content]="componentContent"
+    key="url"
+    tooltip="Choose model file"
+    i18n-tooltip
+    (defaultLanguageTextChanged)="componentChanged()"
+  />
 </div>
 <author-url-parameters
   [url]="componentContent.url"

@@ -2,9 +2,8 @@
   mat-raised-button
   color="primary"
   (click)="chooseAsset()"
-  matTooltip="Choose an image"
+  [matTooltip]="tooltip"
   matTooltipPosition="above"
-  i18n-matTooltip
 >
   <mat-icon>insert_photo</mat-icon>
 </button>
