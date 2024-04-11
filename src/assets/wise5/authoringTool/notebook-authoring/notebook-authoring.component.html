@@ -13,7 +13,7 @@
   </mat-slide-toggle>
 </div>
 <div *ngIf="project.notebook.enabled" class="notebook-div">
-  <div class="small-width">
+  <div class="notebook-input">
     <translatable-input
       [content]="project.notebook"
       key="label"
@@ -35,33 +35,30 @@
   </div>
   <div *ngIf="project.notebook.itemTypes.note.enabled" class="notebook-child-div">
     <div fxLayout="row wrap" fxLayoutGap="20px">
-      <div class="small-width">
-        <translatable-input
-          [content]="project.notebook.itemTypes.note.label"
-          key="singular"
-          label="Label (Singular)"
-          i18n-label
-          (defaultLanguageTextChanged)="contentChanged()"
-        ></translatable-input>
-      </div>
-      <div class="small-width">
-        <translatable-input
-          [content]="project.notebook.itemTypes.note.label"
-          key="plural"
-          label="Label (Plural)"
-          i18n-label
-          (defaultLanguageTextChanged)="contentChanged()"
-        ></translatable-input>
-      </div>
-      <div class="small-width">
-        <translatable-input
-          [content]="project.notebook.itemTypes.note.label"
-          key="link"
-          label="Label (Link)"
-          i18n-label
-          (defaultLanguageTextChanged)="contentChanged()"
-        ></translatable-input>
-      </div>
+      <translatable-input
+        [content]="project.notebook.itemTypes.note.label"
+        key="singular"
+        label="Label (Singular)"
+        i18n-label
+        (defaultLanguageTextChanged)="contentChanged()"
+        class="notebook-input"
+      ></translatable-input>
+      <translatable-input
+        [content]="project.notebook.itemTypes.note.label"
+        key="plural"
+        label="Label (Plural)"
+        i18n-label
+        (defaultLanguageTextChanged)="contentChanged()"
+        class="notebook-input"
+      ></translatable-input>
+      <translatable-input
+        [content]="project.notebook.itemTypes.note.label"
+        key="link"
+        label="Label (Link)"
+        i18n-label
+        (defaultLanguageTextChanged)="contentChanged()"
+        class="notebook-input"
+      ></translatable-input>
     </div>
     <mat-checkbox
       color="primary"
@@ -111,36 +108,32 @@
   </mat-slide-toggle>
   <div *ngIf="project.notebook.itemTypes.report.enabled" class="notebook-child-div">
     <div fxLayout="row wrap" fxLayoutGap="20px">
-      <div class="small-width">
-        <translatable-input
-          [content]="project.notebook.itemTypes.report.label"
-          key="singular"
-          label="Label (Singular)"
-          i18n-label
-          (defaultLanguageTextChanged)="contentChanged()"
-        ></translatable-input>
-      </div>
-      <div class="small-width">
-        <translatable-input
-          [content]="project.notebook.itemTypes.report.label"
-          key="plural"
-          label="Label (Plural)"
-          i18n-label
-          (defaultLanguageTextChanged)="contentChanged()"
-        ></translatable-input>
-      </div>
-      <div class="small-width">
-        <translatable-input
-          [content]="project.notebook.itemTypes.report.label"
-          key="link"
-          label="Label (Link)"
-          i18n-label
-          (defaultLanguageTextChanged)="contentChanged()"
-        ></translatable-input>
-      </div>
+      <translatable-input
+        [content]="project.notebook.itemTypes.report.label"
+        key="singular"
+        label="Label (Singular)"
+        i18n-label
+        (defaultLanguageTextChanged)="contentChanged()"
+        class="notebook-input"
+      ></translatable-input>
+      <translatable-input
+        [content]="project.notebook.itemTypes.report.label"
+        key="plural"
+        label="Label (Plural)"
+        i18n-label
+        (defaultLanguageTextChanged)="contentChanged()"
+        class="notebook-input"
+      ></translatable-input>
+      <translatable-input
+        [content]="project.notebook.itemTypes.report.label"
+        key="link"
+        label="Label (Link)"
+        i18n-label
+        (defaultLanguageTextChanged)="contentChanged()"
+      ></translatable-input>
     </div>
     <div *ngFor="let reportNote of project.notebook.itemTypes.report.notes">
-      <div class="small-width">
+      <div class="notebook-input">
         <translatable-input
           [content]="reportNote"
           key="title"
@@ -195,7 +188,7 @@
   </mat-slide-toggle>
 </div>
 <div *ngIf="project.teacherNotebook.enabled" class="notebook-div">
-  <div class="small-width">
+  <div class="notebook-input">
     <translatable-input
       [content]="project.teacherNotebook"
       key="label"
@@ -215,44 +208,40 @@
   </mat-slide-toggle>
   <div *ngIf="project.teacherNotebook.itemTypes.report.enabled" class="notebook-child-div">
     <div fxLayout="row wrap" fxLayoutGap="20px">
-      <div class="small-width">
-        <translatable-input
-          [content]="project.teacherNotebook.itemTypes.report.label"
-          key="singular"
-          label="Label (Singular)"
-          i18n-label
-          (defaultLanguageTextChanged)="contentChanged()"
-        ></translatable-input>
-      </div>
-      <div class="small-width">
-        <translatable-input
-          [content]="project.teacherNotebook.itemTypes.report.label"
-          key="plural"
-          label="Label (Plural)"
-          i18n-label
-          (defaultLanguageTextChanged)="contentChanged()"
-        ></translatable-input>
-      </div>
-      <div class="small-width">
-        <translatable-input
-          [content]="project.teacherNotebook.itemTypes.report.label"
-          key="link"
-          label="Label (Link)"
-          i18n-label
-          (defaultLanguageTextChanged)="contentChanged()"
-        ></translatable-input>
-      </div>
+      <translatable-input
+        [content]="project.teacherNotebook.itemTypes.report.label"
+        key="singular"
+        label="Label (Singular)"
+        i18n-label
+        (defaultLanguageTextChanged)="contentChanged()"
+        class="notebook-input"
+      ></translatable-input>
+      <translatable-input
+        [content]="project.teacherNotebook.itemTypes.report.label"
+        key="plural"
+        label="Label (Plural)"
+        i18n-label
+        (defaultLanguageTextChanged)="contentChanged()"
+        class="notebook-input"
+      ></translatable-input>
+      <translatable-input
+        [content]="project.teacherNotebook.itemTypes.report.label"
+        key="link"
+        label="Label (Link)"
+        i18n-label
+        (defaultLanguageTextChanged)="contentChanged()"
+        class="notebook-input"
+      ></translatable-input>
     </div>
     <div *ngFor="let reportNote of project.teacherNotebook.itemTypes.report.notes">
-      <div class="small-width">
-        <translatable-input
-          [content]="reportNote"
-          key="title"
-          label="Title"
-          i18n-label
-          (defaultLanguageTextChanged)="contentChanged()"
-        ></translatable-input>
-      </div>
+      <translatable-input
+        [content]="reportNote"
+        key="title"
+        label="Title"
+        i18n-label
+        (defaultLanguageTextChanged)="contentChanged()"
+        class="notebook-input"
+      ></translatable-input>
       <translatable-textarea
         [content]="reportNote"
         key="description"
