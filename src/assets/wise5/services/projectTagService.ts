@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, Observable, Subscription, tap } from 'rxjs';
+import { Subject, Observable, tap } from 'rxjs';
 import { Project } from '../../../app/domain/project';
 import { Tag } from '../../../app/domain/tag';
+import { ProjectAndTagsResponse } from '../../../app/domain/projectAndTagsResponse';
 
 @Injectable()
 export class ProjectTagService {
@@ -19,17 +20,19 @@ export class ProjectTagService {
     return this.http.get<Tag[]>(`/api/user/tags`);
   }
 
-  applyTagToProjects(tag: Tag, projects: Project[]): Subscription {
+  applyTagToProjects(tag: Tag, projects: Project[]): Observable<ProjectAndTagsResponse[]> {
     const projectIds = projects.map((project) => project.id);
-    return this.http.put(`/api/projects/tag/${tag.text}`, projectIds).subscribe();
+    return this.http.put<ProjectAndTagsResponse[]>(`/api/projects/tag/${tag.id}`, projectIds);
   }
 
-  removeTagFromProjects(tag: Tag, projects: Project[]): Subscription {
+  removeTagFromProjects(tag: Tag, projects: Project[]): Observable<ProjectAndTagsResponse[]> {
     let params = new HttpParams();
     for (const project of projects) {
       params = params.append('projectIds', project.id);
     }
-    return this.http.delete(`/api/projects/tag/${tag.text}`, { params: params }).subscribe();
+    return this.http.delete<ProjectAndTagsResponse[]>(`/api/projects/tag/${tag.id}`, {
+      params: params
+    });
   }
 
   updateTag(tag: Tag): Observable<Tag> {
@@ -40,8 +43,8 @@ export class ProjectTagService {
     );
   }
 
-  createTag(tagName: string): Observable<Tag> {
-    return this.http.post(`/api/user/tag`, { text: tagName }).pipe(
+  createTag(tagName: string, color: string): Observable<Tag> {
+    return this.http.post(`/api/user/tag`, { text: tagName, color: color }).pipe(
       tap((tag: Tag) => {
         this.newTagSource.next(tag);
       })

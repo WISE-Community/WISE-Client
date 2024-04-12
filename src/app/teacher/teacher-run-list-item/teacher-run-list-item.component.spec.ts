@@ -37,7 +37,7 @@ export class MockConfigService {
   }
 }
 
-const archivedTag = { id: 1, text: 'archived' };
+const archivedTag = { id: 1, text: 'archived', color: null };
 let component: TeacherRunListItemComponent;
 let fixture: ComponentFixture<TeacherRunListItemComponent>;
 let http: HttpClient;

@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { AbstractTagDialogComponent } from '../abstract-tag-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { CreateTagDialogComponent } from '../create-tag-dialog/create-tag-dialog.component';
 import { Tag } from '../../domain/tag';
+import { EditTagComponent } from '../edit-tag/edit-tag.component';
 
 @Component({
   selector: 'edit-tag-dialog',
@@ -18,6 +18,7 @@ import { Tag } from '../../domain/tag';
   standalone: true,
   imports: [
     CommonModule,
+    EditTagComponent,
     FormsModule,
     MatButtonModule,
     MatDialogModule,
@@ -26,23 +27,20 @@ import { Tag } from '../../domain/tag';
     ReactiveFormsModule
   ]
 })
-export class EditTagDialogComponent extends AbstractTagDialogComponent {
+export class EditTagDialogComponent {
+  protected nameControl = new FormControl('', [Validators.required]);
+  protected colorControl = new FormControl('');
+
   constructor(
     private dialogRef: MatDialogRef<CreateTagDialogComponent>,
-    protected projectTagService: ProjectTagService,
+    private projectTagService: ProjectTagService,
     private snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) private tag: Tag
-  ) {
-    super(projectTagService);
-  }
-
-  ngOnInit(): void {
-    super.ngOnInit();
-    this.tagControl.setValue(this.tag.text);
-  }
+    @Inject(MAT_DIALOG_DATA) protected tag: Tag
+  ) {}
 
   protected save(): void {
-    this.tag.text = this.tagControl.value.trim();
+    this.tag.text = this.nameControl.value.trim();
+    this.tag.color = this.colorControl.value.trim();
     this.projectTagService.updateTag(this.tag).subscribe({
       next: () => {
         this.snackBar.open($localize`Tag updated`);
@@ -50,7 +48,7 @@ export class EditTagDialogComponent extends AbstractTagDialogComponent {
       },
       error: ({ error }) => {
         if (error.messageCode === 'tagAlreadyExists') {
-          this.tagControl.setErrors({ tagAlreadyExists: true });
+          this.nameControl.setErrors({ tagAlreadyExists: true });
         }
       }
     });

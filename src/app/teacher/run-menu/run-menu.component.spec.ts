@@ -67,7 +67,7 @@ export class MockConfigService {
   }
 }
 
-const archivedTag = { id: 1, text: 'archived' };
+const archivedTag = { id: 1, text: 'archived', color: null };
 let archiveProjectService: ArchiveProjectService;
 let component: RunMenuComponent;
 let fixture: ComponentFixture<RunMenuComponent>;

@@ -39,6 +39,7 @@ export class ApplyTagsButtonComponent implements OnInit {
       this.projectTagService.tagUpdated$.subscribe((tagThatChanged: Tag) => {
         const tag = this.tags.find((t: Tag) => t.id === tagThatChanged.id);
         tag.text = tagThatChanged.text;
+        tag.color = tagThatChanged.color;
         this.projectTagService.sortTags(this.tags);
       })
     );
@@ -76,11 +77,13 @@ export class ApplyTagsButtonComponent implements OnInit {
 
   protected toggleTagOnProjects(tag: Tag, addTag: boolean): void {
     if (addTag) {
-      this.addTagToProjects(tag, this.selectedProjects);
-      this.projectTagService.applyTagToProjects(tag, this.selectedProjects);
+      this.projectTagService.applyTagToProjects(tag, this.selectedProjects).subscribe(() => {
+        this.addTagToProjects(tag, this.selectedProjects);
+      });
     } else {
-      this.removeTagFromProjects(tag, this.selectedProjects);
-      this.projectTagService.removeTagFromProjects(tag, this.selectedProjects);
+      this.projectTagService.removeTagFromProjects(tag, this.selectedProjects).subscribe(() => {
+        this.removeTagFromProjects(tag, this.selectedProjects);
+      });
     }
   }
 

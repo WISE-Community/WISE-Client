@@ -17,7 +17,7 @@
       (change)="toggleTagOnProjects(tag, $event.checked)"
       (click)="$event.stopPropagation()"
     >
-      {{ tag.text }}
+      <div [ngStyle]="{ color: tag.color }">{{ tag.text }}</div>
     </mat-checkbox>
   </div>
   <mat-divider></mat-divider>

@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
-import { AbstractTagDialogComponent } from '../abstract-tag-dialog.component';
+import { EditTagComponent } from '../edit-tag/edit-tag.component';
 
 @Component({
   selector: 'create-tag-dialog',
@@ -16,6 +16,7 @@ import { AbstractTagDialogComponent } from '../abstract-tag-dialog.component';
   standalone: true,
   imports: [
     CommonModule,
+    EditTagComponent,
     FormsModule,
     MatButtonModule,
     MatDialogModule,
@@ -24,26 +25,29 @@ import { AbstractTagDialogComponent } from '../abstract-tag-dialog.component';
     ReactiveFormsModule
   ]
 })
-export class CreateTagDialogComponent extends AbstractTagDialogComponent {
+export class CreateTagDialogComponent {
+  protected nameControl = new FormControl('', [Validators.required]);
+  protected colorControl = new FormControl('');
+
   constructor(
     private dialogRef: MatDialogRef<CreateTagDialogComponent>,
-    protected projectTagService: ProjectTagService,
+    private projectTagService: ProjectTagService,
     private snackBar: MatSnackBar
-  ) {
-    super(projectTagService);
-  }
+  ) {}
 
   protected create(): void {
-    this.projectTagService.createTag(this.tagControl.value.trim()).subscribe({
-      next: () => {
-        this.snackBar.open($localize`Tag created`);
-        this.dialogRef.close();
-      },
-      error: ({ error }) => {
-        if (error.messageCode === 'tagAlreadyExists') {
-          this.tagControl.setErrors({ tagAlreadyExists: true });
+    this.projectTagService
+      .createTag(this.nameControl.value.trim(), this.colorControl.value.trim())
+      .subscribe({
+        next: () => {
+          this.snackBar.open($localize`Tag created`);
+          this.dialogRef.close();
+        },
+        error: ({ error }) => {
+          if (error.messageCode === 'tagAlreadyExists') {
+            this.nameControl.setErrors({ tagAlreadyExists: true });
+          }
         }
-      }
-    });
+      });
   }
 }

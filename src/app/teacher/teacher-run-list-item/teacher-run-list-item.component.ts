@@ -59,6 +59,7 @@ export class TeacherRunListItemComponent implements OnInit {
         const tagOnProject = this.run.project.tags.find((tag: Tag) => tag.id === tagThatChanged.id);
         if (tagOnProject != null) {
           tagOnProject.text = tagThatChanged.text;
+          tagOnProject.color = tagThatChanged.color;
           this.projectTagService.sortTags(this.run.project.tags);
         }
       })

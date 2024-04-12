@@ -1,0 +1,12 @@
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <mat-form-field class="name-input">
+    <mat-label i18n>Tag Name</mat-label>
+    <input matInput (keyup.enter)="enterKeyPressed()" [formControl]="nameControl" />
+    <mat-error *ngIf="nameControl.errors?.required" i18n>Required</mat-error>
+    <mat-error *ngIf="nameControl.errors?.tagAlreadyExists" i18n>Tag already exists</mat-error>
+  </mat-form-field>
+  <mat-form-field class="color-input">
+    <mat-label i18n>Color</mat-label>
+    <input matInput (keyup.enter)="enterKeyPressed()" [formControl]="colorControl" />
+  </mat-form-field>
+</div>
