@@ -35,23 +35,22 @@
 </div>
 <br />
 <div *ngFor="let metadataField of metadataAuthoring.fields">
-  <mat-form-field *ngIf="metadataField.type === 'textarea'" class="textarea">
-    <mat-label>{{ metadataField.name }}</mat-label>
-    <textarea
-      matInput
-      [(ngModel)]="metadata[metadataField.key]"
-      (ngModelChange)="metadataChanged.next()"
-      cdkTextareaAutosize
-    ></textarea>
-  </mat-form-field>
-  <mat-form-field *ngIf="metadataField.type === 'input'" class="input">
-    <mat-label>{{ metadataField.name }}</mat-label>
-    <input
-      matInput
-      [(ngModel)]="metadata[metadataField.key]"
-      (ngModelChange)="metadataChanged.next()"
-    />
-  </mat-form-field>
+  <translatable-textarea
+    *ngIf="metadataField.type === 'textarea'"
+    [content]="metadata"
+    [key]="metadataField.key"
+    [label]="metadataField.name"
+    (defaultLanguageTextChanged)="metadataChanged.next()"
+    class="textarea"
+  ></translatable-textarea>
+  <translatable-input
+    *ngIf="metadataField.type === 'input'"
+    [content]="metadata"
+    [key]="metadataField.key"
+    [label]="metadataField.name"
+    (defaultLanguageTextChanged)="metadataChanged.next()"
+    class="input"
+  ></translatable-input>
   <edit-project-language-setting
     *ngIf="metadataField.name === 'Language'"
   ></edit-project-language-setting>
