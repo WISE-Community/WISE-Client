@@ -188,14 +188,15 @@
   </mat-slide-toggle>
 </div>
 <div *ngIf="project.teacherNotebook.enabled" class="notebook-div">
-  <div class="notebook-input">
-    <translatable-input
-      [content]="project.teacherNotebook"
-      key="label"
-      label="Notebook Label"
-      i18n-label
-      (defaultLanguageTextChanged)="contentChanged()"
-    ></translatable-input>
+  <div>
+    <mat-form-field>
+      <mat-label i18n>Notebook Label</mat-label>
+      <input
+        matInput
+        [(ngModel)]="project.teacherNotebook.label"
+        (ngModelChange)="contentChanged()"
+      />
+    </mat-form-field>
   </div>
   <mat-slide-toggle
     color="primary"
@@ -207,61 +208,64 @@
     Enable Report
   </mat-slide-toggle>
   <div *ngIf="project.teacherNotebook.itemTypes.report.enabled" class="notebook-child-div">
-    <div fxLayout="row wrap" fxLayoutGap="20px">
-      <translatable-input
-        [content]="project.teacherNotebook.itemTypes.report.label"
-        key="singular"
-        label="Label (Singular)"
-        i18n-label
-        (defaultLanguageTextChanged)="contentChanged()"
-        class="notebook-input"
-      ></translatable-input>
-      <translatable-input
-        [content]="project.teacherNotebook.itemTypes.report.label"
-        key="plural"
-        label="Label (Plural)"
-        i18n-label
-        (defaultLanguageTextChanged)="contentChanged()"
-        class="notebook-input"
-      ></translatable-input>
-      <translatable-input
-        [content]="project.teacherNotebook.itemTypes.report.label"
-        key="link"
-        label="Label (Link)"
-        i18n-label
-        (defaultLanguageTextChanged)="contentChanged()"
-        class="notebook-input"
-      ></translatable-input>
+    <div fxLayoutGap="20px">
+      <mat-form-field>
+        <mat-label i18n>Label (Singular)</mat-label>
+        <input
+          matInput
+          [(ngModel)]="project.teacherNotebook.itemTypes.report.label.singular"
+          (ngModelChange)="contentChanged()"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>Label (Plural)</mat-label>
+        <input
+          matInput
+          [(ngModel)]="project.teacherNotebook.itemTypes.report.label.plural"
+          (ngModelChange)="contentChanged()"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>Label (Link)</mat-label>
+        <input
+          matInput
+          [(ngModel)]="project.teacherNotebook.itemTypes.report.label.link"
+          (ngModelChange)="contentChanged()"
+        />
+      </mat-form-field>
     </div>
     <div *ngFor="let reportNote of project.teacherNotebook.itemTypes.report.notes">
-      <translatable-input
-        [content]="reportNote"
-        key="title"
-        label="Title"
-        i18n-label
-        (defaultLanguageTextChanged)="contentChanged()"
-        class="notebook-input"
-      ></translatable-input>
-      <translatable-textarea
-        [content]="reportNote"
-        key="description"
-        label="Description"
-        i18n-label
-        (defaultLanguageTextChanged)="contentChanged()"
-      ></translatable-textarea>
-      <translatable-textarea
-        [content]="reportNote"
-        key="prompt"
-        label="Prompt"
-        i18n-label
-        (defaultLanguageTextChanged)="contentChanged()"
-      ></translatable-textarea>
+      <mat-form-field>
+        <mat-label i18n>Title</mat-label>
+        <input matInput [(ngModel)]="reportNote.title" (ngModelChange)="contentChanged()" />
+      </mat-form-field>
+      <br />
+      <mat-form-field class="textarea">
+        <mat-label i18n>Description</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          [(ngModel)]="reportNote.description"
+          (ngModelChange)="contentChanged()"
+        ></textarea>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="textarea">
+        <mat-label i18n>Prompt</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          [(ngModel)]="reportNote.prompt"
+          (ngModelChange)="contentChanged()"
+        ></textarea>
+      </mat-form-field>
+      <br />
       <mat-label i18n>Starter Text</mat-label>
-      <translatable-rich-text-editor
-        [content]="reportNote"
-        key="content"
-        (defaultLanguageTextChanged)="save()"
-      ></translatable-rich-text-editor>
+      <wise-authoring-tinymce-editor
+        [(model)]="reportIdToAuthoringNote[reportNote.reportId].html"
+        (modelChange)="reportStarterTextChanged(reportNote.reportId)"
+      >
+      </wise-authoring-tinymce-editor>
     </div>
   </div>
 </div>
