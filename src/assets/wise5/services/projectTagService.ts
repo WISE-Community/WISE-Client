@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, Observable, tap } from 'rxjs';
+import { Subject, Observable, tap, map } from 'rxjs';
 import { Project } from '../../../app/domain/project';
 import { Tag } from '../../../app/domain/tag';
 import { ProjectAndTagsResponse } from '../../../app/domain/projectAndTagsResponse';
@@ -17,7 +17,9 @@ export class ProjectTagService {
   constructor(protected http: HttpClient) {}
 
   retrieveUserTags(): Observable<Tag[]> {
-    return this.http.get<Tag[]>(`/api/user/tags`);
+    return this.http
+      .get<Tag[]>(`/api/user/tags`)
+      .pipe(map((tags) => tags.filter((tag) => tag.text !== 'archived')));
   }
 
   applyTagToProjects(tag: Tag, projects: Project[]): Observable<ProjectAndTagsResponse[]> {

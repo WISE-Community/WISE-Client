@@ -48,13 +48,15 @@
     Shared by {{ run.owner.firstName }} {{ run.owner.lastName }}
   </div>
   <div fxLayout="row">
-    <div
-      *ngFor="let tag of run.project.tags"
-      class="tag"
-      [ngStyle]="{ 'background-color': tag.color }"
-    >
-      {{ tag.text }}
-    </div>
+    <ng-container *ngFor="let tag of run.project.tags">
+      <div
+        *ngIf="tag.text !== 'archived'"
+        class="tag"
+        [ngStyle]="{ 'background-color': tag.color }"
+      >
+        {{ tag.text }}
+      </div>
+    </ng-container>
   </div>
 </ng-template>
 
