@@ -3,7 +3,14 @@
     <mat-label i18n>Tag Name</mat-label>
     <input matInput (keyup.enter)="enterKeyPressed()" [formControl]="nameControl" />
     <mat-error *ngIf="nameControl.errors?.required" i18n>Required</mat-error>
-    <mat-error *ngIf="nameControl.errors?.tagAlreadyExists" i18n>Tag already exists</mat-error>
+    <mat-error *ngIf="nameControl.errors?.archivedNotAllowed" i18n
+      >Archived tag not allowed</mat-error
+    >
+    <mat-error
+      *ngIf="nameControl.errors?.tagAlreadyExists && !nameControl.errors?.archivedNotAllowed"
+      i18n
+      >Tag already exists</mat-error
+    >
   </mat-form-field>
   <mat-form-field class="color-input">
     <mat-label i18n>Color</mat-label>

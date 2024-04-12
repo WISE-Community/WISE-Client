@@ -4,31 +4,38 @@
     <div>
       <button mat-raised-button color="primary" (click)="create()" i18n>+ New Tag</button>
     </div>
-    <div *ngFor="let tag of tags" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-      <div class="tag-name" [ngStyle]="{ 'background-color': tag.color }" fxFlex>
-        {{ tag.text }}
+    <ng-container *ngFor="let tag of tags">
+      <div
+        *ngIf="tag.text !== 'archived'"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="12px"
+      >
+        <div class="tag-name" [ngStyle]="{ 'background-color': tag.color }" fxFlex>
+          {{ tag.text }}
+        </div>
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="edit(tag)"
+          matTooltip="Edit"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="delete(tag)"
+          matTooltip="Delete"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
-      <button
-        mat-icon-button
-        color="primary"
-        (click)="edit(tag)"
-        matTooltip="Edit"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        color="primary"
-        (click)="delete(tag)"
-        matTooltip="Delete"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
+    </ng-container>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

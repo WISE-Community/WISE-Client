@@ -43,13 +43,23 @@ export class EditTagComponent {
       this.nameControl.setValue(this.tag.text);
       this.colorControl.setValue(this.tag.color);
     }
-    this.nameControl.addValidators([Validators.required, this.createUniqueTagValidator()]);
+    this.nameControl.addValidators([
+      Validators.required,
+      this.createArchivedTagValidator(),
+      this.createUniqueTagValidator()
+    ]);
     this.projectTagService.retrieveUserTags().subscribe((tags: Tag[]) => {
       this.tags = tags;
       if (this.tag != null) {
         this.tags = this.tags.filter((tag: Tag) => tag.id !== this.tag.id);
       }
     });
+  }
+
+  private createArchivedTagValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return control.value?.toLowerCase() === 'archived' ? { archivedNotAllowed: true } : null;
+    };
   }
 
   private createUniqueTagValidator(): ValidatorFn {
@@ -62,7 +72,6 @@ export class EditTagComponent {
       }
     };
   }
-
   private doesTagAlreadyExist(tagText: string): boolean {
     return this.tags.some((tag: Tag) => tag.text.toLowerCase() === tagText.toLowerCase().trim());
   }
