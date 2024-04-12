@@ -65,6 +65,8 @@ import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator
 import { ProjectAuthoringLessonComponent } from '../../assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component';
 import { ProjectAuthoringStepComponent } from '../../assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component';
 import { AddLessonButtonComponent } from '../../assets/wise5/authoringTool/add-lesson-button/add-lesson-button.component';
+import { TranslatableInputComponent } from '../../assets/wise5/authoringTool/components/translatable-input/translatable-input.component';
+import { TranslatableTextareaComponent } from '../../assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';
 
 @NgModule({
@@ -136,7 +138,9 @@ import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authorin
     SaveIndicatorComponent,
     StepToolsModule,
     StructureAuthoringModule,
+    TranslatableInputComponent,
     TranslatableRichTextEditorComponent,
+    TranslatableTextareaComponent,
     WiseTinymceEditorModule
   ]
 })
