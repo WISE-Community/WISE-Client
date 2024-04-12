@@ -10,18 +10,16 @@
 <mat-menu #applyTagsMenu>
   <div class="menu-info secondary-text" i18n>Apply tags</div>
   <mat-divider></mat-divider>
-  <ng-container *ngFor="let tag of tags">
-    <div *ngIf="tag.text !== 'archived'" mat-menu-item>
-      <mat-checkbox
-        color="primary"
-        [checked]="tag.checked"
-        (change)="toggleTagOnProjects(tag, $event.checked)"
-        (click)="$event.stopPropagation()"
-      >
-        <div [ngStyle]="{ color: tag.color }">{{ tag.text }}</div>
-      </mat-checkbox>
-    </div>
-  </ng-container>
+  <div *ngFor="let tag of tags" mat-menu-item>
+    <mat-checkbox
+      color="primary"
+      [checked]="tag.checked"
+      (change)="toggleTagOnProjects(tag, $event.checked)"
+      (click)="$event.stopPropagation()"
+    >
+      <div [ngStyle]="{ color: tag.color }">{{ tag.text }}</div>
+    </mat-checkbox>
+  </div>
   <mat-divider></mat-divider>
   <div (click)="manageTags(); $event.stopPropagation()" mat-menu-item i18n>Manage Tags</div>
 </mat-menu>

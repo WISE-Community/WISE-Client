@@ -58,7 +58,12 @@ export class EditTagComponent {
 
   private createArchivedTagValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      return control.value?.toLowerCase() === 'archived' ? { archivedNotAllowed: true } : null;
+      if (control.value?.toLowerCase() === 'archived') {
+        control.markAsTouched();
+        return { archivedNotAllowed: true };
+      } else {
+        return null;
+      }
     };
   }
 
