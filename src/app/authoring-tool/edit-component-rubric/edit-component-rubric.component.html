@@ -12,9 +12,9 @@
     <mat-icon>message</mat-icon>
   </button>
 </div>
-<wise-authoring-tinymce-editor
+<translatable-rich-text-editor
   *ngIf="showRubricAuthoring"
-  [(model)]="rubric"
-  (modelChange)="rubricChanged()"
->
-</wise-authoring-tinymce-editor>
+  [content]="componentContent"
+  key="rubric"
+  (defaultLanguageTextChanged)="rubricChanged()"
+></translatable-rich-text-editor>

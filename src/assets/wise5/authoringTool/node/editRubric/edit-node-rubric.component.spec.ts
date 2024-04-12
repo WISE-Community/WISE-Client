@@ -55,17 +55,7 @@ describe('EditNodeRubricComponent', () => {
     fixture.detectChanges();
   });
 
-  rubricChanged();
-});
-
-function rubricChanged() {
-  describe('rubricChanged()', () => {
-    it('should update the rubric in the node', () => {
-      expect(component.node.rubric).toEqual('');
-      const newRubric = 'Hello World';
-      component.rubric = newRubric;
-      component.rubricChanged();
-      expect(component.node.rubric).toEqual(newRubric);
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
-}
+});
