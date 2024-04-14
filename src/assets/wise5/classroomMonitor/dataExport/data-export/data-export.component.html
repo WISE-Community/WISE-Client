@@ -4,12 +4,12 @@
       <div>
         <button
           mat-raised-button
-          (click)="setExportType('oneWorkgroupPerRow')"
-          aria-label="Export One Workgroup Per Row"
+          (click)="goToExportGradebookPage()"
+          aria-label="Export Gradebook"
           i18n-aria-label
           i18n
         >
-          Export One Workgroup Per Row
+          Export Gradebook
         </button>
       </div>
       <div>
@@ -123,75 +123,8 @@
         </button>
       </div>
     </div>
-    <div
-      *ngIf="
-        exportType === 'latestStudentWork' ||
-        exportType === 'allStudentWork' ||
-        exportType === 'oneWorkgroupPerRow'
-      "
-    >
+    <div *ngIf="exportType === 'latestStudentWork' || exportType === 'allStudentWork'">
       <h4>{{ exportTypeLabel }}</h4>
-      <div *ngIf="exportType === 'oneWorkgroupPerRow'" fxLayout="column" fxLayoutGap="10px">
-        <div fxLayoutGap="20px">
-          <button mat-raised-button (click)="defaultClicked()" i18n>Default</button>
-          <button mat-raised-button (click)="everythingClicked()" i18n>Everything</button>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeStudentWork" i18n>
-            Include Student Work
-          </mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeStudentWorkIds" i18n>
-            Include Student Work IDs
-          </mat-checkbox>
-        </div>
-        <div *ngIf="canViewStudentNames">
-          <mat-checkbox color="primary" [(ngModel)]="includeStudentNames" i18n>
-            Include Student Names
-          </mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeStudentWorkTimestamps" i18n>
-            Include Student Work Timestamps
-          </mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeBranchPathTaken" i18n>
-            Include Branch Path Taken
-          </mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeBranchPathTakenNodeId" i18n>
-            Include Branch Path Taken Node ID
-          </mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeBranchPathTakenStepTitle" i18n>
-            Include Branch Path Taken Step Title
-          </mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeScores" i18n>
-            Include Scores
-          </mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeScoreTimestamps" i18n>
-            Include Score Timestamps
-          </mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeComments" i18n>
-            Include Comments
-          </mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox color="primary" [(ngModel)]="includeCommentTimestamps" i18n>
-            Include Comment Timestamps
-          </mat-checkbox>
-        </div>
-      </div>
       <div
         *ngIf="
           canViewStudentNames &&

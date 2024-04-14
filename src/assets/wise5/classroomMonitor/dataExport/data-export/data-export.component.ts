@@ -12,7 +12,6 @@ import { EventDataExportStrategy } from '../strategies/EventDataExportStrategy';
 import { NotebookDataExportStrategy } from '../strategies/NotebookDataExportStrategy';
 import { NotificationDataExportStrategy } from '../strategies/NotificationDataExportStrategy';
 import { StudentAssetDataExportStrategy } from '../strategies/StudentAssetDataExportStrategy';
-import { OneWorkgroupPerRowDataExportStrategy } from '../strategies/OneWorkgroupPerRowDataExportStrategy';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -61,20 +60,10 @@ export class DataExportComponent implements OnInit {
   exportTypeLabel: string;
   flattenedProjectAsNodeIds: string[] = [];
   includeAnnotations: boolean;
-  includeBranchPathTaken: boolean;
-  includeBranchPathTakenNodeId: boolean;
-  includeBranchPathTakenStepTitle: boolean;
-  includeComments: boolean;
-  includeCommentTimestamps: boolean;
   includeEvents: boolean;
   includeNames: boolean;
-  includeScores: boolean;
-  includeScoreTimestamps: boolean;
   includeStudentEvents: boolean;
   includeStudentNames: boolean;
-  includeStudentWork: boolean;
-  includeStudentWorkIds: boolean;
-  includeStudentWorkTimestamps: boolean;
   includeTeacherEvents: boolean;
   nodes: any[] = [];
   project: any;
@@ -120,8 +109,6 @@ export class DataExportComponent implements OnInit {
 
   getExportTypeLabel(exportType: string): string {
     switch (exportType) {
-      case 'oneWorkgroupPerRow':
-        return $localize`One Workgroup Per Row`;
       case 'latestStudentWork':
         return $localize`Latest Student Work`;
       case 'allStudentWork':
@@ -157,8 +144,6 @@ export class DataExportComponent implements OnInit {
       this.dataExportContext.setStrategy(new NotificationDataExportStrategy());
     } else if (exportType === 'studentAssets') {
       this.dataExportContext.setStrategy(new StudentAssetDataExportStrategy());
-    } else if (exportType === 'oneWorkgroupPerRow') {
-      this.dataExportContext.setStrategy(new OneWorkgroupPerRowDataExportStrategy());
     }
     this.dataExportContext.export();
   }
@@ -179,55 +164,6 @@ export class DataExportComponent implements OnInit {
       }
     }
     return extractedUserIDsAndStudentNames;
-  }
-
-  /**
-   * Check if a component is selected
-   * @param selectedNodesMap a map of node id and component id strings
-   * to true
-   * example
-   * {
-   *   "node1-38fj20egrj": true,
-   *   "node1-20dbj2e0sf": true
-   * }
-   * @param nodeId the node id to check
-   * @param componentId the component id to check
-   * @return whether the component is selected
-   */
-  isComponentSelected(selectedNodesMap: any, nodeId: string, componentId: string): boolean {
-    var result = false;
-    if (selectedNodesMap != null) {
-      if (
-        nodeId != null &&
-        componentId != null &&
-        selectedNodesMap[nodeId + '-' + componentId] == true
-      ) {
-        result = true;
-      }
-    }
-    return result;
-  }
-
-  /**
-   * Check if a component is selected
-   * @param selectedNodesMap a map of node id to true
-   * example
-   * {
-   *   "node1": true,
-   *   "node2": true
-   * }
-   * @param nodeId the node id to check
-   * @param componentId the component id to check
-   * @return whether the node is selected
-   */
-  isNodeSelected(selectedNodesMap: any, nodeId: string): boolean {
-    var result = false;
-    if (selectedNodesMap != null) {
-      if (nodeId != null && selectedNodesMap[nodeId] == true) {
-        result = true;
-      }
-    }
-    return result;
   }
 
   /**
@@ -335,21 +271,6 @@ export class DataExportComponent implements OnInit {
   }
 
   /**
-   * Check if we want to export this node
-   * @param selectedNodesMap a mapping of node id to boolean value of whether
-   * the researcher has checked the node
-   * @param nodeId the node id
-   * @return whether the node was checked
-   */
-  exportNode(selectedNodesMap: any, nodeId: string): boolean {
-    if (selectedNodesMap == null || this.isNodeSelected(selectedNodesMap, nodeId)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  /**
    * Get the node position
    * @param nodeId the node id
    * @returns the node position
@@ -372,38 +293,18 @@ export class DataExportComponent implements OnInit {
   }
 
   everythingClicked(): void {
-    this.includeStudentWork = true;
-    this.includeStudentWorkIds = true;
     this.includeStudentNames = true;
-    this.includeStudentWorkTimestamps = true;
-    this.includeBranchPathTaken = true;
-    this.includeBranchPathTakenStepTitle = true;
-    this.includeBranchPathTakenNodeId = true;
-    this.includeScores = true;
-    this.includeScoreTimestamps = true;
-    this.includeComments = true;
-    this.includeCommentTimestamps = true;
     this.exportStepSelectionType = 'exportAllSteps';
     this.includeAnnotations = true;
     this.includeEvents = true;
   }
 
   setDefaultExportSettings(): void {
-    this.includeStudentWork = true;
-    this.includeStudentWorkIds = false;
     if (this.canViewStudentNames) {
       this.includeStudentNames = true;
     } else {
       this.includeStudentNames = false;
     }
-    this.includeStudentWorkTimestamps = false;
-    this.includeBranchPathTaken = true;
-    this.includeBranchPathTakenStepTitle = false;
-    this.includeBranchPathTakenNodeId = false;
-    this.includeScores = false;
-    this.includeScoreTimestamps = false;
-    this.includeComments = false;
-    this.includeCommentTimestamps = false;
     this.exportStepSelectionType = 'exportAllSteps';
     this.includeAnnotations = false;
     this.includeEvents = false;
@@ -442,5 +343,9 @@ export class DataExportComponent implements OnInit {
 
   protected goToExportEventsPage(): void {
     this.router.navigate(['events'], { relativeTo: this.route });
+  }
+
+  protected goToExportGradebookPage(): void {
+    this.router.navigate(['gradebook'], { relativeTo: this.route });
   }
 }

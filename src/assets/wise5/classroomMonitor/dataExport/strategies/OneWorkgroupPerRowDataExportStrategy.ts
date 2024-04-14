@@ -196,7 +196,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
               }
             }
           }
-          if (this.controller.exportNode(selectedNodesMap, nodeId)) {
+          if (this.exportNode(selectedNodesMap, nodeId)) {
             if (this.projectService.isBranchPoint(nodeId)) {
               var toNodeId = null;
               var stepTitle = null;
@@ -244,7 +244,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
         rows.push(workgroupRow);
       }
       var fileName = runId + '_one_workgroup_per_row.csv';
-      this.controller.generateCSVFile(rows, fileName);
+      this.generateCSVFile(rows, fileName);
       this.controller.hideDownloadingExportMessage();
     });
   }
@@ -259,8 +259,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
    */
   private exportComponent(selectedNodesMap, nodeId, componentId) {
     return (
-      selectedNodesMap == null ||
-      this.controller.isComponentSelected(selectedNodesMap, nodeId, componentId)
+      selectedNodesMap == null || this.isComponentSelected(selectedNodesMap, nodeId, componentId)
     );
   }
 
@@ -311,7 +310,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
             }
           }
         }
-        if (this.controller.exportNode(selectedNodesMap, nodeId)) {
+        if (this.exportNode(selectedNodesMap, nodeId)) {
           if (this.projectService.isBranchPoint(nodeId)) {
             if (this.controller.includeBranchPathTakenNodeId) {
               columnIds.push(nodeId + '-branchPathTakenNodeId');
@@ -327,6 +326,43 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
       }
     }
     return columnIds;
+  }
+
+  /**
+   * Check if we want to export this node
+   * @param selectedNodesMap a mapping of node id to boolean value of whether
+   * the researcher has checked the node
+   * @param nodeId the node id
+   * @return whether the node was checked
+   */
+  exportNode(selectedNodesMap: any, nodeId: string): boolean {
+    if (selectedNodesMap == null || this.isNodeSelected(selectedNodesMap, nodeId)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Check if a component is selected
+   * @param selectedNodesMap a map of node id to true
+   * example
+   * {
+   *   "node1": true,
+   *   "node2": true
+   * }
+   * @param nodeId the node id to check
+   * @param componentId the component id to check
+   * @return whether the node is selected
+   */
+  isNodeSelected(selectedNodesMap: any, nodeId: string): boolean {
+    var result = false;
+    if (selectedNodesMap != null) {
+      if (nodeId != null && selectedNodesMap[nodeId] == true) {
+        result = true;
+      }
+    }
+    return result;
   }
 
   /**
