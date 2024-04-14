@@ -2434,7 +2434,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">75</context>
         </context-group>
-        <target state="translated">Explorar temas de importancia social</target>
+        <target state="translated">Explorar temas de relevancia social</target>
       </trans-unit>
       <trans-unit id="704339fc471e1b8d675435af5455c289241dbe1c" datatype="html">
         <source>Pose relevant questions and make predictions</source>
@@ -21300,7 +21300,7 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">88,90</context>
+          <context context-type="linenumber">87,89</context>
         </context-group>
         <target state="translated"> Correcto </target>
       </trans-unit>
@@ -21312,7 +21312,7 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">101,103</context>
+          <context context-type="linenumber">100,102</context>
         </context-group>
         <target state="translated"> Incorrecto </target>
       </trans-unit>
@@ -21493,7 +21493,7 @@ Advertencia: Esto eliminará todas las opciones existentes en este componente.</
         <source> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempt </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">61,63</context>
+          <context context-type="linenumber">60,62</context>
         </context-group>
         <target state="translated"> Ha usado <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> intento </target>
       </trans-unit>
@@ -21501,7 +21501,7 @@ Advertencia: Esto eliminará todas las opciones existentes en este componente.</
         <source> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempts </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">72,74</context>
+          <context context-type="linenumber">71,73</context>
         </context-group>
         <target state="translated"> Utilizaste <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> de <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> intentos </target>
       </trans-unit>
