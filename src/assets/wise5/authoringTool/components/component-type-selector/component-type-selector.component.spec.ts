@@ -10,9 +10,11 @@ import { ComponentTypeSelectorHarness } from './component-type-selector.harness'
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
 import { UserService } from '../../../../../app/services/user.service';
+import { ConfigService } from '../../../services/configService';
 
 let component: ComponentTypeSelectorComponent;
 let componentTypeSelectorHarness: ComponentTypeSelectorHarness;
+let configService: ConfigService;
 let fixture: ComponentFixture<ComponentTypeSelectorComponent>;
 let userService: UserService;
 
@@ -32,6 +34,8 @@ describe('ComponentTypeSelectorComponent', () => {
       providers: []
     });
     fixture = TestBed.createComponent(ComponentTypeSelectorComponent);
+    configService = TestBed.inject(ConfigService);
+    spyOn(configService, 'getConfigParam').and.returnValue(true);
     userService = TestBed.inject(UserService);
     userService.isAuthenticated = true;
     spyOn(userService, 'getRoles').and.returnValue(['researcher', 'teacher']);

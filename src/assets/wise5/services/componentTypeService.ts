@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { UserService } from '../../../app/services/user.service';
+import { ConfigService } from './configService';
 
 @Injectable()
 export class ComponentTypeService {
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
+    private configService: ConfigService,
     private userService: UserService
   ) {}
 
@@ -31,11 +33,7 @@ export class ComponentTypeService {
       { type: 'Summary', name: this.getComponentTypeLabel('Summary') },
       { type: 'Table', name: this.getComponentTypeLabel('Table') }
     ];
-    if (
-      this.userService.isAdmin() ||
-      this.userService.isResearcher() ||
-      this.userService.isTrustedAuthor()
-    ) {
+    if (this.isAiChatAllowed()) {
       componentTypes.unshift({ type: 'AiChat', name: this.getComponentTypeLabel('AiChat') });
     }
     return componentTypes;
@@ -43,5 +41,14 @@ export class ComponentTypeService {
 
   getComponentTypeLabel(componentType: string): string {
     return this.componentServiceLookupService.getService(componentType).getComponentTypeLabel();
+  }
+
+  private isAiChatAllowed(): boolean {
+    return (
+      this.configService.getConfigParam('chatGptEnabled') &&
+      (this.userService.isAdmin() ||
+        this.userService.isResearcher() ||
+        this.userService.isTrustedAuthor())
+    );
   }
 }
