@@ -108,7 +108,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">168,172</context>
         </context-group>
-        <target state="translated"> Mientras los estudiantes lidian con múltiples ideas contradictorias y confusas, las investigaciones han demostrado que la enseñanza es más efectiva cuando las opiniones de los estudiantes se utilizan como punto de partida para investigaciones científicas. </target>
+        <target state="translated"> A medida que los estudiantes se enfrentan a múltiples ideas contradictorias y confusas, las investigaciones han demostrado que la instrucción es más efectiva cuando se utilizan las perspectivas de los estudiantes como punto de partida para las investigaciones científicas. </target>
       </trans-unit>
       <trans-unit id="6c0a994c7e2b0ebe8c73c6ff5895c8340ba3c4d6" datatype="html">
         <source> The <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Knowledge Integration (KI)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> perspective emphasizes building on and strengthening science understanding by incorporating new ideas and sorting out alternative perspectives using evidence. This framework forms the basis of WISE curriculum design, assessments, and evaluation. </source>
@@ -2498,7 +2498,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">108,111</context>
         </context-group>
-        <target state="translated"> Con las unidades de investigación de WISE, los estudiantes no solo aprenden habilidades que los preparan para tener éxito en disciplinas STEM sino que también aprenden las habilidades necesarias para ser ciudadanos responsables y con pensamiento crítico. </target>
+        <target state="translated"> Con las unidades de investigación de WISE, los estudiantes no solo aprenden habilidades que los preparan para desempeñarse en disciplinas STEM sino que también aprenden las habilidades necesarias para ser ciudadanos responsables con pensamiento crítico. </target>
       </trans-unit>
       <trans-unit id="811c99b1c960d5acedf84179c8c29e177ae0bf27" datatype="html">
         <source>Standards-Aligned Curricula</source>
@@ -2522,7 +2522,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">133,139</context>
         </context-group>
-        <target state="translated">Las unidades de WISE apoyan los <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;http://www.nextgenscience.org&quot; target=&quot;_blank&quot;               &gt;"/>Next Generation Science Standards (NGSS)<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a             &gt;"/>, y promueven el <x id="START_LINK_1" equiv-text="&lt;a href=&quot;http://www.nextgenscience.org/three-dimensions&quot; target=&quot;_blank&quot;               &gt;"/>aprendizaje 3-dimensional<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a             &gt;"/>, aunque también son fácilmente adaptables a los estándares y diseños curriculares locales.</target>
+        <target state="translated">Las unidades de WISE apoyan los <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;http://www.nextgenscience.org&quot; target=&quot;_blank&quot;               &gt;"/>Next Generation Science Standards (NGSS)<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a             &gt;"/>, fomentan <x id="START_LINK_1" equiv-text="&lt;a href=&quot;http://www.nextgenscience.org/three-dimensions&quot; target=&quot;_blank&quot;               &gt;"/>el aprendizaje en 3 dimensiones<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a             &gt;"/>, aunque también son fácilmente adaptables a los estándares y diseños curriculares locales.</target>
       </trans-unit>
       <trans-unit id="6e15a0555bed4b010ba36febb47e87ff32616dd8" datatype="html">
         <source>Design Process &amp; Goals</source>
