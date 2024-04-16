@@ -2,32 +2,43 @@
 <mat-dialog-content class="dialog-content-scroll">
   <div fxLayout="column" fxLayoutGap="12px">
     <div>
-      <button mat-raised-button color="primary" (click)="create()" i18n>+ New Tag</button>
+      <button mat-raised-button color="primary" (click)="showCreateTag = !showCreateTag" i18n>
+        + New Tag
+      </button>
     </div>
+    <edit-tag *ngIf="showCreateTag" (closeEvent)="showCreateTag = false"></edit-tag>
     <div *ngFor="let tag of tags" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-      <div class="tag-name" [ngStyle]="{ 'background-color': tag.color }" fxFlex>
-        {{ tag.text }}
-      </div>
-      <button
-        mat-icon-button
-        color="primary"
-        (click)="edit(tag)"
-        matTooltip="Edit"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        color="primary"
-        (click)="delete(tag)"
-        matTooltip="Delete"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>close</mat-icon>
-      </button>
+      <edit-tag
+        *ngIf="idToEditing[tag.id]"
+        class="edit-tag"
+        [tag]="tag"
+        (closeEvent)="cancelEditing(tag)"
+      ></edit-tag>
+      <ng-container *ngIf="!idToEditing[tag.id]">
+        <div class="tag-name" [ngStyle]="{ 'background-color': tag.color }" fxFlex>
+          {{ tag.text }}
+        </div>
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="idToEditing[tag.id] = !idToEditing[tag.id]"
+          matTooltip="Edit"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="delete(tag)"
+          matTooltip="Delete"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </ng-container>
     </div>
   </div>
 </mat-dialog-content>
