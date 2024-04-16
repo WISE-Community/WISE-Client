@@ -34,7 +34,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditTagComponent {
   @Output() closeEvent: EventEmitter<void> = new EventEmitter();
-  @Output() enterKeyEvent: EventEmitter<void> = new EventEmitter();
   @ViewChild('nameInput') nameInput: ElementRef;
   protected submitLabel: string = $localize`Create`;
   @Input() tag: Tag;
@@ -47,7 +46,7 @@ export class EditTagComponent {
     this.createUniqueTagValidator()
   ]);
 
-  constructor(protected projectTagService: ProjectTagService, protected snackBar: MatSnackBar) {}
+  constructor(private projectTagService: ProjectTagService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     if (this.tag != null) {
@@ -65,7 +64,7 @@ export class EditTagComponent {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      (<any>this.nameInput).nativeElement.focus();
+      this.nameInput.nativeElement.focus();
     });
   }
 

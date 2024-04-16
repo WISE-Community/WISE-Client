@@ -1,4 +1,3 @@
-<h3 *ngIf="tag == null" i18n>Create New Tag</h3>
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
   <mat-form-field class="name-input">
     <mat-label i18n>Tag Name</mat-label>
@@ -14,7 +13,7 @@
     <input matInput (keyup.enter)="enterKeyPressed()" [formControl]="colorControl" />
   </mat-form-field>
   <button mat-button (click)="close()" i18n>Cancel</button>
-  <button mat-raised-button color="primary" [disabled]="!nameControl.valid" (click)="submit()" i18n>
+  <button mat-raised-button color="primary" [disabled]="!nameControl.valid" (click)="submit()">
     {{ submitLabel }}
   </button>
 </div>

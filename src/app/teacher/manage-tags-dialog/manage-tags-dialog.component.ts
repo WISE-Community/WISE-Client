@@ -35,7 +35,7 @@ import { EditTagComponent } from '../edit-tag/edit-tag.component';
   ]
 })
 export class ManageTagsDialogComponent implements OnInit {
-  protected idToEditing: any = {};
+  protected idToEditing: { [id: string]: boolean } = {};
   protected inputChanged: Subject<any> = new Subject<any>();
   protected showCreateTag: boolean;
   private subscriptions: Subscription = new Subscription();
@@ -65,7 +65,7 @@ export class ManageTagsDialogComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  protected cancel(tag: Tag): void {
+  protected cancelEditing(tag: Tag): void {
     this.idToEditing[tag.id] = false;
   }
 

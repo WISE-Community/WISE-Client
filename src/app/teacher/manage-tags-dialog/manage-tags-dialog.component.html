@@ -12,7 +12,7 @@
         *ngIf="idToEditing[tag.id]"
         class="edit-tag"
         [tag]="tag"
-        (closeEvent)="cancel(tag)"
+        (closeEvent)="cancelEditing(tag)"
       ></edit-tag>
       <ng-container *ngIf="!idToEditing[tag.id]">
         <div class="tag-name" [ngStyle]="{ 'background-color': tag.color }" fxFlex>
