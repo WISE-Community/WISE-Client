@@ -5,11 +5,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { ManageTagsDialogComponent } from '../manage-tags-dialog/manage-tags-dialog.component';
 import { Subscription } from 'rxjs';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
+import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
 
 @Component({
   selector: 'apply-tags-button',
   templateUrl: './apply-tags-button.component.html',
-  styleUrls: ['./apply-tags-button.component.scss']
+  styleUrls: ['./apply-tags-button.component.scss'],
+  providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }]
 })
 export class ApplyTagsButtonComponent implements OnInit {
   @Input() selectedProjects: Project[] = [];
@@ -19,19 +21,35 @@ export class ApplyTagsButtonComponent implements OnInit {
   constructor(private dialog: MatDialog, private projectTagService: ProjectTagService) {}
 
   ngOnInit(): void {
-    this.retrieveUserTags();
     this.subscribeToTagUpdated();
     this.subscribeToNewTag();
     this.subscribeToTagDeleted();
   }
 
+  ngOnChanges(): void {
+    this.retrieveUserTags();
+  }
+
   private retrieveUserTags(): void {
     this.projectTagService.retrieveUserTags().subscribe((tags: Tag[]) => {
       for (const tag of tags) {
-        tag.checked = this.doesAnyProjectHaveTag(tag);
+        this.updateTagCheckedValue(tag);
       }
       this.tags = tags;
     });
+  }
+
+  private updateTagCheckedValue(tag: Tag): void {
+    const numProjectsWithTag = this.getNumProjectsWithTag(tag);
+    tag.checked = numProjectsWithTag === this.selectedProjects.length;
+    tag.indeterminateChecked =
+      numProjectsWithTag > 0 && numProjectsWithTag < this.selectedProjects.length;
+  }
+
+  private getNumProjectsWithTag(tag: Tag): number {
+    return this.selectedProjects.filter((project) =>
+      project.tags.some((projectTag) => projectTag.id === tag.id)
+    ).length;
   }
 
   private subscribeToTagUpdated(): void {
@@ -66,23 +84,16 @@ export class ApplyTagsButtonComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  private doesAnyProjectHaveTag(tag: Tag): boolean {
-    for (const project of this.selectedProjects) {
-      if (project.tags.some((projectTag) => projectTag.id === tag.id)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  protected toggleTagOnProjects(tag: Tag, addTag: boolean): void {
-    if (addTag) {
-      this.projectTagService.applyTagToProjects(tag, this.selectedProjects).subscribe(() => {
-        this.addTagToProjects(tag, this.selectedProjects);
-      });
-    } else {
+  protected toggleTagOnProjects(tag: Tag): void {
+    if (tag.checked || tag.indeterminateChecked) {
       this.projectTagService.removeTagFromProjects(tag, this.selectedProjects).subscribe(() => {
         this.removeTagFromProjects(tag, this.selectedProjects);
+        this.updateTagCheckedValue(tag);
+      });
+    } else {
+      this.projectTagService.applyTagToProjects(tag, this.selectedProjects).subscribe(() => {
+        this.addTagToProjects(tag, this.selectedProjects);
+        this.updateTagCheckedValue(tag);
       });
     }
   }
