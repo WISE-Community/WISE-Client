@@ -1,7 +1,8 @@
-<div fxLayout="row" fxLayoutAlign="space-between">
+<h3 *ngIf="tag == null" i18n>Create New Tag</h3>
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
   <mat-form-field class="name-input">
     <mat-label i18n>Tag Name</mat-label>
-    <input matInput (keyup.enter)="enterKeyPressed()" [formControl]="nameControl" />
+    <input matInput #nameInput (keyup.enter)="enterKeyPressed()" [formControl]="nameControl" />
     <mat-error *ngIf="nameControl.errors?.required" i18n>Required</mat-error>
     <mat-error *ngIf="nameControl.errors?.archivedNotAllowed" i18n
       >Archived tag not allowed</mat-error
@@ -12,4 +13,9 @@
     <mat-label i18n>Color</mat-label>
     <input matInput (keyup.enter)="enterKeyPressed()" [formControl]="colorControl" />
   </mat-form-field>
+  <button mat-button (click)="close()" i18n>Cancel</button>
+  <button mat-raised-button color="primary" [disabled]="!nameControl.valid" (click)="submit()" i18n>
+    {{ submitLabel }}
+  </button>
 </div>
+<hr *ngIf="tag == null" />

@@ -291,7 +291,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
@@ -436,16 +436,12 @@
           <context context-type="linenumber">91</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/create-tag-dialog/create-tag-dialog.component.html</context>
-          <context context-type="linenumber">10</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-run-warning-dialog/edit-run-warning-dialog.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/edit-tag-dialog/edit-tag-dialog.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.html</context>
@@ -731,7 +727,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
@@ -1055,7 +1051,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9001940350011393028" datatype="html">
@@ -5661,7 +5657,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/select-peer-grouping-option/select-peer-grouping-option.component.html</context>
@@ -8205,27 +8201,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">128,130</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="e1b8c658165692659d6ad0a7eb28f782cb011dda" datatype="html">
-        <source>Create New Tag</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/create-tag-dialog/create-tag-dialog.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5ddde4e47e7de2e987bb8d25dd803b9fa4e775cd" datatype="html">
-        <source> Create </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/create-tag-dialog/create-tag-dialog.component.html</context>
-          <context context-type="linenumber">11,13</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5325249077056620539" datatype="html">
-        <source>Tag created</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/create-tag-dialog/create-tag-dialog.component.ts</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="22003a1edfc137e76879183acaaea45adf8452fa" datatype="html">
         <source>Latest from the WISE Community</source>
         <context-group purpose="location">
@@ -8299,36 +8274,18 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="96c4808d57c6238c90e83f1c3abf2dc78131f896" datatype="html">
-        <source>Edit Tag</source>
+      <trans-unit id="e1b8c658165692659d6ad0a7eb28f782cb011dda" datatype="html">
+        <source>Create New Tag</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/edit-tag-dialog/edit-tag-dialog.component.html</context>
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
           <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9e0eaab2042cd18d46b66c7fafc914b7e54b91c3" datatype="html">
-        <source> Save </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/edit-tag-dialog/edit-tag-dialog.component.html</context>
-          <context context-type="linenumber">12,14</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component.html</context>
-          <context context-type="linenumber">9,11</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1772313028295081091" datatype="html">
-        <source>Tag updated</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/edit-tag-dialog/edit-tag-dialog.component.ts</context>
-          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e5f24fc7a2bf50bd61d109dd9cad3fbff6ec7add" datatype="html">
         <source>Required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component.html</context>
@@ -8339,21 +8296,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Archived tag not allowed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4215210349960e31377ef22c4d2750f626b84067" datatype="html">
         <source>Tag already exists</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8fa4d523f7b91df4390120b85ed0406138273e1a" datatype="html">
         <source>Color</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
@@ -8386,6 +8343,41 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">146</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a4b2a2eee74b0f9dc8fa3b70724d293aeb760879" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ submitLabel }}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5674286808255988565" datatype="html">
+        <source>Create</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3768927257183755959" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5325249077056620539" datatype="html">
+        <source>Tag created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
+          <context context-type="linenumber">122</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1772313028295081091" datatype="html">
+        <source>Tag updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="76de164da3c441addbf9b14950150aa869b00fdb" datatype="html">
@@ -8501,39 +8493,39 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="62e22c1515a1d619b38a15ff66ecbfd65cd66316" datatype="html">
-        <source>+ New Tag</source>
+      <trans-unit id="dea691b1f946f0b5e4bf750b4cfc30098c784fe0" datatype="html">
+        <source> + New Tag </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="linenumber">5,7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8663242190095976332" datatype="html">
         <source>Tag deleted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9151762754681070291" datatype="html">
         <source>There is <x id="PH" equiv-text="numProjectsWithTag"/> unit with this tag.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2021640020415028727" datatype="html">
         <source>There are <x id="PH" equiv-text="numProjectsWithTag"/> units with this tag.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
-          <context context-type="linenumber">99</context>
+          <context context-type="linenumber">90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1288226131735320264" datatype="html">
         <source>Are you sure you want to delete this tag? </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9008968878373693685" datatype="html">
@@ -21221,6 +21213,13 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
           <context context-type="linenumber">151</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9e0eaab2042cd18d46b66c7fafc914b7e54b91c3" datatype="html">
+        <source> Save </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component.html</context>
+          <context context-type="linenumber">9,11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="99387bde50a12de9097e8cb9c92e2aa6a43f8324" datatype="html">
