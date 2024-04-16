@@ -746,7 +746,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">85</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
@@ -13264,19 +13264,27 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Teams Per Group: </target>
       </trans-unit>
-      <trans-unit id="f96faab393e2749256e2f2e3dda5e04d42d078c9" datatype="html">
-        <source> Drop image or file here or click to upload! <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input       type=&quot;file&quot;       accept=&quot;image/*,application/pdf,text/csv,text/javascript&quot;       class=&quot;file-input&quot;       (onFileSelected)=&quot;fileChosen($event)&quot;       ng2FileSelect       multiple     /&gt;"/></source>
+      <trans-unit id="5abeb8898e4a9d00841c40124f192d0a71b3cc18" datatype="html">
+        <source>Drop image or file here or click to upload!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">8,17</context>
+          <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation"> Drop image or file here or click to upload! <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input       type=&quot;file&quot;       accept=&quot;image/*,application/pdf,text/csv,text/javascript&quot;       class=&quot;file-input&quot;       (onFileSelected)=&quot;fileChosen($event)&quot;       ng2FileSelect       multiple     /&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/studentAsset/student-assets/student-assets.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <target state="needs-translation">Drop image or file here or click to upload!</target>
       </trans-unit>
       <trans-unit id="713ee2647d2ff3f42ac8bcebc40da62cae77e4c4" datatype="html">
         <source> You are using <x id="INTERPOLATION" equiv-text="{{ totalFileSize | filesize }}"/> out of <x id="INTERPOLATION_1" equiv-text="{{ projectAssetTotalSizeMax | filesize }}"/> (<x id="INTERPOLATION_2" equiv-text="{{ projectAssetUsagePercentage.toFixed(0) }}"/>%) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">20,23</context>
+          <context context-type="linenumber">19,22</context>
         </context-group>
         <target state="needs-translation"> You are using <x id="INTERPOLATION" equiv-text="{{ totalFileSize | filesize }}"/> out of <x id="INTERPOLATION_1" equiv-text="{{ projectAssetTotalSizeMax | filesize }}"/> (<x id="INTERPOLATION_2" equiv-text="{{ projectAssetUsagePercentage.toFixed(0) }}"/>%) </target>
       </trans-unit>
@@ -13284,7 +13292,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Sort Assets</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <target state="needs-translation">Sort Assets</target>
       </trans-unit>
@@ -13292,7 +13300,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>File Name A-&gt;Z</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <target state="needs-translation">File Name A-&gt;Z</target>
       </trans-unit>
@@ -13300,7 +13308,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>File Name Z-&gt;A</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <target state="needs-translation">File Name Z-&gt;A</target>
       </trans-unit>
@@ -13308,7 +13316,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>File Size Small -&gt; Large</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <target state="needs-translation">File Size Small -&gt; Large</target>
       </trans-unit>
@@ -13316,7 +13324,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>File Size Large -&gt; Small</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <target state="needs-translation">File Size Large -&gt; Small</target>
       </trans-unit>
@@ -13324,7 +13332,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> Choose </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">66,68</context>
+          <context context-type="linenumber">65,67</context>
         </context-group>
         <target state="needs-translation"> Choose </target>
       </trans-unit>
@@ -13332,7 +13340,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>(Not Used)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">70</context>
         </context-group>
         <target state="needs-translation">(Not Used)</target>
       </trans-unit>
@@ -13340,7 +13348,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Download</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">76</context>
         </context-group>
         <target state="needs-translation">Download</target>
       </trans-unit>
@@ -13361,7 +13369,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.ts</context>
-          <context context-type="linenumber">192</context>
+          <context context-type="linenumber">193</context>
         </context-group>
         <target state="needs-translation">The file you are trying to upload is larger than 500 KB. We recommend using smaller files so they load faster for students. Are you sure you want to upload this large file?
 </target>
@@ -13371,7 +13379,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.ts</context>
-          <context context-type="linenumber">194</context>
+          <context context-type="linenumber">195</context>
         </context-group>
         <target state="needs-translation">One of the files you are trying to upload is larger than 500 KB. We recommend using smaller files so they load faster for students. Are you sure you want to upload the large file?
 </target>
@@ -13381,7 +13389,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.ts</context>
-          <context context-type="linenumber">196</context>
+          <context context-type="linenumber">197</context>
         </context-group>
         <target state="needs-translation"><x id="PH" equiv-text="largeFiles.length"/> of the files you are trying to upload are larger than 500 KB. We recommend using smaller files so they load faster for students. Are you sure you want to upload these large files?
 </target>
@@ -13390,7 +13398,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Successfully uploaded:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.ts</context>
-          <context context-type="linenumber">225</context>
+          <context context-type="linenumber">226</context>
         </context-group>
         <target state="needs-translation">Successfully uploaded:</target>
       </trans-unit>
@@ -13398,7 +13406,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Error uploading: </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.ts</context>
-          <context context-type="linenumber">234</context>
+          <context context-type="linenumber">235</context>
         </context-group>
         <target state="needs-translation">Error uploading: </target>
       </trans-unit>
@@ -21304,7 +21312,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">88,90</context>
+          <context context-type="linenumber">87,89</context>
         </context-group>
         <target state="needs-translation"> Correct </target>
       </trans-unit>
@@ -21316,7 +21324,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">101,103</context>
+          <context context-type="linenumber">100,102</context>
         </context-group>
         <target state="needs-translation"> Incorrect </target>
       </trans-unit>
@@ -21498,7 +21506,7 @@ Warning: This will delete all existing choices in this component.</target>
         <source> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempt </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">61,63</context>
+          <context context-type="linenumber">60,62</context>
         </context-group>
         <target state="needs-translation"> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempt </target>
       </trans-unit>
@@ -21506,7 +21514,7 @@ Warning: This will delete all existing choices in this component.</target>
         <source> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempts </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">72,74</context>
+          <context context-type="linenumber">71,73</context>
         </context-group>
         <target state="needs-translation"> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempts </target>
       </trans-unit>
@@ -24327,18 +24335,6 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">27</context>
         </context-group>
         <target state="needs-translation">Remove File</target>
-      </trans-unit>
-      <trans-unit id="5abeb8898e4a9d00841c40124f192d0a71b3cc18" datatype="html">
-        <source>Drop image or file here or click to upload!</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
-          <context context-type="linenumber">48</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/studentAsset/student-assets/student-assets.component.html</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-        <target state="needs-translation">Drop image or file here or click to upload!</target>
       </trans-unit>
       <trans-unit id="eec31089571ce760c1f3c39edb0469e81ed2595f" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;mat-small&quot;&gt;"/>Share with Class<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
