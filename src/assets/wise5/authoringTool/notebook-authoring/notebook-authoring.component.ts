@@ -11,7 +11,6 @@ import { Subject, debounceTime } from 'rxjs';
 })
 export class NotebookAuthoringComponent {
   protected notebookChanged: Subject<void> = new Subject<void>();
-  protected projectId: number;
   protected project: any;
   protected reportIdToAuthoringNote: any;
 
@@ -22,7 +21,6 @@ export class NotebookAuthoringComponent {
 
   ngOnInit(): void {
     this.project = this.projectService.project;
-    this.projectId = this.configService.getProjectId();
     this.reportIdToAuthoringNote = {};
 
     if (this.project.notebook == null) {
@@ -36,15 +34,10 @@ export class NotebookAuthoringComponent {
       this.project.teacherNotebook = projectTemplate.teacherNotebook;
     }
 
-    this.initializeStudentNotesAuthoring();
     this.initializeTeacherNotesAuthoring();
     this.notebookChanged.pipe(debounceTime(1000)).subscribe(() => {
       this.save();
     });
-  }
-
-  private initializeStudentNotesAuthoring(): void {
-    this.initializeNotesAuthoring(this.project.notebook.itemTypes.report.notes);
   }
 
   private initializeTeacherNotesAuthoring(): void {
@@ -68,17 +61,14 @@ export class NotebookAuthoringComponent {
     this.reportIdToAuthoringNote[reportId] = authoringReportNote;
   }
 
-  private getAuthoringReportNote(id: string): any {
-    return this.reportIdToAuthoringNote[id];
+  protected reportStarterTextChanged(reportId: string): void {
+    const note = this.getReportNote(reportId);
+    const authoringNote = this.getAuthoringReportNote(reportId);
+    note.content = insertWiseLinks(this.configService.removeAbsoluteAssetPaths(authoringNote.html));
+    this.save();
   }
 
   private getReportNote(id: string): any {
-    const studentNotes = this.project.notebook.itemTypes.report.notes;
-    for (const note of studentNotes) {
-      if (note.reportId === id) {
-        return note;
-      }
-    }
     const teacherNotes = this.project.teacherNotebook.itemTypes.report.notes;
     for (const note of teacherNotes) {
       if (note.reportId === id) {
@@ -88,11 +78,8 @@ export class NotebookAuthoringComponent {
     return null;
   }
 
-  protected reportStarterTextChanged(reportId: string): void {
-    const note = this.getReportNote(reportId);
-    const authoringNote = this.getAuthoringReportNote(reportId);
-    note.content = insertWiseLinks(this.configService.removeAbsoluteAssetPaths(authoringNote.html));
-    this.save();
+  private getAuthoringReportNote(id: string): any {
+    return this.reportIdToAuthoringNote[id];
   }
 
   protected contentChanged(): void {
