@@ -79,8 +79,8 @@
         [showArchive]="!showArchivedView"
       ></select-runs-controls>
       <apply-tags-button
-        *ngIf="getSelectedProjects().length > 0"
-        [selectedProjects]="getSelectedProjects()"
+        *ngIf="selectedProjects.length > 0"
+        [selectedProjects]="selectedProjects"
       ></apply-tags-button>
     </div>
     <app-timeline>

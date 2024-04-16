@@ -28,6 +28,7 @@ export class TeacherRunListComponent implements OnInit {
   protected runChangedEventEmitter: EventEmitter<void> = new EventEmitter<void>();
   protected runs: TeacherRun[] = [];
   protected searchValue: string = '';
+  protected selectedProjects: Project[] = [];
   protected showAll: boolean = false;
   protected showArchivedView: boolean = false;
   private subscriptions: Subscription = new Subscription();
@@ -237,6 +238,7 @@ export class TeacherRunListComponent implements OnInit {
 
   private runSelectedStatusChanged(): void {
     this.runChangedEventEmitter.emit();
+    this.selectedProjects = this.getSelectedProjects();
   }
 
   protected archiveProjects(archive: boolean): void {
