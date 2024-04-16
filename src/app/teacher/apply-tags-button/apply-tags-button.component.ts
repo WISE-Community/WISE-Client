@@ -21,35 +21,36 @@ export class ApplyTagsButtonComponent implements OnInit {
   constructor(private dialog: MatDialog, private projectTagService: ProjectTagService) {}
 
   ngOnInit(): void {
+    this.retrieveUserTags();
     this.subscribeToTagUpdated();
     this.subscribeToNewTag();
     this.subscribeToTagDeleted();
   }
 
   ngOnChanges(): void {
-    this.retrieveUserTags();
+    this.updateAllTagsCheckedValues();
   }
 
   private retrieveUserTags(): void {
     this.projectTagService.retrieveUserTags().subscribe((tags: Tag[]) => {
-      for (const tag of tags) {
-        this.updateTagCheckedValue(tag);
-      }
       this.tags = tags;
+      this.updateAllTagsCheckedValues();
     });
   }
 
+  private updateAllTagsCheckedValues(): void {
+    for (const tag of this.tags) {
+      this.updateTagCheckedValue(tag);
+    }
+  }
+
   private updateTagCheckedValue(tag: Tag): void {
-    const numProjectsWithTag = this.getNumProjectsWithTag(tag);
+    const numProjectsWithTag = this.selectedProjects.filter((project) =>
+      project.tags.some((projectTag) => projectTag.id === tag.id)
+    ).length;
     tag.checked = numProjectsWithTag === this.selectedProjects.length;
     tag.indeterminateChecked =
       numProjectsWithTag > 0 && numProjectsWithTag < this.selectedProjects.length;
-  }
-
-  private getNumProjectsWithTag(tag: Tag): number {
-    return this.selectedProjects.filter((project) =>
-      project.tags.some((projectTag) => projectTag.id === tag.id)
-    ).length;
   }
 
   private subscribeToTagUpdated(): void {
