@@ -3,8 +3,8 @@ import { AbstractComponentAuthoring } from '../../../authoringTool/components/Ab
 import { ConfigService } from '../../../services/configService';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { DialogGuidanceService } from '../dialogGuidanceService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { ComputerAvatarService } from '../../../services/computerAvatarService';
 
 @Component({
   selector: 'dialog-guidance-authoring',
@@ -13,8 +13,8 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 })
 export class DialogGuidanceAuthoringComponent extends AbstractComponentAuthoring {
   constructor(
+    private computerAvatarService: ComputerAvatarService,
     protected configService: ConfigService,
-    private dialogGuidanceService: DialogGuidanceService,
     protected nodeService: TeacherNodeService,
     protected projectAssetService: ProjectAssetService,
     protected projectService: TeacherProjectService
@@ -25,7 +25,7 @@ export class DialogGuidanceAuthoringComponent extends AbstractComponentAuthoring
   ngOnInit() {
     super.ngOnInit();
     if (this.componentContent.computerAvatarSettings == null) {
-      this.componentContent.computerAvatarSettings = this.dialogGuidanceService.getDefaultComputerAvatarSettings();
+      this.componentContent.computerAvatarSettings = this.computerAvatarService.getDefaultComputerAvatarSettings();
     }
   }
 }

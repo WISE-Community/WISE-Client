@@ -1,0 +1,16 @@
+<div fxLayoutAlign="end start" fxLayoutGap="4px">
+  <mat-icon
+    class="mat-36"
+    [ngStyle]="{ color: avatarColor }"
+    aria-label="Student response"
+    i18n-aria-label
+    fxFlexOrder="2"
+    >account_circle</mat-icon
+  >
+  <div fxFlex fxLayoutAlign="end">
+    <div class="response-text selected-bg-bg">
+      <div class="mat-small secondary-text poster">{{ displayNames }}</div>
+      <div [innerHtml]="message.content"></div>
+    </div>
+  </div>
+</div>

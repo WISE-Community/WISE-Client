@@ -1,0 +1,14 @@
+<div fxLayoutAlign="start start" fxLayoutGap="4px">
+  <img
+    [src]="computerAvatarImageSrc"
+    class="computer-avatar"
+    aria-label="Automated guidance response"
+    i18n-aria-label
+  />
+  <div fxFlex fxLayoutAlign="start">
+    <div class="response-text notice-bg-bg">
+      <div class="mat-small secondary-text poster" i18n>{{ computerAvatar.name }}</div>
+      <div [innerHtml]="message.content"></div>
+    </div>
+  </div>
+</div>

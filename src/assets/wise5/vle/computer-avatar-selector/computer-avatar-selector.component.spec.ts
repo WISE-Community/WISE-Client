@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ComputerAvatar } from '../../common/ComputerAvatar';
+import { ComputerAvatar } from '../../common/computer-avatar/ComputerAvatar';
 import { DialogGuidanceService } from '../../components/dialogGuidance/dialogGuidanceService';
 import { AnnotationService } from '../../services/annotationService';
 import { ComputerAvatarService } from '../../services/computerAvatarService';

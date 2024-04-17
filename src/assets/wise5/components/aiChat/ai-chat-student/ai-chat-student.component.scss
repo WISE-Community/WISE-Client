@@ -1,0 +1,16 @@
+@import 'style/abstracts/variables', 'style/abstracts/functions';
+
+.mat-mdc-card {
+  padding: 12px;
+  margin-top: 16px;
+  max-width: breakpoint('sm.min');
+}
+
+ai-chat-messages {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.add-response {
+  margin-top: 12px;
+}

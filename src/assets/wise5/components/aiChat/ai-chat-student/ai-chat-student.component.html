@@ -1,0 +1,19 @@
+<computer-avatar-selector
+  *ngIf="computerAvatarSelectorVisible"
+  [computerAvatarSettings]="componentContent.computerAvatarSettings"
+  (chooseAvatarEvent)="selectComputerAvatar($event)"
+>
+</computer-avatar-selector>
+<mat-card *ngIf="!computerAvatarSelectorVisible" appearance="outlined" class="mat-elevation-z2">
+  <component-header [component]="component"></component-header>
+  <ai-chat-messages
+    [messages]="messages"
+    [workgroupId]="workgroupId"
+    [waitingForComputerResponse]="waitingForComputerResponse"
+    [computerAvatar]="computerAvatar"
+  ></ai-chat-messages>
+  <chat-input
+    [submitDisabled]="waitingForComputerResponse"
+    (submitEvent)="submitStudentResponse($event)"
+  ></chat-input>
+</mat-card>

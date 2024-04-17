@@ -19,10 +19,12 @@ import { ShowMyWorkInfo } from '../components/showMyWork/ShowMyWorkInfo';
 import { SummaryInfo } from '../components/summary/SummaryInfo';
 import { TableInfo } from '../components/table/TableInfo';
 import { ComponentInfo } from '../components/ComponentInfo';
+import { AiChatInfo } from '../components/aiChat/AiChatInfo';
 
 @Injectable()
 export class ComponentInfoService {
   private componentInfo = {
+    AiChat: new AiChatInfo(),
     Animation: new AnimationInfo(),
     AudioOscillator: new AudioOscillatorInfo(),
     ConceptMap: new ConceptMapInfo(),

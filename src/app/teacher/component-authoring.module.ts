@@ -84,9 +84,12 @@ import { ComponentAuthoringComponent } from '../../assets/wise5/authoringTool/co
 import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
 import { WiseLinkAuthoringDialogComponent } from '../../assets/wise5/authoringTool/wise-link-authoring-dialog/wise-link-authoring-dialog.component';
 import { EditComponentAdvancedButtonComponent } from '../../assets/wise5/authoringTool/components/edit-component-advanced-button/edit-component-advanced-button.component';
+import { AiChatAuthoringComponent } from '../../assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component';
+import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component';
 
 @NgModule({
   declarations: [
+    AiChatAuthoringComponent,
     AnimationAuthoring,
     AudioOscillatorAuthoring,
     AuthorUrlParametersComponent,
@@ -97,6 +100,7 @@ import { EditComponentAdvancedButtonComponent } from '../../assets/wise5/authori
     DrawAuthoring,
     DialogGuidanceAuthoringComponent,
     DiscussionAuthoring,
+    EditAiChatAdvancedComponent,
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
@@ -176,13 +180,14 @@ import { EditComponentAdvancedButtonComponent } from '../../assets/wise5/authori
     WiseTinymceEditorModule
   ],
   exports: [
-    AnimationAuthoring,
+    AiChatAuthoringComponent,
     AudioOscillatorAuthoring,
     ComponentAuthoringComponent,
     ConceptMapAuthoring,
     DialogGuidanceAuthoringComponent,
     DiscussionAuthoring,
     DrawAuthoring,
+    EditAiChatAdvancedComponent,
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
