@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ChooseAutomatedAssessmentComponent {
   private importProjectId: number;
   protected node: any;
-  protected nodeIdToInsertInsideOrAfter: string;
+  protected targetLocation: string;
   private project: any;
   protected projectItems: any;
 
@@ -21,7 +21,7 @@ export class ChooseAutomatedAssessmentComponent {
   ) {}
 
   ngOnInit(): void {
-    this.nodeIdToInsertInsideOrAfter = history.state.nodeIdToInsertInsideOrAfter;
+    this.targetLocation = history.state.targetLocation;
     this.importProjectId = this.projectService.getAutomatedAssessmentProjectId();
     this.showAutomatedAssessmentProject();
   }
@@ -50,7 +50,7 @@ export class ChooseAutomatedAssessmentComponent {
       state: {
         importProjectId: this.importProjectId,
         node: this.node,
-        nodeIdToInsertInsideOrAfter: this.nodeIdToInsertInsideOrAfter
+        targetLocation: this.targetLocation
       }
     });
   }

@@ -16,7 +16,7 @@ export class AddYourOwnNode {
   });
   protected componentTypes: any[];
   protected initialComponents: string[] = [];
-  protected nodeIdToInsertInsideOrAfter: string;
+  protected targetLocation: string;
 
   constructor(
     private componentTypeService: ComponentTypeService,
@@ -27,7 +27,7 @@ export class AddYourOwnNode {
   ) {}
 
   ngOnInit() {
-    this.nodeIdToInsertInsideOrAfter = history.state.nodeIdToInsertInsideOrAfter;
+    this.targetLocation = history.state.targetLocation;
     this.componentTypes = this.componentTypeService.getComponentTypes();
   }
 
@@ -45,10 +45,10 @@ export class AddYourOwnNode {
 
   protected submit(): void {
     const newNode = this.projectService.createNode(this.addNodeFormGroup.controls['title'].value);
-    if (this.isGroupNode(this.nodeIdToInsertInsideOrAfter)) {
-      this.projectService.createNodeInside(newNode, this.nodeIdToInsertInsideOrAfter);
+    if (this.isGroupNode(this.targetLocation)) {
+      this.projectService.createNodeInside(newNode, this.targetLocation);
     } else {
-      this.projectService.createNodeAfter(newNode, this.nodeIdToInsertInsideOrAfter);
+      this.projectService.createNodeAfter(newNode, this.targetLocation);
     }
     this.addInitialComponents(newNode.id, this.initialComponents);
     this.save().then(() => {
