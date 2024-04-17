@@ -12,10 +12,7 @@
       type="text"
     />
   </mat-form-field>
-  <edit-component-max-submit
-    [(maxSubmitCount)]="componentContent.maxSubmitCount"
-    (maxSubmitCountChange)="componentChanged()"
-  ></edit-component-max-submit>
+  <edit-component-max-submit [componentContent]="componentContent"></edit-component-max-submit>
   <mat-checkbox
     color="primary"
     [(ngModel)]="componentContent.isComputerAvatarEnabled"

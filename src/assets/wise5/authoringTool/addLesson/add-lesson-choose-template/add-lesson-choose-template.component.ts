@@ -39,7 +39,10 @@ export class AddLessonChooseTemplateComponent {
 
   protected chooseTemplate(template: any): void {
     this.router.navigate([...template.route.split('/')], {
-      relativeTo: this.route
+      relativeTo: this.route,
+      state: {
+        target: history.state.target
+      }
     });
   }
 }

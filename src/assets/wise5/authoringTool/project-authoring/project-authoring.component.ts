@@ -133,14 +133,6 @@ export class ProjectAuthoringComponent implements OnInit {
     this.projectService.setNodeTypeSelected(null);
   }
 
-  protected addNewLesson(): void {
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-lesson`]);
-  }
-
-  protected addNewStep(): void {
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/add-node/choose-template`]);
-  }
-
   private temporarilyHighlightNewNodes(newNodes = []): void {
     if (newNodes.length > 0) {
       setTimeout(() => {

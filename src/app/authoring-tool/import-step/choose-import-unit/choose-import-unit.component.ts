@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class ChooseImportUnitComponent {
   protected libraryProjects: any[];
   protected myProjects: any[];
+  protected nodeIdToInsertInsideOrAfter: string;
   private subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -22,6 +23,7 @@ export class ChooseImportUnitComponent {
   ) {}
 
   ngOnInit(): void {
+    this.nodeIdToInsertInsideOrAfter = history.state.nodeIdToInsertInsideOrAfter;
     this.myProjects = this.configService.getAuthorableProjects();
     this.subscriptions.add(
       this.projectLibraryService.getLibraryProjects().subscribe((libraryProjects) => {
@@ -37,7 +39,10 @@ export class ChooseImportUnitComponent {
   protected chooseProject(project: any): void {
     this.router.navigate(['../choose-step'], {
       relativeTo: this.route,
-      state: { importProjectId: project.id }
+      state: {
+        importProjectId: project.id,
+        nodeIdToInsertInsideOrAfter: this.nodeIdToInsertInsideOrAfter
+      }
     });
   }
 }

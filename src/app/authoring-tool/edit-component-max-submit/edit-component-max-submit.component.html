@@ -5,8 +5,8 @@
       matInput
       type="number"
       min="1"
-      [(ngModel)]="maxSubmitCount"
-      (ngModelChange)="maxSubmitCountDebouncer.next($event)"
+      [(ngModel)]="componentContent.maxSubmitCount"
+      (ngModelChange)="inputChanged.next($event)"
     />
   </mat-form-field>
 </div>

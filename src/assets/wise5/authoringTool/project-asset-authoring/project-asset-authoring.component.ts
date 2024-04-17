@@ -148,6 +148,7 @@ export class ProjectAssetAuthoringComponent {
   }
 
   protected uploadAssetItems(files: any[]): void {
+    files = Array.from(files);
     let performUploadOfAllFiles = true;
     const largeAndSmallFiles = this.separateLargeAndSmallFiles(files);
     const largeFiles = largeAndSmallFiles.largeFiles;
@@ -268,10 +269,5 @@ export class ProjectAssetAuthoringComponent {
   private setTotalUnusedFilesSize(totalUnusedFilesSize: number): void {
     this.totalUnusedFilesSize = totalUnusedFilesSize;
     this.unusedFilesPercentage = this.projectAssetService.getAssetUnusedPercentage();
-  }
-
-  protected fileChosen(event: any): void {
-    const files = Array.from(event);
-    this.uploadAssetItems(files);
   }
 }

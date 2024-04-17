@@ -25,6 +25,7 @@ describe('ChooseAutomatedAssessmentComponent', () => {
       ],
       providers: [TeacherProjectService]
     }).compileComponents();
+    window.history.pushState({}, '', '');
     fixture = TestBed.createComponent(ChooseAutomatedAssessmentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,20 +1,47 @@
-<button
-  mat-icon-button
-  color="primary"
-  (click)="addLesson()"
-  [matMenuTriggerFor]="lessonId == null ? null : lessonMenu"
-  #menuTrigger
-  matTooltip="Add lesson"
-  matTooltipPosition="above"
-  i18n-matTooltip
->
-  <mat-icon>add_circle</mat-icon>
-</button>
-<mat-menu #lessonMenu="matMenu">
-  <button mat-menu-item (click)="addLessonBefore()">
-    <mat-icon>add_circle</mat-icon><span i18n>Add Lesson Before</span>
+<ng-container *ngIf="lessonId == null">
+  <button
+    mat-icon-button
+    color="primary"
+    (click)="addFirstLesson()"
+    matTooltip="Add lesson"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>add_circle</mat-icon>
   </button>
-  <button mat-menu-item (click)="addLessonAfter()">
-    <mat-icon>add_circle</mat-icon><span i18n>Add Lesson After</span>
-  </button>
-</mat-menu>
+</ng-container>
+<ng-container *ngIf="lessonId != null">
+  <ng-container *ngIf="first">
+    <button
+      mat-icon-button
+      color="primary"
+      [matMenuTriggerFor]="lessonMenu"
+      #menuTrigger
+      matTooltip="Add lesson"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+    <mat-menu #lessonMenu="matMenu">
+      <button mat-menu-item (click)="addFirstLesson()">
+        <mat-icon>add_circle</mat-icon><span i18n>Add lesson before</span>
+      </button>
+      <button mat-menu-item (click)="addLessonAfter()">
+        <mat-icon>add_circle</mat-icon><span i18n>Add lesson after</span>
+      </button>
+    </mat-menu>
+  </ng-container>
+  <ng-container *ngIf="!first">
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="addLessonAfter()"
+      matTooltip="Add lesson after"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </ng-container>
+</ng-container>

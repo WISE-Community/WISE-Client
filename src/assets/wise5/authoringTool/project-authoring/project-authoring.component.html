@@ -2,28 +2,6 @@
   <button
     mat-raised-button
     color="primary"
-    (click)="addNewLesson()"
-    [disabled]="nodeTypeSelected() != null"
-    matTooltip="Add New Lesson"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>queue</mat-icon>
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="addNewStep()"
-    [disabled]="nodeTypeSelected() != null"
-    matTooltip="Add New Step"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>add_box</mat-icon>
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
     (click)="chooseLocation(false)"
     [disabled]="!hasSelectedNodes()"
     matTooltip="Move"
@@ -79,7 +57,7 @@
     <div i18n>There are no lessons</div>
     <add-lesson-button [active]="true"></add-lesson-button>
   </div>
-  <div *ngFor="let lesson of lessons" fxLayout="row">
+  <div *ngFor="let lesson of lessons; let first = first" fxLayout="row">
     <project-authoring-lesson
       [lesson]="lesson"
       (selectNodeEvent)="selectNode($event)"
@@ -92,6 +70,7 @@
     <add-lesson-button
       class="add-lesson-button-next-to-lesson"
       [active]="true"
+      [first]="first"
       [lessonId]="lesson.id"
     ></add-lesson-button>
   </div>
@@ -101,7 +80,7 @@
       <div i18n>There are no unused lessons</div>
       <add-lesson-button></add-lesson-button>
     </div>
-    <div *ngFor="let inactiveGroupNode of inactiveGroupNodes" fxLayout="row">
+    <div *ngFor="let inactiveGroupNode of inactiveGroupNodes; let first = first" fxLayout="row">
       <project-authoring-lesson
         [lesson]="inactiveGroupNode"
         (selectNodeEvent)="selectNode($event)"
@@ -113,6 +92,7 @@
       ></project-authoring-lesson>
       <add-lesson-button
         class="add-lesson-button-next-to-lesson"
+        [first]="first"
         [lessonId]="inactiveGroupNode.id"
       ></add-lesson-button>
     </div>

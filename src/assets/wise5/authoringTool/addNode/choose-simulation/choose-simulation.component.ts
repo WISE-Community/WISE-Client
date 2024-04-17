@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfigService } from '../../../services/configService';
+import { CopyNodesService } from '../../../services/copyNodesService';
+import { InsertNodesService } from '../../../services/insertNodesService';
+import { AbstractImportStepComponent } from '../abstract-import-step/abstract-import-step.component';
 
 class SimulationNode {
   metadata = {
@@ -17,7 +21,7 @@ class SimulationNode {
   templateUrl: './choose-simulation.component.html',
   styleUrls: ['./choose-simulation.component.scss', '../../add-content.scss']
 })
-export class ChooseSimulationComponent {
+export class ChooseSimulationComponent extends AbstractImportStepComponent {
   private allNodes: SimulationNode[] = [];
   protected filteredNodes: SimulationNode[] = [];
   protected project: any;
@@ -25,22 +29,27 @@ export class ChooseSimulationComponent {
   protected searchText: string = '';
   protected selectedNode: string;
   protected selectedSubjects: string[] = [];
-  private simulationProjectId: number;
   protected subjects: string[] = [];
 
   constructor(
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    protected configService: ConfigService,
+    protected copyNodesService: CopyNodesService,
+    protected insertNodesService: InsertNodesService,
+    protected projectService: TeacherProjectService,
+    protected route: ActivatedRoute,
+    protected router: Router
+  ) {
+    super(configService, copyNodesService, insertNodesService, projectService, route, router);
+  }
 
   ngOnInit(): void {
-    this.simulationProjectId = this.projectService.getSimulationProjectId();
+    super.ngOnInit();
+    this.importProjectId = this.projectService.getSimulationProjectId();
     this.showSimulationProject();
   }
 
   private showSimulationProject(): void {
-    this.projectService.retrieveProjectById(this.simulationProjectId).then((projectJSON) => {
+    this.projectService.retrieveProjectById(this.importProjectId).then((projectJSON) => {
       this.project = projectJSON;
       const nodeOrderOfProject = this.projectService.getNodeOrderOfProject(this.project);
       this.projectItems = nodeOrderOfProject.nodes.slice(1); // remove root node from consideration
@@ -93,16 +102,6 @@ export class ChooseSimulationComponent {
 
   protected previewNode(node: any): void {
     window.open(`${this.project.previewProjectURL}/${node.id}`);
-  }
-
-  protected next(): void {
-    this.router.navigate(['../../../import-step/choose-location'], {
-      relativeTo: this.route,
-      state: {
-        importFromProjectId: this.simulationProjectId,
-        selectedNodes: [this.selectedNode]
-      }
-    });
   }
 
   protected itemSelected(item: any): void {
