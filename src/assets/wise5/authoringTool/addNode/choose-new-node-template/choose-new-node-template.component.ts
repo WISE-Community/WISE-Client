@@ -37,7 +37,7 @@ export class ChooseNewNodeTemplate {
     this.router.navigate(['..', ...template.route.split('/')], {
       relativeTo: this.route,
       state: {
-        nodeIdToInsertInsideOrAfter: history.state.nodeIdToInsertInsideOrAfter
+        targetId: history.state.targetId
       }
     });
   }

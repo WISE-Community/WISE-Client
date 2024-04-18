@@ -8,7 +8,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 @Directive()
 export abstract class AbstractImportStepComponent implements OnInit {
   protected importProjectId: number;
-  protected nodeIdToInsertInsideOrAfter: string;
+  protected targetId: string;
 
   constructor(
     protected configService: ConfigService,
@@ -20,7 +20,7 @@ export abstract class AbstractImportStepComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.nodeIdToInsertInsideOrAfter = history.state.nodeIdToInsertInsideOrAfter;
+    this.targetId = history.state.targetId;
     this.importProjectId = history.state.importProjectId;
   }
 
@@ -29,7 +29,7 @@ export abstract class AbstractImportStepComponent implements OnInit {
       .copyNodes(nodesToImport, this.importProjectId, this.configService.getProjectId())
       .subscribe((copiedNodes: any[]) => {
         const nodesWithNewNodeIds = this.projectService.getNodesWithNewIds(copiedNodes);
-        this.insertNodesService.insertNodes(nodesWithNewNodeIds, this.nodeIdToInsertInsideOrAfter);
+        this.insertNodesService.insertNodes(nodesWithNewNodeIds, this.targetId);
         this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
           this.projectService.refreshProject();
           this.router.navigate(['../../..'], { relativeTo: this.route });

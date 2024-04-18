@@ -67,7 +67,7 @@ export class ProjectAuthoringLessonComponent {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
       state: {
-        nodeIdToInsertInsideOrAfter: nodeId
+        targetId: nodeId
       }
     });
   }
