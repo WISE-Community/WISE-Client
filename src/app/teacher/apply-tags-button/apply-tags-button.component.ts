@@ -45,12 +45,9 @@ export class ApplyTagsButtonComponent implements OnInit {
   }
 
   private updateTagCheckedValue(tag: Tag): void {
-    const numProjectsWithTag = this.selectedProjects.filter((project) =>
+    tag.numProjectsWithTag = this.selectedProjects.filter((project) =>
       project.tags.some((projectTag) => projectTag.id === tag.id)
     ).length;
-    tag.checked = numProjectsWithTag === this.selectedProjects.length;
-    tag.indeterminateChecked =
-      numProjectsWithTag > 0 && numProjectsWithTag < this.selectedProjects.length;
   }
 
   private subscribeToTagUpdated(): void {
@@ -85,30 +82,22 @@ export class ApplyTagsButtonComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  protected toggleTagOnProjects(tag: Tag): void {
-    if (tag.checked || tag.indeterminateChecked) {
-      this.projectTagService.removeTagFromProjects(tag, this.selectedProjects).subscribe(() => {
-        this.removeTagFromProjects(tag, this.selectedProjects);
-        this.updateTagCheckedValue(tag);
-      });
-    } else {
-      this.projectTagService.applyTagToProjects(tag, this.selectedProjects).subscribe(() => {
-        this.addTagToProjects(tag, this.selectedProjects);
-        this.updateTagCheckedValue(tag);
-      });
-    }
+  protected addTagToProjects(tag: Tag): void {
+    this.projectTagService.applyTagToProjects(tag, this.selectedProjects).subscribe(() => {
+      for (const project of this.selectedProjects) {
+        project.addTag(tag);
+      }
+      this.updateTagCheckedValue(tag);
+    });
   }
 
-  private addTagToProjects(tag: Tag, projects: Project[]): void {
-    for (const project of projects) {
-      project.addTag(tag);
-    }
-  }
-
-  private removeTagFromProjects(tag: Tag, projects: Project[]): void {
-    for (const project of projects) {
-      project.tags = project.tags.filter((projectTag: Tag) => projectTag.id !== tag.id);
-    }
+  protected removeTagFromProjects(tag: Tag): void {
+    this.projectTagService.removeTagFromProjects(tag, this.selectedProjects).subscribe(() => {
+      for (const project of this.selectedProjects) {
+        project.tags = project.tags.filter((projectTag: Tag) => projectTag.id !== tag.id);
+      }
+      this.updateTagCheckedValue(tag);
+    });
   }
 
   protected manageTags(): void {

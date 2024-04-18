@@ -10,11 +10,11 @@ type SelectAllItemsStatus = 'none' | 'some' | 'all';
 })
 export class SelectAllItemsCheckboxComponent {
   @Output() allSelectedEvent: EventEmitter<void> = new EventEmitter<void>();
-  @Input() label: string = $localize`items`;
   @Output() noneSelectedEvent: EventEmitter<void> = new EventEmitter<void>();
   @Input() numAllItems: number;
   @Input() numSelectedItems: number;
   protected status: SelectAllItemsStatus;
+  @Input() tooltip: string;
 
   ngOnChanges(): void {
     if (this.numSelectedItems == 0) {

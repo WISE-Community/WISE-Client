@@ -14,7 +14,7 @@
   <div fxLayoutAlign="start center" fxLayout.xs="column" fxLayoutGap="8px">
     <div fxLayoutAlign="center center" fxLayoutGap="4px" fxFlexAlign.xs="start" fxFlexOrder.xs="1">
       <select-all-items-checkbox
-        [label]="projectsLabel"
+        [tooltip]="projectsLabel"
         [numAllItems]="numProjectsInView"
         [numSelectedItems]="numSelectedProjects()"
         (allSelectedEvent)="selectAllProjects()"

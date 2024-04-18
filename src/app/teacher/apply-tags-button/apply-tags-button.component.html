@@ -11,14 +11,14 @@
   <div class="menu-info secondary-text" i18n>Apply tags</div>
   <mat-divider></mat-divider>
   <div *ngFor="let tag of tags" (click)="$event.stopPropagation()" mat-menu-item>
-    <mat-checkbox
-      color="primary"
-      [checked]="tag.checked"
-      [indeterminate]="tag.indeterminateChecked"
-      (click)="toggleTagOnProjects(tag)"
+    <select-all-items-checkbox
+      [numAllItems]="selectedProjects.length"
+      [numSelectedItems]="tag.numProjectsWithTag"
+      (allSelectedEvent)="addTagToProjects(tag)"
+      (noneSelectedEvent)="removeTagFromProjects(tag)"
     >
       <div [ngStyle]="{ color: tag.color }">{{ tag.text }}</div>
-    </mat-checkbox>
+    </select-all-items-checkbox>
   </div>
   <mat-divider></mat-divider>
   <div (click)="manageTags(); $event.stopPropagation()" mat-menu-item i18n>Manage Tags</div>
