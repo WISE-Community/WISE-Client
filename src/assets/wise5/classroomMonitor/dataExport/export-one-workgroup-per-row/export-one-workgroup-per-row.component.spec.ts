@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ExportGradebookComponent } from './export-gradebook.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DataExportService } from '../../../services/dataExportService';
 import { ClassroomMonitorTestingModule } from '../../classroom-monitor-testing.module';
@@ -9,17 +8,18 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DataExportModule } from '../data-export.module';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConfigService } from '../../../services/configService';
+import { ExportOneWorkgroupPerRowComponent } from './export-one-workgroup-per-row.component';
 
 let configService: ConfigService;
 let teacherProjectService: TeacherProjectService;
 
-describe('ExportGradebookComponent', () => {
-  let component: ExportGradebookComponent;
-  let fixture: ComponentFixture<ExportGradebookComponent>;
+describe('ExportOneWorkgroupPerRowComponent', () => {
+  let component: ExportOneWorkgroupPerRowComponent;
+  let fixture: ComponentFixture<ExportOneWorkgroupPerRowComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ExportGradebookComponent],
+      declarations: [ExportOneWorkgroupPerRowComponent],
       imports: [
         ClassroomMonitorTestingModule,
         DataExportModule,
@@ -30,7 +30,7 @@ describe('ExportGradebookComponent', () => {
       ],
       providers: [DataExportService]
     });
-    fixture = TestBed.createComponent(ExportGradebookComponent);
+    fixture = TestBed.createComponent(ExportOneWorkgroupPerRowComponent);
     component = fixture.componentInstance;
     configService = TestBed.inject(ConfigService);
     spyOn(configService, 'getPermissions').and.returnValue({

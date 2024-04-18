@@ -1437,16 +1437,16 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-gradebook/export-gradebook.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-item/export-item.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-item/export-item.component.html</context>
           <context context-type="linenumber">111</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component.html</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
@@ -14014,19 +14014,15 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">226</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="747c90fad2b5bfbe12b4c80301cb6bd592fff1d1" datatype="html">
-        <source>Export Gradebook</source>
+      <trans-unit id="9b7565e0b46708f16f29b8b055bc32b758f30834" datatype="html">
+        <source>Export One Workgroup Per Row</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-gradebook/export-gradebook.component.html</context>
-          <context context-type="linenumber">12</context>
-        </context-group>
       </trans-unit>
-      <trans-unit id="71a6408fa1c90b1ecafe822a25a928bbdf2b3fd4" datatype="html">
-        <source> Export Gradebook </source>
+      <trans-unit id="a32158501b6e9d92a6087a50ccaf04df43a6a08e" datatype="html">
+        <source> Export One Workgroup Per Row </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">11,13</context>
@@ -14198,7 +14194,7 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">158</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-gradebook/export-gradebook.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component.html</context>
           <context context-type="linenumber">72</context>
         </context-group>
         <context-group purpose="location">
@@ -14296,83 +14292,6 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">28,30</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1679909b06f9caec91e1b3b51284ba3fb1bdc6ed" datatype="html">
-        <source> Include Student Work </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-gradebook/export-gradebook.component.html</context>
-          <context context-type="linenumber">14,16</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="673b3c85fa017f9640a55079e798d9e81d9e0e72" datatype="html">
-        <source> Include Student Work IDs </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-gradebook/export-gradebook.component.html</context>
-          <context context-type="linenumber">19,21</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="562f6c6001fd2e615c134935d992231bf6cf101e" datatype="html">
-        <source> Include Student Names </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-gradebook/export-gradebook.component.html</context>
-          <context context-type="linenumber">24,26</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1df2af778b2b3f9e68f6c467c96edbbb09a083b9" datatype="html">
-        <source> Include Student Work Timestamps </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-gradebook/export-gradebook.component.html</context>
-          <context context-type="linenumber">29,31</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="31f68432a20b3c5118e51876a29cd150fcddddd9" datatype="html">
-        <source> Include Branch Path Taken </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-gradebook/export-gradebook.component.html</context>
-          <context context-type="linenumber">34,36</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="26b9dd382f5ac8f1f915eef03de915a6eb4e6955" datatype="html">
-        <source> Include Branch Path Taken Node ID </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-gradebook/export-gradebook.component.html</context>
-          <context context-type="linenumber">39,41</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9d5737bf8c0bc8e78679896605dcc38f7d868aa4" datatype="html">
-        <source> Include Branch Path Taken Step Title </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-gradebook/export-gradebook.component.html</context>
-          <context context-type="linenumber">44,46</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="172101f271e2848be3e0dda57e3158fa28d27575" datatype="html">
-        <source>Include Scores</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-gradebook/export-gradebook.component.html</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="d8eef2de21010b7929ee5ae95485afe09a62b3cc" datatype="html">
-        <source> Include Score Timestamps </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-gradebook/export-gradebook.component.html</context>
-          <context context-type="linenumber">52,54</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="e46937edcfd0ae399faf7fee8e02097279c1008f" datatype="html">
-        <source> Include Comments </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-gradebook/export-gradebook.component.html</context>
-          <context context-type="linenumber">57,59</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4fa056db65d1f2dc8b69061917882b59e70c1f8b" datatype="html">
-        <source> Include Comment Timestamps </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-gradebook/export-gradebook.component.html</context>
-          <context context-type="linenumber">62,64</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="0b4a69c4ce44d6f54f5a49317dfd16f3b7fe0b51" datatype="html">
         <source> Include Student Names </source>
         <context-group purpose="location">
@@ -14417,6 +14336,90 @@ Are you sure you want to proceed?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-item/export-item.component.html</context>
           <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="747c90fad2b5bfbe12b4c80301cb6bd592fff1d1" datatype="html">
+        <source>Export Gradebook</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1679909b06f9caec91e1b3b51284ba3fb1bdc6ed" datatype="html">
+        <source> Include Student Work </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="673b3c85fa017f9640a55079e798d9e81d9e0e72" datatype="html">
+        <source> Include Student Work IDs </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component.html</context>
+          <context context-type="linenumber">19,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="562f6c6001fd2e615c134935d992231bf6cf101e" datatype="html">
+        <source> Include Student Names </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component.html</context>
+          <context context-type="linenumber">24,26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1df2af778b2b3f9e68f6c467c96edbbb09a083b9" datatype="html">
+        <source> Include Student Work Timestamps </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component.html</context>
+          <context context-type="linenumber">29,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="31f68432a20b3c5118e51876a29cd150fcddddd9" datatype="html">
+        <source> Include Branch Path Taken </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component.html</context>
+          <context context-type="linenumber">34,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="26b9dd382f5ac8f1f915eef03de915a6eb4e6955" datatype="html">
+        <source> Include Branch Path Taken Node ID </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component.html</context>
+          <context context-type="linenumber">39,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9d5737bf8c0bc8e78679896605dcc38f7d868aa4" datatype="html">
+        <source> Include Branch Path Taken Step Title </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component.html</context>
+          <context context-type="linenumber">44,46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="172101f271e2848be3e0dda57e3158fa28d27575" datatype="html">
+        <source>Include Scores</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d8eef2de21010b7929ee5ae95485afe09a62b3cc" datatype="html">
+        <source> Include Score Timestamps </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component.html</context>
+          <context context-type="linenumber">52,54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e46937edcfd0ae399faf7fee8e02097279c1008f" datatype="html">
+        <source> Include Comments </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component.html</context>
+          <context context-type="linenumber">57,59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4fa056db65d1f2dc8b69061917882b59e70c1f8b" datatype="html">
+        <source> Include Comment Timestamps </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component.html</context>
+          <context context-type="linenumber">62,64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ff7cee38a2259526c519f878e71b964f41db4348" datatype="html">

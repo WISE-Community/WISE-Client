@@ -7,15 +7,15 @@ import { SelectStepAndComponentCheckboxesComponent } from './select-step-and-com
 import { ExportItemComponent } from './export-item/export-item.component';
 import { ExportRawDataComponent } from './export-raw-data/export-raw-data.component';
 import { ExportEventsComponent } from './export-events/export-events.component';
-import { ExportGradebookComponent } from './export-gradebook/export-gradebook.component';
+import { ExportOneWorkgroupPerRowComponent } from './export-one-workgroup-per-row/export-one-workgroup-per-row.component';
 
 @NgModule({
   imports: [RouterModule, StudentTeacherCommonModule],
   declarations: [
     DataExportComponent,
     ExportEventsComponent,
-    ExportGradebookComponent,
     ExportItemComponent,
+    ExportOneWorkgroupPerRowComponent,
     ExportRawDataComponent,
     ExportStepVisitsComponent,
     SelectStepAndComponentCheckboxesComponent
@@ -23,8 +23,8 @@ import { ExportGradebookComponent } from './export-gradebook/export-gradebook.co
   exports: [
     DataExportComponent,
     ExportEventsComponent,
-    ExportGradebookComponent,
     ExportItemComponent,
+    ExportOneWorkgroupPerRowComponent,
     ExportRawDataComponent,
     ExportStepVisitsComponent,
     SelectStepAndComponentCheckboxesComponent

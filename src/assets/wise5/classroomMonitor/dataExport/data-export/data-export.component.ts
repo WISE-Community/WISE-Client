@@ -345,7 +345,7 @@ export class DataExportComponent implements OnInit {
     this.router.navigate(['events'], { relativeTo: this.route });
   }
 
-  protected goToExportGradebookPage(): void {
-    this.router.navigate(['gradebook'], { relativeTo: this.route });
+  protected goToExportOneWorkgroupPerRowPage(): void {
+    this.router.navigate(['one-workgroup-per-row'], { relativeTo: this.route });
   }
 }

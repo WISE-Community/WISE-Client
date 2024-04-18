@@ -11,22 +11,22 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-  selector: 'export-gradebook',
-  templateUrl: './export-gradebook.component.html',
-  styleUrls: ['./export-gradebook.component.scss']
+  selector: 'export-one-workgroup-per-row',
+  templateUrl: './export-one-workgroup-per-row.component.html',
+  styleUrls: ['./export-one-workgroup-per-row.component.scss']
 })
-export class ExportGradebookComponent extends AbstractExportComponent {
-  includeBranchPathTaken: boolean;
-  includeBranchPathTakenNodeId: boolean;
-  includeBranchPathTakenStepTitle: boolean;
-  includeComments: boolean;
-  includeCommentTimestamps: boolean;
-  includeScores: boolean;
-  includeScoreTimestamps: boolean;
-  includeStudentNames: boolean;
-  includeStudentWork: boolean;
-  includeStudentWorkIds: boolean;
-  includeStudentWorkTimestamps: boolean;
+export class ExportOneWorkgroupPerRowComponent extends AbstractExportComponent {
+  protected includeBranchPathTaken: boolean;
+  protected includeBranchPathTakenNodeId: boolean;
+  protected includeBranchPathTakenStepTitle: boolean;
+  protected includeComments: boolean;
+  protected includeCommentTimestamps: boolean;
+  protected includeScores: boolean;
+  protected includeScoreTimestamps: boolean;
+  protected includeStudentNames: boolean;
+  protected includeStudentWork: boolean;
+  protected includeStudentWorkIds: boolean;
+  protected includeStudentWorkTimestamps: boolean;
 
   constructor(
     public annotationService: AnnotationService,
