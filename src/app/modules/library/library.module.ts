@@ -49,7 +49,7 @@ import { CopyProjectDialogComponent } from './copy-project-dialog/copy-project-d
 import { LibraryPaginatorIntl } from './libraryPaginatorIntl';
 import { DiscourseCategoryActivityComponent } from './discourse-category-activity/discourse-category-activity.component';
 import { ArchiveProjectsButtonComponent } from '../../teacher/archive-projects-button/archive-projects-button.component';
-import { SelectAllItemsCheckboxModule } from './select-all-items-checkbox/select-all-items-checkbox.module';
+import { SelectAllItemsCheckboxComponent } from './select-all-items-checkbox/select-all-items-checkbox.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -81,7 +81,7 @@ const materialModules = [
     ReactiveFormsModule,
     RouterModule,
     materialModules,
-    SelectAllItemsCheckboxModule,
+    SelectAllItemsCheckboxComponent,
     SharedModule,
     TimelineModule
   ],

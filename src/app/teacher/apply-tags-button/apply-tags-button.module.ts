@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { ManageTagsDialogComponent } from '../manage-tags-dialog/manage-tags-dialog.component';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
-import { SelectAllItemsCheckboxModule } from '../../modules/library/select-all-items-checkbox/select-all-items-checkbox.module';
+import { SelectAllItemsCheckboxComponent } from '../../modules/library/select-all-items-checkbox/select-all-items-checkbox.component';
 
 @NgModule({
   declarations: [ApplyTagsButtonComponent],
@@ -28,7 +28,7 @@ import { SelectAllItemsCheckboxModule } from '../../modules/library/select-all-i
     MatIconModule,
     MatMenuModule,
     MatTooltipModule,
-    SelectAllItemsCheckboxModule,
+    SelectAllItemsCheckboxComponent,
     StudentTeacherCommonServicesModule
   ],
   providers: [ProjectTagService]
