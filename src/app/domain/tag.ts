@@ -1,6 +1,6 @@
 export interface Tag {
-  checked?: boolean;
   color: string;
   id: number;
+  numProjectsWithTag?: number;
   text: string;
 }

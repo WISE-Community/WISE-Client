@@ -5,11 +5,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { ManageTagsDialogComponent } from '../manage-tags-dialog/manage-tags-dialog.component';
 import { Subscription } from 'rxjs';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
+import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
 
 @Component({
   selector: 'apply-tags-button',
   templateUrl: './apply-tags-button.component.html',
-  styleUrls: ['./apply-tags-button.component.scss']
+  styleUrls: ['./apply-tags-button.component.scss'],
+  providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }]
 })
 export class ApplyTagsButtonComponent implements OnInit {
   @Input() selectedProjects: Project[] = [];
@@ -25,13 +27,27 @@ export class ApplyTagsButtonComponent implements OnInit {
     this.subscribeToTagDeleted();
   }
 
+  ngOnChanges(): void {
+    this.updateAllTagsCheckedValues();
+  }
+
   private retrieveUserTags(): void {
     this.projectTagService.retrieveUserTags().subscribe((tags: Tag[]) => {
-      for (const tag of tags) {
-        tag.checked = this.doesAnyProjectHaveTag(tag);
-      }
       this.tags = tags;
+      this.updateAllTagsCheckedValues();
     });
+  }
+
+  private updateAllTagsCheckedValues(): void {
+    for (const tag of this.tags) {
+      this.updateTagCheckedValue(tag);
+    }
+  }
+
+  private updateTagCheckedValue(tag: Tag): void {
+    tag.numProjectsWithTag = this.selectedProjects.filter((project) =>
+      project.tags.some((projectTag) => projectTag.id === tag.id)
+    ).length;
   }
 
   private subscribeToTagUpdated(): void {
@@ -66,37 +82,22 @@ export class ApplyTagsButtonComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  private doesAnyProjectHaveTag(tag: Tag): boolean {
-    for (const project of this.selectedProjects) {
-      if (project.tags.some((projectTag) => projectTag.id === tag.id)) {
-        return true;
+  protected addTagToProjects(tag: Tag): void {
+    this.projectTagService.applyTagToProjects(tag, this.selectedProjects).subscribe(() => {
+      for (const project of this.selectedProjects) {
+        project.addTag(tag);
       }
-    }
-    return false;
+      this.updateTagCheckedValue(tag);
+    });
   }
 
-  protected toggleTagOnProjects(tag: Tag, addTag: boolean): void {
-    if (addTag) {
-      this.projectTagService.applyTagToProjects(tag, this.selectedProjects).subscribe(() => {
-        this.addTagToProjects(tag, this.selectedProjects);
-      });
-    } else {
-      this.projectTagService.removeTagFromProjects(tag, this.selectedProjects).subscribe(() => {
-        this.removeTagFromProjects(tag, this.selectedProjects);
-      });
-    }
-  }
-
-  private addTagToProjects(tag: Tag, projects: Project[]): void {
-    for (const project of projects) {
-      project.addTag(tag);
-    }
-  }
-
-  private removeTagFromProjects(tag: Tag, projects: Project[]): void {
-    for (const project of projects) {
-      project.tags = project.tags.filter((projectTag: Tag) => projectTag.id !== tag.id);
-    }
+  protected removeTagFromProjects(tag: Tag): void {
+    this.projectTagService.removeTagFromProjects(tag, this.selectedProjects).subscribe(() => {
+      for (const project of this.selectedProjects) {
+        project.tags = project.tags.filter((projectTag: Tag) => projectTag.id !== tag.id);
+      }
+      this.updateTagCheckedValue(tag);
+    });
   }
 
   protected manageTags(): void {

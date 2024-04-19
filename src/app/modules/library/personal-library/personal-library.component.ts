@@ -25,7 +25,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
     }, {})
   );
   projects: LibraryProject[] = [];
-  protected projectsLabel: string = $localize`units`;
+  protected projectsLabel: string = $localize`Select all units`;
   protected selectedProjects: WritableSignal<LibraryProject[]> = signal([]);
   protected sharedProjects: LibraryProject[] = [];
   protected showArchivedView: boolean = false;

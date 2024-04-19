@@ -5889,18 +5889,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">56,58</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8443540764676509944" datatype="html">
-        <source>units</source>
+      <trans-unit id="4204495853509039236" datatype="html">
+        <source>Select all units</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.ts</context>
           <context context-type="linenumber">28</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="413346167952108153" datatype="html">
-        <source>items</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/library/select-all-items-checkbox/select-all-items-checkbox.component.ts</context>
-          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6028472408314831177" datatype="html">

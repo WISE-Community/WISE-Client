@@ -3,7 +3,9 @@
   [checked]="status === 'all'"
   [indeterminate]="status === 'some'"
   (click)="select()"
-  [matTooltip]="'Select all ' + label"
+  [matTooltip]="tooltip"
   matTooltipPosition="above"
   i18n-matTooltip
-></mat-checkbox>
+>
+  <ng-content></ng-content>
+</mat-checkbox>
