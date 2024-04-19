@@ -207,56 +207,56 @@
         <source>Increase Participation in Science</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">281</context>
+          <context context-type="linenumber">282</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3d73774ed9394af93f37f94b1118593230594e42" datatype="html">
         <source> WISE gives more teachers and students the opportunity to do inquiry-based science. Our units make difficult concepts accessible both for teachers to teach and students to learn. WISE curricula help students see themselves as capable of doing science and realize that, no matter their backgrounds, science can be a potential career. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">282,287</context>
+          <context context-type="linenumber">283,288</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d528a21d07675cb0c41c688a22371f4cc925a969" datatype="html">
         <source>Accessible to All</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">295</context>
+          <context context-type="linenumber">297</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ae4b2a9f8c119e6daadc2545446e4fdc9350e14c" datatype="html">
         <source> WISE is <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>free<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>open source<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! WISE subsists on generous support from the National Science Foundation, which means it&apos;s available to anyone with an internet connection. Driven by an active community of developers, WISE is continually being expanded and improved. Bring science inquiry into the classroom, the museum, the after-school, or the home-school environment! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">296,302</context>
+          <context context-type="linenumber">298,304</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4ad1e5cce5dbc999f93e23e6bc9fa28d9cbb0ee1" datatype="html">
         <source>WISE on student computer</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">326</context>
+          <context context-type="linenumber">328</context>
         </context-group>
       </trans-unit>
       <trans-unit id="14a76370983f28622ac762d950962707e124e964" datatype="html">
         <source>WISE researcher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">347</context>
+          <context context-type="linenumber">349</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6cc03c819c2923d3c2dd2a236ee0040ddac13c4b" datatype="html">
         <source>WISE teachers and researcher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">368</context>
+          <context context-type="linenumber">370</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9d4d981f8068dbb230ef2048664016f5ff9c255e" datatype="html">
         <source>WISE developers and teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">389</context>
+          <context context-type="linenumber">391</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f4e529ae5ffd73001d1ff4bbdeeb0a72e342e5c8" datatype="html">
@@ -15275,7 +15275,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
@@ -17296,28 +17296,28 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Share with class...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b87e7abf15926adeca15e38e887a4c21121c9587" datatype="html">
         <source>Remove file</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c648889391b76acac6870869f928f33920241c76" datatype="html">
         <source>Add picture</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">86</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cf52ff0f4f9dc792b81e652fc6f0c2e83d14d56b" datatype="html">
         <source> Post </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">93,95</context>
+          <context context-type="linenumber">98,100</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3210146777760299474" datatype="html">
