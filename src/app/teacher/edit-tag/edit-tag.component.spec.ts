@@ -4,6 +4,7 @@ import { ProjectTagService } from '../../../assets/wise5/services/projectTagServ
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
 
 describe('EditTagComponent', () => {
   let component: EditTagComponent;
@@ -15,6 +16,7 @@ describe('EditTagComponent', () => {
         BrowserAnimationsModule,
         EditTagComponent,
         HttpClientTestingModule,
+        MatChipsModule,
         MatSnackBarModule
       ],
       providers: [ProjectTagService]
