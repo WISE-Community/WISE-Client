@@ -66,6 +66,7 @@ export class ApplyTagsButtonComponent implements OnInit {
       this.projectTagService.newTag$.subscribe((tag: Tag) => {
         this.tags.push(tag);
         this.projectTagService.sortTags(this.tags);
+        this.updateTagCheckedValue(tag);
       })
     );
   }
