@@ -1,7 +1,31 @@
+@import
+  '@angular/material/theming',
+  'style/abstracts/functions',
+  'style/abstracts/variables';
+
+.tag-inputs-div {
+  width: 100%;
+}
+
 .name-input {
-  width: 70%;
+  width: 80%;
 }
 
 .color-input {
   width: 15%;
+}
+
+.color-choice {
+  border-radius: $button-border-radius;
+  width: 32px;
+}
+
+.color-option-div {
+  width: 10px;
+}
+
+.color-preview {
+  border-radius: $button-border-radius;
+  width: 110px;
+  height: 32px;
 }

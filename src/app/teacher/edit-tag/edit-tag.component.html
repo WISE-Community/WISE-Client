@@ -1,20 +1,46 @@
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-  <mat-form-field class="name-input">
-    <mat-label i18n>Tag Name</mat-label>
-    <input matInput #nameInput (keyup.enter)="enterKeyPressed()" [formControl]="nameControl" />
-    <mat-error *ngIf="nameControl.errors?.required" i18n>Required</mat-error>
-    <mat-error *ngIf="nameControl.errors?.archivedNotAllowed" i18n
-      >Archived tag not allowed</mat-error
-    >
-    <mat-error *ngIf="nameControl.errors?.tagAlreadyExists" i18n>Tag already exists</mat-error>
-  </mat-form-field>
-  <mat-form-field class="color-input">
-    <mat-label i18n>Color</mat-label>
-    <input matInput (keyup.enter)="enterKeyPressed()" [formControl]="colorControl" />
-  </mat-form-field>
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="12px">
+  <div class="tag-inputs-div" fxLayout="column">
+    <div fxLayoutAlign="space-between" fxLayoutGap="12px">
+      <mat-form-field class="name-input">
+        <mat-label i18n>Tag Name</mat-label>
+        <input matInput #nameInput (keyup.enter)="enterKeyPressed()" [formControl]="nameControl" />
+        <mat-error *ngIf="nameControl.errors?.required" i18n>Required</mat-error>
+        <mat-error *ngIf="nameControl.errors?.archivedNotAllowed" i18n
+          >Archived tag not allowed</mat-error
+        >
+        <mat-error *ngIf="nameControl.errors?.tagAlreadyExists" i18n>Tag already exists</mat-error>
+      </mat-form-field>
+      <mat-form-field class="color-input">
+        <mat-label i18n>Color</mat-label>
+        <input matInput (keyup.enter)="enterKeyPressed()" [formControl]="colorControl" />
+      </mat-form-field>
+    </div>
+    <div fxLayoutAlign="space-between center">
+      <mat-chip-listbox>
+        <mat-chip-option
+          *ngFor="let color of colors"
+          class="color-choice"
+          [value]="color"
+          [selected]="color === colorControl.value"
+          (selectionChange)="chooseColor($event)"
+          [style.background-color]="color"
+        >
+          <div class="color-option-div"></div>
+        </mat-chip-option>
+      </mat-chip-listbox>
+      <div
+        class="color-preview"
+        [style.background-color]="colorControl.value"
+        fxLayoutAlign="center center"
+        i18n
+      >
+        Preview
+      </div>
+    </div>
+  </div>
   <button mat-button (click)="close()" i18n>Cancel</button>
   <button mat-raised-button color="primary" [disabled]="!nameControl.valid" (click)="submit()">
     {{ submitLabel }}
   </button>
 </div>
-<hr *ngIf="tag == null" />
+<hr />

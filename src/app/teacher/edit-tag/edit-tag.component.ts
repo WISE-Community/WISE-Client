@@ -16,6 +16,7 @@ import { Tag } from '../../domain/tag';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'edit-tag',
@@ -27,6 +28,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     FormsModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule
@@ -34,6 +36,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditTagComponent {
   @Output() closeEvent: EventEmitter<void> = new EventEmitter();
+  protected colors: string[] = [
+    '#66BB6A',
+    '#009688',
+    '#00B0FF',
+    '#1565C0',
+    '#673AB7',
+    '#AB47BC',
+    '#E91E63',
+    '#D50000',
+    '#F57C00',
+    '#FBC02D',
+    '#795548',
+    '#757575'
+  ];
   @ViewChild('nameInput') nameInput: ElementRef;
   protected submitLabel: string = $localize`Create`;
   @Input() tag: Tag;
@@ -97,6 +113,10 @@ export class EditTagComponent {
     if (this.nameControl.valid) {
       this.submit();
     }
+  }
+
+  protected chooseColor(event: any): void {
+    this.colorControl.setValue(event.selected ? event.source.value : '');
   }
 
   protected submit(): void {
