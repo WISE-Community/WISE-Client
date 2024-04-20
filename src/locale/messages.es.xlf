@@ -2156,7 +2156,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <target state="translated">Docente</target>
       </trans-unit>
@@ -2268,11 +2268,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">155</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">175</context>
+          <context context-type="linenumber">178</context>
         </context-group>
         <target state="translated">Falló el recaptcha. Por favor recargue la página y pruebe nuevamente!</target>
       </trans-unit>
@@ -2748,7 +2748,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <target state="translated">Estudiante</target>
       </trans-unit>
@@ -2892,11 +2892,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">145,149</context>
+          <context context-type="linenumber">148,152</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">168,172</context>
+          <context context-type="linenumber">171,175</context>
         </context-group>
         <target state="translated"> Este sitio está protegido por reCAPTCHA y las <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://policies.google.com/privacy&quot;&gt;"/>Polítivcas de Privacidad de Google<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> y los <x id="START_LINK_1" equiv-text="&lt;a href=&quot;https://policies.google.com/terms&quot;&gt;"/>Términos del servicio<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> que aplican. </target>
       </trans-unit>
@@ -5448,11 +5448,31 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">Iniciar sesión con Google</target>
       </trans-unit>
+      <trans-unit id="59389e278152912fc2e41ca16431d02d667262d8" datatype="html">
+        <source>Sign in with Microsoft</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-microsoft-user-already-exists/register-microsoft-user-already-exists.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-student-complete/register-student-complete.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-teacher-complete/register-teacher-complete.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <target state="needs-translation">Sign in with Microsoft</target>
+      </trans-unit>
       <trans-unit id="cabe636014527fb69951e0f36b7aec9697e00c71" datatype="html">
         <source>Forgot username or password?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">91</context>
         </context-group>
         <target state="translated">¿Olvidó su usuario o contraseña?</target>
       </trans-unit>
@@ -5460,7 +5480,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>New to WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Join for free!<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">81,82</context>
+          <context context-type="linenumber">92,93</context>
         </context-group>
         <target state="translated">¿No tienes cuenta en WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Unirse ahora<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
       </trans-unit>
@@ -5499,12 +5519,16 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="linenumber">3</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-microsoft-user-already-exists/register-microsoft-user-already-exists.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">164</context>
+          <context context-type="linenumber">167</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">187</context>
+          <context context-type="linenumber">190</context>
         </context-group>
         <target state="translated">Crear cuenta</target>
       </trans-unit>
@@ -7650,11 +7674,19 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated"> Perdón, tu ID de usuario de Google no fue encontrado en WISE. </target>
       </trans-unit>
+      <trans-unit id="34ae6eff5696c4c8367c3b748dc04f539f4d6be1" datatype="html">
+        <source> Sorry, your Microsoft User ID was not found in WISE. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
+          <context context-type="linenumber">5,7</context>
+        </context-group>
+        <target state="needs-translation"> Sorry, your Microsoft User ID was not found in WISE. </target>
+      </trans-unit>
       <trans-unit id="0374570fb5bc65ef42fa03c5923070a11d7f0b5e" datatype="html">
         <source>Create WISE Account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <target state="translated">Crear cuenta de WISE</target>
       </trans-unit>
@@ -7662,7 +7694,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Students can view and complete WISE lessons offered by teachers.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <target state="translated">Los estudiantes pueden ver y completar unidades de WISE que ofrecen los docentes.</target>
       </trans-unit>
@@ -7670,9 +7702,33 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Teachers can select, author, and run WISE lessons with their students.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <target state="translated">Los docentes pueden seleccionar, crear y ejecutar unidades de WISE con sus estudiantes.</target>
+      </trans-unit>
+      <trans-unit id="9cf37b81962ddd2eb54d8f4e813d0fd1d5a1787b" datatype="html">
+        <source>Hi! This Microsoft user already has a WISE account.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-microsoft-user-already-exists/register-microsoft-user-already-exists.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target state="needs-translation">Hi! This Microsoft user already has a WISE account.</target>
+      </trans-unit>
+      <trans-unit id="377993b426ef138f79016dfddae1265fdb30015f" datatype="html">
+        <source>Microsoft logo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-microsoft-user-already-exists/register-microsoft-user-already-exists.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-student-complete/register-student-complete.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-teacher-complete/register-teacher-complete.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <target state="needs-translation">Microsoft logo</target>
       </trans-unit>
       <trans-unit id="89a4722a9d6828f6aa9e3600033561ffad582c36" datatype="html">
         <source>Your WISE account has been created!</source>
@@ -7794,7 +7850,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> By clicking &quot;Create Account&quot;, you agree to our <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;privacy&quot; target=&quot;_blank&quot;&gt;"/>Privacy Policy &amp; Terms of Use<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">141,144</context>
+          <context context-type="linenumber">144,147</context>
         </context-group>
         <target state="translated"> Al hacer clic en "Crear Cuenta", usted acepta nuestra <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;privacy&quot; target=&quot;_blank&quot;&gt;"/>Política de Privacidad &amp; Términos de Uso<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>. </target>
       </trans-unit>
@@ -7802,11 +7858,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">154</context>
+          <context context-type="linenumber">157</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">177</context>
+          <context context-type="linenumber">180</context>
         </context-group>
         <target state="needs-translation"> </target>
       </trans-unit>
@@ -7845,6 +7901,18 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="linenumber">12</context>
         </context-group>
         <target state="translated">Registrarse</target>
+      </trans-unit>
+      <trans-unit id="4d52b342afecb0f1390df3bb9671aca12bc71777" datatype="html">
+        <source>Sign up with Microsoft</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-student/register-student.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-teacher/register-teacher.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <target state="needs-translation">Sign up with Microsoft</target>
       </trans-unit>
       <trans-unit id="b6c571f49a9876275382c366aabd8aac85dbbd8f" datatype="html">
         <source>You should receive an email with your account details shortly.</source>
@@ -8014,7 +8082,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>I agree to the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;privacy&quot; target=&quot;_blank&quot;&gt;"/>WISE Privacy Policy &amp; Terms of Use<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">156,158</context>
+          <context context-type="linenumber">159,161</context>
         </context-group>
         <target state="translated">Acepto la<x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;privacy&quot; target=&quot;_blank&quot;&gt;"/>Política de Privacidad &amp;y Términos de Uso de WISE<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> *</target>
       </trans-unit>
@@ -8022,7 +8090,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>You must agree to the Privacy Policy &amp; Terms of Use</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">164</context>
+          <context context-type="linenumber">167</context>
         </context-group>
         <target state="translated">Debe aceptar las Políticas de Privacidad &amp; Términos de Uso</target>
       </trans-unit>
