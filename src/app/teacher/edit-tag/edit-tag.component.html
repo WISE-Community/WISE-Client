@@ -16,18 +16,10 @@
       </mat-form-field>
     </div>
     <div fxLayoutAlign="space-between center">
-      <mat-chip-listbox>
-        <mat-chip-option
-          *ngFor="let color of colors"
-          class="color-choice"
-          [value]="color"
-          [selected]="color === colorControl.value"
-          (selectionChange)="chooseColor($event)"
-          [style.background-color]="color"
-        >
-          <div class="color-option-div"></div>
-        </mat-chip-option>
-      </mat-chip-listbox>
+      <color-chooser
+        [chosenColor]="colorControl.value"
+        (chooseColorEvent)="chooseColor($event)"
+      ></color-chooser>
       <div
         class="color-preview"
         [style.background-color]="colorControl.value"

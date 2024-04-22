@@ -17,6 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
+import { ColorChooserComponent } from '../color-chooser/color-chooser.component';
 
 @Component({
   selector: 'edit-tag',
@@ -24,6 +25,7 @@ import { MatChipsModule } from '@angular/material/chips';
   styleUrls: ['./edit-tag.component.scss'],
   standalone: true,
   imports: [
+    ColorChooserComponent,
     CommonModule,
     FormsModule,
     FlexLayoutModule,
@@ -36,20 +38,6 @@ import { MatChipsModule } from '@angular/material/chips';
 })
 export class EditTagComponent {
   @Output() closeEvent: EventEmitter<void> = new EventEmitter();
-  protected colors: string[] = [
-    '#66BB6A',
-    '#009688',
-    '#00B0FF',
-    '#1565C0',
-    '#673AB7',
-    '#AB47BC',
-    '#E91E63',
-    '#D50000',
-    '#F57C00',
-    '#FBC02D',
-    '#795548',
-    '#757575'
-  ];
   @ViewChild('nameInput') nameInput: ElementRef;
   protected submitLabel: string = $localize`Create`;
   @Input() tag: Tag;

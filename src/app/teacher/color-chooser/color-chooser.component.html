@@ -1,0 +1,12 @@
+<mat-chip-listbox>
+  <mat-chip-option
+    *ngFor="let color of colors"
+    class="color-choice"
+    [value]="color"
+    [selected]="color === chosenColor"
+    (selectionChange)="chooseColorEvent.emit($event)"
+    [style.background-color]="color"
+  >
+    <div class="color-option-div"></div>
+  </mat-chip-option>
+</mat-chip-listbox>
