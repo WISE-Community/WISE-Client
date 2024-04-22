@@ -6,14 +6,22 @@
         + New Tag
       </button>
     </div>
-    <edit-tag *ngIf="showCreateTag" (closeEvent)="showCreateTag = false"></edit-tag>
-    <div *ngFor="let tag of tags" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-      <edit-tag
-        *ngIf="idToEditing[tag.id]"
-        class="edit-tag"
-        [tag]="tag"
-        (closeEvent)="cancelEditing(tag)"
-      ></edit-tag>
+    <div *ngIf="showCreateTag">
+      <hr />
+      <edit-tag (closeEvent)="showCreateTag = false"></edit-tag>
+      <hr />
+    </div>
+    <div
+      *ngFor="let tag of tags; let tagIndex = index; let first = first"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="12px"
+    >
+      <div *ngIf="idToEditing[tag.id]" class="edit-tag-div">
+        <hr *ngIf="(first && !showCreateTag) || (!first && !idToEditing[tags[tagIndex - 1].id])" />
+        <edit-tag [tag]="tag" (closeEvent)="cancelEditing(tag)"></edit-tag>
+        <hr />
+      </div>
       <ng-container *ngIf="!idToEditing[tag.id]">
         <div class="tag-name" [ngStyle]="{ 'background-color': tag.color }" fxFlex>
           {{ tag.text }}

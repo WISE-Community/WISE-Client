@@ -3,6 +3,13 @@
   'style/abstracts/functions',
   'style/abstracts/variables';
 
+.tag-preview {
+  border-radius: $button-border-radius;
+  height: 22px;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+}
+
 .tag-inputs-div {
   width: 100%;
 }
@@ -13,10 +20,4 @@
 
 .color-input {
   width: 15%;
-}
-
-.color-preview {
-  border-radius: $button-border-radius;
-  width: 110px;
-  height: 32px;
 }

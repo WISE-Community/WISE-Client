@@ -1,5 +1,10 @@
-<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="12px">
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
   <div class="tag-inputs-div" fxLayout="column">
+    <div fxLayoutAlign="start center">
+      <div class="tag-preview" [style.background-color]="colorControl.value">
+        {{ nameControl.value }}
+      </div>
+    </div>
     <div fxLayoutAlign="space-between" fxLayoutGap="12px">
       <mat-form-field class="name-input">
         <mat-label i18n>Tag Name</mat-label>
@@ -20,14 +25,6 @@
         [chosenColor]="colorControl.value"
         (chooseColorEvent)="chooseColor($event)"
       ></color-chooser>
-      <div
-        class="color-preview"
-        [style.background-color]="colorControl.value"
-        fxLayoutAlign="center center"
-        i18n
-      >
-        Preview
-      </div>
     </div>
   </div>
   <button mat-button (click)="close()" i18n>Cancel</button>
@@ -35,4 +32,3 @@
     {{ submitLabel }}
   </button>
 </div>
-<hr />
