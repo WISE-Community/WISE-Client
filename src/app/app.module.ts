@@ -30,9 +30,13 @@ export function initialize(
   userService: UserService
 ): () => Promise<any> {
   return (): Promise<any> => {
-    return userService.retrieveUserPromise().then((user) => {
-      userService.getUser().subscribe((user) => {
-        configService.retrieveConfig();
+    return new Promise((resolve) => {
+      userService.retrieveUserPromise().then(() => {
+        return userService.getUser().subscribe(() => {
+          return configService.retrieveConfig().subscribe((config) => {
+            resolve(config);
+          });
+        });
       });
     });
   };
