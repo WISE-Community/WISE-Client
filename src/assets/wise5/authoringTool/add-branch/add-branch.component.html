@@ -1,0 +1,72 @@
+<h3 i18n>Create Branch</h3>
+<form fxLayout="column" [formGroup]="formGroup">
+  <mat-form-field class="path-count">
+    <mat-label i18n>Number of Branch Paths</mat-label>
+    <input matInput formControlName="pathCount" type="number" min="2" />
+  </mat-form-field>
+  <mat-form-field *ngIf="formGroup.controls['pathCount'].value > 1" class="select-medium-width">
+    <mat-label i18n>How to Choose Among Paths</mat-label>
+    <mat-select formControlName="criteria">
+      <mat-option *ngFor="let branchCriterion of branchCriteria" [value]="branchCriterion.value">
+        <span fxLayout="row" fxLayoutAlign="start center">
+          <span>{{ branchCriterion.text }}</span>
+        </span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field
+    *ngIf="
+      formGroup.controls['criteria'].value === SCORE ||
+      formGroup.controls['criteria'].value === CHOICE_CHOSEN
+    "
+    class="select-medium-width"
+  >
+    <mat-label i18n>Choose Step</mat-label>
+    <mat-select formControlName="nodeId">
+      <mat-option
+        *ngFor="let nodeId of nodeIds"
+        [value]="nodeId"
+        [disabled]="!nodeIdToSelectable[nodeId]"
+      >
+        <span fxLayout="row" fxLayoutAlign="start center">
+          <span>
+            {{ getNodePositionById(nodeId) + ':' }} {{ getNodeTitle(nodeId) }} ({{ nodeId }})
+          </span>
+        </span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <ng-container
+    *ngIf="
+      formGroup.controls['nodeId'] != null &&
+      (formGroup.controls['criteria'].value === SCORE ||
+        formGroup.controls['criteria'].value === CHOICE_CHOSEN)
+    "
+  >
+    <ng-container *ngIf="formGroup.controls['nodeId'].value !== ''">
+      <mat-form-field class="select-large-width">
+        <mat-label i18n>Choose Item</mat-label>
+        <mat-select formControlName="componentId">
+          <mat-option
+            *ngFor="let component of components; index as componentIndex"
+            [value]="component.id"
+            [disabled]="!componentIdToSelectable[component.id]"
+          >
+            <span fxLayout="row" fxLayoutAlign="start center">
+              <span i18n>
+                {{ componentIndex + 1 }}. {{ component.type }} ({{ component.id }}) Prompt:
+                {{ component.prompt }}
+              </span>
+            </span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+  </ng-container>
+  <div fxLayoutAlign="end center" fxLayoutGap="12px">
+    <button mat-button routerLink=".." i18n>Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="submit()" i18n>
+      Submit
+    </button>
+  </div>
+</form>

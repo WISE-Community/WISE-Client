@@ -39,4 +39,13 @@ export class AddStepButtonComponent {
       }
     });
   }
+
+  protected goToAddBranchView(): void {
+    this.router.navigate(['add-branch'], {
+      relativeTo: this.route,
+      state: {
+        targetId: this.nodeId
+      }
+    });
+  }
 }
