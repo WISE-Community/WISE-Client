@@ -9,8 +9,7 @@ describe('SelectAllItemsCheckboxComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SelectAllItemsCheckboxComponent],
-      imports: [MatCheckboxModule, MatTooltipModule]
+      imports: [MatCheckboxModule, MatTooltipModule, SelectAllItemsCheckboxComponent]
     });
     fixture = TestBed.createComponent(SelectAllItemsCheckboxComponent);
     component = fixture.componentInstance;

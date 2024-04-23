@@ -53,13 +53,10 @@ describe('PersonalLibraryComponent', () => {
           MatPaginatorModule,
           MatSelectModule,
           MatSnackBarModule,
-          OverlayModule
-        ],
-        declarations: [
-          LibraryProjectComponent,
-          PersonalLibraryComponent,
+          OverlayModule,
           SelectAllItemsCheckboxComponent
         ],
+        declarations: [LibraryProjectComponent, PersonalLibraryComponent],
         providers: [ArchiveProjectService, LibraryService],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();

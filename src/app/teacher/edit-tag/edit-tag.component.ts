@@ -16,6 +16,7 @@ import { Tag } from '../../domain/tag';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ColorChooserComponent } from '../color-chooser/color-chooser.component';
 
 @Component({
   selector: 'edit-tag',
@@ -23,6 +24,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./edit-tag.component.scss'],
   standalone: true,
   imports: [
+    ColorChooserComponent,
     CommonModule,
     FormsModule,
     FlexLayoutModule,
@@ -97,6 +99,10 @@ export class EditTagComponent {
     if (this.nameControl.valid) {
       this.submit();
     }
+  }
+
+  protected chooseColor(color: string): void {
+    this.colorControl.setValue(color);
   }
 
   protected submit(): void {

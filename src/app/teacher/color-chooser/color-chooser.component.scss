@@ -1,0 +1,13 @@
+@import
+  '@angular/material/theming',
+  'style/abstracts/functions',
+  'style/abstracts/variables';
+
+.color-choice {
+  border-radius: $button-border-radius;
+  width: 32px;
+}
+
+.color-option-div {
+  width: 10px;
+}
