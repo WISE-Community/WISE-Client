@@ -64,7 +64,6 @@ import { AddBranchComponent } from '../../assets/wise5/authoringTool/add-branch/
 
 @NgModule({
   declarations: [
-    AddBranchComponent,
     AddComponentButtonComponent,
     AddLessonChooseTemplateComponent,
     AddLessonConfigureComponent,
@@ -112,6 +111,7 @@ import { AddBranchComponent } from '../../assets/wise5/authoringTool/add-branch/
     ProjectListComponent
   ],
   imports: [
+    AddBranchComponent,
     AddLessonButtonComponent,
     AddStepButtonComponent,
     StudentTeacherCommonModule,

@@ -1,11 +1,33 @@
 import { Component } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   selector: 'add-branch',
   templateUrl: './add-branch.component.html',
-  styleUrls: ['./add-branch.component.scss']
+  styleUrls: ['./add-branch.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule
+  ]
 })
 export class AddBranchComponent {
   protected readonly CHOICE_CHOSEN: string = 'choiceChosen';
@@ -33,14 +55,14 @@ export class AddBranchComponent {
       text: $localize`Tag`
     }
   ];
-  protected componentIdToSelectable: any = {};
+  protected componentIdToSelectable: { [key: string]: boolean } = {};
   protected components: any[];
   protected formGroup: FormGroup = this.fb.group({
     pathCount: new FormControl('', [Validators.required]),
     criteria: new FormControl('', [Validators.required])
   });
   protected nodeIds: string[];
-  protected nodeIdToSelectable: any = {};
+  protected nodeIdToSelectable: { [key: string]: boolean } = {};
   private targetId: string;
 
   constructor(private fb: FormBuilder, private projectService: TeacherProjectService) {}
@@ -73,7 +95,7 @@ export class AddBranchComponent {
       this.formGroup.addControl('nodeId', new FormControl('', [Validators.required]));
       this.formGroup.controls['nodeId'].valueChanges.subscribe((nodeId: string) => {
         this.updateSelectableComponents(nodeId);
-        this.autoSelectComponentIdIfPossible();
+        this.tryAutoSelectComponentId();
       });
       if (this.getNodeId() === '') {
         this.formGroup.controls['nodeId'].setValue(this.targetId);
@@ -103,7 +125,7 @@ export class AddBranchComponent {
     ) {
       this.formGroup.controls['componentId'].setValue('');
     }
-    this.autoSelectComponentIdIfPossible();
+    this.tryAutoSelectComponentId();
   }
 
   private updateSelectableComponents(nodeId: string): void {
@@ -129,7 +151,7 @@ export class AddBranchComponent {
     return true;
   }
 
-  private autoSelectComponentIdIfPossible(): void {
+  private tryAutoSelectComponentId(): void {
     const criteria = this.getCriteria();
     if (criteria === this.SCORE) {
       this.tryAutoSelectScoreComponent();

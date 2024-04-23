@@ -16,8 +16,8 @@ describe('AddBranchComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AddBranchComponent],
       imports: [
+        AddBranchComponent,
         BrowserAnimationsModule,
         FormsModule,
         HttpClientTestingModule,

@@ -14,7 +14,6 @@ import { MatMenuModule } from '@angular/material/menu';
   imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule]
 })
 export class AddStepButtonComponent {
-  @Input() first: boolean;
   @Input() nodeId: string;
 
   constructor(
