@@ -14,6 +14,7 @@ import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
   providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }]
 })
 export class ApplyTagsButtonComponent implements OnInit {
+  protected filteredTags: Tag[] = [];
   @Input() selectedProjects: Project[] = [];
   private subscriptions: Subscription = new Subscription();
   protected tags: Tag[] = [];
@@ -34,6 +35,7 @@ export class ApplyTagsButtonComponent implements OnInit {
   private retrieveUserTags(): void {
     this.projectTagService.retrieveUserTags().subscribe((tags: Tag[]) => {
       this.tags = tags;
+      this.filteredTags = tags;
       this.updateAllTagsCheckedValues();
     });
   }
@@ -99,6 +101,12 @@ export class ApplyTagsButtonComponent implements OnInit {
       }
       this.updateTagCheckedValue(tag);
     });
+  }
+
+  protected filterTags(searchText: string): void {
+    this.filteredTags = this.tags.filter((tag: Tag) =>
+      tag.text.toLowerCase().includes(searchText.trim().toLowerCase())
+    );
   }
 
   protected manageTags(): void {

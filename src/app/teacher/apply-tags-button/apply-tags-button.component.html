@@ -8,9 +8,9 @@
   <mat-icon>sell</mat-icon>
 </button>
 <mat-menu #applyTagsMenu>
-  <div class="menu-info secondary-text" i18n>Apply tags</div>
-  <mat-divider></mat-divider>
-  <div *ngFor="let tag of tags" (click)="$event.stopPropagation()" mat-menu-item>
+  <div class="menu-info secondary-text" (click)="$event.stopPropagation()" i18n>Apply tags</div>
+  <app-search-bar (update)="filterTags($event)"></app-search-bar>
+  <div *ngFor="let tag of filteredTags" (click)="$event.stopPropagation()" mat-menu-item>
     <select-all-items-checkbox
       [numAllItems]="selectedProjects.length"
       [numSelectedItems]="tag.numProjectsWithTag"
