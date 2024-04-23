@@ -29,7 +29,6 @@
   <archive-projects-button
     *ngIf="numSelectedRuns > 0"
     [showArchive]="showArchive"
-    [projects]="selectedProjects"
-    (archiveActionEvent)="archiveActionEvent.emit()"
+    (archiveProjectsEvent)="archiveProjectsEvent.emit($event)"
   ></archive-projects-button>
 </div>

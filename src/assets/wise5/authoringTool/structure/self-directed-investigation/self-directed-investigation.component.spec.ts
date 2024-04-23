@@ -3,6 +3,8 @@ import { SelfDirectedInvestigationComponent } from './self-directed-investigatio
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatDividerModule } from '@angular/material/divider';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 describe('SelfDirectedInvestigationComponent2', () => {
   let component: SelfDirectedInvestigationComponent;
@@ -11,8 +13,16 @@ describe('SelfDirectedInvestigationComponent2', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SelfDirectedInvestigationComponent],
-      imports: [HttpClientTestingModule, MatDividerModule, RouterTestingModule]
+      imports: [
+        HttpClientTestingModule,
+        MatDividerModule,
+        RouterTestingModule,
+
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [TeacherProjectService]
     }).compileComponents();
+    window.history.pushState({}, '', '');
     fixture = TestBed.createComponent(SelfDirectedInvestigationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

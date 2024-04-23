@@ -3,7 +3,6 @@ import { SelectRunsControlsComponent } from './select-runs-controls.component';
 import { SelectRunsControlsModule } from './select-runs-controls.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ArchiveProjectService } from '../../services/archive-project.service';
-import { MockArchiveProjectService } from '../../services/mock-archive-project.service';
 
 describe('SelectRunsControlsComponent', () => {
   let component: SelectRunsControlsComponent;
@@ -12,7 +11,7 @@ describe('SelectRunsControlsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MatSnackBarModule, SelectRunsControlsModule],
-      providers: [{ provide: ArchiveProjectService, useClass: MockArchiveProjectService }]
+      providers: [ArchiveProjectService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SelectRunsControlsComponent);

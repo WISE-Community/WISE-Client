@@ -1,18 +1,17 @@
 <div class="root">
   <div
     class="drop-box"
-    ng2FileDrop
-    (onFileDrop)="fileChosen($event)"
+    (fileDropped)="uploadAssetItems($event)"
+    dragAndDrop
     accept="image/*,application/pdf,text/csv,text/javascript"
-    i18n
   >
-    Drop image or file here or click to upload!
+    <span i18n>Drop image or file here or click to upload!</span>
     <input
       type="file"
       accept="image/*,application/pdf,text/csv,text/javascript"
       class="file-input"
-      (onFileSelected)="fileChosen($event)"
-      ng2FileSelect
+      (change)="uploadAssetItems($event.target.files)"
+      #fileDropRef
       multiple
     />
   </div>

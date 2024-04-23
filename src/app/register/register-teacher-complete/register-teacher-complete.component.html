@@ -1,13 +1,13 @@
 <mat-card class="standalone__content standalone__content--sm mat-elevation-z4 center">
   <mat-card-content>
     <h2 class="standalone__title accent" i18n>Your WISE account has been created!</h2>
-    <p *ngIf="!isUsingGoogleId" class="mat-subtitle-2" i18n>
+    <p *ngIf="!socialAccount" class="mat-subtitle-2" i18n>
       Your username is: <span class="mat-headline-6">{{ username }}</span
       >.
     </p>
     <p i18n>You should receive an email with your account details shortly.</p>
     <p>
-      <a *ngIf="!isUsingGoogleId" mat-flat-button color="primary" (click)="login()" i18n
+      <a *ngIf="!socialAccount" mat-flat-button color="primary" (click)="login()" i18n
         >Sign In to Get Started</a
       >
       <a
@@ -19,6 +19,17 @@
       >
         <img src="assets/img/icons/google-logo.svg" i18n-alt alt="Google logo" /><ng-container i18n
           >Sign in with Google</ng-container
+        >
+      </a>
+      <a
+        *ngIf="isUsingMicrosoftId"
+        class="button--social-login button--microsoft"
+        href="{{ microsoftLogInURL }}"
+        color="accent"
+        mat-raised-button
+      >
+        <img src="assets/img/icons/ms-logo.svg" i18n-alt alt="Microsoft logo" /><ng-container i18n
+          >Sign in with Microsoft</ng-container
         >
       </a>
     </p>

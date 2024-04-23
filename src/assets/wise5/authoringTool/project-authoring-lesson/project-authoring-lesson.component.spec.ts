@@ -19,6 +19,7 @@ import { DeleteNodeService } from '../../services/deleteNodeService';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { MatMenuModule } from '@angular/material/menu';
+import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
 
 let component: ProjectAuthoringLessonComponent;
 let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
@@ -41,6 +42,7 @@ describe('ProjectAuthoringLessonComponent', () => {
         ProjectAuthoringStepComponent
       ],
       imports: [
+        AddStepButtonComponent,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,

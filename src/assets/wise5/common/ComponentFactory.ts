@@ -1,3 +1,4 @@
+import { AiChatComponent } from '../components/aiChat/AiChatComponent';
 import { DialogGuidanceComponent } from '../components/dialogGuidance/DialogGuidanceComponent';
 import { MultipleChoiceComponent } from '../components/multipleChoice/MultipleChoiceComponent';
 import { PeerChatComponent } from '../components/peerChat/PeerChatComponent';
@@ -7,7 +8,9 @@ import { ComponentContent } from './ComponentContent';
 
 export class ComponentFactory {
   getComponent(content: ComponentContent, nodeId: string): Component {
-    if (content.type === 'DialogGuidance') {
+    if (content.type === 'AiChat') {
+      return new AiChatComponent(content, nodeId);
+    } else if (content.type === 'DialogGuidance') {
       return new DialogGuidanceComponent(content, nodeId);
     } else if (content.type === 'MultipleChoice') {
       return new MultipleChoiceComponent(content, nodeId);

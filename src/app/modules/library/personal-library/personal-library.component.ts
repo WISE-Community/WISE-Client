@@ -143,11 +143,6 @@ export class PersonalLibraryComponent extends LibraryComponent {
     }
   }
 
-  protected refreshProjects(): void {
-    this.unselectAllProjects();
-    this.archiveProjectService.refreshProjects();
-  }
-
   protected unselectAllProjects(): void {
     this.projects.forEach((project) => (project.selected = false));
     this.selectedProjects.set([]);
@@ -163,6 +158,10 @@ export class PersonalLibraryComponent extends LibraryComponent {
     return this.filteredProjects.filter(
       (project, index) => this.lowIndex <= index && index < this.highIndex
     );
+  }
+
+  protected archiveProjects(archive: boolean): void {
+    this.archiveProjectService.archiveProjects(this.selectedProjects(), archive);
   }
 }
 

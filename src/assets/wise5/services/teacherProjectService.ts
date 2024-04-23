@@ -1489,7 +1489,7 @@ export class TeacherProjectService extends ProjectService {
    * @returns the next available node id
    */
   getNextAvailableNodeId(nodeIdsToSkip = []) {
-    let largestNodeIdNumber = -1;
+    let largestNodeIdNumber = 0;
     for (const nodeId of this.getNodeIds()
       .concat(this.getInactiveNodeIds())
       .concat(nodeIdsToSkip)) {

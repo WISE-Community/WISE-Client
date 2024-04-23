@@ -13,14 +13,15 @@ import { lastValueFrom } from 'rxjs';
 export class LoginHomeComponent implements OnInit {
   accessCode: string = '';
   credentials: any = { username: '', password: '', recaptchaResponse: null };
-  isGoogleAuthenticationEnabled: boolean = false;
+  protected googleAuthenticationEnabled: boolean = false;
   isRecaptchaEnabled: boolean = false;
   isRecaptchaVerificationFailed: boolean = false;
   isReLoginDueToErrorSavingData: boolean;
-  isShowGoogleLogin: boolean = true;
+  protected microsoftAuthenticationEnabled: boolean;
   passwordError: boolean = false;
   processing: boolean = false;
   @ViewChild('recaptchaRef', { static: false }) recaptchaRef: any;
+  protected showSocialLogin: boolean;
 
   constructor(
     private configService: ConfigService,
@@ -33,16 +34,19 @@ export class LoginHomeComponent implements OnInit {
   ngOnInit(): void {
     this.configService.getConfig().subscribe((config) => {
       if (config != null) {
-        this.isGoogleAuthenticationEnabled = config.googleClientId != '';
+        this.googleAuthenticationEnabled = config.googleClientId != '';
+        this.microsoftAuthenticationEnabled = config.microsoftClientId != '';
       }
       if (this.userService.isSignedIn()) {
         this.router.navigateByUrl(this.getRedirectUrl(''));
       }
+      this.showSocialLogin =
+        this.googleAuthenticationEnabled || this.microsoftAuthenticationEnabled;
     });
     this.route.params.subscribe((params) => {
       if (params['username'] != null) {
         this.credentials.username = params['username'];
-        this.isShowGoogleLogin = false;
+        this.showSocialLogin = false;
       }
     });
     this.route.queryParams.subscribe((params) => {
@@ -97,6 +101,8 @@ export class LoginHomeComponent implements OnInit {
     let redirectUrl = '';
     if (social === 'google') {
       redirectUrl = `${this.configService.getContextPath()}/api/google-login?redirectUrl=${this.userService.getRedirectUrl()}`;
+    } else if (social === 'microsoft') {
+      redirectUrl = `/api/microsoft-login?redirectUrl=/`;
     } else {
       redirectUrl = this.userService.getRedirectUrl();
     }

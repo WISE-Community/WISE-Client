@@ -93,7 +93,7 @@
           >
         </mat-form-field>
       </p>
-      <div *ngIf="user.googleUserId == null">
+      <div *ngIf="user.googleUserId == null && user.microsoftUserId == null">
         <p>
           <mat-form-field appearance="fill" fxFlex>
             <mat-label i18n>Security Question</mat-label>
@@ -130,7 +130,10 @@
           </mat-form-field>
         </p>
       </div>
-      <div *ngIf="user.googleUserId == null" formGroupName="passwords">
+      <div
+        *ngIf="user.googleUserId == null && user.microsoftUserId == null"
+        formGroupName="passwords"
+      >
         <new-password-and-confirm
           [formGroup]="passwordsFormGroup"
           [passwordLabel]="passwordLabel"

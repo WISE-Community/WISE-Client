@@ -10,6 +10,7 @@ import { ArchiveProjectService } from '../../services/archive-project.service';
 import { runSpansDays } from '../../../assets/wise5/common/datetime/datetime';
 import { SelectRunsOption } from '../select-runs-controls/select-runs-option';
 import { sortByRunStartTimeDesc } from '../../domain/run';
+import { Project } from '../../domain/project';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -236,5 +237,15 @@ export class TeacherRunListComponent implements OnInit {
 
   private runSelectedStatusChanged(): void {
     this.runChangedEventEmitter.emit();
+  }
+
+  protected archiveProjects(archive: boolean): void {
+    this.archiveProjectService.archiveProjects(this.getSelectedProjects(), archive);
+  }
+
+  private getSelectedProjects(): Project[] {
+    return this.filteredRuns
+      .filter((run: TeacherRun) => run.project.selected)
+      .map((run: TeacherRun) => run.project);
   }
 }

@@ -16,6 +16,7 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
 import { VLEProjectService } from '../../../assets/wise5/vle/vleProjectService';
 import { ShowNodeInfoDialogComponent } from './show-node-info-dialog.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentTypeServiceModule } from '../../../assets/wise5/services/componentTypeService.module';
 
 let component: ShowNodeInfoDialogComponent;
 const componentRubric: string = 'This is the component rubric.';
@@ -52,6 +53,7 @@ describe('ShowNodeInfoDialogComponent', () => {
       ],
       imports: [
         ClassroomMonitorTestingModule,
+        ComponentTypeServiceModule,
         MatCardModule,
         MatDialogModule,
         MatIconModule,

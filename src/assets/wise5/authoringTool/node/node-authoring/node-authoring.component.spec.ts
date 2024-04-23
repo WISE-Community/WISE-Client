@@ -27,6 +27,7 @@ import { AddComponentButtonComponent } from '../add-component-button/add-compone
 import { CopyComponentButtonComponent } from '../copy-component-button/copy-component-button.component';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
+import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -52,6 +53,7 @@ describe('NodeAuthoringComponent', () => {
       imports: [
         BrowserAnimationsModule,
         ComponentAuthoringModule,
+        ComponentTypeServiceModule,
         DragDropModule,
         FormsModule,
         HttpClientTestingModule,

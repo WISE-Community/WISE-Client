@@ -109,7 +109,7 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
               var exportRow = true;
               if (this.controller.exportStepSelectionType === 'exportSelectSteps') {
                 if (
-                  !this.controller.isComponentSelected(
+                  !this.isComponentSelected(
                     selectedNodesMap,
                     componentState.nodeId,
                     componentState.componentId

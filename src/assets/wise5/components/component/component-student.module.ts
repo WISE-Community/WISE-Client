@@ -25,10 +25,12 @@ import { ShowMyWorkStudentModule } from '../showMyWork/show-my-work-student/show
 import { SummaryStudentModule } from '../summary/summary-student/summary-student.module';
 import { TableStudentModule } from '../table/table-student/table-student.module';
 import { ComponentComponent } from './component.component';
+import { AiChatStudentModule } from '../aiChat/ai-chat-student/ai-chat-student.module';
 
 @NgModule({
   declarations: [ComponentComponent, PreviewComponentComponent],
   imports: [
+    AiChatStudentModule,
     AnimationStudentModule,
     AudioOscillatorStudentModule,
     CommonModule,

@@ -11,13 +11,10 @@ import { NodeAdvancedAuthoringComponent } from '../../assets/wise5/authoringTool
 import { NodeAdvancedConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component';
 import { ChooseComponentLocationComponent } from '../../assets/wise5/authoringTool/node/chooseComponentLocation/choose-component-location.component';
 import { AddLessonConfigureComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component';
-import { AddLessonChooseLocationComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-location/add-lesson-choose-location.component';
 import { ChooseNewNodeTemplate } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
 import { AddYourOwnNode } from '../../assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component';
-import { ChooseNewNodeLocation } from '../../assets/wise5/authoringTool/addNode/choose-new-node-location/choose-new-node-location.component';
 import { ChooseAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/choose-automated-assessment/choose-automated-assessment.component';
 import { ConfigureAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component';
-import { ChooseImportStepLocationComponent } from '../authoring-tool/import-step/choose-import-step-location/choose-import-step-location.component';
 import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component';
 import { ChooseImportStepComponent } from '../authoring-tool/import-step/choose-import-step/choose-import-step.component';
 import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
@@ -71,10 +68,6 @@ const routes: Routes = [
                 component: AddLessonConfigureComponent
               },
               {
-                path: 'choose-location',
-                component: AddLessonChooseLocationComponent
-              },
-              {
                 path: 'structure',
                 loadChildren: () =>
                   import(
@@ -105,16 +98,8 @@ const routes: Routes = [
                 component: ChooseNewNodeTemplate
               },
               {
-                path: 'choose-location',
-                component: ChooseNewNodeLocation
-              },
-              {
                 path: 'import-step',
                 children: [
-                  {
-                    path: 'choose-location',
-                    component: ChooseImportStepLocationComponent
-                  },
                   {
                     path: 'choose-step',
                     component: ChooseImportStepComponent

@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { ComputerAvatar } from '../../../common/ComputerAvatar';
+import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceFeedbackService';
@@ -26,10 +26,26 @@ import { DialogGuidanceStudentComponent } from './dialog-guidance-student.compon
 import { DialogGuidanceComponent } from '../DialogGuidanceComponent';
 import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
 
 let component: DialogGuidanceStudentComponent;
 let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
 const robotAvatar = new ComputerAvatar('robot', 'Robot', 'robot.png');
+
+function initializeComponent(isComputerAvatarEnabled: boolean): void {
+  fixture = TestBed.createComponent(DialogGuidanceStudentComponent);
+  component = fixture.componentInstance;
+  component.component = createDialogGuidanceComponent(isComputerAvatarEnabled);
+  spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
+  spyOn(component, 'isNotebookEnabled').and.returnValue(false);
+  fixture.detectChanges();
+}
+
+function createDialogGuidanceComponent(isComputerAvatarEnabled: boolean): DialogGuidanceComponent {
+  const componentContent = TestBed.inject(DialogGuidanceService).createComponent();
+  componentContent.isComputerAvatarEnabled = isComputerAvatarEnabled;
+  return new DialogGuidanceComponent(componentContent, null);
+}
 
 describe('DialogGuidanceStudentComponent', () => {
   beforeEach(async () => {
@@ -42,6 +58,7 @@ describe('DialogGuidanceStudentComponent', () => {
       ],
       imports: [
         BrowserAnimationsModule,
+        ChatInputComponent,
         FormsModule,
         HttpClientTestingModule,
         MatCardModule,
@@ -57,20 +74,8 @@ describe('DialogGuidanceStudentComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogGuidanceStudentComponent);
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
-    component = fixture.componentInstance;
-    const componentContent = TestBed.inject(DialogGuidanceService).createComponent();
-    componentContent.feedbackRules = [
-      {
-        expression: 'isDefault',
-        feedback: 'Default Feedback'
-      }
-    ];
-    component.component = new DialogGuidanceComponent(componentContent, null);
-    spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
-    spyOn(component, 'isNotebookEnabled').and.returnValue(false);
-    fixture.detectChanges();
+    initializeComponent(true);
   });
 
   it('should create computer dialog response with single score', () => {
@@ -122,8 +127,7 @@ describe('DialogGuidanceStudentComponent', () => {
   });
 
   it('should initialize computer avatar to default computer avatar', () => {
-    clearComputerAvatar(component);
-    component.ngOnInit();
+    initializeComponent(false);
     expectComputerAvatarSelectorNotToBeShown(component);
     expect(component.computerAvatar).not.toBeNull();
   });
@@ -220,18 +224,18 @@ function initializeComponentStateWithNoComputerAvatarId(component: any) {
 }
 
 function expectComputerAvatarSelectorToBeShown(component: any) {
-  expectIsShowComputerAvatarSelector(component, true);
+  expectComputerAvatarSelectorVisible(component, true);
 }
 
 function expectComputerAvatarSelectorNotToBeShown(component: any) {
-  expectIsShowComputerAvatarSelector(component, false);
+  expectComputerAvatarSelectorVisible(component, false);
 }
 
-function expectIsShowComputerAvatarSelector(
+function expectComputerAvatarSelectorVisible(
   component: any,
   expectedIsShowComputerAvatarSelector: boolean
 ) {
-  expect(component.isShowComputerAvatarSelector).toEqual(expectedIsShowComputerAvatarSelector);
+  expect(component.computerAvatarSelectorVisible).toEqual(expectedIsShowComputerAvatarSelector);
 }
 
 function createDummyScoringResponse(): RawCRaterResponse {

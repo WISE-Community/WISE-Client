@@ -23,11 +23,13 @@ import { ArchiveProjectResponse } from '../../../domain/archiveProjectResponse';
 import { of } from 'rxjs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
+import { HttpClient } from '@angular/common/http';
 
 let archiveProjectService: ArchiveProjectService;
 let component: PersonalLibraryComponent;
 let fixture: ComponentFixture<PersonalLibraryComponent>;
 let harness: PersonalLibraryHarness;
+let http: HttpClient;
 const projectId1 = 1;
 const projectId2 = 2;
 const projectId3 = 3;
@@ -68,6 +70,7 @@ describe('PersonalLibraryComponent', () => {
     component = fixture.componentInstance;
     setUpFiveProjects();
     archiveProjectService = TestBed.inject(ArchiveProjectService);
+    http = TestBed.inject(HttpClient);
     fixture.detectChanges();
     harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, PersonalLibraryHarness);
   });
@@ -146,7 +149,7 @@ function archiveMultipleProjects() {
     describe('select multiple projects and click archive button', () => {
       it('archives multiple projects', async () => {
         await harness.selectProjects([projectId4, projectId3]);
-        spyOn(archiveProjectService, 'archiveProjects').and.returnValue(
+        spyOn(http, 'put').and.returnValue(
           of([new ArchiveProjectResponse(4, true), new ArchiveProjectResponse(3, true)])
         );
         await (await harness.getArchiveButton()).click();
@@ -162,7 +165,7 @@ function restoreMultipleProjects() {
       it('restores multiple projects', async () => {
         await harness.showArchivedView();
         await harness.selectProjects([projectId2, projectId1]);
-        spyOn(archiveProjectService, 'unarchiveProjects').and.returnValue(
+        spyOn(http, 'delete').and.returnValue(
           of([new ArchiveProjectResponse(2, false), new ArchiveProjectResponse(1, false)])
         );
         await (await harness.getUnarchiveButton()).click();

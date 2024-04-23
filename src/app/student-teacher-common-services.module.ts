@@ -54,10 +54,12 @@ import { NodeProgressService } from '../assets/wise5/services/nodeProgressServic
 import { CompletionService } from '../assets/wise5/services/completionService';
 import { StudentNodeService } from '../assets/wise5/services/studentNodeService';
 import { StudentProjectTranslationService } from '../assets/wise5/services/studentProjectTranslationService';
+import { AiChatService } from '../assets/wise5/components/aiChat/aiChatService';
 
 @NgModule({
   providers: [
     AchievementService,
+    AiChatService,
     AnimationService,
     AnnotationService,
     AudioOscillatorService,

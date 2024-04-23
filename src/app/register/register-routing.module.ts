@@ -10,6 +10,7 @@ import { RegisterTeacherFormComponent } from './register-teacher-form/register-t
 import { RegisterTeacherCompleteComponent } from './register-teacher-complete/register-teacher-complete.component';
 import { RegisterStudentComponent } from './register-student/register-student.component';
 import { RegisterGoogleUserAlreadyExistsComponent } from './register-google-user-already-exists/register-google-user-already-exists.component';
+import { RegisterMicrosoftUserAlreadyExistsComponent } from './register-microsoft-user-already-exists/register-microsoft-user-already-exists.component';
 
 const registerRoutes: Routes = [
   {
@@ -23,7 +24,8 @@ const registerRoutes: Routes = [
       { path: 'teacher', component: RegisterTeacherComponent },
       { path: 'teacher/complete', component: RegisterTeacherCompleteComponent },
       { path: 'teacher/form', component: RegisterTeacherFormComponent },
-      { path: 'googleUserAlreadyExists', component: RegisterGoogleUserAlreadyExistsComponent }
+      { path: 'googleUserAlreadyExists', component: RegisterGoogleUserAlreadyExistsComponent },
+      { path: 'microsoftUserAlreadyExists', component: RegisterMicrosoftUserAlreadyExistsComponent }
     ]
   }
 ];

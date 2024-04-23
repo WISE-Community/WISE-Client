@@ -88,9 +88,12 @@ import { TranslatableInputComponent } from '../../assets/wise5/authoringTool/com
 import { TranslatableTextareaComponent } from '../../assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';
 import { TranslatableAssetChooserComponent } from '../../assets/wise5/authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
+import { AiChatAuthoringComponent } from '../../assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component';
+import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component';
 
 @NgModule({
   declarations: [
+    AiChatAuthoringComponent,
     AnimationAuthoring,
     AudioOscillatorAuthoring,
     AuthorUrlParametersComponent,
@@ -101,6 +104,7 @@ import { TranslatableAssetChooserComponent } from '../../assets/wise5/authoringT
     DrawAuthoring,
     DialogGuidanceAuthoringComponent,
     DiscussionAuthoring,
+    EditAiChatAdvancedComponent,
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
@@ -184,13 +188,14 @@ import { TranslatableAssetChooserComponent } from '../../assets/wise5/authoringT
     WiseTinymceEditorModule
   ],
   exports: [
-    AnimationAuthoring,
+    AiChatAuthoringComponent,
     AudioOscillatorAuthoring,
     ComponentAuthoringComponent,
     ConceptMapAuthoring,
     DialogGuidanceAuthoringComponent,
     DiscussionAuthoring,
     DrawAuthoring,
+    EditAiChatAdvancedComponent,
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,

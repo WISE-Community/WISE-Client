@@ -3,6 +3,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
   selector: 'add-your-own-node',
@@ -15,15 +16,18 @@ export class AddYourOwnNode {
   });
   protected componentTypes: any[];
   protected initialComponents: string[] = [];
+  protected targetId: string;
 
   constructor(
     private componentTypeService: ComponentTypeService,
     private fb: FormBuilder,
+    private projectService: TeacherProjectService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit() {
+    this.targetId = history.state.targetId;
     this.componentTypes = this.componentTypeService.getComponentTypes();
   }
 
@@ -39,15 +43,32 @@ export class AddYourOwnNode {
     moveItemInArray(this.initialComponents, event.previousIndex, event.currentIndex);
   }
 
-  protected chooseLocation(): void {
-    if (this.addNodeFormGroup.valid) {
-      this.router.navigate(['..', 'choose-location'], {
-        relativeTo: this.route,
-        state: {
-          initialComponents: this.initialComponents,
-          title: this.addNodeFormGroup.controls['title'].value
-        }
-      });
+  protected submit(): void {
+    const newNode = this.projectService.createNode(this.addNodeFormGroup.controls['title'].value);
+    if (this.isGroupNode(this.targetId)) {
+      this.projectService.createNodeInside(newNode, this.targetId);
+    } else {
+      this.projectService.createNodeAfter(newNode, this.targetId);
     }
+    this.addInitialComponents(newNode.id, this.initialComponents);
+    this.save().then(() => {
+      this.router.navigate(['../..'], { relativeTo: this.route });
+    });
+  }
+
+  protected isGroupNode(nodeId: string): boolean {
+    return this.projectService.isGroupNode(nodeId);
+  }
+
+  private addInitialComponents(nodeId: string, components: any[]): void {
+    components
+      .reverse()
+      .forEach((component) => this.projectService.createComponent(nodeId, component.type));
+  }
+
+  private save(): any {
+    return this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
+      this.projectService.refreshProject();
+    });
   }
 }

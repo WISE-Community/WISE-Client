@@ -4,7 +4,6 @@ import { ConfigService } from '../../../services/configService';
 import { DataExportService } from '../../../services/dataExportService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { DataExportComponent } from '../data-export/data-export.component';
 import { DataExportContext } from '../DataExportContext';
 import { DataExportStrategy } from './DataExportStrategy';
 import { removeHTMLTags } from '../../../common/string/string';
@@ -12,7 +11,7 @@ import { generateCSVFile } from '../../../common/csv/csv';
 
 export abstract class AbstractDataExportStrategy implements DataExportStrategy {
   context: DataExportContext;
-  controller: DataExportComponent;
+  controller: any;
   annotationService: AnnotationService;
   configService: ConfigService;
   dataExportService: DataExportService;
@@ -121,6 +120,33 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
 
   insertColumnAtEnd(headerRow: string[], columnName: string): void {
     headerRow.push(columnName);
+  }
+
+  /**
+   * Check if a component is selected
+   * @param selectedNodesMap a map of node id and component id strings
+   * to true
+   * example
+   * {
+   *   "node1-38fj20egrj": true,
+   *   "node1-20dbj2e0sf": true
+   * }
+   * @param nodeId the node id to check
+   * @param componentId the component id to check
+   * @return whether the component is selected
+   */
+  isComponentSelected(selectedNodesMap: any, nodeId: string, componentId: string): boolean {
+    var result = false;
+    if (selectedNodesMap != null) {
+      if (
+        nodeId != null &&
+        componentId != null &&
+        selectedNodesMap[nodeId + '-' + componentId] == true
+      ) {
+        result = true;
+      }
+    }
+    return result;
   }
 
   /**
