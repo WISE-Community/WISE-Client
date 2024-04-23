@@ -16,7 +16,6 @@ import { Tag } from '../../domain/tag';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatChipsModule } from '@angular/material/chips';
 import { ColorChooserComponent } from '../color-chooser/color-chooser.component';
 
 @Component({
@@ -30,7 +29,6 @@ import { ColorChooserComponent } from '../color-chooser/color-chooser.component'
     FormsModule,
     FlexLayoutModule,
     MatButtonModule,
-    MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule
@@ -103,8 +101,8 @@ export class EditTagComponent {
     }
   }
 
-  protected chooseColor(event: any): void {
-    this.colorControl.setValue(event.selected ? event.source.value : '');
+  protected chooseColor(color: string): void {
+    this.colorControl.setValue(color);
   }
 
   protected submit(): void {

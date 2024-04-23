@@ -4,7 +4,7 @@
     class="color-choice"
     [value]="color"
     [selected]="color === chosenColor"
-    (selectionChange)="chooseColorEvent.emit($event)"
+    (selectionChange)="chooseColorEvent.emit($event.selected ? $event.source.value : '')"
     [style.background-color]="color"
   >
     <div class="color-option-div"></div>
