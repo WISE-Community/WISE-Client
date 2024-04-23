@@ -1,33 +1,22 @@
-<ng-container *ngIf="first">
-  <button
-    mat-icon-button
-    color="primary"
-    [matMenuTriggerFor]="step"
-    #menuTrigger="matMenuTrigger"
-    matTooltip="Add step"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>add_circle</mat-icon>
+<button
+  mat-icon-button
+  color="primary"
+  [matMenuTriggerFor]="step"
+  #menuTrigger="matMenuTrigger"
+  matTooltip="Add step"
+  matTooltipPosition="above"
+  i18n-matTooltip
+>
+  <mat-icon>add_circle</mat-icon>
+</button>
+<mat-menu #step="matMenu">
+  <button mat-menu-item (click)="addStepBefore()">
+    <mat-icon>add_circle</mat-icon><span i18n>Add step before</span>
   </button>
-  <mat-menu #step="matMenu">
-    <button mat-menu-item (click)="addStepBefore()">
-      <mat-icon>add_circle</mat-icon><span i18n>Add step before</span>
-    </button>
-    <button mat-menu-item (click)="addStepAfter()">
-      <mat-icon>add_circle</mat-icon><span i18n>Add step after</span>
-    </button>
-  </mat-menu>
-</ng-container>
-<ng-container *ngIf="!first">
-  <button
-    mat-icon-button
-    color="primary"
-    (click)="addStepAfter()"
-    matTooltip="Add step after"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>add_circle</mat-icon>
+  <button mat-menu-item (click)="addStepAfter()">
+    <mat-icon>add_circle</mat-icon><span i18n>Add step after</span>
   </button>
-</ng-container>
+  <button mat-menu-item (click)="goToAddBranchView()">
+    <mat-icon>add_circle</mat-icon><span i18n>Branch off this step</span>
+  </button>
+</mat-menu>

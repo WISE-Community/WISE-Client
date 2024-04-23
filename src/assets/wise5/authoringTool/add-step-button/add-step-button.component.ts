@@ -14,7 +14,6 @@ import { MatMenuModule } from '@angular/material/menu';
   imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule]
 })
 export class AddStepButtonComponent {
-  @Input() first: boolean;
   @Input() nodeId: string;
 
   constructor(
@@ -36,6 +35,15 @@ export class AddStepButtonComponent {
       relativeTo: this.route,
       state: {
         targetId: nodeId
+      }
+    });
+  }
+
+  protected goToAddBranchView(): void {
+    this.router.navigate(['add-branch'], {
+      relativeTo: this.route,
+      state: {
+        targetId: this.nodeId
       }
     });
   }

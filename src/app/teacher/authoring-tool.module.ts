@@ -60,6 +60,7 @@ import { ProjectAuthoringLessonComponent } from '../../assets/wise5/authoringToo
 import { ProjectAuthoringStepComponent } from '../../assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component';
 import { AddLessonButtonComponent } from '../../assets/wise5/authoringTool/add-lesson-button/add-lesson-button.component';
 import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-step-button/add-step-button.component';
+import { AddBranchComponent } from '../../assets/wise5/authoringTool/add-branch/add-branch.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-ste
     ProjectListComponent
   ],
   imports: [
+    AddBranchComponent,
     AddLessonButtonComponent,
     AddStepButtonComponent,
     StudentTeacherCommonModule,
