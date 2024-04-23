@@ -64,7 +64,7 @@ export class AddBranchComponent {
   });
   protected nodeIds: string[];
   protected nodeIdToSelectable: { [key: string]: boolean } = {};
-  private pathFormControls: FormControl[] = [];
+  protected pathFormControls: FormControl[] = [];
   private targetId: string;
 
   constructor(private fb: FormBuilder, private projectService: TeacherProjectService) {}
