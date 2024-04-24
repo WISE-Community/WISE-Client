@@ -15,6 +15,7 @@ import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
 })
 export class ApplyTagsButtonComponent implements OnInit {
   protected filteredTags: Tag[] = [];
+  protected searchText: string = '';
   @Input() selectedProjects: Project[] = [];
   private subscriptions: Subscription = new Subscription();
   protected tags: Tag[] = [];
@@ -104,6 +105,7 @@ export class ApplyTagsButtonComponent implements OnInit {
   }
 
   protected filterTags(searchText: string): void {
+    this.searchText = searchText;
     this.filteredTags = this.tags.filter((tag: Tag) =>
       tag.text.toLowerCase().includes(searchText.trim().toLowerCase())
     );
@@ -113,5 +115,9 @@ export class ApplyTagsButtonComponent implements OnInit {
     this.dialog.open(ManageTagsDialogComponent, {
       panelClass: 'dialog-md'
     });
+  }
+
+  protected menuClosed(): void {
+    this.searchText = '';
   }
 }
