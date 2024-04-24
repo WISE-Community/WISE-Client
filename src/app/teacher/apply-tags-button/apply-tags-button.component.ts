@@ -116,8 +116,4 @@ export class ApplyTagsButtonComponent implements OnInit {
       panelClass: 'dialog-md'
     });
   }
-
-  protected menuClosed(): void {
-    this.searchText = '';
-  }
 }

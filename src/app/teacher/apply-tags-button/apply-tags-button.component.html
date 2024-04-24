@@ -7,7 +7,7 @@
 >
   <mat-icon>sell</mat-icon>
 </button>
-<mat-menu #applyTagsMenu (closed)="menuClosed()">
+<mat-menu #applyTagsMenu (closed)="searchText = ''">
   <div class="menu-info secondary-text" (click)="$event.stopPropagation()" i18n>Apply tags</div>
   <app-search-bar [value]="searchText" (update)="filterTags($event)"></app-search-bar>
   <div *ngFor="let tag of filteredTags" (click)="$event.stopPropagation()" mat-menu-item>
