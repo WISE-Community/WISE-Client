@@ -8,15 +8,22 @@ import { SelectStepAndComponentComponent } from './select-step-and-component.com
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatSelectHarness } from '@angular/material/select/testing';
+import { SelectStepAndComponentHarness } from './select-step-and-component.harness';
+import { SelectStepComponent } from '../select-step/select-step.component';
 
 let component: SelectStepAndComponentComponent;
 const componentId1 = 'component1';
 const componentId2 = 'component2';
 const componentId3 = 'component3';
 let fixture: ComponentFixture<SelectStepAndComponentComponent>;
+let harness: SelectStepAndComponentHarness;
 let loader: HarnessLoader;
 const nodeId1 = 'node1';
 const nodeId2 = 'node2';
+const nodeIds = [nodeId1, nodeId2];
+const nodeTitle1 = '1.1: First Step';
+const nodeTitle2 = '1.2: Second Step';
+let projectService: ProjectService;
 
 describe('SelectStepAndComponentComponent', () => {
   beforeEach(async () => {
@@ -25,19 +32,32 @@ describe('SelectStepAndComponentComponent', () => {
         BrowserAnimationsModule,
         HttpClientTestingModule,
         SelectStepAndComponentComponent,
+        SelectStepComponent,
         StudentTeacherCommonServicesModule
-      ]
+      ],
+      providers: [ProjectService]
     }).compileComponents();
     fixture = TestBed.createComponent(SelectStepAndComponentComponent);
     loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
     component.referenceComponent = new ReferenceComponent(null, null);
     component.allowedComponentTypes = ['OpenResponse'];
-    spyOn(TestBed.inject(ProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
-      nodeId1,
-      nodeId2
-    ]);
+    projectService = TestBed.inject(ProjectService);
+    spyOn(projectService, 'getStepNodeIds').and.returnValue(nodeIds);
+    spyOn(projectService, 'getFlattenedProjectAsNodeIds').and.returnValue(nodeIds);
+    spyOn(projectService, 'getNodePositionAndTitle').and.callFake((nodeId: string) => {
+      switch (nodeId) {
+        case nodeId1:
+          return nodeTitle1;
+        case nodeId2:
+          return nodeTitle2;
+      }
+    });
     fixture.detectChanges();
+    harness = await TestbedHarnessEnvironment.harnessForFixture(
+      fixture,
+      SelectStepAndComponentHarness
+    );
   });
   selectComponent();
   stepChanged();
@@ -61,18 +81,18 @@ function selectComponent() {
 
 function stepChanged() {
   describe('stepChanged()', () => {
-    it('should handle step changed when there are no allowed components', () => {
-      setComponentsAndCallStepChanged('Draw', 'Graph', 'Table');
+    it('should handle step changed when there are no allowed components', async () => {
+      await setComponentsAndCallStepChanged('Draw', 'Graph', 'Table');
       expectReferenceComponentValues(nodeId1, null);
     });
 
-    it('should handle step changed when there is one allowed component', () => {
-      setComponentsAndCallStepChanged('Draw', 'OpenResponse', 'Table');
+    it('should handle step changed when there is one allowed component', async () => {
+      await setComponentsAndCallStepChanged('Draw', 'OpenResponse', 'Table');
       expectReferenceComponentValues(nodeId1, componentId2);
     });
 
-    it('should handle step changed when there are multiple allowed components', () => {
-      setComponentsAndCallStepChanged('Draw', 'OpenResponse', 'OpenResponse');
+    it('should handle step changed when there are multiple allowed components', async () => {
+      await setComponentsAndCallStepChanged('Draw', 'OpenResponse', 'OpenResponse');
       expectReferenceComponentValues(nodeId1, null);
     });
   });
@@ -98,14 +118,16 @@ function setUpGetComponentsSpy(components: any[]): void {
   spyOn(TestBed.inject(ProjectService), 'getComponents').and.returnValue(components);
 }
 
-function setComponentsAndCallStepChanged(
+async function setComponentsAndCallStepChanged(
   componentType1: string,
   componentType2: string,
   componentType3: string
-): void {
+): Promise<void> {
   setUpThreeComponentsSpy(componentType1, componentType2, componentType3);
-  component.referenceComponent.nodeId = nodeId1;
-  component.stepChanged(nodeId1);
+  const selectStepHarness = await harness.getSelectStep();
+  const select = await selectStepHarness.getSelect();
+  await select.open();
+  await select.clickOptions({ text: nodeTitle1 });
 }
 
 function expectReferenceComponentValues(nodeId: string, componentId: string): void {
