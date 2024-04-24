@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { Choice } from '../../components/match/choice';
 
 @Component({
   selector: 'add-branch',
@@ -63,6 +64,7 @@ export class AddBranchComponent {
   });
   protected nodeIds: string[];
   protected nodeIdToSelectable: { [key: string]: boolean } = {};
+  protected pathFormControls: FormControl[] = [];
   private targetId: string;
 
   constructor(private fb: FormBuilder, private projectService: TeacherProjectService) {}
@@ -70,9 +72,14 @@ export class AddBranchComponent {
   ngOnInit(): void {
     this.targetId = history.state.targetId;
     this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);
+    this.formGroup.controls['pathCount'].valueChanges.subscribe(() => {
+      this.updatePathParams();
+    });
     this.formGroup.controls['criteria'].valueChanges.subscribe((criteria: string) => {
       if (this.criteriaRequiresAdditionalParams(criteria)) {
-        this.updateAdditionalParams();
+        this.updateStepAndComponentParams();
+        this.clearPathParams();
+        this.updatePathParams();
       } else {
         this.removeAdditionalParams();
       }
@@ -83,9 +90,9 @@ export class AddBranchComponent {
     return criteria === this.SCORE || criteria === this.CHOICE_CHOSEN;
   }
 
-  private updateAdditionalParams(): void {
-    this.initializeNodeIdSelector();
+  private updateStepAndComponentParams(): void {
     this.initializeComponentIdSelector();
+    this.initializeNodeIdSelector();
     this.updateNodeIdSelector();
     this.updateComponentIdSelector();
   }
@@ -95,7 +102,9 @@ export class AddBranchComponent {
       this.formGroup.addControl('nodeId', new FormControl('', [Validators.required]));
       this.formGroup.controls['nodeId'].valueChanges.subscribe((nodeId: string) => {
         this.updateSelectableComponents(nodeId);
+        this.setComponentId('');
         this.tryAutoSelectComponentId();
+        this.tryAutoSelectPathParamValues();
       });
       if (this.getNodeId() === '') {
         this.formGroup.controls['nodeId'].setValue(this.targetId);
@@ -106,6 +115,10 @@ export class AddBranchComponent {
   private initializeComponentIdSelector(): void {
     if (this.formGroup.controls['componentId'] == null) {
       this.formGroup.addControl('componentId', new FormControl('', [Validators.required]));
+      this.formGroup.controls['componentId'].valueChanges.subscribe(() => {
+        this.clearPathParams();
+        this.tryAutoSelectPathParamValues();
+      });
     }
   }
 
@@ -123,7 +136,7 @@ export class AddBranchComponent {
       !this.components?.some((component) => component.id === componentId) ||
       !this.componentIdToSelectable[componentId]
     ) {
-      this.formGroup.controls['componentId'].setValue('');
+      this.setComponentId('');
     }
     this.tryAutoSelectComponentId();
   }
@@ -165,7 +178,7 @@ export class AddBranchComponent {
       this.projectService.componentHasWork(component)
     ).length;
     if (numWorkComponents === 1) {
-      this.formGroup.controls['componentId'].setValue(
+      this.setComponentId(
         this.components.find((component) => this.projectService.componentHasWork(component)).id
       );
     }
@@ -176,15 +189,75 @@ export class AddBranchComponent {
       (component) => component.type === 'MultipleChoice'
     ).length;
     if (numMultipleChoice === 1) {
-      this.formGroup.controls['componentId'].setValue(
+      this.setComponentId(
         this.components.find((component) => component.type === 'MultipleChoice').id
       );
+    }
+  }
+
+  private updatePathParams(): void {
+    this.updateNumPathFormControls();
+    this.tryAutoSelectPathParamValues();
+  }
+
+  private updateNumPathFormControls(): void {
+    if (this.criteriaRequiresAdditionalParams(this.getCriteria())) {
+      if (this.pathFormControls.length < this.getPathCount()) {
+        this.increasePaths();
+      } else if (this.pathFormControls.length > this.getPathCount()) {
+        this.decreasePaths();
+      }
+    }
+  }
+
+  private tryAutoSelectPathParamValues(): void {
+    if (this.getCriteria() === this.CHOICE_CHOSEN) {
+      this.clearPathParams();
+      this.autoFillChoiceChosenValues();
+    }
+  }
+
+  private increasePaths(): void {
+    for (let i = this.pathFormControls.length; i < this.getPathCount(); i++) {
+      const pathFormControl = new FormControl('', [Validators.required]);
+      this.formGroup.addControl(`path${i + 1}`, pathFormControl);
+      this.pathFormControls.push(pathFormControl);
+    }
+  }
+
+  private decreasePaths(): void {
+    for (let i = this.pathFormControls.length; i > this.getPathCount(); i--) {
+      this.formGroup.removeControl(`path${i}`);
+      this.pathFormControls.pop();
+    }
+  }
+
+  private clearPathParams(): void {
+    for (let i = 0; i < this.pathFormControls.length; i++) {
+      this.pathFormControls[i].setValue('');
+    }
+  }
+
+  private autoFillChoiceChosenValues(): void {
+    const componentId = this.getComponentId();
+    if (componentId !== '') {
+      const component = this.components.find((component) => component.id === componentId);
+      const choiceIds = component.choices.map((choice: Choice) => choice.id);
+      for (let i = 0; i < this.pathFormControls.length; i++) {
+        if (choiceIds[i] != null) {
+          this.pathFormControls[i].setValue(choiceIds[i]);
+        }
+      }
     }
   }
 
   private removeAdditionalParams(): void {
     this.formGroup.removeControl('nodeId');
     this.formGroup.removeControl('componentId');
+    for (let i = 0; i < this.pathFormControls.length; i++) {
+      this.formGroup.removeControl(`path${i + 1}`);
+    }
+    this.pathFormControls = [];
   }
 
   private getPathCount(): number {
@@ -201,6 +274,10 @@ export class AddBranchComponent {
 
   private getComponentId(): string {
     return this.formGroup.get('componentId')?.value;
+  }
+
+  private setComponentId(componentId: string): void {
+    this.formGroup.get('componentId').setValue(componentId);
   }
 
   protected getNodePositionById(nodeId: string): string {
@@ -221,6 +298,12 @@ export class AddBranchComponent {
     data.criteria = this.getCriteria();
     data.nodeId = this.getNodeId();
     data.componentId = this.getComponentId();
+    if (this.pathFormControls.length > 0) {
+      data.paths = [];
+      for (let pathFormControl of this.pathFormControls) {
+        data.paths.push(pathFormControl.value);
+      }
+    }
     alert(JSON.stringify(data, null, 2));
   }
 }
