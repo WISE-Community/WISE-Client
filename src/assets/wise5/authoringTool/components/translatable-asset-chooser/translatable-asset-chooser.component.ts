@@ -19,6 +19,9 @@ import { TeacherProjectTranslationService } from '../../../services/teacherProje
 })
 export class TranslatableAssetChooserComponent extends AbstractTranslatableFieldComponent {
   @Input() tooltip: String = $localize`Choose image`;
+  @Input() processAsset: (value: string) => string = (value) => {
+    return value;
+  };
 
   constructor(
     private dialog: MatDialog,
@@ -34,11 +37,12 @@ export class TranslatableAssetChooserComponent extends AbstractTranslatableField
       .afterClosed()
       .pipe(filter((data) => data != null))
       .subscribe(({ assetItem }) => {
+        const value = this.processAsset(assetItem.fileName);
         if (this.showTranslationInput()) {
-          this.translationTextChanged.next(assetItem.fileName);
+          this.translationTextChanged.next(value);
         } else {
-          this.content[this.key] = assetItem.fileName;
-          this.defaultLanguageTextChanged.next(assetItem.fileName);
+          this.content[this.key] = value;
+          this.defaultLanguageTextChanged.next(value);
         }
       });
   }

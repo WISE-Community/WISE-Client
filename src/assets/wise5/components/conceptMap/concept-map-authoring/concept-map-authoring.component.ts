@@ -118,10 +118,7 @@ export class ConceptMapAuthoring extends AbstractComponentAuthoring {
   assetSelected(args: any): void {
     super.assetSelected(args);
     const fileName = args.assetItem.fileName;
-    if (args.target === 'background') {
-      this.componentContent.background = fileName;
-      this.componentChanged();
-    } else if (args.target != null && args.target.indexOf('node') == 0) {
+    if (args.target != null && args.target.indexOf('node') == 0) {
       const node = this.getNodeById(args.target);
       node.fileName = fileName;
       this.componentChanged();

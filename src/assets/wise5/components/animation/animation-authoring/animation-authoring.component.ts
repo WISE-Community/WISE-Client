@@ -235,21 +235,6 @@ export class AnimationAuthoring extends AbstractComponentAuthoring {
     authoredObject.dataSource.xColumnIndex = 1;
   }
 
-  /**
-   * @param {string} targetString Can be 'image', 'imageMovingLeft', or 'imageMovingRight'.
-   * @param {object} authoredObject
-   * @returns {object}
-   */
-  createOpenAssetChooserParamsObject(targetString: string, authoredObject: any): any {
-    return {
-      isPopup: true,
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      target: targetString,
-      targetObject: authoredObject
-    };
-  }
-
   authoredObjectTypeChanged(authoredObject: any): void {
     if (authoredObject.type === 'image') {
       this.removeTextFromAuthoredObject(authoredObject);

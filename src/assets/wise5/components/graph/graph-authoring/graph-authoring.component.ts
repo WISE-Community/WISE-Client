@@ -209,14 +209,6 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
     this.componentChanged();
   }
 
-  assetSelected({ nodeId, componentId, assetItem, target, targetObject }): void {
-    super.assetSelected({ nodeId, componentId, assetItem, target });
-    if (target === 'background') {
-      this.componentContent.backgroundImage = assetItem.fileName;
-      this.componentChanged();
-    }
-  }
-
   addXAxisCategory(): void {
     this.componentContent.xAxis.categories.push('');
     this.componentChanged();
@@ -562,15 +554,5 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
 
   customTrackBy(index: number): number {
     return index;
-  }
-
-  chooseBackground(): void {
-    new AssetChooser(this.dialog, this.nodeId, this.componentId)
-      .open('background')
-      .afterClosed()
-      .pipe(filter((data) => data != null))
-      .subscribe((data: any) => {
-        return this.assetSelected(data);
-      });
   }
 }

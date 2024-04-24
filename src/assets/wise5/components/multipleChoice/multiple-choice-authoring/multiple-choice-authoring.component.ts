@@ -112,21 +112,7 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
     this.componentChanged();
   }
 
-  chooseChoiceAsset(choice: any): void {
-    new AssetChooser(this.dialog, this.nodeId, this.componentId)
-      .open('choice', choice)
-      .afterClosed()
-      .pipe(filter((data) => data != null))
-      .subscribe((data: any) => {
-        return this.assetSelected(data);
-      });
-  }
-
-  assetSelected({ nodeId, componentId, assetItem, target, targetObject }): void {
-    super.assetSelected({ nodeId, componentId, assetItem, target });
-    if (target === 'choice') {
-      targetObject.text = `<img src="${assetItem.fileName}"/>`;
-      this.componentChanged();
-    }
+  processSelectedAsset(value: string): string {
+    return `<img src="${value}" alt="${value}" />`;
   }
 }

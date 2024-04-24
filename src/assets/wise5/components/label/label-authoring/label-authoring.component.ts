@@ -72,15 +72,6 @@ export class LabelAuthoring extends AbstractComponentAuthoring {
     }
   }
 
-  assetSelected({ nodeId, componentId, assetItem, target }): void {
-    super.assetSelected({ nodeId, componentId, assetItem, target });
-    const fileName = assetItem.fileName;
-    if (target === 'background') {
-      this.componentContent.backgroundImage = fileName;
-      this.componentChanged();
-    }
-  }
-
   saveStarterState(starterState: any): void {
     this.componentContent.labels = starterState;
     this.componentChanged();
@@ -103,15 +94,5 @@ export class LabelAuthoring extends AbstractComponentAuthoring {
 
   openColorViewer(): void {
     window.open('http://www.javascripter.net/faq/colornam.htm');
-  }
-
-  chooseBackground(): void {
-    new AssetChooser(this.dialog, this.nodeId, this.componentId)
-      .open('background')
-      .afterClosed()
-      .pipe(filter((data) => data != null))
-      .subscribe((data: any) => {
-        return this.assetSelected(data);
-      });
   }
 }
