@@ -13,6 +13,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ManageTagsDialogComponent } from '../manage-tags-dialog/manage-tags-dialog.component';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { SelectAllItemsCheckboxComponent } from '../../modules/library/select-all-items-checkbox/select-all-items-checkbox.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { SharedModule } from '../../modules/shared/shared.module';
 
 @NgModule({
   declarations: [ApplyTagsButtonComponent],
@@ -25,10 +28,13 @@ import { SelectAllItemsCheckboxComponent } from '../../modules/library/select-al
     MatButtonModule,
     MatCheckboxModule,
     MatDividerModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatMenuModule,
     MatTooltipModule,
     SelectAllItemsCheckboxComponent,
+    SharedModule,
     StudentTeacherCommonServicesModule
   ],
   providers: [ProjectTagService]
