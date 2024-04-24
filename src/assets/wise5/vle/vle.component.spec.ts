@@ -12,7 +12,6 @@ import { TopBarComponent } from '../../../app/student/top-bar/top-bar.component'
 import { NodeComponent } from './node/node.component';
 import { NotebookNotesComponent } from '../../../app/notebook/notebook-notes/notebook-notes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StudentAccountMenuComponent } from './student-account-menu/student-account-menu.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
@@ -53,7 +52,8 @@ describe('VLEComponent', () => {
         MatSelectModule,
         MatSidenavModule,
         RouterTestingModule,
-        StudentTeacherCommonServicesModule
+        StudentTeacherCommonServicesModule,
+        TopBarComponent
       ],
       declarations: [
         NavigationComponent,
@@ -63,8 +63,6 @@ describe('VLEComponent', () => {
         NotebookNotesComponent,
         SafeUrl,
         StepToolsComponent,
-        StudentAccountMenuComponent,
-        TopBarComponent,
         VLEComponent
       ],
       providers: [

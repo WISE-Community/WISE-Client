@@ -23,7 +23,6 @@ import { StudentTeacherCommonModule } from '../../student-teacher-common.module'
 import { ChooseBranchPathDialogComponent } from '../../preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
 import { DataService } from '../../services/data.service';
 import { StudentComponentModule } from '../student.component.module';
-import { TopBarModule } from '../top-bar/top-bar.module';
 import { StudentVLERoutingModule } from './student-vle-routing.module';
 import { PauseScreenService } from '../../../assets/wise5/services/pauseScreenService';
 import { StudentNotificationService } from '../../../assets/wise5/services/studentNotificationService';
@@ -34,6 +33,7 @@ import { NodeNavigationComponent } from '../../../assets/wise5/directives/node-n
 import { GroupTabsComponent } from '../../../assets/wise5/directives/group-tabs/group-tabs.component';
 import { StudentPeerGroupService } from '../../../assets/wise5/services/studentPeerGroupService';
 import { PeerGroupService } from '../../../assets/wise5/services/peerGroupService';
+import { TopBarComponent } from '../top-bar/top-bar.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +60,7 @@ import { PeerGroupService } from '../../../assets/wise5/services/peerGroupServic
     StudentComponentModule,
     StudentVLERoutingModule,
     SummaryDisplayModule,
-    TopBarModule
+    TopBarComponent
   ],
   providers: [
     InitializeVLEService,
