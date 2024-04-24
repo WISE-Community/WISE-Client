@@ -7,8 +7,6 @@ import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MatchService } from '../matchService';
-import { MatDialog } from '@angular/material/dialog';
-import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
@@ -22,7 +20,6 @@ export class MatchAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected configService: ConfigService,
-    private dialog: MatDialog,
     private matchService: MatchService,
     protected nodeService: TeacherNodeService,
     protected projectAssetService: ProjectAssetService,

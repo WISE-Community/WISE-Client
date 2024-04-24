@@ -7,9 +7,6 @@ import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { GraphService } from '../graphService';
 import { isMultipleYAxes } from '../util';
-import { MatDialog } from '@angular/material/dialog';
-import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
-import { filter } from 'rxjs/operators';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
@@ -132,7 +129,6 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
-    private dialog: MatDialog,
     private GraphService: GraphService,
     protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,

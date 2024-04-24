@@ -7,8 +7,6 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { MatDialog } from '@angular/material/dialog';
-import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
@@ -22,7 +20,6 @@ export class LabelAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
-    private dialog: MatDialog,
     protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
