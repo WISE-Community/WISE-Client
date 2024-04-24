@@ -32,9 +32,9 @@ describe('SelectStepAndComponentComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
+        SelectStepAndComponentComponent,
         StudentTeacherCommonServicesModule
-      ],
-      declarations: [SelectStepAndComponentComponent]
+      ]
     }).compileComponents();
     fixture = TestBed.createComponent(SelectStepAndComponentComponent);
     loader = TestbedHarnessEnvironment.loader(fixture);

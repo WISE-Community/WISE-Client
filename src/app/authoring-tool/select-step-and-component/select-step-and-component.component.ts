@@ -1,11 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { ReferenceComponent } from '../../domain/referenceComponent';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'select-step-and-component',
   templateUrl: './select-step-and-component.component.html',
-  styleUrls: ['./select-step-and-component.component.scss']
+  styleUrls: ['./select-step-and-component.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule]
 })
 export class SelectStepAndComponentComponent implements OnInit {
   @Input() allowedComponentTypes: string[] = [];
