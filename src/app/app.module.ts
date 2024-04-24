@@ -14,7 +14,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { ConfigService } from './services/config.service';
 import { HeaderModule } from './modules/header/header.module';
 import { HomeModule } from './home/home.module';
-import { FooterModule } from './modules/footer/footer.module';
 import { StudentService } from './student/student.service';
 import { UserService } from './services/user.service';
 import { TeacherService } from './teacher/teacher.service';
@@ -24,6 +23,7 @@ import { AnnouncementDialogComponent } from './announcement/announcement.compone
 import { TrackScrollDirective } from './track-scroll.directive';
 import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY, RECAPTCHA_BASE_URL } from 'ng-recaptcha';
 import { ArchiveProjectService } from './services/archive-project.service';
+import { FooterComponent } from './modules/footer/footer.component';
 
 export function initialize(
   configService: ConfigService,
@@ -55,7 +55,7 @@ export function initialize(
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    FooterModule,
+    FooterComponent,
     HeaderModule,
     HomeModule,
     MobileMenuModule,
