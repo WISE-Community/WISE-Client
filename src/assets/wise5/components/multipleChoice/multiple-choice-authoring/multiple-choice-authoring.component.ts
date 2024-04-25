@@ -6,8 +6,6 @@ import { AbstractComponentAuthoring } from '../../../authoringTool/components/Ab
 import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { MatDialog } from '@angular/material/dialog';
-import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
@@ -22,7 +20,6 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
-    private dialog: MatDialog,
     protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
@@ -112,21 +109,7 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
     this.componentChanged();
   }
 
-  chooseChoiceAsset(choice: any): void {
-    new AssetChooser(this.dialog, this.nodeId, this.componentId)
-      .open('choice', choice)
-      .afterClosed()
-      .pipe(filter((data) => data != null))
-      .subscribe((data: any) => {
-        return this.assetSelected(data);
-      });
-  }
-
-  assetSelected({ nodeId, componentId, assetItem, target, targetObject }): void {
-    super.assetSelected({ nodeId, componentId, assetItem, target });
-    if (target === 'choice') {
-      targetObject.text = `<img src="${assetItem.fileName}"/>`;
-      this.componentChanged();
-    }
+  processSelectedAsset(value: string): string {
+    return `<img src="${value}" alt="${value}" />`;
   }
 }

@@ -22,7 +22,6 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EmbeddedService } from '../embeddedService';
 import { EmbeddedAuthoring } from './embedded-authoring.component';
 import { ComponentAuthoringModule } from '../../component-authoring.module';
-import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
 
 @NgModule({
   declarations: [EmbeddedAuthoring, EditComponentPrompt, AuthorUrlParametersComponent],
@@ -35,8 +34,7 @@ import { TranslatableAssetChooserComponent } from '../../../authoringTool/compon
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatRadioModule,
-    TranslatableAssetChooserComponent
+    MatRadioModule
   ],
   providers: [
     AnnotationService,

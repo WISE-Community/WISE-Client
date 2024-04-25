@@ -158,10 +158,7 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
   assetSelected({ nodeId, componentId, assetItem, target, targetObject }): void {
     super.assetSelected({ nodeId, componentId, assetItem, target });
     const fileName = assetItem.fileName;
-    if (target === 'background') {
-      this.componentContent.background = fileName;
-      this.updateStarterDrawDataBackgroundAndSave();
-    } else if (target === 'stamp') {
+    if (target === 'stamp') {
       const stampIndex = targetObject;
       this.setStampImage(stampIndex, fileName);
       this.updateAuthoringComponentContentStampsAndSave();
@@ -271,15 +268,5 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
       stampStrings.push(stampObject.image);
     }
     return stampStrings;
-  }
-
-  chooseBackground(): void {
-    new AssetChooser(this.dialog, this.nodeId, this.componentId)
-      .open('background')
-      .afterClosed()
-      .pipe(filter((data) => data != null))
-      .subscribe((data: any) => {
-        return this.assetSelected(data);
-      });
   }
 }

@@ -1,27 +1,22 @@
-<div fxLayout="column" fxLayoutGap="16px">
+<div fxLayout="column" fxLayoutGap="8px">
   <edit-component-prompt
     [componentContent]="componentContent"
     (promptChangedEvent)="promptChanged($event)"
   ></edit-component-prompt>
-  <div fxLayoutGap="16px">
-    <mat-form-field class="background">
-      <mat-label i18n>Background Image (Optional)</mat-label>
-      <input
-        matInput
-        [(ngModel)]="componentContent.background"
-        (ngModelChange)="inputChange.next($event)"
-      />
-    </mat-form-field>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="chooseAsset('background')"
-      matTooltip="Choose an Image"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>insert_photo</mat-icon>
-    </button>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <translatable-input
+      [content]="componentContent"
+      key="background"
+      label="Background Image (Optional)"
+      i18n-label
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+      class="background"
+    />
+    <translatable-asset-chooser
+      [content]="componentContent"
+      key="background"
+      (defaultLanguageTextChanged)="componentChanged()"
+    />
   </div>
   <div>
     <mat-checkbox
@@ -113,26 +108,19 @@
           fxFlex.sm="60"
           fxFlex.gt-sm="35"
         >
-          <mat-form-field fxFlex>
-            <mat-label i18n>Image</mat-label>
-            <input
-              matInput
-              [(ngModel)]="node.fileName"
-              (ngModelChange)="inputChange.next($event)"
-            />
-          </mat-form-field>
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="chooseAsset(node.id)"
-            matTooltip="Choose an Image"
-            matTooltipPosition="above"
-            i18n-matTooltip
-            aria-label="Choose an Image"
-            i18n-aria-label
-          >
-            <mat-icon>insert_photo</mat-icon>
-          </button>
+          <translatable-input
+            [content]="node"
+            key="fileName"
+            label="Image"
+            i18n-label
+            (defaultLanguageTextChanged)="inputChange.next($event)"
+            class="background"
+          />
+          <translatable-asset-chooser
+            [content]="node"
+            key="fileName"
+            (defaultLanguageTextChanged)="componentChanged()"
+          />
         </div>
         <div class="content-item-setting" fxLayoutGap="8px">
           <mat-form-field class="node-dimension">

@@ -7,8 +7,6 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { MatDialog } from '@angular/material/dialog';
-import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
@@ -22,7 +20,6 @@ export class LabelAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
-    private dialog: MatDialog,
     protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
@@ -72,15 +69,6 @@ export class LabelAuthoring extends AbstractComponentAuthoring {
     }
   }
 
-  assetSelected({ nodeId, componentId, assetItem, target }): void {
-    super.assetSelected({ nodeId, componentId, assetItem, target });
-    const fileName = assetItem.fileName;
-    if (target === 'background') {
-      this.componentContent.backgroundImage = fileName;
-      this.componentChanged();
-    }
-  }
-
   saveStarterState(starterState: any): void {
     this.componentContent.labels = starterState;
     this.componentChanged();
@@ -103,15 +91,5 @@ export class LabelAuthoring extends AbstractComponentAuthoring {
 
   openColorViewer(): void {
     window.open('http://www.javascripter.net/faq/colornam.htm');
-  }
-
-  chooseBackground(): void {
-    new AssetChooser(this.dialog, this.nodeId, this.componentId)
-      .open('background')
-      .afterClosed()
-      .pipe(filter((data) => data != null))
-      .subscribe((data: any) => {
-        return this.assetSelected(data);
-      });
   }
 }

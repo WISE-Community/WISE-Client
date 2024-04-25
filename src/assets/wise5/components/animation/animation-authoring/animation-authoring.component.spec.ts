@@ -14,7 +14,6 @@ import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { AnimationAuthoring } from './animation-authoring.component';
-import { MatDialogModule } from '@angular/material/dialog';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { ComponentAuthoringModule } from '../../component-authoring.module';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
@@ -32,7 +31,6 @@ describe('AnimationAuthoring', () => {
         ComponentAuthoringModule,
         FormsModule,
         HttpClientTestingModule,
-        MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,

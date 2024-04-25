@@ -6,9 +6,6 @@ import { AbstractComponentAuthoring } from '../../../authoringTool/components/Ab
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapService } from '../conceptMapService';
-import { MatDialog } from '@angular/material/dialog';
-import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
-import { filter } from 'rxjs/operators';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
@@ -23,7 +20,6 @@ export class ConceptMapAuthoring extends AbstractComponentAuthoring {
   constructor(
     private ConceptMapService: ConceptMapService,
     protected ConfigService: ConfigService,
-    private dialog: MatDialog,
     protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
@@ -113,28 +109,5 @@ export class ConceptMapAuthoring extends AbstractComponentAuthoring {
   deleteStarterState(): void {
     this.componentContent.starterConceptMap = null;
     this.componentChanged();
-  }
-
-  assetSelected(args: any): void {
-    super.assetSelected(args);
-    const fileName = args.assetItem.fileName;
-    if (args.target === 'background') {
-      this.componentContent.background = fileName;
-      this.componentChanged();
-    } else if (args.target != null && args.target.indexOf('node') == 0) {
-      const node = this.getNodeById(args.target);
-      node.fileName = fileName;
-      this.componentChanged();
-    }
-  }
-
-  chooseAsset(target: string): void {
-    new AssetChooser(this.dialog, this.nodeId, this.componentId)
-      .open(target)
-      .afterClosed()
-      .pipe(filter((data) => data != null))
-      .subscribe((data: any) => {
-        return this.assetSelected(data);
-      });
   }
 }

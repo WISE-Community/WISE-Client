@@ -73,19 +73,12 @@
       (defaultLanguageTextChanged)="inputChange.next($event)"
       class="name"
     />
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      (click)="chooseChoiceAsset(choice)"
-      matTooltip="Choose an Image"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Choose an Image"
-      i18n-aria-label
-    >
-      <mat-icon>insert_photo</mat-icon>
-    </button>
+    <translatable-asset-chooser
+      [content]="choice"
+      key="value"
+      [processAsset]="processSelectedAsset"
+      (defaultLanguageTextChanged)="componentChanged()"
+    />
     <button
       mat-raised-button
       color="primary"
@@ -174,21 +167,13 @@
       i18n-placeholder
       (defaultLanguageTextChanged)="inputChange.next($event)"
       class="name"
-    >
-    </translatable-input>
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      (click)="chooseBucketAsset(bucket)"
-      matTooltip="Choose an Image"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Choose an Image"
-      i18n-aria-label
-    >
-      <mat-icon>insert_photo</mat-icon>
-    </button>
+    />
+    <translatable-asset-chooser
+      [content]="bucket"
+      key="value"
+      [processAsset]="processSelectedAsset"
+      (defaultLanguageTextChanged)="componentChanged()"
+    />
     <button
       mat-raised-button
       color="primary"

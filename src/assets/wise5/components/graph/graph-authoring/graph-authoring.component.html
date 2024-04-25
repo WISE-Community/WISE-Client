@@ -301,26 +301,19 @@
   </div>
 </ng-container>
 <div fxLayout="row" fxLayoutAlign="start center">
-  <mat-form-field class="background">
-    <mat-label i18n>Background Image (Optional)</mat-label>
-    <input
-      matInput
-      [(ngModel)]="componentContent.backgroundImage"
-      (ngModelChange)="inputChange.next($event)"
-    />
-  </mat-form-field>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="chooseBackground()"
-    matTooltip="Choose an Image"
-    matTooltipPosition="above"
-    i18n-matTooltip
-    aria-label="Choose an Image"
-    i18n-aria-label
-  >
-    <mat-icon>insert_photo</mat-icon>
-  </button>
+  <translatable-input
+    [content]="componentContent"
+    key="backgroundImage"
+    label="Background Image (Optional)"
+    i18n-label
+    (defaultLanguageTextChanged)="inputChange.next($event)"
+    class="background"
+  />
+  <translatable-asset-chooser
+    [content]="componentContent"
+    key="backgroundImage"
+    (defaultLanguageTextChanged)="componentChanged()"
+  />
 </div>
 <mat-form-field>
   <mat-label i18n>Round Values To</mat-label>
