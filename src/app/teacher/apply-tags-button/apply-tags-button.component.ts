@@ -6,12 +6,31 @@ import { ManageTagsDialogComponent } from '../manage-tags-dialog/manage-tags-dia
 import { Subscription } from 'rxjs';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { SharedModule } from '../../modules/shared/shared.module';
+import { MatDividerModule } from '@angular/material/divider';
+import { SelectAllItemsCheckboxComponent } from '../../modules/library/select-all-items-checkbox/select-all-items-checkbox.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'apply-tags-button',
   templateUrl: './apply-tags-button.component.html',
   styleUrls: ['./apply-tags-button.component.scss'],
-  providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }]
+  providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatMenuModule,
+    MatTooltipModule,
+    SelectAllItemsCheckboxComponent,
+    SharedModule
+  ]
 })
 export class ApplyTagsButtonComponent implements OnInit {
   protected filteredTags: Tag[] = [];
