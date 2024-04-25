@@ -24,9 +24,9 @@ describe('SelectPeerGroupingAuthoringComponent', () => {
     fixture = TestBed.createComponent(SelectPeerGroupingAuthoringComponent);
     component = fixture.componentInstance;
     peerGrouping1 = new PeerGrouping({ tag: tag1 });
-    spyOn(TestBed.inject(PeerGroupingAuthoringService), 'getPeerGroupings').and.returnValue([
+    spyOn(TestBed.inject(PeerGroupingAuthoringService), 'getPeerGrouping').and.returnValue(
       peerGrouping1
-    ]);
+    );
     fixture.detectChanges();
   });
 

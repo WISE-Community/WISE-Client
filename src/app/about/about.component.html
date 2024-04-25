@@ -274,7 +274,8 @@
       >
         <div
           class="content-block about__goal"
-          ngClass.gt-xs="about__goal--alt"
+          [ngClass]="{ 'about__goal--alt': false }"
+          [ngClass.gt-xs]="{ 'about__goal--alt': true }"
           fxFlex="100%"
           fxFlex.gt-xs="50%"
         >
@@ -288,7 +289,8 @@
         </div>
         <div
           class="content-block about__goal"
-          ngClass.xs="about__goal--alt"
+          [ngClass]="{ 'about__goal--alt': false }"
+          [ngClass.xs]="{ 'about__goal--alt': true }"
           fxFlex="100%"
           fxFlex.gt-xs="50%"
         >

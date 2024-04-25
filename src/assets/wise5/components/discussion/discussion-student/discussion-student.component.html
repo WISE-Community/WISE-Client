@@ -10,7 +10,12 @@
   >
   </component-annotations>
   <div fxLayout="row">
-    <div class="discussion-posts" ngClass.gt-sm="half-width" ngClass.lt-md="full-width">
+    <div
+      class="discussion-posts"
+      [ngClass]="{ 'half-width': false, 'full-width': false }"
+      [ngClass.gt-sm]="{ 'half-width': true, 'full-width': false }"
+      [ngClass.lt-md]="{ 'half-width': false, 'full-width': true }"
+    >
       <mat-card
         appearance="outlined"
         class="discussion-new discussion-post"
