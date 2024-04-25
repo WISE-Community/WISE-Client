@@ -168,13 +168,13 @@ import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiCha
     PeerChatAuthoringComponent,
     ShowGroupWorkAuthoringComponent,
     ShowMyWorkAuthoringComponent,
-    SelectStepAndComponentComponent,
     SummaryAuthoring,
     TableAuthoring,
     WiseLinkAuthoringDialogComponent
   ],
   imports: [
     ConstraintAuthoringModule,
+    SelectStepAndComponentComponent,
     StudentTeacherCommonModule,
     PeerGroupingAuthoringModule,
     WiseTinymceEditorModule
@@ -246,7 +246,6 @@ import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiCha
     PeerChatAuthoringComponent,
     ShowGroupWorkAuthoringComponent,
     ShowMyWorkAuthoringComponent,
-    SelectStepAndComponentComponent,
     SummaryAuthoring,
     TableAuthoring
   ]
