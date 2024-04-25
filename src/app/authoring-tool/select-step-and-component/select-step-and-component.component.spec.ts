@@ -1,9 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { ReferenceComponent } from '../../domain/referenceComponent';
@@ -27,11 +23,7 @@ describe('SelectStepAndComponentComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
-        FormsModule,
         HttpClientTestingModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
         SelectStepAndComponentComponent,
         StudentTeacherCommonServicesModule
       ]
