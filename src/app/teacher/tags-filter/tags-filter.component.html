@@ -1,0 +1,23 @@
+<mat-form-field>
+  <mat-label i18n>Tags</mat-label>
+  <mat-select
+    [(value)]="selectedTags"
+    (selectionChange)="tagsFilterChanged.emit(selectedTags)"
+    multiple
+  >
+    <mat-select-trigger i18n>{{ selectedTags.length }} Tag(s)</mat-select-trigger>
+    <app-search-bar [value]="searchText" (update)="filterTags($event)"></app-search-bar>
+    <mat-option *ngFor="let tag of filteredTags" [value]="tag" [ngStyle]="{ color: tag.color }">
+      {{ tag.text }}
+    </mat-option>
+    <mat-divider></mat-divider>
+    <button
+      mat-button
+      class="manage-tags-button"
+      (click)="manageTags(); $event.stopPropagation()"
+      i18n
+    >
+      Manage Tags
+    </button>
+  </mat-select>
+</mat-form-field>

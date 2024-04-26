@@ -1,10 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Project } from '../../domain/project';
 import { Tag } from '../../domain/tag';
-import { MatDialog } from '@angular/material/dialog';
-import { ManageTagsDialogComponent } from '../manage-tags-dialog/manage-tags-dialog.component';
-import { Subscription } from 'rxjs';
-import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +10,7 @@ import { SharedModule } from '../../modules/shared/shared.module';
 import { MatDividerModule } from '@angular/material/divider';
 import { SelectAllItemsCheckboxComponent } from '../../modules/library/select-all-items-checkbox/select-all-items-checkbox.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AbstractTagsMenuComponent } from '../abstract-tags-menu/abstract-tags-menu.component';
 
 @Component({
   selector: 'apply-tags-button',
@@ -32,32 +29,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SharedModule
   ]
 })
-export class ApplyTagsButtonComponent implements OnInit {
-  protected filteredTags: Tag[] = [];
-  protected searchText: string = '';
+export class ApplyTagsButtonComponent extends AbstractTagsMenuComponent {
   @Input() selectedProjects: Project[] = [];
-  private subscriptions: Subscription = new Subscription();
-  protected tags: Tag[] = [];
-
-  constructor(private dialog: MatDialog, private projectTagService: ProjectTagService) {}
-
-  ngOnInit(): void {
-    this.retrieveUserTags();
-    this.subscribeToTagUpdated();
-    this.subscribeToNewTag();
-    this.subscribeToTagDeleted();
-  }
 
   ngOnChanges(): void {
     this.updateAllTagsCheckedValues();
   }
 
-  private retrieveUserTags(): void {
-    this.projectTagService.retrieveUserTags().subscribe((tags: Tag[]) => {
-      this.tags = tags;
-      this.filteredTags = tags;
-      this.updateAllTagsCheckedValues();
-    });
+  protected afterRetrieveUserTags(): void {
+    this.updateAllTagsCheckedValues();
   }
 
   private updateAllTagsCheckedValues(): void {
@@ -66,43 +46,14 @@ export class ApplyTagsButtonComponent implements OnInit {
     }
   }
 
+  protected afterNewTag(tag: Tag): void {
+    this.updateTagCheckedValue(tag);
+  }
+
   private updateTagCheckedValue(tag: Tag): void {
     tag.numProjectsWithTag = this.selectedProjects.filter((project) =>
       project.tags.some((projectTag) => projectTag.id === tag.id)
     ).length;
-  }
-
-  private subscribeToTagUpdated(): void {
-    this.subscriptions.add(
-      this.projectTagService.tagUpdated$.subscribe((tagThatChanged: Tag) => {
-        const tag = this.tags.find((t: Tag) => t.id === tagThatChanged.id);
-        tag.text = tagThatChanged.text;
-        tag.color = tagThatChanged.color;
-        this.projectTagService.sortTags(this.tags);
-      })
-    );
-  }
-
-  private subscribeToNewTag(): void {
-    this.subscriptions.add(
-      this.projectTagService.newTag$.subscribe((tag: Tag) => {
-        this.tags.push(tag);
-        this.projectTagService.sortTags(this.tags);
-        this.updateTagCheckedValue(tag);
-      })
-    );
-  }
-
-  private subscribeToTagDeleted(): void {
-    this.subscriptions.add(
-      this.projectTagService.tagDeleted$.subscribe((deletedTag: Tag) => {
-        this.tags = this.tags.filter((tag: Tag) => tag.id !== deletedTag.id);
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
   }
 
   protected addTagToProjects(tag: Tag): void {
@@ -120,19 +71,6 @@ export class ApplyTagsButtonComponent implements OnInit {
         project.tags = project.tags.filter((projectTag: Tag) => projectTag.id !== tag.id);
       }
       this.updateTagCheckedValue(tag);
-    });
-  }
-
-  protected filterTags(searchText: string): void {
-    this.searchText = searchText;
-    this.filteredTags = this.tags.filter((tag: Tag) =>
-      tag.text.toLowerCase().includes(searchText.trim().toLowerCase())
-    );
-  }
-
-  protected manageTags(): void {
-    this.dialog.open(ManageTagsDialogComponent, {
-      panelClass: 'dialog-md'
     });
   }
 }
