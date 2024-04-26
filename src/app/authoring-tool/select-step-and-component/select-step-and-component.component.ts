@@ -5,21 +5,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SelectStepComponent } from '../select-step/select-step.component';
 
 @Component({
   selector: 'select-step-and-component',
   templateUrl: './select-step-and-component.component.html',
   styleUrls: ['./select-step-and-component.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule]
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule, SelectStepComponent]
 })
 export class SelectStepAndComponentComponent implements OnInit {
   @Input() allowedComponentTypes: string[] = [];
   @Output() componentChange: EventEmitter<ReferenceComponent> = new EventEmitter();
   protected components: any[] = [];
   protected componentToIsAllowed: Map<string, boolean> = new Map<string, boolean>();
-  protected nodeIds: string[] = [];
-  protected nodeToPositionAndTitle: Map<string, string> = new Map<string, string>();
   @Input() referenceComponent: ReferenceComponent;
   @Output() stepChange: EventEmitter<ReferenceComponent> = new EventEmitter();
   @Input() thisComponentId: string;
@@ -27,19 +26,11 @@ export class SelectStepAndComponentComponent implements OnInit {
   constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.nodeIds = this.projectService.getStepNodeIds();
-    this.calculateNodePositionAndTitles(this.nodeIds);
     if (this.referenceComponent.nodeId != null) {
       this.calculateComponents(this.referenceComponent.nodeId);
       if (this.referenceComponent.componentId == null) {
         this.automaticallySetComponentIfPossible(this.referenceComponent.nodeId);
       }
-    }
-  }
-
-  private calculateNodePositionAndTitles(nodeIds: string[]): void {
-    for (const nodeId of nodeIds) {
-      this.nodeToPositionAndTitle.set(nodeId, this.projectService.getNodePositionAndTitle(nodeId));
     }
   }
 
@@ -53,7 +44,8 @@ export class SelectStepAndComponentComponent implements OnInit {
     }
   }
 
-  stepChanged(nodeId: string): void {
+  protected stepChanged(nodeId: string): void {
+    this.referenceComponent.nodeId = nodeId;
     this.referenceComponent.componentId = null;
     this.automaticallySetComponentIfPossible(nodeId);
     this.calculateComponents(nodeId);

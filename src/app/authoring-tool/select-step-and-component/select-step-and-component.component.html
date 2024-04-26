@@ -1,11 +1,8 @@
-<mat-form-field class="step-select-form-field">
-  <mat-label i18n>Step</mat-label>
-  <mat-select [(ngModel)]="referenceComponent.nodeId" (ngModelChange)="stepChanged($event)">
-    <ng-container *ngFor="let nodeId of nodeIds">
-      <mat-option [value]="nodeId">{{ nodeToPositionAndTitle.get(nodeId) }}</mat-option>
-    </ng-container>
-  </mat-select>
-</mat-form-field>
+<select-step
+  class="step-select-form-field"
+  [nodeId]="referenceComponent.nodeId"
+  (stepChangedEvent)="stepChanged($event)"
+></select-step>
 <mat-form-field>
   <mat-label i18n>Component</mat-label>
   <mat-select [(ngModel)]="referenceComponent.componentId" (ngModelChange)="componentChanged()">
