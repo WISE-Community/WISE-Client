@@ -34,12 +34,14 @@ function removeComponent() {
       );
       spyOn(configService, 'getProjectId').and.returnValue('123');
       spyOn(configService, 'getConfigParam').and.returnValue('/123/project.json');
-      service.removeComponent({
-        id: 'abc',
-        type: 'OpenResponse',
-        prompt: 'hello',
-        'prompt.i18n': { id: 'xyz' }
-      } as ComponentContent);
+      service.removeComponents([
+        {
+          id: 'abc',
+          type: 'OpenResponse',
+          prompt: 'hello',
+          'prompt.i18n': { id: 'xyz' }
+        } as ComponentContent
+      ]);
       http.expectOne(`/123/translations.es.json`).flush({ xyz: {} });
       http.expectOne(`/123/translations.ja.json`).flush({ xyz: {} });
     });

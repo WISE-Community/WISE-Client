@@ -226,7 +226,7 @@ export class NodeAuthoringComponent implements OnInit {
 
   private removeTranslations(components: ComponentContent[]): void {
     if (this.projectService.getLocale().hasTranslations()) {
-      components.forEach((component) => this.removeTranslationsService.removeComponent(component));
+      this.removeTranslationsService.removeComponents(components);
     }
   }
 

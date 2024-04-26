@@ -18,9 +18,9 @@ export class RemoveTranslationsService extends ProjectTranslationService {
     super(configService, http, projectService);
   }
 
-  async removeComponent(componentElement: ComponentContent): Promise<void> {
+  async removeComponents(components: ComponentContent[]): Promise<void> {
     const allTranslations = await this.fetchAllTranslations();
-    const i18nKeys = this.getI18NKeys(componentElement);
+    const i18nKeys = components.flatMap((component) => this.getI18NKeys(component));
     const saveTranslationRequests: Observable<Object>[] = [];
     allTranslations.forEach((translations, language) => {
       i18nKeys.forEach((i18nKey) => delete translations[i18nKey]);
