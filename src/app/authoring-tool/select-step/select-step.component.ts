@@ -21,11 +21,7 @@ export class SelectStepComponent {
 
   ngOnInit(): void {
     this.nodeIds = this.projectService.getStepNodeIds();
-    this.calculateNodePositionAndTitles(this.nodeIds);
-  }
-
-  private calculateNodePositionAndTitles(nodeIds: string[]): void {
-    for (const nodeId of nodeIds) {
+    for (const nodeId of this.nodeIds) {
       this.nodeToPositionAndTitle.set(nodeId, this.projectService.getNodePositionAndTitle(nodeId));
     }
   }

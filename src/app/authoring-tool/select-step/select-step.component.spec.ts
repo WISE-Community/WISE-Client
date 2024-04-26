@@ -16,8 +16,7 @@ describe('SelectStepComponent', () => {
         HttpClientTestingModule,
         SelectStepComponent,
         StudentTeacherCommonServicesModule
-      ],
-      providers: [ProjectService]
+      ]
     });
     fixture = TestBed.createComponent(SelectStepComponent);
     component = fixture.componentInstance;

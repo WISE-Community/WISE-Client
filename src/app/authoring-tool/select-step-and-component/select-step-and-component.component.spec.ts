@@ -32,7 +32,6 @@ describe('SelectStepAndComponentComponent', () => {
         BrowserAnimationsModule,
         HttpClientTestingModule,
         SelectStepAndComponentComponent,
-        SelectStepComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [ProjectService]
