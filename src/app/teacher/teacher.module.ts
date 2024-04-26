@@ -42,7 +42,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SelectRunsControlsModule } from './select-runs-controls/select-runs-controls.module';
-import { ApplyTagsButtonModule } from './apply-tags-button/apply-tags-button.module';
+import { ApplyTagsButtonComponent } from './apply-tags-button/apply-tags-button.component';
+import { ProjectTagService } from '../../assets/wise5/services/projectTagService';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -67,7 +68,7 @@ const materialModules = [
 ];
 @NgModule({
   imports: [
-    ApplyTagsButtonModule,
+    ApplyTagsButtonComponent,
     CommonModule,
     FlexLayoutModule,
     FormsModule,
@@ -95,7 +96,7 @@ const materialModules = [
     TeacherRunListComponent,
     TeacherRunListItemComponent
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, ProjectTagService],
   exports: [TeacherComponent, materialModules]
 })
 export class TeacherModule {}
