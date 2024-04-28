@@ -7,7 +7,9 @@ import { StudentTeacherCommonServicesModule } from '../../student-teacher-common
 import { SelectStepAndComponentComponent } from './select-step-and-component.component';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatSelectHarness } from '@angular/material/select/testing';
 import { SelectStepAndComponentHarness } from './select-step-and-component.harness';
+import { SelectStepComponent } from '../select-step/select-step.component';
 
 let component: SelectStepAndComponentComponent;
 const componentId1 = 'component1';
@@ -31,14 +33,14 @@ describe('SelectStepAndComponentComponent', () => {
         HttpClientTestingModule,
         SelectStepAndComponentComponent,
         StudentTeacherCommonServicesModule
-      ]
+      ],
+      providers: [ProjectService]
     }).compileComponents();
     fixture = TestBed.createComponent(SelectStepAndComponentComponent);
     loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
     component.referenceComponent = new ReferenceComponent(null, null);
     component.allowedComponentTypes = ['OpenResponse'];
-    component.thisComponentId = componentId1;
     projectService = TestBed.inject(ProjectService);
     spyOn(projectService, 'getStepNodeIds').and.returnValue(nodeIds);
     spyOn(projectService, 'getFlattenedProjectAsNodeIds').and.returnValue(nodeIds);
@@ -56,45 +58,41 @@ describe('SelectStepAndComponentComponent', () => {
       SelectStepAndComponentHarness
     );
   });
-  selectStep();
+  selectComponent();
+  stepChanged();
 });
 
-function selectStep() {
-  describe('selecting a step', () => {
-    describe('when the step has compnents that can and cannot be selected', () => {
-      it('disables certain options in the select component', async () => {
-        setUpThreeComponentsSpy('OpenResponse', 'Graph', 'OpenResponse');
-        const selectStepHarness = await harness.getSelectStep();
-        const selectStep = await selectStepHarness.getSelect();
-        await selectStep.open();
-        await selectStep.clickOptions({ text: nodeTitle1 });
-        const selectComponentHarness = await harness.getSelectComponent();
-        const selectComponent = await selectComponentHarness.getSelect();
-        await selectComponent.open();
-        const options = await selectComponent.getOptions();
-        expect(await options[0].isDisabled()).toBeTrue();
-        expect(await options[1].isDisabled()).toBeTrue();
-        expect(await options[2].isDisabled()).toBeFalse();
-      });
-    });
-    describe('when the step has no components that can be selected', () => {
-      it('does not automatically select a component', async () => {
-        await setComponentsAndCallStepChanged('Draw', 'Graph', 'Table');
-        expectReferenceComponentValues(nodeId1, null);
-      });
+function selectComponent() {
+  it('should disable certain options in the select component', async () => {
+    setUpThreeComponentsSpy('OpenResponse', 'Graph', 'OpenResponse');
+    component.referenceComponent.nodeId = nodeId1;
+    component.thisComponentId = componentId1;
+    component.ngOnInit();
+    const selects = await loader.getAllHarnesses(MatSelectHarness);
+    const selectComponent = selects[1];
+    await selectComponent.open();
+    const options = await selectComponent.getOptions();
+    expect(await options[0].isDisabled()).toBeTrue();
+    expect(await options[1].isDisabled()).toBeTrue();
+    expect(await options[2].isDisabled()).toBeFalse();
+  });
+}
+
+function stepChanged() {
+  describe('stepChanged()', () => {
+    it('should handle step changed when there are no allowed components', async () => {
+      await setComponentsAndCallStepChanged('Draw', 'Graph', 'Table');
+      expectReferenceComponentValues(nodeId1, null);
     });
 
-    describe('when the step has one component that can be selected', () => {
-      it('automatically selects the one allowed component', async () => {
-        await setComponentsAndCallStepChanged('Draw', 'OpenResponse', 'Table');
-        expectReferenceComponentValues(nodeId1, componentId2);
-      });
+    it('should handle step changed when there is one allowed component', async () => {
+      await setComponentsAndCallStepChanged('Draw', 'OpenResponse', 'Table');
+      expectReferenceComponentValues(nodeId1, componentId2);
     });
-    describe('when the step has many components that can be selected', () => {
-      it('doesn not automatically select a component', async () => {
-        await setComponentsAndCallStepChanged('Draw', 'OpenResponse', 'OpenResponse');
-        expectReferenceComponentValues(nodeId1, null);
-      });
+
+    it('should handle step changed when there are multiple allowed components', async () => {
+      await setComponentsAndCallStepChanged('Draw', 'OpenResponse', 'OpenResponse');
+      expectReferenceComponentValues(nodeId1, null);
     });
   });
 }
