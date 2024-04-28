@@ -1,0 +1,13 @@
+<mat-form-field>
+  <mat-label i18n>Component</mat-label>
+  <mat-select [(ngModel)]="componentId" (ngModelChange)="componentChangedEvent.emit($event)">
+    <mat-option
+      *ngFor="let component of components; index as componentIndex"
+      [value]="component.id"
+      [disabled]="!componentToIsAllowed.get(component.id) || component.id === thisComponentId"
+    >
+      <span>{{ componentIndex + 1 }}. {{ component.type }}</span>
+      <span *ngIf="component.id === thisComponentId" i18n>(This Component)</span>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
