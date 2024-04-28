@@ -4,7 +4,7 @@ import { DataExportService } from '../../../services/dataExportService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ClassroomMonitorTestingModule } from '../../classroom-monitor-testing.module';
 import { DataExportComponent } from './data-export.component';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 
 let component: DataExportComponent;
 let fixture: ComponentFixture<DataExportComponent>;
@@ -31,8 +31,8 @@ describe('DataExportComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DataExportComponent],
-      imports: [ClassroomMonitorTestingModule, RouterTestingModule],
-      providers: [DataExportService]
+      imports: [ClassroomMonitorTestingModule],
+      providers: [DataExportService, provideRouter([])]
     }).compileComponents();
   });
 
@@ -60,18 +60,10 @@ describe('DataExportComponent', () => {
     fixture.detectChanges();
   });
 
-  setExportType();
-});
-
-function setExportType() {
-  describe('setExportType', () => {
-    it('should set export type to events', () => {
-      component.setExportType('events');
-      expect(component.exportType).toEqual('events');
-      expect(component.exportTypeLabel).toEqual('Events');
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
-}
+});
 
 function createProjectItem(node: any, order: number) {
   return {

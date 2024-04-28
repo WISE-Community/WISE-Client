@@ -15,6 +15,7 @@ import { ExportItemComponent } from '../../assets/wise5/classroomMonitor/dataExp
 import { ExportRawDataComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component';
 import { ExportEventsComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-events/export-events.component';
 import { ExportOneWorkgroupPerRowComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component';
+import { ExportStudentWorkComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-student-work/export-student-work.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
       { path: 'export/item', component: ExportItemComponent },
       { path: 'export/events', component: ExportEventsComponent },
       { path: 'export/one-workgroup-per-row', component: ExportOneWorkgroupPerRowComponent },
+      { path: 'export/student-work', component: ExportStudentWorkComponent },
       { path: 'export/raw', component: ExportRawDataComponent },
       { path: 'export/visits', component: ExportStepVisitsComponent },
       { path: 'manage-students', component: ManageStudentsComponent },
