@@ -20,6 +20,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { MatMenuModule } from '@angular/material/menu';
 import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
+import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 
 let component: ProjectAuthoringLessonComponent;
 let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
@@ -56,6 +57,7 @@ describe('ProjectAuthoringLessonComponent', () => {
         ClassroomStatusService,
         CopyNodesService,
         DeleteNodeService,
+        DeleteTranslationsService,
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService

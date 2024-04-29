@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SelectNodeEvent } from '../domain/select-node-event';
 import { NodeTypeSelected } from '../domain/node-type-selected';
 import { ExpandEvent } from '../domain/expand-event';
+import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
+import { ComponentContent } from '../../common/ComponentContent';
 
 @Component({
   selector: 'project-authoring',
@@ -35,6 +37,7 @@ export class ProjectAuthoringComponent implements OnInit {
 
   constructor(
     private deleteNodeService: DeleteNodeService,
+    private deleteTranslationsService: DeleteTranslationsService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
     private route: ActivatedRoute,
@@ -89,11 +92,24 @@ export class ProjectAuthoringComponent implements OnInit {
         ? $localize`Are you sure you want to delete the selected item?`
         : $localize`Are you sure you want to delete the ${selectedNodeIds.length} selected items?`;
     if (confirm(confirmMessage)) {
+      const components = this.getComponents(selectedNodeIds); // get the components before they're removed by the following line
       selectedNodeIds.forEach((nodeId) => this.deleteNodeService.deleteNode(nodeId));
       this.removeLessonIdToExpandedEntries(selectedNodeIds);
       this.projectService.saveProject();
       this.refreshProject();
+      if (this.projectService.getLocale().hasTranslations()) {
+        this.deleteTranslationsService.deleteComponents(components);
+      }
     }
+  }
+
+  private getComponents(nodeIds: string[]): ComponentContent[] {
+    return nodeIds.flatMap((nodeId) => {
+      const node = this.projectService.getNodeById(nodeId);
+      return this.projectService.isGroupNode(nodeId)
+        ? node.ids.flatMap((nodeId) => this.projectService.getNodeById(nodeId).components)
+        : node.components;
+    });
   }
 
   private getSelectedNodeIds(): string[] {

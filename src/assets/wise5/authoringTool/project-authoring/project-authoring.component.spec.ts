@@ -38,6 +38,7 @@ import { of } from 'rxjs/internal/observable/of';
 import { HttpClient } from '@angular/common/http';
 import { AddLessonButtonComponent } from '../add-lesson-button/add-lesson-button.component';
 import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
+import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 
 let configService: ConfigService;
 let component: ProjectAuthoringComponent;
@@ -83,6 +84,7 @@ describe('ProjectAuthoringComponent', () => {
         ClassroomStatusService,
         CopyNodesService,
         DeleteNodeService,
+        DeleteTranslationsService,
         MoveNodesService,
         TeacherDataService,
         TeacherProjectService,
