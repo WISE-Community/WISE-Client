@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterStudentFormComponent } from './register-student-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of, throwError } from 'rxjs';
 import { StudentService } from '../../student/student.service';
 import { UserService } from '../../services/user.service';
@@ -9,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, provideRouter } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import * as helpers from '../register-user-form/register-user-form-spec-helpers';
 import {
@@ -61,14 +60,15 @@ describe('RegisterStudentFormComponent', () => {
           MatSnackBarModule,
           PasswordModule,
           ReactiveFormsModule,
-          RecaptchaV3Module,
-          RouterTestingModule
+          RecaptchaV3Module
         ],
         providers: [
           { provide: ConfigService, useClass: MockConfigService },
+          provideRouter([]),
+          { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' },
           { provide: StudentService, useClass: MockStudentService },
-          { provide: UserService, useClass: MockUserService },
-          { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
+
+          { provide: UserService, useClass: MockUserService }
         ],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
@@ -140,11 +140,7 @@ async function createAccount() {
         const response: any = helpers.createAccountSuccessResponse(username);
         spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
         spyOn(studentService, 'registerStudentAccount').and.returnValue(of(response));
-        const routerNavigateSpy = spyOn(router, 'navigate').and.callFake(
-          (args: any[]): Promise<boolean> => {
-            return of(true).toPromise();
-          }
-        );
+        const routerNavigateSpy = spyOn(router, 'navigate');
         await component.createAccount();
         expect(routerNavigateSpy).toHaveBeenCalledWith([
           'join/student/complete',
@@ -232,7 +228,7 @@ async function expectCreateAccountWithInvalidNameToShowError(
   );
   const response: any = helpers.createAccountErrorResponse(errorCode);
   spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
-  spyOn(studentService, 'registerStudentAccount').and.returnValue(throwError(response));
+  spyOn(studentService, 'registerStudentAccount').and.returnValue(throwError(() => response));
   const snackBarSpy = spyOn(snackBar, 'open');
   await component.createAccount();
   expect(snackBarSpy).toHaveBeenCalledWith(errorMessage);

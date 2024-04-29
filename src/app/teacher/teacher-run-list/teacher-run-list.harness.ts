@@ -3,13 +3,14 @@ import { TeacherRunListItemHarness } from '../teacher-run-list-item/teacher-run-
 import { SelectRunsControlsHarness } from '../select-runs-controls/select-runs-controls.harness';
 import { MatSelectHarness } from '@angular/material/select/testing';
 import { clickMenuButton } from '../../common/harness-helper';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 export class TeacherRunListHarness extends ComponentHarness {
   static hostSelector = 'app-teacher-run-list';
   private ARCHIVED_TEXT = 'Archived';
   protected getNoRunsMessageDiv = this.locatorFor('.no-runs-message');
   getRunListItems = this.locatorForAll(TeacherRunListItemHarness);
-  getSearchInput = this.locatorFor('.search-bar input');
+  getSearchInput = this.locatorFor(MatInputHarness);
   protected getSelectRunsControls = this.locatorFor(SelectRunsControlsHarness);
   protected getViewSelect = this.locatorFor(MatSelectHarness);
 

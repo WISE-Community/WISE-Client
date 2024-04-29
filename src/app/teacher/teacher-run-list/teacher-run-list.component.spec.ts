@@ -379,9 +379,9 @@ function searchUnselectAllRuns(): void {
           await runListItem.checkCheckbox();
         }
         const searchInput = await runListHarness.getSearchInput();
-        await searchInput.sendKeys('first');
+        await searchInput.setValue('first');
         await expectRunsIsSelected([false]);
-      }, 10000);
+      });
     });
   });
 }
