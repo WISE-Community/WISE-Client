@@ -8,6 +8,7 @@ import { ExportItemComponent } from './export-item/export-item.component';
 import { ExportRawDataComponent } from './export-raw-data/export-raw-data.component';
 import { ExportEventsComponent } from './export-events/export-events.component';
 import { ExportOneWorkgroupPerRowComponent } from './export-one-workgroup-per-row/export-one-workgroup-per-row.component';
+import { ExportStudentWorkComponent } from './export-student-work/export-student-work.component';
 
 @NgModule({
   imports: [RouterModule, StudentTeacherCommonModule],
@@ -18,6 +19,7 @@ import { ExportOneWorkgroupPerRowComponent } from './export-one-workgroup-per-ro
     ExportOneWorkgroupPerRowComponent,
     ExportRawDataComponent,
     ExportStepVisitsComponent,
+    ExportStudentWorkComponent,
     SelectStepAndComponentCheckboxesComponent
   ],
   exports: [
@@ -27,6 +29,7 @@ import { ExportOneWorkgroupPerRowComponent } from './export-one-workgroup-per-ro
     ExportOneWorkgroupPerRowComponent,
     ExportRawDataComponent,
     ExportStepVisitsComponent,
+    ExportStudentWorkComponent,
     SelectStepAndComponentCheckboxesComponent
   ]
 })

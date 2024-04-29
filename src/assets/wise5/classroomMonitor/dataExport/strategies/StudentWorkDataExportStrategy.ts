@@ -147,7 +147,7 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
       } else if (this.exportType === 'latestStudentWork') {
         fileName = runId + '_latest_work.csv';
       }
-      this.controller.generateCSVFile(rows, fileName);
+      this.generateCSVFile(rows, fileName);
       this.controller.hideDownloadingExportMessage();
     });
   }
