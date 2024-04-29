@@ -9,7 +9,7 @@ import { ProjectTranslationService } from './projectTranslationService';
 import { TeacherProjectService } from './teacherProjectService';
 
 @Injectable()
-export class RemoveTranslationsService extends ProjectTranslationService {
+export class DeleteTranslationsService extends ProjectTranslationService {
   constructor(
     protected configService: ConfigService,
     protected http: HttpClient,
@@ -18,7 +18,7 @@ export class RemoveTranslationsService extends ProjectTranslationService {
     super(configService, http, projectService);
   }
 
-  async removeComponents(components: ComponentContent[]): Promise<void> {
+  async deleteComponents(components: ComponentContent[]): Promise<void> {
     const allTranslations = await this.fetchAllTranslations();
     const i18nKeys = components.flatMap((component) => this.getI18NKeys(component));
     const saveTranslationRequests: Observable<Object>[] = [];

@@ -10,7 +10,7 @@ import { scrollToTopOfPage, temporarilyHighlightElement } from '../../../common/
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { RemoveTranslationsService } from '../../../services/removeTranslationsService';
+import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
 
 @Component({
   selector: 'node-authoring',
@@ -36,7 +36,7 @@ export class NodeAuthoringComponent implements OnInit {
     private nodeService: TeacherNodeService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
-    private removeTranslationsService: RemoveTranslationsService,
+    private deleteTranslationsService: DeleteTranslationsService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -207,7 +207,7 @@ export class NodeAuthoringComponent implements OnInit {
         this.componentsToChecked.mutate((obj) => delete obj[component.id]);
         delete this.componentsToExpanded[component.id];
       }
-      this.removeTranslations(components);
+      this.deleteTranslations(components);
     });
   }
 
@@ -224,9 +224,9 @@ export class NodeAuthoringComponent implements OnInit {
     }
   }
 
-  private removeTranslations(components: ComponentContent[]): void {
+  private deleteTranslations(components: ComponentContent[]): void {
     if (this.projectService.getLocale().hasTranslations()) {
-      this.removeTranslationsService.removeComponents(components);
+      this.deleteTranslationsService.deleteComponents(components);
     }
   }
 

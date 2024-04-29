@@ -28,7 +28,7 @@ import { CopyComponentButtonComponent } from '../copy-component-button/copy-comp
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
-import { RemoveTranslationsService } from '../../../services/removeTranslationsService';
+import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -68,9 +68,9 @@ describe('NodeAuthoringComponent', () => {
       ],
       providers: [
         ClassroomStatusService,
+        DeleteTranslationsService,
         TeacherProjectTranslationService,
         ProjectAssetService,
-        RemoveTranslationsService,
         TeacherDataService,
         TeacherNodeService,
         TeacherProjectService,
