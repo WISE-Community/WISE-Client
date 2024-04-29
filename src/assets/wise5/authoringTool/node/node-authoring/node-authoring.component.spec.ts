@@ -28,6 +28,7 @@ import { CopyComponentButtonComponent } from '../copy-component-button/copy-comp
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
+import { RemoveTranslationsService } from '../../../services/removeTranslationsService';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -39,6 +40,7 @@ let node1Components = [];
 const nodeId1 = 'node1';
 let teacherDataService: TeacherDataService;
 let teacherProjectService: TeacherProjectService;
+let saveProjectSpy: jasmine.Spy;
 
 describe('NodeAuthoringComponent', () => {
   beforeEach(async () => {
@@ -68,6 +70,7 @@ describe('NodeAuthoringComponent', () => {
         ClassroomStatusService,
         TeacherProjectTranslationService,
         ProjectAssetService,
+        RemoveTranslationsService,
         TeacherDataService,
         TeacherNodeService,
         TeacherProjectService,
@@ -106,7 +109,8 @@ describe('NodeAuthoringComponent', () => {
     teacherProjectService.idToNode = { node1: node1 };
     teacherProjectService.project = {
       nodes: [{ id: nodeId1, components: node1Components }],
-      inactiveNodes: []
+      inactiveNodes: [],
+      metadata: { locale: { default: 'en_US', supported: ['es'] } }
     };
     spyOn(teacherProjectService, 'getNodeById').and.returnValue(node1);
     teacherDataService = TestBed.inject(TeacherDataService);
@@ -114,8 +118,10 @@ describe('NodeAuthoringComponent', () => {
       return Promise.resolve();
     });
     spyOn(teacherProjectService, 'getLocale').and.returnValue(
-      new ProjectLocale({ default: 'en-US' })
+      new ProjectLocale({ default: 'en-US', supported: ['es'] })
     );
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
+    saveProjectSpy = spyOn(teacherProjectService, 'saveProject').and.returnValue(Promise.resolve());
     fixture = TestBed.createComponent(NodeAuthoringComponent);
     component = fixture.componentInstance;
     component.nodeId = nodeId1;
@@ -156,6 +162,7 @@ function deleteComponent() {
       expect(confirmSpy).toHaveBeenCalledWith(
         `Are you sure you want to delete this component?\n2. MultipleChoice`
       );
+      expect(saveProjectSpy).toHaveBeenCalled();
       expect(teacherProjectService.idToNode[nodeId1].components).toEqual([component1, component3]);
     });
   });

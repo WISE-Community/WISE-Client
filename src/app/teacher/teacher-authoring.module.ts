@@ -33,6 +33,7 @@ import { AuthoringRoutingModule } from './authoring-routing.module';
 import { RouterModule } from '@angular/router';
 import { ComponentInfoService } from '../../assets/wise5/services/componentInfoService';
 import { TeacherProjectTranslationService } from '../../assets/wise5/services/teacherProjectTranslationService';
+import { RemoveTranslationsService } from '../../assets/wise5/services/removeTranslationsService';
 
 @NgModule({
   imports: [StudentTeacherCommonModule, AuthoringToolModule, RouterModule, AuthoringRoutingModule],
@@ -55,6 +56,7 @@ import { TeacherProjectTranslationService } from '../../assets/wise5/services/te
     { provide: NodeService, useExisting: TeacherNodeService },
     ProjectAssetService,
     SpaceService,
+    RemoveTranslationsService,
     { provide: PeerGroupService, useExisting: TeacherPeerGroupService },
     { provide: ProjectService, useExisting: TeacherProjectService },
     TeacherDataService,
