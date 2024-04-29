@@ -2,7 +2,7 @@
   <mat-label i18n>Tags</mat-label>
   <mat-select
     [(value)]="selectedTags"
-    (selectionChange)="tagsFilterChanged.emit(selectedTags)"
+    (selectionChange)="selectTagEvent.emit(selectedTags)"
     multiple
   >
     <mat-select-trigger i18n>{{ selectedTags.length }} Tag(s)</mat-select-trigger>

@@ -44,7 +44,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SelectRunsControlsModule } from './select-runs-controls/select-runs-controls.module';
 import { ApplyTagsButtonComponent } from './apply-tags-button/apply-tags-button.component';
 import { ProjectTagService } from '../../assets/wise5/services/projectTagService';
-import { TagsFilterComponent } from './tags-filter/tags-filter.component';
+import { SelectTagsComponent } from './select-tags/select-tags.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -77,7 +77,7 @@ const materialModules = [
     materialModules,
     SharedModule,
     SelectRunsControlsModule,
-    TagsFilterComponent,
+    SelectTagsComponent,
     TeacherRoutingModule,
     TimelineModule,
     ClipboardModule

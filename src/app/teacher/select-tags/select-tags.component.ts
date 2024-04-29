@@ -6,13 +6,13 @@ import { Tag } from '../../domain/tag';
 import { AbstractTagsMenuComponent } from '../abstract-tags-menu/abstract-tags-menu.component';
 
 @Component({
-  selector: 'tags-filter',
-  templateUrl: './tags-filter.component.html',
-  styleUrls: ['./tags-filter.component.scss'],
+  selector: 'select-tags',
+  templateUrl: './select-tags.component.html',
+  styleUrls: ['./select-tags.component.scss'],
   standalone: true,
   imports: [CommonModule, MatDividerModule, SharedModule]
 })
-export class TagsFilterComponent extends AbstractTagsMenuComponent {
+export class SelectTagsComponent extends AbstractTagsMenuComponent {
   protected selectedTags: Tag[] = [];
-  @Output() tagsFilterChanged: EventEmitter<Tag[]> = new EventEmitter<Tag[]>();
+  @Output() selectTagEvent: EventEmitter<Tag[]> = new EventEmitter<Tag[]>();
 }
