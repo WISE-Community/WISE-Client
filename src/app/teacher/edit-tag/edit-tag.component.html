@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
   <div class="tag-inputs-div" fxLayout="column">
     <div fxLayoutAlign="start center">
-      <div class="tag-preview" [style.background-color]="colorControl.value">
+      <div class="tag-preview" [style.background-color]="color">
         {{ nameControl.value }}
       </div>
     </div>
@@ -17,14 +17,24 @@
       </mat-form-field>
       <mat-form-field class="color-input">
         <mat-label i18n>Color</mat-label>
-        <input matInput (keyup.enter)="enterKeyPressed()" [formControl]="colorControl" />
+        <input matInput [(ngModel)]="color" (keyup.enter)="enterKeyPressed()" />
       </mat-form-field>
     </div>
-    <div fxLayoutAlign="space-between center">
-      <color-chooser
-        [chosenColor]="colorControl.value"
-        (chooseColorEvent)="chooseColor($event)"
-      ></color-chooser>
+    <div fxLayoutAlign="start center" fxLayoutGap="12px">
+      <color-chooser [chosenColor]="color" (chooseColorEvent)="chooseColor($event)"></color-chooser>
+      <div
+        fxLayoutAlign="center center"
+        class="custom-color-div"
+        [(colorPicker)]="color"
+        (colorPickerChange)="chooseColor($event)"
+        [cpFallbackColor]="'#ff0000'"
+        [cpOutputFormat]="'hex'"
+        [cpOKButton]="true"
+        [cpCancelButton]="true"
+        i18n
+      >
+        Custom
+      </div>
     </div>
   </div>
   <button mat-button (click)="close()" i18n>Cancel</button>

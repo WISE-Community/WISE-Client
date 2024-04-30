@@ -17,6 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ColorChooserComponent } from '../color-chooser/color-chooser.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @Component({
   selector: 'edit-tag',
@@ -25,6 +26,7 @@ import { ColorChooserComponent } from '../color-chooser/color-chooser.component'
   standalone: true,
   imports: [
     ColorChooserComponent,
+    ColorPickerModule,
     CommonModule,
     FormsModule,
     FlexLayoutModule,
@@ -36,12 +38,12 @@ import { ColorChooserComponent } from '../color-chooser/color-chooser.component'
 })
 export class EditTagComponent {
   @Output() closeEvent: EventEmitter<void> = new EventEmitter();
+  protected color: string = '';
   @ViewChild('nameInput') nameInput: ElementRef;
   protected submitLabel: string = $localize`Create`;
   @Input() tag: Tag;
   private tags: Tag[] = [];
 
-  protected colorControl = new FormControl('');
   protected nameControl = new FormControl('', [
     Validators.required,
     this.createArchivedTagValidator(),
@@ -53,7 +55,7 @@ export class EditTagComponent {
   ngOnInit(): void {
     if (this.tag != null) {
       this.nameControl.setValue(this.tag.text);
-      this.colorControl.setValue(this.tag.color);
+      this.color = this.tag.color;
       this.submitLabel = $localize`Save`;
     }
     this.projectTagService.retrieveUserTags().subscribe((tags: Tag[]) => {
@@ -102,7 +104,7 @@ export class EditTagComponent {
   }
 
   protected chooseColor(color: string): void {
-    this.colorControl.setValue(color);
+    this.color = color;
   }
 
   protected submit(): void {
@@ -117,12 +119,8 @@ export class EditTagComponent {
     return this.nameControl.value.trim();
   }
 
-  private getColorValue(): string {
-    return this.colorControl.value.trim();
-  }
-
   private createTag(): void {
-    this.projectTagService.createTag(this.getNameValue(), this.getColorValue()).subscribe({
+    this.projectTagService.createTag(this.getNameValue(), this.color).subscribe({
       next: () => {
         this.snackBar.open($localize`Tag created`);
         this.close();
@@ -135,7 +133,7 @@ export class EditTagComponent {
 
   private updateTag(): void {
     this.tag.text = this.getNameValue();
-    this.tag.color = this.getColorValue();
+    this.tag.color = this.color;
     this.projectTagService.updateTag(this.tag).subscribe({
       next: () => {
         this.snackBar.open($localize`Tag updated`);

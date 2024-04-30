@@ -45,6 +45,7 @@ import { SelectRunsControlsModule } from './select-runs-controls/select-runs-con
 import { ApplyTagsButtonComponent } from './apply-tags-button/apply-tags-button.component';
 import { ProjectTagService } from '../../assets/wise5/services/projectTagService';
 import { SelectTagsComponent } from './select-tags/select-tags.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -70,6 +71,7 @@ const materialModules = [
 @NgModule({
   imports: [
     ApplyTagsButtonComponent,
+    ColorPickerModule,
     CommonModule,
     FlexLayoutModule,
     FormsModule,

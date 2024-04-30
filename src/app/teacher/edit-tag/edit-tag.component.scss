@@ -21,3 +21,11 @@
 .color-input {
   width: 15%;
 }
+
+.custom-color-div {
+  border: 1px solid grey;
+  border-radius: $button-border-radius;
+  width: 72px;
+  height: 32px;
+  cursor: pointer;
+}

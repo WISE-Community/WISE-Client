@@ -441,7 +441,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.html</context>
@@ -1036,7 +1036,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">2</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/tags-filter/tags-filter.component.html</context>
+          <context context-type="sourcefile">src/app/teacher/select-tags/select-tags.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
@@ -8335,32 +8335,39 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="93d5f8048028bb8db09114a3a17a6d6474a85f47" datatype="html">
+        <source> Custom </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
+          <context context-type="linenumber">34,36</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="5674286808255988565" datatype="html">
         <source>Create</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3768927257183755959" datatype="html">
         <source>Save</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5325249077056620539" datatype="html">
         <source>Tag created</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1772313028295081091" datatype="html">
         <source>Tag updated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="76de164da3c441addbf9b14950150aa869b00fdb" datatype="html">
@@ -8870,6 +8877,20 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="353c43d34a92c7a8744729bd7b3ae5d3be470ae5" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ selectedTags.length }}"/> Tag(s)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/select-tags/select-tags.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cac2f7e9a1019a0154afe969ab3750e052d429c0" datatype="html">
+        <source> Manage Tags </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/select-tags/select-tags.component.html</context>
+          <context context-type="linenumber">19,21</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="c76c2eeebe0adc81f3434495d189c56d70899cad" datatype="html">
         <source>Share with Students</source>
         <context-group purpose="location">
@@ -9028,20 +9049,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.ts</context>
           <context context-type="linenumber">172</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="353c43d34a92c7a8744729bd7b3ae5d3be470ae5" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ selectedTags.length }}"/> Tag(s)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/tags-filter/tags-filter.component.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="cac2f7e9a1019a0154afe969ab3750e052d429c0" datatype="html">
-        <source> Manage Tags </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/tags-filter/tags-filter.component.html</context>
-          <context context-type="linenumber">19,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="48ae429835665b58a2711db68e68b9a4dfa1f0ff" datatype="html">
