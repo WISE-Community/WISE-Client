@@ -17,7 +17,7 @@ import { HomeModule } from './home/home.module';
 import { StudentService } from './student/student.service';
 import { UserService } from './services/user.service';
 import { TeacherService } from './teacher/teacher.service';
-import { MobileMenuModule } from './modules/mobile-menu/mobile-menu.module';
+import { MobileMenuComponent } from './modules/mobile-menu/mobile-menu.component';
 import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementDialogComponent } from './announcement/announcement.component';
 import { TrackScrollDirective } from './track-scroll.directive';
@@ -58,7 +58,7 @@ export function initialize(
     FooterComponent,
     HeaderModule,
     HomeModule,
-    MobileMenuModule,
+    MobileMenuComponent,
     MatSidenavModule,
     MatSnackBarModule,
     MatDialogModule,
