@@ -6161,7 +6161,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Search</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/search-bar/search-bar.component.ts</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7f32abe3fc638f65c0d3eb269d478ee49ad41ebe" datatype="html">

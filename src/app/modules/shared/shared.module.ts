@@ -25,7 +25,6 @@ const materialModules = [
 import { BlurbComponent } from './blurb/blurb.component';
 import { CallToActionComponent } from './call-to-action/call-to-action.component';
 import { HeroSectionComponent } from './hero-section/hero-section.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SelectMenuComponent } from './select-menu/select-menu.component';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
 import { UnlinkGoogleAccountConfirmComponent } from './unlink-google-account-confirm/unlink-google-account-confirm.component';
@@ -49,7 +48,6 @@ import { PasswordModule } from '../../password/password.module';
     BlurbComponent,
     CallToActionComponent,
     HeroSectionComponent,
-    SearchBarComponent,
     SelectMenuComponent,
     EditPasswordComponent
   ],
@@ -57,13 +55,11 @@ import { PasswordModule } from '../../password/password.module';
     BlurbComponent,
     CallToActionComponent,
     HeroSectionComponent,
-    SearchBarComponent,
     SelectMenuComponent,
     EditPasswordComponent,
     UnlinkGoogleAccountConfirmComponent,
     UnlinkGoogleAccountPasswordComponent,
     UnlinkGoogleAccountSuccessComponent
-  ],
-  providers: []
+  ]
 })
 export class SharedModule {}

@@ -5,7 +5,6 @@ import { TeacherService } from '../teacher.service';
 import { TeacherRun } from '../teacher-run';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
-import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../../services/user.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { User } from '../../domain/user';
@@ -31,6 +30,7 @@ import { Project } from '../../domain/project';
 import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
 import { HttpClient } from '@angular/common/http';
 import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
+import { provideRouter } from '@angular/router';
 
 class TeacherScheduleStubComponent {}
 
@@ -81,12 +81,7 @@ describe('TeacherRunListComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [
-          RunMenuComponent,
-          SearchBarComponent,
-          TeacherRunListComponent,
-          TeacherRunListItemComponent
-        ],
+        declarations: [RunMenuComponent, TeacherRunListComponent, TeacherRunListItemComponent],
         imports: [
           ArchiveProjectsButtonComponent,
           BrowserAnimationsModule,
@@ -102,12 +97,18 @@ describe('TeacherRunListComponent', () => {
           MatSelectModule,
           MatSnackBarModule,
           ReactiveFormsModule,
-          RouterTestingModule.withRoutes([
-            { path: 'teacher/home/schedule', component: TeacherScheduleStubComponent }
-          ]),
+          SearchBarComponent,
           SelectRunsControlsModule
         ],
-        providers: [ArchiveProjectService, ConfigService, TeacherService, UserService],
+        providers: [
+          ArchiveProjectService,
+          ConfigService,
+          provideRouter([
+            { path: 'teacher/home/schedule', component: TeacherScheduleStubComponent }
+          ]),
+          TeacherService,
+          UserService
+        ],
         schemas: [NO_ERRORS_SCHEMA]
       });
     })
