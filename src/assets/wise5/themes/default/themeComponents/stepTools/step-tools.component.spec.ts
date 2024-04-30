@@ -8,7 +8,6 @@ import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component
 import { ProjectService } from '../../../../services/projectService';
 import { StudentDataService } from '../../../../services/studentDataService';
 import { NodeStatusIcon } from '../nodeStatusIcon/node-status-icon.component';
-
 import { StepToolsComponent } from './step-tools.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 import { NodeStatusService } from '../../../../services/nodeStatusService';
@@ -32,10 +31,11 @@ describe('StepToolsComponent', () => {
         MatDialogModule,
         MatIconModule,
         MatSelectModule,
+        NodeIconComponent,
         NoopAnimationsModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [NodeIconComponent, NodeStatusIcon, StepToolsComponent]
+      declarations: [NodeStatusIcon, StepToolsComponent]
     }).compileComponents();
   });
 

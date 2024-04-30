@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfigService } from '../services/configService';
 import { NotebookService } from '../services/notebookService';
@@ -29,6 +28,7 @@ import { StudentTeacherCommonServicesModule } from '../../../app/student-teacher
 import { PauseScreenService } from '../services/pauseScreenService';
 import { StudentNotificationService } from '../services/studentNotificationService';
 import { SafeUrl } from '../../../assets/wise5/directives/safeUrl/safe-url.pipe';
+import { provideRouter } from '@angular/router';
 
 let component: VLEComponent;
 let fixture: ComponentFixture<VLEComponent>;
@@ -51,14 +51,13 @@ describe('VLEComponent', () => {
         MatToolbarModule,
         MatSelectModule,
         MatSidenavModule,
-        RouterTestingModule,
+        NodeIconComponent,
         StudentTeacherCommonServicesModule,
         TopBarComponent
       ],
       declarations: [
         NavigationComponent,
         NodeComponent,
-        NodeIconComponent,
         NodeStatusIcon,
         NotebookNotesComponent,
         SafeUrl,
@@ -68,6 +67,7 @@ describe('VLEComponent', () => {
       providers: [
         InitializeVLEService,
         PauseScreenService,
+        provideRouter([]),
         StudentNotificationService,
         VLEProjectService
       ]
