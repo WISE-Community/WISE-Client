@@ -30,10 +30,10 @@ export class TeacherRunListComponent implements OnInit {
   protected runs: TeacherRun[] = [];
   protected searchValue: string = '';
   protected selectedProjects: Project[] = [];
+  private selectedTags: Tag[] = [];
   protected showAll: boolean = false;
   protected showArchivedView: boolean = false;
   private subscriptions: Subscription = new Subscription();
-  private tagsToFilterBy: Tag[] = [];
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
@@ -156,8 +156,8 @@ export class TeacherRunListComponent implements OnInit {
     this.performSearchAndFilter();
   }
 
-  protected tagsFilterChanged(tags: Tag[]): void {
-    this.tagsToFilterBy = tags;
+  protected selectTags(tags: Tag[]): void {
+    this.selectedTags = tags;
     this.performSearchAndFilter();
   }
 
@@ -167,9 +167,9 @@ export class TeacherRunListComponent implements OnInit {
         (!this.showArchivedView && !run.project.archived) ||
         (this.showArchivedView && run.project.archived)
     );
-    if (this.tagsToFilterBy.length > 0) {
+    if (this.selectedTags.length > 0) {
       this.filteredRuns = this.filteredRuns.filter((run: TeacherRun) =>
-        this.tagsToFilterBy.some((tag: Tag) => run.project.hasTag(tag))
+        this.selectedTags.some((tag: Tag) => run.project.hasTag(tag))
       );
     }
   }

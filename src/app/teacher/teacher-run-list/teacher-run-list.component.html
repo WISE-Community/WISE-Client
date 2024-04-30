@@ -17,7 +17,7 @@
       (update)="searchChanged($event)"
     ></app-search-bar>
     <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
-    <select-tags (selectTagEvent)="tagsFilterChanged($event)"></select-tags>
+    <select-tags (selectTagEvent)="selectTags($event)"></select-tags>
     <mat-form-field>
       <mat-label>View</mat-label>
       <mat-select [(ngModel)]="showArchivedView" (selectionChange)="refreshProjects()">
