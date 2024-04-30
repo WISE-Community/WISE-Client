@@ -26,9 +26,8 @@ export class SelectComponentComponent {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.nodeId) {
       this.nodeId = changes.nodeId.currentValue;
-      this.componentId = null;
       this.calculateComponents(this.nodeId);
-      this.automaticallySetComponentIfPossible(this.nodeId);
+      this.setComponentId();
     }
   }
 
@@ -42,10 +41,10 @@ export class SelectComponentComponent {
     }
   }
 
-  private automaticallySetComponentIfPossible(nodeId: string): void {
+  private setComponentId(): void {
     let numAllowedComponents = 0;
     let allowedComponent = null;
-    for (const component of this.projectService.getComponents(nodeId)) {
+    for (const component of this.components) {
       if (
         this.allowedComponentTypes.includes(component.type) &&
         component.id !== this.thisComponentId
@@ -57,6 +56,8 @@ export class SelectComponentComponent {
     if (numAllowedComponents === 1) {
       this.componentId = allowedComponent.id;
       this.componentChanged();
+    } else {
+      this.componentId = null;
     }
   }
 

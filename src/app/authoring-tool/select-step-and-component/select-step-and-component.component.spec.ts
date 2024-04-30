@@ -61,7 +61,7 @@ describe('SelectStepAndComponentComponent', () => {
 
 function selectStep() {
   describe('selecting a step', () => {
-    describe('when the step has compnents that can and cannot be selected', () => {
+    describe('when the step has components that can and cannot be selected', () => {
       it('disables certain options in the select component', async () => {
         setUpThreeComponentsSpy('OpenResponse', 'Graph', 'OpenResponse');
         const selectStepHarness = await harness.getSelectStep();
@@ -91,7 +91,7 @@ function selectStep() {
       });
     });
     describe('when the step has many components that can be selected', () => {
-      it('doesn not automatically select a component', async () => {
+      it('does not automatically select a component', async () => {
         await setComponentsAndCallStepChanged('Draw', 'OpenResponse', 'OpenResponse');
         expectReferenceComponentValues(nodeId1, null);
       });
