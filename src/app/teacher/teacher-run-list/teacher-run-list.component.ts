@@ -11,6 +11,7 @@ import { runSpansDays } from '../../../assets/wise5/common/datetime/datetime';
 import { SelectRunsOption } from '../select-runs-controls/select-runs-option';
 import { sortByRunStartTimeDesc } from '../../domain/run';
 import { Project } from '../../domain/project';
+import { Tag } from '../../domain/tag';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -29,6 +30,7 @@ export class TeacherRunListComponent implements OnInit {
   protected runs: TeacherRun[] = [];
   protected searchValue: string = '';
   protected selectedProjects: Project[] = [];
+  private selectedTags: Tag[] = [];
   protected showAll: boolean = false;
   protected showArchivedView: boolean = false;
   private subscriptions: Subscription = new Subscription();
@@ -154,12 +156,22 @@ export class TeacherRunListComponent implements OnInit {
     this.performSearchAndFilter();
   }
 
+  protected selectTags(tags: Tag[]): void {
+    this.selectedTags = tags;
+    this.performSearchAndFilter();
+  }
+
   private performFilter(): void {
     this.filteredRuns = this.filteredRuns.filter(
       (run: TeacherRun) =>
         (!this.showArchivedView && !run.project.archived) ||
         (this.showArchivedView && run.project.archived)
     );
+    if (this.selectedTags.length > 0) {
+      this.filteredRuns = this.filteredRuns.filter((run: TeacherRun) =>
+        this.selectedTags.some((tag: Tag) => run.project.hasTag(tag))
+      );
+    }
   }
 
   private performSearch(searchValue: string): TeacherRun[] {

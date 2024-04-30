@@ -3,7 +3,7 @@
     class="content-block__header controls dark-theme primary-bg"
     fxLayout="row"
     fxLayout.xs="column"
-    fxLayoutGap.sm="16px"
+    fxLayoutGap="16px"
     fxLayoutAlign="start center"
   >
     <app-search-bar
@@ -17,6 +17,7 @@
       (update)="searchChanged($event)"
     ></app-search-bar>
     <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
+    <select-tags (selectTagEvent)="selectTags($event)"></select-tags>
     <mat-form-field>
       <mat-label>View</mat-label>
       <mat-select [(ngModel)]="showArchivedView" (selectionChange)="refreshProjects()">
