@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Config } from '../domain/config';
 import { Announcement } from '../domain/announcement';
 
@@ -17,14 +17,16 @@ export class ConfigService {
     return this.config$;
   }
 
-  retrieveConfig() {
+  retrieveConfig(): Observable<Config> {
     const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
-    this.http
+    return this.http
       .get<Config>(this.userConfigUrl, { headers: headers })
-      .subscribe((config) => {
-        this.config$.next(config);
-        this.timeDiff = Date.now() - config.currentTime;
-      });
+      .pipe(
+        tap((config) => {
+          this.config$.next(config);
+          this.timeDiff = Date.now() - config.currentTime;
+        })
+      );
   }
 
   getContextPath() {

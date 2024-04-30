@@ -1,0 +1,8 @@
+<mat-form-field>
+  <mat-label i18n>Step</mat-label>
+  <mat-select [(ngModel)]="nodeId" (ngModelChange)="stepChangedEvent.emit($event)">
+    <ng-container *ngFor="let nodeId of nodeIds">
+      <mat-option [value]="nodeId">{{ nodeToPositionAndTitle.get(nodeId) }}</mat-option>
+    </ng-container>
+  </mat-select>
+</mat-form-field>
