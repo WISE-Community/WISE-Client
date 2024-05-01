@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { SharedModule } from '../../modules/shared/shared.module';
@@ -13,6 +13,6 @@ import { AbstractTagsMenuComponent } from '../abstract-tags-menu/abstract-tags-m
   imports: [CommonModule, MatDividerModule, SharedModule]
 })
 export class SelectTagsComponent extends AbstractTagsMenuComponent {
-  protected selectedTags: Tag[] = [];
+  @Input() selectedTags: Tag[] = [];
   @Output() selectTagEvent: EventEmitter<Tag[]> = new EventEmitter<Tag[]>();
 }

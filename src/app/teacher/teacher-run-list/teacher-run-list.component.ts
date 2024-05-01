@@ -30,7 +30,7 @@ export class TeacherRunListComponent implements OnInit {
   protected runs: TeacherRun[] = [];
   protected searchValue: string = '';
   protected selectedProjects: Project[] = [];
-  private selectedTags: Tag[] = [];
+  protected selectedTags: Tag[] = [];
   protected showAll: boolean = false;
   protected showArchivedView: boolean = false;
   private subscriptions: Subscription = new Subscription();
@@ -158,6 +158,11 @@ export class TeacherRunListComponent implements OnInit {
 
   protected selectTags(tags: Tag[]): void {
     this.selectedTags = tags;
+    this.performSearchAndFilter();
+  }
+
+  protected removeTag(tag: Tag): void {
+    this.selectedTags = this.selectedTags.filter((selectedTag: Tag) => selectedTag.id !== tag.id);
     this.performSearchAndFilter();
   }
 

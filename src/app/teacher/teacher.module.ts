@@ -45,6 +45,7 @@ import { SelectRunsControlsModule } from './select-runs-controls/select-runs-con
 import { ApplyTagsButtonComponent } from './apply-tags-button/apply-tags-button.component';
 import { ProjectTagService } from '../../assets/wise5/services/projectTagService';
 import { SelectTagsComponent } from './select-tags/select-tags.component';
+import { SelectedTagsListComponent } from './selected-tags-list/selected-tags-list.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -78,6 +79,7 @@ const materialModules = [
     SharedModule,
     SelectRunsControlsModule,
     SelectTagsComponent,
+    SelectedTagsListComponent,
     TeacherRoutingModule,
     TimelineModule,
     ClipboardModule
