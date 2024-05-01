@@ -112,7 +112,8 @@ export class ProjectAuthoringStepComponent {
 
   protected delete(): void {
     if (confirm($localize`Are you sure you want to delete this step?`)) {
-      const components = this.step.components; // get the components before they're removed by the following line
+      // get the components before they're removed by the following line
+      const components = this.step.components;
       this.deleteNodeService.deleteNode(this.step.id);
       this.saveAndRefreshProject();
       if (this.projectService.getLocale().hasTranslations()) {

@@ -60,9 +60,10 @@ export class ProjectAuthoringLessonComponent {
 
   protected delete(): void {
     if (confirm($localize`Are you sure you want to delete this lesson?`)) {
+      // get the components before they're removed by the following line
       const components = this.lesson.ids.flatMap(
         (nodeId) => this.projectService.getNodeById(nodeId).components
-      ); // get the components before they're removed by the following line
+      );
       this.deleteNodeService.deleteNode(this.lesson.id);
       this.saveAndRefreshProject();
       if (this.projectService.getLocale().hasTranslations()) {

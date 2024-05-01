@@ -92,7 +92,8 @@ export class ProjectAuthoringComponent implements OnInit {
         ? $localize`Are you sure you want to delete the selected item?`
         : $localize`Are you sure you want to delete the ${selectedNodeIds.length} selected items?`;
     if (confirm(confirmMessage)) {
-      const components = this.getComponents(selectedNodeIds); // get the components before they're removed by the following line
+      // get the components before they're removed by the following line
+      const components = this.getComponents(selectedNodeIds);
       selectedNodeIds.forEach((nodeId) => this.deleteNodeService.deleteNode(nodeId));
       this.removeLessonIdToExpandedEntries(selectedNodeIds);
       this.projectService.saveProject();
