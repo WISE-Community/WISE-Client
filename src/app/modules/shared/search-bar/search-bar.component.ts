@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -7,61 +8,61 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    ReactiveFormsModule
+  ],
   selector: 'app-search-bar',
-  templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  standalone: true,
+  styleUrl: './search-bar.component.scss',
+  templateUrl: './search-bar.component.html'
 })
 export class SearchBarComponent implements OnInit {
-  @Input()
-  placeholderText: string = $localize`Search`; // placeholder text
+  @Output('update') change: EventEmitter<string> = new EventEmitter<string>();
+  @Input() debounce: number = 250;
+  @Input() disable: boolean;
+  @Input() placeholderText: string = $localize`Search`;
+  protected searchField = new FormControl('');
+  @Input() value: string = '';
 
-  @Input()
-  disable: boolean = false; // whether input is disabled
-
-  @Input()
-  value: string = ''; // search string
-
-  @Input()
-  debounce: number = 250; // time to wait for changes (milliseconds)
-
-  @Output('update')
-  change: EventEmitter<string> = new EventEmitter<string>(); // change event emitter
-
-  searchField = new FormControl(''); // form control for the search input
-
-  constructor() {}
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.searchField = new FormControl({
       value: this.value,
       disabled: this.disable
     });
     this.searchField.valueChanges
-      .pipe(debounceTime(this.debounce)) // wait specified interval for any changes
-      .pipe(distinctUntilChanged()) // only emit event if search string has changed
+      .pipe(debounceTime(this.debounce))
+      .pipe(distinctUntilChanged())
       .subscribe((value) => {
         this.change.emit(this.searchField.value);
       });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes.value) {
       this.value = changes.value.currentValue;
       this.searchField.setValue(this.value);
     }
-
     if (changes.disable) {
       this.disable = changes.disable.currentValue;
       this.disable ? this.searchField.disable() : this.searchField.enable();
     }
   }
 
-  clear() {
+  protected clear(): void {
     this.searchField.setValue('');
   }
 }
