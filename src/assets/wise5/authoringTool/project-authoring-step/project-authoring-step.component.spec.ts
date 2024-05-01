@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CopyNodesService } from '../../services/copyNodesService';
+import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 
 const nodeId1 = 'nodeId1';
 const node = { id: nodeId1 };
@@ -39,6 +40,7 @@ describe('ProjectAuthoringStepComponent', () => {
         ClassroomStatusService,
         CopyNodesService,
         DeleteNodeService,
+        DeleteTranslationsService,
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService

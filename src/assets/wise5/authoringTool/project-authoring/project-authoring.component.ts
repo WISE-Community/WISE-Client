@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SelectNodeEvent } from '../domain/select-node-event';
 import { NodeTypeSelected } from '../domain/node-type-selected';
 import { ExpandEvent } from '../domain/expand-event';
+import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
+import { ComponentContent } from '../../common/ComponentContent';
 
 @Component({
   selector: 'project-authoring',
@@ -35,6 +37,7 @@ export class ProjectAuthoringComponent implements OnInit {
 
   constructor(
     private deleteNodeService: DeleteNodeService,
+    private deleteTranslationsService: DeleteTranslationsService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
     private route: ActivatedRoute,
@@ -84,16 +87,24 @@ export class ProjectAuthoringComponent implements OnInit {
 
   protected deleteSelectedNodes(): void {
     const selectedNodeIds = this.getSelectedNodeIds();
-    const confirmMessage =
-      selectedNodeIds.length === 1
-        ? $localize`Are you sure you want to delete the selected item?`
-        : $localize`Are you sure you want to delete the ${selectedNodeIds.length} selected items?`;
+    const confirmMessage = $localize`Are you sure you want to delete the ${selectedNodeIds.length} selected item(s)?`;
     if (confirm(confirmMessage)) {
+      // get the components before they're removed by the following line
+      const components = this.getComponents(selectedNodeIds);
       selectedNodeIds.forEach((nodeId) => this.deleteNodeService.deleteNode(nodeId));
       this.removeLessonIdToExpandedEntries(selectedNodeIds);
       this.projectService.saveProject();
       this.refreshProject();
+      this.deleteTranslationsService.tryDeleteComponents(components);
     }
+  }
+
+  private getComponents(nodeIds: string[]): ComponentContent[] {
+    return nodeIds.flatMap((nodeId: string) => {
+      return this.projectService.isGroupNode(nodeId)
+        ? this.projectService.getComponentsFromLesson(nodeId)
+        : this.projectService.getComponentsFromStep(nodeId);
+    });
   }
 
   private getSelectedNodeIds(): string[] {
