@@ -207,7 +207,7 @@ export class NodeAuthoringComponent implements OnInit {
         this.componentsToChecked.mutate((obj) => delete obj[component.id]);
         delete this.componentsToExpanded[component.id];
       }
-      this.deleteTranslations(components);
+      this.deleteTranslationsService.tryDeleteComponents(components);
     });
   }
 
@@ -221,12 +221,6 @@ export class NodeAuthoringComponent implements OnInit {
         this.nodeJson.showSaveButton = false;
         this.nodeJson.showSubmitButton = false;
       }
-    }
-  }
-
-  private deleteTranslations(components: ComponentContent[]): void {
-    if (this.projectService.getLocale().hasTranslations()) {
-      this.deleteTranslationsService.deleteComponents(components);
     }
   }
 

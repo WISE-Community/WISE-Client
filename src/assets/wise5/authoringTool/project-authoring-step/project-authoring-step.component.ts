@@ -24,7 +24,7 @@ export class ProjectAuthoringStepComponent {
     private copyNodesService: CopyNodesService,
     private dataService: TeacherDataService,
     private deleteNodeService: DeleteNodeService,
-    private deleteTranslationService: DeleteTranslationsService,
+    private deleteTranslationsService: DeleteTranslationsService,
     private projectService: TeacherProjectService,
     private route: ActivatedRoute,
     private router: Router
@@ -116,9 +116,7 @@ export class ProjectAuthoringStepComponent {
       const components = this.step.components;
       this.deleteNodeService.deleteNode(this.step.id);
       this.saveAndRefreshProject();
-      if (this.projectService.getLocale().hasTranslations()) {
-        this.deleteTranslationService.deleteComponents(components);
-      }
+      this.deleteTranslationsService.tryDeleteComponents(components);
     }
   }
 

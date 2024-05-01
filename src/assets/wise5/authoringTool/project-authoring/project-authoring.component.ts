@@ -87,10 +87,7 @@ export class ProjectAuthoringComponent implements OnInit {
 
   protected deleteSelectedNodes(): void {
     const selectedNodeIds = this.getSelectedNodeIds();
-    const confirmMessage =
-      selectedNodeIds.length === 1
-        ? $localize`Are you sure you want to delete the selected item?`
-        : $localize`Are you sure you want to delete the ${selectedNodeIds.length} selected items?`;
+    const confirmMessage = $localize`Are you sure you want to delete the ${selectedNodeIds.length} selected item(s)?`;
     if (confirm(confirmMessage)) {
       // get the components before they're removed by the following line
       const components = this.getComponents(selectedNodeIds);
@@ -98,18 +95,15 @@ export class ProjectAuthoringComponent implements OnInit {
       this.removeLessonIdToExpandedEntries(selectedNodeIds);
       this.projectService.saveProject();
       this.refreshProject();
-      if (this.projectService.getLocale().hasTranslations()) {
-        this.deleteTranslationsService.deleteComponents(components);
-      }
+      this.deleteTranslationsService.tryDeleteComponents(components);
     }
   }
 
   private getComponents(nodeIds: string[]): ComponentContent[] {
-    return nodeIds.flatMap((nodeId) => {
-      const node = this.projectService.getNodeById(nodeId);
+    return nodeIds.flatMap((nodeId: string) => {
       return this.projectService.isGroupNode(nodeId)
-        ? node.ids.flatMap((nodeId) => this.projectService.getNodeById(nodeId).components)
-        : node.components;
+        ? this.projectService.getComponentsFromLesson(nodeId)
+        : this.projectService.getComponentsFromStep(nodeId);
     });
   }
 

@@ -18,7 +18,13 @@ export class DeleteTranslationsService extends ProjectTranslationService {
     super(configService, http, projectService);
   }
 
-  async deleteComponents(components: ComponentContent[]): Promise<void> {
+  tryDeleteComponents(components: ComponentContent[]): void {
+    if (this.projectService.getLocale().hasTranslations()) {
+      this.deleteComponents(components);
+    }
+  }
+
+  private async deleteComponents(components: ComponentContent[]): Promise<void> {
     const allTranslations = await this.fetchAllTranslations();
     const i18nKeys = components.flatMap((component) => this.getI18NKeys(component));
     const saveTranslationRequests: Observable<Object>[] = [];

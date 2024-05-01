@@ -12,6 +12,7 @@ import { generateRandomKey } from '../common/string/string';
 import { branchPathBackgroundColors } from '../common/color/color';
 import { reduceByUniqueId } from '../common/array/array';
 import { NodeTypeSelected } from '../authoringTool/domain/node-type-selected';
+import { ComponentContent } from '../common/ComponentContent';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -3089,5 +3090,15 @@ export class TeacherProjectService extends ProjectService {
 
   getNodeTypeSelected(): Signal<NodeTypeSelected> {
     return this.nodeTypeSelected.asReadonly();
+  }
+
+  getComponentsFromStep(nodeId: string): ComponentContent[] {
+    return this.getNodeById(nodeId).components;
+  }
+
+  getComponentsFromLesson(lessonId: string): ComponentContent[] {
+    return this.getNodeById(lessonId).ids.flatMap((nodeId: string) =>
+      this.getComponentsFromStep(nodeId)
+    );
   }
 }

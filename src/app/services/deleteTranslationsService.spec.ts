@@ -23,18 +23,18 @@ describe('DeleteTranslationsService', () => {
     projectService = TestBed.inject(TeacherProjectService);
     service = TestBed.inject(DeleteTranslationsService);
   });
-  deleteComponents();
+  tryDeleteComponents();
 });
 
-function deleteComponents() {
-  describe('deleteComponents()', () => {
+function tryDeleteComponents() {
+  describe('tryDeleteComponents()', () => {
     it('fetches all supported translations', () => {
       spyOn(projectService, 'getLocale').and.returnValue(
         new ProjectLocale({ default: 'en_us', supported: ['es', 'ja'] })
       );
       spyOn(configService, 'getProjectId').and.returnValue('123');
       spyOn(configService, 'getConfigParam').and.returnValue('/123/project.json');
-      service.deleteComponents([
+      service.tryDeleteComponents([
         {
           id: 'abc',
           type: 'OpenResponse',
