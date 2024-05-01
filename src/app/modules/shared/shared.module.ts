@@ -22,7 +22,6 @@ const materialModules = [
   MatProgressBarModule
 ];
 
-import { BlurbComponent } from './blurb/blurb.component';
 import { CallToActionComponent } from './call-to-action/call-to-action.component';
 import { HeroSectionComponent } from './hero-section/hero-section.component';
 import { SelectMenuComponent } from './select-menu/select-menu.component';
@@ -45,14 +44,12 @@ import { PasswordModule } from '../../password/password.module';
   exports: [
     materialModules,
     FlexLayoutModule,
-    BlurbComponent,
     CallToActionComponent,
     HeroSectionComponent,
     SelectMenuComponent,
     EditPasswordComponent
   ],
   declarations: [
-    BlurbComponent,
     CallToActionComponent,
     HeroSectionComponent,
     SelectMenuComponent,
