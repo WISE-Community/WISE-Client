@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { Choice } from '../../components/match/choice';
+import { SelectStepComponent } from '../../../../app/authoring-tool/select-step/select-step.component';
+import { SelectComponentComponent } from '../../../../app/authoring-tool/select-component/select-component.component';
 
 @Component({
   selector: 'add-branch',
@@ -27,13 +29,16 @@ import { Choice } from '../../components/match/choice';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SelectComponentComponent,
+    SelectStepComponent
   ]
 })
 export class AddBranchComponent {
   protected readonly CHOICE_CHOSEN: string = 'choiceChosen';
   protected readonly SCORE: string = 'score';
 
+  protected allowedComponentTypes: string[] = [];
   protected branchCriteria: any = [
     {
       value: 'workgroupId',
@@ -56,14 +61,12 @@ export class AddBranchComponent {
       text: $localize`Tag`
     }
   ];
-  protected componentIdToSelectable: { [key: string]: boolean } = {};
   protected components: any[];
   protected formGroup: FormGroup = this.fb.group({
     pathCount: new FormControl('', [Validators.required]),
     criteria: new FormControl('', [Validators.required])
   });
   protected nodeIds: string[];
-  protected nodeIdToSelectable: { [key: string]: boolean } = {};
   protected pathFormControls: FormControl[] = [];
   private targetId: string;
 
@@ -77,6 +80,7 @@ export class AddBranchComponent {
     });
     this.formGroup.controls['criteria'].valueChanges.subscribe((criteria: string) => {
       if (this.criteriaRequiresAdditionalParams(criteria)) {
+        this.updateAllowedComponentTypes();
         this.updateStepAndComponentParams();
         this.clearPathParams();
         this.updatePathParams();
@@ -90,10 +94,34 @@ export class AddBranchComponent {
     return criteria === this.SCORE || criteria === this.CHOICE_CHOSEN;
   }
 
+  private updateAllowedComponentTypes(): void {
+    const criteria = this.getCriteria();
+    if (criteria === this.SCORE) {
+      this.allowedComponentTypes = [
+        'AiChat',
+        'Animation',
+        'AudioOscillator',
+        'ConceptMap',
+        'DialogGuidance',
+        'Discussion',
+        'Draw',
+        'Embedded',
+        'Graph',
+        'Label',
+        'Match',
+        'MultipleChoice',
+        'OpenResponse',
+        'PeerChat',
+        'Table'
+      ];
+    } else if (criteria === this.CHOICE_CHOSEN) {
+      this.allowedComponentTypes = ['MultipleChoice'];
+    }
+  }
+
   private updateStepAndComponentParams(): void {
     this.initializeComponentIdSelector();
     this.initializeNodeIdSelector();
-    this.updateNodeIdSelector();
     this.updateComponentIdSelector();
   }
 
@@ -107,7 +135,7 @@ export class AddBranchComponent {
         this.tryAutoSelectPathParamValues();
       });
       if (this.getNodeId() === '') {
-        this.formGroup.controls['nodeId'].setValue(this.targetId);
+        this.setNodeId(this.targetId);
       }
     }
   }
@@ -122,20 +150,11 @@ export class AddBranchComponent {
     }
   }
 
-  private updateNodeIdSelector(): void {
-    this.nodeIdToSelectable = {};
-    for (const nodeId of this.nodeIds) {
-      this.nodeIdToSelectable[nodeId] = this.stepContainsSelectableComponent(nodeId);
-    }
-  }
-
   private updateComponentIdSelector(): void {
-    this.updateSelectableComponents(this.getNodeId());
-    const componentId = this.getComponentId();
-    if (
-      !this.components?.some((component) => component.id === componentId) ||
-      !this.componentIdToSelectable[componentId]
-    ) {
+    const selectedComponent = this.components.find(
+      (component) => component.id === this.getComponentId()
+    );
+    if (selectedComponent == null || !this.allowedComponentTypes.includes(selectedComponent.type)) {
       this.setComponentId('');
     }
     this.tryAutoSelectComponentId();
@@ -143,25 +162,6 @@ export class AddBranchComponent {
 
   private updateSelectableComponents(nodeId: string): void {
     this.components = this.getComponents(nodeId);
-    this.componentIdToSelectable = {};
-    for (const component of this.components) {
-      this.componentIdToSelectable[component.id] = this.isComponentSelectable(component);
-    }
-  }
-
-  private stepContainsSelectableComponent(nodeId: string): boolean {
-    const components = this.getComponents(nodeId);
-    return components.some((component) => this.isComponentSelectable(component));
-  }
-
-  private isComponentSelectable(component: any): boolean {
-    const criteria = this.getCriteria();
-    if (criteria === this.SCORE) {
-      return this.projectService.componentHasWork(component);
-    } else if (criteria === this.CHOICE_CHOSEN) {
-      return component.type === 'MultipleChoice';
-    }
-    return true;
   }
 
   private tryAutoSelectComponentId(): void {
@@ -272,20 +272,16 @@ export class AddBranchComponent {
     return this.formGroup.get('nodeId')?.value;
   }
 
+  private setNodeId(nodeId: string): void {
+    this.formGroup.get('nodeId').setValue(nodeId);
+  }
+
   private getComponentId(): string {
     return this.formGroup.get('componentId')?.value;
   }
 
   private setComponentId(componentId: string): void {
     this.formGroup.get('componentId').setValue(componentId);
-  }
-
-  protected getNodePositionById(nodeId: string): string {
-    return this.projectService.getNodePositionById(nodeId);
-  }
-
-  protected getNodeTitle(nodeId: string): string {
-    return this.projectService.getNodeTitle(nodeId);
   }
 
   protected getComponents(nodeId: string): any[] {
