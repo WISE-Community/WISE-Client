@@ -61,12 +61,11 @@ export class AddBranchComponent {
       text: $localize`Tag`
     }
   ];
-  protected components: any[];
+  private components: any[];
   protected formGroup: FormGroup = this.fb.group({
     pathCount: new FormControl('', [Validators.required]),
     criteria: new FormControl('', [Validators.required])
   });
-  protected nodeIds: string[];
   protected pathFormControls: FormControl[] = [];
   private targetId: string;
 
@@ -74,7 +73,6 @@ export class AddBranchComponent {
 
   ngOnInit(): void {
     this.targetId = history.state.targetId;
-    this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);
     this.formGroup.controls['pathCount'].valueChanges.subscribe(() => {
       this.updatePathParams();
     });
@@ -129,7 +127,7 @@ export class AddBranchComponent {
     if (this.formGroup.controls['nodeId'] == null) {
       this.formGroup.addControl('nodeId', new FormControl('', [Validators.required]));
       this.formGroup.controls['nodeId'].valueChanges.subscribe((nodeId: string) => {
-        this.updateSelectableComponents(nodeId);
+        this.components = this.getComponents(nodeId);
         this.setComponentId('');
         this.tryAutoSelectComponentId();
         this.tryAutoSelectPathParamValues();
@@ -158,10 +156,6 @@ export class AddBranchComponent {
       this.setComponentId('');
     }
     this.tryAutoSelectComponentId();
-  }
-
-  private updateSelectableComponents(nodeId: string): void {
-    this.components = this.getComponents(nodeId);
   }
 
   private tryAutoSelectComponentId(): void {
