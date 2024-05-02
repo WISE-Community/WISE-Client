@@ -47,17 +47,13 @@
   <div *ngIf="run.shared" class="info" i18n>
     Shared by {{ run.owner.firstName }} {{ run.owner.lastName }}
   </div>
-  <div fxLayout="row">
+  <mat-chip-set>
     <ng-container *ngFor="let tag of run.project.tags">
-      <div
-        *ngIf="tag.text !== 'archived'"
-        class="tag"
-        [ngStyle]="{ 'background-color': tag.color }"
-      >
+      <mat-chip *ngIf="tag.text !== 'archived'" [ngStyle]="{ 'background-color': tag.color }">
         {{ tag.text }}
-      </div>
+      </mat-chip>
     </ng-container>
-  </div>
+  </mat-chip-set>
 </ng-template>
 
 <mat-card

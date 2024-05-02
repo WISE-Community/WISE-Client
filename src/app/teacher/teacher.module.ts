@@ -45,12 +45,14 @@ import { SelectRunsControlsModule } from './select-runs-controls/select-runs-con
 import { ApplyTagsButtonComponent } from './apply-tags-button/apply-tags-button.component';
 import { ProjectTagService } from '../../assets/wise5/services/projectTagService';
 import { SelectTagsComponent } from './select-tags/select-tags.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 const materialModules = [
   MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatChipsModule,
   MatDatepickerModule,
   MatDialogModule,
   MatDividerModule,
