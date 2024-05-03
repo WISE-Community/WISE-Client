@@ -13,9 +13,11 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { Choice } from '../../components/match/choice';
 import { SelectStepComponent } from '../../../../app/authoring-tool/select-step/select-step.component';
 import { SelectComponentComponent } from '../../../../app/authoring-tool/select-component/select-component.component';
+import { BranchPathAuthoringComponent } from '../branch-path-authoring/branch-path-authoring.component';
+import { RouterModule } from '@angular/router';
+import { BranchService } from '../../services/branchService';
 
 @Component({
   selector: 'add-branch',
@@ -23,6 +25,7 @@ import { SelectComponentComponent } from '../../../../app/authoring-tool/select-
   styleUrls: ['./add-branch.component.scss'],
   standalone: true,
   imports: [
+    BranchPathAuthoringComponent,
     CommonModule,
     FlexLayoutModule,
     MatButtonModule,
@@ -30,13 +33,14 @@ import { SelectComponentComponent } from '../../../../app/authoring-tool/select-
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
+    RouterModule,
     SelectComponentComponent,
     SelectStepComponent
   ]
 })
 export class AddBranchComponent {
-  protected readonly CHOICE_CHOSEN: string = 'choiceChosen';
-  protected readonly SCORE: string = 'score';
+  protected readonly CHOICE_CHOSEN: string = this.branchService.CHOICE_CHOSEN;
+  protected readonly SCORE: string = this.branchService.SCORE;
 
   protected allowedComponentTypes: string[] = [];
   protected branchCriteria: any = [
@@ -62,26 +66,27 @@ export class AddBranchComponent {
     }
   ];
   private components: any[];
-  protected formGroup: FormGroup = this.fb.group({
-    pathCount: new FormControl('', [Validators.required]),
-    criteria: new FormControl('', [Validators.required])
-  });
-  protected pathFormControls: FormControl[] = [];
+  protected pathFormGroup: FormGroup = this.fb.group({});
   private targetId: string;
 
-  constructor(private fb: FormBuilder, private projectService: TeacherProjectService) {}
+  protected formGroup: FormGroup = this.fb.group({
+    pathCount: new FormControl('', [Validators.required]),
+    criteria: new FormControl('', [Validators.required]),
+    pathFormGroup: this.pathFormGroup
+  });
+
+  constructor(
+    private branchService: BranchService,
+    private fb: FormBuilder,
+    private projectService: TeacherProjectService
+  ) {}
 
   ngOnInit(): void {
     this.targetId = history.state.targetId;
-    this.formGroup.controls['pathCount'].valueChanges.subscribe(() => {
-      this.updatePathParams();
-    });
     this.formGroup.controls['criteria'].valueChanges.subscribe((criteria: string) => {
       if (this.criteriaRequiresAdditionalParams(criteria)) {
         this.updateAllowedComponentTypes();
         this.updateStepAndComponentParams();
-        this.clearPathParams();
-        this.updatePathParams();
       } else {
         this.removeAdditionalParams();
       }
@@ -127,10 +132,9 @@ export class AddBranchComponent {
     if (this.formGroup.controls['nodeId'] == null) {
       this.formGroup.addControl('nodeId', new FormControl('', [Validators.required]));
       this.formGroup.controls['nodeId'].valueChanges.subscribe((nodeId: string) => {
-        this.components = this.getComponents(nodeId);
+        this.components = this.projectService.getComponents(nodeId);
         this.setComponentId('');
         this.tryAutoSelectComponentId();
-        this.tryAutoSelectPathParamValues();
       });
       if (this.getNodeId() === '') {
         this.setNodeId(this.targetId);
@@ -141,10 +145,6 @@ export class AddBranchComponent {
   private initializeComponentIdSelector(): void {
     if (this.formGroup.controls['componentId'] == null) {
       this.formGroup.addControl('componentId', new FormControl('', [Validators.required]));
-      this.formGroup.controls['componentId'].valueChanges.subscribe(() => {
-        this.clearPathParams();
-        this.tryAutoSelectPathParamValues();
-      });
     }
   }
 
@@ -189,69 +189,9 @@ export class AddBranchComponent {
     }
   }
 
-  private updatePathParams(): void {
-    this.updateNumPathFormControls();
-    this.tryAutoSelectPathParamValues();
-  }
-
-  private updateNumPathFormControls(): void {
-    if (this.criteriaRequiresAdditionalParams(this.getCriteria())) {
-      if (this.pathFormControls.length < this.getPathCount()) {
-        this.increasePaths();
-      } else if (this.pathFormControls.length > this.getPathCount()) {
-        this.decreasePaths();
-      }
-    }
-  }
-
-  private tryAutoSelectPathParamValues(): void {
-    if (this.getCriteria() === this.CHOICE_CHOSEN) {
-      this.clearPathParams();
-      this.autoFillChoiceChosenValues();
-    }
-  }
-
-  private increasePaths(): void {
-    for (let i = this.pathFormControls.length; i < this.getPathCount(); i++) {
-      const pathFormControl = new FormControl('', [Validators.required]);
-      this.formGroup.addControl(`path${i + 1}`, pathFormControl);
-      this.pathFormControls.push(pathFormControl);
-    }
-  }
-
-  private decreasePaths(): void {
-    for (let i = this.pathFormControls.length; i > this.getPathCount(); i--) {
-      this.formGroup.removeControl(`path${i}`);
-      this.pathFormControls.pop();
-    }
-  }
-
-  private clearPathParams(): void {
-    for (let i = 0; i < this.pathFormControls.length; i++) {
-      this.pathFormControls[i].setValue('');
-    }
-  }
-
-  private autoFillChoiceChosenValues(): void {
-    const componentId = this.getComponentId();
-    if (componentId !== '') {
-      const component = this.components.find((component) => component.id === componentId);
-      const choiceIds = component.choices.map((choice: Choice) => choice.id);
-      for (let i = 0; i < this.pathFormControls.length; i++) {
-        if (choiceIds[i] != null) {
-          this.pathFormControls[i].setValue(choiceIds[i]);
-        }
-      }
-    }
-  }
-
   private removeAdditionalParams(): void {
     this.formGroup.removeControl('nodeId');
     this.formGroup.removeControl('componentId');
-    for (let i = 0; i < this.pathFormControls.length; i++) {
-      this.formGroup.removeControl(`path${i + 1}`);
-    }
-    this.pathFormControls = [];
   }
 
   private getPathCount(): number {
@@ -278,21 +218,18 @@ export class AddBranchComponent {
     this.formGroup.get('componentId').setValue(componentId);
   }
 
-  protected getComponents(nodeId: string): any[] {
-    return this.projectService.getComponents(nodeId);
-  }
-
   protected submit(): void {
     const data: any = {};
     data.pathCount = this.getPathCount();
     data.criteria = this.getCriteria();
     data.nodeId = this.getNodeId();
     data.componentId = this.getComponentId();
-    if (this.pathFormControls.length > 0) {
+    const pathKeys = Object.keys(this.pathFormGroup.controls);
+    if (pathKeys.length > 0) {
       data.paths = [];
-      for (let pathFormControl of this.pathFormControls) {
-        data.paths.push(pathFormControl.value);
-      }
+      pathKeys.forEach((key) => {
+        data.paths.push(this.pathFormGroup.controls[key].value);
+      });
     }
     alert(JSON.stringify(data, null, 2));
   }

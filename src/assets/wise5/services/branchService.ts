@@ -5,6 +5,9 @@ import { PathService } from './pathService';
 
 @Injectable()
 export class BranchService {
+  readonly CHOICE_CHOSEN: string = 'choiceChosen';
+  readonly SCORE: string = 'score';
+
   branchesCache: Branch[];
 
   constructor(private configService: ConfigService, private pathService: PathService) {}

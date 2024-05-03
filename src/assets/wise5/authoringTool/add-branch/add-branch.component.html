@@ -34,30 +34,13 @@
     [allowedComponentTypes]="allowedComponentTypes"
     (componentChangedEvent)="setComponentId($event)"
   ></select-component>
-  <ng-container
-    *ngIf="
-      formGroup.controls['nodeId']?.value !== '' &&
-      formGroup.controls['componentId']?.value !== '' &&
-      (formGroup.controls['criteria'].value === SCORE ||
-        formGroup.controls['criteria'].value === CHOICE_CHOSEN)
-    "
-  >
-    <div *ngFor="let pathFormControl of pathFormControls; index as index">
-      <div i18n>Path {{ index + 1 }}</div>
-      <ng-container *ngIf="formGroup.controls['criteria'].value === SCORE">
-        <mat-form-field>
-          <mat-label i18n>Score</mat-label>
-          <input matInput [formControlName]="'path' + (index + 1)" type="number" min="0" />
-        </mat-form-field>
-      </ng-container>
-      <ng-container *ngIf="formGroup.controls['criteria'].value === CHOICE_CHOSEN">
-        <mat-form-field>
-          <mat-label i18n>Choice Chosen</mat-label>
-          <input matInput [formControlName]="'path' + (index + 1)" />
-        </mat-form-field>
-      </ng-container>
-    </div>
-  </ng-container>
+  <branch-path-authoring
+    [pathCount]="formGroup.controls['pathCount'].value"
+    [criteria]="formGroup.controls['criteria'].value"
+    [nodeId]="formGroup.controls['nodeId']?.value"
+    [componentId]="formGroup.controls['componentId']?.value"
+    [pathFormGroup]="formGroup.controls['pathFormGroup']"
+  ></branch-path-authoring>
   <div fxLayoutAlign="end center" fxLayoutGap="12px">
     <button mat-button routerLink=".." i18n>Cancel</button>
     <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="submit()" i18n>
