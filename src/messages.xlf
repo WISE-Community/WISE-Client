@@ -8884,11 +8884,18 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">19,21</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="49f33ab0a10387961143efd56ab84b4f65737ec4" datatype="html">
+        <source>Remove filter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/selected-tags-list/selected-tags-list.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="0f1ef37e15512702909190c08b6f79056dd5c1ae" datatype="html">
         <source> Clear filters </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/selected-tags-list/selected-tags-list.component.html</context>
-          <context context-type="linenumber">8,10</context>
+          <context context-type="linenumber">14,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c76c2eeebe0adc81f3434495d189c56d70899cad" datatype="html">

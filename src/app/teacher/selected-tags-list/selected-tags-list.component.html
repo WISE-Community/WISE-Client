@@ -1,10 +1,16 @@
 <div fxLayout="row" fxLayoutAlign="space-between center">
-  <mat-chip-set>
-    <mat-chip *ngFor="let tag of tags" [ngStyle]="{ 'background-color': tag.color }">
+  <mat-chip-listbox [selectable]="false" aria-label="Selected filters" i8n-aria-label>
+    <mat-chip-option
+      *ngFor="let tag of tags"
+      [ngStyle]="{ 'background-color': tag.color }"
+      (removed)="removeTagEvent.emit(tag)"
+    >
       <div>{{ tag.text }}</div>
-      <button matChipRemove (click)="removeTagEvent.emit(tag)"><mat-icon>cancel</mat-icon></button>
-    </mat-chip>
-  </mat-chip-set>
+      <button matChipRemove aria-label="Remove filter" i18n-aria-label>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-option>
+  </mat-chip-listbox>
   <a *ngIf="tags.length > 0" href="#" (click)="removeTags(); $event.preventDefault()" i18n>
     Clear filters
   </a>

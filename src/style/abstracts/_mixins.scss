@@ -63,6 +63,10 @@
     }
   }
 
+  .mat-mdc-standard-chip .mdc-evolution-chip__text-label {
+    font-size: mat.font-size($wise-typography, 'button');
+  }
+
   .mat-divider-horizontal {
     margin: 16px 0;
   }
