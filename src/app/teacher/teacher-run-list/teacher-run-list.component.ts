@@ -203,6 +203,7 @@ export class TeacherRunListComponent implements OnInit {
   protected reset(): void {
     this.searchValue = '';
     this.filterValue = '';
+    this.selectedTags = [];
     this.performSearchAndFilter();
   }
 
@@ -266,5 +267,13 @@ export class TeacherRunListComponent implements OnInit {
     return this.filteredRuns
       .filter((run: TeacherRun) => run.project.selected)
       .map((run: TeacherRun) => run.project);
+  }
+
+  protected getNumActiveRuns(): number {
+    return this.runs.filter((run: TeacherRun) => !run.project.archived).length;
+  }
+
+  protected getNumArchivedRuns(): number {
+    return this.runs.filter((run: TeacherRun) => run.project.archived).length;
   }
 }

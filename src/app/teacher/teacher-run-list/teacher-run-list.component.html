@@ -31,7 +31,7 @@
     [tags]="selectedTags"
     (removeTagEvent)="removeTag($event)"
   ></selected-tags-list>
-  <div *ngIf="filteredRuns.length > 0" class="notice">
+  <div class="notice">
     <p [ngStyle]="{ visibility: allRunsLoaded ? 'visible' : 'hidden' }">
       <ng-container *ngIf="searchValue || filterValue" i18n
         >Units found: {{ filteredRuns.length }}</ng-container
@@ -52,7 +52,7 @@
           >, <span i18n>{{ scheduledTotal() }} scheduled</span></ng-container
         >)
       </span>
-      <ng-container *ngIf="searchValue || filterValue">
+      <ng-container *ngIf="searchValue || filterValue || selectedTags.length > 0">
         |
         <a
           href="#"
@@ -66,15 +66,13 @@
     </p>
   </div>
   <ng-container *ngIf="recentRunsLoaded">
-    <ng-container *ngIf="filteredRuns.length === 0">
-      <div class="notice no-runs-message" *ngIf="!showArchivedView">
-        <p i18n>Hey there! Looks like you don't have any active classroom units.</p>
-        <p i18n>Browse the "Unit Library" to find titles to use with your students.</p>
-      </div>
-      <div class="notice no-runs-message" *ngIf="showArchivedView">
-        <p i18n>Looks like you don't have any archived classroom units.</p>
-      </div>
-    </ng-container>
+    <div class="notice no-runs-message" *ngIf="!showArchivedView && getNumActiveRuns() === 0">
+      <p i18n>Hey there! Looks like you don't have any active classroom units.</p>
+      <p i18n>Browse the "Unit Library" to find titles to use with your students.</p>
+    </div>
+    <div class="notice no-runs-message" *ngIf="showArchivedView && getNumArchivedRuns() === 0">
+      <p i18n>Looks like you don't have any archived classroom units.</p>
+    </div>
     <div fxLayout="row">
       <select-runs-controls
         *ngIf="filteredRuns.length > 0"

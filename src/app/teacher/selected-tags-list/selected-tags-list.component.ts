@@ -15,10 +15,4 @@ import { MatChipsModule } from '@angular/material/chips';
 export class SelectedTagsListComponent {
   @Output() removeTagEvent: EventEmitter<Tag> = new EventEmitter<Tag>();
   @Input() tags: Tag[] = [];
-
-  protected removeTags(): void {
-    this.tags.forEach((tag: Tag) => {
-      this.removeTagEvent.emit(tag);
-    });
-  }
 }
