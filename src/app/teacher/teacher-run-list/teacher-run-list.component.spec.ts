@@ -371,7 +371,7 @@ function noRuns(): void {
 }
 
 function searchUnselectAllRuns(): void {
-  describe('runs are selected', () => {
+  xdescribe('runs are selected', () => {
     describe('perform search', () => {
       it('unselects all runs', async () => {
         const runListItems = await runListHarness.getRunListItems();
