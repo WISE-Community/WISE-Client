@@ -125,7 +125,7 @@
     *ngFor="let label of componentContent.labels; index as labelIndex"
     class="starter-label-container"
   >
-    <div fxLayout="row">
+    <div fxLayout="row wrap" fxLayoutAlign="start start">
       <translatable-input
         [content]="label"
         key="text"
