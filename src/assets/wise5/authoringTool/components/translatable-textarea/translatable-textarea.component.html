@@ -9,7 +9,7 @@
   >
   </textarea>
 </mat-form-field>
-<mat-form-field *ngIf="showTranslationInput()">
+<mat-form-field *ngIf="showTranslationInput()" class="translatable">
   <mat-label>{{ label }} ({{ currentLanguage().language }})</mat-label>
   <textarea
     matInput
@@ -18,5 +18,8 @@
     placeholder="{{ placeholder }}"
     cdkTextareaAutosize
   ></textarea>
-  <mat-hint>[{{ defaultLanguage.language }}] {{ content[key] }}</mat-hint>
+  <mat-hint class="source-language selected-bg-bg">
+    <strong><mat-icon>translate</mat-icon> {{ defaultLanguage.language }}:</strong>
+    {{ content[key] }}
+  </mat-hint>
 </mat-form-field>

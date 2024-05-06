@@ -1,0 +1,16 @@
+.translatable {
+  width: 100%;
+
+  .mat-mdc-form-field-hint-wrapper {
+    position: relative;
+    margin: -16px 0 4px;
+  }
+
+  .mat-mdc-form-field-hint-spacer {
+    display: none;
+  }
+
+  .source-language {
+    padding: 4px 8px;
+  }
+}
