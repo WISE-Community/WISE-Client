@@ -9,10 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   selector: 'translatable-input',
   imports: [CommonModule, FormsModule, MatIconModule, MatInputModule],
-  styleUrls: [
-    '../abstract-translatable-field/abstract-translatable-field.component.scss',
-    './translatable-input.component.scss'
-  ],
+  styleUrls: ['../abstract-translatable-field/abstract-translatable-field.component.scss'],
   templateUrl: './translatable-input.component.html',
   encapsulation: ViewEncapsulation.None
 })
