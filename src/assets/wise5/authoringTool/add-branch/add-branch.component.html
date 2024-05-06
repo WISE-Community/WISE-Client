@@ -41,6 +41,20 @@
     [componentId]="formGroup.controls['componentId']?.value"
     [pathFormGroup]="formGroup.controls['pathFormGroup']"
   ></branch-path-authoring>
+  <select-merge-step
+    *ngIf="
+      formGroup.controls['criteria'].value === WORKGROUP_ID_VALUE ||
+      formGroup.controls['criteria'].value === RANDOM_VALUE ||
+      formGroup.controls['criteria'].value === TAG_VALUE ||
+      ((formGroup.controls['criteria'].value === SCORE_VALUE ||
+        formGroup.controls['criteria'].value === CHOICE_CHOSEN_VALUE) &&
+        formGroup.controls['nodeId'].value !== '' &&
+        formGroup.controls['componentId'].value !== '' &&
+        formGroup.controls['pathFormGroup'].valid)
+    "
+    [branchStepId]="targetId"
+    (selectMergeStepEvent)="setMergeStep($event)"
+  ></select-merge-step>
   <div fxLayoutAlign="end center" fxLayoutGap="12px">
     <button mat-button routerLink=".." i18n>Cancel</button>
     <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="submit()" i18n>

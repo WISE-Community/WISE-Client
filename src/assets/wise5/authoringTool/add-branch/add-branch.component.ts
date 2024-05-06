@@ -21,8 +21,12 @@ import {
   BranchCriteria,
   BRANCH_CRITERIA,
   CHOICE_CHOSEN_VALUE,
-  SCORE_VALUE
+  SCORE_VALUE,
+  WORKGROUP_ID_VALUE,
+  RANDOM_VALUE,
+  TAG_VALUE
 } from '../../../../app/domain/branchCriteria';
+import { SelectMergeStepComponent } from '../select-merge-step/select-merge-step.component';
 
 @Component({
   selector: 'add-branch',
@@ -40,23 +44,28 @@ import {
     ReactiveFormsModule,
     RouterModule,
     SelectComponentComponent,
+    SelectMergeStepComponent,
     SelectStepComponent
   ]
 })
 export class AddBranchComponent {
   protected readonly BRANCH_CRITERIA: BranchCriteria[] = BRANCH_CRITERIA;
   protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;
+  protected readonly RANDOM_VALUE: string = RANDOM_VALUE;
   protected readonly SCORE_VALUE: string = SCORE_VALUE;
+  protected readonly TAG_VALUE: string = TAG_VALUE;
+  protected readonly WORKGROUP_ID_VALUE: string = WORKGROUP_ID_VALUE;
 
   protected allowedComponentTypes: string[] = [];
   private components: any[];
   protected pathFormGroup: FormGroup = this.fb.group({});
-  private targetId: string;
+  protected targetId: string;
 
   protected formGroup: FormGroup = this.fb.group({
     pathCount: new FormControl('', [Validators.required]),
     criteria: new FormControl('', [Validators.required]),
-    pathFormGroup: this.pathFormGroup
+    pathFormGroup: this.pathFormGroup,
+    mergeStep: new FormControl('')
   });
 
   constructor(private fb: FormBuilder, private projectService: TeacherProjectService) {}
@@ -198,6 +207,14 @@ export class AddBranchComponent {
     this.formGroup.get('componentId').setValue(componentId);
   }
 
+  protected setMergeStep(nodeId: string): void {
+    this.formGroup.get('mergeStep').setValue(nodeId);
+  }
+
+  private getMergeStepId(): string {
+    return this.formGroup.get('mergeStep').value;
+  }
+
   protected submit(): void {
     const data: any = {};
     data.pathCount = this.getPathCount();
@@ -211,6 +228,7 @@ export class AddBranchComponent {
         data.paths.push(this.pathFormGroup.controls[key].value);
       });
     }
+    data.mergeStepId = this.getMergeStepId();
     alert(JSON.stringify(data, null, 2));
   }
 }
