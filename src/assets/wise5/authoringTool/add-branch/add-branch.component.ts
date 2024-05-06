@@ -17,7 +17,12 @@ import { SelectStepComponent } from '../../../../app/authoring-tool/select-step/
 import { SelectComponentComponent } from '../../../../app/authoring-tool/select-component/select-component.component';
 import { BranchPathAuthoringComponent } from '../branch-path-authoring/branch-path-authoring.component';
 import { RouterModule } from '@angular/router';
-import { BranchService } from '../../services/branchService';
+import {
+  BranchCriteria,
+  BRANCH_CRITERIA,
+  CHOICE_CHOSEN_VALUE,
+  SCORE_VALUE
+} from '../../../../app/domain/branchCriteria';
 
 @Component({
   selector: 'add-branch',
@@ -39,32 +44,11 @@ import { BranchService } from '../../services/branchService';
   ]
 })
 export class AddBranchComponent {
-  protected readonly CHOICE_CHOSEN: string = this.branchService.CHOICE_CHOSEN;
-  protected readonly SCORE: string = this.branchService.SCORE;
+  protected readonly BRANCH_CRITERIA: BranchCriteria[] = BRANCH_CRITERIA;
+  protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;
+  protected readonly SCORE_VALUE: string = SCORE_VALUE;
 
   protected allowedComponentTypes: string[] = [];
-  protected branchCriteria: any = [
-    {
-      value: 'workgroupId',
-      text: $localize`Workgroup ID`
-    },
-    {
-      value: this.SCORE,
-      text: $localize`Score`
-    },
-    {
-      value: this.CHOICE_CHOSEN,
-      text: $localize`Choice Chosen`
-    },
-    {
-      value: 'random',
-      text: $localize`Random`
-    },
-    {
-      value: 'tag',
-      text: $localize`Tag`
-    }
-  ];
   private components: any[];
   protected pathFormGroup: FormGroup = this.fb.group({});
   private targetId: string;
@@ -75,11 +59,7 @@ export class AddBranchComponent {
     pathFormGroup: this.pathFormGroup
   });
 
-  constructor(
-    private branchService: BranchService,
-    private fb: FormBuilder,
-    private projectService: TeacherProjectService
-  ) {}
+  constructor(private fb: FormBuilder, private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.targetId = history.state.targetId;
@@ -94,12 +74,12 @@ export class AddBranchComponent {
   }
 
   private criteriaRequiresAdditionalParams(criteria: string): boolean {
-    return criteria === this.SCORE || criteria === this.CHOICE_CHOSEN;
+    return criteria === this.SCORE_VALUE || criteria === this.CHOICE_CHOSEN_VALUE;
   }
 
   private updateAllowedComponentTypes(): void {
     const criteria = this.getCriteria();
-    if (criteria === this.SCORE) {
+    if (criteria === this.SCORE_VALUE) {
       this.allowedComponentTypes = [
         'AiChat',
         'Animation',
@@ -117,7 +97,7 @@ export class AddBranchComponent {
         'PeerChat',
         'Table'
       ];
-    } else if (criteria === this.CHOICE_CHOSEN) {
+    } else if (criteria === this.CHOICE_CHOSEN_VALUE) {
       this.allowedComponentTypes = ['MultipleChoice'];
     }
   }
@@ -160,9 +140,9 @@ export class AddBranchComponent {
 
   private tryAutoSelectComponentId(): void {
     const criteria = this.getCriteria();
-    if (criteria === this.SCORE) {
+    if (criteria === this.SCORE_VALUE) {
       this.tryAutoSelectScoreComponent();
-    } else if (criteria === this.CHOICE_CHOSEN) {
+    } else if (criteria === this.CHOICE_CHOSEN_VALUE) {
       this.tryAutoSelectChoiceChosenComponent();
     }
   }

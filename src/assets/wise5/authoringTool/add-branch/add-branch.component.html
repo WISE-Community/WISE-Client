@@ -7,7 +7,7 @@
   <mat-form-field *ngIf="formGroup.controls['pathCount'].value > 1" class="select-medium-width">
     <mat-label i18n>How to Choose Among Paths</mat-label>
     <mat-select formControlName="criteria">
-      <mat-option *ngFor="let branchCriterion of branchCriteria" [value]="branchCriterion.value">
+      <mat-option *ngFor="let branchCriterion of BRANCH_CRITERIA" [value]="branchCriterion.value">
         <span fxLayout="row" fxLayoutAlign="start center">
           <span>{{ branchCriterion.text }}</span>
         </span>
@@ -16,8 +16,8 @@
   </mat-form-field>
   <select-step
     *ngIf="
-      formGroup.controls['criteria'].value === SCORE ||
-      formGroup.controls['criteria'].value === CHOICE_CHOSEN
+      formGroup.controls['criteria'].value === SCORE_VALUE ||
+      formGroup.controls['criteria'].value === CHOICE_CHOSEN_VALUE
     "
     [nodeId]="formGroup.controls['nodeId'].value"
     (stepChangedEvent)="setNodeId($event)"
@@ -26,8 +26,8 @@
   <select-component
     *ngIf="
       formGroup.controls['nodeId']?.value !== '' &&
-      (formGroup.controls['criteria'].value === SCORE ||
-        formGroup.controls['criteria'].value === CHOICE_CHOSEN)
+      (formGroup.controls['criteria'].value === SCORE_VALUE ||
+        formGroup.controls['criteria'].value === CHOICE_CHOSEN_VALUE)
     "
     [nodeId]="formGroup.controls['nodeId'].value"
     [componentId]="formGroup.controls['componentId'].value"

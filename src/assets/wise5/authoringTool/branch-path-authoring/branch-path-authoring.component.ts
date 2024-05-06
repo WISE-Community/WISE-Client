@@ -13,6 +13,7 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Choice } from '../../components/multipleChoice/Choice';
 import { BranchService } from '../../services/branchService';
 import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleChoiceContent';
+import { CHOICE_CHOSEN_VALUE, SCORE_VALUE } from '../../../../app/domain/branchCriteria';
 
 @Component({
   selector: 'branch-path-authoring',
@@ -21,8 +22,8 @@ import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleC
   templateUrl: './branch-path-authoring.component.html'
 })
 export class BranchPathAuthoringComponent {
-  protected readonly CHOICE_CHOSEN: string = this.branchService.CHOICE_CHOSEN;
-  protected readonly SCORE: string = this.branchService.SCORE;
+  protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;
+  protected readonly SCORE_VALUE: string = SCORE_VALUE;
 
   @Input() componentId: string = '';
   @Input() criteria: string = '';
@@ -67,7 +68,7 @@ export class BranchPathAuthoringComponent {
   }
 
   private criteriaRequiresAdditionalParams(criteria: string): boolean {
-    return criteria === this.SCORE || criteria === this.CHOICE_CHOSEN;
+    return criteria === this.SCORE_VALUE || criteria === this.CHOICE_CHOSEN_VALUE;
   }
 
   private increasePaths(): void {
@@ -93,7 +94,7 @@ export class BranchPathAuthoringComponent {
   }
 
   private tryAutoSelectPathParamValues(): void {
-    if (this.criteria === this.CHOICE_CHOSEN) {
+    if (this.criteria === this.CHOICE_CHOSEN_VALUE) {
       this.autoFillChoiceChosenValues();
     }
   }
