@@ -2,14 +2,20 @@
   <div class="personal-library-header" fxLayoutAlign="center center" fxLayoutGap="8px">
     <a class="mat-caption" href="#" (click)="showInfo($event)" i18n>What are My Units?</a>
     <span fxFlex></span>
+    <select-tags [selectedTags]="selectedTags" (selectTagEvent)="selectTags($event)"></select-tags>
     <mat-form-field [subscriptSizing]="'dynamic'">
-      <mat-label>View</mat-label>
+      <mat-label i18n>View</mat-label>
       <mat-select [(ngModel)]="showArchivedView" (selectionChange)="switchActiveArchivedView()">
         <mat-option [value]="false" i18n>Active</mat-option>
         <mat-option [value]="true" i18n>Archived</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
+  <selected-tags-list
+    *ngIf="selectedTags.length > 0"
+    [tags]="selectedTags"
+    (removeTagEvent)="removeTag($event)"
+  ></selected-tags-list>
   <mat-divider></mat-divider>
   <div fxLayoutAlign="start center" fxLayout.xs="column" fxLayoutGap="8px">
     <div fxLayoutAlign="center center" fxLayoutGap="4px" fxFlexAlign.xs="start" fxFlexOrder.xs="1">
@@ -28,6 +34,10 @@
         [showArchive]="!showArchivedView"
         (archiveProjectsEvent)="archiveProjects($event)"
       ></archive-projects-button>
+      <apply-tags-button
+        *ngIf="selectedProjects().length > 0"
+        [selectedProjects]="selectedProjects()"
+      ></apply-tags-button>
     </div>
     <span fxFlex fxHide.xs></span>
     <mat-paginator

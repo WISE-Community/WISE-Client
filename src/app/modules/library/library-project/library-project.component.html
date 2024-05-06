@@ -42,5 +42,12 @@
     <p *ngIf="project.shared" class="info mat-caption" i18n>
       Shared by {{ project.owner.displayName }}
     </p>
+    <mat-chip-set aria-label="Unit tags" i18n-aria-label>
+      <ng-container *ngFor="let tag of project.tags">
+        <mat-chip *ngIf="tag.text !== 'archived'" [ngStyle]="{ 'background-color': tag.color }">
+          {{ tag.text }}
+        </mat-chip>
+      </ng-container>
+    </mat-chip-set>
   </div>
 </mat-card>
