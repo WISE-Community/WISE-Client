@@ -7,13 +7,14 @@ describe('LibraryProjectDisciplinesComponent', () => {
   let component: LibraryProjectDisciplinesComponent;
   let fixture: ComponentFixture<LibraryProjectDisciplinesComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [LibraryProjectDisciplinesComponent],
-      imports: [],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [LibraryProjectDisciplinesComponent],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LibraryProjectDisciplinesComponent);

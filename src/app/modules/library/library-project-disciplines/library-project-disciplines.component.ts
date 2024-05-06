@@ -1,20 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-library-project-disciplines',
   templateUrl: './library-project-disciplines.component.html',
-  styleUrls: ['./library-project-disciplines.component.scss']
+  styleUrls: ['./library-project-disciplines.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FlexLayoutModule, MatTooltipModule]
 })
 export class LibraryProjectDisciplinesComponent implements OnInit {
-  @Input()
-  project: LibraryProject = new LibraryProject();
+  @Input() project: LibraryProject = new LibraryProject();
 
   disciplines: any[];
 
-  constructor() {}
-
-  ngOnInit() {
+  ngOnInit(): void {
     let standards = this.project.metadata.standardsAddressed;
     if (standards && standards.ngss) {
       if (standards.ngss.disciplines) {
