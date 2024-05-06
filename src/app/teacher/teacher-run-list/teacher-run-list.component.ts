@@ -30,7 +30,7 @@ export class TeacherRunListComponent implements OnInit {
   protected runs: TeacherRun[] = [];
   protected searchValue: string = '';
   protected selectedProjects: Project[] = [];
-  private selectedTags: Tag[] = [];
+  protected selectedTags: Tag[] = [];
   protected showAll: boolean = false;
   protected showArchivedView: boolean = false;
   private subscriptions: Subscription = new Subscription();
@@ -161,6 +161,11 @@ export class TeacherRunListComponent implements OnInit {
     this.performSearchAndFilter();
   }
 
+  protected removeTag(tag: Tag): void {
+    this.selectedTags = this.selectedTags.filter((selectedTag: Tag) => selectedTag.id !== tag.id);
+    this.performSearchAndFilter();
+  }
+
   private performFilter(): void {
     this.filteredRuns = this.filteredRuns.filter(
       (run: TeacherRun) =>
@@ -198,6 +203,7 @@ export class TeacherRunListComponent implements OnInit {
   protected reset(): void {
     this.searchValue = '';
     this.filterValue = '';
+    this.selectedTags = [];
     this.performSearchAndFilter();
   }
 
@@ -261,5 +267,13 @@ export class TeacherRunListComponent implements OnInit {
     return this.filteredRuns
       .filter((run: TeacherRun) => run.project.selected)
       .map((run: TeacherRun) => run.project);
+  }
+
+  protected getNumActiveRuns(): number {
+    return this.runs.filter((run: TeacherRun) => !run.project.archived).length;
+  }
+
+  protected getNumArchivedRuns(): number {
+    return this.runs.filter((run: TeacherRun) => run.project.archived).length;
   }
 }
