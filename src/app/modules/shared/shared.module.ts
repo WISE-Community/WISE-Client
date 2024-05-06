@@ -23,7 +23,6 @@ const materialModules = [
 ];
 
 import { CallToActionComponent } from './call-to-action/call-to-action.component';
-import { HeroSectionComponent } from './hero-section/hero-section.component';
 import { SelectMenuComponent } from './select-menu/select-menu.component';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
 import { UnlinkGoogleAccountConfirmComponent } from './unlink-google-account-confirm/unlink-google-account-confirm.component';
@@ -45,13 +44,11 @@ import { PasswordModule } from '../../password/password.module';
     materialModules,
     FlexLayoutModule,
     CallToActionComponent,
-    HeroSectionComponent,
     SelectMenuComponent,
     EditPasswordComponent
   ],
   declarations: [
     CallToActionComponent,
-    HeroSectionComponent,
     SelectMenuComponent,
     EditPasswordComponent,
     UnlinkGoogleAccountConfirmComponent,

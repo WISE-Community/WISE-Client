@@ -7,11 +7,13 @@ import { LibraryModule } from '../modules/library/library.module';
 import { SharedModule } from '../modules/shared/shared.module';
 import { DiscourseLatestNewsComponent } from './discourse-latest-news/discourse-latest-news.component';
 import { BlurbComponent } from '../modules/shared/blurb/blurb.component';
+import { HeroSectionComponent } from '../modules/shared/hero-section/hero-section.component';
 
 @NgModule({
   imports: [
     BlurbComponent,
     CommonModule,
+    HeroSectionComponent,
     HomeRoutingModule,
     LibraryModule,
     SharedModule,
