@@ -7,7 +7,7 @@
   <mat-form-field *ngIf="formGroup.controls['pathCount'].value > 1" class="select-medium-width">
     <mat-label i18n>How to Choose Among Paths</mat-label>
     <mat-select formControlName="criteria">
-      <mat-option *ngFor="let branchCriterion of branchCriteria" [value]="branchCriterion.value">
+      <mat-option *ngFor="let branchCriterion of BRANCH_CRITERIA" [value]="branchCriterion.value">
         <span fxLayout="row" fxLayoutAlign="start center">
           <span>{{ branchCriterion.text }}</span>
         </span>
@@ -16,8 +16,8 @@
   </mat-form-field>
   <select-step
     *ngIf="
-      formGroup.controls['criteria'].value === SCORE ||
-      formGroup.controls['criteria'].value === CHOICE_CHOSEN
+      formGroup.controls['criteria'].value === SCORE_VALUE ||
+      formGroup.controls['criteria'].value === CHOICE_CHOSEN_VALUE
     "
     [nodeId]="formGroup.controls['nodeId'].value"
     (stepChangedEvent)="setNodeId($event)"
@@ -26,38 +26,21 @@
   <select-component
     *ngIf="
       formGroup.controls['nodeId']?.value !== '' &&
-      (formGroup.controls['criteria'].value === SCORE ||
-        formGroup.controls['criteria'].value === CHOICE_CHOSEN)
+      (formGroup.controls['criteria'].value === SCORE_VALUE ||
+        formGroup.controls['criteria'].value === CHOICE_CHOSEN_VALUE)
     "
     [nodeId]="formGroup.controls['nodeId'].value"
     [componentId]="formGroup.controls['componentId'].value"
     [allowedComponentTypes]="allowedComponentTypes"
     (componentChangedEvent)="setComponentId($event)"
   ></select-component>
-  <ng-container
-    *ngIf="
-      formGroup.controls['nodeId']?.value !== '' &&
-      formGroup.controls['componentId']?.value !== '' &&
-      (formGroup.controls['criteria'].value === SCORE ||
-        formGroup.controls['criteria'].value === CHOICE_CHOSEN)
-    "
-  >
-    <div *ngFor="let pathFormControl of pathFormControls; index as index">
-      <div i18n>Path {{ index + 1 }}</div>
-      <ng-container *ngIf="formGroup.controls['criteria'].value === SCORE">
-        <mat-form-field>
-          <mat-label i18n>Score</mat-label>
-          <input matInput [formControlName]="'path' + (index + 1)" type="number" min="0" />
-        </mat-form-field>
-      </ng-container>
-      <ng-container *ngIf="formGroup.controls['criteria'].value === CHOICE_CHOSEN">
-        <mat-form-field>
-          <mat-label i18n>Choice Chosen</mat-label>
-          <input matInput [formControlName]="'path' + (index + 1)" />
-        </mat-form-field>
-      </ng-container>
-    </div>
-  </ng-container>
+  <branch-path-authoring
+    [pathCount]="formGroup.controls['pathCount'].value"
+    [criteria]="formGroup.controls['criteria'].value"
+    [nodeId]="formGroup.controls['nodeId']?.value"
+    [componentId]="formGroup.controls['componentId']?.value"
+    [pathFormGroup]="formGroup.controls['pathFormGroup']"
+  ></branch-path-authoring>
   <div fxLayoutAlign="end center" fxLayoutGap="12px">
     <button mat-button routerLink=".." i18n>Cancel</button>
     <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="submit()" i18n>
