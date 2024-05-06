@@ -11,7 +11,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Choice } from '../../components/multipleChoice/Choice';
-import { BranchService } from '../../services/branchService';
 import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleChoiceContent';
 import { CHOICE_CHOSEN_VALUE, SCORE_VALUE } from '../../../../app/domain/branchCriteria';
 
@@ -32,10 +31,7 @@ export class BranchPathAuthoringComponent {
   @Input() pathCount: number;
   @Input() pathFormGroup: FormGroup;
 
-  constructor(
-    private branchService: BranchService,
-    private projectService: TeacherProjectService
-  ) {}
+  constructor(private projectService: TeacherProjectService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.pathCount) {
