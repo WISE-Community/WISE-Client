@@ -33,11 +33,11 @@ export class BranchPathAuthoringComponent {
   protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;
   protected readonly SCORE_VALUE: string = SCORE_VALUE;
 
+  protected choices: Choice[] = [];
   @Input() componentId: string = '';
   @Input() criteria: string = '';
   protected formControls: FormControl[] = [];
   @Input() nodeId: string = '';
-  protected choices: Choice[] = [];
   @Input() pathCount: number;
   @Input() pathFormGroup: FormGroup;
 
