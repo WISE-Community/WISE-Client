@@ -186,16 +186,11 @@ export class AddBranchComponent {
   }
 
   protected showSelectMergeStep(): boolean {
-    return (
-      this.formGroup.controls['criteria'].value === WORKGROUP_ID_VALUE ||
-      this.formGroup.controls['criteria'].value === RANDOM_VALUE ||
-      this.formGroup.controls['criteria'].value === TAG_VALUE ||
-      ((this.formGroup.controls['criteria'].value === SCORE_VALUE ||
-        this.formGroup.controls['criteria'].value === CHOICE_CHOSEN_VALUE) &&
-        this.formGroup.controls['nodeId'].value !== '' &&
-        this.formGroup.controls['componentId'].value !== '' &&
-        this.formGroup.controls['pathFormGroup'].valid)
-    );
+    return this.criteriaRequiresAdditionalParams(this.getCriteria())
+      ? this.formGroup.controls['nodeId'].valid &&
+          this.formGroup.controls['componentId'].valid &&
+          this.formGroup.controls['pathFormGroup'].valid
+      : this.formGroup.controls['criteria'].valid;
   }
 
   private getPathCount(): number {
