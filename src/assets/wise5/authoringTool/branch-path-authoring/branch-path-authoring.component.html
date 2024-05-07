@@ -17,7 +17,11 @@
     <ng-container *ngIf="criteria === CHOICE_CHOSEN_VALUE">
       <mat-form-field>
         <mat-label i18n>Choice Chosen</mat-label>
-        <input matInput [formControlName]="'path-' + (index + 1)" />
+        <mat-select [formControlName]="'path-' + (index + 1)">
+          <mat-option *ngFor="let choice of choices" [value]="choice.id">
+            {{ choice.text }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </ng-container>
   </div>
