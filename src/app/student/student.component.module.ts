@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ComponentStateInfoModule } from '../../assets/wise5/common/component-state-info/component-state-info.module';
 import { AddToNotebookButton } from '../../assets/wise5/directives/add-to-notebook-button/add-to-notebook-button.component';
 import { ComponentHeader } from '../../assets/wise5/directives/component-header/component-header.component';
 import { ComponentSaveSubmitButtons } from '../../assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component';
@@ -8,6 +7,7 @@ import { DynamicPromptComponent } from '../../assets/wise5/directives/dynamic-pr
 import { PromptComponent } from '../../assets/wise5/directives/prompt/prompt.component';
 import { PossibleScoreComponent } from '../possible-score/possible-score.component';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
+import { ComponentStateInfoComponent } from '../../assets/wise5/common/component-state-info/component-state-info.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
     PossibleScoreComponent,
     PromptComponent
   ],
-  imports: [StudentTeacherCommonModule, ComponentStateInfoModule],
+  imports: [ComponentStateInfoComponent, StudentTeacherCommonModule],
   exports: [
     AddToNotebookButton,
     ComponentAnnotationsComponent,
