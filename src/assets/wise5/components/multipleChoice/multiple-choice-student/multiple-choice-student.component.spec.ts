@@ -116,10 +116,11 @@ describe('MultipleChoiceStudentComponent', () => {
         MatCheckboxModule,
         MatDialogModule,
         MatRadioModule,
+        PossibleScoreComponent,
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [ComponentHeader, MultipleChoiceStudent, PossibleScoreComponent],
+      declarations: [ComponentHeader, MultipleChoiceStudent],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(MultipleChoiceStudent);

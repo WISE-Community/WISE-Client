@@ -40,6 +40,7 @@ describe('OpenResponseStudent', () => {
         HttpClientTestingModule,
         MatDialogModule,
         MatIconModule,
+        PossibleScoreComponent,
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
@@ -47,8 +48,7 @@ describe('OpenResponseStudent', () => {
         ComponentHeader,
         ComponentSaveSubmitButtons,
         DialogWithoutCloseComponent,
-        OpenResponseStudent,
-        PossibleScoreComponent
+        OpenResponseStudent
       ],
       providers: [AudioRecorderService],
       schemas: [NO_ERRORS_SCHEMA]
