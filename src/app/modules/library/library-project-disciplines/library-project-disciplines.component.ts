@@ -7,14 +7,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'app-library-project-disciplines',
   templateUrl: './library-project-disciplines.component.html',
-  styleUrls: ['./library-project-disciplines.component.scss'],
+  styleUrl: './library-project-disciplines.component.scss',
   standalone: true,
   imports: [CommonModule, FlexLayoutModule, MatTooltipModule]
 })
 export class LibraryProjectDisciplinesComponent implements OnInit {
+  protected disciplines: any[];
   @Input() project: LibraryProject = new LibraryProject();
-
-  disciplines: any[];
 
   ngOnInit(): void {
     let standards = this.project.metadata.standardsAddressed;

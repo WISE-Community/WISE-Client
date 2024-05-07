@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { LibraryProjectDisciplinesComponent } from './library-project-disciplines.component';
 import { LibraryProject } from '../libraryProject';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('LibraryProjectDisciplinesComponent', () => {
   let component: LibraryProjectDisciplinesComponent;
@@ -10,8 +9,7 @@ describe('LibraryProjectDisciplinesComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [LibraryProjectDisciplinesComponent],
-        schemas: [NO_ERRORS_SCHEMA]
+        imports: [LibraryProjectDisciplinesComponent]
       }).compileComponents();
     })
   );
