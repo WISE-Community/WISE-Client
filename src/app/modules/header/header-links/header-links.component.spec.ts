@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderLinksComponent } from './header-links.component';
 import { User } from '../../../domain/user';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideRouter } from '@angular/router';
 
 describe('HeaderLinksComponent', () => {
   let component: HeaderLinksComponent;
@@ -9,9 +9,8 @@ describe('HeaderLinksComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HeaderLinksComponent],
-      imports: [],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [HeaderLinksComponent],
+      providers: [provideRouter([])]
     });
     fixture = TestBed.createComponent(HeaderLinksComponent);
     component = fixture.componentInstance;

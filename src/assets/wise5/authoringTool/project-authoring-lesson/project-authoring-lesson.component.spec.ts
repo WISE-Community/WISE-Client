@@ -16,11 +16,11 @@ import { ProjectAuthoringStepComponent } from '../project-authoring-step/project
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ProjectAuthoringLessonHarness } from './project-authoring-lesson.harness';
 import { DeleteNodeService } from '../../services/deleteNodeService';
-import { RouterTestingModule } from '@angular/router/testing';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { MatMenuModule } from '@angular/material/menu';
 import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
+import { provideRouter } from '@angular/router';
 
 let component: ProjectAuthoringLessonComponent;
 let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
@@ -37,7 +37,6 @@ describe('ProjectAuthoringLessonComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [
-        NodeIconComponent,
         NodeIconAndTitleComponent,
         ProjectAuthoringLessonComponent,
         ProjectAuthoringStepComponent
@@ -50,7 +49,7 @@ describe('ProjectAuthoringLessonComponent', () => {
         MatDialogModule,
         MatIconModule,
         MatMenuModule,
-        RouterTestingModule,
+        NodeIconComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [
@@ -58,6 +57,7 @@ describe('ProjectAuthoringLessonComponent', () => {
         CopyNodesService,
         DeleteNodeService,
         DeleteTranslationsService,
+        provideRouter([]),
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService

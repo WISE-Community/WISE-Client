@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   ContentChild,
@@ -7,45 +8,32 @@ import {
   ViewChild,
   ElementRef
 } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
+  imports: [CommonModule, FlexLayoutModule],
   selector: 'app-hero-section',
-  templateUrl: './hero-section.component.html',
-  styleUrls: ['./hero-section.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  standalone: true,
+  styleUrl: './hero-section.component.scss',
+  templateUrl: './hero-section.component.html'
 })
 export class HeroSectionComponent {
-  @Input()
-  imgSrc: string;
-
-  @Input()
-  imgDescription: string;
-
-  @Input()
-  imgSources: Object;
-
-  @Input()
-  headline: string;
-
+  @ViewChild('bgRef') bgRef: ElementRef;
+  protected bgStyle: SafeStyle;
+  @Input() headline: string;
   @ContentChild('headlineTemplate', { static: false }) headlineRef: TemplateRef<any>;
-
-  @Input()
-  tagline: string;
-
+  @Input() imgDescription: string;
+  @Input() imgSources: Object;
+  @Input() imgSrc: string;
+  @ContentChild('sideTemplate', { static: false }) sideRef: TemplateRef<any>;
+  @Input() tagline: string;
   @ContentChild('taglineTemplate', { static: false }) taglineRef: TemplateRef<any>;
 
-  @ContentChild('sideTemplate', { static: false }) sideRef: TemplateRef<any>;
+  constructor(private sanitizer: DomSanitizer) {}
 
-  @ViewChild('bgRef') bgRef: ElementRef;
-
-  bgStyle: SafeStyle;
-
-  constructor(private sanitizer: DomSanitizer) {
-    this.sanitizer = sanitizer;
-  }
-
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.bgRef.nativeElement.onload = () => {
       this.bgStyle = this.getBgStyle();
     };
@@ -55,8 +43,7 @@ export class HeroSectionComponent {
    * Returns the background-image css value for imgSrc
    * @returns {SafeStyle}
    */
-  getBgStyle(): SafeStyle {
-    const style: string = `url(${this.bgRef.nativeElement.currentSrc})`;
-    return this.sanitizer.bypassSecurityTrustStyle(style);
+  private getBgStyle(): SafeStyle {
+    return this.sanitizer.bypassSecurityTrustStyle(`url(${this.bgRef.nativeElement.currentSrc})`);
   }
 }

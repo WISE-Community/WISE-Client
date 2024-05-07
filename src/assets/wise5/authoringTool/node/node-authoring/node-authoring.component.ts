@@ -11,6 +11,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
+import { copy } from '../../../common/object/object';
 
 @Component({
   selector: 'node-authoring',
@@ -204,7 +205,10 @@ export class NodeAuthoringComponent implements OnInit {
     this.checkIfNeedToShowNodeSaveOrNodeSubmitButtons();
     this.projectService.saveProject().then(() => {
       for (const component of components) {
-        this.componentsToChecked.mutate((obj) => delete obj[component.id]);
+        this.componentsToChecked.update((obj) => {
+          delete obj[component.id];
+          return copy(obj);
+        });
         delete this.componentsToExpanded[component.id];
       }
       this.deleteTranslationsService.tryDeleteComponents(components);
@@ -250,7 +254,10 @@ export class NodeAuthoringComponent implements OnInit {
   }
 
   protected componentCheckboxChanged(componentId: string, checked: boolean): void {
-    this.componentsToChecked.mutate((obj) => (obj[componentId] = checked));
+    this.componentsToChecked.update((componentsToChecked) => {
+      componentsToChecked[componentId] = checked;
+      return copy(componentsToChecked);
+    });
   }
 
   protected toggleComponent(componentId: string): void {

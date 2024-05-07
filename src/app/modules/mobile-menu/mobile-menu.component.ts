@@ -1,29 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { UtilService } from '../../services/util.service';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-mobile-menu',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    RouterModule
+  ],
   templateUrl: './mobile-menu.component.html',
-  styleUrls: ['./mobile-menu.component.scss']
+  styleUrl: './mobile-menu.component.scss'
 })
 export class MobileMenuComponent implements OnInit {
-  signedIn: boolean = false;
+  protected signedIn: boolean;
 
-  constructor(private userService: UserService, private utilService: UtilService) {
-    this.userService = userService;
-    this.utilService = utilService;
-  }
+  constructor(private userService: UserService, private utilService: UtilService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getUser();
   }
 
-  close() {
+  protected close(): void {
     this.utilService.showMobileMenu(false);
   }
 
-  getUser() {
+  private getUser(): void {
     this.userService.getUser().subscribe((user) => {
       this.signedIn = user.roles?.length > 0;
     });

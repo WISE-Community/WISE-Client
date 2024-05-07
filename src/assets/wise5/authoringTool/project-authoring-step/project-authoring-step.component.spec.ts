@@ -13,9 +13,9 @@ import { NodeIconComponent } from '../../vle/node-icon/node-icon.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { DeleteNodeService } from '../../services/deleteNodeService';
-import { RouterTestingModule } from '@angular/router/testing';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
+import { provideRouter } from '@angular/router';
 
 const nodeId1 = 'nodeId1';
 const node = { id: nodeId1 };
@@ -26,14 +26,14 @@ describe('ProjectAuthoringStepComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NodeIconComponent, NodeIconAndTitleComponent, ProjectAuthoringStepComponent],
+      declarations: [NodeIconAndTitleComponent, ProjectAuthoringStepComponent],
       imports: [
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
         MatDialogModule,
         MatIconModule,
-        RouterTestingModule,
+        NodeIconComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [
@@ -41,6 +41,7 @@ describe('ProjectAuthoringStepComponent', () => {
         CopyNodesService,
         DeleteNodeService,
         DeleteTranslationsService,
+        provideRouter([]),
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService

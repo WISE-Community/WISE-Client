@@ -132,13 +132,12 @@ export class PersonalLibraryComponent extends LibraryComponent {
   protected updateSelectedProjects(event: ProjectSelectionEvent): void {
     if (event.selected) {
       this.selectedProjects.update((selectedProjects) => {
-        selectedProjects.push(event.project);
-        return selectedProjects;
+        return [...selectedProjects, event.project];
       });
     } else {
       this.selectedProjects.update((selectedProjects) => {
         selectedProjects.splice(selectedProjects.indexOf(event.project), 1);
-        return selectedProjects;
+        return [...selectedProjects];
       });
     }
   }

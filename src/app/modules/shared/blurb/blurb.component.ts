@@ -1,31 +1,19 @@
-import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
 
 @Component({
+  imports: [CommonModule],
   selector: 'app-blurb',
-  templateUrl: './blurb.component.html',
-  styleUrls: ['./blurb.component.scss']
+  standalone: true,
+  styleUrl: './blurb.component.scss',
+  templateUrl: './blurb.component.html'
 })
-export class BlurbComponent implements OnInit {
-  @Input()
-  imgSrc: string;
-
-  @Input()
-  imgDescription: string;
-
-  @Input()
-  imgSources: Object;
-
-  @Input()
-  headline: string;
-
-  @ContentChild('headlineTemplate', { static: false }) headlineRef: TemplateRef<any>;
-
-  @Input()
-  content: string;
-
+export class BlurbComponent {
+  @Input() content: string;
   @ContentChild('contentTemplate', { static: false }) contentRef: TemplateRef<any>;
-
-  constructor() {}
-
-  ngOnInit() {}
+  @Input() headline: string;
+  @ContentChild('headlineTemplate', { static: false }) headlineRef: TemplateRef<any>;
+  @Input() imgDescription: string;
+  @Input() imgSources: Object;
+  @Input() imgSrc: string;
 }

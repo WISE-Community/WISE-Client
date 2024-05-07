@@ -1,6 +1,6 @@
 <div class="view-content view-content--with-sidemenu">
   <div class="l-constrained" fxLayout="column">
-    <div *ngIf="exportType == null" fxLayout="column" fxLayoutGap="10px">
+    <div fxLayout="column" fxLayoutGap="10px">
       <div>
         <button
           mat-raised-button
@@ -15,23 +15,12 @@
       <div>
         <button
           mat-raised-button
-          (click)="setExportType('latestStudentWork')"
-          aria-label="Export Latest Work"
+          (click)="goToExportStudentWorkPage()"
+          aria-label="Export Student Work"
           i18n-aria-label
           i18n
         >
-          Export Latest Work
-        </button>
-      </div>
-      <div>
-        <button
-          mat-raised-button
-          (click)="setExportType('allStudentWork')"
-          aria-label="Export All Work"
-          i18n-aria-label
-          i18n
-        >
-          Export All Work
+          Export Student Work
         </button>
       </div>
       <div>
@@ -120,52 +109,6 @@
           i18n
         >
           Export Step Visits
-        </button>
-      </div>
-    </div>
-    <div *ngIf="exportType === 'latestStudentWork' || exportType === 'allStudentWork'">
-      <h4>{{ exportTypeLabel }}</h4>
-      <div
-        *ngIf="
-          canViewStudentNames &&
-          (exportType === 'latestStudentWork' || exportType === 'allStudentWork')
-        "
-      >
-        <mat-checkbox color="primary" [(ngModel)]="includeStudentNames" i18n>
-          Include Student Names
-        </mat-checkbox>
-      </div>
-      <div class="button-div" fxLayoutGap="20px">
-        <button mat-raised-button (click)="export()" aria-label="Export" i18n-aria-label i18n>
-          Export
-        </button>
-        <button
-          mat-raised-button
-          (click)="setExportType(null)"
-          aria-label="Cancel"
-          i18n-aria-label
-          i18n
-        >
-          Cancel
-        </button>
-      </div>
-      <select-step-and-component-checkboxes
-        [(exportStepSelectionType)]="exportStepSelectionType"
-        [nodes]="nodes"
-        [projectIdToOrder]="projectIdToOrder"
-      ></select-step-and-component-checkboxes>
-      <div class="button-div" fxLayoutGap="20px">
-        <button mat-raised-button (click)="export()" aria-label="Export" i18n-aria-label i18n>
-          Export
-        </button>
-        <button
-          mat-raised-button
-          (click)="setExportType(null)"
-          aria-label="Cancel"
-          i18n-aria-label
-          i18n
-        >
-          Cancel
         </button>
       </div>
     </div>

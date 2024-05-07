@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MobileMenuComponent } from './mobile-menu.component';
 import { User } from '../../domain/user';
@@ -15,17 +14,14 @@ export class MockUserService {
 
 let userService: MockUserService;
 let fixture: ComponentFixture<MobileMenuComponent>;
-
 describe('MobileMenuComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [MobileMenuComponent],
-      providers: [{ provide: UserService, useValue: new MockUserService() }],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [MobileMenuComponent],
+      providers: [provideRouter([]), { provide: UserService, useValue: new MockUserService() }]
     }).compileComponents();
     fixture = TestBed.createComponent(MobileMenuComponent);
-    userService = TestBed.get(UserService);
+    userService = TestBed.inject(UserService);
   });
   userLoggedIn();
   userLoggedOut();

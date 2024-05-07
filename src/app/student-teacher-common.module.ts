@@ -45,7 +45,6 @@ import { SideMenuComponent } from '../assets/wise5/common/side-menu/side-menu.co
     DialogResponseComponent,
     DialogResponsesComponent,
     MainMenuComponent,
-    NodeIconComponent,
     NodeStatusIcon,
     SideMenuComponent
   ],
@@ -80,6 +79,7 @@ import { SideMenuComponent } from '../assets/wise5/common/side-menu/side-menu.co
     MatSlideToggleModule,
     MatTooltipModule,
     MathModule,
+    NodeIconComponent,
     NotebookModule,
     ReactiveFormsModule,
     StudentTeacherCommonServicesModule

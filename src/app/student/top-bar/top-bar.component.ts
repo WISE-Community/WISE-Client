@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { ConstraintService } from '../../../assets/wise5/services/constraintService';
@@ -14,9 +14,37 @@ import { getAvatarColorForWorkgroupId } from '../../../assets/wise5/common/workg
 import { Language } from '../../domain/language';
 import { StudentProjectTranslationService } from '../../../assets/wise5/services/studentProjectTranslationService';
 import { ProjectLocale } from '../../domain/projectLocale';
+import { StudentAccountMenuModule } from '../../../assets/wise5/vle/student-account-menu/student-account-menu.module';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { NotificationsDialogModule } from '../../../assets/wise5/vle/notifications-dialog/notifications-dialog.module';
+import { DismissAmbientNotificationDialogModule } from '../../../assets/wise5/vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.module';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatBadgeModule } from '@angular/material/badge';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { ProjectLanguageChooserComponent } from '../../common/project-language-chooser/project-language-chooser.component';
 
 @Component({
+  standalone: true,
   selector: 'top-bar',
+  imports: [
+    CommonModule,
+    DismissAmbientNotificationDialogModule,
+    FlexLayoutModule,
+    MatBadgeModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatToolbarModule,
+    NotificationsDialogModule,
+    ProjectLanguageChooserComponent,
+    StudentAccountMenuModule
+  ],
   styleUrls: ['./top-bar.component.scss'],
   templateUrl: 'top-bar.component.html'
 })
