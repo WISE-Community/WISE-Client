@@ -14,6 +14,7 @@
   <selected-tags-list
     *ngIf="selectedTags.length > 0"
     [tags]="selectedTags"
+    [showClearButton]="true"
     (removeTagEvent)="removeTag($event)"
   ></selected-tags-list>
   <mat-divider></mat-divider>

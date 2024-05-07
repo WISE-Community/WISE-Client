@@ -5901,14 +5901,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> <x id="INTERPOLATION" equiv-text="{{ numSelectedProjects() }}"/> selected </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">29,31</context>
+          <context context-type="linenumber">30,32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="050a0b486e807a37ee8dbeeac274d84786bffa34" datatype="html">
         <source> No owned or shared units found. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">66,68</context>
+          <context context-type="linenumber">67,69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4204495853509039236" datatype="html">
@@ -8907,6 +8907,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/selected-tags-list/selected-tags-list.component.html</context>
           <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0f1ef37e15512702909190c08b6f79056dd5c1ae" datatype="html">
+        <source> Clear filters </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/selected-tags-list/selected-tags-list.component.html</context>
+          <context context-type="linenumber">19,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c76c2eeebe0adc81f3434495d189c56d70899cad" datatype="html">
