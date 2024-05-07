@@ -130,13 +130,13 @@ describe('PeerChatStudentComponent', () => {
         MatIconModule,
         MatInputModule,
         PeerChatModule,
+        PossibleScoreComponent,
         StudentTeacherCommonServicesModule
       ],
       declarations: [
         ComponentHeader,
         DynamicPromptComponent,
         PeerChatStudentComponent,
-        PossibleScoreComponent,
         PromptComponent
       ],
       providers: [

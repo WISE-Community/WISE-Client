@@ -16,17 +16,15 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
     ComponentHeader,
     ComponentSaveSubmitButtons,
     DynamicPromptComponent,
-    PossibleScoreComponent,
     PromptComponent
   ],
-  imports: [StudentTeacherCommonModule, ComponentStateInfoModule],
+  imports: [ComponentStateInfoModule, PossibleScoreComponent, StudentTeacherCommonModule],
   exports: [
     AddToNotebookButton,
     ComponentAnnotationsComponent,
     ComponentHeader,
     ComponentSaveSubmitButtons,
     DynamicPromptComponent,
-    PossibleScoreComponent,
     PromptComponent
   ]
 })
