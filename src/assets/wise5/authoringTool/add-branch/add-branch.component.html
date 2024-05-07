@@ -1,4 +1,4 @@
-<h3 i18n>Create Branch</h3>
+<h3 i18n>Create Branch Off {{ targetTitle }}</h3>
 <form fxLayout="column" [formGroup]="formGroup">
   <mat-form-field class="path-count">
     <mat-label i18n>Number of Branch Paths</mat-label>
@@ -41,6 +41,11 @@
     [componentId]="formGroup.controls['componentId']?.value"
     [pathFormGroup]="formGroup.controls['pathFormGroup']"
   ></branch-path-authoring>
+  <select-merge-step
+    *ngIf="showSelectMergeStep()"
+    [branchStepId]="targetId"
+    (selectMergeStepEvent)="setMergeStep($event)"
+  ></select-merge-step>
   <div fxLayoutAlign="end center" fxLayoutGap="12px">
     <button mat-button routerLink=".." i18n>Cancel</button>
     <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="submit()" i18n>
