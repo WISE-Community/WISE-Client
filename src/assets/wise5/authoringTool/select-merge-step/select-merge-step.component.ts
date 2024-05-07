@@ -9,12 +9,14 @@ import { CommonModule } from '@angular/common';
   selector: 'select-merge-step',
   standalone: true,
   imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule],
-  templateUrl: './select-merge-step.component.html'
+  templateUrl: './select-merge-step.component.html',
+  styleUrl: './select-merge-step.component.scss'
 })
 export class SelectMergeStepComponent {
   @Input() branchStepId: string;
   protected mergeStepId: string = '';
   protected nextStepId: string = '';
+  protected nextStepTitle: string = '';
   @Output() selectMergeStepEvent: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private projectService: TeacherProjectService) {}
@@ -25,6 +27,7 @@ export class SelectMergeStepComponent {
     const nextStepParentId = this.projectService.getParentGroupId(nextStepId);
     if (branchStepParentId === nextStepParentId) {
       this.nextStepId = nextStepId;
+      this.nextStepTitle = this.projectService.getNodePositionAndTitle(this.nextStepId);
       this.mergeStepId = this.nextStepId;
     }
     this.selectMergeStepEvent.emit(this.mergeStepId);

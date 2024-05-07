@@ -1,4 +1,4 @@
-<h3 i18n>Create Branch</h3>
+<h3 i18n>Create Branch Off {{ targetTitle }}</h3>
 <form fxLayout="column" [formGroup]="formGroup">
   <mat-form-field class="path-count">
     <mat-label i18n>Number of Branch Paths</mat-label>
@@ -42,16 +42,7 @@
     [pathFormGroup]="formGroup.controls['pathFormGroup']"
   ></branch-path-authoring>
   <select-merge-step
-    *ngIf="
-      formGroup.controls['criteria'].value === WORKGROUP_ID_VALUE ||
-      formGroup.controls['criteria'].value === RANDOM_VALUE ||
-      formGroup.controls['criteria'].value === TAG_VALUE ||
-      ((formGroup.controls['criteria'].value === SCORE_VALUE ||
-        formGroup.controls['criteria'].value === CHOICE_CHOSEN_VALUE) &&
-        formGroup.controls['nodeId'].value !== '' &&
-        formGroup.controls['componentId'].value !== '' &&
-        formGroup.controls['pathFormGroup'].valid)
-    "
+    *ngIf="showSelectMergeStep()"
     [branchStepId]="targetId"
     (selectMergeStepEvent)="setMergeStep($event)"
   ></select-merge-step>

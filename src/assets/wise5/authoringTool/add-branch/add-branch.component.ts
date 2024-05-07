@@ -60,6 +60,7 @@ export class AddBranchComponent {
   private components: any[];
   protected pathFormGroup: FormGroup = this.fb.group({});
   protected targetId: string;
+  protected targetTitle: string;
 
   protected formGroup: FormGroup = this.fb.group({
     pathCount: new FormControl('', [Validators.required]),
@@ -72,6 +73,7 @@ export class AddBranchComponent {
 
   ngOnInit(): void {
     this.targetId = history.state.targetId;
+    this.targetTitle = this.projectService.getNodePositionAndTitle(this.targetId);
     this.formGroup.controls['criteria'].valueChanges.subscribe((criteria: string) => {
       if (this.criteriaRequiresAdditionalParams(criteria)) {
         this.updateAllowedComponentTypes();
@@ -183,6 +185,19 @@ export class AddBranchComponent {
     this.formGroup.removeControl('componentId');
   }
 
+  protected showSelectMergeStep(): boolean {
+    return (
+      this.formGroup.controls['criteria'].value === WORKGROUP_ID_VALUE ||
+      this.formGroup.controls['criteria'].value === RANDOM_VALUE ||
+      this.formGroup.controls['criteria'].value === TAG_VALUE ||
+      ((this.formGroup.controls['criteria'].value === SCORE_VALUE ||
+        this.formGroup.controls['criteria'].value === CHOICE_CHOSEN_VALUE) &&
+        this.formGroup.controls['nodeId'].value !== '' &&
+        this.formGroup.controls['componentId'].value !== '' &&
+        this.formGroup.controls['pathFormGroup'].valid)
+    );
+  }
+
   private getPathCount(): number {
     return this.formGroup.get('pathCount').value;
   }
@@ -217,6 +232,7 @@ export class AddBranchComponent {
 
   protected submit(): void {
     const data: any = {};
+    data.branchStepId = this.targetId;
     data.pathCount = this.getPathCount();
     data.criteria = this.getCriteria();
     data.nodeId = this.getNodeId();
