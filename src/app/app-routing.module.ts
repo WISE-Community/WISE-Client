@@ -2,12 +2,14 @@ import { HTTP_INTERCEPTORS, HttpRequest, HttpHandler, HttpInterceptor } from '@a
 import { Injectable, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
 import { PrivacyComponent } from './privacy/privacy.component';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
-  { path: 'about', loadChildren: () => import('./about/about.module').then((m) => m.AboutModule) },
+  {
+    path: 'about',
+    loadComponent: () => import('./about/about.component').then((m) => m.AboutComponent)
+  },
   {
     path: 'contact',
     loadChildren: () => import('./contact/contact.module').then((m) => m.ContactModule)
