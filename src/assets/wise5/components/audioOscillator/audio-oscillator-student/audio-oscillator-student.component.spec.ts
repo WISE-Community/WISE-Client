@@ -41,10 +41,11 @@ describe('AudioOscillatorStudent', () => {
         MatInputModule,
         MatSelectModule,
         MatTooltipModule,
+        PossibleScoreComponent,
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [AudioOscillatorStudent, ComponentHeader, PossibleScoreComponent],
+      declarations: [AudioOscillatorStudent, ComponentHeader],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(AudioOscillatorStudent);

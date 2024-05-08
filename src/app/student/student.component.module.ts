@@ -16,17 +16,15 @@ import { ComponentStateInfoComponent } from '../../assets/wise5/common/component
     ComponentHeader,
     ComponentSaveSubmitButtons,
     DynamicPromptComponent,
-    PossibleScoreComponent,
     PromptComponent
   ],
-  imports: [ComponentStateInfoComponent, StudentTeacherCommonModule],
+  imports: [ComponentStateInfoComponent, PossibleScoreComponent, StudentTeacherCommonModule],
   exports: [
     AddToNotebookButton,
     ComponentAnnotationsComponent,
     ComponentHeader,
     ComponentSaveSubmitButtons,
     DynamicPromptComponent,
-    PossibleScoreComponent,
     PromptComponent
   ]
 })

@@ -9,7 +9,6 @@ import { ComponentHeader } from '../../../directives/component-header/component-
 import { AiChatModule } from '../ai-chat.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PromptComponent } from '../../../directives/prompt/prompt.component';
-import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { AiChatComponent } from '../AiChatComponent';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -17,6 +16,7 @@ import { ProjectService } from '../../../services/projectService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
+import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 
 describe('AiChatStudentComponent', () => {
   let component: AiChatStudentComponent;
@@ -24,12 +24,7 @@ describe('AiChatStudentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AiChatStudentComponent,
-        ComponentHeader,
-        PossibleScoreComponent,
-        PromptComponent
-      ],
+      declarations: [AiChatStudentComponent, ComponentHeader, PromptComponent],
       imports: [
         AiChatModule,
         BrowserAnimationsModule,
@@ -41,6 +36,7 @@ describe('AiChatStudentComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatSnackBarModule,
+        PossibleScoreComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [AiChatService]

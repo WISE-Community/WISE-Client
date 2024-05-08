@@ -1,21 +1,20 @@
 import { Component, Input } from '@angular/core';
 import { ProjectService } from '../../assets/wise5/services/projectService';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  imports: [CommonModule],
   selector: 'possible-score',
+  standalone: true,
   templateUrl: 'possible-score.component.html'
 })
 export class PossibleScoreComponent {
-  @Input()
-  maxScore: any;
-
-  themeSettings: any;
-  hidePossibleScores: any;
+  protected hidePossibleScores: boolean;
+  @Input() maxScore: number;
 
   constructor(private projectService: ProjectService) {}
 
-  ngOnInit() {
-    this.themeSettings = this.projectService.getThemeSettings();
-    this.hidePossibleScores = this.themeSettings.hidePossibleScores;
+  ngOnInit(): void {
+    this.hidePossibleScores = this.projectService.getThemeSettings().hidePossibleScores;
   }
 }
