@@ -13,7 +13,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { ComponentStateInfoModule } from '../../assets/wise5/common/component-state-info/component-state-info.module';
+import { ComponentStateInfoComponent } from '../../assets/wise5/common/component-state-info/component-state-info.component';
 import { NotebookItemComponent } from './notebook-item/notebook-item.component';
 import { NotebookLauncherComponent } from './notebook-launcher/notebook-launcher.component';
 import { NotebookNotesComponent } from './notebook-notes/notebook-notes.component';
@@ -33,7 +33,7 @@ import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tiny
   ],
   imports: [
     CommonModule,
-    ComponentStateInfoModule,
+    ComponentStateInfoComponent,
     EditorModule,
     FlexLayoutModule,
     MatButtonModule,
