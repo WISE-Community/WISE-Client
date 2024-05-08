@@ -34,7 +34,6 @@ import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { DynamicPromptComponent } from '../../../directives/dynamic-prompt/dynamic-prompt.component';
 import { PromptComponent } from '../../../directives/prompt/prompt.component';
 import { PeerChatComponent } from '../PeerChatComponent';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let component: PeerChatStudentComponent;
 const componentId = 'component1';
@@ -122,6 +121,7 @@ describe('PeerChatStudentComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        DynamicPromptComponent,
         FormsModule,
         HttpClientTestingModule,
         MatCardModule,
@@ -133,12 +133,7 @@ describe('PeerChatStudentComponent', () => {
         PossibleScoreComponent,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [
-        ComponentHeader,
-        DynamicPromptComponent,
-        PeerChatStudentComponent,
-        PromptComponent
-      ],
+      declarations: [ComponentHeader, PeerChatStudentComponent, PromptComponent],
       providers: [
         AnnotationService,
         ComponentService,
@@ -153,8 +148,7 @@ describe('PeerChatStudentComponent', () => {
         StudentDataService,
         StudentWebSocketService,
         TagService
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
     }).compileComponents();
   });
 

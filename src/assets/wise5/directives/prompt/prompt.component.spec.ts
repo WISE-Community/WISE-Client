@@ -17,8 +17,13 @@ describe('PromptComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PromptComponent, DynamicPromptComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
+      declarations: [PromptComponent],
+      imports: [
+        DynamicPromptComponent,
+        HttpClientTestingModule,
+        MatDialogModule,
+        StudentTeacherCommonServicesModule
+      ]
     }).compileComponents();
   });
 
