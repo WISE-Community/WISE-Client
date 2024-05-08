@@ -13,17 +13,27 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Choice } from '../../components/multipleChoice/Choice';
 import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleChoiceContent';
 import { CHOICE_CHOSEN_VALUE, SCORE_VALUE } from '../../../../app/domain/branchCriteria';
+import { ComponentContent } from '../../common/ComponentContent';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'branch-path-authoring',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './branch-path-authoring.component.html'
 })
 export class BranchPathAuthoringComponent {
   protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;
   protected readonly SCORE_VALUE: string = SCORE_VALUE;
 
+  protected choices: Choice[] = [];
   @Input() componentId: string = '';
   @Input() criteria: string = '';
   protected formControls: FormControl[] = [];
@@ -43,12 +53,8 @@ export class BranchPathAuthoringComponent {
         this.componentId !== '' &&
         this.criteriaRequiresAdditionalParams(this.criteria)
       ) {
-        for (let i = 0; i < this.pathCount; i++) {
-          const pathFormControl = new FormControl('', [Validators.required]);
-          this.pathFormGroup.addControl(this.getFormControlName(i), pathFormControl);
-          this.formControls.push(pathFormControl);
-        }
-        this.tryAutoSelectPathParamValues();
+        this.initializeFormControls();
+        this.initializePathValues();
       }
     }
   }
@@ -89,23 +95,41 @@ export class BranchPathAuthoringComponent {
     this.formControls = [];
   }
 
-  private tryAutoSelectPathParamValues(): void {
-    if (this.criteria === this.CHOICE_CHOSEN_VALUE) {
-      this.autoFillChoiceChosenValues();
+  private initializeFormControls(): void {
+    for (let i = 0; i < this.pathCount; i++) {
+      const pathFormControl = new FormControl('', [Validators.required]);
+      this.pathFormGroup.addControl(this.getFormControlName(i), pathFormControl);
+      this.formControls.push(pathFormControl);
     }
   }
 
+  private initializePathValues(): void {
+    if (this.criteria === this.CHOICE_CHOSEN_VALUE) {
+      this.populateChoices();
+      this.autoFillChoiceChosenValues();
+    } else {
+      this.choices = [];
+    }
+  }
+
+  private populateChoices(): void {
+    const component: MultipleChoiceContent = this.getComponent() as MultipleChoiceContent;
+    this.choices = component.choices;
+  }
+
   private autoFillChoiceChosenValues(): void {
-    const components = this.projectService.getComponents(this.nodeId);
-    const component = components.find(
-      (component) => component.id === this.componentId
-    ) as MultipleChoiceContent;
+    const component: MultipleChoiceContent = this.getComponent() as MultipleChoiceContent;
     const choiceIds = component.choices.map((choice: Choice) => choice.id);
     for (let i = 0; i < this.pathCount; i++) {
       if (choiceIds[i] != null) {
         this.pathFormGroup.controls[this.getFormControlName(i)].setValue(choiceIds[i]);
       }
     }
+  }
+
+  private getComponent(): ComponentContent {
+    const components = this.projectService.getComponents(this.nodeId);
+    return components.find((component) => component.id === this.componentId);
   }
 
   private getFormControlName(index: number): string {
