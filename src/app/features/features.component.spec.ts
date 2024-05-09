@@ -1,18 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-
 import { FeaturesComponent } from './features.component';
+import { provideRouter } from '@angular/router';
 
 describe('FeaturesComponent', () => {
   let component: FeaturesComponent;
   let fixture: ComponentFixture<FeaturesComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [FeaturesComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [FeaturesComponent],
+        providers: [provideRouter([])]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FeaturesComponent);
