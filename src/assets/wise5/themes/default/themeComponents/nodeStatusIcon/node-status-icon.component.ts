@@ -1,18 +1,22 @@
 import { Component, Input } from '@angular/core';
 import { NodeStatusService } from '../../../../services/nodeStatusService';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
+  imports: [CommonModule, MatIconModule],
   selector: 'node-status-icon',
-  styleUrls: ['node-status-icon.component.scss'],
+  standalone: true,
+  styleUrl: 'node-status-icon.component.scss',
   templateUrl: 'node-status-icon.component.html'
 })
-export class NodeStatusIcon {
+export class NodeStatusIconComponent {
   @Input() nodeId: string;
-  nodeStatus: any;
+  protected nodeStatus: any;
 
   constructor(private nodeStatusService: NodeStatusService) {}
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.nodeStatus = this.nodeStatusService.getNodeStatusByNodeId(this.nodeId);
   }
 }
