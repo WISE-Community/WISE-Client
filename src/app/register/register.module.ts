@@ -23,6 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { GoogleSignInModule } from '../modules/google-sign-in/google-sign-in.module';
 import { PasswordModule } from '../password/password.module';
 import { RegisterMicrosoftUserAlreadyExistsComponent } from './register-microsoft-user-already-exists/register-microsoft-user-already-exists.component';
+import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-action.component';
 
 const materialModules = [
   MatButtonModule,
@@ -37,6 +38,7 @@ const materialModules = [
 
 @NgModule({
   imports: [
+    CallToActionComponent,
     CommonModule,
     FormsModule,
     GoogleSignInModule,

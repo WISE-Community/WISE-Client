@@ -21,9 +21,11 @@ import { ForgotTeacherPasswordChangeComponent } from './teacher/forgot-teacher-p
 import { ForgotTeacherPasswordVerifyComponent } from './teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component';
 import { PasswordModule } from '../password/password.module';
 import { ForgotUserPasswordCompleteComponent } from './forgot-user-password-complete/forgot-user-password-complete.component';
+import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-action.component';
 
 @NgModule({
   imports: [
+    CallToActionComponent,
     CommonModule,
     ForgotRoutingModule,
     FormsModule,
