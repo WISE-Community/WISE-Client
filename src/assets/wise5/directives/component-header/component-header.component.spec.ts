@@ -13,7 +13,8 @@ let fixture: ComponentFixture<ComponentHeader>;
 describe('ComponentHeaderComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ComponentHeader, DynamicPromptComponent, PromptComponent],
+      declarations: [ComponentHeader, PromptComponent],
+      imports: [DynamicPromptComponent],
       providers: [
         {
           provide: DomSanitizer,
