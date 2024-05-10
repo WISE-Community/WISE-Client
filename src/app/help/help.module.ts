@@ -8,9 +8,10 @@ import { TeacherFaqComponent } from './faq/teacher-faq/teacher-faq.component';
 import { StudentFaqComponent } from './faq/student-faq/student-faq.component';
 import { HelpHomeComponent } from './help-home/help-home.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-action.component';
 
 @NgModule({
-  imports: [CommonModule, HelpRoutingModule, MatDividerModule, SharedModule],
+  imports: [CallToActionComponent, CommonModule, HelpRoutingModule, MatDividerModule, SharedModule],
   declarations: [
     HelpComponent,
     GettingStartedComponent,

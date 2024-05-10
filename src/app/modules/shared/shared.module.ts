@@ -22,7 +22,6 @@ const materialModules = [
   MatProgressBarModule
 ];
 
-import { CallToActionComponent } from './call-to-action/call-to-action.component';
 import { SelectMenuComponent } from './select-menu/select-menu.component';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
 import { UnlinkGoogleAccountConfirmComponent } from './unlink-google-account-confirm/unlink-google-account-confirm.component';
@@ -40,15 +39,8 @@ import { PasswordModule } from '../../password/password.module';
     RouterModule,
     materialModules
   ],
-  exports: [
-    materialModules,
-    FlexLayoutModule,
-    CallToActionComponent,
-    SelectMenuComponent,
-    EditPasswordComponent
-  ],
+  exports: [materialModules, FlexLayoutModule, SelectMenuComponent, EditPasswordComponent],
   declarations: [
-    CallToActionComponent,
     SelectMenuComponent,
     EditPasswordComponent,
     UnlinkGoogleAccountConfirmComponent,
