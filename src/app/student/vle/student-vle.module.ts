@@ -34,6 +34,7 @@ import { GroupTabsComponent } from '../../../assets/wise5/directives/group-tabs/
 import { StudentPeerGroupService } from '../../../assets/wise5/services/studentPeerGroupService';
 import { PeerGroupService } from '../../../assets/wise5/services/peerGroupService';
 import { TopBarComponent } from '../top-bar/top-bar.component';
+import { NodeStatusIconComponent } from '../../../assets/wise5/themes/default/themeComponents/nodeStatusIcon/node-status-icon.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { TopBarComponent } from '../top-bar/top-bar.component';
     ComponentStudentModule,
     MatDialogModule,
     NodeModule,
+    NodeStatusIconComponent,
     SimpleDialogModule,
     StudentAssetsDialogModule,
     StudentComponentModule,
