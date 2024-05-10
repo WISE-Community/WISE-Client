@@ -48,7 +48,6 @@ describe('ShowNodeInfoDialogComponent', () => {
         NodeInfoComponent,
         OpenResponseStudent,
         PreviewComponentComponent,
-        PromptComponent,
         ShowNodeInfoDialogComponent
       ],
       imports: [
@@ -57,7 +56,8 @@ describe('ShowNodeInfoDialogComponent', () => {
         MatCardModule,
         MatDialogModule,
         MatIconModule,
-        MatToolbarModule
+        MatToolbarModule,
+        PromptComponent
       ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: nodeId1 },
