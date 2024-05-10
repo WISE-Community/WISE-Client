@@ -16,7 +16,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { SelectStepComponent } from '../../../../app/authoring-tool/select-step/select-step.component';
 import { SelectComponentComponent } from '../../../../app/authoring-tool/select-component/select-component.component';
 import { BranchPathAuthoringComponent } from '../branch-path-authoring/branch-path-authoring.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import {
   BranchCriteria,
   BRANCH_CRITERIA,
@@ -27,6 +27,8 @@ import {
   TAG_VALUE
 } from '../../../../app/domain/branchCriteria';
 import { SelectMergeStepComponent } from '../select-merge-step/select-merge-step.component';
+import { CreateBranchService } from '../../services/createBranchService';
+import { CreateBranchParams } from '../../common/CreateBranchParams';
 
 @Component({
   selector: 'add-branch',
@@ -69,7 +71,13 @@ export class AddBranchComponent {
     mergeStep: new FormControl('')
   });
 
-  constructor(private fb: FormBuilder, private projectService: TeacherProjectService) {}
+  constructor(
+    private createBranchService: CreateBranchService,
+    private fb: FormBuilder,
+    private projectService: TeacherProjectService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.targetId = history.state.targetId;
@@ -225,13 +233,15 @@ export class AddBranchComponent {
     return this.formGroup.get('mergeStep').value;
   }
 
-  protected submit(): void {
-    const data: any = {};
-    data.branchStepId = this.targetId;
-    data.pathCount = this.getPathCount();
-    data.criteria = this.getCriteria();
-    data.nodeId = this.getNodeId();
-    data.componentId = this.getComponentId();
+  private getBranchParams(): CreateBranchParams {
+    const data: any = {
+      branchStepId: this.targetId,
+      componentId: this.getComponentId(),
+      criteria: this.getCriteria(),
+      mergeStepId: this.getMergeStepId(),
+      nodeId: this.getNodeId(),
+      pathCount: this.getPathCount()
+    };
     const pathKeys = Object.keys(this.pathFormGroup.controls);
     if (pathKeys.length > 0) {
       data.paths = [];
@@ -239,7 +249,11 @@ export class AddBranchComponent {
         data.paths.push(this.pathFormGroup.controls[key].value);
       });
     }
-    data.mergeStepId = this.getMergeStepId();
-    alert(JSON.stringify(data, null, 2));
+    return data;
+  }
+
+  protected async submit(): Promise<void> {
+    await this.createBranchService.createBranch(this.getBranchParams());
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 }

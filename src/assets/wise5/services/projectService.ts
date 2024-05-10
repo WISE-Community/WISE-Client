@@ -130,7 +130,7 @@ export class ProjectService {
     }
   }
 
-  private addApplicationNode(node: any): void {
+  addApplicationNode(node: any): void {
     const applicationNodes = this.applicationNodes;
     if (applicationNodes != null) {
       applicationNodes.push(node);
