@@ -31,7 +31,6 @@ import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PauseScreenService } from '../../../services/pauseScreenService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
-import { DynamicPromptComponent } from '../../../directives/dynamic-prompt/dynamic-prompt.component';
 import { PromptComponent } from '../../../directives/prompt/prompt.component';
 import { PeerChatComponent } from '../PeerChatComponent';
 
@@ -121,7 +120,6 @@ describe('PeerChatStudentComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
-        DynamicPromptComponent,
         FormsModule,
         HttpClientTestingModule,
         MatCardModule,
@@ -130,10 +128,11 @@ describe('PeerChatStudentComponent', () => {
         MatIconModule,
         MatInputModule,
         PeerChatModule,
+        PromptComponent,
         PossibleScoreComponent,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [ComponentHeader, PeerChatStudentComponent, PromptComponent],
+      declarations: [ComponentHeader, PeerChatStudentComponent],
       providers: [
         AnnotationService,
         ComponentService,

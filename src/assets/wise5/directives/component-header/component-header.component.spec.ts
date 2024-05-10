@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ComponentHeader } from './component-header.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PromptComponent } from '../prompt/prompt.component';
-import { DynamicPromptComponent } from '../dynamic-prompt/dynamic-prompt.component';
 import { ComponentContent } from '../../common/ComponentContent';
 import { Component } from '../../common/Component';
 
@@ -13,8 +12,8 @@ let fixture: ComponentFixture<ComponentHeader>;
 describe('ComponentHeaderComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ComponentHeader, PromptComponent],
-      imports: [DynamicPromptComponent],
+      declarations: [ComponentHeader],
+      imports: [PromptComponent],
       providers: [
         {
           provide: DomSanitizer,

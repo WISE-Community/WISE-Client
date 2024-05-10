@@ -24,7 +24,7 @@ describe('AiChatStudentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AiChatStudentComponent, ComponentHeader, PromptComponent],
+      declarations: [AiChatStudentComponent, ComponentHeader],
       imports: [
         AiChatModule,
         BrowserAnimationsModule,
@@ -37,6 +37,7 @@ describe('AiChatStudentComponent', () => {
         MatInputModule,
         MatSnackBarModule,
         PossibleScoreComponent,
+        PromptComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [AiChatService]
