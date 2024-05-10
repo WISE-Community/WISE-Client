@@ -1,80 +1,93 @@
-'use strict';
-
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 import { NodeService } from '../../services/nodeService';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { NodeIconComponent } from '../node-icon/node-icon.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NodeStatusIconComponent } from '../../themes/default/themeComponents/nodeStatusIcon/node-status-icon.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatIconModule,
+    MatListModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    NodeIconComponent,
+    NodeStatusIconComponent
+  ],
   selector: 'nav-item',
-  styleUrls: ['nav-item.component.scss'],
-  templateUrl: 'nav-item.component.html',
-  encapsulation: ViewEncapsulation.None
+  standalone: true,
+  styleUrl: 'nav-item.component.scss',
+  templateUrl: 'nav-item.component.html'
 })
 export class NavItemComponent {
-  currentNode: any;
-  expanded: boolean = false;
-  isCurrentNode: boolean;
-  isGroup: boolean;
-  isPrevStep: boolean = false;
-  item: any;
-  subscriptions: Subscription = new Subscription();
-
-  @Input()
-  nodeId: string;
-  nodeStatus: any;
-  nodeTitle: string;
-
-  @Input()
-  showPosition: any;
-
-  @Input()
-  type: string;
+  private currentNode: any;
+  protected expanded: boolean;
+  private isCurrentNode: boolean;
+  protected isGroup: boolean;
+  protected isPrevStep: boolean;
+  protected item: any;
+  @Input() nodeId: string;
+  protected nodeStatus: any;
+  protected nodeTitle: string;
+  @Input() showPosition: any;
+  private subscriptions: Subscription = new Subscription();
+  @Input() type: string;
 
   constructor(
+    private dataService: StudentDataService,
     private nodeService: NodeService,
-    private ProjectService: ProjectService,
-    private StudentDataService: StudentDataService
+    private projectService: ProjectService
   ) {}
 
-  ngOnInit() {
-    this.item = this.ProjectService.idToNode[this.nodeId];
-    this.isGroup = this.ProjectService.isGroupNode(this.nodeId);
-    this.nodeStatus = this.StudentDataService.nodeStatuses[this.nodeId];
+  ngOnInit(): void {
+    this.item = this.projectService.idToNode[this.nodeId];
+    this.isGroup = this.projectService.isGroupNode(this.nodeId);
+    this.nodeStatus = this.dataService.nodeStatuses[this.nodeId];
     this.nodeTitle = this.showPosition
-      ? this.ProjectService.nodeIdToNumber[this.nodeId] + ': ' + this.item.title
+      ? this.projectService.nodeIdToNumber[this.nodeId] + ': ' + this.item.title
       : this.item.title;
-    this.currentNode = this.StudentDataService.currentNode;
+    this.currentNode = this.dataService.currentNode;
     this.isCurrentNode = this.currentNode.id === this.nodeId;
     if (this.isGroup && this.isCurrentNode) {
       this.setExpanded();
     }
     this.subscriptions.add(
-      this.StudentDataService.navItemIsExpanded$.subscribe(({ nodeId, isExpanded }) => {
+      this.dataService.navItemIsExpanded$.subscribe(({ nodeId, isExpanded }) => {
         if (nodeId === this.nodeId) {
           this.expanded = isExpanded;
         }
       })
     );
     this.subscriptions.add(
-      this.StudentDataService.currentNodeChanged$.subscribe(
+      this.dataService.currentNodeChanged$.subscribe(
         ({ previousNode: oldNode, currentNode: newNode }) => {
           this.currentNode = newNode;
           this.isCurrentNode = this.nodeId === newNode.id;
           let isPrev = false;
-          if (this.ProjectService.isApplicationNode(newNode.id)) {
+          if (this.projectService.isApplicationNode(newNode.id)) {
             return;
           }
           if (oldNode) {
             isPrev = this.nodeId === oldNode.id;
-            if (this.StudentDataService.previousStep) {
-              this.isPrevStep = this.nodeId === this.StudentDataService.previousStep.id;
+            if (this.dataService.previousStep) {
+              this.isPrevStep = this.nodeId === this.dataService.previousStep.id;
             }
           }
           if (this.isGroup) {
-            let prevNodeisGroup = !oldNode || this.ProjectService.isGroupNode(oldNode.id);
-            let prevNodeIsDescendant = this.ProjectService.isNodeDescendentOfGroup(
+            let prevNodeisGroup = !oldNode || this.projectService.isGroupNode(oldNode.id);
+            let prevNodeIsDescendant = this.projectService.isNodeDescendentOfGroup(
               oldNode,
               this.item
             );
@@ -93,7 +106,7 @@ export class NavItemComponent {
               }
             }
           } else {
-            if (isPrev && this.ProjectService.isNodeDescendentOfGroup(this.item, newNode)) {
+            if (isPrev && this.projectService.isNodeDescendentOfGroup(this.item, newNode)) {
               this.zoomToElement();
             }
           }
@@ -102,20 +115,20 @@ export class NavItemComponent {
     );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
-  setExpanded(): void {
+  private setExpanded(): void {
     this.expanded = true;
-    this.StudentDataService.setNavItemExpanded(this.nodeId, this.expanded);
+    this.dataService.setNavItemExpanded(this.nodeId, this.expanded);
   }
 
-  zoomToElement() {
+  private zoomToElement(): void {
     // TODO: implement me
   }
 
-  itemClicked(event) {
+  protected itemClicked(): void {
     if (this.isGroup) {
       this.expanded = !this.expanded;
       if (this.expanded) {
@@ -125,7 +138,7 @@ export class NavItemComponent {
           this.nodeService.setCurrentNode(this.nodeId);
         }
       }
-      this.StudentDataService.setNavItemExpanded(this.nodeId, this.expanded);
+      this.dataService.setNavItemExpanded(this.nodeId, this.expanded);
     } else {
       this.nodeService.setCurrentNode(this.nodeId);
     }

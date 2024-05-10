@@ -1,8 +1,8 @@
 <ng-container *ngIf="nodeStatus.isVisible" [ngSwitch]="type">
   <mat-card *ngSwitchCase="'card'" class="nav-item" [ngClass]="{ expanded: expanded }">
     <mat-card-header
-      (click)="itemClicked($event)"
-      (keyup.enter)="itemClicked($event)"
+      (click)="itemClicked()"
+      (keyup.enter)="itemClicked()"
       role="button"
       matRipple
       fxLayout="row"
@@ -69,7 +69,7 @@
     <button
       mat-list-item
       class="list-item nav-item"
-      (click)="itemClicked($event)"
+      (click)="itemClicked()"
       tabindex="0"
       i18n-title
       title="Go to {{ nodeTitle }}"
