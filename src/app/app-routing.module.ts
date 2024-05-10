@@ -2,7 +2,6 @@ import { HTTP_INTERCEPTORS, HttpRequest, HttpHandler, HttpInterceptor } from '@a
 import { Injectable, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { PrivacyComponent } from './privacy/privacy.component';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
@@ -29,7 +28,10 @@ const routes: Routes = [
   },
   { path: 'login', loadChildren: () => import('./login/login.module').then((m) => m.LoginModule) },
   { path: 'news', loadChildren: () => import('./news/news.module').then((m) => m.NewsModule) },
-  { path: 'privacy', component: PrivacyComponent },
+  {
+    path: 'privacy',
+    loadComponent: () => import('./privacy/privacy.component').then((m) => m.PrivacyComponent)
+  },
   {
     path: 'preview',
     loadChildren: () => import('./student/student.module').then((m) => m.StudentModule)
@@ -55,7 +57,6 @@ export class XhrInterceptor implements HttpInterceptor {
 }
 
 @NgModule({
-  declarations: [PrivacyComponent],
   imports: [RouterModule.forRoot(routes, {}), FormsModule],
   exports: [RouterModule],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }]
