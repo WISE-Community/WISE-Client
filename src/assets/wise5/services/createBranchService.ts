@@ -35,7 +35,10 @@ export class CreateBranchService {
         : this.projectService.getNodeById(params.mergeStepId);
     this.setPathStepTransitions(newNodeIds, mergeStep.id);
     this.setTargetNodeTransitionLogic(targetNode, params.criteria);
-    this.addNewNodeIdsToParentGroup(params.branchStepId, [...newNodeIds, mergeStep.id]);
+    if (params.mergeStepId === '') {
+      newNodeIds.push(mergeStep.id);
+    }
+    this.addNewNodeIdsToParentGroup(params.branchStepId, newNodeIds);
     return this.projectService.saveProject().then(() => {
       this.hideCreatingBranchMessage();
     });
