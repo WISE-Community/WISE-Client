@@ -234,7 +234,7 @@ export class AddBranchComponent {
   }
 
   private getBranchParams(): CreateBranchParams {
-    const data: any = {
+    const params: CreateBranchParams = {
       branchStepId: this.targetId,
       componentId: this.getComponentId(),
       criteria: this.getCriteria(),
@@ -244,12 +244,12 @@ export class AddBranchComponent {
     };
     const pathKeys = Object.keys(this.pathFormGroup.controls);
     if (pathKeys.length > 0) {
-      data.paths = [];
+      params.paths = [];
       pathKeys.forEach((key) => {
-        data.paths.push(this.pathFormGroup.controls[key].value);
+        params.paths.push(this.pathFormGroup.controls[key].value);
       });
     }
-    return data;
+    return params;
   }
 
   protected async submit(): Promise<void> {

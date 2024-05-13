@@ -14,27 +14,24 @@ import { TransitionCriteriaParams } from '../common/TransitionCriteriaParams';
 
 @Injectable()
 export class CreateBranchService {
-  protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;
-  protected readonly SCORE_VALUE: string = SCORE_VALUE;
-
   constructor(private dialog: MatDialog, private projectService: TeacherProjectService) {}
 
   createBranch(params: CreateBranchParams): Promise<void> {
     this.showCreatingBranchMessage();
-    const targetNode = this.projectService.getNodeById(params.branchStepId);
-    const nodeIdTargetNodeTransitionsTo =
-      targetNode.transitionLogic.transitions.length > 0
-        ? targetNode.transitionLogic.transitions[0].to
+    const branchNode = this.projectService.getNodeById(params.branchStepId);
+    const nodeIdBranchNodeTransitionsTo =
+      branchNode.transitionLogic.transitions.length > 0
+        ? branchNode.transitionLogic.transitions[0].to
         : '';
-    targetNode.transitionLogic.transitions = [];
+    branchNode.transitionLogic.transitions = [];
     const newNodeIds = this.createNewNodeIds(params.pathCount);
-    this.createPathSteps(params, targetNode, newNodeIds);
+    this.createPathSteps(params, branchNode, newNodeIds);
     const mergeStep: any =
       params.mergeStepId === ''
-        ? this.createMergeStep(newNodeIds, nodeIdTargetNodeTransitionsTo)
+        ? this.createMergeStep(newNodeIds, nodeIdBranchNodeTransitionsTo)
         : this.projectService.getNodeById(params.mergeStepId);
     this.setPathStepTransitions(newNodeIds, mergeStep.id);
-    this.setTargetNodeTransitionLogic(targetNode, params.criteria);
+    this.setBranchNodeTransitionLogic(branchNode, params.criteria);
     if (params.mergeStepId === '') {
       newNodeIds.push(mergeStep.id);
     }
@@ -47,34 +44,33 @@ export class CreateBranchService {
   private createNewNodeIds(pathCount: number): string[] {
     const newNodeIds = [];
     for (let i = 0; i < pathCount; i++) {
-      const newNodeId = this.projectService.getNextAvailableNodeId(newNodeIds);
-      newNodeIds.push(newNodeId);
+      newNodeIds.push(this.projectService.getNextAvailableNodeId(newNodeIds));
     }
     return newNodeIds;
   }
 
-  private createPathSteps(params: any, targetNode: any, newNodeIds: string[]): void {
+  private createPathSteps(params: CreateBranchParams, branchNode: any, newNodeIds: string[]): void {
     for (let i = 0; i < newNodeIds.length; i++) {
       const pathNumber = i + 1;
       const newNode = this.projectService.createNode($localize`Path ${pathNumber}`);
       newNode.id = newNodeIds[i];
-      this.addTransitionFromTargetNodeToPathNode(params, targetNode, newNode, pathNumber);
+      this.addTransitionFromBranchNodeToPathNode(params, branchNode, newNode, pathNumber);
       this.projectService.addNode(newNode);
       this.projectService.addApplicationNode(newNode);
       this.projectService.setIdToNode(newNode.id, newNode);
-      this.projectService.addBranchPathTakenConstraints(newNode.id, targetNode.id, newNode.id);
+      this.projectService.addBranchPathTakenConstraints(newNode.id, branchNode.id, newNode.id);
     }
   }
 
-  private addTransitionFromTargetNodeToPathNode(
-    params: any,
-    targetNode: any,
+  private addTransitionFromBranchNodeToPathNode(
+    params: CreateBranchParams,
+    branchNode: any,
     newNode: any,
     pathNumber: number
   ): void {
     switch (params.criteria) {
-      case this.SCORE_VALUE:
-        targetNode.transitionLogic.transitions.push(
+      case SCORE_VALUE:
+        branchNode.transitionLogic.transitions.push(
           new Transition(newNode.id, [
             new TransitionCriteria(
               SCORE_VALUE,
@@ -86,10 +82,10 @@ export class CreateBranchService {
             )
           ])
         );
-        targetNode.transitionLogic.whenToChoosePath = 'studentDataChanged';
+        branchNode.transitionLogic.whenToChoosePath = 'studentDataChanged';
         break;
-      case this.CHOICE_CHOSEN_VALUE:
-        targetNode.transitionLogic.transitions.push(
+      case CHOICE_CHOSEN_VALUE:
+        branchNode.transitionLogic.transitions.push(
           new Transition(newNode.id, [
             new TransitionCriteria(
               CHOICE_CHOSEN_VALUE,
@@ -101,20 +97,20 @@ export class CreateBranchService {
             )
           ])
         );
-        targetNode.transitionLogic.whenToChoosePath = 'studentDataChanged';
+        branchNode.transitionLogic.whenToChoosePath = 'studentDataChanged';
         break;
       default:
-        targetNode.transitionLogic.transitions.push(new Transition(newNode.id));
-        targetNode.transitionLogic.whenToChoosePath = 'enterNode';
+        branchNode.transitionLogic.transitions.push(new Transition(newNode.id));
+        branchNode.transitionLogic.whenToChoosePath = 'enterNode';
     }
   }
 
-  private createMergeStep(newNodeIds: string[], nodeIdTargetNodeTransitionsTo: string): any {
+  private createMergeStep(newNodeIds: string[], nodeIdBranchNodeTransitionsTo: string): any {
     const mergeStepNode = this.projectService.createNode($localize`Merge Step`);
     const mergeStepNodeId = this.projectService.getNextAvailableNodeId(newNodeIds);
     mergeStepNode.id = mergeStepNodeId;
-    if (nodeIdTargetNodeTransitionsTo !== '') {
-      mergeStepNode.transitionLogic.transitions = [new Transition(nodeIdTargetNodeTransitionsTo)];
+    if (nodeIdBranchNodeTransitionsTo !== '') {
+      mergeStepNode.transitionLogic.transitions = [new Transition(nodeIdBranchNodeTransitionsTo)];
     }
     this.projectService.addNode(mergeStepNode);
     this.projectService.addApplicationNode(mergeStepNode);
@@ -130,11 +126,11 @@ export class CreateBranchService {
     }
   }
 
-  private setTargetNodeTransitionLogic(targetNode: any, criteria: string): void {
-    targetNode.transitionLogic.maxPathsVisitable = 1;
-    targetNode.transitionLogic.howToChooseAmongAvailablePaths =
+  private setBranchNodeTransitionLogic(branchNode: any, criteria: string): void {
+    branchNode.transitionLogic.maxPathsVisitable = 1;
+    branchNode.transitionLogic.howToChooseAmongAvailablePaths =
       criteria === WORKGROUP_ID_VALUE ? WORKGROUP_ID_VALUE : 'random';
-    targetNode.transitionLogic.canChangePath = false;
+    branchNode.transitionLogic.canChangePath = false;
   }
 
   private addNewNodeIdsToParentGroup(branchStepId: string, newNodeIds: string[]): void {
