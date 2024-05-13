@@ -26,7 +26,7 @@ import { GraphAuthoring } from './graph/graph-authoring/graph-authoring.componen
 import { GraphGradingComponent } from './graph/graph-grading/graph-grading.component';
 import { GraphStudent } from './graph/graph-student/graph-student.component';
 import { HtmlAuthoring } from './html/html-authoring/html-authoring.component';
-import { HtmlStudent } from './html/html-student/html-student.component';
+import { HtmlStudentComponent } from './html/html-student/html-student.component';
 import { LabelAuthoring } from './label/label-authoring/label-authoring.component';
 import { LabelGradingComponent } from './label/label-grading/label-grading.component';
 import { LabelStudent } from './label/label-student/label-student.component';
@@ -94,7 +94,7 @@ export const components = {
     student: EmbeddedStudent
   },
   Graph: { authoring: GraphAuthoring, grading: GraphGradingComponent, student: GraphStudent },
-  HTML: { authoring: HtmlAuthoring, student: HtmlStudent },
+  HTML: { authoring: HtmlAuthoring, student: HtmlStudentComponent },
   Label: { authoring: LabelAuthoring, grading: LabelGradingComponent, student: LabelStudent },
   Match: { authoring: MatchAuthoring, grading: MatchGradingComponent, student: MatchStudent },
   MultipleChoice: {
