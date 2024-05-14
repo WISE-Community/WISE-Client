@@ -1,24 +1,22 @@
-<div class="content-block">
-  <div
-    class="content-block__header controls dark-theme primary-bg"
-    fxLayout="row"
-    fxLayout.xs="column"
-    fxLayoutGap="16px"
-    fxLayoutAlign="start center"
-  >
-    <app-search-bar
-      fxFlex="0 0 auto"
-      fxFlex.xs="0 0 100%"
-      fxFlex.sm="0 0 calc(50%-8px)"
-      i18n-placeholderText
-      placeholderText="Search"
-      [disable]="!recentRunsLoaded"
-      [value]="searchValue"
-      (update)="searchChanged($event)"
-    ></app-search-bar>
-    <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
+<div
+  class="content-block filters dark-theme primary-bg"
+  fxLayout="row"
+  fxLayout.lt-md="column"
+  fxLayoutGap="16px"
+  fxLayoutAlign="start stretch"
+>
+  <app-search-bar
+    fxFlex="0 0 auto"
+    i18n-placeholderText
+    placeholderText="Search"
+    [disable]="!recentRunsLoaded"
+    [value]="searchValue"
+    (update)="searchChanged($event)"
+  ></app-search-bar>
+  <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
     <select-tags [selectedTags]="selectedTags" (selectTagEvent)="selectTags($event)"></select-tags>
-    <mat-form-field>
+    <mat-form-field [subscriptSizing]="'dynamic'">
       <mat-label>View</mat-label>
       <mat-select [(ngModel)]="showArchivedView" (selectionChange)="refreshProjects()">
         <mat-option [value]="false" i18n>Active</mat-option>
@@ -26,6 +24,8 @@
       </mat-select>
     </mat-form-field>
   </div>
+</div>
+<div class="content-block">
   <selected-tags-list
     *ngIf="selectedTags.length > 0"
     [tags]="selectedTags"

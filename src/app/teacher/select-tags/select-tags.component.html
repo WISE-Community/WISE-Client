@@ -1,5 +1,5 @@
-<mat-form-field>
-  <mat-label i18n>Tags</mat-label>
+<mat-form-field [subscriptSizing]="'dynamic'">
+  <mat-label i18n>Filter by tag</mat-label>
   <mat-select
     [(value)]="selectedTags"
     (selectionChange)="selectTagEvent.emit(selectedTags)"
