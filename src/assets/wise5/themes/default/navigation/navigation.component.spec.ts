@@ -1,15 +1,12 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { VLEProjectService } from '../../../vle/vleProjectService';
 import { NavigationComponent } from './navigation.component';
 
 class MockVLEProjectService {
-  rootNode = { ids: [] };
-
   getProjectRootNode() {
-    return this.rootNode;
+    return { ids: [] };
   }
 }
 
@@ -19,8 +16,7 @@ describe('NavigationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [NavigationComponent],
+      imports: [HttpClientTestingModule, NavigationComponent, StudentTeacherCommonServicesModule],
       providers: [{ provide: VLEProjectService, useClass: MockVLEProjectService }]
     }).compileComponents();
   });

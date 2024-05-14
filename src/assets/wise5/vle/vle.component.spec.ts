@@ -51,13 +51,13 @@ describe('VLEComponent', () => {
         MatToolbarModule,
         MatSelectModule,
         MatSidenavModule,
+        NavigationComponent,
         NodeIconComponent,
         NodeStatusIconComponent,
         StudentTeacherCommonServicesModule,
         TopBarComponent
       ],
       declarations: [
-        NavigationComponent,
         NodeComponent,
         NotebookNotesComponent,
         SafeUrl,
