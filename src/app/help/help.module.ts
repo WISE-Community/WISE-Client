@@ -17,8 +17,9 @@ import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-
     GettingStartedComponent,
     HelpRoutingModule,
     MatDividerModule,
-    SharedModule
+    SharedModule,
+    StudentFaqComponent
   ],
-  declarations: [HelpComponent, TeacherFaqComponent, StudentFaqComponent, HelpHomeComponent]
+  declarations: [HelpComponent, TeacherFaqComponent, HelpHomeComponent]
 })
 export class HelpModule {}
