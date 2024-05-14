@@ -7,8 +7,13 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { ComponentStateInfoComponent } from '../../assets/wise5/common/component-state-info/component-state-info.component';
 
 @NgModule({
-  declarations: [AddToNotebookButton, ComponentAnnotationsComponent, ComponentSaveSubmitButtons],
-  imports: [ComponentHeaderComponent, ComponentStateInfoComponent, StudentTeacherCommonModule],
+  declarations: [AddToNotebookButton, ComponentSaveSubmitButtons],
+  imports: [
+    ComponentAnnotationsComponent,
+    ComponentHeaderComponent,
+    ComponentStateInfoComponent,
+    StudentTeacherCommonModule
+  ],
   exports: [
     AddToNotebookButton,
     ComponentAnnotationsComponent,
