@@ -9,8 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
-import { ComponentHeader } from '../../../directives/component-header/component-header.component';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ProjectService } from '../../../services/projectService';
 import { AudioOscillatorStudent } from './audio-oscillator-student.component';
 import { AudioOscillatorStudentData } from '../AudioOscillatorStudentData';
@@ -33,6 +32,7 @@ describe('AudioOscillatorStudent', () => {
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
+        ComponentHeaderComponent,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,
@@ -41,11 +41,10 @@ describe('AudioOscillatorStudent', () => {
         MatInputModule,
         MatSelectModule,
         MatTooltipModule,
-        PossibleScoreComponent,
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [AudioOscillatorStudent, ComponentHeader],
+      declarations: [AudioOscillatorStudent],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(AudioOscillatorStudent);

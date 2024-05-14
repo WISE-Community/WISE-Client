@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
-import { ComponentHeader } from '../../../directives/component-header/component-header.component';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceFeedbackService';
 import { ProjectService } from '../../../services/projectService';
@@ -26,7 +26,6 @@ import { DialogGuidanceComponent } from '../DialogGuidanceComponent';
 import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
-import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 
 let component: DialogGuidanceStudentComponent;
 let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
@@ -50,10 +49,11 @@ function createDialogGuidanceComponent(isComputerAvatarEnabled: boolean): Dialog
 describe('DialogGuidanceStudentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ComponentHeader, DialogGuidanceStudentComponent, DialogResponsesComponent],
+      declarations: [DialogGuidanceStudentComponent, DialogResponsesComponent],
       imports: [
         BrowserAnimationsModule,
         ChatInputComponent,
+        ComponentHeaderComponent,
         FormsModule,
         HttpClientTestingModule,
         MatCardModule,
@@ -61,7 +61,6 @@ describe('DialogGuidanceStudentComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        PossibleScoreComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [DialogGuidanceFeedbackService],

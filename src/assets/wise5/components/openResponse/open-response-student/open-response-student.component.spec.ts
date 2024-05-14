@@ -7,10 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
-import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
-import { ComponentHeader } from '../../../directives/component-header/component-header.component';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ComponentSaveSubmitButtons } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
 import { CRaterService } from '../../../services/cRaterService';
@@ -36,20 +35,15 @@ describe('OpenResponseStudent', () => {
         BrowserAnimationsModule,
         BrowserModule,
         CommonModule,
+        ComponentHeaderComponent,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,
         MatIconModule,
-        PossibleScoreComponent,
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [
-        ComponentHeader,
-        ComponentSaveSubmitButtons,
-        DialogWithoutCloseComponent,
-        OpenResponseStudent
-      ],
+      declarations: [ComponentSaveSubmitButtons, DialogWithoutCloseComponent, OpenResponseStudent],
       providers: [AudioRecorderService],
       schemas: [NO_ERRORS_SCHEMA]
     });

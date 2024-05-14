@@ -5,10 +5,9 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { ComponentHeader } from '../../../directives/component-header/component-header.component';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { AiChatModule } from '../ai-chat.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { PromptComponent } from '../../../directives/prompt/prompt.component';
 import { AiChatComponent } from '../AiChatComponent';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -16,7 +15,6 @@ import { ProjectService } from '../../../services/projectService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
-import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 
 describe('AiChatStudentComponent', () => {
   let component: AiChatStudentComponent;
@@ -24,11 +22,12 @@ describe('AiChatStudentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AiChatStudentComponent, ComponentHeader],
+      declarations: [AiChatStudentComponent],
       imports: [
         AiChatModule,
         BrowserAnimationsModule,
         ChatInputComponent,
+        ComponentHeaderComponent,
         FormsModule,
         HttpClientTestingModule,
         MatCardModule,
@@ -36,8 +35,6 @@ describe('AiChatStudentComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatSnackBarModule,
-        PossibleScoreComponent,
-        PromptComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [AiChatService]

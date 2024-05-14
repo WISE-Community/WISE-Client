@@ -22,6 +22,7 @@ import { OpenResponseInfo } from '../../../components/openResponse/OpenResponseI
 import { ComponentInfo } from '../../../components/ComponentInfo';
 import { MatCardModule } from '@angular/material/card';
 import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 
 let component: ComponentInfoDialogComponent;
 let fixture: ComponentFixture<ComponentInfoDialogComponent>;
@@ -40,6 +41,7 @@ describe('ComponentInfoDialogComponent', () => {
       ],
       imports: [
         BrowserAnimationsModule,
+        ComponentHeaderComponent,
         ComponentTypeServiceModule,
         HttpClientTestingModule,
         MatButtonModule,
