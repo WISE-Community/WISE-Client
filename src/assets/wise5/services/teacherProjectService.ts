@@ -344,15 +344,15 @@ export class TeacherProjectService extends ProjectService {
    * @param node the new node
    * @param nodeId the node to add after
    */
-  createNodeAfter(newNode, nodeId) {
+  createNodeAfter(newNode: any, nodeId: string, nextId: string = null) {
     if (this.isInactive(nodeId)) {
       this.setIdToNode(newNode.id, newNode);
       this.addInactiveNodeInsertAfter(newNode, nodeId);
     } else {
       this.addNode(newNode);
       this.setIdToNode(newNode.id, newNode);
-      this.insertNodeAfterInGroups(newNode.id, nodeId);
-      this.insertNodeAfterInTransitions(newNode, nodeId);
+      this.insertNodeAfterInGroups(newNode.id, nodeId, nextId);
+      this.insertNodeAfterInTransitions(newNode, nodeId, nextId);
     }
   }
 
@@ -1100,11 +1100,11 @@ export class TeacherProjectService extends ProjectService {
    * @param nodeIdToInsert the node id we want to insert
    * @param nodeIdToInsertAfter the node id we want to insert after
    */
-  insertNodeAfterInGroups(nodeIdToInsert, nodeIdToInsertAfter) {
+  insertNodeAfterInGroups(nodeIdToInsert, nodeIdToInsertAfter, nextId?: string) {
     const groupNodes = this.getGroupNodes();
     if (groupNodes != null) {
       for (const group of groupNodes) {
-        this.insertNodeAfterInGroup(group, nodeIdToInsert, nodeIdToInsertAfter);
+        this.insertNodeAfterInGroup(group, nodeIdToInsert, nodeIdToInsertAfter, nextId);
       }
     }
     const inactiveGroupNodes = this.getInactiveGroupNodes();
@@ -1122,13 +1122,17 @@ export class TeacherProjectService extends ProjectService {
    * @param nodeIdToInsertAfter The node id to insert after.
    * @returns {boolean} Whether we inserted the node id.
    */
-  insertNodeAfterInGroup(group, nodeIdToInsert, nodeIdToInsertAfter) {
+  insertNodeAfterInGroup(group, nodeIdToInsert, nodeIdToInsertAfter, nextId?: string) {
     const ids = group.ids;
     if (ids != null) {
       for (let i = 0; i < ids.length; i++) {
         const id = ids[i];
-        if (nodeIdToInsertAfter === id) {
+        if (nextId == null && nodeIdToInsertAfter === id) {
           ids.splice(i + 1, 0, nodeIdToInsert);
+          return true;
+        }
+        if (nextId === id) {
+          ids.splice(i, 0, nodeIdToInsert);
           return true;
         }
       }
@@ -1142,7 +1146,7 @@ export class TeacherProjectService extends ProjectService {
    * @param nodeToInsert the node to insert
    * @param nodeIdToInsertAfter the node id to insert after
    */
-  insertNodeAfterInTransitions(nodeToInsert, nodeIdToInsertAfter) {
+  insertNodeAfterInTransitions(nodeToInsert, nodeIdToInsertAfter, nextId?: string) {
     const nodeToInsertAfter = this.getNodeById(nodeIdToInsertAfter);
     if (nodeToInsert.type != nodeToInsertAfter.type) {
       throw 'Error: insertNodeAfterInTransitions() nodes are not the same type';
@@ -1160,15 +1164,46 @@ export class TeacherProjectService extends ProjectService {
     if (this.isGroupNode(nodeToInsert.id)) {
       this.updateChildrenTransitionsInAndOutOfGroup(nodeToInsert, nodeIdToInsertAfter);
     }
-    this.copyTransitions(nodeToInsertAfter, nodeToInsert);
-    if (nodeToInsert.transitionLogic.transitions.length == 0) {
-      this.copyParentTransitions(nodeIdToInsertAfter, nodeToInsert);
+    if (nodeToInsertAfter.transitionLogic.transitions.length > 1 && nextId != null) {
+      // node to insert after is a branch step
+      const previousNodeTransition = nodeToInsertAfter.transitionLogic.transitions.find(
+        (transition: any) => transition.to === nextId
+      );
+      // make previous node transition to the node we are inserting
+      previousNodeTransition.to = nodeToInsert.id;
+      // make the node we are inserting point to the next id
+      nodeToInsert.transitionLogic.transitions = [{ to: nextId }];
+      // copy the branchPathTaken constraints for the nodes in the path and set them into the node
+      // we are inserting
+      this.updateBranchPathTakenConstraints(nodeToInsert, nextId);
+      const branch = this.getBranchesByBranchStartPointNodeId(nodeIdToInsertAfter)[0];
+      const path = branch.paths.find((path) => path[0] === nodeToInsert.id);
+      // update all branchPathTaken constraints for the nodes in the branch path
+      for (const nodeInPath of path) {
+        this.updateBranchPathTakenConstraintToNode(this.getNodeById(nodeInPath), nodeToInsert.id);
+      }
+    } else {
+      this.copyTransitions(nodeToInsertAfter, nodeToInsert);
+      if (nodeToInsert.transitionLogic.transitions.length == 0) {
+        this.copyParentTransitions(nodeIdToInsertAfter, nodeToInsert);
+      }
+      const transitionObject = {
+        to: nodeToInsert.id
+      };
+      nodeToInsertAfter.transitionLogic.transitions = [transitionObject];
+      this.updateBranchPathTakenConstraints(nodeToInsert, nodeIdToInsertAfter);
     }
-    const transitionObject = {
-      to: nodeToInsert.id
-    };
-    nodeToInsertAfter.transitionLogic.transitions = [transitionObject];
-    this.updateBranchPathTakenConstraints(nodeToInsert, nodeIdToInsertAfter);
+  }
+
+  updateBranchPathTakenConstraintToNode(node: any, toNodeId: string): void {
+    const constraints = node.constraints;
+    for (const constraint of constraints) {
+      for (const removalCriterion of constraint.removalCriteria) {
+        if (removalCriterion.name === 'branchPathTaken') {
+          removalCriterion.params.toNodeId = toNodeId;
+        }
+      }
+    }
   }
 
   /*

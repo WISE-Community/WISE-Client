@@ -16,6 +16,7 @@ export class AddYourOwnNode {
   });
   protected componentTypes: any[];
   protected initialComponents: string[] = [];
+  protected nextId: string;
   protected targetId: string;
 
   constructor(
@@ -28,6 +29,7 @@ export class AddYourOwnNode {
 
   ngOnInit() {
     this.targetId = history.state.targetId;
+    this.nextId = history.state.nextId;
     this.componentTypes = this.componentTypeService.getComponentTypes();
   }
 
@@ -48,7 +50,7 @@ export class AddYourOwnNode {
     if (this.isGroupNode(this.targetId)) {
       this.projectService.createNodeInside(newNode, this.targetId);
     } else {
-      this.projectService.createNodeAfter(newNode, this.targetId);
+      this.projectService.createNodeAfter(newNode, this.targetId, this.nextId);
     }
     this.addInitialComponents(newNode.id, this.initialComponents);
     this.save().then(() => {

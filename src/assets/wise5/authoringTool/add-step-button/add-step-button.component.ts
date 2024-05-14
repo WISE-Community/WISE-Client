@@ -23,18 +23,24 @@ export class AddStepButtonComponent {
   ) {}
 
   protected addStepBefore(): void {
-    this.goToAddStepView(this.projectService.getParentGroupId(this.nodeId));
+    const previousNodes = this.projectService.getNodesByToNodeId(this.nodeId);
+    const previousNodeId: string =
+      previousNodes.length > 0
+        ? previousNodes[0].id
+        : this.projectService.getParentGroupId(this.nodeId);
+    this.goToAddStepView(previousNodeId, this.nodeId);
   }
 
   protected addStepAfter(): void {
-    this.goToAddStepView(this.nodeId);
+    this.goToAddStepView(this.nodeId, null);
   }
 
-  private goToAddStepView(nodeId: string): void {
+  private goToAddStepView(previousNodeId: string, nextNodeId: string): void {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
       state: {
-        targetId: nodeId
+        targetId: previousNodeId,
+        nextId: nextNodeId
       }
     });
   }
