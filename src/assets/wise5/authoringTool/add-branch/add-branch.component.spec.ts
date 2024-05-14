@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
+import { CreateBranchService } from '../../services/createBranchService';
 
 let teacherProjectService: TeacherProjectService;
 
@@ -27,7 +28,7 @@ describe('AddBranchComponent', () => {
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [provideRouter([]), TeacherProjectService]
+      providers: [CreateBranchService, provideRouter([]), TeacherProjectService]
     });
     window.history.pushState({}, '', '');
     teacherProjectService = TestBed.inject(TeacherProjectService);

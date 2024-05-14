@@ -9159,7 +9159,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Create Branch Off <x id="INTERPOLATION" equiv-text="{{ targetTitle }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-branch/add-branch.component.html</context>
-          <context context-type="linenumber">1</context>
+          <context context-type="linenumber">1,2</context>
         </context-group>
       </trans-unit>
       <trans-unit id="06c301fa0994d4b67e51eeb201f1d3d9988c7a23" datatype="html">
@@ -21446,6 +21446,27 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/configService.ts</context>
           <context context-type="linenumber">560</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7206782115156099663" datatype="html">
+        <source>Path <x id="PH" equiv-text="pathNumber"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/createBranchService.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4647197691580277546" datatype="html">
+        <source>Merge Step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/createBranchService.ts</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1035141360074485815" datatype="html">
+        <source>Creating Branch</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/createBranchService.ts</context>
+          <context context-type="linenumber">144</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1384916903989385807" datatype="html">
