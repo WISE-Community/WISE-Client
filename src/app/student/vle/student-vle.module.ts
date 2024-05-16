@@ -14,7 +14,6 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
 import { NavigationComponent } from '../../../assets/wise5/themes/default/navigation/navigation.component';
 import { StepToolsComponent } from '../../../assets/wise5/themes/default/themeComponents/stepTools/step-tools.component';
-import { NavItemComponent } from '../../../assets/wise5/vle/nav-item/nav-item.component';
 import { NodeModule } from '../../../assets/wise5/vle/node/node.module';
 import { StudentAssetsDialogModule } from '../../../assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.module';
 import { VLEComponent } from '../../../assets/wise5/vle/vle.component';
@@ -41,7 +40,6 @@ import { NodeStatusIconComponent } from '../../../assets/wise5/themes/default/th
     ChooseBranchPathDialogComponent,
     GenerateImageDialogComponent,
     GroupTabsComponent,
-    NavigationComponent,
     NodeNavigationComponent,
     RunEndedAndLockedMessageComponent,
     SafeUrl,
@@ -54,7 +52,7 @@ import { NodeStatusIconComponent } from '../../../assets/wise5/themes/default/th
     CommonModule,
     ComponentStudentModule,
     MatDialogModule,
-    NavItemComponent,
+    NavigationComponent,
     NodeModule,
     NodeStatusIconComponent,
     SimpleDialogModule,
