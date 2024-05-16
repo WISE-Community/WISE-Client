@@ -6336,7 +6336,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">205</context>
+          <context context-type="linenumber">189</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3de550daa9bf35829dbeb9099844614347d2dbc5" datatype="html">
@@ -16865,7 +16865,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">202</context>
+          <context context-type="linenumber">186</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2353574516166744013" datatype="html">
