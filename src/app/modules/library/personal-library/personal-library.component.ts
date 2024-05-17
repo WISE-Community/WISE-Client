@@ -138,17 +138,14 @@ export class PersonalLibraryComponent extends LibraryComponent {
   }
 
   protected updateSelectedProjects(event: ProjectSelectionEvent): void {
+    const selectedProjects = this.selectedProjects();
     if (event.selected) {
-      this.selectedProjects.update((selectedProjects) => {
-        selectedProjects.push(event.project);
-        return selectedProjects;
-      });
+      selectedProjects.push(event.project);
     } else {
-      this.selectedProjects.update((selectedProjects) => {
-        selectedProjects.splice(selectedProjects.indexOf(event.project), 1);
-        return selectedProjects;
-      });
+      selectedProjects.splice(selectedProjects.indexOf(event.project), 1);
     }
+    // create a new array to trigger change detection
+    this.selectedProjects.set([...selectedProjects]);
   }
 
   protected unselectAllProjects(): void {
