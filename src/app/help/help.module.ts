@@ -11,13 +11,16 @@ import { MatDividerModule } from '@angular/material/divider';
 import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-action.component';
 
 @NgModule({
-  imports: [CallToActionComponent, CommonModule, HelpRoutingModule, MatDividerModule, SharedModule],
-  declarations: [
-    HelpComponent,
+  imports: [
+    CallToActionComponent,
+    CommonModule,
     GettingStartedComponent,
-    TeacherFaqComponent,
+    HelpRoutingModule,
+    MatDividerModule,
+    SharedModule,
     StudentFaqComponent,
-    HelpHomeComponent
-  ]
+    TeacherFaqComponent
+  ],
+  declarations: [HelpComponent, HelpHomeComponent]
 })
 export class HelpModule {}

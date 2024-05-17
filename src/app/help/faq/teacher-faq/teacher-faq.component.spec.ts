@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
 import { TeacherFaqComponent } from './teacher-faq.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigService } from '../../../services/config.service';
 import { Observable } from 'rxjs';
 import { Config } from '../../../domain/config';
+import { provideRouter } from '@angular/router';
 
 export class MockConfigService {
   getConfig(): Observable<Config> {
@@ -13,7 +12,7 @@ export class MockConfigService {
       logOutURL: '/logout',
       currentTime: new Date('2018-10-24T15:05:40.214').getTime()
     };
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       observer.next(config);
       observer.complete();
     });
@@ -27,9 +26,8 @@ describe('TeacherFaqComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [TeacherFaqComponent],
-        providers: [{ provide: ConfigService, useClass: MockConfigService }],
-        schemas: [NO_ERRORS_SCHEMA]
+        imports: [TeacherFaqComponent],
+        providers: [{ provide: ConfigService, useClass: MockConfigService }, provideRouter([])]
       }).compileComponents();
     })
   );
