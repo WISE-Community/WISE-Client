@@ -10,7 +10,7 @@ import { of } from 'rxjs';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
-import { ComponentSaveSubmitButtons } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
 import { CRaterService } from '../../../services/cRaterService';
 import { NotebookService } from '../../../services/notebookService';
@@ -19,7 +19,6 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { OpenResponseContent } from '../OpenResponseContent';
 import { OpenResponseService } from '../openResponseService';
 import { OpenResponseStudent } from './open-response-student.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DialogWithoutCloseComponent } from '../../../directives/dialog-without-close/dialog-without-close.component';
 
 let component: OpenResponseStudent;
@@ -36,6 +35,7 @@ describe('OpenResponseStudent', () => {
         BrowserModule,
         CommonModule,
         ComponentHeaderComponent,
+        ComponentSaveSubmitButtonsComponent,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,
@@ -43,9 +43,8 @@ describe('OpenResponseStudent', () => {
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [ComponentSaveSubmitButtons, DialogWithoutCloseComponent, OpenResponseStudent],
-      providers: [AudioRecorderService],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [DialogWithoutCloseComponent, OpenResponseStudent],
+      providers: [AudioRecorderService]
     });
   });
 
