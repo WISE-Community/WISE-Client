@@ -27,6 +27,7 @@ import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-
   imports: [
     CallToActionComponent,
     CommonModule,
+    ForgotComponent,
     ForgotRoutingModule,
     FormsModule,
     MatDividerModule,
@@ -36,7 +37,6 @@ import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-
     SharedModule
   ],
   declarations: [
-    ForgotComponent,
     ForgotHomeComponent,
     ForgotStudentComponent,
     ForgotTeacherComponent,
