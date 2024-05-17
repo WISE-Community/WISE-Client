@@ -15,13 +15,13 @@ import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-
     CallToActionComponent,
     CommonModule,
     GettingStartedComponent,
+    HelpComponent,
     HelpHomeComponent,
     HelpRoutingModule,
     MatDividerModule,
     SharedModule,
     StudentFaqComponent,
     TeacherFaqComponent
-  ],
-  declarations: [HelpComponent]
+  ]
 })
 export class HelpModule {}
