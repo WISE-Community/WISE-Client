@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotHomeComponent } from './forgot-home.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideRouter } from '@angular/router';
 
 describe('ForgotHomeComponent', () => {
   let component: ForgotHomeComponent;
@@ -8,12 +8,9 @@ describe('ForgotHomeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ForgotHomeComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [ForgotHomeComponent],
+      providers: [provideRouter([])]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(ForgotHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
