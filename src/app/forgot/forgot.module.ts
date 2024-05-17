@@ -29,6 +29,7 @@ import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-
     ForgotComponent,
     ForgotHomeComponent,
     ForgotStudentComponent,
+    ForgotTeacherComponent,
     ForgotRoutingModule,
     FormsModule,
     MatDividerModule,
@@ -38,7 +39,6 @@ import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-
     SharedModule
   ],
   declarations: [
-    ForgotTeacherComponent,
     ForgotStudentPasswordComponent,
     ForgotStudentUsernameComponent,
     ForgotTeacherUsernameComponent,
