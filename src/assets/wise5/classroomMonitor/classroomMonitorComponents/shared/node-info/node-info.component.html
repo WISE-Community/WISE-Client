@@ -19,8 +19,7 @@
       >
         {{ component.assessmentItemIndex + '. ' + component.typeLabel }}&nbsp;
       </h3>
-      <preview-component [component]="component.component" [periodId]="periodId">
-      </preview-component>
+      <preview-component [component]="component.component" [periodId]="periodId" />
       <mat-card
         appearance="outlined"
         *ngIf="component.rubric"
