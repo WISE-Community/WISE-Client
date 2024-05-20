@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { ForgotRoutingModule } from './forgot-routing.module';
 import { ForgotHomeComponent } from './forgot-home/forgot-home.component';
 import { ForgotComponent } from './forgot.component';
@@ -27,6 +26,10 @@ import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-
   imports: [
     CallToActionComponent,
     CommonModule,
+    ForgotComponent,
+    ForgotHomeComponent,
+    ForgotStudentComponent,
+    ForgotTeacherComponent,
     ForgotRoutingModule,
     FormsModule,
     MatDividerModule,
@@ -36,10 +39,6 @@ import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-
     SharedModule
   ],
   declarations: [
-    ForgotComponent,
-    ForgotHomeComponent,
-    ForgotStudentComponent,
-    ForgotTeacherComponent,
     ForgotStudentPasswordComponent,
     ForgotStudentUsernameComponent,
     ForgotTeacherUsernameComponent,
