@@ -50,6 +50,10 @@ import { LibraryPaginatorIntl } from './libraryPaginatorIntl';
 import { DiscourseCategoryActivityComponent } from './discourse-category-activity/discourse-category-activity.component';
 import { ArchiveProjectsButtonComponent } from '../../teacher/archive-projects-button/archive-projects-button.component';
 import { SelectAllItemsCheckboxComponent } from './select-all-items-checkbox/select-all-items-checkbox.component';
+import { ApplyTagsButtonComponent } from '../../teacher/apply-tags-button/apply-tags-button.component';
+import { SelectTagsComponent } from '../../teacher/select-tags/select-tags.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { SelectedTagsListComponent } from '../../teacher/selected-tags-list/selected-tags-list.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -57,6 +61,7 @@ const materialModules = [
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatChipsModule,
   MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
@@ -74,6 +79,7 @@ const materialModules = [
 
 @NgModule({
   imports: [
+    ApplyTagsButtonComponent,
     ArchiveProjectsButtonComponent,
     CommonModule,
     FlexLayoutModule,
@@ -82,6 +88,8 @@ const materialModules = [
     RouterModule,
     materialModules,
     SelectAllItemsCheckboxComponent,
+    SelectTagsComponent,
+    SelectedTagsListComponent,
     SharedModule,
     TimelineModule
   ],

@@ -1035,10 +1035,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-tags/edit-component-tags.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/select-tags/select-tags.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="d9a6d2f30e57a02a6b36a7773c39a3791c42ae9c" datatype="html">
         <source>Add Tag</source>
@@ -3008,7 +3004,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
@@ -5470,21 +5466,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Discipline</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b26db160af51478944575eeb0137e167ab054cca" datatype="html">
         <source>DCI Arrangement</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b17d72cdba2d53ad1c4952c8c3ba0d70ffc7ed1d" datatype="html">
         <source>Performance Expectation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="07ab43ffb10e6bed417b203bfdc02cdda6aa1b61" datatype="html">
@@ -5749,6 +5745,17 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">42,44</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="8e63cdbdb10c29b7ecc49caa43163fc7c800d612" datatype="html">
+        <source>Unit tags</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="7189355262232159449" datatype="html">
         <source>Unit Details</source>
         <context-group purpose="location">
@@ -5857,47 +5864,54 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="b36e1450940b7f6028d8587568c7d669b53f7a06" datatype="html">
-        <source>Active</source>
+      <trans-unit id="6829218544e108e152f5fa72cb79c4ccb82e0d06" datatype="html">
+        <source>View</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5124633f6ba30f4d9b29fd0e43c9195a6bcf0f79" datatype="html">
-        <source>Archived</source>
+      <trans-unit id="b36e1450940b7f6028d8587568c7d669b53f7a06" datatype="html">
+        <source>Active</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5124633f6ba30f4d9b29fd0e43c9195a6bcf0f79" datatype="html">
+        <source>Archived</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8c208095ba4dc91d0b08952326cd6eff7e781d8e" datatype="html">
         <source> <x id="INTERPOLATION" equiv-text="{{ numSelectedProjects() }}"/> selected </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">23,25</context>
+          <context context-type="linenumber">30,32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="050a0b486e807a37ee8dbeeac274d84786bffa34" datatype="html">
         <source> No owned or shared units found. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">56,58</context>
+          <context context-type="linenumber">67,69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4204495853509039236" datatype="html">
         <source>Select all units</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6028472408314831177" datatype="html">
@@ -5972,7 +5986,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/search-bar/search-bar.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
@@ -8870,6 +8884,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="bdb9a910523610254872e147222689e9a4115b84" datatype="html">
+        <source>Filter by tag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/select-tags/select-tags.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="353c43d34a92c7a8744729bd7b3ae5d3be470ae5" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ selectedTags.length }}"/> Tag(s)</source>
         <context-group purpose="location">
@@ -8889,6 +8910,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/selected-tags-list/selected-tags-list.component.html</context>
           <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0f1ef37e15512702909190c08b6f79056dd5c1ae" datatype="html">
+        <source> Clear filters </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/selected-tags-list/selected-tags-list.component.html</context>
+          <context context-type="linenumber">20,22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c76c2eeebe0adc81f3434495d189c56d70899cad" datatype="html">
@@ -9143,13 +9171,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
           <context context-type="linenumber">47,49</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8e63cdbdb10c29b7ecc49caa43163fc7c800d612" datatype="html">
-        <source>Unit tags</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
-          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="490233cd77b10fe95606d32aa5ed4be533645820" datatype="html">

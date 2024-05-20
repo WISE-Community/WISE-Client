@@ -11,4 +11,13 @@
       </button>
     </mat-chip-option>
   </mat-chip-listbox>
+  <a
+    *ngIf="showClearButton && tags.length > 0"
+    class="mat-caption"
+    href="#"
+    (click)="removeTags(); $event.preventDefault()"
+    i18n
+  >
+    Clear filters
+  </a>
 </div>

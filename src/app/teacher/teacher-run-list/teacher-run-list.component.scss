@@ -7,17 +7,11 @@ h2 {
   margin-bottom: 0;
 }
 
-.content-block {
+.filters {
   margin-top: 24px;
-  overflow: hidden;
-}
-
-.content-block__header {
-  margin: -16px -16px 16px;
-
-  @media (min-width: breakpoint('sm.min')) {
-    margin: -24px -24px 16px;
-  }
+  padding: 16px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .notice {
