@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class ChooseImportUnitComponent {
   protected libraryProjects: any[];
+  protected nextId: string;
   protected myProjects: any[];
   protected targetId: string;
   private subscriptions: Subscription = new Subscription();
@@ -24,6 +25,7 @@ export class ChooseImportUnitComponent {
 
   ngOnInit(): void {
     this.targetId = history.state.targetId;
+    this.nextId = history.state.nextId;
     this.myProjects = this.configService.getAuthorableProjects();
     this.subscriptions.add(
       this.projectLibraryService.getLibraryProjects().subscribe((libraryProjects) => {
@@ -41,6 +43,7 @@ export class ChooseImportUnitComponent {
       relativeTo: this.route,
       state: {
         importProjectId: project.id,
+        nextId: this.nextId,
         targetId: this.targetId
       }
     });

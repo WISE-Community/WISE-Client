@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ChooseAutomatedAssessmentComponent {
   private importProjectId: number;
+  protected nextId: string;
   protected node: any;
   protected targetId: string;
   private project: any;
@@ -22,6 +23,7 @@ export class ChooseAutomatedAssessmentComponent {
 
   ngOnInit(): void {
     this.targetId = history.state.targetId;
+    this.nextId = history.state.nextId;
     this.importProjectId = this.projectService.getAutomatedAssessmentProjectId();
     this.showAutomatedAssessmentProject();
   }
@@ -49,6 +51,7 @@ export class ChooseAutomatedAssessmentComponent {
       relativeTo: this.route,
       state: {
         importProjectId: this.importProjectId,
+        nextId: this.nextId,
         node: this.node,
         targetId: this.targetId
       }
