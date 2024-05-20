@@ -33,6 +33,7 @@ import { AuthoringRoutingModule } from './authoring-routing.module';
 import { RouterModule } from '@angular/router';
 import { ComponentInfoService } from '../../assets/wise5/services/componentInfoService';
 import { CreateBranchService } from '../../assets/wise5/services/createBranchService';
+import { CreateNodeBetweenService } from '../../assets/wise5/services/createNodeBetweenService';
 
 @NgModule({
   imports: [StudentTeacherCommonModule, AuthoringToolModule, RouterModule, AuthoringRoutingModule],
@@ -42,6 +43,7 @@ import { CreateBranchService } from '../../assets/wise5/services/createBranchSer
     CopyNodesService,
     CopyProjectService,
     CreateBranchService,
+    CreateNodeBetweenService,
     DataExportService,
     { provide: DataService, useExisting: TeacherDataService },
     GetWorkgroupService,

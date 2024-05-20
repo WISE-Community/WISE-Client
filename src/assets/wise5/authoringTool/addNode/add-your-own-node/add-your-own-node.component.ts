@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { CreateNodeBetweenService } from '../../../services/createNodeBetweenService';
 
 @Component({
   selector: 'add-your-own-node',
@@ -21,6 +22,7 @@ export class AddYourOwnNode {
 
   constructor(
     private componentTypeService: ComponentTypeService,
+    private createNodeBetweenService: CreateNodeBetweenService,
     private fb: FormBuilder,
     private projectService: TeacherProjectService,
     private route: ActivatedRoute,
@@ -50,7 +52,7 @@ export class AddYourOwnNode {
     if (this.isGroupNode(this.targetId)) {
       this.projectService.createNodeInside(newNode, this.targetId);
     } else if (this.projectService.isFirstNodeInBranchPath(this.nextId)) {
-      this.projectService.createNodeBetween(newNode, this.targetId, this.nextId);
+      this.createNodeBetweenService.createNodeBetween(newNode, this.targetId, this.nextId);
     } else {
       this.projectService.createNodeAfter(newNode, this.targetId);
     }
