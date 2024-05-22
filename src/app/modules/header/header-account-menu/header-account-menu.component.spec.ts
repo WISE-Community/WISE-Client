@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Config } from '../../../domain/config';
+import { provideRouter } from '@angular/router';
 
 export class MockConfigService {
   getConfig(): Observable<Config> {
@@ -30,7 +31,7 @@ describe('HeaderAccountMenuComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [HeaderAccountMenuComponent, HttpClientTestingModule, MatMenuModule],
-        providers: [{ provide: ConfigService, useClass: MockConfigService }],
+        providers: [{ provide: ConfigService, useClass: MockConfigService }, provideRouter([])],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
     })
