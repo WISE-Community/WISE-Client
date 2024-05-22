@@ -27,22 +27,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 })
 export class HeaderAccountMenuComponent implements OnInit {
   protected firstName: string = '';
-  protected isPreviousAdmin: boolean = false;
+  protected isPreviousAdmin: boolean;
   protected lastName: string = '';
   protected logOutURL: string;
   protected roles: string[] = [];
   private switchToOriginalUserURL = '/api/logout/impersonate';
   @Input() user: User;
 
-  constructor(private configService: ConfigService, private http: HttpClient) {
-    this.configService = configService;
-  }
+  constructor(private configService: ConfigService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.configService.getConfig().subscribe((config) => {
-      if (config != null) {
-        this.logOutURL = config.logOutURL;
-      }
+      this.logOutURL = config.logOutURL;
     });
   }
 

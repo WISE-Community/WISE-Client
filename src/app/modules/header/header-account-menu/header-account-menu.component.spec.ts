@@ -5,7 +5,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ConfigService } from '../../../services/config.service';
 import { Observable } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Config } from '../../../domain/config';
 import { provideRouter } from '@angular/router';
 
@@ -31,8 +30,7 @@ describe('HeaderAccountMenuComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [HeaderAccountMenuComponent, HttpClientTestingModule, MatMenuModule],
-        providers: [{ provide: ConfigService, useClass: MockConfigService }, provideRouter([])],
-        schemas: [NO_ERRORS_SCHEMA]
+        providers: [{ provide: ConfigService, useClass: MockConfigService }, provideRouter([])]
       }).compileComponents();
     })
   );
