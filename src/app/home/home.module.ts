@@ -15,13 +15,14 @@ import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-
     BlurbComponent,
     CallToActionComponent,
     CommonModule,
+    DiscourseLatestNewsComponent,
     HeroSectionComponent,
     HomeRoutingModule,
     LibraryModule,
     SharedModule,
     RouterModule
   ],
-  declarations: [HomeComponent, DiscourseLatestNewsComponent],
+  declarations: [HomeComponent],
   exports: [HomeComponent, SharedModule]
 })
 export class HomeModule {}

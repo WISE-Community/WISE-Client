@@ -68,6 +68,7 @@ const materialModules = [
 @NgModule({
   imports: [
     CommonModule,
+    DiscourseRecentActivityComponent,
     FlexLayoutModule,
     FormsModule,
     LibraryModule,
@@ -81,7 +82,6 @@ const materialModules = [
   ],
   declarations: [
     CreateRunDialogComponent,
-    DiscourseRecentActivityComponent,
     EditComponent,
     EditRunWarningDialogComponent,
     ListClassroomCoursesDialogComponent,
