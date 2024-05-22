@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { TeacherProjectService } from './teacherProjectService';
-import { CreateNodeBetweenService } from './createNodeBetweenService';
+import { InsertFirstNodeInBranchPathService } from './insertFirstNodeInBranchPathService';
 
 @Injectable()
 export class InsertNodesService {
   constructor(
-    private createNodeBetweenService: CreateNodeBetweenService,
+    private insertFirstNodeInBranchPathService: InsertFirstNodeInBranchPathService,
     private projectService: TeacherProjectService
   ) {}
 
@@ -15,7 +15,7 @@ export class InsertNodesService {
    * @param targetId id of node or group. If this is a group, we will make the
    * new step the first step in the group. If this is a step, we will place the new step after it.
    */
-  insertNodes(nodes: any[], targetId: string, nextId: string): void {
+  insertNodes(nodes: any[], targetId: string, firstNodeInBranchPath: string): void {
     if (targetId == null) {
       /*
        * Insert the node after the last inactive node. If there
@@ -34,8 +34,12 @@ export class InsertNodesService {
     for (const node of nodes) {
       if (this.projectService.isGroupNode(targetId)) {
         this.projectService.createNodeInside(node, targetId);
-      } else if (this.projectService.isFirstNodeInBranchPath(nextId)) {
-        this.createNodeBetweenService.createNodeBetween(node, targetId, nextId);
+      } else if (this.projectService.isFirstNodeInBranchPath(firstNodeInBranchPath)) {
+        this.insertFirstNodeInBranchPathService.insertFirstNodeInBranchPath(
+          node,
+          targetId,
+          firstNodeInBranchPath
+        );
       } else {
         this.projectService.createNodeAfter(node, targetId);
       }

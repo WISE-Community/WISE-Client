@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { TeacherProjectService } from './teacherProjectService';
 
 @Injectable()
-export class CreateNodeBetweenService {
+export class InsertFirstNodeInBranchPathService {
   constructor(private projectService: TeacherProjectService) {}
 
-  createNodeBetween(newNode: any, nodeIdBefore: string, nodeIdAfter: string): void {
+  insertFirstNodeInBranchPath(newNode: any, nodeIdBefore: string, nodeIdAfter: string): void {
     if (this.projectService.isInactive(nodeIdBefore)) {
       this.projectService.setIdToNode(newNode.id, newNode);
       this.projectService.addInactiveNodeInsertAfter(newNode, nodeIdBefore);
