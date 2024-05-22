@@ -23,13 +23,14 @@ const materialModules = [
 
 @NgModule({
   imports: [
-    CommonModule,
-    HeaderLinksComponent,
-    FlexLayoutModule,
     AppRoutingModule,
+    CommonModule,
+    FlexLayoutModule,
+    HeaderAccountMenuComponent,
+    HeaderLinksComponent,
     materialModules
   ],
-  declarations: [HeaderComponent, HeaderAccountMenuComponent],
+  declarations: [HeaderComponent],
   providers: [ConfigService, UserService],
   exports: [HeaderComponent]
 })
