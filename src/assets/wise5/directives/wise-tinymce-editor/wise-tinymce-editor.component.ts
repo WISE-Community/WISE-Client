@@ -74,7 +74,7 @@ export class WiseTinymceEditorComponent {
     'wordcount'
   ];
 
-  constructor(private NotebookService: NotebookService) {
+  constructor(private notebookService: NotebookService) {
     this.subscriptions.add(
       this.debouncer.pipe(debounceTime(1000)).subscribe((value) => {
         this.modelChange.emit(value);
@@ -85,7 +85,7 @@ export class WiseTinymceEditorComponent {
   ngOnInit(): void {
     if (this.isAddNoteButtonAvailable) {
       this.subscriptions.add(
-        this.NotebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
+        this.notebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
           if (requester === 'report') {
             this.insertWISENote(notebookItem);
           }
