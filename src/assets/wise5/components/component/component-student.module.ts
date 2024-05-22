@@ -28,7 +28,7 @@ import { ComponentComponent } from './component.component';
 import { AiChatStudentModule } from '../aiChat/ai-chat-student/ai-chat-student.module';
 
 @NgModule({
-  declarations: [ComponentComponent, PreviewComponentComponent],
+  declarations: [ComponentComponent],
   imports: [
     AiChatStudentModule,
     AnimationStudentModule,
@@ -49,6 +49,7 @@ import { AiChatStudentModule } from '../aiChat/ai-chat-student/ai-chat-student.m
     OpenResponseStudentModule,
     OutsideUrlStudentModule,
     PeerChatStudentModule,
+    PreviewComponentComponent,
     ShowGroupWorkStudentModule,
     ShowMyWorkStudentModule,
     StudentAssetsDialogModule,

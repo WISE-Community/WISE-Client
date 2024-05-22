@@ -34,11 +34,7 @@ let outsideUrlInfo = new OutsideUrlInfo();
 describe('ComponentInfoDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ComponentInfoDialogComponent,
-        ComponentTypeSelectorComponent,
-        PreviewComponentComponent
-      ],
+      declarations: [ComponentInfoDialogComponent, ComponentTypeSelectorComponent],
       imports: [
         BrowserAnimationsModule,
         ComponentHeaderComponent,
@@ -52,6 +48,7 @@ describe('ComponentInfoDialogComponent', () => {
         MatIconModule,
         MatSelectModule,
         MatTabsModule,
+        PreviewComponentComponent,
         PreviewComponentModule
       ],
       providers: [ComponentInfoService, { provide: MAT_DIALOG_DATA, useValue: 'OpenResponse' }]

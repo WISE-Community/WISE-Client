@@ -39,15 +39,10 @@ const node: any = {
   title: stepTitle
 };
 
-describe('ShowNodeInfoDialogComponent', () => {
+describe('ShowNodeInfoDialogComponents', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        NodeInfoComponent,
-        OpenResponseStudent,
-        PreviewComponentComponent,
-        ShowNodeInfoDialogComponent
-      ],
+      declarations: [NodeInfoComponent, OpenResponseStudent, ShowNodeInfoDialogComponent],
       imports: [
         ClassroomMonitorTestingModule,
         ComponentHeaderComponent,
@@ -55,7 +50,8 @@ describe('ShowNodeInfoDialogComponent', () => {
         MatCardModule,
         MatDialogModule,
         MatIconModule,
-        MatToolbarModule
+        MatToolbarModule,
+        PreviewComponentComponent
       ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: nodeId1 },
