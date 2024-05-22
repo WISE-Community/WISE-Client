@@ -4,8 +4,8 @@ import { WiseTinymceEditorComponent } from './wise-tinymce-editor.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
-  declarations: [WiseAuthoringTinymceEditorComponent, WiseTinymceEditorComponent],
-  exports: [WiseAuthoringTinymceEditorComponent, WiseTinymceEditorComponent],
-  imports: [EditorModule]
+  declarations: [WiseAuthoringTinymceEditorComponent],
+  exports: [WiseAuthoringTinymceEditorComponent],
+  imports: [EditorModule, WiseTinymceEditorComponent]
 })
 export class WiseTinymceEditorModule {}

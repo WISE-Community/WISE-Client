@@ -20,7 +20,7 @@ import { NotebookNotesComponent } from './notebook-notes/notebook-notes.componen
 import { NotebookParentComponent } from './notebook-parent/notebook-parent.component';
 import { NotebookReportAnnotationsComponent } from './notebook-report-annotations/notebook-report-annotations.component';
 import { NotebookReportComponent } from './notebook-report/notebook-report.component';
-import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
+import { WiseTinymceEditorComponent } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,7 @@ import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tiny
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    WiseTinymceEditorModule
+    WiseTinymceEditorComponent
   ],
   exports: [
     NotebookParentComponent,

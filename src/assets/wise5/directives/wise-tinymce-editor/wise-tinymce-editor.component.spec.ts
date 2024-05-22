@@ -11,8 +11,12 @@ let fixture: ComponentFixture<WiseTinymceEditorComponent>;
 describe('WiseTinymceEditorComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [WiseTinymceEditorComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule,
+        StudentTeacherCommonServicesModule,
+        WiseTinymceEditorComponent
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
     fixture = TestBed.createComponent(WiseTinymceEditorComponent);
