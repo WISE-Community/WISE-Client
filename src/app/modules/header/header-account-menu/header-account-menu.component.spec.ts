@@ -29,8 +29,7 @@ describe('HeaderAccountMenuComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [HeaderAccountMenuComponent],
-        imports: [HttpClientTestingModule, MatMenuModule],
+        imports: [HeaderAccountMenuComponent, HttpClientTestingModule, MatMenuModule],
         providers: [{ provide: ConfigService, useClass: MockConfigService }],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
