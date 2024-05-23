@@ -77,6 +77,7 @@ const materialModules = [
   imports: [
     ArchiveProjectsButtonComponent,
     CommonModule,
+    DiscourseCategoryActivityComponent,
     FlexLayoutModule,
     FormsModule,
     LibraryProjectDisciplinesComponent,
@@ -103,8 +104,7 @@ const materialModules = [
     PersonalLibraryDetailsComponent,
     SelectAllItemsCheckboxComponent,
     ShareProjectDialogComponent,
-    CopyProjectDialogComponent,
-    DiscourseCategoryActivityComponent
+    CopyProjectDialogComponent
   ],
   exports: [
     HomePageProjectLibraryComponent,

@@ -1,6 +1,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DiscourseCategoryActivityComponent } from './discourse-category-activity.component';
+import { By } from '@angular/platform-browser';
 
 let component: DiscourseCategoryActivityComponent;
 let http: HttpTestingController;
@@ -25,34 +26,32 @@ describe('DiscourseCategoryActivityComponent', () => {
     http = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(DiscourseCategoryActivityComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   afterEach(() => {
     fixture.destroy();
   });
 
-  retrieveCategory();
+  ngOnInit();
 });
 
-function retrieveCategory() {
-  xdescribe('retrieveCategory()', () => {
-    it('should set discussion links and post count when request succeeds', () => {
-      component.categoryURL = 'http://localhost:9292';
-      component.retrieveCategory();
+function ngOnInit() {
+  describe('ngOnInit()', () => {
+    it('should make request to fetch posts and show discussion links', () => {
+      component.categoryURL = 'http://localhost:9292/c/7';
+      component.ngOnInit();
       http.expectOne(`${component.categoryURL}.json?order=latest`).flush(sampleDiscourseResponse);
-      expect(component.isValidCategoryURL).toBeTrue();
-      expect(component.topics.length).toEqual(3);
-      expect(component.postCount).toEqual(8);
+      fixture.detectChanges();
+      expect(fixture.debugElement.queryAll(By.css('a')).length).toEqual(4);
     });
 
-    it('should set isValidCategoryURL to false on network error', () => {
+    xit('should set isValidCategoryURL to false on network error', () => {
       component.categoryURL = 'http://invalid_url';
-      component.retrieveCategory();
+      //component.retrieveCategory();
       http
         .expectOne(`${component.categoryURL}.json?order=latest`)
         .error(new ErrorEvent('404 error'));
-      expect(component.isValidCategoryURL).toBeFalse();
+      //expect(component.isValidCategoryURL).toBeFalse();
     });
   });
 }

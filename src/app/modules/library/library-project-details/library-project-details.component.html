@@ -79,7 +79,7 @@
     <discourse-category-activity
       *ngIf="project.metadata.discourseCategoryURL"
       [categoryURL]="project.metadata.discourseCategoryURL"
-    ></discourse-category-activity>
+    />
     <div class="license notice-bg-bg mat-caption secondary-text">
       <img src="../../../../assets/img/by-sa.png" alt="CC BY-SA" />&nbsp;
       <span *ngIf="!isCopy" [ngSwitch]="authorsString.length">
