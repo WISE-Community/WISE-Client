@@ -1,37 +1,41 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { Component as WISEComponent } from '../../../common/Component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
+  imports: [FlexLayoutModule, MatButtonModule, MatIconModule, MatTooltipModule],
   selector: 'save-starter-state',
+  standalone: true,
   templateUrl: 'save-starter-state.component.html'
 })
-export class SaveStarterStateComponent implements OnInit {
+export class SaveStarterStateComponent {
   @Input() private component: WISEComponent;
-  protected isDirty: boolean;
+  protected dirty: boolean;
   @Input() private starterState: any;
 
   constructor(private matDialog: MatDialog, private nodeService: TeacherNodeService) {}
 
-  ngOnInit(): void {}
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.isDirty = !changes.starterState.isFirstChange();
+  ngOnChanges(changes: SimpleChanges): void {
+    this.dirty = !changes.starterState.isFirstChange();
   }
 
-  protected confirmSave(): void {
+  protected save(): void {
     if (confirm($localize`Are you sure you want to save the starter state?`)) {
       this.nodeService.respondStarterState({
         nodeId: this.component.nodeId,
         componentId: this.component.id,
         starterState: this.starterState
       });
-      this.isDirty = false;
+      this.dirty = false;
     }
   }
 
-  protected confirmDelete(): void {
+  protected delete(): void {
     if (
       confirm(
         $localize`Are you sure you want to delete the starter state? This will also close this preview window.`

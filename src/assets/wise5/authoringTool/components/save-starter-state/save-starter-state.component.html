@@ -4,19 +4,19 @@
     <button
       mat-icon-button
       color="primary"
-      matTooltip="Save Starter State"
+      matTooltip="Save starter state"
       matTooltipPosition="above"
-      (click)="confirmSave()"
-      [disabled]="!isDirty"
+      (click)="save()"
+      [disabled]="!dirty"
       i18n-matToolTip
     >
       <mat-icon>save</mat-icon>
     </button>
     <button
       mat-icon-button
-      matTooltip="Delete Starter State"
+      matTooltip="Delete starter state"
       matTooltipPosition="above"
-      (click)="confirmDelete()"
+      (click)="delete()"
       i18n-matToolTip
     >
       <mat-icon>close</mat-icon>
