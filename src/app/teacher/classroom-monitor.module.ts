@@ -62,8 +62,7 @@ import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator
     TeacherSummaryDisplay,
     ToolBarComponent,
     TopBarComponent,
-    ViewComponentRevisionsComponent,
-    NavItemScoreComponent
+    ViewComponentRevisionsComponent
   ],
   imports: [
     StudentTeacherCommonModule,
@@ -74,6 +73,7 @@ import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator
     HighchartsChartModule,
     ManageStudentsModule,
     MilestoneModule,
+    NavItemScoreComponent,
     PeerGroupGradingModule,
     PreviewComponentModule,
     RouterModule,

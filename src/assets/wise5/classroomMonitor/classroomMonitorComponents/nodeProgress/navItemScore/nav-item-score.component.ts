@@ -1,26 +1,23 @@
-'use strict';
-
 import { Component, Inject, Input, LOCALE_ID } from '@angular/core';
-import { formatNumber } from '@angular/common';
+import { CommonModule, formatNumber } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
+  imports: [CommonModule, FlexLayoutModule, MatIconModule],
   selector: 'nav-item-score',
+  standalone: true,
   templateUrl: 'nav-item-score.component.html'
 })
 export class NavItemScoreComponent {
-  @Input()
-  averageScore: any;
-
-  averageScoreDisplay: string = '';
-
-  @Input()
-  maxScore: any;
-
-  showScore: boolean = false;
+  @Input() averageScore: number | string;
+  protected averageScoreDisplay: string = '';
+  @Input() maxScore: number;
+  protected showScore: boolean;
 
   constructor(@Inject(LOCALE_ID) private locale: string) {}
 
-  ngOnChanges(changes) {
+  ngOnChanges(): void {
     if (typeof this.maxScore === 'number' || typeof this.averageScore === 'number') {
       this.showScore = true;
       this.averageScoreDisplay = this.getAverageScoreDisplay();
@@ -29,16 +26,14 @@ export class NavItemScoreComponent {
     }
   }
 
-  getAverageScoreDisplay(): string {
+  private getAverageScoreDisplay(): string {
     const averageScore = this.formatAverageScore(this.averageScore);
-    if (typeof this.maxScore === 'number') {
-      return `${averageScore}/${this.maxScore}`;
-    } else {
-      return `${averageScore}/0`;
-    }
+    return typeof this.maxScore === 'number'
+      ? `${averageScore}/${this.maxScore}`
+      : `${averageScore}/0`;
   }
 
-  formatAverageScore(averageScore: any): string {
+  private formatAverageScore(averageScore: number | string): number | string {
     if (typeof averageScore === 'number') {
       if (averageScore % 1 !== 0) {
         averageScore = formatNumber(averageScore, this.locale, '1.1-1').toString();
