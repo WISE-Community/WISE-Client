@@ -9,12 +9,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RegisterHomeComponent implements OnInit {
   googleUserNotFoundError: boolean;
+  protected microsoftUserNotFoundError: boolean;
 
   constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.googleUserNotFoundError = params['googleUserNotFound'] === 'true';
+      this.microsoftUserNotFoundError = params['microsoftUserNotFound'] === 'true';
     });
   }
 }

@@ -5,6 +5,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../app/student-teac
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AddLessonButtonComponent', () => {
   let component: AddLessonButtonComponent;
@@ -12,9 +13,10 @@ describe('AddLessonButtonComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AddLessonButtonComponent],
       imports: [
+        AddLessonButtonComponent,
         HttpClientTestingModule,
+        RouterTestingModule,
         StudentTeacherCommonServicesModule,
         MatIconModule,
         MatMenuModule

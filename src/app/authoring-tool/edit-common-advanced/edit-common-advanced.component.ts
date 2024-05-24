@@ -20,10 +20,6 @@ export class EditCommonAdvancedComponent implements OnInit {
     this.componentChanged();
   }
 
-  maxSubmitCountChanged(maxSubmitCount: number): void {
-    this.componentChanged();
-  }
-
   componentChanged(): void {
     this.projectService.nodeChanged();
   }

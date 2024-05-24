@@ -37,6 +37,7 @@ import { StudentEditProfileComponent } from './account/edit-profile/edit-profile
 import { TimelineModule } from '../modules/timeline/timeline.module';
 import { TeamSignInDialogComponent } from './team-sign-in-dialog/team-sign-in-dialog.component';
 import { GoogleSignInModule } from '../modules/google-sign-in/google-sign-in.module';
+import { SearchBarComponent } from '../modules/shared/search-bar/search-bar.component';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { GoogleSignInModule } from '../modules/google-sign-in/google-sign-in.mod
     GoogleSignInModule,
     ReactiveFormsModule,
     materialModules,
+    SearchBarComponent,
     SharedModule,
     StudentRoutingModule,
     TimelineModule

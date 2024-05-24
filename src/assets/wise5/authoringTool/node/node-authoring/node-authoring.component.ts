@@ -10,6 +10,7 @@ import { scrollToTopOfPage, temporarilyHighlightElement } from '../../../common/
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { copy } from '../../../common/object/object';
 
 @Component({
   selector: 'node-authoring',
@@ -204,7 +205,10 @@ export class NodeAuthoringComponent implements OnInit {
 
   private afterDeleteComponent(componentIdAndTypes: any[]): void {
     for (const componentIdAndType of componentIdAndTypes) {
-      this.componentsToChecked.mutate((obj) => delete obj[componentIdAndType.componentId]);
+      this.componentsToChecked.update((componentsToChecked) => {
+        delete componentsToChecked[componentIdAndType.componentId];
+        return copy(componentsToChecked);
+      });
       delete this.componentsToExpanded[componentIdAndType.componentId];
     }
     this.checkIfNeedToShowNodeSaveOrNodeSubmitButtons();
@@ -250,7 +254,10 @@ export class NodeAuthoringComponent implements OnInit {
   }
 
   protected componentCheckboxChanged(componentId: string, checked: boolean): void {
-    this.componentsToChecked.mutate((obj) => (obj[componentId] = checked));
+    this.componentsToChecked.update((componentsToChecked) => {
+      componentsToChecked[componentId] = checked;
+      return copy(componentsToChecked);
+    });
   }
 
   protected toggleComponent(componentId: string): void {

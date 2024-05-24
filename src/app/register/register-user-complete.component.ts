@@ -7,7 +7,10 @@ import { ConfigService } from '../services/config.service';
 })
 export abstract class RegisterUserCompleteComponent implements OnInit {
   protected googleLogInURL = `${this.configService.getContextPath()}/api/google-login`;
+  protected microsoftLogInURL = `${this.configService.getContextPath()}/api/microsoft-login?redirectUrl=/`;
+  protected socialAccount: boolean;
   protected isUsingGoogleId: boolean;
+  protected isUsingMicrosoftId: boolean;
   protected username: string;
 
   constructor(
@@ -17,9 +20,11 @@ export abstract class RegisterUserCompleteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(({ username, isUsingGoogleId }) => {
+    this.route.params.subscribe(({ username, isUsingGoogleId, isUsingMicrosoftId }) => {
       this.username = username;
       this.isUsingGoogleId = isUsingGoogleId === 'true';
+      this.isUsingMicrosoftId = isUsingMicrosoftId === 'true';
+      this.socialAccount = this.isUsingGoogleId || this.isUsingMicrosoftId;
     });
   }
 

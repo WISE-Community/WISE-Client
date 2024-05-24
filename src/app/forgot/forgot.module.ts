@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { ForgotRoutingModule } from './forgot-routing.module';
 import { ForgotHomeComponent } from './forgot-home/forgot-home.component';
 import { ForgotComponent } from './forgot.component';
@@ -21,10 +20,16 @@ import { ForgotTeacherPasswordChangeComponent } from './teacher/forgot-teacher-p
 import { ForgotTeacherPasswordVerifyComponent } from './teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component';
 import { PasswordModule } from '../password/password.module';
 import { ForgotUserPasswordCompleteComponent } from './forgot-user-password-complete/forgot-user-password-complete.component';
+import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-action.component';
 
 @NgModule({
   imports: [
+    CallToActionComponent,
     CommonModule,
+    ForgotComponent,
+    ForgotHomeComponent,
+    ForgotStudentComponent,
+    ForgotTeacherComponent,
     ForgotRoutingModule,
     FormsModule,
     MatDividerModule,
@@ -34,10 +39,6 @@ import { ForgotUserPasswordCompleteComponent } from './forgot-user-password-comp
     SharedModule
   ],
   declarations: [
-    ForgotComponent,
-    ForgotHomeComponent,
-    ForgotStudentComponent,
-    ForgotTeacherComponent,
     ForgotStudentPasswordComponent,
     ForgotStudentUsernameComponent,
     ForgotTeacherUsernameComponent,

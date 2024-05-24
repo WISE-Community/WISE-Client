@@ -14,25 +14,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { ConfigService } from './services/config.service';
 import { HeaderModule } from './modules/header/header.module';
 import { HomeModule } from './home/home.module';
-import { FooterModule } from './modules/footer/footer.module';
 import { StudentService } from './student/student.service';
 import { UserService } from './services/user.service';
 import { TeacherService } from './teacher/teacher.service';
-import { MobileMenuModule } from './modules/mobile-menu/mobile-menu.module';
+import { MobileMenuComponent } from './modules/mobile-menu/mobile-menu.component';
 import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementDialogComponent } from './announcement/announcement.component';
 import { TrackScrollDirective } from './track-scroll.directive';
 import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY, RECAPTCHA_BASE_URL } from 'ng-recaptcha';
 import { ArchiveProjectService } from './services/archive-project.service';
+import { FooterComponent } from './modules/footer/footer.component';
 
 export function initialize(
   configService: ConfigService,
   userService: UserService
 ): () => Promise<any> {
   return (): Promise<any> => {
-    return userService.retrieveUserPromise().then((user) => {
-      userService.getUser().subscribe((user) => {
-        configService.retrieveConfig();
+    return new Promise((resolve) => {
+      userService.retrieveUserPromise().then(() => {
+        return userService.getUser().subscribe(() => {
+          return configService.retrieveConfig().subscribe((config) => {
+            resolve(config);
+          });
+        });
       });
     });
   };
@@ -51,10 +55,10 @@ export function initialize(
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    FooterModule,
+    FooterComponent,
     HeaderModule,
     HomeModule,
-    MobileMenuModule,
+    MobileMenuComponent,
     MatSidenavModule,
     MatSnackBarModule,
     MatDialogModule,

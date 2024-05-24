@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotStudentComponent } from './forgot-student.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideRouter } from '@angular/router';
 
 describe('ForgotStudentComponent', () => {
   let component: ForgotStudentComponent;
@@ -8,12 +8,9 @@ describe('ForgotStudentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ForgotStudentComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [ForgotStudentComponent],
+      providers: [provideRouter([])]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(ForgotStudentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

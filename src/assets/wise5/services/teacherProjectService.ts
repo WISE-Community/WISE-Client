@@ -1489,7 +1489,7 @@ export class TeacherProjectService extends ProjectService {
    * @returns the next available node id
    */
   getNextAvailableNodeId(nodeIdsToSkip = []) {
-    let largestNodeIdNumber = -1;
+    let largestNodeIdNumber = 0;
     for (const nodeId of this.getNodeIds()
       .concat(this.getInactiveNodeIds())
       .concat(nodeIdsToSkip)) {
@@ -1644,7 +1644,7 @@ export class TeacherProjectService extends ProjectService {
               }
 
               // remove the transition to the node we are removing
-              transitions.splice(t, 1);
+              const transitionRemoved = transitions.splice(t, 1)[0];
 
               if (transitionsCopy != null) {
                 let insertIndex = t;
@@ -1685,6 +1685,9 @@ export class TeacherProjectService extends ProjectService {
                     ) {
                       this.addToTransition(node, this.getGroupStartId(toNodeId));
                     } else {
+                      if (transitionRemoved.criteria != null) {
+                        transitionCopy.criteria = transitionRemoved.criteria;
+                      }
                       transitions.splice(insertIndex, 0, transitionCopy);
                       insertIndex++;
                     }

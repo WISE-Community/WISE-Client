@@ -49,6 +49,7 @@ import { CopyProjectDialogComponent } from './copy-project-dialog/copy-project-d
 import { LibraryPaginatorIntl } from './libraryPaginatorIntl';
 import { DiscourseCategoryActivityComponent } from './discourse-category-activity/discourse-category-activity.component';
 import { ArchiveProjectsButtonComponent } from '../../teacher/archive-projects-button/archive-projects-button.component';
+import { SearchBarComponent } from '../shared/search-bar/search-bar.component';
 import { SelectAllItemsCheckboxComponent } from './select-all-items-checkbox/select-all-items-checkbox.component';
 import { ApplyTagsButtonComponent } from '../../teacher/apply-tags-button/apply-tags-button.component';
 import { SelectTagsComponent } from '../../teacher/select-tags/select-tags.component';
@@ -84,12 +85,14 @@ const materialModules = [
     CommonModule,
     FlexLayoutModule,
     FormsModule,
+    LibraryProjectDisciplinesComponent,
     ReactiveFormsModule,
     RouterModule,
     materialModules,
+    SearchBarComponent,
     SelectAllItemsCheckboxComponent,
-    SelectTagsComponent,
     SelectedTagsListComponent,
+    SelectTagsComponent,
     SharedModule,
     TimelineModule
   ],
@@ -97,7 +100,6 @@ const materialModules = [
     LibraryGroupThumbsComponent,
     LibraryProjectComponent,
     LibraryProjectDetailsComponent,
-    LibraryProjectDisciplinesComponent,
     LibraryProjectMenuComponent,
     LibraryFiltersComponent,
     HomePageProjectLibraryComponent,

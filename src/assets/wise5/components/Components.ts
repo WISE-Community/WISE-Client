@@ -1,3 +1,6 @@
+import { AiChatAuthoringComponent } from './aiChat/ai-chat-authoring/ai-chat-authoring.component';
+import { AiChatGradingComponent } from './aiChat/ai-chat-grading/ai-chat-grading.component';
+import { AiChatStudentComponent } from './aiChat/ai-chat-student/ai-chat-student.component';
 import { AnimationAuthoring } from './animation/animation-authoring/animation-authoring.component';
 import { AnimationGradingComponent } from './animation/animation-grading/animation-grading.component';
 import { AnimationStudent } from './animation/animation-student/animation-student.component';
@@ -23,7 +26,7 @@ import { GraphAuthoring } from './graph/graph-authoring/graph-authoring.componen
 import { GraphGradingComponent } from './graph/graph-grading/graph-grading.component';
 import { GraphStudent } from './graph/graph-student/graph-student.component';
 import { HtmlAuthoring } from './html/html-authoring/html-authoring.component';
-import { HtmlStudent } from './html/html-student/html-student.component';
+import { HtmlStudentComponent } from './html/html-student/html-student.component';
 import { LabelAuthoring } from './label/label-authoring/label-authoring.component';
 import { LabelGradingComponent } from './label/label-grading/label-grading.component';
 import { LabelStudent } from './label/label-student/label-student.component';
@@ -54,6 +57,11 @@ import { TableGradingComponent } from './table/table-grading/table-grading.compo
 import { TableStudent } from './table/table-student/table-student.component';
 
 export const components = {
+  AiChat: {
+    authoring: AiChatAuthoringComponent,
+    grading: AiChatGradingComponent,
+    student: AiChatStudentComponent
+  },
   Animation: {
     authoring: AnimationAuthoring,
     grading: AnimationGradingComponent,
@@ -86,7 +94,7 @@ export const components = {
     student: EmbeddedStudent
   },
   Graph: { authoring: GraphAuthoring, grading: GraphGradingComponent, student: GraphStudent },
-  HTML: { authoring: HtmlAuthoring, student: HtmlStudent },
+  HTML: { authoring: HtmlAuthoring, student: HtmlStudentComponent },
   Label: { authoring: LabelAuthoring, grading: LabelGradingComponent, student: LabelStudent },
   Match: { authoring: MatchAuthoring, grading: MatchGradingComponent, student: MatchStudent },
   MultipleChoice: {

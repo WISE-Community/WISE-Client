@@ -25,7 +25,7 @@ export abstract class AbstractExportComponent {
     public configService: ConfigService,
     public dataExportService: DataExportService,
     public dataService: TeacherDataService,
-    private dialog: MatDialog,
+    protected dialog: MatDialog,
     public projectService: TeacherProjectService,
     protected route: ActivatedRoute,
     protected router: Router

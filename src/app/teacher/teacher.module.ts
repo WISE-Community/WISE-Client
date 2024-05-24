@@ -42,6 +42,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SelectRunsControlsModule } from './select-runs-controls/select-runs-controls.module';
+import { SearchBarComponent } from '../modules/shared/search-bar/search-bar.component';
 import { ApplyTagsButtonComponent } from './apply-tags-button/apply-tags-button.component';
 import { ProjectTagService } from '../../assets/wise5/services/projectTagService';
 import { SelectTagsComponent } from './select-tags/select-tags.component';
@@ -74,21 +75,22 @@ const materialModules = [
   imports: [
     ApplyTagsButtonComponent,
     CommonModule,
+    DiscourseRecentActivityComponent,
     FlexLayoutModule,
     FormsModule,
     LibraryModule,
     materialModules,
-    SharedModule,
+    SearchBarComponent,
+    SelectedTagsListComponent,
     SelectRunsControlsModule,
     SelectTagsComponent,
-    SelectedTagsListComponent,
+    SharedModule,
     TeacherRoutingModule,
     TimelineModule,
     ClipboardModule
   ],
   declarations: [
     CreateRunDialogComponent,
-    DiscourseRecentActivityComponent,
     EditComponent,
     EditRunWarningDialogComponent,
     ListClassroomCoursesDialogComponent,

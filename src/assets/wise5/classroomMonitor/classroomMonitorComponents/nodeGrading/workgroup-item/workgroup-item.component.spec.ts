@@ -3,6 +3,7 @@ import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testin
 import { WorkgroupItemComponent } from './workgroup-item.component';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentTypeServiceModule } from '../../../../services/componentTypeService.module';
 
 let component: WorkgroupItemComponent;
 let fixture: ComponentFixture<WorkgroupItemComponent>;
@@ -13,7 +14,7 @@ describe('WorkgroupItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [WorkgroupItemComponent],
-      imports: [ClassroomMonitorTestingModule],
+      imports: [ClassroomMonitorTestingModule, ComponentTypeServiceModule],
       providers: [TeacherProjectService],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

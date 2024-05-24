@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { StudentTeacherCommonModule } from '../../../../../../app/student-teacher-common.module';
+import { NodeStatusIconComponent } from '../nodeStatusIcon/node-status-icon.component';
 
 @NgModule({
   declarations: [StepToolsComponent],
@@ -24,6 +25,7 @@ import { StudentTeacherCommonModule } from '../../../../../../app/student-teache
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    NodeStatusIconComponent,
     StudentTeacherCommonModule
   ]
 })

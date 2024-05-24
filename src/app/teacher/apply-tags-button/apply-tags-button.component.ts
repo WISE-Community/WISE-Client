@@ -11,6 +11,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { SelectAllItemsCheckboxComponent } from '../../modules/library/select-all-items-checkbox/select-all-items-checkbox.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AbstractTagsMenuComponent } from '../abstract-tags-menu/abstract-tags-menu.component';
+import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
 
 @Component({
   selector: 'apply-tags-button',
@@ -25,6 +26,7 @@ import { AbstractTagsMenuComponent } from '../abstract-tags-menu/abstract-tags-m
     MatIconModule,
     MatMenuModule,
     MatTooltipModule,
+    SearchBarComponent,
     SelectAllItemsCheckboxComponent,
     SharedModule
   ]

@@ -6,9 +6,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NewPasswordAndConfirmComponent } from './new-password-and-confirm/new-password-and-confirm.component';
 import { MatIconModule } from '@angular/material/icon';
-import { PasswordStrengthMeterModule } from '@wise-community/angular-password-strength-meter';
+import { PasswordStrengthMeterComponent } from 'angular-password-strength-meter';
 import { PasswordRequirementComponent } from './password-requirement/password-requirement.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { provideZxvbnServiceForPSM } from 'angular-password-strength-meter/zxcvbn';
 
 @NgModule({
   imports: [
@@ -19,10 +20,11 @@ import { MatMenuModule } from '@angular/material/menu';
     MatIconModule,
     MatInputModule,
     MatMenuModule,
-    PasswordStrengthMeterModule.forRoot(),
+    PasswordStrengthMeterComponent,
     ReactiveFormsModule
   ],
   declarations: [NewPasswordAndConfirmComponent, PasswordRequirementComponent],
+  providers: [provideZxvbnServiceForPSM()],
   exports: [NewPasswordAndConfirmComponent]
 })
 export class PasswordModule {}

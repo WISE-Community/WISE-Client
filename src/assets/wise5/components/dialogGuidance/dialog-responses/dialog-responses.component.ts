@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ComputerAvatar } from '../../../common/ComputerAvatar';
+import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { DialogResponse } from '../DialogResponse';
 
 @Component({

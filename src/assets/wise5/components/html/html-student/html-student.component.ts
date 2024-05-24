@@ -13,32 +13,33 @@ import { ComponentService } from '../../componentService';
 
 @Component({
   selector: 'html-student',
-  styleUrls: ['html-student.component.scss'],
+  standalone: true,
+  styleUrl: 'html-student.component.scss',
   templateUrl: 'html-student.component.html'
 })
-export class HtmlStudent extends ComponentStudent {
-  html: SafeHtml = '';
+export class HtmlStudentComponent extends ComponentStudent {
+  protected html: SafeHtml = '';
 
   constructor(
-    protected AnnotationService: AnnotationService,
-    protected ComponentService: ComponentService,
-    protected ConfigService: ConfigService,
+    protected annotationService: AnnotationService,
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
     protected dialog: MatDialog,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService,
     private wiseLinkService: WiseLinkService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService
     );
   }
 

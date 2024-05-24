@@ -109,7 +109,7 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
               var exportRow = true;
               if (this.controller.exportStepSelectionType === 'exportSelectSteps') {
                 if (
-                  !this.controller.isComponentSelected(
+                  !this.isComponentSelected(
                     selectedNodesMap,
                     componentState.nodeId,
                     componentState.componentId
@@ -147,7 +147,7 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
       } else if (this.exportType === 'latestStudentWork') {
         fileName = runId + '_latest_work.csv';
       }
-      this.controller.generateCSVFile(rows, fileName);
+      this.generateCSVFile(rows, fileName);
       this.controller.hideDownloadingExportMessage();
     });
   }

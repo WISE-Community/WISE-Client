@@ -1,9 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="bottom-spacing">
   <mat-label class="bold" i18n>Grouping Logic:</mat-label>
-  <ng-container [ngSwitch]="peerGrouping">
-    <span *ngSwitchCase="null" i18n>(None Selected)</span>
-    <span *ngSwitchDefault>{{ peerGrouping.name }}</span>
-  </ng-container>
+  <span *ngIf="peerGrouping == null" i18n>(None Selected)</span>
+  <span *ngIf="peerGrouping != null">{{ peerGrouping.name }}</span>
   <button
     mat-raised-button
     color="primary"

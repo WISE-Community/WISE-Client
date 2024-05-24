@@ -4,13 +4,14 @@ import { MatDividerModule } from '@angular/material/divider';
 import { SharedModule } from '../../modules/shared/shared.module';
 import { Tag } from '../../domain/tag';
 import { AbstractTagsMenuComponent } from '../abstract-tags-menu/abstract-tags-menu.component';
+import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
 
 @Component({
   selector: 'select-tags',
   templateUrl: './select-tags.component.html',
   styleUrls: ['./select-tags.component.scss'],
   standalone: true,
-  imports: [CommonModule, MatDividerModule, SharedModule]
+  imports: [CommonModule, MatDividerModule, SearchBarComponent, SharedModule]
 })
 export class SelectTagsComponent extends AbstractTagsMenuComponent {
   @Input() selectedTags: Tag[] = [];

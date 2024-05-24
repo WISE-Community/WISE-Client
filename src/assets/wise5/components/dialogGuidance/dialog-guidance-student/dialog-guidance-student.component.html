@@ -1,10 +1,10 @@
 <computer-avatar-selector
-  *ngIf="isShowComputerAvatarSelector"
+  *ngIf="computerAvatarSelectorVisible"
   [computerAvatarSettings]="componentContent.computerAvatarSettings"
   (chooseAvatarEvent)="selectComputerAvatar($event)"
 >
 </computer-avatar-selector>
-<mat-card appearance="outlined" *ngIf="!isShowComputerAvatarSelector" class="mat-elevation-z2">
+<mat-card appearance="outlined" *ngIf="!computerAvatarSelectorVisible" class="mat-elevation-z2">
   <component-header [component]="component"></component-header>
   <dialog-responses
     [responses]="responses"
@@ -12,32 +12,9 @@
     [computerAvatar]="computerAvatar"
   >
   </dialog-responses>
-  <div
+  <chat-input
     *ngIf="studentCanRespond"
-    class="add-response"
-    fxLayout="row"
-    fxLayoutAlign="start center"
-    fxLayoutGap="8px"
-  >
-    <mat-form-field fxFlex class="form-field-no-label form-field-no-hint" appearance="fill">
-      <textarea
-        matInput
-        cdkTextareaAutosize
-        placeholder="Add response..."
-        i18n-placeholder
-        [(ngModel)]="studentResponse"
-        (ngModelChange)="studentResponseChanged()"
-        [disabled]="isDisabled"
-      ></textarea>
-    </mat-form-field>
-    <button
-      mat-flat-button
-      color="primary"
-      (click)="submitStudentResponse()"
-      [disabled]="!isSubmitEnabled"
-      i18n
-    >
-      Send
-    </button>
-  </div>
+    [submitDisabled]="isWaitingForComputerResponse"
+    (submitEvent)="submitStudentResponse($event)"
+  ></chat-input>
 </mat-card>

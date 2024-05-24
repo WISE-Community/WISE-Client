@@ -25,6 +25,7 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { EditNodeTitleComponent } from '../edit-node-title/edit-node-title.component';
 import { AddComponentButtonComponent } from '../add-component-button/add-component-button.component';
 import { CopyComponentButtonComponent } from '../copy-component-button/copy-component-button.component';
+import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -50,6 +51,7 @@ describe('NodeAuthoringComponent', () => {
       imports: [
         BrowserAnimationsModule,
         ComponentAuthoringModule,
+        ComponentTypeServiceModule,
         DragDropModule,
         FormsModule,
         HttpClientTestingModule,

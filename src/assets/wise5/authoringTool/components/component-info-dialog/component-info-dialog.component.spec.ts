@@ -21,6 +21,8 @@ import { OutsideUrlInfo } from '../../../components/outsideURL/OutsideUrlInfo';
 import { OpenResponseInfo } from '../../../components/openResponse/OpenResponseInfo';
 import { ComponentInfo } from '../../../components/ComponentInfo';
 import { MatCardModule } from '@angular/material/card';
+import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 
 let component: ComponentInfoDialogComponent;
 let fixture: ComponentFixture<ComponentInfoDialogComponent>;
@@ -32,13 +34,11 @@ let outsideUrlInfo = new OutsideUrlInfo();
 describe('ComponentInfoDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ComponentInfoDialogComponent,
-        ComponentTypeSelectorComponent,
-        PreviewComponentComponent
-      ],
+      declarations: [ComponentInfoDialogComponent, ComponentTypeSelectorComponent],
       imports: [
         BrowserAnimationsModule,
+        ComponentHeaderComponent,
+        ComponentTypeServiceModule,
         HttpClientTestingModule,
         MatButtonModule,
         MatCardModule,
@@ -48,6 +48,7 @@ describe('ComponentInfoDialogComponent', () => {
         MatIconModule,
         MatSelectModule,
         MatTabsModule,
+        PreviewComponentComponent,
         PreviewComponentModule
       ],
       providers: [ComponentInfoService, { provide: MAT_DIALOG_DATA, useValue: 'OpenResponse' }]

@@ -1,55 +1,47 @@
 'use strict';
 
 import { ProjectService } from '../../services/projectService';
-import { Component, Input, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Node } from '../../common/Node';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
+  imports: [CommonModule, MatIconModule],
   selector: 'node-icon',
-  templateUrl: 'node-icon.component.html',
-  styleUrls: ['node-icon.component.scss']
+  standalone: true,
+  styleUrl: 'node-icon.component.scss',
+  templateUrl: 'node-icon.component.html'
 })
 export class NodeIconComponent {
-  @Input()
-  canEdit: boolean = false;
+  @Input() canEdit: boolean;
+  @Input() customClass: string;
+  @Input() icon: any;
+  protected isGroup: boolean;
+  protected node: Node;
+  @Input() nodeId: string;
+  @Input() size: number;
+  protected sizeClass: string;
 
-  @Input()
-  customClass: string;
+  constructor(protected dialog: MatDialog, protected projectService: ProjectService) {}
 
-  @Input()
-  icon: any;
-
-  isGroup: boolean;
-
-  @Input()
-  nodeId: string;
-
-  node: Node;
-
-  @Input()
-  size: any;
-
-  sizeClass: any;
-
-  constructor(protected dialog: MatDialog, protected ProjectService: ProjectService) {}
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.node = this.ProjectService.getNode(this.nodeId);
+  ngOnChanges(changes: SimpleChanges): void {
+    this.node = this.projectService.getNode(this.nodeId);
     this.isGroup = this.node.isGroup();
     if (changes.icon == null) {
-      this.icon = this.ProjectService.getNode(this.nodeId).getIcon();
+      this.icon = this.projectService.getNode(this.nodeId).getIcon();
     }
     if (this.size) {
       this.sizeClass = `mat-${this.size}`;
     }
   }
 
-  isFont() {
+  protected isFont(): boolean {
     return this.icon.type === 'font';
   }
 
-  isImage() {
+  protected isImage(): boolean {
     return this.icon.type === 'img';
   }
 }

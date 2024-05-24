@@ -23,11 +23,13 @@ import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { ComputerAvatarService } from './computerAvatarService';
 import { ConfigService } from './configService';
 import { StudentAssetService } from './studentAssetService';
+import { AiChatService } from '../components/aiChat/aiChatService';
 
 @NgModule({
   declarations: [],
   imports: [],
   providers: [
+    AiChatService,
     AnimationService,
     AudioOscillatorService,
     ComputerAvatarService,

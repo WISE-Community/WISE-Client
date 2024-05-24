@@ -4,6 +4,8 @@ import { SelectPeerGroupingAuthoringComponent } from '../../../assets/wise5/auth
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { EditComponentPeerGroupingTagComponent } from './edit-component-peer-grouping-tag.component';
+import { PeerGroupingAuthoringService } from '../../../assets/wise5/services/peerGroupingAuthoringService';
+import { PeerGrouping } from '../../domain/peerGrouping';
 
 let component: EditComponentPeerGroupingTagComponent;
 let fixture: ComponentFixture<EditComponentPeerGroupingTagComponent>;
@@ -15,7 +17,8 @@ describe('EditComponentPeerGroupingTagComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PeerGroupingTestingModule, StudentTeacherCommonServicesModule],
-      declarations: [EditComponentPeerGroupingTagComponent, SelectPeerGroupingAuthoringComponent]
+      declarations: [EditComponentPeerGroupingTagComponent, SelectPeerGroupingAuthoringComponent],
+      providers: [PeerGroupingAuthoringService]
     }).compileComponents();
   });
 
@@ -25,6 +28,10 @@ describe('EditComponentPeerGroupingTagComponent', () => {
     component.componentContent = { peerGroupingTag: tag1 };
     projectService = TestBed.inject(TeacherProjectService);
     spyOn(projectService, 'getPeerGroupings').and.returnValue([]);
+    const peerGrouping1 = new PeerGrouping({ tag: tag1 });
+    spyOn(TestBed.inject(PeerGroupingAuthoringService), 'getPeerGrouping').and.returnValue(
+      peerGrouping1
+    );
     fixture.detectChanges();
   });
 

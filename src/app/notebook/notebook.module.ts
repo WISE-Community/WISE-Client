@@ -13,14 +13,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { ComponentStateInfoModule } from '../../assets/wise5/common/component-state-info/component-state-info.module';
+import { ComponentStateInfoComponent } from '../../assets/wise5/common/component-state-info/component-state-info.component';
 import { NotebookItemComponent } from './notebook-item/notebook-item.component';
 import { NotebookLauncherComponent } from './notebook-launcher/notebook-launcher.component';
 import { NotebookNotesComponent } from './notebook-notes/notebook-notes.component';
 import { NotebookParentComponent } from './notebook-parent/notebook-parent.component';
 import { NotebookReportAnnotationsComponent } from './notebook-report-annotations/notebook-report-annotations.component';
 import { NotebookReportComponent } from './notebook-report/notebook-report.component';
-import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
+import { WiseTinymceEditorComponent } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tiny
   ],
   imports: [
     CommonModule,
-    ComponentStateInfoModule,
+    ComponentStateInfoComponent,
     EditorModule,
     FlexLayoutModule,
     MatButtonModule,
@@ -47,7 +47,7 @@ import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tiny
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    WiseTinymceEditorModule
+    WiseTinymceEditorComponent
   ],
   exports: [
     NotebookParentComponent,

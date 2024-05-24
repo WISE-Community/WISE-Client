@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotTeacherComponent } from './forgot-teacher.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideRouter } from '@angular/router';
 
 describe('ForgotTeacherComponent', () => {
   let component: ForgotTeacherComponent;
@@ -8,8 +8,8 @@ describe('ForgotTeacherComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ForgotTeacherComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [ForgotTeacherComponent],
+      providers: [provideRouter([])]
     });
     fixture = TestBed.createComponent(ForgotTeacherComponent);
     component = fixture.componentInstance;
