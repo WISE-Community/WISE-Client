@@ -9887,12 +9887,15 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="929954f6e28805c5a7c03aac44c9e48cad2ab3e3" datatype="html">
-        <source>Preview Component</source>
+      <trans-unit id="592715f579b88977a98d277b9d6099afcd72a6fc" datatype="html">
+        <source>Preview component</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/preview-component-button/preview-component-button.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="929954f6e28805c5a7c03aac44c9e48cad2ab3e3" datatype="html">
+        <source>Preview Component</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/preview-component-dialog/preview-component-dialog.component.html</context>
           <context context-type="linenumber">1</context>
