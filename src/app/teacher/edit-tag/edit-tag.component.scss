@@ -1,7 +1,4 @@
-@import
-  '@angular/material/theming',
-  'style/abstracts/functions',
-  'style/abstracts/variables';
+@import 'style/abstracts/variables';
 
 .tag-preview {
   border-radius: $button-border-radius;
