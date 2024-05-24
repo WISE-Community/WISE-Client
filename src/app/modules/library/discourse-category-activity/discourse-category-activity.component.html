@@ -1,16 +1,20 @@
-<ng-container *ngIf="validCategoryURL">
-  <mat-divider></mat-divider>
-  <p fxLayoutAlign="start center">
-    <mat-icon>forum</mat-icon>&nbsp;
-    <a href="{{ categoryURL }}" target="_blank">
-      <strong i18n>Discuss ({{ postCount }}{{ hasMoreTopics ? '+' : '' }})</strong>
-    </a>
-  </p>
-  <ul class="topics" *ngIf="topics.length">
-    <li *ngFor="let topic of topics.slice(0, 3)">
-      <a href="{{ discourseBaseUrl }}/t/{{ topic.slug }}/{{ topic.id }}" target="_blank">
-        {{ topic.title }}
-      </a>
-    </li>
+@if (validCategoryURL) {
+<mat-divider />
+<p fxLayoutAlign="start center">
+  <mat-icon>forum</mat-icon>&nbsp;
+  <a href="{{ categoryURL }}" target="_blank">
+    <strong i18n>Discuss ({{ postCount }}{{ hasMoreTopics ? '+' : '' }})</strong>
+  </a>
+</p>
+@if (topics.length > 0) {
+  <ul class="topics">
+    @for (topic of topics.slice(0,3); track topic.id) {
+      <li>
+        <a href="{{ discourseBaseUrl }}/t/{{ topic.slug }}/{{ topic.id }}" target="_blank">
+          {{ topic.title }}
+        </a>
+      </li>
+    }
   </ul>
-</ng-container>
+}
+}
