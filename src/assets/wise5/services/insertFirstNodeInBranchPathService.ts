@@ -5,7 +5,7 @@ import { TeacherProjectService } from './teacherProjectService';
 export class InsertFirstNodeInBranchPathService {
   constructor(private projectService: TeacherProjectService) {}
 
-  insertFirstNodeInBranchPath(newNode: any, nodeIdBefore: string, nodeIdAfter: string): void {
+  insertNode(newNode: any, nodeIdBefore: string, nodeIdAfter: string): void {
     if (this.projectService.isInactive(nodeIdBefore)) {
       this.projectService.setIdToNode(newNode.id, newNode);
       this.projectService.addInactiveNodeInsertAfter(newNode, nodeIdBefore);
@@ -14,6 +14,17 @@ export class InsertFirstNodeInBranchPathService {
       this.projectService.setIdToNode(newNode.id, newNode);
       this.insertNodeBetweenInGroups(newNode.id, nodeIdAfter);
       this.insertNodeBetweenInTransitions(newNode, nodeIdBefore, nodeIdAfter);
+    }
+  }
+
+  insertNodes(nodes: any[], targetId: string, firstNodeInBranchPath: string): void {
+    for (const node of nodes) {
+      if (this.projectService.isFirstNodeInBranchPath(firstNodeInBranchPath)) {
+        this.insertNode(node, targetId, firstNodeInBranchPath);
+      } else {
+        this.projectService.createNodeAfter(node, targetId);
+      }
+      targetId = node.id;
     }
   }
 

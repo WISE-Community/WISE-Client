@@ -4,6 +4,7 @@ import { ConfigService } from '../../../services/configService';
 import { CopyNodesService } from '../../../services/copyNodesService';
 import { InsertNodesService } from '../../../services/insertNodesService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
 
 @Directive()
 export abstract class AbstractImportStepComponent implements OnInit {
@@ -14,6 +15,7 @@ export abstract class AbstractImportStepComponent implements OnInit {
   constructor(
     protected configService: ConfigService,
     protected copyNodesService: CopyNodesService,
+    protected insertFirstNodeInBranchPathService: InsertFirstNodeInBranchPathService,
     protected insertNodesService: InsertNodesService,
     protected projectService: TeacherProjectService,
     protected route: ActivatedRoute,
@@ -31,7 +33,15 @@ export abstract class AbstractImportStepComponent implements OnInit {
       .copyNodes(nodesToImport, this.importProjectId, this.configService.getProjectId())
       .subscribe((copiedNodes: any[]) => {
         const nodesWithNewNodeIds = this.projectService.getNodesWithNewIds(copiedNodes);
-        this.insertNodesService.insertNodes(nodesWithNewNodeIds, this.targetId, this.nextId);
+        if (this.projectService.isFirstNodeInBranchPath(this.nextId)) {
+          this.insertFirstNodeInBranchPathService.insertNodes(
+            nodesWithNewNodeIds,
+            this.targetId,
+            this.nextId
+          );
+        } else {
+          this.insertNodesService.insertNodes(nodesWithNewNodeIds, this.targetId);
+        }
         this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
           this.projectService.refreshProject();
           this.router.navigate(['../../..'], { relativeTo: this.route });

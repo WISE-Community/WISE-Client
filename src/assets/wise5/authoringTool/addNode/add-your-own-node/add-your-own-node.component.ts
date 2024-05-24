@@ -52,11 +52,7 @@ export class AddYourOwnNode {
     if (this.isGroupNode(this.targetId)) {
       this.projectService.createNodeInside(newNode, this.targetId);
     } else if (this.projectService.isFirstNodeInBranchPath(this.nextId)) {
-      this.insertFirstNodeInBranchPathService.insertFirstNodeInBranchPath(
-        newNode,
-        this.targetId,
-        this.nextId
-      );
+      this.insertFirstNodeInBranchPathService.insertNode(newNode, this.targetId, this.nextId);
     } else {
       this.projectService.createNodeAfter(newNode, this.targetId);
     }
