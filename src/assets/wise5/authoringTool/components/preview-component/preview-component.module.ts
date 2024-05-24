@@ -6,10 +6,10 @@ import { ComponentStudentModule } from '../../../../../assets/wise5/components/c
 import { StudentTeacherCommonModule } from '../../../../../app/student-teacher-common.module';
 
 @NgModule({
-  declarations: [PreviewComponentDialogComponent],
   exports: [PreviewComponentButtonComponent],
   imports: [
     PreviewComponentButtonComponent,
+    PreviewComponentDialogComponent,
     SaveStarterStateComponent,
     StudentTeacherCommonModule,
     ComponentStudentModule
