@@ -44,14 +44,5 @@ function ngOnInit() {
       fixture.detectChanges();
       expect(fixture.debugElement.queryAll(By.css('a')).length).toEqual(4);
     });
-
-    xit('should set isValidCategoryURL to false on network error', () => {
-      component.categoryURL = 'http://invalid_url';
-      //component.retrieveCategory();
-      http
-        .expectOne(`${component.categoryURL}.json?order=latest`)
-        .error(new ErrorEvent('404 error'));
-      //expect(component.isValidCategoryURL).toBeFalse();
-    });
   });
 }
