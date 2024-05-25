@@ -10,10 +10,12 @@ import { Subscription } from 'rxjs';
   templateUrl: './choose-import-unit.component.html'
 })
 export class ChooseImportUnitComponent {
+  protected branchNodeId: string;
+  protected firstNodeIdInBranchPath: string;
   protected libraryProjects: any[];
-  protected nextId: string;
   protected myProjects: any[];
   protected targetId: string;
+  protected targetType: string;
   private subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -24,8 +26,10 @@ export class ChooseImportUnitComponent {
   ) {}
 
   ngOnInit(): void {
+    this.targetType = history.state.targetType;
     this.targetId = history.state.targetId;
-    this.nextId = history.state.nextId;
+    this.branchNodeId = history.state.branchNodeId;
+    this.firstNodeIdInBranchPath = history.state.firstNodeIdInBranchPath;
     this.myProjects = this.configService.getAuthorableProjects();
     this.subscriptions.add(
       this.projectLibraryService.getLibraryProjects().subscribe((libraryProjects) => {
@@ -43,8 +47,10 @@ export class ChooseImportUnitComponent {
       relativeTo: this.route,
       state: {
         importProjectId: project.id,
-        nextId: this.nextId,
-        targetId: this.targetId
+        targetType: this.targetType,
+        targetId: this.targetId,
+        branchNodeId: this.branchNodeId,
+        firstNodeIdInBranchPath: this.firstNodeIdInBranchPath
       }
     });
   }

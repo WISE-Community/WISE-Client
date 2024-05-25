@@ -24,23 +24,52 @@ export class AddStepButtonComponent {
 
   protected addStepBefore(): void {
     const previousNodes = this.projectService.getNodesByToNodeId(this.nodeId);
-    const previousNodeId: string =
-      previousNodes.length > 0
-        ? previousNodes[0].id
-        : this.projectService.getParentGroupId(this.nodeId);
-    this.goToAddStepView(previousNodeId, this.nodeId);
+    if (previousNodes.length === 0) {
+      this.goToAddStepViewForIn(this.projectService.getParentGroupId(this.nodeId));
+    } else {
+      const previousNodeId: string = previousNodes[0].id;
+      if (this.projectService.isFirstNodeInBranchPath(this.nodeId)) {
+        this.goToAddStepViewForFirstStepInBranchPath(previousNodeId, this.nodeId);
+      } else {
+        this.goToAddStepViewForAfter(previousNodeId);
+      }
+    }
   }
 
   protected addStepAfter(): void {
-    this.goToAddStepView(this.nodeId, null);
+    this.goToAddStepViewForAfter(this.nodeId);
   }
 
-  private goToAddStepView(previousNodeId: string, nextNodeId: string): void {
+  private goToAddStepViewForIn(groupId: string): void {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
       state: {
-        targetId: previousNodeId,
-        nextId: nextNodeId
+        targetType: 'in',
+        targetId: groupId
+      }
+    });
+  }
+
+  private goToAddStepViewForAfter(previousNodeId: string): void {
+    this.router.navigate(['add-node', 'choose-template'], {
+      relativeTo: this.route,
+      state: {
+        targetType: 'after',
+        targetId: previousNodeId
+      }
+    });
+  }
+
+  private goToAddStepViewForFirstStepInBranchPath(
+    previousNodeId: string,
+    nextNodeId: string
+  ): void {
+    this.router.navigate(['add-node', 'choose-template'], {
+      relativeTo: this.route,
+      state: {
+        targetType: 'firstStepInBranchPath',
+        branchNodeId: previousNodeId,
+        firstNodeIdInBranchPath: nextNodeId
       }
     });
   }

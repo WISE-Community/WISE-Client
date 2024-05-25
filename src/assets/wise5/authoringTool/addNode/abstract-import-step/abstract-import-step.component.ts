@@ -8,9 +8,11 @@ import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirs
 
 @Directive()
 export abstract class AbstractImportStepComponent implements OnInit {
+  protected branchNodeId: string;
+  protected firstNodeIdInBranchPath: string;
   protected importProjectId: number;
-  protected nextId: string;
   protected targetId: string;
+  protected targetType: string;
 
   constructor(
     protected configService: ConfigService,
@@ -23,8 +25,10 @@ export abstract class AbstractImportStepComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.targetType = history.state.targetType;
     this.targetId = history.state.targetId;
-    this.nextId = history.state.nextId;
+    this.branchNodeId = history.state.branchNodeId;
+    this.firstNodeIdInBranchPath = history.state.firstNodeIdInBranchPath;
     this.importProjectId = history.state.importProjectId;
   }
 
@@ -33,11 +37,11 @@ export abstract class AbstractImportStepComponent implements OnInit {
       .copyNodes(nodesToImport, this.importProjectId, this.configService.getProjectId())
       .subscribe((copiedNodes: any[]) => {
         const nodesWithNewNodeIds = this.projectService.getNodesWithNewIds(copiedNodes);
-        if (this.projectService.isFirstNodeInBranchPath(this.nextId)) {
+        if (this.targetType === 'firstStepInBranchPath') {
           this.insertFirstNodeInBranchPathService.insertNodes(
             nodesWithNewNodeIds,
-            this.targetId,
-            this.nextId
+            this.branchNodeId,
+            this.firstNodeIdInBranchPath
           );
         } else {
           this.insertNodesService.insertNodes(nodesWithNewNodeIds, this.targetId);

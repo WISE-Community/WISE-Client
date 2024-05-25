@@ -8,10 +8,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./choose-automated-assessment.component.scss', '../../add-content.scss']
 })
 export class ChooseAutomatedAssessmentComponent {
+  protected branchNodeId: string;
+  protected firstNodeIdInBranchPath: string;
   private importProjectId: number;
-  protected nextId: string;
   protected node: any;
   protected targetId: string;
+  protected targetType: string;
   private project: any;
   protected projectItems: any;
 
@@ -22,8 +24,10 @@ export class ChooseAutomatedAssessmentComponent {
   ) {}
 
   ngOnInit(): void {
+    this.targetType = history.state.targetType;
     this.targetId = history.state.targetId;
-    this.nextId = history.state.nextId;
+    this.branchNodeId = history.state.branchNodeId;
+    this.firstNodeIdInBranchPath = history.state.firstNodeIdInBranchPath;
     this.importProjectId = this.projectService.getAutomatedAssessmentProjectId();
     this.showAutomatedAssessmentProject();
   }
@@ -51,9 +55,11 @@ export class ChooseAutomatedAssessmentComponent {
       relativeTo: this.route,
       state: {
         importProjectId: this.importProjectId,
-        nextId: this.nextId,
-        node: this.node,
-        targetId: this.targetId
+        targetType: this.targetType,
+        targetId: this.targetId,
+        branchNodeId: this.branchNodeId,
+        firstNodeIdInBranchPath: this.firstNodeIdInBranchPath,
+        node: this.node
       }
     });
   }

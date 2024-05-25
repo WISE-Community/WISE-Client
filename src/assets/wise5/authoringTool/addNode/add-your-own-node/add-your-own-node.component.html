@@ -59,7 +59,12 @@
         mat-button
         class="mat-primary"
         routerLink="../choose-template"
-        [state]="{ targetId: targetId, nextId: nextId }"
+        [state]="{
+          targetType: targetType,
+          targetId: targetId,
+          branchNodeId: branchNodeId,
+          firstNodeIdInBranchPath: firstNodeIdInBranchPath
+        }"
         i18n
       >
         Back

@@ -15,10 +15,12 @@ export class AddYourOwnNode {
   protected addNodeFormGroup: FormGroup = this.fb.group({
     title: new FormControl($localize`New Step`, [Validators.required])
   });
+  protected branchNodeId: string;
   protected componentTypes: any[];
+  protected firstNodeIdInBranchPath: string;
   protected initialComponents: string[] = [];
-  protected nextId: string;
   protected targetId: string;
+  protected targetType: 'in' | 'after' | 'firstStepInBranchPath';
 
   constructor(
     private componentTypeService: ComponentTypeService,
@@ -30,8 +32,10 @@ export class AddYourOwnNode {
   ) {}
 
   ngOnInit() {
+    this.targetType = history.state.targetType;
     this.targetId = history.state.targetId;
-    this.nextId = history.state.nextId;
+    this.branchNodeId = history.state.branchNodeId;
+    this.firstNodeIdInBranchPath = history.state.firstNodeIdInBranchPath;
     this.componentTypes = this.componentTypeService.getComponentTypes();
   }
 
@@ -49,12 +53,20 @@ export class AddYourOwnNode {
 
   protected submit(): void {
     const newNode = this.projectService.createNode(this.addNodeFormGroup.controls['title'].value);
-    if (this.isGroupNode(this.targetId)) {
-      this.projectService.createNodeInside(newNode, this.targetId);
-    } else if (this.projectService.isFirstNodeInBranchPath(this.nextId)) {
-      this.insertFirstNodeInBranchPathService.insertNode(newNode, this.targetId, this.nextId);
-    } else {
-      this.projectService.createNodeAfter(newNode, this.targetId);
+    switch (this.targetType) {
+      case 'in':
+        this.projectService.createNodeInside(newNode, this.targetId);
+        break;
+      case 'after':
+        this.projectService.createNodeAfter(newNode, this.targetId);
+        break;
+      case 'firstStepInBranchPath':
+        this.insertFirstNodeInBranchPathService.insertNode(
+          newNode,
+          this.branchNodeId,
+          this.firstNodeIdInBranchPath
+        );
+        break;
     }
     this.addInitialComponents(newNode.id, this.initialComponents);
     this.save().then(() => {
