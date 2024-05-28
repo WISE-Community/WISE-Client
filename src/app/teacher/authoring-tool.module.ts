@@ -11,7 +11,6 @@ import { ChooseNewComponent } from '../authoring-tool/add-component/choose-new-c
 import { ChooseImportStepComponent } from '../authoring-tool/import-step/choose-import-step/choose-import-step.component';
 import { ComponentAuthoringModule } from './component-authoring.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
-import { PreviewComponentModule } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
 import { AddLessonConfigureComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component';
@@ -60,6 +59,7 @@ import { ProjectAuthoringLessonComponent } from '../../assets/wise5/authoringToo
 import { ProjectAuthoringStepComponent } from '../../assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component';
 import { AddLessonButtonComponent } from '../../assets/wise5/authoringTool/add-lesson-button/add-lesson-button.component';
 import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-step-button/add-step-button.component';
+import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringTool/components/preview-component-button/preview-component-button.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +119,7 @@ import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-ste
     MatChipsModule,
     ImportComponentModule,
     NodeAdvancedAuthoringModule,
-    PreviewComponentModule,
+    PreviewComponentButtonComponent,
     ProjectAssetAuthoringModule,
     RouterModule,
     SaveIndicatorComponent,
