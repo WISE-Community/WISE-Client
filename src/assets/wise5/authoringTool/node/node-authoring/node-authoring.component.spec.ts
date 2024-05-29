@@ -42,13 +42,13 @@ describe('NodeAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AddComponentButtonComponent,
         CopyComponentButtonComponent,
         EditNodeTitleComponent,
         NodeAuthoringComponent,
         TeacherNodeIconComponent
       ],
       imports: [
+        AddComponentButtonComponent,
         BrowserAnimationsModule,
         ComponentAuthoringModule,
         ComponentTypeServiceModule,

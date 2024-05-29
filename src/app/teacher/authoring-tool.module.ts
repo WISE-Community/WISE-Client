@@ -63,7 +63,6 @@ import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringToo
 
 @NgModule({
   declarations: [
-    AddComponentButtonComponent,
     AddLessonChooseTemplateComponent,
     AddLessonConfigureComponent,
     AddProjectComponent,
@@ -110,6 +109,7 @@ import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringToo
     ProjectListComponent
   ],
   imports: [
+    AddComponentButtonComponent,
     AddLessonButtonComponent,
     AddStepButtonComponent,
     StudentTeacherCommonModule,
