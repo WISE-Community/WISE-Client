@@ -3,7 +3,6 @@ import { EditTagComponent } from './edit-tag.component';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('EditTagComponent', () => {
   let component: EditTagComponent;
@@ -11,12 +10,7 @@ describe('EditTagComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        EditTagComponent,
-        HttpClientTestingModule,
-        MatSnackBarModule
-      ],
+      imports: [BrowserAnimationsModule, EditTagComponent, HttpClientTestingModule],
       providers: [ProjectTagService]
     });
     fixture = TestBed.createComponent(EditTagComponent);

@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { SharedModule } from '../../modules/shared/shared.module';
 import { MatDividerModule } from '@angular/material/divider';
 import { SelectAllItemsCheckboxComponent } from '../../modules/library/select-all-items-checkbox/select-all-items-checkbox.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -27,8 +26,7 @@ import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.c
     MatMenuModule,
     MatTooltipModule,
     SearchBarComponent,
-    SelectAllItemsCheckboxComponent,
-    SharedModule
+    SelectAllItemsCheckboxComponent
   ]
 })
 export class ApplyTagsButtonComponent extends AbstractTagsMenuComponent {

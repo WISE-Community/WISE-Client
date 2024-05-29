@@ -9,7 +9,7 @@ describe('ColorChooserComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ColorChooserComponent, CommonModule, MatChipsModule]
+      imports: [ColorChooserComponent]
     });
     fixture = TestBed.createComponent(ColorChooserComponent);
     component = fixture.componentInstance;

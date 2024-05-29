@@ -43,9 +43,9 @@ export class ManageTagsDialogComponent implements OnInit {
   protected tags: Tag[] = [];
 
   constructor(
+    private projectTagService: ProjectTagService,
     private snackBar: MatSnackBar,
-    private teacherService: TeacherService,
-    private projectTagService: ProjectTagService
+    private teacherService: TeacherService
   ) {}
 
   ngOnInit(): void {

@@ -46,7 +46,6 @@ import { SearchBarComponent } from '../modules/shared/search-bar/search-bar.comp
 import { ApplyTagsButtonComponent } from './apply-tags-button/apply-tags-button.component';
 import { ProjectTagService } from '../../assets/wise5/services/projectTagService';
 import { SelectTagsComponent } from './select-tags/select-tags.component';
-import { MatChipsModule } from '@angular/material/chips';
 import { SelectedTagsListComponent } from './selected-tags-list/selected-tags-list.component';
 
 const materialModules = [
@@ -54,7 +53,6 @@ const materialModules = [
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
-  MatChipsModule,
   MatDatepickerModule,
   MatDialogModule,
   MatDividerModule,
