@@ -12,9 +12,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { MatIconModule } from '@angular/material/icon';
 import { TeacherService } from '../teacher.service';
-import { Run } from '../../domain/run';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { EditTagComponent } from '../edit-tag/edit-tag.component';
+import { Project } from '../../domain/project';
 
 @Component({
   selector: 'manage-tags-dialog',
@@ -37,6 +37,7 @@ import { EditTagComponent } from '../edit-tag/edit-tag.component';
 export class ManageTagsDialogComponent implements OnInit {
   protected idToEditing: { [id: string]: boolean } = {};
   protected inputChanged: Subject<any> = new Subject<any>();
+  private projects: Project[];
   protected showCreateTag: boolean;
   private subscriptions: Subscription = new Subscription();
   protected tags: Tag[] = [];
@@ -48,6 +49,9 @@ export class ManageTagsDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.teacherService.getPersonalAndSharedProjects().subscribe((projects) => {
+      this.projects = projects;
+    });
     this.subscriptions.add(
       this.projectTagService.retrieveUserTags().subscribe((tags: Tag[]) => {
         this.tags = tags;
@@ -70,19 +74,17 @@ export class ManageTagsDialogComponent implements OnInit {
   }
 
   protected delete(tag: Tag): void {
-    this.teacherService.getRuns().subscribe((runs) => {
-      if (confirm(this.getDeleteMessage(runs, tag))) {
-        this.projectTagService.deleteTag(tag).subscribe((tag: Tag) => {
-          this.tags = this.tags.filter((t) => t.id !== tag.id);
-          this.snackBar.open($localize`Tag deleted`);
-        });
-      }
-    });
+    if (confirm(this.getDeleteMessage(tag))) {
+      this.projectTagService.deleteTag(tag).subscribe((tag: Tag) => {
+        this.tags = this.tags.filter((t) => t.id !== tag.id);
+        this.snackBar.open($localize`Tag deleted`);
+      });
+    }
   }
 
-  private getDeleteMessage(runs: Run[], tag: Tag): string {
-    const numProjectsWithTag = runs.filter((run: Run) =>
-      run.project.tags.some((projectTag: Tag) => projectTag.id === tag.id)
+  private getDeleteMessage(tag: Tag): string {
+    const numProjectsWithTag = this.projects.filter((project: Project) =>
+      project.tags.some((projectTag: Tag) => projectTag.id === tag.id)
     ).length;
     const numberOfProjectsMessage =
       numProjectsWithTag === 1
