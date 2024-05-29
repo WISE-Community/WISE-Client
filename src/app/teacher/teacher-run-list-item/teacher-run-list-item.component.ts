@@ -12,10 +12,10 @@ import { ProjectTagService } from '../../../assets/wise5/services/projectTagServ
 import { Tag } from '../../domain/tag';
 
 @Component({
+  animations: [flash],
   selector: 'app-teacher-run-list-item',
-  templateUrl: './teacher-run-list-item.component.html',
-  styleUrls: ['./teacher-run-list-item.component.scss'],
-  animations: [flash]
+  styleUrl: './teacher-run-list-item.component.scss',
+  templateUrl: './teacher-run-list-item.component.html'
 })
 export class TeacherRunListItemComponent implements OnInit {
   protected animateDelay: string = '0s';

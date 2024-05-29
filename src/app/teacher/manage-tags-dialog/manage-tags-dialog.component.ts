@@ -17,10 +17,6 @@ import { EditTagComponent } from '../edit-tag/edit-tag.component';
 import { Project } from '../../domain/project';
 
 @Component({
-  selector: 'manage-tags-dialog',
-  templateUrl: './manage-tags-dialog.component.html',
-  styleUrls: ['./manage-tags-dialog.component.scss'],
-  standalone: true,
   imports: [
     CommonModule,
     EditTagComponent,
@@ -32,7 +28,11 @@ import { Project } from '../../domain/project';
     MatIconModule,
     MatInputModule,
     MatTooltipModule
-  ]
+  ],
+  selector: 'manage-tags-dialog',
+  standalone: true,
+  styleUrl: './manage-tags-dialog.component.scss',
+  templateUrl: './manage-tags-dialog.component.html'
 })
 export class ManageTagsDialogComponent implements OnInit {
   protected idToEditing: { [id: string]: boolean } = {};

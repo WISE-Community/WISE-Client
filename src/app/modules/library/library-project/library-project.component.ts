@@ -7,11 +7,11 @@ import { flash } from '../../../animations';
 import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
 
 @Component({
-  selector: 'app-library-project',
-  templateUrl: './library-project.component.html',
-  styleUrls: ['./library-project.component.scss'],
+  animations: [flash],
   encapsulation: ViewEncapsulation.None,
-  animations: [flash]
+  selector: 'app-library-project',
+  styleUrl: './library-project.component.scss',
+  templateUrl: './library-project.component.html'
 })
 export class LibraryProjectComponent implements OnInit {
   @Input() checked: boolean = false;

@@ -2,7 +2,7 @@
   <div class="personal-library-header" fxLayoutAlign="center center" fxLayoutGap="8px">
     <a class="mat-caption" href="#" (click)="showInfo($event)" i18n>What are My Units?</a>
     <span fxFlex></span>
-    <select-tags [selectedTags]="selectedTags" (selectTagEvent)="selectTags($event)"></select-tags>
+    <select-tags [selectedTags]="selectedTags" (selectTagEvent)="selectTags($event)"/>
     <mat-form-field [subscriptSizing]="'dynamic'">
       <mat-label i18n>View</mat-label>
       <mat-select [(ngModel)]="showArchivedView" (selectionChange)="switchActiveArchivedView()">
@@ -16,7 +16,7 @@
     [tags]="selectedTags"
     [showClearButton]="true"
     (removeTagEvent)="removeTag($event)"
-  ></selected-tags-list>
+  />
   <mat-divider></mat-divider>
   <div fxLayoutAlign="start center" fxLayout.xs="column" fxLayoutGap="8px">
     <div fxLayoutAlign="center center" fxLayoutGap="4px" fxFlexAlign.xs="start" fxFlexOrder.xs="1">
@@ -38,7 +38,7 @@
       <apply-tags-button
         *ngIf="selectedProjects().length > 0"
         [selectedProjects]="selectedProjects()"
-      ></apply-tags-button>
+      />
     </div>
     <span fxFlex fxHide.xs></span>
     <mat-paginator
@@ -62,7 +62,7 @@
         fxFlex.sm="50"
         fxFlex.md="33"
         fxFlex.gt-md="25"
-      ></app-library-project>
+      />
     </ng-container>
     <div *ngIf="filteredProjects.length === 0" class="notice" i18n>
       No owned or shared units found.

@@ -15,8 +15,8 @@ import { Tag } from '../../domain/tag';
 
 @Component({
   selector: 'app-teacher-run-list',
-  templateUrl: './teacher-run-list.component.html',
-  styleUrls: ['./teacher-run-list.component.scss']
+  styleUrl: './teacher-run-list.component.scss',
+  templateUrl: './teacher-run-list.component.html'
 })
 export class TeacherRunListComponent implements OnInit {
   private MAX_RECENT_RUNS = 10;

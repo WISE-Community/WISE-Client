@@ -13,11 +13,6 @@ import { AbstractTagsMenuComponent } from '../abstract-tags-menu/abstract-tags-m
 import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
 
 @Component({
-  selector: 'apply-tags-button',
-  templateUrl: './apply-tags-button.component.html',
-  styleUrls: ['./apply-tags-button.component.scss'],
-  providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }],
-  standalone: true,
   imports: [
     CommonModule,
     MatButtonModule,
@@ -27,7 +22,12 @@ import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.c
     MatTooltipModule,
     SearchBarComponent,
     SelectAllItemsCheckboxComponent
-  ]
+  ],
+  providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }],
+  selector: 'apply-tags-button',
+  standalone: true,
+  styleUrl: './apply-tags-button.component.scss',
+  templateUrl: './apply-tags-button.component.html'
 })
 export class ApplyTagsButtonComponent extends AbstractTagsMenuComponent {
   @Input() selectedProjects: Project[] = [];

@@ -9,10 +9,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'select-tags',
-  templateUrl: './select-tags.component.html',
-  styleUrls: ['./select-tags.component.scss'],
-  standalone: true,
   imports: [
     CommonModule,
     MatButtonModule,
@@ -20,7 +16,11 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatSelectModule,
     SearchBarComponent
-  ]
+  ],
+  selector: 'select-tags',
+  standalone: true,
+  styleUrl: './select-tags.component.scss',
+  templateUrl: './select-tags.component.html'
 })
 export class SelectTagsComponent extends AbstractTagsMenuComponent {
   @Input() selectedTags: Tag[] = [];

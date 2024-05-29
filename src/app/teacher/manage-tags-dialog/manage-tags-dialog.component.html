@@ -8,7 +8,7 @@
     </div>
     <div *ngIf="showCreateTag">
       <hr />
-      <edit-tag (closeEvent)="showCreateTag = false"></edit-tag>
+      <edit-tag (closeEvent)="showCreateTag = false"/>
       <hr />
     </div>
     <div
@@ -19,7 +19,7 @@
     >
       <div *ngIf="idToEditing[tag.id]" class="edit-tag-div">
         <hr *ngIf="(first && !showCreateTag) || (!first && !idToEditing[tags[tagIndex - 1].id])" />
-        <edit-tag [tag]="tag" (closeEvent)="cancelEditing(tag)"></edit-tag>
+        <edit-tag [tag]="tag" (closeEvent)="cancelEditing(tag)"/>
         <hr />
       </div>
       <ng-container *ngIf="!idToEditing[tag.id]">

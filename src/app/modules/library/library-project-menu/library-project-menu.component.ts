@@ -10,8 +10,8 @@ import { ArchiveProjectService } from '../../../services/archive-project.service
 
 @Component({
   selector: 'app-library-project-menu',
-  templateUrl: './library-project-menu.component.html',
-  styleUrls: ['./library-project-menu.component.scss']
+  styleUrl: './library-project-menu.component.scss',
+  templateUrl: './library-project-menu.component.html'
 })
 export class LibraryProjectMenuComponent {
   @Input()

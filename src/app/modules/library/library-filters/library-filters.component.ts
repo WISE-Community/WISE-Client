@@ -3,8 +3,6 @@ import {
   OnInit,
   Input,
   SimpleChanges,
-  Output,
-  EventEmitter,
   ViewEncapsulation
 } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
@@ -15,10 +13,10 @@ import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { UtilService } from '../../../services/util.service';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   selector: 'app-library-filters',
-  templateUrl: './library-filters.component.html',
-  styleUrls: ['./library-filters.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrl: './library-filters.component.scss',
+  templateUrl: './library-filters.component.html'
 })
 export class LibraryFiltersComponent implements OnInit {
   @Input()

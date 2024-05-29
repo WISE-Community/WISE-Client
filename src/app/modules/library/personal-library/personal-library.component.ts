@@ -12,8 +12,8 @@ import { Project } from '../../../domain/project';
 
 @Component({
   selector: 'app-personal-library',
-  templateUrl: './personal-library.component.html',
-  styleUrls: ['./personal-library.component.scss']
+  styleUrl: './personal-library.component.scss',
+  templateUrl: './personal-library.component.html'
 })
 export class PersonalLibraryComponent extends LibraryComponent {
   filteredProjects: LibraryProject[] = [];

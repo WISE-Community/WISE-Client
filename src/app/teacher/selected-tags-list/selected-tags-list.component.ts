@@ -7,9 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
+  imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatChipsModule, MatIconModule],
   selector: 'selected-tags-list',
   standalone: true,
-  imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatChipsModule, MatIconModule],
   templateUrl: './selected-tags-list.component.html'
 })
 export class SelectedTagsListComponent {

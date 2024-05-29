@@ -19,10 +19,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ColorChooserComponent } from '../color-chooser/color-chooser.component';
 
 @Component({
-  selector: 'edit-tag',
-  templateUrl: './edit-tag.component.html',
-  styleUrls: ['./edit-tag.component.scss'],
-  standalone: true,
   imports: [
     ColorChooserComponent,
     CommonModule,
@@ -32,7 +28,11 @@ import { ColorChooserComponent } from '../color-chooser/color-chooser.component'
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule
-  ]
+  ],
+  selector: 'edit-tag',
+  standalone: true,
+  styleUrl: './edit-tag.component.scss',
+  templateUrl: './edit-tag.component.html'
 })
 export class EditTagComponent {
   @Output() closeEvent: EventEmitter<void> = new EventEmitter();
