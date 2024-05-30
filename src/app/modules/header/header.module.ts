@@ -8,8 +8,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HeaderComponent } from './header.component';
-import { HeaderLinksComponent } from './header-links/header-links.component';
-import { HeaderAccountMenuComponent } from './header-account-menu/header-account-menu.component';
 import { ConfigService } from '../../services/config.service';
 import { UserService } from '../../services/user.service';
 
@@ -22,15 +20,7 @@ const materialModules = [
 ];
 
 @NgModule({
-  imports: [
-    AppRoutingModule,
-    CommonModule,
-    FlexLayoutModule,
-    HeaderAccountMenuComponent,
-    HeaderLinksComponent,
-    materialModules
-  ],
-  declarations: [HeaderComponent],
+  imports: [AppRoutingModule, CommonModule, FlexLayoutModule, HeaderComponent, materialModules],
   providers: [ConfigService, UserService],
   exports: [HeaderComponent]
 })
