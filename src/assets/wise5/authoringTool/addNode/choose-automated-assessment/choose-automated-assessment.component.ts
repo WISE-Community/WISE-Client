@@ -22,7 +22,7 @@ export class ChooseAutomatedAssessmentComponent {
   ) {}
 
   ngOnInit(): void {
-    this.target = history.state.target;
+    this.target = history.state;
     this.importProjectId = this.projectService.getAutomatedAssessmentProjectId();
     this.showAutomatedAssessmentProject();
   }
@@ -46,13 +46,11 @@ export class ChooseAutomatedAssessmentComponent {
   }
 
   protected next(): void {
+    this.target.importProjectId = this.importProjectId;
+    this.target.node = this.node;
     this.router.navigate(['..', 'configure'], {
       relativeTo: this.route,
-      state: {
-        importProjectId: this.importProjectId,
-        node: this.node,
-        target: this.target
-      }
+      state: this.target
     });
   }
 }

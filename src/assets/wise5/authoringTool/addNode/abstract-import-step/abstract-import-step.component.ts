@@ -23,8 +23,8 @@ export abstract class AbstractImportStepComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.target = history.state.target;
-    this.importProjectId = history.state.importProjectId;
+    this.target = history.state;
+    this.importProjectId = this.target.importProjectId;
   }
 
   protected import(nodesToImport: any[]): void {

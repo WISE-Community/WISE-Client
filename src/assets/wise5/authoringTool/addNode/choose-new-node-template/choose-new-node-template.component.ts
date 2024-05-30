@@ -36,7 +36,7 @@ export class ChooseNewNodeTemplate {
   protected chooseTemplate(template: NewNodeTemplate) {
     this.router.navigate(['..', ...template.route.split('/')], {
       relativeTo: this.route,
-      state: { target: history.state.target }
+      state: history.state
     });
   }
 }

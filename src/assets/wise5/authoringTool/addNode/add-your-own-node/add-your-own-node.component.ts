@@ -30,7 +30,7 @@ export class AddYourOwnNode {
   ) {}
 
   ngOnInit() {
-    this.target = history.state.target;
+    this.target = history.state;
     this.componentTypes = this.componentTypeService.getComponentTypes();
   }
 

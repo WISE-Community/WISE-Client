@@ -40,18 +40,14 @@ export class AddStepButtonComponent {
   private goToAddStepViewForIn(groupId: string): void {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
-      state: {
-        target: new AddStepTarget('in', groupId)
-      }
+      state: new AddStepTarget('in', groupId)
     });
   }
 
   protected goToAddStepViewForAfter(previousNodeId: string): void {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
-      state: {
-        target: new AddStepTarget('after', previousNodeId)
-      }
+      state: new AddStepTarget('after', previousNodeId)
     });
   }
 
@@ -61,9 +57,7 @@ export class AddStepButtonComponent {
   ): void {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
-      state: {
-        target: new AddStepTarget('firstStepInBranchPath', null, previousNodeId, nextNodeId)
-      }
+      state: new AddStepTarget('firstStepInBranchPath', null, previousNodeId, nextNodeId)
     });
   }
 

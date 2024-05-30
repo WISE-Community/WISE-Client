@@ -24,7 +24,7 @@ export class ChooseImportUnitComponent {
   ) {}
 
   ngOnInit(): void {
-    this.target = history.state.target;
+    this.target = history.state;
     this.myProjects = this.configService.getAuthorableProjects();
     this.subscriptions.add(
       this.projectLibraryService.getLibraryProjects().subscribe((libraryProjects) => {
@@ -38,12 +38,10 @@ export class ChooseImportUnitComponent {
   }
 
   protected chooseProject(project: any): void {
+    this.target.importProjectId = project.id;
     this.router.navigate(['../choose-step'], {
       relativeTo: this.route,
-      state: {
-        importProjectId: project.id,
-        target: this.target
-      }
+      state: this.target
     });
   }
 }
