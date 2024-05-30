@@ -36,10 +36,6 @@ export class AddStepButtonComponent {
     }
   }
 
-  protected addStepAfter(): void {
-    this.goToAddStepViewForAfter(this.nodeId);
-  }
-
   private goToAddStepViewForIn(groupId: string): void {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
@@ -50,7 +46,7 @@ export class AddStepButtonComponent {
     });
   }
 
-  private goToAddStepViewForAfter(previousNodeId: string): void {
+  protected goToAddStepViewForAfter(previousNodeId: string): void {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
       state: {
