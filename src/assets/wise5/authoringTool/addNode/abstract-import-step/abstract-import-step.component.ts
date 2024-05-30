@@ -5,14 +5,12 @@ import { CopyNodesService } from '../../../services/copyNodesService';
 import { InsertNodesService } from '../../../services/insertNodesService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
+import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
 
 @Directive()
 export abstract class AbstractImportStepComponent implements OnInit {
-  protected branchNodeId: string;
-  protected firstNodeIdInBranchPath: string;
   protected importProjectId: number;
-  protected targetId: string;
-  protected targetType: string;
+  protected target: AddStepTarget;
 
   constructor(
     protected configService: ConfigService,
@@ -25,10 +23,7 @@ export abstract class AbstractImportStepComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.targetType = history.state.targetType;
-    this.targetId = history.state.targetId;
-    this.branchNodeId = history.state.branchNodeId;
-    this.firstNodeIdInBranchPath = history.state.firstNodeIdInBranchPath;
+    this.target = history.state.target;
     this.importProjectId = history.state.importProjectId;
   }
 
@@ -37,14 +32,14 @@ export abstract class AbstractImportStepComponent implements OnInit {
       .copyNodes(nodesToImport, this.importProjectId, this.configService.getProjectId())
       .subscribe((copiedNodes: any[]) => {
         const nodesWithNewNodeIds = this.projectService.getNodesWithNewIds(copiedNodes);
-        if (this.targetType === 'firstStepInBranchPath') {
+        if (this.target.type === 'firstStepInBranchPath') {
           this.insertFirstNodeInBranchPathService.insertNodes(
             nodesWithNewNodeIds,
-            this.branchNodeId,
-            this.firstNodeIdInBranchPath
+            this.target.branchNodeId,
+            this.target.firstNodeIdInBranchPath
           );
         } else {
-          this.insertNodesService.insertNodes(nodesWithNewNodeIds, this.targetId);
+          this.insertNodesService.insertNodes(nodesWithNewNodeIds, this.target.targetId);
         }
         this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
           this.projectService.refreshProject();

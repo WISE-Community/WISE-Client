@@ -3,6 +3,7 @@ import { ConfigService } from '../../../../assets/wise5/services/configService';
 import { ProjectLibraryService } from '../../../../assets/wise5/services/projectLibraryService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AddStepTarget } from '../../../domain/addStepTarget';
 
 @Component({
   selector: 'choose-import-unit',
@@ -10,13 +11,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './choose-import-unit.component.html'
 })
 export class ChooseImportUnitComponent {
-  protected branchNodeId: string;
-  protected firstNodeIdInBranchPath: string;
   protected libraryProjects: any[];
   protected myProjects: any[];
-  protected targetId: string;
-  protected targetType: string;
   private subscriptions: Subscription = new Subscription();
+  protected target: AddStepTarget;
 
   constructor(
     private configService: ConfigService,
@@ -26,10 +24,7 @@ export class ChooseImportUnitComponent {
   ) {}
 
   ngOnInit(): void {
-    this.targetType = history.state.targetType;
-    this.targetId = history.state.targetId;
-    this.branchNodeId = history.state.branchNodeId;
-    this.firstNodeIdInBranchPath = history.state.firstNodeIdInBranchPath;
+    this.target = history.state.target;
     this.myProjects = this.configService.getAuthorableProjects();
     this.subscriptions.add(
       this.projectLibraryService.getLibraryProjects().subscribe((libraryProjects) => {
@@ -47,10 +42,7 @@ export class ChooseImportUnitComponent {
       relativeTo: this.route,
       state: {
         importProjectId: project.id,
-        targetType: this.targetType,
-        targetId: this.targetId,
-        branchNodeId: this.branchNodeId,
-        firstNodeIdInBranchPath: this.firstNodeIdInBranchPath
+        target: this.target
       }
     });
   }

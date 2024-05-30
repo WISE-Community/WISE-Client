@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { AddStepTarget } from '../../../../app/domain/addStepTarget';
 
 @Component({
   selector: 'add-step-button',
@@ -40,8 +41,7 @@ export class AddStepButtonComponent {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
       state: {
-        targetType: 'in',
-        targetId: groupId
+        target: new AddStepTarget('in', groupId)
       }
     });
   }
@@ -50,8 +50,7 @@ export class AddStepButtonComponent {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
       state: {
-        targetType: 'after',
-        targetId: previousNodeId
+        target: new AddStepTarget('after', previousNodeId)
       }
     });
   }
@@ -63,9 +62,7 @@ export class AddStepButtonComponent {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
       state: {
-        targetType: 'firstStepInBranchPath',
-        branchNodeId: previousNodeId,
-        firstNodeIdInBranchPath: nextNodeId
+        target: new AddStepTarget('firstStepInBranchPath', null, previousNodeId, nextNodeId)
       }
     });
   }

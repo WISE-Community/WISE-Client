@@ -5,6 +5,7 @@ import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
+import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
 
 @Component({
   selector: 'add-your-own-node',
@@ -15,12 +16,9 @@ export class AddYourOwnNode {
   protected addNodeFormGroup: FormGroup = this.fb.group({
     title: new FormControl($localize`New Step`, [Validators.required])
   });
-  protected branchNodeId: string;
   protected componentTypes: any[];
-  protected firstNodeIdInBranchPath: string;
   protected initialComponents: string[] = [];
-  protected targetId: string;
-  protected targetType: 'in' | 'after' | 'firstStepInBranchPath';
+  protected target: AddStepTarget;
 
   constructor(
     private componentTypeService: ComponentTypeService,
@@ -32,10 +30,7 @@ export class AddYourOwnNode {
   ) {}
 
   ngOnInit() {
-    this.targetType = history.state.targetType;
-    this.targetId = history.state.targetId;
-    this.branchNodeId = history.state.branchNodeId;
-    this.firstNodeIdInBranchPath = history.state.firstNodeIdInBranchPath;
+    this.target = history.state.target;
     this.componentTypes = this.componentTypeService.getComponentTypes();
   }
 
@@ -53,18 +48,18 @@ export class AddYourOwnNode {
 
   protected submit(): void {
     const newNode = this.projectService.createNode(this.addNodeFormGroup.controls['title'].value);
-    switch (this.targetType) {
+    switch (this.target.type) {
       case 'in':
-        this.projectService.createNodeInside(newNode, this.targetId);
+        this.projectService.createNodeInside(newNode, this.target.targetId);
         break;
       case 'after':
-        this.projectService.createNodeAfter(newNode, this.targetId);
+        this.projectService.createNodeAfter(newNode, this.target.targetId);
         break;
       case 'firstStepInBranchPath':
         this.insertFirstNodeInBranchPathService.insertNode(
           newNode,
-          this.branchNodeId,
-          this.firstNodeIdInBranchPath
+          this.target.branchNodeId,
+          this.target.firstNodeIdInBranchPath
         );
         break;
     }
