@@ -104,7 +104,6 @@ import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiCha
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
-    EditComponentAdvancedButtonComponent,
     EditComponentAdvancedComponent,
     EditComponentAddToNotebookButtonComponent,
     EditComponentConstraintsComponent,
@@ -174,6 +173,7 @@ import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiCha
   ],
   imports: [
     ConstraintAuthoringModule,
+    EditComponentAdvancedButtonComponent,
     SelectStepAndComponentComponent,
     StudentTeacherCommonModule,
     PeerGroupingAuthoringModule,
