@@ -51,6 +51,7 @@ import { DiscourseCategoryActivityComponent } from './discourse-category-activit
 import { SelectAllItemsCheckboxComponent } from './select-all-items-checkbox/select-all-items-checkbox.component';
 import { ArchiveProjectsButtonComponent } from '../../teacher/archive-projects-button/archive-projects-button.component';
 import { SearchBarComponent } from '../shared/search-bar/search-bar.component';
+import { SelectMenuComponent } from '../shared/select-menu/select-menu.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -85,6 +86,7 @@ const materialModules = [
     RouterModule,
     materialModules,
     SearchBarComponent,
+    SelectMenuComponent,
     SharedModule,
     TimelineModule
   ],

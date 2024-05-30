@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SelectMenuComponent } from './select-menu.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('SelectMenuComponent', () => {
   let component: SelectMenuComponent;
   let fixture: ComponentFixture<SelectMenuComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [SelectMenuComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [SelectMenuComponent]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SelectMenuComponent);
