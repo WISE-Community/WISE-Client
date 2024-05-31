@@ -8,12 +8,14 @@
   >
     <mat-select-trigger *ngIf="multiple">
       {{ selectField.value ? selectField.value[0] : '' }}
-      <span *ngIf="selectField.value?.length > 1">
-        (+{{ selectField.value.length - 1 }} <ng-container i18n>more</ng-container>)
-      </span>
+      @if (selectField.value?.length > 1) {
+      <span> (+{{ selectField.value.length - 1 }} <ng-container i18n>more</ng-container>) </span>
+      }
     </mat-select-trigger>
-    <mat-option *ngFor="let option of options" [value]="option[valueProp]">
+    @for (option of options; track option.id) {
+    <mat-option [value]="option[valueProp]">
       {{ option[viewValueProp] }}
     </mat-option>
+    }
   </mat-select>
 </mat-form-field>
