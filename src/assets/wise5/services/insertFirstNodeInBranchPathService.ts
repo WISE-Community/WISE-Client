@@ -43,7 +43,7 @@ export class InsertFirstNodeInBranchPathService {
     }
   }
 
-  private insertNodeBeforeInGroup(group: any, newNodeId: string, nodeIdAfter: string) {
+  private insertNodeBeforeInGroup(group: any, newNodeId: string, nodeIdAfter: string): boolean {
     const ids = group.ids;
     for (let i = 0; i < ids.length; i++) {
       const id = ids[i];
@@ -55,7 +55,11 @@ export class InsertFirstNodeInBranchPathService {
     return false;
   }
 
-  private insertNodeBetweenInTransitions(newNode: any, nodeIdBefore: string, nodeIdAfter: string) {
+  private insertNodeBetweenInTransitions(
+    newNode: any,
+    nodeIdBefore: string,
+    nodeIdAfter: string
+  ): void {
     const nodeBefore = this.projectService.getNodeById(nodeIdBefore);
     const nodeBeforeTransition = nodeBefore.transitionLogic.transitions.find(
       (transition: any) => transition.to === nodeIdAfter
