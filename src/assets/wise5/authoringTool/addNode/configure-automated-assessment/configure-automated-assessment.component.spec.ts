@@ -8,6 +8,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { CopyNodesService } from '../../../services/copyNodesService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { InsertNodesService } from '../../../services/insertNodesService';
+import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
 
 describe('ConfigureAutomatedAssessmentComponent', () => {
   let component: ConfigureAutomatedAssessmentComponent;
@@ -23,7 +24,12 @@ describe('ConfigureAutomatedAssessmentComponent', () => {
         RouterTestingModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [CopyNodesService, InsertNodesService, TeacherProjectService]
+      providers: [
+        CopyNodesService,
+        InsertFirstNodeInBranchPathService,
+        InsertNodesService,
+        TeacherProjectService
+      ]
     }).compileComponents();
     window.history.pushState(
       {

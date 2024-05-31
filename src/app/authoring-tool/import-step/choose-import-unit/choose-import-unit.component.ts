@@ -3,6 +3,7 @@ import { ConfigService } from '../../../../assets/wise5/services/configService';
 import { ProjectLibraryService } from '../../../../assets/wise5/services/projectLibraryService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AddStepTarget } from '../../../domain/addStepTarget';
 
 @Component({
   selector: 'choose-import-unit',
@@ -12,8 +13,8 @@ import { Subscription } from 'rxjs';
 export class ChooseImportUnitComponent {
   protected libraryProjects: any[];
   protected myProjects: any[];
-  protected targetId: string;
   private subscriptions: Subscription = new Subscription();
+  protected target: AddStepTarget;
 
   constructor(
     private configService: ConfigService,
@@ -23,7 +24,7 @@ export class ChooseImportUnitComponent {
   ) {}
 
   ngOnInit(): void {
-    this.targetId = history.state.targetId;
+    this.target = history.state;
     this.myProjects = this.configService.getAuthorableProjects();
     this.subscriptions.add(
       this.projectLibraryService.getLibraryProjects().subscribe((libraryProjects) => {
@@ -37,12 +38,10 @@ export class ChooseImportUnitComponent {
   }
 
   protected chooseProject(project: any): void {
+    this.target.importProjectId = project.id;
     this.router.navigate(['../choose-step'], {
       relativeTo: this.route,
-      state: {
-        importProjectId: project.id,
-        targetId: this.targetId
-      }
+      state: this.target
     });
   }
 }

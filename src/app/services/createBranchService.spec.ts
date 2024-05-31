@@ -19,6 +19,7 @@ import {
   WORKGROUP_ID_VALUE
 } from '../domain/branchCriteria';
 import { ConstraintRemovalCriteriaParams } from '../../assets/wise5/common/ConstraintRemovalCriteriaParams';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const ENTER_NODE: string = 'enterNode';
 const RANDOM: string = 'random';
@@ -41,7 +42,11 @@ let service: CreateBranchService;
 describe('CreateBranchService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
+      imports: [
+        HttpClientTestingModule,
+        MatProgressSpinnerModule,
+        StudentTeacherCommonServicesModule
+      ],
       providers: [CreateBranchService, TeacherProjectService]
     });
     demoProjectJSON = copy(demoProjectJSON_import);

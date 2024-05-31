@@ -4,6 +4,8 @@ import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
+import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
 
 @Component({
   selector: 'add-your-own-node',
@@ -16,18 +18,19 @@ export class AddYourOwnNode {
   });
   protected componentTypes: any[];
   protected initialComponents: string[] = [];
-  protected targetId: string;
+  protected target: AddStepTarget;
 
   constructor(
     private componentTypeService: ComponentTypeService,
     private fb: FormBuilder,
+    private insertFirstNodeInBranchPathService: InsertFirstNodeInBranchPathService,
     private projectService: TeacherProjectService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.targetId = history.state.targetId;
+    this.target = history.state;
     this.componentTypes = this.componentTypeService.getComponentTypes();
   }
 
@@ -45,10 +48,20 @@ export class AddYourOwnNode {
 
   protected submit(): void {
     const newNode = this.projectService.createNode(this.addNodeFormGroup.controls['title'].value);
-    if (this.isGroupNode(this.targetId)) {
-      this.projectService.createNodeInside(newNode, this.targetId);
-    } else {
-      this.projectService.createNodeAfter(newNode, this.targetId);
+    switch (this.target.type) {
+      case 'in':
+        this.projectService.createNodeInside(newNode, this.target.targetId);
+        break;
+      case 'after':
+        this.projectService.createNodeAfter(newNode, this.target.targetId);
+        break;
+      case 'firstStepInBranchPath':
+        this.insertFirstNodeInBranchPathService.insertNode(
+          newNode,
+          this.target.branchNodeId,
+          this.target.firstNodeIdInBranchPath
+        );
+        break;
     }
     this.addInitialComponents(newNode.id, this.initialComponents);
     this.save().then(() => {

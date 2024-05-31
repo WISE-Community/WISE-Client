@@ -12,6 +12,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MatDividerModule } from '@angular/material/divider';
 import { CopyNodesService } from '../../../services/copyNodesService';
 import { InsertNodesService } from '../../../services/insertNodesService';
+import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
 
 describe('ChooseSimulationComponent', () => {
   let component: ChooseSimulationComponent;
@@ -31,7 +32,12 @@ describe('ChooseSimulationComponent', () => {
         RouterTestingModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [CopyNodesService, InsertNodesService, TeacherProjectService]
+      providers: [
+        CopyNodesService,
+        InsertFirstNodeInBranchPathService,
+        InsertNodesService,
+        TeacherProjectService
+      ]
     }).compileComponents();
     window.history.pushState({}, '', '');
     fixture = TestBed.createComponent(ChooseSimulationComponent);

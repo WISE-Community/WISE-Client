@@ -3,7 +3,7 @@ import { TeacherProjectService } from './teacherProjectService';
 
 @Injectable()
 export class InsertNodesService {
-  constructor(protected ProjectService: TeacherProjectService) {}
+  constructor(private projectService: TeacherProjectService) {}
 
   /**
    * Insert nodes in specified location. Modifies project.
@@ -11,7 +11,7 @@ export class InsertNodesService {
    * @param targetId id of node or group. If this is a group, we will make the
    * new step the first step in the group. If this is a step, we will place the new step after it.
    */
-  insertNodes(nodes: any[], targetId: string) {
+  insertNodes(nodes: any[], targetId: string): void {
     if (targetId == null) {
       /*
        * Insert the node after the last inactive node. If there
@@ -19,7 +19,7 @@ export class InsertNodesService {
        * inactive nodes section. In the latter case we do this by
        * setting targetId to 'inactiveSteps'.
        */
-      const inactiveNodes = this.ProjectService.getInactiveNodes();
+      const inactiveNodes = this.projectService.getInactiveNodes();
       if (inactiveNodes != null && inactiveNodes.length > 0) {
         targetId = inactiveNodes[inactiveNodes.length - 1];
       } else {
@@ -28,10 +28,10 @@ export class InsertNodesService {
     }
 
     for (const node of nodes) {
-      if (this.ProjectService.isGroupNode(targetId)) {
-        this.ProjectService.createNodeInside(node, targetId);
+      if (this.projectService.isGroupNode(targetId)) {
+        this.projectService.createNodeInside(node, targetId);
       } else {
-        this.ProjectService.createNodeAfter(node, targetId);
+        this.projectService.createNodeAfter(node, targetId);
       }
 
       /*

@@ -344,7 +344,7 @@ export class TeacherProjectService extends ProjectService {
    * @param node the new node
    * @param nodeId the node to add after
    */
-  createNodeAfter(newNode, nodeId) {
+  createNodeAfter(newNode: any, nodeId: string): void {
     if (this.isInactive(nodeId)) {
       this.setIdToNode(newNode.id, newNode);
       this.addInactiveNodeInsertAfter(newNode, nodeId);
@@ -2959,6 +2959,15 @@ export class TeacherProjectService extends ProjectService {
    */
   isFirstNodeInBranchPath(nodeId) {
     for (const node of this.getNodes()) {
+      if (node.transitionLogic?.transitions?.length > 1) {
+        for (const transition of node.transitionLogic.transitions) {
+          if (transition.to === nodeId) {
+            return true;
+          }
+        }
+      }
+    }
+    for (const node of this.getInactiveNodes()) {
       if (node.transitionLogic?.transitions?.length > 1) {
         for (const transition of node.transitionLogic.transitions) {
           if (transition.to === nodeId) {

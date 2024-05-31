@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
 
 @Component({
   selector: 'choose-automated-assessment',
@@ -10,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ChooseAutomatedAssessmentComponent {
   private importProjectId: number;
   protected node: any;
-  protected targetId: string;
+  protected target: AddStepTarget;
   private project: any;
   protected projectItems: any;
 
@@ -21,7 +22,7 @@ export class ChooseAutomatedAssessmentComponent {
   ) {}
 
   ngOnInit(): void {
-    this.targetId = history.state.targetId;
+    this.target = history.state;
     this.importProjectId = this.projectService.getAutomatedAssessmentProjectId();
     this.showAutomatedAssessmentProject();
   }
@@ -45,13 +46,11 @@ export class ChooseAutomatedAssessmentComponent {
   }
 
   protected next(): void {
+    this.target.importProjectId = this.importProjectId;
+    this.target.node = this.node;
     this.router.navigate(['..', 'configure'], {
       relativeTo: this.route,
-      state: {
-        importProjectId: this.importProjectId,
-        node: this.node,
-        targetId: this.targetId
-      }
+      state: this.target
     });
   }
 }
