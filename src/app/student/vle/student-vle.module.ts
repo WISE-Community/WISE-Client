@@ -43,11 +43,11 @@ import { NodeStatusIconComponent } from '../../../assets/wise5/themes/default/th
     NodeNavigationComponent,
     RunEndedAndLockedMessageComponent,
     SafeUrl,
-    StepToolsComponent,
     VLEComponent,
     VLEParentComponent
   ],
   imports: [
+    StepToolsComponent,
     StudentTeacherCommonModule,
     CommonModule,
     ComponentStudentModule,
