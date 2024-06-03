@@ -1,56 +1,70 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { User } from '../../domain/user';
 import { UserService } from '../../services/user.service';
 import { UtilService } from '../../services/util.service';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { HeaderLinksComponent } from './header-links/header-links.component';
+import { HeaderAccountMenuComponent } from './header-account-menu/header-account-menu.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    HeaderAccountMenuComponent,
+    HeaderLinksComponent,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
+    RouterModule
+  ],
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  standalone: true,
+  styleUrl: './header.component.scss',
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-  user: User;
-
-  location: string = ''; // current location
-  roles: string[] = [];
-  url: string = '';
+  protected location: string = '';
+  protected roles: string[] = [];
+  protected user: User;
 
   constructor(
     private router: Router,
     private userService: UserService,
     private utilService: UtilService
   ) {
-    this.router = router;
-    this.router.events.subscribe((event) => {
+    this.router.events.subscribe(() => {
       this.setLocation();
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getUser();
     this.setLocation();
   }
 
-  getUser() {
+  private getUser(): void {
     this.userService.getUser().subscribe((user) => {
       this.user = user;
       this.roles = user.roles ? user.roles : [];
     });
   }
 
-  setLocation() {
-    this.url = this.router.url;
-    if (this.url.match(/^\/teacher/)) {
+  private setLocation(): void {
+    if (this.router.url.match(/^\/teacher/)) {
       this.location = 'teacher';
-    } else if (this.url.match(/^\/student/)) {
+    } else if (this.router.url.match(/^\/student/)) {
       this.location = 'student';
     } else {
       this.location = '';
     }
   }
 
-  showMobileMenu() {
+  protected showMobileMenu(): void {
     this.utilService.showMobileMenu();
   }
 }

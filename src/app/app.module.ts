@@ -12,7 +12,6 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ConfigService } from './services/config.service';
-import { HeaderModule } from './modules/header/header.module';
 import { HomeModule } from './home/home.module';
 import { StudentService } from './student/student.service';
 import { UserService } from './services/user.service';
@@ -24,6 +23,7 @@ import { TrackScrollDirective } from './track-scroll.directive';
 import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY, RECAPTCHA_BASE_URL } from 'ng-recaptcha';
 import { ArchiveProjectService } from './services/archive-project.service';
 import { FooterComponent } from './modules/footer/footer.component';
+import { HeaderComponent } from './modules/header/header.component';
 
 export function initialize(
   configService: ConfigService,
@@ -56,7 +56,7 @@ export function initialize(
     HttpClientModule,
     AppRoutingModule,
     FooterComponent,
-    HeaderModule,
+    HeaderComponent,
     HomeModule,
     MobileMenuComponent,
     MatSidenavModule,
