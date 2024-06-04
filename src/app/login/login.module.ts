@@ -12,7 +12,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { GoogleSignInButtonComponent } from '../modules/google-sign-in/google-sign-in-button/google-sign-in-button.component';
 
 const materialModules = [
   MatButtonModule,
@@ -28,7 +27,6 @@ const materialModules = [
     CommonModule,
     FlexLayoutModule,
     FormsModule,
-    GoogleSignInButtonComponent,
     LoginRoutingModule,
     ReactiveFormsModule,
     materialModules,
