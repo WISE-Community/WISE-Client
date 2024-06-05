@@ -1,17 +1,34 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { ComponentInfoService } from '../../../services/componentInfoService';
-import { ComponentInfo } from '../../../components/ComponentInfo';
 import { ComponentFactory } from '../../../common/ComponentFactory';
 import { Component as WISEComponent } from '../../../common/Component';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ComponentTypeSelectorComponent } from '../component-type-selector/component-type-selector.component';
+import { PreviewComponentComponent } from '../preview-component/preview-component.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
-  selector: 'component-info-dialog',
-  templateUrl: './component-info-dialog.component.html',
-  styleUrls: ['./component-info-dialog.component.scss']
+  imports: [
+    CommonModule,
+    ComponentTypeSelectorComponent,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatTabsModule,
+    PreviewComponentComponent
+  ],
+  standalone: true,
+  styleUrl: './component-info-dialog.component.scss',
+  templateUrl: './component-info-dialog.component.html'
 })
 export class ComponentInfoDialogComponent {
-  private componentInfo: ComponentInfo;
   protected description: string;
   protected previewComponents: WISEComponent[] = [];
   protected previewExamples: any[] = [];
@@ -25,10 +42,10 @@ export class ComponentInfoDialogComponent {
     this.displayComponent(this.componentType);
   }
 
-  protected displayComponent(componentType: any): void {
-    this.componentInfo = this.componentInfoService.getInfo(componentType);
-    this.description = this.componentInfo.getDescription();
-    this.previewExamples = this.componentInfo.getPreviewExamples();
+  protected displayComponent(componentType: string): void {
+    const componentInfo = this.componentInfoService.getInfo(componentType);
+    this.description = componentInfo.getDescription();
+    this.previewExamples = componentInfo.getPreviewExamples();
     this.previewComponents = this.previewExamples.map((example: any) => {
       return new ComponentFactory().getComponent(example.content, 'node1');
     });

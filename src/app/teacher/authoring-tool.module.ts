@@ -50,7 +50,6 @@ import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/n
 import { AddLessonChooseTemplateComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-template/add-lesson-choose-template.component';
 import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 import { ComponentInfoDialogComponent } from '../../assets/wise5/authoringTool/components/component-info-dialog/component-info-dialog.component';
-import { ComponentTypeSelectorComponent } from '../../assets/wise5/authoringTool/components/component-type-selector/component-type-selector.component';
 import { EditNodeTitleComponent } from '../../assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component';
 import { AddComponentButtonComponent } from '../../assets/wise5/authoringTool/node/add-component-button/add-component-button.component';
 import { CopyComponentButtonComponent } from '../../assets/wise5/authoringTool/node/copy-component-button/copy-component-button.component';
@@ -80,7 +79,6 @@ import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringToo
     ChooseNewNodeTemplate,
     ChooseMoveNodeLocationComponent,
     ChooseSimulationComponent,
-    ComponentInfoDialogComponent,
     ComponentTypeButtonComponent,
     ConcurrentAuthorsMessageComponent,
     ConfigureAutomatedAssessmentComponent,
@@ -113,8 +111,8 @@ import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringToo
     AddStepButtonComponent,
     StudentTeacherCommonModule,
     ComponentAuthoringModule,
+    ComponentInfoDialogComponent,
     ComponentStudentModule,
-    ComponentTypeSelectorComponent,
     MatBadgeModule,
     MatChipsModule,
     ImportComponentModule,

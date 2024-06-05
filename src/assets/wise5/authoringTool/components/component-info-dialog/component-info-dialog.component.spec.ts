@@ -1,27 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ComponentInfoDialogComponent } from './component-info-dialog.component';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { MatDividerModule } from '@angular/material/divider';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { PreviewComponentComponent } from '../preview-component/preview-component.component';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentInfoService } from '../../../services/componentInfoService';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentTypeSelectorComponent } from '../component-type-selector/component-type-selector.component';
 import { ComponentInfoDialogHarness } from './component-info-dialog.harness';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { MatTabsModule } from '@angular/material/tabs';
 import { MultipleChoiceInfo } from '../../../components/multipleChoice/MultipleChoiceInfo';
 import { OutsideUrlInfo } from '../../../components/outsideURL/OutsideUrlInfo';
 import { OpenResponseInfo } from '../../../components/openResponse/OpenResponseInfo';
 import { ComponentInfo } from '../../../components/ComponentInfo';
-import { MatCardModule } from '@angular/material/card';
 import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
-import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ComponentStudentModule } from '../../../../../assets/wise5/components/component/component-student.module';
 
 let component: ComponentInfoDialogComponent;
@@ -34,23 +24,12 @@ let outsideUrlInfo = new OutsideUrlInfo();
 describe('ComponentInfoDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ComponentInfoDialogComponent],
       imports: [
         BrowserAnimationsModule,
-        ComponentHeaderComponent,
+        ComponentInfoDialogComponent,
         ComponentStudentModule,
-        ComponentTypeSelectorComponent,
         ComponentTypeServiceModule,
-        HttpClientTestingModule,
-        MatButtonModule,
-        MatCardModule,
-        MatDialogModule,
-        MatDividerModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatSelectModule,
-        MatTabsModule,
-        PreviewComponentComponent
+        HttpClientTestingModule
       ],
       providers: [ComponentInfoService, { provide: MAT_DIALOG_DATA, useValue: 'OpenResponse' }]
     }).compileComponents();
