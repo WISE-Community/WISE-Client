@@ -1,10 +1,25 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ComponentTypeService } from '../../../services/componentTypeService';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule
+  ],
   selector: 'component-type-selector',
-  templateUrl: './component-type-selector.component.html',
-  styleUrls: ['./component-type-selector.component.scss']
+  standalone: true,
+  styleUrl: './component-type-selector.component.scss',
+  templateUrl: './component-type-selector.component.html'
 })
 export class ComponentTypeSelectorComponent {
   @Input() componentType: string;

@@ -34,11 +34,12 @@ let outsideUrlInfo = new OutsideUrlInfo();
 describe('ComponentInfoDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ComponentInfoDialogComponent, ComponentTypeSelectorComponent],
+      declarations: [ComponentInfoDialogComponent],
       imports: [
         BrowserAnimationsModule,
         ComponentHeaderComponent,
         ComponentStudentModule,
+        ComponentTypeSelectorComponent,
         ComponentTypeServiceModule,
         HttpClientTestingModule,
         MatButtonModule,
