@@ -36,7 +36,7 @@ import { EditComponent } from './account/edit/edit.component';
 import { StudentEditProfileComponent } from './account/edit-profile/edit-profile.component';
 import { TimelineModule } from '../modules/timeline/timeline.module';
 import { TeamSignInDialogComponent } from './team-sign-in-dialog/team-sign-in-dialog.component';
-import { GoogleSignInModule } from '../modules/google-sign-in/google-sign-in.module';
+import { GoogleSignInButtonComponent } from '../modules/google-sign-in/google-sign-in-button/google-sign-in-button.component';
 import { SearchBarComponent } from '../modules/shared/search-bar/search-bar.component';
 
 @NgModule({
@@ -44,7 +44,7 @@ import { SearchBarComponent } from '../modules/shared/search-bar/search-bar.comp
     CommonModule,
     FlexLayoutModule,
     FormsModule,
-    GoogleSignInModule,
+    GoogleSignInButtonComponent,
     ReactiveFormsModule,
     materialModules,
     SearchBarComponent,
