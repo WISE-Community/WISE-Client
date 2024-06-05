@@ -2700,7 +2700,7 @@ export class TeacherProjectService extends ProjectService {
                       if (groupIdWeAreMoving === toNodeIdParentGroupId) {
                         // the transition is to a child in the group we are moving
 
-                        if (groupNode.startId == null) {
+                        if (groupNode.startId == null || groupNode.startId === '') {
                           // change the transition to point to the after group
                           transitionFromChild.to = firstNodeToRemoveTransitionToNodeId;
                         } else {

@@ -5,9 +5,14 @@ import { ChooseNewComponent } from '../../../../../app/authoring-tool/add-compon
 import { filter } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Node } from '../../../common/Node';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
   selector: 'add-component-button',
+  standalone: true,
   templateUrl: './add-component-button.component.html'
 })
 export class AddComponentButtonComponent {

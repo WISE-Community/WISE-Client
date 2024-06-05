@@ -55,6 +55,7 @@ import { ApplyTagsButtonComponent } from '../../teacher/apply-tags-button/apply-
 import { SelectTagsComponent } from '../../teacher/select-tags/select-tags.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { SelectedTagsListComponent } from '../../teacher/selected-tags-list/selected-tags-list.component';
+import { SelectMenuComponent } from '../shared/select-menu/select-menu.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -83,6 +84,7 @@ const materialModules = [
     ApplyTagsButtonComponent,
     ArchiveProjectsButtonComponent,
     CommonModule,
+    DiscourseCategoryActivityComponent,
     FlexLayoutModule,
     FormsModule,
     LibraryProjectDisciplinesComponent,
@@ -92,6 +94,7 @@ const materialModules = [
     SearchBarComponent,
     SelectAllItemsCheckboxComponent,
     SelectedTagsListComponent,
+    SelectMenuComponent,
     SelectTagsComponent,
     SharedModule,
     TimelineModule
@@ -111,8 +114,7 @@ const materialModules = [
     PersonalLibraryComponent,
     PersonalLibraryDetailsComponent,
     ShareProjectDialogComponent,
-    CopyProjectDialogComponent,
-    DiscourseCategoryActivityComponent
+    CopyProjectDialogComponent
   ],
   exports: [
     HomePageProjectLibraryComponent,

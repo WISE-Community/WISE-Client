@@ -1,10 +1,24 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Component as WISEComponent } from '../../../common/Component';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { SaveStarterStateComponent } from '../save-starter-state/save-starter-state.component';
+import { PreviewComponentComponent } from '../preview-component/preview-component.component';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  templateUrl: 'preview-component-dialog.component.html',
-  styleUrls: ['preview-component-dialog.component.scss']
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatDividerModule,
+    PreviewComponentComponent,
+    SaveStarterStateComponent
+  ],
+  standalone: true,
+  styleUrl: 'preview-component-dialog.component.scss',
+  templateUrl: 'preview-component-dialog.component.html'
 })
 export class PreviewComponentDialogComponent implements OnInit {
   protected canSaveStarterState: boolean;
@@ -19,7 +33,7 @@ export class PreviewComponentDialogComponent implements OnInit {
     );
   }
 
-  updateStarterState(starterState: any): void {
+  protected updateStarterState(starterState: any): void {
     this.starterState = starterState;
   }
 }
