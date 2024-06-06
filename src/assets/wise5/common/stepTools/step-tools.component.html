@@ -2,8 +2,6 @@
   <button
     id="previousNodeButton"
     mat-icon-button
-    aria-label="Previous Step"
-    i18n-aria-label
     [disabled]="!prevId"
     (click)="goToPrevNode()"
     matTooltip="Previous Step"
@@ -17,8 +15,6 @@
     <mat-select
       id="stepSelectMenu"
       [panelClass]="'select-panel-full-height'"
-      aria-label="Select a Step"
-      i18n-aria-label
       placeholder="Select a Step"
       i18n-placeholder
       [(ngModel)]="nodeId"
@@ -44,8 +40,6 @@
   <button
     id="nextNodeButton"
     mat-icon-button
-    aria-label="Next Step"
-    i18n-aria-label
     [disabled]="!nextId"
     (click)="goToNextNode()"
     matTooltip="Next Step"
