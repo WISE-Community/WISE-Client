@@ -24,7 +24,6 @@ import { copy } from '../../common/object/object';
 import { ProjectAuthoringLessonComponent } from '../project-authoring-lesson/project-authoring-lesson.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
-import { NodeIconComponent } from '../../vle/node-icon/node-icon.component';
 import { ProjectAuthoringStepComponent } from '../project-authoring-step/project-authoring-step.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ProjectAuthoringHarness } from './project-authoring.harness';
@@ -54,7 +53,6 @@ describe('ProjectAuthoringComponent', () => {
       declarations: [
         ConcurrentAuthorsMessageComponent,
         NodeAuthoringComponent,
-        NodeIconAndTitleComponent,
         ProjectAuthoringComponent,
         ProjectAuthoringLessonComponent,
         ProjectAuthoringStepComponent,
@@ -74,7 +72,7 @@ describe('ProjectAuthoringComponent', () => {
         MatInputModule,
         MatMenuModule,
         MatTooltipModule,
-        NodeIconComponent,
+        NodeIconAndTitleComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [
