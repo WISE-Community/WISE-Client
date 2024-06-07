@@ -4,9 +4,6 @@ import { ComponentInfoService } from '../../../services/componentInfoService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
 
 describe('ComponentTypeButtonComponent', () => {
   let component: ComponentTypeButtonComponent;
@@ -14,12 +11,9 @@ describe('ComponentTypeButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ComponentTypeButtonComponent],
       imports: [
+        ComponentTypeButtonComponent,
         HttpClientTestingModule,
-        MatCardModule,
-        MatDialogModule,
-        MatIconModule,
         StudentTeacherCommonServicesModule
       ],
       providers: [ComponentInfoService, ComponentServiceLookupService]
