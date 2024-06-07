@@ -54,16 +54,11 @@ describe('VLEComponent', () => {
         NavigationComponent,
         NodeIconComponent,
         NodeStatusIconComponent,
+        StepToolsComponent,
         StudentTeacherCommonServicesModule,
         TopBarComponent
       ],
-      declarations: [
-        NodeComponent,
-        NotebookNotesComponent,
-        SafeUrl,
-        StepToolsComponent,
-        VLEComponent
-      ],
+      declarations: [NodeComponent, NotebookNotesComponent, SafeUrl, VLEComponent],
       providers: [
         InitializeVLEService,
         PauseScreenService,

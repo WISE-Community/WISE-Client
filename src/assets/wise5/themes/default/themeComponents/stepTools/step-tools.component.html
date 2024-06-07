@@ -12,8 +12,9 @@
       <mat-icon>{{ icons.prev }}</mat-icon>
     </button>
     <div class="node-icon-div">
-      <node-icon [nodeId]="nodeId" size="18" [icon]="nodeStatus.icon"></node-icon>
-    </div>&nbsp;
+      <node-icon [nodeId]="nodeId" size="18" [icon]="nodeStatus.icon"/>
+    </div>
+    &nbsp;
     <mat-form-field appearance="fill">
       <mat-select
         [panelClass]="'select-panel-full-height'"
@@ -28,26 +29,27 @@
         <mat-select-trigger>
           {{ getNodePositionAndTitle(nodeId) }}
         </mat-select-trigger>
-        <ng-container *ngFor="let nodeId of nodeIds">
-          <mat-option *ngIf="nodeStatuses[nodeId].isVisible" [value]="nodeId">
-            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-              <node-icon
-                [nodeId]="nodeId"
-                size="18"
-                [icon]="nodeStatuses[nodeId].icon"
-                custom-class="node-select__icon"
-              >
-              </node-icon>
-              <span [ngClass]="{ strong: isGroupNode(nodeId) }">{{
-                getNodePositionAndTitle(nodeId)
-              }}</span>
-            </div>
-          </mat-option>
-        </ng-container>
+        @for (nodeId of nodeIds; track nodeId) {
+          @if (nodeStatuses[nodeId].isVisible) {
+            <mat-option [value]="nodeId">
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                <node-icon
+                  [nodeId]="nodeId"
+                  size="18"
+                  [icon]="nodeStatuses[nodeId].icon"
+                  custom-class="node-select__icon"
+                />
+                <span [ngClass]="{ strong: isGroupNode(nodeId) }">{{
+                  getNodePositionAndTitle(nodeId)
+                }}</span>
+              </div>
+            </mat-option>
+          }
+        }
       </mat-select>
     </mat-form-field>
     <div class="node-status-div">
-      <node-status-icon [nodeId]="nodeId"></node-status-icon>
+      <node-status-icon [nodeId]="nodeId"/>
     </div>
     <button
       mat-icon-button
