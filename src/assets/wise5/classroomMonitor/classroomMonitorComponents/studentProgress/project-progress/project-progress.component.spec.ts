@@ -1,8 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ProjectProgressComponent } from './project-progress.component';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 describe('ProjectProgressComponent', () => {
   let component: ProjectProgressComponent;
@@ -10,8 +7,7 @@ describe('ProjectProgressComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ProjectProgressComponent],
-      imports: [MatProgressBarModule, MatTooltipModule]
+      imports: [ProjectProgressComponent]
     }).compileComponents();
   });
 
