@@ -61,13 +61,11 @@
       mat-raised-button
       color="primary"
       (click)="import(getSelectedNodesToImport())"
-      [disabled]="getSelectedNodesToImport().length == 0"
-      matTooltip="Submit"
-      i18n-matTooltip
-      matTooltipPosition="above"
-      i18n
+      [disabled]="getSelectedNodesToImport().length == 0 || submitting"
+      class="button--progress"
     >
-      Submit
+      <mat-progress-bar *ngIf="submitting" mode="indeterminate"/>
+      <ng-container i18n>Submit</ng-container>
     </button>
   </div>
 </div>
