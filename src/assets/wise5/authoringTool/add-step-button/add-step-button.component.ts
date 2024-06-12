@@ -15,6 +15,9 @@ import { AddStepTarget } from '../../../../app/domain/addStepTarget';
   imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule]
 })
 export class AddStepButtonComponent {
+  protected branchMergePoint: boolean;
+  protected branchPathStep: boolean;
+  protected branchPoint: boolean;
   @Input() nodeId: string;
 
   constructor(
@@ -22,6 +25,12 @@ export class AddStepButtonComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.branchPoint = this.projectService.isBranchPoint(this.nodeId);
+    this.branchPathStep = this.projectService.isNodeInAnyBranchPath(this.nodeId);
+    this.branchMergePoint = this.projectService.isBranchMergePoint(this.nodeId);
+  }
 
   protected addStepBefore(): void {
     const previousNodes = this.projectService.getNodesByToNodeId(this.nodeId);
