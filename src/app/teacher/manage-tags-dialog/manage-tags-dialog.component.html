@@ -1,55 +1,54 @@
 <h2 mat-dialog-title i18n>Manage Tags</h2>
 <mat-dialog-content class="dialog-content-scroll">
   <div fxLayout="column" fxLayoutGap="12px">
-    <div>
-      <button mat-raised-button color="primary" (click)="showCreateTag = !showCreateTag" i18n>
+    <div *ngIf="!showCreateTag">
+      <button mat-flat-button color="primary" (click)="showCreateTag = !showCreateTag" i18n>
         + New Tag
       </button>
     </div>
-    <div *ngIf="showCreateTag">
-      <hr />
-      <edit-tag (closeEvent)="showCreateTag = false"/>
-      <hr />
-    </div>
-    <div
-      *ngFor="let tag of tags; let tagIndex = index; let first = first"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      fxLayoutGap="12px"
-    >
-      <div *ngIf="idToEditing[tag.id]" class="edit-tag-div">
-        <hr *ngIf="(first && !showCreateTag) || (!first && !idToEditing[tags[tagIndex - 1].id])" />
-        <edit-tag [tag]="tag" (closeEvent)="cancelEditing(tag)"/>
-        <hr />
+    <edit-tag *ngIf="showCreateTag" (closeEvent)="showCreateTag = false" />
+    <mat-list class="app-bg-bg">
+      <div *ngFor="let tag of tags; let tagIndex = index; let last = last">
+        <mat-list-item>
+          <div
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            fxLayoutGap="8px"
+          >
+            <div *ngIf="idToEditing[tag.id]" class="edit-tag">
+              <edit-tag [tag]="tag" (closeEvent)="cancelEditing(tag)" />
+            </div>
+            <ng-container *ngIf="!idToEditing[tag.id]">
+              <tag class="mat-small" [color]="tag.color" [text]="tag.text"></tag>
+              <span fxFlex></span>
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="idToEditing[tag.id] = !idToEditing[tag.id]; showCreateTag = false;"
+                matTooltip="Edit"
+                matTooltipPosition="above"
+                i18n-matTooltip
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="delete(tag)"
+                matTooltip="Delete"
+                matTooltipPosition="above"
+                i18n-matTooltip
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </ng-container>
+          </div>
+        </mat-list-item>
+        <mat-divider *ngIf="!last"/>
       </div>
-      <ng-container *ngIf="!idToEditing[tag.id]">
-        <div class="tag-name" [ngStyle]="{ 'background-color': tag.color }" fxFlex>
-          {{ tag.text }}
-        </div>
-        <button
-          mat-icon-button
-          color="primary"
-          (click)="idToEditing[tag.id] = !idToEditing[tag.id]"
-          matTooltip="Edit"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          color="primary"
-          (click)="delete(tag)"
-          matTooltip="Delete"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>close</mat-icon>
-        </button>
-      </ng-container>
-    </div>
+    </mat-list>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions fxLayoutAlign="end">
   <button mat-button cdkFocusInitial mat-dialog-close i18n>Close</button>
 </mat-dialog-actions>

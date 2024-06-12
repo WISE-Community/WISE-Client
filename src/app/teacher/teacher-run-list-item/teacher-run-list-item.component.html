@@ -47,15 +47,8 @@
   <div *ngIf="run.shared" class="info" i18n>
     Shared by {{ run.owner.firstName }} {{ run.owner.lastName }}
   </div>
-  <mat-chip-set aria-label="Unit tags" i18n-aria-label>
-    <ng-container *ngFor="let tag of run.project.tags">
-      <mat-chip *ngIf="tag.text !== 'archived'" [ngStyle]="{ 'background-color': tag.color }">
-        {{ tag.text }}
-      </mat-chip>
-    </ng-container>
-  </mat-chip-set>
+  <unit-tags [tags]="run.project.tags"></unit-tags>
 </ng-template>
-
 <mat-card
   class="can-highlight"
   [ngClass]="{ 'highlighted-bg': run.highlighted }"

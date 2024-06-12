@@ -56,6 +56,7 @@ import { SelectTagsComponent } from '../../teacher/select-tags/select-tags.compo
 import { MatChipsModule } from '@angular/material/chips';
 import { SelectedTagsListComponent } from '../../teacher/selected-tags-list/selected-tags-list.component';
 import { SelectMenuComponent } from '../shared/select-menu/select-menu.component';
+import { UnitTagsComponent } from '../../teacher/unit-tags/unit-tags.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -97,7 +98,8 @@ const materialModules = [
     SelectMenuComponent,
     SelectTagsComponent,
     SharedModule,
-    TimelineModule
+    TimelineModule,
+    UnitTagsComponent
   ],
   declarations: [
     LibraryGroupThumbsComponent,
@@ -120,6 +122,7 @@ const materialModules = [
     HomePageProjectLibraryComponent,
     ReactiveFormsModule,
     TeacherProjectLibraryComponent,
+    UnitTagsComponent,
     materialModules
   ],
   providers: [LibraryService, { provide: MatPaginatorIntl, useClass: LibraryPaginatorIntl }]

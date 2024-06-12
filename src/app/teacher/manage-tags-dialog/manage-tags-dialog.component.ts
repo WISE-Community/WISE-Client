@@ -15,6 +15,9 @@ import { TeacherService } from '../teacher.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { EditTagComponent } from '../edit-tag/edit-tag.component';
 import { Project } from '../../domain/project';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { TagComponent } from '../tag/tag.component';
 
 @Component({
   imports: [
@@ -24,10 +27,13 @@ import { Project } from '../../domain/project';
     FormsModule,
     MatButtonModule,
     MatDialogModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatTooltipModule
+    MatListModule,
+    MatTooltipModule,
+    TagComponent
   ],
   selector: 'manage-tags-dialog',
   standalone: true,

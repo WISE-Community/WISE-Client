@@ -1,20 +1,9 @@
 @import 'style/abstracts/variables';
 
 .tag-preview {
-  border-radius: $button-border-radius;
-  height: 22px;
-  padding: 8px 12px;
-  margin-bottom: 16px;
-}
-
-.tag-inputs-div {
-  width: 100%;
-}
-
-.name-input {
-  width: 80%;
+  margin-bottom: 12px;
 }
 
 .color-input {
-  width: 15%;
+  width: 120px;
 }

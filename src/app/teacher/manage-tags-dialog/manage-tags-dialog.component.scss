@@ -1,13 +1,31 @@
-.edit-tag-div {
+@import 'style/abstracts/variables';
+
+.edit-tag {
   width: 100%;
+  padding: 16px 0;
 }
 
 .tag-name {
-  border: 1px solid lightgrey;
-  border-radius: 5px;
+  border-radius: $card-border-radius;
   padding: 12px;
 }
 
 .mat-icon {
   margin: 0px;
+}
+
+.mdc-list {
+  padding: 0;
+}
+
+.mdc-list-item {
+  padding: 0 12px;
+}
+
+.mat-divider {
+  margin: 0;
+}
+
+.mdc-list-item.mdc-list-item--with-one-line {
+  height: auto;
 }

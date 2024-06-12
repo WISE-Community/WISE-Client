@@ -47,6 +47,8 @@ import { ApplyTagsButtonComponent } from './apply-tags-button/apply-tags-button.
 import { ProjectTagService } from '../../assets/wise5/services/projectTagService';
 import { SelectTagsComponent } from './select-tags/select-tags.component';
 import { SelectedTagsListComponent } from './selected-tags-list/selected-tags-list.component';
+import { UnitTagsComponent } from './unit-tags/unit-tags.component';
+import { ColorService } from '../../assets/wise5/services/colorService';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -85,7 +87,8 @@ const materialModules = [
     SharedModule,
     TeacherRoutingModule,
     TimelineModule,
-    ClipboardModule
+    ClipboardModule,
+    UnitTagsComponent
   ],
   declarations: [
     CreateRunDialogComponent,
@@ -102,7 +105,7 @@ const materialModules = [
     TeacherRunListComponent,
     TeacherRunListItemComponent
   ],
-  providers: [AuthGuard, ProjectTagService],
-  exports: [TeacherComponent, materialModules]
+  providers: [AuthGuard, ColorService, ProjectTagService],
+  exports: [TeacherComponent, UnitTagsComponent, materialModules]
 })
 export class TeacherModule {}

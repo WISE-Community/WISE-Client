@@ -17,6 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ColorChooserComponent } from '../color-chooser/color-chooser.component';
+import { TagComponent } from '../tag/tag.component';
 
 @Component({
   imports: [
@@ -27,7 +28,8 @@ import { ColorChooserComponent } from '../color-chooser/color-chooser.component'
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TagComponent
   ],
   selector: 'edit-tag',
   standalone: true,
@@ -41,7 +43,7 @@ export class EditTagComponent {
   @Input() tag: Tag;
   private tags: Tag[] = [];
 
-  protected colorControl = new FormControl('');
+  protected colorControl = new FormControl('', [Validators.required]);
   protected nameControl = new FormControl('', [
     Validators.required,
     this.createArchivedTagValidator(),
