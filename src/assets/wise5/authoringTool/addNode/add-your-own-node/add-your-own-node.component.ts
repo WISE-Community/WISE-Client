@@ -16,6 +16,7 @@ export class AddYourOwnNode {
   });
   protected componentTypes: any[];
   protected initialComponents: string[] = [];
+  protected submitting: boolean;
   protected targetId: string;
 
   constructor(
@@ -44,6 +45,7 @@ export class AddYourOwnNode {
   }
 
   protected submit(): void {
+    this.submitting = true;
     const newNode = this.projectService.createNode(this.addNodeFormGroup.controls['title'].value);
     if (this.isGroupNode(this.targetId)) {
       this.projectService.createNodeInside(newNode, this.targetId);
