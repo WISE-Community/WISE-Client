@@ -35,7 +35,6 @@ import { ProjectListComponent } from '../../assets/wise5/authoringTool/project-l
 import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-project/add-project.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { AuthoringToolBarComponent } from '../../assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component';
-import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponents/stepTools/step-tools.module';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
 import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authoring-tool.component';
 import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component';
@@ -59,6 +58,7 @@ import { ProjectAuthoringStepComponent } from '../../assets/wise5/authoringTool/
 import { AddLessonButtonComponent } from '../../assets/wise5/authoringTool/add-lesson-button/add-lesson-button.component';
 import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-step-button/add-step-button.component';
 import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringTool/components/preview-component-button/preview-component-button.component';
+import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-tools.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +121,7 @@ import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringToo
     ProjectAssetAuthoringModule,
     RouterModule,
     SaveIndicatorComponent,
-    StepToolsModule,
+    StepToolsComponent,
     StructureAuthoringModule,
     WiseTinymceEditorModule
   ]

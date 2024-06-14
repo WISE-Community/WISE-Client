@@ -52,9 +52,9 @@ describe('StepTools', () => {
         MatIconModule,
         MatSelectModule,
         NoopAnimationsModule,
+        StepToolsComponent,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [StepToolsComponent],
       providers: [
         ClassroomStatusService,
         { provide: NodeService, useClass: MockNodeService },
