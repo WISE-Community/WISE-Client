@@ -5,7 +5,7 @@
     </button>
     <span *ngIf="!showStepTools" class="toolbar__title">{{ viewName }}</span>
     @if (showStepTools) {
-      <step-tools *ngIf="showStepTools" />
+      <step-tools />
     }
     <div fxFlex></div>
     <span *ngIf="isJSONValid" class="success" fxLayoutAlign="start center">
