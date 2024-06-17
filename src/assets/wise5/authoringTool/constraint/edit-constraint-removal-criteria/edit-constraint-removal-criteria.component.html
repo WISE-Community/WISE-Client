@@ -23,7 +23,9 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <required-error-label *ngIf="criteria.name === ''"> </required-error-label>
+  @if (criteria.name === '') {
+    <required-error-label />
+  }
 </div>
 <div *ngFor="let param of getParamsByName(criteria.name)">
   <div
@@ -45,7 +47,9 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <required-error-label *ngIf="criteria.params.nodeId === ''"> </required-error-label>
+    @if (criteria.params.nodeId === '') {
+      <required-error-label />
+    }
   </div>
   <div
     *ngIf="param.value === 'componentId'"
@@ -70,7 +74,9 @@
         </ng-container>
       </mat-select>
     </mat-form-field>
-    <required-error-label *ngIf="criteria.params.componentId === ''"> </required-error-label>
+    @if (criteria.params.componentId === '') {
+      <required-error-label />
+    }
   </div>
   <div
     *ngIf="param.value === 'fromNodeId'"
@@ -89,10 +95,9 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <required-error-label
-      *ngIf="criteria.params.fromNodeId == null || criteria.params.fromNodeId === ''"
-    >
-    </required-error-label>
+    @if (criteria.params.fromNodeId == null || criteria.params.fromNodeId === '') {
+      <required-error-label />
+    }
   </div>
   <div
     *ngIf="param.value === 'toNodeId'"
@@ -111,10 +116,9 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <required-error-label
-      *ngIf="criteria.params.toNodeId == null || criteria.params.toNodeId === ''"
-    >
-    </required-error-label>
+    @if (criteria.params.toNodeId == null || criteria.params.toNodeId === '') {
+      <required-error-label />
+    }
   </div>
   <div
     *ngIf="param.value === 'scores'"
@@ -130,13 +134,12 @@
         (ngModelChange)="scoresChanged($event, criteria.params)"
       />
     </mat-form-field>
-    <required-error-label
-      *ngIf="
-        criteria.params.scores.length === 0 ||
-        (criteria.params.scores.length === 1 && criteria.params.scores[0] === '')
-      "
-    >
-    </required-error-label>
+    @if (
+      criteria.params.scores.length === 0 ||
+      (criteria.params.scores.length === 1 && criteria.params.scores[0] === '')
+    ) {
+      <required-error-label />
+    }
   </div>
   <div
     *ngIf="param.value === 'requiredSubmitCount'"
@@ -154,12 +157,11 @@
         (ngModelChange)="saveProject()"
       />
     </mat-form-field>
-    <required-error-label
-      *ngIf="
-        criteria.params.requiredSubmitCount == null || criteria.params.requiredSubmitCount === ''
-      "
-    >
-    </required-error-label>
+    @if (
+      criteria.params.requiredSubmitCount == null || criteria.params.requiredSubmitCount === ''
+    ) {
+      <required-error-label />
+    }
   </div>
   <div
     *ngIf="
@@ -186,7 +188,9 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <required-error-label *ngIf="criteria.params.choiceIds === ''"> </required-error-label>
+    @if (criteria.params.choiceIds === '') {
+      <required-error-label />
+    }
   </div>
   <div
     *ngIf="
@@ -211,7 +215,9 @@
         >
       </mat-select>
     </mat-form-field>
-    <required-error-label *ngIf="criteria.params.choiceIds.length === 0"> </required-error-label>
+    @if (criteria.params.choiceIds.length === 0) {
+      <required-error-label />
+    }
   </div>
   <div
     *ngIf="param.value === 'requiredNumberOfWords'"
@@ -228,13 +234,11 @@
         (ngModelChange)="saveProject()"
       />
     </mat-form-field>
-    <required-error-label
-      *ngIf="
-        criteria.params.requiredNumberOfWords == null ||
-        criteria.params.requiredNumberOfWords === ''
-      "
-    >
-    </required-error-label>
+    @if (
+      criteria.params.requiredNumberOfWords == null || criteria.params.requiredNumberOfWords === ''
+    ) {
+      <required-error-label />
+    }
   </div>
   <div
     *ngIf="param.value === 'requiredNumberOfNotes'"
@@ -251,13 +255,11 @@
         (ngModelChange)="saveProject()"
       />
     </mat-form-field>
-    <required-error-label
-      *ngIf="
-        criteria.params.requiredNumberOfNotes == null ||
-        criteria.params.requiredNumberOfNotes === ''
-      "
-    >
-    </required-error-label>
+    @if (
+      criteria.params.requiredNumberOfNotes == null || criteria.params.requiredNumberOfNotes === ''
+    ) {
+      <required-error-label />
+    }
   </div>
   <div
     *ngIf="param.value === 'requiredNumberOfFilledRows'"
@@ -274,13 +276,12 @@
         (ngModelChange)="saveProject()"
       />
     </mat-form-field>
-    <required-error-label
-      *ngIf="
-        criteria.params.requiredNumberOfFilledRows == null ||
-        criteria.params.requiredNumberOfFilledRows === ''
-      "
-    >
-    </required-error-label>
+    @if (
+      criteria.params.requiredNumberOfFilledRows == null ||
+      criteria.params.requiredNumberOfFilledRows === ''
+    ) {
+      <required-error-label />
+    }
   </div>
   <mat-checkbox
     *ngIf="param.value === 'tableHasHeaderRow'"

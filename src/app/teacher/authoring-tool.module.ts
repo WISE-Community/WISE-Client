@@ -4,7 +4,6 @@ import { AddYourOwnNode } from '../../assets/wise5/authoringTool/addNode/add-you
 import { ChooseNewNodeTemplate } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
 import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
 import { CardSelectorComponent } from '../../assets/wise5/authoringTool/components/card-selector/card-selector.component';
-import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component';
 import { RubricAuthoringComponent } from '../../assets/wise5/authoringTool/rubric/rubric-authoring.component';
 import { NodeIconChooserDialog } from '../../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
 import { ChooseNewComponent } from '../authoring-tool/add-component/choose-new-component/choose-new-component.component';
@@ -96,7 +95,6 @@ import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringToo
     ProjectAuthoringLessonComponent,
     ProjectAuthoringStepComponent,
     RecoveryAuthoringComponent,
-    RequiredErrorLabelComponent,
     RubricAuthoringComponent,
     TeacherNodeIconComponent,
     TopBarComponent,
