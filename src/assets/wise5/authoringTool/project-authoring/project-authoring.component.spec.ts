@@ -18,20 +18,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import * as demoProjectJSON_import from '../../../../app/services/sampleData/curriculum/Demo.project.json';
 import { copy } from '../../common/object/object';
 import { ProjectAuthoringLessonComponent } from '../project-authoring-lesson/project-authoring-lesson.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
-import { NodeIconComponent } from '../../vle/node-icon/node-icon.component';
 import { ProjectAuthoringStepComponent } from '../project-authoring-step/project-authoring-step.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ProjectAuthoringHarness } from './project-authoring.harness';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonHarness } from '@angular/material/button/testing';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, provideRouter } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { ConfigService } from '../../services/configService';
 import { of } from 'rxjs/internal/observable/of';
@@ -55,8 +53,6 @@ describe('ProjectAuthoringComponent', () => {
       declarations: [
         ConcurrentAuthorsMessageComponent,
         NodeAuthoringComponent,
-        NodeIconComponent,
-        NodeIconAndTitleComponent,
         ProjectAuthoringComponent,
         ProjectAuthoringLessonComponent,
         ProjectAuthoringStepComponent,
@@ -76,7 +72,7 @@ describe('ProjectAuthoringComponent', () => {
         MatInputModule,
         MatMenuModule,
         MatTooltipModule,
-        RouterTestingModule,
+        NodeIconAndTitleComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [
@@ -84,6 +80,7 @@ describe('ProjectAuthoringComponent', () => {
         CopyNodesService,
         DeleteNodeService,
         MoveNodesService,
+        provideRouter([]),
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService

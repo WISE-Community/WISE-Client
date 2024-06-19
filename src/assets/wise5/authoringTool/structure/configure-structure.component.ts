@@ -12,6 +12,7 @@ export abstract class ConfigureStructureComponent {
   protected target: string;
   private structure: any = {};
   private structureDir: string = 'assets/wise5/authoringTool/structure';
+  protected submitting: boolean;
 
   constructor(
     private http: HttpClient,
@@ -58,6 +59,7 @@ export abstract class ConfigureStructureComponent {
   }
 
   protected submit(): void {
+    this.submitting = true;
     this.structure = this.injectUniqueIds(this.structure);
     this.addNodesToProject(this.structure.nodes);
     const target = history.state.target;

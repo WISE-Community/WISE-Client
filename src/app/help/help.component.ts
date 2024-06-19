@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
+  imports: [RouterModule],
   selector: 'app-help',
-  templateUrl: './help.component.html',
-  styleUrls: ['./help.component.scss']
+  standalone: true,
+  styleUrl: './help.component.scss',
+  templateUrl: './help.component.html'
 })
-export class HelpComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class HelpComponent {}

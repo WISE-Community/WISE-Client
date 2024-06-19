@@ -1644,7 +1644,7 @@ export class TeacherProjectService extends ProjectService {
               }
 
               // remove the transition to the node we are removing
-              transitions.splice(t, 1);
+              const transitionRemoved = transitions.splice(t, 1)[0];
 
               if (transitionsCopy != null) {
                 let insertIndex = t;
@@ -1685,6 +1685,9 @@ export class TeacherProjectService extends ProjectService {
                     ) {
                       this.addToTransition(node, this.getGroupStartId(toNodeId));
                     } else {
+                      if (transitionRemoved.criteria != null) {
+                        transitionCopy.criteria = transitionRemoved.criteria;
+                      }
                       transitions.splice(insertIndex, 0, transitionCopy);
                       insertIndex++;
                     }
@@ -2697,7 +2700,7 @@ export class TeacherProjectService extends ProjectService {
                       if (groupIdWeAreMoving === toNodeIdParentGroupId) {
                         // the transition is to a child in the group we are moving
 
-                        if (groupNode.startId == null) {
+                        if (groupNode.startId == null || groupNode.startId === '') {
                           // change the transition to point to the after group
                           transitionFromChild.to = firstNodeToRemoveTransitionToNodeId;
                         } else {

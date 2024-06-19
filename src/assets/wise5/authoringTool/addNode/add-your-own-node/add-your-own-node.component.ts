@@ -18,6 +18,7 @@ export class AddYourOwnNode {
   });
   protected componentTypes: any[];
   protected initialComponents: string[] = [];
+  protected submitting: boolean;
   protected target: AddStepTarget;
 
   constructor(
@@ -47,6 +48,7 @@ export class AddYourOwnNode {
   }
 
   protected submit(): void {
+    this.submitting = true;
     const newNode = this.projectService.createNode(this.addNodeFormGroup.controls['title'].value);
     switch (this.target.type) {
       case 'in':

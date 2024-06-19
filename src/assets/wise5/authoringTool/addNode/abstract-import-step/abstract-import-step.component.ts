@@ -10,6 +10,7 @@ import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
 @Directive()
 export abstract class AbstractImportStepComponent implements OnInit {
   protected importProjectId: number;
+  protected submitting: boolean;
   protected target: AddStepTarget;
 
   constructor(
@@ -28,6 +29,7 @@ export abstract class AbstractImportStepComponent implements OnInit {
   }
 
   protected import(nodesToImport: any[]): void {
+    this.submitting = true;
     this.copyNodesService
       .copyNodes(nodesToImport, this.importProjectId, this.configService.getProjectId())
       .subscribe((copiedNodes: any[]) => {

@@ -1,19 +1,18 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { LibraryProjectDisciplinesComponent } from './library-project-disciplines.component';
 import { LibraryProject } from '../libraryProject';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('LibraryProjectDisciplinesComponent', () => {
   let component: LibraryProjectDisciplinesComponent;
   let fixture: ComponentFixture<LibraryProjectDisciplinesComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [LibraryProjectDisciplinesComponent],
-      imports: [],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [LibraryProjectDisciplinesComponent]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LibraryProjectDisciplinesComponent);

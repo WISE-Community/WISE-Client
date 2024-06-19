@@ -15,6 +15,7 @@ import { components } from '../../../components/Components';
 
 @Component({
   selector: 'preview-component',
+  standalone: true,
   template: '<div class="component__wrapper"><div #component></div></div>'
 })
 export class PreviewComponentComponent {
@@ -36,7 +37,11 @@ export class PreviewComponentComponent {
     }
   }
 
-  renderComponent(): void {
+  ngOnDestroy(): void {
+    this.componentRef.destroy();
+  }
+
+  private renderComponent(): void {
     this.componentRef = createComponent(components[this.component.content.type].student, {
       hostElement: this.componentElementRef.nativeElement,
       environmentInjector: this.injector
@@ -48,9 +53,5 @@ export class PreviewComponentComponent {
       starterStateChangedEvent: this.starterStateChangedEvent
     });
     this.applicationRef.attachView(this.componentRef.hostView);
-  }
-
-  ngOnDestroy(): void {
-    this.componentRef.destroy();
   }
 }

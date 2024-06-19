@@ -42,6 +42,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SelectRunsControlsModule } from './select-runs-controls/select-runs-controls.module';
+import { SearchBarComponent } from '../modules/shared/search-bar/search-bar.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -67,10 +68,12 @@ const materialModules = [
 @NgModule({
   imports: [
     CommonModule,
+    DiscourseRecentActivityComponent,
     FlexLayoutModule,
     FormsModule,
     LibraryModule,
     materialModules,
+    SearchBarComponent,
     SharedModule,
     SelectRunsControlsModule,
     TeacherRoutingModule,
@@ -79,7 +82,6 @@ const materialModules = [
   ],
   declarations: [
     CreateRunDialogComponent,
-    DiscourseRecentActivityComponent,
     EditComponent,
     EditRunWarningDialogComponent,
     ListClassroomCoursesDialogComponent,

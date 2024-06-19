@@ -1,74 +1,58 @@
-'use strict';
-
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
-import { Subscription } from 'rxjs';
 import { WiseLinkService } from '../../../../app/services/wiseLinkService';
 import { ConfigService } from '../../services/configService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../../vle/vleProjectService';
+import { CommonModule } from '@angular/common';
+import { SaveTimeMessageComponent } from '../../common/save-time-message/save-time-message.component';
+import { MatCardModule } from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
+  imports: [CommonModule, FlexLayoutModule, MatCardModule, MatIconModule, SaveTimeMessageComponent],
   selector: 'component-annotations',
-  styleUrls: ['component-annotations.component.scss'],
+  standalone: true,
+  styleUrl: 'component-annotations.component.scss',
   templateUrl: 'component-annotations.component.html'
 })
 export class ComponentAnnotationsComponent {
-  @Input()
-  annotations: any;
-
-  @Input()
-  maxScore: string;
-
-  @Input()
-  nodeId: string;
-
-  @Input()
-  componentId: string;
-
-  comment: SafeHtml;
-  icon: string = 'person';
-  isNew: boolean;
-  label: string;
-  latestAnnotationTime: any = null;
-  maxScoreDisplay: string;
-  showComment: boolean = true;
-  showScore: boolean = true;
-  studentWorkSavedToServerSubscription: Subscription;
+  @Input() annotations: any;
+  protected comment: SafeHtml;
+  @Input() componentId: string;
+  protected icon: string = 'person';
+  protected label: string;
+  protected latestAnnotationTime: any = null;
+  @Input() maxScore: string;
+  protected maxScoreDisplay: string;
+  @Input() nodeId: string;
+  protected showComment: boolean = true;
+  protected showScore: boolean = true;
 
   constructor(
     private configService: ConfigService,
+    private dataService: StudentDataService,
     private projectService: VLEProjectService,
-    private studentDataService: StudentDataService,
     private wiseLinkService: WiseLinkService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.maxScoreDisplay = parseInt(this.maxScore) > 0 ? '/' + this.maxScore : '';
-    this.studentWorkSavedToServerSubscription = this.studentDataService.studentWorkSavedToServer$.subscribe(
-      (componentState) => {
-        if (
-          componentState.nodeId === this.nodeId &&
-          componentState.componentId === this.componentId
-        ) {
-          this.isNew = false;
-        }
-      }
-    );
     this.processAnnotations();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.processAnnotations();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (!changes.annotations.isFirstChange()) {
       this.processAnnotations();
     }
   }
 
-  processAnnotations(): void {
+  private processAnnotations(): void {
     if (this.annotations.comment || this.annotations.score) {
       this.nodeId = this.getNodeId(this.annotations);
       this.componentId = this.getComponentId(this.annotations);
@@ -82,45 +66,45 @@ export class ComponentAnnotationsComponent {
     this.latestAnnotationTime = this.getLatestAnnotationTime();
   }
 
-  getNodeId(annotations: any): string {
+  private getNodeId(annotations: any): string {
     return this.hasCommentAnnotation(annotations)
       ? annotations.comment.nodeId
       : annotations.score.nodeId;
   }
 
-  getComponentId(annotations: any): string {
+  private getComponentId(annotations: any): string {
     return this.hasCommentAnnotation(annotations)
       ? annotations.comment.componentId
       : annotations.score.componentId;
   }
 
-  isShowScore(annotations: any): boolean {
+  private isShowScore(annotations: any): boolean {
     return (
       this.hasScoreAnnotation(annotations) &&
       this.projectService.displayAnnotation(annotations.score)
     );
   }
 
-  isShowComment(annotations: any): boolean {
+  private isShowComment(annotations: any): boolean {
     return (
       this.hasCommentAnnotation(annotations) &&
       this.projectService.displayAnnotation(this.annotations.comment)
     );
   }
 
-  hasCommentAnnotation(annotations: any): boolean {
+  private hasCommentAnnotation(annotations: any): boolean {
     return annotations.comment != null;
   }
 
-  hasScoreAnnotation(annotations: any): boolean {
+  private hasScoreAnnotation(annotations: any): boolean {
     return annotations.score != null;
   }
 
-  getCommentHtml(commentAnnotation: any): SafeHtml {
+  private getCommentHtml(commentAnnotation: any): SafeHtml {
     return this.wiseLinkService.generateHtmlWithWiseLink(commentAnnotation.data.value);
   }
 
-  getLatestAnnotation() {
+  private getLatestAnnotation(): any {
     let latest = null;
     if (this.annotations.comment || this.annotations.score) {
       const commentSaveTime = this.getSaveTime(this.annotations.comment);
@@ -134,7 +118,7 @@ export class ComponentAnnotationsComponent {
     return latest;
   }
 
-  getSaveTime(annotation: any): number {
+  private getSaveTime(annotation: any): number {
     let saveTime = null;
     if (annotation != null) {
       if (annotation.serverSaveTime != null) {
@@ -147,7 +131,7 @@ export class ComponentAnnotationsComponent {
     return saveTime;
   }
 
-  getLatestAnnotationTime() {
+  private getLatestAnnotationTime(): any {
     const latest = this.getLatestAnnotation();
     if (latest) {
       return this.configService.convertToClientTimestamp(this.getSaveTime(latest));
@@ -155,8 +139,8 @@ export class ComponentAnnotationsComponent {
     return null;
   }
 
-  getLatestVisitTime() {
-    let nodeEvents = this.studentDataService.getEventsByNodeId(this.nodeId);
+  private getLatestVisitTime(): any {
+    let nodeEvents = this.dataService.getEventsByNodeId(this.nodeId);
     let n = nodeEvents.length - 1;
     let visitTime = null;
     for (let i = n; i > 0; i--) {
@@ -169,8 +153,8 @@ export class ComponentAnnotationsComponent {
     return visitTime;
   }
 
-  getLatestSaveTime() {
-    const latestState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+  private getLatestSaveTime(): any {
+    const latestState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
       this.nodeId,
       this.componentId
     );
@@ -181,7 +165,7 @@ export class ComponentAnnotationsComponent {
     return saveTime;
   }
 
-  isNewAnnotation() {
+  protected isNewAnnotation(): boolean {
     let latestVisitTime = this.getLatestVisitTime();
     let latestSaveTime = this.getLatestSaveTime();
     let latestAnnotationTime = this.getLatestAnnotationTime();
@@ -195,7 +179,7 @@ export class ComponentAnnotationsComponent {
     return isNew;
   }
 
-  setLabelAndIcon() {
+  private setLabelAndIcon(): void {
     const latest = this.getLatestAnnotation();
     if (latest) {
       if (latest.type === 'autoComment' || latest.type === 'autoScore') {

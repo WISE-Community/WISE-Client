@@ -86,6 +86,7 @@ import { WiseLinkAuthoringDialogComponent } from '../../assets/wise5/authoringTo
 import { EditComponentAdvancedButtonComponent } from '../../assets/wise5/authoringTool/components/edit-component-advanced-button/edit-component-advanced-button.component';
 import { AiChatAuthoringComponent } from '../../assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component';
 import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component';
+import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,6 @@ import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiCha
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
-    EditComponentAdvancedButtonComponent,
     EditComponentAdvancedComponent,
     EditComponentAddToNotebookButtonComponent,
     EditComponentConstraintsComponent,
@@ -174,8 +174,10 @@ import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiCha
   ],
   imports: [
     ConstraintAuthoringModule,
+    EditComponentAdvancedButtonComponent,
     SelectStepAndComponentComponent,
     StudentTeacherCommonModule,
+    RequiredErrorLabelComponent,
     PeerGroupingAuthoringModule,
     WiseTinymceEditorModule
   ],

@@ -7,8 +7,7 @@ import { PreviewComponentComponent } from '../../../assets/wise5/authoringTool/c
 import { ClassroomMonitorTestingModule } from '../../../assets/wise5/classroomMonitor/classroom-monitor-testing.module';
 import { NodeInfoComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component';
 import { OpenResponseStudent } from '../../../assets/wise5/components/openResponse/open-response-student/open-response-student.component';
-import { ComponentHeader } from '../../../assets/wise5/directives/component-header/component-header.component';
-import { PromptComponent } from '../../../assets/wise5/directives/prompt/prompt.component';
+import { ComponentHeaderComponent } from '../../../assets/wise5/directives/component-header/component-header.component';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { TeacherDataService } from '../../../assets/wise5/services/teacherDataService';
@@ -40,24 +39,19 @@ const node: any = {
   title: stepTitle
 };
 
-describe('ShowNodeInfoDialogComponent', () => {
+describe('ShowNodeInfoDialogComponents', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ComponentHeader,
-        NodeInfoComponent,
-        OpenResponseStudent,
-        PreviewComponentComponent,
-        PromptComponent,
-        ShowNodeInfoDialogComponent
-      ],
+      declarations: [NodeInfoComponent, OpenResponseStudent, ShowNodeInfoDialogComponent],
       imports: [
         ClassroomMonitorTestingModule,
+        ComponentHeaderComponent,
         ComponentTypeServiceModule,
         MatCardModule,
         MatDialogModule,
         MatIconModule,
-        MatToolbarModule
+        MatToolbarModule,
+        PreviewComponentComponent
       ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: nodeId1 },

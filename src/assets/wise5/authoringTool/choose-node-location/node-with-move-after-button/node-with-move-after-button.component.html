@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-  <node-icon-and-title [nodeId]="nodeId"></node-icon-and-title>
+  <node-icon-and-title [nodeId]="nodeId" />
   <insert-node-after-button
     [disabled]="disabled"
     (insertEvent)="insertEvent.emit()"

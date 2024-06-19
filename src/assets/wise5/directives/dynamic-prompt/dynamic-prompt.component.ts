@@ -10,39 +10,31 @@ import { ConstraintService } from '../../services/constraintService';
 import { DynamicPromptOpenResponseEvaluator } from './DynamicPromptOpenResponseEvaluator';
 import { DynamicPromptMultipleChoiceEvaluator } from './DynamicPromptMultipleChoiceEvaluator';
 import { PeerGroup } from '../../components/peerChat/PeerGroup';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  imports: [CommonModule],
   selector: 'dynamic-prompt',
-  templateUrl: './dynamic-prompt.component.html',
-  styleUrls: ['./dynamic-prompt.component.scss']
+  standalone: true,
+  styleUrl: './dynamic-prompt.component.scss',
+  templateUrl: './dynamic-prompt.component.html'
 })
 export class DynamicPromptComponent implements OnInit {
-  annotationService: AnnotationService;
   @Input() componentId: string;
-  configService: ConfigService;
-  constraintService: ConstraintService;
-  dataService: StudentDataService;
   @Input() dynamicPrompt: DynamicPrompt;
   @Output() dynamicPromptChanged: EventEmitter<FeedbackRule> = new EventEmitter<FeedbackRule>();
   @Input() nodeId: string;
-  peerGroup: PeerGroup;
-  peerGroupService: PeerGroupService;
-  prompt: string;
+  public peerGroup: PeerGroup;
+  public prompt: string;
 
   constructor(
-    annotationService: AnnotationService,
-    configService: ConfigService,
-    constraintService: ConstraintService,
-    dataService: StudentDataService,
-    peerGroupService: PeerGroupService,
+    public annotationService: AnnotationService,
+    public configService: ConfigService,
+    public constraintService: ConstraintService,
+    public dataService: StudentDataService,
+    public peerGroupService: PeerGroupService,
     private projectService: ProjectService
-  ) {
-    this.annotationService = annotationService;
-    this.configService = configService;
-    this.constraintService = constraintService;
-    this.dataService = dataService;
-    this.peerGroupService = peerGroupService;
-  }
+  ) {}
 
   ngOnInit(): void {
     const referenceComponent = this.projectService.getReferenceComponent(this.dynamicPrompt);

@@ -9,17 +9,16 @@ import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
-import { NodeIconComponent } from '../../vle/node-icon/node-icon.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { ProjectAuthoringStepComponent } from '../project-authoring-step/project-authoring-step.component';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ProjectAuthoringLessonHarness } from './project-authoring-lesson.harness';
 import { DeleteNodeService } from '../../services/deleteNodeService';
-import { RouterTestingModule } from '@angular/router/testing';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { MatMenuModule } from '@angular/material/menu';
 import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
+import { provideRouter } from '@angular/router';
 
 let component: ProjectAuthoringLessonComponent;
 let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
@@ -35,12 +34,7 @@ const node2 = { id: nodeId2, title: 'Step 2' };
 describe('ProjectAuthoringLessonComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [
-        NodeIconComponent,
-        NodeIconAndTitleComponent,
-        ProjectAuthoringLessonComponent,
-        ProjectAuthoringStepComponent
-      ],
+      declarations: [ProjectAuthoringLessonComponent, ProjectAuthoringStepComponent],
       imports: [
         AddStepButtonComponent,
         FormsModule,
@@ -49,13 +43,14 @@ describe('ProjectAuthoringLessonComponent', () => {
         MatDialogModule,
         MatIconModule,
         MatMenuModule,
-        RouterTestingModule,
+        NodeIconAndTitleComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [
         ClassroomStatusService,
         CopyNodesService,
         DeleteNodeService,
+        provideRouter([]),
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService

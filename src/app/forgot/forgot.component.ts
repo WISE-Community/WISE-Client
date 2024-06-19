@@ -1,12 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-forgot',
-  templateUrl: './forgot.component.html',
-  styleUrls: ['./forgot.component.scss']
+  imports: [RouterModule],
+  standalone: true,
+  templateUrl: './forgot.component.html'
 })
-export class ForgotComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class ForgotComponent {}

@@ -22,11 +22,6 @@ const materialModules = [
   MatProgressBarModule
 ];
 
-import { BlurbComponent } from './blurb/blurb.component';
-import { CallToActionComponent } from './call-to-action/call-to-action.component';
-import { HeroSectionComponent } from './hero-section/hero-section.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
-import { SelectMenuComponent } from './select-menu/select-menu.component';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
 import { UnlinkGoogleAccountConfirmComponent } from './unlink-google-account-confirm/unlink-google-account-confirm.component';
 import { UnlinkGoogleAccountPasswordComponent } from './unlink-google-account-password/unlink-google-account-password.component';
@@ -43,27 +38,12 @@ import { PasswordModule } from '../../password/password.module';
     RouterModule,
     materialModules
   ],
-  exports: [
-    materialModules,
-    FlexLayoutModule,
-    BlurbComponent,
-    CallToActionComponent,
-    HeroSectionComponent,
-    SearchBarComponent,
-    SelectMenuComponent,
-    EditPasswordComponent
-  ],
+  exports: [EditPasswordComponent, FlexLayoutModule, materialModules],
   declarations: [
-    BlurbComponent,
-    CallToActionComponent,
-    HeroSectionComponent,
-    SearchBarComponent,
-    SelectMenuComponent,
     EditPasswordComponent,
     UnlinkGoogleAccountConfirmComponent,
     UnlinkGoogleAccountPasswordComponent,
     UnlinkGoogleAccountSuccessComponent
-  ],
-  providers: []
+  ]
 })
 export class SharedModule {}

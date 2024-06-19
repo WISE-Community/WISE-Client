@@ -15,7 +15,6 @@ import { FormsModule } from '@angular/forms';
 import { TeacherNodeIconComponent } from '../../teacher-node-icon/teacher-node-icon.component';
 import { ComponentAuthoringModule } from '../../../../../app/teacher/component-authoring.module';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { PreviewComponentModule } from '../../components/preview-component/preview-component.module';
 import { DebugElement } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -26,6 +25,7 @@ import { EditNodeTitleComponent } from '../edit-node-title/edit-node-title.compo
 import { AddComponentButtonComponent } from '../add-component-button/add-component-button.component';
 import { CopyComponentButtonComponent } from '../copy-component-button/copy-component-button.component';
 import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
+import { PreviewComponentButtonComponent } from '../../components/preview-component-button/preview-component-button.component';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -42,13 +42,13 @@ describe('NodeAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AddComponentButtonComponent,
         CopyComponentButtonComponent,
         EditNodeTitleComponent,
         NodeAuthoringComponent,
         TeacherNodeIconComponent
       ],
       imports: [
+        AddComponentButtonComponent,
         BrowserAnimationsModule,
         ComponentAuthoringModule,
         ComponentTypeServiceModule,
@@ -58,7 +58,7 @@ describe('NodeAuthoringComponent', () => {
         MatCheckboxModule,
         MatIconModule,
         MatInputModule,
-        PreviewComponentModule,
+        PreviewComponentButtonComponent,
         RouterTestingModule,
         StudentTeacherCommonServicesModule
       ],

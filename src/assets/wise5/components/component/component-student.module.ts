@@ -13,7 +13,7 @@ import { DiscussionStudentModule } from '../discussion/discussion-student/discus
 import { DrawStudentModule } from '../draw/draw-student/draw-student-module';
 import { EmbeddedStudentModule } from '../embedded/embedded-student/embedded-student.module';
 import { GraphStudentModule } from '../graph/graph-student/graph-student.module';
-import { HtmlStudentModule } from '../html/html-student/html-student.module';
+import { HtmlStudentComponent } from '../html/html-student/html-student.component';
 import { LabelStudentModule } from '../label/label-student/label-student.module';
 import { MatchStudentModule } from '../match/match-student/match-student.module';
 import { MultipleChoiceStudentModule } from '../multipleChoice/multiple-choice-student/multiple-choice-student.module';
@@ -28,7 +28,7 @@ import { ComponentComponent } from './component.component';
 import { AiChatStudentModule } from '../aiChat/ai-chat-student/ai-chat-student.module';
 
 @NgModule({
-  declarations: [ComponentComponent, PreviewComponentComponent],
+  declarations: [ComponentComponent],
   imports: [
     AiChatStudentModule,
     AnimationStudentModule,
@@ -42,13 +42,14 @@ import { AiChatStudentModule } from '../aiChat/ai-chat-student/ai-chat-student.m
     GraphStudentModule,
     HelpIconModule,
     HighchartsChartModule,
-    HtmlStudentModule,
+    HtmlStudentComponent,
     LabelStudentModule,
     MatchStudentModule,
     MultipleChoiceStudentModule,
     OpenResponseStudentModule,
     OutsideUrlStudentModule,
     PeerChatStudentModule,
+    PreviewComponentComponent,
     ShowGroupWorkStudentModule,
     ShowMyWorkStudentModule,
     StudentAssetsDialogModule,

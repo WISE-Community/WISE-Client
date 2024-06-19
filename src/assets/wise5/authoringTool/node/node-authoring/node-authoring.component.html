@@ -36,7 +36,7 @@
     <add-component-button
       [node]="node"
       (newComponentsEvent)="highlightAndExpandComponents($event)"
-    ></add-component-button>
+    />
     <div *ngIf="isAnyComponentSelected()">
       <button
         mat-icon-button
@@ -151,7 +151,7 @@
               *ngIf="componentsToExpanded[component.id]"
               [componentContent]="component"
               [nodeId]="nodeId"
-            ></edit-component-advanced-button>
+            />
             <preview-component-button
               class="dynamic-component-button"
               [ngClass]="{
@@ -159,7 +159,7 @@
               }"
               [nodeId]="nodeId"
               [componentId]="component.id"
-            ></preview-component-button>
+            />
             <copy-component-button
               class="dynamic-component-button"
               [ngClass]="{
@@ -204,7 +204,7 @@
           [insertAfterComponentId]="component.id"
           [node]="node"
           (newComponentsEvent)="highlightAndExpandComponents($event)"
-        ></add-component-button>
+        />
       </div>
     </div>
   </div>

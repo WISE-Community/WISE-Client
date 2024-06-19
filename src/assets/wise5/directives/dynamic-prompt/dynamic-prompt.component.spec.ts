@@ -25,8 +25,12 @@ const promptScore2: string = 'This is the prompt when you get a score of 2.';
 describe('DynamicPromptComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DynamicPromptComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
+      imports: [
+        DynamicPromptComponent,
+        HttpClientTestingModule,
+        MatDialogModule,
+        StudentTeacherCommonServicesModule
+      ]
     }).compileComponents();
   });
 
