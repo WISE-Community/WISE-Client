@@ -33,10 +33,10 @@ export class AddStepButtonComponent {
   }
 
   protected addStepBefore(): void {
-    const previousNodes = this.projectService.getNodesByToNodeId(this.nodeId);
-    if (previousNodes.length === 0) {
+    if (this.projectService.isFirstStepInLesson(this.nodeId)) {
       this.goToAddStepViewForIn(this.projectService.getParentGroupId(this.nodeId));
     } else {
+      const previousNodes = this.projectService.getNodesByToNodeId(this.nodeId);
       const previousNodeId: string = previousNodes[0].id;
       if (this.projectService.isFirstNodeInBranchPath(this.nodeId)) {
         this.goToAddStepViewForFirstStepInBranchPath(previousNodeId, this.nodeId);
