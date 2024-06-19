@@ -1,9 +1,9 @@
 <h3 i18n>Create Branch Off {{ targetTitle }}</h3>
 <form fxLayout="column" [formGroup]="formGroup">
-  <mat-form-field class="path-count">
-    <mat-label i18n>Number of Branch Paths</mat-label>
-    <input matInput formControlName="pathCount" type="number" min="2" />
-  </mat-form-field>
+  <select-path-count
+    [pathCount]="formGroup.controls['pathCount'].value"
+    (pathCountChangedEvent)="setPathCount($event)"
+  ></select-path-count>
   <mat-form-field *ngIf="formGroup.controls['pathCount'].value > 1" class="select-medium-width">
     <mat-label i18n>How to Choose Among Paths</mat-label>
     <mat-select formControlName="criteria">

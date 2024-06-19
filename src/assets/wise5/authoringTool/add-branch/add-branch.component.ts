@@ -29,12 +29,9 @@ import {
 import { SelectMergeStepComponent } from '../select-merge-step/select-merge-step.component';
 import { CreateBranchService } from '../../services/createBranchService';
 import { CreateBranchParams } from '../../common/CreateBranchParams';
+import { SelectPathCountComponent } from '../select-path-count/select-path-count.component';
 
 @Component({
-  selector: 'add-branch',
-  templateUrl: './add-branch.component.html',
-  styleUrls: ['./add-branch.component.scss'],
-  standalone: true,
   imports: [
     BranchPathAuthoringComponent,
     CommonModule,
@@ -47,8 +44,13 @@ import { CreateBranchParams } from '../../common/CreateBranchParams';
     RouterModule,
     SelectComponentComponent,
     SelectMergeStepComponent,
+    SelectPathCountComponent,
     SelectStepComponent
-  ]
+  ],
+  selector: 'add-branch',
+  standalone: true,
+  styleUrl: './add-branch.component.scss',
+  templateUrl: './add-branch.component.html'
 })
 export class AddBranchComponent {
   protected readonly BRANCH_CRITERIA: BranchCriteria[] = BRANCH_CRITERIA;
@@ -199,6 +201,10 @@ export class AddBranchComponent {
           this.formGroup.controls['componentId'].valid &&
           this.formGroup.controls['pathFormGroup'].valid
       : this.formGroup.controls['criteria'].valid;
+  }
+
+  protected setPathCount(pathCount: number): void {
+    this.formGroup.get('pathCount').setValue(pathCount);
   }
 
   private getPathCount(): number {
