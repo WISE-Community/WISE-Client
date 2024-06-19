@@ -1422,7 +1422,7 @@ export class ProjectService {
    * @param nodeId look for a branch with this end node id
    * @return whether the node is a branch end point
    */
-  private isBranchMergePoint(nodeId: string): boolean {
+  isBranchMergePoint(nodeId: string): boolean {
     return this.getBranches().some((branch) => branch.endPoint === nodeId);
   }
 
