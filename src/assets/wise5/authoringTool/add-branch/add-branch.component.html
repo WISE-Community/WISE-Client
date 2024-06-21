@@ -3,7 +3,7 @@
   <select-path-count
     [pathCount]="formGroup.controls['pathCount'].value"
     (pathCountChangedEvent)="setPathCount($event)"
-  ></select-path-count>
+  />
   <mat-form-field *ngIf="formGroup.controls['pathCount'].value > 1" class="select-medium-width">
     <mat-label i18n>How to Choose Among Paths</mat-label>
     <mat-select formControlName="criteria">
