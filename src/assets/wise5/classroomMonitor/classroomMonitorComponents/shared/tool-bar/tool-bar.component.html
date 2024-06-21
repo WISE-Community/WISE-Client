@@ -12,7 +12,9 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span class="toolbar__title" *ngIf="!(showStepTools || showTeamTools)">{{ viewName }}</span>
-    <step-tools *ngIf="showStepTools" [showOnlyStepsWithWork]="true"></step-tools>
+    @if (showStepTools) {
+      <step-tools [showOnlyStepsWithWork]="true" />
+    }
     <student-grading-tools *ngIf="showTeamTools" [workgroupId]="workgroupId">
     </student-grading-tools>
     <span fxFlex></span>

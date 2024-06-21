@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
+  imports: [FlexLayoutModule, MatIconModule],
   selector: 'required-error-label',
-  templateUrl: './required-error-label.component.html',
-  styleUrls: ['./required-error-label.component.scss']
+  standalone: true,
+  styleUrl: './required-error-label.component.scss',
+  templateUrl: './required-error-label.component.html'
 })
-export class RequiredErrorLabelComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class RequiredErrorLabelComponent {}

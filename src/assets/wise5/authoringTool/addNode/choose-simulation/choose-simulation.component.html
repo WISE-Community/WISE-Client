@@ -51,11 +51,12 @@
     <button
       mat-raised-button
       color="primary"
-      [disabled]="selectedNode == null"
+      [disabled]="selectedNode == null || submitting"
       (click)="import([selectedNode])"
-      i18n
+      class="button--progress"
     >
-      Submit
+      <mat-progress-bar *ngIf="submitting" mode="indeterminate"/>
+      <ng-container i18n>Submit</ng-container>
     </button>
   </div>
 </div>

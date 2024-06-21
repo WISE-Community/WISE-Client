@@ -10,7 +10,9 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <required-error-label *ngIf="constraint.action === ''"> </required-error-label>
+  @if (constraint.action === '') {
+    <required-error-label />
+  }
   <div fxFlex></div>
   <mat-form-field class="removal-conditional-select">
     <mat-label i18n>Removal Conditional</mat-label>
