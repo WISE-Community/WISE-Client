@@ -1,4 +1,16 @@
-.manage-tags-button {
-  width: 100%;
-  justify-content: flex-start;
+.ng-select {
+  padding-bottom: 0;
+
+  &.select-tags.ng-select-multiple .ng-select-container {
+    .ng-value-container {
+      .ng-value {
+        background-color: transparent;
+        padding: 2px 0;
+      }
+    }
+  }
+}
+
+.ng-dropdown-panel.ng-select-bottom {
+  top: 100%;
 }

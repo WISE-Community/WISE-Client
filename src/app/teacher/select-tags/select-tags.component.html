@@ -1,23 +1,29 @@
-<mat-form-field [subscriptSizing]="'dynamic'">
-  <mat-label i18n>Filter by tag</mat-label>
-  <mat-select
-    [(value)]="selectedTags"
-    (selectionChange)="selectTagEvent.emit(selectedTags)"
-    multiple
-  >
-    <mat-select-trigger i18n>{{ selectedTags.length }} Tag(s)</mat-select-trigger>
-    <app-search-bar [value]="searchText" (update)="filterTags($event)"></app-search-bar>
-    <mat-option *ngFor="let tag of filteredTags" [value]="tag" [ngStyle]="{ color: tag.color }">
-      {{ tag.text }}
-    </mat-option>
-    <mat-divider></mat-divider>
-    <button
-      mat-button
-      class="manage-tags-button"
-      (click)="manageTags(); $event.stopPropagation()"
-      i18n
-    >
-      Manage Tags
-    </button>
-  </mat-select>
-</mat-form-field>
+<ng-select
+  class="select-tags"
+  [items]="filteredTags"
+  appearance="outline"
+  bindLabel="tags"
+  placeholder="Filter by tag"
+  i18n-placeholder
+  [(ngModel)]="selectedTags"
+  [closeOnSelect]="false"
+  [multiple]="true"
+  [searchFn]="tagSearch"
+  (change)="selectTagEvent.emit(selectedTags)"
+>
+  <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+    <tag [color]="item.color" [text]="item.text" class="mat-small"></tag>
+  </ng-template>
+  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+    <tag
+      [color]="item.color"
+      [text]="item.text"
+      [showRemoveButton]="true"
+      (removeTagEvent)="clear(item)"
+      class="mat-small"
+    ></tag>
+  </ng-template>
+  <ng-template ng-footer-tmp>
+    <button mat-button (click)="manageTags(); $event.stopPropagation()" i18n>Manage Tags</button>
+  </ng-template>
+</ng-select>

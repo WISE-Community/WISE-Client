@@ -1,3 +1,15 @@
 <span class="tag" [ngStyle]="{ 'background-color': color, color: textColor }">
-  {{ text }}
+  <span>{{ text }}</span>
+  @if (showRemoveButton) {
+  <span class="divider"></span>
+  <button
+    mat-icon-button
+    class="remove-tag"
+    (click)="removeTagEvent.emit()"
+    aria-label="Remove tag"
+    i18n-aria-label
+  >
+    <mat-icon class="remove-icon">cancel</mat-icon>
+  </button>
+  }
 </span>

@@ -54,7 +54,6 @@ import { SelectAllItemsCheckboxComponent } from './select-all-items-checkbox/sel
 import { ApplyTagsButtonComponent } from '../../teacher/apply-tags-button/apply-tags-button.component';
 import { SelectTagsComponent } from '../../teacher/select-tags/select-tags.component';
 import { MatChipsModule } from '@angular/material/chips';
-import { SelectedTagsListComponent } from '../../teacher/selected-tags-list/selected-tags-list.component';
 import { SelectMenuComponent } from '../shared/select-menu/select-menu.component';
 import { UnitTagsComponent } from '../../teacher/unit-tags/unit-tags.component';
 
@@ -94,7 +93,6 @@ const materialModules = [
     materialModules,
     SearchBarComponent,
     SelectAllItemsCheckboxComponent,
-    SelectedTagsListComponent,
     SelectMenuComponent,
     SelectTagsComponent,
     SharedModule,

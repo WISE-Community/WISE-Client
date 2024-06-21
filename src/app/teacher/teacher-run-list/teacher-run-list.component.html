@@ -15,7 +15,6 @@
   ></app-search-bar>
   <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
-    <select-tags [selectedTags]="selectedTags" (selectTagEvent)="selectTags($event)"/>
     <mat-form-field [subscriptSizing]="'dynamic'">
       <mat-label>View</mat-label>
       <mat-select [(ngModel)]="showArchivedView" (selectionChange)="refreshProjects()">
@@ -26,44 +25,42 @@
   </div>
 </div>
 <div class="content-block">
-  <selected-tags-list
-    *ngIf="selectedTags.length > 0"
-    [tags]="selectedTags"
-    (removeTagEvent)="removeTag($event)"
-  />
-  <div class="notice">
-    <p [ngStyle]="{ visibility: allRunsLoaded ? 'visible' : 'hidden' }">
-      <ng-container *ngIf="searchValue || filterValue" i18n
-        >Units found: {{ filteredRuns.length }}</ng-container
-      >
-      <ng-container *ngIf="!searchValue && !filterValue">
-        <ng-container *ngIf="showArchivedView" i18n>Archived classroom units:</ng-container>
-        <ng-container *ngIf="!showArchivedView" i18n>Active classroom units:</ng-container>
-        {{ filteredRuns.length }}
-      </ng-container>
-      <span class="mat-caption" *ngIf="!showArchivedView && filteredRuns.length">
-        (<ng-container *ngIf="completedTotal()"
-          ><span i18n>{{ completedTotal() }} completed</span>,
+  <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="16px" fxLayoutAlign="space-between center">
+    <select-tags [selectedTags]="selectedTags" (selectTagEvent)="selectTags($event)"/>
+    <div class="notice run-counts">
+      <p [ngStyle]="{ visibility: allRunsLoaded ? 'visible' : 'hidden' }">
+        <ng-container *ngIf="searchValue || filterValue" i18n
+          >Units found: {{ filteredRuns.length }}</ng-container
+        >
+        <ng-container *ngIf="!searchValue && !filterValue">
+          <ng-container *ngIf="showArchivedView" i18n>Archived classroom units:</ng-container>
+          <ng-container *ngIf="!showArchivedView" i18n>Active classroom units:</ng-container>
+          {{ filteredRuns.length }}
         </ng-container>
-        <ng-container
-          ><span i18n>{{ activeTotal() }} running</span></ng-container
-        >
-        <ng-container *ngIf="scheduledTotal()"
-          >, <span i18n>{{ scheduledTotal() }} scheduled</span></ng-container
-        >)
-      </span>
-      <ng-container *ngIf="searchValue || filterValue || selectedTags.length > 0">
-        |
-        <a
-          href="#"
-          (click)="clearFilters($event)"
-          (keyup.enter)="clearFilters($event)"
-          tabindex="0"
-          i18n
-          >Clear filters</a
-        >
-      </ng-container>
-    </p>
+        <span class="mat-caption" *ngIf="!showArchivedView && filteredRuns.length">
+          (<ng-container *ngIf="completedTotal()"
+            ><span i18n>{{ completedTotal() }} completed</span>,
+          </ng-container>
+          <ng-container
+            ><span i18n>{{ activeTotal() }} running</span></ng-container
+          >
+          <ng-container *ngIf="scheduledTotal()"
+            >, <span i18n>{{ scheduledTotal() }} scheduled</span></ng-container
+          >)
+        </span>
+        <ng-container *ngIf="searchValue || filterValue || selectedTags.length > 0">
+          |
+          <a
+            href="#"
+            (click)="clearFilters($event)"
+            (keyup.enter)="clearFilters($event)"
+            tabindex="0"
+            i18n
+            >Clear filters</a
+          >
+        </ng-container>
+      </p>
+    </div>
   </div>
   <ng-container *ngIf="recentRunsLoaded">
     <div class="notice no-runs-message" *ngIf="!showArchivedView && getNumActiveRuns() === 0">

@@ -46,9 +46,9 @@ import { SearchBarComponent } from '../modules/shared/search-bar/search-bar.comp
 import { ApplyTagsButtonComponent } from './apply-tags-button/apply-tags-button.component';
 import { ProjectTagService } from '../../assets/wise5/services/projectTagService';
 import { SelectTagsComponent } from './select-tags/select-tags.component';
-import { SelectedTagsListComponent } from './selected-tags-list/selected-tags-list.component';
 import { UnitTagsComponent } from './unit-tags/unit-tags.component';
 import { ColorService } from '../../assets/wise5/services/colorService';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -80,8 +80,8 @@ const materialModules = [
     FormsModule,
     LibraryModule,
     materialModules,
+    NgSelectModule,
     SearchBarComponent,
-    SelectedTagsListComponent,
     SelectRunsControlsModule,
     SelectTagsComponent,
     SharedModule,

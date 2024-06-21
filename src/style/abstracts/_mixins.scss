@@ -290,6 +290,67 @@
         border-color: $value;
       }
   }
+
+  // ng-select
+  .ng-select {
+    .ng-select-container {
+      padding: 0 12px;
+      background-color: rgba(0, 0, 0, 0.04);
+      border-radius: $card-border-radius;
+
+      .ng-value-container {
+        padding: .2875em 0;
+
+        .ng-value {
+          margin: 0.21875em 0.4375em 0.21875em 0;
+        }
+
+        .ng-input>input {
+          height: 100%;
+        }
+      }
+
+      &.ng-appearance-outline {
+        min-height: 56px;
+
+        .ng-placeholder {
+          background-color: transparent;
+        }
+
+        &:after {
+          border-radius: $card-border-radius;
+          border: 0 none;
+        }
+
+        &:hover:after {
+          border-bottom: 1px solid;
+        }
+
+        &.ng-has-value {
+          .ng-placeholder {
+            margin-top: 0.4375em;
+          }
+        }
+      }
+    }
+
+    &.ng-select-focused {
+      .ng-select-container {
+        background-color: rgba(0, 0, 0, 0.08);
+
+        &.ng-appearance-outline {
+          &:after {
+            border-bottom: 2px solid map.get($colors, 'primary');
+          }
+
+          .ng-placeholder {
+            color: map.get($colors, 'primary');
+            margin-top: 0.4375em;
+          }
+        }
+      }
+    }
+  }
 }
 
 // Set Angular Material icon size
