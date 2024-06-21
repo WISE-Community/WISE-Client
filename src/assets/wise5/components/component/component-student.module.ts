@@ -28,12 +28,12 @@ import { AiChatStudentModule } from '../aiChat/ai-chat-student/ai-chat-student.m
 import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
 
 @NgModule({
-  declarations: [ComponentComponent],
   imports: [
     AiChatStudentModule,
     AnimationStudentModule,
     AudioOscillatorStudentModule,
     CommonModule,
+    ComponentComponent,
     ConceptMapStudentModule,
     DialogGuidanceStudentModule,
     DiscussionStudentModule,
