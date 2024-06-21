@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentComponentModule } from '../../../../app/student/student.component.module';
-import { HelpIconModule } from '../../themes/default/themeComponents/helpIcon/help-icon.module';
 import { PreviewComponentComponent } from '../../authoringTool/components/preview-component/preview-component.component';
 import { StudentAssetsDialogModule } from '../../vle/studentAsset/student-assets-dialog/student-assets-dialog.module';
 import { AnimationStudentModule } from '../animation/animation-student/animation-student.module';
@@ -26,6 +25,7 @@ import { SummaryStudentModule } from '../summary/summary-student/summary-student
 import { TableStudentModule } from '../table/table-student/table-student.module';
 import { ComponentComponent } from './component.component';
 import { AiChatStudentModule } from '../aiChat/ai-chat-student/ai-chat-student.module';
+import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
 
 @NgModule({
   declarations: [ComponentComponent],
@@ -40,7 +40,7 @@ import { AiChatStudentModule } from '../aiChat/ai-chat-student/ai-chat-student.m
     DrawStudentModule,
     EmbeddedStudentModule,
     GraphStudentModule,
-    HelpIconModule,
+    HelpIconComponent,
     HighchartsChartModule,
     HtmlStudentComponent,
     LabelStudentModule,
