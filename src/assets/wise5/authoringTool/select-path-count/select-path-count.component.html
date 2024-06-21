@@ -1,0 +1,10 @@
+<mat-form-field>
+  <mat-label i18n>Number of Branch Paths</mat-label>
+  <input
+    matInput
+    [(ngModel)]="pathCount"
+    (ngModelChange)="pathCountChangedEvent.emit($event)"
+    type="number"
+    min="2"
+  />
+</mat-form-field>
