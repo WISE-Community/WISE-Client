@@ -4,16 +4,12 @@
     [pathCount]="formGroup.controls['pathCount'].value"
     (pathCountChangedEvent)="setPathCount($event)"
   />
-  <mat-form-field *ngIf="formGroup.controls['pathCount'].value > 1" class="select-medium-width">
-    <mat-label i18n>How to Choose Among Paths</mat-label>
-    <mat-select formControlName="criteria">
-      <mat-option *ngFor="let branchCriterion of BRANCH_CRITERIA" [value]="branchCriterion.value">
-        <span fxLayout="row" fxLayoutAlign="start center">
-          <span>{{ branchCriterion.text }}</span>
-        </span>
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  @if (formGroup.controls['pathCount'].value > 1) {
+    <select-branch-criteria
+      [criteria]="formGroup.controls['criteria']"
+      (criteriaChangedEvent)="setCriteria($event)"
+    />
+  }
   <select-step
     *ngIf="
       formGroup.controls['criteria'].value === SCORE_VALUE ||
