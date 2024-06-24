@@ -35,15 +35,10 @@ let removalCriteria: any;
 xdescribe('EditConstraintRemovalCriteriaComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditConstraintRemovalCriteriaComponent, RequiredErrorLabelComponent],
       imports: [
         BrowserAnimationsModule,
-        FormsModule,
+        EditConstraintRemovalCriteriaComponent,
         HttpClientTestingModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatSelectModule,
         StudentTeacherCommonServicesModule
       ],
       providers: [TeacherProjectService]
