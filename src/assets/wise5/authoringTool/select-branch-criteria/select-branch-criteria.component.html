@@ -1,0 +1,10 @@
+<mat-form-field class="select-criteria">
+  <mat-label i18n>How to Choose Among Paths</mat-label>
+  <mat-select [(ngModel)]="criteria" (ngModelChange)="criteriaChangedEvent.emit($event)">
+    @for (criterion of BRANCH_CRITERIA; track $index) {
+      <mat-option [value]="criterion.value">
+        {{ criterion.text }}
+      </mat-option>
+    }
+  </mat-select>
+</mat-form-field>

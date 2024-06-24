@@ -18,8 +18,6 @@ import { SelectComponentComponent } from '../../../../app/authoring-tool/select-
 import { BranchPathAuthoringComponent } from '../branch-path-authoring/branch-path-authoring.component';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import {
-  BranchCriteria,
-  BRANCH_CRITERIA,
   CHOICE_CHOSEN_VALUE,
   SCORE_VALUE,
   WORKGROUP_ID_VALUE,
@@ -30,6 +28,7 @@ import { SelectMergeStepComponent } from '../select-merge-step/select-merge-step
 import { CreateBranchService } from '../../services/createBranchService';
 import { CreateBranchParams } from '../../common/CreateBranchParams';
 import { SelectPathCountComponent } from '../select-path-count/select-path-count.component';
+import { SelectBranchCriteriaComponent } from '../select-branch-criteria/select-branch-criteria.component';
 
 @Component({
   imports: [
@@ -42,6 +41,7 @@ import { SelectPathCountComponent } from '../select-path-count/select-path-count
     MatSelectModule,
     ReactiveFormsModule,
     RouterModule,
+    SelectBranchCriteriaComponent,
     SelectComponentComponent,
     SelectMergeStepComponent,
     SelectPathCountComponent,
@@ -53,7 +53,6 @@ import { SelectPathCountComponent } from '../select-path-count/select-path-count
   templateUrl: './add-branch.component.html'
 })
 export class AddBranchComponent {
-  protected readonly BRANCH_CRITERIA: BranchCriteria[] = BRANCH_CRITERIA;
   protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;
   protected readonly RANDOM_VALUE: string = RANDOM_VALUE;
   protected readonly SCORE_VALUE: string = SCORE_VALUE;
@@ -209,6 +208,10 @@ export class AddBranchComponent {
 
   private getPathCount(): number {
     return this.formGroup.get('pathCount').value;
+  }
+
+  protected setCriteria(criteria: string): void {
+    this.formGroup.get('criteria').setValue(criteria);
   }
 
   private getCriteria(): string {
