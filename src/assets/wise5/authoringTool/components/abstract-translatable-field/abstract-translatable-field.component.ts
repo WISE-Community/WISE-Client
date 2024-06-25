@@ -14,6 +14,7 @@ export abstract class AbstractTranslatableFieldComponent {
   private currentTranslations$ = toObservable(this.projectTranslationService.currentTranslations);
   protected defaultLanguage: Language = this.projectService.getLocale().getDefaultLanguage();
   @Output() defaultLanguageTextChanged: Subject<string> = new Subject<string>();
+  @Input() hint: string;
   protected i18nId: string;
   @Input() key: string;
   @Input() label: string;
