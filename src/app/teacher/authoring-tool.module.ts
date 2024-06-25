@@ -96,7 +96,6 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     ProjectAuthoringStepComponent,
     RecoveryAuthoringComponent,
     RubricAuthoringComponent,
-    TeacherNodeIconComponent,
     TopBarComponent,
     ProjectListComponent
   ],
@@ -119,6 +118,7 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     SaveIndicatorComponent,
     StepToolsComponent,
     StructureAuthoringModule,
+    TeacherNodeIconComponent,
     WiseTinymceEditorModule
   ]
 })
