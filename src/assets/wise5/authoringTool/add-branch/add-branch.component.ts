@@ -218,20 +218,20 @@ export class AddBranchComponent {
     return this.formGroup.get('criteria').value;
   }
 
+  protected setNodeId(nodeId: string): void {
+    this.formGroup.get('nodeId').setValue(nodeId);
+  }
+
   private getNodeId(): string {
     return this.formGroup.get('nodeId')?.value;
   }
 
-  private setNodeId(nodeId: string): void {
-    this.formGroup.get('nodeId').setValue(nodeId);
+  protected setComponentId(componentId: string): void {
+    this.formGroup.get('componentId').setValue(componentId);
   }
 
   private getComponentId(): string {
     return this.formGroup.get('componentId')?.value;
-  }
-
-  private setComponentId(componentId: string): void {
-    this.formGroup.get('componentId').setValue(componentId);
   }
 
   protected setMergeStep(nodeId: string): void {
