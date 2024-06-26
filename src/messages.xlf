@@ -1588,7 +1588,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dc834df3c90c7b9021cfa37b2be737c2134249a5" datatype="html">
@@ -6370,7 +6370,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">47,49</context>
+          <context context-type="linenumber">46,48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="70cfd60f574a2e5b823237ac05381d8d488e4c7c" datatype="html">
@@ -15025,7 +15025,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5760105370370371133" datatype="html">
@@ -16552,7 +16552,7 @@ Are you ready to receive feedback on this answer?</source>
         <source>Teaching Tips</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component/component.component.html</context>
-          <context context-type="linenumber">2</context>
+          <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
       <trans-unit id="687454984939780519" datatype="html">
@@ -22086,7 +22086,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Submit </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">59,61</context>
+          <context context-type="linenumber">58,60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e4c201ad39e5fa4658b22a707c94012bc30e0846" datatype="html">
