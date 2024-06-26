@@ -3,7 +3,6 @@ import { LibraryProjectComponent } from './library-project.component';
 import { LibraryProject } from '../libraryProject';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -12,13 +11,15 @@ describe('LibraryProjectComponent', () => {
   let component: LibraryProjectComponent;
   let fixture: ComponentFixture<LibraryProjectComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [LibraryProjectComponent],
-      imports: [BrowserAnimationsModule, RouterTestingModule, OverlayModule, MatDialogModule],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LibraryProjectComponent],
+        imports: [BrowserAnimationsModule, RouterTestingModule, OverlayModule, MatDialogModule],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LibraryProjectComponent);

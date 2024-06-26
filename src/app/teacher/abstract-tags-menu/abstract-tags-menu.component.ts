@@ -51,6 +51,7 @@ export class AbstractTagsMenuComponent {
       this.projectTagService.newTag$.subscribe((tag: Tag) => {
         this.tags.push(tag);
         this.projectTagService.sortTags(this.tags);
+        this.filterTags(this.searchText);
         this.afterNewTag(tag);
       })
     );
@@ -62,6 +63,7 @@ export class AbstractTagsMenuComponent {
     this.subscriptions.add(
       this.projectTagService.tagDeleted$.subscribe((deletedTag: Tag) => {
         this.tags = this.tags.filter((tag: Tag) => tag.id !== deletedTag.id);
+        this.filterTags(this.searchText);
       })
     );
   }

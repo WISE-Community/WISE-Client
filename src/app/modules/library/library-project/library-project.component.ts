@@ -5,6 +5,9 @@ import { LibraryProject } from '../libraryProject';
 import { LibraryProjectDetailsComponent } from '../library-project-details/library-project-details.component';
 import { flash } from '../../../animations';
 import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
+import { Subscription } from 'rxjs';
+import { ProjectTagService } from '../../../../assets/wise5/services/projectTagService';
+import { Tag } from '../../../domain/tag';
 
 @Component({
   animations: [flash],
@@ -14,16 +17,20 @@ import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
   templateUrl: './library-project.component.html'
 })
 export class LibraryProjectComponent implements OnInit {
+  animateDelay: string = '0s';
+  animateDuration: string = '0s';
   @Input() checked: boolean = false;
   @Input() myUnit: boolean = false;
   @Input() project: LibraryProject = new LibraryProject();
   @Output()
   projectSelectionEvent: EventEmitter<ProjectSelectionEvent> = new EventEmitter<ProjectSelectionEvent>();
+  private subscriptions: Subscription = new Subscription();
 
-  animateDuration: string = '0s';
-  animateDelay: string = '0s';
-
-  constructor(public dialog: MatDialog, private sanitizer: DomSanitizer) {}
+  constructor(
+    private dialog: MatDialog,
+    private projectTagService: ProjectTagService,
+    private sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit() {
     this.project.thumbStyle = this.getThumbStyle(this.project.projectThumb);
@@ -34,6 +41,35 @@ export class LibraryProjectComponent implements OnInit {
         this.project.isHighlighted = false;
       }, 7000);
     }
+    this.subscribeToTagUpdated();
+    this.subscribeToTagDeleted();
+  }
+
+  private subscribeToTagUpdated(): void {
+    this.subscriptions.add(
+      this.projectTagService.tagUpdated$.subscribe((tagThatChanged: Tag) => {
+        const tagOnProject = this.project.tags.find((tag: Tag) => tag.id === tagThatChanged.id);
+        if (tagOnProject != null) {
+          tagOnProject.text = tagThatChanged.text;
+          tagOnProject.color = tagThatChanged.color;
+          this.projectTagService.sortTags(this.project.tags);
+        }
+      })
+    );
+  }
+
+  private subscribeToTagDeleted(): void {
+    this.subscriptions.add(
+      this.projectTagService.tagDeleted$.subscribe((tag: Tag) => {
+        if (this.project.hasTag(tag)) {
+          this.project.removeTag(tag);
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   /**
