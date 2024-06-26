@@ -54,8 +54,7 @@
           <required-error-label />
         }
       </div>
-    }
-    @if (param.value === 'componentId') {
+    } @else if (param.value === 'componentId') {
       <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
         <mat-form-field class="common-width">
           <mat-label>{{ param.text }}</mat-label>
@@ -83,8 +82,7 @@
           <required-error-label />
         }
       </div>
-    }
-    @if (param.value === 'fromNodeId') {
+    } @else if (param.value === 'fromNodeId') {
       <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
         <mat-form-field class="common-width">
           <mat-label>{{ param.text }}</mat-label>
@@ -105,8 +103,7 @@
           <required-error-label />
         }
       </div>
-    }
-    @if (param.value === 'toNodeId') {
+    } @else if (param.value === 'toNodeId') {
       <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
         <mat-form-field class="common-width">
           <mat-label>{{ param.text }}</mat-label>
@@ -129,8 +126,7 @@
           <required-error-label />
         }
       </div>
-    }
-    @if (param.value === 'scores') {
+    } @else if (param.value === 'scores') {
       <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
         <mat-form-field>
           <mat-label>{{ param.text }}</mat-label>
@@ -147,8 +143,7 @@
           <required-error-label />
         }
       </div>
-    }
-    @if (param.value === 'requiredSubmitCount') {
+    } @else if (param.value === 'requiredSubmitCount') {
       <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
         @if (param.value === 'requiredSubmitCount') {
           <mat-form-field>
@@ -167,8 +162,7 @@
           <required-error-label />
         }
       </div>
-    }
-    @if (
+    } @else if (
       param.value === 'choiceIds' &&
       getChoiceType(criteria.params.nodeId, criteria.params.componentId) === 'radio'
     ) {
@@ -195,8 +189,7 @@
           <required-error-label />
         }
       </div>
-    }
-    @if (
+    } @else if (
       param.value === 'choiceIds' &&
       getChoiceType(criteria.params.nodeId, criteria.params.componentId) === 'checkbox'
     ) {
@@ -214,8 +207,7 @@
           <required-error-label />
         }
       </div>
-    }
-    @if (param.value === 'requiredNumberOfWords') {
+    } @else if (param.value === 'requiredNumberOfWords') {
       <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
         <mat-form-field class="common-width">
           <mat-label i18n>{{ param.text }}</mat-label>
@@ -233,8 +225,7 @@
           <required-error-label />
         }
       </div>
-    }
-    @if (param.value === 'requiredNumberOfNotes') {
+    } @else if (param.value === 'requiredNumberOfNotes') {
       <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
         <mat-form-field class="common-width">
           <mat-label i18n>{{ param.text }}</mat-label>
@@ -252,8 +243,7 @@
           <required-error-label />
         }
       </div>
-    }
-    @if (param.value === 'requiredNumberOfFilledRows') {
+    } @else if (param.value === 'requiredNumberOfFilledRows') {
       <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
         <mat-form-field class="common-width">
           <mat-label i18n>{{ param.text }}</mat-label>
@@ -271,8 +261,7 @@
           <required-error-label />
         }
       </div>
-    }
-    @if (param.value === 'tableHasHeaderRow') {
+    } @else if (param.value === 'tableHasHeaderRow') {
       <mat-checkbox
         color="primary"
         [(ngModel)]="criteria.params.tableHasHeaderRow"
@@ -280,8 +269,7 @@
       >
         {{ param.text }}
       </mat-checkbox>
-    }
-    @if (param.value === 'requireAllCellsInARowToBeFilled') {
+    } @else if (param.value === 'requireAllCellsInARowToBeFilled') {
       <mat-checkbox
         color="primary"
         [(ngModel)]="criteria.params.requireAllCellsInARowToBeFilled"
