@@ -10,6 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   standalone: true,
   selector: 'project-language-chooser',
+  styleUrl: './project-language-chooser.component.scss',
   imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
   templateUrl: './project-language-chooser.component.html'
 })
