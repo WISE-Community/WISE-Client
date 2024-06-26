@@ -72,8 +72,7 @@ describe('ProjectAuthoringComponent', () => {
         MatMenuModule,
         MatTooltipModule,
         NodeIconAndTitleComponent,
-        StudentTeacherCommonServicesModule,
-        TeacherNodeIconComponent
+        StudentTeacherCommonServicesModule
       ],
       providers: [
         ClassroomStatusService,
