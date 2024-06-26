@@ -7,11 +7,11 @@ import { NodeAdvancedAuthoringComponent } from './node-advanced-authoring/node-a
 import { NodeAdvancedPathAuthoringComponent } from './path/node-advanced-path-authoring.component';
 import { StudentTeacherCommonModule } from '../../../../../app/student-teacher-common.module';
 import { NodeConstraintAuthoringComponent } from '../../constraint/node-constraint-authoring/node-constraint-authoring.component';
-import { ConstraintAuthoringModule } from '../../constraint/constraint-authoring.module';
 import { EditNodeRubricComponent } from '../editRubric/edit-node-rubric.component';
 import { WiseTinymceEditorModule } from '../../../directives/wise-tinymce-editor/wise-tinymce-editor.module';
 import { RouterModule } from '@angular/router';
 import { RequiredErrorLabelComponent } from './required-error-label/required-error-label.component';
+import { EditConstraintRemovalCriteriaComponent } from '../../constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { RequiredErrorLabelComponent } from './required-error-label/required-err
     NodeConstraintAuthoringComponent
   ],
   imports: [
-    ConstraintAuthoringModule,
+    EditConstraintRemovalCriteriaComponent,
     RequiredErrorLabelComponent,
     RouterModule,
     StudentTeacherCommonModule,

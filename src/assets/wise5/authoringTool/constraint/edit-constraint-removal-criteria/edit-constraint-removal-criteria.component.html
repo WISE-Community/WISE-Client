@@ -15,288 +15,268 @@
   <mat-form-field class="common-width">
     <mat-label i18n>Removal Criteria Name</mat-label>
     <mat-select [(ngModel)]="criteria.name" (ngModelChange)="nameChanged(criteria)">
-      <mat-option
-        *ngFor="let criterion of removalCriteria; index as criterionIndex"
-        [value]="criterion.value"
-      >
-        <span [ngStyle]="criterionIndex === 0 && { color: 'red' }">{{ criterion.text }}</span>
-      </mat-option>
+      @for (criterion of removalCriteria; track criterion; let criterionIndex = $index) {
+        <mat-option [value]="criterion.value">
+          <span [ngStyle]="criterionIndex === 0 && { color: 'red' }">{{ criterion.text }}</span>
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
   @if (criteria.name === '') {
     <required-error-label />
   }
 </div>
-<div *ngFor="let param of getParamsByName(criteria.name)">
-  <div
-    *ngIf="param.value === 'nodeId'"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
-  >
-    <mat-form-field class="common-width">
-      <mat-label>{{ param.text }}</mat-label>
-      <mat-select [(ngModel)]="criteria.params.nodeId" (ngModelChange)="nodeIdChanged(criteria)">
-        <mat-option [value]="''">
-          <span class="red" i18n>Please Choose a Step</span>
-        </mat-option>
-        <mat-option *ngFor="let nodeId of nodeIds" [value]="nodeId">
-          <span i18n
-            >{{ getNodePosition(nodeId) + ':' }} {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span
+@for (param of getParamsByName(criteria.name); track param) {
+  <div>
+    @if (param.value === 'nodeId') {
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <mat-form-field class="common-width">
+          <mat-label>{{ param.text }}</mat-label>
+          <mat-select
+            [(ngModel)]="criteria.params.nodeId"
+            (ngModelChange)="nodeIdChanged(criteria)"
           >
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    @if (criteria.params.nodeId === '') {
-      <required-error-label />
-    }
-  </div>
-  <div
-    *ngIf="param.value === 'componentId'"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
-  >
-    <mat-form-field class="common-width">
-      <mat-label>{{ param.text }}</mat-label>
-      <mat-select [(ngModel)]="criteria.params.componentId" (ngModelChange)="saveProject()">
-        <mat-option [value]="''">
-          <span class="red" i18n>Please Choose a Component</span>
-        </mat-option>
-        <ng-container
-          *ngFor="let component of getComponents(criteria.params.nodeId); index as componentIndex"
-        >
-          <mat-option *ngIf="componentIdToIsSelectable[component.id]" [value]="component.id">
-            <span i18n
-              >{{ componentIndex + 1 }}. {{ component.type }} (Prompt: {{ component.prompt }})</span
-            >
-          </mat-option>
-        </ng-container>
-      </mat-select>
-    </mat-form-field>
-    @if (criteria.params.componentId === '') {
-      <required-error-label />
-    }
-  </div>
-  <div
-    *ngIf="param.value === 'fromNodeId'"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
-  >
-    <mat-form-field class="common-width">
-      <mat-label>{{ param.text }}</mat-label>
-      <mat-select [(ngModel)]="criteria.params.fromNodeId" (ngModelChange)="saveProject()">
-        <mat-option [value]="''">
-          <span class="red" i18n>Please Select a From Step</span>
-        </mat-option>
-        <mat-option *ngFor="let nodeId of nodeIds" [value]="nodeId">
-          <span>{{ getNodePosition(nodeId) + ':' }} {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    @if (criteria.params.fromNodeId == null || criteria.params.fromNodeId === '') {
-      <required-error-label />
-    }
-  </div>
-  <div
-    *ngIf="param.value === 'toNodeId'"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
-  >
-    <mat-form-field class="common-width">
-      <mat-label>{{ param.text }}</mat-label>
-      <mat-select [(ngModel)]="criteria.params.toNodeId" (ngModelChange)="saveProject()">
-        <mat-option [value]="''">
-          <span class="red" i18n>Please Select a To Step</span>
-        </mat-option>
-        <mat-option *ngFor="let nodeId of nodeIds" [value]="nodeId">
-          <span>{{ getNodePosition(nodeId) + ':' }} {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    @if (criteria.params.toNodeId == null || criteria.params.toNodeId === '') {
-      <required-error-label />
-    }
-  </div>
-  <div
-    *ngIf="param.value === 'scores'"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
-  >
-    <mat-form-field>
-      <mat-label>{{ param.text }}</mat-label>
-      <input
-        matInput
-        [(ngModel)]="criteria.params.scores"
-        (ngModelChange)="scoresChanged($event, criteria.params)"
-      />
-    </mat-form-field>
-    @if (
-      criteria.params.scores.length === 0 ||
-      (criteria.params.scores.length === 1 && criteria.params.scores[0] === '')
-    ) {
-      <required-error-label />
-    }
-  </div>
-  <div
-    *ngIf="param.value === 'requiredSubmitCount'"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
-  >
-    <mat-form-field>
-      <mat-label>{{ param.text }}</mat-label>
-      <input
-        matInput
-        type="number"
-        *ngIf="param.value === 'requiredSubmitCount'"
-        [(ngModel)]="criteria.params.requiredSubmitCount"
-        (ngModelChange)="saveProject()"
-      />
-    </mat-form-field>
-    @if (
-      criteria.params.requiredSubmitCount == null || criteria.params.requiredSubmitCount === ''
-    ) {
-      <required-error-label />
-    }
-  </div>
-  <div
-    *ngIf="
+            <mat-option [value]="''">
+              <span class="red" i18n>Please Choose a Step</span>
+            </mat-option>
+            @for (nodeId of nodeIds; track nodeId) {
+              <mat-option [value]="nodeId">
+                <span i18n
+                  >{{ getNodePosition(nodeId) + ':' }} {{ getNodeTitle(nodeId) }} ({{
+                    nodeId
+                  }})</span
+                >
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        @if (criteria.params.nodeId === '') {
+          <required-error-label />
+        }
+      </div>
+    } @else if (param.value === 'componentId') {
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <mat-form-field class="common-width">
+          <mat-label>{{ param.text }}</mat-label>
+          <mat-select [(ngModel)]="criteria.params.componentId" (ngModelChange)="saveProject()">
+            <mat-option [value]="''">
+              <span class="red" i18n>Please Choose a Component</span>
+            </mat-option>
+            @for (
+              component of getComponents(criteria.params.nodeId);
+              track component;
+              let componentIndex = $index
+            ) {
+              @if (componentIdToIsSelectable[component.id]) {
+                <mat-option [value]="component.id">
+                  <span i18n
+                    >{{ componentIndex + 1 }}. {{ component.type }} (Prompt:
+                    {{ component.prompt }})</span
+                  >
+                </mat-option>
+              }
+            }
+          </mat-select>
+        </mat-form-field>
+        @if (criteria.params.componentId === '') {
+          <required-error-label />
+        }
+      </div>
+    } @else if (param.value === 'fromNodeId') {
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <mat-form-field class="common-width">
+          <mat-label>{{ param.text }}</mat-label>
+          <mat-select [(ngModel)]="criteria.params.fromNodeId" (ngModelChange)="saveProject()">
+            <mat-option [value]="''">
+              <span class="red" i18n>Please Select a From Step</span>
+            </mat-option>
+            @for (nodeId of nodeIds; track nodeId) {
+              <mat-option [value]="nodeId">
+                <span
+                  >{{ getNodePosition(nodeId) + ':' }} {{ getNodeTitle(nodeId) }} ({{ nodeId }})
+                </span>
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        @if (criteria.params.fromNodeId == null || criteria.params.fromNodeId === '') {
+          <required-error-label />
+        }
+      </div>
+    } @else if (param.value === 'toNodeId') {
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <mat-form-field class="common-width">
+          <mat-label>{{ param.text }}</mat-label>
+          <mat-select [(ngModel)]="criteria.params.toNodeId" (ngModelChange)="saveProject()">
+            <mat-option [value]="''">
+              <span class="red" i18n>Please Select a To Step</span>
+            </mat-option>
+            @for (nodeId of nodeIds; track nodeId) {
+              <mat-option [value]="nodeId">
+                <span
+                  >{{ getNodePosition(nodeId) + ':' }} {{ getNodeTitle(nodeId) }} ({{
+                    nodeId
+                  }})</span
+                >
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        @if (criteria.params.toNodeId == null || criteria.params.toNodeId === '') {
+          <required-error-label />
+        }
+      </div>
+    } @else if (param.value === 'scores') {
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <mat-form-field>
+          <mat-label>{{ param.text }}</mat-label>
+          <input
+            matInput
+            [(ngModel)]="criteria.params.scores"
+            (ngModelChange)="scoresChanged($event, criteria.params)"
+          />
+        </mat-form-field>
+        @if (
+          criteria.params.scores.length === 0 ||
+          (criteria.params.scores.length === 1 && criteria.params.scores[0] === '')
+        ) {
+          <required-error-label />
+        }
+      </div>
+    } @else if (param.value === 'requiredSubmitCount') {
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+        @if (param.value === 'requiredSubmitCount') {
+          <mat-form-field>
+            <mat-label>{{ param.text }}</mat-label>
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="criteria.params.requiredSubmitCount"
+              (ngModelChange)="saveProject()"
+            />
+          </mat-form-field>
+        }
+        @if (
+          criteria.params.requiredSubmitCount == null || criteria.params.requiredSubmitCount === ''
+        ) {
+          <required-error-label />
+        }
+      </div>
+    } @else if (
       param.value === 'choiceIds' &&
       getChoiceType(criteria.params.nodeId, criteria.params.componentId) === 'radio'
-    "
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
-  >
-    <mat-form-field class="common-width">
-      <mat-label>{{ param.text }}</mat-label>
-      <mat-select [(ngModel)]="criteria.params.choiceIds" (ngModelChange)="saveProject()">
-        <mat-option [value]="''">
-          <span fxLayout="row" fxLayoutAlign="start center">
-            <span class="red" i18n>Please Select a Choice</span>
-          </span>
-        </mat-option>
-        <mat-option
-          *ngFor="let choice of getChoices(criteria.params.nodeId, criteria.params.componentId)"
-          [value]="choice.id"
-        >
-          <span>{{ choice.text }}</span>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    @if (criteria.params.choiceIds === '') {
-      <required-error-label />
-    }
-  </div>
-  <div
-    *ngIf="
+    ) {
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <mat-form-field class="common-width">
+          <mat-label>{{ param.text }}</mat-label>
+          <mat-select [(ngModel)]="criteria.params.choiceIds" (ngModelChange)="saveProject()">
+            <mat-option [value]="''">
+              <span fxLayout="row" fxLayoutAlign="start center">
+                <span class="red" i18n>Please Select a Choice</span>
+              </span>
+            </mat-option>
+            @for (
+              choice of getChoices(criteria.params.nodeId, criteria.params.componentId);
+              track choice.id
+            ) {
+              <mat-option [value]="choice.id">
+                <span>{{ choice.text }}</span>
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        @if (criteria.params.choiceIds === '') {
+          <required-error-label />
+        }
+      </div>
+    } @else if (
       param.value === 'choiceIds' &&
       getChoiceType(criteria.params.nodeId, criteria.params.componentId) === 'checkbox'
-    "
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
-  >
-    <mat-form-field class="common-width">
-      <mat-label>{{ param.text }}</mat-label>
-      <mat-select
-        [(ngModel)]="criteria.params.choiceIds"
+    ) {
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <mat-form-field class="common-width">
+          <mat-label>{{ param.text }}</mat-label>
+          <mat-select
+            [(ngModel)]="criteria.params.choiceIds"
+            (ngModelChange)="saveProject()"
+            multiple="{{ getChoiceType(criteria.params.nodeId, criteria.params.componentId) }}"
+          >
+          </mat-select>
+        </mat-form-field>
+        @if (criteria.params.choiceIds.length === 0) {
+          <required-error-label />
+        }
+      </div>
+    } @else if (param.value === 'requiredNumberOfWords') {
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <mat-form-field class="common-width">
+          <mat-label i18n>{{ param.text }}</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="criteria.params.requiredNumberOfWords"
+            (ngModelChange)="saveProject()"
+          />
+        </mat-form-field>
+        @if (
+          criteria.params.requiredNumberOfWords == null ||
+          criteria.params.requiredNumberOfWords === ''
+        ) {
+          <required-error-label />
+        }
+      </div>
+    } @else if (param.value === 'requiredNumberOfNotes') {
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <mat-form-field class="common-width">
+          <mat-label i18n>{{ param.text }}</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="criteria.params.requiredNumberOfNotes"
+            (ngModelChange)="saveProject()"
+          />
+        </mat-form-field>
+        @if (
+          criteria.params.requiredNumberOfNotes == null ||
+          criteria.params.requiredNumberOfNotes === ''
+        ) {
+          <required-error-label />
+        }
+      </div>
+    } @else if (param.value === 'requiredNumberOfFilledRows') {
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <mat-form-field class="common-width">
+          <mat-label i18n>{{ param.text }}</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="criteria.params.requiredNumberOfFilledRows"
+            (ngModelChange)="saveProject()"
+          />
+        </mat-form-field>
+        @if (
+          criteria.params.requiredNumberOfFilledRows == null ||
+          criteria.params.requiredNumberOfFilledRows === ''
+        ) {
+          <required-error-label />
+        }
+      </div>
+    } @else if (param.value === 'tableHasHeaderRow') {
+      <mat-checkbox
+        color="primary"
+        [(ngModel)]="criteria.params.tableHasHeaderRow"
         (ngModelChange)="saveProject()"
-        multiple="{{ getChoiceType(criteria.params.nodeId, criteria.params.componentId) }}"
       >
-        <mat-option
-          [value]="choice.id"
-          *ngFor="let choice of getChoices(criteria.params.nodeId, criteria.params.componentId)"
-          >{{ choice.text }}</mat-option
-        >
-      </mat-select>
-    </mat-form-field>
-    @if (criteria.params.choiceIds.length === 0) {
-      <required-error-label />
-    }
-  </div>
-  <div
-    *ngIf="param.value === 'requiredNumberOfWords'"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
-  >
-    <mat-form-field class="common-width">
-      <mat-label i18n>{{ param.text }}</mat-label>
-      <input
-        matInput
-        type="number"
-        [(ngModel)]="criteria.params.requiredNumberOfWords"
+        {{ param.text }}
+      </mat-checkbox>
+    } @else if (param.value === 'requireAllCellsInARowToBeFilled') {
+      <mat-checkbox
+        color="primary"
+        [(ngModel)]="criteria.params.requireAllCellsInARowToBeFilled"
         (ngModelChange)="saveProject()"
-      />
-    </mat-form-field>
-    @if (
-      criteria.params.requiredNumberOfWords == null || criteria.params.requiredNumberOfWords === ''
-    ) {
-      <required-error-label />
+      >
+        {{ param.text }}
+      </mat-checkbox>
     }
   </div>
-  <div
-    *ngIf="param.value === 'requiredNumberOfNotes'"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
-  >
-    <mat-form-field class="common-width">
-      <mat-label i18n>{{ param.text }}</mat-label>
-      <input
-        matInput
-        type="number"
-        [(ngModel)]="criteria.params.requiredNumberOfNotes"
-        (ngModelChange)="saveProject()"
-      />
-    </mat-form-field>
-    @if (
-      criteria.params.requiredNumberOfNotes == null || criteria.params.requiredNumberOfNotes === ''
-    ) {
-      <required-error-label />
-    }
-  </div>
-  <div
-    *ngIf="param.value === 'requiredNumberOfFilledRows'"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
-  >
-    <mat-form-field class="common-width">
-      <mat-label i18n>{{ param.text }}</mat-label>
-      <input
-        matInput
-        type="number"
-        [(ngModel)]="criteria.params.requiredNumberOfFilledRows"
-        (ngModelChange)="saveProject()"
-      />
-    </mat-form-field>
-    @if (
-      criteria.params.requiredNumberOfFilledRows == null ||
-      criteria.params.requiredNumberOfFilledRows === ''
-    ) {
-      <required-error-label />
-    }
-  </div>
-  <mat-checkbox
-    *ngIf="param.value === 'tableHasHeaderRow'"
-    color="primary"
-    [(ngModel)]="criteria.params.tableHasHeaderRow"
-    (ngModelChange)="saveProject()"
-  >
-    {{ param.text }}
-  </mat-checkbox>
-  <mat-checkbox
-    *ngIf="param.value === 'requireAllCellsInARowToBeFilled'"
-    color="primary"
-    [(ngModel)]="criteria.params.requireAllCellsInARowToBeFilled"
-    (ngModelChange)="saveProject()"
-  >
-    {{ param.text }}
-  </mat-checkbox>
-</div>
+}
