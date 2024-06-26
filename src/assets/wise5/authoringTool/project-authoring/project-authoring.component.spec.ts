@@ -55,8 +55,7 @@ describe('ProjectAuthoringComponent', () => {
         NodeAuthoringComponent,
         ProjectAuthoringComponent,
         ProjectAuthoringLessonComponent,
-        ProjectAuthoringStepComponent,
-        TeacherNodeIconComponent
+        ProjectAuthoringStepComponent
       ],
       imports: [
         AddLessonButtonComponent,

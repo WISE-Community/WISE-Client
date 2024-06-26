@@ -41,12 +41,7 @@ let teacherProjectService: TeacherProjectService;
 describe('NodeAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        CopyComponentButtonComponent,
-        EditNodeTitleComponent,
-        NodeAuthoringComponent,
-        TeacherNodeIconComponent
-      ],
+      declarations: [CopyComponentButtonComponent, EditNodeTitleComponent, NodeAuthoringComponent],
       imports: [
         AddComponentButtonComponent,
         BrowserAnimationsModule,
@@ -60,7 +55,8 @@ describe('NodeAuthoringComponent', () => {
         MatInputModule,
         PreviewComponentButtonComponent,
         RouterTestingModule,
-        StudentTeacherCommonServicesModule
+        StudentTeacherCommonServicesModule,
+        TeacherNodeIconComponent
       ],
       providers: [
         ClassroomStatusService,
