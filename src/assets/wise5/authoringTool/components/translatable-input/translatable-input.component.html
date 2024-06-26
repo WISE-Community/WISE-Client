@@ -11,8 +11,8 @@
       <mat-hint>{{ hint }}</mat-hint>
     }
   </mat-form-field>
-} @if (showTranslationInput()) {
-  <mat-form-field *ngIf="showTranslationInput()" class="translatable">
+} @else {
+  <mat-form-field class="translatable">
     <mat-label>{{ label }} ({{ currentLanguage().language }})</mat-label>
     <input
       matInput
