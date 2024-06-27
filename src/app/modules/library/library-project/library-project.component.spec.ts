@@ -4,8 +4,10 @@ import { LibraryProject } from '../libraryProject';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { ProjectTagService } from '../../../../assets/wise5/services/projectTagService';
+import { provideRouter } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('LibraryProjectComponent', () => {
   let component: LibraryProjectComponent;
@@ -15,7 +17,8 @@ describe('LibraryProjectComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [LibraryProjectComponent],
-        imports: [BrowserAnimationsModule, RouterTestingModule, OverlayModule, MatDialogModule],
+        imports: [BrowserAnimationsModule, HttpClientTestingModule, MatDialogModule, OverlayModule],
+        providers: [ProjectTagService, provideRouter([])],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
     })

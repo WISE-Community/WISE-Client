@@ -24,6 +24,7 @@ import { of } from 'rxjs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
 import { HttpClient } from '@angular/common/http';
+import { ProjectTagService } from '../../../../assets/wise5/services/projectTagService';
 
 const archivedTag = { id: 1, text: 'archived', color: null };
 let archiveProjectService: ArchiveProjectService;
@@ -57,7 +58,7 @@ describe('PersonalLibraryComponent', () => {
           SelectAllItemsCheckboxComponent
         ],
         declarations: [LibraryProjectComponent, PersonalLibraryComponent],
-        providers: [ArchiveProjectService, LibraryService],
+        providers: [ArchiveProjectService, LibraryService, ProjectTagService],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
     })
