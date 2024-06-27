@@ -10,7 +10,9 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <required-error-label *ngIf="constraint.action === ''"> </required-error-label>
+  @if (constraint.action === '') {
+    <required-error-label />
+  }
   <div fxFlex></div>
   <mat-form-field class="removal-conditional-select">
     <mat-label i18n>Removal Conditional</mat-label>
@@ -29,11 +31,7 @@
   class="criteria-div"
   fxLayoutGap="16px"
 >
-  <edit-constraint-removal-criteria
-    [constraint]="constraint"
-    [criteria]="criteria"
-    [node]="node"
-  ></edit-constraint-removal-criteria>
+  <edit-constraint-removal-criteria [constraint]="constraint" [criteria]="criteria" [node]="node" />
 </div>
 <div fxLayoutGap="16px">
   <mat-label i18n>Add Removal Criteria</mat-label>

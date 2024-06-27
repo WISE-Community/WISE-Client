@@ -4,26 +4,25 @@
   <component-type-selector
     [componentType]="componentType"
     (componentTypeSelectedEvent)="displayComponent($event)"
-  ></component-type-selector>
+  />
 </div>
 <mat-dialog-content class="dialog-content-scroll">
   <h3 i18n>Description:</h3>
   <p class="description">{{ description }}</p>
-  <mat-divider></mat-divider>
+  <mat-divider/>
   <h3 i18n>Example:</h3>
   <mat-card appearance="outlined">
-    <preview-component
-      *ngIf="previewComponents.length === 1"
-      [component]="previewComponents[0]"
-    />
-    <mat-tab-group *ngIf="previewComponents.length > 1" mat-stretch-tabs="false">
-      <mat-tab
-        *ngFor="let component of previewComponents; index as i"
-        [label]="previewExamples[i].label"
-      >
-        <preview-component [component]="component" />
-      </mat-tab>
-    </mat-tab-group>
+    @if (previewComponents.length === 1) {
+    <preview-component [component]="previewComponents[0]" />
+    } @else if (previewComponents.length > 1) {
+      <mat-tab-group mat-stretch-tabs="false">
+        @for (component of previewComponents; track component; let i = $index) {
+          <mat-tab [label]="previewExamples[i].label">
+            <preview-component [component]="component" />
+          </mat-tab>
+        }
+      </mat-tab-group>
+    }
   </mat-card>
 </mat-dialog-content>
 <mat-dialog-actions fxLayoutAlign="end">

@@ -33,10 +33,10 @@ import { MilestoneModule } from './milestone/milestone.module';
 import { GradingCommonModule } from './grading-common.module';
 import { ManageStudentsModule } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students.module';
 import { DataExportModule } from '../../assets/wise5/classroomMonitor/dataExport/data-export.module';
-import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponents/stepTools/step-tools.module';
 import { RouterModule } from '@angular/router';
 import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator/save-indicator.component';
 import { PreviewComponentComponent } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.component';
+import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-tools.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,6 @@ import { PreviewComponentComponent } from '../../assets/wise5/authoringTool/comp
     NotebookWorkgroupGradingComponent,
     NotificationsMenuComponent,
     PauseScreensMenuComponent,
-    ProjectProgressComponent,
     ShowNodeInfoDialogComponent,
     StepInfoComponent,
     StepItemComponent,
@@ -76,10 +75,11 @@ import { PreviewComponentComponent } from '../../assets/wise5/authoringTool/comp
     NavItemScoreComponent,
     PeerGroupGradingModule,
     PreviewComponentComponent,
+    ProjectProgressComponent,
     RouterModule,
     SaveIndicatorComponent,
     SelectPeriodModule,
-    StepToolsModule
+    StepToolsComponent
   ]
 })
 export class ClassroomMonitorModule {}

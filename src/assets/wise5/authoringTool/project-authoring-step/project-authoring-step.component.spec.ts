@@ -9,7 +9,6 @@ import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
-import { NodeIconComponent } from '../../vle/node-icon/node-icon.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { DeleteNodeService } from '../../services/deleteNodeService';
@@ -25,14 +24,14 @@ describe('ProjectAuthoringStepComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NodeIconAndTitleComponent, ProjectAuthoringStepComponent],
+      declarations: [ProjectAuthoringStepComponent],
       imports: [
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
         MatDialogModule,
         MatIconModule,
-        NodeIconComponent,
+        NodeIconAndTitleComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [

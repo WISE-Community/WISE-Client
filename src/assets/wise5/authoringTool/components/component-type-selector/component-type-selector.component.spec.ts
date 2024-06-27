@@ -2,9 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ComponentTypeSelectorComponent } from './component-type-selector.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentTypeSelectorHarness } from './component-type-selector.harness';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
@@ -21,17 +18,13 @@ let userService: UserService;
 describe('ComponentTypeSelectorComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [ComponentTypeSelectorComponent],
       imports: [
         BrowserAnimationsModule,
+        ComponentTypeSelectorComponent,
         ComponentTypeServiceModule,
         HttpClientTestingModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatSelectModule,
         StudentTeacherCommonServicesModule
-      ],
-      providers: []
+      ]
     });
     fixture = TestBed.createComponent(ComponentTypeSelectorComponent);
     configService = TestBed.inject(ConfigService);

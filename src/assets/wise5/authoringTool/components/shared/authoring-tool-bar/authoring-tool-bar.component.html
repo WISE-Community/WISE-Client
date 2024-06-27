@@ -4,7 +4,9 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span *ngIf="!showStepTools" class="toolbar__title">{{ viewName }}</span>
-    <step-tools *ngIf="showStepTools"></step-tools>
+    @if (showStepTools) {
+      <step-tools />
+    }
     <div fxFlex></div>
     <span *ngIf="isJSONValid" class="success" fxLayoutAlign="start center">
       <mat-icon>done</mat-icon>

@@ -2,8 +2,6 @@
   <button
     id="previousNodeButton"
     mat-icon-button
-    aria-label="Previous Step"
-    i18n-aria-label
     [disabled]="!prevId"
     (click)="goToPrevNode()"
     matTooltip="Previous Step"
@@ -12,13 +10,11 @@
   >
     <mat-icon>{{ icons.prev }}</mat-icon>
   </button>
-  <node-icon *ngIf="nodeId" [nodeId]="nodeId" size="18"></node-icon>&nbsp;
+  <node-icon *ngIf="nodeId" [nodeId]="nodeId" size="18" />&nbsp;
   <mat-form-field appearance="fill">
     <mat-select
       id="stepSelectMenu"
       [panelClass]="'select-panel-full-height'"
-      aria-label="Select a Step"
-      i18n-aria-label
       placeholder="Select a Step"
       i18n-placeholder
       [(ngModel)]="nodeId"
@@ -33,7 +29,7 @@
       </mat-select-trigger>
       <mat-option *ngFor="let nodeId of nodeIds" [value]="nodeId" class="node-select-option">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-          <node-icon [nodeId]="nodeId" size="18"></node-icon>
+          <node-icon [nodeId]="nodeId" size="18" />
           <span [ngClass]="{ strong: isGroupNode(nodeId) }">{{
             getNodePositionAndTitle(nodeId)
           }}</span>
@@ -44,8 +40,6 @@
   <button
     id="nextNodeButton"
     mat-icon-button
-    aria-label="Next Step"
-    i18n-aria-label
     [disabled]="!nextId"
     (click)="goToNextNode()"
     matTooltip="Next Step"

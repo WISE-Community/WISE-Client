@@ -23,6 +23,15 @@
     </button>
     <span fxFlex></span>
     <button mat-button color="primary" routerLink="../../.." i18n>Cancel</button>
-    <button mat-raised-button color="primary" (click)="submit()" i18n>Submit</button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="submit()"
+      [disabled]="submitting"
+      class="button--progress"
+    >
+      <mat-progress-bar *ngIf="submitting" mode="indeterminate" />
+      <ng-container i18n>Submit</ng-container>
+    </button>
   </div>
 </div>

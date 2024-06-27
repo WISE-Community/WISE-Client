@@ -299,7 +299,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-info-dialog/component-info-dialog.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">29</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/preview-component-dialog/preview-component-dialog.component.html</context>
@@ -1520,7 +1520,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Submit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step/choose-import-step.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
@@ -1559,24 +1559,36 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">20</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/structure/jigsaw/jigsaw.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/structure/ki-cycle-using-oer/ki-cycle-using-oer.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/structure/peer-review-and-revision/peer-review-and-revision.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/structure/self-directed-investigation/self-directed-investigation.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">24</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-connected-components/edit-draw-connected-components.component.html</context>
@@ -1592,18 +1604,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">56</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="134d4dcbdf14d91b4d88bd9e920f3f0c91eebb43" datatype="html">
-        <source> Submit </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step/choose-import-step.component.html</context>
-          <context context-type="linenumber">69,71</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
-          <context context-type="linenumber">57,59</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dc834df3c90c7b9021cfa37b2be737c2134249a5" datatype="html">
@@ -1727,11 +1728,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/classroom-monitor/step-info/step-info.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroupInfo/workgroup-info.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.html</context>
@@ -6389,7 +6390,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">47,49</context>
+          <context context-type="linenumber">46,48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="70cfd60f574a2e5b823237ac05381d8d488e4c7c" datatype="html">
@@ -9472,21 +9473,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">64,66</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="b570c9b6f5d96fb6f6969cb9397019829c34e82c" datatype="html">
-        <source> Submit </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component.html</context>
-          <context context-type="linenumber">38,40</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
-          <context context-type="linenumber">76,78</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">59,61</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="891f639ffcf9d31aea80ea7e8e428a6597b059b3" datatype="html">
         <source>Step Title</source>
         <context-group purpose="location">
@@ -10071,7 +10057,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Next component type</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-type-selector/component-type-selector.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bc2e854e111ecf2bd7db170da5e3c2ed08181d88" datatype="html">
@@ -10249,30 +10235,30 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Removal Conditional</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f2223c3676f4453fbc98054f7b25cdeb921d57f9" datatype="html">
         <source>Add Removal Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/constraint-authoring/constraint-authoring.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1616102757855967475" datatype="html">
@@ -10325,99 +10311,101 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Please Choose a Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.html</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">40</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="dfdf148005fa139917dc083016eb4b6edddc0e1c" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ getNodePosition(nodeId) + &apos;:&apos; }}"/> <x id="INTERPOLATION_1" equiv-text="{{ getNodeTitle(nodeId) }}"/> (<x id="INTERPOLATION_2" equiv-text="{{ nodeId }}"/>)</source>
+      <trans-unit id="5e1e11017ce1735cc357cc78ec5065ffce34fbfa" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ getNodePosition(nodeId) + &apos;:&apos; }}"/> <x id="INTERPOLATION_1" equiv-text="{{ getNodeTitle(nodeId) }}"/> (<x id="INTERPOLATION_2" equiv-text="{{
+                    nodeId
+                  }}"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">45,47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ffdd60b93016f90d108095e9a69849cb5d1e93ed" datatype="html">
         <source>Please Choose a Component</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.html</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ea0a55a0d4f9d7cf400f299699b5e5f286d69f99" datatype="html">
+      <trans-unit id="0fdffed52edaed29e03a6678b12303fae7ed1bbb" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ componentIndex + 1 }}"/>. <x id="INTERPOLATION_1" equiv-text="{{ component.type }}"/> (Prompt: <x id="INTERPOLATION_2" equiv-text="{{ component.prompt }}"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.html</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">73,74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2429c94849bccc2d8286fdecef990de25fabb867" datatype="html">
         <source>Please Select a From Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.html</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="20cee39940010d8e8bd5c2bf5871a1e6bf445356" datatype="html">
         <source>Please Select a To Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.html</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">112</context>
         </context-group>
       </trans-unit>
       <trans-unit id="337685d80c312b75cbb9b507173f51f559c7f4ae" datatype="html">
         <source>Please Select a Choice</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.html</context>
-          <context context-type="linenumber">178</context>
+          <context context-type="linenumber">175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="331a731f82078e496dfeddc5399c38bd40f7ffaa" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ param.text }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.html</context>
-          <context context-type="linenumber">223</context>
+          <context context-type="linenumber">213</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.html</context>
-          <context context-type="linenumber">246</context>
+          <context context-type="linenumber">231</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.html</context>
-          <context context-type="linenumber">269</context>
+          <context context-type="linenumber">249</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5847302460276630595" datatype="html">
         <source>Component</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8980375993935541237" datatype="html">
         <source>Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4250686915350181595" datatype="html">
         <source>Please Choose a Removal Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6460463610153137840" datatype="html">
         <source>Is Completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7123653594948067002" datatype="html">
         <source>Score</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
@@ -10436,35 +10424,35 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Score(s)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="16986194959433746" datatype="html">
         <source>Branch Path Taken</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6380325907263903883" datatype="html">
         <source>From Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="455666817590621118" datatype="html">
         <source>To Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8352660755693654653" datatype="html">
         <source>Choice Chosen</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
@@ -10475,7 +10463,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Choices</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
@@ -10494,112 +10482,112 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Is Correct</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4268291134905709874" datatype="html">
         <source>Used X Submits</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="767433972334291022" datatype="html">
         <source>Required Submit Count</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2997822456018079719" datatype="html">
         <source>Is Visible</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2226381985639556979" datatype="html">
         <source>Is Visitable</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3284330787067886212" datatype="html">
         <source>Is Visited</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3120562623622017132" datatype="html">
         <source>Wrote X Number of Words</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3793469420585389570" datatype="html">
         <source>Required Number of Words</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2346474241177154844" datatype="html">
         <source>Add X Number of Notes On This Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2215706295447985195" datatype="html">
         <source>Required Number of Notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3753898460381641212" datatype="html">
         <source>Fill X Number of Rows</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8868642264052368211" datatype="html">
         <source>Required Number of Filled Rows (Not Including Header Row)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3373179210544883044" datatype="html">
         <source>Table Has Header Row</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">97</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3682483624336387760" datatype="html">
         <source>Require All Cells In a Row To Be Filled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">100</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6549053190457916462" datatype="html">
         <source>Teacher Removes Constraint</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">104</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8870343237719695349" datatype="html">
         <source>Are you sure you want to delete this removal criteria?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8564983557318479146" datatype="html">
@@ -12627,21 +12615,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Copying Unit...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5317921744918848185" datatype="html">
         <source>There was an error copying this unit. Please contact WISE staff.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4550129747596313114" datatype="html">
         <source> (Run ID: <x id="PH" equiv-text="project.runId"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5435676366729047906" datatype="html">
@@ -12650,14 +12638,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
 <x id="PH" equiv-text="projectInfo"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1460984918484282139" datatype="html">
         <source>Loading Unit...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="da5a512c617db2028ac96bac14b200a4bbc381d4" datatype="html">
@@ -15230,7 +15218,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5760105370370371133" datatype="html">
@@ -15328,11 +15316,7 @@ Are you sure you want to proceed?</source>
         <source>Previous Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">7</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
@@ -15343,41 +15327,33 @@ Are you sure you want to proceed?</source>
         <source>Select a Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">20</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="917fe58e5db91d556b358347aaf19ac603959b1f" datatype="html">
         <source> Select a Step </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8b28432b6c78dfa3fb0a921ff13c63faa06457fe" datatype="html">
         <source>Next Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">47</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5353912858871423613" datatype="html">
@@ -16769,7 +16745,7 @@ Are you ready to receive feedback on this answer?</source>
         <source>Teaching Tips</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component/component.component.html</context>
-          <context context-type="linenumber">2</context>
+          <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
       <trans-unit id="687454984939780519" datatype="html">
@@ -22032,11 +22008,11 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">70</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8bb72dd61fcb847d109325b4dcae05bef9de55c0" datatype="html">
@@ -22121,7 +22097,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Rubric</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/helpIcon/help-icon.component.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2e1aeaf8d183e6846a0463a08c784f472184fcf0" datatype="html">
@@ -22149,7 +22125,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Next Item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7fb53ef6f4a51654aa5d007c189f354a75b4c05f" datatype="html">
@@ -22262,6 +22238,24 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
           <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d4dcc586339ab168041be68bea2c0f182a08dc41" datatype="html">
+        <source>Choose an icon</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node-icon/node-icon.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node-icon/node-icon.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b570c9b6f5d96fb6f6969cb9397019829c34e82c" datatype="html">
+        <source> Submit </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
+          <context context-type="linenumber">58,60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e4c201ad39e5fa4658b22a707c94012bc30e0846" datatype="html">

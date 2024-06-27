@@ -17,16 +17,17 @@
 <button
   *ngIf="canEdit"
   mat-button
-  matTooltip="Choose an Icon"
+  matTooltip="Choose an icon"
   matTooltipPosition="above"
+  i18n-matTooltip
   matBadge="edit"
   class="mdc-text-field--filled has-icon-badge"
   (click)="openNodeIconChooserDialog()"
 >
   <div class="mat-form-field-flex" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="4px">
-    <ng-container *ngTemplateOutlet="iconContent"></ng-container>
+    <ng-container *ngTemplateOutlet="iconContent" />
   </div>
 </button>
 <ng-container *ngIf="!canEdit">
-  <ng-container *ngTemplateOutlet="iconContent"></ng-container>
+  <ng-container *ngTemplateOutlet="iconContent" />
 </ng-container>

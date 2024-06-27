@@ -18,9 +18,13 @@ import { StudentDataService } from '../../services/studentDataService';
 import { Component as WISEComponent } from '../../common/Component';
 import { ComponentFactory } from '../../common/ComponentFactory';
 import { components } from '../Components';
+import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  imports: [CommonModule, HelpIconComponent],
   selector: 'component',
+  standalone: true,
   templateUrl: 'component.component.html'
 })
 export class ComponentComponent {
@@ -39,15 +43,15 @@ export class ComponentComponent {
     private applicationRef: ApplicationRef,
     private clickToSnipImageService: ClickToSnipImageService,
     private configService: ConfigService,
+    private dataService: StudentDataService,
     private injector: EnvironmentInjector,
     private notebookService: NotebookService,
-    private projectService: ProjectService,
-    private studentDataService: StudentDataService
+    private projectService: ProjectService
   ) {}
 
   ngOnInit() {
     if (this.componentState == null || this.componentState === '') {
-      this.componentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+      this.componentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
         this.nodeId,
         this.componentId
       );

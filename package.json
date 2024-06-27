@@ -120,7 +120,7 @@
     "karma-json-fixtures-preprocessor": "0.0.6",
     "karma-spec-reporter": "0.0.36",
     "karma-webpack": "^5.0.0",
-    "prettier": "2.2.1",
+    "prettier": "^3.3.2",
     "protractor": "~7.0.0",
     "sass": "^1.50.1",
     "ts-loader": "^6.2.2",

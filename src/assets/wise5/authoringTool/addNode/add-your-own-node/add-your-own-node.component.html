@@ -44,7 +44,7 @@
           <component-type-button
             [componentType]="componentType.type"
             (componentSelectedEvent)="addComponent(componentType)"
-          ></component-type-button>
+          />
         </div>
       </div>
       <p class="info mat-small" i18n>
@@ -69,12 +69,12 @@
       <button
         mat-raised-button
         color="primary"
-        [disabled]="!addNodeFormGroup.valid"
+        [disabled]="!addNodeFormGroup.valid || submitting"
         (click)="submit()"
-        aria-label="Submit"
-        i18n
+        class="button--progress"
       >
-        Submit
+        <mat-progress-bar *ngIf="submitting" mode="indeterminate"/>
+        <ng-container i18n>Submit</ng-container>
       </button>
     </div>
   </div>

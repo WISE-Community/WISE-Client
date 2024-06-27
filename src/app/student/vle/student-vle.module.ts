@@ -43,12 +43,10 @@ import { NodeStatusIconComponent } from '../../../assets/wise5/themes/default/th
     NodeNavigationComponent,
     RunEndedAndLockedMessageComponent,
     SafeUrl,
-    StepToolsComponent,
     VLEComponent,
     VLEParentComponent
   ],
   imports: [
-    StudentTeacherCommonModule,
     CommonModule,
     ComponentStudentModule,
     MatDialogModule,
@@ -56,8 +54,10 @@ import { NodeStatusIconComponent } from '../../../assets/wise5/themes/default/th
     NodeModule,
     NodeStatusIconComponent,
     SimpleDialogModule,
+    StepToolsComponent,
     StudentAssetsDialogModule,
     StudentComponentModule,
+    StudentTeacherCommonModule,
     StudentVLERoutingModule,
     SummaryDisplayModule,
     TopBarComponent
