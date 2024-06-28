@@ -10,6 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   standalone: true,
   selector: 'project-language-chooser',
+  styleUrl: './project-language-chooser.component.scss',
   imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
   templateUrl: './project-language-chooser.component.html'
 })
@@ -18,7 +19,7 @@ export class ProjectLanguageChooserComponent implements OnChanges {
   @Output() languageChangedEvent = new EventEmitter<Language>();
   @Input() projectLocale: ProjectLocale;
   protected selectedLanguage: Language;
-  @Input() tooltip: string = $localize`Select Language`;
+  @Input() tooltip: string = $localize`Select language`;
 
   ngOnChanges(): void {
     this.availableLanguages = this.projectLocale.getAvailableLanguages();
