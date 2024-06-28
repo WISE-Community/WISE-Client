@@ -1,15 +1,14 @@
 <h2 mat-dialog-title i18n>Manage Tags</h2>
 <mat-dialog-content class="dialog-content-scroll">
   <div fxLayout="column" fxLayoutGap="12px">
-    @if (!showCreateTag) {
+    @if (showCreateTag) {
+      <edit-tag (closeEvent)="showCreateTag = false" />
+    } @else {
       <div>
         <button mat-flat-button color="primary" (click)="showCreateTag = !showCreateTag" i18n>
           + New Tag
         </button>
       </div>
-    }
-    @if (showCreateTag) {
-      <edit-tag (closeEvent)="showCreateTag = false" />
     }
     <mat-list class="app-bg-bg">
       @for (tag of tags; track tag.id; let tagIndex = $index; let last = $last) {
@@ -20,8 +19,7 @@
                 <div class="edit-tag">
                   <edit-tag [tag]="tag" (closeEvent)="cancelEditing(tag)" />
                 </div>
-              }
-              @if (!idToEditing[tag.id]) {
+              } @else {
                 <tag class="mat-small" [color]="tag.color" [text]="tag.text" />
                 <span fxFlex></span>
                 <button
