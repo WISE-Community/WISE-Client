@@ -9,6 +9,7 @@ type SelectAllItemsStatus = 'none' | 'some' | 'all';
   providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }],
   selector: 'select-all-items-checkbox',
   standalone: true,
+  styleUrl: 'select-all-items-checkbox.component.scss',
   templateUrl: './select-all-items-checkbox.component.html'
 })
 export class SelectAllItemsCheckboxComponent {
