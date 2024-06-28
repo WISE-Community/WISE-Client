@@ -9,7 +9,7 @@
 </button>
 <mat-menu #applyTagsMenu (closed)="searchText = ''">
   <div class="menu-info secondary-text" (click)="$event.stopPropagation()" i18n>Apply tags</div>
-  <app-search-bar [value]="searchText" (update)="filterTags($event)"></app-search-bar>
+  <app-search-bar [value]="searchText" (update)="filterTags($event)" />
   <div *ngFor="let tag of filteredTags" (click)="$event.stopPropagation()" mat-menu-item>
     <select-all-items-checkbox
       [numAllItems]="selectedProjects.length"
@@ -20,6 +20,6 @@
       <div [ngStyle]="{ color: tag.color }">{{ tag.text }}</div>
     </select-all-items-checkbox>
   </div>
-  <mat-divider></mat-divider>
+  <mat-divider />
   <div (click)="manageTags(); $event.stopPropagation()" mat-menu-item i18n>Manage Tags</div>
 </mat-menu>

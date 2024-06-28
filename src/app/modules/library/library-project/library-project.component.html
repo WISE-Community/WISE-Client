@@ -22,7 +22,7 @@
       (click)="selectProject($event)"
     ></mat-checkbox>
   </div>
-  <app-library-project-disciplines [project]="project"/>
+  <app-library-project-disciplines [project]="project" />
   <div
     class="library-project__details can-highlight"
     [ngClass]="{ 'highlighted-bg': project.isHighlighted }"
@@ -43,7 +43,7 @@
       Shared by {{ project.owner.displayName }}
     </p>
     <div class="tags">
-      <unit-tags class="mat-small" [tags]="project.tags"></unit-tags>
+      <unit-tags class="mat-small" [tags]="project.tags" />
     </div>
   </div>
 </mat-card>

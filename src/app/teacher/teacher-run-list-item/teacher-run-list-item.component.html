@@ -47,7 +47,7 @@
   <div *ngIf="run.shared" class="info" i18n>
     Shared by {{ run.owner.firstName }} {{ run.owner.lastName }}
   </div>
-  <unit-tags [tags]="run.project.tags"></unit-tags>
+  <unit-tags [tags]="run.project.tags" />
 </ng-template>
 <mat-card
   class="can-highlight"

@@ -12,7 +12,7 @@
     [disable]="!recentRunsLoaded"
     [value]="searchValue"
     (update)="searchChanged($event)"
-  ></app-search-bar>
+  />
   <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
     <mat-form-field [subscriptSizing]="'dynamic'">
@@ -25,8 +25,13 @@
   </div>
 </div>
 <div class="content-block">
-  <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="16px" fxLayoutAlign="space-between center">
-    <select-tags [selectedTags]="selectedTags" (selectTagEvent)="selectTags($event)"/>
+  <div
+    fxLayout="column"
+    fxLayout.gt-xs="row"
+    fxLayoutGap="16px"
+    fxLayoutAlign="space-between center"
+  >
+    <select-tags [selectedTags]="selectedTags" (selectTagEvent)="selectTags($event)" />
     <div class="notice run-counts">
       <p [ngStyle]="{ visibility: allRunsLoaded ? 'visible' : 'hidden' }">
         <ng-container *ngIf="searchValue || filterValue" i18n
@@ -78,7 +83,7 @@
         [runs]="filteredRuns"
         (selectRunsOptionChosenEvent)="selectRunsOptionChosen($event)"
         [showArchive]="!showArchivedView"
-      ></select-runs-controls>
+      />
       <apply-tags-button
         *ngIf="selectedProjects.length > 0"
         [selectedProjects]="selectedProjects"

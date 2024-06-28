@@ -12,7 +12,7 @@
   (change)="selectTagEvent.emit(selectedTags)"
 >
   <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
-    <tag [color]="item.color" [text]="item.text" class="mat-small"></tag>
+    <tag [color]="item.color" [text]="item.text" class="mat-small" />
   </ng-template>
   <ng-template ng-label-tmp let-item="item" let-clear="clear">
     <tag
@@ -21,7 +21,7 @@
       [showRemoveButton]="true"
       (removeTagEvent)="clear(item)"
       class="mat-small"
-    ></tag>
+    />
   </ng-template>
   <ng-template ng-footer-tmp>
     <button mat-button (click)="manageTags(); $event.stopPropagation()" i18n>Manage Tags</button>

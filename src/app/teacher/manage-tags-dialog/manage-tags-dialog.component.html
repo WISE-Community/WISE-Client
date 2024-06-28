@@ -10,21 +10,17 @@
     <mat-list class="app-bg-bg">
       <div *ngFor="let tag of tags; let tagIndex = index; let last = last">
         <mat-list-item>
-          <div
-            fxLayout="row"
-            fxLayoutAlign="start center"
-            fxLayoutGap="8px"
-          >
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
             <div *ngIf="idToEditing[tag.id]" class="edit-tag">
               <edit-tag [tag]="tag" (closeEvent)="cancelEditing(tag)" />
             </div>
             <ng-container *ngIf="!idToEditing[tag.id]">
-              <tag class="mat-small" [color]="tag.color" [text]="tag.text"></tag>
+              <tag class="mat-small" [color]="tag.color" [text]="tag.text" />
               <span fxFlex></span>
               <button
                 mat-icon-button
                 color="primary"
-                (click)="idToEditing[tag.id] = !idToEditing[tag.id]; showCreateTag = false;"
+                (click)="idToEditing[tag.id] = !idToEditing[tag.id]; showCreateTag = false"
                 matTooltip="Edit"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -44,7 +40,7 @@
             </ng-container>
           </div>
         </mat-list-item>
-        <mat-divider *ngIf="!last"/>
+        <mat-divider *ngIf="!last" />
       </div>
     </mat-list>
   </div>
