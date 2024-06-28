@@ -10,16 +10,18 @@
 <mat-menu #applyTagsMenu (closed)="searchText = ''">
   <div class="menu-info secondary-text" (click)="$event.stopPropagation()" i18n>Apply tags</div>
   <app-search-bar [value]="searchText" (update)="filterTags($event)" />
-  <div *ngFor="let tag of filteredTags" (click)="$event.stopPropagation()" mat-menu-item>
-    <select-all-items-checkbox
-      [numAllItems]="selectedProjects.length"
-      [numSelectedItems]="tag.numProjectsWithTag"
-      (allSelectedEvent)="addTagToProjects(tag)"
-      (noneSelectedEvent)="removeTagFromProjects(tag)"
-    >
-      <div [ngStyle]="{ color: tag.color }">{{ tag.text }}</div>
-    </select-all-items-checkbox>
-  </div>
+  @for (tag of filteredTags; track tag.id) {
+    <div (click)="$event.stopPropagation()" mat-menu-item>
+      <select-all-items-checkbox
+        [numAllItems]="selectedProjects.length"
+        [numSelectedItems]="tag.numProjectsWithTag"
+        (allSelectedEvent)="addTagToProjects(tag)"
+        (noneSelectedEvent)="removeTagFromProjects(tag)"
+      >
+        <div [ngStyle]="{ color: tag.color }">{{ tag.text }}</div>
+      </select-all-items-checkbox>
+    </div>
+  }
   <mat-divider />
   <div (click)="manageTags(); $event.stopPropagation()" mat-menu-item i18n>Manage Tags</div>
 </mat-menu>

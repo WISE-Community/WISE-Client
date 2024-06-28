@@ -6,16 +6,20 @@
     <mat-form-field fxFlex>
       <mat-label i18n>Tag Name</mat-label>
       <input matInput #nameInput (keyup.enter)="enterKeyPressed()" [formControl]="nameControl" />
-      <mat-error *ngIf="nameControl.errors?.required" i18n>Required</mat-error>
-      <mat-error *ngIf="nameControl.errors?.archivedNotAllowed" i18n
-        >Archived tag not allowed</mat-error
-      >
-      <mat-error *ngIf="nameControl.errors?.tagAlreadyExists" i18n>Tag already exists</mat-error>
+      @if (nameControl.errors?.required) {
+        <mat-error i18n>Required</mat-error>
+      } @else if (nameControl.errors?.archivedNotAllowed) {
+        <mat-error i18n>Archived tag not allowed</mat-error>
+      } @else if (nameControl.errors?.tagAlreadyExists) {
+        <mat-error i18n>Tag already exists</mat-error>
+      }
     </mat-form-field>
     <mat-form-field class="color-input">
       <mat-label i18n>Color</mat-label>
       <input matInput (keyup.enter)="enterKeyPressed()" [formControl]="colorControl" />
-      <mat-error *ngIf="colorControl.errors?.required" i18n>Required</mat-error>
+      @if (colorControl.errors?.required) {
+        <mat-error i18n>Required</mat-error>
+      }
     </mat-form-field>
   </div>
 </div>
