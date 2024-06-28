@@ -291,7 +291,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
@@ -437,7 +437,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.html</context>
@@ -703,7 +703,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">41</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
@@ -5617,7 +5617,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/select-peer-grouping-option/select-peer-grouping-option.component.html</context>
@@ -5709,7 +5709,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Unit Details</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1160916388490317189" datatype="html">
@@ -6262,7 +6262,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3376099465386156138" datatype="html">
@@ -7789,7 +7789,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cba86a51e8ee210e24b4d9b47ceffed1e70b61d1" datatype="html">
@@ -8045,7 +8045,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Manage Tags</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/apply-tags-button/apply-tags-button.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">26</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
@@ -8282,11 +8282,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component.html</context>
@@ -8297,21 +8297,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Archived tag not allowed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4215210349960e31377ef22c4d2750f626b84067" datatype="html">
         <source>Tag already exists</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8fa4d523f7b91df4390120b85ed0406138273e1a" datatype="html">
         <source>Color</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
@@ -8487,11 +8487,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="dea691b1f946f0b5e4bf750b4cfc30098c784fe0" datatype="html">
+      <trans-unit id="13773197ab492ec5aab001f2798d1f262f09c068" datatype="html">
         <source> + New Tag </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
-          <context context-type="linenumber">5,7</context>
+          <context context-type="linenumber">6,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8663242190095976332" datatype="html">
@@ -9185,63 +9185,63 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Archived classroom units:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="86afbfd92ca97c3ff7a13ce7b054cb61da0a765b" datatype="html">
         <source>Active classroom units:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c3840ff3430f7c6130e4d7a2f0aec5a7cb3ebb3a" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ completedTotal() }}"/> completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a7b809683879d9bbbcc3e267d32b6d1843e71f37" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ activeTotal() }}"/> running</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c6a2c19b6bd10c35aca82f19ffebdc75a2fc164c" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ scheduledTotal() }}"/> scheduled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1e5e23363e949f7dcbaf034bdb141a561132a10e" datatype="html">
         <source>Clear filters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e4e0216355ba192123e2e3de05ca4dd43bade702" datatype="html">
         <source>Hey there! Looks like you don&apos;t have any active classroom units.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0bba20f41a44e7e61cb7eaad1470a5609e82344e" datatype="html">
         <source>Browse the &quot;Unit Library&quot; to find titles to use with your students.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a6b02f88136d4ac3a08c668a1faafe2759d2b48d" datatype="html">
         <source>Looks like you don&apos;t have any archived classroom units.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8e63cdbdb10c29b7ecc49caa43163fc7c800d612" datatype="html">
