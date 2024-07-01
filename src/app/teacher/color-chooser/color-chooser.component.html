@@ -1,0 +1,13 @@
+<mat-chip-listbox>
+  @for (color of colors; track color) {
+    <mat-chip-option
+      class="color-choice"
+      [value]="color"
+      [selected]="color === chosenColor"
+      (selectionChange)="chooseColorEvent.emit($event.selected ? $event.source.value : '')"
+      [style.background-color]="color"
+    >
+      <div class="color-option-div"></div>
+    </mat-chip-option>
+  }
+</mat-chip-listbox>

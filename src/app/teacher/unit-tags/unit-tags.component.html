@@ -1,0 +1,7 @@
+<div fxLayoutGap="8px" role="presentation" aria-label="Unit tags" i18n-aria-label>
+  @for (tag of tags; track tag) {
+    @if (tag.text !== 'archived') {
+      <tag [color]="tag.color" [text]="tag.text" />
+    }
+  }
+</div>

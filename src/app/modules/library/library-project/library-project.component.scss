@@ -85,6 +85,11 @@ $config: mat.define-typography-config();
 .mat-mdc-checkbox.library-project__checkbox {
   position: absolute;
   top: 0;
-  z-index: 1;
+  z-index: 100;
   border-end-end-radius: $button-border-radius;
+}
+
+.tags {
+  max-height: 86px;
+  overflow-y: auto;
 }

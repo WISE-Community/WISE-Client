@@ -4,6 +4,7 @@ import { Observable, Subject, Subscription } from 'rxjs';
 import { Project } from '../domain/project';
 import { ArchiveProjectResponse } from '../domain/archiveProjectResponse';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Tag } from '../domain/tag';
 
 @Injectable()
 export class ArchiveProjectService {
@@ -15,7 +16,7 @@ export class ArchiveProjectService {
   archiveProject(project: Project, archive: boolean): void {
     this[archive ? 'makeArchiveProjectRequest' : 'makeUnarchiveProjectRequest'](project).subscribe({
       next: (response: ArchiveProjectResponse) => {
-        this.updateProjectArchivedStatus(project, response.archived);
+        this.updateProjectArchivedStatus(project, response.archived, response.tag);
         this.showArchiveProjectSuccessMessage(project, archive);
       },
       error: () => {
@@ -32,8 +33,8 @@ export class ArchiveProjectService {
     return this.http.delete<ArchiveProjectResponse>(`/api/project/${project.id}/archived`);
   }
 
-  private updateProjectArchivedStatus(project: Project, archived: boolean): void {
-    project.updateArchivedStatus(archived);
+  private updateProjectArchivedStatus(project: Project, archived: boolean, tag: Tag): void {
+    project.updateArchivedStatus(archived, tag);
     this.refreshProjects();
   }
 
@@ -52,7 +53,7 @@ export class ArchiveProjectService {
   private undoArchiveProjectAction(project: Project, archiveFunctionName: string): void {
     this[archiveFunctionName](project).subscribe({
       next: (response: ArchiveProjectResponse) => {
-        this.updateProjectArchivedStatus(project, response.archived);
+        this.updateProjectArchivedStatus(project, response.archived, response.tag);
         this.snackBar.open($localize`Action undone.`);
       },
       error: () => {
@@ -102,7 +103,7 @@ export class ArchiveProjectService {
   ): void {
     for (const archiveProjectResponse of archiveProjectsResponse) {
       const project = projects.find((project: Project) => project.id === archiveProjectResponse.id);
-      project.updateArchivedStatus(archiveProjectResponse.archived);
+      project.updateArchivedStatus(archiveProjectResponse.archived, archiveProjectResponse.tag);
     }
     this.refreshProjects();
   }

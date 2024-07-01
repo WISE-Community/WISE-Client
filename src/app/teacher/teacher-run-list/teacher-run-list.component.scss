@@ -7,19 +7,15 @@ h2 {
   margin-bottom: 0;
 }
 
-.content-block {
+.filters {
   margin-top: 24px;
-  overflow: hidden;
+  padding: 16px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
-.content-block__header {
-  margin: -16px -16px 16px;
-
-  @media (min-width: breakpoint('sm.min')) {
-    margin: -24px -24px 16px;
-  }
-}
-
-.notice {
+.run-counts {
   font-weight: 500;
+  margin: 0;
+  max-width: none;
 }
