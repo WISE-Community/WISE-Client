@@ -18,7 +18,7 @@
         (allSelectedEvent)="addTagToProjects(tag)"
         (noneSelectedEvent)="removeTagFromProjects(tag)"
       >
-        <div [ngStyle]="{ color: tag.color }">{{ tag.text }}</div>
+        <tag [color]="tag.color" [text]="tag.text" class="mat-small" />
       </select-all-items-checkbox>
     </div>
   }

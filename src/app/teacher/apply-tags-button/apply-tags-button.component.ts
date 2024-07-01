@@ -11,6 +11,7 @@ import { SelectAllItemsCheckboxComponent } from '../../modules/library/select-al
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AbstractTagsMenuComponent } from '../abstract-tags-menu/abstract-tags-menu.component';
 import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
+import { TagComponent } from '../tag/tag.component';
 
 @Component({
   imports: [
@@ -21,7 +22,8 @@ import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.c
     MatMenuModule,
     MatTooltipModule,
     SearchBarComponent,
-    SelectAllItemsCheckboxComponent
+    SelectAllItemsCheckboxComponent,
+    TagComponent
   ],
   providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }],
   selector: 'apply-tags-button',
