@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { UnitTagsComponent } from './unit-tags.component';
 
 describe('UnitTagsComponent', () => {
@@ -9,9 +8,8 @@ describe('UnitTagsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [UnitTagsComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(UnitTagsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

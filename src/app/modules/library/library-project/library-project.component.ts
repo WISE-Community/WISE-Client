@@ -23,7 +23,8 @@ export class LibraryProjectComponent implements OnInit {
   @Input() myUnit: boolean = false;
   @Input() project: LibraryProject = new LibraryProject();
   @Output()
-  projectSelectionEvent: EventEmitter<ProjectSelectionEvent> = new EventEmitter<ProjectSelectionEvent>();
+  projectSelectionEvent: EventEmitter<ProjectSelectionEvent> =
+    new EventEmitter<ProjectSelectionEvent>();
   private subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -47,11 +48,11 @@ export class LibraryProjectComponent implements OnInit {
 
   private subscribeToTagUpdated(): void {
     this.subscriptions.add(
-      this.projectTagService.tagUpdated$.subscribe((tagThatChanged: Tag) => {
-        const tagOnProject = this.project.tags.find((tag: Tag) => tag.id === tagThatChanged.id);
-        if (tagOnProject != null) {
-          tagOnProject.text = tagThatChanged.text;
-          tagOnProject.color = tagThatChanged.color;
+      this.projectTagService.tagUpdated$.subscribe((updatedTag: Tag) => {
+        const projectTag = this.project.tags.find((tag: Tag) => tag.id === updatedTag.id);
+        if (projectTag != null) {
+          projectTag.text = updatedTag.text;
+          projectTag.color = updatedTag.color;
           this.projectTagService.sortTags(this.project.tags);
         }
       })

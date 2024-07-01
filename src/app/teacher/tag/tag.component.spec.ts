@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TagComponent } from './tag.component';
 import { ColorService } from '../../../assets/wise5/services/colorService';
 

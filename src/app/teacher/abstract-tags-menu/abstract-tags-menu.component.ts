@@ -12,7 +12,10 @@ export class AbstractTagsMenuComponent {
   private subscriptions: Subscription = new Subscription();
   protected tags: Tag[] = [];
 
-  constructor(private dialog: MatDialog, protected projectTagService: ProjectTagService) {}
+  constructor(
+    private dialog: MatDialog,
+    protected projectTagService: ProjectTagService
+  ) {}
 
   ngOnInit(): void {
     this.retrieveUserTags();
@@ -37,10 +40,10 @@ export class AbstractTagsMenuComponent {
 
   private subscribeToTagUpdated(): void {
     this.subscriptions.add(
-      this.projectTagService.tagUpdated$.subscribe((tagThatChanged: Tag) => {
-        const tag = this.tags.find((t: Tag) => t.id === tagThatChanged.id);
-        tag.text = tagThatChanged.text;
-        tag.color = tagThatChanged.color;
+      this.projectTagService.tagUpdated$.subscribe((updatedTag: Tag) => {
+        const tag = this.tags.find((t: Tag) => t.id === updatedTag.id);
+        tag.text = updatedTag.text;
+        tag.color = updatedTag.color;
         this.projectTagService.sortTags(this.tags);
       })
     );

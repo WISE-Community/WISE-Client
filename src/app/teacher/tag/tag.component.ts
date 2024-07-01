@@ -13,11 +13,11 @@ import { MatDividerModule } from '@angular/material/divider';
   styleUrl: './tag.component.scss'
 })
 export class TagComponent implements OnChanges {
+  @Input() allowRemove: boolean;
   @Input() color: string;
   @Output() removeTagEvent: EventEmitter<void> = new EventEmitter<void>();
   @Input() text: string;
   protected textColor: string;
-  @Input() showRemoveButton: boolean;
 
   constructor(private colorService: ColorService) {}
 

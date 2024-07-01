@@ -1,6 +1,6 @@
 <span class="tag" [ngStyle]="{ 'background-color': color, color: textColor }">
   <span>{{ text }}</span>
-  @if (showRemoveButton) {
+  @if (allowRemove) {
     <span class="divider"></span>
     <button
       mat-icon-button

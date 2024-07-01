@@ -29,10 +29,9 @@
         [showArchive]="!showArchivedView"
         (archiveProjectsEvent)="archiveProjects($event)"
       ></archive-projects-button>
-      <apply-tags-button
-        *ngIf="selectedProjects().length > 0"
-        [selectedProjects]="selectedProjects()"
-      />
+      @if (selectedProjects().length > 0) {
+        <apply-tags-button [selectedProjects]="selectedProjects()" />
+      }
     </div>
     <span fxFlex fxHide.xs></span>
     <mat-paginator
