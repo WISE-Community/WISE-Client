@@ -75,6 +75,7 @@
           >{{ isLast ? '' : ' / ' }}
         </ng-container>
       </p>
+      <unit-tags [tags]="project.tags" />
     </div>
     <discourse-category-activity
       *ngIf="project.metadata.discourseCategoryURL"
