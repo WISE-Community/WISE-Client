@@ -12,6 +12,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { AbstractTagsMenuComponent } from '../abstract-tags-menu/abstract-tags-menu.component';
 import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
 import { TagComponent } from '../tag/tag.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   imports: [
@@ -33,6 +36,14 @@ import { TagComponent } from '../tag/tag.component';
 })
 export class ApplyTagsButtonComponent extends AbstractTagsMenuComponent {
   @Input() selectedProjects: Project[] = [];
+
+  constructor(
+    dialog: MatDialog,
+    protected projectTagService: ProjectTagService,
+    private snackBar: MatSnackBar
+  ) {
+    super(dialog, projectTagService);
+  }
 
   ngOnChanges(): void {
     this.updateAllTagsCheckedValues();
@@ -64,6 +75,7 @@ export class ApplyTagsButtonComponent extends AbstractTagsMenuComponent {
         project.addTag(tag);
       }
       this.updateTagCheckedValue(tag);
+      this.snackBar.open($localize`Successfully applied tag`);
     });
   }
 
@@ -73,6 +85,7 @@ export class ApplyTagsButtonComponent extends AbstractTagsMenuComponent {
         project.tags = project.tags.filter((projectTag: Tag) => projectTag.id !== tag.id);
       }
       this.updateTagCheckedValue(tag);
+      this.snackBar.open($localize`Successfully removed tag`);
     });
   }
 }
