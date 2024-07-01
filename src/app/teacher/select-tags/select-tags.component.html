@@ -12,7 +12,9 @@
   (change)="selectTagEvent.emit(selectedTags)"
 >
   <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
-    <tag [color]="item.color" [text]="item.text" class="mat-small" />
+    <mat-checkbox [checked]="isSelected(item)" color="primary">
+      <tag [color]="item.color" [text]="item.text" class="mat-small" />
+    </mat-checkbox>
   </ng-template>
   <ng-template ng-label-tmp let-item="item" let-clear="clear">
     <tag

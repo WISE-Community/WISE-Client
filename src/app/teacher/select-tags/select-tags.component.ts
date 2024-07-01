@@ -10,12 +10,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TagComponent } from '../tag/tag.component';
 import { FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   imports: [
     CommonModule,
+    FlexLayoutModule,
     FormsModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatDividerModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -33,7 +37,11 @@ export class SelectTagsComponent extends AbstractTagsMenuComponent {
   @Input() selectedTags: Tag[] = [];
   @Output() selectTagEvent: EventEmitter<Tag[]> = new EventEmitter<Tag[]>();
 
-  tagSearch(term: string, item: Tag): boolean {
+  protected tagSearch(term: string, item: Tag): boolean {
     return item.text.toLowerCase().includes(term.toLowerCase());
+  }
+
+  protected isSelected(tag: Tag): boolean {
+    return this.selectedTags.some((selectedTag) => selectedTag.text === tag.text);
   }
 }
