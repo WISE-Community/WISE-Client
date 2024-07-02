@@ -18,17 +18,18 @@
     <node-icon-and-title [nodeId]="step.id" [showPosition]="showPosition" />
   </mat-checkbox>
   <div fxLayoutAlign="start center" fxLayoutGap="10px">
-    <mat-icon
-      *ngIf="isBranchPoint(step.id)"
-      class="rotate-180"
-      (click)="branchIconClicked(step.id); $event.stopPropagation()"
-      matTooltip="Branch point with {{ getNumberOfBranchPaths(step.id) }} paths based on {{
-        getBranchCriteriaDescription(step.id)
-      }}"
-      matTooltipPosition="right"
-      i18n-matTooltip
-      >call_split</mat-icon
-    >
+    @if (isBranchPoint(step.id)) {
+      <mat-icon
+        class="rotate-180"
+        (click)="goToEditBranch(step.id); $event.stopPropagation()"
+        matTooltip="Branch point with {{ getNumberOfBranchPaths(step.id) }} paths based on {{
+          getBranchCriteriaDescription(step.id)
+        }}"
+        matTooltipPosition="right"
+        i18n-matTooltip
+        >call_split</mat-icon
+      >
+    }
     <mat-icon
       *ngIf="nodeHasConstraint(step.id)"
       (click)="constraintIconClicked(step.id); $event.stopPropagation()"

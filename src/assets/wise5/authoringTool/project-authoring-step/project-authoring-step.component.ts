@@ -91,9 +91,13 @@ export class ProjectAuthoringStepComponent {
     ]);
   }
 
-  protected branchIconClicked(nodeId: string): void {
-    this.dataService.setCurrentNodeByNodeId(nodeId);
-    this.router.navigate([`/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/path`]);
+  protected goToEditBranch(nodeId: string): void {
+    this.router.navigate(['edit-branch'], {
+      relativeTo: this.route,
+      state: {
+        targetId: nodeId
+      }
+    });
   }
 
   protected move(): void {
