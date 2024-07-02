@@ -310,7 +310,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">132</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
@@ -319,6 +319,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library-details.html</context>
           <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
@@ -467,6 +471,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-run-warning-dialog/edit-run-warning-dialog.component.html</context>
           <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.html</context>
@@ -735,6 +743,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component.html</context>
           <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
@@ -1083,6 +1095,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-tags/edit-component-tags.component.html</context>
           <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
+          <context context-type="linenumber">7</context>
         </context-group>
         <target state="translated">Nombre de etiqueta</target>
       </trans-unit>
@@ -3160,7 +3176,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
@@ -5908,7 +5924,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Discipline</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <target state="translated">Disciplina</target>
       </trans-unit>
@@ -5916,7 +5932,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>DCI Arrangement</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <target state="translated">Ideas Disciplinares Centrales</target>
       </trans-unit>
@@ -5924,7 +5940,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Performance Expectation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">79</context>
         </context-group>
         <target state="translated">Expectativas de Logro</target>
       </trans-unit>
@@ -6004,7 +6020,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is licensed under <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">87,88</context>
+          <context context-type="linenumber">88,89</context>
         </context-group>
         <target state="translated"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>Esta unidad<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> se encuentra bajo licencia <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</target>
       </trans-unit>
@@ -6012,7 +6028,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is licensed under <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION" equiv-text="{{ authorsString }}"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">91,93</context>
+          <context context-type="linenumber">92,94</context>
         </context-group>
         <target state="translated"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>Esta unidad<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> se encuentra bajo licencia <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION" equiv-text="{{ authorsString }}"/>.</target>
       </trans-unit>
@@ -6020,7 +6036,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is a copy of <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ parentProject.uri }}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{ parentProject.title }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> (used under <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">98,100</context>
+          <context context-type="linenumber">99,101</context>
         </context-group>
         <target state="translated"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>Esta unidad<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> es copia de <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ parentProject.uri }}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{ parentProject.title }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> (used under <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</target>
       </trans-unit>
@@ -6028,7 +6044,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is a copy of <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ parentProject.uri }}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{ parentProject.title }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION_1" equiv-text="{{ parentAuthorsString }}"/> (used under <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">103,106</context>
+          <context context-type="linenumber">104,107</context>
         </context-group>
         <target state="translated"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>Esta unidad<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> es copia de <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ parentProject.uri }}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{ parentProject.title }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION_1" equiv-text="{{ parentAuthorsString }}"/> (usada bajo <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</target>
       </trans-unit>
@@ -6036,7 +6052,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>More</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">118</context>
         </context-group>
         <target state="translated">Más</target>
       </trans-unit>
@@ -6044,7 +6060,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>View License</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">120</context>
         </context-group>
         <target state="translated">Ver Licencia</target>
       </trans-unit>
@@ -6052,7 +6068,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Use with Class</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">140</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
@@ -6064,7 +6080,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Preview</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
@@ -6117,6 +6133,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-menu/library-project-menu.component.html</context>
           <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
+          <context context-type="linenumber">29</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/select-peer-grouping-option/select-peer-grouping-option.component.html</context>
@@ -6216,7 +6236,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Unit Details</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">90</context>
         </context-group>
         <target state="translated">Detalles de la Unidad</target>
       </trans-unit>
@@ -6332,15 +6352,23 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">¿Dónde están Mis Unidades?</target>
       </trans-unit>
+      <trans-unit id="6829218544e108e152f5fa72cb79c4ccb82e0d06" datatype="html">
+        <source>View</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target state="needs-translation">View</target>
+      </trans-unit>
       <trans-unit id="b36e1450940b7f6028d8587568c7d669b53f7a06" datatype="html">
         <source>Active</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">9</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">21</context>
         </context-group>
         <target state="translated">Activo</target>
       </trans-unit>
@@ -6348,11 +6376,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Archived</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <target state="translated">Archivado</target>
       </trans-unit>
@@ -6360,7 +6388,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source><x id="INTERPOLATION" equiv-text="{{ numSelectedProjects() }}"/> selected </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">23,25</context>
+          <context context-type="linenumber">24,26</context>
         </context-group>
         <target state="translated"> <x id="INTERPOLATION" equiv-text="{{ numSelectedProjects() }}"/> seleccionado </target>
       </trans-unit>
@@ -6368,25 +6396,17 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> No owned or shared units found. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">56,58</context>
+          <context context-type="linenumber">60,62</context>
         </context-group>
         <target state="translated"> No se encontraron unidades propias o compartidas. </target>
       </trans-unit>
-      <trans-unit id="8443540764676509944" datatype="html">
-        <source>units</source>
+      <trans-unit id="4204495853509039236" datatype="html">
+        <source>Select all units</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">30</context>
         </context-group>
-        <target state="translated">unidades</target>
-      </trans-unit>
-      <trans-unit id="413346167952108153" datatype="html">
-        <source>items</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/library/select-all-items-checkbox/select-all-items-checkbox.component.ts</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <target state="translated">items</target>
+        <target state="needs-translation">Select all units</target>
       </trans-unit>
       <trans-unit id="6028472408314831177" datatype="html">
         <source>Sharing permissions updated for <x id="firstName" equiv-text="sharedOwner.firstName"/> <x id="lastName" equiv-text="sharedOwner.lastName"/>.</source>
@@ -6468,7 +6488,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/search-bar/search-bar.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
@@ -6824,7 +6844,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <target state="translated">Mostrar más</target>
       </trans-unit>
@@ -8142,7 +8162,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Successfully <x id="PH" equiv-text="archive ? &apos;archived&apos; : &apos;restored&apos;"/> unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">43</context>
         </context-group>
         <target state="translated">Unidad exitosamente <x id="PH" equiv-text="archive ? 'archived' : 'restored'"/> .</target>
       </trans-unit>
@@ -8150,11 +8170,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Undo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <target state="translated">Deshacer</target>
       </trans-unit>
@@ -8162,11 +8182,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Action undone.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">140</context>
         </context-group>
         <target state="translated">Acción deshecha.</target>
       </trans-unit>
@@ -8174,11 +8194,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Error undoing action.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <target state="translated">Error deshaciendo acción.</target>
       </trans-unit>
@@ -8186,7 +8206,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Error archiving unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <target state="translated">Error archivando unidad.</target>
       </trans-unit>
@@ -8194,7 +8214,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Error restoring unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <target state="translated">Error al restaurar la unidad.</target>
       </trans-unit>
@@ -8202,7 +8222,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Successfully archived <x id="PH" equiv-text="count"/> unit(s).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">122</context>
         </context-group>
         <target state="translated">La unidad <x id="PH" equiv-text="count"/> fue archivada correctamente.</target>
       </trans-unit>
@@ -8210,7 +8230,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Successfully restored <x id="PH" equiv-text="count"/> unit(s).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">123</context>
         </context-group>
         <target state="translated">Unidad(es) <x id="PH" equiv-text="count"/> correctamente restaurada(s).</target>
       </trans-unit>
@@ -8218,7 +8238,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Error archiving unit(s).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">150</context>
         </context-group>
         <target state="translated">Error archivando unidad(es).</target>
       </trans-unit>
@@ -8226,7 +8246,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Error restoring unit(s).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/archive-project.service.ts</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">150</context>
         </context-group>
         <target state="translated">Error al restaurar unidad(es).</target>
       </trans-unit>
@@ -8538,7 +8558,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">38</context>
         </context-group>
         <target state="translated">Unidades encontradas: <x id="INTERPOLATION" equiv-text="{{ filteredRuns.length }}"/></target>
       </trans-unit>
@@ -8802,6 +8822,50 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated"> Idioma requerido </target>
       </trans-unit>
+      <trans-unit id="4aec117738aef2c652af2cabf15863b130aa2196" datatype="html">
+        <source>Apply tags</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/apply-tags-button/apply-tags-button.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/apply-tags-button/apply-tags-button.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <target state="needs-translation">Apply tags</target>
+      </trans-unit>
+      <trans-unit id="dfbc2318c9fccb8087026673bfd89a13ef2284de" datatype="html">
+        <source>Manage Tags</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/apply-tags-button/apply-tags-button.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/select-tags/select-tags.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <target state="needs-translation">Manage Tags</target>
+      </trans-unit>
+      <trans-unit id="4098687853188279101" datatype="html">
+        <source>Successfully applied tag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/apply-tags-button/apply-tags-button.component.ts</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <target state="needs-translation">Successfully applied tag</target>
+      </trans-unit>
+      <trans-unit id="1793239119471258096" datatype="html">
+        <source>Successfully removed tag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/apply-tags-button/apply-tags-button.component.ts</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+        <target state="needs-translation">Successfully removed tag</target>
+      </trans-unit>
       <trans-unit id="a2d9400df68d9f4e89fe24f6a3f40bc5322f19f2" datatype="html">
         <source>1. Choose Periods</source>
         <context-group purpose="location">
@@ -9050,6 +9114,110 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">Proceder</target>
       </trans-unit>
+      <trans-unit id="e5f24fc7a2bf50bd61d109dd9cad3fbff6ec7add" datatype="html">
+        <source>Required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <target state="translated">Requerido</target>
+      </trans-unit>
+      <trans-unit id="aae122bd1c42ac22fe514a63b0d2832097264935" datatype="html">
+        <source>Archived tag not allowed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <target state="needs-translation">Archived tag not allowed</target>
+      </trans-unit>
+      <trans-unit id="4215210349960e31377ef22c4d2750f626b84067" datatype="html">
+        <source>Tag already exists</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <target state="needs-translation">Tag already exists</target>
+      </trans-unit>
+      <trans-unit id="8fa4d523f7b91df4390120b85ed0406138273e1a" datatype="html">
+        <source>Color</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
+          <context context-type="linenumber">249</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">107</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">148</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
+          <context context-type="linenumber">191</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
+          <context context-type="linenumber">250</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
+          <context context-type="linenumber">431</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
+          <context context-type="linenumber">147</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
+          <context context-type="linenumber">146</context>
+        </context-group>
+        <target state="translated">Color</target>
+      </trans-unit>
+      <trans-unit id="5674286808255988565" datatype="html">
+        <source>Create</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <target state="translated">Crear</target>
+      </trans-unit>
+      <trans-unit id="3768927257183755959" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <target state="translated">Guardar</target>
+      </trans-unit>
+      <trans-unit id="5325249077056620539" datatype="html">
+        <source>Tag created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+        <target state="needs-translation">Tag created</target>
+      </trans-unit>
+      <trans-unit id="1772313028295081091" datatype="html">
+        <source>Tag updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+        <target state="needs-translation">Tag updated</target>
+      </trans-unit>
       <trans-unit id="76de164da3c441addbf9b14950150aa869b00fdb" datatype="html">
         <source>Share to Google Classroom</source>
         <context-group purpose="location">
@@ -9177,6 +9345,46 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="linenumber">123</context>
         </context-group>
         <target state="translated">(Sección <x id="section" equiv-text="course.section"/>)</target>
+      </trans-unit>
+      <trans-unit id="13773197ab492ec5aab001f2798d1f262f09c068" datatype="html">
+        <source> + New Tag </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+        <target state="needs-translation"> + New Tag </target>
+      </trans-unit>
+      <trans-unit id="8663242190095976332" datatype="html">
+        <source>Tag deleted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+        <target state="needs-translation">Tag deleted</target>
+      </trans-unit>
+      <trans-unit id="9151762754681070291" datatype="html">
+        <source>There is <x id="PH" equiv-text="numProjectsWithTag"/> unit with this tag.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+        <target state="needs-translation">There is <x id="PH" equiv-text="numProjectsWithTag"/> unit with this tag.</target>
+      </trans-unit>
+      <trans-unit id="2021640020415028727" datatype="html">
+        <source>There are <x id="PH" equiv-text="numProjectsWithTag"/> units with this tag.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+        <target state="needs-translation">There are <x id="PH" equiv-text="numProjectsWithTag"/> units with this tag.</target>
+      </trans-unit>
+      <trans-unit id="1288226131735320264" datatype="html">
+        <source>Are you sure you want to delete this tag? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to delete this tag? </target>
       </trans-unit>
       <trans-unit id="9008968878373693685" datatype="html">
         <source>Teams</source>
@@ -9586,6 +9794,14 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated"><x id="INTERPOLATION" equiv-text="{{ numSelectedRuns }}"/> seleccionado</target>
       </trans-unit>
+      <trans-unit id="bdb9a910523610254872e147222689e9a4115b84" datatype="html">
+        <source>Filter by tag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/select-tags/select-tags.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <target state="needs-translation">Filter by tag</target>
+      </trans-unit>
       <trans-unit id="c76c2eeebe0adc81f3434495d189c56d70899cad" datatype="html">
         <source>Share with Students</source>
         <context-group purpose="location">
@@ -9766,6 +9982,14 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">Propiedad de unidad de clase transferida a <x id="firstName" equiv-text="run.owner.firstName"/> <x id="lastName" equiv-text="run.owner.lastName"/>.</target>
       </trans-unit>
+      <trans-unit id="0f6ae2b3123ad5e28ac81cd30a8504ffdbf802a7" datatype="html">
+        <source>Remove tag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/tag/tag.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <target state="needs-translation">Remove tag</target>
+      </trans-unit>
       <trans-unit id="48ae429835665b58a2711db68e68b9a4dfa1f0ff" datatype="html">
         <source>Teacher home navigation</source>
         <context-group purpose="location">
@@ -9898,7 +10122,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Class Periods:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.ts</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="linenumber">116</context>
         </context-group>
         <target state="translated">Períodos de Clase:</target>
       </trans-unit>
@@ -9906,7 +10130,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Archived classroom units:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">41</context>
         </context-group>
         <target state="translated">Unidades de clase archivadas:</target>
       </trans-unit>
@@ -9914,7 +10138,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Active classroom units:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <target state="translated">Unidades de clase activas:</target>
       </trans-unit>
@@ -9922,7 +10146,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source><x id="INTERPOLATION" equiv-text="{{ completedTotal() }}"/> completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <target state="translated"><x id="INTERPOLATION" equiv-text="{{ completedTotal() }}"/> completado</target>
       </trans-unit>
@@ -9930,7 +10154,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source><x id="INTERPOLATION" equiv-text="{{ activeTotal() }}"/> running</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <target state="translated"><x id="INTERPOLATION" equiv-text="{{ activeTotal() }}"/> ejecutándose</target>
       </trans-unit>
@@ -9938,7 +10162,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source><x id="INTERPOLATION" equiv-text="{{ scheduledTotal() }}"/> scheduled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <target state="translated"><x id="INTERPOLATION" equiv-text="{{ scheduledTotal() }}"/> agendado</target>
       </trans-unit>
@@ -9946,7 +10170,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Clear filters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <target state="translated">Limpiar filtros</target>
       </trans-unit>
@@ -9954,7 +10178,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Hey there! Looks like you don&apos;t have any active classroom units.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <target state="translated">Parece que no hay unidades de clase activas.</target>
       </trans-unit>
@@ -9962,7 +10186,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Browse the &quot;Unit Library&quot; to find titles to use with your students.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <target state="translated">Explorar la "Biblioteca de Unidades" para buscar unidades para usar con sus estudiantes.</target>
       </trans-unit>
@@ -9970,9 +10194,17 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Looks like you don&apos;t have any archived classroom units.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">76</context>
         </context-group>
         <target state="translated">Parece que no tienes ninguna unidad de clase archivada.</target>
+      </trans-unit>
+      <trans-unit id="8e63cdbdb10c29b7ecc49caa43163fc7c800d612" datatype="html">
+        <source>Unit tags</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/unit-tags/unit-tags.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <target state="needs-translation">Unit tags</target>
       </trans-unit>
       <trans-unit id="f6b8c00d13eab40bfcae19bec9a2c7698d943715" datatype="html">
         <source>Add lesson</source>
@@ -12723,14 +12955,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="linenumber">203</context>
         </context-group>
         <target state="translated">¿Seguro que desea eliminar este recorrido a "<x id="PH" equiv-text="stepTitle"/>"?</target>
-      </trans-unit>
-      <trans-unit id="e5f24fc7a2bf50bd61d109dd9cad3fbff6ec7add" datatype="html">
-        <source>Required</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-        <target state="translated">Requerido</target>
       </trans-unit>
       <trans-unit id="cf11597f80309219c947fba6c22b94290f6371d2" datatype="html">
         <source>Choose the new location by clicking one of the buttons below</source>
@@ -18585,42 +18809,6 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">245</context>
         </context-group>
         <target state="translated">Etiqueta del enlace</target>
-      </trans-unit>
-      <trans-unit id="8fa4d523f7b91df4390120b85ed0406138273e1a" datatype="html">
-        <source>Color</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">249</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">107</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">148</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
-          <context context-type="linenumber">191</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
-          <context context-type="linenumber">250</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
-          <context context-type="linenumber">431</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">147</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
-          <context context-type="linenumber">146</context>
-        </context-group>
-        <target state="translated">Color</target>
       </trans-unit>
       <trans-unit id="3009366829878620841" datatype="html">
         <source>Are you sure you want to delete this node?
