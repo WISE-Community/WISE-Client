@@ -1,5 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-  <node-icon [nodeId]="nodeId" size="18"></node-icon>&nbsp;
-  <span *ngIf="showPosition" class="step-number">{{ getNodePosition(nodeId) }}: </span>
+  <node-icon [nodeId]="nodeId" size="18" />&nbsp;
+  @if (showPosition) {
+    <span class="step-number">{{ getNodePosition(nodeId) }}: </span>
+  }
   <span class="step-title">{{ getNodeTitle(nodeId) }}</span>
 </div>

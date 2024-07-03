@@ -67,6 +67,7 @@ export class MockConfigService {
   }
 }
 
+const archivedTag = { id: 1, text: 'archived', color: null };
 let archiveProjectService: ArchiveProjectService;
 let component: RunMenuComponent;
 let fixture: ComponentFixture<RunMenuComponent>;
@@ -137,20 +138,22 @@ function setRun(archived: boolean): void {
 function archive() {
   describe('archive()', () => {
     it('should archive a run', async () => {
-      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(runId1, true)));
+      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(runId1, true, archivedTag)));
       await runMenuHarness.clickArchiveMenuButton();
       expect(component.run.project.archived).toEqual(true);
       const snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Successfully archived unit.');
     });
     it('should archive a run and then undo', async () => {
-      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(runId1, true)));
+      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(runId1, true, archivedTag)));
       await runMenuHarness.clickArchiveMenuButton();
       expect(component.run.project.archived).toEqual(true);
       let snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Successfully archived unit.');
       expect(await snackBar.getActionDescription()).toEqual('Undo');
-      spyOn(http, 'delete').and.returnValue(of(new ArchiveProjectResponse(runId1, false)));
+      spyOn(http, 'delete').and.returnValue(
+        of(new ArchiveProjectResponse(runId1, false, archivedTag))
+      );
       await snackBar.dismissWithAction();
       expect(component.run.project.archived).toEqual(false);
       snackBar = await getSnackBar();
@@ -164,7 +167,9 @@ function unarchive() {
     it('should unarchive a run', async () => {
       setRun(true);
       component.ngOnInit();
-      spyOn(http, 'delete').and.returnValue(of(new ArchiveProjectResponse(runId1, false)));
+      spyOn(http, 'delete').and.returnValue(
+        of(new ArchiveProjectResponse(runId1, false, archivedTag))
+      );
       await runMenuHarness.clickUnarchiveMenuButton();
       expect(component.run.project.archived).toEqual(false);
       const snackBar = await getSnackBar();
@@ -173,13 +178,15 @@ function unarchive() {
     it('should unarchive a run and then undo', async () => {
       setRun(true);
       component.ngOnInit();
-      spyOn(http, 'delete').and.returnValue(of(new ArchiveProjectResponse(runId1, false)));
+      spyOn(http, 'delete').and.returnValue(
+        of(new ArchiveProjectResponse(runId1, false, archivedTag))
+      );
       await runMenuHarness.clickUnarchiveMenuButton();
       expect(component.run.project.archived).toEqual(false);
       let snackBar = await getSnackBar();
       expect(await snackBar.getMessage()).toEqual('Successfully restored unit.');
       expect(await snackBar.getActionDescription()).toEqual('Undo');
-      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(runId1, true)));
+      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(runId1, true, archivedTag)));
       await snackBar.dismissWithAction();
       expect(component.run.project.archived).toEqual(true);
       snackBar = await getSnackBar();

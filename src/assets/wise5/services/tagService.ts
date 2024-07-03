@@ -8,7 +8,7 @@ import { ProjectService } from './projectService';
 
 @Injectable()
 export class TagService {
-  tags: any[] = [];
+  private tags: any[] = [];
 
   constructor(
     protected http: HttpClient,

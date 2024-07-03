@@ -65,8 +65,7 @@
           [class.center]="!isExistingStudent(teamMember)"
         >
           <p *ngIf="!isExistingStudent(teamMember)" class="mat-subtitle-2">- OR -</p>
-          <google-sign-in-button (signedIn)="googleSignIn($event, teamMember)">
-          </google-sign-in-button>
+          <google-sign-in-button (signedIn)="googleSignIn($event, teamMember)"/>
         </div>
       </ng-container>
     </ng-container>

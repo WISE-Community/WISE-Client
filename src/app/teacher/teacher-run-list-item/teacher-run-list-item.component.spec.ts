@@ -21,6 +21,7 @@ import { User } from '../../domain/user';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
+import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 
 export class MockTeacherService {}
 
@@ -36,6 +37,7 @@ export class MockConfigService {
   }
 }
 
+const archivedTag = { id: 1, text: 'archived', color: null };
 let component: TeacherRunListItemComponent;
 let fixture: ComponentFixture<TeacherRunListItemComponent>;
 let http: HttpClient;
@@ -64,6 +66,7 @@ describe('TeacherRunListItemComponent', () => {
       providers: [
         ArchiveProjectService,
         { provide: ConfigService, useClass: MockConfigService },
+        ProjectTagService,
         { provide: TeacherService, useClass: MockTeacherService },
         UserService
       ],
@@ -119,7 +122,7 @@ function runArchiveStatusChanged() {
   describe('run is not archived and archive menu button is clicked', () => {
     it('should archive run and emit events', async () => {
       expect(await runListItemHarness.isArchived()).toBeFalse();
-      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(1, true)));
+      spyOn(http, 'put').and.returnValue(of(new ArchiveProjectResponse(1, true, archivedTag)));
       await runListItemHarness.clickArchiveMenuButton();
       expect(await runListItemHarness.isArchived()).toBeTrue();
     });

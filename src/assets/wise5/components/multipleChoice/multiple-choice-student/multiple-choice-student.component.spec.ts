@@ -6,10 +6,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { copy } from '../../../common/object/object';
-import { ComponentHeader } from '../../../directives/component-header/component-header.component';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ProjectService } from '../../../services/projectService';
 import { MultipleChoiceComponent } from '../MultipleChoiceComponent';
 import { MultipleChoiceStudent } from './multiple-choice-student.component';
@@ -112,6 +111,7 @@ describe('MultipleChoiceStudentComponent', () => {
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
+        ComponentHeaderComponent,
         HttpClientTestingModule,
         MatCheckboxModule,
         MatDialogModule,
@@ -119,7 +119,7 @@ describe('MultipleChoiceStudentComponent', () => {
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [ComponentHeader, MultipleChoiceStudent, PossibleScoreComponent],
+      declarations: [MultipleChoiceStudent],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(MultipleChoiceStudent);

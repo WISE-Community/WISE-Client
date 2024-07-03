@@ -5,15 +5,38 @@ import { RemovalCriteriaParam } from '../../../../../app/domain/removalCriteriaP
 import { ComponentContent } from '../../../common/ComponentContent';
 import { MultipleChoiceContent } from '../../../components/multipleChoice/MultipleChoiceContent';
 import { EditConstraintRemovalCriteriaHelper } from './edit-constraint-removal-criteria-helper';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { RequiredErrorLabelComponent } from '../../node/advanced/required-error-label/required-error-label.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
+  imports: [
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
+    RequiredErrorLabelComponent
+  ],
   selector: 'edit-constraint-removal-criteria',
-  styleUrls: ['./edit-constraint-removal-criteria.component.scss'],
+  standalone: true,
+  styleUrl: './edit-constraint-removal-criteria.component.scss',
   templateUrl: './edit-constraint-removal-criteria.component.html'
 })
 export class EditConstraintRemovalCriteriaComponent implements OnInit {
   private allNodeIds: string[];
-  private componentIdToIsSelectable: { [componentId: string]: boolean } = {};
+  protected componentIdToIsSelectable: { [componentId: string]: boolean } = {};
   private componentParam: RemovalCriteriaParam = new RemovalCriteriaParam(
     'componentId',
     $localize`Component`
@@ -21,7 +44,7 @@ export class EditConstraintRemovalCriteriaComponent implements OnInit {
   @Input() constraint: any;
   @Input() criteria: any;
   @Input() node: any;
-  nodeIds: string[];
+  protected nodeIds: string[];
   private removalCriteriaHelper: EditConstraintRemovalCriteriaHelper;
   private stepParam: RemovalCriteriaParam = new RemovalCriteriaParam('nodeId', $localize`Step`);
 
@@ -110,7 +133,7 @@ export class EditConstraintRemovalCriteriaComponent implements OnInit {
     );
   }
 
-  deleteRemovalCriteria(): void {
+  protected deleteRemovalCriteria(): void {
     if (confirm($localize`Are you sure you want to delete this removal criteria?`)) {
       const removalCriteria = this.constraint.removalCriteria;
       removalCriteria.splice(removalCriteria.indexOf(this.criteria), 1);
@@ -118,7 +141,7 @@ export class EditConstraintRemovalCriteriaComponent implements OnInit {
     }
   }
 
-  nameChanged(criteria: any): void {
+  protected nameChanged(criteria: any): void {
     criteria.params = {};
     const params = this.getParamsByName(criteria.name);
     for (const paramObject of params) {

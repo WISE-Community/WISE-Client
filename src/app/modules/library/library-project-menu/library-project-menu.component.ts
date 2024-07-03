@@ -10,8 +10,8 @@ import { ArchiveProjectService } from '../../../services/archive-project.service
 
 @Component({
   selector: 'app-library-project-menu',
-  templateUrl: './library-project-menu.component.html',
-  styleUrls: ['./library-project-menu.component.scss']
+  styleUrl: './library-project-menu.component.scss',
+  templateUrl: './library-project-menu.component.html'
 })
 export class LibraryProjectMenuComponent {
   @Input()
@@ -40,7 +40,7 @@ export class LibraryProjectMenuComponent {
     this.isCanShare = this.isOwner() && !this.isRun;
     this.editLink = `${this.configService.getContextPath()}/teacher/edit/unit/${this.project.id}`;
     this.isChild = this.project.isChild();
-    this.archived = this.project.hasTag('archived');
+    this.archived = this.project.hasTagWithText('archived');
   }
 
   isOwner() {

@@ -7,10 +7,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
-import { ComponentHeader } from '../../../directives/component-header/component-header.component';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceFeedbackService';
 import { ProjectService } from '../../../services/projectService';
@@ -50,15 +49,11 @@ function createDialogGuidanceComponent(isComputerAvatarEnabled: boolean): Dialog
 describe('DialogGuidanceStudentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ComponentHeader,
-        DialogGuidanceStudentComponent,
-        DialogResponsesComponent,
-        PossibleScoreComponent
-      ],
+      declarations: [DialogGuidanceStudentComponent, DialogResponsesComponent],
       imports: [
         BrowserAnimationsModule,
         ChatInputComponent,
+        ComponentHeaderComponent,
         FormsModule,
         HttpClientTestingModule,
         MatCardModule,

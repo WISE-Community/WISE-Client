@@ -7,11 +7,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
-import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
-import { ComponentHeader } from '../../../directives/component-header/component-header.component';
-import { ComponentSaveSubmitButtons } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
 import { CRaterService } from '../../../services/cRaterService';
 import { NotebookService } from '../../../services/notebookService';
@@ -20,7 +19,6 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { OpenResponseContent } from '../OpenResponseContent';
 import { OpenResponseService } from '../openResponseService';
 import { OpenResponseStudent } from './open-response-student.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DialogWithoutCloseComponent } from '../../../directives/dialog-without-close/dialog-without-close.component';
 
 let component: OpenResponseStudent;
@@ -36,6 +34,8 @@ describe('OpenResponseStudent', () => {
         BrowserAnimationsModule,
         BrowserModule,
         CommonModule,
+        ComponentHeaderComponent,
+        ComponentSaveSubmitButtonsComponent,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,
@@ -43,15 +43,8 @@ describe('OpenResponseStudent', () => {
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [
-        ComponentHeader,
-        ComponentSaveSubmitButtons,
-        DialogWithoutCloseComponent,
-        OpenResponseStudent,
-        PossibleScoreComponent
-      ],
-      providers: [AudioRecorderService],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [DialogWithoutCloseComponent, OpenResponseStudent],
+      providers: [AudioRecorderService]
     });
   });
 

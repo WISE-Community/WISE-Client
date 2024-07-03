@@ -84,24 +84,22 @@
       <span fxFlex fxHide.gt-xs></span>
       <status-icon
         *ngIf="newAlert"
-        [iconClass]="alertIconClass"
-        [iconName]="alertIconName"
-        [iconLabel]="alertIconLabel"
-        [iconTooltip]="alertIconLabel"
-      ></status-icon>
+        [class]="alertIconClass"
+        [name]="alertIconName"
+        [tooltip]="alertIconLabel"
+      />
       <status-icon
         *ngIf="hasRubrics"
-        [iconClass]="rubricIconClass"
-        [iconName]="rubricIconName"
-        [iconLabel]="rubricIconLabel"
-        [iconTooltip]="rubricIconLabel"
-      ></status-icon>
+        [class]="rubricIconClass"
+        [name]="rubricIconName"
+        [tooltip]="rubricIconLabel"
+      />
       <span fxFlex hide-xs></span>
       <nav-item-score
         class="nav-item--list__info-item"
         [maxScore]="maxScore"
         [averageScore]="getNodeAverageScore()"
-      ></nav-item-score>
+      />
       <nav-item-progress
         [nodeCompletion]="getNodeCompletion()"
         [period]="currentPeriod"

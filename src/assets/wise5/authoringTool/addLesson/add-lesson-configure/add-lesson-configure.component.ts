@@ -13,6 +13,7 @@ export class AddLessonConfigureComponent {
   protected addLessonFormGroup: FormGroup = this.fb.group({
     title: new FormControl('', [Validators.required])
   });
+  protected submitting: boolean;
   protected target: string;
   @ViewChild('titleField') titleField: ElementRef;
 
@@ -32,6 +33,7 @@ export class AddLessonConfigureComponent {
   }
 
   protected submit(): void {
+    this.submitting = true;
     const newLesson = this.projectService.createGroup(
       this.addLessonFormGroup.controls['title'].value
     );

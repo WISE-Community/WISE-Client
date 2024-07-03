@@ -1,9 +1,11 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
-import { DiscourseFeedComponent } from './discourse-feed.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DiscourseLatestNewsComponent } from './discourse-latest-news.component';
+import { By } from '@angular/platform-browser';
 
-describe('DiscourseFeedComponent', () => {
-  let component: DiscourseFeedComponent;
+describe('DiscourseLatestNewsComponent', () => {
+  let component: DiscourseLatestNewsComponent;
+  let fixture: ComponentFixture<DiscourseLatestNewsComponent>;
   let http: HttpTestingController;
   const sampleLatestResponse = {
     users: [],
@@ -15,13 +17,15 @@ describe('DiscourseFeedComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [DiscourseFeedComponent]
+      providers: [DiscourseLatestNewsComponent]
     });
-    component = TestBed.inject(DiscourseFeedComponent);
     http = TestBed.inject(HttpTestingController);
+    fixture = TestBed.createComponent(DiscourseLatestNewsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
-  it('should create and show 3 latest topics', () => {
+  it('should show 3 latest topics', () => {
     component.baseUrl = 'http://localhost:9292';
     component.category = 'c/news/1';
     component.queryString = 'order=latest';
@@ -29,6 +33,7 @@ describe('DiscourseFeedComponent', () => {
     http
       .expectOne(`${component.baseUrl}/${component.category}.json?${component.queryString}`)
       .flush(sampleLatestResponse);
-    expect(component.topics.length).toEqual(3);
+    fixture.detectChanges();
+    expect(fixture.debugElement.queryAll(By.css('li')).length).toEqual(3);
   });
 });

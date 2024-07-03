@@ -2,8 +2,9 @@
   <div class="personal-library-header" fxLayoutAlign="center center" fxLayoutGap="8px">
     <a class="mat-caption" href="#" (click)="showInfo($event)" i18n>What are My Units?</a>
     <span fxFlex></span>
+    <select-tags [selectedTags]="selectedTags" (selectTagEvent)="selectTags($event)" />
     <mat-form-field [subscriptSizing]="'dynamic'">
-      <mat-label>View</mat-label>
+      <mat-label i18n>View</mat-label>
       <mat-select [(ngModel)]="showArchivedView" (selectionChange)="switchActiveArchivedView()">
         <mat-option [value]="false" i18n>Active</mat-option>
         <mat-option [value]="true" i18n>Archived</mat-option>
@@ -14,7 +15,7 @@
   <div fxLayoutAlign="start center" fxLayout.xs="column" fxLayoutGap="8px">
     <div fxLayoutAlign="center center" fxLayoutGap="4px" fxFlexAlign.xs="start" fxFlexOrder.xs="1">
       <select-all-items-checkbox
-        [label]="projectsLabel"
+        [tooltip]="projectsLabel"
         [numAllItems]="numProjectsInView"
         [numSelectedItems]="numSelectedProjects()"
         (allSelectedEvent)="selectAllProjects()"
@@ -28,6 +29,9 @@
         [showArchive]="!showArchivedView"
         (archiveProjectsEvent)="archiveProjects($event)"
       ></archive-projects-button>
+      @if (selectedProjects().length > 0) {
+        <apply-tags-button [selectedProjects]="selectedProjects()" />
+      }
     </div>
     <span fxFlex fxHide.xs></span>
     <mat-paginator
@@ -51,7 +55,7 @@
         fxFlex.sm="50"
         fxFlex.md="33"
         fxFlex.gt-md="25"
-      ></app-library-project>
+      />
     </ng-container>
     <div *ngIf="filteredProjects.length === 0" class="notice" i18n>
       No owned or shared units found.

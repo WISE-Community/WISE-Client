@@ -20,7 +20,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { NavigationComponent } from '../themes/default/navigation/navigation.component';
 import { StepToolsComponent } from '../themes/default/themeComponents/stepTools/step-tools.component';
 import { MatSelectModule } from '@angular/material/select';
-import { NodeStatusIcon } from '../themes/default/themeComponents/nodeStatusIcon/node-status-icon.component';
+import { NodeStatusIconComponent } from '../themes/default/themeComponents/nodeStatusIcon/node-status-icon.component';
 import { NodeIconComponent } from './node-icon/node-icon.component';
 import { FormsModule } from '@angular/forms';
 import { InitializeVLEService } from '../services/initializeVLEService';
@@ -51,19 +51,14 @@ describe('VLEComponent', () => {
         MatToolbarModule,
         MatSelectModule,
         MatSidenavModule,
+        NavigationComponent,
         NodeIconComponent,
+        NodeStatusIconComponent,
+        StepToolsComponent,
         StudentTeacherCommonServicesModule,
         TopBarComponent
       ],
-      declarations: [
-        NavigationComponent,
-        NodeComponent,
-        NodeStatusIcon,
-        NotebookNotesComponent,
-        SafeUrl,
-        StepToolsComponent,
-        VLEComponent
-      ],
+      declarations: [NodeComponent, NotebookNotesComponent, SafeUrl, VLEComponent],
       providers: [
         InitializeVLEService,
         PauseScreenService,

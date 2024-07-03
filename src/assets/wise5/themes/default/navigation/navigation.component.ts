@@ -1,21 +1,26 @@
 import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StudentDataService } from '../../../services/studentDataService';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { NavItemComponent } from '../../../vle/nav-item/nav-item.component';
 
 @Component({
+  imports: [CommonModule, FlexLayoutModule, NavItemComponent],
   selector: 'navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  standalone: true,
+  styleUrl: './navigation.component.scss',
+  templateUrl: './navigation.component.html'
 })
 export class NavigationComponent {
-  navItemIsExpanded: any = {};
-  navItemIsExpandedSubscription: Subscription;
+  protected navItemIsExpanded: { [nodeId: string]: boolean } = {};
+  private navItemIsExpandedSubscription: Subscription;
   @Input() rootNode: any;
 
-  constructor(private studentDataService: StudentDataService) {}
+  constructor(private dataService: StudentDataService) {}
 
   ngAfterViewInit(): void {
-    this.navItemIsExpandedSubscription = this.studentDataService.navItemIsExpanded$.subscribe(
+    this.navItemIsExpandedSubscription = this.dataService.navItemIsExpanded$.subscribe(
       ({ nodeId, isExpanded }) => {
         this.navItemIsExpanded[nodeId] = isExpanded;
       }

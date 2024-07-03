@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectAllItemsCheckboxComponent } from './select-all-items-checkbox.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 describe('SelectAllItemsCheckboxComponent', () => {
   let component: SelectAllItemsCheckboxComponent;
@@ -9,8 +7,7 @@ describe('SelectAllItemsCheckboxComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SelectAllItemsCheckboxComponent],
-      imports: [MatCheckboxModule, MatTooltipModule]
+      imports: [SelectAllItemsCheckboxComponent]
     });
     fixture = TestBed.createComponent(SelectAllItemsCheckboxComponent);
     component = fixture.componentInstance;

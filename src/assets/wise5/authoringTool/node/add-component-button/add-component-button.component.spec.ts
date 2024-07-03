@@ -1,15 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AddComponentButtonComponent } from './add-component-button.component';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { RouterTestingModule } from '@angular/router/testing';
-import { MatIconModule } from '@angular/material/icon';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { ChooseNewComponent } from '../../../../../app/authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { of } from 'rxjs';
 import { Node } from '../../../common/Node';
+import { provideRouter } from '@angular/router';
 
 class MockTeacherProjectService {
   createComponent() {}
@@ -22,9 +21,11 @@ describe('AddComponentButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AddComponentButtonComponent],
-      imports: [MatDialogModule, MatIconModule, RouterTestingModule],
-      providers: [{ provide: TeacherProjectService, useClass: MockTeacherProjectService }]
+      imports: [AddComponentButtonComponent],
+      providers: [
+        { provide: TeacherProjectService, useClass: MockTeacherProjectService },
+        provideRouter([])
+      ]
     });
     fixture = TestBed.createComponent(AddComponentButtonComponent);
     component = fixture.componentInstance;

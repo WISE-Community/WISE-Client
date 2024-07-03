@@ -6,7 +6,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { SessionService } from '../../services/sessionService';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
 
 @Component({
   selector: 'project-list-authoring',
@@ -68,15 +67,13 @@ export class ProjectListComponent implements OnInit {
   }
 
   private highlightNewProject(projectId: number): void {
-    this.configService.retrieveConfig(`/api/author/config`).pipe(
-      tap(() => {
-        this.projects = this.configService.getConfigParam('projects');
-        // wait for new element to appear on the page
-        setTimeout(() => {
-          temporarilyHighlightElement(projectId.toString(), 3000);
-        });
-      })
-    );
+    this.configService.retrieveConfig(`/api/author/config`).subscribe(() => {
+      this.projects = this.configService.getConfigParam('projects');
+      // wait for new element to appear on the page
+      setTimeout(() => {
+        temporarilyHighlightElement(projectId.toString(), 3000);
+      });
+    });
   }
 
   private showMessageInModalDialog(message: string): void {

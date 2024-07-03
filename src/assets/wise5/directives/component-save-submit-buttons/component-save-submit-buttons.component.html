@@ -3,7 +3,7 @@
     *ngIf="isSaveButtonVisible"
     mat-raised-button
     color="primary"
-    (click)="save()"
+    (click)="saveButtonClicked.next()"
     [disabled]="isDisabled || !isDirty"
     i18n
   >
@@ -13,7 +13,7 @@
     *ngIf="isSubmitButtonVisible"
     mat-raised-button
     color="primary"
-    (click)="submit()"
+    (click)="submitButtonClicked.next()"
     [disabled]="isSubmitButtonDisabled || isDisabled || !isSubmitDirty"
     i18n
   >
