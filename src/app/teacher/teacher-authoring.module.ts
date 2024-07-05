@@ -34,6 +34,7 @@ import { RouterModule } from '@angular/router';
 import { ComponentInfoService } from '../../assets/wise5/services/componentInfoService';
 import { TeacherProjectTranslationService } from '../../assets/wise5/services/teacherProjectTranslationService';
 import { DeleteTranslationsService } from '../../assets/wise5/services/deleteTranslationsService';
+import { CopyTranslationsService } from '../../assets/wise5/services/copyTranslationsService';
 
 @NgModule({
   imports: [StudentTeacherCommonModule, AuthoringToolModule, RouterModule, AuthoringRoutingModule],
@@ -42,6 +43,7 @@ import { DeleteTranslationsService } from '../../assets/wise5/services/deleteTra
     ComponentInfoService,
     CopyNodesService,
     CopyProjectService,
+    CopyTranslationsService,
     DataExportService,
     { provide: DataService, useExisting: TeacherDataService },
     TeacherProjectTranslationService,
