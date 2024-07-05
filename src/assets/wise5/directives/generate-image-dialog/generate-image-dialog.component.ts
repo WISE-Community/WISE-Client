@@ -8,22 +8,33 @@ import { GraphService } from '../../components/graph/graphService';
 import { LabelService } from '../../components/label/labelService';
 import { TableService } from '../../components/table/tableService';
 import { NodeService } from '../../services/nodeService';
+import { CommonModule } from '@angular/common';
+import { ComponentComponent } from '../../components/component/component.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'generate-image-dialog',
-  templateUrl: './generate-image-dialog.component.html',
-  styleUrls: ['./generate-image-dialog.component.scss']
+  imports: [
+    CommonModule,
+    ComponentComponent,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatProgressSpinnerModule
+  ],
+  standalone: true,
+  styleUrl: './generate-image-dialog.component.scss',
+  templateUrl: './generate-image-dialog.component.html'
 })
 export class GenerateImageDialogComponent implements OnInit {
-  componentState: any;
-  destroyDoneRenderingComponentListenerTimeout: any;
-  doneRenderingComponentSubscription: Subscription;
-  isFailedToImportWork: boolean = false;
-  isImportingWork: boolean = true;
+  private destroyDoneRenderingComponentListenerTimeout: any;
+  private doneRenderingComponentSubscription: Subscription;
+  protected failedToImportWork: boolean;
+  protected importingWork: boolean = true;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public componentState: any,
     private conceptMapService: ConceptMapService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<GenerateImageDialogComponent>,
     private drawService: DrawService,
     private embeddedService: EmbeddedService,
@@ -34,12 +45,11 @@ export class GenerateImageDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.componentState = this.data;
     this.subscribeToDoneRenderingComponent();
     this.setDestroyTimeout();
   }
 
-  subscribeToDoneRenderingComponent(): void {
+  private subscribeToDoneRenderingComponent(): void {
     this.doneRenderingComponentSubscription = this.nodeService.doneRenderingComponent$.subscribe(
       ({ nodeId, componentId }) => {
         if (
@@ -54,7 +64,7 @@ export class GenerateImageDialogComponent implements OnInit {
     );
   }
 
-  generateImage(): void {
+  private generateImage(): void {
     this.getComponentService(this.componentState.componentType)
       .generateImageFromRenderedComponentState(this.componentState)
       .then((image: any) => {
@@ -68,23 +78,23 @@ export class GenerateImageDialogComponent implements OnInit {
    * Set a timeout to destroy the listener in case there is an error creating the image and
    * we don't get to destroying it after we generate the image.
    */
-  setDestroyTimeout(): void {
+  private setDestroyTimeout(): void {
     this.destroyDoneRenderingComponentListenerTimeout = setTimeout(() => {
       this.doneRenderingComponentSubscription.unsubscribe();
       this.setFailedToImportWork();
     }, 10000);
   }
 
-  setFailedToImportWork(): void {
-    this.isImportingWork = false;
-    this.isFailedToImportWork = true;
+  private setFailedToImportWork(): void {
+    this.importingWork = false;
+    this.failedToImportWork = true;
   }
 
-  closeDialog(): void {
+  protected closeDialog(): void {
     this.dialogRef.close();
   }
 
-  getComponentService(componentType: string): any {
+  private getComponentService(componentType: string): any {
     switch (componentType) {
       case 'ConceptMap':
         return this.conceptMapService;
