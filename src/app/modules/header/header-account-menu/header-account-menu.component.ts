@@ -1,37 +1,48 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { ConfigService } from '../../../services/config.service';
 import { User } from '../../../domain/user';
 import { HttpClient } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-header-account-menu',
   templateUrl: './header-account-menu.component.html',
-  styleUrls: ['./header-account-menu.component.scss']
+  styleUrl: './header-account-menu.component.scss',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatDividerModule,
+    RouterModule
+  ]
 })
 export class HeaderAccountMenuComponent implements OnInit {
-  @Input()
-  user: User;
+  protected firstName: string = '';
+  protected isPreviousAdmin: boolean;
+  protected lastName: string = '';
+  protected logOutURL: string;
+  protected roles: string[] = [];
+  private switchToOriginalUserURL = '/api/logout/impersonate';
+  @Input() user: User;
 
-  firstName: string = '';
-  lastName: string = '';
-  roles: string[] = [];
-  isPreviousAdmin: boolean = false;
-  logOutURL: string;
-  switchToOriginalUserURL = '/api/logout/impersonate';
+  constructor(private configService: ConfigService, private http: HttpClient) {}
 
-  constructor(private configService: ConfigService, private http: HttpClient) {
-    this.configService = configService;
-  }
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.configService.getConfig().subscribe((config) => {
-      if (config != null) {
-        this.logOutURL = config.logOutURL;
-      }
+      this.logOutURL = config.logOutURL;
     });
   }
 
-  ngOnChanges(changes) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes.user) {
       const user = changes.user.currentValue;
       if (user) {
@@ -43,17 +54,17 @@ export class HeaderAccountMenuComponent implements OnInit {
     }
   }
 
-  switchToAdmin() {
+  protected switchToAdmin(): void {
     window.location.href = '/admin';
   }
 
-  switchToOriginalUser() {
+  protected switchToOriginalUser(): void {
     this.http.post(this.switchToOriginalUserURL, {}).subscribe(() => {
       window.location.href = '/teacher';
     });
   }
 
-  logOut() {
+  protected logOut(): void {
     this.http.get(this.logOutURL).subscribe(() => {
       window.location.href = '/';
     });

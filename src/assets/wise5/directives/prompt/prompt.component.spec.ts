@@ -4,7 +4,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { ComponentContent } from '../../common/ComponentContent';
 import { ProjectService } from '../../services/projectService';
-import { DynamicPromptComponent } from '../dynamic-prompt/dynamic-prompt.component';
 import { DynamicPrompt } from '../dynamic-prompt/DynamicPrompt';
 import { PromptComponent } from './prompt.component';
 
@@ -17,8 +16,12 @@ describe('PromptComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PromptComponent, DynamicPromptComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule,
+        PromptComponent,
+        StudentTeacherCommonServicesModule
+      ]
     }).compileComponents();
   });
 

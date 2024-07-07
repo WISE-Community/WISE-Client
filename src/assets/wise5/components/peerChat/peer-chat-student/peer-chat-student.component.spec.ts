@@ -18,8 +18,7 @@ import { PeerGroup } from '../PeerGroup';
 import { PeerChatStudentComponent } from './peer-chat-student.component';
 import { PeerGroupMember } from '../PeerGroupMember';
 import { of } from 'rxjs';
-import { ComponentHeader } from '../../../directives/component-header/component-header.component';
-import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,10 +30,7 @@ import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PauseScreenService } from '../../../services/pauseScreenService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
-import { DynamicPromptComponent } from '../../../directives/dynamic-prompt/dynamic-prompt.component';
-import { PromptComponent } from '../../../directives/prompt/prompt.component';
 import { PeerChatComponent } from '../PeerChatComponent';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let component: PeerChatStudentComponent;
 const componentId = 'component1';
@@ -122,6 +118,7 @@ describe('PeerChatStudentComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        ComponentHeaderComponent,
         FormsModule,
         HttpClientTestingModule,
         MatCardModule,
@@ -132,13 +129,7 @@ describe('PeerChatStudentComponent', () => {
         PeerChatModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [
-        ComponentHeader,
-        DynamicPromptComponent,
-        PeerChatStudentComponent,
-        PossibleScoreComponent,
-        PromptComponent
-      ],
+      declarations: [PeerChatStudentComponent],
       providers: [
         AnnotationService,
         ComponentService,
@@ -153,8 +144,7 @@ describe('PeerChatStudentComponent', () => {
         StudentDataService,
         StudentWebSocketService,
         TagService
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
     }).compileComponents();
   });
 

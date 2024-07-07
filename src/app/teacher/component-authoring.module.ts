@@ -78,7 +78,6 @@ import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-
 import { SelectStepAndComponentComponent } from '../authoring-tool/select-step-and-component/select-step-and-component.component';
 import { EditComponentConstraintsComponent } from '../authoring-tool/edit-component-constraints/edit-component-constraints.component';
 import { ComponentConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/constraint/component-constraint-authoring/component-constraint-authoring.component';
-import { ConstraintAuthoringModule } from '../../assets/wise5/authoringTool/constraint/constraint-authoring.module';
 import { EditComponentAdvancedComponent } from '../authoring-tool/edit-component-advanced/edit-component-advanced.component';
 import { ComponentAuthoringComponent } from '../../assets/wise5/authoringTool/components/component-authoring.component';
 import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
@@ -90,6 +89,8 @@ import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authorin
 import { TranslatableAssetChooserComponent } from '../../assets/wise5/authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
 import { AiChatAuthoringComponent } from '../../assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component';
 import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component';
+import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component';
+import { EditConstraintRemovalCriteriaComponent } from '../../assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,6 @@ import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiCha
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
-    EditComponentAdvancedButtonComponent,
     EditComponentAdvancedComponent,
     EditComponentAddToNotebookButtonComponent,
     EditComponentConstraintsComponent,
@@ -177,10 +177,12 @@ import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiCha
     WiseLinkAuthoringDialogComponent
   ],
   imports: [
-    ConstraintAuthoringModule,
+    EditConstraintRemovalCriteriaComponent,
+    EditComponentAdvancedButtonComponent,
+    PeerGroupingAuthoringModule,
+    RequiredErrorLabelComponent,
     SelectStepAndComponentComponent,
     StudentTeacherCommonModule,
-    PeerGroupingAuthoringModule,
     TranslatableAssetChooserComponent,
     TranslatableInputComponent,
     TranslatableRichTextEditorComponent,

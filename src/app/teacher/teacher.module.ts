@@ -43,6 +43,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SelectRunsControlsModule } from './select-runs-controls/select-runs-controls.module';
 import { SearchBarComponent } from '../modules/shared/search-bar/search-bar.component';
+import { ApplyTagsButtonComponent } from './apply-tags-button/apply-tags-button.component';
+import { ProjectTagService } from '../../assets/wise5/services/projectTagService';
+import { SelectTagsComponent } from './select-tags/select-tags.component';
+import { UnitTagsComponent } from './unit-tags/unit-tags.component';
+import { ColorService } from '../../assets/wise5/services/colorService';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -67,21 +73,25 @@ const materialModules = [
 ];
 @NgModule({
   imports: [
+    ApplyTagsButtonComponent,
     CommonModule,
+    DiscourseRecentActivityComponent,
     FlexLayoutModule,
     FormsModule,
     LibraryModule,
     materialModules,
+    NgSelectModule,
     SearchBarComponent,
-    SharedModule,
     SelectRunsControlsModule,
+    SelectTagsComponent,
+    SharedModule,
     TeacherRoutingModule,
     TimelineModule,
-    ClipboardModule
+    ClipboardModule,
+    UnitTagsComponent
   ],
   declarations: [
     CreateRunDialogComponent,
-    DiscourseRecentActivityComponent,
     EditComponent,
     EditRunWarningDialogComponent,
     ListClassroomCoursesDialogComponent,
@@ -95,7 +105,7 @@ const materialModules = [
     TeacherRunListComponent,
     TeacherRunListItemComponent
   ],
-  providers: [AuthGuard],
-  exports: [TeacherComponent, materialModules]
+  providers: [AuthGuard, ColorService, ProjectTagService],
+  exports: [TeacherComponent, UnitTagsComponent, materialModules]
 })
 export class TeacherModule {}

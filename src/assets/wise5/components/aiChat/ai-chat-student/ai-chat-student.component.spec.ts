@@ -5,11 +5,9 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { ComponentHeader } from '../../../directives/component-header/component-header.component';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { AiChatModule } from '../ai-chat.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { PromptComponent } from '../../../directives/prompt/prompt.component';
-import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { AiChatComponent } from '../AiChatComponent';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -24,16 +22,12 @@ describe('AiChatStudentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AiChatStudentComponent,
-        ComponentHeader,
-        PossibleScoreComponent,
-        PromptComponent
-      ],
+      declarations: [AiChatStudentComponent],
       imports: [
         AiChatModule,
         BrowserAnimationsModule,
         ChatInputComponent,
+        ComponentHeaderComponent,
         FormsModule,
         HttpClientTestingModule,
         MatCardModule,

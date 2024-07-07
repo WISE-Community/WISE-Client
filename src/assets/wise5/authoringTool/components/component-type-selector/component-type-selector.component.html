@@ -10,12 +10,9 @@
   </button>
   <mat-form-field [subscriptSizing]="'dynamic'">
     <mat-select [(value)]="componentType" (selectionChange)="selectComponent(componentType)">
-      <mat-option
-        *ngFor="let componentTypeOption of componentTypes"
-        [value]="componentTypeOption.type"
-      >
-        {{ componentTypeOption.name }}
-      </mat-option>
+      @for (componentTypeOption of componentTypes; track componentTypeOption.type) {
+      <mat-option [value]="componentTypeOption.type">{{ componentTypeOption.name }}</mat-option>
+      }
     </mat-select>
   </mat-form-field>
   <button

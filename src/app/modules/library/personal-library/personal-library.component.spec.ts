@@ -24,7 +24,9 @@ import { of } from 'rxjs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
 import { HttpClient } from '@angular/common/http';
+import { ProjectTagService } from '../../../../assets/wise5/services/projectTagService';
 
+const archivedTag = { id: 1, text: 'archived', color: null };
 let archiveProjectService: ArchiveProjectService;
 let component: PersonalLibraryComponent;
 let fixture: ComponentFixture<PersonalLibraryComponent>;
@@ -52,14 +54,11 @@ describe('PersonalLibraryComponent', () => {
           MatPaginatorModule,
           MatSelectModule,
           MatSnackBarModule,
-          OverlayModule
-        ],
-        declarations: [
-          LibraryProjectComponent,
-          PersonalLibraryComponent,
+          OverlayModule,
           SelectAllItemsCheckboxComponent
         ],
-        providers: [ArchiveProjectService, LibraryService],
+        declarations: [LibraryProjectComponent, PersonalLibraryComponent],
+        providers: [ArchiveProjectService, LibraryService, ProjectTagService],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
     })
@@ -92,12 +91,12 @@ function setUpFiveProjects() {
     new LibraryProject({
       id: projectId1,
       metadata: { title: 'Hello' },
-      tags: ['archived']
+      tags: [archivedTag]
     }),
     new LibraryProject({
       id: projectId2,
       metadata: { title: 'Hello World' },
-      tags: ['archived']
+      tags: [archivedTag]
     }),
     new LibraryProject({
       id: projectId3,
@@ -150,7 +149,10 @@ function archiveMultipleProjects() {
       it('archives multiple projects', async () => {
         await harness.selectProjects([projectId4, projectId3]);
         spyOn(http, 'put').and.returnValue(
-          of([new ArchiveProjectResponse(4, true), new ArchiveProjectResponse(3, true)])
+          of([
+            new ArchiveProjectResponse(4, true, archivedTag),
+            new ArchiveProjectResponse(3, true, archivedTag)
+          ])
         );
         await (await harness.getArchiveButton()).click();
         expect(await harness.getProjectIdsInView()).toEqual([projectId5]);
@@ -166,7 +168,10 @@ function restoreMultipleProjects() {
         await harness.showArchivedView();
         await harness.selectProjects([projectId2, projectId1]);
         spyOn(http, 'delete').and.returnValue(
-          of([new ArchiveProjectResponse(2, false), new ArchiveProjectResponse(1, false)])
+          of([
+            new ArchiveProjectResponse(2, false, archivedTag),
+            new ArchiveProjectResponse(1, false, archivedTag)
+          ])
         );
         await (await harness.getUnarchiveButton()).click();
         expect(await harness.getProjectIdsInView()).toEqual([]);

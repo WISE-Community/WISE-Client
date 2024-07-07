@@ -13,7 +13,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { NodeInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
-import { PreviewComponentModule } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.module';
 import { NotebookWorkgroupGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component';
 import { ProjectProgressComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentProgress/project-progress/project-progress.component';
 import { PauseScreensMenuComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component';
@@ -34,9 +33,10 @@ import { MilestoneModule } from './milestone/milestone.module';
 import { GradingCommonModule } from './grading-common.module';
 import { ManageStudentsModule } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students.module';
 import { DataExportModule } from '../../assets/wise5/classroomMonitor/dataExport/data-export.module';
-import { StepToolsModule } from '../../assets/wise5/themes/default/themeComponents/stepTools/step-tools.module';
 import { RouterModule } from '@angular/router';
 import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator/save-indicator.component';
+import { PreviewComponentComponent } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.component';
+import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-tools.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,6 @@ import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator
     NotebookWorkgroupGradingComponent,
     NotificationsMenuComponent,
     PauseScreensMenuComponent,
-    ProjectProgressComponent,
     ShowNodeInfoDialogComponent,
     StepInfoComponent,
     StepItemComponent,
@@ -62,8 +61,7 @@ import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator
     TeacherSummaryDisplay,
     ToolBarComponent,
     TopBarComponent,
-    ViewComponentRevisionsComponent,
-    NavItemScoreComponent
+    ViewComponentRevisionsComponent
   ],
   imports: [
     StudentTeacherCommonModule,
@@ -74,12 +72,14 @@ import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator
     HighchartsChartModule,
     ManageStudentsModule,
     MilestoneModule,
+    NavItemScoreComponent,
     PeerGroupGradingModule,
-    PreviewComponentModule,
+    PreviewComponentComponent,
+    ProjectProgressComponent,
     RouterModule,
     SaveIndicatorComponent,
     SelectPeriodModule,
-    StepToolsModule
+    StepToolsComponent
   ]
 })
 export class ClassroomMonitorModule {}

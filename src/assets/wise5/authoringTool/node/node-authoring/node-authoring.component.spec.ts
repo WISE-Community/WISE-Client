@@ -15,7 +15,6 @@ import { FormsModule } from '@angular/forms';
 import { TeacherNodeIconComponent } from '../../teacher-node-icon/teacher-node-icon.component';
 import { ComponentAuthoringModule } from '../../../../../app/teacher/component-authoring.module';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { PreviewComponentModule } from '../../components/preview-component/preview-component.module';
 import { DebugElement } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -29,6 +28,7 @@ import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
 import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
+import { PreviewComponentButtonComponent } from '../../components/preview-component-button/preview-component-button.component';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -45,14 +45,9 @@ let saveProjectSpy: jasmine.Spy;
 describe('NodeAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AddComponentButtonComponent,
-        CopyComponentButtonComponent,
-        EditNodeTitleComponent,
-        NodeAuthoringComponent,
-        TeacherNodeIconComponent
-      ],
+      declarations: [CopyComponentButtonComponent, EditNodeTitleComponent, NodeAuthoringComponent],
       imports: [
+        AddComponentButtonComponent,
         BrowserAnimationsModule,
         ComponentAuthoringModule,
         ComponentTypeServiceModule,
@@ -62,9 +57,10 @@ describe('NodeAuthoringComponent', () => {
         MatCheckboxModule,
         MatIconModule,
         MatInputModule,
-        PreviewComponentModule,
+        PreviewComponentButtonComponent,
         RouterTestingModule,
-        StudentTeacherCommonServicesModule
+        StudentTeacherCommonServicesModule,
+        TeacherNodeIconComponent
       ],
       providers: [
         ClassroomStatusService,

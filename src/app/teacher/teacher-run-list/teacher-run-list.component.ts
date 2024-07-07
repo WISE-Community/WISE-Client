@@ -11,11 +11,12 @@ import { runSpansDays } from '../../../assets/wise5/common/datetime/datetime';
 import { SelectRunsOption } from '../select-runs-controls/select-runs-option';
 import { sortByRunStartTimeDesc } from '../../domain/run';
 import { Project } from '../../domain/project';
+import { Tag } from '../../domain/tag';
 
 @Component({
   selector: 'app-teacher-run-list',
-  templateUrl: './teacher-run-list.component.html',
-  styleUrls: ['./teacher-run-list.component.scss']
+  styleUrl: './teacher-run-list.component.scss',
+  templateUrl: './teacher-run-list.component.html'
 })
 export class TeacherRunListComponent implements OnInit {
   private MAX_RECENT_RUNS = 10;
@@ -28,6 +29,8 @@ export class TeacherRunListComponent implements OnInit {
   protected runChangedEventEmitter: EventEmitter<void> = new EventEmitter<void>();
   protected runs: TeacherRun[] = [];
   protected searchValue: string = '';
+  protected selectedProjects: Project[] = [];
+  protected selectedTags: Tag[] = [];
   protected showAll: boolean = false;
   protected showArchivedView: boolean = false;
   private subscriptions: Subscription = new Subscription();
@@ -78,7 +81,7 @@ export class TeacherRunListComponent implements OnInit {
     this.runs = runs.map((run) => {
       const teacherRun = new TeacherRun(run);
       teacherRun.shared = !teacherRun.isOwner(userId);
-      teacherRun.project.archived = teacherRun.project.tags.includes('archived');
+      teacherRun.project.archived = teacherRun.project.hasTagWithText('archived');
       return teacherRun;
     });
     this.filteredRuns = this.runs;
@@ -153,12 +156,27 @@ export class TeacherRunListComponent implements OnInit {
     this.performSearchAndFilter();
   }
 
+  protected selectTags(tags: Tag[]): void {
+    this.selectedTags = tags;
+    this.performSearchAndFilter();
+  }
+
+  protected removeTag(tag: Tag): void {
+    this.selectedTags = this.selectedTags.filter((selectedTag: Tag) => selectedTag.id !== tag.id);
+    this.performSearchAndFilter();
+  }
+
   private performFilter(): void {
     this.filteredRuns = this.filteredRuns.filter(
       (run: TeacherRun) =>
         (!this.showArchivedView && !run.project.archived) ||
         (this.showArchivedView && run.project.archived)
     );
+    if (this.selectedTags.length > 0) {
+      this.filteredRuns = this.filteredRuns.filter((run: TeacherRun) =>
+        this.selectedTags.some((tag: Tag) => run.project.hasTag(tag))
+      );
+    }
   }
 
   private performSearch(searchValue: string): TeacherRun[] {
@@ -185,6 +203,7 @@ export class TeacherRunListComponent implements OnInit {
   protected reset(): void {
     this.searchValue = '';
     this.filterValue = '';
+    this.selectedTags = [];
     this.performSearchAndFilter();
   }
 
@@ -237,15 +256,24 @@ export class TeacherRunListComponent implements OnInit {
 
   private runSelectedStatusChanged(): void {
     this.runChangedEventEmitter.emit();
+    this.selectedProjects = this.getSelectedProjects();
   }
 
   protected archiveProjects(archive: boolean): void {
     this.archiveProjectService.archiveProjects(this.getSelectedProjects(), archive);
   }
 
-  private getSelectedProjects(): Project[] {
+  protected getSelectedProjects(): Project[] {
     return this.filteredRuns
       .filter((run: TeacherRun) => run.project.selected)
       .map((run: TeacherRun) => run.project);
+  }
+
+  protected getNumActiveRuns(): number {
+    return this.runs.filter((run: TeacherRun) => !run.project.archived).length;
+  }
+
+  protected getNumArchivedRuns(): number {
+    return this.runs.filter((run: TeacherRun) => run.project.archived).length;
   }
 }

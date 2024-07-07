@@ -7,11 +7,13 @@ import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
+import { Tag } from '../../../domain/tag';
+import { Project } from '../../../domain/project';
 
 @Component({
   selector: 'app-personal-library',
-  templateUrl: './personal-library.component.html',
-  styleUrls: ['./personal-library.component.scss']
+  styleUrl: './personal-library.component.scss',
+  templateUrl: './personal-library.component.html'
 })
 export class PersonalLibraryComponent extends LibraryComponent {
   filteredProjects: LibraryProject[] = [];
@@ -25,8 +27,9 @@ export class PersonalLibraryComponent extends LibraryComponent {
     }, {})
   );
   projects: LibraryProject[] = [];
-  protected projectsLabel: string = $localize`units`;
+  protected projectsLabel: string = $localize`Select all units`;
   protected selectedProjects: WritableSignal<LibraryProject[]> = signal([]);
+  protected selectedTags: Tag[] = [];
   protected sharedProjects: LibraryProject[] = [];
   protected showArchivedView: boolean = false;
 
@@ -113,8 +116,13 @@ export class PersonalLibraryComponent extends LibraryComponent {
   public filterUpdated(filterValues: ProjectFilterValues = null): void {
     super.filterUpdated(filterValues);
     this.filteredProjects = this.filteredProjects.filter(
-      (project) => project.hasTag('archived') == this.showArchivedView
+      (project) => project.hasTagWithText('archived') == this.showArchivedView
     );
+    if (this.selectedTags.length > 0) {
+      this.filteredProjects = this.filteredProjects.filter((project: Project) =>
+        this.selectedTags.some((tag: Tag) => project.hasTag(tag))
+      );
+    }
     this.numProjectsInView = this.getProjectsInView().length;
     this.unselectAllProjects();
   }
@@ -130,16 +138,14 @@ export class PersonalLibraryComponent extends LibraryComponent {
   }
 
   protected updateSelectedProjects(event: ProjectSelectionEvent): void {
+    const selectedProjects = this.selectedProjects();
     if (event.selected) {
-      this.selectedProjects.update((selectedProjects) => {
-        return [...selectedProjects, event.project];
-      });
+      selectedProjects.push(event.project);
     } else {
-      this.selectedProjects.update((selectedProjects) => {
-        selectedProjects.splice(selectedProjects.indexOf(event.project), 1);
-        return [...selectedProjects];
-      });
+      selectedProjects.splice(selectedProjects.indexOf(event.project), 1);
     }
+    // create a new array to trigger change detection
+    this.selectedProjects.set([...selectedProjects]);
   }
 
   protected unselectAllProjects(): void {
@@ -161,6 +167,16 @@ export class PersonalLibraryComponent extends LibraryComponent {
 
   protected archiveProjects(archive: boolean): void {
     this.archiveProjectService.archiveProjects(this.selectedProjects(), archive);
+  }
+
+  protected selectTags(tags: Tag[]): void {
+    this.selectedTags = tags;
+    this.filterUpdated();
+  }
+
+  protected removeTag(tag: Tag): void {
+    this.selectedTags = this.selectedTags.filter((selectedTag: Tag) => selectedTag.id !== tag.id);
+    this.filterUpdated();
   }
 }
 

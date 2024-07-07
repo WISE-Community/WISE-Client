@@ -33,10 +33,11 @@
         mat-button
         class="mat-raised-button mat-primary"
         (click)="submit()"
-        [disabled]="!addLessonFormGroup.valid"
-        i18n
+        [disabled]="!addLessonFormGroup.valid || submitting"
+        class="button--progress"
       >
-        Submit
+        <mat-progress-bar *ngIf="submitting" mode="indeterminate"/>
+        <ng-container i18n>Submit</ng-container>
       </button>
     </div>
   </div>

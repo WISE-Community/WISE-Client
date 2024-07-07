@@ -1,0 +1,40 @@
+<div class="tag-inputs" fxLayout="column">
+  <div class="tag-preview">
+    <tag class="mat-small" [color]="colorControl.value" [text]="nameControl.value" />
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-form-field fxFlex>
+      <mat-label i18n>Tag Name</mat-label>
+      <input matInput #nameInput (keyup.enter)="enterKeyPressed()" [formControl]="nameControl" />
+      @if (nameControl.errors?.required) {
+        <mat-error i18n>Required</mat-error>
+      } @else if (nameControl.errors?.archivedNotAllowed) {
+        <mat-error i18n>Archived tag not allowed</mat-error>
+      } @else if (nameControl.errors?.tagAlreadyExists) {
+        <mat-error i18n>Tag already exists</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="color-input">
+      <mat-label i18n>Color</mat-label>
+      <input matInput (keyup.enter)="enterKeyPressed()" [formControl]="colorControl" />
+      @if (colorControl.errors?.required) {
+        <mat-error i18n>Required</mat-error>
+      }
+    </mat-form-field>
+  </div>
+</div>
+<div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <color-chooser [chosenColor]="colorControl.value" (chooseColorEvent)="chooseColor($event)" />
+  <span fxFlex></span>
+  <div fxLayoutGap="8px">
+    <button mat-button (click)="close()" i18n>Cancel</button>
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="!nameControl.valid || !colorControl.valid"
+      (click)="submit()"
+    >
+      {{ submitLabel }}
+    </button>
+  </div>
+</div>

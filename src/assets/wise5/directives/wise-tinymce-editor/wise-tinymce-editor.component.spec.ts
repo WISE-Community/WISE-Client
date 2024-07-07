@@ -1,9 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { WiseTinymceEditorComponent } from './wise-tinymce-editor.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let component: WiseTinymceEditorComponent;
 let fixture: ComponentFixture<WiseTinymceEditorComponent>;
@@ -11,9 +9,11 @@ let fixture: ComponentFixture<WiseTinymceEditorComponent>;
 describe('WiseTinymceEditorComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [WiseTinymceEditorComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [
+        HttpClientTestingModule,
+        StudentTeacherCommonServicesModule,
+        WiseTinymceEditorComponent
+      ]
     }).compileComponents();
     fixture = TestBed.createComponent(WiseTinymceEditorComponent);
     component = fixture.componentInstance;

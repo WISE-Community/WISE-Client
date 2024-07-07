@@ -15,15 +15,16 @@ import { ConfigService } from '../../../services/config.service';
 import { GoogleUser } from '../GoogleUser';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   selector: 'google-sign-in-button',
-  styleUrls: ['google-sign-in-button.component.scss'],
-  templateUrl: 'google-sign-in-button.component.html',
-  encapsulation: ViewEncapsulation.None
+  standalone: true,
+  styleUrl: 'google-sign-in-button.component.scss',
+  template: '<div #googleButton class="googleButton center"></div>'
 })
 export class GoogleSignInButtonComponent implements AfterViewInit {
+  @ViewChild('googleButton') private googleButton: ElementRef;
   @Output() signedIn = new EventEmitter<GoogleUser>();
   @Input() text: string = 'signin_with';
-  @ViewChild('googleButton') private googleButton: ElementRef;
 
   constructor(private configService: ConfigService, private ngZone: NgZone) {}
 

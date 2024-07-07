@@ -4,25 +4,47 @@ import { NodeService } from '../../../../services/nodeService';
 import { NodeStatusService } from '../../../../services/nodeStatusService';
 import { ProjectService } from '../../../../services/projectService';
 import { StudentDataService } from '../../../../services/studentDataService';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { NodeStatusIconComponent } from '../nodeStatusIcon/node-status-icon.component';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    MatTooltipModule,
+    NodeIconComponent,
+    NodeStatusIconComponent
+  ],
   selector: 'step-tools',
-  templateUrl: './step-tools.component.html',
-  styleUrls: ['./step-tools.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  standalone: true,
+  styleUrl: './step-tools.component.scss',
+  templateUrl: './step-tools.component.html'
 })
 export class StepToolsComponent implements OnInit {
-  icons: any;
-  idToOrder: any;
-  is_rtl: boolean;
-  nextId: string;
-  nodeId: string;
-  nodeIds: string[];
-  nodeStatus: any;
-  nodeStatuses: any;
-  prevId: string;
-  subscriptions: Subscription = new Subscription();
-  toNodeId: string;
+  protected icons: any;
+  protected is_rtl: boolean;
+  protected nextId: string;
+  protected nodeId: string;
+  protected nodeIds: string[];
+  protected nodeStatus: any;
+  protected nodeStatuses: any;
+  protected prevId: string;
+  private subscriptions: Subscription = new Subscription();
+  protected toNodeId: string;
 
   constructor(
     private nodeService: NodeService,
@@ -39,12 +61,11 @@ export class StepToolsComponent implements OnInit {
     }
     this.calculateNodeIds();
     this.nodeStatuses = this.nodeStatusService.getNodeStatuses();
-    this.idToOrder = this.projectService.idToOrder;
     this.updateModel();
     this.subscribeToChanges();
   }
 
-  subscribeToChanges(): void {
+  private subscribeToChanges(): void {
     this.subscriptions.add(
       this.studentDataService.currentNodeChanged$.subscribe(() => {
         this.updateModel();
@@ -61,16 +82,16 @@ export class StepToolsComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  calculateNodeIds(): void {
+  private calculateNodeIds(): void {
     this.nodeIds = Object.keys(this.projectService.idToOrder);
     this.nodeIds.shift(); // remove the 'group0' master root node from consideration
   }
 
-  toNodeIdChanged(): void {
+  protected toNodeIdChanged(): void {
     this.nodeService.setCurrentNode(this.toNodeId);
   }
 
-  updateModel(): void {
+  private updateModel(): void {
     const nodeId = this.studentDataService.getCurrentNodeId();
     if (!this.projectService.isGroupNode(nodeId)) {
       this.nodeId = nodeId;
@@ -84,35 +105,23 @@ export class StepToolsComponent implements OnInit {
     }
   }
 
-  getTemplateUrl(): string {
-    return this.projectService.getThemePath() + '/themeComponents/stepTools/stepTools.html';
-  }
-
-  getNodeTitle(nodeId: string): string {
-    return this.projectService.getNodeTitle(nodeId);
-  }
-
-  getNodePositionById(nodeId: string): string {
-    return this.projectService.getNodePositionById(nodeId);
-  }
-
-  getNodePositionAndTitle(nodeId: string): string {
+  protected getNodePositionAndTitle(nodeId: string): string {
     return this.projectService.getNodePositionAndTitle(nodeId);
   }
 
-  isGroupNode(nodeId: string): boolean {
+  protected isGroupNode(nodeId: string): boolean {
     return this.projectService.isGroupNode(nodeId);
   }
 
-  goToPrevNode(): void {
+  protected goToPrevNode(): void {
     this.nodeService.goToPrevNode();
   }
 
-  goToNextNode(): void {
+  protected goToNextNode(): void {
     this.nodeService.goToNextNode();
   }
 
-  closeNode(): void {
+  protected closeNode(): void {
     this.nodeService.closeNode();
   }
 }

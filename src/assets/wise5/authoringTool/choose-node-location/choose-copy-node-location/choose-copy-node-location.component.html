@@ -14,7 +14,7 @@
       [ngStyle]="{ 'background-color': getBackgroundColor(nodeId) }"
     >
       <div fxLayout="row" fxLayoutGap="8px">
-        <node-icon-and-title [nodeId]="nodeId" [showPosition]="true"></node-icon-and-title>
+        <node-icon-and-title [nodeId]="nodeId" [showPosition]="true" />
         <insert-node-inside-button
           *ngIf="isGroupNode(nodeId)"
           (insertEvent)="insert(nodeId, false)"
@@ -30,7 +30,7 @@
   <div *ngIf="inactiveGroupNodes.length == 0" i18n>There are no Unused Lessons</div>
   <ng-container *ngFor="let inactiveNode of inactiveGroupNodes">
     <div fxLayout="row" fxLayoutAlign="start center" class="lesson-header" fxLayoutGap="10px">
-      <node-icon-and-title [nodeId]="inactiveNode.id"></node-icon-and-title>
+      <node-icon-and-title [nodeId]="inactiveNode.id" />
       <insert-node-inside-button
         (insertEvent)="insert(inactiveNode.id, false)"
       ></insert-node-inside-button>

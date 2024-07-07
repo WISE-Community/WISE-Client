@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ComponentStateInfoModule } from '../../assets/wise5/common/component-state-info/component-state-info.module';
 import { AnimationGradingModule } from '../../assets/wise5/components/animation/animation-grading/animation-grading.module';
 import { AudioOscillatorGradingModule } from '../../assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.module';
 import { ConceptMapGradingModule } from '../../assets/wise5/components/conceptMap/concept-map-grading/concept-map-grading.module';
@@ -18,6 +17,7 @@ import { TableGradingModule } from '../../assets/wise5/components/table/table-gr
 import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
 import { ShowMyWorkGradingModule } from '../../assets/wise5/components/showMyWork/show-my-work-grading/show-my-work-grading.module';
 import { AiChatGradingModule } from '../../assets/wise5/components/aiChat/ai-chat-grading/ai-chat-grading.module';
+import { ComponentStateInfoComponent } from '../../assets/wise5/common/component-state-info/component-state-info.component';
 
 @NgModule({
   declarations: [ComponentGradingComponent],
@@ -25,7 +25,7 @@ import { AiChatGradingModule } from '../../assets/wise5/components/aiChat/ai-cha
     AiChatGradingModule,
     AnimationGradingModule,
     AudioOscillatorGradingModule,
-    ComponentStateInfoModule,
+    ComponentStateInfoComponent,
     ConceptMapGradingModule,
     DialogGuidanceGradingModule,
     DiscussionGradingModule,
@@ -46,7 +46,7 @@ import { AiChatGradingModule } from '../../assets/wise5/components/aiChat/ai-cha
     AnimationGradingModule,
     AudioOscillatorGradingModule,
     ComponentGradingComponent,
-    ComponentStateInfoModule,
+    ComponentStateInfoComponent,
     ConceptMapGradingModule,
     DialogGuidanceGradingModule,
     DiscussionGradingModule,
