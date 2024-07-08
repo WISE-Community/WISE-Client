@@ -17,7 +17,6 @@ import { ComponentAuthoringModule } from '../../../../../app/teacher/component-a
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { DebugElement } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
@@ -29,6 +28,7 @@ import { TeacherProjectTranslationService } from '../../../services/teacherProje
 import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
 import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
 import { PreviewComponentButtonComponent } from '../../components/preview-component-button/preview-component-button.component';
+import { CopyTranslationsService } from '../../../services/copyTranslationsService';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -58,12 +58,12 @@ describe('NodeAuthoringComponent', () => {
         MatIconModule,
         MatInputModule,
         PreviewComponentButtonComponent,
-        RouterTestingModule,
         StudentTeacherCommonServicesModule,
         TeacherNodeIconComponent
       ],
       providers: [
         ClassroomStatusService,
+        CopyTranslationsService,
         DeleteTranslationsService,
         TeacherProjectTranslationService,
         ProjectAssetService,
