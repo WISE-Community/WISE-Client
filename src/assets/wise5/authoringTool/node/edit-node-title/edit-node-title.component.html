@@ -1,8 +1,6 @@
 <translatable-input
   [content]="nodeJson"
   key="title"
-  [label]="isGroupNode ? 'Lesson Title ' : 'Step Title ' + nodePosition"
-  i18n-label
+  [label]="label"
   (defaultLanguageTextChanged)="save()"
-  class="step-title form-field-no-hint"
 />
