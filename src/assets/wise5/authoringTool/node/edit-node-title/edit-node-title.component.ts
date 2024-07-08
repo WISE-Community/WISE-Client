@@ -7,7 +7,6 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   templateUrl: './edit-node-title.component.html'
 })
 export class EditNodeTitleComponent {
-  protected isGroupNode: boolean;
   protected label: string;
   @Input() node: Node;
   protected nodeJson: any;
@@ -16,9 +15,8 @@ export class EditNodeTitleComponent {
 
   ngOnChanges(): void {
     this.nodeJson = this.projectService.getNodeById(this.node.id);
-    this.isGroupNode = this.node.isGroup();
     this.label =
-      (this.isGroupNode ? $localize`Lesson Title` : $localize`Step Title`) +
+      (this.node.isGroup() ? $localize`Lesson Title` : $localize`Step Title`) +
       ' ' +
       this.projectService.getNodePositionById(this.node.id);
   }
