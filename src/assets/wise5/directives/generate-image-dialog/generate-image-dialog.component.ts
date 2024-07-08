@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, forwardRef, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ConceptMapService } from '../../components/conceptMap/conceptMapService';
@@ -17,7 +17,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   imports: [
     CommonModule,
-    ComponentComponent,
+    forwardRef(() => ComponentComponent),
     FlexLayoutModule,
     MatButtonModule,
     MatProgressSpinnerModule
