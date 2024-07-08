@@ -28,6 +28,7 @@ import { TeacherProjectTranslationService } from '../../../services/teacherProje
 import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
 import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
 import { PreviewComponentButtonComponent } from '../../components/preview-component-button/preview-component-button.component';
+import { TranslatableInputComponent } from '../../components/translatable-input/translatable-input.component';
 import { CopyTranslationsService } from '../../../services/copyTranslationsService';
 
 let component: NodeAuthoringComponent;
@@ -59,7 +60,8 @@ describe('NodeAuthoringComponent', () => {
         MatInputModule,
         PreviewComponentButtonComponent,
         StudentTeacherCommonServicesModule,
-        TeacherNodeIconComponent
+        TeacherNodeIconComponent,
+        TranslatableInputComponent
       ],
       providers: [
         ClassroomStatusService,

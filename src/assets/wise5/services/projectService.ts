@@ -1414,9 +1414,9 @@ export class ProjectService {
     return componentService.componentHasWork(component);
   }
 
-  calculateComponentIdToHasWork(
-    components: ComponentContent[]
-  ): { [componentId: string]: boolean } {
+  calculateComponentIdToHasWork(components: ComponentContent[]): {
+    [componentId: string]: boolean;
+  } {
     const componentIdToHasWork: { [componentId: string]: boolean } = {};
     for (const component of components) {
       componentIdToHasWork[component.id] = this.componentHasWork(component);
