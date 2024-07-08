@@ -5,6 +5,7 @@ import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { CopyTranslationsService } from '../../../services/copyTranslationsService';
 
 const nodeId = 'node1';
 const components = [
@@ -35,9 +36,8 @@ class MockTeacherDataService {
 class MockComponentTypeService {}
 
 let component: ChooseComponentLocationComponent;
-let teacherProjectService: TeacherProjectService;
 
-describe('InsertComponent', () => {
+describe('ChooseComponentLocationComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -45,12 +45,12 @@ describe('InsertComponent', () => {
         ChooseComponentLocationComponent,
         { provide: ComponentTypeService, useClass: MockComponentTypeService },
         ConfigService,
+        CopyTranslationsService,
         { provide: TeacherProjectService, useClass: MockProjectService },
         { provide: TeacherDataService, useClass: MockTeacherDataService }
       ]
     });
     component = TestBed.inject(ChooseComponentLocationComponent);
-    teacherProjectService = TestBed.inject(TeacherProjectService);
   });
 
   it('should create', () => {
