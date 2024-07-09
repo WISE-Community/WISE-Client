@@ -56,6 +56,7 @@ import { SelectTagsComponent } from '../../teacher/select-tags/select-tags.compo
 import { MatChipsModule } from '@angular/material/chips';
 import { SelectMenuComponent } from '../shared/select-menu/select-menu.component';
 import { UnitTagsComponent } from '../../teacher/unit-tags/unit-tags.component';
+import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -123,6 +124,10 @@ const materialModules = [
     UnitTagsComponent,
     materialModules
   ],
-  providers: [LibraryService, { provide: MatPaginatorIntl, useClass: LibraryPaginatorIntl }]
+  providers: [
+    LibraryService,
+    { provide: MatPaginatorIntl, useClass: LibraryPaginatorIntl },
+    ProjectTagService
+  ]
 })
 export class LibraryModule {}
