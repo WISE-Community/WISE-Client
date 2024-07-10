@@ -22,9 +22,9 @@ const nodeId1 = 'node1';
 describe('ComponentConstraintAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ComponentConstraintAuthoringComponent],
       imports: [
         BrowserAnimationsModule,
+        ComponentConstraintAuthoringComponent,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,
@@ -38,8 +38,7 @@ describe('ComponentConstraintAuthoringComponent', () => {
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ComponentConstraintAuthoringComponent);

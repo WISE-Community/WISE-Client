@@ -95,7 +95,6 @@ import { EditConstraintRemovalCriteriaComponent } from '../../assets/wise5/autho
     AudioOscillatorAuthoring,
     AuthorUrlParametersComponent,
     ComponentAuthoringComponent,
-    ComponentConstraintAuthoringComponent,
     ConceptMapAuthoring,
     CreateNewPeerGroupingDialogComponent,
     DrawAuthoring,
@@ -173,6 +172,7 @@ import { EditConstraintRemovalCriteriaComponent } from '../../assets/wise5/autho
     WiseLinkAuthoringDialogComponent
   ],
   imports: [
+    ComponentConstraintAuthoringComponent,
     EditConstraintRemovalCriteriaComponent,
     EditComponentAdvancedButtonComponent,
     PeerGroupingAuthoringModule,
