@@ -134,7 +134,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
       this.setComponentId(createBranchComponentId);
     }
 
-    // use set timeout to give the form to populate the path form group controls
+    // use set timeout to give the form time to populate the path form group controls
     setTimeout(() => {
       if (scores.length > 0) {
         for (let i = 0; i < scores.length; i++) {
@@ -150,7 +150,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     this.changeDetector.detectChanges();
   }
 
-  removeBranchButtonClicked(): void {
+  protected removeBranchButtonClicked(): void {
     if (
       confirm(
         $localize`Are you sure you want to remove the branch?\n\nThe branch structure will be removed but the steps will not be deleted.`
@@ -160,7 +160,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     }
   }
 
-  removeBranch(): void {
+  private removeBranch(): void {
     for (let bp = 0; bp < this.branchPaths.length; bp++) {
       const branchPath = this.branchPaths[bp];
       this.removeBranchPath(branchPath);

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EditBranchComponent } from './edit-branch.component';
 
 describe('EditBranchComponent', () => {
@@ -9,9 +8,8 @@ describe('EditBranchComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [EditBranchComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(EditBranchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
