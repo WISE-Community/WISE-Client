@@ -3,8 +3,10 @@ import { AddStepButtonComponent } from './add-step-button.component';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { MatIconModule } from '@angular/material/icon';
+import { provideRouter } from '@angular/router';
+
+let teacherProjectService: TeacherProjectService;
 
 describe('AddStepButtonComponent', () => {
   let component: AddStepButtonComponent;
@@ -16,11 +18,12 @@ describe('AddStepButtonComponent', () => {
         AddStepButtonComponent,
         HttpClientTestingModule,
         MatIconModule,
-        RouterTestingModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [TeacherProjectService]
+      providers: [provideRouter([]), TeacherProjectService]
     });
+    teacherProjectService = TestBed.inject(TeacherProjectService);
+    spyOn(teacherProjectService, 'isBranchMergePoint').and.returnValue(false);
     fixture = TestBed.createComponent(AddStepButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

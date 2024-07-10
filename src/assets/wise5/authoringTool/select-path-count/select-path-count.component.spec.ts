@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectPathCountComponent } from './select-path-count.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('SelectPathCountComponent', () => {
   let component: SelectPathCountComponent;
@@ -7,7 +8,7 @@ describe('SelectPathCountComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelectPathCountComponent]
+      imports: [BrowserAnimationsModule, SelectPathCountComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SelectPathCountComponent);
