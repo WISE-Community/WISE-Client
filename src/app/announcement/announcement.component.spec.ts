@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AnnouncementComponent } from './announcement.component';
 import { Announcement } from '../domain/announcement';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,7 +10,7 @@ describe('AnnouncementComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AnnouncementComponent],
+      imports: [AnnouncementComponent],
       providers: [
         {
           provide: MatDialog,
@@ -19,8 +18,7 @@ describe('AnnouncementComponent', () => {
             closeAll: () => {}
           }
         }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
     });
   });
 
@@ -47,8 +45,9 @@ describe('AnnouncementComponent', () => {
 
   it('should emit dismiss event on dismiss button click', async () => {
     spyOn(component.doDismiss, 'emit');
-    const dismissButton = fixture.debugElement.query(By.css('.announcement__dismiss'))
-      .nativeElement;
+    const dismissButton = fixture.debugElement.query(
+      By.css('.announcement__dismiss')
+    ).nativeElement;
     dismissButton.click();
     fixture.detectChanges();
     expect(component.doDismiss.emit).toHaveBeenCalled();

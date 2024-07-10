@@ -1,30 +1,36 @@
 import { Component, EventEmitter, Input, Output, ViewEncapsulation, Inject } from '@angular/core';
 import { Announcement } from '../domain/announcement';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogModule
+} from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
+  imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatDialogModule, MatIconModule],
   selector: 'app-announcement',
-  templateUrl: './announcement.component.html',
-  styleUrls: ['./announcement.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  standalone: true,
+  styleUrl: './announcement.component.scss',
+  templateUrl: './announcement.component.html'
 })
 export class AnnouncementComponent {
-  @Input()
-  announcement: Announcement = new Announcement();
-
-  @Output('callback')
-  doCallback: EventEmitter<any> = new EventEmitter<any>();
-
-  @Output('dismiss')
-  doDismiss: EventEmitter<any> = new EventEmitter<any>();
+  @Input() announcement: Announcement = new Announcement();
+  @Output('callback') doCallback: EventEmitter<any> = new EventEmitter<any>();
+  @Output('dismiss') doDismiss: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(public dialog: MatDialog) {}
 
-  dismiss() {
+  protected dismiss(): void {
     this.doDismiss.emit();
   }
 
-  showAnnouncementDetails() {
+  protected showAnnouncementDetails(): void {
     this.dialog.open(AnnouncementDialogComponent, {
       data: this.announcement,
       panelClass: 'dialog-md'
