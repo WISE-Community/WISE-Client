@@ -8,8 +8,7 @@ describe('DialogWithCloseComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatDialogModule],
-      declarations: [DialogWithCloseComponent],
+      imports: [DialogWithCloseComponent, MatDialogModule],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} }
