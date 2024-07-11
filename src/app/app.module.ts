@@ -43,13 +43,9 @@ export function initialize(
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AnnouncementComponent,
-    AnnouncementDialogComponent,
-    TrackScrollDirective
-  ],
+  declarations: [AppComponent, AnnouncementDialogComponent, TrackScrollDirective],
   imports: [
+    AnnouncementComponent,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,

@@ -1,21 +1,18 @@
 <div class="announcement mat-caption dark-theme center primary-bg" fxLayoutAlign="center center">
   <span class="announcement__content" fxLayoutGap="4px" fxLayoutAlign="center center">
     <span>{{ announcement.bannerText }}</span>
-    <button
-      *ngIf="announcement.bannerButton"
-      mat-button
-      color="primary"
-      (click)="showAnnouncementDetails()"
-    >
-      {{ announcement.bannerButton }}
-    </button>
+    @if (announcement.bannerButton) {
+      <button mat-button color="primary" (click)="showAnnouncementDetails()">
+        {{ announcement.bannerButton }}
+      </button>
+    }
   </span>
   <button
     class="announcement__dismiss"
     mat-icon-button
     i18n-aria-label
     aria-label="Dismiss"
-    (click)="dismiss()"
+    (click)="dismiss.emit()"
   >
     <mat-icon>close</mat-icon>
   </button>
