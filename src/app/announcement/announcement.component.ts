@@ -21,14 +21,9 @@ import { CommonModule } from '@angular/common';
 })
 export class AnnouncementComponent {
   @Input() announcement: Announcement = new Announcement();
-  @Output('callback') doCallback: EventEmitter<any> = new EventEmitter<any>();
-  @Output('dismiss') doDismiss: EventEmitter<any> = new EventEmitter<any>();
+  @Output() dismiss: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(public dialog: MatDialog) {}
-
-  protected dismiss(): void {
-    this.doDismiss.emit();
-  }
 
   protected showAnnouncementDetails(): void {
     this.dialog.open(AnnouncementDialogComponent, {
