@@ -46,9 +46,8 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     super.ngOnInit();
     const branch = this.projectService.getBranchesByBranchStartPointNodeId(this.targetId)[0];
     this.setPathCount(branch.paths.length);
-    const mergeStepId = branch.endPoint;
-    this.setMergeStep(mergeStepId);
-    this.mergeStepTitle = this.projectService.getNodePositionAndTitle(mergeStepId);
+    this.setMergeStep(branch.endPoint);
+    this.mergeStepTitle = this.projectService.getNodePositionAndTitle(branch.endPoint);
     this.node = this.projectService.getNodeById(this.targetId);
   }
 
@@ -67,16 +66,16 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
       const transition = this.node.transitionLogic.transitions[t];
       const branch: any = {
         number: t + 1,
-        items: this.getBranchItems(),
-        checkedItemsInBranchPath: [],
+        items: this.getItems(),
+        nodesInBranchPath: [],
         transition: transition
       };
       this.branchPaths.push(branch);
       const criteria = transition.criteria;
       if (criteria != null) {
         for (let criterion of transition.criteria) {
-          let name = criterion.name;
-          let params = criterion.params;
+          const name = criterion.name;
+          const params = criterion.params;
           if (params != null) {
             createBranchNodeId = params.nodeId;
             createBranchComponentId = params.componentId;
@@ -99,9 +98,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
                 createBranchNodeId,
                 createBranchComponentId
               );
-              if (choices != null) {
-                branch.choices = copy(choices);
-              }
+              branch.choices = copy(choices);
             }
           }
         }
@@ -110,10 +107,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
       const nodeIdsInBranch = this.projectService.getNodeIdsInBranch(this.targetId, transition.to);
       for (const nodeId of nodeIdsInBranch) {
         const item = branch.items[nodeId];
-        if (item != null) {
-          item.checked = true;
-          branch.checkedItemsInBranchPath.push(item);
-        }
+        branch.nodesInBranchPath.push(item);
       }
     }
 
@@ -130,7 +124,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     if (createBranchNodeId != null) {
       this.setNodeId(createBranchNodeId);
     }
-    if (createBranchComponentId) {
+    if (createBranchComponentId != null) {
       this.setComponentId(createBranchComponentId);
     }
 
@@ -153,7 +147,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
   protected removeBranchButtonClicked(): void {
     if (
       confirm(
-        $localize`Are you sure you want to remove the branch?\n\nThe branch structure will be removed but the steps will not be deleted.`
+        $localize`Are you sure you want to remove this branch?\n\nThe branch structure will be removed but the steps will not be deleted.`
       )
     ) {
       this.removeBranch();
@@ -167,45 +161,22 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
       bp--; // shift the counter back one because we have just removed a branch path
     }
 
-    const nodeId = this.targetId; // branch point node
-    const nodeIdAfter = this.projectService.getNodeIdAfter(nodeId);
+    const nodeIdAfter = this.projectService.getNodeIdAfter(this.targetId);
 
     /*
      * update the transition of this step to point to the next step
      * in the project. this may be different than the next step
      * if it was still the branch point.
      */
-    this.projectService.setTransition(nodeId, nodeIdAfter);
-
-    this.projectService.setTransitionLogicField(nodeId, 'howToChooseAmongAvailablePaths', null);
-    this.projectService.setTransitionLogicField(nodeId, 'whenToChoosePath', null);
-    this.projectService.setTransitionLogicField(nodeId, 'canChangePath', null);
-    this.projectService.setTransitionLogicField(nodeId, 'maxPathsVisitable', null);
-
-    /*
-     * branch paths are determined by the transitions. since there is now
-     * just one transition, we will create a single branch object to
-     * represent it.
-     */
-
-    // create a branch object to hold all the related information for that branch
-    const branch: any = {
-      number: 1
-    };
-
-    /*
-     * set the mapping of all the ids to order for use when choosing which items are
-     * in the branch path
-     */
-    branch.items = this.getBranchItems();
-    branch.checkedItemsInBranchPath = [];
-    let transition = null;
-    const transitions = this.projectService.getTransitionsByFromNodeId(nodeId);
-    if (transitions != null && transitions.length > 0) {
-      transition = transitions[0];
-    }
-    branch.transition = transition;
-    this.branchPaths.push(branch);
+    this.projectService.setTransition(this.targetId, nodeIdAfter);
+    this.projectService.setTransitionLogicField(
+      this.targetId,
+      'howToChooseAmongAvailablePaths',
+      null
+    );
+    this.projectService.setTransitionLogicField(this.targetId, 'whenToChoosePath', null);
+    this.projectService.setTransitionLogicField(this.targetId, 'canChangePath', null);
+    this.projectService.setTransitionLogicField(this.targetId, 'maxPathsVisitable', null);
     this.projectService.calculateNodeNumbers();
     this.saveProject();
   }
@@ -217,30 +188,28 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
    * the branch path in this branch point node.
    * @param branch the branch object
    */
-  protected removeBranchPath(branch: any) {
-    const checkedItemsInBranchPath = branch.checkedItemsInBranchPath;
-    if (checkedItemsInBranchPath != null) {
-      for (const checkedItem of checkedItemsInBranchPath) {
-        const nodeId = checkedItem.$key;
-        this.projectService.removeBranchPathTakenNodeConstraintsIfAny(nodeId);
-        /*
-         * update the transition of the step to point to the next step
-         * in the project. this may be different than the next step
-         * if it was still in the branch path.
-         */
-        const nodeIdAfter = this.projectService.getNodeIdAfter(nodeId);
-        this.projectService.setTransition(nodeId, nodeIdAfter);
-      }
+  protected removeBranchPath(branch: any): void {
+    const nodesInBranchPath = branch.nodesInBranchPath;
+    for (const checkedItem of nodesInBranchPath) {
+      const nodeId = checkedItem.nodeId;
+      this.projectService.removeBranchPathTakenNodeConstraintsIfAny(nodeId);
+      /*
+       * update the transition of the step to point to the next step
+       * in the project. this may be different than the next step
+       * if it was still in the branch path.
+       */
+      const nodeIdAfter = this.projectService.getNodeIdAfter(nodeId);
+      this.projectService.setTransition(nodeId, nodeIdAfter);
     }
     const branchPathIndex = this.branchPaths.indexOf(branch);
     this.branchPaths.splice(branchPathIndex, 1);
     this.node.transitionLogic.transitions.splice(branchPathIndex, 1);
   }
 
-  protected getBranchItems(): any {
+  protected getItems(): any {
     const items = copy(this.projectService.idToOrder);
     for (const nodeId of Object.keys(items)) {
-      items[nodeId]['$key'] = nodeId;
+      items[nodeId].nodeId = nodeId;
     }
     return items;
   }

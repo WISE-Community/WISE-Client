@@ -472,6 +472,10 @@
           <context context-type="linenumber">3</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component.html</context>
           <context context-type="linenumber">131</context>
         </context-group>
@@ -9165,6 +9169,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-branch/add-branch.component.html</context>
           <context context-type="linenumber">46,48</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.html</context>
+          <context context-type="linenumber">44,46</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="f6b8c00d13eab40bfcae19bec9a2c7698d943715" datatype="html">
         <source>Add lesson</source>
@@ -10561,6 +10569,43 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/node-constraint-authoring/node-constraint-authoring.component.ts</context>
           <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2005b54af64c5c15b332ceb3f95a4c94bf1c9c53" datatype="html">
+        <source>Edit Branch</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7ab2e69506ac8bf4b8f884afb3e6cba19ddba44" datatype="html">
+        <source> Remove Branch </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.html</context>
+          <context context-type="linenumber">3,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8b660e27526f0a9ab84adf548f7f50451cdc54c5" datatype="html">
+        <source>Branch Step: <x id="INTERPOLATION" equiv-text="{{ targetTitle }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d5fcbf7165fb132f9ca27acc2305dfa04fd43d04" datatype="html">
+        <source>Merge Step: <x id="INTERPOLATION" equiv-text="{{ mergeStepTitle }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.html</context>
+          <context context-type="linenumber">41,42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5731788087862811038" datatype="html">
+        <source>Are you sure you want to remove this branch?
+
+The branch structure will be removed but the steps will not be deleted.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.ts</context>
+          <context context-type="linenumber">150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="549db7a4a511ef9e23b17fa3cd8781e3d8ef45d4" datatype="html">
@@ -12289,10 +12334,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a47534ecaf69e350907bd041db0953d7554a1cfc" datatype="html">
+      <trans-unit id="62547d9d6ebd4fe6c10b47b87c9b603978fde580" datatype="html">
         <source>Branch point with <x id="INTERPOLATION" equiv-text="{{ getNumberOfBranchPaths(step.id) }}"/> paths based on <x id="INTERPOLATION_1" equiv-text="{{
-        getBranchCriteriaDescription(step.id)
-      }}"/></source>
+          getBranchCriteriaDescription(step.id)
+        }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
           <context context-type="linenumber">25,27</context>
@@ -12304,49 +12349,49 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
       }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">35,37</context>
+          <context context-type="linenumber">36,38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b3b4847175a6193afa85eb431bbe16d1f04470fa" datatype="html">
         <source>Has Rubric</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="86b684959993240cec0e9ff07ca51d8b3dedbb75" datatype="html">
         <source>Click to enter step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="755e89f2e7a2ffda09056f509222d0e405820e4d" datatype="html">
         <source>Move step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6e3d4bf4bfb1dd3195c4e1d59b0fdbacd1d68db4" datatype="html">
         <source>Copy step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0faf7dd5b826ee951da05aaad4063e8794de757b" datatype="html">
         <source>Delete step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8656136323789683230" datatype="html">
         <source>Are you sure you want to delete this step?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.ts</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">116</context>
         </context-group>
       </trans-unit>
       <trans-unit id="57cf305f9bfd681c70dc26e914108d06384ade9f" datatype="html">
