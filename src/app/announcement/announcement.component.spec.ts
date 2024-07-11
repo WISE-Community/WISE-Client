@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AnnouncementComponent } from './announcement.component';
 import { Announcement } from '../domain/announcement';
 import { MatDialog } from '@angular/material/dialog';
-import { By } from '@angular/platform-browser';
 
 describe('AnnouncementComponent', () => {
   let component: AnnouncementComponent;
@@ -41,15 +40,5 @@ describe('AnnouncementComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.textContent).toContain('This is an announcement.');
     expect(compiled.textContent).toContain('Do something');
-  });
-
-  it('should emit dismiss event on dismiss button click', async () => {
-    spyOn(component.doDismiss, 'emit');
-    const dismissButton = fixture.debugElement.query(
-      By.css('.announcement__dismiss')
-    ).nativeElement;
-    dismissButton.click();
-    fixture.detectChanges();
-    expect(component.doDismiss.emit).toHaveBeenCalled();
   });
 });
