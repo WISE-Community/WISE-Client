@@ -5,6 +5,7 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Node } from '../../../common/Node';
 import { Router } from '@angular/router';
+import { CopyTranslationsService } from '../../../services/copyTranslationsService';
 
 @Component({
   selector: 'choose-component-location',
@@ -18,6 +19,7 @@ export class ChooseComponentLocationComponent {
 
   constructor(
     private componentTypeService: ComponentTypeService,
+    private copyTranslationsService: CopyTranslationsService,
     private configService: ConfigService,
     private dataService: TeacherDataService,
     private projectService: TeacherProjectService,
@@ -47,10 +49,12 @@ export class ChooseComponentLocationComponent {
   }
 
   private copyComponents(insertAfterComponentId: string = null): any[] {
-    return this.node.copyComponents(
+    const newComponents = this.node.copyComponents(
       this.selectedComponents.map((c) => c.id),
       insertAfterComponentId
     );
+    this.copyTranslationsService.tryCopyTranslations(this.node, newComponents);
+    return newComponents;
   }
 
   private moveComponents(insertAfterComponentId: string = null): any[] {
