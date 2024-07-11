@@ -53,7 +53,7 @@ export class ChooseComponentLocationComponent {
       this.selectedComponents.map((c) => c.id),
       insertAfterComponentId
     );
-    this.copyTranslationsService.tryCopyTranslations(this.node, newComponents);
+    this.copyTranslationsService.tryCopyComponents(this.node, newComponents);
     return newComponents;
   }
 

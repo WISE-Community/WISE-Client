@@ -37,7 +37,7 @@ export class CopyTranslationsService extends EditTranslationsService {
     this.projectService.saveProject();
   }
 
-  tryCopyTranslations(node: Node, components: ComponentContent[]): void {
+  tryCopyComponents(node: Node, components: ComponentContent[]): void {
     if (this.projectService.getLocale().hasTranslations()) {
       this.copyTranslations(
         node,
