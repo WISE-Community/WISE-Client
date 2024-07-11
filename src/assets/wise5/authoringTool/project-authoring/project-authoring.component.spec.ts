@@ -12,7 +12,6 @@ import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConcurrentAuthorsMessageComponent } from '../concurrent-authors-message/concurrent-authors-message.component';
 import { NodeAuthoringComponent } from '../node/node-authoring/node-authoring.component';
-import { TeacherNodeIconComponent } from '../teacher-node-icon/teacher-node-icon.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
@@ -37,6 +36,7 @@ import { HttpClient } from '@angular/common/http';
 import { AddLessonButtonComponent } from '../add-lesson-button/add-lesson-button.component';
 import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
+import { CopyTranslationsService } from '../../services/copyTranslationsService';
 
 let configService: ConfigService;
 let component: ProjectAuthoringComponent;
@@ -78,6 +78,7 @@ describe('ProjectAuthoringComponent', () => {
       providers: [
         ClassroomStatusService,
         CopyNodesService,
+        CopyTranslationsService,
         DeleteNodeService,
         DeleteTranslationsService,
         MoveNodesService,

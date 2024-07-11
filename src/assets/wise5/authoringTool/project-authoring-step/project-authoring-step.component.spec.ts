@@ -15,6 +15,7 @@ import { DeleteNodeService } from '../../services/deleteNodeService';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { provideRouter } from '@angular/router';
+import { CopyTranslationsService } from '../../services/copyTranslationsService';
 
 const nodeId1 = 'nodeId1';
 const node = { id: nodeId1 };
@@ -38,6 +39,7 @@ describe('ProjectAuthoringStepComponent', () => {
       providers: [
         ClassroomStatusService,
         CopyNodesService,
+        CopyTranslationsService,
         DeleteNodeService,
         DeleteTranslationsService,
         provideRouter([]),

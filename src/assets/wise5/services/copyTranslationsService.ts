@@ -12,6 +12,31 @@ interface I18NReplaceKey {
 
 @Injectable()
 export class CopyTranslationsService extends EditTranslationsService {
+  tryCopyNodes(nodes: Node[]): void {
+    if (this.projectService.getLocale().hasTranslations()) {
+      this.copyNodes(nodes);
+    }
+  }
+
+  private async copyNodes(nodes: Node[]): Promise<void> {
+    const allTranslations = await this.fetchAllTranslations();
+    const i18nKeys = nodes.flatMap((node) =>
+      node.components.flatMap((component) => this.replaceI18NKeys(component))
+    );
+    const saveTranslationRequests: Observable<Object>[] = [];
+    allTranslations.forEach((translations, language) => {
+      i18nKeys.forEach((i18nKey) => (translations[i18nKey.new] = translations[i18nKey.original]));
+      saveTranslationRequests.push(
+        this.http.post(
+          `/api/author/project/translate/${this.configService.getProjectId()}/${language.locale}`,
+          translations
+        )
+      );
+    });
+    forkJoin(saveTranslationRequests).subscribe();
+    this.projectService.saveProject();
+  }
+
   tryCopyTranslations(node: Node, components: ComponentContent[]): void {
     if (this.projectService.getLocale().hasTranslations()) {
       this.copyTranslations(

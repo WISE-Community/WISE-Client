@@ -20,6 +20,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { provideRouter } from '@angular/router';
+import { CopyTranslationsService } from '../../services/copyTranslationsService';
 
 let component: ProjectAuthoringLessonComponent;
 let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
@@ -50,6 +51,7 @@ describe('ProjectAuthoringLessonComponent', () => {
       providers: [
         ClassroomStatusService,
         CopyNodesService,
+        CopyTranslationsService,
         DeleteNodeService,
         DeleteTranslationsService,
         provideRouter([]),
