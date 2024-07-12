@@ -21,7 +21,7 @@ export class CopyComponentButtonComponent {
     event.stopPropagation();
     const newComponents = this.node.copyComponents([this.componentId], this.componentId);
     this.projectService.saveProject();
-    this.copyTranslationsService.tryCopyTranslations(this.node, newComponents);
+    this.copyTranslationsService.tryCopyComponents(this.node, newComponents);
     this.newComponentEvent.emit(newComponents);
   }
 }
