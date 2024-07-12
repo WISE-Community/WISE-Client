@@ -10605,7 +10605,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
 The branch structure will be removed but the steps will not be deleted.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">190</context>
         </context-group>
       </trans-unit>
       <trans-unit id="549db7a4a511ef9e23b17fa3cd8781e3d8ef45d4" datatype="html">

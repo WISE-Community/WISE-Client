@@ -56,12 +56,23 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
   }
 
   private populateBranchAuthoring(): void {
-    this.branchPaths = [];
-    let createBranchCriterion: string;
-    let createBranchNodeId: string;
-    let createBranchComponentId: string;
-    const scores: any[] = [];
-    const choices: string[] = [];
+    this.branchPaths = this.getBranchPaths();
+    const criteria = this.getBranchCriteria();
+    this.setCriteria(criteria);
+    const branchParamNodeId = this.getBranchParamByField('nodeId');
+    if (branchParamNodeId != null) {
+      this.setNodeId(branchParamNodeId);
+    }
+    const branchParamComponentId = this.getBranchParamByField('componentId');
+    if (branchParamComponentId != null) {
+      this.setComponentId(branchParamComponentId);
+    }
+    this.updateParamFormControls(criteria);
+    this.changeDetector.detectChanges();
+  }
+
+  private getBranchPaths(): any[] {
+    const branchPaths = [];
     for (let t = 0; t < this.node.transitionLogic.transitions.length; t++) {
       const transition = this.node.transitionLogic.transitions[t];
       const branch: any = {
@@ -70,78 +81,107 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
         nodesInBranchPath: [],
         transition: transition
       };
-      this.branchPaths.push(branch);
+      branchPaths.push(branch);
+      this.populateBranchParams(branch, transition);
+    }
+    return branchPaths;
+  }
+
+  private populateBranchParams(branch: any, transition: any): void {
+    if (transition.criteria != null) {
+      for (const criterion of transition.criteria) {
+        if (criterion.name === this.SCORE_VALUE) {
+          this.populateScoreBranchParam(branch, criterion);
+        } else if (criterion.name === this.CHOICE_CHOSEN_VALUE) {
+          this.populateChoiceBranchParam(branch, criterion);
+        }
+      }
+    }
+    for (const nodeId of this.projectService.getNodeIdsInBranch(this.targetId, transition.to)) {
+      branch.nodesInBranchPath.push(branch.items[nodeId]);
+    }
+  }
+
+  private populateScoreBranchParam(branch: any, criterion: any): void {
+    branch.scores = criterion.params.scores;
+  }
+
+  private populateChoiceBranchParam(branch: any, criterion: any): void {
+    const params = criterion.params;
+    if (params.choiceIds.length > 0) {
+      branch.choiceId = params.choiceIds[0];
+    }
+    if (params.nodeId && params.componentId) {
+      const choices = this.projectService.getChoices(params.nodeId, params.componentId);
+      branch.choices = copy(choices);
+    }
+  }
+
+  private getBranchCriteria(): string {
+    const criteria = this.getCriteriaFromTransitions();
+    return criteria == null ? this.node.transitionLogic.howToChooseAmongAvailablePaths : criteria;
+  }
+
+  private getCriteriaFromTransitions(): string {
+    for (const transition of this.node.transitionLogic.transitions) {
       const criteria = transition.criteria;
       if (criteria != null) {
-        for (let criterion of transition.criteria) {
-          const name = criterion.name;
-          const params = criterion.params;
-          if (params != null) {
-            createBranchNodeId = params.nodeId;
-            createBranchComponentId = params.componentId;
-          }
-          if (name === 'score') {
-            createBranchCriterion = 'score';
-            if (params != null && params.scores != null) {
-              branch.scores = params.scores;
-              scores.push(params.scores);
-            }
-          } else if (name === 'choiceChosen') {
-            createBranchCriterion = 'choiceChosen';
-            if (params != null && params.choiceIds != null && params.choiceIds.length > 0) {
-              branch.choiceId = params.choiceIds[0];
-              choices.push(params.choiceIds[0]);
-            }
-
-            if (createBranchNodeId && createBranchComponentId) {
-              const choices = this.projectService.getChoices(
-                createBranchNodeId,
-                createBranchComponentId
-              );
-              branch.choices = copy(choices);
-            }
+        for (const criterion of transition.criteria) {
+          if (criterion.name === this.SCORE_VALUE) {
+            return this.SCORE_VALUE;
+          } else if (criterion.name === this.CHOICE_CHOSEN_VALUE) {
+            return this.CHOICE_CHOSEN_VALUE;
           }
         }
       }
+    }
+    return null;
+  }
 
-      const nodeIdsInBranch = this.projectService.getNodeIdsInBranch(this.targetId, transition.to);
-      for (const nodeId of nodeIdsInBranch) {
-        const item = branch.items[nodeId];
-        branch.nodesInBranchPath.push(item);
+  private getBranchParamByField(fieldName: string): string {
+    for (const transition of this.node.transitionLogic.transitions) {
+      const criteria = transition.criteria;
+      if (criteria != null) {
+        for (const criterion of transition.criteria) {
+          if (criterion.params != null) {
+            return criterion.params[fieldName];
+          }
+        }
       }
     }
+    return null;
+  }
 
-    if (createBranchCriterion == null) {
-      if (this.node.transitionLogic.howToChooseAmongAvailablePaths === 'workgroupId') {
-        createBranchCriterion = 'workgroupId';
-      } else if (this.node.transitionLogic.howToChooseAmongAvailablePaths === 'random') {
-        createBranchCriterion = 'random';
-      } else if (this.node.transitionLogic.howToChooseAmongAvailablePaths === 'tag') {
-        createBranchCriterion = 'tag';
-      }
+  private updateParamFormControls(criteria: string): void {
+    if (criteria === this.SCORE_VALUE) {
+      this.updateScoreFormControls();
+    } else if (criteria === this.CHOICE_CHOSEN_VALUE) {
+      this.updateChoiceFormControls();
     }
-    this.setCriteria(createBranchCriterion);
-    if (createBranchNodeId != null) {
-      this.setNodeId(createBranchNodeId);
-    }
-    if (createBranchComponentId != null) {
-      this.setComponentId(createBranchComponentId);
-    }
+  }
 
+  private updateScoreFormControls(): void {
     // use set timeout to give the form time to populate the path form group controls
     setTimeout(() => {
+      const scores = this.branchPaths.map((branchPath) => branchPath.scores);
       if (scores.length > 0) {
         for (let i = 0; i < scores.length; i++) {
           this.pathFormGroup.controls[`path-${i + 1}`].setValue(scores[i].join(', '));
         }
       }
+    });
+  }
+
+  private updateChoiceFormControls(): void {
+    // use set timeout to give the form time to populate the path form group controls
+    setTimeout(() => {
+      const choices = this.branchPaths.map((branchPath) => branchPath.choiceId);
       if (choices.length > 0) {
         for (let i = 0; i < choices.length; i++) {
           this.pathFormGroup.controls[`path-${i + 1}`].setValue(choices[i]);
         }
       }
     });
-    this.changeDetector.detectChanges();
   }
 
   protected removeBranchButtonClicked(): void {
