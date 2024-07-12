@@ -21,8 +21,7 @@ import { EditConstraintRemovalCriteriaComponent } from '../../constraint/edit-co
     NodeAdvancedConstraintAuthoringComponent,
     NodeAdvancedGeneralAuthoringComponent,
     NodeAdvancedJsonAuthoringComponent,
-    NodeAdvancedPathAuthoringComponent,
-    NodeConstraintAuthoringComponent
+    NodeAdvancedPathAuthoringComponent
   ],
   exports: [
     EditNodeRubricComponent,
@@ -31,11 +30,11 @@ import { EditConstraintRemovalCriteriaComponent } from '../../constraint/edit-co
     NodeAdvancedConstraintAuthoringComponent,
     NodeAdvancedGeneralAuthoringComponent,
     NodeAdvancedJsonAuthoringComponent,
-    NodeAdvancedPathAuthoringComponent,
-    NodeConstraintAuthoringComponent
+    NodeAdvancedPathAuthoringComponent
   ],
   imports: [
     EditConstraintRemovalCriteriaComponent,
+    NodeConstraintAuthoringComponent,
     RequiredErrorLabelComponent,
     RouterModule,
     StudentTeacherCommonModule,
