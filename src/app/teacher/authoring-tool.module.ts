@@ -46,7 +46,6 @@ import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringToo
 import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
 import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
 import { AddLessonChooseTemplateComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-template/add-lesson-choose-template.component';
-import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 import { EditNodeTitleComponent } from '../../assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component';
 import { AddComponentButtonComponent } from '../../assets/wise5/authoringTool/node/add-component-button/add-component-button.component';
 import { CopyComponentButtonComponent } from '../../assets/wise5/authoringTool/node/copy-component-button/copy-component-button.component';
@@ -73,7 +72,6 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     ChooseCopyNodeLocationComponent,
     ChooseImportStepComponent,
     ChooseImportUnitComponent,
-    ChooseNewComponent,
     ChooseNewNodeTemplate,
     ChooseMoveNodeLocationComponent,
     ChooseSimulationComponent,
@@ -104,9 +102,9 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     AddLessonButtonComponent,
     AddStepButtonComponent,
     StudentTeacherCommonModule,
+    ChooseNewComponent,
     ComponentAuthoringModule,
     ComponentStudentModule,
-    ComponentTypeButtonComponent,
     MatBadgeModule,
     MatChipsModule,
     ImportComponentModule,
