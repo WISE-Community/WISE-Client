@@ -53,7 +53,6 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     NotificationsMenuComponent,
     PauseScreensMenuComponent,
     ShowNodeInfoDialogComponent,
-    StepInfoComponent,
     StepItemComponent,
     StudentGradingComponent,
     StudentGradingToolsComponent,
@@ -79,6 +78,7 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     RouterModule,
     SaveIndicatorComponent,
     SelectPeriodModule,
+    StepInfoComponent,
     StepToolsComponent
   ]
 })
