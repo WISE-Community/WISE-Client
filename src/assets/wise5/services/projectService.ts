@@ -238,7 +238,9 @@ export class ProjectService {
     if (this.project.projectAchievements != null) {
       this.achievements = this.project.projectAchievements;
     }
-    this.currentLanguageSignal.set(this.getLocale().getDefaultLanguage());
+    if (this.currentLanguage() == null) {
+      this.currentLanguageSignal.set(this.getLocale().getDefaultLanguage());
+    }
     this.broadcastProjectParsed();
   }
 
@@ -1414,7 +1416,9 @@ export class ProjectService {
     return componentService.componentHasWork(component);
   }
 
-  calculateComponentIdToHasWork(components: ComponentContent[]): {
+  calculateComponentIdToHasWork(
+    components: ComponentContent[]
+  ): {
     [componentId: string]: boolean;
   } {
     const componentIdToHasWork: { [componentId: string]: boolean } = {};
