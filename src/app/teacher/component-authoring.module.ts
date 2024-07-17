@@ -90,7 +90,6 @@ import { TranslatableAssetChooserComponent } from '../../assets/wise5/authoringT
 import { AiChatAuthoringComponent } from '../../assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component';
 import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component';
 import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component';
-import { EditConstraintRemovalCriteriaComponent } from '../../assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +98,6 @@ import { EditConstraintRemovalCriteriaComponent } from '../../assets/wise5/autho
     AudioOscillatorAuthoring,
     AuthorUrlParametersComponent,
     ComponentAuthoringComponent,
-    ComponentConstraintAuthoringComponent,
     ConceptMapAuthoring,
     CreateNewPeerGroupingDialogComponent,
     DrawAuthoring,
@@ -177,7 +175,7 @@ import { EditConstraintRemovalCriteriaComponent } from '../../assets/wise5/autho
     WiseLinkAuthoringDialogComponent
   ],
   imports: [
-    EditConstraintRemovalCriteriaComponent,
+    ComponentConstraintAuthoringComponent,
     EditComponentAdvancedButtonComponent,
     PeerGroupingAuthoringModule,
     RequiredErrorLabelComponent,

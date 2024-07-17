@@ -2,12 +2,11 @@
   <mat-form-field class="common-width">
     <mat-label i18n>Action</mat-label>
     <mat-select [(ngModel)]="constraint.action" (ngModelChange)="saveProject()">
-      <mat-option
-        *ngFor="let action of constraintActions; index as actionIndex"
-        [value]="action.value"
-      >
-        <span [ngStyle]="actionIndex === 0 && { color: 'red' }">{{ action.text }}</span>
-      </mat-option>
+      @for (action of constraintActions; track action; let actionIndex = $index) {
+        <mat-option [value]="action.value">
+          <span [ngStyle]="actionIndex === 0 && { color: 'red' }">{{ action.text }}</span>
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
   @if (constraint.action === '') {
@@ -17,22 +16,23 @@
   <mat-form-field class="removal-conditional-select">
     <mat-label i18n>Removal Conditional</mat-label>
     <mat-select [(ngModel)]="constraint.removalConditional" (ngModelChange)="saveProject()">
-      <mat-option
-        *ngFor="let availableRemovalConditional of removalConditionals"
-        [value]="availableRemovalConditional.value"
-      >
-        <span>{{ availableRemovalConditional.text }}</span>
-      </mat-option>
+      @for (availableRemovalConditional of removalConditionals; track availableRemovalConditional) {
+        <mat-option [value]="availableRemovalConditional.value">
+          <span>{{ availableRemovalConditional.text }}</span>
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
 </div>
-<div
-  *ngFor="let criteria of constraint.removalCriteria; index as criteriaIndex"
-  class="criteria-div"
-  fxLayoutGap="16px"
->
-  <edit-constraint-removal-criteria [constraint]="constraint" [criteria]="criteria" [node]="node" />
-</div>
+@for (criteria of constraint.removalCriteria; track criteria; let criteriaIndex = $index) {
+  <div class="criteria-div" fxLayoutGap="16px">
+    <edit-constraint-removal-criteria
+      [constraint]="constraint"
+      [criteria]="criteria"
+      [node]="node"
+    />
+  </div>
+}
 <div fxLayoutGap="16px">
   <mat-label i18n>Add Removal Criteria</mat-label>
   <button

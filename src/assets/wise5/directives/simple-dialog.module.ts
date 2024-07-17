@@ -10,15 +10,13 @@ import { DialogWithoutCloseComponent } from './dialog-without-close/dialog-witho
 
 @NgModule({
   declarations: [
-    DialogWithCloseComponent,
     DialogWithConfirmComponent,
     DialogWithOpenInNewWindowComponent,
     DialogWithoutCloseComponent,
     DialogWithSpinnerComponent
   ],
-  imports: [StudentTeacherCommonModule, MatButtonModule, MatDialogModule],
+  imports: [DialogWithCloseComponent, StudentTeacherCommonModule, MatButtonModule, MatDialogModule],
   exports: [
-    DialogWithCloseComponent,
     DialogWithConfirmComponent,
     DialogWithOpenInNewWindowComponent,
     DialogWithoutCloseComponent,
