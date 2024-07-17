@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { VLEProjectService } from '../../../vle/vleProjectService';
 import { NavigationComponent } from './navigation.component';
 
 describe('NavigationComponent', () => {
@@ -16,7 +17,7 @@ describe('NavigationComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NavigationComponent);
     component = fixture.componentInstance;
-    component.rootNode = { ids: [] };
+    spyOn(TestBed.inject(VLEProjectService), 'getProjectRootNode').and.returnValue({ ids: [] });
     fixture.detectChanges();
   });
 
