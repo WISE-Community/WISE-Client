@@ -30,7 +30,7 @@ export abstract class AbstractTranslatableFieldComponent {
     protected projectTranslationService: TeacherProjectTranslationService
   ) {}
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.i18nId = this.content[`${this.key}.i18n`]?.id;
     this.subscriptions.add(
       this.currentTranslations$.subscribe((translations: Translations) => {

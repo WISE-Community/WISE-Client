@@ -37,8 +37,8 @@ export class TranslatableRichTextEditorComponent extends AbstractTranslatableFie
     super(projectService, projectTranslationService);
   }
 
-  ngOnInit(): void {
-    super.ngOnInit();
+  ngOnChanges(): void {
+    super.ngOnChanges();
     this.html = this.projectService.replaceAssetPaths(replaceWiseLinks(this.content[this.key]));
   }
 
