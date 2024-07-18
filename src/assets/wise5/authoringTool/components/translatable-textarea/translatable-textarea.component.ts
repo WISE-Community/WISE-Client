@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   selector: 'translatable-textarea',
   imports: [CommonModule, FormsModule, MatIconModule, MatInputModule],
-  styleUrls: ['../abstract-translatable-field/abstract-translatable-field.component.scss'],
+  styleUrl: '../abstract-translatable-field/abstract-translatable-field.component.scss',
   templateUrl: './translatable-textarea.component.html',
   encapsulation: ViewEncapsulation.None
 })

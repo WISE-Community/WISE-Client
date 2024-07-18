@@ -15,7 +15,7 @@ import { TeacherProjectTranslationService } from '../../../services/teacherProje
   selector: 'translatable-asset-chooser',
   imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
   templateUrl: './translatable-asset-chooser.component.html',
-  styleUrls: ['./translatable-asset-chooser.component.scss']
+  styleUrl: './translatable-asset-chooser.component.scss'
 })
 export class TranslatableAssetChooserComponent extends AbstractTranslatableFieldComponent {
   @Input() tooltip: String = $localize`Choose image`;

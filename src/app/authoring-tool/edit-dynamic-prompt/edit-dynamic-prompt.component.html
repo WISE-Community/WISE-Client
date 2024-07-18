@@ -34,7 +34,7 @@
       label="Pre Prompt (Optional)"
       i18n-label
       (defaultLanguageTextChanged)="dynamicPromptChangedEvent.next()"
-    ></translatable-textarea>
+    />
     <div class="feedback-rules-div">
       <edit-dynamic-prompt-rules [feedbackRules]="componentContent.dynamicPrompt.rules">
       </edit-dynamic-prompt-rules>
@@ -45,6 +45,6 @@
       label="Post Prompt (Optional)"
       i18n-label
       (defaultLanguageTextChanged)="dynamicPromptChangedEvent.next()"
-    ></translatable-textarea>
+    />
   </div>
 </div>

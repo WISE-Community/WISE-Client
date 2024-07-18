@@ -20,7 +20,7 @@
       label="Notebook Label"
       i18n-label
       (defaultLanguageTextChanged)="contentChanged()"
-    ></translatable-input>
+    />
   </div>
   <div>
     <mat-slide-toggle
@@ -42,7 +42,7 @@
         i18n-label
         (defaultLanguageTextChanged)="contentChanged()"
         class="notebook-input"
-      ></translatable-input>
+      />
       <translatable-input
         [content]="project.notebook.itemTypes.note.label"
         key="plural"
@@ -50,7 +50,7 @@
         i18n-label
         (defaultLanguageTextChanged)="contentChanged()"
         class="notebook-input"
-      ></translatable-input>
+      />
       <translatable-input
         [content]="project.notebook.itemTypes.note.label"
         key="link"
@@ -58,7 +58,7 @@
         i18n-label
         (defaultLanguageTextChanged)="contentChanged()"
         class="notebook-input"
-      ></translatable-input>
+      />
     </div>
     <mat-checkbox
       color="primary"
@@ -115,7 +115,7 @@
         i18n-label
         (defaultLanguageTextChanged)="contentChanged()"
         class="notebook-input"
-      ></translatable-input>
+      />
       <translatable-input
         [content]="project.notebook.itemTypes.report.label"
         key="plural"
@@ -123,14 +123,14 @@
         i18n-label
         (defaultLanguageTextChanged)="contentChanged()"
         class="notebook-input"
-      ></translatable-input>
+      />
       <translatable-input
         [content]="project.notebook.itemTypes.report.label"
         key="link"
         label="Label (Link)"
         i18n-label
         (defaultLanguageTextChanged)="contentChanged()"
-      ></translatable-input>
+      />
     </div>
     <div *ngFor="let reportNote of project.notebook.itemTypes.report.notes">
       <div class="notebook-input">
@@ -140,7 +140,7 @@
           label="Title"
           i18n-label
           (defaultLanguageTextChanged)="contentChanged()"
-        ></translatable-input>
+        />
       </div>
       <div>
         <mat-form-field>
@@ -159,20 +159,20 @@
         label="Description"
         i18n-label
         (defaultLanguageTextChanged)="contentChanged()"
-      ></translatable-textarea>
+      />
       <translatable-textarea
         [content]="reportNote"
         key="prompt"
         label="Prompt"
         i18n-label
         (defaultLanguageTextChanged)="contentChanged()"
-      ></translatable-textarea>
+      />
       <mat-label i18n>Starter Text</mat-label>
       <translatable-rich-text-editor
         [content]="reportNote"
         key="content"
         (defaultLanguageTextChanged)="save()"
-      ></translatable-rich-text-editor>
+      />
     </div>
   </div>
 </div>

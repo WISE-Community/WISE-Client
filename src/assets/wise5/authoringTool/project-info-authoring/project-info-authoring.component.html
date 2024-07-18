@@ -42,7 +42,7 @@
     [label]="metadataField.name"
     (defaultLanguageTextChanged)="metadataChanged.next()"
     class="textarea"
-  ></translatable-textarea>
+  />
   <translatable-input
     *ngIf="metadataField.type === 'input'"
     [content]="metadata"
@@ -50,7 +50,7 @@
     [label]="metadataField.name"
     (defaultLanguageTextChanged)="metadataChanged.next()"
     class="input"
-  ></translatable-input>
+  />
   <edit-project-language-setting
     *ngIf="metadataField.name === 'Language'"
   ></edit-project-language-setting>

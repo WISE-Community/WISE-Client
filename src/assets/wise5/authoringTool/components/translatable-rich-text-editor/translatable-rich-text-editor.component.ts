@@ -23,7 +23,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     WiseTinymceEditorModule
   ],
   templateUrl: './translatable-rich-text-editor.component.html',
-  styleUrls: ['./translatable-rich-text-editor.component.scss']
+  styleUrl: './translatable-rich-text-editor.component.scss'
 })
 export class TranslatableRichTextEditorComponent extends AbstractTranslatableFieldComponent {
   protected html: string = '';
