@@ -178,6 +178,7 @@ export class TopBarComponent {
   }
 
   protected changeLanguage(language: Language): void {
-    this.projectTranslationService.translate(language.locale);
+    this.projectTranslationService.switchLanguage(language, 'student');
+    this.studentDataService.updateNodeStatuses();
   }
 }

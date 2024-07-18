@@ -9,6 +9,8 @@ import { of } from 'rxjs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import { NodeProgressService } from '../../assets/wise5/services/nodeProgressService';
+import { ProjectService } from '../../assets/wise5/services/projectService';
+import { ProjectLocale } from '../domain/projectLocale';
 
 let configService: ConfigService;
 let http: HttpClient;
@@ -92,6 +94,9 @@ function saveStudentStatus_nodeStatusChanged_PostStudentStatus() {
     spyOn(configService, 'getStudentStatusURL').and.returnValue(studentStatusUrl);
     spyOn(studentDataService, 'getCurrentNodeId').and.returnValue(nodeId);
     spyOn(nodeProgressService, 'getNodeProgress').and.returnValue(projectCompletion);
+    spyOn(TestBed.inject(ProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en_US', supported: [] })
+    );
     const httpPostSpy = spyOn(http, 'post').and.callFake((url: string, body: any) => {
       return of({} as any);
     });

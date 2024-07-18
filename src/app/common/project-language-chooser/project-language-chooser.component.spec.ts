@@ -6,6 +6,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatMenuHarness, MatMenuItemHarness } from '@angular/material/menu/testing';
+import { ProjectService } from '../../../assets/wise5/services/projectService';
+
+class MockProjectService {
+  currentLanguage() {
+    return null;
+  }
+}
 
 let loader: HarnessLoader;
 let component: ProjectLanguageChooserComponent;
@@ -13,7 +20,8 @@ let fixture: ComponentFixture<ProjectLanguageChooserComponent>;
 describe('ProjectLanguageChooserComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, HttpClientTestingModule, ProjectLanguageChooserComponent]
+      imports: [BrowserAnimationsModule, HttpClientTestingModule, ProjectLanguageChooserComponent],
+      providers: [{ provide: ProjectService, useClass: MockProjectService }]
     }).compileComponents();
   });
 
@@ -37,6 +45,10 @@ describe('ProjectLanguageChooserComponent', () => {
   it('keeps selected language option when language option changes', async () => {
     const menuHarness = await loader.getHarness(MatMenuHarness);
     await menuHarness.clickItem({ text: 'Japanese' });
+    spyOn(TestBed.inject(ProjectService), 'currentLanguage').and.returnValue({
+      locale: 'ja',
+      language: 'Japanese'
+    });
     setProjectLocale(new ProjectLocale({ default: 'it', supported: ['de', 'fr', 'ja', 'es'] }));
     const options = await getOptions();
     const selected = await options[3].host();

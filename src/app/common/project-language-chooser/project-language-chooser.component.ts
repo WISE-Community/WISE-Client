@@ -6,6 +6,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ProjectService } from '../../../assets/wise5/services/projectService';
 
 @Component({
   standalone: true,
@@ -21,8 +22,11 @@ export class ProjectLanguageChooserComponent implements OnChanges {
   protected selectedLanguage: Language;
   @Input() tooltip: string = $localize`Select language`;
 
+  constructor(private projectService: ProjectService) {}
+
   ngOnChanges(): void {
     this.availableLanguages = this.projectLocale.getAvailableLanguages();
+    this.selectedLanguage = this.projectService.currentLanguage();
     if (
       this.selectedLanguage == null ||
       !this.availableLanguages.some((lang) => lang.locale === this.selectedLanguage.locale)
