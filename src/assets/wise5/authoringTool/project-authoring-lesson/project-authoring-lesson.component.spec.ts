@@ -21,6 +21,7 @@ import { AddStepButtonComponent } from '../add-step-button/add-step-button.compo
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { provideRouter } from '@angular/router';
 import { CopyTranslationsService } from '../../services/copyTranslationsService';
+import { TeacherProjectTranslationService } from '../../services/teacherProjectTranslationService';
 
 let component: ProjectAuthoringLessonComponent;
 let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
@@ -57,6 +58,7 @@ describe('ProjectAuthoringLessonComponent', () => {
         provideRouter([]),
         TeacherDataService,
         TeacherProjectService,
+        TeacherProjectTranslationService,
         TeacherWebSocketService
       ]
     });
@@ -66,6 +68,7 @@ describe('ProjectAuthoringLessonComponent', () => {
       node2: node2
     };
     teacherProjectService.project = { nodes: [node1, node2] };
+    spyOn(teacherProjectService, 'isDefaultLocale').and.returnValue(true);
     fixture = TestBed.createComponent(ProjectAuthoringLessonComponent);
     component = fixture.componentInstance;
     component.lesson = {

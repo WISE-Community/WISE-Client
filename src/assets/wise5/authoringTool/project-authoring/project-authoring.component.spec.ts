@@ -37,6 +37,7 @@ import { AddLessonButtonComponent } from '../add-lesson-button/add-lesson-button
 import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { CopyTranslationsService } from '../../services/copyTranslationsService';
+import { TeacherProjectTranslationService } from '../../services/teacherProjectTranslationService';
 
 let configService: ConfigService;
 let component: ProjectAuthoringComponent;
@@ -85,6 +86,7 @@ describe('ProjectAuthoringComponent', () => {
         provideRouter([]),
         TeacherDataService,
         TeacherProjectService,
+        TeacherProjectTranslationService,
         TeacherWebSocketService
       ]
     }).compileComponents();
