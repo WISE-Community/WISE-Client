@@ -32,6 +32,6 @@ describe('RunEndedAndLockedMessageComponent', () => {
     );
   });
   function getTitle(): string {
-    return fixture.debugElement.query(By.css('.md-body-2')).nativeElement.textContent;
+    return fixture.debugElement.query(By.css('.mat-small')).nativeElement.textContent;
   }
 });
