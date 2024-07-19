@@ -22,13 +22,13 @@
 <div id="wise-link-communicator" class="wise-link-communicator"></div>
 
 <ng-template #defaultVLETemplate>
-  <step-tools *ngIf="layoutState === 'node'" class="control-bg-bg mat-elevation-z1"/>
+  <step-tools *ngIf="layoutState === 'node'" class="control-bg-bg mat-elevation-z1" />
   <div
     id="content"
     class="vle-content"
     [ngClass]="{ 'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node' }"
   >
-    <run-ended-and-locked-message *ngIf="runEndedAndLocked"></run-ended-and-locked-message>
+    <run-ended-and-locked-message *ngIf="runEndedAndLocked" class="notice" />
     <node *ngIf="layoutState === 'node'" class="top"></node>
     <navigation *ngIf="layoutState === 'nav'" class="top"></navigation>
   </div>
@@ -42,7 +42,7 @@
   >
     <group-tabs></group-tabs>
     <div class="tab-content">
-      <run-ended-and-locked-message *ngIf="runEndedAndLocked"></run-ended-and-locked-message>
+      <run-ended-and-locked-message *ngIf="runEndedAndLocked" />
       <node *ngIf="layoutState === 'node'" class="node-tabbed top"></node>
       <div class="node-nav">
         <node-navigation class="l-constrained"></node-navigation>
