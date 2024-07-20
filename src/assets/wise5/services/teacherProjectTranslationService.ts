@@ -17,7 +17,11 @@ export class TeacherProjectTranslationService extends ProjectTranslationService 
   ) {
     super(configService, http, projectService);
     toObservable(this.projectService.currentLanguage).subscribe(async (language) => {
-      this.currentTranslations.set(await lastValueFrom(this.fetchTranslations(language.locale)));
+      this.currentTranslations.set(
+        this.projectService.isDefaultLocale()
+          ? {}
+          : await lastValueFrom(this.fetchTranslations(language.locale))
+      );
     });
   }
 
