@@ -801,6 +801,7 @@ export class ProjectService {
     return this.makeProjectRequest().pipe(
       tap((projectJSON: any) => {
         this.originalProject = projectJSON;
+        this.setCurrentLanguage(null);
         this.setProject(projectJSON);
         return projectJSON;
       })
