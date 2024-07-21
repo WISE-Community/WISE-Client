@@ -63,6 +63,7 @@ export class TranslatableRichTextEditorComponent extends AbstractTranslatableFie
         } with content in ${this.defaultLanguage.language} for this item?`
       )
     ) {
+      this.setTranslationText(this.html);
       this.translationTextChanged.next(this.html);
       this.tabs.selectedIndex = 0;
     }
