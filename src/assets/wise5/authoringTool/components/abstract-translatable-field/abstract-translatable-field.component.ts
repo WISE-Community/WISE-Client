@@ -34,7 +34,9 @@ export abstract class AbstractTranslatableFieldComponent {
     this.i18nId = this.content[`${this.key}.i18n`]?.id;
     this.subscriptions.add(
       this.currentTranslations$.subscribe((translations: Translations) => {
-        this.setTranslationText(translations[this.i18nId]?.value);
+        if (this.showTranslationInput()) {
+          this.setTranslationText(translations[this.i18nId]?.value);
+        }
       })
     );
     this.subscriptions.add(
