@@ -1,13 +1,28 @@
 import { Component } from '@angular/core';
 import { NewNodeTemplate } from '../NewNodeTemplate';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'choose-new-node-template',
-  templateUrl: 'choose-new-node-template.component.html',
-  styleUrls: ['choose-new-node-template.component.scss', '../../add-content.scss']
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
+    MatIconModule,
+    RouterModule
+  ],
+  standalone: true,
+  styleUrls: ['choose-new-node-template.component.scss', '../../add-content.scss'],
+  templateUrl: 'choose-new-node-template.component.html'
 })
-export class ChooseNewNodeTemplate {
+export class ChooseNewNodeTemplateComponent {
   protected templates: NewNodeTemplate[] = [
     {
       label: $localize`Create Your Own`,
