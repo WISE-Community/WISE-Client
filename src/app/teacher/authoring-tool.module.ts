@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AddYourOwnNode } from '../../assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component';
-import { ChooseNewNodeTemplate } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
+import { ChooseNewNodeTemplateComponent } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
 import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
 import { CardSelectorComponent } from '../../assets/wise5/authoringTool/components/card-selector/card-selector.component';
 import { RubricAuthoringComponent } from '../../assets/wise5/authoringTool/rubric/rubric-authoring.component';
@@ -74,7 +74,6 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     ChooseImportStepComponent,
     ChooseImportUnitComponent,
     ChooseNewComponent,
-    ChooseNewNodeTemplate,
     ChooseMoveNodeLocationComponent,
     ChooseSimulationComponent,
     ConcurrentAuthorsMessageComponent,
@@ -103,6 +102,7 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     AddComponentButtonComponent,
     AddLessonButtonComponent,
     AddStepButtonComponent,
+    ChooseNewNodeTemplateComponent,
     StudentTeacherCommonModule,
     ComponentAuthoringModule,
     ComponentStudentModule,
