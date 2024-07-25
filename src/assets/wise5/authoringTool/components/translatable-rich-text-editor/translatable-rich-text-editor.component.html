@@ -8,7 +8,13 @@
   <mat-tab label="{{ currentLanguage().language }}">
     <ng-template matTabContent>
       <div class="translation-tools">
-        <button mat-stroked-button color="primary" (click)="copyDefaultLanguageText()" i18n>
+        <button
+          class="enable-in-translation"
+          mat-stroked-button
+          color="primary"
+          (click)="copyDefaultLanguageText()"
+          i18n
+        >
           Copy content from {{ defaultLanguage.language }}
         </button>
       </div>
@@ -27,7 +33,13 @@
           >Note: Editing is disabled. Please switch back to {{ defaultLanguage.language }} if you
           want to edit.</span
         >
-        <button mat-stroked-button color="primary" (click)="copyDefaultLanguageText()" i18n>
+        <button
+          class="enable-in-translation"
+          mat-stroked-button
+          color="primary"
+          (click)="copyDefaultLanguageText()"
+          i18n
+        >
           Copy content to {{ currentLanguage().language }}
         </button>
       </div>

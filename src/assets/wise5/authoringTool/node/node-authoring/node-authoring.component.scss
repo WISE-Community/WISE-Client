@@ -111,3 +111,11 @@
 .cdk-drag-placeholder {
   opacity: .4;
 }
+
+mat-icon[disabled=true] {
+  opacity: .5;
+}
+
+.component-label {
+  color: rgba(0,0,0,.87);
+}

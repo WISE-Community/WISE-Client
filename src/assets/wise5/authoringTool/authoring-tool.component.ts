@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { Subscription, filter } from 'rxjs';
 import { ConfigService } from '../services/configService';
 import { NotificationService } from '../services/notificationService';
@@ -29,8 +29,10 @@ export class AuthoringToolComponent {
     private configService: ConfigService,
     private dataService: TeacherDataService,
     private dialog: MatDialog,
+    private elem: ElementRef,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService,
+    private renderer: Renderer2,
     private sessionService: SessionService,
     private router: Router
   ) {}
@@ -43,6 +45,7 @@ export class AuthoringToolComponent {
     this.subscribeToProjectEvents();
     this.subscribeToDataEvents();
     this.subscribeToRouterEvents();
+    this.subscribeToUIChangeEvents();
     this.checkPermission();
   }
 
@@ -192,6 +195,44 @@ export class AuthoringToolComponent {
     );
   }
 
+  private subscribeToUIChangeEvents(): void {
+    this.subscriptions.add(
+      this.projectService.uiChanged$.subscribe(() => {
+        setTimeout(() => {
+          if (this.projectService.isDefaultLocale()) {
+            this.enableElements();
+          } else {
+            this.disableElements();
+          }
+        }, 500);
+      })
+    );
+  }
+
+  private enableElements(): void {
+    this.getElements().forEach((element) => {
+      this.renderer.removeAttribute(element, 'disabled');
+      this.renderer.removeStyle(element, 'pointer-events');
+    });
+  }
+
+  private disableElements(): void {
+    this.getElements()
+      .filter((element) => !element.classList.contains('enable-in-translation'))
+      .forEach((element) => {
+        this.renderer.setAttribute(element, 'disabled', 'true');
+        this.renderer.setStyle(element, 'pointer-events', 'none');
+      });
+  }
+
+  private getElements(): any[] {
+    return Array.from(
+      this.elem.nativeElement.querySelectorAll(
+        'div.main-content button,input[type=radio],input[type=checkbox],input[type=number],mat-checkbox,mat-icon[cdkdraghandle]'
+      )
+    );
+  }
+
   private checkPermission(): void {
     if (!this.configService.getConfigParam('canEditProject')) {
       setTimeout(() => {
@@ -223,6 +264,7 @@ export class AuthoringToolComponent {
       this.projectTitle = null;
     }
     this.notificationService.hideJSONValidMessage();
+    this.projectService.uiChanged();
   }
 
   protected toggleMenu(): void {

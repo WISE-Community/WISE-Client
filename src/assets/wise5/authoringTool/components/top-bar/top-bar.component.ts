@@ -119,5 +119,6 @@ export class TopBarComponent implements OnInit {
 
   protected changeLanguage(language: Language): void {
     this.projectService.setCurrentLanguage(language);
+    this.projectService.uiChanged();
   }
 }

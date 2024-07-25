@@ -14,16 +14,6 @@
         <mat-icon>build</mat-icon>
       </button>
     </div>
-    <span fxFlex></span>
-    <button
-      mat-icon-button
-      (click)="close()"
-      matTooltip="Back to unit"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>close</mat-icon>
-    </button>
   </div>
   <div
     *ngIf="!isGroupNode"
@@ -72,6 +62,7 @@
     <span fxFlex></span>
     <div *ngIf="!isGroupNode" fxLayoutGap="16px">
       <button
+        class="enable-in-translation"
         mat-raised-button
         color="primary"
         (click)="setAllComponentsIsExpanded(true)"
@@ -81,6 +72,7 @@
         + Expand All
       </button>
       <button
+        class="enable-in-translation"
         mat-raised-button
         color="primary"
         (click)="setAllComponentsIsExpanded(false)"
