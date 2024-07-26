@@ -109,11 +109,6 @@ export class NodeAuthoringComponent implements OnInit {
     );
   }
 
-  protected close(): void {
-    this.dataService.setCurrentNode(null);
-    scrollToTopOfPage();
-  }
-
   protected hideAllComponentSaveButtons(): void {
     for (const component of this.components) {
       const service = this.componentServiceLookupService.getService(component.type);
@@ -262,12 +257,14 @@ export class NodeAuthoringComponent implements OnInit {
 
   protected toggleComponent(componentId: string): void {
     this.componentsToExpanded[componentId] = !this.componentsToExpanded[componentId];
+    this.projectService.uiChanged();
   }
 
   protected setAllComponentsIsExpanded(isExpanded: boolean): void {
     this.components.forEach((component) => {
       this.componentsToExpanded[component.id] = isExpanded;
     });
+    this.projectService.uiChanged();
   }
 
   protected getNumberOfComponentsExpanded(): number {

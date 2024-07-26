@@ -707,7 +707,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">86</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
@@ -1052,7 +1052,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">470</context>
+          <context context-type="linenumber">474</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-connected-components/edit-graph-connected-components.component.html</context>
@@ -1145,7 +1145,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component.html</context>
@@ -1164,7 +1164,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">118</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component.html</context>
@@ -1946,7 +1946,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">171</context>
+          <context context-type="linenumber">173</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -2074,7 +2074,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">511</context>
+          <context context-type="linenumber">515</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
@@ -8939,11 +8939,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">116</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">367</context>
+          <context context-type="linenumber">371</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-item/export-item.component.html</context>
@@ -9886,14 +9886,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Unit Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2634396349466458330" datatype="html">
         <source>Unit Info</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component.ts</context>
@@ -9904,7 +9904,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>File Manager</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">74</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component.ts</context>
@@ -9915,7 +9915,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Notebook Settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">81</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component.ts</context>
@@ -9926,7 +9926,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Milestones</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">88</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component.ts</context>
@@ -9945,21 +9945,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Advanced Settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1422076554976852397" datatype="html">
         <source>Unit List</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">99</context>
+          <context context-type="linenumber">102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2304476742154607725" datatype="html">
         <source>You have been inactive for a long time. Do you want to stay logged in?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">116</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
@@ -9974,7 +9974,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Session Timeout</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">117</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
@@ -9989,7 +9989,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Saving...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">141</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
@@ -10000,25 +10000,25 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">155</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6634710158550020332" datatype="html">
         <source>Error Saving Unit. Please refresh the page.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">159</context>
+          <context context-type="linenumber">162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="586193560737361056" datatype="html">
         <source>You do not have permission to edit this unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">166</context>
+          <context context-type="linenumber">169</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">199</context>
+          <context context-type="linenumber">240</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8d558c05faf7e8ec36f7bc0a46e5a2cf6874196e" datatype="html">
@@ -10044,7 +10044,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8fa7f8678048f0ed8a8c670b4348e2a2c709af33" datatype="html">
@@ -10070,7 +10070,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="linenumber">102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0217500199a3e48a7b95762b14b79dad49e76beb" datatype="html">
@@ -10327,21 +10327,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Copy content from <x id="INTERPOLATION" equiv-text="{{ defaultLanguage.language }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
-          <context context-type="linenumber">11,13</context>
+          <context context-type="linenumber">17,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="640c45ed65607e87581aabc5cfce2ccf3942bac9" datatype="html">
         <source>Note: Editing is disabled. Please switch back to <x id="INTERPOLATION" equiv-text="{{ defaultLanguage.language }}"/> if you want to edit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
-          <context context-type="linenumber">27,28</context>
+          <context context-type="linenumber">33,34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ea247b9f655d6860ba5938acc13f2a10c49b0f75" datatype="html">
         <source> Copy content to <x id="INTERPOLATION" equiv-text="{{ currentLanguage().language }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
-          <context context-type="linenumber">30,32</context>
+          <context context-type="linenumber">42,44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5046317553228226783" datatype="html">
@@ -10875,107 +10875,107 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">562</context>
+          <context context-type="linenumber">566</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d95c883f6fbde43b2a40a68de217a29800781746" datatype="html">
         <source>Click to Collapse</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">327</context>
+          <context context-type="linenumber">330</context>
         </context-group>
       </trans-unit>
       <trans-unit id="af2457ffe373c7c736ad2da6ac861d6fcf2fe954" datatype="html">
         <source>Click to Expand</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">337</context>
+          <context context-type="linenumber">341</context>
         </context-group>
       </trans-unit>
       <trans-unit id="075a16f10c0432717ecb9cca7de1327c7d6f9819" datatype="html">
         <source>Milestone <x id="INTERPOLATION" equiv-text="{{ milestoneIndex + 1 }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="838199b8150d2bab1ee5ca1e3fb40cd03fd4ef5c" datatype="html">
         <source>Delete Milestone</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="02267a7322a2e4d263e8c4d419b6417bb1bfa484" datatype="html">
         <source>Milestone Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b24f65b04ab04c46b8398371d4e66b48313fda89" datatype="html">
         <source>Milestone Description</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="16d9831d3f6620f02614e4f3f9804d05b401caec" datatype="html">
         <source> Enable Satisfy Criteria </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">85,87</context>
+          <context context-type="linenumber">87,89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f0e88edbf7f9264fd1cad492cfd5fbc3502256e2" datatype="html">
         <source>Satisfy Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">92</context>
         </context-group>
       </trans-unit>
       <trans-unit id="090c00e247c39b6fe6a3dd3e9a1713b9aba293e0" datatype="html">
         <source>Satisfy Minimum Percentage</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bbfbe6b60a66806dc31ed8f6519dc632e19430f3" datatype="html">
         <source>Satisfy Minimum Number Of Workgroups</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">102</context>
+          <context context-type="linenumber">104</context>
         </context-group>
       </trans-unit>
       <trans-unit id="334aa18470d71a5a5aa03bb04de13d67fa23c164" datatype="html">
         <source>Satisfy Conditional</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">113</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">361</context>
+          <context context-type="linenumber">365</context>
         </context-group>
       </trans-unit>
       <trans-unit id="16d449549ab7bc61caf3d636372a4a56b5870383" datatype="html">
         <source>Any</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">366</context>
+          <context context-type="linenumber">370</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
@@ -10994,69 +10994,69 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Add Milestone Satisfy Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">127</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">202</context>
+          <context context-type="linenumber">204</context>
         </context-group>
       </trans-unit>
       <trans-unit id="19f12b275107079fb75d50a8b9aaa97cd4419398" datatype="html">
         <source>Milestone Satisfy Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="af0189cc231a09644a31b960d670556efa1e1cda" datatype="html">
         <source>Delete Milestone Satisfy Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0e203e60f15515180c6328882f54c8eadfd4ec3d" datatype="html">
         <source>Node ID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">147</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">224</context>
+          <context context-type="linenumber">226</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">405</context>
+          <context context-type="linenumber">409</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0ed759df797ff7d712f5fa5f588fea19c4900be5" datatype="html">
         <source>Component ID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">155</context>
+          <context context-type="linenumber">157</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">234</context>
+          <context context-type="linenumber">236</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">415</context>
+          <context context-type="linenumber">419</context>
         </context-group>
       </trans-unit>
       <trans-unit id="93af773949b835f303f7a6093bca1c2bd7ce7404" datatype="html">
         <source>Copy Node ID and Component ID to Milestone</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">190</context>
+          <context context-type="linenumber">192</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f72992030f134408b675152c397f9d0ec00f3b2a" datatype="html">
         <source>Report</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">207</context>
+          <context context-type="linenumber">209</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
@@ -11067,156 +11067,156 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Add Report Location</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">212</context>
+          <context context-type="linenumber">214</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">266</context>
+          <context context-type="linenumber">268</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0416aef14ec3aca09e043e73a6335de5371705ab" datatype="html">
         <source>Location <x id="INTERPOLATION" equiv-text="{{ locationIndex + 1 }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">222</context>
+          <context context-type="linenumber">224</context>
         </context-group>
       </trans-unit>
       <trans-unit id="254ad48dc50c572572b8097e6c47ebf116c58d97" datatype="html">
         <source>Delete Location</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">253</context>
+          <context context-type="linenumber">255</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e4c555ebf0149581f22013ddf96709334c8a90bc" datatype="html">
         <source>Custom Score Values</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">271</context>
+          <context context-type="linenumber">273</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">296</context>
+          <context context-type="linenumber">298</context>
         </context-group>
       </trans-unit>
       <trans-unit id="02f2d3b8102c44b3c0f5d819fe317c3dd4558bf0" datatype="html">
         <source>Delete Custom Score Values</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">284</context>
+          <context context-type="linenumber">286</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1b992857d16757659f9a10d02e9acdda890f1179" datatype="html">
         <source>Custom Score Key</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">292</context>
+          <context context-type="linenumber">294</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d043b423e4139c6ba495c2c916dc0b8eca3fd159" datatype="html">
         <source>Add Custom Score Values</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">305</context>
+          <context context-type="linenumber">307</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7c8452d7fa1b96c36b2d61e017fb78ceb652a4c6" datatype="html">
         <source>Add Template</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">312</context>
+          <context context-type="linenumber">314</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">551</context>
+          <context context-type="linenumber">555</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e54cbbacf8d5ead56d9f32343b8c6e1942d0deeb" datatype="html">
         <source>Template <x id="INTERPOLATION" equiv-text="{{ templateIndex + 1 }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">342</context>
+          <context context-type="linenumber">346</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ddf5a8a3268f51e0c1c483f97f1a6fcc3cf30340" datatype="html">
         <source>Delete Template</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">347</context>
+          <context context-type="linenumber">351</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4a82cc3f3f360d2bc6b77b43bbfa3ca63a4e56e5" datatype="html">
         <source>Add Template Satisfy Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">379</context>
+          <context context-type="linenumber">383</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">503</context>
+          <context context-type="linenumber">507</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cefd5a14f39b6c996605418bd94aa5a0e87d1322" datatype="html">
         <source>Template Satisfy Criteria <x id="INTERPOLATION" equiv-text="{{ satisfyCriteriaIndex + 1 }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">392</context>
+          <context context-type="linenumber">396</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9892e5948b2c09596b55ac5fa25ea50b27fd09d7" datatype="html">
         <source>Delete Template Satisfy Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">397</context>
+          <context context-type="linenumber">401</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8dd73f8432542493a9aa83e87e057b57151682f1" datatype="html">
         <source>Function</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">443</context>
+          <context context-type="linenumber">447</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ea72f0ebd6356f9f3c67cdcd36b708ec48905184" datatype="html">
         <source>Percent Threshold</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">459</context>
+          <context context-type="linenumber">463</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ffff6c969ea0cf07b5528818cefaf4bb3ab54e69" datatype="html">
         <source>Target Variable</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">478</context>
+          <context context-type="linenumber">482</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5049e204c14c648691ac775a64fb504467aeb549" datatype="html">
         <source>Value</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">486</context>
+          <context context-type="linenumber">490</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dcb0a18677fd130250915d67e1466d42d5749ccf" datatype="html">
         <source>Content Preview</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">524</context>
+          <context context-type="linenumber">528</context>
         </context-group>
       </trans-unit>
       <trans-unit id="13b999a2fcec2117611e71910766fee83e030d23" datatype="html">
         <source>Recommendations</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">532</context>
+          <context context-type="linenumber">536</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d0aa484c35892a0548ed345e55b78ffc28c5faac" datatype="html">
         <source>Recommendations Preview</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
-          <context context-type="linenumber">537</context>
+          <context context-type="linenumber">541</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2047450671991070773" datatype="html">
@@ -11907,88 +11907,81 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="90c4e4785a98ff9c710d707d8e079c584fb9af48" datatype="html">
-        <source>Back to unit</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="16f48e8858552177f3da7a0ccf2449b2522ebe14" datatype="html">
         <source>Components</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7c5b499b46f7ab611026c2e07b19d8d70e51853a" datatype="html">
         <source>Move Components</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="835ab9ba787d9e73a77b6f723e200ca24a5808a9" datatype="html">
         <source>Copy Components</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="646e338d93a6cafb1c27766c746ce8f2fde3c2a6" datatype="html">
         <source>Delete Components</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="67145eb769f4fe04e8b9f3c24d4452cf18ac196b" datatype="html">
         <source> + Expand All </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">80,82</context>
+          <context context-type="linenumber">71,73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="22137335ce02968992f1f2fb73c630e68be673cb" datatype="html">
         <source> - Collapse All </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">89,91</context>
+          <context context-type="linenumber">81,83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1944eaae32b2002e6f552fd9c1f5a113c412ad25" datatype="html">
         <source>This step does not have any components. Click the + button to add a component.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="534f4fefca77da56b8b0ea6fb63ff18bae415a92" datatype="html">
         <source>Toggle component authoring</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">110</context>
         </context-group>
       </trans-unit>
       <trans-unit id="11cd90245b41b1506efabdcea69d3c5c0964a432" datatype="html">
         <source>Select component</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">127</context>
         </context-group>
       </trans-unit>
       <trans-unit id="47f8ae23f1be55b30a01abc41c7ca4b770f5d1b2" datatype="html">
         <source>Click to expand/collapse</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">146</context>
+          <context context-type="linenumber">138</context>
         </context-group>
       </trans-unit>
       <trans-unit id="46c242cc262ba3a868dfd6bd37f555c1ada6877c" datatype="html">
         <source>Delete Component</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">172</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7035134055292483273" datatype="html">
@@ -11996,7 +11989,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">198</context>
+          <context context-type="linenumber">193</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5170405945214763287" datatype="html">
@@ -12004,7 +11997,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">199</context>
+          <context context-type="linenumber">194</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bb39841df2c03f771748c1f986e615bffa7f2593" datatype="html">
@@ -12463,7 +12456,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Download</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2589779545965103394" datatype="html">
@@ -12640,35 +12633,35 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> + Expand All </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">42,44</context>
+          <context context-type="linenumber">43,45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f38b6d67175548a28ac5f5aea4e105c79e295531" datatype="html">
         <source> - Collapse All </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">51,53</context>
+          <context context-type="linenumber">53,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="064120d68b9435e460f4e279c5e61bbebae375eb" datatype="html">
         <source>There are no lessons</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="916f9b62ed7c33eba9be8517d84288d762048cfa" datatype="html">
         <source>There are no unused lessons</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1f244812aec621e93ca22f9e72ba88ffe13bb354" datatype="html">
         <source>There are no unused steps</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">103</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5775641662261420108" datatype="html">
@@ -15547,56 +15540,56 @@ Are you sure you want to proceed?</source>
         <source>Toggle system prompt instructions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5295731a6cd416bcfc75bcc270e291529a620b52" datatype="html">
         <source>System Prompt Instructions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="64a0e565dac872662708ee95c663ca320464b707" datatype="html">
         <source> Provide context, instructions, and other relevant information to help the chat bot act the way you want it to. Be as specific as possible. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">21,24</context>
+          <context context-type="linenumber">22,25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8f6fa76d4a23d7f0b39f750714ce4762daebe7aa" datatype="html">
         <source>Example System Prompt</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d4cf91bc1eb9a6646386b9835c7206fd72ca6a19" datatype="html">
         <source> You are a teacher helping a student understand the greenhouse effect by using the example of a car that has been sitting in the sun on a cold day. The student is asked how the temperature inside the car will feel. Do not tell them the correct answer, but guide them to better understand the science by asking questions. Also make sure they explain their reasoning. Limit your response to 100 words or less. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">26,32</context>
+          <context context-type="linenumber">27,33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4c58dd3004d2dc9515ab6b2a19c07de08ca215bc" datatype="html">
         <source>System Prompt</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="78eed8b0ee3039557d9b409316b4cb137ba46c12" datatype="html">
         <source>Use the prompt to introduce the chatbot activity. Students will see the prompt.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="989e3e512d67ecf1ee51ebf8edc99e048d3c3959" datatype="html">
         <source>Enable Computer Avatar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
@@ -17950,18 +17943,18 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
       &gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
-          <context context-type="linenumber">49,55</context>
+          <context context-type="linenumber">50,56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b2a497bce327b6c20cc9969b0bad0b1470fcccd5" datatype="html">
         <source>Reload Model</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7956799829776596403" datatype="html">
@@ -21562,7 +21555,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">100</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7975589013595125523" datatype="html">
@@ -21573,11 +21566,11 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">112</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">154</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5946383547512220582" datatype="html">
@@ -21588,11 +21581,11 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">113</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">153</context>
+          <context context-type="linenumber">155</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3177789104763917185" datatype="html">
@@ -21610,7 +21603,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6590475405017990661" datatype="html">
@@ -21621,7 +21614,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7008439939460403347" datatype="html">
@@ -21632,7 +21625,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4200122564420479235" datatype="html">
@@ -21849,145 +21842,145 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>First Lesson</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2017855920890197640" datatype="html">
         <source>First Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8104421162933956065" datatype="html">
         <source>Notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">114</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">154</context>
+          <context context-type="linenumber">156</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5668531960608480573" datatype="html">
         <source>Final Report</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8604167983715964004" datatype="html">
         <source>Final summary report of what you learned in this unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4419148705442508208" datatype="html">
         <source>Use this space to write your final report using evidence from your notebook.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2128364009265696768" datatype="html">
         <source>&lt;h3&gt;This is a heading&lt;/h3&gt;&lt;p&gt;This is a paragraph.&lt;/p&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3712572360135341203" datatype="html">
         <source>Teacher Notebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3422550137142657635" datatype="html">
         <source>teacher notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">164</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">163</context>
+          <context context-type="linenumber">165</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2558301014879118031" datatype="html">
         <source>Teacher Notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">164</context>
+          <context context-type="linenumber">166</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">171</context>
+          <context context-type="linenumber">173</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2841850575512700640" datatype="html">
         <source>Notes for the teacher as they&apos;re running the WISE unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">172</context>
+          <context context-type="linenumber">174</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4383493915104232758" datatype="html">
         <source>Use this space to take notes for this unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">173</context>
+          <context context-type="linenumber">175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8373748870534083811" datatype="html">
         <source>&lt;p&gt;Use this space to take notes for this unit&lt;/p&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">176</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4358283284933461426" datatype="html">
         <source>All steps after this one will not be visitable until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">946</context>
+          <context context-type="linenumber">948</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5548702737138673668" datatype="html">
         <source>All steps after this one will not be visible until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">949</context>
+          <context context-type="linenumber">951</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3112051127445790513" datatype="html">
         <source>All other steps will not be visitable until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">952</context>
+          <context context-type="linenumber">954</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2264443134334419091" datatype="html">
         <source>All other steps will not be visible until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">955</context>
+          <context context-type="linenumber">957</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6819040711904864999" datatype="html">
         <source>This step will not be visitable until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">958</context>
+          <context context-type="linenumber">960</context>
         </context-group>
       </trans-unit>
       <trans-unit id="816962217622004346" datatype="html">
         <source>This step will not be visible until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">961</context>
+          <context context-type="linenumber">963</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6103908175957925049" datatype="html">

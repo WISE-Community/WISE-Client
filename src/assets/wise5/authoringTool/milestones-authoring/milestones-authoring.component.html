@@ -27,6 +27,7 @@
     <div class="border margin-bottom-20">
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
         <button
+          class="enable-in-translation"
           *ngIf="idToExpanded[item.id]"
           mat-raised-button
           color="primary"
@@ -37,6 +38,7 @@
           <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
         <button
+          class="enable-in-translation"
           mat-raised-button
           color="primary"
           *ngIf="!idToExpanded[item.id]"
@@ -320,6 +322,7 @@
               <div class="border margin-left-20" fxLayout="column" fxLayoutGap="20px">
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
                   <button
+                    class="enable-in-translation"
                     mat-raised-button
                     color="primary"
                     *ngIf="idToExpanded[template.id]"
@@ -330,6 +333,7 @@
                     <mat-icon>keyboard_arrow_down</mat-icon>
                   </button>
                   <button
+                    class="enable-in-translation"
                     mat-raised-button
                     color="primary"
                     *ngIf="!idToExpanded[template.id]"

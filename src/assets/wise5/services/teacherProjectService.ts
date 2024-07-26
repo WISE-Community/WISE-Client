@@ -31,6 +31,8 @@ export class TeacherProjectService extends ProjectService {
   public projectSaved$: Observable<void> = this.projectSavedSource.asObservable();
   private savingProjectSource: Subject<void> = new Subject<void>();
   public savingProject$: Observable<void> = this.savingProjectSource.asObservable();
+  private uiChangedSource: Subject<void> = new Subject<void>();
+  public uiChanged$: Observable<void> = this.uiChangedSource.asObservable();
 
   constructor(
     protected branchService: BranchService,
@@ -3103,5 +3105,9 @@ export class TeacherProjectService extends ProjectService {
     return this.getNodeById(lessonId).ids.flatMap((nodeId: string) =>
       this.getComponentsFromStep(nodeId)
     );
+  }
+
+  uiChanged(): void {
+    this.uiChangedSource.next();
   }
 }
