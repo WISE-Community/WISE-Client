@@ -20,7 +20,6 @@ const nodeId1 = 'node1';
 describe('NodeConstraintAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [],
       imports: [
         BrowserAnimationsModule,
         FormsModule,
