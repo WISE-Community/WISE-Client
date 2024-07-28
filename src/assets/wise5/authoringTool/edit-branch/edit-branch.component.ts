@@ -73,16 +73,14 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
 
   private getBranchPaths(): any[] {
     const branchPaths = [];
-    for (let t = 0; t < this.node.transitionLogic.transitions.length; t++) {
-      const transition = this.node.transitionLogic.transitions[t];
-      const branch: any = {
-        number: t + 1,
+    for (const transition of this.node.transitionLogic.transitions) {
+      const branchPath: any = {
         items: this.getItems(),
         nodesInBranchPath: [],
         transition: transition
       };
-      branchPaths.push(branch);
-      this.populateBranchParams(branch, transition);
+      branchPaths.push(branchPath);
+      this.populateBranchParams(branchPath, transition);
     }
     return branchPaths;
   }
@@ -91,7 +89,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     if (transition.criteria != null) {
       for (const criterion of transition.criteria) {
         if (criterion.name === this.SCORE_VALUE) {
-          this.populateScoreBranchParam(branch, criterion);
+          branch.scores = criterion.params.scores;
         } else if (criterion.name === this.CHOICE_CHOSEN_VALUE) {
           this.populateChoiceBranchParam(branch, criterion);
         }
@@ -100,10 +98,6 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     for (const nodeId of this.projectService.getNodeIdsInBranch(this.targetId, transition.to)) {
       branch.nodesInBranchPath.push(branch.items[nodeId]);
     }
-  }
-
-  private populateScoreBranchParam(branch: any, criterion: any): void {
-    branch.scores = criterion.params.scores;
   }
 
   private populateChoiceBranchParam(branch: any, criterion: any): void {
@@ -229,9 +223,8 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
    * @param branch the branch object
    */
   protected removeBranchPath(branch: any): void {
-    const nodesInBranchPath = branch.nodesInBranchPath;
-    for (const checkedItem of nodesInBranchPath) {
-      const nodeId = checkedItem.nodeId;
+    for (const nodeInBranchPath of branch.nodesInBranchPath) {
+      const nodeId = nodeInBranchPath.nodeId;
       this.projectService.removeBranchPathTakenNodeConstraintsIfAny(nodeId);
       /*
        * update the transition of the step to point to the next step
