@@ -17,7 +17,6 @@ import { EditComponentRubricComponent } from '../edit-component-rubric/edit-comp
 import { EditComponentSaveButtonComponent } from '../edit-component-save-button/edit-component-save-button.component';
 import { EditComponentSubmitButtonComponent } from '../edit-component-submit-button/edit-component-submit-button.component';
 import { EditComponentTagsComponent } from '../edit-component-tags/edit-component-tags.component';
-import { EditComponentWidthComponent } from '../edit-component-width/edit-component-width.component';
 import { EditConnectedComponentsAddButtonComponent } from '../edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsComponent } from '../edit-connected-components/edit-connected-components.component';
 import { EditCommonAdvancedComponent } from './edit-common-advanced.component';
@@ -49,7 +48,6 @@ describe('EditCommonAdvancedComponent', () => {
         EditComponentTagsComponent,
         EditComponentSaveButtonComponent,
         EditComponentSubmitButtonComponent,
-        EditComponentWidthComponent,
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent
       ],
