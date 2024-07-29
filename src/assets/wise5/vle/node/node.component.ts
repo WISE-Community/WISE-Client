@@ -134,6 +134,10 @@ export class NodeComponent implements OnInit {
     );
 
     this.studentDataService.currentNodeChanged$.subscribe(() => {
+      this.nodeUnloaded(this.node.id);
+      if (this.node.isEvaluateTransitionLogicOn('exitNode')) {
+        this.nodeService.evaluateTransitionLogic();
+      }
       this.initializeNode();
     });
     this.studentDataService.nodeStatusesChanged$.subscribe(() => {
@@ -155,9 +159,8 @@ export class NodeComponent implements OnInit {
       this.nodeService.evaluateTransitionLogic();
     }
 
-    const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
-      this.node.id
-    );
+    const latestComponentState =
+      this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(this.node.id);
     if (latestComponentState) {
       this.latestComponentState = latestComponentState;
     }
@@ -200,10 +203,6 @@ export class NodeComponent implements OnInit {
 
   ngOnDestroy() {
     this.stopAutoSaveInterval();
-    this.nodeUnloaded(this.node.id);
-    if (this.node.isEvaluateTransitionLogicOn('exitNode')) {
-      this.nodeService.evaluateTransitionLogic();
-    }
     this.subscriptions.unsubscribe();
   }
 
