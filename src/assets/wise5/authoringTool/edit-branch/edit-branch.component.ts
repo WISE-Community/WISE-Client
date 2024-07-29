@@ -30,6 +30,7 @@ import { DeleteBranchService } from '../../services/deleteBranchService';
 })
 export class EditBranchComponent extends AbstractBranchAuthoringComponent {
   private branchPaths: any[] = [];
+  private items: any;
   protected mergeStepTitle: string;
   private node: any;
 
@@ -51,6 +52,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     this.setMergeStep(branch.endPoint);
     this.mergeStepTitle = this.projectService.getNodePositionAndTitle(branch.endPoint);
     this.node = this.projectService.getNodeById(this.targetId);
+    this.items = this.getItems();
   }
 
   ngAfterViewInit(): void {
@@ -77,7 +79,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     const branchPaths = [];
     for (const transition of this.node.transitionLogic.transitions) {
       const branchPath: any = {
-        items: this.getItems(),
+        items: this.items,
         nodesInBranchPath: [],
         transition: transition
       };
@@ -191,7 +193,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     }
   }
 
-  protected getItems(): any {
+  private getItems(): any {
     const items = copy(this.projectService.idToOrder);
     for (const nodeId of Object.keys(items)) {
       items[nodeId].nodeId = nodeId;
