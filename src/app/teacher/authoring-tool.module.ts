@@ -56,6 +56,7 @@ import { AddLessonButtonComponent } from '../../assets/wise5/authoringTool/add-l
 import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-step-button/add-step-button.component';
 import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringTool/components/preview-component-button/preview-component-button.component';
 import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-tools.component';
+import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     ChooseNewComponent,
     ComponentAuthoringModule,
     ComponentStudentModule,
+    ComponentTypeButtonComponent,
     MatBadgeModule,
     MatChipsModule,
     ImportComponentModule,
