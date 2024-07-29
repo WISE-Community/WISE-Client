@@ -10,6 +10,7 @@ import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/a
 import { BranchPathAuthoringComponent } from '../branch-path-authoring/branch-path-authoring.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TeacherProjectService } from '../../services/teacherProjectService';
+import { DeleteBranchService } from '../../services/deleteBranchService';
 
 @Component({
   imports: [
@@ -34,6 +35,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
+    private deleteBranchService: DeleteBranchService,
     protected fb: FormBuilder,
     protected projectService: TeacherProjectService,
     protected route: ActivatedRoute,
@@ -184,59 +186,9 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
         $localize`Are you sure you want to remove this branch?\n\nThe branch structure will be removed but the steps will not be deleted.`
       )
     ) {
-      this.removeBranch();
+      this.deleteBranchService.removeBranch(this.branchPaths, this.targetId);
+      this.saveProject();
     }
-  }
-
-  private removeBranch(): void {
-    for (let bp = 0; bp < this.branchPaths.length; bp++) {
-      const branchPath = this.branchPaths[bp];
-      this.removeBranchPath(branchPath);
-      bp--; // shift the counter back one because we have just removed a branch path
-    }
-
-    const nodeIdAfter = this.projectService.getNodeIdAfter(this.targetId);
-
-    /*
-     * update the transition of this step to point to the next step
-     * in the project. this may be different than the next step
-     * if it was still the branch point.
-     */
-    this.projectService.setTransition(this.targetId, nodeIdAfter);
-    this.projectService.setTransitionLogicField(
-      this.targetId,
-      'howToChooseAmongAvailablePaths',
-      null
-    );
-    this.projectService.setTransitionLogicField(this.targetId, 'whenToChoosePath', null);
-    this.projectService.setTransitionLogicField(this.targetId, 'canChangePath', null);
-    this.projectService.setTransitionLogicField(this.targetId, 'maxPathsVisitable', null);
-    this.projectService.calculateNodeNumbers();
-    this.saveProject();
-  }
-
-  /**
-   * Remove a branch path by removing all the branch path taken constraints
-   * from the steps in the branch path, resetting the transitions in the
-   * steps in the branch path, and removing the transition corresponding to
-   * the branch path in this branch point node.
-   * @param branch the branch object
-   */
-  protected removeBranchPath(branch: any): void {
-    for (const nodeInBranchPath of branch.nodesInBranchPath) {
-      const nodeId = nodeInBranchPath.nodeId;
-      this.projectService.removeBranchPathTakenNodeConstraintsIfAny(nodeId);
-      /*
-       * update the transition of the step to point to the next step
-       * in the project. this may be different than the next step
-       * if it was still in the branch path.
-       */
-      const nodeIdAfter = this.projectService.getNodeIdAfter(nodeId);
-      this.projectService.setTransition(nodeId, nodeIdAfter);
-    }
-    const branchPathIndex = this.branchPaths.indexOf(branch);
-    this.branchPaths.splice(branchPathIndex, 1);
-    this.node.transitionLogic.transitions.splice(branchPathIndex, 1);
   }
 
   protected getItems(): any {

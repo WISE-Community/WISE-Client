@@ -34,6 +34,7 @@ import { RouterModule } from '@angular/router';
 import { ComponentInfoService } from '../../assets/wise5/services/componentInfoService';
 import { CreateBranchService } from '../../assets/wise5/services/createBranchService';
 import { InsertFirstNodeInBranchPathService } from '../../assets/wise5/services/insertFirstNodeInBranchPathService';
+import { DeleteBranchService } from '../../assets/wise5/services/deleteBranchService';
 
 @NgModule({
   imports: [StudentTeacherCommonModule, AuthoringToolModule, RouterModule, AuthoringRoutingModule],
@@ -43,6 +44,7 @@ import { InsertFirstNodeInBranchPathService } from '../../assets/wise5/services/
     CopyNodesService,
     CopyProjectService,
     CreateBranchService,
+    DeleteBranchService,
     InsertFirstNodeInBranchPathService,
     DataExportService,
     { provide: DataService, useExisting: TeacherDataService },
