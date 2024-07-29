@@ -1,21 +1,23 @@
 <h5 i18n>Start from scratch, import from another unit, or choose a step template:</h5>
 <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutAlign.gt-sm="start">
-  <mat-card *ngFor="let template of templates" appearance="outlined">
-    <mat-card-title>
-      <h6 class="center">{{ template.label }}</h6>
-    </mat-card-title>
-    <mat-card-content fxLayoutAlign="center center">
-      <mat-icon class="mat-48 text">{{ template.icon }}</mat-icon>
-    </mat-card-content>
-    <mat-card-actions fxLayout="row" fxLayoutAlign="start center">
-      <button mat-flat-button color="primary" (click)="chooseTemplate(template)" fxFlex i18n>
-        Select
-      </button>
-    </mat-card-actions>
-  </mat-card>
+  @for (template of templates; track template.route) {
+    <mat-card appearance="outlined">
+      <mat-card-title>
+        <h6 class="center">{{ template.label }}</h6>
+      </mat-card-title>
+      <mat-card-content fxLayoutAlign="center center">
+        <mat-icon class="mat-48 text">{{ template.icon }}</mat-icon>
+      </mat-card-content>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="start center">
+        <button mat-flat-button color="primary" (click)="chooseTemplate(template)" fxFlex i18n>
+          Select
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  }
 </div>
 <div class="nav-controls">
-  <mat-divider></mat-divider>
+  <mat-divider />
   <div>
     <button mat-button class="mat-primary" routerLink="../.." i18n>Cancel</button>
   </div>
