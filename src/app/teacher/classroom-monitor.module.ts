@@ -42,7 +42,6 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
   declarations: [
     AlertStatusCornerComponent,
     ClassroomMonitorComponent,
-    ComponentNewWorkBadgeComponent,
     ComponentSelectComponent,
     NavItemComponent,
     NodeInfoComponent,
@@ -63,8 +62,8 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     ViewComponentRevisionsComponent
   ],
   imports: [
-    StudentTeacherCommonModule,
     ComponentGradingModule,
+    ComponentNewWorkBadgeComponent,
     ComponentStudentModule,
     DataExportModule,
     GradingCommonModule,
@@ -79,7 +78,8 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     SaveIndicatorComponent,
     SelectPeriodModule,
     StepInfoComponent,
-    StepToolsComponent
+    StepToolsComponent,
+    StudentTeacherCommonModule
   ]
 })
 export class ClassroomMonitorModule {}
