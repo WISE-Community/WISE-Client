@@ -121,7 +121,6 @@ import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/no
     EditComponentSaveButtonComponent,
     EditComponentSubmitButtonComponent,
     EditComponentTagsComponent,
-    EditComponentWidthComponent,
     EditConceptMapAdvancedComponent,
     EditConceptMapConnectedComponentsComponent,
     EditConnectedComponentDefaultSelectsComponent,
@@ -177,6 +176,7 @@ import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/no
   imports: [
     ComponentConstraintAuthoringComponent,
     EditComponentAdvancedButtonComponent,
+    EditComponentWidthComponent,
     PeerGroupingAuthoringModule,
     RequiredErrorLabelComponent,
     SelectStepAndComponentComponent,

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AddYourOwnNode } from '../../assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component';
-import { ChooseNewNodeTemplate } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
+import { ChooseNewNodeTemplateComponent } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
 import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
 import { CardSelectorComponent } from '../../assets/wise5/authoringTool/components/card-selector/card-selector.component';
 import { RubricAuthoringComponent } from '../../assets/wise5/authoringTool/rubric/rubric-authoring.component';
@@ -47,7 +47,6 @@ import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringToo
 import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
 import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
 import { AddLessonChooseTemplateComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-template/add-lesson-choose-template.component';
-import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 import { EditNodeTitleComponent } from '../../assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component';
 import { EditProjectLanguageSettingComponent } from '../../assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component';
 import { AddComponentButtonComponent } from '../../assets/wise5/authoringTool/node/add-component-button/add-component-button.component';
@@ -63,6 +62,7 @@ import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authorin
 import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-step-button/add-step-button.component';
 import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringTool/components/preview-component-button/preview-component-button.component';
 import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-tools.component';
+import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 
 @NgModule({
   declarations: [
@@ -79,8 +79,6 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     ChooseCopyNodeLocationComponent,
     ChooseImportStepComponent,
     ChooseImportUnitComponent,
-    ChooseNewComponent,
-    ChooseNewNodeTemplate,
     ChooseMoveNodeLocationComponent,
     ChooseSimulationComponent,
     ConcurrentAuthorsMessageComponent,
@@ -110,7 +108,9 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     AddComponentButtonComponent,
     AddLessonButtonComponent,
     AddStepButtonComponent,
+    ChooseNewNodeTemplateComponent,
     StudentTeacherCommonModule,
+    ChooseNewComponent,
     ComponentAuthoringModule,
     ComponentStudentModule,
     ComponentTypeButtonComponent,

@@ -12,7 +12,6 @@ import { WiseTinymceEditorModule } from '../../../directives/wise-tinymce-editor
 import { RouterModule } from '@angular/router';
 import { TranslatableRichTextEditorComponent } from '../../components/translatable-rich-text-editor/translatable-rich-text-editor.component';
 import { RequiredErrorLabelComponent } from './required-error-label/required-error-label.component';
-import { EditConstraintRemovalCriteriaComponent } from '../../constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +21,7 @@ import { EditConstraintRemovalCriteriaComponent } from '../../constraint/edit-co
     NodeAdvancedConstraintAuthoringComponent,
     NodeAdvancedGeneralAuthoringComponent,
     NodeAdvancedJsonAuthoringComponent,
-    NodeAdvancedPathAuthoringComponent,
-    NodeConstraintAuthoringComponent
+    NodeAdvancedPathAuthoringComponent
   ],
   exports: [
     EditNodeRubricComponent,
@@ -32,11 +30,10 @@ import { EditConstraintRemovalCriteriaComponent } from '../../constraint/edit-co
     NodeAdvancedConstraintAuthoringComponent,
     NodeAdvancedGeneralAuthoringComponent,
     NodeAdvancedJsonAuthoringComponent,
-    NodeAdvancedPathAuthoringComponent,
-    NodeConstraintAuthoringComponent
+    NodeAdvancedPathAuthoringComponent
   ],
   imports: [
-    EditConstraintRemovalCriteriaComponent,
+    NodeConstraintAuthoringComponent,
     RequiredErrorLabelComponent,
     RouterModule,
     StudentTeacherCommonModule,

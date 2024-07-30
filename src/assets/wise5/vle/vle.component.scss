@@ -111,3 +111,11 @@ notebook-report {
 .wise-link-communicator {
   visibility: hidden;
 }
+
+run-ended-and-locked-message {
+  display: block;
+  
+  @media (min-width: breakpoint('sm.min')) {
+    margin-bottom: -8px;
+  }
+}

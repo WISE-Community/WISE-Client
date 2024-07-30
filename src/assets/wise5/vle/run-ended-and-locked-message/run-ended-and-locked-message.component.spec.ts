@@ -1,6 +1,7 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../services/configService';
 import { RunEndedAndLockedMessageComponent } from './run-ended-and-locked-message.component';
+import { By } from '@angular/platform-browser';
 
 class MockConfigService {
   getPrettyEndDate(): string {
@@ -11,23 +12,26 @@ class MockConfigService {
 describe('RunEndedAndLockedMessageComponent', () => {
   let component: RunEndedAndLockedMessageComponent;
   let configService: ConfigService;
+  let fixture: ComponentFixture<RunEndedAndLockedMessageComponent>;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        RunEndedAndLockedMessageComponent,
-        { provide: ConfigService, useClass: MockConfigService }
-      ]
+      imports: [RunEndedAndLockedMessageComponent],
+      providers: [{ provide: ConfigService, useClass: MockConfigService }]
     });
-    component = TestBed.inject(RunEndedAndLockedMessageComponent);
+    fixture = TestBed.createComponent(RunEndedAndLockedMessageComponent);
+    component = fixture.componentInstance;
     configService = TestBed.inject(ConfigService);
   });
   it('should not have message after construction', () => {
-    expect(component.message).toBeUndefined();
+    expect(getTitle()).toEqual('');
   });
   it('should set message after Angular calls ngOnInit', () => {
-    component.ngOnInit();
-    expect(component.message).toEqual(
+    fixture.detectChanges();
+    expect(getTitle()).toEqual(
       'This unit ended on August 19, 2022. You can no longer save new work.'
     );
   });
+  function getTitle(): string {
+    return fixture.debugElement.query(By.css('.mat-small')).nativeElement.textContent;
+  }
 });
