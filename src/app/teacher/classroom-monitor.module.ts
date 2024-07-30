@@ -62,8 +62,8 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     ViewComponentRevisionsComponent
   ],
   imports: [
-    ComponentNewWorkBadgeComponent,
     ComponentGradingModule,
+    ComponentNewWorkBadgeComponent,
     ComponentStudentModule,
     DataExportModule,
     GradingCommonModule,
