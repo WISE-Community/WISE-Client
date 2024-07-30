@@ -5,10 +5,10 @@ import { TeacherProjectService } from './teacherProjectService';
 export class DeleteBranchService {
   constructor(private projectService: TeacherProjectService) {}
 
-  removeBranch(branchPaths: any[], targetId: string): void {
+  deleteBranch(branchPaths: any[], targetId: string): void {
     for (let bp = 0; bp < branchPaths.length; bp++) {
       const branchPath = branchPaths[bp];
-      this.removeBranchPath(branchPaths, branchPath, targetId);
+      this.deleteBranchPath(branchPaths, branchPath, targetId);
       bp--; // shift the counter back one because we have just removed a branch path
     }
     const nodeIdAfter = this.projectService.getNodeIdAfter(targetId);
@@ -32,7 +32,7 @@ export class DeleteBranchService {
    * the branch path in this branch point node.
    * @param branch the branch object
    */
-  private removeBranchPath(branchPaths: any[], branch: any, targetId: string): void {
+  private deleteBranchPath(branchPaths: any[], branch: any, targetId: string): void {
     for (const nodeInBranchPath of branch.nodesInBranchPath) {
       const nodeId = nodeInBranchPath.nodeId;
       this.projectService.removeBranchPathTakenNodeConstraintsIfAny(nodeId);

@@ -79,7 +79,6 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     const branchPaths = [];
     for (const transition of this.node.transitionLogic.transitions) {
       const branchPath: any = {
-        items: this.items,
         nodesInBranchPath: [],
         transition: transition
       };
@@ -100,7 +99,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
       }
     }
     for (const nodeId of this.projectService.getNodeIdsInBranch(this.targetId, transition.to)) {
-      branch.nodesInBranchPath.push(branch.items[nodeId]);
+      branch.nodesInBranchPath.push(this.items[nodeId]);
     }
   }
 
@@ -182,13 +181,13 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     });
   }
 
-  protected removeBranchButtonClicked(): void {
+  protected removeBranch(): void {
     if (
       confirm(
         $localize`Are you sure you want to remove this branch?\n\nThe branch structure will be removed but the steps will not be deleted.`
       )
     ) {
-      this.deleteBranchService.removeBranch(this.branchPaths, this.targetId);
+      this.deleteBranchService.deleteBranch(this.branchPaths, this.targetId);
       this.saveProject();
     }
   }

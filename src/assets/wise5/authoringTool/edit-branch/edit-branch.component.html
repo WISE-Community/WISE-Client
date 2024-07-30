@@ -1,8 +1,6 @@
 <div fxLayout="row wrap" fxLayoutAlign="space-between center">
   <h3 class="title" i18n>Edit Branch</h3>
-  <button mat-raised-button color="warn" (click)="removeBranchButtonClicked()" i18n>
-    Remove Branch
-  </button>
+  <button mat-raised-button color="warn" (click)="removeBranch()" i18n>Remove Branch</button>
 </div>
 <h5 i18n>Branch Step: {{ targetTitle }}</h5>
 <form fxLayout="column" [formGroup]="formGroup">
