@@ -378,7 +378,7 @@ export class VLEComponent implements AfterViewInit {
     return this.createNodeEvent('nodeExited', nodeId);
   }
 
-  private createNodeEvent(eventName: string, nodeId: string = this.currentNode.id) {
+  private createNodeEvent(eventName: string, nodeId: string = this.currentNode.id): any {
     return this.studentDataService.createNewEvent(
       nodeId,
       null,
