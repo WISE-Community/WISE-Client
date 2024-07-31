@@ -14,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WiseLinkService } from '../../../app/services/wiseLinkService';
 import { convertToPNGFile } from '../common/canvas/canvas';
 import { NodeStatusService } from '../services/nodeStatusService';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'vle',
@@ -54,6 +54,11 @@ export class VLEComponent implements AfterViewInit {
     private studentDataService: StudentDataService,
     private wiseLinkService: WiseLinkService
   ) {}
+
+  @HostListener('window:beforeunload')
+  beforeUnload(): void {
+    this.saveNodeExitedEvent();
+  }
 
   ngAfterViewInit(): void {
     this.initializeVLEService.initialized$.subscribe((initialized: boolean) => {
@@ -103,6 +108,7 @@ export class VLEComponent implements AfterViewInit {
     this.currentNode = this.studentDataService.getCurrentNode();
     this.setLayoutState();
     this.initializeSubscriptions();
+    this.saveNodeEnteredEvent();
   }
 
   ngOnDestroy() {
@@ -165,49 +171,17 @@ export class VLEComponent implements AfterViewInit {
     this.subscriptions.add(
       this.studentDataService.currentNodeChanged$.subscribe(({ previousNode }) => {
         this.currentNode = this.studentDataService.getCurrentNode();
-        let currentNodeId = this.currentNode.id;
-
+        const currentNodeId = this.currentNode.id;
         this.studentDataService.updateStackHistory(currentNodeId);
         this.nodeStatusService.setNodeIsVisited(currentNodeId);
-
-        let componentId, componentType, category, eventName, eventData, eventNodeId;
-        if (previousNode != null && this.projectService.isGroupNode(previousNode.id)) {
-          // going from group to node or group to group
-          componentId = null;
-          componentType = null;
-          category = 'Navigation';
-          eventName = 'nodeExited';
-          eventData = {
-            nodeId: previousNode.id
-          };
-          eventNodeId = previousNode.id;
-          this.studentDataService.saveVLEEvent(
-            eventNodeId,
-            componentId,
-            componentType,
-            category,
-            eventName,
-            eventData
-          );
+        const events = [];
+        if (previousNode != null) {
+          events.push(this.createNodeExitedEvent(previousNode.id));
         }
+        events.push(this.createNodeEnteredEvent());
+        this.studentDataService.saveEvents(events);
 
         if (this.projectService.isGroupNode(currentNodeId)) {
-          componentId = null;
-          componentType = null;
-          category = 'Navigation';
-          eventName = 'nodeEntered';
-          eventData = {
-            nodeId: currentNodeId
-          };
-          eventNodeId = currentNodeId;
-          this.studentDataService.saveVLEEvent(
-            eventNodeId,
-            componentId,
-            componentType,
-            category,
-            eventName,
-            eventData
-          );
         } else {
           this.scrollToTop();
         }
@@ -386,5 +360,35 @@ export class VLEComponent implements AfterViewInit {
         return this.projectService.getMaxScoreForComponent(nodeId, componentId);
       }
     };
+  }
+
+  private saveNodeEnteredEvent(): void {
+    this.studentDataService.saveEvents([this.createNodeEnteredEvent()]);
+  }
+
+  private saveNodeExitedEvent(): void {
+    this.studentDataService.saveEvents([this.createNodeExitedEvent()]);
+  }
+
+  private createNodeEnteredEvent(): any {
+    return this.createNodeEvent('nodeEntered');
+  }
+
+  private createNodeExitedEvent(nodeId: string = this.currentNode.id): any {
+    return this.createNodeEvent('nodeExited', nodeId);
+  }
+
+  private createNodeEvent(eventName: string, nodeId: string = this.currentNode.id) {
+    return this.studentDataService.createNewEvent(
+      nodeId,
+      null,
+      'VLE',
+      null,
+      'Navigation',
+      eventName,
+      {
+        nodeId: nodeId
+      }
+    );
   }
 }

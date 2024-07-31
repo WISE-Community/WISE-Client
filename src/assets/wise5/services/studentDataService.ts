@@ -26,17 +26,20 @@ export class StudentDataService extends DataService {
   private componentDirtySource: Subject<boolean> = new Subject<boolean>();
   public componentDirty$: Observable<any> = this.componentDirtySource.asObservable();
   private componentSaveTriggeredSource: Subject<boolean> = new Subject<boolean>();
-  public componentSaveTriggered$: Observable<any> = this.componentSaveTriggeredSource.asObservable();
+  public componentSaveTriggered$: Observable<any> =
+    this.componentSaveTriggeredSource.asObservable();
   private componentSubmitDirtySource: Subject<boolean> = new Subject<boolean>();
   public componentSubmitDirty$: Observable<any> = this.componentSubmitDirtySource.asObservable();
   private componentSubmitTriggeredSource: Subject<boolean> = new Subject<boolean>();
-  public componentSubmitTriggered$: Observable<any> = this.componentSubmitTriggeredSource.asObservable();
+  public componentSubmitTriggered$: Observable<any> =
+    this.componentSubmitTriggeredSource.asObservable();
   private componentStudentDataSource: Subject<any> = new Subject<any>();
   public componentStudentData$: Observable<any> = this.componentStudentDataSource.asObservable();
   private dataRetrievedSource: Subject<any> = new Subject<any>();
   public dataRetrieved$: Observable<any> = this.dataRetrievedSource.asObservable();
   private studentWorkSavedToServerSource: Subject<any> = new Subject<any>();
-  public studentWorkSavedToServer$: Observable<any> = this.studentWorkSavedToServerSource.asObservable();
+  public studentWorkSavedToServer$: Observable<any> =
+    this.studentWorkSavedToServerSource.asObservable();
   private navItemIsExpandedSource: Subject<any> = new Subject<any>();
   public navItemIsExpanded$: Observable<any> = this.navItemIsExpandedSource.asObservable();
   private nodeStatusesChangedSource: Subject<void> = new Subject<void>();
@@ -276,6 +279,12 @@ export class StudentDataService extends DataService {
       data
     );
     events.push(newEvent);
+    const componentStates = undefined;
+    const annotations = undefined;
+    return this.saveToServer(componentStates, events, annotations);
+  }
+
+  saveEvents(events: any): Promise<any> {
     const componentStates = undefined;
     const annotations = undefined;
     return this.saveToServer(componentStates, events, annotations);
