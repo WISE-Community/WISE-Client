@@ -30,7 +30,6 @@ export class NodeComponent implements OnInit {
   @Input() node: Node;
   nodeContent: any;
   nodeStatus: any;
-  rubric: string;
   latestComponentState: ComponentState;
   showRubric: boolean;
   submit: boolean = false;
@@ -189,8 +188,7 @@ export class NodeComponent implements OnInit {
     );
 
     if (this.configService.isPreview()) {
-      this.rubric = this.node.rubric;
-      this.showRubric = this.rubric != null && this.rubric != '';
+      this.showRubric = this.node.rubric != null && this.node.rubric != '';
     }
 
     const script = this.nodeContent.script;
