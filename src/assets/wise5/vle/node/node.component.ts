@@ -141,6 +141,10 @@ export class NodeComponent implements OnInit {
 
     this.studentDataService.currentNodeChanged$.subscribe(({ currentNode }) => {
       this.node = this.projectService.getNode(currentNode.id);
+      this.nodeUnloaded(this.node.id);
+      if (this.node.isEvaluateTransitionLogicOn('exitNode')) {
+        this.nodeService.evaluateTransitionLogic();
+      }
       this.initializeNode();
     });
     this.studentDataService.nodeStatusesChanged$.subscribe(() => {
@@ -206,10 +210,6 @@ export class NodeComponent implements OnInit {
 
   ngOnDestroy() {
     this.stopAutoSaveInterval();
-    this.nodeUnloaded(this.node.id);
-    if (this.node.isEvaluateTransitionLogicOn('exitNode')) {
-      this.nodeService.evaluateTransitionLogic();
-    }
     this.subscriptions.unsubscribe();
   }
 
