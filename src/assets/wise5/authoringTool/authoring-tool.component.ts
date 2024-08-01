@@ -6,7 +6,7 @@ import { TeacherProjectService } from '../services/teacherProjectService';
 import { SessionService } from '../services/sessionService';
 import { TeacherDataService } from '../services/teacherDataService';
 import { NavigationEnd, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
 
 @Component({
@@ -226,9 +226,15 @@ export class AuthoringToolComponent {
   }
 
   private getElements(): any[] {
+    const elementsToDisable =
+      'button,input[type=radio],input[type=checkbox],input[type=number],input[type=text],mat-checkbox,mat-icon[cdkdraghandle]';
     return Array.from(
-      this.elem.nativeElement.querySelectorAll(
-        'div.main-content button,input[type=radio],input[type=checkbox],input[type=number],input[type=text],mat-checkbox,mat-icon[cdkdraghandle]'
+      this.elem.nativeElement.querySelectorAll(`div.main-content ${elementsToDisable}`)
+    ).concat(
+      this.dialog.openDialogs.flatMap((dialogRef: MatDialogRef<any, any>) =>
+        Array.from(
+          dialogRef.componentRef.location.nativeElement.querySelectorAll(`${elementsToDisable}`)
+        )
       )
     );
   }
