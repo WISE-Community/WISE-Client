@@ -228,7 +228,7 @@ export class AuthoringToolComponent {
   private getElements(): any[] {
     return Array.from(
       this.elem.nativeElement.querySelectorAll(
-        'div.main-content button,input[type=radio],input[type=checkbox],input[type=number],mat-checkbox,mat-icon[cdkdraghandle]'
+        'div.main-content button,input[type=radio],input[type=checkbox],input[type=number],input[type=text],mat-checkbox,mat-icon[cdkdraghandle]'
       )
     );
   }
