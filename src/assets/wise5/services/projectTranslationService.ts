@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
 import { Translations } from '../../../app/domain/translations';
@@ -14,9 +14,11 @@ export class ProjectTranslationService {
   ) {}
 
   protected fetchTranslations(locale: string): Observable<Translations> {
-    return this.http.get<Translations>(this.getTranslationMappingURL(locale), {
-      headers: new HttpHeaders().set('cache-control', 'no-cache')
-    });
+    return this.http
+      .get<Translations>(this.getTranslationMappingURL(locale), {
+        headers: new HttpHeaders().set('cache-control', 'no-cache')
+      })
+      .pipe(catchError(() => of({})));
   }
 
   private getTranslationMappingURL(locale: string): string {
