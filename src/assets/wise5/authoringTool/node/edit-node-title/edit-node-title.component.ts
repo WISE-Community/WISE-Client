@@ -4,6 +4,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
   selector: 'edit-node-title',
+  styleUrl: './edit-node-title.component.scss',
   templateUrl: './edit-node-title.component.html'
 })
 export class EditNodeTitleComponent {

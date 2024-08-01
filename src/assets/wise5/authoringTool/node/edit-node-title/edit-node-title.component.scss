@@ -1,0 +1,10 @@
+@import
+  'style/abstracts/variables',
+  'style/abstracts/functions';
+
+@media (min-width: breakpoint('sm.min')) {
+  translatable-input {
+    width: 480px;
+    display: block;
+  }
+}
