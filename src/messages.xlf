@@ -10326,21 +10326,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="48a41ede1e77cc856b4db02992364495fff66794" datatype="html">
+      <trans-unit id="408cba84d285a04bf7e87e0f2222633ea4ff87c9" datatype="html">
         <source> Copy content from <x id="INTERPOLATION" equiv-text="{{ defaultLanguage.language }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
-          <context context-type="linenumber">17,19</context>
+          <context context-type="linenumber">12,14</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="640c45ed65607e87581aabc5cfce2ccf3942bac9" datatype="html">
+      <trans-unit id="0c3914e3f9e2b4f6fc0c94083a862c378cbddfc0" datatype="html">
         <source>Note: Editing is disabled. Please switch back to <x id="INTERPOLATION" equiv-text="{{ defaultLanguage.language }}"/> if you want to edit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
           <context context-type="linenumber">33,34</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ea247b9f655d6860ba5938acc13f2a10c49b0f75" datatype="html">
+      <trans-unit id="badc08a20861a73d13f112e10a1db00774efa33d" datatype="html">
         <source> Copy content to <x id="INTERPOLATION" equiv-text="{{ currentLanguage().language }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>

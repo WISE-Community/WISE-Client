@@ -1,34 +1,34 @@
-@if (!showTranslationInput()) {
-<mat-form-field>
-  <mat-label>{{ label }}</mat-label>
-  <textarea
-    matInput
-    [(ngModel)]="content[key]"
-    (ngModelChange)="defaultLanguageTextChanged.next($event)"
-    placeholder="{{ placeholder }}"
-    cdkTextareaAutosize
-  >
-  </textarea>
-  @if (hint) {
-  <mat-hint>{{ hint }}</mat-hint>
-  }
-</mat-form-field>
-} @if (showTranslationInput()) {
-<mat-form-field class="translatable">
-  <mat-label>{{ label }} ({{ currentLanguage().language }})</mat-label>
-  <textarea
-    matInput
-    [(ngModel)]="translationText"
-    (ngModelChange)="translationTextChanged.next($event)"
-    placeholder="{{ placeholder }}"
-    cdkTextareaAutosize
-  ></textarea>
-  @if (hint) {
-  <mat-hint>{{ hint }}</mat-hint>
-  }
-  <mat-hint class="source-language selected-bg-bg">
-    <strong><mat-icon>translate</mat-icon> {{ defaultLanguage.language }}:</strong>
-    {{ content[key] }}
-  </mat-hint>
-</mat-form-field>
+@if (showTranslationInput()) {
+  <mat-form-field class="translatable">
+    <mat-label>{{ label }} ({{ currentLanguage().language }})</mat-label>
+    <textarea
+      matInput
+      [(ngModel)]="translationText"
+      (ngModelChange)="translationTextChanged.next($event)"
+      placeholder="{{ placeholder }}"
+      cdkTextareaAutosize
+    ></textarea>
+    @if (hint) {
+      <mat-hint>{{ hint }}</mat-hint>
+    }
+    <mat-hint class="source-language selected-bg-bg">
+      <strong><mat-icon>translate</mat-icon> {{ defaultLanguage.language }}:</strong>
+      {{ content[key] }}
+    </mat-hint>
+  </mat-form-field>
+} @else {
+  <mat-form-field>
+    <mat-label>{{ label }}</mat-label>
+    <textarea
+      matInput
+      [(ngModel)]="content[key]"
+      (ngModelChange)="defaultLanguageTextChanged.next($event)"
+      placeholder="{{ placeholder }}"
+      cdkTextareaAutosize
+    >
+    </textarea>
+    @if (hint) {
+      <mat-hint>{{ hint }}</mat-hint>
+    }
+  </mat-form-field>
 }
