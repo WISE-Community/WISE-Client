@@ -32,4 +32,22 @@ export class EditTranslationsService extends ProjectTranslationService {
     );
     return allTranslations;
   }
+
+  protected getI18NKeys(componentElement: object): any[] {
+    let i18nKeys = Object.keys(componentElement)
+      .filter((key) => key.endsWith('.i18n'))
+      .map((key) => this.getI18NKey(componentElement, key));
+    Object.values(componentElement).forEach((value) => {
+      if (Array.isArray(value)) {
+        i18nKeys = i18nKeys.concat(...value.map((val) => this.getI18NKeys(val)));
+      } else if (typeof value === 'object' && value != null) {
+        i18nKeys = i18nKeys.concat(this.getI18NKeys(value));
+      }
+    });
+    return i18nKeys;
+  }
+
+  protected getI18NKey(componentElement: object, key: string): any {
+    return componentElement[key].id;
+  }
 }

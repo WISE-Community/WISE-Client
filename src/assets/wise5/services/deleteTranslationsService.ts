@@ -26,18 +26,4 @@ export class DeleteTranslationsService extends EditTranslationsService {
     });
     forkJoin(saveTranslationRequests).subscribe();
   }
-
-  private getI18NKeys(componentElement: object): string[] {
-    let i18nKeys = Object.keys(componentElement)
-      .filter((key) => key.endsWith('.i18n'))
-      .map((key) => componentElement[key].id);
-    Object.values(componentElement).forEach((value) => {
-      if (Array.isArray(value)) {
-        i18nKeys = i18nKeys.concat(...value.map((val) => this.getI18NKeys(val)));
-      } else if (typeof value === 'object' && value != null) {
-        i18nKeys = i18nKeys.concat(this.getI18NKeys(value));
-      }
-    });
-    return i18nKeys;
-  }
 }
