@@ -6,6 +6,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { generateRandomKey } from '../../../common/string/string';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Translations } from '../../../../../app/domain/translations';
+import { copy } from '../../../common/object/object';
 
 @Directive()
 export abstract class AbstractTranslatableFieldComponent {
@@ -31,9 +32,11 @@ export abstract class AbstractTranslatableFieldComponent {
   ) {}
 
   ngOnChanges(): void {
-    this.i18nId = this.content[`${this.key}.i18n`]?.id;
+    this.setI18nId();
     this.subscriptions.add(
       this.currentTranslations$.subscribe((translations: Translations) => {
+        // i18nId might have been created by another component (e.g. this=input, other=AssetChooser)
+        this.setI18nId();
         if (this.showTranslationInput()) {
           this.setTranslationText(translations[this.i18nId]?.value);
         }
@@ -53,6 +56,10 @@ export abstract class AbstractTranslatableFieldComponent {
     this.subscriptions.unsubscribe();
   }
 
+  private setI18nId(): void {
+    this.i18nId = this.content[`${this.key}.i18n`]?.id;
+  }
+
   protected setTranslationText(text: string): void {
     this.translationText = text;
   }
@@ -64,7 +71,7 @@ export abstract class AbstractTranslatableFieldComponent {
   }
 
   protected saveTranslationText(text: string): void {
-    const currentTranslations = this.projectTranslationService.currentTranslations();
+    const currentTranslations = copy(this.projectTranslationService.currentTranslations());
     currentTranslations[this.i18nId] = { value: text, modified: new Date().getTime() };
     this.projectTranslationService.saveCurrentTranslations(currentTranslations).subscribe();
   }

@@ -9,7 +9,8 @@ import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable()
 export class TeacherProjectTranslationService extends ProjectTranslationService {
-  currentTranslations: WritableSignal<Translations> = signal({});
+  private currentTranslationsSignal: WritableSignal<Translations> = signal({});
+  readonly currentTranslations = this.currentTranslationsSignal.asReadonly();
   constructor(
     protected configService: ConfigService,
     protected http: HttpClient,
@@ -17,7 +18,7 @@ export class TeacherProjectTranslationService extends ProjectTranslationService 
   ) {
     super(configService, http, projectService);
     toObservable(this.projectService.currentLanguage).subscribe(async (language) => {
-      this.currentTranslations.set(
+      this.currentTranslationsSignal.set(
         this.projectService.isDefaultLocale()
           ? {}
           : await lastValueFrom(this.fetchTranslations(language.locale))
@@ -36,7 +37,7 @@ export class TeacherProjectTranslationService extends ProjectTranslationService 
       )
       .pipe(
         map(() => {
-          this.currentTranslations.set(translations);
+          this.currentTranslationsSignal.set(translations);
           this.projectService.broadcastProjectSaved();
         }),
         catchError(() => {
