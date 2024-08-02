@@ -30,7 +30,8 @@ export class TeacherDataService extends DataService {
   private currentPeriodChangedSource: Subject<any> = new Subject<any>();
   public currentPeriodChanged$: Observable<any> = this.currentPeriodChangedSource.asObservable();
   private currentWorkgroupChangedSource: Subject<any> = new Subject<any>();
-  public currentWorkgroupChanged$: Observable<any> = this.currentWorkgroupChangedSource.asObservable();
+  public currentWorkgroupChanged$: Observable<any> =
+    this.currentWorkgroupChangedSource.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -158,7 +159,7 @@ export class TeacherDataService extends DataService {
       projectId: this.ConfigService.getProjectId(),
       runId: this.ConfigService.getRunId(),
       workgroupId: this.ConfigService.getWorkgroupId(),
-      clientSaveTime: Date.parse(new Date().toString()),
+      clientSaveTime: new Date().getTime(),
       context: context,
       nodeId: nodeId,
       componentId: componentId,
