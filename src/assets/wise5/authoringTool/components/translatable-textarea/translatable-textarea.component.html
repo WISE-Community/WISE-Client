@@ -3,6 +3,7 @@
     <mat-label>{{ label }} ({{ currentLanguage().language }})</mat-label>
     <textarea
       matInput
+      class="enable-in-translation"
       [(ngModel)]="translationText"
       (ngModelChange)="translationTextChanged.next($event)"
       placeholder="{{ placeholder }}"

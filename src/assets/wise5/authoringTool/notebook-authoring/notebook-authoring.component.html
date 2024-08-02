@@ -264,6 +264,7 @@
       <wise-authoring-tinymce-editor
         [(model)]="reportIdToAuthoringNote[reportNote.reportId].html"
         (modelChange)="reportStarterTextChanged(reportNote.reportId)"
+        [disabled]="reportStarterTextDisabled()"
       >
       </wise-authoring-tinymce-editor>
     </div>

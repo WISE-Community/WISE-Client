@@ -1,7 +1,8 @@
 @if (showTranslationInput()) {
-  <mat-form-field class="translatable enable-in-translation">
+  <mat-form-field class="translatable">
     <mat-label>{{ label }} ({{ currentLanguage().language }})</mat-label>
     <input
+      class="enable-in-translation"
       matInput
       [(ngModel)]="translationText"
       (ngModelChange)="translationTextChanged.next($event)"

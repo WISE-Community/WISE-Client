@@ -89,4 +89,8 @@ export class NotebookAuthoringComponent {
   private save(): void {
     this.projectService.saveProject();
   }
+
+  protected reportStarterTextDisabled(): boolean {
+    return !this.projectService.isDefaultLocale();
+  }
 }

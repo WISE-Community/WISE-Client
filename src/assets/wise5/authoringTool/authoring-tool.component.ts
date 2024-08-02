@@ -218,16 +218,21 @@ export class AuthoringToolComponent {
 
   private disableElements(): void {
     this.getElements()
-      .filter((element) => !element.classList.contains('enable-in-translation'))
+      .filter((element) => !this.isAlwaysEnabled(element))
       .forEach((element) => {
         this.renderer.setAttribute(element, 'disabled', 'true');
         this.renderer.setStyle(element, 'pointer-events', 'none');
       });
   }
 
+  private isAlwaysEnabled(element: any): boolean {
+    return ['enable-in-translation', 'tox-mbtn', 'tox-tbtn'].some((allowedClass) =>
+      element.classList.contains(allowedClass)
+    );
+  }
+
   private getElements(): any[] {
-    const elementsToDisable =
-      'button,input[type=radio],input[type=checkbox],input[type=number],input[type=text],mat-checkbox,mat-icon[cdkdraghandle]';
+    const elementsToDisable = 'button,input,mat-checkbox,textarea,mat-icon[cdkdraghandle]';
     return Array.from(
       this.elem.nativeElement.querySelectorAll(`div.main-content ${elementsToDisable}`)
     ).concat(
