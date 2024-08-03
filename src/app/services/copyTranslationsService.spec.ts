@@ -35,7 +35,7 @@ function tryCopyComponents() {
       );
       spyOn(configService, 'getProjectId').and.returnValue('123');
       spyOn(configService, 'getConfigParam').and.returnValue('/123/project.json');
-      service.tryCopyComponents({} as Node, [
+      service.tryCopyComponents({ components: [{ id: 'abc' }] } as Node, [
         {
           id: 'abc',
           type: 'OpenResponse',

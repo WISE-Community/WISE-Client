@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { ProjectTranslationService } from './projectTranslationService';
 import { TeacherProjectService } from './teacherProjectService';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { Translations } from '../../../app/domain/translations';
 import { Language } from '../../../app/domain/language';
 import { Injectable } from '@angular/core';
@@ -49,5 +49,15 @@ export class EditTranslationsService extends ProjectTranslationService {
 
   protected getI18NKey(componentElement: object, key: string): any {
     return componentElement[key].id;
+  }
+
+  protected getSaveTranslationRequest(
+    translations: Translations,
+    language: Language
+  ): Observable<Object> {
+    return this.http.post(
+      `/api/author/project/translate/${this.configService.getProjectId()}/${language.locale}`,
+      translations
+    );
   }
 }

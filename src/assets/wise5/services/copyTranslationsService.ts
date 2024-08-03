@@ -30,15 +30,9 @@ export class CopyTranslationsService extends EditTranslationsService {
     i18nKeys: I18NReplaceKey[]
   ): Promise<Observable<Object>[]> {
     const saveTranslationRequests: Observable<Object>[] = [];
-    const allTranslations = await this.fetchAllTranslations();
-    allTranslations.forEach((translations, language) => {
+    (await this.fetchAllTranslations()).forEach((translations, language) => {
       i18nKeys.forEach((i18nKey) => (translations[i18nKey.new] = translations[i18nKey.original]));
-      saveTranslationRequests.push(
-        this.http.post(
-          `/api/author/project/translate/${this.configService.getProjectId()}/${language.locale}`,
-          translations
-        )
-      );
+      saveTranslationRequests.push(this.getSaveTranslationRequest(translations, language));
     });
     return saveTranslationRequests;
   }

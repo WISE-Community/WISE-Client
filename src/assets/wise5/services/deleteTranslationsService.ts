@@ -12,17 +12,11 @@ export class DeleteTranslationsService extends EditTranslationsService {
   }
 
   private async deleteComponents(components: ComponentContent[]): Promise<void> {
-    const allTranslations = await this.fetchAllTranslations();
     const i18nKeys = components.flatMap((component) => this.getI18NKeys(component));
     const saveTranslationRequests: Observable<Object>[] = [];
-    allTranslations.forEach((translations, language) => {
+    (await this.fetchAllTranslations()).forEach((translations, language) => {
       i18nKeys.forEach((i18nKey) => delete translations[i18nKey]);
-      saveTranslationRequests.push(
-        this.http.post(
-          `/api/author/project/translate/${this.configService.getProjectId()}/${language.locale}`,
-          translations
-        )
-      );
+      saveTranslationRequests.push(this.getSaveTranslationRequest(translations, language));
     });
     forkJoin(saveTranslationRequests).subscribe();
   }
