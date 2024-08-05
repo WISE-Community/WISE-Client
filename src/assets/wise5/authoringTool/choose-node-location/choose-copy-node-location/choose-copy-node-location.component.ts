@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { CopyNodesService } from '../../../services/copyNodesService';
 import { ChooseNodeLocationComponent } from '../choose-node-location.component';
+import { CopyTranslationsService } from '../../../services/copyTranslationsService';
 
 @Component({
   templateUrl: 'choose-copy-node-location.component.html',
@@ -11,6 +12,7 @@ import { ChooseNodeLocationComponent } from '../choose-node-location.component';
 export class ChooseCopyNodeLocationComponent extends ChooseNodeLocationComponent {
   constructor(
     private copyNodesService: CopyNodesService,
+    private copyTranslationsService: CopyTranslationsService,
     protected projectService: TeacherProjectService,
     protected route: ActivatedRoute,
     protected router: Router
@@ -19,10 +21,14 @@ export class ChooseCopyNodeLocationComponent extends ChooseNodeLocationComponent
   }
 
   protected insertAfter(nodeId: string): any[] {
-    return this.copyNodesService.copyNodesAfter(this.selectedNodeIds, nodeId);
+    const newNodes = this.copyNodesService.copyNodesAfter(this.selectedNodeIds, nodeId);
+    this.copyTranslationsService.tryCopyNodes(newNodes);
+    return newNodes;
   }
 
   protected insertInside(groupNodeId: string): any[] {
-    return this.copyNodesService.copyNodesInsideGroup(this.selectedNodeIds, groupNodeId);
+    const newNodes = this.copyNodesService.copyNodesInsideGroup(this.selectedNodeIds, groupNodeId);
+    this.copyTranslationsService.tryCopyNodes(newNodes);
+    return newNodes;
   }
 }

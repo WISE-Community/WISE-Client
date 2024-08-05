@@ -1,6 +1,7 @@
 {
   "startGroupId": "group0",
   "startNodeId": "node1",
+  "metadata": {},
   "nodes": [
     {
       "id": "group0",

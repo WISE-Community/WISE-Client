@@ -10,6 +10,7 @@ import { scrollToTopOfPage, temporarilyHighlightElement } from '../../../common/
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
 import { copy } from '../../../common/object/object';
 
 @Component({
@@ -36,6 +37,7 @@ export class NodeAuthoringComponent implements OnInit {
     private nodeService: TeacherNodeService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
+    private deleteTranslationsService: DeleteTranslationsService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -107,11 +109,6 @@ export class NodeAuthoringComponent implements OnInit {
     );
   }
 
-  protected close(): void {
-    this.dataService.setCurrentNode(null);
-    scrollToTopOfPage();
-  }
-
   protected hideAllComponentSaveButtons(): void {
     for (const component of this.components) {
       const service = this.componentServiceLookupService.getService(component.type);
@@ -173,10 +170,9 @@ export class NodeAuthoringComponent implements OnInit {
   protected deleteComponents(): void {
     scrollToTopOfPage();
     if (this.confirmDeleteComponent(this.getSelectedComponentNumbersAndTypes())) {
-      const componentIdAndTypes = this.getSelectedComponents()
-        .map((component) => this.node.deleteComponent(component.id))
-        .map((component) => ({ componentId: component.id, type: component.type }));
-      this.afterDeleteComponent(componentIdAndTypes);
+      this.deleteComponentsOnServer(
+        this.getSelectedComponents().map((component) => this.node.deleteComponent(component.id))
+      );
     }
   }
 
@@ -187,10 +183,7 @@ export class NodeAuthoringComponent implements OnInit {
   ): void {
     event.stopPropagation();
     if (this.confirmDeleteComponent([`${componentNumber}. ${component.type}`])) {
-      const deletedComponent = this.node.deleteComponent(component.id);
-      this.afterDeleteComponent([
-        { componentId: deletedComponent.id, type: deletedComponent.type }
-      ]);
+      this.deleteComponentsOnServer([this.node.deleteComponent(component.id)]);
     }
   }
 
@@ -203,16 +196,18 @@ export class NodeAuthoringComponent implements OnInit {
     return confirm(confirmMessage);
   }
 
-  private afterDeleteComponent(componentIdAndTypes: any[]): void {
-    for (const componentIdAndType of componentIdAndTypes) {
-      this.componentsToChecked.update((componentsToChecked) => {
-        delete componentsToChecked[componentIdAndType.componentId];
-        return copy(componentsToChecked);
-      });
-      delete this.componentsToExpanded[componentIdAndType.componentId];
-    }
+  private deleteComponentsOnServer(components: ComponentContent[]): void {
     this.checkIfNeedToShowNodeSaveOrNodeSubmitButtons();
-    this.projectService.saveProject();
+    this.projectService.saveProject().then(() => {
+      for (const component of components) {
+        this.componentsToChecked.update((obj) => {
+          delete obj[component.id];
+          return copy(obj);
+        });
+        delete this.componentsToExpanded[component.id];
+      }
+      this.deleteTranslationsService.tryDeleteComponents(components);
+    });
   }
 
   private checkIfNeedToShowNodeSaveOrNodeSubmitButtons(): void {
@@ -262,12 +257,14 @@ export class NodeAuthoringComponent implements OnInit {
 
   protected toggleComponent(componentId: string): void {
     this.componentsToExpanded[componentId] = !this.componentsToExpanded[componentId];
+    this.projectService.uiChanged();
   }
 
   protected setAllComponentsIsExpanded(isExpanded: boolean): void {
     this.components.forEach((component) => {
       this.componentsToExpanded[component.id] = isExpanded;
     });
+    this.projectService.uiChanged();
   }
 
   protected getNumberOfComponentsExpanded(): number {

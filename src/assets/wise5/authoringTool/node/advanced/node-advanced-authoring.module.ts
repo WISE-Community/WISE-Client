@@ -10,6 +10,7 @@ import { NodeConstraintAuthoringComponent } from '../../constraint/node-constrai
 import { EditNodeRubricComponent } from '../editRubric/edit-node-rubric.component';
 import { WiseTinymceEditorModule } from '../../../directives/wise-tinymce-editor/wise-tinymce-editor.module';
 import { RouterModule } from '@angular/router';
+import { TranslatableRichTextEditorComponent } from '../../components/translatable-rich-text-editor/translatable-rich-text-editor.component';
 import { RequiredErrorLabelComponent } from './required-error-label/required-error-label.component';
 
 @NgModule({
@@ -36,6 +37,7 @@ import { RequiredErrorLabelComponent } from './required-error-label/required-err
     RequiredErrorLabelComponent,
     RouterModule,
     StudentTeacherCommonModule,
+    TranslatableRichTextEditorComponent,
     WiseTinymceEditorModule
   ]
 })

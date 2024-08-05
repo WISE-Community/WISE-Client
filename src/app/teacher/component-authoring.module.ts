@@ -83,6 +83,10 @@ import { ComponentAuthoringComponent } from '../../assets/wise5/authoringTool/co
 import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
 import { WiseLinkAuthoringDialogComponent } from '../../assets/wise5/authoringTool/wise-link-authoring-dialog/wise-link-authoring-dialog.component';
 import { EditComponentAdvancedButtonComponent } from '../../assets/wise5/authoringTool/components/edit-component-advanced-button/edit-component-advanced-button.component';
+import { TranslatableInputComponent } from '../../assets/wise5/authoringTool/components/translatable-input/translatable-input.component';
+import { TranslatableTextareaComponent } from '../../assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component';
+import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';
+import { TranslatableAssetChooserComponent } from '../../assets/wise5/authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
 import { AiChatAuthoringComponent } from '../../assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component';
 import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component';
 import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component';
@@ -177,6 +181,10 @@ import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/no
     RequiredErrorLabelComponent,
     SelectStepAndComponentComponent,
     StudentTeacherCommonModule,
+    TranslatableAssetChooserComponent,
+    TranslatableInputComponent,
+    TranslatableRichTextEditorComponent,
+    TranslatableTextareaComponent,
     WiseTinymceEditorModule
   ],
   exports: [

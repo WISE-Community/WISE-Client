@@ -7,23 +7,41 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
+import { TranslatableInputComponent } from '../../components/translatable-input/translatable-input.component';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
+import { ConfigService } from '../../../services/configService';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
-class MockTeacherProjectService {
-  getNodeById() {}
-  getNodePositionById() {}
-}
 let component: EditNodeTitleComponent;
 let fixture: ComponentFixture<EditNodeTitleComponent>;
+let teacherProjectService: TeacherProjectService;
+
 describe('EditNodeTitleComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [EditNodeTitleComponent],
-      imports: [FormsModule, MatFormFieldModule, MatInputModule],
+      imports: [
+        FormsModule,
+        HttpClientTestingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        StudentTeacherCommonServicesModule,
+        TranslatableInputComponent
+      ],
       providers: [
-        { provide: TeacherProjectService, useClass: MockTeacherProjectService },
-        provideAnimations()
+        ConfigService,
+        provideAnimations(),
+        TeacherProjectService,
+        TeacherProjectTranslationService
       ]
     });
+    teacherProjectService = TestBed.inject(TeacherProjectService);
+    spyOn(teacherProjectService, 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en_us', supported: ['es', 'ja'] })
+    );
+    spyOn(teacherProjectService, 'isDefaultLocale').and.returnValue(true);
     fixture = TestBed.createComponent(EditNodeTitleComponent);
     component = fixture.componentInstance;
     const node = new Node();

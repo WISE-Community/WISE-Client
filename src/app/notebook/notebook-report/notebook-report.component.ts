@@ -56,9 +56,6 @@ export class NotebookReportComponent extends NotebookParentComponent {
     if (this.mode !== 'classroomMonitor') {
       this.reportItem.id = null; // set the id to null so it can be inserted as initial version, as opposed to updated. this is true for both new and just-loaded reports.
     }
-    this.reportItemContent = this.ProjectService.injectAssetPaths(
-      replaceWiseLinks(this.reportItem.content.content)
-    );
     this.latestAnnotations = this.AnnotationService.getLatestNotebookItemAnnotations(
       this.workgroupId,
       this.reportId
@@ -105,6 +102,15 @@ export class NotebookReportComponent extends NotebookParentComponent {
         }
       })
     );
+
+    this.subscriptions.add(
+      this.ProjectService.projectParsed$.subscribe(() => {
+        if (this.saveTime == null) {
+          this.setConfig();
+          this.setReportItem();
+        }
+      })
+    );
   }
 
   ngOnDestroy(): void {
@@ -124,6 +130,11 @@ export class NotebookReportComponent extends NotebookParentComponent {
       this.setSaveTime(clientSaveTime);
     } else {
       this.reportItem = this.NotebookService.getTemplateReportItemByReportId(this.reportId);
+    }
+    if (this.reportItem != null) {
+      this.reportItemContent = this.ProjectService.injectAssetPaths(
+        replaceWiseLinks(this.reportItem.content.content)
+      );
     }
   }
 

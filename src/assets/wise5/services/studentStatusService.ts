@@ -6,6 +6,8 @@ import { ConfigService } from './configService';
 import { NodeProgressService } from './nodeProgressService';
 import { NodeStatusService } from './nodeStatusService';
 import { StudentDataService } from './studentDataService';
+import { ProjectService } from './projectService';
+import { StudentProjectTranslationService } from './studentProjectTranslationService';
 
 @Injectable()
 export class StudentStatusService {
@@ -16,6 +18,8 @@ export class StudentStatusService {
     private configService: ConfigService,
     private nodeProgressService: NodeProgressService,
     private nodeStatusService: NodeStatusService,
+    private projectService: ProjectService,
+    private projectTranslationService: StudentProjectTranslationService,
     private studentDataService: StudentDataService
   ) {
     studentDataService.nodeStatusesChanged$.subscribe(() => {
@@ -33,6 +37,10 @@ export class StudentStatusService {
           studentStatus == null
             ? new StudentStatus()
             : new StudentStatus(JSON.parse(studentStatus.status));
+        const language = this.studentStatus.language;
+        if (language != null) {
+          this.projectTranslationService.switchLanguage(language, 'system');
+        }
       });
   }
 
@@ -67,6 +75,9 @@ export class StudentStatusService {
     const computerAvatarId = this.getComputerAvatarId();
     if (computerAvatarId != null) {
       studentStatusJSON.computerAvatarId = computerAvatarId;
+    }
+    if (this.projectService.getLocale().hasTranslations()) {
+      studentStatusJSON.language = this.projectService.currentLanguage();
     }
     this.studentStatus = studentStatusJSON;
     const studentStatusParams = {

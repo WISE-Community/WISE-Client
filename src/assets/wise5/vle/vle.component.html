@@ -6,7 +6,7 @@
     <notebook-notes [config]="notebookConfig"></notebook-notes>
   </mat-drawer>
   <mat-drawer-content>
-    <top-bar></top-bar>
+    <top-bar [projectName]="project.metadata.title"></top-bar>
     <ng-container *ngTemplateOutlet="vleTemplate"></ng-container>
     <notebook-report
       *ngIf="reportEnabled"
@@ -28,7 +28,7 @@
     [ngClass]="{ 'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node' }"
   >
     <run-ended-and-locked-message *ngIf="runEndedAndLocked" class="notice" />
-    <node *ngIf="layoutState === 'node'" class="top"></node>
+    <node *ngIf="layoutState === 'node'" class="top" [node]="currentNode"></node>
     <navigation *ngIf="layoutState === 'nav'" class="top"></navigation>
   </div>
 </ng-template>

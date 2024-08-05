@@ -1,27 +1,22 @@
-<div fxLayout="column" fxLayoutGap="16px">
+<div fxLayout="column" fxLayoutGap="8px">
   <edit-component-prompt
-    [prompt]="componentContent.prompt"
+    [componentContent]="componentContent"
     (promptChangedEvent)="promptChanged($event)"
   ></edit-component-prompt>
-  <div fxLayoutGap="16px">
-    <mat-form-field class="background">
-      <mat-label i18n>Background Image (Optional)</mat-label>
-      <input
-        matInput
-        [(ngModel)]="componentContent.background"
-        (ngModelChange)="inputChange.next($event)"
-      />
-    </mat-form-field>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="chooseAsset('background')"
-      matTooltip="Choose an Image"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>insert_photo</mat-icon>
-    </button>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <translatable-input
+      [content]="componentContent"
+      key="background"
+      label="Background Image (Optional)"
+      i18n-label
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+      class="background"
+    />
+    <translatable-asset-chooser
+      [content]="componentContent"
+      key="background"
+      (defaultLanguageTextChanged)="componentChanged()"
+    />
   </div>
   <div>
     <mat-checkbox
@@ -92,40 +87,40 @@
         "
         class="content-item"
         fxLayout="row wrap"
-        fxLayoutAlign="start center"
+        fxLayoutAlign="start start"
       >
-        <mat-form-field class="content-item-setting" fxFlex="100" fxFlex.sm="40" fxFlex.gt-sm="30">
-          <mat-label i18n>Node Label</mat-label>
-          <input matInput [(ngModel)]="node.label" (ngModelChange)="inputChange.next($event)" />
-        </mat-form-field>
+        <translatable-input
+          fxFlex="100"
+          fxFlex.sm="40"
+          fxFlex.gt-sm="30"
+          [content]="node"
+          key="label"
+          label="Node Label"
+          i18n-label
+          (defaultLanguageTextChanged)="inputChange.next($event)"
+          class="content-item-setting"
+        />
         <div
           class="content-item-setting"
-          fxLayoutAlign="start center"
+          fxLayoutAlign="start start"
           fxLayoutGap="8px"
           fxFlex="100"
           fxFlex.sm="60"
           fxFlex.gt-sm="35"
         >
-          <mat-form-field fxFlex>
-            <mat-label i18n>Image</mat-label>
-            <input
-              matInput
-              [(ngModel)]="node.fileName"
-              (ngModelChange)="inputChange.next($event)"
-            />
-          </mat-form-field>
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="chooseAsset(node.id)"
-            matTooltip="Choose an Image"
-            matTooltipPosition="above"
-            i18n-matTooltip
-            aria-label="Choose an Image"
-            i18n-aria-label
-          >
-            <mat-icon>insert_photo</mat-icon>
-          </button>
+          <translatable-input
+            [content]="node"
+            key="fileName"
+            label="Image"
+            i18n-label
+            (defaultLanguageTextChanged)="inputChange.next($event)"
+            class="background"
+          />
+          <translatable-asset-chooser
+            [content]="node"
+            key="fileName"
+            (defaultLanguageTextChanged)="componentChanged()"
+          />
         </div>
         <div class="content-item-setting" fxLayoutGap="8px">
           <mat-form-field class="node-dimension">
@@ -202,14 +197,14 @@
     </div>
   </div>
   <div class="add-content" fxLayout="column" fxLayoutGap="16px">
-    <mat-form-field class="links-title">
-      <mat-label i18n>Links Title</mat-label>
-      <input
-        matInput
-        [(ngModel)]="componentContent.linksTitle"
-        (ngModelChange)="inputChange.next($event)"
-      />
-    </mat-form-field>
+    <translatable-input
+      [content]="componentContent"
+      key="linksTitle"
+      label="Links Title"
+      i18n-label
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+      class="links-title"
+    />
     <div fxLayoutAlign="start center" fxLayoutGap="16px">
       <span i18n>Links</span>
       <button
@@ -238,13 +233,19 @@
         "
         class="content-item"
         fxLayout="row wrap"
-        fxLayoutAlign="start center"
+        fxLayoutAlign="start start"
         fxLayouGap="16px"
       >
-        <mat-form-field class="content-item-setting" fxFlex="50" fxFlex.gt-sm="30">
-          <mat-label i18n>Link Label</mat-label>
-          <input matInput [(ngModel)]="link.label" (ngModelChange)="inputChange.next($event)" />
-        </mat-form-field>
+        <translatable-input
+          fxFlex="50"
+          fxFlex.gt-sm="30"
+          [content]="link"
+          key="label"
+          label="Link Label"
+          i18n-label
+          (defaultLanguageTextChanged)="inputChange.next($event)"
+          class="content-item-setting"
+        />
         <mat-form-field class="content-item-setting" fxFlex="50" fxFlex.gt-sm="30">
           <mat-label i18n>Color</mat-label>
           <input matInput [(ngModel)]="link.color" (ngModelChange)="inputChange.next($event)" />

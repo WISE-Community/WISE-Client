@@ -7,6 +7,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
 import { DialogGuidanceAuthoringModule } from './dialog-guidance-authoring.module';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 
 const componentContent = {
   id: 'i64ex48j1z',
@@ -32,8 +33,12 @@ describe('DialogGuidanceAuthoringComponent', () => {
       ],
       providers: [TeacherNodeService]
     });
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(DialogGuidanceAuthoringComponent);
     component = fixture.componentInstance;
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
       copy(componentContent)
     );

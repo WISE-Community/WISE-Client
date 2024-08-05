@@ -53,6 +53,7 @@ import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 import { NodeProgressService } from '../assets/wise5/services/nodeProgressService';
 import { CompletionService } from '../assets/wise5/services/completionService';
 import { StudentNodeService } from '../assets/wise5/services/studentNodeService';
+import { StudentProjectTranslationService } from '../assets/wise5/services/studentProjectTranslationService';
 import { AiChatService } from '../assets/wise5/components/aiChat/aiChatService';
 
 @NgModule({
@@ -110,6 +111,7 @@ import { AiChatService } from '../assets/wise5/components/aiChat/aiChatService';
     TableService,
     TabulatorDataService,
     TagService,
+    StudentProjectTranslationService,
     VLEProjectService,
     WiseLinkService
   ]

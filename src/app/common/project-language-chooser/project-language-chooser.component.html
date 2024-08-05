@@ -1,0 +1,13 @@
+<button mat-button [matMenuTriggerFor]="languageSelect" [matTooltip]="tooltip">
+  <mat-icon>arrow_drop_down</mat-icon><mat-icon>translate</mat-icon> {{ selectedLanguage.language }}
+</button>
+<mat-menu #languageSelect="matMenu">
+  <button
+    *ngFor="let language of availableLanguages"
+    mat-menu-item
+    (click)="changeLanguage(language)"
+    [class]="{ primary: language.locale === selectedLanguage.locale }"
+  >
+    {{ language.language }}
+  </button>
+</mat-menu>

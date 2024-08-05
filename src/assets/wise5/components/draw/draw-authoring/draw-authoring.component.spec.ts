@@ -6,6 +6,7 @@ import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { DrawAuthoring } from './draw-authoring.component';
 import { DrawAuthoringModule } from './draw-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 
 let component: DrawAuthoring;
 let fixture: ComponentFixture<DrawAuthoring>;
@@ -50,8 +51,12 @@ describe('DrawAuthoringComponent', () => {
         StudentTeacherCommonServicesModule
       ]
     });
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(DrawAuthoring);
     component = fixture.componentInstance;
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
       copy(componentContent)
     );
@@ -60,28 +65,7 @@ describe('DrawAuthoringComponent', () => {
   });
   moveAStampDown();
   moveAStampUp();
-  selectTheBackgroundImage();
 });
-
-function selectTheBackgroundImage() {
-  it('should select the background image', () => {
-    component.nodeId = 'node1';
-    component.componentId = 'component1';
-    expect(component.componentContent.background).toEqual('background.png');
-    spyOn(component, 'componentChanged').and.callFake(() => {});
-    const args = {
-      nodeId: 'node1',
-      componentId: 'component1',
-      target: 'background',
-      targetObject: {},
-      assetItem: {
-        fileName: 'new_background.png'
-      }
-    };
-    component.assetSelected(args);
-    expect(component.componentContent.background).toEqual('new_background.png');
-  });
-}
 
 function moveAStampUp() {
   it('should move a stamp up', () => {

@@ -145,7 +145,7 @@
     "test-coverage": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng test wise --source-map=false --browsers ChromeHeadlessNoSandbox --watch=false --code-coverage",
     "test-e2e-comment": "test-e2e assumes wise is already running.",
     "test-e2e": "node ./node_modules/protractor/bin/protractor src/assets/wise5/test-e2e/conf.js",
-    "extract-i18n": "ng extract-i18n --output-path=src"
+    "extract-i18n": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng extract-i18n --output-path=src"
   },
   "repository": {
     "type": "git",

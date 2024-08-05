@@ -12,6 +12,7 @@ import { generateRandomKey } from '../common/string/string';
 import { branchPathBackgroundColors } from '../common/color/color';
 import { reduceByUniqueId } from '../common/array/array';
 import { NodeTypeSelected } from '../authoringTool/domain/node-type-selected';
+import { ComponentContent } from '../common/ComponentContent';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -30,6 +31,8 @@ export class TeacherProjectService extends ProjectService {
   public projectSaved$: Observable<void> = this.projectSavedSource.asObservable();
   private savingProjectSource: Subject<void> = new Subject<void>();
   public savingProject$: Observable<void> = this.savingProjectSource.asObservable();
+  private uiChangedSource: Subject<void> = new Subject<void>();
+  public uiChanged$: Observable<void> = this.uiChangedSource.asObservable();
 
   constructor(
     protected branchService: BranchService,
@@ -3044,7 +3047,7 @@ export class TeacherProjectService extends ProjectService {
     return a.order - b.order;
   }
 
-  private broadcastSavingProject(): void {
+  broadcastSavingProject(): void {
     this.savingProjectSource.next();
   }
 
@@ -3092,5 +3095,19 @@ export class TeacherProjectService extends ProjectService {
 
   getNodeTypeSelected(): Signal<NodeTypeSelected> {
     return this.nodeTypeSelected.asReadonly();
+  }
+
+  getComponentsFromStep(nodeId: string): ComponentContent[] {
+    return this.getNodeById(nodeId).components;
+  }
+
+  getComponentsFromLesson(lessonId: string): ComponentContent[] {
+    return this.getNodeById(lessonId).ids.flatMap((nodeId: string) =>
+      this.getComponentsFromStep(nodeId)
+    );
+  }
+
+  uiChanged(): void {
+    this.uiChangedSource.next();
   }
 }

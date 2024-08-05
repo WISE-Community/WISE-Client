@@ -42,6 +42,9 @@ label.mat-radio-label {
 
 .choice-text-input-container, .choice-feedback-input-container {
   width: 70%;
+  mat-form-field {
+    width: 100%;
+  }
 }
 
 .reload-preview-container {

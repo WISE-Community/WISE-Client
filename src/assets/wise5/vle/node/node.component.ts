@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { ComponentState } from '../../../../app/domain/componentState';
@@ -12,6 +12,7 @@ import { NodeStatusService } from '../../services/nodeStatusService';
 import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../vleProjectService';
+import { copy } from '../../common/object/object';
 
 @Component({
   selector: 'node',
@@ -26,10 +27,9 @@ export class NodeComponent implements OnInit {
   dirtyComponentIds: any = [];
   dirtySubmitComponentIds: any = [];
   isDisabled: boolean;
-  node: Node;
+  @Input() node: Node;
   nodeContent: any;
   nodeStatus: any;
-  rubric: string;
   latestComponentState: ComponentState;
   showRubric: boolean;
   submit: boolean = false;
@@ -64,6 +64,11 @@ export class NodeComponent implements OnInit {
     private sessionService: SessionService,
     private studentDataService: StudentDataService
   ) {}
+
+  ngOnChanges(): void {
+    // copy is needed to trigger change detection for current node.components array
+    this.components = copy(this.getComponents());
+  }
 
   ngOnInit(): void {
     this.workgroupId = this.configService.getWorkgroupId();
@@ -134,7 +139,8 @@ export class NodeComponent implements OnInit {
     );
 
     this.subscriptions.add(
-      this.studentDataService.currentNodeChanged$.subscribe(() => {
+      this.studentDataService.currentNodeChanged$.subscribe(({ currentNode }) => {
+        this.node = this.projectService.getNode(currentNode.id);
         if (this.node.isEvaluateTransitionLogicOn('exitNode')) {
           this.nodeService.evaluateTransitionLogic();
         }
@@ -151,10 +157,9 @@ export class NodeComponent implements OnInit {
 
   initializeNode(): void {
     this.clearLatestComponentState();
-    this.node = this.projectService.getNode(this.studentDataService.getCurrentNodeId());
     this.nodeContent = this.projectService.getNodeById(this.node.id);
-    this.nodeStatus = this.nodeStatusService.getNodeStatusByNodeId(this.node.id);
     this.components = this.getComponents();
+    this.nodeStatus = this.nodeStatusService.getNodeStatusByNodeId(this.node.id);
     this.dirtyComponentIds = [];
     this.dirtySubmitComponentIds = [];
     this.updateComponentVisibility();
@@ -170,8 +175,7 @@ export class NodeComponent implements OnInit {
     }
 
     if (this.configService.isPreview()) {
-      this.rubric = this.node.rubric;
-      this.showRubric = this.rubric != null && this.rubric != '';
+      this.showRubric = this.node.rubric != null && this.node.rubric != '';
     }
 
     const script = this.nodeContent.script;

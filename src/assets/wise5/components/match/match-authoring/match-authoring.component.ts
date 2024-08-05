@@ -7,8 +7,6 @@ import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MatchService } from '../matchService';
-import { MatDialog } from '@angular/material/dialog';
-import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
@@ -22,7 +20,6 @@ export class MatchAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected configService: ConfigService,
-    private dialog: MatDialog,
     private matchService: MatchService,
     protected nodeService: TeacherNodeService,
     protected projectAssetService: ProjectAssetService,
@@ -266,30 +263,8 @@ export class MatchAuthoring extends AbstractComponentAuthoring {
     this.componentChanged();
   }
 
-  chooseChoiceAsset(choice: any): void {
-    this.openAssetChooserHelper('choice', choice);
-  }
-
-  chooseBucketAsset(bucket: any): void {
-    this.openAssetChooserHelper('bucket', bucket);
-  }
-
-  openAssetChooserHelper(target: string, targetObject: any): void {
-    new AssetChooser(this.dialog, this.nodeId, this.componentId)
-      .open(target, targetObject)
-      .afterClosed()
-      .pipe(filter((data) => data != null))
-      .subscribe((data: any) => {
-        return this.assetSelected(data);
-      });
-  }
-
-  assetSelected({ nodeId, componentId, assetItem, target, targetObject }): void {
-    super.assetSelected({ nodeId, componentId, assetItem, target });
-    if (target === 'choice' || target === 'bucket') {
-      targetObject.value = '<img src="' + assetItem.fileName + '"/>';
-      this.componentChanged();
-    }
+  processSelectedAsset(value: string): string {
+    return `<img src="${value}" alt="${value}" />`;
   }
 
   getChoiceTextById(choiceId: string): string {

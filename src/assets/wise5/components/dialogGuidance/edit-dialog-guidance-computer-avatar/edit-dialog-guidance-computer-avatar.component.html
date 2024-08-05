@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutGap="16px">
+<div class="edit-dialog-guidance" fxLayout="column" fxLayoutGap="16px">
   <mat-checkbox
     color="primary"
     [(ngModel)]="computerAvatarSettings.useGlobalComputerAvatar"
@@ -6,41 +6,42 @@
     i18n
     >Use Global Computer Avatar</mat-checkbox
   >
-  <mat-form-field class="avatar-label" appearance="fill">
-    <mat-label i18n>Computer Avatar Label</mat-label>
-    <input
-      matInput
-      [(ngModel)]="computerAvatarSettings.label"
-      (ngModelChange)="componentChanged()"
-      placeholder="Thought Buddy"
-      i18n-placeholder
-    />
-    <mat-hint i18n>This is what the computer avatar will be referred as</mat-hint>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label i18n>Computer Avatar Prompt</mat-label>
-    <textarea
-      matInput
-      [(ngModel)]="computerAvatarSettings.prompt"
-      (ngModelChange)="componentChanged()"
-      placeholder="Discuss your answer with a thought buddy!"
-      i18n-placeholder
-      cdkTextareaAutosize
-    >
-    </textarea>
-    <mat-hint i18n>This text will introduce the avatar selection task</mat-hint>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label i18n>Computer Avatar Initial Response</mat-label>
-    <input
-      matInput
-      [(ngModel)]="computerAvatarSettings.initialResponse"
-      (ngModelChange)="componentChanged()"
-      placeholder="Hi there! It's nice to meet you. What do you think about..."
-      i18n-placeholder
-    />
-    <mat-hint i18n>Computer avatar will initiate dialog with this text</mat-hint>
-  </mat-form-field>
+  <translatable-input
+    [content]="computerAvatarSettings"
+    key="label"
+    label="Computer Avatar Label"
+    i18n-label
+    placeholder="Thought Buddy"
+    i18n-placeholder
+    (defaultLanguageTextChanged)="componentChanged()"
+    class="name"
+    hint="This is what the computer avatar will be referred to as"
+    i18n-hint
+  />
+  <translatable-input
+    [content]="computerAvatarSettings"
+    key="prompt"
+    label="Computer Avatar Prompt"
+    i18n-label
+    placeholder="Discuss your answer with a thought buddy!"
+    i18n-placeholder
+    (defaultLanguageTextChanged)="componentChanged()"
+    class="name"
+    hint="This text will introduce the avatar selection task"
+    i18n-hint
+  />
+  <translatable-input
+    [content]="computerAvatarSettings"
+    key="initialResponse"
+    label="Computer Avatar Initial Response"
+    i18n-label
+    placeholder="Hi there! It's nice to meet you. What do you think about..."
+    i18n-placeholder
+    (defaultLanguageTextChanged)="componentChanged()"
+    class="name"
+    hint="Computer avatar will initiate dialog with this text"
+    i18n-hint
+  />
   <div class="avatars">
     <div class="mat-subtitle-1">Computer avatars students can choose:</div>
     <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">

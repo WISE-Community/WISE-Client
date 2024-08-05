@@ -16,10 +16,15 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MultipleChoiceAuthoringHarness } from './multiple-choice-authoring.harness';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { ProjectService } from '../../../services/projectService';
 
 let component: MultipleChoiceAuthoring;
 let fixture: ComponentFixture<MultipleChoiceAuthoring>;
 let multipleChoiceAuthoringHarness: MultipleChoiceAuthoringHarness;
+let projectService: ProjectService;
+let teacherProjectService: TeacherProjectService;
 
 describe('MultipleChoiceAuthoringComponent', () => {
   beforeEach(
@@ -28,6 +33,7 @@ describe('MultipleChoiceAuthoringComponent', () => {
         declarations: [EditComponentPrompt, MultipleChoiceAuthoring],
         imports: [
           BrowserAnimationsModule,
+          ComponentAuthoringModule,
           FormsModule,
           HttpClientTestingModule,
           MatDialogModule,
@@ -44,6 +50,13 @@ describe('MultipleChoiceAuthoringComponent', () => {
   );
 
   beforeEach(async () => {
+    projectService = TestBed.inject(ProjectService);
+    teacherProjectService = TestBed.inject(TeacherProjectService);
+    const locale = new ProjectLocale({ default: 'en-US' });
+    spyOn(teacherProjectService, 'getLocale').and.returnValue(locale);
+    spyOn(teacherProjectService, 'isDefaultLocale').and.returnValue(true);
+    spyOn(projectService, 'getLocale').and.returnValue(locale);
+    projectService.setCurrentLanguage(locale.getDefaultLanguage());
     fixture = TestBed.createComponent(MultipleChoiceAuthoring);
     component = fixture.componentInstance;
     component.componentContent = {

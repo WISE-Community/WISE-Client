@@ -13,7 +13,10 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { CopyNodesService } from '../../services/copyNodesService';
+import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { provideRouter } from '@angular/router';
+import { CopyTranslationsService } from '../../services/copyTranslationsService';
+import { TeacherProjectTranslationService } from '../../services/teacherProjectTranslationService';
 
 const nodeId1 = 'nodeId1';
 const node = { id: nodeId1 };
@@ -37,10 +40,13 @@ describe('ProjectAuthoringStepComponent', () => {
       providers: [
         ClassroomStatusService,
         CopyNodesService,
+        CopyTranslationsService,
         DeleteNodeService,
+        DeleteTranslationsService,
         provideRouter([]),
         TeacherDataService,
         TeacherProjectService,
+        TeacherProjectTranslationService,
         TeacherWebSocketService
       ]
     });
@@ -49,7 +55,9 @@ describe('ProjectAuthoringStepComponent', () => {
     component.step = node;
     const idToNode = {};
     idToNode[nodeId1] = node;
-    TestBed.inject(TeacherProjectService).idToNode = idToNode;
+    const projectService = TestBed.inject(TeacherProjectService);
+    projectService.idToNode = idToNode;
+    spyOn(projectService, 'isDefaultLocale').and.returnValue(true);
     fixture.detectChanges();
   });
 

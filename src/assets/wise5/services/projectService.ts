@@ -1,7 +1,7 @@
 'use strict';
 
 import { ConfigService } from './configService';
-import { Injectable } from '@angular/core';
+import { Injectable, WritableSignal, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, tap } from 'rxjs';
 import { Node } from '../common/Node';
@@ -18,6 +18,8 @@ import { ReferenceComponent } from '../../../app/domain/referenceComponent';
 import { QuestionBank } from '../components/peerChat/peer-chat-question-bank/QuestionBank';
 import { DynamicPrompt } from '../directives/dynamic-prompt/DynamicPrompt';
 import { Component } from '../common/Component';
+import { ProjectLocale } from '../../../app/domain/projectLocale';
+import { Language } from '../../../app/domain/language';
 
 @Injectable()
 export class ProjectService {
@@ -25,6 +27,9 @@ export class ProjectService {
   additionalProcessingFunctionsMap: any = {};
   allPaths: string[][] = [];
   applicationNodes: any = [];
+  private currentLanguageSignal: WritableSignal<Language> = signal(null);
+  readonly currentLanguage = this.currentLanguageSignal.asReadonly();
+
   flattenedProjectAsNodeIds: any = null;
   groupNodes: any[] = [];
   idToNode: any = {};
@@ -38,6 +43,7 @@ export class ProjectService {
   nodeIdToIsInBranchPath: any = {};
   nodeIdsInAnyBranch: any = [];
   nodeIdToBranchPathLetter: any = {};
+  private originalProject: any;
   project: any = null;
   rootNode: any = null;
   transitions: Transition[] = [];
@@ -51,6 +57,10 @@ export class ProjectService {
     protected configService: ConfigService,
     protected pathService: PathService
   ) {}
+
+  getProject(): any {
+    return this.project;
+  }
 
   setProject(project: any): void {
     this.project = project;
@@ -228,6 +238,9 @@ export class ProjectService {
     if (this.project.projectAchievements != null) {
       this.achievements = this.project.projectAchievements;
     }
+    if (this.currentLanguage() == null) {
+      this.currentLanguageSignal.set(this.getLocale().getDefaultLanguage());
+    }
     this.broadcastProjectParsed();
   }
 
@@ -239,6 +252,10 @@ export class ProjectService {
   instantiateDefaults(): void {
     this.project.nodes = this.project.nodes ? this.project.nodes : [];
     this.project.inactiveNodes = this.project.inactiveNodes ? this.project.inactiveNodes : [];
+    this.project.metadata.locale = this.project.metadata.locale ?? {
+      default: 'en_US',
+      supported: []
+    };
   }
 
   private calculateNodeOrderOfProject(): void {
@@ -783,6 +800,8 @@ export class ProjectService {
   retrieveProject(): Observable<any> {
     return this.makeProjectRequest().pipe(
       tap((projectJSON: any) => {
+        this.originalProject = projectJSON;
+        this.setCurrentLanguage(null);
         this.setProject(projectJSON);
         return projectJSON;
       })
@@ -792,6 +811,7 @@ export class ProjectService {
   retrieveProjectWithoutParsing(): Observable<any> {
     return this.makeProjectRequest().pipe(
       tap((projectJSON: any) => {
+        this.originalProject = projectJSON;
         this.project = projectJSON;
         this.metadata = projectJSON.metadata;
         return projectJSON;
@@ -803,6 +823,10 @@ export class ProjectService {
     const projectURL = this.configService.getConfigParam('projectURL');
     const headers = new HttpHeaders().set('cache-control', 'no-cache');
     return this.http.get(projectURL, { headers: headers });
+  }
+
+  getOriginalProject(): any {
+    return this.originalProject;
   }
 
   getThemePath(): string {
@@ -1395,7 +1419,9 @@ export class ProjectService {
 
   calculateComponentIdToHasWork(
     components: ComponentContent[]
-  ): { [componentId: string]: boolean } {
+  ): {
+    [componentId: string]: boolean;
+  } {
     const componentIdToHasWork: { [componentId: string]: boolean } = {};
     for (const component of components) {
       componentIdToHasWork[component.id] = this.componentHasWork(component);
@@ -1997,6 +2023,18 @@ export class ProjectService {
     const nodeId = content.getReferenceNodeId();
     const componentId = content.getReferenceComponentId();
     return new Component(this.getComponent(nodeId, componentId), nodeId);
+  }
+
+  getLocale(): ProjectLocale {
+    return new ProjectLocale(this.project.metadata.locale);
+  }
+
+  setCurrentLanguage(language: Language): void {
+    this.currentLanguageSignal.set(language);
+  }
+
+  isDefaultLocale(): boolean {
+    return this.getLocale().isDefaultLocale(this.currentLanguage().locale);
   }
 
   getSpeechToTextSettings(): any {

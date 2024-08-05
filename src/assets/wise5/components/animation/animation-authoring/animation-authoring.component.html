@@ -1,5 +1,5 @@
 <edit-component-prompt
-  [prompt]="componentContent.prompt"
+  [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
 ></edit-component-prompt>
 <div fxLayout="row">
@@ -127,28 +127,29 @@
       fxLayoutAlign="start center"
       class="object-image-input-container"
     >
-      <mat-form-field class="object-image-input">
-        <mat-label i18n>Image</mat-label>
-        <input matInput [(ngModel)]="object.image" (ngModelChange)="inputChange.next($event)" />
-      </mat-form-field>
-      <button
-        mat-raised-button
-        color="primary"
-        class="button"
-        (click)="chooseImage(object)"
-        matTooltip="Choose an Image"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Image"
-        i18n-aria-label
-      >
-        <mat-icon>insert_photo</mat-icon>
-      </button>
+      <translatable-input
+        [content]="object"
+        key="image"
+        label="Image"
+        i18n-label
+        (defaultLanguageTextChanged)="inputChange.next($event)"
+        class="object-image-input"
+      />
+      <translatable-asset-chooser
+        [content]="object"
+        key="image"
+        (defaultLanguageTextChanged)="componentChanged()"
+      />
     </div>
-    <mat-form-field *ngIf="object.type === 'text'" class="object-text-input">
-      <mat-label i18n>Text</mat-label>
-      <input matInput [(ngModel)]="object.text" (ngModelChange)="inputChange.next($event)" />
-    </mat-form-field>
+    <translatable-input
+      *ngIf="object.type === 'text'" 
+      [content]="object"
+      key="text"
+      label="Text"
+      i18n-label
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+      class="object-text-input"
+    />
     <span fxFlex></span>
     <button
       mat-raised-button
@@ -215,48 +216,34 @@
     </mat-form-field>
   </div>
   <div *ngIf="object.type === 'image'" fxLayout="row" fxLayoutAlign="start center">
-    <mat-form-field class="image-moving-input">
-      <mat-label i18n>Image Moving Left</mat-label>
-      <input
-        matInput
-        [(ngModel)]="object.imageMovingLeft"
-        (ngModelChange)="inputChange.next($event)"
-      />
-    </mat-form-field>
-    <button
-      mat-raised-button
-      color="primary"
+    <translatable-input
+      [content]="object"
+      key="imageMovingLeft"
+      label="Image Moving Left"
+      i18n-label
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+      class="image-moving-input"
+    />
+    <translatable-asset-chooser
+      [content]="object"
+      key="imageMovingLeft"
+      (defaultLanguageTextChanged)="componentChanged()"
       class="image-button"
-      (click)="chooseImage(object, 'imageMovingLeft')"
-      matTooltip="Choose an Image"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Choose an Image"
-      i18n-aria-label
-    >
-      <mat-icon>insert_photo</mat-icon>
-    </button>
-    <mat-form-field class="image-moving-input">
-      <mat-label i18n>Image Moving Right</mat-label>
-      <input
-        matInput
-        [(ngModel)]="object.imageMovingRight"
-        (ngModelChange)="inputChange.next($event)"
-      />
-    </mat-form-field>
-    <button
-      mat-raised-button
-      color="primary"
+    />
+    <translatable-input
+      [content]="object"
+      key="imageMovingRight"
+      label="Image Moving Right"
+      i18n-label
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+      class="image-moving-input"
+    />
+    <translatable-asset-chooser
+      [content]="object"
+      key="imageMovingRight"
+      (defaultLanguageTextChanged)="componentChanged()"
       class="image-button"
-      (click)="chooseImage(object, 'imageMovingRight')"
-      matTooltip="Choose an Image"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Choose an Image"
-      i18n-aria-label
-    >
-      <mat-icon>insert_photo</mat-icon>
-    </button>
+    />
   </div>
   <div fxLayout="row">
     <mat-form-field class="image-location">
@@ -358,23 +345,20 @@
           (ngModelChange)="inputChange.next($event)"
         />
       </mat-form-field>
-      <mat-form-field class="data-point-image">
-        <mat-label i18n>Change to Image (Optional)</mat-label>
-        <input matInput [(ngModel)]="dataPoint.image" (ngModelChange)="inputChange.next($event)" />
-      </mat-form-field>
-      <button
-        mat-raised-button
-        color="primary"
+      <translatable-input
+        [content]="dataPoint"
+        key="image"
+        label="Change to Image (Optional)"
+        i18n-label
+        (defaultLanguageTextChanged)="inputChange.next($event)"
+        class="data-point-image"
+      />
+      <translatable-asset-chooser
+        [content]="dataPoint"
+        key="image"
+        (defaultLanguageTextChanged)="componentChanged()"
         class="image-button"
-        (click)="chooseImage(dataPoint)"
-        matTooltip="Choose an Image"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Choose an Image"
-        i18n-aria-label
-      >
-        <mat-icon>insert_photo</mat-icon>
-      </button>
+      />
       <div>
         <button
           mat-raised-button

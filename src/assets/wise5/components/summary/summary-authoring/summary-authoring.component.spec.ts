@@ -18,6 +18,8 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { SummaryAuthoring } from './summary-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 
 export class MockConfigService {}
 
@@ -32,6 +34,7 @@ describe('SummaryAuthoringComponent', () => {
         BrowserAnimationsModule,
         BrowserModule,
         CommonModule,
+        ComponentAuthoringModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
@@ -50,10 +53,14 @@ describe('SummaryAuthoringComponent', () => {
         TeacherProjectService
       ]
     });
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(SummaryAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
     component.componentContent = copy(componentContent);
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
     getComponentSpy.and.returnValue(componentContent);
     spyOn(component, 'componentChanged');

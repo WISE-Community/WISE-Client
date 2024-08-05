@@ -4,26 +4,20 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { VLEProjectService } from '../../../vle/vleProjectService';
 import { NavigationComponent } from './navigation.component';
 
-class MockVLEProjectService {
-  getProjectRootNode() {
-    return { ids: [] };
-  }
-}
-
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
   let fixture: ComponentFixture<NavigationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, NavigationComponent, StudentTeacherCommonServicesModule],
-      providers: [{ provide: VLEProjectService, useClass: MockVLEProjectService }]
+      imports: [HttpClientTestingModule, NavigationComponent, StudentTeacherCommonServicesModule]
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NavigationComponent);
     component = fixture.componentInstance;
+    spyOn(TestBed.inject(VLEProjectService), 'getProjectRootNode').and.returnValue({ ids: [] });
     fixture.detectChanges();
   });
 

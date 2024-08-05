@@ -15,6 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EditDialogGuidanceComputerAvatarComponent } from '../../dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 
 describe('AiChatAuthoringComponent', () => {
   let component: AiChatAuthoringComponent;
@@ -29,6 +31,7 @@ describe('AiChatAuthoringComponent', () => {
       ],
       imports: [
         BrowserAnimationsModule,
+        ComponentAuthoringModule,
         FormsModule,
         HttpClientTestingModule,
         MatButtonToggleModule,
@@ -41,7 +44,11 @@ describe('AiChatAuthoringComponent', () => {
       ],
       providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
     });
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(AiChatAuthoringComponent);
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     component = fixture.componentInstance;
     component.componentContent = {
       id: 'component1',

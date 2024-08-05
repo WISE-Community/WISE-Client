@@ -6,6 +6,9 @@ import { ConfigService } from '../../../services/configService';
 import { SessionService } from '../../../services/sessionService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Router } from '@angular/router';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { Language } from '../../../../../app/domain/language';
+import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 
 @Component({
@@ -16,12 +19,15 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 export class TopBarComponent implements OnInit {
   avatarColor: any;
   contextPath: string;
+  protected hasTranslations: boolean;
   @Input() logoPath: string;
   @Input() projectId: number;
   projectInfo: string;
+  protected projectLocale: ProjectLocale;
   @Input() projectTitle: string;
   @Input() runId: number;
   @Input() runCode: string;
+  private subscriptions = new Subscription();
   userInfo: any;
   workgroupId: number;
 
@@ -41,10 +47,27 @@ export class TopBarComponent implements OnInit {
     this.avatarColor = getAvatarColorForWorkgroupId(this.workgroupId);
     this.userInfo = this.configService.getMyUserInfo();
     this.contextPath = this.configService.getContextPath();
+    this.subscriptions.add(
+      this.projectService.projectSaved$.subscribe(() => this.updateTranslationModel())
+    );
+  }
+
+  private updateTranslationModel(): void {
+    this.projectLocale = this.projectService.getLocale();
+    this.hasTranslations = this.projectLocale.hasTranslations();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   ngOnChanges() {
-    this.projectInfo = this.getProjectInfo();
+    if (this.projectId) {
+      this.projectInfo = this.getProjectInfo();
+      this.updateTranslationModel();
+    } else {
+      this.hasTranslations = false;
+    }
   }
 
   private getProjectInfo(): string {
@@ -92,5 +115,10 @@ export class TopBarComponent implements OnInit {
 
   protected logOut(): void {
     this.sessionService.logOut();
+  }
+
+  protected changeLanguage(language: Language): void {
+    this.projectService.setCurrentLanguage(language);
+    this.projectService.uiChanged();
   }
 }
