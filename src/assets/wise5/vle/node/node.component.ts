@@ -138,17 +138,21 @@ export class NodeComponent implements OnInit {
       })
     );
 
-    this.studentDataService.currentNodeChanged$.subscribe(({ currentNode }) => {
-      this.node = this.projectService.getNode(currentNode.id);
-      this.nodeUnloaded(this.node.id);
-      if (this.node.isEvaluateTransitionLogicOn('exitNode')) {
-        this.nodeService.evaluateTransitionLogic();
-      }
-      this.initializeNode();
-    });
-    this.studentDataService.nodeStatusesChanged$.subscribe(() => {
-      this.updateComponentVisibility();
-    });
+    this.subscriptions.add(
+      this.studentDataService.currentNodeChanged$.subscribe(({ currentNode }) => {
+        this.node = this.projectService.getNode(currentNode.id);
+        if (this.node.isEvaluateTransitionLogicOn('exitNode')) {
+          this.nodeService.evaluateTransitionLogic();
+        }
+        this.initializeNode();
+      })
+    );
+
+    this.subscriptions.add(
+      this.studentDataService.nodeStatusesChanged$.subscribe(() => {
+        this.updateComponentVisibility();
+      })
+    );
   }
 
   initializeNode(): void {
@@ -164,28 +168,11 @@ export class NodeComponent implements OnInit {
       this.nodeService.evaluateTransitionLogic();
     }
 
-    const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
-      this.node.id
-    );
+    const latestComponentState =
+      this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(this.node.id);
     if (latestComponentState) {
       this.latestComponentState = latestComponentState;
     }
-
-    const componentId = null;
-    const componentType = null;
-    const category = 'Navigation';
-    const event = 'nodeEntered';
-    const eventData = {
-      nodeId: this.node.id
-    };
-    this.studentDataService.saveVLEEvent(
-      this.node.id,
-      componentId,
-      componentType,
-      category,
-      event,
-      eventData
-    );
 
     if (this.configService.isPreview()) {
       this.showRubric = this.node.rubric != null && this.node.rubric != '';
@@ -449,29 +436,10 @@ export class NodeComponent implements OnInit {
     );
   }
 
-  private nodeUnloaded(nodeId: string): void {
-    const componentId = null;
-    const componentType = null;
-    const category = 'Navigation';
-    const event = 'nodeExited';
-    const eventData = {
-      nodeId: nodeId
-    };
-    this.studentDataService.saveVLEEvent(
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      eventData
-    );
-  }
-
   private registerExitListener(): void {
     this.subscriptions.add(
       this.sessionService.exit$.subscribe(() => {
         this.stopAutoSaveInterval();
-        this.nodeUnloaded(this.node.id);
       })
     );
   }
