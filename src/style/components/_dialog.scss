@@ -21,7 +21,7 @@ mat-dialog-container.mat-mdc-dialog-container {
   }
 
   .mat-mdc-dialog-content {
-    font-size: mat.font-size($wise-typography, 'body-1');
+    font-size: mat.m2-font-size($wise-typography, 'body-1');
     padding: 0 16px;
     color: inherit;
     font-weight: 400;
@@ -63,7 +63,7 @@ mat-dialog-container.mat-mdc-dialog-container {
 
 .cdk-overlay-pane {
   max-width: 90vw !important;
-  
+
   @media (max-width: breakpoint('xs.max')) {
     max-width: 95vw !important;
   }

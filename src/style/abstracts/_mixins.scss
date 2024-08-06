@@ -10,13 +10,13 @@
 
   h1 {
     .mat-icon {
-      @include mat-icon-size(mat.font-size($wise-typography, 'headline-5'));
+      @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-5'));
     }
   }
 
   h2 {
     .mat-icon {
-      @include mat-icon-size(mat.font-size($wise-typography, 'headline-6'));
+      @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-6'));
     }
   }
 
@@ -24,7 +24,7 @@
     margin-bottom: 36px;
 
     .mat-icon {
-      @include mat-icon-size(mat.font-size($wise-typography, 'headline-4'));
+      @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-4'));
     }
   }
 
@@ -32,7 +32,7 @@
     margin-bottom: 40px;
 
     .mat-icon {
-      @include mat-icon-size(mat.font-size($wise-typography, 'headline-3'));
+      @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-3'));
     }
   }
 
@@ -64,7 +64,7 @@
   }
 
   .mat-mdc-standard-chip .mdc-evolution-chip__text-label {
-    font-size: mat.font-size($wise-typography, 'button');
+    font-size: mat.m2-font-size($wise-typography, 'button');
   }
 
   .mat-divider-horizontal {
@@ -131,7 +131,7 @@
   }
 
   .mat-mdc-option, .mat-mdc-optgroup-label {
-    @include mat.typography-level($wise-typography, 'caption');
+    @include mat.m2-typography-level($wise-typography, 'caption');
   }
 
   .mdc-text-field {
@@ -145,10 +145,10 @@
   }
 
   .mat-toolbar {
-    @include mat.typography-level($wise-typography, 'subtitle-1');
+    @include mat.m2-typography-level($wise-typography, 'subtitle-1');
 
     h1, h2, h3, h4, h5 ,h6 {
-      @include mat.typography-level($wise-typography, 'subtitle-1');
+      @include mat.m2-typography-level($wise-typography, 'subtitle-1');
     }
   }
 
@@ -267,12 +267,12 @@
   }
   /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
   .mat-form-field-prefix, .mat-form-field-suffix {
-    color: mat.get-color-from-palette($foreground, 'secondary-text');
+    color: mat.m2-get-color-from-palette($foreground, 'secondary-text');
   }
 
   figure {
     &.image {
-      border: 1px solid mat.get-color-from-palette($background, 'status-bar');
+      border: 1px solid mat.m2-get-color-from-palette($background, 'status-bar');
     }
   }
 

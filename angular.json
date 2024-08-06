@@ -9,7 +9,7 @@
       "projectType": "application",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
               "angular",
@@ -23,9 +23,7 @@
               "compute-covariance"
             ],
             "aot": true,
-            "outputPath": {
-              "base": "dist"
-            },
+            "outputPath": "dist",
             "index": "src/index.html",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": [
@@ -66,7 +64,7 @@
               ]
             },
             "scripts": [],
-            "browser": "src/main.ts"
+            "main": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -90,9 +88,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputPath": {
-                "base": "dist/"
-              },
+              "outputPath": "dist",
               "baseHref": "/"
             },
             "development": {
@@ -139,33 +135,33 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "wise:build",
+            "buildTarget": "wise:build",
             "publicHost": "localhost:4200"
           },
           "configurations": {
             "production": {
-              "browserTarget": "wise:build:production"
+              "buildTarget": "wise:build:production"
             },
             "development": {
-              "browserTarget": "wise:build:development"
+              "buildTarget": "wise:build:development"
             },
             "es": {
-              "browserTarget": "wise:build:es"
+              "buildTarget": "wise:build:es"
             },
             "ja": {
-              "browserTarget": "wise:build:ja"
+              "buildTarget": "wise:build:ja"
             },
             "pt": {
-              "browserTarget": "wise:build:pt"
+              "buildTarget": "wise:build:pt"
             },
             "tr": {
-              "browserTarget": "wise:build:tr"
+              "buildTarget": "wise:build:tr"
             },
             "zh-Hans": {
-              "browserTarget": "wise:build:zh-Hans"
+              "buildTarget": "wise:build:zh-Hans"
             },
             "zh-Hant": {
-              "browserTarget": "wise:build:zh-Hant"
+              "buildTarget": "wise:build:zh-Hant"
             }
           },
           "defaultConfiguration": "development"
@@ -173,7 +169,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "wise:build"
+            "buildTarget": "wise:build"
           }
         },
         "test": {

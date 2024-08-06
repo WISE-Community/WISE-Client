@@ -1,6 +1,6 @@
 'use strict';
 
-import * as $ from 'jquery';
+import $ from 'jquery';
 import * as html2canvas from 'html2canvas';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';

@@ -7,6 +7,6 @@
 
 h2 {
   .mat-icon {
-    @include mat-icon-size(mat.font-size($wise-typography, 'headline-4'));
+    @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-4'));
   }
 }
