@@ -11,12 +11,16 @@ import { BranchPathAuthoringComponent } from '../branch-path-authoring/branch-pa
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { DeleteBranchService } from '../../services/deleteBranchService';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   imports: [
     BranchPathAuthoringComponent,
+    CommonModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
     RouterModule,
     SelectBranchCriteriaComponent,
@@ -33,6 +37,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
   private items: any;
   protected mergeStepTitle: string;
   private node: any;
+  protected submitting: boolean;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -208,8 +213,51 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
   }
 
   protected async submit(): Promise<void> {
-    alert(JSON.stringify(this.getBranchParams(), null, 2));
-    // TODO: update branch
-    // this.router.navigate(['..'], { relativeTo: this.route });
+    this.submitting = true;
+    const params = this.getBranchParams();
+    this.updateTransitions(params);
+    this.updateTransitionLogic(params);
+    this.saveProject();
+  }
+
+  private updateTransitions(params: any): void {
+    for (let x = 0; x < this.node.transitionLogic.transitions.length; x++) {
+      const transition = this.node.transitionLogic.transitions[x];
+      if (params.criteria === this.SCORE_VALUE) {
+        transition.criteria = [
+          {
+            name: this.SCORE_VALUE,
+            params: {
+              componentId: params.componentId,
+              nodeId: params.nodeId,
+              scores: [params.paths[x]]
+            }
+          }
+        ];
+      } else if (params.criteria === this.CHOICE_CHOSEN_VALUE) {
+        transition.criteria = [
+          {
+            name: this.CHOICE_CHOSEN_VALUE,
+            params: {
+              choiceIds: [params.paths[x]],
+              componentId: params.componentId,
+              nodeId: params.nodeId
+            }
+          }
+        ];
+      } else {
+        delete transition.criteria;
+      }
+    }
+  }
+
+  private updateTransitionLogic(params: any): void {
+    if (params.criteria === this.WORKGROUP_ID_VALUE || params.criteria === this.RANDOM_VALUE) {
+      this.node.transitionLogic.howToChooseAmongAvailablePaths = params.criteria;
+      this.node.transitionLogic.whenToChoosePath = 'enterNode';
+    } else {
+      this.node.transitionLogic.howToChooseAmongAvailablePaths = this.RANDOM_VALUE;
+      this.node.transitionLogic.whenToChoosePath = 'studentDataChanged';
+    }
   }
 }
