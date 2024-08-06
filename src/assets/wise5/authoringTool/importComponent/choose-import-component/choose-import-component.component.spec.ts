@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ChooseImportComponentComponent } from './choose-import-component.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ConfigService } from '../../../services/configService';
 import { ProjectLibraryService } from '../../../services/projectLibraryService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -18,6 +18,7 @@ import { CopyNodesService } from '../../../services/copyNodesService';
 import { InsertComponentService } from '../../../services/insertComponentService';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { RouterTestingModule } from '@angular/router/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: ChooseImportComponentComponent;
 const component1 = { id: 'component1', type: 'OpenResponse' };
@@ -41,18 +42,15 @@ let projectService: TeacherProjectService;
 describe('ChooseImportComponentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ChooseImportComponentComponent],
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [ChooseImportComponentComponent],
+    imports: [BrowserAnimationsModule,
         FormsModule,
-        HttpClientTestingModule,
         MatDialogModule,
         MatFormFieldModule,
         MatSelectModule,
         RouterTestingModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [
+        StudentTeacherCommonServicesModule],
+    providers: [
         ClassroomStatusService,
         ConfigService,
         CopyNodesService,
@@ -62,9 +60,11 @@ describe('ChooseImportComponentComponent', () => {
         ProjectLibraryService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
-      ]
-    }).compileComponents();
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

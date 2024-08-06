@@ -3,7 +3,7 @@ import { EditNodeRubricComponent } from './edit-node-rubric.component';
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherDataService } from '../../../services/teacherDataService';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
@@ -13,6 +13,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: EditNodeRubricComponent;
 let fixture: ComponentFixture<EditNodeRubricComponent>;
@@ -22,29 +23,28 @@ const nodeId1: string = 'node1';
 describe('EditNodeRubricComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditNodeRubricComponent],
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
+    declarations: [EditNodeRubricComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [MatDialogModule,
         MatIconModule,
         RouterTestingModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [
+        StudentTeacherCommonServicesModule],
+    providers: [
         ClassroomStatusService,
         ConfigService,
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,
         {
-          provide: ActivatedRoute,
-          useValue: {
-            parent: { parent: { params: of({ nodeId: 'node1' }) } }
-          }
-        }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+            provide: ActivatedRoute,
+            useValue: {
+                parent: { parent: { params: of({ nodeId: 'node1' }) } }
+            }
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

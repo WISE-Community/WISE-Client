@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
@@ -31,6 +31,7 @@ import { PauseScreenService } from '../../../services/pauseScreenService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { PeerChatComponent } from '../PeerChatComponent';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: PeerChatStudentComponent;
 const componentId = 'component1';
@@ -116,21 +117,18 @@ const peerGroup = new PeerGroup(
 describe('PeerChatStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [PeerChatStudentComponent],
+    imports: [BrowserAnimationsModule,
         ComponentHeaderComponent,
         FormsModule,
-        HttpClientTestingModule,
         MatCardModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
         PeerChatModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [PeerChatStudentComponent],
-      providers: [
+        StudentTeacherCommonServicesModule],
+    providers: [
         AnnotationService,
         ComponentService,
         ConfigService,
@@ -143,9 +141,11 @@ describe('PeerChatStudentComponent', () => {
         StudentAssetService,
         StudentDataService,
         StudentWebSocketService,
-        TagService
-      ]
-    }).compileComponents();
+        TagService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

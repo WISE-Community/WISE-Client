@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -19,6 +19,7 @@ import { PeerChatAuthoringComponent } from './peer-chat-authoring.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const componentContent = {
   id: 'qn3savv52r',
@@ -46,28 +47,27 @@ describe('PeerChatAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [EditComponentPrompt, PeerChatAuthoringComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
         FormsModule,
-        HttpClientTestingModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
         MatSelectModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [EditComponentPrompt, PeerChatAuthoringComponent],
-      providers: [
+        StudentTeacherCommonServicesModule],
+    providers: [
         ConfigService,
         { provide: TeacherNodeService, useClass: MockNodeService },
         ProjectAssetService,
         ProjectService,
         SessionService,
-        TeacherProjectService
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

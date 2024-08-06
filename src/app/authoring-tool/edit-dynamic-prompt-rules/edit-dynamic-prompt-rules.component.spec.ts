@@ -1,5 +1,5 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,6 +7,7 @@ import { FeedbackRule } from '../../../assets/wise5/components/common/feedbackRu
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { EditDynamicPromptRulesComponent } from './edit-dynamic-prompt-rules.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: EditDynamicPromptRulesComponent;
 let fixture: ComponentFixture<EditDynamicPromptRulesComponent>;
@@ -14,16 +15,13 @@ let fixture: ComponentFixture<EditDynamicPromptRulesComponent>;
 describe('EditDynamicPromptRulesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditDynamicPromptRulesComponent],
-      imports: [
-        DragDropModule,
-        HttpClientTestingModule,
+    declarations: [EditDynamicPromptRulesComponent],
+    imports: [DragDropModule,
         MatDialogModule,
         MatIconModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [TeacherProjectService]
-    }).compileComponents();
+        StudentTeacherCommonServicesModule],
+    providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

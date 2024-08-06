@@ -1,20 +1,22 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { NotebookItemComponent } from './notebook-item.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: NotebookItemComponent;
 
 describe('NotebookItemComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [NotebookItemComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+    declarations: [NotebookItemComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     const fixture = TestBed.createComponent(NotebookItemComponent);
     component = fixture.componentInstance;
     component.notebookUpdatedSubscription = new Subscription();

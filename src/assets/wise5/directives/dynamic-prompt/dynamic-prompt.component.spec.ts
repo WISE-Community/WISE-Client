@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { of } from 'rxjs';
@@ -11,6 +11,7 @@ import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 import { DynamicPromptComponent } from './dynamic-prompt.component';
 import { DynamicPrompt } from './DynamicPrompt';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: DynamicPromptComponent;
 let fixture: ComponentFixture<DynamicPromptComponent>;
@@ -25,13 +26,11 @@ const promptScore2: string = 'This is the prompt when you get a score of 2.';
 describe('DynamicPromptComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        DynamicPromptComponent,
-        HttpClientTestingModule,
+    imports: [DynamicPromptComponent,
         MatDialogModule,
-        StudentTeacherCommonServicesModule
-      ]
-    }).compileComponents();
+        StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

@@ -2,10 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentStudent } from './component-student.component';
 import { NotebookService } from '../services/notebookService';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../app/student-teacher-common-services.module';
 import { Component as WISEComponent } from '../common/Component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: ComponentStudent;
 let fixture: ComponentFixture<ComponentStudent>;
@@ -19,10 +20,11 @@ class ComponentStudentImpl extends ComponentStudent {}
 describe('ComponentStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [ComponentStudentImpl],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+    declarations: [ComponentStudentImpl],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(ComponentStudentImpl);
     component = fixture.componentInstance;
     component.componentContent = {};

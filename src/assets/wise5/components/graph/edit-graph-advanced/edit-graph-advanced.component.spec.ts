@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -25,6 +25,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { GraphContent } from '../GraphContent';
 import { EditGraphAdvancedComponent } from './edit-graph-advanced.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: EditGraphAdvancedComponent;
 let fixture: ComponentFixture<EditGraphAdvancedComponent>;
@@ -32,18 +33,7 @@ let fixture: ComponentFixture<EditGraphAdvancedComponent>;
 describe('EditGraphAdvancedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientTestingModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [
+    declarations: [
         EditComponentAddToNotebookButtonComponent,
         EditCommonAdvancedComponent,
         EditComponentExcludeFromTotalScoreComponent,
@@ -56,10 +46,18 @@ describe('EditGraphAdvancedComponent', () => {
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent,
         EditGraphAdvancedComponent
-      ],
-      providers: [TeacherNodeService, TeacherProjectService],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        StudentTeacherCommonServicesModule],
+    providers: [TeacherNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

@@ -6,7 +6,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LibraryProject } from '../libraryProject';
 import { PersonalLibraryHarness } from './personal-library.harness';
@@ -23,8 +23,7 @@ import { ArchiveProjectResponse } from '../../../domain/archiveProjectResponse';
 import { of } from 'rxjs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
-import { HttpClient } from '@angular/common/http';
-import { ProjectTagService } from '../../../../assets/wise5/services/projectTagService';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const archivedTag = { id: 1, text: 'archived', color: null };
 let archiveProjectService: ArchiveProjectService;
@@ -39,30 +38,32 @@ const projectId4 = 4;
 const projectId5 = 5;
 
 describe('PersonalLibraryComponent', () => {
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          ArchiveProjectsButtonComponent,
-          BrowserAnimationsModule,
-          FormsModule,
-          HttpClientTestingModule,
-          MatCheckboxModule,
-          MatDialogModule,
-          MatFormFieldModule,
-          MatOptionModule,
-          MatPaginatorModule,
-          MatSelectModule,
-          MatSnackBarModule,
-          OverlayModule,
-          SelectAllItemsCheckboxComponent
-        ],
-        declarations: [LibraryProjectComponent, PersonalLibraryComponent],
-        providers: [ArchiveProjectService, LibraryService, ProjectTagService],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [LibraryProjectComponent, PersonalLibraryComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        ArchiveProjectsButtonComponent,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatOptionModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        MatSnackBarModule,
+        OverlayModule,
+        SelectAllItemsCheckboxComponent
+      ],
+      providers: [
+        ArchiveProjectService,
+        LibraryService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    }).compileComponents();
+  }));
 
   beforeEach(async () => {
     fixture = TestBed.createComponent(PersonalLibraryComponent);
@@ -121,9 +122,8 @@ function setUpTwentyProjects() {
   for (let i = 1; i <= 20; i++) {
     libraryProjects.push(new LibraryProject({ id: i, metadata: {}, tags: [] }));
   }
-  TestBed.inject(LibraryService).personalLibraryProjectsSource$ = fakeAsyncResponse(
-    libraryProjects
-  );
+  TestBed.inject(LibraryService).personalLibraryProjectsSource$ =
+    fakeAsyncResponse(libraryProjects);
 }
 
 function showActiveProjects() {

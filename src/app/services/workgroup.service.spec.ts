@@ -2,7 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { WorkgroupService } from './workgroup.service';
 import classmateUserInfos from './sampleData/sample_classmateUserInfos.json';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let workgroupService: WorkgroupService;
 
@@ -18,9 +19,9 @@ class ConfigServiceStub {
 describe('WorkgroupService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [{ provide: ConfigService, useClass: ConfigServiceStub }, WorkgroupService]
-    });
+    imports: [],
+    providers: [{ provide: ConfigService, useClass: ConfigServiceStub }, WorkgroupService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     workgroupService = TestBed.inject(WorkgroupService);
   });
   getWorkgroupsInPeriod();

@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -12,6 +12,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { NodeConstraintAuthoringComponent } from './node-constraint-authoring.component';
 import { MatIconModule } from '@angular/material/icon';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: NodeConstraintAuthoringComponent;
 let fixture: ComponentFixture<NodeConstraintAuthoringComponent>;
@@ -23,7 +24,6 @@ describe('NodeConstraintAuthoringComponent', () => {
       imports: [
         BrowserAnimationsModule,
         FormsModule,
-        HttpClientTestingModule,
         MatDialogModule,
         MatIconModule,
         MatSelectModule,
@@ -34,7 +34,9 @@ describe('NodeConstraintAuthoringComponent', () => {
         ClassroomStatusService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
       ]
     }).compileComponents();
 

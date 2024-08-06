@@ -1,9 +1,10 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { EditConnectedComponentsAddButtonComponent } from '../edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsComponent } from './edit-connected-components.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: EditConnectedComponentsComponent;
 let fixture: ComponentFixture<EditConnectedComponentsComponent>;
@@ -13,9 +14,10 @@ const nodeId10 = 'node10';
 describe('EditConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatIconModule, StudentTeacherCommonServicesModule],
-      declarations: [EditConnectedComponentsAddButtonComponent, EditConnectedComponentsComponent]
-    }).compileComponents();
+    declarations: [EditConnectedComponentsAddButtonComponent, EditConnectedComponentsComponent],
+    imports: [MatIconModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

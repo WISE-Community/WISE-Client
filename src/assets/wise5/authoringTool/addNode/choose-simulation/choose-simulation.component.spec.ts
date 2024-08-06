@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChooseSimulationComponent } from './choose-simulation.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,6 +12,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MatDividerModule } from '@angular/material/divider';
 import { CopyNodesService } from '../../../services/copyNodesService';
 import { InsertNodesService } from '../../../services/insertNodesService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ChooseSimulationComponent', () => {
   let component: ChooseSimulationComponent;
@@ -19,20 +20,17 @@ describe('ChooseSimulationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ChooseSimulationComponent],
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [ChooseSimulationComponent],
+    imports: [BrowserAnimationsModule,
         FormsModule,
-        HttpClientTestingModule,
         MatDividerModule,
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
         RouterTestingModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [CopyNodesService, InsertNodesService, TeacherProjectService]
-    }).compileComponents();
+        StudentTeacherCommonServicesModule],
+    providers: [CopyNodesService, InsertNodesService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
     window.history.pushState({}, '', '');
     fixture = TestBed.createComponent(ChooseSimulationComponent);
     component = fixture.componentInstance;

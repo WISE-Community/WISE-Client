@@ -15,7 +15,7 @@ import { TeacherRunListItemComponent } from '../teacher-run-list-item/teacher-ru
 import { MatDialogModule } from '@angular/material/dialog';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TeacherRunListHarness } from './teacher-run-list.harness';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,10 +28,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { ArchiveProjectsButtonComponent } from '../archive-projects-button/archive-projects-button.component';
 import { Project } from '../../domain/project';
 import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 import { Tag } from '../../domain/tag';
-import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { provideRouter } from '@angular/router';
 
 class TeacherScheduleStubComponent {}
@@ -81,42 +80,38 @@ class TeacherRunStub extends TeacherRun {
 }
 
 describe('TeacherRunListComponent', () => {
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [RunMenuComponent, TeacherRunListComponent, TeacherRunListItemComponent],
-        imports: [
-          ArchiveProjectsButtonComponent,
-          BrowserAnimationsModule,
-          BrowserModule,
-          FormsModule,
-          HttpClientTestingModule,
-          MatCardModule,
-          MatCheckboxModule,
-          MatDialogModule,
-          MatFormFieldModule,
-          MatInputModule,
-          MatMenuModule,
-          MatSelectModule,
-          MatSnackBarModule,
-          ReactiveFormsModule,
-          SearchBarComponent,
-          SelectRunsControlsModule
-        ],
-        providers: [
-          ArchiveProjectService,
-          ConfigService,
-          ProjectTagService,
-          provideRouter([
-            { path: 'teacher/home/schedule', component: TeacherScheduleStubComponent }
-          ]),
-          TeacherService,
-          UserService
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      });
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [RunMenuComponent, TeacherRunListComponent, TeacherRunListItemComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        ArchiveProjectsButtonComponent,
+        BrowserAnimationsModule,
+        BrowserModule,
+        FormsModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatMenuModule,
+        MatSelectModule,
+        MatSnackBarModule,
+        ReactiveFormsModule,
+        SearchBarComponent,
+        SelectRunsControlsModule
+      ],
+      providers: [
+        ArchiveProjectService,
+        ConfigService,
+        provideRouter([{ path: 'teacher/home/schedule', component: TeacherScheduleStubComponent }]),
+        TeacherService,
+        UserService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
+  }));
 
   beforeEach(async () => {
     configService = TestBed.inject(ConfigService);

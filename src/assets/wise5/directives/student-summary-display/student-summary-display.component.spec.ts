@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -7,6 +7,7 @@ import { ComponentContent } from '../../common/ComponentContent';
 import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
 import { StudentSummaryDisplay } from './student-summary-display.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: StudentSummaryDisplay;
 let fixture: ComponentFixture<StudentSummaryDisplay>;
@@ -14,10 +15,11 @@ let fixture: ComponentFixture<StudentSummaryDisplay>;
 describe('StudentSummaryDisplayComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [StudentSummaryDisplay],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+    declarations: [StudentSummaryDisplay],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(StudentSummaryDisplay);
     component = fixture.componentInstance;
     fixture.detectChanges();

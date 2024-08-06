@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { AnnotationService } from '../../../services/annotationService';
@@ -6,6 +6,7 @@ import { ConfigService } from '../../../services/configService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { ScoreConstraintStrategy } from './ScoreConstraintStrategy';
 import { Annotation } from '../../Annotation';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let annotationService: AnnotationService;
 let configService: ConfigService;
@@ -15,8 +16,9 @@ let strategy: ScoreConstraintStrategy;
 describe('ScoreConstraintStrategy', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
-    });
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     annotationService = TestBed.inject(AnnotationService);
     configService = TestBed.inject(ConfigService);
     dataService = TestBed.inject(StudentDataService);

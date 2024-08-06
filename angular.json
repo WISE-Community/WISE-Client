@@ -9,7 +9,7 @@
       "projectType": "application",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "allowedCommonJsDependencies": [
               "angular",
@@ -23,21 +23,35 @@
               "compute-covariance"
             ],
             "aot": true,
-            "outputPath": "dist",
+            "outputPath": {
+              "base": "dist"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "assets": [
               {
                 "glob": "**/*",
                 "input": "src/assets/",
-                "ignore": ["**/*.scss", "**/*.md"],
+                "ignore": [
+                  "**/*.scss",
+                  "**/*.md"
+                ],
                 "output": "/assets/"
               },
               "src/favicon.ico",
-              { "glob": "**/*", "input": "node_modules/mathjax", "output": "/mathjax/" },
-              { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" }
+              {
+                "glob": "**/*",
+                "input": "node_modules/mathjax",
+                "output": "/mathjax/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce",
+                "output": "/tinymce/"
+              }
             ],
             "styles": [
               "./node_modules/tabulator-tables/dist/css/tabulator_semanticui.min.css",
@@ -48,10 +62,11 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/style"
+                "src"
               ]
             },
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -69,15 +84,15 @@
               "aot": true,
               "localize": true,
               "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputPath": "dist/",
+              "outputPath": {
+                "base": "dist/"
+              },
               "baseHref": "/"
             },
             "development": {
@@ -87,27 +102,37 @@
               "namedChunks": true,
               "aot": true,
               "extractLicenses": false,
-              "vendorChunk": true,
-              "buildOptimizer": false,
               "budgets": []
             },
             "es": {
-              "localize": ["es"]
+              "localize": [
+                "es"
+              ]
             },
             "ja": {
-              "localize": ["ja"]
+              "localize": [
+                "ja"
+              ]
             },
             "pt": {
-              "localize": ["pt"]
+              "localize": [
+                "pt"
+              ]
             },
             "tr": {
-              "localize": ["tr"]
+              "localize": [
+                "tr"
+              ]
             },
             "zh-Hans": {
-              "localize": ["zh-Hans"]
+              "localize": [
+                "zh-Hans"
+              ]
             },
             "zh-Hant": {
-              "localize": ["zh-Hant"]
+              "localize": [
+                "zh-Hant"
+              ]
             }
           }
         },
@@ -155,7 +180,11 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "karmaConfig": "karma.conf.js",
-            "polyfills": ["@angular/localize/init", "zone.js", "zone.js/testing"],
+            "polyfills": [
+              "@angular/localize/init",
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
@@ -163,7 +192,7 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/style"
+                "src"
               ]
             },
             "assets": [

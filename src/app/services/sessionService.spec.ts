@@ -1,17 +1,18 @@
 import { TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { of } from 'rxjs';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 let service: SessionService;
 let configService: ConfigService;
 
 describe('SessionService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [ConfigService, SessionService]
-    });
+    imports: [],
+    providers: [ConfigService, SessionService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     configService = TestBed.get(ConfigService);
     service = TestBed.get(SessionService);
   });

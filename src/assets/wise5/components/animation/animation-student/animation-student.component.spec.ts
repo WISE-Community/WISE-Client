@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -6,6 +6,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { Component } from '../../../common/Component';
 import { AnimationService } from '../animationService';
 import { AnimationStudent } from './animation-student.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: AnimationStudent;
 const componentId = 'component1';
@@ -37,10 +38,11 @@ const object1 = {
 describe('AnimationStudent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [AnimationStudent],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+    declarations: [AnimationStudent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(AnimationStudent);
     component = fixture.componentInstance;
     const componentContent = TestBed.inject(AnimationService).createComponent();

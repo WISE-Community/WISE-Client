@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SaveIndicatorComponent } from './save-indicator.component';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('SaveIndicatorComponent', () => {
   let component: SaveIndicatorComponent;
@@ -10,13 +11,11 @@ describe('SaveIndicatorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
+    imports: [MatDialogModule,
         SaveIndicatorComponent,
-        StudentTeacherCommonServicesModule
-      ]
-    });
+        StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(SaveIndicatorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

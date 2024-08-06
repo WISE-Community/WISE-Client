@@ -7,7 +7,7 @@ import { TeacherService } from '../../../teacher/teacher.service';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { ConfigService } from '../../../services/config.service';
-import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha-2';
 
 let component: ForgotTeacherPasswordComponent;
 let fixture: ComponentFixture<ForgotTeacherPasswordComponent>;
@@ -31,20 +31,18 @@ class MockConfigService {
 }
 
 describe('ForgotTeacherPasswordComponent', () => {
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [ForgotTeacherPasswordComponent],
-        imports: [RouterTestingModule, ReactiveFormsModule, RecaptchaV3Module],
-        providers: [
-          { provide: TeacherService, useClass: MockTeacherService },
-          { provide: ConfigService, useClass: MockConfigService },
-          { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      });
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ForgotTeacherPasswordComponent],
+      imports: [RouterTestingModule, ReactiveFormsModule, RecaptchaV3Module],
+      providers: [
+        { provide: TeacherService, useClass: MockTeacherService },
+        { provide: ConfigService, useClass: MockConfigService },
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ForgotTeacherPasswordComponent);
@@ -86,19 +84,16 @@ async function changePassword() {
       );
     });
 
-    it(
-      'should show error when Recaptcha is invalid',
-      waitForAsync(async () => {
-        component.isRecaptchaEnabled = true;
-        teacherService = TestBed.get(TeacherService);
-        const observableResponse = createObservableResponse('failed', 'recaptchaResponseInvalid');
-        spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
-        spyOn(teacherService, 'getVerificationCodeEmail').and.returnValue(observableResponse);
-        await component.submit();
-        fixture.detectChanges();
-        expect(getErrorMessage()).toContain('Recaptcha failed.');
-      })
-    );
+    it('should show error when Recaptcha is invalid', waitForAsync(async () => {
+      component.isRecaptchaEnabled = true;
+      teacherService = TestBed.get(TeacherService);
+      const observableResponse = createObservableResponse('failed', 'recaptchaResponseInvalid');
+      spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
+      spyOn(teacherService, 'getVerificationCodeEmail').and.returnValue(observableResponse);
+      await component.submit();
+      fixture.detectChanges();
+      expect(getErrorMessage()).toContain('Recaptcha failed.');
+    }));
 
     it('should navigate to the verify code page', () => {
       const router = TestBed.get(Router);
@@ -113,24 +108,21 @@ async function changePassword() {
       });
     });
 
-    it(
-      'should navigate to the verify code page after successfully sending a valid username',
-      waitForAsync(async () => {
-        const router = TestBed.get(Router);
-        const navigateSpy = spyOn(router, 'navigate');
-        component.setControlFieldValue('username', 'SpongebobSquarepants');
-        spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
-        await component.submit();
-        fixture.detectChanges();
-        const params = {
-          username: 'SpongebobSquarepants'
-        };
-        expect(navigateSpy).toHaveBeenCalledWith(['/forgot/teacher/password/verify'], {
-          queryParams: params,
-          skipLocationChange: true
-        });
-      })
-    );
+    it('should navigate to the verify code page after successfully sending a valid username', waitForAsync(async () => {
+      const router = TestBed.get(Router);
+      const navigateSpy = spyOn(router, 'navigate');
+      component.setControlFieldValue('username', 'SpongebobSquarepants');
+      spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
+      await component.submit();
+      fixture.detectChanges();
+      const params = {
+        username: 'SpongebobSquarepants'
+      };
+      expect(navigateSpy).toHaveBeenCalledWith(['/forgot/teacher/password/verify'], {
+        queryParams: params,
+        skipLocationChange: true
+      });
+    }));
   });
 }
 

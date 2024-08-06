@@ -1,7 +1,8 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ManageStudentsComponent } from './manage-students.component';
 import { TeacherDataService } from '../../../../services/teacherDataService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 class TeacherDataServiceStub {
   getCurrentPeriod() {}
@@ -19,10 +20,10 @@ let component: ManageStudentsComponent;
 describe('ManageStudentsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ManageStudentsComponent],
-      imports: [HttpClientTestingModule],
-      providers: [{ provide: TeacherDataService, useClass: TeacherDataServiceStub }]
-    });
+    declarations: [ManageStudentsComponent],
+    imports: [],
+    providers: [{ provide: TeacherDataService, useClass: TeacherDataServiceStub }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     teacherDataService = TestBed.inject(TeacherDataService);
     http = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(ManageStudentsComponent);

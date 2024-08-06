@@ -1,17 +1,18 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { PeerChatMessage } from './PeerChatMessage';
 import { PeerChatService } from './peerChatService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let service: PeerChatService;
 
 describe('PeerChatService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
-      providers: [PeerChatService]
-    });
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [PeerChatService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(PeerChatService);
   });
 

@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { StudentStatus } from '../../assets/wise5/common/StudentStatus';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -35,8 +35,9 @@ const studentStatusUrl = '/api/studentStatus';
 describe('StudentStatusService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
-    });
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     configService = TestBed.inject(ConfigService);
     http = TestBed.inject(HttpClient);
     nodeProgressService = TestBed.inject(NodeProgressService);

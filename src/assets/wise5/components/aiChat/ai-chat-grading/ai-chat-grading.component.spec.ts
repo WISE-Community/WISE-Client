@@ -2,9 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AiChatGradingComponent } from './ai-chat-grading.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { MatDialogModule } from '@angular/material/dialog';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { AiChatGradingModule } from './ai-chat-grading.module';
 import { ProjectService } from '../../../services/projectService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AiChatGradingComponent', () => {
   let component: AiChatGradingComponent;
@@ -12,14 +13,12 @@ describe('AiChatGradingComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AiChatGradingComponent],
-      imports: [
-        AiChatGradingModule,
-        HttpClientTestingModule,
+    declarations: [AiChatGradingComponent],
+    imports: [AiChatGradingModule,
         MatDialogModule,
-        StudentTeacherCommonServicesModule
-      ]
-    });
+        StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(AiChatGradingComponent);
     component = fixture.componentInstance;
     component.componentState = {

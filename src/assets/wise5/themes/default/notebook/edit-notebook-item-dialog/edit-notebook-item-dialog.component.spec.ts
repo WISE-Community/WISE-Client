@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -11,6 +11,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../../../app/studen
 import { WiseLinkComponent } from '../../../../directives/wise-link/wise-link.component';
 import { ProjectService } from '../../../../services/projectService';
 import { EditNotebookItemDialogComponent } from './edit-notebook-item-dialog.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('EditNotebookItemDialogComponent', () => {
   let component: EditNotebookItemDialogComponent;
@@ -18,44 +19,43 @@ describe('EditNotebookItemDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [EditNotebookItemDialogComponent, WiseLinkComponent],
+    imports: [BrowserAnimationsModule,
         FormsModule,
-        HttpClientTestingModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
         MatToolbarModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [EditNotebookItemDialogComponent, WiseLinkComponent],
-      providers: [
+        StudentTeacherCommonServicesModule],
+    providers: [
         {
-          provide: MAT_DIALOG_DATA,
-          useValue: {
-            notebookConfig: {
-              itemTypes: {
-                note: {
-                  label: {
-                    color: 'white',
-                    plural: 'notes',
-                    singular: 'note'
-                  }
+            provide: MAT_DIALOG_DATA,
+            useValue: {
+                notebookConfig: {
+                    itemTypes: {
+                        note: {
+                            label: {
+                                color: 'white',
+                                plural: 'notes',
+                                singular: 'note'
+                            }
+                        }
+                    }
                 }
-              }
             }
-          }
         },
         {
-          provide: MatDialogRef,
-          useValue: {
-            close: () => {}
-          }
-        }
-      ]
-    }).compileComponents();
+            provide: MatDialogRef,
+            useValue: {
+                close: () => { }
+            }
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

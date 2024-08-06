@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,6 +13,7 @@ import { NodeAdvancedAuthoringComponent } from '../node-advanced-authoring/node-
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('NodeAdvancedPathAuthoringComponent', () => {
   let component: NodeAdvancedPathAuthoringComponent;
@@ -20,28 +21,27 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
+    declarations: [NodeAdvancedAuthoringComponent, NodeAdvancedPathAuthoringComponent],
+    imports: [MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         RouterTestingModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [NodeAdvancedAuthoringComponent, NodeAdvancedPathAuthoringComponent],
-      providers: [
+        StudentTeacherCommonServicesModule],
+    providers: [
         ClassroomStatusService,
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,
         {
-          provide: ActivatedRoute,
-          useValue: {
-            parent: { parent: { params: of({ nodeId: 'node1' }) } }
-          }
-        }
-      ]
-    }).compileComponents();
+            provide: ActivatedRoute,
+            useValue: {
+                parent: { parent: { params: of({ nodeId: 'node1' }) } }
+            }
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

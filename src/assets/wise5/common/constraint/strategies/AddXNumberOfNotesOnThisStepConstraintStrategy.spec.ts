@@ -1,10 +1,11 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NotebookService } from '../../../services/notebookService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { AddXNumberOfNotesOnThisStepConstraintStrategy } from './AddXNumberOfNotesOnThisStepConstraintStrategy';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let dataService: StudentDataService;
 let notebookService: NotebookService;
@@ -13,8 +14,9 @@ let strategy: AddXNumberOfNotesOnThisStepConstraintStrategy;
 describe('AddXNumberOfNotesOnThisStepConstraintStrategy', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
-    });
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     dataService = TestBed.inject(StudentDataService);
     notebookService = TestBed.inject(NotebookService);
     strategy = new AddXNumberOfNotesOnThisStepConstraintStrategy();

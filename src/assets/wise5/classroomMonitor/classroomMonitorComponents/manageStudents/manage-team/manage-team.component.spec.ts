@@ -9,10 +9,10 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ManageTeamHarness } from './manage-team.harness';
 import { ManageStudentsModule } from '../manage-students.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { RemoveUserConfirmDialogComponent } from '../remove-user-confirm-dialog/remove-user-confirm-dialog.component';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 let component: ManageTeamComponent;
@@ -28,18 +28,15 @@ const studentUsername = 'aa0101';
 describe('ManageTeamComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [ManageTeamComponent],
-      imports: [
-        BrowserAnimationsModule,
-        HttpClientTestingModule,
+    declarations: [ManageTeamComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
         ManageStudentsModule,
         MatCardModule,
         MatDialogModule,
-        MatSnackBarModule
-      ],
-      providers: [ConfigService, UpdateWorkgroupService],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+        MatSnackBarModule],
+    providers: [ConfigService, UpdateWorkgroupService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     configService = TestBed.inject(ConfigService);
     dialog = TestBed.inject(MatDialog);
     fixture = TestBed.createComponent(ManageTeamComponent);

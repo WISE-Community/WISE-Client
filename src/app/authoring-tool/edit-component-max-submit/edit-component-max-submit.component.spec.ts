@@ -3,7 +3,8 @@ import { EditComponentMaxSubmitComponent } from './edit-component-max-submit.com
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('EditComponentMaxSubmitComponent', () => {
   let component: EditComponentMaxSubmitComponent;
@@ -11,11 +12,11 @@ describe('EditComponentMaxSubmitComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditComponentMaxSubmitComponent],
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
-      providers: [TeacherProjectService],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+    declarations: [EditComponentMaxSubmitComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,6 +1,6 @@
 import '../../assets/wise5/lib/jquery/jquery-global';
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
@@ -8,6 +8,7 @@ import { StudentAssetService } from '../../assets/wise5/services/studentAssetSer
 import { TagService } from '../../assets/wise5/services/tagService';
 import { DrawService } from '../../assets/wise5/components/draw/drawService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let service: DrawService;
 let defaultDrawDataWithNoObjectsField: string = '{"canvas":{}}';
@@ -17,17 +18,19 @@ let drawDataWithObjects: string = '{"canvas":{"objects":[{}]}}';
 describe('DrawService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         AnnotationService,
         ConfigService,
         DrawService,
         ProjectService,
         SessionService,
         StudentAssetService,
-        TagService
-      ]
-    });
+        TagService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.inject(DrawService);
   });
   createComponent();

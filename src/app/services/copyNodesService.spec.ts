@@ -1,8 +1,9 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 class ConfigServiceStub {}
 
@@ -27,13 +28,15 @@ let createNodeAfterSpy, createNodeInsideSpy, getUnusedComponentIdSpy, parseProje
 describe('CopyNodesService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         CopyNodesService,
         { provide: ConfigService, useClass: ConfigServiceStub },
-        { provide: TeacherProjectService, useClass: ProjectServiceStub }
-      ]
-    });
+        { provide: TeacherProjectService, useClass: ProjectServiceStub },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.inject(CopyNodesService);
     projectService = TestBed.inject(TeacherProjectService);
     createNodeAfterSpy = spyOn(projectService, 'createNodeAfter');

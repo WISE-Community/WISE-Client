@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { MultipleChoiceService } from '../../assets/wise5/components/multipleChoice/multipleChoiceService';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -8,6 +8,7 @@ import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let service: MultipleChoiceService;
 let choiceId1: string = 'aaaaaaaaaa';
@@ -25,17 +26,19 @@ let componentId1: string = 'abcdefghij';
 describe('MultipleChoiceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         AnnotationService,
         ConfigService,
         MultipleChoiceService,
         ProjectService,
         SessionService,
         StudentAssetService,
-        TagService
-      ]
-    });
+        TagService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.inject(MultipleChoiceService);
     choice1 = createChoice(choiceId1, choiceText1, '', false);
     choice2 = createChoice(choiceId2, choiceText2, '', false);

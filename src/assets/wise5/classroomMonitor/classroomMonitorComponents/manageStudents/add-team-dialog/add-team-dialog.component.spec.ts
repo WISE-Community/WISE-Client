@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -53,21 +53,20 @@ const period = {
 describe('AddTeamDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AddTeamDialogComponent],
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [AddTeamDialogComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
         MatDialogModule,
-        HttpClientTestingModule,
-        MatSnackBarModule
-      ],
-      providers: [
+        MatSnackBarModule],
+    providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: TeacherDataService, useClass: TeacherDataServiceStub },
         { provide: WorkgroupService, useClass: WorkgroupServiceStub },
-        { provide: MAT_DIALOG_DATA, useValue: period }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+        { provide: MAT_DIALOG_DATA, useValue: period },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

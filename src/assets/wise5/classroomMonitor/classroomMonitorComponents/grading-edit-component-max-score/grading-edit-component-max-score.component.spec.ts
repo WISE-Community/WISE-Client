@@ -2,9 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GradingEditComponentMaxScoreComponent } from './grading-edit-component-max-score.component';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { CopyNodesService } from '../../../services/copyNodesService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: GradingEditComponentMaxScoreComponent;
 let fixture: ComponentFixture<GradingEditComponentMaxScoreComponent>;
@@ -15,11 +16,11 @@ let projectService: TeacherProjectService;
 describe('GradingEditComponentMaxScoreComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
-      declarations: [GradingEditComponentMaxScoreComponent],
-      providers: [CopyNodesService, TeacherProjectService],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+    declarations: [GradingEditComponentMaxScoreComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [CopyNodesService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     projectService = TestBed.inject(TeacherProjectService);
     fixture = TestBed.createComponent(GradingEditComponentMaxScoreComponent);
     component = fixture.componentInstance;

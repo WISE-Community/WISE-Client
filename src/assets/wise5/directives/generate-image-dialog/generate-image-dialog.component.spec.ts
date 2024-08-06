@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -13,6 +13,7 @@ import { LabelService } from '../../components/label/labelService';
 import { TableService } from '../../components/table/tableService';
 import { ProjectService } from '../../services/projectService';
 import { GenerateImageDialogComponent } from './generate-image-dialog.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('GenerateImageDialogComponent', () => {
   let component: GenerateImageDialogComponent;
@@ -20,19 +21,18 @@ describe('GenerateImageDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
+    declarations: [GenerateImageDialogComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [MatDialogModule,
         MatProgressSpinnerModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [GenerateImageDialogComponent],
-      providers: [
+        StudentTeacherCommonServicesModule],
+    providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        { provide: MatDialogRef, useValue: { close() {} } }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+        { provide: MatDialogRef, useValue: { close() { } } },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

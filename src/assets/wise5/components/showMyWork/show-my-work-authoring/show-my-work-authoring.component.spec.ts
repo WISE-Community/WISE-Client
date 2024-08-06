@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -15,6 +15,7 @@ import { ShowMyWorkAuthoringComponent } from './show-my-work-authoring.component
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { ComponentAuthoringModule } from '../../component-authoring.module';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ShowMyWorkAuthoringComponent', () => {
   let component: ShowMyWorkAuthoringComponent;
@@ -34,20 +35,25 @@ describe('ShowMyWorkAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      declarations: [EditComponentPrompt, ShowMyWorkAuthoringComponent],
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
         ComponentAuthoringModule,
         FormsModule,
-        HttpClientTestingModule,
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [EditComponentPrompt, ShowMyWorkAuthoringComponent],
-      providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
+      providers: [
+        ProjectAssetService,
+        TeacherNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
     }).compileComponents();
   });
 

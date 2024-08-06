@@ -1,6 +1,6 @@
 import { MilestoneService } from '../../../assets/wise5/services/milestoneService';
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { AchievementService } from '../../../assets/wise5/services/achievementService';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
@@ -15,6 +15,7 @@ import satisfyCriterionSample from '../sampleData/sample_satisfyCriterion.json';
 import { MilestoneReportService } from '../../../assets/wise5/services/milestoneReportService';
 import { createSatisfyCriteria, createScoreCounts } from './milestone-test-functions';
 import { copy } from '../../../assets/wise5/common/object/object';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let service: MilestoneService;
 let achievementService: AchievementService;
@@ -26,17 +27,19 @@ let teacherDataService: TeacherDataService;
 describe('MilestoneService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      providers: [
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [
         ClassroomStatusService,
         CopyNodesService,
         MilestoneService,
         MilestoneReportService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
-      ]
-    });
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.inject(MilestoneService);
     achievementService = TestBed.inject(AchievementService);
     configService = TestBed.inject(ConfigService);

@@ -5,7 +5,8 @@ import { By } from '@angular/platform-browser';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { of } from 'rxjs';
 import { SessionService } from '../../services/sessionService';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 class MockConfigService {
   getMyUsername(): string {
@@ -23,14 +24,16 @@ let fixture: ComponentFixture<ConcurrentAuthorsMessageComponent>;
 describe('ConcurrentAuthorsMessageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ConcurrentAuthorsMessageComponent],
-      imports: [HttpClientTestingModule],
-      providers: [
+    declarations: [ConcurrentAuthorsMessageComponent],
+    imports: [],
+    providers: [
         { provide: ConfigService, useClass: MockConfigService },
         SessionService,
-        { provide: TeacherProjectService, useClass: MockTeacherProjectService }
-      ]
-    });
+        { provide: TeacherProjectService, useClass: MockTeacherProjectService },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     fixture = TestBed.createComponent(ConcurrentAuthorsMessageComponent);
     component = fixture.componentInstance;
   });

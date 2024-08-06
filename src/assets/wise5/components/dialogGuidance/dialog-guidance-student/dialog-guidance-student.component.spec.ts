@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -26,6 +26,7 @@ import { DialogGuidanceComponent } from '../DialogGuidanceComponent';
 import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: DialogGuidanceStudentComponent;
 let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
@@ -49,23 +50,20 @@ function createDialogGuidanceComponent(isComputerAvatarEnabled: boolean): Dialog
 describe('DialogGuidanceStudentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DialogGuidanceStudentComponent, DialogResponsesComponent],
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [DialogGuidanceStudentComponent, DialogResponsesComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
         ChatInputComponent,
         ComponentHeaderComponent,
         FormsModule,
-        HttpClientTestingModule,
         MatCardModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [DialogGuidanceFeedbackService],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+        StudentTeacherCommonServicesModule],
+    providers: [DialogGuidanceFeedbackService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

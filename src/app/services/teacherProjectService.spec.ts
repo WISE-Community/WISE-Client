@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
@@ -8,6 +8,7 @@ import teacherProjctJSON_import from './sampleData/curriculum/TeacherProjectServ
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import { copy } from '../../assets/wise5/common/object/object';
 import { DeleteNodeService } from '../../assets/wise5/services/deleteNodeService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 let service: TeacherProjectService;
 let configService: ConfigService;
 let deleteNodeService: DeleteNodeService;
@@ -28,9 +29,9 @@ const wiseBaseURL = '/wise';
 describe('TeacherProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
-      providers: [DeleteNodeService, TeacherProjectService]
-    });
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [DeleteNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(TeacherProjectService);
     configService = TestBed.inject(ConfigService);

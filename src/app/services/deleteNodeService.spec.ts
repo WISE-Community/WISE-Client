@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { copy } from '../../assets/wise5/common/object/object';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
@@ -6,6 +6,7 @@ import { DeleteNodeService } from '../../assets/wise5/services/deleteNodeService
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let demoProjectJSON: any;
 let projectService: TeacherProjectService;
@@ -14,9 +15,9 @@ let service: DeleteNodeService;
 describe('DeleteNodeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
-      providers: [CopyNodesService, DeleteNodeService, TeacherProjectService]
-    });
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [CopyNodesService, DeleteNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     demoProjectJSON = copy(demoProjectJSON_import);
     projectService = TestBed.inject(TeacherProjectService);
     service = TestBed.inject(DeleteNodeService);

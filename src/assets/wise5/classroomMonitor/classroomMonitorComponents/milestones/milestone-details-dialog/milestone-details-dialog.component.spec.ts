@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,6 +16,7 @@ import { MilestoneDetailsComponent } from '../milestone-details/milestone-detail
 import { MilestoneDetailsDialogComponent } from './milestone-details-dialog.component';
 import { NavItemProgressComponent } from '../../../../../../app/classroom-monitor/nav-item-progress/nav-item-progress.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const milestoneName: string = 'Checkpoint #1';
 
@@ -25,32 +26,31 @@ describe('MilestoneDetailsDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
+    declarations: [
         MilestoneDetailsComponent,
         MilestoneDetailsDialogComponent,
         NavItemProgressComponent,
         SelectPeriodComponent
-      ],
-      imports: [
-        ClassroomMonitorTestingModule,
-        HttpClientTestingModule,
+    ],
+    imports: [ClassroomMonitorTestingModule,
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
         MatListModule,
         MatProgressBarModule,
         MatSelectModule,
-        MatTooltipModule
-      ],
-      providers: [
+        MatTooltipModule],
+    providers: [
         {
-          provide: MAT_DIALOG_DATA,
-          useValue: { id: 1, items: [], name: milestoneName, workgroups: [] }
+            provide: MAT_DIALOG_DATA,
+            useValue: { id: 1, items: [], name: milestoneName, workgroups: [] }
         },
         { provide: MatDialogRef, useValue: {} },
-        WorkgroupService
-      ]
-    }).compileComponents();
+        WorkgroupService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
 
     fixture = TestBed.createComponent(MilestoneDetailsDialogComponent);
     component = fixture.componentInstance;

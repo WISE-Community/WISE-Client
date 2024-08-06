@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Constraint } from '../../../../../app/domain/constraint';
@@ -6,6 +6,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EditConstraintRemovalCriteriaComponent } from './edit-constraint-removal-criteria.component';
 import { ComponentContent } from '../../../common/ComponentContent';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: EditConstraintRemovalCriteriaComponent;
 const componentId1: string = 'component1';
@@ -29,10 +30,13 @@ describe('EditConstraintRemovalCriteriaComponent', () => {
       imports: [
         BrowserAnimationsModule,
         EditConstraintRemovalCriteriaComponent,
-        HttpClientTestingModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [TeacherProjectService]
+      providers: [
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
     }).compileComponents();
 
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([

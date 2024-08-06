@@ -5,7 +5,7 @@ import { NotebookService } from '../services/notebookService';
 import { VLEProjectService } from './vleProjectService';
 import { VLEComponent } from './vle.component';
 import { StudentDataService } from '../services/studentDataService';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TopBarComponent } from '../../../app/student/top-bar/top-bar.component';
 import { NodeComponent } from './node/node.component';
@@ -29,6 +29,7 @@ import { PauseScreenService } from '../services/pauseScreenService';
 import { StudentNotificationService } from '../services/studentNotificationService';
 import { SafeUrl } from '../../../assets/wise5/directives/safeUrl/safe-url.pipe';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: VLEComponent;
 let fixture: ComponentFixture<VLEComponent>;
@@ -38,10 +39,16 @@ let saveVLEEventSpy: jasmine.Spy;
 describe('VLEComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      declarations: [
+        NodeComponent,
+        NotebookNotesComponent,
+        SafeUrl,
+        StepToolsComponent,
+        VLEComponent
+      ],
       imports: [
         BrowserAnimationsModule,
         FormsModule,
-        HttpClientTestingModule,
         MatBadgeModule,
         MatDialogModule,
         MatDividerModule,
@@ -58,13 +65,14 @@ describe('VLEComponent', () => {
         StudentTeacherCommonServicesModule,
         TopBarComponent
       ],
-      declarations: [NodeComponent, NotebookNotesComponent, SafeUrl, VLEComponent],
       providers: [
         InitializeVLEService,
         PauseScreenService,
         provideRouter([]),
         StudentNotificationService,
-        VLEProjectService
+        VLEProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
       ]
     }).compileComponents();
   });

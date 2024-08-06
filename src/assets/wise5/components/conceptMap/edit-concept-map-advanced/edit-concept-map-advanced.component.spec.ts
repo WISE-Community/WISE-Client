@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -24,6 +24,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapContent } from '../ConceptMapContent';
 import { EditConceptMapAdvancedComponent } from './edit-concept-map-advanced.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: EditConceptMapAdvancedComponent;
 let fixture: ComponentFixture<EditConceptMapAdvancedComponent>;
@@ -32,18 +33,7 @@ let rule1: any;
 describe('EditConceptMapAdvancedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientTestingModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [
+    declarations: [
         EditCommonAdvancedComponent,
         EditComponentExcludeFromTotalScoreComponent,
         EditComponentJsonComponent,
@@ -55,10 +45,18 @@ describe('EditConceptMapAdvancedComponent', () => {
         EditConceptMapAdvancedComponent,
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent
-      ],
-      providers: [TeacherNodeService, TeacherProjectService],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        StudentTeacherCommonServicesModule],
+    providers: [TeacherNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

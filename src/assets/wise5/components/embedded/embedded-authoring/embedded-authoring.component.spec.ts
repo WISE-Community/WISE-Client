@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
@@ -8,6 +8,7 @@ import { EmbeddedAuthoring } from './embedded-authoring.component';
 import { EmbeddedAuthoringModule } from './embedded-authoring.module';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: EmbeddedAuthoring;
 let fixture: ComponentFixture<EmbeddedAuthoring>;
@@ -18,10 +19,13 @@ describe('EmbeddedAuthoringComponent', () => {
       imports: [
         BrowserAnimationsModule,
         EmbeddedAuthoringModule,
-        HttpClientTestingModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [TeacherNodeService]
+      providers: [
+        TeacherNodeService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
     });
     spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
       new ProjectLocale({ default: 'en-US' })

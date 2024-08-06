@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NgModule } from '@angular/core';
 import { MatOptionModule } from '@angular/material/core';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -22,44 +22,40 @@ import { SelectPeerGroupingOptionComponent } from './select-peer-grouping-option
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-@NgModule({
-  imports: [
-    BrowserAnimationsModule,
-    BrowserModule,
-    CommonModule,
-    FormsModule,
-    HttpClientTestingModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatOptionModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatTooltipModule
-  ],
-  declarations: [
-    CreateNewPeerGroupingDialogComponent,
-    EditPeerGroupingDialogComponent,
-    SelectPeerGroupingAuthoringComponent,
-    SelectPeerGroupingDialogComponent,
-    SelectPeerGroupingOptionComponent
-  ],
-  providers: [
-    ConfigService,
-    {
-      provide: MAT_DIALOG_DATA,
-      useValue: {}
-    },
-    {
-      provide: MatDialogRef,
-      useValue: { close: () => {} }
-    },
-    PeerGroupingAuthoringService,
-    SessionService,
-    TeacherProjectService
-  ]
-})
+@NgModule({ declarations: [
+        CreateNewPeerGroupingDialogComponent,
+        EditPeerGroupingDialogComponent,
+        SelectPeerGroupingAuthoringComponent,
+        SelectPeerGroupingDialogComponent,
+        SelectPeerGroupingOptionComponent
+    ], imports: [BrowserAnimationsModule,
+        BrowserModule,
+        CommonModule,
+        FormsModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatOptionModule,
+        MatRadioModule,
+        MatSelectModule,
+        MatTooltipModule], providers: [
+        ConfigService,
+        {
+            provide: MAT_DIALOG_DATA,
+            useValue: {}
+        },
+        {
+            provide: MatDialogRef,
+            useValue: { close: () => { } }
+        },
+        PeerGroupingAuthoringService,
+        SessionService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ] })
 export class PeerGroupingTestingModule {}

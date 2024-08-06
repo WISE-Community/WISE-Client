@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { OpenResponseService } from '../../assets/wise5/components/openResponse/openResponseService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -8,6 +8,7 @@ import { StudentAssetService } from '../../assets/wise5/services/studentAssetSer
 import { TagService } from '../../assets/wise5/services/tagService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { OpenResponseCompletionCriteriaService } from '../../assets/wise5/components/openResponse/openResponseCompletionCriteriaService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let service: OpenResponseService;
 let completionCriteriaService: OpenResponseCompletionCriteriaService;
@@ -15,8 +16,8 @@ let completionCriteriaService: OpenResponseCompletionCriteriaService;
 describe('OpenResponseService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         AnnotationService,
         ConfigService,
         OpenResponseCompletionCriteriaService,
@@ -24,9 +25,11 @@ describe('OpenResponseService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        TagService
-      ]
-    });
+        TagService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.inject(OpenResponseService);
     completionCriteriaService = TestBed.inject(OpenResponseCompletionCriteriaService);
   });

@@ -1,13 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import { ConstraintService } from '../../assets/wise5/services/constraintService';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { Constraint } from '../domain/constraint';
 import { Observable, Subject } from 'rxjs';
 import { CompletionService } from '../../assets/wise5/services/completionService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 class MockProjectService {
   private projectParsedSource: Subject<void> = new Subject<void>();
@@ -54,9 +55,9 @@ let service: ConstraintService;
 describe('ConstraintService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      providers: [{ provide: ProjectService, useClass: MockProjectService }]
-    });
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [{ provide: ProjectService, useClass: MockProjectService }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     completionService = TestBed.inject(CompletionService);
     configService = TestBed.inject(ConfigService);
     projectService = TestBed.inject(ProjectService);

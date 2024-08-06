@@ -1,10 +1,11 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { StudentAssetsComponent } from './student-assets.component';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { Component } from '../../../common/Component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('StudentAssetsComponent', () => {
   let component: StudentAssetsComponent;
@@ -18,9 +19,10 @@ describe('StudentAssetsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
-      declarations: [StudentAssetsComponent]
-    }).compileComponents();
+    declarations: [StudentAssetsComponent],
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

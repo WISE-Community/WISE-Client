@@ -3,10 +3,11 @@ import { EditAiChatAdvancedComponent } from './edit-ai-chat-advanced.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ComponentAuthoringModule } from '../../../../../app/teacher/component-authoring.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('EditAiChatAdvancedComponent', () => {
   let component: EditAiChatAdvancedComponent;
@@ -14,16 +15,13 @@ describe('EditAiChatAdvancedComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EditAiChatAdvancedComponent],
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [EditAiChatAdvancedComponent],
+    imports: [BrowserAnimationsModule,
         ComponentAuthoringModule,
-        HttpClientTestingModule,
         MatDialogModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [TeacherNodeService, TeacherProjectService]
-    });
+        StudentTeacherCommonServicesModule],
+    providers: [TeacherNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(EditAiChatAdvancedComponent);
     component = fixture.componentInstance;
     component.nodeId = 'node1';
