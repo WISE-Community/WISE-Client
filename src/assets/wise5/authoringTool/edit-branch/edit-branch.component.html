@@ -48,7 +48,9 @@
       (click)="submit()"
       class="button--progress"
     >
-      <mat-progress-bar *ngIf="submitting" mode="indeterminate"></mat-progress-bar>
+      @if (submitting) {
+        <mat-progress-bar mode="indeterminate" />
+      }
       <span i18n>Submit</span>
     </button>
   </div>
