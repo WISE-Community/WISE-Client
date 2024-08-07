@@ -1,6 +1,8 @@
 <div fxLayout="row wrap" fxLayoutAlign="space-between center">
   <h3 class="title" i18n>Edit Branch</h3>
-  <button mat-raised-button color="warn" (click)="removeBranch()" i18n>Remove Branch</button>
+  <button mat-raised-button color="warn" (click)="removeBranch()" [disabled]="submitting" i18n>
+    Remove Branch
+  </button>
 </div>
 <h5 i18n>Branch Step: {{ targetTitle }}</h5>
 <form fxLayout="column" [formGroup]="formGroup">
@@ -39,8 +41,17 @@
   <h5 i18n>Merge Step: {{ mergeStepTitle }}</h5>
   <div fxLayoutAlign="end center" fxLayoutGap="12px">
     <button mat-button routerLink=".." i18n>Cancel</button>
-    <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="submit()" i18n>
-      Submit
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!formGroup.valid || submitting"
+      (click)="submit()"
+      class="button--progress"
+    >
+      @if (submitting) {
+        <mat-progress-bar mode="indeterminate" />
+      }
+      <span i18n>Submit</span>
     </button>
   </div>
 </form>
