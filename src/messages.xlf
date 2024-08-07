@@ -5048,21 +5048,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>An error occurred: </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/http-error.interceptor.ts</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8903463267282596576" datatype="html">
         <source>Backend returned code <x id="status" equiv-text="err.status"/>, body was: <x id="error" equiv-text="err.error"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/http-error.interceptor.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6272363620327622591" datatype="html">
         <source>An error occurred. Please refresh this page and try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/http-error.interceptor.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="263e1717422fe3b5810e9a2e55b87e477b35d1ed" datatype="html">

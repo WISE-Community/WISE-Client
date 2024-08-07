@@ -32,6 +32,7 @@ import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/
 import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 import { Tag } from '../../domain/tag';
 import { provideRouter } from '@angular/router';
+import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 
 class TeacherScheduleStubComponent {}
 
@@ -104,6 +105,7 @@ describe('TeacherRunListComponent', () => {
       providers: [
         ArchiveProjectService,
         ConfigService,
+        ProjectTagService,
         provideRouter([{ path: 'teacher/home/schedule', component: TeacherScheduleStubComponent }]),
         TeacherService,
         UserService,
