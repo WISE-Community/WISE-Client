@@ -61,8 +61,7 @@ describe('NodeAuthoringComponent', () => {
         MatInputModule,
         PreviewComponentButtonComponent,
         StudentTeacherCommonServicesModule,
-        TeacherNodeIconComponent,
-        TranslatableInputComponent
+        TeacherNodeIconComponent
       ],
       providers: [
         ClassroomStatusService,
