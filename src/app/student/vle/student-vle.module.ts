@@ -38,7 +38,6 @@ import { NodeStatusIconComponent } from '../../../assets/wise5/themes/default/th
 @NgModule({
   declarations: [
     ChooseBranchPathDialogComponent,
-    GenerateImageDialogComponent,
     GroupTabsComponent,
     NodeNavigationComponent,
     SafeUrl,
@@ -48,6 +47,7 @@ import { NodeStatusIconComponent } from '../../../assets/wise5/themes/default/th
   imports: [
     CommonModule,
     ComponentStudentModule,
+    GenerateImageDialogComponent,
     MatDialogModule,
     NavigationComponent,
     NodeModule,
