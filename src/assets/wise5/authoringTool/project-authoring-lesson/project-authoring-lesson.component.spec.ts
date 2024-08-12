@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectAuthoringLessonComponent } from './project-authoring-lesson.component';
 import { TeacherDataService } from '../../services/teacherDataService';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../services/teacherWebSocketService';
@@ -22,6 +22,7 @@ import { DeleteTranslationsService } from '../../services/deleteTranslationsServ
 import { provideRouter } from '@angular/router';
 import { CopyTranslationsService } from '../../services/copyTranslationsService';
 import { TeacherProjectTranslationService } from '../../services/teacherProjectTranslationService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: ProjectAuthoringLessonComponent;
 let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
@@ -41,7 +42,6 @@ describe('ProjectAuthoringLessonComponent', () => {
       imports: [
         AddStepButtonComponent,
         FormsModule,
-        HttpClientTestingModule,
         MatCheckboxModule,
         MatDialogModule,
         MatIconModule,
@@ -59,7 +59,9 @@ describe('ProjectAuthoringLessonComponent', () => {
         TeacherDataService,
         TeacherProjectService,
         TeacherProjectTranslationService,
-        TeacherWebSocketService
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
       ]
     });
     teacherProjectService = TestBed.inject(TeacherProjectService);

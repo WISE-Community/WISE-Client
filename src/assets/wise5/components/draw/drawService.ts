@@ -1,6 +1,6 @@
 'use strict';
 
-import * as $ from 'jquery';
+import $ from 'jquery';
 import * as fabric from 'fabric';
 window['fabric'] = fabric.fabric;
 import * as EventEmitter2 from 'eventemitter2';

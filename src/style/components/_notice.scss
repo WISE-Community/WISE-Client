@@ -6,7 +6,7 @@
   padding: 0.725em;
   margin: 24px auto;
   border-radius: $card-border-radius;
-  font-size: mat.font-size($wise-typography, 'caption');
+  font-size: mat.m2-font-size($wise-typography, 'caption');
 
   @media (min-width: breakpoint('sm.min')) {
     max-width: 80%;

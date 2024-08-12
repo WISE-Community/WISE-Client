@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ClassroomStatusService } from '../../assets/wise5/services/classroomStatusService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
@@ -9,6 +9,7 @@ import { NodeStatus } from '../../assets/wise5/common/NodeStatus';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { copy } from '../../assets/wise5/common/object/object';
 import * as project from './sampleData/curriculum/ClassroomStatusServiceSpec.project.json';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let configService: ConfigService;
 let projectService: ProjectService;
@@ -32,9 +33,9 @@ const workgroupId2 = 2;
 describe('ClassroomStatusService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
-      providers: [ClassroomStatusService]
-    });
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [ClassroomStatusService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(ClassroomStatusService);
     configService = TestBed.inject(ConfigService);

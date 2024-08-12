@@ -10,11 +10,12 @@ import { Observable } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigService } from '../../../services/config.service';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { LibraryProjectMenuHarness } from './library-project-menu.harness';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 export class MockUserService {
   getUser(): Observable<User[]> {
@@ -58,22 +59,21 @@ describe('LibraryProjectMenuComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [
-          BrowserAnimationsModule,
-          HttpClientTestingModule,
-          MatDialogModule,
-          MatMenuModule,
-          MatSnackBarModule
-        ],
-        declarations: [LibraryProjectMenuComponent],
-        providers: [
-          ArchiveProjectService,
-          { provide: TeacherService, useClass: MockTeacherService },
-          { provide: UserService, useClass: MockUserService },
-          { provide: ConfigService, useClass: MockConfigService }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
+    declarations: [LibraryProjectMenuComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
+        MatDialogModule,
+        MatMenuModule,
+        MatSnackBarModule],
+    providers: [
+        ArchiveProjectService,
+        { provide: TeacherService, useClass: MockTeacherService },
+        { provide: UserService, useClass: MockUserService },
+        { provide: ConfigService, useClass: MockConfigService },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
     })
   );
 

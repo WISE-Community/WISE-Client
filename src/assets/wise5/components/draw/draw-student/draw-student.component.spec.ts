@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -8,6 +8,7 @@ import { ProjectService } from '../../../services/projectService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { DrawService } from '../drawService';
 import { DrawStudent } from './draw-student.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: DrawStudent;
 let fixture: ComponentFixture<DrawStudent>;
@@ -17,10 +18,11 @@ const starterDrawData =
 describe('DrawStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [DrawStudent],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+    declarations: [DrawStudent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     jasmine.clock().install();
     fixture = TestBed.createComponent(DrawStudent);
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);

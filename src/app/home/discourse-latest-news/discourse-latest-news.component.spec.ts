@@ -1,7 +1,8 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DiscourseLatestNewsComponent } from './discourse-latest-news.component';
 import { By } from '@angular/platform-browser';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('DiscourseLatestNewsComponent', () => {
   let component: DiscourseLatestNewsComponent;
@@ -16,9 +17,9 @@ describe('DiscourseLatestNewsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [DiscourseLatestNewsComponent]
-    });
+    imports: [],
+    providers: [DiscourseLatestNewsComponent, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     http = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(DiscourseLatestNewsComponent);
     component = fixture.componentInstance;

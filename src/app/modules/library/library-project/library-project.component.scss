@@ -4,7 +4,7 @@
   'style/abstracts/variables';
 
 // Create a config with the default typography levels.
-$config: mat.define-typography-config();
+$config: mat.m2-define-typography-config();
 
 .library-project {
   margin: 8px;
@@ -52,7 +52,7 @@ $config: mat.define-typography-config();
   right: 0;
   padding: 10px;
   background-color: #ffffff;
-  font-size: mat.font-size($config, 'body-1');
+  font-size: mat.m2-font-size($config, 'body-1');
 
   p {
     margin-bottom: 6px;

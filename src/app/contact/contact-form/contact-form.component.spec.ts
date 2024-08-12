@@ -11,9 +11,9 @@ import { StudentService } from '../../student/student.service';
 import { User } from '../../domain/user';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { LibraryService } from '../../services/library.service';
-import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
+import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha-2';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
 import { getErrorMessage } from '../../common/test-helper';
 
@@ -35,30 +35,29 @@ let recaptchaV3Service: ReCaptchaV3Service;
 let userService: UserService;
 
 describe('ContactFormComponent', () => {
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [ContactFormComponent],
-        imports: [
-          BrowserAnimationsModule,
-          HttpClientTestingModule,
-          MatInputModule,
-          MatSelectModule,
-          ReactiveFormsModule,
-          RecaptchaV3Module,
-          RouterTestingModule
-        ],
-        providers: [
-          ConfigService,
-          { provide: LibraryService, useClass: MockLibraryService },
-          { provide: RECAPTCHA_V3_SITE_KEY, useValue: recaptchaPrivateKey },
-          { provide: StudentService, useClass: MockStudentService },
-          UserService
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ContactFormComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        RecaptchaV3Module,
+        RouterTestingModule
+      ],
+      providers: [
+        ConfigService,
+        { provide: LibraryService, useClass: MockLibraryService },
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: recaptchaPrivateKey },
+        { provide: StudentService, useClass: MockStudentService },
+        UserService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     configService = TestBed.inject(ConfigService);

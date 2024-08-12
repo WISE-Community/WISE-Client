@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -20,6 +20,7 @@ import { GraphAuthoring } from './graph-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { ComponentAuthoringModule } from '../../component-authoring.module';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: GraphAuthoring;
 let fixture: ComponentFixture<GraphAuthoring>;
@@ -27,12 +28,12 @@ let fixture: ComponentFixture<GraphAuthoring>;
 describe('GraphAuthoringComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      declarations: [GraphAuthoring, EditComponentPrompt],
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
         ComponentAuthoringModule,
         FormsModule,
-        HttpClientTestingModule,
         MatCheckboxModule,
         MatDialogModule,
         MatFormFieldModule,
@@ -44,8 +45,13 @@ describe('GraphAuthoringComponent', () => {
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [GraphAuthoring, EditComponentPrompt],
-      providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
+      providers: [
+        ProjectAssetService,
+        TeacherNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
     });
     spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
       new ProjectLocale({ default: 'en-US' })

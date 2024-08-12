@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -6,6 +6,7 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 
 import { EditComponentAddToNotebookButtonComponent } from './edit-component-add-to-notebook-button.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('EditComponentAddToNotebookButtonComponent', () => {
   let component: EditComponentAddToNotebookButtonComponent;
@@ -13,15 +14,12 @@ describe('EditComponentAddToNotebookButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        FormsModule,
-        HttpClientTestingModule,
+    declarations: [EditComponentAddToNotebookButtonComponent],
+    imports: [FormsModule,
         MatCheckboxModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [EditComponentAddToNotebookButtonComponent],
-      providers: [TeacherProjectService]
-    }).compileComponents();
+        StudentTeacherCommonServicesModule],
+    providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

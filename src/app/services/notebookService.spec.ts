@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { NotebookService } from '../../assets/wise5/services/notebookService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import demoNotebookItems_import from './sampleData/sample_notebookItems.json';
@@ -9,6 +9,7 @@ import demoProject_import from './sampleData/curriculum/Demo.project.json';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import { copy } from '../../assets/wise5/common/object/object';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let http: HttpTestingController;
 let configService: ConfigService;
@@ -24,8 +25,9 @@ const teacherNotebookURL = 'http://localhost:8080/teacher/notebook/run/1';
 describe('NotebookService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
-    });
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     http = TestBed.inject(HttpTestingController);
     configService = TestBed.inject(ConfigService);
     service = TestBed.inject(NotebookService);

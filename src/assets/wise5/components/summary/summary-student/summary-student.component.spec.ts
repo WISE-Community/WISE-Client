@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -11,6 +11,7 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { SummaryStudent } from './summary-student.component';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { Component } from '../../../common/Component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: SummaryStudent;
 const componentId = 'component1';
@@ -21,16 +22,14 @@ const otherStepTitle = 'Choose your favorite ice cream';
 describe('SummaryStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserModule,
-        HttpClientTestingModule,
+    declarations: [SummaryStudent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserModule,
         MatDialogModule,
         NoopAnimationsModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [SummaryStudent],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+        StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(SummaryStudent);
     component = fixture.componentInstance;
     const componentContent = {

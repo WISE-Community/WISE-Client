@@ -6,10 +6,10 @@
 }
 
 td.mdc-data-table__cell, th.mdc-data-table__header-cell {
-  font-size: mat.font-size($wise-typography, 'caption');
+  font-size: mat.m2-font-size($wise-typography, 'caption');
 
   .mdc-form-field {
-    font-size: mat.font-size($wise-typography, 'caption');
+    font-size: mat.m2-font-size($wise-typography, 'caption');
     max-width: 100%;
     padding-top: 4px;
     padding-bottom: 4px;

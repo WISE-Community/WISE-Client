@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectAuthoringStepComponent } from './project-authoring-step.component';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { TeacherDataService } from '../../services/teacherDataService';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../services/teacherWebSocketService';
 import { ClassroomStatusService } from '../../services/classroomStatusService';
@@ -17,6 +17,7 @@ import { DeleteTranslationsService } from '../../services/deleteTranslationsServ
 import { provideRouter } from '@angular/router';
 import { CopyTranslationsService } from '../../services/copyTranslationsService';
 import { TeacherProjectTranslationService } from '../../services/teacherProjectTranslationService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const nodeId1 = 'nodeId1';
 const node = { id: nodeId1 };
@@ -30,7 +31,6 @@ describe('ProjectAuthoringStepComponent', () => {
       declarations: [ProjectAuthoringStepComponent],
       imports: [
         FormsModule,
-        HttpClientTestingModule,
         MatCheckboxModule,
         MatDialogModule,
         MatIconModule,
@@ -47,7 +47,9 @@ describe('ProjectAuthoringStepComponent', () => {
         TeacherDataService,
         TeacherProjectService,
         TeacherProjectTranslationService,
-        TeacherWebSocketService
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
       ]
     });
     fixture = TestBed.createComponent(ProjectAuthoringStepComponent);

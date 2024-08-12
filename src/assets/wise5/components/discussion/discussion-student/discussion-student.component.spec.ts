@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -12,6 +12,7 @@ import { NotificationService } from '../../../services/notificationService';
 import { ProjectService } from '../../../services/projectService';
 import { DiscussionService } from '../discussionService';
 import { DiscussionStudent } from './discussion-student.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: DiscussionStudent;
 const componentId = 'component1';
@@ -24,15 +25,13 @@ let saveNotificationToServerSpy;
 describe('DiscussionStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserModule,
-        HttpClientTestingModule,
+    declarations: [DiscussionStudent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserModule,
         MatDialogModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [DiscussionStudent],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+        StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(DiscussionStudent);
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     spyOn(TestBed.inject(ConfigService), 'getUserIdsStringByWorkgroupId').and.returnValue('1');

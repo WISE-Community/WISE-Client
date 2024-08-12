@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Signal, WritableSignal, computed, signal } fr
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
-import * as $ from 'jquery';
+import $ from 'jquery';
 import { Subscription } from 'rxjs';
 import { temporarilyHighlightElement } from '../../common/dom/dom';
 import { ActivatedRoute, Router } from '@angular/router';

@@ -6,13 +6,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TopBarComponent } from './top-bar.component';
 import { ConfigService } from '../../../services/configService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
 import { MatDialogModule } from '@angular/material/dialog';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('TopBarComponent', () => {
   let component: TopBarComponent;
@@ -20,23 +21,22 @@ describe('TopBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TopBarComponent],
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
+    declarations: [TopBarComponent],
+    imports: [MatDialogModule,
         MatIconModule,
         MatMenuModule,
         MatToolbarModule,
         MatTooltipModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [
+        StudentTeacherCommonServicesModule],
+    providers: [
         ClassroomStatusService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
-      ]
-    }).compileComponents();
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

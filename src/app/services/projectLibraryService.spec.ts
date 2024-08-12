@@ -1,7 +1,8 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectLibraryService } from '../../assets/wise5/services/projectLibraryService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let configService: ConfigService;
 let http: HttpTestingController;
@@ -10,9 +11,9 @@ let service: ProjectLibraryService;
 describe('ProjectLibraryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [ProjectLibraryService, ConfigService]
-    });
+    imports: [],
+    providers: [ProjectLibraryService, ConfigService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(ProjectLibraryService);
     configService = TestBed.inject(ConfigService);

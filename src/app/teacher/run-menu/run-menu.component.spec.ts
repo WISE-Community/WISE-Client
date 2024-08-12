@@ -14,14 +14,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ArchiveProjectService } from '../../services/archive-project.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { RunMenuHarness } from './run-menu.harness';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarHarness } from '@angular/material/snack-bar/testing';
 import { HarnessLoader } from '@angular/cdk/testing';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 
 export class MockTeacherService {
@@ -82,25 +82,24 @@ describe('RunMenuComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [
-          BrowserAnimationsModule,
-          HttpClientTestingModule,
-          MatButtonModule,
-          MatIconModule,
-          MatMenuModule,
-          MatSnackBarModule,
-          RouterTestingModule
-        ],
-        declarations: [RunMenuComponent],
-        providers: [
-          ArchiveProjectService,
-          { provide: TeacherService, useClass: MockTeacherService },
-          { provide: UserService, useClass: MockUserService },
-          { provide: ConfigService, useClass: MockConfigService },
-          { provide: MatDialog, useValue: {} }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
+    declarations: [RunMenuComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        MatSnackBarModule,
+        RouterTestingModule],
+    providers: [
+        ArchiveProjectService,
+        { provide: TeacherService, useClass: MockTeacherService },
+        { provide: UserService, useClass: MockUserService },
+        { provide: ConfigService, useClass: MockConfigService },
+        { provide: MatDialog, useValue: {} },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
     })
   );
 

@@ -1,10 +1,11 @@
 // @ts-nocheck
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConstraintsAuthoringComponent } from './constraints-authoring.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: ConstraintsAuthoringComponent;
 let fixture: ComponentFixture<ConstraintsAuthoringComponent>;
@@ -18,10 +19,10 @@ class ConstraintsAuthoringComponentImpl extends ConstraintsAuthoringComponent {}
 describe('ConstraintsAuthoringComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
-      declarations: [ConstraintsAuthoringComponentImpl],
-      providers: [TeacherProjectService]
-    });
+    declarations: [ConstraintsAuthoringComponentImpl],
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(ConstraintsAuthoringComponentImpl);
     component = fixture.componentInstance;
     component.content = {

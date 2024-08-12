@@ -5,8 +5,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ComponentContent } from '../../common/ComponentContent';
 import { Component } from '../../common/Component';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ProjectService } from '../../services/projectService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: ComponentHeaderComponent;
 let fixture: ComponentFixture<ComponentHeaderComponent>;
@@ -14,21 +15,20 @@ let fixture: ComponentFixture<ComponentHeaderComponent>;
 describe('ComponentHeaderComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ComponentHeaderComponent,
-        HttpClientTestingModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [ComponentHeaderComponent,
+        StudentTeacherCommonServicesModule],
+    providers: [
         {
-          provide: DomSanitizer,
-          useValue: {
-            bypassSecurityTrustHtml: (val: string) => val
-          }
-        }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+            provide: DomSanitizer,
+            useValue: {
+                bypassSecurityTrustHtml: (val: string) => val
+            }
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
   });
 

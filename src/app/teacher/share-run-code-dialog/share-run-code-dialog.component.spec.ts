@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ShareRunCodeDialogComponent } from './share-run-code-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -44,22 +44,20 @@ describe('ShareRunCodeDialogComponent', () => {
   let component: ShareRunCodeDialogComponent;
   let fixture: ComponentFixture<ShareRunCodeDialogComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [ShareRunCodeDialogComponent],
-        imports: [BrowserAnimationsModule, MatDialogModule, MatSnackBarModule],
-        providers: [
-          { provide: ConfigService, useClass: MockConfigService },
-          { provide: TeacherService, useClass: MockTeacherService },
-          { provide: UserService, useClass: MockUserService },
-          { provide: MatDialogRef, useValue: {} },
-          { provide: MAT_DIALOG_DATA, useValue: runObj }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ShareRunCodeDialogComponent],
+      imports: [BrowserAnimationsModule, MatDialogModule, MatSnackBarModule],
+      providers: [
+        { provide: ConfigService, useClass: MockConfigService },
+        { provide: TeacherService, useClass: MockTeacherService },
+        { provide: UserService, useClass: MockUserService },
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: runObj }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShareRunCodeDialogComponent);

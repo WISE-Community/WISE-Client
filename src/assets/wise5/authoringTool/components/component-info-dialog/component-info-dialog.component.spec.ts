@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ComponentInfoDialogComponent } from './component-info-dialog.component';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentInfoService } from '../../../services/componentInfoService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +13,7 @@ import { OpenResponseInfo } from '../../../components/openResponse/OpenResponseI
 import { ComponentInfo } from '../../../components/ComponentInfo';
 import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
 import { ComponentStudentModule } from '../../../../../assets/wise5/components/component/component-student.module';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: ComponentInfoDialogComponent;
 let fixture: ComponentFixture<ComponentInfoDialogComponent>;
@@ -28,10 +29,14 @@ describe('ComponentInfoDialogComponent', () => {
         BrowserAnimationsModule,
         ComponentInfoDialogComponent,
         ComponentStudentModule,
-        ComponentTypeServiceModule,
-        HttpClientTestingModule
+        ComponentTypeServiceModule
       ],
-      providers: [ComponentInfoService, { provide: MAT_DIALOG_DATA, useValue: 'OpenResponse' }]
+      providers: [
+        ComponentInfoService,
+        { provide: MAT_DIALOG_DATA, useValue: 'OpenResponse' },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
     }).compileComponents();
     fixture = TestBed.createComponent(ComponentInfoDialogComponent);
     const projectService = TestBed.inject(ProjectService);

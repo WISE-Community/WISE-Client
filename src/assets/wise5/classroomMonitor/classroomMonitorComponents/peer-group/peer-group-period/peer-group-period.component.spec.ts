@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -32,6 +32,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { PeerGroupGroupingComponent } from '../peer-group-grouping/peer-group-grouping.component';
 import { PeerGroupWorkgroupComponent } from '../peer-group-workgroup/peer-group-workgroup.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('PeerGroupPeriodComponent', () => {
   let component: PeerGroupPeriodComponent;
@@ -46,29 +47,26 @@ describe('PeerGroupPeriodComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
+    declarations: [
         PeerGroupAssignedWorkgroupsComponent,
         PeerGroupPeriodComponent,
         PeerGroupGroupingComponent,
         PeerGroupUnassignedWorkgroupsComponent,
         PeerGroupWorkgroupComponent,
         SelectPeriodComponent
-      ],
-      imports: [
-        BrowserAnimationsModule,
+    ],
+    imports: [BrowserAnimationsModule,
         CommonModule,
         DragDropModule,
         FlexLayoutModule,
         FormsModule,
-        HttpClientTestingModule,
         MatCardModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatSelectModule,
-        ReactiveFormsModule
-      ],
-      providers: [
+        ReactiveFormsModule],
+    providers: [
         AchievementService,
         AnnotationService,
         ConfigService,
@@ -83,9 +81,11 @@ describe('PeerGroupPeriodComponent', () => {
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,
-        WorkgroupService
-      ]
-    }).compileComponents();
+        WorkgroupService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

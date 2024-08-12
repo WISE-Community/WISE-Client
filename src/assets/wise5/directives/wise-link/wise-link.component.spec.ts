@@ -1,10 +1,11 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { NotebookService } from '../../services/notebookService';
 import { StudentDataService } from '../../services/studentDataService';
 import { WiseLinkComponent } from './wise-link.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('WiseLinkComponent', () => {
   let component: WiseLinkComponent;
@@ -13,9 +14,10 @@ describe('WiseLinkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [WiseLinkComponent]
-    }).compileComponents();
+    declarations: [WiseLinkComponent],
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

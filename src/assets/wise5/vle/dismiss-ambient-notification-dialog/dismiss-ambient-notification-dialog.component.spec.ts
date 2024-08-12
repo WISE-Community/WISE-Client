@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,6 +9,7 @@ import { StudentDataService } from '../../services/studentDataService';
 import { DismissAmbientNotificationDialogComponent } from './dismiss-ambient-notification-dialog.component';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { NodeService } from '../../services/nodeService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: DismissAmbientNotificationDialogComponent;
 const DISMISS_CODE: string = 'computer';
@@ -20,27 +21,26 @@ let saveVLEEventSpy: jasmine.Spy;
 describe('DismissAmbientNotificationDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [DismissAmbientNotificationDialogComponent],
+    imports: [BrowserAnimationsModule,
         FormsModule,
-        HttpClientTestingModule,
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [DismissAmbientNotificationDialogComponent],
-      providers: [
+        StudentTeacherCommonServicesModule],
+    providers: [
         {
-          provide: MAT_DIALOG_DATA,
-          useValue: {
-            data: { dismissCode: DISMISS_CODE }
-          }
+            provide: MAT_DIALOG_DATA,
+            useValue: {
+                data: { dismissCode: DISMISS_CODE }
+            }
         },
-        { provide: MatDialogRef, useValue: { close() {} } }
-      ]
-    }).compileComponents();
+        { provide: MatDialogRef, useValue: { close() { } } },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

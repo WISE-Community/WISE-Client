@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -20,6 +20,7 @@ import { OpenResponseContent } from '../OpenResponseContent';
 import { OpenResponseService } from '../openResponseService';
 import { OpenResponseStudent } from './open-response-student.component';
 import { DialogWithoutCloseComponent } from '../../../directives/dialog-without-close/dialog-without-close.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: OpenResponseStudent;
 const componentId = 'component1';
@@ -30,22 +31,19 @@ const response = 'Hello World';
 describe('OpenResponseStudent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [DialogWithoutCloseComponent, OpenResponseStudent],
+    imports: [BrowserAnimationsModule,
         BrowserModule,
         CommonModule,
         ComponentHeaderComponent,
         ComponentSaveSubmitButtonsComponent,
         FormsModule,
-        HttpClientTestingModule,
         MatDialogModule,
         MatIconModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [DialogWithoutCloseComponent, OpenResponseStudent],
-      providers: [AudioRecorderService]
-    });
+        StudentTeacherCommonServicesModule],
+    providers: [AudioRecorderService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
   });
 
   beforeEach(() => {

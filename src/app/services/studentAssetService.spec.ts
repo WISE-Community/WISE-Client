@@ -1,7 +1,8 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
 import { ConfigService } from '../../assets/wise5/services/configService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let configService: ConfigService;
 let service: StudentAssetService;
@@ -14,9 +15,9 @@ let asset1, asset2;
 describe('StudentAssetService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [StudentAssetService, ConfigService]
-    });
+    imports: [],
+    providers: [StudentAssetService, ConfigService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     http = TestBed.get(HttpTestingController);
     service = TestBed.get(StudentAssetService);
     configService = TestBed.get(ConfigService);

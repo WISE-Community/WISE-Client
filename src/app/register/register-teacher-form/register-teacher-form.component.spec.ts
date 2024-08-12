@@ -18,7 +18,7 @@ import {
   validateAndExpect
 } from '../register-user-form/register-user-form-spec-helpers';
 import { By } from '@angular/platform-browser';
-import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha-2';
 import { PasswordModule } from '../../password/password.module';
 import { ConfigService } from '../../services/config.service';
 import { PasswordRequirementComponent } from '../../password/password-requirement/password-requirement.component';
@@ -43,31 +43,29 @@ let router: Router;
 let snackBar: MatSnackBar;
 
 describe('RegisterTeacherFormComponent', () => {
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [RegisterTeacherFormComponent],
-        imports: [
-          BrowserAnimationsModule,
-          MatCheckboxModule,
-          MatInputModule,
-          MatSelectModule,
-          MatSnackBarModule,
-          PasswordModule,
-          ReactiveFormsModule,
-          RecaptchaV3Module,
-          RouterTestingModule
-        ],
-        providers: [
-          { provide: ConfigService, useClass: MockConfigService },
-          { provide: TeacherService, useClass: MockTeacherService },
-          { provide: UserService, useClass: MockUserService },
-          { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [RegisterTeacherFormComponent],
+      imports: [
+        BrowserAnimationsModule,
+        MatCheckboxModule,
+        MatInputModule,
+        MatSelectModule,
+        MatSnackBarModule,
+        PasswordModule,
+        ReactiveFormsModule,
+        RecaptchaV3Module,
+        RouterTestingModule
+      ],
+      providers: [
+        { provide: ConfigService, useClass: MockConfigService },
+        { provide: TeacherService, useClass: MockTeacherService },
+        { provide: UserService, useClass: MockUserService },
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterTeacherFormComponent);
@@ -113,41 +111,38 @@ function validateLastName() {
 }
 async function createAccount() {
   describe('createAccount()', () => {
-    it(
-      'should create account with valid form fields',
-      waitForAsync(async () => {
-        component.createTeacherAccountFormGroup.setValue(
-          createAccountFormValue(
-            'Spongebob',
-            'Squarepants',
-            'spongebob@bikinibottom.com',
-            'Bikini Bottom',
-            'Ocean',
-            'Pacific Ocean',
-            'Boating School',
-            'Other',
-            '',
-            PASSWORD,
-            PASSWORD,
-            true
-          )
-        );
-        const username = 'SpongebobSquarepants';
-        const response: any = helpers.createAccountSuccessResponse(username);
-        spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
-        spyOn(teacherService, 'registerTeacherAccount').and.returnValue(of(response));
-        const routerNavigateSpy = spyOn(router, 'navigate').and.callFake(
-          (args: any[]): Promise<boolean> => {
-            return of(true).toPromise();
-          }
-        );
-        await component.createAccount();
-        expect(routerNavigateSpy).toHaveBeenCalledWith([
-          'join/teacher/complete',
-          { username: username, isUsingGoogleId: false, isUsingMicrosoftId: false }
-        ]);
-      })
-    );
+    it('should create account with valid form fields', waitForAsync(async () => {
+      component.createTeacherAccountFormGroup.setValue(
+        createAccountFormValue(
+          'Spongebob',
+          'Squarepants',
+          'spongebob@bikinibottom.com',
+          'Bikini Bottom',
+          'Ocean',
+          'Pacific Ocean',
+          'Boating School',
+          'Other',
+          '',
+          PASSWORD,
+          PASSWORD,
+          true
+        )
+      );
+      const username = 'SpongebobSquarepants';
+      const response: any = helpers.createAccountSuccessResponse(username);
+      spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
+      spyOn(teacherService, 'registerTeacherAccount').and.returnValue(of(response));
+      const routerNavigateSpy = spyOn(router, 'navigate').and.callFake(
+        (args: any[]): Promise<boolean> => {
+          return of(true).toPromise();
+        }
+      );
+      await component.createAccount();
+      expect(routerNavigateSpy).toHaveBeenCalledWith([
+        'join/teacher/complete',
+        { username: username, isUsingGoogleId: false, isUsingMicrosoftId: false }
+      ]);
+    }));
 
     it('should show error when Recaptcha is invalid', () => {
       waitForAsync(async () => {
@@ -180,35 +175,26 @@ async function createAccount() {
       });
     });
 
-    it(
-      'should show error when invalid first name is sent to server',
-      waitForAsync(() => {
-        expectCreateAccountWithInvalidNameToShowError(
-          'invalidFirstName',
-          'Error: First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
-        );
-      })
-    );
+    it('should show error when invalid first name is sent to server', waitForAsync(() => {
+      expectCreateAccountWithInvalidNameToShowError(
+        'invalidFirstName',
+        'Error: First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
+      );
+    }));
 
-    it(
-      'should show error when invalid last name is sent to server',
-      waitForAsync(() => {
-        expectCreateAccountWithInvalidNameToShowError(
-          'invalidLastName',
-          'Error: Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
-        );
-      })
-    );
+    it('should show error when invalid last name is sent to server', waitForAsync(() => {
+      expectCreateAccountWithInvalidNameToShowError(
+        'invalidLastName',
+        'Error: Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
+      );
+    }));
 
-    it(
-      'should show error when invalid first and last name is sent to server',
-      waitForAsync(() => {
-        expectCreateAccountWithInvalidNameToShowError(
-          'invalidFirstAndLastName',
-          'Error: First Name and Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
-        );
-      })
-    );
+    it('should show error when invalid first and last name is sent to server', waitForAsync(() => {
+      expectCreateAccountWithInvalidNameToShowError(
+        'invalidFirstAndLastName',
+        'Error: First Name and Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
+      );
+    }));
   });
 }
 

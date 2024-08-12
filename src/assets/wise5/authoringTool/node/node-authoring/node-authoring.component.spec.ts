@@ -2,7 +2,7 @@ import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NodeAuthoringComponent } from './node-authoring.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
@@ -30,6 +30,8 @@ import { DeleteTranslationsService } from '../../../services/deleteTranslationsS
 import { PreviewComponentButtonComponent } from '../../components/preview-component-button/preview-component-button.component';
 import { TranslatableInputComponent } from '../../components/translatable-input/translatable-input.component';
 import { CopyTranslationsService } from '../../../services/copyTranslationsService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -55,11 +57,11 @@ describe('NodeAuthoringComponent', () => {
         DragDropModule,
         EditNodeTitleComponent,
         FormsModule,
-        HttpClientTestingModule,
         MatCheckboxModule,
         MatIconModule,
         MatInputModule,
         PreviewComponentButtonComponent,
+        RouterTestingModule,
         StudentTeacherCommonServicesModule,
         TeacherNodeIconComponent
       ],
@@ -86,7 +88,9 @@ describe('NodeAuthoringComponent', () => {
             events: of([]),
             url: '/teacher/edit/unit/123/node/node4'
           }
-        }
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
       ]
     }).compileComponents();
     window.history.pushState(

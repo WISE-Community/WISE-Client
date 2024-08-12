@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import sampleConfig1 from './sampleData/sample_config_1.json';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 let service: ConfigService;
 let http: HttpTestingController;
 
@@ -18,9 +19,9 @@ const teacherWorkgroupId2 = 102;
 describe('ConfigService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [ConfigService]
-    });
+    imports: [],
+    providers: [ConfigService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     http = TestBed.get(HttpTestingController);
     service = TestBed.get(ConfigService);
     configJSON = {

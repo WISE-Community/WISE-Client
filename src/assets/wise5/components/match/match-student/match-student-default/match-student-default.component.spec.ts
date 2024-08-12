@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -9,6 +9,7 @@ import { copy } from '../../../../common/object/object';
 import { ClickToSnipImageService } from '../../../../services/clickToSnipImageService';
 import { ProjectService } from '../../../../services/projectService';
 import { MatchStudentDefault } from './match-student-default.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: MatchStudentDefault;
 let fixture: ComponentFixture<MatchStudentDefault>;
@@ -50,10 +51,11 @@ let starterBucketLabel = 'Starter Choices';
 describe('MatchStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [MatchStudentDefault],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+    declarations: [MatchStudentDefault],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(MatchStudentDefault);
     component = fixture.componentInstance;
     choice1 = createChoice(choiceId1, choiceValue1);

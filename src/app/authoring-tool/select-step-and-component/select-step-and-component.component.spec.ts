@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
@@ -8,6 +8,7 @@ import { SelectStepAndComponentComponent } from './select-step-and-component.com
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { SelectStepAndComponentHarness } from './select-step-and-component.harness';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: SelectStepAndComponentComponent;
 const componentId1 = 'component1';
@@ -26,13 +27,11 @@ let projectService: ProjectService;
 describe('SelectStepAndComponentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        HttpClientTestingModule,
+    imports: [BrowserAnimationsModule,
         SelectStepAndComponentComponent,
-        StudentTeacherCommonServicesModule
-      ]
-    }).compileComponents();
+        StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
     fixture = TestBed.createComponent(SelectStepAndComponentComponent);
     loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;

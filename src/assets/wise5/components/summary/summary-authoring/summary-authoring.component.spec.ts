@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -20,6 +20,7 @@ import { SummaryAuthoring } from './summary-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { ComponentAuthoringModule } from '../../component-authoring.module';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 export class MockConfigService {}
 
@@ -30,13 +31,13 @@ let getComponentSpy;
 describe('SummaryAuthoringComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      declarations: [EditComponentPrompt, SummaryAuthoring],
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
         CommonModule,
         ComponentAuthoringModule,
         FormsModule,
-        HttpClientTestingModule,
         MatCheckboxModule,
         MatFormFieldModule,
         MatIconModule,
@@ -46,11 +47,12 @@ describe('SummaryAuthoringComponent', () => {
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [EditComponentPrompt, SummaryAuthoring],
       providers: [
         { provide: TeacherNodeService, useClass: MockNodeService },
         ProjectAssetService,
-        TeacherProjectService
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
       ]
     });
     spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(

@@ -1,6 +1,6 @@
 import { DiscussionService } from '../../assets/wise5/components/discussion/discussionService';
 import { TestBed, waitForAsync } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
@@ -13,6 +13,7 @@ import { TeacherWebSocketService } from '../../assets/wise5/services/teacherWebS
 import { AchievementService } from '../../assets/wise5/services/achievementService';
 import { NotificationService } from '../../assets/wise5/services/notificationService';
 import { ClassroomStatusService } from '../../assets/wise5/services/classroomStatusService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 class MockTeacherDataService {
   getComponentStatesByComponentIds() {
@@ -30,8 +31,8 @@ const runId = 1;
 describe('DiscussionService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         AchievementService,
         AnnotationService,
         ClassroomStatusService,
@@ -44,9 +45,11 @@ describe('DiscussionService', () => {
         TagService,
         { provide: TeacherDataService, useClass: MockTeacherDataService },
         TeacherProjectService,
-        TeacherWebSocketService
-      ]
-    });
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
 
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(DiscussionService);

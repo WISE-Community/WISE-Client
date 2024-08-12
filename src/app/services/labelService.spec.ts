@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
@@ -7,6 +7,7 @@ import { TagService } from '../../assets/wise5/services/tagService';
 import { LabelService } from '../../assets/wise5/components/label/labelService';
 import { TestBed } from '@angular/core/testing';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let service: LabelService;
 let label1: any;
@@ -36,17 +37,19 @@ let canDeleteBoolean: boolean = true;
 describe('LabelService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         AnnotationService,
         ConfigService,
         LabelService,
         ProjectService,
         SessionService,
         StudentAssetService,
-        TagService
-      ]
-    });
+        TagService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.inject(LabelService);
     label1 = createLabel(label1Text, label1PointX, label1PointY, label1TextX, label1TextY, color1);
     label2 = createLabel(label2Text, label2PointX, label2PointY, label2TextX, label2TextY, color2);

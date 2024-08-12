@@ -1,8 +1,9 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { copy } from '../../assets/wise5/common/object/object';
 import { InsertComponentService } from '../../assets/wise5/services/insertComponentService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 class MockProjectService {
   getNodeById() {}
@@ -18,12 +19,14 @@ let node;
 describe('InsertComponentService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         InsertComponentService,
-        { provide: TeacherProjectService, useClass: MockProjectService }
-      ]
-    });
+        { provide: TeacherProjectService, useClass: MockProjectService },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.inject(InsertComponentService);
     projectService = TestBed.inject(TeacherProjectService);
     node = copy(NODE1);

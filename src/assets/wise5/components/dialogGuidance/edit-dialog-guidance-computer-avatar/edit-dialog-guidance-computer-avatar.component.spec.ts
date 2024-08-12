@@ -1,5 +1,5 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,7 @@ import { copy } from '../../../common/object/object';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EditDialogGuidanceComputerAvatarComponent } from './edit-dialog-guidance-computer-avatar.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('EditDialogGuidanceComputerAvatarComponent', () => {
   let allComputerAvatars: ComputerAvatar[];
@@ -25,23 +26,20 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [EditDialogGuidanceComputerAvatarComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
         DragDropModule,
         FormsModule,
-        HttpClientTestingModule,
         MatButtonToggleModule,
         MatCheckboxModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [EditDialogGuidanceComputerAvatarComponent],
-      providers: [ProjectAssetService, TeacherProjectService],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+        StudentTeacherCommonServicesModule],
+    providers: [ProjectAssetService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

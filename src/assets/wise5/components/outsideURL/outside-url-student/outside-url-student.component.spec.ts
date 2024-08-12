@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -11,6 +11,7 @@ import { Component } from '../../../common/Component';
 import { ProjectService } from '../../../services/projectService';
 import { OutsideUrlStudent } from './outside-url-student.component';
 import { OutsideUrlContent } from '../OutsideUrlContent';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: OutsideUrlStudent;
 const componentId = 'component1';
@@ -20,19 +21,17 @@ const nodeId = 'node1';
 describe('OutsideUrlStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [OutsideUrlStudent],
+    imports: [BrowserAnimationsModule,
         BrowserModule,
         CommonModule,
         FormsModule,
-        HttpClientTestingModule,
         MatDialogModule,
         MatIconModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [OutsideUrlStudent]
-    });
+        StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(OutsideUrlStudent);
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});

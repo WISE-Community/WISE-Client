@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectStepAndComponentCheckboxesComponent } from './select-step-and-component-checkboxes.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import * as demoProjectJSON_import from '../../../../../app/services/sampleData/curriculum/Demo.project.json';
 import { copy } from '../../../common/object/object';
@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: SelectStepAndComponentCheckboxesComponent;
 let fixture: ComponentFixture<SelectStepAndComponentCheckboxesComponent>;
@@ -25,18 +26,15 @@ let projectService: TeacherProjectService;
 describe('SelectStepAndComponentCheckboxesComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [SelectStepAndComponentCheckboxesComponent],
-      imports: [
-        FormsModule,
-        HttpClientTestingModule,
+    declarations: [SelectStepAndComponentCheckboxesComponent],
+    imports: [FormsModule,
         MatButtonModule,
         MatCheckboxModule,
         MatIconModule,
         MatRadioModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [TeacherProjectService]
-    });
+        StudentTeacherCommonServicesModule],
+    providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     projectService = TestBed.inject(TeacherProjectService);
     project = copy(demoProjectJSON_import);
     projectService.setProject(project);

@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -8,6 +8,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../app/student-teac
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { RecoveryAuthoringComponent } from './recovery-authoring.component';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 class MockTeacherProjectService {
   project = {
@@ -40,21 +41,20 @@ const nodeId2 = 'node2';
 describe('RecoveryAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RecoveryAuthoringComponent],
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [RecoveryAuthoringComponent],
+    imports: [BrowserAnimationsModule,
         FormsModule,
-        HttpClientTestingModule,
         MatDialogModule,
         MatInputModule,
         RouterModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [
+        StudentTeacherCommonServicesModule],
+    providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: { get: () => '1' } } } },
-        { provide: TeacherProjectService, useClass: MockTeacherProjectService }
-      ]
-    }).compileComponents();
+        { provide: TeacherProjectService, useClass: MockTeacherProjectService },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

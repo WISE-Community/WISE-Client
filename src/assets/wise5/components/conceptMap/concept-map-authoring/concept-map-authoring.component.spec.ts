@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
@@ -7,6 +7,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapAuthoring } from './concept-map-authoring.component';
 import { ConceptMapAuthoringModule } from './concept-map-authoring.module';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: ConceptMapAuthoring;
 let fixture: ComponentFixture<ConceptMapAuthoring>;
@@ -82,9 +83,9 @@ describe('ConceptMapAuthoringComponent', () => {
       imports: [
         BrowserAnimationsModule,
         ConceptMapAuthoringModule,
-        HttpClientTestingModule,
         StudentTeacherCommonServicesModule
-      ]
+      ],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
     });
     spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
       new ProjectLocale({ default: 'en-US' })

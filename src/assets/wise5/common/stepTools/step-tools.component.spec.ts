@@ -1,5 +1,5 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NodeService } from '../../services/nodeService';
 import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { TeacherDataService } from '../../services/teacherDataService';
@@ -8,6 +8,7 @@ import { TeacherWebSocketService } from '../../services/teacherWebSocketService'
 import { StepToolsComponent } from './step-tools.component';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('StepTools', () => {
   let component: StepToolsComponent;
@@ -15,18 +16,15 @@ describe('StepTools', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        NoopAnimationsModule,
-        StepToolsComponent,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [NoopAnimationsModule, StepToolsComponent, StudentTeacherCommonServicesModule],
       providers: [
         ClassroomStatusService,
         NodeService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
       ]
     });
     fixture = TestBed.createComponent(StepToolsComponent);

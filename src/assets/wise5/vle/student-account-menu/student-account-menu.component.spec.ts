@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,6 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 class MockProjectService {
   rootNode = {};
@@ -43,18 +44,15 @@ describe('StudentAccountMenuComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
+    declarations: [StudentAccountMenuComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [MatDialogModule,
         MatDividerModule,
         MatIconModule,
         MatMenuModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [StudentAccountMenuComponent],
-      providers: [{ provide: ProjectService, useClass: MockProjectService }],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+        StudentTeacherCommonServicesModule],
+    providers: [{ provide: ProjectService, useClass: MockProjectService }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     const studentDataService = TestBed.inject(StudentDataService);
     studentDataService.nodeStatuses = {
       node1: {

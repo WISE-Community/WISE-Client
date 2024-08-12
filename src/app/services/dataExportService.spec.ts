@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
@@ -9,6 +9,7 @@ import { TeacherProjectService } from '../../assets/wise5/services/teacherProjec
 import { TeacherWebSocketService } from '../../assets/wise5/services/teacherWebSocketService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let service: DataExportService;
 let configService: ConfigService;
@@ -19,16 +20,18 @@ const teacherWorkgroupId = 100;
 describe('DataExportService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      providers: [
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [
         ClassroomStatusService,
         CopyNodesService,
         DataExportService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
-      ]
-    });
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.inject(DataExportService);
     configService = TestBed.inject(ConfigService);
     spyOn(configService, 'isTeacherWorkgroupId').and.callFake((workgroupId: number) => {

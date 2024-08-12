@@ -6,10 +6,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NewPasswordAndConfirmComponent } from './new-password-and-confirm/new-password-and-confirm.component';
 import { MatIconModule } from '@angular/material/icon';
-import { PasswordStrengthMeterComponent } from 'angular-password-strength-meter';
+import { PasswordStrengthMeterComponent } from '@wise-community/angular-password-strength-meter';
 import { PasswordRequirementComponent } from './password-requirement/password-requirement.component';
 import { MatMenuModule } from '@angular/material/menu';
-import { provideZxvbnServiceForPSM } from 'angular-password-strength-meter/zxcvbn';
+import { provideZxvbnServiceForPSM } from '@wise-community/angular-password-strength-meter/zxcvbn';
 
 @NgModule({
   imports: [

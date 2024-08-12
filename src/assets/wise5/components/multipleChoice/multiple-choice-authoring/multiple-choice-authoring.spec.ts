@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MultipleChoiceAuthoring } from './multiple-choice-authoring.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
@@ -19,6 +19,7 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { ComponentAuthoringModule } from '../../component-authoring.module';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { ProjectService } from '../../../services/projectService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: MultipleChoiceAuthoring;
 let fixture: ComponentFixture<MultipleChoiceAuthoring>;
@@ -27,27 +28,30 @@ let projectService: ProjectService;
 let teacherProjectService: TeacherProjectService;
 
 describe('MultipleChoiceAuthoringComponent', () => {
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [EditComponentPrompt, MultipleChoiceAuthoring],
-        imports: [
-          BrowserAnimationsModule,
-          ComponentAuthoringModule,
-          FormsModule,
-          HttpClientTestingModule,
-          MatDialogModule,
-          MatCheckboxModule,
-          MatFormFieldModule,
-          MatIconModule,
-          MatInputModule,
-          MatRadioModule,
-          StudentTeacherCommonServicesModule
-        ],
-        providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
-      });
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [EditComponentPrompt, MultipleChoiceAuthoring],
+      imports: [
+        BrowserAnimationsModule,
+        ComponentAuthoringModule,
+        FormsModule,
+        MatDialogModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatRadioModule,
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
+        ProjectAssetService,
+        TeacherNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
+  }));
 
   beforeEach(async () => {
     projectService = TestBed.inject(ProjectService);
