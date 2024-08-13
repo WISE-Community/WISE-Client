@@ -35,6 +35,7 @@ import { ComponentInfoService } from '../../assets/wise5/services/componentInfoS
 import { TeacherProjectTranslationService } from '../../assets/wise5/services/teacherProjectTranslationService';
 import { DeleteTranslationsService } from '../../assets/wise5/services/deleteTranslationsService';
 import { CopyTranslationsService } from '../../assets/wise5/services/copyTranslationsService';
+import { NotifyAuthorService } from '../../assets/wise5/services/notifyAuthorService';
 
 @NgModule({
   imports: [StudentTeacherCommonModule, AuthoringToolModule, RouterModule, AuthoringRoutingModule],
@@ -56,6 +57,7 @@ import { CopyTranslationsService } from '../../assets/wise5/services/copyTransla
     MilestoneReportService,
     MoveNodesService,
     { provide: NodeService, useExisting: TeacherNodeService },
+    NotifyAuthorService,
     ProjectAssetService,
     SpaceService,
     DeleteTranslationsService,

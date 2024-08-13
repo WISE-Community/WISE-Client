@@ -26,7 +26,8 @@ export class TeacherProjectService extends ProjectService {
   public errorSavingProject$: Observable<void> = this.errorSavingProjectSource.asObservable();
   private nodeTypeSelected: WritableSignal<NodeTypeSelected> = signal(null);
   private notAllowedToEditThisProjectSource: Subject<void> = new Subject<void>();
-  public notAllowedToEditThisProject$: Observable<void> = this.notAllowedToEditThisProjectSource.asObservable();
+  public notAllowedToEditThisProject$: Observable<void> =
+    this.notAllowedToEditThisProjectSource.asObservable();
   private projectSavedSource: Subject<void> = new Subject<void>();
   public projectSaved$: Observable<void> = this.projectSavedSource.asObservable();
   private savingProjectSource: Subject<void> = new Subject<void>();
@@ -181,29 +182,6 @@ export class TeacherProjectService extends ProjectService {
       },
       inactiveNodes: []
     };
-  }
-
-  notifyAuthorProjectBeginEnd(projectId, isBegin) {
-    return this.http.post(`/api/author/project/notify/${projectId}/${isBegin}`, null).toPromise();
-  }
-
-  notifyAuthorProjectBegin(projectId) {
-    return this.notifyAuthorProjectBeginEnd(projectId, true);
-  }
-
-  notifyAuthorProjectEnd(projectId = null) {
-    return new Promise((resolve, reject) => {
-      if (projectId == null) {
-        if (this.project != null) {
-          projectId = this.configService.getProjectId();
-        } else {
-          resolve({});
-        }
-      }
-      this.notifyAuthorProjectBeginEnd(projectId, false).then(() => {
-        resolve({});
-      });
-    });
   }
 
   /**
