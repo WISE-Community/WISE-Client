@@ -28,7 +28,7 @@
     [ngClass]="{ 'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node' }"
   >
     <run-ended-and-locked-message *ngIf="runEndedAndLocked" class="notice" />
-    <node *ngIf="layoutState === 'node'" class="top" [node]="currentNode"></node>
+    <node *ngIf="layoutState === 'node'" class="top" [node]="currentNode" />
     <navigation *ngIf="layoutState === 'nav'" class="top"></navigation>
   </div>
 </ng-template>
@@ -42,7 +42,7 @@
     <group-tabs></group-tabs>
     <div class="tab-content">
       <run-ended-and-locked-message *ngIf="runEndedAndLocked" />
-      <node *ngIf="layoutState === 'node'" class="node-tabbed top"></node>
+      <node *ngIf="layoutState === 'node'" class="node-tabbed top" />
       <div class="node-nav">
         <node-navigation class="l-constrained"></node-navigation>
       </div>
