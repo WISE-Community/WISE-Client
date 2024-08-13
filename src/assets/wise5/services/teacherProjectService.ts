@@ -26,7 +26,8 @@ export class TeacherProjectService extends ProjectService {
   public errorSavingProject$: Observable<void> = this.errorSavingProjectSource.asObservable();
   private nodeTypeSelected: WritableSignal<NodeTypeSelected> = signal(null);
   private notAllowedToEditThisProjectSource: Subject<void> = new Subject<void>();
-  public notAllowedToEditThisProject$: Observable<void> = this.notAllowedToEditThisProjectSource.asObservable();
+  public notAllowedToEditThisProject$: Observable<void> =
+    this.notAllowedToEditThisProjectSource.asObservable();
   private projectSavedSource: Subject<void> = new Subject<void>();
   public projectSaved$: Observable<void> = this.projectSavedSource.asObservable();
   private savingProjectSource: Subject<void> = new Subject<void>();
@@ -3061,22 +3062,6 @@ export class TeacherProjectService extends ProjectService {
 
   broadcastProjectSaved() {
     this.projectSavedSource.next();
-  }
-
-  moveObjectUp(objects: any[], index: number): void {
-    if (index !== 0) {
-      const object = objects[index];
-      objects.splice(index, 1);
-      objects.splice(index - 1, 0, object);
-    }
-  }
-
-  moveObjectDown(objects: any[], index: number): void {
-    if (index !== objects.length - 1) {
-      const object = objects[index];
-      objects.splice(index, 1);
-      objects.splice(index + 1, 0, object);
-    }
   }
 
   getNodesInOrder(): any[] {

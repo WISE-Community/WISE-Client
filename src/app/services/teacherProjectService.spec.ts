@@ -16,7 +16,6 @@ let http: HttpTestingController;
 let demoProjectJSON: any;
 let scootersProjectJSON: any;
 let teacherProjectJSON: any;
-let objects;
 
 const scootersProjectJSONString = JSON.stringify(demoProjectJSON_import);
 const scootersProjectName = 'scooters';
@@ -29,9 +28,14 @@ const wiseBaseURL = '/wise';
 describe('TeacherProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [StudentTeacherCommonServicesModule],
-    providers: [DeleteNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [StudentTeacherCommonServicesModule],
+      providers: [
+        DeleteNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(TeacherProjectService);
     configService = TestBed.inject(ConfigService);
@@ -79,8 +83,6 @@ describe('TeacherProjectService', () => {
   getOldToNewIds();
   replaceOldIds();
   replaceIds();
-  moveObjectUp();
-  moveObjectDown();
   removeNodeIdFromTransitions();
 });
 
@@ -747,54 +749,6 @@ function replaceIds() {
       const expectedString = '"node10", "node10", "node2", "node10", "node11", "node11"';
       expect(service.replaceIds(string, 'node1', 'node10')).toEqual(expectedString);
     });
-  });
-}
-
-function moveObjectUp() {
-  describe('moveObjectUp()', () => {
-    beforeEach(() => {
-      objects = [1, 2, 3];
-    });
-    moveObjectUpTopElement();
-    moveObjectUpNotTopElement();
-  });
-}
-
-function moveObjectUpTopElement() {
-  it('should not move an object up when the object is the top element', () => {
-    service.moveObjectUp(objects, 0);
-    expect(objects).toEqual([1, 2, 3]);
-  });
-}
-
-function moveObjectUpNotTopElement() {
-  it('should move an object up when the object is not the top element', () => {
-    service.moveObjectUp(objects, 1);
-    expect(objects).toEqual([2, 1, 3]);
-  });
-}
-
-function moveObjectDown() {
-  describe('moveObjectDown()', () => {
-    beforeEach(() => {
-      objects = [1, 2, 3];
-    });
-    moveObjectDownNotBottomElement();
-    moveObjectDownIsBottomElement();
-  });
-}
-
-function moveObjectDownNotBottomElement() {
-  it('should move an object down when the object is not the bottom element', () => {
-    service.moveObjectDown(objects, 1);
-    expect(objects).toEqual([1, 3, 2]);
-  });
-}
-
-function moveObjectDownIsBottomElement() {
-  it('should not move an object down when the object is the bottom element', () => {
-    service.moveObjectDown(objects, 2);
-    expect(objects).toEqual([1, 2, 3]);
   });
 }
 

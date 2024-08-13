@@ -5,6 +5,7 @@ import { ProjectAssetService } from '../../../../app/services/projectAssetServic
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherNodeService } from '../../services/teacherNodeService';
+import { moveObjectDown, moveObjectUp } from '../../common/array/array';
 
 @Directive()
 export abstract class AbstractComponentAuthoring {
@@ -114,12 +115,12 @@ export abstract class AbstractComponentAuthoring {
   }
 
   moveObjectUp(objects: any[], index: number): void {
-    this.projectService.moveObjectUp(objects, index);
+    moveObjectUp(objects, index);
     this.componentChanged();
   }
 
   moveObjectDown(objects: any[], index: number): void {
-    this.projectService.moveObjectDown(objects, index);
+    moveObjectDown(objects, index);
     this.componentChanged();
   }
 }

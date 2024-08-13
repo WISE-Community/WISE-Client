@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
+import { moveObjectDown, moveObjectUp } from '../../../../assets/wise5/common/array/array';
 
 @Component({
   selector: 'edit-component-default-feedback',
@@ -37,12 +38,12 @@ export class EditComponentDefaultFeedback {
   }
 
   moveDefaultFeedbackUp(index: number): void {
-    this.ProjectService.moveObjectUp(this.componentContent.defaultFeedback, index);
+    moveObjectUp(this.componentContent.defaultFeedback, index);
     this.componentChanged();
   }
 
   moveDefaultFeedbackDown(index: number): void {
-    this.ProjectService.moveObjectDown(this.componentContent.defaultFeedback, index);
+    moveObjectDown(this.componentContent.defaultFeedback, index);
     this.componentChanged();
   }
 
