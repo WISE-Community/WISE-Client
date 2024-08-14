@@ -4,6 +4,7 @@ import { RxStomp } from '@stomp/rx-stomp';
 import { Message } from '@stomp/stompjs';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { SessionService } from '../../services/sessionService';
+import { NotifyAuthorService } from '../../services/notifyAuthorService';
 
 @Component({
   selector: 'concurrent-authors-message',
@@ -17,6 +18,7 @@ export class ConcurrentAuthorsMessageComponent {
 
   constructor(
     private configService: ConfigService,
+    private notifyAuthorService: NotifyAuthorService,
     private projectService: TeacherProjectService,
     private sessionService: SessionService
   ) {
@@ -29,7 +31,7 @@ export class ConcurrentAuthorsMessageComponent {
   ngOnInit() {
     this.rxStomp.activate();
     this.rxStomp.connected$.subscribe(() => {
-      this.projectService.notifyAuthorProjectBegin(this.projectId);
+      this.notifyAuthorService.editBegin(this.projectId);
     });
     this.subscribeToCurrentAuthors();
     this.subscribeToSessionExit();
@@ -49,7 +51,7 @@ export class ConcurrentAuthorsMessageComponent {
 
   private subscribeToSessionExit(): void {
     this.sessionService.exit$.subscribe(() => {
-      this.projectService.notifyAuthorProjectEnd();
+      this.notifyAuthorService.editEnd(this.projectId);
     });
   }
 
