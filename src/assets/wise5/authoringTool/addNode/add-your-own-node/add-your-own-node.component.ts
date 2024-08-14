@@ -1,16 +1,47 @@
 import { Component } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { ComponentTypeService } from '../../../services/componentTypeService';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatIconModule } from '@angular/material/icon';
+import { ComponentTypeButtonComponent } from '../../components/component-type-button/component-type-button.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'add-your-own-node',
+  imports: [
+    CommonModule,
+    ComponentTypeButtonComponent,
+    DragDropModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressBarModule,
+    ReactiveFormsModule,
+    RouterModule
+  ],
+  standalone: true,
   styleUrls: ['add-your-own-node.component.scss', '../../add-content.scss'],
   templateUrl: 'add-your-own-node.component.html'
 })
-export class AddYourOwnNode {
+export class AddYourOwnNodeComponent {
   protected addNodeFormGroup: FormGroup = this.fb.group({
     title: new FormControl($localize`New Step`, [Validators.required])
   });
@@ -25,11 +56,12 @@ export class AddYourOwnNode {
     private projectService: TeacherProjectService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
-
-  ngOnInit() {
-    this.targetId = history.state.targetId;
+  ) {
     this.componentTypes = this.componentTypeService.getComponentTypes();
+  }
+
+  ngOnInit(): void {
+    this.targetId = history.state.targetId;
   }
 
   protected addComponent(componentType: any): void {
