@@ -3,6 +3,8 @@ import { insertWiseLinks, replaceWiseLinks } from '../../common/wise-link/wise-l
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Subject, debounceTime } from 'rxjs';
+import { copy } from '../../common/object/object';
+import { newProjectTemplate } from '../new-project-template';
 
 @Component({
   selector: 'notebook-authoring',
@@ -24,12 +26,12 @@ export class NotebookAuthoringComponent {
     this.reportIdToAuthoringNote = {};
 
     if (this.project.notebook == null) {
-      const projectTemplate = this.projectService.getNewProjectTemplate();
+      const projectTemplate = copy(newProjectTemplate);
       this.project.notebook = projectTemplate.notebook;
     }
 
     if (this.project.teacherNotebook == null) {
-      const projectTemplate = this.projectService.getNewProjectTemplate();
+      const projectTemplate = copy(newProjectTemplate);
       projectTemplate.teacherNotebook.enabled = false;
       this.project.teacherNotebook = projectTemplate.teacherNotebook;
     }
