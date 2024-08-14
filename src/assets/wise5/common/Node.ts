@@ -196,4 +196,8 @@ export class Node {
       componentContent.connectedComponents.length !== 0
     );
   }
+
+  getConstraints(): any[] {
+    return this.constraints;
+  }
 }
