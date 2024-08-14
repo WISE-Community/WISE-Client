@@ -21,6 +21,7 @@ import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress
     IntersectionObserverModule,
     StatusIconComponent,
     StudentTeacherCommonModule,
+    WorkgroupNodeScoreComponent,
     WorkgroupNodeStatusComponent
   ],
   declarations: [
@@ -32,7 +33,6 @@ import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress
     WorkgroupComponentGradingComponent,
     WorkgroupInfoComponent,
     WorkgroupItemComponent,
-    WorkgroupNodeScoreComponent,
     WorkgroupSelectAutocompleteComponent
   ],
   exports: [

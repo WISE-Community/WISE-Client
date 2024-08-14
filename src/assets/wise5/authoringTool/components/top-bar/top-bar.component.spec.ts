@@ -14,6 +14,7 @@ import { TeacherWebSocketService } from '../../../services/teacherWebSocketServi
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { NotifyAuthorService } from '../../../services/notifyAuthorService';
 
 describe('TopBarComponent', () => {
   let component: TopBarComponent;
@@ -21,22 +22,25 @@ describe('TopBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [TopBarComponent],
-    imports: [MatDialogModule,
+      declarations: [TopBarComponent],
+      imports: [
+        MatDialogModule,
         MatIconModule,
         MatMenuModule,
         MatToolbarModule,
         MatTooltipModule,
-        StudentTeacherCommonServicesModule],
-    providers: [
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
         ClassroomStatusService,
+        NotifyAuthorService,
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

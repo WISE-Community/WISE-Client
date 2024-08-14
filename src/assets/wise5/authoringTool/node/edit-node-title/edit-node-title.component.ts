@@ -1,9 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Node } from '../../../common/Node';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TranslatableInputComponent } from '../../components/translatable-input/translatable-input.component';
 
 @Component({
+  imports: [TranslatableInputComponent],
   selector: 'edit-node-title',
+  standalone: true,
   styleUrl: './edit-node-title.component.scss',
   templateUrl: './edit-node-title.component.html'
 })

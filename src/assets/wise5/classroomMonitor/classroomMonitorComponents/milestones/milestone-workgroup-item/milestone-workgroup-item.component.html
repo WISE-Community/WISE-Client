@@ -33,8 +33,7 @@
         fxLayout="row"
         fxLayoutAlign="center center"
       >
-        <workgroup-node-score [score]="initialScore" [maxScore]="firstComponentMaxScore">
-        </workgroup-node-score>
+        <workgroup-node-score [score]="initialScore" [maxScore]="firstComponentMaxScore" />
       </div>
       <div
         *ngIf="showScore"
@@ -42,8 +41,7 @@
         fxLayout="row"
         fxLayoutAlign="center center"
       >
-        <workgroup-node-score [score]="score" [maxScore]="lastComponentMaxScore">
-        </workgroup-node-score>
+        <workgroup-node-score [score]="score" [maxScore]="lastComponentMaxScore" />
       </div>
       <div
         *ngIf="showScore && locations.length > 1"

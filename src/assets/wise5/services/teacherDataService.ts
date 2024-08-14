@@ -160,7 +160,7 @@ export class TeacherDataService extends DataService {
       projectId: this.ConfigService.getProjectId(),
       runId: this.ConfigService.getRunId(),
       workgroupId: this.ConfigService.getWorkgroupId(),
-      clientSaveTime: Date.parse(new Date().toString()),
+      clientSaveTime: new Date().getTime(),
       context: context,
       nodeId: nodeId,
       componentId: componentId,

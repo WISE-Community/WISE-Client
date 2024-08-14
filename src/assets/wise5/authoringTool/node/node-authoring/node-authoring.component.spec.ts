@@ -48,13 +48,14 @@ let saveProjectSpy: jasmine.Spy;
 describe('NodeAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CopyComponentButtonComponent, EditNodeTitleComponent, NodeAuthoringComponent],
+      declarations: [CopyComponentButtonComponent, NodeAuthoringComponent],
       imports: [
         AddComponentButtonComponent,
         BrowserAnimationsModule,
         ComponentAuthoringModule,
         ComponentTypeServiceModule,
         DragDropModule,
+        EditNodeTitleComponent,
         FormsModule,
         MatCheckboxModule,
         MatIconModule,
@@ -62,8 +63,7 @@ describe('NodeAuthoringComponent', () => {
         PreviewComponentButtonComponent,
         RouterTestingModule,
         StudentTeacherCommonServicesModule,
-        TeacherNodeIconComponent,
-        TranslatableInputComponent
+        TeacherNodeIconComponent
       ],
       providers: [
         ClassroomStatusService,

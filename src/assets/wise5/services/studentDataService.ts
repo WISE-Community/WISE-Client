@@ -304,7 +304,7 @@ export class StudentDataService extends DataService {
       runId: this.ConfigService.getRunId(),
       periodId: this.ConfigService.getPeriodId(),
       workgroupId: this.ConfigService.getWorkgroupId(),
-      clientSaveTime: Date.parse(new Date().toString())
+      clientSaveTime: new Date().getTime()
     };
   }
 
