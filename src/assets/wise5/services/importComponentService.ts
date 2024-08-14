@@ -4,6 +4,7 @@ import { ConfigService } from './configService';
 import { CopyNodesService } from './copyNodesService';
 import { InsertComponentService } from './insertComponentService';
 import { TeacherProjectService } from './teacherProjectService';
+import { map, Observable } from 'rxjs';
 
 @Injectable()
 export class ImportComponentService {
@@ -28,7 +29,7 @@ export class ImportComponentService {
     importProjectId: number,
     nodeId: string,
     insertAfterComponentId: string
-  ) {
+  ): Observable<any> {
     const newComponents = [];
     const newComponentIds = [];
     for (const component of components) {
@@ -46,11 +47,11 @@ export class ImportComponentService {
       newComponents,
       importProjectId,
       this.ConfigService.getConfigParam('projectId')
-    )
-      .toPromise()
-      .then((newComponents: any) => {
+    ).pipe(
+      map((newComponents: any) => {
         this.InsertComponentService.insertComponents(newComponents, nodeId, insertAfterComponentId);
         return newComponents;
-      });
+      })
+    );
   }
 }
