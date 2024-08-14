@@ -4,6 +4,8 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { Router } from '@angular/router';
+import { copy } from '../../common/object/object';
+import { newProjectTemplate } from '../new-project-template';
 
 @Component({
   selector: 'add-project',
@@ -38,7 +40,7 @@ export class AddProjectComponent {
       },
       disableClose: true
     });
-    const project = this.projectService.getNewProjectTemplate();
+    const project = copy(newProjectTemplate);
     project.metadata.title = this.addProjectFormGroup.controls['title'].value;
     const projectJSONString = JSON.stringify(project, null, 4);
     this.projectService
