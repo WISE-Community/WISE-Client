@@ -45,29 +45,6 @@ export class TeacherProjectService extends ProjectService {
     super(branchService, componentServiceLookupService, http, configService, pathService);
   }
 
-  notifyAuthorProjectBeginEnd(projectId, isBegin) {
-    return this.http.post(`/api/author/project/notify/${projectId}/${isBegin}`, null).toPromise();
-  }
-
-  notifyAuthorProjectBegin(projectId) {
-    return this.notifyAuthorProjectBeginEnd(projectId, true);
-  }
-
-  notifyAuthorProjectEnd(projectId = null) {
-    return new Promise((resolve, reject) => {
-      if (projectId == null) {
-        if (this.project != null) {
-          projectId = this.configService.getProjectId();
-        } else {
-          resolve({});
-        }
-      }
-      this.notifyAuthorProjectBeginEnd(projectId, false).then(() => {
-        resolve({});
-      });
-    });
-  }
-
   /**
    * Retrieve the project JSON
    * @param projectId retrieve the project JSON with this id
