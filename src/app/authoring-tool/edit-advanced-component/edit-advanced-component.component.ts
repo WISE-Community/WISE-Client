@@ -4,6 +4,7 @@ import { Component } from '../../../assets/wise5/common/Component';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { TeacherNodeService } from '../../../assets/wise5/services/teacherNodeService';
+import { moveObjectDown, moveObjectUp } from '../../../assets/wise5/common/array/array';
 
 @Directive()
 export abstract class EditAdvancedComponentComponent {
@@ -48,12 +49,12 @@ export abstract class EditAdvancedComponentComponent {
   }
 
   moveObjectUp(objects: any[], index: number): void {
-    this.teacherProjectService.moveObjectUp(objects, index);
+    moveObjectUp(objects, index);
     this.componentChanged();
   }
 
   moveObjectDown(objects: any[], index: number): void {
-    this.teacherProjectService.moveObjectDown(objects, index);
+    moveObjectDown(objects, index);
     this.componentChanged();
   }
 }

@@ -1,4 +1,10 @@
-import { arraysContainSameValues, CSVToArray, reduceByUniqueId } from './array';
+import {
+  arraysContainSameValues,
+  CSVToArray,
+  moveObjectDown,
+  moveObjectUp,
+  reduceByUniqueId
+} from './array';
 import csvArraySample from './arraySample';
 import { getIntersectOfArrays } from './array';
 
@@ -94,3 +100,48 @@ describe('reduceByUniqueId', () => {
     expect(result[2].id).toEqual(3);
   });
 });
+
+let objects;
+describe('moveObjectUp()', () => {
+  beforeEach(() => {
+    objects = [1, 2, 3];
+  });
+  moveObjectUpTopElement();
+  moveObjectUpNotTopElement();
+});
+
+function moveObjectUpTopElement() {
+  it('should not move an object up when the object is the top element', () => {
+    moveObjectUp(objects, 0);
+    expect(objects).toEqual([1, 2, 3]);
+  });
+}
+
+function moveObjectUpNotTopElement() {
+  it('should move an object up when the object is not the top element', () => {
+    moveObjectUp(objects, 1);
+    expect(objects).toEqual([2, 1, 3]);
+  });
+}
+
+describe('moveObjectDown()', () => {
+  beforeEach(() => {
+    objects = [1, 2, 3];
+  });
+  moveObjectDownNotBottomElement();
+  moveObjectDownIsBottomElement();
+});
+
+function moveObjectDownNotBottomElement() {
+  it('should move an object down when the object is not the bottom element', () => {
+    moveObjectDown(objects, 1);
+    expect(objects).toEqual([1, 3, 2]);
+  });
+}
+
+function moveObjectDownIsBottomElement() {
+  it('should not move an object down when the object is the bottom element', () => {
+    moveObjectDown(objects, 2);
+    expect(objects).toEqual([1, 2, 3]);
+  });
+}

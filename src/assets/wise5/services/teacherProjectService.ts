@@ -2902,22 +2902,6 @@ export class TeacherProjectService extends ProjectService {
     this.projectSavedSource.next();
   }
 
-  moveObjectUp(objects: any[], index: number): void {
-    if (index !== 0) {
-      const object = objects[index];
-      objects.splice(index, 1);
-      objects.splice(index - 1, 0, object);
-    }
-  }
-
-  moveObjectDown(objects: any[], index: number): void {
-    if (index !== objects.length - 1) {
-      const object = objects[index];
-      objects.splice(index, 1);
-      objects.splice(index + 1, 0, object);
-    }
-  }
-
   getNodesInOrder(): any[] {
     return Object.entries(this.idToOrder)
       .map((entry: any) => {
