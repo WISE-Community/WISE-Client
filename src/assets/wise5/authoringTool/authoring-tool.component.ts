@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { Subscription, filter } from 'rxjs';
 import { ConfigService } from '../services/configService';
 import { NotificationService } from '../services/notificationService';
@@ -6,7 +6,7 @@ import { TeacherProjectService } from '../services/teacherProjectService';
 import { SessionService } from '../services/sessionService';
 import { TeacherDataService } from '../services/teacherDataService';
 import { NavigationEnd, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
 
 @Component({
@@ -29,8 +29,10 @@ export class AuthoringToolComponent {
     private configService: ConfigService,
     private dataService: TeacherDataService,
     private dialog: MatDialog,
+    private elem: ElementRef,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService,
+    private renderer: Renderer2,
     private sessionService: SessionService,
     private router: Router
   ) {}
@@ -43,6 +45,7 @@ export class AuthoringToolComponent {
     this.subscribeToProjectEvents();
     this.subscribeToDataEvents();
     this.subscribeToRouterEvents();
+    this.subscribeToUIChangeEvents();
     this.checkPermission();
   }
 
@@ -192,6 +195,55 @@ export class AuthoringToolComponent {
     );
   }
 
+  private subscribeToUIChangeEvents(): void {
+    this.subscriptions.add(
+      this.projectService.uiChanged$.subscribe(() => {
+        setTimeout(() => {
+          if (this.projectService.isDefaultLocale()) {
+            this.enableElements();
+          } else {
+            this.disableElements();
+          }
+        }, 500);
+      })
+    );
+  }
+
+  private enableElements(): void {
+    this.getElements().forEach((element) => {
+      this.renderer.removeAttribute(element, 'disabled');
+      this.renderer.removeStyle(element, 'pointer-events');
+    });
+  }
+
+  private disableElements(): void {
+    this.getElements()
+      .filter((element) => !this.isAlwaysEnabled(element))
+      .forEach((element) => {
+        this.renderer.setAttribute(element, 'disabled', 'true');
+        this.renderer.setStyle(element, 'pointer-events', 'none');
+      });
+  }
+
+  private isAlwaysEnabled(element: any): boolean {
+    return ['enable-in-translation', 'tox-mbtn', 'tox-tbtn'].some((allowedClass) =>
+      element.classList.contains(allowedClass)
+    );
+  }
+
+  private getElements(): any[] {
+    const elementsToDisable = 'button,input,mat-checkbox,textarea,mat-icon[cdkdraghandle]';
+    return Array.from(
+      this.elem.nativeElement.querySelectorAll(`div.main-content ${elementsToDisable}`)
+    ).concat(
+      this.dialog.openDialogs.flatMap((dialogRef: MatDialogRef<any, any>) =>
+        Array.from(
+          dialogRef.componentRef.location.nativeElement.querySelectorAll(`${elementsToDisable}`)
+        )
+      )
+    );
+  }
+
   private checkPermission(): void {
     if (!this.configService.getConfigParam('canEditProject')) {
       setTimeout(() => {
@@ -208,15 +260,22 @@ export class AuthoringToolComponent {
     document.getElementById('top').scrollIntoView();
     this.showToolbar = this.router.url.startsWith('/teacher/edit/unit');
     this.isMenuOpen = false;
-    this.projectId = this.configService.getProjectId();
-    this.runId = this.configService.getRunId();
-    this.runCode = this.configService.getRunCode();
+    if (!this.showToolbar) {
+      delete this.projectId;
+      delete this.runId;
+      delete this.runCode;
+    } else {
+      this.projectId = this.configService.getProjectId();
+      this.runId = this.configService.getRunId();
+      this.runCode = this.configService.getRunCode();
+    }
     if (this.projectId) {
       this.projectTitle = this.projectService.getProjectTitle();
     } else {
       this.projectTitle = null;
     }
     this.notificationService.hideJSONValidMessage();
+    this.projectService.uiChanged();
   }
 
   protected toggleMenu(): void {

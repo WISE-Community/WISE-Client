@@ -13,7 +13,8 @@ export class AnnotationService {
   annotations: Annotation[] = [];
   dummyAnnotationId: number = 1; // used in preview mode when we simulate saving of annotation
   private annotationSavedToServerSource: Subject<Annotation> = new Subject<Annotation>();
-  public annotationSavedToServer$: Observable<Annotation> = this.annotationSavedToServerSource.asObservable();
+  public annotationSavedToServer$: Observable<Annotation> =
+    this.annotationSavedToServerSource.asObservable();
   private annotationReceivedSource: Subject<Annotation> = new Subject<Annotation>();
   public annotationReceived$: Observable<Annotation> = this.annotationReceivedSource.asObservable();
 
@@ -318,7 +319,7 @@ export class AnnotationService {
     const localNotebookItemId = null;
     const notebookItemId = null;
     const annotationType = 'autoScore';
-    const clientSaveTime = Date.parse(new Date().toString());
+    const clientSaveTime = new Date().getTime();
     const annotation = this.createAnnotation(
       annotationId,
       runId,
@@ -354,7 +355,7 @@ export class AnnotationService {
     const localNotebookItemId = null;
     const notebookItemId = null;
     const annotationType = 'autoComment';
-    const clientSaveTime = Date.parse(new Date().toString());
+    const clientSaveTime = new Date().getTime();
     const annotation = this.createAnnotation(
       annotationId,
       runId,
@@ -399,7 +400,7 @@ export class AnnotationService {
     const localNotebookItemId = null;
     const notebookItemId = null;
     const annotationType = 'inappropriateFlag';
-    const clientSaveTime = Date.parse(new Date().toString());
+    const clientSaveTime = new Date().getTime();
     const annotation = this.createAnnotation(
       annotationId,
       runId,

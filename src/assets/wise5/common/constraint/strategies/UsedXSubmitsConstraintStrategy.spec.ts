@@ -1,8 +1,9 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { StudentDataService } from '../../../services/studentDataService';
 import { UsedXSubmitsConstraintStrategy } from './UsedXSubmitsConstraintStrategy';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let dataService: StudentDataService;
 let strategy: UsedXSubmitsConstraintStrategy;
@@ -10,8 +11,9 @@ let strategy: UsedXSubmitsConstraintStrategy;
 describe('UsedXSubmitsConstraintStrategy', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
-    });
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     dataService = TestBed.inject(StudentDataService);
     strategy = new UsedXSubmitsConstraintStrategy();
     strategy.dataService = dataService;

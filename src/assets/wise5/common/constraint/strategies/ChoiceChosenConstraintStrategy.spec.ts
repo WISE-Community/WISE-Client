@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { StudentDataService } from '../../../services/studentDataService';
 import { ChoiceChosenConstraintStrategy } from './ChoiceChosenConstraintStrategy';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const choiceId1 = 'choice1';
 const choiceId2 = 'choice2';
@@ -28,12 +29,10 @@ const criteria = {
 describe('ChoiceChosenConstraintStrategy', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        StudentTeacherCommonServicesModule
-      ]
-    });
+    imports: [ComponentServiceLookupServiceModule,
+        StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     strategy = new ChoiceChosenConstraintStrategy();
     componentServiceLookupService = TestBed.inject(ComponentServiceLookupService);
     strategy.componentServiceLookupService = componentServiceLookupService;

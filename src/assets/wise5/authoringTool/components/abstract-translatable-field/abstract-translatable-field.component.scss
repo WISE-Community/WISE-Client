@@ -1,0 +1,21 @@
+mat-form-field {
+  width: 100%;
+}
+
+.translatable {
+  .mat-mdc-form-field-hint-wrapper {
+    position: relative;
+    margin: -20px 0 4px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mat-mdc-form-field-hint-spacer {
+    display: none;
+  }
+
+  .source-language {
+    padding: 4px 8px;
+    margin-top: 4px;
+  }
+}

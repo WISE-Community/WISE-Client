@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -15,6 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ShowGroupWorkAuthoringComponent', () => {
   let component: ShowGroupWorkAuthoringComponent;
@@ -23,22 +24,19 @@ describe('ShowGroupWorkAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [EditComponentPrompt, ShowGroupWorkAuthoringComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
-        HttpClientTestingModule,
         MatCheckboxModule,
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [EditComponentPrompt, ShowGroupWorkAuthoringComponent],
-      providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+        StudentTeacherCommonServicesModule],
+    providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

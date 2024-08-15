@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -9,6 +9,7 @@ import { Component } from '../../../common/Component';
 import { ProjectService } from '../../../services/projectService';
 import { TabulatorDataService } from '../tabulatorDataService';
 import { TableStudent } from './table-student.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: TableStudent;
 const componentId = 'component1';
@@ -24,16 +25,14 @@ const testTableData = createTableData([
 describe('TableStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserModule,
-        HttpClientTestingModule,
+    declarations: [TableStudent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserModule,
         MatDialogModule,
         NoopAnimationsModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [TableStudent],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+        StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(TableStudent);
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     component = fixture.componentInstance;

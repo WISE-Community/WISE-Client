@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ExportItemComponent } from './export-item.component';
 import { DataExportService } from '../../../services/dataExportService';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ClassroomMonitorTestingModule } from '../../classroom-monitor-testing.module';
 import { ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,6 +10,7 @@ import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ExportItemComponent', () => {
   let component: ExportItemComponent;
@@ -17,23 +18,22 @@ describe('ExportItemComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ExportItemComponent],
-      imports: [
-        ClassroomMonitorTestingModule,
+    declarations: [ExportItemComponent],
+    imports: [ClassroomMonitorTestingModule,
         FormsModule,
-        HttpClientTestingModule,
         MatCheckboxModule,
         MatIconModule,
-        MatInputModule
-      ],
-      providers: [
+        MatInputModule],
+    providers: [
         {
-          provide: ActivatedRoute,
-          useValue: {}
+            provide: ActivatedRoute,
+            useValue: {}
         },
-        DataExportService
-      ]
-    });
+        DataExportService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     spyOn(TestBed.inject(ConfigService), 'getPermissions').and.returnValue({
       canViewStudentNames: true,
       canGradeStudentWork: true,

@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MilestoneReportService } from '../../../assets/wise5/services/milestoneReportService';
@@ -6,6 +6,7 @@ import { StudentTeacherCommonServicesModule } from '../../student-teacher-common
 import aggregateAutoScoresSample from '../sampleData/sample_aggregateAutoScores.json';
 import { copy } from '../../../assets/wise5/common/object/object';
 import { createSatisfyCriteria, createScoreCounts } from './milestone-test-functions';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let service: MilestoneReportService;
 const reportSettingsCustomScoreValuesSample = {
@@ -17,9 +18,9 @@ const reportSettingsCustomScoreValuesSample = {
 describe('MilestoneReportService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      providers: [MilestoneReportService]
-    });
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [MilestoneReportService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(MilestoneReportService);
   });
 

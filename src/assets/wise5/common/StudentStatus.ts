@@ -1,8 +1,10 @@
+import { Language } from '../../../app/domain/language';
 import { NodeProgress } from './NodeProgress';
 
 export class StudentStatus {
   computerAvatarId?: string;
   currentNodeId: string;
+  language?: Language;
   nodeStatuses: any;
   periodId: number;
   projectCompletion: NodeProgress;

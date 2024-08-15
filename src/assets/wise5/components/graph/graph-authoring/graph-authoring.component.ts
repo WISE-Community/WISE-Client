@@ -7,9 +7,6 @@ import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { GraphService } from '../graphService';
 import { isMultipleYAxes } from '../util';
-import { MatDialog } from '@angular/material/dialog';
-import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
-import { filter } from 'rxjs/operators';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
@@ -132,7 +129,6 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
-    private dialog: MatDialog,
     private GraphService: GraphService,
     protected NodeService: TeacherNodeService,
     protected ProjectAssetService: ProjectAssetService,
@@ -207,14 +203,6 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
       this.componentContent.hideAllTrialsOnNewTrial = true;
     }
     this.componentChanged();
-  }
-
-  assetSelected({ nodeId, componentId, assetItem, target, targetObject }): void {
-    super.assetSelected({ nodeId, componentId, assetItem, target });
-    if (target === 'background') {
-      this.componentContent.backgroundImage = assetItem.fileName;
-      this.componentChanged();
-    }
   }
 
   addXAxisCategory(): void {
@@ -562,15 +550,5 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
 
   customTrackBy(index: number): number {
     return index;
-  }
-
-  chooseBackground(): void {
-    new AssetChooser(this.dialog, this.nodeId, this.componentId)
-      .open('background')
-      .afterClosed()
-      .pipe(filter((data) => data != null))
-      .subscribe((data: any) => {
-        return this.assetSelected(data);
-      });
   }
 }

@@ -31,7 +31,7 @@
       *ngIf="isTeacher && project.wiseVersion !== 4"
       [project]="project"
       [isRun]="isRunProject"
-    ></app-library-project-menu>
+    />
   </div>
   <div class="info-block">
     <div class="details">
@@ -75,6 +75,7 @@
           >{{ isLast ? '' : ' / ' }}
         </ng-container>
       </p>
+      <unit-tags [tags]="project.tags" />
     </div>
     <discourse-category-activity
       *ngIf="project.metadata.discourseCategoryURL"

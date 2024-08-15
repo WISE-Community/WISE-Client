@@ -8,7 +8,7 @@ import { Student } from '../../domain/student';
 import { ConfigService } from '../../services/config.service';
 import { StudentService } from '../../student/student.service';
 import { LibraryService } from '../../services/library.service';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { Subscription, lastValueFrom } from 'rxjs';
 
 @Component({

@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -12,31 +12,32 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { NodeConstraintAuthoringComponent } from './node-constraint-authoring.component';
 import { MatIconModule } from '@angular/material/icon';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: NodeConstraintAuthoringComponent;
 let fixture: ComponentFixture<NodeConstraintAuthoringComponent>;
+const nodeId1 = 'node1';
 
 describe('NodeConstraintAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NodeConstraintAuthoringComponent],
       imports: [
         BrowserAnimationsModule,
         FormsModule,
-        HttpClientTestingModule,
         MatDialogModule,
         MatIconModule,
         MatSelectModule,
+        NodeConstraintAuthoringComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [
         ClassroomStatusService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(NodeConstraintAuthoringComponent);
@@ -52,6 +53,9 @@ describe('NodeConstraintAuthoringComponent', () => {
         }
       ]
     });
+    spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
+      nodeId1
+    ]);
     fixture.detectChanges();
   });
 

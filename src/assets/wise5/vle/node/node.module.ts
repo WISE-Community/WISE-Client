@@ -4,7 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NodeComponent } from './node.component';
-import { HelpIconModule } from '../../themes/default/themeComponents/helpIcon/help-icon.module';
+import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
 import { ComponentStudentModule } from '../../components/component/component-student.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ComponentStateInfoComponent } from '../../common/component-state-info/component-state-info.component';
@@ -16,7 +16,7 @@ import { ComponentStateInfoComponent } from '../../common/component-state-info/c
     ComponentStateInfoComponent,
     ComponentStudentModule,
     FlexLayoutModule,
-    HelpIconModule,
+    HelpIconComponent,
     MatButtonModule,
     MatIconModule,
     MatTooltipModule

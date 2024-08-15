@@ -6,6 +6,7 @@ import { NodeTypeSelected } from '../domain/node-type-selected';
 import { ExpandEvent } from '../domain/expand-event';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 
 @Component({
   selector: 'project-authoring-lesson',
@@ -25,6 +26,7 @@ export class ProjectAuthoringLessonComponent {
   constructor(
     private dataService: TeacherDataService,
     private deleteNodeService: DeleteNodeService,
+    private deleteTranslationsService: DeleteTranslationsService,
     private projectService: TeacherProjectService,
     private route: ActivatedRoute,
     private router: Router
@@ -58,8 +60,10 @@ export class ProjectAuthoringLessonComponent {
 
   protected delete(): void {
     if (confirm($localize`Are you sure you want to delete this lesson?`)) {
+      const components = this.projectService.getComponentsFromLesson(this.lesson.id);
       this.deleteNodeService.deleteNode(this.lesson.id);
       this.saveAndRefreshProject();
+      this.deleteTranslationsService.tryDeleteComponents(components);
     }
   }
 

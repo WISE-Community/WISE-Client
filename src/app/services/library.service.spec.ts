@@ -1,14 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { LibraryService } from './library.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('LibraryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LibraryService],
-      imports: [HttpClientTestingModule, RouterTestingModule]
-    });
+    imports: [RouterTestingModule],
+    providers: [LibraryService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
   });
 
   it('should be created', inject([LibraryService], (service: LibraryService) => {

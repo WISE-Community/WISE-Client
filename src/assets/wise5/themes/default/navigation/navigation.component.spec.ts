@@ -1,14 +1,9 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { VLEProjectService } from '../../../vle/vleProjectService';
 import { NavigationComponent } from './navigation.component';
-
-class MockVLEProjectService {
-  getProjectRootNode() {
-    return { ids: [] };
-  }
-}
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
@@ -16,14 +11,15 @@ describe('NavigationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, NavigationComponent, StudentTeacherCommonServicesModule],
-      providers: [{ provide: VLEProjectService, useClass: MockVLEProjectService }]
-    }).compileComponents();
+      imports: [NavigationComponent, StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NavigationComponent);
     component = fixture.componentInstance;
+    spyOn(TestBed.inject(VLEProjectService), 'getProjectRootNode').and.returnValue({ ids: [] });
     fixture.detectChanges();
   });
 

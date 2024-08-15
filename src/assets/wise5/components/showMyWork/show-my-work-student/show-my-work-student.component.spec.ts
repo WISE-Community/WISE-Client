@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,6 +10,7 @@ import { NotebookService } from '../../../services/notebookService';
 
 import { ShowMyWorkStudentComponent } from './show-my-work-student.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 class MockService {}
 
@@ -27,14 +28,16 @@ describe('ShowMyWorkStudentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatCardModule, StudentTeacherCommonServicesModule],
-      declarations: [ShowMyWorkStudentComponent],
-      providers: [
+    declarations: [ShowMyWorkStudentComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [MatCardModule, StudentTeacherCommonServicesModule],
+    providers: [
         { provide: MatDialog, useClass: MockService },
-        { provide: NotebookService, useClass: MockNotebookService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+        { provide: NotebookService, useClass: MockNotebookService },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

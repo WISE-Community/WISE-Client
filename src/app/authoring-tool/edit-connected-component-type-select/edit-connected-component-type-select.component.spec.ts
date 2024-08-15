@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,16 +18,13 @@ describe('EditConnectedComponentTypeSelectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [EditConnectedComponentTypeSelectComponent],
+    imports: [BrowserAnimationsModule,
         FormsModule,
-        HttpClientModule,
         MatFormFieldModule,
-        MatSelectModule
-      ],
-      declarations: [EditConnectedComponentTypeSelectComponent],
-      providers: [ConfigService, ProjectService, SessionService]
-    }).compileComponents();
+        MatSelectModule],
+    providers: [ConfigService, ProjectService, SessionService, provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
   });
 
   beforeEach(() => {

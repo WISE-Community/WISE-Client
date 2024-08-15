@@ -23,6 +23,7 @@
     ></div>
     <div class="lesson-buttons" [ngClass]="{ 'lesson-expanded': expanded }" fxLayoutGap="8px">
       <button
+        class="enable-in-translation"
         mat-icon-button
         (click)="setCurrentNode(lesson.id)"
         color="primary"

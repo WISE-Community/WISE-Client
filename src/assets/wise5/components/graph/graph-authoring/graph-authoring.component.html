@@ -1,17 +1,18 @@
 <edit-component-prompt
-  [prompt]="componentContent.prompt"
+  [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
 ></edit-component-prompt>
-<div fxLayout="row wrap">
-  <mat-form-field class="graph-title">
-    <mat-label i18n>Graph Title</mat-label>
-    <input
-      matInput
-      [(ngModel)]="componentContent.title"
-      (ngModelChange)="inputChange.next($event)"
-    />
-  </mat-form-field>
-  <mat-form-field class="plot-type">
+<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <translatable-input
+    [content]="componentContent"
+    key="title"
+    label="Graph Title"
+    i18n-label
+    (defaultLanguageTextChanged)="inputChange.next($event)"
+    class="graph-title"
+    fxFlex="auto"
+  />
+  <mat-form-field>
     <mat-label i18n>Plot Type</mat-label>
     <mat-select [(ngModel)]="componentContent.graphType" (ngModelChange)="graphTypeChanged()">
       <mat-option
@@ -41,17 +42,17 @@
     />
   </mat-form-field>
 </div>
-<div fxLayout="row wrap" fxLayoutAlign="start center">
-  <span class="label" i18n>X Axis</span>
-  <mat-form-field class="axis-title">
-    <mat-label i18n>Title</mat-label>
-    <input
-      matInput
-      [(ngModel)]="componentContent.xAxis.title.text"
-      (ngModelChange)="inputChange.next($event)"
-    />
-  </mat-form-field>
-  <mat-form-field class="axis-type">
+<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <span i18n>X Axis</span>
+  <translatable-input
+    [content]="componentContent.xAxis.title"
+    key="text"
+    label="Title"
+    i18n-label
+    (defaultLanguageTextChanged)="inputChange.next($event)"
+    fxFlex="auto"
+  />
+  <mat-form-field>
     <mat-label i18n>Axis Type</mat-label>
     <mat-select
       (ngModelChange)="xAxisTypeChanged($event, componentContent.xAxis.type)"
@@ -65,23 +66,21 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <div
+  <ng-container
     *ngIf="
       componentContent.xAxis.type === 'limits' ||
       componentContent.xAxis.type === '' ||
       componentContent.xAxis.type == null
     "
-    class="limits-settings"
   >
-    <mat-form-field class="axis-units">
-      <mat-label i18n>Units</mat-label>
-      <input
-        matInput
-        [(ngModel)]="componentContent.xAxis.units"
-        (ngModelChange)="inputChange.next($event)"
-      />
-    </mat-form-field>
-    <mat-form-field class="axis-min">
+    <translatable-input
+      [content]="componentContent.xAxis"
+      key="units"
+      label="Units"
+      i18n-label
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+    />
+    <mat-form-field class="minmax">
       <mat-label i18n>Min</mat-label>
       <input
         matInput
@@ -90,7 +89,7 @@
         (ngModelChange)="inputChange.next($event)"
       />
     </mat-form-field>
-    <mat-form-field class="axis-max">
+    <mat-form-field class="minmax">
       <mat-label i18n>Max</mat-label>
       <input
         matInput
@@ -107,9 +106,11 @@
     >
       Locked
     </mat-checkbox>
-  </div>
-  <div *ngIf="componentContent.xAxis.type == 'categories'" class="categories">
-    <span class="label" i18n>Categories</span>
+  </ng-container>
+</div>
+<div *ngIf="componentContent.xAxis.type == 'categories'" class="categories">
+  <div class="add-button" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <span i18n>Categories</span>
     <button
       mat-raised-button
       color="primary"
@@ -122,37 +123,40 @@
     >
       <mat-icon>add</mat-icon>
     </button>
-    <div
-      *ngFor="
-        let category of [].constructor(componentContent.xAxis.categories.length);
-        index as categoryIndex
-      "
+  </div>
+  <div
+    *ngFor="
+      let category of [].constructor(componentContent.xAxis.categories.length);
+      index as categoryIndex
+    "
+    fxLayout="row wrap"
+    fxLayoutAlign="start center"
+    fxLayoutGap="8px"
+  >
+    <mat-form-field>
+      <mat-label i18n>Category Name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="componentContent.xAxis.categories[categoryIndex]"
+        (ngModelChange)="inputChange.next($event)"
+      />
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="deleteXAxisCategory(categoryIndex)"
+      matTooltip="Delete Category"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      aria-label="Delete"
+      i18n-aria-label
     >
-      <mat-form-field class="category-name">
-        <mat-label i18n>Category Name</mat-label>
-        <input
-          matInput
-          [(ngModel)]="componentContent.xAxis.categories[categoryIndex]"
-          (ngModelChange)="inputChange.next($event)"
-        />
-      </mat-form-field>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="deleteXAxisCategory(categoryIndex)"
-        matTooltip="Delete Category"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Delete"
-        i18n-aria-label
-      >
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
+      <mat-icon>delete</mat-icon>
+    </button>
   </div>
 </div>
 <div>
-  <div fxLayout="row">
+  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
     <mat-slide-toggle
       color="primary"
       class="enable-y-axis-label"
@@ -162,32 +166,32 @@
     >
       Enable Multiple Y Axes
     </mat-slide-toggle>
-    <div *ngIf="enableMultipleYAxes">
+    <ng-container *ngIf="enableMultipleYAxes">
       <mat-radio-group
         color="primary"
         (ngModelChange)="numYAxesChanged($event, numYAxes)"
         [(ngModel)]="numYAxes"
       >
-        <div layout="row">
+        <div fxLayoutGap="16px">
           <mat-radio-button [value]="2" class="y-axis-count">2</mat-radio-button>
           <mat-radio-button [value]="3" class="y-axis-count">3</mat-radio-button>
           <mat-radio-button [value]="4" class="y-axis-count">4</mat-radio-button>
         </div>
       </mat-radio-group>
-    </div>
+    </ng-container>
   </div>
 </div>
-<div *ngIf="!enableMultipleYAxes" fxLayout="row wrap" fxLayoutAlign="start center">
-  <span class="label" i18n>Y Axis</span>
-  <mat-form-field class="axis-title">
-    <mat-label i18n>Title</mat-label>
-    <input
-      matInput
-      [(ngModel)]="componentContent.yAxis.title.text"
-      (ngModelChange)="inputChange.next($event)"
-    />
-  </mat-form-field>
-  <mat-form-field class="axis-color">
+<div *ngIf="!enableMultipleYAxes" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <span i18n>Y Axis</span>
+  <translatable-input
+    [content]="componentContent.yAxis.title"
+    key="text"
+    label="Title"
+    i18n-label
+    (defaultLanguageTextChanged)="inputChange.next($event)"
+    fxFlex="auto"
+  />
+  <mat-form-field>
     <mat-label i18n>Color</mat-label>
     <input
       matInput
@@ -195,15 +199,14 @@
       (ngModelChange)="inputChange.next($event)"
     />
   </mat-form-field>
-  <mat-form-field class="axis-units">
-    <mat-label i18n>Units</mat-label>
-    <input
-      matInput
-      [(ngModel)]="componentContent.yAxis.units"
-      (ngModelChange)="inputChange.next($event)"
+  <translatable-input
+      [content]="componentContent.yAxis"
+      key="units"
+      label="Units"
+      i18n-label
+      (defaultLanguageTextChanged)="inputChange.next($event)"
     />
-  </mat-form-field>
-  <mat-form-field class="axis-min">
+  <mat-form-field class="minmax">
     <mat-label i18n>Min</mat-label>
     <input
       matInput
@@ -212,7 +215,7 @@
       (ngModelChange)="inputChange.next($event)"
     />
   </mat-form-field>
-  <mat-form-field class="axis-max">
+  <mat-form-field class="minmax">
     <mat-label i18n>Max</mat-label>
     <input
       matInput
@@ -223,7 +226,6 @@
   </mat-form-field>
   <mat-checkbox
     color="primary"
-    class="locked-checkbox"
     [(ngModel)]="componentContent.yAxis.locked"
     (ngModelChange)="componentChanged()"
     i18n
@@ -231,22 +233,23 @@
     Locked
   </mat-checkbox>
 </div>
-<div *ngIf="enableMultipleYAxes" class="multiple-y-axis-container">
+<ng-container *ngIf="enableMultipleYAxes">
   <div
     *ngFor="let y of [].constructor(componentContent.yAxis.length); index as yAxisIndex"
     fxLayout="row wrap"
     fxLayoutAlign="start center"
+    fxLayoutGap="8px"
   >
-    <span class="label" i18n>Y Axis</span>
-    <mat-form-field class="axis-title">
-      <mat-label i18n>Title</mat-label>
-      <input
-        matInput
-        [(ngModel)]="componentContent.yAxis[yAxisIndex].title.text"
-        (ngModelChange)="inputChange.next($event)"
-      />
-    </mat-form-field>
-    <mat-form-field class="axis-color">
+    <span i18n>Y Axis</span>
+    <translatable-input
+      [content]="componentContent.yAxis[yAxisIndex].title"
+      key="text"
+      label="Title"
+      i18n-label
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+      fxFlex="auto"
+    />
+    <mat-form-field>
       <mat-label i18n>Color</mat-label>
       <input
         matInput
@@ -254,15 +257,14 @@
         (ngModelChange)="yAxisColorChanged(yAxisIndex)"
       />
     </mat-form-field>
-    <mat-form-field class="multiple-y-axis-units">
-      <mat-label i18n>Units</mat-label>
-      <input
-        matInput
-        [(ngModel)]="componentContent.yAxis[yAxisIndex].units"
-        (ngModelChange)="inputChange.next($event)"
-      />
-    </mat-form-field>
-    <mat-form-field class="axis-min">
+    <translatable-input
+      [content]="componentContent.yAxis[yAxisIndex]"
+      key="units"
+      label="Units"
+      i18n-label
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+    />
+    <mat-form-field class="minmax">
       <mat-label i18n>Min</mat-label>
       <input
         matInput
@@ -271,7 +273,7 @@
         (ngModelChange)="inputChange.next($event)"
       />
     </mat-form-field>
-    <mat-form-field class="axis-max">
+    <mat-form-field class="minmax">
       <mat-label i18n>Max</mat-label>
       <input
         matInput
@@ -282,7 +284,6 @@
     </mat-form-field>
     <mat-checkbox
       color="primary"
-      class="locked-checkbox"
       [(ngModel)]="componentContent.yAxis[yAxisIndex].locked"
       (ngModelChange)="componentChanged()"
       i18n
@@ -298,42 +299,33 @@
       <span *ngIf="componentContent.yAxis[yAxisIndex].opposite" i18n>Right Side</span>
     </mat-slide-toggle>
   </div>
-</div>
+</ng-container>
 <div fxLayout="row" fxLayoutAlign="start center">
-  <mat-form-field class="background">
-    <mat-label i18n>Background Image (Optional)</mat-label>
-    <input
-      matInput
-      [(ngModel)]="componentContent.backgroundImage"
-      (ngModelChange)="inputChange.next($event)"
-    />
-  </mat-form-field>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="chooseBackground()"
-    matTooltip="Choose an Image"
-    matTooltipPosition="above"
-    i18n-matTooltip
-    aria-label="Choose an Image"
-    i18n-aria-label
-  >
-    <mat-icon>insert_photo</mat-icon>
-  </button>
+  <translatable-input
+    [content]="componentContent"
+    key="backgroundImage"
+    label="Background Image (Optional)"
+    i18n-label
+    (defaultLanguageTextChanged)="inputChange.next($event)"
+    class="background"
+  />
+  <translatable-asset-chooser
+    [content]="componentContent"
+    key="backgroundImage"
+    (defaultLanguageTextChanged)="componentChanged()"
+  />
 </div>
-<div fxLayout="row" fxLayoutAlign="start center">
-  <mat-form-field class="round-select">
-    <mat-label i18n>Round Values To</mat-label>
-    <mat-select [(ngModel)]="componentContent.roundValuesTo" (ngModelChange)="componentChanged()">
-      <mat-option
-        *ngFor="let availableRoundingOption of availableRoundingOptions"
-        [value]="availableRoundingOption.value"
-      >
-        {{ availableRoundingOption.text }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
+<mat-form-field>
+  <mat-label i18n>Round Values To</mat-label>
+  <mat-select [(ngModel)]="componentContent.roundValuesTo" (ngModelChange)="componentChanged()">
+    <mat-option
+      *ngFor="let availableRoundingOption of availableRoundingOptions"
+      [value]="availableRoundingOption.value"
+    >
+      {{ availableRoundingOption.text }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 <div>
   <mat-checkbox
     color="primary"
@@ -400,8 +392,8 @@
   </mat-checkbox>
 </div>
 <br />
-<div fxLayout="row wrap" fxLayoutAlign="start center" class="add-button-div">
-  <span class="label" i18n>Series</span>
+<div class="add-button" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <span i18n>Series</span>
   <button
     mat-raised-button
     color="primary"
@@ -423,76 +415,76 @@
   There are no series. Click the "Add Series" button to add a series.
 </div>
 <div *ngFor="let series of componentContent.series; index as seriesIndex" class="series">
-  <mat-form-field class="series-name">
-    <mat-label i18n>Name</mat-label>
-    <input matInput [(ngModel)]="series.name" (ngModelChange)="inputChange.next($event)" />
-  </mat-form-field>
-  <mat-form-field class="series-color">
-    <mat-label i18n>Color</mat-label>
-    <input matInput [(ngModel)]="series.color" (ngModelChange)="inputChange.next($event)" />
-  </mat-form-field>
-  <mat-form-field
-    *ngIf="componentContent.graphType === 'line' || componentContent.graphType === 'scatter'"
-    class="series-symbol"
-  >
-    <mat-label i18n>Symbol</mat-label>
-    <mat-select [(ngModel)]="series.marker.symbol" (ngModelChange)="componentChanged()">
-      <mat-option *ngFor="let availableSymbol of availableSymbols" [value]="availableSymbol.value">
-        {{ availableSymbol.text }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field
-    *ngIf="componentContent.graphType === 'line' || componentContent.graphType === 'scatter'"
-    class="series-type"
-  >
-    <mat-label i18n>Type</mat-label>
-    <mat-select [(ngModel)]="series.type" (ngModelChange)="seriesTypeChanged(series)">
-      <mat-option
-        *ngFor="let availableSeriesType of availableSeriesTypes"
-        [value]="availableSeriesType.value"
-      >
-        {{ availableSeriesType.text }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field
-    *ngIf="series.type === 'line' || (series.type == null && componentContent.graphType === 'line')"
-    class="series-line-type"
-  >
-    <mat-label i18n>Line Type</mat-label>
-    <mat-select [(ngModel)]="series.dashStyle" (ngModelChange)="componentChanged()">
-      <mat-option
-        *ngFor="let availableLineType of availableLineTypes"
-        [value]="availableLineType.value"
-      >
-        {{ availableLineType.text }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-checkbox
-    color="primary"
-    class="series-can-student-edit"
-    [(ngModel)]="series.canEdit"
-    (ngModelChange)="componentChanged()"
-    i18n
-  >
-    Can Student Edit
-  </mat-checkbox>
-  <mat-form-field *ngIf="enableMultipleYAxes" class="series-y-axis">
-    <mat-label i18n>Y Axis</mat-label>
-    <mat-select [(ngModel)]="series.yAxis" (ngModelChange)="seriesYAxisChanged(series)">
-      <mat-option
-        *ngFor="let yAxis of componentContent.yAxis; index as yAxisIndex"
-        [value]="yAxisIndex"
-        i18n
-      >
-        Y Axis {{ yAxisIndex + 1 }}: {{ yAxis.title.text }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br />
-  <div class="add-button-div">
+  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <translatable-input
+      [content]="series"
+      key="name"
+      label="Name"
+      i18n-label
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+    />
+    <mat-form-field>
+      <mat-label i18n>Color</mat-label>
+      <input matInput [(ngModel)]="series.color" (ngModelChange)="inputChange.next($event)" />
+    </mat-form-field>
+    <mat-form-field
+      *ngIf="componentContent.graphType === 'line' || componentContent.graphType === 'scatter'"
+    >
+      <mat-label i18n>Symbol</mat-label>
+      <mat-select [(ngModel)]="series.marker.symbol" (ngModelChange)="componentChanged()">
+        <mat-option *ngFor="let availableSymbol of availableSymbols" [value]="availableSymbol.value">
+          {{ availableSymbol.text }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field
+      *ngIf="componentContent.graphType === 'line' || componentContent.graphType === 'scatter'"
+    >
+      <mat-label i18n>Type</mat-label>
+      <mat-select [(ngModel)]="series.type" (ngModelChange)="seriesTypeChanged(series)">
+        <mat-option
+          *ngFor="let availableSeriesType of availableSeriesTypes"
+          [value]="availableSeriesType.value"
+        >
+          {{ availableSeriesType.text }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field
+      *ngIf="series.type === 'line' || (series.type == null && componentContent.graphType === 'line')"
+    >
+      <mat-label i18n>Line Type</mat-label>
+      <mat-select [(ngModel)]="series.dashStyle" (ngModelChange)="componentChanged()">
+        <mat-option
+          *ngFor="let availableLineType of availableLineTypes"
+          [value]="availableLineType.value"
+        >
+          {{ availableLineType.text }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-checkbox
+      color="primary"
+      [(ngModel)]="series.canEdit"
+      (ngModelChange)="componentChanged()"
+      i18n
+    >
+      Can Student Edit
+    </mat-checkbox>
+    <mat-form-field *ngIf="enableMultipleYAxes">
+      <mat-label i18n>Y Axis</mat-label>
+      <mat-select [(ngModel)]="series.yAxis" (ngModelChange)="seriesYAxisChanged(series)">
+        <mat-option
+          *ngFor="let yAxis of componentContent.yAxis; index as yAxisIndex"
+          [value]="yAxisIndex"
+          i18n
+        >
+          Y Axis {{ yAxisIndex + 1 }}: {{ yAxis.title.text }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="add-button" fxLayoutAlign="start center" fxLayoutGap="8px">
     <span class="label" i18n>Data Points</span>
     <button
       mat-raised-button
@@ -519,15 +511,19 @@
       last as isLast;
       trackBy: customTrackBy
     "
+    fxLayout="row wrap"
+    fxLayoutAlign="start center"
+    fxLayoutGap="8px"
   >
-    <span
+    <ng-container
       *ngIf="
         componentContent.xAxis.type === 'limits' ||
         componentContent.xAxis.type === '' ||
         componentContent.xAxis.type == null
       "
+      
     >
-      <mat-form-field class="data-point-input">
+      <mat-form-field class="data-point">
         <mat-label i18n>X</mat-label>
         <input
           matInput
@@ -536,7 +532,7 @@
           (ngModelChange)="inputChange.next($event)"
         />
       </mat-form-field>
-      <mat-form-field class="data-point-input">
+      <mat-form-field class="data-point">
         <mat-label i18n>Y</mat-label>
         <input
           matInput
@@ -545,9 +541,9 @@
           (ngModelChange)="inputChange.next($event)"
         />
       </mat-form-field>
-    </span>
-    <span *ngIf="componentContent.xAxis.type === 'categories'">
-      <mat-form-field class="category-input">
+    </ng-container>
+    <ng-container *ngIf="componentContent.xAxis.type === 'categories'" >
+      <mat-form-field>
         <mat-label>{{ componentContent.xAxis.categories[dataPointIndex] }}</mat-label>
         <input
           matInput
@@ -556,7 +552,7 @@
           (ngModelChange)="inputChange.next($event)"
         />
       </mat-form-field>
-    </span>
+    </ng-container>
     <button
       mat-raised-button
       color="primary"

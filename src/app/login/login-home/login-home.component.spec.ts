@@ -5,10 +5,10 @@ import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ConfigService } from '../../services/config.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha-2';
 import { By } from '@angular/platform-browser';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { getErrorMessage } from '../../common/test-helper';
 
@@ -24,21 +24,21 @@ let router: Router;
 let userService: UserService;
 
 describe('LoginHomeComponent', () => {
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [LoginHomeComponent],
-        imports: [HttpClientTestingModule, RecaptchaV3Module, RouterTestingModule],
-        providers: [
-          ConfigService,
-          { provide: RECAPTCHA_V3_SITE_KEY, useValue: recaptchaPrivateKey },
-          ReCaptchaV3Service,
-          UserService
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [LoginHomeComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [RecaptchaV3Module, RouterTestingModule],
+      providers: [
+        ConfigService,
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: recaptchaPrivateKey },
+        ReCaptchaV3Service,
+        UserService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     configService = TestBed.inject(ConfigService);

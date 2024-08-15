@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,8 +14,10 @@ import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { AnimationAuthoring } from './animation-authoring.component';
-import { MatDialogModule } from '@angular/material/dialog';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 export class MockConfigService {}
 
@@ -24,12 +26,12 @@ let fixture: ComponentFixture<AnimationAuthoring>;
 describe('AnimationAuthoring', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      declarations: [AnimationAuthoring, EditComponentPrompt],
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
+        ComponentAuthoringModule,
         FormsModule,
-        HttpClientTestingModule,
-        MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
@@ -37,16 +39,21 @@ describe('AnimationAuthoring', () => {
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [AnimationAuthoring, EditComponentPrompt],
       providers: [
         { provide: TeacherNodeService, useClass: MockNodeService },
         ProjectAssetService,
-        TeacherProjectService
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
       ]
     });
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(AnimationAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
       copy(componentContent)
     );

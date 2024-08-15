@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TeacherProjectService } from '../../services/teacherProjectService';
+import { NotifyAuthorService } from '../../services/notifyAuthorService';
 
 @Component({
   templateUrl: './project-authoring-parent.component.html',
@@ -8,17 +8,17 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 export class ProjectAuthoringParentComponent {
   @Input('unitId') protected projectId?: number;
 
-  constructor(private projectService: TeacherProjectService) {}
+  constructor(private notifyAuthorService: NotifyAuthorService) {}
 
   ngOnInit(): void {
     this.projectId = Number(this.projectId);
-    this.projectService.notifyAuthorProjectBegin(this.projectId);
+    this.notifyAuthorService.editBegin(this.projectId);
     window.onbeforeunload = (event) => {
-      this.projectService.notifyAuthorProjectEnd(this.projectId);
+      this.notifyAuthorService.editEnd(this.projectId);
     };
   }
 
   ngOnDestroy(): void {
-    this.projectService.notifyAuthorProjectEnd(this.projectId);
+    this.notifyAuthorService.editEnd(this.projectId);
   }
 }

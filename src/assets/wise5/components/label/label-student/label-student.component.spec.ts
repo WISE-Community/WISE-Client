@@ -1,11 +1,12 @@
 import { fabric } from 'fabric';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { LabelStudent } from './label-student.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: LabelStudent;
 let fixture: ComponentFixture<LabelStudent>;
@@ -13,10 +14,11 @@ let fixture: ComponentFixture<LabelStudent>;
 describe('LabelStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [LabelStudent],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+    declarations: [LabelStudent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(LabelStudent);
     component = fixture.componentInstance;
     const componentContent = {

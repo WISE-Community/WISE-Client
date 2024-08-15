@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { PeerChatQuestionBankComponent } from './peer-chat-question-bank.component';
@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { QuestionBankService } from './questionBank.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: PeerChatQuestionBankComponent;
 let fixture: ComponentFixture<PeerChatQuestionBankComponent>;
@@ -26,16 +27,13 @@ const defaultQuestionBankRule = {
 describe('PeerChatQuestionBankComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatCardModule,
+    declarations: [PeerChatQuestionBankComponent],
+    imports: [MatCardModule,
         MatDialogModule,
         MatIconModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [PeerChatQuestionBankComponent],
-      providers: [QuestionBankService]
-    }).compileComponents();
+        StudentTeacherCommonServicesModule],
+    providers: [QuestionBankService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
     fixture = TestBed.createComponent(PeerChatQuestionBankComponent);
     peerGroupService = TestBed.inject(PeerGroupService);
     projectService = TestBed.inject(ProjectService);

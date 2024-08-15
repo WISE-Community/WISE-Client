@@ -2,10 +2,9 @@
   'style/abstracts/variables',
   'style/abstracts/functions';
 
-.step-title {
-  width: 320px;
-
-  @media (min-width: breakpoint('md.min')) {
+@media (min-width: breakpoint('sm.min')) {
+  translatable-input {
     width: 480px;
+    display: block;
   }
 }

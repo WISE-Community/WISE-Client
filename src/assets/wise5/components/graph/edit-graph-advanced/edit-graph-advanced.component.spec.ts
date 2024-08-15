@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +17,6 @@ import { EditComponentRubricComponent } from '../../../../../app/authoring-tool/
 import { EditComponentSaveButtonComponent } from '../../../../../app/authoring-tool/edit-component-save-button/edit-component-save-button.component';
 import { EditComponentSubmitButtonComponent } from '../../../../../app/authoring-tool/edit-component-submit-button/edit-component-submit-button.component';
 import { EditComponentTagsComponent } from '../../../../../app/authoring-tool/edit-component-tags/edit-component-tags.component';
-import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/edit-component-width/edit-component-width.component';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
@@ -26,6 +25,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { GraphContent } from '../GraphContent';
 import { EditGraphAdvancedComponent } from './edit-graph-advanced.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: EditGraphAdvancedComponent;
 let fixture: ComponentFixture<EditGraphAdvancedComponent>;
@@ -33,18 +33,7 @@ let fixture: ComponentFixture<EditGraphAdvancedComponent>;
 describe('EditGraphAdvancedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientTestingModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [
+    declarations: [
         EditComponentAddToNotebookButtonComponent,
         EditCommonAdvancedComponent,
         EditComponentExcludeFromTotalScoreComponent,
@@ -54,14 +43,21 @@ describe('EditGraphAdvancedComponent', () => {
         EditComponentSaveButtonComponent,
         EditComponentSubmitButtonComponent,
         EditComponentTagsComponent,
-        EditComponentWidthComponent,
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent,
         EditGraphAdvancedComponent
-      ],
-      providers: [TeacherNodeService, TeacherProjectService],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        StudentTeacherCommonServicesModule],
+    providers: [TeacherNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

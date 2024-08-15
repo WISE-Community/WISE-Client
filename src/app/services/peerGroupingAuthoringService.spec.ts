@@ -1,10 +1,11 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { PeerGroupingAuthoringService } from '../../assets/wise5/services/peerGroupingAuthoringService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { PeerGrouping } from '../domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let allPeerGroupings: PeerGrouping[];
 let configService: ConfigService;
@@ -28,9 +29,9 @@ const tag2: string = 'tag2';
 describe('PeerGroupingAuthoringService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
-      providers: [PeerGroupingAuthoringService, TeacherProjectService]
-    });
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [PeerGroupingAuthoringService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(PeerGroupingAuthoringService);
     configService = TestBed.inject(ConfigService);
     http = TestBed.inject(HttpTestingController);

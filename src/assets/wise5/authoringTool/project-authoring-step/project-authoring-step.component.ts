@@ -6,6 +6,8 @@ import { SelectNodeEvent } from '../domain/select-node-event';
 import { NodeTypeSelected } from '../domain/node-type-selected';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { CopyNodesService } from '../../services/copyNodesService';
+import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
+import { CopyTranslationsService } from '../../services/copyTranslationsService';
 
 @Component({
   selector: 'project-authoring-step',
@@ -21,8 +23,10 @@ export class ProjectAuthoringStepComponent {
 
   constructor(
     private copyNodesService: CopyNodesService,
+    private copyTranslationsService: CopyTranslationsService,
     private dataService: TeacherDataService,
     private deleteNodeService: DeleteNodeService,
+    private deleteTranslationsService: DeleteTranslationsService,
     private projectService: TeacherProjectService,
     private route: ActivatedRoute,
     private router: Router
@@ -108,14 +112,18 @@ export class ProjectAuthoringStepComponent {
   }
 
   protected copy(): void {
-    this.copyNodesService.copyNodesAfter([this.step.id], this.step.id);
+    const newNodes = this.copyNodesService.copyNodesAfter([this.step.id], this.step.id);
+    this.copyTranslationsService.tryCopyNodes(newNodes);
     this.saveAndRefreshProject();
   }
 
   protected delete(): void {
     if (confirm($localize`Are you sure you want to delete this step?`)) {
+      // get the components before they're removed by the following line
+      const components = this.step.components;
       this.deleteNodeService.deleteNode(this.step.id);
       this.saveAndRefreshProject();
+      this.deleteTranslationsService.tryDeleteComponents(components);
     }
   }
 

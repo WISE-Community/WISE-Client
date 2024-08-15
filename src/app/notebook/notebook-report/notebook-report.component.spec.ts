@@ -1,17 +1,19 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NotebookReportComponent } from './notebook-report.component';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: NotebookReportComponent;
 
 describe('NotebookReportComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [NotebookReportComponent]
-    });
+    declarations: [NotebookReportComponent],
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     const fixture = TestBed.createComponent(NotebookReportComponent);
     component = fixture.componentInstance;
     component.config = createConfig();

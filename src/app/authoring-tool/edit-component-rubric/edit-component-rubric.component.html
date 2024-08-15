@@ -3,7 +3,7 @@
   <button
     mat-raised-button
     color="primary"
-    class="topButton"
+    class="topButton enable-in-translation"
     (click)="showRubricAuthoring = !showRubricAuthoring"
     matTooltip="Edit Component Rubric"
     i18n-matTooltip
@@ -12,9 +12,9 @@
     <mat-icon>message</mat-icon>
   </button>
 </div>
-<wise-authoring-tinymce-editor
+<translatable-rich-text-editor
   *ngIf="showRubricAuthoring"
-  [(model)]="rubric"
-  (modelChange)="rubricChanged()"
->
-</wise-authoring-tinymce-editor>
+  [content]="componentContent"
+  key="rubric"
+  (defaultLanguageTextChanged)="rubricChanged()"
+/>

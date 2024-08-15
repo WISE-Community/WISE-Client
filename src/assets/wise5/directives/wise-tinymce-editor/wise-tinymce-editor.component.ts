@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { debounceTime } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 import { NotebookService } from '../../services/notebookService';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import 'tinymce';
+import { EditorComponent } from '@tinymce/tinymce-angular';
+import { Language } from '../../../../app/domain/language';
 
 declare let tinymce: any;
 
@@ -17,8 +19,11 @@ declare let tinymce: any;
 export class WiseTinymceEditorComponent {
   public config: any;
   private debouncer: Subject<string> = new Subject<string>();
+  @Input() disabled: boolean;
   public editor: any;
+  @ViewChild(EditorComponent) editorComponent: EditorComponent;
   @Input() isAddNoteButtonAvailable: boolean;
+  @Input() language: Language;
   @Input() model: any;
   @Output() modelChange: EventEmitter<string> = new EventEmitter<string>();
   @Output() openNotebook: EventEmitter<string> = new EventEmitter<string>();
@@ -98,6 +103,25 @@ export class WiseTinymceEditorComponent {
     this.initializeTinyMCE();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.editorComponent) {
+      if (
+        changes.model &&
+        changes.model.currentValue !== this.editorComponent.editor.getContent()
+      ) {
+        this.editorComponent.editor.setContent(changes.model.currentValue ?? '');
+      }
+      if (changes.language && !this.model) {
+        // handles an edge case in the AT translation mode where
+        // 1. show lang1 (original value: undefined)
+        // 2. translate lang1 (set value to 'XYZ')
+        // 3. switch to lang2 (original value: undefined)
+        // should show empty editor, but is showing 'XYZ'
+        this.editorComponent.editor.setContent('');
+      }
+    }
+  }
+
   addPluginName(pluginName: string): void {
     this.plugins.push(pluginName);
   }
@@ -114,9 +138,9 @@ export class WiseTinymceEditorComponent {
       media_live_embeds: true,
       extended_valid_elements: this.extendedValidElements,
       font_formats: `Roboto=Roboto,Helvetica Neue,sans-serif; Raleway=Raleway,sans-serif;
-        Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; 
-        Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; 
-        Helvetica=helvetica; Impact=impact,chicago; Tahoma=tahoma,arial,helvetica,sans-serif; 
+        Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde;
+        Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino;
+        Helvetica=helvetica; Impact=impact,chicago; Tahoma=tahoma,arial,helvetica,sans-serif;
         Terminal=terminal,monaco; Times New Roman=times new roman,times; Verdana=verdana,geneva`,
       plugins: this.plugins,
       quickbars_insert_toolbar: false,

@@ -1,10 +1,12 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ChooseComponentLocationComponent } from './choose-component-location.component';
 import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { CopyTranslationsService } from '../../../services/copyTranslationsService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const nodeId = 'node1';
 const components = [
@@ -35,22 +37,23 @@ class MockTeacherDataService {
 class MockComponentTypeService {}
 
 let component: ChooseComponentLocationComponent;
-let teacherProjectService: TeacherProjectService;
 
-describe('InsertComponent', () => {
+describe('ChooseComponentLocationComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [],
       providers: [
         ChooseComponentLocationComponent,
         { provide: ComponentTypeService, useClass: MockComponentTypeService },
         ConfigService,
+        CopyTranslationsService,
         { provide: TeacherProjectService, useClass: MockProjectService },
-        { provide: TeacherDataService, useClass: MockTeacherDataService }
+        { provide: TeacherDataService, useClass: MockTeacherDataService },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
       ]
     });
     component = TestBed.inject(ChooseComponentLocationComponent);
-    teacherProjectService = TestBed.inject(TeacherProjectService);
   });
 
   it('should create', () => {

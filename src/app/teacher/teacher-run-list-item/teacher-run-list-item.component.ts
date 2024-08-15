@@ -7,12 +7,15 @@ import { flash } from '../../animations';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ShareRunCodeDialogComponent } from '../share-run-code-dialog/share-run-code-dialog.component';
+import { Subscription } from 'rxjs';
+import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
+import { Tag } from '../../domain/tag';
 
 @Component({
+  animations: [flash],
   selector: 'app-teacher-run-list-item',
-  templateUrl: './teacher-run-list-item.component.html',
-  styleUrls: ['./teacher-run-list-item.component.scss'],
-  animations: [flash]
+  styleUrl: './teacher-run-list-item.component.scss',
+  templateUrl: './teacher-run-list-item.component.html'
 })
 export class TeacherRunListItemComponent implements OnInit {
   protected animateDelay: string = '0s';
@@ -22,6 +25,7 @@ export class TeacherRunListItemComponent implements OnInit {
   @Input() run: TeacherRun = new TeacherRun();
   @Output() runArchiveStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
   @Output() runSelectedStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
+  private subscriptions: Subscription = new Subscription();
   protected thumbStyle: SafeStyle;
 
   constructor(
@@ -29,10 +33,11 @@ export class TeacherRunListItemComponent implements OnInit {
     private configService: ConfigService,
     private router: Router,
     private elRef: ElementRef,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private projectTagService: ProjectTagService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.run.project.thumbStyle = this.getThumbStyle();
     this.manageStudentsLink = `${this.configService.getContextPath()}/teacher/manage/unit/${
       this.run.id
@@ -44,16 +49,45 @@ export class TeacherRunListItemComponent implements OnInit {
         this.run.highlighted = false;
       }, 7000);
     }
+    this.subscribeToTagUpdated();
+    this.subscribeToTagDeleted();
   }
 
-  ngAfterViewInit() {
+  private subscribeToTagUpdated(): void {
+    this.subscriptions.add(
+      this.projectTagService.tagUpdated$.subscribe((updatedTag: Tag) => {
+        const projectTag = this.run.project.tags.find((tag: Tag) => tag.id === updatedTag.id);
+        if (projectTag != null) {
+          projectTag.text = updatedTag.text;
+          projectTag.color = updatedTag.color;
+          this.projectTagService.sortTags(this.run.project.tags);
+        }
+      })
+    );
+  }
+
+  private subscribeToTagDeleted(): void {
+    this.subscriptions.add(
+      this.projectTagService.tagDeleted$.subscribe((tag: Tag) => {
+        if (this.run.project.hasTag(tag)) {
+          this.run.project.removeTag(tag);
+        }
+      })
+    );
+  }
+
+  ngAfterViewInit(): void {
     if (this.run.highlighted) {
       this.elRef.nativeElement.querySelector('mat-card').scrollIntoView();
     }
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.periodsTooltipText = this.getPeriodsTooltipText();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   private getThumbStyle() {

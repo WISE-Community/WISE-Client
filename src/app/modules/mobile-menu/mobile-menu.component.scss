@@ -2,7 +2,7 @@
 @import '../../../style/base/typography';
 
 // Create a config with the default typography levels.
-$typography: mat.define-typography-config();
+$typography: mat.m2-define-typography-config();
 
 .mobile-menu {
   width: 300px;
@@ -17,7 +17,7 @@ $typography: mat.define-typography-config();
 a.mat-mdc-button {
   text-transform: none;
   justify-content: flex-start;
-  font-size: mat.font-size($wise-typography, 'subtitle-2');
+  font-size: mat.m2-font-size($wise-typography, 'subtitle-2');
 }
 
 

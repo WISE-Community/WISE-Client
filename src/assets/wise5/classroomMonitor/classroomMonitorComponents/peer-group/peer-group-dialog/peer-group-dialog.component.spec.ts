@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
@@ -14,6 +14,7 @@ import { ClassroomStatusService } from '../../../../services/classroomStatusServ
 import { PeerGrouping } from '../../../../../../app/domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('PeerGroupDialogComponent', () => {
   let component: PeerGroupDialogComponent;
@@ -21,25 +22,24 @@ describe('PeerGroupDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PeerGroupDialogComponent, SelectPeriodComponent],
-      imports: [
-        BrowserAnimationsModule,
+    declarations: [PeerGroupDialogComponent, SelectPeriodComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
         CommonModule,
-        HttpClientTestingModule,
         MatDialogModule,
         MatSelectModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [
+        StudentTeacherCommonServicesModule],
+    providers: [
         ClassroomStatusService,
         { provide: MAT_DIALOG_DATA, useValue: {} },
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,
-        WorkgroupService
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+        WorkgroupService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

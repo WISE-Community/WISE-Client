@@ -1,0 +1,27 @@
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="applyTagsMenu"
+  matTooltip="Apply tags"
+  matTooltipPosition="above"
+  i18n-matTooltip
+>
+  <mat-icon>sell</mat-icon>
+</button>
+<mat-menu #applyTagsMenu (closed)="searchText = ''">
+  <div class="menu-info secondary-text" (click)="$event.stopPropagation()" i18n>Apply tags</div>
+  <app-search-bar [value]="searchText" (update)="filterTags($event)" />
+  @for (tag of filteredTags; track tag.id) {
+    <div (click)="$event.stopPropagation()" mat-menu-item>
+      <select-all-items-checkbox
+        [numAllItems]="selectedProjects.length"
+        [numSelectedItems]="tag.numProjectsWithTag"
+        (allSelectedEvent)="addTagToProjects(tag)"
+        (noneSelectedEvent)="removeTagFromProjects(tag)"
+      >
+        <tag [color]="tag.color" [text]="tag.text" class="mat-small" />
+      </select-all-items-checkbox>
+    </div>
+  }
+  <mat-divider />
+  <div (click)="manageTags(); $event.stopPropagation()" mat-menu-item i18n>Manage Tags</div>
+</mat-menu>

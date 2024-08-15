@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { lastValueFrom } from 'rxjs';
 
 @Component({

@@ -1,9 +1,10 @@
 <div class="top-button-bar">
   <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-    <teacher-node-icon [nodeId]="nodeId" [canEdit]="true" size="18"></teacher-node-icon>
-    <edit-node-title [node]="node"></edit-node-title>
+    <teacher-node-icon [nodeId]="nodeId" [canEdit]="true" size="18" />
+    <edit-node-title [node]="node" />
     <div class="node-buttons" fxLayoutGap="16px">
       <button
+        class="enable-in-translation"
         mat-raised-button
         color="primary"
         routerLink="advanced"
@@ -14,16 +15,6 @@
         <mat-icon>build</mat-icon>
       </button>
     </div>
-    <span fxFlex></span>
-    <button
-      mat-icon-button
-      (click)="close()"
-      matTooltip="Back to unit"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>close</mat-icon>
-    </button>
   </div>
   <div
     *ngIf="!isGroupNode"
@@ -72,6 +63,7 @@
     <span fxFlex></span>
     <div *ngIf="!isGroupNode" fxLayoutGap="16px">
       <button
+        class="enable-in-translation"
         mat-raised-button
         color="primary"
         (click)="setAllComponentsIsExpanded(true)"
@@ -81,6 +73,7 @@
         + Expand All
       </button>
       <button
+        class="enable-in-translation"
         mat-raised-button
         color="primary"
         (click)="setAllComponentsIsExpanded(false)"

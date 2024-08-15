@@ -1,7 +1,7 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -20,7 +20,7 @@ import { MobileMenuComponent } from './modules/mobile-menu/mobile-menu.component
 import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementDialogComponent } from './announcement/announcement.component';
 import { TrackScrollDirective } from './track-scroll.directive';
-import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY, RECAPTCHA_BASE_URL } from 'ng-recaptcha';
+import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY, RECAPTCHA_BASE_URL } from 'ng-recaptcha-2';
 import { ArchiveProjectService } from './services/archive-project.service';
 import { FooterComponent } from './modules/footer/footer.component';
 import { HeaderComponent } from './modules/header/header.component';
@@ -43,17 +43,13 @@ export function initialize(
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AnnouncementComponent,
-    AnnouncementDialogComponent,
-    TrackScrollDirective
-  ],
+  declarations: [AppComponent, AnnouncementDialogComponent, TrackScrollDirective],
+  bootstrap: [AppComponent],
   imports: [
+    AnnouncementComponent,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule,
     AppRoutingModule,
     FooterComponent,
     HeaderComponent,
@@ -105,8 +101,8 @@ export function initialize(
     {
       provide: RECAPTCHA_BASE_URL,
       useValue: 'https://recaptcha.net/recaptcha/api.js'
-    }
-  ],
-  bootstrap: [AppComponent]
+    },
+    provideHttpClient(withInterceptorsFromDi())
+  ]
 })
 export class AppModule {}

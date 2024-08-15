@@ -1,8 +1,9 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../../services/configService';
 import { ClassResponse } from './class-response.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let fixture: ComponentFixture<ClassResponse>;
 let component: ClassResponse;
@@ -12,11 +13,11 @@ let reply2: any = createComponentState('World');
 describe('ClassResponseComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [ClassResponse],
-      providers: [ConfigService],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+    declarations: [ClassResponse],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [],
+    providers: [ConfigService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(ClassResponse);
     component = fixture.componentInstance;
     component.response = createComponentState();

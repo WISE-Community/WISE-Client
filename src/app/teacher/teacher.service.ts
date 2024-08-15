@@ -65,6 +65,10 @@ export class TeacherService {
     return this.http.get<Run>(`${this.lastRunUrl}/${projectId}`);
   }
 
+  getPersonalAndSharedProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>('/api/project/personal-and-shared');
+  }
+
   registerTeacherAccount(teacherUser: Teacher): Observable<any> {
     const headers = {
       'Content-Type': 'application/json'

@@ -1,18 +1,19 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { SpaceService } from '../../assets/wise5/services/spaceService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 let service: SpaceService;
 let teacherProjectService: TeacherProjectService;
 
 describe('SpaceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
-      providers: [CopyNodesService, SpaceService, TeacherProjectService]
-    });
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [CopyNodesService, SpaceService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     teacherProjectService = TestBed.inject(TeacherProjectService);
     service = TestBed.inject(SpaceService);
   });

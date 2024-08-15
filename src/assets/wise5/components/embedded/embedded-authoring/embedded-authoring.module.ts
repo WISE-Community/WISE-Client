@@ -21,11 +21,13 @@ import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EmbeddedService } from '../embeddedService';
 import { EmbeddedAuthoring } from './embedded-authoring.component';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
 
 @NgModule({
   declarations: [EmbeddedAuthoring, EditComponentPrompt, AuthorUrlParametersComponent],
   imports: [
     CommonModule,
+    ComponentAuthoringModule,
     FormsModule,
     MatCheckboxModule,
     MatDialogModule,

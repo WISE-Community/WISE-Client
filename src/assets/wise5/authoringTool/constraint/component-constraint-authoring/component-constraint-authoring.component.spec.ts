@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -13,7 +13,7 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { ComponentConstraintAuthoringComponent } from './component-constraint-authoring.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: ComponentConstraintAuthoringComponent;
 let fixture: ComponentFixture<ComponentConstraintAuthoringComponent>;
@@ -22,11 +22,10 @@ const nodeId1 = 'node1';
 describe('ComponentConstraintAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ComponentConstraintAuthoringComponent],
       imports: [
         BrowserAnimationsModule,
+        ComponentConstraintAuthoringComponent,
         FormsModule,
-        HttpClientTestingModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
@@ -37,9 +36,10 @@ describe('ComponentConstraintAuthoringComponent', () => {
         ClassroomStatusService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ComponentConstraintAuthoringComponent);

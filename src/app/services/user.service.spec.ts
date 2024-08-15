@@ -1,7 +1,8 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { UserService } from './user.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ConfigService } from './config.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let service: UserService;
 let http: HttpTestingController;
@@ -10,9 +11,9 @@ export class MockConfigService {}
 describe('UserService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [UserService, { provide: ConfigService, useClass: MockConfigService }],
-      imports: [HttpClientTestingModule]
-    });
+    imports: [],
+    providers: [UserService, { provide: ConfigService, useClass: MockConfigService }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(UserService);
     http = TestBed.inject(HttpTestingController);
   });

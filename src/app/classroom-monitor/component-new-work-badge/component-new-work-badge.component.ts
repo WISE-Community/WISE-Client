@@ -3,79 +3,78 @@ import { Subscription } from 'rxjs';
 import { AnnotationService } from '../../../assets/wise5/services/annotationService';
 import { TeacherDataService } from '../../../assets/wise5/services/teacherDataService';
 import { Annotation } from '../../../assets/wise5/common/Annotation';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  imports: [CommonModule],
   selector: 'component-new-work-badge',
-  template: `<span *ngIf="hasNewWork" class="badge badge--info" i18n>New</span>`
+  standalone: true,
+  template: `@if (hasNewWork) {
+    <span class="badge badge--info" i18n>New</span>
+    }`
 })
 export class ComponentNewWorkBadgeComponent {
-  annotationSavedToServerSubscription: Subscription;
-
-  @Input()
-  componentId: string;
-
-  hasNewWork: boolean = false;
-
-  @Input()
-  nodeId: string;
-
-  @Input()
-  workgroupId: number;
+  @Input() componentId: string;
+  protected hasNewWork: boolean;
+  @Input() nodeId: string;
+  private subscriptions: Subscription = new Subscription();
+  @Input() workgroupId: number;
 
   constructor(
-    private AnnotationService: AnnotationService,
-    private TeacherDataService: TeacherDataService
+    private annotationService: AnnotationService,
+    private dataService: TeacherDataService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.checkHasNewWork();
-    this.annotationSavedToServerSubscription = this.AnnotationService.annotationSavedToServer$.subscribe(
-      (annotation: Annotation) => {
+    this.subscriptions.add(
+      this.annotationService.annotationSavedToServer$.subscribe((annotation: Annotation) => {
         if (annotation.nodeId === this.nodeId && annotation.componentId === this.componentId) {
           this.checkHasNewWork();
         }
-      }
+      })
     );
   }
 
-  ngOnDestroy() {
-    this.annotationSavedToServerSubscription.unsubscribe();
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
-  checkHasNewWork() {
-    const latestComponentState = this.TeacherDataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
+  private checkHasNewWork(): void {
+    this.hasNewWork = false;
+    const componentState = this.dataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
       this.workgroupId,
       this.nodeId,
       this.componentId
     );
-    const latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
+    const annotations = this.annotationService.getLatestComponentAnnotations(
       this.nodeId,
       this.componentId,
       this.workgroupId,
-      null,
+      'any',
       'comment'
     );
-    if (latestComponentState) {
-      let latestTeacherComment = null;
-      if (latestAnnotations && latestAnnotations.comment) {
-        latestTeacherComment = latestAnnotations.comment;
+    if (componentState) {
+      let teacherComment = null;
+      if (annotations && annotations.comment) {
+        teacherComment = annotations.comment;
       }
-      let latestTeacherScore = null;
-      if (latestAnnotations && latestAnnotations.score) {
-        if (latestAnnotations.score.type !== 'autoScore') {
-          latestTeacherScore = latestAnnotations.score;
+      let teacherScore = null;
+      if (annotations && annotations.score) {
+        if (annotations.score.type !== 'autoScore') {
+          teacherScore = annotations.score;
         }
       }
-      const commentSaveTime = latestTeacherComment ? latestTeacherComment.serverSaveTime : 0;
-      const scoreSaveTime = latestTeacherScore ? latestTeacherScore.serverSaveTime : 0;
-      let latestTeacherAnnotationTime = 0;
+      const commentSaveTime = teacherComment ? teacherComment.serverSaveTime : 0;
+      const scoreSaveTime = teacherScore ? teacherScore.serverSaveTime : 0;
+      let teacherAnnotationTime = 0;
       if (commentSaveTime >= scoreSaveTime) {
-        latestTeacherAnnotationTime = commentSaveTime;
+        teacherAnnotationTime = commentSaveTime;
       } else if (scoreSaveTime > commentSaveTime) {
-        latestTeacherAnnotationTime = scoreSaveTime;
+        teacherAnnotationTime = scoreSaveTime;
       }
-      let latestComponentStateTime = latestComponentState.serverSaveTime;
-      if (latestComponentStateTime > latestTeacherAnnotationTime) {
+      let componentStateTime = componentState.serverSaveTime;
+      if (componentStateTime > teacherAnnotationTime) {
         this.hasNewWork = true;
       }
     }

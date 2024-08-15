@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectService } from '../../../../services/projectService';
 import { StudentDataService } from '../../../../services/studentDataService';
@@ -6,6 +6,7 @@ import { StepToolsComponent } from './step-tools.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 import { NodeStatusService } from '../../../../services/nodeStatusService';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const nodeId1 = 'node1';
 const nodeStatus1 = { icon: '', isCompleted: true };
@@ -18,12 +19,8 @@ describe('StepToolsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        NoopAnimationsModule,
-        StepToolsComponent,
-        StudentTeacherCommonServicesModule
-      ]
+      imports: [NoopAnimationsModule, StepToolsComponent, StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
     }).compileComponents();
   });
 

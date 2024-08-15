@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -17,11 +17,11 @@ import { EditComponentRubricComponent } from '../edit-component-rubric/edit-comp
 import { EditComponentSaveButtonComponent } from '../edit-component-save-button/edit-component-save-button.component';
 import { EditComponentSubmitButtonComponent } from '../edit-component-submit-button/edit-component-submit-button.component';
 import { EditComponentTagsComponent } from '../edit-component-tags/edit-component-tags.component';
-import { EditComponentWidthComponent } from '../edit-component-width/edit-component-width.component';
 import { EditConnectedComponentsAddButtonComponent } from '../edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsComponent } from '../edit-connected-components/edit-connected-components.component';
 import { EditCommonAdvancedComponent } from './edit-common-advanced.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('EditCommonAdvancedComponent', () => {
   let component: EditCommonAdvancedComponent;
@@ -29,18 +29,7 @@ describe('EditCommonAdvancedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientTestingModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [
+    declarations: [
         EditCommonAdvancedComponent,
         EditComponentExcludeFromTotalScoreComponent,
         EditComponentJsonComponent,
@@ -49,13 +38,20 @@ describe('EditCommonAdvancedComponent', () => {
         EditComponentTagsComponent,
         EditComponentSaveButtonComponent,
         EditComponentSubmitButtonComponent,
-        EditComponentWidthComponent,
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent
-      ],
-      providers: [TeacherProjectService],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        StudentTeacherCommonServicesModule],
+    providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

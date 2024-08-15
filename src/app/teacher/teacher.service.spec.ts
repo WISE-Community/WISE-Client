@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpParams } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpParams, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { TeacherService } from './teacher.service';
 
 describe('TeacherService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [TeacherService, { provide: MatDialog, useValue: {} }]
-    });
+    imports: [],
+    providers: [TeacherService, { provide: MatDialog, useValue: {} }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
   });
 
   it('should be created', inject([TeacherService], (service: TeacherService) => {

@@ -2,12 +2,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ShowMyWorkGradingComponent } from './show-my-work-grading.component';
 import { ShowMyWorkGradingModule } from './show-my-work-grading.module';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { ProjectService } from '../../../services/projectService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: ShowMyWorkGradingComponent;
 const componentId: string = 'component1';
@@ -20,20 +21,19 @@ const workgroupId: number = 100;
 describe('ShowMyWorkGradingComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ShowMyWorkGradingComponent],
-      imports: [
-        HttpClientTestingModule,
-        ShowMyWorkGradingModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [
+    declarations: [ShowMyWorkGradingComponent],
+    imports: [ShowMyWorkGradingModule,
+        StudentTeacherCommonServicesModule],
+    providers: [
         ClassroomStatusService,
         ProjectService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
-      ]
-    });
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     projectService = TestBed.inject(ProjectService);
     spyOn(projectService, 'getComponent').and.returnValue({
       id: componentId,

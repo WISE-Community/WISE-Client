@@ -27,6 +27,7 @@
     <div class="border margin-bottom-20">
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
         <button
+          class="enable-in-translation"
           *ngIf="idToExpanded[item.id]"
           mat-raised-button
           color="primary"
@@ -37,6 +38,7 @@
           <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
         <button
+          class="enable-in-translation"
           mat-raised-button
           color="primary"
           *ngIf="!idToExpanded[item.id]"
@@ -58,23 +60,23 @@
         </button>
       </div>
       <div *ngIf="idToExpanded[item.id]" class="margin-left-20">
-        <div>
-          <mat-form-field class="width-300">
-            <mat-label i18n>Milestone Name</mat-label>
-            <input matInput [(ngModel)]="item.name" (ngModelChange)="contentChanged()" />
-          </mat-form-field>
+        <div class="width-300">
+          <translatable-input
+            [content]="item"
+            key="name"
+            label="Milestone Name"
+            i18n-label
+            (defaultLanguageTextChanged)="contentChanged()"
+          />
         </div>
         <div>
-          <mat-form-field class="full-width">
-            <mat-label i18n>Milestone Description</mat-label>
-            <textarea
-              matInput
-              [(ngModel)]="item.description"
-              (ngModelChange)="contentChanged()"
-              cdkTextareaAutosize
-            >
-            </textarea>
-          </mat-form-field>
+          <translatable-textarea
+            [content]="item"
+            key="description"
+            label="Milestone Description"
+            i18n-label
+            (defaultLanguageTextChanged)="contentChanged()"
+          />
         </div>
         <div class="margin-bottom-20">
           <mat-slide-toggle
@@ -320,6 +322,7 @@
               <div class="border margin-left-20" fxLayout="column" fxLayoutGap="20px">
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
                   <button
+                    class="enable-in-translation"
                     mat-raised-button
                     color="primary"
                     *ngIf="idToExpanded[template.id]"
@@ -330,6 +333,7 @@
                     <mat-icon>keyboard_arrow_down</mat-icon>
                   </button>
                   <button
+                    class="enable-in-translation"
                     mat-raised-button
                     color="primary"
                     *ngIf="!idToExpanded[template.id]"
@@ -505,44 +509,34 @@
                     </div>
                   </div>
                   <div>
-                    <mat-form-field class="full-width">
-                      <mat-label i18n>Description</mat-label>
-                      <textarea
-                        matInput
-                        [(ngModel)]="template.description"
-                        (ngModelChange)="contentChanged()"
-                        cdkTextareaAutosize
-                      >
-                      </textarea>
-                    </mat-form-field>
+                    <translatable-textarea
+                      [content]="template"
+                      key="description"
+                      label="Description"
+                      i18n-label
+                      (defaultLanguageTextChanged)="contentChanged()"
+                    />
                   </div>
                   <div>
-                    <mat-form-field class="full-width">
-                      <mat-label i18n>Content</mat-label>
-                      <textarea
-                        matInput
-                        [(ngModel)]="template.content"
-                        (ngModelChange)="contentChanged()"
-                        cdkTextareaAutosize
-                      >
-                      </textarea>
-                    </mat-form-field>
+                    <translatable-textarea
+                      [content]="template"
+                      key="content"
+                      label="Content"
+                      (defaultLanguageTextChanged)="contentChanged()"
+                    />
                   </div>
                   <span i18n>Content Preview</span>
                   <section class="milestone-details__section md-whiteframe-1dp">
                     <div [innerHTML]="template.content"></div>
                   </section>
                   <div>
-                    <mat-form-field class="full-width">
-                      <mat-label i18n>Recommendations</mat-label>
-                      <textarea
-                        matInput
-                        [(ngModel)]="template.recommendations"
-                        (ngModelChange)="contentChanged()"
-                        cdkTextareaAutosize
-                      >
-                      </textarea>
-                    </mat-form-field>
+                    <translatable-textarea
+                      [content]="template"
+                      key="recommendations"
+                      label="Recommendations"
+                      i18n-label
+                      (defaultLanguageTextChanged)="contentChanged()"
+                    />
                   </div>
                   <span i18n>Recommendations Preview</span>
                   <section class="md-whiteframe-1dp gray-lightest-bg">

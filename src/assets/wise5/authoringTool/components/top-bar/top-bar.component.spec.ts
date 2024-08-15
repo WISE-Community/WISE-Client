@@ -6,12 +6,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TopBarComponent } from './top-bar.component';
 import { ConfigService } from '../../../services/configService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
 import { MatDialogModule } from '@angular/material/dialog';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { NotifyAuthorService } from '../../../services/notifyAuthorService';
 
 describe('TopBarComponent', () => {
   let component: TopBarComponent;
@@ -21,7 +24,6 @@ describe('TopBarComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [TopBarComponent],
       imports: [
-        HttpClientTestingModule,
         MatDialogModule,
         MatIconModule,
         MatMenuModule,
@@ -31,9 +33,12 @@ describe('TopBarComponent', () => {
       ],
       providers: [
         ClassroomStatusService,
+        NotifyAuthorService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
       ]
     }).compileComponents();
   });
@@ -42,6 +47,9 @@ describe('TopBarComponent', () => {
     fixture = TestBed.createComponent(TopBarComponent);
     component = fixture.componentInstance;
     spyOn(TestBed.inject(ConfigService), 'getMyUserInfo').and.returnValue({});
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en_US', supported: [] })
+    );
     fixture.detectChanges();
   });
 

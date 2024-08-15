@@ -1,28 +1,21 @@
 <edit-component-prompt
-  [prompt]="componentContent.prompt"
+  [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
 ></edit-component-prompt>
-<div>
-  <mat-form-field class="background-image input">
-    <mat-label i18n>Background Image</mat-label>
-    <input
-      matInput
-      [(ngModel)]="componentContent.backgroundImage"
-      (ngModelChange)="textInputChange.next($event)"
-    />
-  </mat-form-field>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="chooseBackground()"
-    matTooltip="Choose an Image"
-    matTooltipPosition="above"
-    i18n-matTooltip
-    aria-label="Image"
-    i18n-aria-label
-  >
-    <mat-icon>insert_photo</mat-icon>
-  </button>
+<div fxLayout="row" fxLayoutAlign="start center">
+  <translatable-input
+    [content]="componentContent"
+    key="backgroundImage"
+    label="Background Image (Optional)"
+    i18n-label
+    (defaultLanguageTextChanged)="inputChange.next($event)"
+    class="background-image input"
+  />
+  <translatable-asset-chooser
+    [content]="componentContent"
+    key="backgroundImage"
+    (defaultLanguageTextChanged)="componentChanged()"
+  />
 </div>
 <div>
   <mat-form-field class="input">
@@ -132,17 +125,15 @@
     *ngFor="let label of componentContent.labels; index as labelIndex"
     class="starter-label-container"
   >
-    <div>
-      <mat-form-field class="input label-input">
-        <mat-label i18n>Text</mat-label>
-        <input
-          matInput
-          [(ngModel)]="label.text"
-          (ngModelChange)="textInputChange.next($event)"
-          placeholder="Enter Label Text Here"
-          i18n-placeholder
-        />
-      </mat-form-field>
+    <div fxLayout="row wrap" fxLayoutAlign="start start">
+      <translatable-input
+        [content]="label"
+        key="text"
+        label="Label Text"
+        i18n-label
+        (defaultLanguageTextChanged)="textInputChange.next($event)"
+        class="input label-input"
+      />
       <mat-form-field class="input color-input">
         <mat-label i18n>Color</mat-label>
         <input

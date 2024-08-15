@@ -5,6 +5,7 @@
       prompt.
     </span>
     <button
+      class="enable-in-translation"
       mat-icon-button
       (click)="showSystemPromptHelp = !showSystemPromptHelp"
       matTooltip="Help"
@@ -43,7 +44,7 @@
   </mat-form-field>
   <p i18n>Use the prompt to introduce the chatbot activity. Students will see the prompt.</p>
   <edit-component-prompt
-    [prompt]="componentContent.prompt"
+    [componentContent]="componentContent"
     (promptChangedEvent)="promptChanged($event)"
   ></edit-component-prompt>
   <mat-checkbox

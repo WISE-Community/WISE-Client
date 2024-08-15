@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
@@ -8,6 +8,7 @@ import { ConceptMapService } from '../../assets/wise5/components/conceptMap/conc
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { MatDialogModule } from '@angular/material/dialog';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let service: ConceptMapService;
 let conceptMapNode1: any;
@@ -42,17 +43,19 @@ const link2DestinationNodeInstanceId = 'studentNode2';
 describe('ConceptMapService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule],
-      providers: [
+    imports: [MatDialogModule],
+    providers: [
         AnnotationService,
         ConceptMapService,
         ConfigService,
         ProjectService,
         SessionService,
         StudentAssetService,
-        TagService
-      ]
-    });
+        TagService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.get(ConceptMapService);
     conceptMapNode1 = createConceptMapNode(
       node1OriginalId,

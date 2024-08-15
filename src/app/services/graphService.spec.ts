@@ -1,5 +1,5 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
@@ -7,6 +7,7 @@ import { StudentAssetService } from '../../assets/wise5/services/studentAssetSer
 import { TagService } from '../../assets/wise5/services/tagService';
 import { GraphService } from '../../assets/wise5/components/graph/graphService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let http: HttpTestingController;
 const runId: number = 1;
@@ -15,17 +16,19 @@ let service: GraphService;
 describe('GraphService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         AnnotationService,
         ConfigService,
         GraphService,
         ProjectService,
         SessionService,
         StudentAssetService,
-        TagService
-      ]
-    });
+        TagService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.get(GraphService);
     http = TestBed.inject(HttpTestingController);
     spyOn(TestBed.inject(ConfigService), 'getRunId').and.returnValue(runId);

@@ -1,18 +1,19 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogWithoutCloseComponent } from '../../assets/wise5/directives/dialog-without-close/dialog-without-close.component';
 import { PauseScreenService } from '../../assets/wise5/services/pauseScreenService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let dialog: MatDialog;
 let service: PauseScreenService;
 describe('PauseScreenService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      providers: [PauseScreenService]
-    });
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [PauseScreenService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     dialog = TestBed.inject(MatDialog);
     service = TestBed.inject(PauseScreenService);
   });

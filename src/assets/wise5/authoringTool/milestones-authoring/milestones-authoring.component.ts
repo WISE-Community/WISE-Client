@@ -462,10 +462,12 @@ export class MilestonesAuthoringComponent {
 
   protected expand(id: string): void {
     this.idToExpanded[id] = true;
+    this.projectService.uiChanged();
   }
 
   protected collapse(id: string): void {
     this.idToExpanded[id] = false;
+    this.projectService.uiChanged();
   }
 
   protected save(): void {

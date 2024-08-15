@@ -1,7 +1,7 @@
 import { Component, Inject, Optional } from '@angular/core';
 import { ConfigService } from '../../services/configService';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
-import * as $ from 'jquery';
+import $ from 'jquery';
 import { Subscription } from 'rxjs';
 import { isImage, isVideo } from '../../common/file/file';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';

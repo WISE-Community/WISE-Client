@@ -41,7 +41,6 @@ import { NodeStatusIconComponent } from '../../../assets/wise5/themes/default/th
     GenerateImageDialogComponent,
     GroupTabsComponent,
     NodeNavigationComponent,
-    RunEndedAndLockedMessageComponent,
     SafeUrl,
     VLEComponent,
     VLEParentComponent
@@ -53,6 +52,7 @@ import { NodeStatusIconComponent } from '../../../assets/wise5/themes/default/th
     NavigationComponent,
     NodeModule,
     NodeStatusIconComponent,
+    RunEndedAndLockedMessageComponent,
     SimpleDialogModule,
     StepToolsComponent,
     StudentAssetsDialogModule,

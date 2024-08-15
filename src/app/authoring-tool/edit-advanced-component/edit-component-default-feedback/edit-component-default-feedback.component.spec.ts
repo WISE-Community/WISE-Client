@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,6 +8,7 @@ import { CopyNodesService } from '../../../../assets/wise5/services/copyNodesSer
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../../student-teacher-common-services.module';
 import { EditComponentDefaultFeedback } from './edit-component-default-feedback.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: EditComponentDefaultFeedback;
 let feedback1 = 'First feedback';
@@ -18,17 +19,14 @@ let fixture: ComponentFixture<EditComponentDefaultFeedback>;
 describe('EditComponentDefaultFeedback', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        FormsModule,
-        HttpClientTestingModule,
+    declarations: [EditComponentDefaultFeedback],
+    imports: [FormsModule,
         MatIconModule,
         MatInputModule,
         NoopAnimationsModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [EditComponentDefaultFeedback],
-      providers: [CopyNodesService, TeacherProjectService]
-    });
+        StudentTeacherCommonServicesModule],
+    providers: [CopyNodesService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
   });
 
   beforeEach(() => {

@@ -63,13 +63,13 @@
       margin-bottom: 24px;
 
       .mat-icon {
-        @include mat-icon-size(mat.font-size($wise-typography, 'headline-3'));
+        @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-3'));
       }
     }
 
     @media (min-width: breakpoint('md.min')) {
       .mat-icon {
-        @include mat-icon-size(mat.font-size($wise-typography, 'headline-2'));
+        @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-2'));
       }
     }
   }
@@ -91,12 +91,12 @@
     margin-bottom: 0 !important;
 
     .mat-icon {
-      @include mat-icon-size(mat.font-size($wise-typography, 'headline-5'));
+      @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-5'));
     }
 
     @media (min-width: breakpoint('sm.min')) {
       .mat-icon {
-        @include mat-icon-size(mat.font-size($wise-typography, 'headline-4'));
+        @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-4'));
       }
     }
   }

@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -6,6 +6,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { Component } from '../../../common/Component';
 import { ConceptMapService } from '../conceptMapService';
 import { ConceptMapStudent } from './concept-map-student.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let background1 = 'background1.png';
 let background2 = 'background2.png';
@@ -29,10 +30,11 @@ let nodeInstanceId2 = 'studentNode2';
 describe('ConceptMapStudent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [ConceptMapStudent],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+    declarations: [ConceptMapStudent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(ConceptMapStudent);
     component = fixture.componentInstance;
     const componentContent = TestBed.inject(ConceptMapService).createComponent();

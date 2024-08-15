@@ -12,8 +12,8 @@ import { ArchiveProjectService } from '../../services/archive-project.service';
 
 @Component({
   selector: 'app-run-menu',
-  templateUrl: './run-menu.component.html',
-  styleUrls: ['./run-menu.component.scss']
+  styleUrl: './run-menu.component.scss',
+  templateUrl: './run-menu.component.html'
 })
 export class RunMenuComponent implements OnInit {
   private editLink: string = '';

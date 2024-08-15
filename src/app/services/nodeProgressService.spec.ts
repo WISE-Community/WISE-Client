@@ -1,16 +1,18 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { NodeProgressService } from '../../assets/wise5/services/nodeProgressService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let projectService: ProjectService;
 let service: NodeProgressService;
 describe('NodeProgressService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
-    });
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     projectService = TestBed.inject(ProjectService);
     service = TestBed.inject(NodeProgressService);
   });

@@ -6,7 +6,7 @@
     <notebook-notes [config]="notebookConfig"></notebook-notes>
   </mat-drawer>
   <mat-drawer-content>
-    <top-bar></top-bar>
+    <top-bar [projectName]="project.metadata.title"></top-bar>
     <ng-container *ngTemplateOutlet="vleTemplate"></ng-container>
     <notebook-report
       *ngIf="reportEnabled"
@@ -14,22 +14,21 @@
       [config]="notebookConfig"
     >
     </notebook-report>
-    <notebook-launcher *ngIf="notesEnabled && !notesVisible" [notebookConfig]="notebookConfig">
-    </notebook-launcher>
+    <notebook-launcher *ngIf="notesEnabled && !notesVisible" [notebookConfig]="notebookConfig" />
   </mat-drawer-content>
 </mat-drawer-container>
 
 <div id="wise-link-communicator" class="wise-link-communicator"></div>
 
 <ng-template #defaultVLETemplate>
-  <step-tools *ngIf="layoutState === 'node'" class="control-bg-bg mat-elevation-z1"/>
+  <step-tools *ngIf="layoutState === 'node'" class="control-bg-bg mat-elevation-z1" />
   <div
     id="content"
     class="vle-content"
     [ngClass]="{ 'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node' }"
   >
-    <run-ended-and-locked-message *ngIf="runEndedAndLocked"></run-ended-and-locked-message>
-    <node *ngIf="layoutState === 'node'" class="top"></node>
+    <run-ended-and-locked-message *ngIf="runEndedAndLocked" class="notice" />
+    <node *ngIf="layoutState === 'node'" class="top" [node]="currentNode"></node>
     <navigation *ngIf="layoutState === 'nav'" class="top"></navigation>
   </div>
 </ng-template>
@@ -42,7 +41,7 @@
   >
     <group-tabs></group-tabs>
     <div class="tab-content">
-      <run-ended-and-locked-message *ngIf="runEndedAndLocked"></run-ended-and-locked-message>
+      <run-ended-and-locked-message *ngIf="runEndedAndLocked" />
       <node *ngIf="layoutState === 'node'" class="node-tabbed top"></node>
       <div class="node-nav">
         <node-navigation class="l-constrained"></node-navigation>

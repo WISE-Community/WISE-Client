@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { StudentDataService } from '../../services/studentDataService';
 import { StudentNotificationService } from '../../services/studentNotificationService';
 import { VLEProjectService } from '../vleProjectService';
 import { VLEParentComponent } from './vle-parent.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: VLEParentComponent;
 let fixture: ComponentFixture<VLEParentComponent>;
@@ -23,21 +24,20 @@ const runId1: string = '1';
 describe('VLEParentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
+    declarations: [VLEParentComponent],
+    imports: [MatDialogModule,
         RouterTestingModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [VLEParentComponent],
-      providers: [
+        StudentTeacherCommonServicesModule],
+    providers: [
         InitializeVLEService,
         PauseScreenService,
         ProjectService,
         StudentNotificationService,
-        VLEProjectService
-      ]
-    }).compileComponents();
+        VLEProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
     fixture = TestBed.createComponent(VLEParentComponent);
     component = fixture.componentInstance;
     initializeVLEService = TestBed.inject(InitializeVLEService);

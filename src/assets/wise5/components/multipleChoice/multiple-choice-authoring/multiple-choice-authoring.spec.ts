@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MultipleChoiceAuthoring } from './multiple-choice-authoring.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
@@ -16,34 +16,51 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MultipleChoiceAuthoringHarness } from './multiple-choice-authoring.harness';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { ProjectService } from '../../../services/projectService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: MultipleChoiceAuthoring;
 let fixture: ComponentFixture<MultipleChoiceAuthoring>;
 let multipleChoiceAuthoringHarness: MultipleChoiceAuthoringHarness;
+let projectService: ProjectService;
+let teacherProjectService: TeacherProjectService;
 
 describe('MultipleChoiceAuthoringComponent', () => {
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [EditComponentPrompt, MultipleChoiceAuthoring],
-        imports: [
-          BrowserAnimationsModule,
-          FormsModule,
-          HttpClientTestingModule,
-          MatDialogModule,
-          MatCheckboxModule,
-          MatFormFieldModule,
-          MatIconModule,
-          MatInputModule,
-          MatRadioModule,
-          StudentTeacherCommonServicesModule
-        ],
-        providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
-      });
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [EditComponentPrompt, MultipleChoiceAuthoring],
+      imports: [
+        BrowserAnimationsModule,
+        ComponentAuthoringModule,
+        FormsModule,
+        MatDialogModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatRadioModule,
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
+        ProjectAssetService,
+        TeacherNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
+  }));
 
   beforeEach(async () => {
+    projectService = TestBed.inject(ProjectService);
+    teacherProjectService = TestBed.inject(TeacherProjectService);
+    const locale = new ProjectLocale({ default: 'en-US' });
+    spyOn(teacherProjectService, 'getLocale').and.returnValue(locale);
+    spyOn(teacherProjectService, 'isDefaultLocale').and.returnValue(true);
+    spyOn(projectService, 'getLocale').and.returnValue(locale);
+    projectService.setCurrentLanguage(locale.getDefaultLanguage());
     fixture = TestBed.createComponent(MultipleChoiceAuthoring);
     component = fixture.componentInstance;
     component.componentContent = {

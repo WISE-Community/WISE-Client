@@ -1,5 +1,5 @@
 <edit-component-prompt
-  [prompt]="componentContent.prompt"
+  [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
 ></edit-component-prompt>
 <p>
@@ -38,30 +38,23 @@
   *ngFor="let choice of componentContent.choices; first as isFirst; last as isLast"
   class="choice-container"
 >
-  <div fxLayout="row wrap" fxLayoutAlign="start center">
-    <mat-form-field class="choice-text-input-container">
-      <mat-label i18n>Choice Text</mat-label>
-      <input
-        matInput
-        [(ngModel)]="choice.text"
-        (ngModelChange)="choiceTextChange.next($event)"
-        i18n-placeholder
-        placeholder="Type text or choose an image"
-      />
-    </mat-form-field>
-    <button
-      mat-raised-button
-      color="primary"
-      class="choice-authoring-button"
-      (click)="chooseChoiceAsset(choice)"
-      i18n-matTooltip
-      matTooltip="Choose an Image"
-      matTooltipPosition="above"
-      i18n-aria-label
-      aria-label="Image"
-    >
-      <mat-icon>insert_photo</mat-icon>
-    </button>
+  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <translatable-input
+      [content]="choice"
+      key="text"
+      label="Choice Text"
+      i18n-label
+      placeholder="Type text or choose an image"
+      i18n-placeholder
+      (defaultLanguageTextChanged)="choiceTextChange.next($event)"
+      class="choice-text-input-container"
+    />
+    <translatable-asset-chooser
+      [content]="choice"
+      key="text"
+      [processAsset]="processSelectedAsset"
+      (defaultLanguageTextChanged)="componentChanged()"
+    />
     <div>
       <mat-checkbox
         color="primary"
@@ -76,16 +69,16 @@
     </div>
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="start center">
-    <mat-form-field class="choice-feedback-input-container">
-      <mat-label i18n>Feeback</mat-label>
-      <input
-        matInput
-        [(ngModel)]="choice.feedback"
-        (ngModelChange)="feedbackTextChange.next($event)"
-        i18n-placeholder
-        placeholder="Optional"
-      />
-    </mat-form-field>
+    <translatable-input
+      [content]="choice"
+      key="feedback"
+      label="Feedback"
+      i18n-label
+      placeholder="Optional"
+      i18n-placeholder
+      (defaultLanguageTextChanged)="feedbackTextChange.next($event)"
+      class="choice-feedback-input-container"
+    />
     <button
       mat-raised-button
       color="primary"

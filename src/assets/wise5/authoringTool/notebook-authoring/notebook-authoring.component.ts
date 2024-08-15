@@ -3,6 +3,8 @@ import { insertWiseLinks, replaceWiseLinks } from '../../common/wise-link/wise-l
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Subject, debounceTime } from 'rxjs';
+import { copy } from '../../common/object/object';
+import { newProjectTemplate } from '../new-project-template';
 
 @Component({
   selector: 'notebook-authoring',
@@ -11,7 +13,6 @@ import { Subject, debounceTime } from 'rxjs';
 })
 export class NotebookAuthoringComponent {
   protected notebookChanged: Subject<void> = new Subject<void>();
-  protected projectId: number;
   protected project: any;
   protected reportIdToAuthoringNote: any;
 
@@ -22,29 +23,23 @@ export class NotebookAuthoringComponent {
 
   ngOnInit(): void {
     this.project = this.projectService.project;
-    this.projectId = this.configService.getProjectId();
     this.reportIdToAuthoringNote = {};
 
     if (this.project.notebook == null) {
-      const projectTemplate = this.projectService.getNewProjectTemplate();
+      const projectTemplate = copy(newProjectTemplate);
       this.project.notebook = projectTemplate.notebook;
     }
 
     if (this.project.teacherNotebook == null) {
-      const projectTemplate = this.projectService.getNewProjectTemplate();
+      const projectTemplate = copy(newProjectTemplate);
       projectTemplate.teacherNotebook.enabled = false;
       this.project.teacherNotebook = projectTemplate.teacherNotebook;
     }
 
-    this.initializeStudentNotesAuthoring();
     this.initializeTeacherNotesAuthoring();
     this.notebookChanged.pipe(debounceTime(1000)).subscribe(() => {
       this.save();
     });
-  }
-
-  private initializeStudentNotesAuthoring(): void {
-    this.initializeNotesAuthoring(this.project.notebook.itemTypes.report.notes);
   }
 
   private initializeTeacherNotesAuthoring(): void {
@@ -68,17 +63,14 @@ export class NotebookAuthoringComponent {
     this.reportIdToAuthoringNote[reportId] = authoringReportNote;
   }
 
-  private getAuthoringReportNote(id: string): any {
-    return this.reportIdToAuthoringNote[id];
+  protected reportStarterTextChanged(reportId: string): void {
+    const note = this.getReportNote(reportId);
+    const authoringNote = this.getAuthoringReportNote(reportId);
+    note.content = insertWiseLinks(this.configService.removeAbsoluteAssetPaths(authoringNote.html));
+    this.save();
   }
 
   private getReportNote(id: string): any {
-    const studentNotes = this.project.notebook.itemTypes.report.notes;
-    for (const note of studentNotes) {
-      if (note.reportId === id) {
-        return note;
-      }
-    }
     const teacherNotes = this.project.teacherNotebook.itemTypes.report.notes;
     for (const note of teacherNotes) {
       if (note.reportId === id) {
@@ -88,11 +80,8 @@ export class NotebookAuthoringComponent {
     return null;
   }
 
-  protected reportStarterTextChanged(reportId: string): void {
-    const note = this.getReportNote(reportId);
-    const authoringNote = this.getAuthoringReportNote(reportId);
-    note.content = insertWiseLinks(this.configService.removeAbsoluteAssetPaths(authoringNote.html));
-    this.save();
+  private getAuthoringReportNote(id: string): any {
+    return this.reportIdToAuthoringNote[id];
   }
 
   protected contentChanged(): void {
@@ -101,5 +90,9 @@ export class NotebookAuthoringComponent {
 
   private save(): void {
     this.projectService.saveProject();
+  }
+
+  protected reportStarterTextDisabled(): boolean {
+    return !this.projectService.isDefaultLocale();
   }
 }

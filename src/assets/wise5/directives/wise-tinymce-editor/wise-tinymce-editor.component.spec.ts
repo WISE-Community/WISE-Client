@@ -1,7 +1,8 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { WiseTinymceEditorComponent } from './wise-tinymce-editor.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: WiseTinymceEditorComponent;
 let fixture: ComponentFixture<WiseTinymceEditorComponent>;
@@ -9,12 +10,10 @@ let fixture: ComponentFixture<WiseTinymceEditorComponent>;
 describe('WiseTinymceEditorComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        StudentTeacherCommonServicesModule,
-        WiseTinymceEditorComponent
-      ]
-    }).compileComponents();
+    imports: [StudentTeacherCommonServicesModule,
+        WiseTinymceEditorComponent],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
     fixture = TestBed.createComponent(WiseTinymceEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

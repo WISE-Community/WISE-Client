@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AiChatStudentComponent } from './ai-chat-student.component';
 import { AiChatService } from '../aiChatService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
@@ -15,6 +15,7 @@ import { ProjectService } from '../../../services/projectService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AiChatStudentComponent', () => {
   let component: AiChatStudentComponent;
@@ -22,23 +23,20 @@ describe('AiChatStudentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AiChatStudentComponent],
-      imports: [
-        AiChatModule,
+    declarations: [AiChatStudentComponent],
+    imports: [AiChatModule,
         BrowserAnimationsModule,
         ChatInputComponent,
         ComponentHeaderComponent,
         FormsModule,
-        HttpClientTestingModule,
         MatCardModule,
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
         MatSnackBarModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [AiChatService]
-    });
+        StudentTeacherCommonServicesModule],
+    providers: [AiChatService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(AiChatStudentComponent);
     component = fixture.componentInstance;
     component.component = new AiChatComponent({ id: 'component1', type: 'aiChat' }, 'node1');

@@ -1,2 +1,5 @@
-<wise-authoring-tinymce-editor [(model)]="html" (modelChange)="htmlChanged()">
-</wise-authoring-tinymce-editor>
+<translatable-rich-text-editor
+  [content]="componentContent"
+  key="html"
+  (defaultLanguageTextChanged)="componentChanged()"
+/>

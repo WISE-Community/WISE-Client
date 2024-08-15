@@ -1,8 +1,9 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { EditDynamicPromptComponent } from './edit-dynamic-prompt.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: EditDynamicPromptComponent;
 let fixture: ComponentFixture<EditDynamicPromptComponent>;
@@ -10,10 +11,10 @@ let fixture: ComponentFixture<EditDynamicPromptComponent>;
 describe('EditDynamicPromptComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditDynamicPromptComponent],
-      imports: [HttpClientTestingModule, MatCheckboxModule, StudentTeacherCommonServicesModule],
-      providers: []
-    }).compileComponents();
+    declarations: [EditDynamicPromptComponent],
+    imports: [MatCheckboxModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,0 +1,31 @@
+<ng-select
+  class="select-tags"
+  [items]="filteredTags"
+  appearance="outline"
+  bindLabel="tags"
+  placeholder="Filter by tag"
+  i18n-placeholder
+  [(ngModel)]="selectedTags"
+  [closeOnSelect]="false"
+  [multiple]="true"
+  [searchFn]="tagSearch"
+  (change)="selectTagEvent.emit(selectedTags)"
+>
+  <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+    <mat-checkbox [checked]="isSelected(item)" color="primary">
+      <tag [color]="item.color" [text]="item.text" class="mat-small" />
+    </mat-checkbox>
+  </ng-template>
+  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+    <tag
+      [color]="item.color"
+      [text]="item.text"
+      [allowRemove]="true"
+      (removeTagEvent)="clear(item)"
+      class="mat-small"
+    />
+  </ng-template>
+  <ng-template ng-footer-tmp>
+    <button mat-button (click)="manageTags(); $event.stopPropagation()" i18n>Manage Tags</button>
+  </ng-template>
+</ng-select>

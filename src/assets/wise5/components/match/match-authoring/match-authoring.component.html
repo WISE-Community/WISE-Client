@@ -1,5 +1,5 @@
 <edit-component-prompt
-  [prompt]="componentContent.prompt"
+  [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
 ></edit-component-prompt>
 <p>
@@ -63,29 +63,22 @@
     fxLayout="row"
     fxLayoutAlign="start center"
   >
-    <mat-form-field class="name">
-      <mat-label i18n>Choice Name</mat-label>
-      <input
-        matInput
-        [(ngModel)]="choice.value"
-        (ngModelChange)="inputChange.next($event)"
-        placeholder="Type text or choose an image"
-        i18n-placeholder
-      />
-    </mat-form-field>
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      (click)="chooseChoiceAsset(choice)"
-      matTooltip="Choose an Image"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Choose an Image"
-      i18n-aria-label
-    >
-      <mat-icon>insert_photo</mat-icon>
-    </button>
+    <translatable-input
+      [content]="choice"
+      key="value"
+      label="Choice Name"
+      i18n-label
+      placeholder="Type text or choose an image"
+      i18n-placeholder
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+      class="name"
+    />
+    <translatable-asset-chooser
+      [content]="choice"
+      key="value"
+      [processAsset]="processSelectedAsset"
+      (defaultLanguageTextChanged)="componentChanged()"
+    />
     <button
       mat-raised-button
       color="primary"
@@ -130,14 +123,13 @@
   </div>
 </div>
 <div class="section">
-  <mat-form-field class="name">
-    <mat-label i18n>Source Bucket Name</mat-label>
-    <input
-      matInput
-      [(ngModel)]="componentContent.choicesLabel"
-      (ngModelChange)="inputChange.next($event)"
-    />
-  </mat-form-field>
+  <translatable-input
+    [content]="componentContent"
+    key="choicesLabel"
+    label="Source Bucket Name"
+    i18n-label
+    (defaultLanguageTextChanged)="inputChange.next($event)"
+    class="name"/>
   <br />
   <span i18n>Target Buckets</span>
   <button
@@ -166,29 +158,22 @@
     fxLayout="row"
     fxLayoutAlign="start center"
   >
-    <mat-form-field class="name">
-      <mat-label i18n>Target Bucket Name</mat-label>
-      <input
-        matInput
-        [(ngModel)]="bucket.value"
-        (ngModelChange)="inputChange.next($event)"
-        placeholder="Type text or choose an image"
-        i18n-placeholder
-      />
-    </mat-form-field>
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      (click)="chooseBucketAsset(bucket)"
-      matTooltip="Choose an Image"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Choose an Image"
-      i18n-aria-label
-    >
-      <mat-icon>insert_photo</mat-icon>
-    </button>
+    <translatable-input
+      [content]="bucket"
+      key="value"
+      label="Target Bucket Name"
+      i18n-label
+      placeholder="Type text or choose an image"
+      i18n-placeholder
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+      class="name"
+    />
+    <translatable-asset-chooser
+      [content]="bucket"
+      key="value"
+      [processAsset]="processSelectedAsset"
+      (defaultLanguageTextChanged)="componentChanged()"
+    />
     <button
       mat-raised-button
       color="primary"
@@ -246,18 +231,20 @@
   </div>
   <div *ngFor="let bucketFeedback of componentContent.feedback" class="section">
     <p i18n>Bucket Name: {{ getBucketNameById(bucketFeedback.bucketId) }}</p>
-    <div *ngFor="let choiceFeedback of bucketFeedback.choices" class="choice-feedback-container notice-bg-bg">
+    <div
+      *ngFor="let choiceFeedback of bucketFeedback.choices"
+      class="choice-feedback-container notice-bg-bg"
+    >
       <span i18n> Choice: {{ getChoiceTextById(choiceFeedback.choiceId) }} </span>
-      <div layout="row">
-        <mat-form-field class="feedback">
-          <mat-label i18n>Feedback</mat-label>
-          <input
-            matInput
-            color="primary"
-            [(ngModel)]="choiceFeedback.feedback"
-            (ngModelChange)="feedbackChange.next($event)"
-          />
-        </mat-form-field>
+      <div fxLayout="row">
+        <translatable-input
+          [content]="choiceFeedback"
+          key="feedback"
+          label="Feedback"
+          i18n-label
+          (defaultLanguageTextChanged)="feedbackChange.next($event)"
+          class="feedback"
+        />
         <mat-checkbox
           color="primary"
           [(ngModel)]="choiceFeedback.isCorrect"
@@ -268,7 +255,7 @@
           Is Correct
         </mat-checkbox>
       </div>
-      <div *ngIf="componentContent.ordered && choiceFeedback.isCorrect" fxLayout="row">
+      <div *ngIf="componentContent.ordered && choiceFeedback.isCorrect" fxLayout="row" fxLayoutAlign="start start">
         <mat-form-field class="position">
           <mat-label i18n>Position</mat-label>
           <input
@@ -278,14 +265,14 @@
             (ngModelChange)="feedbackChange.next($event)"
           />
         </mat-form-field>
-        <mat-form-field class="incorrect-position-feedback">
-          <mat-label i18n>Incorrect Position Feedback</mat-label>
-          <input
-            matInput
-            [(ngModel)]="choiceFeedback.incorrectPositionFeedback"
-            (ngModelChange)="feedbackChange.next($event)"
-          />
-        </mat-form-field>
+        <translatable-input
+          [content]="choiceFeedback"
+          key="incorrectPositionFeedback"
+          label="Incorrect Position Feedback"
+          i18n-label
+          (defaultLanguageTextChanged)="feedbackChange.next($event)"
+          class="incorrect-position-feedback"
+        />
       </div>
     </div>
   </div>

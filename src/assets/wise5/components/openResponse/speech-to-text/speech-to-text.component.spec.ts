@@ -4,7 +4,8 @@ import { TranscribeService } from '../../../services/transcribeService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectService } from '../../../services/projectService';
 import { ConfigService } from '../../../services/configService';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('SpeechToTextComponent', () => {
   let component: SpeechToTextComponent;
@@ -12,18 +13,20 @@ describe('SpeechToTextComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, HttpClientTestingModule, SpeechToTextComponent],
-      providers: [
+    imports: [BrowserAnimationsModule, SpeechToTextComponent],
+    providers: [
         ConfigService,
         {
-          provide: ProjectService,
-          useValue: {
-            project: { speechToText: { defaultLanguage: 'en-US', supportedLanguages: [] } }
-          }
+            provide: ProjectService,
+            useValue: {
+                project: { speechToText: { defaultLanguage: 'en-US', supportedLanguages: [] } }
+            }
         },
-        TranscribeService
-      ]
-    });
+        TranscribeService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     fixture = TestBed.createComponent(SpeechToTextComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

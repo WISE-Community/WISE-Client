@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { StudentService } from '../../../student/student.service';
 import { ConfigService } from '../../../services/config.service';
-import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha-2';
 
 let component: ForgotStudentPasswordSecurityComponent;
 let fixture: ComponentFixture<ForgotStudentPasswordSecurityComponent>;
@@ -32,25 +32,23 @@ class MockConfigService {
 }
 
 describe('ForgotStudentPasswordSecurityComponent', () => {
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [ForgotStudentPasswordSecurityComponent],
-        imports: [
-          RouterTestingModule,
-          BrowserAnimationsModule,
-          ReactiveFormsModule,
-          RecaptchaV3Module
-        ],
-        providers: [
-          { provide: StudentService, useClass: MockStudentService },
-          { provide: ConfigService, useClass: MockConfigService },
-          { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      });
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ForgotStudentPasswordSecurityComponent],
+      imports: [
+        RouterTestingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        RecaptchaV3Module
+      ],
+      providers: [
+        { provide: StudentService, useClass: MockStudentService },
+        { provide: ConfigService, useClass: MockConfigService },
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ForgotStudentPasswordSecurityComponent);
@@ -82,13 +80,10 @@ async function changePassword() {
       expect(submitButton.disabled).toBe(false);
     });
 
-    it(
-      'should show the incorrect answer message',
-      waitForAsync(() => {
-        submitAndReceiveResponse('checkSecurityAnswer', 'failure', 'incorrectAnswer');
-        expect(getErrorMessage()).toContain('Incorrect answer');
-      })
-    );
+    it('should show the incorrect answer message', waitForAsync(() => {
+      submitAndReceiveResponse('checkSecurityAnswer', 'failure', 'incorrectAnswer');
+      expect(getErrorMessage()).toContain('Incorrect answer');
+    }));
 
     it('should navigate to change password page', () => {
       const router = TestBed.get(Router);
@@ -111,19 +106,16 @@ async function changePassword() {
       });
     });
 
-    it(
-      'should show error when Recaptcha is invalid',
-      waitForAsync(async () => {
-        component.isRecaptchaEnabled = true;
-        studentService = TestBed.get(StudentService);
-        const observableResponse = createObservableResponse('failed', 'recaptchaResponseInvalid');
-        spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
-        spyOn(studentService, 'checkSecurityAnswer').and.returnValue(observableResponse);
-        await component.submit();
-        fixture.detectChanges();
-        expect(getErrorMessage()).toContain('Recaptcha failed.');
-      })
-    );
+    it('should show error when Recaptcha is invalid', waitForAsync(async () => {
+      component.isRecaptchaEnabled = true;
+      studentService = TestBed.get(StudentService);
+      const observableResponse = createObservableResponse('failed', 'recaptchaResponseInvalid');
+      spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
+      spyOn(studentService, 'checkSecurityAnswer').and.returnValue(observableResponse);
+      await component.submit();
+      fixture.detectChanges();
+      expect(getErrorMessage()).toContain('Recaptcha failed.');
+    }));
   });
 }
 

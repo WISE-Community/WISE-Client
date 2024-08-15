@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { CompletionService } from '../../assets/wise5/services/completionService';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentContent } from '../../assets/wise5/common/ComponentContent';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let dataService: StudentDataService;
 let projectService: ProjectService;
@@ -20,8 +21,9 @@ const stateForComponent1 = {
 describe('CompletionService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
-    });
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     dataService = TestBed.inject(StudentDataService);
     projectService = TestBed.inject(ProjectService);
     service = TestBed.inject(CompletionService);

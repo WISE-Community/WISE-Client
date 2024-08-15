@@ -1,24 +1,28 @@
 import { Component, Input } from '@angular/core';
 import { Node } from '../../../common/Node';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TranslatableInputComponent } from '../../components/translatable-input/translatable-input.component';
 
 @Component({
+  imports: [TranslatableInputComponent],
   selector: 'edit-node-title',
-  templateUrl: './edit-node-title.component.html',
-  styleUrls: ['./edit-node-title.component.scss']
+  standalone: true,
+  styleUrl: './edit-node-title.component.scss',
+  templateUrl: './edit-node-title.component.html'
 })
 export class EditNodeTitleComponent {
-  protected isGroupNode: boolean;
+  protected label: string;
   @Input() node: Node;
   protected nodeJson: any;
-  protected nodePosition: string;
 
   constructor(private projectService: TeacherProjectService) {}
 
   ngOnChanges(): void {
-    this.isGroupNode = this.node.isGroup();
     this.nodeJson = this.projectService.getNodeById(this.node.id);
-    this.nodePosition = this.projectService.getNodePositionById(this.node.id);
+    this.label =
+      (this.node.isGroup() ? $localize`Lesson Title` : $localize`Step Title`) +
+      ' ' +
+      this.projectService.getNodePositionById(this.node.id);
   }
 
   protected save(): void {

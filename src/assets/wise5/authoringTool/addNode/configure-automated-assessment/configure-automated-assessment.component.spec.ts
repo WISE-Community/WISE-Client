@@ -1,14 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfigureAutomatedAssessmentComponent } from './configure-automated-assessment.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, provideHttpClientTesting } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { RouterTestingModule } from '@angular/router/testing';
 import { MatDividerModule } from '@angular/material/divider';
 import { CopyNodesService } from '../../../services/copyNodesService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { InsertNodesService } from '../../../services/insertNodesService';
 import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ConfigureAutomatedAssessmentComponent', () => {
   let component: ConfigureAutomatedAssessmentComponent;
@@ -19,7 +21,7 @@ describe('ConfigureAutomatedAssessmentComponent', () => {
       declarations: [ConfigureAutomatedAssessmentComponent],
       imports: [
         FormsModule,
-        HttpClientTestingModule,
+        MatButtonModule,
         MatDividerModule,
         RouterTestingModule,
         StudentTeacherCommonServicesModule
@@ -28,7 +30,9 @@ describe('ConfigureAutomatedAssessmentComponent', () => {
         CopyNodesService,
         InsertFirstNodeInBranchPathService,
         InsertNodesService,
-        TeacherProjectService
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
       ]
     }).compileComponents();
     window.history.pushState(

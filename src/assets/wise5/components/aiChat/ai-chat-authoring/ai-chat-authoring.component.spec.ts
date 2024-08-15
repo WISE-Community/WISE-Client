@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AiChatAuthoringComponent } from './ai-chat-authoring.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
@@ -15,6 +15,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EditDialogGuidanceComputerAvatarComponent } from '../../dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AiChatAuthoringComponent', () => {
   let component: AiChatAuthoringComponent;
@@ -29,8 +32,8 @@ describe('AiChatAuthoringComponent', () => {
       ],
       imports: [
         BrowserAnimationsModule,
+        ComponentAuthoringModule,
         FormsModule,
-        HttpClientTestingModule,
         MatButtonToggleModule,
         MatCheckboxModule,
         MatDialogModule,
@@ -39,9 +42,19 @@ describe('AiChatAuthoringComponent', () => {
         MatInputModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
+      providers: [
+        ProjectAssetService,
+        TeacherNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
     });
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(AiChatAuthoringComponent);
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     component = fixture.componentInstance;
     component.componentContent = {
       id: 'component1',

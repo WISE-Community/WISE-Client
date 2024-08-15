@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { copy } from '../../assets/wise5/common/object/object';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
@@ -6,6 +6,7 @@ import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import { Annotation } from '../../assets/wise5/common/Annotation';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let service: AnnotationService;
 let projectService: ProjectService;
@@ -44,8 +45,9 @@ const annotations = [annotation1, annotation2, annotation3, annotation4];
 describe('AnnotationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
-    });
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(AnnotationService);
     service.annotations = annotations as Annotation[];
     projectService = TestBed.inject(ProjectService);

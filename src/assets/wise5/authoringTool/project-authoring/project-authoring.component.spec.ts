@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectAuthoringComponent } from './project-authoring.component';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { DeleteNodeService } from '../../services/deleteNodeService';
@@ -12,7 +12,6 @@ import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConcurrentAuthorsMessageComponent } from '../concurrent-authors-message/concurrent-authors-message.component';
 import { NodeAuthoringComponent } from '../node/node-authoring/node-authoring.component';
-import { TeacherNodeIconComponent } from '../teacher-node-icon/teacher-node-icon.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
@@ -33,9 +32,12 @@ import { ActivatedRoute, Router, provideRouter } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { ConfigService } from '../../services/configService';
 import { of } from 'rxjs/internal/observable/of';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AddLessonButtonComponent } from '../add-lesson-button/add-lesson-button.component';
 import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
+import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
+import { CopyTranslationsService } from '../../services/copyTranslationsService';
+import { TeacherProjectTranslationService } from '../../services/teacherProjectTranslationService';
 
 let configService: ConfigService;
 let component: ProjectAuthoringComponent;
@@ -55,15 +57,13 @@ describe('ProjectAuthoringComponent', () => {
         NodeAuthoringComponent,
         ProjectAuthoringComponent,
         ProjectAuthoringLessonComponent,
-        ProjectAuthoringStepComponent,
-        TeacherNodeIconComponent
+        ProjectAuthoringStepComponent
       ],
       imports: [
         AddLessonButtonComponent,
         AddStepButtonComponent,
         BrowserAnimationsModule,
         FormsModule,
-        HttpClientTestingModule,
         MatButtonModule,
         MatCheckboxModule,
         MatDialogModule,
@@ -78,12 +78,17 @@ describe('ProjectAuthoringComponent', () => {
       providers: [
         ClassroomStatusService,
         CopyNodesService,
+        CopyTranslationsService,
         DeleteNodeService,
+        DeleteTranslationsService,
         MoveNodesService,
         provideRouter([]),
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
+        TeacherProjectTranslationService,
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
       ]
     }).compileComponents();
     projectService = TestBed.inject(TeacherProjectService);

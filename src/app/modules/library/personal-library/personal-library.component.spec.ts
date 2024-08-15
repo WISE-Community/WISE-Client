@@ -6,7 +6,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LibraryProject } from '../libraryProject';
 import { PersonalLibraryHarness } from './personal-library.harness';
@@ -23,8 +23,10 @@ import { ArchiveProjectResponse } from '../../../domain/archiveProjectResponse';
 import { of } from 'rxjs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ProjectTagService } from '../../../../assets/wise5/services/projectTagService';
 
+const archivedTag = { id: 1, text: 'archived', color: null };
 let archiveProjectService: ArchiveProjectService;
 let component: PersonalLibraryComponent;
 let fixture: ComponentFixture<PersonalLibraryComponent>;
@@ -37,33 +39,33 @@ const projectId4 = 4;
 const projectId5 = 5;
 
 describe('PersonalLibraryComponent', () => {
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          ArchiveProjectsButtonComponent,
-          BrowserAnimationsModule,
-          FormsModule,
-          HttpClientTestingModule,
-          MatCheckboxModule,
-          MatDialogModule,
-          MatFormFieldModule,
-          MatOptionModule,
-          MatPaginatorModule,
-          MatSelectModule,
-          MatSnackBarModule,
-          OverlayModule
-        ],
-        declarations: [
-          LibraryProjectComponent,
-          PersonalLibraryComponent,
-          SelectAllItemsCheckboxComponent
-        ],
-        providers: [ArchiveProjectService, LibraryService],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [LibraryProjectComponent, PersonalLibraryComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        ArchiveProjectsButtonComponent,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatOptionModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        MatSnackBarModule,
+        OverlayModule,
+        SelectAllItemsCheckboxComponent
+      ],
+      providers: [
+        ArchiveProjectService,
+        LibraryService,
+        ProjectTagService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    }).compileComponents();
+  }));
 
   beforeEach(async () => {
     fixture = TestBed.createComponent(PersonalLibraryComponent);
@@ -92,12 +94,12 @@ function setUpFiveProjects() {
     new LibraryProject({
       id: projectId1,
       metadata: { title: 'Hello' },
-      tags: ['archived']
+      tags: [archivedTag]
     }),
     new LibraryProject({
       id: projectId2,
       metadata: { title: 'Hello World' },
-      tags: ['archived']
+      tags: [archivedTag]
     }),
     new LibraryProject({
       id: projectId3,
@@ -122,9 +124,8 @@ function setUpTwentyProjects() {
   for (let i = 1; i <= 20; i++) {
     libraryProjects.push(new LibraryProject({ id: i, metadata: {}, tags: [] }));
   }
-  TestBed.inject(LibraryService).personalLibraryProjectsSource$ = fakeAsyncResponse(
-    libraryProjects
-  );
+  TestBed.inject(LibraryService).personalLibraryProjectsSource$ =
+    fakeAsyncResponse(libraryProjects);
 }
 
 function showActiveProjects() {
@@ -150,7 +151,10 @@ function archiveMultipleProjects() {
       it('archives multiple projects', async () => {
         await harness.selectProjects([projectId4, projectId3]);
         spyOn(http, 'put').and.returnValue(
-          of([new ArchiveProjectResponse(4, true), new ArchiveProjectResponse(3, true)])
+          of([
+            new ArchiveProjectResponse(4, true, archivedTag),
+            new ArchiveProjectResponse(3, true, archivedTag)
+          ])
         );
         await (await harness.getArchiveButton()).click();
         expect(await harness.getProjectIdsInView()).toEqual([projectId5]);
@@ -166,7 +170,10 @@ function restoreMultipleProjects() {
         await harness.showArchivedView();
         await harness.selectProjects([projectId2, projectId1]);
         spyOn(http, 'delete').and.returnValue(
-          of([new ArchiveProjectResponse(2, false), new ArchiveProjectResponse(1, false)])
+          of([
+            new ArchiveProjectResponse(2, false, archivedTag),
+            new ArchiveProjectResponse(1, false, archivedTag)
+          ])
         );
         await (await harness.getUnarchiveButton()).click();
         expect(await harness.getProjectIdsInView()).toEqual([]);

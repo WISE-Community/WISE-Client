@@ -25,8 +25,6 @@ import { WiseTinymceEditorComponent } from '../../assets/wise5/directives/wise-t
 @NgModule({
   declarations: [
     NotebookParentComponent,
-    NotebookItemComponent,
-    NotebookLauncherComponent,
     NotebookNotesComponent,
     NotebookReportComponent,
     NotebookReportAnnotationsComponent
@@ -47,6 +45,8 @@ import { WiseTinymceEditorComponent } from '../../assets/wise5/directives/wise-t
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    NotebookItemComponent,
+    NotebookLauncherComponent,
     WiseTinymceEditorComponent
   ],
   exports: [

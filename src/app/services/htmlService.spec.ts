@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { HTMLService } from '../../assets/wise5/components/html/htmlService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -7,23 +7,26 @@ import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let service: HTMLService;
 
 describe('HTMLService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         AnnotationService,
         ConfigService,
         ProjectService,
         HTMLService,
         SessionService,
         StudentAssetService,
-        TagService
-      ]
-    });
+        TagService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.get(HTMLService);
   });
   createComponent();

@@ -7,12 +7,12 @@
     </button>
   </p>
   <div fxLayout="row wrap" fxLayoutAlign="start center">
-    <ng-container *ngFor="let componentType of componentTypes">
+    @for (componentType of componentTypes; track componentType.type) {
       <component-type-button
         [componentType]="componentType.type"
         (componentSelectedEvent)="selectComponent(componentType.type)"
       />
-    </ng-container>
+    }
   </div>
 </mat-dialog-content>
 <mat-dialog-actions fxLayoutAlign="end center">

@@ -25,11 +25,10 @@
         ></workgroup-info>
       </div>
       <div fxFlex="{{ showScore ? 30 : 20 }}" fxLayout="row" fxLayoutAlign="center center">
-        <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass">
-        </workgroup-node-status>
+        <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass" />
       </div>
       <div *ngIf="showScore" fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
-        <workgroup-node-score [score]="score" [maxScore]="maxScore"></workgroup-node-score>
+        <workgroup-node-score [score]="score" [maxScore]="maxScore" />
       </div>
     </div>
   </button>
@@ -48,7 +47,7 @@
                 [componentId]="component.id"
                 [workgroupId]="workgroupId"
                 [nodeId]="nodeId"
-              ></component-new-work-badge>
+              />
             </h3>
             <workgroup-component-grading
               class="component--grading__response__content"

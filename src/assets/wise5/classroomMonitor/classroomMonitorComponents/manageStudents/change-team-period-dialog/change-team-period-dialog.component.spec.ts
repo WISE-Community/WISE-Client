@@ -1,4 +1,4 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -9,6 +9,7 @@ import { ConfigService } from '../../../../services/configService';
 
 import { ChangeTeamPeriodDialogComponent } from './change-team-period-dialog.component';
 import { of } from 'rxjs';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 class ConfigServiceStub {
   getPeriods() {
@@ -37,19 +38,18 @@ let http: HttpTestingController;
 describe('ChangeTeamPeriodDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ChangeTeamPeriodDialogComponent],
-      imports: [
-        BrowserAnimationsModule,
-        HttpClientTestingModule,
+    declarations: [ChangeTeamPeriodDialogComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
         MatDialogModule,
-        MatSnackBarModule
-      ],
-      providers: [
+        MatSnackBarModule],
+    providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
-        { provide: MAT_DIALOG_DATA, useValue: team }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+        { provide: MAT_DIALOG_DATA, useValue: team },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
   beforeEach(() => {
     http = TestBed.inject(HttpTestingController);

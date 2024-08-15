@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { CRaterService } from '../../assets/wise5/services/cRaterService';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { CRaterIdea } from '../../assets/wise5/components/common/cRater/CRaterIdea';
 import { CRaterScore } from '../../assets/wise5/components/common/cRater/CRaterScore';
 import { RawCRaterResponse } from '../../assets/wise5/components/common/cRater/RawCRaterResponse';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 let service: CRaterService;
 let configService: ConfigService;
 let http: HttpTestingController;
@@ -12,9 +13,9 @@ let http: HttpTestingController;
 describe('CRaterService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [ConfigService, CRaterService]
-    });
+    imports: [],
+    providers: [ConfigService, CRaterService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     http = TestBed.inject(HttpTestingController);
     configService = TestBed.inject(ConfigService);
     service = TestBed.inject(CRaterService);

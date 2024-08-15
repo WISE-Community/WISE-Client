@@ -3,13 +3,10 @@
   <div class="info-block" [innerHTML]="data.content"></div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <a
-    mat-button
-    *ngFor="let button of data.buttons"
-    color="{{ button.color }}"
-    href="{{ button.link }}"
-  >
-    {{ button.text }}
-  </a>
+  @for (button of data.buttons; track button) {
+    <a mat-button color="{{ button.color }}" href="{{ button.link }}">
+      {{ button.text }}
+    </a>
+  }
   <button mat-button mat-dialog-close cdkFocusRegionstart i18n>Close</button>
 </mat-dialog-actions>

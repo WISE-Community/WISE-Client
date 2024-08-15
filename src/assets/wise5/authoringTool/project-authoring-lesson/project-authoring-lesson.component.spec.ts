@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectAuthoringLessonComponent } from './project-authoring-lesson.component';
 import { TeacherDataService } from '../../services/teacherDataService';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../services/teacherWebSocketService';
@@ -18,7 +18,11 @@ import { DeleteNodeService } from '../../services/deleteNodeService';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { MatMenuModule } from '@angular/material/menu';
 import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
+import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { provideRouter } from '@angular/router';
+import { CopyTranslationsService } from '../../services/copyTranslationsService';
+import { TeacherProjectTranslationService } from '../../services/teacherProjectTranslationService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: ProjectAuthoringLessonComponent;
 let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
@@ -38,7 +42,6 @@ describe('ProjectAuthoringLessonComponent', () => {
       imports: [
         AddStepButtonComponent,
         FormsModule,
-        HttpClientTestingModule,
         MatCheckboxModule,
         MatDialogModule,
         MatIconModule,
@@ -49,11 +52,16 @@ describe('ProjectAuthoringLessonComponent', () => {
       providers: [
         ClassroomStatusService,
         CopyNodesService,
+        CopyTranslationsService,
         DeleteNodeService,
+        DeleteTranslationsService,
         provideRouter([]),
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService
+        TeacherProjectTranslationService,
+        TeacherWebSocketService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
       ]
     });
     teacherProjectService = TestBed.inject(TeacherProjectService);
@@ -62,6 +70,7 @@ describe('ProjectAuthoringLessonComponent', () => {
       node2: node2
     };
     teacherProjectService.project = { nodes: [node1, node2] };
+    spyOn(teacherProjectService, 'isDefaultLocale').and.returnValue(true);
     fixture = TestBed.createComponent(ProjectAuthoringLessonComponent);
     component = fixture.componentInstance;
     component.lesson = {

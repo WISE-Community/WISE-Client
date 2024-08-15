@@ -1,7 +1,8 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DiscourseCategoryActivityComponent } from './discourse-category-activity.component';
 import { By } from '@angular/platform-browser';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: DiscourseCategoryActivityComponent;
 let http: HttpTestingController;
@@ -20,9 +21,9 @@ const sampleDiscourseResponse = {
 describe('DiscourseCategoryActivityComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [DiscourseCategoryActivityComponent]
-    });
+    imports: [],
+    providers: [DiscourseCategoryActivityComponent, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     http = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(DiscourseCategoryActivityComponent);
     component = fixture.componentInstance;

@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -12,6 +12,9 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { AudioOscillatorService } from '../audioOscillatorService';
 import { AudioOscillatorAuthoring } from './audio-oscillator-authoring.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: AudioOscillatorAuthoring;
 let fixture: ComponentFixture<AudioOscillatorAuthoring>;
@@ -22,8 +25,8 @@ describe('AudioOscillatorAuthoring', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        ComponentAuthoringModule,
         FormsModule,
-        HttpClientTestingModule,
         MatCheckboxModule,
         MatDialogModule,
         MatInputModule,
@@ -31,12 +34,22 @@ describe('AudioOscillatorAuthoring', () => {
         StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, AudioOscillatorAuthoring],
-      providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService]
+      providers: [
+        ProjectAssetService,
+        TeacherNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
     });
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(AudioOscillatorAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
     component.componentContent = componentContent;
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
     getComponentSpy.and.returnValue(componentContent);
     fixture.detectChanges();

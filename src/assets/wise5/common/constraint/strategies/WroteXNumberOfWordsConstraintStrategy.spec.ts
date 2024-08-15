@@ -1,8 +1,9 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { StudentDataService } from '../../../services/studentDataService';
 import { WroteXNumberOfWordsConstraintStrategy } from './WroteXNumberOfWordsConstraintStrategy';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let dataService: StudentDataService;
 let strategy: WroteXNumberOfWordsConstraintStrategy;
@@ -10,8 +11,9 @@ let strategy: WroteXNumberOfWordsConstraintStrategy;
 describe('WroteXNumberOfWordsConstraintStrategy', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
-    });
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     dataService = TestBed.inject(StudentDataService);
     strategy = new WroteXNumberOfWordsConstraintStrategy();
     strategy.dataService = dataService;

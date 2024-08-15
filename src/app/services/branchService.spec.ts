@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import { BranchService } from '../../assets/wise5/services/branchService';
 import { Branch } from '../domain/branch';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let service: BranchService;
 let configService: ConfigService;
@@ -31,8 +32,9 @@ const pathsWithNoMergePoint = [
 describe('BranchService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
-    });
+    imports: [StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     configService = TestBed.inject(ConfigService);
     service = TestBed.inject(BranchService);
     paths = [

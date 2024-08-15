@@ -25,19 +25,31 @@
             "aot": true,
             "outputPath": "dist",
             "index": "src/index.html",
-            "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "assets": [
               {
                 "glob": "**/*",
                 "input": "src/assets/",
-                "ignore": ["**/*.scss", "**/*.md"],
+                "ignore": [
+                  "**/*.scss",
+                  "**/*.md"
+                ],
                 "output": "/assets/"
               },
               "src/favicon.ico",
-              { "glob": "**/*", "input": "node_modules/mathjax", "output": "/mathjax/" },
-              { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" }
+              {
+                "glob": "**/*",
+                "input": "node_modules/mathjax",
+                "output": "/mathjax/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce",
+                "output": "/tinymce/"
+              }
             ],
             "styles": [
               "./node_modules/tabulator-tables/dist/css/tabulator_semanticui.min.css",
@@ -48,10 +60,11 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/style"
+                "src"
               ]
             },
-            "scripts": []
+            "scripts": [],
+            "main": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -69,15 +82,13 @@
               "aot": true,
               "localize": true,
               "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputPath": "dist/",
+              "outputPath": "dist",
               "baseHref": "/"
             },
             "development": {
@@ -87,60 +98,70 @@
               "namedChunks": true,
               "aot": true,
               "extractLicenses": false,
-              "vendorChunk": true,
-              "buildOptimizer": false,
               "budgets": []
             },
             "es": {
-              "localize": ["es"]
+              "localize": [
+                "es"
+              ]
             },
             "ja": {
-              "localize": ["ja"]
+              "localize": [
+                "ja"
+              ]
             },
             "pt": {
-              "localize": ["pt"]
+              "localize": [
+                "pt"
+              ]
             },
             "tr": {
-              "localize": ["tr"]
+              "localize": [
+                "tr"
+              ]
             },
             "zh-Hans": {
-              "localize": ["zh-Hans"]
+              "localize": [
+                "zh-Hans"
+              ]
             },
             "zh-Hant": {
-              "localize": ["zh-Hant"]
+              "localize": [
+                "zh-Hant"
+              ]
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "wise:build",
+            "buildTarget": "wise:build",
             "publicHost": "localhost:4200"
           },
           "configurations": {
             "production": {
-              "browserTarget": "wise:build:production"
+              "buildTarget": "wise:build:production"
             },
             "development": {
-              "browserTarget": "wise:build:development"
+              "buildTarget": "wise:build:development"
             },
             "es": {
-              "browserTarget": "wise:build:es"
+              "buildTarget": "wise:build:es"
             },
             "ja": {
-              "browserTarget": "wise:build:ja"
+              "buildTarget": "wise:build:ja"
             },
             "pt": {
-              "browserTarget": "wise:build:pt"
+              "buildTarget": "wise:build:pt"
             },
             "tr": {
-              "browserTarget": "wise:build:tr"
+              "buildTarget": "wise:build:tr"
             },
             "zh-Hans": {
-              "browserTarget": "wise:build:zh-Hans"
+              "buildTarget": "wise:build:zh-Hans"
             },
             "zh-Hant": {
-              "browserTarget": "wise:build:zh-Hant"
+              "buildTarget": "wise:build:zh-Hant"
             }
           },
           "defaultConfiguration": "development"
@@ -148,14 +169,18 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "wise:build"
+            "buildTarget": "wise:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "karmaConfig": "karma.conf.js",
-            "polyfills": ["@angular/localize/init", "zone.js", "zone.js/testing"],
+            "polyfills": [
+              "@angular/localize/init",
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
@@ -163,7 +188,7 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/style"
+                "src"
               ]
             },
             "assets": [

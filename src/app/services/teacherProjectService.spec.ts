@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
@@ -8,6 +8,7 @@ import teacherProjctJSON_import from './sampleData/curriculum/TeacherProjectServ
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import { copy } from '../../assets/wise5/common/object/object';
 import { DeleteNodeService } from '../../assets/wise5/services/deleteNodeService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 let service: TeacherProjectService;
 let configService: ConfigService;
 let deleteNodeService: DeleteNodeService;
@@ -15,7 +16,6 @@ let http: HttpTestingController;
 let demoProjectJSON: any;
 let scootersProjectJSON: any;
 let teacherProjectJSON: any;
-let objects;
 
 const scootersProjectJSONString = JSON.stringify(demoProjectJSON_import);
 const scootersProjectName = 'scooters';
@@ -28,8 +28,13 @@ const wiseBaseURL = '/wise';
 describe('TeacherProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
-      providers: [DeleteNodeService, TeacherProjectService]
+      imports: [StudentTeacherCommonServicesModule],
+      providers: [
+        DeleteNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
     });
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(TeacherProjectService);
@@ -78,8 +83,6 @@ describe('TeacherProjectService', () => {
   getOldToNewIds();
   replaceOldIds();
   replaceIds();
-  moveObjectUp();
-  moveObjectDown();
   removeNodeIdFromTransitions();
 });
 
@@ -746,54 +749,6 @@ function replaceIds() {
       const expectedString = '"node10", "node10", "node2", "node10", "node11", "node11"';
       expect(service.replaceIds(string, 'node1', 'node10')).toEqual(expectedString);
     });
-  });
-}
-
-function moveObjectUp() {
-  describe('moveObjectUp()', () => {
-    beforeEach(() => {
-      objects = [1, 2, 3];
-    });
-    moveObjectUpTopElement();
-    moveObjectUpNotTopElement();
-  });
-}
-
-function moveObjectUpTopElement() {
-  it('should not move an object up when the object is the top element', () => {
-    service.moveObjectUp(objects, 0);
-    expect(objects).toEqual([1, 2, 3]);
-  });
-}
-
-function moveObjectUpNotTopElement() {
-  it('should move an object up when the object is not the top element', () => {
-    service.moveObjectUp(objects, 1);
-    expect(objects).toEqual([2, 1, 3]);
-  });
-}
-
-function moveObjectDown() {
-  describe('moveObjectDown()', () => {
-    beforeEach(() => {
-      objects = [1, 2, 3];
-    });
-    moveObjectDownNotBottomElement();
-    moveObjectDownIsBottomElement();
-  });
-}
-
-function moveObjectDownNotBottomElement() {
-  it('should move an object down when the object is not the bottom element', () => {
-    service.moveObjectDown(objects, 1);
-    expect(objects).toEqual([1, 3, 2]);
-  });
-}
-
-function moveObjectDownIsBottomElement() {
-  it('should not move an object down when the object is the bottom element', () => {
-    service.moveObjectDown(objects, 2);
-    expect(objects).toEqual([1, 2, 3]);
   });
 }
 

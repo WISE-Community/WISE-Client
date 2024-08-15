@@ -1,11 +1,6 @@
-<mat-form-field class="step-title form-field-no-hint">
-  <mat-label *ngIf="!isGroupNode" i18n>Step Title {{ nodePosition }}:</mat-label>
-  <mat-label *ngIf="isGroupNode" i18n>Lesson Title {{ nodePosition }}:</mat-label>
-  <input
-    matInput
-    [(ngModel)]="nodeJson.title"
-    (change)="save()"
-    aria-label="Title"
-    i18n-aria-label
-  />
-</mat-form-field>
+<translatable-input
+  [content]="nodeJson"
+  key="title"
+  [label]="label"
+  (defaultLanguageTextChanged)="save()"
+/>

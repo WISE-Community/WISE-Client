@@ -2,7 +2,7 @@ import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NodeAuthoringComponent } from './node-authoring.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
@@ -17,15 +17,21 @@ import { ComponentAuthoringModule } from '../../../../../app/teacher/component-a
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { DebugElement } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { EditNodeTitleComponent } from '../edit-node-title/edit-node-title.component';
 import { AddComponentButtonComponent } from '../add-component-button/add-component-button.component';
 import { CopyComponentButtonComponent } from '../copy-component-button/copy-component-button.component';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
+import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
 import { PreviewComponentButtonComponent } from '../../components/preview-component-button/preview-component-button.component';
+import { TranslatableInputComponent } from '../../components/translatable-input/translatable-input.component';
+import { CopyTranslationsService } from '../../../services/copyTranslationsService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -37,33 +43,33 @@ let node1Components = [];
 const nodeId1 = 'node1';
 let teacherDataService: TeacherDataService;
 let teacherProjectService: TeacherProjectService;
+let saveProjectSpy: jasmine.Spy;
 
 describe('NodeAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        CopyComponentButtonComponent,
-        EditNodeTitleComponent,
-        NodeAuthoringComponent,
-        TeacherNodeIconComponent
-      ],
+      declarations: [CopyComponentButtonComponent, NodeAuthoringComponent],
       imports: [
         AddComponentButtonComponent,
         BrowserAnimationsModule,
         ComponentAuthoringModule,
         ComponentTypeServiceModule,
         DragDropModule,
+        EditNodeTitleComponent,
         FormsModule,
-        HttpClientTestingModule,
         MatCheckboxModule,
         MatIconModule,
         MatInputModule,
         PreviewComponentButtonComponent,
         RouterTestingModule,
-        StudentTeacherCommonServicesModule
+        StudentTeacherCommonServicesModule,
+        TeacherNodeIconComponent
       ],
       providers: [
         ClassroomStatusService,
+        CopyTranslationsService,
+        DeleteTranslationsService,
+        TeacherProjectTranslationService,
         ProjectAssetService,
         TeacherDataService,
         TeacherNodeService,
@@ -82,7 +88,9 @@ describe('NodeAuthoringComponent', () => {
             events: of([]),
             url: '/teacher/edit/unit/123/node/node4'
           }
-        }
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
       ]
     }).compileComponents();
     window.history.pushState(
@@ -103,13 +111,19 @@ describe('NodeAuthoringComponent', () => {
     teacherProjectService.idToNode = { node1: node1 };
     teacherProjectService.project = {
       nodes: [{ id: nodeId1, components: node1Components }],
-      inactiveNodes: []
+      inactiveNodes: [],
+      metadata: { locale: { default: 'en_US', supported: ['es'] } }
     };
     spyOn(teacherProjectService, 'getNodeById').and.returnValue(node1);
     teacherDataService = TestBed.inject(TeacherDataService);
     spyOn(teacherDataService, 'saveEvent').and.callFake(() => {
       return Promise.resolve();
     });
+    spyOn(teacherProjectService, 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US', supported: ['es'] })
+    );
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
+    saveProjectSpy = spyOn(teacherProjectService, 'saveProject').and.returnValue(Promise.resolve());
     fixture = TestBed.createComponent(NodeAuthoringComponent);
     component = fixture.componentInstance;
     component.nodeId = nodeId1;
@@ -150,6 +164,7 @@ function deleteComponent() {
       expect(confirmSpy).toHaveBeenCalledWith(
         `Are you sure you want to delete this component?\n2. MultipleChoice`
       );
+      expect(saveProjectSpy).toHaveBeenCalled();
       expect(teacherProjectService.idToNode[nodeId1].components).toEqual([component1, component3]);
     });
   });

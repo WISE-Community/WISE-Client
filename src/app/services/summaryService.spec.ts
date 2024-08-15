@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { SummaryService } from '../../assets/wise5/components/summary/summaryService';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const ALL_PERIODS = 'allPeriods';
 const componentId = 'component1';
@@ -36,16 +37,18 @@ const scoreSummaryDisallowedComponentTypes = summaryDisallowedComponentTypes;
 describe('SummaryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         AnnotationService,
         ConfigService,
         ProjectService,
         SessionService,
         SummaryService,
-        TagService
-      ]
-    });
+        TagService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.get(SummaryService);
     http = TestBed.get(HttpTestingController);
     spyOn(TestBed.inject(ConfigService), 'getRunId').and.returnValue(runId);

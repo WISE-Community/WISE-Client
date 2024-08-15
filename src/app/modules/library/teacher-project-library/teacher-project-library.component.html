@@ -1,6 +1,6 @@
 <div class="library library-teacher notice-bg-bg">
-  <div class="content-block controls dark-theme library__header library-teacher__header primary-bg">
-    <app-library-filters></app-library-filters>
+  <div class="content-block filters dark-theme library__header library-teacher__header primary-bg">
+    <app-library-filters />
   </div>
   <div class="library__content library-teacher__content">
     <nav mat-tab-nav-bar i18n-aria-label aria-label="Teacher unit library navigation">
@@ -15,8 +15,8 @@
         {{ tab.label }} ({{ tab.numVisible }})
       </a>
     </nav>
-    <app-official-library [hidden]="!isOfficialRoute()"></app-official-library>
-    <app-community-library [hidden]="!isCommunityRoute()"></app-community-library>
-    <app-personal-library [hidden]="!isPersonalRoute()"></app-personal-library>
+    <app-official-library [hidden]="!isOfficialRoute()" />
+    <app-community-library [hidden]="!isCommunityRoute()" />
+    <app-personal-library [hidden]="!isPersonalRoute()" />
   </div>
 </div>

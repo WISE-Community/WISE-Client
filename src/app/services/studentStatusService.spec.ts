@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { StudentStatus } from '../../assets/wise5/common/StudentStatus';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -9,6 +9,8 @@ import { of } from 'rxjs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import { NodeProgressService } from '../../assets/wise5/services/nodeProgressService';
+import { ProjectService } from '../../assets/wise5/services/projectService';
+import { ProjectLocale } from '../domain/projectLocale';
 
 let configService: ConfigService;
 let http: HttpClient;
@@ -33,8 +35,9 @@ const studentStatusUrl = '/api/studentStatus';
 describe('StudentStatusService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
-    });
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     configService = TestBed.inject(ConfigService);
     http = TestBed.inject(HttpClient);
     nodeProgressService = TestBed.inject(NodeProgressService);
@@ -92,6 +95,9 @@ function saveStudentStatus_nodeStatusChanged_PostStudentStatus() {
     spyOn(configService, 'getStudentStatusURL').and.returnValue(studentStatusUrl);
     spyOn(studentDataService, 'getCurrentNodeId').and.returnValue(nodeId);
     spyOn(nodeProgressService, 'getNodeProgress').and.returnValue(projectCompletion);
+    spyOn(TestBed.inject(ProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en_US', supported: [] })
+    );
     const httpPostSpy = spyOn(http, 'post').and.callFake((url: string, body: any) => {
       return of({} as any);
     });

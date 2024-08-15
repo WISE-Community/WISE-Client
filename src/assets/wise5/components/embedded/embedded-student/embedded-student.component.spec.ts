@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -8,6 +8,7 @@ import { ProjectService } from '../../../services/projectService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { EmbeddedService } from '../embeddedService';
 import { EmbeddedStudent } from './embedded-student.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: EmbeddedStudent;
 const componentId = 'component1';
@@ -31,10 +32,11 @@ const spongebobName = 'Spongebob';
 describe('EmbeddedStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
-      declarations: [EmbeddedStudent],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
+    declarations: [EmbeddedStudent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(EmbeddedStudent);
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     component = fixture.componentInstance;
