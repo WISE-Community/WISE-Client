@@ -8,6 +8,7 @@ import { DeleteNodeService } from '../../services/deleteNodeService';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { CopyTranslationsService } from '../../services/copyTranslationsService';
+import { ConstraintService } from '../../services/constraintService';
 
 @Component({
   selector: 'project-authoring-step',
@@ -24,6 +25,7 @@ export class ProjectAuthoringStepComponent {
   constructor(
     private copyNodesService: CopyNodesService,
     private copyTranslationsService: CopyTranslationsService,
+    private constraintService: ConstraintService,
     private dataService: TeacherDataService,
     private deleteNodeService: DeleteNodeService,
     private deleteTranslationsService: DeleteTranslationsService,
@@ -66,11 +68,11 @@ export class ProjectAuthoringStepComponent {
   }
 
   protected nodeHasConstraint(nodeId: string): boolean {
-    return this.projectService.nodeHasConstraint(nodeId);
+    return this.getNumberOfConstraintsOnNode(nodeId) > 0;
   }
 
   protected getNumberOfConstraintsOnNode(nodeId: string): number {
-    return this.projectService.getConstraintsOnNode(nodeId).length;
+    return this.projectService.getNode(nodeId).getConstraints().length;
   }
 
   protected nodeHasRubric(nodeId: string): boolean {
@@ -78,14 +80,7 @@ export class ProjectAuthoringStepComponent {
   }
 
   protected getConstraintDescriptions(nodeId: string): string {
-    let constraintDescriptions = '';
-    const constraints = this.projectService.getConstraintsOnNode(nodeId);
-    for (let c = 0; c < constraints.length; c++) {
-      let constraint = constraints[c];
-      let description = this.projectService.getConstraintDescription(constraint);
-      constraintDescriptions += c + 1 + ' - ' + description + '\n';
-    }
-    return constraintDescriptions;
+    return this.constraintService.getConstraintDescriptions(nodeId);
   }
 
   protected constraintIconClicked(nodeId: string): void {
