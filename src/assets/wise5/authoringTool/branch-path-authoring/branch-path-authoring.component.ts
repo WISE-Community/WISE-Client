@@ -15,29 +15,34 @@ import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleC
 import { CHOICE_CHOSEN_VALUE, SCORE_VALUE } from '../../../../app/domain/branchCriteria';
 import { ComponentContent } from '../../common/ComponentContent';
 import { MatSelectModule } from '@angular/material/select';
+import { DisplayBranchPathStepsComponent } from '../display-branch-path-steps/display-branch-path-steps.component';
 
 @Component({
   selector: 'branch-path-authoring',
   standalone: true,
   imports: [
     CommonModule,
+    DisplayBranchPathStepsComponent,
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule
   ],
+  styleUrl: './branch-path-authoring.component.scss',
   templateUrl: './branch-path-authoring.component.html'
 })
 export class BranchPathAuthoringComponent {
   protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;
   protected readonly SCORE_VALUE: string = SCORE_VALUE;
 
+  @Input() branchPaths: any[] = [];
   protected choices: Choice[] = [];
   @Input() componentId: string = '';
   @Input() criteria: string = '';
   protected formControls: FormControl[] = [];
   @Input() nodeId: string = '';
+  protected nodeIdToStepTitle: { [key: string]: string } = {};
   @Input() pathCount: number;
   @Input() pathFormGroup: FormGroup;
 

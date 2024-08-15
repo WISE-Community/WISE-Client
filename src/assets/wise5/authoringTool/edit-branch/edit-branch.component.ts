@@ -33,7 +33,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './edit-branch.component.html'
 })
 export class EditBranchComponent extends AbstractBranchAuthoringComponent {
-  private branchPaths: any[] = [];
+  protected branchPaths: any[] = [];
   private items: any;
   protected mergeStepTitle: string;
   private node: any;
