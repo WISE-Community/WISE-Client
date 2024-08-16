@@ -670,14 +670,6 @@ export class TeacherProjectService extends ProjectService {
     }
   }
 
-  createNodeAndAddToLocalStorage(nodeTitle) {
-    const node = this.createNode(nodeTitle);
-    this.setIdToNode(node.id, node);
-    this.addNode(node);
-    this.applicationNodes.push(node);
-    return node;
-  }
-
   getAutomatedAssessmentProjectId(): number {
     return this.configService.getConfigParam('automatedAssessmentProjectId') || -1;
   }
