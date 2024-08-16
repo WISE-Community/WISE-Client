@@ -1821,13 +1821,6 @@ export class TeacherProjectService extends ProjectService {
     return maxScore;
   }
 
-  setMaxScoreForComponent(nodeId: string, componentId: string, maxScore: number): void {
-    const component = this.getComponent(nodeId, componentId);
-    if (component != null) {
-      component.maxScore = maxScore;
-    }
-  }
-
   hasGroupStartId(nodeId) {
     const startId = this.getGroupStartId(nodeId);
     return startId != null && startId != '';
