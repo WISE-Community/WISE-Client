@@ -1761,38 +1761,6 @@ export class TeacherProjectService extends ProjectService {
     }
   }
 
-  /**
-   * TODO: Deprecated, should be removed; replaced by getMaxScoreForWorkgroupId in
-   * ClassroomStatusService
-   * Get the max score for the project. If the project contains branches, we
-   * will only calculate the max score for a single path from the first node
-   * to the last node in the project.
-   * @returns the max score for the project or null if none of the components in the project
-   * has max scores.
-   */
-  getMaxScore() {
-    let maxScore = null;
-    const startNodeId = this.getStartNodeId();
-
-    // get all the paths in the project
-    const allPaths = this.getAllPaths([], startNodeId);
-
-    if (allPaths != null && allPaths.length > -1) {
-      const firstPath = allPaths[0];
-      for (let nodeId of firstPath) {
-        const nodeMaxScore = this.getMaxScoreForNode(nodeId);
-        if (nodeMaxScore != null) {
-          if (maxScore == null) {
-            maxScore = nodeMaxScore;
-          } else {
-            maxScore += nodeMaxScore;
-          }
-        }
-      }
-    }
-    return maxScore;
-  }
-
   setMaxScoreForComponent(nodeId: string, componentId: string, maxScore: number): void {
     const component = this.getComponent(nodeId, componentId);
     if (component != null) {

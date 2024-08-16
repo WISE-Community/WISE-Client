@@ -61,7 +61,6 @@ describe('TeacherProjectService', () => {
   getNextAvailableNodeId();
   shouldReturnTheNextAvailableGroupId();
   shouldReturnTheGroupIdsInTheProject();
-  shouldReturnTheMaxScoreOfTheProject();
   shouldNotAddSpaceIfItDoesExist();
   shouldAddSpaceIfItDoesntExist();
   shouldRemoveSpaces();
@@ -290,18 +289,6 @@ function shouldReturnTheGroupIdsInTheProject() {
     const groupIdsExpected = ['group0', 'group1', 'group2', 'group3', 'group4', 'group5', 'group6'];
     const groupIdsActual = service.getGroupIds();
     expect(groupIdsActual).toEqual(groupIdsExpected);
-  });
-}
-
-function shouldReturnTheMaxScoreOfTheProject() {
-  it('should return the max score of the project', () => {
-    service.setProject(demoProjectJSON);
-    const demoProjectMaxScoreActual = service.getMaxScore();
-    expect(demoProjectMaxScoreActual).toEqual(9);
-    service.setProject(scootersProjectJSON);
-    const scootersProjectMaxScoreExpected = 18;
-    const scootersProjectMaxScoreActual = service.getMaxScore();
-    expect(scootersProjectMaxScoreActual).toEqual(scootersProjectMaxScoreExpected);
   });
 }
 
