@@ -6,8 +6,8 @@
   "
   [formGroup]="pathFormGroup"
 >
-  <div *ngFor="let formControl of formControls; index as index">
-    <div i18n>Path {{ index + 1 }}</div>
+  <div *ngFor="let formControl of formControls; index as index" class="branch-path">
+    <span class="path-label" i18n>Path {{ index + 1 }}</span>
     <ng-container *ngIf="criteria === SCORE_VALUE">
       <mat-form-field>
         <mat-label i18n>Score</mat-label>
@@ -24,5 +24,8 @@
         </mat-select>
       </mat-form-field>
     </ng-container>
+    @if (branchPaths.length > 1) {
+      <display-branch-path-steps [nodes]="branchPaths[index].nodesInBranchPath" />
+    }
   </div>
 </div>
