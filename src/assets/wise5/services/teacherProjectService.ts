@@ -412,21 +412,6 @@ export class TeacherProjectService extends ProjectService {
     return numRubrics;
   }
 
-  deleteTransition(node, transition) {
-    const nodeTransitions = node.transitionLogic.transitions;
-    const index = nodeTransitions.indexOf(transition);
-    if (index > -1) {
-      nodeTransitions.splice(index, 1);
-    }
-    if (nodeTransitions.length <= 1) {
-      // these settings only apply when there are multiple transitions
-      node.transitionLogic.howToChooseAmongAvailablePaths = null;
-      node.transitionLogic.whenToChoosePath = null;
-      node.transitionLogic.canChangePath = null;
-      node.transitionLogic.maxPathsVisitable = null;
-    }
-  }
-
   getBackgroundColor(nodeId: string): string {
     const branchPathLetter = this.nodeIdToBranchPathLetter[nodeId];
     if (branchPathLetter != null) {

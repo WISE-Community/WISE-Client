@@ -200,4 +200,19 @@ export class Node {
   getConstraints(): any[] {
     return this.constraints;
   }
+
+  deleteTransition(transition: any): void {
+    const transitions = this.transitionLogic.transitions;
+    const index = transitions.indexOf(transition);
+    if (index > -1) {
+      transitions.splice(index, 1);
+    }
+    if (transitions.length <= 1) {
+      // these settings only apply when there are multiple transitions
+      this.transitionLogic.howToChooseAmongAvailablePaths = null;
+      this.transitionLogic.whenToChoosePath = null;
+      this.transitionLogic.canChangePath = null;
+      this.transitionLogic.maxPathsVisitable = null;
+    }
+  }
 }
