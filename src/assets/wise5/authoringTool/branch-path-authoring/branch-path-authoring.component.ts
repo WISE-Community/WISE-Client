@@ -42,7 +42,6 @@ export class BranchPathAuthoringComponent {
   @Input() criteria: string = '';
   protected formControls: FormControl[] = [];
   @Input() nodeId: string = '';
-  protected nodeIdToStepTitle: { [key: string]: string } = {};
   @Input() pathCount: number;
   @Input() pathFormGroup: FormGroup;
 

@@ -10,20 +10,20 @@ import { CommonModule } from '@angular/common';
   templateUrl: './display-branch-path-steps.component.html'
 })
 export class DisplayBranchPathStepsComponent {
-  @Input() branchPathNodes: any[] = [];
   protected nodeIdToBackgroundColor: { [key: string]: string } = {};
   protected nodeIdToStepTitle: { [key: string]: string } = {};
+  @Input() nodes: any[] = [];
 
   constructor(private projectService: TeacherProjectService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.branchPathNodes) {
-      this.getStepTitlesAndBackgroundColor();
+    if (changes.nodes) {
+      this.setStepTitlesAndBackgroundColor();
     }
   }
 
-  private getStepTitlesAndBackgroundColor(): void {
-    for (const branchPathNode of this.branchPathNodes) {
+  private setStepTitlesAndBackgroundColor(): void {
+    for (const branchPathNode of this.nodes) {
       this.nodeIdToBackgroundColor[branchPathNode.nodeId] = this.projectService.getBackgroundColor(
         branchPathNode.nodeId
       );

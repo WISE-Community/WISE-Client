@@ -3,7 +3,6 @@ import { DisplayBranchPathStepsComponent } from './display-branch-path-steps.com
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('DisplayBranchPathStepsComponent', () => {
   let component: DisplayBranchPathStepsComponent;
@@ -12,7 +11,7 @@ describe('DisplayBranchPathStepsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DisplayBranchPathStepsComponent, StudentTeacherCommonServicesModule],
-      providers: [provideHttpClient(), provideHttpClientTesting(), TeacherProjectService]
+      providers: [provideHttpClient(), TeacherProjectService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(DisplayBranchPathStepsComponent);
