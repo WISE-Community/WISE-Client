@@ -6,6 +6,9 @@ const componentId2 = 'c2';
 let node: Node;
 const nodeId1 = 'node1';
 const nodeId2 = 'node2';
+const node1TransitionLogic = {
+  transitions: [{ to: 'node2' }, { to: 'node3' }]
+};
 
 describe('Node', () => {
   beforeEach(() => {
@@ -15,6 +18,7 @@ describe('Node', () => {
       { id: componentId1, prompt: 'a' },
       { id: componentId2, prompt: 'b' }
     ];
+    node.transitionLogic = node1TransitionLogic;
   });
   copyComponents();
   deleteComponent();
@@ -23,6 +27,7 @@ describe('Node', () => {
   moveComponents();
   replaceComponent();
   getAllRelatedComponents();
+  deleteTransition();
 });
 
 function copyComponents() {
@@ -195,6 +200,17 @@ function getAllRelatedComponents_stepHasDiscussionWithConnectedComponent_getsRel
         { nodeId: nodeId1, componentId: componentId1 },
         { nodeId: nodeId2, componentId: componentId2, type: 'importWork' }
       ]);
+    });
+  });
+}
+
+function deleteTransition() {
+  describe('deleteTransition', () => {
+    it('should delete existing transition from the node', () => {
+      expect(node.getTransitionLogic().transitions.length).toEqual(2);
+      node.deleteTransition(node1TransitionLogic.transitions[0]);
+      expect(node.getTransitionLogic().transitions.length).toEqual(1);
+      expect(node.getTransitionLogic().transitions[0].to).toEqual('node3');
     });
   });
 }

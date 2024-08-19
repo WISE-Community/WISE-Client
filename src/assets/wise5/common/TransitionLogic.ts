@@ -5,4 +5,5 @@ export interface TransitionLogic {
   howToChooseAmongAvailablePaths?: string;
   transitions: Transition[];
   whenToChoosePath?: string;
+  maxPathsVisitable?: number;
 }

@@ -52,7 +52,6 @@ describe('TeacherProjectService', () => {
   registerNewProject();
   isNodeIdUsed();
   isNodeIdToInsertTargetNotSpecified();
-  testDeleteTransition();
   testGetNodeIdAfter();
   testCreateNodeAfter();
   shouldGetTheBranchLetter();
@@ -163,18 +162,6 @@ function isNodeIdToInsertTargetNotSpecified() {
     it('should return false for active nodes and groups', () => {
       expect(service.isNodeIdToInsertTargetNotSpecified('activeNodes')).toBeFalsy();
       expect(service.isNodeIdToInsertTargetNotSpecified('activeGroups')).toBeFalsy();
-    });
-  });
-}
-
-function testDeleteTransition() {
-  describe('deleteTransition', () => {
-    it('should delete existing transition from the node', () => {
-      service.setProject(demoProjectJSON);
-      const node1 = service.getNodeById('node1');
-      expect(service.nodeHasTransitionToNodeId(node1, 'node2')).toBeTruthy();
-      service.deleteTransition(node1, node1.transitionLogic.transitions[0]);
-      expect(service.nodeHasTransitionToNodeId(node1, 'node2')).toBeFalsy();
     });
   });
 }
