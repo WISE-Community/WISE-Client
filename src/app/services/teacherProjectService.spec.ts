@@ -52,7 +52,6 @@ describe('TeacherProjectService', () => {
   registerNewProject();
   isNodeIdUsed();
   isNodeIdToInsertTargetNotSpecified();
-  testDeleteTransition();
   testGetNodeIdAfter();
   testCreateNodeAfter();
   shouldGetTheBranchLetter();
@@ -61,7 +60,6 @@ describe('TeacherProjectService', () => {
   getNextAvailableNodeId();
   shouldReturnTheNextAvailableGroupId();
   shouldReturnTheGroupIdsInTheProject();
-  shouldReturnTheMaxScoreOfTheProject();
   shouldNotAddSpaceIfItDoesExist();
   shouldAddSpaceIfItDoesntExist();
   shouldRemoveSpaces();
@@ -164,18 +162,6 @@ function isNodeIdToInsertTargetNotSpecified() {
     it('should return false for active nodes and groups', () => {
       expect(service.isNodeIdToInsertTargetNotSpecified('activeNodes')).toBeFalsy();
       expect(service.isNodeIdToInsertTargetNotSpecified('activeGroups')).toBeFalsy();
-    });
-  });
-}
-
-function testDeleteTransition() {
-  describe('deleteTransition', () => {
-    it('should delete existing transition from the node', () => {
-      service.setProject(demoProjectJSON);
-      const node1 = service.getNodeById('node1');
-      expect(service.nodeHasTransitionToNodeId(node1, 'node2')).toBeTruthy();
-      service.deleteTransition(node1, node1.transitionLogic.transitions[0]);
-      expect(service.nodeHasTransitionToNodeId(node1, 'node2')).toBeFalsy();
     });
   });
 }
@@ -290,18 +276,6 @@ function shouldReturnTheGroupIdsInTheProject() {
     const groupIdsExpected = ['group0', 'group1', 'group2', 'group3', 'group4', 'group5', 'group6'];
     const groupIdsActual = service.getGroupIds();
     expect(groupIdsActual).toEqual(groupIdsExpected);
-  });
-}
-
-function shouldReturnTheMaxScoreOfTheProject() {
-  it('should return the max score of the project', () => {
-    service.setProject(demoProjectJSON);
-    const demoProjectMaxScoreActual = service.getMaxScore();
-    expect(demoProjectMaxScoreActual).toEqual(9);
-    service.setProject(scootersProjectJSON);
-    const scootersProjectMaxScoreExpected = 18;
-    const scootersProjectMaxScoreActual = service.getMaxScore();
-    expect(scootersProjectMaxScoreActual).toEqual(scootersProjectMaxScoreExpected);
   });
 }
 

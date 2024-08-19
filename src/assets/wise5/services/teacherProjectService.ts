@@ -412,21 +412,6 @@ export class TeacherProjectService extends ProjectService {
     return numRubrics;
   }
 
-  deleteTransition(node, transition) {
-    const nodeTransitions = node.transitionLogic.transitions;
-    const index = nodeTransitions.indexOf(transition);
-    if (index > -1) {
-      nodeTransitions.splice(index, 1);
-    }
-    if (nodeTransitions.length <= 1) {
-      // these settings only apply when there are multiple transitions
-      node.transitionLogic.howToChooseAmongAvailablePaths = null;
-      node.transitionLogic.whenToChoosePath = null;
-      node.transitionLogic.canChangePath = null;
-      node.transitionLogic.maxPathsVisitable = null;
-    }
-  }
-
   getBackgroundColor(nodeId: string): string {
     const branchPathLetter = this.nodeIdToBranchPathLetter[nodeId];
     if (branchPathLetter != null) {
@@ -668,42 +653,6 @@ export class TeacherProjectService extends ProjectService {
         }
       }
     }
-  }
-
-  addNodeToGroup(node, group) {
-    if (this.isGroupHasNode(group)) {
-      this.insertAfterLastNode(node, group);
-    } else {
-      this.insertAsFirstNode(node, group);
-    }
-  }
-
-  isGroupHasNode(group) {
-    return group.ids.length != 0;
-  }
-
-  getLastNodeInGroup(group) {
-    const lastNodeId = group.ids[group.ids.length - 1];
-    return this.idToNode[lastNodeId];
-  }
-
-  insertAsFirstNode(node, group) {
-    this.insertNodeInsideOnlyUpdateTransitions(node.id, group.id);
-    this.insertNodeInsideInGroups(node.id, group.id);
-  }
-
-  insertAfterLastNode(node, group) {
-    const lastNode = this.getLastNodeInGroup(group);
-    this.insertNodeAfterInTransitions(node, lastNode.id);
-    this.insertNodeAfterInGroups(node.id, lastNode.id);
-  }
-
-  createNodeAndAddToLocalStorage(nodeTitle) {
-    const node = this.createNode(nodeTitle);
-    this.setIdToNode(node.id, node);
-    this.addNode(node);
-    this.applicationNodes.push(node);
-    return node;
   }
 
   getAutomatedAssessmentProjectId(): number {
@@ -1787,38 +1736,6 @@ export class TeacherProjectService extends ProjectService {
         node.components.push(component);
       }
     }
-  }
-
-  /**
-   * TODO: Deprecated, should be removed; replaced by getMaxScoreForWorkgroupId in
-   * ClassroomStatusService
-   * Get the max score for the project. If the project contains branches, we
-   * will only calculate the max score for a single path from the first node
-   * to the last node in the project.
-   * @returns the max score for the project or null if none of the components in the project
-   * has max scores.
-   */
-  getMaxScore() {
-    let maxScore = null;
-    const startNodeId = this.getStartNodeId();
-
-    // get all the paths in the project
-    const allPaths = this.getAllPaths([], startNodeId);
-
-    if (allPaths != null && allPaths.length > -1) {
-      const firstPath = allPaths[0];
-      for (let nodeId of firstPath) {
-        const nodeMaxScore = this.getMaxScoreForNode(nodeId);
-        if (nodeMaxScore != null) {
-          if (maxScore == null) {
-            maxScore = nodeMaxScore;
-          } else {
-            maxScore += nodeMaxScore;
-          }
-        }
-      }
-    }
-    return maxScore;
   }
 
   hasGroupStartId(nodeId) {
