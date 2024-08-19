@@ -5,8 +5,8 @@ import { TeacherWebSocketService } from './teacherWebSocketService';
 @Injectable()
 export class TeacherPauseScreenService {
   constructor(
-    private teacherDataService: TeacherDataService,
-    private teacherWebSocketService: TeacherWebSocketService
+    private dataService: TeacherDataService,
+    private webSocketService: TeacherWebSocketService
   ) {}
 
   /**
@@ -24,23 +24,15 @@ export class TeacherPauseScreenService {
       category = 'TeacherAction',
       data = { periodId: periodId },
       event = isPaused ? 'pauseScreen' : 'unPauseScreen';
-    this.teacherDataService.saveEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      data
-    );
+    this.dataService.saveEvent(context, nodeId, componentId, componentType, category, event, data);
   }
 
   private saveRunStatusThenHandlePauseScreen(periodId: number, isPaused: boolean): void {
-    this.teacherDataService.saveRunStatus().subscribe(() => {
+    this.dataService.saveRunStatus().subscribe(() => {
       if (isPaused) {
-        this.teacherWebSocketService.pauseScreens(periodId);
+        this.webSocketService.pauseScreens(periodId);
       } else {
-        this.teacherWebSocketService.unPauseScreens(periodId);
+        this.webSocketService.unPauseScreens(periodId);
       }
     });
   }
@@ -51,8 +43,8 @@ export class TeacherPauseScreenService {
    * @param isPaused whether the period is paused or not
    */
   private updatePausedRunStatusValue(periodId: number, isPaused: boolean): void {
-    if (this.teacherDataService.getRunStatus() == null) {
-      this.teacherDataService.setRunStatus(this.teacherDataService.createRunStatus());
+    if (this.dataService.getRunStatus() == null) {
+      this.dataService.setRunStatus(this.dataService.createRunStatus());
     }
     if (periodId === -1) {
       this.updateAllPeriodsPausedValue(isPaused);
@@ -62,13 +54,13 @@ export class TeacherPauseScreenService {
   }
 
   private updateAllPeriodsPausedValue(isPaused: boolean): void {
-    for (const period of this.teacherDataService.getRunStatus().periods) {
+    for (const period of this.dataService.getRunStatus().periods) {
       period.paused = isPaused;
     }
   }
 
   private updatePeriodPausedValue(periodId: number, isPaused: boolean): void {
-    for (const period of this.teacherDataService.getRunStatus().periods) {
+    for (const period of this.dataService.getRunStatus().periods) {
       if (period.periodId === periodId) {
         period.paused = isPaused;
       }

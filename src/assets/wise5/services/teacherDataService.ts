@@ -23,7 +23,7 @@ export class TeacherDataService extends DataService {
   currentWorkgroup = null;
   currentStep = null;
   previousStep = null;
-  runStatus: RunStatus = null;
+  private runStatus: RunStatus = null;
   periods = [];
   nodeGradingSort = 'team';
   studentGradingSort = 'step';
