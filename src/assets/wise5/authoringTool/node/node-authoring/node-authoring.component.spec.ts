@@ -48,12 +48,13 @@ let saveProjectSpy: jasmine.Spy;
 describe('NodeAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CopyComponentButtonComponent, NodeAuthoringComponent],
+      declarations: [NodeAuthoringComponent],
       imports: [
         AddComponentButtonComponent,
         BrowserAnimationsModule,
         ComponentAuthoringModule,
         ComponentTypeServiceModule,
+        CopyComponentButtonComponent,
         DragDropModule,
         EditNodeTitleComponent,
         FormsModule,
