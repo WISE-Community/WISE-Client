@@ -81,7 +81,7 @@ export class StudentNodeService extends NodeService {
   getNextNodeId(currentId?: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const currentNodeId = currentId ?? this.DataService.getCurrentNodeId();
-      const transitionLogic = this.ProjectService.getTransitionLogicByFromNodeId(currentNodeId);
+      const transitionLogic = this.ProjectService.getNode(currentNodeId).getTransitionLogic();
       const branchPathTakenEvents =
         this.DataService.getBranchPathTakenEventsByNodeId(currentNodeId);
       if (this.hasPreviouslyBranchedAndCannotChange(branchPathTakenEvents, transitionLogic)) {
@@ -100,7 +100,7 @@ export class StudentNodeService extends NodeService {
   }
 
   private resolveNextNodeIdFromTransition(resolve: any, currentNodeId: string): void {
-    const transitionLogic = this.ProjectService.getTransitionLogicByFromNodeId(currentNodeId);
+    const transitionLogic = this.ProjectService.getNode(currentNodeId).getTransitionLogic();
     if (transitionLogic.transitions.length == 0) {
       this.getNextNodeIdFromParent(resolve, currentNodeId);
     } else {
@@ -113,8 +113,7 @@ export class StudentNodeService extends NodeService {
   private getNextNodeIdFromParent(resolve: any, currentNodeId: string): void {
     const parentGroupId = this.ProjectService.getParentGroupId(currentNodeId);
     if (parentGroupId != null) {
-      const parentTransitionLogic =
-        this.ProjectService.getTransitionLogicByFromNodeId(parentGroupId);
+      const parentTransitionLogic = this.ProjectService.getNode(parentGroupId).getTransitionLogic();
       this.chooseTransition(parentGroupId, parentTransitionLogic).then((transition: any) => {
         const transitionToNodeId = transition.to;
         const startId = this.ProjectService.isGroupNode(transitionToNodeId)

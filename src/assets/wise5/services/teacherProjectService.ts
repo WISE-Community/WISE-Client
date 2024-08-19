@@ -345,7 +345,7 @@ export class TeacherProjectService extends ProjectService {
    * are assigned branch paths on this branch point.
    */
   getBranchCriteriaDescription(nodeId) {
-    const transitionLogic = this.getTransitionLogicByFromNodeId(nodeId);
+    const transitionLogic = this.getNode(nodeId).getTransitionLogic();
     for (const transition of transitionLogic.transitions) {
       if (transition.criteria != null && transition.criteria.length > 0) {
         for (const singleCriteria of transition.criteria) {

@@ -720,22 +720,12 @@ export class ProjectService {
   }
 
   /**
-   * Get the transition logic for a node
-   * @param fromNodeId the from node id
-   * @returns the transition logic object
-   */
-  getTransitionLogicByFromNodeId(fromNodeId: string): TransitionLogic {
-    return this.getNode(fromNodeId).getTransitionLogic();
-  }
-
-  /**
    * Get the transitions for a node
    * @param fromNodeId the node to get transitions from
    * @returns {Array} an array of transitions
    */
   getTransitionsByFromNodeId(fromNodeId: string): Transition[] {
-    const transitionLogic = this.getTransitionLogicByFromNodeId(fromNodeId);
-    return transitionLogic.transitions ?? [];
+    return this.getNode(fromNodeId).getTransitionLogic().transitions ?? [];
   }
 
   /**
