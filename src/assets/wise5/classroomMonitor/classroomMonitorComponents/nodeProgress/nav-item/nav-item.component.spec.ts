@@ -7,6 +7,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { NavItemComponent } from './nav-item.component';
 import { NodeService } from '../../../../services/nodeService';
+import { Node } from '../../../../common/Node';
 
 class MockNotificationService {
   getAlertNotifications() {
@@ -39,10 +40,9 @@ class MockTeacherProjectService {
   nodeHasWork() {}
   getMaxScoreForNode() {}
   getNode() {
-    return { getIcon: () => {} };
+    return new Node();
   }
   getParentGroup() {}
-  getNumberOfRubricsByNodeId() {}
 }
 
 let component: NavItemComponent;

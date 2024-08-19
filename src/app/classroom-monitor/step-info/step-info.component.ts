@@ -34,7 +34,7 @@ export class StepInfoComponent {
         ? $localize`Has new alert(s)`
         : $localize`Has dismissed alert(s)`;
     }
-    this.hasRubrics = this.projectService.getNumberOfRubricsByNodeId(this.nodeId) > 0;
+    this.hasRubrics = this.projectService.getNode(this.nodeId).getNumRubrics() > 0;
     this.rubricIconLabel = $localize`Step has rubrics/teaching tips`;
   }
 }

@@ -380,38 +380,6 @@ export class TeacherProjectService extends ProjectService {
     return null;
   }
 
-  nodeHasRubric(nodeId: string): boolean {
-    return this.getNumberOfRubricsByNodeId(nodeId) > 0;
-  }
-
-  /**
-   * Get the total number of rubrics (step + components) for the given nodeId
-   * @param nodeId the node id
-   * @return Number of rubrics for the node
-   */
-  getNumberOfRubricsByNodeId(nodeId: string): number {
-    let numRubrics = 0;
-    const node = this.getNodeById(nodeId);
-    if (node) {
-      const nodeRubric = node.rubric;
-      if (nodeRubric != null && nodeRubric != '') {
-        numRubrics++;
-      }
-      const components = node.components;
-      if (components && components.length) {
-        for (let component of components) {
-          if (component) {
-            const componentRubric = component.rubric;
-            if (componentRubric != null && componentRubric != '') {
-              numRubrics++;
-            }
-          }
-        }
-      }
-    }
-    return numRubrics;
-  }
-
   getBackgroundColor(nodeId: string): string {
     const branchPathLetter = this.nodeIdToBranchPathLetter[nodeId];
     if (branchPathLetter != null) {

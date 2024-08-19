@@ -28,6 +28,7 @@ describe('Node', () => {
   replaceComponent();
   getAllRelatedComponents();
   deleteTransition();
+  getNumRubrics();
 });
 
 function copyComponents() {
@@ -211,6 +212,20 @@ function deleteTransition() {
       node.deleteTransition(node1TransitionLogic.transitions[0]);
       expect(node.getTransitionLogic().transitions.length).toEqual(1);
       expect(node.getTransitionLogic().transitions[0].to).toEqual('node3');
+    });
+  });
+}
+
+function getNumRubrics() {
+  describe('getNumRubrics()', () => {
+    it("should return 0 when node and components don't have any rubric", () => {
+      expect(node.getNumRubrics()).toEqual(0);
+    });
+    it('should return total number of rubrics for the node and its components', () => {
+      node.rubric = 'node rubric';
+      node.components[0].rubric = 'component 1 rubric';
+      node.components[1].rubric = 'component 2 rubric';
+      expect(node.getNumRubrics()).toEqual(3);
     });
   });
 }
