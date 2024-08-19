@@ -14,7 +14,10 @@ export class ConfigService {
   private configRetrievedSource: Subject<any> = new Subject<any>();
   public configRetrieved$: Observable<any> = this.configRetrievedSource.asObservable();
 
-  constructor(private http: HttpClient, @Inject(LOCALE_ID) private localeID: string) {}
+  constructor(
+    private http: HttpClient,
+    @Inject(LOCALE_ID) private localeID: string
+  ) {}
 
   setConfig(config) {
     this.config = config;
@@ -182,7 +185,7 @@ export class ConfigService {
     return null;
   }
 
-  getPeriods() {
+  getPeriods(): any[] {
     const myUserInfo = this.getMyUserInfo();
     if (myUserInfo != null) {
       const myClassInfo = myUserInfo.myClassInfo;

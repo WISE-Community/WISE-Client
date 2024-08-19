@@ -8,13 +8,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { generateRandomKey } from '../common/string/string';
+import { RunStatus } from '../common/RunStatus';
 
 @Injectable()
 export class StudentDataService extends DataService {
   dummyStudentWorkId: number = 1;
   nodeStatuses: any = {};
   previousStep = null;
-  runStatus: any = null;
+  runStatus: RunStatus = null;
   saveToServerRequestCount: number = 0;
   stackHistory = []; // array of node id's
   studentData: any = {
@@ -139,7 +140,7 @@ export class StudentDataService extends DataService {
       return this.http
         .get(this.ConfigService.getConfigParam('runStatusURL'), options)
         .toPromise()
-        .then((runStatus: any) => {
+        .then((runStatus: RunStatus) => {
           this.runStatus = runStatus;
           if (this.runStatus != null && this.runStatus.periods == null) {
             this.runStatus.periods = [];
@@ -603,7 +604,7 @@ export class StudentDataService extends DataService {
     return this.AnnotationService.getTotalScore(this.studentData.annotations);
   }
 
-  getRunStatus() {
+  getRunStatus(): RunStatus {
     return this.runStatus;
   }
 

@@ -31,6 +31,7 @@ import { TeacherNodeService } from '../../assets/wise5/services/teacherNodeServi
 import { MilestoneReportService } from '../../assets/wise5/services/milestoneReportService';
 import { RouterModule } from '@angular/router';
 import { TeacherToolsRoutingModule } from './teacher-tools-routing.module';
+import { TeacherPauseScreenService } from '../../assets/wise5/services/teacherPauseScreenService';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { TeacherToolsRoutingModule } from './teacher-tools-routing.module';
     TeacherDataService,
     TeacherDiscussionService,
     TeacherNodeService,
+    TeacherPauseScreenService,
     TeacherPeerGroupService,
     TeacherProjectService,
     TeacherWebSocketService,
