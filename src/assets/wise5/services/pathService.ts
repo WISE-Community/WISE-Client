@@ -5,19 +5,10 @@ export class PathService {
   /**
    * Check if all the paths are empty
    * @param paths an array of paths. each path is an array of node ids
-   * @return whether all the paths are empty
+   * @return true iff all the paths are empty
    */
   arePathsEmpty(paths: string[][]): boolean {
-    if (paths != null) {
-      for (let path of paths) {
-        if (path != null) {
-          if (path.length !== 0) {
-            return false;
-          }
-        }
-      }
-    }
-    return true;
+    return !paths.some((path) => path.length > 0);
   }
 
   /**
