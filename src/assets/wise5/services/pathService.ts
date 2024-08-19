@@ -8,7 +8,7 @@ export class PathService {
    * @return true iff all the paths are empty
    */
   arePathsEmpty(paths: string[][]): boolean {
-    return !paths.some((path) => path.length > 0);
+    return paths.every((path) => path.length === 0);
   }
 
   /**
