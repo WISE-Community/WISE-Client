@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { StudentNodeService } from '../../assets/wise5/services/studentNodeService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { NodeStatusService } from '../../assets/wise5/services/nodeStatusService';
 import { DataService } from './data.service';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { Node } from '../../assets/wise5/common/Node';
 
 let dataService: DataService;
 let dialog: MatDialog;
@@ -18,9 +18,9 @@ let service: StudentNodeService;
 describe('StudentNodeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi())]
+    });
     dataService = TestBed.inject(DataService);
     dialog = TestBed.inject(MatDialog);
     service = TestBed.inject(StudentNodeService);
@@ -87,9 +87,11 @@ function getNextNodeId_previouslyBranched_getsNodeFromPreviousBranchPathTaken() 
 function getNextNodeId_currentNodeHasTransition_getsNodeFromTransition() {
   describe('current node has a transition', () => {
     it('gets the node id from the transition', async () => {
-      spyOn(projectService, 'getTransitionLogicByFromNodeId').and.returnValue({
+      const node = new Node();
+      node.transitionLogic = {
         transitions: [{ to: nodeId2 }]
-      });
+      };
+      spyOn(projectService, 'getNode').and.returnValue(node);
       expect(await service.getNextNodeId()).toEqual(nodeId2);
     });
   });
