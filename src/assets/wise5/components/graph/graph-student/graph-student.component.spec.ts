@@ -1,15 +1,13 @@
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Point } from 'highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { ProjectService } from '../../../services/projectService';
-import { GraphService } from '../graphService';
 import { GraphStudent } from './graph-student.component';
-import { of } from 'rxjs';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
 import { XPlotLine } from '../domain/xPlotLine';
@@ -28,15 +26,17 @@ let studentDataChangedSpy: jasmine.Spy;
 describe('GraphStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [GraphStudent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserModule,
+      declarations: [GraphStudent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        BrowserModule,
         HighchartsChartModule,
         MatDialogModule,
         NoopAnimationsModule,
-        StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     fixture = TestBed.createComponent(GraphStudent);
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     component = fixture.componentInstance;
@@ -137,7 +137,6 @@ describe('GraphStudentComponent', () => {
   turnOffYAxisDecimalsWhenThereAreMultipleYAxes();
   undoClicked();
   updateMinMaxAxisValues();
-  getTrialsFromClassmates();
 });
 
 function createComponentContent() {
@@ -720,19 +719,16 @@ function makePointsUnique() {
 
 function createComponentState() {
   describe('createComponentState', () => {
-    it(
-      'should create component state',
-      waitForAsync(() => {
-        const trials = [createTrial('trial1', []), createTrial('trial2', [])];
-        component.trials = trials;
-        component.createComponentState('save').then((componentState: any) => {
-          expect(componentState.componentId).toEqual(componentId);
-          expect(componentState.nodeId).toEqual(nodeId);
-          expect(componentState.componentType).toEqual('Graph');
-          expect(componentState.studentData.trials).toEqual(trials);
-        });
-      })
-    );
+    it('should create component state', waitForAsync(() => {
+      const trials = [createTrial('trial1', []), createTrial('trial2', [])];
+      component.trials = trials;
+      component.createComponentState('save').then((componentState: any) => {
+        expect(componentState.componentId).toEqual(componentId);
+        expect(componentState.nodeId).toEqual(nodeId);
+        expect(componentState.componentType).toEqual('Graph');
+        expect(componentState.studentData.trials).toEqual(trials);
+      });
+    }));
   });
 }
 
@@ -1852,24 +1848,6 @@ function importGraphSettings() {
     expect(component.xAxis.title.text).toEqual(xAxis2Title);
     expect(component.yAxis.title.text).toEqual(yAxis2Title);
   });
-}
-
-function getTrialsFromClassmates() {
-  it('should get trials from classmates', fakeAsync(() => {
-    const name1 = 'Step 1';
-    const trial1 = { name: name1, show: true };
-    const trials = [trial1];
-    const componentState1 = createComponentStateObject(trials);
-    spyOn(TestBed.inject(ProjectService), 'getNodePositionAndTitle').and.returnValue(name1);
-    spyOn(TestBed.inject(GraphService), 'getClassmateStudentWork').and.returnValue(
-      of([componentState1])
-    );
-    component
-      .getTrialsFromClassmates('node2', 'component2', 100, 'node1', 'component1', 'period')
-      .then((mergedTrials) => {
-        expect(mergedTrials).toEqual(trials);
-      });
-  }));
 }
 
 function mouseDownEventOccurred() {

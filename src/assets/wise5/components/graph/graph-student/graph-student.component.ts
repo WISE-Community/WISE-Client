@@ -22,6 +22,7 @@ import { GraphCustomLegend } from '../GraphCustomLegend';
 import { PlotLineManager } from '../plot-line-manager';
 import { DataExplorerManager } from '../data-explorer-manager';
 import { addPointFromTableIntoData, isMultipleYAxes, isSingleYAxis } from '../util';
+import { GraphConnectedComponentManager } from '../graph-connected-component-manager';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -43,6 +44,7 @@ export class GraphStudent extends ComponentStudent {
   chartConfig: any;
   chartId: string = 'chart1';
   fileName: string;
+  graphConnectedComponentManager: GraphConnectedComponentManager;
   graphType: string;
   hasCustomLegendBeenSet: boolean = false;
   height: number = null;
@@ -116,6 +118,10 @@ export class GraphStudent extends ComponentStudent {
       this.componentContent.xAxis.plotLines,
       this.componentContent.showMouseXPlotLine,
       this.componentContent.showMouseYPlotLine
+    );
+    this.graphConnectedComponentManager = new GraphConnectedComponentManager(
+      this.GraphService,
+      this.ProjectService
     );
     this.initializeComponentContentParams();
     this.initializeStudentMode(this.componentState);
@@ -1330,87 +1336,6 @@ export class GraphStudent extends ComponentStudent {
   }
 
   /**
-   * Get the trials from classmates
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @param showClassmateWorkSource Whether to get the work only from the
-   * period the student is in or from all the periods. The possible values
-   * are "period" or "class".
-   * @return a promise that will return all the trials from the classmates
-   */
-  getTrialsFromClassmates(
-    nodeId: string,
-    componentId: string,
-    periodId: number,
-    showWorkNodeId: string,
-    showWorkComponentId: string,
-    showClassmateWorkSource: 'period' | 'class'
-  ): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.GraphService.getClassmateStudentWork(
-        nodeId,
-        componentId,
-        periodId,
-        showWorkNodeId,
-        showWorkComponentId,
-        showClassmateWorkSource
-      ).subscribe((componentStates: any[]) => {
-        const promises = [];
-        for (const componentState of componentStates) {
-          promises.push(this.getTrialsFromComponentState(nodeId, componentId, componentState));
-        }
-        Promise.all(promises).then((promiseResults) => {
-          const mergedTrials = [];
-          for (const trials of promiseResults) {
-            for (const trial of trials) {
-              mergedTrials.push(trial);
-            }
-          }
-          resolve(mergedTrials);
-        });
-      });
-    });
-  }
-
-  /**
-   * Get the trials from a component state.
-   * Note: The code in this function doesn't actually require usage of a
-   * promise. It's just the code that calls this function that utilizes
-   * promise functionality. It's possible to refactor the code so that this
-   * function doesn't need to return a promise.
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @param componentState the component state
-   * @return a promise that will return the trials from the component state
-   */
-  getTrialsFromComponentState(nodeId, componentId, componentState) {
-    const mergedTrials = [];
-    const nodePositionAndTitle = this.ProjectService.getNodePositionAndTitle(nodeId);
-    const studentData = componentState.studentData;
-    if (this.isStudentDataVersion1(studentData.version)) {
-      const series = studentData.series;
-      const newTrial = {
-        id: generateRandomKey(),
-        name: nodePositionAndTitle,
-        show: true,
-        series: series
-      };
-      mergedTrials.push(newTrial);
-    } else {
-      const trials = studentData.trials;
-      if (trials != null) {
-        for (const trial of trials) {
-          const newTrial = copy(trial);
-          newTrial.name = nodePositionAndTitle;
-          newTrial.show = true;
-          mergedTrials.push(newTrial);
-        }
-      }
-    }
-    return Promise.resolve(mergedTrials);
-  }
-
-  /**
    * Convert the table data into series data
    * @param componentState the component state to get table data from
    * @param params (optional) the params to specify what columns
@@ -2265,12 +2190,16 @@ export class GraphStudent extends ComponentStudent {
     let connectedComponentBackgroundImage = null;
     this.isDisabled = true;
     if (this.ConfigService.isPreview()) {
-      const latestComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
-        nodeId,
-        componentId
-      );
+      const latestComponentState =
+        this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId);
       if (latestComponentState != null) {
-        promises.push(this.getTrialsFromComponentState(nodeId, componentId, latestComponentState));
+        promises.push(
+          this.graphConnectedComponentManager.getTrialsFromComponentState(
+            nodeId,
+            componentId,
+            latestComponentState
+          )
+        );
         if (
           latestComponentState != null &&
           latestComponentState.studentData != null &&
@@ -2281,7 +2210,7 @@ export class GraphStudent extends ComponentStudent {
       }
     } else {
       promises.push(
-        this.getTrialsFromClassmates(
+        this.graphConnectedComponentManager.getTrialsFromClassmates(
           this.nodeId,
           this.componentId,
           this.ConfigService.getPeriodId(),
@@ -2301,10 +2230,8 @@ export class GraphStudent extends ComponentStudent {
     const nodeId = connectedComponent.nodeId;
     const componentId = connectedComponent.componentId;
     let connectedComponentBackgroundImage = null;
-    let latestComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
-      nodeId,
-      componentId
-    );
+    let latestComponentState =
+      this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId);
     if (latestComponentState != null) {
       if (
         latestComponentState.componentType === 'ConceptMap' ||
@@ -2324,7 +2251,13 @@ export class GraphStudent extends ComponentStudent {
           const canEdit = false;
           this.setCanEditForAllSeriesInComponentState(latestComponentState, canEdit);
         }
-        promises.push(this.getTrialsFromComponentState(nodeId, componentId, latestComponentState));
+        promises.push(
+          this.graphConnectedComponentManager.getTrialsFromComponentState(
+            nodeId,
+            componentId,
+            latestComponentState
+          )
+        );
         if (
           latestComponentState != null &&
           latestComponentState.studentData != null &&
@@ -2463,10 +2396,11 @@ export class GraphStudent extends ComponentStudent {
       if (type === 'showClassmateWork') {
         mergedComponentState = newComponentState;
       } else if (type === 'importWork' || type == null) {
-        const connectedComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
-          nodeId,
-          componentId
-        );
+        const connectedComponentState =
+          this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+            nodeId,
+            componentId
+          );
         const fields = connectedComponent.fields;
         if (connectedComponentState != null) {
           if (connectedComponentState.componentType !== 'Graph') {
