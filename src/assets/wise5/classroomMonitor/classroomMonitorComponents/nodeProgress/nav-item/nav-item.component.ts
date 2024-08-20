@@ -76,7 +76,7 @@ export class NavItemComponent implements OnInit {
       this.parentGroupId = parentGroup.id;
     }
     this.getAlertNotifications();
-    this.hasRubrics = this.projectService.getNumberOfRubricsByNodeId(this.nodeId) > 0;
+    this.hasRubrics = this.projectService.getNode(this.nodeId).getNumRubrics() > 0;
     this.alertIconLabel = $localize`Has new alert(s)`;
     this.alertIconClass = 'warn';
     this.alertIconName = 'notifications';

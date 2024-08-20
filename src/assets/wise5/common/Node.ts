@@ -215,4 +215,15 @@ export class Node {
       this.transitionLogic.maxPathsVisitable = null;
     }
   }
+
+  getNumRubrics(): number {
+    let numRubrics = 0;
+    if (this.rubric != null && this.rubric != '') {
+      numRubrics++;
+    }
+    numRubrics += this.components.filter(
+      (component) => component.rubric != null && component.rubric != ''
+    ).length;
+    return numRubrics;
+  }
 }
