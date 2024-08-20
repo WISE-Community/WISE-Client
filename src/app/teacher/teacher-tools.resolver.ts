@@ -9,6 +9,8 @@ import { NotificationService } from '../../assets/wise5/services/notificationSer
 import { TeacherWebSocketService } from '../../assets/wise5/services/teacherWebSocketService';
 import { NotebookService } from '../../assets/wise5/services/notebookService';
 import { AchievementService } from '../../assets/wise5/services/achievementService';
+import { RunStatus } from '../../assets/wise5/common/RunStatus';
+import { RunStatusService } from '../../assets/wise5/services/runStatusService';
 
 export const TeacherToolsResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,
@@ -20,6 +22,7 @@ export const TeacherToolsResolver: ResolveFn<any> = (
   notebookService: NotebookService = inject(NotebookService),
   notificationService: NotificationService = inject(NotificationService),
   projectService: ProjectService = inject(ProjectService),
+  runStatusService: RunStatusService = inject(RunStatusService),
   websocketService: TeacherWebSocketService = inject(TeacherWebSocketService)
 ): Observable<any> =>
   configService
@@ -27,7 +30,7 @@ export const TeacherToolsResolver: ResolveFn<any> = (
     .pipe(switchMap(() => projectService.retrieveProject()))
     .pipe(switchMap(() => classroomStatusService.retrieveStudentStatuses()))
     .pipe(switchMap(() => achievementService.retrieveStudentAchievements()))
-    .pipe(switchMap(() => dataService.retrieveRunStatus()))
+    .pipe(switchMap(() => runStatusService.retrieveRunStatus()))
     .pipe(switchMap(() => notificationService.retrieveNotifications()))
     .pipe(switchMap(() => dataService.retrieveAnnotations()))
     .pipe(switchMap(() => notebookService.retrieveNotebookItems()))

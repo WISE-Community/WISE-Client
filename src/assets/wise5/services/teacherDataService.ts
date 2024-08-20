@@ -14,7 +14,6 @@ import { isMatchingPeriods } from '../common/period/period';
 import { getIntersectOfArrays } from '../common/array/array';
 import { serverSaveTimeComparator } from '../common/object/object';
 import { Annotation } from '../common/Annotation';
-import { RunStatus } from '../common/RunStatus';
 
 @Injectable()
 export class TeacherDataService extends DataService {
@@ -23,7 +22,6 @@ export class TeacherDataService extends DataService {
   currentWorkgroup = null;
   currentStep = null;
   previousStep = null;
-  private runStatus: RunStatus = null;
   periods = [];
   nodeGradingSort = 'team';
   studentGradingSort = 'step';
@@ -64,12 +62,6 @@ export class TeacherDataService extends DataService {
     this.TeacherWebSocketService.newStudentWorkReceived$.subscribe(({ studentWork }) => {
       this.addOrUpdateComponentState(studentWork);
       this.broadcastStudentWorkReceived({ studentWork: studentWork });
-    });
-
-    this.ConfigService.configRetrieved$.subscribe(() => {
-      if (this.ConfigService.isClassroomMonitor()) {
-        this.retrieveRunStatus();
-      }
     });
   }
 
@@ -396,19 +388,6 @@ export class TeacherDataService extends DataService {
     return -1;
   }
 
-  retrieveRunStatus(): Observable<any> {
-    const options = {
-      params: new HttpParams().set('runId', this.ConfigService.getConfigParam('runId')),
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    };
-    return this.http.get(this.ConfigService.getConfigParam('runStatusURL'), options).pipe(
-      tap((runStatus: RunStatus) => {
-        this.runStatus = runStatus;
-        this.initializePeriods();
-      })
-    );
-  }
-
   getComponentStatesByWorkgroupId(workgroupId) {
     return this.studentData.componentStatesByWorkgroupId[workgroupId] || [];
   }
@@ -569,31 +548,6 @@ export class TeacherDataService extends DataService {
     }
   }
 
-  private initializePeriods(): void {
-    const periods = [...this.ConfigService.getPeriods()];
-    if (this.currentPeriod == null) {
-      this.setCurrentPeriod(periods[0]);
-    }
-    periods.unshift({ periodId: -1, periodName: $localize`All Periods` });
-    let mergedPeriods = periods;
-    if (this.runStatus.periods != null) {
-      mergedPeriods = this.mergeConfigAndRunStatusPeriods(periods, this.runStatus.periods);
-    }
-    this.periods = mergedPeriods;
-    this.runStatus.periods = mergedPeriods;
-  }
-
-  private mergeConfigAndRunStatusPeriods(configPeriods: any[], runStatusPeriods: any[]): any[] {
-    const mergedPeriods = [];
-    configPeriods.forEach((configPeriod) => {
-      const runStatusPeriod = runStatusPeriods.find(
-        (runStatusPeriod) => runStatusPeriod.periodId === configPeriod.periodId
-      );
-      mergedPeriods.push(runStatusPeriod != null ? runStatusPeriod : configPeriod);
-    });
-    return mergedPeriods;
-  }
-
   setCurrentPeriod(period) {
     const previousPeriod = this.currentPeriod;
     this.currentPeriod = period;
@@ -631,16 +585,12 @@ export class TeacherDataService extends DataService {
     return this.currentPeriod.periodId;
   }
 
-  getPeriods() {
+  getPeriods(): any[] {
     return this.periods;
   }
 
-  getRunStatus(): RunStatus {
-    return this.runStatus;
-  }
-
-  setRunStatus(runStatus: RunStatus): void {
-    this.runStatus = runStatus;
+  setPeriods(periods: any[]) {
+    this.periods = periods;
   }
 
   getVisiblePeriodsById(currentPeriodId: number): any {
@@ -680,26 +630,6 @@ export class TeacherDataService extends DataService {
 
   private getPeriodById(periodId: number): any {
     return this.getPeriods().find((period) => period.periodId === periodId);
-  }
-
-  saveRunStatus(): Observable<void> {
-    const url = this.ConfigService.getConfigParam('runStatusURL');
-    const body = new HttpParams()
-      .set('runId', this.ConfigService.getConfigParam('runId'))
-      .set('status', JSON.stringify(this.runStatus));
-    const options = {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    };
-    return this.http.post<void>(url, body, options);
-  }
-
-  createRunStatus(): RunStatus {
-    const periods = this.ConfigService.getPeriods();
-    periods.forEach((period) => (period.paused = false));
-    return {
-      runId: this.ConfigService.getConfigParam('runId'),
-      periods: periods
-    };
   }
 
   isWorkgroupShown(workgroup): boolean {
