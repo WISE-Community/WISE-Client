@@ -139,7 +139,7 @@ export class NodeGradingViewComponent implements OnInit {
       this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;
       this.setWorkgroupsById();
       this.sortWorkgroups();
-      this.numRubrics = this.projectService.getNumberOfRubricsByNodeId(node.id);
+      this.numRubrics = node.getNumRubrics();
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     });
   }

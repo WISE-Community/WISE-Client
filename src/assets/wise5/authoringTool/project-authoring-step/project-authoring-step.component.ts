@@ -104,7 +104,7 @@ export class ProjectAuthoringStepComponent {
   }
 
   protected nodeHasRubric(nodeId: string): boolean {
-    return this.projectService.nodeHasRubric(nodeId);
+    return this.projectService.getNode(nodeId).getNumRubrics() > 0;
   }
 
   protected getConstraintDescriptions(nodeId: string): string {
