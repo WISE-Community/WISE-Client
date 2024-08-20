@@ -310,51 +310,6 @@ export class TeacherProjectService extends ProjectService {
     this.project.rubric = html;
   }
 
-  /**
-   * Get the number of branch paths. This is assuming the node is a branch point.
-   * @param nodeId The node id of the branch point node.
-   * @return The number of branch paths for this branch point.
-   */
-  getNumberOfBranchPaths(nodeId) {
-    const transitions = this.getTransitionsByFromNodeId(nodeId);
-    if (transitions != null) {
-      return transitions.length;
-    }
-    return 0;
-  }
-
-  /**
-   * If this step is a branch point, we will return the criteria that is used
-   * to determine which path the student gets assigned to.
-   * @param nodeId The node id of the branch point.
-   * @returns A human readable string containing the criteria of how students
-   * are assigned branch paths on this branch point.
-   */
-  getBranchCriteriaDescription(nodeId) {
-    const transitionLogic = this.getNode(nodeId).getTransitionLogic();
-    for (const transition of transitionLogic.transitions) {
-      if (transition.criteria != null && transition.criteria.length > 0) {
-        for (const singleCriteria of transition.criteria) {
-          if (singleCriteria.name === 'choiceChosen') {
-            return 'multiple choice';
-          } else if (singleCriteria.name === 'score') {
-            return 'score';
-          }
-        }
-      }
-    }
-
-    /*
-     * None of the transitions had a specific criteria so the branching is just
-     * based on the howToChooseAmongAvailablePaths field.
-     */
-    if (transitionLogic.howToChooseAmongAvailablePaths === 'workgroupId') {
-      return 'workgroup ID';
-    } else if (transitionLogic.howToChooseAmongAvailablePaths === 'random') {
-      return 'random assignment';
-    }
-  }
-
   setProjectScriptFilename(scriptFilename) {
     this.project.script = scriptFilename;
   }

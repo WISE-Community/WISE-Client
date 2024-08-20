@@ -48,11 +48,39 @@ export class ProjectAuthoringStepComponent {
   }
 
   protected getNumberOfBranchPaths(nodeId: string): number {
-    return this.projectService.getNumberOfBranchPaths(nodeId);
+    return this.projectService.getTransitionsByFromNodeId(nodeId).length;
   }
 
+  /**
+   * If this step is a branch point, we will return the criteria that is used
+   * to determine which path the student gets assigned to.
+   * @param nodeId The node id of the branch point.
+   * @returns A human readable string containing the criteria of how students
+   * are assigned branch paths on this branch point.
+   */
   protected getBranchCriteriaDescription(nodeId: string): string {
-    return this.projectService.getBranchCriteriaDescription(nodeId);
+    const transitionLogic = this.projectService.getNode(nodeId).getTransitionLogic();
+    for (const transition of transitionLogic.transitions) {
+      if (transition.criteria != null && transition.criteria.length > 0) {
+        for (const singleCriteria of transition.criteria) {
+          if (singleCriteria.name === 'choiceChosen') {
+            return 'multiple choice';
+          } else if (singleCriteria.name === 'score') {
+            return 'score';
+          }
+        }
+      }
+    }
+
+    /*
+     * None of the transitions had a specific criteria so the branching is just
+     * based on the howToChooseAmongAvailablePaths field.
+     */
+    if (transitionLogic.howToChooseAmongAvailablePaths === 'workgroupId') {
+      return 'workgroup ID';
+    } else if (transitionLogic.howToChooseAmongAvailablePaths === 'random') {
+      return 'random assignment';
+    }
   }
 
   protected getStepBackgroundColor(nodeId: string): string {
