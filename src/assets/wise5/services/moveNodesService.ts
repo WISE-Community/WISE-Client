@@ -35,12 +35,12 @@ export class MoveNodesService {
         this.projectService.removeNodeIdFromGroups(nodeId);
 
         if (n == 0) {
-          this.projectService.moveFromActiveToInactiveInsertInside(node, groupNodeId);
+          this.moveFromActiveToInactiveInsertInside(node, groupNodeId);
         } else {
-          this.projectService.moveToInactive(node, groupNodeId);
+          this.moveToInactive(node, groupNodeId);
         }
       } else if (!movingNodeIsActive && stationaryNodeIsActive) {
-        this.projectService.moveToActive(node);
+        this.moveToActive(node);
 
         if (n == 0) {
           this.projectService.insertNodeInsideOnlyUpdateTransitions(nodeId, groupNodeId);
@@ -54,7 +54,7 @@ export class MoveNodesService {
         this.projectService.removeNodeIdFromGroups(nodeId);
 
         if (n == 0) {
-          this.projectService.moveFromInactiveToInactiveInsertInside(node, groupNodeId);
+          this.moveFromInactiveToInactiveInsertInside(node, groupNodeId);
         } else {
           this.moveInactiveNodeToInactiveSection(node, groupNodeId);
         }
@@ -63,6 +63,100 @@ export class MoveNodesService {
       groupNodeId = node.id;
     }
     return movedNodes;
+  }
+
+  /**
+   * Move the node from active to inside an inactive group
+   * @param node the node to move
+   * @param nodeIdToInsertInside place the node inside this
+   */
+  private moveFromActiveToInactiveInsertInside(node: any, nodeIdToInsertInside: string): void {
+    this.removeNodeFromActiveNodes(node.id);
+    this.projectService.addInactiveNodeInsertInside(node, nodeIdToInsertInside);
+  }
+
+  /**
+   * Remove the node from the active nodes.
+   * If the node is a group node, also remove its children.
+   * @param nodeId the node to remove
+   * @returns the node that was removed
+   */
+  private removeNodeFromActiveNodes(nodeId: string): any {
+    let nodeRemoved = null;
+    const activeNodes = this.projectService.project.nodes;
+    for (let a = 0; a < activeNodes.length; a++) {
+      const activeNode = activeNodes[a];
+      if (activeNode.id === nodeId) {
+        activeNodes.splice(a, 1);
+        nodeRemoved = activeNode;
+        if (activeNode.type === 'group') {
+          this.removeChildNodesFromActiveNodes(activeNode);
+        }
+        break;
+      }
+    }
+    return nodeRemoved;
+  }
+
+  /**
+   * Move the child nodes of a group from the active nodes.
+   * @param node The group node.
+   */
+  private removeChildNodesFromActiveNodes(node: any): void {
+    for (const childId of node.ids) {
+      this.removeNodeFromActiveNodes(childId);
+    }
+  }
+
+  /**
+   * Move the node to the active nodes array. If the node is a group node,
+   * also move all of its children to active.
+   */
+  private moveToActive(node: any): void {
+    this.projectService.removeNodeFromInactiveNodes(node.id);
+    this.projectService.addNode(node);
+    if (this.projectService.isGroupNode(node.id)) {
+      for (const childId of node.ids) {
+        this.projectService.addNode(this.projectService.removeNodeFromInactiveNodes(childId));
+      }
+    }
+  }
+
+  /**
+   * Move the node from inactive to inside an inactive group
+   * @param node the node to move
+   * @param nodeIdToInsertInside place the node inside this
+   */
+  private moveFromInactiveToInactiveInsertInside(node: any, nodeIdToInsertInside: string): void {
+    this.projectService.removeNodeFromInactiveNodes(node.id);
+    if (this.projectService.isGroupNode(node.id)) {
+      /*
+       * remove the group's child nodes from our data structures so that we can
+       * add them back in later
+       */
+      for (const childId of node.ids) {
+        const childNode = this.projectService.getNodeById(childId);
+        const inactiveNodesIndex = this.projectService.project.inactiveNodes.indexOf(childNode);
+        if (inactiveNodesIndex != -1) {
+          this.projectService.project.inactiveNodes.splice(inactiveNodesIndex, 1);
+        }
+        const inactiveStepNodesIndex = this.projectService.inactiveStepNodes.indexOf(childNode);
+        if (inactiveStepNodesIndex != -1) {
+          this.projectService.inactiveStepNodes.splice(inactiveStepNodesIndex, 1);
+        }
+      }
+    }
+    this.projectService.addInactiveNodeInsertInside(node, nodeIdToInsertInside);
+  }
+
+  /**
+   * Move an active node to the inactive nodes array.
+   * @param node the node to move
+   * @param nodeIdToInsertAfter place the node after this
+   */
+  private moveToInactive(node: any, nodeIdToInsertAfter: string): void {
+    this.removeNodeFromActiveNodes(node.id);
+    this.projectService.addInactiveNodeInsertAfter(node, nodeIdToInsertAfter);
   }
 
   /**
@@ -85,9 +179,9 @@ export class MoveNodesService {
       } else if (movingNodeIsActive && !stationaryNodeIsActive) {
         this.projectService.removeNodeIdFromTransitions(nodeId);
         this.projectService.removeNodeIdFromGroups(nodeId);
-        this.projectService.moveToInactive(node, moveAfterNodeId);
+        this.moveToInactive(node, moveAfterNodeId);
       } else if (!movingNodeIsActive && stationaryNodeIsActive) {
-        this.projectService.moveToActive(node);
+        this.moveToActive(node);
         this.projectService.insertNodeAfterInGroups(nodeId, moveAfterNodeId);
         this.projectService.insertNodeAfterInTransitions(node, moveAfterNodeId);
       } else if (!movingNodeIsActive && !stationaryNodeIsActive) {

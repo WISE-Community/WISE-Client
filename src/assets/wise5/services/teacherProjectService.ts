@@ -479,51 +479,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Remove the node from the active nodes.
-   * If the node is a group node, also remove its children.
-   * @param nodeId the node to remove
-   * @returns the node that was removed
-   */
-  removeNodeFromActiveNodes(nodeId) {
-    let nodeRemoved = null;
-    const activeNodes = this.project.nodes;
-    for (let a = 0; a < activeNodes.length; a++) {
-      const activeNode = activeNodes[a];
-      if (activeNode.id === nodeId) {
-        activeNodes.splice(a, 1);
-        nodeRemoved = activeNode;
-        if (activeNode.type === 'group') {
-          this.removeChildNodesFromActiveNodes(activeNode);
-        }
-        break;
-      }
-    }
-    return nodeRemoved;
-  }
-
-  /**
-   * Move the child nodes of a group from the active nodes.
-   * @param node The group node.
-   */
-  removeChildNodesFromActiveNodes(node) {
-    for (const childId of node.ids) {
-      this.removeNodeFromActiveNodes(childId);
-    }
-  }
-
-  /**
-   * Move an active node to the inactive nodes array.
-   * @param node the node to move
-   * @param nodeIdToInsertAfter place the node after this
-   */
-  moveToInactive(node, nodeIdToInsertAfter) {
-    if (this.isActive(node.id)) {
-      this.removeNodeFromActiveNodes(node.id);
-      this.addInactiveNodeInsertAfter(node, nodeIdToInsertAfter);
-    }
-  }
-
-  /**
    * Add the node to the inactive nodes array.
    * @param node the node to move
    * @param nodeIdToInsertAfter place the node after this
@@ -571,43 +526,6 @@ export class TeacherProjectService extends ProjectService {
     return [null, 'inactiveNodes', 'inactiveSteps', 'inactiveGroups'].includes(
       nodeIdToInsertTarget
     );
-  }
-
-  /**
-   * Move the node from active to inside an inactive group
-   * @param node the node to move
-   * @param nodeIdToInsertInside place the node inside this
-   */
-  moveFromActiveToInactiveInsertInside(node, nodeIdToInsertInside) {
-    this.removeNodeFromActiveNodes(node.id);
-    this.addInactiveNodeInsertInside(node, nodeIdToInsertInside);
-  }
-
-  /**
-   * Move the node from inactive to inside an inactive group
-   * @param node the node to move
-   * @param nodeIdToInsertInside place the node inside this
-   */
-  moveFromInactiveToInactiveInsertInside(node, nodeIdToInsertInside) {
-    this.removeNodeFromInactiveNodes(node.id);
-    if (this.isGroupNode(node.id)) {
-      /*
-       * remove the group's child nodes from our data structures so that we can
-       * add them back in later
-       */
-      for (const childId of node.ids) {
-        const childNode = this.getNodeById(childId);
-        const inactiveNodesIndex = this.project.inactiveNodes.indexOf(childNode);
-        if (inactiveNodesIndex != -1) {
-          this.project.inactiveNodes.splice(inactiveNodesIndex, 1);
-        }
-        const inactiveStepNodesIndex = this.inactiveStepNodes.indexOf(childNode);
-        if (inactiveStepNodesIndex != -1) {
-          this.inactiveStepNodes.splice(inactiveStepNodesIndex, 1);
-        }
-      }
-    }
-    this.addInactiveNodeInsertInside(node, nodeIdToInsertInside);
   }
 
   addInactiveNodeInsertInside(node, nodeIdToInsertInside = null) {
@@ -2218,22 +2136,6 @@ export class TeacherProjectService extends ProjectService {
       if (nodeId == this.inactiveGroupNodes[i].id) {
         this.inactiveGroupNodes.splice(i, 1);
         break;
-      }
-    }
-  }
-
-  /**
-   * Move the node to the active nodes array. If the node is a group node,
-   * also move all of its children to active.
-   */
-  moveToActive(node) {
-    if (!this.isActive(node.id)) {
-      this.removeNodeFromInactiveNodes(node.id);
-      this.addNode(node);
-      if (this.isGroupNode(node.id)) {
-        for (const childId of node.ids) {
-          this.addNode(this.removeNodeFromInactiveNodes(childId));
-        }
       }
     }
   }
