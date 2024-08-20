@@ -14,6 +14,7 @@ import { isMatchingPeriods } from '../common/period/period';
 import { getIntersectOfArrays } from '../common/array/array';
 import { serverSaveTimeComparator } from '../common/object/object';
 import { Annotation } from '../common/Annotation';
+import { RunStatus } from '../common/RunStatus';
 
 @Injectable()
 export class TeacherDataService extends DataService {
@@ -22,7 +23,7 @@ export class TeacherDataService extends DataService {
   currentWorkgroup = null;
   currentStep = null;
   previousStep = null;
-  runStatus = null;
+  private runStatus: RunStatus = null;
   periods = [];
   nodeGradingSort = 'team';
   studentGradingSort = 'step';
@@ -401,7 +402,7 @@ export class TeacherDataService extends DataService {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     };
     return this.http.get(this.ConfigService.getConfigParam('runStatusURL'), options).pipe(
-      tap((runStatus: any) => {
+      tap((runStatus: RunStatus) => {
         this.runStatus = runStatus;
         this.initializePeriods();
       })
@@ -634,8 +635,12 @@ export class TeacherDataService extends DataService {
     return this.periods;
   }
 
-  getRunStatus() {
+  getRunStatus(): RunStatus {
     return this.runStatus;
+  }
+
+  setRunStatus(runStatus: RunStatus): void {
+    this.runStatus = runStatus;
   }
 
   getVisiblePeriodsById(currentPeriodId: number): any {
@@ -677,35 +682,7 @@ export class TeacherDataService extends DataService {
     return this.getPeriods().find((period) => period.periodId === periodId);
   }
 
-  /**
-   * The pause screen status was changed for the given periodId. Update period accordingly.
-   * @param periodId the id of the period to toggle
-   * @param isPaused Boolean whether the period should be paused or not
-   */
-  pauseScreensChanged(periodId: number, isPaused: boolean): void {
-    this.updatePausedRunStatusValue(periodId, isPaused);
-    this.saveRunStatusThenHandlePauseScreen(periodId, isPaused);
-    const context = 'ClassroomMonitor',
-      nodeId = null,
-      componentId = null,
-      componentType = null,
-      category = 'TeacherAction',
-      data = { periodId: periodId },
-      event = isPaused ? 'pauseScreen' : 'unPauseScreen';
-    this.saveEvent(context, nodeId, componentId, componentType, category, event, data);
-  }
-
-  private saveRunStatusThenHandlePauseScreen(periodId: number, isPaused: boolean): void {
-    this.saveRunStatus().subscribe(() => {
-      if (isPaused) {
-        this.TeacherWebSocketService.pauseScreens(periodId);
-      } else {
-        this.TeacherWebSocketService.unPauseScreens(periodId);
-      }
-    });
-  }
-
-  private saveRunStatus(): Observable<void> {
+  saveRunStatus(): Observable<void> {
     const url = this.ConfigService.getConfigParam('runStatusURL');
     const body = new HttpParams()
       .set('runId', this.ConfigService.getConfigParam('runId'))
@@ -716,43 +693,13 @@ export class TeacherDataService extends DataService {
     return this.http.post<void>(url, body, options);
   }
 
-  /**
-   * Update the paused value for a period in our run status
-   * @param periodId the period id or -1 for all periods
-   * @param isPaused whether the period is paused or not
-   */
-  private updatePausedRunStatusValue(periodId: number, isPaused: boolean): void {
-    if (this.runStatus == null) {
-      this.runStatus = this.createRunStatus();
-    }
-    if (periodId === -1) {
-      this.updateAllPeriodsPausedValue(isPaused);
-    } else {
-      this.updatePeriodPausedValue(periodId, isPaused);
-    }
-  }
-
-  private createRunStatus(): any {
+  createRunStatus(): RunStatus {
     const periods = this.ConfigService.getPeriods();
     periods.forEach((period) => (period.paused = false));
     return {
       runId: this.ConfigService.getConfigParam('runId'),
       periods: periods
     };
-  }
-
-  private updateAllPeriodsPausedValue(isPaused: boolean): void {
-    for (const period of this.runStatus.periods) {
-      period.paused = isPaused;
-    }
-  }
-
-  private updatePeriodPausedValue(periodId: number, isPaused: boolean): void {
-    for (const period of this.runStatus.periods) {
-      if (period.periodId === periodId) {
-        period.paused = isPaused;
-      }
-    }
   }
 
   isWorkgroupShown(workgroup): boolean {

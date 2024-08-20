@@ -13,29 +13,41 @@ import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../vleProjectService';
 import { copy } from '../../common/object/object';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ComponentComponent } from '../../components/component/component.component';
+import { MatButtonModule } from '@angular/material/button';
+import { ComponentStateInfoComponent } from '../../common/component-state-info/component-state-info.component';
+import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
 
 @Component({
+  imports: [
+    CommonModule,
+    ComponentComponent,
+    ComponentStateInfoComponent,
+    FlexLayoutModule,
+    HelpIconComponent,
+    MatButtonModule
+  ],
   selector: 'node',
-  templateUrl: './node.component.html',
-  styleUrls: ['./node.component.scss']
+  standalone: true,
+  styleUrl: './node.component.scss',
+  templateUrl: './node.component.html'
 })
 export class NodeComponent implements OnInit {
-  autoSaveInterval: number = 60000; // in milliseconds;
-  autoSaveIntervalId: any;
-  components: any[];
-  componentToVisible = {};
-  dirtyComponentIds: any = [];
-  dirtySubmitComponentIds: any = [];
-  isDisabled: boolean;
+  private autoSaveInterval: number = 60000; // in milliseconds;
+  private autoSaveIntervalId: any;
+  protected components: any[];
+  protected componentToVisible = {};
+  protected dirtyComponentIds: any = [];
+  protected dirtySubmitComponentIds: any = [];
+  protected disabled: boolean;
+  protected latestComponentState: ComponentState;
   @Input() node: Node;
-  nodeContent: any;
-  nodeStatus: any;
-  latestComponentState: ComponentState;
-  showRubric: boolean;
-  submit: boolean = false;
-  subscriptions: Subscription = new Subscription();
-  teacherWorkgroupId: number;
-  workComponents: string[] = [
+  protected nodeStatus: any;
+  protected showRubric: boolean;
+  private subscriptions: Subscription = new Subscription();
+  private workComponents: string[] = [
     'Animation',
     'AudioOscillator',
     'ConceptMap',
@@ -52,7 +64,7 @@ export class NodeComponent implements OnInit {
     'Summary',
     'Table'
   ];
-  workgroupId: number;
+  protected workgroupId: number;
 
   constructor(
     private componentService: ComponentService,
@@ -72,8 +84,7 @@ export class NodeComponent implements OnInit {
 
   ngOnInit(): void {
     this.workgroupId = this.configService.getWorkgroupId();
-    this.teacherWorkgroupId = this.configService.getTeacherWorkgroupId();
-    this.isDisabled = !this.configService.isRunActive();
+    this.disabled = !this.configService.isRunActive();
 
     this.initializeNode();
     this.startAutoSaveInterval();
@@ -82,8 +93,7 @@ export class NodeComponent implements OnInit {
     this.subscriptions.add(
       this.studentDataService.componentSaveTriggered$.subscribe(({ nodeId, componentId }) => {
         if (nodeId == this.node.id && this.node.hasComponent(componentId)) {
-          const isAutoSave = false;
-          this.createAndSaveComponentData(isAutoSave, componentId);
+          this.createAndSaveComponentData(false, componentId);
         }
       })
     );
@@ -91,9 +101,7 @@ export class NodeComponent implements OnInit {
     this.subscriptions.add(
       this.studentDataService.componentSubmitTriggered$.subscribe(({ nodeId, componentId }) => {
         if (nodeId == this.node.id && this.node.hasComponent(componentId)) {
-          const isAutoSave = false;
-          const isSubmit = true;
-          this.createAndSaveComponentData(isAutoSave, componentId, isSubmit);
+          this.createAndSaveComponentData(false, componentId, true);
         }
       })
     );
@@ -155,9 +163,8 @@ export class NodeComponent implements OnInit {
     );
   }
 
-  initializeNode(): void {
+  private initializeNode(): void {
     this.clearLatestComponentState();
-    this.nodeContent = this.projectService.getNodeById(this.node.id);
     this.components = this.getComponents();
     this.nodeStatus = this.nodeStatusService.getNodeStatusByNodeId(this.node.id);
     this.dirtyComponentIds = [];
@@ -178,7 +185,8 @@ export class NodeComponent implements OnInit {
       this.showRubric = this.node.rubric != null && this.node.rubric != '';
     }
 
-    const script = this.nodeContent.script;
+    const nodeContent = this.projectService.getNodeById(this.node.id);
+    const script = nodeContent.script;
     if (script != null) {
       this.projectService.retrieveScript(script).then((script: string) => {
         new Function(script).call(this);
@@ -198,21 +206,18 @@ export class NodeComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  saveButtonClicked(): void {
-    const isAutoSave = false;
-    this.createAndSaveComponentData(isAutoSave);
+  protected save(): void {
+    this.createAndSaveComponentData(false);
   }
 
-  submitButtonClicked(): void {
+  protected submit(): void {
     this.nodeService.broadcastNodeSubmitClicked({ nodeId: this.node.id });
-    const isAutoSave = false;
-    const isSubmit = true;
-    this.createAndSaveComponentData(isAutoSave, null, isSubmit);
+    this.createAndSaveComponentData(false, null, true);
   }
 
   private getComponents(): any[] {
     return this.node.components.map((component) => {
-      if (this.isDisabled) {
+      if (this.disabled) {
         component.isDisabled = true;
       }
       return component;
@@ -226,8 +231,7 @@ export class NodeComponent implements OnInit {
   private startAutoSaveInterval(): void {
     this.autoSaveIntervalId = setInterval(() => {
       if (this.dirtyComponentIds.length) {
-        const isAutoSave = true;
-        this.createAndSaveComponentData(isAutoSave);
+        this.createAndSaveComponentData(true);
       }
     }, this.autoSaveInterval);
   }
@@ -247,7 +251,7 @@ export class NodeComponent implements OnInit {
    * that needs saving
    */
   private createAndSaveComponentData(
-    isAutoSave,
+    isAutoSave: boolean,
     componentId = null,
     isSubmit = null
   ): Promise<any> {
@@ -256,7 +260,11 @@ export class NodeComponent implements OnInit {
     );
   }
 
-  private createComponentStatesResponseHandler(isAutoSave, componentId = null, isSubmit = null) {
+  private createComponentStatesResponseHandler(
+    isAutoSave: boolean,
+    componentId: string = null,
+    isSubmit: boolean = null
+  ) {
     return (componentStates) => {
       const componentAnnotations = this.getAnnotationsFromComponentStates(componentStates);
       componentStates.forEach((componentState: any) => {
@@ -400,7 +408,7 @@ export class NodeComponent implements OnInit {
   ): any {
     componentState.runId = this.configService.getRunId();
     componentState.periodId = this.configService.getPeriodId();
-    componentState.workgroupId = this.configService.getWorkgroupId();
+    componentState.workgroupId = this.workgroupId;
     componentState.isAutoSave = isAutoSave === true;
     componentState.isSubmit ??= isSubmit;
   }
@@ -429,7 +437,7 @@ export class NodeComponent implements OnInit {
     }
   }
 
-  getComponentStateByComponentId(componentId: string): any {
+  protected getComponentStateByComponentId(componentId: string): any {
     return this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
       this.node.id,
       componentId
@@ -444,7 +452,7 @@ export class NodeComponent implements OnInit {
     );
   }
 
-  saveComponentState($event: any): Promise<any> {
+  protected saveComponentState($event: any): Promise<any> {
     return Promise.all([$event.componentStatePromise]).then(
       this.createComponentStatesResponseHandler(true)
     );

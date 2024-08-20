@@ -1192,125 +1192,6 @@ export class ProjectService {
   }
 
   /**
-   * Get the message that describes how to satisfy the criteria
-   * TODO: check if the criteria is satisfied
-   * @param criteria the criteria object that needs to be satisfied
-   * @returns the message to display to the student that describes how to
-   * satisfy the criteria
-   */
-  getCriteriaMessage(criteria: any): string {
-    let message = '';
-
-    if (criteria != null) {
-      const name = criteria.name;
-      const params = criteria.params;
-
-      if (name === 'isCompleted') {
-        const nodeId = params.nodeId;
-        if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitle(nodeId);
-          message += $localize`Complete <b>${nodeTitle}</b>`;
-        }
-      } else if (name === 'isVisited') {
-        const nodeId = params.nodeId;
-        if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitle(nodeId);
-          message += $localize`Visit <b>${nodeTitle}</b>`;
-        }
-      } else if (name === 'isCorrect') {
-        const nodeId = params.nodeId;
-        if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitle(nodeId);
-          message += $localize`Correctly answer <b>${nodeTitle}</b>`;
-        }
-      } else if (name === 'score') {
-        const nodeId = params.nodeId;
-        let nodeTitle = '';
-        let scoresString = '';
-
-        if (nodeId != null) {
-          nodeTitle = this.getNodePositionAndTitle(nodeId);
-        }
-
-        const scores = params.scores;
-        if (scores != null) {
-          scoresString = scores.join(', ');
-        }
-        message += $localize`Obtain a score of <b>${scoresString}</b> on <b>${nodeTitle}</b>`;
-      } else if (name === 'choiceChosen') {
-        const nodeId = params.nodeId;
-        const componentId = params.componentId;
-        const choiceIds = params.choiceIds;
-        let nodeTitle = this.getNodePositionAndTitle(nodeId);
-        let choices = this.getChoiceText(nodeId, componentId, choiceIds);
-        let choiceText = choices.join(', ');
-        message += $localize`You must choose "${choiceText}" on "${nodeTitle}"`;
-      } else if (name === 'usedXSubmits') {
-        const nodeId = params.nodeId;
-        let nodeTitle = '';
-
-        const requiredSubmitCount = params.requiredSubmitCount;
-
-        if (nodeId != null) {
-          nodeTitle = this.getNodePositionAndTitle(nodeId);
-        }
-
-        if (requiredSubmitCount == 1) {
-          message += $localize`Submit <b>${requiredSubmitCount}</b> time on <b>${nodeTitle}</b>`;
-        } else {
-          message += $localize`Submit <b>${requiredSubmitCount}</b> times on <b>${nodeTitle}</b>`;
-        }
-      } else if (name === 'branchPathTaken') {
-        const fromNodeId = params.fromNodeId;
-        const fromNodeTitle = this.getNodePositionAndTitle(fromNodeId);
-        const toNodeId = params.toNodeId;
-        const toNodeTitle = this.getNodePositionAndTitle(toNodeId);
-        message += $localize`Take the branch path from <b>${fromNodeTitle}</b> to <b>${toNodeTitle}</b>`;
-      } else if (name === 'wroteXNumberOfWords') {
-        const nodeId = params.nodeId;
-        if (nodeId != null) {
-          const requiredNumberOfWords = params.requiredNumberOfWords;
-          const nodeTitle = this.getNodePositionAndTitle(nodeId);
-          message += $localize`Write <b>${requiredNumberOfWords}</b> words on <b>${nodeTitle}</b>`;
-        }
-      } else if (name === 'isVisible') {
-        const nodeId = params.nodeId;
-        if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitle(nodeId);
-          message += $localize`"${nodeTitle}" is visible`;
-        }
-      } else if (name === 'isVisitable') {
-        const nodeId = params.nodeId;
-        if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitle(nodeId);
-          message += $localize`"${nodeTitle}" is visitable`;
-        }
-      } else if (name === 'addXNumberOfNotesOnThisStep') {
-        const nodeId = params.nodeId;
-        const requiredNumberOfNotes = params.requiredNumberOfNotes;
-        const nodeTitle = this.getNodePositionAndTitle(nodeId);
-        if (requiredNumberOfNotes == 1) {
-          message += $localize`Add <b>${requiredNumberOfNotes}</b> note on <b>${nodeTitle}</b>`;
-        } else {
-          message += $localize`Add <b>${requiredNumberOfNotes}</b> notes on <b>${nodeTitle}</b>`;
-        }
-      } else if (name === 'fillXNumberOfRows') {
-        const requiredNumberOfFilledRows = params.requiredNumberOfFilledRows;
-        const nodeId = params.nodeId;
-        const nodeTitle = this.getNodePositionAndTitle(nodeId);
-        if (requiredNumberOfFilledRows == 1) {
-          message += $localize`You must fill in <b>${requiredNumberOfFilledRows}</b> row in the <b>Table</b> on <b>${nodeTitle}</b>`;
-        } else {
-          message += $localize`You must fill in <b>${requiredNumberOfFilledRows}</b> rows in the <b>Table</b> on <b>${nodeTitle}</b>`;
-        }
-      } else if (name === 'teacherRemoval') {
-        message += $localize`Wait for your teacher to unlock the item`;
-      }
-    }
-    return message;
-  }
-
-  /**
    * Get the choices of a Multiple Choice component.
    * @param nodeId The node id.
    * @param componentId The component id.
@@ -1417,9 +1298,7 @@ export class ProjectService {
     return componentService.componentHasWork(component);
   }
 
-  calculateComponentIdToHasWork(
-    components: ComponentContent[]
-  ): {
+  calculateComponentIdToHasWork(components: ComponentContent[]): {
     [componentId: string]: boolean;
   } {
     const componentIdToHasWork: { [componentId: string]: boolean } = {};

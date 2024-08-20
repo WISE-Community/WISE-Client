@@ -398,21 +398,6 @@ export class TeacherProjectService extends ProjectService {
     return numRubrics;
   }
 
-  deleteTransition(node, transition) {
-    const nodeTransitions = node.transitionLogic.transitions;
-    const index = nodeTransitions.indexOf(transition);
-    if (index > -1) {
-      nodeTransitions.splice(index, 1);
-    }
-    if (nodeTransitions.length <= 1) {
-      // these settings only apply when there are multiple transitions
-      node.transitionLogic.howToChooseAmongAvailablePaths = null;
-      node.transitionLogic.whenToChoosePath = null;
-      node.transitionLogic.canChangePath = null;
-      node.transitionLogic.maxPathsVisitable = null;
-    }
-  }
-
   getBackgroundColor(nodeId: string): string {
     const branchPathLetter = this.nodeIdToBranchPathLetter[nodeId];
     if (branchPathLetter != null) {
@@ -656,42 +641,6 @@ export class TeacherProjectService extends ProjectService {
     }
   }
 
-  addNodeToGroup(node, group) {
-    if (this.isGroupHasNode(group)) {
-      this.insertAfterLastNode(node, group);
-    } else {
-      this.insertAsFirstNode(node, group);
-    }
-  }
-
-  isGroupHasNode(group) {
-    return group.ids.length != 0;
-  }
-
-  getLastNodeInGroup(group) {
-    const lastNodeId = group.ids[group.ids.length - 1];
-    return this.idToNode[lastNodeId];
-  }
-
-  insertAsFirstNode(node, group) {
-    this.insertNodeInsideOnlyUpdateTransitions(node.id, group.id);
-    this.insertNodeInsideInGroups(node.id, group.id);
-  }
-
-  insertAfterLastNode(node, group) {
-    const lastNode = this.getLastNodeInGroup(group);
-    this.insertNodeAfterInTransitions(node, lastNode.id);
-    this.insertNodeAfterInGroups(node.id, lastNode.id);
-  }
-
-  createNodeAndAddToLocalStorage(nodeTitle) {
-    const node = this.createNode(nodeTitle);
-    this.setIdToNode(node.id, node);
-    this.addNode(node);
-    this.applicationNodes.push(node);
-    return node;
-  }
-
   getAutomatedAssessmentProjectId(): number {
     return this.configService.getConfigParam('automatedAssessmentProjectId') || -1;
   }
@@ -725,68 +674,6 @@ export class TeacherProjectService extends ProjectService {
 
   refreshProject() {
     this.refreshProjectSource.next();
-  }
-
-  nodeHasConstraint(nodeId: string): boolean {
-    const constraints = this.getConstraintsOnNode(nodeId);
-    return constraints.length > 0;
-  }
-
-  getConstraintsOnNode(nodeId: string): any {
-    const node = this.getNodeById(nodeId);
-    return node.constraints ?? [];
-  }
-
-  /**
-   * Get the human readable description of the constraint.
-   * @param constraint The constraint object.
-   * @returns A human readable text string that describes the constraint.
-   * example
-   * 'All steps after this one will not be visitable until the student completes
-   * "3.7 Revise Your Bowls Explanation"'
-   */
-  getConstraintDescription(constraint: any): string {
-    let message = '';
-    for (const singleRemovalCriteria of constraint.removalCriteria) {
-      if (message != '') {
-        // this constraint has multiple removal criteria
-        if (constraint.removalConditional === 'any') {
-          message += ' or ';
-        } else if (constraint.removalConditional === 'all') {
-          message += ' and ';
-        }
-      }
-      message += this.getCriteriaMessage(singleRemovalCriteria);
-    }
-    return this.getActionMessage(constraint.action) + message;
-  }
-
-  /**
-   * Get the constraint action as human readable text.
-   * @param action A constraint action.
-   * @return A human readable text string that describes the action
-   * example
-   * 'All steps after this one will not be visitable until '
-   */
-  private getActionMessage(action: string): string {
-    if (action === 'makeAllNodesAfterThisNotVisitable') {
-      return $localize`All steps after this one will not be visitable until `;
-    }
-    if (action === 'makeAllNodesAfterThisNotVisible') {
-      return $localize`All steps after this one will not be visible until `;
-    }
-    if (action === 'makeAllOtherNodesNotVisitable') {
-      return $localize`All other steps will not be visitable until `;
-    }
-    if (action === 'makeAllOtherNodesNotVisible') {
-      return $localize`All other steps will not be visible until `;
-    }
-    if (action === 'makeThisNodeNotVisitable') {
-      return $localize`This step will not be visitable until `;
-    }
-    if (action === 'makeThisNodeNotVisible') {
-      return $localize`This step will not be visible until `;
-    }
   }
 
   addTeacherRemovalConstraint(node: any, periodId: number) {
@@ -1835,38 +1722,6 @@ export class TeacherProjectService extends ProjectService {
         node.components.push(component);
       }
     }
-  }
-
-  /**
-   * TODO: Deprecated, should be removed; replaced by getMaxScoreForWorkgroupId in
-   * ClassroomStatusService
-   * Get the max score for the project. If the project contains branches, we
-   * will only calculate the max score for a single path from the first node
-   * to the last node in the project.
-   * @returns the max score for the project or null if none of the components in the project
-   * has max scores.
-   */
-  getMaxScore() {
-    let maxScore = null;
-    const startNodeId = this.getStartNodeId();
-
-    // get all the paths in the project
-    const allPaths = this.getAllPaths([], startNodeId);
-
-    if (allPaths != null && allPaths.length > -1) {
-      const firstPath = allPaths[0];
-      for (let nodeId of firstPath) {
-        const nodeMaxScore = this.getMaxScoreForNode(nodeId);
-        if (nodeMaxScore != null) {
-          if (maxScore == null) {
-            maxScore = nodeMaxScore;
-          } else {
-            maxScore += nodeMaxScore;
-          }
-        }
-      }
-    }
-    return maxScore;
   }
 
   hasGroupStartId(nodeId) {

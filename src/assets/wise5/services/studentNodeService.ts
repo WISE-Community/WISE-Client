@@ -66,7 +66,7 @@ export class StudentNodeService extends NodeService {
    */
   private getConstraintMessage(constraint: Constraint): string {
     return constraint.removalCriteria
-      .map((criterion) => this.projectService.getCriteriaMessage(criterion))
+      .map((criterion) => this.constraintService.getCriteriaMessage(criterion))
       .filter((message) => message != '')
       .join('<br/>');
   }
@@ -82,9 +82,8 @@ export class StudentNodeService extends NodeService {
     return new Promise((resolve, reject) => {
       const currentNodeId = currentId ?? this.DataService.getCurrentNodeId();
       const transitionLogic = this.ProjectService.getTransitionLogicByFromNodeId(currentNodeId);
-      const branchPathTakenEvents = this.DataService.getBranchPathTakenEventsByNodeId(
-        currentNodeId
-      );
+      const branchPathTakenEvents =
+        this.DataService.getBranchPathTakenEventsByNodeId(currentNodeId);
       if (this.hasPreviouslyBranchedAndCannotChange(branchPathTakenEvents, transitionLogic)) {
         resolve(branchPathTakenEvents.at(-1).data.toNodeId);
       } else {
@@ -114,9 +113,8 @@ export class StudentNodeService extends NodeService {
   private getNextNodeIdFromParent(resolve: any, currentNodeId: string): void {
     const parentGroupId = this.ProjectService.getParentGroupId(currentNodeId);
     if (parentGroupId != null) {
-      const parentTransitionLogic = this.ProjectService.getTransitionLogicByFromNodeId(
-        parentGroupId
-      );
+      const parentTransitionLogic =
+        this.ProjectService.getTransitionLogicByFromNodeId(parentGroupId);
       this.chooseTransition(parentGroupId, parentTransitionLogic).then((transition: any) => {
         const transitionToNodeId = transition.to;
         const startId = this.ProjectService.isGroupNode(transitionToNodeId)
