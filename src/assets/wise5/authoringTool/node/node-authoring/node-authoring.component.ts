@@ -212,7 +212,7 @@ export class NodeAuthoringComponent implements OnInit {
 
   private checkIfNeedToShowNodeSaveOrNodeSubmitButtons(): void {
     if (!this.projectService.doesAnyComponentInNodeShowSubmitButton(this.nodeId)) {
-      if (this.projectService.doesAnyComponentHaveWork(this.nodeId)) {
+      if (this.hasComponentsWithWork()) {
         this.nodeJson.showSaveButton = true;
         this.nodeJson.showSubmitButton = false;
         this.hideAllComponentSaveButtons();
@@ -221,6 +221,12 @@ export class NodeAuthoringComponent implements OnInit {
         this.nodeJson.showSubmitButton = false;
       }
     }
+  }
+
+  private hasComponentsWithWork(): boolean {
+    return this.node.components.some((component) =>
+      this.componentServiceLookupService.getService(component.type).componentHasWork(component)
+    );
   }
 
   /**

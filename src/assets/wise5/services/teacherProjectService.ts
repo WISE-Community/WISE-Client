@@ -1624,22 +1624,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Returns true iff any component in the step generates work
-   * @param nodeId the node id
-   * @return whether any components in the step generates work
-   */
-  doesAnyComponentHaveWork(nodeId) {
-    const node = this.getNodeById(nodeId);
-    for (const component of node.components) {
-      const service = this.componentServiceLookupService.getService(component.type);
-      if (service != null && service.componentHasWork(component)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
    * Check if any of the components in the node are showing their submit button.
    * @param nodeId {string} The node id to check.
    * @return {boolean} Whether any of the components in the node show their submit button.
