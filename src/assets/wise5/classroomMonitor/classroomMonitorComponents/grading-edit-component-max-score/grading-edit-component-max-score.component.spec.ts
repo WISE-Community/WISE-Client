@@ -6,29 +6,35 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { CopyNodesService } from '../../../services/copyNodesService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { Node } from '../../../common/Node';
 
 let component: GradingEditComponentMaxScoreComponent;
 let fixture: ComponentFixture<GradingEditComponentMaxScoreComponent>;
 let saveProjectSpy;
-let setMaxScoreForComponentSpy;
+let getNodeSpy;
 let projectService: TeacherProjectService;
 
 describe('GradingEditComponentMaxScoreComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [GradingEditComponentMaxScoreComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [StudentTeacherCommonServicesModule],
-    providers: [CopyNodesService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      declarations: [GradingEditComponentMaxScoreComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [StudentTeacherCommonServicesModule],
+      providers: [
+        CopyNodesService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
     projectService = TestBed.inject(TeacherProjectService);
     fixture = TestBed.createComponent(GradingEditComponentMaxScoreComponent);
     component = fixture.componentInstance;
+    component.componentId = 'c1';
     saveProjectSpy = spyOn(projectService, 'saveProject').and.callFake(() => new Promise(() => {}));
-    setMaxScoreForComponentSpy = spyOn(
-      projectService,
-      'setMaxScoreForComponent'
-    ).and.callFake(() => {});
+    const node = new Node();
+    node.components = [{ id: 'c1' }];
+    getNodeSpy = spyOn(projectService, 'getNode').and.returnValue(node);
   });
   saveMaxScore();
 });
@@ -48,13 +54,13 @@ function saveMaxScore() {
 
 function shouldSave(maxScore: number) {
   setMaxScoreAndSave(maxScore);
-  expect(setMaxScoreForComponentSpy).toHaveBeenCalled();
+  expect(getNodeSpy).toHaveBeenCalled();
   expect(saveProjectSpy).toHaveBeenCalled();
 }
 
 function shouldNotSave(maxScore: number) {
   setMaxScoreAndSave(maxScore);
-  expect(setMaxScoreForComponentSpy).not.toHaveBeenCalled();
+  expect(getNodeSpy).not.toHaveBeenCalled();
   expect(saveProjectSpy).not.toHaveBeenCalled();
 }
 

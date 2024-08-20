@@ -5,9 +5,14 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
   selector: 'grading-edit-component-max-score',
-  styles: [`
-/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
-.mat-form-field-infix { width: inherit; }`],
+  styles: [
+    `
+      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+      .mat-form-field-infix {
+        width: inherit;
+      }
+    `
+  ],
   templateUrl: 'grading-edit-component-max-score.component.html',
   encapsulation: ViewEncapsulation.None
 })
@@ -37,7 +42,7 @@ export class GradingEditComponentMaxScoreComponent {
   saveMaxScore(): void {
     const maxScore = Number(this.maxScore);
     if (maxScore >= 0) {
-      this.projectService.setMaxScoreForComponent(this.nodeId, this.componentId, maxScore);
+      this.projectService.getNode(this.nodeId).getComponent(this.componentId).maxScore = maxScore;
       this.projectService.saveProject();
       this.maxScore = this.maxScore || 0;
     }

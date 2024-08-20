@@ -50,7 +50,6 @@ describe('TeacherProjectService', () => {
     service.applicationNodes = [];
   });
   registerNewProject();
-  isNodeIdUsed();
   isNodeIdToInsertTargetNotSpecified();
   testGetNodeIdAfter();
   testCreateNodeAfter();
@@ -127,25 +126,6 @@ function registerNewProject() {
       newProjectIdActual.then((result) => {
         expect(result).toEqual(newProjectIdExpected);
       });
-    });
-  });
-}
-
-function isNodeIdUsed() {
-  describe('isNodeIdUsed', () => {
-    beforeEach(() => {
-      service.setProject(demoProjectJSON);
-    });
-    it('should find used node id in active nodes', () => {
-      expect(service.isNodeIdUsed('node1')).toEqual(true);
-    });
-
-    it('should find used node id in inactive nodes', () => {
-      expect(service.isNodeIdUsed('node789')).toEqual(true);
-    });
-
-    it('should not find used node id in active or inactive nodes', () => {
-      expect(service.isNodeIdUsed('nodedoesnotexist')).toEqual(false);
     });
   });
 }

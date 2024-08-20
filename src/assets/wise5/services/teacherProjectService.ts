@@ -208,20 +208,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Check if a node id is already being used in the project
-   * @param nodeId check if this node id is already being used in the project
-   * @return whether the node id is already being used in the project
-   */
-  isNodeIdUsed(nodeId) {
-    for (const node of this.getNodes().concat(this.getInactiveNodes())) {
-      if (node.id === nodeId) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
    * Set a field in the transition logic of a node
    */
   setTransitionLogicField(nodeId, field, value) {
@@ -1735,13 +1721,6 @@ export class TeacherProjectService extends ProjectService {
          */
         node.components.push(component);
       }
-    }
-  }
-
-  setMaxScoreForComponent(nodeId: string, componentId: string, maxScore: number): void {
-    const component = this.getComponent(nodeId, componentId);
-    if (component != null) {
-      component.maxScore = maxScore;
     }
   }
 
