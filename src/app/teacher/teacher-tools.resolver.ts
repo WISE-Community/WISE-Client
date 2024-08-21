@@ -9,7 +9,6 @@ import { NotificationService } from '../../assets/wise5/services/notificationSer
 import { TeacherWebSocketService } from '../../assets/wise5/services/teacherWebSocketService';
 import { NotebookService } from '../../assets/wise5/services/notebookService';
 import { AchievementService } from '../../assets/wise5/services/achievementService';
-import { RunStatus } from '../../assets/wise5/common/RunStatus';
 import { RunStatusService } from '../../assets/wise5/services/runStatusService';
 
 export const TeacherToolsResolver: ResolveFn<any> = (

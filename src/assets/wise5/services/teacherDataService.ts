@@ -589,7 +589,7 @@ export class TeacherDataService extends DataService {
     return this.periods;
   }
 
-  setPeriods(periods: any[]) {
+  setPeriods(periods: any[]): void {
     this.periods = periods;
   }
 

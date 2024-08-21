@@ -14,10 +14,6 @@ export class RunStatusService {
     private dataService: TeacherDataService,
     private http: HttpClient
   ) {
-    this.subscribeToEvents();
-  }
-
-  subscribeToEvents(): void {
     this.configService.configRetrieved$.subscribe(() => {
       if (this.configService.isClassroomMonitor()) {
         this.retrieveRunStatus();
@@ -25,7 +21,7 @@ export class RunStatusService {
     });
   }
 
-  retrieveRunStatus(): Observable<any> {
+  retrieveRunStatus(): Observable<RunStatus> {
     const options = {
       params: new HttpParams().set('runId', this.configService.getConfigParam('runId')),
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
