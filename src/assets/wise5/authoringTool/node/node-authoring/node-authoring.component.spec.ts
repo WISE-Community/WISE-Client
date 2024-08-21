@@ -32,6 +32,7 @@ import { TranslatableInputComponent } from '../../components/translatable-input/
 import { CopyTranslationsService } from '../../../services/copyTranslationsService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CreateComponentService } from '../../../services/createComponentService';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -68,6 +69,7 @@ describe('NodeAuthoringComponent', () => {
       ],
       providers: [
         ClassroomStatusService,
+        CreateComponentService,
         CopyTranslationsService,
         DeleteTranslationsService,
         TeacherProjectTranslationService,

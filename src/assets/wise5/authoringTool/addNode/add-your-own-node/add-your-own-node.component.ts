@@ -9,6 +9,7 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { ComponentTypeService } from '../../../services/componentTypeService';
+import { CreateComponentService } from '../../../services/createComponentService';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { CommonModule } from '@angular/common';
@@ -52,6 +53,7 @@ export class AddYourOwnNodeComponent {
 
   constructor(
     private componentTypeService: ComponentTypeService,
+    private createComponentService: CreateComponentService,
     private fb: FormBuilder,
     private projectService: TeacherProjectService,
     private route: ActivatedRoute,
@@ -97,7 +99,7 @@ export class AddYourOwnNodeComponent {
   private addInitialComponents(nodeId: string, components: any[]): void {
     components
       .reverse()
-      .forEach((component) => this.projectService.createComponent(nodeId, component.type));
+      .forEach((component) => this.createComponentService.create(nodeId, component.type));
   }
 
   private save(): any {

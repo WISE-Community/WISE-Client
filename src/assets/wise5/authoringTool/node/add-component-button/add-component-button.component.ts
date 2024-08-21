@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CreateComponentService } from '../../../services/createComponentService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MatDialog } from '@angular/material/dialog';
 import { ChooseNewComponent } from '../../../../../app/authoring-tool/add-component/choose-new-component/choose-new-component.component';
@@ -21,6 +22,7 @@ export class AddComponentButtonComponent {
   @Output() newComponentsEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
+    private createComponentService: CreateComponentService,
     private dialog: MatDialog,
     private projectService: TeacherProjectService,
     private route: ActivatedRoute,
@@ -44,7 +46,7 @@ export class AddComponentButtonComponent {
             }
           });
         } else {
-          const component = this.projectService.createComponent(
+          const component = this.createComponentService.create(
             this.node.id,
             componentType,
             this.insertAfterComponentId
