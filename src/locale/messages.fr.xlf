@@ -10980,7 +10980,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">88</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.ts</context>
@@ -11012,7 +11012,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">151</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
@@ -11028,7 +11028,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">152</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
@@ -14650,7 +14650,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Classroom Monitor</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <target state="needs-translation">Classroom Monitor</target>
       </trans-unit>
@@ -14658,7 +14658,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Grade by Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">95</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.ts</context>
@@ -14670,7 +14670,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Grade by Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">108</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.ts</context>
@@ -14682,7 +14682,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Manage Students</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.ts</context>
@@ -14694,7 +14694,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Student Notebooks</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">122</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.ts</context>
@@ -14706,7 +14706,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Data Export</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">129</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.ts</context>
@@ -14718,7 +14718,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Error: Data is not being saved! Check your internet connection.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
-          <context context-type="linenumber">192</context>
+          <context context-type="linenumber">194</context>
         </context-group>
         <target state="needs-translation">Error: Data is not being saved! Check your internet connection.</target>
       </trans-unit>
@@ -15775,8 +15775,8 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">96</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/teacherDataService.ts</context>
-          <context context-type="linenumber">577</context>
+          <context context-type="sourcefile">src/assets/wise5/services/runStatusService.ts</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <target state="needs-translation">All Periods</target>
       </trans-unit>
@@ -24020,19 +24020,19 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="needs-translation">Error: Failed to import work.</target>
       </trans-unit>
-      <trans-unit id="e0a9d4bf9fa677b18e0c334249274957d3ee7fab" datatype="html">
+      <trans-unit id="95d52dbba6e41e91cac9ad8ab8a49a15fc502c6a" datatype="html">
         <source> Previous step </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/node-navigation/node-navigation.component.html</context>
-          <context context-type="linenumber">8,10</context>
+          <context context-type="linenumber">3,5</context>
         </context-group>
         <target state="needs-translation"> Previous step </target>
       </trans-unit>
-      <trans-unit id="96247ff61a36a0a5c6d3d28c5e0df0391df45a0e" datatype="html">
+      <trans-unit id="ecd0eb64543f4002e3e0f212a9e3be7e8be48546" datatype="html">
         <source> Next step </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/node-navigation/node-navigation.component.html</context>
-          <context context-type="linenumber">18,20</context>
+          <context context-type="linenumber">9,11</context>
         </context-group>
         <target state="needs-translation"> Next step </target>
       </trans-unit>
