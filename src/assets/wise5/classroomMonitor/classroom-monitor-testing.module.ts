@@ -13,6 +13,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MilestoneReportService } from '../services/milestoneReportService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TeacherPauseScreenService } from '../services/teacherPauseScreenService';
+import { RunStatusService } from '../services/runStatusService';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { TeacherPauseScreenService } from '../services/teacherPauseScreenService
     TeacherPeerGroupService,
     TeacherProjectService,
     TeacherWebSocketService,
+    RunStatusService,
     provideHttpClient(withInterceptorsFromDi()),
     provideHttpClientTesting()
   ]

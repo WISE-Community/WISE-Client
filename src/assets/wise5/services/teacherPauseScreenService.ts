@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { TeacherDataService } from './teacherDataService';
 import { TeacherWebSocketService } from './teacherWebSocketService';
+import { RunStatusService } from './runStatusService';
 
 @Injectable()
 export class TeacherPauseScreenService {
   constructor(
     private dataService: TeacherDataService,
+    private runStatusService: RunStatusService,
     private webSocketService: TeacherWebSocketService
   ) {}
 
@@ -28,7 +30,7 @@ export class TeacherPauseScreenService {
   }
 
   private saveRunStatusThenHandlePauseScreen(periodId: number, isPaused: boolean): void {
-    this.dataService.saveRunStatus().subscribe(() => {
+    this.runStatusService.saveRunStatus().subscribe(() => {
       if (isPaused) {
         this.webSocketService.pauseScreens(periodId);
       } else {
@@ -43,8 +45,8 @@ export class TeacherPauseScreenService {
    * @param isPaused whether the period is paused or not
    */
   private updatePausedRunStatusValue(periodId: number, isPaused: boolean): void {
-    if (this.dataService.getRunStatus() == null) {
-      this.dataService.setRunStatus(this.dataService.createRunStatus());
+    if (this.runStatusService.getRunStatus() == null) {
+      this.runStatusService.setRunStatus(this.runStatusService.createRunStatus());
     }
     if (periodId === -1) {
       this.updateAllPeriodsPausedValue(isPaused);
@@ -54,13 +56,13 @@ export class TeacherPauseScreenService {
   }
 
   private updateAllPeriodsPausedValue(isPaused: boolean): void {
-    for (const period of this.dataService.getRunStatus().periods) {
+    for (const period of this.runStatusService.getRunStatus().periods) {
       period.paused = isPaused;
     }
   }
 
   private updatePeriodPausedValue(periodId: number, isPaused: boolean): void {
-    for (const period of this.dataService.getRunStatus().periods) {
+    for (const period of this.runStatusService.getRunStatus().periods) {
       if (period.periodId === periodId) {
         period.paused = isPaused;
       }
