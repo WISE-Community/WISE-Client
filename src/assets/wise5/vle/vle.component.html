@@ -41,7 +41,7 @@
     class="vle-content tabbed"
     [ngClass]="{ 'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node' }"
   >
-    <group-tabs></group-tabs>
+    <group-tabs />
     <div class="tab-content">
       <run-ended-and-locked-message *ngIf="runEndedAndLocked" />
       @if (layoutState === 'node') {
