@@ -45,10 +45,10 @@
     <div class="tab-content">
       <run-ended-and-locked-message *ngIf="runEndedAndLocked" />
       @if (layoutState === 'node') {
-        <node class="node-tabbed top" />
+        <node class="node-tabbed top" [node]="currentNode" />
       }
       <div class="node-nav">
-        <node-navigation class="l-constrained"></node-navigation>
+        <node-navigation class="l-constrained" />
       </div>
     </div>
   </div>

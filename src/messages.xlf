@@ -21499,18 +21499,18 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="e0a9d4bf9fa677b18e0c334249274957d3ee7fab" datatype="html">
+      <trans-unit id="95d52dbba6e41e91cac9ad8ab8a49a15fc502c6a" datatype="html">
         <source> Previous step </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/node-navigation/node-navigation.component.html</context>
-          <context context-type="linenumber">8,10</context>
+          <context context-type="linenumber">3,5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="96247ff61a36a0a5c6d3d28c5e0df0391df45a0e" datatype="html">
+      <trans-unit id="ecd0eb64543f4002e3e0f212a9e3be7e8be48546" datatype="html">
         <source> Next step </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/node-navigation/node-navigation.component.html</context>
-          <context context-type="linenumber">18,20</context>
+          <context context-type="linenumber">9,11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="866753876041645935" datatype="html">
