@@ -1466,25 +1466,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Remove the node from the inactive nodes array
-   * @param nodeId the node to remove from the inactive nodes array
-   */
-  removeNodeIdFromInactiveNodes(nodeId) {
-    const inactiveNodes = this.project.inactiveNodes;
-    if (inactiveNodes != null) {
-      for (let i = 0; i < inactiveNodes.length; i++) {
-        const inactiveNode = inactiveNodes[i];
-        if (inactiveNode != null) {
-          const inactiveNodeId = inactiveNode.id;
-          if (inactiveNodeId === nodeId) {
-            inactiveNodes.splice(i, 1);
-          }
-        }
-      }
-    }
-  }
-
-  /**
    * Create a new component
    * @param nodeId the node id to create the component in
    * @param componentType the component type
