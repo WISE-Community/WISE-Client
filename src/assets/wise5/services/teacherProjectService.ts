@@ -1165,50 +1165,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Remove the node from the inactive nodes array
-   * @param nodeId the node to remove from the inactive nodes array
-   */
-  removeNodeIdFromInactiveNodes(nodeId) {
-    const inactiveNodes = this.project.inactiveNodes;
-    if (inactiveNodes != null) {
-      for (let i = 0; i < inactiveNodes.length; i++) {
-        const inactiveNode = inactiveNodes[i];
-        if (inactiveNode != null) {
-          const inactiveNodeId = inactiveNode.id;
-          if (inactiveNodeId === nodeId) {
-            inactiveNodes.splice(i, 1);
-          }
-        }
-      }
-    }
-  }
-
-  /**
-   * Create a new component
-   * @param nodeId the node id to create the component in
-   * @param componentType the component type
-   * @param insertAfterComponentId Insert the new compnent after the given
-   * component id. If this argument is null, we will place the new component
-   * in the first position.
-   */
-  createComponent(nodeId, componentType, insertAfterComponentId = null) {
-    const node = this.getNodeById(nodeId);
-    const service = this.componentServiceLookupService.getService(componentType);
-    const component = service.createComponent();
-    if (service.componentHasWork(component)) {
-      if (node.showSaveButton == false) {
-        if (this.doesAnyComponentInNodeShowSubmitButton(node.id)) {
-          component.showSaveButton = true;
-        } else {
-          node.showSaveButton = true;
-        }
-      }
-    }
-    this.addComponentToNode(node, component, insertAfterComponentId);
-    return component;
-  }
-
-  /**
    * Check if any of the components in the node are showing their submit button.
    * @param nodeId {string} The node id to check.
    * @return {boolean} Whether any of the components in the node show their submit button.
@@ -1245,52 +1201,6 @@ export class TeacherProjectService extends ProjectService {
       }
     }
     return -1;
-  }
-
-  /**
-   * Add the component to the node
-   * @param node the node
-   * @param component the component
-   * @param insertAfterComponentId Insert the component after this given
-   * component id. If this argument is null, we will place the new component
-   * in the first position.
-   */
-  addComponentToNode(node, component, insertAfterComponentId) {
-    if (insertAfterComponentId == null) {
-      node.components.splice(0, 0, component);
-    } else {
-      // place the new component after the insertAfterComponentId
-
-      // boolean flag for whether we have added the component yet
-      let added = false;
-
-      const components = node.components;
-      for (let c = 0; c < components.length; c++) {
-        const tempComponent = components[c];
-        if (
-          tempComponent != null &&
-          tempComponent.id != null &&
-          tempComponent.id == insertAfterComponentId
-        ) {
-          /*
-           * we have found the component we want to add the new
-           * one after
-           */
-
-          components.splice(c + 1, 0, component);
-          added = true;
-          break;
-        }
-      }
-
-      if (!added) {
-        /*
-         * the component has not been added yet so we will just add
-         * it at the end
-         */
-        node.components.push(component);
-      }
-    }
   }
 
   /**

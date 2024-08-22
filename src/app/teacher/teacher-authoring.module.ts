@@ -35,6 +35,7 @@ import { ComponentInfoService } from '../../assets/wise5/services/componentInfoS
 import { TeacherProjectTranslationService } from '../../assets/wise5/services/teacherProjectTranslationService';
 import { DeleteTranslationsService } from '../../assets/wise5/services/deleteTranslationsService';
 import { CopyTranslationsService } from '../../assets/wise5/services/copyTranslationsService';
+import { CreateComponentService } from '../../assets/wise5/services/createComponentService';
 import { NotifyAuthorService } from '../../assets/wise5/services/notifyAuthorService';
 import { RemoveNodeIdFromTransitionsService } from '../../assets/wise5/services/removeNodeIdFromTransitionsService';
 
@@ -46,6 +47,7 @@ import { RemoveNodeIdFromTransitionsService } from '../../assets/wise5/services/
     CopyNodesService,
     CopyProjectService,
     CopyTranslationsService,
+    CreateComponentService,
     DataExportService,
     { provide: DataService, useExisting: TeacherDataService },
     TeacherProjectTranslationService,
