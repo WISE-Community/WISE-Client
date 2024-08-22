@@ -18957,46 +18957,46 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Are you sure you want to overwrite the current line data?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">231</context>
+          <context context-type="linenumber">237</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6882380861047606832" datatype="html">
         <source>The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">846</context>
+          <context context-type="linenumber">852</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2852989551014711458" datatype="html">
         <source>You can not edit this series. Please choose a series that can be edited.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">860</context>
+          <context context-type="linenumber">866</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7053114367342967943" datatype="html">
         <source>Are you sure you want to reset the series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1093</context>
+          <context context-type="linenumber">1099</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7889560203726829643" datatype="html">
         <source>Are you sure you want to reset the &quot;<x id="PH" equiv-text="seriesName"/>&quot; series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1095</context>
+          <context context-type="linenumber">1101</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6999515396807067782" datatype="html">
         <source>Trial</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1593</context>
+          <context context-type="linenumber">1518</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">2417</context>
+          <context context-type="linenumber">2350</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7500488806315952979" datatype="html">

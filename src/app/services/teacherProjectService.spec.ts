@@ -9,6 +9,7 @@ import { StudentTeacherCommonServicesModule } from '../student-teacher-common-se
 import { copy } from '../../assets/wise5/common/object/object';
 import { DeleteNodeService } from '../../assets/wise5/services/deleteNodeService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { RemoveNodeIdFromTransitionsService } from '../../assets/wise5/services/removeNodeIdFromTransitionsService';
 let service: TeacherProjectService;
 let configService: ConfigService;
 let deleteNodeService: DeleteNodeService;
@@ -31,6 +32,7 @@ describe('TeacherProjectService', () => {
       imports: [StudentTeacherCommonServicesModule],
       providers: [
         DeleteNodeService,
+        RemoveNodeIdFromTransitionsService,
         TeacherProjectService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
@@ -62,7 +64,6 @@ describe('TeacherProjectService', () => {
   shouldNotAddSpaceIfItDoesExist();
   shouldAddSpaceIfItDoesntExist();
   shouldRemoveSpaces();
-  shouldRemoveTransitionsGoingOutOfGroupInChildNodesOfGroup();
   removeNodeFromGroup();
   insertNodeAfterInTransitions();
   shouldNotBeAbleToInsertANodeAfterAnotherNodeWhenTheyAreDifferentTypes();
@@ -312,17 +313,6 @@ function shouldRemoveSpaces() {
       service.removeSpace('sharePictures');
       expect(spaces.length).toEqual(0);
     });
-  });
-}
-
-function shouldRemoveTransitionsGoingOutOfGroupInChildNodesOfGroup() {
-  it('should remove transitions going out of group in child nodes of group', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getTransitionsByFromNodeId('node18').length).toEqual(1);
-    expect(service.getTransitionsByFromNodeId('node19').length).toEqual(1);
-    service.removeTransitionsOutOfGroup('group1');
-    expect(service.getTransitionsByFromNodeId('node18').length).toEqual(1);
-    expect(service.getTransitionsByFromNodeId('node19').length).toEqual(0);
   });
 }
 
