@@ -6,6 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { MoveNodesService } from '../../../services/moveNodesService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { RemoveNodeIdFromTransitionsService } from '../../../services/removeNodeIdFromTransitionsService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: ChooseMoveNodeLocationComponent;
@@ -13,11 +14,17 @@ let fixture: ComponentFixture<ChooseMoveNodeLocationComponent>;
 describe('ChooseMoveNodeLocationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [ChooseMoveNodeLocationComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [RouterTestingModule, StudentTeacherCommonServicesModule],
-    providers: [MoveNodesService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      declarations: [ChooseMoveNodeLocationComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [RouterTestingModule, StudentTeacherCommonServicesModule],
+      providers: [
+        MoveNodesService,
+        RemoveNodeIdFromTransitionsService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
     window.history.pushState(
       {
         selectedNodeIds: ['node1']

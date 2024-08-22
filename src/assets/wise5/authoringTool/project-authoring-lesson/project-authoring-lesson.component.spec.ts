@@ -22,6 +22,7 @@ import { DeleteTranslationsService } from '../../services/deleteTranslationsServ
 import { provideRouter } from '@angular/router';
 import { CopyTranslationsService } from '../../services/copyTranslationsService';
 import { TeacherProjectTranslationService } from '../../services/teacherProjectTranslationService';
+import { RemoveNodeIdFromTransitionsService } from '../../services/removeNodeIdFromTransitionsService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: ProjectAuthoringLessonComponent;
@@ -56,6 +57,7 @@ describe('ProjectAuthoringLessonComponent', () => {
         DeleteNodeService,
         DeleteTranslationsService,
         provideRouter([]),
+        RemoveNodeIdFromTransitionsService,
         TeacherDataService,
         TeacherProjectService,
         TeacherProjectTranslationService,
