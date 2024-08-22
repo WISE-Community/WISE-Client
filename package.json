@@ -34,7 +34,7 @@
     "@stomp/rx-stomp": "^1.1.4",
     "@stomp/stompjs": "^5.4.4",
     "@tinymce/tinymce-angular": "^7.0.0",
-    "@wise-community/drawing-tool": "^2.3.0-pre.1",
+    "@wise-community/drawing-tool": "^2.3.2",
     "@zxcvbn-ts/core": "^3.0.4",
     "@zxcvbn-ts/language-en": "^3.0.2",
     "@wise-community/angular-password-strength-meter": "^12.0.4",

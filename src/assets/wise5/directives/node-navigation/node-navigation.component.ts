@@ -2,27 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NodeService } from '../../services/nodeService';
 import { StudentDataService } from '../../services/studentDataService';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  imports: [CommonModule, FlexLayoutModule, MatButtonModule],
   selector: 'node-navigation',
+  standalone: true,
   templateUrl: './node-navigation.component.html'
 })
 export class NodeNavigationComponent implements OnInit {
-  hasNextNode: boolean;
-  hasPrevNode: boolean;
+  protected hasNextNode: boolean;
+  protected hasPrevNode: boolean;
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private nodeService: NodeService, private studentDataService: StudentDataService) {}
+  constructor(
+    private dataService: StudentDataService,
+    private nodeService: NodeService
+  ) {}
 
   ngOnInit(): void {
     this.checkPreviousAndNextNodes();
     this.subscriptions.add(
-      this.studentDataService.currentNodeChanged$.subscribe(() => {
+      this.dataService.currentNodeChanged$.subscribe(() => {
         this.checkPreviousAndNextNodes();
       })
     );
     this.subscriptions.add(
-      this.studentDataService.nodeStatusesChanged$.subscribe(() => {
+      this.dataService.nodeStatusesChanged$.subscribe(() => {
         this.checkPreviousAndNextNodes();
       })
     );
@@ -36,11 +44,11 @@ export class NodeNavigationComponent implements OnInit {
     });
   }
 
-  goToPrevNode(): void {
+  protected goToPrevNode(): void {
     this.nodeService.goToPrevNode();
   }
 
-  goToNextNode(): void {
+  protected goToNextNode(): void {
     this.nodeService.goToNextNode();
   }
 }

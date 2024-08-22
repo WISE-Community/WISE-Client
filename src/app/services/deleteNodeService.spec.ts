@@ -7,6 +7,7 @@ import { TeacherProjectService } from '../../assets/wise5/services/teacherProjec
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { RemoveNodeIdFromTransitionsService } from '../../assets/wise5/services/removeNodeIdFromTransitionsService';
 
 let demoProjectJSON: any;
 let projectService: TeacherProjectService;
@@ -15,9 +16,16 @@ let service: DeleteNodeService;
 describe('DeleteNodeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [StudentTeacherCommonServicesModule],
-    providers: [CopyNodesService, DeleteNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [StudentTeacherCommonServicesModule],
+      providers: [
+        CopyNodesService,
+        DeleteNodeService,
+        RemoveNodeIdFromTransitionsService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
     demoProjectJSON = copy(demoProjectJSON_import);
     projectService = TestBed.inject(TeacherProjectService);
     service = TestBed.inject(DeleteNodeService);

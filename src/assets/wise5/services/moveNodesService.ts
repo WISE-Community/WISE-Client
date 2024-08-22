@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { TeacherProjectService } from './teacherProjectService';
+import { RemoveNodeIdFromTransitionsService } from './removeNodeIdFromTransitionsService';
 
 @Injectable()
 export class MoveNodesService {
-  constructor(protected projectService: TeacherProjectService) {}
+  constructor(
+    protected projectService: TeacherProjectService,
+    private removeNodeIdFromTransitionsService: RemoveNodeIdFromTransitionsService
+  ) {}
 
   /**
    * Move nodes inside an active/inactive group node
@@ -20,7 +24,7 @@ export class MoveNodesService {
       const stationaryNodeIsActive = this.projectService.isActive(groupNodeId);
 
       if (movingNodeIsActive && stationaryNodeIsActive) {
-        this.projectService.removeNodeIdFromTransitions(nodeId);
+        this.removeNodeIdFromTransitionsService.remove(nodeId);
         this.projectService.removeNodeIdFromGroups(nodeId);
 
         if (n == 0) {
@@ -31,7 +35,7 @@ export class MoveNodesService {
           this.projectService.insertNodeAfterInGroups(nodeId, groupNodeId);
         }
       } else if (movingNodeIsActive && !stationaryNodeIsActive) {
-        this.projectService.removeNodeIdFromTransitions(nodeId);
+        this.removeNodeIdFromTransitionsService.remove(nodeId);
         this.projectService.removeNodeIdFromGroups(nodeId);
 
         if (n == 0) {
@@ -50,7 +54,7 @@ export class MoveNodesService {
           this.projectService.insertNodeAfterInGroups(nodeId, groupNodeId);
         }
       } else if (!movingNodeIsActive && !stationaryNodeIsActive) {
-        this.projectService.removeNodeIdFromTransitions(nodeId);
+        this.removeNodeIdFromTransitionsService.remove(nodeId);
         this.projectService.removeNodeIdFromGroups(nodeId);
 
         if (n == 0) {
@@ -172,12 +176,12 @@ export class MoveNodesService {
       const movingNodeIsActive = this.projectService.isActive(nodeId);
       const stationaryNodeIsActive = this.projectService.isActive(moveAfterNodeId);
       if (movingNodeIsActive && stationaryNodeIsActive) {
-        this.projectService.removeNodeIdFromTransitions(nodeId);
+        this.removeNodeIdFromTransitionsService.remove(nodeId);
         this.projectService.removeNodeIdFromGroups(nodeId);
         this.projectService.insertNodeAfterInGroups(nodeId, moveAfterNodeId);
         this.projectService.insertNodeAfterInTransitions(node, moveAfterNodeId);
       } else if (movingNodeIsActive && !stationaryNodeIsActive) {
-        this.projectService.removeNodeIdFromTransitions(nodeId);
+        this.removeNodeIdFromTransitionsService.remove(nodeId);
         this.projectService.removeNodeIdFromGroups(nodeId);
         this.moveToInactive(node, moveAfterNodeId);
       } else if (!movingNodeIsActive && stationaryNodeIsActive) {
@@ -185,7 +189,7 @@ export class MoveNodesService {
         this.projectService.insertNodeAfterInGroups(nodeId, moveAfterNodeId);
         this.projectService.insertNodeAfterInTransitions(node, moveAfterNodeId);
       } else if (!movingNodeIsActive && !stationaryNodeIsActive) {
-        this.projectService.removeNodeIdFromTransitions(nodeId);
+        this.removeNodeIdFromTransitionsService.remove(nodeId);
         this.projectService.removeNodeIdFromGroups(nodeId);
         this.moveInactiveNodeToInactiveSection(node, moveAfterNodeId);
       }

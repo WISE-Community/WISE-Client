@@ -37,6 +37,7 @@ import { DeleteTranslationsService } from '../../assets/wise5/services/deleteTra
 import { CopyTranslationsService } from '../../assets/wise5/services/copyTranslationsService';
 import { CreateComponentService } from '../../assets/wise5/services/createComponentService';
 import { NotifyAuthorService } from '../../assets/wise5/services/notifyAuthorService';
+import { RemoveNodeIdFromTransitionsService } from '../../assets/wise5/services/removeNodeIdFromTransitionsService';
 
 @NgModule({
   imports: [StudentTeacherCommonModule, AuthoringToolModule, RouterModule, AuthoringRoutingModule],
@@ -65,6 +66,7 @@ import { NotifyAuthorService } from '../../assets/wise5/services/notifyAuthorSer
     DeleteTranslationsService,
     { provide: PeerGroupService, useExisting: TeacherPeerGroupService },
     { provide: ProjectService, useExisting: TeacherProjectService },
+    RemoveNodeIdFromTransitionsService,
     TeacherDataService,
     TeacherDiscussionService,
     TeacherNodeService,

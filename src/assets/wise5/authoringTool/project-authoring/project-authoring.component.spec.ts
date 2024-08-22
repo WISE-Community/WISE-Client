@@ -38,6 +38,7 @@ import { AddStepButtonComponent } from '../add-step-button/add-step-button.compo
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { CopyTranslationsService } from '../../services/copyTranslationsService';
 import { TeacherProjectTranslationService } from '../../services/teacherProjectTranslationService';
+import { RemoveNodeIdFromTransitionsService } from '../../services/removeNodeIdFromTransitionsService';
 
 let configService: ConfigService;
 let component: ProjectAuthoringComponent;
@@ -83,6 +84,7 @@ describe('ProjectAuthoringComponent', () => {
         DeleteTranslationsService,
         MoveNodesService,
         provideRouter([]),
+        RemoveNodeIdFromTransitionsService,
         TeacherDataService,
         TeacherProjectService,
         TeacherProjectTranslationService,

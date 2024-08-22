@@ -31,9 +31,9 @@ let twoLessonsProjectJSON: any;
 describe('ProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     http = TestBed.inject(HttpTestingController);
     configService = TestBed.inject(ConfigService);
     service = TestBed.inject(ProjectService);
@@ -89,7 +89,6 @@ describe('ProjectService', () => {
   // MARK: Tests for Node and Group Id functions
   // TODO: add test for service.getNodePositionAndTitle()
   // TODO: add test for service.deconsteNode()
-  // TODO: add test for service.removeNodeIdFromTransitions()
   // TODO: add test for service.removeNodeIdFromGroups()
   // TODO: add test for service.createComponent()
   // TODO: add test for service.addComponentToNode()

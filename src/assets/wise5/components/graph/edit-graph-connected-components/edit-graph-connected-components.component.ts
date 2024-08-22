@@ -54,7 +54,6 @@ export class EditGraphConnectedComponentsComponent extends EditConnectedComponen
       connectedComponent.xColumn = 0;
       connectedComponent.yColumn = 1;
     }
-    connectedComponent.type = 'importWork';
   }
 
   connectedComponentShowClassmateWorkChanged(connectedComponent: any) {
