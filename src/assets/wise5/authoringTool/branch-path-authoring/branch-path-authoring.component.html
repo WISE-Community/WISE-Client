@@ -1,31 +1,38 @@
-<div
-  *ngIf="
-    nodeId !== '' &&
-    componentId !== '' &&
-    (criteria === SCORE_VALUE || criteria === CHOICE_CHOSEN_VALUE)
-  "
-  [formGroup]="pathFormGroup"
->
-  <div *ngFor="let formControl of formControls; index as index" class="branch-path">
-    <span class="path-label" i18n>Path {{ index + 1 }}</span>
-    <ng-container *ngIf="criteria === SCORE_VALUE">
-      <mat-form-field>
-        <mat-label i18n>Score</mat-label>
-        <input matInput [formControlName]="'path-' + (index + 1)" type="number" min="0" />
-      </mat-form-field>
-    </ng-container>
-    <ng-container *ngIf="criteria === CHOICE_CHOSEN_VALUE">
-      <mat-form-field>
-        <mat-label i18n>Choice Chosen</mat-label>
-        <mat-select [formControlName]="'path-' + (index + 1)">
-          <mat-option *ngFor="let choice of choices" [value]="choice.id">
-            {{ choice.text }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </ng-container>
-    @if (branchPaths.length > 1) {
-      <display-branch-path-steps [nodes]="branchPaths[index].nodesInBranchPath" />
+@if (nodeId !== '' && componentId !== '') {
+  @if (criteria === SCORE_VALUE || criteria === CHOICE_CHOSEN_VALUE) {
+    <div [formGroup]="pathFormGroup">
+      @for (formControl of formControls; track formControl; let index = $index) {
+        <div class="path">
+          <span class="path-label" i18n>Path {{ index + 1 }}</span>
+          @if (criteria === SCORE_VALUE) {
+            <mat-form-field>
+              <mat-label i18n>Score</mat-label>
+              <input matInput [formControlName]="'path-' + (index + 1)" type="number" min="0" />
+            </mat-form-field>
+          } @else if (criteria === CHOICE_CHOSEN_VALUE) {
+            <mat-form-field>
+              <mat-label i18n>Choice Chosen</mat-label>
+              <mat-select [formControlName]="'path-' + (index + 1)">
+                @for (choice of choices; track choice) {
+                  <mat-option [value]="choice.id">
+                    {{ choice.text }}
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          }
+          <display-branch-path-steps [nodes]="branchPaths[index].nodesInBranchPath" />
+        </div>
+      }
+    </div>
+  } @else {
+    @for (path of [].constructor(branchPaths.length); track path; let index = $index) {
+      <div class="path">
+        <span class="path-label" i18n>Path {{ index + 1 }}</span>
+        <div class="path-without-parameters">
+          <display-branch-path-steps [nodes]="branchPaths[index].nodesInBranchPath" />
+        </div>
+      </div>
     }
-  </div>
-</div>
+  }
+}
