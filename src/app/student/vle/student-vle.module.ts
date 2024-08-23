@@ -39,7 +39,6 @@ import { NodeComponent } from '../../../assets/wise5/vle/node/node.component';
   declarations: [
     ChooseBranchPathDialogComponent,
     GenerateImageDialogComponent,
-    GroupTabsComponent,
     SafeUrl,
     VLEComponent,
     VLEParentComponent
@@ -47,6 +46,7 @@ import { NodeComponent } from '../../../assets/wise5/vle/node/node.component';
   imports: [
     CommonModule,
     ComponentStudentModule,
+    GroupTabsComponent,
     MatDialogModule,
     NavigationComponent,
     NodeComponent,

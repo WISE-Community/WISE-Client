@@ -4,6 +4,7 @@
   animationDuration="0ms"
   class="app-bg-bg"
 >
-  <mat-tab *ngFor="let node of groupNodes" [label]="node.title" [disabled]="node.disabled">
-  </mat-tab>
+  @for (node of groupNodes; track node.id) {
+    <mat-tab [label]="node.title" [disabled]="node.disabled" />
+  }
 </mat-tab-group>
