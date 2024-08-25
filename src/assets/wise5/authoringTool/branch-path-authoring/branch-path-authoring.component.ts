@@ -53,7 +53,9 @@ export class BranchPathAuthoringComponent {
     } else {
       this.removePathFormControls();
       if (
+        this.nodeId != null &&
         this.nodeId !== '' &&
+        this.componentId != null &&
         this.componentId !== '' &&
         this.criteriaRequiresAdditionalParams(this.criteria)
       ) {
