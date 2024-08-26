@@ -82,45 +82,6 @@ export class TeacherProjectService extends ProjectService {
       });
   }
 
-  /**
-   * Create a new group
-   * @param title the title of the group
-   * @returns the group object
-   */
-  createGroup(title: string): any {
-    return {
-      id: this.getNextAvailableGroupId(),
-      type: 'group',
-      title: title,
-      startId: '',
-      constraints: [],
-      transitionLogic: {
-        transitions: []
-      },
-      ids: []
-    };
-  }
-
-  /**
-   * Create a new node
-   * @param title the title of the node
-   * @returns the node object
-   */
-  createNode(title) {
-    return {
-      id: this.getNextAvailableNodeId(),
-      title: title,
-      type: 'node',
-      constraints: [],
-      transitionLogic: {
-        transitions: []
-      },
-      showSaveButton: false,
-      showSubmitButton: false,
-      components: []
-    };
-  }
-
   getNodesWithNewIds(nodes: any[]): any[] {
     const oldToNewIds = this.getOldToNewIds(nodes);
     return nodes.map((node: any) => {
