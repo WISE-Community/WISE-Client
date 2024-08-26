@@ -35,12 +35,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatTooltipModule,
     ReactiveFormsModule
   ],
-  selector: 'branch-path-authoring',
+  selector: 'edit-branch-paths',
   standalone: true,
-  styleUrl: './branch-path-authoring.component.scss',
-  templateUrl: './branch-path-authoring.component.html'
+  styleUrl: './edit-branch-paths.component.scss',
+  templateUrl: './edit-branch-paths.component.html'
 })
-export class BranchPathAuthoringComponent {
+export class EditBranchPathsComponent {
   protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;
   protected readonly SCORE_VALUE: string = SCORE_VALUE;
 

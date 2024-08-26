@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BranchPathAuthoringComponent } from './branch-path-authoring.component';
+import { EditBranchPathsComponent } from './edit-branch-paths.component';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { provideHttpClient } from '@angular/common/http';
 
-describe('BranchPathAuthoringComponent', () => {
-  let component: BranchPathAuthoringComponent;
-  let fixture: ComponentFixture<BranchPathAuthoringComponent>;
+describe('EditBranchPathsComponent', () => {
+  let component: EditBranchPathsComponent;
+  let fixture: ComponentFixture<EditBranchPathsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BranchPathAuthoringComponent, StudentTeacherCommonServicesModule],
+      imports: [EditBranchPathsComponent, StudentTeacherCommonServicesModule],
       providers: [provideHttpClient(), TeacherProjectService]
     }).compileComponents();
-    fixture = TestBed.createComponent(BranchPathAuthoringComponent);
+
+    fixture = TestBed.createComponent(EditBranchPathsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
