@@ -44,8 +44,10 @@
     </div>
   }
 }
-<div fxLayoutAlign="center center">
-  <button mat-stroked-button color="primary" (click)="addPath()">
-    <mat-icon>add</mat-icon><span i18n>Add Path</span>
-  </button>
-</div>
+@if (branchPaths.length > 0) {
+  <div fxLayoutAlign="center center">
+    <button mat-stroked-button color="primary" (click)="addPath()">
+      <mat-icon>add</mat-icon><span i18n>Add Path</span>
+    </button>
+  </div>
+}

@@ -52,7 +52,7 @@ export class CreateBranchService {
     return newNodeIds;
   }
 
-  createPathSteps(params: CreateBranchParams, branchNode: any, newNodeIds: string[]): void {
+  private createPathSteps(params: CreateBranchParams, branchNode: any, newNodeIds: string[]): void {
     for (let i = 0; i < newNodeIds.length; i++) {
       this.createPathStep(params, branchNode, newNodeIds[i], i);
     }

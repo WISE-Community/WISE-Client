@@ -14,6 +14,7 @@ import { DeleteBranchService } from '../../services/deleteBranchService';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 import { CreateBranchService } from '../../services/createBranchService';
+import { CreateBranchParams } from '../../common/CreateBranchParams';
 
 @Component({
   imports: [
@@ -217,14 +218,14 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
   protected async submit(): Promise<void> {
     this.submitting = true;
     const params = this.getBranchParams();
-    this.createNewPaths(this.branchPaths, params);
+    this.createNewPaths(params);
     this.updateTransitions(params);
     this.updateTransitionLogic(params);
     this.saveProject();
   }
 
-  private createNewPaths(branchPaths: any[], params: any): void {
-    branchPaths.forEach((path: any, index: number) => {
+  private createNewPaths(params: CreateBranchParams): void {
+    this.branchPaths.forEach((path: any, index: number) => {
       if (path.new) {
         this.createBranchService.addBranchPath(index, params);
       }
