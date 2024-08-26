@@ -16,6 +16,10 @@ import { CHOICE_CHOSEN_VALUE, SCORE_VALUE } from '../../../../app/domain/branchC
 import { ComponentContent } from '../../common/ComponentContent';
 import { MatSelectModule } from '@angular/material/select';
 import { DisplayBranchPathStepsComponent } from '../display-branch-path-steps/display-branch-path-steps.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   selector: 'branch-path-authoring',
@@ -23,10 +27,14 @@ import { DisplayBranchPathStepsComponent } from '../display-branch-path-steps/di
   imports: [
     CommonModule,
     DisplayBranchPathStepsComponent,
+    FlexLayoutModule,
     FormsModule,
+    MatButtonModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatSelectModule,
+    MatTooltipModule,
     ReactiveFormsModule
   ],
   styleUrl: './branch-path-authoring.component.scss',
@@ -140,5 +148,11 @@ export class BranchPathAuthoringComponent {
 
   private getFormControlName(index: number): string {
     return `path-${index + 1}`;
+  }
+
+  protected addPath(): void {
+    this.pathCount++;
+    this.updateNumPathFormControls();
+    this.branchPaths.push({ new: true, nodesInBranchPath: [] });
   }
 }

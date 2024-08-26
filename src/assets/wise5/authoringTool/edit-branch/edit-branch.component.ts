@@ -13,6 +13,7 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { DeleteBranchService } from '../../services/deleteBranchService';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
+import { CreateBranchService } from '../../services/createBranchService';
 
 @Component({
   imports: [
@@ -41,6 +42,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
+    private createBranchService: CreateBranchService,
     private deleteBranchService: DeleteBranchService,
     protected fb: FormBuilder,
     protected projectService: TeacherProjectService,
@@ -215,9 +217,18 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
   protected async submit(): Promise<void> {
     this.submitting = true;
     const params = this.getBranchParams();
+    this.createNewPaths(this.branchPaths, params);
     this.updateTransitions(params);
     this.updateTransitionLogic(params);
     this.saveProject();
+  }
+
+  private createNewPaths(branchPaths: any[], params: any): void {
+    branchPaths.forEach((path: any, index: number) => {
+      if (path.new) {
+        this.createBranchService.addBranchPath(index, params);
+      }
+    });
   }
 
   private updateTransitions(params: any): void {

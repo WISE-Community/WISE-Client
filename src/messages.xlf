@@ -10177,7 +10177,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/branch-path-authoring/branch-path-authoring.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="380e20a1e13d9489c69f6dbea7da19025ab6eb25" datatype="html">
@@ -10216,6 +10216,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
           <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ff8aa2fb4724311bcc5857672bbcffcca729ede5" datatype="html">
+        <source>Add Path</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/branch-path-authoring/branch-path-authoring.component.html</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8d558c05faf7e8ec36f7bc0a46e5a2cf6874196e" datatype="html">
@@ -10954,6 +10961,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2235b60c945bdd32e36276daa978f60e093ecf4e" datatype="html">
+        <source>(A new step will automatically be created in this path)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/display-branch-path-steps/display-branch-path-steps.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="2005b54af64c5c15b332ceb3f95a4c94bf1c9c53" datatype="html">
         <source>Edit Branch</source>
         <context-group purpose="location">
@@ -10988,7 +11002,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
 The branch structure will be removed but the steps will not be deleted.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.ts</context>
-          <context context-type="linenumber">192</context>
+          <context context-type="linenumber">194</context>
         </context-group>
       </trans-unit>
       <trans-unit id="549db7a4a511ef9e23b17fa3cd8781e3d8ef45d4" datatype="html">
@@ -21879,21 +21893,21 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Path <x id="PH" equiv-text="pathNumber"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/createBranchService.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4647197691580277546" datatype="html">
         <source>Merge Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/createBranchService.ts</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1035141360074485815" datatype="html">
         <source>Creating Branch</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/createBranchService.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3177789104763917185" datatype="html">

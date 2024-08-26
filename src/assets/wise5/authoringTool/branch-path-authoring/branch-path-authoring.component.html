@@ -12,7 +12,7 @@
         @if (criteria === SCORE_VALUE) {
           <mat-form-field>
             <mat-label i18n>Score</mat-label>
-            <input matInput [formControlName]="'path-' + (index + 1)" type="number" min="0" />
+            <input matInput [formControlName]="'path-' + (index + 1)" />
           </mat-form-field>
         } @else if (criteria === CHOICE_CHOSEN_VALUE) {
           <mat-form-field>
@@ -26,9 +26,11 @@
             </mat-select>
           </mat-form-field>
         }
-        @if (branchPaths.length > 0) {
-          <display-branch-path-steps [nodes]="branchPaths[index].nodesInBranchPath" />
-        }
+        <div>
+          @if (branchPaths.length > 0) {
+            <display-branch-path-steps [nodes]="branchPaths[index].nodesInBranchPath" />
+          }
+        </div>
       </div>
     }
   </div>
@@ -42,3 +44,8 @@
     </div>
   }
 }
+<div fxLayoutAlign="center center">
+  <button mat-stroked-button color="primary" (click)="addPath()">
+    <mat-icon>add</mat-icon><span i18n>Add Path</span>
+  </button>
+</div>
