@@ -34,7 +34,6 @@ import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/a
     SelectPathCountComponent,
     SelectStepComponent
   ],
-  selector: 'create-branch',
   standalone: true,
   styleUrl: './create-branch.component.scss',
   templateUrl: './create-branch.component.html'

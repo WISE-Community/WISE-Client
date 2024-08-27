@@ -142,8 +142,7 @@ export class CreateBranchPathsComponent {
   }
 
   private getComponent(): ComponentContent {
-    const components = this.projectService.getComponents(this.nodeId);
-    return components.find((component) => component.id === this.componentId);
+    return this.projectService.getNode(this.nodeId).getComponent(this.componentId);
   }
 
   private getFormControlName(index: number): string {

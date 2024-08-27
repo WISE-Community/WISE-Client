@@ -29,7 +29,6 @@ import { EditBranchPathsComponent } from '../edit-branch-paths/edit-branch-paths
     SelectComponentComponent,
     SelectStepComponent
   ],
-  selector: 'edit-branch',
   standalone: true,
   styleUrl: './edit-branch.component.scss',
   templateUrl: './edit-branch.component.html'
