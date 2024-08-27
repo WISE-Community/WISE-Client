@@ -70,8 +70,8 @@ export class AddStepButtonComponent {
     });
   }
 
-  protected goToAddBranchView(): void {
-    this.router.navigate(['add-branch'], {
+  protected goToCreateBranchView(): void {
+    this.router.navigate(['create-branch'], {
       relativeTo: this.route,
       state: {
         targetId: this.nodeId

@@ -7,7 +7,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { SelectComponentComponent } from '../../../../app/authoring-tool/select-component/select-component.component';
 import { SelectStepComponent } from '../../../../app/authoring-tool/select-step/select-step.component';
 import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/abstract-branch-authoring.component';
-import { BranchPathAuthoringComponent } from '../branch-path-authoring/branch-path-authoring.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { DeleteBranchService } from '../../services/deleteBranchService';
@@ -15,11 +14,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 import { CreateBranchService } from '../../services/createBranchService';
 import { CreateBranchParams } from '../../common/CreateBranchParams';
+import { EditBranchPathsComponent } from '../edit-branch-paths/edit-branch-paths.component';
 
 @Component({
   imports: [
-    BranchPathAuthoringComponent,
     CommonModule,
+    EditBranchPathsComponent,
     FlexLayoutModule,
     MatButtonModule,
     MatProgressBarModule,
@@ -29,7 +29,6 @@ import { CreateBranchParams } from '../../common/CreateBranchParams';
     SelectComponentComponent,
     SelectStepComponent
   ],
-  selector: 'edit-branch',
   standalone: true,
   styleUrl: './edit-branch.component.scss',
   templateUrl: './edit-branch.component.html'

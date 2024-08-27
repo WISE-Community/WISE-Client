@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SelectStepComponent } from '../../../../app/authoring-tool/select-step/select-step.component';
 import { SelectComponentComponent } from '../../../../app/authoring-tool/select-component/select-component.component';
-import { BranchPathAuthoringComponent } from '../branch-path-authoring/branch-path-authoring.component';
+import { CreateBranchPathsComponent } from '../create-branch-paths/create-branch-paths.component';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { SelectMergeStepComponent } from '../select-merge-step/select-merge-step.component';
 import { CreateBranchService } from '../../services/createBranchService';
@@ -19,7 +19,7 @@ import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/a
 
 @Component({
   imports: [
-    BranchPathAuthoringComponent,
+    CreateBranchPathsComponent,
     CommonModule,
     FlexLayoutModule,
     MatButtonModule,
@@ -34,12 +34,11 @@ import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/a
     SelectPathCountComponent,
     SelectStepComponent
   ],
-  selector: 'add-branch',
   standalone: true,
-  styleUrl: './add-branch.component.scss',
-  templateUrl: './add-branch.component.html'
+  styleUrl: './create-branch.component.scss',
+  templateUrl: './create-branch.component.html'
 })
-export class AddBranchComponent extends AbstractBranchAuthoringComponent {
+export class CreateBranchComponent extends AbstractBranchAuthoringComponent {
   constructor(
     private createBranchService: CreateBranchService,
     protected fb: FormBuilder,

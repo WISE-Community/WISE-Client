@@ -7,6 +7,7 @@ import { provideRouter } from '@angular/router';
 import { Branch } from '../../../../app/domain/branch';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DeleteBranchService } from '../../services/deleteBranchService';
+import { CreateBranchService } from '../../services/createBranchService';
 
 let teacherProjectService: TeacherProjectService;
 
@@ -22,7 +23,12 @@ describe('EditBranchComponent', () => {
         HttpClientTestingModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [DeleteBranchService, provideRouter([]), TeacherProjectService]
+      providers: [
+        CreateBranchService,
+        DeleteBranchService,
+        provideRouter([]),
+        TeacherProjectService
+      ]
     }).compileComponents();
     window.history.pushState({ targetId: 'node1' }, '', '');
     teacherProjectService = TestBed.inject(TeacherProjectService);

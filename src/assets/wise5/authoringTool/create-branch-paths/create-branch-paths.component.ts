@@ -22,8 +22,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  selector: 'branch-path-authoring',
-  standalone: true,
   imports: [
     CommonModule,
     DisplayBranchPathStepsComponent,
@@ -37,10 +35,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatTooltipModule,
     ReactiveFormsModule
   ],
-  styleUrl: './branch-path-authoring.component.scss',
-  templateUrl: './branch-path-authoring.component.html'
+  selector: 'create-branch-paths',
+  standalone: true,
+  styleUrl: './create-branch-paths.component.scss',
+  templateUrl: './create-branch-paths.component.html'
 })
-export class BranchPathAuthoringComponent {
+export class CreateBranchPathsComponent {
   protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;
   protected readonly SCORE_VALUE: string = SCORE_VALUE;
 
@@ -73,7 +73,7 @@ export class BranchPathAuthoringComponent {
     }
   }
 
-  private updateNumPathFormControls(): void {
+  protected updateNumPathFormControls(): void {
     if (this.criteriaRequiresAdditionalParams(this.criteria)) {
       if (this.formControls.length < this.pathCount) {
         this.increasePaths();
@@ -142,17 +142,10 @@ export class BranchPathAuthoringComponent {
   }
 
   private getComponent(): ComponentContent {
-    const components = this.projectService.getComponents(this.nodeId);
-    return components.find((component) => component.id === this.componentId);
+    return this.projectService.getNode(this.nodeId).getComponent(this.componentId);
   }
 
   private getFormControlName(index: number): string {
     return `path-${index + 1}`;
-  }
-
-  protected addPath(): void {
-    this.pathCount++;
-    this.updateNumPathFormControls();
-    this.branchPaths.push({ new: true, nodesInBranchPath: [] });
   }
 }
