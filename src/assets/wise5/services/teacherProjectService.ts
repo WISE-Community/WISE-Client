@@ -66,23 +66,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Registers a new project having the projectJSON content with the server.
-   * Returns a new project id if the project is successfully registered.
-   * @param projectJSONString a valid JSON string
-   */
-  registerNewProject(projectName, projectJSONString) {
-    return this.http
-      .post(this.configService.getConfigParam('registerNewProjectURL'), {
-        projectName: projectName,
-        projectJSONString: projectJSONString
-      })
-      .toPromise()
-      .then((newProjectId) => {
-        return newProjectId;
-      });
-  }
-
-  /**
    * Create a new group
    * @param title the title of the group
    * @returns the group object
