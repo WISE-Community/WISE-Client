@@ -26,28 +26,7 @@
             </mat-select>
           </mat-form-field>
         }
-        <div>
-          @if (branchPaths.length > 0) {
-            <display-branch-path-steps [nodes]="branchPaths[index].nodesInBranchPath" />
-          }
-        </div>
       </div>
     }
-  </div>
-} @else {
-  @for (path of branchPaths; track path; let index = $index) {
-    <div class="path">
-      <span class="path-label" i18n>Path {{ index + 1 }}</span>
-      <div class="path-without-parameters">
-        <display-branch-path-steps [nodes]="path.nodesInBranchPath" />
-      </div>
-    </div>
-  }
-}
-@if (branchPaths.length > 0) {
-  <div fxLayoutAlign="center center">
-    <button mat-stroked-button color="primary" (click)="addPath()">
-      <mat-icon>add</mat-icon><span i18n>Add Path</span>
-    </button>
   </div>
 }

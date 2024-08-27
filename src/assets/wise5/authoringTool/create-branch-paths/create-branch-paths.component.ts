@@ -73,7 +73,7 @@ export class CreateBranchPathsComponent {
     }
   }
 
-  private updateNumPathFormControls(): void {
+  protected updateNumPathFormControls(): void {
     if (this.criteriaRequiresAdditionalParams(this.criteria)) {
       if (this.formControls.length < this.pathCount) {
         this.increasePaths();
@@ -148,11 +148,5 @@ export class CreateBranchPathsComponent {
 
   private getFormControlName(index: number): string {
     return `path-${index + 1}`;
-  }
-
-  protected addPath(): void {
-    this.pathCount++;
-    this.updateNumPathFormControls();
-    this.branchPaths.push({ new: true, nodesInBranchPath: [] });
   }
 }

@@ -27,9 +27,7 @@
           </mat-form-field>
         }
         <div>
-          @if (branchPaths.length > 0) {
-            <display-branch-path-steps [nodes]="branchPaths[index].nodesInBranchPath" />
-          }
+          <display-branch-path-steps [nodes]="branchPaths[index].nodesInBranchPath" />
         </div>
       </div>
     }
@@ -44,10 +42,8 @@
     </div>
   }
 }
-@if (branchPaths.length > 0) {
-  <div fxLayoutAlign="center center">
-    <button mat-stroked-button color="primary" (click)="addPath()">
-      <mat-icon>add</mat-icon><span i18n>Add Path</span>
-    </button>
-  </div>
-}
+<div fxLayoutAlign="center center">
+  <button mat-stroked-button color="primary" (click)="addPath()">
+    <mat-icon>add</mat-icon><span i18n>Add Path</span>
+  </button>
+</div>
