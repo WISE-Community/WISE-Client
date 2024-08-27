@@ -6,3 +6,6 @@
     {{ nodeIdToStepTitle[node.nodeId] }}
   </div>
 }
+@if (nodes.length === 0) {
+  <span i18n>(A new step will automatically be created in this path)</span>
+}
