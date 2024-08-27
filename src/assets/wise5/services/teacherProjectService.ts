@@ -517,35 +517,6 @@ export class TeacherProjectService extends ProjectService {
     this.refreshProjectSource.next();
   }
 
-  addTeacherRemovalConstraint(node: any, periodId: number) {
-    const lockConstraint = {
-      id: generateRandomKey(),
-      action: 'makeThisNodeNotVisitable',
-      targetId: node.id,
-      removalConditional: 'any',
-      removalCriteria: [
-        {
-          name: 'teacherRemoval',
-          params: {
-            periodId: periodId
-          }
-        }
-      ]
-    };
-    this.addConstraintToNode(node, lockConstraint);
-  }
-
-  removeTeacherRemovalConstraint(node: any, periodId: number) {
-    node.constraints = node.constraints.filter((constraint) => {
-      return !(
-        constraint.action === 'makeThisNodeNotVisitable' &&
-        constraint.targetId === node.id &&
-        constraint.removalCriteria[0].name === 'teacherRemoval' &&
-        constraint.removalCriteria[0].params.periodId === periodId
-      );
-    });
-  }
-
   /**
    * Saves the project to Config.saveProjectURL and returns commit history promise.
    * if Config.saveProjectURL or Config.projectId are undefined, does not save and returns null
