@@ -117,11 +117,11 @@ export class MoveNodesService {
    * also move all of its children to active.
    */
   private moveToActive(node: any): void {
-    this.projectService.removeNodeFromInactiveNodes(node.id);
+    this.removeNodeFromInactiveNodes(node.id);
     this.projectService.addNode(node);
     if (this.projectService.isGroupNode(node.id)) {
       for (const childId of node.ids) {
-        this.projectService.addNode(this.projectService.removeNodeFromInactiveNodes(childId));
+        this.projectService.addNode(this.removeNodeFromInactiveNodes(childId));
       }
     }
   }
@@ -132,7 +132,7 @@ export class MoveNodesService {
    * @param nodeIdToInsertInside place the node inside this
    */
   private moveFromInactiveToInactiveInsertInside(node: any, nodeIdToInsertInside: string): void {
-    this.projectService.removeNodeFromInactiveNodes(node.id);
+    this.removeNodeFromInactiveNodes(node.id);
     if (this.projectService.isGroupNode(node.id)) {
       /*
        * remove the group's child nodes from our data structures so that we can
@@ -200,7 +200,45 @@ export class MoveNodesService {
   }
 
   private moveInactiveNodeToInactiveSection(node: any, nodeIdToInsertAfter: string): void {
-    this.projectService.removeNodeFromInactiveNodes(node.id);
+    this.removeNodeFromInactiveNodes(node.id);
     this.projectService.addInactiveNodeInsertAfter(node, nodeIdToInsertAfter);
+  }
+
+  private removeNodeFromInactiveNodes(nodeId: string): void {
+    let node = null;
+    if (this.projectService.getParentGroup(nodeId) != null) {
+      this.projectService.removeChildFromParent(nodeId);
+    }
+
+    const inactiveNodes = this.projectService.project.inactiveNodes;
+    for (let i = 0; i < inactiveNodes.length; i++) {
+      let inactiveNode = inactiveNodes[i];
+      if (inactiveNode.id === nodeId) {
+        node = inactiveNode;
+        inactiveNodes.splice(i, 1);
+        break;
+      }
+    }
+    this.removeNodeFromInactiveStepNodes(nodeId);
+    this.removeNodeFromInactiveGroupNodes(nodeId);
+    return node;
+  }
+
+  private removeNodeFromInactiveStepNodes(nodeId: string): void {
+    for (let i = 0; i < this.projectService.inactiveStepNodes.length; i++) {
+      if (nodeId == this.projectService.inactiveStepNodes[i].id) {
+        this.projectService.inactiveStepNodes.splice(i, 1);
+        break;
+      }
+    }
+  }
+
+  private removeNodeFromInactiveGroupNodes(nodeId: string): void {
+    for (let i = 0; i < this.projectService.inactiveGroupNodes.length; i++) {
+      if (nodeId == this.projectService.inactiveGroupNodes[i].id) {
+        this.projectService.inactiveGroupNodes.splice(i, 1);
+        break;
+      }
+    }
   }
 }

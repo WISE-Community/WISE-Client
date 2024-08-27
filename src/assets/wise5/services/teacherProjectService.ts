@@ -1550,38 +1550,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Remove the node from the inactive nodes array
-   * @param nodeId the node to remove
-   * @returns the node that was removed
-   */
-  removeNodeFromInactiveNodes(nodeId) {
-    let node = null;
-    if (nodeId != null) {
-      let parentGroup = this.getParentGroup(nodeId);
-      if (parentGroup != null) {
-        this.removeChildFromParent(nodeId);
-      }
-
-      let inactiveNodes = this.project.inactiveNodes;
-      if (inactiveNodes != null) {
-        for (let i = 0; i < inactiveNodes.length; i++) {
-          let inactiveNode = inactiveNodes[i];
-          if (inactiveNode != null) {
-            if (nodeId === inactiveNode.id) {
-              node = inactiveNode;
-              inactiveNodes.splice(i, 1);
-              break;
-            }
-          }
-        }
-      }
-      this.removeNodeFromInactiveStepNodes(nodeId);
-      this.removeNodeFromInactiveGroupNodes(nodeId);
-    }
-    return node;
-  }
-
-  /**
    * Remove the child node from the parent group.
    * @param nodeId The child node to remove from the parent.
    */
@@ -1619,34 +1587,6 @@ export class TeacherProjectService extends ProjectService {
         if (!startIdUpdated) {
           parentGroup.startId = '';
         }
-      }
-    }
-  }
-
-  /**
-   * Remove the node from the inactive step nodes array.
-   * @param nodeId The node id of the node we want to remove from the
-   * inactive step nodes array.
-   */
-  removeNodeFromInactiveStepNodes(nodeId) {
-    for (let i = 0; i < this.inactiveStepNodes.length; i++) {
-      if (nodeId == this.inactiveStepNodes[i].id) {
-        this.inactiveStepNodes.splice(i, 1);
-        break;
-      }
-    }
-  }
-
-  /**
-   * Remove the node from the inactive group nodes array.
-   * @param nodeId The node id of the group we want to remove from the
-   * inactive group nodes array.
-   */
-  removeNodeFromInactiveGroupNodes(nodeId) {
-    for (let i = 0; i < this.inactiveGroupNodes.length; i++) {
-      if (nodeId == this.inactiveGroupNodes[i].id) {
-        this.inactiveGroupNodes.splice(i, 1);
-        break;
       }
     }
   }
