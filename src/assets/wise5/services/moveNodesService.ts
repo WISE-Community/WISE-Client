@@ -206,12 +206,11 @@ export class MoveNodesService {
 
   private removeNodeFromInactiveNodes(nodeId: string): void {
     let node = null;
-    let parentGroup = this.projectService.getParentGroup(nodeId);
-    if (parentGroup != null) {
+    if (this.projectService.getParentGroup(nodeId) != null) {
       this.projectService.removeChildFromParent(nodeId);
     }
 
-    let inactiveNodes = this.projectService.project.inactiveNodes;
+    const inactiveNodes = this.projectService.project.inactiveNodes;
     for (let i = 0; i < inactiveNodes.length; i++) {
       let inactiveNode = inactiveNodes[i];
       if (inactiveNode.id === nodeId) {
