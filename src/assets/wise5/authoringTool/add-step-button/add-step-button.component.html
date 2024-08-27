@@ -10,17 +10,19 @@
   <mat-icon>add_circle</mat-icon>
 </button>
 <mat-menu #step="matMenu">
-  @if(!branchMergePoint) {
-  <button mat-menu-item (click)="addStepBefore()">
-    <mat-icon>add_circle</mat-icon><span i18n>Add step before</span>
-  </button>
-  } @if(!branchPoint) {
-  <button mat-menu-item (click)="goToAddStepViewForAfter(nodeId)">
-    <mat-icon>add_circle</mat-icon><span i18n>Add step after</span>
-  </button>
-  } @if(!branchPoint && !branchPathStep) {
-  <button mat-menu-item (click)="goToAddBranchView()">
-    <mat-icon>add_circle</mat-icon><span i18n>Branch off this step</span>
-  </button>
+  @if (!branchMergePoint) {
+    <button mat-menu-item (click)="addStepBefore()">
+      <mat-icon>add_circle</mat-icon><span i18n>Add step before</span>
+    </button>
+  }
+  @if (!branchPoint) {
+    <button mat-menu-item (click)="goToAddStepViewForAfter(nodeId)">
+      <mat-icon>add_circle</mat-icon><span i18n>Add step after</span>
+    </button>
+  }
+  @if (!branchPoint && !branchPathStep) {
+    <button mat-menu-item (click)="goToCreateBranchView()">
+      <mat-icon>add_circle</mat-icon><span i18n>Branch off this step</span>
+    </button>
   }
 </mat-menu>

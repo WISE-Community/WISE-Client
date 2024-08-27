@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AddBranchComponent } from './add-branch.component';
+import { CreateBranchComponent } from './create-branch.component';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -12,14 +12,14 @@ import { CreateBranchService } from '../../services/createBranchService';
 
 let teacherProjectService: TeacherProjectService;
 
-describe('AddBranchComponent', () => {
-  let component: AddBranchComponent;
-  let fixture: ComponentFixture<AddBranchComponent>;
+describe('CreateBranchComponent', () => {
+  let component: CreateBranchComponent;
+  let fixture: ComponentFixture<CreateBranchComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        AddBranchComponent,
+        CreateBranchComponent,
         BrowserAnimationsModule,
         FormsModule,
         HttpClientTestingModule,
@@ -33,7 +33,7 @@ describe('AddBranchComponent', () => {
     window.history.pushState({}, '', '');
     teacherProjectService = TestBed.inject(TeacherProjectService);
     spyOn(teacherProjectService, 'getFlattenedProjectAsNodeIds').and.returnValue([]);
-    fixture = TestBed.createComponent(AddBranchComponent);
+    fixture = TestBed.createComponent(CreateBranchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

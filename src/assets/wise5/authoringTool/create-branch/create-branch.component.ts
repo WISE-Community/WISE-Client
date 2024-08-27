@@ -34,12 +34,12 @@ import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/a
     SelectPathCountComponent,
     SelectStepComponent
   ],
-  selector: 'add-branch',
+  selector: 'create-branch',
   standalone: true,
-  styleUrl: './add-branch.component.scss',
-  templateUrl: './add-branch.component.html'
+  styleUrl: './create-branch.component.scss',
+  templateUrl: './create-branch.component.html'
 })
-export class AddBranchComponent extends AbstractBranchAuthoringComponent {
+export class CreateBranchComponent extends AbstractBranchAuthoringComponent {
   constructor(
     private createBranchService: CreateBranchService,
     protected fb: FormBuilder,
