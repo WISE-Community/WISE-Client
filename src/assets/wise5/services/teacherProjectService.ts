@@ -878,18 +878,16 @@ export class TeacherProjectService extends ProjectService {
    * Update all the transitions that point to the group and change
    * them to point to the new start id
    */
-  updateStepTransitionsToGroup(nodeIdToInsertInside, nodeIdToInsert) {
-    const nodesThatTransitionToGroup = this.getNodesByToNodeId(nodeIdToInsertInside);
-    for (let nodeThatTransitionsToGroup of nodesThatTransitionToGroup) {
+  private updateStepTransitionsToGroup(groupId: string, nodeIdToInsert: string): void {
+    for (const nodeThatTransitionsToGroup of this.getNodesByToNodeId(groupId)) {
       if (!this.isGroupNode(nodeThatTransitionsToGroup.id)) {
-        this.updateToTransition(nodeThatTransitionsToGroup, nodeIdToInsertInside, nodeIdToInsert);
+        this.updateToTransition(nodeThatTransitionsToGroup, groupId, nodeIdToInsert);
       }
     }
   }
 
-  updateTransitionsToStartId(startId, nodeIdToInsert) {
-    const nodesThatTransitionToStartId = this.getNodesByToNodeId(startId);
-    for (let nodeThatTransitionToStartId of nodesThatTransitionToStartId) {
+  private updateTransitionsToStartId(startId: string, nodeIdToInsert: string): void {
+    for (const nodeThatTransitionToStartId of this.getNodesByToNodeId(startId)) {
       this.updateToTransition(nodeThatTransitionToStartId, startId, nodeIdToInsert);
     }
   }
