@@ -770,20 +770,6 @@ export class ProjectService {
   }
 
   /**
-   * Get node ids of all the nodes that have a to transition to the given node id
-   * @param toNodeId
-   * @returns all the node ids that have a transition to the given node id
-   */
-  getNodesWithTransitionToNodeId(toNodeId: string): string[] {
-    const nodeIds = [];
-    const nodes = this.getNodesByToNodeId(toNodeId);
-    for (let node of nodes) {
-      nodeIds.push(node.id);
-    }
-    return nodeIds;
-  }
-
-  /**
    * Retrieves the project JSON from Config.projectURL and returns it.
    * If Config.projectURL is undefined, returns null.
    */
