@@ -8,6 +8,7 @@ import { ChooseBranchPathDialogComponent } from '../../../app/preview/modules/ch
 import { DataService } from '../../../app/services/data.service';
 import { Observable, Subject } from 'rxjs';
 import { ConstraintService } from './constraintService';
+import { TransitionLogic } from '../common/TransitionLogic';
 
 @Injectable()
 export class NodeService {
@@ -176,92 +177,87 @@ export class NodeService {
    * for how to choose a transition
    * @returns a promise that will return a transition
    */
-  chooseTransition(nodeId, transitionLogic): any {
+  protected chooseTransition(nodeId: string, transitionLogic: TransitionLogic): Promise<any> {
     const existingPromise = this.getChooseTransitionPromise(nodeId);
     if (existingPromise != null) {
       return existingPromise;
     }
     const promise = new Promise((resolve, reject) => {
       let transitionResult = this.getTransitionResultByNodeId(nodeId);
-      if (
-        transitionResult == null ||
-        (transitionLogic != null && transitionLogic.canChangePath == true)
-      ) {
+      if (transitionResult == null || transitionLogic.canChangePath == true) {
         /*
          * we have not previously calculated the transition or the
          * transition logic allows the student to change branch paths
          * so we will calculate the transition again
          */
         const transitions = transitionLogic.transitions;
-        if (transitions != null) {
-          const availableTransitions = this.getAvailableTransitions(transitions);
-          if (availableTransitions.length == 0) {
-            transitionResult = null;
-          } else if (availableTransitions.length == 1) {
-            transitionResult = availableTransitions[0];
-          } else if (availableTransitions.length > 1) {
-            if (this.ConfigService.isPreview()) {
+        const availableTransitions = this.getAvailableTransitions(transitions);
+        if (availableTransitions.length == 0) {
+          transitionResult = null;
+        } else if (availableTransitions.length == 1) {
+          transitionResult = availableTransitions[0];
+        } else if (availableTransitions.length > 1) {
+          if (this.ConfigService.isPreview()) {
+            /*
+             * we are in preview mode so we will let the user choose
+             * the branch path to go to
+             */
+            if (transitionResult != null) {
               /*
-               * we are in preview mode so we will let the user choose
-               * the branch path to go to
+               * the user has previously chosen the branch path
+               * so we will use the transition they chose and
+               * not ask them again
                */
-              if (transitionResult != null) {
-                /*
-                 * the user has previously chosen the branch path
-                 * so we will use the transition they chose and
-                 * not ask them again
-                 */
-              } else {
-                const paths = [];
-                for (const availableTransition of availableTransitions) {
-                  const toNodeId = availableTransition.to;
-                  const path = {
-                    nodeId: toNodeId,
-                    nodeTitle: this.ProjectService.getNodePositionAndTitle(toNodeId),
-                    transition: availableTransition
-                  };
-                  paths.push(path);
-                }
-                const dialogRef = this.dialog.open(ChooseBranchPathDialogComponent, {
-                  data: {
-                    paths: paths,
-                    nodeId: nodeId
-                  },
-                  disableClose: true
-                });
-                dialogRef.afterClosed().subscribe((result) => {
-                  resolve(result);
-                });
-              }
             } else {
-              /*
-               * we are in regular student run mode so we will choose
-               * the branch according to how the step was authored
-               */
-              const howToChooseAmongAvailablePaths = transitionLogic.howToChooseAmongAvailablePaths;
-              if (
-                howToChooseAmongAvailablePaths == null ||
-                howToChooseAmongAvailablePaths === '' ||
-                howToChooseAmongAvailablePaths === 'random'
-              ) {
-                // choose a random transition
-
-                const randomIndex = Math.floor(Math.random() * availableTransitions.length);
-                transitionResult = availableTransitions[randomIndex];
-              } else if (howToChooseAmongAvailablePaths === 'workgroupId') {
-                // use the workgroup id to choose the transition
-
-                const workgroupId = this.ConfigService.getWorkgroupId();
-                const index = workgroupId % availableTransitions.length;
-                transitionResult = availableTransitions[index];
-              } else if (howToChooseAmongAvailablePaths === 'firstAvailable') {
-                // choose the first available transition
-
-                transitionResult = availableTransitions[0];
-              } else if (howToChooseAmongAvailablePaths === 'lastAvailable') {
-                // choose the last available transition
-                transitionResult = availableTransitions[availableTransitions.length - 1];
+              const paths = [];
+              for (const availableTransition of availableTransitions) {
+                const toNodeId = availableTransition.to;
+                const path = {
+                  nodeId: toNodeId,
+                  nodeTitle: this.ProjectService.getNodePositionAndTitle(toNodeId),
+                  transition: availableTransition
+                };
+                paths.push(path);
               }
+              const dialogRef = this.dialog.open(ChooseBranchPathDialogComponent, {
+                data: {
+                  paths: paths,
+                  nodeId: nodeId
+                },
+                disableClose: true
+              });
+              dialogRef.afterClosed().subscribe((result) => {
+                resolve(result);
+              });
+            }
+          } else {
+            /*
+             * we are in regular student run mode so we will choose
+             * the branch according to how the step was authored
+             */
+            const howToChooseAmongAvailablePaths = transitionLogic.howToChooseAmongAvailablePaths;
+            if (
+              howToChooseAmongAvailablePaths == null ||
+              howToChooseAmongAvailablePaths === '' ||
+              howToChooseAmongAvailablePaths === 'random'
+            ) {
+              // choose a random transition
+
+              const randomIndex = Math.floor(Math.random() * availableTransitions.length);
+              transitionResult = availableTransitions[randomIndex];
+            } else if (howToChooseAmongAvailablePaths === 'workgroupId') {
+              // use the workgroup id to choose the transition
+
+              const workgroupId = this.ConfigService.getWorkgroupId();
+              const index = workgroupId % availableTransitions.length;
+              transitionResult = availableTransitions[index];
+            } else if (howToChooseAmongAvailablePaths === 'firstAvailable') {
+              // choose the first available transition
+
+              transitionResult = availableTransitions[0];
+            } else if (howToChooseAmongAvailablePaths === 'lastAvailable') {
+              // choose the last available transition
+              transitionResult = availableTransitions[availableTransitions.length - 1];
             }
           }
         }
@@ -283,18 +279,11 @@ export class NodeService {
     return promise;
   }
 
-  getAvailableTransitions(transitions: any) {
-    const availableTransitions = [];
-    for (const transition of transitions) {
-      const criteria = transition.criteria;
-      if (
-        criteria == null ||
-        (criteria != null && this.constraintService.evaluateCriterias(criteria))
-      ) {
-        availableTransitions.push(transition);
-      }
-    }
-    return availableTransitions;
+  private getAvailableTransitions(transitions: any): any[] {
+    return transitions.filter(
+      (transition) =>
+        transition.criteria == null || this.constraintService.evaluateCriterias(transition.criteria)
+    );
   }
 
   /**
