@@ -731,26 +731,12 @@ export class ProjectService {
   /**
    * Get nodes that have a transition to the given node id
    * @param toNodeId the node id
-   * @returns an array of node objects that transition to the
-   * given node id
+   * @returns an array of node objects that transition to the given node id
    */
-  getNodesByToNodeId(toNodeId: string): any {
-    const nodesByToNodeId = [];
-    if (toNodeId != null) {
-      const nodes = this.project.nodes;
-      for (let node of nodes) {
-        if (this.nodeHasTransitionToNodeId(node, toNodeId)) {
-          nodesByToNodeId.push(node);
-        }
-      }
-      const inactiveNodes = this.getInactiveNodes();
-      for (let inactiveNode of inactiveNodes) {
-        if (this.nodeHasTransitionToNodeId(inactiveNode, toNodeId)) {
-          nodesByToNodeId.push(inactiveNode);
-        }
-      }
-    }
-    return nodesByToNodeId;
+  getNodesByToNodeId(toNodeId: string): any[] {
+    return this.project.nodes
+      .concat(this.getInactiveNodes())
+      .filter((node) => this.nodeHasTransitionToNodeId(node, toNodeId));
   }
 
   getInactiveNodes(): any {

@@ -26,217 +26,214 @@ export class RemoveNodeIdFromTransitionsService {
 
     for (let n = 0; n < nodesByToNodeId.length; n++) {
       const node = nodesByToNodeId[n];
-      if (node != null) {
-        const parentIdOfFromNode = this.projectService.getParentGroupId(node.id);
-        const transitionLogic = node.transitionLogic;
+      const parentIdOfFromNode = this.projectService.getParentGroupId(node.id);
+      const transitionLogic = node.transitionLogic;
 
-        if (transitionLogic != null) {
-          const transitions = transitionLogic.transitions;
-          for (let t = 0; t < transitions.length; t++) {
-            const transition = transitions[t];
-            if (nodeId === transition.to) {
-              // we have found the transition to the node we are removing
+      if (transitionLogic != null) {
+        const transitions = transitionLogic.transitions;
+        for (let t = 0; t < transitions.length; t++) {
+          const transition = transitions[t];
+          if (nodeId === transition.to) {
+            // we have found the transition to the node we are removing
 
-              // copy the transitions from the node we are removing
-              let transitionsCopy = copy(nodeToRemoveTransitions);
+            // copy the transitions from the node we are removing
+            let transitionsCopy = copy(nodeToRemoveTransitions);
 
-              /*
-               * if the parent from group is different than the parent removing group
-               * remove transitions that are to a node in a different group than
-               * the parent removing group
-               */
+            /*
+             * if the parent from group is different than the parent removing group
+             * remove transitions that are to a node in a different group than
+             * the parent removing group
+             */
 
-              if (parentIdOfFromNode != parentIdOfNodeToRemove) {
-                for (let tc = 0; tc < transitionsCopy.length; tc++) {
-                  const tempTransition = transitionsCopy[tc];
-                  if (tempTransition != null) {
-                    const tempToNodeId = tempTransition.to;
-                    if (tempToNodeId != null) {
-                      const parentIdOfToNode = this.projectService.getParentGroupId(tempToNodeId);
-                      if (parentIdOfNodeToRemove != parentIdOfToNode) {
-                        // remove the transition
-                        transitionsCopy.splice(tc, 1);
-                        tc--;
-                      }
+            if (parentIdOfFromNode != parentIdOfNodeToRemove) {
+              for (let tc = 0; tc < transitionsCopy.length; tc++) {
+                const tempTransition = transitionsCopy[tc];
+                if (tempTransition != null) {
+                  const tempToNodeId = tempTransition.to;
+                  if (tempToNodeId != null) {
+                    const parentIdOfToNode = this.projectService.getParentGroupId(tempToNodeId);
+                    if (parentIdOfNodeToRemove != parentIdOfToNode) {
+                      // remove the transition
+                      transitionsCopy.splice(tc, 1);
+                      tc--;
                     }
                   }
                 }
               }
+            }
 
-              if (this.isFirstNodeInBranchPath(nodeId)) {
-                /*
-                 * Get the node ids that have a branchPathTaken
-                 * constraint from the before node and to the node
-                 * we are removing. If there are any, we need to
-                 * update the branchPathTaken constraint with the
-                 * next nodeId that comes after the node we are
-                 * removing.
-                 */
-                const nodeIdsInBranch = this.projectService.getNodeIdsInBranch(node.id, nodeId);
+            if (this.isFirstNodeInBranchPath(nodeId)) {
+              /*
+               * Get the node ids that have a branchPathTaken
+               * constraint from the before node and to the node
+               * we are removing. If there are any, we need to
+               * update the branchPathTaken constraint with the
+               * next nodeId that comes after the node we are
+               * removing.
+               */
+              const nodeIdsInBranch = this.projectService.getNodeIdsInBranch(node.id, nodeId);
 
-                if (nodeIdsInBranch != null) {
-                  for (let nodeIdInBranch of nodeIdsInBranch) {
-                    const nodeInBranch = this.projectService.getNodeById(nodeIdInBranch);
-                    for (let transitionCopy of transitionsCopy) {
-                      if (transitionCopy != null) {
-                        const currentFromNodeId = node.id;
-                        const currentToNodeId = nodeId;
-                        const newFromNodeId = node.id;
-                        const newToNodeId = transitionCopy.to;
+              if (nodeIdsInBranch != null) {
+                for (let nodeIdInBranch of nodeIdsInBranch) {
+                  const nodeInBranch = this.projectService.getNodeById(nodeIdInBranch);
+                  for (let transitionCopy of transitionsCopy) {
+                    if (transitionCopy != null) {
+                      const currentFromNodeId = node.id;
+                      const currentToNodeId = nodeId;
+                      const newFromNodeId = node.id;
+                      const newToNodeId = transitionCopy.to;
 
-                        /*
-                         * change the branch path taken constraint by changing
-                         * the toNodeId
-                         */
-                        this.updateBranchPathTakenConstraint(
-                          nodeInBranch,
-                          currentFromNodeId,
-                          currentToNodeId,
-                          newFromNodeId,
-                          newToNodeId
-                        );
-                      }
+                      /*
+                       * change the branch path taken constraint by changing
+                       * the toNodeId
+                       */
+                      this.updateBranchPathTakenConstraint(
+                        nodeInBranch,
+                        currentFromNodeId,
+                        currentToNodeId,
+                        newFromNodeId,
+                        newToNodeId
+                      );
                     }
                   }
                 }
-              } else if (this.projectService.isBranchPoint(nodeId)) {
-                /*
-                 * get all the branches that have the node we
-                 * are removing as the start point
-                 */
-                const branches = this.projectService.getBranchesByBranchStartPointNodeId(nodeId);
+              }
+            } else if (this.projectService.isBranchPoint(nodeId)) {
+              /*
+               * get all the branches that have the node we
+               * are removing as the start point
+               */
+              const branches = this.projectService.getBranchesByBranchStartPointNodeId(nodeId);
 
-                for (let branch of branches) {
-                  if (branch != null) {
-                    /*
-                     * get the branch paths. these paths do not
-                     * contain the start point or merge point.
-                     */
-                    const branchPaths = branch.paths;
+              for (let branch of branches) {
+                if (branch != null) {
+                  /*
+                   * get the branch paths. these paths do not
+                   * contain the start point or merge point.
+                   */
+                  const branchPaths = branch.paths;
 
-                    if (branchPaths != null) {
-                      for (let branchPath of branchPaths) {
-                        if (branchPath != null) {
-                          const currentFromNodeId = nodeId;
-                          const currentToNodeId = branchPath[0];
-                          const newFromNodeId = node.id;
-                          const newToNodeId = branchPath[0];
-                          for (let branchPathNodeId of branchPath) {
-                            const branchPathNode =
-                              this.projectService.getNodeById(branchPathNodeId);
-                            this.updateBranchPathTakenConstraint(
-                              branchPathNode,
-                              currentFromNodeId,
-                              currentToNodeId,
-                              newFromNodeId,
-                              newToNodeId
-                            );
-                          }
+                  if (branchPaths != null) {
+                    for (let branchPath of branchPaths) {
+                      if (branchPath != null) {
+                        const currentFromNodeId = nodeId;
+                        const currentToNodeId = branchPath[0];
+                        const newFromNodeId = node.id;
+                        const newToNodeId = branchPath[0];
+                        for (let branchPathNodeId of branchPath) {
+                          const branchPathNode = this.projectService.getNodeById(branchPathNodeId);
+                          this.updateBranchPathTakenConstraint(
+                            branchPathNode,
+                            currentFromNodeId,
+                            currentToNodeId,
+                            newFromNodeId,
+                            newToNodeId
+                          );
                         }
                       }
                     }
                   }
                 }
               }
+            }
 
-              // remove the transition to the node we are removing
-              const transitionRemoved = transitions.splice(t, 1)[0];
+            // remove the transition to the node we are removing
+            const transitionRemoved = transitions.splice(t, 1)[0];
 
-              if (transitionsCopy != null) {
-                let insertIndex = t;
+            if (transitionsCopy != null) {
+              let insertIndex = t;
 
-                /*
-                 * loop through all the transitions from the node we are removing
-                 * and insert them into the transitions of the from node
-                 * e.g.
-                 * the node that comes before the node we are removing has these transitions
-                 * "transitions": [
-                 *     {
-                 *         "to": "node4"
-                 *     },
-                 *     {
-                 *         "to": "node6"
-                 *     }
-                 * ]
-                 *
-                 * we are removing node4. node4 has a transition to node5.
-                 *
-                 * the node that comes before the node we are removing now has these transitions
-                 * "transitions": [
-                 *     {
-                 *         "to": "node5"
-                 *     },
-                 *     {
-                 *         "to": "node6"
-                 *     }
-                 * ]
-                 */
-                for (let transitionCopy of transitionsCopy) {
-                  if (!this.isTransitionExist(transitions, transitionCopy)) {
-                    const toNodeId = transitionCopy.to;
-                    if (
-                      this.projectService.isApplicationNode(node.id) &&
-                      this.projectService.isGroupNode(toNodeId) &&
-                      this.hasGroupStartId(toNodeId)
-                    ) {
-                      this.projectService.addToTransition(
-                        node,
-                        this.projectService.getGroupStartId(toNodeId)
-                      );
-                    } else {
-                      if (transitionRemoved.criteria != null) {
-                        transitionCopy.criteria = transitionRemoved.criteria;
-                      }
-                      transitions.splice(insertIndex, 0, transitionCopy);
-                      insertIndex++;
+              /*
+               * loop through all the transitions from the node we are removing
+               * and insert them into the transitions of the from node
+               * e.g.
+               * the node that comes before the node we are removing has these transitions
+               * "transitions": [
+               *     {
+               *         "to": "node4"
+               *     },
+               *     {
+               *         "to": "node6"
+               *     }
+               * ]
+               *
+               * we are removing node4. node4 has a transition to node5.
+               *
+               * the node that comes before the node we are removing now has these transitions
+               * "transitions": [
+               *     {
+               *         "to": "node5"
+               *     },
+               *     {
+               *         "to": "node6"
+               *     }
+               * ]
+               */
+              for (let transitionCopy of transitionsCopy) {
+                if (!this.isTransitionExist(transitions, transitionCopy)) {
+                  const toNodeId = transitionCopy.to;
+                  if (
+                    this.projectService.isApplicationNode(node.id) &&
+                    this.projectService.isGroupNode(toNodeId) &&
+                    this.hasGroupStartId(toNodeId)
+                  ) {
+                    this.projectService.addToTransition(
+                      node,
+                      this.projectService.getGroupStartId(toNodeId)
+                    );
+                  } else {
+                    if (transitionRemoved.criteria != null) {
+                      transitionCopy.criteria = transitionRemoved.criteria;
                     }
+                    transitions.splice(insertIndex, 0, transitionCopy);
+                    insertIndex++;
                   }
                 }
               }
-              t--;
+            }
+            t--;
 
-              // check if the node we are moving is a group
-              if (this.projectService.isGroupNode(nodeId)) {
-                /*
-                 * we are moving a group so we need to update transitions that
-                 * go into the group
-                 */
-                const groupIdWeAreMoving = nodeId;
-                const groupThatTransitionsToGroupWeAreMoving = node;
-                this.updateChildrenTransitionsIntoGroupWeAreMoving(
-                  groupThatTransitionsToGroupWeAreMoving,
-                  groupIdWeAreMoving
-                );
-              }
+            // check if the node we are moving is a group
+            if (this.projectService.isGroupNode(nodeId)) {
+              /*
+               * we are moving a group so we need to update transitions that
+               * go into the group
+               */
+              const groupIdWeAreMoving = nodeId;
+              const groupThatTransitionsToGroupWeAreMoving = node;
+              this.updateChildrenTransitionsIntoGroupWeAreMoving(
+                groupThatTransitionsToGroupWeAreMoving,
+                groupIdWeAreMoving
+              );
             }
           }
+        }
 
-          if (
-            transitions.length === 0 &&
-            parentIdOfNodeToRemove != 'group0' &&
-            parentIdOfNodeToRemove != this.projectService.getParentGroupId(node.id)
-          ) {
-            /*
-             * the from node no longer has any transitions so we will make it transition to the
-             * parent of the node we are removing
-             */
-            this.projectService.addToTransition(node, parentIdOfNodeToRemove);
-          }
+        if (
+          transitions.length === 0 &&
+          parentIdOfNodeToRemove != 'group0' &&
+          parentIdOfNodeToRemove != this.projectService.getParentGroupId(node.id)
+        ) {
+          /*
+           * the from node no longer has any transitions so we will make it transition to the
+           * parent of the node we are removing
+           */
+          this.projectService.addToTransition(node, parentIdOfNodeToRemove);
+        }
 
-          if (this.projectService.isBranchPoint(nodeId)) {
-            /*
-             * the node we are deleting is a branch point so we to
-             * copy the transition logic to the node that comes
-             * before it
-             */
-            node.transitionLogic = copy(nodeToRemoveTransitionLogic);
+        if (this.projectService.isBranchPoint(nodeId)) {
+          /*
+           * the node we are deleting is a branch point so we to
+           * copy the transition logic to the node that comes
+           * before it
+           */
+          node.transitionLogic = copy(nodeToRemoveTransitionLogic);
 
-            /*
-             * set the transitions for the node that comes before
-             * the one we are removing
-             */
-            node.transitionLogic.transitions = transitions;
-          }
+          /*
+           * set the transitions for the node that comes before
+           * the one we are removing
+           */
+          node.transitionLogic.transitions = transitions;
         }
       }
     }
@@ -364,9 +361,6 @@ export class RemoveNodeIdFromTransitionsService {
     if (groupThatTransitionsToGroupWeAreMoving != null && groupIdWeAreMoving != null) {
       const group = this.projectService.getNodeById(groupIdWeAreMoving);
       if (group != null) {
-        // get all the nodes that have a transition to the node we are removing
-        const nodesByToNodeId = this.projectService.getNodesByToNodeId(groupIdWeAreMoving);
-
         // get the transitions of the node we are removing
         const nodeToRemoveTransitionLogic = group.transitionLogic;
         let nodeToRemoveTransitions = [];
