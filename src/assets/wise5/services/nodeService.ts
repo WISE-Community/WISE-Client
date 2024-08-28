@@ -184,7 +184,7 @@ export class NodeService {
     }
     const promise = new Promise((resolve, reject) => {
       let transitionResult = this.getTransitionResultByNodeId(nodeId);
-      if (transitionResult == null || transitionLogic.canChangePath == true) {
+      if (transitionResult == null || transitionLogic.canChangePath) {
         /*
          * we have not previously calculated the transition or the
          * transition logic allows the student to change branch paths
