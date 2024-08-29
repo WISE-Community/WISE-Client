@@ -165,7 +165,7 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('pathCount').setValue(pathCount);
   }
 
-  private getPathCount(): number {
+  protected getPathCount(): number {
     return this.formGroup.get('pathCount').value;
   }
 
@@ -173,7 +173,7 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('criteria').setValue(criteria);
   }
 
-  private getCriteria(): string {
+  protected getCriteria(): string {
     return this.formGroup.get('criteria').value;
   }
 
@@ -181,7 +181,7 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('nodeId').setValue(nodeId);
   }
 
-  private getNodeId(): string {
+  protected getNodeId(): string {
     return this.formGroup.get('nodeId')?.value;
   }
 
@@ -189,7 +189,7 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('componentId').setValue(componentId);
   }
 
-  private getComponentId(): string {
+  protected getComponentId(): string {
     return this.formGroup.get('componentId')?.value;
   }
 
@@ -197,7 +197,7 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('mergeStep').setValue(nodeId);
   }
 
-  private getMergeStepId(): string {
+  protected getMergeStepId(): string {
     return this.formGroup.get('mergeStep').value;
   }
 

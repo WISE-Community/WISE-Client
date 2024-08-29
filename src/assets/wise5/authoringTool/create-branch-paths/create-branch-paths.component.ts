@@ -83,7 +83,7 @@ export class CreateBranchPathsComponent {
     }
   }
 
-  private criteriaRequiresAdditionalParams(criteria: string): boolean {
+  protected criteriaRequiresAdditionalParams(criteria: string): boolean {
     return criteria === this.SCORE_VALUE || criteria === this.CHOICE_CHOSEN_VALUE;
   }
 
@@ -109,7 +109,7 @@ export class CreateBranchPathsComponent {
     this.formControls = [];
   }
 
-  private initializeFormControls(): void {
+  protected initializeFormControls(): void {
     for (let i = 0; i < this.pathCount; i++) {
       const pathFormControl = new FormControl('', [Validators.required]);
       this.pathFormGroup.addControl(this.getFormControlName(i), pathFormControl);
@@ -117,7 +117,7 @@ export class CreateBranchPathsComponent {
     }
   }
 
-  private initializePathValues(): void {
+  protected initializePathValues(): void {
     if (this.criteria === this.CHOICE_CHOSEN_VALUE) {
       this.populateChoices();
       this.autoFillChoiceChosenValues();
@@ -131,7 +131,7 @@ export class CreateBranchPathsComponent {
     this.choices = component.choices;
   }
 
-  private autoFillChoiceChosenValues(): void {
+  protected autoFillChoiceChosenValues(): void {
     const component: MultipleChoiceContent = this.getComponent() as MultipleChoiceContent;
     const choiceIds = component.choices.map((choice: Choice) => choice.id);
     for (let i = 0; i < this.pathCount; i++) {

@@ -3,6 +3,7 @@ import { EditBranchPathsComponent } from './edit-branch-paths.component';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { provideHttpClient } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
 
 describe('EditBranchPathsComponent', () => {
   let component: EditBranchPathsComponent;
@@ -16,6 +17,7 @@ describe('EditBranchPathsComponent', () => {
 
     fixture = TestBed.createComponent(EditBranchPathsComponent);
     component = fixture.componentInstance;
+    component.pathFormGroup = new FormGroup({});
     fixture.detectChanges();
   });
 
