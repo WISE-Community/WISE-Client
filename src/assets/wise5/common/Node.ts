@@ -197,6 +197,10 @@ export class Node {
     );
   }
 
+  addConstraint(constraint: any): void {
+    this.constraints.push(constraint);
+  }
+
   getConstraints(): any[] {
     return this.constraints;
   }
