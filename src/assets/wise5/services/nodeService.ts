@@ -12,8 +12,8 @@ import { TransitionLogic } from '../common/TransitionLogic';
 
 @Injectable()
 export class NodeService {
-  transitionResults = {};
-  chooseTransitionPromises = {};
+  private transitionResults = {};
+  private chooseTransitionPromises = {};
   private nodeSubmitClickedSource: Subject<any> = new Subject<any>();
   public nodeSubmitClicked$: Observable<any> = this.nodeSubmitClickedSource.asObservable();
   private doneRenderingComponentSource: Subject<any> = new Subject<any>();
@@ -179,12 +179,26 @@ export class NodeService {
    * @returns a promise that will return a transition
    */
   protected chooseTransition(nodeId: string, transitionLogic: TransitionLogic): Promise<any> {
-    const existingPromise = this.getChooseTransitionPromise(nodeId);
-    if (existingPromise != null) {
-      return existingPromise;
+    if (this.ConfigService.isPreview() && this.chooseTransitionPromises[nodeId] != null) {
+      return this.chooseTransitionPromises[nodeId];
     }
-    const promise = new Promise((resolve, reject) => {
-      let transitionResult = this.getTransitionResultByNodeId(nodeId);
+    const promise = this.getChooseTransitionPromise(nodeId, transitionLogic);
+    if (this.ConfigService.isPreview()) {
+      const availableTransitions = this.getAvailableTransitions(transitionLogic.transitions);
+      const transitionResult = this.transitionResults[nodeId];
+      if (availableTransitions.length > 1 && transitionResult == null) {
+        this.chooseTransitionPromises[nodeId] = promise;
+      }
+    }
+    return promise;
+  }
+
+  private getChooseTransitionPromise(
+    nodeId: string,
+    transitionLogic: TransitionLogic
+  ): Promise<any> {
+    return new Promise((resolve) => {
+      let transitionResult = this.transitionResults[nodeId];
       if (transitionResult == null || transitionLogic.canChangePath) {
         /*
          * we have not previously calculated the transition or the
@@ -199,85 +213,29 @@ export class NodeService {
           transitionResult = availableTransitions[0];
         } else if (availableTransitions.length > 1) {
           if (this.ConfigService.isPreview()) {
-            /*
-             * we are in preview mode so we will let the user choose
-             * the branch path to go to
-             */
+            // we are in preview mode so we will let the user choose the branch path to go to
             if (transitionResult != null) {
               /*
-               * the user has previously chosen the branch path
-               * so we will use the transition they chose and
-               * not ask them again
+               * the user has previously chosen the branch path so we will use the transition
+               * they last chose and not ask them again
                */
             } else {
-              const paths = [];
-              for (const availableTransition of availableTransitions) {
-                const toNodeId = availableTransition.to;
-                const path = {
-                  nodeId: toNodeId,
-                  nodeTitle: this.ProjectService.getNodePositionAndTitle(toNodeId),
-                  transition: availableTransition
-                };
-                paths.push(path);
-              }
-              const dialogRef = this.dialog.open(ChooseBranchPathDialogComponent, {
-                data: {
-                  paths: paths,
-                  nodeId: nodeId
-                },
-                disableClose: true
-              });
-              dialogRef.afterClosed().subscribe((result) => {
-                resolve(result);
-              });
+              this.letUserChooseTransition(availableTransitions, nodeId, resolve);
             }
           } else {
-            /*
-             * we are in regular student run mode so we will choose
-             * the branch according to how the step was authored
-             */
-            const howToChooseAmongAvailablePaths = transitionLogic.howToChooseAmongAvailablePaths;
-            if (
-              howToChooseAmongAvailablePaths == null ||
-              howToChooseAmongAvailablePaths === '' ||
-              howToChooseAmongAvailablePaths === 'random'
-            ) {
-              // choose a random transition
-
-              const randomIndex = Math.floor(Math.random() * availableTransitions.length);
-              transitionResult = availableTransitions[randomIndex];
-            } else if (howToChooseAmongAvailablePaths === 'workgroupId') {
-              // use the workgroup id to choose the transition
-
-              const workgroupId = this.ConfigService.getWorkgroupId();
-              const index = workgroupId % availableTransitions.length;
-              transitionResult = availableTransitions[index];
-            } else if (howToChooseAmongAvailablePaths === 'firstAvailable') {
-              // choose the first available transition
-
-              transitionResult = availableTransitions[0];
-            } else if (howToChooseAmongAvailablePaths === 'lastAvailable') {
-              // choose the last available transition
-              transitionResult = availableTransitions[availableTransitions.length - 1];
-            }
+            transitionResult = this.chooseTransitionAutomatically(
+              transitionLogic.howToChooseAmongAvailablePaths,
+              availableTransitions,
+              transitionResult
+            );
           }
         }
       }
       if (transitionResult != null) {
-        this.setTransitionResult(nodeId, transitionResult);
+        this.transitionResults[nodeId] = transitionResult;
         resolve(transitionResult);
       }
     });
-    const availableTransitions = this.getAvailableTransitions(transitionLogic.transitions);
-    const transitionResult = this.getTransitionResultByNodeId(nodeId);
-    if (
-      this.ConfigService.isPreview() &&
-      availableTransitions.length > 1 &&
-      transitionResult == null
-    ) {
-      this.setChooseTransitionPromise(nodeId, promise);
-    }
-    return promise;
   }
 
   private getAvailableTransitions(transitions: any): any[] {
@@ -285,6 +243,52 @@ export class NodeService {
       (transition) =>
         transition.criteria == null || this.constraintService.evaluateCriterias(transition.criteria)
     );
+  }
+
+  private letUserChooseTransition(
+    availableTransitions: any[],
+    nodeId: string,
+    resolve: (value: any) => void
+  ): void {
+    const paths = [];
+    for (const availableTransition of availableTransitions) {
+      const toNodeId = availableTransition.to;
+      const path = {
+        nodeId: toNodeId,
+        nodeTitle: this.ProjectService.getNodePositionAndTitle(toNodeId),
+        transition: availableTransition
+      };
+      paths.push(path);
+    }
+    const dialogRef = this.dialog.open(ChooseBranchPathDialogComponent, {
+      data: {
+        paths: paths,
+        nodeId: nodeId
+      },
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      resolve(result);
+    });
+  }
+
+  private chooseTransitionAutomatically(
+    howToChooseAmongAvailablePaths: string,
+    availableTransitions: any[],
+    transitionResult: any
+  ): any {
+    if ([null, '', 'random'].includes(howToChooseAmongAvailablePaths)) {
+      const randomIndex = Math.floor(Math.random() * availableTransitions.length);
+      transitionResult = availableTransitions[randomIndex];
+    } else if (howToChooseAmongAvailablePaths === 'workgroupId') {
+      const index = this.ConfigService.getWorkgroupId() % availableTransitions.length;
+      transitionResult = availableTransitions[index];
+    } else if (howToChooseAmongAvailablePaths === 'firstAvailable') {
+      transitionResult = availableTransitions[0];
+    } else if (howToChooseAmongAvailablePaths === 'lastAvailable') {
+      transitionResult = availableTransitions[availableTransitions.length - 1];
+    }
+    return transitionResult;
   }
 
   /**
@@ -321,49 +325,6 @@ export class NodeService {
       toNodeId: toNodeId
     };
     this.DataService.saveVLEEvent(nodeId, componentId, componentType, category, event, eventData);
-  }
-
-  /**
-   * Get the transition result for a node
-   * @param nodeId the the node id
-   * @returns the transition object that was chosen for the node
-   */
-  getTransitionResultByNodeId(nodeId) {
-    return this.transitionResults[nodeId];
-  }
-
-  /**
-   * Set the transition result for a node
-   * @param nodeId the node id
-   * @param transitionResult the transition object that was chosen for the node
-   */
-  setTransitionResult(nodeId, transitionResult) {
-    if (nodeId != null) {
-      this.transitionResults[nodeId] = transitionResult;
-    }
-  }
-
-  /**
-   * Get the promise that was created for a specific node when the
-   * chooseTransition() function was called. This promise has not been
-   * resolved yet.
-   * @param nodeId the node id
-   * @returns the promise that was created when chooseTransition() was called
-   * or null if there is no unresolved promise.
-   */
-  getChooseTransitionPromise(nodeId) {
-    return this.chooseTransitionPromises[nodeId];
-  }
-
-  /**
-   * Set the promise that was created for a specific node when the
-   * chooseTransition() function was called. This promise has not been
-   * resolved yet.
-   * @param nodeId the node id
-   * @param promise the promise
-   */
-  setChooseTransitionPromise(nodeId, promise) {
-    this.chooseTransitionPromises[nodeId] = promise;
   }
 
   broadcastNodeSubmitClicked(args: any) {
