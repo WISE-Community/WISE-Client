@@ -17,6 +17,6 @@ export class InsertComponentService {
   private getInitialInsertPosition(nodeId: string, insertAfterComponentId: string): number {
     return insertAfterComponentId == null
       ? 0
-      : this.projectService.getComponentPosition(nodeId, insertAfterComponentId) + 1;
+      : this.projectService.getNode(nodeId).getComponentPosition(insertAfterComponentId) + 1;
   }
 }

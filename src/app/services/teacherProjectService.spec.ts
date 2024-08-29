@@ -70,7 +70,6 @@ describe('TeacherProjectService', () => {
   shouldBeAbleToInsertAStepNodeInsideAGroupNode();
   shouldBeAbleToInsertAGroupNodeInsideAGroupNode();
   shouldNotBeAbleToInsertAStepNodeInsideAStepNode();
-  getComponentPosition();
   addCurrentUserToAuthors_CM_shouldAddUserInfo();
   getNodeIds();
   getInactiveNodeIds();
@@ -415,24 +414,6 @@ function insertNodeAfterInTransitions() {
   });
   it('should be able to insert an activity node after another activity node', () => {
     expectInsertNodeAfterInTransition('group1', 'group2');
-  });
-}
-
-function getComponentPosition() {
-  it('should get the component position by node id and comonent id', () => {
-    service.setProject(scootersProjectJSON);
-    const nullNodeIdResult = service.getComponentPosition(null, '57lxhwfp5r');
-    expect(nullNodeIdResult).toEqual(-1);
-    const nullComponentIdResult = service.getComponentPosition('node13', null);
-    expect(nullComponentIdResult).toEqual(-1);
-    const nodeIdDNEResult = service.getComponentPosition('badNodeId', '57lxhwfp5r');
-    expect(nodeIdDNEResult).toEqual(-1);
-    const componentIdDNEResult = service.getComponentPosition('node13', 'badComponentId');
-    expect(componentIdDNEResult).toEqual(-1);
-    const componentExists = service.getComponentPosition('node13', '57lxhwfp5r');
-    expect(componentExists).toEqual(0);
-    const componentExists2 = service.getComponentPosition('node9', 'mnzx68ix8h');
-    expect(componentExists2).toEqual(1);
   });
 }
 

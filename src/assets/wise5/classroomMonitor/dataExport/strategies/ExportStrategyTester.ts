@@ -12,6 +12,7 @@ import { ComponentState } from '../../../../../app/domain/componentState';
 import { Annotation } from '../../../common/Annotation';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { ExportItemComponent } from '../export-item/export-item.component';
+import { Node } from '../../../common/Node';
 
 export class ExportStrategyTester {
   annotationService: AnnotationService = new AnnotationService(null, null, null);
@@ -109,9 +110,9 @@ export class ExportStrategyTester {
     spyOn(this.teacherProjectService, 'getNodePositionAndTitle').and.returnValue(
       this.nodePositionAndTitle
     );
-    spyOn(this.teacherProjectService, 'getComponentPosition').and.returnValue(
-      this.componentPosition
-    );
+    const node = new Node();
+    node.components = [{ id: this.componentId }];
+    spyOn(this.teacherProjectService, 'getNode').and.returnValue(node);
     spyOn(this.teacherProjectService, 'getProjectTitle').and.returnValue(this.projectTitle);
   }
 
@@ -151,10 +152,9 @@ export class ExportStrategyTester {
       null,
       null
     );
-    this.generateCSVFileSpy = spyOn(
-      this.componentExportStrategy,
-      'generateCSVFile'
-    ).and.callFake(() => {});
+    this.generateCSVFileSpy = spyOn(this.componentExportStrategy, 'generateCSVFile').and.callFake(
+      () => {}
+    );
     return controller;
   }
 

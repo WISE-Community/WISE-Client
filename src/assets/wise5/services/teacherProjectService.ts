@@ -1133,30 +1133,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Returns the position of the component in the node by node id and
-   * component id, 0-indexed.
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @returns the component's position or -1 if nodeId or componentId are null
-   * or doesn't exist in the project.
-   */
-  getComponentPosition(nodeId: string, componentId: string): number {
-    if (nodeId != null && componentId != null) {
-      const components = this.getComponents(nodeId);
-      for (let c = 0; c < components.length; c++) {
-        const tempComponent = components[c];
-        if (tempComponent != null) {
-          const tempComponentId = tempComponent.id;
-          if (componentId === tempComponentId) {
-            return c;
-          }
-        }
-      }
-    }
-    return -1;
-  }
-
-  /**
    * Update the transitions so that the fromGroup points to the newToGroup
    *
    * Before

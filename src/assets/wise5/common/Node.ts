@@ -226,4 +226,8 @@ export class Node {
     ).length;
     return numRubrics;
   }
+
+  getComponentPosition(componentId: string): number {
+    return this.components.findIndex((component) => component.id === componentId);
+  }
 }
