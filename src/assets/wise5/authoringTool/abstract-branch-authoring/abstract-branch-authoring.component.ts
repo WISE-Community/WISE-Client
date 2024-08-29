@@ -9,7 +9,6 @@ import {
   TAG_VALUE,
   WORKGROUP_ID_VALUE
 } from '../../../../app/domain/branchCriteria';
-import { CreateBranchParams } from '../../common/CreateBranchParams';
 
 @Directive()
 export abstract class AbstractBranchAuthoringComponent {
@@ -199,24 +198,5 @@ export abstract class AbstractBranchAuthoringComponent {
 
   protected getMergeStepId(): string {
     return this.formGroup.get('mergeStep').value;
-  }
-
-  protected getBranchParams(): CreateBranchParams {
-    const params: CreateBranchParams = {
-      branchStepId: this.targetId,
-      componentId: this.getComponentId(),
-      criteria: this.getCriteria(),
-      mergeStepId: this.getMergeStepId(),
-      nodeId: this.getNodeId(),
-      pathCount: this.getPathCount()
-    };
-    const pathKeys = Object.keys(this.pathFormGroup.controls);
-    if (pathKeys.length > 0) {
-      params.paths = [];
-      pathKeys.forEach((key) => {
-        params.paths.push(this.pathFormGroup.controls[key].value);
-      });
-    }
-    return params;
   }
 }

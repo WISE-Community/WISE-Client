@@ -260,28 +260,23 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     }
   }
 
-  private removePaths(branchPaths: any[], params: any): void {
+  private removePaths(branchPaths: any[], params: CreateBranchParams): void {
     const nodeIdAfterMergeStep = this.projectService.getNodeIdAfter(params.mergeStepId);
     let nodeIdToPlaceAfter = params.mergeStepId;
     branchPaths
       .filter((path: any) => path.delete)
       .forEach((path: any, index: number) => {
-        if (path.delete) {
-          this.deleteBranchService.deleteBranchPathAndPlaceAfter(
-            branchPaths,
-            path,
-            params.branchStepId,
-            nodeIdToPlaceAfter,
-            nodeIdAfterMergeStep
-          );
-          if (
-            params.criteria === this.CHOICE_CHOSEN_VALUE ||
-            params.criteria === this.SCORE_VALUE
-          ) {
-            params.paths.splice(index, 1);
-          }
-          nodeIdToPlaceAfter = path.nodesInBranchPath[path.nodesInBranchPath.length - 1].nodeId;
+        this.deleteBranchService.deleteBranchPathAndPlaceAfter(
+          branchPaths,
+          path,
+          params.branchStepId,
+          nodeIdToPlaceAfter,
+          nodeIdAfterMergeStep
+        );
+        if (params.criteria === this.CHOICE_CHOSEN_VALUE || params.criteria === this.SCORE_VALUE) {
+          params.paths.splice(index, 1);
         }
+        nodeIdToPlaceAfter = path.nodesInBranchPath[path.nodesInBranchPath.length - 1].nodeId;
       });
   }
 }

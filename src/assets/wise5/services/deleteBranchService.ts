@@ -54,16 +54,15 @@ export class DeleteBranchService {
     nodeIdToPlaceAfter: string,
     nodeIdAfterMergeStep: string
   ): void {
-    let placeAfterNodeId = nodeIdToPlaceAfter;
     for (const nodeInBranchPath of branch.nodesInBranchPath) {
       const nodeId = nodeInBranchPath.nodeId;
       this.projectService.removeBranchPathTakenNodeConstraintsIfAny(nodeId);
-      this.projectService.setTransition(placeAfterNodeId, nodeId);
+      this.projectService.setTransition(nodeIdToPlaceAfter, nodeId);
       this.projectService.removeNodeIdFromGroups(nodeId);
-      this.projectService.insertNodeAfterInGroups(nodeId, placeAfterNodeId);
-      placeAfterNodeId = nodeId;
+      this.projectService.insertNodeAfterInGroups(nodeId, nodeIdToPlaceAfter);
+      nodeIdToPlaceAfter = nodeId;
     }
-    this.projectService.setTransition(placeAfterNodeId, nodeIdAfterMergeStep);
+    this.projectService.setTransition(nodeIdToPlaceAfter, nodeIdAfterMergeStep);
     this.removeBranchPathAndTransition(branchPaths, branch, branchStepId);
   }
 

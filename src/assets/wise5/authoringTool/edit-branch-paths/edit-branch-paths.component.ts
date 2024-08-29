@@ -37,7 +37,7 @@ import { CreateBranchPathsComponent } from '../create-branch-paths/create-branch
   templateUrl: './edit-branch-paths.component.html'
 })
 export class EditBranchPathsComponent extends CreateBranchPathsComponent {
-  pathsFormArray: FormArray = new FormArray([]);
+  private pathsFormArray: FormArray = new FormArray([]);
 
   ngOnInit(): void {
     this.pathFormGroup.addControl('paths', this.pathsFormArray);
