@@ -178,10 +178,8 @@ export class NodeService {
    * @returns a promise that will return a transition
    */
   protected chooseTransition(nodeId: string, transitionLogic: TransitionLogic): Promise<any> {
-    if (this.ConfigService.isPreview()) {
-      if (this.chooseTransitionPromises[nodeId] != null) {
-        return this.chooseTransitionPromises[nodeId];
-      }
+    if (this.ConfigService.isPreview() && this.chooseTransitionPromises[nodeId] != null) {
+      return this.chooseTransitionPromises[nodeId];
     }
     const promise = this.getChooseTransitionPromise(nodeId, transitionLogic);
     if (this.ConfigService.isPreview()) {
