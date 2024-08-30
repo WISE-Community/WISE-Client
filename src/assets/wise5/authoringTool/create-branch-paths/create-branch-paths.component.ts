@@ -60,15 +60,11 @@ export class CreateBranchPathsComponent {
       this.updateNumPathFormControls();
     } else {
       this.removePathFormControls();
-      if (
-        this.nodeId != null &&
-        this.nodeId !== '' &&
-        this.componentId != null &&
-        this.componentId !== '' &&
-        this.criteriaRequiresAdditionalParams(this.criteria)
-      ) {
+      if (this.isComponentSet() && this.criteriaRequiresAdditionalParams(this.criteria)) {
         this.initializeFormControls();
-        this.initializePathValues();
+        if (this.criteria === this.CHOICE_CHOSEN_VALUE) {
+          this.initializeChoiceChosenOptions();
+        }
       }
     }
   }
@@ -81,6 +77,15 @@ export class CreateBranchPathsComponent {
         this.decreasePaths();
       }
     }
+  }
+
+  protected isComponentSet(): boolean {
+    return (
+      this.nodeId != null &&
+      this.nodeId !== '' &&
+      this.componentId != null &&
+      this.componentId !== ''
+    );
   }
 
   protected criteriaRequiresAdditionalParams(criteria: string): boolean {
@@ -117,8 +122,11 @@ export class CreateBranchPathsComponent {
     }
   }
 
-  protected initializePathValues(): void {
-    if (this.criteria === this.CHOICE_CHOSEN_VALUE) {
+  protected initializeChoiceChosenOptions(): void {
+    if (
+      this.criteria === this.CHOICE_CHOSEN_VALUE &&
+      this.getComponent()?.type === 'MultipleChoice'
+    ) {
       this.populateChoices();
       this.autoFillChoiceChosenValues();
     } else {
