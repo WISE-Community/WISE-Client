@@ -18,18 +18,24 @@ describe('AddProjectComponent', () => {
   let fixture: ComponentFixture<AddProjectComponent>;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [AddProjectComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
+      declarations: [AddProjectComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        BrowserAnimationsModule,
         MatDialogModule,
         MatDividerModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule],
-    providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    }).compileComponents();
     fixture = TestBed.createComponent(AddProjectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

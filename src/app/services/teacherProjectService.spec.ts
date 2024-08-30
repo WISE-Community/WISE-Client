@@ -51,7 +51,6 @@ describe('TeacherProjectService', () => {
     };
     service.applicationNodes = [];
   });
-  registerNewProject();
   isNodeIdToInsertTargetNotSpecified();
   testGetNodeIdAfter();
   testCreateNodeAfter();
@@ -108,23 +107,6 @@ function createConfigServiceGetConfigParamSpy() {
     } else if (param === 'wiseBaseURL') {
       return wiseBaseURL;
     }
-  });
-}
-
-function registerNewProject() {
-  describe('registerNewProject', () => {
-    it('should register new project', () => {
-      createConfigServiceGetConfigParamSpy();
-      const newProjectIdExpected = projectIdDefault;
-      const newProjectIdActual = service.registerNewProject(
-        scootersProjectName,
-        scootersProjectJSONString
-      );
-      http.expectOne(registerNewProjectURL).flush(newProjectIdExpected);
-      newProjectIdActual.then((result) => {
-        expect(result).toEqual(newProjectIdExpected);
-      });
-    });
   });
 }
 
