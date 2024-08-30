@@ -98,9 +98,8 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
           this.teacherDataService.injectRevisionCounterIntoComponentStates(
             this.teacherDataService.getComponentStatesByWorkgroupId(workgroupId)
           );
-          componentStates = this.teacherDataService.getLatestComponentStatesByWorkgroupId(
-            workgroupId
-          );
+          componentStates =
+            this.teacherDataService.getLatestComponentStatesByWorkgroupId(workgroupId);
         }
         if (componentStates != null) {
           for (var c = 0; c < componentStates.length; c++) {
@@ -218,8 +217,9 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
       componentState.nodeId
     );
     var componentPartNumber =
-      this.projectService.getComponentPosition(componentState.nodeId, componentState.componentId) +
-      1;
+      this.projectService
+        .getNode(componentState.nodeId)
+        .getComponentPosition(componentState.componentId) + 1;
     row[columnNameToNumber['Component Part Number']] = componentPartNumber;
     var component = this.projectService.getComponent(
       componentState.nodeId,
@@ -233,18 +233,15 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
         row[columnNameToNumber['Component Prompt']] = prompt;
       }
     }
-    var teacherScoreAnnotation = this.annotationService.getLatestTeacherScoreAnnotationByStudentWorkId(
-      componentState.id
-    );
-    var teacherCommentAnnotation = this.annotationService.getLatestTeacherCommentAnnotationByStudentWorkId(
-      componentState.id
-    );
+    var teacherScoreAnnotation =
+      this.annotationService.getLatestTeacherScoreAnnotationByStudentWorkId(componentState.id);
+    var teacherCommentAnnotation =
+      this.annotationService.getLatestTeacherCommentAnnotationByStudentWorkId(componentState.id);
     var autoScoreAnnotation = this.annotationService.getLatestAutoScoreAnnotationByStudentWorkId(
       componentState.id
     );
-    var autoCommentAnnotation = this.annotationService.getLatestAutoCommentAnnotationByStudentWorkId(
-      componentState.id
-    );
+    var autoCommentAnnotation =
+      this.annotationService.getLatestAutoCommentAnnotationByStudentWorkId(componentState.id);
     if (teacherScoreAnnotation != null) {
       if (teacherScoreAnnotation.serverSaveTime != null) {
         var teacherScoreServerSaveTime = new Date(teacherScoreAnnotation.serverSaveTime);
@@ -253,9 +250,8 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
             teacherScoreServerSaveTime.toDateString() +
             ' ' +
             teacherScoreServerSaveTime.toLocaleTimeString();
-          row[
-            columnNameToNumber['Teacher Score Server Timestamp']
-          ] = teacherScoreServerSaveTimeString;
+          row[columnNameToNumber['Teacher Score Server Timestamp']] =
+            teacherScoreServerSaveTimeString;
         }
       }
       if (teacherScoreAnnotation.clientSaveTime != null) {
@@ -265,9 +261,8 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
             teacherScoreClientSaveTime.toDateString() +
             ' ' +
             teacherScoreClientSaveTime.toLocaleTimeString();
-          row[
-            columnNameToNumber['Teacher Score Client Timestamp']
-          ] = teacherScoreClientSaveTimeString;
+          row[columnNameToNumber['Teacher Score Client Timestamp']] =
+            teacherScoreClientSaveTimeString;
         }
       }
       var data = teacherScoreAnnotation.data;
@@ -293,9 +288,8 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
             teacherCommentServerSaveTime.toDateString() +
             ' ' +
             teacherCommentServerSaveTime.toLocaleTimeString();
-          row[
-            columnNameToNumber['Teacher Comment Server Timestamp']
-          ] = teacherCommentServerSaveTimeString;
+          row[columnNameToNumber['Teacher Comment Server Timestamp']] =
+            teacherCommentServerSaveTimeString;
         }
       }
       if (teacherCommentAnnotation.clientSaveTime != null) {
@@ -305,9 +299,8 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
             teacherCommentClientSaveTime.toDateString() +
             ' ' +
             teacherCommentClientSaveTime.toLocaleTimeString();
-          row[
-            columnNameToNumber['Teacher Comment Client Timestamp']
-          ] = teacherCommentClientSaveTimeString;
+          row[columnNameToNumber['Teacher Comment Client Timestamp']] =
+            teacherCommentClientSaveTimeString;
         }
       }
       var data = teacherCommentAnnotation.data;
@@ -360,9 +353,8 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
             autoCommentServerSaveTime.toDateString() +
             ' ' +
             autoCommentServerSaveTime.toLocaleTimeString();
-          row[
-            columnNameToNumber['Auto Comment Server Timestamp']
-          ] = autoCommentServerSaveTimeString;
+          row[columnNameToNumber['Auto Comment Server Timestamp']] =
+            autoCommentServerSaveTimeString;
         }
       }
       if (autoCommentAnnotation.clientSaveTime != null) {
@@ -372,9 +364,8 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
             autoCommentClientSaveTime.toDateString() +
             ' ' +
             autoCommentClientSaveTime.toLocaleTimeString();
-          row[
-            columnNameToNumber['Auto Comment Client Timestamp']
-          ] = autoCommentClientSaveTimeString;
+          row[columnNameToNumber['Auto Comment Client Timestamp']] =
+            autoCommentClientSaveTimeString;
         }
       }
       var data = autoCommentAnnotation.data;

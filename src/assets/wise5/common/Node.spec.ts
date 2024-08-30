@@ -29,6 +29,7 @@ describe('Node', () => {
   getAllRelatedComponents();
   deleteTransition();
   getNumRubrics();
+  getComponentPosition();
 });
 
 function copyComponents() {
@@ -226,6 +227,16 @@ function getNumRubrics() {
       node.components[0].rubric = 'component 1 rubric';
       node.components[1].rubric = 'component 2 rubric';
       expect(node.getNumRubrics()).toEqual(3);
+    });
+  });
+}
+
+function getComponentPosition() {
+  describe('getComponentPosition()', () => {
+    it('should return index of the specified component id', () => {
+      expect(node.getComponentPosition(componentId1)).toEqual(0);
+      expect(node.getComponentPosition(componentId2)).toEqual(1);
+      expect(node.getComponentPosition('invalid_id')).toEqual(-1);
     });
   });
 }

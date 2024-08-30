@@ -183,7 +183,8 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
   ): string {
     const runId = this.configService.getRunId();
     const stepNumber = this.projectService.getNodePositionById(nodeId);
-    const componentNumber = this.projectService.getComponentPosition(nodeId, componentId) + 1;
+    const componentNumber =
+      this.projectService.getNode(nodeId).getComponentPosition(componentId) + 1;
     return (
       `${runId}_step_${stepNumber}_component_` +
       `${componentNumber}_${componentTypeWithUnderscore}_work.csv`

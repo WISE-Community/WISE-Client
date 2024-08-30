@@ -436,10 +436,9 @@ export class EventDataExportStrategy extends AbstractDataExportStrategy {
   }
 
   private setComponentPartNumber(row, columnNameToNumber, data) {
-    const componentPartNumber = this.projectService.getComponentPosition(
-      data.nodeId,
-      data.componentId
-    );
+    const componentPartNumber = this.projectService
+      .getNode(data.nodeId)
+      .getComponentPosition(data.componentId);
     if (componentPartNumber != -1) {
       row[columnNameToNumber['Component Part Number']] = componentPartNumber + 1;
     }

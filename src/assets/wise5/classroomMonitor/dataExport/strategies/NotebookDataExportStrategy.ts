@@ -84,10 +84,9 @@ export class NotebookDataExportStrategy extends AbstractDataExportStrategy {
     row[columnNameToNumber['Step Title']] = this.controller.getNodeTitleByNodeId(
       notebookItem.nodeId
     );
-    const position = this.projectService.getComponentPosition(
-      notebookItem.nodeId,
-      notebookItem.componentId
-    );
+    const position = this.projectService
+      .getNode(notebookItem.nodeId)
+      .getComponentPosition(notebookItem.componentId);
     if (position != -1) {
       row[columnNameToNumber['Component Part Number']] = position + 1;
     }
