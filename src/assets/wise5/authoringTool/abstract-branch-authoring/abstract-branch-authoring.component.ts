@@ -9,7 +9,6 @@ import {
   TAG_VALUE,
   WORKGROUP_ID_VALUE
 } from '../../../../app/domain/branchCriteria';
-import { CreateBranchParams } from '../../common/CreateBranchParams';
 
 @Directive()
 export abstract class AbstractBranchAuthoringComponent {
@@ -165,7 +164,7 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('pathCount').setValue(pathCount);
   }
 
-  private getPathCount(): number {
+  protected getPathCount(): number {
     return this.formGroup.get('pathCount').value;
   }
 
@@ -173,7 +172,7 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('criteria').setValue(criteria);
   }
 
-  private getCriteria(): string {
+  protected getCriteria(): string {
     return this.formGroup.get('criteria').value;
   }
 
@@ -181,7 +180,7 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('nodeId').setValue(nodeId);
   }
 
-  private getNodeId(): string {
+  protected getNodeId(): string {
     return this.formGroup.get('nodeId')?.value;
   }
 
@@ -189,7 +188,7 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('componentId').setValue(componentId);
   }
 
-  private getComponentId(): string {
+  protected getComponentId(): string {
     return this.formGroup.get('componentId')?.value;
   }
 
@@ -197,26 +196,7 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('mergeStep').setValue(nodeId);
   }
 
-  private getMergeStepId(): string {
+  protected getMergeStepId(): string {
     return this.formGroup.get('mergeStep').value;
-  }
-
-  protected getBranchParams(): CreateBranchParams {
-    const params: CreateBranchParams = {
-      branchStepId: this.targetId,
-      componentId: this.getComponentId(),
-      criteria: this.getCriteria(),
-      mergeStepId: this.getMergeStepId(),
-      nodeId: this.getNodeId(),
-      pathCount: this.getPathCount()
-    };
-    const pathKeys = Object.keys(this.pathFormGroup.controls);
-    if (pathKeys.length > 0) {
-      params.paths = [];
-      pathKeys.forEach((key) => {
-        params.paths.push(this.pathFormGroup.controls[key].value);
-      });
-    }
-    return params;
   }
 }

@@ -16,6 +16,7 @@ import { CreateBranchService } from '../../services/createBranchService';
 import { SelectPathCountComponent } from '../select-path-count/select-path-count.component';
 import { SelectBranchCriteriaComponent } from '../select-branch-criteria/select-branch-criteria.component';
 import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/abstract-branch-authoring.component';
+import { CreateBranchParams } from '../../common/CreateBranchParams';
 
 @Component({
   imports: [
@@ -52,5 +53,24 @@ export class CreateBranchComponent extends AbstractBranchAuthoringComponent {
   protected async submit(): Promise<void> {
     await this.createBranchService.createBranch(this.getBranchParams());
     this.router.navigate(['..'], { relativeTo: this.route });
+  }
+
+  protected getBranchParams(): CreateBranchParams {
+    const params: CreateBranchParams = {
+      branchStepId: this.targetId,
+      componentId: this.getComponentId(),
+      criteria: this.getCriteria(),
+      mergeStepId: this.getMergeStepId(),
+      nodeId: this.getNodeId(),
+      pathCount: this.getPathCount()
+    };
+    const pathKeys = Object.keys(this.pathFormGroup.controls);
+    if (pathKeys.length > 0) {
+      params.paths = [];
+      pathKeys.forEach((key) => {
+        params.paths.push(this.pathFormGroup.controls[key].value);
+      });
+    }
+    return params;
   }
 }

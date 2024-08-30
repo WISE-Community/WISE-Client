@@ -1,47 +1,54 @@
-@if (
-  nodeId != null &&
-  nodeId !== '' &&
-  componentId != null &&
-  componentId !== '' &&
-  (criteria === SCORE_VALUE || criteria === CHOICE_CHOSEN_VALUE)
-) {
-  <div [formGroup]="pathFormGroup">
-    @for (formControl of formControls; track formControl; let index = $index) {
+<div [formGroup]="pathFormGroup">
+  <ng-container formArrayName="paths">
+    @for (path of branchPaths; track path; let index = $index) {
       <div class="path">
-        <span class="path-label" i18n>Path {{ index + 1 }}</span>
-        @if (criteria === SCORE_VALUE) {
-          <mat-form-field>
-            <mat-label i18n>Score</mat-label>
-            <input matInput [formControlName]="'path-' + (index + 1)" />
-          </mat-form-field>
-        } @else if (criteria === CHOICE_CHOSEN_VALUE) {
-          <mat-form-field>
-            <mat-label i18n>Choice Chosen</mat-label>
-            <mat-select [formControlName]="'path-' + (index + 1)">
-              @for (choice of choices; track choice) {
-                <mat-option [value]="choice.id">
-                  {{ choice.text }}
-                </mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        }
-        <div>
-          <display-branch-path-steps [nodes]="branchPaths[index].nodesInBranchPath" />
+        <div fxLayoutAlign="space-between center">
+          <div>
+            <span class="path-label" i18n>Path {{ index + 1 }}</span>
+            @if (criteria === SCORE_VALUE) {
+              <mat-form-field>
+                <mat-label i18n>Score</mat-label>
+                <input matInput [formControlName]="index" />
+              </mat-form-field>
+            } @else if (criteria === CHOICE_CHOSEN_VALUE) {
+              <mat-form-field>
+                <mat-label i18n>Choice Chosen</mat-label>
+                <mat-select [formControlName]="index">
+                  @for (choice of choices; track choice) {
+                    <mat-option [value]="choice.id">
+                      {{ choice.text }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            }
+          </div>
+          @if (path.delete) {
+            <span i18n
+              >This path will be deleted and the steps in the path will be moved after the
+              branch</span
+            >
+          }
+          @if (!path.delete) {
+            <button
+              mat-icon-button
+              color="primary"
+              matTooltip="Delete"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              (click)="deletePath(index)"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+        </div>
+        <div class="path-without-parameters">
+          <display-branch-path-steps [nodes]="path.nodesInBranchPath" />
         </div>
       </div>
     }
-  </div>
-} @else {
-  @for (path of branchPaths; track path; let index = $index) {
-    <div class="path">
-      <span class="path-label" i18n>Path {{ index + 1 }}</span>
-      <div class="path-without-parameters">
-        <display-branch-path-steps [nodes]="path.nodesInBranchPath" />
-      </div>
-    </div>
-  }
-}
+  </ng-container>
+</div>
 <div fxLayoutAlign="center center">
   <button mat-stroked-button color="primary" (click)="addPath()">
     <mat-icon>add</mat-icon><span i18n>Add Path</span>

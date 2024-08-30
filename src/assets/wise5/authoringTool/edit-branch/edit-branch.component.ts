@@ -7,7 +7,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { SelectComponentComponent } from '../../../../app/authoring-tool/select-component/select-component.component';
 import { SelectStepComponent } from '../../../../app/authoring-tool/select-step/select-step.component';
 import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/abstract-branch-authoring.component';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { DeleteBranchService } from '../../services/deleteBranchService';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -78,7 +78,6 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     if (branchParamComponentId != null) {
       this.setComponentId(branchParamComponentId);
     }
-    this.updateParamFormControls(criteria);
     this.changeDetector.detectChanges();
   }
 
@@ -156,38 +155,6 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     return null;
   }
 
-  private updateParamFormControls(criteria: string): void {
-    if (criteria === this.SCORE_VALUE) {
-      this.updateScoreFormControls();
-    } else if (criteria === this.CHOICE_CHOSEN_VALUE) {
-      this.updateChoiceFormControls();
-    }
-  }
-
-  private updateScoreFormControls(): void {
-    // use set timeout to give the form time to populate the path form group controls
-    setTimeout(() => {
-      const scores = this.branchPaths.map((branchPath) => branchPath.scores);
-      if (scores.length > 0) {
-        for (let i = 0; i < scores.length; i++) {
-          this.pathFormGroup.controls[`path-${i + 1}`].setValue(scores[i].join(', '));
-        }
-      }
-    });
-  }
-
-  private updateChoiceFormControls(): void {
-    // use set timeout to give the form time to populate the path form group controls
-    setTimeout(() => {
-      const choices = this.branchPaths.map((branchPath) => branchPath.choiceId);
-      if (choices.length > 0) {
-        for (let i = 0; i < choices.length; i++) {
-          this.pathFormGroup.controls[`path-${i + 1}`].setValue(choices[i]);
-        }
-      }
-    });
-  }
-
   protected removeBranch(): void {
     if (
       confirm(
@@ -218,9 +185,30 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     this.submitting = true;
     const params = this.getBranchParams();
     this.createNewPaths(params);
+    this.removePaths(this.branchPaths, params);
     this.updateTransitions(params);
     this.updateTransitionLogic(params);
     this.saveProject();
+  }
+
+  protected getBranchParams(): CreateBranchParams {
+    const params: CreateBranchParams = {
+      branchStepId: this.targetId,
+      componentId: this.getComponentId(),
+      criteria: this.getCriteria(),
+      mergeStepId: this.getMergeStepId(),
+      nodeId: this.getNodeId(),
+      pathCount: this.getPathCount()
+    };
+    if (params.criteria === this.CHOICE_CHOSEN_VALUE || params.criteria === this.SCORE_VALUE) {
+      params.paths = [];
+      const paths: FormArray = this.pathFormGroup.get('paths') as FormArray;
+      for (let p = 0; p < paths.length; p++) {
+        const value = paths.at(p).getRawValue();
+        params.paths.push(value);
+      }
+    }
+    return params;
   }
 
   private createNewPaths(params: CreateBranchParams): void {
@@ -270,5 +258,25 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
       this.node.transitionLogic.howToChooseAmongAvailablePaths = this.RANDOM_VALUE;
       this.node.transitionLogic.whenToChoosePath = 'studentDataChanged';
     }
+  }
+
+  private removePaths(branchPaths: any[], params: CreateBranchParams): void {
+    const nodeIdAfterMergeStep = this.projectService.getNodeIdAfter(params.mergeStepId);
+    let nodeIdToPlaceAfter = params.mergeStepId;
+    branchPaths
+      .filter((path: any) => path.delete)
+      .forEach((path: any, index: number) => {
+        this.deleteBranchService.deleteBranchPathAndPlaceAfter(
+          branchPaths,
+          path,
+          params.branchStepId,
+          nodeIdToPlaceAfter,
+          nodeIdAfterMergeStep
+        );
+        if (params.criteria === this.CHOICE_CHOSEN_VALUE || params.criteria === this.SCORE_VALUE) {
+          params.paths.splice(index, 1);
+        }
+        nodeIdToPlaceAfter = path.nodesInBranchPath[path.nodesInBranchPath.length - 1].nodeId;
+      });
   }
 }
