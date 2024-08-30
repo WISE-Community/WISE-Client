@@ -79,8 +79,6 @@ describe('ProjectService', () => {
   // TODO: add test for service.removeDuplicatePaths()
   // TODO: add test for service.pathsEqual()
   // TODO: add test for service.getNodeContentByNodeId()
-  // TODO: add test for service.createGroup()
-  // TODO: add test for service.createNode()
   // TODO: add test for service.createNodeInside()
   // TODO: add test for service.createNodeAfter()
   // TODO: add test for service.insertNodeAfterInGroups()

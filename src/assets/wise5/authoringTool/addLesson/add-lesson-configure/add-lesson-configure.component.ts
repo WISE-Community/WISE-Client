@@ -34,9 +34,17 @@ export class AddLessonConfigureComponent {
 
   protected submit(): void {
     this.submitting = true;
-    const newLesson = this.projectService.createGroup(
-      this.addLessonFormGroup.controls['title'].value
-    );
+    const newLesson = {
+      id: this.projectService.getNextAvailableGroupId(),
+      type: 'group',
+      title: this.addLessonFormGroup.controls['title'].value,
+      startId: '',
+      constraints: [],
+      transitionLogic: {
+        transitions: []
+      },
+      ids: []
+    };
     if (this.target === 'group0' || this.target === 'inactiveGroups') {
       this.projectService.createNodeInside(newLesson, this.target);
     } else {

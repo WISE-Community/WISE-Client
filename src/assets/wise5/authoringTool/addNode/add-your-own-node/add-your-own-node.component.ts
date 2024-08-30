@@ -80,7 +80,18 @@ export class AddYourOwnNodeComponent {
 
   protected submit(): void {
     this.submitting = true;
-    const newNode = this.projectService.createNode(this.addNodeFormGroup.controls['title'].value);
+    const newNode = {
+      id: this.projectService.getNextAvailableNodeId(),
+      title: this.addNodeFormGroup.controls['title'].value,
+      type: 'node',
+      constraints: [],
+      transitionLogic: {
+        transitions: []
+      },
+      showSaveButton: false,
+      showSubmitButton: false,
+      components: []
+    };
     if (this.isGroupNode(this.targetId)) {
       this.projectService.createNodeInside(newNode, this.targetId);
     } else {
