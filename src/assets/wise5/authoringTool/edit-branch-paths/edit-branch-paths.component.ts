@@ -63,9 +63,7 @@ export class EditBranchPathsComponent extends CreateBranchPathsComponent {
   }
 
   private clearPathFormControlValues(): void {
-    this.pathsFormArray.controls.forEach((formControl) => {
-      formControl.setValue('');
-    });
+    this.pathsFormArray.controls.forEach((formControl) => formControl.setValue(''));
   }
 
   protected initializeFormControls(): void {
@@ -77,15 +75,11 @@ export class EditBranchPathsComponent extends CreateBranchPathsComponent {
   }
 
   private enablePathFormControls(): void {
-    this.pathsFormArray.controls.forEach((formControl) => {
-      formControl.enable();
-    });
+    this.pathsFormArray.controls.forEach((formControl) => formControl.enable());
   }
 
   private disablePathFormControls(): void {
-    this.pathsFormArray.controls.forEach((formControl) => {
-      formControl.disable();
-    });
+    this.pathsFormArray.controls.forEach((formControl) => formControl.disable());
   }
 
   private deletePathFormControls(): void {

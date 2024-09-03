@@ -123,10 +123,7 @@ export class CreateBranchPathsComponent {
   }
 
   protected initializeChoiceChosenOptions(): void {
-    if (
-      this.criteria === this.CHOICE_CHOSEN_VALUE &&
-      this.getComponent()?.type === 'MultipleChoice'
-    ) {
+    if (this.getComponent()?.type === 'MultipleChoice') {
       this.populateChoices();
       this.autoFillChoiceChosenValues();
     } else {
