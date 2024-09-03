@@ -13,21 +13,33 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 
 let configService: ConfigService;
 let teacherProjectService: TeacherProjectService;
-
+const group0 = {
+  id: 'group0',
+  type: 'group',
+  title: 'Master',
+  startId: '',
+  ids: []
+};
 describe('ExportOneWorkgroupPerRowComponent', () => {
   let component: ExportOneWorkgroupPerRowComponent;
   let fixture: ComponentFixture<ExportOneWorkgroupPerRowComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [ExportOneWorkgroupPerRowComponent],
-    imports: [ClassroomMonitorTestingModule,
+      declarations: [ExportOneWorkgroupPerRowComponent],
+      imports: [
+        ClassroomMonitorTestingModule,
         DataExportModule,
         MatCheckboxModule,
         MatIconModule,
-        RouterTestingModule],
-    providers: [DataExportService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+        RouterTestingModule
+      ],
+      providers: [
+        DataExportService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
     fixture = TestBed.createComponent(ExportOneWorkgroupPerRowComponent);
     component = fixture.componentInstance;
     configService = TestBed.inject(ConfigService);
@@ -39,15 +51,18 @@ describe('ExportOneWorkgroupPerRowComponent', () => {
     teacherProjectService = TestBed.inject(TeacherProjectService);
     spyOn(teacherProjectService, 'getNodeOrderOfProject').and.returnValue({
       idToOrder: {},
-      nodes: []
+      nodes: [group0]
     });
     teacherProjectService.project = {
-      nodes: [],
       inactiveNodes: [],
       metadata: {
         title: 'Test Project'
-      }
+      },
+      startGroupId: 'group0',
+      startNodeId: 'group0',
+      nodes: [group0]
     };
+    teacherProjectService.idToNode['group0'] = group0;
     fixture.detectChanges();
   });
 
