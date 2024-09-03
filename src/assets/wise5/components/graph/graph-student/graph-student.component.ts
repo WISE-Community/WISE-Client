@@ -11,7 +11,7 @@ import { ComponentService } from '../../componentService';
 import { GraphService } from '../graphService';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
-import canvg from 'canvg';
+import { Canvg } from 'canvg';
 import { MatDialog } from '@angular/material/dialog';
 import { GraphContent } from '../GraphContent';
 import { copy } from '../../../common/object/object';
@@ -2084,16 +2084,16 @@ export class GraphStudent extends ComponentStudent {
     }
   }
 
-  snipGraph() {
-    const chart: any = this.getChartById(this.chartId);
-    const svgString = chart.getSVG();
-    const hiddenCanvas: any = document.getElementById(this.hiddenCanvasId);
-    canvg(hiddenCanvas, svgString, {
-      renderCallback: () => {
-        const pngFile = convertToPNGFile(hiddenCanvas);
-        this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), pngFile);
-      }
-    });
+  protected snipGraph(): void {
+    const hiddenCanvas: any = document.querySelector(`#${this.hiddenCanvasId}`);
+    Canvg.fromString(hiddenCanvas.getContext('2d'), this.getChartById(this.chartId).getSVG())
+      .render()
+      .then(() => {
+        this.NotebookService.addNote(
+          this.StudentDataService.getCurrentNodeId(),
+          convertToPNGFile(hiddenCanvas)
+        );
+      });
   }
 
   readCSVIntoActiveSeries(csvString) {
