@@ -45,9 +45,25 @@ export class EditBranchPathsComponent extends CreateBranchPathsComponent {
 
   ngOnChanges(): void {
     if (this.criteriaRequiresAdditionalParams(this.criteria)) {
-      this.initializeFormControls();
-      this.initializePathValues();
+      this.clearPathFormControlValues();
+      if (this.pathsFormArray.length === 0) {
+        this.initializeFormControls();
+      }
+      if (this.criteria === this.CHOICE_CHOSEN_VALUE) {
+        this.initializeChoiceChosenOptions();
+      }
+      if (this.isComponentSet()) {
+        this.enablePathFormControls();
+      } else {
+        this.disablePathFormControls();
+      }
+    } else {
+      this.deletePathFormControls();
     }
+  }
+
+  private clearPathFormControlValues(): void {
+    this.pathsFormArray.controls.forEach((formControl) => formControl.setValue(''));
   }
 
   protected initializeFormControls(): void {
@@ -56,6 +72,18 @@ export class EditBranchPathsComponent extends CreateBranchPathsComponent {
       this.setPathFormControlValue(branchPath, formControl);
       branchPath.formControl = formControl;
     });
+  }
+
+  private enablePathFormControls(): void {
+    this.pathsFormArray.controls.forEach((formControl) => formControl.enable());
+  }
+
+  private disablePathFormControls(): void {
+    this.pathsFormArray.controls.forEach((formControl) => formControl.disable());
+  }
+
+  private deletePathFormControls(): void {
+    this.pathsFormArray.clear();
   }
 
   protected autoFillChoiceChosenValues(): void {}
