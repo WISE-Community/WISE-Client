@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -37,11 +37,7 @@ import { CreateBranchPathsComponent } from '../create-branch-paths/create-branch
   templateUrl: './edit-branch-paths.component.html'
 })
 export class EditBranchPathsComponent extends CreateBranchPathsComponent {
-  private pathsFormArray: FormArray = new FormArray([]);
-
-  ngOnInit(): void {
-    this.pathFormGroup.addControl('paths', this.pathsFormArray);
-  }
+  @Input() branchPaths: any[] = [];
 
   ngOnChanges(): void {
     if (this.criteriaRequiresAdditionalParams(this.criteria)) {
@@ -62,16 +58,29 @@ export class EditBranchPathsComponent extends CreateBranchPathsComponent {
     }
   }
 
-  private clearPathFormControlValues(): void {
-    this.pathsFormArray.controls.forEach((formControl) => formControl.setValue(''));
-  }
-
   protected initializeFormControls(): void {
     this.branchPaths.forEach((branchPath) => {
       const formControl = this.createPathFormControl();
       this.setPathFormControlValue(branchPath, formControl);
       branchPath.formControl = formControl;
     });
+  }
+
+  protected initializeChoiceChosenOptions(): void {
+    if (this.getComponent()?.type === 'MultipleChoice') {
+      this.populateChoices();
+    } else {
+      this.choices = [];
+    }
+  }
+
+  protected isComponentSet(): boolean {
+    return (
+      this.nodeId != null &&
+      this.nodeId !== '' &&
+      this.componentId != null &&
+      this.componentId !== ''
+    );
   }
 
   private enablePathFormControls(): void {
@@ -84,14 +93,6 @@ export class EditBranchPathsComponent extends CreateBranchPathsComponent {
 
   private deletePathFormControls(): void {
     this.pathsFormArray.clear();
-  }
-
-  protected autoFillChoiceChosenValues(): void {}
-
-  private createPathFormControl(): FormControl {
-    const formControl = new FormControl('', [Validators.required]);
-    this.pathsFormArray.push(formControl);
-    return formControl;
   }
 
   private setPathFormControlValue(branchPath: any, formControl: FormControl): void {
