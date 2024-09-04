@@ -245,7 +245,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     let nodeIdToPlaceAfter = params.mergeStepId;
     branchPaths
       .filter((path: any) => path.delete)
-      .forEach((path: any, index: number) => {
+      .forEach((path: any) => {
         this.deleteBranchService.deleteBranchPathAndPlaceAfter(
           branchPaths,
           path,
@@ -253,9 +253,6 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
           nodeIdToPlaceAfter,
           nodeIdAfterMergeStep
         );
-        if (params.criteria === this.CHOICE_CHOSEN_VALUE || params.criteria === this.SCORE_VALUE) {
-          params.paths.splice(index, 1);
-        }
         nodeIdToPlaceAfter = path.nodesInBranchPath[path.nodesInBranchPath.length - 1].nodeId;
       });
   }
