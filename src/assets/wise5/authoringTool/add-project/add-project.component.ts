@@ -1,11 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { TeacherProjectService } from '../../services/teacherProjectService';
+import { RegisterProjectService } from '../../services/registerProjectService';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { Router } from '@angular/router';
 import { copy } from '../../common/object/object';
 import { newProjectTemplate } from '../new-project-template';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Component({
   selector: 'add-project',
@@ -21,7 +22,7 @@ export class AddProjectComponent {
   constructor(
     private dialog: MatDialog,
     private fb: FormBuilder,
-    private projectService: TeacherProjectService,
+    private registerProjectService: RegisterProjectService,
     private router: Router
   ) {}
 
@@ -43,15 +44,19 @@ export class AddProjectComponent {
     const project = copy(newProjectTemplate);
     project.metadata.title = this.addProjectFormGroup.controls['title'].value;
     const projectJSONString = JSON.stringify(project, null, 4);
-    this.projectService
-      .registerNewProject(project.metadata.title, projectJSONString)
-      .then((projectId) => {
+    this.registerProjectService
+      .register(project.metadata.title, projectJSONString)
+      .pipe(catchError(this.handleRegisterError))
+      .subscribe((projectId) => {
         this.dialog.closeAll();
         this.router.navigate([`/teacher/edit/unit/${projectId}`]);
-      })
-      .catch(() => {
-        this.dialog.closeAll();
-        alert($localize`There was an error creating this unit. Please contact WISE staff.`);
       });
+  }
+
+  private handleRegisterError(): Observable<never> {
+    this.dialog.closeAll;
+    const errorMsg = $localize`There was an error creating this unit. Please contact WISE staff.`;
+    alert(errorMsg);
+    return throwError(() => new Error(errorMsg));
   }
 }

@@ -66,23 +66,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Registers a new project having the projectJSON content with the server.
-   * Returns a new project id if the project is successfully registered.
-   * @param projectJSONString a valid JSON string
-   */
-  registerNewProject(projectName, projectJSONString) {
-    return this.http
-      .post(this.configService.getConfigParam('registerNewProjectURL'), {
-        projectName: projectName,
-        projectJSONString: projectJSONString
-      })
-      .toPromise()
-      .then((newProjectId) => {
-        return newProjectId;
-      });
-  }
-
-  /**
    * Create a new group
    * @param title the title of the group
    * @returns the group object
@@ -208,20 +191,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Check if a node id is already being used in the project
-   * @param nodeId check if this node id is already being used in the project
-   * @return whether the node id is already being used in the project
-   */
-  isNodeIdUsed(nodeId) {
-    for (const node of this.getNodes().concat(this.getInactiveNodes())) {
-      if (node.id === nodeId) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
    * Set a field in the transition logic of a node
    */
   setTransitionLogicField(nodeId, field, value) {
@@ -324,51 +293,6 @@ export class TeacherProjectService extends ProjectService {
     this.project.rubric = html;
   }
 
-  /**
-   * Get the number of branch paths. This is assuming the node is a branch point.
-   * @param nodeId The node id of the branch point node.
-   * @return The number of branch paths for this branch point.
-   */
-  getNumberOfBranchPaths(nodeId) {
-    const transitions = this.getTransitionsByFromNodeId(nodeId);
-    if (transitions != null) {
-      return transitions.length;
-    }
-    return 0;
-  }
-
-  /**
-   * If this step is a branch point, we will return the criteria that is used
-   * to determine which path the student gets assigned to.
-   * @param nodeId The node id of the branch point.
-   * @returns A human readable string containing the criteria of how students
-   * are assigned branch paths on this branch point.
-   */
-  getBranchCriteriaDescription(nodeId) {
-    const transitionLogic = this.getTransitionLogicByFromNodeId(nodeId);
-    for (const transition of transitionLogic.transitions) {
-      if (transition.criteria != null && transition.criteria.length > 0) {
-        for (const singleCriteria of transition.criteria) {
-          if (singleCriteria.name === 'choiceChosen') {
-            return 'multiple choice';
-          } else if (singleCriteria.name === 'score') {
-            return 'score';
-          }
-        }
-      }
-    }
-
-    /*
-     * None of the transitions had a specific criteria so the branching is just
-     * based on the howToChooseAmongAvailablePaths field.
-     */
-    if (transitionLogic.howToChooseAmongAvailablePaths === 'workgroupId') {
-      return 'workgroup ID';
-    } else if (transitionLogic.howToChooseAmongAvailablePaths === 'random') {
-      return 'random assignment';
-    }
-  }
-
   setProjectScriptFilename(scriptFilename) {
     this.project.script = scriptFilename;
   }
@@ -378,53 +302,6 @@ export class TeacherProjectService extends ProjectService {
       return this.project.script;
     }
     return null;
-  }
-
-  nodeHasRubric(nodeId: string): boolean {
-    return this.getNumberOfRubricsByNodeId(nodeId) > 0;
-  }
-
-  /**
-   * Get the total number of rubrics (step + components) for the given nodeId
-   * @param nodeId the node id
-   * @return Number of rubrics for the node
-   */
-  getNumberOfRubricsByNodeId(nodeId: string): number {
-    let numRubrics = 0;
-    const node = this.getNodeById(nodeId);
-    if (node) {
-      const nodeRubric = node.rubric;
-      if (nodeRubric != null && nodeRubric != '') {
-        numRubrics++;
-      }
-      const components = node.components;
-      if (components && components.length) {
-        for (let component of components) {
-          if (component) {
-            const componentRubric = component.rubric;
-            if (componentRubric != null && componentRubric != '') {
-              numRubrics++;
-            }
-          }
-        }
-      }
-    }
-    return numRubrics;
-  }
-
-  deleteTransition(node, transition) {
-    const nodeTransitions = node.transitionLogic.transitions;
-    const index = nodeTransitions.indexOf(transition);
-    if (index > -1) {
-      nodeTransitions.splice(index, 1);
-    }
-    if (nodeTransitions.length <= 1) {
-      // these settings only apply when there are multiple transitions
-      node.transitionLogic.howToChooseAmongAvailablePaths = null;
-      node.transitionLogic.whenToChoosePath = null;
-      node.transitionLogic.canChangePath = null;
-      node.transitionLogic.maxPathsVisitable = null;
-    }
   }
 
   getBackgroundColor(nodeId: string): string {
@@ -508,51 +385,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Remove the node from the active nodes.
-   * If the node is a group node, also remove its children.
-   * @param nodeId the node to remove
-   * @returns the node that was removed
-   */
-  removeNodeFromActiveNodes(nodeId) {
-    let nodeRemoved = null;
-    const activeNodes = this.project.nodes;
-    for (let a = 0; a < activeNodes.length; a++) {
-      const activeNode = activeNodes[a];
-      if (activeNode.id === nodeId) {
-        activeNodes.splice(a, 1);
-        nodeRemoved = activeNode;
-        if (activeNode.type === 'group') {
-          this.removeChildNodesFromActiveNodes(activeNode);
-        }
-        break;
-      }
-    }
-    return nodeRemoved;
-  }
-
-  /**
-   * Move the child nodes of a group from the active nodes.
-   * @param node The group node.
-   */
-  removeChildNodesFromActiveNodes(node) {
-    for (const childId of node.ids) {
-      this.removeNodeFromActiveNodes(childId);
-    }
-  }
-
-  /**
-   * Move an active node to the inactive nodes array.
-   * @param node the node to move
-   * @param nodeIdToInsertAfter place the node after this
-   */
-  moveToInactive(node, nodeIdToInsertAfter) {
-    if (this.isActive(node.id)) {
-      this.removeNodeFromActiveNodes(node.id);
-      this.addInactiveNodeInsertAfter(node, nodeIdToInsertAfter);
-    }
-  }
-
-  /**
    * Add the node to the inactive nodes array.
    * @param node the node to move
    * @param nodeIdToInsertAfter place the node after this
@@ -602,43 +434,6 @@ export class TeacherProjectService extends ProjectService {
     );
   }
 
-  /**
-   * Move the node from active to inside an inactive group
-   * @param node the node to move
-   * @param nodeIdToInsertInside place the node inside this
-   */
-  moveFromActiveToInactiveInsertInside(node, nodeIdToInsertInside) {
-    this.removeNodeFromActiveNodes(node.id);
-    this.addInactiveNodeInsertInside(node, nodeIdToInsertInside);
-  }
-
-  /**
-   * Move the node from inactive to inside an inactive group
-   * @param node the node to move
-   * @param nodeIdToInsertInside place the node inside this
-   */
-  moveFromInactiveToInactiveInsertInside(node, nodeIdToInsertInside) {
-    this.removeNodeFromInactiveNodes(node.id);
-    if (this.isGroupNode(node.id)) {
-      /*
-       * remove the group's child nodes from our data structures so that we can
-       * add them back in later
-       */
-      for (const childId of node.ids) {
-        const childNode = this.getNodeById(childId);
-        const inactiveNodesIndex = this.project.inactiveNodes.indexOf(childNode);
-        if (inactiveNodesIndex != -1) {
-          this.project.inactiveNodes.splice(inactiveNodesIndex, 1);
-        }
-        const inactiveStepNodesIndex = this.inactiveStepNodes.indexOf(childNode);
-        if (inactiveStepNodesIndex != -1) {
-          this.inactiveStepNodes.splice(inactiveStepNodesIndex, 1);
-        }
-      }
-    }
-    this.addInactiveNodeInsertInside(node, nodeIdToInsertInside);
-  }
-
   addInactiveNodeInsertInside(node, nodeIdToInsertInside = null) {
     this.clearTransitionsFromNode(node);
     if (this.isNodeIdToInsertTargetNotSpecified(nodeIdToInsertInside)) {
@@ -668,42 +463,6 @@ export class TeacherProjectService extends ProjectService {
         }
       }
     }
-  }
-
-  addNodeToGroup(node, group) {
-    if (this.isGroupHasNode(group)) {
-      this.insertAfterLastNode(node, group);
-    } else {
-      this.insertAsFirstNode(node, group);
-    }
-  }
-
-  isGroupHasNode(group) {
-    return group.ids.length != 0;
-  }
-
-  getLastNodeInGroup(group) {
-    const lastNodeId = group.ids[group.ids.length - 1];
-    return this.idToNode[lastNodeId];
-  }
-
-  insertAsFirstNode(node, group) {
-    this.insertNodeInsideOnlyUpdateTransitions(node.id, group.id);
-    this.insertNodeInsideInGroups(node.id, group.id);
-  }
-
-  insertAfterLastNode(node, group) {
-    const lastNode = this.getLastNodeInGroup(group);
-    this.insertNodeAfterInTransitions(node, lastNode.id);
-    this.insertNodeAfterInGroups(node.id, lastNode.id);
-  }
-
-  createNodeAndAddToLocalStorage(nodeTitle) {
-    const node = this.createNode(nodeTitle);
-    this.setIdToNode(node.id, node);
-    this.addNode(node);
-    this.applicationNodes.push(node);
-    return node;
   }
 
   getAutomatedAssessmentProjectId(): number {
@@ -739,97 +498,6 @@ export class TeacherProjectService extends ProjectService {
 
   refreshProject() {
     this.refreshProjectSource.next();
-  }
-
-  nodeHasConstraint(nodeId: string): boolean {
-    const constraints = this.getConstraintsOnNode(nodeId);
-    return constraints.length > 0;
-  }
-
-  getConstraintsOnNode(nodeId: string): any {
-    const node = this.getNodeById(nodeId);
-    return node.constraints ?? [];
-  }
-
-  /**
-   * Get the human readable description of the constraint.
-   * @param constraint The constraint object.
-   * @returns A human readable text string that describes the constraint.
-   * example
-   * 'All steps after this one will not be visitable until the student completes
-   * "3.7 Revise Your Bowls Explanation"'
-   */
-  getConstraintDescription(constraint: any): string {
-    let message = '';
-    for (const singleRemovalCriteria of constraint.removalCriteria) {
-      if (message != '') {
-        // this constraint has multiple removal criteria
-        if (constraint.removalConditional === 'any') {
-          message += ' or ';
-        } else if (constraint.removalConditional === 'all') {
-          message += ' and ';
-        }
-      }
-      message += this.getCriteriaMessage(singleRemovalCriteria);
-    }
-    return this.getActionMessage(constraint.action) + message;
-  }
-
-  /**
-   * Get the constraint action as human readable text.
-   * @param action A constraint action.
-   * @return A human readable text string that describes the action
-   * example
-   * 'All steps after this one will not be visitable until '
-   */
-  private getActionMessage(action: string): string {
-    if (action === 'makeAllNodesAfterThisNotVisitable') {
-      return $localize`All steps after this one will not be visitable until `;
-    }
-    if (action === 'makeAllNodesAfterThisNotVisible') {
-      return $localize`All steps after this one will not be visible until `;
-    }
-    if (action === 'makeAllOtherNodesNotVisitable') {
-      return $localize`All other steps will not be visitable until `;
-    }
-    if (action === 'makeAllOtherNodesNotVisible') {
-      return $localize`All other steps will not be visible until `;
-    }
-    if (action === 'makeThisNodeNotVisitable') {
-      return $localize`This step will not be visitable until `;
-    }
-    if (action === 'makeThisNodeNotVisible') {
-      return $localize`This step will not be visible until `;
-    }
-  }
-
-  addTeacherRemovalConstraint(node: any, periodId: number) {
-    const lockConstraint = {
-      id: generateRandomKey(),
-      action: 'makeThisNodeNotVisitable',
-      targetId: node.id,
-      removalConditional: 'any',
-      removalCriteria: [
-        {
-          name: 'teacherRemoval',
-          params: {
-            periodId: periodId
-          }
-        }
-      ]
-    };
-    this.addConstraintToNode(node, lockConstraint);
-  }
-
-  removeTeacherRemovalConstraint(node: any, periodId: number) {
-    node.constraints = node.constraints.filter((constraint) => {
-      return !(
-        constraint.action === 'makeThisNodeNotVisitable' &&
-        constraint.targetId === node.id &&
-        constraint.removalCriteria[0].name === 'teacherRemoval' &&
-        constraint.removalCriteria[0].params.periodId === periodId
-      );
-    });
   }
 
   /**
@@ -1072,34 +740,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Update a node's branchPathTaken constraint's fromNodeId and toNodeId
-   * @param node update the branch path taken constraints in this node
-   * @param currentFromNodeId the current from node id
-   * @param currentToNodeId the current to node id
-   * @param newFromNodeId the new from node id
-   * @param newToNodeId the new to node id
-   */
-  updateBranchPathTakenConstraint(
-    node,
-    currentFromNodeId,
-    currentToNodeId,
-    newFromNodeId,
-    newToNodeId
-  ) {
-    for (let constraint of node.constraints) {
-      for (let removalCriterion of constraint.removalCriteria) {
-        if (removalCriterion.name === 'branchPathTaken') {
-          const params = removalCriterion.params;
-          if (params.fromNodeId === currentFromNodeId && params.toNodeId === currentToNodeId) {
-            params.fromNodeId = newFromNodeId;
-            params.toNodeId = newToNodeId;
-          }
-        }
-      }
-    }
-  }
-
-  /**
    * Insert a node into a group
    * @param nodeIdToInsert the node id to insert
    * @param nodeIdToInsertInside the node id of the group we will insert into
@@ -1192,18 +832,16 @@ export class TeacherProjectService extends ProjectService {
    * Update all the transitions that point to the group and change
    * them to point to the new start id
    */
-  updateStepTransitionsToGroup(nodeIdToInsertInside, nodeIdToInsert) {
-    const nodesThatTransitionToGroup = this.getNodesByToNodeId(nodeIdToInsertInside);
-    for (let nodeThatTransitionsToGroup of nodesThatTransitionToGroup) {
+  private updateStepTransitionsToGroup(groupId: string, nodeIdToInsert: string): void {
+    for (const nodeThatTransitionsToGroup of this.getNodesByToNodeId(groupId)) {
       if (!this.isGroupNode(nodeThatTransitionsToGroup.id)) {
-        this.updateToTransition(nodeThatTransitionsToGroup, nodeIdToInsertInside, nodeIdToInsert);
+        this.updateToTransition(nodeThatTransitionsToGroup, groupId, nodeIdToInsert);
       }
     }
   }
 
-  updateTransitionsToStartId(startId, nodeIdToInsert) {
-    const nodesThatTransitionToStartId = this.getNodesByToNodeId(startId);
-    for (let nodeThatTransitionToStartId of nodesThatTransitionToStartId) {
+  private updateTransitionsToStartId(startId: string, nodeIdToInsert: string): void {
+    for (const nodeThatTransitionToStartId of this.getNodesByToNodeId(startId)) {
       this.updateToTransition(nodeThatTransitionToStartId, startId, nodeIdToInsert);
     }
   }
@@ -1354,270 +992,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Update the transitions to handle removing a node
-   * @param nodeId the node id to remove
-   */
-  removeNodeIdFromTransitions(nodeId) {
-    const nodeToRemove = this.getNodeById(nodeId);
-    const nodesByToNodeId = this.getNodesByToNodeId(nodeId);
-
-    const nodeToRemoveTransitionLogic = nodeToRemove.transitionLogic;
-    let nodeToRemoveTransitions = [];
-
-    if (nodeToRemoveTransitionLogic != null && nodeToRemoveTransitionLogic.transitions != null) {
-      nodeToRemoveTransitions = nodeToRemoveTransitionLogic.transitions;
-    }
-
-    const parentIdOfNodeToRemove = this.getParentGroupId(nodeId);
-    this.updateParentGroupStartId(nodeId);
-
-    for (let n = 0; n < nodesByToNodeId.length; n++) {
-      const node = nodesByToNodeId[n];
-      if (node != null) {
-        const parentIdOfFromNode = this.getParentGroupId(node.id);
-        const transitionLogic = node.transitionLogic;
-
-        if (transitionLogic != null) {
-          const transitions = transitionLogic.transitions;
-          for (let t = 0; t < transitions.length; t++) {
-            const transition = transitions[t];
-            if (nodeId === transition.to) {
-              // we have found the transition to the node we are removing
-
-              // copy the transitions from the node we are removing
-              let transitionsCopy = copy(nodeToRemoveTransitions);
-
-              /*
-               * if the parent from group is different than the parent removing group
-               * remove transitions that are to a node in a different group than
-               * the parent removing group
-               */
-
-              if (parentIdOfFromNode != parentIdOfNodeToRemove) {
-                for (let tc = 0; tc < transitionsCopy.length; tc++) {
-                  const tempTransition = transitionsCopy[tc];
-                  if (tempTransition != null) {
-                    const tempToNodeId = tempTransition.to;
-                    if (tempToNodeId != null) {
-                      const parentIdOfToNode = this.getParentGroupId(tempToNodeId);
-                      if (parentIdOfNodeToRemove != parentIdOfToNode) {
-                        // remove the transition
-                        transitionsCopy.splice(tc, 1);
-                        tc--;
-                      }
-                    }
-                  }
-                }
-              }
-
-              if (this.isFirstNodeInBranchPath(nodeId)) {
-                /*
-                 * Get the node ids that have a branchPathTaken
-                 * constraint from the before node and to the node
-                 * we are removing. If there are any, we need to
-                 * update the branchPathTaken constraint with the
-                 * next nodeId that comes after the node we are
-                 * removing.
-                 */
-                const nodeIdsInBranch = this.getNodeIdsInBranch(node.id, nodeId);
-
-                if (nodeIdsInBranch != null) {
-                  for (let nodeIdInBranch of nodeIdsInBranch) {
-                    const nodeInBranch = this.getNodeById(nodeIdInBranch);
-                    for (let transitionCopy of transitionsCopy) {
-                      if (transitionCopy != null) {
-                        const currentFromNodeId = node.id;
-                        const currentToNodeId = nodeId;
-                        const newFromNodeId = node.id;
-                        const newToNodeId = transitionCopy.to;
-
-                        /*
-                         * change the branch path taken constraint by changing
-                         * the toNodeId
-                         */
-                        this.updateBranchPathTakenConstraint(
-                          nodeInBranch,
-                          currentFromNodeId,
-                          currentToNodeId,
-                          newFromNodeId,
-                          newToNodeId
-                        );
-                      }
-                    }
-                  }
-                }
-              } else if (this.isBranchPoint(nodeId)) {
-                /*
-                 * get all the branches that have the node we
-                 * are removing as the start point
-                 */
-                const branches = this.getBranchesByBranchStartPointNodeId(nodeId);
-
-                for (let branch of branches) {
-                  if (branch != null) {
-                    /*
-                     * get the branch paths. these paths do not
-                     * contain the start point or merge point.
-                     */
-                    const branchPaths = branch.paths;
-
-                    if (branchPaths != null) {
-                      for (let branchPath of branchPaths) {
-                        if (branchPath != null) {
-                          const currentFromNodeId = nodeId;
-                          const currentToNodeId = branchPath[0];
-                          const newFromNodeId = node.id;
-                          const newToNodeId = branchPath[0];
-                          for (let branchPathNodeId of branchPath) {
-                            const branchPathNode = this.getNodeById(branchPathNodeId);
-                            this.updateBranchPathTakenConstraint(
-                              branchPathNode,
-                              currentFromNodeId,
-                              currentToNodeId,
-                              newFromNodeId,
-                              newToNodeId
-                            );
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-
-              // remove the transition to the node we are removing
-              const transitionRemoved = transitions.splice(t, 1)[0];
-
-              if (transitionsCopy != null) {
-                let insertIndex = t;
-
-                /*
-                 * loop through all the transitions from the node we are removing
-                 * and insert them into the transitions of the from node
-                 * e.g.
-                 * the node that comes before the node we are removing has these transitions
-                 * "transitions": [
-                 *     {
-                 *         "to": "node4"
-                 *     },
-                 *     {
-                 *         "to": "node6"
-                 *     }
-                 * ]
-                 *
-                 * we are removing node4. node4 has a transition to node5.
-                 *
-                 * the node that comes before the node we are removing now has these transitions
-                 * "transitions": [
-                 *     {
-                 *         "to": "node5"
-                 *     },
-                 *     {
-                 *         "to": "node6"
-                 *     }
-                 * ]
-                 */
-                for (let transitionCopy of transitionsCopy) {
-                  if (!this.isTransitionExist(transitions, transitionCopy)) {
-                    const toNodeId = transitionCopy.to;
-                    if (
-                      this.isApplicationNode(node.id) &&
-                      this.isGroupNode(toNodeId) &&
-                      this.hasGroupStartId(toNodeId)
-                    ) {
-                      this.addToTransition(node, this.getGroupStartId(toNodeId));
-                    } else {
-                      if (transitionRemoved.criteria != null) {
-                        transitionCopy.criteria = transitionRemoved.criteria;
-                      }
-                      transitions.splice(insertIndex, 0, transitionCopy);
-                      insertIndex++;
-                    }
-                  }
-                }
-              }
-              t--;
-
-              // check if the node we are moving is a group
-              if (this.isGroupNode(nodeId)) {
-                /*
-                 * we are moving a group so we need to update transitions that
-                 * go into the group
-                 */
-                const groupIdWeAreMoving = nodeId;
-                const groupThatTransitionsToGroupWeAreMoving = node;
-                this.updateChildrenTransitionsIntoGroupWeAreMoving(
-                  groupThatTransitionsToGroupWeAreMoving,
-                  groupIdWeAreMoving
-                );
-              }
-            }
-          }
-
-          if (
-            transitions.length === 0 &&
-            parentIdOfNodeToRemove != 'group0' &&
-            parentIdOfNodeToRemove != this.getParentGroupId(node.id)
-          ) {
-            /*
-             * the from node no longer has any transitions so we will make it transition to the
-             * parent of the node we are removing
-             */
-            this.addToTransition(node, parentIdOfNodeToRemove);
-          }
-
-          if (this.isBranchPoint(nodeId)) {
-            /*
-             * the node we are deleting is a branch point so we to
-             * copy the transition logic to the node that comes
-             * before it
-             */
-            node.transitionLogic = copy(nodeToRemoveTransitionLogic);
-
-            /*
-             * set the transitions for the node that comes before
-             * the one we are removing
-             */
-            node.transitionLogic.transitions = transitions;
-          }
-        }
-      }
-    }
-
-    if (nodeToRemoveTransitionLogic != null) {
-      nodeToRemoveTransitionLogic.transitions = [];
-    }
-
-    if (this.isGroupNode(nodeId)) {
-      this.removeTransitionsOutOfGroup(nodeId);
-    }
-  }
-
-  /**
-   * Update the parent group start id if the node we are removing is the start id
-   * @param nodeId The node we are removing
-   */
-  private updateParentGroupStartId(nodeId: string): void {
-    const parentGroup = this.getParentGroup(nodeId);
-    if (parentGroup != null && parentGroup.startId === nodeId) {
-      const transitions = this.getTransitionsFromNode(this.getNodeById(nodeId));
-      if (transitions.length > 0) {
-        for (const transition of transitions) {
-          const toNodeId = transition.to;
-          // Make sure the to node id is in the same group because a step can transition to a step
-          // in a different group. If the to node id is in a different group, we would not want to
-          // use it as the start id of this group.
-          if (this.getParentGroupId(toNodeId) === parentGroup.id) {
-            parentGroup.startId = toNodeId;
-          }
-        }
-      } else {
-        parentGroup.startId = '';
-      }
-    }
-  }
-
-  /**
    * Check if a node is a branch point. A branch point is a node with more
    * than one transition.
    * @param nodeId the node id
@@ -1652,15 +1026,6 @@ export class TeacherProjectService extends ProjectService {
       result = this.nodeIdToIsInBranchPath[nodeId];
     }
     return result;
-  }
-
-  isTransitionExist(transitions: any[], transition: any) {
-    for (const tempTransition of transitions) {
-      if (tempTransition.from === transition.from && tempTransition.to === transition.to) {
-        return true;
-      }
-    }
-    return false;
   }
 
   /**
@@ -1707,66 +1072,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Remove the node from the inactive nodes array
-   * @param nodeId the node to remove from the inactive nodes array
-   */
-  removeNodeIdFromInactiveNodes(nodeId) {
-    const inactiveNodes = this.project.inactiveNodes;
-    if (inactiveNodes != null) {
-      for (let i = 0; i < inactiveNodes.length; i++) {
-        const inactiveNode = inactiveNodes[i];
-        if (inactiveNode != null) {
-          const inactiveNodeId = inactiveNode.id;
-          if (inactiveNodeId === nodeId) {
-            inactiveNodes.splice(i, 1);
-          }
-        }
-      }
-    }
-  }
-
-  /**
-   * Create a new component
-   * @param nodeId the node id to create the component in
-   * @param componentType the component type
-   * @param insertAfterComponentId Insert the new compnent after the given
-   * component id. If this argument is null, we will place the new component
-   * in the first position.
-   */
-  createComponent(nodeId, componentType, insertAfterComponentId = null) {
-    const node = this.getNodeById(nodeId);
-    const service = this.componentServiceLookupService.getService(componentType);
-    const component = service.createComponent();
-    if (service.componentHasWork(component)) {
-      if (node.showSaveButton == false) {
-        if (this.doesAnyComponentInNodeShowSubmitButton(node.id)) {
-          component.showSaveButton = true;
-        } else {
-          node.showSaveButton = true;
-        }
-      }
-    }
-    this.addComponentToNode(node, component, insertAfterComponentId);
-    return component;
-  }
-
-  /**
-   * Returns true iff any component in the step generates work
-   * @param nodeId the node id
-   * @return whether any components in the step generates work
-   */
-  doesAnyComponentHaveWork(nodeId) {
-    const node = this.getNodeById(nodeId);
-    for (const component of node.components) {
-      const service = this.componentServiceLookupService.getService(component.type);
-      if (service != null && service.componentHasWork(component)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
    * Check if any of the components in the node are showing their submit button.
    * @param nodeId {string} The node id to check.
    * @return {boolean} Whether any of the components in the node show their submit button.
@@ -1779,120 +1084,6 @@ export class TeacherProjectService extends ProjectService {
       }
     }
     return false;
-  }
-
-  /**
-   * Returns the position of the component in the node by node id and
-   * component id, 0-indexed.
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @returns the component's position or -1 if nodeId or componentId are null
-   * or doesn't exist in the project.
-   */
-  getComponentPosition(nodeId: string, componentId: string): number {
-    if (nodeId != null && componentId != null) {
-      const components = this.getComponents(nodeId);
-      for (let c = 0; c < components.length; c++) {
-        const tempComponent = components[c];
-        if (tempComponent != null) {
-          const tempComponentId = tempComponent.id;
-          if (componentId === tempComponentId) {
-            return c;
-          }
-        }
-      }
-    }
-    return -1;
-  }
-
-  /**
-   * Add the component to the node
-   * @param node the node
-   * @param component the component
-   * @param insertAfterComponentId Insert the component after this given
-   * component id. If this argument is null, we will place the new component
-   * in the first position.
-   */
-  addComponentToNode(node, component, insertAfterComponentId) {
-    if (insertAfterComponentId == null) {
-      node.components.splice(0, 0, component);
-    } else {
-      // place the new component after the insertAfterComponentId
-
-      // boolean flag for whether we have added the component yet
-      let added = false;
-
-      const components = node.components;
-      for (let c = 0; c < components.length; c++) {
-        const tempComponent = components[c];
-        if (
-          tempComponent != null &&
-          tempComponent.id != null &&
-          tempComponent.id == insertAfterComponentId
-        ) {
-          /*
-           * we have found the component we want to add the new
-           * one after
-           */
-
-          components.splice(c + 1, 0, component);
-          added = true;
-          break;
-        }
-      }
-
-      if (!added) {
-        /*
-         * the component has not been added yet so we will just add
-         * it at the end
-         */
-        node.components.push(component);
-      }
-    }
-  }
-
-  /**
-   * TODO: Deprecated, should be removed; replaced by getMaxScoreForWorkgroupId in
-   * ClassroomStatusService
-   * Get the max score for the project. If the project contains branches, we
-   * will only calculate the max score for a single path from the first node
-   * to the last node in the project.
-   * @returns the max score for the project or null if none of the components in the project
-   * has max scores.
-   */
-  getMaxScore() {
-    let maxScore = null;
-    const startNodeId = this.getStartNodeId();
-
-    // get all the paths in the project
-    const allPaths = this.getAllPaths([], startNodeId);
-
-    if (allPaths != null && allPaths.length > -1) {
-      const firstPath = allPaths[0];
-      for (let nodeId of firstPath) {
-        const nodeMaxScore = this.getMaxScoreForNode(nodeId);
-        if (nodeMaxScore != null) {
-          if (maxScore == null) {
-            maxScore = nodeMaxScore;
-          } else {
-            maxScore += nodeMaxScore;
-          }
-        }
-      }
-    }
-    return maxScore;
-  }
-
-  setMaxScoreForComponent(nodeId: string, componentId: string, maxScore: number): void {
-    const component = this.getComponent(nodeId, componentId);
-    if (component != null) {
-      component.maxScore = maxScore;
-    }
-  }
-
-  hasGroupStartId(nodeId) {
-    const startId = this.getGroupStartId(nodeId);
-    return startId != null && startId != '';
   }
 
   /**
@@ -2287,38 +1478,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Remove the node from the inactive nodes array
-   * @param nodeId the node to remove
-   * @returns the node that was removed
-   */
-  removeNodeFromInactiveNodes(nodeId) {
-    let node = null;
-    if (nodeId != null) {
-      let parentGroup = this.getParentGroup(nodeId);
-      if (parentGroup != null) {
-        this.removeChildFromParent(nodeId);
-      }
-
-      let inactiveNodes = this.project.inactiveNodes;
-      if (inactiveNodes != null) {
-        for (let i = 0; i < inactiveNodes.length; i++) {
-          let inactiveNode = inactiveNodes[i];
-          if (inactiveNode != null) {
-            if (nodeId === inactiveNode.id) {
-              node = inactiveNode;
-              inactiveNodes.splice(i, 1);
-              break;
-            }
-          }
-        }
-      }
-      this.removeNodeFromInactiveStepNodes(nodeId);
-      this.removeNodeFromInactiveGroupNodes(nodeId);
-    }
-    return node;
-  }
-
-  /**
    * Remove the child node from the parent group.
    * @param nodeId The child node to remove from the parent.
    */
@@ -2361,50 +1520,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Remove the node from the inactive step nodes array.
-   * @param nodeId The node id of the node we want to remove from the
-   * inactive step nodes array.
-   */
-  removeNodeFromInactiveStepNodes(nodeId) {
-    for (let i = 0; i < this.inactiveStepNodes.length; i++) {
-      if (nodeId == this.inactiveStepNodes[i].id) {
-        this.inactiveStepNodes.splice(i, 1);
-        break;
-      }
-    }
-  }
-
-  /**
-   * Remove the node from the inactive group nodes array.
-   * @param nodeId The node id of the group we want to remove from the
-   * inactive group nodes array.
-   */
-  removeNodeFromInactiveGroupNodes(nodeId) {
-    for (let i = 0; i < this.inactiveGroupNodes.length; i++) {
-      if (nodeId == this.inactiveGroupNodes[i].id) {
-        this.inactiveGroupNodes.splice(i, 1);
-        break;
-      }
-    }
-  }
-
-  /**
-   * Move the node to the active nodes array. If the node is a group node,
-   * also move all of its children to active.
-   */
-  moveToActive(node) {
-    if (!this.isActive(node.id)) {
-      this.removeNodeFromInactiveNodes(node.id);
-      this.addNode(node);
-      if (this.isGroupNode(node.id)) {
-        for (const childId of node.ids) {
-          this.addNode(this.removeNodeFromInactiveNodes(childId));
-        }
-      }
-    }
-  }
-
-  /**
    * Add a group's cthild nodes to the inactive nodes.
    * @param node The group node.
    */
@@ -2414,149 +1529,6 @@ export class TeacherProjectService extends ProjectService {
         const childNode = this.getNodeById(childId);
         this.project.inactiveNodes.push(childNode);
         this.inactiveStepNodes.push(childNode);
-      }
-    }
-  }
-
-  /**
-   * Remove transition from nodes in the specified group that go out of the group
-   * @param nodeId the group id
-   */
-  removeTransitionsOutOfGroup(groupId) {
-    const group = this.getNodeById(groupId);
-    for (const childId of group.ids) {
-      const transitions = this.getTransitionsByFromNodeId(childId);
-      for (let t = 0; t < transitions.length; t++) {
-        const transition = transitions[t];
-        const parentGroupId = this.getParentGroupId(transition.to);
-        if (parentGroupId != groupId) {
-          // this is a transition that goes out of the specified group
-          transitions.splice(t, 1);
-          t--; // so it won't skip the next element
-        }
-      }
-    }
-  }
-
-  /*
-   * Update the step transitions that point into the group we are moving
-   * For example
-   * group1 has children node1 and node2 (node2 transitions to node3)
-   * group2 has children node3 and node4 (node4 transitions to node5)
-   * group3 has children node5 and node6
-   * if we move group2 after group3 we will need to change the
-   * transition from node2 to node3 and make node2 transition to node5
-   * the result will be
-   * group1 has children node1 and node2 (node2 transitions to node5)
-   * group3 has children node5 and node6
-   * group2 has children node3 and node4 (node4 transitions to node5)
-   * note: the (node4 transition to node5) will be removed later
-   * when is called removeTransitionsOutOfGroup
-   * note: when group2 is added in a later function call, we will add
-   * the node6 to node3 transition
-   * @param groupThatTransitionsToGroupWeAreMoving the group object
-   * that transitions to the group we are moving. we may need to update
-   * the transitions of this group's children.
-   * @param groupIdWeAreMoving the group id of the group we are moving
-   */
-  updateChildrenTransitionsIntoGroupWeAreMoving(
-    groupThatTransitionsToGroupWeAreMoving,
-    groupIdWeAreMoving
-  ) {
-    if (groupThatTransitionsToGroupWeAreMoving != null && groupIdWeAreMoving != null) {
-      const group = this.getNodeById(groupIdWeAreMoving);
-      if (group != null) {
-        // get all the nodes that have a transition to the node we are removing
-        const nodesByToNodeId = this.getNodesByToNodeId(groupIdWeAreMoving);
-
-        // get the transitions of the node we are removing
-        const nodeToRemoveTransitionLogic = group.transitionLogic;
-        let nodeToRemoveTransitions = [];
-
-        if (
-          nodeToRemoveTransitionLogic != null &&
-          nodeToRemoveTransitionLogic.transitions != null
-        ) {
-          nodeToRemoveTransitions = nodeToRemoveTransitionLogic.transitions;
-        }
-
-        if (nodeToRemoveTransitions.length == 0) {
-          /*
-           * The group we are moving is the last group in the project
-           * and does not have any transitions. We will loop through
-           * all the nodes that transition into this group and remove
-           * those transitions.
-           */
-
-          // get child ids of the group that comes before the group we are moving
-          const childIds = groupThatTransitionsToGroupWeAreMoving.ids;
-
-          if (childIds != null) {
-            for (let childId of childIds) {
-              const transitionsFromChild = this.getTransitionsByFromNodeId(childId);
-              if (transitionsFromChild != null) {
-                for (let tfc = 0; tfc < transitionsFromChild.length; tfc++) {
-                  const transitionFromChild = transitionsFromChild[tfc];
-                  if (transitionFromChild != null) {
-                    const toNodeId = transitionFromChild.to;
-                    const toNodeIdParentGroupId = this.getParentGroupId(toNodeId);
-
-                    if (groupIdWeAreMoving === toNodeIdParentGroupId) {
-                      // the transition is to a child in the group we are moving
-                      transitionsFromChild.splice(tfc, 1);
-
-                      /*
-                       * move the counter back one because we have just removed an
-                       * element from the array
-                       */
-                      tfc--;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        } else if (nodeToRemoveTransitions.length > 0) {
-          // get the first group that comes after the group we are removing
-          const firstNodeToRemoveTransition = nodeToRemoveTransitions[0];
-          const firstNodeToRemoveTransitionToNodeId = firstNodeToRemoveTransition.to;
-
-          if (this.isGroupNode(firstNodeToRemoveTransitionToNodeId)) {
-            // get the group that comes after the group we are moving
-            const groupNode = this.getNodeById(firstNodeToRemoveTransitionToNodeId);
-
-            // get child ids of the group that comes before the group we are moving
-            const childIds = groupThatTransitionsToGroupWeAreMoving.ids;
-
-            if (childIds != null) {
-              for (let childId of childIds) {
-                const transitionsFromChild = this.getTransitionsByFromNodeId(childId);
-                if (transitionsFromChild != null) {
-                  for (let transitionFromChild of transitionsFromChild) {
-                    if (transitionFromChild != null) {
-                      const toNodeId = transitionFromChild.to;
-
-                      // get the parent group id of the toNodeId
-                      const toNodeIdParentGroupId = this.getParentGroupId(toNodeId);
-
-                      if (groupIdWeAreMoving === toNodeIdParentGroupId) {
-                        // the transition is to a child in the group we are moving
-
-                        if (groupNode.startId == null || groupNode.startId === '') {
-                          // change the transition to point to the after group
-                          transitionFromChild.to = firstNodeToRemoveTransitionToNodeId;
-                        } else {
-                          // change the transition to point to the start id of the after group
-                          transitionFromChild.to = groupNode.startId;
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
       }
     }
   }
@@ -2802,7 +1774,7 @@ export class TeacherProjectService extends ProjectService {
    * @param nodeId the node id
    * @return whether the node is the first node in a branch path
    */
-  isFirstNodeInBranchPath(nodeId) {
+  isFirstNodeInBranchPath(nodeId: string): boolean {
     for (const node of this.getNodes()) {
       if (node.transitionLogic?.transitions?.length > 1) {
         for (const transition of node.transitionLogic.transitions) {

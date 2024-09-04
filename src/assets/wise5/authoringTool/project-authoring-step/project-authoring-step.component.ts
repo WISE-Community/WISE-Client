@@ -8,6 +8,7 @@ import { DeleteNodeService } from '../../services/deleteNodeService';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { CopyTranslationsService } from '../../services/copyTranslationsService';
+import { ConstraintService } from '../../services/constraintService';
 
 @Component({
   selector: 'project-authoring-step',
@@ -24,6 +25,7 @@ export class ProjectAuthoringStepComponent {
   constructor(
     private copyNodesService: CopyNodesService,
     private copyTranslationsService: CopyTranslationsService,
+    private constraintService: ConstraintService,
     private dataService: TeacherDataService,
     private deleteNodeService: DeleteNodeService,
     private deleteTranslationsService: DeleteTranslationsService,
@@ -46,11 +48,39 @@ export class ProjectAuthoringStepComponent {
   }
 
   protected getNumberOfBranchPaths(nodeId: string): number {
-    return this.projectService.getNumberOfBranchPaths(nodeId);
+    return this.projectService.getTransitionsByFromNodeId(nodeId).length;
   }
 
+  /**
+   * If this step is a branch point, we will return the criteria that is used
+   * to determine which path the student gets assigned to.
+   * @param nodeId The node id of the branch point.
+   * @returns A human readable string containing the criteria of how students
+   * are assigned branch paths on this branch point.
+   */
   protected getBranchCriteriaDescription(nodeId: string): string {
-    return this.projectService.getBranchCriteriaDescription(nodeId);
+    const transitionLogic = this.projectService.getNode(nodeId).getTransitionLogic();
+    for (const transition of transitionLogic.transitions) {
+      if (transition.criteria != null && transition.criteria.length > 0) {
+        for (const singleCriteria of transition.criteria) {
+          if (singleCriteria.name === 'choiceChosen') {
+            return 'multiple choice';
+          } else if (singleCriteria.name === 'score') {
+            return 'score';
+          }
+        }
+      }
+    }
+
+    /*
+     * None of the transitions had a specific criteria so the branching is just
+     * based on the howToChooseAmongAvailablePaths field.
+     */
+    if (transitionLogic.howToChooseAmongAvailablePaths === 'workgroupId') {
+      return 'workgroup ID';
+    } else if (transitionLogic.howToChooseAmongAvailablePaths === 'random') {
+      return 'random assignment';
+    }
   }
 
   protected getStepBackgroundColor(nodeId: string): string {
@@ -66,26 +96,19 @@ export class ProjectAuthoringStepComponent {
   }
 
   protected nodeHasConstraint(nodeId: string): boolean {
-    return this.projectService.nodeHasConstraint(nodeId);
+    return this.getNumberOfConstraintsOnNode(nodeId) > 0;
   }
 
   protected getNumberOfConstraintsOnNode(nodeId: string): number {
-    return this.projectService.getConstraintsOnNode(nodeId).length;
+    return this.projectService.getNode(nodeId).getConstraints().length;
   }
 
   protected nodeHasRubric(nodeId: string): boolean {
-    return this.projectService.nodeHasRubric(nodeId);
+    return this.projectService.getNode(nodeId).getNumRubrics() > 0;
   }
 
   protected getConstraintDescriptions(nodeId: string): string {
-    let constraintDescriptions = '';
-    const constraints = this.projectService.getConstraintsOnNode(nodeId);
-    for (let c = 0; c < constraints.length; c++) {
-      let constraint = constraints[c];
-      let description = this.projectService.getConstraintDescription(constraint);
-      constraintDescriptions += c + 1 + ' - ' + description + '\n';
-    }
-    return constraintDescriptions;
+    return this.constraintService.getConstraintDescriptions(nodeId);
   }
 
   protected constraintIconClicked(nodeId: string): void {

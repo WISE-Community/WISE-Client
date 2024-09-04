@@ -70,10 +70,9 @@ export class NotificationDataExportStrategy extends AbstractDataExportStrategy {
     row[columnNameToNumber['Step Title']] = this.controller.getNodeTitleByNodeId(
       notification.nodeId
     );
-    const componentPosition = this.projectService.getComponentPosition(
-      notification.nodeId,
-      notification.componentId
-    );
+    const componentPosition = this.projectService
+      .getNode(notification.nodeId)
+      .getComponentPosition(notification.componentId);
     if (componentPosition != -1) {
       row[columnNameToNumber['Component Part Number']] = componentPosition + 1;
     }

@@ -151,7 +151,7 @@ export class DiscussionComponentDataExportStrategy extends AbstractComponentData
     row[columnNameToNumber['Node ID']] = nodeId;
     row[columnNameToNumber['Step Title']] = this.projectService.getNodePositionAndTitle(nodeId);
     row[columnNameToNumber['Component Part Number']] =
-      this.projectService.getComponentPosition(nodeId, componentId) + 1;
+      this.projectService.getNode(nodeId).getComponentPosition(componentId) + 1;
     row[columnNameToNumber['Component ID']] = component.id;
     row[columnNameToNumber['Component Type']] = component.type;
     row[columnNameToNumber['Component Prompt']] = removeHTMLTags(component.prompt);

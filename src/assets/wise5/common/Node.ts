@@ -196,4 +196,42 @@ export class Node {
       componentContent.connectedComponents.length !== 0
     );
   }
+
+  addConstraint(constraint: any): void {
+    this.constraints.push(constraint);
+  }
+
+  getConstraints(): any[] {
+    return this.constraints;
+  }
+
+  deleteTransition(transition: any): void {
+    const transitions = this.transitionLogic.transitions;
+    const index = transitions.indexOf(transition);
+    if (index > -1) {
+      transitions.splice(index, 1);
+    }
+    if (transitions.length <= 1) {
+      // these settings only apply when there are multiple transitions
+      this.transitionLogic.howToChooseAmongAvailablePaths = null;
+      this.transitionLogic.whenToChoosePath = null;
+      this.transitionLogic.canChangePath = null;
+      this.transitionLogic.maxPathsVisitable = null;
+    }
+  }
+
+  getNumRubrics(): number {
+    let numRubrics = 0;
+    if (this.rubric != null && this.rubric != '') {
+      numRubrics++;
+    }
+    numRubrics += this.components.filter(
+      (component) => component.rubric != null && component.rubric != ''
+    ).length;
+    return numRubrics;
+  }
+
+  getComponentPosition(componentId: string): number {
+    return this.components.findIndex((component) => component.id === componentId);
+  }
 }

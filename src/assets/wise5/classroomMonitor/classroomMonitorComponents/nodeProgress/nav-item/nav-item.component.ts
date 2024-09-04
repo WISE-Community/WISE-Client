@@ -8,6 +8,8 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../../services/teacherWebSocketService';
 import { NodeService } from '../../../../services/nodeService';
+import { generateRandomKey } from '../../../../common/string/string';
+import { Node } from '../../../../common/Node';
 
 @Component({
   selector: 'nav-item',
@@ -76,7 +78,7 @@ export class NavItemComponent implements OnInit {
       this.parentGroupId = parentGroup.id;
     }
     this.getAlertNotifications();
-    this.hasRubrics = this.projectService.getNumberOfRubricsByNodeId(this.nodeId) > 0;
+    this.hasRubrics = this.projectService.getNode(this.nodeId).getNumRubrics() > 0;
     this.alertIconLabel = $localize`Has new alert(s)`;
     this.alertIconClass = 'warn';
     this.alertIconName = 'notifications';
@@ -185,16 +187,12 @@ export class NavItemComponent implements OnInit {
   }
 
   isLocked(): boolean {
-    const constraints = this.projectService.getNodeById(this.nodeId).constraints;
-    if (constraints == null) {
-      return false;
-    } else {
-      return (
-        (this.isShowingAllPeriods() && this.isLockedForAll(constraints)) ||
-        (!this.isShowingAllPeriods() &&
-          this.isLockedForPeriod(constraints, this.dataService.getCurrentPeriod().periodId))
-      );
-    }
+    const constraints = this.projectService.getNode(this.nodeId).constraints;
+    return (
+      (this.isShowingAllPeriods() && this.isLockedForAll(constraints)) ||
+      (!this.isShowingAllPeriods() &&
+        this.isLockedForPeriod(constraints, this.dataService.getCurrentPeriod().periodId))
+    );
   }
 
   private isLockedForAll(constraints: any): boolean {
@@ -220,7 +218,7 @@ export class NavItemComponent implements OnInit {
   }
 
   protected toggleLockNode(): void {
-    const node = this.projectService.getNodeById(this.nodeId);
+    const node = this.projectService.getNode(this.nodeId);
     const isLocked = this.isLocked();
     if (isLocked) {
       this.unlockNode(node);
@@ -241,38 +239,61 @@ export class NavItemComponent implements OnInit {
     );
   }
 
-  private unlockNode(node: any): void {
+  private unlockNode(node: Node): void {
     if (this.isShowingAllPeriods()) {
       this.unlockNodeForAllPeriods(node);
     } else {
-      this.projectService.removeTeacherRemovalConstraint(
-        node,
-        this.dataService.getCurrentPeriod().periodId
-      );
+      this.removeTeacherRemovalConstraint(node, this.dataService.getCurrentPeriod().periodId);
     }
   }
 
-  private lockNode(node: any): void {
+  private lockNode(node: Node): void {
     if (this.isShowingAllPeriods()) {
       this.lockNodeForAllPeriods(node);
     } else {
-      this.projectService.addTeacherRemovalConstraint(
-        node,
-        this.dataService.getCurrentPeriod().periodId
-      );
+      this.addTeacherRemovalConstraint(node, this.dataService.getCurrentPeriod().periodId);
     }
   }
 
-  private unlockNodeForAllPeriods(node: any): void {
+  private addTeacherRemovalConstraint(node: Node, periodId: number): void {
+    const lockConstraint = {
+      id: generateRandomKey(),
+      action: 'makeThisNodeNotVisitable',
+      targetId: node.id,
+      removalConditional: 'any',
+      removalCriteria: [
+        {
+          name: 'teacherRemoval',
+          params: {
+            periodId: periodId
+          }
+        }
+      ]
+    };
+    node.addConstraint(lockConstraint);
+  }
+
+  private unlockNodeForAllPeriods(node: Node): void {
     for (const period of this.dataService.getPeriods()) {
-      this.projectService.removeTeacherRemovalConstraint(node, period.periodId);
+      this.removeTeacherRemovalConstraint(node, period.periodId);
     }
   }
 
-  private lockNodeForAllPeriods(node: any): void {
+  private removeTeacherRemovalConstraint(node: Node, periodId: number) {
+    node.constraints = node.constraints.filter((constraint) => {
+      return !(
+        constraint.action === 'makeThisNodeNotVisitable' &&
+        constraint.targetId === node.id &&
+        constraint.removalCriteria[0].name === 'teacherRemoval' &&
+        constraint.removalCriteria[0].params.periodId === periodId
+      );
+    });
+  }
+
+  private lockNodeForAllPeriods(node: Node): void {
     for (const period of this.dataService.getPeriods()) {
       if (period.periodId !== -1 && !this.isLockedForPeriod(node.constraints, period.periodId)) {
-        this.projectService.addTeacherRemovalConstraint(node, period.periodId);
+        this.addTeacherRemovalConstraint(node, period.periodId);
       }
     }
   }

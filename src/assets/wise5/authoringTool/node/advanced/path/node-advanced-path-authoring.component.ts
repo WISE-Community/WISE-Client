@@ -57,7 +57,10 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
     { value: 'studentDataChanged', text: $localize`Student Data Changed` }
   ];
 
-  constructor(private projectService: TeacherProjectService, private route: ActivatedRoute) {}
+  constructor(
+    private projectService: TeacherProjectService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.route.parent.parent.params.subscribe((params) => {
@@ -198,11 +201,11 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
     this.saveProject();
   }
 
-  deleteTransition(transition): void {
+  deleteTransition(transition: any): void {
     const stepTitle = this.projectService.getNodePositionAndTitle(transition.to);
     const answer = confirm($localize`Are you sure you want to delete this path to "${stepTitle}"?`);
     if (answer) {
-      this.projectService.deleteTransition(this.node, transition);
+      this.projectService.getNode(this.node.id).deleteTransition(transition);
       this.saveProject();
     }
   }

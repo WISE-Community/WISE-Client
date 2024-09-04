@@ -11,6 +11,7 @@ describe('PathService', () => {
     service = TestBed.inject(PathService);
   });
   consolidatePaths();
+  arePathsEmpty();
 });
 
 function consolidatePaths() {
@@ -32,6 +33,15 @@ function consolidatePaths() {
         'node7',
         'node8'
       ]);
+    });
+  });
+}
+
+function arePathsEmpty() {
+  describe('arePathsEmpty()', () => {
+    it('should return true iff all paths are empty', () => {
+      expect(service.arePathsEmpty([[], []])).toBeTrue();
+      expect(service.arePathsEmpty([['node1'], []])).toBeFalse();
     });
   });
 }

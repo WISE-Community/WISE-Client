@@ -1,6 +1,4 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
 import { ConfigService } from '../../services/configService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../vleProjectService';
@@ -15,9 +13,8 @@ let fixture: ComponentFixture<NodeComponent>;
 describe('NodeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NodeComponent],
-      imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+      imports: [NodeComponent, StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi())]
     }).compileComponents();
   });
 

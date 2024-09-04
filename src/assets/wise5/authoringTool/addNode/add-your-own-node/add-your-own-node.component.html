@@ -2,50 +2,52 @@
   <mat-form-field appearance="fill" class="title-field">
     <mat-label i18n>Step Title</mat-label>
     <input matInput type="text" id="title" name="title" formControlName="title" required />
-    <mat-error *ngIf="addNodeFormGroup.controls['title'].hasError('required')" i18n>
-      Step Title is required
-    </mat-error>
+    @if (addNodeFormGroup.controls['title'].hasError('required')) {
+      <mat-error i18n> Step Title is required </mat-error>
+    }
   </mat-form-field>
   <h5 i18n>Select components to add to your new step (optional):</h5>
   <div fxLayout="column" fxLayout.gt-sm="row">
     <div class="initial-components notice-bg-bg" fxFlex="100" fxFlex.gt-sm="25">
-      <div *ngIf="initialComponents.length == 0" class="mat-small" i18n>No components added</div>
-      <div
-        class="component-list"
-        *ngIf="initialComponents.length > 0"
-        cdkDropList
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div
-          class="component-list-item"
-          *ngFor="let component of initialComponents; let i = index"
-          cdkDrag
-          fxLayout="row"
-          fxLayoutAlign="start center"
-          fxLayoutGap="8px"
-        >
-          <mat-icon class="secondary-text">reorder</mat-icon>
-          <span class="mat-small">{{ component.name }}</span>
-          <span fxFlex></span>
-          <button
-            mat-icon-button
-            (click)="deleteComponent(i)"
-            i18n-aria-label
-            aria-label="Delete component"
-          >
-            <mat-icon class="secondary-text">close</mat-icon>
-          </button>
+      @if (initialComponents.length == 0) {
+        <div class="mat-small" i18n>No components added</div>
+      }
+      @if (initialComponents.length > 0) {
+        <div class="component-list" cdkDropList (cdkDropListDropped)="drop($event)">
+          @for (component of initialComponents; track component.id) {
+            <div
+              class="component-list-item"
+              cdkDrag
+              fxLayout="row"
+              fxLayoutAlign="start center"
+              fxLayoutGap="8px"
+            >
+              <mat-icon class="secondary-text">reorder</mat-icon>
+              <span class="mat-small">{{ component.name }}</span>
+              <span fxFlex></span>
+              <button
+                mat-icon-button
+                (click)="deleteComponent(i)"
+                i18n-aria-label
+                aria-label="Delete component"
+              >
+                <mat-icon class="secondary-text">close</mat-icon>
+              </button>
+            </div>
+          }
         </div>
-      </div>
+      }
     </div>
     <div fxFlex="100" fxFlex.gt-sm="75">
       <div class="component-types" fxLayout="row wrap" fxLayoutAlign="start start">
-        <div class="component-type" *ngFor="let componentType of componentTypes">
-          <component-type-button
-            [componentType]="componentType.type"
-            (componentSelectedEvent)="addComponent(componentType)"
-          />
-        </div>
+        @for (componentType of componentTypes; track componentType.type) {
+          <div class="component-type">
+            <component-type-button
+              [componentType]="componentType.type"
+              (componentSelectedEvent)="addComponent(componentType)"
+            />
+          </div>
+        }
       </div>
       <p class="info mat-small" i18n>
         *Note: You can always add or remove content later by editing the step.
@@ -67,7 +69,9 @@
         (click)="submit()"
         class="button--progress"
       >
-        <mat-progress-bar *ngIf="submitting" mode="indeterminate"/>
+        @if (submitting) {
+          <mat-progress-bar mode="indeterminate" />
+        }
         <ng-container i18n>Submit</ng-container>
       </button>
     </div>

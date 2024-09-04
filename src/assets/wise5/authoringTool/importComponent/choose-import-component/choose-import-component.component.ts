@@ -87,7 +87,7 @@ export class ChooseImportComponentComponent implements OnInit {
           this.dataService.getCurrentNodeId(),
           history.state.insertAfterComponentId
         )
-        .then((newComponents) => {
+        .subscribe((newComponents) => {
           this.projectService.saveProject();
           // refresh the project assets in case any of the imported components also imported assets
           this.projectAssetService.retrieveProjectAssets();

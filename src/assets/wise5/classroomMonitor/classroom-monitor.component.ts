@@ -11,7 +11,9 @@ import { NotificationService } from '../services/notificationService';
 import { SessionService } from '../services/sessionService';
 import { TeacherDataService } from '../services/teacherDataService';
 import { TeacherProjectService } from '../services/teacherProjectService';
+import { TeacherPauseScreenService } from '../services/teacherPauseScreenService';
 import { NavigationEnd, Router } from '@angular/router';
+import { RunStatusService } from '../services/runStatusService';
 
 @Component({
   selector: 'classroom-monitor',
@@ -42,8 +44,10 @@ export class ClassroomMonitorComponent implements OnInit {
     private nodeService: NodeService,
     private notebookService: NotebookService,
     private notificationService: NotificationService,
+    private pauseScreenService: TeacherPauseScreenService,
     private projectService: TeacherProjectService,
     private router: Router,
+    private runStatusService: RunStatusService,
     private sessionService: SessionService,
     private snackBar: MatSnackBar
   ) {}
@@ -202,9 +206,9 @@ export class ClassroomMonitorComponent implements OnInit {
 
   @HostListener('window:beforeunload')
   protected unPauseAllPeriods(): void {
-    this.dataService.getRunStatus().periods.forEach((period) => {
+    this.runStatusService.getRunStatus().periods.forEach((period) => {
       if (period.periodId !== -1 && period.paused) {
-        this.dataService.pauseScreensChanged(period.periodId, false);
+        this.pauseScreenService.pauseScreensChanged(period.periodId, false);
       }
     });
   }

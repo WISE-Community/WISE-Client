@@ -6,6 +6,9 @@ const componentId2 = 'c2';
 let node: Node;
 const nodeId1 = 'node1';
 const nodeId2 = 'node2';
+const node1TransitionLogic = {
+  transitions: [{ to: 'node2' }, { to: 'node3' }]
+};
 
 describe('Node', () => {
   beforeEach(() => {
@@ -15,6 +18,7 @@ describe('Node', () => {
       { id: componentId1, prompt: 'a' },
       { id: componentId2, prompt: 'b' }
     ];
+    node.transitionLogic = node1TransitionLogic;
   });
   copyComponents();
   deleteComponent();
@@ -23,6 +27,9 @@ describe('Node', () => {
   moveComponents();
   replaceComponent();
   getAllRelatedComponents();
+  deleteTransition();
+  getNumRubrics();
+  getComponentPosition();
 });
 
 function copyComponents() {
@@ -195,6 +202,41 @@ function getAllRelatedComponents_stepHasDiscussionWithConnectedComponent_getsRel
         { nodeId: nodeId1, componentId: componentId1 },
         { nodeId: nodeId2, componentId: componentId2, type: 'importWork' }
       ]);
+    });
+  });
+}
+
+function deleteTransition() {
+  describe('deleteTransition', () => {
+    it('should delete existing transition from the node', () => {
+      expect(node.getTransitionLogic().transitions.length).toEqual(2);
+      node.deleteTransition(node1TransitionLogic.transitions[0]);
+      expect(node.getTransitionLogic().transitions.length).toEqual(1);
+      expect(node.getTransitionLogic().transitions[0].to).toEqual('node3');
+    });
+  });
+}
+
+function getNumRubrics() {
+  describe('getNumRubrics()', () => {
+    it("should return 0 when node and components don't have any rubric", () => {
+      expect(node.getNumRubrics()).toEqual(0);
+    });
+    it('should return total number of rubrics for the node and its components', () => {
+      node.rubric = 'node rubric';
+      node.components[0].rubric = 'component 1 rubric';
+      node.components[1].rubric = 'component 2 rubric';
+      expect(node.getNumRubrics()).toEqual(3);
+    });
+  });
+}
+
+function getComponentPosition() {
+  describe('getComponentPosition()', () => {
+    it('should return index of the specified component id', () => {
+      expect(node.getComponentPosition(componentId1)).toEqual(0);
+      expect(node.getComponentPosition(componentId2)).toEqual(1);
+      expect(node.getComponentPosition('invalid_id')).toEqual(-1);
     });
   });
 }

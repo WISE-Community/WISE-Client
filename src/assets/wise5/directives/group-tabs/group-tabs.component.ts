@@ -4,6 +4,8 @@ import { NodeStatusService } from '../../services/nodeStatusService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../../vle/vleProjectService';
 import { NodeService } from '../../services/nodeService';
+import { CommonModule } from '@angular/common';
+import { MatTabsModule } from '@angular/material/tabs';
 
 class GroupNode {
   id: string;
@@ -13,12 +15,14 @@ class GroupNode {
 }
 
 @Component({
+  imports: [CommonModule, MatTabsModule],
   selector: 'group-tabs',
+  standalone: true,
   templateUrl: './group-tabs.component.html'
 })
 export class GroupTabsComponent implements OnInit {
-  groupNodes: GroupNode[] = [];
-  selectedTabIndex: number;
+  protected groupNodes: GroupNode[] = [];
+  protected selectedTabIndex: number;
   private subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -62,7 +66,7 @@ export class GroupTabsComponent implements OnInit {
     );
   }
 
-  goToGroupTab(groupTabIndex: number): void {
+  protected goToGroupTab(groupTabIndex: number): void {
     const groupStartNodeId = this.groupNodes[groupTabIndex].startId;
     this.nodeService.setCurrentNode(groupStartNodeId);
   }

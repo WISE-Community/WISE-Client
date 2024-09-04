@@ -7,6 +7,7 @@ import { TeacherProjectService } from '../../assets/wise5/services/teacherProjec
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { RemoveNodeIdFromTransitionsService } from '../../assets/wise5/services/removeNodeIdFromTransitionsService';
 
 let demoProjectJSON: any;
 let projectService: TeacherProjectService;
@@ -15,9 +16,16 @@ let service: DeleteNodeService;
 describe('DeleteNodeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [StudentTeacherCommonServicesModule],
-    providers: [CopyNodesService, DeleteNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [StudentTeacherCommonServicesModule],
+      providers: [
+        CopyNodesService,
+        DeleteNodeService,
+        RemoveNodeIdFromTransitionsService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
     demoProjectJSON = copy(demoProjectJSON_import);
     projectService = TestBed.inject(TeacherProjectService);
     service = TestBed.inject(DeleteNodeService);
@@ -46,14 +54,14 @@ function shouldDeleteAStepFromTheProject() {
     expect(
       projectService.nodeHasTransitionToNodeId(projectService.getNodeById('node5'), 'node6')
     ).toBeTruthy();
-    expect(projectService.getNodesWithTransitionToNodeId('node6').length).toEqual(1);
+    expect(projectService.getNodesByToNodeId('node6').length).toEqual(1);
     service.deleteNode('node5');
     expect(projectService.getNodes().length).toEqual(53);
     expect(projectService.getNodeById('node5')).toBeNull();
     expect(
       projectService.nodeHasTransitionToNodeId(projectService.getNodeById('node4'), 'node6')
     ).toBeTruthy();
-    expect(projectService.getNodesWithTransitionToNodeId('node6').length).toEqual(1);
+    expect(projectService.getNodesByToNodeId('node6').length).toEqual(1);
   });
 }
 
@@ -72,10 +80,10 @@ function shouldDeleteAStepThatIsTheStartIdOfTheProject() {
   it('should delete a step that is the start id of the project', () => {
     projectService.setProject(demoProjectJSON);
     expect(projectService.getStartNodeId()).toEqual('node1');
-    expect(projectService.getNodesWithTransitionToNodeId('node2').length).toEqual(1);
+    expect(projectService.getNodesByToNodeId('node2').length).toEqual(1);
     service.deleteNode('node1');
     expect(projectService.getStartNodeId()).toEqual('node2');
-    expect(projectService.getNodesWithTransitionToNodeId('node2').length).toEqual(0);
+    expect(projectService.getNodesByToNodeId('node2').length).toEqual(0);
   });
 }
 
@@ -118,13 +126,13 @@ function shouldDeleteTheFirstActivityFromTheProject() {
     expect(projectService.getGroupStartId('group0')).toEqual('group1');
     expect(projectService.getStartNodeId()).toEqual('node1');
     expect(projectService.getNodes().length).toEqual(54);
-    expect(projectService.getNodesWithTransitionToNodeId('node20').length).toEqual(1);
+    expect(projectService.getNodesByToNodeId('node20').length).toEqual(1);
     service.deleteNode('group1');
     expect(projectService.getNodeById('group1')).toBeNull();
     expect(projectService.getGroupStartId('group0')).toEqual('group2');
     expect(projectService.getStartNodeId()).toEqual('node20');
     expect(projectService.getNodes().length).toEqual(34);
-    expect(projectService.getNodesWithTransitionToNodeId('node20').length).toEqual(0);
+    expect(projectService.getNodesByToNodeId('node20').length).toEqual(0);
   });
 }
 

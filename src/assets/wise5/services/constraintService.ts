@@ -270,4 +270,183 @@ export class ConstraintService {
   hasActiveConstraints(): boolean {
     return this.activeConstraints.length > 0;
   }
+
+  getConstraintDescriptions(nodeId: string): string {
+    let constraintDescriptions = '';
+    const constraints = this.projectService.getNode(nodeId).getConstraints();
+    for (let c = 0; c < constraints.length; c++) {
+      const constraint = constraints[c];
+      const description = this.getConstraintDescription(constraint);
+      constraintDescriptions += c + 1 + ' - ' + description + '\n';
+    }
+    return constraintDescriptions;
+  }
+
+  /**
+   * Get the human readable description of the constraint.
+   * @param constraint The constraint object.
+   * @returns A human readable text string that describes the constraint.
+   * example
+   * 'All steps after this one will not be visitable until the student completes
+   * "3.7 Revise Your Bowls Explanation"'
+   */
+  private getConstraintDescription(constraint: any): string {
+    let message = '';
+    for (const singleRemovalCriteria of constraint.removalCriteria) {
+      if (message != '') {
+        // this constraint has multiple removal criteria
+        if (constraint.removalConditional === 'any') {
+          message += ' or ';
+        } else if (constraint.removalConditional === 'all') {
+          message += ' and ';
+        }
+      }
+      message += this.getCriteriaMessage(singleRemovalCriteria);
+    }
+    return this.getActionMessage(constraint.action) + message;
+  }
+
+  /**
+   * Get the message that describes how to satisfy the criteria
+   * TODO: check if the criteria is satisfied
+   * @param criteria the criteria object that needs to be satisfied
+   * @returns the message to display to the student that describes how to
+   * satisfy the criteria
+   */
+  getCriteriaMessage(criteria: any): string {
+    let message = '';
+    const name = criteria.name;
+    const params = criteria.params;
+
+    if (name === 'isCompleted') {
+      const nodeId = params.nodeId;
+      if (nodeId != null) {
+        const nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
+        message += $localize`Complete <b>${nodeTitle}</b>`;
+      }
+    } else if (name === 'isVisited') {
+      const nodeId = params.nodeId;
+      if (nodeId != null) {
+        const nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
+        message += $localize`Visit <b>${nodeTitle}</b>`;
+      }
+    } else if (name === 'isCorrect') {
+      const nodeId = params.nodeId;
+      if (nodeId != null) {
+        const nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
+        message += $localize`Correctly answer <b>${nodeTitle}</b>`;
+      }
+    } else if (name === 'score') {
+      const nodeId = params.nodeId;
+      let nodeTitle = '';
+      let scoresString = '';
+
+      if (nodeId != null) {
+        nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
+      }
+
+      const scores = params.scores;
+      if (scores != null) {
+        scoresString = scores.join(', ');
+      }
+      message += $localize`Obtain a score of <b>${scoresString}</b> on <b>${nodeTitle}</b>`;
+    } else if (name === 'choiceChosen') {
+      const nodeId = params.nodeId;
+      const componentId = params.componentId;
+      const choiceIds = params.choiceIds;
+      let nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
+      let choices = this.projectService.getChoiceText(nodeId, componentId, choiceIds);
+      let choiceText = choices.join(', ');
+      message += $localize`You must choose "${choiceText}" on "${nodeTitle}"`;
+    } else if (name === 'usedXSubmits') {
+      const nodeId = params.nodeId;
+      let nodeTitle = '';
+
+      const requiredSubmitCount = params.requiredSubmitCount;
+
+      if (nodeId != null) {
+        nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
+      }
+
+      if (requiredSubmitCount == 1) {
+        message += $localize`Submit <b>${requiredSubmitCount}</b> time on <b>${nodeTitle}</b>`;
+      } else {
+        message += $localize`Submit <b>${requiredSubmitCount}</b> times on <b>${nodeTitle}</b>`;
+      }
+    } else if (name === 'branchPathTaken') {
+      const fromNodeId = params.fromNodeId;
+      const fromNodeTitle = this.projectService.getNodePositionAndTitle(fromNodeId);
+      const toNodeId = params.toNodeId;
+      const toNodeTitle = this.projectService.getNodePositionAndTitle(toNodeId);
+      message += $localize`Take the branch path from <b>${fromNodeTitle}</b> to <b>${toNodeTitle}</b>`;
+    } else if (name === 'wroteXNumberOfWords') {
+      const nodeId = params.nodeId;
+      if (nodeId != null) {
+        const requiredNumberOfWords = params.requiredNumberOfWords;
+        const nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
+        message += $localize`Write <b>${requiredNumberOfWords}</b> words on <b>${nodeTitle}</b>`;
+      }
+    } else if (name === 'isVisible') {
+      const nodeId = params.nodeId;
+      if (nodeId != null) {
+        const nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
+        message += $localize`"${nodeTitle}" is visible`;
+      }
+    } else if (name === 'isVisitable') {
+      const nodeId = params.nodeId;
+      if (nodeId != null) {
+        const nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
+        message += $localize`"${nodeTitle}" is visitable`;
+      }
+    } else if (name === 'addXNumberOfNotesOnThisStep') {
+      const nodeId = params.nodeId;
+      const requiredNumberOfNotes = params.requiredNumberOfNotes;
+      const nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
+      if (requiredNumberOfNotes == 1) {
+        message += $localize`Add <b>${requiredNumberOfNotes}</b> note on <b>${nodeTitle}</b>`;
+      } else {
+        message += $localize`Add <b>${requiredNumberOfNotes}</b> notes on <b>${nodeTitle}</b>`;
+      }
+    } else if (name === 'fillXNumberOfRows') {
+      const requiredNumberOfFilledRows = params.requiredNumberOfFilledRows;
+      const nodeId = params.nodeId;
+      const nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
+      if (requiredNumberOfFilledRows == 1) {
+        message += $localize`You must fill in <b>${requiredNumberOfFilledRows}</b> row in the <b>Table</b> on <b>${nodeTitle}</b>`;
+      } else {
+        message += $localize`You must fill in <b>${requiredNumberOfFilledRows}</b> rows in the <b>Table</b> on <b>${nodeTitle}</b>`;
+      }
+    } else if (name === 'teacherRemoval') {
+      message += $localize`Wait for your teacher to unlock the item`;
+    }
+    return message;
+  }
+
+  /**
+   * Get the constraint action as human readable text.
+   * @param action A constraint action.
+   * @return A human readable text string that describes the action
+   * example
+   * 'All steps after this one will not be visitable until '
+   */
+  private getActionMessage(action: string): string {
+    if (action === 'makeAllNodesAfterThisNotVisitable') {
+      return $localize`All steps after this one will not be visitable until `;
+    }
+    if (action === 'makeAllNodesAfterThisNotVisible') {
+      return $localize`All steps after this one will not be visible until `;
+    }
+    if (action === 'makeAllOtherNodesNotVisitable') {
+      return $localize`All other steps will not be visitable until `;
+    }
+    if (action === 'makeAllOtherNodesNotVisible') {
+      return $localize`All other steps will not be visible until `;
+    }
+    if (action === 'makeThisNodeNotVisitable') {
+      return $localize`This step will not be visitable until `;
+    }
+    if (action === 'makeThisNodeNotVisible') {
+      return $localize`This step will not be visible until `;
+    }
+  }
 }

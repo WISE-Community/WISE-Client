@@ -182,7 +182,7 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
       row,
       columnNameToNumber,
       'Component Part Number',
-      this.projectService.getComponentPosition(nodeId, component.id) + 1
+      this.projectService.getNode(nodeId).getComponentPosition(component.id) + 1
     );
     this.setColumnValue(
       row,

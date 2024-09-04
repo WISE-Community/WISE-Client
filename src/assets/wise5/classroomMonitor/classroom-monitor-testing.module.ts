@@ -12,19 +12,28 @@ import { TeacherPeerGroupService } from '../services/teacherPeerGroupService';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MilestoneReportService } from '../services/milestoneReportService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TeacherPauseScreenService } from '../services/teacherPauseScreenService';
+import { RunStatusService } from '../services/runStatusService';
 
-@NgModule({ imports: [BrowserAnimationsModule,
-        MatDialogModule,
-        MatSnackBarModule,
-        StudentTeacherCommonServicesModule], providers: [
-        ClassroomStatusService,
-        MilestoneService,
-        MilestoneReportService,
-        TeacherDataService,
-        TeacherPeerGroupService,
-        TeacherProjectService,
-        TeacherWebSocketService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ] })
+@NgModule({
+  imports: [
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    StudentTeacherCommonServicesModule
+  ],
+  providers: [
+    ClassroomStatusService,
+    MilestoneService,
+    MilestoneReportService,
+    TeacherDataService,
+    TeacherPauseScreenService,
+    TeacherPeerGroupService,
+    TeacherProjectService,
+    TeacherWebSocketService,
+    RunStatusService,
+    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClientTesting()
+  ]
+})
 export class ClassroomMonitorTestingModule {}

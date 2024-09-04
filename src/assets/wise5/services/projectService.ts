@@ -720,47 +720,23 @@ export class ProjectService {
   }
 
   /**
-   * Get the transition logic for a node
-   * @param fromNodeId the from node id
-   * @returns the transition logic object
-   */
-  getTransitionLogicByFromNodeId(fromNodeId: string): TransitionLogic {
-    return this.getNode(fromNodeId).getTransitionLogic();
-  }
-
-  /**
    * Get the transitions for a node
    * @param fromNodeId the node to get transitions from
    * @returns {Array} an array of transitions
    */
   getTransitionsByFromNodeId(fromNodeId: string): Transition[] {
-    const transitionLogic = this.getTransitionLogicByFromNodeId(fromNodeId);
-    return transitionLogic.transitions ?? [];
+    return this.getNode(fromNodeId).getTransitionLogic().transitions ?? [];
   }
 
   /**
    * Get nodes that have a transition to the given node id
    * @param toNodeId the node id
-   * @returns an array of node objects that transition to the
-   * given node id
+   * @returns an array of node objects that transition to the given node id
    */
-  getNodesByToNodeId(toNodeId: string): any {
-    const nodesByToNodeId = [];
-    if (toNodeId != null) {
-      const nodes = this.project.nodes;
-      for (let node of nodes) {
-        if (this.nodeHasTransitionToNodeId(node, toNodeId)) {
-          nodesByToNodeId.push(node);
-        }
-      }
-      const inactiveNodes = this.getInactiveNodes();
-      for (let inactiveNode of inactiveNodes) {
-        if (this.nodeHasTransitionToNodeId(inactiveNode, toNodeId)) {
-          nodesByToNodeId.push(inactiveNode);
-        }
-      }
-    }
-    return nodesByToNodeId;
+  getNodesByToNodeId(toNodeId: string): any[] {
+    return this.project.nodes
+      .concat(this.getInactiveNodes())
+      .filter((node) => this.nodeHasTransitionToNodeId(node, toNodeId));
   }
 
   getInactiveNodes(): any {
@@ -777,20 +753,6 @@ export class ProjectService {
     return this.getTransitionsByFromNodeId(node.id).some(
       (transition) => transition.to === toNodeId
     );
-  }
-
-  /**
-   * Get node ids of all the nodes that have a to transition to the given node id
-   * @param toNodeId
-   * @returns all the node ids that have a transition to the given node id
-   */
-  getNodesWithTransitionToNodeId(toNodeId: string): string[] {
-    const nodeIds = [];
-    const nodes = this.getNodesByToNodeId(toNodeId);
-    for (let node of nodes) {
-      nodeIds.push(node.id);
-    }
-    return nodeIds;
   }
 
   /**
@@ -892,230 +854,224 @@ export class ProjectService {
   getAllPaths(pathSoFar: string[], nodeId: string = '', includeGroups: boolean = false): any[][] {
     const allPaths = [];
     if (this.isApplicationNode(nodeId)) {
-      const path = [];
-      const transitions = this.getTransitionsByFromNodeId(nodeId);
-      if (includeGroups) {
-        const parentGroup = this.getParentGroup(nodeId);
-        if (parentGroup != null) {
-          const parentGroupId = parentGroup.id;
-          if (parentGroupId != null && pathSoFar.indexOf(parentGroupId) == -1) {
-            pathSoFar.push(parentGroup.id);
+      this.getStepPaths(pathSoFar, nodeId, includeGroups, allPaths);
+    } else {
+      this.getLessonPaths(pathSoFar, nodeId, includeGroups, allPaths);
+    }
+    return allPaths;
+  }
+
+  private getStepPaths(
+    pathSoFar: string[],
+    nodeId: string,
+    includeGroups: boolean,
+    allPaths: any[]
+  ): void {
+    const path = [];
+    const transitions = this.getTransitionsByFromNodeId(nodeId);
+    if (includeGroups) {
+      const parentGroup = this.getParentGroup(nodeId);
+      if (parentGroup != null) {
+        const parentGroupId = parentGroup.id;
+        if (parentGroupId != null && pathSoFar.indexOf(parentGroupId) == -1) {
+          pathSoFar.push(parentGroup.id);
+        }
+      }
+    }
+
+    /*
+     * add the node id to the path so far so we can later check
+     * which nodes are already in the path to prevent looping
+     * back in the path
+     */
+    pathSoFar.push(nodeId);
+
+    if (transitions.length === 0) {
+      /*
+       * there are no transitions from the node id so we will
+       * look for a transition in the parent group
+       */
+      let addedCurrentNodeId = false;
+      const parentGroupId = this.getParentGroupId(nodeId);
+      const parentGroupTransitions = this.getTransitionsByFromNodeId(parentGroupId);
+      for (const parentGroupTransition of parentGroupTransitions) {
+        if (parentGroupTransition != null) {
+          const toNodeId = parentGroupTransition.to;
+          if (pathSoFar.indexOf(toNodeId) == -1) {
+            /*
+             * recursively get the paths by getting all
+             * the paths for the to node
+             */
+            const allPathsFromToNode = this.getAllPaths(pathSoFar, toNodeId, includeGroups);
+
+            for (let tempPath of allPathsFromToNode) {
+              tempPath.unshift(nodeId);
+              allPaths.push(tempPath);
+              addedCurrentNodeId = true;
+            }
           }
         }
       }
 
-      /*
-       * add the node id to the path so far so we can later check
-       * which nodes are already in the path to prevent looping
-       * back in the path
-       */
-      pathSoFar.push(nodeId);
-
-      if (transitions.length === 0) {
+      if (!addedCurrentNodeId) {
         /*
-         * there are no transitions from the node id so we will
-         * look for a transition in the parent group
+         * if the parent group doesn't have any transitions we will
+         * need to add the current node id to the path
          */
-
-        let addedCurrentNodeId = false;
-        const parentGroupId = this.getParentGroupId(nodeId);
-        const parentGroupTransitions = this.getTransitionsByFromNodeId(parentGroupId);
-        for (const parentGroupTransition of parentGroupTransitions) {
-          if (parentGroupTransition != null) {
-            const toNodeId = parentGroupTransition.to;
-            if (pathSoFar.indexOf(toNodeId) == -1) {
-              /*
-               * recursively get the paths by getting all
-               * the paths for the to node
-               */
-              const allPathsFromToNode = this.getAllPaths(pathSoFar, toNodeId, includeGroups);
-
-              for (let tempPath of allPathsFromToNode) {
-                tempPath.unshift(nodeId);
-                allPaths.push(tempPath);
-                addedCurrentNodeId = true;
-              }
-            }
-          }
-        }
-
-        if (!addedCurrentNodeId) {
-          /*
-           * if the parent group doesn't have any transitions we will
-           * need to add the current node id to the path
-           */
-          path.push(nodeId);
-          allPaths.push(path);
-        }
-      } else {
-        // there are transitions from this node id
-
-        for (let transition of transitions) {
-          if (transition != null) {
-            const toNodeId = transition.to;
-            if (toNodeId != null && pathSoFar.indexOf(toNodeId) == -1) {
-              // we have not found the to node in the path yet so we can traverse it
-
-              /*
-               * recursively get the paths by getting all
-               * the paths from the to node
-               */
-              const allPathsFromToNode = this.getAllPaths(pathSoFar, toNodeId, includeGroups);
-
-              if (allPathsFromToNode != null) {
-                for (let tempPath of allPathsFromToNode) {
-                  if (includeGroups) {
-                    // we need to add the group id to the path
-
-                    if (tempPath.length > 0) {
-                      const firstNodeId = tempPath[0];
-                      const firstParentGroupId = this.getParentGroupId(firstNodeId);
-                      const parentGroupId = this.getParentGroupId(nodeId);
-                      if (parentGroupId != firstParentGroupId) {
-                        /*
-                         * the parent ids are different which means this is a boundary
-                         * between two groups. for example if the project looked like
-                         * group1>node1>node2>group2>node3>node4
-                         * and the current node was node2 then the first node in the
-                         * path would be node3 which means we would need to place
-                         * group2 on the path before node3
-                         */
-                        tempPath.unshift(firstParentGroupId);
-                      }
-                    }
-                  }
-
-                  tempPath.unshift(nodeId);
-                  allPaths.push(tempPath);
-                }
-              }
-            } else {
-              /*
-               * the node is already in the path so far which means
-               * the transition is looping back to a previous node.
-               * we do not want to take this transition because
-               * it will lead to an infinite loop. we will just
-               * add the current node id to the path and not take
-               * the transition which essentially ends the path.
-               */
-              path.push(nodeId);
-              allPaths.push(path);
-            }
-          }
-        }
-      }
-
-      if (pathSoFar.length > 0) {
-        const lastNodeId = pathSoFar[pathSoFar.length - 1];
-        if (this.isGroupNode(lastNodeId)) {
-          /*
-           * the last node id is a group id so we will remove it
-           * since we are moving back up the path as we traverse
-           * the nodes depth first
-           */
-          pathSoFar.pop();
-        }
-      }
-
-      /*
-       * remove the latest node id (this will be a step node id)
-       * since we are moving back up the path as we traverse the
-       * nodes depth first
-       */
-      pathSoFar.pop();
-
-      if (includeGroups) {
-        if (pathSoFar.length == 1) {
-          /*
-           * we are including groups and we have traversed
-           * back up to the start node id for the project.
-           * the only node id left in pathSoFar is now the
-           * parent group of the start node id. we will
-           * now add this parent group of the start node id
-           * to all of the paths
-           */
-
-          for (let path of allPaths) {
-            if (path != null) {
-              /*
-               * prepend the parent group of the start node id
-               * to the path
-               */
-              path.unshift(pathSoFar[0]);
-            }
-          }
-
-          /*
-           * remove the parent group of the start node id from
-           * pathSoFar which leaves us with an empty pathSoFar
-           * which means we are completely done with
-           * calculating all the paths
-           */
-          pathSoFar.pop();
-        }
+        path.push(nodeId);
+        allPaths.push(path);
       }
     } else {
-      /*
-       * add the node id to the path so far so we can later check
-       * which nodes are already in the path to prevent looping
-       * back in the path
-       */
-      pathSoFar.push(nodeId);
+      // there are transitions from this node id
+      for (let transition of transitions) {
+        if (transition != null) {
+          const toNodeId = transition.to;
+          if (toNodeId != null && pathSoFar.indexOf(toNodeId) == -1) {
+            // we have not found the to node in the path yet so we can traverse it
+            /*
+             * recursively get the paths by getting all
+             * the paths from the to node
+             */
+            const allPathsFromToNode = this.getAllPaths(pathSoFar, toNodeId, includeGroups);
 
-      const groupNode = this.getNodeById(nodeId);
-      if (groupNode != null) {
-        const startId = groupNode.startId;
-        if (startId == null || startId == '') {
-          // there is no start id so we will take the transition from the group
-          // TODO? there is no start id so we will loop through all the child nodes
-
-          const transitions = this.getTransitionsByFromNodeId(groupNode.id);
-          if (transitions.length > 0) {
-            for (let transition of transitions) {
-              if (transition != null) {
-                const toNodeId = transition.to;
-
-                const allPathsFromToNode = this.getAllPaths(pathSoFar, toNodeId, includeGroups);
-
-                if (allPathsFromToNode != null) {
-                  for (let tempPath of allPathsFromToNode) {
-                    tempPath.unshift(nodeId);
-                    allPaths.push(tempPath);
+            if (allPathsFromToNode != null) {
+              for (let tempPath of allPathsFromToNode) {
+                if (includeGroups) {
+                  // we need to add the group id to the path
+                  if (tempPath.length > 0) {
+                    const firstNodeId = tempPath[0];
+                    const firstParentGroupId = this.getParentGroupId(firstNodeId);
+                    const parentGroupId = this.getParentGroupId(nodeId);
+                    if (parentGroupId != firstParentGroupId) {
+                      /*
+                       * the parent ids are different which means this is a boundary
+                       * between two groups. for example if the project looked like
+                       * group1>node1>node2>group2>node3>node4
+                       * and the current node was node2 then the first node in the
+                       * path would be node3 which means we would need to place
+                       * group2 on the path before node3
+                       */
+                      tempPath.unshift(firstParentGroupId);
+                    }
                   }
                 }
+
+                tempPath.unshift(nodeId);
+                allPaths.push(tempPath);
               }
             }
           } else {
             /*
-             * this activity does not have any transitions so
-             * we have reached the end of this path
+             * the node is already in the path so far which means
+             * the transition is looping back to a previous node.
+             * we do not want to take this transition because
+             * it will lead to an infinite loop. we will just
+             * add the current node id to the path and not take
+             * the transition which essentially ends the path.
              */
-
-            const tempPath = [];
-            tempPath.unshift(nodeId);
-            allPaths.push(tempPath);
-          }
-        } else {
-          // there is a start id so we will traverse it
-
-          const allPathsFromToNode = this.getAllPaths(pathSoFar, startId, includeGroups);
-
-          if (allPathsFromToNode != null) {
-            for (let tempPath of allPathsFromToNode) {
-              tempPath.unshift(nodeId);
-              allPaths.push(tempPath);
-            }
+            path.push(nodeId);
+            allPaths.push(path);
           }
         }
       }
-
-      /*
-       * remove the latest node id since we are moving back
-       * up the path as we traverse the nodes depth first
-       */
-      pathSoFar.pop();
     }
-    return allPaths;
+
+    if (pathSoFar.length > 0) {
+      const lastNodeId = pathSoFar[pathSoFar.length - 1];
+      if (this.isGroupNode(lastNodeId)) {
+        /*
+         * the last node id is a group id so we will remove it
+         * since we are moving back up the path as we traverse
+         * the nodes depth first
+         */
+        pathSoFar.pop();
+      }
+    }
+
+    /*
+     * remove the latest node id (this will be a step node id)
+     * since we are moving back up the path as we traverse the
+     * nodes depth first
+     */
+    pathSoFar.pop();
+
+    if (includeGroups) {
+      if (pathSoFar.length == 1) {
+        /*
+         * we are including groups and we have traversed
+         * back up to the start node id for the project.
+         * the only node id left in pathSoFar is now the
+         * parent group of the start node id. we will
+         * now add this parent group of the start node id
+         * to all of the paths
+         */
+        for (let path of allPaths) {
+          if (path != null) {
+            /*
+             * prepend the parent group of the start node id
+             * to the path
+             */
+            path.unshift(pathSoFar[0]);
+          }
+        }
+
+        /*
+         * remove the parent group of the start node id from
+         * pathSoFar which leaves us with an empty pathSoFar
+         * which means we are completely done with
+         * calculating all the paths
+         */
+        pathSoFar.pop();
+      }
+    }
+  }
+
+  private getLessonPaths(
+    pathSoFar: string[],
+    groupId: string,
+    includeGroups: boolean,
+    allPaths: any[]
+  ): void {
+    /*
+     * add the node id to the path so far so we can later check
+     * which nodes are already in the path to prevent looping
+     * back in the path
+     */
+    pathSoFar.push(groupId);
+
+    const groupNode = this.getNodeById(groupId);
+    const startId = groupNode.startId;
+    if (startId == null || startId == '') {
+      // there is no start id (e.g., this is an empty lesson)
+      // so we will take the transition from the group
+      // TODO? there is no start id so we will loop through all the child nodes
+      const transitions = this.getTransitionsByFromNodeId(groupNode.id);
+      if (transitions.length > 0) {
+        for (const transition of transitions) {
+          const allPathsFromToNode = this.getAllPaths(pathSoFar, transition.to, includeGroups);
+          for (const tempPath of allPathsFromToNode) {
+            tempPath.unshift(groupId);
+            allPaths.push(tempPath);
+          }
+        }
+      } else {
+        // this activity does not have any transitions so we have reached the end of this path
+        allPaths.push([groupId]);
+      }
+    } else {
+      // there is a start id so we will traverse it
+      const allPathsFromToNode = this.getAllPaths(pathSoFar, startId, includeGroups);
+      for (const tempPath of allPathsFromToNode) {
+        tempPath.unshift(groupId);
+        allPaths.push(tempPath);
+      }
+    }
+
+    /*
+     * remove the latest node id since we are moving back
+     * up the path as we traverse the nodes depth first
+     */
+    pathSoFar.pop();
   }
 
   getStepNodeIds(): string[] {
@@ -1189,125 +1145,6 @@ export class ProjectService {
       return component.maxScore;
     }
     return null;
-  }
-
-  /**
-   * Get the message that describes how to satisfy the criteria
-   * TODO: check if the criteria is satisfied
-   * @param criteria the criteria object that needs to be satisfied
-   * @returns the message to display to the student that describes how to
-   * satisfy the criteria
-   */
-  getCriteriaMessage(criteria: any): string {
-    let message = '';
-
-    if (criteria != null) {
-      const name = criteria.name;
-      const params = criteria.params;
-
-      if (name === 'isCompleted') {
-        const nodeId = params.nodeId;
-        if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitle(nodeId);
-          message += $localize`Complete <b>${nodeTitle}</b>`;
-        }
-      } else if (name === 'isVisited') {
-        const nodeId = params.nodeId;
-        if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitle(nodeId);
-          message += $localize`Visit <b>${nodeTitle}</b>`;
-        }
-      } else if (name === 'isCorrect') {
-        const nodeId = params.nodeId;
-        if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitle(nodeId);
-          message += $localize`Correctly answer <b>${nodeTitle}</b>`;
-        }
-      } else if (name === 'score') {
-        const nodeId = params.nodeId;
-        let nodeTitle = '';
-        let scoresString = '';
-
-        if (nodeId != null) {
-          nodeTitle = this.getNodePositionAndTitle(nodeId);
-        }
-
-        const scores = params.scores;
-        if (scores != null) {
-          scoresString = scores.join(', ');
-        }
-        message += $localize`Obtain a score of <b>${scoresString}</b> on <b>${nodeTitle}</b>`;
-      } else if (name === 'choiceChosen') {
-        const nodeId = params.nodeId;
-        const componentId = params.componentId;
-        const choiceIds = params.choiceIds;
-        let nodeTitle = this.getNodePositionAndTitle(nodeId);
-        let choices = this.getChoiceText(nodeId, componentId, choiceIds);
-        let choiceText = choices.join(', ');
-        message += $localize`You must choose "${choiceText}" on "${nodeTitle}"`;
-      } else if (name === 'usedXSubmits') {
-        const nodeId = params.nodeId;
-        let nodeTitle = '';
-
-        const requiredSubmitCount = params.requiredSubmitCount;
-
-        if (nodeId != null) {
-          nodeTitle = this.getNodePositionAndTitle(nodeId);
-        }
-
-        if (requiredSubmitCount == 1) {
-          message += $localize`Submit <b>${requiredSubmitCount}</b> time on <b>${nodeTitle}</b>`;
-        } else {
-          message += $localize`Submit <b>${requiredSubmitCount}</b> times on <b>${nodeTitle}</b>`;
-        }
-      } else if (name === 'branchPathTaken') {
-        const fromNodeId = params.fromNodeId;
-        const fromNodeTitle = this.getNodePositionAndTitle(fromNodeId);
-        const toNodeId = params.toNodeId;
-        const toNodeTitle = this.getNodePositionAndTitle(toNodeId);
-        message += $localize`Take the branch path from <b>${fromNodeTitle}</b> to <b>${toNodeTitle}</b>`;
-      } else if (name === 'wroteXNumberOfWords') {
-        const nodeId = params.nodeId;
-        if (nodeId != null) {
-          const requiredNumberOfWords = params.requiredNumberOfWords;
-          const nodeTitle = this.getNodePositionAndTitle(nodeId);
-          message += $localize`Write <b>${requiredNumberOfWords}</b> words on <b>${nodeTitle}</b>`;
-        }
-      } else if (name === 'isVisible') {
-        const nodeId = params.nodeId;
-        if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitle(nodeId);
-          message += $localize`"${nodeTitle}" is visible`;
-        }
-      } else if (name === 'isVisitable') {
-        const nodeId = params.nodeId;
-        if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitle(nodeId);
-          message += $localize`"${nodeTitle}" is visitable`;
-        }
-      } else if (name === 'addXNumberOfNotesOnThisStep') {
-        const nodeId = params.nodeId;
-        const requiredNumberOfNotes = params.requiredNumberOfNotes;
-        const nodeTitle = this.getNodePositionAndTitle(nodeId);
-        if (requiredNumberOfNotes == 1) {
-          message += $localize`Add <b>${requiredNumberOfNotes}</b> note on <b>${nodeTitle}</b>`;
-        } else {
-          message += $localize`Add <b>${requiredNumberOfNotes}</b> notes on <b>${nodeTitle}</b>`;
-        }
-      } else if (name === 'fillXNumberOfRows') {
-        const requiredNumberOfFilledRows = params.requiredNumberOfFilledRows;
-        const nodeId = params.nodeId;
-        const nodeTitle = this.getNodePositionAndTitle(nodeId);
-        if (requiredNumberOfFilledRows == 1) {
-          message += $localize`You must fill in <b>${requiredNumberOfFilledRows}</b> row in the <b>Table</b> on <b>${nodeTitle}</b>`;
-        } else {
-          message += $localize`You must fill in <b>${requiredNumberOfFilledRows}</b> rows in the <b>Table</b> on <b>${nodeTitle}</b>`;
-        }
-      } else if (name === 'teacherRemoval') {
-        message += $localize`Wait for your teacher to unlock the item`;
-      }
-    }
-    return message;
   }
 
   /**
@@ -1417,9 +1254,7 @@ export class ProjectService {
     return componentService.componentHasWork(component);
   }
 
-  calculateComponentIdToHasWork(
-    components: ComponentContent[]
-  ): {
+  calculateComponentIdToHasWork(components: ComponentContent[]): {
     [componentId: string]: boolean;
   } {
     const componentIdToHasWork: { [componentId: string]: boolean } = {};

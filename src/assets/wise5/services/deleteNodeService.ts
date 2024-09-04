@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { TeacherProjectService } from './teacherProjectService';
+import { RemoveNodeIdFromTransitionsService } from './removeNodeIdFromTransitionsService';
 
 @Injectable()
 export class DeleteNodeService {
-  constructor(protected ProjectService: TeacherProjectService) {}
+  constructor(
+    protected ProjectService: TeacherProjectService,
+    private removeNodeIdFromTransitionsService: RemoveNodeIdFromTransitionsService
+  ) {}
 
   /**
    * Delete a node from the project and update transitions.
@@ -23,7 +27,7 @@ export class DeleteNodeService {
     if (this.ProjectService.isGroupNode(nodeId)) {
       this.removeChildNodes(nodeId);
     }
-    this.ProjectService.removeNodeIdFromTransitions(nodeId);
+    this.removeNodeIdFromTransitionsService.remove(nodeId);
     this.ProjectService.removeNodeIdFromGroups(nodeId);
     this.removeNodeIdFromNodes(nodeId);
   }
@@ -117,7 +121,7 @@ export class DeleteNodeService {
     const group = this.ProjectService.getNodeById(groupId);
     for (let i = 0; i < group.ids.length; i++) {
       const childId = group.ids[i];
-      this.ProjectService.removeNodeIdFromTransitions(childId);
+      this.removeNodeIdFromTransitionsService.remove(childId);
       this.ProjectService.removeNodeIdFromGroups(childId);
       this.removeNodeIdFromNodes(childId);
       i--; // so it won't skip the next element

@@ -63,7 +63,7 @@ export class SelectComponentComponent {
     if (numAllowedComponents === 1) {
       this.componentId = allowedComponent.id;
       this.componentChanged();
-    } else {
+    } else if (!this.components.map((component) => component.id).includes(this.componentId)) {
       this.componentId = null;
     }
   }

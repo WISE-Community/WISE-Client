@@ -50,7 +50,6 @@ testing_pipelines=(
   "private-wise-api-and-client-pipeline"
   "private-wise-api-pipeline"
   "private-wise-client-github-actions-pipeline"
-  "private-wise-client-pipeline"
 )
 
 # Show the status for all the testing pipelines

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { AddYourOwnNode } from '../../assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component';
+import { AddYourOwnNodeComponent } from '../../assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component';
 import { ChooseNewNodeTemplateComponent } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
 import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
 import { CardSelectorComponent } from '../../assets/wise5/authoringTool/components/card-selector/card-selector.component';
@@ -71,7 +71,6 @@ import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/c
     AddLessonChooseTemplateComponent,
     AddLessonConfigureComponent,
     AddProjectComponent,
-    AddYourOwnNode,
     AdvancedProjectAuthoringComponent,
     AuthoringToolComponent,
     AuthoringToolBarComponent,
@@ -85,7 +84,6 @@ import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/c
     ChooseSimulationComponent,
     ConcurrentAuthorsMessageComponent,
     ConfigureAutomatedAssessmentComponent,
-    CopyComponentButtonComponent,
     EditProjectLanguageSettingComponent,
     InsertNodeAfterButtonComponent,
     InsertNodeInsideButtonComponent,
@@ -110,11 +108,13 @@ import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/c
     AddComponentButtonComponent,
     AddLessonButtonComponent,
     AddStepButtonComponent,
+    AddYourOwnNodeComponent,
     ChooseNewNodeTemplateComponent,
     ChooseNewComponent,
     ComponentAuthoringModule,
     ComponentStudentModule,
     ComponentTypeButtonComponent,
+    CopyComponentButtonComponent,
     EditBranchComponent,
     EditNodeTitleComponent,
     MatBadgeModule,
