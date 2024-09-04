@@ -9,7 +9,13 @@ import { ConfigService } from '../../../services/configService';
 
 let configService: ConfigService;
 let teacherProjectService: TeacherProjectService;
-
+const group0 = {
+  id: 'group0',
+  type: 'group',
+  title: 'Master',
+  startId: '',
+  ids: []
+};
 describe('ExportStudentWorkComponent', () => {
   let component: ExportStudentWorkComponent;
   let fixture: ComponentFixture<ExportStudentWorkComponent>;
@@ -32,15 +38,18 @@ describe('ExportStudentWorkComponent', () => {
     teacherProjectService = TestBed.inject(TeacherProjectService);
     spyOn(teacherProjectService, 'getNodeOrderOfProject').and.returnValue({
       idToOrder: {},
-      nodes: []
+      nodes: [group0]
     });
     teacherProjectService.project = {
-      nodes: [],
       inactiveNodes: [],
       metadata: {
         title: 'Test Project'
-      }
+      },
+      startGroupId: 'group0',
+      startNodeId: 'group0',
+      nodes: [group0]
     };
+    teacherProjectService.idToNode['group0'] = group0;
     fixture.detectChanges();
   });
 
