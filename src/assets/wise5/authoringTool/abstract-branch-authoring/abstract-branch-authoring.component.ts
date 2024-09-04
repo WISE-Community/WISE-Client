@@ -6,7 +6,6 @@ import {
   CHOICE_CHOSEN_VALUE,
   RANDOM_VALUE,
   SCORE_VALUE,
-  TAG_VALUE,
   WORKGROUP_ID_VALUE
 } from '../../../../app/domain/branchCriteria';
 import { CreateBranchParams } from '../../common/CreateBranchParams';
@@ -16,7 +15,6 @@ export abstract class AbstractBranchAuthoringComponent {
   protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;
   protected readonly RANDOM_VALUE: string = RANDOM_VALUE;
   protected readonly SCORE_VALUE: string = SCORE_VALUE;
-  protected readonly TAG_VALUE: string = TAG_VALUE;
   protected readonly WORKGROUP_ID_VALUE: string = WORKGROUP_ID_VALUE;
 
   protected allowedComponentTypes: string[] = [];

@@ -1,7 +1,6 @@
 export const CHOICE_CHOSEN_VALUE = 'choiceChosen';
 export const RANDOM_VALUE = 'random';
 export const SCORE_VALUE = 'score';
-export const TAG_VALUE = 'tag';
 export const WORKGROUP_ID_VALUE = 'workgroupId';
 
 export interface BranchCriteria {
@@ -25,9 +24,5 @@ export const BRANCH_CRITERIA: BranchCriteria[] = [
   {
     text: $localize`Random`,
     value: RANDOM_VALUE
-  },
-  {
-    text: $localize`Tag`,
-    value: TAG_VALUE
   }
 ];
