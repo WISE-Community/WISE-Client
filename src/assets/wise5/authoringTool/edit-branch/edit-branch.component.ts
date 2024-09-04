@@ -236,7 +236,8 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
       this.node.transitionLogic.whenToChoosePath = 'enterNode';
     } else {
       this.node.transitionLogic.howToChooseAmongAvailablePaths = this.RANDOM_VALUE;
-      this.node.transitionLogic.whenToChoosePath = 'studentDataChanged';
+      this.node.transitionLogic.whenToChoosePath =
+        params.branchStepId === params.nodeId ? 'studentDataChanged' : 'enterNode';
     }
   }
 

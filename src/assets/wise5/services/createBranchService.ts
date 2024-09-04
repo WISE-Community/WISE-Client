@@ -104,7 +104,8 @@ export class CreateBranchService {
             )
           ])
         );
-        branchNode.transitionLogic.whenToChoosePath = 'studentDataChanged';
+        branchNode.transitionLogic.whenToChoosePath =
+          params.branchStepId === params.nodeId ? 'studentDataChanged' : 'enterNode';
         break;
       case CHOICE_CHOSEN_VALUE:
         branchNode.transitionLogic.transitions.push(
@@ -119,7 +120,8 @@ export class CreateBranchService {
             )
           ])
         );
-        branchNode.transitionLogic.whenToChoosePath = 'studentDataChanged';
+        branchNode.transitionLogic.whenToChoosePath =
+          params.branchStepId === params.nodeId ? 'studentDataChanged' : 'enterNode';
         break;
       default:
         branchNode.transitionLogic.transitions.push(new Transition(newNode.id));
