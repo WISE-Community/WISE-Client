@@ -33,6 +33,13 @@ const nodeId1 = 'node1';
 const nodeId2 = 'node2';
 let teacherProjectService: TeacherProjectService;
 
+const group1 = {
+  id: groupId1,
+  type: 'group',
+  title: 'Lesson 1',
+  ids: [nodeId1, nodeId2],
+  startId: nodeId1
+};
 const node1 = { id: nodeId1, title: 'Step 1' };
 const node2 = { id: nodeId2, title: 'Step 2' };
 
@@ -68,18 +75,15 @@ describe('ProjectAuthoringLessonComponent', () => {
     });
     teacherProjectService = TestBed.inject(TeacherProjectService);
     teacherProjectService.idToNode = {
+      group1: group1,
       node1: node1,
       node2: node2
     };
-    teacherProjectService.project = { nodes: [node1, node2] };
+    teacherProjectService.project = { nodes: [group1, node1, node2], startNodeId: nodeId1 };
     spyOn(teacherProjectService, 'isDefaultLocale').and.returnValue(true);
     fixture = TestBed.createComponent(ProjectAuthoringLessonComponent);
     component = fixture.componentInstance;
-    component.lesson = {
-      id: groupId1,
-      ids: [nodeId1, nodeId2],
-      type: 'group'
-    };
+    component.lesson = group1;
     fixture.detectChanges();
     harness = await TestbedHarnessEnvironment.harnessForFixture(
       fixture,
