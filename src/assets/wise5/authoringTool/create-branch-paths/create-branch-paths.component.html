@@ -6,27 +6,29 @@
   (criteria === SCORE_VALUE || criteria === CHOICE_CHOSEN_VALUE)
 ) {
   <div [formGroup]="pathFormGroup">
-    @for (formControl of formControls; track formControl; let index = $index) {
-      <div class="path">
-        <span class="path-label" i18n>Path {{ index + 1 }}</span>
-        @if (criteria === SCORE_VALUE) {
-          <mat-form-field>
-            <mat-label i18n>Score</mat-label>
-            <input matInput [formControlName]="'path-' + (index + 1)" />
-          </mat-form-field>
-        } @else if (criteria === CHOICE_CHOSEN_VALUE) {
-          <mat-form-field>
-            <mat-label i18n>Choice Chosen</mat-label>
-            <mat-select [formControlName]="'path-' + (index + 1)">
-              @for (choice of choices; track choice) {
-                <mat-option [value]="choice.id">
-                  {{ choice.text }}
-                </mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        }
-      </div>
-    }
+    <ng-container formArrayName="paths">
+      @for (formControl of pathsFormArray.controls; track formControl; let index = $index) {
+        <div class="path">
+          <span class="path-label" i18n>Path {{ index + 1 }}</span>
+          @if (criteria === SCORE_VALUE) {
+            <mat-form-field>
+              <mat-label i18n>Score</mat-label>
+              <input matInput [formControlName]="index" />
+            </mat-form-field>
+          } @else if (criteria === CHOICE_CHOSEN_VALUE) {
+            <mat-form-field>
+              <mat-label i18n>Choice Chosen</mat-label>
+              <mat-select [formControlName]="index">
+                @for (choice of choices; track choice) {
+                  <mat-option [value]="choice.id">
+                    {{ choice.text }}
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          }
+        </div>
+      }
+    </ng-container>
   </div>
 }

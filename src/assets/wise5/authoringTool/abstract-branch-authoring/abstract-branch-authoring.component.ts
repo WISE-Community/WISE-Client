@@ -9,6 +9,7 @@ import {
   TAG_VALUE,
   WORKGROUP_ID_VALUE
 } from '../../../../app/domain/branchCriteria';
+import { CreateBranchParams } from '../../common/CreateBranchParams';
 
 @Directive()
 export abstract class AbstractBranchAuthoringComponent {
@@ -164,7 +165,7 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('pathCount').setValue(pathCount);
   }
 
-  protected getPathCount(): number {
+  private getPathCount(): number {
     return this.formGroup.get('pathCount').value;
   }
 
@@ -172,7 +173,7 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('criteria').setValue(criteria);
   }
 
-  protected getCriteria(): string {
+  private getCriteria(): string {
     return this.formGroup.get('criteria').value;
   }
 
@@ -180,7 +181,7 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('nodeId').setValue(nodeId);
   }
 
-  protected getNodeId(): string {
+  private getNodeId(): string {
     return this.formGroup.get('nodeId')?.value;
   }
 
@@ -188,7 +189,7 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('componentId').setValue(componentId);
   }
 
-  protected getComponentId(): string {
+  private getComponentId(): string {
     return this.formGroup.get('componentId')?.value;
   }
 
@@ -196,7 +197,25 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('mergeStep').setValue(nodeId);
   }
 
-  protected getMergeStepId(): string {
+  private getMergeStepId(): string {
     return this.formGroup.get('mergeStep').value;
+  }
+
+  protected getBranchParams(): CreateBranchParams {
+    const params: CreateBranchParams = {
+      branchStepId: this.targetId,
+      componentId: this.getComponentId(),
+      criteria: this.getCriteria(),
+      mergeStepId: this.getMergeStepId(),
+      nodeId: this.getNodeId(),
+      pathCount: this.getPathCount()
+    };
+    if (this.criteriaRequiresAdditionalParams(params.criteria)) {
+      params.paths = [];
+      this.pathFormGroup.get('paths').value.forEach((value: string) => {
+        params.paths.push(value);
+      });
+    }
+    return params;
   }
 }

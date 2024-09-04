@@ -7,7 +7,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { SelectComponentComponent } from '../../../../app/authoring-tool/select-component/select-component.component';
 import { SelectStepComponent } from '../../../../app/authoring-tool/select-step/select-step.component';
 import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/abstract-branch-authoring.component';
-import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { DeleteBranchService } from '../../services/deleteBranchService';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -191,26 +191,6 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     this.saveProject();
   }
 
-  protected getBranchParams(): CreateBranchParams {
-    const params: CreateBranchParams = {
-      branchStepId: this.targetId,
-      componentId: this.getComponentId(),
-      criteria: this.getCriteria(),
-      mergeStepId: this.getMergeStepId(),
-      nodeId: this.getNodeId(),
-      pathCount: this.getPathCount()
-    };
-    if (params.criteria === this.CHOICE_CHOSEN_VALUE || params.criteria === this.SCORE_VALUE) {
-      params.paths = [];
-      const paths: FormArray = this.pathFormGroup.get('paths') as FormArray;
-      for (let p = 0; p < paths.length; p++) {
-        const value = paths.at(p).getRawValue();
-        params.paths.push(value);
-      }
-    }
-    return params;
-  }
-
   private createNewPaths(params: CreateBranchParams): void {
     this.branchPaths.forEach((path: any, index: number) => {
       if (path.new) {
@@ -265,7 +245,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     let nodeIdToPlaceAfter = params.mergeStepId;
     branchPaths
       .filter((path: any) => path.delete)
-      .forEach((path: any, index: number) => {
+      .forEach((path: any) => {
         this.deleteBranchService.deleteBranchPathAndPlaceAfter(
           branchPaths,
           path,
@@ -273,9 +253,6 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
           nodeIdToPlaceAfter,
           nodeIdAfterMergeStep
         );
-        if (params.criteria === this.CHOICE_CHOSEN_VALUE || params.criteria === this.SCORE_VALUE) {
-          params.paths.splice(index, 1);
-        }
         nodeIdToPlaceAfter = path.nodesInBranchPath[path.nodesInBranchPath.length - 1].nodeId;
       });
   }
