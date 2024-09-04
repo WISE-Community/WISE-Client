@@ -20,6 +20,7 @@ import {
 } from '../domain/branchCriteria';
 import { ConstraintRemovalCriteriaParams } from '../../assets/wise5/common/ConstraintRemovalCriteriaParams';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DialogWithSpinnerComponent } from '../../assets/wise5/directives/dialog-with-spinner/dialog-with-spinner.component';
 
 const ENTER_NODE: string = 'enterNode';
 const RANDOM: string = 'random';
@@ -42,6 +43,7 @@ let service: CreateBranchService;
 describe('CreateBranchService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      declarations: [DialogWithSpinnerComponent],
       imports: [
         HttpClientTestingModule,
         MatProgressSpinnerModule,
