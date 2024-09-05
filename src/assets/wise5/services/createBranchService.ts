@@ -99,7 +99,7 @@ export class CreateBranchService {
               new TransitionCriteriaParams({
                 componentId: params.componentId,
                 nodeId: params.nodeId,
-                scores: [params.paths[pathNumber - 1]]
+                scores: params.paths[pathNumber - 1].split(',')
               })
             )
           ])

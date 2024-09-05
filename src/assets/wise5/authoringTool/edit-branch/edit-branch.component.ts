@@ -209,7 +209,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
             params: {
               componentId: params.componentId,
               nodeId: params.nodeId,
-              scores: [params.paths[x]]
+              scores: params.paths[x].split(',')
             }
           }
         ];
