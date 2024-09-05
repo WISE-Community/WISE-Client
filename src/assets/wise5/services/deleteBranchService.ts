@@ -62,7 +62,12 @@ export class DeleteBranchService {
       this.projectService.insertNodeAfterInGroups(nodeId, nodeIdToPlaceAfter);
       nodeIdToPlaceAfter = nodeId;
     }
-    this.projectService.setTransition(nodeIdToPlaceAfter, nodeIdAfterMergeStep);
+    if (nodeIdAfterMergeStep == null) {
+      const transitionLogic = this.projectService.getNode(nodeIdToPlaceAfter).getTransitionLogic();
+      transitionLogic.transitions = [];
+    } else {
+      this.projectService.setTransition(nodeIdToPlaceAfter, nodeIdAfterMergeStep);
+    }
     this.removeBranchPathAndTransition(branchPaths, branch, branchStepId);
   }
 
