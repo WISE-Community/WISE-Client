@@ -109,17 +109,21 @@ export class EditBranchPathsComponent extends CreateBranchPathsComponent {
   }
 
   protected deletePath(index: number): void {
-    const branchPath = this.branchPaths[index];
-    if (branchPath.new) {
-      this.branchPaths.splice(index, 1);
-      if (branchPath.formControl != null) {
-        this.pathsFormArray.removeAt(index);
-      }
+    if (this.branchPaths.filter((branchPath) => !branchPath.delete).length <= 2) {
+      alert($localize`You are not allowed to have fewer than 2 paths.`);
     } else {
-      branchPath.delete = true;
-      if (branchPath.formControl != null) {
-        branchPath.formControl.disable();
-        branchPath.formControl.clearValidators();
+      const branchPath = this.branchPaths[index];
+      if (branchPath.new) {
+        this.branchPaths.splice(index, 1);
+        if (branchPath.formControl != null) {
+          this.pathsFormArray.removeAt(index);
+        }
+      } else {
+        branchPath.delete = true;
+        if (branchPath.formControl != null) {
+          branchPath.formControl.disable();
+          branchPath.formControl.clearValidators();
+        }
       }
     }
   }

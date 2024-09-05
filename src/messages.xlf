@@ -449,11 +449,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
-<<<<<<< HEAD
-          <context context-type="linenumber">62</context>
-=======
-          <context context-type="linenumber">70</context>
->>>>>>> develop
+          <context context-type="linenumber">64</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.html</context>
@@ -1576,11 +1572,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
-<<<<<<< HEAD
-          <context context-type="linenumber">71</context>
-=======
-          <context context-type="linenumber">81</context>
->>>>>>> develop
+          <context context-type="linenumber">75</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
@@ -2241,7 +2233,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Workgroup ID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/branchCriteria.ts</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
@@ -2256,7 +2248,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Score</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/branchCriteria.ts</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
@@ -2279,7 +2271,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Choice Chosen</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/branchCriteria.ts</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
@@ -2294,7 +2286,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Random</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/branchCriteria.ts</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
@@ -2311,25 +2303,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-logic-options.ts</context>
           <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1825829511397926879" datatype="html">
-        <source>Tag</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/domain/branchCriteria.ts</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
-          <context context-type="linenumber">33</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="511208907501917679" datatype="html">
@@ -9717,11 +9690,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
-<<<<<<< HEAD
-          <context context-type="linenumber">58,60</context>
-=======
-          <context context-type="linenumber">66,68</context>
->>>>>>> develop
+          <context context-type="linenumber">60,62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="891f639ffcf9d31aea80ea7e8e428a6597b059b3" datatype="html">
@@ -9770,11 +9739,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>New Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.ts</context>
-<<<<<<< HEAD
-          <context context-type="linenumber">17</context>
-=======
-          <context context-type="linenumber">47</context>
->>>>>>> develop
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="909afacc2d9d62ea57b1ba4b1e70b6c4314f668d" datatype="html">
@@ -10999,6 +10964,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3873025443598498056" datatype="html">
+        <source>You are not allowed to have fewer than 2 paths.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch-paths/edit-branch-paths.component.ts</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="2005b54af64c5c15b332ceb3f95a4c94bf1c9c53" datatype="html">
         <source>Edit Branch</source>
         <context-group purpose="location">
@@ -11876,6 +11848,21 @@ The branch structure will be removed but the steps will not be deleted.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
           <context context-type="linenumber">149</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1825829511397926879" datatype="html">
+        <source>Tag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6214965175603898773" datatype="html">
@@ -12971,11 +12958,7 @@ The branch structure will be removed but the steps will not be deleted.</source>
         <source>Are you sure you want to delete this step?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.ts</context>
-<<<<<<< HEAD
-          <context context-type="linenumber">121</context>
-=======
-          <context context-type="linenumber">140</context>
->>>>>>> develop
+          <context context-type="linenumber">144</context>
         </context-group>
       </trans-unit>
       <trans-unit id="57cf305f9bfd681c70dc26e914108d06384ade9f" datatype="html">
@@ -22089,14 +22072,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Merge Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/createBranchService.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1035141360074485815" datatype="html">
         <source>Creating Branch</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/createBranchService.ts</context>
-          <context context-type="linenumber">171</context>
+          <context context-type="linenumber">173</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3177789104763917185" datatype="html">
