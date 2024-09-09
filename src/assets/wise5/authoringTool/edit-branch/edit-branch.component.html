@@ -45,7 +45,7 @@
     <button
       mat-raised-button
       color="primary"
-      [disabled]="!formGroup.valid || submitting"
+      [disabled]="formGroup.invalid || submitting"
       (click)="submit()"
       class="button--progress"
     >

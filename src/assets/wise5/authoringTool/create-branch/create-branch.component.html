@@ -43,7 +43,13 @@
   }
   <div fxLayoutAlign="end center" fxLayoutGap="12px">
     <button mat-button routerLink=".." i18n>Cancel</button>
-    <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="submit()" i18n>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="formGroup.invalid"
+      (click)="submit()"
+      i18n
+    >
       Submit
     </button>
   </div>

@@ -50,7 +50,7 @@ export abstract class AbstractBranchAuthoringComponent {
     });
   }
 
-  private criteriaRequiresAdditionalParams(criteria: string): boolean {
+  protected criteriaRequiresAdditionalParams(criteria: string): boolean {
     return criteria === this.SCORE_VALUE || criteria === this.CHOICE_CHOSEN_VALUE;
   }
 

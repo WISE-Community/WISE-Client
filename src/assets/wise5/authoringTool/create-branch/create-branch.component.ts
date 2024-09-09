@@ -49,6 +49,17 @@ export class CreateBranchComponent extends AbstractBranchAuthoringComponent {
     super(fb, projectService, route, router);
   }
 
+  ngOnInit(): void {
+    super.ngOnInit();
+    this.formGroup.controls['criteria'].valueChanges.subscribe((criteria: string) => {
+      if (this.criteriaRequiresAdditionalParams(criteria)) {
+        this.formGroup.addControl('pathFormGroup', this.pathFormGroup);
+      } else {
+        this.formGroup.removeControl('pathFormGroup');
+      }
+    });
+  }
+
   protected async submit(): Promise<void> {
     await this.createBranchService.createBranch(this.getBranchParams());
     this.router.navigate(['..'], { relativeTo: this.route });

@@ -10940,7 +10940,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Submit </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/create-branch/create-branch.component.html</context>
-          <context context-type="linenumber">46,48</context>
+          <context context-type="linenumber">52,54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2235b60c945bdd32e36276daa978f60e093ecf4e" datatype="html">
