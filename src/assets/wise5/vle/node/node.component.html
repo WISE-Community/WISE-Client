@@ -9,7 +9,7 @@
         <help-icon [content]="node.rubric" label="Step Info" i18n-label icon="info" />
       </div>
     }
-    @for (component of components; track component.id) {
+    @for (component of components; track component) {
       <div
         id="component_{{ component.id }}"
         class="component"
