@@ -21,7 +21,7 @@ export class CreateBranchService {
 
   createBranch(params: CreateBranchParams): Promise<void> {
     this.showCreatingBranchMessage();
-    const branchNode = this.projectService.getNodeById(params.branchStepId);
+    const branchNode = this.projectService.getNode(params.branchStepId);
     const nodeIdBranchNodeTransitionsTo =
       branchNode.transitionLogic.transitions.length > 0
         ? branchNode.transitionLogic.transitions[0].to
@@ -32,7 +32,7 @@ export class CreateBranchService {
     const mergeStep: any =
       params.mergeStepId === ''
         ? this.createMergeStep(newNodeIds, nodeIdBranchNodeTransitionsTo)
-        : this.projectService.getNodeById(params.mergeStepId);
+        : this.projectService.getNode(params.mergeStepId);
     this.setPathStepTransitions(newNodeIds, mergeStep.id);
     this.setBranchNodeTransitionLogic(branchNode, params.criteria);
     if (params.mergeStepId === '') {
@@ -75,8 +75,8 @@ export class CreateBranchService {
   }
 
   addBranchPath(pathIndex: number, params: any): void {
-    const branchStep = this.projectService.getNodeById(params.branchStepId);
-    const mergeStep = this.projectService.getNodeById(params.mergeStepId);
+    const branchStep = this.projectService.getNode(params.branchStepId);
+    const mergeStep = this.projectService.getNode(params.mergeStepId);
     const newNodeId = this.projectService.getNextAvailableNodeId();
     this.createPathStep(params, branchStep, newNodeId, pathIndex);
     this.setPathStepTransitions([newNodeId], mergeStep.id);
@@ -131,8 +131,7 @@ export class CreateBranchService {
 
   private createMergeStep(newNodeIds: string[], nodeIdBranchNodeTransitionsTo: string): any {
     const mergeStepNode = this.projectService.createNode($localize`Merge Step`);
-    const mergeStepNodeId = this.projectService.getNextAvailableNodeId(newNodeIds);
-    mergeStepNode.id = mergeStepNodeId;
+    mergeStepNode.id = this.projectService.getNextAvailableNodeId(newNodeIds);
     if (nodeIdBranchNodeTransitionsTo !== '') {
       mergeStepNode.transitionLogic.transitions = [new Transition(nodeIdBranchNodeTransitionsTo)];
     }
@@ -144,7 +143,7 @@ export class CreateBranchService {
 
   private setPathStepTransitions(newNodeIds: string[], mergeStepId: string): void {
     for (const newNodeId of newNodeIds) {
-      this.projectService.getNodeById(newNodeId).transitionLogic.transitions = [
+      this.projectService.getNode(newNodeId).getTransitionLogic().transitions = [
         new Transition(mergeStepId)
       ];
     }
