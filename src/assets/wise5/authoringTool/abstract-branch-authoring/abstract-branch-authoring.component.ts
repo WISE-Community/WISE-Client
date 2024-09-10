@@ -163,10 +163,6 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('pathCount').setValue(pathCount);
   }
 
-  private getPathCount(): number {
-    return this.formGroup.get('pathCount').value;
-  }
-
   protected setCriteria(criteria: string): void {
     this.formGroup.get('criteria').setValue(criteria);
   }
@@ -195,18 +191,14 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('mergeStep').setValue(nodeId);
   }
 
-  private getMergeStepId(): string {
-    return this.formGroup.get('mergeStep').value;
-  }
-
   protected getBranchParams(): CreateBranchParams {
     const params: CreateBranchParams = {
       branchStepId: this.targetId,
       componentId: this.getComponentId(),
       criteria: this.getCriteria(),
-      mergeStepId: this.getMergeStepId(),
+      mergeStepId: this.formGroup.get('mergeStep').value,
       nodeId: this.getNodeId(),
-      pathCount: this.getPathCount()
+      pathCount: this.formGroup.get('pathCount').value
     };
     if (this.criteriaRequiresAdditionalParams(params.criteria)) {
       params.paths = [];

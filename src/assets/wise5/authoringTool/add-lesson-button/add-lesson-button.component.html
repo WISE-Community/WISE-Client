@@ -27,7 +27,7 @@
       <button mat-menu-item (click)="addFirstLesson()">
         <mat-icon>add_circle</mat-icon><span i18n>Add lesson before</span>
       </button>
-      <button mat-menu-item (click)="addLessonAfter()">
+      <button mat-menu-item (click)="goToAddLessonView(lessonId)">
         <mat-icon>add_circle</mat-icon><span i18n>Add lesson after</span>
       </button>
     </mat-menu>
@@ -36,7 +36,7 @@
     <button
       mat-icon-button
       color="primary"
-      (click)="addLessonAfter()"
+      (click)="goToAddLessonView(lessonId)"
       matTooltip="Add lesson after"
       matTooltipPosition="above"
       i18n-matTooltip
