@@ -5,34 +5,53 @@ import { NotebookService } from '../../../assets/wise5/services/notebookService'
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
 import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { NotebookItemComponent } from '../notebook-item/notebook-item.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    NotebookItemComponent
+  ],
   selector: 'notebook-notes',
-  styleUrls: ['notebook-notes.component.scss'],
+  standalone: true,
+  styleUrl: 'notebook-notes.component.scss',
   templateUrl: 'notebook-notes.component.html',
   encapsulation: ViewEncapsulation.None
 })
 export class NotebookNotesComponent extends NotebookParentComponent {
-  @Input() viewOnly: boolean;
-
-  groups = [];
-  groupNameToGroup = {};
-  hasPrivateNotes: boolean = false;
-  insertArgs: any = {
+  protected groups = [];
+  private groupNameToGroup = {};
+  protected hasPrivateNotes: boolean = false;
+  protected insertArgs: any = {
     insertMode: false
   };
-  label: any;
-  selectedTabIndex = 0;
-  title: string;
-  subscriptions: Subscription = new Subscription();
+  protected label: any;
+  protected selectedTabIndex = 0;
+  private subscriptions: Subscription = new Subscription();
+  @Input() viewOnly: boolean;
 
   constructor(
-    ConfigService: ConfigService,
+    configService: ConfigService,
+    private dataService: StudentDataService,
     NotebookService: NotebookService,
-    private ProjectService: ProjectService,
-    private studentDataService: StudentDataService
+    private projectService: ProjectService
   ) {
-    super(ConfigService, NotebookService);
+    super(configService, NotebookService);
   }
 
   ngOnInit(): void {
@@ -77,7 +96,7 @@ export class NotebookNotesComponent extends NotebookParentComponent {
     );
 
     this.subscriptions.add(
-      this.ProjectService.projectParsed$.subscribe(() => {
+      this.projectService.projectParsed$.subscribe(() => {
         this.setConfig();
         this.setLabel();
       })
@@ -116,8 +135,8 @@ export class NotebookNotesComponent extends NotebookParentComponent {
     this.groups.push(personalGroup);
   }
 
-  addSpacesToGroups(): void {
-    for (const space of this.ProjectService.getSpaces()) {
+  private addSpacesToGroups(): void {
+    for (const space of this.projectService.getSpaces()) {
       if (space.isShowInNotebook) {
         const spaceGroup = {
           title: space.name,
@@ -131,7 +150,7 @@ export class NotebookNotesComponent extends NotebookParentComponent {
     }
   }
 
-  updatePrivateNotebookNote(notebookItem: any): void {
+  private updatePrivateNotebookNote(notebookItem: any): void {
     this.updateNotebookNote(
       this.groupNameToGroup['private'],
       notebookItem.localNotebookItemId,
@@ -147,7 +166,7 @@ export class NotebookNotesComponent extends NotebookParentComponent {
     }
   }
 
-  updatePublicNotebookNote(notebookItem: any): void {
+  private updatePublicNotebookNote(notebookItem: any): void {
     this.updateNotebookNote(
       this.groupNameToGroup['public'],
       notebookItem.localNotebookItemId,
@@ -161,7 +180,7 @@ export class NotebookNotesComponent extends NotebookParentComponent {
     );
   }
 
-  updateNotebookNote(
+  private updateNotebookNote(
     group: any,
     localNotebookItemId: string,
     workgroupId: number,
@@ -181,7 +200,7 @@ export class NotebookNotesComponent extends NotebookParentComponent {
     }
   }
 
-  removeNotebookNote(group: any, localNotebookItemId: string, workgroupId: number): void {
+  private removeNotebookNote(group: any, localNotebookItemId: string, workgroupId: number): void {
     let items = group.items;
     for (let i = 0; i < items.length; i++) {
       let item = items[i];
@@ -192,25 +211,21 @@ export class NotebookNotesComponent extends NotebookParentComponent {
     }
   }
 
-  addNote() {
-    this.NotebookService.addNote(this.studentDataService.getCurrentNodeId());
+  protected addNote(): void {
+    this.NotebookService.addNote(this.dataService.getCurrentNodeId());
   }
 
-  select({ event, note }: any): void {
+  protected select({ event, note }: any): void {
     if (this.insertArgs.insertMode) {
       this.insertArgs.notebookItem = note;
       this.NotebookService.broadcastNotebookItemChosen(this.insertArgs);
     } else {
       const isEditMode = !this.viewOnly;
-      this.NotebookService.editNote(this.studentDataService.getCurrentNodeId(), note, isEditMode);
+      this.NotebookService.editNote(this.dataService.getCurrentNodeId(), note, isEditMode);
     }
   }
 
-  close(): void {
+  protected close(): void {
     this.NotebookService.closeNotes();
-  }
-
-  filterDeleted(item: any): boolean {
-    return item.serverDeleteTime == null;
   }
 }

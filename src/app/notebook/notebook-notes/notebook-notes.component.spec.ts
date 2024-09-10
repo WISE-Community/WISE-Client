@@ -1,19 +1,15 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { NotebookNotesComponent } from './notebook-notes.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: NotebookNotesComponent;
-
 describe('NotebookNotesComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [NotebookNotesComponent],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [NotebookNotesComponent, StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi())]
+    });
     const fixture = TestBed.createComponent(NotebookNotesComponent);
     component = fixture.componentInstance;
   });
