@@ -12,7 +12,7 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { DeleteBranchService } from '../../services/deleteBranchService';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
-import { CreateBranchService } from '../../services/createBranchService';
+import { EditBranchService } from '../../services/editBranchService';
 import { CreateBranchParams } from '../../common/CreateBranchParams';
 import { EditBranchPathsComponent } from '../edit-branch-paths/edit-branch-paths.component';
 
@@ -42,8 +42,8 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private createBranchService: CreateBranchService,
     private deleteBranchService: DeleteBranchService,
+    private editBranchService: EditBranchService,
     protected fb: FormBuilder,
     protected projectService: TeacherProjectService,
     protected route: ActivatedRoute,
@@ -194,7 +194,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
   private createNewPaths(params: CreateBranchParams): void {
     this.branchPaths.forEach((path: any, index: number) => {
       if (path.new) {
-        this.createBranchService.addBranchPath(index, params);
+        this.editBranchService.addBranchPath(index, params);
       }
     });
   }

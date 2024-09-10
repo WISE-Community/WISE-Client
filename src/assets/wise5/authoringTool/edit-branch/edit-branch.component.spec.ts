@@ -6,7 +6,7 @@ import { provideRouter } from '@angular/router';
 import { Branch } from '../../../../app/domain/branch';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DeleteBranchService } from '../../services/deleteBranchService';
-import { CreateBranchService } from '../../services/createBranchService';
+import { EditBranchService } from '../../services/editBranchService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let projectService: TeacherProjectService;
@@ -18,7 +18,7 @@ describe('EditBranchComponent', () => {
     await TestBed.configureTestingModule({
       imports: [BrowserAnimationsModule, EditBranchComponent, StudentTeacherCommonServicesModule],
       providers: [
-        CreateBranchService,
+        EditBranchService,
         DeleteBranchService,
         provideHttpClient(withInterceptorsFromDi()),
         provideRouter([]),

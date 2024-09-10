@@ -21799,6 +21799,13 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">206</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="7206782115156099663" datatype="html">
+        <source>Path <x id="PH" equiv-text="pathNumber"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/authorBranchService.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="3570422532828875517" datatype="html">
         <source>Ermina</source>
         <context-group purpose="location">
@@ -22061,25 +22068,18 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">449</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7206782115156099663" datatype="html">
-        <source>Path <x id="PH" equiv-text="pathNumber"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/createBranchService.ts</context>
-          <context context-type="linenumber">68</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="4647197691580277546" datatype="html">
         <source>Merge Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/createBranchService.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1035141360074485815" datatype="html">
         <source>Creating Branch</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/createBranchService.ts</context>
-          <context context-type="linenumber">172</context>
+          <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3177789104763917185" datatype="html">

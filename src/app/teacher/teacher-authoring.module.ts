@@ -33,6 +33,7 @@ import { AuthoringRoutingModule } from './authoring-routing.module';
 import { RouterModule } from '@angular/router';
 import { ComponentInfoService } from '../../assets/wise5/services/componentInfoService';
 import { CreateBranchService } from '../../assets/wise5/services/createBranchService';
+import { EditBranchService } from '../../assets/wise5/services/editBranchService';
 import { InsertFirstNodeInBranchPathService } from '../../assets/wise5/services/insertFirstNodeInBranchPathService';
 import { DeleteBranchService } from '../../assets/wise5/services/deleteBranchService';
 import { TeacherProjectTranslationService } from '../../assets/wise5/services/teacherProjectTranslationService';
@@ -54,6 +55,7 @@ import { RegisterProjectService } from '../../assets/wise5/services/registerProj
     CreateBranchService,
     CreateComponentService,
     DeleteBranchService,
+    EditBranchService,
     InsertFirstNodeInBranchPathService,
     DataExportService,
     { provide: DataService, useExisting: TeacherDataService },

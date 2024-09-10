@@ -2,22 +2,18 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TeacherProjectService } from './teacherProjectService';
 import { DialogWithSpinnerComponent } from '../directives/dialog-with-spinner/dialog-with-spinner.component';
-import {
-  CHOICE_CHOSEN_VALUE,
-  SCORE_VALUE,
-  WORKGROUP_ID_VALUE
-} from '../../../app/domain/branchCriteria';
 import { CreateBranchParams } from '../common/CreateBranchParams';
 import { Transition } from '../common/Transition';
-import { TransitionCriteria } from '../common/TransitionCriteria';
-import { TransitionCriteriaParams } from '../common/TransitionCriteriaParams';
+import { AuthorBranchService } from './authorBranchService';
 
 @Injectable()
-export class CreateBranchService {
+export class CreateBranchService extends AuthorBranchService {
   constructor(
     private dialog: MatDialog,
-    private projectService: TeacherProjectService
-  ) {}
+    protected projectService: TeacherProjectService
+  ) {
+    super(projectService);
+  }
 
   createBranch(params: CreateBranchParams): Promise<void> {
     this.showCreatingBranchMessage();
@@ -58,77 +54,6 @@ export class CreateBranchService {
     }
   }
 
-  private createPathStep(
-    params: CreateBranchParams,
-    branchNode: any,
-    nodeId: string,
-    index: number
-  ): void {
-    const pathNumber = index + 1;
-    const newNode = this.projectService.createNode($localize`Path ${pathNumber}`);
-    newNode.id = nodeId;
-    this.addTransitionFromBranchNodeToPathNode(params, branchNode, newNode, pathNumber);
-    this.projectService.addNode(newNode);
-    this.projectService.addApplicationNode(newNode);
-    this.projectService.setIdToNode(newNode.id, newNode);
-    this.projectService.addBranchPathTakenConstraints(newNode.id, branchNode.id, newNode.id);
-  }
-
-  addBranchPath(pathIndex: number, params: any): void {
-    const branchStep = this.projectService.getNode(params.branchStepId);
-    const mergeStep = this.projectService.getNode(params.mergeStepId);
-    const newNodeId = this.projectService.getNextAvailableNodeId();
-    this.createPathStep(params, branchStep, newNodeId, pathIndex);
-    this.setPathStepTransitions([newNodeId], mergeStep.id);
-    this.setBranchNodeTransitionLogic(branchStep, params.criteria);
-    this.addNewNodeIdBeforeMergeStep(params.mergeStepId, newNodeId);
-  }
-
-  private addTransitionFromBranchNodeToPathNode(
-    params: CreateBranchParams,
-    branchNode: any,
-    newNode: any,
-    pathNumber: number
-  ): void {
-    switch (params.criteria) {
-      case SCORE_VALUE:
-        branchNode.transitionLogic.transitions.push(
-          new Transition(newNode.id, [
-            new TransitionCriteria(
-              SCORE_VALUE,
-              new TransitionCriteriaParams({
-                componentId: params.componentId,
-                nodeId: params.nodeId,
-                scores: params.paths[pathNumber - 1].split(',')
-              })
-            )
-          ])
-        );
-        branchNode.transitionLogic.whenToChoosePath =
-          params.branchStepId === params.nodeId ? 'studentDataChanged' : 'enterNode';
-        break;
-      case CHOICE_CHOSEN_VALUE:
-        branchNode.transitionLogic.transitions.push(
-          new Transition(newNode.id, [
-            new TransitionCriteria(
-              CHOICE_CHOSEN_VALUE,
-              new TransitionCriteriaParams({
-                choiceIds: [params.paths[pathNumber - 1]],
-                componentId: params.componentId,
-                nodeId: params.nodeId
-              })
-            )
-          ])
-        );
-        branchNode.transitionLogic.whenToChoosePath =
-          params.branchStepId === params.nodeId ? 'studentDataChanged' : 'enterNode';
-        break;
-      default:
-        branchNode.transitionLogic.transitions.push(new Transition(newNode.id));
-        branchNode.transitionLogic.whenToChoosePath = 'enterNode';
-    }
-  }
-
   private createMergeStep(newNodeIds: string[], nodeIdBranchNodeTransitionsTo: string): any {
     const mergeStepNode = this.projectService.createNode($localize`Merge Step`);
     mergeStepNode.id = this.projectService.getNextAvailableNodeId(newNodeIds);
@@ -141,29 +66,9 @@ export class CreateBranchService {
     return mergeStepNode;
   }
 
-  private setPathStepTransitions(newNodeIds: string[], mergeStepId: string): void {
-    for (const newNodeId of newNodeIds) {
-      this.projectService.getNode(newNodeId).getTransitionLogic().transitions = [
-        new Transition(mergeStepId)
-      ];
-    }
-  }
-
-  private setBranchNodeTransitionLogic(branchNode: any, criteria: string): void {
-    branchNode.transitionLogic.maxPathsVisitable = 1;
-    branchNode.transitionLogic.howToChooseAmongAvailablePaths =
-      criteria === WORKGROUP_ID_VALUE ? WORKGROUP_ID_VALUE : 'random';
-    branchNode.transitionLogic.canChangePath = false;
-  }
-
   private addNewNodeIdsToParentGroup(branchStepId: string, newNodeIds: string[]): void {
     const parentGroup = this.projectService.getParentGroup(branchStepId);
     parentGroup.ids.splice(parentGroup.ids.indexOf(branchStepId) + 1, 0, ...newNodeIds);
-  }
-
-  private addNewNodeIdBeforeMergeStep(mergeStepId: string, newNodeId: string): void {
-    const parentGroup = this.projectService.getParentGroup(mergeStepId);
-    parentGroup.ids.splice(parentGroup.ids.indexOf(mergeStepId), 0, newNodeId);
   }
 
   private showCreatingBranchMessage(): void {
