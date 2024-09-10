@@ -1940,7 +1940,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">82</context>
         </context-group>
         <target state="translated">Yeni uyarı(lar) var</target>
       </trans-unit>
@@ -1964,7 +1964,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">85</context>
         </context-group>
         <target state="needs-translation">Step has rubrics/teaching tips</target>
       </trans-unit>
@@ -7008,19 +7008,19 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         </context-group>
         <target state="needs-translation">Revive <x id="singular term for note in unit" equiv-text="this.label.singular"/></target>
       </trans-unit>
-      <trans-unit id="58856baa2a91a512984bddd54ec1d2fe794d5da7" datatype="html">
-        <source> You haven&apos;t created any <x id="INTERPOLATION" equiv-text="{{ label.plural }}"/> yet. </source>
+      <trans-unit id="55d381c7037f3e53e038a4aeef9894e004156e2f" datatype="html">
+        <source>You haven&apos;t created any <x id="INTERPOLATION" equiv-text="{{ label.plural }}"/> yet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.html</context>
-          <context context-type="linenumber">3,5</context>
+          <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation"> You haven't created any <x id="INTERPOLATION" equiv-text="{{ label.plural }}"/> yet. </target>
+        <target state="needs-translation">You haven't created any <x id="INTERPOLATION" equiv-text="{{ label.plural }}"/> yet.</target>
       </trans-unit>
       <trans-unit id="6b19ee5aa027ce641a0df6d12215e956fce185f5" datatype="html">
         <source>Select item to insert</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <target state="needs-translation">Select item to insert</target>
       </trans-unit>
@@ -7028,23 +7028,23 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Add <x id="INTERPOLATION" equiv-text="{{ label.singular }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">76</context>
         </context-group>
         <target state="needs-translation">Add <x id="INTERPOLATION" equiv-text="{{ label.singular }}"/></target>
       </trans-unit>
-      <trans-unit id="61a2cd64144538c1628586ca7a0981489013b3e0" datatype="html">
-        <source> Team hasn&apos;t created any <x id="INTERPOLATION" equiv-text="{{ label.plural }}"/> yet. </source>
+      <trans-unit id="787c4b744ae99accb57fc1c9324e75f250245743" datatype="html">
+        <source>Team hasn&apos;t created any <x id="INTERPOLATION" equiv-text="{{ label.plural }}"/> yet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.html</context>
-          <context context-type="linenumber">82,84</context>
+          <context context-type="linenumber">94</context>
         </context-group>
-        <target state="needs-translation"> Team hasn't created any <x id="INTERPOLATION" equiv-text="{{ label.plural }}"/> yet. </target>
+        <target state="needs-translation">Team hasn't created any <x id="INTERPOLATION" equiv-text="{{ label.plural }}"/> yet.</target>
       </trans-unit>
       <trans-unit id="1283241409166703000" datatype="html">
         <source>Personal</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.ts</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">122</context>
         </context-group>
         <target state="translated">Kişisel</target>
       </trans-unit>
@@ -10430,7 +10430,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Creating Unit...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-project/add-project.component.ts</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <target state="needs-translation">Creating Unit...</target>
       </trans-unit>
@@ -10438,7 +10438,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>There was an error creating this unit. Please contact WISE staff.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-project/add-project.component.ts</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <target state="needs-translation">There was an error creating this unit. Please contact WISE staff.</target>
       </trans-unit>
@@ -10632,7 +10632,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>New Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.ts</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <target state="needs-translation">New Step</target>
       </trans-unit>
@@ -14178,7 +14178,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Are you sure you want to delete this step?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.ts</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">140</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this step?</target>
       </trans-unit>
@@ -15752,7 +15752,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source><x id="PH" equiv-text="this.nodeTitle"/> has been locked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">239</context>
+          <context context-type="linenumber">237</context>
         </context-group>
         <target state="needs-translation"><x id="PH" equiv-text="this.nodeTitle"/> has been locked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</target>
       </trans-unit>
@@ -15760,7 +15760,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source><x id="PH" equiv-text="this.nodeTitle"/> has been unlocked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">240</context>
+          <context context-type="linenumber">238</context>
         </context-group>
         <target state="needs-translation"><x id="PH" equiv-text="this.nodeTitle"/> has been unlocked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</target>
       </trans-unit>
@@ -15768,7 +15768,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>All Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">350</context>
+          <context context-type="linenumber">371</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
@@ -15784,7 +15784,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">351</context>
+          <context context-type="linenumber">372</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
@@ -15796,7 +15796,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Unlock for <x id="PH" equiv-text="this.getPeriodLabel()"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">356</context>
+          <context context-type="linenumber">377</context>
         </context-group>
         <target state="needs-translation">Unlock for <x id="PH" equiv-text="this.getPeriodLabel()"/></target>
       </trans-unit>
@@ -15804,7 +15804,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Lock for <x id="PH" equiv-text="this.getPeriodLabel()"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">357</context>
+          <context context-type="linenumber">378</context>
         </context-group>
         <target state="needs-translation">Lock for <x id="PH" equiv-text="this.getPeriodLabel()"/></target>
       </trans-unit>
@@ -15816,13 +15816,13 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         </context-group>
         <target state="needs-translation">Show/hide team's notebook contents</target>
       </trans-unit>
-      <trans-unit id="71ea7dff11ec5bc75f1f9c0a86398e08df9ebea3" datatype="html">
-        <source> Latest Work: <x id="INTERPOLATION" equiv-text="{{ workgroup.report.serverSaveTime | date : &apos;mediumDate&apos; }}"/> </source>
+      <trans-unit id="ee8f01f880aa93450e427573939a31763f76d1a8" datatype="html">
+        <source> Latest Work: <x id="INTERPOLATION" equiv-text="{{ workgroup.report.serverSaveTime | date: &apos;mediumDate&apos; }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component.html</context>
           <context context-type="linenumber">29,31</context>
         </context-group>
-        <target state="needs-translation"> Latest Work: <x id="INTERPOLATION" equiv-text="{{ workgroup.report.serverSaveTime | date : 'mediumDate' }}"/> </target>
+        <target state="needs-translation"> Latest Work: <x id="INTERPOLATION" equiv-text="{{ workgroup.report.serverSaveTime | date: 'mediumDate' }}"/> </target>
       </trans-unit>
       <trans-unit id="9dc899e8783169628d01bceac79b074a435ea58e" datatype="html">
         <source> No Work </source>
@@ -21128,7 +21128,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to overwrite the current line data?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">231</context>
+          <context context-type="linenumber">237</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to overwrite the current line data?</target>
       </trans-unit>
@@ -21136,7 +21136,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">846</context>
+          <context context-type="linenumber">852</context>
         </context-group>
         <target state="needs-translation">The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</target>
       </trans-unit>
@@ -21144,7 +21144,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>You can not edit this series. Please choose a series that can be edited.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">860</context>
+          <context context-type="linenumber">866</context>
         </context-group>
         <target state="needs-translation">You can not edit this series. Please choose a series that can be edited.</target>
       </trans-unit>
@@ -21152,7 +21152,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset the series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1093</context>
+          <context context-type="linenumber">1099</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset the series?</target>
       </trans-unit>
@@ -21160,7 +21160,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset the &quot;<x id="PH" equiv-text="seriesName"/>&quot; series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1095</context>
+          <context context-type="linenumber">1101</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset the "<x id="PH" equiv-text="seriesName"/>" series?</target>
       </trans-unit>
@@ -21168,11 +21168,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Trial</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1593</context>
+          <context context-type="linenumber">1518</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">2417</context>
+          <context context-type="linenumber">2350</context>
         </context-group>
         <target state="translated">Deneme</target>
       </trans-unit>
