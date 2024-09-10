@@ -3,7 +3,7 @@
 <link rel="stylesheet" [href]="projectStylePath | safeUrl" />
 <mat-drawer-container [hasBackdrop]="false" *ngIf="initialized">
   <mat-drawer #drawer mode="over" position="end" (keydown.escape)="closeNotes()">
-    <notebook-notes [config]="notebookConfig"></notebook-notes>
+    <notebook-notes [config]="notebookConfig" />
   </mat-drawer>
   <mat-drawer-content>
     <top-bar [projectName]="project.metadata.title"></top-bar>
