@@ -2,16 +2,16 @@
   <ng-container formArrayName="paths">
     @for (path of branchPaths; track path; let index = $index) {
       <div class="path">
-        <div fxLayoutAlign="space-between center">
-          <div>
-            <span class="path-label" i18n>Path {{ index + 1 }}</span>
+        <div fxLayoutAlign="space-between center" fxLayoutGap="8px">
+          <div fxLayoutAlign="center center" fxLayoutGap="8px">
+            <span class="strong" i18n>Path {{ index + 1 }}</span>
             @if (criteria === SCORE_VALUE) {
-              <mat-form-field>
+              <mat-form-field class="form-field-no-hint">
                 <mat-label i18n>Score</mat-label>
                 <input matInput [formControlName]="index" />
               </mat-form-field>
             } @else if (criteria === CHOICE_CHOSEN_VALUE) {
-              <mat-form-field>
+              <mat-form-field class="form-field-no-hint">
                 <mat-label i18n>Choice Chosen</mat-label>
                 <mat-select [formControlName]="index">
                   @for (choice of choices; track choice) {
@@ -24,21 +24,21 @@
             }
           </div>
           @if (path.delete) {
-            <span i18n
-              >This path will be deleted and the steps in the path will be moved after the
-              branch</span
+            <span class="warn" i18n
+              >This path will be deleted and its steps will be moved after the branching
+              structure</span
             >
           }
           @if (!path.delete) {
             <button
               mat-icon-button
               color="primary"
-              matTooltip="Delete"
+              matTooltip="Delete branch path"
               matTooltipPosition="above"
               i18n-matTooltip
               (click)="deletePath(index)"
             >
-              <mat-icon>close</mat-icon>
+              <mat-icon>delete</mat-icon>
             </button>
           }
         </div>
@@ -49,8 +49,8 @@
     }
   </ng-container>
 </div>
-<div fxLayoutAlign="center center">
-  <button mat-stroked-button color="primary" (click)="addPath()">
+<div>
+  <button mat-flat-button color="primary" (click)="addPath()">
     <mat-icon>add</mat-icon><span i18n>Add Path</span>
   </button>
 </div>

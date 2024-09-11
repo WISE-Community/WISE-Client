@@ -18,6 +18,7 @@ import { SelectBranchCriteriaComponent } from '../select-branch-criteria/select-
 import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/abstract-branch-authoring.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   imports: [
@@ -26,6 +27,7 @@ import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner
     FlexLayoutModule,
     MatButtonModule,
     MatDialogModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,

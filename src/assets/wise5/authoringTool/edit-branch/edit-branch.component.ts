@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { EditBranchService } from '../../services/editBranchService';
 import { CreateBranchParams } from '../../common/CreateBranchParams';
 import { EditBranchPathsComponent } from '../edit-branch-paths/edit-branch-paths.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   imports: [
@@ -22,6 +23,7 @@ import { EditBranchPathsComponent } from '../edit-branch-paths/edit-branch-paths
     EditBranchPathsComponent,
     FlexLayoutModule,
     MatButtonModule,
+    MatDividerModule,
     MatProgressBarModule,
     ReactiveFormsModule,
     RouterModule,
@@ -158,7 +160,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
   protected removeBranch(): void {
     if (
       confirm(
-        $localize`Are you sure you want to remove this branch?\n\nThe branch structure will be removed but the steps will not be deleted.`
+        $localize`Are you sure you want to remove this branching structure?\n\nThe branches will be removed but the steps will remain in the unit.`
       )
     ) {
       this.deleteBranchService.deleteBranch(this.branchPaths, this.targetId);

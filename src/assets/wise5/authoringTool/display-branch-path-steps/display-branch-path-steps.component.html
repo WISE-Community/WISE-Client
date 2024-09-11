@@ -1,11 +1,13 @@
-@for (node of nodes; track node) {
-  <div
-    class="branch-path-step"
-    [ngStyle]="{ 'background-color': nodeIdToBackgroundColor[node.nodeId] }"
-  >
-    {{ nodeIdToStepTitle[node.nodeId] }}
-  </div>
-}
+<div fxLayout="column" fxLayoutGap="8px">
+  @for (node of nodes; track node) {
+    <div
+      class="branch-path-step"
+      [ngStyle]="{ 'background-color': nodeIdToBackgroundColor[node.nodeId] }"
+    >
+      {{ nodeIdToStepTitle[node.nodeId] }}
+    </div>
+  }
+</div>
 @if (nodes.length === 0) {
-  <span i18n>(A new step will automatically be created in this path)</span>
+  <span i18n>A new step will automatically be created in this path</span>
 }

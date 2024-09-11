@@ -1,9 +1,10 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [CommonModule],
+  imports: [CommonModule, FlexLayoutModule],
   selector: 'display-branch-path-steps',
   standalone: true,
   styleUrl: './display-branch-path-steps.component.scss',

@@ -23,8 +23,10 @@
   display: none;
 }
 
-.step:hover .dynamic-step-buttons {
-  display: block;
+.step:hover, .step:focus {
+  .dynamic-step-buttons {
+    display: block;
+  }
 }
 
 .step-click-to-enter-div {
