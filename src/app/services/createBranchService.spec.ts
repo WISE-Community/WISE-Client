@@ -4,8 +4,7 @@ import { copy } from '../../assets/wise5/common/object/object';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { of } from 'rxjs';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { Transition } from '../../assets/wise5/common/Transition';
@@ -19,8 +18,6 @@ import {
   WORKGROUP_ID_VALUE
 } from '../domain/branchCriteria';
 import { ConstraintRemovalCriteriaParams } from '../../assets/wise5/common/ConstraintRemovalCriteriaParams';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { DialogWithSpinnerComponent } from '../../assets/wise5/directives/dialog-with-spinner/dialog-with-spinner.component';
 
 const ENTER_NODE: string = 'enterNode';
 const RANDOM: string = 'random';
@@ -43,13 +40,12 @@ let service: CreateBranchService;
 describe('CreateBranchService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DialogWithSpinnerComponent],
-      imports: [
-        HttpClientTestingModule,
-        MatProgressSpinnerModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [CreateBranchService, TeacherProjectService]
+      imports: [StudentTeacherCommonServicesModule],
+      providers: [
+        CreateBranchService,
+        provideHttpClient(withInterceptorsFromDi()),
+        TeacherProjectService
+      ]
     });
     demoProjectJSON = copy(demoProjectJSON_import);
     configService = TestBed.inject(ConfigService);

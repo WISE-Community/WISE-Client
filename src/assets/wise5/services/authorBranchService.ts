@@ -18,12 +18,11 @@ export abstract class AuthorBranchService {
     params: CreateBranchParams,
     branchNode: any,
     nodeId: string,
-    index: number
+    pathIndex: number
   ): void {
-    const pathNumber = index + 1;
-    const newNode = this.projectService.createNode($localize`Path ${pathNumber}`);
+    const newNode = this.projectService.createNode($localize`Path ${pathIndex + 1}`);
     newNode.id = nodeId;
-    this.addTransitionFromBranchNodeToPathNode(params, branchNode, newNode, pathNumber);
+    this.addTransitionFromBranchNodeToPathNode(params, branchNode, newNode, pathIndex);
     this.projectService.addNode(newNode);
     this.projectService.addApplicationNode(newNode);
     this.projectService.setIdToNode(newNode.id, newNode);
@@ -49,7 +48,7 @@ export abstract class AuthorBranchService {
     params: CreateBranchParams,
     branchNode: any,
     newNode: any,
-    pathNumber: number
+    pathIndex: number
   ): void {
     switch (params.criteria) {
       case SCORE_VALUE:
@@ -60,7 +59,7 @@ export abstract class AuthorBranchService {
               new TransitionCriteriaParams({
                 componentId: params.componentId,
                 nodeId: params.nodeId,
-                scores: params.paths[pathNumber - 1].split(',')
+                scores: params.paths[pathIndex].split(',')
               })
             )
           ])
@@ -74,7 +73,7 @@ export abstract class AuthorBranchService {
             new TransitionCriteria(
               CHOICE_CHOSEN_VALUE,
               new TransitionCriteriaParams({
-                choiceIds: [params.paths[pathNumber - 1]],
+                choiceIds: [params.paths[pathIndex]],
                 componentId: params.componentId,
                 nodeId: params.nodeId
               })

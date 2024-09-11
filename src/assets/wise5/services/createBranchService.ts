@@ -1,22 +1,16 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { TeacherProjectService } from './teacherProjectService';
-import { DialogWithSpinnerComponent } from '../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { CreateBranchParams } from '../common/CreateBranchParams';
 import { Transition } from '../common/Transition';
 import { AuthorBranchService } from './authorBranchService';
 
 @Injectable()
 export class CreateBranchService extends AuthorBranchService {
-  constructor(
-    private dialog: MatDialog,
-    protected projectService: TeacherProjectService
-  ) {
+  constructor(protected projectService: TeacherProjectService) {
     super(projectService);
   }
 
   createBranch(params: CreateBranchParams): Promise<void> {
-    this.showCreatingBranchMessage();
     const branchNode = this.projectService.getNode(params.branchStepId);
     const nodeIdBranchNodeTransitionsTo =
       branchNode.transitionLogic.transitions.length > 0
@@ -35,9 +29,7 @@ export class CreateBranchService extends AuthorBranchService {
       newNodeIds.push(mergeStep.id);
     }
     this.addNewNodeIdsToParentGroup(params.branchStepId, newNodeIds);
-    return this.projectService.saveProject().then(() => {
-      this.hideCreatingBranchMessage();
-    });
+    return this.projectService.saveProject();
   }
 
   private createNewNodeIds(pathCount: number): string[] {
@@ -69,18 +61,5 @@ export class CreateBranchService extends AuthorBranchService {
   private addNewNodeIdsToParentGroup(branchStepId: string, newNodeIds: string[]): void {
     const parentGroup = this.projectService.getParentGroup(branchStepId);
     parentGroup.ids.splice(parentGroup.ids.indexOf(branchStepId) + 1, 0, ...newNodeIds);
-  }
-
-  private showCreatingBranchMessage(): void {
-    this.dialog.open(DialogWithSpinnerComponent, {
-      data: {
-        title: $localize`Creating Branch`
-      },
-      disableClose: false
-    });
-  }
-
-  private hideCreatingBranchMessage(): void {
-    this.dialog.closeAll();
   }
 }

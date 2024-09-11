@@ -16,6 +16,8 @@ import { CreateBranchService } from '../../services/createBranchService';
 import { SelectPathCountComponent } from '../select-path-count/select-path-count.component';
 import { SelectBranchCriteriaComponent } from '../select-branch-criteria/select-branch-criteria.component';
 import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/abstract-branch-authoring.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
 
 @Component({
   imports: [
@@ -23,6 +25,7 @@ import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/a
     CommonModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
@@ -41,6 +44,7 @@ import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/a
 export class CreateBranchComponent extends AbstractBranchAuthoringComponent {
   constructor(
     private createBranchService: CreateBranchService,
+    private dialog: MatDialog,
     protected fb: FormBuilder,
     protected projectService: TeacherProjectService,
     protected route: ActivatedRoute,
@@ -61,7 +65,23 @@ export class CreateBranchComponent extends AbstractBranchAuthoringComponent {
   }
 
   protected async submit(): Promise<void> {
-    await this.createBranchService.createBranch(this.getBranchParams());
-    this.router.navigate(['..'], { relativeTo: this.route });
+    this.showCreatingBranchMessage();
+    this.createBranchService.createBranch(this.getBranchParams()).then(() => {
+      this.hideCreatingBranchMessage();
+      this.router.navigate(['..'], { relativeTo: this.route });
+    });
+  }
+
+  private showCreatingBranchMessage(): void {
+    this.dialog.open(DialogWithSpinnerComponent, {
+      data: {
+        title: $localize`Creating Branch`
+      },
+      disableClose: false
+    });
+  }
+
+  private hideCreatingBranchMessage(): void {
+    this.dialog.closeAll();
   }
 }

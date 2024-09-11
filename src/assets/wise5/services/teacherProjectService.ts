@@ -1659,7 +1659,7 @@ export class TeacherProjectService extends ProjectService {
    * @param toNodeId the to node id
    * @return an array of nodes that are in the branch path
    */
-  getNodeIdsInBranch(fromNodeId, toNodeId) {
+  getNodeIdsInBranch(fromNodeId: string, toNodeId: string): any[] {
     const nodeIdsInBranch = [];
     for (const node of this.getNodes()) {
       if (this.hasBranchPathTakenConstraint(node, fromNodeId, toNodeId)) {
@@ -1676,7 +1676,7 @@ export class TeacherProjectService extends ProjectService {
    * @param constraints An array of node ids.
    * @return An array of ordered node ids.
    */
-  orderNodeIds(nodeIds) {
+  private orderNodeIds(nodeIds: string[]): string[] {
     let orderedNodeIds = this.getFlattenedProjectAsNodeIds();
     return nodeIds.sort(this.nodeIdsComparatorGenerator(orderedNodeIds));
   }
