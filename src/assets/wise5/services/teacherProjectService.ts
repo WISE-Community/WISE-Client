@@ -1775,25 +1775,13 @@ export class TeacherProjectService extends ProjectService {
    * @return whether the node is the first node in a branch path
    */
   isFirstNodeInBranchPath(nodeId: string): boolean {
-    for (const node of this.getNodes()) {
-      if (node.transitionLogic?.transitions?.length > 1) {
-        for (const transition of node.transitionLogic.transitions) {
-          if (transition.to === nodeId) {
-            return true;
-          }
-        }
-      }
-    }
-    for (const node of this.getInactiveNodes()) {
-      if (node.transitionLogic?.transitions?.length > 1) {
-        for (const transition of node.transitionLogic.transitions) {
-          if (transition.to === nodeId) {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
+    return this.getNodes()
+      .concat(this.getInactiveNodes())
+      .some(
+        (node) =>
+          node.transitionLogic?.transitions?.length > 1 &&
+          node.transitionLogic.transitions.some((transition) => transition.to === nodeId)
+      );
   }
 
   addSpace(space) {

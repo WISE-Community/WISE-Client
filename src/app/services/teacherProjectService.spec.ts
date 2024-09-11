@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
+import branchInActiveAndInactiveLessonProjectJSON_import from './sampleData/curriculum/BranchInActiveAndInactiveLessons.project.json';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVehiclesChallenge.project.json';
 import teacherProjctJSON_import from './sampleData/curriculum/TeacherProjectServiceSpec.project.json';
@@ -14,16 +15,14 @@ let service: TeacherProjectService;
 let configService: ConfigService;
 let deleteNodeService: DeleteNodeService;
 let http: HttpTestingController;
+let branchInActiveAndInactiveLessonProjectJSON: any;
 let demoProjectJSON: any;
 let scootersProjectJSON: any;
 let teacherProjectJSON: any;
 
-const scootersProjectJSONString = JSON.stringify(demoProjectJSON_import);
-const scootersProjectName = 'scooters';
 const projectIdDefault = 1;
 const projectBaseURL = 'http://localhost:8080/curriculum/12345/';
 const projectURL = projectBaseURL + 'project.json';
-const registerNewProjectURL = 'http://localhost:8080/wise/project/new';
 const saveProjectURL = 'http://localhost:8080/wise/project/save/' + projectIdDefault;
 const wiseBaseURL = '/wise';
 describe('TeacherProjectService', () => {
@@ -42,6 +41,9 @@ describe('TeacherProjectService', () => {
     service = TestBed.inject(TeacherProjectService);
     configService = TestBed.inject(ConfigService);
     deleteNodeService = TestBed.inject(DeleteNodeService);
+    branchInActiveAndInactiveLessonProjectJSON = copy(
+      branchInActiveAndInactiveLessonProjectJSON_import
+    );
     demoProjectJSON = copy(demoProjectJSON_import);
     scootersProjectJSON = copy(scootersProjectJSON_import);
     teacherProjectJSON = copy(teacherProjctJSON_import);
@@ -63,6 +65,7 @@ describe('TeacherProjectService', () => {
   shouldRemoveSpaces();
   removeNodeFromGroup();
   insertNodeAfterInTransitions();
+  isFirstNodeInBranchPath();
   shouldNotBeAbleToInsertANodeAfterAnotherNodeWhenTheyAreDifferentTypes();
   shouldBeAbleToInsertAStepNodeInsideAGroupNode();
   shouldBeAbleToInsertAGroupNodeInsideAGroupNode();
@@ -93,23 +96,6 @@ function createNormalSpy() {
     }
   });
 }
-
-function createConfigServiceGetConfigParamSpy() {
-  spyOn(configService, 'getConfigParam').and.callFake((param) => {
-    if (param === 'projectBaseURL') {
-      return projectBaseURL;
-    } else if (param === 'projectURL') {
-      return projectURL;
-    } else if (param === 'registerNewProjectURL') {
-      return registerNewProjectURL;
-    } else if (param === 'saveProjectURL') {
-      return saveProjectURL;
-    } else if (param === 'wiseBaseURL') {
-      return wiseBaseURL;
-    }
-  });
-}
-
 function isNodeIdToInsertTargetNotSpecified() {
   describe('isNodeIdToInsertTargetNotSpecified', () => {
     it('should return true for null, inactive nodes, steps, and activities', () => {
@@ -362,6 +348,25 @@ function insertNodeAfterInTransitions() {
   });
   it('should be able to insert an activity node after another activity node', () => {
     expectInsertNodeAfterInTransition('group1', 'group2');
+  });
+}
+
+function isFirstNodeInBranchPath() {
+  describe('isFirstNodeInBranchPath()', () => {
+    it('should return true iff node is first node in branch path in active/inactive lesson', () => {
+      service.setProject(branchInActiveAndInactiveLessonProjectJSON);
+      // test steps in active lesson
+      expect(service.isFirstNodeInBranchPath('node1')).toBeFalse();
+      expect(service.isFirstNodeInBranchPath('node10')).toBeTrue();
+      expect(service.isFirstNodeInBranchPath('node12')).toBeTrue();
+      expect(service.isFirstNodeInBranchPath('node14')).toBeFalse();
+
+      // test steps in inactive lesson
+      expect(service.isFirstNodeInBranchPath('node2')).toBeFalse();
+      expect(service.isFirstNodeInBranchPath('node3')).toBeTrue();
+      expect(service.isFirstNodeInBranchPath('node5')).toBeTrue();
+      expect(service.isFirstNodeInBranchPath('node7')).toBeFalse();
+    });
   });
 }
 
