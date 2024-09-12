@@ -31,17 +31,17 @@
         />
       }
     </div>
-    @if (formGroup.controls['componentId']?.value) {
-      <p class="strong" i18n>Paths:</p>
-    }
-    <create-branch-paths
-      [pathCount]="formGroup.controls['pathCount'].value"
-      [criteria]="formGroup.controls['criteria'].value"
-      [nodeId]="formGroup.controls['nodeId']?.value"
-      [componentId]="formGroup.controls['componentId']?.value"
-      [pathFormGroup]="formGroup.controls['pathFormGroup']"
-    />
   }
+  @if (formGroup.controls['componentId']?.value) {
+    <p class="strong" i18n>Paths:</p>
+  }
+  <create-branch-paths
+    [pathCount]="formGroup.controls['pathCount'].value"
+    [criteria]="formGroup.controls['criteria'].value"
+    [nodeId]="formGroup.controls['nodeId']?.value"
+    [componentId]="formGroup.controls['componentId']?.value"
+    [pathFormGroup]="formGroup.controls['pathFormGroup']"
+  />
   @if (showSelectMergeStep()) {
     <select-merge-step [branchStepId]="targetId" (selectMergeStepEvent)="setMergeStep($event)" />
   }
