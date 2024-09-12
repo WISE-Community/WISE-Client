@@ -10997,7 +10997,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Delete branch path</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch-paths/edit-branch-paths.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ff8aa2fb4724311bcc5857672bbcffcca729ede5" datatype="html">
@@ -11005,13 +11005,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch-paths/edit-branch-paths.component.html</context>
           <context context-type="linenumber">54</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3873025443598498056" datatype="html">
-        <source>You are not allowed to have fewer than 2 paths.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch-paths/edit-branch-paths.component.ts</context>
-          <context context-type="linenumber">113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="05c79212144d2c83e779e76c86f81924247f814f" datatype="html">

@@ -28,14 +28,14 @@
               >This path will be deleted and its steps will be moved after the branching
               structure</span
             >
-          }
-          @if (!path.delete) {
+          } @else {
             <button
               mat-icon-button
               color="primary"
               matTooltip="Delete branch path"
               matTooltipPosition="above"
               i18n-matTooltip
+              [disabled]="hasTwoPaths()"
               (click)="deletePath(index)"
             >
               <mat-icon>delete</mat-icon>
