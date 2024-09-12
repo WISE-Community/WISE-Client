@@ -40,6 +40,9 @@ class MockTeacherProjectService {
   isGroupNode() {}
   nodeHasWork() {}
   getMaxScoreForNode() {}
+  getNodeById() {
+    return { constraints: [] };
+  }
   getNode() {
     return new Node();
   }
@@ -121,7 +124,7 @@ function toggleLockNode() {
     });
     describe('when there is no teacherRemovalConstraint', () => {
       it('should add constraint', () => {
-        const getNodeSpy = spyOn(projectService, 'getNode').and.returnValue(node1);
+        const getNodeSpy = spyOn(projectService, 'getNodeById').and.returnValue(node1);
         expect(node1.constraints.length).toEqual(0);
         lockNodeButton.click();
         expect(getNodeSpy).toHaveBeenCalled();
@@ -141,7 +144,7 @@ function toggleLockNode() {
             Object({ name: 'teacherRemoval', params: Object({ periodId: periodId }) })
           ]
         });
-        const getNodeSpy = spyOn(projectService, 'getNode').and.returnValue(node1);
+        const getNodeSpy = spyOn(projectService, 'getNodeById').and.returnValue(node1);
         const dataService = TestBed.inject(TeacherDataService);
         const currentPeriodSpy = spyOn(dataService, 'getCurrentPeriod').and.returnValue({
           periodId: periodId

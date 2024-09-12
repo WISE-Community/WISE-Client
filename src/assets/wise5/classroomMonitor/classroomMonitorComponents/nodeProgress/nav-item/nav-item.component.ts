@@ -187,7 +187,7 @@ export class NavItemComponent implements OnInit {
   }
 
   isLocked(): boolean {
-    const constraints = this.projectService.getNode(this.nodeId).constraints;
+    const constraints = this.projectService.getNodeById(this.nodeId).constraints ?? [];
     return (
       (this.isShowingAllPeriods() && this.isLockedForAll(constraints)) ||
       (!this.isShowingAllPeriods() &&
@@ -218,7 +218,7 @@ export class NavItemComponent implements OnInit {
   }
 
   protected toggleLockNode(): void {
-    const node = this.projectService.getNode(this.nodeId);
+    const node = this.projectService.getNodeById(this.nodeId);
     const isLocked = this.isLocked();
     if (isLocked) {
       this.unlockNode(node);
@@ -270,7 +270,10 @@ export class NavItemComponent implements OnInit {
         }
       ]
     };
-    node.addConstraint(lockConstraint);
+    if (node.constraints == null) {
+      node.constraints = [];
+    }
+    node.constraints.push(lockConstraint);
   }
 
   private unlockNodeForAllPeriods(node: Node): void {
