@@ -53,32 +53,14 @@ export abstract class AuthorBranchService {
     switch (params.criteria) {
       case SCORE_VALUE:
         branchNode.transitionLogic.transitions.push(
-          new Transition(newNode.id, [
-            new TransitionCriteria(
-              SCORE_VALUE,
-              new TransitionCriteriaParams({
-                componentId: params.componentId,
-                nodeId: params.nodeId,
-                scores: params.paths[pathIndex].split(',')
-              })
-            )
-          ])
+          new ScoreTransition(newNode.id, params, params.paths[pathIndex].split(','))
         );
         branchNode.transitionLogic.whenToChoosePath =
           params.branchStepId === params.nodeId ? 'studentDataChanged' : 'enterNode';
         break;
       case CHOICE_CHOSEN_VALUE:
         branchNode.transitionLogic.transitions.push(
-          new Transition(newNode.id, [
-            new TransitionCriteria(
-              CHOICE_CHOSEN_VALUE,
-              new TransitionCriteriaParams({
-                choiceIds: [params.paths[pathIndex]],
-                componentId: params.componentId,
-                nodeId: params.nodeId
-              })
-            )
-          ])
+          new ChoiceChosenTransition(newNode.id, params, [params.paths[pathIndex]])
         );
         branchNode.transitionLogic.whenToChoosePath =
           params.branchStepId === params.nodeId ? 'studentDataChanged' : 'enterNode';
@@ -87,5 +69,35 @@ export abstract class AuthorBranchService {
         branchNode.transitionLogic.transitions.push(new Transition(newNode.id));
         branchNode.transitionLogic.whenToChoosePath = 'enterNode';
     }
+  }
+}
+
+class ScoreTransition extends Transition {
+  constructor(toNodeId: string, params: AuthorBranchParams, scores: string[]) {
+    super(toNodeId, [
+      new TransitionCriteria(
+        SCORE_VALUE,
+        new TransitionCriteriaParams({
+          nodeId: params.nodeId,
+          componentId: params.componentId,
+          scores: scores
+        })
+      )
+    ]);
+  }
+}
+
+class ChoiceChosenTransition extends Transition {
+  constructor(toNodeId: string, params: AuthorBranchParams, choiceIds: string[]) {
+    super(toNodeId, [
+      new TransitionCriteria(
+        CHOICE_CHOSEN_VALUE,
+        new TransitionCriteriaParams({
+          nodeId: params.nodeId,
+          componentId: params.componentId,
+          choiceIds: choiceIds
+        })
+      )
+    ]);
   }
 }
