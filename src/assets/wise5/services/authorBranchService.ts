@@ -1,4 +1,4 @@
-import { CreateBranchParams } from '../common/CreateBranchParams';
+import { AuthorBranchParams } from '../common/AuthorBranchParams';
 import { TeacherProjectService } from './teacherProjectService';
 import {
   CHOICE_CHOSEN_VALUE,
@@ -15,7 +15,7 @@ export abstract class AuthorBranchService {
   constructor(protected projectService: TeacherProjectService) {}
 
   protected createPathStep(
-    params: CreateBranchParams,
+    params: AuthorBranchParams,
     branchNode: any,
     nodeId: string,
     pathIndex: number
@@ -45,7 +45,7 @@ export abstract class AuthorBranchService {
   }
 
   private addTransitionFromBranchNodeToPathNode(
-    params: CreateBranchParams,
+    params: AuthorBranchParams,
     branchNode: any,
     newNode: any,
     pathIndex: number

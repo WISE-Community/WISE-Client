@@ -8,7 +8,7 @@ import {
   SCORE_VALUE,
   WORKGROUP_ID_VALUE
 } from '../../../../app/domain/branchCriteria';
-import { CreateBranchParams } from '../../common/CreateBranchParams';
+import { AuthorBranchParams } from '../../common/AuthorBranchParams';
 
 @Directive()
 export abstract class AbstractBranchAuthoringComponent {
@@ -191,8 +191,8 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('mergeStep').setValue(nodeId);
   }
 
-  protected getBranchParams(): CreateBranchParams {
-    const params: CreateBranchParams = {
+  protected getBranchParams(): AuthorBranchParams {
+    const params: AuthorBranchParams = {
       branchStepId: this.targetId,
       componentId: this.getComponentId(),
       criteria: this.getCriteria(),

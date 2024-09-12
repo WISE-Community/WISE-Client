@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TeacherProjectService } from './teacherProjectService';
-import { CreateBranchParams } from '../common/CreateBranchParams';
+import { AuthorBranchParams } from '../common/AuthorBranchParams';
 import { Transition } from '../common/Transition';
 import { AuthorBranchService } from './authorBranchService';
 
@@ -10,7 +10,7 @@ export class CreateBranchService extends AuthorBranchService {
     super(projectService);
   }
 
-  createBranch(params: CreateBranchParams): Promise<void> {
+  createBranch(params: AuthorBranchParams): Promise<void> {
     const branchNode = this.projectService.getNode(params.branchStepId);
     const nodeIdBranchNodeTransitionsTo =
       branchNode.transitionLogic.transitions.length > 0
@@ -40,7 +40,7 @@ export class CreateBranchService extends AuthorBranchService {
     return newNodeIds;
   }
 
-  private createPathSteps(params: CreateBranchParams, branchNode: any, newNodeIds: string[]): void {
+  private createPathSteps(params: AuthorBranchParams, branchNode: any, newNodeIds: string[]): void {
     for (let i = 0; i < newNodeIds.length; i++) {
       this.createPathStep(params, branchNode, newNodeIds[i], i);
     }

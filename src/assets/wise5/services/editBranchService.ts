@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AuthorBranchService } from './authorBranchService';
+import { AuthorBranchParams } from '../common/AuthorBranchParams';
 
 @Injectable()
 export class EditBranchService extends AuthorBranchService {
-  addBranchPath(pathIndex: number, params: any): void {
+  addBranchPath(pathIndex: number, params: AuthorBranchParams): void {
     const branchStep = this.projectService.getNode(params.branchStepId);
     const mergeStep = this.projectService.getNode(params.mergeStepId);
     const newNodeId = this.projectService.getNextAvailableNodeId();

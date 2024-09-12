@@ -13,7 +13,7 @@ import { DeleteBranchService } from '../../services/deleteBranchService';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 import { EditBranchService } from '../../services/editBranchService';
-import { CreateBranchParams } from '../../common/CreateBranchParams';
+import { AuthorBranchParams } from '../../common/AuthorBranchParams';
 import { EditBranchPathsComponent } from '../edit-branch-paths/edit-branch-paths.component';
 import { MatDividerModule } from '@angular/material/divider';
 
@@ -193,7 +193,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     this.saveProject();
   }
 
-  private createNewPaths(params: CreateBranchParams): void {
+  private createNewPaths(params: AuthorBranchParams): void {
     this.branchPaths.forEach((path: any, index: number) => {
       if (path.new) {
         this.editBranchService.addBranchPath(index, params);
@@ -201,7 +201,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     });
   }
 
-  private updateTransitions(params: any): void {
+  private updateTransitions(params: AuthorBranchParams): void {
     for (let x = 0; x < this.node.transitionLogic.transitions.length; x++) {
       const transition = this.node.transitionLogic.transitions[x];
       if (params.criteria === this.SCORE_VALUE) {
@@ -232,7 +232,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     }
   }
 
-  private updateTransitionLogic(params: any): void {
+  private updateTransitionLogic(params: AuthorBranchParams): void {
     if (params.criteria === this.WORKGROUP_ID_VALUE || params.criteria === this.RANDOM_VALUE) {
       this.node.transitionLogic.howToChooseAmongAvailablePaths = params.criteria;
       this.node.transitionLogic.whenToChoosePath = 'enterNode';
@@ -243,7 +243,7 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     }
   }
 
-  private removePaths(branchPaths: any[], params: CreateBranchParams): void {
+  private removePaths(branchPaths: any[], params: AuthorBranchParams): void {
     const nodeIdAfterMergeStep = this.projectService.getNodeIdAfter(params.mergeStepId);
     let nodeIdToPlaceAfter = params.mergeStepId;
     branchPaths

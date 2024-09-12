@@ -1,4 +1,4 @@
-export interface CreateBranchParams {
+export interface AuthorBranchParams {
   branchStepId: string;
   componentId?: string;
   criteria: string;
