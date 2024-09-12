@@ -18,6 +18,7 @@ import {
   WORKGROUP_ID_VALUE
 } from '../domain/branchCriteria';
 import { ConstraintRemovalCriteriaParams } from '../../assets/wise5/common/ConstraintRemovalCriteriaParams';
+import { expectConstraint, expectTransitionLogic } from './branchServiceTestHelperFunctions';
 
 const ENTER_NODE: string = 'enterNode';
 const RANDOM: string = 'random';
@@ -275,10 +276,6 @@ function createBranchAndNewMergeStep() {
   });
 }
 
-function expectTransitionLogic(node: any, transitionLogic: TransitionLogic) {
-  expect(copy(node.transitionLogic)).toEqual(copy(transitionLogic));
-}
-
 function expectPathStepsToHaveTransitions(newNodeIds: string[], mergeStepId: string) {
   for (const newNodeId of newNodeIds) {
     expectTransitionLogic(
@@ -309,18 +306,5 @@ function expectPathStepsToHaveConstraints(newNodeIds: string[], branchStepId: st
         })
       )
     ]);
-  }
-}
-
-function expectConstraint(
-  constraint: any,
-  expectedAction: string,
-  expectedTargetId: string,
-  expectedRemovalCriteria: any[]
-) {
-  expect(constraint.action).toEqual(expectedAction);
-  expect(constraint.targetId).toEqual(expectedTargetId);
-  for (let i = 0; i < expectedRemovalCriteria.length; i++) {
-    expect(copy(constraint.removalCriteria[i])).toEqual(copy(expectedRemovalCriteria[i]));
   }
 }
