@@ -10976,7 +10976,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Creating Branch</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/create-branch/create-branch.component.ts</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="51339769753fff911a34db58b68a5fa4f8e7ac9c" datatype="html">

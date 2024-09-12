@@ -55,7 +55,7 @@ export abstract class AbstractBranchAuthoringComponent {
   }
 
   private updateAllowedComponentTypes(): void {
-    const criteria = this.getCriteria();
+    const criteria = this.formGroup.get('criteria').value;
     if (criteria === this.SCORE_VALUE) {
       this.allowedComponentTypes = [
         'AiChat',
@@ -93,7 +93,7 @@ export abstract class AbstractBranchAuthoringComponent {
         this.setComponentId('');
         this.tryAutoSelectComponentId();
       });
-      if (this.getNodeId() === '') {
+      if (this.formGroup.get('nodeId')?.value === '') {
         this.setNodeId(this.targetId);
       }
     }
@@ -107,7 +107,7 @@ export abstract class AbstractBranchAuthoringComponent {
 
   private updateComponentIdSelector(): void {
     const selectedComponent = this.components.find(
-      (component) => component.id === this.getComponentId()
+      (component) => component.id === this.formGroup.get('componentId')?.value
     );
     if (selectedComponent == null || !this.allowedComponentTypes.includes(selectedComponent.type)) {
       this.setComponentId('');
@@ -116,7 +116,7 @@ export abstract class AbstractBranchAuthoringComponent {
   }
 
   private tryAutoSelectComponentId(): void {
-    const criteria = this.getCriteria();
+    const criteria = this.formGroup.get('criteria').value;
     if (criteria === this.SCORE_VALUE) {
       this.tryAutoSelectScoreComponent();
     } else if (criteria === this.CHOICE_CHOSEN_VALUE) {
@@ -151,14 +151,6 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.removeControl('componentId');
   }
 
-  protected showSelectMergeStep(): boolean {
-    return this.criteriaRequiresAdditionalParams(this.getCriteria())
-      ? this.formGroup.controls['nodeId'].valid &&
-          this.formGroup.controls['componentId'].valid &&
-          this.formGroup.controls['pathFormGroup'].valid
-      : this.formGroup.controls['criteria'].valid;
-  }
-
   protected setPathCount(pathCount: number): void {
     this.formGroup.get('pathCount').setValue(pathCount);
   }
@@ -167,24 +159,12 @@ export abstract class AbstractBranchAuthoringComponent {
     this.formGroup.get('criteria').setValue(criteria);
   }
 
-  private getCriteria(): string {
-    return this.formGroup.get('criteria').value;
-  }
-
   protected setNodeId(nodeId: string): void {
     this.formGroup.get('nodeId').setValue(nodeId);
   }
 
-  private getNodeId(): string {
-    return this.formGroup.get('nodeId')?.value;
-  }
-
   protected setComponentId(componentId: string): void {
     this.formGroup.get('componentId').setValue(componentId);
-  }
-
-  private getComponentId(): string {
-    return this.formGroup.get('componentId')?.value;
   }
 
   protected setMergeStep(nodeId: string): void {
@@ -194,10 +174,10 @@ export abstract class AbstractBranchAuthoringComponent {
   protected getBranchParams(): AuthorBranchParams {
     const params: AuthorBranchParams = {
       branchStepId: this.targetId,
-      componentId: this.getComponentId(),
-      criteria: this.getCriteria(),
+      componentId: this.formGroup.get('componentId')?.value,
+      criteria: this.formGroup.get('criteria').value,
       mergeStepId: this.formGroup.get('mergeStep').value,
-      nodeId: this.getNodeId(),
+      nodeId: this.formGroup.get('nodeId')?.value,
       pathCount: this.formGroup.get('pathCount').value
     };
     if (this.criteriaRequiresAdditionalParams(params.criteria)) {

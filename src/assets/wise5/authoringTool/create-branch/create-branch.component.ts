@@ -66,6 +66,14 @@ export class CreateBranchComponent extends AbstractBranchAuthoringComponent {
     });
   }
 
+  protected showSelectMergeStep(): boolean {
+    return this.criteriaRequiresAdditionalParams(this.formGroup.get('criteria').value)
+      ? this.formGroup.controls['nodeId'].valid &&
+          this.formGroup.controls['componentId'].valid &&
+          this.formGroup.controls['pathFormGroup'].valid
+      : this.formGroup.controls['criteria'].valid;
+  }
+
   protected async submit(): Promise<void> {
     this.showCreatingBranchMessage();
     this.createBranchService.createBranch(this.getBranchParams()).then(() => {
