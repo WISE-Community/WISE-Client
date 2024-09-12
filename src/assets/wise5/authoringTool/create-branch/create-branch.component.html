@@ -22,11 +22,7 @@
         [nodeId]="formGroup.controls['nodeId'].value"
         (stepChangedEvent)="setNodeId($event)"
       />
-      @if (
-        formGroup.controls['nodeId']?.value !== '' &&
-        (formGroup.controls['criteria'].value === SCORE_VALUE ||
-          formGroup.controls['criteria'].value === CHOICE_CHOSEN_VALUE)
-      ) {
+      @if (formGroup.controls['nodeId']?.value !== '') {
         <select-component
           [nodeId]="formGroup.controls['nodeId'].value"
           [componentId]="formGroup.controls['componentId'].value"
