@@ -5,20 +5,18 @@ import oneBranchTwoPaths_project_import from './sampleData/curriculum/OneBranchT
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { of } from 'rxjs';
-import { ConfigService } from '../../assets/wise5/services/configService';
 import { Transition } from '../../assets/wise5/common/Transition';
 import { TransitionLogic } from '../../assets/wise5/common/TransitionLogic';
 import { ConstraintRemovalCriteria } from '../../assets/wise5/common/ConstraintRemovalCriteria';
 import { RANDOM_VALUE } from '../domain/branchCriteria';
 import { ConstraintRemovalCriteriaParams } from '../../assets/wise5/common/ConstraintRemovalCriteriaParams';
 import { expectConstraint, expectTransitionLogic } from './branchServiceTestHelperFunctions';
+import { DeleteBranchService } from '../../assets/wise5/services/deleteBranchService';
 
 const ENTER_NODE: string = 'enterNode';
 
 const branchStepId: string = 'node2';
 const canChangePath: boolean = false;
-let configService: ConfigService;
 let branchProjectJSON: any;
 let http: HttpClient;
 const maxPathsVisitable: number = 1;
@@ -29,6 +27,7 @@ const path3NodeId: string = 'node9';
 const pathCount: number = 2;
 let projectService: TeacherProjectService;
 let service: EditBranchService;
+let saveProjectSpy;
 
 describe('EditBranchService', () => {
   beforeEach(() => {
@@ -36,27 +35,97 @@ describe('EditBranchService', () => {
       imports: [StudentTeacherCommonServicesModule],
       providers: [
         EditBranchService,
+        DeleteBranchService,
         provideHttpClient(withInterceptorsFromDi()),
         TeacherProjectService
       ]
     });
     branchProjectJSON = copy(oneBranchTwoPaths_project_import);
-    configService = TestBed.inject(ConfigService);
     http = TestBed.inject(HttpClient);
     projectService = TestBed.inject(TeacherProjectService);
     service = TestBed.inject(EditBranchService);
-    configService.setConfig({ canEditProject: true });
     projectService.setProject(branchProjectJSON);
-    spyOn(configService, 'getMyUserInfo').and.returnValue({
-      userId: 4,
-      firstName: 'Spongebob',
-      lastName: 'Squarepants',
-      username: 'spongebobsquarepants'
-    });
-    spyOn(http, 'post').and.returnValue(of({}));
+    saveProjectSpy = spyOn(projectService, 'saveProject').and.returnValue(new Promise(() => {}));
   });
+  editBranch();
   addBranchPath();
 });
+
+function editBranch() {
+  describe('editBranch()', () => {
+    it('adds a path to an existing branch', () => {
+      const node = {
+        id: 'node2',
+        title: 'Branch point',
+        type: 'node',
+        transitionLogic: {
+          transitions: [
+            {
+              to: 'node3'
+            },
+            {
+              to: 'node5'
+            }
+          ],
+          howToChooseAmongAvailablePaths: 'random',
+          whenToChoosePath: 'enterNode',
+          canChangePath: false,
+          maxPathsVisitable: 1
+        }
+      };
+      const branchPaths = [
+        {
+          nodesInBranchPath: [
+            {
+              order: 4,
+              nodeId: 'node3'
+            },
+            {
+              order: 5,
+              nodeId: 'node4'
+            }
+          ],
+          transition: {
+            to: 'node3'
+          }
+        },
+        {
+          nodesInBranchPath: [
+            {
+              order: 6,
+              nodeId: 'node5'
+            },
+            {
+              order: 7,
+              nodeId: 'node6'
+            },
+            {
+              order: 8,
+              nodeId: 'node7'
+            }
+          ],
+          transition: {
+            to: 'node5'
+          }
+        },
+        {
+          new: true,
+          nodesInBranchPath: []
+        }
+      ];
+      const params = {
+        branchStepId: 'node2',
+        criteria: 'random',
+        mergeStepId: 'node8',
+        pathCount: 2
+      };
+      service.editBranch(node, branchPaths, params);
+      expectPathStepsToHaveTransitions(['node4', 'node7', 'node9'], mergeStepId);
+      expectPathStepsToHaveConstraints([path1NodeId, path2NodeId, path3NodeId], branchStepId);
+      expect(saveProjectSpy).toHaveBeenCalled();
+    });
+  });
+}
 
 function addBranchPath() {
   describe('addBranchPath()', () => {

@@ -13,7 +13,6 @@ import { DeleteBranchService } from '../../services/deleteBranchService';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 import { EditBranchService } from '../../services/editBranchService';
-import { AuthorBranchParams } from '../../common/AuthorBranchParams';
 import { EditBranchPathsComponent } from '../edit-branch-paths/edit-branch-paths.component';
 import { MatDividerModule } from '@angular/material/divider';
 
@@ -183,80 +182,12 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
     });
   }
 
-  protected async submit(): Promise<void> {
+  protected submit(): void {
     this.submitting = true;
-    const params = this.getBranchParams();
-    this.createNewPaths(params);
-    this.removePaths(this.branchPaths, params);
-    this.updateTransitions(params);
-    this.updateTransitionLogic(params);
-    this.saveProject();
-  }
-
-  private createNewPaths(params: AuthorBranchParams): void {
-    this.branchPaths.forEach((path: any, index: number) => {
-      if (path.new) {
-        this.editBranchService.addBranchPath(index, params);
-      }
-    });
-  }
-
-  private updateTransitions(params: AuthorBranchParams): void {
-    for (let x = 0; x < this.node.transitionLogic.transitions.length; x++) {
-      const transition = this.node.transitionLogic.transitions[x];
-      if (params.criteria === this.SCORE_VALUE) {
-        transition.criteria = [
-          {
-            name: this.SCORE_VALUE,
-            params: {
-              componentId: params.componentId,
-              nodeId: params.nodeId,
-              scores: params.paths[x].split(',')
-            }
-          }
-        ];
-      } else if (params.criteria === this.CHOICE_CHOSEN_VALUE) {
-        transition.criteria = [
-          {
-            name: this.CHOICE_CHOSEN_VALUE,
-            params: {
-              choiceIds: [params.paths[x]],
-              componentId: params.componentId,
-              nodeId: params.nodeId
-            }
-          }
-        ];
-      } else {
-        delete transition.criteria;
-      }
-    }
-  }
-
-  private updateTransitionLogic(params: AuthorBranchParams): void {
-    if (params.criteria === this.WORKGROUP_ID_VALUE || params.criteria === this.RANDOM_VALUE) {
-      this.node.transitionLogic.howToChooseAmongAvailablePaths = params.criteria;
-      this.node.transitionLogic.whenToChoosePath = 'enterNode';
-    } else {
-      this.node.transitionLogic.howToChooseAmongAvailablePaths = this.RANDOM_VALUE;
-      this.node.transitionLogic.whenToChoosePath =
-        params.branchStepId === params.nodeId ? 'studentDataChanged' : 'enterNode';
-    }
-  }
-
-  private removePaths(branchPaths: any[], params: AuthorBranchParams): void {
-    const nodeIdAfterMergeStep = this.projectService.getNodeIdAfter(params.mergeStepId);
-    let nodeIdToPlaceAfter = params.mergeStepId;
-    branchPaths
-      .filter((path: any) => path.delete)
-      .forEach((path: any) => {
-        this.deleteBranchService.deleteBranchPathAndPlaceAfter(
-          branchPaths,
-          path,
-          params.branchStepId,
-          nodeIdToPlaceAfter,
-          nodeIdAfterMergeStep
-        );
-        nodeIdToPlaceAfter = path.nodesInBranchPath[path.nodesInBranchPath.length - 1].nodeId;
+    this.editBranchService
+      .editBranch(this.node, this.branchPaths, this.getBranchParams())
+      .then(() => {
+        this.router.navigate(['..'], { relativeTo: this.route });
       });
   }
 }

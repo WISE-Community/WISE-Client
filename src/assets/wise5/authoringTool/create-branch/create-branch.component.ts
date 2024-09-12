@@ -74,7 +74,7 @@ export class CreateBranchComponent extends AbstractBranchAuthoringComponent {
       : this.formGroup.controls['criteria'].valid;
   }
 
-  protected async submit(): Promise<void> {
+  protected submit(): void {
     this.showCreatingBranchMessage();
     this.createBranchService.createBranch(this.getBranchParams()).then(() => {
       this.hideCreatingBranchMessage();
