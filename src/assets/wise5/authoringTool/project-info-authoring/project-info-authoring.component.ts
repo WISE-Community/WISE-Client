@@ -129,7 +129,7 @@ export class ProjectInfoAuthoringComponent {
 
   protected setFeaturedProjectIcon(projectIcon: string): void {
     this.projectService.setFeaturedProjectIcon(projectIcon).then(() => {
-      this.projectIcon = `projectIcons/${projectIcon}`;
+      this.projectIcon = `/projectIcons/${projectIcon}`;
       this.showProjectIcon();
       this.closeEditProjectIconMode();
     });
