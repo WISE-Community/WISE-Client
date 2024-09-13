@@ -29,17 +29,11 @@ export class InsertFirstNodeInBranchPathService {
   }
 
   private insertNodeBetweenInGroups(newNodeId: string, nodeIdAfter: string): void {
-    const groupNodes = this.projectService.getGroupNodes();
-    if (groupNodes != null) {
-      for (const group of groupNodes) {
-        this.insertNodeBeforeInGroup(group, newNodeId, nodeIdAfter);
-      }
+    for (const group of this.projectService.getGroupNodes()) {
+      this.insertNodeBeforeInGroup(group, newNodeId, nodeIdAfter);
     }
-    const inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
-    if (inactiveGroupNodes != null) {
-      for (const inactiveGroup of inactiveGroupNodes) {
-        this.insertNodeBeforeInGroup(inactiveGroup, newNodeId, nodeIdAfter);
-      }
+    for (const inactiveGroup of this.projectService.getInactiveGroupNodes()) {
+      this.insertNodeBeforeInGroup(inactiveGroup, newNodeId, nodeIdAfter);
     }
   }
 

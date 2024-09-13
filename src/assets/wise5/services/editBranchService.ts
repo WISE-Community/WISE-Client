@@ -69,33 +69,36 @@ export class EditBranchService extends AuthorBranchService {
   }
 
   private updateTransitions(node: any, params: AuthorBranchParams): void {
-    for (let x = 0; x < node.transitionLogic.transitions.length; x++) {
-      const transition = node.transitionLogic.transitions[x];
-      if (params.criteria === SCORE_VALUE) {
-        transition.criteria = [
-          {
-            name: SCORE_VALUE,
-            params: {
-              componentId: params.componentId,
-              nodeId: params.nodeId,
-              scores: params.paths[x].split(',')
-            }
+    for (let i = 0; i < node.transitionLogic.transitions.length; i++) {
+      this.updateTransition(params, node.transitionLogic.transitions[i], i);
+    }
+  }
+
+  private updateTransition(params: AuthorBranchParams, transition: any, index: number): void {
+    if (params.criteria === SCORE_VALUE) {
+      transition.criteria = [
+        {
+          name: SCORE_VALUE,
+          params: {
+            componentId: params.componentId,
+            nodeId: params.nodeId,
+            scores: params.paths[index].split(',')
           }
-        ];
-      } else if (params.criteria === CHOICE_CHOSEN_VALUE) {
-        transition.criteria = [
-          {
-            name: CHOICE_CHOSEN_VALUE,
-            params: {
-              choiceIds: [params.paths[x]],
-              componentId: params.componentId,
-              nodeId: params.nodeId
-            }
+        }
+      ];
+    } else if (params.criteria === CHOICE_CHOSEN_VALUE) {
+      transition.criteria = [
+        {
+          name: CHOICE_CHOSEN_VALUE,
+          params: {
+            choiceIds: [params.paths[index]],
+            componentId: params.componentId,
+            nodeId: params.nodeId
           }
-        ];
-      } else {
-        delete transition.criteria;
-      }
+        }
+      ];
+    } else {
+      delete transition.criteria;
     }
   }
 
