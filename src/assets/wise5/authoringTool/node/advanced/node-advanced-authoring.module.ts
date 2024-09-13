@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { NodeAdvancedBranchAuthoringComponent } from './branch/node-advanced-branch-authoring.component';
 import { NodeAdvancedConstraintAuthoringComponent } from './constraint/node-advanced-constraint-authoring.component';
 import { NodeAdvancedGeneralAuthoringComponent } from './general/node-advanced-general-authoring.component';
 import { NodeAdvancedJsonAuthoringComponent } from './json/node-advanced-json-authoring.component';
@@ -17,7 +16,6 @@ import { RequiredErrorLabelComponent } from './required-error-label/required-err
   declarations: [
     EditNodeRubricComponent,
     NodeAdvancedAuthoringComponent,
-    NodeAdvancedBranchAuthoringComponent,
     NodeAdvancedConstraintAuthoringComponent,
     NodeAdvancedGeneralAuthoringComponent,
     NodeAdvancedJsonAuthoringComponent,
@@ -26,7 +24,6 @@ import { RequiredErrorLabelComponent } from './required-error-label/required-err
   exports: [
     EditNodeRubricComponent,
     NodeAdvancedAuthoringComponent,
-    NodeAdvancedBranchAuthoringComponent,
     NodeAdvancedConstraintAuthoringComponent,
     NodeAdvancedGeneralAuthoringComponent,
     NodeAdvancedJsonAuthoringComponent,

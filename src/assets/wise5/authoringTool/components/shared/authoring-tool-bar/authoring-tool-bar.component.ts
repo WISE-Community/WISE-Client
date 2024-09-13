@@ -16,7 +16,10 @@ export class AuthoringToolBarComponent {
   private subscriptions: Subscription = new Subscription();
   protected viewName: string;
 
-  constructor(private notificationService: NotificationService, private router: Router) {}
+  constructor(
+    private notificationService: NotificationService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.processUI();
