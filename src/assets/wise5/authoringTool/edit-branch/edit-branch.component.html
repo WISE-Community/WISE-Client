@@ -1,0 +1,61 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-between center">
+  <h4 class="title" i18n>Edit Branching Structure</h4>
+  <button mat-raised-button color="warn" (click)="removeBranch()" [disabled]="submitting" i18n>
+    Remove Branching
+  </button>
+</div>
+<p class="strong" i18n>Branch Step: {{ targetTitle }}</p>
+<mat-divider></mat-divider>
+<form fxLayout="column" [formGroup]="formGroup">
+  <select-branch-criteria
+    [criteria]="formGroup.controls['criteria'].value"
+    (criteriaChangedEvent)="setCriteria($event)"
+  />
+  @if (
+    formGroup.controls['criteria'].value === SCORE_VALUE ||
+    formGroup.controls['criteria'].value === CHOICE_CHOSEN_VALUE
+  ) {
+    <p class="strong" i18n>Reference component:</p>
+    <div fxLayout="row wrap" fxLayoutGap="8px">
+      <select-step
+        [nodeId]="formGroup.controls['nodeId'].value"
+        (stepChangedEvent)="setNodeId($event)"
+      />
+      @if (formGroup.controls['nodeId']?.value !== '') {
+        <select-component
+          [nodeId]="formGroup.controls['nodeId'].value"
+          [componentId]="formGroup.controls['componentId'].value"
+          [allowedComponentTypes]="allowedComponentTypes"
+          (componentChangedEvent)="setComponentId($event)"
+        />
+      }
+    </div>
+  }
+  <p class="strong" i18n>Paths:</p>
+  <edit-branch-paths
+    [pathCount]="formGroup.controls['pathCount'].value"
+    [criteria]="formGroup.controls['criteria'].value"
+    [nodeId]="formGroup.controls['nodeId']?.value"
+    [componentId]="formGroup.controls['componentId']?.value"
+    [pathFormGroup]="formGroup.controls['pathFormGroup']"
+    [branchPaths]="branchPaths"
+  />
+  <mat-divider></mat-divider>
+  <p class="strong" i18n>Merge Step: {{ mergeStepTitle }}</p>
+  <mat-divider></mat-divider>
+  <div fxLayoutAlign="end center" fxLayoutGap="8px">
+    <button mat-button routerLink=".." i18n>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="formGroup.invalid || submitting"
+      (click)="submit()"
+      class="button--progress"
+    >
+      @if (submitting) {
+        <mat-progress-bar mode="indeterminate" />
+      }
+      <span i18n>Submit</span>
+    </button>
+  </div>
+</form>

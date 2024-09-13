@@ -18,14 +18,13 @@ export class AddLessonButtonComponent {
   @Input() lessonId: string;
   @ViewChild(MatMenuTrigger) menuTrigger: MatMenuTrigger;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   protected addFirstLesson(): void {
     this.goToAddLessonView(this.active ? 'group0' : 'inactiveGroups');
-  }
-
-  protected addLessonAfter(): void {
-    this.goToAddLessonView(this.lessonId);
   }
 
   private goToAddLessonView(nodeId: string): void {

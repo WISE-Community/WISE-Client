@@ -1,0 +1,56 @@
+<div [formGroup]="pathFormGroup">
+  <ng-container formArrayName="paths">
+    @for (path of branchPaths; track path; let index = $index) {
+      <div class="path">
+        <div fxLayoutAlign="space-between center" fxLayoutGap="8px">
+          <div fxLayoutAlign="center center" fxLayoutGap="8px">
+            <span class="strong" i18n>Path {{ index + 1 }}</span>
+            @if (criteria === SCORE_VALUE) {
+              <mat-form-field class="form-field-no-hint">
+                <mat-label i18n>Score</mat-label>
+                <input matInput [formControlName]="index" />
+              </mat-form-field>
+            } @else if (criteria === CHOICE_CHOSEN_VALUE) {
+              <mat-form-field class="form-field-no-hint">
+                <mat-label i18n>Choice Chosen</mat-label>
+                <mat-select [formControlName]="index">
+                  @for (choice of choices; track choice) {
+                    <mat-option [value]="choice.id">
+                      {{ choice.text }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            }
+          </div>
+          @if (path.delete) {
+            <span class="warn" i18n
+              >This path will be deleted and its steps will be moved after the branching
+              structure</span
+            >
+          } @else {
+            <button
+              mat-icon-button
+              color="primary"
+              matTooltip="Delete branch path"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              [disabled]="hasTwoPaths()"
+              (click)="deletePath(index)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          }
+        </div>
+        <div class="path-without-parameters">
+          <display-branch-path-steps [nodes]="path.nodesInBranchPath" />
+        </div>
+      </div>
+    }
+  </ng-container>
+</div>
+<div>
+  <button mat-flat-button color="primary" (click)="addPath()">
+    <mat-icon>add</mat-icon><span i18n>Add Path</span>
+  </button>
+</div>

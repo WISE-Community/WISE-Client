@@ -169,7 +169,7 @@ export class TeacherProjectService extends ProjectService {
    * @param node the new node
    * @param nodeId the node to add after
    */
-  createNodeAfter(newNode, nodeId) {
+  createNodeAfter(newNode: any, nodeId: string): void {
     if (this.isInactive(nodeId)) {
       this.setIdToNode(newNode.id, newNode);
       this.addInactiveNodeInsertAfter(newNode, nodeId);
@@ -1659,7 +1659,7 @@ export class TeacherProjectService extends ProjectService {
    * @param toNodeId the to node id
    * @return an array of nodes that are in the branch path
    */
-  getNodeIdsInBranch(fromNodeId, toNodeId) {
+  getNodeIdsInBranch(fromNodeId: string, toNodeId: string): any[] {
     const nodeIdsInBranch = [];
     for (const node of this.getNodes()) {
       if (this.hasBranchPathTakenConstraint(node, fromNodeId, toNodeId)) {
@@ -1676,7 +1676,7 @@ export class TeacherProjectService extends ProjectService {
    * @param constraints An array of node ids.
    * @return An array of ordered node ids.
    */
-  orderNodeIds(nodeIds) {
+  private orderNodeIds(nodeIds: string[]): string[] {
     let orderedNodeIds = this.getFlattenedProjectAsNodeIds();
     return nodeIds.sort(this.nodeIdsComparatorGenerator(orderedNodeIds));
   }
@@ -1767,6 +1767,21 @@ export class TeacherProjectService extends ProjectService {
       }
     }
     return branchPathTakenConstraints;
+  }
+
+  /**
+   * Check if a node is the first node in a branch path
+   * @param nodeId the node id
+   * @return whether the node is the first node in a branch path
+   */
+  isFirstNodeInBranchPath(nodeId: string): boolean {
+    return this.getNodes()
+      .concat(this.getInactiveNodes())
+      .some(
+        (node) =>
+          node.transitionLogic?.transitions?.length > 1 &&
+          node.transitionLogic.transitions.some((transition) => transition.to === nodeId)
+      );
   }
 
   addSpace(space) {

@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { AddStepTarget } from '../../../../app/domain/addStepTarget';
 
 @Component({
   selector: 'add-step-button',
@@ -14,7 +15,9 @@ import { MatMenuModule } from '@angular/material/menu';
   imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule]
 })
 export class AddStepButtonComponent {
-  @Input() first: boolean;
+  protected branchMergePoint: boolean;
+  protected branchPathStep: boolean;
+  protected branchPoint: boolean;
   @Input() nodeId: string;
 
   constructor(
@@ -23,19 +26,55 @@ export class AddStepButtonComponent {
     private router: Router
   ) {}
 
+  ngOnInit(): void {
+    this.branchPoint = this.projectService.isBranchPoint(this.nodeId);
+    this.branchPathStep = this.projectService.isNodeInAnyBranchPath(this.nodeId);
+    this.branchMergePoint = this.projectService.isBranchMergePoint(this.nodeId);
+  }
+
   protected addStepBefore(): void {
-    this.goToAddStepView(this.projectService.getParentGroupId(this.nodeId));
+    if (this.projectService.isFirstStepInLesson(this.nodeId)) {
+      this.goToAddStepViewForIn(this.projectService.getParentGroupId(this.nodeId));
+    } else {
+      const previousNodes = this.projectService.getNodesByToNodeId(this.nodeId);
+      const previousNodeId: string = previousNodes[0].id;
+      if (this.projectService.isFirstNodeInBranchPath(this.nodeId)) {
+        this.goToAddStepViewForFirstStepInBranchPath(previousNodeId, this.nodeId);
+      } else {
+        this.goToAddStepViewForAfter(previousNodeId);
+      }
+    }
   }
 
-  protected addStepAfter(): void {
-    this.goToAddStepView(this.nodeId);
-  }
-
-  private goToAddStepView(nodeId: string): void {
+  private goToAddStepViewForIn(groupId: string): void {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
+      state: new AddStepTarget('in', groupId)
+    });
+  }
+
+  protected goToAddStepViewForAfter(previousNodeId: string): void {
+    this.router.navigate(['add-node', 'choose-template'], {
+      relativeTo: this.route,
+      state: new AddStepTarget('after', previousNodeId)
+    });
+  }
+
+  private goToAddStepViewForFirstStepInBranchPath(
+    previousNodeId: string,
+    nextNodeId: string
+  ): void {
+    this.router.navigate(['add-node', 'choose-template'], {
+      relativeTo: this.route,
+      state: new AddStepTarget('firstStepInBranchPath', null, previousNodeId, nextNodeId)
+    });
+  }
+
+  protected goToCreateBranchView(): void {
+    this.router.navigate(['create-branch'], {
+      relativeTo: this.route,
       state: {
-        targetId: nodeId
+        targetId: this.nodeId
       }
     });
   }

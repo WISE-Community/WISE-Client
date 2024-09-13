@@ -1,33 +1,28 @@
-<ng-container *ngIf="first">
-  <button
-    mat-icon-button
-    color="primary"
-    [matMenuTriggerFor]="step"
-    #menuTrigger="matMenuTrigger"
-    matTooltip="Add step"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>add_circle</mat-icon>
-  </button>
-  <mat-menu #step="matMenu">
+<button
+  mat-icon-button
+  color="primary"
+  [matMenuTriggerFor]="step"
+  #menuTrigger="matMenuTrigger"
+  matTooltip="Add step"
+  matTooltipPosition="above"
+  i18n-matTooltip
+>
+  <mat-icon>add_circle</mat-icon>
+</button>
+<mat-menu #step="matMenu">
+  @if (!branchMergePoint) {
     <button mat-menu-item (click)="addStepBefore()">
       <mat-icon>add_circle</mat-icon><span i18n>Add step before</span>
     </button>
-    <button mat-menu-item (click)="addStepAfter()">
+  }
+  @if (!branchPoint) {
+    <button mat-menu-item (click)="goToAddStepViewForAfter(nodeId)">
       <mat-icon>add_circle</mat-icon><span i18n>Add step after</span>
     </button>
-  </mat-menu>
-</ng-container>
-<ng-container *ngIf="!first">
-  <button
-    mat-icon-button
-    color="primary"
-    (click)="addStepAfter()"
-    matTooltip="Add step after"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>add_circle</mat-icon>
-  </button>
-</ng-container>
+  }
+  @if (!branchPoint && !branchPathStep) {
+    <button mat-menu-item (click)="goToCreateBranchView()">
+      <mat-icon>add_circle</mat-icon><span i18n>Branch off this step</span>
+    </button>
+  }
+</mat-menu>

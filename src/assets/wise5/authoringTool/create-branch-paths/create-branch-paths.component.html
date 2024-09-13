@@ -1,0 +1,36 @@
+@if (
+  nodeId != null &&
+  nodeId !== '' &&
+  componentId != null &&
+  componentId !== '' &&
+  (criteria === SCORE_VALUE || criteria === CHOICE_CHOSEN_VALUE)
+) {
+  <div [formGroup]="pathFormGroup">
+    <ng-container formArrayName="paths">
+      @for (formControl of pathsFormArray.controls; track formControl; let index = $index) {
+        <div class="path">
+          <div fxLayoutAlign="start center" fxLayoutGap="8px">
+            <span class="strong" i18n>Path {{ index + 1 }}</span>
+            @if (criteria === SCORE_VALUE) {
+              <mat-form-field class="form-field-no-hint">
+                <mat-label i18n>Score</mat-label>
+                <input matInput [formControlName]="index" />
+              </mat-form-field>
+            } @else if (criteria === CHOICE_CHOSEN_VALUE) {
+              <mat-form-field class="form-field-no-hint">
+                <mat-label i18n>Choice Chosen</mat-label>
+                <mat-select [formControlName]="index">
+                  @for (choice of choices; track choice) {
+                    <mat-option [value]="choice.id">
+                      {{ choice.text }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            }
+          </div>
+        </div>
+      }
+    </ng-container>
+  </div>
+}

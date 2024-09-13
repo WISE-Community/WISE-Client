@@ -29,6 +29,13 @@ export class SelectComponentComponent {
       this.calculateComponents(this.nodeId);
       this.setComponentId();
     }
+    if (changes.allowedComponentTypes) {
+      this.allowedComponentTypes = changes.allowedComponentTypes.currentValue;
+      this.calculateComponents(this.nodeId);
+    }
+    if (changes.componentId) {
+      this.componentId = changes.componentId.currentValue;
+    }
   }
 
   private calculateComponents(nodeId: string): void {

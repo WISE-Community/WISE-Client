@@ -60,8 +60,10 @@ import { TranslatableInputComponent } from '../../assets/wise5/authoringTool/com
 import { TranslatableTextareaComponent } from '../../assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';
 import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-step-button/add-step-button.component';
+import { CreateBranchComponent } from '../../assets/wise5/authoringTool/create-branch/create-branch.component';
 import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringTool/components/preview-component-button/preview-component-button.component';
 import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-tools.component';
+import { EditBranchComponent } from '../../assets/wise5/authoringTool/edit-branch/edit-branch.component';
 import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 
 @NgModule({
@@ -102,17 +104,18 @@ import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/c
     ProjectListComponent
   ],
   imports: [
+    CreateBranchComponent,
     AddComponentButtonComponent,
     AddLessonButtonComponent,
     AddStepButtonComponent,
     AddYourOwnNodeComponent,
     ChooseNewNodeTemplateComponent,
-    StudentTeacherCommonModule,
     ChooseNewComponent,
     ComponentAuthoringModule,
     ComponentStudentModule,
     ComponentTypeButtonComponent,
     CopyComponentButtonComponent,
+    EditBranchComponent,
     EditNodeTitleComponent,
     MatBadgeModule,
     MatChipsModule,
@@ -127,6 +130,7 @@ import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/c
     SaveIndicatorComponent,
     StepToolsComponent,
     StructureAuthoringModule,
+    StudentTeacherCommonModule,
     TeacherNodeIconComponent,
     TranslatableInputComponent,
     TranslatableRichTextEditorComponent,

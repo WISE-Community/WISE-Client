@@ -36,6 +36,8 @@ import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-
 import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
 import { AddLessonChooseTemplateComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-template/add-lesson-choose-template.component';
 import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.resolver';
+import { CreateBranchComponent } from '../../assets/wise5/authoringTool/create-branch/create-branch.component';
+import { EditBranchComponent } from '../../assets/wise5/authoringTool/edit-branch/edit-branch.component';
 
 const routes: Routes = [
   {
@@ -116,6 +118,10 @@ const routes: Routes = [
               }
             ]
           },
+          {
+            path: 'create-branch',
+            component: CreateBranchComponent
+          },
           { path: 'advanced', component: AdvancedProjectAuthoringComponent },
           {
             path: 'asset',
@@ -123,6 +129,10 @@ const routes: Routes = [
           },
           { path: 'choose-copy-location', component: ChooseCopyNodeLocationComponent },
           { path: 'choose-move-location', component: ChooseMoveNodeLocationComponent },
+          {
+            path: 'edit-branch',
+            component: EditBranchComponent
+          },
           { path: 'info', component: ProjectInfoAuthoringComponent },
           { path: 'milestones', component: MilestonesAuthoringComponent },
           {

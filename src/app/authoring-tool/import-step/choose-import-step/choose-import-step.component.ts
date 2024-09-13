@@ -5,6 +5,7 @@ import { ConfigService } from '../../../../assets/wise5/services/configService';
 import { CopyNodesService } from '../../../../assets/wise5/services/copyNodesService';
 import { InsertNodesService } from '../../../../assets/wise5/services/insertNodesService';
 import { AbstractImportStepComponent } from '../../../../assets/wise5/authoringTool/addNode/abstract-import-step/abstract-import-step.component';
+import { InsertFirstNodeInBranchPathService } from '../../../../assets/wise5/services/insertFirstNodeInBranchPathService';
 
 @Component({
   selector: 'choose-import-step',
@@ -19,12 +20,21 @@ export class ChooseImportStepComponent extends AbstractImportStepComponent {
   constructor(
     protected configService: ConfigService,
     protected copyNodesService: CopyNodesService,
+    protected insertFirstNodeInBranchPathService: InsertFirstNodeInBranchPathService,
     protected insertNodesService: InsertNodesService,
     protected projectService: TeacherProjectService,
     protected route: ActivatedRoute,
     protected router: Router
   ) {
-    super(configService, copyNodesService, insertNodesService, projectService, route, router);
+    super(
+      configService,
+      copyNodesService,
+      insertFirstNodeInBranchPathService,
+      insertNodesService,
+      projectService,
+      route,
+      router
+    );
   }
 
   ngOnInit() {

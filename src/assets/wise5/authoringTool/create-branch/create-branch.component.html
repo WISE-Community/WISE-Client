@@ -1,0 +1,61 @@
+<h4 i18n>Create Branching Structure</h4>
+<p class="strong" i18n>Branch Step: {{ targetTitle }}</p>
+<mat-divider></mat-divider>
+<form fxLayout="column" [formGroup]="formGroup">
+  <select-path-count
+    [pathCount]="formGroup.controls['pathCount'].value"
+    (pathCountChangedEvent)="setPathCount($event)"
+  />
+  @if (formGroup.controls['pathCount'].value > 1) {
+    <select-branch-criteria
+      [criteria]="formGroup.controls['criteria']"
+      (criteriaChangedEvent)="setCriteria($event)"
+    />
+  }
+  @if (
+    formGroup.controls['criteria'].value === SCORE_VALUE ||
+    formGroup.controls['criteria'].value === CHOICE_CHOSEN_VALUE
+  ) {
+    <p class="strong" i18n>Reference component:</p>
+    <div fxLayout="row wrap" fxLayoutGap="8px">
+      <select-step
+        [nodeId]="formGroup.controls['nodeId'].value"
+        (stepChangedEvent)="setNodeId($event)"
+      />
+      @if (formGroup.controls['nodeId']?.value !== '') {
+        <select-component
+          [nodeId]="formGroup.controls['nodeId'].value"
+          [componentId]="formGroup.controls['componentId'].value"
+          [allowedComponentTypes]="allowedComponentTypes"
+          (componentChangedEvent)="setComponentId($event)"
+        />
+      }
+    </div>
+  }
+  @if (formGroup.controls['componentId']?.value) {
+    <p class="strong" i18n>Paths:</p>
+  }
+  <create-branch-paths
+    [pathCount]="formGroup.controls['pathCount'].value"
+    [criteria]="formGroup.controls['criteria'].value"
+    [nodeId]="formGroup.controls['nodeId']?.value"
+    [componentId]="formGroup.controls['componentId']?.value"
+    [pathFormGroup]="formGroup.controls['pathFormGroup']"
+  />
+  @if (showSelectMergeStep()) {
+    <select-merge-step [branchStepId]="targetId" (selectMergeStepEvent)="setMergeStep($event)" />
+  }
+  <mat-divider></mat-divider>
+  <div fxLayoutAlign="end center" fxLayoutGap="12px">
+    <button mat-button routerLink=".." i18n>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="formGroup.invalid"
+      (click)="submit()"
+      i18n
+    >
+      Submit
+    </button>
+  </div>
+</form>

@@ -7,6 +7,7 @@ import { ExpandEvent } from '../domain/expand-event';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
+import { AddStepTarget } from '../../../../app/domain/addStepTarget';
 
 @Component({
   selector: 'project-authoring-lesson',
@@ -67,12 +68,10 @@ export class ProjectAuthoringLessonComponent {
     }
   }
 
-  protected addStepInside(nodeId: string): void {
+  protected addStepInside(groupId: string): void {
     this.router.navigate(['add-node', 'choose-template'], {
       relativeTo: this.route,
-      state: {
-        targetId: nodeId
-      }
+      state: new AddStepTarget('in', groupId)
     });
   }
 

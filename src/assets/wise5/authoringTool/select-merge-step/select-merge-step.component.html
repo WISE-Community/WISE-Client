@@ -1,0 +1,9 @@
+<mat-form-field class="select-merge form-field-no-hint">
+  <mat-label i18n>Merge Step</mat-label>
+  <mat-select [(ngModel)]="mergeStepId" (ngModelChange)="selectMergeStepEvent.emit($event)">
+    <mat-option *ngIf="nextStepId !== ''" [value]="nextStepId" i18n>
+      Use Next Step In Unit ({{ nextStepTitle }})
+    </mat-option>
+    <mat-option [value]="''" i18n>Create New Step</mat-option>
+  </mat-select>
+</mat-form-field>

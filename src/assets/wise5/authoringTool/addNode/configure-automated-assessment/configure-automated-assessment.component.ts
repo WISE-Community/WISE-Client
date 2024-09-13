@@ -5,6 +5,7 @@ import { CopyNodesService } from '../../../services/copyNodesService';
 import { InsertNodesService } from '../../../services/insertNodesService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { AbstractImportStepComponent } from '../abstract-import-step/abstract-import-step.component';
+import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
 
 @Component({
   selector: 'configure-automated-assessment',
@@ -18,12 +19,21 @@ export class ConfigureAutomatedAssessmentComponent extends AbstractImportStepCom
   constructor(
     protected configService: ConfigService,
     protected copyNodesService: CopyNodesService,
+    protected insertFirstNodeInBranchPathService: InsertFirstNodeInBranchPathService,
     protected insertNodesService: InsertNodesService,
     protected projectService: TeacherProjectService,
     protected route: ActivatedRoute,
     protected router: Router
   ) {
-    super(configService, copyNodesService, insertNodesService, projectService, route, router);
+    super(
+      configService,
+      copyNodesService,
+      insertFirstNodeInBranchPathService,
+      insertNodesService,
+      projectService,
+      route,
+      router
+    );
   }
 
   ngOnInit(): void {

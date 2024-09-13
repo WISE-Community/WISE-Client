@@ -32,6 +32,10 @@ import { MilestoneReportService } from '../../assets/wise5/services/milestoneRep
 import { AuthoringRoutingModule } from './authoring-routing.module';
 import { RouterModule } from '@angular/router';
 import { ComponentInfoService } from '../../assets/wise5/services/componentInfoService';
+import { CreateBranchService } from '../../assets/wise5/services/createBranchService';
+import { EditBranchService } from '../../assets/wise5/services/editBranchService';
+import { InsertFirstNodeInBranchPathService } from '../../assets/wise5/services/insertFirstNodeInBranchPathService';
+import { DeleteBranchService } from '../../assets/wise5/services/deleteBranchService';
 import { TeacherProjectTranslationService } from '../../assets/wise5/services/teacherProjectTranslationService';
 import { DeleteTranslationsService } from '../../assets/wise5/services/deleteTranslationsService';
 import { CopyTranslationsService } from '../../assets/wise5/services/copyTranslationsService';
@@ -48,7 +52,11 @@ import { RegisterProjectService } from '../../assets/wise5/services/registerProj
     CopyNodesService,
     CopyProjectService,
     CopyTranslationsService,
+    CreateBranchService,
     CreateComponentService,
+    DeleteBranchService,
+    EditBranchService,
+    InsertFirstNodeInBranchPathService,
     DataExportService,
     { provide: DataService, useExisting: TeacherDataService },
     TeacherProjectTranslationService,
