@@ -27,7 +27,7 @@
         </div>
         <div *ngIf="reportEnabled" fxLayout="row" fxLayoutAlign="center center" fxFlex="25">
           <span *ngIf="reportHasWork" class="success center" i18n>
-            Latest Work: {{ workgroup.report.serverSaveTime | date : 'mediumDate' }}
+            Latest Work: {{ workgroup.report.serverSaveTime | date: 'mediumDate' }}
           </span>
           <span *ngIf="!reportHasWork" class="text-secondary" i18n> No Work </span>
         </div>
@@ -42,8 +42,7 @@
           [config]="notebookConfig"
           [viewOnly]="true"
           [workgroupId]="workgroup.workgroupId"
-        >
-        </notebook-notes>
+        />
       </mat-tab>
       <mat-tab *ngIf="reportEnabled" label="{{ reportTitle }}">
         <notebook-report

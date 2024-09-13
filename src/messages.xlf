@@ -6496,39 +6496,39 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">109</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="58856baa2a91a512984bddd54ec1d2fe794d5da7" datatype="html">
-        <source> You haven&apos;t created any <x id="INTERPOLATION" equiv-text="{{ label.plural }}"/> yet. </source>
+      <trans-unit id="55d381c7037f3e53e038a4aeef9894e004156e2f" datatype="html">
+        <source>You haven&apos;t created any <x id="INTERPOLATION" equiv-text="{{ label.plural }}"/> yet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.html</context>
-          <context context-type="linenumber">3,5</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6b19ee5aa027ce641a0df6d12215e956fce185f5" datatype="html">
         <source>Select item to insert</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3dce7e9686e2a02f2f3cc28c5ecec0791f5dda86" datatype="html">
         <source>Add <x id="INTERPOLATION" equiv-text="{{ label.singular }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="61a2cd64144538c1628586ca7a0981489013b3e0" datatype="html">
-        <source> Team hasn&apos;t created any <x id="INTERPOLATION" equiv-text="{{ label.plural }}"/> yet. </source>
+      <trans-unit id="787c4b744ae99accb57fc1c9324e75f250245743" datatype="html">
+        <source>Team hasn&apos;t created any <x id="INTERPOLATION" equiv-text="{{ label.plural }}"/> yet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.html</context>
-          <context context-type="linenumber">82,84</context>
+          <context context-type="linenumber">94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1283241409166703000" datatype="html">
         <source>Personal</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.ts</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="14ab0b74dd05d40df302ebb4b98952b702ebfd56" datatype="html">
@@ -14417,7 +14417,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>All Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">371</context>
+          <context context-type="linenumber">374</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
@@ -14432,7 +14432,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">372</context>
+          <context context-type="linenumber">375</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
@@ -14443,14 +14443,14 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Unlock for <x id="PH" equiv-text="this.getPeriodLabel()"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">377</context>
+          <context context-type="linenumber">380</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2330813372531032088" datatype="html">
         <source>Lock for <x id="PH" equiv-text="this.getPeriodLabel()"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">378</context>
+          <context context-type="linenumber">381</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5411ee1bc7179f254f2db73cf448e995fca45f43" datatype="html">
@@ -14460,8 +14460,8 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="71ea7dff11ec5bc75f1f9c0a86398e08df9ebea3" datatype="html">
-        <source> Latest Work: <x id="INTERPOLATION" equiv-text="{{ workgroup.report.serverSaveTime | date : &apos;mediumDate&apos; }}"/> </source>
+      <trans-unit id="ee8f01f880aa93450e427573939a31763f76d1a8" datatype="html">
+        <source> Latest Work: <x id="INTERPOLATION" equiv-text="{{ workgroup.report.serverSaveTime | date: &apos;mediumDate&apos; }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component.html</context>
           <context context-type="linenumber">29,31</context>

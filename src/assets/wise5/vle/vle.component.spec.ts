@@ -39,7 +39,7 @@ let saveVLEEventSpy: jasmine.Spy;
 describe('VLEComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NotebookNotesComponent, SafeUrl, VLEComponent],
+      declarations: [SafeUrl, VLEComponent],
       imports: [
         BrowserAnimationsModule,
         FormsModule,
@@ -56,6 +56,7 @@ describe('VLEComponent', () => {
         NodeComponent,
         NodeIconComponent,
         NodeStatusIconComponent,
+        NotebookNotesComponent,
         StepToolsComponent,
         StudentTeacherCommonServicesModule,
         TopBarComponent
