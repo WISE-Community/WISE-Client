@@ -416,7 +416,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/add-component/choose-new-component/choose-new-component.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Select the component type you want to add or</target>
+        <target state="translated">選擇想要組件類別加入或</target>
       </trans-unit>
       <trans-unit id="e9500a66230abb4f89c6376f184208a1f63d49a9" datatype="html">
         <source> import from another unit </source>
@@ -424,7 +424,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/add-component/choose-new-component/choose-new-component.component.html</context>
           <context context-type="linenumber">5,7</context>
         </context-group>
-        <target state="needs-translation"> import from another unit </target>
+        <target state="translated"> 從另一個單元匯入 </target>
       </trans-unit>
       <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
         <source>Cancel</source>
@@ -438,7 +438,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-unit/choose-import-unit.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/copy-project-dialog/copy-project-dialog.component.html</context>
@@ -486,7 +486,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.html</context>
@@ -494,11 +494,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component.html</context>
@@ -507,6 +507,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component.html</context>
           <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/create-branch/create-branch.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.html</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component.html</context>
@@ -1484,7 +1492,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank/edit-question-bank.component.html</context>
           <context context-type="linenumber">28,30</context>
         </context-group>
-        <target state="needs-translation"> Student can select questions to use in Peer Chat </target>
+        <target state="translated"> 學生可以選擇問題用於同儕討論。 </target>
       </trans-unit>
       <trans-unit id="896589cbf4473a405f00a4068706375829758d92" datatype="html">
         <source>Max Number of Questions</source>
@@ -1500,7 +1508,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step/choose-import-step.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Choose the step(s) that you want to import, then select Next.</target>
+        <target state="translated">選擇一個要匯入的步驟，接著選擇下一步。</target>
       </trans-unit>
       <trans-unit id="cf540b0175594b4ab4215257835c477a2fe4cb5f" datatype="html">
         <source>Selected unit: <x id="INTERPOLATION" equiv-text="{{ project?.metadata.title }}"/></source>
@@ -1508,7 +1516,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step/choose-import-step.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Selected unit: <x id="INTERPOLATION" equiv-text="{{ project?.metadata.title }}"/></target>
+        <target state="translated">已選擇的單元：<x id="INTERPOLATION" equiv-text="{{ project?.metadata.title }}"/></target>
       </trans-unit>
       <trans-unit id="76176dda9f079e8ab3c78d6975eee76b8b3eddad" datatype="html">
         <source>Preview Unit</source>
@@ -1594,19 +1602,19 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-unit/choose-import-unit.component.html</context>
-          <context context-type="linenumber">34,36</context>
+          <context context-type="linenumber">28,30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-automated-assessment/choose-automated-assessment.component.html</context>
-          <context context-type="linenumber">44,46</context>
+          <context context-type="linenumber">38,40</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
-          <context context-type="linenumber">46,48</context>
+          <context context-type="linenumber">40,42</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component.html</context>
-          <context context-type="linenumber">37,39</context>
+          <context context-type="linenumber">31,33</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/structure/jigsaw/jigsaw.component.html</context>
@@ -1674,15 +1682,19 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">75</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.html</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/structure/jigsaw/jigsaw.component.html</context>
@@ -2010,7 +2022,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/common/project-language-chooser/project-language-chooser.component.ts</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation">Select language</target>
+        <target state="translated">選擇語言</target>
       </trans-unit>
       <trans-unit id="4c00c8f929591b166c1e22e74a414a4dd42ff00b" datatype="html">
         <source>Thank you for contacting WISE!</source>
@@ -2380,6 +2392,86 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="translated">在編輯方面需要幫助</target>
       </trans-unit>
+      <trans-unit id="5115344169131680845" datatype="html">
+        <source>Workgroup ID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/branchCriteria.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <target state="translated">作業小組ID</target>
+      </trans-unit>
+      <trans-unit id="7123653594948067002" datatype="html">
+        <source>Score</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/branchCriteria.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
+          <context context-type="linenumber">395</context>
+        </context-group>
+        <target state="needs-translation">Score</target>
+      </trans-unit>
+      <trans-unit id="8352660755693654653" datatype="html">
+        <source>Choice Chosen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/branchCriteria.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <target state="translated">選擇的選項</target>
+      </trans-unit>
+      <trans-unit id="1102665189929883417" datatype="html">
+        <source>Random</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/branchCriteria.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/PeerGroupingLogic.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-logic-options.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <target state="translated">隨機</target>
+      </trans-unit>
       <trans-unit id="511208907501917679" datatype="html">
         <source>Chinese (Simplified)</source>
         <context-group purpose="location">
@@ -2390,7 +2482,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
           <context context-type="linenumber">30</context>
         </context-group>
-        <target state="translated">簡體中文</target>
+        <target state="translated">中文 (簡體)</target>
       </trans-unit>
       <trans-unit id="4303868626158306518" datatype="html">
         <source>Chinese (Traditional)</source>
@@ -2398,7 +2490,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Chinese (Traditional)</target>
+        <target state="translated">中文 (繁體)</target>
       </trans-unit>
       <trans-unit id="3071065188816255493" datatype="html">
         <source>Dutch</source>
@@ -2406,7 +2498,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Dutch</target>
+        <target state="translated">荷蘭語</target>
       </trans-unit>
       <trans-unit id="5866254605255506989" datatype="html">
         <source>English</source>
@@ -2486,7 +2578,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">Vietnamese</target>
+        <target state="translated">越南語</target>
       </trans-unit>
       <trans-unit id="8954371642157143595" datatype="html">
         <source>Elementary School</source>
@@ -5194,7 +5286,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">297,303</context>
         </context-group>
-        <target state="needs-translation"> We recommend that you go through the project and select a few steps that you think best demonstrate the students' understanding of the complex concepts covered in the module and grade those steps. Then tell your students they must complete all questions but should concentrate their efforts on the key steps. We recognize that critically grading each step is very time consuming and unpractical. </target>
+        <target state="translated"> 我們建議您檢視整個專案，並選擇幾個您認為最能展現學生對模組中複雜概念理解的步驟進行評分。然後告訴學生們，雖然他們必須完成所有問題，但應該把重點放在關鍵步驟上。我們了解逐步進行嚴格評分非常耗時且不切實際。 </target>
       </trans-unit>
       <trans-unit id="d43085815938bf7369d9f4d71748c90955f4ac4c" datatype="html">
         <source>What is the Real Time Classroom Monitor?</source>
@@ -6326,7 +6418,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">Select unit</target>
+        <target state="translated">選擇單元</target>
       </trans-unit>
       <trans-unit id="53c647ed0bda0187e7653c35e0856deea80c268b" datatype="html">
         <source>(ID: <x id="INTERPOLATION" equiv-text="{{ project.id }}"/>)</source>
@@ -6518,7 +6610,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.ts</context>
           <context context-type="linenumber">30</context>
         </context-group>
-        <target state="needs-translation">Select all units</target>
+        <target state="translated">選擇所有單元</target>
       </trans-unit>
       <trans-unit id="6028472408314831177" datatype="html">
         <source>Sharing permissions updated for <x id="firstName" equiv-text="sharedOwner.firstName"/> <x id="lastName" equiv-text="sharedOwner.lastName"/>.</source>
@@ -6942,7 +7034,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/register/register-teacher-complete/register-teacher-complete.component.html</context>
           <context context-type="linenumber">4,7</context>
         </context-group>
-        <target state="needs-translation"> Your username is: <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;mat-subtitle-2&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{ username }}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span       &gt;"/>. </target>
+        <target state="translated"> 您的使用者名稱是：<x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;mat-subtitle-2&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{ username }}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span       &gt;"/>. </target>
       </trans-unit>
       <trans-unit id="ca98710638193518e4fe1302f8977d2db4f2b842" datatype="html">
         <source>Show More</source>
@@ -7084,7 +7176,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
           <context context-type="linenumber">189</context>
         </context-group>
-        <target state="needs-translation">Teacher Feedback</target>
+        <target state="translated">教師回饋</target>
       </trans-unit>
       <trans-unit id="3de550daa9bf35829dbeb9099844614347d2dbc5" datatype="html">
         <source>Toggle Full Screen</source>
@@ -7116,7 +7208,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
           <context context-type="linenumber">80,82</context>
         </context-group>
-        <target state="needs-translation"> Save </target>
+        <target state="translated"> 儲存 </target>
       </trans-unit>
       <trans-unit id="70cfd60f574a2e5b823237ac05381d8d488e4c7c" datatype="html">
         <source> Team hasn&apos;t worked on <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> yet. </source>
@@ -7124,7 +7216,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
           <context context-type="linenumber">93,95</context>
         </context-group>
-        <target state="needs-translation"> Team hasn't worked on <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> yet. </target>
+        <target state="translated"> 小組尚未開始處理 <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/>。 </target>
       </trans-unit>
       <trans-unit id="a8d79c94172b18dbceadb046a6f53999bd5684f6" datatype="html">
         <source> Password required </source>
@@ -7196,7 +7288,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
           <context context-type="linenumber">67,69</context>
         </context-group>
-        <target state="needs-translation"> Password does not match </target>
+        <target state="translated"> 密碼不一致 </target>
       </trans-unit>
       <trans-unit id="911145468998987410" datatype="html">
         <source>Confirm New Password</source>
@@ -7428,7 +7520,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">50,55</context>
         </context-group>
-        <target state="needs-translation"> To help ensure unauthorized use of your account, please keep your password secret. You are solely responsible for any use of your account, even if your account is used by another person. If any use of your account violates the Terms of Use, your account may be suspended or deleted. </target>
+        <target state="translated"> 為了確保您的帳戶不被未經授權使用，請保密您的密碼。您將對帳戶的所有使用負全責，即使是由其他人使用您的帳戶。如果任何使用違反了使用條款，您的帳戶可能會被暫停或刪除。 </target>
       </trans-unit>
       <trans-unit id="208a942910d2e845cbf1bc24f0c15a01f8ae6dcd" datatype="html">
         <source> If you believe that your account is no longer secure for any reason, please change your password. If you cannot access your account to change your password, contact us using our <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;/contact&quot;&gt;"/>Contact Form<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>. </source>
@@ -7540,7 +7632,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">121,127</context>
         </context-group>
-        <target state="needs-translation"> WISE uses Google Analytics to help us understand our site usage. We use data like which pages you visit and clicks you make to help us improve the site. Information collected and processed by Google Analytics is anonymized and does not contain IP addresses or similar personally identifiable information. Some browsers allow you to opt-out of the Google Analytics tracking by installing add-ons for your browser. </target>
+        <target state="translated"> WISE 使用 Google Analytics 來幫助我們了解網站的使用情況。我們利用像是您訪問的頁面和點擊的數據來改進網站。Google Analytics 收集和處理的資訊是匿名的，且不包含 IP 位址或類似的個人識別信息。某些瀏覽器允許您透過安裝外掛程式來選擇不被 Google Analytics 追蹤。 </target>
       </trans-unit>
       <trans-unit id="9af481581bbddd55af685583742a16757964160e" datatype="html">
         <source>3. How We Use the Data</source>
@@ -7676,7 +7768,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">208,211</context>
         </context-group>
-        <target state="needs-translation"> You can help us protect against unauthorized access to your account by choosing a strong password and keeping your password secret at all times. </target>
+        <target state="translated"> 您可以通過選擇一個強密碼並隨時保密密碼，來幫助我們防止未經授權的帳戶訪問。 </target>
       </trans-unit>
       <trans-unit id="5af2549b2c02c290b49d68890ec5308298eea08a" datatype="html">
         <source>6. State &amp; Federal Laws</source>
@@ -8940,7 +9032,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">116,119</context>
         </context-group>
-        <target state="needs-translation">Help us translate WISE! Visit <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://crowdin.com/project/wise&quot; target=&quot;_blank&quot;             &gt;"/>https://crowdin.com/project/wise<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a           &gt;"/>.</target>
+        <target state="translated">幫助我們翻譯 WISE！請訪問 <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://crowdin.com/project/wise&quot; target=&quot;_blank&quot;             &gt;"/>https://crowdin.com/project/wise<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a           &gt;"/>.</target>
       </trans-unit>
       <trans-unit id="2b2f9f56dbfbfb71056a8da8c94e8011d837766e" datatype="html">
         <source> Language required </source>
@@ -8976,7 +9068,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/teacher/select-tags/select-tags.component.html</context>
           <context context-type="linenumber">29</context>
         </context-group>
-        <target state="needs-translation">Manage Tags</target>
+        <target state="translated">管理標籤</target>
       </trans-unit>
       <trans-unit id="4098687853188279101" datatype="html">
         <source>Successfully applied tag</source>
@@ -9328,7 +9420,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
           <context context-type="linenumber">59</context>
         </context-group>
-        <target state="translated">知識整合引出想法</target>
+        <target state="translated">儲存</target>
       </trans-unit>
       <trans-unit id="5325249077056620539" datatype="html">
         <source>Tag created</source>
@@ -9480,7 +9572,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.html</context>
           <context context-type="linenumber">8,10</context>
         </context-group>
-        <target state="needs-translation"> + New Tag </target>
+        <target state="translated"> + 新標籤 </target>
       </trans-unit>
       <trans-unit id="8663242190095976332" datatype="html">
         <source>Tag deleted</source>
@@ -9488,7 +9580,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
           <context context-type="linenumber">86</context>
         </context-group>
-        <target state="needs-translation">Tag deleted</target>
+        <target state="translated">標籤已刪除</target>
       </trans-unit>
       <trans-unit id="9151762754681070291" datatype="html">
         <source>There is <x id="PH" equiv-text="numProjectsWithTag"/> unit with this tag.</source>
@@ -9836,7 +9928,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
           <context context-type="linenumber">62</context>
         </context-group>
-        <target state="needs-translation">Select</target>
+        <target state="translated">選擇</target>
       </trans-unit>
       <trans-unit id="cf5b9a99a7f19adbf75653f4c7ff54dc64afbff6" datatype="html">
         <source>Select units</source>
@@ -9844,7 +9936,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
-        <target state="needs-translation">Select units</target>
+        <target state="translated">選擇單元</target>
       </trans-unit>
       <trans-unit id="dfc3c34e182ea73c5d784ff7c8135f087992dac1" datatype="html">
         <source>All</source>
@@ -9880,7 +9972,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/select-peer-grouping-option/select-peer-grouping-option.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
-        <target state="needs-translation">None</target>
+        <target state="translated">無</target>
       </trans-unit>
       <trans-unit id="a7c328c4773db932ff14a1954e15e43dca58e7b7" datatype="html">
         <source>Completed</source>
@@ -9904,7 +9996,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.html</context>
           <context context-type="linenumber">24</context>
         </context-group>
-        <target state="needs-translation">Running</target>
+        <target state="translated">執行中</target>
       </trans-unit>
       <trans-unit id="5e420747842373fa99a75a7a18df068cc81e46fb" datatype="html">
         <source>Scheduled</source>
@@ -9912,7 +10004,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
-        <target state="needs-translation">Scheduled</target>
+        <target state="translated">已排程</target>
       </trans-unit>
       <trans-unit id="dab15985640ff299a89217fcdc8cdc0123b52ecb" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ numSelectedRuns }}"/> selected</source>
@@ -9928,7 +10020,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/teacher/select-tags/select-tags.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Filter by tag</target>
+        <target state="translated">依標籤篩選</target>
       </trans-unit>
       <trans-unit id="c76c2eeebe0adc81f3434495d189c56d70899cad" datatype="html">
         <source>Share with Students</source>
@@ -10316,7 +10408,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
           <context context-type="linenumber">73</context>
         </context-group>
-        <target state="needs-translation">Browse the "Unit Library" to find titles to use with your students.</target>
+        <target state="translated">瀏覽“單元庫”以尋找要與學生一起使用的標題。</target>
       </trans-unit>
       <trans-unit id="a6b02f88136d4ac3a08c668a1faafe2759d2b48d" datatype="html">
         <source>Looks like you don&apos;t have any archived classroom units.</source>
@@ -10372,7 +10464,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-project/add-project.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Enter a title for the new unit</target>
+        <target state="translated">輸入新單元的標題</target>
       </trans-unit>
       <trans-unit id="0de02535b5717bfd772988452477686b02c859b9" datatype="html">
         <source>Unit Title</source>
@@ -10380,7 +10472,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-project/add-project.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">Unit Title</target>
+        <target state="translated">單元標題</target>
       </trans-unit>
       <trans-unit id="d29259ffbaa7c08e416d89f10ff54499745254f0" datatype="html">
         <source> Unit Title is required </source>
@@ -10388,7 +10480,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-project/add-project.component.html</context>
           <context context-type="linenumber">23,25</context>
         </context-group>
-        <target state="needs-translation"> Unit Title is required </target>
+        <target state="translated"> 單元標題為必填項 </target>
       </trans-unit>
       <trans-unit id="c7d761ff7a5f7e7a8f6d3899d4a7fe62e73afab3" datatype="html">
         <source>cancel</source>
@@ -10446,13 +10538,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Add step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-step-button/add-step-button.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
           <context context-type="linenumber">88</context>
         </context-group>
-        <target state="needs-translation">Add step</target>
+        <target state="translated">新增步驟</target>
       </trans-unit>
       <trans-unit id="abeeca08450df34a78cb591b634d6d16ef5b7dad" datatype="html">
         <source>Add step before</source>
@@ -10460,19 +10552,23 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-step-button/add-step-button.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
-        <target state="needs-translation">Add step before</target>
+        <target state="translated">新增步驟⬆</target>
       </trans-unit>
       <trans-unit id="d59263511cd8dbe0a1eb9bd829aac8d827d8fd83" datatype="html">
         <source>Add step after</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-step-button/add-step-button.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">20</context>
         </context-group>
+        <target state="translated">新增步驟⬇</target>
+      </trans-unit>
+      <trans-unit id="66a796ca959149529fa803f5ffa9cad29b5c5c5a" datatype="html">
+        <source>Branch off this step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-step-button/add-step-button.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">25</context>
         </context-group>
-        <target state="needs-translation">Add step after</target>
+        <target state="needs-translation">Branch off this step</target>
       </trans-unit>
       <trans-unit id="8608bcf1ea8ff554000e0ac4337e7afd3cf5c3f3" datatype="html">
         <source>Start from scratch or choose a Lesson Structure*:</source>
@@ -10488,7 +10584,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addLesson/add-lesson-choose-template/add-lesson-choose-template.component.html</context>
           <context context-type="linenumber">13,15</context>
         </context-group>
-        <target state="needs-translation"> Select </target>
+        <target state="translated"> 選擇 </target>
       </trans-unit>
       <trans-unit id="a9862dafec3ad203ef4a2dea04416d7675f21dd4" datatype="html">
         <source> *Based on our work with classroom teachers, we have developed several lesson structures that follow the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://wise.berkeley.edu/about#ki&quot; target=&quot;_blank&quot;&gt;"/>Knowledge Integration<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> framework and help teachers productively integrate open educational resources (OERs) into their curricula. These structures have also proven useful for developing students&apos; capacity for self-directed learning. We have made the structures very general, so that teachers can customize and incorporate them into any WISE unit to strengthen support for knowledge integration and self-directed learning.
@@ -10497,7 +10593,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addLesson/add-lesson-choose-template/add-lesson-choose-template.component.html</context>
           <context context-type="linenumber">19,28</context>
         </context-group>
-        <target state="needs-translation"> *Based on our work with classroom teachers, we have developed several lesson structures that follow the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://wise.berkeley.edu/about#ki&quot; target=&quot;_blank&quot;&gt;"/>Knowledge Integration<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> framework and help teachers productively integrate open educational resources (OERs) into their curricula. These structures have also proven useful for developing students' capacity for self-directed learning. We have made the structures very general, so that teachers can customize and incorporate them into any WISE unit to strengthen support for knowledge integration and self-directed learning.
+        <target state="translated"> *基於我們與課堂教師的合作，我們開發了幾個遵循 <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://wise.berkeley.edu/about#ki&quot; target=&quot;_blank&quot;&gt;"/>知識整合<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>框架的課程結構，這些結構有助於教師有效地將開放教育資源 (OERs) 融入其課程中。這些結構還被證明對於培養學生的自主學習能力非常有用。我們將這些結構設計得非常通用，讓教師能夠自定義並將其整合到任何 WISE 單元中，以增強對知識整合和自主學習的支持。
 </target>
       </trans-unit>
       <trans-unit id="2220610653030603731" datatype="html">
@@ -10510,7 +10606,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.ts</context>
           <context context-type="linenumber">28</context>
         </context-group>
-        <target state="needs-translation">Create Your Own</target>
+        <target state="translated">自行建立</target>
       </trans-unit>
       <trans-unit id="9161763152537068038" datatype="html">
         <source>Jigsaw</source>
@@ -10550,7 +10646,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Enter a title for the new lesson</target>
+        <target state="translated">輸入新課程的標題</target>
       </trans-unit>
       <trans-unit id="8038f3a869fb34dc1ec87e558cf6f97515bd3cf6" datatype="html">
         <source>Lesson Title</source>
@@ -10558,7 +10654,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">Lesson Title</target>
+        <target state="translated">課程標題</target>
       </trans-unit>
       <trans-unit id="6e865bed9e5566eb4a24f5b09e0518e7bbf8f5f9" datatype="html">
         <source> Lesson Title is required </source>
@@ -10566,7 +10662,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component.html</context>
           <context context-type="linenumber">20,22</context>
         </context-group>
-        <target state="needs-translation"> Lesson Title is required </target>
+        <target state="translated"> 課程標題為必填項 </target>
       </trans-unit>
       <trans-unit id="eef3d003a6862d8a8358220843fa187a2ee0e09c" datatype="html">
         <source> Back </source>
@@ -10576,7 +10672,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
-          <context context-type="linenumber">66,68</context>
+          <context context-type="linenumber">60,62</context>
         </context-group>
         <target state="translated"> 上一步 </target>
       </trans-unit>
@@ -10586,7 +10682,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Step Title</target>
+        <target state="translated">步驟標題</target>
       </trans-unit>
       <trans-unit id="ca6422c7d869dd959da5fb47d9c438c65c09ffa8" datatype="html">
         <source> Step Title is required </source>
@@ -10594,7 +10690,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation"> Step Title is required </target>
+        <target state="translated"> 步驟標題為必填項 </target>
       </trans-unit>
       <trans-unit id="9ff39e032b731c11440ba7faf5eacbbc0ec420e7" datatype="html">
         <source>Select components to add to your new step (optional):</source>
@@ -10602,7 +10698,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">Select components to add to your new step (optional):</target>
+        <target state="translated">選擇要添加到新步驟的組件 (可選)：</target>
       </trans-unit>
       <trans-unit id="a281da0bb5751e01fce4228df3c09a4479fbf124" datatype="html">
         <source>No components added</source>
@@ -10626,15 +10722,15 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
           <context context-type="linenumber">52,54</context>
         </context-group>
-        <target state="needs-translation"> *Note: You can always add or remove content later by editing the step. </target>
+        <target state="translated"> 注意：您隨時可以通過編輯步驟來新增或刪除內容。 </target>
       </trans-unit>
       <trans-unit id="6009535360963985115" datatype="html">
         <source>New Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.ts</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">49</context>
         </context-group>
-        <target state="needs-translation">New Step</target>
+        <target state="translated">新步驟</target>
       </trans-unit>
       <trans-unit id="909afacc2d9d62ea57b1ba4b1e70b6c4314f668d" datatype="html">
         <source>Automated Assessment</source>
@@ -10642,7 +10738,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-automated-assessment/choose-automated-assessment.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Automated Assessment</target>
+        <target state="translated">自動評估</target>
       </trans-unit>
       <trans-unit id="176b122e6b658b553c8d2829641897a7626cfe03" datatype="html">
         <source> Automated Assessments will automatically score student responses and provide feedback for reflection.
@@ -10680,7 +10776,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/card-selector/card-selector.component.html</context>
           <context context-type="linenumber">35,37</context>
         </context-group>
-        <target state="needs-translation"> Select </target>
+        <target state="translated"> 選擇 </target>
       </trans-unit>
       <trans-unit id="7152189031040166896" datatype="html">
         <source>Import From Another Unit</source>
@@ -10688,7 +10784,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.ts</context>
           <context context-type="linenumber">33</context>
         </context-group>
-        <target state="needs-translation">Import From Another Unit</target>
+        <target state="translated">從另一個單元匯入</target>
       </trans-unit>
       <trans-unit id="8293078288618811295" datatype="html">
         <source>Automated Assessment</source>
@@ -10696,7 +10792,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.ts</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="needs-translation">Automated Assessment</target>
+        <target state="translated">自動評估</target>
       </trans-unit>
       <trans-unit id="6013229483538709548" datatype="html">
         <source>Interactive Simulation</source>
@@ -10704,7 +10800,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.ts</context>
           <context context-type="linenumber">43</context>
         </context-group>
-        <target state="needs-translation">Interactive Simulation</target>
+        <target state="translated">互動模擬</target>
       </trans-unit>
       <trans-unit id="9430426ed5a9b22d6dcf57e82af9318742f4b2bc" datatype="html">
         <source>Interactive Simulation</source>
@@ -10712,7 +10808,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Interactive Simulation</target>
+        <target state="translated">互動模擬</target>
       </trans-unit>
       <trans-unit id="effd088d41cd598a9e095db21fd4abe625aff717" datatype="html">
         <source> Select from a curated library of interactive simulations addressing various science topics.
@@ -10770,7 +10866,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Customize Feedback (optional)</target>
+        <target state="translated">自定義回饋 (可選)</target>
       </trans-unit>
       <trans-unit id="8508c3b2764e65f31a1418a7fa5e8bfafe96a4e6" datatype="html">
         <source> Choose whether students should see their score and whether they should receive feedback after submitting an answer. Customize the feedback students will receive for each automated score value.
@@ -10788,7 +10884,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">Show Score</target>
+        <target state="translated">顯示分數</target>
       </trans-unit>
       <trans-unit id="88dc2e75175430c652ffd7923d9520b4f0947052" datatype="html">
         <source>Show Feedback</source>
@@ -10796,7 +10892,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="needs-translation">Show Feedback</target>
+        <target state="translated">顯示回饋</target>
       </trans-unit>
       <trans-unit id="ac50f69ce0a9adbc4dd5706b53dc937c52b55a03" datatype="html">
         <source>Score <x id="INTERPOLATION" equiv-text="{{ scoringRule.score }}"/></source>
@@ -10832,7 +10928,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
           <context context-type="linenumber">75</context>
         </context-group>
-        <target state="needs-translation">Feedback</target>
+        <target state="translated">回饋</target>
       </trans-unit>
       <trans-unit id="29242856838907f4f025afb9a0467fbe4511c055" datatype="html">
         <source> The step you chose has nothing to customize. Click &quot;Next&quot; to continue.
@@ -10841,7 +10937,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component.html</context>
           <context context-type="linenumber">25,27</context>
         </context-group>
-        <target state="needs-translation"> The step you chose has nothing to customize. Click "Next" to continue.
+        <target state="translated"> 您選擇的步驟沒有任何可自定義的項目。點擊「下一步」繼續。
 </target>
       </trans-unit>
       <trans-unit id="2845783fa6ce5e23d36879061c96b5b195d2d088" datatype="html">
@@ -10954,7 +11050,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component.ts</context>
           <context context-type="linenumber">56</context>
         </context-group>
-        <target state="needs-translation">File Manager</target>
+        <target state="translated">檔案管理</target>
       </trans-unit>
       <trans-unit id="1835967522048643143" datatype="html">
         <source>Notebook Settings</source>
@@ -10966,7 +11062,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component.ts</context>
           <context context-type="linenumber">59</context>
         </context-group>
-        <target state="needs-translation">Notebook Settings</target>
+        <target state="translated">筆記本設定</target>
       </trans-unit>
       <trans-unit id="1354846446306331186" datatype="html">
         <source>Milestones</source>
@@ -10986,7 +11082,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.ts</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <target state="needs-translation">Milestones</target>
+        <target state="translated">里程碑</target>
       </trans-unit>
       <trans-unit id="8360107325291301836" datatype="html">
         <source>Advanced Settings</source>
@@ -11054,7 +11150,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
           <context context-type="linenumber">155</context>
         </context-group>
-        <target state="needs-translation">Saved</target>
+        <target state="translated">已儲存</target>
       </trans-unit>
       <trans-unit id="6634710158550020332" datatype="html">
         <source>Error Saving Unit. Please refresh the page.</source>
@@ -11130,7 +11226,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
           <context context-type="linenumber">102</context>
         </context-group>
-        <target state="needs-translation">Unused Steps</target>
+        <target state="translated">未使用的步驟</target>
       </trans-unit>
       <trans-unit id="0217500199a3e48a7b95762b14b79dad49e76beb" datatype="html">
         <source>There are no Unused Steps</source>
@@ -11142,7 +11238,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component.html</context>
           <context context-type="linenumber">81</context>
         </context-group>
-        <target state="needs-translation">There are no Unused Steps</target>
+        <target state="translated">沒有未使用的步驟</target>
       </trans-unit>
       <trans-unit id="f951d80b53d5536f79142285e8ba09f190a3c723" datatype="html">
         <source>Insert after</source>
@@ -11174,7 +11270,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
           <context context-type="linenumber">74</context>
         </context-group>
-        <target state="needs-translation">Selected</target>
+        <target state="translated">已選取</target>
       </trans-unit>
       <trans-unit id="f871b41bfbdb193507cce2cd848c2d02bde77a03" datatype="html">
         <source>No results found</source>
@@ -11244,7 +11340,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-type-selector/component-type-selector.component.html</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="needs-translation">Next component type</target>
+        <target state="translated">下一個組件種類</target>
       </trans-unit>
       <trans-unit id="bc2e854e111ecf2bd7db170da5e3c2ed08181d88" datatype="html">
         <source>Advanced</source>
@@ -11256,7 +11352,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">Advanced</target>
+        <target state="translated">進階</target>
       </trans-unit>
       <trans-unit id="592715f579b88977a98d277b9d6099afcd72a6fc" datatype="html">
         <source>Preview component</source>
@@ -11340,7 +11436,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">55,57</context>
         </context-group>
-        <target state="needs-translation"> Help </target>
+        <target state="translated"> 幫助 </target>
       </trans-unit>
       <trans-unit id="ffac8783eaf153173408c8a9014a7484fa6a9175" datatype="html">
         <source>User Menu</source>
@@ -11404,7 +11500,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">Choose image</target>
+        <target state="translated">選取圖片</target>
       </trans-unit>
       <trans-unit id="408cba84d285a04bf7e87e0f2222633ea4ff87c9" datatype="html">
         <source> Copy content from <x id="INTERPOLATION" equiv-text="{{ defaultLanguage.language }}"/> </source>
@@ -11444,7 +11540,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/concurrent-authors-message/concurrent-authors-message.component.ts</context>
           <context context-type="linenumber">45,47</context>
         </context-group>
-        <target state="needs-translation">Also currently editing this unit: <x id="PH" equiv-text="otherAuthors.join(               ', '             )"/>. Be careful not to overwrite each other's work!</target>
+        <target state="translated">當前正在編輯此單元的還有：<x id="PH" equiv-text="otherAuthors.join(               ', '             )"/>。請小心不要覆蓋彼此的工作！</target>
       </trans-unit>
       <trans-unit id="5763042719559545946" datatype="html">
         <source>Please Choose an Action</source>
@@ -11672,26 +11768,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="needs-translation">Is Completed</target>
       </trans-unit>
-      <trans-unit id="7123653594948067002" datatype="html">
-        <source>Score</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">54</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.ts</context>
-          <context context-type="linenumber">54</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">395</context>
-        </context-group>
-        <target state="needs-translation">Score</target>
-      </trans-unit>
       <trans-unit id="185559960832537937" datatype="html">
         <source>Score(s)</source>
         <context-group purpose="location">
@@ -11723,18 +11799,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">61</context>
         </context-group>
         <target state="needs-translation">To Step</target>
-      </trans-unit>
-      <trans-unit id="8352660755693654653" datatype="html">
-        <source>Choice Chosen</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
-          <context context-type="linenumber">63</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-        <target state="translated">選擇的選項</target>
       </trans-unit>
       <trans-unit id="6910078656226990536" datatype="html">
         <source>Choices</source>
@@ -11932,6 +11996,194 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="needs-translation">Make this node not visible</target>
       </trans-unit>
+      <trans-unit id="f5c7489ef53e1b6c0f86b4b4100b02c27bbfa412" datatype="html">
+        <source>Path <x id="INTERPOLATION" equiv-text="{{ index + 1 }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/create-branch-paths/create-branch-paths.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch-paths/edit-branch-paths.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target state="needs-translation">Path <x id="INTERPOLATION" equiv-text="{{ index + 1 }}"/></target>
+      </trans-unit>
+      <trans-unit id="380e20a1e13d9489c69f6dbea7da19025ab6eb25" datatype="html">
+        <source>Score</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/create-branch-paths/create-branch-paths.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch-paths/edit-branch-paths.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">157</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-grading/student-grading.component.html</context>
+          <context context-type="linenumber">100</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
+          <context context-type="linenumber">135</context>
+        </context-group>
+        <target state="needs-translation">Score</target>
+      </trans-unit>
+      <trans-unit id="811195f9acaa8be6f8d39184c94c2e3c63bff00c" datatype="html">
+        <source>Choice Chosen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/create-branch-paths/create-branch-paths.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch-paths/edit-branch-paths.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+        <target state="translated">選擇的選項</target>
+      </trans-unit>
+      <trans-unit id="6b71e4d64744aa78a64f1eeb7fce0ddc1f554ca2" datatype="html">
+        <source>Create Branching Structure</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/create-branch/create-branch.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <target state="needs-translation">Create Branching Structure</target>
+      </trans-unit>
+      <trans-unit id="8b660e27526f0a9ab84adf548f7f50451cdc54c5" datatype="html">
+        <source>Branch Step: <x id="INTERPOLATION" equiv-text="{{ targetTitle }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/create-branch/create-branch.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target state="needs-translation">Branch Step: <x id="INTERPOLATION" equiv-text="{{ targetTitle }}"/></target>
+      </trans-unit>
+      <trans-unit id="a3e0d7ae1ce1d7ce3c686f327500c27c860fbf54" datatype="html">
+        <source>Reference component:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/create-branch/create-branch.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <target state="needs-translation">Reference component:</target>
+      </trans-unit>
+      <trans-unit id="476575767b9234241bdae45c2f6cf3e65678514c" datatype="html">
+        <source>Paths:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/create-branch/create-branch.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <target state="needs-translation">Paths:</target>
+      </trans-unit>
+      <trans-unit id="134d4dcbdf14d91b4d88bd9e920f3f0c91eebb43" datatype="html">
+        <source> Submit </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/create-branch/create-branch.component.html</context>
+          <context context-type="linenumber">57,59</context>
+        </context-group>
+        <target state="translated"> 送出 </target>
+      </trans-unit>
+      <trans-unit id="1035141360074485815" datatype="html">
+        <source>Creating Branch</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/create-branch/create-branch.component.ts</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+        <target state="needs-translation">Creating Branch</target>
+      </trans-unit>
+      <trans-unit id="51339769753fff911a34db58b68a5fa4f8e7ac9c" datatype="html">
+        <source>A new step will automatically be created in this path</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/display-branch-path-steps/display-branch-path-steps.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <target state="needs-translation">A new step will automatically be created in this path</target>
+      </trans-unit>
+      <trans-unit id="2c663aaf9e7b94e729f933172d3955ca68534558" datatype="html">
+        <source>This path will be deleted and its steps will be moved after the branching structure</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch-paths/edit-branch-paths.component.html</context>
+          <context context-type="linenumber">28,29</context>
+        </context-group>
+        <target state="needs-translation">This path will be deleted and its steps will be moved after the branching structure</target>
+      </trans-unit>
+      <trans-unit id="e535223e0ce8257ccc34ae80fb1df58e4462f921" datatype="html">
+        <source>Delete branch path</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch-paths/edit-branch-paths.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <target state="needs-translation">Delete branch path</target>
+      </trans-unit>
+      <trans-unit id="ff8aa2fb4724311bcc5857672bbcffcca729ede5" datatype="html">
+        <source>Add Path</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch-paths/edit-branch-paths.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <target state="needs-translation">Add Path</target>
+      </trans-unit>
+      <trans-unit id="05c79212144d2c83e779e76c86f81924247f814f" datatype="html">
+        <source>Edit Branching Structure</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <target state="needs-translation">Edit Branching Structure</target>
+      </trans-unit>
+      <trans-unit id="b193b77aceee2f9029a0ba88515ad3eea7d4b586" datatype="html">
+        <source> Remove Branching </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.html</context>
+          <context context-type="linenumber">3,5</context>
+        </context-group>
+        <target state="needs-translation"> Remove Branching </target>
+      </trans-unit>
+      <trans-unit id="d5fcbf7165fb132f9ca27acc2305dfa04fd43d04" datatype="html">
+        <source>Merge Step: <x id="INTERPOLATION" equiv-text="{{ mergeStepTitle }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <target state="needs-translation">Merge Step: <x id="INTERPOLATION" equiv-text="{{ mergeStepTitle }}"/></target>
+      </trans-unit>
+      <trans-unit id="3992663386716863740" datatype="html">
+        <source>Are you sure you want to remove this branching structure?
+
+The branches will be removed but the steps will remain in the unit.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch/edit-branch.component.ts</context>
+          <context context-type="linenumber">162</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to remove this branching structure?
+
+The branches will be removed but the steps will remain in the unit.</target>
+      </trans-unit>
       <trans-unit id="549db7a4a511ef9e23b17fa3cd8781e3d8ef45d4" datatype="html">
         <source>Import Component(s)</source>
         <context-group purpose="location">
@@ -12000,7 +12252,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="translated">里程碑編輯</target>
+        <target state="translated">編寫里程碑</target>
       </trans-unit>
       <trans-unit id="66643b5a698cf5542e5a2cf963860167dc3e5efe" datatype="html">
         <source> Enable Milestones </source>
@@ -12736,6 +12988,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-path-count/select-path-count.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
         <target state="translated">分支路徑數量</target>
       </trans-unit>
       <trans-unit id="95e9e6cf01f9b6960c4819faa3f8ea594d1d3c8b" datatype="html">
@@ -12744,13 +13000,17 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
           <context context-type="linenumber">13,15</context>
         </context-group>
-        <target state="needs-translation"> Remove Branch </target>
+        <target state="translated"> 移除分支 </target>
       </trans-unit>
       <trans-unit id="f349eaff8f8387128c51240dbb351413930be068" datatype="html">
         <source>How to Choose Among Paths</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
           <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/select-branch-criteria.component.html</context>
+          <context context-type="linenumber">2</context>
         </context-group>
         <target state="translated">如何在路徑之間進行選擇</target>
       </trans-unit>
@@ -12801,38 +13061,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">87</context>
         </context-group>
         <target state="translated">作業小組ID</target>
-      </trans-unit>
-      <trans-unit id="380e20a1e13d9489c69f6dbea7da19025ab6eb25" datatype="html">
-        <source>Score</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
-          <context context-type="linenumber">89</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
-          <context context-type="linenumber">90</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
-          <context context-type="linenumber">157</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-grading/student-grading.component.html</context>
-          <context context-type="linenumber">100</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">135</context>
-        </context-group>
-        <target state="needs-translation">Score</target>
-      </trans-unit>
-      <trans-unit id="811195f9acaa8be6f8d39184c94c2e3c63bff00c" datatype="html">
-        <source>Choice Chosen</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
-          <context context-type="linenumber">97</context>
-        </context-group>
-        <target state="translated">選擇的選項</target>
       </trans-unit>
       <trans-unit id="95b4a077864b241a8027e9e4106d4db2fe3ad679" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ choice.text }}"/> (<x id="INTERPOLATION_1" equiv-text="{{ choice.id }}"/>), Is Correct: <x id="INTERPOLATION_2" equiv-text="{{ choice.isCorrect }}"/>, Feedback: <x id="INTERPOLATION_3" equiv-text="{{ choice.feedback }}"/> </source>
@@ -12893,38 +13121,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">149</context>
         </context-group>
         <target state="translated">選擇合併點</target>
-      </trans-unit>
-      <trans-unit id="5115344169131680845" datatype="html">
-        <source>Workgroup ID</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">18</context>
-        </context-group>
-        <target state="translated">作業小組ID</target>
-      </trans-unit>
-      <trans-unit id="1102665189929883417" datatype="html">
-        <source>Random</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/PeerGroupingLogic.ts</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-logic-options.ts</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <target state="translated">隨機</target>
       </trans-unit>
       <trans-unit id="1825829511397926879" datatype="html">
         <source>Tag</source>
@@ -13366,7 +13562,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component.ts</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation">Lesson Title</target>
+        <target state="translated">課程標題</target>
       </trans-unit>
       <trans-unit id="896601949204119976" datatype="html">
         <source>Step Title</source>
@@ -13374,7 +13570,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component.ts</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation">Step Title</target>
+        <target state="translated">步驟標題</target>
       </trans-unit>
       <trans-unit id="16f48e8858552177f3da7a0ccf2449b2522ebe14" datatype="html">
         <source>Components</source>
@@ -13490,7 +13686,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Notebook Settings</target>
+        <target state="translated">筆記本設定</target>
       </trans-unit>
       <trans-unit id="80801429a07d2dcc6d5e6bc89cf95f6ae87a3837" datatype="html">
         <source> Student Notebook </source>
@@ -13598,7 +13794,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
           <context context-type="linenumber">96,98</context>
         </context-group>
-        <target state="needs-translation"> Enable Student Uploads </target>
+        <target state="translated"> 允許學生上傳 </target>
       </trans-unit>
       <trans-unit id="00d9fa046e02414bb4726dc04aeeff2429203220" datatype="html">
         <source> Enable Report </source>
@@ -13850,7 +14046,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/select-peer-grouping-authoring/select-peer-grouping-authoring.component.html</context>
           <context context-type="linenumber">13,15</context>
         </context-group>
-        <target state="needs-translation"> Select </target>
+        <target state="translated"> 選擇 </target>
       </trans-unit>
       <trans-unit id="17315c72b1b5a693dc4992a961e0b0330f958851" datatype="html">
         <source>Select Peer Grouping</source>
@@ -14104,7 +14300,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Are you sure you want to delete this lesson?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <target state="translated">您確定要刪除此課程嗎？</target>
       </trans-unit>
@@ -14112,23 +14308,23 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Select step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <target state="translated">選擇步驟</target>
       </trans-unit>
-      <trans-unit id="a47534ecaf69e350907bd041db0953d7554a1cfc" datatype="html">
-        <source>Branch point with <x id="INTERPOLATION" equiv-text="{{ getNumberOfBranchPaths(step.id) }}"/> paths based on <x id="INTERPOLATION_1" equiv-text="{{         getBranchCriteriaDescription(step.id)       }}"/></source>
+      <trans-unit id="d01434f6aa648b854ae7dc927a315142b1e8c791" datatype="html">
+        <source>Edit branch point: <x id="INTERPOLATION" equiv-text="{{ getNumberOfBranchPaths(step.id) }}"/> paths based on <x id="INTERPOLATION_1" equiv-text="{{           getBranchCriteriaDescription(step.id)         }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">25,27</context>
+          <context context-type="linenumber">26,28</context>
         </context-group>
-        <target state="needs-translation">Branch point with <x id="INTERPOLATION" equiv-text="{{ getNumberOfBranchPaths(step.id) }}"/> paths based on <x id="INTERPOLATION_1" equiv-text="{{         getBranchCriteriaDescription(step.id)       }}"/></target>
+        <target state="needs-translation">Edit branch point: <x id="INTERPOLATION" equiv-text="{{ getNumberOfBranchPaths(step.id) }}"/> paths based on <x id="INTERPOLATION_1" equiv-text="{{           getBranchCriteriaDescription(step.id)         }}"/></target>
       </trans-unit>
       <trans-unit id="5d897973ca9256c890caa2df3c41e11f31b84166" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ getNumberOfConstraintsOnNode(step.id) }}"/> Constraint(s) <x id="INTERPOLATION_1" equiv-text="{{         getConstraintDescriptions(step.id)       }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">35,37</context>
+          <context context-type="linenumber">38,40</context>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ getNumberOfConstraintsOnNode(step.id) }}"/> Constraint(s) <x id="INTERPOLATION_1" equiv-text="{{         getConstraintDescriptions(step.id)       }}"/></target>
       </trans-unit>
@@ -14136,7 +14332,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Has Rubric</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <target state="translated">有評分標準</target>
       </trans-unit>
@@ -14144,15 +14340,15 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Click to enter step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">55</context>
         </context-group>
-        <target state="translated">點擊輸入步驟</target>
+        <target state="translated">點擊進入步驟</target>
       </trans-unit>
       <trans-unit id="755e89f2e7a2ffda09056f509222d0e405820e4d" datatype="html">
         <source>Move step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <target state="translated">移動步驟</target>
       </trans-unit>
@@ -14160,7 +14356,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Copy step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">76</context>
         </context-group>
         <target state="translated">複製步驟</target>
       </trans-unit>
@@ -14168,7 +14364,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Delete step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.html</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">86</context>
         </context-group>
         <target state="translated">刪除步驟</target>
       </trans-unit>
@@ -14176,7 +14372,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Are you sure you want to delete this step?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <target state="translated">您確定要刪除此步驟嗎？</target>
       </trans-unit>
@@ -14226,7 +14422,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
           <context context-type="linenumber">103</context>
         </context-group>
-        <target state="needs-translation">There are no unused steps</target>
+        <target state="translated">沒有未使用的步驟</target>
       </trans-unit>
       <trans-unit id="5775641662261420108" datatype="html">
         <source>Are you sure you want to delete the <x id="PH" equiv-text="selectedNodeIds.length"/> selected item(s)?</source>
@@ -14242,7 +14438,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Unit Icon</target>
+        <target state="translated">單元縮圖</target>
       </trans-unit>
       <trans-unit id="d6805c18e8199b48b81d4daabab83976e04c0622" datatype="html">
         <source>This unit does not have a unit icon.</source>
@@ -14250,7 +14446,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="needs-translation">This unit does not have a unit icon.</target>
+        <target state="translated">此單元沒有單元縮圖。</target>
       </trans-unit>
       <trans-unit id="8f515b6f0a0b5042a8bb3f8cee9b7175ac1cf5e8" datatype="html">
         <source>Click the edit button to set one.</source>
@@ -14266,7 +14462,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
-        <target state="needs-translation">Choose a new Unit Icon by clicking on one below or upload your own custom icon.</target>
+        <target state="translated">通過點擊下面的一個縮圖來選擇新的單元縮圖，或者上傳您自己的自定義縮圖。</target>
       </trans-unit>
       <trans-unit id="0c9f4702eecbbcaf6485d526444072e97234f0c6" datatype="html">
         <source> Upload </source>
@@ -14274,7 +14470,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
           <context context-type="linenumber">22,24</context>
         </context-group>
-        <target state="needs-translation"> Upload </target>
+        <target state="translated"> 上傳 </target>
       </trans-unit>
       <trans-unit id="d5633c7ffb5d36eebe0dbe84efa93a1e95713391" datatype="html">
         <source>Default language:</source>
@@ -14282,7 +14478,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Default language:</target>
+        <target state="translated">預設語言：</target>
       </trans-unit>
       <trans-unit id="a4822ae93998e191f2bed67a380af96f2b5e63bb" datatype="html">
         <source>Additional languages:</source>
@@ -14290,7 +14486,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">Additional languages:</target>
+        <target state="translated">額外語言：</target>
       </trans-unit>
       <trans-unit id="abf24af7ad0fd7ffecdad3210051c47589373d68" datatype="html">
         <source>Back to Teacher Home</source>
@@ -14464,6 +14660,30 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="translated">編輯單元評分標準</target>
       </trans-unit>
+      <trans-unit id="45a3f117e81fdcd5cb8324d8c3132ea52bcfad60" datatype="html">
+        <source>Merge Step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-merge-step/select-merge-step.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <target state="needs-translation">Merge Step</target>
+      </trans-unit>
+      <trans-unit id="4c34d230132aa94d1c9a475b105b33e30815b8f9" datatype="html">
+        <source> Use Next Step In Unit (<x id="INTERPOLATION" equiv-text="{{ nextStepTitle }}"/>) </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-merge-step/select-merge-step.component.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
+        <target state="needs-translation"> Use Next Step In Unit (<x id="INTERPOLATION" equiv-text="{{ nextStepTitle }}"/>) </target>
+      </trans-unit>
+      <trans-unit id="93c7d1ec242f9b1551ee0b4ac7dc133dbeab61cf" datatype="html">
+        <source>Create New Step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-merge-step/select-merge-step.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target state="needs-translation">Create New Step</target>
+      </trans-unit>
       <trans-unit id="a2866be16f044f150d3b987bca4b2d7be8cca652" datatype="html">
         <source>Jigsaw</source>
         <context-group purpose="location">
@@ -14565,7 +14785,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/authoringTool/structure/self-directed-investigation/self-directed-investigation.component.html</context>
           <context context-type="linenumber">2,7</context>
         </context-group>
-        <target state="needs-translation"> The Self-Directed Investigation KI lesson structure helps students ask research questions about a science topic, guides them through refining their initial questions to researchable questions, and supports them in finding and evaluating evidence using online resources of their choice. Students synthesize their findings into a product of your choice.
+        <target state="translated"> 自主研究 KI 課程結構幫助學生提出有關科學主題的研究問題，指導他們將初步問題改寫為可研究的問題，並支持他們利用自選的線上資源尋找和評估證據。學生將研究結果綜合為您選擇的產出形式。
 </target>
       </trans-unit>
       <trans-unit id="1a1e67e69c46d3cd35b415df98316290f4c99c57" datatype="html">
@@ -14874,7 +15094,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.ts</context>
           <context context-type="linenumber">90</context>
         </context-group>
-        <target state="needs-translation">Error: Could not create team.</target>
+        <target state="translated">錯誤: 無法建立小組。</target>
       </trans-unit>
       <trans-unit id="6babfd035bd01c83b35e9440bd51b8b3b45e15d6" datatype="html">
         <source>Change Student Password</source>
@@ -14890,7 +15110,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Change password for </target>
+        <target state="translated">更改密碼 </target>
       </trans-unit>
       <trans-unit id="40847f2be1387dc7b9f1cfa600aa50a0fd993c3a" datatype="html">
         <source>Student <x id="INTERPOLATION" equiv-text="{{ user.id }}"/></source>
@@ -15766,7 +15986,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>All Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">371</context>
+          <context context-type="linenumber">374</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
@@ -15782,7 +16002,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">372</context>
+          <context context-type="linenumber">375</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
@@ -15794,7 +16014,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Unlock for <x id="PH" equiv-text="this.getPeriodLabel()"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">377</context>
+          <context context-type="linenumber">380</context>
         </context-group>
         <target state="translated">為<x id="PH" equiv-text="this.getPeriodLabel()"/>解鎖</target>
       </trans-unit>
@@ -15802,7 +16022,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Lock for <x id="PH" equiv-text="this.getPeriodLabel()"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">378</context>
+          <context context-type="linenumber">381</context>
         </context-group>
         <target state="translated">為<x id="PH" equiv-text="this.getPeriodLabel()"/>鎖定</target>
       </trans-unit>
@@ -16132,7 +16352,7 @@ Are you sure you want to proceed?</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/student-grading-tools/student-grading-tools.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">Previous Team</target>
+        <target state="translated">上一個小組</target>
       </trans-unit>
       <trans-unit id="a583a8310a17f5d7048ddca86ed44d4e512d6cb2" datatype="html">
         <source>Next Team</source>
@@ -16144,7 +16364,7 @@ Are you sure you want to proceed?</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/student-grading-tools/student-grading-tools.component.html</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="needs-translation">Next Team</target>
+        <target state="translated">下一個小組</target>
       </trans-unit>
       <trans-unit id="57acb9f2d8deff630650f87fc5cf6f42951481e4" datatype="html">
         <source>Completed <x id="INTERPOLATION" equiv-text="{{ completed }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ total }}"/> steps with work</source>
@@ -16176,7 +16396,7 @@ Are you sure you want to proceed?</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component.html</context>
           <context context-type="linenumber">22,24</context>
         </context-group>
-        <target state="needs-translation"> Team has not saved any work </target>
+        <target state="translated"> 小組尚未儲存任何作業 </target>
       </trans-unit>
       <trans-unit id="1a68048cfcd964c630f4316c43db20f0b8e3a80d" datatype="html">
         <source>See revisions</source>
@@ -17210,7 +17430,7 @@ Are you sure you want to proceed?</target>
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
           <context context-type="linenumber">31</context>
         </context-group>
-        <target state="needs-translation">Use a Knowledge Integration (KI) icon:</target>
+        <target state="translated">使用知識整合 (KI) 圖示：</target>
       </trans-unit>
       <trans-unit id="c80f9758aa49779d616f8d163a2ac735e8bb0485" datatype="html">
         <source>More about WISE and Knowledge Integration</source>
@@ -17258,7 +17478,7 @@ Are you sure you want to proceed?</target>
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
           <context context-type="linenumber">81</context>
         </context-group>
-        <target state="translated">儲存</target>
+        <target state="translated">選擇一種顏色</target>
       </trans-unit>
       <trans-unit id="52c9a103b812f258bcddc3d90a6e3f46871d25fe" datatype="html">
         <source>Save</source>
@@ -17282,7 +17502,7 @@ Are you sure you want to proceed?</target>
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
           <context context-type="linenumber">42</context>
         </context-group>
-        <target state="translated">知識整合引出想法</target>
+        <target state="translated">儲存</target>
       </trans-unit>
       <trans-unit id="5760105370370371133" datatype="html">
         <source>Knowledge Integration elicit ideas</source>
@@ -17490,7 +17710,7 @@ Are you sure you want to proceed?</target>
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
           <context context-type="linenumber">22,25</context>
         </context-group>
-        <target state="needs-translation"> Provide context, instructions, and other relevant information to help the chat bot act the way you want it to. Be as specific as possible. </target>
+        <target state="translated"> 提供上下文、指示和其他相關資訊，以幫助聊天機器人按照您的需求行動。請儘可能具體說明。 </target>
       </trans-unit>
       <trans-unit id="8f6fa76d4a23d7f0b39f750714ce4762daebe7aa" datatype="html">
         <source>Example System Prompt</source>
@@ -17506,7 +17726,7 @@ Are you sure you want to proceed?</target>
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
           <context context-type="linenumber">27,33</context>
         </context-group>
-        <target state="needs-translation"> You are a teacher helping a student understand the greenhouse effect by using the example of a car that has been sitting in the sun on a cold day. The student is asked how the temperature inside the car will feel. Do not tell them the correct answer, but guide them to better understand the science by asking questions. Also make sure they explain their reasoning. Limit your response to 100 words or less. </target>
+        <target state="translated"> 你是一位老師，正在幫助學生理解溫室效應，並以一輛在寒冷天氣下曬太陽的車為例。問學生車內的溫度感覺如何，不要直接告訴他們正確答案，而是通過提問來引導他們更好地理解科學原理。同時，確保他們解釋自己的推理。請將你的回應限制在100字以內。 </target>
       </trans-unit>
       <trans-unit id="4c58dd3004d2dc9515ab6b2a19c07de08ca215bc" datatype="html">
         <source>System Prompt</source>
@@ -17636,7 +17856,7 @@ Are you sure you want to proceed?</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">29</context>
         </context-group>
-        <target state="translated">寬度(單位)</target>
+        <target state="translated">寬度 (單位)</target>
       </trans-unit>
       <trans-unit id="701a0dcd34275c6c20cf014390a51e52f815a527" datatype="html">
         <source>Height (Units)</source>
@@ -18582,7 +18802,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Note: this term currently only works in the Dialog Guidance component.</target>
+        <target state="translated">注意：此術語目前僅適用於Dialog Guidance組件。</target>
       </trans-unit>
       <trans-unit id="21a9fc818b21be4ca6e733d9cf3defc9b28f3879" datatype="html">
         <source>Feedback Rule Authoring</source>
@@ -18606,7 +18826,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">7,10</context>
         </context-group>
-        <target state="needs-translation"> Rules are evaluated top to bottom. The first rule <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expression<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> that matches the student's response is used to provide feedback. </target>
+        <target state="translated"> 規則從上到下進行評估。第一個符合學生回應的規則 <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>表達式<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> 將用來提供反饋。 </target>
       </trans-unit>
       <trans-unit id="2f65cedf60cf1bf82125ec83f1de1859614cf944" datatype="html">
         <source> You can add multiple <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Feedback<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> items per rule. The first time a rule matches, Feedback #1 will be shown to the student.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> If the rule matches a second time (in a subsequent round), Feedback #2 will be shown, and so on. </source>
@@ -18614,7 +18834,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">11,15</context>
         </context-group>
-        <target state="needs-translation"> You can add multiple <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Feedback<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> items per rule. The first time a rule matches, Feedback #1 will be shown to the student.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> If the rule matches a second time (in a subsequent round), Feedback #2 will be shown, and so on. </target>
+        <target state="translated"> 您可以為每個規則添加多個<x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>回饋<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>項目。當規則第一次匹配時，回饋 #1 將顯示給學生。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> 如果該規則第二次匹配(在後續回合中)，回饋 #2 將顯示，依此類推。 </target>
       </trans-unit>
       <trans-unit id="d8b6142c3d02b165711db70e94cc65d49a2dfabe" datatype="html">
         <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expressions<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> are made up of terms, operators, and parentheses:</source>
@@ -18662,7 +18882,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">30,33</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if the student received a KI score of X.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>hasKIScore(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student received KI score 3. </target>
+        <target state="translated"> 如果學生獲得 KI 分數X，則評估為true。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/>例如:<x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>hasKIScore(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>如果學生獲得 KI 分數3，則評估為true。 </target>
       </trans-unit>
       <trans-unit id="71a4930ba088b909b7923626580adac30640c167" datatype="html">
         <source> Evaluates to true if more than X ideas were found in all (both past and current) of student&apos;s responses.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>accumulatedIdeaCountMoreThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had more than 2 ideas in all of their responses.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></source>
@@ -18726,7 +18946,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">99,102</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if exactly X ideas were found in the student's response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas. </target>
+        <target state="translated"> 如果學生的回答中找到剛好X個想法，則評估為true。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/>例如:<x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>表示如果學生剛好有2個想法，則評估為true。 </target>
       </trans-unit>
       <trans-unit id="2d05e3d5853bc13670778644a91cb4a915d5b3ce" datatype="html">
         <source> Evaluates to true if exactly X ideas were found in the student&apos;s Y-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2, 3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas in their 3rd response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></source>
@@ -18734,7 +18954,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">106,110</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if exactly X ideas were found in the student's Y-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2, 3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas in their 3rd response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></target>
+        <target state="translated"> 如果學生的第Y次回答中找到剛好X個想法，則評估為true。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/>例如:<x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2, 3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>表示如果學生在第3次回答中剛好有2個想法，則評估為true。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/><x id="START_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;ng-template [ngTemplateOutlet]=&quot;accumulatedIdeaCountSupportMessage&quot;&gt;"/><x id="CLOSE_TAG_NG_TEMPLATE" ctype="x-ng_template" equiv-text="&lt;/ng-template&gt;"/></target>
       </trans-unit>
       <trans-unit id="acb957d799796d719108eeb1d0ed9ca4880c9f0c" datatype="html">
         <source> Evaluates to true if this is the student&apos;s X-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>isSubmitNumber(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if this is the student&apos;s third response. </source>
@@ -18742,7 +18962,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">115,118</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if this is the student's X-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>isSubmitNumber(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if this is the student's third response. </target>
+        <target state="translated"> 如果這是學生的第X次回答，則評估為true。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/>例如:<x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>isSubmitNumber(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>表示如果這是學生的第三次回答，則評估為true。 </target>
       </trans-unit>
       <trans-unit id="ab15bc35d4c4c975e2cd82171bd30ef3fbf8f226" datatype="html">
         <source> Evaluates to true if this is the student&apos;s second to last response when the max number of submits is specified. </source>
@@ -18750,7 +18970,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">122,125</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if this is the student's second to last response when the max number of submits is specified. </target>
+        <target state="translated"> 當指定提交的最大次數時，如果這是學生的倒數第二次回答，則評估為true。 </target>
       </trans-unit>
       <trans-unit id="bc1cca966f287a319703db89b22d379a6c1455cb" datatype="html">
         <source> Evaluates to true if this is the student&apos;s final response when the max number of submits is specified. </source>
@@ -18758,7 +18978,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">129,132</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if this is the student's final response when the max number of submits is specified. </target>
+        <target state="translated"> 當指定提交的最大次數時，如果這是學生的最後一次回答，則評估為true。 </target>
       </trans-unit>
       <trans-unit id="3783efe04c66c9d80d09506ec8b7ad29167aacd8" datatype="html">
         <source>Evaluates to true if the student&apos;s response was not scorable.</source>
@@ -18774,7 +18994,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">140,143</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if no other terms were matched. Add this term as the final rule to specify a default feedback. </target>
+        <target state="translated"> 如果沒有匹配到其他術語，則評估為true。將此術語新增為最後一條規則，以指定預設回饋。 </target>
       </trans-unit>
       <trans-unit id="9d4ed1f582fafcfd1035ea83e58a5e1fe8d6a1a5" datatype="html">
         <source>Operators</source>
@@ -18806,7 +19026,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">155,160</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if terms on both sides of this operator evaluate to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; hasKIScore(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was found and the student received a KI score of 2. </target>
+        <target state="translated"> 如果此運算子兩側的術語都評估為true，則評估為true。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/>例如:<x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>表示如果找到想法1和想法2，則評估為true。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/>例如:<x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; hasKIScore(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>表示如果找到想法1且學生的 KI 分數為2，則評估為true。 </target>
       </trans-unit>
       <trans-unit id="1f50d4313ef8ddef3a1d6d3fd464ec3dd3c21f03" datatype="html">
         <source> Evaluates to true if a term on either side of this operator evaluates to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 || 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if either idea 1 or 2 was found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2 || 3<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found or idea 3 was found. </source>
@@ -18814,7 +19034,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">164,169</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if a term on either side of this operator evaluates to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 || 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if either idea 1 or 2 was found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2 || 3<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found or idea 3 was found. </target>
+        <target state="translated"> 如果此運算子任一側的術語評估為true，則評估為true。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/>例如:<x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 || 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>表示如果找到想法1或想法2，則評估為true。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/>例如:<x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2 || 3<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>表示如果找到想法1和想法2，或找到想法3，則評估為true。 </target>
       </trans-unit>
       <trans-unit id="414f2fd4ea5c948c6ebbf8417e6afe371bea442d" datatype="html">
         <source> Evaluates to true if a term following this operator evaluates to false.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>!1<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was not found. </source>
@@ -18822,7 +19042,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">173,176</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if a term following this operator evaluates to false.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>!1<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was not found. </target>
+        <target state="translated"> 如果此運算子後面的術語評估為false，則評估為true。<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/>例如:<x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>!1<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>表示如果沒有找到想法1，則評估為true。 </target>
       </trans-unit>
       <trans-unit id="46b1ed215e53246db19c5bde05ea87e08a5c2705" datatype="html">
         <source>Parentheses</source>
@@ -18878,7 +19098,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">197,200</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if idea 5a and either idea 4a or idea 12 was found, and the student received a KI score of 3. </target>
+        <target state="translated"> 如果找到了想法5a以及想法4a或想法12，並且學生的 KI 分數為3，則評估為true。 </target>
       </trans-unit>
       <trans-unit id="dc34bee07a6ceed8f010d89d1fcbda15a5abee8c" datatype="html">
         <source>Teaching Tips</source>
@@ -18954,7 +19174,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">43</context>
         </context-group>
-        <target state="translated">畫布寬度(可選)</target>
+        <target state="translated">畫布寬度 (可選)</target>
       </trans-unit>
       <trans-unit id="ac73c15ba143c99206114f58260b06bd8f4f4f83" datatype="html">
         <source>Canvas Height (Optional)</source>
@@ -18966,7 +19186,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">41</context>
         </context-group>
-        <target state="translated">畫布高度(可選)</target>
+        <target state="translated">畫布高度 (可選)</target>
       </trans-unit>
       <trans-unit id="6e2329529b1953198c7dfa0edb260554310bc636" datatype="html">
         <source>Nodes</source>
@@ -18994,7 +19214,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">78</context>
         </context-group>
-        <target state="translated">沒有節點。點擊"新增節點"按鈕來新增節點。</target>
+        <target state="translated">沒有節點。點擊"新增節點"按鈕來新增一個。</target>
       </trans-unit>
       <trans-unit id="0738afe18a258dbcc9031a6ca2bb42747696bd46" datatype="html">
         <source>Node Label</source>
@@ -19062,7 +19282,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">224</context>
         </context-group>
-        <target state="translated">沒有連結。點擊"新增連結"按鈕來新增連結。</target>
+        <target state="translated">沒有連結。點擊"新增連結"按鈕來新增一個。</target>
       </trans-unit>
       <trans-unit id="704ff937be1fcf12bfd12a1a85844849765d13f5" datatype="html">
         <source>Link Label</source>
@@ -19175,7 +19395,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
           <context context-type="linenumber">186</context>
         </context-group>
-        <target state="needs-translation">Feedback</target>
+        <target state="translated">回饋</target>
       </trans-unit>
       <trans-unit id="2353574516166744013" datatype="html">
         <source>Are you sure you want to reset your work?</source>
@@ -20068,7 +20288,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.html</context>
           <context context-type="linenumber">31,33</context>
         </context-group>
-        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>image<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Upload Background Image </target>
+        <target state="translated"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>圖片<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> 上傳背景圖片 </target>
       </trans-unit>
       <trans-unit id="a2e00c075282262a6479cbb99ede5fb4218679d1" datatype="html">
         <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>restore<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Reset </source>
@@ -20184,7 +20404,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="sourcefile">src/assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
           <context context-type="linenumber">50,56</context>
         </context-group>
-        <target state="needs-translation"><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span fxLayout=&quot;row&quot; fxLayoutAlign=&quot;start center&quot;&gt;"/> Saves Student Work   <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon         matTooltip=&quot;Checking this box will enable the Grading Tool to show the student work for the model if the model saves student work. You can also come back later to check this box even after students have saved work for this model. If the model does not save student work, this check box will not do anything.&quot;         &gt;"/>help<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon       &gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+        <target state="translated"><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span fxLayout=&quot;row&quot; fxLayoutAlign=&quot;start center&quot;&gt;"/> 儲存學生的作業   <x id id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon         matTooltip=&quot;Checking this box will enable the Grading Tool to show the student work for the model if the model saves student work. You can also come back later to check this box even after students have saved work for this model. If the model does not save student work, this check box will not do anything.&quot;         &gt;"/>幫助<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon       &gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
       </trans-unit>
       <trans-unit id="b2a497bce327b6c20cc9969b0bad0b1470fcccd5" datatype="html">
         <source>Reload Model</source>
@@ -20308,7 +20528,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
           <context context-type="linenumber">105</context>
         </context-group>
-        <target state="needs-translation">X Value</target>
+        <target state="translated">X 值</target>
       </trans-unit>
       <trans-unit id="f8059ed03401367653cb52747f2b3e818182a8ea" datatype="html">
         <source>Y Axis Plot Line</source>
@@ -20332,7 +20552,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
           <context context-type="linenumber">150</context>
         </context-group>
-        <target state="needs-translation">Y Value</target>
+        <target state="translated">Y 值</target>
       </trans-unit>
       <trans-unit id="507d853e717783f0857fcdfc0e0b92cd7bdf94e8" datatype="html">
         <source> Show Classmate Work </source>
@@ -20721,7 +20941,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">414,416</context>
         </context-group>
-        <target state="translated"> 沒有數列。點擊"新增數列"按鈕來新增一個數列。
+        <target state="translated"> 沒有數列。點擊"新增數列"按鈕來新增一個。
 </target>
       </trans-unit>
       <trans-unit id="7cd2168068d1fd50772c493d493f83e4e412ebc8" datatype="html">
@@ -21294,7 +21514,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="translated">畫布寬度(像素)</target>
+        <target state="translated">畫布寬度 (像素)</target>
       </trans-unit>
       <trans-unit id="579bd990c53c37a00d6f2be19b772c2bd901b5eb" datatype="html">
         <source>Canvas Height (px)</source>
@@ -21302,7 +21522,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
           <context context-type="linenumber">31</context>
         </context-group>
-        <target state="translated">畫布高度(像素)</target>
+        <target state="translated">畫布高度 (像素)</target>
       </trans-unit>
       <trans-unit id="19858049294089faa3ac7a89cd9fd8cb7c0cb084" datatype="html">
         <source>Point Radius Size (px)</source>
@@ -21342,7 +21562,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
           <context context-type="linenumber">96,98</context>
         </context-group>
-        <target state="needs-translation"> Allow Student to Upload Image for Background </target>
+        <target state="translated"> 允許學生上傳圖片作為背景 </target>
       </trans-unit>
       <trans-unit id="720864f262b53e2fff90515031217f60a6f6f6fc" datatype="html">
         <source>Starter Labels</source>
@@ -21608,7 +21828,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
           <context context-type="linenumber">53,55</context>
         </context-group>
-        <target state="translated"> 沒有選項。點擊"新增選項"按鈕來新增一個選項。 </target>
+        <target state="translated"> 沒有選項。點擊"新增選項"按鈕新增一個。 </target>
       </trans-unit>
       <trans-unit id="3e20a6ecefca9c87d5dedc6e425a571629d232c5" datatype="html">
         <source>Choice Name</source>
@@ -21672,7 +21892,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
           <context context-type="linenumber">148,150</context>
         </context-group>
-        <target state="translated"> 沒有目標桶。點擊"新增目標桶"按鈕來新增一個桶。 </target>
+        <target state="translated"> 沒有目標桶。點擊"新增目標桶"按鈕新增一個。 </target>
       </trans-unit>
       <trans-unit id="e36f8feebf8f84ea6d1a1d5db05acaf38556e1f8" datatype="html">
         <source>Target Bucket Name</source>
@@ -21756,7 +21976,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.ts</context>
           <context context-type="linenumber">171</context>
         </context-group>
-        <target state="translated">您確定要刪除此容器嗎?</target>
+        <target state="translated">您確定要刪除此桶嗎?</target>
       </trans-unit>
       <trans-unit id="3db39135c783da4bb320d5826f4de893f62c7e1b" datatype="html">
         <source>Correct</source>
@@ -21914,7 +22134,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multipleChoiceService.ts</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="translated">複選題</target>
+        <target state="translated">多選</target>
       </trans-unit>
       <trans-unit id="9007972153162147219" datatype="html">
         <source>Single Answer</source>
@@ -21978,7 +22198,7 @@ Warning: This will delete all existing choices in this component.</source>
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
           <context context-type="linenumber">34,36</context>
         </context-group>
-        <target state="translated"> 沒有選項。點擊"新增選項"按鈕來新增一個選項。
+        <target state="translated"> 沒有選項。點擊"新增選項"按鈕新增一個。
 </target>
       </trans-unit>
       <trans-unit id="3f2b2b4a6ec318a31f7f5f9b526480846a27547a" datatype="html">
@@ -22059,7 +22279,7 @@ Warning: This will delete all existing choices in this component.</source>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/openResponseService.ts</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="translated">開放式回答</target>
+        <target state="translated">簡答</target>
       </trans-unit>
       <trans-unit id="65051492d1bf489abd46626b33e7d900871f24b7" datatype="html">
         <source>Record Response</source>
@@ -22119,7 +22339,7 @@ Warning: This will delete all existing choices in this component.</source>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Starter Sentence</target>
+        <target state="translated">起始句</target>
       </trans-unit>
       <trans-unit id="6420d6b7f651adac4ff91a2cf5c30e1e3489b07f" datatype="html">
         <source> Allow students to record audio response </source>
@@ -22127,7 +22347,7 @@ Warning: This will delete all existing choices in this component.</source>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">15,17</context>
         </context-group>
-        <target state="needs-translation"> Allow students to record audio response </target>
+        <target state="translated"> 允許學生錄製音訊回應 </target>
       </trans-unit>
       <trans-unit id="10fe2c226b35ba6dbbd873cd7f1e47884d371d13" datatype="html">
         <source> Enable CRater </source>
@@ -22135,7 +22355,7 @@ Warning: This will delete all existing choices in this component.</source>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">26,28</context>
         </context-group>
-        <target state="needs-translation"> Enable CRater </target>
+        <target state="translated"> 啟用CRater </target>
       </trans-unit>
       <trans-unit id="34662097b301b569174c9fd4f08aa195084f9f0b" datatype="html">
         <source>Item Id</source>
@@ -22143,7 +22363,7 @@ Warning: This will delete all existing choices in this component.</source>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">33</context>
         </context-group>
-        <target state="needs-translation">Item Id</target>
+        <target state="translated">項目 Id</target>
       </trans-unit>
       <trans-unit id="3466a3d9ca15827963c87b9a05bc93ecc68b7a18" datatype="html">
         <source> Verify </source>
@@ -22487,7 +22707,7 @@ Warning: This will delete all existing choices in this component.</source>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="needs-translation">Default feedback</target>
+        <target state="translated">預設回饋</target>
       </trans-unit>
       <trans-unit id="2839735751687486837" datatype="html">
         <source>Are you sure you want to delete this scoring rule?
@@ -22760,7 +22980,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
           <context context-type="linenumber">91,93</context>
         </context-group>
-        <target state="needs-translation"> Select </target>
+        <target state="translated"> 選擇 </target>
       </trans-unit>
       <trans-unit id="801b98c6f02fe3b32f6afa3ee854c99ed83474e6" datatype="html">
         <source>URL</source>
@@ -23946,7 +24166,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component.html</context>
           <context context-type="linenumber">9,11</context>
         </context-group>
-        <target state="needs-translation"> Save </target>
+        <target state="translated"> 儲存 </target>
       </trans-unit>
       <trans-unit id="99387bde50a12de9097e8cb9c92e2aa6a43f8324" datatype="html">
         <source> Submit </source>
@@ -23954,7 +24174,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component.html</context>
           <context context-type="linenumber">19,21</context>
         </context-group>
-        <target state="needs-translation"> Submit </target>
+        <target state="translated"> 送出 </target>
       </trans-unit>
       <trans-unit id="4dd656fd6c1723d4ce276413cf8d8ec6a3b89cd8" datatype="html">
         <source>Score: <x id="INTERPOLATION" equiv-text="{{ annotations.score.data.value }}"/><x id="INTERPOLATION_1" equiv-text="{{ maxScoreDisplay }}"/></source>
@@ -24151,6 +24371,14 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">206</context>
         </context-group>
         <target state="translated">筆記本中的圖片</target>
+      </trans-unit>
+      <trans-unit id="7206782115156099663" datatype="html">
+        <source>Path <x id="PH" equiv-text="pathIndex + 1"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/authorBranchService.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target state="needs-translation">Path <x id="PH" equiv-text="pathIndex + 1"/></target>
       </trans-unit>
       <trans-unit id="3570422532828875517" datatype="html">
         <source>Ermina</source>
@@ -24449,6 +24677,14 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">449</context>
         </context-group>
         <target state="needs-translation">This step will not be visible until </target>
+      </trans-unit>
+      <trans-unit id="4647197691580277546" datatype="html">
+        <source>Merge Step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/createBranchService.ts</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <target state="needs-translation">Merge Step</target>
       </trans-unit>
       <trans-unit id="3177789104763917185" datatype="html">
         <source>Manage Notes</source>
@@ -24877,7 +25113,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/vle/node-icon/node-icon.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
-        <target state="needs-translation">Choose an icon</target>
+        <target state="translated">選擇一個圖示</target>
       </trans-unit>
       <trans-unit id="368b817b7cc89a1705d9ac752da4ddda15d42ae8" datatype="html">
         <source> Save </source>
@@ -24885,7 +25121,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
           <context context-type="linenumber">45,47</context>
         </context-group>
-        <target state="needs-translation"> Save </target>
+        <target state="translated"> 儲存 </target>
       </trans-unit>
       <trans-unit id="729411b7f2d3f8d9112be6db06e97d485d6efdae" datatype="html">
         <source> Submit </source>
@@ -24893,7 +25129,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
           <context context-type="linenumber">58,60</context>
         </context-group>
-        <target state="needs-translation"> Submit </target>
+        <target state="translated"> 送出 </target>
       </trans-unit>
       <trans-unit id="e4c201ad39e5fa4658b22a707c94012bc30e0846" datatype="html">
         <source>Dismiss all alerts</source>
