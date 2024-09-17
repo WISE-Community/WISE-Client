@@ -1,4 +1,13 @@
-import { Component, Input, OnInit, Signal, WritableSignal, computed, signal } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Signal,
+  ViewChild,
+  WritableSignal,
+  computed,
+  signal
+} from '@angular/core';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
@@ -12,6 +21,7 @@ import { ExpandEvent } from '../domain/expand-event';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { ComponentContent } from '../../common/ComponentContent';
 import { copy } from '../../common/object/object';
+import { MatExpansionPanel } from '@angular/material/expansion';
 
 @Component({
   selector: 'project-authoring',
@@ -33,6 +43,7 @@ export class ProjectAuthoringComponent implements OnInit {
   protected lessonIdToExpanded: WritableSignal<{ [key: string]: boolean }> = signal({});
   protected nodeIdToChecked: any = {};
   protected nodeTypeSelected: Signal<NodeTypeSelected>;
+  @ViewChild('panel') panel: MatExpansionPanel;
   @Input('unitId') protected projectId?: number;
   private subscriptions: Subscription = new Subscription();
 

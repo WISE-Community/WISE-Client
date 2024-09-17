@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, Signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Signal, ViewEncapsulation } from '@angular/core';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { SelectNodeEvent } from '../domain/select-node-event';
@@ -12,7 +12,8 @@ import { AddStepTarget } from '../../../../app/domain/addStepTarget';
 @Component({
   selector: 'project-authoring-lesson',
   templateUrl: './project-authoring-lesson.component.html',
-  styleUrls: ['./project-authoring-lesson.component.scss']
+  styleUrls: ['./project-authoring-lesson.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ProjectAuthoringLessonComponent {
   @Input() expanded: boolean = true;
@@ -47,8 +48,8 @@ export class ProjectAuthoringLessonComponent {
     this.dataService.setCurrentNodeByNodeId(nodeId);
   }
 
-  protected toggleExpanded(): void {
-    this.expanded = !this.expanded;
+  protected toggleExpanded(opened: boolean = true): void {
+    this.expanded = opened;
     this.onExpandedChanged.emit({ id: this.lesson.id, expanded: this.expanded });
   }
 

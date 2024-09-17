@@ -1,53 +1,23 @@
 .lesson {
-  padding: 8px;
-  margin: 16px 0px;
-  border: 2px solid #dddddd;
-  border-radius: 6px;
-  position: relative;
-}
-
-.lesson:hover {
-  &.lesson-collapsed {
-    background-color: #add8e6;
+  .mat-expansion-panel-header {
+    padding-inline-start: 8px;
   }
-}
 
-.lesson:hover .lesson-buttons {
-  display: block;
-}
-
-.lesson-bar {
-  height: 40px;
-}
-
-.full-width {
-  width: 100%;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-.lesson-expand-collapse-div {
-  flex-grow: 1;
-  align-self: stretch;
-}
-
-.lesson-buttons {
-  margin-right: 8px;
-  display: none;
-
-  &.lesson-expanded {
-    display: block;
+  .mat-expansion-panel-body {
+    padding-left: 8px;
+    padding-right: 8px;
   }
-}
 
-.expand-collapse-icon {
-  width: 40px;
-  margin-right: 10px;
-}
+  .lesson-bar {
+    height: 40px;
+  }
 
-.no-steps-message {
-  height: 40px;
-  margin-left: 40px;
+  .full-width {
+    width: 100%;
+  }
+
+  .no-steps-message {
+    height: 40px;
+    margin-left: 40px;
+  }
 }
