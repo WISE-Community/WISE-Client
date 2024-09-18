@@ -45,11 +45,11 @@
     [(ngModel)]="componentContent.hasWork"
     (ngModelChange)="inputChange.next($event)"
     color="primary"
-    i18n
   >
     <span fxLayout="row" fxLayoutAlign="start center">
-      Saves Student Work &nbsp;
+      <span i18n>Saves Student Work</span> &nbsp;
       <mat-icon
+        i18n-matTooltip
         matTooltip="Checking this box will enable the Grading Tool to show the student work for the model if the model saves student work. You can also come back later to check this box even after students have saved work for this model. If the model does not save student work, this check box will not do anything."
         >help</mat-icon
       >
