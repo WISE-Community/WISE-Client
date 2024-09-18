@@ -4,7 +4,6 @@ import {
   ProjectAuthoringNodeHarness,
   ProjectAuthoringNodeHarnessFilters
 } from '../project-authoring/project-authoring-node.harness';
-
 import { MatExpansionPanelHarness } from '@angular/material/expansion/testing';
 
 export class ProjectAuthoringLessonHarness extends ProjectAuthoringNodeHarness {

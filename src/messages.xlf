@@ -13040,7 +13040,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Are you sure you want to delete the <x id="PH" equiv-text="selectedNodeIds.length"/> selected item(s)?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.ts</context>
-          <context context-type="linenumber">102</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e8fb2ceb6f8d4c3e90a6a688e9024461e67f44f0" datatype="html">
