@@ -22,7 +22,6 @@ import { NodeAdvancedGeneralAuthoringComponent } from '../../assets/wise5/author
 import { EditNodeRubricComponent } from '../../assets/wise5/authoringTool/node/editRubric/edit-node-rubric.component';
 import { NodeAdvancedPathAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component';
 import { NodeAdvancedJsonAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/json/node-advanced-json-authoring.component';
-import { NodeAdvancedBranchAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
 import { ProjectAssetAuthoringComponent } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component';
@@ -147,7 +146,6 @@ const routes: Routes = [
                 path: 'advanced',
                 component: NodeAdvancedAuthoringComponent,
                 children: [
-                  { path: 'branch', component: NodeAdvancedBranchAuthoringComponent },
                   { path: 'constraint', component: NodeAdvancedConstraintAuthoringComponent },
                   { path: 'general', component: NodeAdvancedGeneralAuthoringComponent },
                   { path: 'json', component: NodeAdvancedJsonAuthoringComponent },
