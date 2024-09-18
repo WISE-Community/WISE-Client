@@ -4,11 +4,11 @@ import {
   ProjectAuthoringNodeHarness,
   ProjectAuthoringNodeHarnessFilters
 } from '../project-authoring/project-authoring-node.harness';
+import { MatExpansionPanelHarness } from '@angular/material/expansion/testing';
 
 export class ProjectAuthoringLessonHarness extends ProjectAuthoringNodeHarness {
   static hostSelector = 'project-authoring-lesson';
-  getExpandCollapseDiv = this.locatorFor('.lesson-expand-collapse-div');
-  getExpandCollapseIcon = this.locatorFor('.expand-collapse-icon .mat-icon');
+  getLesson = this.locatorFor(MatExpansionPanelHarness);
   getSteps = this.locatorForAll(ProjectAuthoringStepHarness);
 
   static with(
@@ -24,10 +24,10 @@ export class ProjectAuthoringLessonHarness extends ProjectAuthoringNodeHarness {
   }
 
   async isExpanded(): Promise<boolean> {
-    return (await (await this.getExpandCollapseIcon()).text()) === 'expand_less';
+    return (await (await this.getLesson()).isExpanded()) === true;
   }
 
   async isCollapsed(): Promise<boolean> {
-    return (await (await this.getExpandCollapseIcon()).text()) === 'expand_more';
+    return (await (await this.getLesson()).isExpanded()) === false;
   }
 }

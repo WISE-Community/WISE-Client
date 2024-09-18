@@ -112,10 +112,12 @@ export class ProjectAuthoringStepComponent {
   }
 
   protected constraintIconClicked(nodeId: string): void {
-    this.dataService.setCurrentNodeByNodeId(nodeId);
-    this.router.navigate([
-      `/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/constraint`
-    ]);
+    if (!this.isNodeInAnyBranchPath(nodeId)) {
+      this.dataService.setCurrentNodeByNodeId(nodeId);
+      this.router.navigate([
+        `/teacher/edit/unit/${this.projectId}/node/${nodeId}/advanced/constraint`
+      ]);
+    }
   }
 
   protected goToEditBranch(nodeId: string): void {

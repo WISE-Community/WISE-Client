@@ -65,6 +65,7 @@ import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringToo
 import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-tools.component';
 import { EditBranchComponent } from '../../assets/wise5/authoringTool/edit-branch/edit-branch.component';
 import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -119,6 +120,7 @@ import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/c
     EditNodeTitleComponent,
     MatBadgeModule,
     MatChipsModule,
+    MatExpansionModule,
     ImportComponentModule,
     NgSelectModule,
     NodeAdvancedAuthoringModule,

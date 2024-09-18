@@ -1,10 +1,11 @@
 .step {
   height: 50px;
   padding: 4px;
-  margin: 4px 10px 4px 30px;
+  margin: 4px 4px 4px 30px;
   border: 2px solid #dddddd;
   border-radius: 6px;
   position: relative;
+  cursor: pointer;
 }
 
 .step:hover {
@@ -15,25 +16,20 @@
   margin-left: 55px !important;
 }
 
-.pointer {
-  cursor: pointer;
-}
-
-.dynamic-step-buttons {
+.step-action {
   display: none;
 }
 
-.step:hover, .step:focus {
-  .dynamic-step-buttons {
+.step:hover, .step:focus-within {
+  .step-action {
     display: block;
   }
-}
-
-.step-click-to-enter-div {
-  flex-grow: 1;
-  align-self: stretch;
-}
+}                       
 
 .rotate-180 {
   transform: rotate(180deg);
+}
+
+.tooltip-helper {
+  height: 100%;
 }

@@ -1,12 +1,16 @@
 <div
   id="{{ step.id }}"
   fxLayoutAlign="start center"
-  fxLayoutGap="10px"
-  class="step pointer"
+  fxLayoutGap="8px"
+  class="step"
   [ngClass]="{ 'branch-path-step': isNodeInAnyBranchPath(step.id) }"
   [ngStyle]="{ 'background-color': getStepBackgroundColor(step.id) }"
   (click)="setCurrentNode(step.id)"
+  (keyup.enter)="setCurrentNode(step.id)"
   role="button"
+  tabindex="0"
+  aria-label="Edit step"
+  i18n-aria-label
 >
   <mat-checkbox
     color="primary"
@@ -32,63 +36,66 @@
         <mat-icon class="rotate-180">call_split</mat-icon>
       </button>
     }
-    <mat-icon
+    <button
       *ngIf="nodeHasConstraint(step.id)"
+      mat-icon-button
       (click)="constraintIconClicked(step.id); $event.stopPropagation()"
       matTooltip="{{ getNumberOfConstraintsOnNode(step.id) }} Constraint(s) {{
         getConstraintDescriptions(step.id)
       }}"
       matTooltipPosition="right"
       i18n-matTooltip
-      >block</mat-icon
     >
+      <mat-icon>block</mat-icon>
+    </button>
     <mat-icon
       *ngIf="nodeHasRubric(step.id)"
-      matTooltip="Has Rubric"
-      matTooltipPosition="right"
+      tabindex="0"
+      matTooltip="Has rubric/teaching tips"
+      matTooltipPosition="above"
       i18n-matTooltip
       >message</mat-icon
     >
   </div>
   <div
-    class="step-click-to-enter-div"
-    matTooltip="Click to enter step"
+    fxFlex
+    class="tooltip-helper"
+    matTooltip="Edit step"
     matTooltipPosition="above"
     i18n-matTooltip
-    fxFlex
   ></div>
-  <div class="dynamic-step-buttons">
-    <div fxLayoutAlign="start center">
-      <button
-        mat-icon-button
-        (click)="move(); $event.stopPropagation()"
-        color="primary"
-        matTooltip="Move step"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>redo</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        (click)="copy(); $event.stopPropagation()"
-        color="primary"
-        matTooltip="Copy step"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>content_copy</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        (click)="delete(); $event.stopPropagation()"
-        color="primary"
-        matTooltip="Delete step"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
+  <!-- <div class="dynamic-step-buttons"> -->
+  <div fxLayoutAlign="start center">
+    <button
+      class="step-action"
+      mat-icon-button
+      (click)="move(); $event.stopPropagation()"
+      matTooltip="Move step"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>redo</mat-icon>
+    </button>
+    <button
+      class="step-action"
+      mat-icon-button
+      (click)="copy(); $event.stopPropagation()"
+      matTooltip="Copy step"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>content_copy</mat-icon>
+    </button>
+    <button
+      class="step-action"
+      mat-icon-button
+      (click)="delete(); $event.stopPropagation()"
+      matTooltip="Delete step"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
   </div>
+  <!-- </div> -->
 </div>

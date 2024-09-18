@@ -39,6 +39,7 @@ import { DeleteTranslationsService } from '../../services/deleteTranslationsServ
 import { CopyTranslationsService } from '../../services/copyTranslationsService';
 import { TeacherProjectTranslationService } from '../../services/teacherProjectTranslationService';
 import { RemoveNodeIdFromTransitionsService } from '../../services/removeNodeIdFromTransitionsService';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 let configService: ConfigService;
 let component: ProjectAuthoringComponent;
@@ -68,6 +69,7 @@ describe('ProjectAuthoringComponent', () => {
         MatButtonModule,
         MatCheckboxModule,
         MatDialogModule,
+        MatExpansionModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
