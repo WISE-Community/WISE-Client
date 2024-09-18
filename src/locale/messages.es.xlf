@@ -20406,6 +20406,22 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="translated">Alto (px)</target>
       </trans-unit>
+      <trans-unit id="eb8281c5492ce8940004383fbbb82bed8ab9e826" datatype="html">
+        <source>Saves Student Work</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <target state="needs-translation">Saves Student Work</target>
+      </trans-unit>
+      <trans-unit id="184e5ce60367489ca65580b65687bfc7d3b7fd27" datatype="html">
+        <source>Checking this box will enable the Grading Tool to show the student work for the model if the model saves student work. You can also come back later to check this box even after students have saved work for this model. If the model does not save student work, this check box will not do anything.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+        <target state="needs-translation">Checking this box will enable the Grading Tool to show the student work for the model if the model saves student work. You can also come back later to check this box even after students have saved work for this model. If the model does not save student work, this check box will not do anything.</target>
+      </trans-unit>
       <trans-unit id="b2a497bce327b6c20cc9969b0bad0b1470fcccd5" datatype="html">
         <source>Reload Model</source>
         <context-group purpose="location">
