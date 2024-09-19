@@ -44,15 +44,16 @@
           [workgroupId]="workgroup.workgroupId"
         />
       </mat-tab>
-      <mat-tab *ngIf="reportEnabled" label="{{ reportTitle }}">
-        <notebook-report
-          class="report-grading"
-          [mode]="'classroomMonitor'"
-          [config]="notebookConfig"
-          [workgroupId]="workgroup.workgroupId"
-        >
-        </notebook-report>
-      </mat-tab>
+      @if (reportEnabled) {
+        <mat-tab label="{{ reportTitle }}">
+          <notebook-report
+            class="report-grading"
+            [mode]="'classroomMonitor'"
+            [config]="notebookConfig"
+            [workgroupId]="workgroup.workgroupId"
+          />
+        </mat-tab>
+      }
     </mat-tab-group>
   </mat-list-item>
 </div>
