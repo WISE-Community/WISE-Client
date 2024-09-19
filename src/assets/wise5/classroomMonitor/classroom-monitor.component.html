@@ -19,11 +19,12 @@
         <router-outlet></router-outlet>
       </content>
       <side-menu [views]="views"></side-menu>
-      <notebook-report
-        *ngIf="reportEnabled"
-        [ngClass]="{ 'report-full': reportFullscreen }"
-        [notebookConfig]="notebookConfig"
-      ></notebook-report>
+      @if (reportEnabled) {
+        <notebook-report
+          [ngClass]="{ 'report-full': reportFullscreen }"
+          [notebookConfig]="notebookConfig"
+        />
+      }
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

@@ -22,7 +22,7 @@ import { NotebookReportComponent } from './notebook-report/notebook-report.compo
 import { WiseTinymceEditorComponent } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component';
 
 @NgModule({
-  declarations: [NotebookParentComponent, NotebookReportComponent],
+  declarations: [NotebookParentComponent],
   imports: [
     CommonModule,
     ComponentStateInfoComponent,
@@ -42,6 +42,7 @@ import { WiseTinymceEditorComponent } from '../../assets/wise5/directives/wise-t
     NotebookItemComponent,
     NotebookLauncherComponent,
     NotebookNotesComponent,
+    NotebookReportComponent,
     WiseTinymceEditorComponent
   ],
   exports: [

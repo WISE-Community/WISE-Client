@@ -8,12 +8,12 @@
   <mat-drawer-content>
     <top-bar [projectName]="project.metadata.title"></top-bar>
     <ng-container *ngTemplateOutlet="vleTemplate"></ng-container>
-    <notebook-report
-      *ngIf="reportEnabled"
-      [ngClass]="{ 'notes-visible': notesVisible, 'report-full': reportFullscreen }"
-      [config]="notebookConfig"
-    >
-    </notebook-report>
+    @if (reportEnabled) {
+      <notebook-report
+        [ngClass]="{ 'notes-visible': notesVisible, 'report-full': reportFullscreen }"
+        [config]="notebookConfig"
+      />
+    }
     <notebook-launcher *ngIf="notesEnabled && !notesVisible" [notebookConfig]="notebookConfig" />
   </mat-drawer-content>
 </mat-drawer-container>
