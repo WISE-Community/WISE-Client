@@ -5839,7 +5839,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.html</context>
@@ -6515,57 +6515,25 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="14ab0b74dd05d40df302ebb4b98952b702ebfd56" datatype="html">
-        <source> Score: <x id="INTERPOLATION" equiv-text="{{ annotations.score.data.value }}"/><x id="INTERPOLATION_1" equiv-text="{{ maxScoreDisplay }}"/> </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/notebook/notebook-report-annotations/notebook-report-annotations.component.html</context>
-          <context context-type="linenumber">19,21</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8133f877e85896a39ffe724e5801638f1794ac88" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ latestAnnotationTime | amDateFormat : &apos;ddd, MMM D YYYY, h:mm a&apos; }}"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/notebook/notebook-report-annotations/notebook-report-annotations.component.html</context>
-          <context context-type="linenumber">27</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1700529996937824756" datatype="html">
-        <source>Computer Feedback</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/notebook/notebook-report-annotations/notebook-report-annotations.component.ts</context>
-          <context context-type="linenumber">64</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4887677208798229337" datatype="html">
-        <source>Teacher Feedback</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/notebook/notebook-report-annotations/notebook-report-annotations.component.ts</context>
-          <context context-type="linenumber">67</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">189</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="3de550daa9bf35829dbeb9099844614347d2dbc5" datatype="html">
         <source>Toggle Full Screen</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e8bcb762b48cf52fbea66ce9c4f6b970b99a80fd" datatype="html">
         <source>Collapse</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f8b53b407af242e77dc3391947f23988f3451e64" datatype="html">
         <source> Save </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">72,74</context>
+          <context context-type="linenumber">69,71</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component.html</context>
@@ -6580,7 +6548,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Team hasn&apos;t worked on <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> yet. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">93,95</context>
+          <context context-type="linenumber">90,92</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a8d79c94172b18dbceadb046a6f53999bd5684f6" datatype="html">
@@ -21499,6 +21467,13 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.html</context>
           <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4887677208798229337" datatype="html">
+        <source>Teacher Feedback</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
+          <context context-type="linenumber">189</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3d3ae7deebc5949b0c1c78b9847886a94321d9fd" datatype="html">

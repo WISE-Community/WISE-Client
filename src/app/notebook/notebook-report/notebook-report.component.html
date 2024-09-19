@@ -9,7 +9,11 @@
     (click)="toggleCollapse()"
     fxLayoutAlign="start center"
   >
-    <mat-card-title class="mat-body-2 overflow--ellipsis" fxLayoutAlign="start center" fxLayoutGap="4px">
+    <mat-card-title
+      class="mat-body-2 overflow--ellipsis"
+      fxLayoutAlign="start center"
+      fxLayoutGap="4px"
+    >
       <mat-icon> assignment </mat-icon>
       <span>
         {{ reportItem.content.title }}
@@ -53,13 +57,6 @@
       (openNotebook)="addNotebookItemContent($event)"
     >
     </wise-tinymce-editor>
-    <notebook-report-annotations
-      *ngIf="hasAnnotation"
-      [annotations]="latestAnnotations"
-      [hasNew]="hasNewAnnotation"
-      [maxScore]="maxScore"
-    >
-    </notebook-report-annotations>
   </mat-card-content>
   <mat-card-actions [class.hidden]="collapsed">
     <div class="actions" fxLayoutGap="8px" fxLayoutAlign="start center">
