@@ -28,11 +28,11 @@ import { TeacherProjectTranslationService } from '../../../services/teacherProje
 import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
 import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
 import { PreviewComponentButtonComponent } from '../../components/preview-component-button/preview-component-button.component';
-import { TranslatableInputComponent } from '../../components/translatable-input/translatable-input.component';
 import { CopyTranslationsService } from '../../../services/copyTranslationsService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CreateComponentService } from '../../../services/createComponentService';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -60,6 +60,7 @@ describe('NodeAuthoringComponent', () => {
         EditNodeTitleComponent,
         FormsModule,
         MatCheckboxModule,
+        MatExpansionModule,
         MatIconModule,
         MatInputModule,
         PreviewComponentButtonComponent,
@@ -142,7 +143,7 @@ describe('NodeAuthoringComponent', () => {
 function copyComponent() {
   describe('copyComponent()', () => {
     it('should copy component', () => {
-      clickComponentHeader(component2.id);
+      clickComponent(component2.id);
       fixture.detectChanges();
       expect(teacherProjectService.idToNode[nodeId1].components).toEqual(node1Components);
       clickComponentCopyButton(component2.id);
@@ -159,7 +160,7 @@ function copyComponent() {
 function deleteComponent() {
   describe('deleteComponent()', () => {
     it('should delete component', () => {
-      clickComponentHeader(component2.id);
+      clickComponent(component2.id);
       fixture.detectChanges();
       expect(teacherProjectService.idToNode[nodeId1].components).toEqual(node1Components);
       confirmSpy.and.returnValue(true);
@@ -200,8 +201,8 @@ function clickComponentCheckbox(componentId: string): void {
   queryByCssAndClick(`#${componentId} mat-checkbox label`);
 }
 
-function clickComponentHeader(componentId: string): void {
-  queryByCssAndClick(`#${componentId} .component-header`);
+function clickComponent(componentId: string): void {
+  queryByCssAndClick(`#${componentId}`);
 }
 
 function queryByCssAndClick(css: string): void {
@@ -210,11 +211,6 @@ function queryByCssAndClick(css: string): void {
 
 function clickComponentCopyButton(componentId: string): void {
   queryByCssAndClickCopy(`#${componentId} button`);
-}
-
-function clickCopyComponentsButton(): void {
-  queryByCssAndClickCopy('button');
-  fixture.detectChanges();
 }
 
 function queryByCssAndClickCopy(css: string): void {

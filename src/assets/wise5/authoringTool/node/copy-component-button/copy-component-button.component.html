@@ -1,7 +1,7 @@
 <button
   mat-icon-button
-  color="primary"
-  (click)="copy($event)"
+  (click)="$event.stopPropagation(); copy()"
+  (keydown)="$event.stopPropagation()"
   matTooltip="Copy component"
   matTooltipPosition="above"
   i18n-matTooltip

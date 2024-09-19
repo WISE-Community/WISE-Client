@@ -1,10 +1,10 @@
 <button
   mat-icon-button
-  color="primary"
   matTooltip="Preview component"
   matTooltipPosition="above"
   i18n-matTooltip
   (click)="$event.stopPropagation(); popUpComponentPreview()"
+  (keydown)="$event.stopPropagation()"
 >
   <mat-icon>preview</mat-icon>
 </button>
