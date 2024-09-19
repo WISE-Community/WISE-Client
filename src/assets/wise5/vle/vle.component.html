@@ -1,37 +1,47 @@
 <link rel="stylesheet" href="/assets/wise5/themes/default/style/angular-material.css" />
 <link rel="stylesheet" href="/assets/wise5/themes/default/style/vle.css" />
 <link rel="stylesheet" [href]="projectStylePath | safeUrl" />
-<mat-drawer-container [hasBackdrop]="false" *ngIf="initialized">
-  <mat-drawer #drawer mode="over" position="end" (keydown.escape)="closeNotes()">
-    <notebook-notes [config]="notebookConfig" />
-  </mat-drawer>
-  <mat-drawer-content>
-    <top-bar [projectName]="project.metadata.title"></top-bar>
-    <ng-container *ngTemplateOutlet="vleTemplate"></ng-container>
-    @if (reportEnabled) {
-      <notebook-report
-        [ngClass]="{ 'notes-visible': notesVisible, 'report-full': reportFullscreen }"
-        [config]="notebookConfig"
-      />
-    }
-    <notebook-launcher *ngIf="notesEnabled && !notesVisible" [notebookConfig]="notebookConfig" />
-  </mat-drawer-content>
-</mat-drawer-container>
+@if (initialized) {
+  <mat-drawer-container [hasBackdrop]="false">
+    <mat-drawer #drawer mode="over" position="end" (keydown.escape)="closeNotes()">
+      <notebook-notes [config]="notebookConfig" />
+    </mat-drawer>
+    <mat-drawer-content>
+      <top-bar [projectName]="project.metadata.title" />
+      <ng-container *ngTemplateOutlet="vleTemplate"></ng-container>
+      @if (reportEnabled) {
+        <notebook-report
+          [ngClass]="{ 'notes-visible': notesVisible, 'report-full': reportFullscreen }"
+          [config]="notebookConfig"
+        />
+      }
+      @if (notesEnabled && !notesVisible) {
+        <notebook-launcher [notebookConfig]="notebookConfig" />
+      }
+    </mat-drawer-content>
+  </mat-drawer-container>
+}
 
 <div id="wise-link-communicator" class="wise-link-communicator"></div>
 
 <ng-template #defaultVLETemplate>
-  <step-tools *ngIf="layoutState === 'node'" class="control-bg-bg mat-elevation-z1" />
+  @if (layoutState === 'node') {
+    <step-tools class="control-bg-bg mat-elevation-z1" />
+  }
   <div
     id="content"
     class="vle-content"
     [ngClass]="{ 'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node' }"
   >
-    <run-ended-and-locked-message *ngIf="runEndedAndLocked" class="notice" />
+    @if (runEndedAndLocked) {
+      <run-ended-and-locked-message class="notice" />
+    }
     @if (layoutState === 'node') {
       <node class="top" [node]="currentNode" />
     }
-    <navigation *ngIf="layoutState === 'nav'" class="top"></navigation>
+    @if (layoutState === 'nav') {
+      <navigation class="top" />
+    }
   </div>
 </ng-template>
 
@@ -43,7 +53,9 @@
   >
     <group-tabs />
     <div class="tab-content">
-      <run-ended-and-locked-message *ngIf="runEndedAndLocked" />
+      @if (runEndedAndLocked) {
+        <run-ended-and-locked-message />
+      }
       @if (layoutState === 'node') {
         <node class="node-tabbed top" [node]="currentNode" />
       }

@@ -5,7 +5,6 @@ import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../vleProjectService';
 
 @Component({
-  selector: 'vle-parent',
   templateUrl: './vle-parent.component.html'
 })
 export class VLEParentComponent implements OnInit {

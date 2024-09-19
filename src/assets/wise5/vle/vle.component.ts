@@ -16,31 +16,58 @@ import { convertToPNGFile } from '../common/canvas/canvas';
 import { NodeStatusService } from '../services/nodeStatusService';
 import { Node } from '../common/Node';
 import { SafeResourceUrl } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { NotebookNotesComponent } from '../../../app/notebook/notebook-notes/notebook-notes.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { SafeUrl } from '../directives/safeUrl/safe-url.pipe';
+import { NodeNavigationComponent } from '../directives/node-navigation/node-navigation.component';
+import { GroupTabsComponent } from '../directives/group-tabs/group-tabs.component';
+import { TopBarComponent } from '../../../app/student/top-bar/top-bar.component';
+import { NotebookReportComponent } from '../../../app/notebook/notebook-report/notebook-report.component';
+import { NotebookLauncherComponent } from '../../../app/notebook/notebook-launcher/notebook-launcher.component';
+import { StepToolsComponent } from '../themes/default/themeComponents/stepTools/step-tools.component';
+import { RunEndedAndLockedMessageComponent } from './run-ended-and-locked-message/run-ended-and-locked-message.component';
+import { NodeComponent } from './node/node.component';
+import { NavigationComponent } from '../themes/default/navigation/navigation.component';
 
 @Component({
+  imports: [
+    CommonModule,
+    GroupTabsComponent,
+    MatSidenavModule,
+    NavigationComponent,
+    NodeComponent,
+    NodeNavigationComponent,
+    NotebookLauncherComponent,
+    NotebookNotesComponent,
+    NotebookReportComponent,
+    RunEndedAndLockedMessageComponent,
+    SafeUrl,
+    StepToolsComponent,
+    TopBarComponent
+  ],
   selector: 'vle',
-  templateUrl: './vle.component.html',
-  styleUrls: ['./vle.component.scss']
+  standalone: true,
+  styleUrl: './vle.component.scss',
+  templateUrl: './vle.component.html'
 })
 export class VLEComponent implements AfterViewInit {
+  protected currentNode: Node;
   @ViewChild('defaultVLETemplate') private defaultVLETemplate: TemplateRef<any>;
   @ViewChild('drawer') public drawer: any;
+  protected initialized: boolean;
+  protected layoutState: string;
+  protected notebookConfig: any;
+  protected notesEnabled: boolean = false;
+  protected notesVisible: boolean = false;
+  protected project: any;
+  protected projectStylePath: SafeResourceUrl;
+  protected reportEnabled: boolean = false;
+  protected reportFullscreen: boolean = false;
+  protected runEndedAndLocked: boolean;
+  private subscriptions: Subscription = new Subscription();
   @ViewChild('tabbedVLETemplate') private tabbedVLETemplate: TemplateRef<any>;
-
-  currentNode: Node;
-  initialized: boolean;
-  layoutState: string;
-  notebookConfig: any;
-  notesEnabled: boolean = false;
-  notesVisible: boolean = false;
-  project: any;
-  projectStylePath: SafeResourceUrl;
-  reportEnabled: boolean = false;
-  reportFullscreen: boolean = false;
-  rootNode: any;
-  runEndedAndLocked: boolean;
-  subscriptions: Subscription = new Subscription();
-  vleTemplate: TemplateRef<any>;
+  protected vleTemplate: TemplateRef<any>;
 
   constructor(
     private annotationService: AnnotationService,
@@ -73,7 +100,7 @@ export class VLEComponent implements AfterViewInit {
     this.wiseLinkService.addWiseLinkClickedListener();
   }
 
-  initRestOfVLE() {
+  private initRestOfVLE(): void {
     this.setProject();
     this.vleTemplate =
       this.projectService.project.theme === 'tab'
@@ -122,7 +149,6 @@ export class VLEComponent implements AfterViewInit {
 
   private setProject(): void {
     this.project = this.projectService.getProject();
-    this.rootNode = this.projectService.rootNode;
     this.setCurrentNode();
   }
 
