@@ -120,6 +120,7 @@
                 [(ngModel)]="componentsToChecked()[component.id]"
                 (change)="componentCheckboxChanged(component.id, $event.checked)"
                 (click)="$event.stopPropagation()"
+                (keydown)="$event.stopPropagation()"
                 aria-label="Select component"
                 i18n-aria-label
               >
