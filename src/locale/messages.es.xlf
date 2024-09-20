@@ -1258,7 +1258,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">114</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component.html</context>
@@ -6376,7 +6376,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.html</context>
@@ -7136,33 +7136,29 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Collapse</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">41</context>
         </context-group>
         <target state="translated">Colapsar</target>
       </trans-unit>
-      <trans-unit id="f8b53b407af242e77dc3391947f23988f3451e64" datatype="html">
+      <trans-unit id="368b817b7cc89a1705d9ac752da4ddda15d42ae8" datatype="html">
         <source> Save </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">69,71</context>
+          <context context-type="linenumber">73,75</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component.html</context>
-          <context context-type="linenumber">11,13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
-          <context context-type="linenumber">80,82</context>
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
+          <context context-type="linenumber">45,47</context>
         </context-group>
         <target state="translated"> Guardar </target>
       </trans-unit>
-      <trans-unit id="70cfd60f574a2e5b823237ac05381d8d488e4c7c" datatype="html">
-        <source> Team hasn&apos;t worked on <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> yet. </source>
+      <trans-unit id="5618fdabad6d84b2517b1919b6db5af88b260b24" datatype="html">
+        <source>Team hasn&apos;t worked on <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> yet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">90,92</context>
+          <context context-type="linenumber">100</context>
         </context-group>
-        <target state="translated"> El equipo no ha trabajo todavía en <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> . </target>
+        <target state="needs-translation">Team hasn't worked on <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> yet.</target>
       </trans-unit>
       <trans-unit id="a8d79c94172b18dbceadb046a6f53999bd5684f6" datatype="html">
         <source> Password required </source>
@@ -11058,7 +11054,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">168</context>
+          <context context-type="linenumber">194</context>
         </context-group>
         <target state="translated">¿Seguir conectado/a?</target>
       </trans-unit>
@@ -11074,7 +11070,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">195</context>
         </context-group>
         <target state="translated">Se acabó el tiempo de la sesión</target>
       </trans-unit>
@@ -11296,7 +11292,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <target state="translated">Avanzado</target>
       </trans-unit>
@@ -11304,7 +11300,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Preview component</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/preview-component-button/preview-component-button.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">3</context>
         </context-group>
         <target state="needs-translation">Preview component</target>
       </trans-unit>
@@ -13334,7 +13330,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Components</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">27</context>
         </context-group>
         <target state="translated">Componentes</target>
       </trans-unit>
@@ -13342,7 +13338,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Move Components</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <target state="translated">Mover componentes</target>
       </trans-unit>
@@ -13350,7 +13346,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Copy Components</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <target state="translated">Copiar componentes</target>
       </trans-unit>
@@ -13358,23 +13354,35 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Delete Components</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <target state="translated">Eliminar componentes</target>
       </trans-unit>
-      <trans-unit id="67145eb769f4fe04e8b9f3c24d4452cf18ac196b" datatype="html">
+      <trans-unit id="a0161b45994d017056833ae5e2fbaccb8f58e847" datatype="html">
         <source> + Expand All </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">72,74</context>
+          <context context-type="linenumber">73,75</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">22,24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-grading/student-grading.component.html</context>
+          <context context-type="linenumber">34,36</context>
         </context-group>
         <target state="translated"> +Expandir Todo </target>
       </trans-unit>
-      <trans-unit id="22137335ce02968992f1f2fb73c630e68be673cb" datatype="html">
+      <trans-unit id="67f47ba6318d57c0512c1cca8cfcd07670b14e36" datatype="html">
         <source> - Collapse All </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">82,84</context>
+          <context context-type="linenumber">83,85</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-grading/student-grading.component.html</context>
+          <context context-type="linenumber">45,47</context>
         </context-group>
         <target state="translated"> - Colapsar Todo </target>
       </trans-unit>
@@ -13382,39 +13390,31 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>This step does not have any components. Click the + button to add a component.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">91</context>
         </context-group>
         <target state="translated">Este paso no tiene ningún componente. Hacer clic en el botón + para agregar un componente.</target>
       </trans-unit>
-      <trans-unit id="534f4fefca77da56b8b0ea6fb63ff18bae415a92" datatype="html">
-        <source>Toggle component authoring</source>
+      <trans-unit id="8f7d9f3c64392f7c5f81b31834ae93c016889683" datatype="html">
+        <source>Expand/collapse component</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
           <context context-type="linenumber">111</context>
         </context-group>
-        <target state="translated">Activar la creación de componentes</target>
+        <target state="needs-translation">Expand/collapse component</target>
       </trans-unit>
       <trans-unit id="11cd90245b41b1506efabdcea69d3c5c0964a432" datatype="html">
         <source>Select component</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <target state="translated">Seleccionar componente</target>
-      </trans-unit>
-      <trans-unit id="47f8ae23f1be55b30a01abc41c7ca4b770f5d1b2" datatype="html">
-        <source>Click to expand/collapse</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">139</context>
-        </context-group>
-        <target state="translated">Clic para expandir / contraer</target>
       </trans-unit>
       <trans-unit id="46c242cc262ba3a868dfd6bd37f555c1ada6877c" datatype="html">
         <source>Delete Component</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">173</context>
+          <context context-type="linenumber">148</context>
         </context-group>
         <target state="translated">Eliminar componente</target>
       </trans-unit>
@@ -13423,7 +13423,7 @@ The branches will be removed but the steps will remain in the unit.</target>
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">193</context>
+          <context context-type="linenumber">203</context>
         </context-group>
         <target state="translated">¿Está seguro de que desea quitar este componente?</target>
       </trans-unit>
@@ -13432,7 +13432,7 @@ The branches will be removed but the steps will remain in the unit.</target>
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">194</context>
+          <context context-type="linenumber">204</context>
         </context-group>
         <target state="translated">¿Seguro de eliminar estos componentes?</target>
       </trans-unit>
@@ -14347,6 +14347,18 @@ The branches will be removed but the steps will remain in the unit.</target>
           <context context-type="linenumber">2</context>
         </context-group>
         <target state="translated">Vista de recuperación</target>
+      </trans-unit>
+      <trans-unit id="f8b53b407af242e77dc3391947f23988f3451e64" datatype="html">
+        <source> Save </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component.html</context>
+          <context context-type="linenumber">11,13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
+          <context context-type="linenumber">80,82</context>
+        </context-group>
+        <target state="translated"> Guardar </target>
       </trans-unit>
       <trans-unit id="2d7827cfe4d0ae4813b39caa8b57acc610e0649e" datatype="html">
         <source> Go to Authoring View </source>
@@ -15375,18 +15387,6 @@ The branches will be removed but the steps will remain in the unit.</target>
           <context context-type="linenumber">18</context>
         </context-group>
         <target state="translated">Expandir todo</target>
-      </trans-unit>
-      <trans-unit id="a0161b45994d017056833ae5e2fbaccb8f58e847" datatype="html">
-        <source> + Expand All </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
-          <context context-type="linenumber">22,24</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-grading/student-grading.component.html</context>
-          <context context-type="linenumber">34,36</context>
-        </context-group>
-        <target state="translated"> +Expandir Todo </target>
       </trans-unit>
       <trans-unit id="7cc20136d8ae69cbe796d0fd2a6b2e242d2bd061" datatype="html">
         <source>Collapse All</source>
@@ -17069,14 +17069,6 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">40</context>
         </context-group>
         <target state="translated">Colapsar todo</target>
-      </trans-unit>
-      <trans-unit id="67f47ba6318d57c0512c1cca8cfcd07670b14e36" datatype="html">
-        <source> - Collapse All </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-grading/student-grading.component.html</context>
-          <context context-type="linenumber">45,47</context>
-        </context-group>
-        <target state="translated"> - Colapsar Todo </target>
       </trans-unit>
       <trans-unit id="4e72de6762f4a3b95de1b2e2a30b6af0f91b172f" datatype="html">
         <source>Sort by step</source>
@@ -24919,14 +24911,6 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="linenumber">20</context>
         </context-group>
         <target state="needs-translation">Choose an icon</target>
-      </trans-unit>
-      <trans-unit id="368b817b7cc89a1705d9ac752da4ddda15d42ae8" datatype="html">
-        <source> Save </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">45,47</context>
-        </context-group>
-        <target state="translated"> Guardar </target>
       </trans-unit>
       <trans-unit id="729411b7f2d3f8d9112be6db06e97d485d6efdae" datatype="html">
         <source> Submit </source>
