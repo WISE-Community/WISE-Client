@@ -22,8 +22,7 @@ export class CopyComponentButtonComponent {
     private projectService: TeacherProjectService
   ) {}
 
-  protected copy(event: Event): void {
-    event.stopPropagation();
+  protected copy(): void {
     const newComponents = this.node.copyComponents([this.componentId], this.componentId);
     this.projectService.saveProject();
     this.copyTranslationsService.tryCopyComponents(this.node, newComponents);

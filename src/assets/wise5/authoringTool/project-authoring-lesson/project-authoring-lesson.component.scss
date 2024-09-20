@@ -3,6 +3,10 @@
     padding-inline-start: 8px;
   }
 
+  .mat-expansion-panel-header-title {
+    flex-grow: 100;
+  }
+
   .mat-expansion-panel-body {
     padding-left: 8px;
     padding-right: 8px;
@@ -17,7 +21,6 @@
   }
 
   .no-steps-message {
-    height: 40px;
-    margin-left: 40px;
+    padding: 0 8px;
   }
 }

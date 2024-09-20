@@ -1,4 +1,13 @@
-import { Component, Input, OnInit, Signal, WritableSignal, computed, signal } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Signal,
+  ViewEncapsulation,
+  WritableSignal,
+  computed,
+  signal
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -16,7 +25,8 @@ import { copy } from '../../../common/object/object';
 @Component({
   selector: 'node-authoring',
   templateUrl: './node-authoring.component.html',
-  styleUrls: ['./node-authoring.component.scss']
+  styleUrls: ['./node-authoring.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NodeAuthoringComponent implements OnInit {
   components: ComponentContent[] = [];
@@ -261,8 +271,8 @@ export class NodeAuthoringComponent implements OnInit {
     });
   }
 
-  protected toggleComponent(componentId: string): void {
-    this.componentsToExpanded[componentId] = !this.componentsToExpanded[componentId];
+  protected toggleComponent(componentId: string, expanded: boolean = true): void {
+    this.componentsToExpanded[componentId] = expanded;
     this.projectService.uiChanged();
   }
 
