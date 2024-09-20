@@ -261,10 +261,7 @@ export class NodeService {
       paths.push(path);
     }
     const dialogRef = this.dialog.open(ChooseBranchPathDialogComponent, {
-      data: {
-        paths: paths,
-        nodeId: nodeId
-      },
+      data: paths,
       disableClose: true
     });
     dialogRef.afterClosed().subscribe((result) => {

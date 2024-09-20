@@ -13,7 +13,6 @@ import { StudentAssetsDialogModule } from '../../../assets/wise5/vle/studentAsse
 import { VLEComponent } from '../../../assets/wise5/vle/vle.component';
 import { VLEProjectService } from '../../../assets/wise5/vle/vleProjectService';
 import { StudentTeacherCommonModule } from '../../student-teacher-common.module';
-import { ChooseBranchPathDialogComponent } from '../../preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
 import { DataService } from '../../services/data.service';
 import { StudentComponentModule } from '../student.component.module';
 import { StudentVLERoutingModule } from './student-vle-routing.module';
@@ -25,7 +24,7 @@ import { StudentPeerGroupService } from '../../../assets/wise5/services/studentP
 import { PeerGroupService } from '../../../assets/wise5/services/peerGroupService';
 
 @NgModule({
-  declarations: [ChooseBranchPathDialogComponent, GenerateImageDialogComponent, VLEParentComponent],
+  declarations: [GenerateImageDialogComponent, VLEParentComponent],
   imports: [
     CommonModule,
     ComponentStudentModule,
