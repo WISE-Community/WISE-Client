@@ -12,7 +12,8 @@ import { ComponentContent } from '../../common/ComponentContent';
 import { components } from '../../components/Components';
 
 @Component({
-  selector: 'component-authoring-component',
+  selector: 'component-authoring',
+  standalone: true,
   template: '<div #component></div>'
 })
 export class ComponentAuthoringComponent {
@@ -21,7 +22,10 @@ export class ComponentAuthoringComponent {
   private componentRef: ComponentRef<any>;
   @Input() private nodeId: string;
 
-  constructor(private applicationRef: ApplicationRef, private injector: EnvironmentInjector) {}
+  constructor(
+    private applicationRef: ApplicationRef,
+    private injector: EnvironmentInjector
+  ) {}
 
   ngAfterViewInit(): void {
     this.componentRef = createComponent(components[this.componentContent.type].authoring, {
