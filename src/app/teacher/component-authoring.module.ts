@@ -97,7 +97,6 @@ import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/no
     AnimationAuthoring,
     AudioOscillatorAuthoring,
     AuthorUrlParametersComponent,
-    ComponentAuthoringComponent,
     ConceptMapAuthoring,
     CreateNewPeerGroupingDialogComponent,
     DrawAuthoring,
@@ -174,6 +173,7 @@ import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/no
     WiseLinkAuthoringDialogComponent
   ],
   imports: [
+    ComponentAuthoringComponent,
     ComponentConstraintAuthoringComponent,
     EditComponentAdvancedButtonComponent,
     EditComponentWidthComponent,
