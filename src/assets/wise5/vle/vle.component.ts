@@ -29,10 +29,12 @@ import { StepToolsComponent } from '../themes/default/themeComponents/stepTools/
 import { RunEndedAndLockedMessageComponent } from './run-ended-and-locked-message/run-ended-and-locked-message.component';
 import { NodeComponent } from './node/node.component';
 import { NavigationComponent } from '../themes/default/navigation/navigation.component';
+import { ChooseBranchPathDialogComponent } from '../../../app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
 
 @Component({
   imports: [
     CommonModule,
+    ChooseBranchPathDialogComponent,
     GroupTabsComponent,
     MatSidenavModule,
     NavigationComponent,

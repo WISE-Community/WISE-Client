@@ -6,10 +6,12 @@
     chosen a branch, complete the current step and then click the Next arrow.
   </p>
   <mat-list>
-    <mat-list-item *ngFor="let path of paths">
-      <button mat-flat-button [mat-dialog-close]="path.transition">
-        <span>{{ path.nodeTitle }}</span>
-      </button>
-    </mat-list-item>
+    @for (path of paths; track path) {
+      <mat-list-item>
+        <button mat-flat-button [mat-dialog-close]="path.transition">
+          <span>{{ path.nodeTitle }}</span>
+        </button>
+      </mat-list-item>
+    }
   </mat-list>
 </mat-dialog-content>
