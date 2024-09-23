@@ -22,10 +22,11 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { ComponentAuthoringModule } from '../../component-authoring.module';
 
 @NgModule({
-  declarations: [DrawAuthoring, EditComponentPrompt],
+  declarations: [DrawAuthoring],
   imports: [
     CommonModule,
     ComponentAuthoringModule,
+    EditComponentPrompt,
     FormsModule,
     MatCheckboxModule,
     MatDialogModule,

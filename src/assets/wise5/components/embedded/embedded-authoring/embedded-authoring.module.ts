@@ -24,10 +24,11 @@ import { EmbeddedAuthoring } from './embedded-authoring.component';
 import { ComponentAuthoringModule } from '../../component-authoring.module';
 
 @NgModule({
-  declarations: [EmbeddedAuthoring, EditComponentPrompt, AuthorUrlParametersComponent],
+  declarations: [EmbeddedAuthoring, AuthorUrlParametersComponent],
   imports: [
     CommonModule,
     ComponentAuthoringModule,
+    EditComponentPrompt,
     FormsModule,
     MatCheckboxModule,
     MatDialogModule,

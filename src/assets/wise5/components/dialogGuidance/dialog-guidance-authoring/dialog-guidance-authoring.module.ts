@@ -28,7 +28,6 @@ import { ComponentAuthoringModule } from '../../component-authoring.module';
 @NgModule({
   declarations: [
     DialogGuidanceAuthoringComponent,
-    EditComponentPrompt,
     EditComponentMaxSubmitComponent,
     EditFeedbackRulesComponent,
     FeedbackRuleHelpComponent
@@ -36,6 +35,7 @@ import { ComponentAuthoringModule } from '../../component-authoring.module';
   imports: [
     CommonModule,
     ComponentAuthoringModule,
+    EditComponentPrompt,
     DragDropModule,
     FormsModule,
     MatCheckboxModule,

@@ -26,6 +26,7 @@ describe('AudioOscillatorAuthoring', () => {
       imports: [
         BrowserAnimationsModule,
         ComponentAuthoringModule,
+        EditComponentPrompt,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,
@@ -33,7 +34,7 @@ describe('AudioOscillatorAuthoring', () => {
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [EditComponentPrompt, AudioOscillatorAuthoring],
+      declarations: [AudioOscillatorAuthoring],
       providers: [
         ProjectAssetService,
         TeacherNodeService,

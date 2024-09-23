@@ -30,10 +30,11 @@ let teacherProjectService: TeacherProjectService;
 describe('MultipleChoiceAuthoringComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [EditComponentPrompt, MultipleChoiceAuthoring],
+      declarations: [MultipleChoiceAuthoring],
       imports: [
         BrowserAnimationsModule,
         ComponentAuthoringModule,
+        EditComponentPrompt,
         FormsModule,
         MatDialogModule,
         MatCheckboxModule,

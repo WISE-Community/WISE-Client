@@ -28,11 +28,12 @@ let fixture: ComponentFixture<GraphAuthoring>;
 describe('GraphAuthoringComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GraphAuthoring, EditComponentPrompt],
+      declarations: [GraphAuthoring],
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
         ComponentAuthoringModule,
+        EditComponentPrompt,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,
