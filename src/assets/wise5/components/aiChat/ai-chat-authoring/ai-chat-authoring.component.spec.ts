@@ -25,14 +25,11 @@ describe('AiChatAuthoringComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AiChatAuthoringComponent,
-        EditComponentPrompt,
-        EditDialogGuidanceComputerAvatarComponent
-      ],
+      declarations: [AiChatAuthoringComponent, EditDialogGuidanceComputerAvatarComponent],
       imports: [
         BrowserAnimationsModule,
         ComponentAuthoringModule,
+        EditComponentPrompt,
         FormsModule,
         MatButtonToggleModule,
         MatCheckboxModule,

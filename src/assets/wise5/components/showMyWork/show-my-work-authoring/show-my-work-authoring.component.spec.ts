@@ -35,11 +35,12 @@ describe('ShowMyWorkAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditComponentPrompt, ShowMyWorkAuthoringComponent],
+      declarations: [ShowMyWorkAuthoringComponent],
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
         ComponentAuthoringModule,
+        EditComponentPrompt,
         FormsModule,
         MatDialogModule,
         MatFormFieldModule,

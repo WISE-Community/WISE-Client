@@ -16,6 +16,8 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 
 describe('ShowGroupWorkAuthoringComponent', () => {
   let component: ShowGroupWorkAuthoringComponent;
@@ -24,23 +26,37 @@ describe('ShowGroupWorkAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [EditComponentPrompt, ShowGroupWorkAuthoringComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
+      declarations: [ShowGroupWorkAuthoringComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        BrowserAnimationsModule,
         BrowserModule,
+        ComponentAuthoringModule,
+        EditComponentPrompt,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
-        StudentTeacherCommonServicesModule],
-    providers: [ProjectAssetService, TeacherNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
+        ProjectAssetService,
+        TeacherNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(ShowGroupWorkAuthoringComponent);
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
       nodeId1
     ]);

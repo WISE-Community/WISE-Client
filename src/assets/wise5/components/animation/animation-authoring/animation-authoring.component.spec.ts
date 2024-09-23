@@ -26,11 +26,12 @@ let fixture: ComponentFixture<AnimationAuthoring>;
 describe('AnimationAuthoring', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AnimationAuthoring, EditComponentPrompt],
+      declarations: [AnimationAuthoring],
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
         ComponentAuthoringModule,
+        EditComponentPrompt,
         FormsModule,
         MatFormFieldModule,
         MatIconModule,

@@ -31,12 +31,13 @@ let getComponentSpy;
 describe('SummaryAuthoringComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EditComponentPrompt, SummaryAuthoring],
+      declarations: [SummaryAuthoring],
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
         CommonModule,
         ComponentAuthoringModule,
+        EditComponentPrompt,
         FormsModule,
         MatCheckboxModule,
         MatFormFieldModule,

@@ -20,6 +20,8 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 
 const componentContent = {
   id: 'qn3savv52r',
@@ -47,17 +49,21 @@ describe('PeerChatAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [EditComponentPrompt, PeerChatAuthoringComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
+      declarations: [PeerChatAuthoringComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        BrowserAnimationsModule,
+        ComponentAuthoringModule,
+        EditComponentPrompt,
         FormsModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
         MatSelectModule,
-        StudentTeacherCommonServicesModule],
-    providers: [
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
         ConfigService,
         { provide: TeacherNodeService, useClass: MockNodeService },
         ProjectAssetService,
@@ -66,13 +72,17 @@ describe('PeerChatAuthoringComponent', () => {
         TeacherProjectService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
+    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
+      new ProjectLocale({ default: 'en-US' })
+    );
     fixture = TestBed.createComponent(PeerChatAuthoringComponent);
     component = fixture.componentInstance;
+    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
       'node1',
       'node2',
