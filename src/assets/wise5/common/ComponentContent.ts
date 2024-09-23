@@ -4,6 +4,7 @@ import { DynamicPrompt } from '../directives/dynamic-prompt/DynamicPrompt';
 export interface ComponentContent {
   id: string;
   connectedComponents?: any[];
+  constraints?: any[];
   dynamicPrompt?: DynamicPrompt;
   excludeFromTotalScore?: boolean;
   maxScore?: number;
