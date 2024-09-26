@@ -1,12 +1,20 @@
 <span fxLayout="row" fxLayoutAlign="start center">
   <label class="input-label md-no-float annotations--grading__score__label">
-    <span *ngIf="isAutoScore" fxLayout fxLayoutGap="4px">
-      <span i18n>Auto Score</span>
-      <span *ngIf="!disabled">(<a (click)="focusScoreInput()" i18n>Edit</a>)</span>
-      :
-    </span>
-    <span *ngIf="!isAutoScore && disabled" i18n>Teacher Score:</span>
-    <span *ngIf="!isAutoScore && !disabled" i18n>Item Score:</span>
+    @if (isAutoScore) {
+      <span fxLayout fxLayoutGap="4px">
+        <span i18n>Auto Score</span>
+        @if (!disabled) {
+          <span>(<a (click)="focusScoreInput()" i18n>Edit</a>)</span>
+        }
+        :
+      </span>
+    } @else {
+      @if (disabled) {
+        <span i18n>Teacher Score:</span>
+      } @else {
+        <span i18n>Item Score:</span>
+      }
+    }
   </label>
   <mat-form-field>
     <input

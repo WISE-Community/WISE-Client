@@ -1,12 +1,10 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AnnotationService } from '../../../services/annotationService';
 import { EditComponentScoreComponent } from './edit-component-score.component';
-import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NotificationService } from '../../../services/notificationService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 let annotationService: AnnotationService;
 let component: EditComponentScoreComponent;
@@ -16,11 +14,13 @@ let notificationService: NotificationService;
 describe('EditComponentScoreComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [EditComponentScoreComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [
+        BrowserAnimationsModule,
+        EditComponentScoreComponent,
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [provideHttpClient(withInterceptorsFromDi())]
+    });
     annotationService = TestBed.inject(AnnotationService);
     notificationService = TestBed.inject(NotificationService);
     fixture = TestBed.createComponent(EditComponentScoreComponent);

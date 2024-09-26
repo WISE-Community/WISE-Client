@@ -18,6 +18,7 @@ import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress
 @NgModule({
   imports: [
     ComponentGradingModule,
+    EditComponentScoreComponent,
     IntersectionObserverModule,
     StatusIconComponent,
     StudentTeacherCommonModule,
@@ -27,7 +28,6 @@ import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress
   declarations: [
     EditComponentAnnotationsComponent,
     EditComponentCommentComponent,
-    EditComponentScoreComponent,
     GradingEditComponentMaxScoreComponent,
     NavItemProgressComponent,
     WorkgroupComponentGradingComponent,
