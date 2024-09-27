@@ -443,7 +443,7 @@ export class ProjectService {
       // note that this also works for \"abc.png and \'abc.png, where the quotes are escaped
       contentString = contentString.replace(
         new RegExp(
-          "('|\"|\\\\'|\\\\\")[^:][^/]?[^/]?[a-zA-Z0-9@%&;\\._\\/\\s\\-']*[.]" +
+          "('|\"|\\\\'|\\\\\")[^:][^/]?[^/]?[a-zA-Z0-9\u4e00-\u9fa5@%&;\\._\\/\\s\\-']*[.]" +
             '(png|jpe?g|pdf|gif|mov|mp4|mp3|wav|swf|css|txt|json|xlsx?|doc|html.*?|js).*?' +
             '(\'|"|\\\\\'|\\\\")',
           'gi'
