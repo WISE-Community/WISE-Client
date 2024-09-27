@@ -34,8 +34,9 @@ export class EditProjectLanguageSettingComponent {
 
   protected updateDefaultLanguage(): void {
     this.projectLocale.setDefaultLocale(this.defaultLanguage.locale);
-    this.projectService.setCurrentLanguage(this.defaultLanguage);
     this.projectService.saveProject();
+    this.projectService.setCurrentLanguage(this.defaultLanguage);
+    this.projectService.uiChanged();
     this.updateModel();
   }
 
