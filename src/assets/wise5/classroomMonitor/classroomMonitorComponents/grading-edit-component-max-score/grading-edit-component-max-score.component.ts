@@ -2,9 +2,15 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule],
   selector: 'grading-edit-component-max-score',
+  standalone: true,
   styles: [
     `
       /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
@@ -22,7 +28,7 @@ export class GradingEditComponentMaxScoreComponent {
   maxScore: number;
   maxScoreChanged: Subject<string> = new Subject<string>();
   @Input() nodeId: string;
-  subscriptions: Subscription = new Subscription();
+  private subscriptions: Subscription = new Subscription();
 
   constructor(private projectService: TeacherProjectService) {}
 
