@@ -232,7 +232,7 @@ export class AuthoringToolComponent {
   }
 
   private getElements(): any[] {
-    const elementsToDisable = 'button,input,mat-checkbox,textarea,mat-icon[cdkdraghandle]';
+    const elementsToDisable = 'button,input,textarea,mat-radio-button,mat-checkbox,mat-icon[cdkdraghandle]';
     return Array.from(
       this.elem.nativeElement.querySelectorAll(`div.main-content ${elementsToDisable}`)
     ).concat(
