@@ -20,7 +20,7 @@
       [componentId]="componentId"
       [disabled]="isDisabled || !canAuthorProject"
       [nodeId]="nodeId"
-    ></grading-edit-component-max-score>
+    />
   </div>
   <div *ngIf="edit || !showAutoComment()" class="annotations--grading__item">
     <edit-component-comment
@@ -81,7 +81,7 @@
         [componentId]="componentId"
         [disabled]="true"
         [nodeId]="nodeId"
-      ></grading-edit-component-max-score>
+      />
     </div>
     <div *ngIf="latestAnnotations.comment" class="annotations--grading__item">
       <edit-component-comment
@@ -126,7 +126,7 @@
         [nodeId]="nodeId"
         [componentId]="componentId"
         [disabled]="true"
-      ></grading-edit-component-max-score>
+      />
     </div>
     <div
       class="annotations--grading__item annotations--grading__auto-comment"
