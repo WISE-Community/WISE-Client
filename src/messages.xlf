@@ -9902,8 +9902,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="c1628a55788dfc4796fdfe902f88f0ecf241be28" datatype="html">
-        <source>Default (lessons appear in a drop-down list)</source>
+      <trans-unit id="bd8c2612b8af0a937cbc69bb4087e0e252d7a43b" datatype="html">
+        <source>Default (lessons appear in drop-down list and unit plan)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
           <context context-type="linenumber">61</context>
