@@ -50,6 +50,22 @@
     ></textarea>
   </mat-form-field>
 </div>
+<div>
+  <label id="navigation-type-label" i18n>Navigation mode:</label>
+  <mat-radio-group
+    aria-labelledby="navigation-type-label"
+    [(ngModel)]="navigationType"
+    (ngModelChange)="updateNavigationType()"
+  >
+    <mat-radio-button color="primary" value="default" i18n
+      >Default (lessons appear in drop-down list and unit plan)</mat-radio-button
+    >
+    <mat-radio-button color="primary" value="tab" i18n
+      >Tabbed (lessons appear as tabs)
+    </mat-radio-button>
+  </mat-radio-group>
+</div>
+<!--
 <div fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="start center">
   <mat-form-field style="width: 400px; max-width: 100%">
     <mat-label i18n>Script Filename</mat-label>
@@ -67,6 +83,7 @@
     <mat-icon>attach_file</mat-icon>
   </button>
 </div>
+-->
 <div fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="start center">
   <mat-form-field style="width: 400px; max-width: 100%">
     <mat-label i18n>Unit URL</mat-label>

@@ -14,6 +14,7 @@ import { filter } from 'rxjs/operators';
 })
 export class AdvancedProjectAuthoringComponent {
   protected jsonDisplayed: boolean;
+  protected navigationType: string = 'default';
   private projectId: number;
   protected projectJSONString: string;
   protected projectScriptFilename: string;
@@ -129,6 +130,11 @@ export class AdvancedProjectAuthoringComponent {
     if (this.showJSON) {
       this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
     }
+    this.projectService.saveProject();
+  }
+
+  protected updateNavigationType(): void {
+    this.projectService.project.theme = this.navigationType;
     this.projectService.saveProject();
   }
 }
