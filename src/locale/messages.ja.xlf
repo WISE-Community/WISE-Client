@@ -892,7 +892,7 @@
         <source> Close </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-advanced/edit-component-advanced.component.html</context>
-          <context context-type="linenumber">111,113</context>
+          <context context-type="linenumber">109,111</context>
         </context-group>
         <target state="needs-translation"> Close </target>
       </trans-unit>
@@ -924,7 +924,7 @@
         <source>Constraint</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-constraints/edit-component-constraints.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <target state="needs-translation">Constraint</target>
       </trans-unit>
@@ -932,7 +932,7 @@
         <source>Delete Constraint</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-constraints/edit-component-constraints.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html</context>
@@ -1000,7 +1000,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <target state="needs-translation">The JSON is invalid. Invalid JSON will not be saved.
 Click "OK" to revert back to the last valid JSON.
@@ -6340,7 +6340,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="linenumber">7</context>
         </context-group>
         <target state="translated">編集</target>
       </trans-unit>
@@ -10910,27 +10910,35 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Edit Unit JSON</target>
       </trans-unit>
-      <trans-unit id="9203b05eb7515e937cc5e5d8cbc8a03195bb2d7f" datatype="html">
-        <source>Script Filename</source>
+      <trans-unit id="aa3959bc16313e8798209b3aaee7985fc6a246a2" datatype="html">
+        <source>Navigation mode:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">54</context>
         </context-group>
-        <target state="needs-translation">Script Filename</target>
+        <target state="needs-translation">Navigation mode:</target>
       </trans-unit>
-      <trans-unit id="9fabdfadf0453602acf388171bd4f758df47e1a7" datatype="html">
-        <source>Choose</source>
+      <trans-unit id="bd8c2612b8af0a937cbc69bb4087e0e252d7a43b" datatype="html">
+        <source>Default (lessons appear in drop-down list and unit plan)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">61</context>
         </context-group>
-        <target state="needs-translation">Choose</target>
+        <target state="needs-translation">Default (lessons appear in drop-down list and unit plan)</target>
+      </trans-unit>
+      <trans-unit id="73b8427966dc9a8002217c4719c54677b9cd1bcc" datatype="html">
+        <source>Tabbed (lessons appear as tabs) </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
+          <context context-type="linenumber">64,65</context>
+        </context-group>
+        <target state="needs-translation">Tabbed (lessons appear as tabs) </target>
       </trans-unit>
       <trans-unit id="0435f6f300b78e13d48ecd2ee6e404d40df04188" datatype="html">
         <source>Unit URL</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">89</context>
         </context-group>
         <target state="needs-translation">Unit URL</target>
       </trans-unit>
@@ -10938,7 +10946,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Copy Unit URL to Clipboard</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">96</context>
         </context-group>
         <target state="needs-translation">Copy Unit URL to Clipboard</target>
       </trans-unit>
@@ -10946,7 +10954,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Open Unit URL in New Tab</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">107</context>
         </context-group>
         <target state="needs-translation">Open Unit URL in New Tab</target>
       </trans-unit>
@@ -11054,7 +11062,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">194</context>
+          <context context-type="linenumber">196</context>
         </context-group>
         <target state="needs-translation">You have been inactive for a long time. Do you want to stay logged in?</target>
       </trans-unit>
@@ -11070,7 +11078,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">195</context>
+          <context context-type="linenumber">197</context>
         </context-group>
         <target state="needs-translation">Session Timeout</target>
       </trans-unit>
@@ -14780,7 +14788,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Auto Score</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">5</context>
         </context-group>
         <target state="needs-translation">Auto Score</target>
       </trans-unit>
@@ -14788,7 +14796,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Teacher Score:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <target state="needs-translation">Teacher Score:</target>
       </trans-unit>
@@ -14796,7 +14804,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Item Score:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <target state="needs-translation">Item Score:</target>
       </trans-unit>
@@ -14804,7 +14812,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Saved score</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <target state="needs-translation">Saved score</target>
       </trans-unit>
