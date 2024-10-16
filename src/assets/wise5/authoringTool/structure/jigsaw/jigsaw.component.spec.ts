@@ -1,13 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { JigsawComponent } from './jigsaw.component';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { MatRadioModule } from '@angular/material/radio';
-import { FormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { MatDividerModule } from '@angular/material/divider';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
 describe('JigsawComponent', () => {
   let component: JigsawComponent;
@@ -15,14 +11,13 @@ describe('JigsawComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [JigsawComponent],
-    imports: [FormsModule,
-        MatDividerModule,
-        MatRadioModule,
-        RouterTestingModule,
-        StudentTeacherCommonServicesModule],
-    providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [StudentTeacherCommonServicesModule, JigsawComponent],
+      providers: [
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideRouter([])
+      ]
+    }).compileComponents();
     window.history.pushState({}, '', '');
     fixture = TestBed.createComponent(JigsawComponent);
     component = fixture.componentInstance;
