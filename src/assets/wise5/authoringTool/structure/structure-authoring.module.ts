@@ -8,18 +8,15 @@ import { RouterModule } from '@angular/router';
 import { StructureAuthoringRoutingModule } from './structure-authoring-routing.module';
 
 @NgModule({
-  declarations: [
-    JigsawComponent,
-    KiCycleUsingOerComponent,
-    PeerReviewAndRevisionComponent,
-    SelfDirectedInvestigationComponent
-  ],
-  imports: [RouterModule, StudentTeacherCommonModule, StructureAuthoringRoutingModule],
-  exports: [
-    JigsawComponent,
-    KiCycleUsingOerComponent,
-    PeerReviewAndRevisionComponent,
-    SelfDirectedInvestigationComponent
-  ]
+    imports: [RouterModule, StudentTeacherCommonModule, StructureAuthoringRoutingModule, JigsawComponent,
+        KiCycleUsingOerComponent,
+        PeerReviewAndRevisionComponent,
+        SelfDirectedInvestigationComponent],
+    exports: [
+        JigsawComponent,
+        KiCycleUsingOerComponent,
+        PeerReviewAndRevisionComponent,
+        SelfDirectedInvestigationComponent
+    ]
 })
 export class StructureAuthoringModule {}
