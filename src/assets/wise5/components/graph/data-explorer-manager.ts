@@ -5,7 +5,11 @@ import { Series } from './domain/series';
 export class DataExplorerManager {
   dataExplorerColors: string[] = ['blue', 'orange', 'purple', 'black', 'green'];
 
-  constructor(private xAxis: any, private yAxis: any, private activeTrial: any) {}
+  constructor(
+    private xAxis: any,
+    private yAxis: any,
+    private activeTrial: any
+  ) {}
 
   handleDataExplorer(studentData: any): Series[] {
     this.xAxis.title.text = studentData.dataExplorerXAxisLabel;
@@ -163,7 +167,7 @@ export class DataExplorerManager {
       typeof textValue === 'string' &&
       textValue !== '' &&
       !this.isNA(textValue) &&
-      isNaN(parseFloat(textValue))
+      isNaN(Number(textValue))
     );
   }
 
