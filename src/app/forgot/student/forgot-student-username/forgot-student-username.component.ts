@@ -1,14 +1,53 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { UtilService } from '../../../services/util.service';
 import { StudentService } from '../../../student/student.service';
 import { finalize } from 'rxjs/operators';
+import { MatDivider } from '@angular/material/divider';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatOption } from '@angular/material/core';
+import { MatSelect } from '@angular/material/select';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatButton } from '@angular/material/button';
+import { ExtendedModule } from '@angular/flex-layout/extended';
+import { NgIf, NgClass, NgFor } from '@angular/common';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-  selector: 'app-forgot-student-username',
   templateUrl: './forgot-student-username.component.html',
-  styleUrls: ['./forgot-student-username.component.scss']
+  styleUrl: './forgot-student-username.component.scss',
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    FlexModule,
+    ReactiveFormsModule,
+    NgIf,
+    NgClass,
+    ExtendedModule,
+    NgFor,
+    MatButton,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatSelect,
+    MatOption,
+    MatProgressBar,
+    MatDivider,
+    RouterLink
+  ]
 })
 export class ForgotStudentUsernameComponent implements OnInit {
   months: any[] = [
@@ -86,49 +125,30 @@ export class ForgotStudentUsernameComponent implements OnInit {
   setMessageForFoundUsernames() {
     const foundUsernamesCount = this.foundUsernames.length;
     if (foundUsernamesCount === 0) {
-      this.setZeroMatchMessage();
+      this.message = $localize`We did not find any usernames that match the information you provided. Please make sure you entered your information correctly. If you can't find your account, ask a teacher for help or contact us for assistance.`;
       this.isErrorMessage = true;
     } else if (foundUsernamesCount === 1) {
-      this.setSingleMatchMessage();
+      this.message = $localize`We found a username that matches. Select it to log in. If this username is not yours, ask a teacher for help or contact us for assistance.`;
       this.isErrorMessage = false;
     } else if (foundUsernamesCount > 1) {
-      this.setMultipleMatchMessage();
+      this.message = $localize`We found multiple usernames that match. If one of these is yours, select it to log in. If you can't find your account, ask a teacher for help or contact us for assistance.`;
       this.isErrorMessage = false;
     }
   }
 
-  setZeroMatchMessage() {
-    const message = $localize`We did not find any usernames that match the information you provided. Please make sure you entered your information correctly. If you can't find your account, ask a teacher for help or contact us for assistance.`;
-    this.setMessage(message);
-  }
-
-  setSingleMatchMessage() {
-    const message = $localize`We found a username that matches. Select it to log in. If this username is not yours, ask a teacher for help or contact us for assistance.`;
-    this.setMessage(message);
-  }
-
-  setMultipleMatchMessage() {
-    const message = $localize`We found multiple usernames that match. If one of these is yours, select it to log in. If you can't find your account, ask a teacher for help or contact us for assistance.`;
-    this.setMessage(message);
-  }
-
-  setMessage(message) {
-    this.message = message;
-  }
-
-  clearMessage() {
-    this.setMessage('');
+  private clearMessage(): void {
+    this.message = '';
   }
 
   getControlFieldValue(fieldName) {
     return this.forgotStudentUsernameFormGroup.get(fieldName).value;
   }
 
-  setControlFieldValue(name: string, value: string) {
+  setControlFieldValue(name: string, value: string): void {
     this.forgotStudentUsernameFormGroup.controls[name].setValue(value);
   }
 
-  loginWithUsername(username) {
+  loginWithUsername(username: string): void {
     this.router.navigate(['/login', { username: username }]);
   }
 }

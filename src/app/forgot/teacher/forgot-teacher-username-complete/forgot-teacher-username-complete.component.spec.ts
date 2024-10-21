@@ -1,7 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotTeacherUsernameCompleteComponent } from './forgot-teacher-username-complete.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 
 describe('ForgotTeacherUsernameCompleteComponent', () => {
   let component: ForgotTeacherUsernameCompleteComponent;
@@ -9,9 +8,8 @@ describe('ForgotTeacherUsernameCompleteComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ForgotTeacherUsernameCompleteComponent],
-      imports: [RouterTestingModule],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [ForgotTeacherUsernameCompleteComponent],
+      providers: [provideRouter([])]
     });
     fixture = TestBed.createComponent(ForgotTeacherUsernameCompleteComponent);
     component = fixture.componentInstance;

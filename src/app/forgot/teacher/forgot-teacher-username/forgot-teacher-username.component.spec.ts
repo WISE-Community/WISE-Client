@@ -1,11 +1,10 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotTeacherUsernameComponent } from './forgot-teacher-username.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export class MockTeacherService {
   sendForgotUsernameEmail(email: string): Observable<any> {
@@ -24,7 +23,7 @@ describe('ForgotTeacherUsernameComponent', () => {
   let fixture: ComponentFixture<ForgotTeacherUsernameComponent>;
 
   const submitAndReceiveResponse = (teacherServiceFunctionName, status, messageCode) => {
-    const teacherService = TestBed.get(TeacherService);
+    const teacherService = TestBed.inject(TeacherService);
     const observableResponse = createObservableResponse(status, messageCode);
     spyOn(teacherService, teacherServiceFunctionName).and.returnValue(observableResponse);
     component.submit();
@@ -50,10 +49,8 @@ describe('ForgotTeacherUsernameComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ForgotTeacherUsernameComponent],
-      imports: [RouterTestingModule.withRoutes([]), ReactiveFormsModule],
-      providers: [{ provide: TeacherService, useClass: MockTeacherService }],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [BrowserAnimationsModule, ReactiveFormsModule, ForgotTeacherUsernameComponent],
+      providers: [{ provide: TeacherService, useClass: MockTeacherService }, provideRouter([])]
     });
     fixture = TestBed.createComponent(ForgotTeacherUsernameComponent);
     component = fixture.componentInstance;

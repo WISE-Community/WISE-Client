@@ -3,9 +3,7 @@ import { ForgotUserPasswordCompleteComponent } from './forgot-user-password-comp
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatButtonHarness } from '@angular/material/button/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
+import { provideRouter, Router } from '@angular/router';
 
 let loader: HarnessLoader;
 describe('ForgotUserPasswordCompleteComponent', () => {
@@ -14,8 +12,8 @@ describe('ForgotUserPasswordCompleteComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ForgotUserPasswordCompleteComponent],
-      imports: [MatCardModule, RouterTestingModule]
+      imports: [ForgotUserPasswordCompleteComponent],
+      providers: [provideRouter([])]
     });
     fixture = TestBed.createComponent(ForgotUserPasswordCompleteComponent);
     component = fixture.componentInstance;

@@ -1,11 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotTeacherPasswordVerifyComponent } from './forgot-teacher-password-verify.component';
 import { TeacherService } from '../../../teacher/teacher.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export class MockTeacherService {
   checkVerificationCode(username: string, verificationCode: string): Observable<any> {
@@ -24,7 +23,7 @@ describe('ForgotTeacherPasswordVerifyComponent', () => {
   let fixture: ComponentFixture<ForgotTeacherPasswordVerifyComponent>;
 
   const submitAndReceiveResponse = (teacherServiceFunctionName, status, messageCode) => {
-    const teacherService = TestBed.get(TeacherService);
+    const teacherService = TestBed.inject(TeacherService);
     const observableResponse = createObservableResponse(status, messageCode);
     spyOn(teacherService, teacherServiceFunctionName).and.returnValue(observableResponse);
     component.submit();
@@ -49,10 +48,8 @@ describe('ForgotTeacherPasswordVerifyComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ForgotTeacherPasswordVerifyComponent],
-      imports: [RouterTestingModule, ReactiveFormsModule],
-      providers: [{ provide: TeacherService, useClass: MockTeacherService }],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [BrowserAnimationsModule, ReactiveFormsModule, ForgotTeacherPasswordVerifyComponent],
+      providers: [{ provide: TeacherService, useClass: MockTeacherService }, provideRouter([])]
     });
     fixture = TestBed.createComponent(ForgotTeacherPasswordVerifyComponent);
     component = fixture.componentInstance;

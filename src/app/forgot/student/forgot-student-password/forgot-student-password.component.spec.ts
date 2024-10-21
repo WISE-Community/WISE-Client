@@ -1,11 +1,8 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotStudentPasswordComponent } from './forgot-student-password.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
 import { StudentService } from '../../../student/student.service';
-import { Router } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 export class MockStudentService {
@@ -55,10 +52,8 @@ describe('ForgotStudentPasswordComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ForgotStudentPasswordComponent],
-      imports: [RouterTestingModule, BrowserAnimationsModule, ReactiveFormsModule],
-      providers: [{ provide: StudentService, useClass: MockStudentService }],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [BrowserAnimationsModule, ForgotStudentPasswordComponent],
+      providers: [{ provide: StudentService, useClass: MockStudentService }, provideRouter([])]
     });
     fixture = TestBed.createComponent(ForgotStudentPasswordComponent);
     component = fixture.componentInstance;

@@ -1,24 +1,55 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { StudentService } from '../../../student/student.service';
 import { finalize } from 'rxjs/operators';
 import { ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { ConfigService } from '../../../services/config.service';
+import { MatDivider } from '@angular/material/divider';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatButton } from '@angular/material/button';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { NgIf } from '@angular/common';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-  selector: 'app-forgot-student-password-security',
   templateUrl: './forgot-student-password-security.component.html',
-  styleUrls: ['./forgot-student-password-security.component.scss']
+  styleUrl: './forgot-student-password-security.component.scss',
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    FlexModule,
+    ReactiveFormsModule,
+    NgIf,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatButton,
+    MatProgressBar,
+    MatDivider,
+    RouterLink
+  ]
 })
 export class ForgotStudentPasswordSecurityComponent {
-  answer: string;
-  answerSecurityQuestionFormGroup: FormGroup = this.fb.group({
+  protected answer: string;
+  protected answerSecurityQuestionFormGroup: FormGroup = this.fb.group({
     answer: new FormControl('', [Validators.required])
   });
   isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
-  message: string;
-  processing: boolean = false;
+  protected message: string;
+  protected processing: boolean = false;
   @Input() question: string;
   @Input() questionKey: string;
   @Input() username: string;
@@ -76,7 +107,7 @@ export class ForgotStudentPasswordSecurityComponent {
         message = $localize`Recaptcha failed. Please reload the page and try again.`;
         break;
     }
-    this.setMessage(message);
+    this.message = message;
   }
 
   getAnswer() {
@@ -87,15 +118,11 @@ export class ForgotStudentPasswordSecurityComponent {
     return this.answerSecurityQuestionFormGroup.get(fieldName).value;
   }
 
-  setControlFieldValue(name: string, value: string) {
+  setControlFieldValue(name: string, value: string): void {
     this.answerSecurityQuestionFormGroup.controls[name].setValue(value);
   }
 
-  setMessage(message) {
-    this.message = message;
-  }
-
-  clearMessage() {
-    this.setMessage('');
+  private clearMessage(): void {
+    this.message = '';
   }
 }

@@ -1,9 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatButton } from '@angular/material/button';
+import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-  selector: 'forgot-user-password-complete',
-  templateUrl: './forgot-user-password-complete.component.html'
+  templateUrl: './forgot-user-password-complete.component.html',
+  standalone: true,
+  imports: [MatCard, MatCardContent, MatButton]
 })
 export class ForgotUserPasswordCompleteComponent {
   @Input() username: string;

@@ -1,13 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ForgotTeacherPasswordComponent } from './forgot-teacher-password.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ReactiveFormsModule } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { Observable, of } from 'rxjs';
-import { Router } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { ConfigService } from '../../../services/config.service';
 import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha-2';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 let component: ForgotTeacherPasswordComponent;
 let fixture: ComponentFixture<ForgotTeacherPasswordComponent>;
@@ -33,14 +31,13 @@ class MockConfigService {
 describe('ForgotTeacherPasswordComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ForgotTeacherPasswordComponent],
-      imports: [RouterTestingModule, ReactiveFormsModule, RecaptchaV3Module],
+      imports: [BrowserAnimationsModule, RecaptchaV3Module, ForgotTeacherPasswordComponent],
       providers: [
         { provide: TeacherService, useClass: MockTeacherService },
         { provide: ConfigService, useClass: MockConfigService },
-        { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' },
+        provideRouter([])
+      ]
     });
   }));
 

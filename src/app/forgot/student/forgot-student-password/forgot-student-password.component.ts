@@ -1,21 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { StudentService } from '../../../student/student.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs/operators';
+import { MatDivider } from '@angular/material/divider';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatButton } from '@angular/material/button';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { NgIf } from '@angular/common';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-  selector: 'app-forgot-student-password',
   templateUrl: './forgot-student-password.component.html',
-  styleUrls: ['./forgot-student-password.component.scss']
+  styleUrl: './forgot-student-password.component.scss',
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    FlexModule,
+    ReactiveFormsModule,
+    NgIf,
+    RouterLink,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatButton,
+    MatProgressBar,
+    MatDivider
+  ]
 })
-export class ForgotStudentPasswordComponent implements OnInit {
-  forgotStudentPasswordFormGroup: FormGroup = this.fb.group({
+export class ForgotStudentPasswordComponent {
+  protected forgotStudentPasswordFormGroup: FormGroup = this.fb.group({
     username: new FormControl('', [Validators.required])
   });
-  message: string;
-  showForgotUsernameLink: boolean = false;
-  processing: boolean = false;
+  protected message: string;
+  protected showForgotUsernameLink: boolean = false;
+  protected processing: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -23,9 +54,7 @@ export class ForgotStudentPasswordComponent implements OnInit {
     private studentService: StudentService
   ) {}
 
-  ngOnInit() {}
-
-  submit() {
+  submit(): void {
     this.processing = true;
     this.clearMessage();
     this.showForgotUsernameLink = false;
@@ -73,16 +102,11 @@ export class ForgotStudentPasswordComponent implements OnInit {
     });
   }
 
-  setUsernameNotFoundMessage() {
-    const message = $localize`We could not find that username. Please make sure you are typing it correctly and try again. If you have forgotten your username, please use the forgot username option below.`;
-    this.setMessage(message);
+  private setUsernameNotFoundMessage(): void {
+    this.message = $localize`We could not find that username. Please make sure you are typing it correctly and try again. If you have forgotten your username, please use the forgot username option below.`;
   }
 
-  setMessage(message) {
-    this.message = message;
-  }
-
-  clearMessage() {
-    this.setMessage('');
+  private clearMessage(): void {
+    this.message = '';
   }
 }

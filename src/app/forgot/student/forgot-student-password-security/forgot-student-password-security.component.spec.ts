@@ -1,10 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ForgotStudentPasswordSecurityComponent } from './forgot-student-password-security.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { StudentService } from '../../../student/student.service';
 import { ConfigService } from '../../../services/config.service';
@@ -15,7 +12,7 @@ let fixture: ComponentFixture<ForgotStudentPasswordSecurityComponent>;
 let recaptchaV3Service: ReCaptchaV3Service;
 let studentService: StudentService;
 
-export class MockStudentService {
+class MockStudentService {
   checkSecurityAnswer(username: string, answer: string): Observable<any> {
     return Observable.create((observer) => {
       observer.next({
@@ -34,19 +31,13 @@ class MockConfigService {
 describe('ForgotStudentPasswordSecurityComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ForgotStudentPasswordSecurityComponent],
-      imports: [
-        RouterTestingModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        RecaptchaV3Module
-      ],
+      imports: [BrowserAnimationsModule, RecaptchaV3Module, ForgotStudentPasswordSecurityComponent],
       providers: [
         { provide: StudentService, useClass: MockStudentService },
         { provide: ConfigService, useClass: MockConfigService },
-        { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' },
+        provideRouter([])
+      ]
     });
   }));
 

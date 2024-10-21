@@ -1,28 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { finalize } from 'rxjs/operators';
+import { MatDivider } from '@angular/material/divider';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatButton } from '@angular/material/button';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { NgIf } from '@angular/common';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-  selector: 'app-forgot-teacher-username',
   templateUrl: './forgot-teacher-username.component.html',
-  styleUrls: ['./forgot-teacher-username.component.scss']
+  styleUrl: './forgot-teacher-username.component.scss',
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    FlexModule,
+    ReactiveFormsModule,
+    NgIf,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatButton,
+    MatProgressBar,
+    MatDivider,
+    RouterLink
+  ]
 })
-export class ForgotTeacherUsernameComponent implements OnInit {
-  forgotTeacherUsernameFormGroup: FormGroup = this.fb.group({
+export class ForgotTeacherUsernameComponent {
+  protected forgotTeacherUsernameFormGroup: FormGroup = this.fb.group({
     email: new FormControl('', [Validators.required, Validators.email])
   });
-  message: string = '';
-  processing: boolean = false;
+  protected message: string = '';
+  protected processing: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private teacherService: TeacherService
   ) {}
-
-  ngOnInit() {}
 
   getControlFieldValue(fieldName) {
     return this.forgotTeacherUsernameFormGroup.get(fieldName).value;
@@ -36,7 +65,7 @@ export class ForgotTeacherUsernameComponent implements OnInit {
     return this.getControlFieldValue('email');
   }
 
-  submit() {
+  submit(): void {
     this.processing = true;
     this.clearMessage();
     const email = this.getEmail();
@@ -49,7 +78,7 @@ export class ForgotTeacherUsernameComponent implements OnInit {
       )
       .subscribe((response) => {
         if (response.status === 'success') {
-          this.goToSuccessPage();
+          this.router.navigate(['/forgot/teacher/username/complete']);
         } else {
           if (response.messageCode === 'emailNotFound') {
             this.setEmailNotFoundMessage();
@@ -60,25 +89,15 @@ export class ForgotTeacherUsernameComponent implements OnInit {
       });
   }
 
-  setEmailNotFoundMessage() {
-    const message = $localize`We did not find a WISE account associated with that email. Please make sure you have typed your email address correctly.`;
-    this.setMessage(message);
+  private setEmailNotFoundMessage(): void {
+    this.message = $localize`We did not find a WISE account associated with that email. Please make sure you have typed your email address correctly.`;
   }
 
-  setFailedToSendEmailMessage() {
-    const message = $localize`The server has encountered an error and was unable to send an email to you. Please try again. If the error continues to occur, please contact us.`;
-    this.setMessage(message);
+  private setFailedToSendEmailMessage(): void {
+    this.message = $localize`The server has encountered an error and was unable to send an email to you. Please try again. If the error continues to occur, please contact us.`;
   }
 
-  setMessage(message) {
-    this.message = message;
-  }
-
-  clearMessage() {
-    this.setMessage('');
-  }
-
-  goToSuccessPage() {
-    this.router.navigate(['/forgot/teacher/username/complete']);
+  private clearMessage(): void {
+    this.message == '';
   }
 }

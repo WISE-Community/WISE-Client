@@ -1,24 +1,53 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { finalize } from 'rxjs/operators';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatButton } from '@angular/material/button';
+import { NgIf } from '@angular/common';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-  selector: 'app-forgot-teacher-password-verify',
   templateUrl: './forgot-teacher-password-verify.component.html',
-  styleUrls: ['./forgot-teacher-password-verify.component.scss']
+  styleUrl: './forgot-teacher-password-verify.component.scss',
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    FlexModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    NgIf,
+    MatError,
+    MatButton,
+    MatProgressBar,
+    RouterLink
+  ]
 })
 export class ForgotTeacherPasswordVerifyComponent {
   @Input() username: string = null;
-  verificationCodeFormGroup: FormGroup = this.fb.group({
+  protected verificationCodeFormGroup: FormGroup = this.fb.group({
     verificationCode: new FormControl('', [Validators.required])
   });
-  message: string;
-  processing: boolean = false;
-  isVerificationCodeInputEnabled: boolean = true;
-  isSubmitButtonEnabled: boolean = true;
-  showForgotPasswordLink: boolean = false;
+  protected message: string;
+  protected processing: boolean = false;
+  protected isVerificationCodeInputEnabled: boolean = true;
+  protected isSubmitButtonEnabled: boolean = true;
+  protected showForgotPasswordLink: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -38,7 +67,7 @@ export class ForgotTeacherPasswordVerifyComponent {
     this.verificationCodeFormGroup.controls[name].setValue(value);
   }
 
-  submit() {
+  submit(): void {
     this.processing = true;
     this.clearMessage();
     this.showForgotPasswordLink = false;
@@ -55,14 +84,14 @@ export class ForgotTeacherPasswordVerifyComponent {
           this.goToChangePasswordPage();
         } else {
           if (response.messageCode === 'verificationCodeExpired') {
-            this.setVerificationCodeExpiredMessage();
+            this.message = $localize`The verification code has expired. Verification codes are valid for 10 minutes. Please go back to the Teacher Forgot Password page to generate a new one.`;
             this.disableVerificationCodeInput();
             this.disableSubmitButton();
             this.showForgotPasswordLink = true;
           } else if (response.messageCode === 'verificationCodeIncorrect') {
-            this.setVerificationCodeIncorrectMessage();
+            this.message = $localize`The verification code is invalid. Please try again.`;
           } else if (response.messageCode === 'tooManyVerificationCodeAttempts') {
-            this.setTooManyVerificationCodeAttemptsMessage();
+            this.message = $localize`You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, please go back to the Teacher Forgot Password page to generate a new verification code.`;
             this.disableVerificationCodeInput();
             this.disableSubmitButton();
             this.showForgotPasswordLink = true;
@@ -71,38 +100,19 @@ export class ForgotTeacherPasswordVerifyComponent {
       });
   }
 
-  setVerificationCodeExpiredMessage() {
-    const message = $localize`The verification code has expired. Verification codes are valid for 10 minutes. Please go back to the Teacher Forgot Password page to generate a new one.`;
-    this.setMessage(message);
+  private clearMessage(): void {
+    this.message = '';
   }
 
-  setVerificationCodeIncorrectMessage() {
-    const message = $localize`The verification code is invalid. Please try again.`;
-    this.setMessage(message);
-  }
-
-  setTooManyVerificationCodeAttemptsMessage() {
-    const message = $localize`You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, please go back to the Teacher Forgot Password page to generate a new verification code.`;
-    this.setMessage(message);
-  }
-
-  setMessage(message) {
-    this.message = message;
-  }
-
-  clearMessage() {
-    this.setMessage('');
-  }
-
-  disableVerificationCodeInput() {
+  private disableVerificationCodeInput(): void {
     this.getControlField('verificationCode').disable();
   }
 
-  disableSubmitButton() {
+  private disableSubmitButton(): void {
     this.isSubmitButtonEnabled = false;
   }
 
-  goToChangePasswordPage() {
+  goToChangePasswordPage(): void {
     const params = {
       username: this.username,
       verificationCode: this.getControlFieldValue('verificationCode')
