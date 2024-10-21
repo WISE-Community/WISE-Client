@@ -1,23 +1,49 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { finalize } from 'rxjs/operators';
 import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
 import { injectPasswordErrors } from '../../../common/password-helper';
 import { PasswordErrors } from '../../../domain/password/password-errors';
+import { MatDivider } from '@angular/material/divider';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { NgIf } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { PasswordModule } from '../../../password/password.module';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-  selector: 'app-forgot-teacher-password-change',
   templateUrl: './forgot-teacher-password-change.component.html',
-  styleUrls: ['./forgot-teacher-password-change.component.scss']
+  styleUrl: './forgot-teacher-password-change.component.scss',
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    FlexModule,
+    ReactiveFormsModule,
+    PasswordModule,
+    MatButton,
+    NgIf,
+    MatProgressBar,
+    RouterLink,
+    MatDivider
+  ]
 })
 export class ForgotTeacherPasswordChangeComponent {
-  changePasswordFormGroup: FormGroup = this.fb.group({});
-  isSubmitButtonEnabled: boolean = true;
-  message: string = '';
-  processing: boolean = false;
-  showForgotPasswordLink = false;
+  protected changePasswordFormGroup: FormGroup = this.fb.group({});
+  protected isSubmitButtonEnabled: boolean = true;
+  protected message: string = '';
+  protected processing: boolean = false;
+  protected showForgotPasswordLink = false;
   @Input() username: string = null;
   @Input() verificationCode: string;
 
@@ -120,34 +146,27 @@ export class ForgotTeacherPasswordChangeComponent {
   }
 
   private setVerificationCodeExpiredMessage(): void {
-    const message = $localize`The verification code has expired. Verification codes are valid for 10 minutes. Please go back to the Teacher Forgot Password page to generate a new one.`;
-    this.setMessage(message);
+    this.message = $localize`The verification code has expired. Verification codes are valid for 10 minutes. Please go back to the Teacher Forgot Password page to generate a new one.`;
   }
 
   private setVerificationCodeIncorrectMessage(): void {
-    const message = $localize`The verification code is invalid. Please try again.`;
-    this.setMessage(message);
+    this.message = $localize`The verification code is invalid. Please try again.`;
   }
 
   private setTooManyVerificationCodeAttemptsMessage(): void {
-    const message = $localize`You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, please go back to the Teacher Forgot Password page to generate a new verification code.`;
-    this.setMessage(message);
+    this.message = $localize`You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, please go back to the Teacher Forgot Password page to generate a new verification code.`;
   }
 
   private setPasswordsDoNotMatchMessage(): void {
-    this.setMessage($localize`Passwords do not match, please try again.`);
+    this.message = $localize`Passwords do not match, please try again.`;
   }
 
   private setErrorOccurredMessage(): void {
-    this.setMessage($localize`An error occurred. Please try again.`);
-  }
-
-  private setMessage(message: string): void {
-    this.message = message;
+    this.message = $localize`An error occurred. Please try again.`;
   }
 
   private clearMessage(): void {
-    this.setMessage('');
+    this.message = '';
   }
 
   private disablePasswordInputs(): void {

@@ -1,22 +1,42 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { StudentService } from '../../../student/student.service';
 import { finalize } from 'rxjs/operators';
 import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
 import { injectPasswordErrors } from '../../../common/password-helper';
 import { PasswordErrors } from '../../../domain/password/password-errors';
+import { MatDivider } from '@angular/material/divider';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatButton } from '@angular/material/button';
+import { PasswordModule } from '../../../password/password.module';
+import { NgIf } from '@angular/common';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-  selector: 'forgot-student-password-change',
   templateUrl: './forgot-student-password-change.component.html',
-  styleUrls: ['./forgot-student-password-change.component.scss']
+  styleUrl: './forgot-student-password-change.component.scss',
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    FlexModule,
+    ReactiveFormsModule,
+    NgIf,
+    PasswordModule,
+    MatButton,
+    MatProgressBar,
+    MatDivider,
+    RouterLink
+  ]
 })
 export class ForgotStudentPasswordChangeComponent {
   @Input() answer: string;
-  changePasswordFormGroup: FormGroup = this.fb.group({});
-  message: string = '';
-  processing: boolean = false;
+  protected changePasswordFormGroup: FormGroup = this.fb.group({});
+  protected message: string = '';
+  protected processing: boolean = false;
   @Input() questionKey: string;
   @Input() username: string;
 
@@ -31,7 +51,7 @@ export class ForgotStudentPasswordChangeComponent {
     this.changeDetectorRef.detectChanges();
   }
 
-  submit(): void {
+  protected submit(): void {
     this.clearMessage();
     const password = this.getNewPassword();
     const confirmPassword = this.getConfirmNewPassword();
@@ -82,11 +102,7 @@ export class ForgotStudentPasswordChangeComponent {
   }
 
   private setErrorOccurredMessage(): void {
-    this.setMessage($localize`An error occurred. Please try again.`);
-  }
-
-  private setMessage(message: string): void {
-    this.message = message;
+    this.message = $localize`An error occurred. Please try again.`;
   }
 
   private clearMessage(): void {

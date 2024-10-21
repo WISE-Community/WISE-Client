@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { MatAnchor } from '@angular/material/button';
+import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-  selector: 'app-forgot-teacher-username-complete',
   templateUrl: './forgot-teacher-username-complete.component.html',
-  styleUrls: ['./forgot-teacher-username-complete.component.scss']
+  styleUrl: './forgot-teacher-username-complete.component.scss',
+  standalone: true,
+  imports: [MatCard, MatCardContent, MatAnchor, RouterLink]
 })
-export class ForgotTeacherUsernameCompleteComponent implements OnInit {
-  constructor(private router: Router) {}
-
-  ngOnInit() {}
-}
+export class ForgotTeacherUsernameCompleteComponent {}

@@ -23,33 +23,31 @@ import { ForgotUserPasswordCompleteComponent } from './forgot-user-password-comp
 import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-action.component';
 
 @NgModule({
-  imports: [
-    CallToActionComponent,
-    CommonModule,
-    ForgotComponent,
-    ForgotHomeComponent,
-    ForgotStudentComponent,
-    ForgotTeacherComponent,
-    ForgotRoutingModule,
-    FormsModule,
-    MatDividerModule,
-    MatProgressBarModule,
-    PasswordModule,
-    ReactiveFormsModule,
-    SharedModule
-  ],
-  declarations: [
-    ForgotStudentPasswordComponent,
-    ForgotStudentUsernameComponent,
-    ForgotTeacherUsernameComponent,
-    ForgotTeacherPasswordComponent,
-    ForgotStudentPasswordSecurityComponent,
-    ForgotStudentPasswordChangeComponent,
-    ForgotTeacherUsernameCompleteComponent,
-    ForgotTeacherPasswordChangeComponent,
-    ForgotTeacherPasswordVerifyComponent,
-    ForgotUserPasswordCompleteComponent
-  ],
-  exports: [ForgotComponent]
+    imports: [
+        CallToActionComponent,
+        CommonModule,
+        ForgotComponent,
+        ForgotHomeComponent,
+        ForgotStudentComponent,
+        ForgotTeacherComponent,
+        ForgotRoutingModule,
+        FormsModule,
+        MatDividerModule,
+        MatProgressBarModule,
+        PasswordModule,
+        ReactiveFormsModule,
+        SharedModule,
+        ForgotStudentPasswordComponent,
+        ForgotStudentUsernameComponent,
+        ForgotTeacherUsernameComponent,
+        ForgotTeacherPasswordComponent,
+        ForgotStudentPasswordSecurityComponent,
+        ForgotStudentPasswordChangeComponent,
+        ForgotTeacherUsernameCompleteComponent,
+        ForgotTeacherPasswordChangeComponent,
+        ForgotTeacherPasswordVerifyComponent,
+        ForgotUserPasswordCompleteComponent
+    ],
+    exports: [ForgotComponent]
 })
 export class ForgotModule {}

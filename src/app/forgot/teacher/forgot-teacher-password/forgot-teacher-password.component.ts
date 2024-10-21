@@ -1,24 +1,55 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { finalize } from 'rxjs/operators';
 import { ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { ConfigService } from '../../../services/config.service';
+import { MatDivider } from '@angular/material/divider';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatButton } from '@angular/material/button';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { NgIf } from '@angular/common';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-  selector: 'app-forgot-teacher-password',
   templateUrl: './forgot-teacher-password.component.html',
-  styleUrls: ['./forgot-teacher-password.component.scss']
+  styleUrl: './forgot-teacher-password.component.scss',
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    FlexModule,
+    ReactiveFormsModule,
+    NgIf,
+    RouterLink,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatButton,
+    MatProgressBar,
+    MatDivider
+  ]
 })
-export class ForgotTeacherPasswordComponent implements OnInit {
-  forgotTeacherPasswordFormGroup: FormGroup = this.fb.group({
+export class ForgotTeacherPasswordComponent {
+  protected forgotTeacherPasswordFormGroup: FormGroup = this.fb.group({
     username: new FormControl('', [Validators.required])
   });
-  isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
-  message: string = '';
-  showForgotUsernameLink: boolean = false;
-  processing: boolean = false;
+  protected isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
+  protected message: string = '';
+  protected showForgotUsernameLink: boolean = false;
+  protected processing: boolean = false;
 
   constructor(
     private configService: ConfigService,
@@ -27,8 +58,6 @@ export class ForgotTeacherPasswordComponent implements OnInit {
     private router: Router,
     private teacherService: TeacherService
   ) {}
-
-  ngOnInit() {}
 
   getControlFieldValue(fieldName) {
     return this.forgotTeacherPasswordFormGroup.get(fieldName).value;
@@ -90,14 +119,10 @@ export class ForgotTeacherPasswordComponent implements OnInit {
         message = $localize`Recaptcha failed. Please reload the page and try again.`;
         break;
     }
-    this.setMessage(message);
-  }
-
-  setMessage(message) {
     this.message = message;
   }
 
-  clearMessage() {
-    this.setMessage('');
+  private clearMessage(): void {
+    this.message = '';
   }
 }
