@@ -39,7 +39,7 @@ import { MatCard, MatCardContent } from '@angular/material/card';
   ]
 })
 export class ForgotTeacherPasswordChangeComponent {
-  protected changePasswordFormGroup: FormGroup = this.fb.group({});
+  changePasswordFormGroup: FormGroup = this.fb.group({});
   protected isSubmitButtonEnabled: boolean = true;
   protected message: string = '';
   protected processing: boolean = false;

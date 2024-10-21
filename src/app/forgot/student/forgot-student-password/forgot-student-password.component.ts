@@ -54,7 +54,7 @@ export class ForgotStudentPasswordComponent {
     private studentService: StudentService
   ) {}
 
-  protected submit(): void {
+  submit(): void {
     this.processing = true;
     this.clearMessage();
     this.showForgotUsernameLink = false;

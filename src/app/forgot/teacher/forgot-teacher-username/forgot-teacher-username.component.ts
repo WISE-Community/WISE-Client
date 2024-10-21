@@ -65,7 +65,7 @@ export class ForgotTeacherUsernameComponent {
     return this.getControlFieldValue('email');
   }
 
-  protected submit(): void {
+  submit(): void {
     this.processing = true;
     this.clearMessage();
     const email = this.getEmail();

@@ -148,7 +148,7 @@ export class ForgotStudentUsernameComponent implements OnInit {
     this.forgotStudentUsernameFormGroup.controls[name].setValue(value);
   }
 
-  protected loginWithUsername(username: string): void {
+  loginWithUsername(username: string): void {
     this.router.navigate(['/login', { username: username }]);
   }
 }

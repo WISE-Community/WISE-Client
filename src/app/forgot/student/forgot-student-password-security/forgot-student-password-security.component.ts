@@ -47,7 +47,7 @@ export class ForgotStudentPasswordSecurityComponent {
   protected answerSecurityQuestionFormGroup: FormGroup = this.fb.group({
     answer: new FormControl('', [Validators.required])
   });
-  protected isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
+  isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
   protected message: string;
   protected processing: boolean = false;
   @Input() question: string;

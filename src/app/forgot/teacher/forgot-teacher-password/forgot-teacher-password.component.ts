@@ -46,7 +46,7 @@ export class ForgotTeacherPasswordComponent {
   protected forgotTeacherPasswordFormGroup: FormGroup = this.fb.group({
     username: new FormControl('', [Validators.required])
   });
-  protected isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
+  isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
   protected message: string = '';
   protected showForgotUsernameLink: boolean = false;
   protected processing: boolean = false;

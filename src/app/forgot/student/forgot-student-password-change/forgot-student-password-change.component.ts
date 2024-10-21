@@ -34,7 +34,7 @@ import { MatCard, MatCardContent } from '@angular/material/card';
 })
 export class ForgotStudentPasswordChangeComponent {
   @Input() answer: string;
-  protected changePasswordFormGroup: FormGroup = this.fb.group({});
+  changePasswordFormGroup: FormGroup = this.fb.group({});
   protected message: string = '';
   protected processing: boolean = false;
   @Input() questionKey: string;
@@ -51,7 +51,7 @@ export class ForgotStudentPasswordChangeComponent {
     this.changeDetectorRef.detectChanges();
   }
 
-  protected submit(): void {
+  submit(): void {
     this.clearMessage();
     const password = this.getNewPassword();
     const confirmPassword = this.getConfirmNewPassword();

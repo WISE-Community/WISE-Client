@@ -112,7 +112,7 @@ export class ForgotTeacherPasswordVerifyComponent {
     this.isSubmitButtonEnabled = false;
   }
 
-  protected goToChangePasswordPage(): void {
+  goToChangePasswordPage(): void {
     const params = {
       username: this.username,
       verificationCode: this.getControlFieldValue('verificationCode')
