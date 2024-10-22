@@ -1,31 +1,28 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
+  imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatCardModule, MatIconModule],
   selector: 'card-selector',
-  templateUrl: './card-selector.component.html',
-  styleUrls: ['./card-selector.component.scss']
+  standalone: true,
+  styleUrl: './card-selector.component.scss',
+  templateUrl: './card-selector.component.html'
 })
-export class CardSelectorComponent implements OnInit {
-  @Input()
-  items: any[] = [];
+export class CardSelectorComponent {
+  @Input() items: any[] = [];
+  @Output() itemSelected: any = new EventEmitter();
+  @Input() previewProjectUrl: string;
+  private selectedItem: any;
 
-  @Input()
-  previewProjectUrl: string;
-
-  @Output()
-  itemSelected: any = new EventEmitter();
-
-  selectedItem: any;
-
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  isItemSelected(item: any): boolean {
+  protected isItemSelected(item: any): boolean {
     return item === this.selectedItem;
   }
 
-  previewItem(item: any): void {
+  protected previewItem(item: any): void {
     window.open(`${this.previewProjectUrl}/${item.id}`, '_blank');
   }
 

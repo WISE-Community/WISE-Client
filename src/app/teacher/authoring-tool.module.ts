@@ -4,7 +4,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { AddYourOwnNodeComponent } from '../../assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component';
 import { ChooseNewNodeTemplateComponent } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
 import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
-import { CardSelectorComponent } from '../../assets/wise5/authoringTool/components/card-selector/card-selector.component';
 import { RubricAuthoringComponent } from '../../assets/wise5/authoringTool/rubric/rubric-authoring.component';
 import { NodeIconChooserDialog } from '../../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
 import { ChooseNewComponent } from '../authoring-tool/add-component/choose-new-component/choose-new-component.component';
@@ -75,14 +74,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
     AdvancedProjectAuthoringComponent,
     AuthoringToolComponent,
     AuthoringToolBarComponent,
-    CardSelectorComponent,
     ChooseAutomatedAssessmentComponent,
     ChooseComponentLocationComponent,
     ChooseCopyNodeLocationComponent,
     ChooseImportStepComponent,
     ChooseImportUnitComponent,
     ChooseMoveNodeLocationComponent,
-    ChooseSimulationComponent,
     ConcurrentAuthorsMessageComponent,
     ConfigureAutomatedAssessmentComponent,
     EditProjectLanguageSettingComponent,
@@ -112,6 +109,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     AddYourOwnNodeComponent,
     ChooseNewNodeTemplateComponent,
     ChooseNewComponent,
+    ChooseSimulationComponent,
     ComponentAuthoringModule,
     ComponentStudentModule,
     ComponentTypeButtonComponent,

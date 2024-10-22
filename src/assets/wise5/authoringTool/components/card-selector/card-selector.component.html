@@ -1,49 +1,45 @@
 <div fxLayout="row wrap" fxLayout.xs="column" class="item-cards-container gray-lighter-bg">
-  <div fxFlex.sm="50" fxFlex.md="33" fxFlex.gt-md="25" *ngFor="let item of items">
-    <mat-card
-      appearance="outlined"
-      class="item-card"
-      [ngStyle]="isItemSelected(item) && { border: '4px solid #00C853' }"
-    >
-      <mat-card-title class="item-card-title">
-        {{ item.title }}
-      </mat-card-title>
-      <div class="item-card-image" style="background-image: url('{{ item.thumbnail }}');"></div>
-      <mat-card-actions
-        class="item-card-actions"
-        fxLayout="row"
-        fxLayoutAlign="start center"
-        fxLayoutGap="10px"
+  @for (item of items; track item.id) {
+    <div fxFlex.sm="50" fxFlex.md="33" fxFlex.gt-md="25">
+      <mat-card
+        appearance="outlined"
+        class="item-card"
+        [ngStyle]="isItemSelected(item) && { border: '4px solid #00C853' }"
       >
-        <mat-icon
-          class="success"
-          aria-label="Selected"
-          i18n-aria-label
-          *ngIf="isItemSelected(item)"
+        <mat-card-title class="item-card-title">
+          {{ item.title }}
+        </mat-card-title>
+        <div class="item-card-image" style="background-image: url('{{ item.thumbnail }}');"></div>
+        <mat-card-actions
+          class="item-card-actions"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="10px"
         >
-          check_circle
-        </mat-icon>
-        <span class="item-card-actions-spacer"></span>
-        <button mat-flat-button color="primary" (click)="previewItem(item)" i18n>Preview</button>
-        <button
-          mat-flat-button
-          color="primary"
-          (click)="selectItem(item)"
-          target="_blank"
-          [disabled]="isItemSelected(item)"
-          i18n
-        >
-          Select
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-  <div
-    *ngIf="items.length < 1"
-    fxLayout="row"
-    fxLayoutAlign="center start"
-    class="no-results-message-container"
-  >
-    <span i18n>No results found</span>
-  </div>
+          @if (isItemSelected(item)) {
+            <mat-icon class="success" aria-label="Selected" i18n-aria-label>
+              check_circle
+            </mat-icon>
+          }
+          <span class="item-card-actions-spacer"></span>
+          <button mat-flat-button color="primary" (click)="previewItem(item)" i18n>Preview</button>
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="selectItem(item)"
+            target="_blank"
+            [disabled]="isItemSelected(item)"
+            i18n
+          >
+            Select
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  }
+  @if (items.length < 1) {
+    <div fxLayout="row" fxLayoutAlign="center start" class="no-results-message-container">
+      <span i18n>No results found</span>
+    </div>
+  }
 </div>
