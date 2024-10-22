@@ -17,7 +17,6 @@ import { ProjectLocale } from '../../domain/projectLocale';
 import { StudentAccountMenuModule } from '../../../assets/wise5/vle/student-account-menu/student-account-menu.module';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { NotificationsDialogModule } from '../../../assets/wise5/vle/notifications-dialog/notifications-dialog.module';
 import { DismissAmbientNotificationDialogModule } from '../../../assets/wise5/vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -41,7 +40,7 @@ import { ProjectLanguageChooserComponent } from '../../common/project-language-c
     MatMenuModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-    NotificationsDialogModule,
+    NotificationsDialogComponent,
     ProjectLanguageChooserComponent,
     StudentAccountMenuModule
   ],
@@ -132,9 +131,10 @@ export class TopBarComponent {
   }
 
   private setCompletionPercent(): void {
-    this.completionPercent = this.nodeStatusService.getNodeStatuses()[
-      this.projectService.getProjectRootNode().id
-    ].progress.completionPct;
+    this.completionPercent =
+      this.nodeStatusService.getNodeStatuses()[
+        this.projectService.getProjectRootNode().id
+      ].progress.completionPct;
   }
 
   private subscribeToStudentData(): void {
