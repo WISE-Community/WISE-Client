@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CardSelectorComponent } from './card-selector.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
 
 class Item {
@@ -21,8 +19,7 @@ describe('CardSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CardSelectorComponent],
-      imports: [MatCardModule, MatIconModule]
+      imports: [CardSelectorComponent]
     }).compileComponents();
   });
 
