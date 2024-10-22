@@ -1,21 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { Notification } from '../../../../app/domain/notification';
 import { NotebookService } from '../../services/notebookService';
 import { NotificationService } from '../../services/notificationService';
 import { ProjectService } from '../../services/projectService';
 import { NodeService } from '../../services/nodeService';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  selector: 'notifications-dialog',
-  templateUrl: './notifications-dialog.component.html',
-  styleUrls: ['./notifications-dialog.component.scss']
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule,
+    MatTooltipModule
+  ],
+  standalone: true,
+  styleUrl: './notifications-dialog.component.scss',
+  templateUrl: './notifications-dialog.component.html'
 })
 export class NotificationsDialogComponent implements OnInit {
   newNotifications: any;
-  notifications: any;
-  subscriptions: Subscription = new Subscription();
+  protected notifications: any;
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     public dialog: MatDialog,
@@ -29,14 +46,17 @@ export class NotificationsDialogComponent implements OnInit {
   ngOnInit(): void {
     this.subscriptions.add(
       this.notificationService.notificationChanged$.subscribe(() => {
-        // update new notifications
         this.newNotifications = this.notificationService.getNewNotifications();
       })
     );
     this.newNotifications = this.notificationService.getNewNotifications();
   }
 
-  hasNewNotifications(): boolean {
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  protected hasNewNotifications(): boolean {
     return this.newNotifications.length > 0;
   }
 
@@ -93,7 +113,7 @@ export class NotificationsDialogComponent implements OnInit {
     }
   }
 
-  getNodePositionAndTitle(nodeId: string): string {
+  protected getNodePositionAndTitle(nodeId: string): string {
     return this.projectService.getNodePositionAndTitle(nodeId);
   }
 

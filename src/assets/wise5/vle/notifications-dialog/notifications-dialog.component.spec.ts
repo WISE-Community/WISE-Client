@@ -1,11 +1,7 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { NotificationService } from '../../services/notificationService';
 import { NotificationsDialogComponent } from './notifications-dialog.component';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { NodeService } from '../../services/nodeService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -24,21 +20,15 @@ describe('NotificationsMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [NotificationsDialogComponent],
-    imports: [MatCardModule,
-        MatDialogModule,
-        MatIconModule,
-        MatToolbarModule,
-        StudentTeacherCommonServicesModule],
-    providers: [
+      imports: [NotificationsDialogComponent, StudentTeacherCommonServicesModule],
+      providers: [
         {
-            provide: MatDialogRef,
-            useValue: { close: () => { } }
+          provide: MatDialogRef,
+          useValue: { close: () => {} }
         },
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-}).compileComponents();
+        provideHttpClient(withInterceptorsFromDi())
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -84,10 +74,9 @@ describe('NotificationsMenuComponent', () => {
   }
 
   it('should dismiss notification aggregate and visit node', () => {
-    const setCurrentNodeSpy = spyOn(
-      TestBed.inject(NodeService),
-      'setCurrentNode'
-    ).and.callFake(() => {});
+    const setCurrentNodeSpy = spyOn(TestBed.inject(NodeService), 'setCurrentNode').and.callFake(
+      () => {}
+    );
     component.dismissNotificationAggregateAndVisitNode(notificationAggregate1);
     expect(dismissNotificationSpy).toHaveBeenCalledTimes(2);
     expect(setCurrentNodeSpy).toHaveBeenCalledWith(nodeId1);
