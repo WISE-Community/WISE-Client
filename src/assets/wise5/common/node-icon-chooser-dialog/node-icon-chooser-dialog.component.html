@@ -5,25 +5,26 @@
   fxLayoutAlign="start center"
   fxLayoutGap="8px"
 >
-  <div
-    *ngIf="newNodeIcon.type === 'font'"
-    style="background-color: {{ newNodeIcon.color }}"
-    class="avatar preview-icon"
-    aria-label="Selected icon"
-    i18n-aria-label
-    [ngClass]="{ 'avatar--square': node.isGroup() }"
-  >
-    <mat-icon class="mat-24 material-icons">{{ newNodeIcon.fontName }}</mat-icon>
-  </div>
-  <img
-    *ngIf="newNodeIcon.type === 'img'"
-    class="mat-24 avatar"
-    [ngClass]="{ 'avatar--square': node.isGroup() }"
-    [src]="newNodeIcon.imgSrc"
-    alt="newNodeIcon.imgAlt"
-    aria-label="Selected icon"
-    i18n-aria-label
-  />
+  @if (newNodeIcon.type === 'font') {
+    <div
+      style="background-color: {{ newNodeIcon.color }}"
+      class="avatar preview-icon"
+      aria-label="Selected icon"
+      i18n-aria-label
+      [ngClass]="{ 'avatar--square': node.isGroup() }"
+    >
+      <mat-icon class="mat-24 material-icons">{{ newNodeIcon.fontName }}</mat-icon>
+    </div>
+  } @else if (newNodeIcon.type === 'img') {
+    <img
+      class="mat-24 avatar"
+      [ngClass]="{ 'avatar--square': node.isGroup() }"
+      [src]="newNodeIcon.imgSrc"
+      alt="newNodeIcon.imgAlt"
+      aria-label="Selected icon"
+      i18n-aria-label
+    />
+  }
   <span i18n>Choose an Icon</span>
 </h2>
 <mat-dialog-content class="dialog-content-scroll">
@@ -42,52 +43,55 @@
     </a>
   </h3>
   <mat-chip-listbox aria-label="Select a KI icon" i18n-aria-label>
-    <mat-chip-option
-      *ngFor="let kiIcon of kiIcons"
-      class="ki-choice"
-      color="null"
-      [value]="kiIcon"
-      [selected]="newNodeIcon.type === 'img' && kiIcon.imgSrc === newNodeIcon.imgSrc"
-      (selectionChange)="chooseKIIcon($event)"
-      (click)="chip.select()"
-      style="background-color: {{ color }}"
-    >
-      <mat-chip-avatar>
-        <img class="ki-icon" [src]="kiIcon.imgSrc" [alt]="kiIcon.imgAlt" />
-      </mat-chip-avatar>
-      {{ kiIcon.imgLabel }}
-    </mat-chip-option>
+    @for (kiIcon of kiIcons; track kiIcon.imgSrc) {
+      <mat-chip-option
+        class="ki-choice"
+        color="null"
+        [value]="kiIcon"
+        [selected]="newNodeIcon.type === 'img' && kiIcon.imgSrc === newNodeIcon.imgSrc"
+        (selectionChange)="chooseKIIcon($event)"
+        (click)="chip.select()"
+        style="background-color: {{ color }}"
+      >
+        <mat-chip-avatar>
+          <img class="ki-icon" [src]="kiIcon.imgSrc" [alt]="kiIcon.imgAlt" />
+        </mat-chip-avatar>
+        {{ kiIcon.imgLabel }}
+      </mat-chip-option>
+    }
   </mat-chip-listbox>
   <mat-divider></mat-divider>
   <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
     <div>
       <h3 i18n>Or choose your own icon:</h3>
       <mat-chip-listbox aria-label="Select an icon" i18n-aria-label>
-        <mat-chip-option
-          *ngFor="let fontName of fontNames"
-          class="icon-choice"
-          color="null"
-          [value]="fontName"
-          [ariaLabel]="fontName"
-          [selected]="newNodeIcon.type === 'font' && fontName === newNodeIcon.fontName"
-          (selectionChange)="chooseFontName($event)"
-        >
-          <mat-icon>{{ fontName }}</mat-icon>
-        </mat-chip-option>
+        @for (fontName of fontNames; track fontName) {
+          <mat-chip-option
+            class="icon-choice"
+            color="null"
+            [value]="fontName"
+            [ariaLabel]="fontName"
+            [selected]="newNodeIcon.type === 'font' && fontName === newNodeIcon.fontName"
+            (selectionChange)="chooseFontName($event)"
+          >
+            <mat-icon>{{ fontName }}</mat-icon>
+          </mat-chip-option>
+        }
       </mat-chip-listbox>
     </div>
     <div fxFlex.gt-sm="18">
       <h3 i18n>Color:</h3>
       <mat-chip-listbox aria-label="Select a color" i18n-aria-label>
-        <mat-chip-option
-          *ngFor="let color of colors"
-          class="color-choice icon-choice"
-          [value]="color"
-          [ariaLabel]="color"
-          [selected]="newNodeIcon.type === 'font' && color === newNodeIcon.color"
-          (selectionChange)="chooseFontColor($event)"
-          style="background-color: {{ color }}"
-        ></mat-chip-option>
+        @for (color of colors; track color) {
+          <mat-chip-option
+            class="color-choice icon-choice"
+            [value]="color"
+            [ariaLabel]="color"
+            [selected]="newNodeIcon.type === 'font' && color === newNodeIcon.color"
+            (selectionChange)="chooseFontColor($event)"
+            style="background-color: {{ color }}"
+          ></mat-chip-option>
+        }
       </mat-chip-listbox>
     </div>
   </div>

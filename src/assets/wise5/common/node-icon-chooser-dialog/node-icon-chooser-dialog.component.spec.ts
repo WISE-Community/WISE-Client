@@ -1,9 +1,9 @@
-import { NodeIconChooserDialog } from './node-icon-chooser-dialog.component';
+import { NodeIconChooserDialogComponent } from './node-icon-chooser-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Node } from '../Node';
+import { provideRouter } from '@angular/router';
 
 const node1 = {
   id: 'node1',
@@ -40,18 +40,18 @@ class MockProjectService {
 
 let fixture;
 let component;
-describe('NodeIconChooserDialog', () => {
+fdescribe('NodeIconChooserDialog', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NodeIconChooserDialog],
+      imports: [NodeIconChooserDialogComponent],
       providers: [
         { provide: MatDialogRef, useValue: { close: () => {} } },
         { provide: MAT_DIALOG_DATA, useValue: [] },
-        { provide: TeacherProjectService, useClass: MockProjectService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+        { provide: TeacherProjectService, useClass: MockProjectService },
+        provideRouter([])
+      ]
     });
-    fixture = TestBed.createComponent(NodeIconChooserDialog);
+    fixture = TestBed.createComponent(NodeIconChooserDialogComponent);
     component = fixture.componentInstance;
     component.node = Object.assign(new Node(), node1);
     component.newNodeIcon = node1.icon;

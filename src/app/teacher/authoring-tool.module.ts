@@ -5,7 +5,6 @@ import { AddYourOwnNodeComponent } from '../../assets/wise5/authoringTool/addNod
 import { ChooseNewNodeTemplateComponent } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
 import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
 import { RubricAuthoringComponent } from '../../assets/wise5/authoringTool/rubric/rubric-authoring.component';
-import { NodeIconChooserDialog } from '../../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
 import { ChooseNewComponent } from '../authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { ChooseImportStepComponent } from '../authoring-tool/import-step/choose-import-step/choose-import-step.component';
 import { ComponentAuthoringModule } from './component-authoring.module';
@@ -88,7 +87,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MilestonesAuthoringComponent,
     NodeAuthoringComponent,
     NodeAuthoringParentComponent,
-    NodeIconChooserDialog,
     NodeWithMoveAfterButtonComponent,
     NotebookAuthoringComponent,
     ProjectInfoAuthoringComponent,

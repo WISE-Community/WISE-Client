@@ -1,7 +1,15 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Node } from '../Node';
+import { CommonModule } from '@angular/common';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
 
 interface KIIcon {
   imgAlt: string;
@@ -10,12 +18,24 @@ interface KIIcon {
 }
 
 @Component({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatIconModule,
+    MatTooltipModule,
+    RouterModule
+  ],
   selector: 'node-icon-chooser-dialog',
-  styleUrls: ['node-icon-chooser-dialog.component.scss'],
+  standalone: true,
+  styleUrl: 'node-icon-chooser-dialog.component.scss',
   templateUrl: 'node-icon-chooser-dialog.component.html'
 })
-export class NodeIconChooserDialog {
-  colors = [
+export class NodeIconChooserDialogComponent {
+  protected colors = [
     '#66BB6A',
     '#009688',
     '#00B0FF',
@@ -30,7 +50,7 @@ export class NodeIconChooserDialog {
     '#757575'
   ];
 
-  fontNames = [
+  protected fontNames = [
     'access_time',
     'alarm',
     'announcement',
@@ -78,7 +98,7 @@ export class NodeIconChooserDialog {
     'verified_user',
     'view_list'
   ];
-  kiIcons: KIIcon[] = [
+  protected kiIcons: KIIcon[] = [
     {
       imgAlt: $localize`Knowledge Integration elicit ideas`,
       imgLabel: $localize`Elicit Ideas`,
@@ -105,13 +125,13 @@ export class NodeIconChooserDialog {
       imgSrc: 'assets/img/icons/ki-color-cycle.svg'
     }
   ];
-  newNodeIcon: any;
-  node: Node;
+  protected newNodeIcon: any;
+  protected node: Node;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) protected data: any,
-    public dialogRef: MatDialogRef<NodeIconChooserDialog>,
-    private ProjectService: TeacherProjectService
+    public dialogRef: MatDialogRef<NodeIconChooserDialogComponent>,
+    private projectService: TeacherProjectService
   ) {}
 
   ngOnInit() {
@@ -119,39 +139,31 @@ export class NodeIconChooserDialog {
     this.newNodeIcon = Object.assign({}, this.node.getIcon());
   }
 
-  chooseFontColor(event: any) {
+  chooseFontColor(event: any): void {
     if (event.selected) {
-      this.setFontType();
+      this.newNodeIcon.type = 'font';
       this.newNodeIcon.color = event.source.value;
     }
   }
 
-  chooseFontName(event: any) {
+  chooseFontName(event: any): void {
     if (event.selected) {
-      this.setFontType();
+      this.newNodeIcon.type = 'font';
       this.newNodeIcon.fontName = event.source.value;
     }
   }
 
-  chooseKIIcon(event: any) {
+  chooseKIIcon(event: any): void {
     if (event.selected) {
-      this.setImgType();
+      this.newNodeIcon.type = 'img';
       Object.assign(this.newNodeIcon, event.source.value);
     }
   }
 
-  setImgType() {
-    this.newNodeIcon.type = 'img';
-  }
-
-  setFontType() {
-    this.newNodeIcon.type = 'font';
-  }
-
-  save() {
-    const nodeContent = this.ProjectService.getNodeById(this.node.id);
+  save(): void {
+    const nodeContent = this.projectService.getNodeById(this.node.id);
     nodeContent.icon = Object.assign(this.node.getIcon(), this.newNodeIcon);
-    this.ProjectService.saveProject();
+    this.projectService.saveProject();
     this.dialogRef.close();
   }
 }
