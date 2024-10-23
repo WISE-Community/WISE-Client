@@ -3,19 +3,24 @@
     <button mat-icon-button aria-label="Authoring Tool Menu" i18n-aria-label (click)="toggleMenu()">
       <mat-icon>menu</mat-icon>
     </button>
-    <span *ngIf="!showStepTools" class="toolbar__title">{{ viewName }}</span>
     @if (showStepTools) {
       <step-tools />
+    } @else {
+      <span class="toolbar__title">{{ viewName }}</span>
     }
     <div fxFlex></div>
-    <span *ngIf="isJSONValid" class="success" fxLayoutAlign="start center">
-      <mat-icon>done</mat-icon>
-      <span>JSON Valid</span></span
-    >
-    <span *ngIf="isJSONValid === false" class="warn" fxLayoutAlign="start center">
-      <mat-icon>clear</mat-icon>
-      <span>JSON Invalid</span>
-    </span>
-    <save-indicator></save-indicator>
+    @if (isJSONValid == null) {
+    } @else if (isJSONValid) {
+      <span class="success" fxLayoutAlign="start center">
+        <mat-icon>done</mat-icon>
+        <span>JSON Valid</span>
+      </span>
+    } @else {
+      <span class="warn" fxLayoutAlign="start center">
+        <mat-icon>clear</mat-icon>
+        <span>JSON Invalid</span>
+      </span>
+    }
+    <save-indicator />
   </div>
 </mat-toolbar>
