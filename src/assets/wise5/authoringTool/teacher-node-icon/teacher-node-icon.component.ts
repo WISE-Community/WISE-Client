@@ -1,7 +1,7 @@
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectService } from '../../services/projectService';
 import { NodeIconComponent } from '../../vle/node-icon/node-icon.component';
-import { NodeIconChooserDialog } from '../../common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
+import { NodeIconChooserDialogComponent } from '../../common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -17,7 +17,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatBadgeModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NodeIconChooserDialogComponent
   ],
   selector: 'teacher-node-icon',
   standalone: true,
@@ -33,7 +34,7 @@ export class TeacherNodeIconComponent extends NodeIconComponent {
   }
 
   protected openNodeIconChooserDialog(): void {
-    this.dialog.open(NodeIconChooserDialog, {
+    this.dialog.open(NodeIconChooserDialogComponent, {
       data: { node: this.node },
       panelClass: 'dialog-md'
     });
