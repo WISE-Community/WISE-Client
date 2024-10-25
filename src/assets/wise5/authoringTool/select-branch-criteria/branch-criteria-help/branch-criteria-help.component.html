@@ -1,0 +1,54 @@
+<h2 mat-dialog-title i18n>Branching Criteria Options</h2>
+<mat-dialog-content class="dialog-content-scroll">
+  <h3 i18n>Workgroup ID</h3>
+  <p i18n>
+    Automatically assigns students a branch path based on their WISE Workgroup ID number. This
+    option ensures a relatively even distribution of students per path.
+  </p>
+  <p i18n>
+    *Assigning paths based on Workgroup ID also can ensure that students are branched to the same
+    path across multiple branching structures in the unit (assuming each branching structure
+    contains the same number of paths).
+  </p>
+  <p>
+    This option uses the
+    <a
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder"
+      target="_blank"
+      >remainder function</a
+    >. So for 4 branch paths (A, B, C, D), calculations for the following Workgroup IDs would be:
+  </p>
+  <ul>
+    <li>1000 % 4 = 0 (Path A)</li>
+    <li>1001 % 4 = 1 (Path B)</li>
+    <li>1002 % 4 = 2 (Path C)</li>
+    <li>1003 % 4 = 3 (Path D)</li>
+    <li>1004 % 4 = 0 (Path A)</li>
+    <li>...</li>
+  </ul>
+  <mat-divider></mat-divider>
+  <h3 i18n>Score</h3>
+  <p i18n>Assigns students a branch path based on their score from another item in the unit.</p>
+  <p>
+    After choosing to branch by score, you'll need to identify a reference component. The branching
+    logic will use the student's score from that item to determine their path.
+  </p>
+  <mat-divider></mat-divider>
+  <h3 i18n>Choice Chosen</h3>
+  <p i18n>
+    Assigns students a branch path based on their selection from a multiple choice item in the unit.
+  </p>
+  <p>
+    After choosing to branch by choice, you'll need to identify a reference component. The branching
+    logic will use the student's selection from that item to determine their path.
+  </p>
+  <mat-divider></mat-divider>
+  <h3 i18n>Random</h3>
+  <p i18n>
+    Randomly assigns student teams a branch path. This option ensures a relatively even distribution
+    of students per path.
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close cdkFocusRegionstart i18n>Close</button>
+</mat-dialog-actions>
