@@ -307,7 +307,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">52</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component.html</context>
@@ -10853,7 +10853,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">29</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
@@ -10884,7 +10884,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6b71e4d64744aa78a64f1eeb7fce0ddc1f554ca2" datatype="html">
@@ -13091,28 +13091,28 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Assigns students a branch path based on their score from another item in the unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0dd9b37a8adbe238823cdaa2e5c289afe531797f" datatype="html">
         <source> Assigns students a branch path based on their selection from a multiple choice item in the unit. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
-          <context context-type="linenumber">38,40</context>
+          <context context-type="linenumber">37,39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3efbc55094b3e633835a1866fcfb14b0601376dc" datatype="html">
         <source>Random</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5087b29e62f5008e9e4093f289e67f28c6a457fe" datatype="html">
         <source> Randomly assigns student teams a branch path. This option ensures a relatively even distribution of students per path. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
-          <context context-type="linenumber">47,50</context>
+          <context context-type="linenumber">46,49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f349eaff8f8387128c51240dbb351413930be068" datatype="html">
@@ -13141,6 +13141,13 @@ The branches will be removed but the steps will remain in the unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/select-merge-step/select-merge-step.component.html</context>
           <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7ae6a8df418f4d3413d4508e3fcec514c45af68c" datatype="html">
+        <source>All students will be directed here after completing their branch paths.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-merge-step/select-merge-step.component.html</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="06c301fa0994d4b67e51eeb201f1d3d9988c7a23" datatype="html">
