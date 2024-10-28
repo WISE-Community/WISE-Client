@@ -36,7 +36,7 @@ export class SelectBranchCriteriaComponent {
 
   constructor(protected dialog: MatDialog) {}
 
-  showCriteriaHelp(): void {
+  protected showCriteriaHelp(): void {
     this.dialog.open(BranchCriteriaHelpComponent, {
       panelClass: 'dialog-md'
     });
