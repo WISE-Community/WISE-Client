@@ -337,6 +337,10 @@
           <context context-type="linenumber">26</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component.html</context>
           <context context-type="linenumber">37</context>
         </context-group>
@@ -370,7 +374,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.component.html</context>
@@ -390,7 +394,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <target state="translated">Descartar</target>
       </trans-unit>
@@ -494,7 +498,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component.html</context>
@@ -574,7 +578,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">100</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-match-choice-dialog/add-match-choice-dialog.html</context>
@@ -1610,7 +1614,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
-          <context context-type="linenumber">40,42</context>
+          <context context-type="linenumber">41,43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component.html</context>
@@ -1686,7 +1690,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component.html</context>
@@ -2004,11 +2008,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.ts</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">105</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">165</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/author-peer-grouping-dialog/author-peer-grouping-dialog.component.ts</context>
@@ -3104,7 +3108,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Incorrect answer, please try again. If you can&apos;t remember the answer to your security question, please ask your teacher to change your password or contact us for assistance.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">104</context>
         </context-group>
         <target state="translated">Respuesta incorrecta, intentar nuevamente. Si no recuerda la respuesta a su pregunta de seguridad, contactar al docente que cambie su contraseña o contáctenos para obtener ayuda.</target>
       </trans-unit>
@@ -3112,11 +3116,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Recaptcha failed. Please reload the page and try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.ts</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">107</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">119</context>
         </context-group>
         <target state="translated">Falló el Recaptcha. Por favor recargar la página e intentar nuevamente.</target>
       </trans-unit>
@@ -3196,11 +3200,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>We could not find that username. Please make sure you are typing it correctly and try again. If you have forgotten your username, please use the forgot username option below.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.ts</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">106</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">109</context>
         </context-group>
         <target state="translated">No pudimos encontrar ese nombre de usuario. Asegúrese de escribirlo correctamente y vuelva a intentarlo. Si ha olvidado su nombre de usuario, utilice la opción de nombre de usuario olvidado a continuación.</target>
       </trans-unit>
@@ -3368,7 +3372,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
@@ -3380,7 +3384,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>01 (Jan)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
@@ -3392,7 +3396,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>02 (Feb)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">55</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
@@ -3404,7 +3408,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>03 (Mar)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
@@ -3416,7 +3420,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>04 (Apr)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
@@ -3428,7 +3432,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>05 (May)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
@@ -3440,7 +3444,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>06 (Jun)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
@@ -3452,7 +3456,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>07 (Jul)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
@@ -3464,7 +3468,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>08 (Aug)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">61</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
@@ -3476,7 +3480,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>09 (Sep)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
@@ -3488,7 +3492,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>10 (Oct)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
@@ -3500,7 +3504,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>11 (Nov)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
@@ -3512,7 +3516,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>12 (Dec)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
@@ -3524,7 +3528,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>We did not find any usernames that match the information you provided. Please make sure you entered your information correctly. If you can&apos;t find your account, ask a teacher for help or contact us for assistance.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">128</context>
         </context-group>
         <target state="translated">No encontramos ningún nombre de usuario que coincida con la información que proporcionó. Asegúrese de haber ingresado su información correctamente. Si no puede encontrar su cuenta, pídale ayuda a un docente o contáctenos para obtener ayuda.</target>
       </trans-unit>
@@ -3532,7 +3536,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>We found a username that matches. Select it to log in. If this username is not yours, ask a teacher for help or contact us for assistance.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">131</context>
         </context-group>
         <target state="translated">Encontramos un nombre de usuario que coincide. Selecciónelo para iniciar sesión. Si este nombre de usuario no es suyo, pídale ayuda a un/a docente o contáctenos para obtener ayuda.</target>
       </trans-unit>
@@ -3540,7 +3544,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>We found multiple usernames that match. If one of these is yours, select it to log in. If you can&apos;t find your account, ask a teacher for help or contact us for assistance.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <target state="translated">Encontramos varios nombres de usuario que coinciden. Si uno de estos es suyo, selecciónelo para iniciar sesión. Si no puede encontrar su cuenta, pídale ayuda a un/a docente o contáctenos para obtener ayuda.</target>
       </trans-unit>
@@ -3624,11 +3628,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>The verification code has expired. Verification codes are valid for 10 minutes. Please go back to the Teacher Forgot Password page to generate a new one.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">149</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">87</context>
         </context-group>
         <target state="translated">El código de verificación ha caducado. Los códigos de verificación son válidos por 10 minutos. Vuelva a la página de Docente Olvidé Contraseña para generar una nueva.</target>
       </trans-unit>
@@ -3636,11 +3640,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>The verification code is invalid. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">153</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">92</context>
         </context-group>
         <target state="translated">El código de verificación es erróneo. Intenta otra vez.</target>
       </trans-unit>
@@ -3648,11 +3652,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, please go back to the Teacher Forgot Password page to generate a new verification code.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">157</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">94</context>
         </context-group>
         <target state="translated">Ha enviado un código de verificación no válido demasiadas veces. Por razones de seguridad, bloquearemos la posibilidad de cambiar su contraseña durante 10 minutos. Después de 10 minutos, regrese a la página de Docente Olvidó Contraseña para generar un nuevo código de verificación.</target>
       </trans-unit>
@@ -3660,7 +3664,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Passwords do not match, please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">161</context>
         </context-group>
         <target state="translated">Las contraseñas no coinciden, intenta nuevamente.</target>
       </trans-unit>
@@ -3712,7 +3716,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, you can try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">113</context>
         </context-group>
         <target state="translated">Ha enviado un código de verificación no válido demasiadas veces. Por razones de seguridad, bloquearemos la posibilidad de cambiar su contraseña durante 10 minutos. Después de 10 minutos, puede volver a intentarlo.</target>
       </trans-unit>
@@ -3720,7 +3724,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>The server has encountered an error and was unable to send you an email. Please try again. If the error continues to occur, please contact us.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">116</context>
         </context-group>
         <target state="translated">El servidor encontró un error y no pudo enviarle un email. Por favor intente nuevamente. Si el error persiste, por favor contáctenos.</target>
       </trans-unit>
@@ -3744,7 +3748,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>We did not find a WISE account associated with that email. Please make sure you have typed your email address correctly.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-username/forgot-teacher-username.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">93</context>
         </context-group>
         <target state="translated">No encontramos una cuenta WISE asociada con ese correo electrónico. Asegúrese de haber escrito correctamente su dirección de correo electrónico.</target>
       </trans-unit>
@@ -3752,7 +3756,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>The server has encountered an error and was unable to send an email to you. Please try again. If the error continues to occur, please contact us.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-username/forgot-teacher-username.component.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">97</context>
         </context-group>
         <target state="translated">El servidor encontró un error y no pudo enviarle un correo electrónico. Intente de nuevo. Si el error persiste, contáctenos.</target>
       </trans-unit>
@@ -6276,7 +6280,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/card-selector/card-selector.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
@@ -10492,7 +10496,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Add step before</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-step-button/add-step-button.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <target state="translated">Agregar paso antes</target>
       </trans-unit>
@@ -10500,7 +10504,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Add step after</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-step-button/add-step-button.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">21</context>
         </context-group>
         <target state="translated">Agregar paso después</target>
       </trans-unit>
@@ -10508,7 +10512,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Branch off this step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-step-button/add-step-button.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">26</context>
         </context-group>
         <target state="needs-translation">Branch off this step</target>
       </trans-unit>
@@ -10714,10 +10718,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.html</context>
           <context context-type="linenumber">12,14</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/card-selector/card-selector.component.html</context>
-          <context context-type="linenumber">35,37</context>
-        </context-group>
         <target state="translated"> Elegir </target>
       </trans-unit>
       <trans-unit id="7152189031040166896" datatype="html">
@@ -10778,10 +10778,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Clear All</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
-          <context context-type="linenumber">20</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
           <context context-type="linenumber">22</context>
         </context-group>
         <context-group purpose="location">
@@ -10798,7 +10794,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source><x id="INTERPOLATION" equiv-text="{{ getNumItemsFound() }}"/> Item(s) Found </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">29</context>
         </context-group>
         <target state="translated"> <x id="INTERPOLATION" equiv-text="{{ getNumItemsFound() }}"/> Item(s) Encontrado(s) </target>
       </trans-unit>
@@ -11222,11 +11218,23 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">Seleccionada</target>
       </trans-unit>
+      <trans-unit id="91450c740fcd6a3086aec1629d15354ae17c1a5c" datatype="html">
+        <source> Select </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/card-selector/card-selector.component.html</context>
+          <context context-type="linenumber">33,35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
+          <context context-type="linenumber">91,93</context>
+        </context-group>
+        <target state="translated"> Elegir </target>
+      </trans-unit>
       <trans-unit id="f871b41bfbdb193507cce2cd848c2d02bde77a03" datatype="html">
         <source>No results found</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/card-selector/card-selector.component.html</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
@@ -11969,6 +11977,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
           <context context-type="linenumber">90</context>
         </context-group>
@@ -11995,6 +12007,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-branch-paths/edit-branch-paths.component.html</context>
           <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <target state="translated">Opción elegida</target>
       </trans-unit>
@@ -14440,6 +14456,70 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <target state="translated">Editar Rúbrica de la Unidad</target>
       </trans-unit>
+      <trans-unit id="5faab18cc820fb3c0cdcbd1706fde514a51107b6" datatype="html">
+        <source>Branching Criteria Options</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <target state="needs-translation">Branching Criteria Options</target>
+      </trans-unit>
+      <trans-unit id="b8a2a02fb76d3b8313dd93a1ad8c7257dc8947e1" datatype="html">
+        <source>Workgroup ID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <target state="translated">ID de grupo de trabajo</target>
+      </trans-unit>
+      <trans-unit id="ea702a849598ffa572fffd0bb7c9f134b378e5a5" datatype="html">
+        <source> Automatically assigns students a branch path based on their WISE Workgroup ID number. This option ensures a relatively even distribution of students per path. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
+          <context context-type="linenumber">4,7</context>
+        </context-group>
+        <target state="needs-translation"> Automatically assigns students a branch path based on their WISE Workgroup ID number. This option ensures a relatively even distribution of students per path. </target>
+      </trans-unit>
+      <trans-unit id="54e244e0ce370a8e710b620aee49bc416fd70c52" datatype="html">
+        <source> *Assigning paths based on Workgroup ID also can ensure that students are branched to the same path across multiple branching structures in the unit (assuming each branching structure contains the same number of paths). </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
+          <context context-type="linenumber">8,12</context>
+        </context-group>
+        <target state="needs-translation"> *Assigning paths based on Workgroup ID also can ensure that students are branched to the same path across multiple branching structures in the unit (assuming each branching structure contains the same number of paths). </target>
+      </trans-unit>
+      <trans-unit id="1e7d2f303c768d632e787daaf57cb2ef1014b3da" datatype="html">
+        <source>Assigns students a branch path based on their score from another item in the unit.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <target state="needs-translation">Assigns students a branch path based on their score from another item in the unit.</target>
+      </trans-unit>
+      <trans-unit id="0dd9b37a8adbe238823cdaa2e5c289afe531797f" datatype="html">
+        <source> Assigns students a branch path based on their selection from a multiple choice item in the unit. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
+          <context context-type="linenumber">37,39</context>
+        </context-group>
+        <target state="needs-translation"> Assigns students a branch path based on their selection from a multiple choice item in the unit. </target>
+      </trans-unit>
+      <trans-unit id="3efbc55094b3e633835a1866fcfb14b0601376dc" datatype="html">
+        <source>Random</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <target state="translated">Aleatorio</target>
+      </trans-unit>
+      <trans-unit id="5087b29e62f5008e9e4093f289e67f28c6a457fe" datatype="html">
+        <source> Randomly assigns student teams a branch path. This option ensures a relatively even distribution of students per path. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
+          <context context-type="linenumber">46,49</context>
+        </context-group>
+        <target state="needs-translation"> Randomly assigns student teams a branch path. This option ensures a relatively even distribution of students per path. </target>
+      </trans-unit>
       <trans-unit id="f349eaff8f8387128c51240dbb351413930be068" datatype="html">
         <source>How to Choose Among Paths</source>
         <context-group purpose="location">
@@ -14471,6 +14551,14 @@ The branches will be removed but the steps will remain in the unit.</target>
           <context context-type="linenumber">7</context>
         </context-group>
         <target state="needs-translation">Create New Step</target>
+      </trans-unit>
+      <trans-unit id="7ae6a8df418f4d3413d4508e3fcec514c45af68c" datatype="html">
+        <source>All students will be directed here after completing their branch paths.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/select-merge-step/select-merge-step.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <target state="needs-translation">All students will be directed here after completing their branch paths.</target>
       </trans-unit>
       <trans-unit id="06c301fa0994d4b67e51eeb201f1d3d9988c7a23" datatype="html">
         <source>Number of Branch Paths</source>
@@ -17196,7 +17284,7 @@ Are you sure you want to proceed?</source>
         <source>Choose an Icon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">28</context>
         </context-group>
         <target state="translated">Seleccionar un ícono</target>
       </trans-unit>
@@ -17204,7 +17292,7 @@ Are you sure you want to proceed?</source>
         <source>Use a Knowledge Integration (KI) icon:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <target state="translated">Usar un icono de Integración de Conocimiento (KI):</target>
       </trans-unit>
@@ -17212,7 +17300,7 @@ Are you sure you want to proceed?</source>
         <source>More about WISE and Knowledge Integration</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <target state="translated">Saber más sobre WISE y la Integración de Conocimiento (IC)</target>
       </trans-unit>
@@ -17220,7 +17308,7 @@ Are you sure you want to proceed?</source>
         <source>Select a KI icon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <target state="translated">Seleccionar un ícono de IC</target>
       </trans-unit>
@@ -17228,7 +17316,7 @@ Are you sure you want to proceed?</source>
         <source>Or choose your own icon:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <target state="translated">O elige tu propio icono:</target>
       </trans-unit>
@@ -17236,7 +17324,7 @@ Are you sure you want to proceed?</source>
         <source>Select an icon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <target state="translated">Seleccionar un ícono</target>
       </trans-unit>
@@ -17244,7 +17332,7 @@ Are you sure you want to proceed?</source>
         <source>Color:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">83</context>
         </context-group>
         <target state="translated">Color:</target>
       </trans-unit>
@@ -17252,7 +17340,7 @@ Are you sure you want to proceed?</source>
         <source>Select a color</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">84</context>
         </context-group>
         <target state="translated">Seleccionar un color</target>
       </trans-unit>
@@ -17260,7 +17348,7 @@ Are you sure you want to proceed?</source>
         <source>Save</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">101</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-connected-components/edit-draw-connected-components.component.html</context>
@@ -17284,7 +17372,7 @@ Are you sure you want to proceed?</source>
         <source>Knowledge Integration elicit ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">103</context>
         </context-group>
         <target state="translated">Integración del Conocimiento generar ideas</target>
       </trans-unit>
@@ -17292,7 +17380,7 @@ Are you sure you want to proceed?</source>
         <source>Elicit Ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">104</context>
         </context-group>
         <target state="translated">Obtener ideas</target>
       </trans-unit>
@@ -17300,7 +17388,7 @@ Are you sure you want to proceed?</source>
         <source>Knowledge Integration discover ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">88</context>
+          <context context-type="linenumber">108</context>
         </context-group>
         <target state="translated">Integración del Conocimiento descubrir ideas</target>
       </trans-unit>
@@ -17308,7 +17396,7 @@ Are you sure you want to proceed?</source>
         <source>Discover Ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">109</context>
         </context-group>
         <target state="translated">Descubrir ideas</target>
       </trans-unit>
@@ -17316,7 +17404,7 @@ Are you sure you want to proceed?</source>
         <source>Knowledge Integration distinguish ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">113</context>
         </context-group>
         <target state="translated">Integración del Conocimiento distinguir ideas</target>
       </trans-unit>
@@ -17324,7 +17412,7 @@ Are you sure you want to proceed?</source>
         <source>Distinguish Ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">114</context>
         </context-group>
         <target state="translated">Distinguir ideas</target>
       </trans-unit>
@@ -17332,7 +17420,7 @@ Are you sure you want to proceed?</source>
         <source>Knowledge Integration connect ideas and reflect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">118</context>
         </context-group>
         <target state="translated">Integración del Conocimiento conectar ideas y reflexionar</target>
       </trans-unit>
@@ -17340,7 +17428,7 @@ Are you sure you want to proceed?</source>
         <source>Connect Ideas &amp; Reflect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">99</context>
+          <context context-type="linenumber">119</context>
         </context-group>
         <target state="translated">Conectar Ideas &amp; Reflexionar</target>
       </trans-unit>
@@ -17348,7 +17436,7 @@ Are you sure you want to proceed?</source>
         <source>Knowledge Integration cycle</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">123</context>
         </context-group>
         <target state="translated">Ciclo de Integración del Conocimiento</target>
       </trans-unit>
@@ -17356,7 +17444,7 @@ Are you sure you want to proceed?</source>
         <source>KI Cycle</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <target state="translated">Ciclo de IC</target>
       </trans-unit>
@@ -22771,14 +22859,6 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         </context-group>
         <target state="translated"> Info </target>
       </trans-unit>
-      <trans-unit id="91450c740fcd6a3086aec1629d15354ae17c1a5c" datatype="html">
-        <source> Select </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
-          <context context-type="linenumber">91,93</context>
-        </context-group>
-        <target state="translated"> Elegir </target>
-      </trans-unit>
       <trans-unit id="801b98c6f02fe3b32f6afa3ee854c99ed83474e6" datatype="html">
         <source>URL</source>
         <context-group purpose="location">
@@ -24940,7 +25020,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Hi there! You currently have no alerts.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <target state="translated">¡Hola! No tenés ninguna alerta.</target>
       </trans-unit>
@@ -24948,7 +25028,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>View alert</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <target state="translated">Ver alerta</target>
       </trans-unit>
@@ -24956,7 +25036,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Are you sure you want to dismiss all your alerts?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.ts</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">109</context>
         </context-group>
         <target state="translated">¿Seguro desea ignorar todas los alertas?</target>
       </trans-unit>
