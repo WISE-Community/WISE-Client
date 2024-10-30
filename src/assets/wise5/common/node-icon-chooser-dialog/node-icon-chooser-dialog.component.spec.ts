@@ -40,7 +40,7 @@ class MockProjectService {
 
 let fixture;
 let component;
-fdescribe('NodeIconChooserDialog', () => {
+describe('NodeIconChooserDialog', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NodeIconChooserDialogComponent],
