@@ -20,11 +20,11 @@
             (keyup)="$event.keyCode == 13 && create()"
             required
           />
-          <mat-error *ngIf="addProjectFormGroup.controls['title'].hasError('required')" i18n>
-            Unit Title is required
-          </mat-error>
+          @if (addProjectFormGroup.controls['title'].hasError('required')) {
+            <mat-error i18n> Unit Title is required </mat-error>
+          }
         </mat-form-field>
-        <mat-divider></mat-divider>
+        <mat-divider />
         <div fxLayout="row" fxLayoutGap="20px">
           <button
             mat-button

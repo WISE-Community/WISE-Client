@@ -1,16 +1,38 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import { RegisterProjectService } from '../../services/registerProjectService';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { copy } from '../../common/object/object';
 import { newProjectTemplate } from '../new-project-template';
 import { catchError, Observable, throwError } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'add-project',
-  styleUrls: ['./add-project.component.scss'],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    RouterModule
+  ],
+  standalone: true,
+  styleUrl: './add-project.component.scss',
   templateUrl: './add-project.component.html'
 })
 export class AddProjectComponent {
