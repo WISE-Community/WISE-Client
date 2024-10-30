@@ -12,12 +12,7 @@
       (keyup.enter)="itemClicked($event)"
       role="button"
     >
-      <node-icon
-        mat-card-avatar
-        class="group-icon"
-        customClass="mat-24"
-        [nodeId]="nodeId"
-      ></node-icon>
+      <node-icon mat-card-avatar class="group-icon" customClass="mat-24" [nodeId]="nodeId" />
       <mat-card-title class="title" style="color: {{ icon.color }}">
         <span>{{ nodeTitle }}</span>
       </mat-card-title>
@@ -54,8 +49,7 @@
       fxLayoutAlign="start center"
       fxLayoutGap="8px"
     >
-      <nav-item-progress [nodeCompletion]="getNodeCompletion()" [period]="currentPeriod">
-      </nav-item-progress>
+      <nav-item-progress [nodeCompletion]="getNodeCompletion()" [period]="currentPeriod" />
       <span fxFlex></span>
       <button
         mat-icon-button
@@ -78,7 +72,7 @@
     [ngClass]="{ 'nav-item--list--group': isGroup, 'text-secondary': !nodeHasWork }"
   >
     <span fxLayout="row" fxLayoutAlign="start center">
-      <node-icon [nodeId]="nodeId" class="step-icon" customClass="mat-24"></node-icon>
+      <node-icon [nodeId]="nodeId" class="step-icon" customClass="mat-24" />
       <span [ngClass]="{ warn: newAlert }">{{ nodeTitle }}</span
       >&nbsp;
       <span fxFlex fxHide.gt-xs></span>
@@ -100,10 +94,7 @@
         [maxScore]="maxScore"
         [averageScore]="getNodeAverageScore()"
       />
-      <nav-item-progress
-        [nodeCompletion]="getNodeCompletion()"
-        [period]="currentPeriod"
-      ></nav-item-progress>
+      <nav-item-progress [nodeCompletion]="getNodeCompletion()" [period]="currentPeriod" />
     </span>
   </mat-list-item>
 </ng-container>
