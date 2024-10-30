@@ -12,6 +12,16 @@ import { AddStepTarget } from '../../../../app/domain/addStepTarget';
   selector: 'add-step-button',
   templateUrl: './add-step-button.component.html',
   standalone: true,
+  styles: [
+    `
+      .rotate-180 {
+        transform: rotate(180deg);
+      }
+      .flip-vertical {
+        transform: scaleY(-1);
+      }
+    `
+  ],
   imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule]
 })
 export class AddStepButtonComponent {

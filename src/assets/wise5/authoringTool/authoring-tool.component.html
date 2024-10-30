@@ -13,7 +13,9 @@
         [runId]="runId"
         [runCode]="runCode"
       ></at-top-bar>
-      <authoring-tool-bar *ngIf="showToolbar" (onMenuToggle)="toggleMenu()"></authoring-tool-bar>
+      @if (showToolbar) {
+        <authoring-tool-bar (onMenuToggle)="toggleMenu()" />
+      }
       <content
         id="content"
         fxLayout="column"

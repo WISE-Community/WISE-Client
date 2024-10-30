@@ -12,17 +12,18 @@
 <mat-menu #step="matMenu">
   @if (!branchMergePoint) {
     <button mat-menu-item (click)="addStepBefore()">
-      <mat-icon>add_circle</mat-icon><span i18n>Add step before</span>
+      <mat-icon class="rotate-180 flip-vertical">subdirectory_arrow_left</mat-icon
+      ><span i18n>Add step before</span>
     </button>
   }
   @if (!branchPoint) {
     <button mat-menu-item (click)="goToAddStepViewForAfter(nodeId)">
-      <mat-icon>add_circle</mat-icon><span i18n>Add step after</span>
+      <mat-icon>subdirectory_arrow_left</mat-icon><span i18n>Add step after</span>
     </button>
   }
   @if (!branchPoint && !branchPathStep) {
     <button mat-menu-item (click)="goToCreateBranchView()">
-      <mat-icon>add_circle</mat-icon><span i18n>Branch off this step</span>
+      <mat-icon class="rotate-180">call_split</mat-icon><span i18n>Branch off this step</span>
     </button>
   }
 </mat-menu>

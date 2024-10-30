@@ -2,15 +2,32 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Subscription, filter } from 'rxjs';
 import { NotificationService } from '../../../../services/notificationService';
 import { NavigationEnd, Router } from '@angular/router';
+import { SaveIndicatorComponent } from '../../../../common/save-indicator/save-indicator.component';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatIconModule } from '@angular/material/icon';
+import { StepToolsComponent } from '../../../../common/stepTools/step-tools.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
+    SaveIndicatorComponent,
+    StepToolsComponent
+  ],
   selector: 'authoring-tool-bar',
-  templateUrl: './authoring-tool-bar.component.html',
-  styleUrls: ['./authoring-tool-bar.component.scss']
+  standalone: true,
+  styleUrl: './authoring-tool-bar.component.scss',
+  templateUrl: './authoring-tool-bar.component.html'
 })
 export class AuthoringToolBarComponent {
   protected globalMessage: any = {};
-  protected isJSONValid: boolean = null;
+  protected isJSONValid: boolean;
   @Output() private onMenuToggle: EventEmitter<void> = new EventEmitter<void>();
   protected showStepTools: boolean;
   private subscriptions: Subscription = new Subscription();
@@ -56,12 +73,13 @@ export class AuthoringToolBarComponent {
     const path = this.router.url.substring(this.router.url.lastIndexOf('/') + 1);
     this.viewName =
       {
+        advanced: $localize`Advanced Settings`,
         asset: $localize`File Manager`,
         info: $localize`Unit Info`,
         milestones: $localize`Milestones`,
         notebook: $localize`Notebook Settings`
       }[path] ?? $localize`Authoring Tool`;
-    const stepToolPathsFragments = ['advanced', 'branch', 'constraint', 'node'];
+    const stepToolPathsFragments = ['branch', 'constraint', 'node'];
     this.showStepTools = this.router.url
       .split('/')
       .some((path) => stepToolPathsFragments.includes(path));
