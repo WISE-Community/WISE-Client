@@ -25,14 +25,16 @@ const testTableData = createTableData([
 describe('TableStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [TableStudent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserModule,
+      declarations: [TableStudent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        BrowserModule,
         MatDialogModule,
         NoopAnimationsModule,
-        StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     fixture = TestBed.createComponent(TableStudent);
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     component = fixture.componentInstance;
@@ -92,13 +94,9 @@ describe('TableStudentComponent', () => {
   getYFromDataPoint();
   handleConnectedComponents();
   initializeDataExplorer();
-  isAllDataExplorerSeriesSpecified();
   isDataExplorerOneYAxis();
-  isTableEmpty();
-  isTableReset();
   mergeTableData();
   processConnectedComponentState();
-  removeAllCellsFromTableData();
   repopulateDataExplorerData();
   resetTable();
   setDataExplorerSeriesYAxis();
@@ -193,18 +191,13 @@ function resetTable() {
 
 function createComponentState() {
   describe('createComponentState', () => {
-    it(
-      'should create component state',
-      waitForAsync(() => {
-        component.createComponentState('save').then((componentState: any) => {
-          expect(componentState.componentId).toEqual(componentId);
-          expect(componentState.nodeId).toEqual(nodeId);
-          expect(componentState.studentData.tableData).toEqual(
-            component.componentContent.tableData
-          );
-        });
-      })
-    );
+    it('should create component state', waitForAsync(() => {
+      component.createComponentState('save').then((componentState: any) => {
+        expect(componentState.componentId).toEqual(componentId);
+        expect(componentState.nodeId).toEqual(nodeId);
+        expect(componentState.studentData.tableData).toEqual(component.componentContent.tableData);
+      });
+    }));
   });
 }
 
@@ -410,34 +403,6 @@ function repopulateDataExplorerData() {
   });
 }
 
-function isTableReset() {
-  describe('isTableReset', () => {
-    it('should check if table is reset when it is not', () => {
-      component.setTableDataCellValue(0, 0, component.tableData, '');
-      expect(component.isTableReset()).toEqual(false);
-    });
-    it('should check if table is reset when it is', () => {
-      expect(component.isTableReset()).toEqual(true);
-    });
-  });
-}
-
-function isTableEmpty() {
-  describe('isTableEmpty', () => {
-    it('should check if table is empty when it is not', () => {
-      component.tableData = createTableData([
-        ['Time', 'Position'],
-        ['0', '0']
-      ]);
-      expect(component.isTableEmpty()).toEqual(false);
-    });
-    it('should check if table is empty when it is', () => {
-      component.tableData = createTableData([['']]);
-      expect(component.isTableEmpty()).toEqual(true);
-    });
-  });
-}
-
 function getTableDataCellValue() {
   describe('getTableDataCellValue', () => {
     it('should get table data cell value', () => {
@@ -610,25 +575,6 @@ function handleConnectedComponents() {
   });
 }
 
-function isAllDataExplorerSeriesSpecified() {
-  describe('isAllDataExplorerSeriesSpecified', () => {
-    it('should check if all data explorer series are specified when it is', () => {
-      component.dataExplorerSeries = [
-        { xColumn: 0, yColumn: 1 },
-        { xColumn: 0, yColumn: 2 }
-      ];
-      expect(component.isAllDataExplorerSeriesSpecified()).toEqual(true);
-    });
-    it('should check if all data explorer series are specified when it is not', () => {
-      component.dataExplorerSeries = [
-        { xColumn: 0, yColumn: 1 },
-        { xColumn: 0, yColumn: null }
-      ];
-      expect(component.isAllDataExplorerSeriesSpecified()).toEqual(false);
-    });
-  });
-}
-
 function processConnectedComponentState() {
   describe('processConnectedComponentState', () => {
     beforeEach(() => {
@@ -725,16 +671,6 @@ function dataExplorerYColumnChanged() {
       component.dataExplorerSeries[0].yColumn = 2;
       component.dataExplorerYColumnChanged(0);
       expect(component.dataExplorerSeries[0].name).toEqual('Speed');
-    });
-  });
-}
-
-function removeAllCellsFromTableData() {
-  describe('removeAllCellsFromTableData', () => {
-    it('should remove all cells from table data', () => {
-      expect(component.tableData).not.toEqual([]);
-      component.removeAllCellsFromTableData();
-      expect(component.tableData).toEqual([]);
     });
   });
 }

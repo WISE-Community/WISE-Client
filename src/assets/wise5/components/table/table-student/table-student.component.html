@@ -3,7 +3,7 @@
   <button
     mat-button
     color="accent"
-    *ngIf="showResetTableButton()"
+    *ngIf="resetTableButtonVisible"
     (click)="resetTable()"
     [disabled]="isDisabled"
   >

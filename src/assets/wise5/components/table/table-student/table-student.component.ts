@@ -19,9 +19,8 @@ import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
 
 @Component({
-  selector: 'table-student',
   templateUrl: 'table-student.component.html',
-  styleUrls: ['table-student.component.scss'],
+  styleUrl: 'table-student.component.scss',
   encapsulation: ViewEncapsulation.None
 })
 export class TableStudent extends ComponentStudent {
@@ -39,7 +38,7 @@ export class TableStudent extends ComponentStudent {
   dataExplorerYAxisLabels: string[];
   isDataExplorerEnabled: boolean;
   isDataExplorerScatterPlotRegressionLineEnabled: boolean;
-  isResetTableButtonVisible: boolean;
+  protected resetTableButtonVisible: boolean;
   latestConnectedComponentParams: any;
   latestConnectedComponentState: any;
   notebookConfig: any;
@@ -123,7 +122,6 @@ export class TableStudent extends ComponentStudent {
       }
     }
 
-    // set up the table
     this.setupTable();
 
     if (this.isDataExplorerEnabled) {
@@ -143,7 +141,7 @@ export class TableStudent extends ComponentStudent {
       this.isDisabled = true;
     }
 
-    this.isResetTableButtonVisible = this.TableService.componentHasEditableCells(
+    this.resetTableButtonVisible = this.TableService.componentHasEditableCells(
       this.componentContent
     );
     this.disableComponentIfNecessary();
@@ -165,7 +163,8 @@ export class TableStudent extends ComponentStudent {
     if (this.dataExplorerGraphTypes.length > 0) {
       this.dataExplorerGraphType = this.dataExplorerGraphTypes[0].value;
     }
-    this.isDataExplorerScatterPlotRegressionLineEnabled = this.componentContent.isDataExplorerScatterPlotRegressionLineEnabled;
+    this.isDataExplorerScatterPlotRegressionLineEnabled =
+      this.componentContent.isDataExplorerScatterPlotRegressionLineEnabled;
     this.dataExplorerYAxisLabels = Array(this.componentContent.numDataExplorerYAxis).fill('');
     this.dataExplorerSeriesParams = this.componentContent.dataExplorerSeriesParams;
     this.dataExplorerTooltipHeaderColumn = this.componentContent.dataExplorerTooltipHeaderColumn;
@@ -173,7 +172,7 @@ export class TableStudent extends ComponentStudent {
 
   setDataExplorerDataToColumn(): void {
     for (let index = 0; index < this.dataExplorerSeries.length; index++) {
-      const xColumn = this.getDataExplorerXDataColumn();
+      const xColumn = this.getDataExplorerDataToColumn('x');
       if (xColumn != null) {
         this.setXDataToColumn(index, xColumn);
       }
@@ -213,9 +212,8 @@ export class TableStudent extends ComponentStudent {
     if (this.isDataExplorerOneYAxis()) {
       yAxisLabel = this.dataExplorerYAxisLabel;
     } else {
-      yAxisLabel = this.dataExplorerYAxisLabels[
-        this.dataExplorerSeriesParams[dataExplorerSeriesIndex].yAxis
-      ];
+      yAxisLabel =
+        this.dataExplorerYAxisLabels[this.dataExplorerSeriesParams[dataExplorerSeriesIndex].yAxis];
     }
     return yAxisLabel == null || yAxisLabel === '';
   }
@@ -230,24 +228,11 @@ export class TableStudent extends ComponentStudent {
     }
   }
 
-  isAllDataExplorerSeriesSpecified(): boolean {
-    for (const singleSeries of this.dataExplorerSeries) {
-      if (singleSeries.xColumn == null || singleSeries.yColumn == null) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  getDataExplorerXDataColumn(): number {
-    return this.getDataExplorerDataToColumn('x');
-  }
-
   /**
    * @param ySeriesNumber (1 indexed)
    * @return The column index (0 indexed)
    */
-  getDataExplorerYDataColumn(ySeriesNumber: number): number {
+  private getDataExplorerYDataColumn(ySeriesNumber: number): number {
     if (ySeriesNumber === 1) {
       return this.getDataExplorerDataToColumn('y');
     } else {
@@ -280,7 +265,7 @@ export class TableStudent extends ComponentStudent {
    * @param tableData the table data to copy
    * @return a copy of the table data
    */
-  getCopyOfTableData(tableData) {
+  private getCopyOfTableData(tableData: any): any {
     let tableDataCopy = null;
 
     if (tableData != null) {
@@ -342,13 +327,6 @@ export class TableStudent extends ComponentStudent {
   }
 
   /**
-   * Get the rows of the table data
-   */
-  getTableDataRows() {
-    return this.tableData;
-  }
-
-  /**
    * Populate the student work into the component
    * @param componentState the component state to populate into the component
    */
@@ -404,7 +382,8 @@ export class TableStudent extends ComponentStudent {
     if (this.dataExplorerYAxisLabels) {
       studentData.dataExplorerYAxisLabels = this.dataExplorerYAxisLabels;
     }
-    studentData.isDataExplorerScatterPlotRegressionLineEnabled = this.isDataExplorerScatterPlotRegressionLineEnabled;
+    studentData.isDataExplorerScatterPlotRegressionLineEnabled =
+      this.isDataExplorerScatterPlotRegressionLineEnabled;
     studentData.dataExplorerSeries = copy(this.dataExplorerSeries);
 
     studentData.submitCounter = this.submitCounter;
@@ -430,14 +409,6 @@ export class TableStudent extends ComponentStudent {
         action
       );
     });
-  }
-
-  /**
-   * Check whether we need to show the reset table button
-   * @return whether to show the reset table button
-   */
-  showResetTableButton() {
-    return this.isResetTableButtonVisible;
   }
 
   /**
@@ -533,8 +504,8 @@ export class TableStudent extends ComponentStudent {
     let yUnits = studentData.yAxis.units;
     let xAxisTitle = studentData.xAxis.title.text;
     let yAxisTitle = studentData.yAxis.title.text;
-    this.removeAllCellsFromTableData();
-    this.addTableDataRow(this.createTableRow(['Series Name', xAxisTitle, yAxisTitle]));
+    this.tableData = [];
+    this.tableData.push(this.createTableRow(['Series Name', xAxisTitle, yAxisTitle]));
     for (let trial of studentData.trials) {
       if (trial.show) {
         let multipleSeries = trial.series;
@@ -542,7 +513,7 @@ export class TableStudent extends ComponentStudent {
           if (singleSeries.show !== false) {
             let closestDataPoint = this.getClosestDataPoint(singleSeries.data, x);
             if (closestDataPoint != null) {
-              this.addTableDataRow(
+              this.tableData.push(
                 this.createTableRow([
                   singleSeries.name,
                   Math.round(this.getXFromDataPoint(closestDataPoint)) + ' ' + xUnits,
@@ -554,21 +525,6 @@ export class TableStudent extends ComponentStudent {
         }
       }
     }
-  }
-
-  /**
-   * Remove all the rows and cells from the table data.
-   */
-  removeAllCellsFromTableData() {
-    this.tableData = [];
-  }
-
-  /**
-   * Append a row to the table data.
-   * @param row An array of objects. Each object represents a cell in the table.
-   */
-  addTableDataRow(row) {
-    this.tableData.push(row);
   }
 
   /**
@@ -606,12 +562,12 @@ export class TableStudent extends ComponentStudent {
    * @param x The argument x.
    * @return A data point which can be an object or array.
    */
-  getClosestDataPoint(dataPoints, x) {
+  private getClosestDataPoint(dataPoints, x): any {
     let closestDataPoint = null;
     let minNumericalXDifference = Infinity;
     for (let dataPoint of dataPoints) {
       let dataPointX = this.getXFromDataPoint(dataPoint);
-      let numericalDifference = this.getNumericalAbsoluteDifference(x, dataPointX);
+      let numericalDifference = Math.abs(x - dataPointX);
       if (numericalDifference < minNumericalXDifference) {
         // we have found a new data point that is closer to x
         closestDataPoint = dataPoint;
@@ -619,16 +575,6 @@ export class TableStudent extends ComponentStudent {
       }
     }
     return closestDataPoint;
-  }
-
-  /**
-   * Get the absolute value of the difference between the two numbers.
-   * @param x1 A number.
-   * @param x2 A number.
-   * @return The absolute value of the difference between the two numbers.
-   */
-  getNumericalAbsoluteDifference(x1, x2) {
-    return Math.abs(x1 - x2);
   }
 
   /**
@@ -690,8 +636,7 @@ export class TableStudent extends ComponentStudent {
     }
 
     if (series != null) {
-      // get the table data rows
-      const tableDataRows = this.getTableDataRows();
+      const tableDataRows = this.tableData;
 
       // get the data from the series
       const data = series.data;
@@ -740,8 +685,7 @@ export class TableStudent extends ComponentStudent {
     let tableDataRows = table;
 
     if (table == null) {
-      // get the table data rows
-      tableDataRows = this.getTableDataRows();
+      tableDataRows = this.tableData;
     }
 
     if (tableDataRows != null) {
@@ -772,8 +716,7 @@ export class TableStudent extends ComponentStudent {
     let cellValue = null;
 
     if (table == null) {
-      // get the table data rows
-      table = this.getTableDataRows();
+      table = this.tableData;
     }
 
     if (table != null) {
@@ -795,97 +738,9 @@ export class TableStudent extends ComponentStudent {
   }
 
   /**
-   * Get the number of rows in the table
-   * @returns the number of rows in the table
-   */
-  getNumRows() {
-    return this.componentContent.numRows;
-  }
-
-  /**
-   * Get the number of columns in the table
-   * @returns the number of columns in the table
-   */
-  getNumColumns() {
-    return this.componentContent.numColumns;
-  }
-
-  /**
-   * Check if the table is empty. The table is empty if all the cells are empty string.
-   * @returns whether the table is empty
-   */
-  isTableEmpty() {
-    let result = true;
-
-    const numRows = this.getNumRows();
-    const numColumns = this.getNumColumns();
-
-    // loop through all the rows
-    for (let r = 0; r < numRows; r++) {
-      // loop through all the cells in the row
-      for (let c = 0; c < numColumns; c++) {
-        // get a cell value
-        const cellValue = this.getTableDataCellValue(c, r);
-
-        if (cellValue != null && cellValue != '') {
-          // the cell is not empty so the table is not empty
-          result = false;
-          break;
-        }
-      }
-
-      if (result == false) {
-        break;
-      }
-    }
-
-    return result;
-  }
-
-  /**
-   * Check if the table is set to the default values. The table
-   * is set to the default values if all the cells match the
-   * values in the default authored table.
-   * @returns whether the table is set to the default values
-   */
-  isTableReset() {
-    let result = true;
-
-    const numRows = this.getNumRows();
-    const numColumns = this.getNumColumns();
-
-    // get the default table
-    const defaultTable = this.componentContent.tableData;
-
-    // loop through all the rows
-    for (let r = 0; r < numRows; r++) {
-      // loop through all the cells in the row
-      for (let c = 0; c < numColumns; c++) {
-        // get the cell value from the student table
-        const cellValue = this.getTableDataCellValue(c, r);
-
-        // get the cell value from the default table
-        const defaultCellValue = this.getTableDataCellValue(c, r, defaultTable);
-
-        if (cellValue != defaultCellValue) {
-          // the cell values do not match so the table is not set to the default values
-          result = false;
-          break;
-        }
-      }
-
-      if (result == false) {
-        break;
-      }
-    }
-
-    return result;
-  }
-
-  /**
    * Snip the table by converting it to an image
    */
-  snipTable() {
+  protected snipTable(): void {
     const tableElement = this.getElementById(
       this.TableService.getTableId(this.nodeId, this.componentId),
       true
@@ -925,7 +780,7 @@ export class TableStudent extends ComponentStudent {
     }
   }
 
-  importTableComponentState(componentState: any, connectedComponent: any): void {
+  private importTableComponentState(componentState: any, connectedComponent: any): void {
     if (connectedComponent.type === 'showWork') {
       this.tableData = componentState.studentData.tableData;
       this.isDisabled = true;
@@ -954,7 +809,7 @@ export class TableStudent extends ComponentStudent {
     return connectedComponentsAndTheirComponentStates;
   }
 
-  mergeComponentState(componentState) {
+  private mergeComponentState(componentState: any): void {
     if (this.tableData == null) {
       this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
     }
@@ -966,8 +821,8 @@ export class TableStudent extends ComponentStudent {
   }
 
   mergeTableData(tableData) {
-    for (let y = 0; y < this.getNumRows(); y++) {
-      for (let x = 0; x < this.getNumColumns(); x++) {
+    for (let y = 0; y < this.componentContent.numRows; y++) {
+      for (let x = 0; x < this.componentContent.numColumns; x++) {
         const cellValue = this.getTableDataCellValue(x, y, tableData);
         if (cellValue != null && cellValue !== '') {
           this.setTableDataCellValue(x, y, this.tableData, cellValue);
