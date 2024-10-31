@@ -9462,11 +9462,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="d29259ffbaa7c08e416d89f10ff54499745254f0" datatype="html">
+      <trans-unit id="52c3b900f92aa33d2cf368698e2841a9a6a6d7ac" datatype="html">
         <source> Unit Title is required </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-project/add-project.component.html</context>
-          <context context-type="linenumber">23,25</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c7d761ff7a5f7e7a8f6d3899d4a7fe62e73afab3" datatype="html">
@@ -9505,14 +9505,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Creating Unit...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-project/add-project.component.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="153622098599923481" datatype="html">
         <source>There was an error creating this unit. Please contact WISE staff.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-project/add-project.component.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3f3eed30db20799da458408b4d53206e5c8c8684" datatype="html">
