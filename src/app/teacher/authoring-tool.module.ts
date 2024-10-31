@@ -67,7 +67,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
   declarations: [
     AddLessonChooseTemplateComponent,
     AddLessonConfigureComponent,
-    AddProjectComponent,
     AdvancedProjectAuthoringComponent,
     AuthoringToolComponent,
     ChooseAutomatedAssessmentComponent,
@@ -100,6 +99,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     CreateBranchComponent,
     AddComponentButtonComponent,
     AddLessonButtonComponent,
+    AddProjectComponent,
     AddStepButtonComponent,
     AddYourOwnNodeComponent,
     AuthoringToolBarComponent,
