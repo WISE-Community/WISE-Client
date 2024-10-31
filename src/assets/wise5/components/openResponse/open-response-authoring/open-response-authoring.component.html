@@ -2,8 +2,8 @@
   <style>
     {{nodeContent.style}}
   </style>
-  <div>
-    <div *ngIf="!componentContent.showPreviousWork">
+  @if (!componentContent.showPreviousWork) {
+    <div>
       <mat-icon
         matTooltip="If you want to use rich visuals (images, videos, links, bullets, etc.) in your prompt, use an HTML component above this"
         matTooltipPosition="right"
@@ -13,7 +13,7 @@
       <edit-component-prompt
         [componentContent]="componentContent"
         (promptChangedEvent)="promptChanged($event)"
-      ></edit-component-prompt>
+      />
     </div>
-  </div>
+  }
 </div>
