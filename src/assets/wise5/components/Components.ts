@@ -36,7 +36,7 @@ import { MatchStudent } from './match/match-student/match-student.component';
 import { MultipleChoiceAuthoring } from './multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component';
 import { MultipleChoiceGradingComponent } from './multipleChoice/multiple-choice-grading/multiple-choice-grading.component';
 import { MultipleChoiceStudent } from './multipleChoice/multiple-choice-student/multiple-choice-student.component';
-import { OpenResponseAuthoring } from './openResponse/open-response-authoring/open-response-authoring.component';
+import { OpenResponseAuthoringComponent } from './openResponse/open-response-authoring/open-response-authoring.component';
 import { OpenResponseGradingComponent } from './openResponse/open-response-grading/open-response-grading.component';
 import { OpenResponseStudent } from './openResponse/open-response-student/open-response-student.component';
 import { OutsideUrlAuthoring } from './outsideURL/outside-url-authoring/outside-url-authoring.component';
@@ -54,7 +54,7 @@ import { SummaryAuthoring } from './summary/summary-authoring/summary-authoring.
 import { SummaryStudent } from './summary/summary-student/summary-student.component';
 import { TableAuthoring } from './table/table-authoring/table-authoring.component';
 import { TableGradingComponent } from './table/table-grading/table-grading.component';
-import { TableStudent } from './table/table-student/table-student.component';
+import { TableStudentComponent } from './table/table-student/table-student.component';
 
 export const components = {
   AiChat: {
@@ -103,7 +103,7 @@ export const components = {
     student: MultipleChoiceStudent
   },
   OpenResponse: {
-    authoring: OpenResponseAuthoring,
+    authoring: OpenResponseAuthoringComponent,
     grading: OpenResponseGradingComponent,
     student: OpenResponseStudent
   },
@@ -124,5 +124,9 @@ export const components = {
     student: ShowMyWorkStudentComponent
   },
   Summary: { authoring: SummaryAuthoring, student: SummaryStudent },
-  Table: { authoring: TableAuthoring, grading: TableGradingComponent, student: TableStudent }
+  Table: {
+    authoring: TableAuthoring,
+    grading: TableGradingComponent,
+    student: TableStudentComponent
+  }
 };

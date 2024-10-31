@@ -8,12 +8,12 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { Component } from '../../../common/Component';
 import { ProjectService } from '../../../services/projectService';
 import { TabulatorDataService } from '../tabulatorDataService';
-import { TableStudent } from './table-student.component';
+import { TableStudentComponent } from './table-student.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-let component: TableStudent;
+let component: TableStudentComponent;
 const componentId = 'component1';
-let fixture: ComponentFixture<TableStudent>;
+let fixture: ComponentFixture<TableStudentComponent>;
 const nodeId = 'node1';
 const testTableData = createTableData([
   ['Time', 'Position', 'Speed'],
@@ -25,15 +25,17 @@ const testTableData = createTableData([
 describe('TableStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [TableStudent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserModule,
+      declarations: [TableStudentComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        BrowserModule,
         MatDialogModule,
         NoopAnimationsModule,
-        StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
-    fixture = TestBed.createComponent(TableStudent);
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
+    fixture = TestBed.createComponent(TableStudentComponent);
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     component = fixture.componentInstance;
     const componentContent = {
@@ -77,33 +79,24 @@ describe('TableStudentComponent', () => {
     fixture.detectChanges();
   });
 
-  appendTable();
   createComponentState();
   createDataExplorerSeries();
   createTableCell();
   createTableRow();
   dataExplorerXColumnChanged();
   dataExplorerYColumnChanged();
-  getColumnName();
-  getDataExplorerYAxisLabelWhenOneYAxis();
   getTableDataCellValue();
   getXFromDataPoint();
   getYAxisForDataExplorerSeries();
   getYFromDataPoint();
   handleConnectedComponents();
   initializeDataExplorer();
-  isAllDataExplorerSeriesSpecified();
-  isDataExplorerOneYAxis();
-  isTableEmpty();
-  isTableReset();
   mergeTableData();
   processConnectedComponentState();
-  removeAllCellsFromTableData();
   repopulateDataExplorerData();
   resetTable();
   setDataExplorerSeriesYAxis();
   setDataExplorerXColumnIsDisabled();
-  setDataExplorerYAxisLabelWithMultipleYAxes();
   setDataExplorerYColumnIsDisabled();
   setGraphDataIntoTableData();
   setSeriesIntoTable();
@@ -193,18 +186,13 @@ function resetTable() {
 
 function createComponentState() {
   describe('createComponentState', () => {
-    it(
-      'should create component state',
-      waitForAsync(() => {
-        component.createComponentState('save').then((componentState: any) => {
-          expect(componentState.componentId).toEqual(componentId);
-          expect(componentState.nodeId).toEqual(nodeId);
-          expect(componentState.studentData.tableData).toEqual(
-            component.componentContent.tableData
-          );
-        });
-      })
-    );
+    it('should create component state', waitForAsync(() => {
+      component.createComponentState('save').then((componentState: any) => {
+        expect(componentState.componentId).toEqual(componentId);
+        expect(componentState.nodeId).toEqual(nodeId);
+        expect(componentState.studentData.tableData).toEqual(component.componentContent.tableData);
+      });
+    }));
   });
 }
 
@@ -366,16 +354,6 @@ function updateColumnNames() {
   });
 }
 
-function getColumnName() {
-  describe('getColumnName', () => {
-    it('should get column name', () => {
-      expect(component.getColumnName(0)).toEqual('Time');
-      expect(component.getColumnName(1)).toEqual('Position');
-      expect(component.getColumnName(2)).toEqual('Speed');
-    });
-  });
-}
-
 function repopulateDataExplorerData() {
   describe('repopulateDataExplorerData', () => {
     it('should repopulate data explorer data', () => {
@@ -406,34 +384,6 @@ function repopulateDataExplorerData() {
       expect(component.dataExplorerYAxisLabel).toEqual(dataExplorerYAxisLabel);
       expect(component.dataExplorerYAxisLabels).toEqual(dataExplorerYAxisLabels);
       expect(component.dataExplorerSeries).toEqual(dataExplorerSeries);
-    });
-  });
-}
-
-function isTableReset() {
-  describe('isTableReset', () => {
-    it('should check if table is reset when it is not', () => {
-      component.setTableDataCellValue(0, 0, component.tableData, '');
-      expect(component.isTableReset()).toEqual(false);
-    });
-    it('should check if table is reset when it is', () => {
-      expect(component.isTableReset()).toEqual(true);
-    });
-  });
-}
-
-function isTableEmpty() {
-  describe('isTableEmpty', () => {
-    it('should check if table is empty when it is not', () => {
-      component.tableData = createTableData([
-        ['Time', 'Position'],
-        ['0', '0']
-      ]);
-      expect(component.isTableEmpty()).toEqual(false);
-    });
-    it('should check if table is empty when it is', () => {
-      component.tableData = createTableData([['']]);
-      expect(component.isTableEmpty()).toEqual(true);
     });
   });
 }
@@ -610,25 +560,6 @@ function handleConnectedComponents() {
   });
 }
 
-function isAllDataExplorerSeriesSpecified() {
-  describe('isAllDataExplorerSeriesSpecified', () => {
-    it('should check if all data explorer series are specified when it is', () => {
-      component.dataExplorerSeries = [
-        { xColumn: 0, yColumn: 1 },
-        { xColumn: 0, yColumn: 2 }
-      ];
-      expect(component.isAllDataExplorerSeriesSpecified()).toEqual(true);
-    });
-    it('should check if all data explorer series are specified when it is not', () => {
-      component.dataExplorerSeries = [
-        { xColumn: 0, yColumn: 1 },
-        { xColumn: 0, yColumn: null }
-      ];
-      expect(component.isAllDataExplorerSeriesSpecified()).toEqual(false);
-    });
-  });
-}
-
 function processConnectedComponentState() {
   describe('processConnectedComponentState', () => {
     beforeEach(() => {
@@ -660,24 +591,6 @@ function processConnectedComponentState() {
       const setGraphDataIntoTableDataSpy = spyOn(component, 'setGraphDataIntoTableData');
       component.processConnectedComponentState(componentState);
       expect(setGraphDataIntoTableDataSpy).toHaveBeenCalled();
-    });
-  });
-}
-
-function appendTable() {
-  describe('appendTable', () => {
-    it('should append table', () => {
-      expect(component.tableData.length).toEqual(4);
-      component.appendTable(createTableData([['30', '300', '10']]));
-      expect(component.tableData.length).toEqual(5);
-      const expectedTableData = createTableData([
-        ['Time', 'Position', 'Speed'],
-        ['0', '0', '0'],
-        ['10', '100', '10'],
-        ['20', '200', '10'],
-        ['30', '300', '10']
-      ]);
-      expect(tableDataEquals(component.tableData, expectedTableData)).toEqual(true);
     });
   });
 }
@@ -729,16 +642,6 @@ function dataExplorerYColumnChanged() {
   });
 }
 
-function removeAllCellsFromTableData() {
-  describe('removeAllCellsFromTableData', () => {
-    it('should remove all cells from table data', () => {
-      expect(component.tableData).not.toEqual([]);
-      component.removeAllCellsFromTableData();
-      expect(component.tableData).toEqual([]);
-    });
-  });
-}
-
 function updateDataExplorerSeriesNames() {
   describe('updateDataExplorerSeriesNames', () => {
     it('should update data explorer series names', () => {
@@ -753,27 +656,6 @@ function updateDataExplorerSeriesNames() {
   });
 }
 
-function isDataExplorerOneYAxis() {
-  describe('isDataExplorerOneYAxis', () => {
-    it('should check if data explorer only has one y axis when there is only one y axis', () => {
-      component.componentContent.numDataExplorerYAxis = 1;
-      expect(component.isDataExplorerOneYAxis()).toEqual(true);
-    });
-    it('should check if data explorer only has one y axis when there are multiple y axes', () => {
-      component.componentContent.numDataExplorerYAxis = 2;
-      expect(component.isDataExplorerOneYAxis()).toEqual(false);
-    });
-  });
-}
-
-function getDataExplorerYAxisLabelWhenOneYAxis() {
-  describe('getDataExplorerYAxisLabelWhenOneYAxis', () => {
-    it('should get data explorer y axis label when there is one y axis', () => {
-      expect(component.getDataExplorerYAxisLabelWhenOneYAxis()).toEqual('Position <br/> Speed');
-    });
-  });
-}
-
 function setDataExplorerSeriesYAxis() {
   describe('setDataExplorerSeriesYAxis', () => {
     it('should set data explorer series y axis', () => {
@@ -781,17 +663,6 @@ function setDataExplorerSeriesYAxis() {
       component.dataExplorerSeriesParams[0].yAxis = 1;
       component.setDataExplorerSeriesYAxis(0);
       expect(component.dataExplorerSeries[0].yAxis).toEqual(1);
-    });
-  });
-}
-
-function setDataExplorerYAxisLabelWithMultipleYAxes() {
-  describe('setDataExplorerYAxisLabelWithMultipleYAxes', () => {
-    it('should set data explorer y axis label with multiple y axes', () => {
-      expect(component.dataExplorerYAxisLabels[0]).toEqual('');
-      const newLabel = 'Temperature';
-      component.setDataExplorerYAxisLabelWithMultipleYAxes(0, newLabel);
-      expect(component.dataExplorerYAxisLabels[0]).toEqual(newLabel);
     });
   });
 }

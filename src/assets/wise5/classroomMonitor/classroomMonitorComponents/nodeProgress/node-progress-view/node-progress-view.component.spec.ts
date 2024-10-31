@@ -13,7 +13,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { NodeProgressViewComponent } from './node-progress-view.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 
 const rubric = 'This is the unit rubric.';
 const title = 'Photosynthesis';
@@ -80,7 +80,8 @@ class MockTeacherDataService {
   private currentNodeChangedSource: Subject<any> = new Subject<any>();
   public currentNodeChanged$ = this.currentNodeChangedSource.asObservable();
   private currentWorkgroupChangedSource: Subject<any> = new Subject<any>();
-  public currentWorkgroupChanged$: Observable<any> = this.currentWorkgroupChangedSource.asObservable();
+  public currentWorkgroupChanged$: Observable<any> =
+    this.currentWorkgroupChangedSource.asObservable();
   private studentWorkReceivedSource: Subject<any> = new Subject<any>();
   public studentWorkReceived$ = this.studentWorkReceivedSource.asObservable();
   private currentPeriodChangedSource: Subject<any> = new Subject<any>();
@@ -98,13 +99,13 @@ describe('NodeProgressViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ComponentSelectComponent, NodeProgressViewComponent],
+      declarations: [NodeProgressViewComponent],
       imports: [
         ClassroomMonitorTestingModule,
+        ComponentSelectComponent,
         FlexLayoutModule,
         MatIconModule,
-        MatListModule,
-        RouterTestingModule
+        MatListModule
       ],
       providers: [
         {
@@ -122,7 +123,8 @@ describe('NodeProgressViewComponent', () => {
         {
           provide: TeacherProjectService,
           useClass: MockTeacherProjectService
-        }
+        },
+        provideRouter([])
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
