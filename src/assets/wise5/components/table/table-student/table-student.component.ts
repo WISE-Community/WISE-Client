@@ -261,21 +261,6 @@ export class TableStudentComponent extends ComponentStudent {
   }
 
   /**
-   * Get a copy of the table data
-   * @param tableData the table data to copy
-   * @return a copy of the table data
-   */
-  private getCopyOfTableData(tableData: any): any {
-    let tableDataCopy = null;
-    if (tableData != null) {
-      const tableDataJSONString = JSON.stringify(tableData);
-      const tableDataJSON = JSON.parse(tableDataJSONString);
-      tableDataCopy = tableDataJSON;
-    }
-    return tableDataCopy;
-  }
-
-  /**
    * Setup the table
    */
   setupTable() {
@@ -284,7 +269,7 @@ export class TableStudentComponent extends ComponentStudent {
        * the student does not have any table data so we will use
        * the table data from the component content
        */
-      this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
+      this.tableData = copy(this.componentContent.tableData);
     }
     this.setTabulatorData();
   }
@@ -295,11 +280,11 @@ export class TableStudentComponent extends ComponentStudent {
   resetTable() {
     if (this.component.hasConnectedComponent()) {
       // this component imports work so we will import the work again
-      this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
+      this.tableData = copy(this.componentContent.tableData);
       this.handleConnectedComponents();
     } else {
       // get the original table from the step content
-      this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
+      this.tableData = copy(this.componentContent.tableData);
       if (this.isDataExplorerEnabled) {
         this.dataExplorerGraphType = null;
         this.dataExplorerXColumn = null;
@@ -362,7 +347,7 @@ export class TableStudentComponent extends ComponentStudent {
   createComponentState(action) {
     const componentState: any = this.createNewComponentState();
     const studentData: any = {};
-    studentData.tableData = this.getCopyOfTableData(this.tableData);
+    studentData.tableData = copy(this.tableData);
     studentData.selectedRowIndices = this.componentContent.enableRowSelection
       ? this.selectedRowIndices
       : [];
@@ -722,7 +707,7 @@ export class TableStudentComponent extends ComponentStudent {
             isStudentDataChanged = true;
             break;
           case 'Graph':
-            this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
+            this.tableData = copy(this.componentContent.tableData);
             this.setGraphDataIntoTableData(componentState, connectedComponent);
             isStudentDataChanged = true;
             break;
@@ -770,7 +755,7 @@ export class TableStudentComponent extends ComponentStudent {
 
   private mergeComponentState(componentState: any): void {
     if (this.tableData == null) {
-      this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
+      this.tableData = copy(this.componentContent.tableData);
     }
     if (this.componentContent.numRows === 0 || this.componentContent.numColumns === 0) {
       this.tableData = componentState.studentData.tableData;
@@ -792,7 +777,7 @@ export class TableStudentComponent extends ComponentStudent {
 
   private appendComponentState(componentState, connectedComponent): void {
     if (this.tableData == null) {
-      this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
+      this.tableData = copy(this.componentContent.tableData);
     }
     let tableData = componentState.studentData.tableData;
     if (connectedComponent.excludeFirstRow) {
