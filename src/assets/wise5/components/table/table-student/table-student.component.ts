@@ -267,17 +267,11 @@ export class TableStudentComponent extends ComponentStudent {
    */
   private getCopyOfTableData(tableData: any): any {
     let tableDataCopy = null;
-
     if (tableData != null) {
-      // create a JSON string from the table data
       const tableDataJSONString = JSON.stringify(tableData);
-
-      // create a JSON object from the table data string
       const tableDataJSON = JSON.parse(tableDataJSONString);
-
       tableDataCopy = tableDataJSON;
     }
-
     return tableDataCopy;
   }
 
@@ -425,12 +419,10 @@ export class TableStudentComponent extends ComponentStudent {
 
     if (params != null) {
       if (params.trialIndex != null) {
-        // get the trial index
         trialIndex = params.trialIndex;
       }
 
       if (params.seriesIndex != null) {
-        // get the series index
         seriesIndex = params.seriesIndex;
       }
 
@@ -441,44 +433,27 @@ export class TableStudentComponent extends ComponentStudent {
     }
 
     if (componentState != null && componentState.studentData != null) {
-      // get the student data
       const studentData = componentState.studentData;
-
-      // get the student data version
       const studentDataVersion = studentData.version;
 
       if (studentDataVersion == null || studentDataVersion == 1) {
         // this is the old student data format that can't contain trials
 
-        // get the series
         const series = studentData.series;
-
         if (series != null && series.length > 0) {
-          // get the series that we will get data from
           const tempSeries = series[seriesIndex];
-
-          // set the series data into the table
           this.setSeriesIntoTable(tempSeries);
         }
       } else {
         // this is the new student data format that can contain trials
 
-        // get all the trials
         const trials = studentData.trials;
-
         if (trials != null) {
-          // get the specific trial we want
           const trial = trials[trialIndex];
-
           if (trial != null) {
-            // get the series in the trial
             const multipleSeries = trial.series;
-
             if (multipleSeries != null) {
-              // get the specific series we want
               const series = multipleSeries[seriesIndex];
-
-              // set the series data into the table
               this.setSeriesIntoTable(series);
             }
           }
@@ -546,7 +521,7 @@ export class TableStudentComponent extends ComponentStudent {
    * @param columns An array of strings or objects.
    * @return An array of objects.
    */
-  createTableRow(columns) {
+  createTableRow(columns: any[]): any[] {
     let row = [];
     for (let column of columns) {
       if (column.constructor.name == 'String') {
@@ -584,7 +559,7 @@ export class TableStudentComponent extends ComponentStudent {
    * @param dataPoint An object or array.
    * @return The x value of the data point.
    */
-  getXFromDataPoint(dataPoint) {
+  getXFromDataPoint(dataPoint: any): number {
     if (dataPoint.constructor.name == 'Object') {
       return dataPoint.x;
     } else if (dataPoint.constructor.name == 'Array') {
@@ -597,7 +572,7 @@ export class TableStudentComponent extends ComponentStudent {
    * @param dataPoint An object or array.
    * @return The y value of the data point.
    */
-  getYFromDataPoint(dataPoint) {
+  getYFromDataPoint(dataPoint: any): number {
     if (dataPoint.constructor.name == 'Object') {
       return dataPoint.y;
     } else if (dataPoint.constructor.name == 'Array') {
@@ -683,23 +658,16 @@ export class TableStudentComponent extends ComponentStudent {
    * @param y the y index (0 indexed)
    * @param value the value to set in the cell
    */
-  setTableDataCellValue(x, y, table, value) {
+  setTableDataCellValue(x, y, table, value): void {
     let tableDataRows = table;
-
     if (table == null) {
       tableDataRows = this.tableData;
     }
-
     if (tableDataRows != null) {
-      // get the row we want
       const row = tableDataRows[y];
-
       if (row != null) {
-        // get the cell we want
         const cell = row[x];
-
         if (cell != null) {
-          // set the value into the cell
           cell.text = value;
         }
       }
@@ -714,34 +682,23 @@ export class TableStudentComponent extends ComponentStudent {
    * when we want to look up the value in the default authored table
    * @returns the cell value (text or a number)
    */
-  getTableDataCellValue(x, y, table = null) {
+  getTableDataCellValue(x, y, table = null): string | number {
     let cellValue = null;
-
     if (table == null) {
       table = this.tableData;
     }
-
     if (table != null) {
-      // get the row we want
       const row = table[y];
-
       if (row != null) {
-        // get the cell we want
         const cell = row[x];
-
         if (cell != null) {
-          // set the value into the cell
           cellValue = cell.text;
         }
       }
     }
-
     return cellValue;
   }
 
-  /**
-   * Snip the table by converting it to an image
-   */
   protected snipTable(): void {
     const tableElement = this.getElementById(
       this.TableService.getTableId(this.nodeId, this.componentId),
@@ -795,7 +752,7 @@ export class TableStudentComponent extends ComponentStudent {
     }
   }
 
-  getConnectedComponentsAndTheirComponentStates() {
+  getConnectedComponentsAndTheirComponentStates(): any[] {
     const connectedComponentsAndTheirComponentStates = [];
     for (const connectedComponent of this.componentContent.connectedComponents) {
       const componentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
@@ -822,7 +779,7 @@ export class TableStudentComponent extends ComponentStudent {
     }
   }
 
-  mergeTableData(tableData) {
+  mergeTableData(tableData: any): void {
     for (let y = 0; y < this.componentContent.numRows; y++) {
       for (let x = 0; x < this.componentContent.numColumns; x++) {
         const cellValue = this.getTableDataCellValue(x, y, tableData);
@@ -857,14 +814,12 @@ export class TableStudentComponent extends ComponentStudent {
     this.createComponentStateAndBroadcast(action);
   }
 
-  updateColumnNames() {
+  updateColumnNames(): void {
     const firstRow = this.tableData[0];
-    this.columnNames = firstRow.map((cell: any): string => {
-      return cell.text;
-    });
+    this.columnNames = firstRow.map((cell: any): string => cell.text);
   }
 
-  updateColumnsUsed(): void {
+  private updateColumnsUsed(): void {
     const firstRow = this.tableData[0];
     for (let c = 0; c < firstRow.length; c++) {
       this.columnIndexToIsUsed.set(c, this.isColumnUsed(c));
@@ -880,7 +835,7 @@ export class TableStudentComponent extends ComponentStudent {
     );
   }
 
-  updateDataExplorerSeriesNames() {
+  updateDataExplorerSeriesNames(): void {
     for (const singleSeries of this.dataExplorerSeries) {
       if (singleSeries.yColumn != null) {
         singleSeries.name = this.columnNames[singleSeries.yColumn];
@@ -888,7 +843,7 @@ export class TableStudentComponent extends ComponentStudent {
     }
   }
 
-  dataExplorerXColumnChanged() {
+  dataExplorerXColumnChanged(): void {
     for (const singleSeries of this.dataExplorerSeries) {
       singleSeries.xColumn = this.dataExplorerXColumn;
     }
@@ -906,26 +861,11 @@ export class TableStudentComponent extends ComponentStudent {
     this.studentDataChanged();
   }
 
-  isDataExplorerOneYAxis() {
+  private isDataExplorerOneYAxis(): boolean {
     return (
       this.componentContent.numDataExplorerYAxis == null ||
       this.componentContent.numDataExplorerYAxis === 1
     );
-  }
-
-  getDataExplorerYAxisLabelWhenOneYAxis() {
-    let yAxisLabel = '';
-    for (let index = 0; index < this.dataExplorerSeries.length; index++) {
-      const yColumn = this.dataExplorerSeries[index].yColumn;
-      if (yColumn != null) {
-        const columnName = this.columnNames[yColumn];
-        if (yAxisLabel != '') {
-          yAxisLabel += ' <br/> ';
-        }
-        yAxisLabel += columnName;
-      }
-    }
-    return yAxisLabel;
   }
 
   setDataExplorerSeriesYAxis(index) {

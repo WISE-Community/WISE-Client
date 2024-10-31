@@ -85,14 +85,12 @@ describe('TableStudentComponent', () => {
   createTableRow();
   dataExplorerXColumnChanged();
   dataExplorerYColumnChanged();
-  getDataExplorerYAxisLabelWhenOneYAxis();
   getTableDataCellValue();
   getXFromDataPoint();
   getYAxisForDataExplorerSeries();
   getYFromDataPoint();
   handleConnectedComponents();
   initializeDataExplorer();
-  isDataExplorerOneYAxis();
   mergeTableData();
   processConnectedComponentState();
   repopulateDataExplorerData();
@@ -654,27 +652,6 @@ function updateDataExplorerSeriesNames() {
       component.updateDataExplorerSeriesNames();
       expect(component.dataExplorerSeries[0].name).toEqual('Time');
       expect(component.dataExplorerSeries[1].name).toEqual('Position');
-    });
-  });
-}
-
-function isDataExplorerOneYAxis() {
-  describe('isDataExplorerOneYAxis', () => {
-    it('should check if data explorer only has one y axis when there is only one y axis', () => {
-      component.componentContent.numDataExplorerYAxis = 1;
-      expect(component.isDataExplorerOneYAxis()).toEqual(true);
-    });
-    it('should check if data explorer only has one y axis when there are multiple y axes', () => {
-      component.componentContent.numDataExplorerYAxis = 2;
-      expect(component.isDataExplorerOneYAxis()).toEqual(false);
-    });
-  });
-}
-
-function getDataExplorerYAxisLabelWhenOneYAxis() {
-  describe('getDataExplorerYAxisLabelWhenOneYAxis', () => {
-    it('should get data explorer y axis label when there is one y axis', () => {
-      expect(component.getDataExplorerYAxisLabelWhenOneYAxis()).toEqual('Position <br/> Speed');
     });
   });
 }
