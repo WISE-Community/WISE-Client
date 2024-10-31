@@ -54,7 +54,7 @@ import { SummaryAuthoring } from './summary/summary-authoring/summary-authoring.
 import { SummaryStudent } from './summary/summary-student/summary-student.component';
 import { TableAuthoring } from './table/table-authoring/table-authoring.component';
 import { TableGradingComponent } from './table/table-grading/table-grading.component';
-import { TableStudent } from './table/table-student/table-student.component';
+import { TableStudentComponent } from './table/table-student/table-student.component';
 
 export const components = {
   AiChat: {
@@ -124,5 +124,9 @@ export const components = {
     student: ShowMyWorkStudentComponent
   },
   Summary: { authoring: SummaryAuthoring, student: SummaryStudent },
-  Table: { authoring: TableAuthoring, grading: TableGradingComponent, student: TableStudent }
+  Table: {
+    authoring: TableAuthoring,
+    grading: TableGradingComponent,
+    student: TableStudentComponent
+  }
 };
