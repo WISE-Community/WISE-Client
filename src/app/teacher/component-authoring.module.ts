@@ -13,7 +13,7 @@ import { HtmlAuthoring } from '../../assets/wise5/components/html/html-authoring
 import { LabelAuthoring } from '../../assets/wise5/components/label/label-authoring/label-authoring.component';
 import { MatchAuthoring } from '../../assets/wise5/components/match/match-authoring/match-authoring.component';
 import { MultipleChoiceAuthoring } from '../../assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component';
-import { OpenResponseAuthoring } from '../../assets/wise5/components/openResponse/open-response-authoring/open-response-authoring.component';
+import { OpenResponseAuthoringComponent } from '../../assets/wise5/components/openResponse/open-response-authoring/open-response-authoring.component';
 import { EditOutsideUrlAdvancedComponent } from '../../assets/wise5/components/outsideURL/edit-outside-url-advanced/edit-outside-url-advanced.component';
 import { OutsideUrlAuthoring } from '../../assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component';
 import { SummaryAuthoring } from '../../assets/wise5/components/summary/summary-authoring/summary-authoring.component';
@@ -160,7 +160,6 @@ import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/no
     LabelAuthoring,
     MatchAuthoring,
     MultipleChoiceAuthoring,
-    OpenResponseAuthoring,
     OutsideUrlAuthoring,
     PeerChatAuthoringComponent,
     ShowGroupWorkAuthoringComponent,
@@ -175,6 +174,7 @@ import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/no
     EditComponentConstraintsComponent,
     EditComponentPrompt,
     EditComponentWidthComponent,
+    OpenResponseAuthoringComponent,
     PeerGroupingAuthoringModule,
     RequiredErrorLabelComponent,
     SelectStepAndComponentComponent,
@@ -246,7 +246,7 @@ import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/no
     LabelAuthoring,
     MatchAuthoring,
     MultipleChoiceAuthoring,
-    OpenResponseAuthoring,
+    OpenResponseAuthoringComponent,
     OutsideUrlAuthoring,
     PeerChatAuthoringComponent,
     ShowGroupWorkAuthoringComponent,
