@@ -8,12 +8,12 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { Component } from '../../../common/Component';
 import { ProjectService } from '../../../services/projectService';
 import { TabulatorDataService } from '../tabulatorDataService';
-import { TableStudent } from './table-student.component';
+import { TableStudentComponent } from './table-student.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-let component: TableStudent;
+let component: TableStudentComponent;
 const componentId = 'component1';
-let fixture: ComponentFixture<TableStudent>;
+let fixture: ComponentFixture<TableStudentComponent>;
 const nodeId = 'node1';
 const testTableData = createTableData([
   ['Time', 'Position', 'Speed'],
@@ -25,7 +25,7 @@ const testTableData = createTableData([
 describe('TableStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TableStudent],
+      declarations: [TableStudentComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
         BrowserModule,
@@ -35,7 +35,7 @@ describe('TableStudentComponent', () => {
       ],
       providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
     });
-    fixture = TestBed.createComponent(TableStudent);
+    fixture = TestBed.createComponent(TableStudentComponent);
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     component = fixture.componentInstance;
     const componentContent = {

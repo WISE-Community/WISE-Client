@@ -23,7 +23,7 @@ import { hasConnectedComponent } from '../../../common/ComponentContent';
   styleUrl: 'table-student.component.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class TableStudent extends ComponentStudent {
+export class TableStudentComponent extends ComponentStudent {
   columnIndexToIsUsed: Map<number, boolean> = new Map();
   columnNames: string[];
   dataExplorerColumnToIsDisabled: any = {};
