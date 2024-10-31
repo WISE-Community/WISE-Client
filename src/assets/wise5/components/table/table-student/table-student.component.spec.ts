@@ -79,14 +79,12 @@ describe('TableStudentComponent', () => {
     fixture.detectChanges();
   });
 
-  appendTable();
   createComponentState();
   createDataExplorerSeries();
   createTableCell();
   createTableRow();
   dataExplorerXColumnChanged();
   dataExplorerYColumnChanged();
-  getColumnName();
   getDataExplorerYAxisLabelWhenOneYAxis();
   getTableDataCellValue();
   getXFromDataPoint();
@@ -101,7 +99,6 @@ describe('TableStudentComponent', () => {
   resetTable();
   setDataExplorerSeriesYAxis();
   setDataExplorerXColumnIsDisabled();
-  setDataExplorerYAxisLabelWithMultipleYAxes();
   setDataExplorerYColumnIsDisabled();
   setGraphDataIntoTableData();
   setSeriesIntoTable();
@@ -359,16 +356,6 @@ function updateColumnNames() {
   });
 }
 
-function getColumnName() {
-  describe('getColumnName', () => {
-    it('should get column name', () => {
-      expect(component.getColumnName(0)).toEqual('Time');
-      expect(component.getColumnName(1)).toEqual('Position');
-      expect(component.getColumnName(2)).toEqual('Speed');
-    });
-  });
-}
-
 function repopulateDataExplorerData() {
   describe('repopulateDataExplorerData', () => {
     it('should repopulate data explorer data', () => {
@@ -610,24 +597,6 @@ function processConnectedComponentState() {
   });
 }
 
-function appendTable() {
-  describe('appendTable', () => {
-    it('should append table', () => {
-      expect(component.tableData.length).toEqual(4);
-      component.appendTable(createTableData([['30', '300', '10']]));
-      expect(component.tableData.length).toEqual(5);
-      const expectedTableData = createTableData([
-        ['Time', 'Position', 'Speed'],
-        ['0', '0', '0'],
-        ['10', '100', '10'],
-        ['20', '200', '10'],
-        ['30', '300', '10']
-      ]);
-      expect(tableDataEquals(component.tableData, expectedTableData)).toEqual(true);
-    });
-  });
-}
-
 function mergeTableData() {
   describe('mergeTableData', () => {
     it('should merge table data', () => {
@@ -717,17 +686,6 @@ function setDataExplorerSeriesYAxis() {
       component.dataExplorerSeriesParams[0].yAxis = 1;
       component.setDataExplorerSeriesYAxis(0);
       expect(component.dataExplorerSeries[0].yAxis).toEqual(1);
-    });
-  });
-}
-
-function setDataExplorerYAxisLabelWithMultipleYAxes() {
-  describe('setDataExplorerYAxisLabelWithMultipleYAxes', () => {
-    it('should set data explorer y axis label with multiple y axes', () => {
-      expect(component.dataExplorerYAxisLabels[0]).toEqual('');
-      const newLabel = 'Temperature';
-      component.setDataExplorerYAxisLabelWithMultipleYAxes(0, newLabel);
-      expect(component.dataExplorerYAxisLabels[0]).toEqual(newLabel);
     });
   });
 }

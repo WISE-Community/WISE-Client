@@ -45,7 +45,7 @@
   (cellChanged)="tabulatorCellChanged($event)"
   (rowSelectionChanged)="tabulatorRowSelectionChanged($event)"
   (rowSortChanged)="tabulatorRowSortChanged($event)"
-  (ready)="tabulatorRendered()"
+  (ready)="broadcastDoneRenderingComponent()"
 ></tabulator-table>
 <div *ngIf="isDataExplorerEnabled">
   <br />

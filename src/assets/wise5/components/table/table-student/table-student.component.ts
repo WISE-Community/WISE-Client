@@ -195,12 +195,12 @@ export class TableStudent extends ComponentStudent {
   }
 
   updateDataExplorerXAxisLabel(columnIndex: number): void {
-    this.dataExplorerXAxisLabel = this.getColumnName(columnIndex);
+    this.dataExplorerXAxisLabel = this.columnNames[columnIndex];
   }
 
   setYDataToColumn(dataExplorerSeriesIndex: number, columnIndex: number): void {
     this.dataExplorerSeries[dataExplorerSeriesIndex].yColumn = columnIndex;
-    this.dataExplorerSeries[dataExplorerSeriesIndex].name = this.getColumnName(columnIndex);
+    this.dataExplorerSeries[dataExplorerSeriesIndex].name = this.columnNames[columnIndex];
     this.setDataExplorerYColumnIsDisabled(dataExplorerSeriesIndex + 1);
     if (this.isDataExplorerYAxisLabelEmpty(dataExplorerSeriesIndex)) {
       this.updateDataExplorerYAxisLabel(dataExplorerSeriesIndex, columnIndex);
@@ -219,12 +219,12 @@ export class TableStudent extends ComponentStudent {
   }
 
   updateDataExplorerYAxisLabel(dataExplorerSeriesIndex: number, columnIndex: number): void {
-    const columnName = this.getColumnName(columnIndex);
+    const columnName = this.columnNames[columnIndex];
     if (this.isDataExplorerOneYAxis()) {
       this.dataExplorerYAxisLabel = columnName;
     } else {
       const yAxisIndex = this.dataExplorerSeries[dataExplorerSeriesIndex].yAxis;
-      this.setDataExplorerYAxisLabelWithMultipleYAxes(yAxisIndex, columnName);
+      this.dataExplorerYAxisLabels[yAxisIndex] = columnName;
     }
   }
 
@@ -369,7 +369,9 @@ export class TableStudent extends ComponentStudent {
     const componentState: any = this.createNewComponentState();
     const studentData: any = {};
     studentData.tableData = this.getCopyOfTableData(this.tableData);
-    studentData.selectedRowIndices = this.getSelectedRowIndices();
+    studentData.selectedRowIndices = this.componentContent.enableRowSelection
+      ? this.selectedRowIndices
+      : [];
     studentData.sortOrder = this.sortOrder;
     studentData.tabulatorSorters = this.tabulatorSorters;
     studentData.isDataExplorerEnabled = this.isDataExplorerEnabled;
@@ -831,7 +833,7 @@ export class TableStudent extends ComponentStudent {
     }
   }
 
-  appendComponentState(componentState, connectedComponent) {
+  private appendComponentState(componentState, connectedComponent): void {
     if (this.tableData == null) {
       this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
     }
@@ -839,10 +841,6 @@ export class TableStudent extends ComponentStudent {
     if (connectedComponent.excludeFirstRow) {
       tableData = tableData.slice(1);
     }
-    this.appendTable(tableData);
-  }
-
-  appendTable(tableData) {
     this.tableData = this.tableData.concat(tableData);
   }
 
@@ -873,7 +871,7 @@ export class TableStudent extends ComponentStudent {
     }
   }
 
-  isColumnUsed(columnIndex: number): boolean {
+  private isColumnUsed(columnIndex: number): boolean {
     return (
       columnIndex === this.dataExplorerXColumn ||
       this.dataExplorerSeries.some((series) => {
@@ -888,13 +886,6 @@ export class TableStudent extends ComponentStudent {
         singleSeries.name = this.columnNames[singleSeries.yColumn];
       }
     }
-  }
-
-  /**
-   * @param columnIndex (0 indexed)
-   */
-  getColumnName(columnIndex: number): string {
-    return this.columnNames[columnIndex];
   }
 
   dataExplorerXColumnChanged() {
@@ -927,7 +918,7 @@ export class TableStudent extends ComponentStudent {
     for (let index = 0; index < this.dataExplorerSeries.length; index++) {
       const yColumn = this.dataExplorerSeries[index].yColumn;
       if (yColumn != null) {
-        const columnName = this.getColumnName(yColumn);
+        const columnName = this.columnNames[yColumn];
         if (yAxisLabel != '') {
           yAxisLabel += ' <br/> ';
         }
@@ -935,14 +926,6 @@ export class TableStudent extends ComponentStudent {
       }
     }
     return yAxisLabel;
-  }
-
-  /**
-   * @param yAxisIndex (0 indexed)
-   * @param label The axis label.
-   */
-  setDataExplorerYAxisLabelWithMultipleYAxes(yAxisIndex: number, label: string): void {
-    this.dataExplorerYAxisLabels[yAxisIndex] = label;
   }
 
   setDataExplorerSeriesYAxis(index) {
@@ -1033,20 +1016,12 @@ export class TableStudent extends ComponentStudent {
     this.studentDataChanged();
   }
 
-  tabulatorRendered(): void {
-    this.broadcastDoneRenderingComponent();
-  }
-
   tabulatorRowSelectionChanged(rows: Tabulator.RowComponent[]): void {
     this.selectedRowIndices = [];
     for (const row of rows) {
       this.selectedRowIndices.push(row.getIndex());
     }
     this.studentDataChanged();
-  }
-
-  private getSelectedRowIndices(): number[] {
-    return this.componentContent.enableRowSelection ? this.selectedRowIndices : [];
   }
 
   tabulatorRowSortChanged(sortData: any): void {
