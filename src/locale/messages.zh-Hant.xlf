@@ -1682,7 +1682,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
@@ -10418,13 +10418,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="translated">單元標題</target>
       </trans-unit>
-      <trans-unit id="d29259ffbaa7c08e416d89f10ff54499745254f0" datatype="html">
+      <trans-unit id="52c3b900f92aa33d2cf368698e2841a9a6a6d7ac" datatype="html">
         <source> Unit Title is required </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-project/add-project.component.html</context>
-          <context context-type="linenumber">23,25</context>
+          <context context-type="linenumber">24</context>
         </context-group>
-        <target state="translated"> 單元標題為必填項 </target>
+        <target state="needs-translation"> Unit Title is required </target>
       </trans-unit>
       <trans-unit id="c7d761ff7a5f7e7a8f6d3899d4a7fe62e73afab3" datatype="html">
         <source>cancel</source>
@@ -10466,7 +10466,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Creating Unit...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-project/add-project.component.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <target state="needs-translation">Creating Unit...</target>
       </trans-unit>
@@ -10474,7 +10474,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>There was an error creating this unit. Please contact WISE staff.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/add-project/add-project.component.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">80</context>
         </context-group>
         <target state="needs-translation">There was an error creating this unit. Please contact WISE staff.</target>
       </trans-unit>
@@ -10600,13 +10600,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="translated">課程標題</target>
       </trans-unit>
-      <trans-unit id="6e865bed9e5566eb4a24f5b09e0518e7bbf8f5f9" datatype="html">
+      <trans-unit id="7a5f35a59a4014498a4ae5f09947afb041bdcd61" datatype="html">
         <source> Lesson Title is required </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component.html</context>
-          <context context-type="linenumber">20,22</context>
+          <context context-type="linenumber">21</context>
         </context-group>
-        <target state="translated"> 課程標題為必填項 </target>
+        <target state="needs-translation"> Lesson Title is required </target>
       </trans-unit>
       <trans-unit id="eef3d003a6862d8a8358220843fa187a2ee0e09c" datatype="html">
         <source> Back </source>
