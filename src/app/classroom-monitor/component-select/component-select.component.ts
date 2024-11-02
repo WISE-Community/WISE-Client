@@ -8,18 +8,25 @@ import {
 } from '@angular/core';
 import { ComponentTypeService } from '../../../assets/wise5/services/componentTypeService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
+  imports: [CommonModule, FormsModule, MatButtonModule, MatFormFieldModule, MatSelectModule],
   selector: 'component-select',
-  styleUrls: ['component-select.component.scss'],
-  templateUrl: 'component-select.component.html',
-  encapsulation: ViewEncapsulation.None
+  standalone: true,
+  styleUrl: 'component-select.component.scss',
+  templateUrl: 'component-select.component.html'
 })
 export class ComponentSelectComponent {
-  components: any[];
+  protected components: any[];
   @Output() modelChange: EventEmitter<any> = new EventEmitter<any>();
   @Input() nodeId: string;
-  selectedComponents: any[];
+  protected selectedComponents: any[];
 
   constructor(
     private componentTypeService: ComponentTypeService,
@@ -36,15 +43,15 @@ export class ComponentSelectComponent {
     });
   }
 
-  getComponentTypeLabel(componentType: string): string {
+  protected getComponentTypeLabel(componentType: string): string {
     return this.componentTypeService.getComponentTypeLabel(componentType);
   }
 
-  getSelectedText(): string {
+  protected getSelectedText(): string {
     return $localize`Showing ${this.selectedComponents.length}/${this.components.length} items`;
   }
 
-  selectedComponentsChange(): void {
+  protected selectedComponentsChange(): void {
     const hiddenComponents = [];
     for (const component of this.components) {
       const id = component.id;

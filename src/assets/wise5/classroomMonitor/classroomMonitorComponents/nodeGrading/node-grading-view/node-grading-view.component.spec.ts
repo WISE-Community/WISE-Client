@@ -28,15 +28,12 @@ let testHelper: NodeGradingViewComponentTestHelper;
 describe('NodeGradingViewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ComponentSelectComponent,
-        NodeGradingViewComponent,
-        WorkgroupSelectAutocompleteComponent
-      ],
+      declarations: [NodeGradingViewComponent, WorkgroupSelectAutocompleteComponent],
       imports: [
         BrowserAnimationsModule,
         ClassroomMonitorTestingModule,
         CommonModule,
+        ComponentSelectComponent,
         ComponentTypeServiceModule,
         FlexLayoutModule,
         FormsModule,
