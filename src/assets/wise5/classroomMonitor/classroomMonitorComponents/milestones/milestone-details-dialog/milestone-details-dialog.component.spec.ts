@@ -26,31 +26,33 @@ describe('MilestoneDetailsDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
+      declarations: [
         MilestoneDetailsComponent,
         MilestoneDetailsDialogComponent,
-        NavItemProgressComponent,
         SelectPeriodComponent
-    ],
-    imports: [ClassroomMonitorTestingModule,
+      ],
+      imports: [
+        ClassroomMonitorTestingModule,
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
         MatListModule,
         MatProgressBarModule,
         MatSelectModule,
-        MatTooltipModule],
-    providers: [
+        MatTooltipModule,
+        NavItemProgressComponent
+      ],
+      providers: [
         {
-            provide: MAT_DIALOG_DATA,
-            useValue: { id: 1, items: [], name: milestoneName, workgroups: [] }
+          provide: MAT_DIALOG_DATA,
+          useValue: { id: 1, items: [], name: milestoneName, workgroups: [] }
         },
         { provide: MatDialogRef, useValue: {} },
         WorkgroupService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MilestoneDetailsDialogComponent);
     component = fixture.componentInstance;
