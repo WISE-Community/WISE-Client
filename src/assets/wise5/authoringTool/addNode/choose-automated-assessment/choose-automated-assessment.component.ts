@@ -1,12 +1,31 @@
 import { Component } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  selector: 'choose-automated-assessment',
-  templateUrl: './choose-automated-assessment.component.html',
-  styleUrls: ['./choose-automated-assessment.component.scss', '../../add-content.scss']
+  imports: [
+    CommonModule,
+    FormsModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatRadioModule,
+    MatTooltipModule,
+    RouterModule
+  ],
+  standalone: true,
+  styleUrls: ['./choose-automated-assessment.component.scss', '../../add-content.scss'],
+  templateUrl: './choose-automated-assessment.component.html'
 })
 export class ChooseAutomatedAssessmentComponent {
   private importProjectId: number;
@@ -37,7 +56,8 @@ export class ChooseAutomatedAssessmentComponent {
         })
         .sort((a: any, b: any) => {
           return a.order - b.order;
-        });
+        })
+        .slice(1); // remove root node from consideration
     });
   }
 
