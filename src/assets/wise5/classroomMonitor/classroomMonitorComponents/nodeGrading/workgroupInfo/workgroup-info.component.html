@@ -4,11 +4,10 @@
     {{ usernames }}
     <span class="md-caption text-secondary more" i18n>(Team {{ workgroupId }})</span>
   </div>
-  <status-icon
-    *ngIf="hasAlert"
-    [tooltip]="alertLabel"
-    [name]="alertIconName"
-    [class]="alertIconClass"
-  />
-  <span *ngIf="hasNewWork" class="badge badge--info animate-fade" i18n>New</span>
+  @if (hasAlert) {
+    <status-icon [tooltip]="alertLabel" [name]="alertIconName" [class]="alertIconClass" />
+  }
+  @if (hasNewWork) {
+    <span class="badge badge--info animate-fade" i18n>New</span>
+  }
 </div>
