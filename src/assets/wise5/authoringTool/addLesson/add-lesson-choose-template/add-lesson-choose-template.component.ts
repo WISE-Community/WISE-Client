@@ -1,8 +1,23 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'add-lesson-choose-template',
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
+    MatIconModule,
+    RouterModule
+  ],
+  standalone: true,
   styleUrls: ['./add-lesson-choose-template.component.scss', '../../add-content.scss'],
   templateUrl: './add-lesson-choose-template.component.html'
 })
@@ -35,7 +50,10 @@ export class AddLessonChooseTemplateComponent {
     }
   ];
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   protected chooseTemplate(template: any): void {
     this.router.navigate([...template.route.split('/')], {
