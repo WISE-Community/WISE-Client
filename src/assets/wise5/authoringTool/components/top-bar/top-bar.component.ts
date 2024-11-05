@@ -11,26 +11,45 @@ import { Language } from '../../../../../app/domain/language';
 import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { NotifyAuthorService } from '../../../services/notifyAuthorService';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
+import { ProjectLanguageChooserComponent } from '../../../../../app/common/project-language-chooser/project-language-chooser.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    ProjectLanguageChooserComponent
+  ],
   selector: 'at-top-bar',
-  templateUrl: './top-bar.component.html',
-  styleUrls: ['./top-bar.component.scss']
+  standalone: true,
+  styleUrl: './top-bar.component.scss',
+  templateUrl: './top-bar.component.html'
 })
 export class TopBarComponent implements OnInit {
-  avatarColor: any;
-  contextPath: string;
+  protected avatarColor: any;
+  protected contextPath: string;
   protected hasTranslations: boolean;
   @Input() logoPath: string;
   @Input() projectId: number;
-  projectInfo: string;
+  protected projectInfo: string;
   protected projectLocale: ProjectLocale;
   @Input() projectTitle: string;
   @Input() runId: number;
   @Input() runCode: string;
   private subscriptions = new Subscription();
-  userInfo: any;
-  workgroupId: number;
+  protected userInfo: any;
+  protected workgroupId: number;
 
   constructor(
     private configService: ConfigService,
@@ -63,7 +82,7 @@ export class TopBarComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     if (this.projectId) {
       this.projectInfo = this.getProjectInfo();
       this.updateTranslationModel();
