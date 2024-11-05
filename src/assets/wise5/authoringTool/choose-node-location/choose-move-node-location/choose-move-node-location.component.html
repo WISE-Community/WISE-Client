@@ -3,10 +3,7 @@
   <button mat-raised-button color="primary" routerLink=".." aria-label="Cancel" i18n>Cancel</button>
 </div>
 <div style="margin-top: 20px; margin-left: 20px">
-  <insert-node-inside-button
-    *ngIf="moveGroup"
-    (insertEvent)="insert('group0', false)"
-  ></insert-node-inside-button>
+  <insert-node-inside-button *ngIf="moveGroup" (insertEvent)="insert('group0', false)" />
   <div *ngFor="let nodeId of nodeIds">
     <div
       id="{{ nodeId }}"
@@ -22,7 +19,7 @@
         <insert-node-inside-button
           *ngIf="isGroupNode(nodeId) && !moveGroup"
           (insertEvent)="insert(nodeId, false)"
-        ></insert-node-inside-button>
+        />
         <insert-node-after-button
           *ngIf="!isGroupNode(nodeId) || (isGroupNode(nodeId) && moveGroup)"
           [disabled]="!canInsertAfter(nodeId)"
@@ -33,10 +30,7 @@
   </div>
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
     <h6 class="unused-header" i18n>Unused Lessons</h6>
-    <insert-node-inside-button
-      *ngIf="moveGroup"
-      (insertEvent)="insert('inactiveGroups', false)"
-    ></insert-node-inside-button>
+    <insert-node-inside-button *ngIf="moveGroup" (insertEvent)="insert('inactiveGroups', false)" />
   </div>
   <div *ngIf="inactiveGroupNodes.length == 0" i18n>There are no Unused Lessons</div>
   <ng-container *ngFor="let inactiveNode of inactiveGroupNodes">
@@ -45,7 +39,7 @@
       <insert-node-inside-button
         *ngIf="!moveGroup"
         (insertEvent)="insert(inactiveNode.id, false)"
-      ></insert-node-inside-button>
+      />
       <insert-node-after-button
         *ngIf="moveGroup"
         [disabled]="!canInsertAfter(inactiveNode.id)"
@@ -74,9 +68,7 @@
   <div *ngIf="!moveGroup">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
       <h6 class="unused-header" i18n>Unused Steps</h6>
-      <insert-node-inside-button
-        (insertEvent)="insert('inactiveNodes', false)"
-      ></insert-node-inside-button>
+      <insert-node-inside-button (insertEvent)="insert('inactiveNodes', false)" />
     </div>
     <div *ngIf="inactiveStepNodes.length == 0" i18n>There are no Unused Steps</div>
     <ng-container *ngFor="let inactiveNode of inactiveStepNodes">
