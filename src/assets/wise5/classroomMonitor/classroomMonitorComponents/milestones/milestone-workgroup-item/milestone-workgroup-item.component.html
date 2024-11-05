@@ -22,7 +22,7 @@
           [hasNewAlert]="hasNewAlert"
           [usernames]="workgroupData.displayNames"
           [workgroupId]="workgroupId"
-        ></workgroup-info>
+        />
       </div>
       <div *ngIf="locations.length == 1" fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
         <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass" />

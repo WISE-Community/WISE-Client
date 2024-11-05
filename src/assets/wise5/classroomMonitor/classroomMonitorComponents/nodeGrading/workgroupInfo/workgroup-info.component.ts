@@ -1,36 +1,28 @@
-'use strict';
-
 import { Component, Input } from '@angular/core';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { StatusIconComponent } from '../../../../../../app/classroom-monitor/status-icon/status-icon.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
+  imports: [CommonModule, FlexLayoutModule, MatIconModule, StatusIconComponent],
   selector: 'workgroup-info',
+  standalone: true,
   templateUrl: 'workgroup-info.component.html'
 })
 export class WorkgroupInfoComponent {
-  alertIconClass: string;
-  alertIconName: string;
-  alertLabel: string;
-  avatarColor: any;
+  protected alertIconClass: string;
+  protected alertIconName: string;
+  protected alertLabel: string;
+  protected avatarColor: string;
+  @Input() hasAlert: boolean;
+  @Input() hasNewAlert: boolean;
+  @Input() hasNewWork: boolean;
+  @Input() usernames: string;
+  @Input() workgroupId: number;
 
-  @Input()
-  hasAlert: boolean;
-
-  @Input()
-  hasNewAlert: boolean;
-
-  @Input()
-  hasNewWork: boolean;
-
-  @Input()
-  usernames: string;
-
-  @Input()
-  workgroupId: number;
-
-  constructor() {}
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.avatarColor = getAvatarColorForWorkgroupId(this.workgroupId);
     this.alertIconClass = this.hasNewAlert ? 'warn' : 'text-disabled';
     this.alertIconName = 'notifications';
