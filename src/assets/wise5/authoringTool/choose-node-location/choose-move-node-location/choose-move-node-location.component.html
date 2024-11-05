@@ -27,7 +27,7 @@
           *ngIf="!isGroupNode(nodeId) || (isGroupNode(nodeId) && moveGroup)"
           [disabled]="!canInsertAfter(nodeId)"
           (insertEvent)="insert(nodeId, true)"
-        ></insert-node-after-button>
+        />
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
         *ngIf="moveGroup"
         [disabled]="!canInsertAfter(inactiveNode.id)"
         (insertEvent)="insert(inactiveNode.id, true)"
-      ></insert-node-after-button>
+      />
     </div>
     <ng-container *ngFor="let inactiveChildId of inactiveNode.ids">
       <div *ngIf="!moveGroup">
