@@ -24,6 +24,7 @@ import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress
     NavItemProgressComponent,
     StatusIconComponent,
     StudentTeacherCommonModule,
+    WorkgroupInfoComponent,
     WorkgroupNodeScoreComponent,
     WorkgroupNodeStatusComponent
   ],
@@ -31,7 +32,6 @@ import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress
     EditComponentAnnotationsComponent,
     EditComponentCommentComponent,
     WorkgroupComponentGradingComponent,
-    WorkgroupInfoComponent,
     WorkgroupItemComponent,
     WorkgroupSelectAutocompleteComponent
   ],
