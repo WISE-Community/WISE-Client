@@ -1,18 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { Router, RouterModule } from '@angular/router';
 import { scrollToTopOfPage, temporarilyHighlightElement } from '../../common/dom/dom';
 import { ConfigService } from '../../services/configService';
 import { CopyProjectService } from '../../services/copyProjectService';
-import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { SessionService } from '../../services/sessionService';
-import { Router } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'project-list-authoring',
-  styleUrls: ['./project-list.component.scss'],
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatTooltipModule,
+    RouterModule
+  ],
+  standalone: true,
+  styleUrl: './project-list.component.scss',
   templateUrl: './project-list.component.html'
 })
-export class ProjectListComponent implements OnInit {
+export class ProjectListComponent implements OnInit, OnDestroy {
   protected projects: any[] = [];
   protected sharedProjects: any[] = [];
 

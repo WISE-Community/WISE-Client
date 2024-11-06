@@ -53,29 +53,29 @@
         >
         <div style="width: 750px">
           <h3 i18n>My Units</h3>
-          <div *ngIf="projects.length == 0" i18n>You have no units</div>
-          <div
-            *ngFor="let project of projects"
-            id="{{ project.id }}"
-            class="projectItem"
-            fxLayout="row"
-          >
-            <ng-template
-              *ngTemplateOutlet="projectTemplate; context: { project: project }"
-            ></ng-template>
-          </div>
+          @if (projects.length == 0) {
+            <div i18n>You have no units</div>
+          } @else {
+            @for (project of projects; track project.id) {
+              <div id="{{ project.id }}" class="projectItem" fxLayout="row">
+                <ng-template
+                  *ngTemplateOutlet="projectTemplate; context: { project: project }"
+                ></ng-template>
+              </div>
+            }
+          }
           <h3 i18n>Shared Units</h3>
-          <div *ngIf="sharedProjects.length == 0" i18n>You have no shared units</div>
-          <div
-            *ngFor="let project of sharedProjects"
-            id="{{ project.id }}"
-            class="projectItem"
-            fxLayout="row"
-          >
-            <ng-template
-              *ngTemplateOutlet="projectTemplate; context: { project: project }"
-            ></ng-template>
-          </div>
+          @if (sharedProjects.length == 0) {
+            <div i18n>You have no shared units</div>
+          } @else {
+            @for (project of sharedProjects; track project.id) {
+              <div id="{{ project.id }}" class="projectItem" fxLayout="row">
+                <ng-template
+                  *ngTemplateOutlet="projectTemplate; context: { project: project }"
+                ></ng-template>
+              </div>
+            }
+          }
         </div>
       </div>
     </div>
