@@ -18,11 +18,11 @@
         <insert-node-inside-button
           *ngIf="isGroupNode(nodeId)"
           (insertEvent)="insert(nodeId, false)"
-        ></insert-node-inside-button>
+        />
         <insert-node-after-button
           *ngIf="!isGroupNode(nodeId)"
           (insertEvent)="insert(nodeId, true)"
-        ></insert-node-after-button>
+        />
       </div>
     </div>
   </div>
@@ -31,9 +31,7 @@
   <ng-container *ngFor="let inactiveNode of inactiveGroupNodes">
     <div fxLayout="row" fxLayoutAlign="start center" class="lesson-header" fxLayoutGap="10px">
       <node-icon-and-title [nodeId]="inactiveNode.id" />
-      <insert-node-inside-button
-        (insertEvent)="insert(inactiveNode.id, false)"
-      ></insert-node-inside-button>
+      <insert-node-inside-button (insertEvent)="insert(inactiveNode.id, false)" />
     </div>
     <ng-container *ngFor="let inactiveChildId of inactiveNode.ids">
       <div
@@ -53,9 +51,7 @@
   </ng-container>
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
     <h6 class="unused-header" i18n>Unused Steps</h6>
-    <insert-node-inside-button
-      (insertEvent)="insert('inactiveNodes', false)"
-    ></insert-node-inside-button>
+    <insert-node-inside-button (insertEvent)="insert('inactiveNodes', false)" />
   </div>
   <div *ngIf="inactiveStepNodes.length == 0" i18n>There are no Unused Steps</div>
   <ng-container *ngFor="let inactiveNode of inactiveStepNodes">
