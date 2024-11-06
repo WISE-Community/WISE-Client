@@ -48,7 +48,6 @@ import { AddLessonChooseTemplateComponent } from '../../assets/wise5/authoringTo
 import { EditNodeTitleComponent } from '../../assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component';
 import { EditProjectLanguageSettingComponent } from '../../assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component';
 import { AddComponentButtonComponent } from '../../assets/wise5/authoringTool/node/add-component-button/add-component-button.component';
-import { ProjectLanguageChooserComponent } from '../common/project-language-chooser/project-language-chooser.component';
 import { CopyComponentButtonComponent } from '../../assets/wise5/authoringTool/node/copy-component-button/copy-component-button.component';
 import { ProjectAuthoringLessonComponent } from '../../assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component';
 import { ProjectAuthoringStepComponent } from '../../assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component';
@@ -86,9 +85,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ProjectAuthoringLessonComponent,
     ProjectAuthoringStepComponent,
     RecoveryAuthoringComponent,
-    RubricAuthoringComponent,
-    TopBarComponent,
-    ProjectListComponent
+    RubricAuthoringComponent
   ],
   imports: [
     AddComponentButtonComponent,
@@ -121,11 +118,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
     NodeIconAndTitleComponent,
     PreviewComponentButtonComponent,
     ProjectAssetAuthoringModule,
-    ProjectLanguageChooserComponent,
+    ProjectListComponent,
     RouterModule,
     StructureAuthoringModule,
     StudentTeacherCommonModule,
     TeacherNodeIconComponent,
+    TopBarComponent,
     TranslatableInputComponent,
     TranslatableRichTextEditorComponent,
     TranslatableTextareaComponent,
