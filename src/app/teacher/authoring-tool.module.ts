@@ -87,8 +87,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ProjectAuthoringLessonComponent,
     ProjectAuthoringStepComponent,
     RecoveryAuthoringComponent,
-    RubricAuthoringComponent,
-    ProjectListComponent
+    RubricAuthoringComponent
   ],
   imports: [
     AddComponentButtonComponent,
@@ -119,6 +118,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     NodeIconAndTitleComponent,
     PreviewComponentButtonComponent,
     ProjectAssetAuthoringModule,
+    ProjectListComponent,
     RouterModule,
     StructureAuthoringModule,
     StudentTeacherCommonModule,
