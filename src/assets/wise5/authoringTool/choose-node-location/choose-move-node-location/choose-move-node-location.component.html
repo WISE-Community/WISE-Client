@@ -60,7 +60,7 @@
             [disabled]="!canInsertAfter(inactiveChildId)"
             (insertEvent)="insert(inactiveChildId, true)"
             [nodeId]="inactiveChildId"
-          ></node-with-move-after-button>
+          />
         </div>
       </div>
     </ng-container>
@@ -77,7 +77,7 @@
           [disabled]="!canInsertAfter(inactiveNode.id)"
           (insertEvent)="insert(inactiveNode.id, true)"
           [nodeId]="inactiveNode.id"
-        ></node-with-move-after-button>
+        />
       </div>
     </ng-container>
   </div>
