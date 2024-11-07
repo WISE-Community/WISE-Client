@@ -50,19 +50,11 @@ export class TeacherProjectService extends ProjectService {
    * @param projectId retrieve the project JSON with this id
    * @return a promise to return the project JSON
    */
-  retrieveProjectById(projectId: number): any {
-    return this.http
-      .get(`/api/author/config/${projectId}`)
-      .toPromise()
-      .then((configJSON: any) => {
-        return this.http
-          .get(configJSON.projectURL)
-          .toPromise()
-          .then((projectJSON: any) => {
-            projectJSON.previewProjectURL = configJSON.previewProjectURL;
-            return projectJSON;
-          });
-      });
+  async retrieveProjectById(projectId: number): Promise<any> {
+    const configJSON: any = await this.http.get(`/api/author/config/${projectId}`).toPromise();
+    const projectJSON: any = await this.http.get(configJSON.projectURL).toPromise();
+    projectJSON.previewProjectURL = configJSON.previewProjectURL;
+    return projectJSON;
   }
 
   /**
