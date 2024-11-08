@@ -1,13 +1,31 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { CopyNodesService } from '../../../services/copyNodesService';
 import { ChooseNodeLocationComponent } from '../choose-node-location.component';
 import { CopyTranslationsService } from '../../../services/copyTranslationsService';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { InsertNodeAfterButtonComponent } from '../insert-node-after-button/insert-node-after-button.component';
+import { InsertNodeInsideButtonComponent } from '../insert-node-inside-button/insert-node-inside-button.component';
+import { NodeIconAndTitleComponent } from '../node-icon-and-title/node-icon-and-title.component';
+import { NodeWithMoveAfterButtonComponent } from '../node-with-move-after-button/node-with-move-after-button.component';
 
 @Component({
-  templateUrl: 'choose-copy-node-location.component.html',
-  styleUrls: ['../choose-node-location.component.scss']
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    InsertNodeAfterButtonComponent,
+    InsertNodeInsideButtonComponent,
+    MatButtonModule,
+    NodeIconAndTitleComponent,
+    NodeWithMoveAfterButtonComponent,
+    RouterLink
+  ],
+  standalone: true,
+  styleUrl: '../choose-node-location.component.scss',
+  templateUrl: 'choose-copy-node-location.component.html'
 })
 export class ChooseCopyNodeLocationComponent extends ChooseNodeLocationComponent {
   constructor(

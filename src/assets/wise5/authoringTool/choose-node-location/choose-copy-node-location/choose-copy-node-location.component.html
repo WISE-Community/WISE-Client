@@ -3,7 +3,7 @@
   <button mat-raised-button color="primary" routerLink=".." aria-label="Cancel" i18n>Cancel</button>
 </div>
 <div style="margin-top: 20px; margin-left: 20px">
-  <div *ngFor="let nodeId of nodeIds">
+  @for (nodeId of nodeIds; track nodeId) {
     <div
       id="{{ nodeId }}"
       [ngClass]="{
@@ -15,51 +15,56 @@
     >
       <div fxLayout="row" fxLayoutGap="8px">
         <node-icon-and-title [nodeId]="nodeId" [showPosition]="true" />
-        <insert-node-inside-button
-          *ngIf="isGroupNode(nodeId)"
-          (insertEvent)="insert(nodeId, false)"
-        />
-        <insert-node-after-button
-          *ngIf="!isGroupNode(nodeId)"
-          (insertEvent)="insert(nodeId, true)"
-        />
+        @if (isGroupNode(nodeId)) {
+          <insert-node-inside-button (insertEvent)="insert(nodeId, false)" />
+        } @else {
+          <insert-node-after-button (insertEvent)="insert(nodeId, true)" />
+        }
       </div>
     </div>
-  </div>
+  }
   <h6 class="unused-header" i18n>Unused Lessons</h6>
-  <div *ngIf="inactiveGroupNodes.length == 0" i18n>There are no Unused Lessons</div>
-  <ng-container *ngFor="let inactiveNode of inactiveGroupNodes">
-    <div fxLayout="row" fxLayoutAlign="start center" class="lesson-header" fxLayoutGap="10px">
-      <node-icon-and-title [nodeId]="inactiveNode.id" />
-      <insert-node-inside-button (insertEvent)="insert(inactiveNode.id, false)" />
-    </div>
-    <ng-container *ngFor="let inactiveChildId of inactiveNode.ids">
-      <div
-        fxLayout="row"
-        class="step-header"
-        [ngClass]="{
-          'branch-path-step-header': isNodeInAnyBranchPath(inactiveChildId)
-        }"
-        [ngStyle]="{ 'background-color': getBackgroundColor(inactiveChildId) }"
-      >
-        <node-with-move-after-button
-          (insertEvent)="insert(inactiveChildId, true)"
-          [nodeId]="inactiveChildId"
-        />
+  @if (inactiveGroupNodes.length == 0) {
+    <div i18n>There are no Unused Lessons</div>
+  } @else {
+    @for (inactiveNode of inactiveGroupNodes; track inactiveNode.id) {
+      <div fxLayout="row" fxLayoutAlign="start center" class="lesson-header" fxLayoutGap="10px">
+        <node-icon-and-title [nodeId]="inactiveNode.id" />
+        <insert-node-inside-button (insertEvent)="insert(inactiveNode.id, false)" />
       </div>
-    </ng-container>
-  </ng-container>
+      @for (inactiveChildId of inactiveNode.ids; track inactiveChildId) {
+        <div
+          fxLayout="row"
+          class="step-header"
+          [ngClass]="{
+            'branch-path-step-header': isNodeInAnyBranchPath(inactiveChildId)
+          }"
+          [ngStyle]="{ 'background-color': getBackgroundColor(inactiveChildId) }"
+        >
+          <node-with-move-after-button
+            (insertEvent)="insert(inactiveChildId, true)"
+            [nodeId]="inactiveChildId"
+          />
+        </div>
+      }
+    }
+  }
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
     <h6 class="unused-header" i18n>Unused Steps</h6>
     <insert-node-inside-button (insertEvent)="insert('inactiveNodes', false)" />
   </div>
-  <div *ngIf="inactiveStepNodes.length == 0" i18n>There are no Unused Steps</div>
-  <ng-container *ngFor="let inactiveNode of inactiveStepNodes">
-    <div *ngIf="getParentGroup(inactiveNode.id) == null" class="step-header">
-      <node-with-move-after-button
-        (insertEvent)="insert(inactiveNode.id, true)"
-        [nodeId]="inactiveNode.id"
-      />
-    </div>
-  </ng-container>
+  @if (inactiveStepNodes.length == 0) {
+    <div i18n>There are no Unused Steps</div>
+  } @else {
+    @for (inactiveNode of inactiveStepNodes; track inactiveNode.id) {
+      @if (getParentGroup(inactiveNode.id) == null) {
+        <div class="step-header">
+          <node-with-move-after-button
+            (insertEvent)="insert(inactiveNode.id, true)"
+            [nodeId]="inactiveNode.id"
+          />
+        </div>
+      }
+    }
+  }
 </div>

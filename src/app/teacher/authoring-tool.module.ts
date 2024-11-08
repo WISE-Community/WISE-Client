@@ -66,7 +66,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
   declarations: [
     AdvancedProjectAuthoringComponent,
     AuthoringToolComponent,
-    ChooseCopyNodeLocationComponent,
     ChooseImportStepComponent,
     ChooseImportUnitComponent,
     ChooseMoveNodeLocationComponent,
@@ -96,6 +95,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     AuthoringToolBarComponent,
     ChooseAutomatedAssessmentComponent,
     ChooseComponentLocationComponent,
+    ChooseCopyNodeLocationComponent,
     ChooseNewNodeTemplateComponent,
     ChooseNewComponent,
     ChooseSimulationComponent,
