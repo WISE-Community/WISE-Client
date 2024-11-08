@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
@@ -6,9 +11,18 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Node } from '../../../common/Node';
 import { Router } from '@angular/router';
 import { CopyTranslationsService } from '../../../services/copyTranslationsService';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  selector: 'choose-component-location',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    RouterModule
+  ],
   templateUrl: 'choose-component-location.component.html'
 })
 export class ChooseComponentLocationComponent {

@@ -1,4 +1,3 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ChooseComponentLocationComponent } from './choose-component-location.component';
 import { ComponentTypeService } from '../../../services/componentTypeService';
@@ -35,13 +34,10 @@ class MockTeacherDataService {
 }
 
 class MockComponentTypeService {}
-
 let component: ChooseComponentLocationComponent;
-
 describe('ChooseComponentLocationComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [],
       providers: [
         ChooseComponentLocationComponent,
         { provide: ComponentTypeService, useClass: MockComponentTypeService },
@@ -49,8 +45,7 @@ describe('ChooseComponentLocationComponent', () => {
         CopyTranslationsService,
         { provide: TeacherProjectService, useClass: MockProjectService },
         { provide: TeacherDataService, useClass: MockTeacherDataService },
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        provideHttpClient(withInterceptorsFromDi())
       ]
     });
     component = TestBed.inject(ChooseComponentLocationComponent);
