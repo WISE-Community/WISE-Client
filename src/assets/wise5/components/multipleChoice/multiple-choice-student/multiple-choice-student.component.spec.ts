@@ -1,18 +1,11 @@
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatRadioModule } from '@angular/material/radio';
-import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { copy } from '../../../common/object/object';
-import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ProjectService } from '../../../services/projectService';
 import { MultipleChoiceComponent } from '../MultipleChoiceComponent';
 import { MultipleChoiceStudent } from './multiple-choice-student.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const choiceId1 = 'choice1';
@@ -109,18 +102,9 @@ function createComponent(choiceType: string, choices: any[]): any {
 describe('MultipleChoiceStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [MultipleChoiceStudent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
-        BrowserModule,
-        ComponentHeaderComponent,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatRadioModule,
-        ReactiveFormsModule,
-        StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [BrowserAnimationsModule, MultipleChoiceStudent, StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     fixture = TestBed.createComponent(MultipleChoiceStudent);
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     component = fixture.componentInstance;

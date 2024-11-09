@@ -1,6 +1,8 @@
-'use strict';
-
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -15,11 +17,24 @@ import { MultipleChoiceService } from '../multipleChoiceService';
 import { MultipleChoiceContent } from '../MultipleChoiceContent';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
 import { copy } from '../../../common/object/object';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 
 @Component({
+  imports: [
+    CommonModule,
+    ComponentAnnotationsComponent,
+    ComponentHeaderComponent,
+    ComponentSaveSubmitButtonsComponent,
+    FormsModule,
+    MatCheckboxModule,
+    MatRadioModule
+  ],
   selector: 'multiple-choice-student',
-  templateUrl: 'multiple-choice-student.component.html',
-  styleUrls: ['multiple-choice-student.component.scss']
+  standalone: true,
+  styleUrl: 'multiple-choice-student.component.scss',
+  templateUrl: 'multiple-choice-student.component.html'
 })
 export class MultipleChoiceStudent extends ComponentStudent {
   choices: any[];
