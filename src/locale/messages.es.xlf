@@ -1238,7 +1238,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
@@ -1530,7 +1530,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
@@ -10106,7 +10106,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/chooseComponentLocation/choose-component-location.component.html</context>
-          <context context-type="linenumber">49,51</context>
+          <context context-type="linenumber">48,50</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component.html</context>
@@ -10166,7 +10166,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">28</context>
         </context-group>
         <target state="translated">Herramienta de Autor</target>
       </trans-unit>
@@ -11136,11 +11136,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Unused Lessons</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">26</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
@@ -11152,11 +11152,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>There are no Unused Lessons</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">28</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <target state="translated">No hay lecciones sin usar</target>
       </trans-unit>
@@ -11164,11 +11164,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Unused Steps</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">70</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
@@ -11180,11 +11180,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>There are no Unused Steps</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component.html</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component.html</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <target state="translated">No hay pasos sin usar</target>
       </trans-unit>
@@ -11378,7 +11378,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Switch to Grading View</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <target state="translated">Cambiar a Vista de Calificación</target>
       </trans-unit>
@@ -11386,7 +11386,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Language to translate</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <target state="needs-translation">Language to translate</target>
       </trans-unit>
@@ -11394,7 +11394,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> Help </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">55,57</context>
+          <context context-type="linenumber">64,66</context>
         </context-group>
         <target state="translated"> Ayuda </target>
       </trans-unit>
@@ -11402,7 +11402,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>User Menu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
@@ -11414,7 +11414,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> Go Home </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">85,87</context>
+          <context context-type="linenumber">94,96</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
@@ -11426,7 +11426,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> Sign Out </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">89,91</context>
+          <context context-type="linenumber">98,100</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
@@ -11438,7 +11438,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>ID: <x id="PH" equiv-text="this.projectId"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">95</context>
         </context-group>
         <target state="translated">ID: <x id="PH" equiv-text="this.projectId"/></target>
       </trans-unit>
@@ -11446,7 +11446,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Run ID: <x id="PH" equiv-text="this.runId"/> | Access Code: <x id="PH_1" equiv-text="this.runCode"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">97</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.ts</context>
@@ -13324,7 +13324,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Insert After</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/chooseComponentLocation/choose-component-location.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <target state="translated">Insertar después</target>
       </trans-unit>
@@ -14304,7 +14304,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>You have no units</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <target state="translated">No tienes unidades</target>
       </trans-unit>
@@ -14320,7 +14320,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>You have no shared units</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <target state="translated">No tienes unidades compartidas</target>
       </trans-unit>
@@ -14328,7 +14328,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Copying Unit...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <target state="translated">Copiando unidad...</target>
       </trans-unit>
@@ -14336,7 +14336,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>There was an error copying this unit. Please contact WISE staff.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <target state="translated">Se ha producido un error al crear esta unidad. Por favor, contacte con el personal WISE.</target>
       </trans-unit>
@@ -14344,7 +14344,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source> (Run ID: <x id="PH" equiv-text="project.runId"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">78</context>
         </context-group>
         <target state="translated"> (Ejecutar ID: <x id="PH" equiv-text="project.runId"/>)</target>
       </trans-unit>
@@ -14354,7 +14354,7 @@ The branches will be removed but the steps will remain in the unit.</target>
 <x id="PH" equiv-text="projectInfo"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">80</context>
         </context-group>
         <target state="translated">¿Seguro que quiere copiar esta unidad?</target>
       </trans-unit>
@@ -14362,7 +14362,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Loading Unit...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">103</context>
         </context-group>
         <target state="translated">Cargando unidad...</target>
       </trans-unit>
@@ -21874,6 +21874,10 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
           <context context-type="linenumber">52</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
         <target state="translated">Correcto</target>
       </trans-unit>
       <trans-unit id="8b42d54000704393a3c06e5f8b668880014f6986" datatype="html">
@@ -21885,6 +21889,10 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
           <context context-type="linenumber">53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <target state="translated">Incorrecto</target>
       </trans-unit>
@@ -21944,10 +21952,6 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
           <context context-type="linenumber">15,17</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">87,89</context>
-        </context-group>
         <target state="translated"> Correcto </target>
       </trans-unit>
       <trans-unit id="d4d6f1510d16638d79a0e793a0ac8a11b2231a8f" datatype="html">
@@ -21955,10 +21959,6 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
           <context context-type="linenumber">22,24</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">100,102</context>
         </context-group>
         <target state="translated"> Incorrecto </target>
       </trans-unit>
@@ -22127,21 +22127,13 @@ Advertencia: Esto eliminará todas las opciones existentes en este componente.</
         </context-group>
         <target state="translated"> Ha utilizado <x id="INTERPOLATION" equiv-text="{{ componentState.studentData.submitCounter }}"/> de <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> intento(s) </target>
       </trans-unit>
-      <trans-unit id="b3057aaacad80ab45d3ee394bad642b92911d122" datatype="html">
-        <source> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempt </source>
+      <trans-unit id="dbc49f731fa8be621ff6b95f144a8a05c18e0dc9" datatype="html">
+        <source> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> <x id="INTERPOLATION_2" equiv-text="{{ componentContent.maxSubmitCount === 1 ? &apos;attempt&apos; : &apos;attempts&apos; }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">60,62</context>
+          <context context-type="linenumber">56,59</context>
         </context-group>
-        <target state="translated"> Ha usado <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> intento </target>
-      </trans-unit>
-      <trans-unit id="305089568f85e84d60510cb5b6c271a953033049" datatype="html">
-        <source> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempts </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">71,73</context>
-        </context-group>
-        <target state="translated"> Utilizaste <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> de <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> intentos </target>
+        <target state="needs-translation"> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> <x id="INTERPOLATION_2" equiv-text="{{ componentContent.maxSubmitCount === 1 ? 'attempt' : 'attempts' }}"/> </target>
       </trans-unit>
       <trans-unit id="7864549548500976713" datatype="html">
         <source>Students type a response to a question or prompt.</source>
