@@ -4,8 +4,7 @@ import { StudentComponentModule } from '../../../../../app/student/student.compo
 import { MultipleChoiceStudent } from './multiple-choice-student.component';
 
 @NgModule({
-  declarations: [MultipleChoiceStudent],
-  imports: [StudentTeacherCommonModule, StudentComponentModule],
+  imports: [MultipleChoiceStudent, StudentTeacherCommonModule, StudentComponentModule],
   exports: [MultipleChoiceStudent]
 })
 export class MultipleChoiceStudentModule {}
