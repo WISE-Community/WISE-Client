@@ -1,20 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MultipleChoiceAuthoring } from './multiple-choice-authoring.component';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MultipleChoiceAuthoringHarness } from './multiple-choice-authoring.harness';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { ComponentAuthoringModule } from '../../component-authoring.module';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
@@ -30,26 +21,18 @@ let teacherProjectService: TeacherProjectService;
 describe('MultipleChoiceAuthoringComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MultipleChoiceAuthoring],
+      declarations: [],
       imports: [
         BrowserAnimationsModule,
         ComponentAuthoringModule,
-        EditComponentPrompt,
-        FormsModule,
-        MatDialogModule,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatRadioModule,
+        MultipleChoiceAuthoring,
         StudentTeacherCommonServicesModule
       ],
       providers: [
         ProjectAssetService,
         TeacherNodeService,
         TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        provideHttpClient(withInterceptorsFromDi())
       ]
     });
   }));
