@@ -1,0 +1,24 @@
+<mat-radio-group [(ngModel)]="studentChoices" (ngModelChange)="studentChoicesChange.emit($event)">
+  @for (choice of choices; track choice.id) {
+    <div>
+      <mat-radio-button
+        [attr.aria-label]="choice.text"
+        color="primary"
+        [value]="choice.id"
+        [disabled]="isDisabled"
+      >
+        <span [innerHTML]="choice.text"></span>&nbsp;
+        @if (showFeedback && choice.showFeedback) {
+          <span
+            [ngClass]="{
+              success: componentHasCorrectAnswer && choice.isCorrect,
+              warn: componentHasCorrectAnswer && !choice.isCorrect,
+              info: !componentHasCorrectAnswer
+            }"
+            >{{ choice.feedbackToShow }}</span
+          >
+        }
+      </mat-radio-button>
+    </div>
+  }
+</mat-radio-group>
