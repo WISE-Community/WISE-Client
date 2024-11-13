@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { CommonModule } from '@angular/common';
 import { copy } from '../../../common/object/object';
-import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { MultipleChoiceComponent } from '../MultipleChoiceComponent';
 
 @Component({
+  imports: [CommonModule, FormsModule, MatCheckboxModule, MatRadioModule],
   selector: 'multiple-choice-show-work',
-  templateUrl: 'multiple-choice-show-work.component.html',
-  styleUrls: ['multiple-choice-show-work.component.scss']
+  standalone: true,
+  styleUrl: 'multiple-choice-show-work.component.scss',
+  templateUrl: 'multiple-choice-show-work.component.html'
 })
 export class MultipleChoiceShowWorkComponent extends ComponentShowWorkDirective {
   studentChoiceId: string = '';
@@ -17,10 +21,6 @@ export class MultipleChoiceShowWorkComponent extends ComponentShowWorkDirective 
   showFeedback: boolean = false;
   hasCorrectAnswer: boolean = false;
   isStudentAnswerCorrect: boolean = false;
-
-  constructor(protected nodeService: NodeService, protected projectService: ProjectService) {
-    super(nodeService, projectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

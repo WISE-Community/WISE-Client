@@ -10,10 +10,10 @@ import { EmbeddedShowWorkModule } from '../../embedded/embedded-show-work/embedd
 import { GraphShowWorkModule } from '../../graph/graph-show-work/graph-show-work.module';
 import { LabelShowWorkModule } from '../../label/label-show-work/label-show-work.module';
 import { MatchShowWorkModule } from '../../match/match-show-work/match-show-work-module';
-import { MultipleChoiceShowWorkModule } from '../../multipleChoice/multiple-choice-show-work/multiple-choice-show-work.module';
 import { OpenResponseShowWorkModule } from '../../openResponse/open-response-show-work/open-response-show-work.module';
 import { TableShowWorkModule } from '../../table/table-show-work/table-show-work.module';
 import { ShowWorkStudentComponent } from './show-work-student.component';
+import { MultipleChoiceShowWorkComponent } from '../../multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component';
 
 @NgModule({
   declarations: [ShowWorkStudentComponent],
@@ -29,7 +29,7 @@ import { ShowWorkStudentComponent } from './show-work-student.component';
     GraphShowWorkModule,
     LabelShowWorkModule,
     MatchShowWorkModule,
-    MultipleChoiceShowWorkModule,
+    MultipleChoiceShowWorkComponent,
     OpenResponseShowWorkModule,
     TableShowWorkModule
   ],
