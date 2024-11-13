@@ -1,54 +1,78 @@
-<ng-container *ngIf="componentState" [ngSwitch]="componentContent.choiceType">
-  <div *ngSwitchCase="'radio'" class="choices">
-    <mat-radio-group [(ngModel)]="studentChoiceId">
-      <div *ngFor="let choice of choices" class="choice">
-        <mat-radio-button color="primary" [value]="choice.id" [disabled]="true">
-          <span [innerHTML]="choice.text"> </span>
-          <span
-            *ngIf="
-              componentState.isSubmit &&
-              showFeedback &&
-              choice.feedback !== '' &&
-              choice.id === studentChoiceId
-            "
-            [ngClass]="{
-              success: hasCorrectAnswer && choice.isCorrect,
-              warn: hasCorrectAnswer && !choice.isCorrect,
-              info: !hasCorrectAnswer
-            }"
-          >
-            {{ choice.feedback }}
-          </span>
-        </mat-radio-button>
-      </div>
-    </mat-radio-group>
-  </div>
-  <div *ngSwitchCase="'checkbox'" class="choices">
-    <div *ngFor="let choice of choices" class="choice">
-      <mat-checkbox
-        color="primary"
-        aria-label="choice.text"
-        [(ngModel)]="choice.isSelected"
-        [disabled]="true"
-      >
-        <span [innerHTML]="choice.text"> </span>
-        <span
-          *ngIf="componentState.isSubmit && showFeedback && choice.isSelected"
-          [ngClass]="{
-            success: hasCorrectAnswer && choice.isCorrect,
-            warn: hasCorrectAnswer && !choice.isCorrect,
-            info: !hasCorrectAnswer
-          }"
-        >
-          {{ choice.feedback }}
-        </span>
-      </mat-checkbox>
+@if (componentState) {
+  @if (componentContent.choiceType == 'radio') {
+    <div class="choices">
+      <mat-radio-group [(ngModel)]="studentChoiceId">
+        @for (choice of choices; track choice.id) {
+          <div class="choice">
+            <mat-radio-button color="primary" [value]="choice.id" disabled="true">
+              <span [innerHTML]="choice.text"></span>
+              @if (
+                componentState.isSubmit &&
+                showFeedback &&
+                choice.feedback !== '' &&
+                choice.id === studentChoiceId
+              ) {
+                <span
+                  [class]="
+                    hasCorrectAnswer && choice.isCorrect
+                      ? 'success'
+                      : hasCorrectAnswer && !choice.isCorrect
+                        ? 'warn'
+                        : 'info'
+                  "
+                >
+                  {{ choice.feedback }}
+                </span>
+              }
+            </mat-radio-button>
+          </div>
+        }
+      </mat-radio-group>
     </div>
-  </div>
-  <div class="details" *ngIf="componentContent.maxSubmitCount != null" i18n>
-    You have used {{ componentState.studentData.submitCounter }} of
-    {{ componentContent.maxSubmitCount }} attempt(s)
-  </div>
-  <div *ngIf="hasCorrectAnswer && isStudentAnswerCorrect" class="success details" i18n>Correct</div>
-  <div *ngIf="hasCorrectAnswer && !isStudentAnswerCorrect" class="warn details" i18n>Incorrect</div>
-</ng-container>
+  }
+
+  @if (componentContent.choiceType == 'checkbox') {
+    <div class="choices">
+      @for (choice of choices; track choice.id) {
+        <div class="choice">
+          <mat-checkbox
+            color="primary"
+            aria-label="choice.text"
+            [(ngModel)]="choice.isSelected"
+            disabled="true"
+          >
+            <span [innerHTML]="choice.text"></span>
+            @if (componentState.isSubmit && showFeedback && choice.isSelected) {
+              <span
+                [class]="
+                  hasCorrectAnswer && choice.isCorrect
+                    ? 'success'
+                    : hasCorrectAnswer && !choice.isCorrect
+                      ? 'warn'
+                      : 'info'
+                "
+              >
+                {{ choice.feedback }}
+              </span>
+            }
+          </mat-checkbox>
+        </div>
+      }
+    </div>
+  }
+
+  @if (componentContent.maxSubmitCount != null) {
+    <div class="details" i18n>
+      You have used {{ componentState.studentData.submitCounter }} of
+      {{ componentContent.maxSubmitCount }} attempt(s)
+    </div>
+  }
+
+  @if (hasCorrectAnswer) {
+    @if (isStudentAnswerCorrect) {
+      <div class="success details" i18n>Correct</div>
+    } @else {
+      <div class="warn details" i18n>Incorrect</div>
+    }
+  }
+}

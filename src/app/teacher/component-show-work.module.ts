@@ -9,9 +9,9 @@ import { EmbeddedShowWorkModule } from '../../assets/wise5/components/embedded/e
 import { GraphShowWorkModule } from '../../assets/wise5/components/graph/graph-show-work/graph-show-work.module';
 import { LabelShowWorkModule } from '../../assets/wise5/components/label/label-show-work/label-show-work.module';
 import { MatchShowWorkModule } from '../../assets/wise5/components/match/match-show-work/match-show-work-module';
-import { MultipleChoiceShowWorkModule } from '../../assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.module';
 import { OpenResponseShowWorkModule } from '../../assets/wise5/components/openResponse/open-response-show-work/open-response-show-work.module';
 import { TableShowWorkModule } from '../../assets/wise5/components/table/table-show-work/table-show-work.module';
+import { MultipleChoiceShowWorkComponent } from '../../assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component';
 
 @NgModule({
   imports: [
@@ -25,7 +25,7 @@ import { TableShowWorkModule } from '../../assets/wise5/components/table/table-s
     GraphShowWorkModule,
     LabelShowWorkModule,
     MatchShowWorkModule,
-    MultipleChoiceShowWorkModule,
+    MultipleChoiceShowWorkComponent,
     OpenResponseShowWorkModule,
     TableShowWorkModule
   ],
@@ -40,7 +40,7 @@ import { TableShowWorkModule } from '../../assets/wise5/components/table/table-s
     GraphShowWorkModule,
     LabelShowWorkModule,
     MatchShowWorkModule,
-    MultipleChoiceShowWorkModule,
+    MultipleChoiceShowWorkComponent,
     OpenResponseShowWorkModule,
     TableShowWorkModule
   ]
