@@ -2,54 +2,23 @@
   <component-header [component]="component" />
 
   @if (choiceType === 'radio') {
-    <mat-radio-group [(ngModel)]="studentChoices" (ngModelChange)="studentDataChanged()">
-      @for (choice of choices; track choice.id) {
-        <div>
-          <mat-radio-button
-            [attr.aria-label]="choice.text"
-            color="primary"
-            [value]="choice.id"
-            [disabled]="isDisabled"
-          >
-            <span [innerHTML]="choice.text"></span>&nbsp;
-            @if (showFeedback && choice.showFeedback) {
-              <span
-                [ngClass]="{
-                  success: componentHasCorrectAnswer && choice.isCorrect,
-                  warn: componentHasCorrectAnswer && !choice.isCorrect,
-                  info: !componentHasCorrectAnswer
-                }"
-                >{{ choice.feedbackToShow }}</span
-              >
-            }
-          </mat-radio-button>
-        </div>
-      }
-    </mat-radio-group>
+    <multiple-choice-radio-student
+      [choices]="choices"
+      [(studentChoices)]="studentChoices"
+      [isDisabled]="isDisabled"
+      [showFeedback]="showFeedback"
+      [componentHasCorrectAnswer]="componentHasCorrectAnswer"
+      (studentChoicesChange)="studentDataChanged()"
+    />
   } @else if (choiceType === 'checkbox') {
-    @for (choice of choices; track choice.id) {
-      <div>
-        <mat-checkbox
-          [(ngModel)]="choice.isChecked"
-          (change)="updateStudentChoices(choice.id)"
-          [disabled]="isDisabled"
-          [attr.aria-label]="choice.text"
-          color="primary"
-        >
-          <span [innerHTML]="choice.text"></span>&nbsp;
-          @if (choice.showFeedback) {
-            <span
-              [ngClass]="{
-                success: componentHasCorrectAnswer && choice.isCorrect,
-                warn: componentHasCorrectAnswer && !choice.isCorrect,
-                info: !componentHasCorrectAnswer
-              }"
-              >{{ choice.feedbackToShow }}</span
-            >
-          }
-        </mat-checkbox>
-      </div>
-    }
+    <multiple-choice-checkbox-student
+      [choices]="choices"
+      [studentChoices]="studentChoices"
+      [isDisabled]="isDisabled"
+      [showFeedback]="showFeedback"
+      [componentHasCorrectAnswer]="componentHasCorrectAnswer"
+      (updateStudentChoices)="updateStudentChoices($event)"
+    />
   }
 
   @if (componentHasCorrectAnswer && componentContent.maxSubmitCount != null) {

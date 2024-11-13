@@ -1,0 +1,23 @@
+@for (choice of choices; track choice.id) {
+  <div>
+    <mat-checkbox
+      [(ngModel)]="choice.isChecked"
+      (change)="updateStudentChoices.emit(choice.id)"
+      [disabled]="isDisabled"
+      [attr.aria-label]="choice.text"
+      color="primary"
+    >
+      <span [innerHTML]="choice.text"></span>&nbsp;
+      @if (choice.showFeedback) {
+        <span
+          [ngClass]="{
+            success: componentHasCorrectAnswer && choice.isCorrect,
+            warn: componentHasCorrectAnswer && !choice.isCorrect,
+            info: !componentHasCorrectAnswer
+          }"
+          >{{ choice.feedbackToShow }}</span
+        >
+      }
+    </mat-checkbox>
+  </div>
+}

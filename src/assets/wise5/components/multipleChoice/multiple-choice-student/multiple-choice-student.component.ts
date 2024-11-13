@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -20,6 +17,8 @@ import { copy } from '../../../common/object/object';
 import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { MultipleChoiceRadioStudentComponent } from '../multiple-choice-radio-student/multiple-choice-radio-student.component';
+import { MultipleChoiceCheckboxStudentComponent } from '../multiple-choice-checkbox-student/multiple-choice-checkbox-student.component';
 
 @Component({
   imports: [
@@ -27,9 +26,8 @@ import { ComponentSaveSubmitButtonsComponent } from '../../../directives/compone
     ComponentAnnotationsComponent,
     ComponentHeaderComponent,
     ComponentSaveSubmitButtonsComponent,
-    FormsModule,
-    MatCheckboxModule,
-    MatRadioModule
+    MultipleChoiceRadioStudentComponent,
+    MultipleChoiceCheckboxStudentComponent
   ],
   selector: 'multiple-choice-student',
   standalone: true,
@@ -150,13 +148,13 @@ export class MultipleChoiceStudent extends ComponentStudent {
     }
   }
 
-  setIsCheckedOnStudentChoices(studentChoices: string[]): void {
+  private setIsCheckedOnStudentChoices(studentChoices: string[]): void {
     for (const choice of this.choices) {
       choice.isChecked = studentChoices.includes(choice.id);
     }
   }
 
-  showFeedbackForChoiceIds(choiceIds: string[]): void {
+  private showFeedbackForChoiceIds(choiceIds: string[]): void {
     for (const choice of this.choices) {
       if (choiceIds.includes(choice.id)) {
         choice.showFeedback = true;
@@ -165,23 +163,15 @@ export class MultipleChoiceStudent extends ComponentStudent {
     }
   }
 
-  isChecked(choiceId: string): boolean {
+  private isChecked(choiceId: string): boolean {
     const studentChoices = this.studentChoices;
-    if (studentChoices != null) {
-      if (this.component.isRadio()) {
-        if (choiceId === studentChoices) {
-          return true;
-        }
-      } else if (this.component.isCheckbox()) {
-        if (studentChoices.indexOf(choiceId) != -1) {
-          return true;
-        }
-      }
-    }
-    return false;
+    if (studentChoices == null) return false;
+    return this.component.isRadio()
+      ? studentChoices === choiceId
+      : (studentChoices as string[]).indexOf(choiceId) != -1;
   }
 
-  getChoiceIdsFromStudentData(studentData: any): string[] {
+  private getChoiceIdsFromStudentData(studentData: any): string[] {
     const choiceIds = [];
     if (studentData != null && studentData.studentChoices != null) {
       const studentChoices = studentData.studentChoices;
