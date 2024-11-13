@@ -84,7 +84,7 @@
       color="primary"
       class="choice-authoring-button"
       [disabled]="isFirst"
-      (click)="moveChoiceUp(choice.id)"
+      (click)="moveChoiceUp(choice)"
       i18n-matTooltip
       matTooltip="Move Up"
       matTooltipPosition="above"
@@ -98,7 +98,7 @@
       color="primary"
       class="choice-authoring-button"
       [disabled]="isLast"
-      (click)="moveChoiceDown(choice.id)"
+      (click)="moveChoiceDown(choice)"
       i18n-matTooltip
       matTooltip="Move Down"
       matTooltipPosition="above"
@@ -111,7 +111,7 @@
       mat-raised-button
       color="primary"
       class="choice-authoring-button"
-      (click)="deleteChoice(choice.id)"
+      (click)="deleteChoice(choice)"
       i18n-matTooltip
       matTooltip="Delete"
       matTooltipPosition="above"

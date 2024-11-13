@@ -7,6 +7,7 @@ import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { moveObjectDown, moveObjectUp } from '../../../common/array/array';
 
 @Component({
   selector: 'multiple-choice-authoring',
@@ -19,12 +20,12 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
   feedbackTextChange: Subject<string> = new Subject<string>();
 
   constructor(
-    protected ConfigService: ConfigService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    protected configService: ConfigService,
+    protected nodeService: TeacherNodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+    super(configService, nodeService, projectAssetService, projectService);
     this.subscriptions.add(
       this.choiceTextChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
@@ -37,7 +38,7 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
     );
   }
 
-  feedbackChanged(): void {
+  protected feedbackChanged(): void {
     let show = true;
     if (!this.componentHasFeedback()) {
       show = false;
@@ -46,7 +47,7 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
     this.componentChanged();
   }
 
-  componentHasFeedback(): boolean {
+  private componentHasFeedback(): boolean {
     for (const choice of this.componentContent.choices) {
       if (choice.isCorrect || (choice.feedback != null && choice.feedback !== '')) {
         return true;
@@ -55,7 +56,7 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
     return false;
   }
 
-  addChoice(): void {
+  protected addChoice(): void {
     const newChoice = {
       id: generateRandomKey(),
       text: '',
@@ -66,50 +67,28 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
     this.componentChanged();
   }
 
-  deleteChoice(choiceId: string): void {
+  protected deleteChoice(choice: any): void {
     if (confirm($localize`Are you sure you want to delete this choice?`)) {
-      const choices = this.componentContent.choices;
-      for (let c = 0; c < choices.length; c++) {
-        if (choices[c].id === choiceId) {
-          choices.splice(c, 1);
-          break;
-        }
-      }
+      this.componentContent.choices.splice(this.findChoiceIndex(choice), 1);
       this.componentChanged();
     }
   }
 
-  moveChoiceUp(choiceId: string): void {
-    const choices = this.componentContent.choices;
-    for (let c = 0; c < choices.length; c++) {
-      const choice = choices[c];
-      if (choice.id === choiceId) {
-        if (c !== 0) {
-          choices.splice(c, 1);
-          choices.splice(c - 1, 0, choice);
-        }
-        break;
-      }
-    }
+  protected moveChoiceUp(choice: any): void {
+    moveObjectUp(this.componentContent.choices, this.findChoiceIndex(choice));
     this.componentChanged();
   }
 
-  moveChoiceDown(choiceId: string): void {
-    const choices = this.componentContent.choices;
-    for (let c = 0; c < choices.length; c++) {
-      const choice = choices[c];
-      if (choice.id === choiceId) {
-        if (c !== choices.length - 1) {
-          choices.splice(c, 1);
-          choices.splice(c + 1, 0, choice);
-        }
-        break;
-      }
-    }
+  protected moveChoiceDown(choice: any): void {
+    moveObjectDown(this.componentContent.choices, this.findChoiceIndex(choice));
     this.componentChanged();
   }
 
-  processSelectedAsset(value: string): string {
+  private findChoiceIndex(searchChoice: any): number {
+    return this.componentContent.choices.findIndex((choice) => choice === searchChoice);
+  }
+
+  protected processSelectedAsset(value: string): string {
     return `<img src="${value}" alt="${value}" />`;
   }
 }
