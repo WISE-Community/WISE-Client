@@ -12,37 +12,40 @@
     <mat-icon>preview</mat-icon>
   </button>
 </p>
-<div
-  *ngFor="let item of projectIdToOrder"
-  [ngClass]="{
-    groupHeader: item.node.type == 'group',
-    stepHeader: item.node.type != 'group'
-  }"
->
-  <h6 *ngIf="item.order != 0 && item.node.type == 'group'">
-    {{ item.stepNumber }}: {{ item.node.title }}
-  </h6>
-  <div fxLayout="row wrap" fxLayoutGap="8px" *ngIf="item.order != 0 && item.node.type != 'group'">
-    <mat-checkbox name="item" ngDefaultControl [(ngModel)]="item.checked">
-      <span class="step-title">{{ item.stepNumber }}: {{ item.node.title }}</span>
-    </mat-checkbox>
-    <button
-      mat-raised-button
-      color="primary"
-      class="mat-raised-button mat-primary"
-      style="margin-top: -5"
-      (click)="previewNode(item.node)"
-      aria-label="Preview Step"
-      matTooltip="Preview Step"
-      i18n-matTooltip
-      matTooltipPosition="above"
-    >
-      <mat-icon>preview</mat-icon>
-    </button>
+@for (item of projectIdToOrder; track item.order) {
+  <div
+    [ngClass]="{
+      groupHeader: item.node.type == 'group',
+      stepHeader: item.node.type != 'group'
+    }"
+  >
+    @if (item.order != 0 && item.node.type == 'group') {
+      <h6>{{ item.stepNumber }}: {{ item.node.title }}</h6>
+    }
+    @if (item.order != 0 && item.node.type != 'group') {
+      <div fxLayout="row wrap" fxLayoutGap="8px">
+        <mat-checkbox name="item" ngDefaultControl [(ngModel)]="item.checked">
+          <span class="step-title">{{ item.stepNumber }}: {{ item.node.title }}</span>
+        </mat-checkbox>
+        <button
+          mat-raised-button
+          color="primary"
+          class="mat-raised-button mat-primary"
+          style="margin-top: -5"
+          (click)="previewNode(item.node)"
+          aria-label="Preview Step"
+          matTooltip="Preview Step"
+          i18n-matTooltip
+          matTooltipPosition="above"
+        >
+          <mat-icon>preview</mat-icon>
+        </button>
+      </div>
+    }
   </div>
-</div>
+}
 <div class="nav-controls">
-  <mat-divider></mat-divider>
+  <mat-divider />
   <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="end center">
     <button
       mat-button
@@ -64,7 +67,9 @@
       [disabled]="getSelectedNodesToImport().length == 0 || submitting"
       class="button--progress"
     >
-      <mat-progress-bar *ngIf="submitting" mode="indeterminate"/>
+      @if (submitting) {
+        <mat-progress-bar mode="indeterminate" />
+      }
       <ng-container i18n>Submit</ng-container>
     </button>
   </div>
