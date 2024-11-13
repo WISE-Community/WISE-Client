@@ -1,14 +1,31 @@
 import { Component } from '@angular/core';
-import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ConfigService } from '../../../../assets/wise5/services/configService';
-import { CopyNodesService } from '../../../../assets/wise5/services/copyNodesService';
-import { InsertNodesService } from '../../../../assets/wise5/services/insertNodesService';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
 import { AbstractImportStepComponent } from '../../../../assets/wise5/authoringTool/addNode/abstract-import-step/abstract-import-step.component';
-import { InsertFirstNodeInBranchPathService } from '../../../../assets/wise5/services/insertFirstNodeInBranchPathService';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
+  imports: [
+    CommonModule,
+    FormsModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDividerModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    RouterModule
+  ],
   selector: 'choose-import-step',
+  standalone: true,
   styleUrls: ['choose-import-step.component.scss', '../../add-content.scss'],
   templateUrl: 'choose-import-step.component.html'
 })
@@ -16,26 +33,6 @@ export class ChooseImportStepComponent extends AbstractImportStepComponent {
   protected project: any;
   protected projectIdToOrder: any;
   private projectItems: any[] = [];
-
-  constructor(
-    protected configService: ConfigService,
-    protected copyNodesService: CopyNodesService,
-    protected insertFirstNodeInBranchPathService: InsertFirstNodeInBranchPathService,
-    protected insertNodesService: InsertNodesService,
-    protected projectService: TeacherProjectService,
-    protected route: ActivatedRoute,
-    protected router: Router
-  ) {
-    super(
-      configService,
-      copyNodesService,
-      insertFirstNodeInBranchPathService,
-      insertNodesService,
-      projectService,
-      route,
-      router
-    );
-  }
 
   ngOnInit() {
     super.ngOnInit();
