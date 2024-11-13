@@ -9,7 +9,6 @@ import { EmbeddedGradingModule } from '../../assets/wise5/components/embedded/em
 import { GraphGradingModule } from '../../assets/wise5/components/graph/graph-grading/graph-grading.module';
 import { LabelGradingModule } from '../../assets/wise5/components/label/label-grading/label-grading.module';
 import { MatchGradingModule } from '../../assets/wise5/components/match/match-grading/match-grading.module';
-import { MultipleChoiceGradingModule } from '../../assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.module';
 import { OpenResponseGradingModule } from '../../assets/wise5/components/openResponse/open-response-grading/open-response-grading.module';
 import { PeerChatGradingModule } from '../../assets/wise5/components/peerChat/peer-chat-grading/peer-chat-grading.module';
 import { ShowGroupWorkGradingModule } from '../../assets/wise5/components/showGroupWork/show-group-work-grading/show-group-work-grading.module';
@@ -18,6 +17,7 @@ import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/c
 import { ShowMyWorkGradingModule } from '../../assets/wise5/components/showMyWork/show-my-work-grading/show-my-work-grading.module';
 import { AiChatGradingModule } from '../../assets/wise5/components/aiChat/ai-chat-grading/ai-chat-grading.module';
 import { ComponentStateInfoComponent } from '../../assets/wise5/common/component-state-info/component-state-info.component';
+import { MultipleChoiceGradingComponent } from '../../assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component';
 
 @NgModule({
   declarations: [ComponentGradingComponent],
@@ -34,7 +34,7 @@ import { ComponentStateInfoComponent } from '../../assets/wise5/common/component
     GraphGradingModule,
     LabelGradingModule,
     MatchGradingModule,
-    MultipleChoiceGradingModule,
+    MultipleChoiceGradingComponent,
     OpenResponseGradingModule,
     PeerChatGradingModule,
     ShowGroupWorkGradingModule,
@@ -55,7 +55,7 @@ import { ComponentStateInfoComponent } from '../../assets/wise5/common/component
     GraphGradingModule,
     LabelGradingModule,
     MatchGradingModule,
-    MultipleChoiceGradingModule,
+    MultipleChoiceGradingComponent,
     OpenResponseGradingModule,
     PeerChatGradingModule,
     ShowGroupWorkGradingModule,
