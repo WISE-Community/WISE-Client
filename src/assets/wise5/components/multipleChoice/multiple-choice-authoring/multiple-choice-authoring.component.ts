@@ -1,30 +1,54 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { moveObjectDown, moveObjectUp } from '../../../common/array/array';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
+import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 
 @Component({
+  imports: [
+    FormsModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatRadioModule,
+    MatTooltipModule,
+    EditComponentPrompt,
+    TranslatableAssetChooserComponent,
+    TranslatableInputComponent
+  ],
   selector: 'multiple-choice-authoring',
-  templateUrl: 'multiple-choice-authoring.component.html',
-  styleUrls: ['multiple-choice-authoring.component.scss']
+  standalone: true,
+  styleUrls: ['multiple-choice-authoring.component.scss'],
+  templateUrl: 'multiple-choice-authoring.component.html'
 })
 export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
   allowedConnectedComponentTypes = ['MultipleChoice'];
-  choiceTextChange: Subject<string> = new Subject<string>();
-  feedbackTextChange: Subject<string> = new Subject<string>();
+  protected choiceTextChange: Subject<string> = new Subject<string>();
+  protected feedbackTextChange: Subject<string> = new Subject<string>();
 
   constructor(
-    protected ConfigService: ConfigService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    protected configService: ConfigService,
+    protected nodeService: TeacherNodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+    super(configService, nodeService, projectAssetService, projectService);
     this.subscriptions.add(
       this.choiceTextChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
@@ -37,7 +61,7 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
     );
   }
 
-  feedbackChanged(): void {
+  protected feedbackChanged(): void {
     let show = true;
     if (!this.componentHasFeedback()) {
       show = false;
@@ -46,7 +70,7 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
     this.componentChanged();
   }
 
-  componentHasFeedback(): boolean {
+  private componentHasFeedback(): boolean {
     for (const choice of this.componentContent.choices) {
       if (choice.isCorrect || (choice.feedback != null && choice.feedback !== '')) {
         return true;
@@ -55,7 +79,7 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
     return false;
   }
 
-  addChoice(): void {
+  protected addChoice(): void {
     const newChoice = {
       id: generateRandomKey(),
       text: '',
@@ -66,50 +90,28 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
     this.componentChanged();
   }
 
-  deleteChoice(choiceId: string): void {
+  protected deleteChoice(choice: any): void {
     if (confirm($localize`Are you sure you want to delete this choice?`)) {
-      const choices = this.componentContent.choices;
-      for (let c = 0; c < choices.length; c++) {
-        if (choices[c].id === choiceId) {
-          choices.splice(c, 1);
-          break;
-        }
-      }
+      this.componentContent.choices.splice(this.findChoiceIndex(choice), 1);
       this.componentChanged();
     }
   }
 
-  moveChoiceUp(choiceId: string): void {
-    const choices = this.componentContent.choices;
-    for (let c = 0; c < choices.length; c++) {
-      const choice = choices[c];
-      if (choice.id === choiceId) {
-        if (c !== 0) {
-          choices.splice(c, 1);
-          choices.splice(c - 1, 0, choice);
-        }
-        break;
-      }
-    }
+  protected moveChoiceUp(choice: any): void {
+    moveObjectUp(this.componentContent.choices, this.findChoiceIndex(choice));
     this.componentChanged();
   }
 
-  moveChoiceDown(choiceId: string): void {
-    const choices = this.componentContent.choices;
-    for (let c = 0; c < choices.length; c++) {
-      const choice = choices[c];
-      if (choice.id === choiceId) {
-        if (c !== choices.length - 1) {
-          choices.splice(c, 1);
-          choices.splice(c + 1, 0, choice);
-        }
-        break;
-      }
-    }
+  protected moveChoiceDown(choice: any): void {
+    moveObjectDown(this.componentContent.choices, this.findChoiceIndex(choice));
     this.componentChanged();
   }
 
-  processSelectedAsset(value: string): string {
+  private findChoiceIndex(searchChoice: any): number {
+    return this.componentContent.choices.findIndex((choice) => choice === searchChoice);
+  }
+
+  protected processSelectedAsset(value: string): string {
     return `<img src="${value}" alt="${value}" />`;
   }
 }
