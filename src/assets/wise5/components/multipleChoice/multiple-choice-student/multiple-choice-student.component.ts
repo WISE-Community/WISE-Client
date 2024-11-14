@@ -245,9 +245,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
   }
 
   private hideAllFeedback(): void {
-    for (const choice of this.choices) {
-      choice.showFeedback = false;
-    }
+    this.choices.forEach((choice) => (choice.showFeedback = false));
   }
 
   checkAnswer(): void {
@@ -395,19 +393,17 @@ export class MultipleChoiceStudent extends ComponentStudent {
    * @return a component state with the merged student responses
    */
   createMergedComponentState(componentStates: any[]): any[] {
-    const mergedComponentState: any = this.createNewComponentState();
-    if (componentStates != null) {
-      let mergedStudentChoices = [];
-      for (const componentState of componentStates) {
-        const studentChoices = componentState.studentData.studentChoices;
-        if (studentChoices != null && studentChoices.length > 0) {
-          mergedStudentChoices = mergedStudentChoices.concat(studentChoices);
-        }
+    let mergedStudentChoices = [];
+    for (const componentState of componentStates) {
+      const studentChoices = componentState.studentData.studentChoices;
+      if (studentChoices != null && studentChoices.length > 0) {
+        mergedStudentChoices = mergedStudentChoices.concat(studentChoices);
       }
-      mergedComponentState.studentData = {
-        studentChoices: mergedStudentChoices
-      };
     }
+    const mergedComponentState: any = this.createNewComponentState();
+    mergedComponentState.studentData = {
+      studentChoices: mergedStudentChoices
+    };
     return mergedComponentState;
   }
 
