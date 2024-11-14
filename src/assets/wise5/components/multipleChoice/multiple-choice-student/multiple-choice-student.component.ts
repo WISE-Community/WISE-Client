@@ -245,48 +245,22 @@ export class MultipleChoiceStudent extends ComponentStudent {
   }
 
   private hideAllFeedback(): void {
-    for (const choice of this.choices) {
-      choice.showFeedback = false;
-    }
+    this.choices.forEach((choice) => (choice.showFeedback = false));
   }
 
   checkAnswer(): void {
     if (this.component.isRadio()) {
-      this.checkSingleAnswer();
+      this.isCorrect = this.choices.some((choice) => choice.isCorrect && this.isChecked(choice.id));
     } else {
-      this.checkMultipleAnswer();
+      this.isCorrect = this.choices.every((choice) => this.isStudentChoiceValueCorrect(choice));
     }
   }
 
-  private checkSingleAnswer(): void {
-    let isCorrect = false;
-    for (const choice of this.choices) {
-      if (this.componentHasCorrectAnswer) {
-        if (choice.isCorrect && this.isChecked(choice.id)) {
-          isCorrect = true;
-        }
-      }
-      this.displayFeedbackOnChoiceIfNecessary(choice);
-    }
-    if (this.componentHasCorrectAnswer) {
-      this.isCorrect = isCorrect;
-    }
+  displayFeedback(): void {
+    this.choices.forEach((choice) => this.displayFeedbackOnChoice(choice));
   }
 
-  private checkMultipleAnswer(): void {
-    let isAllCorrect = true;
-    for (const choice of this.choices) {
-      if (this.componentHasCorrectAnswer) {
-        isAllCorrect &&= this.isStudentChoiceValueCorrect(choice);
-      }
-      this.displayFeedbackOnChoiceIfNecessary(choice);
-    }
-    if (this.componentHasCorrectAnswer) {
-      this.isCorrect = isAllCorrect;
-    }
-  }
-
-  private displayFeedbackOnChoiceIfNecessary(choice: any): void {
+  private displayFeedbackOnChoice(choice: any): void {
     if (this.showFeedback && this.isChecked(choice.id)) {
       choice.showFeedback = true;
       choice.feedbackToShow = choice.feedback;
@@ -319,7 +293,10 @@ export class MultipleChoiceStudent extends ComponentStudent {
     };
 
     if (action === 'submit') {
-      this.checkAnswer();
+      if (this.componentHasCorrectAnswer) {
+        this.checkAnswer();
+      }
+      this.displayFeedback();
       if (this.isCorrect != null) {
         studentData.isCorrect = this.isCorrect;
       }
@@ -395,19 +372,17 @@ export class MultipleChoiceStudent extends ComponentStudent {
    * @return a component state with the merged student responses
    */
   createMergedComponentState(componentStates: any[]): any[] {
-    const mergedComponentState: any = this.createNewComponentState();
-    if (componentStates != null) {
-      let mergedStudentChoices = [];
-      for (const componentState of componentStates) {
-        const studentChoices = componentState.studentData.studentChoices;
-        if (studentChoices != null && studentChoices.length > 0) {
-          mergedStudentChoices = mergedStudentChoices.concat(studentChoices);
-        }
+    let mergedStudentChoices = [];
+    for (const componentState of componentStates) {
+      const studentChoices = componentState.studentData.studentChoices;
+      if (studentChoices != null && studentChoices.length > 0) {
+        mergedStudentChoices = mergedStudentChoices.concat(studentChoices);
       }
-      mergedComponentState.studentData = {
-        studentChoices: mergedStudentChoices
-      };
     }
+    const mergedComponentState: any = this.createNewComponentState();
+    mergedComponentState.studentData = {
+      studentChoices: mergedStudentChoices
+    };
     return mergedComponentState;
   }
 

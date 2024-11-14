@@ -7,12 +7,14 @@ export class MultipleChoiceAuthoringHarness extends ComponentHarness {
   getAddChoiceButton = this.locatorFor(MatButtonHarness.with({ selector: '.add-choice-button' }));
   getChoices = this.locatorForAll('.choice-container');
   getDeleteChoiceButtons = this.locatorForAll(
-    MatButtonHarness.with({ selector: '[aria-label="Delete"]' })
+    MatButtonHarness.with({ selector: '[mattooltip="Delete"]' })
   );
   getMoveDownButtons = this.locatorForAll(
-    MatButtonHarness.with({ selector: '[aria-label="Down"]' })
+    MatButtonHarness.with({ selector: '[mattooltip="Move Down"]' })
   );
-  getMoveUpButtons = this.locatorForAll(MatButtonHarness.with({ selector: '[aria-label="Up"]' }));
+  getMoveUpButtons = this.locatorForAll(
+    MatButtonHarness.with({ selector: '[mattooltip="Move Up"]' })
+  );
   getMultipleAnswerRadioChoice = this.locatorFor(
     MatRadioButtonHarness.with({ label: 'Multiple Answer' })
   );
