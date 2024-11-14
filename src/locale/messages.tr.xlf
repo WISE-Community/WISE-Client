@@ -21884,7 +21884,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
@@ -21900,7 +21900,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">75</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
@@ -22114,11 +22114,11 @@ Warning: This will delete all existing choices in this component.</target>
         </context-group>
         <target state="translated">İsteğe Bağlı</target>
       </trans-unit>
-      <trans-unit id="deba9a93d665caab3fa0ee8701dc14a482bee9c7" datatype="html">
+      <trans-unit id="83b360aecbf5316060c382f91fb84c421743fe98" datatype="html">
         <source> You have used <x id="INTERPOLATION" equiv-text="{{ componentState.studentData.submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempt(s) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
-          <context context-type="linenumber">48,51</context>
+          <context context-type="linenumber">65,68</context>
         </context-group>
         <target state="needs-translation"> You have used <x id="INTERPOLATION" equiv-text="{{ componentState.studentData.submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempt(s) </target>
       </trans-unit>
