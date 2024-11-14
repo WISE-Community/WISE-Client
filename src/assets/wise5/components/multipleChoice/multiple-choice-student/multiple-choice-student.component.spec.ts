@@ -212,6 +212,7 @@ function singleAnswerSingleCorrectAnswerComponentShouldShowTheFeedbackOnTheSubmi
   it('should show the feedback on the submitted choice', () => {
     selectSingleAnswerChoice(choiceId1);
     checkAnswer();
+    component.displayFeedback();
     const choice1 = getChoiceById(choiceId1);
     const choice2 = getChoiceById(choiceId2);
     const choice3 = getChoiceById(choiceId3);
@@ -261,6 +262,7 @@ function multipleAnswerComponentShouldShowTheFeedbackOnTheSubmittedChoices() {
     selectMultipleAnswerChoice(choiceId2);
     selectMultipleAnswerChoice(choiceId3);
     checkAnswer();
+    component.displayFeedback();
     const choice1 = getChoiceById(choiceId1);
     const choice2 = getChoiceById(choiceId2);
     const choice3 = getChoiceById(choiceId3);
