@@ -248,7 +248,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
     this.choices.forEach((choice) => (choice.showFeedback = false));
   }
 
-  checkAnswer(): void {
+  private checkAnswer(): void {
     if (this.component.isRadio()) {
       this.isCorrect = this.choices.some((choice) => choice.isCorrect && this.isChecked(choice.id));
     } else {
@@ -256,7 +256,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
     }
   }
 
-  displayFeedback(): void {
+  private displayFeedback(): void {
     this.choices.forEach((choice) => this.displayFeedbackOnChoice(choice));
   }
 
@@ -291,7 +291,6 @@ export class MultipleChoiceStudent extends ComponentStudent {
     const studentData: any = {
       studentChoices: this.getStudentChoiceObjects()
     };
-
     if (action === 'submit') {
       if (this.componentHasCorrectAnswer) {
         this.checkAnswer();

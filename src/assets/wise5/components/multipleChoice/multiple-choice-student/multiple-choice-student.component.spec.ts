@@ -130,7 +130,6 @@ describe('MultipleChoiceStudentComponent', () => {
     spyOn(component, 'studentDataChanged').and.callFake(() => {});
     fixture.detectChanges();
   });
-
   testMultipleAnswerComponent();
   testSingleAnswerSingleCorrectAnswerComponent();
   testSingleAnswerMultipleCorrectAnswersComponent();
@@ -189,7 +188,6 @@ function testSingleAnswerMultipleCorrectAnswersComponent() {
         JSON.stringify(singleAnswerMultipleCorrectAnswersComponent)
       );
       component.component = new MultipleChoiceComponent(component.componentContent, nodeId);
-
       component.ngOnInit();
     });
     singleAnswerMultipleCorrectAnswersComponentShouldShowCorrect();
@@ -204,15 +202,10 @@ function selectMultipleAnswerChoice(choiceId) {
   component.addOrRemoveFromStudentChoices(choiceId);
 }
 
-function checkAnswer() {
-  component.checkAnswer();
-}
-
 function singleAnswerSingleCorrectAnswerComponentShouldShowTheFeedbackOnTheSubmittedChoice() {
   it('should show the feedback on the submitted choice', () => {
     selectSingleAnswerChoice(choiceId1);
-    checkAnswer();
-    component.displayFeedback();
+    component.createComponentStateAndBroadcast('submit');
     const choice1 = getChoiceById(choiceId1);
     const choice2 = getChoiceById(choiceId2);
     const choice3 = getChoiceById(choiceId3);
@@ -232,7 +225,7 @@ function getChoiceById(id: string): any {
 function singleAnswerSingleCorrectAnswerComponentShouldShowIncorrect() {
   it(`should show incorrect when the incorrect answer is submitted`, () => {
     selectSingleAnswerChoice(choiceId1);
-    checkAnswer();
+    component.createComponentStateAndBroadcast('submit');
     expect(component.isCorrect).toBeFalsy();
   });
 }
@@ -240,7 +233,7 @@ function singleAnswerSingleCorrectAnswerComponentShouldShowIncorrect() {
 function singleAnswerSingleCorrectAnswerComponentShouldShowCorrect() {
   it(`should show correct when the correct answer is submitted`, () => {
     selectSingleAnswerChoice(choiceId3);
-    checkAnswer();
+    component.createComponentStateAndBroadcast('submit');
     expect(component.isCorrect).toBeTruthy();
   });
 }
@@ -248,10 +241,10 @@ function singleAnswerSingleCorrectAnswerComponentShouldShowCorrect() {
 function singleAnswerMultipleCorrectAnswersComponentShouldShowCorrect() {
   it(`should show correct when one of the multiple correct answers is submitted`, () => {
     selectSingleAnswerChoice(choiceId2);
-    checkAnswer();
+    component.createComponentStateAndBroadcast('submit');
     expect(component.isCorrect).toBeTruthy();
     selectSingleAnswerChoice(choiceId3);
-    checkAnswer();
+    component.createComponentStateAndBroadcast('submit');
     expect(component.isCorrect).toBeTruthy();
   });
 }
@@ -261,8 +254,7 @@ function multipleAnswerComponentShouldShowTheFeedbackOnTheSubmittedChoices() {
     selectMultipleAnswerChoice(choiceId1);
     selectMultipleAnswerChoice(choiceId2);
     selectMultipleAnswerChoice(choiceId3);
-    checkAnswer();
-    component.displayFeedback();
+    component.createComponentStateAndBroadcast('submit');
     const choice1 = getChoiceById(choiceId1);
     const choice2 = getChoiceById(choiceId2);
     const choice3 = getChoiceById(choiceId3);
@@ -278,7 +270,7 @@ function multipleAnswerComponentShouldShowTheFeedbackOnTheSubmittedChoices() {
 function multipleAnswerComponentShouldShowIncorrectWhenTheIncorrectAnswerIsSubmitted() {
   it(`should show incorrect when the incorrect answer is submitted`, () => {
     selectMultipleAnswerChoice(choiceId1);
-    checkAnswer();
+    component.createComponentStateAndBroadcast('submit');
     expect(component.isCorrect).toBeFalsy();
   });
 }
@@ -288,7 +280,7 @@ function multipleAnswerComponentShouldShowIncorrectWhenNotJustTheCorrectAnswersA
     selectMultipleAnswerChoice(choiceId1);
     selectMultipleAnswerChoice(choiceId2);
     selectMultipleAnswerChoice(choiceId3);
-    checkAnswer();
+    component.createComponentStateAndBroadcast('submit');
     expect(component.isCorrect).toBeFalsy();
   });
 }
@@ -296,7 +288,7 @@ function multipleAnswerComponentShouldShowIncorrectWhenNotJustTheCorrectAnswersA
 function multipleAnswerComponentShouldShowIncorrectWhenNotAllTheCorrectAnswersAreSubmitted() {
   it(`should show incorrect when not all the correct answers are submitted`, () => {
     selectMultipleAnswerChoice(choiceId2);
-    checkAnswer();
+    component.createComponentStateAndBroadcast('submit');
     expect(component.isCorrect).toBeFalsy();
   });
 }
@@ -305,7 +297,7 @@ function multipleAnswerComponentShouldShowCorrectWhenOnlyTheCorrectAnswersAreSub
   it(`should show correct when only the correct answers are submitted`, () => {
     selectMultipleAnswerChoice(choiceId2);
     selectMultipleAnswerChoice(choiceId3);
-    checkAnswer();
+    component.createComponentStateAndBroadcast('submit');
     expect(component.isCorrect).toBeTruthy();
   });
 }
