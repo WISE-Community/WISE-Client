@@ -1,4 +1,3 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
@@ -107,7 +106,7 @@ describe('MultipleChoiceStudentComponent', () => {
         MultipleChoiceStudentComponent,
         StudentTeacherCommonServicesModule
       ],
-      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+      providers: [provideHttpClient(withInterceptorsFromDi())]
     });
     fixture = TestBed.createComponent(MultipleChoiceStudentComponent);
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
