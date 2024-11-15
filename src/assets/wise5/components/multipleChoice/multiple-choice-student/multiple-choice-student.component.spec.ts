@@ -5,7 +5,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { copy } from '../../../common/object/object';
 import { ProjectService } from '../../../services/projectService';
 import { MultipleChoiceComponent } from '../MultipleChoiceComponent';
-import { MultipleChoiceStudent } from './multiple-choice-student.component';
+import { MultipleChoiceStudentComponent } from './multiple-choice-student.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const choiceId1 = 'choice1';
@@ -14,12 +14,12 @@ const choiceId3 = 'choice3';
 const choiceText1 = 'A';
 const choiceText2 = 'B';
 const choiceText3 = 'C<br/><img src="cookie.png"/>';
-let component: MultipleChoiceStudent;
+let component: MultipleChoiceStudentComponent;
 const componentId = 'component1';
 const feedback1 = 'A Feedback';
 const feedback2 = 'B Feedback';
 const feedback3 = 'C Feedback';
-let fixture: ComponentFixture<MultipleChoiceStudent>;
+let fixture: ComponentFixture<MultipleChoiceStudentComponent>;
 const multipleChoiceType = 'MultipleChoice';
 const nodeId = 'node1';
 let originalComponentContent: any;
@@ -102,10 +102,14 @@ function createComponent(choiceType: string, choices: any[]): any {
 describe('MultipleChoiceStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, MultipleChoiceStudent, StudentTeacherCommonServicesModule],
+      imports: [
+        BrowserAnimationsModule,
+        MultipleChoiceStudentComponent,
+        StudentTeacherCommonServicesModule
+      ],
       providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
     });
-    fixture = TestBed.createComponent(MultipleChoiceStudent);
+    fixture = TestBed.createComponent(MultipleChoiceStudentComponent);
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     component = fixture.componentInstance;
     originalComponentContent = {
