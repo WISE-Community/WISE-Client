@@ -108,7 +108,11 @@
           [cdkDragDisabled]="components.length < 2"
           (opened)="toggleComponent(component.id, true)"
           (closed)="toggleComponent(component.id, false)"
+          (cdkDragStarted)="setAllComponentsIsExpanded(false)"
+          (cdkDragEnded)="setAllComponentsIsExpanded(true)"
         >
+          <span *cdkDragPreview>{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span>
+          <div *cdkDragPlaceholder class="cdk-drag-placeholder"></div>
           <mat-expansion-panel-header aria-label="Expand/collapse component" i18n-aria-label>
             <mat-panel-title fxLayout="row" fxLayoutAlign="start center">
               @if (components.length > 1) {
