@@ -9,6 +9,17 @@ import { Component as WISEComponent } from '../../common/Component';
   imports: [PreviewComponentComponent, EditComponentComponent],
   selector: 'component-authoring',
   standalone: true,
+  styles: [
+    `
+      preview-component {
+        display: block;
+        cursor: pointer;
+      }
+      preview-component:hover {
+        background-color: yellow;
+      }
+    `
+  ],
   template: `@if (editing) {
       <edit-component [componentContent]="componentContent" [nodeId]="nodeId" />
     } @else {
