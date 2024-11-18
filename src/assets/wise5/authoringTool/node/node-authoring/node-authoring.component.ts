@@ -32,6 +32,7 @@ export class NodeAuthoringComponent implements OnInit {
   components: ComponentContent[] = [];
   protected componentsToChecked: WritableSignal<{ [key: string]: boolean }> = signal({});
   componentsToExpanded = {};
+  protected editingComponentId: string;
   protected isAnyComponentSelected: Signal<boolean> = computed(() =>
     Object.values(this.componentsToChecked()).some((value) => value)
   );
@@ -39,7 +40,7 @@ export class NodeAuthoringComponent implements OnInit {
   node: Node;
   nodeJson: any;
   @Input() nodeId?: string;
-  subscriptions: Subscription = new Subscription();
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
@@ -298,5 +299,9 @@ export class NodeAuthoringComponent implements OnInit {
   protected dropComponent(event: CdkDragDrop<ComponentContent[]>): void {
     moveItemInArray(this.components, event.previousIndex, event.currentIndex);
     this.projectService.saveProject();
+  }
+
+  protected editComponent(componentId: string): void {
+    this.editingComponentId = componentId;
   }
 }

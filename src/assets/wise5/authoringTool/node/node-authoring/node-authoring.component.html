@@ -155,7 +155,12 @@
           </mat-expansion-panel-header>
           <div>
             @if (componentsToExpanded[component.id]) {
-              <component-authoring [nodeId]="nodeId" [componentContent]="component" />
+              <component-authoring
+                [nodeId]="nodeId"
+                [componentContent]="component"
+                [editing]="component.id === editingComponentId"
+                (editComponentEvent)="editComponent(component.id)"
+              />
             }
           </div>
         </mat-expansion-panel>
