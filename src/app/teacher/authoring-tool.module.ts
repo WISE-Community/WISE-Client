@@ -61,6 +61,7 @@ import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringToo
 import { EditBranchComponent } from '../../assets/wise5/authoringTool/edit-branch/edit-branch.component';
 import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { OutsideClickDirective } from '../../assets/wise5/directives/outside-click.directive';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     NodeAdvancedAuthoringModule,
     NodeIconAndTitleComponent,
     NodeWithMoveAfterButtonComponent,
+    OutsideClickDirective,
     PreviewComponentButtonComponent,
     ProjectAssetAuthoringModule,
     ProjectListComponent,
