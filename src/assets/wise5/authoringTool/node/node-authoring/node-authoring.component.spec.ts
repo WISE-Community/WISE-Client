@@ -27,7 +27,6 @@ import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
 import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
-import { PreviewComponentButtonComponent } from '../../components/preview-component-button/preview-component-button.component';
 import { CopyTranslationsService } from '../../../services/copyTranslationsService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -65,7 +64,6 @@ describe('NodeAuthoringComponent', () => {
         MatExpansionModule,
         MatIconModule,
         MatInputModule,
-        PreviewComponentButtonComponent,
         RouterTestingModule,
         StudentTeacherCommonServicesModule,
         TeacherNodeIconComponent
