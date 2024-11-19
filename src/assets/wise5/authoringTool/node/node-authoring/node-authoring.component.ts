@@ -59,6 +59,7 @@ export class NodeAuthoringComponent implements OnInit {
     this.subscribeToShowSubmitButtonValueChanges();
     this.subscribeToNodeChanges();
     this.subscribeToCurrentNodeChanged();
+    this.setAllComponentsIsExpanded(true);
   }
 
   private setup(nodeId: string): void {
@@ -115,6 +116,7 @@ export class NodeAuthoringComponent implements OnInit {
       this.dataService.currentNodeChanged$.subscribe(({ currentNode }) => {
         if (currentNode != null) {
           this.setup(currentNode.id);
+          this.setAllComponentsIsExpanded(true);
         }
       })
     );

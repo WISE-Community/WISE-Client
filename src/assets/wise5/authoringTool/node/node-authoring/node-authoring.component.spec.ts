@@ -33,6 +33,8 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { RouterTestingModule } from '@angular/router/testing';
 import { CreateComponentService } from '../../../services/createComponentService';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { VLEProjectService } from '../../../vle/vleProjectService';
+import { NotebookService } from '../../../services/notebookService';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -107,8 +109,8 @@ describe('NodeAuthoringComponent', () => {
     spyOn(document, 'getElementById').and.returnValue(document.createElement('div'));
     confirmSpy = spyOn(window, 'confirm');
     component1 = { id: 'component1', type: 'OpenResponse', showSubmitButton: true };
-    component2 = { id: 'component2', type: 'MultipleChoice', showSubmitButton: true };
-    component3 = { id: 'component3', type: 'Match', showSubmitButton: true };
+    component2 = { id: 'component2', type: 'MultipleChoice', showSubmitButton: true, choices: [] };
+    component3 = { id: 'component3', type: 'HTML', showSubmitButton: true, html: '' };
     node1Components = [component1, component2, component3];
     teacherProjectService = TestBed.inject(TeacherProjectService);
     const node1 = { components: node1Components };
@@ -127,6 +129,10 @@ describe('NodeAuthoringComponent', () => {
       new ProjectLocale({ default: 'en-US', supported: ['es'] })
     );
     spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
+    const vleProjectService = TestBed.inject(VLEProjectService);
+    vleProjectService.project = teacherProjectService.project;
+    spyOn(TestBed.inject(VLEProjectService), 'getSpeechToTextSettings').and.returnValue(null);
+    spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(false);
     saveProjectSpy = spyOn(teacherProjectService, 'saveProject').and.returnValue(Promise.resolve());
     fixture = TestBed.createComponent(NodeAuthoringComponent);
     component = fixture.componentInstance;
@@ -184,7 +190,7 @@ function deleteComponents() {
       confirmSpy.and.returnValue(true);
       clickDeleteComponentsButton();
       expect(confirmSpy).toHaveBeenCalledWith(
-        `Are you sure you want to delete these components?\n1. OpenResponse\n3. Match`
+        `Are you sure you want to delete these components?\n1. OpenResponse\n3. HTML`
       );
       expect(component.components).toEqual([component2]);
       expect(expectCheckboxValue(component1.id)).toBeFalsy();
