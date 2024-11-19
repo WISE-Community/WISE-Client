@@ -19,6 +19,7 @@ import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress
   imports: [
     ComponentGradingModule,
     EditComponentScoreComponent,
+    EditComponentCommentComponent,
     GradingEditComponentMaxScoreComponent,
     IntersectionObserverModule,
     NavItemProgressComponent,
@@ -30,7 +31,6 @@ import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress
   ],
   declarations: [
     EditComponentAnnotationsComponent,
-    EditComponentCommentComponent,
     WorkgroupComponentGradingComponent,
     WorkgroupItemComponent,
     WorkgroupSelectAutocompleteComponent
