@@ -133,7 +133,9 @@
               </mat-checkbox>
             </mat-panel-title>
             <mat-panel-description class="text" fxLayoutAlign="end center" fxLayoutGap="4px">
-              <edit-component-advanced-button [componentContent]="component" [nodeId]="nodeId" />
+              @if (component.id === editingComponentId) {
+                <edit-component-advanced-button [componentContent]="component" [nodeId]="nodeId" />
+              }
               <copy-component-button
                 class="component-action"
                 [node]="node"
