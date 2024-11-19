@@ -19,13 +19,17 @@ import { components } from '../../../components/Components';
   template: '<div class="component__wrapper"><div #component></div></div>'
 })
 export class PreviewComponentComponent {
-  @Input() protected component: WISEComponent;
+  @Input() component: WISEComponent;
   @ViewChild('component') private componentElementRef: ElementRef;
   private componentRef: ComponentRef<WISEComponent>;
-  @Input() protected periodId: number;
-  @Output() private starterStateChangedEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Input() disabled: boolean;
+  @Input() periodId: number;
+  @Output() starterStateChangedEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private applicationRef: ApplicationRef, private injector: EnvironmentInjector) {}
+  constructor(
+    private applicationRef: ApplicationRef,
+    private injector: EnvironmentInjector
+  ) {}
 
   ngAfterViewInit(): void {
     this.renderComponent();
@@ -50,6 +54,7 @@ export class PreviewComponentComponent {
       component: this.component,
       mode: 'preview',
       periodId: this.periodId,
+      isDisabled: this.disabled,
       starterStateChangedEvent: this.starterStateChangedEvent
     });
     this.applicationRef.attachView(this.componentRef.hostView);

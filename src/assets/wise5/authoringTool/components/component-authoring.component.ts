@@ -23,7 +23,11 @@ import { Component as WISEComponent } from '../../common/Component';
   template: `@if (editing) {
       <edit-component [componentContent]="componentContent" [nodeId]="nodeId" />
     } @else {
-      <preview-component (click)="editComponentEvent.emit()" [component]="component" />
+      <preview-component
+        (click)="editComponentEvent.emit()"
+        [component]="component"
+        [disabled]="true"
+      />
     }`
 })
 export class ComponentAuthoringComponent {
