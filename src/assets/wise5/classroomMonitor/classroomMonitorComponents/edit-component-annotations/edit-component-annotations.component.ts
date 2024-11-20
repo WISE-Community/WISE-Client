@@ -19,16 +19,14 @@ export class EditComponentAnnotationsComponent {
   @Input() showAllAnnotations: boolean;
   @Input() toWorkgroupId: number;
 
-  annotationId: number;
-  canAuthorProject: boolean;
-  canGradeStudentWork: boolean;
-  comment: string;
-  componentStates: any;
-  edit: boolean;
-  latestAnnotations: any;
-  periodId: number;
-  runId: number;
-  score: number;
+  protected canAuthorProject: boolean;
+  protected canGradeStudentWork: boolean;
+  protected comment: string;
+  private componentStates: any;
+  protected edit: boolean;
+  protected latestAnnotations: any;
+  protected periodId: number;
+  protected runId: number;
   private subscription: Subscription;
 
   constructor(
@@ -101,9 +99,6 @@ export class EditComponentAnnotationsComponent {
       if (latestComment.type === 'comment') {
         this.comment = latestComment.data.value;
       }
-    }
-    if (this.latestAnnotations && this.latestAnnotations.score) {
-      this.score = this.latestAnnotations.score.data.value;
     }
   }
 
