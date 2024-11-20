@@ -7,10 +7,20 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
   selector: 'add-lesson-button',
-  templateUrl: './add-lesson-button.component.html',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule]
+  styles: [
+    `
+      .rotate-180 {
+        transform: rotate(180deg);
+      }
+      .flip-vertical {
+        transform: scaleY(-1);
+      }
+    `
+  ],
+  templateUrl: './add-lesson-button.component.html'
 })
 export class AddLessonButtonComponent {
   @Input() active: boolean;
