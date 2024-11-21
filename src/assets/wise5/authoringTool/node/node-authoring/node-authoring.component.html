@@ -99,20 +99,14 @@
     fxLayoutGap="8px"
   >
     @for (component of components; track component.id; let i = $index) {
-      <div fxLayout="row" fxLayoutGap="4px">
+      <div fxLayout="row" fxLayoutGap="4px" cdkDrag [cdkDragDisabled]="components.length < 2">
         <mat-expansion-panel
           [id]="component.id"
           [expanded]="componentsToExpanded[component.id]"
           class="component"
-          cdkDrag
-          [cdkDragDisabled]="components.length < 2"
           (opened)="toggleComponent(component.id, true)"
           (closed)="toggleComponent(component.id, false)"
-          (cdkDragStarted)="setAllComponentsIsExpanded(false)"
-          (cdkDragEnded)="setAllComponentsIsExpanded(true)"
         >
-          <span *cdkDragPreview>{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span>
-          <div *cdkDragPlaceholder class="cdk-drag-placeholder"></div>
           <mat-expansion-panel-header aria-label="Expand/collapse component" i18n-aria-label>
             <mat-panel-title fxLayout="row" fxLayoutAlign="start center">
               @if (components.length > 1) {
@@ -172,6 +166,7 @@
           [node]="node"
           (newComponentsEvent)="highlightAndExpandComponents($event)"
         />
+        <div *cdkDragPlaceholder i18n>Move here</div>
       </div>
     }
   </div>
