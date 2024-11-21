@@ -7,7 +7,6 @@ import { ComponentSelectComponent } from '../classroom-monitor/component-select/
 import { StepInfoComponent } from '../classroom-monitor/step-info/step-info.component';
 import { PeerGroupGradingModule } from './peer-group-grading.module';
 import { SelectPeriodModule } from './select-period.module';
-import { ComponentGradingModule } from './component-grading.module';
 import { TeacherSummaryDisplay } from '../../assets/wise5/directives/teacher-summary-display/teacher-summary-display.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
@@ -37,6 +36,7 @@ import { RouterModule } from '@angular/router';
 import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator/save-indicator.component';
 import { PreviewComponentComponent } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.component';
 import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-tools.component';
+import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +61,7 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     ViewComponentRevisionsComponent
   ],
   imports: [
-    ComponentGradingModule,
+    ComponentGradingComponent,
     ComponentNewWorkBadgeComponent,
     ComponentSelectComponent,
     ComponentStudentModule,
