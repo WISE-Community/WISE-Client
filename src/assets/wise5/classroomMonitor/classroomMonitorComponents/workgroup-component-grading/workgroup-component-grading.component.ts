@@ -1,5 +1,3 @@
-'use strict';
-
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ComponentContent } from '../../../common/ComponentContent';
@@ -14,45 +12,45 @@ import { ViewComponentRevisionsComponent } from '../view-component-revisions/vie
   templateUrl: 'workgroup-component-grading.component.html'
 })
 export class WorkgroupComponentGradingComponent {
+  protected component: ComponentContent;
   @Input() componentId: string;
+  protected componentStates: any[];
+  protected isGradable: boolean;
+  protected latestComponentState: any;
+  protected latestComponentStateId: number;
   @Input() nodeId: string;
+  protected teacherWorkgroupId: number;
   @Input() workgroupId: number;
 
-  component: ComponentContent;
-  componentStates: any[];
-  isGradable: boolean;
-  latestComponentState: any;
-  latestComponentStateId: number;
-  teacherWorkgroupId: number;
-
   constructor(
+    private configService: ConfigService,
+    private dataService: TeacherDataService,
     private dialog: MatDialog,
-    private ConfigService: ConfigService,
-    private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService
+    private projectService: TeacherProjectService
   ) {}
 
-  ngOnInit() {
-    this.teacherWorkgroupId = this.ConfigService.getWorkgroupId();
-    this.component = this.ProjectService.getComponent(this.nodeId, this.componentId);
+  ngOnInit(): void {
+    this.teacherWorkgroupId = this.configService.getWorkgroupId();
+    this.component = this.projectService.getComponent(this.nodeId, this.componentId);
     const factory = new ComponentFactory();
     const component = factory.getComponent(this.component, this.nodeId);
     this.isGradable = component.isGradable();
-    this.componentStates = this.TeacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
+    this.componentStates = this.dataService.getComponentStatesByWorkgroupIdAndComponentId(
       this.workgroupId,
       this.componentId
     );
-    this.latestComponentState = this.TeacherDataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
-      this.workgroupId,
-      this.nodeId,
-      this.componentId
-    );
+    this.latestComponentState =
+      this.dataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
+        this.workgroupId,
+        this.nodeId,
+        this.componentId
+      );
     if (this.latestComponentState != null) {
       this.latestComponentStateId = this.latestComponentState.id;
     }
   }
 
-  showRevisions() {
+  protected showRevisions(): void {
     this.dialog.open(ViewComponentRevisionsComponent, {
       data: {
         workgroupId: this.workgroupId,
