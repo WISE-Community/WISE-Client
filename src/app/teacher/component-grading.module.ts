@@ -20,11 +20,11 @@ import { ComponentStateInfoComponent } from '../../assets/wise5/common/component
 import { MultipleChoiceGradingComponent } from '../../assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component';
 
 @NgModule({
-  declarations: [ComponentGradingComponent],
   imports: [
     AiChatGradingModule,
     AnimationGradingModule,
     AudioOscillatorGradingModule,
+    ComponentGradingComponent,
     ComponentStateInfoComponent,
     ConceptMapGradingModule,
     DialogGuidanceGradingModule,

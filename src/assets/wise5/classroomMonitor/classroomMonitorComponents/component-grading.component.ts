@@ -13,6 +13,7 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Component({
   selector: 'component-grading-component',
+  standalone: true,
   template: '<div #component></div>'
 })
 export class ComponentGradingComponent {
