@@ -16256,19 +16256,19 @@ Are you sure you want to proceed?</source>
         </context-group>
         <target state="translated">Mostrar más</target>
       </trans-unit>
-      <trans-unit id="149546eb32bc1b69012afcd34945c180f0790dbf" datatype="html">
+      <trans-unit id="25e891de83c55fc6006c9c5c5dcb4225e095c86f" datatype="html">
         <source> Team has not saved any work </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component.html</context>
-          <context context-type="linenumber">22,24</context>
+          <context context-type="linenumber">17,19</context>
         </context-group>
-        <target state="translated"> El equipo no ha guardado ningún trabajo </target>
+        <target state="needs-translation"> Team has not saved any work </target>
       </trans-unit>
       <trans-unit id="1a68048cfcd964c630f4316c43db20f0b8e3a80d" datatype="html">
         <source>See revisions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">29</context>
         </context-group>
         <target state="translated">Ver revisiones</target>
       </trans-unit>
