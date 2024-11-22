@@ -16260,11 +16260,11 @@ Are you sure you want to proceed?</target>
         </context-group>
         <target state="needs-translation">Show more</target>
       </trans-unit>
-      <trans-unit id="149546eb32bc1b69012afcd34945c180f0790dbf" datatype="html">
+      <trans-unit id="25e891de83c55fc6006c9c5c5dcb4225e095c86f" datatype="html">
         <source> Team has not saved any work </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component.html</context>
-          <context context-type="linenumber">22,24</context>
+          <context context-type="linenumber">17,19</context>
         </context-group>
         <target state="needs-translation"> Team has not saved any work </target>
       </trans-unit>
@@ -16272,7 +16272,7 @@ Are you sure you want to proceed?</target>
         <source>See revisions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">29</context>
         </context-group>
         <target state="needs-translation">See revisions</target>
       </trans-unit>
