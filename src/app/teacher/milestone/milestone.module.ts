@@ -8,15 +8,15 @@ import { MilestoneWorkgroupItemComponent } from '../../../assets/wise5/classroom
 import { MilestonesComponent } from '../../classroom-monitor/milestones/milestones.component';
 import { StudentTeacherCommonModule } from '../../student-teacher-common.module';
 import { GradingCommonModule } from '../grading-common.module';
-import { SelectPeriodModule } from '../select-period.module';
 import { MilestoneReportDataComponent } from './milestone-report-data/milestone-report-data.component';
 import { MilestoneReportGraphComponent } from './milestone-report-graph/milestone-report-graph.component';
+import { SelectPeriodComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
 
 @NgModule({
   imports: [
     GradingCommonModule,
     HighchartsChartModule,
-    SelectPeriodModule,
+    SelectPeriodComponent,
     StudentTeacherCommonModule
   ],
   declarations: [

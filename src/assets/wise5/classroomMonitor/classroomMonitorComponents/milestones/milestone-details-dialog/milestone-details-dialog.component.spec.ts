@@ -26,11 +26,7 @@ describe('MilestoneDetailsDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        MilestoneDetailsComponent,
-        MilestoneDetailsDialogComponent,
-        SelectPeriodComponent
-      ],
+      declarations: [MilestoneDetailsComponent, MilestoneDetailsDialogComponent],
       imports: [
         ClassroomMonitorTestingModule,
         MatDialogModule,
@@ -40,7 +36,8 @@ describe('MilestoneDetailsDialogComponent', () => {
         MatProgressBarModule,
         MatSelectModule,
         MatTooltipModule,
-        NavItemProgressComponent
+        NavItemProgressComponent,
+        SelectPeriodComponent
       ],
       providers: [
         {

@@ -8,29 +8,29 @@ import { WorkgroupComponentGradingComponent } from '../../assets/wise5/classroom
 import { WorkgroupNodeStatusComponent } from '../classroom-monitor/workgroup-node-status/workgroup-node-status.component';
 import { WorkgroupSelectAutocompleteComponent } from '../classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
-import { ComponentGradingModule } from './component-grading.module';
 import { StatusIconComponent } from '../classroom-monitor/status-icon/status-icon.component';
 import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress/nav-item-progress.component';
+import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
+import { ComponentStateInfoComponent } from '../../assets/wise5/common/component-state-info/component-state-info.component';
 
 @NgModule({
   imports: [
-    ComponentGradingModule,
+    ComponentGradingComponent,
+    ComponentStateInfoComponent,
     EditComponentAnnotationsComponent,
     IntersectionObserverModule,
     NavItemProgressComponent,
     StatusIconComponent,
     StudentTeacherCommonModule,
     WorkgroupInfoComponent,
+    WorkgroupComponentGradingComponent,
     WorkgroupNodeScoreComponent,
     WorkgroupNodeStatusComponent
   ],
-  declarations: [
-    WorkgroupComponentGradingComponent,
-    WorkgroupItemComponent,
-    WorkgroupSelectAutocompleteComponent
-  ],
+  declarations: [WorkgroupItemComponent, WorkgroupSelectAutocompleteComponent],
   exports: [
-    ComponentGradingModule,
+    ComponentGradingComponent,
+    ComponentStateInfoComponent,
     EditComponentAnnotationsComponent,
     IntersectionObserverModule,
     NavItemProgressComponent,

@@ -47,15 +47,15 @@ describe('PeerGroupPeriodComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
+      declarations: [
         PeerGroupAssignedWorkgroupsComponent,
         PeerGroupPeriodComponent,
         PeerGroupGroupingComponent,
         PeerGroupUnassignedWorkgroupsComponent,
-        PeerGroupWorkgroupComponent,
-        SelectPeriodComponent
-    ],
-    imports: [BrowserAnimationsModule,
+        PeerGroupWorkgroupComponent
+      ],
+      imports: [
+        BrowserAnimationsModule,
         CommonModule,
         DragDropModule,
         FlexLayoutModule,
@@ -65,8 +65,10 @@ describe('PeerGroupPeriodComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatSelectModule,
-        ReactiveFormsModule],
-    providers: [
+        ReactiveFormsModule,
+        SelectPeriodComponent
+      ],
+      providers: [
         AchievementService,
         AnnotationService,
         ConfigService,
@@ -84,8 +86,8 @@ describe('PeerGroupPeriodComponent', () => {
         WorkgroupService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
