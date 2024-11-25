@@ -96,6 +96,7 @@ export class DrawStudent extends ComponentStudent {
       this.disableSubmitButton();
     }
     if (this.isDisabled) {
+      this.drawingTool.canvasOnly();
       this.drawingTool.canvas.removeListeners();
     }
 
@@ -323,14 +324,13 @@ export class DrawStudent extends ComponentStudent {
 
   addToNotebook(): void {
     if (this.isDirty) {
-      const studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
-        (componentState: any) => {
+      const studentWorkSavedToServerSubscription =
+        this.StudentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
           if (this.isForThisComponent(componentState)) {
             this.addNoteWithImage(componentState.id);
             studentWorkSavedToServerSubscription.unsubscribe();
           }
-        }
-      );
+        });
       this.saveButtonClicked();
     } else {
       const componentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
