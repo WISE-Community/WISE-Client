@@ -5,6 +5,7 @@ import { ProjectService } from '../../services/projectService';
 import { SummaryService } from '../../components/summary/summaryService';
 import { SummaryDisplay } from '../summary-display/summary-display.component';
 import { StudentDataService } from '../../services/studentDataService';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'student-summary-display',
@@ -12,32 +13,30 @@ import { StudentDataService } from '../../services/studentDataService';
   styleUrls: ['../summary-display/summary-display.component.scss']
 })
 export class StudentSummaryDisplay extends SummaryDisplay {
+  private studentWorkSavedToServerSubscription: Subscription;
+
   constructor(
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
+    protected dataService: StudentDataService,
     protected projectService: ProjectService,
-    private studentDataService: StudentDataService,
     protected summaryService: SummaryService
   ) {
-    super(annotationService, configService, projectService, summaryService);
+    super(annotationService, configService, dataService, projectService, summaryService);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
     this.initializeChangeListeners();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.studentWorkSavedToServerSubscription.unsubscribe();
   }
 
-  initializeDataService() {
-    this.dataService = this.studentDataService;
-  }
-
-  initializeChangeListeners() {
-    this.studentWorkSavedToServerSubscription = this.studentDataService.studentWorkSavedToServer$.subscribe(
-      (componentState) => {
+  private initializeChangeListeners(): void {
+    this.studentWorkSavedToServerSubscription =
+      this.dataService.studentWorkSavedToServer$.subscribe((componentState) => {
         if (
           this.doRender &&
           componentState.nodeId === this.nodeId &&
@@ -45,7 +44,6 @@ export class StudentSummaryDisplay extends SummaryDisplay {
         ) {
           this.renderDisplay();
         }
-      }
-    );
+      });
   }
 }
