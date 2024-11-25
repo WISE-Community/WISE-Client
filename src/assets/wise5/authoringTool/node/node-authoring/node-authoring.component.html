@@ -83,7 +83,12 @@
     }
   </div>
   @if (components.length === 0 && !isGroupNode) {
-    <p i18n>This step does not have any components. Click the + button to add a component.</p>
+    <p i18n>This step does not have any components.</p>
+    <add-component-button
+      class="add-component"
+      [node]="node"
+      (newComponentsEvent)="highlightAndExpandComponents($event)"
+    />
   }
   <div
     cdkDropList

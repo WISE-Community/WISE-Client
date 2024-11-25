@@ -31,8 +31,9 @@ import { CommonModule } from '@angular/common';
 export class AddComponentButtonComponent {
   protected firstComponent = false;
   @Input() insertAfterComponentId: string = null;
-  @Input() node: Node;
   @Output() newComponentsEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Input() node: Node;
+  protected tooltipText = $localize`Add component`;
 
   constructor(
     private createComponentService: CreateComponentService,
@@ -43,15 +44,14 @@ export class AddComponentButtonComponent {
   ) {}
 
   ngOnInit(): void {
-    this.setFirstComponent();
+    this.updateUI();
   }
 
-  private setFirstComponent(): void {
+  private updateUI(): void {
     this.firstComponent = this.node.getComponentPosition(this.insertAfterComponentId) === 0;
-  }
-
-  protected addFirstComponent(): void {
-    this.addComponent(null);
+    if (this.node.components.length > 0 && !this.firstComponent) {
+      this.tooltipText = $localize`Add component after`;
+    }
   }
 
   protected addComponent(afterComponent = this.insertAfterComponentId): void {
@@ -78,7 +78,7 @@ export class AddComponentButtonComponent {
           );
           this.projectService.saveProject();
           this.newComponentsEvent.emit([component]);
-          this.setFirstComponent();
+          this.updateUI();
         }
       });
   }

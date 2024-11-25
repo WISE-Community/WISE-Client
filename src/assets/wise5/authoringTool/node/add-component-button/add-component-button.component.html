@@ -4,14 +4,13 @@
     color="primary"
     [matMenuTriggerFor]="componentMenu"
     #menuTrigger
-    matTooltip="Add component"
+    [matTooltip]="tooltipText"
     matTooltipPosition="above"
-    i18n-matTooltip
   >
     <mat-icon>add_circle</mat-icon>
   </button>
   <mat-menu #componentMenu="matMenu">
-    <button mat-menu-item (click)="addFirstComponent()">
+    <button mat-menu-item (click)="addComponent(null)">
       <mat-icon class="rotate-180 flip-vertical">subdirectory_arrow_left</mat-icon
       ><span i18n>Add component before</span>
     </button>
@@ -23,8 +22,7 @@
   <button
     mat-icon-button
     color="primary"
-    matTooltip="Add component after"
-    i18n-matTooltip
+    [matTooltip]="tooltipText"
     matTooltipPosition="above"
     (click)="addComponent()"
   >
