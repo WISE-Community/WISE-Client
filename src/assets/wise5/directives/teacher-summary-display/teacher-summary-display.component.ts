@@ -15,14 +15,10 @@ export class TeacherSummaryDisplay extends SummaryDisplay {
   constructor(
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
+    protected dataService: TeacherDataService,
     protected projectService: ProjectService,
-    protected summaryService: SummaryService,
-    private teacherDataService: TeacherDataService
+    protected summaryService: SummaryService
   ) {
-    super(annotationService, configService, projectService, summaryService);
-  }
-
-  initializeDataService() {
-    this.dataService = this.teacherDataService;
+    super(annotationService, configService, dataService, projectService, summaryService);
   }
 }
