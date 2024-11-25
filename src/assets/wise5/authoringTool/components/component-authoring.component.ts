@@ -4,6 +4,7 @@ import { PreviewComponentComponent } from './preview-component/preview-component
 import { EditComponentComponent } from './edit-component/edit-component.component';
 import { ComponentFactory } from '../../common/ComponentFactory';
 import { Component as WISEComponent } from '../../common/Component';
+import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Component({
   imports: [PreviewComponentComponent, EditComponentComponent],
@@ -37,7 +38,12 @@ export class ComponentAuthoringComponent {
   @Output() editComponentEvent: EventEmitter<void> = new EventEmitter<void>();
   @Input() nodeId: string;
 
+  constructor(private projectService: TeacherProjectService) {}
+
   ngOnChanges(): void {
-    this.component = new ComponentFactory().getComponent(this.componentContent, this.nodeId);
+    this.component = new ComponentFactory().getComponent(
+      this.projectService.injectAssetPaths(this.componentContent),
+      this.nodeId
+    );
   }
 }
