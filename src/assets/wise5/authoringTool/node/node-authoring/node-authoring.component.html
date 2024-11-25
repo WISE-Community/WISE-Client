@@ -24,11 +24,6 @@
   <div class="node-authoring-controls">
     @if (!isGroupNode) {
       <div class="components-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-        <h5 i18n>Components</h5>
-        <add-component-button
-          [node]="node"
-          (newComponentsEvent)="highlightAndExpandComponents($event)"
-        />
         <div *ngIf="isAnyComponentSelected()">
           <button
             mat-icon-button

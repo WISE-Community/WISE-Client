@@ -1,10 +1,33 @@
-<button
-  mat-icon-button
-  color="primary"
-  matTooltip="Add a new component"
-  i18n-matTooltip
-  matTooltipPosition="above"
-  (click)="addComponent()"
->
-  <mat-icon>add_circle</mat-icon>
-</button>
+@if (firstComponent) {
+  <button
+    mat-icon-button
+    color="primary"
+    [matMenuTriggerFor]="componentMenu"
+    #menuTrigger
+    matTooltip="Add component"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button>
+  <mat-menu #componentMenu="matMenu">
+    <button mat-menu-item (click)="addFirstComponent()">
+      <mat-icon class="rotate-180 flip-vertical">subdirectory_arrow_left</mat-icon
+      ><span i18n>Add component before</span>
+    </button>
+    <button mat-menu-item (click)="addComponent()">
+      <mat-icon>subdirectory_arrow_left</mat-icon><span i18n>Add component after</span>
+    </button>
+  </mat-menu>
+} @else {
+  <button
+    mat-icon-button
+    color="primary"
+    matTooltip="Add component after"
+    i18n-matTooltip
+    matTooltipPosition="above"
+    (click)="addComponent()"
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button>
+}

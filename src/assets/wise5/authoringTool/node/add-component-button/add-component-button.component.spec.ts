@@ -33,7 +33,8 @@ describe('AddComponentButtonComponent', () => {
     });
     fixture = TestBed.createComponent(AddComponentButtonComponent);
     component = fixture.componentInstance;
-    component.node = { id: 'node1' } as Node;
+    component.node = new Node();
+    component.node.id = 'node1';
     loader = TestbedHarnessEnvironment.loader(fixture);
     fixture.detectChanges();
   });
