@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{ stepNumberAndTitle }}</h2>
 <mat-dialog-content #nodeInfoDiv class="dialog-content-scroll">
-  <node-info [nodeId]="nodeId"></node-info>
+  <node-info [nodeId]="nodeId" />
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button (click)="openInNewWindow()" i18n>Open in New Window</button>

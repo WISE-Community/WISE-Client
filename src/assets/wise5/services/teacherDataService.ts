@@ -509,21 +509,6 @@ export class TeacherDataService extends DataService {
     return this.studentData.eventsByNodeId[nodeId] || [];
   }
 
-  getLatestEventByWorkgroupIdAndNodeIdAndType(workgroupId, nodeId, eventType) {
-    const eventsByWorkgroupId = this.getEventsByWorkgroupId(workgroupId);
-    for (let e = eventsByWorkgroupId.length - 1; e >= 0; e--) {
-      const event = eventsByWorkgroupId[e];
-      if (this.isEventMatchingNodeIdEventType(event, nodeId, eventType)) {
-        return event;
-      }
-    }
-    return null;
-  }
-
-  isEventMatchingNodeIdEventType(event, nodeId, eventType) {
-    return event.nodeId === nodeId && event.event === eventType;
-  }
-
   getAnnotationsToWorkgroupId(workgroupId: number) {
     return this.studentData.annotationsToWorkgroupId[workgroupId] || [];
   }

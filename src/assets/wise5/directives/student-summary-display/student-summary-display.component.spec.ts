@@ -1,7 +1,4 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { ComponentContent } from '../../common/ComponentContent';
 import { ConfigService } from '../../services/configService';
@@ -15,11 +12,9 @@ let fixture: ComponentFixture<StudentSummaryDisplay>;
 describe('StudentSummaryDisplayComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [StudentSummaryDisplay],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [StudentSummaryDisplay, StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi())]
+    });
     fixture = TestBed.createComponent(StudentSummaryDisplay);
     component = fixture.componentInstance;
     fixture.detectChanges();

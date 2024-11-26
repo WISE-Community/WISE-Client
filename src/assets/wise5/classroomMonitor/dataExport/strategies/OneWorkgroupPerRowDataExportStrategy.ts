@@ -115,11 +115,12 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                 var componentId = component.id;
                 if (this.exportComponent(selectedNodesMap, nodeId, componentId)) {
                   var columnIdPrefix = nodeId + '-' + componentId;
-                  var componentState = this.teacherDataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
-                    workgroupId,
-                    nodeId,
-                    componentId
-                  );
+                  var componentState =
+                    this.teacherDataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
+                      workgroupId,
+                      nodeId,
+                      componentId
+                    );
                   if (componentState != null) {
                     if (this.controller.includeStudentWorkIds) {
                       workgroupRow[columnIdToColumnIndex[columnIdPrefix + '-studentWorkId']] =
@@ -135,15 +136,15 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                         ] = formattedDateTime;
                       }
                     }
-                    workgroupRow[
-                      columnIdToColumnIndex[columnIdPrefix + '-studentWork']
-                    ] = this.getStudentDataString(componentState);
+                    workgroupRow[columnIdToColumnIndex[columnIdPrefix + '-studentWork']] =
+                      this.getStudentDataString(componentState);
                     if (this.controller.includeScores || this.controller.includeComments) {
-                      var latestComponentAnnotations = this.annotationService.getLatestComponentAnnotations(
-                        nodeId,
-                        componentId,
-                        workgroupId
-                      );
+                      var latestComponentAnnotations =
+                        this.annotationService.getLatestComponentAnnotations(
+                          nodeId,
+                          componentId,
+                          workgroupId
+                        );
                       if (latestComponentAnnotations != null) {
                         var scoreAnnotation = latestComponentAnnotations.score;
                         var commentAnnotation = latestComponentAnnotations.comment;
@@ -162,9 +163,8 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                               scoreAnnotation.data.value != null
                             ) {
                               var scoreValue = scoreAnnotation.data.value;
-                              workgroupRow[
-                                columnIdToColumnIndex[columnIdPrefix + '-score']
-                              ] = scoreValue;
+                              workgroupRow[columnIdToColumnIndex[columnIdPrefix + '-score']] =
+                                scoreValue;
                             }
                           }
                         }
@@ -183,9 +183,8 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                               commentAnnotation.data.value != null
                             ) {
                               var commentValue = commentAnnotation.data.value;
-                              workgroupRow[
-                                columnIdToColumnIndex[columnIdPrefix + '-comment']
-                              ] = commentValue;
+                              workgroupRow[columnIdToColumnIndex[columnIdPrefix + '-comment']] =
+                                commentValue;
                             }
                           }
                         }
@@ -200,11 +199,9 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
             if (this.projectService.isBranchPoint(nodeId)) {
               var toNodeId = null;
               var stepTitle = null;
-              var eventType = 'branchPathTaken';
-              var latestBranchPathTakenEvent = this.teacherDataService.getLatestEventByWorkgroupIdAndNodeIdAndType(
+              const latestBranchPathTakenEvent = this.getLatestBranchPathTakenEvent(
                 workgroupId,
-                nodeId,
-                eventType
+                nodeId
               );
               if (
                 latestBranchPathTakenEvent != null &&
@@ -231,9 +228,8 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
               }
               if (this.controller.includeBranchPathTakenStepTitle) {
                 if (stepTitle != null) {
-                  workgroupRow[
-                    columnIdToColumnIndex[nodeId + '-branchPathTakenStepTitle']
-                  ] = stepTitle;
+                  workgroupRow[columnIdToColumnIndex[nodeId + '-branchPathTakenStepTitle']] =
+                    stepTitle;
                 } else {
                   workgroupRow[columnIdToColumnIndex[nodeId + '-branchPathTakenStepTitle']] = ' ';
                 }
@@ -247,6 +243,17 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
       this.generateCSVFile(rows, fileName);
       this.controller.hideDownloadingExportMessage();
     });
+  }
+
+  private getLatestBranchPathTakenEvent(workgroupId: number, nodeId: string): any {
+    const events = this.teacherDataService.getEventsByWorkgroupId(workgroupId);
+    for (let i = events.length - 1; i >= 0; i--) {
+      const event = events[i];
+      if (event.nodeId === nodeId && event.event === 'branchPathTaken') {
+        return event;
+      }
+    }
+    return null;
   }
 
   /**
@@ -434,22 +441,19 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                   c + 1;
                 componentTypeRow[columnIdToColumnIndex[columnIdPrefix + '-studentWorkId']] =
                   component.type;
-                componentPromptRow[
-                  columnIdToColumnIndex[columnIdPrefix + '-studentWorkId']
-                ] = prompt;
+                componentPromptRow[columnIdToColumnIndex[columnIdPrefix + '-studentWorkId']] =
+                  prompt;
                 nodeIdRow[columnIdToColumnIndex[columnIdPrefix + '-studentWorkId']] = nodeId;
-                componentIdRow[
-                  columnIdToColumnIndex[columnIdPrefix + '-studentWorkId']
-                ] = componentId;
+                componentIdRow[columnIdToColumnIndex[columnIdPrefix + '-studentWorkId']] =
+                  componentId;
                 columnIdRow[columnIdToColumnIndex[columnIdPrefix + '-studentWorkId']] =
                   columnIdPrefix + '-studentWorkId';
                 descriptionRow[columnIdToColumnIndex[columnIdPrefix + '-studentWorkId']] =
                   'Student Work ID';
               }
               if (this.controller.includeStudentWorkTimestamps) {
-                stepTitleRow[
-                  columnIdToColumnIndex[columnIdPrefix + '-studentWorkTimestamp']
-                ] = stepTitle;
+                stepTitleRow[columnIdToColumnIndex[columnIdPrefix + '-studentWorkTimestamp']] =
+                  stepTitle;
                 componentPartNumberRow[
                   columnIdToColumnIndex[columnIdPrefix + '-studentWorkTimestamp']
                 ] = c + 1;
@@ -459,9 +463,8 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                   columnIdToColumnIndex[columnIdPrefix + '-studentWorkTimestamp']
                 ] = prompt;
                 nodeIdRow[columnIdToColumnIndex[columnIdPrefix + '-studentWorkTimestamp']] = nodeId;
-                componentIdRow[
-                  columnIdToColumnIndex[columnIdPrefix + '-studentWorkTimestamp']
-                ] = componentId;
+                componentIdRow[columnIdToColumnIndex[columnIdPrefix + '-studentWorkTimestamp']] =
+                  componentId;
                 columnIdRow[columnIdToColumnIndex[columnIdPrefix + '-studentWorkTimestamp']] =
                   columnIdPrefix + '-studentWorkTimestamp';
                 descriptionRow[columnIdToColumnIndex[columnIdPrefix + '-studentWorkTimestamp']] =
@@ -475,9 +478,8 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                   component.type;
                 componentPromptRow[columnIdToColumnIndex[columnIdPrefix + '-studentWork']] = prompt;
                 nodeIdRow[columnIdToColumnIndex[columnIdPrefix + '-studentWork']] = nodeId;
-                componentIdRow[
-                  columnIdToColumnIndex[columnIdPrefix + '-studentWork']
-                ] = componentId;
+                componentIdRow[columnIdToColumnIndex[columnIdPrefix + '-studentWork']] =
+                  componentId;
                 columnIdRow[columnIdToColumnIndex[columnIdPrefix + '-studentWork']] =
                   columnIdPrefix + '-studentWork';
                 descriptionRow[columnIdToColumnIndex[columnIdPrefix + '-studentWork']] =
@@ -490,13 +492,11 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                   c + 1;
                 componentTypeRow[columnIdToColumnIndex[columnIdPrefix + '-scoreTimestamp']] =
                   component.type;
-                componentPromptRow[
-                  columnIdToColumnIndex[columnIdPrefix + '-scoreTimestamp']
-                ] = prompt;
+                componentPromptRow[columnIdToColumnIndex[columnIdPrefix + '-scoreTimestamp']] =
+                  prompt;
                 nodeIdRow[columnIdToColumnIndex[columnIdPrefix + '-scoreTimestamp']] = nodeId;
-                componentIdRow[
-                  columnIdToColumnIndex[columnIdPrefix + '-scoreTimestamp']
-                ] = componentId;
+                componentIdRow[columnIdToColumnIndex[columnIdPrefix + '-scoreTimestamp']] =
+                  componentId;
                 columnIdRow[columnIdToColumnIndex[columnIdPrefix + '-scoreTimestamp']] =
                   columnIdPrefix + '-scoreTimestamp';
                 descriptionRow[columnIdToColumnIndex[columnIdPrefix + '-scoreTimestamp']] =
@@ -514,21 +514,18 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                 descriptionRow[columnIdToColumnIndex[columnIdPrefix + '-score']] = 'Score';
               }
               if (this.controller.includeCommentTimestamps) {
-                stepTitleRow[
-                  columnIdToColumnIndex[columnIdPrefix + '-commentTimestamp']
-                ] = stepTitle;
+                stepTitleRow[columnIdToColumnIndex[columnIdPrefix + '-commentTimestamp']] =
+                  stepTitle;
                 componentPartNumberRow[
                   columnIdToColumnIndex[columnIdPrefix + '-commentTimestamp']
                 ] = c + 1;
                 componentTypeRow[columnIdToColumnIndex[columnIdPrefix + '-commentTimestamp']] =
                   component.type;
-                componentPromptRow[
-                  columnIdToColumnIndex[columnIdPrefix + '-commentTimestamp']
-                ] = prompt;
+                componentPromptRow[columnIdToColumnIndex[columnIdPrefix + '-commentTimestamp']] =
+                  prompt;
                 nodeIdRow[columnIdToColumnIndex[columnIdPrefix + '-commentTimestamp']] = nodeId;
-                componentIdRow[
-                  columnIdToColumnIndex[columnIdPrefix + '-commentTimestamp']
-                ] = componentId;
+                componentIdRow[columnIdToColumnIndex[columnIdPrefix + '-commentTimestamp']] =
+                  componentId;
                 columnIdRow[columnIdToColumnIndex[columnIdPrefix + '-commentTimestamp']] =
                   columnIdPrefix + '-commentTimestamp';
                 descriptionRow[columnIdToColumnIndex[columnIdPrefix + '-commentTimestamp']] =

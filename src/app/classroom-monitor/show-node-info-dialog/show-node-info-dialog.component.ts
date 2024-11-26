@@ -1,15 +1,19 @@
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
+import { NodeInfoComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component';
 
 @Component({
+  imports: [MatButtonModule, MatDialogModule, NodeInfoComponent],
   selector: 'show-node-info-dialog',
   templateUrl: './show-node-info-dialog.component.html',
-  styleUrls: ['./show-node-info-dialog.component.scss']
+  styleUrl: './show-node-info-dialog.component.scss',
+  standalone: true
 })
 export class ShowNodeInfoDialogComponent implements OnInit {
   @ViewChild('nodeInfoDiv') nodeInfoDiv: ElementRef;
-  stepNumberAndTitle: string;
+  protected stepNumberAndTitle: string;
 
   constructor(
     public dialogRef: MatDialogRef<ShowNodeInfoDialogComponent>,
