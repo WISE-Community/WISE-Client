@@ -1,48 +1,48 @@
 <div class="component__content" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
   <div fxLayout="column" fxFlex="100" [fxFlex.gt-sm]="isGradable ? 66 : 100">
-    <ng-container
-      *ngIf="
-        latestComponentState != null ||
-        component.type === 'ShowGroupWork' ||
-        component.type === 'ShowMyWork'
-      "
-    >
+    @if (
+      latestComponentState != null ||
+      component.type === 'ShowGroupWork' ||
+      component.type === 'ShowMyWork'
+    ) {
       <component-grading-component
         [nodeId]="nodeId"
         [componentId]="component.id"
         [componentState]="latestComponentState"
         [workgroupId]="workgroupId"
-      ></component-grading-component>
-    </ng-container>
+      />
+    }
     <span fxFlex></span>
-    <div
-      *ngIf="componentStates.length === 0 && component.type !== 'ShowGroupWork'"
-      class="component__actions__info component--grading__actions__info md-caption"
-      i18n
-    >
-      Team has not saved any work
-    </div>
-    <div
-      *ngIf="componentStates.length > 0"
-      class="component__actions__info component--grading__actions__info md-caption"
-      fxLayout="row"
-    >
-      <component-state-info [componentState]="latestComponentState"> </component-state-info>
-      <span *ngIf="componentStates.length > 1">
-        &nbsp;&#8226;&nbsp;<a (click)="showRevisions($event)" i18n>See revisions</a>
-      </span>
-    </div>
+    @if (componentStates.length === 0 && component.type !== 'ShowGroupWork') {
+      <div class="component__actions__info component--grading__actions__info md-caption" i18n>
+        Team has not saved any work
+      </div>
+    }
+    @if (componentStates.length > 0) {
+      <div
+        class="component__actions__info component--grading__actions__info md-caption"
+        fxLayout="row"
+      >
+        <component-state-info [componentState]="latestComponentState" />
+        @if (componentStates.length > 1) {
+          <span>
+            &nbsp;&#8226;&nbsp;<a (click)="showRevisions($event)" i18n>See revisions</a>
+          </span>
+        }
+      </div>
+    }
   </div>
-  <div *ngIf="isGradable" fxFlex="100" fxFlex.gt-sm="33" class="component--grading__annotations">
-    <edit-component-annotations
-      [componentId]="component.id"
-      [componentStateId]="latestComponentStateId"
-      [fromWorkgroupId]="teacherWorkgroupId"
-      [isDisabled]="false"
-      [nodeId]="nodeId"
-      [showAllAnnotations]="false"
-      [toWorkgroupId]="workgroupId"
-    >
-    </edit-component-annotations>
-  </div>
+  @if (isGradable) {
+    <div fxFlex="100" fxFlex.gt-sm="33" class="component--grading__annotations">
+      <edit-component-annotations
+        [componentId]="component.id"
+        [componentStateId]="latestComponentStateId"
+        [fromWorkgroupId]="teacherWorkgroupId"
+        [isDisabled]="false"
+        [nodeId]="nodeId"
+        [showAllAnnotations]="false"
+        [toWorkgroupId]="workgroupId"
+      />
+    </div>
+  }
 </div>

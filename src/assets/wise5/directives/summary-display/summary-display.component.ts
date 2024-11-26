@@ -1,6 +1,6 @@
 import * as Highcharts from 'highcharts';
 import { Component, Input, SimpleChanges } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
@@ -9,11 +9,17 @@ import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { copy } from '../../common/object/object';
 import { rgbToHex } from '../../common/color/color';
+import { DataService } from '../../../../app/services/data.service';
+import { StudentDataService } from '../../services/studentDataService';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
+  imports: [CommonModule, MatCardModule],
   selector: 'summary-display',
-  templateUrl: 'summary-display.component.html',
-  styleUrls: ['summary-display.component.scss']
+  standalone: true,
+  styleUrl: 'summary-display.component.scss',
+  templateUrl: 'summary-display.component.html'
 })
 export abstract class SummaryDisplay {
   chartConfig: any;
@@ -40,7 +46,6 @@ export abstract class SummaryDisplay {
     correct: '#00C853',
     incorrect: '#C62828'
   };
-  dataService: any = null;
   defaultMaxScore: number = 5;
   hasCorrectness: boolean = false;
   Highcharts: typeof Highcharts = Highcharts;
@@ -50,7 +55,6 @@ export abstract class SummaryDisplay {
   otherComponent: any;
   otherComponentType: string;
   percentResponded: number;
-  studentWorkSavedToServerSubscription: Subscription;
   totalWorkgroups: number;
 
   @Input() nodeId: string;
@@ -68,6 +72,7 @@ export abstract class SummaryDisplay {
   constructor(
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
+    protected dataService: DataService,
     protected projectService: ProjectService,
     protected summaryService: SummaryService
   ) {}
@@ -75,7 +80,6 @@ export abstract class SummaryDisplay {
   ngOnInit() {
     this.setNumDummySamples();
     this.initializeOtherComponent();
-    this.initializeDataService();
     this.initializeCustomLabelColors();
     if (this.doRender) {
       this.renderDisplay();
@@ -97,10 +101,6 @@ export abstract class SummaryDisplay {
     if (this.otherComponent != null) {
       this.otherComponentType = this.otherComponent.type;
     }
-  }
-
-  initializeDataService() {
-    // implemented by children
   }
 
   initializeCustomLabelColors() {
@@ -164,9 +164,9 @@ export abstract class SummaryDisplay {
     this.processComponentStates(componentStates);
   }
 
-  getResponseForSelf() {
+  private getResponseForSelf() {
     if (this.isVLEPreview() || this.isStudentRun()) {
-      return this.dataService.getLatestComponentStateByNodeIdAndComponentId(
+      return (this.dataService as StudentDataService).getLatestComponentStateByNodeIdAndComponentId(
         this.nodeId,
         this.componentId
       );
@@ -312,12 +312,11 @@ export abstract class SummaryDisplay {
     });
   }
 
-  getDummyStudentWorkForVLEPreview(nodeId: string, componentId: string): Observable<any> {
+  private getDummyStudentWorkForVLEPreview(nodeId: string, componentId: string): Observable<any> {
     const componentStates = this.createDummyComponentStates();
-    const componentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
-      nodeId,
-      componentId
-    );
+    const componentState = (
+      this.dataService as StudentDataService
+    ).getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId);
     if (componentState != null) {
       componentStates.push(componentState);
     }
@@ -341,7 +340,7 @@ export abstract class SummaryDisplay {
     return of(this.createDummyScoreAnnotations());
   }
 
-  createDummyComponentStates() {
+  private createDummyComponentStates() {
     const dummyComponentStates = [];
     for (let dummyCounter = 0; dummyCounter < this.numDummySamples; dummyCounter++) {
       dummyComponentStates.push(this.createDummyComponentState(this.otherComponent));
@@ -349,7 +348,7 @@ export abstract class SummaryDisplay {
     return dummyComponentStates;
   }
 
-  createDummyComponentState(component) {
+  private createDummyComponentState(component) {
     if (this.otherComponentType === 'MultipleChoice') {
       return this.createDummyMultipleChoiceComponentState(component);
     } else if (this.otherComponentType === 'Table') {
@@ -366,7 +365,7 @@ export abstract class SummaryDisplay {
     };
   }
 
-  createDummyTableComponentState(component) {
+  private createDummyTableComponentState(component) {
     if (this.isAuthoringPreview()) {
       return {
         studentData: {
@@ -391,12 +390,11 @@ export abstract class SummaryDisplay {
     ];
   }
 
-  getDummyTableDataSimilarToLatestComponentState() {
+  private getDummyTableDataSimilarToLatestComponentState(): any {
     let tableData = [];
-    const componentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
+    const componentState = (
+      this.dataService as StudentDataService
+    ).getLatestComponentStateByNodeIdAndComponentId(this.nodeId, this.componentId);
     if (componentState != null) {
       tableData = copy(componentState.studentData.tableData);
       for (let r = 1; r < tableData.length; r++) {
@@ -406,15 +404,15 @@ export abstract class SummaryDisplay {
     return tableData;
   }
 
-  getRandomSimilarNumber(text) {
+  private getRandomSimilarNumber(text): number {
     return Math.ceil(this.convertToNumber(text) * Math.random());
   }
 
-  getRandomChoice(choices) {
+  private getRandomChoice(choices): any {
     return choices[Math.floor(Math.random() * choices.length)];
   }
 
-  createDummyScoreAnnotations() {
+  private createDummyScoreAnnotations(): any {
     const dummyScoreAnnotations = [];
     for (let dummyCounter = 0; dummyCounter < this.numDummySamples; dummyCounter++) {
       dummyScoreAnnotations.push(this.createDummyScoreAnnotation());

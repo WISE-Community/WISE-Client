@@ -1,14 +1,25 @@
-'use strict';
-
 import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { Annotation } from '../../../common/Annotation';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { EditComponentScoreComponent } from '../edit-component-score/edit-component-score.component';
+import { GradingEditComponentMaxScoreComponent } from '../grading-edit-component-max-score/grading-edit-component-max-score.component';
+import { EditComponentCommentComponent } from '../edit-component-comment/edit-component-comment.component';
 
 @Component({
+  imports: [
+    CommonModule,
+    EditComponentCommentComponent,
+    EditComponentScoreComponent,
+    FlexLayoutModule,
+    GradingEditComponentMaxScoreComponent
+  ],
   selector: 'edit-component-annotations',
+  standalone: true,
   styles: ['.disabled-text { color: gray; }'],
   templateUrl: 'edit-component-annotations.component.html'
 })
@@ -21,35 +32,32 @@ export class EditComponentAnnotationsComponent {
   @Input() showAllAnnotations: boolean;
   @Input() toWorkgroupId: number;
 
-  annotationId: number;
-  canAuthorProject: boolean;
-  canGradeStudentWork: boolean;
-  comment: string;
-  componentStates: any;
-  edit: boolean;
-  latestAnnotations: any;
-  periodId: number;
-  runId: number;
-  score: number;
-
-  annotationSavedToServerSubscription: Subscription;
+  protected canAuthorProject: boolean;
+  protected canGradeStudentWork: boolean;
+  protected comment: string;
+  private componentStates: any;
+  protected edit: boolean;
+  protected latestAnnotations: any;
+  protected periodId: number;
+  protected runId: number;
+  private subscription: Subscription;
 
   constructor(
-    private AnnotationService: AnnotationService,
-    private ConfigService: ConfigService,
-    private TeacherDataService: TeacherDataService
+    private annotationService: AnnotationService,
+    private configService: ConfigService,
+    private dataService: TeacherDataService
   ) {}
 
-  ngOnInit() {
-    this.runId = this.ConfigService.getRunId();
-    const permissions = this.ConfigService.getPermissions();
+  ngOnInit(): void {
+    this.runId = this.configService.getRunId();
+    const permissions = this.configService.getPermissions();
     this.canGradeStudentWork = permissions.canGradeStudentWork;
     this.canAuthorProject = permissions.canAuthorProject;
-    const toUserInfo = this.ConfigService.getUserInfoByWorkgroupId(this.toWorkgroupId);
+    const toUserInfo = this.configService.getUserInfoByWorkgroupId(this.toWorkgroupId);
     if (toUserInfo) {
       this.periodId = toUserInfo.periodId;
     }
-    this.annotationSavedToServerSubscription = this.AnnotationService.annotationSavedToServer$.subscribe(
+    this.subscription = this.annotationService.annotationSavedToServer$.subscribe(
       (annotation: Annotation) => {
         // TODO: we're watching this here and in the parent component's controller; probably want to optimize!
         if (annotation.nodeId === this.nodeId && annotation.componentId === this.componentId) {
@@ -59,52 +67,55 @@ export class EditComponentAnnotationsComponent {
     );
   }
 
-  ngOnDestroy() {
-    this.annotationSavedToServerSubscription.unsubscribe();
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
-  ngOnChanges() {
-    this.componentStates = this.TeacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
+  ngOnChanges(): void {
+    this.componentStates = this.dataService.getComponentStatesByWorkgroupIdAndComponentId(
       this.toWorkgroupId,
       this.componentId
     );
     this.processAnnotations();
   }
 
-  processAnnotations() {
+  private processAnnotations(): void {
     if (this.showAllAnnotations) {
-      this.latestAnnotations = {};
-      this.latestAnnotations.score = this.AnnotationService.getLatestTeacherScoreAnnotationByStudentWorkId(
-        this.componentStateId
-      );
-      this.latestAnnotations.autoScore = this.AnnotationService.getLatestAutoScoreAnnotationByStudentWorkId(
-        this.componentStateId
-      );
-      this.latestAnnotations.comment = this.AnnotationService.getLatestTeacherCommentAnnotationByStudentWorkId(
-        this.componentStateId
-      );
-      this.latestAnnotations.autoComment = this.AnnotationService.getLatestAutoCommentAnnotationByStudentWorkId(
-        this.componentStateId
-      );
+      this.processAllAnnotations();
     } else {
-      this.latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
-        this.nodeId,
-        this.componentId,
-        this.toWorkgroupId
+      this.processLatestAnnotations();
+    }
+  }
+
+  private processAllAnnotations(): void {
+    this.latestAnnotations = {};
+    this.latestAnnotations.score =
+      this.annotationService.getLatestTeacherScoreAnnotationByStudentWorkId(this.componentStateId);
+    this.latestAnnotations.autoScore =
+      this.annotationService.getLatestAutoScoreAnnotationByStudentWorkId(this.componentStateId);
+    this.latestAnnotations.comment =
+      this.annotationService.getLatestTeacherCommentAnnotationByStudentWorkId(
+        this.componentStateId
       );
-      if (this.latestAnnotations && this.latestAnnotations.comment) {
-        const latestComment = this.latestAnnotations.comment;
-        if (latestComment.type === 'comment') {
-          this.comment = latestComment.data.value;
-        }
-      }
-      if (this.latestAnnotations && this.latestAnnotations.score) {
-        this.score = this.latestAnnotations.score.data.value;
+    this.latestAnnotations.autoComment =
+      this.annotationService.getLatestAutoCommentAnnotationByStudentWorkId(this.componentStateId);
+  }
+
+  private processLatestAnnotations(): void {
+    this.latestAnnotations = this.annotationService.getLatestComponentAnnotations(
+      this.nodeId,
+      this.componentId,
+      this.toWorkgroupId
+    );
+    if (this.latestAnnotations && this.latestAnnotations.comment) {
+      const latestComment = this.latestAnnotations.comment;
+      if (latestComment.type === 'comment') {
+        this.comment = latestComment.data.value;
       }
     }
   }
 
-  showAutoComment() {
+  protected showAutoComment(): boolean {
     if (this.latestAnnotations) {
       const latestComment = this.latestAnnotations.comment;
       if (latestComment && latestComment.type === 'autoComment') {
@@ -119,23 +130,23 @@ export class EditComponentAnnotationsComponent {
     return false;
   }
 
-  hasTeacherAnnotations() {
+  protected hasTeacherAnnotations(): boolean {
     return this.latestAnnotations.score || this.latestAnnotations.comment;
   }
 
-  hasAutoAnnotations() {
+  protected hasAutoAnnotations(): boolean {
     return this.latestAnnotations.autoScore || this.latestAnnotations.autoComment;
   }
 
-  hasTeacherAndAutoAnnotations() {
+  protected hasTeacherAndAutoAnnotations(): boolean {
     return this.hasTeacherAnnotations() && this.hasAutoAnnotations();
   }
 
-  hasNoAnnotations() {
+  protected hasNoAnnotations(): boolean {
     return !(this.hasTeacherAnnotations() || this.hasAutoAnnotations());
   }
 
-  toggleEditComment() {
+  protected toggleEditComment(): void {
     this.edit = !this.edit;
     if (this.edit) {
       document.getElementById(`commentInput_${this.componentId}_${this.toWorkgroupId}`).focus();

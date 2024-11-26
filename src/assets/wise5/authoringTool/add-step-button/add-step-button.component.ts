@@ -9,8 +9,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AddStepTarget } from '../../../../app/domain/addStepTarget';
 
 @Component({
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
   selector: 'add-step-button',
-  templateUrl: './add-step-button.component.html',
   standalone: true,
   styles: [
     `
@@ -22,12 +22,12 @@ import { AddStepTarget } from '../../../../app/domain/addStepTarget';
       }
     `
   ],
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule]
+  templateUrl: './add-step-button.component.html'
 })
 export class AddStepButtonComponent {
-  protected branchMergePoint: boolean;
-  protected branchPathStep: boolean;
-  protected branchPoint: boolean;
+  protected canAddAfter: boolean;
+  protected canAddBefore: boolean;
+  protected canBranch: boolean;
   @Input() nodeId: string;
 
   constructor(
@@ -37,9 +37,11 @@ export class AddStepButtonComponent {
   ) {}
 
   ngOnInit(): void {
-    this.branchPoint = this.projectService.isBranchPoint(this.nodeId);
-    this.branchPathStep = this.projectService.isNodeInAnyBranchPath(this.nodeId);
-    this.branchMergePoint = this.projectService.isBranchMergePoint(this.nodeId);
+    this.canAddBefore = this.projectService.isFirstStepInLesson(this.nodeId);
+    const isBranchPoint = this.projectService.isBranchPoint(this.nodeId);
+    const isBranchPathStep = this.projectService.isNodeInAnyBranchPath(this.nodeId);
+    this.canAddAfter = !isBranchPoint;
+    this.canBranch = !(isBranchPoint || isBranchPathStep);
   }
 
   protected addStepBefore(): void {

@@ -6,22 +6,23 @@
   matTooltip="Add step"
   matTooltipPosition="above"
   i18n-matTooltip
+  [disabled]="!canAddBefore && !canAddAfter && !canBranch"
 >
   <mat-icon>add_circle</mat-icon>
 </button>
 <mat-menu #step="matMenu">
-  @if (!branchMergePoint) {
+  @if (canAddBefore) {
     <button mat-menu-item (click)="addStepBefore()">
       <mat-icon class="rotate-180 flip-vertical">subdirectory_arrow_left</mat-icon
       ><span i18n>Add step before</span>
     </button>
   }
-  @if (!branchPoint) {
+  @if (canAddAfter) {
     <button mat-menu-item (click)="goToAddStepViewForAfter(nodeId)">
       <mat-icon>subdirectory_arrow_left</mat-icon><span i18n>Add step after</span>
     </button>
   }
-  @if (!branchPoint && !branchPathStep) {
+  @if (canBranch) {
     <button mat-menu-item (click)="goToCreateBranchView()">
       <mat-icon class="rotate-180">call_split</mat-icon><span i18n>Branch off this step</span>
     </button>

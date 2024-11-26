@@ -6,16 +6,16 @@
     "declaration": false,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "module": "es2022",
+    "module": "ESNext",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "ES2022",
+    "target": "ES2023",
     "resolveJsonModule": true,
     "typeRoots": [
       "node_modules/@types"
     ],
     "lib": [
-      "es2022",
+      "ES2023",
       "dom"
     ],
     "useDefineForClassFields": false

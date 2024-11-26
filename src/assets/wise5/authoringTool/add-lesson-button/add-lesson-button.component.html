@@ -25,10 +25,11 @@
     </button>
     <mat-menu #lessonMenu="matMenu">
       <button mat-menu-item (click)="addFirstLesson()">
-        <mat-icon>add_circle</mat-icon><span i18n>Add lesson before</span>
+        <mat-icon class="rotate-180 flip-vertical">subdirectory_arrow_left</mat-icon
+        ><span i18n>Add lesson before</span>
       </button>
       <button mat-menu-item (click)="goToAddLessonView(lessonId)">
-        <mat-icon>add_circle</mat-icon><span i18n>Add lesson after</span>
+        <mat-icon>subdirectory_arrow_left</mat-icon><span i18n>Add lesson after</span>
       </button>
     </mat-menu>
   </ng-container>
