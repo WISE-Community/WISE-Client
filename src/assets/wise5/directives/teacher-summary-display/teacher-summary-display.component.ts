@@ -5,24 +5,25 @@ import { ProjectService } from '../../services/projectService';
 import { SummaryService } from '../../components/summary/summaryService';
 import { SummaryDisplay } from '../summary-display/summary-display.component';
 import { TeacherDataService } from '../../services/teacherDataService';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @Component({
+  imports: [CommonModule, HighchartsChartModule, MatCardModule],
   selector: 'teacher-summary-display',
-  templateUrl: '../summary-display/summary-display.component.html',
-  styleUrls: ['../summary-display/summary-display.component.scss']
+  standalone: true,
+  styleUrl: '../summary-display/summary-display.component.scss',
+  templateUrl: '../summary-display/summary-display.component.html'
 })
-export class TeacherSummaryDisplay extends SummaryDisplay {
+export class TeacherSummaryDisplayComponent extends SummaryDisplay {
   constructor(
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
+    protected dataService: TeacherDataService,
     protected projectService: ProjectService,
-    protected summaryService: SummaryService,
-    private teacherDataService: TeacherDataService
+    protected summaryService: SummaryService
   ) {
-    super(annotationService, configService, projectService, summaryService);
-  }
-
-  initializeDataService() {
-    this.dataService = this.teacherDataService;
+    super(annotationService, configService, dataService, projectService, summaryService);
   }
 }
