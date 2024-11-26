@@ -1,8 +1,8 @@
-'use strict';
-
 import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
 import { arraysContainSameValues } from '../../common/array/array';
+import { Choice } from './Choice';
+import { generateRandomKey } from '../../common/string/string';
 
 @Injectable()
 export class MultipleChoiceService extends ComponentService {
@@ -10,11 +10,15 @@ export class MultipleChoiceService extends ComponentService {
     return $localize`Multiple Choice`;
   }
 
-  createComponent() {
+  createComponent(): any {
     const component: any = super.createComponent();
     component.type = 'MultipleChoice';
+    component.prompt = $localize`Choose an option from below`;
     component.choiceType = 'radio';
-    component.choices = [];
+    component.choices = [
+      new Choice(generateRandomKey(), $localize`Choice 1`, false, ''),
+      new Choice(generateRandomKey(), $localize`Choice 2`, false, '')
+    ];
     component.showFeedback = true;
     return component;
   }
