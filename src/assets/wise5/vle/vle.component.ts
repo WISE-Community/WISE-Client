@@ -378,12 +378,11 @@ export class VLEComponent implements AfterViewInit {
        * @returns {the|Object}
        */
       getLatestAnnotationForComponent: (nodeId, componentId, annotationType) => {
-        let params = {
+        return this.annotationService.getLatestAnnotation({
           nodeId: nodeId,
           componentId: componentId,
           type: annotationType
-        };
-        return this.annotationService.getLatestAnnotation(params);
+        });
       },
       /**
        * Updates the annotation locally and on the server
