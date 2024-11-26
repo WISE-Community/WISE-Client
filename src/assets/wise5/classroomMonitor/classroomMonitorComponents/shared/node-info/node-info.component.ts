@@ -7,46 +7,63 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { ComponentFactory } from '../../../../common/ComponentFactory';
 import { isMatchingPeriods } from '../../../../common/period/period';
+import { Node } from '../../../../common/Node';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { PreviewComponentComponent } from '../../../../authoringTool/components/preview-component/preview-component.component';
+import { TeacherSummaryDisplayComponent } from '../../../../directives/teacher-summary-display/teacher-summary-display.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatDividerModule,
+    FlexLayoutModule,
+    PreviewComponentComponent,
+    TeacherSummaryDisplayComponent
+  ],
   selector: 'node-info',
-  styleUrls: ['node-info.component.scss'],
+  standalone: true,
+  styleUrl: 'node-info.component.scss',
   templateUrl: 'node-info.component.html'
 })
 export class NodeInfoComponent {
-  nodeContent: any;
+  protected node: Node;
   @Input() nodeId: string;
-  periodId: number;
-  source: string;
+  protected periodId: number;
+  protected source: 'allPeriods' | 'period';
 
   constructor(
     private annotationService: AnnotationService,
     private componentServiceLookupService: ComponentServiceLookupService,
     private componentTypeService: ComponentTypeService,
+    private dataService: TeacherDataService,
     private projectService: TeacherProjectService,
-    private summaryService: SummaryService,
-    private teacherDataService: TeacherDataService
+    private summaryService: SummaryService
   ) {}
 
-  ngOnInit() {
-    this.periodId = this.teacherDataService.getCurrentPeriodId();
+  ngOnInit(): void {
+    this.periodId = this.dataService.getCurrentPeriodId();
     this.source = this.periodId === -1 ? 'allPeriods' : 'period';
-    this.nodeContent = this.projectService.getNodeById(this.nodeId);
-    if (this.nodeContent.rubric != null) {
-      this.nodeContent.rubric = this.projectService.replaceAssetPaths(this.nodeContent.rubric);
+    this.node = this.projectService.getNode(this.nodeId);
+    if (this.node.rubric != null) {
+      this.node.rubric = this.projectService.replaceAssetPaths(this.node.rubric);
     }
     this.populateComponentFields();
   }
 
   private populateComponentFields(): void {
     let assessmentItemIndex = 1;
-    for (const component of this.nodeContent.components) {
+    for (const component of this.node.components) {
       component.typeLabel = this.componentTypeService.getComponentTypeLabel(component.type);
       component.rubric = this.projectService.replaceAssetPaths(component.rubric);
       component.hasCorrectAnswer = this.componentHasCorrectAnswer(component);
-      component.hasResponsesSummary = this.summaryService.isResponsesSummaryAvailableForComponentType(
-        component.type
-      );
+      component.hasResponsesSummary =
+        this.summaryService.isResponsesSummaryAvailableForComponentType(component.type);
       component.hasScoresSummary = this.summaryService.isScoresSummaryAvailableForComponentType(
         component.type
       );
@@ -59,8 +76,7 @@ export class NodeInfoComponent {
       if (component.isStudentWorkGenerated) {
         component.assessmentItemIndex = assessmentItemIndex++;
       }
-      const factory = new ComponentFactory();
-      component.component = factory.getComponent(
+      component.component = new ComponentFactory().getComponent(
         this.projectService.injectAssetPaths(component),
         this.nodeId
       );
@@ -78,7 +94,8 @@ export class NodeInfoComponent {
   }
 
   private componentHasCorrectAnswer(component: any): boolean {
-    const service = this.componentServiceLookupService.getService(component.type);
-    return service.componentHasCorrectAnswer(component);
+    return this.componentServiceLookupService
+      .getService(component.type)
+      .componentHasCorrectAnswer(component);
   }
 }
