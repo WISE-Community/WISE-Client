@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClassroomMonitorTestingModule } from '../../../assets/wise5/classroomMonitor/classroom-monitor-testing.module';
-import { NodeInfoComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { TeacherDataService } from '../../../assets/wise5/services/teacherDataService';
@@ -17,7 +16,6 @@ const nodeId1: string = 'node1';
 const prompt: string = 'This is the prompt.';
 const stepRubric: string = 'This is the step rubric.';
 const stepTitle: string = 'This is the title';
-
 const node: any = {
   components: [
     {
@@ -35,12 +33,10 @@ const node: any = {
 describe('ShowNodeInfoDialogComponents', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ShowNodeInfoDialogComponent],
       imports: [
         ClassroomMonitorTestingModule,
         ComponentTypeServiceModule,
-        MatDialogModule,
-        NodeInfoComponent
+        ShowNodeInfoDialogComponent
       ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: nodeId1 },
@@ -63,7 +59,7 @@ describe('ShowNodeInfoDialogComponents', () => {
   });
 
   it('should render the step content in the dialog', () => {
-    expect(fixture.debugElement.nativeElement.innerHTML).toContain(component.stepNumberAndTitle);
+    expect(fixture.debugElement.nativeElement.innerHTML).toContain(stepTitle);
     expect(fixture.debugElement.nativeElement.innerHTML).toContain(prompt);
     expect(fixture.debugElement.nativeElement.innerHTML).toContain(stepRubric);
     expect(fixture.debugElement.nativeElement.innerHTML).toContain(componentRubric);
