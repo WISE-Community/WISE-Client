@@ -42,27 +42,17 @@ export class AnnotationService {
    * @returns the latest annotation that matches the params
    */
   getLatestAnnotation(params): any {
-    for (let a = this.annotations.length - 1; a >= 0; a--) {
-      const annotation = this.annotations[a];
-      let match = true;
-      if (annotation.nodeId !== params.nodeId) {
-        match = false;
-      }
-      if (match && annotation.componentId !== params.componentId) {
-        match = false;
-      }
-      if (match) {
-        if (params.type.constructor === Array) {
-          match = params.type.every((thisType) => annotation.type === thisType);
-        } else {
-          match = annotation.type === params.type;
-        }
-        if (match) {
-          return annotation;
-        }
-      }
-    }
-    return null;
+    return (
+      this.annotations.findLast((annotation) => {
+        return (
+          annotation.nodeId == params.nodeId &&
+          annotation.componentId == params.componentId &&
+          ((params.type.constructor === Array &&
+            params.type.every((thisType) => annotation.type === thisType)) ||
+            annotation.type === params.type)
+        );
+      }) ?? null
+    );
   }
 
   /**
