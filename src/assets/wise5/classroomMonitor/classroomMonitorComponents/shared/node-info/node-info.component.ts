@@ -8,9 +8,26 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { ComponentFactory } from '../../../../common/ComponentFactory';
 import { isMatchingPeriods } from '../../../../common/period/period';
 import { Node } from '../../../../common/Node';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { PreviewComponentComponent } from '../../../../authoringTool/components/preview-component/preview-component.component';
+import { TeacherSummaryDisplayComponent } from '../../../../directives/teacher-summary-display/teacher-summary-display.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatDividerModule,
+    FlexLayoutModule,
+    PreviewComponentComponent,
+    TeacherSummaryDisplayComponent
+  ],
   selector: 'node-info',
+  standalone: true,
   styleUrl: 'node-info.component.scss',
   templateUrl: 'node-info.component.html'
 })

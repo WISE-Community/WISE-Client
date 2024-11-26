@@ -42,22 +42,18 @@
             [highlightCorrectAnswer]="component.hasCorrectAnswer"
             [chartType]="'column'"
             [doRender]="true"
-          >
-          </teacher-summary-display>
+          />
         }
         @if (component.hasScoresSummary && component.hasScoreAnnotation) {
-          <div>
-            <teacher-summary-display
-              [nodeId]="nodeId"
-              [componentId]="component.id"
-              [periodId]="periodId"
-              [studentDataType]="'scores'"
-              [source]="source"
-              [chartType]="'column'"
-              [doRender]="true"
-            >
-            </teacher-summary-display>
-          </div>
+          <teacher-summary-display
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+            [periodId]="periodId"
+            [studentDataType]="'scores'"
+            [source]="source"
+            [chartType]="'column'"
+            [doRender]="true"
+          />
         }
       </div>
     }
