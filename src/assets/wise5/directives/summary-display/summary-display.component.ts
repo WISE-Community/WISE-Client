@@ -11,11 +11,15 @@ import { copy } from '../../common/object/object';
 import { rgbToHex } from '../../common/color/color';
 import { DataService } from '../../../../app/services/data.service';
 import { StudentDataService } from '../../services/studentDataService';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
+  imports: [CommonModule, MatCardModule],
   selector: 'summary-display',
-  templateUrl: 'summary-display.component.html',
-  styleUrls: ['summary-display.component.scss']
+  standalone: true,
+  styleUrl: 'summary-display.component.scss',
+  templateUrl: 'summary-display.component.html'
 })
 export abstract class SummaryDisplay {
   chartConfig: any;

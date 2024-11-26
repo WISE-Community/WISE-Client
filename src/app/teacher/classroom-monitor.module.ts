@@ -6,7 +6,7 @@ import { ComponentNewWorkBadgeComponent } from '../classroom-monitor/component-n
 import { ComponentSelectComponent } from '../classroom-monitor/component-select/component-select.component';
 import { StepInfoComponent } from '../classroom-monitor/step-info/step-info.component';
 import { PeerGroupGradingModule } from './peer-group-grading.module';
-import { TeacherSummaryDisplay } from '../../assets/wise5/directives/teacher-summary-display/teacher-summary-display.component';
+import { TeacherSummaryDisplayComponent } from '../../assets/wise5/directives/teacher-summary-display/teacher-summary-display.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { NodeInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component';
@@ -55,7 +55,6 @@ import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/class
     StudentGradingComponent,
     StudentGradingToolsComponent,
     StudentProgressComponent,
-    TeacherSummaryDisplay,
     ToolBarComponent,
     TopBarComponent,
     ViewComponentRevisionsComponent
@@ -79,7 +78,8 @@ import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/class
     SelectPeriodComponent,
     StepInfoComponent,
     StepToolsComponent,
-    StudentTeacherCommonModule
+    StudentTeacherCommonModule,
+    TeacherSummaryDisplayComponent
   ]
 })
 export class ClassroomMonitorModule {}

@@ -6,11 +6,16 @@ import { SummaryService } from '../../components/summary/summaryService';
 import { SummaryDisplay } from '../summary-display/summary-display.component';
 import { StudentDataService } from '../../services/studentDataService';
 import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @Component({
+  imports: [CommonModule, HighchartsChartModule, MatCardModule],
   selector: 'student-summary-display',
-  templateUrl: '../summary-display/summary-display.component.html',
-  styleUrls: ['../summary-display/summary-display.component.scss']
+  standalone: true,
+  styleUrl: '../summary-display/summary-display.component.scss',
+  templateUrl: '../summary-display/summary-display.component.html'
 })
 export class StudentSummaryDisplay extends SummaryDisplay {
   private studentWorkSavedToServerSubscription: Subscription;
