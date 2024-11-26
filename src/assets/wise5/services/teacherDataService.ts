@@ -1,5 +1,3 @@
-'use strict';
-
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AnnotationService } from './annotationService';
 import { ConfigService } from './configService';
@@ -10,7 +8,6 @@ import { Observable, Subject, tap } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { Node } from '../common/Node';
 import { compressToEncodedURIComponent } from 'lz-string';
-import { isMatchingPeriods } from '../common/period/period';
 import { getIntersectOfArrays } from '../common/array/array';
 import { serverSaveTimeComparator } from '../common/object/object';
 import { Annotation } from '../common/Annotation';
@@ -502,22 +499,6 @@ export class TeacherDataService extends DataService {
 
   getAnnotationsByNodeId(nodeId: string) {
     return this.studentData.annotationsByNodeId[nodeId] || [];
-  }
-
-  getAnnotationsByNodeIdAndComponentId(nodeId: string, componentId: string): any[] {
-    const annotationsByNodeId = this.getAnnotationsByNodeId(nodeId);
-    return annotationsByNodeId.filter((annotation: any) => annotation.componentId === componentId);
-  }
-
-  getAnnotationsByNodeIdAndPeriodId(nodeId, periodId) {
-    const annotationsByNodeId = this.studentData.annotationsByNodeId[nodeId];
-    if (annotationsByNodeId != null) {
-      return annotationsByNodeId.filter((annotation) => {
-        return isMatchingPeriods(annotation.periodId, periodId);
-      });
-    } else {
-      return [];
-    }
   }
 
   setCurrentPeriod(period) {
