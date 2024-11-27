@@ -15,7 +15,6 @@ import { GraphStudentModule } from '../graph/graph-student/graph-student.module'
 import { HtmlStudentComponent } from '../html/html-student/html-student.component';
 import { LabelStudentModule } from '../label/label-student/label-student.module';
 import { MatchStudentModule } from '../match/match-student/match-student.module';
-import { MultipleChoiceStudentModule } from '../multipleChoice/multiple-choice-student/multiple-choice-student.module';
 import { OpenResponseStudentModule } from '../openResponse/open-response-student/open-response-student.module';
 import { OutsideUrlStudentModule } from '../outsideURL/outside-url-student/outside-url-student.module';
 import { PeerChatStudentModule } from '../peerChat/peer-chat-student/peer-chat-student.module';
@@ -26,6 +25,7 @@ import { TableStudentModule } from '../table/table-student/table-student.module'
 import { ComponentComponent } from './component.component';
 import { AiChatStudentModule } from '../aiChat/ai-chat-student/ai-chat-student.module';
 import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
+import { MultipleChoiceStudentComponent } from '../multipleChoice/multiple-choice-student/multiple-choice-student.component';
 
 @NgModule({
   imports: [
@@ -45,7 +45,7 @@ import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon
     HtmlStudentComponent,
     LabelStudentModule,
     MatchStudentModule,
-    MultipleChoiceStudentModule,
+    MultipleChoiceStudentComponent,
     OpenResponseStudentModule,
     OutsideUrlStudentModule,
     PeerChatStudentModule,

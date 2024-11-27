@@ -35,7 +35,7 @@ import { MatchGradingComponent } from './match/match-grading/match-grading.compo
 import { MatchStudent } from './match/match-student/match-student.component';
 import { MultipleChoiceAuthoring } from './multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component';
 import { MultipleChoiceGradingComponent } from './multipleChoice/multiple-choice-grading/multiple-choice-grading.component';
-import { MultipleChoiceStudent } from './multipleChoice/multiple-choice-student/multiple-choice-student.component';
+import { MultipleChoiceStudentComponent } from './multipleChoice/multiple-choice-student/multiple-choice-student.component';
 import { OpenResponseAuthoringComponent } from './openResponse/open-response-authoring/open-response-authoring.component';
 import { OpenResponseGradingComponent } from './openResponse/open-response-grading/open-response-grading.component';
 import { OpenResponseStudent } from './openResponse/open-response-student/open-response-student.component';
@@ -100,7 +100,7 @@ export const components = {
   MultipleChoice: {
     authoring: MultipleChoiceAuthoring,
     grading: MultipleChoiceGradingComponent,
-    student: MultipleChoiceStudent
+    student: MultipleChoiceStudentComponent
   },
   OpenResponse: {
     authoring: OpenResponseAuthoringComponent,
