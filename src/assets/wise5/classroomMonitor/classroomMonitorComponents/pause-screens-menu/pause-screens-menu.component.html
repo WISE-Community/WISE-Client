@@ -21,17 +21,18 @@
     >
       All Periods
     </mat-slide-toggle>
-    <mat-divider></mat-divider>
-    <mat-slide-toggle
-      *ngFor="let period of periods"
-      class="mat-primary account-menu__control"
-      aria-label="Pause student screens (Period: {{ period.periodName }})"
-      i18n-aria-label
-      [(ngModel)]="period.paused"
-      (ngModelChange)="togglePeriod(period)"
-      i18n
-    >
-      Period: {{ period.periodName }}
-    </mat-slide-toggle>
+    <mat-divider />
+    @for (period of periods; track period.periodId) {
+      <mat-slide-toggle
+        class="mat-primary account-menu__control"
+        aria-label="Pause student screens (Period: {{ period.periodName }})"
+        i18n-aria-label
+        [(ngModel)]="period.paused"
+        (ngModelChange)="togglePeriod(period)"
+        i18n
+      >
+        Period: {{ period.periodName }}
+      </mat-slide-toggle>
+    }
   </div>
 </div>
