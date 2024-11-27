@@ -350,7 +350,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
@@ -15374,7 +15374,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">5</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
@@ -15860,7 +15860,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">84</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/runStatusService.ts</context>
@@ -15876,7 +15876,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">85</context>
         </context-group>
         <target state="needs-translation">Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></target>
       </trans-unit>
@@ -15972,7 +15972,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <target state="needs-translation">Pause student screens (Period: <x id="INTERPOLATION" equiv-text="{{ period.periodName }}"/>)</target>
       </trans-unit>
-      <trans-unit id="17fab40eb78ceec55d9a0884e132fc2dd9f70e51" datatype="html">
+      <trans-unit id="ae01e13f07e3e6c87e05fdcd39228e846ec19532" datatype="html">
         <source> Period: <x id="INTERPOLATION" equiv-text="{{ period.periodName }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
@@ -15984,7 +15984,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Groupings for <x id="INTERPOLATION" equiv-text="{{ peerGroupingName }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component.html</context>
-          <context context-type="linenumber">2</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <target state="needs-translation">Groupings for <x id="INTERPOLATION" equiv-text="{{ peerGroupingName }}"/></target>
       </trans-unit>
@@ -15992,7 +15992,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Tip: Drag students to change groups for this peer grouping.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <target state="needs-translation">Tip: Drag students to change groups for this peer grouping.</target>
       </trans-unit>
@@ -16072,7 +16072,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>All Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">12</context>
         </context-group>
         <target state="needs-translation">All Periods</target>
       </trans-unit>
@@ -16080,7 +16080,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Period: <x id="INTERPOLATION" equiv-text="{{ period.periodName }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <target state="needs-translation">Period: <x id="INTERPOLATION" equiv-text="{{ period.periodName }}"/></target>
       </trans-unit>
@@ -16088,7 +16088,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>0 teams</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <target state="needs-translation">0 teams</target>
       </trans-unit>
@@ -16096,7 +16096,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>1 team</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <target state="needs-translation">1 team</target>
       </trans-unit>
@@ -16104,7 +16104,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source><x id="INTERPOLATION" equiv-text="{{ period.numWorkgroupsInPeriod }}"/> teams</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ period.numWorkgroupsInPeriod }}"/> teams</target>
       </trans-unit>
@@ -21974,11 +21974,11 @@ Warning: This will delete all existing choices and buckets in this component.</t
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">576</context>
+          <context context-type="linenumber">574</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">686</context>
+          <context context-type="linenumber">684</context>
         </context-group>
         <target state="needs-translation">Correct</target>
       </trans-unit>
@@ -21990,11 +21990,11 @@ Warning: This will delete all existing choices and buckets in this component.</t
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">576</context>
+          <context context-type="linenumber">574</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">690</context>
+          <context context-type="linenumber">688</context>
         </context-group>
         <target state="needs-translation">Incorrect</target>
       </trans-unit>
@@ -24110,7 +24110,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Your Response</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">710</context>
+          <context context-type="linenumber">708</context>
         </context-group>
         <target state="needs-translation">Your Response</target>
       </trans-unit>
@@ -24118,7 +24118,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Your Score</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">712</context>
+          <context context-type="linenumber">710</context>
         </context-group>
         <target state="needs-translation">Your Score</target>
       </trans-unit>
@@ -24126,7 +24126,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Period Responses</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">719</context>
+          <context context-type="linenumber">717</context>
         </context-group>
         <target state="needs-translation">Period Responses</target>
       </trans-unit>
@@ -24134,7 +24134,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Period Scores</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">724</context>
+          <context context-type="linenumber">722</context>
         </context-group>
         <target state="needs-translation">Period Scores</target>
       </trans-unit>
@@ -24142,7 +24142,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Class Responses</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">733</context>
+          <context context-type="linenumber">731</context>
         </context-group>
         <target state="needs-translation">Class Responses</target>
       </trans-unit>
@@ -24150,7 +24150,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Class Scores</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">738</context>
+          <context context-type="linenumber">736</context>
         </context-group>
         <target state="needs-translation">Class Scores</target>
       </trans-unit>
@@ -24158,7 +24158,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source><x id="PH" equiv-text="this.percentResponded"/>% Responded (<x id="PH_1" equiv-text="this.numResponses"/>/<x id="PH_2" equiv-text="this.totalWorkgroups"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">749</context>
+          <context context-type="linenumber">747</context>
         </context-group>
         <target state="needs-translation"><x id="PH" equiv-text="this.percentResponded"/>% Responded (<x id="PH_1" equiv-text="this.numResponses"/>/<x id="PH_2" equiv-text="this.totalWorkgroups"/>)</target>
       </trans-unit>
@@ -24166,7 +24166,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Count</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">866</context>
+          <context context-type="linenumber">864</context>
         </context-group>
         <target state="needs-translation">Count</target>
       </trans-unit>
