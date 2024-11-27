@@ -40,7 +40,6 @@ describe('StudentDataService', () => {
   shouldGetComponentStatesByNodeId();
   shouldGetComponentStatesByNodeIdAndComponentId();
   shouldGetEventsByNodeId();
-  shouldGetLatestNodeEnteredEventNodeIdWithExistingNode();
   shouldCalculateCanVisitNode();
   shouldGetNodeStatusByNodeId();
   shouldGetLatestComponentStatesByNodeId();
@@ -425,30 +424,6 @@ function shouldGetEventsByNodeId() {
     expect(events[0].id).toEqual(1);
     expect(events[1].id).toEqual(2);
     expect(events[2].id).toEqual(5);
-  });
-}
-
-function shouldGetLatestNodeEnteredEventNodeIdWithExistingNode() {
-  it('should get latest node entered event node id with existing node', () => {
-    service.studentData = {
-      events: [
-        createEvent(1, 'node1', 'component1', 'nodeEntered'),
-        createEvent(2, 'node1', 'component2', 'nodeEntered'),
-        createEvent(3, 'node2', 'component3', 'nodeEntered'),
-        createEvent(4, 'node3', 'component4', 'nodeEntered'),
-        createEvent(5, 'node1', 'component1', 'nodeEntered')
-      ]
-    };
-    spyOn(projectService, 'getNodeById').and.callFake((nodeId) => {
-      return {
-        id: nodeId
-      };
-    });
-    spyOn(projectService, 'isActive').and.callFake((nodeId) => {
-      return nodeId === 'node1';
-    });
-    const nodeId = service.getLatestNodeEnteredEventNodeIdWithExistingNode();
-    expect(nodeId).toEqual('node1');
   });
 }
 

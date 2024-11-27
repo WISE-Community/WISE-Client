@@ -1,5 +1,3 @@
-'use strict';
-
 import { Injectable } from '@angular/core';
 import { ConfigService } from './configService';
 import { AnnotationService } from './annotationService';
@@ -567,26 +565,6 @@ export class StudentDataService extends DataService {
 
   getEventsByNodeId(nodeId: string): any[] {
     return this.studentData.events.filter((event) => event.nodeId === nodeId);
-  }
-
-  /**
-   * Get the node id of the latest node entered event for an active node that
-   * exists in the project. We need to check if the node exists in the project
-   * in case the node has been deleted from the project. We also need to check
-   * that the node is active in case the node has been moved to the inactive
-   * section of the project.
-   * @return the node id of the latest node entered event for an active node
-   * that exists in the project
-   */
-  getLatestNodeEnteredEventNodeIdWithExistingNode(): string {
-    const event = this.studentData.events.findLast(
-      (event) => event.event === 'nodeEntered' && this.isNodeExistAndActive(event.nodeId)
-    );
-    return event?.nodeId ?? null;
-  }
-
-  private isNodeExistAndActive(nodeId: string): boolean {
-    return this.ProjectService.getNodeById(nodeId) != null && this.ProjectService.isActive(nodeId);
   }
 
   getTotalScore() {
