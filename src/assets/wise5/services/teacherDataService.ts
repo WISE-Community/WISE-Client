@@ -578,14 +578,6 @@ export class TeacherDataService extends DataService {
     this.periods = periods;
   }
 
-  getVisiblePeriodsById(currentPeriodId: number): any {
-    if (currentPeriodId === -1) {
-      return this.getPeriods().slice(1);
-    } else {
-      return [this.getPeriodById(currentPeriodId)];
-    }
-  }
-
   setCurrentWorkgroup(workgroup) {
     this.currentWorkgroup = workgroup;
     this.broadcastCurrentWorkgroupChanged({ currentWorkgroup: this.currentWorkgroup });
@@ -611,10 +603,6 @@ export class TeacherDataService extends DataService {
     return this.AnnotationService.getTotalScore(
       this.studentData.annotationsToWorkgroupId[workgroupId]
     );
-  }
-
-  private getPeriodById(periodId: number): any {
-    return this.getPeriods().find((period) => period.periodId === periodId);
   }
 
   isWorkgroupShown(workgroup): boolean {
