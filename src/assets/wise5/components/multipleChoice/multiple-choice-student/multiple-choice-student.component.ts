@@ -34,27 +34,27 @@ import { MultipleChoiceCheckboxStudentComponent } from '../multiple-choice-check
   styleUrl: 'multiple-choice-student.component.scss',
   templateUrl: 'multiple-choice-student.component.html'
 })
-export class MultipleChoiceStudent extends ComponentStudent {
+export class MultipleChoiceStudentComponent extends ComponentStudent {
   choices: any[];
-  choiceType: string;
+  protected choiceType: 'radio' | 'checkbox';
   component: MultipleChoiceComponent;
-  componentHasCorrectAnswer: boolean;
+  protected componentHasCorrectAnswer: boolean;
   isCorrect: boolean;
-  isLatestComponentStateSubmit: boolean;
-  originalComponentContent: MultipleChoiceContent;
-  showFeedback: boolean;
+  protected isLatestComponentStateSubmit: boolean;
+  private originalComponentContent: MultipleChoiceContent;
+  protected showFeedback: boolean;
   studentChoices: string | string[];
 
   constructor(
     protected annotationService: AnnotationService,
     protected componentService: ComponentService,
     protected configService: ConfigService,
+    protected dataService: StudentDataService,
     protected dialog: MatDialog,
     private multipleChoiceService: MultipleChoiceService,
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService
+    protected studentAssetService: StudentAssetService
   ) {
     super(
       annotationService,
@@ -64,7 +64,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
       nodeService,
       notebookService,
       studentAssetService,
-      studentDataService
+      dataService
     );
   }
 
@@ -106,7 +106,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
   handleConnectedComponents(): void {
     for (const connectedComponent of this.componentContent.connectedComponents) {
-      const componentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+      const componentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
         connectedComponent.nodeId,
         connectedComponent.componentId
       );
@@ -228,7 +228,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
         }
 
         if (submitTriggeredBy == null || submitTriggeredBy === 'componentSubmitButton') {
-          this.studentDataService.broadcastComponentSubmitTriggered({
+          this.dataService.broadcastComponentSubmitTriggered({
             nodeId: this.component.nodeId,
             componentId: this.component.id
           });

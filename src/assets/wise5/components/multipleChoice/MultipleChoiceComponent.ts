@@ -16,7 +16,7 @@ export class MultipleChoiceComponent extends Component {
     return this.content.choices;
   }
 
-  getChoiceType(): string {
+  getChoiceType(): 'radio' | 'checkbox' {
     return this.content.choiceType;
   }
 

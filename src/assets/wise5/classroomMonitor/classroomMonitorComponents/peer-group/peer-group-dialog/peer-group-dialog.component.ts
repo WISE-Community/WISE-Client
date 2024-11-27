@@ -7,38 +7,38 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 @Component({
   selector: 'peer-group-dialog',
   templateUrl: './peer-group-dialog.component.html',
-  styleUrls: ['./peer-group-dialog.component.scss']
+  styleUrl: './peer-group-dialog.component.scss'
 })
 export class PeerGroupDialogComponent implements OnInit {
-  currentPeriodChangedSubscription: Subscription;
-  peerGroupingName: string;
-  periods: any[];
+  private currentPeriodChangedSubscription: Subscription;
+  protected peerGroupingName: string;
+  protected periods: any[];
 
   constructor(
+    private dataService: TeacherDataService,
     @Inject(MAT_DIALOG_DATA) public peerGroupingTag: string,
-    private teacherDataService: TeacherDataService,
-    private teacherProjectService: TeacherProjectService
+    private projectService: TeacherProjectService
   ) {}
 
-  ngOnInit() {
-    this.setPeriods(this.teacherDataService.getCurrentPeriodId());
-    this.peerGroupingName = this.teacherProjectService.getPeerGrouping(this.peerGroupingTag).name;
-    this.subscribeToPeriodChanged();
-  }
-
-  subscribeToPeriodChanged(): void {
-    this.currentPeriodChangedSubscription = this.teacherDataService.currentPeriodChanged$.subscribe(
+  ngOnInit(): void {
+    this.setPeriods(this.dataService.getCurrentPeriodId());
+    this.peerGroupingName = this.projectService.getPeerGrouping(this.peerGroupingTag).name;
+    this.currentPeriodChangedSubscription = this.dataService.currentPeriodChanged$.subscribe(
       ({ currentPeriod }) => {
         this.setPeriods(currentPeriod.periodId);
       }
     );
   }
 
-  setPeriods(periodId: number): void {
-    this.periods = this.teacherDataService.getVisiblePeriodsById(periodId);
+  ngOnDestroy(): void {
+    this.currentPeriodChangedSubscription.unsubscribe();
   }
 
-  ngOnDestroy() {
-    this.currentPeriodChangedSubscription.unsubscribe();
+  private setPeriods(periodId: number): void {
+    const allPeriods = this.dataService.getPeriods();
+    this.periods =
+      periodId === -1
+        ? allPeriods.slice(1)
+        : [allPeriods.find((period) => period.periodId === periodId)];
   }
 }
