@@ -524,31 +524,24 @@ export class StudentDataService extends DataService {
    * are found
    */
   getLatestComponentStateByNodeIdAndComponentId(nodeId: string, componentId: string = null): any {
-    const componentStates = this.studentData.componentStates;
-    for (let c = componentStates.length - 1; c >= 0; c--) {
-      const componentState = componentStates[c];
-      if (componentState.nodeId === nodeId) {
-        if (componentId == null || componentState.componentId === componentId) {
-          return componentState;
-        }
-      }
-    }
-    return null;
+    return (
+      this.studentData.componentStates.findLast(
+        (componentState) =>
+          componentState.nodeId === nodeId &&
+          (componentId == null || componentState.componentId === componentId)
+      ) ?? null
+    );
   }
 
-  getLatestSubmitComponentState(nodeId, componentId) {
-    const componentStates = this.studentData.componentStates;
-    for (let c = componentStates.length - 1; c >= 0; c--) {
-      const componentState = componentStates[c];
-      if (
-        componentState.nodeId === nodeId &&
-        componentState.componentId === componentId &&
-        componentState.isSubmit
-      ) {
-        return componentState;
-      }
-    }
-    return null;
+  getLatestSubmitComponentState(nodeId: string, componentId: string): any {
+    return (
+      this.studentData.componentStates.findLast(
+        (componentState) =>
+          componentState.nodeId === nodeId &&
+          componentState.componentId === componentId &&
+          componentState.isSubmit
+      ) ?? null
+    );
   }
 
   getComponentStates(): any[] {
@@ -585,18 +578,14 @@ export class StudentDataService extends DataService {
    * @return the node id of the latest node entered event for an active node
    * that exists in the project
    */
-  getLatestNodeEnteredEventNodeIdWithExistingNode() {
-    const events = this.studentData.events;
-    for (let e = events.length - 1; e >= 0; e--) {
-      const event = events[e];
-      if (event.event == 'nodeEntered' && this.isNodeExistAndActive(event.nodeId)) {
-        return event.nodeId;
-      }
-    }
-    return null;
+  getLatestNodeEnteredEventNodeIdWithExistingNode(): string {
+    const event = this.studentData.events.findLast(
+      (event) => event.event === 'nodeEntered' && this.isNodeExistAndActive(event.nodeId)
+    );
+    return event?.nodeId ?? null;
   }
 
-  isNodeExistAndActive(nodeId) {
+  private isNodeExistAndActive(nodeId: string): boolean {
     return this.ProjectService.getNodeById(nodeId) != null && this.ProjectService.isActive(nodeId);
   }
 

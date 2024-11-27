@@ -246,14 +246,11 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
   }
 
   private getLatestBranchPathTakenEvent(workgroupId: number, nodeId: string): any {
-    const events = this.teacherDataService.getEventsByWorkgroupId(workgroupId);
-    for (let i = events.length - 1; i >= 0; i--) {
-      const event = events[i];
-      if (event.nodeId === nodeId && event.event === 'branchPathTaken') {
-        return event;
-      }
-    }
-    return null;
+    return (
+      this.teacherDataService
+        .getEventsByWorkgroupId(workgroupId)
+        .findLast((event) => event.nodeId === nodeId && event.event === 'branchPathTaken') ?? null
+    );
   }
 
   /**
