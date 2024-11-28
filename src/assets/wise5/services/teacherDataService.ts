@@ -397,16 +397,6 @@ export class TeacherDataService extends DataService {
     return this.studentData.componentStatesByComponentId[componentId] || [];
   }
 
-  getComponentStatesByComponentIds(componentIds) {
-    let componentStatesByComponentId = [];
-    for (const componentId of componentIds) {
-      componentStatesByComponentId = componentStatesByComponentId.concat(
-        this.studentData.componentStatesByComponentId[componentId]
-      );
-    }
-    return componentStatesByComponentId;
-  }
-
   getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(workgroupId, nodeId, componentId) {
     return (
       this.getComponentStatesByWorkgroupIdAndNodeId(workgroupId, nodeId).findLast(
@@ -433,17 +423,6 @@ export class TeacherDataService extends DataService {
   getComponentStatesByWorkgroupIdAndComponentId(workgroupId, componentId) {
     const componentStatesByWorkgroupId = this.getComponentStatesByWorkgroupId(workgroupId);
     const componentStatesByComponentId = this.getComponentStatesByComponentId(componentId);
-    return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByComponentId);
-  }
-
-  getComponentStatesByWorkgroupIdAndComponentIds(workgroupId, componentIds) {
-    const componentStatesByWorkgroupId = this.getComponentStatesByWorkgroupId(workgroupId);
-    let componentStatesByComponentId = [];
-    for (const componentId of componentIds) {
-      componentStatesByComponentId = componentStatesByComponentId.concat(
-        this.getComponentStatesByComponentId(componentId)
-      );
-    }
     return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByComponentId);
   }
 

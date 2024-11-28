@@ -8,7 +8,10 @@ import { serverSaveTimeComparator } from '../../common/object/object';
 
 @Injectable()
 export class DiscussionService extends ComponentService {
-  constructor(protected http: HttpClient, protected ConfigService: ConfigService) {
+  constructor(
+    protected configService: ConfigService,
+    protected http: HttpClient
+  ) {
     super();
   }
 
@@ -216,10 +219,8 @@ export class DiscussionService extends ComponentService {
       if (componentState.studentData.isSubmit) {
         componentState.replies = [];
         this.setUsernames(componentState);
-        const latestInappropriateFlagAnnotation = this.getLatestInappropriateFlagAnnotationByStudentWorkId(
-          annotations,
-          componentState.id
-        );
+        const latestInappropriateFlagAnnotation =
+          this.getLatestInappropriateFlagAnnotationByStudentWorkId(annotations, componentState.id);
         if (isStudentMode) {
           if (
             latestInappropriateFlagAnnotation == null ||
@@ -244,9 +245,9 @@ export class DiscussionService extends ComponentService {
 
   setUsernames(componentState: any): void {
     const workgroupId = componentState.workgroupId;
-    const usernames = this.ConfigService.getUsernamesByWorkgroupId(workgroupId);
+    const usernames = this.configService.getUsernamesByWorkgroupId(workgroupId);
     if (usernames.length > 0) {
-      componentState.usernames = this.ConfigService.getUsernamesStringByWorkgroupId(workgroupId);
+      componentState.usernames = this.configService.getUsernamesStringByWorkgroupId(workgroupId);
     } else if (componentState.usernamesArray != null) {
       componentState.usernames = componentState.usernamesArray
         .map(function (obj) {
@@ -254,7 +255,7 @@ export class DiscussionService extends ComponentService {
         })
         .join(', ');
     } else {
-      componentState.usernames = this.ConfigService.getUserIdsStringByWorkgroupId(workgroupId);
+      componentState.usernames = this.configService.getUserIdsStringByWorkgroupId(workgroupId);
     }
   }
 
