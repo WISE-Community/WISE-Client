@@ -430,44 +430,6 @@ export class TeacherDataService extends DataService {
     return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByNodeId);
   }
 
-  /**
-   * @param workgroupId the workgroup id
-   * @return An array of component states. Each component state will be the latest component state
-   * for a component.
-   */
-  getLatestComponentStatesByWorkgroupId(workgroupId) {
-    const componentStates = [];
-    const componentsFound = {};
-    const componentStatesForWorkgroup = this.getComponentStatesByWorkgroupId(workgroupId);
-    for (let csb = componentStatesForWorkgroup.length - 1; csb >= 0; csb--) {
-      const componentState = componentStatesForWorkgroup[csb];
-      const key = this.getComponentStateNodeIdComponentIdKey(componentState);
-      if (componentsFound[key] == null) {
-        componentStates.push(componentState);
-        componentsFound[key] = true;
-      }
-    }
-    componentStates.reverse();
-    return componentStates;
-  }
-
-  injectRevisionCounterIntoComponentStates(componentStates) {
-    const componentRevisionCounter = {};
-    for (const componentState of componentStates) {
-      const key = this.getComponentStateNodeIdComponentIdKey(componentState);
-      if (componentRevisionCounter[key] == null) {
-        componentRevisionCounter[key] = 1;
-      }
-      const revisionCounter = componentRevisionCounter[key];
-      componentState.revisionCounter = revisionCounter;
-      componentRevisionCounter[key] = revisionCounter + 1;
-    }
-  }
-
-  getComponentStateNodeIdComponentIdKey(componentState) {
-    return componentState.nodeId + '-' + componentState.componentId;
-  }
-
   getComponentStatesByWorkgroupIdAndComponentId(workgroupId, componentId) {
     const componentStatesByWorkgroupId = this.getComponentStatesByWorkgroupId(workgroupId);
     const componentStatesByComponentId = this.getComponentStatesByComponentId(componentId);

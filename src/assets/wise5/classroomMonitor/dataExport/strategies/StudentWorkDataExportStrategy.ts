@@ -95,11 +95,10 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
         if (this.exportType === 'allStudentWork') {
           componentStates = this.teacherDataService.getComponentStatesByWorkgroupId(workgroupId);
         } else if (this.exportType === 'latestStudentWork') {
-          this.teacherDataService.injectRevisionCounterIntoComponentStates(
+          this.injectRevisionCounterIntoComponentStates(
             this.teacherDataService.getComponentStatesByWorkgroupId(workgroupId)
           );
-          componentStates =
-            this.teacherDataService.getLatestComponentStatesByWorkgroupId(workgroupId);
+          componentStates = this.getLatestComponentStatesByWorkgroupId(workgroupId);
         }
         if (componentStates != null) {
           for (var c = 0; c < componentStates.length; c++) {
@@ -149,6 +148,40 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
       this.generateCSVFile(rows, fileName);
       this.controller.hideDownloadingExportMessage();
     });
+  }
+
+  private injectRevisionCounterIntoComponentStates(componentStates: any[]): void {
+    const componentRevisionCounter = {};
+    componentStates.forEach((componentState) => {
+      const key = componentState.nodeId + '-' + componentState.componentId;
+      if (componentRevisionCounter[key] == null) {
+        componentRevisionCounter[key] = 1;
+      }
+      componentState.revisionCounter = componentRevisionCounter[key];
+      componentRevisionCounter[key]++;
+    });
+  }
+
+  /**
+   * @param workgroupId the workgroup id
+   * @return An array of component states. Each component state will be the latest component state
+   * for a component.
+   */
+  private getLatestComponentStatesByWorkgroupId(workgroupId: number): any[] {
+    const componentStates = [];
+    const componentsFound = {};
+    const componentStatesForWorkgroup =
+      this.teacherDataService.getComponentStatesByWorkgroupId(workgroupId);
+    for (let csb = componentStatesForWorkgroup.length - 1; csb >= 0; csb--) {
+      const componentState = componentStatesForWorkgroup[csb];
+      const key = componentState.nodeId + '-' + componentState.componentId;
+      if (componentsFound[key] == null) {
+        componentStates.push(componentState);
+        componentsFound[key] = true;
+      }
+    }
+    componentStates.reverse();
+    return componentStates;
   }
 
   /**
