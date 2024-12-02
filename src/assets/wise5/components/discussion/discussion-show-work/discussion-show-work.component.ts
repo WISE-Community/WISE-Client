@@ -36,12 +36,13 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
     this.setStudentWork();
   }
 
-  setStudentWork(): void {
+  private setStudentWork(): void {
     const componentIds = this.getGradingComponentIds();
-    const componentStates = this.TeacherDiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
-      componentIds,
-      this.workgroupId
-    );
+    const componentStates =
+      this.TeacherDiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
+        componentIds,
+        this.workgroupId
+      );
     const annotations = this.getInappropriateFlagAnnotationsByComponentStates(componentStates);
     this.setClassResponses(componentStates, annotations);
   }
@@ -54,10 +55,11 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
   getInappropriateFlagAnnotationsByComponentStates(componentStates = []) {
     const annotations = [];
     for (const componentState of componentStates) {
-      const latestInappropriateFlagAnnotation = this.AnnotationService.getLatestAnnotationByStudentWorkIdAndType(
-        componentState.id,
-        'inappropriateFlag'
-      );
+      const latestInappropriateFlagAnnotation =
+        this.AnnotationService.getLatestAnnotationByStudentWorkIdAndType(
+          componentState.id,
+          'inappropriateFlag'
+        );
       if (latestInappropriateFlagAnnotation != null) {
         annotations.push(latestInappropriateFlagAnnotation);
       }
@@ -145,10 +147,11 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
       data
     );
     this.AnnotationService.saveAnnotation(annotation).then(() => {
-      const componentStates = this.TeacherDiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
-        this.getGradingComponentIds(),
-        this.workgroupId
-      );
+      const componentStates =
+        this.TeacherDiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
+          this.getGradingComponentIds(),
+          this.workgroupId
+        );
       const annotations = this.getInappropriateFlagAnnotationsByComponentStates(componentStates);
       this.setClassResponses(componentStates, annotations);
     });
