@@ -1,20 +1,38 @@
 import { Component } from '@angular/core';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherPauseScreenService } from '../../../services/teacherPauseScreenService';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
+import { FormsModule } from '@angular/forms';
 
 class Period {
   paused: boolean;
   periodId: number;
+  periodName: string;
 }
 
 @Component({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatDividerModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    MatToolbarModule
+  ],
   selector: 'pause-screens-menu',
-  styleUrls: ['./pause-screens-menu.component.scss'],
+  standalone: true,
+  styleUrl: './pause-screens-menu.component.scss',
   templateUrl: './pause-screens-menu.component.html'
 })
 export class PauseScreensMenuComponent {
-  allPeriodsPaused: boolean;
-  periods: Period[];
+  protected allPeriodsPaused: boolean;
+  protected periods: Period[];
 
   constructor(
     private dataService: TeacherDataService,
@@ -23,11 +41,11 @@ export class PauseScreensMenuComponent {
     this.periods = this.dataService.getPeriods().filter((period) => period.periodId !== -1);
   }
 
-  togglePeriod(period: Period): void {
+  protected togglePeriod(period: Period): void {
     this.pauseScreenService.pauseScreensChanged(period.periodId, period.paused);
   }
 
-  toggleAllPeriods(): void {
+  protected toggleAllPeriods(): void {
     this.periods.forEach((period) => {
       this.pauseScreenService.pauseScreensChanged(period.periodId, this.allPeriodsPaused);
     });

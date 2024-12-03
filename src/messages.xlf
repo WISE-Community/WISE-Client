@@ -14389,7 +14389,7 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="17fab40eb78ceec55d9a0884e132fc2dd9f70e51" datatype="html">
+      <trans-unit id="ae01e13f07e3e6c87e05fdcd39228e846ec19532" datatype="html">
         <source> Period: <x id="INTERPOLATION" equiv-text="{{ period.periodName }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
@@ -17702,7 +17702,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussionService.ts</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f1affa088d785794802225dbc56ee2ff3d785f87" datatype="html">
@@ -19578,7 +19578,7 @@ Warning: This will delete all existing choices and buckets in this component.</s
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.ts</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6683126302760629027" datatype="html">
@@ -19812,6 +19812,27 @@ Warning: This will delete all existing choices in this component.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
           <context context-type="linenumber">25,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4018977700600303269" datatype="html">
+        <source>Choose an option from below</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multipleChoiceService.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1267813701388263700" datatype="html">
+        <source>Choice 1</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multipleChoiceService.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="169678945905320246" datatype="html">
+        <source>Choice 2</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multipleChoiceService.ts</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7864549548500976713" datatype="html">
@@ -22007,28 +22028,28 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Preview Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1967824796880640028" datatype="html">
         <source>StudentDataService.saveComponentEvent: component, category, event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">245</context>
+          <context context-type="linenumber">243</context>
         </context-group>
       </trans-unit>
       <trans-unit id="944638387659785956" datatype="html">
         <source>StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">255</context>
+          <context context-type="linenumber">253</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4924640921903672943" datatype="html">
         <source>StudentDataService.saveVLEEvent: category and event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">264</context>
+          <context context-type="linenumber">262</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3178064088723974543" datatype="html">

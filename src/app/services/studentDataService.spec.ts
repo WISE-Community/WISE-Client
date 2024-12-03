@@ -4,23 +4,20 @@ import { StudentDataService } from '../../assets/wise5/services/studentDataServi
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
-import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-let $rootScope;
 let http: HttpTestingController;
 let service: StudentDataService;
 let configService: ConfigService;
 let annotationService: AnnotationService;
 let projectService: ProjectService;
-
 describe('StudentDataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(StudentDataService);
     configService = TestBed.inject(ConfigService);
@@ -43,7 +40,6 @@ describe('StudentDataService', () => {
   shouldGetComponentStatesByNodeId();
   shouldGetComponentStatesByNodeIdAndComponentId();
   shouldGetEventsByNodeId();
-  shouldGetLatestNodeEnteredEventNodeIdWithExistingNode();
   shouldCalculateCanVisitNode();
   shouldGetNodeStatusByNodeId();
   shouldGetLatestComponentStatesByNodeId();
@@ -135,7 +131,6 @@ function shouldHandleSaveStudentWorkToServerSuccess() {
       ]
     };
     spyOn(configService, 'getMode').and.returnValue('preview');
-    spyOn($rootScope, '$broadcast');
     spyOn(service, 'updateNodeStatuses').and.callFake(() => {});
     service.saveToServerRequestCount = 1;
     service.handleSaveToServerSuccess(savedStudentDataResponse);
@@ -148,10 +143,6 @@ function shouldHandleSaveStudentWorkToServerSuccess() {
     expect(service.studentData.componentStates[2].serverSaveTime).toBeDefined();
     expect(service.studentData.componentStates[2].requestToken).toEqual(null);
     expect(service.studentData.componentStates[2].id).toEqual(3);
-    expect($rootScope.$broadcast).toHaveBeenCalledWith(
-      'studentWorkSavedToServer',
-      jasmine.any(Object)
-    );
     expect(service.saveToServerRequestCount).toEqual(0);
     expect(service.updateNodeStatuses).toHaveBeenCalled();
   });
@@ -191,7 +182,6 @@ function shouldHandleSaveEventsToServerSuccess() {
         createEvent(3, 'node1', 'component1', 'nodeEntered', 'c', 3000)
       ]
     };
-    spyOn($rootScope, '$broadcast');
     spyOn(service, 'updateNodeStatuses').and.callFake(() => {});
     service.saveToServerRequestCount = 1;
     service.handleSaveToServerSuccess(savedStudentDataResponse);
@@ -434,30 +424,6 @@ function shouldGetEventsByNodeId() {
     expect(events[0].id).toEqual(1);
     expect(events[1].id).toEqual(2);
     expect(events[2].id).toEqual(5);
-  });
-}
-
-function shouldGetLatestNodeEnteredEventNodeIdWithExistingNode() {
-  it('should get latest node entered event node id with existing node', () => {
-    service.studentData = {
-      events: [
-        createEvent(1, 'node1', 'component1', 'nodeEntered'),
-        createEvent(2, 'node1', 'component2', 'nodeEntered'),
-        createEvent(3, 'node2', 'component3', 'nodeEntered'),
-        createEvent(4, 'node3', 'component4', 'nodeEntered'),
-        createEvent(5, 'node1', 'component1', 'nodeEntered')
-      ]
-    };
-    spyOn(projectService, 'getNodeById').and.callFake((nodeId) => {
-      return {
-        id: nodeId
-      };
-    });
-    spyOn(projectService, 'isActive').and.callFake((nodeId) => {
-      return nodeId === 'node1';
-    });
-    const nodeId = service.getLatestNodeEnteredEventNodeIdWithExistingNode();
-    expect(nodeId).toEqual('node1');
   });
 }
 

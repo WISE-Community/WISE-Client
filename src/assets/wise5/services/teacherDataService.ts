@@ -1,5 +1,3 @@
-'use strict';
-
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AnnotationService } from './annotationService';
 import { ConfigService } from './configService';
@@ -10,7 +8,6 @@ import { Observable, Subject, tap } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { Node } from '../common/Node';
 import { compressToEncodedURIComponent } from 'lz-string';
-import { isMatchingPeriods } from '../common/period/period';
 import { getIntersectOfArrays } from '../common/array/array';
 import { serverSaveTimeComparator } from '../common/object/object';
 import { Annotation } from '../common/Annotation';
@@ -400,85 +397,24 @@ export class TeacherDataService extends DataService {
     return this.studentData.componentStatesByComponentId[componentId] || [];
   }
 
-  getComponentStatesByComponentIds(componentIds) {
-    let componentStatesByComponentId = [];
-    for (const componentId of componentIds) {
-      componentStatesByComponentId = componentStatesByComponentId.concat(
-        this.studentData.componentStatesByComponentId[componentId]
-      );
-    }
-    return componentStatesByComponentId;
-  }
-
   getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(workgroupId, nodeId, componentId) {
-    const componentStates = this.getComponentStatesByWorkgroupIdAndNodeId(workgroupId, nodeId);
-    for (let c = componentStates.length - 1; c >= 0; c--) {
-      const componentState = componentStates[c];
-      if (this.isComponentStateMatchingNodeIdComponentId(componentState, nodeId, componentId)) {
-        return componentState;
-      }
-    }
-    return null;
+    return (
+      this.getComponentStatesByWorkgroupIdAndNodeId(workgroupId, nodeId).findLast(
+        (componentState) =>
+          componentState.nodeId === nodeId && componentState.componentId === componentId
+      ) ?? null
+    );
   }
 
-  isComponentStateMatchingNodeIdComponentId(componentState, nodeId, componentId) {
-    return componentState.nodeId === nodeId && componentState.componentId === componentId;
+  getLatestComponentStateByWorkgroupIdNodeId(workgroupId: number, nodeId: string): any {
+    return (
+      this.getComponentStatesByWorkgroupIdAndNodeId(workgroupId, nodeId).findLast(
+        (componentState) => componentState.nodeId === nodeId
+      ) ?? null
+    );
   }
 
-  getLatestComponentStateByWorkgroupIdNodeId(workgroupId, nodeId) {
-    const componentStates = this.getComponentStatesByWorkgroupIdAndNodeId(workgroupId, nodeId);
-    for (let c = componentStates.length - 1; c >= 0; c--) {
-      const componentState = componentStates[c];
-      if (this.isComponentStateMatchingNodeId(componentState, nodeId)) {
-        return componentState;
-      }
-    }
-    return null;
-  }
-
-  isComponentStateMatchingNodeId(componentState, nodeId) {
-    return componentState.nodeId === nodeId;
-  }
-
-  /**
-   * @param workgroupId the workgroup id
-   * @return An array of component states. Each component state will be the latest component state
-   * for a component.
-   */
-  getLatestComponentStatesByWorkgroupId(workgroupId) {
-    const componentStates = [];
-    const componentsFound = {};
-    const componentStatesForWorkgroup = this.getComponentStatesByWorkgroupId(workgroupId);
-    for (let csb = componentStatesForWorkgroup.length - 1; csb >= 0; csb--) {
-      const componentState = componentStatesForWorkgroup[csb];
-      const key = this.getComponentStateNodeIdComponentIdKey(componentState);
-      if (componentsFound[key] == null) {
-        componentStates.push(componentState);
-        componentsFound[key] = true;
-      }
-    }
-    componentStates.reverse();
-    return componentStates;
-  }
-
-  injectRevisionCounterIntoComponentStates(componentStates) {
-    const componentRevisionCounter = {};
-    for (const componentState of componentStates) {
-      const key = this.getComponentStateNodeIdComponentIdKey(componentState);
-      if (componentRevisionCounter[key] == null) {
-        componentRevisionCounter[key] = 1;
-      }
-      const revisionCounter = componentRevisionCounter[key];
-      componentState.revisionCounter = revisionCounter;
-      componentRevisionCounter[key] = revisionCounter + 1;
-    }
-  }
-
-  getComponentStateNodeIdComponentIdKey(componentState) {
-    return componentState.nodeId + '-' + componentState.componentId;
-  }
-
-  getComponentStatesByWorkgroupIdAndNodeId(workgroupId, nodeId) {
+  private getComponentStatesByWorkgroupIdAndNodeId(workgroupId: number, nodeId: string): any[] {
     const componentStatesByWorkgroupId = this.getComponentStatesByWorkgroupId(workgroupId);
     const componentStatesByNodeId = this.getComponentStatesByNodeId(nodeId);
     return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByNodeId);
@@ -487,17 +423,6 @@ export class TeacherDataService extends DataService {
   getComponentStatesByWorkgroupIdAndComponentId(workgroupId, componentId) {
     const componentStatesByWorkgroupId = this.getComponentStatesByWorkgroupId(workgroupId);
     const componentStatesByComponentId = this.getComponentStatesByComponentId(componentId);
-    return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByComponentId);
-  }
-
-  getComponentStatesByWorkgroupIdAndComponentIds(workgroupId, componentIds) {
-    const componentStatesByWorkgroupId = this.getComponentStatesByWorkgroupId(workgroupId);
-    let componentStatesByComponentId = [];
-    for (const componentId of componentIds) {
-      componentStatesByComponentId = componentStatesByComponentId.concat(
-        this.getComponentStatesByComponentId(componentId)
-      );
-    }
     return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByComponentId);
   }
 
@@ -515,22 +440,6 @@ export class TeacherDataService extends DataService {
 
   getAnnotationsByNodeId(nodeId: string) {
     return this.studentData.annotationsByNodeId[nodeId] || [];
-  }
-
-  getAnnotationsByNodeIdAndComponentId(nodeId: string, componentId: string): any[] {
-    const annotationsByNodeId = this.getAnnotationsByNodeId(nodeId);
-    return annotationsByNodeId.filter((annotation: any) => annotation.componentId === componentId);
-  }
-
-  getAnnotationsByNodeIdAndPeriodId(nodeId, periodId) {
-    const annotationsByNodeId = this.studentData.annotationsByNodeId[nodeId];
-    if (annotationsByNodeId != null) {
-      return annotationsByNodeId.filter((annotation) => {
-        return isMatchingPeriods(annotation.periodId, periodId);
-      });
-    } else {
-      return [];
-    }
   }
 
   setCurrentPeriod(period) {
@@ -578,14 +487,6 @@ export class TeacherDataService extends DataService {
     this.periods = periods;
   }
 
-  getVisiblePeriodsById(currentPeriodId: number): any {
-    if (currentPeriodId === -1) {
-      return this.getPeriods().slice(1);
-    } else {
-      return [this.getPeriodById(currentPeriodId)];
-    }
-  }
-
   setCurrentWorkgroup(workgroup) {
     this.currentWorkgroup = workgroup;
     this.broadcastCurrentWorkgroupChanged({ currentWorkgroup: this.currentWorkgroup });
@@ -611,10 +512,6 @@ export class TeacherDataService extends DataService {
     return this.AnnotationService.getTotalScore(
       this.studentData.annotationsToWorkgroupId[workgroupId]
     );
-  }
-
-  private getPeriodById(periodId: number): any {
-    return this.getPeriods().find((period) => period.periodId === periodId);
   }
 
   isWorkgroupShown(workgroup): boolean {

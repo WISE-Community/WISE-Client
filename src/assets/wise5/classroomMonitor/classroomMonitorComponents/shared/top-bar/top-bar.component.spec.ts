@@ -1,10 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ConfigService } from '../../../../services/configService';
@@ -12,7 +9,6 @@ import { NotificationService } from '../../../../services/notificationService';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { PauseScreensMenuComponent } from '../../pause-screens-menu/pause-screens-menu.component';
 import { NotificationsMenuComponent } from '../notifications-menu/notifications-menu.component';
-
 import { TopBarComponent } from './top-bar.component';
 
 describe('TopBarComponent', () => {
@@ -21,15 +17,13 @@ describe('TopBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NotificationsMenuComponent, PauseScreensMenuComponent, TopBarComponent],
+      declarations: [NotificationsMenuComponent, TopBarComponent],
       imports: [
         ClassroomMonitorTestingModule,
-        FormsModule,
-        MatDividerModule,
+        PauseScreensMenuComponent,
         MatIconModule,
         MatListModule,
         MatMenuModule,
-        MatSlideToggleModule,
         MatToolbarModule,
         MatTooltipModule
       ]
