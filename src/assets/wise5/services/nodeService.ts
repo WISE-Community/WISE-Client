@@ -300,28 +300,17 @@ export class NodeService {
     if ((alreadyBranched && transitionLogic.canChangePath) || !alreadyBranched) {
       this.chooseTransition(currentNode.id, transitionLogic).then((transition) => {
         if (transition != null) {
-          this.createBranchPathTakenEvent(currentNode.id, transition.to);
+          this.saveBranchPathTakenEvent(currentNode.id, transition.to);
         }
       });
     }
   }
 
-  /**
-   * Create a branchPathTaken event
-   * @param fromNodeId the from node id
-   * @param toNodeid the to node id
-   */
-  createBranchPathTakenEvent(fromNodeId, toNodeId) {
-    const nodeId = fromNodeId;
-    const componentId = null;
-    const componentType = null;
-    const category = 'Navigation';
-    const event = 'branchPathTaken';
-    const eventData = {
+  private saveBranchPathTakenEvent(fromNodeId: string, toNodeId: string): void {
+    this.DataService.saveVLEEvent(fromNodeId, null, null, 'Navigation', 'branchPathTaken', {
       fromNodeId: fromNodeId,
       toNodeId: toNodeId
-    };
-    this.DataService.saveVLEEvent(nodeId, componentId, componentType, category, event, eventData);
+    });
   }
 
   broadcastNodeSubmitClicked(args: any) {
