@@ -19718,7 +19718,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussionService.ts</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">19</context>
         </context-group>
         <target state="translated">Debate</target>
       </trans-unit>
@@ -21844,7 +21844,7 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.ts</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">89</context>
         </context-group>
         <target state="translated">¿Seguro que desea eliminar esta opción?</target>
       </trans-unit>
@@ -22109,6 +22109,30 @@ Advertencia: Esto eliminará todas las opciones existentes en este componente.</
           <context context-type="linenumber">25,28</context>
         </context-group>
         <target state="needs-translation"> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> <x id="INTERPOLATION_2" equiv-text="{{ componentContent.maxSubmitCount === 1 ? 'attempt' : 'attempts' }}"/> </target>
+      </trans-unit>
+      <trans-unit id="4018977700600303269" datatype="html">
+        <source>Choose an option from below</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multipleChoiceService.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <target state="needs-translation">Choose an option from below</target>
+      </trans-unit>
+      <trans-unit id="1267813701388263700" datatype="html">
+        <source>Choice 1</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multipleChoiceService.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <target state="needs-translation">Choice 1</target>
+      </trans-unit>
+      <trans-unit id="169678945905320246" datatype="html">
+        <source>Choice 2</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multipleChoiceService.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <target state="needs-translation">Choice 2</target>
       </trans-unit>
       <trans-unit id="7864549548500976713" datatype="html">
         <source>Students type a response to a question or prompt.</source>
@@ -24608,7 +24632,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Preview Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">76</context>
         </context-group>
         <target state="translated">Previsualizar estudiante</target>
       </trans-unit>
@@ -24616,7 +24640,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>StudentDataService.saveComponentEvent: component, category, event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">245</context>
+          <context context-type="linenumber">243</context>
         </context-group>
         <target state="translated">StudentDataService.saveComponentEvent: component, category, event args no pueden ser nulos</target>
       </trans-unit>
@@ -24624,7 +24648,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">255</context>
+          <context context-type="linenumber">253</context>
         </context-group>
         <target state="translated">StudentDataService.saveComponentEvent: nodeId, componentId, componentType no pueden ser nulos</target>
       </trans-unit>
@@ -24632,7 +24656,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>StudentDataService.saveVLEEvent: category and event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">264</context>
+          <context context-type="linenumber">262</context>
         </context-group>
         <target state="translated">StudentDataService.saveVLEEvent: argumentos para categoría y evento no pueden ser nulos</target>
       </trans-unit>
