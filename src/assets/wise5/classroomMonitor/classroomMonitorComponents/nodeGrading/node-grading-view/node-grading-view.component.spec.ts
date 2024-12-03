@@ -1,21 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatIconModule } from '@angular/material/icon';
 import { ComponentSelectComponent } from '../../../../../../app/classroom-monitor/component-select/component-select.component';
 import { WorkgroupSelectAutocompleteComponent } from '../../../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { VLEProjectService } from '../../../../vle/vleProjectService';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatListModule } from '@angular/material/list';
 import { NodeGradingViewComponent } from './node-grading-view.component';
 import { ConfigService } from '../../../../services/configService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { CommonModule } from '@angular/common';
 import { NodeGradingViewComponentTestHelper } from '../../nodeGrading/node-grading-view/node-grading-view.component.test.helper';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { of } from 'rxjs';
@@ -28,21 +20,13 @@ let testHelper: NodeGradingViewComponentTestHelper;
 describe('NodeGradingViewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NodeGradingViewComponent, WorkgroupSelectAutocompleteComponent],
+      declarations: [NodeGradingViewComponent],
       imports: [
         BrowserAnimationsModule,
         ClassroomMonitorTestingModule,
-        CommonModule,
         ComponentSelectComponent,
         ComponentTypeServiceModule,
-        FlexLayoutModule,
-        FormsModule,
-        MatAutocompleteModule,
-        MatFormFieldModule,
-        MatListModule,
-        MatIconModule,
-        MatInputModule,
-        ReactiveFormsModule
+        WorkgroupSelectAutocompleteComponent
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

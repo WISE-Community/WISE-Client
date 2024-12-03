@@ -13,8 +13,10 @@
     (optionSelected)="itemSelected($event.option.value)"
     (closed)="closed($event)"
   >
-    <mat-option *ngFor="let workgroup of filteredWorkgroups | async" [value]="workgroup">
-      {{ workgroup.displayNames }}
-    </mat-option>
+    @for (workgroup of filteredWorkgroups | async; track workgroup.displayNames) {
+      <mat-option [value]="workgroup">
+        {{ workgroup.displayNames }}
+      </mat-option>
+    }
   </mat-autocomplete>
 </mat-form-field>

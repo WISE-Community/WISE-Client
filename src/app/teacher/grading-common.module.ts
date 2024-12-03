@@ -26,9 +26,9 @@ import { ComponentStateInfoComponent } from '../../assets/wise5/common/component
     WorkgroupItemComponent,
     WorkgroupComponentGradingComponent,
     WorkgroupNodeScoreComponent,
-    WorkgroupNodeStatusComponent
+    WorkgroupNodeStatusComponent,
+    WorkgroupSelectAutocompleteComponent
   ],
-  declarations: [WorkgroupSelectAutocompleteComponent],
   exports: [
     ComponentGradingComponent,
     ComponentStateInfoComponent,

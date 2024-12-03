@@ -1,5 +1,3 @@
-'use strict';
-
 import { Directive, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
@@ -8,15 +6,18 @@ import { TeacherDataService } from '../../../assets/wise5/services/teacherDataSe
 @Directive({ selector: 'workgroup-select' })
 export class WorkgroupSelectComponent {
   @Input() customClass: string;
-  canViewStudentNames: boolean;
-  periodId: number;
-  selectedItem: any;
-  subscriptions: Subscription = new Subscription();
-  workgroups: any;
+  protected canViewStudentNames: boolean;
+  protected periodId: number;
+  protected selectedItem: any;
+  protected subscriptions: Subscription = new Subscription();
+  protected workgroups: any;
 
-  constructor(protected configService: ConfigService, protected dataService: TeacherDataService) {}
+  constructor(
+    protected configService: ConfigService,
+    protected dataService: TeacherDataService
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;
     this.periodId = this.dataService.getCurrentPeriod().periodId;
     this.setWorkgroups();
@@ -37,29 +38,29 @@ export class WorkgroupSelectComponent {
     );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
-  setWorkgroups() {}
+  protected setWorkgroups() {}
 
   protected setWorkgroup(workgroup: any): void {}
 
-  currentPeriodChanged() {}
+  protected currentPeriodChanged() {}
 
-  sortByField(arr: any[], field: string): any[] {
+  protected sortByField(arr: any[], field: string): any[] {
     return arr.sort((workgroup1, workgroup2) => {
       return workgroup1[field] - workgroup2[field];
     });
   }
 
-  sortByDisplayNames(arr: any[]): any[] {
+  protected sortByDisplayNames(arr: any[]): any[] {
     return arr.sort((workgroup1, workgroup2) => {
       return workgroup1.displayNames.localeCompare(workgroup2.displayNames);
     });
   }
 
-  filterWorkgroupsBySelectedPeriod() {
+  protected filterWorkgroupsBySelectedPeriod(): void {
     this.workgroups = this.configService.getClassmateUserInfos().filter((workgroup) => {
       return (
         (this.periodId === -1 || workgroup.periodId === this.periodId) &&
@@ -68,7 +69,7 @@ export class WorkgroupSelectComponent {
     });
   }
 
-  setCurrentWorkgroup(workgroup) {
+  protected setCurrentWorkgroup(workgroup): void {
     this.dataService.setCurrentWorkgroup(workgroup);
   }
 }
