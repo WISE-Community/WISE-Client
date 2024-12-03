@@ -26,8 +26,8 @@ let componentId1: string = 'abcdefghij';
 describe('MultipleChoiceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [
+      imports: [],
+      providers: [
         AnnotationService,
         ConfigService,
         MultipleChoiceService,
@@ -37,8 +37,8 @@ describe('MultipleChoiceService', () => {
         TagService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-});
+      ]
+    });
     service = TestBed.inject(MultipleChoiceService);
     choice1 = createChoice(choiceId1, choiceText1, '', false);
     choice2 = createChoice(choiceId2, choiceText2, '', false);
@@ -58,7 +58,7 @@ function createComponent() {
     const component = service.createComponent();
     expect(component.type).toEqual('MultipleChoice');
     expect(component.choiceType).toEqual('radio');
-    expect(component.choices).toEqual([]);
+    expect(component.choices.length).toEqual(2);
     expect(component.showFeedback).toEqual(true);
   });
 }

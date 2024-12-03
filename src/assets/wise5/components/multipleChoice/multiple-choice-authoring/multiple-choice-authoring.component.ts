@@ -18,6 +18,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
 import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
+import { Choice } from '../Choice';
 
 @Component({
   imports: [
@@ -80,13 +81,7 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
   }
 
   protected addChoice(): void {
-    const newChoice = {
-      id: generateRandomKey(),
-      text: '',
-      feedback: '',
-      isCorrect: false
-    };
-    this.componentContent.choices.push(newChoice);
+    this.componentContent.choices.push(new Choice(generateRandomKey(), '', false, ''));
     this.componentChanged();
   }
 
