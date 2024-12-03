@@ -2,30 +2,51 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { calculateComponentVisibility } from '../../shared/grading-helpers/grading-helpers';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { WorkgroupInfoComponent } from '../workgroupInfo/workgroup-info.component';
+import { WorkgroupNodeStatusComponent } from '../../../../../../app/classroom-monitor/workgroup-node-status/workgroup-node-status.component';
+import { WorkgroupNodeScoreComponent } from '../../shared/workgroupNodeScore/workgroup-node-score.component';
+import { ComponentNewWorkBadgeComponent } from '../../../../../../app/classroom-monitor/component-new-work-badge/component-new-work-badge.component';
+import { WorkgroupComponentGradingComponent } from '../../workgroup-component-grading/workgroup-component-grading.component';
 
 @Component({
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatListModule,
+    FlexLayoutModule,
+    WorkgroupInfoComponent,
+    WorkgroupNodeStatusComponent,
+    WorkgroupNodeScoreComponent,
+    ComponentNewWorkBadgeComponent,
+    WorkgroupComponentGradingComponent
+  ],
   selector: 'workgroup-item',
-  templateUrl: 'workgroup-item.component.html',
-  styleUrls: ['workgroup-item.component.scss']
+  standalone: true,
+  styleUrl: 'workgroup-item.component.scss',
+  templateUrl: 'workgroup-item.component.html'
 })
 export class WorkgroupItemComponent {
-  componentIdToHasWork: { [componentId: string]: boolean } = {};
-  componentIdToIsVisible: { [componentId: string]: boolean } = {};
-  components: any[] = [];
-  disabled: boolean;
+  private componentIdToHasWork: { [componentId: string]: boolean } = {};
+  protected componentIdToIsVisible: { [componentId: string]: boolean } = {};
+  protected components: any[] = [];
+  protected disabled: boolean;
   @Input() expanded: boolean;
-  hasAlert: boolean;
-  hasNewAlert: boolean;
+  protected hasAlert: boolean;
+  protected hasNewAlert: boolean;
   @Input() hiddenComponents: string[] = [];
   @Input() maxScore: number;
-  nodeHasWork: boolean;
+  private nodeHasWork: boolean;
   @Input() nodeId: string;
   @Output() onUpdateExpand: EventEmitter<any> = new EventEmitter();
-  score: any;
+  protected score: any;
   @Input() showScore: boolean;
-  status: any;
-  statusClass: string;
-  statusText: string = '';
+  private status: any;
+  protected statusClass: string;
+  protected statusText: string = '';
   @Input() workgroupId: number;
   @Input() workgroupData: any;
 
@@ -39,7 +60,7 @@ export class WorkgroupItemComponent {
     this.updateStatus();
   }
 
-  updateNode(): void {
+  private updateNode(): void {
     this.nodeHasWork = this.projectService.nodeHasWork(this.nodeId);
     this.components = this.projectService.getComponents(this.nodeId);
     this.componentIdToHasWork = this.projectService.calculateComponentIdToHasWork(this.components);
@@ -69,11 +90,11 @@ export class WorkgroupItemComponent {
     }
   }
 
-  isComponentVisible(componentId: string): boolean {
+  protected isComponentVisible(componentId: string): boolean {
     return !this.hiddenComponents.includes(componentId);
   }
 
-  getComponentTypeLabel(componentType): string {
+  protected getComponentTypeLabel(componentType): string {
     return this.componentTypeService.getComponentTypeLabel(componentType);
   }
 
@@ -109,10 +130,9 @@ export class WorkgroupItemComponent {
     this.disabled = this.status === -1;
   }
 
-  toggleExpand(): void {
+  protected toggleExpand(): void {
     if (this.showScore) {
-      let expand = !this.expanded;
-      this.onUpdateExpand.emit({ workgroupId: this.workgroupId, value: expand });
+      this.onUpdateExpand.emit({ workgroupId: this.workgroupId, value: !this.expanded });
     }
   }
 }

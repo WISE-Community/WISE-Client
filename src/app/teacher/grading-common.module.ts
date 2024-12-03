@@ -23,11 +23,12 @@ import { ComponentStateInfoComponent } from '../../assets/wise5/common/component
     StatusIconComponent,
     StudentTeacherCommonModule,
     WorkgroupInfoComponent,
+    WorkgroupItemComponent,
     WorkgroupComponentGradingComponent,
     WorkgroupNodeScoreComponent,
     WorkgroupNodeStatusComponent
   ],
-  declarations: [WorkgroupItemComponent, WorkgroupSelectAutocompleteComponent],
+  declarations: [WorkgroupSelectAutocompleteComponent],
   exports: [
     ComponentGradingComponent,
     ComponentStateInfoComponent,
