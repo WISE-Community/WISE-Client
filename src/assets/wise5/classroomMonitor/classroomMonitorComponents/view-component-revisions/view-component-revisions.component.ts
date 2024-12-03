@@ -1,13 +1,31 @@
 import { Component, Inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { TeacherDataService } from '../../../services/teacherDataService';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ConfigService } from '../../..//services/configService';
+import { TeacherDataService } from '../../..//services/teacherDataService';
+import { ComponentGradingComponent } from '../component-grading.component';
+import { ComponentStateInfoComponent } from '../../../common/component-state-info/component-state-info.component';
+import { EditComponentAnnotationsComponent } from '../edit-component-annotations/edit-component-annotations.component';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'view-component-revisions.component',
-  styleUrls: ['view-component-revisions.component.scss'],
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatListModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    ComponentGradingComponent,
+    ComponentStateInfoComponent,
+    EditComponentAnnotationsComponent
+  ],
+  selector: 'view-component-revisions',
+  standalone: true,
+  styleUrl: 'view-component-revisions.component.scss',
   templateUrl: 'view-component-revisions.component.html'
 })
 export class ViewComponentRevisionsComponent {

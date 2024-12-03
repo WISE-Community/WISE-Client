@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { NavItemScoreComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/navItemScore/nav-item-score.component';
-import { ViewComponentRevisionsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component';
 import { AlertStatusCornerComponent } from '../classroom-monitor/alert-status-corner/alert-status-corner.component';
 import { ComponentNewWorkBadgeComponent } from '../classroom-monitor/component-new-work-badge/component-new-work-badge.component';
 import { ComponentSelectComponent } from '../classroom-monitor/component-select/component-select.component';
@@ -52,8 +51,7 @@ import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/class
     StudentGradingToolsComponent,
     StudentProgressComponent,
     ToolBarComponent,
-    TopBarComponent,
-    ViewComponentRevisionsComponent
+    TopBarComponent
   ],
   imports: [
     ComponentGradingComponent,
