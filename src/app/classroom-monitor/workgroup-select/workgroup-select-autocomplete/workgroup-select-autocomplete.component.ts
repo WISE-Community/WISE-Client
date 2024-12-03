@@ -1,29 +1,33 @@
-'use strict';
-
 import { Component, ViewEncapsulation } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
 import { WorkgroupSelectComponent } from '../workgroup-select.component';
-import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { filter, map, startWith } from 'rxjs/operators';
-import { ConfigService } from '../../../../assets/wise5/services/configService';
-import { TeacherDataService } from '../../../../assets/wise5/services/teacherDataService';
 import { copy } from '../../../../assets/wise5/common/object/object';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
+  ],
   selector: 'workgroup-select-autocomplete',
-  styleUrls: ['workgroup-select-autocomplete.component.scss'],
-  templateUrl: 'workgroup-select-autocomplete.component.html',
-  encapsulation: ViewEncapsulation.None
+  standalone: true,
+  styleUrl: 'workgroup-select-autocomplete.component.scss',
+  templateUrl: 'workgroup-select-autocomplete.component.html'
 })
 export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectComponent {
-  filteredWorkgroups: Observable<any>;
-  myControl = new FormControl();
+  protected filteredWorkgroups: Observable<any>;
+  protected myControl = new FormControl();
 
-  constructor(protected configService: ConfigService, protected dataService: TeacherDataService) {
-    super(configService, dataService);
-  }
-
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
     this.updateFilteredWorkgroups();
     const currentWorkgroup = this.dataService.getCurrentWorkgroup();
@@ -32,7 +36,7 @@ export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectCompone
     }
   }
 
-  private updateFilteredWorkgroups() {
+  private updateFilteredWorkgroups(): void {
     this.filteredWorkgroups = this.myControl.valueChanges.pipe(
       startWith(''),
       filter((value) => typeof value === 'string'),
@@ -40,7 +44,7 @@ export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectCompone
     );
   }
 
-  displayWith(workgroup) {
+  protected displayWith(workgroup: any): string {
     return workgroup.displayNames;
   }
 
@@ -50,11 +54,11 @@ export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectCompone
     );
   }
 
-  currentPeriodChanged() {
+  protected currentPeriodChanged(): void {
     this.myControl.setValue('');
   }
 
-  setWorkgroups() {
+  protected setWorkgroups(): void {
     this.filterWorkgroupsBySelectedPeriod();
     const students = this.getStudentsFromWorkgroups();
     this.workgroups = this.canViewStudentNames
@@ -67,7 +71,7 @@ export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectCompone
     this.updateWorkgroupDisplay(workgroup);
   }
 
-  getStudentsFromWorkgroups() {
+  private getStudentsFromWorkgroups(): any[] {
     const students = [];
     for (const workgroup of this.workgroups) {
       const ids = workgroup.userIds;
@@ -86,25 +90,21 @@ export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectCompone
     return students;
   }
 
-  flipName(name: string) {
+  private flipName(name: string): string {
     const names = name.split(' ');
     return `${names[1]}, ${names[0]}`;
   }
 
-  itemSelected(workgroup: any) {
+  protected itemSelected(workgroup: any): void {
     this.setCurrentWorkgroup(workgroup);
     this.updateWorkgroupDisplay(workgroup);
   }
 
   private updateWorkgroupDisplay(workgroup: any): void {
-    if (workgroup) {
-      this.myControl.setValue(workgroup.displayNames);
-    } else {
-      this.myControl.setValue('');
-    }
+    this.myControl.setValue(workgroup ? workgroup.displayNames : '');
   }
 
-  closed(event: any) {
+  protected closed(event: any): void {
     if (this.myControl.value === '') {
       this.itemSelected(null);
     }
