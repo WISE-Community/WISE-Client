@@ -1,48 +1,58 @@
 <h2 mat-dialog-title i18n>Revisions for {{ usernames }}</h2>
 <mat-dialog-content class="dialog-content-scroll">
   <mat-list class="component-revisions">
-    <mat-list-item
-      *ngFor="let revision of revisionsSorted; index as i; first as isFirst"
-      class="list-item mat-elevation-z1 revision"
-      [ngClass]="{ 'revision-latest': isFirst }"
-    >
-      <div *ngIf="i < numRevisionsShown" fxFlex>
-        <h3 class="accent-1 mat-caption gray-lightest-bg component-header">
-          #{{ totalRevisions - i }} <span *ngIf="isFirst">(Latest)</span>
-        </h3>
-        <div class="revision-content" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
-          <div fxFlex="100" fxFlex.gt-sm="66.67" fxLayout="column" class="revision-response">
-            <component-grading-component
-              [nodeId]="nodeId"
-              [componentId]="componentId"
-              [componentState]="revision.componentState"
-              [workgroupId]="workgroupId"
-              [isRevision]="true"
-            />
-            <span fxFlex></span>
-            <div class="component__actions__info component--grading__actions__info md-caption">
-              <component-state-info [componentState]="revision.componentState" [isInactive]="true">
-              </component-state-info>
+    @for (revision of revisionsSorted; track revision; let i = $index; let isFirst = $first) {
+      <mat-list-item
+        class="list-item mat-elevation-z1 revision"
+        [ngClass]="{ 'revision-latest': isFirst }"
+      >
+        @if (i < numRevisionsShown) {
+          <div fxFlex>
+            <h3 class="accent-1 mat-caption gray-lightest-bg component-header">
+              #{{ totalRevisions - i }}
+              @if (isFirst) {
+                <span>(Latest)</span>
+              }
+            </h3>
+            <div class="revision-content" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
+              <div fxFlex="100" fxFlex.gt-sm="66.67" fxLayout="column" class="revision-response">
+                <component-grading-component
+                  [nodeId]="nodeId"
+                  [componentId]="componentId"
+                  [componentState]="revision.componentState"
+                  [workgroupId]="workgroupId"
+                  [isRevision]="true"
+                />
+                <span fxFlex></span>
+                <div class="component__actions__info component--grading__actions__info md-caption">
+                  <component-state-info
+                    [componentState]="revision.componentState"
+                    [isInactive]="true"
+                  />
+                </div>
+              </div>
+              <edit-component-annotations
+                class="selected-bg-bg"
+                fxFlex="100"
+                fxFlex.gt-sm="33.33"
+                [componentId]="componentId"
+                [componentStateId]="revision.componentState.id"
+                [fromWorkgroupId]="fromWorkgroupId"
+                [isDisabled]="true"
+                [nodeId]="nodeId"
+                [showAllAnnotations]="true"
+                [toWorkgroupId]="workgroupId"
+              />
             </div>
           </div>
-          <edit-component-annotations
-            class="selected-bg-bg"
-            fxFlex="100"
-            fxFlex.gt-sm="33.33"
-            [componentId]="componentId"
-            [componentStateId]="revision.componentState.id"
-            [fromWorkgroupId]="fromWorkgroupId"
-            [isDisabled]="true"
-            [nodeId]="nodeId"
-            [showAllAnnotations]="true"
-            [toWorkgroupId]="workgroupId"
-          />
-        </div>
+        }
+      </mat-list-item>
+    }
+    @if (totalRevisions > numRevisionsShown) {
+      <div class="show-more center">
+        <button mat-raised-button (click)="showMore()" i18n>Show more</button>
       </div>
-    </mat-list-item>
-    <div *ngIf="totalRevisions > numRevisionsShown" class="show-more center">
-      <button mat-raised-button (click)="showMore()" i18n>Show more</button>
-    </div>
+    }
   </mat-list>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
