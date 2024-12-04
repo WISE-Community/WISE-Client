@@ -1,0 +1,31 @@
+<div class="view-content--with-sidemenu">
+  {{ stepTitle }}
+  <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex.lt-md="100">
+    <div class="accent-1" fxLayout="row" fxLayoutAlign="center center">
+      <h2 class="content-head__item" fxLayout.lt-md="column" fxLayoutGap.gt-sm="4px">
+        <span>{{ getNodeCompletion() }}%</span>
+        <span class="content-head-label" i18n>Completion</span>
+      </h2>
+      @if (hasWork) {
+        <h2 class="content-head__item" fxLayout.lt-md="column" fxLayoutGap.gt-sm="4px">
+          @if (getNodeAverageScore() != null) {
+            <span>{{ getNodeAverageScore() | number: '1.1' }}</span>
+          } @else {
+            <span i18n>N/A</span>
+          }
+          <span class="content-head-label" i18n>Mean Score</span>
+        </h2>
+      }
+    </div>
+    <button mat-stroked-button (click)="showRubric()" class="info">
+      <div fxLayoutAlign="center center" fxLayoutGap="4px">
+        <mat-icon class="info">info_outline</mat-icon>
+        @if (numRubrics == 0) {
+          <span i18n>Step Info</span>
+        } @else {
+          <span i18n>Info + Tips ({{ numRubrics }})</span>
+        }
+      </div>
+    </button>
+  </div>
+</div>

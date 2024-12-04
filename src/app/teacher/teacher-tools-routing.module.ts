@@ -16,6 +16,7 @@ import { ExportRawDataComponent } from '../../assets/wise5/classroomMonitor/data
 import { ExportEventsComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-events/export-events.component';
 import { ExportOneWorkgroupPerRowComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component';
 import { ExportStudentWorkComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-student-work/export-student-work.component';
+import { NodeGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading/node-grading.component';
 
 const routes: Routes = [
   {
@@ -33,7 +34,7 @@ const routes: Routes = [
       { path: 'export/visits', component: ExportStepVisitsComponent },
       { path: 'manage-students', component: ManageStudentsComponent },
       { path: 'milestones', component: MilestonesComponent },
-      { path: 'node/:nodeId', component: NodeProgressViewComponent },
+      { path: 'node/:nodeId', component: NodeGradingComponent },
       { path: 'notebook', component: NotebookGradingComponent },
       {
         path: 'team',
