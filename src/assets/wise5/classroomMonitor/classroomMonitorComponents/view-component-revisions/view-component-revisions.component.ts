@@ -29,28 +29,26 @@ import { Observable } from 'rxjs';
   templateUrl: 'view-component-revisions.component.html'
 })
 export class ViewComponentRevisionsComponent {
-  componentId: string;
-  componentStates: any = [];
-  fromWorkgroupId: number;
-  increment: number = 5;
-  nodeId: string;
-  numRevisionsShown: number = 5;
-  revisions: any = {};
-  revisionsSorted: any[];
-  totalRevisions: number;
-  usernames: string[];
-  workgroupId: number;
+  protected componentId: string;
+  protected fromWorkgroupId: number;
+  private increment: number = 5;
+  protected nodeId: string;
+  protected numRevisionsShown: number = 5;
+  private revisions: any = {};
+  protected revisionsSorted: any[];
+  protected totalRevisions: number;
+  protected usernames: string[];
+  protected workgroupId: number;
 
   constructor(
     private annotationService: AnnotationService,
     private configService: ConfigService,
-    private dataService: TeacherDataService,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dataService: TeacherDataService
   ) {}
 
   ngOnInit() {
     this.componentId = this.data.componentId;
-    this.componentStates = this.data.componentStates;
     this.fromWorkgroupId = this.data.fromWorkgroupId;
     this.nodeId = this.data.nodeId;
     this.workgroupId = this.data.workgroupId;
@@ -67,24 +65,22 @@ export class ViewComponentRevisionsComponent {
     this.revisions = {};
     this.totalRevisions = 0;
     this.getNodeEnteredEvents().subscribe(({ events }) => {
-      const nodeVisits = events.map((event) => {
-        return {
-          serverSaveTime: event.serverSaveTime,
-          states: []
-        };
-      });
+      const nodeVisits = events.map((event) => ({
+        serverSaveTime: event.serverSaveTime,
+        states: []
+      }));
       this.populateDataHelper(nodeVisits);
     });
   }
 
-  populateDataHelper(nodeVisits: any[]) {
+  private populateDataHelper(nodeVisits: any[]): void {
     // group all component states by node visit
-    for (let cStatesIndex = this.componentStates.length - 1; cStatesIndex > -1; cStatesIndex--) {
-      const componentState = this.componentStates[cStatesIndex];
+    for (let i = this.data.componentStates.length - 1; i > -1; i--) {
+      const componentState = this.data.componentStates[i];
       if (nodeVisits.length > 0) {
         // add state to corresponding node visit
-        for (let nVisitsIndex = nodeVisits.length - 1; nVisitsIndex > -1; nVisitsIndex--) {
-          const nodeVisit = nodeVisits[nVisitsIndex];
+        for (let j = nodeVisits.length - 1; j > -1; j--) {
+          const nodeVisit = nodeVisits[j];
           if (componentState.serverSaveTime >= nodeVisit.serverSaveTime) {
             nodeVisit.states.push(componentState);
             break;
@@ -94,46 +90,45 @@ export class ViewComponentRevisionsComponent {
         // we don't have any node visits, so count all all states as revisions.
         this.totalRevisions++;
         this.revisions[componentState.id] = {
-          clientSaveTime: this.convertToClientTimestamp(componentState.serverSaveTime),
+          clientSaveTime: this.configService.convertToClientTimestamp(
+            componentState.serverSaveTime
+          ),
           componentState: componentState
         };
       }
     }
 
     // find revisions in each node visit and add to model
-    for (let visitsIndex = 0; visitsIndex < nodeVisits.length; visitsIndex++) {
-      const states = nodeVisits[visitsIndex].states;
-      for (let i = 0; i < states.length; i++) {
-        const state = states[i];
-        let isRevision = false;
-        if (i === 0) {
-          isRevision = true; // latest state for a visit always counts as a revision
-        } else if (state.isSubmit) {
-          isRevision = true;
-        } else {
-          for (const annotation of this.annotationService.getAnnotationsByStudentWorkId(state.id)) {
-            if (['score', 'autoScore', 'comment', 'autoComment'].includes(annotation.type)) {
-              isRevision = true; // is revision if there is an annotation for the component
-              break;
-            }
-          }
-        }
-        if (isRevision) {
+    nodeVisits.forEach((nodeVisit) => {
+      nodeVisit.states
+        .filter((state, index) => this.isRevision(state, index))
+        .forEach((state) => {
           this.totalRevisions++;
           this.revisions[state.id] = {
-            clientSaveTime: this.convertToClientTimestamp(state.serverSaveTime),
+            clientSaveTime: this.configService.convertToClientTimestamp(state.serverSaveTime),
             componentState: state
           };
-        }
-      }
-    }
+        });
+    });
     this.sortRevisions();
   }
 
-  sortRevisions() {
-    this.revisionsSorted = Object.values(this.revisions).sort((a: any, b: any) => {
-      return b.clientSaveTime - a.clientSaveTime;
-    });
+  private isRevision(state: any, stateIndex: number): boolean {
+    return (
+      stateIndex === 0 ||
+      state.isSubmit ||
+      this.annotationService
+        .getAnnotationsByStudentWorkId(state.id)
+        .some((annotation) =>
+          ['score', 'autoScore', 'comment', 'autoComment'].includes(annotation.type)
+        )
+    );
+  }
+
+  private sortRevisions(): void {
+    this.revisionsSorted = Object.values(this.revisions).sort(
+      (a: any, b: any) => b.clientSaveTime - a.clientSaveTime
+    );
   }
 
   private getNodeEnteredEvents(): Observable<any> {
@@ -148,11 +143,7 @@ export class ViewComponentRevisionsComponent {
     });
   }
 
-  convertToClientTimestamp(time: number) {
-    return this.configService.convertToClientTimestamp(time);
-  }
-
-  showMore() {
+  protected showMore(): void {
     this.numRevisionsShown += this.increment;
   }
 }
