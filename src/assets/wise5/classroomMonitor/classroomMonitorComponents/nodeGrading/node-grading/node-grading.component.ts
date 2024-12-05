@@ -7,17 +7,24 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { ShowNodeInfoDialogComponent } from '../../../../../../app/classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
+import { SelectComponentComponent } from '../select-component/select-component.component';
+import { Node } from '../../../../common/Node';
+import { Subscription } from 'rxjs';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, MatIconModule],
+  imports: [CommonModule, FlexLayoutModule, MatIconModule, SelectComponentComponent],
   selector: 'node-grading',
   standalone: true,
   templateUrl: './node-grading.component.html'
 })
 export class NodeGradingComponent {
+  protected component: any;
   protected hasWork: boolean;
+  protected node: Node;
   @Input() nodeId: string;
   protected numRubrics: number;
+  private subscriptions: Subscription = new Subscription();
+
   constructor(
     private classroomStatusService: ClassroomStatusService,
     private dataService: TeacherDataService,
@@ -27,8 +34,18 @@ export class NodeGradingComponent {
 
   ngOnInit(): void {
     this.hasWork = this.projectService.nodeHasWork(this.nodeId);
-    this.numRubrics = this.projectService.getNode(this.nodeId).getNumRubrics();
+    this.node = this.projectService.getNode(this.nodeId);
+    this.numRubrics = this.node.getNumRubrics();
     this.dataService.setCurrentNodeByNodeId(this.nodeId);
+    this.subscriptions.add(
+      this.dataService.currentNodeChanged$.subscribe(({ currentNode }) => {
+        this.node = currentNode;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   protected getNodeCompletion(): number {
@@ -50,5 +67,9 @@ export class NodeGradingComponent {
       data: this.nodeId,
       width: '90%'
     });
+  }
+
+  protected showComponent(component: any): void {
+    this.component = component;
   }
 }
