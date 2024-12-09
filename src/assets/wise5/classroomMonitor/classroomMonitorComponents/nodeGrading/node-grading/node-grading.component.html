@@ -32,4 +32,27 @@
     <span i18n>Question: </span
     ><select-component [node]="node" (componentChangedEvent)="showComponent($event)" />
   </div>
+  @if (component?.type === 'MultipleChoice' && hasResponsesSummary) {
+    <teacher-summary-display
+      [nodeId]="node.id"
+      [componentId]="component.id"
+      [periodId]="periodId"
+      [studentDataType]="'responses'"
+      [source]="source"
+      [highlightCorrectAnswer]="hasCorrectAnswer"
+      [chartType]="'column'"
+      [doRender]="true"
+    />
+  }
+  @if (hasScoresSummary && hasScoreAnnotation) {
+    <teacher-summary-display
+      [nodeId]="nodeId"
+      [componentId]="component.id"
+      [periodId]="periodId"
+      [studentDataType]="'scores'"
+      [source]="source"
+      [chartType]="'column'"
+      [doRender]="true"
+    />
+  }
 </div>
