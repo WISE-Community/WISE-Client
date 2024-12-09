@@ -15735,12 +15735,20 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">7</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="63801449925cc7b568e5ed1b756f2f17e1632d97" datatype="html">
         <source>Select a Step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">18</context>
@@ -15760,9 +15768,17 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="8b28432b6c78dfa3fb0a921ff13c63faa06457fe" datatype="html">
         <source>Next Step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">45</context>
