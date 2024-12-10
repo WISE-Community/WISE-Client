@@ -44,7 +44,7 @@ export class StepToolsComponent {
 
   constructor(
     protected dataService: TeacherDataService,
-    private dir: Directionality,
+    protected dir: Directionality,
     protected nodeService: NodeService,
     protected projectService: TeacherProjectService
   ) {}

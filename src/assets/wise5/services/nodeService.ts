@@ -48,38 +48,6 @@ export class NodeService {
     return null;
   }
 
-  /**
-   * Go to the next node that captures work
-   * @return a promise that will return the next node id
-   */
-  goToNextNodeWithWork(): Promise<string> {
-    return this.getNextNodeIdWithWork().then((nextNodeId: string) => {
-      if (nextNodeId) {
-        this.setCurrentNode(nextNodeId);
-      }
-      return nextNodeId;
-    });
-  }
-
-  /**
-   * Get the next node id in the project sequence that captures student work
-   * @param currentId (optional)
-   * @returns next node id
-   */
-  getNextNodeIdWithWork(currentId = null) {
-    return this.getNextNodeId(currentId).then((nextNodeId: string) => {
-      if (nextNodeId) {
-        if (this.ProjectService.nodeHasWork(nextNodeId)) {
-          return nextNodeId;
-        } else {
-          return this.getNextNodeIdWithWork(nextNodeId);
-        }
-      } else {
-        return null;
-      }
-    });
-  }
-
   goToPrevNode() {
     const prevNodeId = this.getPrevNodeId();
     this.setCurrentNode(prevNodeId);
@@ -129,32 +97,6 @@ export class NodeService {
       }
     }
     return prevNodeId;
-  }
-
-  /**
-   * Go to the previous node that captures work
-   */
-  goToPrevNodeWithWork() {
-    const prevNodeId = this.getPrevNodeIdWithWork();
-    this.setCurrentNode(prevNodeId);
-  }
-
-  /**
-   * Get the previous node id in the project sequence that captures student work
-   * @param currentId (optional)
-   * @returns next node id
-   */
-  getPrevNodeIdWithWork(currentId = null) {
-    const prevNodeId = this.getPrevNodeId(currentId);
-    if (prevNodeId) {
-      if (this.ProjectService.nodeHasWork(prevNodeId)) {
-        return prevNodeId;
-      } else {
-        return this.getPrevNodeIdWithWork(prevNodeId);
-      }
-    } else {
-      return null;
-    }
   }
 
   /**
