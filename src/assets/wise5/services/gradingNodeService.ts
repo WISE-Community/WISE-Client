@@ -10,15 +10,10 @@ export class GradingNodeService extends TeacherNodeService {
    */
   getNextNodeId(currentId = null): Promise<string> {
     return super.getNextNodeId(currentId).then((nextNodeId: string) => {
-      if (nextNodeId) {
-        if (this.ProjectService.nodeHasWork(nextNodeId)) {
-          return nextNodeId;
-        } else {
-          return this.getNextNodeId(nextNodeId);
-        }
-      } else {
-        return null;
-      }
+      if (!nextNodeId) return null;
+      return this.ProjectService.nodeHasWork(nextNodeId)
+        ? nextNodeId
+        : this.getNextNodeId(nextNodeId);
     });
   }
 
@@ -49,14 +44,9 @@ export class GradingNodeService extends TeacherNodeService {
    */
   getPrevNodeId(currentId = null) {
     const prevNodeId = super.getPrevNodeId(currentId);
-    if (prevNodeId) {
-      if (this.ProjectService.nodeHasWork(prevNodeId)) {
-        return prevNodeId;
-      } else {
-        return this.getPrevNodeId(prevNodeId);
-      }
-    } else {
-      return null;
-    }
+    if (!prevNodeId) return null;
+    return this.ProjectService.nodeHasWork(prevNodeId)
+      ? prevNodeId
+      : this.getPrevNodeId(prevNodeId);
   }
 }
