@@ -17,6 +17,11 @@ export class SelectComponentComponent {
   @Output() componentChangedEvent: EventEmitter<any> = new EventEmitter();
 
   ngOnChanges(): void {
-    this.selectedComponent = this.node.components[0];
+    this.selectComponent(this.node.components[0]);
+  }
+
+  protected selectComponent(component: any): void {
+    this.selectedComponent = component;
+    this.componentChangedEvent.emit(component);
   }
 }

@@ -1,7 +1,4 @@
-<mat-select
-  [(ngModel)]="selectedComponent"
-  (ngModelChange)="componentChangedEvent.emit(selectedComponent)"
->
+<mat-select [(ngModel)]="selectedComponent" (ngModelChange)="selectComponent(selectedComponent)">
   @for (component of node.components; track component.id; let i = $index) {
     <mat-option [value]="component">
       <span>{{ i + 1 }}. {{ component.type }}</span>

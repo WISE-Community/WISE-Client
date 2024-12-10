@@ -110,7 +110,11 @@ export abstract class SummaryDisplay {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!changes.doRender.firstChange) {
+    if (changes.doRender != null && !changes.doRender.firstChange) {
+      this.renderDisplay();
+    } else if (changes.componentId) {
+      this.initializeOtherComponent();
+      this.initializeCustomLabelColors();
       this.renderDisplay();
     }
   }

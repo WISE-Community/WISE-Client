@@ -29,8 +29,8 @@
     </button>
   </div>
   <div>
-    <span i18n>Question: </span
-    ><select-component [node]="node" (componentChangedEvent)="showComponent($event)" />
+    <span i18n>Question: </span>
+    <select-component [node]="node" (componentChangedEvent)="showComponent($event)" />
   </div>
   @if (component?.type === 'MultipleChoice' && hasResponsesSummary) {
     <teacher-summary-display
