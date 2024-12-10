@@ -14,6 +14,8 @@ import { NodeIconComponent } from '../../../vle/node-icon/node-icon.component';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { GradingNodeService } from '../../../services/gradingNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ConfigService } from '../../../services/configService';
+import { Router } from '@angular/router';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -36,12 +38,24 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 })
 export class GradingStepToolsComponent extends StepToolsComponent {
   constructor(
+    private configService: ConfigService,
     protected dataService: TeacherDataService,
     protected dir: Directionality,
     protected nodeService: GradingNodeService,
-    protected projectService: TeacherProjectService
+    protected projectService: TeacherProjectService,
+    private router: Router
   ) {
     super(dataService, dir, nodeService, projectService);
+  }
+
+  protected updateModel(): void {
+    super.updateModel();
+    this.router.navigate([
+      '/teacher/manage/unit',
+      this.configService.getRunId(),
+      this.projectService.isApplicationNode(this.nodeId) ? 'node' : 'group',
+      this.nodeId
+    ]);
   }
 
   protected calculateNodeIds(): void {

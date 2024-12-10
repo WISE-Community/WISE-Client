@@ -82,7 +82,7 @@ export class StepToolsComponent {
     this.dataService.setCurrentNodeByNodeId(this.nodeId);
   }
 
-  private updateModel(): void {
+  protected updateModel(): void {
     this.nodeId = this.dataService.getCurrentNodeId();
     if (this.nodeId == null) {
       this.prevId = null;

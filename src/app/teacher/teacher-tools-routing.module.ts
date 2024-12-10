@@ -34,6 +34,7 @@ const routes: Routes = [
       { path: 'export/visits', component: ExportStepVisitsComponent },
       { path: 'manage-students', component: ManageStudentsComponent },
       { path: 'milestones', component: MilestonesComponent },
+      { path: 'group/:nodeId', component: NodeProgressViewComponent },
       { path: 'node/:nodeId', component: NodeGradingComponent },
       { path: 'notebook', component: NotebookGradingComponent },
       {
