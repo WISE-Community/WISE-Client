@@ -14,6 +14,7 @@ import { MilestoneReportService } from '../services/milestoneReportService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TeacherPauseScreenService } from '../services/teacherPauseScreenService';
 import { RunStatusService } from '../services/runStatusService';
+import { GradingNodeService } from '../services/gradingNodeService';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { RunStatusService } from '../services/runStatusService';
   ],
   providers: [
     ClassroomStatusService,
+    GradingNodeService,
     MilestoneService,
     MilestoneReportService,
     TeacherDataService,

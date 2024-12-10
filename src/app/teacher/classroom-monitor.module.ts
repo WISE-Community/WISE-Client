@@ -32,9 +32,10 @@ import { DataExportModule } from '../../assets/wise5/classroomMonitor/dataExport
 import { RouterModule } from '@angular/router';
 import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator/save-indicator.component';
 import { PreviewComponentComponent } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.component';
-import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-tools.component';
 import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
 import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
+import { GradingStepToolsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/grading-step-tools/grading-step-tools.component';
+import { GradingNodeService } from '../../assets/wise5/services/gradingNodeService';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/class
     ComponentStudentModule,
     DataExportModule,
     GradingCommonModule,
+    GradingStepToolsComponent,
     HighchartsChartModule,
     ManageStudentsModule,
     MilestoneModule,
@@ -73,9 +75,9 @@ import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/class
     SelectPeriodComponent,
     ShowNodeInfoDialogComponent,
     StepInfoComponent,
-    StepToolsComponent,
     StudentTeacherCommonModule,
     TeacherSummaryDisplayComponent
-  ]
+  ],
+  providers: [GradingNodeService]
 })
 export class ClassroomMonitorModule {}

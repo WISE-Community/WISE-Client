@@ -13,7 +13,7 @@
     </button>
     <span class="toolbar__title" *ngIf="!(showStepTools || showTeamTools)">{{ viewName }}</span>
     @if (showStepTools) {
-      <step-tools [showOnlyStepsWithWork]="true" />
+      <grading-step-tools />
     }
     <student-grading-tools *ngIf="showTeamTools" [workgroupId]="workgroupId">
     </student-grading-tools>
