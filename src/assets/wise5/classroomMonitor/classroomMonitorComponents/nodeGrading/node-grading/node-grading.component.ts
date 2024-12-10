@@ -58,16 +58,26 @@ export class NodeGradingComponent {
     this.numRubrics = this.node.getNumRubrics();
     this.dataService.setCurrentNodeByNodeId(this.nodeId);
     this.periodId = this.dataService.getCurrentPeriodId();
-    this.source = this.periodId === -1 ? 'allPeriods' : 'period';
+    this.setSource();
     this.subscriptions.add(
       this.dataService.currentNodeChanged$.subscribe(({ currentNode }) => {
         this.node = currentNode;
+      })
+    );
+    this.subscriptions.add(
+      this.dataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
+        this.periodId = currentPeriod.periodId;
+        this.setSource();
       })
     );
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  private setSource(): void {
+    this.source = this.periodId === -1 ? 'allPeriods' : 'period';
   }
 
   protected getNodeCompletion(): number {
