@@ -14,7 +14,7 @@ import { components } from '../../../components/Components';
 @Component({
   selector: 'edit-component',
   standalone: true,
-  template: '<div #component></div>'
+  template: '<div #component tabindex="-1"></div>'
 })
 export class EditComponentComponent {
   @Input() componentContent: ComponentContent;
@@ -28,8 +28,9 @@ export class EditComponentComponent {
   ) {}
 
   ngAfterViewInit(): void {
+    const hostElement = this.componentElementRef.nativeElement;
     this.componentRef = createComponent(components[this.componentContent.type].authoring, {
-      hostElement: this.componentElementRef.nativeElement,
+      hostElement: hostElement,
       environmentInjector: this.injector
     });
     Object.assign(this.componentRef.instance, {
@@ -37,6 +38,7 @@ export class EditComponentComponent {
       nodeId: this.nodeId
     });
     this.applicationRef.attachView(this.componentRef.hostView);
+    setTimeout(() => hostElement.focus());
   }
 
   ngOnDestroy(): void {
