@@ -8,7 +8,8 @@ import { NotifyAuthorService } from '../../services/notifyAuthorService';
 
 @Component({
   selector: 'concurrent-authors-message',
-  templateUrl: 'concurrent-authors-message.component.html'
+  templateUrl: 'concurrent-authors-message.component.html',
+  styles: ['.concurrent-authors { padding: 4px; }']
 })
 export class ConcurrentAuthorsMessageComponent {
   protected message: string = '';

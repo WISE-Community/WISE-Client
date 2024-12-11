@@ -1,6 +1,8 @@
 .node-authoring {
+  --mat-expansion-header-expanded-state-height: --mat-expansion-header-collpased-state-height;
+
   .node-authoring-header {
-    margin: 8px 8px 0;
+    margin: 16px 8px 0;
   }
 
   .node-authoring-controls {
@@ -15,16 +17,25 @@
     flex: 1;
 
     .mat-expansion-panel-header {
-      padding-inline-start: 8px;
+      padding: 0 8px;
+    }
+
+    &.component-editing {
+      border-inline-start: 4px solid;
     }
 
     .mat-expansion-panel-header-title {
       flex-grow: 100;
+      margin: 0;
+    }
+
+    .mat-content.mat-content-hide-toggle {
+      margin: 0;
     }
 
     .mat-expansion-panel-body {
-      padding-left: 16px;
-      padding-right: 16px;
+      padding: 16px;
+      border-top: 1px solid #dddddd;
     }
 
     &:hover, &:focus-within, &.mat-expanded {

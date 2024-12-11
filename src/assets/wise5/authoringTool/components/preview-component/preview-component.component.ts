@@ -16,7 +16,7 @@ import { components } from '../../../components/Components';
 @Component({
   selector: 'preview-component',
   standalone: true,
-  template: '<div class="component__wrapper"><div #component></div></div>'
+  template: '<div #component></div>'
 })
 export class PreviewComponentComponent {
   @Input() component: WISEComponent;
