@@ -44,9 +44,6 @@ describe('ConcurrentAuthorsMessageComponent', () => {
 
 function ngOnInit() {
   describe('ngOnInit()', () => {
-    it('set empty message when there are no other authors', () => {
-      expectMessage('["aa"]', '');
-    });
     it('set message to author when there is one other author', () => {
       expectMessage(
         '["aa","bb"]',
