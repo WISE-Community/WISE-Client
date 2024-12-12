@@ -141,7 +141,6 @@ describe('NodeAuthoringComponent', () => {
 
   copyComponent();
   deleteComponent();
-  deleteComponents();
 });
 
 function copyComponent() {
@@ -174,25 +173,6 @@ function deleteComponent() {
       );
       expect(saveProjectSpy).toHaveBeenCalled();
       expect(teacherProjectService.idToNode[nodeId1].components).toEqual([component1, component3]);
-    });
-  });
-}
-
-function deleteComponents() {
-  describe('deleteComponents()', () => {
-    it('should delete components', () => {
-      clickComponentCheckbox(component1.id);
-      clickComponentCheckbox(component3.id);
-      fixture.detectChanges();
-      expect(component.components).toEqual(node1Components);
-      confirmSpy.and.returnValue(true);
-      clickDeleteComponentsButton();
-      expect(confirmSpy).toHaveBeenCalledWith(
-        `Are you sure you want to delete these components?\n1. OpenResponse\n3. HTML`
-      );
-      expect(component.components).toEqual([component2]);
-      expect(expectCheckboxValue(component1.id)).toBeFalsy();
-      expect(expectCheckboxValue(component3.id)).toBeFalsy();
     });
   });
 }

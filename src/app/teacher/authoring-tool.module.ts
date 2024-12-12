@@ -22,7 +22,6 @@ import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tiny
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { StructureAuthoringModule } from '../../assets/wise5/authoringTool/structure/structure-authoring.module';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
-import { ChooseComponentLocationComponent } from '../../assets/wise5/authoringTool/node/chooseComponentLocation/choose-component-location.component';
 import { TopBarComponent } from '../../assets/wise5/authoringTool/components/top-bar/top-bar.component';
 import { ProjectAssetAuthoringModule } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.module';
 import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component';
@@ -92,7 +91,6 @@ import { OutsideClickDirective } from '../../assets/wise5/directives/outside-cli
     AddYourOwnNodeComponent,
     AuthoringToolBarComponent,
     ChooseAutomatedAssessmentComponent,
-    ChooseComponentLocationComponent,
     ChooseCopyNodeLocationComponent,
     ChooseImportStepComponent,
     ChooseImportUnitComponent,
