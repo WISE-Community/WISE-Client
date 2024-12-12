@@ -14,11 +14,13 @@ describe('NodeGradingComponent', () => {
     }).compileComponents();
     const projectService = TestBed.inject(TeacherProjectService);
     spyOn(projectService, 'nodeHasWork').and.returnValue(false);
+    spyOn(projectService, 'getComponents').and.returnValue([{ id: 'abc', type: 'MultipleChoice' }]);
+    spyOn(projectService, 'componentHasWork').and.returnValue(true);
     const dataService = TestBed.inject(TeacherDataService);
     spyOn(dataService, 'getCurrentPeriodId').and.returnValue(1);
     fixture = TestBed.createComponent(NodeGradingComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    component.ngOnChanges();
   });
 
   it('should create', () => {

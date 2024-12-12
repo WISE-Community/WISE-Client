@@ -14269,8 +14269,8 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="cba7b065013dc11bcd81f0bd837584d9f1932066" datatype="html">
-        <source> of <x id="INTERPOLATION" equiv-text="{{ node.components.length }}"/></source>
+      <trans-unit id="07b0d0c5b03f35518fb90d3b0d7dce4b4c1b35db" datatype="html">
+        <source> of <x id="INTERPOLATION" equiv-text="{{ components.length }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/select-component/select-component.component.html</context>
           <context context-type="linenumber">8</context>

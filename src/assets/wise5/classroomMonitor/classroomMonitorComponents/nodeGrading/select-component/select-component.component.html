@@ -1,8 +1,8 @@
 <mat-select [(ngModel)]="selectedComponent" (ngModelChange)="selectComponent(selectedComponent)">
-  @for (component of node.components; track component.id; let i = $index) {
+  @for (component of components; track component.id; let i = $index) {
     <mat-option [value]="component">
       <span>{{ i + 1 }}. {{ component.type }}</span>
     </mat-option>
   }
 </mat-select>
-<span i18n> of {{ node.components.length }}</span>
+<span i18n> of {{ components.length }}</span>

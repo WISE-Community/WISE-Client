@@ -30,6 +30,7 @@ import { TeacherSummaryDisplayComponent } from '../../../../directives/teacher-s
 })
 export class NodeGradingComponent {
   protected component: any;
+  protected components: any[];
   protected hasWork: boolean;
   protected hasCorrectAnswer: boolean;
   protected hasResponsesSummary: boolean;
@@ -53,12 +54,6 @@ export class NodeGradingComponent {
   ) {}
 
   ngOnInit(): void {
-    this.hasWork = this.projectService.nodeHasWork(this.nodeId);
-    this.node = this.projectService.getNode(this.nodeId);
-    this.numRubrics = this.node.getNumRubrics();
-    this.dataService.setCurrentNodeByNodeId(this.nodeId);
-    this.periodId = this.dataService.getCurrentPeriodId();
-    this.setSource();
     this.subscriptions.add(
       this.dataService.currentNodeChanged$.subscribe(({ currentNode }) => {
         this.node = currentNode;
@@ -72,12 +67,28 @@ export class NodeGradingComponent {
     );
   }
 
+  ngOnChanges(): void {
+    this.setNode();
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
   private setSource(): void {
     this.source = this.periodId === -1 ? 'allPeriods' : 'period';
+  }
+
+  private setNode(): void {
+    this.hasWork = this.projectService.nodeHasWork(this.nodeId);
+    this.node = this.projectService.getNode(this.nodeId);
+    this.components = this.projectService
+      .getComponents(this.nodeId)
+      .filter((component) => this.projectService.componentHasWork(component));
+    this.numRubrics = this.node.getNumRubrics();
+    this.dataService.setCurrentNodeByNodeId(this.nodeId);
+    this.periodId = this.dataService.getCurrentPeriodId();
+    this.setSource();
   }
 
   protected getNodeCompletion(): number {

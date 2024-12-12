@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectComponentComponent } from './select-component.component';
-import { Node } from '../../../../common/Node';
 
 describe('SelectComponentComponent', () => {
   let component: SelectComponentComponent;
@@ -13,7 +12,7 @@ describe('SelectComponentComponent', () => {
 
     fixture = TestBed.createComponent(SelectComponentComponent);
     component = fixture.componentInstance;
-    component.node = { components: [] } as Node;
+    component.components = [];
     fixture.detectChanges();
   });
 

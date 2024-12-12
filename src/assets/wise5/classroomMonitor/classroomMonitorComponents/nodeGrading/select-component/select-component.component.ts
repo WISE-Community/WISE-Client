@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Node } from '../../../../common/Node';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,12 +11,12 @@ import { MatOptionModule } from '@angular/material/core';
   templateUrl: './select-component.component.html'
 })
 export class SelectComponentComponent {
-  @Input() node: Node;
+  @Input() components: any[];
   protected selectedComponent: any;
   @Output() componentChangedEvent: EventEmitter<any> = new EventEmitter();
 
   ngOnChanges(): void {
-    this.selectComponent(this.node.components[0]);
+    this.selectComponent(this.components[0]);
   }
 
   protected selectComponent(component: any): void {
