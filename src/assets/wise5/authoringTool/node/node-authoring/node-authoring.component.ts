@@ -197,7 +197,18 @@ export class NodeAuthoringComponent implements OnInit {
   }
 
   protected dropComponent(event: CdkDragDrop<ComponentContent[]>): void {
-    moveItemInArray(this.components, event.previousIndex, event.currentIndex);
+    this.moveComponent(event.previousIndex, event.currentIndex);
+  }
+
+  protected moveComponent(
+    previousIndex: number,
+    currentIndex: number,
+    scroll: boolean = false
+  ): void {
+    moveItemInArray(this.components, previousIndex, currentIndex);
+    if (scroll) {
+      this.highlightComponents([this.components[currentIndex]]);
+    }
     this.projectService.saveProject();
   }
 

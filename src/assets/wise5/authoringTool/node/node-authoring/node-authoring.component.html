@@ -98,12 +98,38 @@
             />
           </div>
         </mat-expansion-panel>
-        <add-component-button
-          class="add-component"
-          [insertAfterComponentId]="component.id"
-          [node]="node"
-          (newComponentsEvent)="highlightComponents($event)"
-        />
+        <div fxLayout="column">
+          <add-component-button
+            class="add-component"
+            [insertAfterComponentId]="component.id"
+            [node]="node"
+            (newComponentsEvent)="highlightComponents($event)"
+          />
+          @if (i > 0) {
+            <button
+              mat-icon-button
+              color="primary"
+              matTooltip="Move up"
+              matTooltipPosition="after"
+              i18n-matTooltip
+              (click)="moveComponent(i, i - 1, true)"
+            >
+              <mat-icon>arrow_upward</mat-icon>
+            </button>
+          }
+          @if (!last) {
+            <button
+              mat-icon-button
+              color="primary"
+              matTooltip="Move down"
+              matTooltipPosition="after"
+              i18n-matTooltip
+              (click)="moveComponent(i, i + 1, true)"
+            >
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
+          }
+        </div>
         <mat-card *cdkDragPreview>
           <mat-card-content
             >{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</mat-card-content
