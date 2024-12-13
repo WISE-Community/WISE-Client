@@ -3,6 +3,7 @@ import { NodeGradingComponent } from './node-grading.component';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
+import { provideRouter } from '@angular/router';
 
 describe('NodeGradingComponent', () => {
   let component: NodeGradingComponent;
@@ -10,7 +11,8 @@ describe('NodeGradingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClassroomMonitorTestingModule, NodeGradingComponent]
+      imports: [ClassroomMonitorTestingModule, NodeGradingComponent],
+      providers: [provideRouter([])]
     }).compileComponents();
     const projectService = TestBed.inject(TeacherProjectService);
     spyOn(projectService, 'nodeHasWork').and.returnValue(false);
