@@ -31,9 +31,9 @@ import { CopyTranslationsService } from '../../../services/copyTranslationsServi
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CreateComponentService } from '../../../services/createComponentService';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { VLEProjectService } from '../../../vle/vleProjectService';
 import { NotebookService } from '../../../services/notebookService';
+import { MatDividerModule } from '@angular/material/divider';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -61,7 +61,7 @@ describe('NodeAuthoringComponent', () => {
         EditNodeTitleComponent,
         FormsModule,
         MatCheckboxModule,
-        MatExpansionModule,
+        MatDividerModule,
         MatIconModule,
         MatInputModule,
         RouterTestingModule,
