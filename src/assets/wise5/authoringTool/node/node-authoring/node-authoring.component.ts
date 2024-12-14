@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -14,8 +14,7 @@ import { DeleteTranslationsService } from '../../../services/deleteTranslationsS
 @Component({
   selector: 'node-authoring',
   templateUrl: './node-authoring.component.html',
-  styleUrls: ['./node-authoring.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./node-authoring.component.scss']
 })
 export class NodeAuthoringComponent implements OnInit {
   components: ComponentContent[] = [];

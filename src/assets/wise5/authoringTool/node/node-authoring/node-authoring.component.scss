@@ -1,80 +1,51 @@
-.node-authoring {
-  --mat-expansion-header-expanded-state-height: --mat-expansion-header-collpased-state-height;
-
-  .node-authoring-header {
+.node-authoring-header {
     margin: 16px 8px 0;
   }
 
-  .node-authoring-controls {
-    padding: 8px 16px;
-    background-color: white;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-  }
+.component {
+  flex: 1;
 
-  .component {
-    flex: 1;
+  &.component-editing {
+    border-inline-start: 4px solid;
 
-    .mat-expansion-panel-header {
-      padding: 0 8px;
-    }
-
-    &.component-editing {
-      border-inline-start: 4px solid;
-    }
-
-    .mat-expansion-panel-header-title {
-      flex-grow: 100;
-      margin: 0;
-    }
-
-    .mat-content.mat-content-hide-toggle {
-      margin: 0;
-    }
-
-    .mat-expansion-panel-body {
-      padding: 16px;
-      border-top: 1px solid #dddddd;
-    }
-
-    &:hover, &:focus-within, &.mat-expanded {
-      .component-action {
-        display: block;
-      }
-    }
-
-    &.mat-expanded {
-      edit-component-advanced-button {
-        display: block;
-      }
+    edit-component-advanced-button {
+      display: block;
     }
   }
+}
 
-  edit-component-advanced-button {
-    display: none;
-  }
+edit-component-advanced-button {
+  display: none;
+}
 
-  .component-action {
-    display: none;
-  }
+.component-header {
+  padding: 0 8px;
+}
 
-  .drag-handle {
-    cursor: move;
-    margin-right: 4px;
-    margin-left: 4px;
-  }
+component-authoring {
+  display: block;
+  margin: 16px;
+}
 
-  .cdk-drag-placeholder {
-    opacity: .4;
-    background: #ccc;
-    border: dotted 3px #999;
-    min-height: 40px;
-    min-width: 360px;
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
+.mat-divider-horizontal {
+  margin: 0;
+}
 
-  .mat-icon {
-    margin: 0;
-  }
+.drag-handle {
+  cursor: move;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+.cdk-drag-placeholder {
+  opacity: .4;
+  background: #ccc;
+  border: dotted 3px #999;
+  min-height: 40px;
+  min-width: 360px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.mat-icon {
+  margin: 0;
 }
