@@ -4,29 +4,13 @@
  * @param duration The number of milliseconds to keep the element highlighted
  */
 export function temporarilyHighlightElement(id: string, duration: number = 1000): void {
-  const element = $('#' + id);
-  const originalBackgroundColor = element.css('backgroundColor');
-  element.css('background-color', '#FFFF9C');
-
-  /*
-   * Use a timeout before starting to transition back to the original background color. For some
-   * reason the element won't get highlighted in the first place unless this timeout is used.
-   */
+  const element = document.getElementById(id);
+  element.classList.add('highlighted-bg');
   setTimeout(() => {
-    // slowly fade back to the original background color
-    element.css({
-      transition: 'background-color 2s ease-in-out',
-      'background-color': originalBackgroundColor
-    });
-
-    /*
-     * remove these styling fields after we perform the fade otherwise the regular mouseover
-     * background color change will not work
-     */
+    element.style.transition = 'background-color 2s ease-in-out';
+    element.classList.remove('highlighted-bg');
     setTimeout(() => {
-      element.css({
-        transition: ''
-      });
+      element.style.transition = '';
     }, 2000);
   }, duration);
 }

@@ -1,3 +1,5 @@
-<div class="warn">
-  <b>{{ message }}</b>
-</div>
+@if (message) {
+  <div class="concurrent-authors">
+    <b class="warn">{{ message }}</b>
+  </div>
+}
