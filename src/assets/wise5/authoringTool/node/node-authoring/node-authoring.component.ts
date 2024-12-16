@@ -48,6 +48,7 @@ export class NodeAuthoringComponent implements OnInit {
     this.isGroupNode = this.projectService.isGroupNode(this.nodeId);
     this.nodeJson = this.projectService.getNodeById(this.nodeId);
     this.components = this.projectService.getComponents(this.nodeId);
+    this.editingComponentId = null;
 
     if (history.state.newComponents && history.state.newComponents.length > 0) {
       this.highlightComponents(history.state.newComponents);
