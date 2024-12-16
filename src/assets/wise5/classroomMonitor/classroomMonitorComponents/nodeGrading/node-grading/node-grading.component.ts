@@ -22,6 +22,8 @@ export class NodeGradingComponent {
   protected components: any[];
   protected hasWork: boolean;
   protected node: Node;
+  protected nodeAverageScore: number;
+  protected nodeCompletionPercent: number;
   @Input() nodeId: string;
   protected numRubrics: number;
   protected periodId: number;
@@ -55,26 +57,20 @@ export class NodeGradingComponent {
   private setNode(): void {
     this.hasWork = this.projectService.nodeHasWork(this.nodeId);
     this.node = this.projectService.getNode(this.nodeId);
+    this.nodeAverageScore = this.classroomStatusService.getNodeAverageScore(
+      this.nodeId,
+      this.dataService.getCurrentPeriodId()
+    );
+    this.nodeCompletionPercent = this.classroomStatusService.getNodeCompletion(
+      this.nodeId,
+      this.dataService.getCurrentPeriodId()
+    ).completionPct;
     this.components = this.projectService
       .getComponents(this.nodeId)
       .filter((component) => this.projectService.componentHasWork(component));
     this.numRubrics = this.node.getNumRubrics();
     this.dataService.setCurrentNodeByNodeId(this.nodeId);
     this.periodId = this.dataService.getCurrentPeriodId();
-  }
-
-  protected getNodeCompletion(): number {
-    return this.classroomStatusService.getNodeCompletion(
-      this.nodeId,
-      this.dataService.getCurrentPeriodId()
-    ).completionPct;
-  }
-
-  protected getNodeAverageScore(): any {
-    return this.classroomStatusService.getNodeAverageScore(
-      this.nodeId,
-      this.dataService.getCurrentPeriodId()
-    );
   }
 
   protected showRubric(): void {
