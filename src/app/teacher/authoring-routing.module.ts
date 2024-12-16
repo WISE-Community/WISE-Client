@@ -9,7 +9,6 @@ import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/proj
 import { NodeAuthoringComponent } from '../../assets/wise5/authoringTool/node/node-authoring/node-authoring.component';
 import { NodeAdvancedAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component';
 import { NodeAdvancedConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component';
-import { ChooseComponentLocationComponent } from '../../assets/wise5/authoringTool/node/chooseComponentLocation/choose-component-location.component';
 import { AddLessonConfigureComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component';
 import { ChooseNewNodeTemplateComponent } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
 import { AddYourOwnNodeComponent } from '../../assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component';
@@ -152,10 +151,6 @@ const routes: Routes = [
                   { path: 'path', component: NodeAdvancedPathAuthoringComponent },
                   { path: 'rubric', component: EditNodeRubricComponent }
                 ]
-              },
-              {
-                path: 'choose-component-location',
-                component: ChooseComponentLocationComponent
               },
               {
                 path: 'import-component',
