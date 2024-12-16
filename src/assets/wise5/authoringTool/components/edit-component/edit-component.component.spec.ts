@@ -62,4 +62,14 @@ describe('EditComponentComponent', () => {
     component.ngOnDestroy();
     expect(destroySpy).toHaveBeenCalled();
   });
+
+  it('should focus the host element after timeout', (done) => {
+    component.ngAfterViewInit();
+    fixture.detectChanges();
+    setTimeout(() => {
+      const hostElement = fixture.nativeElement.querySelector('div');
+      expect(document.activeElement).toBe(hostElement);
+      done();
+    }, 0);
+  });
 });
