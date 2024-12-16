@@ -94,7 +94,6 @@ export class NodeAuthoringComponent implements OnInit {
       this.dataService.currentNodeChanged$.subscribe(({ currentNode }) => {
         if (currentNode != null) {
           this.setup(currentNode.id);
-          // this.setAllComponentsIsExpanded(true);
         }
       })
     );
@@ -127,18 +126,13 @@ export class NodeAuthoringComponent implements OnInit {
     component: ComponentContent
   ): void {
     event.stopPropagation();
-    if (this.confirmDeleteComponent([`${componentNumber}. ${component.type}`])) {
+    if (
+      confirm(
+        $localize`Are you sure you want to delete this component?\n\n${componentNumber}. ${component.type}`
+      )
+    ) {
       this.deleteComponentsOnServer([this.node.deleteComponent(component.id)]);
     }
-  }
-
-  private confirmDeleteComponent(componentLabels: string[]): boolean {
-    let confirmMessage =
-      componentLabels.length === 1
-        ? $localize`Are you sure you want to delete this component?\n`
-        : $localize`Are you sure you want to delete these components?\n`;
-    confirmMessage += `${componentLabels.join('\n')}`;
-    return confirm(confirmMessage);
   }
 
   private deleteComponentsOnServer(components: ComponentContent[]): void {
@@ -176,9 +170,7 @@ export class NodeAuthoringComponent implements OnInit {
     setTimeout(() => {
       if (components.length > 0) {
         document.getElementById(components[0].id).scrollIntoView();
-        for (const component of components) {
-          temporarilyHighlightElement(component.id);
-        }
+        components.forEach((component) => temporarilyHighlightElement(component.id));
       }
     }, 100);
   }

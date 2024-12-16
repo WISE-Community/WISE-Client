@@ -47,7 +47,7 @@ let teacherDataService: TeacherDataService;
 let teacherProjectService: TeacherProjectService;
 let saveProjectSpy: jasmine.Spy;
 
-describe('NodeAuthoringComponent', () => {
+fdescribe('NodeAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NodeAuthoringComponent],
@@ -169,20 +169,12 @@ function deleteComponent() {
       confirmSpy.and.returnValue(true);
       clickComponentDeleteButton(component2.id);
       expect(confirmSpy).toHaveBeenCalledWith(
-        `Are you sure you want to delete this component?\n2. MultipleChoice`
+        `Are you sure you want to delete this component?\n\n2. MultipleChoice`
       );
       expect(saveProjectSpy).toHaveBeenCalled();
       expect(teacherProjectService.idToNode[nodeId1].components).toEqual([component1, component3]);
     });
   });
-}
-
-function expectCheckboxValue(componentId: string): void {
-  return fixture.debugElement.query(By.css(`#${componentId} mat-checkbox`)).nativeElement.checked;
-}
-
-function clickComponentCheckbox(componentId: string): void {
-  queryByCssAndClick(`#${componentId} mat-checkbox label`);
 }
 
 function clickComponent(componentId: string): void {
