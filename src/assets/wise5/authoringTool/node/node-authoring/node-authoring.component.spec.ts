@@ -29,7 +29,6 @@ import { ComponentTypeServiceModule } from '../../../services/componentTypeServi
 import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
 import { CopyTranslationsService } from '../../../services/copyTranslationsService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { RouterTestingModule } from '@angular/router/testing';
 import { CreateComponentService } from '../../../services/createComponentService';
 import { VLEProjectService } from '../../../vle/vleProjectService';
 import { NotebookService } from '../../../services/notebookService';
@@ -47,7 +46,7 @@ let teacherDataService: TeacherDataService;
 let teacherProjectService: TeacherProjectService;
 let saveProjectSpy: jasmine.Spy;
 
-fdescribe('NodeAuthoringComponent', () => {
+describe('NodeAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NodeAuthoringComponent],
@@ -64,7 +63,6 @@ fdescribe('NodeAuthoringComponent', () => {
         MatDividerModule,
         MatIconModule,
         MatInputModule,
-        RouterTestingModule,
         StudentTeacherCommonServicesModule,
         TeacherNodeIconComponent
       ],
@@ -195,10 +193,6 @@ function queryByCssAndClickCopy(css: string): void {
 
 function clickComponentDeleteButton(componentId: string): void {
   queryByCssAndClickDelete(`#${componentId} button`);
-}
-
-function clickDeleteComponentsButton(): void {
-  queryByCssAndClickDelete('button');
 }
 
 function queryByCssAndClickDelete(css: string): void {
