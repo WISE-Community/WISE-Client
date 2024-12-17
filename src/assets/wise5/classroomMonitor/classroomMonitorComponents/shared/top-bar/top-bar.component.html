@@ -53,12 +53,7 @@
     <mat-icon mat-menu-origin>notifications</mat-icon>
   </button>
   <mat-menu #notificationsMenu class="account-menu account-menu--fixed-width">
-    <notifications-menu
-      (click)="$event.stopPropagation()"
-      [newNotifications]="newNotifications"
-      [withPause]="true"
-    >
-    </notifications-menu>
+    <notifications-menu (click)="$event.stopPropagation()" [newNotifications]="newNotifications" />
   </mat-menu>
   <button
     mat-icon-button
