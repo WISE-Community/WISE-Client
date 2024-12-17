@@ -10,7 +10,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { NotebookWorkgroupGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component';
-import { ProjectProgressComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentProgress/project-progress/project-progress.component';
 import { PauseScreensMenuComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component';
 import { StepItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component';
 import { StudentGradingToolsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/student-grading-tools/student-grading-tools.component';
@@ -50,7 +49,6 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     StepItemComponent,
     StudentGradingComponent,
     StudentGradingToolsComponent,
-    StudentProgressComponent,
     ToolBarComponent,
     TopBarComponent
   ],
@@ -69,12 +67,12 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     PauseScreensMenuComponent,
     PeerGroupGradingModule,
     PreviewComponentComponent,
-    ProjectProgressComponent,
     RouterModule,
     SaveIndicatorComponent,
     SelectPeriodComponent,
     ShowNodeInfoDialogComponent,
     StepInfoComponent,
+    StudentProgressComponent,
     StudentTeacherCommonModule,
     TeacherSummaryDisplayComponent
   ],
