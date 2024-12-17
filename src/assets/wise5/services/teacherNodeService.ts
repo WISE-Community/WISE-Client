@@ -24,6 +24,27 @@ export class TeacherNodeService extends NodeService {
     this.starterStateResponseSource.next(args);
   }
 
+  /**
+   * Get the previous node in the project sequence
+   * @param currentId (optional)
+   */
+  getPrevNodeId(currentId?: string): string {
+    let prevNodeId = null;
+    const currentNodeId = currentId ?? this.dataService.getCurrentNodeId();
+    if (currentNodeId) {
+      const currentNodeOrder = this.projectService.getNodeOrderById(currentNodeId);
+      if (currentNodeOrder) {
+        const prevId = this.projectService.getNodeIdByOrder(currentNodeOrder - 1);
+        if (prevId) {
+          prevNodeId = this.projectService.isApplicationNode(prevId)
+            ? prevId
+            : this.getPrevNodeId(prevId);
+        }
+      }
+    }
+    return prevNodeId;
+  }
+
   getNextNodeId(currentId?: string): Promise<any> {
     return new Promise((resolve, reject) => {
       let nextNodeId = null;

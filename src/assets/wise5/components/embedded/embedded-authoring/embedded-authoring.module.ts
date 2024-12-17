@@ -12,7 +12,6 @@ import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-comp
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { StudentAssetService } from '../../../services/studentAssetService';
@@ -22,6 +21,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EmbeddedService } from '../embeddedService';
 import { EmbeddedAuthoring } from './embedded-authoring.component';
 import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @NgModule({
   declarations: [EmbeddedAuthoring, AuthorUrlParametersComponent],
@@ -41,13 +41,13 @@ import { ComponentAuthoringModule } from '../../component-authoring.module';
     AnnotationService,
     ConfigService,
     EmbeddedService,
-    NodeService,
     ProjectAssetService,
     ProjectService,
     SessionService,
     StudentAssetService,
     StudentDataService,
     TagService,
+    TeacherNodeService,
     TeacherProjectService
   ],
   exports: [EmbeddedAuthoring, EditComponentPrompt, AuthorUrlParametersComponent]

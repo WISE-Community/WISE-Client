@@ -71,6 +71,34 @@ export class StudentNodeService extends NodeService {
       .join('<br/>');
   }
 
+  getPrevNodeId(currentId?: string): string {
+    let prevNodeId = null;
+    const currentNodeId = currentId ?? this.dataService.getCurrentNodeId();
+    if (currentNodeId) {
+      // get all the nodes that transition to the current node
+      const nodeIdsByToNodeId = this.projectService
+        .getNodesByToNodeId(currentNodeId)
+        .map((node) => node.id);
+      if (nodeIdsByToNodeId.length === 1) {
+        // there is only one node that transitions to the current node
+        prevNodeId = nodeIdsByToNodeId[0];
+      } else if (nodeIdsByToNodeId.length > 1) {
+        // there are multiple nodes that transition to the current node
+        const stackHistory = this.dataService.getStackHistory();
+        // loop through the stack history node ids from newest to oldest
+        for (let s = stackHistory.length - 1; s >= 0; s--) {
+          const stackHistoryNodeId = stackHistory[s];
+          if (nodeIdsByToNodeId.indexOf(stackHistoryNodeId) != -1) {
+            // we have found a node that we previously visited that transitions to the current node
+            prevNodeId = stackHistoryNodeId;
+            break;
+          }
+        }
+      }
+    }
+    return prevNodeId;
+  }
+
   /**
    * Get the next node in the project sequence. We return a promise because in preview mode we allow
    * the user to specify which branch path they want to go to. In all other cases we will resolve
