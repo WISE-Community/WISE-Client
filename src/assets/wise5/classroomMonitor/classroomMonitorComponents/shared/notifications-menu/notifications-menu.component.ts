@@ -1,34 +1,53 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NotificationService } from '../../../../services/notificationService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { DialogWithConfirmComponent } from '../../../../../../assets/wise5/directives/dialog-with-confirm/dialog-with-confirm.component';
 import { Notification } from '../../../../../../app/domain/notification';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule,
+    MatTooltipModule
+  ],
   selector: 'notifications-menu',
-  templateUrl: './notifications-menu.component.html',
-  styleUrls: ['./notifications-menu.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  standalone: true,
+  styleUrl: './notifications-menu.component.scss',
+  templateUrl: './notifications-menu.component.html'
 })
-export class NotificationsMenuComponent implements OnInit {
+export class NotificationsMenuComponent {
   @Input() newNotifications: Notification[] = [];
   @Input() state: any;
-  @Input() withPause: boolean;
 
   constructor(
     private dialog: MatDialog,
     private notificationService: NotificationService,
-    private projectService: TeacherProjectService
+    private projectService: TeacherProjectService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {}
-
-  getNodePositionAndTitle(nodeId: string): string {
+  protected getNodePositionAndTitle(nodeId: string): string {
     return this.projectService.getNodePositionAndTitle(nodeId);
   }
 
-  confirmDismissAllNotifications(): void {
+  protected confirmDismissAllNotifications(): void {
     this.dialog
       .open(DialogWithConfirmComponent, {
         data: {
@@ -50,11 +69,13 @@ export class NotificationsMenuComponent implements OnInit {
     });
   }
 
-  dismissNotification(notification: Notification): void {
+  protected dismissNotification(notification: Notification): void {
     this.notificationService.dismissNotification(notification);
   }
 
-  visitNode(notification: Notification): void {
-    this.state.go('root.cm.unit.node', { nodeId: notification.nodeId });
+  protected visitNode(notification: Notification): void {
+    this.router.navigate(['node', notification.nodeId], {
+      relativeTo: this.route
+    });
   }
 }
