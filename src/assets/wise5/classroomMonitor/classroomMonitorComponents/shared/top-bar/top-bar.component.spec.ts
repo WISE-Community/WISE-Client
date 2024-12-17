@@ -10,6 +10,7 @@ import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testin
 import { PauseScreensMenuComponent } from '../../pause-screens-menu/pause-screens-menu.component';
 import { NotificationsMenuComponent } from '../notifications-menu/notifications-menu.component';
 import { TopBarComponent } from './top-bar.component';
+import { provideRouter } from '@angular/router';
 
 describe('TopBarComponent', () => {
   let component: TopBarComponent;
@@ -17,16 +18,18 @@ describe('TopBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NotificationsMenuComponent, TopBarComponent],
+      declarations: [TopBarComponent],
       imports: [
         ClassroomMonitorTestingModule,
+        NotificationsMenuComponent,
         PauseScreensMenuComponent,
         MatIconModule,
         MatListModule,
         MatMenuModule,
         MatToolbarModule,
         MatTooltipModule
-      ]
+      ],
+      providers: [provideRouter([])]
     }).compileComponents();
   });
 

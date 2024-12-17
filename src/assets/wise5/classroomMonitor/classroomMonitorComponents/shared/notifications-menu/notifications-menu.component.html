@@ -9,53 +9,57 @@
       &nbsp;
       <span i18n>Alerts</span>
     </span>
-    <button
-      mat-icon-button
-      *ngIf="newNotifications.length > 0"
-      (click)="confirmDismissAllNotifications()"
-      [disabled]="newNotifications.length === 0"
-      matTooltip="Clear all notifications"
-      matTooltipPosition="left"
-      i18n-matTooltip
-      aria-label="Clear all notifications"
-      i18n-aria-label
-    >
-      <mat-icon>clear_all</mat-icon>
-    </button>
+    @if (newNotifications.length > 0) {
+      <button
+        mat-icon-button
+        (click)="confirmDismissAllNotifications()"
+        [disabled]="newNotifications.length === 0"
+        matTooltip="Clear all notifications"
+        matTooltipPosition="left"
+        i18n-matTooltip
+      >
+        <mat-icon>clear_all</mat-icon>
+      </button>
+    }
   </mat-toolbar>
   <div class="account-menu__actions notifications-content" fxFlex>
-    <p class="no-notifications" *ngIf="newNotifications.length === 0" i18n>You have no new alerts at this time.</p>
-    <mat-list *ngIf="newNotifications.length > 0">
-      <ng-container *ngFor="let notification of newNotifications; let last = last">
-        <mat-list-item>
-          <div fxLayout="row" fxLayoutAlign="start center">
-            <div class="notification-content">
-              <div>
-                <a
-                  (click)="visitNode(notification)"
-                  tabindex="0"
-                  matTooltip="Go to {{ getNodePositionAndTitle(notification.nodeId) }}"
-                  matTooltipPosition="left"
-                  i18n-matTooltip
-                  >{{ notification.message }}</a
-                >
+    @if (newNotifications.length === 0) {
+      <p class="no-notifications" i18n>You have no new alerts at this time.</p>
+    } @else {
+      <mat-list>
+        @for (notification of newNotifications; track notification.id) {
+          <mat-list-item>
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <div class="notification-content">
+                <div>
+                  <a
+                    (click)="visitNode(notification)"
+                    tabindex="0"
+                    matTooltip="Go to {{ getNodePositionAndTitle(notification.nodeId) }}"
+                    matTooltipPosition="left"
+                    i18n-matTooltip
+                    >{{ notification.message }}</a
+                  >
+                </div>
+                <div class="secondary-text mat-body-2">
+                  {{ getNodePositionAndTitle(notification.nodeId) }}
+                </div>
               </div>
-              <div class="secondary-text mat-body-2">{{ getNodePositionAndTitle(notification.nodeId) }}</div>
+              <span fxFlex></span>
+              <button
+                mat-icon-button
+                (click)="dismissNotification(notification)"
+                fxLayoutAlign="center center"
+                aria-label="Clear"
+                i18n-aria-label
+              >
+                <mat-icon>clear</mat-icon>
+              </button>
             </div>
-            <span fxFlex></span>
-            <button
-              mat-icon-button
-              (click)="dismissNotification(notification)"
-              fxLayoutAlign="center center"
-              aria-label="Clear"
-              i18n-aria-label
-            >
-              <mat-icon>clear</mat-icon>
-            </button>
-          </div>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-      </ng-container>
-    </mat-list>
+          </mat-list-item>
+          <mat-divider />
+        }
+      </mat-list>
+    }
   </div>
 </div>
