@@ -5,7 +5,8 @@ import { Subject, Observable } from 'rxjs';
 @Injectable()
 export class TeacherNodeService extends NodeService {
   private componentShowSubmitButtonValueChangedSource: Subject<any> = new Subject<any>();
-  public componentShowSubmitButtonValueChanged$: Observable<any> = this.componentShowSubmitButtonValueChangedSource.asObservable();
+  public componentShowSubmitButtonValueChanged$: Observable<any> =
+    this.componentShowSubmitButtonValueChangedSource.asObservable();
   private deleteStarterStateSource: Subject<any> = new Subject<any>();
   public deleteStarterState$: Observable<any> = this.deleteStarterStateSource.asObservable();
   private starterStateResponseSource: Subject<any> = new Subject<any>();
@@ -26,12 +27,12 @@ export class TeacherNodeService extends NodeService {
   getNextNodeId(currentId?: string): Promise<any> {
     return new Promise((resolve, reject) => {
       let nextNodeId = null;
-      const currentNodeId = currentId ?? this.DataService.getCurrentNodeId();
-      const currentNodeOrder = this.ProjectService.getNodeOrderById(currentNodeId);
+      const currentNodeId = currentId ?? this.dataService.getCurrentNodeId();
+      const currentNodeOrder = this.projectService.getNodeOrderById(currentNodeId);
       if (currentNodeOrder) {
-        const nextId = this.ProjectService.getNodeIdByOrder(currentNodeOrder + 1);
+        const nextId = this.projectService.getNodeIdByOrder(currentNodeOrder + 1);
         if (nextId) {
-          nextNodeId = this.ProjectService.isApplicationNode(nextId)
+          nextNodeId = this.projectService.isApplicationNode(nextId)
             ? nextId
             : this.getNextNodeId(nextId);
         }
