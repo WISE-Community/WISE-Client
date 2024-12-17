@@ -3,11 +3,6 @@ import { TeacherNodeService } from './teacherNodeService';
 
 @Injectable()
 export class GradingNodeService extends TeacherNodeService {
-  /**
-   * Get the next node id in the project sequence that captures student work
-   * @param currentId (optional)
-   * @returns next node id
-   */
   getNextNodeId(currentId = null): Promise<string> {
     return super.getNextNodeId(currentId).then((nextNodeId: string) => {
       if (!nextNodeId) return null;
@@ -17,18 +12,10 @@ export class GradingNodeService extends TeacherNodeService {
     });
   }
 
-  /**
-   * Go to the previous node that captures work
-   */
   goToPrevNode(): void {
     this.setCurrentNode(this.getPrevNodeId());
   }
 
-  /**
-   * Get the previous node id in the project sequence that captures student work
-   * @param currentId (optional)
-   * @returns next node id
-   */
   getPrevNodeId(currentId = null) {
     const prevNodeId = super.getPrevNodeId(currentId);
     if (!prevNodeId) return null;
