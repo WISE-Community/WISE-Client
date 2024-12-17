@@ -1,10 +1,9 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Directionality } from '@angular/cdk/bidi';
 import { Subscription } from 'rxjs';
 import { NodeService } from '../../services/nodeService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { ConfigService } from '../../services/configService';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -41,15 +40,13 @@ export class StepToolsComponent {
   protected nodeId: string;
   protected nodeIds: string[];
   protected prevId: any;
-  @Input() showOnlyStepsWithWork: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
   constructor(
-    private configService: ConfigService,
-    private dir: Directionality,
-    private nodeService: NodeService,
-    private projectService: TeacherProjectService,
-    private teacherDataService: TeacherDataService
+    protected dataService: TeacherDataService,
+    protected dir: Directionality,
+    protected nodeService: NodeService,
+    protected projectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +58,7 @@ export class StepToolsComponent {
       this.icons = { prev: 'chevron_left', next: 'chevron_right' };
     }
     this.subscriptions.add(
-      this.teacherDataService.currentNodeChanged$.subscribe(() => {
+      this.dataService.currentNodeChanged$.subscribe(() => {
         this.updateModel();
       })
     );
@@ -76,22 +73,17 @@ export class StepToolsComponent {
     this.subscriptions.unsubscribe();
   }
 
-  private calculateNodeIds(): void {
+  protected calculateNodeIds(): void {
     this.nodeIds = Object.keys(this.projectService.idToOrder);
-    if (this.showOnlyStepsWithWork) {
-      this.nodeIds = this.nodeIds.filter((nodeId) => {
-        return this.isGroupNode(nodeId) || this.projectService.nodeHasWork(nodeId);
-      });
-    }
     this.nodeIds.shift(); // remove the 'group0' master root node from consideration
   }
 
   protected nodeChanged(): void {
-    this.teacherDataService.setCurrentNodeByNodeId(this.nodeId);
+    this.dataService.setCurrentNodeByNodeId(this.nodeId);
   }
 
   private updateModel(): void {
-    this.nodeId = this.teacherDataService.getCurrentNodeId();
+    this.nodeId = this.dataService.getCurrentNodeId();
     if (this.nodeId == null) {
       this.prevId = null;
       this.nextId = null;
@@ -105,20 +97,12 @@ export class StepToolsComponent {
     }
   }
 
-  private getPrevNodeId(): string {
-    if (this.isClassroomMonitorMode()) {
-      return this.nodeService.getPrevNodeIdWithWork(this.nodeId);
-    } else {
-      return this.nodeService.getPrevNodeId(this.nodeId);
-    }
+  protected getPrevNodeId(): string {
+    return this.nodeService.getPrevNodeId(this.nodeId);
   }
 
-  private getNextNodeId(): Promise<any> {
-    if (this.isClassroomMonitorMode()) {
-      return Promise.resolve(this.nodeService.getNextNodeIdWithWork(this.nodeId));
-    } else {
-      return this.nodeService.getNextNodeId(this.nodeId);
-    }
+  protected getNextNodeId(): Promise<any> {
+    return this.nodeService.getNextNodeId(this.nodeId);
   }
 
   protected getNodePositionAndTitle(nodeId: string): string {
@@ -130,27 +114,13 @@ export class StepToolsComponent {
   }
 
   protected goToPrevNode(): void {
-    if (this.isClassroomMonitorMode()) {
-      this.nodeService.goToPrevNodeWithWork();
-    } else {
-      this.nodeService.goToPrevNode();
-    }
-    this.nodeId = this.teacherDataService.getCurrentNodeId();
+    this.nodeService.goToPrevNode();
+    this.nodeId = this.dataService.getCurrentNodeId();
   }
 
   protected goToNextNode(): void {
-    if (this.isClassroomMonitorMode()) {
-      this.nodeService.goToNextNodeWithWork().then((nodeId: string) => {
-        this.nodeId = nodeId;
-      });
-    } else {
-      this.nodeService.goToNextNode().then((nodeId: string) => {
-        this.nodeId = nodeId;
-      });
-    }
-  }
-
-  private isClassroomMonitorMode(): boolean {
-    return this.configService.getMode() === 'classroomMonitor';
+    this.nodeService.goToNextNode().then((nodeId: string) => {
+      this.nodeId = nodeId;
+    });
   }
 }

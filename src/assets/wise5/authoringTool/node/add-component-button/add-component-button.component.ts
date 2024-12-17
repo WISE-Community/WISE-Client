@@ -9,17 +9,31 @@ import { Node } from '../../../common/Node';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
   selector: 'add-component-button',
   standalone: true,
+  styles: [
+    `
+      .rotate-180 {
+        transform: rotate(180deg);
+      }
+      .flip-vertical {
+        transform: scaleY(-1);
+      }
+    `
+  ],
   templateUrl: './add-component-button.component.html'
 })
 export class AddComponentButtonComponent {
+  protected firstComponent = false;
   @Input() insertAfterComponentId: string = null;
-  @Input() node: Node;
   @Output() newComponentsEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Input() node: Node;
+  protected tooltipText = $localize`Add component`;
 
   constructor(
     private createComponentService: CreateComponentService,
@@ -29,10 +43,21 @@ export class AddComponentButtonComponent {
     private router: Router
   ) {}
 
-  protected addComponent(): void {
+  ngOnInit(): void {
+    this.updateUI();
+  }
+
+  private updateUI(): void {
+    this.firstComponent = this.node.getComponentPosition(this.insertAfterComponentId) === 0;
+    if (this.node.components.length > 0 && !this.firstComponent) {
+      this.tooltipText = $localize`Add component after`;
+    }
+  }
+
+  protected addComponent(afterComponent = this.insertAfterComponentId): void {
     this.dialog
       .open(ChooseNewComponent, {
-        data: this.insertAfterComponentId,
+        data: afterComponent,
         width: '80%'
       })
       .afterClosed()
@@ -42,17 +67,18 @@ export class AddComponentButtonComponent {
           this.router.navigate(['import-component/choose-component'], {
             relativeTo: this.route,
             state: {
-              insertAfterComponentId: this.insertAfterComponentId
+              insertAfterComponentId: afterComponent
             }
           });
         } else {
           const component = this.createComponentService.create(
             this.node.id,
             componentType,
-            this.insertAfterComponentId
+            afterComponent
           );
           this.projectService.saveProject();
           this.newComponentsEvent.emit([component]);
+          this.updateUI();
         }
       });
   }

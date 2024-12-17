@@ -19,7 +19,7 @@ let testHelper: NodeGradingViewComponentTestHelper;
 describe('MilestoneGradingViewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MilestoneGradingViewComponent, WorkgroupSelectAutocompleteComponent],
+      declarations: [MilestoneGradingViewComponent],
       imports: [
         ClassroomMonitorTestingModule,
         FormsModule,
@@ -27,7 +27,8 @@ describe('MilestoneGradingViewComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatListModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        WorkgroupSelectAutocompleteComponent
       ]
     }).compileComponents();
   });

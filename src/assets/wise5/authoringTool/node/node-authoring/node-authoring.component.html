@@ -1,171 +1,131 @@
-<div class="node-authoring">
-  <div
-    class="node-authoring-header"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
-  >
-    <teacher-node-icon [nodeId]="nodeId" [canEdit]="true" size="18" />
-    <edit-node-title [node]="node" />
-    <div fxLayoutGap="16px">
-      <button
-        class="enable-in-translation"
-        mat-raised-button
-        color="primary"
-        routerLink="advanced"
-        matTooltip="Advanced"
-        matTooltipPosition="above"
-        i18n-matTooltip
+<div
+  class="node-authoring-header"
+  fxLayout="row wrap"
+  fxLayoutAlign="start start"
+  fxLayoutGap="16px"
+>
+  <teacher-node-icon [nodeId]="nodeId" [canEdit]="true" size="18" />
+  <edit-node-title [node]="node" />
+  <div fxLayoutGap="16px">
+    <button
+      class="enable-in-translation"
+      mat-raised-button
+      color="primary"
+      routerLink="advanced"
+      matTooltip="Advanced"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>build</mat-icon>
+    </button>
+  </div>
+</div>
+@if (components.length === 0 && !isGroupNode) {
+  <p i18n>This step does not have any components.</p>
+  <add-component-button
+    class="add-component"
+    [node]="node"
+    (newComponentsEvent)="highlightComponents($event)"
+  />
+}
+<div
+  cdkDropList
+  cdkDropListLockAxis="y"
+  (cdkDropListDropped)="dropComponent($event)"
+  cdkScrollable
+  fxLayout="column"
+  fxLayoutGap="16px"
+>
+  @for (component of components; track component.id; let i = $index; let last = $last) {
+    <div fxLayout="row" cdkDrag [cdkDragDisabled]="components.length < 2">
+      <mat-card
+        [id]="component.id"
+        class="component"
+        [ngClass]="{ 'component-editing': component.id === editingComponentId }"
       >
-        <mat-icon>build</mat-icon>
-      </button>
-    </div>
-  </div>
-  <div class="node-authoring-controls">
-    @if (!isGroupNode) {
-      <div class="components-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-        <h5 i18n>Components</h5>
-        <add-component-button
-          [node]="node"
-          (newComponentsEvent)="highlightAndExpandComponents($event)"
-        />
-        <div *ngIf="isAnyComponentSelected()">
-          <button
-            mat-icon-button
-            color="primary"
-            (click)="chooseComponentLocation('move')"
-            matTooltip="Move Components"
-            matTooltipPosition="above"
-            i18n-matTooltip
-          >
-            <mat-icon>redo</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            color="primary"
-            (click)="chooseComponentLocation('copy')"
-            matTooltip="Copy Components"
-            matTooltipPosition="above"
-            i18n-matTooltip
-          >
-            <mat-icon>content_copy</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            color="primary"
-            (click)="deleteComponents()"
-            matTooltip="Delete Components"
-            matTooltipPosition="above"
-            i18n-matTooltip
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-        <span fxFlex></span>
-        <div fxLayoutGap="16px">
-          <button
-            class="enable-in-translation"
-            mat-raised-button
-            color="primary"
-            (click)="setAllComponentsIsExpanded(true)"
-            [disabled]="getNumberOfComponentsExpanded() === components.length"
-            i18n
-          >
-            + Expand All
-          </button>
-          <button
-            class="enable-in-translation"
-            mat-raised-button
-            color="primary"
-            (click)="setAllComponentsIsExpanded(false)"
-            [disabled]="getNumberOfComponentsExpanded() === 0"
-            i18n
-          >
-            - Collapse All
-          </button>
-        </div>
-      </div>
-    }
-  </div>
-  @if (components.length === 0 && !isGroupNode) {
-    <p i18n>This step does not have any components. Click the + button to add a component.</p>
-  }
-  <div
-    cdkDropList
-    (cdkDropListDropped)="dropComponent($event)"
-    cdkScrollable
-    fxLayout="column"
-    fxLayoutGap="8px"
-  >
-    @for (component of components; track component.id; let i = $index) {
-      <div fxLayout="row" fxLayoutGap="4px">
-        <mat-expansion-panel
-          [id]="component.id"
-          [expanded]="componentsToExpanded[component.id]"
-          class="component"
-          cdkDrag
-          [cdkDragDisabled]="components.length < 2"
-          (opened)="toggleComponent(component.id, true)"
-          (closed)="toggleComponent(component.id, false)"
+        <div
+          class="component-header"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          [ngClass]="{ 'selected-bg-bg': component.id === editingComponentId }"
         >
-          <mat-expansion-panel-header aria-label="Expand/collapse component" i18n-aria-label>
-            <mat-panel-title fxLayout="row" fxLayoutAlign="start center">
-              @if (components.length > 1) {
-                <mat-icon class="drag-handle" cdkDragHandle title="Drag to reorder" i18n-title
-                  >drag_indicator</mat-icon
-                >
-              }
-              <mat-checkbox
-                color="primary"
-                [(ngModel)]="componentsToChecked()[component.id]"
-                (change)="componentCheckboxChanged(component.id, $event.checked)"
-                (click)="$event.stopPropagation()"
-                (keydown)="$event.stopPropagation()"
-                aria-label="Select component"
-                i18n-aria-label
+          <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+            @if (components.length > 1) {
+              <mat-icon class="drag-handle" cdkDragHandle title="Drag to reorder" i18n-title
+                >drag_indicator</mat-icon
               >
-                <span>{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span>
-              </mat-checkbox>
-            </mat-panel-title>
-            <mat-panel-description class="text" fxLayoutAlign="end center" fxLayoutGap="4px">
-              <edit-component-advanced-button [componentContent]="component" [nodeId]="nodeId" />
-              <preview-component-button
-                class="component-action"
-                [nodeId]="nodeId"
-                [componentId]="component.id"
-              />
-              <copy-component-button
-                class="component-action"
-                [node]="node"
-                [componentId]="component.id"
-                (newComponentEvent)="highlightAndExpandComponents($event)"
-              />
-              <button
-                mat-icon-button
-                class="component-action"
-                (click)="$event.stopPropagation(); deleteComponent($event, i + 1, component)"
-                (keydown)="$event.stopPropagation()"
-                matTooltip="Delete Component"
-                matTooltipPosition="above"
-                i18n-matTooltip
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div>
-            @if (componentsToExpanded[component.id]) {
-              <component-authoring [nodeId]="nodeId" [componentContent]="component" />
             }
+            <span class="heavy">{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span>
           </div>
-        </mat-expansion-panel>
+          <span fxFlex></span>
+          <div class="text" fxLayoutAlign="end center">
+            @if (component.id === editingComponentId) {
+              <edit-component-advanced-button [componentContent]="component" [nodeId]="nodeId" />
+            }
+            <copy-component-button
+              [node]="node"
+              [componentId]="component.id"
+              (newComponentEvent)="highlightComponents($event)"
+            />
+            <button
+              mat-icon-button
+              (click)="$event.stopPropagation(); deleteComponent($event, i + 1, component)"
+              (keydown)="$event.stopPropagation()"
+              matTooltip="Delete Component"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div>
+          <component-authoring
+            [nodeId]="nodeId"
+            [componentContent]="component"
+            [editing]="component.id === editingComponentId"
+            (editComponentEvent)="editComponent(component.id)"
+          />
+        </div>
+      </mat-card>
+      <div fxLayout="column">
         <add-component-button
           class="add-component"
           [insertAfterComponentId]="component.id"
           [node]="node"
-          (newComponentsEvent)="highlightAndExpandComponents($event)"
+          (newComponentsEvent)="highlightComponents($event)"
         />
+        @if (i > 0) {
+          <button
+            mat-icon-button
+            color="primary"
+            matTooltip="Move up"
+            matTooltipPosition="after"
+            i18n-matTooltip
+            (click)="moveComponent(i, i - 1, true)"
+          >
+            <mat-icon>arrow_upward</mat-icon>
+          </button>
+        }
+        @if (!last) {
+          <button
+            mat-icon-button
+            color="primary"
+            matTooltip="Move down"
+            matTooltipPosition="after"
+            i18n-matTooltip
+            (click)="moveComponent(i, i + 1, true)"
+          >
+            <mat-icon>arrow_downward</mat-icon>
+          </button>
+        }
       </div>
-    }
-  </div>
+      <mat-card *cdkDragPreview>
+        <mat-card-content
+          >{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</mat-card-content
+        >
+      </mat-card>
+    </div>
+  }
 </div>

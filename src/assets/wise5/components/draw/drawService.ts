@@ -182,14 +182,10 @@ export class DrawService extends ComponentService {
   }
 
   setUpTools(drawingToolId: string, tools: any, isDisabled: boolean): void {
-    if (isDisabled) {
-      this.hideAllTools(drawingToolId);
-    } else {
-      const drawingTool = $(`#${drawingToolId}`);
-      for (const toolName of Object.keys(tools)) {
-        const isShowTool = tools[toolName];
-        this.toggleToolVisibility(drawingTool, isShowTool, this.toolFieldToLabel[toolName]);
-      }
+    const drawingTool = $(`#${drawingToolId}`);
+    for (const toolName of Object.keys(tools)) {
+      const isShowTool = tools[toolName];
+      this.toggleToolVisibility(drawingTool, isShowTool, this.toolFieldToLabel[toolName]);
     }
   }
 
@@ -199,9 +195,5 @@ export class DrawService extends ComponentService {
     } else {
       drawingTool.find(`[title="${title}"]`).hide();
     }
-  }
-
-  hideAllTools(drawingToolId: string): void {
-    $(`#${drawingToolId}`).find('.dt-tools').hide();
   }
 }

@@ -10,7 +10,7 @@ import { TeacherDataService } from '../../services/teacherDataService';
 import { ClassroomMonitorTestingModule } from '../classroom-monitor-testing.module';
 import { ClassroomMonitorTestHelper } from '../classroomMonitorComponents/shared/testing/ClassroomMonitorTestHelper';
 import { StudentProgressComponent } from './student-progress.component';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 
 class SortTestParams {
   constructor(
@@ -29,7 +29,7 @@ const { workgroupId1, workgroupId2, workgroupId3, workgroupId4, workgroupId5 } =
 describe('StudentProgressComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [StudentProgressComponent, WorkgroupSelectAutocompleteComponent],
+      declarations: [StudentProgressComponent],
       imports: [
         ClassroomMonitorTestingModule,
         FormsModule,
@@ -38,8 +38,9 @@ describe('StudentProgressComponent', () => {
         MatInputModule,
         MatListModule,
         ReactiveFormsModule,
-        RouterTestingModule
-      ]
+        WorkgroupSelectAutocompleteComponent
+      ],
+      providers: [provideRouter([])]
     }).compileComponents();
   });
 

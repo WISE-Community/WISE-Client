@@ -39,6 +39,7 @@ import { MathModule } from './math/math.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { MainMenuComponent } from '../assets/wise5/common/main-menu/main-menu.component';
 import { SideMenuComponent } from '../assets/wise5/common/side-menu/side-menu.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { SideMenuComponent } from '../assets/wise5/common/side-menu/side-menu.co
     NodeStatusIconComponent,
     NotebookModule,
     ReactiveFormsModule,
+    ScrollingModule,
     StudentTeacherCommonServicesModule
   ],
   exports: [
