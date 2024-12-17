@@ -13,14 +13,14 @@ import { TransitionLogic } from '../common/TransitionLogic';
 @Injectable()
 export class StudentNodeService extends NodeService {
   constructor(
+    protected dataService: DataService,
     protected dialog: MatDialog,
     protected configService: ConfigService,
     protected constraintService: ConstraintService,
     private nodeStatusService: NodeStatusService,
-    protected projectService: ProjectService,
-    protected dataService: DataService
+    protected projectService: ProjectService
   ) {
-    super(dialog, configService, constraintService, projectService, dataService);
+    super(dataService, dialog, configService, constraintService, projectService);
   }
 
   setCurrentNode(nodeId: string): void {

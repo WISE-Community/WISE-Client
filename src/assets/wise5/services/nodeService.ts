@@ -18,11 +18,11 @@ export abstract class NodeService {
   public doneRenderingComponent$ = this.doneRenderingComponentSource.asObservable();
 
   constructor(
+    protected dataService: DataService,
     protected dialog: MatDialog,
     protected configService: ConfigService,
     protected constraintService: ConstraintService,
-    protected projectService: ProjectService,
-    protected dataService: DataService
+    protected projectService: ProjectService
   ) {}
 
   setCurrentNode(nodeId: string): void {
