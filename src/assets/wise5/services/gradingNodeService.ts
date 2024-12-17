@@ -18,19 +18,6 @@ export class GradingNodeService extends TeacherNodeService {
   }
 
   /**
-   * Go to the next node that captures work
-   * @return a promise that will return the next node id
-   */
-  goToNextNode(): Promise<string> {
-    return this.getNextNodeId().then((nextNodeId: string) => {
-      if (nextNodeId) {
-        this.setCurrentNode(nextNodeId);
-      }
-      return nextNodeId;
-    });
-  }
-
-  /**
    * Go to the previous node that captures work
    */
   goToPrevNode(): void {
