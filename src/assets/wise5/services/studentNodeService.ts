@@ -80,10 +80,10 @@ export class StudentNodeService extends NodeService {
    */
   getNextNodeId(currentId?: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const currentNodeId = currentId ?? this.DataService.getCurrentNodeId();
-      const transitionLogic = this.ProjectService.getNode(currentNodeId).getTransitionLogic();
+      const currentNodeId = currentId ?? this.dataService.getCurrentNodeId();
+      const transitionLogic = this.projectService.getNode(currentNodeId).getTransitionLogic();
       const branchPathTakenEvents =
-        this.DataService.getBranchPathTakenEventsByNodeId(currentNodeId);
+        this.dataService.getBranchPathTakenEventsByNodeId(currentNodeId);
       if (this.hasPreviouslyBranchedAndCannotChange(branchPathTakenEvents, transitionLogic)) {
         resolve(branchPathTakenEvents.at(-1).data.toNodeId);
       } else {
@@ -100,7 +100,7 @@ export class StudentNodeService extends NodeService {
   }
 
   private resolveNextNodeIdFromTransition(resolve: any, currentNodeId: string): void {
-    const transitionLogic = this.ProjectService.getNode(currentNodeId).getTransitionLogic();
+    const transitionLogic = this.projectService.getNode(currentNodeId).getTransitionLogic();
     if (transitionLogic.transitions.length == 0) {
       this.getNextNodeIdFromParent(resolve, currentNodeId);
     } else {
@@ -111,13 +111,13 @@ export class StudentNodeService extends NodeService {
   }
 
   private getNextNodeIdFromParent(resolve: any, currentNodeId: string): void {
-    const parentGroupId = this.ProjectService.getParentGroupId(currentNodeId);
+    const parentGroupId = this.projectService.getParentGroupId(currentNodeId);
     if (parentGroupId != null) {
-      const parentTransitionLogic = this.ProjectService.getNode(parentGroupId).getTransitionLogic();
+      const parentTransitionLogic = this.projectService.getNode(parentGroupId).getTransitionLogic();
       this.chooseTransition(parentGroupId, parentTransitionLogic).then((transition: any) => {
         const transitionToNodeId = transition.to;
-        const startId = this.ProjectService.isGroupNode(transitionToNodeId)
-          ? this.ProjectService.getGroupStartId(transitionToNodeId)
+        const startId = this.projectService.isGroupNode(transitionToNodeId)
+          ? this.projectService.getGroupStartId(transitionToNodeId)
           : null;
         resolve(startId == null || startId === '' ? transitionToNodeId : startId);
       });
