@@ -5,21 +5,38 @@ import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectCompletion } from '../../common/ProjectCompletion';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { WorkgroupSelectAutocompleteComponent } from '../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
+import { ProjectProgressComponent } from '../classroomMonitorComponents/studentProgress/project-progress/project-progress.component';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    MatTableModule,
+    ProjectProgressComponent,
+    WorkgroupSelectAutocompleteComponent
+  ],
   selector: 'student-progress',
-  templateUrl: './student-progress.component.html',
-  styleUrls: ['./student-progress.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  standalone: true,
+  styleUrl: './student-progress.component.scss',
+  templateUrl: './student-progress.component.html'
 })
 export class StudentProgressComponent implements OnInit {
-  currentWorkgroup: any;
-  permissions: any;
-  sort: any;
-  sortedStudents: StudentProgress[];
-  subscriptions: Subscription = new Subscription();
-  teacherWorkgroupId: number;
-  sortOptions: any = {
+  protected permissions: any;
+  protected sort: any;
+  protected sortedStudents: StudentProgress[];
+  private subscriptions: Subscription = new Subscription();
+  protected sortOptions: any = {
     team: {
       label: $localize`Team`,
       fieldName: 'workgroupId',
@@ -56,7 +73,7 @@ export class StudentProgressComponent implements OnInit {
       isNumeric: true
     }
   };
-  students: StudentProgress[];
+  private students: StudentProgress[] = [];
 
   constructor(
     private classroomStatusService: ClassroomStatusService,
@@ -67,21 +84,13 @@ export class StudentProgressComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.teacherWorkgroupId = this.configService.getWorkgroupId();
     this.sort = this.dataService.studentProgressSort;
     this.permissions = this.configService.getPermissions();
     this.initializeStudents();
     this.sortWorkgroups();
     this.subscriptions.add(
       this.classroomStatusService.studentStatusReceived$.subscribe((args) => {
-        const studentStatus = args.studentStatus;
-        const workgroupId = studentStatus.workgroupId;
-        this.updateTeam(workgroupId);
-      })
-    );
-    this.subscriptions.add(
-      this.dataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
-        this.currentWorkgroup = currentWorkgroup;
+        this.updateTeam(args.studentStatus.workgroupId);
       })
     );
   }
@@ -91,40 +100,38 @@ export class StudentProgressComponent implements OnInit {
   }
 
   private initializeStudents(): void {
-    this.students = [];
-    const workgroups = this.configService
+    this.configService
       .getClassmateUserInfos()
-      .filter((workgroup: any) => workgroup.workgroupId != null);
-    for (const workgroup of workgroups) {
-      const workgroupId = workgroup.workgroupId;
-      const userNames = this.configService
-        .getDisplayUsernamesByWorkgroupId(workgroupId)
-        .split(', ');
-      userNames.forEach((user: any) => {
-        const names = user.split(' ');
-        const student = new StudentProgress({
-          periodId: workgroup.periodId,
-          periodName: workgroup.periodName,
-          workgroupId: workgroupId,
-          username: names[0] + ' ' + names[1],
-          firstName: names[0],
-          lastName: names[1]
+      .filter((workgroup: any) => workgroup.workgroupId != null)
+      .forEach((workgroup: any) => {
+        const workgroupId = workgroup.workgroupId;
+        const userNames = this.configService
+          .getDisplayUsernamesByWorkgroupId(workgroupId)
+          .split(', ');
+        userNames.forEach((user: any) => {
+          const names = user.split(' ');
+          const student = new StudentProgress({
+            periodId: workgroup.periodId,
+            periodName: workgroup.periodName,
+            workgroupId: workgroupId,
+            username: names[0] + ' ' + names[1],
+            firstName: names[0],
+            lastName: names[1]
+          });
+          this.students.push(student);
+          this.updateTeam(workgroupId);
         });
-        this.students.push(student);
-        this.updateTeam(workgroupId);
       });
-    }
   }
 
   private updateTeam(workgroupId: number): void {
     const location = this.classroomStatusService.getCurrentNodeLocationForWorkgroupId(workgroupId);
     const completion = this.classroomStatusService.getStudentProjectCompletion(workgroupId);
     const score = this.getStudentTotalScore(workgroupId) || 0;
-    let maxScore = this.classroomStatusService.getMaxScoreForWorkgroupId(workgroupId);
-    maxScore = maxScore ? maxScore : 0;
-
-    for (const student of this.students) {
-      if (student.workgroupId === workgroupId) {
+    const maxScore = this.classroomStatusService.getMaxScoreForWorkgroupId(workgroupId) ?? 0;
+    this.students
+      .filter((student) => student.workgroupId === workgroupId)
+      .forEach((student) => {
         student.position = location?.position || '';
         student.order = location?.order || 0;
         student.completion = completion;
@@ -132,8 +139,7 @@ export class StudentProgressComponent implements OnInit {
         student.score = score;
         student.maxScore = maxScore;
         student.scorePct = maxScore ? score / maxScore : score;
-      }
-    }
+      });
   }
 
   private getStudentTotalScore(workgroupId: number): number {
@@ -181,22 +187,18 @@ export class StudentProgressComponent implements OnInit {
     return direction === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
   }
 
-  isWorkgroupShown(workgroup: number): boolean {
+  protected isWorkgroupShown(workgroup: number): boolean {
     return this.dataService.isWorkgroupShown(workgroup);
   }
 
-  showStudentGradingView(workgroup: any): void {
+  protected showStudentGradingView(workgroup: any): void {
     if (this.classroomStatusService.hasStudentStatus(workgroup.workgroupId)) {
       this.router.navigate([workgroup.workgroupId], { relativeTo: this.route });
     }
   }
 
-  setSort(value: string): void {
-    if (this.sort === value) {
-      this.sort = `-${value}`;
-    } else {
-      this.sort = value;
-    }
+  protected setSort(value: string): void {
+    this.sort = this.sort === value ? `-${value}` : value;
     this.dataService.studentProgressSort = this.sort;
     this.sortWorkgroups();
   }
