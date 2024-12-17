@@ -38,19 +38,12 @@ export abstract class NodeService {
     });
   }
 
-  /**
-   * This function should be implemented by the child service classes
-   */
   abstract getNextNodeId(currentId?: string): Promise<any>;
 
   goToPrevNode(): void {
     this.setCurrentNode(this.getPrevNodeId());
   }
 
-  /**
-   * Get the previous node in the project sequence
-   * @param currentId (optional)
-   */
   abstract getPrevNodeId(currentId?: string): string;
 
   /**
@@ -116,7 +109,7 @@ export abstract class NodeService {
                * they last chose and not ask them again
                */
             } else {
-              this.letUserChooseTransition(availableTransitions, nodeId, resolve);
+              this.letUserChooseTransition(availableTransitions, resolve);
             }
           } else {
             transitionResult = this.chooseTransitionAutomatically(
@@ -141,28 +134,18 @@ export abstract class NodeService {
     );
   }
 
-  private letUserChooseTransition(
-    availableTransitions: any[],
-    nodeId: string,
-    resolve: (value: any) => void
-  ): void {
-    const paths = [];
-    for (const availableTransition of availableTransitions) {
-      const toNodeId = availableTransition.to;
-      const path = {
-        nodeId: toNodeId,
-        nodeTitle: this.projectService.getNodePositionAndTitle(toNodeId),
-        transition: availableTransition
-      };
-      paths.push(path);
-    }
-    const dialogRef = this.dialog.open(ChooseBranchPathDialogComponent, {
-      data: paths,
-      disableClose: true
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      resolve(result);
-    });
+  private letUserChooseTransition(transitions: any[], resolve: (value: any) => void): void {
+    this.dialog
+      .open(ChooseBranchPathDialogComponent, {
+        data: transitions.map((transition) => ({
+          nodeId: transition.to,
+          nodeTitle: this.projectService.getNodePositionAndTitle(transition.to),
+          transition: transition
+        })),
+        disableClose: true
+      })
+      .afterClosed()
+      .subscribe((result) => resolve(result));
   }
 
   private chooseTransitionAutomatically(
