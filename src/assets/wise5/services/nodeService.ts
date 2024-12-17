@@ -9,7 +9,7 @@ import { ConstraintService } from './constraintService';
 import { TransitionLogic } from '../common/TransitionLogic';
 
 @Injectable()
-export class NodeService {
+export abstract class NodeService {
   private transitionResults = {};
   private chooseTransitionPromises = {};
   private nodeSubmitClickedSource: Subject<any> = new Subject<any>();
@@ -18,11 +18,11 @@ export class NodeService {
   public doneRenderingComponent$ = this.doneRenderingComponentSource.asObservable();
 
   constructor(
+    protected dataService: DataService,
     protected dialog: MatDialog,
     protected configService: ConfigService,
     protected constraintService: ConstraintService,
-    protected projectService: ProjectService,
-    protected dataService: DataService
+    protected projectService: ProjectService
   ) {}
 
   setCurrentNode(nodeId: string): void {
@@ -30,7 +30,7 @@ export class NodeService {
   }
 
   goToNextNode(): Promise<string> {
-    return this.getNextNodeId().then((nextNodeId) => {
+    return this.getNextNodeId().then((nextNodeId: string) => {
       if (nextNodeId != null) {
         this.setCurrentNode(nextNodeId);
       }
@@ -38,63 +38,13 @@ export class NodeService {
     });
   }
 
-  /**
-   * This function should be implemented by the child service classes
-   */
-  getNextNodeId(currentId?: string): Promise<any> {
-    return null;
+  abstract getNextNodeId(currentId?: string): Promise<any>;
+
+  goToPrevNode(): void {
+    this.setCurrentNode(this.getPrevNodeId());
   }
 
-  goToPrevNode() {
-    const prevNodeId = this.getPrevNodeId();
-    this.setCurrentNode(prevNodeId);
-  }
-
-  /**
-   * Get the previous node in the project sequence
-   * @param currentId (optional)
-   */
-  getPrevNodeId(currentId?: string): string {
-    let prevNodeId = null;
-    const currentNodeId = currentId ?? this.dataService.getCurrentNodeId();
-    if (currentNodeId) {
-      if (['author', 'classroomMonitor'].includes(this.configService.getMode())) {
-        const currentNodeOrder = this.projectService.getNodeOrderById(currentNodeId);
-        if (currentNodeOrder) {
-          const prevId = this.projectService.getNodeIdByOrder(currentNodeOrder - 1);
-          if (prevId) {
-            prevNodeId = this.projectService.isApplicationNode(prevId)
-              ? prevId
-              : this.getPrevNodeId(prevId);
-          }
-        }
-      } else {
-        // get all the nodes that transition to the current node
-        const nodeIdsByToNodeId = this.projectService
-          .getNodesByToNodeId(currentNodeId)
-          .map((node) => node.id);
-        if (nodeIdsByToNodeId.length === 1) {
-          // there is only one node that transitions to the current node
-          prevNodeId = nodeIdsByToNodeId[0];
-        } else if (nodeIdsByToNodeId.length > 1) {
-          // there are multiple nodes that transition to the current node
-
-          const stackHistory = this.dataService.getStackHistory();
-
-          // loop through the stack history node ids from newest to oldest
-          for (let s = stackHistory.length - 1; s >= 0; s--) {
-            const stackHistoryNodeId = stackHistory[s];
-            if (nodeIdsByToNodeId.indexOf(stackHistoryNodeId) != -1) {
-              // we have found a node that we previously visited that transitions to the current node
-              prevNodeId = stackHistoryNodeId;
-              break;
-            }
-          }
-        }
-      }
-    }
-    return prevNodeId;
-  }
+  abstract getPrevNodeId(currentId?: string): string;
 
   /**
    * Close the current node (and open the current node's parent group)
@@ -159,7 +109,7 @@ export class NodeService {
                * they last chose and not ask them again
                */
             } else {
-              this.letUserChooseTransition(availableTransitions, nodeId, resolve);
+              this.letUserChooseTransition(availableTransitions, resolve);
             }
           } else {
             transitionResult = this.chooseTransitionAutomatically(
@@ -184,28 +134,18 @@ export class NodeService {
     );
   }
 
-  private letUserChooseTransition(
-    availableTransitions: any[],
-    nodeId: string,
-    resolve: (value: any) => void
-  ): void {
-    const paths = [];
-    for (const availableTransition of availableTransitions) {
-      const toNodeId = availableTransition.to;
-      const path = {
-        nodeId: toNodeId,
-        nodeTitle: this.projectService.getNodePositionAndTitle(toNodeId),
-        transition: availableTransition
-      };
-      paths.push(path);
-    }
-    const dialogRef = this.dialog.open(ChooseBranchPathDialogComponent, {
-      data: paths,
-      disableClose: true
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      resolve(result);
-    });
+  private letUserChooseTransition(transitions: any[], resolve: (value: any) => void): void {
+    this.dialog
+      .open(ChooseBranchPathDialogComponent, {
+        data: transitions.map((transition) => ({
+          nodeId: transition.to,
+          nodeTitle: this.projectService.getNodePositionAndTitle(transition.to),
+          transition: transition
+        })),
+        disableClose: true
+      })
+      .afterClosed()
+      .subscribe((result) => resolve(result));
   }
 
   private chooseTransitionAutomatically(
