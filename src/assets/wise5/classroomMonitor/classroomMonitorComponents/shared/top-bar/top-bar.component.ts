@@ -3,40 +3,55 @@ import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { SessionService } from '../../../../services/sessionService';
-import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { NotificationService } from '../../../../services/notificationService';
 import { Notification } from '../../../../../../app/domain/notification';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { NotificationsMenuComponent } from '../notifications-menu/notifications-menu.component';
+import { PauseScreensMenuComponent } from '../../pause-screens-menu/pause-screens-menu.component';
 
 @Component({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
+    NotificationsMenuComponent,
+    PauseScreensMenuComponent
+  ],
   selector: 'top-bar',
-  templateUrl: './top-bar.component.html',
-  styleUrls: ['./top-bar.component.scss']
+  standalone: true,
+  styleUrl: './top-bar.component.scss',
+  templateUrl: './top-bar.component.html'
 })
 export class TopBarComponent implements OnInit {
-  avatarColor: any;
-  canAuthorProject: boolean;
-  contextPath: string;
-  dismissedNotifications: Notification[] = [];
+  protected avatarColor: any;
+  protected canAuthorProject: boolean;
+  protected contextPath: string;
   @Input() logoPath: string;
-  newNotifications: Notification[] = [];
-  notificationChangedSubscription: Subscription;
+  protected newNotifications: Notification[] = [];
+  private notificationChangedSubscription: Subscription;
   @Input() notifications: any;
   @Input() projectId: number;
   @Input() projectTitle: string;
   @Input() runId: number;
   @Input() runCode: string;
-  runInfo: string;
-  themePath: string;
-  userInfo: any;
-  workgroupId: number;
+  protected runInfo: string;
+  protected userInfo: any;
+  private workgroupId: number;
 
   constructor(
     private configService: ConfigService,
     private dataService: TeacherDataService,
     private notificationService: NotificationService,
-    private projectService: TeacherProjectService,
     private router: Router,
     private sessionService: SessionService
   ) {}
@@ -53,11 +68,10 @@ export class TopBarComponent implements OnInit {
         this.setNotifications();
       }
     );
-    this.themePath = this.projectService.getThemePath();
     this.contextPath = this.configService.getContextPath();
     const permissions = this.configService.getPermissions();
     this.canAuthorProject = permissions.canAuthorProject;
-    this.runInfo = this.getRunInfo();
+    this.runInfo = $localize`Run ID: ${this.runId} | Access Code: ${this.runCode}`;
     this.setNotifications();
   }
 
@@ -71,10 +85,6 @@ export class TopBarComponent implements OnInit {
     }
   }
 
-  private getRunInfo(): string {
-    return $localize`Run ID: ${this.runId} | Access Code: ${this.runCode}`;
-  }
-
   /**
    * Find all teacher notifications and separate into new and dismissed arrays
    * TODO: move to TeacherDataService?
@@ -82,10 +92,6 @@ export class TopBarComponent implements OnInit {
   private setNotifications(): void {
     // TODO: take into account shared teacher users!
     this.newNotifications = this.notificationService.getLatestActiveNotificationsFromUniqueSource(
-      this.notifications,
-      this.workgroupId
-    );
-    this.dismissedNotifications = this.notificationService.getDismissedNotificationsForWorkgroup(
       this.notifications,
       this.workgroupId
     );
