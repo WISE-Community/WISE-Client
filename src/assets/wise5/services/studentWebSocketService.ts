@@ -17,11 +17,11 @@ export class StudentWebSocketService {
   constructor(
     private AnnotationService: AnnotationService,
     private configService: ConfigService,
+    private dataService: StudentDataService,
     private nodeService: NodeService,
     private notebookService: NotebookService,
     private ProjectService: ProjectService,
     private stompService: StompService,
-    private StudentDataService: StudentDataService,
     private TagService: TagService
   ) {}
 
@@ -35,7 +35,7 @@ export class StudentWebSocketService {
       const body = JSON.parse(message.body);
       if (body.type === 'studentWork') {
         const studentWork = JSON.parse(body.content);
-        this.StudentDataService.broadcastStudentWorkReceived(studentWork);
+        this.dataService.broadcastStudentWorkReceived(studentWork);
       } else if (body.type === 'annotation') {
         this.AnnotationService.broadcastAnnotationReceived(JSON.parse(body.content));
       } else if (body.type === 'goToNode') {
@@ -60,20 +60,20 @@ export class StudentWebSocketService {
       } else if (body.type === 'tagsToWorkgroup') {
         const tags = JSON.parse(body.content);
         this.TagService.setTags(tags);
-        this.StudentDataService.updateNodeStatuses();
+        this.dataService.updateNodeStatuses();
         this.nodeService.evaluateTransitionLogic();
       } else if (body.type === 'goToNode') {
         this.goToStep(body.content);
       } else if (body.type === 'goToNextNode') {
         this.goToNextStep();
       } else if (body.type === 'classmateStudentWork') {
-        this.StudentDataService.broadcastStudentWorkReceived(JSON.parse(body.content));
+        this.dataService.broadcastStudentWorkReceived(JSON.parse(body.content));
       }
     });
   }
 
   private handleAnnotationReceived(annotation: Annotation): void {
-    this.StudentDataService.studentData.annotations.push(annotation);
+    this.dataService.studentData.annotations.push(annotation);
     if (annotation.notebookItemId) {
       this.notebookService.broadcastNotebookItemAnnotationReceived(annotation);
     } else {
@@ -95,7 +95,7 @@ export class StudentWebSocketService {
     const node = JSON.parse(nodeString);
     this.ProjectService.replaceNode(node.id, node);
     this.ProjectService.parseProject();
-    this.StudentDataService.updateNodeStatuses();
+    this.dataService.updateNodeStatuses();
   }
 
   sendStudentWorkToClassmate(workgroupId: number, studentWork: any): void {

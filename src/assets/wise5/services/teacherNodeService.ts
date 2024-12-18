@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { NodeService } from './nodeService';
 import { Subject, Observable } from 'rxjs';
+import { TeacherDataService } from './teacherDataService';
+import { TeacherProjectService } from './teacherProjectService';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfigService } from './configService';
+import { ConstraintService } from './constraintService';
 
 @Injectable()
 export class TeacherNodeService extends NodeService {
@@ -11,6 +16,16 @@ export class TeacherNodeService extends NodeService {
   public deleteStarterState$: Observable<any> = this.deleteStarterStateSource.asObservable();
   private starterStateResponseSource: Subject<any> = new Subject<any>();
   public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
+
+  constructor(
+    protected dataService: TeacherDataService,
+    protected dialog: MatDialog,
+    protected configService: ConfigService,
+    protected constraintService: ConstraintService,
+    protected projectService: TeacherProjectService
+  ) {
+    super(dataService, dialog, configService, constraintService, projectService);
+  }
 
   broadcastComponentShowSubmitButtonValueChanged(args: any): void {
     this.componentShowSubmitButtonValueChangedSource.next(args);
