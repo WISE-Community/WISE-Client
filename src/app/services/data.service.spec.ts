@@ -1,24 +1,21 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
-
 import { DataService } from './data.service';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 
 let service: DataService;
 let projectService: ProjectService;
-
 describe('DataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
-    service = TestBed.inject(DataService);
+      imports: [StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi())]
+    });
+    service = TestBed.inject(StudentDataService);
     projectService = TestBed.inject(ProjectService);
   });
-
   setCurrentNode();
 });
 
@@ -37,7 +34,6 @@ function setCurrentNode() {
     spyOn(projectService, 'isGroupNode').and.callFake(() => {
       return false;
     });
-    spyOn(service, 'broadcastCurrentNodeChanged').and.callFake(() => {});
     service.setCurrentNode(node2);
     expect(service.previousStep).toEqual(node1);
     expect(service.currentNode).toEqual(node2);

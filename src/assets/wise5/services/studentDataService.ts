@@ -206,7 +206,7 @@ export class StudentDataService extends DataService {
     return null;
   }
 
-  getStackHistory() {
+  getStackHistory(): any[] {
     return this.stackHistory;
   }
 
