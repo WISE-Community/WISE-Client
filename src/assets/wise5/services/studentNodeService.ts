@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NodeService } from './nodeService';
 import { MatDialog } from '@angular/material/dialog';
-import { DataService } from '../../../app/services/data.service';
 import { ConfigService } from './configService';
 import { ConstraintService } from './constraintService';
 import { ProjectService } from './projectService';
@@ -9,11 +8,12 @@ import { NodeStatusService } from './nodeStatusService';
 import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
 import { Constraint } from '../../../app/domain/constraint';
 import { TransitionLogic } from '../common/TransitionLogic';
+import { StudentDataService } from './studentDataService';
 
 @Injectable()
 export class StudentNodeService extends NodeService {
   constructor(
-    protected dataService: DataService,
+    protected dataService: StudentDataService,
     protected dialog: MatDialog,
     protected configService: ConfigService,
     protected constraintService: ConstraintService,
