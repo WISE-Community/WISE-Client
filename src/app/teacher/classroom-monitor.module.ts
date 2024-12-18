@@ -48,8 +48,7 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     StepItemComponent,
     StudentGradingComponent,
     StudentGradingToolsComponent,
-    ToolBarComponent,
-    TopBarComponent
+    ToolBarComponent
   ],
   imports: [
     ComponentGradingComponent,
@@ -74,7 +73,8 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     StepInfoComponent,
     StudentProgressComponent,
     StudentTeacherCommonModule,
-    TeacherSummaryDisplayComponent
+    TeacherSummaryDisplayComponent,
+    TopBarComponent
   ],
   providers: [GradingNodeService]
 })
