@@ -118,9 +118,9 @@ export class ExportStrategyTester {
 
   setUpTeacherDataService(): void {
     this.teacherDataService = new TeacherDataService(
-      null,
       this.annotationService,
       this.configService,
+      null,
       this.teacherProjectService,
       this.teacherWebSocketService
     );
