@@ -17,7 +17,6 @@ export class TeacherDataService extends DataService {
   studentData: any;
   currentPeriod = null;
   currentWorkgroup = null;
-  currentStep = null;
   previousStep = null;
   periods = [];
   nodeGradingSort = 'team';
@@ -436,14 +435,6 @@ export class TeacherDataService extends DataService {
 
   getCurrentWorkgroup() {
     return this.currentWorkgroup;
-  }
-
-  setCurrentStep(step) {
-    this.currentStep = step;
-  }
-
-  getCurrentStep() {
-    return this.currentStep;
   }
 
   getTotalScoreByWorkgroupId(workgroupId: number) {
