@@ -47,7 +47,7 @@ export class TeacherDataService extends DataService {
     this.subscribeToEvents();
   }
 
-  subscribeToEvents() {
+  private subscribeToEvents(): void {
     this.annotationService.annotationSavedToServer$.subscribe((annotation: Annotation) => {
       this.handleAnnotationReceived(annotation);
     });
@@ -173,7 +173,7 @@ export class TeacherDataService extends DataService {
     );
   }
 
-  handleStudentDataResponse(resultData) {
+  private handleStudentDataResponse(resultData: any): any {
     const { studentWorkList: componentStates, events, annotations } = resultData;
     if (componentStates != null) {
       this.processComponentStates(componentStates);
@@ -187,35 +187,29 @@ export class TeacherDataService extends DataService {
     return resultData;
   }
 
-  processComponentStates(componentStates) {
+  processComponentStates(componentStates: any[]): void {
     this.initializeComponentStatesDataStructures();
-    for (const componentState of componentStates) {
-      this.addOrUpdateComponentState(componentState);
-    }
+    componentStates.forEach((componentState) => this.addOrUpdateComponentState(componentState));
   }
 
-  initializeComponentStatesDataStructures(): void {
+  private initializeComponentStatesDataStructures(): void {
     this.studentData.componentStatesByWorkgroupId = {};
     this.studentData.componentStatesByNodeId = {};
     this.studentData.componentStatesByComponentId = {};
   }
 
-  processEvents(events) {
+  private processEvents(events: any[]): void {
     events.sort(serverSaveTimeComparator);
     this.studentData.allEvents = events;
-    this.initializeEventsDataStructures();
-    for (const event of events) {
-      this.addEventToEventsByWorkgroupId(event);
-      this.addEventToEventsByNodeId(event);
-    }
-  }
-
-  initializeEventsDataStructures() {
     this.studentData.eventsByWorkgroupId = {};
     this.studentData.eventsByNodeId = {};
+    events.forEach((event) => {
+      this.addEventToEventsByWorkgroupId(event);
+      this.addEventToEventsByNodeId(event);
+    });
   }
 
-  addEventToEventsByWorkgroupId(event) {
+  private addEventToEventsByWorkgroupId(event: any): void {
     const eventWorkgroupId = event.workgroupId;
     if (this.studentData.eventsByWorkgroupId[eventWorkgroupId] == null) {
       this.studentData.eventsByWorkgroupId[eventWorkgroupId] = new Array();
@@ -223,7 +217,7 @@ export class TeacherDataService extends DataService {
     this.studentData.eventsByWorkgroupId[eventWorkgroupId].push(event);
   }
 
-  addEventToEventsByNodeId(event) {
+  private addEventToEventsByNodeId(event: any): void {
     const eventNodeId = event.nodeId;
     if (this.studentData.eventsByNodeId[eventNodeId] == null) {
       this.studentData.eventsByNodeId[eventNodeId] = new Array();
@@ -231,8 +225,9 @@ export class TeacherDataService extends DataService {
     this.studentData.eventsByNodeId[eventNodeId].push(event);
   }
 
-  processAnnotations(annotations) {
-    this.initializeAnnotationsDataStructures();
+  private processAnnotations(annotations: any[]): void {
+    this.studentData.annotationsByNodeId = {};
+    this.studentData.annotationsToWorkgroupId = {};
     this.studentData.annotations = annotations;
     for (const annotation of annotations) {
       this.addAnnotationToAnnotationsToWorkgroupId(annotation);
@@ -241,12 +236,7 @@ export class TeacherDataService extends DataService {
     this.annotationService.setAnnotations(this.studentData.annotations);
   }
 
-  initializeAnnotationsDataStructures(): void {
-    this.studentData.annotationsByNodeId = {};
-    this.studentData.annotationsToWorkgroupId = {};
-  }
-
-  addAnnotationToAnnotationsToWorkgroupId(annotation) {
+  private addAnnotationToAnnotationsToWorkgroupId(annotation: any): void {
     const annotationWorkgroupId = annotation.toWorkgroupId;
     if (!this.studentData.annotationsToWorkgroupId[annotationWorkgroupId]) {
       this.studentData.annotationsToWorkgroupId[annotationWorkgroupId] = new Array();
@@ -394,23 +384,19 @@ export class TeacherDataService extends DataService {
     return this.studentData.annotationsByNodeId[nodeId] || [];
   }
 
-  setCurrentPeriod(period) {
+  setCurrentPeriod(period: any): void {
     const previousPeriod = this.currentPeriod;
     this.currentPeriod = period;
     this.clearCurrentWorkgroupIfNecessary(this.currentPeriod.periodId);
     if (previousPeriod == null || previousPeriod.periodId != this.currentPeriod.periodId) {
-      this.broadcastCurrentPeriodChanged({
+      this.currentPeriodChangedSource.next({
         previousPeriod: previousPeriod,
         currentPeriod: this.currentPeriod
       });
     }
   }
 
-  broadcastCurrentPeriodChanged(previousAndCurrentPeriod: any) {
-    this.currentPeriodChangedSource.next(previousAndCurrentPeriod);
-  }
-
-  clearCurrentWorkgroupIfNecessary(periodId) {
+  private clearCurrentWorkgroupIfNecessary(periodId: number): void {
     const currentWorkgroup = this.getCurrentWorkgroup();
     if (currentWorkgroup) {
       if (periodId !== -1 && currentWorkgroup.periodId !== periodId) {
