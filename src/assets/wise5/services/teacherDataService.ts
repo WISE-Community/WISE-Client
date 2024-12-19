@@ -228,10 +228,10 @@ export class TeacherDataService extends DataService {
     this.studentData.annotationsByNodeId = {};
     this.studentData.annotationsToWorkgroupId = {};
     this.studentData.annotations = annotations;
-    for (const annotation of annotations) {
+    annotations.forEach((annotation) => {
       this.addAnnotationToAnnotationsToWorkgroupId(annotation);
       this.addAnnotationToAnnotationsByNodeId(annotation);
-    }
+    });
     this.annotationService.setAnnotations(this.studentData.annotations);
   }
 
