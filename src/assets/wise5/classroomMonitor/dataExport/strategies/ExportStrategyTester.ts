@@ -55,7 +55,7 @@ export class ExportStrategyTester {
   studentWorkTimestamp2 = millisecondsToDateTime(this.studentWorkTimestampMilliseconds2);
   studentWorkTimestamp3 = millisecondsToDateTime(this.studentWorkTimestampMilliseconds3);
   studentWorkTimestamp4 = millisecondsToDateTime(this.studentWorkTimestampMilliseconds4);
-  teacherDataService: TeacherDataService;
+  dataService: TeacherDataService;
   teacherProjectService: TeacherProjectService;
   teacherWebSocketService: TeacherWebSocketService = new TeacherWebSocketService(
     null,
@@ -117,7 +117,7 @@ export class ExportStrategyTester {
   }
 
   setUpTeacherDataService(): void {
-    this.teacherDataService = new TeacherDataService(
+    this.dataService = new TeacherDataService(
       this.annotationService,
       this.configService,
       null,
@@ -138,7 +138,7 @@ export class ExportStrategyTester {
     this.componentExportStrategy.configService = this.configService;
     this.componentExportStrategy.dataExportService = this.dataExportService;
     this.componentExportStrategy.projectService = this.teacherProjectService;
-    this.componentExportStrategy.teacherDataService = this.teacherDataService;
+    this.componentExportStrategy.dataService = this.dataService;
   }
 
   createDataExportComponent(): any {
@@ -146,7 +146,7 @@ export class ExportStrategyTester {
       this.annotationService,
       this.configService,
       this.dataExportService,
-      this.teacherDataService,
+      this.dataService,
       null,
       this.teacherProjectService,
       null,
@@ -159,7 +159,7 @@ export class ExportStrategyTester {
   }
 
   setStudentData(componentStates: any[]): void {
-    this.teacherDataService.processComponentStates(componentStates);
+    this.dataService.processComponentStates(componentStates);
   }
 
   setAnnotations(annotations: any[]): void {

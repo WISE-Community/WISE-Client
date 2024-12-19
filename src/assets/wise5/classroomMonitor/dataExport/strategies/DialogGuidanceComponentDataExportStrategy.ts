@@ -26,7 +26,7 @@ export class DialogGuidanceComponentDataExportStrategy extends AbstractComponent
 
   private addDialogGuidanceSpecificHeaderColumns(component: any, headerRow: string[]): void {
     headerRow.push(this.itemIdLabel);
-    const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
+    const componentStates = this.dataService.getComponentStatesByComponentId(component.id);
     const ideaNames = this.getIdeaNames(componentStates);
     const scoreNames = this.getScoreNames(componentStates);
     for (let i = 1; i <= this.getMaxNumberOfStudentResponses(componentStates); i++) {

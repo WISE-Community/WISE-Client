@@ -30,7 +30,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractComponentDataEx
 
   protected generateComponentHeaderRow(component: any): string[] {
     const headerRow = [...this.defaultColumnNames];
-    const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
+    const componentStates = this.dataService.getComponentStatesByComponentId(component.id);
     this.insertPromptColumns(headerRow, component);
     this.insertQuestionColumns(headerRow, component, componentStates);
     return headerRow;
@@ -110,7 +110,7 @@ export class PeerChatComponentDataExportStrategy extends AbstractComponentDataEx
     columnNameToNumber: any,
     nodeId: string
   ): any[] {
-    const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
+    const componentStates = this.dataService.getComponentStatesByComponentId(component.id);
     const sortedComponentStates = this.sortByPeerGroupIdAndTimestamp(componentStates);
     const workRows = [];
     for (let r = 0; r < sortedComponentStates.length; r++) {

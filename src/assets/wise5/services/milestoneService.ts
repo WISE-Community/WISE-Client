@@ -19,9 +19,9 @@ export class MilestoneService {
   constructor(
     private achievementService: AchievementService,
     private configService: ConfigService,
+    private dataService: TeacherDataService,
     private milestoneReportService: MilestoneReportService,
-    private projectService: ProjectService,
-    private teacherDataService: TeacherDataService
+    private projectService: ProjectService
   ) {}
 
   getProjectMilestones(): Milestone[] {
@@ -49,7 +49,7 @@ export class MilestoneService {
   }
 
   getProjectMilestoneStatus(milestoneId: string): any {
-    this.periodId = this.teacherDataService.getCurrentPeriod().periodId;
+    this.periodId = this.dataService.getCurrentPeriod().periodId;
     this.setWorkgroupsInCurrentPeriod();
     let milestone = this.projectService.getAchievementByAchievementId(milestoneId);
     milestone = this.insertMilestoneItems(milestone);
@@ -73,7 +73,8 @@ export class MilestoneService {
   }
 
   insertMilestoneCompletion(milestone: any): any {
-    const achievementIdToStudentAchievements = this.achievementService.getAchievementIdToStudentAchievementsMappings();
+    const achievementIdToStudentAchievements =
+      this.achievementService.getAchievementIdToStudentAchievementsMappings();
     const studentAchievements = achievementIdToStudentAchievements[milestone.id];
     const workgroupIdsCompleted = [];
     const achievementTimes = [];
