@@ -260,7 +260,9 @@ export class TeacherDataService extends DataService {
   private addComponentStateByWorkgroupId(componentState: any): void {
     const workgroupId = componentState.workgroupId;
     this.initializeComponentStatesByWorkgroupIdIfNecessary(workgroupId);
-    const index = this.getComponentStateByWorkgroupIdIndex(componentState);
+    const index = this.studentData.componentStatesByWorkgroupId[
+      componentState.workgroupId
+    ].findIndex((state) => state.id === componentState.id);
     if (index != -1) {
       this.studentData.componentStatesByWorkgroupId[workgroupId][index] = componentState;
     } else {
@@ -274,16 +276,12 @@ export class TeacherDataService extends DataService {
     }
   }
 
-  private getComponentStateByWorkgroupIdIndex(componentState: any): number {
-    return this.studentData.componentStatesByWorkgroupId[componentState.workgroupId].findIndex(
-      (state) => state.id === componentState.id
-    );
-  }
-
   private addComponentStateByNodeId(componentState: any): void {
     const nodeId = componentState.nodeId;
     this.initializeComponentStatesByNodeIdIfNecessary(nodeId);
-    const index = this.getComponentStateByNodeIdIndex(componentState);
+    const index = this.studentData.componentStatesByNodeId[componentState.nodeId].findIndex(
+      (state) => state.id === componentState.id
+    );
     if (index != -1) {
       this.studentData.componentStatesByNodeId[nodeId][index] = componentState;
     } else {
@@ -297,16 +295,12 @@ export class TeacherDataService extends DataService {
     }
   }
 
-  private getComponentStateByNodeIdIndex(componentState: any): number {
-    return this.studentData.componentStatesByNodeId[componentState.nodeId].findIndex(
-      (state) => state.id === componentState.id
-    );
-  }
-
   private addComponentStateByComponentId(componentState: any): void {
     const componentId = componentState.componentId;
     this.initializeComponentStatesByComponentIdIfNecessary(componentId);
-    const index = this.getComponentStateByComponentIdIndex(componentState);
+    const index = this.studentData.componentStatesByComponentId[
+      componentState.componentId
+    ].findIndex((state) => state.id === componentState.id);
     if (index != -1) {
       this.studentData.componentStatesByComponentId[componentId][index] = componentState;
     } else {
@@ -318,12 +312,6 @@ export class TeacherDataService extends DataService {
     if (this.studentData.componentStatesByComponentId[componentId] == null) {
       this.studentData.componentStatesByComponentId[componentId] = [];
     }
-  }
-
-  private getComponentStateByComponentIdIndex(componentState: any): number {
-    return this.studentData.componentStatesByComponentId[componentState.componentId].findIndex(
-      (state) => state.id === componentState.id
-    );
   }
 
   getComponentStatesByWorkgroupId(workgroupId: number): any[] {
