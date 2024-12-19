@@ -47,12 +47,12 @@ export class StudentDataService extends DataService {
   public updateNodeStatuses$: Observable<void> = this.updateNodeStatusesSource.asObservable();
 
   constructor(
+    private annotationService: AnnotationService,
+    private configService: ConfigService,
     public http: HttpClient,
-    private AnnotationService: AnnotationService,
-    private ConfigService: ConfigService,
-    protected ProjectService: ProjectService
+    protected projectService: ProjectService
   ) {
-    super(ProjectService);
+    super(projectService);
   }
 
   broadcastComponentStudentData(componentStudentData: any) {
@@ -61,7 +61,7 @@ export class StudentDataService extends DataService {
 
   retrieveStudentData() {
     this.nodeStatuses = {};
-    if (this.ConfigService.isPreview()) {
+    if (this.configService.isPreview()) {
       this.retrieveStudentDataForPreview();
     } else {
       return this.retrieveStudentDataForSignedInStudent();
@@ -76,7 +76,7 @@ export class StudentDataService extends DataService {
       username: $localize`Preview Student`,
       userId: '0'
     };
-    this.AnnotationService.setAnnotations(this.studentData.annotations);
+    this.annotationService.setAnnotations(this.studentData.annotations);
     this.dataRetrievedSource.next(this.studentData);
   }
 
@@ -90,17 +90,17 @@ export class StudentDataService extends DataService {
 
   retrieveStudentDataForSignedInStudent() {
     const params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
-      .set('workgroupId', this.ConfigService.getWorkgroupId() + '')
+      .set('runId', this.configService.getRunId())
+      .set('workgroupId', this.configService.getWorkgroupId() + '')
       .set('getStudentWork', true + '')
       .set('getEvents', true + '')
       .set('getAnnotations', true + '')
-      .set('toWorkgroupId', this.ConfigService.getWorkgroupId());
+      .set('toWorkgroupId', this.configService.getWorkgroupId());
     const options = {
       params: params
     };
     return this.http
-      .get(this.ConfigService.getConfigParam('studentDataURL'), options)
+      .get(this.configService.getConfigParam('studentDataURL'), options)
       .toPromise()
       .then((resultData) => {
         return this.handleStudentDataResponse(resultData);
@@ -119,24 +119,24 @@ export class StudentDataService extends DataService {
     }
     this.studentData.events = resultData.events;
     this.studentData.annotations = resultData.annotations;
-    this.AnnotationService.setAnnotations(this.studentData.annotations);
+    this.annotationService.setAnnotations(this.studentData.annotations);
     this.populateHistories(this.studentData.events);
     this.dataRetrievedSource.next(this.studentData);
     return this.studentData;
   }
 
   retrieveRunStatus() {
-    if (this.ConfigService.isPreview()) {
+    if (this.configService.isPreview()) {
       this.runStatus = {
         periods: []
       };
     } else {
-      const params = new HttpParams().set('runId', this.ConfigService.getConfigParam('runId'));
+      const params = new HttpParams().set('runId', this.configService.getConfigParam('runId'));
       const options = {
         params: params
       };
       return this.http
-        .get(this.ConfigService.getConfigParam('runStatusURL'), options)
+        .get(this.configService.getConfigParam('runStatusURL'), options)
         .toPromise()
         .then((runStatus: RunStatus) => {
           this.runStatus = runStatus;
@@ -174,9 +174,9 @@ export class StudentDataService extends DataService {
 
   getScoreValueFromScoreAnnotation(scoreAnnotation: any, scoreId: string): number {
     if (scoreId == null) {
-      return this.AnnotationService.getScoreValueFromScoreAnnotation(scoreAnnotation);
+      return this.annotationService.getScoreValueFromScoreAnnotation(scoreAnnotation);
     } else {
-      return this.AnnotationService.getSubScoreValueFromScoreAnnotation(scoreAnnotation, scoreId);
+      return this.annotationService.getSubScoreValueFromScoreAnnotation(scoreAnnotation, scoreId);
     }
   }
 
@@ -298,10 +298,10 @@ export class StudentDataService extends DataService {
       category: category,
       event: event,
       data: data,
-      projectId: this.ConfigService.getProjectId(),
-      runId: this.ConfigService.getRunId(),
-      periodId: this.ConfigService.getPeriodId(),
-      workgroupId: this.ConfigService.getWorkgroupId(),
+      projectId: this.configService.getProjectId(),
+      runId: this.configService.getRunId(),
+      periodId: this.configService.getPeriodId(),
+      workgroupId: this.configService.getWorkgroupId(),
       clientSaveTime: new Date().getTime()
     };
   }
@@ -317,21 +317,21 @@ export class StudentDataService extends DataService {
     const studentWorkList = this.prepareComponentStatesForSave(componentStates);
     this.prepareEventsForSave(events);
     this.prepareAnnotationsForSave(annotations);
-    if (this.ConfigService.isPreview()) {
+    if (this.configService.isPreview()) {
       return this.handlePreviewSaveToServer(studentWorkList, events, annotations);
-    } else if (!this.ConfigService.isRunActive()) {
+    } else if (!this.configService.isRunActive()) {
       return Promise.resolve();
     } else {
       const params = {
-        projectId: this.ConfigService.getProjectId(),
-        runId: this.ConfigService.getRunId(),
-        workgroupId: this.ConfigService.getWorkgroupId(),
+        projectId: this.configService.getProjectId(),
+        runId: this.configService.getRunId(),
+        workgroupId: this.configService.getWorkgroupId(),
         studentWorkList: JSON.stringify(studentWorkList),
         events: JSON.stringify(events),
         annotations: JSON.stringify(annotations)
       };
       return this.http
-        .post(this.ConfigService.getConfigParam('studentDataURL'), params)
+        .post(this.configService.getConfigParam('studentDataURL'), params)
         .toPromise()
         .then(
           (resultData: any) => {
@@ -421,7 +421,7 @@ export class StudentDataService extends DataService {
       for (let l = localStudentWorkList.length - 1; l >= 0; l--) {
         const localStudentWork = localStudentWorkList[l];
         if (this.isMatchingRequestToken(localStudentWork, savedStudentWork)) {
-          if (this.ConfigService.isPreview()) {
+          if (this.configService.isPreview()) {
             this.setDummyIdIntoLocalId(localStudentWork);
             this.setDummyServerSaveTimeIntoLocalServerSaveTime(localStudentWork);
           } else {
@@ -489,7 +489,7 @@ export class StudentDataService extends DataService {
           this.setRemoteIdIntoLocalId(savedAnnotation, localAnnotation);
           this.setRemoteServerSaveTimeIntoLocalServerSaveTime(savedAnnotation, localAnnotation);
           this.clearRequestToken(localAnnotation);
-          this.AnnotationService.broadcastAnnotationSavedToServer(localAnnotation);
+          this.annotationService.broadcastAnnotationSavedToServer(localAnnotation);
           break;
         }
       }
@@ -568,7 +568,7 @@ export class StudentDataService extends DataService {
   }
 
   getTotalScore() {
-    return this.AnnotationService.getTotalScore(this.studentData.annotations);
+    return this.annotationService.getTotalScore(this.studentData.annotations);
   }
 
   getRunStatus(): RunStatus {
@@ -581,7 +581,7 @@ export class StudentDataService extends DataService {
 
   getLatestComponentStatesByNodeId(nodeId) {
     const latestComponentStates = [];
-    const node = this.ProjectService.getNodeById(nodeId);
+    const node = this.projectService.getNodeById(nodeId);
     if (node != null) {
       const components = node.components;
       if (components != null) {
@@ -618,7 +618,7 @@ export class StudentDataService extends DataService {
 
   getStudentWorkById(id) {
     const params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
+      .set('runId', this.configService.getRunId())
       .set('id', id + '')
       .set('getStudentWork', true + '')
       .set('getEvents', false + '')
@@ -628,7 +628,7 @@ export class StudentDataService extends DataService {
       params: params
     };
     return this.http
-      .get(this.ConfigService.getConfigParam('studentDataURL'), options)
+      .get(this.configService.getConfigParam('studentDataURL'), options)
       .toPromise()
       .then((resultData: any) => {
         if (resultData != null && resultData.studentWorkList.length > 0) {
