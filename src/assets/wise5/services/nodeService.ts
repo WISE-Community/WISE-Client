@@ -8,16 +8,16 @@ import { ConstraintService } from './constraintService';
 
 @Injectable()
 export abstract class NodeService {
-  private nodeSubmitClickedSource: Subject<any> = new Subject<any>();
-  public nodeSubmitClicked$: Observable<any> = this.nodeSubmitClickedSource.asObservable();
   private doneRenderingComponentSource: Subject<any> = new Subject<any>();
   public doneRenderingComponent$ = this.doneRenderingComponentSource.asObservable();
+  private nodeSubmitClickedSource: Subject<any> = new Subject<any>();
+  public nodeSubmitClicked$: Observable<any> = this.nodeSubmitClickedSource.asObservable();
 
   constructor(
-    protected dataService: DataService,
-    protected dialog: MatDialog,
     protected configService: ConfigService,
     protected constraintService: ConstraintService,
+    protected dataService: DataService,
+    protected dialog: MatDialog,
     protected projectService: ProjectService
   ) {}
 

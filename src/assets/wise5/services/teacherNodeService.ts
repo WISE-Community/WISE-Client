@@ -18,13 +18,13 @@ export class TeacherNodeService extends NodeService {
   public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
 
   constructor(
-    protected dataService: TeacherDataService,
-    protected dialog: MatDialog,
     protected configService: ConfigService,
     protected constraintService: ConstraintService,
+    protected dataService: TeacherDataService,
+    protected dialog: MatDialog,
     protected projectService: TeacherProjectService
   ) {
-    super(dataService, dialog, configService, constraintService, projectService);
+    super(configService, constraintService, dataService, dialog, projectService);
   }
 
   broadcastComponentShowSubmitButtonValueChanged(args: any): void {

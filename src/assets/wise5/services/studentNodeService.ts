@@ -17,14 +17,14 @@ export class StudentNodeService extends NodeService {
   private transitionResults = {};
 
   constructor(
-    protected dataService: StudentDataService,
-    protected dialog: MatDialog,
     protected configService: ConfigService,
     protected constraintService: ConstraintService,
+    protected dataService: StudentDataService,
+    protected dialog: MatDialog,
     private nodeStatusService: NodeStatusService,
     protected projectService: ProjectService
   ) {
-    super(dataService, dialog, configService, constraintService, projectService);
+    super(configService, constraintService, dataService, dialog, projectService);
   }
 
   setCurrentNode(nodeId: string): void {
