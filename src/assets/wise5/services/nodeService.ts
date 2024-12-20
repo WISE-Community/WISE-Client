@@ -167,31 +167,6 @@ export abstract class NodeService {
     return transitionResult;
   }
 
-  /**
-   * Evaluate the transition logic for the current node and create branch
-   * path taken event if necessary.
-   */
-  evaluateTransitionLogic(): void {
-    const currentNode = this.projectService.getNode(this.dataService.getCurrentNodeId());
-    const transitionLogic = currentNode.getTransitionLogic();
-    const branchEvents = this.dataService.getBranchPathTakenEventsByNodeId(currentNode.id);
-    const alreadyBranched = branchEvents.length > 0;
-    if ((alreadyBranched && transitionLogic.canChangePath) || !alreadyBranched) {
-      this.chooseTransition(currentNode.id, transitionLogic).then((transition) => {
-        if (transition != null) {
-          this.saveBranchPathTakenEvent(currentNode.id, transition.to);
-        }
-      });
-    }
-  }
-
-  private saveBranchPathTakenEvent(fromNodeId: string, toNodeId: string): void {
-    this.dataService.saveVLEEvent(fromNodeId, null, null, 'Navigation', 'branchPathTaken', {
-      fromNodeId: fromNodeId,
-      toNodeId: toNodeId
-    });
-  }
-
   broadcastNodeSubmitClicked(args: any) {
     this.nodeSubmitClickedSource.next(args);
   }
