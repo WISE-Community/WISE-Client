@@ -3,7 +3,6 @@ import { NodeService } from './nodeService';
 import { Subject, Observable } from 'rxjs';
 import { TeacherDataService } from './teacherDataService';
 import { TeacherProjectService } from './teacherProjectService';
-import { MatDialog } from '@angular/material/dialog';
 import { ConfigService } from './configService';
 import { ConstraintService } from './constraintService';
 
@@ -21,10 +20,9 @@ export class TeacherNodeService extends NodeService {
     protected configService: ConfigService,
     protected constraintService: ConstraintService,
     protected dataService: TeacherDataService,
-    protected dialog: MatDialog,
     protected projectService: TeacherProjectService
   ) {
-    super(configService, constraintService, dataService, dialog, projectService);
+    super(configService, constraintService, dataService, projectService);
   }
 
   broadcastComponentShowSubmitButtonValueChanged(args: any): void {

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
 import { DataService } from '../../../app/services/data.service';
@@ -17,7 +16,6 @@ export abstract class NodeService {
     protected configService: ConfigService,
     protected constraintService: ConstraintService,
     protected dataService: DataService,
-    protected dialog: MatDialog,
     protected projectService: ProjectService
   ) {}
 

@@ -20,11 +20,11 @@ export class StudentNodeService extends NodeService {
     protected configService: ConfigService,
     protected constraintService: ConstraintService,
     protected dataService: StudentDataService,
-    protected dialog: MatDialog,
+    private dialog: MatDialog,
     private nodeStatusService: NodeStatusService,
     protected projectService: ProjectService
   ) {
-    super(configService, constraintService, dataService, dialog, projectService);
+    super(configService, constraintService, dataService, projectService);
   }
 
   setCurrentNode(nodeId: string): void {
