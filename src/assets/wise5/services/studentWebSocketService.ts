@@ -1,16 +1,14 @@
-'use strict';
-
 import { Injectable } from '@angular/core';
 import { AnnotationService } from './annotationService';
 import { TagService } from './tagService';
 import { StudentDataService } from './studentDataService';
-import { NodeService } from './nodeService';
 import { ProjectService } from './projectService';
 import { Message } from '@stomp/stompjs';
 import { NotebookService } from './notebookService';
 import { StompService } from './stompService';
 import { ConfigService } from './configService';
 import { Annotation } from '../common/Annotation';
+import { StudentNodeService } from './studentNodeService';
 
 @Injectable()
 export class StudentWebSocketService {
@@ -18,7 +16,7 @@ export class StudentWebSocketService {
     private AnnotationService: AnnotationService,
     private configService: ConfigService,
     private dataService: StudentDataService,
-    private nodeService: NodeService,
+    private nodeService: StudentNodeService,
     private notebookService: NotebookService,
     private ProjectService: ProjectService,
     private stompService: StompService,
