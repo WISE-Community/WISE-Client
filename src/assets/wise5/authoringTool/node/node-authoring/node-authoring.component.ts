@@ -162,6 +162,14 @@ export class NodeAuthoringComponent implements OnInit {
     );
   }
 
+  private isElementInViewport(element: HTMLElement): boolean {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= -100 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) + 100
+    );
+  }
+
   /**
    * Temporarily highlight the specified components
    * @param components an array of components to highlight
@@ -170,7 +178,10 @@ export class NodeAuthoringComponent implements OnInit {
     // wait for the UI to update and then highlight the first component
     setTimeout(() => {
       if (components.length > 0) {
-        document.getElementById(components[0].id).scrollIntoView();
+        const element = document.getElementById(components[0].id);
+        if (!this.isElementInViewport(element)) {
+          element.scrollIntoView();
+        }
         components.forEach((component) => temporarilyHighlightElement(component.id));
       }
     }, 100);
