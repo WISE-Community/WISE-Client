@@ -349,25 +349,25 @@ export class TeacherDataService extends DataService {
     return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByNodeId);
   }
 
-  getComponentStatesByWorkgroupIdAndComponentId(workgroupId, componentId) {
+  getComponentStatesByWorkgroupIdAndComponentId(workgroupId: number, componentId: string): any[] {
     const componentStatesByWorkgroupId = this.getComponentStatesByWorkgroupId(workgroupId);
     const componentStatesByComponentId = this.getComponentStatesByComponentId(componentId);
     return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByComponentId);
   }
 
-  getEventsByWorkgroupId(workgroupId) {
+  getEventsByWorkgroupId(workgroupId: number): any[] {
     return this.studentData.eventsByWorkgroupId[workgroupId] || [];
   }
 
-  getEventsByNodeId(nodeId) {
+  getEventsByNodeId(nodeId: string): any[] {
     return this.studentData.eventsByNodeId[nodeId] || [];
   }
 
-  getAnnotationsToWorkgroupId(workgroupId: number) {
+  getAnnotationsToWorkgroupId(workgroupId: number): any[] {
     return this.studentData.annotationsToWorkgroupId[workgroupId] || [];
   }
 
-  getAnnotationsByNodeId(nodeId: string) {
+  getAnnotationsByNodeId(nodeId: string): any[] {
     return this.studentData.annotationsByNodeId[nodeId] || [];
   }
 
@@ -396,11 +396,11 @@ export class TeacherDataService extends DataService {
     this.currentPeriod = null;
   }
 
-  getCurrentPeriod() {
+  getCurrentPeriod(): any {
     return this.currentPeriod;
   }
 
-  getCurrentPeriodId() {
+  getCurrentPeriodId(): number {
     return this.currentPeriod.periodId;
   }
 
@@ -412,16 +412,12 @@ export class TeacherDataService extends DataService {
     this.periods = periods;
   }
 
-  setCurrentWorkgroup(workgroup) {
+  setCurrentWorkgroup(workgroup: any): void {
     this.currentWorkgroup = workgroup;
-    this.broadcastCurrentWorkgroupChanged({ currentWorkgroup: this.currentWorkgroup });
+    this.currentWorkgroupChangedSource.next({ currentWorkgroup: this.currentWorkgroup });
   }
 
-  broadcastCurrentWorkgroupChanged(args: any) {
-    this.currentWorkgroupChangedSource.next(args);
-  }
-
-  getCurrentWorkgroup() {
+  getCurrentWorkgroup(): any {
     return this.currentWorkgroup;
   }
 
