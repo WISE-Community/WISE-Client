@@ -17,7 +17,6 @@ export class TeacherDataService extends DataService {
   studentData: any;
   currentPeriod = null;
   currentWorkgroup = null;
-  currentStep = null;
   previousStep = null;
   periods = [];
   nodeGradingSort = 'team';
@@ -30,13 +29,13 @@ export class TeacherDataService extends DataService {
     this.currentWorkgroupChangedSource.asObservable();
 
   constructor(
+    private annotationService: AnnotationService,
+    private configService: ConfigService,
     private http: HttpClient,
-    private AnnotationService: AnnotationService,
-    private ConfigService: ConfigService,
-    protected ProjectService: TeacherProjectService,
-    private TeacherWebSocketService: TeacherWebSocketService
+    protected projectService: TeacherProjectService,
+    private webSocketService: TeacherWebSocketService
   ) {
-    super(ProjectService);
+    super(projectService);
     this.studentData = {
       annotationsByNodeId: {},
       annotationsToWorkgroupId: {},
@@ -47,16 +46,16 @@ export class TeacherDataService extends DataService {
     this.subscribeToEvents();
   }
 
-  subscribeToEvents() {
-    this.AnnotationService.annotationSavedToServer$.subscribe((annotation: Annotation) => {
+  private subscribeToEvents(): void {
+    this.annotationService.annotationSavedToServer$.subscribe((annotation: Annotation) => {
       this.handleAnnotationReceived(annotation);
     });
 
-    this.TeacherWebSocketService.newAnnotationReceived$.subscribe((annotation: Annotation) => {
+    this.webSocketService.newAnnotationReceived$.subscribe((annotation: Annotation) => {
       this.handleAnnotationReceived(annotation);
     });
 
-    this.TeacherWebSocketService.newStudentWorkReceived$.subscribe(({ studentWork }) => {
+    this.webSocketService.newStudentWorkReceived$.subscribe(({ studentWork }) => {
       this.addOrUpdateComponentState(studentWork);
       this.broadcastStudentWorkReceived({ studentWork: studentWork });
     });
@@ -74,81 +73,15 @@ export class TeacherDataService extends DataService {
       this.studentData.annotationsByNodeId[nodeId] = new Array();
     }
     this.studentData.annotationsByNodeId[nodeId].push(annotation);
-    this.AnnotationService.setAnnotations(this.studentData.annotations);
-    this.AnnotationService.broadcastAnnotationReceived(annotation);
+    this.annotationService.setAnnotations(this.studentData.annotations);
+    this.annotationService.broadcastAnnotationReceived(annotation);
   }
 
   saveEvent(context, nodeId, componentId, componentType, category, event, data) {
-    const newEvent = this.createEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      data
-    );
-    const events = [newEvent];
-    let body = new HttpParams().set('events', JSON.stringify(events));
-    body = this.addCommonParams(body);
-    const options = {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    };
-    const url = this.ConfigService.getConfigParam('teacherDataURL');
-    return this.http
-      .post(url, body, options)
-      .toPromise()
-      .then((data: any) => {
-        return data.events;
-      });
-  }
-
-  saveAddComponentEvent(nodeId: string, newComponent: any): void {
-    this.saveEvent('AuthoringTool', nodeId, null, null, 'Authoring', 'componentCreated', {
-      componentId: newComponent.id,
-      componentType: newComponent.type
-    });
-  }
-
-  addCommonParams(params) {
-    params = this.addProjectIdToHttpParams(params);
-    params = this.addRunIdToHttpParams(params);
-    params = this.addWorkgroupIdToHttpParams(params);
-    return params;
-  }
-
-  addProjectIdToHttpParams(params) {
-    const projectId = this.ConfigService.getProjectId();
-    if (projectId != null) {
-      return params.set('projectId', projectId);
-    } else {
-      return params;
-    }
-  }
-
-  addRunIdToHttpParams(params) {
-    const runId = this.ConfigService.getRunId();
-    if (runId != null) {
-      return params.set('runId', runId);
-    } else {
-      return params;
-    }
-  }
-
-  addWorkgroupIdToHttpParams(params) {
-    const workgroupId = this.ConfigService.getWorkgroupId();
-    if (workgroupId != null) {
-      return params.set('workgroupId', workgroupId);
-    } else {
-      return params;
-    }
-  }
-
-  createEvent(context, nodeId, componentId, componentType, category, event, data) {
     const newEvent = {
-      projectId: this.ConfigService.getProjectId(),
-      runId: this.ConfigService.getRunId(),
-      workgroupId: this.ConfigService.getWorkgroupId(),
+      projectId: this.configService.getProjectId(),
+      runId: this.configService.getRunId(),
+      workgroupId: this.configService.getWorkgroupId(),
       clientSaveTime: new Date().getTime(),
       context: context,
       nodeId: nodeId,
@@ -158,12 +91,45 @@ export class TeacherDataService extends DataService {
       event: event,
       data: data
     };
-    return newEvent;
+    let body = new HttpParams().set('events', JSON.stringify([newEvent]));
+    body = this.addCommonParams(body);
+    const options = {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    };
+    const url = this.configService.getConfigParam('teacherDataURL');
+    return this.http
+      .post(url, body, options)
+      .toPromise()
+      .then((data: any) => {
+        return data.events;
+      });
+  }
+
+  private addCommonParams(params: any): any {
+    params = this.addProjectIdToHttpParams(params);
+    params = this.addRunIdToHttpParams(params);
+    params = this.addWorkgroupIdToHttpParams(params);
+    return params;
+  }
+
+  private addProjectIdToHttpParams(params: any): any {
+    const projectId = this.configService.getProjectId();
+    return projectId != null ? params.set('projectId', projectId) : params;
+  }
+
+  private addRunIdToHttpParams(params: any): any {
+    const runId = this.configService.getRunId();
+    return runId != null ? params.set('runId', runId) : params;
+  }
+
+  private addWorkgroupIdToHttpParams(params: any): any {
+    const workgroupId = this.configService.getWorkgroupId();
+    return workgroupId != null ? params.set('workgroupId', workgroupId) : params;
   }
 
   retrieveStudentDataForNode(node: Node): Observable<any> {
     let params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
+      .set('runId', this.configService.getRunId())
       .set('getStudentWork', 'true')
       .set('getAnnotations', 'false')
       .set('getEvents', 'false');
@@ -174,9 +140,9 @@ export class TeacherDataService extends DataService {
     return this.retrieveStudentData(params);
   }
 
-  retrieveStudentDataByWorkgroupId(workgroupId) {
+  retrieveStudentDataByWorkgroupId(workgroupId: string): Observable<any> {
     const params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
+      .set('runId', this.configService.getRunId())
       .set('workgroupId', workgroupId)
       .set('toWorkgroupId', workgroupId)
       .set('getStudentWork', 'true')
@@ -185,9 +151,9 @@ export class TeacherDataService extends DataService {
     return this.retrieveStudentData(params);
   }
 
-  retrieveAnnotations() {
+  retrieveAnnotations(): Observable<any> {
     const params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
+      .set('runId', this.configService.getRunId())
       .set('getStudentWork', 'false')
       .set('getEvents', 'false')
       .set('getAnnotations', 'true');
@@ -195,7 +161,7 @@ export class TeacherDataService extends DataService {
   }
 
   retrieveStudentData(params): Observable<any> {
-    const url = this.ConfigService.getConfigParam('teacherDataURL');
+    const url = this.configService.getConfigParam('teacherDataURL');
     const options = {
       params: params
     };
@@ -206,7 +172,7 @@ export class TeacherDataService extends DataService {
     );
   }
 
-  handleStudentDataResponse(resultData) {
+  private handleStudentDataResponse(resultData: any): any {
     const { studentWorkList: componentStates, events, annotations } = resultData;
     if (componentStates != null) {
       this.processComponentStates(componentStates);
@@ -220,35 +186,29 @@ export class TeacherDataService extends DataService {
     return resultData;
   }
 
-  processComponentStates(componentStates) {
+  processComponentStates(componentStates: any[]): void {
     this.initializeComponentStatesDataStructures();
-    for (const componentState of componentStates) {
-      this.addOrUpdateComponentState(componentState);
-    }
+    componentStates.forEach((componentState) => this.addOrUpdateComponentState(componentState));
   }
 
-  initializeComponentStatesDataStructures(): void {
+  private initializeComponentStatesDataStructures(): void {
     this.studentData.componentStatesByWorkgroupId = {};
     this.studentData.componentStatesByNodeId = {};
     this.studentData.componentStatesByComponentId = {};
   }
 
-  processEvents(events) {
+  private processEvents(events: any[]): void {
     events.sort(serverSaveTimeComparator);
     this.studentData.allEvents = events;
-    this.initializeEventsDataStructures();
-    for (const event of events) {
-      this.addEventToEventsByWorkgroupId(event);
-      this.addEventToEventsByNodeId(event);
-    }
-  }
-
-  initializeEventsDataStructures() {
     this.studentData.eventsByWorkgroupId = {};
     this.studentData.eventsByNodeId = {};
+    events.forEach((event) => {
+      this.addEventToEventsByWorkgroupId(event);
+      this.addEventToEventsByNodeId(event);
+    });
   }
 
-  addEventToEventsByWorkgroupId(event) {
+  private addEventToEventsByWorkgroupId(event: any): void {
     const eventWorkgroupId = event.workgroupId;
     if (this.studentData.eventsByWorkgroupId[eventWorkgroupId] == null) {
       this.studentData.eventsByWorkgroupId[eventWorkgroupId] = new Array();
@@ -256,7 +216,7 @@ export class TeacherDataService extends DataService {
     this.studentData.eventsByWorkgroupId[eventWorkgroupId].push(event);
   }
 
-  addEventToEventsByNodeId(event) {
+  private addEventToEventsByNodeId(event: any): void {
     const eventNodeId = event.nodeId;
     if (this.studentData.eventsByNodeId[eventNodeId] == null) {
       this.studentData.eventsByNodeId[eventNodeId] = new Array();
@@ -264,22 +224,18 @@ export class TeacherDataService extends DataService {
     this.studentData.eventsByNodeId[eventNodeId].push(event);
   }
 
-  processAnnotations(annotations) {
-    this.initializeAnnotationsDataStructures();
-    this.studentData.annotations = annotations;
-    for (const annotation of annotations) {
-      this.addAnnotationToAnnotationsToWorkgroupId(annotation);
-      this.addAnnotationToAnnotationsByNodeId(annotation);
-    }
-    this.AnnotationService.setAnnotations(this.studentData.annotations);
-  }
-
-  initializeAnnotationsDataStructures(): void {
+  private processAnnotations(annotations: any[]): void {
     this.studentData.annotationsByNodeId = {};
     this.studentData.annotationsToWorkgroupId = {};
+    this.studentData.annotations = annotations;
+    annotations.forEach((annotation) => {
+      this.addAnnotationToAnnotationsToWorkgroupId(annotation);
+      this.addAnnotationToAnnotationsByNodeId(annotation);
+    });
+    this.annotationService.setAnnotations(this.studentData.annotations);
   }
 
-  addAnnotationToAnnotationsToWorkgroupId(annotation) {
+  private addAnnotationToAnnotationsToWorkgroupId(annotation: any): void {
     const annotationWorkgroupId = annotation.toWorkgroupId;
     if (!this.studentData.annotationsToWorkgroupId[annotationWorkgroupId]) {
       this.studentData.annotationsToWorkgroupId[annotationWorkgroupId] = new Array();
@@ -287,7 +243,7 @@ export class TeacherDataService extends DataService {
     this.studentData.annotationsToWorkgroupId[annotationWorkgroupId].push(annotation);
   }
 
-  addAnnotationToAnnotationsByNodeId(annotation) {
+  private addAnnotationToAnnotationsByNodeId(annotation: any): void {
     const annotationNodeId = annotation.nodeId;
     if (!this.studentData.annotationsByNodeId[annotationNodeId]) {
       this.studentData.annotationsByNodeId[annotationNodeId] = new Array();
@@ -295,16 +251,18 @@ export class TeacherDataService extends DataService {
     this.studentData.annotationsByNodeId[annotationNodeId].push(annotation);
   }
 
-  addOrUpdateComponentState(componentState) {
+  private addOrUpdateComponentState(componentState: any): void {
     this.addComponentStateByWorkgroupId(componentState);
     this.addComponentStateByNodeId(componentState);
     this.addComponentStateByComponentId(componentState);
   }
 
-  addComponentStateByWorkgroupId(componentState) {
+  private addComponentStateByWorkgroupId(componentState: any): void {
     const workgroupId = componentState.workgroupId;
     this.initializeComponentStatesByWorkgroupIdIfNecessary(workgroupId);
-    const index = this.getComponentStateByWorkgroupIdIndex(componentState);
+    const index = this.studentData.componentStatesByWorkgroupId[
+      componentState.workgroupId
+    ].findIndex((state) => state.id === componentState.id);
     if (index != -1) {
       this.studentData.componentStatesByWorkgroupId[workgroupId][index] = componentState;
     } else {
@@ -312,27 +270,18 @@ export class TeacherDataService extends DataService {
     }
   }
 
-  initializeComponentStatesByWorkgroupIdIfNecessary(workgroupId) {
+  private initializeComponentStatesByWorkgroupIdIfNecessary(workgroupId: string): void {
     if (this.studentData.componentStatesByWorkgroupId[workgroupId] == null) {
       this.studentData.componentStatesByWorkgroupId[workgroupId] = [];
     }
   }
 
-  getComponentStateByWorkgroupIdIndex(componentState) {
-    const workgroupId = componentState.workgroupId;
-    const componentStates = this.studentData.componentStatesByWorkgroupId[workgroupId];
-    for (let w = 0; w < componentStates.length; w++) {
-      if (componentStates[w].id === componentState.id) {
-        return w;
-      }
-    }
-    return -1;
-  }
-
-  addComponentStateByNodeId(componentState) {
+  private addComponentStateByNodeId(componentState: any): void {
     const nodeId = componentState.nodeId;
     this.initializeComponentStatesByNodeIdIfNecessary(nodeId);
-    const index = this.getComponentStateByNodeIdIndex(componentState);
+    const index = this.studentData.componentStatesByNodeId[componentState.nodeId].findIndex(
+      (state) => state.id === componentState.id
+    );
     if (index != -1) {
       this.studentData.componentStatesByNodeId[nodeId][index] = componentState;
     } else {
@@ -340,27 +289,18 @@ export class TeacherDataService extends DataService {
     }
   }
 
-  initializeComponentStatesByNodeIdIfNecessary(nodeId) {
+  private initializeComponentStatesByNodeIdIfNecessary(nodeId: string): void {
     if (this.studentData.componentStatesByNodeId[nodeId] == null) {
       this.studentData.componentStatesByNodeId[nodeId] = [];
     }
   }
 
-  getComponentStateByNodeIdIndex(componentState) {
-    const nodeId = componentState.nodeId;
-    const componentStates = this.studentData.componentStatesByNodeId[nodeId];
-    for (let n = 0; n < componentStates.length; n++) {
-      if (componentStates[n].id === componentState.id) {
-        return n;
-      }
-    }
-    return -1;
-  }
-
-  addComponentStateByComponentId(componentState) {
+  private addComponentStateByComponentId(componentState: any): void {
     const componentId = componentState.componentId;
     this.initializeComponentStatesByComponentIdIfNecessary(componentId);
-    const index = this.getComponentStateByComponentIdIndex(componentState);
+    const index = this.studentData.componentStatesByComponentId[
+      componentState.componentId
+    ].findIndex((state) => state.id === componentState.id);
     if (index != -1) {
       this.studentData.componentStatesByComponentId[componentId][index] = componentState;
     } else {
@@ -368,32 +308,21 @@ export class TeacherDataService extends DataService {
     }
   }
 
-  initializeComponentStatesByComponentIdIfNecessary(componentId) {
+  private initializeComponentStatesByComponentIdIfNecessary(componentId: string): void {
     if (this.studentData.componentStatesByComponentId[componentId] == null) {
       this.studentData.componentStatesByComponentId[componentId] = [];
     }
   }
 
-  getComponentStateByComponentIdIndex(componentState) {
-    const componentId = componentState.componentId;
-    const componentStates = this.studentData.componentStatesByComponentId[componentId];
-    for (let c = 0; c < componentStates.length; c++) {
-      if (componentStates[c].id === componentState.id) {
-        return c;
-      }
-    }
-    return -1;
-  }
-
-  getComponentStatesByWorkgroupId(workgroupId) {
+  getComponentStatesByWorkgroupId(workgroupId: number): any[] {
     return this.studentData.componentStatesByWorkgroupId[workgroupId] || [];
   }
 
-  getComponentStatesByNodeId(nodeId) {
+  getComponentStatesByNodeId(nodeId: string): any[] {
     return this.studentData.componentStatesByNodeId[nodeId] || [];
   }
 
-  getComponentStatesByComponentId(componentId) {
+  getComponentStatesByComponentId(componentId: string): any[] {
     return this.studentData.componentStatesByComponentId[componentId] || [];
   }
 
@@ -420,45 +349,41 @@ export class TeacherDataService extends DataService {
     return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByNodeId);
   }
 
-  getComponentStatesByWorkgroupIdAndComponentId(workgroupId, componentId) {
+  getComponentStatesByWorkgroupIdAndComponentId(workgroupId: number, componentId: string): any[] {
     const componentStatesByWorkgroupId = this.getComponentStatesByWorkgroupId(workgroupId);
     const componentStatesByComponentId = this.getComponentStatesByComponentId(componentId);
     return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByComponentId);
   }
 
-  getEventsByWorkgroupId(workgroupId) {
+  getEventsByWorkgroupId(workgroupId: number): any[] {
     return this.studentData.eventsByWorkgroupId[workgroupId] || [];
   }
 
-  getEventsByNodeId(nodeId) {
+  getEventsByNodeId(nodeId: string): any[] {
     return this.studentData.eventsByNodeId[nodeId] || [];
   }
 
-  getAnnotationsToWorkgroupId(workgroupId: number) {
+  getAnnotationsToWorkgroupId(workgroupId: number): any[] {
     return this.studentData.annotationsToWorkgroupId[workgroupId] || [];
   }
 
-  getAnnotationsByNodeId(nodeId: string) {
+  getAnnotationsByNodeId(nodeId: string): any[] {
     return this.studentData.annotationsByNodeId[nodeId] || [];
   }
 
-  setCurrentPeriod(period) {
+  setCurrentPeriod(period: any): void {
     const previousPeriod = this.currentPeriod;
     this.currentPeriod = period;
     this.clearCurrentWorkgroupIfNecessary(this.currentPeriod.periodId);
     if (previousPeriod == null || previousPeriod.periodId != this.currentPeriod.periodId) {
-      this.broadcastCurrentPeriodChanged({
+      this.currentPeriodChangedSource.next({
         previousPeriod: previousPeriod,
         currentPeriod: this.currentPeriod
       });
     }
   }
 
-  broadcastCurrentPeriodChanged(previousAndCurrentPeriod: any) {
-    this.currentPeriodChangedSource.next(previousAndCurrentPeriod);
-  }
-
-  clearCurrentWorkgroupIfNecessary(periodId) {
+  private clearCurrentWorkgroupIfNecessary(periodId: number): void {
     const currentWorkgroup = this.getCurrentWorkgroup();
     if (currentWorkgroup) {
       if (periodId !== -1 && currentWorkgroup.periodId !== periodId) {
@@ -471,11 +396,11 @@ export class TeacherDataService extends DataService {
     this.currentPeriod = null;
   }
 
-  getCurrentPeriod() {
+  getCurrentPeriod(): any {
     return this.currentPeriod;
   }
 
-  getCurrentPeriodId() {
+  getCurrentPeriodId(): number {
     return this.currentPeriod.periodId;
   }
 
@@ -487,29 +412,17 @@ export class TeacherDataService extends DataService {
     this.periods = periods;
   }
 
-  setCurrentWorkgroup(workgroup) {
+  setCurrentWorkgroup(workgroup: any): void {
     this.currentWorkgroup = workgroup;
-    this.broadcastCurrentWorkgroupChanged({ currentWorkgroup: this.currentWorkgroup });
+    this.currentWorkgroupChangedSource.next({ currentWorkgroup: this.currentWorkgroup });
   }
 
-  broadcastCurrentWorkgroupChanged(args: any) {
-    this.currentWorkgroupChangedSource.next(args);
-  }
-
-  getCurrentWorkgroup() {
+  getCurrentWorkgroup(): any {
     return this.currentWorkgroup;
   }
 
-  setCurrentStep(step) {
-    this.currentStep = step;
-  }
-
-  getCurrentStep() {
-    return this.currentStep;
-  }
-
   getTotalScoreByWorkgroupId(workgroupId: number) {
-    return this.AnnotationService.getTotalScore(
+    return this.annotationService.getTotalScore(
       this.studentData.annotationsToWorkgroupId[workgroupId]
     );
   }
@@ -522,11 +435,11 @@ export class TeacherDataService extends DataService {
     );
   }
 
-  isWorkgroupInCurrentPeriod(workgroup: any): boolean {
+  private isWorkgroupInCurrentPeriod(workgroup: any): boolean {
     return this.currentPeriod.periodId === -1 || workgroup.periodId === this.currentPeriod.periodId;
   }
 
-  isCurrentWorkgroup(workgroupId: number): boolean {
+  private isCurrentWorkgroup(workgroupId: number): boolean {
     return this.currentWorkgroup.workgroupId === workgroupId;
   }
 }

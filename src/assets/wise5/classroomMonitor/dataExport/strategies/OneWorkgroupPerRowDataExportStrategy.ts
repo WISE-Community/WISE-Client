@@ -116,7 +116,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                 if (this.exportComponent(selectedNodesMap, nodeId, componentId)) {
                   var columnIdPrefix = nodeId + '-' + componentId;
                   var componentState =
-                    this.teacherDataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
+                    this.dataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
                       workgroupId,
                       nodeId,
                       componentId
@@ -247,7 +247,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
 
   private getLatestBranchPathTakenEvent(workgroupId: number, nodeId: string): any {
     return (
-      this.teacherDataService
+      this.dataService
         .getEventsByWorkgroupId(workgroupId)
         .findLast((event) => event.nodeId === nodeId && event.event === 'branchPathTaken') ?? null
     );

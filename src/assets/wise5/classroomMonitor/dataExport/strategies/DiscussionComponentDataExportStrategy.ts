@@ -44,7 +44,7 @@ export class DiscussionComponentDataExportStrategy extends AbstractComponentData
     nodeId: string
   ) {
     const rows = [];
-    const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
+    const componentStates = this.dataService.getComponentStatesByComponentId(component.id);
     const structuredPosts = this.getStructuredPosts(componentStates);
     let rowCounter = 1;
     for (let threadId of Object.keys(structuredPosts)) {

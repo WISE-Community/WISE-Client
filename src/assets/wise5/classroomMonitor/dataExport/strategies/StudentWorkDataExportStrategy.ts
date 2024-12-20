@@ -93,10 +93,10 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
         var componentRevisionCounter = {};
         let componentStates = [];
         if (this.exportType === 'allStudentWork') {
-          componentStates = this.teacherDataService.getComponentStatesByWorkgroupId(workgroupId);
+          componentStates = this.dataService.getComponentStatesByWorkgroupId(workgroupId);
         } else if (this.exportType === 'latestStudentWork') {
           this.injectRevisionCounterIntoComponentStates(
-            this.teacherDataService.getComponentStatesByWorkgroupId(workgroupId)
+            this.dataService.getComponentStatesByWorkgroupId(workgroupId)
           );
           componentStates = this.getLatestComponentStatesByWorkgroupId(workgroupId);
         }
@@ -171,7 +171,7 @@ export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
     const componentStates = [];
     const componentsFound = {};
     const componentStatesForWorkgroup =
-      this.teacherDataService.getComponentStatesByWorkgroupId(workgroupId);
+      this.dataService.getComponentStatesByWorkgroupId(workgroupId);
     for (let csb = componentStatesForWorkgroup.length - 1; csb >= 0; csb--) {
       const componentState = componentStatesForWorkgroup[csb];
       const key = componentState.nodeId + '-' + componentState.componentId;
