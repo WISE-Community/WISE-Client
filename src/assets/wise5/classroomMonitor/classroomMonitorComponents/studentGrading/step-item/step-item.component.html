@@ -26,35 +26,40 @@
       <div fxFlex="{{ showScore ? 30 : 20 }}" fxLayout="row" fxLayoutAlign="center center">
         <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass" />
       </div>
-      <div *ngIf="showScore" fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
-        <workgroup-node-score [score]="score" [maxScore]="maxScore" />
-      </div>
+      @if (showScore) {
+        <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+          <workgroup-node-score [score]="score" [maxScore]="maxScore" />
+        </div>
+      }
     </button>
   </div>
-  <mat-list-item *ngIf="expand && !disabled" class="grading__item-container">
-    <div class="grading__item">
-      <ng-container *ngFor="let component of components; let index = index">
-        <div
-          *ngIf="componentIdToIsVisible[component.id]"
-          id="component_{{ component.id }}_{{ workgroupId }}"
-          class="component component--grading"
-        >
-          <h3 class="accent-1 strong gray-lightest-bg component__header">
-            {{ index + 1 + '. ' + getComponentTypeLabel(component.type) }}&nbsp;
-            <component-new-work-badge
-              [componentId]="component.id"
-              [workgroupId]="workgroupId"
-              [nodeId]="nodeId"
-            />
-          </h3>
-          <workgroup-component-grading
-            class="component--grading__response__content"
-            [componentId]="component.id"
-            [workgroupId]="workgroupId"
-            [nodeId]="nodeId"
-          />
-        </div>
-      </ng-container>
-    </div>
-  </mat-list-item>
+  @if (expand && !disabled) {
+    <mat-list-item class="grading__item-container">
+      <div class="grading__item">
+        @for (component of components; track component.id; let i = $index) {
+          @if (componentIdToIsVisible[component.id]) {
+            <div
+              id="component_{{ component.id }}_{{ workgroupId }}"
+              class="component component--grading"
+            >
+              <h3 class="accent-1 strong gray-lightest-bg component__header">
+                {{ i + 1 + '. ' + getComponentTypeLabel(component.type) }}&nbsp;
+                <component-new-work-badge
+                  [componentId]="component.id"
+                  [workgroupId]="workgroupId"
+                  [nodeId]="nodeId"
+                />
+              </h3>
+              <workgroup-component-grading
+                class="component--grading__response__content"
+                [componentId]="component.id"
+                [workgroupId]="workgroupId"
+                [nodeId]="nodeId"
+              />
+            </div>
+          }
+        }
+      </div>
+    </mat-list-item>
+  }
 </div>
