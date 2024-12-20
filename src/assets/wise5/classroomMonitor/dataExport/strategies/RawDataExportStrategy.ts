@@ -39,9 +39,7 @@ export class RawDataExportStrategy extends AbstractDataExportStrategy {
           var workgroupId = workgroup.workgroupId;
           if (this.controller.includeStudentWork) {
             workgroup.studentWork = [];
-            var componentStates = this.teacherDataService.getComponentStatesByWorkgroupId(
-              workgroupId
-            );
+            var componentStates = this.dataService.getComponentStatesByWorkgroupId(workgroupId);
             if (componentStates != null) {
               for (var c = 0; c < componentStates.length; c++) {
                 var componentState = componentStates[c];
@@ -59,7 +57,7 @@ export class RawDataExportStrategy extends AbstractDataExportStrategy {
           }
           if (this.controller.includeAnnotations) {
             workgroup.annotations = [];
-            var annotations = this.teacherDataService.getAnnotationsToWorkgroupId(workgroupId);
+            var annotations = this.dataService.getAnnotationsToWorkgroupId(workgroupId);
             if (annotations != null) {
               for (var a = 0; a < annotations.length; a++) {
                 var annotation = annotations[a];
@@ -77,7 +75,7 @@ export class RawDataExportStrategy extends AbstractDataExportStrategy {
           }
           if (this.controller.includeEvents) {
             workgroup.events = [];
-            var events = this.teacherDataService.getEventsByWorkgroupId(workgroupId);
+            var events = this.dataService.getEventsByWorkgroupId(workgroupId);
             if (events != null) {
               for (var e = 0; e < events.length; e++) {
                 var event = events[e];
