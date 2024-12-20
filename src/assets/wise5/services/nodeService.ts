@@ -42,17 +42,11 @@ export abstract class NodeService {
 
   abstract getPrevNodeId(currentId?: string): string;
 
-  /**
-   * Close the current node (and open the current node's parent group)
-   */
-  closeNode() {
-    let currentNode = null;
-    currentNode = this.dataService.getCurrentNode();
+  closeNode(): void {
+    const currentNode = this.dataService.getCurrentNode();
     if (currentNode) {
-      let currentNodeId = currentNode.id;
-      let parentNode = this.projectService.getParentGroup(currentNodeId);
-      let parentNodeId = parentNode.id;
-      this.setCurrentNode(parentNodeId);
+      const parentNode = this.projectService.getParentGroup(currentNode.id);
+      this.setCurrentNode(parentNode.id);
     }
   }
 
