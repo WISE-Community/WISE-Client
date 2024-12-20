@@ -3,7 +3,6 @@ import { NavItemScoreComponent } from '../../assets/wise5/classroomMonitor/class
 import { AlertStatusCornerComponent } from '../classroom-monitor/alert-status-corner/alert-status-corner.component';
 import { ComponentNewWorkBadgeComponent } from '../classroom-monitor/component-new-work-badge/component-new-work-badge.component';
 import { ComponentSelectComponent } from '../classroom-monitor/component-select/component-select.component';
-import { StepInfoComponent } from '../classroom-monitor/step-info/step-info.component';
 import { PeerGroupGradingModule } from './peer-group-grading.module';
 import { TeacherSummaryDisplayComponent } from '../../assets/wise5/directives/teacher-summary-display/teacher-summary-display.component';
 import { HighchartsChartModule } from 'highcharts-angular';
@@ -45,7 +44,6 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     NodeProgressViewComponent,
     NotebookGradingComponent,
     NotebookWorkgroupGradingComponent,
-    StepItemComponent,
     StudentGradingComponent,
     StudentGradingToolsComponent,
     ToolBarComponent
@@ -70,7 +68,7 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     SaveIndicatorComponent,
     SelectPeriodComponent,
     ShowNodeInfoDialogComponent,
-    StepInfoComponent,
+    StepItemComponent,
     StudentProgressComponent,
     StudentTeacherCommonModule,
     TeacherSummaryDisplayComponent,
