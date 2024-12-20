@@ -1,15 +1,3 @@
-<ng-template #addComponentButton let-afterComponentId="insertAfterComponentId">
-  <div fxLayout="row" fxLayoutAlign="end center">
-    <mat-divider fxFlex></mat-divider>
-    <add-component-button
-      class="add-component"
-      [insertAfterComponentId]="afterComponentId"
-      [node]="node"
-      (newComponentsEvent)="highlightComponents($event)"
-    />
-  </div>
-</ng-template>
-
 <div
   class="node-authoring-header"
   fxLayout="row wrap"
@@ -34,11 +22,7 @@
 </div>
 @if (components.length === 0 && !isGroupNode) {
   <p i18n>This step does not have any components.</p>
-  <add-component-button
-    class="add-component"
-    [node]="node"
-    (newComponentsEvent)="highlightComponents($event)"
-  />
+  <add-component [node]="node" (newComponentsEvent)="highlightComponents($event)" />
 }
 <div
   cdkDropList
@@ -48,10 +32,9 @@
   cdkScrollable
   fxLayout="column"
 >
-  <ng-container
-    [ngTemplateOutlet]="addComponentButton"
-    [ngTemplateOutletContext]="{ insertAfterComponentId: null }"
-  />
+  @if (components.length > 0) {
+    <add-component [node]="node" (newComponentsEvent)="highlightComponents($event)" />
+  }
   @for (component of components; track component.id; let i = $index; let last = $last) {
     <div cdkDrag [cdkDragDisabled]="components.length < 2">
       <div fxLayout="row">
@@ -138,9 +121,10 @@
           >
         </mat-card>
       </div>
-      <ng-container
-        [ngTemplateOutlet]="addComponentButton"
-        [ngTemplateOutletContext]="{ insertAfterComponentId: component.id }"
+      <add-component
+        [node]="node"
+        [afterComponentId]="component.id"
+        (newComponentsEvent)="highlightComponents($event)"
       />
     </div>
   }
