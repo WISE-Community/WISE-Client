@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { copy } from '../../../../common/object/object';
 import { ConfigService } from '../../../../services/configService';
@@ -6,6 +10,8 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { WorkgroupSelectAutocompleteComponent } from '../../../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 class Workgroup {
   periodId: number;
@@ -13,7 +19,16 @@ class Workgroup {
 }
 
 @Component({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    WorkgroupSelectAutocompleteComponent
+  ],
   selector: 'student-grading-tools',
+  standalone: true,
   templateUrl: './student-grading-tools.component.html'
 })
 export class StudentGradingToolsComponent implements OnInit {
@@ -64,21 +79,19 @@ export class StudentGradingToolsComponent implements OnInit {
   private updateModel(): void {
     this.avatarColor = getAvatarColorForWorkgroupId(this.workgroupId);
     this.periodId = this.dataService.getCurrentPeriod().periodId;
-    this.filterWorkgroupsForPeriod();
-    this.workgroups = this.workgroups
-      .sort(this.sortByWorkgroupId)
-      .filter((workgroup) => workgroup.workgroupId != null);
+    this.filterWorkgroups();
+    this.sortWorkgroups();
     this.setNextAndPrev();
   }
 
-  private sortByWorkgroupId(a: Workgroup, b: Workgroup): number {
-    return a.workgroupId - b.workgroupId;
+  private filterWorkgroups(): void {
+    this.workgroups = copy(this.configService.getClassmateUserInfos())
+      .filter((workgroup) => this.periodId === -1 || workgroup.periodId === this.periodId)
+      .filter((workgroup) => workgroup.workgroupId != null);
   }
 
-  private filterWorkgroupsForPeriod(): void {
-    this.workgroups = copy(this.configService.getClassmateUserInfos()).filter(
-      (workgroup) => this.periodId === -1 || workgroup.periodId === this.periodId
-    );
+  private sortWorkgroups(): void {
+    this.workgroups = this.workgroups.sort((a, b) => a.workgroupId - b.workgroupId);
   }
 
   private setNextAndPrev(): void {

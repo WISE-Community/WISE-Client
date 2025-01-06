@@ -45,7 +45,6 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     NotebookGradingComponent,
     NotebookWorkgroupGradingComponent,
     StudentGradingComponent,
-    StudentGradingToolsComponent,
     ToolBarComponent
   ],
   imports: [
@@ -69,6 +68,7 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     SelectPeriodComponent,
     ShowNodeInfoDialogComponent,
     StepItemComponent,
+    StudentGradingToolsComponent,
     StudentProgressComponent,
     StudentTeacherCommonModule,
     TeacherSummaryDisplayComponent,
