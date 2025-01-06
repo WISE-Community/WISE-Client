@@ -15,8 +15,7 @@
     @if (showStepTools) {
       <grading-step-tools />
     }
-    <student-grading-tools *ngIf="showTeamTools" [workgroupId]="workgroupId">
-    </student-grading-tools>
+    <student-grading-tools *ngIf="showTeamTools" [workgroupId]="workgroupId" />
     <span fxFlex></span>
     <save-indicator />
     <select-period *ngIf="showPeriodSelect" />
