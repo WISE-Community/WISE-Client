@@ -2,8 +2,6 @@
   <div class="toolbar__tools" fxLayout="row" fxLayoutAlign="start center">
     <button
       mat-icon-button
-      aria-label="Main Menu"
-      i18n-aria-label
       (click)="toggleMenu()"
       matTooltip="Main Menu"
       matTooltipPosition="below"
@@ -11,13 +9,17 @@
     >
       <mat-icon>menu</mat-icon>
     </button>
-    <span class="toolbar__title" *ngIf="!(showStepTools || showTeamTools)">{{ viewName }}</span>
-    @if (showStepTools) {
+    @if (!(showStepTools || showTeamTools)) {
+      <span class="toolbar__title">{{ viewName }}</span>
+    } @else if (showStepTools) {
       <grading-step-tools />
+    } @else if (showTeamTools) {
+      <student-grading-tools [workgroupId]="workgroupId" />
     }
-    <student-grading-tools *ngIf="showTeamTools" [workgroupId]="workgroupId" />
     <span fxFlex></span>
     <save-indicator />
-    <select-period *ngIf="showPeriodSelect" />
+    @if (showPeriodSelect) {
+      <select-period />
+    }
   </div>
 </mat-toolbar>

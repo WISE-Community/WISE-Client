@@ -14,7 +14,7 @@
         [runId]="runId"
         [runCode]="runCode"
       ></top-bar>
-      <tool-bar [workgroupId]="workgroupId" (onMenuToggle)="toggleMenu()"></tool-bar>
+      <tool-bar [workgroupId]="workgroupId" (onMenuToggle)="toggleMenu()" />
       <content id="content" fxFlex role="main" fxLayout="column" class="l-main">
         <router-outlet></router-outlet>
       </content>
