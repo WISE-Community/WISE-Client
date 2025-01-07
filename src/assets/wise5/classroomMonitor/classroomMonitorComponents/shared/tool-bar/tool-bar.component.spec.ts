@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatIconModule } from '@angular/material/icon';
-
 import { ToolBarComponent } from './tool-bar.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
+import { MockComponent } from 'ng-mocks';
+import { SelectPeriodComponent } from '../../select-period/select-period.component';
 
 describe('ToolBarComponent', () => {
   let component: ToolBarComponent;
@@ -11,9 +10,8 @@ describe('ToolBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ToolBarComponent],
-      imports: [MatIconModule, MatToolbarModule],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [MockComponent(SelectPeriodComponent)],
+      imports: [ClassroomMonitorTestingModule, ToolBarComponent]
     }).compileComponents();
   });
 

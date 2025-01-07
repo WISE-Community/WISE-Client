@@ -11,7 +11,6 @@ import { ComponentStudentModule } from '../../assets/wise5/components/component/
 import { NotebookWorkgroupGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component';
 import { PauseScreensMenuComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component';
 import { StepItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component';
-import { StudentGradingToolsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/student-grading-tools/student-grading-tools.component';
 import { ToolBarComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component';
 import { NodeGradingViewComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component';
 import { NotificationsMenuComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component';
@@ -28,11 +27,9 @@ import { GradingCommonModule } from './grading-common.module';
 import { ManageStudentsModule } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students.module';
 import { DataExportModule } from '../../assets/wise5/classroomMonitor/dataExport/data-export.module';
 import { RouterModule } from '@angular/router';
-import { SaveIndicatorComponent } from '../../assets/wise5/common/save-indicator/save-indicator.component';
 import { PreviewComponentComponent } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.component';
 import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
 import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
-import { GradingStepToolsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/grading-step-tools/grading-step-tools.component';
 import { GradingNodeService } from '../../assets/wise5/services/gradingNodeService';
 
 @NgModule({
@@ -44,8 +41,7 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     NodeProgressViewComponent,
     NotebookGradingComponent,
     NotebookWorkgroupGradingComponent,
-    StudentGradingComponent,
-    ToolBarComponent
+    StudentGradingComponent
   ],
   imports: [
     ComponentGradingComponent,
@@ -54,7 +50,6 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     ComponentStudentModule,
     DataExportModule,
     GradingCommonModule,
-    GradingStepToolsComponent,
     HighchartsChartModule,
     ManageStudentsModule,
     MilestoneModule,
@@ -64,15 +59,14 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     PeerGroupGradingModule,
     PreviewComponentComponent,
     RouterModule,
-    SaveIndicatorComponent,
     SelectPeriodComponent,
     ShowNodeInfoDialogComponent,
     StepItemComponent,
-    StudentGradingToolsComponent,
     StudentProgressComponent,
     StudentTeacherCommonModule,
     TeacherSummaryDisplayComponent,
-    TopBarComponent
+    TopBarComponent,
+    ToolBarComponent
   ],
   providers: [GradingNodeService]
 })
