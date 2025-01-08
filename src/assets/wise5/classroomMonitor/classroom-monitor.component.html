@@ -18,7 +18,7 @@
       <content id="content" fxFlex role="main" fxLayout="column" class="l-main">
         <router-outlet></router-outlet>
       </content>
-      <side-menu [views]="views"></side-menu>
+      <side-menu [views]="views" />
       @if (reportEnabled) {
         <notebook-report
           [ngClass]="{ 'report-full': reportFullscreen }"

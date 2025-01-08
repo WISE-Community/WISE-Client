@@ -1,15 +1,15 @@
 <div class="menu-sidebar">
-  <ng-container *ngFor="let view of views">
-    <button
-      mat-icon-button
-      *ngIf="view.type === 'primary' && view.active"
-      id="{{ view.route }}"
-      aria-label="{{ view.name }}"
-      (click)="goToView(view)"
-      matTooltip="{{ view.name }}"
-      matTooltipPosition="after"
-    >
-      <mat-icon>{{ view.icon }}</mat-icon>
-    </button>
-  </ng-container>
+  @for (view of views; track view.name) {
+    @if (view.type === 'primary' && view.active) {
+      <button
+        mat-icon-button
+        id="{{ view.route }}"
+        (click)="goToView(view)"
+        matTooltip="{{ view.name }}"
+        matTooltipPosition="after"
+      >
+        <mat-icon>{{ view.icon }}</mat-icon>
+      </button>
+    }
+  }
 </div>

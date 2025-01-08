@@ -59,6 +59,7 @@ import { EditBranchComponent } from '../../assets/wise5/authoringTool/edit-branc
 import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { AddComponentComponent } from '../../assets/wise5/authoringTool/node/add-component/add-component.component';
+import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,7 @@ import { AddComponentComponent } from '../../assets/wise5/authoringTool/node/add
     ProjectAssetAuthoringModule,
     ProjectListComponent,
     RouterModule,
+    SideMenuComponent,
     StructureAuthoringModule,
     StudentTeacherCommonModule,
     TeacherNodeIconComponent,
