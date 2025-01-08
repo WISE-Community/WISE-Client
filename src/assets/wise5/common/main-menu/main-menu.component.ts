@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -6,13 +6,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './main-menu.component.html',
   styleUrls: ['./main-menu.component.scss']
 })
-export class MainMenuComponent implements OnInit {
+export class MainMenuComponent {
   @Input() title: string;
   @Input() views: any = [];
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
-
-  ngOnInit(): void {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   protected goToView(view: any): void {
     if (view.action != null) {

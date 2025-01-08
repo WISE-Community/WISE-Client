@@ -31,6 +31,7 @@ import { PreviewComponentComponent } from '../../assets/wise5/authoringTool/comp
 import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
 import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
 import { GradingNodeService } from '../../assets/wise5/services/gradingNodeService';
+import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     PreviewComponentComponent,
     RouterModule,
     SelectPeriodComponent,
+    SideMenuComponent,
     ShowNodeInfoDialogComponent,
     StepItemComponent,
     StudentProgressComponent,

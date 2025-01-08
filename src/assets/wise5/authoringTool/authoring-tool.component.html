@@ -27,7 +27,9 @@
       >
         <router-outlet></router-outlet>
       </content>
-      <side-menu *ngIf="showToolbar" [views]="views"></side-menu>
+      @if (showToolbar) {
+        <side-menu [views]="views" />
+      }
     </mat-drawer-content>
   </mat-drawer-container>
 </div>

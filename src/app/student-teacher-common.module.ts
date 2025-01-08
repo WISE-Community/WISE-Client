@@ -38,16 +38,10 @@ import { StudentTeacherCommonServicesModule } from './student-teacher-common-ser
 import { MathModule } from './math/math.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { MainMenuComponent } from '../assets/wise5/common/main-menu/main-menu.component';
-import { SideMenuComponent } from '../assets/wise5/common/side-menu/side-menu.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
-  declarations: [
-    DialogResponseComponent,
-    DialogResponsesComponent,
-    MainMenuComponent,
-    SideMenuComponent
-  ],
+  declarations: [DialogResponseComponent, DialogResponsesComponent, MainMenuComponent],
   imports: [
     CommonModule,
     DragDropModule,
@@ -121,8 +115,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MathModule,
     NodeIconComponent,
     NotebookModule,
-    ReactiveFormsModule,
-    SideMenuComponent
+    ReactiveFormsModule
   ]
 })
 export class StudentTeacherCommonModule {}
