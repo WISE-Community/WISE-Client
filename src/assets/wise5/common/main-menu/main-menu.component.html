@@ -1,40 +1,28 @@
+<ng-template #viewTemplate let-type="type">
+  <mat-list class="menu-sidenav">
+    @for (view of views; track view.name) {
+      @if (view.type === type && view.active) {
+        <mat-list-item
+          role="button"
+          tabindex="0"
+          aria-label="{{ view.name }}"
+          (click)="goToView(view)"
+          (keyup.enter)="goToView(view)"
+          class="menu-sidenav__list-item mat-mdc-list-item-interactive"
+        >
+          <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <mat-icon class="secondary-text"> {{ view.icon }} </mat-icon>
+            <span class="mat-caption">{{ view.name }}</span>
+          </span>
+        </mat-list-item>
+      }
+    }
+  </mat-list>
+</ng-template>
+
 <mat-toolbar class="md-toolbar--sidenav">
   <div class="md-toolbar-tools dark-theme" i18n>{{ title }}</div>
 </mat-toolbar>
-<mat-list class="menu-sidenav">
-  <ng-container *ngFor="let view of views">
-    <mat-list-item
-      *ngIf="view.type === 'primary' && view.active"
-      role="button"
-      tabindex="0"
-      aria-label="{{ view.name }}"
-      (click)="goToView(view)"
-      (keyup.enter)="goToView(view)"
-      class="menu-sidenav__list-item mat-mdc-list-item-interactive"
-    >
-      <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-        <mat-icon class="secondary-text"> {{ view.icon }} </mat-icon>
-        <span class="mat-caption">{{ view.name }}</span>
-      </span>
-    </mat-list-item>
-  </ng-container>
-</mat-list>
-<mat-divider class="menu-sidenav__divider"></mat-divider>
-<mat-list class="menu-sidenav">
-  <ng-container *ngFor="let view of views">
-    <mat-list-item
-      *ngIf="view.type === 'secondary' && view.active"
-      role="button"
-      tabindex="0"
-      aria-label="{{ view.name }}"
-      (click)="goToView(view)"
-      (keyup.enter)="goToView(view)"
-      class="menu-sidenav__list-item mat-mdc-list-item-interactive"
-    >
-      <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-        <mat-icon class="secondary-text"> {{ view.icon }} </mat-icon>
-        <span class="mat-caption">{{ view.name }}</span>
-      </span>
-    </mat-list-item>
-  </ng-container>
-</mat-list>
+<ng-container [ngTemplateOutlet]="viewTemplate" [ngTemplateOutletContext]="{ type: 'primary' }" />
+<mat-divider class="menu-sidenav__divider" />
+<ng-container [ngTemplateOutlet]="viewTemplate" [ngTemplateOutletContext]="{ type: 'secondary' }" />

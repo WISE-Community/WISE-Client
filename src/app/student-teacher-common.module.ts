@@ -37,11 +37,10 @@ import { EditNotebookItemDialogModule } from '../assets/wise5/themes/default/not
 import { StudentTeacherCommonServicesModule } from './student-teacher-common-services.module';
 import { MathModule } from './math/math.module';
 import { MatMenuModule } from '@angular/material/menu';
-import { MainMenuComponent } from '../assets/wise5/common/main-menu/main-menu.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
-  declarations: [DialogResponseComponent, DialogResponsesComponent, MainMenuComponent],
+  declarations: [DialogResponseComponent, DialogResponsesComponent],
   imports: [
     CommonModule,
     DragDropModule,
@@ -88,7 +87,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     EditorModule,
     FlexLayoutModule,
     FormsModule,
-    MainMenuComponent,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
