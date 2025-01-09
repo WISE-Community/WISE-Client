@@ -1,6 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription, filter } from 'rxjs';
 import { Notification } from '../../../app/domain/notification';
 import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
@@ -48,8 +47,7 @@ export class ClassroomMonitorComponent implements OnInit {
     private projectService: TeacherProjectService,
     private router: Router,
     private runStatusService: RunStatusService,
-    private sessionService: SessionService,
-    private snackBar: MatSnackBar
+    private sessionService: SessionService
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +59,6 @@ export class ClassroomMonitorComponent implements OnInit {
     this.runId = this.configService.getRunId();
     this.initializeNotebook();
     this.initializeViews();
-    this.subscribeToServerConnectionStatus();
     this.subscribeToSessionWarning();
     this.subscribeToNotebookFullScreen();
     this.subscribeToRouterEvents();
@@ -134,14 +131,6 @@ export class ClassroomMonitorComponent implements OnInit {
     ];
   }
 
-  private subscribeToServerConnectionStatus(): void {
-    this.subscriptions.add(
-      this.notificationService.serverConnectionStatus$.subscribe((isConnected: boolean) => {
-        this.toggleServerDisconnectError(!isConnected);
-      })
-    );
-  }
-
   private subscribeToSessionWarning(): void {
     this.subscriptions.add(
       this.sessionService.showSessionWarning$.subscribe(() => {
@@ -186,18 +175,6 @@ export class ClassroomMonitorComponent implements OnInit {
 
   protected toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
-  }
-
-  private toggleServerDisconnectError(show: boolean): void {
-    if (show) {
-      this.snackBar.open(
-        $localize`Error: Data is not being saved! Check your internet connection.`,
-        'Error',
-        { duration: 0 }
-      );
-    } else {
-      this.snackBar.dismiss();
-    }
   }
 
   private logOut(): void {
