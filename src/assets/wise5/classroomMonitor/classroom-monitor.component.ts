@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Subscription, filter } from 'rxjs';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { Notification } from '../../../app/domain/notification';
 import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
 import { ConfigService } from '../services/configService';
@@ -11,30 +12,46 @@ import { SessionService } from '../services/sessionService';
 import { TeacherDataService } from '../services/teacherDataService';
 import { TeacherProjectService } from '../services/teacherProjectService';
 import { TeacherPauseScreenService } from '../services/teacherPauseScreenService';
-import { NavigationEnd, Router } from '@angular/router';
 import { RunStatusService } from '../services/runStatusService';
+import { CommonModule } from '@angular/common';
+import { TopBarComponent } from './classroomMonitorComponents/shared/top-bar/top-bar.component';
+import { ToolBarComponent } from './classroomMonitorComponents/shared/tool-bar/tool-bar.component';
+import { NotebookReportComponent } from '../../../app/notebook/notebook-report/notebook-report.component';
+import { SideMenuComponent } from '../common/side-menu/side-menu.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MainMenuComponent } from '../common/main-menu/main-menu.component';
 
 @Component({
   selector: 'classroom-monitor',
-  styleUrls: ['./classroom-monitor.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MainMenuComponent,
+    MatDialogModule,
+    MatSidenavModule,
+    NotebookReportComponent,
+    RouterModule,
+    SideMenuComponent,
+    ToolBarComponent,
+    TopBarComponent
+  ],
+  styleUrl: './classroom-monitor.component.scss',
   templateUrl: './classroom-monitor.component.html'
 })
 export class ClassroomMonitorComponent implements OnInit {
-  logoPath: string;
-  menuOpen: boolean;
-  notebookConfig: any;
-  notifications: Notification[];
-  projectId: number;
-  projectTitle: string;
-  reportEnabled: boolean;
-  reportFullscreen: boolean;
-  runCode: string;
-  runId: number;
-  showPeriodSelect: boolean;
-  subscriptions: Subscription = new Subscription();
-  title: string = $localize`Classroom Monitor`;
-  views: any[];
-  workgroupId: number;
+  protected logoPath: string;
+  protected menuOpen: boolean;
+  protected notebookConfig: any;
+  protected notifications: Notification[];
+  protected projectId: number;
+  protected projectTitle: string;
+  protected reportEnabled: boolean;
+  protected reportFullscreen: boolean;
+  protected runCode: string;
+  protected runId: number;
+  private subscriptions: Subscription = new Subscription();
+  protected views: any[];
+  protected workgroupId: number;
 
   constructor(
     private configService: ConfigService,

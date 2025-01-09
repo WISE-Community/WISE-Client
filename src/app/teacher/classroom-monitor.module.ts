@@ -11,12 +11,10 @@ import { ComponentStudentModule } from '../../assets/wise5/components/component/
 import { NotebookWorkgroupGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component';
 import { PauseScreensMenuComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component';
 import { StepItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component';
-import { ToolBarComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component';
 import { NodeGradingViewComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component';
 import { NotificationsMenuComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component';
 import { NavItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component';
 import { NodeProgressViewComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/node-progress-view/node-progress-view.component';
-import { TopBarComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component';
 import { NotebookGradingComponent } from '../../assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component';
 import { StudentGradingComponent } from '../../assets/wise5/classroomMonitor/student-grading/student-grading.component';
 import { StudentProgressComponent } from '../../assets/wise5/classroomMonitor/student-progress/student-progress.component';
@@ -31,13 +29,10 @@ import { PreviewComponentComponent } from '../../assets/wise5/authoringTool/comp
 import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
 import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
 import { GradingNodeService } from '../../assets/wise5/services/gradingNodeService';
-import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
-import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu.component';
 
 @NgModule({
   declarations: [
     AlertStatusCornerComponent,
-    ClassroomMonitorComponent,
     NavItemComponent,
     NodeGradingViewComponent,
     NodeProgressViewComponent,
@@ -46,6 +41,7 @@ import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu
     StudentGradingComponent
   ],
   imports: [
+    ClassroomMonitorComponent,
     ComponentGradingComponent,
     ComponentNewWorkBadgeComponent,
     ComponentSelectComponent,
@@ -53,7 +49,6 @@ import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu
     DataExportModule,
     GradingCommonModule,
     HighchartsChartModule,
-    MainMenuComponent,
     ManageStudentsModule,
     MilestoneModule,
     NavItemScoreComponent,
@@ -63,14 +58,11 @@ import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu
     PreviewComponentComponent,
     RouterModule,
     SelectPeriodComponent,
-    SideMenuComponent,
     ShowNodeInfoDialogComponent,
     StepItemComponent,
     StudentProgressComponent,
     StudentTeacherCommonModule,
-    TeacherSummaryDisplayComponent,
-    TopBarComponent,
-    ToolBarComponent
+    TeacherSummaryDisplayComponent
   ],
   providers: [GradingNodeService]
 })
