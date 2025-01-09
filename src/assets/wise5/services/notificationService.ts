@@ -18,10 +18,9 @@ export class NotificationService {
   public setGlobalMessage$: Observable<any> = this.setGlobalMessageSource.asObservable();
   private setIsJSONValidSource: Subject<any> = new Subject<any>();
   public setIsJSONValid$: Observable<any> = this.setIsJSONValidSource.asObservable();
-  private serverConnectionStatusSource: Subject<any> = new Subject<any>();
-  public serverConnectionStatus$: Observable<any> = this.serverConnectionStatusSource.asObservable();
   private viewCurrentAmbientNotificationSource: Subject<any> = new Subject<any>();
-  public viewCurrentAmbientNotification$: Observable<any> = this.viewCurrentAmbientNotificationSource.asObservable();
+  public viewCurrentAmbientNotification$: Observable<any> =
+    this.viewCurrentAmbientNotificationSource.asObservable();
 
   constructor(
     protected annotationService: AnnotationService,
@@ -465,10 +464,6 @@ export class NotificationService {
 
   broadcastSetIsJSONValid(args) {
     this.setIsJSONValidSource.next(args);
-  }
-
-  broadcastServerConnectionStatus(isConnected: boolean) {
-    this.serverConnectionStatusSource.next(isConnected);
   }
 
   broadcastViewCurrentAmbientNotification(args: any) {
