@@ -32,6 +32,7 @@ import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/c
 import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
 import { GradingNodeService } from '../../assets/wise5/services/gradingNodeService';
 import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
+import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu
     DataExportModule,
     GradingCommonModule,
     HighchartsChartModule,
+    MainMenuComponent,
     ManageStudentsModule,
     MilestoneModule,
     NavItemScoreComponent,

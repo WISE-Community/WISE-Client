@@ -1,9 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatListModule } from '@angular/material/list';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MainMenuComponent } from './main-menu.component';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 
 describe('MainMenuComponent', () => {
   let component: MainMenuComponent;
@@ -11,8 +8,8 @@ describe('MainMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MainMenuComponent],
-      imports: [MatDividerModule, MatListModule, MatToolbarModule, RouterTestingModule]
+      imports: [MainMenuComponent],
+      providers: [provideRouter([])]
     }).compileComponents();
   });
 

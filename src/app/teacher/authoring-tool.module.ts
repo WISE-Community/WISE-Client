@@ -60,6 +60,7 @@ import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/c
 import { MatExpansionModule } from '@angular/material/expansion';
 import { AddComponentComponent } from '../../assets/wise5/authoringTool/node/add-component/add-component.component';
 import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
+import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu
     ImportComponentModule,
     InsertNodeAfterButtonComponent,
     InsertNodeInsideButtonComponent,
+    MainMenuComponent,
     NgSelectModule,
     NodeAdvancedAuthoringModule,
     NodeIconAndTitleComponent,
