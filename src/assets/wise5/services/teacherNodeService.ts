@@ -3,7 +3,6 @@ import { NodeService } from './nodeService';
 import { Subject, Observable } from 'rxjs';
 import { TeacherDataService } from './teacherDataService';
 import { TeacherProjectService } from './teacherProjectService';
-import { MatDialog } from '@angular/material/dialog';
 import { ConfigService } from './configService';
 import { ConstraintService } from './constraintService';
 
@@ -18,13 +17,12 @@ export class TeacherNodeService extends NodeService {
   public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
 
   constructor(
-    protected dataService: TeacherDataService,
-    protected dialog: MatDialog,
     protected configService: ConfigService,
     protected constraintService: ConstraintService,
+    protected dataService: TeacherDataService,
     protected projectService: TeacherProjectService
   ) {
-    super(dataService, dialog, configService, constraintService, projectService);
+    super(configService, constraintService, dataService, projectService);
   }
 
   broadcastComponentShowSubmitButtonValueChanged(args: any): void {

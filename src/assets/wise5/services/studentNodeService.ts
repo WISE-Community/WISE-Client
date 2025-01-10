@@ -9,18 +9,22 @@ import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog
 import { Constraint } from '../../../app/domain/constraint';
 import { TransitionLogic } from '../common/TransitionLogic';
 import { StudentDataService } from './studentDataService';
+import { ChooseBranchPathDialogComponent } from '../../../app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
 
 @Injectable()
 export class StudentNodeService extends NodeService {
+  private chooseTransitionPromises = {};
+  private transitionResults = {};
+
   constructor(
-    protected dataService: StudentDataService,
-    protected dialog: MatDialog,
     protected configService: ConfigService,
     protected constraintService: ConstraintService,
+    protected dataService: StudentDataService,
+    private dialog: MatDialog,
     private nodeStatusService: NodeStatusService,
     protected projectService: ProjectService
   ) {
-    super(dataService, dialog, configService, constraintService, projectService);
+    super(configService, constraintService, dataService, projectService);
   }
 
   setCurrentNode(nodeId: string): void {
@@ -150,5 +154,137 @@ export class StudentNodeService extends NodeService {
         resolve(startId == null || startId === '' ? transitionToNodeId : startId);
       });
     }
+  }
+
+  /**
+   * Evaluate the transition logic for the current node and create branch
+   * path taken event if necessary.
+   */
+  evaluateTransitionLogic(): void {
+    const currentNode = this.projectService.getNode(this.dataService.getCurrentNodeId());
+    const transitionLogic = currentNode.getTransitionLogic();
+    const branchEvents = this.dataService.getBranchPathTakenEventsByNodeId(currentNode.id);
+    const alreadyBranched = branchEvents.length > 0;
+    if ((alreadyBranched && transitionLogic.canChangePath) || !alreadyBranched) {
+      this.chooseTransition(currentNode.id, transitionLogic).then((transition) => {
+        if (transition != null) {
+          this.saveBranchPathTakenEvent(currentNode.id, transition.to);
+        }
+      });
+    }
+  }
+
+  private saveBranchPathTakenEvent(fromNodeId: string, toNodeId: string): void {
+    this.dataService.saveVLEEvent(fromNodeId, null, null, 'Navigation', 'branchPathTaken', {
+      fromNodeId: fromNodeId,
+      toNodeId: toNodeId
+    });
+  }
+
+  /**
+   * Choose the transition the student will take
+   * @param nodeId the current node id
+   * @param transitionLogic an object containing transitions and parameters
+   * for how to choose a transition
+   * @returns a promise that will return a transition
+   */
+  protected chooseTransition(nodeId: string, transitionLogic: TransitionLogic): Promise<any> {
+    if (this.configService.isPreview() && this.chooseTransitionPromises[nodeId] != null) {
+      return this.chooseTransitionPromises[nodeId];
+    }
+    const promise = this.getChooseTransitionPromise(nodeId, transitionLogic);
+    if (this.configService.isPreview()) {
+      const availableTransitions = this.getAvailableTransitions(transitionLogic.transitions);
+      const transitionResult = this.transitionResults[nodeId];
+      if (availableTransitions.length > 1 && transitionResult == null) {
+        this.chooseTransitionPromises[nodeId] = promise;
+      }
+    }
+    return promise;
+  }
+
+  private getChooseTransitionPromise(
+    nodeId: string,
+    transitionLogic: TransitionLogic
+  ): Promise<any> {
+    return new Promise((resolve) => {
+      let transitionResult = this.transitionResults[nodeId];
+      if (transitionResult == null || transitionLogic.canChangePath) {
+        /*
+         * we have not previously calculated the transition or the
+         * transition logic allows the student to change branch paths
+         * so we will calculate the transition again
+         */
+        const transitions = transitionLogic.transitions;
+        const availableTransitions = this.getAvailableTransitions(transitions);
+        if (availableTransitions.length == 0) {
+          transitionResult = null;
+        } else if (availableTransitions.length == 1) {
+          transitionResult = availableTransitions[0];
+        } else if (availableTransitions.length > 1) {
+          if (this.configService.isPreview()) {
+            // we are in preview mode so we will let the user choose the branch path to go to
+            if (transitionResult != null) {
+              /*
+               * the user has previously chosen the branch path so we will use the transition
+               * they last chose and not ask them again
+               */
+            } else {
+              this.letUserChooseTransition(availableTransitions, resolve);
+            }
+          } else {
+            transitionResult = this.chooseTransitionAutomatically(
+              transitionLogic.howToChooseAmongAvailablePaths,
+              availableTransitions,
+              transitionResult
+            );
+          }
+        }
+      }
+      if (transitionResult != null) {
+        this.transitionResults[nodeId] = transitionResult;
+        resolve(transitionResult);
+      }
+    });
+  }
+
+  private getAvailableTransitions(transitions: any): any[] {
+    return transitions.filter(
+      (transition) =>
+        transition.criteria == null || this.constraintService.evaluateCriterias(transition.criteria)
+    );
+  }
+
+  private letUserChooseTransition(transitions: any[], resolve: (value: any) => void): void {
+    this.dialog
+      .open(ChooseBranchPathDialogComponent, {
+        data: transitions.map((transition) => ({
+          nodeId: transition.to,
+          nodeTitle: this.projectService.getNodePositionAndTitle(transition.to),
+          transition: transition
+        })),
+        disableClose: true
+      })
+      .afterClosed()
+      .subscribe((result) => resolve(result));
+  }
+
+  private chooseTransitionAutomatically(
+    howToChooseAmongAvailablePaths: string,
+    availableTransitions: any[],
+    transitionResult: any
+  ): any {
+    if ([null, '', 'random'].includes(howToChooseAmongAvailablePaths)) {
+      const randomIndex = Math.floor(Math.random() * availableTransitions.length);
+      transitionResult = availableTransitions[randomIndex];
+    } else if (howToChooseAmongAvailablePaths === 'workgroupId') {
+      const index = this.configService.getWorkgroupId() % availableTransitions.length;
+      transitionResult = availableTransitions[index];
+    } else if (howToChooseAmongAvailablePaths === 'firstAvailable') {
+      transitionResult = availableTransitions[0];
+    } else if (howToChooseAmongAvailablePaths === 'lastAvailable') {
+      transitionResult = availableTransitions[availableTransitions.length - 1];
+    }
+    return transitionResult;
   }
 }

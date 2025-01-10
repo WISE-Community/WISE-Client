@@ -21,7 +21,6 @@ import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { EditNodeTitleComponent } from '../edit-node-title/edit-node-title.component';
-import { AddComponentButtonComponent } from '../add-component-button/add-component-button.component';
 import { CopyComponentButtonComponent } from '../copy-component-button/copy-component-button.component';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
@@ -33,6 +32,7 @@ import { CreateComponentService } from '../../../services/createComponentService
 import { VLEProjectService } from '../../../vle/vleProjectService';
 import { NotebookService } from '../../../services/notebookService';
 import { MatDividerModule } from '@angular/material/divider';
+import { AddComponentComponent } from '../add-component/add-component.component';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -51,7 +51,7 @@ describe('NodeAuthoringComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [NodeAuthoringComponent],
       imports: [
-        AddComponentButtonComponent,
+        AddComponentComponent,
         BrowserAnimationsModule,
         ComponentAuthoringModule,
         ComponentTypeServiceModule,

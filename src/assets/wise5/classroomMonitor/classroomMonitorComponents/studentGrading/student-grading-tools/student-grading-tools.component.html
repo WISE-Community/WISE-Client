@@ -1,8 +1,6 @@
 <div fxLayoutAlign="center center" fxLayoutGap="4px">
   <button
     mat-icon-button
-    aria-label="Previous Team"
-    i18n-aria-label
     [disabled]="!prevWorkgroup"
     (click)="goToTeam(prevWorkgroup)"
     matTooltip="Previous Team"
@@ -15,8 +13,6 @@
   <workgroup-select-autocomplete />
   <button
     mat-icon-button
-    aria-label="Next Team"
-    i18n-aria-label
     [disabled]="!nextWorkgroup"
     (click)="goToTeam(nextWorkgroup)"
     matTooltip="Next Team"

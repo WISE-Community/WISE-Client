@@ -1,18 +1,34 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatDividerModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatListModule
+  ],
   selector: 'main-menu',
-  templateUrl: './main-menu.component.html',
-  styleUrls: ['./main-menu.component.scss']
+  standalone: true,
+  styleUrl: './main-menu.component.scss',
+  templateUrl: './main-menu.component.html'
 })
-export class MainMenuComponent implements OnInit {
+export class MainMenuComponent {
   @Input() title: string;
   @Input() views: any = [];
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
-
-  ngOnInit(): void {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   protected goToView(view: any): void {
     if (view.action != null) {
