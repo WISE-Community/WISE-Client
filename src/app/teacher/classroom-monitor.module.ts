@@ -32,7 +32,6 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
 
 @NgModule({
   declarations: [
-    AlertStatusCornerComponent,
     NavItemComponent,
     NodeGradingViewComponent,
     NodeProgressViewComponent,
@@ -41,6 +40,7 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     StudentGradingComponent
   ],
   imports: [
+    AlertStatusCornerComponent,
     ClassroomMonitorComponent,
     ComponentGradingComponent,
     ComponentNewWorkBadgeComponent,

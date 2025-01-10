@@ -1,17 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
+  imports: [CommonModule, MatTooltipModule],
   selector: 'alert-status-corner',
-  templateUrl: 'alert-status-corner.component.html',
-  styleUrls: ['alert-status-corner.scss']
+  standalone: true,
+  styleUrl: 'alert-status-corner.scss',
+  templateUrl: 'alert-status-corner.component.html'
 })
 export class AlertStatusCornerComponent {
-  @Input()
-  hasNewAlert: boolean;
-
-  @Input()
-  hasAlert: boolean;
-
-  @Input()
-  message: string;
+  @Input() hasNewAlert: boolean;
+  @Input() message: string;
 }
