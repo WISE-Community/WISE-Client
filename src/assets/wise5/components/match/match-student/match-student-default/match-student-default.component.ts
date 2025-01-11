@@ -164,6 +164,7 @@ export class MatchStudentDefault extends ComponentStudent {
   }
 
   setStudentWork(componentState: any): void {
+    this.getBucketById(this.sourceBucketId).items = [];
     this.addComponentStateChoicesToBuckets(componentState);
     if (componentState.studentData.submitCounter != null) {
       this.submitCounter = componentState.studentData.submitCounter;
@@ -172,18 +173,17 @@ export class MatchStudentDefault extends ComponentStudent {
   }
 
   private addComponentStateChoicesToBuckets(componentState: any): void {
-    this.getBucketById(this.sourceBucketId).items = [];
     const choiceIds = this.choices.map((choice) => choice.id);
     for (const componentStateBucket of componentState.studentData.buckets) {
       if (this.buckets.some((bucket) => bucket.id === componentStateBucket.id)) {
         const bucket = this.getBucketById(componentStateBucket.id);
-        for (const componentStateChoice of componentStateBucket.items) {
+        componentStateBucket.items.forEach((componentStateChoice) => {
           this.addChoiceToBucket(componentStateChoice, bucket);
           const choiceLocation = choiceIds.indexOf(componentStateChoice.id);
           if (choiceLocation != -1) {
             choiceIds.splice(choiceLocation, 1);
           }
-        }
+        });
       }
     }
     const sourceBucket = this.getBucketById(this.sourceBucketId);
@@ -267,15 +267,15 @@ export class MatchStudentDefault extends ComponentStudent {
   }
 
   private showFeedbackOnUnchangedChoices(latestSubmitComponentState: any): void {
-    const choicesThatChangedSinceLastSubmit = this.getChoicesThatChangedSinceLastSubmit(
+    const choicesChangedSinceLastSubmit = this.getChoicesThatChangedSinceLastSubmit(
       latestSubmitComponentState
     );
-    if (choicesThatChangedSinceLastSubmit.length > 0) {
+    if (choicesChangedSinceLastSubmit.length > 0) {
       this.setIsSubmitDirty(true);
     } else {
       this.setIsSubmitDirty(false);
     }
-    this.checkAnswer(choicesThatChangedSinceLastSubmit);
+    this.checkAnswer(choicesChangedSinceLastSubmit);
   }
 
   setIsSubmitDirty(isSubmitDirty: boolean): void {
