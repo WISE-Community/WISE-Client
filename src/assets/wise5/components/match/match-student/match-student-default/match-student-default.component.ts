@@ -29,7 +29,7 @@ import { hasConnectedComponent } from '../../../../common/ComponentContent';
 
 @Component({
   templateUrl: 'match-student-default.component.html',
-  styleUrls: ['match-student-default.component.scss']
+  styleUrl: 'match-student-default.component.scss'
 })
 export class MatchStudentDefault extends ComponentStudent {
   autoScroll: any = require('dom-autoscroller');
@@ -126,7 +126,7 @@ export class MatchStudentDefault extends ComponentStudent {
   addNotebookItemToSourceBucket(notebookItem: NotebookItem): void {
     const choice = createChoiceFromNotebookItem(notebookItem);
     this.choices.push(choice);
-    this.getSourceBucket().items.push(choice);
+    this.getBucketById(this.sourceBucketId).items.push(choice);
   }
 
   dragEnter(event: CdkDragEnter) {
@@ -152,7 +152,7 @@ export class MatchStudentDefault extends ComponentStudent {
     this.studentDataChanged();
   }
 
-  registerAutoScroll(): void {
+  private registerAutoScroll(): void {
     this.autoScroll([document.querySelector('#content')], {
       margin: 30,
       scrollWhenOutside: true,
@@ -170,13 +170,13 @@ export class MatchStudentDefault extends ComponentStudent {
     this.processPreviousStudentWork();
   }
 
-  addComponentStateChoicesToBuckets(componentState: any): void {
-    this.clearSourceBucketChoices();
-    const bucketIds = this.getBucketIds();
-    const choiceIds = this.getChoiceIds();
+  private addComponentStateChoicesToBuckets(componentState: any): void {
+    this.getBucketById(this.sourceBucketId).items = [];
+    const bucketIds = this.buckets.map((bucket) => bucket.id);
+    const choiceIds = this.choices.map((choice) => choice.id);
     for (const componentStateBucket of componentState.studentData.buckets) {
       if (bucketIds.includes(componentStateBucket.id)) {
-        const bucket = this.matchService.getBucketById(componentStateBucket.id, this.buckets);
+        const bucket = this.getBucketById(componentStateBucket.id);
         for (const componentStateChoice of componentStateBucket.items) {
           this.addChoiceToBucket(componentStateChoice, bucket);
           const choiceLocation = choiceIds.indexOf(componentStateChoice.id);
@@ -186,23 +186,14 @@ export class MatchStudentDefault extends ComponentStudent {
         }
       }
     }
-    const sourceBucket = this.getSourceBucket();
+    const sourceBucket = this.getBucketById(this.sourceBucketId);
     for (const choiceId of choiceIds) {
       this.addAuthoredChoiceToBucket(choiceId, sourceBucket);
     }
   }
 
-  getSourceBucket(): any {
-    return this.matchService.getBucketById(this.sourceBucketId, this.buckets);
-  }
-
-  clearSourceBucketChoices(): void {
-    const sourceBucket = this.getSourceBucket();
-    sourceBucket.items = [];
-  }
-
-  private isAuthoredChoice(choiceId: string): boolean {
-    return this.getChoiceIds().includes(choiceId);
+  private getBucketById(id: string, buckets: any[] = this.buckets): any {
+    return buckets.find((bucket) => bucket.id === id);
   }
 
   addChoiceToBucket(choice: Choice, bucket: any): void {
@@ -215,6 +206,10 @@ export class MatchStudentDefault extends ComponentStudent {
     }
   }
 
+  private isAuthoredChoice(choiceId: string): boolean {
+    return this.choices.some((choice) => choice.id === choiceId);
+  }
+
   protected addAuthoredChoiceToBucket(choiceId: string, bucket: any): void {
     bucket.items.push(this.matchService.getChoiceById(choiceId, this.choices));
   }
@@ -224,10 +219,11 @@ export class MatchStudentDefault extends ComponentStudent {
    * since. This will also determine if submit is dirty.
    */
   private processPreviousStudentWork(): void {
-    const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
+    const latestComponentState =
+      this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+        this.nodeId,
+        this.componentId
+      );
     if (latestComponentState == null) {
       return;
     }
@@ -248,12 +244,12 @@ export class MatchStudentDefault extends ComponentStudent {
     }
   }
 
-  setGeneralComponentStatus(isCorrect: boolean, isSubmitDirty: boolean): void {
+  private setGeneralComponentStatus(isCorrect: boolean, isSubmitDirty: boolean): void {
     this.isCorrect = isCorrect;
     this.setIsSubmitDirty(isSubmitDirty);
   }
 
-  processDirtyStudentWork(): void {
+  private processDirtyStudentWork(): void {
     const latestSubmitComponentState = this.studentDataService.getLatestSubmitComponentState(
       this.nodeId,
       this.componentId
@@ -261,10 +257,11 @@ export class MatchStudentDefault extends ComponentStudent {
     if (latestSubmitComponentState != null) {
       this.showFeedbackOnUnchangedChoices(latestSubmitComponentState);
     } else {
-      const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
-        this.nodeId,
-        this.componentId
-      );
+      const latestComponentState =
+        this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+          this.nodeId,
+          this.componentId
+        );
       if (latestComponentState != null) {
         this.isCorrect = null;
         this.setIsSubmitDirty(true);
@@ -273,7 +270,7 @@ export class MatchStudentDefault extends ComponentStudent {
     }
   }
 
-  showFeedbackOnUnchangedChoices(latestSubmitComponentState: any): void {
+  private showFeedbackOnUnchangedChoices(latestSubmitComponentState: any): void {
     const choicesThatChangedSinceLastSubmit = this.getChoicesThatChangedSinceLastSubmit(
       latestSubmitComponentState
     );
@@ -290,28 +287,12 @@ export class MatchStudentDefault extends ComponentStudent {
     this.emitComponentSubmitDirty(isSubmitDirty);
   }
 
-  getBucketIds(): string[] {
-    return this.buckets.map((bucket) => bucket.id);
-  }
-
-  getChoiceIds(): string[] {
-    return this.choices.map((choice) => choice.id);
-  }
-
-  getIds(objects: any[]): string[] {
-    return objects.map((object) => {
-      return object.id;
-    });
-  }
-
   protected getChoicesThatChangedSinceLastSubmit(latestSubmitComponentState: any): string[] {
     const choicesThatChanged = [];
     const previousBuckets = latestSubmitComponentState.studentData.buckets;
     for (const currentBucket of this.buckets) {
-      const {
-        currentBucketChoiceIds,
-        previousBucketChoiceIds
-      } = this.getPreviousAndCurrentChoiceIds(previousBuckets, currentBucket);
+      const { currentBucketChoiceIds, previousBucketChoiceIds } =
+        this.getPreviousAndCurrentChoiceIds(previousBuckets, currentBucket);
       for (
         let currentChoiceIndex = 0;
         currentChoiceIndex < currentBucketChoiceIds.length;
@@ -328,16 +309,16 @@ export class MatchStudentDefault extends ComponentStudent {
   }
 
   protected getPreviousAndCurrentChoiceIds(previousBuckets: any[], currentBucket: any): any {
-    const currentBucketChoiceIds = this.getIds(currentBucket.items);
-    const previousBucket = this.matchService.getBucketById(currentBucket.id, previousBuckets);
-    const previousBucketChoiceIds = this.getIds(previousBucket.items);
+    const currentBucketChoiceIds = currentBucket.items.map((item) => item.id);
+    const previousBucket = this.getBucketById(currentBucket.id, previousBuckets);
+    const previousBucketChoiceIds = previousBucket.items.map((item) => item.id);
     return {
       currentBucketChoiceIds,
       previousBucketChoiceIds
     };
   }
 
-  isChoiceChanged(
+  private isChoiceChanged(
     previousBucketChoiceIds: string[],
     currentBucketChoiceIds: string[],
     currentChoiceIndex: number
@@ -354,7 +335,7 @@ export class MatchStudentDefault extends ComponentStudent {
     );
   }
 
-  choicePositionHasChangedInBucket(
+  private choicePositionHasChangedInBucket(
     previousBucketChoiceIds: string[],
     currentChoiceId: string,
     currentChoiceIndex: number
@@ -366,31 +347,21 @@ export class MatchStudentDefault extends ComponentStudent {
     return this.isNotebookEnabled() && this.componentContent.importPrivateNotes;
   }
 
-  initializeBuckets(): void {
+  private initializeBuckets(): void {
     this.buckets = [];
-    this.sourceBucket = this.createSourceBucket();
-    this.sourceBucket.items = this.sourceBucket.items.concat(this.choices);
-    this.buckets.push(this.sourceBucket);
-    for (const componentContentBucket of this.componentContent.buckets) {
-      const bucket = copy(componentContentBucket);
-      bucket.items = [];
-      this.buckets.push(bucket);
-    }
-  }
-
-  createSourceBucket(): any {
-    return {
+    this.sourceBucket = {
       id: this.sourceBucketId,
-      value: this.getSourceBucketLabel(),
+      value: this.componentContent.choicesLabel ?? $localize`Choices`,
       type: 'bucket',
       items: []
     };
-  }
-
-  getSourceBucketLabel(): string {
-    return this.componentContent.choicesLabel
-      ? this.componentContent.choicesLabel
-      : $localize`Choices`;
+    this.sourceBucket.items = this.sourceBucket.items.concat(this.choices);
+    this.buckets.push(this.sourceBucket);
+    this.componentContent.buckets.forEach((bucket) => {
+      const bucketCopy = copy(bucket);
+      bucketCopy.items = [];
+      this.buckets.push(bucketCopy);
+    });
   }
 
   /**
@@ -619,12 +590,12 @@ export class MatchStudentDefault extends ComponentStudent {
     return null;
   }
 
-  clearFeedback(): void {
-    for (const choice of this.choices) {
+  private clearFeedback(): void {
+    this.choices.forEach((choice) => {
       choice.isCorrect = null;
       choice.isIncorrectPosition = null;
       choice.feedback = null;
-    }
+    });
   }
 
   /**
@@ -633,16 +604,11 @@ export class MatchStudentDefault extends ComponentStudent {
    * @return {boolean} whether the choice has a correct position in any bucket
    */
   isAuthorHasSpecifiedACorrectPosition(choiceId: string): boolean {
-    for (const bucket of this.componentContent.feedback) {
-      for (const choice of bucket.choices) {
-        if (choice.choiceId === choiceId) {
-          if (choice.position != null) {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
+    return this.componentContent.feedback.some((feedbackBucket) =>
+      feedbackBucket.choices.some(
+        (choice) => choice.choiceId === choiceId && choice.position != null
+      )
+    );
   }
 
   createMergedComponentState(componentStates: any[]): any[] {
@@ -689,7 +655,7 @@ export class MatchStudentDefault extends ComponentStudent {
    */
   mergeChoices(choices1: Choice[], choices2: Choice[]): Choice[] {
     const mergedChoices = choices1.slice();
-    const choices1Ids = this.getIds(choices1);
+    const choices1Ids = choices1.map((choice) => choice.id);
     for (const choice2 of choices2) {
       if (!choices1Ids.includes(choice2.id)) {
         mergedChoices.push(choice2);
