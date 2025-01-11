@@ -172,10 +172,9 @@ export class MatchStudentDefault extends ComponentStudent {
 
   private addComponentStateChoicesToBuckets(componentState: any): void {
     this.getBucketById(this.sourceBucketId).items = [];
-    const bucketIds = this.buckets.map((bucket) => bucket.id);
     const choiceIds = this.choices.map((choice) => choice.id);
     for (const componentStateBucket of componentState.studentData.buckets) {
-      if (bucketIds.includes(componentStateBucket.id)) {
+      if (this.buckets.some((bucket) => bucket.id === componentStateBucket.id)) {
         const bucket = this.getBucketById(componentStateBucket.id);
         for (const componentStateChoice of componentStateBucket.items) {
           this.addChoiceToBucket(componentStateChoice, bucket);
@@ -187,9 +186,7 @@ export class MatchStudentDefault extends ComponentStudent {
       }
     }
     const sourceBucket = this.getBucketById(this.sourceBucketId);
-    for (const choiceId of choiceIds) {
-      this.addAuthoredChoiceToBucket(choiceId, sourceBucket);
-    }
+    choiceIds.forEach((choiceId) => this.addAuthoredChoiceToBucket(choiceId, sourceBucket));
   }
 
   private getBucketById(id: string, buckets: any[] = this.buckets): any {
@@ -211,7 +208,7 @@ export class MatchStudentDefault extends ComponentStudent {
   }
 
   protected addAuthoredChoiceToBucket(choiceId: string, bucket: any): void {
-    bucket.items.push(this.matchService.getChoiceById(choiceId, this.choices));
+    bucket.items.push(this.choices.find((choice) => choice.id === choiceId));
   }
 
   /**

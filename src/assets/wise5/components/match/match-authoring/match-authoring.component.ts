@@ -268,7 +268,7 @@ export class MatchAuthoring extends AbstractComponentAuthoring {
   }
 
   getChoiceTextById(choiceId: string): string {
-    const choice = this.matchService.getChoiceById(choiceId, this.componentContent.choices);
+    const choice = this.componentContent.choices.find((choice) => choice.id === choiceId);
     return choice ? choice.value : null;
   }
 

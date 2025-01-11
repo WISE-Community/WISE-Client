@@ -18,16 +18,14 @@ export class MatchStudentChoiceReuse extends MatchStudentDefault {
   }
 
   protected addAuthoredChoiceToBucket(choiceId: string, bucket: any): void {
-    bucket.items.push(copy(this.matchService.getChoiceById(choiceId, this.choices)));
+    bucket.items.push(copy(this.choices.find((choice) => choice.id === choiceId)));
   }
 
   protected getChoicesThatChangedSinceLastSubmit(latestSubmitComponentState: any): string[] {
     const previousBuckets = latestSubmitComponentState.studentData.buckets;
     const removedChoices = this.getNonSourceBuckets().flatMap((bucket: any) => {
-      const {
-        currentBucketChoiceIds,
-        previousBucketChoiceIds
-      } = this.getPreviousAndCurrentChoiceIds(previousBuckets, bucket);
+      const { currentBucketChoiceIds, previousBucketChoiceIds } =
+        this.getPreviousAndCurrentChoiceIds(previousBuckets, bucket);
       return previousBucketChoiceIds.filter(
         (choiceId: string) => !currentBucketChoiceIds.includes(choiceId)
       );

@@ -49,10 +49,6 @@ export class MatchService extends ComponentService {
     return false;
   }
 
-  getChoiceById(id: string, choices: any[]): any {
-    return this.getItemById(id, choices);
-  }
-
   getItemById(id: string, items: any[]): any {
     for (const item of items) {
       if (item.id === id) {
