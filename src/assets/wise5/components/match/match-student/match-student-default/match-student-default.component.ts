@@ -196,14 +196,10 @@ export class MatchStudentDefault extends ComponentStudent {
 
   private addChoiceToBucket(choice: Choice, bucket: Bucket): void {
     bucket.items.push(
-      this.isAuthoredChoice(choice)
+      this.choices.some((authoredChoice) => authoredChoice.id === choice.id)
         ? this.choices.find((authoredChoice) => authoredChoice.id === choice.id)
-        : choice
+        : choice // this is a choice that was created by the student
     );
-  }
-
-  private isAuthoredChoice(choice: Choice): boolean {
-    return this.choices.some((authoredChoice) => authoredChoice.id === choice.id);
   }
 
   protected addAuthoredChoiceToBucket(choiceId: string, bucket: Bucket): void {
