@@ -26,6 +26,7 @@ import { MatchCdkDragDrop } from '../MatchCdkDragDrop';
 import { Container } from '../container';
 import { Item } from '../item';
 import { hasConnectedComponent } from '../../../../common/ComponentContent';
+import { Bucket } from '../../bucket';
 
 @Component({
   templateUrl: 'match-student-default.component.html',
@@ -189,25 +190,23 @@ export class MatchStudentDefault extends ComponentStudent {
     choiceIds.forEach((choiceId) => this.addAuthoredChoiceToBucket(choiceId, sourceBucket));
   }
 
-  private getBucketById(id: string, buckets: any[] = this.buckets): any {
+  private getBucketById(id: string, buckets: Bucket[] = this.buckets): Bucket {
     return buckets.find((bucket) => bucket.id === id);
   }
 
-  addChoiceToBucket(choice: Choice, bucket: any): void {
-    const choiceId = choice.id;
-    if (this.isAuthoredChoice(choiceId)) {
-      this.addAuthoredChoiceToBucket(choiceId, bucket);
-    } else {
-      // This choice was created by the student
-      bucket.items.push(choice);
-    }
+  private addChoiceToBucket(choice: Choice, bucket: Bucket): void {
+    bucket.items.push(
+      this.isAuthoredChoice(choice)
+        ? this.choices.find((authoredChoice) => authoredChoice.id === choice.id)
+        : choice
+    );
   }
 
-  private isAuthoredChoice(choiceId: string): boolean {
-    return this.choices.some((choice) => choice.id === choiceId);
+  private isAuthoredChoice(choice: Choice): boolean {
+    return this.choices.some((authoredChoice) => authoredChoice.id === choice.id);
   }
 
-  protected addAuthoredChoiceToBucket(choiceId: string, bucket: any): void {
+  protected addAuthoredChoiceToBucket(choiceId: string, bucket: Bucket): void {
     bucket.items.push(this.choices.find((choice) => choice.id === choiceId));
   }
 
