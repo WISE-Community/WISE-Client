@@ -51,15 +51,15 @@ export class MatchStudentDefault extends ComponentStudent {
 
   constructor(
     protected annotationService: AnnotationService,
+    protected assetService: StudentAssetService,
     protected componentService: ComponentService,
     protected configService: ConfigService,
+    protected dataService: StudentDataService,
     protected dialog: MatDialog,
     protected matchService: MatchService,
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
-    private projectService: ProjectService,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService
+    private projectService: ProjectService
   ) {
     super(
       annotationService,
@@ -68,8 +68,8 @@ export class MatchStudentDefault extends ComponentStudent {
       dialog,
       nodeService,
       notebookService,
-      studentAssetService,
-      studentDataService
+      assetService,
+      dataService
     );
   }
 
@@ -211,11 +211,10 @@ export class MatchStudentDefault extends ComponentStudent {
    * since. This will also determine if submit is dirty.
    */
   private processPreviousStudentWork(): void {
-    const latestComponentState =
-      this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
-        this.nodeId,
-        this.componentId
-      );
+    const latestComponentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
+      this.nodeId,
+      this.componentId
+    );
     if (latestComponentState == null) {
       return;
     }
@@ -224,7 +223,7 @@ export class MatchStudentDefault extends ComponentStudent {
       this.setGeneralComponentStatus(latestComponentState.isCorrect, false);
       this.checkAnswer();
     } else {
-      const latestSubmitComponentState = this.studentDataService.getLatestSubmitComponentState(
+      const latestSubmitComponentState = this.dataService.getLatestSubmitComponentState(
         this.nodeId,
         this.componentId
       );
@@ -242,18 +241,17 @@ export class MatchStudentDefault extends ComponentStudent {
   }
 
   private processDirtyStudentWork(): void {
-    const latestSubmitComponentState = this.studentDataService.getLatestSubmitComponentState(
+    const latestSubmitComponentState = this.dataService.getLatestSubmitComponentState(
       this.nodeId,
       this.componentId
     );
     if (latestSubmitComponentState != null) {
       this.showFeedbackOnUnchangedChoices(latestSubmitComponentState);
     } else {
-      const latestComponentState =
-        this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
-          this.nodeId,
-          this.componentId
-        );
+      const latestComponentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
+        this.nodeId,
+        this.componentId
+      );
       if (latestComponentState != null) {
         this.isCorrect = null;
         this.setIsSubmitDirty(true);
