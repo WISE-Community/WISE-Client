@@ -95,9 +95,7 @@ export class MatchStudentDefault extends ComponentStudent {
     } else if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
     }
-    if (this.componentState != null && this.componentState.isSubmit) {
-      this.isLatestComponentStateSubmit = true;
-    }
+    this.isLatestComponentStateSubmit = this.componentState != null && this.componentState.isSubmit;
     this.tryDisableComponent();
     this.disableComponentIfNecessary();
     this.broadcastDoneRenderingComponent();
