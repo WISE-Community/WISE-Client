@@ -103,8 +103,14 @@ export class MatchStudentDefault extends ComponentStudent {
     this.broadcastDoneRenderingComponent();
   }
 
-  ngAfterContentInit() {
-    this.registerAutoScroll();
+  ngAfterContentInit(): void {
+    this.autoScroll([document.querySelector('#content')], {
+      margin: 30,
+      scrollWhenOutside: true,
+      autoScroll: function () {
+        return this.down;
+      }
+    });
   }
 
   private importPrivateNotes(): void {
@@ -151,16 +157,6 @@ export class MatchStudentDefault extends ComponentStudent {
     }
     event.container.element.nativeElement.classList.remove('primary-bg');
     this.studentDataChanged();
-  }
-
-  private registerAutoScroll(): void {
-    this.autoScroll([document.querySelector('#content')], {
-      margin: 30,
-      scrollWhenOutside: true,
-      autoScroll: function () {
-        return this.down;
-      }
-    });
   }
 
   setStudentWork(componentState: any): void {
