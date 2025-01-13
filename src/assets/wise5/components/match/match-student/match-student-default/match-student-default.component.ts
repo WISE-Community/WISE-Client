@@ -403,7 +403,7 @@ export class MatchStudentDefault extends ComponentStudent {
     const isCorrect = this.getCorrectness(feedbackObject, hasCorrectAnswer, position);
     choice.isCorrect = isCorrect;
     if (this.doesPositionMatter(feedbackObject.position)) {
-      choice.isIncorrectPosition = !this.isCorrectPosition(feedbackObject, position);
+      choice.isIncorrectPosition = feedbackObject.position !== position;
     }
     this.tryDisableComponent();
     return isCorrect;
@@ -424,7 +424,7 @@ export class MatchStudentDefault extends ComponentStudent {
     position: number,
     hasCorrectAnswer: boolean
   ): string {
-    if (this.isCorrectPosition(feedbackObject, position)) {
+    if (feedbackObject.position === position) {
       return feedbackObject.feedback
         ? feedbackObject.feedback
         : this.getNonPositionFeedback(feedbackObject, hasCorrectAnswer);
@@ -454,14 +454,10 @@ export class MatchStudentDefault extends ComponentStudent {
     if (!hasCorrectAnswer) {
       return null;
     } else if (this.doesPositionMatter(feedbackObject.position)) {
-      return this.isCorrectPosition(feedbackObject, position);
+      return feedbackObject.position === position;
     } else {
       return feedbackObject.isCorrect;
     }
-  }
-
-  private isCorrectPosition(feedbackObject: any, position: number): boolean {
-    return feedbackObject.position === position;
   }
 
   getFeedbackObject(bucketId: string, choiceId: string): any {
