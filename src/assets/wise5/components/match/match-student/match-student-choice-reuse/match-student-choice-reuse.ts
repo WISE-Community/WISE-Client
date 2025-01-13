@@ -21,7 +21,7 @@ export class MatchStudentChoiceReuse extends MatchStudentDefault {
     bucket.items.push(copy(this.choices.find((choice) => choice.id === choiceId)));
   }
 
-  protected getChoicesThatChangedSinceLastSubmit(latestSubmitComponentState: any): string[] {
+  protected getUpdatedChoicesSinceLastSubmit(latestSubmitComponentState: any): string[] {
     const previousBuckets = latestSubmitComponentState.studentData.buckets;
     const removedChoices = this.getNonSourceBuckets().flatMap((bucket: any) => {
       const { currentBucketChoiceIds, previousBucketChoiceIds } =
@@ -31,7 +31,7 @@ export class MatchStudentChoiceReuse extends MatchStudentDefault {
       );
     });
     return super
-      .getChoicesThatChangedSinceLastSubmit(latestSubmitComponentState)
+      .getUpdatedChoicesSinceLastSubmit(latestSubmitComponentState)
       .concat(removedChoices);
   }
 

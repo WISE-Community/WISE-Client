@@ -134,15 +134,15 @@ export class MatchStudentDefault extends ComponentStudent {
     this.getBucketById(this.sourceBucketId).items.push(choice);
   }
 
-  dragEnter(event: CdkDragEnter) {
+  protected dragEnter(event: CdkDragEnter): void {
     event.container.element.nativeElement.classList.add('primary-bg');
   }
 
-  dragExit(event: CdkDragExit) {
+  protected dragExit(event: CdkDragExit): void {
     event.container.element.nativeElement.classList.remove('primary-bg');
   }
 
-  protected drop(event: MatchCdkDragDrop<Container, Item>) {
+  protected drop(event: MatchCdkDragDrop<Container, Item>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data.items, event.item.data.position, event.currentIndex);
     } else {
@@ -255,15 +255,13 @@ export class MatchStudentDefault extends ComponentStudent {
   }
 
   private showFeedbackOnUnchangedChoices(latestSubmitComponentState: any): void {
-    const choicesChangedSinceLastSubmit = this.getChoicesThatChangedSinceLastSubmit(
-      latestSubmitComponentState
-    );
-    if (choicesChangedSinceLastSubmit.length > 0) {
+    const updatedChoices = this.getUpdatedChoicesSinceLastSubmit(latestSubmitComponentState);
+    if (updatedChoices.length > 0) {
       this.setIsSubmitDirty(true);
     } else {
       this.setIsSubmitDirty(false);
     }
-    this.checkAnswer(choicesChangedSinceLastSubmit);
+    this.checkAnswer(updatedChoices);
   }
 
   setIsSubmitDirty(isSubmitDirty: boolean): void {
@@ -271,8 +269,8 @@ export class MatchStudentDefault extends ComponentStudent {
     this.emitComponentSubmitDirty(isSubmitDirty);
   }
 
-  protected getChoicesThatChangedSinceLastSubmit(latestSubmitComponentState: any): string[] {
-    const choicesThatChanged = [];
+  protected getUpdatedChoicesSinceLastSubmit(latestSubmitComponentState: any): string[] {
+    const updatedChoices = [];
     const previousBuckets = latestSubmitComponentState.studentData.buckets;
     for (const currentBucket of this.buckets) {
       const { currentBucketChoiceIds, previousBucketChoiceIds } =
@@ -285,11 +283,11 @@ export class MatchStudentDefault extends ComponentStudent {
         if (
           this.isChoiceChanged(previousBucketChoiceIds, currentBucketChoiceIds, currentChoiceIndex)
         ) {
-          choicesThatChanged.push(currentBucketChoiceIds[currentChoiceIndex]);
+          updatedChoices.push(currentBucketChoiceIds[currentChoiceIndex]);
         }
       }
     }
-    return choicesThatChanged;
+    return updatedChoices;
   }
 
   protected getPreviousAndCurrentChoiceIds(previousBuckets: any[], currentBucket: any): any {

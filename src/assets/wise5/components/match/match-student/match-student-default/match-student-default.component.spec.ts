@@ -46,7 +46,7 @@ let notebookItemImageName: string;
 let notebookItemText: string;
 let starterBucketLabel = 'Starter Choices';
 
-describe('MatchStudentComponent', () => {
+describe('MatchStudentDefaultComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [MatchStudentDefault],
@@ -101,6 +101,7 @@ describe('MatchStudentComponent', () => {
     });
     spyOn(component, 'isNotebookEnabled').and.returnValue(false);
     spyOn(component, 'studentDataChanged').and.callFake(() => {});
+    spyOn(component, 'autoScroll').and.callFake(() => {});
     componentStateChoice1 = createChoice(choiceId1, choiceValue1);
     componentStateChoice2 = createChoice(choiceId2, choiceValue2);
     componentStateChoice3 = createChoice(choiceId3, choiceValue3);
@@ -247,7 +248,7 @@ function getChoicesThatChangedSinceLastSubmit() {
       manuallyAddChoiceToBucket(choice1, bucket1);
       manuallyAddChoiceToBucket(choice2, bucket2);
       manuallyAddChoiceToBucket(choice3, bucket3);
-      const choicesChanged = component.getChoicesThatChangedSinceLastSubmit(componentState);
+      const choicesChanged = component.getUpdatedChoicesSinceLastSubmit(componentState);
       expect(choicesChanged.length).toEqual(2);
       expect(choicesChanged[0]).toEqual(choice2.id);
       expect(choicesChanged[1]).toEqual(choice3.id);
@@ -261,7 +262,7 @@ function getChoicesThatChangedSinceLastSubmit() {
       manuallyAddChoiceToBucket(choice2, bucket1);
       manuallyAddChoiceToBucket(choice3, bucket1);
       spyOn(component, 'isAuthorHasSpecifiedACorrectPosition').and.returnValue(true);
-      const choicesChanged = component.getChoicesThatChangedSinceLastSubmit(componentState);
+      const choicesChanged = component.getUpdatedChoicesSinceLastSubmit(componentState);
       expect(choicesChanged.length).toEqual(2);
       expect(choicesChanged[0]).toEqual(choice1.id);
       expect(choicesChanged[1]).toEqual(choice3.id);
@@ -274,7 +275,7 @@ function getChoicesThatChangedSinceLastSubmit() {
       manuallyAddChoiceToBucket(choice1, bucket1);
       manuallyAddChoiceToBucket(choice2, bucket2);
       manuallyAddChoiceToBucket(choice3, bucket3);
-      const choicesChanged = component.getChoicesThatChangedSinceLastSubmit(componentState);
+      const choicesChanged = component.getUpdatedChoicesSinceLastSubmit(componentState);
       expect(choicesChanged.length).toEqual(0);
     });
   });
