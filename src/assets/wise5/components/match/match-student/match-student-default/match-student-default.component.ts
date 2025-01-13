@@ -26,7 +26,7 @@ import { MatchCdkDragDrop } from '../MatchCdkDragDrop';
 import { Container } from '../container';
 import { Item } from '../item';
 import { hasConnectedComponent } from '../../../../common/ComponentContent';
-import { Bucket } from '../../bucket';
+import { Bucket, mergeBucket } from '../../bucket';
 
 @Component({
   templateUrl: 'match-student-default.component.html',
@@ -607,7 +607,7 @@ export class MatchStudentDefault extends ComponentStudent {
     const mergedBuckets = [];
     for (const componentState of componentStates) {
       for (const bucket of componentState.studentData.buckets) {
-        this.mergeBucket(mergedBuckets, bucket);
+        mergeBucket(mergedBuckets, bucket);
       }
     }
     const mergedComponentState: any = this.createNewComponentState();
@@ -615,45 +615,6 @@ export class MatchStudentDefault extends ComponentStudent {
       buckets: mergedBuckets
     };
     return mergedComponentState;
-  }
-
-  /**
-   * Merge a bucket into the array of buckets. If the bucket id already exists in the array, merge
-   * the choices in the bucket. If the bucket does not already exist in the array, add the bucket.
-   * The array of buckets will be modified.
-   * @param {array} buckets an array of buckets
-   * @param {object} bucket the bucket
-   * @return {array} an array of buckets
-   */
-  mergeBucket(buckets: any[], bucket: any): any[] {
-    let bucketFound = false;
-    for (const tempBucket of buckets) {
-      if (tempBucket.id == bucket.id) {
-        bucketFound = true;
-        tempBucket.items = this.mergeChoices(tempBucket.items, bucket.items);
-      }
-    }
-    if (!bucketFound) {
-      buckets.push(bucket);
-    }
-    return buckets;
-  }
-
-  /**
-   * Merge two arrays of choices.
-   * @param {array} choices1 an array of choice objects
-   * @param {array} choices2 an array of choice objects
-   * @return {array} A new array of unique choice objects
-   */
-  mergeChoices(choices1: Choice[], choices2: Choice[]): Choice[] {
-    const mergedChoices = choices1.slice();
-    const choices1Ids = choices1.map((choice) => choice.id);
-    for (const choice2 of choices2) {
-      if (!choices1Ids.includes(choice2.id)) {
-        mergedChoices.push(choice2);
-      }
-    }
-    return mergedChoices;
   }
 
   addChoice(): void {

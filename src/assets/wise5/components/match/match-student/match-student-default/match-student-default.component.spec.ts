@@ -136,8 +136,6 @@ describe('MatchStudentComponent', () => {
   createComponentStateObject();
   isAuthorHasSpecifiedACorrectPosition();
   getFeedbackObject();
-  mergeBucket();
-  mergeChoices();
   getValueById();
   getCleanedValue();
 });
@@ -468,50 +466,6 @@ function getFeedbackObject() {
     it('should get feedback object', () => {
       const feedbackObject = component.getFeedbackObject(bucketId1, choiceId1);
       expect(feedbackObject.choiceId).toEqual(choiceId1);
-    });
-  });
-}
-
-function mergeBucket() {
-  describe('mergeBucket', () => {
-    it('should merge bucket when the bucket is not in the existing buckets array', () => {
-      const buckets = [bucket1, bucket2];
-      const mergedBuckets = component.mergeBucket(buckets, bucket3);
-      expect(mergedBuckets.length).toEqual(3);
-      expect(mergedBuckets[0].id).toEqual(bucketId1);
-      expect(mergedBuckets[1].id).toEqual(bucketId2);
-      expect(mergedBuckets[2].id).toEqual(bucketId3);
-    });
-
-    it('should merge bucket when the bucket is in the existing buckets array', () => {
-      manuallyAddChoiceToBucket(choice1, bucket1);
-      manuallyAddChoiceToBucket(choice2, bucket1);
-      const buckets = [bucket1, bucket2];
-      const anotherBucket1 = createBucket(bucketId1, bucketValue1, []);
-      manuallyAddChoiceToBucket(choice2, anotherBucket1);
-      manuallyAddChoiceToBucket(choice3, anotherBucket1);
-      const mergedBuckets = component.mergeBucket(buckets, anotherBucket1);
-      expect(mergedBuckets.length).toEqual(2);
-      expect(mergedBuckets[0].id).toEqual(bucketId1);
-      expect(mergedBuckets[1].id).toEqual(bucketId2);
-      expect(mergedBuckets[0].items.length).toEqual(3);
-      expect(mergedBuckets[0].items[0].id).toEqual(choiceId1);
-      expect(mergedBuckets[0].items[1].id).toEqual(choiceId2);
-      expect(mergedBuckets[0].items[2].id).toEqual(choiceId3);
-    });
-  });
-}
-
-function mergeChoices() {
-  describe('mergeChoices', () => {
-    it('should merge choices', () => {
-      const choices1 = [choice1, choice2];
-      const choices2 = [choice2, choice3];
-      const mergedChoices = component.mergeChoices(choices1, choices2);
-      expect(mergedChoices.length).toEqual(3);
-      expect(mergedChoices[0].id).toEqual(choiceId1);
-      expect(mergedChoices[1].id).toEqual(choiceId2);
-      expect(mergedChoices[2].id).toEqual(choiceId3);
     });
   });
 }
