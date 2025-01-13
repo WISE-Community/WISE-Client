@@ -1,5 +1,5 @@
-<div class="announcement mat-caption dark-theme center primary-bg" fxLayoutAlign="center center">
-  <span class="announcement__content" fxLayoutGap="4px" fxLayoutAlign="center center">
+<div class="announcement mat-caption dark-theme center primary-bg flex items-center justify-center">
+  <span class="announcement__content flex items-center justify-center gap-2">
     <span>{{ announcement.bannerText }}</span>
     @if (announcement.bannerButton) {
       <button mat-button color="primary" (click)="showAnnouncementDetails()">

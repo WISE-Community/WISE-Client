@@ -2,9 +2,12 @@
         'style/abstracts/mixins',
         'style/abstracts/functions';
 
+.features {
+  @apply flex flex-col sm:flex-row gap-8 items-center sm:items-stretch place-items-center;
+}
+
 app-blurb, app-call-to-action {
-  width: 360px;
-  max-width: 100%;
+  @apply max-w-full w-96;
 }
 
 /* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
@@ -17,6 +20,5 @@ discourse-latest-news {
 }
 
 .social-link {
-  display: flex;
-  align-items: center;
+  @apply flex items-center;
 }

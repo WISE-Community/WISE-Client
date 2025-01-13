@@ -6,7 +6,7 @@
 </button>
 <mat-menu #accountMenu="matMenu" xPosition="before">
   <div class="header-account-menu">
-    <div class="user-info" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="8px">
+    <div class="user-info flex flex-row items-center space-x-2">
       <mat-icon
         *ngIf="roles.includes('student'); else teacherAvatar"
         i18n-aria-label

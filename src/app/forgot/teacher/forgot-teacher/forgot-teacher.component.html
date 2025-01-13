@@ -1,12 +1,7 @@
 <h2 class="standalone__title accent" i18n>Teacher Forgot Username or Password</h2>
-<div
-  class="standalone__content forgot"
-  fxLayout="row"
-  fxLayout.xs="column"
-  fxFlexLayoutAlign="center center"
->
+<div class="standalone__content forgot flex flex-col sm:flex-row justify-center items-center">
   <app-call-to-action
-    fxFlex
+    class="flex-1 w-full"
     icon="account_box"
     iconColor="accent"
     i18n-headline
@@ -16,7 +11,7 @@
     destination="username"
   ></app-call-to-action>
   <app-call-to-action
-    fxFlex
+    class="flex-1 w-full"
     icon="lock"
     iconColor="accent"
     i18n-headline
