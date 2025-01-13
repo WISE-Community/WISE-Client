@@ -101,6 +101,26 @@ export class MatchStudentDefault extends ComponentStudent {
     this.broadcastDoneRenderingComponent();
   }
 
+  private shouldImportPrivateNotes(): boolean {
+    return this.isNotebookEnabled() && this.componentContent.importPrivateNotes;
+  }
+
+  private initializeBuckets(): void {
+    this.buckets = [];
+    this.sourceBucket = {
+      id: this.sourceBucketId,
+      value: this.componentContent.choicesLabel ?? $localize`Choices`,
+      type: 'bucket',
+      items: [...this.choices]
+    };
+    this.buckets.push(this.sourceBucket);
+    this.componentContent.buckets.forEach((bucket) => {
+      const bucketCopy = copy(bucket);
+      bucketCopy.items = [];
+      this.buckets.push(bucketCopy);
+    });
+  }
+
   ngAfterContentInit(): void {
     this.autoScroll([document.querySelector('#content')], {
       margin: 30,
@@ -323,27 +343,6 @@ export class MatchStudentDefault extends ComponentStudent {
     currentChoiceIndex: number
   ): boolean {
     return currentChoiceIndex != previousBucketChoiceIds.indexOf(currentChoiceId);
-  }
-
-  private shouldImportPrivateNotes(): boolean {
-    return this.isNotebookEnabled() && this.componentContent.importPrivateNotes;
-  }
-
-  private initializeBuckets(): void {
-    this.buckets = [];
-    this.sourceBucket = {
-      id: this.sourceBucketId,
-      value: this.componentContent.choicesLabel ?? $localize`Choices`,
-      type: 'bucket',
-      items: []
-    };
-    this.sourceBucket.items = this.sourceBucket.items.concat(this.choices);
-    this.buckets.push(this.sourceBucket);
-    this.componentContent.buckets.forEach((bucket) => {
-      const bucketCopy = copy(bucket);
-      bucketCopy.items = [];
-      this.buckets.push(bucketCopy);
-    });
   }
 
   /**
