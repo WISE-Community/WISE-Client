@@ -136,7 +136,6 @@ describe('MatchStudentComponent', () => {
   createComponentStateObject();
   isAuthorHasSpecifiedACorrectPosition();
   getFeedbackObject();
-  getValueById();
   getCleanedValue();
 });
 
@@ -466,15 +465,6 @@ function getFeedbackObject() {
     it('should get feedback object', () => {
       const feedbackObject = component.getFeedbackObject(bucketId1, choiceId1);
       expect(feedbackObject.choiceId).toEqual(choiceId1);
-    });
-  });
-}
-
-function getValueById() {
-  describe('getValueById', () => {
-    it('should get value by id', () => {
-      expect(component.getValueById(component.componentContent, choiceId1)).toEqual(choiceValue1);
-      expect(component.getValueById(component.componentContent, bucketId1)).toEqual(bucketValue1);
     });
   });
 }

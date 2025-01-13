@@ -565,21 +565,11 @@ export class MatchStudentDefault extends ComponentStudent {
    * @param matchObj
    */
   getCleanedValue(originalComponentContent: any, matchObj: any): string {
-    return this.getValueById(originalComponentContent, matchObj.id) ?? matchObj.value;
-  }
-
-  getValueById(componentContent: any, id: string): string {
-    for (const bucket of componentContent.buckets) {
-      if (bucket.id === id) {
-        return bucket.value;
-      }
-    }
-    for (const choice of componentContent.choices) {
-      if (choice.id === id) {
-        return choice.value;
-      }
-    }
-    return null;
+    return (
+      originalComponentContent.buckets
+        .concat(originalComponentContent.choices)
+        .find((obj) => obj.id === matchObj.id)?.value ?? matchObj.value
+    );
   }
 
   private clearFeedback(): void {
@@ -617,7 +607,7 @@ export class MatchStudentDefault extends ComponentStudent {
     return mergedComponentState;
   }
 
-  addChoice(): void {
+  protected addChoice(): void {
     this.dialog
       .open(AddMatchChoiceDialog, {
         panelClass: 'dialog-sm'
