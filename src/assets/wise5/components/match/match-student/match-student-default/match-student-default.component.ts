@@ -465,16 +465,11 @@ export class MatchStudentDefault extends ComponentStudent {
   }
 
   getFeedbackObject(bucketId: string, choiceId: string): any {
-    for (const bucketFeedback of this.componentContent.feedback) {
-      if (bucketFeedback.bucketId === bucketId) {
-        for (const choiceFeedback of bucketFeedback.choices) {
-          if (choiceFeedback.choiceId === choiceId) {
-            return choiceFeedback;
-          }
-        }
-      }
-    }
-    return null;
+    return (
+      this.componentContent.feedback
+        .find((bucketFeedback) => bucketFeedback.bucketId === bucketId)
+        ?.choices.find((choiceFeedback) => choiceFeedback.choiceId === choiceId) ?? null
+    );
   }
 
   studentDataChanged(): void {
