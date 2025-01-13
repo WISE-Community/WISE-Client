@@ -40,12 +40,8 @@ export class MatchStudentDefault extends ComponentStudent {
   choices: Choice[] = [];
   choiceStyle: any = '';
   hasCorrectAnswer: boolean = false;
-  isChoicesAfter: boolean = false;
   isCorrect: boolean = false;
-  isHorizontal: boolean = false;
   isLatestComponentStateSubmit: boolean = false;
-  numChoiceColumns: number = 1;
-  privateNotebookItems: NotebookItem[] = [];
   sourceBucket: any;
   sourceBucketId: string = '0';
 
@@ -75,10 +71,6 @@ export class MatchStudentDefault extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.isChoicesAfter = this.componentContent.choicesAfter;
-    this.isHorizontal = this.componentContent.horizontal;
-    this.isSaveButtonVisible = this.componentContent.showSaveButton;
-    this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
     this.hasCorrectAnswer = this.matchService.componentHasCorrectAnswer(this.componentContent);
     this.choices = this.componentContent.choices;
     if (this.shouldImportPrivateNotes()) {
@@ -132,12 +124,12 @@ export class MatchStudentDefault extends ComponentStudent {
   }
 
   private importPrivateNotes(): void {
-    this.privateNotebookItems = this.notebookService
+    this.notebookService
       .getPrivateNotebookItems()
-      .filter((item) => item.type === 'note' && item.serverDeleteTime == null);
-    this.privateNotebookItems.forEach((item) => {
-      this.choices.push(createChoiceFromNotebookItem(item));
-    });
+      .filter((item) => item.type === 'note' && item.serverDeleteTime == null)
+      .forEach((item) => {
+        this.choices.push(createChoiceFromNotebookItem(item));
+      });
   }
 
   private subscribeToNewNotes(): void {
