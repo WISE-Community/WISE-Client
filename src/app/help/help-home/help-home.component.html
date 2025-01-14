@@ -1,17 +1,8 @@
 <div class="main app-background">
   <div class="content">
-    <div
-      fxLayout="row"
-      fxLayout.xs="column"
-      fxLayoutAlign="center stretch"
-      fxLayoutAlign.xs="center center"
-      fxLayoutGap="32px"
-      fxLayoutGap.sm="24px"
-      fxLayoutGap.gt-sm="32px"
-    >
+    <div class="flex flex-col sm:flex-row justify-center items-stretch gap-8">
       <app-call-to-action
-        fxFlex
-        fxFlex.gt-xs="33"
+        class="w-full sm:w-1/3"
         icon="info"
         iconColor="accent-2"
         i18n-headline
@@ -21,8 +12,7 @@
         destination="getting-started"
       ></app-call-to-action>
       <app-call-to-action
-        fxFlex
-        fxFlex.gt-xs="33"
+        class="w-full sm:w-1/3"
         icon="school"
         iconColor="accent"
         i18n-headline
@@ -32,8 +22,7 @@
         destination="teacher-faq"
       ></app-call-to-action>
       <app-call-to-action
-        fxFlex
-        fxFlex.gt-xs="33"
+        class="w-full sm:w-1/3"
         icon="face"
         iconColor="accent"
         i18n-headline

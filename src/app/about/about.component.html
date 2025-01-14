@@ -1,10 +1,8 @@
 <div class="main app-background">
   <div class="content">
-    <header fxLayout="row" class="content__header">
+    <header class="content__header flex flex-row">
       <h1
-        class="accent"
-        fxLayoutAlign="center center"
-        fxLayoutGap="8px"
+        class="accent flex items-center gap-2"
         ngClass="mat-headline-4"
         [ngClass.xs]="{ 'mat-headline-4': false }"
       >
@@ -12,21 +10,14 @@
         <span i18n>About Us</span>
       </h1>
     </header>
-    <section
-      class="section"
-      fxLayout="column"
-      fxLayout.gt-xs="row"
-      fxLayoutAlign="center center"
-      fxLayoutGap="36px"
-      fxLayoutGap.gt-md="64px"
-    >
-      <div fxFlex="100%" fxFlex.gt-xs="50%">
+    <section class="section flex flex-col items-center gap-9 md:gap-16 md:flex-row">
+      <div class="w-full md:w-1/2">
         <h2 class="accent-1" i18n>
           WISE is the product of more than 25 years of research on teaching and learning with
           educational technologies
         </h2>
       </div>
-      <div fxFlex="100%" fxFlex.gt-xs="50%">
+      <div class="w-full md:w-1/2">
         <div class="about__intros">
           <picture class="about__intro">
             <source
@@ -54,15 +45,9 @@
     </section>
     <section
       id="research-practice"
-      class="section"
-      fxLayout="column"
-      fxLayout.gt-xs="row"
-      fxLayoutAlign="center center"
-      fxLayoutGap="36px"
-      fxLayoutGap.gt-xs="36px"
-      fxLayoutGap.gt-md="64px"
+      class="section flex flex-col items-center gap-9 md:gap-16 md:flex-row"
     >
-      <div fxFlex="100%" fxFlex.gt-xs="50%" fxFlexOrder="2" fxFlexOrder.gt-xs="1">
+      <div class="w-full md:w-1/2 order-2 md:order-1">
         <div class="about__research-practice about--l">
           <picture class="about__research">
             <source
@@ -129,7 +114,7 @@
           </picture>
         </div>
       </div>
-      <div fxFlex="100%" fxFlex.gt-xs="50%" fxFlexOrder="1" fxFlexOrder.gt-xs="2">
+      <div class="w-full md:w-1/2 order-1 md:order-2">
         <h2 class="accent-1" i18n>Based on Research, Refined Through Practice</h2>
         <p i18n>
           Through our collaborations with teachers, administrators, technology designers, and
@@ -154,16 +139,8 @@
         </p>
       </div>
     </section>
-    <section
-      id="ki"
-      class="section"
-      fxLayout="column"
-      fxLayout.gt-xs="row"
-      fxLayoutAlign="center center"
-      fxLayoutGap="36px"
-      fxLayoutGap.gt-md="64px"
-    >
-      <div fxFlex="100%" fxFlex.gt-xs="50%">
+    <section id="ki" class="section flex flex-col items-center gap-9 md:gap-16 md:flex-row">
+      <div class="w-full md:w-1/2">
         <h2 class="accent-1" i18n>Knowledge Integration</h2>
         <p i18n>
           As students grapple with multiple conflicting and confusing ideas, research has shown that
@@ -177,12 +154,12 @@
           assessments, and evaluation.
         </p>
       </div>
-      <div fxFlex="100%" fxFlex.gt-xs="50%">
-        <div class="about--r" fxFlex>
+      <div class="w-full md:w-1/2">
+        <div class="about--r">
           <div class="content-block">
             <h3 class="content-block__title" i18n>The KI Processes:</h3>
             <ul class="list--icons mat-subtitle-2">
-              <li fxLayoutAlign="start start">
+              <li class="flex items-start">
                 <img
                   class="avatar mat-18"
                   src="assets/img/icons/ki-color-elicit.svg"
@@ -191,7 +168,7 @@
                 />
                 <span i18n>Elicit Ideas</span>
               </li>
-              <li fxLayoutAlign="start start">
+              <li class="flex items-start">
                 <img
                   class="avatar mat-18"
                   src="assets/img/icons/ki-color-add.svg"
@@ -200,7 +177,7 @@
                 />
                 <span i18n>Discover Ideas</span>
               </li>
-              <li fxLayoutAlign="start start">
+              <li class="flex items-start">
                 <img
                   class="avatar mat-18"
                   src="assets/img/icons/ki-color-distinguish.svg"
@@ -209,7 +186,7 @@
                 />
                 <span i18n>Distinguish Ideas</span>
               </li>
-              <li fxLayoutAlign="start start">
+              <li class="flex items-start">
                 <img
                   class="avatar mat-18"
                   src="assets/img/icons/ki-color-connect.svg"
@@ -231,21 +208,9 @@
     >
       ~ WISE Goals ~
     </h1>
-    <section
-      id="goals"
-      class="section"
-      fxLayout="column"
-      fxLayoutGap="36px"
-      fxLayoutGap.gt-md="64px"
-    >
-      <div
-        fxLayout="column"
-        fxLayout.gt-xs="row"
-        fxLayoutGap="24px"
-        fxLayoutGap.gt-xs="36px"
-        fxLayoutGap.gt-md="64px"
-      >
-        <div class="content-block about__goal" fxFlex="100%" fxFlex.gt-xs="50%">
+    <section id="goals" class="section flex flex-col gap-9 sm:gap-16">
+      <div class="flex flex-col gap-6 sm:gap-9 sm:flex-row">
+        <div class="content-block about__goal w-full sm:w-1/2">
           <h2 class="accent" i18n>Make Science Meaningful</h2>
           <p i18n>
             WISE units introduce students to complex science concepts through personally and
@@ -255,7 +220,7 @@
             science.
           </p>
         </div>
-        <div class="content-block about__goal--alt" fxFlex="100%" fxFlex.gt-xs="50%">
+        <div class="content-block about__goal--alt w-full sm:w-1/2">
           <h2 class="accent" i18n>Support Diverse Learners</h2>
           <p i18n>
             Individual students differ in their experiences, interests, and abilities. WISE provides
@@ -265,19 +230,11 @@
           </p>
         </div>
       </div>
-      <div
-        fxLayout="column"
-        fxLayout.gt-xs="row"
-        fxLayoutGap="24px"
-        fxLayoutGap.gt-xs="36px"
-        fxLayoutGap.gt-md="64px"
-      >
+      <div class="flex flex-col gap-6 md:gap-9 sm:flex-row">
         <div
-          class="content-block about__goal"
+          class="content-block about__goal w-full sm:w-1/2"
           [ngClass]="{ 'about__goal--alt': false }"
           [ngClass.gt-xs]="{ 'about__goal--alt': true }"
-          fxFlex="100%"
-          fxFlex.gt-xs="50%"
         >
           <h2 class="accent" i18n>Increase Participation in Science</h2>
           <p i18n>
@@ -288,11 +245,9 @@
           </p>
         </div>
         <div
-          class="content-block about__goal"
+          class="content-block about__goal w-full sm:w-1/2"
           [ngClass]="{ 'about__goal--alt': false }"
           [ngClass.xs]="{ 'about__goal--alt': true }"
-          fxFlex="100%"
-          fxFlex.gt-xs="50%"
         >
           <h2 class="accent" i18n>Accessible to All</h2>
           <p i18n>
