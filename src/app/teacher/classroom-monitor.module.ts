@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { NavItemScoreComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/navItemScore/nav-item-score.component';
-import { AlertStatusCornerComponent } from '../classroom-monitor/alert-status-corner/alert-status-corner.component';
 import { ComponentNewWorkBadgeComponent } from '../classroom-monitor/component-new-work-badge/component-new-work-badge.component';
 import { ComponentSelectComponent } from '../classroom-monitor/component-select/component-select.component';
 import { PeerGroupGradingModule } from './peer-group-grading.module';
@@ -32,7 +30,6 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
 
 @NgModule({
   declarations: [
-    NavItemComponent,
     NodeGradingViewComponent,
     NodeProgressViewComponent,
     NotebookGradingComponent,
@@ -40,7 +37,6 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     StudentGradingComponent
   ],
   imports: [
-    AlertStatusCornerComponent,
     ClassroomMonitorComponent,
     ComponentGradingComponent,
     ComponentNewWorkBadgeComponent,
@@ -51,7 +47,7 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     HighchartsChartModule,
     ManageStudentsModule,
     MilestoneModule,
-    NavItemScoreComponent,
+    NavItemComponent,
     NotificationsMenuComponent,
     PauseScreensMenuComponent,
     PeerGroupGradingModule,
