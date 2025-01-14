@@ -83,7 +83,8 @@ export abstract class LibraryComponent implements OnInit {
     this.peValue = this.filterValues.peValue;
     this.projects.forEach((project) => {
       project.visible =
-        this.isSearchMatch(project, this.searchValue) && this.isFilterMatch(project);
+        this.isSearchMatch(project, this.searchValue) &&
+        (!this.hasFilters() || this.isFilterMatch(project));
       if (project.visible) {
         this.filteredProjects.push(project);
       }
@@ -118,37 +119,25 @@ export abstract class LibraryComponent implements OnInit {
     );
   }
 
-  protected isFilterMatch(project: LibraryProject): boolean {
-    if (this.hasFilters()) {
-      const standardsAddressed = project.metadata.standardsAddressed;
-      if (standardsAddressed.ngss) {
-        const ngss = standardsAddressed.ngss;
-        if (this.dciArrangementValue.length) {
-          const dciArrangements: Standard[] = ngss.dciArrangements ? ngss.dciArrangements : [];
-          for (let val of dciArrangements) {
-            for (let filter of this.dciArrangementValue) {
-              if (val.id === filter) {
-                return true;
-              }
+  private isFilterMatch(project: LibraryProject): boolean {
+    const standardsAddressed = project.metadata.standardsAddressed;
+    if (standardsAddressed.ngss) {
+      const ngss = standardsAddressed.ngss;
+      if (this.dciArrangementValue.length > 0) {
+        const dciArrangements: Standard[] = ngss.dciArrangements ?? [];
+        for (let val of dciArrangements) {
+          for (let filter of this.dciArrangementValue) {
+            if (val.id === filter) {
+              return true;
             }
           }
         }
-        if (this.peValue.length) {
-          const dciArrangements: Standard[] = ngss.dciArrangements ? ngss.dciArrangements : [];
-          for (let arrangement of dciArrangements) {
-            for (let val of arrangement.children) {
-              for (let filter of this.peValue) {
-                if (val.id === filter) {
-                  return true;
-                }
-              }
-            }
-          }
-        }
-        if (this.disciplineValue.length) {
-          const disciplines: Standard[] = ngss.disciplines ? ngss.disciplines : [];
-          for (let val of disciplines) {
-            for (let filter of this.disciplineValue) {
+      }
+      if (this.peValue.length > 0) {
+        const dciArrangements: Standard[] = ngss.dciArrangements ?? [];
+        for (let arrangement of dciArrangements) {
+          for (let val of arrangement.children) {
+            for (let filter of this.peValue) {
               if (val.id === filter) {
                 return true;
               }
@@ -156,20 +145,28 @@ export abstract class LibraryComponent implements OnInit {
           }
         }
       }
-      if (this.researchProjectValue.length > 0) {
-        const researchProjects: ResearchProjectTypes[] = project.metadata.researchProjects ?? [];
-        if (
-          researchProjects.some((researchProject) =>
-            this.researchProjectValue.includes(researchProject)
-          )
-        ) {
-          return true;
+      if (this.disciplineValue.length > 0) {
+        const disciplines: Standard[] = ngss.disciplines ?? [];
+        for (let val of disciplines) {
+          for (let filter of this.disciplineValue) {
+            if (val.id === filter) {
+              return true;
+            }
+          }
         }
       }
-      return false;
-    } else {
-      return true;
     }
+    if (this.researchProjectValue.length > 0) {
+      const researchProjects: ResearchProjectTypes[] = project.metadata.researchProjects ?? [];
+      if (
+        researchProjects.some((researchProject) =>
+          this.researchProjectValue.includes(researchProject)
+        )
+      ) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private hasFilters(): boolean {
