@@ -9,72 +9,66 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Directive()
 export abstract class LibraryComponent implements OnInit {
-  projects: LibraryProject[] = [];
-  filteredProjects: LibraryProject[] = [];
-  searchValue: string = '';
-  dciArrangementOptions: Standard[] = [];
-  dciArrangementValue = [];
-  disciplineOptions: Standard[] = [];
-  disciplineValue = [];
-  peOptions: Standard[] = [];
-  peValue = [];
-  filterValues: ProjectFilterValues = new ProjectFilterValues();
-  private researchProjectValue: ResearchProjectTypes[] = [];
-  showFilters: boolean = false;
-  subscriptions: Subscription = new Subscription();
-  pageSizeOptions: number[] = [12, 24, 48, 96];
-  pageIndex: number = 0;
-  pageSize: number = 12;
-  lowIndex: number = 0;
-  highIndex: number = 0;
-
-  @Output('update') update: EventEmitter<number> = new EventEmitter<number>();
-
+  protected dciArrangementOptions: Standard[] = [];
+  protected dciArrangementValue = [];
+  protected disciplineOptions: Standard[] = [];
+  protected disciplineValue = [];
+  protected filteredProjects: LibraryProject[] = [];
+  protected filterValues: ProjectFilterValues = new ProjectFilterValues();
+  protected highIndex: number = 0;
+  protected lowIndex: number = 0;
+  protected pageSizeOptions: number[] = [12, 24, 48, 96];
+  protected pageIndex: number = 0;
+  protected pageSize: number = 12;
   @ViewChildren(MatPaginator) paginators!: QueryList<MatPaginator>;
+  protected peOptions: Standard[] = [];
+  protected peValue = [];
+  protected projects: LibraryProject[] = [];
+  private researchProjectValue: ResearchProjectTypes[] = [];
+  protected searchValue: string = '';
+  protected showFilters: boolean = false;
+  protected subscriptions: Subscription = new Subscription();
 
   constructor(
     protected dialog: MatDialog,
     protected libraryService: LibraryService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscriptions.add(
-      this.libraryService.projectFilterValuesSource$.subscribe((projectFilterValues) => {
-        this.filterUpdated(projectFilterValues);
-      })
+      this.libraryService.projectFilterValuesSource$.subscribe((projectFilterValues) =>
+        this.filterUpdated(projectFilterValues)
+      )
     );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
-  pageChange(event?: PageEvent, scroll?: boolean): void {
+  protected pageChange(event?: PageEvent, scroll?: boolean): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.setPagination();
     if (scroll) {
-      const listEl = document.querySelector('.library');
-      listEl.scrollIntoView();
+      document.querySelector('.library').scrollIntoView();
     }
   }
 
-  setPageBounds(): void {
-    this.lowIndex = this.pageIndex * this.pageSize;
-    this.highIndex = this.lowIndex + this.pageSize;
-  }
-
-  setPagination(): void {
+  private setPagination(): void {
     if (this.paginators) {
-      this.paginators.toArray().forEach((paginator) => {
-        paginator.pageIndex = this.pageIndex;
-      });
+      this.paginators.toArray().forEach((paginator) => (paginator.pageIndex = this.pageIndex));
       this.setPageBounds();
     }
   }
 
-  isOnPage(index: number): boolean {
-    return index >= this.lowIndex && index < this.highIndex;
+  private setPageBounds(): void {
+    this.lowIndex = this.pageIndex * this.pageSize;
+    this.highIndex = this.lowIndex + this.pageSize;
+  }
+
+  protected isOnPage(index: number): boolean {
+    return this.lowIndex <= index && index < this.highIndex;
   }
 
   filterUpdated(filterValues: ProjectFilterValues = null): void {
@@ -87,46 +81,31 @@ export abstract class LibraryComponent implements OnInit {
     this.dciArrangementValue = this.filterValues.dciArrangementValue;
     this.researchProjectValue = this.filterValues.researchProjectValue;
     this.peValue = this.filterValues.peValue;
-    for (let project of this.projects) {
-      let filterMatch = false;
-      const searchMatch = this.isSearchMatch(project, this.searchValue);
-      if (searchMatch) {
-        filterMatch = this.isFilterMatch(project);
-      }
-      project.visible = searchMatch && filterMatch;
-      if (searchMatch && filterMatch) {
+    this.projects.forEach((project) => {
+      project.visible =
+        this.isSearchMatch(project, this.searchValue) && this.isFilterMatch(project);
+      if (project.visible) {
         this.filteredProjects.push(project);
       }
-    }
+    });
     this.emitNumberOfProjectsVisible(this.countVisibleProjects(this.filteredProjects));
     this.pageIndex = 0;
     this.setPagination();
   }
 
-  emitNumberOfProjectsVisible(numProjectsVisible: number = null) {}
-
-  hasFilters(): boolean {
-    return (
-      this.dciArrangementValue.length +
-        this.peValue.length +
-        this.disciplineValue.length +
-        this.researchProjectValue.length >
-      0
-    );
-  }
+  protected abstract emitNumberOfProjectsVisible(numProjectsVisible: number): void;
 
   private isSearchMatch(project: LibraryProject, searchValue: string): boolean {
-    const metadata: any = project.metadata;
-    metadata.id = project.id;
+    project.metadata.id = project.id;
     return (
       !searchValue ||
-      Object.keys(metadata)
+      Object.keys(project.metadata)
         .filter((prop) =>
           // only check for match in specific metadata fields
           ['title', 'summary', 'keywords', 'features', 'standardsAddressed', 'id'].includes(prop)
         )
         .some((prop) => {
-          let value = metadata[prop];
+          let value = project.metadata[prop];
           if (prop === 'standardsAddressed') {
             value = JSON.stringify(value);
           }
@@ -139,7 +118,7 @@ export abstract class LibraryComponent implements OnInit {
     );
   }
 
-  isFilterMatch(project: LibraryProject): boolean {
+  protected isFilterMatch(project: LibraryProject): boolean {
     if (this.hasFilters()) {
       const standardsAddressed = project.metadata.standardsAddressed;
       if (standardsAddressed.ngss) {
@@ -193,8 +172,18 @@ export abstract class LibraryComponent implements OnInit {
     }
   }
 
-  countVisibleProjects(set: LibraryProject[]): number {
-    return set.filter((project) => 'project' && project.visible).length;
+  private hasFilters(): boolean {
+    return (
+      this.dciArrangementValue.length +
+        this.peValue.length +
+        this.disciplineValue.length +
+        this.researchProjectValue.length >
+      0
+    );
+  }
+
+  protected countVisibleProjects(projects: LibraryProject[]): number {
+    return projects.filter((project) => project.visible).length;
   }
 
   protected showInfo(event: Event): void {
